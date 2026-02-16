@@ -224,7 +224,7 @@ test.describe("acl management", () => {
     //     const aclManagement = new ACLManagement(adminPage);
     //     await aclManagement.createRole("custom", ["sales.rma-reason.create"]);
     //     await aclManagement.createUser();
-    //     await aclManagement.verfiyAssignedRole(["sales->rma"]);
+    //     await aclManagement.verfiyAssignedRole(["sales->rma->reason"]);
     //     await aclManagement.rmaReasonCreateVerify();
     // });
 
@@ -234,7 +234,7 @@ test.describe("acl management", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["sales.rma-reason.edit"]);
         await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["sales->rma"]);
+        await aclManagement.verfiyAssignedRole(["sales->rma->reason"]);
         await aclManagement.rmaReasonEditVerify();
     });
 
@@ -244,7 +244,7 @@ test.describe("acl management", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["sales.rma-reason.delete"]);
         await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["sales->rma"]);
+        await aclManagement.verfiyAssignedRole(["sales->rma->reason"]);
         await aclManagement.rmaReasonDeleteVerify();
     });
 
@@ -254,7 +254,7 @@ test.describe("acl management", () => {
     //     const aclManagement = new ACLManagement(adminPage);
     //     await aclManagement.createRole("custom", ["sales.rma-rules.create"]);
     //     await aclManagement.createUser();
-    //     await aclManagement.verfiyAssignedRole(["sales->rma"]);
+    //     await aclManagement.verfiyAssignedRole(["sales->rma->rma_rules"]);
     //     await aclManagement.rmaRulesCreateVerify();
     // });
 
@@ -264,7 +264,7 @@ test.describe("acl management", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["sales.rma-rules.edit"]);
         await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["sales->rma"]);
+        await aclManagement.verfiyAssignedRole(["sales->rma->rma_rules"]);
         await aclManagement.rmaRulesEditVerify();
     });
 
@@ -274,7 +274,7 @@ test.describe("acl management", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["sales.rma-rules.delete"]);
         await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["sales->rma"]);
+        await aclManagement.verfiyAssignedRole(["sales->rma->rma_rules"]);
         await aclManagement.rmaRulesDeleteVerify();
     });
 
@@ -284,7 +284,7 @@ test.describe("acl management", () => {
     //     const aclManagement = new ACLManagement(adminPage);
     //     await aclManagement.createRole("custom", ["sales.rma-status.create"]);
     //     await aclManagement.createUser();
-    //     await aclManagement.verfiyAssignedRole(["sales->rma"]);
+    //     await aclManagement.verfiyAssignedRole(["sales->rma->rma_status"]);
     //     await aclManagement.rmaStatusCreateVerify();
     // });
 
@@ -294,7 +294,7 @@ test.describe("acl management", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["sales.rma-status.edit"]);
         await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["sales->rma"]);
+        await aclManagement.verfiyAssignedRole(["sales->rma->rma_status"]);
         await aclManagement.rmaStatusEditVerify();
     });
 
@@ -304,7 +304,7 @@ test.describe("acl management", () => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["sales.rma-status.delete"]);
         await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["sales->rma"]);
+        await aclManagement.verfiyAssignedRole(["sales->rma->rma_status"]);
         await aclManagement.rmaStatusDeleteVerify();
     });
 });

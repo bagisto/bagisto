@@ -124,6 +124,63 @@ const ACL_Routes: Record<
         ],
     },
 
+    "sales->rma->reason": {
+        allowed: "admin/sales/rma/reasons",
+        sidebar: "/admin/sales/rma/reasons",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/sales/rma/rules",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/sales/rma/requests",
+            "admin/sales/rma/custom-field",
+            "admin/sales/rma/rma-status",
+        ],
+    },
+
+    "sales->rma->rma_rules": {
+        allowed: "admin/sales/rma/rules",
+        sidebar: "/admin/sales/rma/rules",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/sales/rma/reasons",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/sales/rma/requests",
+            "admin/sales/rma/custom-field",
+            "admin/sales/rma/rma-status",
+        ],
+    },
+
+    "sales->rma->rma_status": {
+        allowed: "admin/sales/rma/status",
+        sidebar: "/admin/sales/rma/status",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/sales/rma/reasons",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/sales/rma/requests",
+            "admin/sales/rma/custom-field",
+            "admin/sales/rma/rules",
+        ],
+    },
+
     catalog: {
         allowed: "admin/catalog/products",
         sidebar: "/admin/catalog/products",
