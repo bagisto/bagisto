@@ -74,27 +74,30 @@ test.describe("customer agreement configuration", () => {
         await loginAsCustomer(adminPage);
 
         await adminPage.goto("customer/account/profile");
+        const acceptButton = adminPage.getByRole("button", { name: "Accept" });
+
+        if (await acceptButton.isVisible()) {
+            await acceptButton.click();
+        }
 
         /**
          * Create GDPR request.
          */
         await adminPage
-            .getByRole("link", { name: " GDPR Requests " })
+            .getByRole("link", { name: "GDPR Requests" })
             .click();
         await adminPage.getByRole("button", { name: "Create Request" }).click();
         await adminPage.locator('select[name="type"]').selectOption("delete");
         await adminPage.locator('textarea[name="message"]').click();
         await adminPage
             .locator('textarea[name="message"]')
-            .fill("Delete my last name - Verma");
+            .fill("Delete my last name - Smith");
         await adminPage.getByRole("button", { name: "Save" }).click();
         await expect(
             adminPage
                 .getByRole("paragraph")
                 .filter({ hasText: "Request created successfully" }),
         ).toBeVisible();
-        await adminPage.locator(".icon-cancel").first().click();
-
         /**
          * Check request is pending.
          */
@@ -150,9 +153,7 @@ test.describe("customer agreement configuration", () => {
         /**
          * Create GDPR request.
          */
-        await adminPage
-            .getByRole("link", { name: "GDPR Requests" })
-            .click();
+        await adminPage.getByRole("link", { name: "GDPR Requests" }).click();
         await adminPage.getByRole("button", { name: "Create Request" }).click();
         await adminPage.locator('select[name="type"]').selectOption("update");
         await adminPage.locator('textarea[name="message"]').click();
