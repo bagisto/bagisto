@@ -43,7 +43,7 @@ export default defineConfig({
     ],
 
     use: {
-        baseURL: `${"http://192.168.15.71/bagisto-master/public/"}/`.replace(/\/+$/, "/"),
+        baseURL: `${process.env.APP_URL}/`.replace(/\/+$/, "/"),
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",
         trace: "retain-on-failure",
