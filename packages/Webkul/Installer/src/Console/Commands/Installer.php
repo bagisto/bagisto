@@ -7,7 +7,6 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
 use Webkul\Installer\Helpers\DatabaseManager;
 use Webkul\Installer\Helpers\EnvironmentManager;
@@ -213,7 +212,7 @@ class Installer extends Command
         $this->call('migrate:fresh');
 
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
-        app(BagistoDatabaseSeeder::class)->run($this->getSeederConfiguration());
+        $this->databaseManager->seed($this->getSeederConfiguration());
         $this->components->info('Basic data seeded successfully.');
 
         $this->warn('Step: Linking storage directory...');
@@ -417,8 +416,6 @@ class Installer extends Command
             hint    : 'The action will create products after installation.',
         );
 
-        $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
-
         try {
             $this->databaseManager->createAdminUser([
                 'name' => $adminName,
@@ -533,6 +530,14 @@ class Installer extends Command
     }
 
     /**
+     * Check key in `.env` file because it will help to find values at runtime.
+     */
+    protected function getEnvVariable(string $key, $default = null): string|bool
+    {
+        return $this->environmentManager->getEnvVariable($key, $default);
+    }
+
+    /**
      * Update the `.env` file with the provided details.
      */
     protected function updateEnvVariables(): void
@@ -562,14 +567,6 @@ class Installer extends Command
 
             $this->components->info('Configuration loaded successfully.');
         }
-    }
-
-    /**
-     * Check key in `.env` file because it will help to find values at runtime.
-     */
-    protected function getEnvVariable(string $key, $default = null): string|bool
-    {
-        return $this->environmentManager->getEnvVariable($key, $default);
     }
 
     /**
@@ -604,6 +601,7 @@ class Installer extends Command
             'allowed_locales' => $this->envDetails['APP_ALLOWED_LOCALES'] ?? [$this->getEnvVariable('APP_LOCALE', 'en')],
             'default_currency' => $this->envDetails['APP_CURRENCY'] ?? $this->getEnvVariable('APP_CURRENCY', 'USD'),
             'allowed_currencies' => $this->envDetails['APP_ALLOWED_CURRENCIES'] ?? [$this->getEnvVariable('APP_CURRENCY', 'USD')],
+            'skip_admin_creation' => true,
         ];
     }
 

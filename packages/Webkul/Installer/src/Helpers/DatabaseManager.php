@@ -90,18 +90,10 @@ class DatabaseManager
     /**
      * Seed the database.
      */
-    public function seed($data): bool
+    public function seed($parameter): bool
     {
-        $data['parameter'] = [
-            'default_locale' => $data['parameter']['default_locales'],
-            'allowed_locales' => $data['parameter']['allowed_locales'],
-            'default_currency' => $data['parameter']['default_currency'],
-            'allowed_currencies' => $data['parameter']['allowed_currencies'],
-            'skip_admin_creation' => $data['parameter']['skip_admin_creation'],
-        ];
-
         try {
-            app(BagistoDatabaseSeeder::class)->run($data['parameter']);
+            app(BagistoDatabaseSeeder::class)->run($parameter);
 
             return true;
         } catch (Exception $e) {

@@ -91,20 +91,16 @@ class InstallerController extends Controller
             )
         );
 
-        $parameter = [
-            'parameter' => [
+        $isEnvVariablesUpdated = $this->environmentManager->updateEnvVariables($allParameters);
+
+        if ($isEnvVariablesUpdated) {
+            $isSeeded = $this->databaseManager->seed([
                 'default_locales' => $appLocale,
                 'default_currency' => $appCurrency,
                 'allowed_locales' => $allowedLocales,
                 'allowed_currencies' => $allowedCurrencies,
                 'skip_admin_creation' => true,
-            ],
-        ];
-
-        $isEnvVariablesUpdated = $this->environmentManager->updateEnvVariables($allParameters);
-
-        if ($isEnvVariablesUpdated) {
-            $isSeeded = $this->databaseManager->seed($parameter);
+            ]);
 
             $this->environmentManager->storageLink();
 
