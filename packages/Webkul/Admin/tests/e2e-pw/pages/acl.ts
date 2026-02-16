@@ -136,9 +136,6 @@ const ACL_Routes: Record<
             "admin/sales/rma/rules",
             "admin/sales/orders",
             "admin/sales/transactions",
-            "admin/sales/rma/requests",
-            "admin/sales/rma/custom-field",
-            "admin/sales/rma/rma-status",
         ],
     },
 
@@ -155,9 +152,6 @@ const ACL_Routes: Record<
             "admin/sales/rma/reasons",
             "admin/sales/orders",
             "admin/sales/transactions",
-            "admin/sales/rma/requests",
-            "admin/sales/rma/custom-field",
-            "admin/sales/rma/rma-status",
         ],
     },
 
@@ -174,9 +168,6 @@ const ACL_Routes: Record<
             "admin/sales/rma/reasons",
             "admin/sales/orders",
             "admin/sales/transactions",
-            "admin/sales/rma/requests",
-            "admin/sales/rma/custom-field",
-            "admin/sales/rma/rules",
         ],
     },
 

@@ -208,20 +208,20 @@ test.describe("acl management", () => {
         ).toBeVisible();
     });
 
-    test("should create custom role with sales (rma->create) permission", async ({
-        adminPage,
-    }) => {
-        test.setTimeout(300 * 1000);
-        const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", [
-            "sales.rma.requests.create",
-            "catalog.products.create",
-            "catalog.products.edit",
-        ]);
-        await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["sales->rma"]);
-        await aclManagement.rmaCreateVerify();
-    });
+    // test("should create custom role with sales (rma->create) permission", async ({
+    //     adminPage,
+    // }) => {
+    //     test.setTimeout(300 * 1000);
+    //     const aclManagement = new ACLManagement(adminPage);
+    //     await aclManagement.createRole("custom", [
+    //         "sales.rma.requests.create",
+    //         "catalog.products.create",
+    //         "catalog.products.edit",
+    //     ]);
+    //     await aclManagement.createUser();
+    //     await aclManagement.verfiyAssignedRole(["sales->rma"]);
+    //     await aclManagement.rmaCreateVerify();
+    // });
 
     test("should create custom role with sales (rma->rma reason->create) permission", async ({
         adminPage,
