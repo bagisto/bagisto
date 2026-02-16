@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'Комунікації',
                 'configure' => 'Налаштувати',
                 'currencies' => 'Валюти',
-                'custom-field' => 'Користувацьке поле',
+                'custom-fields' => 'Користувацьке поле',
                 'customers' => 'Клієнти',
                 'dashboard' => 'Панель керування',
                 'data-transfer' => 'Передача даних',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'Замовлення',
                 'products' => 'Продукти',
                 'promotions' => 'Промоакції',
-                'reason' => 'Причина',
+                'reasons' => 'Причина',
                 'refunds' => 'Повернення',
                 'reporting' => 'Звітність',
                 'requests' => 'Запити',
                 'reviews' => 'Відгуки',
                 'rma' => 'RMA',
-                'rma-status' => 'Статус RMA',
                 'roles' => 'Ролі',
                 'rules' => 'Правила',
                 'sales' => 'Продажі',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'Налаштування',
                 'shipments' => 'Відвантаження',
                 'sitemaps' => 'Карти сайту',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'Категорії податків',
                 'tax-rates' => 'Податкові ставки',
                 'taxes' => 'Податки',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'Перегляд',
 
         'rma' => [
-            'create' => 'Створити',
-            'delete' => 'Видалити',
-            'edit' => 'Редагувати',
-            'view' => 'Переглянути',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Створити',
-            'delete' => 'Видалити',
-            'edit' => 'Редагувати',
-            'title' => 'Причини RMA',
-        ],
+            'requests' => [
+                'create' => 'Створити',
+                'title' => 'Запити RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Видалити',
-            'edit' => 'Редагувати',
-            'title' => 'Правила RMA',
-        ],
+            'reasons' => [
+                'create' => 'Створити',
+                'delete' => 'Видалити',
+                'edit' => 'Редагувати',
+                'title' => 'Причини RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Видалити',
-            'edit' => 'Редагувати',
-            'title' => 'Статус RMA',
-        ],
+            'rules' => [
+                'create' => 'Створити',
+                'delete' => 'Видалити',
+                'edit' => 'Редагувати',
+                'title' => 'Правила RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'Створити',
-            'delete' => 'Видалити',
-            'edit' => 'Редагувати',
-            'title' => 'Користувацькі поля',
+            'statuses' => [
+                'create' => 'Створити',
+                'delete' => 'Видалити',
+                'edit' => 'Редагувати',
+                'title' => 'Статуси RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Створити',
+                'delete' => 'Видалити',
+                'edit' => 'Редагувати',
+                'title' => 'Користувацькі поля',
+            ],
         ],
     ],
 

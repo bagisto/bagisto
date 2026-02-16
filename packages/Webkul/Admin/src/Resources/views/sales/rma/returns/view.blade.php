@@ -32,7 +32,7 @@
                     <div class="flex gap-x-2.5 items-center">
                         <!-- Back Button -->
                         <a
-                            href="{{ route('admin.sales.rma.index') }}"
+                            href="{{ route('admin.sales.rma.requests.index') }}"
                             class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
                         >
                             @lang('admin::app.customers.customers.view.back-btn')
@@ -490,7 +490,7 @@
                                                     <x-slot:content>
                                                         {{-- <x-admin::form
                                                             method="POST"
-                                                            :action="route('admin.sales.rma.update-status', $rma->id)"
+                                                            :action="route('admin.sales.rma.requests.update-status', $rma->id)"
                                                         > --}}
                                                             <!-- RMA Status -->
                                                             <x-admin::form.control-group class="mb-2 w-full">
@@ -568,7 +568,7 @@
                                         @submit="validateForm"
                                         id="check-form"
                                         enctype="multipart/form-data"
-                                        :action="route('admin.sales.rma.re-open', $rma->id)"
+                                        :action="route('admin.sales.rma.requests.re-open', $rma->id)"
                                     >
                                         <div class="w-full gap-4">
                                             <div class="flex flex-col gap-2.5 mb-4">
@@ -724,7 +724,7 @@
 
                 <!-- Modal Content -->
                 <x-slot:content>
-                    {!! view_render_event('bagisto.admin.sales.rma.view.message.attachment.modal.content.before') !!}
+                    {!! view_render_event('bagisto.admin.sales.rma.requests.view.message.attachment.modal.content.before') !!}
 
                     <!-- Display Image -->
                     <img
@@ -766,7 +766,7 @@
                         <source :src="'{{ config('app.url') }}' + '/storage/' + messagePath" />
                     </video>
 
-                    {!! view_render_event('bagisto.admin.sales.rma.view.message.attachment.modal.content.after') !!}
+                    {!! view_render_event('bagisto.admin.sales.rma.requests.view.message.attachment.modal.content.after') !!}
                 </x-slot>
 
                 <!-- Modal Footer -->
@@ -829,7 +829,7 @@
                             message: messageToShow,
 
                             agree: () => {
-                                this.$axios.post(`{{ route('admin.sales.rma.update-status', $rma->id) }}`, {
+                                this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
                                     rma_status_id: this.rmaStatus,
                                     shipping: params.shipping,
                                 })
@@ -852,7 +852,7 @@
                     },
 
                     getMessage() {
-                        this.$axios.get(`{{ route('admin.sales.rma.get-messages') }}`, {
+                        this.$axios.get(`{{ route('admin.sales.rma.requests.get-messages') }}`, {
                             params: {
                                 id: this.rma.id,
                                 limit: this.limit,
@@ -876,7 +876,7 @@
 
                         formData.set('message', sanitizedMessage);
 
-                        this.$axios.post("{{ route('admin.sales.rma.send-message') }}", formData)
+                        this.$axios.post("{{ route('admin.sales.rma.requests.send-message') }}", formData)
                             .then((response) => {
                                 const attachmentPreview = document.getElementById('attachmentPreview');
 

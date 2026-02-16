@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'Communications',
                 'configure' => 'Configure',
                 'currencies' => 'Currencies',
-                'custom-field' => 'Custom Field',
+                'custom-fields' => 'Custom Fields',
                 'customers' => 'Customers',
                 'dashboard' => 'Dashboard',
                 'data-transfer' => 'Data Transfer',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'Orders',
                 'products' => 'Products',
                 'promotions' => 'Promotions',
-                'reason' => 'Reason',
+                'reasons' => 'Reasons',
                 'refunds' => 'Refunds',
                 'reporting' => 'Reporting',
                 'requests' => 'Requests',
                 'reviews' => 'Reviews',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA Status',
                 'roles' => 'Roles',
                 'rules' => 'Rules',
                 'sales' => 'Sales',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'Settings',
                 'shipments' => 'Shipments',
                 'sitemaps' => 'Sitemaps',
+                'statuses' => 'Statuses',
                 'tax-categories' => 'Tax Categories',
                 'tax-rates' => 'Tax Rates',
                 'taxes' => 'Taxes',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'View',
 
         'rma' => [
-            'create' => 'Create',
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'view' => 'View',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Create',
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'title' => 'RMA Reasons',
-        ],
+            'requests' => [
+                'create' => 'Create',
+                'title' => 'RMA Requests',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'title' => 'RMA Rules',
-        ],
+            'reasons' => [
+                'create' => 'Create',
+                'delete' => 'Delete',
+                'edit' => 'Edit',
+                'title' => 'RMA Reasons',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'title' => 'RMA Status',
-        ],
+            'rules' => [
+                'create' => 'Create',
+                'delete' => 'Delete',
+                'edit' => 'Edit',
+                'title' => 'RMA Rules',
+            ],
 
-        'custom-field' => [
-            'create' => 'Create',
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'title' => 'Custom Fields',
+            'statuses' => [
+                'create' => 'Create',
+                'delete' => 'Delete',
+                'edit' => 'Edit',
+                'title' => 'RMA Statuses',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Create',
+                'delete' => 'Delete',
+                'edit' => 'Edit',
+                'title' => 'Custom Fields',
+            ],
         ],
     ],
 

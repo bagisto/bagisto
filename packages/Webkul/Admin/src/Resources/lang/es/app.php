@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'Comunicaciones',
                 'configure' => 'Configurar',
                 'currencies' => 'Monedas',
-                'custom-field' => 'Campo personalizado',
+                'custom-fields' => 'Campo personalizado',
                 'customers' => 'Clientes',
                 'dashboard' => 'Panel de control',
                 'data-transfer' => 'Transferencia de datos',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'Pedidos',
                 'products' => 'Productos',
                 'promotions' => 'Promociones',
-                'reason' => 'Razón',
+                'reasons' => 'Razón',
                 'refunds' => 'Reembolsos',
                 'reporting' => 'Informes',
                 'requests' => 'Solicitudes',
                 'reviews' => 'Reseñas',
                 'rma' => 'RMA',
-                'rma-status' => 'Estado de RMA',
                 'roles' => 'Roles',
                 'rules' => 'Reglas',
                 'sales' => 'Ventas',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'Configuraciones',
                 'shipments' => 'Envíos',
                 'sitemaps' => 'Mapas del sitio',
+                'statuses' => 'Estado de RMA',
                 'tax-categories' => 'Categorías de impuestos',
                 'tax-rates' => 'Tasas de impuestos',
                 'taxes' => 'Impuestos',
@@ -5302,7 +5302,7 @@ return [
         'communications' => 'Comunicaciones',
         'configure' => 'Configurar',
         'copy' => 'Copiar',
-        'create' => 'crear',
+        'create' => 'Crear',
         'currencies' => 'Monedas',
         'customers' => 'Clientes',
         'dashboard' => 'Tablero',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'Ver',
 
         'rma' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'view' => 'Ver',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Motivos de RMA',
-        ],
+            'requests' => [
+                'create' => 'Crear',
+                'title' => 'Solicitudes de RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Reglas de RMA',
-        ],
+            'reasons' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Motivos de RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Estado de RMA',
-        ],
+            'rules' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Reglas de RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Campos personalizados',
+            'statuses' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Estados de RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Campos Personalizados',
+            ],
         ],
     ],
 

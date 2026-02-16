@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'الاتصالات',
                 'configure' => 'تكوين',
                 'currencies' => 'العملات',
-                'custom-field' => 'حقل مخصص',
+                'custom-fields' => 'حقل مخصص',
                 'customers' => 'العملاء',
                 'dashboard' => 'لوحة التحكم',
                 'data-transfer' => 'نقل البيانات',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'الطلبات',
                 'products' => 'المنتجات',
                 'promotions' => 'العروض',
-                'reason' => 'سبب',
+                'reasons' => 'سبب',
                 'refunds' => 'المستردات',
                 'reporting' => 'تقرير',
                 'requests' => 'طلبات',
                 'reviews' => 'المراجعات',
                 'rma' => 'RMA',
-                'rma-status' => 'حالة RMA',
                 'roles' => 'الأدوار',
                 'rules' => 'قواعد',
                 'sales' => 'المبيعات',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'الإعدادات',
                 'shipments' => 'الشحنات',
                 'sitemaps' => 'خرائط الموقع',
+                'statuses' => 'حالة RMA',
                 'tax-categories' => 'فئات الضرائب',
                 'tax-rates' => 'معدلات الضرائب',
                 'taxes' => 'الضرائب',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'عرض',
 
         'rma' => [
-            'create' => 'إنشاء',
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'view' => 'عرض',
-            'title' => 'إرجاع المنتجات (RMA)',
-        ],
+            'title' => 'RMA',
 
-        'rma-reason' => [
-            'create' => 'إنشاء',
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'title' => 'أسباب الإرجاع',
-        ],
+            'requests' => [
+                'create' => 'إنشاء',
+                'title' => 'طلبات RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'title' => 'قواعد الإرجاع',
-        ],
+            'reasons' => [
+                'create' => 'إنشاء',
+                'delete' => 'حذف',
+                'edit' => 'تعديل',
+                'title' => 'أسباب RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'title' => 'حالة الإرجاع',
-        ],
+            'rules' => [
+                'create' => 'إنشاء',
+                'delete' => 'حذف',
+                'edit' => 'تعديل',
+                'title' => 'قواعد RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'إنشاء',
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'title' => 'حقول مخصصة',
+            'statuses' => [
+                'create' => 'إنشاء',
+                'delete' => 'حذف',
+                'edit' => 'تعديل',
+                'title' => 'حالات RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'إنشاء',
+                'delete' => 'حذف',
+                'edit' => 'تعديل',
+                'title' => 'حقول مخصصة',
+            ],
         ],
     ],
 
