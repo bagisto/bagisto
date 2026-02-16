@@ -131,13 +131,13 @@ class RMADataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        if (bouncer()->hasPermission('sales.rma.create')) {
+        if (bouncer()->hasPermission('sales.rma.requests.create')) {
             $this->addAction([
                 'title' => trans('admin::app.sales.rma.all-rma.index.datagrid.view'),
                 'icon' => 'icon-view',
                 'method' => 'GET',
                 'url' => function ($row) {
-                    return route('admin.sales.rma.view', $row->id);
+                    return route('admin.sales.rma.requests.view', $row->id);
                 },
             ]);
         }

@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'İletişim',
                 'configure' => 'Yapılandır',
                 'currencies' => 'Para Birimleri',
-                'custom-field' => 'Özel Alan',
+                'custom-fields' => 'Özel Alan',
                 'customers' => 'Müşteriler',
                 'dashboard' => 'Kontrol Paneli',
                 'data-transfer' => 'Veri aktarımı',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'Siparişler',
                 'products' => 'Ürünler',
                 'promotions' => 'Promosyonlar',
-                'reason' => 'Sebep',
+                'reasons' => 'Sebep',
                 'refunds' => 'İade',
                 'reporting' => 'Raporlama',
                 'requests' => 'Talepler',
                 'reviews' => 'Yorumlar',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA Durumu',
                 'roles' => 'Roller',
                 'rules' => 'Kurallar',
                 'sales' => 'Satışlar',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'Ayarlar',
                 'shipments' => 'Gönderiler',
                 'sitemaps' => 'Site Haritaları',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'Vergi Kategorileri',
                 'tax-rates' => 'Vergi Oranları',
                 'taxes' => 'Vergiler',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'Görüntüle',
 
         'rma' => [
-            'create' => 'Oluştur',
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'view' => 'Görüntüle',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Oluştur',
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'title' => 'RMA Nedenleri',
-        ],
+            'requests' => [
+                'create' => 'Oluştur',
+                'title' => 'RMA Talepleri',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'title' => 'RMA Kuralları',
-        ],
+            'reasons' => [
+                'create' => 'Oluştur',
+                'delete' => 'Sil',
+                'edit' => 'Düzenle',
+                'title' => 'RMA Sebepleri',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'title' => 'RMA Durumu',
-        ],
+            'rules' => [
+                'create' => 'Oluştur',
+                'delete' => 'Sil',
+                'edit' => 'Düzenle',
+                'title' => 'RMA Kuralları',
+            ],
 
-        'custom-field' => [
-            'create' => 'Oluştur',
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'title' => 'Özel Alanlar',
+            'statuses' => [
+                'create' => 'Oluştur',
+                'delete' => 'Sil',
+                'edit' => 'Düzenle',
+                'title' => 'RMA Durumları',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Oluştur',
+                'delete' => 'Sil',
+                'edit' => 'Düzenle',
+                'title' => 'Özel Alanlar',
+            ],
         ],
     ],
 

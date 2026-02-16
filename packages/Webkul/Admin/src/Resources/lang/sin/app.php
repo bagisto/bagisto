@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'සන්නිවේදන',
                 'configure' => 'සකසන්න',
                 'currencies' => 'මුදල්',
-                'custom-field' => 'අභිරුචි ක්ෂේත්‍රය',
+                'custom-fields' => 'අභිරුචි ක්ෂේත්‍රය',
                 'customers' => 'පාරිභාවයෙන්',
                 'dashboard' => 'මුල් පටුන',
                 'data-transfer' => 'දත්ත හුවමාරු',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'ඇණවුම්',
                 'products' => 'නිෂ්පාදන',
                 'promotions' => 'ප්‍රමාදයොන්',
-                'reason' => 'හේතුව',
+                'reasons' => 'හේතුව',
                 'refunds' => 'ආපසු',
                 'reporting' => 'වාර්ථාව',
                 'requests' => 'අයදුම්',
                 'reviews' => 'විභාග',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA තත්ත්වය',
                 'roles' => 'භූමිකා',
                 'rules' => 'නියම',
                 'sales' => 'මිල',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'සැකසුම්',
                 'shipments' => 'වෙළෙන්දා',
                 'sitemaps' => 'සටහන්ද',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'බදු කාණ්ඩ',
                 'tax-rates' => 'බදු තනි',
                 'taxes' => 'බදු',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'දර්ශනය',
 
         'rma' => [
-            'create' => 'නිර්මාණය කරන්න',
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'view' => 'බැලීම',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'නිර්මාණය කරන්න',
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'title' => 'RMA හේතු',
-        ],
+            'requests' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'title' => 'RMA ඉල්ලීම්',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'title' => 'RMA නීති',
-        ],
+            'reasons' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'delete' => 'මකන්න',
+                'edit' => 'සංස්කරණය කරන්න',
+                'title' => 'RMA හේතු',
+            ],
 
-        'rma-status' => [
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'title' => 'RMA තත්ත්වය',
-        ],
+            'rules' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'delete' => 'මකන්න',
+                'edit' => 'සංස්කරණය කරන්න',
+                'title' => 'RMA නීති',
+            ],
 
-        'custom-field' => [
-            'create' => 'නිර්මාණය කරන්න',
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'title' => 'අභිරුචි ක්ෂේත්‍ර',
+            'statuses' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'delete' => 'මකන්න',
+                'edit' => 'සංස්කරණය කරන්න',
+                'title' => 'RMA තත්ත්වයන්',
+            ],
+
+            'custom-fields' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'delete' => 'මකන්න',
+                'edit' => 'සංස්කරණය කරන්න',
+                'title' => 'අභිරුචි ක්ෂේත්‍ර',
+            ],
         ],
     ],
 
