@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => '重定向链接',
                     ],
 
+                    'copyright-content' => [
+                        'title' => '版权内容',
+                        'info' => '配置在您网站页脚显示的版权内容，以保护您的知识产权并提升品牌知名度。',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => '启用猜测规则',
                         'info' => '配置启用或禁用自动猜测逻辑的设置。',

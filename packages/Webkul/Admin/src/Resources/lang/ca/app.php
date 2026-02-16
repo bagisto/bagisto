@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Enllaç de Redirecció',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Contingut de drets d\'autor',
+                        'info' => 'Configura el contingut de drets d\'autor que es mostra al peu de pàgina del teu lloc web per protegir la teva propietat intel·lectual i millorar el reconeixement de la marca.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Habilita les regles d’especulació',
                         'info' => 'Configura els paràmetres per habilitar o deshabilitar la lògica automàtica d’especulació.',

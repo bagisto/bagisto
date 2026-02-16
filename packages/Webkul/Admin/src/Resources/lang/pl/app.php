@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Link przekierowania',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Treść praw autorskich',
+                        'info' => 'Skonfiguruj treść praw autorskich wyświetlaną w stopce swojej witryny, aby chronić swoją własność intelektualną i zwiększyć rozpoznawalność marki.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Włącz reguły spekulacji',
                         'info' => 'Skonfiguruj ustawienia włączania lub wyłączania automatycznej logiki spekulacji.',

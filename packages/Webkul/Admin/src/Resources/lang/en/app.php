@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Redirection Link',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Copyright Content',
+                        'info' => 'Configure the copyright content displayed in the footer of your website to protect your intellectual property and enhance brand recognition.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Enable Speculation Rules',
                         'info' => 'Configure settings for enabling or disabling automated speculation logic.',

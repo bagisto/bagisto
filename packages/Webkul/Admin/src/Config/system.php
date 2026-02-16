@@ -97,6 +97,20 @@ return [
             ],
         ],
     ], [
+        'key' => 'general.content.footer',
+        'name' => 'admin::app.configuration.index.general.content.copyright-content.title',
+        'info' => 'admin::app.configuration.index.general.content.copyright-content.info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'copyright_content',
+                'title' => 'admin::app.configuration.index.general.content.copyright-content.title',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => true,
+            ],
+        ],
+    ], [
         'key' => 'general.content.speculation_rules',
         'name' => 'admin::app.configuration.index.general.content.speculation-rules.title',
         'info' => 'admin::app.configuration.index.general.content.speculation-rules.info',
