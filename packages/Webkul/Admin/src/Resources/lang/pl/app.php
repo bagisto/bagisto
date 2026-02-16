@@ -4207,7 +4207,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL przekierowania',
-                                'title-info' => 'Adres URL przekierowania, na który użytkownicy są wysyłani po uwierzytelnieniu przez Google. Musi być zgodny z adresem skonfigurowanym w konsoli Google.',
+                                'title-info' => 'Adres URL przekierowania, na który użytkownicy są wysyłani po uwierzytelnieniu przez Google. Użyj wyświetlanego formatu zastępczego URL (zmień tylko swoją domenę). Musi być zgodny z adresem skonfigurowanym w konsoli Google.',
                             ],
                         ],
 
@@ -4226,7 +4226,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL przekierowania',
-                                'title-info' => 'Adres URL przekierowania po uwierzytelnieniu przez Facebook. Musi być zgodny z adresem skonfigurowanym w ustawieniach aplikacji Facebook.',
+                                'title-info' => 'Adres URL przekierowania po uwierzytelnieniu przez Facebook. Użyj wyświetlanego formatu zastępczego URL (zmień tylko swoją domenę). Musi być zgodny z adresem skonfigurowanym w ustawieniach aplikacji Facebook.',
                             ],
                         ],
 
@@ -4245,7 +4245,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL przekierowania',
-                                'title-info' => 'Adres URL przekierowania po uwierzytelnieniu przez GitHub. Musi być zgodny z adresem skonfigurowanym w konsoli GitHub.',
+                                'title-info' => 'Adres URL przekierowania po uwierzytelnieniu przez GitHub. Użyj wyświetlanego formatu zastępczego URL (zmień tylko swoją domenę). Musi być zgodny z adresem skonfigurowanym w konsoli GitHub.',
                             ],
                         ],
 
@@ -4264,7 +4264,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL przekierowania',
-                                'title-info' => 'Adres URL przekierowania po uwierzytelnieniu przez LinkedIn. Musi być zgodny z adresem skonfigurowanym w konsoli LinkedIn.',
+                                'title-info' => 'Adres URL przekierowania po uwierzytelnieniu przez LinkedIn. Użyj wyświetlanego formatu zastępczego URL (zmień tylko swoją domenę). Musi być zgodny z adresem skonfigurowanym w konsoli LinkedIn.',
                             ],
                         ],
 
@@ -4283,7 +4283,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL przekierowania',
-                                'title-info' => 'Adres URL przekierowania po uwierzytelnieniu przez Twitter. Musi być zgodny z adresem skonfigurowanym w konsoli Twitter.',
+                                'title-info' => 'Adres URL przekierowania po uwierzytelnieniu przez Twitter. Użyj wyświetlanego formatu zastępczego URL (zmień tylko swoją domenę). Musi być zgodny z adresem skonfigurowanym w konsoli Twitter.',
                             ],
                         ],
                     ],

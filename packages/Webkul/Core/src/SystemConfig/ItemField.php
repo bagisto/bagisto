@@ -38,6 +38,7 @@ class ItemField
         public ?string $default,
         public ?bool $channel_based,
         public ?bool $locale_based,
+        public ?string $placeholder,
         public array|string $options,
         public bool $is_visible = true,
     ) {
@@ -161,6 +162,14 @@ class ItemField
     }
 
     /**
+     * Check if the field is required.
+     */
+    public function getPlaceholder(): ?string
+    {
+        return $this->placeholder;
+    }
+
+    /**
      * Get options of config item.
      */
     public function getOptions(): array
@@ -194,6 +203,7 @@ class ItemField
             'default' => $this->getDefault(),
             'channel_based' => $this->getChannelBased(),
             'locale_based' => $this->getLocaleBased(),
+            'placeholder' => $this->getPlaceholder(),
             'options' => $this->getOptions(),
             'item_key' => $this->getItemKey(),
         ];
