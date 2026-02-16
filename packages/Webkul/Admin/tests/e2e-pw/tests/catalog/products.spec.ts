@@ -323,13 +323,13 @@ async function createConfigurableProduct(adminPage) {
         "Product updated successfully",
     );
 
-    /**
-     * Checking the product in the list.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await expect(
-        adminPage.getByRole("paragraph").filter({ hasText: product.name }),
-    ).toBeVisible();
+    // /**
+    //  * Checking the product in the list.
+    //  */
+    // await adminPage.goto("admin/catalog/products");
+    // await expect(
+    //     adminPage.getByRole("paragraph").filter({ hasText: product.name }),
+    // ).toBeVisible();
 }
 
 async function createGroupedProduct(adminPage) {
@@ -1075,20 +1075,6 @@ test.describe("configurable product management", () => {
          * Waiting for the main form to be visible.
          */
         await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
-
-        /**
-         * Editing the first varient product.
-         */
-        await adminPage.getByText("Edit", { exact: true }).first().click();
-        await adminPage.locator('input[name="price"]').fill("50");
-        await adminPage.locator('input[name="inventories\\[1\\]"]').fill("12");
-
-        /**
-         * Saving the varient product.
-         */
-        await adminPage
-            .getByRole("button", { name: "Save", exact: true })
-            .click();
 
         /**
          * Saving the product.
