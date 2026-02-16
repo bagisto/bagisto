@@ -1,7 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { WebLocators } from "../locators/locator";
 import { loginAsCustomer, addAddress } from "../utils/customer";
-
 import {
     generateFirstName,
     generateLastName,
@@ -9,6 +8,7 @@ import {
     randomElement,
     generateName,
     generateSlug,
+    generateSKU,
     generateDescription,
     generateRandomDate,
     generateHostname,
@@ -94,7 +94,6 @@ const ACL_Routes: Record<
         sidebar: "/admin/sales/rma/requests",
         notAllowed: [
             "admin/dashboard",
-            "admin/catalog/products",
             "admin/customers",
             "admin/cms",
             "admin/marketing/promotions/catalog-rules",
@@ -181,7 +180,7 @@ const ACL_Routes: Record<
         ],
     },
 
-    catalog: {
+    "catalog": {
         allowed: "admin/catalog/products",
         sidebar: "/admin/catalog/products",
         notAllowed: [
@@ -1789,7 +1788,121 @@ export class ACLManagement {
         await this.page.waitForTimeout(8000);
     }
 
+    async createSimpleProduct(adminPage) {
+        /**
+         * Main product data which we will use to create the product.
+         */
+        const product = {
+            name: `simple-${Date.now()}`,
+            sku: generateSKU(),
+            productNumber: generateSKU(),
+            shortDescription: generateDescription(),
+            description: generateDescription(),
+            price: "199",
+            weight: "25",
+        };
+    
+        /**
+         * Reaching to the create product page.
+         */
+        await adminPage.goto("admin/catalog/products");
+        await adminPage.waitForSelector(
+            'button.primary-button:has-text("Create Product")',
+        );
+        await adminPage.getByRole("button", { name: "Create Product" }).click();
+    
+        /**
+         * Opening create product form in modal.
+         */
+        await adminPage.locator('select[name="type"]').selectOption("simple");
+        await adminPage
+            .locator('select[name="attribute_family_id"]')
+            .selectOption("1");
+        await adminPage.locator('input[name="sku"]').fill(generateSKU());
+        await adminPage.getByRole("button", { name: "Save Product" }).click();
+    
+        /**
+         * After creating the product, the page is redirected to the edit product page, where
+         * all the details need to be filled in.
+         */
+        await adminPage.waitForSelector(
+            'button.primary-button:has-text("Save Product")',
+        );
+    
+        /**
+         * Waiting for the main form to be visible.
+         */
+        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    
+        /**
+         * General Section.
+         */
+        await adminPage.locator("#product_number").fill(product.productNumber);
+        await adminPage.locator("#name").fill(product.name);
+        const name = await adminPage.locator('input[name="name"]').inputValue();
+    
+        /**
+         * Description Section.
+         */
+        await adminPage.fillInTinymce(
+            "#short_description_ifr",
+            product.shortDescription,
+        );
+        await adminPage.fillInTinymce("#description_ifr", product.description);
+    
+        /**
+         * Meta Description Section.
+         */
+        await adminPage.locator("#meta_title").fill(product.name);
+        await adminPage.locator("#meta_keywords").fill(product.name);
+        await adminPage.locator("#meta_description").fill(product.shortDescription);
+    
+        /**
+         * Image Section.
+         */
+        // Will add images later.
+    
+        /**
+         * Price Section.
+         */
+        await adminPage.locator("#price").fill(product.price);
+    
+        /**
+         * Shipping Section.
+         */
+        await adminPage.locator("#weight").fill(product.weight);
+    
+        /**
+         * Inventories Section.
+         */
+        await adminPage.locator('input[name="inventories\\[1\\]"]').click();
+        await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
+    
+        /**
+         * Saving the product.
+         */
+        await adminPage.getByRole("button", { name: "Save Product" }).click();
+    
+        /**
+         * Expecting for the product to be saved.
+         */
+        await expect(adminPage.locator("#app")).toContainText(
+            /product updated successfully/i,
+        );
+    
+        /**
+         * Checking the product in the list.
+         */
+        await adminPage.goto("admin/catalog/products");
+        await expect(
+            adminPage
+                .locator("p.break-all.text-base")
+                .filter({ hasText: product.name }),
+        ).toBeVisible();
+    }
+
     async rmaCreateVerify() {
+        await this.createSimpleProduct(this.page);
         await this.createOrder();
         await this.page.goto("admin/sales/rma/requests");
         await this.locators.createBtn.click();

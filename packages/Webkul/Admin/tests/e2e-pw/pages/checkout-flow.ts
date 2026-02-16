@@ -56,6 +56,12 @@ export class ProductCheckout {
      * Common checkout flow
      */
     async customerCheckout() {
+        const acceptButton = this.page.getByRole("button", { name: "Accept" });
+
+        if (await acceptButton.isVisible()) {
+            await acceptButton.click();
+        }
+
         const productName = readProductData();
         await this.searchProduct(productName);
         await this.locators.addToCartButton.click();

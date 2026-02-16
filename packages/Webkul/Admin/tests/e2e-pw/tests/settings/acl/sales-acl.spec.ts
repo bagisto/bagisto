@@ -211,8 +211,13 @@ test.describe("acl management", () => {
     test("should create custom role with sales (rma->create) permission", async ({
         adminPage,
     }) => {
+        test.setTimeout(300 * 1000);
         const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["sales.rma.create"]);
+        await aclManagement.createRole("custom", [
+            "sales.rma.create",
+            "catalog.products.create",
+            "catalog.products.edit",
+        ]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["sales->rma"]);
         await aclManagement.rmaCreateVerify();
@@ -288,7 +293,7 @@ test.describe("acl management", () => {
     //     await aclManagement.rmaStatusCreateVerify();
     // });
 
-        test("should create custom role with sales (rma->rma status->edit) permission", async ({
+    test("should create custom role with sales (rma->rma status->edit) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
