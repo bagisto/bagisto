@@ -88,7 +88,7 @@ class RulesDataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        if (bouncer()->hasPermission('sales.rma-rules.edit')) {
+        if (bouncer()->hasPermission('sales.rma.rules.edit')) {
             $this->addAction([
                 'icon' => 'icon-edit',
                 'title' => trans('admin::app.sales.rma.rules.index.datagrid.edit'),
@@ -100,7 +100,7 @@ class RulesDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('sales.rma-rules.delete')) {
+        if (bouncer()->hasPermission('sales.rma.rules.delete')) {
             $this->addAction([
                 'icon' => 'icon-delete',
                 'title' => trans('admin::app.sales.rma.rules.index.datagrid.delete'),
@@ -118,7 +118,7 @@ class RulesDataGrid extends DataGrid
      */
     public function prepareMassActions(): void
     {
-        if (bouncer()->hasPermission('sales.rma-rules.edit')) {
+        if (bouncer()->hasPermission('sales.rma.rules.edit')) {
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.rules.index.datagrid.update'),
                 'method' => 'POST',
@@ -135,7 +135,7 @@ class RulesDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('sales.rma-rules.delete')) {
+        if (bouncer()->hasPermission('sales.rma.rules.delete')) {
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.rules.index.datagrid.delete'),
                 'method' => 'POST',

@@ -284,13 +284,13 @@ class RequestController extends Controller
 
             return response()->json([
                 'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
-                'redirect_url' => route('admin.sales.rma.view', $rma->id),
+                'redirect_url' => route('admin.sales.rma.requests.view', $rma->id),
             ]);
         }
 
         return response()->json([
             'messages' => trans('admin::app.sales.rma.create-rma.failed'),
-            'redirect_url' => route('admin.sales.rma.create'),
+            'redirect_url' => route('admin.sales.rma.requests.create'),
         ]);
     }
 

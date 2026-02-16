@@ -37,11 +37,11 @@
                 </div>
 
                 <x-admin::datagrid
-                    :src="route('admin.sales.rma.reason.index')"
+                    :src="route('admin.sales.rma.reasons.index')"
                     ref="datagrid"
                 >
                     @php
-                        $hasPermission = bouncer()->hasPermission('rma.reason.edit') || bouncer()->hasPermission('rma.reason.delete');
+                        $hasPermission = bouncer()->hasPermission('sales.rma.reasons.edit') || bouncer()->hasPermission('sales.rma.reasons.delete');
                     @endphp
 
                     <!-- DataGrid Body -->
@@ -292,10 +292,10 @@
 
                         formData.set('title', sanitizedMessage);
 
-                        url = `{{ route('admin.sales.rma.reason.store') }}`;
+                        url = `{{ route('admin.sales.rma.reasons.store') }}`;
 
                         if (params.id) {
-                            url = '{{ route('admin.sales.rma.reason.update', ':id') }}'.replace(':id', params.id);
+                            url = '{{ route('admin.sales.rma.reasons.update', ':id') }}'.replace(':id', params.id);
 
                             formData.append('_method', 'put');
                         }

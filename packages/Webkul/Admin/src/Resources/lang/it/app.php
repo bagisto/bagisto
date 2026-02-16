@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'Comunicazioni',
                 'configure' => 'Configura',
                 'currencies' => 'Valute',
-                'custom-field' => 'Campo personalizzato',
+                'custom-fields' => 'Campo personalizzato',
                 'customers' => 'Clienti',
                 'dashboard' => 'Dashboard',
                 'data-transfer' => 'Trasferimento dati',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'Ordini',
                 'products' => 'Prodotti',
                 'promotions' => 'Promozioni',
-                'reason' => 'Motivo',
+                'reasons' => 'Motivo',
                 'refunds' => 'Rimborsi',
                 'reporting' => 'Report',
                 'requests' => 'Richieste',
                 'reviews' => 'Recensioni',
                 'rma' => 'RMA',
-                'rma-status' => 'Stato RMA',
                 'roles' => 'Ruoli',
                 'rules' => 'Regole',
                 'sales' => 'Vendite',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'Impostazioni',
                 'shipments' => 'Spedizioni',
                 'sitemaps' => 'Sitemap',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'Categorie Fiscali',
                 'tax-rates' => 'Aliquote Fiscali',
                 'taxes' => 'Tasse',
@@ -5302,7 +5302,7 @@ return [
         'communications' => 'Comunicazioni',
         'configure' => 'Configura',
         'copy' => 'Copia',
-        'create' => 'Creare',
+        'create' => 'Crea',
         'currencies' => 'Valute',
         'customers' => 'Clienti',
         'dashboard' => 'Dashboard',
@@ -5314,7 +5314,7 @@ return [
         'exchange-rates' => 'Tassi di Cambio',
         'gdpr' => 'GDPR',
         'groups' => 'Gruppi',
-        'import' => 'Importare',
+        'import' => 'Importa',
         'imports' => 'Importazioni',
         'inventory-sources' => 'Fonti di Inventario',
         'invoices' => 'Fatture',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'Vedi',
 
         'rma' => [
-            'create' => 'Crea',
-            'delete' => 'Elimina',
-            'edit' => 'Modifica',
-            'view' => 'Visualizza',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Crea',
-            'delete' => 'Elimina',
-            'edit' => 'Modifica',
-            'title' => 'Motivi RMA',
-        ],
+            'requests' => [
+                'create' => 'Crea',
+                'title' => 'Richieste RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Elimina',
-            'edit' => 'Modifica',
-            'title' => 'Regole RMA',
-        ],
+            'reasons' => [
+                'create' => 'Crea',
+                'delete' => 'Elimina',
+                'edit' => 'Modifica',
+                'title' => 'Motivi RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Elimina',
-            'edit' => 'Modifica',
-            'title' => 'Stato RMA',
-        ],
+            'rules' => [
+                'create' => 'Crea',
+                'delete' => 'Elimina',
+                'edit' => 'Modifica',
+                'title' => 'Regole RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'Crea',
-            'delete' => 'Elimina',
-            'edit' => 'Modifica',
-            'title' => 'Campi Personalizzati',
+            'statuses' => [
+                'create' => 'Crea',
+                'delete' => 'Elimina',
+                'edit' => 'Modifica',
+                'title' => 'Stati RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Crea',
+                'delete' => 'Elimina',
+                'edit' => 'Modifica',
+                'title' => 'Campi Personalizzati',
+            ],
         ],
     ],
 
