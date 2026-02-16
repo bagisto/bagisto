@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'Komunikasi',
                 'configure' => 'Konfigurasi',
                 'currencies' => 'Mata Uang',
-                'custom-field' => 'Bidang Kustom',
+                'custom-fields' => 'Bidang Kustom',
                 'customers' => 'Pelanggan',
                 'dashboard' => 'Dasbor',
                 'data-transfer' => 'Transfer Data',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'Pesanan',
                 'products' => 'Produk',
                 'promotions' => 'Promosi',
-                'reason' => 'Alasan',
+                'reasons' => 'Alasan',
                 'refunds' => 'Pengembalian Dana',
                 'reporting' => 'Pelaporan',
                 'requests' => 'Permintaan',
                 'reviews' => 'Ulasan',
                 'rma' => 'RMA',
-                'rma-status' => 'Status RMA',
                 'roles' => 'Peran',
                 'rules' => 'Aturan',
                 'sales' => 'Penjualan',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'Pengaturan',
                 'shipments' => 'Pengiriman',
                 'sitemaps' => 'Peta Situs',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'Kategori Pajak',
                 'tax-rates' => 'Tarif Pajak',
                 'taxes' => 'Pajak',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'Lihat',
 
         'rma' => [
-            'create' => 'Buat',
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'view' => 'Lihat',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Buat',
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'title' => 'Alasan RMA',
-        ],
+            'requests' => [
+                'create' => 'Buat',
+                'title' => 'Permintaan RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'title' => 'Aturan RMA',
-        ],
+            'reasons' => [
+                'create' => 'Buat',
+                'delete' => 'Hapus',
+                'edit' => 'Edit',
+                'title' => 'Alasan RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'title' => 'Status RMA',
-        ],
+            'rules' => [
+                'create' => 'Buat',
+                'delete' => 'Hapus',
+                'edit' => 'Edit',
+                'title' => 'Aturan RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'Buat',
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'title' => 'Bidang Kustom',
+            'statuses' => [
+                'create' => 'Buat',
+                'delete' => 'Hapus',
+                'edit' => 'Edit',
+                'title' => 'Status RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Buat',
+                'delete' => 'Hapus',
+                'edit' => 'Edit',
+                'title' => 'Bidang Kustom',
+            ],
         ],
     ],
 

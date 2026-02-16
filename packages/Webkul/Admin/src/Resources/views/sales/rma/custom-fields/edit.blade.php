@@ -16,7 +16,7 @@
             id="v-rma-custom-field-template"
         >
             <x-admin::form
-                :action="route('admin.sales.rma.custom-field.update', $rmaData->id)"
+                :action="route('admin.sales.rma.custom-fields.update', $rmaData->id)"
                 enctype="multipart/form-data"
             >
                 <div class="flex gap-2.5 mt-3.5">
@@ -30,7 +30,7 @@
                             <div class="flex gap-x-2.5 items-center">
                                 <!-- Cancel Button -->
                                 <a
-                                    href="{{ route('admin.sales.rma.custom-field.index') }}"
+                                    href="{{ route('admin.sales.rma.custom-fields.index') }}"
                                     class="transparent-button hover:bg-gray-200 dark:hover:bg-gray-800 dark:text-white"
                                 >
                                     @lang('admin::app.catalog.attributes.create.back-btn')

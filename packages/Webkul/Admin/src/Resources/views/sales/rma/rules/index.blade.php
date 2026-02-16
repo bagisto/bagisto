@@ -40,7 +40,7 @@
                     ref="datagrid"
                 >
                     @php
-                        $hasPermission = bouncer()->hasPermission('rma.reason.edit') || bouncer()->hasPermission('rma.reason.delete');
+                        $hasPermission = bouncer()->hasPermission('sales.rma.rules.edit') || bouncer()->hasPermission('sales.rma.rules.delete');
                     @endphp
 
                     <!-- DataGrid Body -->

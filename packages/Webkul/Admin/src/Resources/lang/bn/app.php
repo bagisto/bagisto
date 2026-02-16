@@ -5037,7 +5037,7 @@ return [
                 'communications' => 'যোগাযোগ',
                 'configure' => 'কনফিগার করুন',
                 'currencies' => 'মুদ্রা',
-                'custom-field' => 'কাস্টম ক্ষেত্র',
+                'custom-fields' => 'কাস্টম ক্ষেত্র',
                 'customers' => 'গ্রাহকগণ',
                 'dashboard' => 'ড্যাশবোর্ড',
                 'data-transfer' => 'তথ্য স্থানান্তর',
@@ -5057,13 +5057,12 @@ return [
                 'orders' => 'অর্ডার',
                 'products' => 'পণ্য',
                 'promotions' => 'প্রচার',
-                'reason' => 'কারণ',
+                'reasons' => 'কারণ',
                 'refunds' => 'ফেরত',
                 'reporting' => 'প্রতিবেদন',
                 'requests' => 'অনুরোধ',
                 'reviews' => 'পর্যালোচনাগুলি',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA স্থিতি',
                 'roles' => 'ভূমিকা',
                 'rules' => 'নিয়ম',
                 'sales' => 'বিক্রয়',
@@ -5073,6 +5072,7 @@ return [
                 'settings' => 'সেটিংস',
                 'shipments' => 'শিপমেন্ট',
                 'sitemaps' => 'সাইটম্যাপগুলি',
+                'statuses' => 'RMA স্থিতি',
                 'tax-categories' => 'কর বিভাগ',
                 'tax-rates' => 'কর হার',
                 'taxes' => 'কর',
@@ -5347,37 +5347,40 @@ return [
         'view' => 'দেখুন',
 
         'rma' => [
-            'create' => 'তৈরি করুন',
-            'delete' => 'মুছুন',
-            'edit' => 'সম্পাদনা করুন',
-            'view' => 'দেখুন',
-            'title' => 'আরএমএ (RMA)',
-        ],
+            'title' => 'RMA',
 
-        'rma-reason' => [
-            'create' => 'তৈরি করুন',
-            'delete' => 'মুছুন',
-            'edit' => 'সম্পাদনা করুন',
-            'title' => 'আরএমএ কারণসমূহ',
-        ],
+            'requests' => [
+                'create' => 'তৈরি করুন',
+                'title' => 'RMA অনুরোধ',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'মুছুন',
-            'edit' => 'সম্পাদনা করুন',
-            'title' => 'আরএমএ নীতিমালা',
-        ],
+            'reasons' => [
+                'create' => 'তৈরি করুন',
+                'delete' => 'মুছুন',
+                'edit' => 'সম্পাদনা করুন',
+                'title' => 'RMA কারণ',
+            ],
 
-        'rma-status' => [
-            'delete' => 'মুছুন',
-            'edit' => 'সম্পাদনা করুন',
-            'title' => 'আরএমএ স্থিতি',
-        ],
+            'rules' => [
+                'create' => 'তৈরি করুন',
+                'delete' => 'মুছুন',
+                'edit' => 'সম্পাদনা করুন',
+                'title' => 'RMA নিয়ম',
+            ],
 
-        'custom-field' => [
-            'create' => 'তৈরি করুন',
-            'delete' => 'মুছুন',
-            'edit' => 'সম্পাদনা করুন',
-            'title' => 'কাস্টম ক্ষেত্রসমূহ',
+            'statuses' => [
+                'create' => 'তৈরি করুন',
+                'delete' => 'মুছুন',
+                'edit' => 'সম্পাদনা করুন',
+                'title' => 'RMA স্থিতি',
+            ],
+
+            'custom-fields' => [
+                'create' => 'তৈরি করুন',
+                'delete' => 'মুছুন',
+                'edit' => 'সম্পাদনা করুন',
+                'title' => 'কাস্টম ক্ষেত্র',
+            ],
         ],
     ],
 

@@ -16,7 +16,7 @@
 
         <div class="flex items-center gap-x-2.5">
             <a
-                href="{{ route('admin.sales.rma.index') }}"
+                href="{{ route('admin.sales.rma.requests.index') }}"
                 class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
             >
                 @lang('admin::app.settings.channels.edit.back-btn')
@@ -36,7 +36,7 @@
             id="v-admin-new-rma-template"
         >
             <div class="w-full overflow-auto">
-                <x-admin::datagrid :src="route('admin.sales.rma.create')" >
+                <x-admin::datagrid :src="route('admin.sales.rma.requests.create')" >
                     <template #header="{
                         isLoading,
                         available,
@@ -851,7 +851,7 @@
                         this.rmaFormSubmit = false;
 
                         try {
-                            const response = await this.$axios.post("{{ route('admin.sales.rma.store') }}", formData);
+                            const response = await this.$axios.post("{{ route('admin.sales.rma.requests.store') }}", formData);
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
 
@@ -948,7 +948,7 @@
 
                     getOrderItems(orderId) {
                         if (this.orderId) {
-                            this.$axios.get('{{ route("admin.sales.rma.get-order-items", ":id") }}'.replace(':id', this.orderId))
+                            this.$axios.get('{{ route("admin.sales.rma.requests.get-order-items", ":id") }}'.replace(':id', this.orderId))
                                 .then(response => {
                                     this.isLoading = false;
 
@@ -986,7 +986,7 @@
 
                         this.rma_qty[product_id] = null;
 
-                        let url = '{{route("admin.sales.rma.get-resolution-reasons", ":resolutionType")}}';
+                        let url = '{{route("admin.sales.rma.requests.get-resolution-reasons", ":resolutionType")}}';
 
                         url = url.replace(':resolutionType', resolutionType);
 
