@@ -167,7 +167,7 @@ test.describe("design configuration", () => {
         await adminPage.hover('a:has-text("Men")');
         await adminPage.waitForTimeout(2000);
         await expect(
-            adminPage.getByRole("link", { name: "Winter Wear" }).first()
+            adminPage.getByRole("link", { name: "Formal Wear" }).first()
         ).toBeVisible();
     });
 });
