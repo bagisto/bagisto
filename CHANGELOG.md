@@ -6,6 +6,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.
 
+- #11030 [Fixed] - Added management support for shop footer copyright content in the admin panel.
+
+- #10929 [Fixed] - Added redirect URI configuration support for social authentication login.
+
 ## **v2.3.11 (22nd of January 2026)** - *Release*
 
 - Security updates.

@@ -162,7 +162,7 @@ class ItemField
     }
 
     /**
-     * Check if the field is required.
+     * Get placeholder of config item.
      */
     public function getPlaceholder(): ?string
     {
