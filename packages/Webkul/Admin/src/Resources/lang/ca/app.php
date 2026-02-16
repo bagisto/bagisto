@@ -4029,6 +4029,11 @@ return [
                         'redirection-link' => 'Enllaç de Redirecció',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Contingut de drets d\'autor',
+                        'info' => 'Configura el contingut de drets d\'autor que es mostra al peu de pàgina del teu lloc web per protegir la teva propietat intel·lectual i millorar el reconeixement de la marca.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Habilita les regles d’especulació',
                         'info' => 'Configura els paràmetres per habilitar o deshabilitar la lògica automàtica d’especulació.',
@@ -4531,7 +4536,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després de la seva autenticació amb Google. Ha de coincidir amb la URL configurada a la teva consola de Google.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després de la seva autenticació amb Google. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de Google.',
                             ],
                         ],
 
@@ -4550,7 +4555,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Facebook. Ha de coincidir amb la URL configurada als paràmetres de la teva aplicació de Facebook.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Facebook. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada als paràmetres de la teva aplicació de Facebook.',
                             ],
                         ],
 
@@ -4569,7 +4574,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb GitHub. Ha de coincidir amb la URL configurada a la teva consola de GitHub.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb GitHub. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de GitHub.',
                             ],
                         ],
 
@@ -4588,7 +4593,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb LinkedIn. Ha de coincidir amb la URL configurada a la teva consola de LinkedIn.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb LinkedIn. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de LinkedIn.',
                             ],
                         ],
 
@@ -4607,7 +4612,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Twitter. Ha de coincidir amb la URL configurada a la teva consola de Twitter.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Twitter. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de Twitter.',
                             ],
                         ],
                     ],

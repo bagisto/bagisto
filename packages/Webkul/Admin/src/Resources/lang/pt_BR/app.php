@@ -4029,6 +4029,11 @@ return [
                         'redirection-link' => 'Link de Redirecionamento',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Conteúdo de direitos autorais',
+                        'info' => 'Configure o conteúdo de direitos autorais exibido no rodapé do seu site para proteger sua propriedade intelectual e aumentar o reconhecimento da marca.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Ativar regras de especulação',
                         'info' => 'Configure as definições para ativar ou desativar a lógica automática de especulação.',
@@ -4531,7 +4536,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de Redirecionamento',
-                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o Google. Deve coincidir com a URL configurada no seu console do Google.',
+                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o Google. Use o formato de URL de espaço reservado mostrado (altere apenas seu domínio). Deve coincidir com a URL configurada no seu console do Google.',
                             ],
                         ],
 
@@ -4550,7 +4555,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de Redirecionamento',
-                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o Facebook. Deve coincidir com a URL configurada nas configurações do aplicativo do Facebook.',
+                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o Facebook. Use o formato de URL de espaço reservado mostrado (altere apenas seu domínio). Deve coincidir com a URL configurada nas configurações do aplicativo do Facebook.',
                             ],
                         ],
 
@@ -4569,7 +4574,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de Redirecionamento',
-                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o GitHub. Deve coincidir com a URL configurada no seu console do GitHub.',
+                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o GitHub. Use o formato de URL de espaço reservado mostrado (altere apenas seu domínio). Deve coincidir com a URL configurada no seu console do GitHub.',
                             ],
                         ],
 
@@ -4588,7 +4593,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de Redirecionamento',
-                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o LinkedIn. Deve coincidir com a URL configurada no seu console do LinkedIn.',
+                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o LinkedIn. Use o formato de URL de espaço reservado mostrado (altere apenas seu domínio). Deve coincidir com a URL configurada no seu console do LinkedIn.',
                             ],
                         ],
 
@@ -4607,7 +4612,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de Redirecionamento',
-                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o Twitter. Deve coincidir com a URL configurada no seu console do Twitter.',
+                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o Twitter. Use o formato de URL de espaço reservado mostrado (altere apenas seu domínio). Deve coincidir com a URL configurada no seu console do Twitter.',
                             ],
                         ],
                     ],

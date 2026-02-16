@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.4.0-beta2 (13th of February 2026)** - **Release**
+## **v2.4.0-beta2 (16th of February 2026)** - **Release**
 
 * Updated the translations for all the dummy products.
 

@@ -4029,6 +4029,11 @@ return [
                         'redirection-link' => 'Lien de redirection',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Contenu des droits d\'auteur',
+                        'info' => 'Configurez le contenu des droits d\'auteur affiché dans le pied de page de votre site web afin de protéger votre propriété intellectuelle et d\'améliorer la reconnaissance de votre marque.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Activer les règles de spéculation',
                         'info' => 'Configurer les paramètres pour activer ou désactiver la logique de spéculation automatique.',

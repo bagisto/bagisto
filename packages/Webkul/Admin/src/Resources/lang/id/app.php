@@ -4029,6 +4029,11 @@ return [
                         'redirection-link' => 'Tautan Pengalihan',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Contenuto del copyright',
+                        'info' => 'Configura il contenuto del copyright visualizzato nel piè di pagina del tuo sito web per proteggere la tua proprietà intellettuale e migliorare il riconoscimento del marchio.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Aktifkan Aturan Spekulasi',
                         'info' => 'Atur preferensi untuk mengaktifkan atau menonaktifkan logika spekulasi otomatis.',
@@ -4531,7 +4536,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Google. Harus sesuai dengan URL yang dikonfigurasi di konsol Google Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Google. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol Google Anda.',
                             ],
                         ],
 
@@ -4550,7 +4555,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Facebook. Harus sesuai dengan URL yang dikonfigurasi di pengaturan aplikasi Facebook Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Facebook. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di pengaturan aplikasi Facebook Anda.',
                             ],
                         ],
 
@@ -4569,7 +4574,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan GitHub. Harus sesuai dengan URL yang dikonfigurasi di konsol GitHub Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan GitHub. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol GitHub Anda.',
                             ],
                         ],
 
@@ -4588,7 +4593,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan LinkedIn. Harus sesuai dengan URL yang dikonfigurasi di konsol LinkedIn Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan LinkedIn. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol LinkedIn Anda.',
                             ],
                         ],
 
@@ -4607,7 +4612,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Twitter. Harus sesuai dengan URL yang dikonfigurasi di konsol Twitter Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Twitter. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol Twitter Anda.',
                             ],
                         ],
                     ],
