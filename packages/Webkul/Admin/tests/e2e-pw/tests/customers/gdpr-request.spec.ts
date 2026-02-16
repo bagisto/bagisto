@@ -36,7 +36,11 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill(generateDescription());
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await expect(adminPage.getByRole('paragraph').filter({ hasText: 'Request created successfully' })).toBeVisible({ timeout: 5000 });
+        await expect(
+            adminPage
+                .getByRole("paragraph")
+                .filter({ hasText: "Request created successfully" }),
+        ).toBeVisible({ timeout: 5000 });
         await adminPage.locator(".icon-cancel").first().click();
 
         /**
@@ -84,7 +88,11 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill("Delete my last name - Verma");
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await expect(adminPage.getByRole('paragraph').filter({ hasText: 'Request created successfully' })).toBeVisible();
+        await expect(
+            adminPage
+                .getByRole("paragraph")
+                .filter({ hasText: "Request created successfully" }),
+        ).toBeVisible();
         await adminPage.locator(".icon-cancel").first().click();
 
         /**
@@ -133,11 +141,17 @@ test.describe("customer agreement configuration", () => {
 
         await adminPage.goto("customer/account/profile");
 
+        const acceptButton = adminPage.getByRole("button", { name: "Accept" });
+
+        if (await acceptButton.isVisible()) {
+            await acceptButton.click();
+        }
+
         /**
          * Create GDPR request.
          */
         await adminPage
-            .getByRole("link", { name: " GDPR Requests " })
+            .getByRole("link", { name: "GDPR Requests" })
             .click();
         await adminPage.getByRole("button", { name: "Create Request" }).click();
         await adminPage.locator('select[name="type"]').selectOption("update");
@@ -146,7 +160,11 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill("Update Phone No.: 123456");
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await expect(adminPage.getByRole('paragraph').filter({ hasText: 'Request created successfully' })).toBeVisible();
+        await expect(
+            adminPage
+                .getByRole("paragraph")
+                .filter({ hasText: "Request created successfully" }),
+        ).toBeVisible();
         await adminPage.locator(".icon-cancel").first().click();
 
         /**
@@ -168,7 +186,7 @@ test.describe("customer agreement configuration", () => {
         await adminPage.getByText("Data Request deleted").click();
         await adminPage.goto("customer/account/gdpr");
         await expect(adminPage.locator("#main")).not.toHaveText(
-            "Update Phone No.: 123456"
+            "Update Phone No.: 123456",
         );
     });
 
@@ -189,7 +207,10 @@ test.describe("customer agreement configuration", () => {
             .locator('textarea[name="message"]')
             .fill(generateDescription());
         await adminPage.getByRole("button", { name: "Save" }).click();
-        await expect(adminPage.locator('#app')).toContainText('Request created successfully', { timeout: 5000 });
+        await expect(adminPage.locator("#app")).toContainText(
+            "Request created successfully",
+            { timeout: 5000 },
+        );
         await adminPage.locator(".icon-cancel").first().click();
 
         /**

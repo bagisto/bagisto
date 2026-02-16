@@ -25,11 +25,11 @@ test.describe("catalog acl", () => {
         await aclManagement.verfiyAssignedRole(["catalog->products"]);
     });
 
-        test("should create custom role with catalog (products-> create) permission", async ({
+    test("should create custom role with catalog (products-> create) permission", async ({
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["catalog.products.create"]);
+        await aclManagement.createRole("custom", ["catalog.products.create","catalog.products.edit"]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["catalog->products"]);
         await aclManagement.createSimpleProduct(adminPage);
