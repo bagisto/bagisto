@@ -14,10 +14,23 @@ class DatabaseManager
 {
     /**
      * Admin User ID for which the admin user will be created during installation.
-     *
-     * @var int
      */
-    const USER_ID = 1;
+    const int USER_ID = 1;
+
+    /**
+     * Default admin name for which the admin user will be created during installation.
+     */
+    const string DEFAULT_ADMIN_NAME = 'Admin';
+
+    /**
+     * Default admin email for which the admin user will be created during installation.
+     */
+    const string DEFAULT_ADMIN_EMAIL = 'admin@example.com';
+
+    /**
+     * Default admin password for which the admin user will be created during installation.
+     */
+    const string DEFAULT_ADMIN_PASSWORD = 'admin123';
 
     /**
      * Check if the application is installed.
@@ -131,14 +144,14 @@ class DatabaseManager
     /**
      * Create admin user.
      */
-    public function createAdminUser($data): bool
+    public function createAdminUser(array $data = []): bool
     {
         try {
             DB::table('admins')->insert([
                 'id' => self::USER_ID,
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'password' => bcrypt($data['password']),
+                'name' => $data['name'] ?? self::DEFAULT_ADMIN_NAME,
+                'email' => $data['email'] ?? self::DEFAULT_ADMIN_EMAIL,
+                'password' => bcrypt($data['password'] ?? self::DEFAULT_ADMIN_PASSWORD),
                 'role_id' => 1,
                 'status' => 1,
                 'created_at' => now(),

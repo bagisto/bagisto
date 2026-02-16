@@ -221,6 +221,8 @@ class Installer extends Command
         if (! $this->option('skip-admin-creation')) {
             $this->warn('Step: Create admin credentials...');
             $this->askForAdminDetails();
+        } else {
+            $this->databaseManager->createAdminUser();
         }
 
         $this->warn('Step: Clearing cached bootstrap files...');
