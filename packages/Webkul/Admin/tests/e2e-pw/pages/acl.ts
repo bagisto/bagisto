@@ -1,5 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import { WebLocators } from "../locators/locator";
+import { loginAsCustomer, addAddress } from "../utils/customer";
 
 import {
     generateFirstName,
@@ -85,6 +86,24 @@ const ACL_Routes: Record<
             "admin/configuration",
             "admin/sales/orders",
             "admin/sales/transactions",
+        ],
+    },
+
+    "sales->rma": {
+        allowed: "admin/sales/rma/requests",
+        sidebar: "/admin/sales/rma/requests",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/sales/refunds",
         ],
     },
 
@@ -1077,7 +1096,9 @@ export class ACLManagement {
         await this.locators.createBtn.click();
         await this.page.waitForLoadState("networkidle");
         await this.locators.ruleName.fill(generateName());
-        await this.locators.promotionRuleDescription.fill(generateDescription());
+        await this.locators.promotionRuleDescription.fill(
+            generateDescription(),
+        );
         await this.locators.addConditionBtn.click();
         await this.locators.selectCondition.selectOption("product|name");
         await this.locators.conditionName.fill(generateName());
@@ -1123,7 +1144,9 @@ export class ACLManagement {
         await this.locators.createBtn.click();
         await this.page.waitForLoadState("networkidle");
         await this.locators.ruleName.fill(generateName());
-        await this.locators.promotionRuleDescription.fill(generateDescription());
+        await this.locators.promotionRuleDescription.fill(
+            generateDescription(),
+        );
         await this.locators.addConditionBtn.click();
         await this.locators.selectCondition.selectOption("product|name");
         await this.locators.conditionName.fill(generateName());
@@ -1224,7 +1247,7 @@ export class ACLManagement {
         await this.locators.name.fill(generateName());
         await this.locators.subject.fill(generateName());
         await this.locators.event.selectOption({ label: "Birthday" });
-        await this.locators.emailTemplate.selectOption({label: "template"});
+        await this.locators.emailTemplate.selectOption({ label: "template" });
         await this.locators.selectChannel.selectOption("1");
         await this.locators.customerGroup.selectOption("1");
         await this.locators.campaignStatus.click();
@@ -1660,7 +1683,9 @@ export class ACLManagement {
         await this.locators.fillCode.fill("test-tax-category");
         await this.locators.name.fill("Test Tax Category");
         await this.locators.description.fill("This is a test tax category");
-        await this.locators.selectTaxRate.selectOption({label:"test-tax-rate"});
+        await this.locators.selectTaxRate.selectOption({
+            label: "test-tax-rate",
+        });
         await this.locators.createBtn.nth(1).click();
         await expect(
             this.locators.successCreateTaxCategory.first(),
@@ -1685,5 +1710,137 @@ export class ACLManagement {
         await expect(
             this.locators.successDeleteTaxCategory.first(),
         ).toBeVisible();
+    }
+
+    async createOrder() {
+        await loginAsCustomer(this.page);
+        await addAddress(this.page);
+        await this.page.goto("");
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.searchInput.fill("simple");
+        await this.locators.searchInput.press("Enter");
+        await this.locators.addToCartButton.first().click();
+        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.locators.ShoppingCartIcon.click();
+        await this.locators.ContinueButton.click();
+        await this.page.locator(".icon-radio-unselect").first().click();
+        await this.locators.clickProcessButton.click();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+        await this.page.waitForTimeout(2000);
+        await this.locators.clickPlaceOrderButton.click();
+        await this.page.waitForTimeout(8000);
+    }
+
+    async rmaCreateVerify() {
+        await this.createOrder();
+        await this.page.goto("admin/sales/rma/requests");
+        await this.locators.createBtn.click();
+        await this.locators.iconEdit.first().click();
+        await this.locators.checkBox.check();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.resolution.selectOption("cancel_items");
+        await this.locators.resolution.selectOption("cancel_items");
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.reason.selectOption("1");
+        await this.locators.rmaQTY.fill("1");
+        await this.locators.info.fill("Changed My Mind.");
+        await this.locators.createBtn.first().click();
+        await expect(this.locators.successAdminRMA).toBeVisible();
+    }
+
+    async rmaReasonCreateVerify() {
+        await this.page.goto("admin/sales/rma/reasons");
+        await this.locators.createRMAReason.click();
+        await this.locators.reasonTitle.fill("Broken Product");
+        await this.locators.reasonStatus.check();
+        await this.locators.position.fill("1");
+        await this.locators.reasonType.selectOption("return");
+        await this.locators.saveReason.click();
+        await expect(this.locators.saveReasonSuccess).toBeVisible();
+    }
+
+    async rmaReasonEditVerify() {
+        await this.page.goto("admin/sales/rma/reasons");
+        await expect(this.locators.createRMAReason).not.toBeVisible();
+        await this.locators.iconEdit.click();
+        await this.locators.position.fill("5");
+        await this.locators.saveReason.click();
+        await expect(
+            this.locators.saveReasonUpdateSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async rmaReasonDeleteVerify() {
+        await this.page.goto("admin/sales/rma/reasons");
+        await expect(this.locators.createRMAReason).not.toBeVisible();
+        await expect(this.locators.editIcon.first()).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(
+            this.locators.saveReasonDeleteSuccess.first(),
+        ).toBeVisible();
+    }
+
+    async rmaRulesCreateVerify() {
+        await this.page.goto("admin/sales/rma/rules");
+        await this.locators.rmaRulesCreate.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.ruleTitle.fill("Test Rule1");
+        await this.locators.reasonStatus.check();
+        await this.locators.ruleDescription.fill("Test Rule Description");
+        await this.locators.returnPeriod.fill("15");
+        await this.locators.saveRule.click();
+        await expect(this.locators.ruleSuccessMSG).toBeVisible();
+    }
+
+    async rmaRulesEditVerify() {
+        await this.page.goto("admin/sales/rma/rules");
+        await expect(this.locators.rmaRulesCreate).not.toBeVisible();
+        await this.locators.iconEdit.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.ruleTitle.fill("Test Rule1");
+        await this.locators.reasonStatus.check();
+        await this.locators.ruleDescription.fill("Test Rule Description");
+        await this.locators.returnPeriod.fill("15");
+        await this.locators.saveRule.click();
+        await expect(this.locators.ruleSuccessUpdatedMSG).toBeVisible();
+    }
+
+    async rmaRulesDeleteVerify() {
+        await this.page.goto("admin/sales/rma/rules");
+        await expect(this.locators.rmaRulesCreate).not.toBeVisible();
+        await expect(this.locators.iconEdit).not.toBeVisible();
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.ruleDeleteSuccessMSG).toBeVisible();
+    }
+
+    async rmaStatusCreateVerify() {
+        await this.page.goto("admin/sales/rma/rma-status");
+        await this.locators.createRMAStatus.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.rmaStatusTitle.fill("RMA Status");
+        await this.locators.reasonStatus.click();
+        await this.locators.saveStatus.click();
+        await expect(this.locators.statusSuccess).toBeVisible();
+    }
+
+    async rmaStatusEditVerify() {
+        await this.page.goto("admin/sales/rma/rma-status");
+        await expect(this.locators.createRMAStatus).not.toBeVisible();
+        await this.locators.iconEdit.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.rmaStatusTitle.fill("RMA Status edited");
+        await this.locators.saveStatus.click();
+        await expect(this.locators.statusUpdateSuccess).toBeVisible();
+    }
+
+    async rmaStatusDeleteVerify() {
+        await this.page.goto("admin/sales/rma/rma-status");
+        await expect(this.locators.createRMAStatus).not.toBeVisible();
+        await this.locators.deleteBtn.click();
+        await this.locators.agreeBtn.click();
+        await expect(this.locators.statusDeleteSuccess).toBeVisible();
     }
 }
