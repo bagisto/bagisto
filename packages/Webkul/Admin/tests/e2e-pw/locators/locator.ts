@@ -149,8 +149,10 @@ export class WebLocators {
     readonly saveReasonSuccess: Locator;
     readonly listVerify: Locator;
     readonly rmaRulesCreate: Locator;
+    readonly saveReasonUpdateSuccess: Locator;
     readonly ruleTitle: Locator;
     readonly ruleDescription: Locator;
+    readonly successAdminRMA: Locator;
     readonly returnPeriod: Locator;
     readonly saveRule: Locator;
     readonly ruleSuccessMSG: Locator;
@@ -161,7 +163,7 @@ export class WebLocators {
     readonly statusSuccess: Locator;
     readonly listStatusVerify: Locator;
 
-   /**
+    /**
      * create role
      */
     readonly createRole: Locator;
@@ -357,6 +359,11 @@ export class WebLocators {
     readonly selectCountry: Locator;
     readonly saveCartRuleBTN: Locator;
     readonly searchBar: Locator;
+    readonly saveReasonDeleteSuccess: Locator;
+    readonly ruleSuccessUpdatedMSG: Locator;
+    readonly ruleDeleteSuccessMSG: Locator;
+    readonly statusUpdateSuccess: Locator;
+    readonly statusDeleteSuccess: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -529,6 +536,12 @@ export class WebLocators {
             name: "Save",
             exact: true,
         });
+        this.saveReasonUpdateSuccess = page.getByText(
+            "Reason updated successfully.",
+        );
+        this.saveReasonDeleteSuccess = page.getByText(
+            "Reason deleted successfully.",
+        );
         this.addLinkButton = page.getByText("Add Link").first();
         this.linkTitleInput = page.locator('input[name="title"]').first();
         this.clickLink = page.locator(".icon-uncheck").first();
@@ -602,6 +615,7 @@ export class WebLocators {
         this.successRMA = page
             .getByRole("paragraph")
             .filter({ hasText: "Request created successfully." });
+        this.successAdminRMA = page.getByText("RMA created successfully.");
         this.invalidRMAMessage = page.getByText(
             "The RMA Qty field must be 1 or less",
         );
@@ -619,18 +633,26 @@ export class WebLocators {
         this.saveReason = page.getByRole("button", { name: "Save Reason" });
         this.saveReasonSuccess = page.getByText("Reason created successfully.");
         this.listVerify = page.getByText("tester");
-        this.rmaRulesCreate=page.getByRole('button', { name: 'Create RMA Rules' });
-        this.ruleTitle=page.getByRole('textbox', { name: 'Rules Title' });
-        this.ruleDescription=page.getByRole('textbox', { name: 'Rules Description' });
-        this.returnPeriod=page.getByPlaceholder('Return Period (Days)');
-        this.saveRule=page.getByRole('button', { name: 'Save RMA Rules' });
-        this.ruleSuccessMSG= page.getByText('RMA Rules created');
-        this.listRuleVerify=page.getByText('test rule');
-        this.createRMAStatus=page.getByRole('button', { name: 'Create RMA Status' });
-        this.rmaStatusTitle=page.getByRole('textbox', { name: 'Title' });
-        this.saveStatus=page.getByRole('button', { name: 'Save RMA Status' });
-        this.statusSuccess=page.getByText('RMA Status created');
-        this.listStatusVerify=page.getByRole('paragraph').filter({ hasText: /^Status$/ });
+        this.rmaRulesCreate = page.getByRole("button", {
+            name: "Create RMA Rules",
+        });
+        this.ruleTitle = page.getByRole("textbox", { name: "Rules Title" });
+        this.ruleDescription = page.getByRole("textbox", {
+            name: "Rules Description",
+        });
+        this.returnPeriod = page.getByPlaceholder("Return Period (Days)");
+        this.saveRule = page.getByRole("button", { name: "Save RMA Rules" });
+        this.ruleSuccessMSG = page.getByText("RMA Rules created");
+        this.listRuleVerify = page.getByText("test rule");
+        this.createRMAStatus = page.getByRole("button", {
+            name: "Create RMA Status",
+        });
+        this.rmaStatusTitle = page.getByRole("textbox", { name: "Title" });
+        this.saveStatus = page.getByRole("button", { name: "Save RMA Status" });
+        this.statusSuccess = page.getByText("RMA Status created");
+        this.listStatusVerify = page
+            .getByRole("paragraph")
+            .filter({ hasText: /^Status$/ });
 
         /**
          * create role
@@ -968,10 +990,22 @@ export class WebLocators {
             "Tax Rates Assigned Categories cannot be deleted.",
         );
         this.selectCountry = page.locator('select[name="country"]');
-        this.searchBar=page.locator('input[name="query"]');
-         this.saveCartRuleBTN = page.getByRole("button", {
+        this.searchBar = page.locator('input[name="query"]');
+        this.saveCartRuleBTN = page.getByRole("button", {
             name: " Save Cart Rule ",
         });
+        this.ruleSuccessUpdatedMSG = page.getByText(
+            "RMA Rules updated successfully.",
+        );
+        this.ruleDeleteSuccessMSG = page.getByText(
+            "RMA Rules deleted successfully.",
+        );
+        this.statusUpdateSuccess = page.getByText(
+            "RMA Status updated successfully.",
+        );
+        this.statusDeleteSuccess = page.getByText(
+            "Selected rma status deleted successfully.",
+        );
     }
 
     /**
