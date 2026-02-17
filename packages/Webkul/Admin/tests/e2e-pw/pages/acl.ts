@@ -89,23 +89,6 @@ const ACL_Routes: Record<
         ],
     },
 
-    "sales->rma": {
-        allowed: "admin/sales/rma/requests",
-        sidebar: "/admin/sales/rma/requests",
-        notAllowed: [
-            "admin/dashboard",
-            "admin/customers",
-            "admin/cms",
-            "admin/marketing/promotions/catalog-rules",
-            "admin/reporting/sales",
-            "admin/settings/locales",
-            "admin/configuration",
-            "admin/sales/orders",
-            "admin/sales/transactions",
-            "admin/sales/refunds",
-        ],
-    },
-
     "sales->refunds": {
         allowed: "admin/sales/refunds",
         sidebar: "/admin/sales/refunds",
@@ -123,6 +106,23 @@ const ACL_Routes: Record<
         ],
     },
 
+    "sales->rma": {
+        allowed: "admin/sales/rma/requests",
+        sidebar: "/admin/sales/rma/requests",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+            "admin/sales/transactions",
+            "admin/sales/refunds",
+        ],
+    },
+
     "sales->rma->reason": {
         allowed: "admin/sales/rma/reasons",
         sidebar: "/admin/sales/rma/reasons",
@@ -133,9 +133,12 @@ const ACL_Routes: Record<
             "admin/marketing/promotions/catalog-rules",
             "admin/reporting/sales",
             "admin/settings/locales",
-            "admin/sales/rma/rules",
             "admin/sales/orders",
             "admin/sales/transactions",
+            "admin/sales/rma/rules",
+            "admin/sales/rma/requests",
+            "admin/sales/rma/rma-status",
+            "admin/sales/rma/custom-fields",
         ],
     },
 
@@ -149,15 +152,18 @@ const ACL_Routes: Record<
             "admin/marketing/promotions/catalog-rules",
             "admin/reporting/sales",
             "admin/settings/locales",
-            "admin/sales/rma/reasons",
             "admin/sales/orders",
             "admin/sales/transactions",
+            "admin/sales/rma/reasons",
+            "admin/sales/rma/requests",
+            "admin/sales/rma/rma-status",
+            "admin/sales/rma/custom-fields",
         ],
     },
 
     "sales->rma->rma_status": {
-        allowed: "admin/sales/rma/status",
-        sidebar: "/admin/sales/rma/status",
+        allowed: "admin/sales/rma/rma-status",
+        sidebar: "/admin/sales/rma/rma-status",
         notAllowed: [
             "admin/dashboard",
             "admin/customers",
@@ -166,12 +172,15 @@ const ACL_Routes: Record<
             "admin/reporting/sales",
             "admin/settings/locales",
             "admin/sales/rma/reasons",
+            "admin/sales/rma/rules",
+            "admin/sales/rma/requests",
+            "admin/sales/rma/custom-fields",
             "admin/sales/orders",
             "admin/sales/transactions",
         ],
     },
 
-    "catalog": {
+    catalog: {
         allowed: "admin/catalog/products",
         sidebar: "/admin/catalog/products",
         notAllowed: [
@@ -1761,9 +1770,14 @@ export class ACLManagement {
 
     async createOrder() {
         await loginAsCustomer(this.page);
+        await this.page.waitForLoadState("networkidle");
+        const acceptButton = this.page.getByRole("button", { name: "Accept" });
+
+        if (await acceptButton.isVisible()) {
+            await acceptButton.click();
+        }
         await addAddress(this.page);
         await this.page.goto("");
-        await this.page.waitForLoadState("networkidle");
         await this.locators.searchInput.fill("simple");
         await this.locators.searchInput.press("Enter");
         await this.locators.addToCartButton.first().click();
@@ -1792,7 +1806,7 @@ export class ACLManagement {
             price: "199",
             weight: "25",
         };
-    
+
         /**
          * Reaching to the create product page.
          */
@@ -1801,7 +1815,7 @@ export class ACLManagement {
             'button.primary-button:has-text("Create Product")',
         );
         await adminPage.getByRole("button", { name: "Create Product" }).click();
-    
+
         /**
          * Opening create product form in modal.
          */
@@ -1811,7 +1825,7 @@ export class ACLManagement {
             .selectOption("1");
         await adminPage.locator('input[name="sku"]').fill(generateSKU());
         await adminPage.getByRole("button", { name: "Save Product" }).click();
-    
+
         /**
          * After creating the product, the page is redirected to the edit product page, where
          * all the details need to be filled in.
@@ -1819,19 +1833,19 @@ export class ACLManagement {
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Save Product")',
         );
-    
+
         /**
          * Waiting for the main form to be visible.
          */
         await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
-    
+
         /**
          * General Section.
          */
         await adminPage.locator("#product_number").fill(product.productNumber);
         await adminPage.locator("#name").fill(product.name);
         const name = await adminPage.locator('input[name="name"]').inputValue();
-    
+
         /**
          * Description Section.
          */
@@ -1840,47 +1854,58 @@ export class ACLManagement {
             product.shortDescription,
         );
         await adminPage.fillInTinymce("#description_ifr", product.description);
-    
+
         /**
          * Meta Description Section.
          */
         await adminPage.locator("#meta_title").fill(product.name);
         await adminPage.locator("#meta_keywords").fill(product.name);
-        await adminPage.locator("#meta_description").fill(product.shortDescription);
-    
+        await adminPage
+            .locator("#meta_description")
+            .fill(product.shortDescription);
+
         /**
          * Image Section.
          */
         // Will add images later.
-    
+
         /**
          * Price Section.
          */
         await adminPage.locator("#price").fill(product.price);
-    
+
         /**
          * Shipping Section.
          */
         await adminPage.locator("#weight").fill(product.weight);
-    
+
         /**
          * Inventories Section.
          */
         await adminPage.locator('input[name="inventories\\[1\\]"]').click();
-        await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
-    
+        await adminPage
+            .locator('input[name="inventories\\[1\\]"]')
+            .fill("5000");
+
+        /**
+         * RMA
+         */
+
+        await this.page.locator('label[for="allow_rma"]').click();
+        await this.locators.rmaSelection.selectOption("1");
+
         /**
          * Saving the product.
          */
         await adminPage.getByRole("button", { name: "Save Product" }).click();
-    
+
         /**
          * Expecting for the product to be saved.
          */
         await expect(adminPage.locator("#app")).toContainText(
             /product updated successfully/i,
         );
-    
+
         /**
          * Checking the product in the list.
          */
@@ -1924,7 +1949,7 @@ export class ACLManagement {
     async rmaReasonEditVerify() {
         await this.page.goto("admin/sales/rma/reasons");
         await expect(this.locators.createRMAReason).not.toBeVisible();
-        await this.locators.iconEdit.click();
+        await this.locators.iconEdit.first().click();
         await this.locators.position.fill("5");
         await this.locators.saveReason.click();
         await expect(
@@ -1958,7 +1983,7 @@ export class ACLManagement {
     async rmaRulesEditVerify() {
         await this.page.goto("admin/sales/rma/rules");
         await expect(this.locators.rmaRulesCreate).not.toBeVisible();
-        await this.locators.iconEdit.click();
+        await this.locators.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
         await this.locators.ruleTitle.fill("Test Rule1");
         await this.locators.reasonStatus.check();
@@ -1990,7 +2015,7 @@ export class ACLManagement {
     async rmaStatusEditVerify() {
         await this.page.goto("admin/sales/rma/rma-status");
         await expect(this.locators.createRMAStatus).not.toBeVisible();
-        await this.locators.iconEdit.click();
+        await this.locators.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
         await this.locators.rmaStatusTitle.fill("RMA Status edited");
         await this.locators.saveStatus.click();
