@@ -139,6 +139,20 @@ class Cart extends Model implements CartContract
     }
 
     /**
+     * Checks if cart has only stockable items.
+     */
+    public function hasOnlyStockableItems(): bool
+    {
+        foreach ($this->items as $item) {
+            if (! $item->product->isStockable()) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Checks if cart has downloadable items.
      */
     public function hasDownloadableItems(): bool
