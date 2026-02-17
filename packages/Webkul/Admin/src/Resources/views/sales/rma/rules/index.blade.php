@@ -24,15 +24,17 @@
                         @lang('admin::app.sales.rma.rules.index.title')
                     </p>
 
-                    <!-- Create Button -->
-                    <div class="flex items-center gap-x-2.5">
-                        <button
-                            class="primary-button"
-                            @click="selectedLocales=0; resetForm(); $refs.rulesModal.toggle()"
-                        >
-                            @lang('admin::app.sales.rma.rules.index.create-btn')
-                        </button>
-                    </div>
+                    @if (bouncer()->hasPermission('sales.rma.rules.create'))
+                        <!-- Create Button -->
+                        <div class="flex items-center gap-x-2.5">
+                            <button
+                                class="primary-button"
+                                @click="selectedLocales=0; resetForm(); $refs.rulesModal.toggle()"
+                            >
+                                @lang('admin::app.sales.rma.rules.index.create-btn')
+                            </button>
+                        </div>
+                    @endif
                 </div>
 
                 <x-admin::datagrid
@@ -40,7 +42,11 @@
                     ref="datagrid"
                 >
                     @php
-                        $hasPermission = bouncer()->hasPermission('sales.rma.rules.edit') || bouncer()->hasPermission('sales.rma.rules.delete');
+                        $hasEditPermission = bouncer()->hasPermission('sales.rma.rules.edit');
+
+                        $hasDeletePermission = bouncer()->hasPermission('sales.rma.rules.delete');
+
+                        $hasPermission = $hasEditPermission || $hasDeletePermission;
                     @endphp
 
                     <!-- DataGrid Body -->
@@ -89,23 +95,27 @@
 
                             <!-- Actions -->
                             <div class="flex justify-end">
-                                <a @click="selectedLocales=1; editModal(record.actions.find(action => action.method === 'GET').url)">
-                                    <span
-                                        :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                        class="cursor-pointer rounded-md p-1 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                        :title="record.actions.find(action => action.title === 'Edit')?.title"
-                                    >
-                                    </span>
-                                </a>
+                                @if ($hasEditPermission)
+                                    <a @click="selectedLocales=1; editModal(record.actions.find(action => action.method === 'GET').url)">
+                                        <span
+                                            :class="record.actions.find(action => action.title === 'Edit')?.icon"
+                                            class="cursor-pointer rounded-md p-1 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            :title="record.actions.find(action => action.title === 'Edit')?.title"
+                                        >
+                                        </span>
+                                    </a>
+                                @endif
 
-                                <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
-                                    <span
-                                        :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                        class="icon-delete cursor-pointer rounded-md p-2 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                        :title="record.actions.find(action => action.method === 'DELETE')?.title"
-                                    >
-                                    </span>
-                                </a>
+                                @if ($hasDeletePermission)
+                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                        <span
+                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                            class="icon-delete cursor-pointer rounded-md p-2 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            :title="record.actions.find(action => action.method === 'DELETE')?.title"
+                                        >
+                                        </span>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </template>
