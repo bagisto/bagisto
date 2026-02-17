@@ -2025,6 +2025,10 @@ export class ACLManagement {
     async rmaStatusDeleteVerify() {
         await this.page.goto("admin/sales/rma/rma-status");
         await expect(this.locators.createRMAStatus).not.toBeVisible();
+        await expect(this.locators.iconEdit.first()).not.toBeVisible();
+        await expect(this.locators.deleteIcon.first()).not.toBeVisible();
+        await this.locators.selectRowBtn.first().click();
+        await this.locators.selectAction.click();
         await this.locators.deleteBtn.click();
         await this.locators.agreeBtn.click();
         await expect(this.locators.statusDeleteSuccess).toBeVisible();
