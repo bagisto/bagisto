@@ -5,6 +5,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 ## Unreleased
 
 - Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.
+- Fixed COD appearing for downloadable products in mixed cart. (#10831)
 
 - #11030 [Fixed] - Added management support for shop footer copyright content in the admin panel.
 
