@@ -139,17 +139,17 @@ class Cart extends Model implements CartContract
     }
 
     /**
-     * Checks if cart have non stockable items.
+     * Checks if cart has only stockable items.
      */
-    public function haveNonStockableItems(): bool
+    public function hasOnlyStockableItems(): bool
     {
         foreach ($this->items as $item) {
             if (! $item->product->isStockable()) {
-                return true;
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
