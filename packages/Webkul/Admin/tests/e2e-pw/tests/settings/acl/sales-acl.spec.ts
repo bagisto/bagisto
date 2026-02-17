@@ -200,7 +200,10 @@ test.describe("acl management", () => {
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["sales.rma.requests.create"]);
+        await aclManagement.createRole("custom", ["sales.rma.requests"]);
+         await aclManagement.editRolePermission([
+            "sales.rma.requests.create",
+        ]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["sales->rma"]);
         await expect(
@@ -208,20 +211,37 @@ test.describe("acl management", () => {
         ).toBeVisible();
     });
 
-    // test("should create custom role with sales (rma->create) permission", async ({
-    //     adminPage,
-    // }) => {
-    //     test.setTimeout(300 * 1000);
-    //     const aclManagement = new ACLManagement(adminPage);
-    //     await aclManagement.createRole("custom", [
-    //         "sales.rma.requests.create",
-    //         "catalog.products.create",
-    //         "catalog.products.edit",
-    //     ]);
-    //     await aclManagement.createUser();
-    //     await aclManagement.verfiyAssignedRole(["sales->rma"]);
-    //     await aclManagement.rmaCreateVerify();
-    // });
+    test("should create custom role with sales (rma->create) permission", async ({
+        adminPage,
+    }) => {
+        test.setTimeout(300 * 1000);
+        const aclManagement = new ACLManagement(adminPage);
+        await aclManagement.createRole("custom", [
+            "sales.rma.requests.create",
+            "catalog.products.create",
+            "catalog.products.edit",
+        ]);
+        await aclManagement.createUser();
+        await aclManagement.verfiyAssignedRole(["sales->rma"]);
+        await aclManagement.rmaCreateVerify();
+    });
+
+    test("should create custom role with sales (rma_reason->view) permission", async ({
+        adminPage,
+    }) => {
+        const aclManagement = new ACLManagement(adminPage);
+        await aclManagement.createRole("custom", ["sales.rma.reasons"]);
+        await aclManagement.editRolePermission([
+            "sales.rma.reasons.create",
+            "sales.rma.reasons.edit",
+            "sales.rma.reasons.delete",
+        ]);
+        await aclManagement.createUser();
+        await aclManagement.verfiyAssignedRole(["sales->rma->reason"]);
+        await expect(
+            adminPage.locator(".table-responsive").first(),
+        ).toBeVisible();
+    });
 
     test("should create custom role with sales (rma->rma reason->create) permission", async ({
         adminPage,
@@ -253,6 +273,23 @@ test.describe("acl management", () => {
         await aclManagement.rmaReasonDeleteVerify();
     });
 
+    test("should create custom role with sales (rma_rules->view) permission", async ({
+        adminPage,
+    }) => {
+        const aclManagement = new ACLManagement(adminPage);
+        await aclManagement.createRole("custom", ["sales.rma.rules"]);
+        await aclManagement.editRolePermission([
+            "sales.rma.rules.create",
+            "sales.rma.rules.edit",
+            "sales.rma.rules.delete",
+        ]);
+        await aclManagement.createUser();
+        await aclManagement.verfiyAssignedRole(["sales->rma->rma_rules"]);
+        await expect(
+            adminPage.locator(".table-responsive").first(),
+        ).toBeVisible();
+    });
+
     test("should create custom role with sales (rma->rma rules->create) permission", async ({
         adminPage,
     }) => {
@@ -281,6 +318,23 @@ test.describe("acl management", () => {
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["sales->rma->rma_rules"]);
         await aclManagement.rmaRulesDeleteVerify();
+    });
+
+    test("should create custom role with sales (rma_status->view) permission", async ({
+        adminPage,
+    }) => {
+        const aclManagement = new ACLManagement(adminPage);
+        await aclManagement.createRole("custom", ["sales.rma.statuses"]);
+        await aclManagement.editRolePermission([
+            "sales.rma.statuses.create",
+            "sales.rma.statuses.edit",
+            "sales.rma.statuses.delete",
+        ]);
+        await aclManagement.createUser();
+        await aclManagement.verfiyAssignedRole(["sales->rma->rma_status"]);
+        await expect(
+            adminPage.locator(".table-responsive").first(),
+        ).toBeVisible();
     });
 
     test("should create custom role with sales (rma->rma status->create) permission", async ({
