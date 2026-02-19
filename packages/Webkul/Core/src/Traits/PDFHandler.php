@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Traits;
 
+use ArPHP\I18N\Arabic;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Mpdf\Mpdf;
@@ -9,87 +10,103 @@ use Mpdf\Mpdf;
 trait PDFHandler
 {
     /**
-     * Download PDF.
-     *
-     * @return \Illuminate\Http\Response
+     * Download PDF as a streamed response.
      */
-    protected function downloadPDF(string $html, ?string $fileName = null)
+    protected function downloadPDF(string $html, ?string $fileName = null): \Illuminate\Http\Response
     {
-        if (is_null($fileName)) {
-            $fileName = Str::random(32);
-        }
+        $fileName = $this->resolvePdfFileName($fileName);
+        $html = $this->preparePdfHtml($html);
 
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-
-        if (($direction = core()->getCurrentLocale()->direction) == 'rtl') {
-            $mPDF = new Mpdf([
-                'margin_left' => 0,
-                'margin_right' => 0,
-                'margin_top' => 0,
-                'margin_bottom' => 0,
-            ]);
-            $mPDF->SetDirectionality($direction);
-            $mPDF->SetDisplayMode('fullpage');
-            $mPDF->WriteHTML($this->adjustArabicAndPersianContent($html));
+        if ($this->isRtlLocale()) {
+            $mpdf = $this->buildMpdf($html);
 
             return response()->streamDownload(
-                fn () => print ($mPDF->Output('', 'S')),
-                $fileName.'.pdf'
+                fn () => print($mpdf->Output('', 'S')),
+                $fileName . '.pdf'
             );
         }
 
-        return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
+        return PDF::loadHTML($html)
             ->setPaper('A4', 'portrait')
             ->set_option('defaultFont', 'Courier')
-            ->download($fileName.'.pdf');
+            ->download($fileName . '.pdf');
     }
 
     /**
-     * Generate PDF content for email attachment
-     *
+     * Generate raw PDF content (e.g. for email attachments).
      */
-    protected function generateInvoicePdf(string $html, ?string $fileName = null)
+    protected function generatePdf(string $html, ?string $fileName = null): string
     {
-        if (is_null($fileName)) {
-            $fileName = Str::random(32);
+        $html = $this->preparePdfHtml($html);
+
+        if ($this->isRtlLocale()) {
+            return $this->buildMpdf($html)->Output('', 'S');
         }
 
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
-
-        if (($direction = core()->getCurrentLocale()->direction) == 'rtl') {
-            $mPDF = new Mpdf([
-                'margin_left' => 0,
-                'margin_right' => 0,
-                'margin_top' => 0,
-                'margin_bottom' => 0,
-            ]);
-            $mPDF->SetDirectionality($direction);
-            $mPDF->SetDisplayMode('fullpage');
-            $mPDF->WriteHTML($this->adjustArabicAndPersianContent($html));
-
-            return $mPDF->Output('', 'S');
-        }
-
-        return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
+        return PDF::loadHTML($html)
             ->setPaper('A4', 'portrait')
             ->set_option('defaultFont', 'Courier')
             ->output();
     }
 
     /**
-     * Adjust arabic and persian content.
-     *
-     * @return string
+     * Build and configure an mPDF instance with the given HTML.
      */
-    protected function adjustArabicAndPersianContent(string $html)
+    private function buildMpdf(string $html): Mpdf
     {
-        $arabic = new \ArPHP\I18N\Arabic;
+        $mpdf = new Mpdf([
+            'margin_left'   => 0,
+            'margin_right'  => 0,
+            'margin_top'    => 0,
+            'margin_bottom' => 0,
+        ]);
 
-        $p = $arabic->arIdentify($html);
+        $mpdf->SetDirectionality('rtl');
+        $mpdf->SetDisplayMode('fullpage');
+        $mpdf->WriteHTML($html);
 
-        for ($i = count($p) - 1; $i >= 0; $i -= 2) {
-            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i - 1], $p[$i] - $p[$i - 1]));
-            $html = substr_replace($html, $utf8ar, $p[$i - 1], $p[$i] - $p[$i - 1]);
+        return $mpdf;
+    }
+
+    /**
+     * Prepare HTML for PDF rendering: encode and adjust Arabic/Persian glyphs.
+     */
+    private function preparePdfHtml(string $html): string
+    {
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
+        return $this->adjustArabicAndPersianContent($html);
+    }
+
+    /**
+     * Determine if the current locale uses RTL direction.
+     */
+    private function isRtlLocale(): bool
+    {
+        return core()->getCurrentLocale()->direction === 'rtl';
+    }
+
+    /**
+     * Resolve a PDF file name, generating a random one if not provided.
+     */
+    private function resolvePdfFileName(?string $fileName): string
+    {
+        return $fileName ?? Str::random(32);
+    }
+
+    /**
+     * Adjust Arabic and Persian glyph rendering for PDF output.
+     */
+    private function adjustArabicAndPersianContent(string $html): string
+    {
+        $arabic = new Arabic;
+
+        $positions = $arabic->arIdentify($html);
+
+        for ($i = count($positions) - 1; $i >= 0; $i -= 2) {
+            $segment   = substr($html, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
+            $converted = $arabic->utf8Glyphs($segment);
+            $html      = substr_replace($html, $converted, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
         }
 
         return $html;
