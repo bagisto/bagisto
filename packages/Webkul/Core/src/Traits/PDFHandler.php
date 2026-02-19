@@ -12,7 +12,7 @@ trait PDFHandler
     /**
      * Download PDF as a streamed response.
      */
-    protected function downloadPDF(string $html, ?string $fileName = null): \Illuminate\Http\Response
+    protected function downloadPDF(string $html, ?string $fileName = null)
     {
         $fileName = $this->resolvePdfFileName($fileName);
         $html = $this->preparePdfHtml($html);
@@ -35,7 +35,7 @@ trait PDFHandler
     /**
      * Generate raw PDF content (e.g. for email attachments).
      */
-    protected function generatePdf(string $html, ?string $fileName = null): string
+    protected function generatePdf(string $html): string
     {
         $html = $this->preparePdfHtml($html);
 

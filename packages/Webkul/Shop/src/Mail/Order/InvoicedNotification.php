@@ -57,7 +57,7 @@ class InvoicedNotification extends Mailable
         try {
             $orderCurrencyCode = $this->invoice->order->order_currency_code;
 
-            $pdfContent = $this->generateInvoicePdf(
+            $pdfContent = $this->generatePdf(
                 view('shop::customers.account.orders.pdf', [
                     'invoice' => $this->invoice,
                     'orderCurrencyCode' => $orderCurrencyCode,
