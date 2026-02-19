@@ -1,0 +1,25 @@
+{
+    "name": "bagisto/laravel-channel-smtp",
+    "description": "Channel based SMTP configuration package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Webkul"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Webkul\\ChannelSmtp\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\ChannelSmtp\\Providers\\ChannelSmtpServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}
