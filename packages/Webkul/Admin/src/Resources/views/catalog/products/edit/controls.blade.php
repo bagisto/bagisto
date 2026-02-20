@@ -104,20 +104,31 @@
         @break
     @case('multiselect')
         @php
-            $selectedOption = old($attribute->code) ?: explode(',', $product[$attribute->code]);
+            $selectedOption = old($attribute->code);
+
+            if (is_null($selectedOption)) {
+                $selectedOption = array_filter(explode(',', (string) $product[$attribute->code]));
+            }
+
+            if (! is_array($selectedOption)) {
+                $selectedOption = [$selectedOption];
+            }
+
+            $selectedOption = array_values(array_map('strval', $selectedOption));
         @endphp
 
         <x-admin::form.control-group.control
             type="multiselect"
             :id="$attribute->code . '[]'"
             :name="$attribute->code . '[]'"
+            ::value='{{ json_encode($selectedOption) }}'
             ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
         >
             @foreach ($attribute->options()->orderBy('sort_order')->get() as $option)
                 <option
                     value="{{ $option->id }}"
-                    {{ in_array($option->id, $selectedOption) ? 'selected' : ''}}
+                    {{ in_array((string) $option->id, $selectedOption, true) ? 'selected' : ''}}
                     v-pre
                 >
                     {{ $option->admin_name }}
