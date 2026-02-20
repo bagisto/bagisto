@@ -4312,6 +4312,26 @@ return [
                     'title' => 'Configurações de E-mail',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Configure as configurações de SMTP para enviar e-mails para este canal.',
+                    'smtp-enable' => 'Ativar SMTP personalizado',
+                    'smtp-enable-info' => 'Ative ou desative o uso de configurações SMTP personalizadas para enviar e-mails deste canal.',
+                    'smtp-encryption' => 'Criptografia',
+                    'smtp-encryption-info' => 'Selecione o método de criptografia para proteger a comunicação por e-mail. As opções incluem TLS, SSL ou Nenhum.',
+                    'smtp-host' => 'Host SMTP',
+                    'smtp-host-info' => 'O endereço do servidor SMTP usado para enviar e-mails. Pode ser um endereço IP ou um nome de domínio.',
+                    'smtp-password' => 'Senha SMTP',
+                    'smtp-password-info' => 'A senha associada ao nome de usuário SMTP para autenticação com o servidor de e-mail.',
+                    'smtp-port' => 'Porta SMTP',
+                    'smtp-port-info' => 'O número da porta usado para comunicação SMTP. Portas comuns incluem 25, 465 (SSL) e 587 (TLS).',
+                    'smtp-username' => 'Nome de usuário SMTP',
+                    'smtp-username-info' => 'O nome de usuário usado para autenticação com o servidor SMTP, geralmente o endereço de e-mail ou um nome de usuário específico fornecido pelo serviço de e-mail.',
+                    'title' => 'Configurações de SMTP',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Nenhum',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Enviar uma notificação ao cliente após cancelar um pedido',
                     'cancel-order-mail-to-admin' => 'Envie um e-mail de notificação ao administrador após cancelar um pedido',

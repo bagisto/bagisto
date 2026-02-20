@@ -4312,6 +4312,26 @@ return [
                     'title' => 'إعدادات البريد الإلكتروني',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Configure SMTP settings to send emails for this channel.',
+                    'smtp-enable' => 'Enable Custom SMTP',
+                    'smtp-enable-info' => 'Enable or disable the use of custom SMTP settings for sending emails from this channel.',
+                    'smtp-encryption' => 'Encryption',
+                    'smtp-encryption-info' => 'Select the encryption method for securing email communication. Options include TLS, SSL, or None.',
+                    'smtp-host' => 'SMTP Host',
+                    'smtp-host-info' => 'The address of the SMTP server used for sending emails. It can be an IP address or a domain name.',
+                    'smtp-password' => 'SMTP Password',
+                    'smtp-password-info' => 'The password associated with the SMTP username for authentication with the email server.',
+                    'smtp-port' => 'SMTP Port',
+                    'smtp-port-info' => 'The port number used for SMTP communication. Common ports include 25, 465 (SSL), and 587 (TLS).',
+                    'smtp-username' => 'SMTP Username',
+                    'smtp-username-info' => 'The username used for authentication with the SMTP server, often the email address or a specific username provided by the email service.',
+                    'title' => 'SMTP Settings',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'None',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'إرسال إشعار للعميل بعد إلغاء الطلب',
                     'cancel-order-mail-to-admin' => 'إرسال بريد إلكتروني إشعاري إلى المشرف بعد إلغاء الطلب',

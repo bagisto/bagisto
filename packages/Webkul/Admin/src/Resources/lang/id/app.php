@@ -4312,6 +4312,26 @@ return [
                     'title' => 'Pengaturan Email',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Konfigurasikan pengaturan SMTP untuk mengirim email pada channel ini.',
+                    'smtp-enable' => 'Aktifkan SMTP Kustom',
+                    'smtp-enable-info' => 'Aktifkan atau nonaktifkan penggunaan pengaturan SMTP kustom untuk mengirim email dari channel ini.',
+                    'smtp-encryption' => 'Enkripsi',
+                    'smtp-encryption-info' => 'Pilih metode enkripsi untuk mengamankan komunikasi email. Opsi termasuk TLS, SSL, atau Tidak ada.',
+                    'smtp-host' => 'Host SMTP',
+                    'smtp-host-info' => 'Alamat server SMTP yang digunakan untuk mengirim email. Dapat berupa alamat IP atau nama domain.',
+                    'smtp-password' => 'Kata Sandi SMTP',
+                    'smtp-password-info' => 'Kata sandi yang terkait dengan nama pengguna SMTP untuk autentikasi dengan server email.',
+                    'smtp-port' => 'Port SMTP',
+                    'smtp-port-info' => 'Nomor port yang digunakan untuk komunikasi SMTP. Port umum termasuk 25, 465 (SSL), dan 587 (TLS).',
+                    'smtp-username' => 'Nama Pengguna SMTP',
+                    'smtp-username-info' => 'Nama pengguna yang digunakan untuk autentikasi dengan server SMTP, biasanya alamat email atau nama pengguna khusus yang disediakan oleh layanan email.',
+                    'title' => 'Pengaturan SMTP',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Tidak ada',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Kirim notifikasi kepada pelanggan setelah membatalkan pesanan',
                     'cancel-order-mail-to-admin' => 'Kirim email notifikasi kepada admin setelah membatalkan pesanan',

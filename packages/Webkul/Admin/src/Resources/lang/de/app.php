@@ -4312,6 +4312,26 @@ return [
                     'title' => 'E-Mail Einstellungen',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Konfigurieren Sie die SMTP-Einstellungen, um E-Mails für diesen Kanal zu senden.',
+                    'smtp-enable' => 'Benutzerdefiniertes SMTP aktivieren',
+                    'smtp-enable-info' => 'Aktivieren oder deaktivieren Sie die Verwendung benutzerdefinierter SMTP-Einstellungen zum Senden von E-Mails von diesem Kanal.',
+                    'smtp-encryption' => 'Verschlüsselung',
+                    'smtp-encryption-info' => 'Wählen Sie die Verschlüsselungsmethode zur Sicherung der E-Mail-Kommunikation. Optionen sind TLS, SSL oder Keine.',
+                    'smtp-host' => 'SMTP-Host',
+                    'smtp-host-info' => 'Die Adresse des SMTP-Servers, der zum Senden von E-Mails verwendet wird. Dies kann eine IP-Adresse oder ein Domainname sein.',
+                    'smtp-password' => 'SMTP-Passwort',
+                    'smtp-password-info' => 'Das Passwort, das mit dem SMTP-Benutzernamen zur Authentifizierung beim E-Mail-Server verwendet wird.',
+                    'smtp-port' => 'SMTP-Port',
+                    'smtp-port-info' => 'Die Portnummer, die für die SMTP-Kommunikation verwendet wird. Gängige Ports sind 25, 465 (SSL) und 587 (TLS).',
+                    'smtp-username' => 'SMTP-Benutzername',
+                    'smtp-username-info' => 'Der Benutzername zur Authentifizierung beim SMTP-Server, häufig die E-Mail-Adresse oder ein vom E-Mail-Dienst bereitgestellter spezifischer Benutzername.',
+                    'title' => 'SMTP-Einstellungen',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Keine',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Senden Sie eine Benachrichtigung an den Kunden, nachdem eine Bestellung storniert wurde',
                     'cancel-order-mail-to-admin' => 'Senden Sie eine Benachrichtigungs-E-Mail an den Administrator nach der Stornierung einer Bestellung',

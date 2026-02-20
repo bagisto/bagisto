@@ -4312,6 +4312,26 @@ return [
                     'title' => 'Paramètres des e-mails',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Configurez les paramètres SMTP pour envoyer des e-mails pour ce canal.',
+                    'smtp-enable' => 'Activer SMTP personnalisé',
+                    'smtp-enable-info' => 'Activez ou désactivez l’utilisation des paramètres SMTP personnalisés pour envoyer des e-mails depuis ce canal.',
+                    'smtp-encryption' => 'Chiffrement',
+                    'smtp-encryption-info' => 'Sélectionnez la méthode de chiffrement pour sécuriser la communication par e-mail. Les options incluent TLS, SSL ou Aucun.',
+                    'smtp-host' => 'Hôte SMTP',
+                    'smtp-host-info' => 'L’adresse du serveur SMTP utilisée pour envoyer des e-mails. Cela peut être une adresse IP ou un nom de domaine.',
+                    'smtp-password' => 'Mot de passe SMTP',
+                    'smtp-password-info' => 'Le mot de passe associé au nom d’utilisateur SMTP pour l’authentification avec le serveur de messagerie.',
+                    'smtp-port' => 'Port SMTP',
+                    'smtp-port-info' => 'Le numéro de port utilisé pour la communication SMTP. Les ports courants incluent 25, 465 (SSL) et 587 (TLS).',
+                    'smtp-username' => 'Nom d’utilisateur SMTP',
+                    'smtp-username-info' => 'Le nom d’utilisateur utilisé pour l’authentification avec le serveur SMTP, souvent l’adresse e-mail ou un nom d’utilisateur spécifique fourni par le service de messagerie.',
+                    'title' => 'Paramètres SMTP',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Aucun',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Envoyer une notification au client après l\'annulation d\'une commande',
                     'cancel-order-mail-to-admin' => 'Envoyer un e-mail de notification à l\'administrateur après l\'annulation d\'une commande',
