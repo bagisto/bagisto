@@ -29,9 +29,12 @@ trait HasMailConfiguration
      */
     protected function buildChildMessage()
     {
-        ! empty($this->from)
-            ? $this->from($this->from[0]['address'], $this->from[0]['name'])
-            : $this->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name']);
+        $sender = core()->getSenderEmailDetails();
+
+        $address = $this->from[0]['address'] ?? $sender['email'];
+        $name = $this->from[0]['name'] ?? $sender['name'] ?? config('mail.from.name');
+
+        $this->from($address, $name);
 
         return $this;
     }
