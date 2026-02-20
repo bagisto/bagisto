@@ -115,6 +115,8 @@ class CartController extends APIController
             Cart::removeItem($id);
         }
 
+        Cart::collectTotals();
+
         return new JsonResource([
             'data' => new CartResource(Cart::getCart()) ?? null,
             'message' => trans('shop::app.checkout.cart.index.remove-selected-success'),
@@ -132,6 +134,8 @@ class CartController extends APIController
             Cart::moveToWishlist($id, $qty);
         }
 
+        Cart::collectTotals();
+
         return new JsonResource([
             'data' => new CartResource(Cart::getCart()) ?? null,
             'message' => trans('shop::app.checkout.cart.index.move-to-wishlist-success'),
@@ -145,6 +149,8 @@ class CartController extends APIController
     {
         try {
             Cart::updateItems(request()->input());
+
+            Cart::collectTotals();
 
             return new JsonResource([
                 'data' => new CartResource(Cart::getCart()),
