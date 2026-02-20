@@ -5,8 +5,10 @@ namespace Webkul\CatalogRule\Repositories;
 use Illuminate\Container\Container;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\RMA\Repositories\RMARuleRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class CatalogRuleRepository extends Repository
@@ -21,6 +23,7 @@ class CatalogRuleRepository extends Repository
         protected AttributeRepository $attributeRepository,
         protected CategoryRepository $categoryRepository,
         protected TaxCategoryRepository $taxCategoryRepository,
+        protected RMARuleRepository $rmaRuleRepository,
         Container $container
     ) {
         parent::__construct($container);
@@ -31,7 +34,7 @@ class CatalogRuleRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\CatalogRule\Contracts\CatalogRule';
+        return CatalogRule::class;
     }
 
     /**
@@ -115,24 +118,16 @@ class CatalogRuleRepository extends Repository
         ];
 
         foreach ($this->attributeRepository->findWhereNotIn('type', ['textarea', 'image', 'file']) as $attribute) {
-            $attributeType = $attribute->type;
-
             if ($attribute->code == 'tax_category_id') {
                 $options = $this->getTaxCategories();
+            } elseif ($attribute->code == 'rma_rule_id') {
+                $options = $this->getRMARules();
             } else {
                 if ($attribute->type === 'select') {
                     $options = $attribute->options()->orderBy('sort_order')->get();
                 } else {
                     $options = $attribute->options;
                 }
-            }
-
-            if ($attribute->validation == 'decimal') {
-                $attributeType = 'decimal';
-            }
-
-            if ($attribute->validation == 'numeric') {
-                $attributeType = 'integer';
             }
 
             $attributes[0]['children'][] = [
@@ -144,6 +139,25 @@ class CatalogRuleRepository extends Repository
         }
 
         return $attributes;
+    }
+
+    /**
+     * Returns all attribute families.
+     *
+     * @return array
+     */
+    public function getAttributeFamilies()
+    {
+        $attributeFamilies = [];
+
+        foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
+            $attributeFamilies[] = [
+                'id' => $attributeFamily->id,
+                'admin_name' => $attributeFamily->name,
+            ];
+        }
+
+        return $attributeFamilies;
     }
 
     /**
@@ -166,21 +180,19 @@ class CatalogRuleRepository extends Repository
     }
 
     /**
-     * Returns all attribute families.
-     *
-     * @return array
+     * Returns all RMA rules.
      */
-    public function getAttributeFamilies()
+    public function getRMARules(): array
     {
-        $attributeFamilies = [];
+        $rmaRules = [];
 
-        foreach ($this->attributeFamilyRepository->all() as $attributeFamily) {
-            $attributeFamilies[] = [
-                'id' => $attributeFamily->id,
-                'admin_name' => $attributeFamily->name,
+        foreach ($this->rmaRuleRepository->all() as $rmaRule) {
+            $rmaRules[] = [
+                'id' => $rmaRule->id,
+                'admin_name' => $rmaRule->name,
             ];
         }
 
-        return $attributeFamilies;
+        return $rmaRules;
     }
 }

@@ -6,10 +6,12 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\CartRule\Contracts\CartRule;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
+use Webkul\RMA\Repositories\RMARuleRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
 class CartRuleRepository extends Repository
@@ -25,6 +27,7 @@ class CartRuleRepository extends Repository
         protected CategoryRepository $categoryRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository,
         protected TaxCategoryRepository $taxCategoryRepository,
+        protected RMARuleRepository $rmaRuleRepository,
         protected CountryRepository $countryRepository,
         protected CountryStateRepository $countryStateRepository,
         Container $container
@@ -33,14 +36,16 @@ class CartRuleRepository extends Repository
     }
 
     /**
-     * Specify Model class name
+     * Specify model class name.
      */
     public function model(): string
     {
-        return 'Webkul\CartRule\Contracts\CartRule';
+        return CartRule::class;
     }
 
     /**
+     * Create.
+     *
      * @return \Webkul\CartRule\Contracts\CartRule
      */
     public function create(array $data)
@@ -75,6 +80,8 @@ class CartRuleRepository extends Repository
     }
 
     /**
+     * Update.
+     *
      * @param  int  $id
      * @return \Webkul\CartRule\Contracts\CartRule
      */
@@ -250,18 +257,12 @@ class CartRuleRepository extends Repository
         ]);
 
         foreach ($tempAttributes as $attribute) {
-            $attributeType = $attribute->type;
-
             if ($attribute->code == 'tax_category_id') {
                 $options = $this->getTaxCategories();
+            } elseif ($attribute->code == 'rma_rule_id') {
+                $options = $this->getRMARules();
             } else {
                 $options = $attribute->options;
-            }
-
-            if ($attribute->validation == 'decimal') {
-                $attributeType = 'decimal';
-            } elseif ($attribute->validation == 'numeric') {
-                $attributeType = 'integer';
             }
 
             $attributes[2]['children'][] = [
@@ -287,67 +288,6 @@ class CartRuleRepository extends Repository
         }
 
         return $attributes;
-    }
-
-    /**
-     * Returns all payment methods.
-     *
-     * @return array
-     */
-    public function getPaymentMethods()
-    {
-        $methods = [];
-
-        foreach (config('payment_methods') as $paymentMethod) {
-            $object = app($paymentMethod['class']);
-
-            $methods[] = [
-                'id' => $object->getCode(),
-                'admin_name' => $object->getTitle(),
-            ];
-        }
-
-        return $methods;
-    }
-
-    /**
-     * Returns all shipping methods.
-     *
-     * @return array
-     */
-    public function getShippingMethods()
-    {
-        $methods = [];
-
-        foreach (config('carriers') as $shippingMethod) {
-            $object = app($shippingMethod['class']);
-
-            $methods[] = [
-                'id' => $object->getCode(),
-                'admin_name' => $object->getTitle(),
-            ];
-        }
-
-        return $methods;
-    }
-
-    /**
-     * Returns all countries.
-     *
-     * @return array
-     */
-    public function getTaxCategories()
-    {
-        $taxCategories = [];
-
-        foreach ($this->taxCategoryRepository->all() as $taxCategory) {
-            $taxCategories[] = [
-                'id' => $taxCategory->id,
-                'admin_name' => $taxCategory->name,
-            ];
-        }
-
-        return $taxCategories;
     }
 
     /**
@@ -416,5 +356,83 @@ class CartRuleRepository extends Repository
         }
 
         return $collection;
+    }
+
+    /**
+     * Returns all shipping methods.
+     *
+     * @return array
+     */
+    public function getShippingMethods()
+    {
+        $methods = [];
+
+        foreach (config('carriers') as $shippingMethod) {
+            $object = app($shippingMethod['class']);
+
+            $methods[] = [
+                'id' => $object->getCode(),
+                'admin_name' => $object->getTitle(),
+            ];
+        }
+
+        return $methods;
+    }
+
+    /**
+     * Returns all payment methods.
+     *
+     * @return array
+     */
+    public function getPaymentMethods()
+    {
+        $methods = [];
+
+        foreach (config('payment_methods') as $paymentMethod) {
+            $object = app($paymentMethod['class']);
+
+            $methods[] = [
+                'id' => $object->getCode(),
+                'admin_name' => $object->getTitle(),
+            ];
+        }
+
+        return $methods;
+    }
+
+    /**
+     * Returns all countries.
+     *
+     * @return array
+     */
+    public function getTaxCategories()
+    {
+        $taxCategories = [];
+
+        foreach ($this->taxCategoryRepository->all() as $taxCategory) {
+            $taxCategories[] = [
+                'id' => $taxCategory->id,
+                'admin_name' => $taxCategory->name,
+            ];
+        }
+
+        return $taxCategories;
+    }
+
+    /**
+     * Returns all RMA rules.
+     */
+    public function getRMARules(): array
+    {
+        $rmaRules = [];
+
+        foreach ($this->rmaRuleRepository->all() as $rmaRule) {
+            $rmaRules[] = [
+                'id' => $rmaRule->id,
+                'admin_name' => $rmaRule->name,
+            ];
+        }
+
+        return $rmaRules;
     }
 }
