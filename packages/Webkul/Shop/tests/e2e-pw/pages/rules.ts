@@ -1,0 +1,121 @@
+import { expect, Page } from "@playwright/test";
+import { WebLocators } from "../locators/locator";
+import { generateName } from "../utils/faker";
+
+export class CreateRules {
+    readonly page: Page;
+    readonly locators: WebLocators;
+    readonly couponCode: string;
+
+    constructor(page: Page) {
+        this.page = page;
+        this.locators = new WebLocators(page);
+        this.couponCode = `CP-${Date.now()}`;
+    }
+
+    async adminlogin() {
+        /**
+         * Login to admin panel.
+         */
+        const adminCredentials = {
+            email: "admin@example.com",
+            password: "admin123",
+        };
+        await this.page.goto("admin/login");
+        await this.page.waitForLoadState("networkidle");
+        await this.locators.emailInput.fill(adminCredentials.email);
+        await this.locators.passwordInput.fill(adminCredentials.password);
+        await this.locators.signInButton.click();
+        await this.page.waitForLoadState("networkidle");
+    }
+
+    private async fillGeneralCartDetails() {
+        await this.locators.createCartRuleButton.waitFor();
+        await this.locators.createCartRuleButton.click();
+        await this.locators.cartRuleForm.waitFor();
+        await this.locators.nameInput.fill(generateName());
+        await this.locators.descriptionInput.fill(generateName());
+        await this.locators.couponTypeSelect.selectOption("1");
+        await this.locators.autoGenerationSelect.selectOption("0");
+        await this.locators.couponCodeInput.fill(this.couponCode);
+        await this.locators.usesPerCouponInput.fill("100");
+        await this.locators.usesPerCustomerInput.fill("100");
+    }
+
+    public async addCondition(
+        attribute: string,
+        operator: string,
+        value: string,
+    ) {
+        await this.locators.addConditionButton.click();
+        await this.locators.conditionAttributeSelect.waitFor();
+        await this.locators.conditionAttributeSelect.selectOption(attribute);
+        await this.locators.conditionOperatorSelect.selectOption(operator);
+        await this.locators.conditionValueInput.fill(value);
+        await this.locators.actionTypeSelect.selectOption("by_percent");
+        await this.locators.discountAmountInput.fill("50");
+    }
+
+    private async configureSettings() {
+        await this.locators.sortOrderInput.fill("1");
+        await this.locators.channelCheckbox.first().click();
+        await this.locators.customerGroupCheckbox.nth(1).click();
+        await this.locators.customerGroupCheckbox2.first().click();
+        await this.locators.statusToggle.first().click();
+    }
+
+    public async saveCartRule() {
+        await this.locators.saveCartRuleButton.click();
+        await expect(this.locators.successMessage).toContainText(
+            "Cart rule created successfully",
+        );
+    }
+
+    public async cartRuleCreationFlow() {
+        await this.page.goto("admin/marketing/promotions/cart-rules");
+        await this.fillGeneralCartDetails();
+        await this.configureSettings();
+    }
+
+    async applyCoupon(incrementTimes?: number) {
+        await this.page.goto("");
+
+        await this.locators.searchInput.fill("simple");
+        await this.locators.searchInput.press("Enter");
+
+        // Add product once
+        await this.locators.addToCartButton.first().click();
+        await expect(
+            this.locators.addToCartSuccessMessage.first(),
+        ).toBeVisible();
+
+        await this.page.goto("checkout/cart");
+
+        if (incrementTimes && incrementTimes > 0) {
+            for (let i = 0; i < incrementTimes; i++) {
+                await this.locators.incrementQtyButton.first().click();
+            }
+
+            await this.locators.updateCart.click();
+        }
+
+        await this.locators.applyCouponButton.click();
+        await this.locators.couponInput.fill(this.couponCode);
+        await this.locators.applyButton.click();
+    }
+
+    async deleteRuleAndProduct() {
+        await this.page.goto("admin/marketing/promotions/cart-rules");
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agree.click();
+        await expect(
+            this.page.getByText("Cart Rule Deleted Successfully"),
+        ).toBeVisible();
+        await this.page.goto("admin/catalog/products");
+        await this.locators.selectRowBtn.nth(2).click();
+        await this.locators.selectAction.click();
+        await this.locators.selectDelete.click();
+        await this.locators.agree.click();
+        await expect(this.locators.productDeleteSuccess).toBeVisible();
+    }
+}
