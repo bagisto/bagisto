@@ -13,7 +13,7 @@ use Webkul\Shop\Mail\Mailable;
 class InvoicedNotification extends Mailable
 {
     use PDFHandler;
-    
+
     /**
      * Create a new message instance.
      *

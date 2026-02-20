@@ -21,15 +21,15 @@ trait PDFHandler
             $mpdf = $this->buildMpdf($html);
 
             return response()->streamDownload(
-                fn () => print($mpdf->Output('', 'S')),
-                $fileName . '.pdf'
+                fn () => print ($mpdf->Output('', 'S')),
+                $fileName.'.pdf'
             );
         }
 
         return PDF::loadHTML($html)
             ->setPaper('A4', 'portrait')
             ->set_option('defaultFont', 'Courier')
-            ->download($fileName . '.pdf');
+            ->download($fileName.'.pdf');
     }
 
     /**
@@ -55,9 +55,9 @@ trait PDFHandler
     private function buildMpdf(string $html): Mpdf
     {
         $mpdf = new Mpdf([
-            'margin_left'   => 0,
-            'margin_right'  => 0,
-            'margin_top'    => 0,
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'margin_top' => 0,
             'margin_bottom' => 0,
         ]);
 
@@ -104,9 +104,9 @@ trait PDFHandler
         $positions = $arabic->arIdentify($html);
 
         for ($i = count($positions) - 1; $i >= 0; $i -= 2) {
-            $segment   = substr($html, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
+            $segment = substr($html, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
             $converted = $arabic->utf8Glyphs($segment);
-            $html      = substr_replace($html, $converted, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
+            $html = substr_replace($html, $converted, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
         }
 
         return $html;
