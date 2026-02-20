@@ -18,17 +18,13 @@ export async function register(page) {
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Sign Up" }).click();
-    await page.getByPlaceholder("First Name").click();
+    await page.waitForLoadState("networkidle");
     await page.getByPlaceholder("First Name").fill(credentials.firstName);
-    await page.getByPlaceholder("Last Name").click();
     await page.getByPlaceholder("Last Name").fill(credentials.lastName);
-    await page.getByPlaceholder("email@example.com").click();
     await page.getByPlaceholder("email@example.com").fill(credentials.email);
-    await page.getByPlaceholder("Password", { exact: true }).click();
     await page
         .getByPlaceholder("Password", { exact: true })
         .fill(credentials.password);
-    await page.getByPlaceholder("Confirm Password").click();
     await page.getByPlaceholder("Confirm Password").fill(credentials.password);
 
     const agreementLocator = page.locator("#agreement").nth(1);
@@ -60,7 +56,7 @@ export async function loginAsCustomer(page) {
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Sign In" }).click();
-    await page.getByPlaceholder("email@example.com").click();
+    await page.waitForLoadState("networkidle");
     await page.getByPlaceholder("email@example.com").fill(credentials.email);
     await page.getByPlaceholder("email@example.com").press("Tab");
     await page.getByPlaceholder("Password").fill(credentials.password);
@@ -77,8 +73,9 @@ export async function loginAsCustomer(page) {
 export async function addAddress(page) {
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Profile" }).click();
-    await page.getByRole("link", { name: " Address " }).click();
+    await page.getByRole("link", { name: "Address" }).click();
     await page.getByRole("link", { name: "Add Address" }).click();
+    await page.waitForLoadState("networkidle");
     await page.getByPlaceholder("Company Name").click();
     await page.getByPlaceholder("Company Name").fill(generateName());
     await page.getByPlaceholder("Company Name").press("Tab");
