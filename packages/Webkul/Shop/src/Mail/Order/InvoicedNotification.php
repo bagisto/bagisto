@@ -19,7 +19,10 @@ class InvoicedNotification extends Mailable
      *
      * @return void
      */
-    public function __construct(public Invoice $invoice) {}
+    public function __construct(
+        public Invoice $invoice,
+        public ?string $duplicateInvoiceEmail = null
+    ) {}
 
     /**
      * Get the message envelope.
@@ -29,7 +32,7 @@ class InvoicedNotification extends Mailable
         return new Envelope(
             to: [
                 new Address(
-                    $this->invoice->order->customer_email,
+                    $this->duplicateInvoiceEmail ?? $this->invoice->order->customer_email,
                     $this->invoice->order->customer_full_name
                 ),
             ],

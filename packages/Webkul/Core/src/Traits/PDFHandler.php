@@ -12,9 +12,10 @@ trait PDFHandler
     /**
      * Download PDF as a streamed response.
      */
-    protected function downloadPDF(string $html, ?string $fileName = null)
+    public function downloadPDF(string $html, ?string $fileName = null)
     {
         $fileName = $this->resolvePdfFileName($fileName);
+
         $html = $this->preparePdfHtml($html);
 
         if ($this->isRtlLocale()) {
@@ -33,9 +34,9 @@ trait PDFHandler
     }
 
     /**
-     * Generate raw PDF content (e.g. for email attachments).
+     * Generate pdf content.
      */
-    protected function generatePdf(string $html): string
+    public function generatePdf(string $html): string
     {
         $html = $this->preparePdfHtml($html);
 
@@ -62,7 +63,9 @@ trait PDFHandler
         ]);
 
         $mpdf->SetDirectionality('rtl');
+
         $mpdf->SetDisplayMode('fullpage');
+
         $mpdf->WriteHTML($html);
 
         return $mpdf;
@@ -105,7 +108,9 @@ trait PDFHandler
 
         for ($i = count($positions) - 1; $i >= 0; $i -= 2) {
             $segment = substr($html, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
+
             $converted = $arabic->utf8Glyphs($segment);
+
             $html = substr_replace($html, $converted, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
         }
 

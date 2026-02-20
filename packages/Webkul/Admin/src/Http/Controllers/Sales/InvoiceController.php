@@ -122,9 +122,10 @@ class InvoiceController extends Controller
 
         $invoice = $this->invoiceRepository->findOrFail($id);
 
-        $invoice->email = request()->input('email');
-
-        Event::dispatch('sales.invoice.send_duplicate_email', $invoice);
+        Event::dispatch('sales.invoice.send_duplicate_email', [
+            'invoice' => $invoice,
+            'duplicate_invoice_email' => request()->input('email'),
+        ]);
 
         session()->flash('success', trans('admin::app.sales.invoices.view.invoice-sent'));
 
