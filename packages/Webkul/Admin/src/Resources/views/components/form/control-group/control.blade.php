@@ -191,15 +191,27 @@
         @break
 
     @case('multiselect')
+        @php
+            $validationName = str_ends_with($name, '[]')
+                ? substr($name, 0, -2)
+                : $name;
+        @endphp
+
         <v-field
-            as="select"
-            v-slot="{ value }"
-            :class="[errors && errors['{{ $name }}'] ? 'border !border-red-600 hover:border-red-600' : '']"
-            {{ $attributes->except([])->merge(['class' => 'flex w-full flex-col rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400']) }}
-            name="{{ $name }}"
-            multiple
+            v-slot="data"
+            {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
+            name="{{ $validationName }}"
         >
-            {{ $slot }}
+            <select
+                v-bind="data.field"
+                name="{{ $name }}"
+                v-model="data.value"
+                multiple
+                :class="[data.errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
+                {{ $attributes->except(['value', ':value', 'v-model', 'rules', ':rules', 'label', ':label'])->merge(['class' => 'flex w-full flex-col rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400']) }}
+            >
+                {{ $slot }}
+            </select>
         </v-field>
 
         @break

@@ -216,7 +216,7 @@
                                             'product'   => $product,
                                         ])
 
-                                        <x-admin::form.control-group.error :control-name="$attribute->code . (in_array($attribute->type, ['multiselect', 'checkbox']) ? '[]' : '')" />
+                                        <x-admin::form.control-group.error :control-name="$attribute->code . ($attribute->type === 'checkbox' ? '[]' : '')" />
                                     </x-admin::form.control-group>
 
                                     {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.controls.after", ['product' => $product]) !!}
