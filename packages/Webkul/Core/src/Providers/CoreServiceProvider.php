@@ -5,6 +5,7 @@ namespace Webkul\Core\Providers;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Core\ChannelSmtpResolver;
 use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
@@ -19,6 +20,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerOverrides();
+
+        $this->app->singleton(ChannelSmtpResolver::class);
     }
 
     /**
@@ -47,6 +50,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->register(EventServiceProvider::class);
         $this->app->register(ImageServiceProvider::class);
         $this->app->register(VisitorServiceProvider::class);
+        app(ChannelSmtpResolver::class)->applyChannelSmtpConfig();
     }
 
     /**

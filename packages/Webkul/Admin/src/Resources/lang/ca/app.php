@@ -4312,6 +4312,26 @@ return [
                     'title' => 'Configuració de correu electrònic',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Configureu la configuració SMTP per enviar correus electrònics per a aquest canal.',
+                    'smtp-enable' => 'Activa SMTP personalitzat',
+                    'smtp-enable-info' => 'Activeu o desactiveu l’ús de la configuració SMTP personalitzada per enviar correus electrònics des d’aquest canal.',
+                    'smtp-encryption' => 'Encriptació',
+                    'smtp-encryption-info' => 'Seleccioneu el mètode d’encriptació per assegurar la comunicació de correu electrònic. Les opcions inclouen TLS, SSL o Cap.',
+                    'smtp-host' => 'Servidor SMTP',
+                    'smtp-host-info' => 'L’adreça del servidor SMTP utilitzat per enviar correus electrònics. Pot ser una adreça IP o un nom de domini.',
+                    'smtp-password' => 'Contrasenya SMTP',
+                    'smtp-password-info' => 'La contrasenya associada amb el nom d’usuari SMTP per a l’autenticació amb el servidor de correu electrònic.',
+                    'smtp-port' => 'Port SMTP',
+                    'smtp-port-info' => 'El número de port utilitzat per a la comunicació SMTP. Els ports comuns inclouen 25, 465 (SSL) i 587 (TLS).',
+                    'smtp-username' => 'Nom d’usuari SMTP',
+                    'smtp-username-info' => 'El nom d’usuari utilitzat per a l’autenticació amb el servidor SMTP, sovint l’adreça de correu electrònic o un nom d’usuari específic proporcionat pel servei de correu electrònic.',
+                    'title' => 'Configuració SMTP',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Cap',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Envia una notificació després de cancel·lar una comanda',
                     'cancel-order-mail-to-admin' => 'Envia un correu electrònic de notificació a l\'administrador després de cancel·lar una comanda',

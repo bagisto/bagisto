@@ -4312,6 +4312,26 @@ return [
                     'title' => 'Ustawienia e-mail',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Skonfiguruj ustawienia SMTP, aby wysyłać wiadomości e-mail dla tego kanału.',
+                    'smtp-enable' => 'Włącz niestandardowy SMTP',
+                    'smtp-enable-info' => 'Włącz lub wyłącz używanie niestandardowych ustawień SMTP do wysyłania wiadomości e-mail z tego kanału.',
+                    'smtp-encryption' => 'Szyfrowanie',
+                    'smtp-encryption-info' => 'Wybierz metodę szyfrowania, aby zabezpieczyć komunikację e-mail. Opcje obejmują TLS, SSL lub Brak.',
+                    'smtp-host' => 'Host SMTP',
+                    'smtp-host-info' => 'Adres serwera SMTP używanego do wysyłania wiadomości e-mail. Może to być adres IP lub nazwa domeny.',
+                    'smtp-password' => 'Hasło SMTP',
+                    'smtp-password-info' => 'Hasło powiązane z nazwą użytkownika SMTP do uwierzytelniania na serwerze pocztowym.',
+                    'smtp-port' => 'Port SMTP',
+                    'smtp-port-info' => 'Numer portu używany do komunikacji SMTP. Typowe porty to 25, 465 (SSL) oraz 587 (TLS).',
+                    'smtp-username' => 'Nazwa użytkownika SMTP',
+                    'smtp-username-info' => 'Nazwa użytkownika używana do uwierzytelniania na serwerze SMTP, często adres e-mail lub określona nazwa użytkownika dostarczona przez usługę e-mail.',
+                    'title' => 'Ustawienia SMTP',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Brak',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Wyślij powiadomienie do klienta po anulowaniu zamówienia',
                     'cancel-order-mail-to-admin' => 'Wyślij powiadomienie e-mail do administratora po anulowaniu zamówienia',
