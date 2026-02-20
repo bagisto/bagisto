@@ -1,5 +1,9 @@
 <div class="grid grid-cols-1 gap-6">
-    @if ($bookingProduct['default_slot']['duration'])
+    @if (
+        $bookingProduct['default_slot']['duration']
+        && ! empty($bookingProduct['default_slot']['booking_type'])
+        && ($bookingProduct['default_slot']['booking_type'] != 'one')
+    )
         <div class="flex gap-3">
             <span class="icon-calendar text-2xl"></span>
 
