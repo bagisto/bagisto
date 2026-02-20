@@ -72,6 +72,7 @@
             "Webkul\\Category\\": "packages/Webkul/Category/src",
             "Webkul\\Checkout\\": "packages/Webkul/Checkout/src",
             "Webkul\\CMS\\": "packages/Webkul/CMS/src",
+            "Webkul\\ChannelSmtp\\": "packages/Webkul/ChannelSmtp/src",
             "Webkul\\Core\\": "packages/Webkul/Core/src",
             "Webkul\\Customer\\": "packages/Webkul/Customer/src",
             "Webkul\\DataGrid\\": "packages/Webkul/DataGrid/src",
