@@ -305,7 +305,7 @@ test.describe("settings acl", () => {
     }) => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", [
-            "settings.users.users.create",
+            "settings.users.create",
         ]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["settings->users"]);
@@ -316,7 +316,7 @@ test.describe("settings acl", () => {
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["settings.users.users.edit"]);
+        await aclManagement.createRole("custom", ["settings.users.edit"]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["settings->users"]);
         await aclManagement.editUserVerify();
@@ -327,7 +327,7 @@ test.describe("settings acl", () => {
     }) => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", [
-            "settings.users.users.delete",
+            "settings.users.delete",
         ]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["settings->users"]);

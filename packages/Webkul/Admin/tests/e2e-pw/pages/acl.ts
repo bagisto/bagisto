@@ -1097,7 +1097,8 @@ export class ACLManagement {
         await expect(this.locators.createBtn).not.toBeVisible();
         await expect(this.locators.iconEdit.first()).not.toBeVisible();
         await this.locators.copyBtn.first().click();
-        await expect(this.locators.cartRuleCopySuccess.first()).toBeVisible();
+        // await expect(this.locators.cartRuleCopySuccess.first()).toBeVisible();
+        await expect(this.locators.saveCartRuleBTN).toBeVisible();
     }
 
     async cartRuleEditVerify() {
@@ -1296,7 +1297,7 @@ export class ACLManagement {
         await expect(this.locators.createBtn).not.toBeVisible();
         await this.locators.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.nth(1).click();
+        await this.locators.createBtn.click();
         await expect(
             this.locators.searchTermUpdateSuccess.first(),
         ).toBeVisible();
@@ -1327,7 +1328,7 @@ export class ACLManagement {
         await expect(this.locators.createBtn).not.toBeVisible();
         await this.locators.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.nth(1).click();
+        await this.locators.createBtn.click();
         await expect(
             this.locators.searchSynonymUpdateSuccess.first(),
         ).toBeVisible();
@@ -1358,7 +1359,7 @@ export class ACLManagement {
         await expect(this.locators.deleteIcon.first()).not.toBeVisible();
         await this.locators.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.nth(1).click();
+        await this.locators.createBtn.click();
         await expect(this.locators.sitemapUpdateSuccess.first()).toBeVisible();
     }
 

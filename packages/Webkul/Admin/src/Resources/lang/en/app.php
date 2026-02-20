@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Redirection Link',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Copyright Content',
+                        'info' => 'Configure the copyright content displayed in the footer of your website to protect your intellectual property and enhance brand recognition.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Enable Speculation Rules',
                         'info' => 'Configure settings for enabling or disabling automated speculation logic.',
@@ -4202,7 +4207,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with Google. Must match the URL configured in your Google console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Google. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your Google Console.',
                             ],
                         ],
 
@@ -4221,7 +4226,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with Facebook. Must match the URL configured in your Facebook app settings.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Facebook. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your Facebook app settings.',
                             ],
                         ],
 
@@ -4240,7 +4245,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with GitHub. Must match the URL configured in your GitHub console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with GitHub. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your GitHub console.',
                             ],
                         ],
 
@@ -4259,7 +4264,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with LinkedIn. Must match the URL configured in your LinkedIn console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with LinkedIn. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your LinkedIn console.',
                             ],
                         ],
 
@@ -4278,7 +4283,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with Twitter. Must match the URL configured in your Twitter console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Twitter. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your Twitter console.',
                             ],
                         ],
                     ],

@@ -6,6 +6,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.
 
+- #11030 [Fixed] - Added management support for shop footer copyright content in the admin panel.
+
+- #10929 [Fixed] - Added redirect URI configuration support for social authentication login.
+
+- #10831 [Fixed] - Fixed COD appearing for downloadable products in mixed cart.
+
 ## **v2.3.11 (22nd of January 2026)** - *Release*
 
 - Security updates.
@@ -13,6 +19,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Enhanced form validation by implementing auto-scroll to the first error field, with support for regular inputs, array fields (categories, channels), nested fields, and TinyMCE editors. Added fallback flash messages when error fields cannot be located or scrolled to.
 
 - #11080 [fixed] - Fixed a currency display issue in invoices when the channel currency differed from the admin panel currency.
+
+- #10973 [fixed] - Fixed an unnecessary validation error triggered by VeeValidate on input fields containing spaces.
 
 ## **v2.3.10 (2nd of January 2026)** - *Release*
 

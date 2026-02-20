@@ -115,7 +115,7 @@
 
                             <!-- Actions -->
                             <div class="flex justify-end">
-                                @if (bouncer()->hasPermission('marketing.search_terms.edit'))
+                                @if (bouncer()->hasPermission('marketing.search_seo.search_terms.edit'))
                                     <a @click="selectedSitemap=1; editModal(record)">
                                         <span
                                             :class="record.actions.find(action => action.index === 'edit')?.icon"
@@ -125,7 +125,7 @@
                                     </a>
                                 @endif
 
-                                @if (bouncer()->hasPermission('marketing.search_terms.delete'))
+                                @if (bouncer()->hasPermission('marketing.search_seo.search_terms.delete'))
                                     <a @click="performAction(record.actions.find(action => action.index === 'delete'))">
                                         <span
                                             :class="record.actions.find(action => action.index === 'delete')?.icon"

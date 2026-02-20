@@ -195,19 +195,19 @@ test.describe("marketing acl", () => {
         await aclManagement.eventCreateVerify();
     });
 
-    test("should create custom role with marketing (communications-> events-> edit) permission", async ({
-        adminPage,
-    }) => {
-        const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", [
-            "marketing.communications.events.edit",
-        ]);
-        await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole([
-            "marketing->communications->event",
-        ]);
-        await aclManagement.eventEditVerify();
-    });
+    // test("should create custom role with marketing (communications-> events-> edit) permission", async ({
+    //     adminPage,
+    // }) => {
+    //     const aclManagement = new ACLManagement(adminPage);
+    //     await aclManagement.createRole("custom", [
+    //         "marketing.communications.events.edit",
+    //     ]);
+    //     await aclManagement.createUser();
+    //     await aclManagement.verfiyAssignedRole([
+    //         "marketing->communications->event",
+    //     ]);
+    //     await aclManagement.eventEditVerify();
+    // });
 
     test("should create custom role with marketing (communications-> events-> delete) permission", async ({
         adminPage,

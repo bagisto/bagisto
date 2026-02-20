@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => '重定向链接',
                     ],
 
+                    'copyright-content' => [
+                        'title' => '版权内容',
+                        'info' => '配置在您网站页脚显示的版权内容，以保护您的知识产权并提升品牌知名度。',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => '启用猜测规则',
                         'info' => '配置启用或禁用自动猜测逻辑的设置。',
@@ -4202,7 +4207,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过Google认证后被重定向的回调URL。必须与您在Google控制台中配置的URL匹配。',
+                                'title-info' => '用户在通过Google认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在Google控制台中配置的URL匹配。',
                             ],
                         ],
 
@@ -4221,7 +4226,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过Facebook认证后被重定向的回调URL。必须与您在Facebook应用设置中配置的URL匹配。',
+                                'title-info' => '用户在通过Facebook认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在Facebook应用设置中配置的URL匹配。',
                             ],
                         ],
 
@@ -4240,7 +4245,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过GitHub认证后被重定向的回调URL。必须与您在GitHub控制台中配置的URL匹配。',
+                                'title-info' => '用户在通过GitHub认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在GitHub控制台中配置的URL匹配。',
                             ],
                         ],
 
@@ -4259,7 +4264,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过LinkedIn认证后被重定向的回调URL。必须与您在LinkedIn控制台中配置的URL匹配。',
+                                'title-info' => '用户在通过LinkedIn认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在LinkedIn控制台中配置的URL匹配。',
                             ],
                         ],
 
@@ -4278,7 +4283,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过Twitter认证后被重定向的回调URL。必须与您在Twitter控制台中配置的URL匹配。',
+                                'title-info' => '用户在通过Twitter认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在Twitter控制台中配置的URL匹配。',
                             ],
                         ],
                     ],

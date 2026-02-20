@@ -108,7 +108,7 @@ test.describe("acl management", () => {
             await aclManagement.createUser();
             await aclManagement.verfiyAssignedRole(["sales->shipments"]);
             await expect(
-                adminPage.locator("button.primary-button").first(),
+                adminPage.locator(".table-responsive").first(),
             ).toBeVisible();
         });
 
@@ -176,7 +176,7 @@ test.describe("acl management", () => {
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["sales->refund"]);
         await expect(
-            adminPage.locator("button.primary-button").first(),
+            adminPage.locator(".table-responsive").first(),
         ).toBeVisible();
     });
 });

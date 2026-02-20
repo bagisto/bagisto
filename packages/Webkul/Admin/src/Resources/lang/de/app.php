@@ -3707,6 +3707,11 @@ return [
                         'redirection-link' => 'Umleitungslink',
                     ],
 
+                    'copyright-content' => [
+                        'title' => 'Urheberrechtsinhalt',
+                        'info' => 'Konfigurieren Sie den im Footer Ihrer Website angezeigten Urheberrechtsinhalt, um Ihr geistiges Eigentum zu schützen und die Markenbekanntheit zu stärken.',
+                    ],
+
                     'speculation-rules' => [
                         'enable-speculation' => 'Spekulationsregeln aktivieren',
                         'info' => 'Konfigurieren Sie die Einstellungen zum Aktivieren oder Deaktivieren der automatischen Spekulationslogik.',
@@ -4202,7 +4207,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Weiterleitungs-URL',
-                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Google weitergeleitet werden. Muss mit der in Ihrer Google-Konsole konfigurierten URL übereinstimmen.',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Google weitergeleitet werden. Verwenden Sie das angezeigte Platzhalter-URL-Format (ändern Sie nur Ihre Domain). Muss mit der in Ihrer Google-Konsole konfigurierten URL übereinstimmen.',
                             ],
                         ],
 
@@ -4221,7 +4226,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Weiterleitungs-URL',
-                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Facebook weitergeleitet werden. Muss mit der in den App-Einstellungen von Facebook konfigurierten URL übereinstimmen.',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Facebook weitergeleitet werden. Verwenden Sie das angezeigte Platzhalter-URL-Format (ändern Sie nur Ihre Domain). Muss mit der in den App-Einstellungen von Facebook konfigurierten URL übereinstimmen.',
                             ],
                         ],
 
@@ -4240,7 +4245,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Weiterleitungs-URL',
-                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit GitHub weitergeleitet werden. Muss mit der in Ihrer GitHub-Konsole konfigurierten URL übereinstimmen.',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit GitHub weitergeleitet werden. Verwenden Sie das angezeigte Platzhalter-URL-Format (ändern Sie nur Ihre Domain). Muss mit der in Ihrer GitHub-Konsole konfigurierten URL übereinstimmen.',
                             ],
                         ],
 
@@ -4259,7 +4264,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Weiterleitungs-URL',
-                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit LinkedIn weitergeleitet werden. Muss mit der in Ihrer LinkedIn-Konsole konfigurierten URL übereinstimmen.',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit LinkedIn weitergeleitet werden. Verwenden Sie das angezeigte Platzhalter-URL-Format (ändern Sie nur Ihre Domain). Muss mit der in Ihrer LinkedIn-Konsole konfigurierten URL übereinstimmen.',
                             ],
                         ],
 
@@ -4278,7 +4283,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Weiterleitungs-URL',
-                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Twitter weitergeleitet werden. Muss mit der in Ihrer Twitter-Konsole konfigurierten URL übereinstimmen.',
+                                'title-info' => 'Rückruf-URL, zu der Benutzer nach der Authentifizierung mit Twitter weitergeleitet werden. Verwenden Sie das angezeigte Platzhalter-URL-Format (ändern Sie nur Ihre Domain). Muss mit der in Ihrer Twitter-Konsole konfigurierten URL übereinstimmen.',
                             ],
                         ],
                     ],

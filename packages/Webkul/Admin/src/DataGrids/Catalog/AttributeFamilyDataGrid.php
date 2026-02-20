@@ -74,7 +74,7 @@ class AttributeFamilyDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('catalog.families.edit')) {
+        if (bouncer()->hasPermission('catalog.families.delete')) {
             $this->addAction([
                 'icon' => 'icon-delete',
                 'title' => trans('admin::app.catalog.families.index.datagrid.catalog.families.index.datagrid.delete'),
