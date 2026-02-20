@@ -2,6 +2,7 @@
 
 namespace Webkul\Core\Traits;
 
+use ArPHP\I18N\Arabic;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Mpdf\Mpdf;
@@ -9,55 +10,108 @@ use Mpdf\Mpdf;
 trait PDFHandler
 {
     /**
-     * Download PDF.
-     *
-     * @return \Illuminate\Http\Response
+     * Download PDF as a streamed response.
      */
-    protected function downloadPDF(string $html, ?string $fileName = null)
+    public function downloadPDF(string $html, ?string $fileName = null)
     {
-        if (is_null($fileName)) {
-            $fileName = Str::random(32);
-        }
+        $fileName = $this->resolvePdfFileName($fileName);
 
-        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+        $html = $this->preparePdfHtml($html);
 
-        if (($direction = core()->getCurrentLocale()->direction) == 'rtl') {
-            $mPDF = new Mpdf([
-                'margin_left' => 0,
-                'margin_right' => 0,
-                'margin_top' => 0,
-                'margin_bottom' => 0,
-            ]);
-            $mPDF->SetDirectionality($direction);
-            $mPDF->SetDisplayMode('fullpage');
-            $mPDF->WriteHTML($this->adjustArabicAndPersianContent($html));
+        if ($this->isRtlLocale()) {
+            $mpdf = $this->buildMpdf($html);
 
             return response()->streamDownload(
-                fn () => print ($mPDF->Output('', 'S')),
+                fn () => print ($mpdf->Output('', 'S')),
                 $fileName.'.pdf'
             );
         }
 
-        return PDF::loadHTML($this->adjustArabicAndPersianContent($html))
+        return PDF::loadHTML($html)
             ->setPaper('A4', 'portrait')
             ->set_option('defaultFont', 'Courier')
             ->download($fileName.'.pdf');
     }
 
     /**
-     * Adjust arabic and persian content.
-     *
-     * @return string
+     * Generate pdf content.
      */
-    protected function adjustArabicAndPersianContent(string $html)
+    public function generatePdf(string $html): string
     {
-        $arabic = new \ArPHP\I18N\Arabic;
+        $html = $this->preparePdfHtml($html);
 
-        $p = $arabic->arIdentify($html);
+        if ($this->isRtlLocale()) {
+            return $this->buildMpdf($html)->Output('', 'S');
+        }
 
-        for ($i = count($p) - 1; $i >= 0; $i -= 2) {
-            $utf8ar = $arabic->utf8Glyphs(substr($html, $p[$i - 1], $p[$i] - $p[$i - 1]));
-            $html = substr_replace($html, $utf8ar, $p[$i - 1], $p[$i] - $p[$i - 1]);
+        return PDF::loadHTML($html)
+            ->setPaper('A4', 'portrait')
+            ->set_option('defaultFont', 'Courier')
+            ->output();
+    }
+
+    /**
+     * Build and configure an mPDF instance with the given HTML.
+     */
+    private function buildMpdf(string $html): Mpdf
+    {
+        $mpdf = new Mpdf([
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'margin_top' => 0,
+            'margin_bottom' => 0,
+        ]);
+
+        $mpdf->SetDirectionality('rtl');
+
+        $mpdf->SetDisplayMode('fullpage');
+
+        $mpdf->WriteHTML($html);
+
+        return $mpdf;
+    }
+
+    /**
+     * Prepare HTML for PDF rendering: encode and adjust Arabic/Persian glyphs.
+     */
+    private function preparePdfHtml(string $html): string
+    {
+        $html = mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8');
+
+        return $this->adjustArabicAndPersianContent($html);
+    }
+
+    /**
+     * Determine if the current locale uses RTL direction.
+     */
+    private function isRtlLocale(): bool
+    {
+        return core()->getCurrentLocale()->direction === 'rtl';
+    }
+
+    /**
+     * Resolve a PDF file name, generating a random one if not provided.
+     */
+    private function resolvePdfFileName(?string $fileName): string
+    {
+        return $fileName ?? Str::random(32);
+    }
+
+    /**
+     * Adjust Arabic and Persian glyph rendering for PDF output.
+     */
+    private function adjustArabicAndPersianContent(string $html): string
+    {
+        $arabic = new Arabic;
+
+        $positions = $arabic->arIdentify($html);
+
+        for ($i = count($positions) - 1; $i >= 0; $i -= 2) {
+            $segment = substr($html, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
+
+            $converted = $arabic->utf8Glyphs($segment);
+
+            $html = substr_replace($html, $converted, $positions[$i - 1], $positions[$i] - $positions[$i - 1]);
         }
 
         return $html;

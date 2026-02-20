@@ -3,19 +3,26 @@
 namespace Webkul\Shop\Mail\Order;
 
 use Illuminate\Mail\Mailables\Address;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Contracts\Invoice;
 use Webkul\Shop\Mail\Mailable;
 
 class InvoicedNotification extends Mailable
 {
+    use PDFHandler;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(public Invoice $invoice) {}
+    public function __construct(
+        public Invoice $invoice,
+        public ?string $duplicateInvoiceEmail = null
+    ) {}
 
     /**
      * Get the message envelope.
@@ -25,7 +32,7 @@ class InvoicedNotification extends Mailable
         return new Envelope(
             to: [
                 new Address(
-                    $this->invoice->order->customer_email,
+                    $this->duplicateInvoiceEmail ?? $this->invoice->order->customer_email,
                     $this->invoice->order->customer_full_name
                 ),
             ],
@@ -41,5 +48,37 @@ class InvoicedNotification extends Mailable
         return new Content(
             view: 'shop::emails.orders.invoiced',
         );
+    }
+
+    /**
+     * Get the attachments.
+     *
+     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     */
+    public function attachments(): array
+    {
+        try {
+            $orderCurrencyCode = $this->invoice->order->order_currency_code;
+
+            $pdfContent = $this->generatePdf(
+                view('shop::customers.account.orders.pdf', [
+                    'invoice' => $this->invoice,
+                    'orderCurrencyCode' => $orderCurrencyCode,
+                ])->render(),
+                'invoice-'.$this->invoice->created_at->format('d-m-Y')
+            );
+
+            return [
+                Attachment::fromData(
+                    fn () => $pdfContent,
+                    'invoice-'.$this->invoice->id.'.pdf'
+                )->withMime('application/pdf'),
+            ];
+
+        } catch (\Exception $e) {
+            report($e);
+
+            return [];
+        }
     }
 }

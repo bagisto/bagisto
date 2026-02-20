@@ -290,6 +290,8 @@ class Bundle extends AbstractType
 
         $products[0]['total_weight'] = $products[0]['base_total_weight'] = $products[0]['weight'] * $products[0]['quantity'];
 
+        $products[0]['total'] = $products[0]['base_total'] = $products[0]['base_total'] * $products[0]['quantity'];
+
         return $products;
     }
 
