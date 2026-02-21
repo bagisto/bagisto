@@ -41,7 +41,8 @@ return Application::configure(basePath: dirname(__DIR__))
          */
         $middleware->replaceInGroup('web', BaseEncryptCookies::class, EncryptCookies::class);
 
-        $middleware->trustProxies('*');
+        // Trust all proxies
+        $middleware->trustProxies(at: '*');
     })
     ->withSchedule(function (Schedule $schedule) {
         //
