@@ -669,6 +669,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Decrease Quantity',
             'increase-quantity' => 'Increase Quantity',
+            'max-quantity-reached' => 'Maximum quantity reached',
         ],
     ],
 

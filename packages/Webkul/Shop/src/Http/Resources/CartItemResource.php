@@ -18,6 +18,7 @@ class CartItemResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'available_qty' => $this->product->getTypeInstance()->totalQuantity(),
             'quantity' => $this->quantity,
             'type' => $this->type,
             'name' => $this->name,
