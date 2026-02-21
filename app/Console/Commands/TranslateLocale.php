@@ -235,9 +235,10 @@ class TranslateLocale extends Command
         $indentStr = str_repeat('    ', $indent);
 
         foreach ($array as $key => $value) {
-            $keyStr = is_string($key) && preg_match('/^[a-zA-Z_][a-zA-Z0-9_]*$/', $key)
-                ? $key
-                : "'".addslashes($key)."'";
+            // Always quote string keys to avoid issues with PHP reserved words and ensure consistency
+            $keyStr = is_string($key)
+                ? "'".addslashes($key)."'"
+                : (is_int($key) ? $key : "'".addslashes((string) $key)."'");
 
             if (is_array($value)) {
                 $output .= "{$indentStr}{$keyStr} => [\n";
