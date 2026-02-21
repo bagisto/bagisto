@@ -1,9 +1,9 @@
 <?php
 
 return [
-    checkout => [
-        cart => [
-            integrity => [
+    'checkout' => [
+        'cart' => [
+            'integrity' => [
                 'qty-missing' => 'Ít nhất một sản phẩm phải có nhiều hơn 1 số lượng.',
             ],
             'invalid-file-extension' => 'Đã tìm thấy phần mở rộng tệp không hợp lệ.',
@@ -13,16 +13,16 @@ return [
             'selected-products-simple' => 'Sản phẩm được chọn phải thuộc loại sản phẩm đơn giản.',
         ],
     ],
-    datagrid => [
+    'datagrid' => [
         'copy-of-slug' => 'bản sao của:value',
         'copy-of' => 'Bản sao của :value',
         'variant-already-exist-message' => 'Biến thể có cùng tùy chọn thuộc tính đã tồn tại.',
     ],
-    response => [
+    'response' => [
         'product-can-not-be-copied' => 'Không thể sao chép các sản phẩm thuộc loại :type',
     ],
     'sort-by' => [
-        options => [
+        'options' => [
             'cheapest-first' => 'Rẻ nhất đầu tiên',
             'expensive-first' => 'Đắt đầu tiên',
             'from-a-z' => 'Từ A-Z',
@@ -31,16 +31,16 @@ return [
             'oldest-first' => 'Cũ nhất đầu tiên',
         ],
     ],
-    type => [
-        abstract => [
-            offers => 'Mua :qty với giá :price mỗi cái và tiết kiệm :discount',
+    'type' => [
+        'abstract' => [
+            'offers' => 'Mua :qty với giá :price mỗi cái và tiết kiệm :discount',
         ],
-        bundle => 'Bó',
-        booking => 'Đặt chỗ',
-        configurable => 'Có thể cấu hình',
-        downloadable => 'Có thể tải xuống',
-        grouped => 'Được nhóm',
-        simple => 'Đơn giản',
-        virtual => 'Ảo',
+        'bundle' => 'Bó',
+        'booking' => 'Đặt chỗ',
+        'configurable' => 'Có thể cấu hình',
+        'downloadable' => 'Có thể tải xuống',
+        'grouped' => 'Được nhóm',
+        'simple' => 'Đơn giản',
+        'virtual' => 'Ảo',
     ],
 ];

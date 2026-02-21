@@ -1,10 +1,10 @@
 <?php
 
 return [
-    boolean => [
-        options => [
-            no => 'KHÔNG',
-            yes => 'Đúng',
+    'boolean' => [
+        'options' => [
+            'no' => 'KHÔNG',
+            'yes' => 'Đúng',
         ],
     ],
 ];
