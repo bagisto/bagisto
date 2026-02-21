@@ -1,0 +1,32 @@
+{
+  "code": "ro",
+  "messages": {
+    "_default": "Câmpul {field} nu este valid",
+    "alpha": "Câmpul {field} poate conține doar caractere alfabetice",
+    "alpha_num": "Câmpul {field} poate conține doar caractere alfanumerice",
+    "alpha_dash": "Câmpul {field} poate conține caractere alfanumerice, liniuțe și underscore",
+    "alpha_spaces": "Câmpul {field} poate conține doar caractere alfabetice și spații",
+    "between": "Câmpul {field} trebuie să fie între 0:{min} și 1:{max}",
+    "confirmed": "Confirmarea câmpului {field} nu se potrivește",
+    "digits": "Câmpul {field} trebuie să fie numeric și să conțină exact 0:{length} cifre",
+    "dimensions": "Câmpul {field} trebuie să fie de 0:{width} pixeli pe 1:{height} pixeli",
+    "email": "Câmpul {field} trebuie să fie o adresă de email validă",
+    "not_one_of": "Câmpul {field} nu este o valoare validă",
+    "ext": "Câmpul {field} nu este un fișier valid",
+    "image": "Câmpul {field} trebuie să fie o imagine",
+    "integer": "Câmpul {field} trebuie să fie un număr întreg",
+    "length": "Câmpul {field} trebuie să aibă lungimea de 0:{length}",
+    "max_value": "Câmpul {field} trebuie să fie cel mult 0:{max}",
+    "max": "Câmpul {field} nu poate depăși 0:{length} caractere",
+    "mimes": "Câmpul {field} trebuie să fie un tip de fișier valid",
+    "min_value": "Câmpul {field} trebuie să fie cel puțin 0:{min}",
+    "min": "Câmpul {field} trebuie să aibă cel puțin 0:{length} caractere",
+    "numeric": "Câmpul {field} poate conține doar cifre",
+    "one_of": "Câmpul {field} nu este o valoare validă",
+    "regex": "Formatul câmpului {field} este invalid",
+    "required_if": "Câmpul {field} este obligatoriu",
+    "required": "Câmpul {field} este obligatoriu",
+    "size": "Câmpul {field} trebuie să fie mai mic de 0:{size}KB",
+    "url": "Câmpul {field} nu este un URL valid"
+  }
+}
