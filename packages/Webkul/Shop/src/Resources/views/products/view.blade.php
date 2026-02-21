@@ -393,6 +393,7 @@
                                         <x-shop::quantity-changer
                                             name="quantity"
                                             value="1"
+                                            :max-value="$product->getTypeInstance()->totalQuantity()"
                                             class="gap-x-4 rounded-xl px-7 py-4 max-md:py-3 max-sm:gap-x-5 max-sm:rounded-lg max-sm:px-4 max-sm:py-1.5"
                                         />
                                     @endif
