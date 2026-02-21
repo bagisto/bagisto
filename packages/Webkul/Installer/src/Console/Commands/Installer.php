@@ -87,6 +87,7 @@ class Installer extends Command
         'nl' => 'Dutch',
         'pl' => 'Polish',
         'pt_BR' => 'Brazilian Portuguese',
+        'ro' => 'Romanian',
         'ru' => 'Russian',
         'sin' => 'Sinhala',
         'tr' => 'Turkish',
