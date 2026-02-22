@@ -108,6 +108,55 @@ export class WebLocators {
     readonly CheckoutsuccessPage: Locator;
     readonly searchInput: Locator;
     readonly addCartSuccess: Locator;
+    readonly emailInput: Locator;
+    readonly passwordInput: Locator;
+    readonly signInButton: Locator;
+    // Buttons
+    readonly createCartRuleButton: Locator;
+    readonly cartRuleForm: Locator;
+
+    // General Section
+    readonly nameInput: Locator;
+    readonly descriptionInput: Locator;
+    readonly couponTypeSelect: Locator;
+    readonly autoGenerationSelect: Locator;
+    readonly couponCodeInput: Locator;
+    readonly usesPerCouponInput: Locator;
+    readonly usesPerCustomerInput: Locator;
+    // Conditions Section
+    readonly addConditionButton: Locator;
+    readonly conditionAttributeSelect: Locator;
+    readonly conditionOperatorSelect: Locator;
+    readonly conditionValueInput: Locator;
+    // Actions Section
+    readonly actionTypeSelect: Locator;
+    readonly discountAmountInput: Locator;
+
+    // Settings Section
+    readonly sortOrderInput: Locator;
+    readonly channelCheckbox: Locator;
+    readonly customerGroupCheckbox: Locator;
+    readonly customerGroupCheckbox2: Locator;
+    readonly statusToggle: Locator;
+
+    // Save
+    readonly saveCartRuleButton: Locator;
+    readonly successMessage: Locator;
+    readonly addToCartSuccessMessage: Locator;
+
+    // Cart
+    readonly applyCouponButton: Locator;
+    readonly couponInput: Locator;
+    readonly applyButton: Locator;
+    readonly couponSuccessMessage: Locator;
+    readonly deleteIcon: Locator;
+    readonly agree: Locator;
+    readonly selectRowBtn: Locator;
+    readonly selectAction: Locator;
+    readonly selectDelete: Locator;
+    readonly productDeleteSuccess: Locator;
+    readonly incrementQtyButton: Locator;
+    readonly updateCart: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -121,7 +170,7 @@ export class WebLocators {
             .first();
         this.selectProductType = page.locator('select[name="type"]');
         this.selectAttribute = page.locator(
-            'select[name="attribute_family_id"]'
+            'select[name="attribute_family_id"]',
         );
         this.productSku = page.locator('input[name="sku"]');
         this.productName = page.locator("#name");
@@ -136,7 +185,7 @@ export class WebLocators {
 
         this.productInventory = page.locator('input[name^="inventories["]');
         this.clickSaveProduct = page.locator(
-            '//button[contains(.,"Save Product") ]'
+            '//button[contains(.,"Save Product") ]',
         );
         this.addOptionButton = page
             .locator(".secondary-button")
@@ -152,14 +201,14 @@ export class WebLocators {
             .first();
 
         this.addToCartButton = page.locator(
-            "(//button[contains(@class, 'secondary-button')])[2]"
+            "(//button[contains(@class, 'secondary-button')])[2]",
         );
         this.ShoppingCartIcon = page.locator(
-            "(//span[contains(@class, 'icon-cart') and @role='button' and @tabindex='0'])[1]"
+            "(//span[contains(@class, 'icon-cart') and @role='button' and @tabindex='0'])[1]",
         );
         this.addCartSuccess = page.getByText("Item Added Successfully");
         this.ContinueButton = page.locator(
-            '(//a[contains(., " Continue to Checkout ")])[1]'
+            '(//a[contains(., " Continue to Checkout ")])[1]',
         );
         this.companyName = page.getByRole("textbox", { name: "Company Name" });
         this.firstName = page.getByRole("textbox", { name: "First Name" });
@@ -190,7 +239,7 @@ export class WebLocators {
             name: "Place Order",
         });
         this.CheckoutsuccessPage = page.locator(
-            "text=Thank you for your order!"
+            "text=Thank you for your order!",
         );
         this.searchInput = page.getByRole("textbox", {
             name: "Search products here",
@@ -224,7 +273,7 @@ export class WebLocators {
         this.variantPriceInput = page.locator('input[name="price"]');
         this.variantWeightInput = page.locator('input[name="weight"]');
         this.variantInventoryInput = page.locator(
-            'input[name="inventories\\[1\\]"]'
+            'input[name="inventories\\[1\\]"]',
         );
         this.variantSkuInput = page.locator('input[name="sku"]').nth(1);
         this.variantSaveButton = page.getByRole("button", {
@@ -297,7 +346,7 @@ export class WebLocators {
             .locator(".secondary-button")
             .first();
         this.selectProductsModalTitle = page.locator(
-            'p:has-text("Select Products")'
+            'p:has-text("Select Products")',
         );
         this.searchByNameInput = page.getByRole("textbox", {
             name: "Search by name",
@@ -309,14 +358,112 @@ export class WebLocators {
         this.appContainer = page.locator("#app");
         this.checkProduct = page.locator(".icon-uncheckbox").first();
         this.bookingLocationInput = page.locator(
-            'input[name="booking[location]"]'
+            'input[name="booking[location]"]',
         );
         this.bookingAvailableFromInput = page.locator(
-            'input[name="booking[available_from]"]'
+            'input[name="booking[available_from]"]',
         );
         this.bookingAvailableToInput = page.locator(
-            'input[name="booking[available_to]"]'
+            'input[name="booking[available_to]"]',
         );
+
+        this.emailInput = page.getByPlaceholder("Email Address");
+        this.passwordInput = page.getByPlaceholder("Password");
+        this.signInButton = page.getByRole("button", { name: "Sign In" });
+        // Buttons
+        this.createCartRuleButton = page.locator(
+            'a.primary-button:has-text("Create Cart Rule")',
+        );
+
+        this.cartRuleForm = page.locator(
+            'form[action*="/promotions/cart-rules/create"]',
+        );
+
+        // General Section
+        this.nameInput = page.locator("#name");
+        this.descriptionInput = page.locator("#description");
+        this.couponTypeSelect = page.locator("#coupon_type");
+        this.autoGenerationSelect = page.locator("#use_auto_generation");
+        this.couponCodeInput = page.getByRole("textbox", {
+            name: "Coupon Code",
+        });
+        this.usesPerCouponInput = page.getByRole("textbox", {
+            name: "Uses Per Coupon",
+        });
+        this.usesPerCustomerInput = page.getByRole("textbox", {
+            name: "Uses Per Customer",
+        });
+
+        this.addConditionButton = page.locator(
+            'div.secondary-button:has-text("Add Condition")',
+        );
+
+        this.conditionAttributeSelect = page.locator(
+            'select[id="conditions\\[0\\]\\[attribute\\]"]',
+        );
+
+        this.conditionOperatorSelect = page.locator(
+            'select[name="conditions\\[0\\]\\[operator\\]"]',
+        );
+
+        this.conditionValueInput = page.locator(
+            'input[name="conditions\\[0\\]\\[value\\]"]',
+        );
+        // Actions
+        this.actionTypeSelect = page.locator("#action_type");
+        this.discountAmountInput = page.locator(
+            'input[name="discount_amount"]',
+        );
+
+        // Settings
+        this.sortOrderInput = page.locator('input[name="sort_order"]');
+        this.channelCheckbox = page.locator('label[for="channel__1"]');
+        this.customerGroupCheckbox = page.locator("#customer_group__1");
+        this.statusToggle = page.locator('label[for="status"]');
+        this.customerGroupCheckbox2 = page.locator(
+            'label[for="customer_group__2"]',
+        );
+
+        // Save
+        this.saveCartRuleButton = page.locator(
+            'button.primary-button:has-text("Save Cart Rule")',
+        );
+        this.successMessage = page.locator("#app");
+
+        // Search section
+        this.searchInput = page.getByPlaceholder("Search products here");
+        this.addToCartButton = page
+            .getByRole("button", { name: "Add To Cart" })
+            .first();
+        this.addToCartSuccessMessage = page
+            .getByText("Item Added Successfully")
+            .first();
+
+        // Cart section
+        this.applyCouponButton = page.getByRole("button", {
+            name: "Apply Coupon",
+        });
+        this.couponInput = page.getByPlaceholder("Enter your code");
+        this.applyButton = page.getByRole("button", {
+            name: "Apply",
+            exact: true,
+        });
+        this.couponSuccessMessage = page
+            .getByRole("paragraph")
+            .filter({ hasText: "Coupon code applied" });
+        this.deleteIcon = page.locator(".icon-delete");
+        this.agree = page.getByRole("button", {
+            name: "Agree",
+            exact: true,
+        });
+        this.selectRowBtn = page.locator(".icon-uncheckbox");
+        this.selectAction = page.getByRole("button", { name: "Select Action" });
+        this.selectDelete = page.getByRole("link", { name: "Delete" });
+        this.productDeleteSuccess = page.getByText(
+            "Selected Products Deleted Successfully",
+        );
+        this.incrementQtyButton = page.locator(".icon-plus");
+        this.updateCart = page.getByRole("button", { name: "Update Cart" });
     }
 
     /**
