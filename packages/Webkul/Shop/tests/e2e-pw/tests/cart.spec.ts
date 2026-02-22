@@ -129,11 +129,20 @@ test("should remove all products from the cart view page", async ({ page }) => {
 
 test("should add product to cart", async ({ page }) => {
     await page.goto("");
+    await page
+        .locator("#main div")
+        .filter({ hasText: "New Products View All New" })
+        .locator("button")
+        .first()
+        .waitFor({ state: "visible" });
 
-    await page.getByPlaceholder("Search products here").fill("simple");
-    await page.getByPlaceholder("Search products here").press("Enter");
-    await page.getByRole("button", { name: "Add To Cart" }).first().click();
-
+    await page
+        .locator("#main div")
+        .filter({ hasText: "New Products View All New" })
+        .locator("button")
+        .first()
+        .click();
+    
     await expect(
         page.getByText("Item Added Successfully").first(),
     ).toBeVisible();
