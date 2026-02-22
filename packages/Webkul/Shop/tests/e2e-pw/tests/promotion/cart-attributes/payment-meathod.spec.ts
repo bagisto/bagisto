@@ -44,7 +44,7 @@ test.describe("cart rules", () => {
             await createRules.addCondition({
                 attribute: "cart|payment_method",
                 operator: "!=",
-                optionSelect: "moneytransfer",
+                optionSelect: "cashondelivery",
             });
             await createRules.saveCartRule();
             await createRules.applyCouponAtCheckout();

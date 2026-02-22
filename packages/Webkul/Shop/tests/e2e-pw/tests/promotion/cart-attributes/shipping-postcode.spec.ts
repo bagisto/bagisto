@@ -2,20 +2,20 @@ import { test } from "../../../setup";
 import { ProductCreation } from "../../../pages/product";
 import { CreateRules } from "../../../pages/rules";
 
-// test.beforeEach("should create simple product", async ({ adminPage }) => {
-//     const productCreation = new ProductCreation(adminPage);
+test.beforeEach("should create simple product", async ({ adminPage }) => {
+    const productCreation = new ProductCreation(adminPage);
 
-//     await productCreation.createProduct({
-//         type: "simple",
-//         sku: `SKU-${Date.now()}`,
-//         name: `Simple-${Date.now()}`,
-//         shortDescription: "Short desc",
-//         description: "Full desc",
-//         price: 199,
-//         weight: 1,
-//         inventory: 100,
-//     });
-// });
+    await productCreation.createProduct({
+        type: "simple",
+        sku: `SKU-${Date.now()}`,
+        name: `Simple-${Date.now()}`,
+        shortDescription: "Short desc",
+        description: "Full desc",
+        price: 199,
+        weight: 1,
+        inventory: 100,
+    });
+});
 
 test.describe("cart rules", () => {
     test.describe("cart attribute conditions", () => {
