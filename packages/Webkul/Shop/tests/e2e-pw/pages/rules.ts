@@ -112,6 +112,7 @@ export class CreateRules {
             }
 
             await this.locators.updateCart.click();
+            await expect(this.locators.cartUpdateSuccess.first()).toBeVisible();
         }
 
         await this.locators.applyCouponButton.click();

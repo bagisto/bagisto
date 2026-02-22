@@ -158,6 +158,7 @@ export class WebLocators {
     readonly incrementQtyButton: Locator;
     readonly updateCart: Locator;
     readonly selectCodintionOption: Locator;
+    readonly cartUpdateSuccess: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -467,6 +468,9 @@ export class WebLocators {
         this.updateCart = page.getByRole("button", { name: "Update Cart" });
         this.selectCodintionOption = page.locator(
             'select[name="conditions[0][value]"]',
+        );
+        this.cartUpdateSuccess = page.getByText(
+            "Quantity updated successfully",
         );
     }
 
