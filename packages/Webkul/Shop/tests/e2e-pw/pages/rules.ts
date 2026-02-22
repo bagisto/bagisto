@@ -42,16 +42,31 @@ export class CreateRules {
         await this.locators.usesPerCustomerInput.fill("100");
     }
 
-    public async addCondition(
-        attribute: string,
-        operator: string,
-        value: string,
-    ) {
+    public async addCondition({
+        attribute,
+        operator,
+        value,
+        optionSelect,
+    }: {
+        attribute: string;
+        operator: string;
+        value?: string;
+        optionSelect?: string;
+    }) {
         await this.locators.addConditionButton.click();
         await this.locators.conditionAttributeSelect.waitFor();
         await this.locators.conditionAttributeSelect.selectOption(attribute);
         await this.locators.conditionOperatorSelect.selectOption(operator);
-        await this.locators.conditionValueInput.fill(value);
+
+        if (optionSelect) {
+            await this.locators.selectCodintionOption.waitFor();
+            await this.locators.selectCodintionOption.selectOption(
+                optionSelect,
+            );
+        } else if (value) {
+            await this.locators.conditionValueInput.fill(value);
+        }
+
         await this.locators.actionTypeSelect.selectOption("by_percent");
         await this.locators.discountAmountInput.fill("50");
     }
@@ -100,8 +115,42 @@ export class CreateRules {
         }
 
         await this.locators.applyCouponButton.click();
+        await this.locators.couponInput.first().fill(this.couponCode);
+        await this.locators.applyButton.click();
+        await expect(this.locators.couponSuccessMessage).toBeVisible();
+    }
+
+    async applyCouponAtCheckout() {
+        await this.page.goto("");
+
+        await this.locators.searchInput.fill("simple");
+        await this.locators.searchInput.press("Enter");
+        await this.locators.addToCartButton.first().click();
+        await expect(
+            this.locators.addToCartSuccessMessage.first(),
+        ).toBeVisible();
+
+        await this.locators.ShoppingCartIcon.click();
+        await this.locators.ContinueButton.click();
+        await this.locators.companyName.fill("Web");
+        await this.locators.firstName.fill("demo");
+        await this.locators.lastName.fill("guest");
+        await this.locators.shippingEmail.fill("demo@example.com");
+        await this.locators.streetAddress.fill("north street");
+        await this.locators.billingCountry.selectOption({ value: "IN" });
+        await this.locators.billingState.selectOption({ value: "UP" });
+        await this.locators.billingCity.fill("test city");
+        await this.locators.billingZip.fill("123456");
+        await this.locators.billingTelephone.fill("2365432789");
+        await this.locators.clickProcessButton.click();
+        await this.locators.chooseShippingMethod.click();
+        await this.locators.choosePaymentMethod.click();
+
+        await this.locators.applyCouponButton.click();
+        await this.page.waitForTimeout(1000);
         await this.locators.couponInput.fill(this.couponCode);
         await this.locators.applyButton.click();
+        await expect(this.locators.couponSuccessMessage).toBeVisible();
     }
 
     async deleteRuleAndProduct() {

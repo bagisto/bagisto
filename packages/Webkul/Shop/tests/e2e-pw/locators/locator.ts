@@ -157,6 +157,7 @@ export class WebLocators {
     readonly productDeleteSuccess: Locator;
     readonly incrementQtyButton: Locator;
     readonly updateCart: Locator;
+    readonly selectCodintionOption: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -443,7 +444,7 @@ export class WebLocators {
         this.applyCouponButton = page.getByRole("button", {
             name: "Apply Coupon",
         });
-        this.couponInput = page.getByPlaceholder("Enter your code");
+        this.couponInput = page.locator('input[name="code"]:visible');
         this.applyButton = page.getByRole("button", {
             name: "Apply",
             exact: true,
@@ -464,6 +465,9 @@ export class WebLocators {
         );
         this.incrementQtyButton = page.locator(".icon-plus");
         this.updateCart = page.getByRole("button", { name: "Update Cart" });
+        this.selectCodintionOption = page.locator(
+            'select[name="conditions[0][value]"]',
+        );
     }
 
     /**
