@@ -191,7 +191,7 @@
                                             @endif
 
                                             <p class="text-gray-600 dark:text-gray-300">
-                                                @lang('admin::app.sales.orders.view.sku', ['sku' => $item->sku])
+                                                @lang('admin::app.sales.orders.view.sku', ['sku' => $item->child?->sku ?? $item->sku])
                                             </p>
 
                                             <p class="text-gray-600 dark:text-gray-300">
