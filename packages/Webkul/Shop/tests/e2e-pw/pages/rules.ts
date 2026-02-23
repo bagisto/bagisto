@@ -47,11 +47,13 @@ export class CreateRules {
         operator,
         value,
         optionSelect,
+        checkboxSelect,
     }: {
         attribute: string;
         operator: string;
         value?: string;
         optionSelect?: string;
+        checkboxSelect?: string;
     }) {
         await this.locators.addConditionButton.click();
         await this.locators.conditionAttributeSelect.waitFor();
@@ -65,6 +67,16 @@ export class CreateRules {
             );
         } else if (value) {
             await this.locators.conditionValueInput.fill(value);
+        } else if (checkboxSelect) {
+            const label = this.page.locator(
+                `label:has-text("${checkboxSelect}")`,
+            );
+            const input = label.locator("input");
+            await expect(input).toBeAttached();
+            const isChecked = await input.isChecked();
+            if (!isChecked) {
+                await label.click();
+            }
         }
 
         await this.locators.actionTypeSelect.selectOption("by_percent");

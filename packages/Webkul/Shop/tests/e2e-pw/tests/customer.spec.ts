@@ -483,18 +483,11 @@ test("should remove product from wishlist", async ({ page }) => {
 
     await addWishlist(page);
 
-    await page
-        .locator(
-            "div:nth-child(9) > div:nth-child(2) > div:nth-child(3) > .-mt-9 > .action-items > span",
-        )
-        .first()
-        .click();
     await page.goto("");
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.locator(".max-md\\:hidden > .flex").first().click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
-
     await expect(
         page.getByText("Item Successfully Removed From Wishlist").first(),
     ).toBeVisible();
