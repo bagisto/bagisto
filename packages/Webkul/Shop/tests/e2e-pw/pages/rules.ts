@@ -98,7 +98,6 @@ export class CreateRules {
         await this.locators.searchInput.fill("simple");
         await this.locators.searchInput.press("Enter");
 
-        // Add product once
         await this.locators.addToCartButton.first().click();
         await expect(
             this.locators.addToCartSuccessMessage.first(),
