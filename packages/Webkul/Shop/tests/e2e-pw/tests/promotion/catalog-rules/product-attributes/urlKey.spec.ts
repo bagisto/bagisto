@@ -73,7 +73,6 @@ test.describe("catalog rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when url key of product condition is -> does not contain", async ({
@@ -89,7 +88,6 @@ test.describe("catalog rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
     });
 });
