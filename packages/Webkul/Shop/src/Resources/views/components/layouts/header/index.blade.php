@@ -6,7 +6,7 @@
     </div>
 @endif
 
-<header class="shadow-gray sticky top-0 z-10 bg-white shadow-sm max-lg:shadow-none">
+<header class="shadow-gray sticky top-0 za-10 bg-white shadow-sm max-lg:shadow-none">
     <v-header-switcher>
         <!-- Desktop Header Shimmer -->
         <div class="flex flex-wrap max-lg:hidden">
