@@ -332,13 +332,13 @@ class RMAController extends Controller
         $rma = $this->rmaRepository->findOrFail($id);
 
         if ($rma->order->customer_id != auth()->guard('customer')->id()) {
-            return new JsonResponse([
+            return response()->json([
                 'message' => trans('shop::app.rma.response.already-cancel'),
             ]);
         }
 
         if ($rma->rma_status_id == DefaultRMAStatusEnum::CANCELED->value) {
-            return new JsonResponse([
+            return response()->json([
                 'message' => trans('shop::app.rma.response.already-cancel'),
             ]);
         }
@@ -349,7 +349,7 @@ class RMAController extends Controller
 
         Event::dispatch('customer.rma.request.update.after', $rma);
 
-        return new JsonResponse([
+        return response()->json([
             'message' => trans('shop::app.rma.response.cancel-success'),
         ]);
     }
