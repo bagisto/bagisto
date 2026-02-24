@@ -22,8 +22,8 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
 
 test.afterEach(
     "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const createRules = new CreateRules(adminPage);
+    async ({ page }) => {
+        const createRules = new CreateRules(page);
         await createRules.deleteRuleAndProduct();
     },
 );

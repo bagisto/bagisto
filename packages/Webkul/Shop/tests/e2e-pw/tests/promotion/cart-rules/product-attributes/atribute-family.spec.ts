@@ -19,16 +19,16 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach(
-    "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const createRules = new CreateRules(adminPage);
-        await createRules.deleteRuleAndProduct();
-    },
-);
-
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
+        test.afterEach(
+            "should delete the created product and rule",
+            async ({ page }) => {
+                const createRules = new CreateRules(page);
+                await createRules.deleteRuleAndProduct();
+            },
+        );
+
         test("should create attribute family for creating rule", async ({
             adminPage,
         }) => {
