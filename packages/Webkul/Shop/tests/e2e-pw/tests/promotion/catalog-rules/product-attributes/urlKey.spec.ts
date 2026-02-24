@@ -65,14 +65,14 @@ test.describe("catalog rules", () => {
         }) => {
             const createRules = new CreateRules(page);
             await createRules.adminlogin();
-            await createRules.cartRuleCreationFlow();
+            await createRules.catalogRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|url_key",
                 operator: "{}",
                 value: generatedName.toLowerCase(),
             });
-            await createRules.saveCartRule();
-            await createRules.applyCoupon();
+            await createRules.saveCatalogRule();
+            await createRules.verifyCatalogRule();
         });
 
         test("should apply coupon when url key of product condition is -> does not contain", async ({
@@ -80,14 +80,14 @@ test.describe("catalog rules", () => {
         }) => {
             const createRules = new CreateRules(page);
             await createRules.adminlogin();
-            await createRules.cartRuleCreationFlow();
+            await createRules.catalogRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|url_key",
                 operator: "!{}",
                 value: "example",
             });
-            await createRules.saveCartRule();
-            await createRules.applyCoupon();
+            await createRules.saveCatalogRule();
+            await createRules.verifyCatalogRule();
         });
     });
 });
