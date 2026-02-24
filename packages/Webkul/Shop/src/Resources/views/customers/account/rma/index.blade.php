@@ -1,8 +1,3 @@
-@php
-    use Webkul\RMA\Enums\DefaultRMAResolution;
-    use Webkul\RMA\Enums\DefaultRMAStatusEnum;
-@endphp
-
 <x-shop::layouts.account>
     <!-- Page Title -->
     <x-slot:title>
