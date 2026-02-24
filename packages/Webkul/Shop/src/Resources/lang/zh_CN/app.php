@@ -482,6 +482,7 @@ return [
                         'order-ref' => '订单参考',
                         'rma-status' => '请求状态',
                         'create' => '创建时间',
+                        'quantity' => '数量',
                     ],
                 ],
 

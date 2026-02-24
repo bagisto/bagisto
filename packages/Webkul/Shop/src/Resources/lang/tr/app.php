@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Sipariş Referansı',
                         'rma-status' => 'Talep Durumu',
                         'create' => 'Oluşturulma Tarihi',
+                        'quantity' => 'Miktar',
                     ],
                 ],
 

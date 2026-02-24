@@ -70,6 +70,7 @@
                                             <span class="text-xs text-gray-500">
                                                 @lang('shop::app.customers.account.rma.index.datagrid.id')
                                             </span>
+                                            
                                             <span class="text-sm font-semibold text-gray-900">
                                                 #@{{ record.id }}
                                             </span>
@@ -77,7 +78,7 @@
 
                                         <div class="flex flex-col gap-1 text-right">
                                             <span class="text-xs text-gray-500">
-                                                @lang('Order Reference')
+                                                @lang('shop::app.customers.account.rma.index.datagrid.order-ref')
                                             </span>
                                             
                                             <span class="text-sm font-semibold text-gray-900"
@@ -90,7 +91,7 @@
                                     <div class="flex items-start justify-between">
                                         <div class="flex flex-col gap-1">
                                             <span class="text-xs text-gray-500">
-                                                @lang('RMA Status')
+                                                @lang('shop::app.customers.account.rma.index.datagrid.rma-status')
                                             </span>
                                             
                                             <span class="text-sm font-semibold text-gray-900"
@@ -100,7 +101,7 @@
 
                                         <div class="flex flex-col gap-1 text-right">
                                             <span class="text-xs text-gray-500">
-                                                @lang('Quantity')
+                                                @lang('shop::app.customers.account.rma.index.datagrid.quantity')
                                             </span>
 
                                             <span class="text-sm font-semibold text-gray-900"
@@ -113,7 +114,7 @@
                                     <div class="flex items-center justify-between border-t pt-2">
                                         <div class="mt-1 flex flex-col gap-2">
                                             <span class="text-xs text-gray-500">
-                                                @lang('Created At')
+                                                @lang('shop::app.customers.account.rma.index.datagrid.create')
                                             </span>
                                             
                                             <p class="text-sm text-gray-900">
