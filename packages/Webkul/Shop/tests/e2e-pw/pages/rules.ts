@@ -42,6 +42,12 @@ export class CreateRules {
         await this.locators.usesPerCustomerInput.fill("100");
     }
 
+    private async fillGeneralCatalogDetails() {
+        await this.locators.createCatalogRuleButton.click();
+        await this.locators.nameInput.fill(generateName());
+        await this.locators.descriptionInput.fill(generateName());
+    }
+
     public async addCondition({
         attribute,
         operator,
@@ -98,9 +104,22 @@ export class CreateRules {
         );
     }
 
+    public async saveCatalogRule() {
+        await this.locators.catalogRuleButton.click();
+        await expect(this.locators.successMessage).toContainText(
+            "Catalog rule created successfully",
+        );
+    }
+
     public async cartRuleCreationFlow() {
         await this.page.goto("admin/marketing/promotions/cart-rules");
         await this.fillGeneralCartDetails();
+        await this.configureSettings();
+    }
+
+    public async catalogRuleCreationFlow() {
+        await this.page.goto("admin/marketing/promotions/catalog-rules");
+        await this.fillGeneralCatalogDetails();
         await this.configureSettings();
     }
 
@@ -130,6 +149,24 @@ export class CreateRules {
         await this.locators.couponInput.first().fill(this.couponCode);
         await this.locators.applyButton.click();
         await expect(this.locators.couponSuccessMessage).toBeVisible();
+    }
+
+    async verifyCatalogRule() {
+        await this.page.goto("");
+
+        await this.locators.searchInput.fill("simple");
+        await this.locators.searchInput.press("Enter");
+
+        const actualPrice = 199;
+        const expectedDiscountedPrice = `$${(actualPrice * 0.5).toFixed(2)}`;
+
+        await expect(
+            this.page
+                .locator("div.flex.items-center")
+                .locator("p")
+                .filter({ hasText: "$" })
+                .last(),
+        ).toHaveText(expectedDiscountedPrice);
     }
 
     async applyCouponAtCheckout() {
@@ -171,6 +208,21 @@ export class CreateRules {
         await this.locators.agree.click();
         await expect(
             this.page.getByText("Cart Rule Deleted Successfully"),
+        ).toBeVisible();
+        await this.page.goto("admin/catalog/products");
+        await this.locators.selectRowBtn.nth(2).click();
+        await this.locators.selectAction.click();
+        await this.locators.selectDelete.click();
+        await this.locators.agree.click();
+        await expect(this.locators.productDeleteSuccess).toBeVisible();
+    }
+
+    async deleteCatalogRuleAndProduct() {
+        await this.page.goto("admin/marketing/promotions/catalog-rules");
+        await this.locators.deleteIcon.first().click();
+        await this.locators.agree.click();
+        await expect(
+            this.page.getByText("Catalog Rule Deleted Successfully"),
         ).toBeVisible();
         await this.page.goto("admin/catalog/products");
         await this.locators.selectRowBtn.nth(2).click();

@@ -159,6 +159,8 @@ export class WebLocators {
     readonly updateCart: Locator;
     readonly selectCodintionOption: Locator;
     readonly cartUpdateSuccess: Locator;
+    readonly catalogRuleButton:Locator;
+    readonly createCatalogRuleButton:Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -471,6 +473,12 @@ export class WebLocators {
         );
         this.cartUpdateSuccess = page.getByText(
             "Quantity updated successfully",
+        );
+        this.createCatalogRuleButton = page.locator(
+            'a.primary-button:has-text("Create Catalog Rule")',
+        );
+        this.catalogRuleButton= page.locator(
+            'button.primary-button:has-text("Save Catalog Rule")',
         );
     }
 

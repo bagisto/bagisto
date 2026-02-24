@@ -1,0 +1,157 @@
+import { expect, test } from "../../../../setup";
+import { ProductCreation } from "../../../../pages/product";
+import { CreateRules } from "../../../../pages/rules";
+
+let generatedProductNumber: string;
+generatedProductNumber = `PN-${Date.now()}`;
+
+test.beforeEach("should create simple product", async ({ adminPage }) => {
+    const productCreation = new ProductCreation(adminPage);
+
+    await productCreation.createProduct({
+        type: "simple",
+        sku: `SKU-${Date.now()}`,
+        name: `Simple-${Date.now()}`,
+        shortDescription: "Short desc",
+        description: "Full desc",
+        price: 199,
+        weight: 1,
+        inventory: 199,
+    });
+});
+
+test.describe("catalog rules", () => {
+    test.describe("product attribute conditions", () => {
+        test("should apply coupon when product number condition is -> is equal to", async ({
+            page,
+        }) => {
+            const createRules = new CreateRules(page);
+            await createRules.adminlogin();
+            await createRules.catalogRuleCreationFlow();
+            await createRules.addCondition({
+                attribute: "product|product_number",
+                operator: "==",
+                value: generatedProductNumber,
+            });
+            await createRules.saveCatalogRule();
+            await page.goto("admin/catalog/products");
+            await page
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await page.waitForLoadState("networkidle");
+            await page
+                .locator('input[name="product_number"]')
+                .first()
+                .fill(generatedProductNumber);
+            await page
+                .locator('button:has-text("Save Product")')
+                .first()
+                .click();
+            await expect(
+                page.getByText("Product updated successfully").first(),
+            ).toBeVisible();
+            await createRules.verifyCatalogRule();
+            await createRules.deleteCatalogRuleAndProduct();
+        });
+
+        test("should apply coupon when product number condition is -> is not equal to", async ({
+            page,
+        }) => {
+            const createRules = new CreateRules(page);
+            await createRules.adminlogin();
+            await createRules.catalogRuleCreationFlow();
+            await createRules.addCondition({
+                attribute: "product|product_number",
+                operator: "!=",
+                value: "123456",
+            });
+            await createRules.saveCatalogRule();
+            await page.goto("admin/catalog/products");
+            await page
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await page.waitForLoadState("networkidle");
+            await page
+                .locator('input[name="product_number"]')
+                .first()
+                .fill(generatedProductNumber);
+            await page
+                .locator('button:has-text("Save Product")')
+                .first()
+                .click();
+            await expect(
+                page.getByText("Product updated successfully").first(),
+            ).toBeVisible();
+            await createRules.verifyCatalogRule();
+            await createRules.deleteCatalogRuleAndProduct();
+        });
+
+        test("should apply coupon when product number condition is -> contains", async ({
+            page,
+        }) => {
+            const createRules = new CreateRules(page);
+            await createRules.adminlogin();
+            await createRules.catalogRuleCreationFlow();
+            await createRules.addCondition({
+                attribute: "product|product_number",
+                operator: "{}",
+                value: generatedProductNumber,
+            });
+            await createRules.saveCatalogRule();
+            await page.goto("admin/catalog/products");
+            await page
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await page.waitForLoadState("networkidle");
+            await page
+                .locator('input[name="product_number"]')
+                .first()
+                .fill(generatedProductNumber);
+            await page
+                .locator('button:has-text("Save Product")')
+                .first()
+                .click();
+            await expect(
+                page.getByText("Product updated successfully").first(),
+            ).toBeVisible();
+            await createRules.verifyCatalogRule();
+            await createRules.deleteCatalogRuleAndProduct();
+        });
+
+        test("should apply coupon when product number condition is -> does not contain", async ({
+            page,
+        }) => {
+            const createRules = new CreateRules(page);
+            await createRules.adminlogin();
+            await createRules.catalogRuleCreationFlow();
+            await createRules.addCondition({
+                attribute: "product|product_number",
+                operator: "!{}",
+                value: "123456",
+            });
+            await createRules.saveCatalogRule();
+            await page.goto("admin/catalog/products");
+            await page
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await page.waitForLoadState("networkidle");
+            await page
+                .locator('input[name="product_number"]')
+                .first()
+                .fill(generatedProductNumber);
+            await page
+                .locator('button:has-text("Save Product")')
+                .first()
+                .click();
+            await expect(
+                page.getByText("Product updated successfully").first(),
+            ).toBeVisible();
+            await createRules.verifyCatalogRule();
+            await createRules.deleteCatalogRuleAndProduct();
+        });
+    });
+});
