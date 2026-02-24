@@ -1,8 +1,8 @@
-import { test } from "../../../setup";
+import { test } from "../../../../setup";
 import {expect} from "@playwright/test";   
-import { ProductCreation } from "../../../pages/product";
-import { CreateRules } from "../../../pages/rules";
-import { generateName, generateSlug } from "../../../utils/faker";
+import { ProductCreation } from "../../../../pages/product";
+import { CreateRules } from "../../../../pages/rules";
+import { generateName, generateSlug } from "../../../../utils/faker";
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
