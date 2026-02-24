@@ -17,6 +17,14 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const createRules = new CreateRules(adminPage);
+        await createRules.deleteRuleAndProduct();
+    },
+);
+
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         test("should apply coupon when cost condition is -> is equal to", async ({
@@ -46,7 +54,6 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when cost condition is -> is not equal to", async ({
@@ -76,7 +83,6 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when cost condition is -> equals or greater then", async ({
@@ -106,7 +112,6 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when cost condition is -> equals or less than", async ({
@@ -136,7 +141,6 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when cost condition is -> greater than", async ({
@@ -166,7 +170,6 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when cost condition is -> less than", async ({
@@ -196,7 +199,6 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
     });
 });

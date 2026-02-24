@@ -17,6 +17,14 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const createRules = new CreateRules(adminPage);
+        await createRules.deleteCatalogRuleAndProduct();
+    },
+);
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         test("should apply coupon when height condition is -> is equal to", async ({
@@ -46,7 +54,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when height condition is -> is not equal to", async ({
@@ -76,7 +83,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when height condition is -> contains", async ({
@@ -106,7 +112,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when height condition is -> does not contain", async ({
@@ -136,7 +141,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
     });
 });

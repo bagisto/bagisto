@@ -17,6 +17,14 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const createRules = new CreateRules(adminPage);
+        await createRules.deleteRuleAndProduct();
+    },
+);
+
 test.describe("cart rules", () => {
     test.describe("cart attribute conditions", () => {
         test("should apply coupon when total item quantity condition is -> is equal to", async ({
@@ -32,7 +40,6 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when total item quantity condition is -> is not equal to", async ({
@@ -48,7 +55,6 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when total item quantity condition is -> equals or greater then", async ({
@@ -64,7 +70,6 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when total item quantity condition is -> equals or less than", async ({
@@ -80,7 +85,6 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when total item quantity condition is -> greater than", async ({
@@ -96,23 +100,21 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon(1);
-            await createRules.deleteRuleAndProduct();
         });
+    });
 
-        test("should apply coupon when total item quantity condition is -> less than", async ({
-            page,
-        }) => {
-            const createRules = new CreateRules(page);
-            await createRules.adminlogin();
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
-                attribute: "cart|items_qty",
-                operator: "<",
-                value: "2",
-            });
-            await createRules.saveCartRule();
-            await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
+    test("should apply coupon when total item quantity condition is -> less than", async ({
+        page,
+    }) => {
+        const createRules = new CreateRules(page);
+        await createRules.adminlogin();
+        await createRules.cartRuleCreationFlow();
+        await createRules.addCondition({
+            attribute: "cart|items_qty",
+            operator: "<",
+            value: "2",
         });
+        await createRules.saveCartRule();
+        await createRules.applyCoupon();
     });
 });

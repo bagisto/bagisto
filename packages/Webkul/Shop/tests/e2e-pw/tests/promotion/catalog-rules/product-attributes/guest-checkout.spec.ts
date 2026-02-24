@@ -21,6 +21,14 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const createRules = new CreateRules(adminPage);
+        await createRules.deleteCatalogRuleAndProduct();
+    },
+);
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         test("should apply coupon when product guest checkout condition is -> is equal to", async ({
@@ -37,7 +45,6 @@ test.describe("catalog rules", () => {
             await createRules.saveCatalogRule();
             await loginAsCustomer(page);
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when product guest checkout condition is -> is not equal to", async ({
@@ -68,7 +75,6 @@ test.describe("catalog rules", () => {
             ).toBeVisible();
             await loginAsCustomer(page);
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
     });
 });

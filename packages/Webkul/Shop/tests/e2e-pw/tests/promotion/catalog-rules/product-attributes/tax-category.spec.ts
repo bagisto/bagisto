@@ -11,7 +11,6 @@ test.describe("catalog rules", () => {
         test.beforeEach(
             "should create simple product and tax category",
             async ({ adminPage }) => {
-
                 await createTaxRate(adminPage);
                 await createTaxCategory(adminPage);
 
@@ -44,6 +43,14 @@ test.describe("catalog rules", () => {
             },
         );
 
+        test.afterEach(
+            "should delete the created product and rule",
+            async ({ adminPage }) => {
+                const createRules = new CreateRules(adminPage);
+                await createRules.deleteCatalogRuleAndProduct();
+            },
+        );
+
         test("should apply coupon when sku of product condition is -> is equal to", async ({
             page,
         }) => {
@@ -57,7 +64,6 @@ test.describe("catalog rules", () => {
             });
             await createRules.saveCatalogRule();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when sku of product condition is -> is not equal to", async ({
@@ -73,7 +79,6 @@ test.describe("catalog rules", () => {
             });
             await createRules.saveCatalogRule();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when sku of product condition is -> contains", async ({
@@ -89,7 +94,6 @@ test.describe("catalog rules", () => {
             });
             await createRules.saveCatalogRule();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when sku of product condition is -> does not contain", async ({
@@ -105,7 +109,6 @@ test.describe("catalog rules", () => {
             });
             await createRules.saveCatalogRule();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
     });
 });

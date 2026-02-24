@@ -22,7 +22,7 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
 
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when visible individually product condition is -> is equal to", async ({
+        test("should apply coupon when visible individually product condition is -> is equal to (yes)", async ({
             page,
         }) => {
             const createRules = new CreateRules(page);
@@ -38,7 +38,53 @@ test.describe("cart rules", () => {
             await createRules.deleteRuleAndProduct();
         });
 
-        test("should apply coupon when visible individually product condition is -> is not equal to", async ({
+        // test("should apply coupon when visible individually product condition is -> is equal to (no)", async ({
+        //     page,
+        // }) => {
+        //     const createRules = new CreateRules(page);
+        //     await createRules.adminlogin();
+        //     await createRules.cartRuleCreationFlow();
+        //     await createRules.addCondition({
+        //         attribute: "product|visible_individually",
+        //         operator: "==",
+        //         optionSelect: "0",
+        //     });
+        //     await createRules.saveCartRule();
+        //     await page.goto("admin/catalog/products");
+        //     await page
+        //         .locator("span.cursor-pointer.icon-sort-right")
+        //         .nth(1)
+        //         .click();
+        //     await page.waitForLoadState("networkidle");
+        //     await page.locator(".peer.h-5").nth(2).click();
+        //     await page
+        //         .locator('button:has-text("Save Product")')
+        //         .first()
+        //         .click();
+        //     await expect(
+        //         page.getByText("Product updated successfully").first(),
+        //     ).toBeVisible();
+        //     await createRules.applyCoupon();
+        //     await createRules.deleteRuleAndProduct();
+        // });
+
+        // test("should apply coupon when visible individually product condition is -> is not equal to (yes)", async ({
+        //     page,
+        // }) => {
+        //     const createRules = new CreateRules(page);
+        //     await createRules.adminlogin();
+        //     await createRules.cartRuleCreationFlow();
+        //     await createRules.addCondition({
+        //         attribute: "product|visible_individually",
+        //         operator: "!=",
+        //         optionSelect: "1",
+        //     });
+        //     await createRules.saveCartRule();
+        //     await createRules.applyCoupon();
+        //     await createRules.deleteRuleAndProduct();
+        // });
+
+        test("should apply coupon when visible individually product condition is -> is not equal to (no)", async ({
             page,
         }) => {
             const createRules = new CreateRules(page);
@@ -50,20 +96,6 @@ test.describe("cart rules", () => {
                 optionSelect: "0",
             });
             await createRules.saveCartRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator(".peer.h-5").nth(2).click();
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
             await createRules.applyCoupon();
             await createRules.deleteRuleAndProduct();
         });

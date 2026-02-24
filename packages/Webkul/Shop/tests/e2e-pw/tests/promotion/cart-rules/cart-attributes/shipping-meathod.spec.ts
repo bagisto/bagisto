@@ -17,6 +17,14 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const createRules = new CreateRules(adminPage);
+        await createRules.deleteRuleAndProduct();
+    },
+);
+
 test.describe("cart rules", () => {
     test.describe("cart attribute conditions", () => {
         test("should apply coupon when shipping meathod condition is -> is equal to", async ({
@@ -32,7 +40,6 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCouponAtCheckout();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when shipping meathod condition is -> is not equal to", async ({
@@ -48,7 +55,6 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCouponAtCheckout();
-            await createRules.deleteRuleAndProduct();
         });
     });
 });

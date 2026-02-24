@@ -1,5 +1,5 @@
 import { test } from "../../../../setup";
-import {expect} from "@playwright/test";   
+import { expect } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/product";
 import { CreateRules } from "../../../../pages/rules";
 import { generateName, generateSlug } from "../../../../utils/faker";
@@ -18,6 +18,14 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
         inventory: 100,
     });
 });
+
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const createRules = new CreateRules(adminPage);
+        await createRules.deleteRuleAndProduct();
+    },
+);
 
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
@@ -69,7 +77,7 @@ test.describe("cart rules", () => {
 
             await adminPage.click(".primary-button:visible");
             await expect(
-                adminPage.getByText("Family created successfully.").first()
+                adminPage.getByText("Family created successfully.").first(),
             ).toBeVisible();
         });
 
@@ -86,7 +94,6 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
 
         test("should apply coupon when attribute family of product condition is -> is not equal to", async ({
@@ -102,7 +109,6 @@ test.describe("cart rules", () => {
             });
             await createRules.saveCartRule();
             await createRules.applyCoupon();
-            await createRules.deleteRuleAndProduct();
         });
     });
 });

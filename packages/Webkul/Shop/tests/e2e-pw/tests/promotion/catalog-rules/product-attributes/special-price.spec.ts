@@ -17,6 +17,14 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const createRules = new CreateRules(adminPage);
+        await createRules.deleteCatalogRuleAndProduct();
+    },
+);
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         test("should apply coupon when cost condition is -> is equal to", async ({
@@ -37,7 +45,10 @@ test.describe("catalog rules", () => {
                 .nth(1)
                 .click();
             await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("150");
+            await page
+                .locator('input[name="special_price"]')
+                .first()
+                .fill("150");
             await page
                 .locator('button:has-text("Save Product")')
                 .first()
@@ -46,7 +57,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when cost condition is -> is not equal to", async ({
@@ -67,7 +77,10 @@ test.describe("catalog rules", () => {
                 .nth(1)
                 .click();
             await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("150");
+            await page
+                .locator('input[name="special_price"]')
+                .first()
+                .fill("150");
             await page
                 .locator('button:has-text("Save Product")')
                 .first()
@@ -76,7 +89,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when price condition is -> equals or greater then", async ({
@@ -97,7 +109,10 @@ test.describe("catalog rules", () => {
                 .nth(1)
                 .click();
             await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("160");
+            await page
+                .locator('input[name="special_price"]')
+                .first()
+                .fill("160");
             await page
                 .locator('button:has-text("Save Product")')
                 .first()
@@ -106,7 +121,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when price condition is -> equals or less than", async ({
@@ -127,7 +141,10 @@ test.describe("catalog rules", () => {
                 .nth(1)
                 .click();
             await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("150");
+            await page
+                .locator('input[name="special_price"]')
+                .first()
+                .fill("150");
             await page
                 .locator('button:has-text("Save Product")')
                 .first()
@@ -136,7 +153,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when price condition is -> greater than", async ({
@@ -156,7 +172,10 @@ test.describe("catalog rules", () => {
                 .locator("span.cursor-pointer.icon-sort-right")
                 .nth(1)
                 .click();
-            await page.locator('input[name="special_price"]').first().fill("150");
+            await page
+                .locator('input[name="special_price"]')
+                .first()
+                .fill("150");
             await page
                 .locator('button:has-text("Save Product")')
                 .first()
@@ -165,7 +184,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
 
         test("should apply coupon when special price condition is -> less than", async ({
@@ -186,7 +204,10 @@ test.describe("catalog rules", () => {
                 .nth(1)
                 .click();
             await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("195");
+            await page
+                .locator('input[name="special_price"]')
+                .first()
+                .fill("195");
             await page
                 .locator('button:has-text("Save Product")')
                 .first()
@@ -195,7 +216,6 @@ test.describe("catalog rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
             await createRules.verifyCatalogRule();
-            await createRules.deleteCatalogRuleAndProduct();
         });
     });
 });
