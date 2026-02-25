@@ -1,0 +1,78 @@
+import { expect, test } from "../../../../setup";
+import { ProductCreation } from "../../../../pages/product";
+import { CreateRules } from "../../../../pages/rules";
+import { loginAsCustomer } from "../../../../utils/customer";
+
+let generatedName: string;
+generatedName = `Simple-${Date.now()}`;
+
+test.beforeEach("should create simple product", async ({ adminPage }) => {
+    const productCreation = new ProductCreation(adminPage);
+
+    await productCreation.createProduct({
+        type: "simple",
+        sku: `SKU-${Date.now()}`,
+        name: generatedName,
+        shortDescription: "Short desc",
+        description: "Full desc",
+        price: 199,
+        weight: 1,
+        inventory: 199,
+    });
+});
+
+test.afterEach("should delete the created product and rule", async ({ adminPage }) => {
+    const createRules = new CreateRules(adminPage);
+    await createRules.deleteRuleAndProduct();
+});
+
+
+test.describe("cart rules", () => {
+    test.describe("product attribute conditions", () => {
+        test("should apply coupon when product guest checkout condition is -> is equal to", async ({
+            page,
+        }) => {
+            const createRules = new CreateRules(page);
+            await createRules.adminlogin();
+            await createRules.cartRuleCreationFlow();
+            await createRules.addCondition({
+                attribute: "product|guest_checkout",
+                operator: "==",
+                optionSelect: "1",
+            });
+            await createRules.saveCartRule();
+            await loginAsCustomer(page);
+            await createRules.applyCoupon();
+        });
+
+        test("should apply coupon when product guest checkout condition is -> is not equal to", async ({
+            page,
+        }) => {
+            const createRules = new CreateRules(page);
+            await createRules.adminlogin();
+            await createRules.cartRuleCreationFlow();
+            await createRules.addCondition({
+                attribute: "product|guest_checkout",
+                operator: "!=",
+                optionSelect: "0",
+            });
+            await createRules.saveCartRule();
+            await page.goto("admin/catalog/products");
+            await page
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await page.waitForLoadState("networkidle");
+            await page.locator(".peer.h-5").nth(4).click();
+            await page
+                .locator('button:has-text("Save Product")')
+                .first()
+                .click();
+            await expect(
+                page.getByText("Product updated successfully").first(),
+            ).toBeVisible();
+            await loginAsCustomer(page);
+            await createRules.applyCoupon();
+        });
+    });
+});
