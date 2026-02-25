@@ -549,6 +549,10 @@ class Importer extends AbstractImporter
                 array_push($validations, function ($field, $value, $fail) use ($attribute, $rowData) {
                     $product = $this->skuStorage->get($rowData['sku']);
 
+                    if (! $product) {
+                        return;
+                    }
+
                     $count = $this->productAttributeValueRepository
                         ->where($attribute->column_name, $rowData[$attribute->code])
                         ->where('attribute_id', '=', $attribute->id)
