@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Referensi Pesanan',
                         'rma-status' => 'Status Permintaan',
                         'create' => 'Dibuat Pada',
+                        'quantity' => 'Kuantitas',
                     ],
                 ],
 

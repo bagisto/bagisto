@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Numer zamówienia',
                         'rma-status' => 'Status zgłoszenia',
                         'create' => 'Utworzono',
+                        'quantity' => 'Ilość',
                     ],
                 ],
 

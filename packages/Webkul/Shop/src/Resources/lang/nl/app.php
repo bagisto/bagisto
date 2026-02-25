@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Bestelreferentie',
                         'rma-status' => 'Aanvraagstatus',
                         'create' => 'Aangemaakt op',
+                        'quantity' => 'Hoeveelheid',
                     ],
                 ],
 

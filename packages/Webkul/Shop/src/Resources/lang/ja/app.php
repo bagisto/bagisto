@@ -482,6 +482,7 @@ return [
                         'order-ref' => '注文参照',
                         'rma-status' => 'リクエスト状況',
                         'create' => '作成日',
+                        'quantity' => '数量',
                     ],
                 ],
 
