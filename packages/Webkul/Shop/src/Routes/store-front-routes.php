@@ -31,6 +31,10 @@ Route::get('/', [HomeController::class, 'index'])
     ->name('shop.home.index')
     ->middleware('cache.response');
 
+Route::get('about', [HomeController::class, 'about'])
+    ->name('shop.home.about')
+    ->middleware('cache.response');
+
 Route::get('contact-us', [HomeController::class, 'contactUs'])
     ->name('shop.home.contact_us')
     ->middleware('cache.response');

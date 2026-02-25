@@ -45,6 +45,11 @@ class HomeController extends Controller
         return view('shop::home.index', compact('customizations', 'categories'));
     }
 
+    // this will render about page
+    public function about(){
+        return view('shop::about.index');
+    }
+
     /**
      * Loads the home page for the storefront if something wrong.
      *
