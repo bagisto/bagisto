@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Referência do pedido',
                         'rma-status' => 'Status da solicitação',
                         'create' => 'Criado em',
+                        'quantity' => 'Quantidade',
                     ],
                 ],
 

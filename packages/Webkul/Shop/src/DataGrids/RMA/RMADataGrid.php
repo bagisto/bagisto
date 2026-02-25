@@ -131,7 +131,7 @@ class RMADataGrid extends DataGrid
         $this->addAction([
             'title' => trans('shop::app.rma.customer-rma-index.cancel'),
             'icon' => 'icon-cancel',
-            'method' => 'GET',
+            'method' => 'POST',
             'url' => function ($row) {
                 return route('shop.customers.account.rma.cancel', $row->id);
             },
