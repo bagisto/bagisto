@@ -29,7 +29,7 @@
                     <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
                 </a>
 
-                <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                <h2 class="text-2xl font-medium ltr:ml-2.5 rtl:mr-2.5 max-md:text-xl max-sm:text-base md:ltr:ml-0 md:rtl:mr-0">
                     @lang('shop::app.customers.account.orders.view.page-title', ['order_id' => $order->increment_id])
                 </h2>
             </div>
@@ -1585,7 +1585,7 @@
                                             @foreach ($refund->items as $item)
                                                 <tr class="border-b bg-white [&>*]:font-medium [&>*]:px-6 [&>*]:py-4 [&>*]:text-black">
                                                     <td data-value="@lang('shop::app.customers.account.orders.view.refunds.sku')">
-                                                        {{ $item->child ? $item->child->sku : $item->sku }}
+                                                        {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                                     </td>
 
                                                     <td data-value="@lang('shop::app.customers.account.orders.view.refunds.product-name')">
@@ -1692,7 +1692,7 @@
                                                         </span>
 
                                                         <span>
-                                                            {{ $item->child ? $item->child->sku : $item->sku }}
+                                                            {{ $item->getTypeInstance()->getOrderedItem($item)->sku }}
                                                         </span>
                                                     </div>
 
