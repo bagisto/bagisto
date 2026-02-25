@@ -119,13 +119,9 @@ export async function addAddress(page) {
 }
 
 export async function addWishlist(page) {
+    await page.getByPlaceholder("Search products here").fill("simple");
+    await page.getByPlaceholder("Search products here").press("Enter");
     await page.locator(".action-items > span").first().click();
-    await page
-        .locator(
-            "div:nth-child(9) > div:nth-child(2) > div > .-mt-9 > .action-items > span"
-        )
-        .first()
-        .click();
 
     await expect(
         page.getByText("Item Successfully Added To Wishlist").first()
