@@ -30,6 +30,7 @@ test.describe("cart rules", () => {
                     .locator("span.cursor-pointer.icon-sort-right")
                     .nth(1)
                     .click();
+                await adminPage.waitForLoadState("networkidle");
                 await adminPage
                     .locator('select[name="tax_category_id"]')
                     .selectOption("1");
