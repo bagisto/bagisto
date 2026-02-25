@@ -172,6 +172,7 @@ test.describe("catalog rules", () => {
                 .locator("span.cursor-pointer.icon-sort-right")
                 .nth(1)
                 .click();
+            await page.waitForLoadState("networkidle");
             await page
                 .locator('input[name="special_price"]')
                 .first()
