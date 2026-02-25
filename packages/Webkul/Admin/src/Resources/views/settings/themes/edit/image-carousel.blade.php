@@ -99,7 +99,7 @@
 
                                     <span class="text-gray-600 transition-all dark:text-gray-300">
                                         <a
-                                            :href="'{{ asset('/') }}' + image.image"
+                                            :href="'{{ config('app.url') }}/' + image.image"
                                             :ref="'image_' + index"
                                             target="_blank"
                                             class="text-blue-600 transition-all hover:underline ltr:ml-2 rtl:mr-2"
@@ -302,30 +302,11 @@
                             throw new Error("{{ trans('admin::app.settings.themes.edit.slider-required') }}");
                         }
 
-                        if (this.isUpdating) {
-                            let existingSlider = this.sliders.images[this.selectedSliderIndex];
-
-                            this.sliders.images[this.selectedSliderIndex] = {
-                                ...existingSlider,
-                                ...sliderData,
-                            };
-                        } else {
-                            this.sliders.images.push(sliderData);
-                        }
+                        const sliderIndex = this.upsertSlider(sliderData);
 
                         if (hasUploadedImage) {
-                            this.setFile(
-                                sliderImage,
-                                this.isUpdating
-                                    ? this.selectedSliderIndex
-                                    : this.sliders.images.length - 1
-                            );
-
-                            if (this.isUpdating && this.selectedSliderOriginalImage) {
-                                this.deletedSliders.push({
-                                    image: this.selectedSliderOriginalImage,
-                                });
-                            }
+                            this.setFile(sliderImage, sliderIndex);
+                            this.markSliderImageForDeletion();
                         }
 
                         resetForm();
@@ -337,6 +318,31 @@
                             slider_image: [error.message],
                         });
                     }
+                },
+
+                upsertSlider(sliderData) {
+                    if (this.isUpdating) {
+                        this.sliders.images[this.selectedSliderIndex] = {
+                            ...this.sliders.images[this.selectedSliderIndex],
+                            ...sliderData,
+                        };
+
+                        return this.selectedSliderIndex;
+                    }
+
+                    this.sliders.images.push(sliderData);
+
+                    return this.sliders.images.length - 1;
+                },
+
+                markSliderImageForDeletion() {
+                    if (! this.isUpdating || ! this.selectedSliderOriginalImage) {
+                        return;
+                    }
+
+                    this.deletedSliders.push({
+                        image: this.selectedSliderOriginalImage,
+                    });
                 },
 
                 hasSliderImage(formData, hasUploadedImage) {
@@ -382,25 +388,26 @@
                 },
 
                 create() {
-                    this.resetSelectedSlider();
-                    this.mediaComponentKey++;
-
-                    this.$refs.addSliderModal.toggle();
+                    this.openSliderModal();
                 },
 
                 edit(slider, index) {
-                    this.isUpdating = true;
-                    this.selectedSliderIndex = index;
+                    this.openSliderModal(slider, index);
+                },
 
-                    this.selectedSlider = {
-                        ...slider,
-                    };
+                openSliderModal(slider = null, index = null) {
+                    this.resetSelectedSlider();
 
-                    this.selectedSliderMediaImages = slider.image
-                        ? [{ id: `slider_image_${index}`, url: '{{ asset('/') }}' + slider.image }]
-                        : [];
+                    if (slider) {
+                        this.isUpdating = true;
+                        this.selectedSliderIndex = index;
+                        this.selectedSlider = { ...slider };
+                        this.selectedSliderOriginalImage = slider.image;
+                        this.selectedSliderMediaImages = slider.image
+                            ? [{ id: `slider_image_${index}`, url: '{{ asset('/') }}' + slider.image }]
+                            : [];
+                    }
 
-                    this.selectedSliderOriginalImage = slider.image;
                     this.mediaComponentKey++;
 
                     this.$refs.addSliderModal.toggle();
