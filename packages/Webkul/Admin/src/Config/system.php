@@ -1250,7 +1250,7 @@ return [
                 'title' => 'admin::app.configuration.index.customer.captcha.credentials.site-key',
                 'type' => 'text',
                 'depends' => 'status:true',
-                'validation' => 'required',
+                'validation' => 'required_if:status,1',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
@@ -1258,7 +1258,7 @@ return [
                 'title' => 'admin::app.configuration.index.customer.captcha.credentials.secret-key',
                 'type' => 'text',
                 'depends' => 'status:true',
-                'validation' => 'required',
+                'validation' => 'required_if:status,1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -1756,7 +1756,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.shipping-methods.free-shipping.title',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -1784,7 +1784,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.title',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -1798,7 +1798,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.shipping-methods.flat-rate-shipping.rate',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required|numeric',
+                'validation' => 'required_if:active,1|numeric',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
@@ -1841,7 +1841,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -1875,7 +1875,7 @@ return [
                 'name' => 'invoice_status',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
                 'depends' => 'generate_invoice:1',
-                'validation' => 'required',
+                'validation' => 'required_if:generate_invoice,1',
                 'type' => 'select',
                 'options' => [
                     [
@@ -1946,7 +1946,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -1973,7 +1973,7 @@ return [
             ], [
                 'name' => 'invoice_status',
                 'depends' => 'generate_invoice:1',
-                'validation' => 'required',
+                'validation' => 'required_if:generate_invoice,1',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
                 'type' => 'select',
                 'options' => [
@@ -2051,7 +2051,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -2073,7 +2073,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.business-account',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],  [
@@ -2120,7 +2120,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -2143,7 +2143,7 @@ return [
                 'info' => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
@@ -2152,7 +2152,7 @@ return [
                 'info' => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => false,
                 'default' => 'CLIENT_SECRET',
@@ -2162,7 +2162,7 @@ return [
                 'info' => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
                 'type' => 'text',
                 'depends' => 'active:1',
-                'validation' => 'required',
+                'validation' => 'required_if:active,1',
                 'channel_based' => true,
                 'locale_based' => false,
                 'default' => 'USD',
@@ -2251,7 +2251,7 @@ return [
                 'name' => 'minimum_order_amount',
                 'title' => 'admin::app.configuration.index.sales.order-settings.minimum-order.minimum-order-amount',
                 'type' => 'number',
-                'validation' => 'required|numeric',
+                'validation' => 'required_if:enable,1|numeric',
                 'depends' => 'enable:1',
                 'channel_based' => true,
             ], [
