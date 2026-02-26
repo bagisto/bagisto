@@ -134,8 +134,67 @@ export class WebLocators {
     readonly status: Locator;
     readonly save: Locator;
     readonly verify: Locator;
-    readonly successRMA:Locator;
-    readonly invalidRMAMessage:Locator;
+    readonly successRMA: Locator;
+    readonly invalidRMAMessage: Locator;
+
+    // Authentication
+    readonly emailInput: Locator;
+    readonly passwordInput: Locator;
+
+    // Cart Rule
+    readonly createCartRuleButton: Locator;
+    readonly cartRuleForm: Locator;
+
+    // General Section
+    readonly nameInput: Locator;
+    readonly descriptionInput: Locator;
+    readonly couponTypeSelect: Locator;
+    readonly autoGenerationSelect: Locator;
+    readonly couponCodeInput: Locator;
+    readonly usesPerCouponInput: Locator;
+    readonly usesPerCustomerInput: Locator;
+
+    // Conditions
+    readonly addConditionButton: Locator;
+    readonly conditionAttributeSelect: Locator;
+    readonly conditionOperatorSelect: Locator;
+    readonly conditionValueInput: Locator;
+
+    // Actions
+    readonly actionTypeSelect: Locator;
+    readonly discountAmountInput: Locator;
+
+    // Settings
+    readonly sortOrderInput: Locator;
+    readonly channelCheckbox: Locator;
+    readonly customerGroupCheckbox: Locator;
+    readonly customerGroupCheckbox2: Locator;
+    readonly statusToggle: Locator;
+
+    // Save
+    readonly saveCartRuleButton: Locator;
+    readonly successMessage: Locator;
+    readonly addToCartSuccessMessage: Locator;
+
+    // Cart Section
+    readonly applyCouponButton: Locator;
+    readonly couponInput: Locator;
+    readonly applyButton: Locator;
+    readonly couponSuccessMessage: Locator;
+    readonly deleteIcon: Locator;
+    readonly agree: Locator;
+    readonly selectRowBtn: Locator;
+    readonly selectAction: Locator;
+    readonly selectDelete: Locator;
+    readonly productDeleteSuccess: Locator;
+    readonly incrementQtyButton: Locator;
+    readonly updateCart: Locator;
+    readonly selectCodintionOption: Locator;
+    readonly cartUpdateSuccess: Locator;
+
+    // Catalog Rule
+    readonly catalogRuleButton: Locator;
+    readonly createCatalogRuleButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -356,30 +415,160 @@ export class WebLocators {
             .locator("#app")
             .getByText("Invoice created successfully");
 
-                this.profileButton = page.locator(
-            'span[role="button"][aria-label="Profile"]'
+        this.profileButton = page.locator(
+            'span[role="button"][aria-label="Profile"]',
         );
         this.email = page.locator('input[name="email"]');
         this.password = page.locator('input[name="password"]');
         this.signInButton = page.locator('button:has-text("Sign In")');
-        this.editIcon = page.locator('a.icon-edit');
+        this.editIcon = page.locator("a.icon-edit");
         this.checkBox = page.locator('input[name^="isChecked["]');
         this.rmaQTY = page.locator('input[name^="rma_qty"]');
         this.resolution = page.locator('select[name^="resolution_type"]');
         this.reason = page.locator('select[name="rma_reason_id"]');
         this.orderStatus = page.locator('select[name="package_condition"]');
         this.info = page.locator('textarea[name="information"]');
-       this.agreement = page.locator('label:has(input#agreement)');
+        this.agreement = page.locator("label:has(input#agreement)");
         this.submit = page.locator('button:has-text("Submit request")');
-        this.rmaIcon = page.locator('span.rma-icon-shop');
+        this.rmaIcon = page.locator("span.rma-icon-shop");
         this.reqRMA = page.locator('text=" New RMA Request "');
         this.rmaLink = page.locator('text="RMA"');
-        this.view = page.locator('span.icon-view');
+        this.view = page.locator("span.icon-view");
         this.status = page.locator('select[name="rma_status"]');
         this.save = page.locator('button:has-text("Save")');
-        this.verify = page.locator('span.label-active');
-        this.successRMA= page.getByRole('paragraph').filter({ hasText: 'Request created successfully.' })
-        this.invalidRMAMessage=page.getByText("The RMA Qty field must be 1 or less");
+        this.verify = page.locator("span.label-active");
+        this.successRMA = page
+            .getByRole("paragraph")
+            .filter({ hasText: "Request created successfully." });
+        this.invalidRMAMessage = page.getByText(
+            "The RMA Qty field must be 1 or less",
+        );
+
+        this.emailInput = page.getByPlaceholder("Email Address");
+        this.passwordInput = page.getByPlaceholder("Password");
+
+        this.createCartRuleButton = page.locator(
+            'a.primary-button:has-text("Create Cart Rule")',
+        );
+
+        this.cartRuleForm = page.locator(
+            'form[action*="/promotions/cart-rules/create"]',
+        );
+
+        // General
+        this.nameInput = page.locator("#name");
+        this.descriptionInput = page.locator("#description");
+        this.couponTypeSelect = page.locator("#coupon_type");
+        this.autoGenerationSelect = page.locator("#use_auto_generation");
+
+        this.couponCodeInput = page.getByRole("textbox", {
+            name: "Coupon Code",
+        });
+
+        this.usesPerCouponInput = page.getByRole("textbox", {
+            name: "Uses Per Coupon",
+        });
+
+        this.usesPerCustomerInput = page.getByRole("textbox", {
+            name: "Uses Per Customer",
+        });
+
+        // Conditions
+        this.addConditionButton = page.locator(
+            'div.secondary-button:has-text("Add Condition")',
+        );
+
+        this.conditionAttributeSelect = page.locator(
+            'select[id="conditions\\[0\\]\\[attribute\\]"]',
+        );
+
+        this.conditionOperatorSelect = page.locator(
+            'select[name="conditions\\[0\\]\\[operator\\]"]',
+        );
+
+        this.conditionValueInput = page.locator(
+            'input[name="conditions\\[0\\]\\[value\\]"]',
+        );
+
+        // Actions
+        this.actionTypeSelect = page.locator("#action_type");
+        this.discountAmountInput = page.locator(
+            'input[name="discount_amount"]',
+        );
+
+        // Settings
+        this.sortOrderInput = page.locator('input[name="sort_order"]');
+        this.channelCheckbox = page.locator('label[for="channel__1"]');
+        this.customerGroupCheckbox = page.locator("#customer_group__1");
+        this.customerGroupCheckbox2 = page.locator(
+            'label[for="customer_group__2"]',
+        );
+        this.statusToggle = page.locator('label[for="status"]');
+
+        // Save
+        this.saveCartRuleButton = page.locator(
+            'button.primary-button:has-text("Save Cart Rule")',
+        );
+
+        this.successMessage = page.locator("#app");
+
+        this.addToCartSuccessMessage = page
+            .getByText("Item Added Successfully")
+            .first();
+
+        // Cart
+        this.applyCouponButton = page.getByRole("button", {
+            name: "Apply Coupon",
+        });
+
+        this.couponInput = page.locator('input[name="code"]:visible');
+
+        this.applyButton = page.getByRole("button", {
+            name: "Apply",
+            exact: true,
+        });
+
+        this.couponSuccessMessage = page
+            .getByRole("paragraph")
+            .filter({ hasText: "Coupon code applied" });
+
+        this.deleteIcon = page.locator(".icon-delete");
+
+        this.agree = page.getByRole("button", {
+            name: "Agree",
+            exact: true,
+        });
+
+        this.selectRowBtn = page.locator(".icon-uncheckbox");
+
+        this.selectAction = page.getByRole("button", { name: "Select Action" });
+
+        this.selectDelete = page.getByRole("link", { name: "Delete" });
+
+        this.productDeleteSuccess = page.getByText(
+            "Selected Products Deleted Successfully",
+        );
+
+        this.incrementQtyButton = page.locator(".icon-plus");
+
+        this.updateCart = page.getByRole("button", { name: "Update Cart" });
+
+        this.selectCodintionOption = page.locator(
+            'select[name="conditions[0][value]"]',
+        );
+
+        this.cartUpdateSuccess = page.getByText(
+            "Quantity updated successfully",
+        );
+
+        // Catalog Rule
+        this.createCatalogRuleButton = page.locator(
+            'a.primary-button:has-text("Create Catalog Rule")',
+        );
+
+        this.catalogRuleButton = page.locator(
+            'button.primary-button:has-text("Save Catalog Rule")',
+        );
     }
 
     /**
