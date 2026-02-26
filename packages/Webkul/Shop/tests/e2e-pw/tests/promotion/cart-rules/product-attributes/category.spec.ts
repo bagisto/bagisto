@@ -1,4 +1,5 @@
 import { test } from "../../../../setup";
+import { expect } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/product";
 import { CreateRules } from "../../../../pages/rules";
 
@@ -36,9 +37,34 @@ test.describe("cart rules", () => {
             await createRules.addCondition({
                 attribute: "product|category_ids",
                 operator: "{}",
-                checkboxSelect: "Men",
+                checkboxSelect: "Mens",
             });
             await createRules.saveCartRule();
+            await page.goto("admin/catalog/products");
+            await page
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await page.waitForLoadState("networkidle");
+            const mensLabel = page.locator("label", {
+                hasText: /^Mens$/,
+            });
+            const mensCheckbox = mensLabel.locator('input[type="checkbox"]');
+            await expect(mensCheckbox).toBeAttached();
+
+            if (!(await mensCheckbox.isChecked())) {
+                await mensLabel.click();
+            }
+            await expect(mensCheckbox).toBeChecked();
+
+            await page
+                .locator('button:has-text("Save Product")')
+                .first()
+                .click();
+            await expect(
+                page.getByText("Product updated successfully").first(),
+            ).toBeVisible();
+
             await createRules.applyCoupon();
         });
 
@@ -51,9 +77,34 @@ test.describe("cart rules", () => {
             await createRules.addCondition({
                 attribute: "product|category_ids",
                 operator: "!{}",
-                checkboxSelect: "Winter Wear",
+                checkboxSelect: "Mens",
             });
             await createRules.saveCartRule();
+            await page.goto("admin/catalog/products");
+            await page
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await page.waitForLoadState("networkidle");
+            const mensLabel = page.locator("label", {
+                hasText: /^Womens$/,
+            });
+            const mensCheckbox = mensLabel.locator('input[type="checkbox"]');
+            await expect(mensCheckbox).toBeAttached();
+
+            if (!(await mensCheckbox.isChecked())) {
+                await mensLabel.click();
+            }
+            await expect(mensCheckbox).toBeChecked();
+
+            await page
+                .locator('button:has-text("Save Product")')
+                .first()
+                .click();
+            await expect(
+                page.getByText("Product updated successfully").first(),
+            ).toBeVisible();
+
             await createRules.applyCoupon();
         });
     });

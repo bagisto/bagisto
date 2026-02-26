@@ -25,7 +25,7 @@ test.afterEach(
     },
 );
 
-test.describe("cart rules", () => {
+test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         test("should apply coupon when size condition is -> is equal to", async ({
             page,
