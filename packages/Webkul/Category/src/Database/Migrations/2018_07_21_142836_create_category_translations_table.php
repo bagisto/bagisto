@@ -25,7 +25,6 @@ return new class extends Migration
             $table->text('meta_keywords')->nullable();
             $table->integer('locale_id')->nullable()->unsigned();
             $table->string('locale');
-
             $table->unique(['category_id', 'slug', 'locale']);
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('locale_id')->references('id')->on('locales')->onDelete('cascade');

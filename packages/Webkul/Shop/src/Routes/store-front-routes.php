@@ -24,15 +24,18 @@ Route::fallback(ProductsCategoriesProxyController::class.'@index')
     ->name('shop.product_or_category.index')
     ->middleware('cache.response');
 
-/**
- * Store front home.
- */
+//Home page Routes 
 Route::get('/', [HomeController::class, 'index'])
-    ->name('shop.home.index')
-    ->middleware('cache.response');
+    ->name('shop.home.index');
 
-Route::get('contact-us', [HomeController::class, 'contactUs'])
-    ->name('shop.home.contact_us')
+Route::get('/services/{slug}', [HomeController::class, 'services'])
+    ->name('shop.home.services');
+
+Route::get('about', [HomeController::class, 'about'])
+    ->name('shop.about.index');
+
+Route::get('contact', [HomeController::class, 'contactUs'])
+    ->name('shop.home.contact')
     ->middleware('cache.response');
 
 Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail'])

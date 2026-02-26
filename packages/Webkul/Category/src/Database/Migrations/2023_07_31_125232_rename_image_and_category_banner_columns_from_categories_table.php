@@ -14,7 +14,6 @@ return new class extends Migration
         if (Schema::hasColumns('categories', ['image', 'category_banner'])) {
             Schema::dropColumns('categories', ['image', 'category_banner']);
         }
-
         Schema::table('categories', function (Blueprint $table) {
             $table->text('logo_path')->nullable()->after('position');
             $table->text('banner_path')->nullable()->after('additional');
