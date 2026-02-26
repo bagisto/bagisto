@@ -3,7 +3,6 @@
 namespace Webkul\MagicAI;
 
 use Laravel\Ai\Image;
-use Laravel\Ai\PendingResponses\PendingImageGeneration;
 
 use function Laravel\Ai\agent;
 
@@ -131,10 +130,31 @@ class MagicAI
     {
         $numberOfImages = max((int) ($options['n'] ?? 1), 1);
 
+        $size = $options['size'] ?? '1024x1024';
+        $quality = match ($options['quality'] ?? null) {
+            'hd' => 'high',
+            'standard' => 'medium',
+            default => null,
+        };
+
         $images = [];
 
         for ($i = 1; $i <= $numberOfImages; $i++) {
-            $generatedImage = $this->buildImageRequest($options)->generate(provider: $this->resolveProvider());
+            $request = Image::of($this->prompt);
+
+            if ($size === '1792x1024') {
+                $request->landscape();
+            } elseif ($size === '1024x1792') {
+                $request->portrait();
+            } else {
+                $request->square();
+            }
+
+            if ($quality) {
+                $request->quality($quality);
+            }
+
+            $generatedImage = $request->generate(provider: $this->resolveProvider());
 
             $images[] = [
                 'url' => 'data:'.$generatedImage->firstImage()->mime.';base64,'.$generatedImage->firstImage()->image,
@@ -142,36 +162,6 @@ class MagicAI
         }
 
         return $images;
-    }
-
-    /**
-     * Build image request.
-     */
-    protected function buildImageRequest(array $options): PendingImageGeneration
-    {
-        $request = Image::of($this->prompt);
-
-        $size = $options['size'] ?? '1024x1024';
-
-        if ($size === '1792x1024') {
-            $request->landscape();
-        } elseif ($size === '1024x1792') {
-            $request->portrait();
-        } else {
-            $request->square();
-        }
-
-        $quality = match ($options['quality'] ?? null) {
-            'hd' => 'high',
-            'standard' => 'medium',
-            default => null,
-        };
-
-        if ($quality) {
-            $request->quality($quality);
-        }
-
-        return $request;
     }
 
     /**
