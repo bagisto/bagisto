@@ -1605,7 +1605,6 @@ return [
                 'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-enable-info',
                 'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-enable',
                 'type' => 'boolean',
-                'channel_based' => true,
                 'default_value' => false,
             ], [
                 'name' => 'smtp_host',
@@ -1613,7 +1612,6 @@ return [
                 'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-host',
                 'type' => 'text',
                 'validation' => 'required',
-                'channel_based' => true,
                 'default_value' => config('mail.mailers.smtp.host'),
             ], [
                 'name' => 'smtp_port',
@@ -1621,25 +1619,21 @@ return [
                 'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-port',
                 'type' => 'text',
                 'validation' => 'required',
-                'channel_based' => true,
             ], [
                 'name' => 'smtp_username',
                 'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-username-info',
                 'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-username',
                 'type' => 'text',
-                'channel_based' => true,
             ], [
                 'name' => 'smtp_password',
                 'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-password-info',
                 'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-password',
                 'type' => 'password',
-                'channel_based' => true,
             ], [
                 'name' => 'smtp_encryption',
                 'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-encryption-info',
                 'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-encryption',
                 'type' => 'select',
-                'channel_based' => true,
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.email.smtp-settings.tls',
