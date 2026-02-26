@@ -1,25 +1,54 @@
-<laravel-boost-guidelines>
+<bagisto-guidelines>
 === foundation rules ===
 
-# Laravel Boost Guidelines
+# Bagisto Guidelines
 
-The Laravel Boost guidelines are specifically curated by Laravel maintainers for this application. These guidelines should be followed closely to ensure the best experience when building Laravel applications.
+Bagisto is a Laravel-based e-commerce platform. These guidelines are specifically curated for developing with Bagisto and its package-based architecture.
 
 ## Foundational Context
 
-This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
+This application is a **Bagisto** e-commerce platform built on Laravel 11. You must be familiar with both Laravel and Bagisto's modular package architecture.
 
-- php - 8.3.28
-- laravel/framework (LARAVEL) - v11
-- laravel/octane (OCTANE) - v2
-- laravel/prompts (PROMPTS) - v0
-- laravel/sanctum (SANCTUM) - v4
-- laravel/socialite (SOCIALITE) - v5
-- laravel/boost (BOOST) - v2
-- laravel/mcp (MCP) - v0
-- laravel/pint (PINT) - v1
-- pestphp/pest (PEST) - v3
-- phpunit/phpunit (PHPUNIT) - v11
+### Technology Stack
+
+- **PHP**: 8.3.28
+- **Laravel**: v11
+- **Vue.js**: For admin panel interactivity
+- **Tailwind CSS**: For styling
+- **Laravel Octane**: v2
+- **Laravel Sanctum**: v4
+- **Laravel Socialite**: v5
+- **Laravel Boost**: v2
+- **Laravel MCP**: v0
+- **Laravel Pint**: v1
+- **Pest**: v3
+- **PHPUnit**: v11
+
+### Bagisto Core Packages
+
+Bagisto uses a modular package structure in `packages/Webkul/`:
+
+| Package | Purpose |
+|---------|---------|
+| **Admin** | Admin panel functionality |
+| **Shop** | Customer storefront |
+| **Core** | Common utilities and helpers |
+| **Product** | Product management |
+| **Category** | Category management |
+| **Checkout** | Cart and checkout process |
+| **Payment** | Payment methods (CashOnDelivery, MoneyTransfer) |
+| **Paypal** | PayPal integration |
+| **Shipping** | Shipping methods |
+| **Sales** | Order management |
+| **Customer** | Customer management |
+| **Attribute** | Product attributes |
+| **Inventory** | Stock management |
+| **CartRule** | Cart promotions |
+| **CatalogRule** | Catalog promotions |
+| **DataGrid** | Admin data tables |
+| **Tax** | Tax calculation |
+| **CMS** | Content management |
+| **Theme** | Theme management |
 
 ## Skills Activation
 
@@ -27,20 +56,84 @@ This project has domain-specific skills available. You MUST activate the relevan
 
 - `pest-testing` — Tests applications using the Pest 3 PHP framework. Activates when writing tests, creating unit or feature tests, adding assertions, testing Livewire components, architecture testing, debugging test failures, working with datasets or mocking; or when the user mentions test, spec, TDD, expects, assertion, coverage, or needs to verify functionality works.
 
+- `payment-method-development` — Payment gateway development in Bagisto. Activates when creating payment methods, integrating payment gateways like Stripe, PayPal, or any third-party payment processor; or when the user mentions payment, payment gateway, payment method, Stripe, PayPal, or needs to add a new payment option to the checkout.
+
+## Bagisto Architecture
+
+### Package Structure
+
+Every Bagisto package follows a standardized structure:
+
+```
+packages/Webkul/{PackageName}/
+├── src/
+│   ├── Config/
+│   │   ├── admin-menu.php
+│   │   └── system.php
+│   ├── Database/
+│   │   ├── Migrations/
+│   │   ├── Seeders/
+│   │   └── Factories/
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── Admin/
+│   │   │   └── Shop/
+│   │   ├── Middleware/
+│   │   └── Requests/
+│   ├── Models/
+│   │   └── {Package}Proxy.php
+│   ├── Repositories/
+│   │   └── {Package}Repository.php
+│   ├── Resources/
+│   │   ├── views/
+│   │   └── lang/
+│   ├── Providers/
+│   │   └── {Package}ServiceProvider.php
+│   └── manifest.php
+└── composer.json
+```
+
+### Repository Pattern
+
+Bagisto uses the Prettus L5 Repository pattern. Always use repositories for data access:
+
+```php
+// Correct way - use = app(ProductRepositoryInterface::class);
+$products = $repository repository
+$repository->all();
+
+# Avoid raw queries
+$products = Product::all(); # Less preferred
+```
+
+### Service Providers
+
+Service providers must:
+- Load routes from `Routes/admin-routes.php` and `Routes/shop-routes.php`
+- Load migrations automatically
+- Load translations from `Resources/lang`
+- Load views from `Resources/views`
+- Merge package configuration using `$this->mergeConfigFrom()`
+
 ## Conventions
 
-- You must follow all existing code conventions used in this application. When creating or editing a file, check sibling files for the correct structure, approach, and naming.
+- Always follow existing code conventions used in this application.
 - Use descriptive names for variables and methods. For example, `isRegisteredForDiscounts`, not `discount()`.
-- Check for existing components to reuse before writing a new one.
+- Check for existing components to reuse before writing new one.
+- Use PHPDoc blocks with proper punctuation for all classes and methods.
+- Follow the package structure when creating new packages.
+- Use repositories for database operations.
 
 ## Verification Scripts
 
-- Do not create verification scripts or tinker when tests cover that functionality and prove they work. Unit and feature tests are more important.
+- Do not create verification scripts or tinker when tests cover that functionality and prove they work.
+- Unit and feature tests are more important than manual verification.
 
 ## Application Structure & Architecture
 
 - Stick to existing directory structure; don't create new base folders without approval.
 - Do not change the application's dependencies without approval.
+- Custom packages should be placed in `packages/Webkul/`.
 
 ## Frontend Bundling
 
@@ -58,7 +151,7 @@ This project has domain-specific skills available. You MUST activate the relevan
 
 # Laravel Boost
 
-- Laravel Boost is an MCP server that comes with powerful tools designed specifically for this application. Use them.
+Laravel Boost is an MCP server that comes with powerful tools designed specifically for this application. Use them.
 
 ## Artisan
 
@@ -81,10 +174,11 @@ This project has domain-specific skills available. You MUST activate the relevan
 
 ## Searching Documentation (Critically Important)
 
-- Boost comes with a powerful `search-docs` tool you should use before trying other approaches when working with Laravel or Laravel ecosystem packages. This tool automatically passes a list of installed packages and their versions to the remote Boost API, so it returns only version-specific documentation for the user's circumstance. You should pass an array of packages to filter on if you know you need docs for particular packages.
+- Boost comes with a powerful `search-docs` tool you should use before trying other approaches when working with Laravel or Laravel ecosystem packages.
+- This tool automatically passes a list of installed packages and their versions to the remote Boost API, so it returns only version-specific documentation for your circumstance.
 - Search the documentation before making code changes to ensure we are taking the correct approach.
-- Use multiple, broad, simple, topic-based queries at once. For example: `['rate limiting', 'routing rate limiting', 'routing']`. The most relevant results will be returned first.
-- Do not add package names to queries; package information is already shared. For example, use `test resource table`, not `filament 4 test resource table`.
+- Use multiple, broad, simple, topic-based queries at once. For example: `['rate limiting', 'routing rate limiting', 'routing']`.
+- Do not add package names to queries; package information is already shared.
 
 ### Available Search Syntax
 
@@ -111,7 +205,6 @@ This project has domain-specific skills available. You MUST activate the relevan
 - Always use explicit return type declarations for methods and functions.
 - Use appropriate PHP type hints for method parameters.
 
-<!-- Explicit Return Types and Method Params -->
 ```php
 protected function isAccessible(User $user, ?string $path = null): bool
 {
@@ -130,6 +223,7 @@ protected function isAccessible(User $user, ?string $path = null): bool
 ## PHPDoc Blocks
 
 - Add useful array shape type definitions when appropriate.
+- Always use proper punctuation at the end of descriptions.
 
 === tests rules ===
 
@@ -144,13 +238,14 @@ protected function isAccessible(User $user, ?string $path = null): bool
 
 - Use `php artisan make:` commands to create new files (i.e. migrations, controllers, models, etc.). You can list available Artisan commands using the `list-artisan-commands` tool.
 - If you're creating a generic PHP class, use `php artisan make:class`.
-- Pass `--no-interaction` to all Artisan commands to ensure they work without user input. You should also pass the correct `--options` to ensure correct behavior.
+- Pass `--no-interaction` to all Artisan commands to ensure they work without user input.
 
 ## Database
 
-- Always use proper Eloquent relationship methods with return type hints. Prefer relationship methods over raw queries or manual joins.
+- Always use proper Eloquent relationship methods with return type hints.
 - Use Eloquent models and relationships before suggesting raw database queries.
-- Avoid `DB::`; prefer `Model::query()`. Generate code that leverages Laravel's ORM capabilities rather than bypassing them.
+- Use Repository pattern for Bagisto packages.
+- Avoid `DB::`; prefer `Model::query()`. Generate code that leverages Laravel's ORM capabilities.
 - Generate code that prevents N+1 query problems by using eager loading.
 - Use Laravel's query builder for very complex database operations.
 
@@ -164,7 +259,7 @@ protected function isAccessible(User $user, ?string $path = null): bool
 
 ## Controllers & Validation
 
-- Always create Form Request classes for validation rather than inline validation in controllers. Include both validation rules and custom error messages.
+- Always create Form Request classes for validation rather than inline validation in controllers.
 - Check sibling Form Requests to see if the application uses array or string based validation rules.
 
 ## Authentication & Authorization
@@ -181,12 +276,13 @@ protected function isAccessible(User $user, ?string $path = null): bool
 
 ## Configuration
 
-- Use environment variables only in configuration files - never use the `env()` function directly outside of config files. Always use `config('app.name')`, not `env('APP_NAME')`.
+- Use environment variables only in configuration files - never use the `env()` function directly outside of config files.
+- Always use `config('app.name')`, not `env('APP_NAME')`.
 
 ## Testing
 
 - When creating models for tests, use the factories for the models. Check if the factory has custom states that can be used before manually setting up the model.
-- Faker: Use methods such as `$this->faker->word()` or `fake()->randomDigit()`. Follow existing conventions whether to use `$this->faker` or `fake()`.
+- Faker: Use methods such as `$this->faker->word()` or `fake()->randomDigit()`.
 - When creating tests, make use of `php artisan make:test [options] {name}` to create a feature test, and pass `--unit` to create a unit test. Most tests should be feature tests.
 
 ## Vite Error
@@ -212,15 +308,15 @@ protected function isAccessible(User $user, ?string $path = null): bool
 ## Database
 
 - When modifying a column, the migration must include all of the attributes that were previously defined on the column. Otherwise, they will be dropped and lost.
-- Laravel 11 allows limiting eagerly loaded records natively, without external packages: `$query->latest()->limit(10);`.
+- Laravel 11 allows limiting eagerly loaded records natively: `$query->latest()->limit(10);`.
 
 ### Models
 
-- Casts can and likely should be set in a `casts()` method on a model rather than the `$casts` property. Follow existing conventions from other models.
+- Casts can and likely should be set in a `casts()` method on a model rather than the `$casts` property.
 
 ## New Artisan Commands
 
-- List Artisan commands using Boost's MCP tool, if available. New commands available in Laravel 11:
+- List Artisan commands using Boost's MCP tool, if available:
     - `php artisan make:enum`
     - `php artisan make:class`
     - `php artisan make:interface`
@@ -245,25 +341,15 @@ protected function isAccessible(User $user, ?string $path = null): bool
 - Use the `database-query` tool when you only need to read from the database.
 - Use the `database-schema` tool to inspect table structure before writing migrations or models.
 
-## Reading Browser Logs With the `browser-logs` Tool
+## Reading Browser Logs
 
 - You can read browser logs, errors, and exceptions using the `browser-logs` tool from Boost.
 - Only recent browser logs will be useful - ignore old logs.
 
-## Searching Documentation (Critically Important)
+## Searching Documentation
 
-- Boost comes with a powerful `search-docs` tool you should use before trying other approaches when working with Laravel or Laravel ecosystem packages. This tool automatically passes a list of installed packages and their versions to the remote Boost API, so it returns only version-specific documentation for the user's circumstance. You should pass an array of packages to filter on if you know you need docs for particular packages.
-- Search the documentation before making code changes to ensure we are taking the correct approach.
-- Use multiple, broad, simple, topic-based queries at once. For example: `['rate limiting', 'routing rate limiting', 'routing']`. The most relevant results will be returned first.
-- Do not add package names to queries; package information is already shared. For example, use `test resource table`, not `filament 4 test resource table`.
-
-### Available Search Syntax
-
-1. Simple Word Searches with auto-stemming - query=authentication - finds 'authenticate' and 'auth'.
-2. Multiple Words (AND Logic) - query=rate limit - finds knowledge containing both "rate" AND "limit".
-3. Quoted Phrases (Exact Position) - query="infinite scroll" - words must be adjacent and in that order.
-4. Mixed Queries - query=middleware "rate limit" - "middleware" AND exact phrase "rate limit".
-5. Multiple Queries - queries=["authentication", "middleware"] - ANY of these terms.
+- Use `search-docs` tool before making code changes to ensure we are taking the correct approach.
+- Use multiple, broad, simple, topic-based queries at once.
 
 === pint/core rules ===
 
@@ -282,4 +368,17 @@ protected function isAccessible(User $user, ?string $path = null): bool
 - CRITICAL: ALWAYS use `search-docs` tool for version-specific Pest documentation and updated code examples.
 - IMPORTANT: Activate `pest-testing` every time you're working with a Pest or testing-related task.
 
-</laravel-boost-guidelines>
+=== payment-method-development rules ===
+
+# Payment Gateway Development
+
+- CRITICAL: ALWAYS use the payment-method-development skill when working with payment methods in Bagisto.
+- Payment methods in Bagisto are located in `packages/Webkul/Payment/src/Payment/` and `packages/Webkul/Paypal/src/Payment/`.
+- All payment methods extend `Webkul\Payment\Payment\Payment` abstract class.
+- Payment configuration is defined in `Config/payment-methods.php` files.
+- System configuration for admin panel is defined in `Config/system.php` files.
+- Service providers must merge payment method configuration using `$this->mergeConfigFrom()`.
+- Always follow the existing code patterns and PHPDoc conventions when creating payment methods.
+- For testing payment methods, refer to `packages/Webkul/Shop/tests/Feature/Checkout/CheckoutTest.php`.
+
+</bagisto-guidelines>
