@@ -8,6 +8,7 @@
 *.hot
 /stubs
 /data
+/storage
 /docker-compose-collection
 Homestead.json
 Homestead.yaml
