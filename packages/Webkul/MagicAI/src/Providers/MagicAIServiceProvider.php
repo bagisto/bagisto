@@ -12,11 +12,6 @@ class MagicAIServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(
-            dirname(__DIR__).'/Config/magic_ai.php',
-            'magic_ai'
-        );
-
         $this->app->singleton(MagicAI::class, function (): MagicAI {
             return new MagicAI;
         });

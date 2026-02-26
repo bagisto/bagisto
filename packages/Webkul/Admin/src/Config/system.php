@@ -319,6 +319,57 @@ return [
                 'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.enabled',
                 'type' => 'boolean',
             ], [
+                'name' => 'provider',
+                'title' => 'Provider',
+                'type' => 'select',
+                'channel_based' => true,
+                'default' => 'openai',
+                'options' => [
+                    [
+                        'title' => 'Anthropic',
+                        'value' => 'anthropic',
+                    ], [
+                        'title' => 'Azure OpenAI',
+                        'value' => 'azure',
+                    ], [
+                        'title' => 'Cohere',
+                        'value' => 'cohere',
+                    ], [
+                        'title' => 'DeepSeek',
+                        'value' => 'deepseek',
+                    ], [
+                        'title' => 'ElevenLabs',
+                        'value' => 'eleven',
+                    ], [
+                        'title' => 'Gemini',
+                        'value' => 'gemini',
+                    ], [
+                        'title' => 'Groq',
+                        'value' => 'groq',
+                    ], [
+                        'title' => 'Jina',
+                        'value' => 'jina',
+                    ], [
+                        'title' => 'Mistral',
+                        'value' => 'mistral',
+                    ], [
+                        'title' => 'Ollama',
+                        'value' => 'ollama',
+                    ], [
+                        'title' => 'OpenAI',
+                        'value' => 'openai',
+                    ], [
+                        'title' => 'OpenRouter',
+                        'value' => 'openrouter',
+                    ], [
+                        'title' => 'VoyageAI',
+                        'value' => 'voyageai',
+                    ], [
+                        'title' => 'xAI',
+                        'value' => 'xai',
+                    ],
+                ],
+            ], [
                 'name' => 'product_short_description_prompt',
                 'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-short-description-prompt',
                 'type' => 'textarea',
@@ -351,6 +402,57 @@ return [
                 'title' => 'admin::app.configuration.index.general.magic-ai.image-generation.enabled',
                 'type' => 'boolean',
                 'channel_based' => true,
+            ], [
+                'name' => 'provider',
+                'title' => 'Provider',
+                'type' => 'select',
+                'channel_based' => true,
+                'default' => 'gemini',
+                'options' => [
+                    [
+                        'title' => 'Anthropic',
+                        'value' => 'anthropic',
+                    ], [
+                        'title' => 'Azure OpenAI',
+                        'value' => 'azure',
+                    ], [
+                        'title' => 'Cohere',
+                        'value' => 'cohere',
+                    ], [
+                        'title' => 'DeepSeek',
+                        'value' => 'deepseek',
+                    ], [
+                        'title' => 'ElevenLabs',
+                        'value' => 'eleven',
+                    ], [
+                        'title' => 'Gemini',
+                        'value' => 'gemini',
+                    ], [
+                        'title' => 'Groq',
+                        'value' => 'groq',
+                    ], [
+                        'title' => 'Jina',
+                        'value' => 'jina',
+                    ], [
+                        'title' => 'Mistral',
+                        'value' => 'mistral',
+                    ], [
+                        'title' => 'Ollama',
+                        'value' => 'ollama',
+                    ], [
+                        'title' => 'OpenAI',
+                        'value' => 'openai',
+                    ], [
+                        'title' => 'OpenRouter',
+                        'value' => 'openrouter',
+                    ], [
+                        'title' => 'VoyageAI',
+                        'value' => 'voyageai',
+                    ], [
+                        'title' => 'xAI',
+                        'value' => 'xai',
+                    ],
+                ],
             ],
         ],
     ], [

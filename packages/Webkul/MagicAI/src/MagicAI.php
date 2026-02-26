@@ -2,10 +2,8 @@
 
 namespace Webkul\MagicAI;
 
-use Laravel\Ai\Ai;
 use Laravel\Ai\Image;
 use Laravel\Ai\PendingResponses\PendingImageGeneration;
-use RuntimeException;
 
 use function Laravel\Ai\agent;
 
@@ -15,6 +13,11 @@ class MagicAI
      * LLM model.
      */
     protected string $model;
+
+    /**
+     * LLM provider.
+     */
+    protected ?string $provider = null;
 
     /**
      * LLM agent.
@@ -47,6 +50,16 @@ class MagicAI
     public function setModel(string $model): self
     {
         $this->model = $model;
+
+        return $this;
+    }
+
+    /**
+     * Set LLM provider.
+     */
+    public function setProvider(?string $provider): self
+    {
+        $this->provider = $provider;
 
         return $this;
     }
@@ -106,17 +119,7 @@ class MagicAI
      */
     public function ask(): string
     {
-        $this->ensureAiSdkIsInstalled();
-
-        $provider = $this->resolveProvider();
-
-        $this->configureProviderCredentials($provider);
-
-        $response = agent()->prompt(
-            $this->prompt,
-            provider: $provider,
-            model: $this->model
-        );
+        $response = agent()->prompt($this->prompt, provider: $this->resolveProvider());
 
         return trim($response->text);
     }
@@ -126,108 +129,19 @@ class MagicAI
      */
     public function images(array $options): array
     {
-        $this->ensureAiSdkIsInstalled();
-
-        $provider = $this->resolveProvider();
-
-        $this->configureProviderCredentials($provider);
-
         $numberOfImages = max((int) ($options['n'] ?? 1), 1);
 
         $images = [];
 
         for ($i = 1; $i <= $numberOfImages; $i++) {
-            $generatedImage = $this->buildImageRequest($options)->generate(
-                provider: $provider,
-                model: $this->model
-            );
+            $generatedImage = $this->buildImageRequest($options)->generate(provider: $this->resolveProvider());
 
             $images[] = [
                 'url' => 'data:'.$generatedImage->firstImage()->mime.';base64,'.$generatedImage->firstImage()->image,
             ];
-
         }
 
         return $images;
-    }
-
-    /**
-     * Resolve provider for selected model.
-     */
-    protected function resolveProvider(): ?string
-    {
-        $configuredProvider = config('magic_ai.model_provider_map', [])[$this->model] ?? null;
-
-        if ($configuredProvider) {
-            return $configuredProvider;
-        }
-
-        foreach (config('magic_ai.model_provider_prefix_map', []) as $provider => $prefixes) {
-            foreach ($prefixes as $prefix) {
-                if (str_starts_with($this->model, $prefix)) {
-                    return $provider;
-                }
-            }
-        }
-
-        if (str_contains($this->model, ':') || str_contains($this->model, '.')) {
-            return 'ollama';
-        }
-
-        return config('ai.default');
-    }
-
-    /**
-     * Configure AI provider credentials from admin settings.
-     */
-    protected function configureProviderCredentials(?string $provider): void
-    {
-        $apiKey = core()->getConfigData('general.magic_ai.settings.api_key') ?: null;
-        $organization = core()->getConfigData('general.magic_ai.settings.organization');
-        $apiDomain = core()->getConfigData('general.magic_ai.settings.api_domain');
-
-        $config = [
-            'ai.default' => $provider ?: config('ai.default'),
-            'ai.providers.anthropic.key' => config('ai.providers.anthropic.key'),
-            'ai.providers.cohere.key' => config('ai.providers.cohere.key'),
-            'ai.providers.eleven.key' => config('ai.providers.eleven.key'),
-            'ai.providers.gemini.key' => config('ai.providers.gemini.key'),
-            'ai.providers.groq.key' => config('ai.providers.groq.key'),
-            'ai.providers.jina.key' => config('ai.providers.jina.key'),
-            'ai.providers.mistral.key' => config('ai.providers.mistral.key'),
-            'ai.providers.ollama.key' => config('ai.providers.ollama.key'),
-            'ai.providers.openai.key' => config('ai.providers.openai.key'),
-            'ai.providers.voyageai.key' => config('ai.providers.voyageai.key'),
-            'ai.providers.xai.key' => config('ai.providers.xai.key'),
-            'ai.providers.ollama.url' => $apiDomain ?: config('ai.providers.ollama.url'),
-        ];
-
-        if ($provider && $apiKey) {
-            $keyPath = match ($provider) {
-                'anthropic' => 'ai.providers.anthropic.key',
-                'cohere' => 'ai.providers.cohere.key',
-                'eleven' => 'ai.providers.eleven.key',
-                'gemini' => 'ai.providers.gemini.key',
-                'groq' => 'ai.providers.groq.key',
-                'jina' => 'ai.providers.jina.key',
-                'mistral' => 'ai.providers.mistral.key',
-                'ollama' => 'ai.providers.ollama.key',
-                'openai' => 'ai.providers.openai.key',
-                'voyageai' => 'ai.providers.voyageai.key',
-                'xai' => 'ai.providers.xai.key',
-                default => null,
-            };
-
-            if ($keyPath) {
-                $config[$keyPath] = $apiKey;
-            }
-        }
-
-        if ($organization && $provider === 'openai') {
-            $config['ai.providers.openai.organization'] = $organization;
-        }
-
-        config($config);
     }
 
     /**
@@ -261,12 +175,16 @@ class MagicAI
     }
 
     /**
-     * Ensure Laravel AI SDK is available.
+     * Resolve provider to an SDK configured provider key.
      */
-    protected function ensureAiSdkIsInstalled(): void
+    protected function resolveProvider(): ?string
     {
-        if (! class_exists(Ai::class) || ! class_exists(Image::class) || ! function_exists('Laravel\\Ai\\agent')) {
-            throw new RuntimeException('Laravel AI SDK is not installed. Please run: composer require laravel/ai');
+        if (! $this->provider) {
+            return null;
         }
+
+        return array_key_exists($this->provider, config('ai.providers', []))
+            ? $this->provider
+            : null;
     }
 }

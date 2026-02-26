@@ -174,28 +174,6 @@
 
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
-                                                @lang('admin::app.components.media.images.ai-generation.model')
-                                            </x-admin::form.control-group.label>
-
-                                            <x-admin::form.control-group.control
-                                                type="select"
-                                                name="model"
-                                                rules="required"
-                                                v-model="ai.model"
-                                                :label="trans('admin::app.components.media.images.ai-generation.model')"
-                                            >
-                                                <option value="gpt-image-1.5">OpenAI - gpt-image-1.5</option>
-                                                <option value="gemini-3-pro-image-preview">Gemini - gemini-3-pro-image-preview</option>
-                                                <option value="grok-imagine-image">xAI - grok-imagine-image</option>
-                                                <option value="dall-e-2">OpenAI - dall-e-2</option>
-                                                <option value="dall-e-3">OpenAI - dall-e-3</option>
-                                            </x-admin::form.control-group.control>
-
-                                            <x-admin::form.control-group.error control-name="model" />
-                                        </x-admin::form.control-group>
-
-                                        <x-admin::form.control-group>
-                                            <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.components.media.images.ai-generation.number-of-images')
                                             </x-admin::form.control-group.label>
 
@@ -463,8 +441,6 @@
 
                         prompt: null,
 
-                        model: 'gpt-image-1.5',
-
                         n: 1,
 
                         size: '1024x1024',
@@ -573,8 +549,6 @@
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
 
                         prompt: null,
-
-                        model: 'gpt-image-1.5',
 
                         n: 1,
 

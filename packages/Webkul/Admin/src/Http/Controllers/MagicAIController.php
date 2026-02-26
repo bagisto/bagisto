@@ -13,12 +13,11 @@ class MagicAIController extends Controller
     public function content(): JsonResponse
     {
         $this->validate(request(), [
-            'model' => 'required',
             'prompt' => 'required',
         ]);
 
         try {
-            $response = MagicAI::setModel(request()->input('model'))
+            $response = MagicAI::setProvider(core()->getConfigData('general.magic_ai.content_generation.provider'))
                 ->setPrompt(request()->input('prompt'))
                 ->ask();
 
@@ -39,7 +38,6 @@ class MagicAIController extends Controller
     {
         $this->validate(request(), [
             'prompt' => 'required',
-            'model' => 'required|in:'.implode(',', config('magic_ai.image_models', [])),
             'n' => 'nullable|integer|min:1|max:10',
             'size' => 'required|in:1024x1024,1024x1792,1792x1024',
             'quality' => 'nullable|in:standard,hd',
@@ -52,7 +50,7 @@ class MagicAIController extends Controller
                 'quality',
             ]);
 
-            $images = MagicAI::setModel(request()->input('model'))
+            $images = MagicAI::setProvider(core()->getConfigData('general.magic_ai.image_generation.provider'))
                 ->setPrompt(request()->input('prompt'))
                 ->images($options);
 
