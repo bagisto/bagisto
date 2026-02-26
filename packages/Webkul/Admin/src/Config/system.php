@@ -371,71 +371,62 @@ return [
                 'channel_based' => true,
                 'options' => [
                     [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4-turbo',
-                        'value' => 'gpt-4-turbo',
+                        'title' => 'OpenAI - gpt-5.2',
+                        'value' => 'gpt-5.2',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o',
-                        'value' => 'gpt-4o',
+                        'title' => 'OpenAI - gpt-5-nano',
+                        'value' => 'gpt-5-nano',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
+                        'title' => 'OpenAI - gpt-5.2-pro',
+                        'value' => 'gpt-5.2-pro',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gemini-2-0-flash',
-                        'value' => 'gemini-2.0-flash',
+                        'title' => 'Anthropic - claude-sonnet-4-6',
+                        'value' => 'claude-sonnet-4-6',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.deepseek-r1-8b',
-                        'value' => 'deepseek-r1:8b',
+                        'title' => 'Anthropic - claude-haiku-4-5-20251001',
+                        'value' => 'claude-haiku-4-5-20251001',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama-groq',
-                        'value' => 'llama3-8b-8192',
+                        'title' => 'Anthropic - claude-opus-4-6',
+                        'value' => 'claude-opus-4-6',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-3b',
-                        'value' => 'llama3.2:3b',
+                        'title' => 'Gemini - gemini-3-flash-preview',
+                        'value' => 'gemini-3-flash-preview',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-1b',
-                        'value' => 'llama3.2:1b',
+                        'title' => 'Gemini - gemini-2.5-flash-lite',
+                        'value' => 'gemini-2.5-flash-lite',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-1-8b',
+                        'title' => 'Gemini - gemini-3-pro-preview',
+                        'value' => 'gemini-3-pro-preview',
+                    ], [
+                        'title' => 'xAI - grok-4-1-fast-reasoning',
+                        'value' => 'grok-4-1-fast-reasoning',
+                    ], [
+                        'title' => 'Groq - openai/gpt-oss-20b',
+                        'value' => 'openai/gpt-oss-20b',
+                    ], [
+                        'title' => 'Groq - openai/gpt-oss-120b',
+                        'value' => 'openai/gpt-oss-120b',
+                    ], [
+                        'title' => 'Mistral - mistral-small-latest',
+                        'value' => 'mistral-small-latest',
+                    ], [
+                        'title' => 'Mistral - mistral-medium-latest',
+                        'value' => 'mistral-medium-latest',
+                    ], [
+                        'title' => 'Mistral - mistral-large-latest',
+                        'value' => 'mistral-large-latest',
+                    ], [
+                        'title' => 'Ollama - llama3.1:8b',
                         'value' => 'llama3.1:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-8b',
-                        'value' => 'llama3:8b',
+                        'title' => 'Ollama - llama3.1:70b',
+                        'value' => 'llama3.1:70b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llava-7b',
-                        'value' => 'llava:7b',
+                        'title' => 'OpenAI - gpt-4o',
+                        'value' => 'gpt-4o',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-13b',
-                        'value' => 'vicuna:13b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-7b',
-                        'value' => 'vicuna:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-14b',
-                        'value' => 'qwen2.5:14b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-7b',
-                        'value' => 'qwen2.5:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-3b',
-                        'value' => 'qwen2.5:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-1-5b',
-                        'value' => 'qwen2.5:1.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-0-5b',
-                        'value' => 'qwen2.5:0.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.mistral-7b',
-                        'value' => 'mistral:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.starling-lm-7b',
-                        'value' => 'starling-lm:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.phi3-5',
-                        'value' => 'phi3.5',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.orca-mini',
-                        'value' => 'orca-mini',
+                        'title' => 'OpenAI - gpt-4o-mini',
+                        'value' => 'gpt-4o-mini',
                     ],
                 ],
             ],
@@ -458,71 +449,62 @@ return [
                 'channel_based' => true,
                 'options' => [
                     [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4-turbo',
-                        'value' => 'gpt-4-turbo',
+                        'title' => 'OpenAI - gpt-5.2',
+                        'value' => 'gpt-5.2',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o',
-                        'value' => 'gpt-4o',
+                        'title' => 'OpenAI - gpt-5-nano',
+                        'value' => 'gpt-5-nano',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
+                        'title' => 'OpenAI - gpt-5.2-pro',
+                        'value' => 'gpt-5.2-pro',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gemini-2-0-flash',
-                        'value' => 'gemini-2.0-flash',
+                        'title' => 'Anthropic - claude-sonnet-4-6',
+                        'value' => 'claude-sonnet-4-6',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.deepseek-r1-8b',
-                        'value' => 'deepseek-r1:8b',
+                        'title' => 'Anthropic - claude-haiku-4-5-20251001',
+                        'value' => 'claude-haiku-4-5-20251001',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama-groq',
-                        'value' => 'llama3.3',
+                        'title' => 'Anthropic - claude-opus-4-6',
+                        'value' => 'claude-opus-4-6',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-3b',
-                        'value' => 'llama3.2:3b',
+                        'title' => 'Gemini - gemini-3-flash-preview',
+                        'value' => 'gemini-3-flash-preview',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-1b',
-                        'value' => 'llama3.2:1b',
+                        'title' => 'Gemini - gemini-2.5-flash-lite',
+                        'value' => 'gemini-2.5-flash-lite',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-1-8b',
+                        'title' => 'Gemini - gemini-3-pro-preview',
+                        'value' => 'gemini-3-pro-preview',
+                    ], [
+                        'title' => 'xAI - grok-4-1-fast-reasoning',
+                        'value' => 'grok-4-1-fast-reasoning',
+                    ], [
+                        'title' => 'Groq - openai/gpt-oss-20b',
+                        'value' => 'openai/gpt-oss-20b',
+                    ], [
+                        'title' => 'Groq - openai/gpt-oss-120b',
+                        'value' => 'openai/gpt-oss-120b',
+                    ], [
+                        'title' => 'Mistral - mistral-small-latest',
+                        'value' => 'mistral-small-latest',
+                    ], [
+                        'title' => 'Mistral - mistral-medium-latest',
+                        'value' => 'mistral-medium-latest',
+                    ], [
+                        'title' => 'Mistral - mistral-large-latest',
+                        'value' => 'mistral-large-latest',
+                    ], [
+                        'title' => 'Ollama - llama3.1:8b',
                         'value' => 'llama3.1:8b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-8b',
-                        'value' => 'llama3:8b',
+                        'title' => 'Ollama - llama3.1:70b',
+                        'value' => 'llama3.1:70b',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava-7b',
-                        'value' => 'llava:7b',
+                        'title' => 'OpenAI - gpt-4o',
+                        'value' => 'gpt-4o',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-13b',
-                        'value' => 'vicuna:13b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-7b',
-                        'value' => 'vicuna:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-14b',
-                        'value' => 'qwen2.5:14b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-7b',
-                        'value' => 'qwen2.5:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-3b',
-                        'value' => 'qwen2.5:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-1-5b',
-                        'value' => 'qwen2.5:1.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-0-5b',
-                        'value' => 'qwen2.5:0.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral-7b',
-                        'value' => 'mistral:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm-7b',
-                        'value' => 'starling-lm:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi3-5',
-                        'value' => 'phi3.5',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.orca-mini',
-                        'value' => 'orca-mini',
+                        'title' => 'OpenAI - gpt-4o-mini',
+                        'value' => 'gpt-4o-mini',
                     ],
                 ],
             ], [

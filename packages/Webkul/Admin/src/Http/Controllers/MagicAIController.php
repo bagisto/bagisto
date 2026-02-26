@@ -37,17 +37,12 @@ class MagicAIController extends Controller
      */
     public function image(): JsonResponse
     {
-        config([
-            'openai.api_key' => core()->getConfigData('general.magic_ai.settings.api_key'),
-            'openai.organization' => core()->getConfigData('general.magic_ai.settings.organization'),
-        ]);
-
         $this->validate(request(), [
             'prompt' => 'required',
-            'model' => 'required|in:dall-e-2,dall-e-3',
-            'n' => 'required_if:model,dall-e-2|integer|min:1|max:10',
+            'model' => 'required|in:'.implode(',', config('magic_ai.image_models', [])),
+            'n' => 'nullable|integer|min:1|max:10',
             'size' => 'required|in:1024x1024,1024x1792,1792x1024',
-            'quality' => 'required_if:model,dall-e-3|in:standard,hd',
+            'quality' => 'nullable|in:standard,hd',
         ]);
 
         try {

@@ -2,10 +2,12 @@
 
 namespace Webkul\MagicAI;
 
-use Webkul\MagicAI\Services\Gemini;
-use Webkul\MagicAI\Services\GroqAI;
-use Webkul\MagicAI\Services\Ollama;
-use Webkul\MagicAI\Services\OpenAI;
+use Laravel\Ai\Ai;
+use Laravel\Ai\Image;
+use Laravel\Ai\PendingResponses\PendingImageGeneration;
+use RuntimeException;
+
+use function Laravel\Ai\agent;
 
 class MagicAI
 {
@@ -104,7 +106,19 @@ class MagicAI
      */
     public function ask(): string
     {
-        return $this->getModelInstance()->ask();
+        $this->ensureAiSdkIsInstalled();
+
+        $provider = $this->resolveProvider();
+
+        $this->configureProviderCredentials($provider);
+
+        $response = agent()->prompt(
+            $this->prompt,
+            provider: $provider,
+            model: $this->model
+        );
+
+        return trim($response->text);
     }
 
     /**
@@ -112,47 +126,147 @@ class MagicAI
      */
     public function images(array $options): array
     {
-        return $this->getModelInstance()->images($options);
+        $this->ensureAiSdkIsInstalled();
+
+        $provider = $this->resolveProvider();
+
+        $this->configureProviderCredentials($provider);
+
+        $numberOfImages = max((int) ($options['n'] ?? 1), 1);
+
+        $images = [];
+
+        for ($i = 1; $i <= $numberOfImages; $i++) {
+            $generatedImage = $this->buildImageRequest($options)->generate(
+                provider: $provider,
+                model: $this->model
+            );
+
+            $images[] = [
+                'url' => 'data:'.$generatedImage->firstImage()->mime.';base64,'.$generatedImage->firstImage()->image,
+            ];
+
+        }
+
+        return $images;
     }
 
     /**
-     * Get LLM model instance.
+     * Resolve provider for selected model.
      */
-    public function getModelInstance(): OpenAI|Ollama|Gemini|GroqAI
+    protected function resolveProvider(): ?string
     {
-        if (in_array($this->model, ['gpt-4-turbo', 'gpt-4o', 'gpt-4o-mini', 'dall-e-2', 'dall-e-3'])) {
-            return new OpenAI(
-                $this->model,
-                $this->prompt,
-                $this->temperature,
-                $this->stream,
-            );
+        $configuredProvider = config('magic_ai.model_provider_map', [])[$this->model] ?? null;
+
+        if ($configuredProvider) {
+            return $configuredProvider;
         }
 
-        if (in_array($this->model, ['llama3-8b-8192'])) {
-            return new GroqAI(
-                $this->model,
-                $this->prompt,
-                $this->temperature,
-                $this->stream,
-            );
+        foreach (config('magic_ai.model_provider_prefix_map', []) as $provider => $prefixes) {
+            foreach ($prefixes as $prefix) {
+                if (str_starts_with($this->model, $prefix)) {
+                    return $provider;
+                }
+            }
         }
 
-        if (in_array($this->model, ['gemini-2.0-flash'])) {
-            return new Gemini(
-                $this->model,
-                $this->prompt,
-                $this->stream,
-                $this->raw,
-            );
+        if (str_contains($this->model, ':') || str_contains($this->model, '.')) {
+            return 'ollama';
         }
 
-        return new Ollama(
-            $this->model,
-            $this->prompt,
-            $this->temperature,
-            $this->stream,
-            $this->raw,
-        );
+        return config('ai.default');
+    }
+
+    /**
+     * Configure AI provider credentials from admin settings.
+     */
+    protected function configureProviderCredentials(?string $provider): void
+    {
+        $apiKey = core()->getConfigData('general.magic_ai.settings.api_key') ?: null;
+        $organization = core()->getConfigData('general.magic_ai.settings.organization');
+        $apiDomain = core()->getConfigData('general.magic_ai.settings.api_domain');
+
+        $config = [
+            'ai.default' => $provider ?: config('ai.default'),
+            'ai.providers.anthropic.key' => config('ai.providers.anthropic.key'),
+            'ai.providers.cohere.key' => config('ai.providers.cohere.key'),
+            'ai.providers.eleven.key' => config('ai.providers.eleven.key'),
+            'ai.providers.gemini.key' => config('ai.providers.gemini.key'),
+            'ai.providers.groq.key' => config('ai.providers.groq.key'),
+            'ai.providers.jina.key' => config('ai.providers.jina.key'),
+            'ai.providers.mistral.key' => config('ai.providers.mistral.key'),
+            'ai.providers.ollama.key' => config('ai.providers.ollama.key'),
+            'ai.providers.openai.key' => config('ai.providers.openai.key'),
+            'ai.providers.voyageai.key' => config('ai.providers.voyageai.key'),
+            'ai.providers.xai.key' => config('ai.providers.xai.key'),
+            'ai.providers.ollama.url' => $apiDomain ?: config('ai.providers.ollama.url'),
+        ];
+
+        if ($provider && $apiKey) {
+            $keyPath = match ($provider) {
+                'anthropic' => 'ai.providers.anthropic.key',
+                'cohere' => 'ai.providers.cohere.key',
+                'eleven' => 'ai.providers.eleven.key',
+                'gemini' => 'ai.providers.gemini.key',
+                'groq' => 'ai.providers.groq.key',
+                'jina' => 'ai.providers.jina.key',
+                'mistral' => 'ai.providers.mistral.key',
+                'ollama' => 'ai.providers.ollama.key',
+                'openai' => 'ai.providers.openai.key',
+                'voyageai' => 'ai.providers.voyageai.key',
+                'xai' => 'ai.providers.xai.key',
+                default => null,
+            };
+
+            if ($keyPath) {
+                $config[$keyPath] = $apiKey;
+            }
+        }
+
+        if ($organization && $provider === 'openai') {
+            $config['ai.providers.openai.organization'] = $organization;
+        }
+
+        config($config);
+    }
+
+    /**
+     * Build image request.
+     */
+    protected function buildImageRequest(array $options): PendingImageGeneration
+    {
+        $request = Image::of($this->prompt);
+
+        $size = $options['size'] ?? '1024x1024';
+
+        if ($size === '1792x1024') {
+            $request->landscape();
+        } elseif ($size === '1024x1792') {
+            $request->portrait();
+        } else {
+            $request->square();
+        }
+
+        $quality = match ($options['quality'] ?? null) {
+            'hd' => 'high',
+            'standard' => 'medium',
+            default => null,
+        };
+
+        if ($quality) {
+            $request->quality($quality);
+        }
+
+        return $request;
+    }
+
+    /**
+     * Ensure Laravel AI SDK is available.
+     */
+    protected function ensureAiSdkIsInstalled(): void
+    {
+        if (! class_exists(Ai::class) || ! class_exists(Image::class) || ! function_exists('Laravel\\Ai\\agent')) {
+            throw new RuntimeException('Laravel AI SDK is not installed. Please run: composer require laravel/ai');
+        }
     }
 }
