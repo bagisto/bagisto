@@ -1,3 +1,7 @@
+.agents
+.agent*
+.claude
+.cursor
 .env
 .env.testing
 .idea
@@ -6,6 +10,13 @@
 .vscode
 .vagrant
 *.hot
+.agents/
+.claude/
+.cursor/
+.opencode/
+/agents/
+agents/
+boost.json
 /stubs
 /data
 /docker-compose-collection
@@ -14,6 +25,7 @@ Homestead.yaml
 /ignorables/*
 /node_modules
 npm-debug.log
+opencode.json
 package-lock.json
 /playwright-report
 /public/css
@@ -22,11 +34,10 @@ package-lock.json
 /public/storage
 /public/vendor
 /lang/vendor
+skills-lock.json
 /storage/*.key
 /storage/dcc-data/
 /test-results
 /vendor
 yarn.lock
 yarn-error.log
-/test-results
-/playwright-report
