@@ -1,19 +1,52 @@
 import { test, expect } from '../../setup';
+import type { Page } from '@playwright/test';
 import {
-    generateFirstName,
-    generateLastName,
-    generateEmail,
-    generatePhoneNumber,
-    generateDescription,
     generateName,
-    generateRandomNumericString,
     getImageFile,
 } from '../../utils/faker';
 
-async function createCategory(adminPage) {
-    await adminPage.goto('admin/catalog/categories');
-    await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
-    await adminPage.click('div.primary-button:visible');
+const CATEGORIES_LIST_URL = 'admin/catalog/categories';
+const OPEN_CREATE_BUTTON = 'div.primary-button:visible';
+const EDIT_ICON = 'span.cursor-pointer.icon-edit';
+const DELETE_ICON = 'span.cursor-pointer.icon-delete';
+const CHECKBOX_ICON = '.icon-uncheckbox:visible';
+const MASS_ACTION_BUTTON = 'button:has-text("Select Action")';
+const CONFIRM_BUTTON = 'button.primary-button:has-text("Agree")';
+const SAVE_CATEGORY_BUTTON = 'button:has-text("Save Category")';
+
+async function openCategoriesList(adminPage: Page) {
+    await adminPage.goto(CATEGORIES_LIST_URL);
+    await adminPage.waitForSelector(OPEN_CREATE_BUTTON, { state: 'visible' });
+}
+
+async function confirmAlert(adminPage: Page) {
+    await adminPage.waitForSelector('text=Are you sure', { state: 'visible', timeout: 1000 });
+
+    const agreeButton = adminPage.locator(CONFIRM_BUTTON);
+    await expect(agreeButton).toBeVisible();
+    await agreeButton.click();
+}
+
+async function clickFirstActionIcon(adminPage: Page, selector: string) {
+    await adminPage.waitForSelector(selector, { state: 'visible' });
+    const icons = await adminPage.$$(selector);
+    expect(icons.length).toBeGreaterThan(0);
+    await icons[0].click();
+}
+
+async function openMassAction(adminPage: Page) {
+    await adminPage.waitForSelector(CHECKBOX_ICON, { state: 'visible' });
+    const checkboxes = await adminPage.$$(CHECKBOX_ICON);
+    expect(checkboxes.length).toBeGreaterThan(1);
+    await checkboxes[1].click();
+
+    const selectActionButton = await adminPage.waitForSelector(MASS_ACTION_BUTTON, { timeout: 1000 });
+    await selectActionButton.click();
+}
+
+async function createCategory(adminPage: Page) {
+    await openCategoriesList(adminPage);
+    await adminPage.click(OPEN_CREATE_BUTTON);
 
     const concatenatedNames = Array(5)
         .fill(null)
@@ -78,7 +111,7 @@ async function createCategory(adminPage) {
         await expect(checkbox).toBeChecked();
     }
 
-    await adminPage.click('button:has-text("Save Category")');
+    await adminPage.click(SAVE_CATEGORY_BUTTON);
 
     await expect(adminPage.locator('#app p', { hasText: 'Category created successfully.' })).toBeVisible();
 }
@@ -89,18 +122,14 @@ test.describe('category management', () => {
     });
 
     test('should edit a category', async ({ adminPage }) => {
-        await adminPage.goto('admin/catalog/categories');
-        await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
-
-        await adminPage.waitForSelector('span.cursor-pointer.icon-edit', { state: 'visible' });
-        const iconEdit = await adminPage.$$('span.cursor-pointer.icon-edit');
-        await iconEdit[0].click();
+        await openCategoriesList(adminPage);
+        await clickFirstActionIcon(adminPage, EDIT_ICON);
 
         await adminPage.waitForSelector('form[action*="/catalog/categories/edit"]');
 
         // Content will be added here. Currently just checking the general save button.
 
-        await adminPage.click('button:has-text("Save Category")');
+        await adminPage.click(SAVE_CATEGORY_BUTTON);
 
          await expect(adminPage.locator('#app p', { hasText: 'Category updated successfully.' })).toBeVisible();
     });
@@ -108,40 +137,22 @@ test.describe('category management', () => {
     test('should delete a category', async ({ adminPage }) => {
         await createCategory(adminPage);
 
-        await adminPage.goto('admin/catalog/categories');
-        await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
-
-        await adminPage.waitForSelector('span.cursor-pointer.icon-delete', { state: 'visible' });
-        const iconDelete = await adminPage.$$('span.cursor-pointer.icon-delete');
-        await iconDelete[0].click();
+        await openCategoriesList(adminPage);
+        await clickFirstActionIcon(adminPage, DELETE_ICON);
 
         await adminPage.click('button.transparent-button + button.primary-button:visible');
          await expect(adminPage.locator('#app p', { hasText: 'The category has been successfully deleted.' })).toBeVisible();
     });
 
     test('should mass update a categories', async ({ adminPage }) => {
-        await adminPage.goto('admin/catalog/categories');
-        await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
-
-        await adminPage.waitForSelector('.icon-uncheckbox:visible', { state: 'visible' });
-        const checkboxes = await adminPage.$$('.icon-uncheckbox:visible');
-        await checkboxes[1].click();
-
-        let selectActionButton = await adminPage.waitForSelector('button:has-text("Select Action")', { timeout: 1000 });
-        await selectActionButton.click();
+        await openCategoriesList(adminPage);
+        await openMassAction(adminPage);
 
         await adminPage.hover('a:has-text("Update Status")', { timeout: 1000 });
         await adminPage.waitForSelector('a:has-text("Active"), a:has-text("Inactive")', { state: 'visible', timeout: 1000 });
         await adminPage.click('a:has-text("Active")');
 
-        await adminPage.waitForSelector('text=Are you sure', { state: 'visible', timeout: 1000 });
-        const agreeButton = await adminPage.locator('button.primary-button:has-text("Agree")');
-
-        if (await agreeButton.isVisible()) {
-            await agreeButton.click();
-        } else {
-            console.error("Agree button not found or not visible.");
-        }
+        await confirmAlert(adminPage);
 
          await expect(adminPage.locator('#app p', { hasText: 'Category updated successfully.' })).toBeVisible();
     });
@@ -149,27 +160,12 @@ test.describe('category management', () => {
     test('should mass delete a categories', async ({ adminPage }) => {
         await createCategory(adminPage);
 
-        await adminPage.goto('admin/catalog/categories');
-        await adminPage.waitForSelector('div.primary-button', { state: 'visible' });
-
-        await adminPage.waitForSelector('.icon-uncheckbox:visible', { state: 'visible' });
-        const checkboxes = await adminPage.$$('.icon-uncheckbox:visible');
-        await checkboxes[1].click();
-
-        let selectActionButton = await adminPage.waitForSelector('button:has-text("Select Action")', { timeout: 1000 });
-        await selectActionButton.click();
+        await openCategoriesList(adminPage);
+        await openMassAction(adminPage);
 
         await adminPage.click('a:has-text("Delete")', { timeout: 1000 });
 
-        await adminPage.waitForSelector('text=Are you sure', { state: 'visible', timeout: 1000 });
-
-        const agreeButton = await adminPage.locator('button.primary-button:has-text("Agree")');
-
-        if (await agreeButton.isVisible()) {
-            await agreeButton.click();
-        } else {
-            console.error("Agree button not found or not visible.");
-        }
+        await confirmAlert(adminPage);
         await expect(adminPage.locator('#app p', { hasText: 'The category has been successfully deleted.' })).toBeVisible();
     });
 });
