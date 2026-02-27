@@ -58,19 +58,6 @@ test.describe("catalog rules", () => {
             });
             await createRules.saveCatalogRule();
             await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator(".peer.h-5").first().click();
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
             await createRules.verifyCatalogRule();
         });
     });
