@@ -178,7 +178,7 @@ test.describe("customer agreement configuration", () => {
         );
 
         /**
-         * Update the GDPR request (processing --> completed).
+         * Update the GDPR request (processing --> completed)
          */
         await expectCustomerRequestState(
             adminPage,

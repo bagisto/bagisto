@@ -22,6 +22,31 @@ import fs from "fs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const PRODUCTS_URL = "admin/catalog/products";
+const CREATE_PRODUCT_BUTTON = 'button.primary-button:has-text("Create Product")';
+const SAVE_PRODUCT_BUTTON = 'button.primary-button:has-text("Save Product")';
+const PRODUCT_FORM_SELECTOR = 'form[enctype="multipart/form-data"]';
+
+async function openCreateProductModal(adminPage) {
+    await adminPage.goto(PRODUCTS_URL);
+    await adminPage.waitForSelector(CREATE_PRODUCT_BUTTON);
+    await adminPage.getByRole("button", { name: "Create Product" }).click();
+}
+
+async function startProductCreation(adminPage, type, attributeFamily = "1") {
+    await openCreateProductModal(adminPage);
+    await adminPage.locator('select[name="type"]').selectOption(type);
+    await adminPage
+        .locator('select[name="attribute_family_id"]')
+        .selectOption(attributeFamily);
+    await adminPage.locator('input[name="sku"]').fill(generateSKU());
+    await adminPage.getByRole("button", { name: "Save Product" }).click();
+}
+
+async function waitForProductEditForm(adminPage) {
+    await adminPage.waitForSelector(SAVE_PRODUCT_BUTTON);
+    await adminPage.waitForSelector(PRODUCT_FORM_SELECTOR);
+}
 
 function saveGeneratedProductName(productName: string) {
     fs.writeFileSync(
@@ -56,37 +81,13 @@ async function createSimpleProduct(adminPage) {
      */
     saveGeneratedProductName(product.name);
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("simple");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "simple");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -174,24 +175,7 @@ async function createConfigurableProduct(adminPage) {
      */
     saveGeneratedProductName(product.name);
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("configurable");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "configurable");
 
     /**
      * After creating the product, the page is redirected to Configurable Attributes modal, where
@@ -404,37 +388,13 @@ async function createGroupedProduct(adminPage) {
      */
     saveGeneratedProductName(product.name);
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("grouped");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "grouped");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -536,37 +496,13 @@ async function createVirtualProduct(adminPage) {
      */
     saveGeneratedProductName(product.name);
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("virtual");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "virtual");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -646,37 +582,13 @@ async function createDownloadableProduct(adminPage) {
      */
     saveGeneratedProductName(product.name);
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("downloadable");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "downloadable");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -789,37 +701,13 @@ async function createBookingProduct(adminPage) {
         .toISOString()
         .slice(0, 19)
         .replace("T", " ");
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("booking");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "booking");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
