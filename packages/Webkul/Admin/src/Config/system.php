@@ -291,21 +291,6 @@ return [
                 'title' => 'admin::app.configuration.index.general.magic-ai.settings.enabled',
                 'type' => 'boolean',
                 'channel_based' => true,
-            ], [
-                'name' => 'api_key',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
-                'type' => 'password',
-                'channel_based' => true,
-            ], [
-                'name' => 'organization',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.organization',
-                'type' => 'text',
-                'channel_based' => true,
-            ], [
-                'name' => 'api_domain',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.llm-api-domain',
-                'type' => 'text',
-                'channel_based' => true,
             ],
         ],
     ], [
@@ -369,6 +354,16 @@ return [
                         'value' => 'xai',
                     ],
                 ],
+            ], [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
+                'type' => 'password',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'Model',
+                'type' => 'text',
+                'channel_based' => true,
             ], [
                 'name' => 'product_short_description_prompt',
                 'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-short-description-prompt',
@@ -453,6 +448,16 @@ return [
                         'value' => 'xai',
                     ],
                 ],
+            ], [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
+                'type' => 'password',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'Model',
+                'type' => 'text',
+                'channel_based' => true,
             ],
         ],
     ], [
