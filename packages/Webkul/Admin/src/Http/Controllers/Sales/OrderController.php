@@ -42,9 +42,11 @@ class OrderController extends Controller
             return datagrid(OrderDataGrid::class)->process();
         }
 
+        $channels = core()->getAllChannels();
+
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view('admin::sales.orders.index', compact('groups'));
+        return view('admin::sales.orders.index', compact('channels', 'groups'));
     }
 
     /**

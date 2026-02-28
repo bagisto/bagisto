@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Saluran',
                     'contact-number' => 'Nomor Kontak',
                     'create-btn' => 'Tambah Pelanggan',
                     'create-success' => 'Pelanggan berhasil ditambahkan',

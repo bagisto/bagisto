@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #10828 [fixed] - Fixed an issue in the customer order view where the parent SKU was being displayed instead of the variant SKU for configurable products.
 
+- #10827 [fixed] - Fixed an issue where customers from one channel could see orders from another channel. Now customers are bound to a specific channel at registration and login, ensuring orders are channel-specific.
+
 ## **v2.3.12 (20th of February 2026)** - *Release*
 
 - Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.

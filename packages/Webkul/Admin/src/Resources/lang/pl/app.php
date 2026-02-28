@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Kanał',
                     'contact-number' => 'Numer kontaktowy',
                     'create-btn' => 'Utwórz klienta',
                     'create-success' => 'Klient został pomyślnie utworzony',

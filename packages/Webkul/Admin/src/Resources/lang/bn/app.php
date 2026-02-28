@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'চ্যানেল',
                     'contact-number' => 'যোগাযোগ নম্বর',
                     'create-btn' => 'গ্রাহক তৈরি করুন',
                     'create-success' => 'গ্রাহক সফলভাবে তৈরি হয়েছে',

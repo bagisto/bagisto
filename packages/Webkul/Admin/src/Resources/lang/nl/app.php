@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Kanaal',
                     'contact-number' => 'Contactnummer',
                     'create-btn' => 'Klant aanmaken',
                     'create-success' => 'Klant succesvol aangemaakt',
