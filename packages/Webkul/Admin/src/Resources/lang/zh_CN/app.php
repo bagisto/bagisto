@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => '渠道',
                     'contact-number' => '联系号码',
                     'create-btn' => '创建客户',
                     'create-success' => '成功创建客户',

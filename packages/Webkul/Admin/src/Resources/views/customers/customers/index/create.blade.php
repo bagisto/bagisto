@@ -111,38 +111,64 @@
                             <x-admin::form.control-group.error control-name="date_of_birth" />
                         </x-admin::form.control-group>
 
+                        <!-- Gender -->
+                        <x-admin::form.control-group>
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.customers.customers.index.create.gender')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                id="gender"
+                                name="gender"
+                                rules="required"
+                                :label="trans('admin::app.customers.customers.index.create.gender')"
+                            >
+                                <option value="">
+                                    @lang('admin::app.customers.customers.index.create.select-gender')
+                                </option>
+
+                                <option value="Male">
+                                    @lang('admin::app.customers.customers.index.create.male')
+                                </option>
+
+                                <option value="Female">
+                                    @lang('admin::app.customers.customers.index.create.female')
+                                </option>
+
+                                <option value="Other">
+                                    @lang('admin::app.customers.customers.index.create.other')
+                                </option>
+                            </x-admin::form.control-group.control>
+
+                            <x-admin::form.control-group.error control-name="gender" />
+                        </x-admin::form.control-group>
+
                         <div class="flex gap-4 max-sm:flex-wrap">
-                            <!-- Gender -->
+                            <!-- Channel -->
                             <x-admin::form.control-group class="w-full">
                                 <x-admin::form.control-group.label class="required">
-                                    @lang('admin::app.customers.customers.index.create.gender')
+                                    @lang('admin::app.customers.customers.index.create.channel')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="select"
-                                    id="gender"
-                                    name="gender"
+                                    id="channel"
+                                    name="channel_id"
                                     rules="required"
-                                    :label="trans('admin::app.customers.customers.index.create.gender')"
+                                    :label="trans('admin::app.customers.customers.index.create.channel')"
+                                    ::value="channels[0]?.id"
                                 >
-                                    <option value="">
-                                        @lang('admin::app.customers.customers.index.create.select-gender')
-                                    </option>
-
-                                    <option value="Male">
-                                        @lang('admin::app.customers.customers.index.create.male')
-                                    </option>
-
-                                    <option value="Female">
-                                        @lang('admin::app.customers.customers.index.create.female')
-                                    </option>
-
-                                    <option value="Other">
-                                        @lang('admin::app.customers.customers.index.create.other')
+                                    <option 
+                                        v-for="channel in channels" 
+                                        :value="channel.id"
+                                        selected
+                                    > 
+                                        @{{ channel.name }} (@{{ channel.code }})
                                     </option>
                                 </x-admin::form.control-group.control>
 
-                                <x-admin::form.control-group.error control-name="gender" />
+                                <x-admin::form.control-group.error control-name="channel_id" />
                             </x-admin::form.control-group>
 
                             <!-- Customer Group -->
@@ -197,6 +223,8 @@
             data() {
                 return {
                     groups: @json($groups),
+
+                    channels: @json($channels),
 
                     isLoading: false,
                 };

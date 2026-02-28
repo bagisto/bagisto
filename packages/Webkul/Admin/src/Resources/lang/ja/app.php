@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'チャンネル',
                     'contact-number' => '連絡先番号',
                     'create-btn' => '顧客を作成',
                     'create-success' => '顧客が正常に作成されました',

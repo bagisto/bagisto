@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'නාලිකාව',
                     'contact-number' => 'සම්බන්ධ අංකය',
                     'create-btn' => 'පාරිභෝගිකයාගේ සාදය',
                     'create-success' => 'පාරිභෝගිකයා සාර්ථකව හරියට එකඟයි',

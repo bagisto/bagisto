@@ -30,7 +30,11 @@ class SessionController extends Controller
      */
     public function store(LoginRequest $loginRequest)
     {
-        if (! auth()->guard('customer')->attempt($loginRequest->only(['email', 'password']))) {
+        $credentials = $loginRequest->only(['email', 'password']);
+
+        $credentials['channel_id'] = core()->getCurrentChannel()->id;
+
+        if (! auth()->guard('customer')->attempt($credentials)) {
             session()->flash('error', trans('shop::app.customers.login-form.invalid-credentials'));
 
             return redirect()->back();
