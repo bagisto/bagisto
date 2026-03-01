@@ -2,6 +2,7 @@
     'name'     => '',
     'value'    => 1,
     'minValue' => 1,
+    'maxValue' => null,
 ])
 
 <v-quantity-changer
@@ -9,6 +10,7 @@
     name="{{ $name }}"
     value="{{ $value }}"
     min-value="{{ $minValue }}"
+    max-value="{{ $maxValue }}"
 >
 </v-quantity-changer>
 
@@ -32,10 +34,13 @@
             </p>
             
             <span 
-                class="icon-plus cursor-pointer text-2xl"
+                :class="[
+                    'icon-plus text-2xl',
+                    isAtMaxQuantity ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'
+                ]"
                 role="button"
                 tabindex="0"
-                aria-label="@lang('shop::app.components.quantity-changer.increase-quantity')"
+                :aria-label="isAtMaxQuantity ? '@lang('shop::app.components.quantity-changer.max-quantity-reached')' : '@lang('shop::app.components.quantity-changer.increase-quantity')'"
                 @click="increase"
             >
             </span>
@@ -52,11 +57,17 @@
         app.component("v-quantity-changer", {
             template: '#v-quantity-changer-template',
 
-            props:['name', 'value', 'minValue'],
+            props:['name', 'value', 'minValue', 'maxValue'],
 
             data() {
                 return  {
                     quantity: this.value,
+                }
+            },
+
+            computed: {
+                isAtMaxQuantity() {
+                    return this.maxValue !== null && this.quantity >= this.maxValue;
                 }
             },
 
@@ -68,7 +79,9 @@
 
             methods: {
                 increase() {
-                    this.$emit('change', ++this.quantity);
+                    if (! this.isAtMaxQuantity) {
+                        this.$emit('change', ++this.quantity);
+                    }
                 },
 
                 decrease() {
