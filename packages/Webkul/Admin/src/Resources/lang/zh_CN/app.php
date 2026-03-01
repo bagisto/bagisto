@@ -4312,6 +4312,26 @@ return [
                     'title' => '电子邮件设置',
                 ],
 
+                'smtp-settings' => [
+                    'info' => '为此渠道配置 SMTP 设置以发送电子邮件。',
+                    'smtp-enable' => '启用自定义 SMTP',
+                    'smtp-enable-info' => '启用或禁用使用自定义 SMTP 设置从此渠道发送电子邮件。',
+                    'smtp-encryption' => '加密',
+                    'smtp-encryption-info' => '选择用于保护电子邮件通信的加密方式。选项包括 TLS、SSL 或 无。',
+                    'smtp-host' => 'SMTP 主机',
+                    'smtp-host-info' => '用于发送电子邮件的 SMTP 服务器地址。可以是 IP 地址或域名。',
+                    'smtp-password' => 'SMTP 密码',
+                    'smtp-password-info' => '与 SMTP 用户名关联的密码，用于与电子邮件服务器进行身份验证。',
+                    'smtp-port' => 'SMTP 端口',
+                    'smtp-port-info' => '用于 SMTP 通信的端口号。常用端口包括 25、465（SSL）和 587（TLS）。',
+                    'smtp-username' => 'SMTP 用户名',
+                    'smtp-username-info' => '用于与 SMTP 服务器进行身份验证的用户名，通常是电子邮件地址或电子邮件服务提供的特定用户名。',
+                    'title' => 'SMTP 设置',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => '无',
+                ],
+
                 'notifications' => [
                     'cancel-order' => '取消订单后向客户发送通知',
                     'cancel-order-mail-to-admin' => '取消订单后向管理员发送通知邮件',

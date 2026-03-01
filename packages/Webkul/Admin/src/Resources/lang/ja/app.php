@@ -4312,6 +4312,26 @@ return [
                     'title' => 'メール設定',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'このチャネルのメール送信のためにSMTP設定を構成します。',
+                    'smtp-enable' => 'カスタムSMTPを有効にする',
+                    'smtp-enable-info' => 'このチャネルからメールを送信するためにカスタムSMTP設定の使用を有効または無効にします。',
+                    'smtp-encryption' => '暗号化',
+                    'smtp-encryption-info' => 'メール通信を保護するための暗号化方式を選択してください。オプションにはTLS、SSL、またはなしがあります。',
+                    'smtp-host' => 'SMTPホスト',
+                    'smtp-host-info' => 'メール送信に使用されるSMTPサーバーのアドレスです。IPアドレスまたはドメイン名を指定できます。',
+                    'smtp-password' => 'SMTPパスワード',
+                    'smtp-password-info' => 'メールサーバーとの認証に使用されるSMTPユーザー名に関連付けられたパスワードです。',
+                    'smtp-port' => 'SMTPポート',
+                    'smtp-port-info' => 'SMTP通信に使用されるポート番号です。一般的なポートは25、465（SSL）、および587（TLS）です。',
+                    'smtp-username' => 'SMTPユーザー名',
+                    'smtp-username-info' => 'SMTPサーバーとの認証に使用されるユーザー名で、通常はメールアドレスまたはメールサービスによって提供された特定のユーザー名です。',
+                    'title' => 'SMTP設定',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'なし',
+                ],
+
                 'notifications' => [
                     'cancel-order' => '注文がキャンセルされた後、顧客に通知を送信する',
                     'cancel-order-mail-to-admin' => '注文キャンセル後に管理者へ通知メールを送信する',

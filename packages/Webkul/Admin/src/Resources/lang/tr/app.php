@@ -4312,6 +4312,26 @@ return [
                     'title' => 'E-posta Ayarları',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Bu kanal için e-posta göndermek üzere SMTP ayarlarını yapılandırın.',
+                    'smtp-enable' => 'Özel SMTP’yi Etkinleştir',
+                    'smtp-enable-info' => 'Bu kanaldan e-posta göndermek için özel SMTP ayarlarının kullanımını etkinleştirin veya devre dışı bırakın.',
+                    'smtp-encryption' => 'Şifreleme',
+                    'smtp-encryption-info' => 'E-posta iletişimini güvence altına almak için şifreleme yöntemini seçin. Seçenekler TLS, SSL veya Yok içerir.',
+                    'smtp-host' => 'SMTP Sunucusu',
+                    'smtp-host-info' => 'E-posta göndermek için kullanılan SMTP sunucusunun adresi. Bu bir IP adresi veya alan adı olabilir.',
+                    'smtp-password' => 'SMTP Parolası',
+                    'smtp-password-info' => 'E-posta sunucusu ile kimlik doğrulama için SMTP kullanıcı adına bağlı parola.',
+                    'smtp-port' => 'SMTP Portu',
+                    'smtp-port-info' => 'SMTP iletişimi için kullanılan port numarası. Yaygın portlar 25, 465 (SSL) ve 587 (TLS)’dir.',
+                    'smtp-username' => 'SMTP Kullanıcı Adı',
+                    'smtp-username-info' => 'SMTP sunucusu ile kimlik doğrulama için kullanılan kullanıcı adı; genellikle e-posta adresi veya e-posta hizmeti tarafından sağlanan özel bir kullanıcı adıdır.',
+                    'title' => 'SMTP Ayarları',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Yok',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Sipariş iptal edildikten sonra müşteriye bildirim gönder',
                     'cancel-order-mail-to-admin' => 'Sipariş iptal edildikten sonra yöneticiye bir bildirim e-postası gönder',

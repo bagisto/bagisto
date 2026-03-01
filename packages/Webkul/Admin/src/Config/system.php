@@ -1588,6 +1588,67 @@ return [
             ],
         ],
     ], [
+        'key' => 'emails.smtp',
+        'name' => 'admin::app.configuration.index.email.smtp-settings.title',
+        'info' => 'admin::app.configuration.index.email.smtp-settings.info',
+        'icon' => 'settings/email.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'emails.smtp.smtp_settings',
+        'name' => 'admin::app.configuration.index.email.smtp-settings.title',
+        'info' => 'admin::app.configuration.index.email.smtp-settings.info',
+        'icon' => 'settings/store.svg',
+        'sort' => 5,
+        'fields' => [
+            [
+                'name' => 'smtp_enable',
+                'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-enable-info',
+                'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-enable',
+                'type' => 'boolean',
+                'default_value' => false,
+            ], [
+                'name' => 'smtp_host',
+                'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-host-info',
+                'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-host',
+                'type' => 'text',
+                'validation' => 'required',
+                'default_value' => config('mail.mailers.smtp.host'),
+            ], [
+                'name' => 'smtp_port',
+                'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-port-info',
+                'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-port',
+                'type' => 'text',
+                'validation' => 'required',
+            ], [
+                'name' => 'smtp_username',
+                'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-username-info',
+                'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-username',
+                'type' => 'text',
+            ], [
+                'name' => 'smtp_password',
+                'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-password-info',
+                'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-password',
+                'type' => 'password',
+            ], [
+                'name' => 'smtp_encryption',
+                'info' => 'admin::app.configuration.index.email.smtp-settings.smtp-encryption-info',
+                'title' => 'admin::app.configuration.index.email.smtp-settings.smtp-encryption',
+                'type' => 'select',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.email.smtp-settings.tls',
+                        'value' => 'tls',
+                    ], [
+                        'title' => 'admin::app.configuration.index.email.smtp-settings.ssl',
+                        'value' => 'ssl',
+                    ], [
+                        'title' => 'admin::app.configuration.index.email.smtp-settings.none',
+                        'value' => null,
+                    ],
+                ],
+            ],
+        ],
+    ], [
         'key' => 'emails.general',
         'name' => 'admin::app.configuration.index.email.notifications.title',
         'info' => 'admin::app.configuration.index.email.notifications.info',

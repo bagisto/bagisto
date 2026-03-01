@@ -4312,6 +4312,26 @@ return [
                     'title' => 'E-mailinstellingen',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Configureer de SMTP-instellingen om e-mails te verzenden voor dit kanaal.',
+                    'smtp-enable' => 'Aangepaste SMTP inschakelen',
+                    'smtp-enable-info' => 'Schakel het gebruik van aangepaste SMTP-instellingen in of uit om e-mails vanuit dit kanaal te verzenden.',
+                    'smtp-encryption' => 'Encryptie',
+                    'smtp-encryption-info' => 'Selecteer de encryptiemethode om e-mailcommunicatie te beveiligen. Opties zijn TLS, SSL of Geen.',
+                    'smtp-host' => 'SMTP-host',
+                    'smtp-host-info' => 'Het adres van de SMTP-server die wordt gebruikt voor het verzenden van e-mails. Dit kan een IP-adres of een domeinnaam zijn.',
+                    'smtp-password' => 'SMTP-wachtwoord',
+                    'smtp-password-info' => 'Het wachtwoord dat is gekoppeld aan de SMTP-gebruikersnaam voor authenticatie met de e-mailserver.',
+                    'smtp-port' => 'SMTP-poort',
+                    'smtp-port-info' => 'Het poortnummer dat wordt gebruikt voor SMTP-communicatie. Veelgebruikte poorten zijn 25, 465 (SSL) en 587 (TLS).',
+                    'smtp-username' => 'SMTP-gebruikersnaam',
+                    'smtp-username-info' => 'De gebruikersnaam die wordt gebruikt voor authenticatie met de SMTP-server, vaak het e-mailadres of een specifieke gebruikersnaam die door de e-mailservice wordt verstrekt.',
+                    'title' => 'SMTP-instellingen',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Geen',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Stuur een melding naar de klant nadat een bestelling is geannuleerd',
                     'cancel-order-mail-to-admin' => 'Stuur een meldingsmail naar de beheerder na het annuleren van een bestelling',

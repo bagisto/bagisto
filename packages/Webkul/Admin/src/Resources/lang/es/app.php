@@ -4312,6 +4312,26 @@ return [
                     'title' => 'Configuración de correo electrónico',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Configure los ajustes de SMTP para enviar correos electrónicos para este canal.',
+                    'smtp-enable' => 'Habilitar SMTP personalizado',
+                    'smtp-enable-info' => 'Habilite o deshabilite el uso de ajustes SMTP personalizados para enviar correos electrónicos desde este canal.',
+                    'smtp-encryption' => 'Cifrado',
+                    'smtp-encryption-info' => 'Seleccione el método de cifrado para asegurar la comunicación por correo electrónico. Las opciones incluyen TLS, SSL o Ninguno.',
+                    'smtp-host' => 'Host SMTP',
+                    'smtp-host-info' => 'La dirección del servidor SMTP utilizado para enviar correos electrónicos. Puede ser una dirección IP o un nombre de dominio.',
+                    'smtp-password' => 'Contraseña SMTP',
+                    'smtp-password-info' => 'La contraseña asociada con el nombre de usuario SMTP para la autenticación con el servidor de correo electrónico.',
+                    'smtp-port' => 'Puerto SMTP',
+                    'smtp-port-info' => 'El número de puerto utilizado para la comunicación SMTP. Los puertos comunes incluyen 25, 465 (SSL) y 587 (TLS).',
+                    'smtp-username' => 'Nombre de usuario SMTP',
+                    'smtp-username-info' => 'El nombre de usuario utilizado para la autenticación con el servidor SMTP, a menudo la dirección de correo electrónico o un nombre de usuario específico proporcionado por el servicio de correo electrónico.',
+                    'title' => 'Configuración SMTP',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Ninguno',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Enviar una notificación al cliente después de cancelar un pedido',
                     'cancel-order-mail-to-admin' => 'Enviar un correo electrónico de notificación al administrador después de cancelar un pedido',

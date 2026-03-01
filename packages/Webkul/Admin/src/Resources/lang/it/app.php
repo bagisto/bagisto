@@ -4312,6 +4312,26 @@ return [
                     'title' => 'Email Settings',
                 ],
 
+                'smtp-settings' => [
+                    'info' => 'Configura le impostazioni SMTP per inviare email per questo canale.',
+                    'smtp-enable' => 'Abilita SMTP personalizzato',
+                    'smtp-enable-info' => 'Abilita o disabilita l’uso delle impostazioni SMTP personalizzate per inviare email da questo canale.',
+                    'smtp-encryption' => 'Crittografia',
+                    'smtp-encryption-info' => 'Seleziona il metodo di crittografia per proteggere la comunicazione email. Le opzioni includono TLS, SSL o Nessuno.',
+                    'smtp-host' => 'Host SMTP',
+                    'smtp-host-info' => 'L’indirizzo del server SMTP utilizzato per inviare email. Può essere un indirizzo IP o un nome di dominio.',
+                    'smtp-password' => 'Password SMTP',
+                    'smtp-password-info' => 'La password associata al nome utente SMTP per l’autenticazione con il server di posta elettronica.',
+                    'smtp-port' => 'Porta SMTP',
+                    'smtp-port-info' => 'Il numero di porta utilizzato per la comunicazione SMTP. Le porte comuni includono 25, 465 (SSL) e 587 (TLS).',
+                    'smtp-username' => 'Nome utente SMTP',
+                    'smtp-username-info' => 'Il nome utente utilizzato per l’autenticazione con il server SMTP, spesso l’indirizzo email o un nome utente specifico fornito dal servizio email.',
+                    'title' => 'Impostazioni SMTP',
+                    'tls' => 'TLS',
+                    'ssl' => 'SSL',
+                    'none' => 'Nessuno',
+                ],
+
                 'notifications' => [
                     'cancel-order' => 'Invia una notifica al cliente dopo l\'annullamento di un ordine',
                     'cancel-order-mail-to-admin' => 'Invia una e-mail di notifica all\'amministratore dopo l\'annullamento di un ordine',
