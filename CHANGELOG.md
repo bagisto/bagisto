@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed catalog rule condition validation where boolean value `0` was being incorrectly treated as empty and causing the condition to fail.
 
+- #11034 [fixed] - Fixed an issue where the `createOrderIfNotThenRetry` method caused an infinite loop by adding a configurable max retry attempts limit.
+
 - #10828 [fixed] - Fixed an issue in the customer order view where the parent SKU was being displayed instead of the variant SKU for configurable products.
 
 ## **v2.3.12 (20th of February 2026)** - *Release*

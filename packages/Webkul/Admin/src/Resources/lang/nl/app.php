@@ -4424,6 +4424,12 @@ return [
                     'info' => 'Stel ordernummers, minimale bestellingen en backorders in.',
                     'title' => 'Bestelinstellingen',
 
+                    'order-creation' => [
+                        'info' => 'Configureer het aantal nieuwe pogingen voor het maken van een bestelling bij fouten tijdens het afrekenen.',
+                        'max-retry-attempts' => 'Maximale Aantal Pogingen',
+                        'title' => 'Bestelling Maken',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Ordernummergenerator',
                         'info' => 'Unieke identificatie toegewezen aan een specifieke klantbestelling, ter ondersteuning van tracking, communicatie en referentie gedurende het aankoopproces.',

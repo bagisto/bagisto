@@ -4424,6 +4424,12 @@ return [
                     'info' => 'Configura els números de comanda, les comandes mínimes i les comandes pendents.',
                     'title' => 'Configuració de comandes',
 
+                    'order-creation' => [
+                        'info' => 'Configureu el nombre de intents de creació de comanda quan es produeixin errors durant el pagament.',
+                        'max-retry-attempts' => 'Nombre Màxim d\'Intents',
+                        'title' => 'Creació de Comanda',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Generador de números de comanda',
                         'info' => 'Identificador únic assignat a una comanda específica d\'un client, que ajuda a fer un seguiment, la comunicació i la referència durant tot el procés de compra.',

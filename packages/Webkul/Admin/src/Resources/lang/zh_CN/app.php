@@ -4424,6 +4424,12 @@ return [
                     'info' => '设置订单编号、最低订单量和预购选项。',
                     'title' => '订单设置',
 
+                    'order-creation' => [
+                        'info' => '配置结账时发生错误时的订单创建重试次数。',
+                        'max-retry-attempts' => '最大重试次数',
+                        'title' => '订单创建',
+                    ],
+
                     'order-number' => [
                         'generator' => '订单编号生成器',
                         'info' => '为每个订单分配唯一的标识符，用于跟踪和管理整个购买流程。',

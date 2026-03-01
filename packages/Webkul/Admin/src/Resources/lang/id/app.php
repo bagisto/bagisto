@@ -4424,6 +4424,12 @@ return [
                     'info' => 'Atur nomor pesanan, pesanan minimum, dan pesanan balik.',
                     'title' => 'Pengaturan Pesanan',
 
+                    'order-creation' => [
+                        'info' => 'Konfigurasi jumlah percobaan pembuatan pesanan saat terjadi kesalahan selama checkout.',
+                        'max-retry-attempts' => 'Jumlah Percobaan Maksimum',
+                        'title' => 'Pembuatan Pesanan',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Generator Nomor Pesanan',
                         'info' => 'Identifikasi unik yang diberikan pada pesanan pelanggan tertentu, membantu pelacakan, komunikasi, dan referensi sepanjang proses pembelian.',
