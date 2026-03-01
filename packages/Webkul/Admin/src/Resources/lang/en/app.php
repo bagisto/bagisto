@@ -1267,6 +1267,7 @@ return [
                             'type-mismatch' => 'The booking type cannot be changed.',
                             'time-validation' => 'Start time must be less than end time.',
                             'overlap-validation' => 'Time slot overlaps with an existing slot.',
+                            'slot-duration-validation' => 'Slot time duration must be equal to defined slot duration.',
                         ],
                     ],
 
