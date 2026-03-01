@@ -4424,6 +4424,12 @@ return [
                     'info' => 'Set order numbers, minimum orders and back orders.',
                     'title' => 'Order Settings',
 
+                    'order-creation' => [
+                        'info' => 'Configure order creation retry attempts when errors occur during checkout.',
+                        'max-retry-attempts' => 'Max Retry Attempts',
+                        'title' => 'Order Creation',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Order Number Generator',
                         'info' => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',

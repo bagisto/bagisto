@@ -4424,6 +4424,12 @@ return [
                     'info' => 'Ustaw numery zamówień, minimalne zamówienia i zamówienia oczekujące.',
                     'title' => 'Ustawienia zamówienia',
 
+                    'order-creation' => [
+                        'info' => 'Skonfiguruj liczbę ponownych prób utworzenia zamówienia w przypadku błędów podczas realizacji zamówienia.',
+                        'max-retry-attempts' => 'Maksymalna liczba prób',
+                        'title' => 'Tworzenie zamówienia',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Generator numerów zamówień',
                         'info' => 'Unikalny identyfikator przypisany do konkretnego zamówienia klienta, ułatwiający śledzenie, komunikację i odniesienie w całym procesie zakupowym.',

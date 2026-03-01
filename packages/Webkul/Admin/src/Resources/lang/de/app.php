@@ -4424,6 +4424,12 @@ return [
                     'info' => 'Setzen Sie Bestellnummern, Mindestbestellungen und Nachbestellungen.',
                     'title' => 'Bestelleinstellungen',
 
+                    'order-creation' => [
+                        'info' => 'Konfigurieren Sie die Anzahl der Wiederholungsversuche für die Erstellung einer Bestellung bei Fehlern während des Checkouts.',
+                        'max-retry-attempts' => 'Maximale Anzahl von Versuchen',
+                        'title' => 'Bestellungserstellung',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Bestellnummern-Generator',
                         'info' => 'Eindeutige Kennung, die einer bestimmten Kundenbestellung zugewiesen wird und die Verfolgung, Kommunikation und Referenzierung während des Kaufprozesses erleichtert.',

@@ -4424,6 +4424,12 @@ return [
                     'info' => 'Definir números de pedidos, pedidos mínimos e pedidos em atraso.',
                     'title' => 'Configurações de Pedido',
 
+                    'order-creation' => [
+                        'info' => 'Configure o número de tentativas de criação do pedido quando ocorrerem erros durante o checkout.',
+                        'max-retry-attempts' => 'Número Máximo de Tentativas',
+                        'title' => 'Criação de Pedido',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Gerador de Número de Pedido',
                         'info' => 'Identificador único atribuído a um pedido específico do cliente, auxiliando no rastreamento, comunicação e referência durante o processo de compra.',

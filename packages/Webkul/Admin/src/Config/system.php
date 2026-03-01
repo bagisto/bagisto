@@ -2206,10 +2206,25 @@ return [
         'icon' => 'settings/order.svg',
         'sort' => 4,
     ], [
+        'key' => 'sales.order_settings.order_creation',
+        'name' => 'admin::app.configuration.index.sales.order-settings.order-creation.title',
+        'info' => 'admin::app.configuration.index.sales.order-settings.order-creation.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'max_retry_attempts',
+                'title' => 'admin::app.configuration.index.sales.order-settings.order-creation.max-retry-attempts',
+                'type' => 'number',
+                'validation' => 'required|integer|min:1',
+                'default' => 3,
+                'channel_based' => true,
+            ],
+        ],
+    ], [
         'key' => 'sales.order_settings.order_number',
         'name' => 'admin::app.configuration.index.sales.order-settings.order-number.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.order-number.info',
-        'sort' => 0,
+        'sort' => 2,
         'fields' => [
             [
                 'name' => 'order_number_prefix',
@@ -2241,7 +2256,7 @@ return [
         'key' => 'sales.order_settings.minimum_order',
         'name' => 'admin::app.configuration.index.sales.order-settings.minimum-order.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.minimum-order.info',
-        'sort' => 1,
+        'sort' => 3,
         'fields' => [
             [
                 'name' => 'enable',
@@ -2276,7 +2291,7 @@ return [
         'key' => 'sales.order_settings.reorder',
         'name' => 'admin::app.configuration.index.sales.order-settings.reorder.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.reorder.info',
-        'sort' => 2,
+        'sort' => 4,
         'fields' => [
             [
                 'name' => 'admin',

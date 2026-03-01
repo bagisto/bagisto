@@ -4424,6 +4424,12 @@ return [
                     'info' => 'Sipariş numaralarını, minimum siparişleri ve geri siparişleri ayarlayın.',
                     'title' => 'Sipariş Ayarları',
 
+                    'order-creation' => [
+                        'info' => 'Ödeme sırasında hata oluştuğunda sipariş oluşturma yeniden deneme sayısını yapılandırın.',
+                        'max-retry-attempts' => 'Maksimum Yeniden Deneme Sayısı',
+                        'title' => 'Sipariş Oluşturma',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Sipariş Numarası Oluşturucusu',
                         'info' => 'Bir müşteri siparişine atanan benzersiz bir tanımlayıcıdır ve satın alma süreci boyunca takip, iletişim ve referans sağlar.',
