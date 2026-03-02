@@ -122,7 +122,7 @@
                             :label="trans('admin::app.cms.edit.content')"
                             :placeholder="trans('admin::app.cms.edit.content')"
                             :tinymce="true"
-                            :prompt="core()->getConfigData('general.magic_ai.content_generation.cms_page_content_prompt')"
+                            :prompt="core()->getConfigData('general.magic_ai.default_prompts.cms_page_content')"
                         />
 
                         <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[html_content]" />

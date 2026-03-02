@@ -8,7 +8,7 @@ use Webkul\MagicAI\Facades\MagicAI;
 class MagicAIController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Generate text content from a prompt.
      */
     public function content(): JsonResponse
     {
@@ -17,22 +17,16 @@ class MagicAIController extends Controller
         ]);
 
         try {
-            $response = MagicAI::setProvider(core()->getConfigData('general.magic_ai.content_generation.provider'))
-                ->setPrompt(request()->input('prompt'))
-                ->ask();
-
             return new JsonResponse([
-                'content' => $response,
+                'content' => MagicAI::generateContent(request()->input('prompt')),
             ]);
         } catch (\Exception $e) {
-            return new JsonResponse([
-                'message' => $e->getMessage(),
-            ], 500);
+            return new JsonResponse(['message' => $e->getMessage()], 500);
         }
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Generate images from a prompt.
      */
     public function image(): JsonResponse
     {
@@ -44,23 +38,14 @@ class MagicAIController extends Controller
         ]);
 
         try {
-            $options = request()->only([
-                'n',
-                'size',
-                'quality',
-            ]);
-
-            $images = MagicAI::setProvider(core()->getConfigData('general.magic_ai.image_generation.provider'))
-                ->setPrompt(request()->input('prompt'))
-                ->images($options);
-
             return new JsonResponse([
-                'images' => $images,
+                'images' => MagicAI::generateImage(
+                    request()->input('prompt'),
+                    request()->only(['n', 'size', 'quality']),
+                ),
             ]);
         } catch (\Exception $e) {
-            return new JsonResponse([
-                'message' => $e->getMessage(),
-            ], 500);
+            return new JsonResponse(['message' => $e->getMessage()], 500);
         }
     }
 }

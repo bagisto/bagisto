@@ -364,26 +364,6 @@ return [
                 'title' => 'Model',
                 'type' => 'text',
                 'channel_based' => true,
-            ], [
-                'name' => 'product_short_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-short-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'product_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'category_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.category-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'cms_page_content_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.cms-page-content-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
             ],
         ],
     ], [
@@ -471,71 +451,6 @@ return [
                 'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.enabled',
                 'type' => 'boolean',
                 'channel_based' => true,
-            ], [
-                'name' => 'model',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.model',
-                'type' => 'select',
-                'channel_based' => true,
-                'options' => [
-                    [
-                        'title' => 'OpenAI - gpt-5.2',
-                        'value' => 'gpt-5.2',
-                    ], [
-                        'title' => 'OpenAI - gpt-5-nano',
-                        'value' => 'gpt-5-nano',
-                    ], [
-                        'title' => 'OpenAI - gpt-5.2-pro',
-                        'value' => 'gpt-5.2-pro',
-                    ], [
-                        'title' => 'Anthropic - claude-sonnet-4-6',
-                        'value' => 'claude-sonnet-4-6',
-                    ], [
-                        'title' => 'Anthropic - claude-haiku-4-5-20251001',
-                        'value' => 'claude-haiku-4-5-20251001',
-                    ], [
-                        'title' => 'Anthropic - claude-opus-4-6',
-                        'value' => 'claude-opus-4-6',
-                    ], [
-                        'title' => 'Gemini - gemini-3-flash-preview',
-                        'value' => 'gemini-3-flash-preview',
-                    ], [
-                        'title' => 'Gemini - gemini-2.5-flash-lite',
-                        'value' => 'gemini-2.5-flash-lite',
-                    ], [
-                        'title' => 'Gemini - gemini-3-pro-preview',
-                        'value' => 'gemini-3-pro-preview',
-                    ], [
-                        'title' => 'xAI - grok-4-1-fast-reasoning',
-                        'value' => 'grok-4-1-fast-reasoning',
-                    ], [
-                        'title' => 'Groq - openai/gpt-oss-20b',
-                        'value' => 'openai/gpt-oss-20b',
-                    ], [
-                        'title' => 'Groq - openai/gpt-oss-120b',
-                        'value' => 'openai/gpt-oss-120b',
-                    ], [
-                        'title' => 'Mistral - mistral-small-latest',
-                        'value' => 'mistral-small-latest',
-                    ], [
-                        'title' => 'Mistral - mistral-medium-latest',
-                        'value' => 'mistral-medium-latest',
-                    ], [
-                        'title' => 'Mistral - mistral-large-latest',
-                        'value' => 'mistral-large-latest',
-                    ], [
-                        'title' => 'Ollama - llama3.1:8b',
-                        'value' => 'llama3.1:8b',
-                    ], [
-                        'title' => 'Ollama - llama3.1:70b',
-                        'value' => 'llama3.1:70b',
-                    ], [
-                        'title' => 'OpenAI - gpt-4o',
-                        'value' => 'gpt-4o',
-                    ], [
-                        'title' => 'OpenAI - gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
-                    ],
-                ],
             ],
         ],
     ], [
@@ -549,74 +464,37 @@ return [
                 'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.enabled',
                 'type' => 'boolean',
                 'channel_based' => true,
+            ],
+        ],
+    ], [
+        'key' => 'general.magic_ai.default_prompts',
+        'name' => 'admin::app.configuration.index.general.magic-ai.default-prompts.title',
+        'info' => 'admin::app.configuration.index.general.magic-ai.default-prompts.title-info',
+        'sort' => 5,
+        'fields' => [
+            [
+                'name' => 'product_short_description',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.product-short-description-prompt',
+                'type' => 'textarea',
+                'locale_based' => true,
             ], [
-                'name' => 'model',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.model',
-                'type' => 'select',
-                'channel_based' => true,
-                'options' => [
-                    [
-                        'title' => 'OpenAI - gpt-5.2',
-                        'value' => 'gpt-5.2',
-                    ], [
-                        'title' => 'OpenAI - gpt-5-nano',
-                        'value' => 'gpt-5-nano',
-                    ], [
-                        'title' => 'OpenAI - gpt-5.2-pro',
-                        'value' => 'gpt-5.2-pro',
-                    ], [
-                        'title' => 'Anthropic - claude-sonnet-4-6',
-                        'value' => 'claude-sonnet-4-6',
-                    ], [
-                        'title' => 'Anthropic - claude-haiku-4-5-20251001',
-                        'value' => 'claude-haiku-4-5-20251001',
-                    ], [
-                        'title' => 'Anthropic - claude-opus-4-6',
-                        'value' => 'claude-opus-4-6',
-                    ], [
-                        'title' => 'Gemini - gemini-3-flash-preview',
-                        'value' => 'gemini-3-flash-preview',
-                    ], [
-                        'title' => 'Gemini - gemini-2.5-flash-lite',
-                        'value' => 'gemini-2.5-flash-lite',
-                    ], [
-                        'title' => 'Gemini - gemini-3-pro-preview',
-                        'value' => 'gemini-3-pro-preview',
-                    ], [
-                        'title' => 'xAI - grok-4-1-fast-reasoning',
-                        'value' => 'grok-4-1-fast-reasoning',
-                    ], [
-                        'title' => 'Groq - openai/gpt-oss-20b',
-                        'value' => 'openai/gpt-oss-20b',
-                    ], [
-                        'title' => 'Groq - openai/gpt-oss-120b',
-                        'value' => 'openai/gpt-oss-120b',
-                    ], [
-                        'title' => 'Mistral - mistral-small-latest',
-                        'value' => 'mistral-small-latest',
-                    ], [
-                        'title' => 'Mistral - mistral-medium-latest',
-                        'value' => 'mistral-medium-latest',
-                    ], [
-                        'title' => 'Mistral - mistral-large-latest',
-                        'value' => 'mistral-large-latest',
-                    ], [
-                        'title' => 'Ollama - llama3.1:8b',
-                        'value' => 'llama3.1:8b',
-                    ], [
-                        'title' => 'Ollama - llama3.1:70b',
-                        'value' => 'llama3.1:70b',
-                    ], [
-                        'title' => 'OpenAI - gpt-4o',
-                        'value' => 'gpt-4o',
-                    ], [
-                        'title' => 'OpenAI - gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
-                    ],
-                ],
+                'name' => 'product_description',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.product-description-prompt',
+                'type' => 'textarea',
+                'locale_based' => true,
             ], [
-                'name' => 'prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.prompt',
+                'name' => 'category_description',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.category-description-prompt',
+                'type' => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name' => 'cms_page_content',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.cms-page-content-prompt',
+                'type' => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name' => 'checkout_message',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.checkout-message-prompt',
                 'type' => 'textarea',
                 'channel_based' => true,
                 'locale_based' => true,
