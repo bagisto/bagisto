@@ -2,10 +2,9 @@
 
 namespace Webkul\MagicAI;
 
-use Webkul\MagicAI\Services\Gemini;
-use Webkul\MagicAI\Services\GroqAI;
-use Webkul\MagicAI\Services\Ollama;
-use Webkul\MagicAI\Services\OpenAI;
+use Laravel\Ai\Image;
+
+use function Laravel\Ai\agent;
 
 class MagicAI
 {
@@ -13,6 +12,11 @@ class MagicAI
      * LLM model.
      */
     protected string $model;
+
+    /**
+     * LLM provider.
+     */
+    protected ?string $provider = null;
 
     /**
      * LLM agent.
@@ -45,6 +49,16 @@ class MagicAI
     public function setModel(string $model): self
     {
         $this->model = $model;
+
+        return $this;
+    }
+
+    /**
+     * Set LLM provider.
+     */
+    public function setProvider(?string $provider): self
+    {
+        $this->provider = $provider;
 
         return $this;
     }
@@ -104,7 +118,9 @@ class MagicAI
      */
     public function ask(): string
     {
-        return $this->getModelInstance()->ask();
+        $response = agent()->prompt($this->prompt, provider: $this->resolveProvider());
+
+        return trim($response->text);
     }
 
     /**
@@ -112,47 +128,53 @@ class MagicAI
      */
     public function images(array $options): array
     {
-        return $this->getModelInstance()->images($options);
+        $numberOfImages = max((int) ($options['n'] ?? 1), 1);
+
+        $size = $options['size'] ?? '1024x1024';
+        $quality = match ($options['quality'] ?? null) {
+            'hd' => 'high',
+            'standard' => 'medium',
+            default => null,
+        };
+
+        $images = [];
+
+        for ($i = 1; $i <= $numberOfImages; $i++) {
+            $request = Image::of($this->prompt);
+
+            if ($size === '1792x1024') {
+                $request->landscape();
+            } elseif ($size === '1024x1792') {
+                $request->portrait();
+            } else {
+                $request->square();
+            }
+
+            if ($quality) {
+                $request->quality($quality);
+            }
+
+            $generatedImage = $request->generate(provider: $this->resolveProvider());
+
+            $images[] = [
+                'url' => 'data:'.$generatedImage->firstImage()->mime.';base64,'.$generatedImage->firstImage()->image,
+            ];
+        }
+
+        return $images;
     }
 
     /**
-     * Get LLM model instance.
+     * Resolve provider to an SDK configured provider key.
      */
-    public function getModelInstance(): OpenAI|Ollama|Gemini|GroqAI
+    protected function resolveProvider(): ?string
     {
-        if (in_array($this->model, ['gpt-4-turbo', 'gpt-4o', 'gpt-4o-mini', 'dall-e-2', 'dall-e-3'])) {
-            return new OpenAI(
-                $this->model,
-                $this->prompt,
-                $this->temperature,
-                $this->stream,
-            );
+        if (! $this->provider) {
+            return null;
         }
 
-        if (in_array($this->model, ['llama3-8b-8192'])) {
-            return new GroqAI(
-                $this->model,
-                $this->prompt,
-                $this->temperature,
-                $this->stream,
-            );
-        }
-
-        if (in_array($this->model, ['gemini-2.0-flash'])) {
-            return new Gemini(
-                $this->model,
-                $this->prompt,
-                $this->stream,
-                $this->raw,
-            );
-        }
-
-        return new Ollama(
-            $this->model,
-            $this->prompt,
-            $this->temperature,
-            $this->stream,
-            $this->raw,
-        );
+        return array_key_exists($this->provider, config('ai.providers', []))
+            ? $this->provider
+            : null;
     }
 }
