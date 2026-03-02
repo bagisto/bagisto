@@ -33,19 +33,26 @@ Route::get('/', [HomeController::class, 'index'])
 Route::get('/services/{slug}', [HomeController::class, 'servicesByCategory'])
     ->name('shop.home.services');
 
+Route::get('/service/{id}', [HomeController::class, 'servicesDetails'])
+    ->name('shop.home.service.details');
+
+Route::get('/services', [HomeController::class, 'allServices'])
+    ->name('shop.home.all.services');
+
+Route::get('/gallery', [HomeController::class, 'galleryIndex'])
+    ->name('shop.gallery.index');      
+
 Route::get('/switch/{ln}',[HomeController::class,'languageArabicSwitch'])->name('language.switch.arabic');
 
 Route::get('/Switch/{ln}',[HomeController::class,'languageEnglishSwitch'])->name('language.switch.english');
 
-Route::get('/booking/search', [HomeController::class, 'bookingSearch'])->name('booking.search');
+    Route::get('/booking/search', [SearchController::class, 'bookingSearch'])->name('booking.search');
 
 Route::get('about', [HomeController::class, 'about'])
-    ->name('shop.home.about')
-    ->middleware('cache.response');
+    ->name('shop.home.about');
 
-Route::get('contact-us', [HomeController::class, 'contactUs'])
-    ->name('shop.home.contact_us')
-    ->middleware('cache.response');
+Route::get('contact', [HomeController::class, 'contactUs'])
+    ->name('shop.home.contact');
 
 Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail'])
     ->name('shop.home.contact_us.send_mail')

@@ -4,6 +4,11 @@ namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Marketing\Repositories\SearchTermRepository;
 use Webkul\Product\Repositories\SearchRepository;
+use Illuminate\Http\Request;
+use Webkul\Category\Models\CategoryTranslation;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Category\Models\Category;
+
 
 class SearchController extends Controller
 {
@@ -79,4 +84,19 @@ class SearchController extends Controller
 
         return $this->searchRepository->uploadSearchImage(request()->all());
     }
+
+
+public function bookingSearch(Request $req)
+{
+    $req->validate([
+        'service_category_id' => ['required', 'integer'],
+        'service_location_id' => ['required', 'integer'],
+    ]);
+
+    return redirect()->route('shop.search.index', [
+        'query'       => 'booking', // required for search page
+        'category_id' => $req->service_category_id,
+        'location_id' => $req->service_location_id,
+    ]);
+}
 }
