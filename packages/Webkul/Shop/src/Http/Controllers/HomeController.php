@@ -14,6 +14,7 @@ use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Category\Models\Category;
 use Illuminate\Http\Request;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Product\Models\ProductFlat;
 
 
 class HomeController extends Controller
@@ -37,9 +38,11 @@ class HomeController extends Controller
      */
     public function index(){
 
-    // Fetching all products for the our products section on homepage
-    // $products = Product::all();
-    // dd($products);
+        // Fetch a single product from the flat table
+$products = ProductFlat::where('type', 'simple')
+    ->where('status', 1)
+    ->where('visible_individually', 1)
+    ->get();
 
     // Get root category (parent_id = null in Bagisto usually)
     $rootCategory = Category::whereNull('parent_id')->first();
@@ -62,19 +65,23 @@ class HomeController extends Controller
         $firstCategory = $categories->first();
 
         $services = $firstCategory->products()
-            ->where('type', 'booking')
-            ->whereHas('product_flats', function ($q) {
-                $q->where('status', 1)
-                  ->where('visible_individually', 1);
-            })
-            ->get();
+    ->where('type', 'booking')
+    ->whereHas('product_flats', function ($q) {
+        $q->where('status', 1)
+          ->where('visible_individually', 1);
+    })->take(4)->get();
     }
-    return view('shop::home.index', compact('categories', 'services'));
+    return view('shop::home.index', compact('categories', 'services','products'));
     }
 
 
 public function servicesByCategory(Request $req)
 {
+      // Fetching all products for the our products section on homepage
+$products = ProductFlat::where('type', 'simple')
+    ->where('status', 1)
+    ->where('visible_individually', 1)
+    ->get();
      // Get root category (parent_id = null in Bagisto usually)
     $rootCategory = Category::whereNull('parent_id')->first();
 
@@ -108,10 +115,9 @@ public function servicesByCategory(Request $req)
         ->whereHas('product_flats', function ($q) {
             $q->where('status', 1)
               ->where('visible_individually', 1);
-        })
-        ->get();
+        })->take(4)->get();
 
-        return view('shop::home.index', compact('categories', 'services'));
+        return view('shop::home.index', compact('categories', 'services','products'));
 }
 
     // this will render about page
@@ -187,5 +193,48 @@ public function servicesByCategory(Request $req)
     return redirect()->back();
     }
 
+
+    public function bookingSearch(Request $request){
+
+        dd($request->all());
+
+        // Validate input (optional)
+        $request->validate([
+            'category_id' => 'nullable|integer|exists:categories,id',
+            'location' => 'nullable|string',
+            'date' => 'nullable|date',
+            'time' => 'nullable|string',
+        ]);
+
+        // Start query for booking-type products
+        $query = ProductFlat::where('type', 'booking')
+            ->where('status', 1)
+            ->where('visible_individually', 1);
+
+        // Filter by category
+        if ($request->filled('category_id')) {
+            $query->where('category_id', $request->category_id);
+        }
+
+        // Filter by location
+        if ($request->filled('location')) {
+            $query->where('location', $request->location);
+        }
+
+        // Filter by date
+        if ($request->filled('date')) {
+            $query->whereDate('available_from', '<=', $request->date)
+                  ->whereDate('available_to', '>=', $request->date);
+        }
+
+        // Filter by time
+        if ($request->filled('time')) {
+            $query->where('available_time', $request->time); // if you have available_time column
+        }
+
+        $services = $query->get();
+
+        return view('shop.booking-results', compact('services'));
+    }
     
 }

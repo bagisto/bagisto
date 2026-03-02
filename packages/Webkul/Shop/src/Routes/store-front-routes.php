@@ -37,6 +37,8 @@ Route::get('/switch/{ln}',[HomeController::class,'languageArabicSwitch'])->name(
 
 Route::get('/Switch/{ln}',[HomeController::class,'languageEnglishSwitch'])->name('language.switch.english');
 
+Route::get('/booking/search', [HomeController::class, 'bookingSearch'])->name('booking.search');
+
 Route::get('about', [HomeController::class, 'about'])
     ->name('shop.home.about')
     ->middleware('cache.response');
