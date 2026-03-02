@@ -13,6 +13,7 @@ use Webkul\Core\Eloquent\Repository;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Marketing\Repositories\SearchSynonymRepository;
 use Webkul\Product\Contracts\Product;
+use Carbon\Carbon;
 
 class ProductRepository extends Repository
 {
@@ -273,6 +274,34 @@ class ProductRepository extends Repository
                     ->whereIn('product_categories.category_id', explode(',', $params['category_id']));
             }
 
+            if (!empty($params['service_location'])) {
+                  $qb->join('booking_products', function ($join) use ($params) {
+                 $join->on('booking_products.product_id', '=', 'products.id')
+                ->where('booking_products.location', $params['service_location']);
+             });
+            }
+
+
+        if (!empty($params['service_date'])) {
+    $requestedDate = Carbon::parse($params['service_date'])->startOfDay();
+
+    $qb->whereExists(function ($query) use ($requestedDate) {
+        $query->select(DB::raw(1))
+              ->from('booking_products')
+              ->whereColumn('booking_products.product_id', 'products.id')
+              ->where(function ($q) use ($requestedDate) {
+                  $q->whereNull('booking_products.available_from')
+                    ->orWhereDate('booking_products.available_from', '<=', $requestedDate);
+              })
+              ->where(function ($q) use ($requestedDate) {
+                  $q->whereNull('booking_products.available_to')
+                    ->orWhereDate('booking_products.available_to', '>=', $requestedDate);
+              });
+    });
+}
+
+
+            
             if (! empty($params['channel_id'])) {
                 $qb->leftJoin('product_channels', 'products.id', '=', 'product_channels.product_id')
                     ->where('product_channels.channel_id', explode(',', $params['channel_id']));
@@ -289,6 +318,7 @@ class ProductRepository extends Repository
                         ->whereNull('product_customizable_options.id');
                 }
             }
+
 
             /**
              * Filter query by price.
