@@ -63,9 +63,11 @@ class CustomerController extends Controller
             return datagrid(CustomerDataGrid::class)->process();
         }
 
+        $channels = core()->getAllChannels();
+
         $groups = $this->customerGroupRepository->findWhere([['code', '<>', 'guest']]);
 
-        return view('admin::customers.customers.index', compact('groups'));
+        return view('admin::customers.customers.index', compact('channels', 'groups'));
     }
 
     /**
@@ -77,7 +79,8 @@ class CustomerController extends Controller
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'email' => 'required|unique:customers,email',
+            'channel_id' => 'required|integer',
+            'email' => 'required|unique:customers,email,NULL,id,channel_id,'.request('channel_id'),
             'date_of_birth' => 'date|before:today',
             'phone' => ['unique:customers,phone', new PhoneNumber],
         ]);
@@ -89,7 +92,6 @@ class CustomerController extends Controller
         $data = array_merge([
             'password' => bcrypt($password),
             'is_verified' => 1,
-            'channel_id' => core()->getCurrentChannel()->id,
         ], request()->only([
             'first_name',
             'last_name',
@@ -202,7 +204,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Login as customer
+     * Login as customer.
      *
      * @return \Illuminate\Http\RedirectResponse
      */

@@ -2035,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Canal',
                     'contact-number' => 'Número de Contacto',
                     'create-btn' => 'Crear Cliente',
                     'create-success' => 'Cliente creado exitosamente',
@@ -4737,6 +4738,12 @@ return [
                     'info' => 'Configurar números de pedido, pedidos mínimos y pedidos pendientes.',
                     'title' => 'Configuración de pedidos',
 
+                    'order-creation' => [
+                        'info' => 'Configure el número de intentos de creación de pedido cuando ocurran errores durante el pago.',
+                        'max-retry-attempts' => 'Número Máximo de Intentos',
+                        'title' => 'Creación de Pedido',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Generador de números de pedido',
                         'info' => 'Identificador único asignado a un pedido específico de un cliente, que ayuda al seguimiento, la comunicación y la referencia durante todo el proceso de compra.',
@@ -5351,9 +5358,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Descargar',
         'export' => 'Exportar',
+        'no' => 'No',
         'no-records' => 'Nada que exportar',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Sí',
     ],
 
     'validations' => [

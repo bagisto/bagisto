@@ -1,45 +1,32 @@
 import { test, expect } from "../../../setup";
 
+const RICH_SNIPPETS_URL = "admin/configuration/catalog/rich_snippets";
+const SAVE_BUTTON = 'button[type="submit"].primary-button:visible';
+const PRODUCT_TOGGLES = [
+    'label[for="catalog[rich_snippets][products][enable]"]',
+    'label[for="catalog[rich_snippets][products][show_sku]"]',
+    'label[for="catalog[rich_snippets][products][show_weight]"]',
+    'label[for="catalog[rich_snippets][products][show_categories]"]',
+    'label[for="catalog[rich_snippets][products][show_images]"]',
+    'label[for="catalog[rich_snippets][products][show_reviews]"]',
+    'label[for="catalog[rich_snippets][products][show_ratings]"]',
+    'label[for="catalog[rich_snippets][products][show_offers]"]',
+];
+
 test.describe("rich snippets configuration", () => {
     test("should update products settings including with sku, weight, categories, images, reviews, ratings, offers and etc.", async ({
         adminPage,
     }) => {
-        /**
-         * Navigate to the configuration page.
-         */
-        await adminPage.goto("admin/configuration/catalog/rich_snippets");
+        await adminPage.goto(RICH_SNIPPETS_URL);
 
-        await adminPage.click(
-            'label[for="catalog[rich_snippets][products][enable]"]'
-        );
-        await adminPage.click(
-            'label[for="catalog[rich_snippets][products][show_sku]"]'
-        );
-        await adminPage.click(
-            'label[for="catalog[rich_snippets][products][show_weight]"]'
-        );
-        await adminPage.click(
-            'label[for="catalog[rich_snippets][products][show_categories]"]'
-        );
-        await adminPage.click(
-            'label[for="catalog[rich_snippets][products][show_images]"]'
-        );
-        await adminPage.click(
-            'label[for="catalog[rich_snippets][products][show_reviews]"]'
-        );
-        await adminPage.click(
-            'label[for="catalog[rich_snippets][products][show_ratings]"]'
-        );
-        await adminPage.click(
-            'label[for="catalog[rich_snippets][products][show_offers]"]'
-        );
-        await adminPage.click('button[type="submit"].primary-button:visible');
+        for (const toggle of PRODUCT_TOGGLES) {
+            await adminPage.click(toggle);
+        }
 
-        /**
-         * Verify the change is saved.
-         */
+        await adminPage.click(SAVE_BUTTON);
+
         await expect(
-            adminPage.getByText("Configuration saved successfully")
+            adminPage.getByText("Configuration saved successfully").first(),
         ).toBeVisible();
     });
 });

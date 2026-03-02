@@ -1,12 +1,56 @@
 import { test, expect } from "../../setup";
+import type { Page } from "@playwright/test";
 import { generateName, generateDescription, generateRandomDate } from "../../utils/faker";
 
-async function createTemplate(adminPage) {
+const EMAIL_TEMPLATES_URL = "admin/marketing/communications/email-templates";
+const EVENTS_URL = "admin/marketing/communications/events";
+const CAMPAIGNS_URL = "admin/marketing/communications/campaigns";
+const PRIMARY_BUTTON = "div.primary-button:visible";
+const CONFIRM_BUTTON = "button.transparent-button + button.primary-button:visible";
+const FORM_SUBMIT_BUTTON = 'button[class="primary-button"]:visible';
+const EDIT_ICON = "span.cursor-pointer.icon-edit";
+const DELETE_ICON = "span.cursor-pointer.icon-delete";
+const VISIBLE_TEXT_INPUTS =
+    'textarea.rounded-md:visible, input[type="text"].rounded-md:visible';
+
+async function openCommunicationsPage(adminPage: Page, url: string) {
+    await adminPage.goto(url);
+}
+
+async function clickCreate(adminPage: Page, selector = PRIMARY_BUTTON) {
+    await adminPage.click(selector);
+}
+
+async function clickFirstIcon(adminPage: Page, selector: string) {
+    await adminPage.waitForSelector(selector, { state: "visible" });
+    const icons = await adminPage.$$(selector);
+    expect(icons.length).toBeGreaterThan(0);
+    await icons[0].click();
+}
+
+async function fillVisibleTextInputs(adminPage: Page, value: string) {
+    const inputs = await adminPage.$$(VISIBLE_TEXT_INPUTS);
+
+    for (const input of inputs) {
+        await input.fill(value);
+    }
+}
+
+async function submitPrimaryForm(adminPage: Page) {
+    await adminPage.click(FORM_SUBMIT_BUTTON);
+}
+
+async function confirmDelete(adminPage: Page) {
+    await adminPage.click(CONFIRM_BUTTON);
+}
+
+async function createTemplate(adminPage: Page) {
     /**
      * Reaching the create template page.
      */
-    await adminPage.goto(`admin/marketing/communications/email-templates`);
-    await adminPage.click(
+    await openCommunicationsPage(adminPage, EMAIL_TEMPLATES_URL);
+    await clickCreate(
+        adminPage,
         'div.primary-button:visible:has-text("Create Template")'
     );
 
@@ -42,13 +86,8 @@ test.describe("communication management", () => {
          */
         await createTemplate(adminPage);
 
-        await adminPage.goto(`admin/marketing/communications/email-templates`);
-
-        await adminPage.waitForSelector("span.cursor-pointer.icon-edit", {
-            state: "visible",
-        });
-        const iconEdit = await adminPage.$$("span.cursor-pointer.icon-edit");
-        await iconEdit[0].click();
+        await openCommunicationsPage(adminPage, EMAIL_TEMPLATES_URL);
+        await clickFirstIcon(adminPage, EDIT_ICON);
         await adminPage.fill('input[name="name"]', generateName());
 
         /**
@@ -67,19 +106,9 @@ test.describe("communication management", () => {
          */
         await createTemplate(adminPage);
 
-        await adminPage.goto(`admin/marketing/communications/email-templates`);
-
-        await adminPage.waitForSelector("span.cursor-pointer.icon-delete", {
-            state: "visible",
-        });
-        const iconDelete = await adminPage.$$(
-            "span.cursor-pointer.icon-delete"
-        );
-        await iconDelete[0].click();
-
-        await adminPage.click(
-            "button.transparent-button + button.primary-button:visible"
-        );
+        await openCommunicationsPage(adminPage, EMAIL_TEMPLATES_URL);
+        await clickFirstIcon(adminPage, DELETE_ICON);
+        await confirmDelete(adminPage);
 
         await expect(
             adminPage.getByText("Template Deleted successfully")
@@ -87,25 +116,18 @@ test.describe("communication management", () => {
     });
 
     test("create event", async ({ adminPage }) => {
-        await adminPage.goto(`admin/marketing/communications/events`);
-
-        await adminPage.click("div.primary-button:visible");
+        await openCommunicationsPage(adminPage, EVENTS_URL);
+        await clickCreate(adminPage);
 
         adminPage.hover('input[name="name"]');
 
-        const inputs = await adminPage.$$(
-            'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
-        );
-
-        for (let input of inputs) {
-            await input.fill(generateName());
-        }
+        await fillVisibleTextInputs(adminPage, generateName());
 
         const time = generateRandomDate();
 
         await adminPage.fill('input[name="date"]', time);
 
-        await adminPage.click('button[class="primary-button"]:visible');
+        await submitPrimaryForm(adminPage);
 
         await expect(
             adminPage.getByText("Events Created Successfully")
@@ -113,17 +135,11 @@ test.describe("communication management", () => {
     });
 
     test("edit event", async ({ adminPage }) => {
-        await adminPage.goto(`admin/marketing/communications/events`);
-
-        await adminPage.waitForSelector(
+        await openCommunicationsPage(adminPage, EVENTS_URL);
+        await clickFirstIcon(
+            adminPage,
             'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
         );
-
-        const iconEdit = await adminPage.$$(
-            'span[class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
-        );
-
-        await iconEdit[0].click();
 
         const iconExists = await adminPage
             .waitForSelector(
@@ -150,19 +166,13 @@ test.describe("communication management", () => {
 
         adminPage.hover('input[name="name"]');
 
-        const inputs = await adminPage.$$(
-            'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
-        );
-
-        for (let input of inputs) {
-            await input.fill(generateDescription(200));
-        }
+        await fillVisibleTextInputs(adminPage, generateDescription(200));
 
         const time = generateRandomDate();
 
         await adminPage.fill('input[name="date"]', time);
 
-        await adminPage.click('button[class="primary-button"]:visible');
+        await submitPrimaryForm(adminPage);
 
         await expect(
             adminPage.getByText("Events Updated Successfully")
@@ -170,21 +180,12 @@ test.describe("communication management", () => {
     });
 
     test("delete event", async ({ adminPage }) => {
-        await adminPage.goto(`admin/marketing/communications/events`);
-
-        await adminPage.waitForSelector(
+        await openCommunicationsPage(adminPage, EVENTS_URL);
+        await clickFirstIcon(
+            adminPage,
             'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
         );
-
-        const iconDelete = await adminPage.$$(
-            'span[class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"]'
-        );
-
-        await iconDelete[0].click();
-
-        await adminPage.click(
-            "button.transparent-button + button.primary-button:visible"
-        );
+        await confirmDelete(adminPage);
 
         await expect(
             adminPage.getByText("Events Deleted Successfully")
@@ -197,43 +198,29 @@ test.describe("communication management", () => {
          */
         await createTemplate(adminPage);
 
-        await adminPage.goto(`admin/marketing/communications/events`);
-
-        await adminPage.click("div.primary-button:visible");
+        await openCommunicationsPage(adminPage, EVENTS_URL);
+        await clickCreate(adminPage);
 
         adminPage.hover('input[name="name"]');
 
-        const inputs = await adminPage.$$(
-            'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
-        );
-
-        for (let input of inputs) {
-            await input.fill(generateDescription(200));
-        }
+        await fillVisibleTextInputs(adminPage, generateDescription(200));
 
         const time = generateRandomDate();
 
         await adminPage.fill('input[name="date"]', time);
 
-        await adminPage.click('button[class="primary-button"]:visible');
+        await submitPrimaryForm(adminPage);
 
         await expect(
             adminPage.getByText("Events Created Successfully")
         ).toBeVisible();
 
-        await adminPage.goto(`admin/marketing/communications/campaigns`);
-
-        await adminPage.click("div.primary-button:visible");
+        await openCommunicationsPage(adminPage, CAMPAIGNS_URL);
+        await clickCreate(adminPage);
 
         await adminPage.click('input[type="checkbox"] + label.peer');
 
-        const newInputs = await adminPage.$$(
-            'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
-        );
-
-        for (let input of newInputs) {
-            await input.fill(generateDescription(200));
-        }
+        await fillVisibleTextInputs(adminPage, generateDescription(200));
 
         const selects = await adminPage.$$("select.custom-select");
 
@@ -258,7 +245,7 @@ test.describe("communication management", () => {
             await adminPage.click('input[type="checkbox"] + label.peer');
         }
 
-        await adminPage.click('button[class="primary-button"]:visible');
+        await submitPrimaryForm(adminPage);
 
         await expect(
             adminPage.getByText("Campaign created successfully.")
@@ -266,27 +253,15 @@ test.describe("communication management", () => {
     });
 
     test("edit campaign", async ({ adminPage }) => {
-        await adminPage.goto(`admin/marketing/communications/campaigns`);
-
-        await adminPage.waitForSelector(
+        await openCommunicationsPage(adminPage, CAMPAIGNS_URL);
+        await clickFirstIcon(
+            adminPage,
             'span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]'
         );
-
-        const iconEdit = await adminPage.$$(
-            'span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-edit"]'
-        );
-
-        await iconEdit[0].click();
 
         await adminPage.click('input[type="checkbox"] + label.peer');
 
-        const inputs = await adminPage.$$(
-            'textarea.rounded-md:visible, input[type="text"].rounded-md:visible'
-        );
-
-        for (let input of inputs) {
-            await input.fill(generateDescription(200));
-        }
+        await fillVisibleTextInputs(adminPage, generateDescription(200));
 
         const selects = await adminPage.$$("select.custom-select");
 
@@ -311,7 +286,7 @@ test.describe("communication management", () => {
             await adminPage.click('input[type="checkbox"] + label.peer');
         }
 
-        await adminPage.click('button[class="primary-button"]:visible');
+        await submitPrimaryForm(adminPage);
 
         await expect(
             adminPage.getByText("Campaign updated successfully.")
@@ -319,21 +294,12 @@ test.describe("communication management", () => {
     });
 
     test("delete campaign", async ({ adminPage }) => {
-        await adminPage.goto(`admin/marketing/communications/campaigns`);
-
-        await adminPage.waitForSelector(
+        await openCommunicationsPage(adminPage, CAMPAIGNS_URL);
+        await clickFirstIcon(
+            adminPage,
             'span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]'
         );
-
-        const iconDelete = await adminPage.$$(
-            'span[class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center icon-delete"]'
-        );
-
-        await iconDelete[0].click();
-
-        await adminPage.click(
-            "button.transparent-button + button.primary-button:visible"
-        );
+        await confirmDelete(adminPage);
 
         await expect(
             adminPage.getByText("Campaign deleted successfully")

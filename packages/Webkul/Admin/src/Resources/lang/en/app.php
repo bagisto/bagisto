@@ -2035,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Channel',
                     'contact-number' => 'Contact Number',
                     'create-btn' => 'Create Customer',
                     'create-success' => 'Customer created successfully',
@@ -4736,6 +4737,12 @@ return [
                     'info' => 'Set order numbers, minimum orders and back orders.',
                     'title' => 'Order Settings',
 
+                    'order-creation' => [
+                        'info' => 'Configure order creation retry attempts when errors occur during checkout.',
+                        'max-retry-attempts' => 'Max Retry Attempts',
+                        'title' => 'Order Creation',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Order Number Generator',
                         'info' => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',
@@ -5350,9 +5357,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Download',
         'export' => 'Export',
+        'no' => 'No',
         'no-records' => 'Nothing to export',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Yes',
     ],
 
     'validations' => [

@@ -705,4 +705,3 @@ test("should delete a profile", async ({ page }) => {
         page.getByText("Customer deleted successfully").first(),
     ).toBeVisible();
 });
-});

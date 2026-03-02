@@ -41,8 +41,10 @@ class OrderRepository extends Repository
      *
      * @return \Webkul\Sales\Contracts\Order
      */
-    public function createOrderIfNotThenRetry(array $data)
+    public function createOrderIfNotThenRetry(array $data, int $attempt = 1, ?int $maxAttempts = null)
     {
+        $maxAttempts = $maxAttempts ?? core()->getConfigData('sales.order_settings.order_creation.max_retry_attempts') ?? 3;
+
         DB::beginTransaction();
 
         try {
@@ -88,11 +90,16 @@ class OrderRepository extends Repository
             /* storing log for errors */
             Log::error(
                 'OrderRepository:createOrderIfNotThenRetry: '.$e->getMessage(),
-                ['data' => $data]
+                ['data' => $data, 'attempt' => $attempt, 'max_attempts' => $maxAttempts]
             );
 
-            /* recalling */
-            return $this->createOrderIfNotThenRetry($data);
+            /* recalling if max attempts not reached */
+            if ($attempt < $maxAttempts) {
+                return $this->createOrderIfNotThenRetry($data, $attempt + 1, $maxAttempts);
+            }
+
+            /* rethrow the exception if max attempts reached */
+            throw $e;
         } finally {
             /* commit in each case */
             DB::commit();
