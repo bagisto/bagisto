@@ -82,6 +82,7 @@ it('should create a new customer', function () {
         'last_name' => fake()->lastName(),
         'gender' => fake()->randomElement(['male', 'female', 'other']),
         'email' => fake()->email(),
+        'channel_id' => 1,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
@@ -115,6 +116,7 @@ it('should create a new customer and send notification to the customer', functio
         'last_name' => fake()->lastName(),
         'gender' => fake()->randomElement(['male', 'female', 'other']),
         'email' => fake()->email(),
+        'channel_id' => 1,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));

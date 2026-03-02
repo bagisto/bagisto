@@ -2035,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Canal',
                     'contact-number' => 'Número de Contacte',
                     'create-btn' => 'Crear Client',
                     'create-success' => 'Client creat amb éxit',
@@ -4737,6 +4738,12 @@ return [
                     'info' => 'Configura els números de comanda, les comandes mínimes i les comandes pendents.',
                     'title' => 'Configuració de comandes',
 
+                    'order-creation' => [
+                        'info' => 'Configureu el nombre de intents de creació de comanda quan es produeixin errors durant el pagament.',
+                        'max-retry-attempts' => 'Nombre Màxim d\'Intents',
+                        'title' => 'Creació de Comanda',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Generador de números de comanda',
                         'info' => 'Identificador únic assignat a una comanda específica d\'un client, que ajuda a fer un seguiment, la comunicació i la referència durant tot el procés de compra.',
@@ -5351,9 +5358,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Descarregar',
         'export' => 'Exportar',
+        'no' => 'No',
         'no-records' => 'Res que exportar',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Sí',
     ],
 
     'validations' => [

@@ -3,7 +3,6 @@ import {
     generateDescription,
     generateRandomNumericString,
     getImageFile,
-    generateSKU,
 } from "../../../utils/faker";
 
 test.describe("product configuration", () => {

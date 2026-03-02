@@ -8,18 +8,6 @@ use Webkul\Customer\Facades\Captcha;
 class RegistrationRequest extends FormRequest
 {
     /**
-     * Define your rules.
-     *
-     * @var array
-     */
-    private $rules = [
-        'first_name' => 'string|required',
-        'last_name' => 'string|required',
-        'email' => 'email|required|unique:customers,email',
-        'password' => 'confirmed|min:6|required',
-    ];
-
-    /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
@@ -36,7 +24,14 @@ class RegistrationRequest extends FormRequest
      */
     public function rules()
     {
-        return Captcha::getValidations($this->rules);
+        $rules = [
+            'first_name' => 'string|required',
+            'last_name' => 'string|required',
+            'email' => 'email|required|unique:customers,email,NULL,id,channel_id,'.core()->getCurrentChannel()->id,
+            'password' => 'confirmed|min:6|required',
+        ];
+
+        return Captcha::getValidations($rules);
     }
 
     /**

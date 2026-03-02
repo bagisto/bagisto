@@ -1,4 +1,5 @@
 import { test, expect } from "../../setup";
+import type { Page } from "@playwright/test";
 import {
     generateFirstName,
     generateLastName,
@@ -9,13 +10,64 @@ import {
     generateDescription,
 } from "../../utils/faker";
 
-async function createCustomer(adminPage) {
-    await adminPage.goto("admin/customers");
-    await adminPage.waitForSelector("button.primary-button:visible", {
+const CUSTOMERS_URL = "admin/customers";
+const PRIMARY_BUTTON = "button.primary-button:visible";
+const OPEN_DETAILS_ICON = "a.cursor-pointer.icon-sort-right";
+const CONFIRM_PRIMARY_BUTTON =
+    'button[type="button"].transparent-button + button[type="button"].primary-button';
+const MASS_CHECKBOX = ".icon-uncheckbox:visible";
+const SELECT_ACTION_BUTTON = 'button:has-text("Select Action")';
+const AGREE_BUTTON = 'button.primary-button:has-text("Agree")';
+const CUSTOMER_EDIT_LINK =
+    'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible';
+
+async function openCustomersList(adminPage: Page) {
+    await adminPage.goto(CUSTOMERS_URL);
+    await adminPage.waitForSelector(PRIMARY_BUTTON, {
         state: "visible",
     });
+}
 
-    await adminPage.click("button.primary-button:visible");
+async function openFirstCustomerDetails(adminPage: Page) {
+    await openCustomersList(adminPage);
+    await adminPage.waitForSelector(OPEN_DETAILS_ICON, {
+        state: "visible",
+    });
+    const detailIcons = await adminPage.$$(OPEN_DETAILS_ICON);
+    expect(detailIcons.length).toBeGreaterThan(0);
+    await detailIcons[0].click();
+}
+
+async function confirmAgreeDialog(adminPage: Page) {
+    await adminPage.waitForSelector("text=Are you sure", {
+        state: "visible",
+        timeout: 1000,
+    });
+    const agreeButton = adminPage.locator(AGREE_BUTTON);
+    await expect(agreeButton).toBeVisible();
+    await agreeButton.click();
+}
+
+async function openMassActionMenu(adminPage: Page) {
+    await openCustomersList(adminPage);
+    await adminPage.waitForSelector(MASS_CHECKBOX, {
+        state: "visible",
+    });
+    const checkboxes = await adminPage.$$(MASS_CHECKBOX);
+    expect(checkboxes.length).toBeGreaterThan(1);
+    await checkboxes[1].click();
+
+    const selectActionButton = await adminPage.waitForSelector(
+        SELECT_ACTION_BUTTON,
+        { timeout: 1000 }
+    );
+    await selectActionButton.click();
+}
+
+async function createCustomer(adminPage: Page) {
+    await openCustomersList(adminPage);
+
+    await adminPage.click(PRIMARY_BUTTON);
 
     await adminPage.fill(
         'input[name="first_name"]:visible',
@@ -46,26 +98,12 @@ test.describe("customer management", () => {
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
+        await openFirstCustomerDetails(adminPage);
+
+        await adminPage.waitForSelector(CUSTOMER_EDIT_LINK, {
             state: "visible",
         });
-
-        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "a.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
-
-        await adminPage.waitForSelector(
-            'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible',
-            { state: "visible" }
-        );
-        const createBtn = await adminPage.$$(
-            'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible'
-        );
+        const createBtn = await adminPage.$$(CUSTOMER_EDIT_LINK);
         await createBtn[0].click();
 
         await adminPage.fill(
@@ -92,18 +130,7 @@ test.describe("customer management", () => {
     });
 
     test("should be add address", async ({ adminPage }) => {
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
-
-        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "a.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        await openFirstCustomerDetails(adminPage);
 
         await adminPage.waitForSelector(
             'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible'
@@ -131,18 +158,7 @@ test.describe("customer management", () => {
     });
 
     test("should be able to edit address", async ({ adminPage }) => {
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
-
-        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "a.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        await openFirstCustomerDetails(adminPage);
 
         await adminPage.waitForSelector(
             'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible'
@@ -176,18 +192,7 @@ test.describe("customer management", () => {
     });
 
     test("should be set default address", async ({ adminPage }) => {
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
-
-        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "a.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        await openFirstCustomerDetails(adminPage);
 
         await adminPage.waitForSelector(
             'button.flex:has-text("Set as Default"):visible'
@@ -209,27 +214,14 @@ test.describe("customer management", () => {
     });
 
     test("should be able to delete address", async ({ adminPage }) => {
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
-
-        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "a.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        await openFirstCustomerDetails(adminPage);
 
         await adminPage.waitForSelector(
             'p[class="cursor-pointer text-red-600 transition-all hover:underline"]:visible'
         );
         await adminPage.locator("p.text-red-600").click();
 
-        await adminPage.click(
-            'button[type="button"].transparent-button + button[type="button"].primary-button'
-        );
+        await adminPage.click(CONFIRM_PRIMARY_BUTTON);
 
         await expect(
             adminPage.getByText("Address Deleted Successfully")
@@ -237,20 +229,13 @@ test.describe("customer management", () => {
     });
 
     test("should be add note in customer", async ({ adminPage }) => {
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible");
+        await openCustomersList(adminPage);
 
         const Description = generateDescription();
         /**
          * edit customer profile
          */
-        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "a.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        await openFirstCustomerDetails(adminPage);
         await adminPage.waitForTimeout(5000);
         await adminPage.reload();
 
@@ -285,18 +270,7 @@ test.describe("customer management", () => {
     test("should be able to delete account", async ({ adminPage }) => {
         await createCustomer(adminPage);
 
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
-
-        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "a.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        await openFirstCustomerDetails(adminPage);
         await adminPage.waitForTimeout(3000);
 
         await adminPage.click(".icon-cancel:visible");
@@ -316,24 +290,11 @@ test.describe("customer management", () => {
     });
 
     test("should be able to create order", async ({ adminPage }) => {
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
-
-        await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
-            state: "visible",
-        });
-        const iconRight = await adminPage.$$(
-            "a.cursor-pointer.icon-sort-right"
-        );
-        await iconRight[0].click();
+        await openFirstCustomerDetails(adminPage);
 
         await adminPage.click(".icon-cart:visible");
 
-        await adminPage.click(
-            'button[type="button"].transparent-button + button[type="button"].primary-button'
-        );
+        await adminPage.click(CONFIRM_PRIMARY_BUTTON);
 
         await expect(adminPage.getByText("Cart Items").first()).toBeVisible();
     });
@@ -346,39 +307,11 @@ test.describe("customer management", () => {
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
-
-        await adminPage.waitForSelector(".icon-uncheckbox:visible", {
-            state: "visible",
-        });
-        const checkboxes = await adminPage.$$(".icon-uncheckbox:visible");
-        await checkboxes[1].click();
-
-        let selectActionButton = await adminPage.waitForSelector(
-            'button:has-text("Select Action")',
-            { timeout: 1000 }
-        );
-        await selectActionButton.click();
+        await openMassActionMenu(adminPage);
 
         await adminPage.click('a:has-text("Delete")', { timeout: 1000 });
 
-        await adminPage.waitForSelector("text=Are you sure", {
-            state: "visible",
-            timeout: 1000,
-        });
-
-        const agreeButton = await adminPage.locator(
-            'button.primary-button:has-text("Agree")'
-        );
-
-        if (await agreeButton.isVisible()) {
-            await agreeButton.click();
-        } else {
-            console.error("Agree button not found or not visible.");
-        }
+        await confirmAgreeDialog(adminPage);
 
         await expect(
             adminPage.getByText("Selected data successfully deleted")
@@ -393,22 +326,7 @@ test.describe("customer management", () => {
          */
         await createCustomer(adminPage);
 
-        await adminPage.goto("admin/customers");
-        await adminPage.waitForSelector("button.primary-button:visible", {
-            state: "visible",
-        });
-
-        await adminPage.waitForSelector(".icon-uncheckbox:visible", {
-            state: "visible",
-        });
-        const checkboxes = await adminPage.$$(".icon-uncheckbox:visible");
-        await checkboxes[1].click();
-
-        let selectActionButton = await adminPage.waitForSelector(
-            'button:has-text("Select Action")',
-            { timeout: 1000 }
-        );
-        await selectActionButton.click();
+        await openMassActionMenu(adminPage);
 
         await adminPage.hover('a:has-text("Update Status")', { timeout: 1000 });
         await adminPage.waitForSelector(
@@ -417,19 +335,7 @@ test.describe("customer management", () => {
         );
         await adminPage.click('a:has-text("Active")');
 
-        await adminPage.waitForSelector("text=Are you sure", {
-            state: "visible",
-            timeout: 1000,
-        });
-        const agreeButton = await adminPage.locator(
-            'button.primary-button:has-text("Agree")'
-        );
-
-        if (await agreeButton.isVisible()) {
-            await agreeButton.click();
-        } else {
-            console.error("Agree button not found or not visible.");
-        }
+        await confirmAgreeDialog(adminPage);
 
         await expect(
             adminPage.getByText("Selected Customers successfully updated")

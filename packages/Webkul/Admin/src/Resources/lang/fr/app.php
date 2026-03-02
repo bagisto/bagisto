@@ -2035,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Canal',
                     'contact-number' => 'Numéro de contact',
                     'create-btn' => 'Créer un client',
                     'create-success' => 'Client créé avec succès',
@@ -4737,6 +4738,12 @@ return [
                     'info' => 'Définir les numéros de commande, les commandes minimales et les commandes en attente.',
                     'title' => 'Paramètres de commande',
 
+                    'order-creation' => [
+                        'info' => 'Configurez le nombre de tentatives de création de commande en cas d\'erreurs lors du paiement.',
+                        'max-retry-attempts' => 'Nombre Maximum de Tentatives',
+                        'title' => 'Création de Commande',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Générateur de numéro de commande',
                         'info' => 'Identifiant unique attribué à une commande client spécifique, facilitant le suivi, la communication et la référence tout au long du processus d\'achat.',
@@ -5351,9 +5358,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Télécharger',
         'export' => 'Exporter',
+        'no' => 'Non',
         'no-records' => 'Rien à exporter',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Oui',
     ],
 
     'validations' => [

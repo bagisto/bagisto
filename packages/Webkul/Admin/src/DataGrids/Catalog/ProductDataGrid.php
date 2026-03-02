@@ -5,6 +5,7 @@ namespace Webkul\Admin\DataGrids\Catalog;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Admin\Exports\ProductDataGridExport;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\DataGrid\DataGrid;
@@ -273,6 +274,14 @@ class ProductDataGrid extends DataGrid
                 ],
             ]);
         }
+    }
+
+    /**
+     * Return a custom exporter that includes all product attribute values.
+     */
+    public function getExporter(): ProductDataGridExport
+    {
+        return new ProductDataGridExport($this);
     }
 
     /**

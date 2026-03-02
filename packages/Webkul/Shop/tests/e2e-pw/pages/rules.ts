@@ -75,7 +75,7 @@ export class CreateRules {
             await this.locators.conditionValueInput.fill(value);
         } else if (checkboxSelect) {
             const label = this.page.locator(
-                `label:has-text("${checkboxSelect}")`,
+                `label:has(div:text-is("${checkboxSelect}"))`,
             );
             const input = label.locator("input");
             await expect(input).toBeAttached();

@@ -73,18 +73,24 @@ class CustomerDataGrid extends DataGrid
      */
     public function prepareColumns()
     {
+        $allChannels = core()->getAllChannels();
+
         $this->addColumn([
             'index' => 'channel_id',
             'label' => trans('admin::app.customers.customers.index.datagrid.channel'),
             'type' => 'string',
             'filterable' => true,
             'filterable_type' => 'dropdown',
-            'filterable_options' => collect(core()->getAllChannels())
+            'filterable_options' => collect($allChannels)
                 ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
                 ->values()
                 ->toArray(),
             'sortable' => true,
-            'visibility' => false,
+            'closure' => function ($row) use ($allChannels) {
+                $channel = $allChannels->firstWhere('id', $row->channel_id);
+
+                return $channel ? $channel->name : '-';
+            },
         ]);
 
         $this->addColumn([
