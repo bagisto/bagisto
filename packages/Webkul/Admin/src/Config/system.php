@@ -1212,7 +1212,7 @@ return [
                 'type' => 'text',
                 'validation' => 'between:1,4|integer',
                 'channel_based' => true,
-                'default_value' => 1,
+                'default' => 1,
             ],
         ],
     ], [
@@ -1538,14 +1538,14 @@ return [
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => false,
-                'default_value' => config('mail.mailers.smtp.host'),
+                'default' => config('mail.mailers.smtp.host'),
             ], [
                 'name' => 'port',
                 'title' => 'admin::app.configuration.index.email.smtp.port',
                 'type' => 'text',
                 'validation' => 'required|numeric',
                 'channel_based' => false,
-                'default_value' => config('mail.mailers.smtp.port'),
+                'default' => config('mail.mailers.smtp.port'),
             ], [
                 'name' => 'encryption',
                 'title' => 'admin::app.configuration.index.email.smtp.encryption',
@@ -1556,21 +1556,21 @@ return [
                     ['title' => 'None', 'value' => 'none'],
                 ],
                 'channel_based' => false,
-                'default_value' => config('mail.mailers.smtp.encryption', 'tls'),
+                'default' => config('mail.mailers.smtp.encryption', 'tls'),
             ], [
                 'name' => 'username',
                 'title' => 'admin::app.configuration.index.email.smtp.username',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => false,
-                'default_value' => config('mail.mailers.smtp.username'),
+                'default' => config('mail.mailers.smtp.username'),
             ], [
                 'name' => 'password',
                 'title' => 'admin::app.configuration.index.email.smtp.password',
                 'type' => 'password',
                 'validation' => 'required',
                 'channel_based' => false,
-                'default_value' => config('mail.mailers.smtp.password'),
+                'default' => config('mail.mailers.smtp.password'),
             ],
         ],
     ], [
@@ -1586,7 +1586,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.sender-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.from.name'),
+                'default' => config('mail.from.name'),
             ], [
                 'name' => 'sender_email',
                 'title' => 'admin::app.configuration.index.email.email-settings.sender-email',
@@ -1594,7 +1594,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.sender-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.from.address'),
+                'default' => config('mail.from.address'),
             ], [
                 'name' => 'admin_name',
                 'title' => 'admin::app.configuration.index.email.email-settings.admin-name',
@@ -1602,7 +1602,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.admin-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.admin.name'),
+                'default' => config('mail.admin.name'),
             ], [
                 'name' => 'admin_email',
                 'title' => 'admin::app.configuration.index.email.email-settings.admin-email',
@@ -1610,7 +1610,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.admin-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.admin.address'),
+                'default' => config('mail.admin.address'),
             ], [
                 'name' => 'contact_name',
                 'title' => 'admin::app.configuration.index.email.email-settings.contact-name',
@@ -1618,7 +1618,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.contact-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.contact.name'),
+                'default' => config('mail.contact.name'),
             ], [
                 'name' => 'contact_email',
                 'title' => 'admin::app.configuration.index.email.email-settings.contact-email',
@@ -1626,7 +1626,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.contact-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.contact.address'),
+                'default' => config('mail.contact.address'),
             ],
         ],
     ], [

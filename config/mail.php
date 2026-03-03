@@ -140,7 +140,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | General contact address used in the footer of the email templates.
-
+    |
     | Here, you may specify a name and address that is used globally for
     | all e-mails that are sent by your application.
     |
