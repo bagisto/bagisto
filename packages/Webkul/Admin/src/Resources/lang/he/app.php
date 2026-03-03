@@ -4625,13 +4625,15 @@ return [
                 'title' => 'אימייל',
 
                 'smtp' => [
-                    'title' => 'SMTP',
-                    'info' => 'הגדר את הגדרות שרת SMTP לשליחת דוא"ל מהחנות שלך.',
-                    'host' => 'מארח',
-                    'port' => 'פורט',
+                    'driver-mismatch-info' => 'מנהל הדואר שלך מוגדר כ-":driver" במקום "bagisto-dynamic-smtp". כל שינוי שייעשה כאן לא יהיה לו כל אפקט. אנא עדכן את MAIL_MAILER=bagisto-dynamic-smtp בקובץ .env שלך כדי להפעיל את ההגדרות האלה.',
+                    'driver-mismatch-title' => 'הגדרות אלו כרגע לא פעילות.',
                     'encryption' => 'הצפנה',
-                    'username' => 'שם משתמש',
+                    'host' => 'מארח',
+                    'info' => 'הגדר את הגדרות שרת SMTP לשליחת דוא"ל מהחנות שלך.',
                     'password' => 'סיסמה',
+                    'port' => 'פורט',
+                    'title' => 'SMTP',
+                    'username' => 'שם משתמש',
                 ],
 
                 'email-settings' => [

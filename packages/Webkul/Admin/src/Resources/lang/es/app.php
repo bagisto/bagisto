@@ -4625,13 +4625,15 @@ return [
                 'title' => 'Correo electrónico',
 
                 'smtp' => [
-                    'title' => 'SMTP',
-                    'info' => 'Configure los ajustes del servidor SMTP para enviar correos electrónicos desde su tienda.',
-                    'host' => 'Host',
-                    'port' => 'Puerto',
+                    'driver-mismatch-info' => 'Su controlador de correo está establecido en ":driver" en lugar de "bagisto-dynamic-smtp". Cualquier cambio realizado aquí no tendrá efecto. Por favor, actualice MAIL_MAILER=bagisto-dynamic-smtp en su archivo .env para activar esta configuración.',
+                    'driver-mismatch-title' => 'Esta configuración está actualmente inactiva.',
                     'encryption' => 'Cifrado',
-                    'username' => 'Nombre de usuario',
+                    'host' => 'Host',
+                    'info' => 'Configure los ajustes del servidor SMTP para enviar correos electrónicos desde su tienda.',
                     'password' => 'Contraseña',
+                    'port' => 'Puerto',
+                    'title' => 'SMTP',
+                    'username' => 'Nombre de usuario',
                 ],
 
                 'email-settings' => [

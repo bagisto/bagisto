@@ -4625,13 +4625,15 @@ return [
                 'title' => 'E-mail',
 
                 'smtp' => [
-                    'title' => 'SMTP',
-                    'info' => 'Configure as configurações do servidor SMTP para enviar e-mails da sua loja.',
-                    'host' => 'Host',
-                    'port' => 'Porta',
+                    'driver-mismatch-info' => 'Seu driver de e-mail está definido como ":driver" em vez de "bagisto-dynamic-smtp". Quaisquer alterações feitas aqui não terão efeito. Por favor, atualize MAIL_MAILER=bagisto-dynamic-smtp em seu arquivo .env para ativar essas configurações.',
+                    'driver-mismatch-title' => 'Estas configurações estão atualmente inativas.',
                     'encryption' => 'Criptografia',
-                    'username' => 'Nome de usuário',
+                    'host' => 'Host',
+                    'info' => 'Configure as configurações do servidor SMTP para enviar e-mails da sua loja.',
                     'password' => 'Senha',
+                    'port' => 'Porta',
+                    'title' => 'SMTP',
+                    'username' => 'Nome de usuário',
                 ],
 
                 'email-settings' => [

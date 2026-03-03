@@ -4625,13 +4625,15 @@ return [
                 'title' => 'Email',
 
                 'smtp' => [
-                    'title' => 'SMTP',
-                    'info' => 'Konfigurasikan pengaturan server SMTP untuk mengirim email dari toko Anda.',
-                    'host' => 'Host',
-                    'port' => 'Port',
+                    'driver-mismatch-info' => 'Driver email Anda diatur ke ":driver" alih-alih "bagisto-dynamic-smtp". Setiap perubahan yang dilakukan di sini tidak akan berpengaruh. Harap perbarui MAIL_MAILER=bagisto-dynamic-smtp di file .env Anda untuk mengaktifkan pengaturan ini.',
+                    'driver-mismatch-title' => 'Pengaturan ini saat ini tidak aktif.',
                     'encryption' => 'Enkripsi',
-                    'username' => 'Nama Pengguna',
+                    'host' => 'Host',
+                    'info' => 'Konfigurasikan pengaturan server SMTP untuk mengirim email dari toko Anda.',
                     'password' => 'Kata Sandi',
+                    'port' => 'Port',
+                    'title' => 'SMTP',
+                    'username' => 'Nama Pengguna',
                 ],
 
                 'email-settings' => [

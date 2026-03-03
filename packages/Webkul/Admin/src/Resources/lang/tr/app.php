@@ -4625,13 +4625,15 @@ return [
                 'title' => 'E-posta',
 
                 'smtp' => [
-                    'title' => 'SMTP',
-                    'info' => 'Mağazanızdan e-posta göndermek için SMTP sunucu ayarlarını yapılandırın.',
-                    'host' => 'Ana Bilgisayar',
-                    'port' => 'Port',
+                    'driver-mismatch-info' => 'Posta sürücünüz "bagisto-dynamic-smtp" yerine ":driver" olarak ayarlanmış. Burada yapılan herhangi bir değişiklik etkili olmayacaktır. Bu ayarları etkinleştirmek için lütfen .env dosyanızda MAIL_MAILER=bagisto-dynamic-smtp güncelleyin.',
+                    'driver-mismatch-title' => 'Bu ayarlar şu anda etkin değil.',
                     'encryption' => 'Şifreleme',
-                    'username' => 'Kullanıcı Adı',
+                    'host' => 'Ana Bilgisayar',
+                    'info' => 'Mağazanızdan e-posta göndermek için SMTP sunucu ayarlarını yapılandırın.',
                     'password' => 'Şifre',
+                    'port' => 'Port',
+                    'title' => 'SMTP',
+                    'username' => 'Kullanıcı Adı',
                 ],
 
                 'email-settings' => [

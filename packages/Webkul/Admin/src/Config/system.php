@@ -1527,6 +1527,12 @@ return [
         'sort' => 1,
         'fields' => [
             [
+                'name' => 'driver_notice',
+                'title' => 'admin::app.configuration.index.email.smtp.driver-notice',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.smtp-driver-notice',
+            ],
+            [
                 'name' => 'host',
                 'title' => 'admin::app.configuration.index.email.smtp.host',
                 'type' => 'text',

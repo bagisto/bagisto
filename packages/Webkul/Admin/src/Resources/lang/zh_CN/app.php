@@ -4625,13 +4625,15 @@ return [
                 'title' => '电子邮件',
 
                 'smtp' => [
-                    'title' => 'SMTP',
-                    'info' => '配置SMTP服务器设置以从您的商店发送电子邮件。',
-                    'host' => '主机',
-                    'port' => '端口',
+                    'driver-mismatch-info' => '您的邮件驱动已设置为 ":driver" 而不是 "bagisto-dynamic-smtp"。此处所做的任何更改都不会生效。请在 .env 文件中更新 MAIL_MAILER=bagisto-dynamic-smtp 以激活这些设置。',
+                    'driver-mismatch-title' => '这些设置目前处于非活动状态。',
                     'encryption' => '加密',
-                    'username' => '用户名',
+                    'host' => '主机',
+                    'info' => '配置SMTP服务器设置以从您的商店发送电子邮件。',
                     'password' => '密码',
+                    'port' => '端口',
+                    'title' => 'SMTP',
+                    'username' => '用户名',
                 ],
 
                 'email-settings' => [
