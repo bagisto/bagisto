@@ -108,28 +108,9 @@ class ReviewController extends APIController
             ], 400);
         }
 
-        $currentLocale = core()->getCurrentLocale();
-
-        $prompt = "
-        Translate the following product review to $currentLocale->name. Ensure that the translation retains the sentiment and conveys the meaning accurately. If specific product-related terms or expressions are commonly used in the $currentLocale->name, please adapt accordingly.
-        ---
-
-        **Original Product Review:**
-        $review->comment
-
-        ---
-        Translation:
-        ";
-
         try {
-            $model = core()->getConfigData('general.magic_ai.review_translation.model');
-
-            $response = MagicAI::setModel($model)
-                ->setPrompt($prompt)
-                ->ask();
-
             return new JsonResponse([
-                'content' => $response,
+                'content' => MagicAI::translate($review->comment, core()->getCurrentLocale()->name),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([

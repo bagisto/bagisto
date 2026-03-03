@@ -66,22 +66,22 @@ test.describe("magic ai configuration", () => {
 
         await adminPage
             .locator(
-                'textarea[name="general[magic_ai][content_generation][product_short_description_prompt]"]'
+                'textarea[name="general[magic_ai][default_prompts][product_short_description]"]'
             )
             .fill(generateDescription(100));
         await adminPage
             .locator(
-                'textarea[name="general[magic_ai][content_generation][product_description_prompt]"]'
+                'textarea[name="general[magic_ai][default_prompts][product_description]"]'
             )
             .fill(generateDescription(100));
         await adminPage
             .locator(
-                'textarea[name="general[magic_ai][content_generation][category_description_prompt]"]'
+                'textarea[name="general[magic_ai][default_prompts][category_description]"]'
             )
             .fill(generateDescription(100));
         await adminPage
             .locator(
-                'textarea[name="general[magic_ai][content_generation][cms_page_content_prompt]"]'
+                'textarea[name="general[magic_ai][default_prompts][cms_page_content]"]'
             )
             .fill(generateDescription(100));
 
@@ -176,14 +176,9 @@ test.describe("magic ai configuration", () => {
         /**
          * Fill the form.
          */
-        await adminPage.selectOption(
-            'select[name="general[magic_ai][checkout_message][model]"]',
-            "gemini-2.0-flash"
-        );
-
         await adminPage
             .locator(
-                'textarea[name="general[magic_ai][checkout_message][prompt]"]'
+                'textarea[name="general[magic_ai][default_prompts][checkout_message]"]'
             )
             .fill(generateDescription(100));
 
@@ -198,11 +193,5 @@ test.describe("magic ai configuration", () => {
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
-
-        await expect(
-            adminPage.locator(
-                'select[name="general[magic_ai][checkout_message][model]"]'
-            )
-        ).toHaveValue("gemini-2.0-flash");
     });
 });

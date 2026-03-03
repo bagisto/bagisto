@@ -1,3 +1,15 @@
+@php
+    use Webkul\MagicAI\AiProvider;
+
+    $provider = core()->getConfigData('general.magic_ai.image_generation.provider') ?? AiProvider::defaultImageProvider();
+
+    $activeModel = core()->getConfigData('general.magic_ai.image_generation.model')
+        ?? AiProvider::defaultImageModel($provider)?->value
+        ?? '';
+
+    $modelOptions = AiProvider::imageModelSelectOptions($provider);
+@endphp
+
 @props([
     'name'             => 'images',
     'allowMultiple'    => false,
@@ -174,30 +186,6 @@
 
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
-                                                @lang('admin::app.components.media.images.ai-generation.model')
-                                            </x-admin::form.control-group.label>
-
-                                            <x-admin::form.control-group.control
-                                                type="select"
-                                                name="model"
-                                                rules="required"
-                                                v-model="ai.model"
-                                                :label="trans('admin::app.components.media.images.ai-generation.model')"
-                                            >
-                                                <option value="dall-e-2">
-                                                    @lang('admin::app.components.media.images.ai-generation.dall-e-2')
-                                                </option>
-
-                                                <option value="dall-e-3">
-                                                    @lang('admin::app.components.media.images.ai-generation.dall-e-3')
-                                                </option>
-                                            </x-admin::form.control-group.control>
-
-                                            <x-admin::form.control-group.error control-name="model" />
-                                        </x-admin::form.control-group>
-
-                                        <x-admin::form.control-group v-if="ai.model == 'dall-e-2'">
-                                            <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.components.media.images.ai-generation.number-of-images')
                                             </x-admin::form.control-group.label>
 
@@ -240,7 +228,7 @@
                                             <x-admin::form.control-group.error control-name="size" />
                                         </x-admin::form.control-group>
 
-                                        <x-admin::form.control-group v-if="ai.model == 'dall-e-3'">
+                                        <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required">
                                                 @lang('admin::app.components.media.images.ai-generation.quality')
                                             </x-admin::form.control-group.label>
@@ -259,9 +247,36 @@
                                                 <option value="hd">
                                                     @lang('admin::app.components.media.images.ai-generation.hd')
                                                 </option>
+
+                                                <option value="">
+                                                    Auto
+                                                </option>
                                             </x-admin::form.control-group.control>
 
                                             <x-admin::form.control-group.error control-name="quality" />
+                                        </x-admin::form.control-group>
+
+                                        <!-- Model Select -->
+                                        <x-admin::form.control-group v-if="ai.models && ai.models.length">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.components.media.images.ai-generation.model')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="model"
+                                                v-model="ai.model"
+                                                :label="trans('admin::app.components.media.images.ai-generation.model')"
+                                            >
+                                                <option
+                                                    v-for="option in ai.models"
+                                                    :key="option.value"
+                                                    :value="option.value"
+                                                    v-text="option.label"
+                                                ></option>
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error control-name="model" />
                                         </x-admin::form.control-group>
                                     </div>
 
@@ -459,9 +474,11 @@
                     ai: {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
 
-                        prompt: null,
+                        models: {!! json_encode($modelOptions) !!},
 
-                        model: 'dall-e-2',
+                        model: "{{ $activeModel }}",
+
+                        prompt: null,
 
                         n: 1,
 
@@ -570,9 +587,11 @@
                     this.ai = {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
 
-                        prompt: null,
+                        models: {!! json_encode($modelOptions) !!},
 
-                        model: 'dall-e-2',
+                        model: "{{ $activeModel }}",
+
+                        prompt: null,
 
                         n: 1,
 

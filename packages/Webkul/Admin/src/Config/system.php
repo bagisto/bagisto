@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\MagicAI\AiProvider;
 use Webkul\Sales\Models\Order;
 
 return [
@@ -291,21 +292,6 @@ return [
                 'title' => 'admin::app.configuration.index.general.magic-ai.settings.enabled',
                 'type' => 'boolean',
                 'channel_based' => true,
-            ], [
-                'name' => 'api_key',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
-                'type' => 'password',
-                'channel_based' => true,
-            ], [
-                'name' => 'organization',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.organization',
-                'type' => 'text',
-                'channel_based' => true,
-            ], [
-                'name' => 'api_domain',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.llm-api-domain',
-                'type' => 'text',
-                'channel_based' => true,
             ],
         ],
     ], [
@@ -319,25 +305,35 @@ return [
                 'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.enabled',
                 'type' => 'boolean',
             ], [
-                'name' => 'product_short_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-short-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
+                'name' => 'provider',
+                'title' => 'Provider',
+                'type' => 'select',
+                'channel_based' => true,
+                'default' => AiProvider::defaultTextProvider(),
+                'options' => AiProvider::textProviderOptions(),
             ], [
-                'name' => 'product_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
+                'type' => 'password',
+                'channel_based' => true,
             ], [
-                'name' => 'category_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.category-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
+                'name' => 'model',
+                'title' => 'Model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
             ], [
-                'name' => 'cms_page_content_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.cms-page-content-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
+                'name' => 'review_translation',
+                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
+                'info' => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'checkout_message',
+                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
+                'info' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
+                'type' => 'boolean',
+                'channel_based' => true,
             ],
         ],
     ], [
@@ -351,183 +347,55 @@ return [
                 'title' => 'admin::app.configuration.index.general.magic-ai.image-generation.enabled',
                 'type' => 'boolean',
                 'channel_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.review_translation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.enabled',
-                'type' => 'boolean',
+            ], [
+                'name' => 'provider',
+                'title' => 'Provider',
+                'type' => 'select',
+                'channel_based' => true,
+                'default' => AiProvider::defaultImageProvider(),
+                'options' => AiProvider::imageProviderOptions(),
+            ], [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
+                'type' => 'password',
                 'channel_based' => true,
             ], [
                 'name' => 'model',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.model',
+                'title' => 'Model',
                 'type' => 'select',
                 'channel_based' => true,
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4-turbo',
-                        'value' => 'gpt-4-turbo',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o',
-                        'value' => 'gpt-4o',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gemini-2-0-flash',
-                        'value' => 'gemini-2.0-flash',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.deepseek-r1-8b',
-                        'value' => 'deepseek-r1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama-groq',
-                        'value' => 'llama3-8b-8192',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-3b',
-                        'value' => 'llama3.2:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-1b',
-                        'value' => 'llama3.2:1b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-1-8b',
-                        'value' => 'llama3.1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-8b',
-                        'value' => 'llama3:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llava-7b',
-                        'value' => 'llava:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-13b',
-                        'value' => 'vicuna:13b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-7b',
-                        'value' => 'vicuna:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-14b',
-                        'value' => 'qwen2.5:14b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-7b',
-                        'value' => 'qwen2.5:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-3b',
-                        'value' => 'qwen2.5:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-1-5b',
-                        'value' => 'qwen2.5:1.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-0-5b',
-                        'value' => 'qwen2.5:0.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.mistral-7b',
-                        'value' => 'mistral:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.starling-lm-7b',
-                        'value' => 'starling-lm:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.phi3-5',
-                        'value' => 'phi3.5',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.orca-mini',
-                        'value' => 'orca-mini',
-                    ],
-                ],
+                'options' => AiProvider::imageModelOptions(),
             ],
         ],
     ], [
-        'key' => 'general.magic_ai.checkout_message',
-        'name' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
-        'sort' => 1,
+        'key' => 'general.magic_ai.default_prompts',
+        'name' => 'admin::app.configuration.index.general.magic-ai.default-prompts.title',
+        'info' => 'admin::app.configuration.index.general.magic-ai.default-prompts.title-info',
+        'sort' => 5,
         'fields' => [
             [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
+                'name' => 'product_short_description',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.product-short-description-prompt',
+                'type' => 'textarea',
+                'locale_based' => true,
             ], [
-                'name' => 'model',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.model',
-                'type' => 'select',
-                'channel_based' => true,
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4-turbo',
-                        'value' => 'gpt-4-turbo',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o',
-                        'value' => 'gpt-4o',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gemini-2-0-flash',
-                        'value' => 'gemini-2.0-flash',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.deepseek-r1-8b',
-                        'value' => 'deepseek-r1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama-groq',
-                        'value' => 'llama3.3',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-3b',
-                        'value' => 'llama3.2:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-1b',
-                        'value' => 'llama3.2:1b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-1-8b',
-                        'value' => 'llama3.1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-8b',
-                        'value' => 'llama3:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava-7b',
-                        'value' => 'llava:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-13b',
-                        'value' => 'vicuna:13b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-7b',
-                        'value' => 'vicuna:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-14b',
-                        'value' => 'qwen2.5:14b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-7b',
-                        'value' => 'qwen2.5:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-3b',
-                        'value' => 'qwen2.5:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-1-5b',
-                        'value' => 'qwen2.5:1.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-0-5b',
-                        'value' => 'qwen2.5:0.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral-7b',
-                        'value' => 'mistral:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm-7b',
-                        'value' => 'starling-lm:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi3-5',
-                        'value' => 'phi3.5',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.orca-mini',
-                        'value' => 'orca-mini',
-                    ],
-                ],
+                'name' => 'product_description',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.product-description-prompt',
+                'type' => 'textarea',
+                'locale_based' => true,
             ], [
-                'name' => 'prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.prompt',
+                'name' => 'category_description',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.category-description-prompt',
+                'type' => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name' => 'cms_page_content',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.cms-page-content-prompt',
+                'type' => 'textarea',
+                'locale_based' => true,
+            ], [
+                'name' => 'checkout_message',
+                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.checkout-message-prompt',
                 'type' => 'textarea',
                 'channel_based' => true,
                 'locale_based' => true,
