@@ -128,9 +128,9 @@ class AiModelHelper
         $defaults = [
             'openai'    => AiModel::GPT4OMini,
             'anthropic' => AiModel::Claude35Haiku,
-            'gemini'    => AiModel::Gemini20Flash,
+            'gemini'    => AiModel::Gemini25Flash,
             'groq'      => AiModel::GroqLlama33_70B,
-            'xai'       => AiModel::Grok2Latest,
+            'xai'       => AiModel::Grok3,
             'deepseek'  => AiModel::DeepSeekChat,
             'mistral'   => AiModel::MistralSmall,
             'ollama'    => AiModel::OllamaLlama32_3B,
@@ -145,8 +145,8 @@ class AiModelHelper
     public static function defaultImageModel(string $provider): ?AiModel
     {
         $defaults = [
-            'openai' => AiModel::DallE3,
-            'gemini' => AiModel::Imagen3,
+            'openai' => AiModel::GptImage1,
+            'gemini' => AiModel::Imagen4,
             'xai'    => AiModel::Aurora,
         ];
 
