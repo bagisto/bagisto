@@ -94,10 +94,6 @@ enum AiModel: string
     case OllamaPhi35      = 'phi3.5';
     case OllamaOrcaMini   = 'orca-mini';
 
-    // -------------------------------------------------------------------------
-    // Provider mapping
-    // -------------------------------------------------------------------------
-
     public function provider(): Lab
     {
         return match ($this) {
@@ -131,10 +127,6 @@ enum AiModel: string
         };
     }
 
-    // -------------------------------------------------------------------------
-    // Type helpers
-    // -------------------------------------------------------------------------
-
     public function isImageModel(): bool
     {
         return $this->isAnyOf(
@@ -163,10 +155,6 @@ enum AiModel: string
 
         return false;
     }
-
-    // -------------------------------------------------------------------------
-    // Labels
-    // -------------------------------------------------------------------------
 
     public function label(): string
     {

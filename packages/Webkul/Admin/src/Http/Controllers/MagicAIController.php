@@ -3,26 +3,22 @@
 namespace Webkul\Admin\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
+use Webkul\Admin\Http\Requests\MagicAI\ContentGenerationRequest;
+use Webkul\Admin\Http\Requests\MagicAI\ImageGenerationRequest;
 use Webkul\MagicAI\Facades\MagicAI;
 
 class MagicAIController extends Controller
 {
     /**
      * Generate text content from a prompt.
-     * Accepts an optional model override from the frontend.
      */
-    public function content(): JsonResponse
+    public function content(ContentGenerationRequest $request): JsonResponse
     {
-        $this->validate(request(), [
-            'prompt' => 'required',
-            'model'  => 'nullable|string',
-        ]);
-
         try {
             return new JsonResponse([
                 'content' => MagicAI::generateContent(
-                    request()->input('prompt'),
-                    request()->input('model'),
+                    $request->input('prompt'),
+                    $request->input('model'),
                 ),
             ]);
         } catch (\Exception $e) {
@@ -32,24 +28,15 @@ class MagicAIController extends Controller
 
     /**
      * Generate images from a prompt.
-     * Accepts an optional model override from the frontend.
      */
-    public function image(): JsonResponse
+    public function image(ImageGenerationRequest $request): JsonResponse
     {
-        $this->validate(request(), [
-            'prompt'  => 'required',
-            'model'   => 'nullable|string',
-            'n'       => 'nullable|integer|min:1|max:10',
-            'size'    => 'required|in:1024x1024,1024x1792,1792x1024',
-            'quality' => 'nullable|in:standard,hd',
-        ]);
-
         try {
             return new JsonResponse([
                 'images' => MagicAI::generateImage(
-                    request()->input('prompt'),
-                    request()->only(['n', 'size', 'quality']),
-                    request()->input('model'),
+                    $request->input('prompt'),
+                    $request->only(['n', 'size', 'quality']),
+                    $request->input('model'),
                 ),
             ]);
         } catch (\Exception $e) {

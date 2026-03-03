@@ -4,6 +4,7 @@ namespace Webkul\MagicAI\Helpers;
 
 use Laravel\Ai\Enums\Lab;
 use Webkul\MagicAI\Enums\AiModel;
+use Webkul\MagicAI\Enums\AiProvider;
 
 class AiModelHelper
 {
@@ -165,25 +166,13 @@ class AiModelHelper
      */
     private static function buildOptions(array $models): array
     {
-        $providerLabels = [
-            'openai'    => 'OpenAI',
-            'anthropic' => 'Anthropic',
-            'gemini'    => 'Gemini',
-            'groq'      => 'Groq',
-            'xai'       => 'xAI',
-            'deepseek'  => 'DeepSeek',
-            'mistral'   => 'Mistral',
-            'azure'     => 'Azure OpenAI',
-            'ollama'    => 'Ollama',
-        ];
-
-        return array_map(function (AiModel $m) use ($providerLabels) {
-            $key  = $m->provider()->value;
-            $name = $providerLabels[$key] ?? ucfirst($key);
+        return array_map(function (AiModel $models) {
+            $providerLabel = AiProvider::tryFrom($models->provider()->value)?->label()
+                ?? ucfirst($models->provider()->value);
 
             return [
-                'title' => "$name: {$m->label()}",
-                'value' => $m->value,
+                'title' => "{$providerLabel}: {$models->label()}",
+                'value' => $models->value,
             ];
         }, $models);
     }

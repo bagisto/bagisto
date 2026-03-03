@@ -1,11 +1,11 @@
 @php
     use Webkul\MagicAI\Helpers\AiModelHelper;
 
-    $imageProvider   = core()->getConfigData('general.magic_ai.image_generation.provider') ?? 'openai';
-    $imageModelValue = core()->getConfigData('general.magic_ai.image_generation.model')
-        ?? AiModelHelper::defaultImageModel($imageProvider)?->value
+    $provider     = core()->getConfigData('general.magic_ai.image_generation.provider') ?? 'openai';
+    $activeModel  = core()->getConfigData('general.magic_ai.image_generation.model')
+        ?? AiModelHelper::defaultImageModel($provider)?->value
         ?? '';
-    $imageModelOptions = AiModelHelper::imageModelSelectOptions($imageProvider);
+    $modelOptions = AiModelHelper::imageModelSelectOptions($provider);
 @endphp
 
 @props([
@@ -472,9 +472,9 @@
                     ai: {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
 
-                        models: {!! json_encode($imageModelOptions) !!},
+                        models: {!! json_encode($modelOptions) !!},
 
-                        model: "{{ $imageModelValue }}",
+                        model: "{{ $activeModel }}",
 
                         prompt: null,
 
@@ -585,9 +585,9 @@
                     this.ai = {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
 
-                        models: {!! json_encode($imageModelOptions) !!},
+                        models: {!! json_encode($modelOptions) !!},
 
-                        model: "{{ $imageModelValue }}",
+                        model: "{{ $activeModel }}",
 
                         prompt: null,
 

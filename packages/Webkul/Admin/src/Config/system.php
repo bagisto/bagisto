@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\MagicAI\Enums\AiProvider;
 use Webkul\MagicAI\Helpers\AiModelHelper;
 use Webkul\Sales\Models\Order;
 
@@ -309,37 +310,8 @@ return [
                 'title' => 'Provider',
                 'type' => 'select',
                 'channel_based' => true,
-                'default' => 'openai',
-                'options' => [
-                    [
-                        'title' => 'Anthropic',
-                        'value' => 'anthropic',
-                    ], [
-                        'title' => 'Azure OpenAI',
-                        'value' => 'azure',
-                    ], [
-                        'title' => 'DeepSeek',
-                        'value' => 'deepseek',
-                    ], [
-                        'title' => 'Gemini',
-                        'value' => 'gemini',
-                    ], [
-                        'title' => 'Groq',
-                        'value' => 'groq',
-                    ], [
-                        'title' => 'Mistral',
-                        'value' => 'mistral',
-                    ], [
-                        'title' => 'Ollama',
-                        'value' => 'ollama',
-                    ], [
-                        'title' => 'OpenAI',
-                        'value' => 'openai',
-                    ], [
-                        'title' => 'xAI',
-                        'value' => 'xai',
-                    ],
-                ],
+                'default' => AiProvider::OpenAI->value,
+                'options' => AiProvider::textProviderOptions(),
             ], [
                 'name' => 'api_key',
                 'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
@@ -381,19 +353,8 @@ return [
                 'title' => 'Provider',
                 'type' => 'select',
                 'channel_based' => true,
-                'default' => 'gemini',
-                'options' => [
-                    [
-                        'title' => 'Gemini',
-                        'value' => 'gemini',
-                    ], [
-                        'title' => 'OpenAI',
-                        'value' => 'openai',
-                    ], [
-                        'title' => 'xAI',
-                        'value' => 'xai',
-                    ],
-                ],
+                'default' => AiProvider::Gemini->value,
+                'options' => AiProvider::imageProviderOptions(),
             ], [
                 'name' => 'api_key',
                 'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',

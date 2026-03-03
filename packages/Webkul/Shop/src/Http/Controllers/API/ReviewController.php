@@ -110,7 +110,7 @@ class ReviewController extends APIController
 
         try {
             return new JsonResponse([
-                'content' => MagicAI::translateReview($review, core()->getCurrentLocale()),
+                'content' => MagicAI::translate($review->comment, core()->getCurrentLocale()->name),
             ]);
         } catch (\Exception $e) {
             return new JsonResponse([

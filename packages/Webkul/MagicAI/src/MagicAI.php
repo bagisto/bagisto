@@ -10,37 +10,32 @@ use function Laravel\Ai\agent;
 class MagicAI
 {
     /**
-     * Generate text using the content_generation feature settings.
-     * Optionally accept a model override from the frontend.
+     * Generate text content from a prompt using the content_generation settings.
      */
     public function generateContent(string $prompt, ?string $model = null): string
     {
-        [$provider, $configModel] = $this->featureConfig('content_generation');
+        ['provider' => $provider, 'model' => $configuredModel] = $this->loadFeatureConfig('content_generation');
 
-        $model = $model ?? $configModel;
-
-        return trim(agent()->prompt($prompt, provider: $provider, model: $model)->text);
+        return trim(
+            agent()->prompt($prompt, provider: $provider, model: $model ?? $configuredModel)->text
+        );
     }
 
     /**
-     * Generate images using the image_generation feature settings.
-     * Optionally accept a model override from the frontend.
+     * Generate images from a prompt using the image_generation settings.
      *
      * @param  array{n?: int, size?: string, quality?: string}  $options
      * @return array<int, array{url: string}>
      */
     public function generateImage(string $prompt, array $options = [], ?string $model = null): array
     {
-        [$provider, $configModel] = $this->featureConfig('image_generation');
+        ['provider' => $provider, 'model' => $configuredModel] = $this->loadFeatureConfig('image_generation');
 
-        $model = $model ?? $configModel;
-
-        return $this->buildImages($prompt, $options, $provider, $model);
+        return $this->executeImages($prompt, $options, $provider, $model ?? $configuredModel);
     }
 
     /**
      * Generate a personalised checkout success message for an order.
-     * Delegates to generateContent() using the content_generation settings.
      */
     public function checkoutMessage(mixed $order): string
     {
@@ -48,79 +43,84 @@ class MagicAI
     }
 
     /**
-     * Translate a product review into the given locale.
-     * Delegates to generateContent() using the content_generation settings.
+     * Translate any text content into the given locale.
      */
-    public function translateReview(mixed $review, mixed $locale): string
+    public function translate(string $content, string $locale): string
     {
-        $prompt = "Translate the following product review to {$locale->name}. "
-            .'Ensure the translation retains the original sentiment and conveys the meaning accurately. '
-            ."Adapt any product-specific expressions to {$locale->name} where appropriate.\n\n"
-            ."---\n\n**Original Product Review:**\n{$review->comment}\n\n---\nTranslation:";
+        $prompt = implode("\n\n", [
+            "Translate the following text to {$locale}.",
+            'Ensure the translation retains the original sentiment and conveys the meaning accurately.',
+            "Adapt any context-specific expressions to {$locale} where appropriate.",
+            "---\n{$content}\n---",
+            'Translation:',
+        ]);
 
         return $this->generateContent($prompt);
     }
 
     /**
-     * Resolve the provider and optional model for a named feature from admin config.
-     * Injects the stored API key into the runtime config so the SDK authenticates correctly.
-     * Falls back to the enum's recommended default model when no model is saved.
+     * Resolve the provider and model for a named feature from admin config.
+     * Injects the stored API key into the Laravel AI runtime config.
+     * Falls back to the enum's recommended default when no model is saved.
      *
-     * @return array{?string, ?string} [$provider, $model]
+     * @return array{provider: ?string, model: ?string}
      */
-    protected function featureConfig(string $feature): array
+    protected function loadFeatureConfig(string $feature): array
     {
-        $provider = core()->getConfigData("general.magic_ai.{$feature}.provider");
+        $configKey = "general.magic_ai.{$feature}";
+        $provider  = core()->getConfigData("{$configKey}.provider");
 
         if ($provider && array_key_exists($provider, config('ai.providers', []))) {
-            $apiKey = core()->getConfigData("general.magic_ai.{$feature}.api_key");
-
-            if ($apiKey) {
-                config(["ai.providers.{$provider}.key" => $apiKey]);
-            }
+            $this->injectApiKey($provider, core()->getConfigData("{$configKey}.api_key"));
         } else {
             $provider = null;
         }
 
-        $model = core()->getConfigData("general.magic_ai.{$feature}.model") ?: null;
+        $model = core()->getConfigData("{$configKey}.model") ?: null;
 
         if (! $model && $provider) {
-            $enumDefault = $feature === 'image_generation'
+            $default = $feature === 'image_generation'
                 ? AiModelHelper::defaultImageModel($provider)
                 : AiModelHelper::defaultTextModel($provider);
 
-            $model = $enumDefault?->value;
+            $model = $default?->value;
         }
 
-        return [$provider, $model];
+        return ['provider' => $provider, 'model' => $model];
     }
 
     /**
-     * Shared image-generation loop used by generateImage().
+     * Write the API key into the Laravel AI runtime config for the given provider.
+     */
+    protected function injectApiKey(string $provider, ?string $apiKey): void
+    {
+        if ($apiKey) {
+            config(["ai.providers.{$provider}.key" => $apiKey]);
+        }
+    }
+
+    /**
+     * Execute image generation requests and return base64-encoded results.
      *
-     * Supported sizes: 1024x1024 (square), 1792x1024 (landscape), 1024x1792 (portrait).
-     * Supported quality values: 'hd' → high, 'standard' → medium.
+     * Supported sizes:   1024x1024 (square) · 1792x1024 (landscape) · 1024x1792 (portrait)
+     * Supported quality: 'hd' → 'high'  |  'standard' → 'medium'
      *
      * @param  array{n?: int, size?: string, quality?: string}  $options
      * @return array<int, array{url: string}>
      */
-    protected function buildImages(string $prompt, array $options, ?string $provider, ?string $model): array
+    protected function executeImages(string $prompt, array $options, ?string $provider, ?string $model): array
     {
-        $count = max((int) ($options['n'] ?? 1), 1);
-        $size = $options['size'] ?? '1024x1024';
-        $quality = match ($options['quality'] ?? null) {
-            'hd' => 'high',
-            'standard' => 'medium',
-            default => null,
-        };
+        $count   = max((int) ($options['n'] ?? 1), 1);
+        $size    = $options['size'] ?? '1024x1024';
+        $quality = $this->resolveQuality($options['quality'] ?? null);
 
         $images = [];
 
-        for ($i = 1; $i <= $count; $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $request = match ($size) {
                 '1792x1024' => Image::of($prompt)->landscape(),
                 '1024x1792' => Image::of($prompt)->portrait(),
-                default => Image::of($prompt)->square(),
+                default     => Image::of($prompt)->square(),
             };
 
             if ($quality) {
@@ -138,12 +138,23 @@ class MagicAI
     }
 
     /**
-     * Build the full prompt for the personalised checkout success message.
-     * Reads the base prompt template from admin config and appends order context.
+     * Map the frontend quality string to the SDK's quality constant.
+     */
+    private function resolveQuality(?string $quality): ?string
+    {
+        return match ($quality) {
+            'hd'       => 'high',
+            'standard' => 'medium',
+            default    => null,
+        };
+    }
+
+    /**
+     * Build the checkout success message prompt from config and order context.
      */
     protected function buildCheckoutPrompt(mixed $order): string
     {
-        $prompt = (string) (core()->getConfigData('general.magic_ai.default_prompts.checkout_message') ?? '');
+        $basePrompt = (string) (core()->getConfigData('general.magic_ai.default_prompts.checkout_message') ?? '');
 
         $productLines = '';
 
@@ -153,11 +164,12 @@ class MagicAI
             $productLines .= 'Price: '.core()->formatPrice($item->total)."\n\n";
         }
 
-        $prompt .= "\n\nProduct Details:\n{$productLines}";
-        $prompt .= "Customer Details:\n{$order->customer_full_name}\n\n";
-        $prompt .= 'Current Locale: '.core()->getCurrentLocale()->name."\n\n";
-        $prompt .= 'Store Name: '.core()->getCurrentChannel()->name;
-
-        return $prompt;
+        return implode("\n\n", array_filter([
+            $basePrompt,
+            "Product Details:\n{$productLines}",
+            "Customer Details:\n{$order->customer_full_name}",
+            'Current Locale: '.core()->getCurrentLocale()->name,
+            'Store Name: '.core()->getCurrentChannel()->name,
+        ]));
     }
 }

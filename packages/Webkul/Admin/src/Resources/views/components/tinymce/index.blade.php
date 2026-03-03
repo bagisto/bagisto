@@ -1,11 +1,11 @@
 @php
     use Webkul\MagicAI\Helpers\AiModelHelper;
 
-    $textProvider   = core()->getConfigData('general.magic_ai.content_generation.provider') ?? 'openai';
-    $textModelValue = core()->getConfigData('general.magic_ai.content_generation.model')
-        ?? AiModelHelper::defaultTextModel($textProvider)?->value
+    $provider     = core()->getConfigData('general.magic_ai.content_generation.provider') ?? 'openai';
+    $activeModel  = core()->getConfigData('general.magic_ai.content_generation.model')
+        ?? AiModelHelper::defaultTextModel($provider)?->value
         ?? '';
-    $textModelOptions = AiModelHelper::textModelSelectOptions($textProvider);
+    $modelOptions = AiModelHelper::textModelSelectOptions($provider);
 @endphp
 
 <v-tinymce {{ $attributes }}></v-tinymce>
@@ -158,9 +158,9 @@
                     ai: {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.content_generation.enabled') }}"),
 
-                        models: {!! json_encode($textModelOptions) !!},
+                        models: {!! json_encode($modelOptions) !!},
 
-                        model: "{{ $textModelValue }}",
+                        model: "{{ $activeModel }}",
 
                         prompt: null,
 
