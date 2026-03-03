@@ -6,6 +6,8 @@
 
 @include('shop::home.services')
 
+@include('shop::home.products')
+
 @include('shop::home.team')
 
 @include('shop::home.offer_stars')
