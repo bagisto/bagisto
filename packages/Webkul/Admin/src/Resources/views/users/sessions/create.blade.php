@@ -6,20 +6,12 @@
 
     <div class="flex h-[100vh] items-center justify-center">
         <div class="flex flex-col items-center gap-5">
-            <!-- Logo -->            
-            @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
-                <img
-                    class="h-10 w-[110px]"
-                    src="{{ Storage::url($logo) }}"
-                    alt="{{ config('app.name') }}"
-                />
-            @else
-                <img
-                    class="w-max" 
-                    src="{{ bagisto_asset('images/logo.svg') }}"
-                    alt="{{ config('app.name') }}"
-                />
-            @endif
+           <!-- Logo -->
+<img
+    class="h-10 w-[110px]"
+    src="{{ asset('themes/shop/default/images/logo.png') }}"
+    alt="{{ config('app.name') }}"
+/>
 
             <div class="box-shadow flex min-w-[300px] flex-col rounded-md bg-white dark:bg-gray-900">
                 <!-- Login Form -->
@@ -98,12 +90,9 @@
             </div>
 
             <!-- Powered By -->
-            <div class="text-sm font-normal">
-                @lang('admin::app.users.sessions.powered-by-description', [
-                    'bagisto' => '<a class="text-blue-600 hover:underline" href="https://bagisto.com/en/">Bagisto</a>',
-                    'webkul' => '<a class="text-blue-600 hover:underline" href="https://webkul.com/">Webkul</a>',
-                ])
-            </div>
+<div class="text-sm font-normal text-gray-600">
+    Welcome to the Admin Panel. Manage your store efficiently from here.
+</div>
         </div>
     </div>
 
