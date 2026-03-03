@@ -4136,13 +4136,13 @@ return [
                     ],
 
                     'default-prompts' => [
-                        'checkout-message-prompt' => 'پیشنهاد',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
                         'category-description-prompt' => 'Category Description Prompt',
+                        'checkout-message-prompt' => 'پیشنهاد',
                         'cms-page-content-prompt' => 'Cms Page Content Prompt',
                         'product-description-prompt' => 'Product Description Prompt',
                         'product-short-description-prompt' => 'Product Short Description Prompt',
+                        'title' => 'Default Prompts',
+                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
                     ],
                 ],
 
@@ -5176,8 +5176,8 @@ return [
                     'generate' => 'تولید',
                     'generating' => 'در حال تولید...',
                     'hd' => 'بالا (HD)',
-                    'number-of-images' => 'تعداد تصاویر',
                     'model' => 'مدل',
+                    'number-of-images' => 'تعداد تصاویر',
                     'prompt' => 'پرامت',
                     'quality' => 'کیفیت',
                     'regenerate' => 'تولید مجدد',

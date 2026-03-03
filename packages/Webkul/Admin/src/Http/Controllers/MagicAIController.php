@@ -44,4 +44,3 @@ class MagicAIController extends Controller
         }
     }
 }
-

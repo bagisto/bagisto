@@ -23,7 +23,7 @@ class OnepageController extends Controller
         Event::dispatch('checkout.load.index');
 
         /**
-         * If guest checkout is not allowed then redirect back to the cart page
+         * If guest checkout is not allowed then redirect back to the cart page.
          */
         if (
             ! auth()->guard('customer')->check()
@@ -33,7 +33,7 @@ class OnepageController extends Controller
         }
 
         /**
-         * If user is suspended then redirect back to the cart page
+         * If user is suspended then redirect back to the cart page.
          */
         if (auth()->guard('customer')->user()?->is_suspended) {
             session()->flash('warning', trans('shop::app.checkout.cart.suspended-account-message'));
@@ -42,7 +42,7 @@ class OnepageController extends Controller
         }
 
         /**
-         * If cart has errors then redirect back to the cart page
+         * If cart has errors then redirect back to the cart page.
          */
         if (Cart::hasError()) {
             return redirect()->route('shop.checkout.cart.index');
@@ -52,7 +52,7 @@ class OnepageController extends Controller
 
         /**
          * If cart is has downloadable items and customer is not logged in
-         * then redirect back to the cart page
+         * then redirect back to the cart page.
          */
         if (
             ! auth()->guard('customer')->check()

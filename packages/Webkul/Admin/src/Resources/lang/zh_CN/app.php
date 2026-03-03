@@ -4136,13 +4136,13 @@ return [
                     ],
 
                     'default-prompts' => [
-                        'checkout-message-prompt' => '提示',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
                         'category-description-prompt' => 'Category Description Prompt',
+                        'checkout-message-prompt' => '提示',
                         'cms-page-content-prompt' => 'Cms Page Content Prompt',
                         'product-description-prompt' => 'Product Description Prompt',
                         'product-short-description-prompt' => 'Product Short Description Prompt',
+                        'title' => 'Default Prompts',
+                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
                     ],
                 ],
 
@@ -5176,8 +5176,8 @@ return [
                     'generate' => '生成',
                     'generating' => '生成中...',
                     'hd' => '高清',
-                    'number-of-images' => '图片数量',
                     'model' => '模型',
+                    'number-of-images' => '图片数量',
                     'prompt' => '提示词',
                     'quality' => '质量',
                     'regenerate' => '重新生成',

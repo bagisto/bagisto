@@ -10,14 +10,14 @@ enum AiProvider: string
      * Text + image providers.
      */
     case Anthropic = 'anthropic';
-    case Azure     = 'azure';
-    case DeepSeek  = 'deepseek';
-    case Gemini    = 'gemini';
-    case Groq      = 'groq';
-    case Mistral   = 'mistral';
-    case Ollama    = 'ollama';
-    case OpenAI    = 'openai';
-    case xAI       = 'xai';
+    case Azure = 'azure';
+    case DeepSeek = 'deepseek';
+    case Gemini = 'gemini';
+    case Groq = 'groq';
+    case Mistral = 'mistral';
+    case Ollama = 'ollama';
+    case OpenAI = 'openai';
+    case xAI = 'xai';
 
     /**
      * Return the equivalent SDK Lab case.
@@ -31,14 +31,14 @@ enum AiProvider: string
     {
         return match ($this) {
             self::Anthropic => 'Anthropic',
-            self::Azure     => 'Azure OpenAI',
-            self::DeepSeek  => 'DeepSeek',
-            self::Gemini    => 'Gemini',
-            self::Groq      => 'Groq',
-            self::Mistral   => 'Mistral',
-            self::Ollama    => 'Ollama',
-            self::OpenAI    => 'OpenAI',
-            self::xAI       => 'xAI',
+            self::Azure => 'Azure OpenAI',
+            self::DeepSeek => 'DeepSeek',
+            self::Gemini => 'Gemini',
+            self::Groq => 'Groq',
+            self::Mistral => 'Mistral',
+            self::Ollama => 'Ollama',
+            self::OpenAI => 'OpenAI',
+            self::xAI => 'xAI',
         };
     }
 

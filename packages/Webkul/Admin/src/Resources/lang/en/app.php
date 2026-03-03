@@ -4134,6 +4134,7 @@ return [
                         'title' => 'Personalized Checkout Message',
                         'title-info' => 'Craft a personalized checkout message for customers on the Thank-You page, tailoring the content to resonate with individual preferences and enhancing the overall post-purchase experience.',
                     ],
+
                     'default-prompts' => [
                         'category-description-prompt' => 'Category Description Prompt',
                         'checkout-message-prompt' => 'Checkout Message Prompt',
@@ -5175,8 +5176,8 @@ return [
                     'generate' => 'Generate',
                     'generating' => 'Generating...',
                     'hd' => 'HD',
-                    'number-of-images' => 'Number of Images',
                     'model' => 'Model',
+                    'number-of-images' => 'Number of Images',
                     'prompt' => 'Prompt',
                     'quality' => 'Quality',
                     'regenerate' => 'Regenerate',

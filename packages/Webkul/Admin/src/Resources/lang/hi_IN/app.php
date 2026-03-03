@@ -4136,13 +4136,13 @@ return [
                     ],
 
                     'default-prompts' => [
-                        'checkout-message-prompt' => 'प्रॉम्प्ट',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
                         'category-description-prompt' => 'Category Description Prompt',
+                        'checkout-message-prompt' => 'प्रॉम्प्ट',
                         'cms-page-content-prompt' => 'Cms Page Content Prompt',
                         'product-description-prompt' => 'Product Description Prompt',
                         'product-short-description-prompt' => 'Product Short Description Prompt',
+                        'title' => 'Default Prompts',
+                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
                     ],
                 ],
 
@@ -5176,8 +5176,8 @@ return [
                     'generate' => 'उत्पन्न करें',
                     'generating' => 'उत्पन्न हो रहा है...',
                     'hd' => 'एचडी',
-                    'number-of-images' => 'छवियों की संख्या',
                     'model' => 'मॉडल',
+                    'number-of-images' => 'छवियों की संख्या',
                     'prompt' => 'प्रॉम्प्ट',
                     'quality' => 'गुणवत्ता',
                     'regenerate' => 'पुनर्जन्म',

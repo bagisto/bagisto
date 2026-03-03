@@ -23,7 +23,7 @@ class ContentGenerationRequest extends FormRequest
     {
         return [
             'prompt' => ['required', 'string'],
-            'model'  => ['nullable', 'string'],
+            'model' => ['nullable', 'string'],
         ];
     }
 }

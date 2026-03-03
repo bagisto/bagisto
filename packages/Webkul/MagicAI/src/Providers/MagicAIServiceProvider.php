@@ -3,7 +3,6 @@
 namespace Webkul\MagicAI\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Webkul\MagicAI\MagicAI;
 
 class MagicAIServiceProvider extends ServiceProvider
 {
@@ -12,10 +11,6 @@ class MagicAIServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->singleton(MagicAI::class, function (): MagicAI {
-            return new MagicAI;
-        });
-
         include __DIR__.'/../Http/helpers.php';
     }
 }

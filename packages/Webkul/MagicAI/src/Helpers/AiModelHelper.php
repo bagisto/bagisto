@@ -126,14 +126,14 @@ class AiModelHelper
     public static function defaultTextModel(string $provider): ?AiModel
     {
         $defaults = [
-            'openai'    => AiModel::GPT4OMini,
+            'openai' => AiModel::GPT4OMini,
             'anthropic' => AiModel::Claude35Haiku,
-            'gemini'    => AiModel::Gemini25Flash,
-            'groq'      => AiModel::GroqLlama33_70B,
-            'xai'       => AiModel::Grok3,
-            'deepseek'  => AiModel::DeepSeekChat,
-            'mistral'   => AiModel::MistralSmall,
-            'ollama'    => AiModel::OllamaLlama32_3B,
+            'gemini' => AiModel::Gemini25Flash,
+            'groq' => AiModel::GroqLlama33_70B,
+            'xai' => AiModel::Grok3,
+            'deepseek' => AiModel::DeepSeekChat,
+            'mistral' => AiModel::MistralSmall,
+            'ollama' => AiModel::OllamaLlama32_3B,
         ];
 
         return $defaults[$provider] ?? (self::textModelsForProvider($provider)[0] ?? null);
@@ -147,7 +147,7 @@ class AiModelHelper
         $defaults = [
             'openai' => AiModel::GptImage1,
             'gemini' => AiModel::Imagen4,
-            'xai'    => AiModel::Aurora,
+            'xai' => AiModel::Aurora,
         ];
 
         return $defaults[$provider] ?? (self::imageModelsForProvider($provider)[0] ?? null);

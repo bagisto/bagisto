@@ -68,7 +68,7 @@ class MagicAI
     protected function loadFeatureConfig(string $feature): array
     {
         $configKey = "general.magic_ai.{$feature}";
-        $provider  = core()->getConfigData("{$configKey}.provider");
+        $provider = core()->getConfigData("{$configKey}.provider");
 
         if ($provider && array_key_exists($provider, config('ai.providers', []))) {
             $this->injectApiKey($provider, core()->getConfigData("{$configKey}.api_key"));
@@ -110,8 +110,8 @@ class MagicAI
      */
     protected function executeImages(string $prompt, array $options, ?string $provider, ?string $model): array
     {
-        $count   = max((int) ($options['n'] ?? 1), 1);
-        $size    = $options['size'] ?? '1024x1024';
+        $count = max((int) ($options['n'] ?? 1), 1);
+        $size = $options['size'] ?? '1024x1024';
         $quality = $this->resolveQuality($options['quality'] ?? null);
 
         $images = [];
@@ -120,7 +120,7 @@ class MagicAI
             $request = match ($size) {
                 '1792x1024' => Image::of($prompt)->landscape(),
                 '1024x1792' => Image::of($prompt)->portrait(),
-                default     => Image::of($prompt)->square(),
+                default => Image::of($prompt)->square(),
             };
 
             if ($quality) {
@@ -143,9 +143,9 @@ class MagicAI
     private function resolveQuality(?string $quality): ?string
     {
         return match ($quality) {
-            'hd'       => 'high',
+            'hd' => 'high',
             'standard' => 'medium',
-            default    => null,
+            default => null,
         };
     }
 

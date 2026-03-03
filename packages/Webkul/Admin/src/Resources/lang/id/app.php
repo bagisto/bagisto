@@ -4136,13 +4136,13 @@ return [
                     ],
 
                     'default-prompts' => [
-                        'checkout-message-prompt' => 'Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
                         'category-description-prompt' => 'Category Description Prompt',
+                        'checkout-message-prompt' => 'Prompt',
                         'cms-page-content-prompt' => 'Cms Page Content Prompt',
                         'product-description-prompt' => 'Product Description Prompt',
                         'product-short-description-prompt' => 'Product Short Description Prompt',
+                        'title' => 'Default Prompts',
+                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
                     ],
                 ],
 
@@ -5176,8 +5176,8 @@ return [
                     'generate' => 'Hasilkan',
                     'generating' => 'Sedang Dihasilkan...',
                     'hd' => 'HD',
-                    'number-of-images' => 'Jumlah Gambar',
                     'model' => 'Model',
+                    'number-of-images' => 'Jumlah Gambar',
                     'prompt' => 'Perintah',
                     'quality' => 'Kualitas',
                     'regenerate' => 'Hasilkan Ulang',
