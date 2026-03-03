@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'Génération en cours...',
                     'hd' => 'HD',
                     'number-of-images' => 'Nombre d\'images',
+                    'model' => 'Modèle',
+                    'prompt' => 'Invite',
                     'quality' => 'Qualité',
                     'regenerate' => 'Régénérer',
                     'regenerating' => 'Régénération en cours...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'Contenu généré',
                 'generated-content-info' => 'Le contenu généré par l\'IA peut être trompeur. Veuillez examiner le contenu généré avant de l\'appliquer.',
                 'generating' => 'Génération en cours...',
+                'model' => 'Modèle',
+                'prompt' => 'Invite',
                 'title' => 'Assistance IA',
             ],
 

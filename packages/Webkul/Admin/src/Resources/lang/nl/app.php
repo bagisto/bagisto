@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'Genereren...',
                     'hd' => 'HD',
                     'number-of-images' => 'Aantal afbeeldingen',
+                    'model' => 'Model',
+                    'prompt' => 'Prompt',
                     'quality' => 'Kwaliteit',
                     'regenerate' => 'Regenereren',
                     'regenerating' => 'Regenereren...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'Gegenereerde Inhoud',
                 'generated-content-info' => 'AI-inhoud kan misleidend zijn. Controleer de gegenereerde inhoud voordat u deze toepast.',
                 'generating' => 'Genereren...',
+                'model' => 'Model',
+                'prompt' => 'Prompt',
                 'title' => 'AI Assistentie',
             ],
 

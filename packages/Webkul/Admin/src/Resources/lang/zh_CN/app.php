@@ -5177,6 +5177,8 @@ return [
                     'generating' => '生成中...',
                     'hd' => '高清',
                     'number-of-images' => '图片数量',
+                    'model' => '模型',
+                    'prompt' => '提示词',
                     'quality' => '质量',
                     'regenerate' => '重新生成',
                     'regenerating' => '重新生成中...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => '生成的内容',
                 'generated-content-info' => 'AI内容可能会误导。请在应用之前审查生成的内容。',
                 'generating' => '生成中...',
+                'model' => '模型',
+                'prompt' => '提示词',
                 'title' => 'AI 辅助',
             ],
 

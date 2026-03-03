@@ -5176,6 +5176,8 @@ return [
                     'generating' => 'Generating...',
                     'hd' => 'HD',
                     'number-of-images' => 'Number of Images',
+                    'model' => 'Model',
+                    'prompt' => 'Prompt',
                     'quality' => 'Quality',
                     'regenerate' => 'Regenerate',
                     'regenerating' => 'Regenerating...',
@@ -5210,6 +5212,8 @@ return [
                 'generated-content' => 'Generated Content',
                 'generated-content-info' => 'AI-generated content may be misleading. Review the generated content before applying.',
                 'generating' => 'Generating...',
+                'model' => 'Model',
+                'prompt' => 'Prompt',
                 'title' => 'AI Assistance',
             ],
 

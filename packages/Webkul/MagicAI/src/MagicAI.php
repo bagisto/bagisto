@@ -3,6 +3,7 @@
 namespace Webkul\MagicAI;
 
 use Laravel\Ai\Image;
+use Webkul\MagicAI\Helpers\AiModelHelper;
 
 use function Laravel\Ai\agent;
 
@@ -10,23 +11,29 @@ class MagicAI
 {
     /**
      * Generate text using the content_generation feature settings.
+     * Optionally accept a model override from the frontend.
      */
-    public function generateContent(string $prompt): string
+    public function generateContent(string $prompt, ?string $model = null): string
     {
-        [$provider, $model] = $this->featureConfig('content_generation');
+        [$provider, $configModel] = $this->featureConfig('content_generation');
+
+        $model = $model ?? $configModel;
 
         return trim(agent()->prompt($prompt, provider: $provider, model: $model)->text);
     }
 
     /**
      * Generate images using the image_generation feature settings.
+     * Optionally accept a model override from the frontend.
      *
      * @param  array{n?: int, size?: string, quality?: string}  $options
      * @return array<int, array{url: string}>
      */
-    public function generateImage(string $prompt, array $options = []): array
+    public function generateImage(string $prompt, array $options = [], ?string $model = null): array
     {
-        [$provider, $model] = $this->featureConfig('image_generation');
+        [$provider, $configModel] = $this->featureConfig('image_generation');
+
+        $model = $model ?? $configModel;
 
         return $this->buildImages($prompt, $options, $provider, $model);
     }
@@ -57,6 +64,7 @@ class MagicAI
     /**
      * Resolve the provider and optional model for a named feature from admin config.
      * Injects the stored API key into the runtime config so the SDK authenticates correctly.
+     * Falls back to the enum's recommended default model when no model is saved.
      *
      * @return array{?string, ?string} [$provider, $model]
      */
@@ -75,6 +83,14 @@ class MagicAI
         }
 
         $model = core()->getConfigData("general.magic_ai.{$feature}.model") ?: null;
+
+        if (! $model && $provider) {
+            $enumDefault = $feature === 'image_generation'
+                ? AiModelHelper::defaultImageModel($provider)
+                : AiModelHelper::defaultTextModel($provider);
+
+            $model = $enumDefault?->value;
+        }
 
         return [$provider, $model];
     }

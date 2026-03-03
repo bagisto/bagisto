@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'Generowanie...',
                     'hd' => 'HD',
                     'number-of-images' => 'Liczba obrazów',
+                    'model' => 'Model',
+                    'prompt' => 'Monit',
                     'quality' => 'Jakość',
                     'regenerate' => 'Regeneruj',
                     'regenerating' => 'Regenerowanie...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'Wygenerowana Treść',
                 'generated-content-info' => 'Treść generowana przez AI może być myląca. Proszę przejrzeć wygenerowaną treść przed jej zastosowaniem.',
                 'generating' => 'Generowanie...',
+                'model' => 'Model',
+                'prompt' => 'Monit',
                 'title' => 'Asystent AI',
             ],
 

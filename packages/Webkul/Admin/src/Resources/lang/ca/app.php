@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'Generant...',
                     'hd' => 'HD',
                     'number-of-images' => 'Número d\'Imatges',
+                    'model' => 'Model',
+                    'prompt' => 'Indicació',
                     'quality' => 'Qualitat',
                     'regenerate' => 'Regenerar',
                     'regenerating' => 'Regenerant...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'Contingut Generat',
                 'generated-content-info' => 'El contingut generat per IA pot ser enganyós. Si us plau, revisa el contingut generat abans d\'aplicar-lo.',
                 'generating' => 'Generant...',
+                'model' => 'Model',
+                'prompt' => 'Indicació',
                 'title' => 'Assistència IA',
             ],
 

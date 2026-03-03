@@ -5177,6 +5177,8 @@ return [
                     'generating' => '生成中...',
                     'hd' => 'HD',
                     'number-of-images' => '画像の数',
+                    'model' => 'モデル',
+                    'prompt' => 'プロンプト',
                     'quality' => '品質',
                     'regenerate' => '再生成',
                     'regenerating' => '再生成中...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => '生成されたコンテンツ',
                 'generated-content-info' => 'AIによって生成されたコンテンツは誤解を招く可能性があります。適用する前に生成されたコンテンツを確認してください。',
                 'generating' => '生成中...',
+                'model' => 'モデル',
+                'prompt' => 'プロンプト',
                 'title' => 'AIアシスタント',
             ],
 

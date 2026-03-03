@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'Generazione in corso...',
                     'hd' => 'HD',
                     'number-of-images' => 'Numero di Immagini',
+                    'model' => 'Modello',
+                    'prompt' => 'Richiesta',
                     'quality' => 'Qualità',
                     'regenerate' => 'Rigenera',
                     'regenerating' => 'Rigenerazione in corso...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'Contenuto Generato',
                 'generated-content-info' => 'Il contenuto generato dall\'AI può essere fuorviante. Si prega di rivedere il contenuto generato prima di applicarlo.',
                 'generating' => 'Generazione in corso...',
+                'model' => 'Modello',
+                'prompt' => 'Richiesta',
                 'title' => 'Assistenza AI',
             ],
 

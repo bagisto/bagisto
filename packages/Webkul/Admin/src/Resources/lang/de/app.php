@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'Generiere...',
                     'hd' => 'HD',
                     'number-of-images' => 'Anzahl der Bilder',
+                    'model' => 'Modell',
+                    'prompt' => 'Eingabeaufforderung',
                     'quality' => 'Qualität',
                     'regenerate' => 'Neu generieren',
                     'regenerating' => 'Regeneriere...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'Generierter Inhalt',
                 'generated-content-info' => 'KI-Inhalte können irreführend sein. Bitte überprüfen Sie den generierten Inhalt, bevor Sie ihn anwenden.',
                 'generating' => 'Generiere...',
+                'model' => 'Modell',
+                'prompt' => 'Eingabeaufforderung',
                 'title' => 'KI-Unterstützung',
             ],
 

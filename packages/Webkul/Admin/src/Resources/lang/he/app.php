@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'יוצר...',
                     'hd' => 'HD',
                     'number-of-images' => 'מספר התמונות',
+                    'model' => 'מודל',
+                    'prompt' => 'הנחיה',
                     'quality' => 'איכות',
                     'regenerate' => 'יצירה מחדש',
                     'regenerating' => 'יוצר מחדש...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'תוכן שנוצר',
                 'generated-content-info' => 'תוכן שנוצר על ידי AI יכול להיות מטעה. אנא בדוק את התוכן שנוצר לפני החלתו.',
                 'generating' => 'יוצר...',
+                'model' => 'מודל',
+                'prompt' => 'הנחיה',
                 'title' => 'סיוע AI',
             ],
 

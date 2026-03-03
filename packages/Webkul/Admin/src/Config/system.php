@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\MagicAI\Helpers\AiModelHelper;
 use Webkul\Sales\Models\Order;
 
 return [
@@ -347,8 +348,9 @@ return [
             ], [
                 'name' => 'model',
                 'title' => 'Model',
-                'type' => 'text',
+                'type' => 'select',
                 'channel_based' => true,
+                'options' => AiModelHelper::textModelOptions(),
             ], [
                 'name' => 'review_translation',
                 'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
@@ -400,8 +402,9 @@ return [
             ], [
                 'name' => 'model',
                 'title' => 'Model',
-                'type' => 'text',
+                'type' => 'select',
                 'channel_based' => true,
+                'options' => AiModelHelper::imageModelOptions(),
             ],
         ],
     ], [

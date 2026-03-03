@@ -1,3 +1,13 @@
+@php
+    use Webkul\MagicAI\Helpers\AiModelHelper;
+
+    $imageProvider   = core()->getConfigData('general.magic_ai.image_generation.provider') ?? 'openai';
+    $imageModelValue = core()->getConfigData('general.magic_ai.image_generation.model')
+        ?? AiModelHelper::defaultImageModel($imageProvider)?->value
+        ?? '';
+    $imageModelOptions = AiModelHelper::imageModelSelectOptions($imageProvider);
+@endphp
+
 @props([
     'name'             => 'images',
     'allowMultiple'    => false,
@@ -243,6 +253,29 @@
 
                                             <x-admin::form.control-group.error control-name="quality" />
                                         </x-admin::form.control-group>
+
+                                        <!-- Model Select -->
+                                        <x-admin::form.control-group v-if="ai.models && ai.models.length">
+                                            <x-admin::form.control-group.label>
+                                                @lang('admin::app.components.media.images.ai-generation.model')
+                                            </x-admin::form.control-group.label>
+
+                                            <x-admin::form.control-group.control
+                                                type="select"
+                                                name="model"
+                                                v-model="ai.model"
+                                                :label="trans('admin::app.components.media.images.ai-generation.model')"
+                                            >
+                                                <option
+                                                    v-for="option in ai.models"
+                                                    :key="option.value"
+                                                    :value="option.value"
+                                                    v-text="option.label"
+                                                ></option>
+                                            </x-admin::form.control-group.control>
+
+                                            <x-admin::form.control-group.error control-name="model" />
+                                        </x-admin::form.control-group>
                                     </div>
 
                                     <div v-show="ai.images.length">
@@ -439,6 +472,10 @@
                     ai: {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
 
+                        models: {!! json_encode($imageModelOptions) !!},
+
+                        model: "{{ $imageModelValue }}",
+
                         prompt: null,
 
                         n: 1,
@@ -547,6 +584,10 @@
                 resetAIModal() {
                     this.ai = {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
+
+                        models: {!! json_encode($imageModelOptions) !!},
+
+                        model: "{{ $imageModelValue }}",
 
                         prompt: null,
 

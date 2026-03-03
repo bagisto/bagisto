@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'Oluşturuluyor...',
                     'hd' => 'HD',
                     'number-of-images' => 'Resim Sayısı',
+                    'model' => 'Model',
+                    'prompt' => 'İstem',
                     'quality' => 'Kalite',
                     'regenerate' => 'Yeniden Oluştur',
                     'regenerating' => 'Yeniden Oluşturuluyor...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'Oluşturulan İçerik',
                 'generated-content-info' => 'AI içeriği yanıltıcı olabilir. Lütfen oluşturulan içeriği uygulamadan önce gözden geçirin.',
                 'generating' => 'Oluşturuluyor...',
+                'model' => 'Model',
+                'prompt' => 'İstem',
                 'title' => 'AI Yardımı',
             ],
 

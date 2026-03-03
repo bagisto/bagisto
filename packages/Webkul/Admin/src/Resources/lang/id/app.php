@@ -5177,6 +5177,8 @@ return [
                     'generating' => 'Sedang Dihasilkan...',
                     'hd' => 'HD',
                     'number-of-images' => 'Jumlah Gambar',
+                    'model' => 'Model',
+                    'prompt' => 'Perintah',
                     'quality' => 'Kualitas',
                     'regenerate' => 'Hasilkan Ulang',
                     'regenerating' => 'Sedang Menghasilkan Ulang...',
@@ -5211,6 +5213,8 @@ return [
                 'generated-content' => 'Konten yang Dihasilkan',
                 'generated-content-info' => 'Konten yang dihasilkan AI bisa saja menyesatkan. Harap periksa konten yang dihasilkan sebelum diterapkan.',
                 'generating' => 'Membuat...',
+                'model' => 'Model',
+                'prompt' => 'Perintah',
                 'title' => 'AI Assistance',
             ],
 

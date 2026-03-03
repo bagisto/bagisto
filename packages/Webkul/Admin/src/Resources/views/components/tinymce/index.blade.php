@@ -1,3 +1,13 @@
+@php
+    use Webkul\MagicAI\Helpers\AiModelHelper;
+
+    $textProvider   = core()->getConfigData('general.magic_ai.content_generation.provider') ?? 'openai';
+    $textModelValue = core()->getConfigData('general.magic_ai.content_generation.model')
+        ?? AiModelHelper::defaultTextModel($textProvider)?->value
+        ?? '';
+    $textModelOptions = AiModelHelper::textModelSelectOptions($textProvider);
+@endphp
+
 <v-tinymce {{ $attributes }}></v-tinymce>
 
 @pushOnce('scripts')
@@ -49,6 +59,27 @@
                             />
 
                             <x-admin::form.control-group.error control-name="prompt" />
+                        </x-admin::form.control-group>
+
+                        <!-- Model Select -->
+                        <x-admin::form.control-group v-if="ai.models && ai.models.length">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.components.tinymce.ai-generation.model')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="model"
+                                v-model="ai.model"
+                                :label="trans('admin::app.components.tinymce.ai-generation.model')"
+                            >
+                                <option
+                                    v-for="option in ai.models"
+                                    :key="option.value"
+                                    :value="option.value"
+                                    v-text="option.label"
+                                ></option>
+                            </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
 
                         <!-- Modal Submission -->
@@ -126,6 +157,10 @@
 
                     ai: {
                         enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.content_generation.enabled') }}"),
+
+                        models: {!! json_encode($textModelOptions) !!},
+
+                        model: "{{ $textModelValue }}",
 
                         prompt: null,
 
@@ -285,6 +320,10 @@
 
                                 onAction: function () {
                                     self.ai = {
+                                        models: self.ai.models,
+
+                                        model: self.ai.model,
+
                                         prompt: self.prompt,
 
                                         content: null,
@@ -305,7 +344,8 @@
                     this.isLoading = true;
 
                     this.$axios.post("{{ route('admin.magic_ai.content') }}", {
-                        prompt: params['prompt']
+                        prompt: params['prompt'],
+                        model: this.ai.model,
                     })
                         .then(response => {
                             this.isLoading = false;
