@@ -2,7 +2,9 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.4.0-beta3 (2nd of March 2026)** - **Release**
+## **v2.4.0-beta3 (3rd of March 2026)** - **Release**
+
+* Integrated Laravel AI SDK for Magic AI, refactoring the provider and model layer into per-provider enums with a unified `AiProvider` entry point.
 
 * #11126 [feature] - Added SMTP configuration support from the admin panel.
 
