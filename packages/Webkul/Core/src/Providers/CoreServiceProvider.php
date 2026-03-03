@@ -46,6 +46,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
         $this->app->register(VisitorServiceProvider::class);
+        $this->app->register(DynamicSmtpServiceProvider::class);
     }
 
     /**

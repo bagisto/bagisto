@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## **v2.4.0-beta3 (2nd of March 2026)** - **Release**
 
+* #11126 [feature] - Added SMTP configuration support from the admin panel.
+
 * Merged all bug fixes and improvements from version 2.3.
 
 * Added pest and playwright testcases.

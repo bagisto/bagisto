@@ -865,7 +865,7 @@ class Core
     {
         $senderName = $this->getConfigData('emails.configure.email_settings.sender_name') ?: config('mail.from.name');
 
-        $senderEmail = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
+        $senderEmail = $this->getConfigData('emails.configure.email_settings.sender_email') ?: config('mail.from.address');
 
         return [
             'name' => $senderName,
@@ -885,7 +885,8 @@ class Core
             ?: config('mail.from.name'));
 
         $adminEmail = $this->getConfigData('emails.configure.email_settings.admin_email')
-            ?: config('mail.admin.address');
+            ?: (config('mail.admin.address')
+            ?: config('mail.from.address'));
 
         return [
             'name' => $adminName,
@@ -905,7 +906,8 @@ class Core
             ?: config('mail.from.name'));
 
         $contactEmail = $this->getConfigData('emails.configure.email_settings.contact_email')
-            ?: config('mail.contact.address');
+            ?: (config('mail.contact.address')
+            ?: config('mail.from.address'));
 
         return [
             'name' => $contactName,
