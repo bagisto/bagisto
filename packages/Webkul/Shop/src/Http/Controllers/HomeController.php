@@ -108,7 +108,6 @@ public function servicesByCategory(Request $req)
               ->where('visible_individually', 1);
         })
         ->get();
-
         return view('shop::home.index', compact('categories', 'services'));
 }
 
@@ -117,24 +116,6 @@ public function servicesByCategory(Request $req)
         return view('shop::about.index');
     }
 
-    // Step 3: Get services
-    $services = $category->products()
-        ->where('type', 'booking')
-        ->whereHas('product_flats', function ($q) {
-            $q->where('status', 1)
-              ->where('visible_individually', 1);
-        })->take(4)->get();
-
-    $service_locations = BookingProduct::get();
-
-        return view('shop::home.index', compact('categories', 'services','products','service_locations'));
-}
-
-
-    // this will render about page
-    public function about(){
-        return view('shop::about.index');
-    }
 
      // this will render gallery page
     public function galleryIndex(){
