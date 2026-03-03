@@ -80,7 +80,7 @@ class OnepageController extends Controller
 
         if (
             core()->getConfigData('general.magic_ai.settings.enabled')
-            && core()->getConfigData('general.magic_ai.checkout_message.enabled')
+            && core()->getConfigData('general.magic_ai.content_generation.checkout_message')
             && ! empty(core()->getConfigData('general.magic_ai.default_prompts.checkout_message'))
         ) {
             try {

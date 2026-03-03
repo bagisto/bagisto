@@ -317,23 +317,14 @@ return [
                         'title' => 'Azure OpenAI',
                         'value' => 'azure',
                     ], [
-                        'title' => 'Cohere',
-                        'value' => 'cohere',
-                    ], [
                         'title' => 'DeepSeek',
                         'value' => 'deepseek',
-                    ], [
-                        'title' => 'ElevenLabs',
-                        'value' => 'eleven',
                     ], [
                         'title' => 'Gemini',
                         'value' => 'gemini',
                     ], [
                         'title' => 'Groq',
                         'value' => 'groq',
-                    ], [
-                        'title' => 'Jina',
-                        'value' => 'jina',
                     ], [
                         'title' => 'Mistral',
                         'value' => 'mistral',
@@ -343,12 +334,6 @@ return [
                     ], [
                         'title' => 'OpenAI',
                         'value' => 'openai',
-                    ], [
-                        'title' => 'OpenRouter',
-                        'value' => 'openrouter',
-                    ], [
-                        'title' => 'VoyageAI',
-                        'value' => 'voyageai',
                     ], [
                         'title' => 'xAI',
                         'value' => 'xai',
@@ -363,6 +348,18 @@ return [
                 'name' => 'model',
                 'title' => 'Model',
                 'type' => 'text',
+                'channel_based' => true,
+            ], [
+                'name' => 'review_translation',
+                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
+                'info' => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'checkout_message',
+                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
+                'info' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
+                'type' => 'boolean',
                 'channel_based' => true,
             ],
         ],
@@ -385,44 +382,11 @@ return [
                 'default' => 'gemini',
                 'options' => [
                     [
-                        'title' => 'Anthropic',
-                        'value' => 'anthropic',
-                    ], [
-                        'title' => 'Azure OpenAI',
-                        'value' => 'azure',
-                    ], [
-                        'title' => 'Cohere',
-                        'value' => 'cohere',
-                    ], [
-                        'title' => 'DeepSeek',
-                        'value' => 'deepseek',
-                    ], [
-                        'title' => 'ElevenLabs',
-                        'value' => 'eleven',
-                    ], [
                         'title' => 'Gemini',
                         'value' => 'gemini',
                     ], [
-                        'title' => 'Groq',
-                        'value' => 'groq',
-                    ], [
-                        'title' => 'Jina',
-                        'value' => 'jina',
-                    ], [
-                        'title' => 'Mistral',
-                        'value' => 'mistral',
-                    ], [
-                        'title' => 'Ollama',
-                        'value' => 'ollama',
-                    ], [
                         'title' => 'OpenAI',
                         'value' => 'openai',
-                    ], [
-                        'title' => 'OpenRouter',
-                        'value' => 'openrouter',
-                    ], [
-                        'title' => 'VoyageAI',
-                        'value' => 'voyageai',
                     ], [
                         'title' => 'xAI',
                         'value' => 'xai',
@@ -437,32 +401,6 @@ return [
                 'name' => 'model',
                 'title' => 'Model',
                 'type' => 'text',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.review_translation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.checkout_message',
-        'name' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.enabled',
-                'type' => 'boolean',
                 'channel_based' => true,
             ],
         ],
