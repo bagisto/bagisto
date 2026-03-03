@@ -115,4 +115,5 @@ class LocaleController extends Controller
             ], 500);
         }
     }
+
 }
