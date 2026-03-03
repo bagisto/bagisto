@@ -8,6 +8,7 @@
 *.hot
 /stubs
 /data
+/storage
 /docker-compose-collection
 Homestead.json
 Homestead.yaml
@@ -30,3 +31,4 @@ yarn.lock
 yarn-error.log
 /test-results
 /playwright-report
+/storage
