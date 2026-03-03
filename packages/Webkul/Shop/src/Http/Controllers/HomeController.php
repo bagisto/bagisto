@@ -37,17 +37,25 @@ class HomeController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index()
-        {
-    // Get root category (parent_id = null in Bagisto usually)
-    $rootCategory = Category::whereNull('parent_id')->first();
+    public function index(){
 
-    if (!$rootCategory) {
-        return view('shop::home.index', [
+        // Fetch a single product from the flat table
+        $products = ProductFlat::where('type', 'simple')
+         ->where('status', 1)
+        ->where('visible_individually', 1)
+        ->get();
+
+      // Get root category (parent_id = null in Bagisto usually)
+     $rootCategory = Category::whereNull('parent_id')->first();
+
+        if (!$rootCategory) {
+         return view('shop::home.index', [
             'categories' => collect(),
             'services'   => collect(),
         ]);
-    }
+        }
+
+    $service_locations = BookingProduct::get();
 
     // Get child categories under root
     $categories = Category::where('parent_id', $rootCategory->id)->get();
@@ -60,19 +68,23 @@ class HomeController extends Controller
         $firstCategory = $categories->first();
 
         $services = $firstCategory->products()
-            ->where('type', 'booking')
-            ->whereHas('product_flats', function ($q) {
-                $q->where('status', 1)
-                  ->where('visible_individually', 1);
-            })
-            ->get();
+    ->where('type', 'booking')
+    ->whereHas('product_flats', function ($q) {
+        $q->where('status', 1)
+          ->where('visible_individually', 1);
+    })->take(4)->get();
     }
-    return view('shop::home.index', compact('categories', 'services'));
+    return view('shop::home.index', compact('categories', 'services','products','service_locations'));
     }
 
 
 public function servicesByCategory(Request $req)
 {
+      // Fetching all products for the our products section on homepage
+     $products = ProductFlat::where('type', 'simple')
+    ->where('status', 1)
+    ->where('visible_individually', 1)
+    ->get();
      // Get root category (parent_id = null in Bagisto usually)
     $rootCategory = Category::whereNull('parent_id')->first();
 
@@ -106,16 +118,18 @@ public function servicesByCategory(Request $req)
         ->whereHas('product_flats', function ($q) {
             $q->where('status', 1)
               ->where('visible_individually', 1);
-        })
-        ->get();
-        return view('shop::home.index', compact('categories', 'services'));
+        })->take(4)->get();
+
+    $service_locations = BookingProduct::get();
+
+        return view('shop::home.index', compact('categories', 'services','products','service_locations'));
 }
+
 
     // this will render about page
     public function about(){
         return view('shop::about.index');
     }
-
 
      // this will render gallery page
     public function galleryIndex(){
