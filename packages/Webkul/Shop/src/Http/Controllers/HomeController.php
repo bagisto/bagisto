@@ -15,6 +15,7 @@ use Webkul\Category\Models\Category;
 use Illuminate\Http\Request;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Models\Product;
 use Webkul\BookingProduct\Models\BookingProduct;
 
 class HomeController extends Controller
@@ -44,15 +45,15 @@ class HomeController extends Controller
         ->where('visible_individually', 1)
         ->get();
 
-    // Get root category (parent_id = null in Bagisto usually)
-    $rootCategory = Category::whereNull('parent_id')->first();
+      // Get root category (parent_id = null in Bagisto usually)
+     $rootCategory = Category::whereNull('parent_id')->first();
 
-    if (!$rootCategory) {
-        return view('shop::home.index', [
+        if (!$rootCategory) {
+         return view('shop::home.index', [
             'categories' => collect(),
             'services'   => collect(),
         ]);
-    }
+        }
 
     $service_locations = BookingProduct::get();
 
@@ -80,7 +81,7 @@ class HomeController extends Controller
 public function servicesByCategory(Request $req)
 {
       // Fetching all products for the our products section on homepage
-$products = ProductFlat::where('type', 'simple')
+     $products = ProductFlat::where('type', 'simple')
     ->where('status', 1)
     ->where('visible_individually', 1)
     ->get();
@@ -124,6 +125,7 @@ $products = ProductFlat::where('type', 'simple')
         return view('shop::home.index', compact('categories', 'services','products','service_locations'));
 }
 
+
     // this will render about page
     public function about(){
         return view('shop::about.index');
@@ -134,10 +136,41 @@ $products = ProductFlat::where('type', 'simple')
         return view('shop::gallery.index');
     }
 
-     public function servicesDetails($id){
+    public function servicesDetails($id){
         $service = ProductFlat::find($id)->first();
         return view('shop::service_details.index',compact('service'));
     }
+
+    // Product details page
+    public function productDetails($id){
+        
+        //product id from url 
+        $product_id = $id;
+
+        // current channel and locale
+        $current_locale = app()->getLocale();
+        $current_chanel = core()->getCurrentChannelCode();
+
+        // fetch single product based on current channel and locale
+        $productFlat = ProductFlat::where('product_id',$product_id)
+                   ->where('locale',$current_locale)
+                   ->where('channel',$current_chanel)
+                   ->firstOrFail();
+
+        // fetch product images from product_images using has many relationship
+        $product_images = Product::with('images')->findOrFail($product_id);
+        
+        // fetch product images by sorting as per position
+        $images = $product_images->images->sortBy('position')->values();
+
+        // Remove first image (main image)
+        $otherImages = $images->slice(1)->take(4);
+
+        // dd($otherImages[3]['path']);
+
+        return view('shop::product_details.index',compact('productFlat','otherImages'));
+    }
+
 
     /**
      * Loads the home page for the storefront if something wrong.

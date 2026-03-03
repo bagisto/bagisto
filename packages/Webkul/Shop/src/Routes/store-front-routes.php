@@ -12,51 +12,58 @@ use Webkul\Shop\Http\Controllers\SubscriptionController;
 use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use App\Http\Middleware\LocaleMiddleware;
 
-/**
- * CMS pages.
- */
-Route::get('page/{slug}', [PageController::class, 'view'])
-    ->name('shop.cms.page')
-    ->middleware('cache.response');
 
-/**
- * Fallback route.
- */
-Route::fallback(ProductsCategoriesProxyController::class.'@index')
-    ->name('shop.product_or_category.index')
-    ->middleware('cache.response');
+// Homepage Routes 
 
-// Home page routes 
+// Header language switcher (Arabic)
+Route::get('/switch/{ln}',[HomeController::class,'languageArabicSwitch'])->name('language.switch.arabic');
+
+// Header language switcher (English)
+Route::get('/Switch/{ln}',[HomeController::class,'languageEnglishSwitch'])->name('language.switch.english');
+
+// Header search box
+Route::get('/booking/search', [SearchController::class, 'bookingSearch'])->name('booking.search');   
+
+// Index page 
 Route::get('/', [HomeController::class, 'index'])
     ->name('shop.home.index');
 
+// Services as per category  
 Route::get('/services/{slug}', [HomeController::class, 'servicesByCategory'])
     ->name('shop.home.services');
 
+// Service details page
 Route::get('/service/{id}', [HomeController::class, 'servicesDetails'])
     ->name('shop.home.service.details');
 
+// Product details page
+Route::get('/product/{id}', [HomeController::class, 'productDetails'])
+    ->name('shop.home.product.details');
+
+
+// Inner pages
+// Services page
 Route::get('/services', [HomeController::class, 'allServices'])
     ->name('shop.home.all.services');
 
+// Gallery page
 Route::get('/gallery', [HomeController::class, 'galleryIndex'])
     ->name('shop.gallery.index');      
 
-Route::get('/switch/{ln}',[HomeController::class,'languageArabicSwitch'])->name('language.switch.arabic');
-
-Route::get('/Switch/{ln}',[HomeController::class,'languageEnglishSwitch'])->name('language.switch.english');
-
-    Route::get('/booking/search', [SearchController::class, 'bookingSearch'])->name('booking.search');
-
+// About Us page
 Route::get('about', [HomeController::class, 'about'])
     ->name('shop.home.about');
 
+// Contact Us page
 Route::get('contact', [HomeController::class, 'contactUs'])
     ->name('shop.home.contact');
 
 Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail'])
     ->name('shop.home.contact_us.send_mail')
     ->middleware('cache.response');
+
+
+
 
 /**
  * Store front search.
@@ -72,7 +79,6 @@ Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.se
  */
 Route::controller(SubscriptionController::class)->group(function () {
     Route::post('subscription', 'store')->name('shop.subscription.store');
-
     Route::get('subscription/{token}', 'destroy')->name('shop.subscription.destroy');
 });
 
@@ -97,3 +103,18 @@ Route::controller(ProductController::class)->group(function () {
  */
 Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])
     ->name('shop.booking-product.slots.index');
+
+
+    /**
+ * CMS pages.
+ */
+Route::get('page/{slug}', [PageController::class, 'view'])
+    ->name('shop.cms.page')
+    ->middleware('cache.response');
+
+/**
+ * Fallback route.
+ */
+Route::fallback(ProductsCategoriesProxyController::class.'@index')
+    ->name('shop.product_or_category.index')
+    ->middleware('cache.response');
