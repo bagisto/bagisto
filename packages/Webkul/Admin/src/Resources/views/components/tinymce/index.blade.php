@@ -1,11 +1,13 @@
 @php
-    use Webkul\MagicAI\Helpers\AiModelHelper;
+    use Webkul\MagicAI\AiProvider;
 
-    $provider     = core()->getConfigData('general.magic_ai.content_generation.provider') ?? 'openai';
-    $activeModel  = core()->getConfigData('general.magic_ai.content_generation.model')
-        ?? AiModelHelper::defaultTextModel($provider)?->value
+    $provider = core()->getConfigData('general.magic_ai.content_generation.provider') ?? AiProvider::defaultTextProvider();
+
+    $activeModel = core()->getConfigData('general.magic_ai.content_generation.model')
+        ?? AiProvider::defaultTextModel($provider)?->value
         ?? '';
-    $modelOptions = AiModelHelper::textModelSelectOptions($provider);
+
+    $modelOptions = AiProvider::textModelSelectOptions($provider);
 @endphp
 
 <v-tinymce {{ $attributes }}></v-tinymce>

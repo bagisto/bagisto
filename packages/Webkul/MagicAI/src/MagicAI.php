@@ -3,7 +3,6 @@
 namespace Webkul\MagicAI;
 
 use Laravel\Ai\Image;
-use Webkul\MagicAI\Helpers\AiModelHelper;
 
 use function Laravel\Ai\agent;
 
@@ -60,7 +59,9 @@ class MagicAI
 
     /**
      * Resolve the provider and model for a named feature from admin config.
+     *
      * Injects the stored API key into the Laravel AI runtime config.
+     *
      * Falls back to the enum's recommended default when no model is saved.
      *
      * @return array{provider: ?string, model: ?string}
@@ -68,6 +69,7 @@ class MagicAI
     protected function loadFeatureConfig(string $feature): array
     {
         $configKey = "general.magic_ai.{$feature}";
+
         $provider = core()->getConfigData("{$configKey}.provider");
 
         if ($provider && array_key_exists($provider, config('ai.providers', []))) {
@@ -80,8 +82,8 @@ class MagicAI
 
         if (! $model && $provider) {
             $default = $feature === 'image_generation'
-                ? AiModelHelper::defaultImageModel($provider)
-                : AiModelHelper::defaultTextModel($provider);
+                ? AiProvider::defaultImageModel($provider)
+                : AiProvider::defaultTextModel($provider);
 
             $model = $default?->value;
         }
@@ -103,6 +105,7 @@ class MagicAI
      * Execute image generation requests and return base64-encoded results.
      *
      * Supported sizes:   1024x1024 (square) · 1792x1024 (landscape) · 1024x1792 (portrait)
+     *
      * Supported quality: 'hd' → 'high'  |  'standard' → 'medium'
      *
      * @param  array{n?: int, size?: string, quality?: string}  $options
@@ -111,7 +114,9 @@ class MagicAI
     protected function executeImages(string $prompt, array $options, ?string $provider, ?string $model): array
     {
         $count = max((int) ($options['n'] ?? 1), 1);
+
         $size = $options['size'] ?? '1024x1024';
+
         $quality = $this->resolveQuality($options['quality'] ?? null);
 
         $images = [];
@@ -140,7 +145,7 @@ class MagicAI
     /**
      * Map the frontend quality string to the SDK's quality constant.
      */
-    private function resolveQuality(?string $quality): ?string
+    protected function resolveQuality(?string $quality): ?string
     {
         return match ($quality) {
             'hd' => 'high',

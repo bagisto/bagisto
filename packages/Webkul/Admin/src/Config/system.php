@@ -1,7 +1,6 @@
 <?php
 
-use Webkul\MagicAI\Enums\AiProvider;
-use Webkul\MagicAI\Helpers\AiModelHelper;
+use Webkul\MagicAI\AiProvider;
 use Webkul\Sales\Models\Order;
 
 return [
@@ -310,7 +309,7 @@ return [
                 'title' => 'Provider',
                 'type' => 'select',
                 'channel_based' => true,
-                'default' => AiProvider::OpenAI->value,
+                'default' => AiProvider::defaultTextProvider(),
                 'options' => AiProvider::textProviderOptions(),
             ], [
                 'name' => 'api_key',
@@ -322,7 +321,7 @@ return [
                 'title' => 'Model',
                 'type' => 'select',
                 'channel_based' => true,
-                'options' => AiModelHelper::textModelOptions(),
+                'options' => AiProvider::textModelOptions(),
             ], [
                 'name' => 'review_translation',
                 'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
@@ -353,7 +352,7 @@ return [
                 'title' => 'Provider',
                 'type' => 'select',
                 'channel_based' => true,
-                'default' => AiProvider::Gemini->value,
+                'default' => AiProvider::defaultImageProvider(),
                 'options' => AiProvider::imageProviderOptions(),
             ], [
                 'name' => 'api_key',
@@ -365,7 +364,7 @@ return [
                 'title' => 'Model',
                 'type' => 'select',
                 'channel_based' => true,
-                'options' => AiModelHelper::imageModelOptions(),
+                'options' => AiProvider::imageModelOptions(),
             ],
         ],
     ], [

@@ -1,11 +1,13 @@
 @php
-    use Webkul\MagicAI\Helpers\AiModelHelper;
+    use Webkul\MagicAI\AiProvider;
 
-    $provider     = core()->getConfigData('general.magic_ai.image_generation.provider') ?? 'openai';
-    $activeModel  = core()->getConfigData('general.magic_ai.image_generation.model')
-        ?? AiModelHelper::defaultImageModel($provider)?->value
+    $provider = core()->getConfigData('general.magic_ai.image_generation.provider') ?? AiProvider::defaultImageProvider();
+
+    $activeModel = core()->getConfigData('general.magic_ai.image_generation.model')
+        ?? AiProvider::defaultImageModel($provider)?->value
         ?? '';
-    $modelOptions = AiModelHelper::imageModelSelectOptions($provider);
+
+    $modelOptions = AiProvider::imageModelSelectOptions($provider);
 @endphp
 
 @props([
