@@ -65,7 +65,6 @@
                             :label="trans('admin::app.cms.create.content')"
                             :placeholder="trans('admin::app.cms.create.content')"
                             :tinymce="true"
-                            :prompt="core()->getConfigData('general.magic_ai.default_prompts.cms_page_content')"
                         />
 
                         <x-admin::form.control-group.error control-name="html_content" />

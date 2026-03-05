@@ -276,137 +276,11 @@ return [
             ],
         ],
     ], [
-        'key' => 'general.magic_ai',
-        'name' => 'admin::app.configuration.index.general.magic-ai.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.info',
-        'icon' => 'settings/magic-ai.svg',
-        'sort' => 3,
-    ], [
-        'key' => 'general.magic_ai.settings',
-        'name' => 'admin::app.configuration.index.general.magic-ai.settings.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.settings.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.content_generation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.content-generation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.content-generation.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.enabled',
-                'type' => 'boolean',
-            ], [
-                'name' => 'provider',
-                'title' => 'Provider',
-                'type' => 'select',
-                'channel_based' => true,
-                'default' => AiProvider::defaultTextProvider(),
-                'options' => AiProvider::textProviderOptions(),
-            ], [
-                'name' => 'api_key',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
-                'type' => 'password',
-                'channel_based' => true,
-            ], [
-                'name' => 'model',
-                'title' => 'Model',
-                'type' => 'select',
-                'channel_based' => true,
-                'options' => AiProvider::textModelOptions(),
-            ], [
-                'name' => 'review_translation',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
-                'info' => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ], [
-                'name' => 'checkout_message',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
-                'info' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.image_generation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.image-generation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.image-generation.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.image-generation.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ], [
-                'name' => 'provider',
-                'title' => 'Provider',
-                'type' => 'select',
-                'channel_based' => true,
-                'default' => AiProvider::defaultImageProvider(),
-                'options' => AiProvider::imageProviderOptions(),
-            ], [
-                'name' => 'api_key',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
-                'type' => 'password',
-                'channel_based' => true,
-            ], [
-                'name' => 'model',
-                'title' => 'Model',
-                'type' => 'select',
-                'channel_based' => true,
-                'options' => AiProvider::imageModelOptions(),
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.default_prompts',
-        'name' => 'admin::app.configuration.index.general.magic-ai.default-prompts.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.default-prompts.title-info',
-        'sort' => 5,
-        'fields' => [
-            [
-                'name' => 'product_short_description',
-                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.product-short-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'product_description',
-                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.product-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'category_description',
-                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.category-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'cms_page_content',
-                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.cms-page-content-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'checkout_message',
-                'title' => 'admin::app.configuration.index.general.magic-ai.default-prompts.checkout-message-prompt',
-                'type' => 'textarea',
-                'channel_based' => true,
-                'locale_based' => true,
-            ],
-        ],
-    ], [
         'key' => 'general.sitemap',
         'name' => 'admin::app.configuration.index.general.sitemap.title',
         'info' => 'admin::app.configuration.index.general.sitemap.info',
         'icon' => 'settings/store.svg',
-        'sort' => 3,
+        'sort' => 4,
     ], [
         'key' => 'general.sitemap.settings',
         'name' => 'admin::app.configuration.index.general.sitemap.settings.title',
@@ -441,7 +315,7 @@ return [
         'name' => 'admin::app.configuration.index.general.gdpr.title',
         'info' => 'admin::app.configuration.index.general.gdpr.info',
         'icon' => 'settings/store.svg',
-        'sort' => 4,
+        'sort' => 5,
     ], [
         'key' => 'general.gdpr.settings',
         'name' => 'admin::app.configuration.index.general.gdpr.settings.title',
@@ -590,13 +464,227 @@ return [
     ],
 
     /**
+     * Magic AI.
+     */
+    [
+        'key' => 'magic_ai',
+        'name' => 'admin::app.configuration.index.magic-ai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.info',
+        'sort' => 2,
+    ], [
+        'key' => 'magic_ai.general',
+        'name' => 'admin::app.configuration.index.magic-ai.general.title',
+        'info' => 'admin::app.configuration.index.magic-ai.general.info',
+        'icon' => 'settings/magic-ai.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'magic_ai.general.settings',
+        'name' => 'admin::app.configuration.index.magic-ai.general.settings.title',
+        'info' => 'admin::app.configuration.index.magic-ai.general.settings.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.general.settings.enabled',
+                'type' => 'boolean',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.info',
+        'icon' => 'settings/magic-ai-providers.svg',
+        'sort' => 2,
+    ], [
+        'key' => 'magic_ai.providers.openai',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.openai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.openai.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.anthropic',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.anthropic.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.anthropic.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.gemini',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.gemini.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.gemini.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.groq',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.groq.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.groq.title-info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.xai',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.xai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.xai.title-info',
+        'sort' => 5,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.deepseek',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.deepseek.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.deepseek.title-info',
+        'sort' => 6,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.mistral',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.mistral.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.mistral.title-info',
+        'sort' => 7,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.ollama',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.ollama.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.ollama.title-info',
+        'sort' => 8,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.admin_features',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.info',
+        'icon' => 'settings/magic-ai-admin-features.svg',
+        'sort' => 3,
+    ], [
+        'key' => 'magic_ai.admin_features.text_generation',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.enabled',
+                'type' => 'boolean',
+            ], [
+                'name' => 'providers',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.providers',
+                'type' => 'multiselect',
+                'options' => AiProvider::textProviderOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.admin_features.image_generation',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.enabled',
+                'type' => 'boolean',
+            ], [
+                'name' => 'providers',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.providers',
+                'type' => 'multiselect',
+                'options' => AiProvider::imageProviderOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.storefront_features',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.info',
+        'icon' => 'settings/magic-ai-storefront-features.svg',
+        'sort' => 4,
+    ], [
+        'key' => 'magic_ai.storefront_features.review_translation',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.enabled',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.storefront_features.checkout_message',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.enabled',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
+            ],
+        ],
+    ],
+
+    /**
      * Catalog.
      */
     [
         'key' => 'catalog',
         'name' => 'admin::app.configuration.index.catalog.title',
         'info' => 'admin::app.configuration.index.catalog.info',
-        'sort' => 2,
+        'sort' => 3,
     ], [
         'key' => 'catalog.products',
         'name' => 'admin::app.configuration.index.catalog.products.title',
@@ -1035,7 +1123,7 @@ return [
         'key' => 'customer',
         'name' => 'admin::app.configuration.index.customer.title',
         'info' => 'admin::app.configuration.index.customer.info',
-        'sort' => 3,
+        'sort' => 4,
     ], [
         'key' => 'customer.address',
         'name' => 'admin::app.configuration.index.customer.address.title',
@@ -1381,7 +1469,7 @@ return [
         'key' => 'emails',
         'name' => 'admin::app.configuration.index.email.title',
         'info' => 'admin::app.configuration.index.email.info',
-        'sort' => 4,
+        'sort' => 5,
     ], [
         'key' => 'emails.configure',
         'name' => 'admin::app.configuration.index.email.email-settings.title',
@@ -1574,7 +1662,7 @@ return [
         'key' => 'sales',
         'name' => 'admin::app.configuration.index.sales.title',
         'info' => 'admin::app.configuration.index.sales.info',
-        'sort' => 5,
+        'sort' => 6,
     ], [
         'key' => 'sales.shipping',
         'name' => 'admin::app.configuration.index.sales.shipping-setting.title',

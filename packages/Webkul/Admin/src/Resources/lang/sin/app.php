@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'මැජික් AI විකල්ප සකසන්න සහ අන්තර්ගතය ස්වයංක්‍රීයව නිර්මාණය කිරීමට විකල්ප කිහිපයක් සක්‍රීය කරන්න.',
-                    'title' => 'මැජික් එයි',
-
-                    'settings' => [
-                        'api-key' => 'API යතුර',
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'llm-api-domain' => 'LLM API ඩොමේන්',
-                        'organization' => 'සංවිධානය',
-                        'title' => 'සාමාන්‍ය සැකසීම්',
-                        'title-info' => 'ඔබේ විවිධ අවස්ථාවක් සඳහා Magic AI විස්තර සැකසීම් සඳහා ඔබේ විවිධ API යතුර සහ අන්තර්ගතය අතුරුම්කරන්න. OpenAI හි ඔබේ විවිධ අංකයන් සහාය සඳහා සැකසීම් අනුව ඔබේ විවිධ අවස්ථාවක් සක්‍රිය කරන්න.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'title' => 'අන්තර්ගතය සැකසීම්',
-                        'title-info' => 'මෙම විස්තරය සැකසීම සඳහා Magic AI සක්‍රිය කරයි, ඔබට AI භාවිතා කරන්නේ කොටස් සඳහා අන්තර්ගතය කළ හැකි විකල්පයක් සඳහා.<br/><br/>සක්‍රිය කිරීමෙන් පෙර කිසිදු සංවිධානයක් සක්‍රිය වීමට යම් සංවිධානයක් සඳහා යෙදුමක් යොමු කරන්න.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'title' => 'රූප සැකසීම්',
-                        'title-info' => 'මෙම විස්තරය සඳහා Magic AI සක්‍රිය කරයි, ඔබට DALL-E භාවිතා කරන්නේ රූප උදව් කිරීමට කොටස් සඳහා අන්තර්ගතය කළ හැකි විකල්පයක් සඳහා.<br/><br/>සක්‍රිය කිරීමෙන් පෙර කිසිදු රූපයක් උදව් කිරීමට යම් රූපයක් උදව් කිරීමට යොමු කරන්න.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'සක්‍රීයයි',
-                        'title' => 'සමාලෝචන පරිවර්තනය',
-                        'title-info' => 'පාරිභෝගික සමාලෝචනය ඉංග්‍රීසිට පරිවර්තනය කිරීමට පාරිභෝගිකයා හෝ සංචාරකයාට විකල්පයක් සපයන්න.<br/><br/>සක්‍රීය කිරීමෙන් පසු, සමාලෝචනයට යන්න, ඔබට "ඉංග්‍රීසිට පරිවර්තනය කරන්න" බොත්තමක් සොයාගත හැකිය, ඔබේ සමාලෝචනය ඉංග්‍රීසි නොවන විට.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'සක්‍රීයයි',
-                        'title' => 'පිටවීමේ පණිවිඩය',
-                        'title-info' => 'පාරිභෝගිකයින් සඳහා ස්වයංක්‍රීය පිටවීමේ පණිවිඩයක් නිර්මාණය කරන්න, ස්වයංක්‍රීයව පසු-මිලදී ගැනීමේ අත්දැකීම වැඩිදියුණු කිරීම සඳහා අන්තර්ගතය අභිරුචි කරන්න.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'ප්‍රවර්ධනය',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR අනුකූලතා සැකසුම්',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'උපරිම ගොනුවේ විශාලත්වය',
                         'max-url-per-file' => 'ගොනුවකට උපරිම URL සංඛ්‍යාව',
                         'title' => 'ගොනු සීමා',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configure Magic AI settings, providers, and features.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'General Magic AI settings.',
+                    'title' => 'General',
+
+                    'settings' => [
+                        'enabled' => 'Enabled',
+                        'title' => 'Settings',
+                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API Key',
+                    'info' => 'Configure API keys for your AI providers.',
+                    'title' => 'Providers',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configure your OpenAI API credentials.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configure your Anthropic API credentials.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configure your Google Gemini API credentials.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configure your Groq API credentials.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configure your xAI API credentials.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configure your DeepSeek API credentials.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configure your Mistral API credentials.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configure your Ollama API credentials.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Enable and configure AI features for the admin panel.',
+                    'title' => 'Admin Features',
+
+                    'text-generation' => [
+                        'enabled' => 'Enabled',
+                        'providers' => 'Providers',
+                        'title' => 'Text Generation',
+                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Enabled',
+                        'providers' => 'Providers',
+                        'title' => 'Image Generation',
+                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Enable and configure AI features for the storefront.',
+                    'title' => 'Storefront Features',
+
+                    'review-translation' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'Review Translation',
+                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'Personalized Checkout Message',
+                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
                     ],
                 ],
             ],

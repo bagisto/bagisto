@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'הגדר אפשרויות Magic AI ואפשר אפשרויות מסוימות לאוטומציה של יצירת תוכן.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'מפתח API',
-                        'enabled' => 'מופעל',
-                        'llm-api-domain' => 'תחום LLM API',
-                        'organization' => 'ארגון',
-                        'title' => 'הגדרות כלליות',
-                        'title-info' => 'שפר את החוויה שלך עם תכונת Magic AI על ידי הזנת מפתח API בלעדי וציון הארגון הרלוונטי לשילוב ללא מאמץ. תפוס בידיים את השליטה על פרטי הזיהוי שלך ב-OpenAI והתאם אישית את ההגדרות לפי צרכיך המיוחדים.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'יצירת תוכן',
-                        'title-info' => 'תכונה זו תאפשר את Magic AI עבור כל עורך WYSIWYG, בו תרצה לנהל תוכן באמצעות AI.<br/><br/>כאשר מופעל, עבור לכל עורך כדי ליצור תוכן.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'יצירת תמונה',
-                        'title-info' => 'תכונה זו תאפשר את Magic AI עבור כל העלאת תמונה, בה תרצה ליצור תמונות באמצעות DALL-E.<br/><br/>כאשר מופעל, עבור לכל העלאת תמונה כדי ליצור תמונה.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'תרגום ביקורת',
-                        'title-info' => 'ספק אפשרות ללקוח או למבקר לתרגם ביקורת לקוח לאנגלית.<br/><br/>כאשר מופעל, עבור לביקורת ותמצא את הכפתור "תרגם לאנגלית" אם הביקורת אינה באנגלית.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'הודעת תשלום מותאמת אישית',
-                        'title-info' => 'צור הודעת תשלום מותאמת אישית ללקוחות בעמוד התודה, התאמת התוכן להעדפות אישיות ושיפור חווית הרכישה הכוללת.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'הנחיה',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'הגדרות תאימות ל-GDPR',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'גודל קובץ מרבי',
                         'max-url-per-file' => 'מספר מרבי של כתובות URL לכל קובץ',
                         'title' => 'גבולות קובץ',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configure Magic AI settings, providers, and features.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'General Magic AI settings.',
+                    'title' => 'General',
+
+                    'settings' => [
+                        'enabled' => 'Enabled',
+                        'title' => 'Settings',
+                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API Key',
+                    'info' => 'Configure API keys for your AI providers.',
+                    'title' => 'Providers',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configure your OpenAI API credentials.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configure your Anthropic API credentials.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configure your Google Gemini API credentials.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configure your Groq API credentials.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configure your xAI API credentials.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configure your DeepSeek API credentials.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configure your Mistral API credentials.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configure your Ollama API credentials.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Enable and configure AI features for the admin panel.',
+                    'title' => 'Admin Features',
+
+                    'text-generation' => [
+                        'enabled' => 'Enabled',
+                        'providers' => 'Providers',
+                        'title' => 'Text Generation',
+                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Enabled',
+                        'providers' => 'Providers',
+                        'title' => 'Image Generation',
+                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Enable and configure AI features for the storefront.',
+                    'title' => 'Storefront Features',
+
+                    'review-translation' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'Review Translation',
+                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'Personalized Checkout Message',
+                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
                     ],
                 ],
             ],

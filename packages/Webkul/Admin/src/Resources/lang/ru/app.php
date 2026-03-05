@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Установите параметры Magic AI и разрешите некоторые опции для автоматизации создания контента.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'API-ключ',
-                        'enabled' => 'Включено',
-                        'llm-api-domain' => 'Домен LLM API',
-                        'organization' => 'Организация',
-                        'title' => 'Общие настройки',
-                        'title-info' => 'Улучшите свой опыт работы с функцией Magic AI, введя свой эксклюзивный API-ключ и указав соответствующую организацию для безупречной интеграции. Получите полный контроль над учетными данными OpenAI и настройте параметры в соответствии с вашими конкретными потребностями.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'Включено',
-                        'title' => 'Генерация контента',
-                        'title-info' => 'Эта функция позволяет использовать Magic AI для каждого редактора WYSIWYG, где вы хотите управлять контентом с помощью искусственного интеллекта.<br/><br/>При включении перейдите в любой редактор для генерации контента.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Включено',
-                        'title' => 'Генерация изображений',
-                        'title-info' => 'Эта функция позволяет использовать Magic AI для каждой загрузки изображений, где вы хотите генерировать изображения с помощью DALL-E.<br/><br/>При включении перейдите к любой загрузке изображений для генерации изображения.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'Включено',
-                        'title' => 'Перевод отзывов',
-                        'title-info' => 'Предоставьте клиенту или посетителю возможность перевести отзыв клиента на английский язык.<br/><br/>Когда включено, перейдите к отзыву, и вы найдете кнопку «Перевести на английский», если отзыв на другом языке, кроме английского.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'Включено',
-                        'title' => 'Персонализированное сообщение при оформлении заказа',
-                        'title-info' => 'Создайте персонализированное сообщение при оформлении заказа для клиентов на странице благодарности, адаптируя контент к индивидуальным предпочтениям и улучшая общий опыт после покупки.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'Подсказка',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'Настройки соответствия GDPR',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'Максимальный размер файла',
                         'max-url-per-file' => 'Максимальное количество URL на файл',
                         'title' => 'Ограничения файлов',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configure Magic AI settings, providers, and features.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'General Magic AI settings.',
+                    'title' => 'General',
+
+                    'settings' => [
+                        'enabled' => 'Enabled',
+                        'title' => 'Settings',
+                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API Key',
+                    'info' => 'Configure API keys for your AI providers.',
+                    'title' => 'Providers',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configure your OpenAI API credentials.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configure your Anthropic API credentials.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configure your Google Gemini API credentials.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configure your Groq API credentials.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configure your xAI API credentials.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configure your DeepSeek API credentials.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configure your Mistral API credentials.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configure your Ollama API credentials.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Enable and configure AI features for the admin panel.',
+                    'title' => 'Admin Features',
+
+                    'text-generation' => [
+                        'enabled' => 'Enabled',
+                        'providers' => 'Providers',
+                        'title' => 'Text Generation',
+                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Enabled',
+                        'providers' => 'Providers',
+                        'title' => 'Image Generation',
+                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Enable and configure AI features for the storefront.',
+                    'title' => 'Storefront Features',
+
+                    'review-translation' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'Review Translation',
+                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'Personalized Checkout Message',
+                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
                     ],
                 ],
             ],

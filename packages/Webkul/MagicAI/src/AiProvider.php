@@ -16,40 +16,34 @@ use Webkul\MagicAI\Enums\Models\XAiModel;
 class AiProvider
 {
     /**
-     * Provider-to-model-enum class map.
+     * Provider registry — single source of truth.
      *
      * Adding a new provider requires only one new entry here
-     * and a corresponding model enum in Enums/Models/.
+     * and a corresponding model enum.
      *
-     * @var array<string, class-string<AiModelContract>>
+     * @var array<string, array{label: string, enum: class-string<AiModelContract>}>
      */
-    private static array $modelEnums = [
-        'openai' => OpenAiModel::class,
-        'anthropic' => AnthropicModel::class,
-        'gemini' => GeminiModel::class,
-        'groq' => GroqModel::class,
-        'xai' => XAiModel::class,
-        'deepseek' => DeepSeekModel::class,
-        'mistral' => MistralModel::class,
-        'ollama' => OllamaModel::class,
+    private static array $providers = [
+        'openai' => ['label' => 'OpenAI', 'enum' => OpenAiModel::class],
+        'anthropic' => ['label' => 'Anthropic', 'enum' => AnthropicModel::class],
+        'gemini' => ['label' => 'Gemini', 'enum' => GeminiModel::class],
+        'groq' => ['label' => 'Groq', 'enum' => GroqModel::class],
+        'xai' => ['label' => 'xAI', 'enum' => XAiModel::class],
+        'deepseek' => ['label' => 'DeepSeek', 'enum' => DeepSeekModel::class],
+        'mistral' => ['label' => 'Mistral', 'enum' => MistralModel::class],
+        'ollama' => ['label' => 'Ollama', 'enum' => OllamaModel::class],
     ];
 
     /**
-     * Human-readable labels for providers.
+     * Cached flat list of all model enum cases.
      *
-     * @var array<string, string>
+     * @var AiModelContract[]|null
      */
-    private static array $labels = [
-        'anthropic' => 'Anthropic',
-        'azure' => 'Azure OpenAI',
-        'deepseek' => 'DeepSeek',
-        'gemini' => 'Gemini',
-        'groq' => 'Groq',
-        'mistral' => 'Mistral',
-        'ollama' => 'Ollama',
-        'openai' => 'OpenAI',
-        'xai' => 'xAI',
-    ];
+    private static ?array $allModelsCache = null;
+
+    // -------------------------------------------------------------------------
+    // Provider lookups.
+    // -------------------------------------------------------------------------
 
     /**
      * Resolve a provider string to its Lab enum instance.
@@ -80,11 +74,27 @@ class AiProvider
      */
     public static function label(string $provider): string
     {
-        return self::$labels[$provider] ?? ucfirst($provider);
+        return self::$providers[$provider]['label'] ?? ucfirst($provider);
+    }
+
+    /**
+     * Resolve the provider string for a given model identifier.
+     *
+     * Searches all registered model enums for a matching case value.
+     */
+    public static function resolveProviderForModel(string $model): ?string
+    {
+        foreach (self::allModels() as $m) {
+            if ($m->value === $model) {
+                return $m->provider()->value;
+            }
+        }
+
+        return null;
     }
 
     // -------------------------------------------------------------------------
-    // Provider capabilities (derived from model enums).
+    // Provider capability queries.
     // -------------------------------------------------------------------------
 
     /**
@@ -108,11 +118,11 @@ class AiProvider
     }
 
     // -------------------------------------------------------------------------
-    // Provider options for config select fields.
+    // Provider options for config select/multiselect fields.
     // -------------------------------------------------------------------------
 
     /**
-     * Get text providers as [{title, value}] for system config select fields.
+     * Get text providers as [{title, value}] for system config fields.
      *
      * @return array<int, array{title: string, value: string}>
      */
@@ -122,7 +132,7 @@ class AiProvider
     }
 
     /**
-     * Get image providers as [{title, value}] for system config select fields.
+     * Get image providers as [{title, value}] for system config fields.
      *
      * @return array<int, array{title: string, value: string}>
      */
@@ -196,7 +206,7 @@ class AiProvider
     }
 
     // -------------------------------------------------------------------------
-    // Model options for config / Vue select fields.
+    // Model options for config select fields (all [{title, value}]).
     // -------------------------------------------------------------------------
 
     /**
@@ -220,29 +230,40 @@ class AiProvider
     }
 
     /**
-     * Get text models for a provider as [{label, value}] for the frontend Vue dropdown.
+     * Build a flat [{title, value}] model list from enabled providers.
      *
-     * @return array<int, array{label: string, value: string}>
+     * Reads the enabled provider keys from a comma-separated multiselect
+     * config value and returns only models belonging to those providers,
+     * prefixed with the provider label (e.g. "OpenAI: GPT-4o").
+     *
+     * @param  string[]  $enabledProviders  Array of provider key strings.
+     * @param  'text'|'image'  $type
+     * @return array<int, array{title: string, value: string}>
      */
-    public static function textModelSelectOptions(string $provider): array
+    public static function modelsForProviders(array $enabledProviders, string $type = 'text'): array
     {
-        return array_map(
-            fn (AiModelContract $m) => ['label' => $m->label(), 'value' => $m->value],
-            self::textModelsForProvider($provider),
-        );
-    }
+        $filter = $type === 'image'
+            ? fn (AiModelContract $m) => $m->isImageModel()
+            : fn (AiModelContract $m) => $m->isTextModel();
 
-    /**
-     * Get image models for a provider as [{label, value}] for the frontend Vue dropdown.
-     *
-     * @return array<int, array{label: string, value: string}>
-     */
-    public static function imageModelSelectOptions(string $provider): array
-    {
-        return array_map(
-            fn (AiModelContract $m) => ['label' => $m->label(), 'value' => $m->value],
-            self::imageModelsForProvider($provider),
-        );
+        $models = [];
+
+        foreach ($enabledProviders as $provider) {
+            if (! isset(self::$providers[$provider])) {
+                continue;
+            }
+
+            $lab = self::resolve($provider);
+
+            foreach (self::filterModels(fn (AiModelContract $m) => $filter($m) && $m->provider() === $lab) as $m) {
+                $models[] = [
+                    'title' => self::label($provider).': '.$m->label(),
+                    'value' => $m->value,
+                ];
+            }
+        }
+
+        return $models;
     }
 
     // -------------------------------------------------------------------------
@@ -254,7 +275,7 @@ class AiProvider
      */
     public static function defaultTextModel(string $provider): ?AiModelContract
     {
-        $enum = self::$modelEnums[$provider] ?? null;
+        $enum = self::$providers[$provider]['enum'] ?? null;
 
         return $enum ? $enum::defaultTextModel() : null;
     }
@@ -264,7 +285,7 @@ class AiProvider
      */
     public static function defaultImageModel(string $provider): ?AiModelContract
     {
-        $enum = self::$modelEnums[$provider] ?? null;
+        $enum = self::$providers[$provider]['enum'] ?? null;
 
         return $enum ? $enum::defaultImageModel() : null;
     }
@@ -276,14 +297,16 @@ class AiProvider
     /**
      * Get all model cases across every registered provider enum.
      *
+     * Results are cached for the duration of the request.
+     *
      * @return AiModelContract[]
      */
     private static function allModels(): array
     {
-        return array_merge(
+        return self::$allModelsCache ??= array_merge(
             ...array_values(array_map(
-                fn (string $enum) => $enum::cases(),
-                self::$modelEnums,
+                fn (array $entry) => $entry['enum']::cases(),
+                self::$providers,
             )),
         );
     }
@@ -324,7 +347,7 @@ class AiProvider
     }
 
     /**
-     * Build [{title, value}] options prefixed with the provider name (e.g. "OpenAI: GPT-4o").
+     * Build [{title, value}] options prefixed with the provider name.
      *
      * @param  AiModelContract[]  $models
      * @return array<int, array{title: string, value: string}>

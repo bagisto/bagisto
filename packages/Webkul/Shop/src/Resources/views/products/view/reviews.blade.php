@@ -330,7 +330,7 @@
                     @{{ review.comment }}
                 </p>
 
-                @if ((bool) core()->getConfigData('general.magic_ai.content_generation.review_translation'))
+                @if ((bool) core()->getConfigData('magic_ai.storefront_features.review_translation.enabled'))
                     <button
                         class="secondary-button min-h-[34px] rounded-lg px-2 py-1 text-sm max-md:rounded-lg"
                         @click="translate"
@@ -449,7 +449,7 @@
                         @{{ review.comment }}
                     </p>
 
-                    @if ((bool) core()->getConfigData('general.magic_ai.content_generation.review_translation'))
+                    @if ((bool) core()->getConfigData('magic_ai.storefront_features.review_translation.enabled'))
                         <button
                             class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-4 py-2.5 text-base max-md:rounded-lg max-sm:px-3 max-sm:py-1 max-sm:text-xs"
                             @click="translate"

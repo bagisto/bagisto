@@ -1,13 +1,9 @@
 @php
     use Webkul\MagicAI\AiProvider;
 
-    $provider = core()->getConfigData('general.magic_ai.image_generation.provider') ?? AiProvider::defaultImageProvider();
-
-    $activeModel = core()->getConfigData('general.magic_ai.image_generation.model')
-        ?? AiProvider::defaultImageModel($provider)?->value
-        ?? '';
-
-    $modelOptions = AiProvider::imageModelSelectOptions($provider);
+    $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.image_generation.providers') ?? ''));
+    $models = AiProvider::modelsForProviders($enabledProviders, 'image');
+    $defaultModel = $models[0]['value'] ?? '';
 @endphp
 
 @props([
@@ -272,7 +268,7 @@
                                                     v-for="option in ai.models"
                                                     :key="option.value"
                                                     :value="option.value"
-                                                    v-text="option.label"
+                                                    v-text="option.title"
                                                 ></option>
                                             </x-admin::form.control-group.control>
 
@@ -472,11 +468,11 @@
                     isLoading: false,
 
                     ai: {
-                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
+                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled') }}"),
 
-                        models: {!! json_encode($modelOptions) !!},
+                        models: {!! json_encode($models) !!},
 
-                        model: "{{ $activeModel }}",
+                        model: "{{ $defaultModel }}",
 
                         prompt: null,
 
@@ -585,11 +581,11 @@
 
                 resetAIModal() {
                     this.ai = {
-                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
+                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled') }}"),
 
-                        models: {!! json_encode($modelOptions) !!},
+                        models: {!! json_encode($models) !!},
 
-                        model: "{{ $activeModel }}",
+                        model: "{{ $defaultModel }}",
 
                         prompt: null,
 

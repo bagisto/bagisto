@@ -9,28 +9,32 @@ use function Laravel\Ai\agent;
 class MagicAI
 {
     /**
-     * Generate text content from a prompt using the content_generation settings.
+     * Generate text content from a prompt.
+     *
+     * The provider is resolved automatically from the model name.
      */
     public function generateContent(string $prompt, ?string $model = null): string
     {
-        ['provider' => $provider, 'model' => $configuredModel] = $this->loadFeatureConfig('content_generation');
+        $this->injectApiKeyForModel($model);
 
         return trim(
-            agent()->prompt($prompt, provider: $provider, model: $model ?? $configuredModel)->text
+            agent()->prompt($prompt, model: $model)->text
         );
     }
 
     /**
-     * Generate images from a prompt using the image_generation settings.
+     * Generate images from a prompt.
+     *
+     * The provider is resolved automatically from the model name.
      *
      * @param  array{n?: int, size?: string, quality?: string}  $options
      * @return array<int, array{url: string}>
      */
     public function generateImage(string $prompt, array $options = [], ?string $model = null): array
     {
-        ['provider' => $provider, 'model' => $configuredModel] = $this->loadFeatureConfig('image_generation');
+        $this->injectApiKeyForModel($model);
 
-        return $this->executeImages($prompt, $options, $provider, $model ?? $configuredModel);
+        return $this->executeImages($prompt, $options, $model);
     }
 
     /**
@@ -38,7 +42,13 @@ class MagicAI
      */
     public function checkoutMessage(mixed $order): string
     {
-        return $this->generateContent($this->buildCheckoutPrompt($order));
+        $model = $this->loadStorefrontModel('checkout_message');
+
+        $this->injectApiKeyForModel($model);
+
+        return trim(
+            agent()->prompt($this->buildCheckoutPrompt($order), model: $model)->text
+        );
     }
 
     /**
@@ -54,50 +64,50 @@ class MagicAI
             'Translation:',
         ]);
 
-        return $this->generateContent($prompt);
+        $model = $this->loadStorefrontModel('review_translation');
+
+        $this->injectApiKeyForModel($model);
+
+        return trim(
+            agent()->prompt($prompt, model: $model)->text
+        );
     }
 
     /**
-     * Resolve the provider and model for a named feature from admin config.
-     *
-     * Injects the stored API key into the Laravel AI runtime config.
+     * Resolve the model for a named storefront feature from admin config.
      *
      * Falls back to the enum's recommended default when no model is saved.
-     *
-     * @return array{provider: ?string, model: ?string}
      */
-    protected function loadFeatureConfig(string $feature): array
+    protected function loadStorefrontModel(string $feature): ?string
     {
-        $configKey = "general.magic_ai.{$feature}";
+        $model = core()->getConfigData("magic_ai.storefront_features.{$feature}.model") ?: null;
 
-        $provider = core()->getConfigData("{$configKey}.provider");
-
-        if ($provider && array_key_exists($provider, config('ai.providers', []))) {
-            $this->injectApiKey($provider, core()->getConfigData("{$configKey}.api_key"));
-        } else {
-            $provider = null;
-        }
-
-        $model = core()->getConfigData("{$configKey}.model") ?: null;
-
-        if (! $model && $provider) {
-            $default = $feature === 'image_generation'
-                ? AiProvider::defaultImageModel($provider)
-                : AiProvider::defaultTextModel($provider);
+        if (! $model) {
+            $default = AiProvider::defaultTextModel(AiProvider::defaultTextProvider());
 
             $model = $default?->value;
         }
 
-        return ['provider' => $provider, 'model' => $model];
+        return $model;
     }
 
     /**
-     * Write the API key into the Laravel AI runtime config for the given provider.
+     * Resolve the provider from a model identifier and inject the stored API key.
      */
-    protected function injectApiKey(string $provider, ?string $apiKey): void
+    protected function injectApiKeyForModel(?string $model): void
     {
-        if ($apiKey) {
-            config(["ai.providers.{$provider}.key" => $apiKey]);
+        if (! $model) {
+            return;
+        }
+
+        $provider = AiProvider::resolveProviderForModel($model);
+
+        if ($provider) {
+            $apiKey = core()->getConfigData("magic_ai.providers.{$provider}.api_key");
+
+            if ($apiKey) {
+                config(["ai.providers.{$provider}.key" => $apiKey]);
+            }
         }
     }
 
@@ -111,7 +121,7 @@ class MagicAI
      * @param  array{n?: int, size?: string, quality?: string}  $options
      * @return array<int, array{url: string}>
      */
-    protected function executeImages(string $prompt, array $options, ?string $provider, ?string $model): array
+    protected function executeImages(string $prompt, array $options, ?string $model): array
     {
         $count = max((int) ($options['n'] ?? 1), 1);
 
@@ -132,7 +142,7 @@ class MagicAI
                 $request->quality($quality);
             }
 
-            $generated = $request->generate(provider: $provider, model: $model);
+            $generated = $request->generate(model: $model);
 
             $images[] = [
                 'url' => 'data:'.$generated->firstImage()->mime.';base64,'.$generated->firstImage()->image,
@@ -155,12 +165,10 @@ class MagicAI
     }
 
     /**
-     * Build the checkout success message prompt from config and order context.
+     * Build the checkout success message prompt from order context.
      */
     protected function buildCheckoutPrompt(mixed $order): string
     {
-        $basePrompt = (string) (core()->getConfigData('general.magic_ai.default_prompts.checkout_message') ?? '');
-
         $productLines = '';
 
         foreach ($order->items as $item) {
@@ -169,12 +177,12 @@ class MagicAI
             $productLines .= 'Price: '.core()->formatPrice($item->total)."\n\n";
         }
 
-        return implode("\n\n", array_filter([
-            $basePrompt,
+        return implode("\n\n", [
+            'Generate a personalized checkout success message for the customer.',
             "Product Details:\n{$productLines}",
             "Customer Details:\n{$order->customer_full_name}",
             'Current Locale: '.core()->getCurrentLocale()->name,
             'Store Name: '.core()->getCurrentChannel()->name,
-        ]));
+        ]);
     }
 }

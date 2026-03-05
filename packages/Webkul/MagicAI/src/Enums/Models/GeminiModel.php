@@ -8,17 +8,17 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum GeminiModel: string implements AiModelContract
 {
     /**
-     * Gemini 2.5 (current stable).
+     * Gemini 3 (latest generation — preview).
+     */
+    case Gemini31Pro = 'gemini-3.1-pro-preview';
+    case Gemini3Flash = 'gemini-3-flash-preview';
+
+    /**
+     * Gemini 2.5 (current stable — recommended for production).
      */
     case Gemini25Pro = 'gemini-2.5-pro';
     case Gemini25Flash = 'gemini-2.5-flash';
     case Gemini25FlashLite = 'gemini-2.5-flash-lite';
-
-    /**
-     * Gemini 2.0 (kept for compatibility).
-     */
-    case Gemini20Flash = 'gemini-2.0-flash';
-    case Gemini20FlashLite = 'gemini-2.0-flash-lite';
 
     /**
      * Imagen 4 family.
@@ -28,7 +28,7 @@ enum GeminiModel: string implements AiModelContract
     case Imagen4Fast = 'imagen-4.0-fast-generate-001';
 
     /**
-     * Imagen 3.
+     * Imagen 3 (previous gen — still available).
      */
     case Imagen3 = 'imagen-3.0-generate-002';
 
@@ -38,6 +38,24 @@ enum GeminiModel: string implements AiModelContract
     public function provider(): Lab
     {
         return Lab::Gemini;
+    }
+
+    /**
+     * Get the human-readable display name.
+     */
+    public function label(): string
+    {
+        return match ($this) {
+            self::Gemini31Pro => 'Gemini 3.1 Pro',
+            self::Gemini3Flash => 'Gemini 3 Flash',
+            self::Gemini25Pro => 'Gemini 2.5 Pro',
+            self::Gemini25Flash => 'Gemini 2.5 Flash',
+            self::Gemini25FlashLite => 'Gemini 2.5 Flash Lite',
+            self::Imagen4 => 'Imagen 4',
+            self::Imagen4Ultra => 'Imagen 4 Ultra',
+            self::Imagen4Fast => 'Imagen 4 Fast',
+            self::Imagen3 => 'Imagen 3',
+        };
     }
 
     /**
@@ -60,29 +78,11 @@ enum GeminiModel: string implements AiModelContract
     }
 
     /**
-     * Get the human-readable display name.
-     */
-    public function label(): string
-    {
-        return match ($this) {
-            self::Gemini25Pro => 'Gemini 2.5 Pro',
-            self::Gemini25Flash => 'Gemini 2.5 Flash',
-            self::Gemini25FlashLite => 'Gemini 2.5 Flash Lite',
-            self::Gemini20Flash => 'Gemini 2.0 Flash',
-            self::Gemini20FlashLite => 'Gemini 2.0 Flash Lite',
-            self::Imagen4 => 'Imagen 4',
-            self::Imagen4Ultra => 'Imagen 4 Ultra',
-            self::Imagen4Fast => 'Imagen 4 Fast',
-            self::Imagen3 => 'Imagen 3',
-        };
-    }
-
-    /**
      * Get the recommended default model for text generation.
      */
     public static function defaultTextModel(): ?static
     {
-        return self::Gemini25Flash;
+        return self::Gemini3Flash;
     }
 
     /**

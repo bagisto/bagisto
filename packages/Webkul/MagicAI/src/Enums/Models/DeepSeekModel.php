@@ -22,6 +22,17 @@ enum DeepSeekModel: string implements AiModelContract
     }
 
     /**
+     * Get the human-readable display name.
+     */
+    public function label(): string
+    {
+        return match ($this) {
+            self::Chat => 'DeepSeek Chat',
+            self::Reasoner => 'DeepSeek Reasoner',
+        };
+    }
+
+    /**
      * Determine whether this model generates images.
      */
     public function isImageModel(): bool
@@ -35,17 +46,6 @@ enum DeepSeekModel: string implements AiModelContract
     public function isTextModel(): bool
     {
         return true;
-    }
-
-    /**
-     * Get the human-readable display name.
-     */
-    public function label(): string
-    {
-        return match ($this) {
-            self::Chat => 'DeepSeek Chat',
-            self::Reasoner => 'DeepSeek Reasoner',
-        };
     }
 
     /**
