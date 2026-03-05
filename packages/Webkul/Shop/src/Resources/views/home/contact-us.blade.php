@@ -16,7 +16,10 @@
                 @lang('shop::app.home.contact.about')
             </p>
 
-            <div class="mt-14 rounded max-sm:mt-8">
+            <div
+                id="contact-us-form"
+                class="mt-14 rounded max-sm:mt-8"
+            >
                 <!-- Contact Form -->
                 <x-shop::form :action="route('shop.home.contact_us.send_mail')">
                     <!-- Name -->

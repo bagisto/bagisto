@@ -861,6 +861,18 @@ return [
                 'write-a-review' => '写评论',
             ],
 
+            'contact-us' => [
+                'about' => '给我们留言，我们会尽快回复您',
+                'desc' => '您有什么问题？',
+                'describe-here' => '在这里描述',
+                'email' => '电子邮件',
+                'message' => '留言',
+                'name' => '姓名',
+                'phone-number' => '电话号码',
+                'submit' => '提交',
+                'title' => '联系我们',
+            ],
+
             'add-to-cart' => '加入购物车',
             'add-to-compare' => '已添加到比较。',
             'add-to-wishlist' => '添加到愿望清单',

@@ -118,7 +118,7 @@
                                                 href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
-                                                <span class="text-2xl icon-download"></span>
+                                                <span class="icon-download text-2xl"></span>
                                             </a>
                                         @elseif ($customAttributeValue['type'] == 'image')
                                             <a
@@ -126,7 +126,7 @@
                                                 download="{{ $customAttributeValue['label'] }}"
                                             >
                                                 <img
-                                                    class="w-5 h-5 min-h-5 min-w-5"
+                                                    class="min-h-5 min-w-5 h-5 w-5"
                                                     src="{{ Storage::url($customAttributeValue['value']) }}"
                                                 />
                                             </a>
@@ -208,7 +208,7 @@
                                             href="{{ Storage::url($product[$customAttributeValue['code']]) }}"
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
-                                            <span class="text-2xl icon-download"></span>
+                                            <span class="icon-download text-2xl"></span>
                                         </a>
                                     @elseif ($customAttributeValue['type'] == 'image')
                                         <a
@@ -216,7 +216,7 @@
                                             download="{{ $customAttributeValue['label'] }}"
                                         >
                                             <img
-                                                class="w-5 h-5 min-h-5 min-w-5"
+                                                class="min-h-5 min-w-5 h-5 w-5"
                                                 src="{{ Storage::url($customAttributeValue['value']) }}"
                                                 alt="Product Image"
                                             />
@@ -289,7 +289,7 @@
                     >
 
                     <div class="container px-[60px] max-1180:px-0">
-                        <div class="flex mt-12 gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-4">
+                        <div class="mt-12 flex gap-9 max-1180:flex-wrap max-lg:mt-0 max-sm:gap-y-4">
                             <!-- Gallery Blade Inclusion -->
                             @include('shop::products.view.gallery')
 
@@ -298,13 +298,13 @@
                                 {!! view_render_event('bagisto.shop.products.name.before', ['product' => $product]) !!}
 
                                 <div class="flex justify-between gap-4">
-                                    <h1 class="text-3xl font-medium break-words max-sm:text-xl" v-pre>
+                                    <h1 class="break-words text-3xl font-medium max-sm:text-xl" v-pre>
                                         {{ $product->name }}
                                     </h1>
 
                                     @if (core()->getConfigData('customer.settings.wishlist.wishlist_option'))
                                         <div
-                                            class="flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:min-h-7 max-sm:min-w-7 max-sm:text-base"
+                                            class="max-sm:min-h-7 max-sm:min-w-7 flex max-h-[46px] min-h-[46px] min-w-[46px] cursor-pointer items-center justify-center rounded-full border bg-white text-2xl transition-all hover:opacity-[0.8] max-sm:max-h-7 max-sm:text-base"
                                             role="button"
                                             aria-label="@lang('shop::app.products.view.add-to-wishlist')"
                                             tabindex="0"
@@ -416,6 +416,14 @@
                                         />
 
                                         {!! view_render_event('bagisto.shop.products.view.add_to_cart.after', ['product' => $product]) !!}
+                                    @else
+                                        <button
+                                            type="button"
+                                            class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            @click="$refs.contactUsModal.open()"
+                                        >
+                                            @lang('shop::app.components.layouts.footer.contact-us')
+                                        </button>
                                     @endif
                                 </div>
 
@@ -442,7 +450,7 @@
                                 {!! view_render_event('bagisto.shop.products.view.additional_actions.before', ['product' => $product]) !!}
 
                                 <!-- Share Buttons -->
-                                <div class="flex mt-10 gap-9 max-md:mt-4 max-md:flex-wrap max-sm:justify-center max-sm:gap-3">
+                                <div class="mt-10 flex gap-9 max-md:mt-4 max-md:flex-wrap max-sm:justify-center max-sm:gap-3">
                                     {!! view_render_event('bagisto.shop.products.view.compare.before', ['product' => $product]) !!}
 
                                     <div
@@ -453,7 +461,7 @@
                                     >
                                         @if (core()->getConfigData('catalog.products.settings.compare_option'))
                                             <span
-                                                class="text-2xl icon-compare"
+                                                class="icon-compare text-2xl"
                                                 role="presentation"
                                             ></span>
 
@@ -470,6 +478,111 @@
                     </div>
                 </form>
             </x-shop::form>
+
+            <!-- Contact Us Modal -->
+            <x-shop::modal ref="contactUsModal">
+                <x-slot:header>
+                <h2 class="text-lg font-semibold max-md:text-base">
+                        @lang('shop::app.products.view.contact-us.title')
+                    </h2>
+                </x-slot>
+
+                <x-slot:content>
+                    <x-shop::form :action="route('shop.home.contact_us.send_mail')">
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label class="required">
+                                @lang('shop::app.products.view.contact-us.name')
+                            </x-shop::form.control-group.label>
+
+                            <x-shop::form.control-group.control
+                                type="text"
+                                name="name"
+                                rules="required"
+                                :value="old('name')"
+                                :label="trans('shop::app.products.view.contact-us.name')"
+                                :placeholder="trans('shop::app.products.view.contact-us.name')"
+                                :aria-label="trans('shop::app.products.view.contact-us.name')"
+                                aria-required="true"
+                            />
+
+                            <x-shop::form.control-group.error control-name="name" />
+                        </x-shop::form.control-group>
+
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label class="required">
+                                @lang('shop::app.products.view.contact-us.email')
+                            </x-shop::form.control-group.label>
+
+                            <x-shop::form.control-group.control
+                                type="email"
+                                name="email"
+                                rules="required|email"
+                                :value="old('email')"
+                                :label="trans('shop::app.products.view.contact-us.email')"
+                                :placeholder="trans('shop::app.products.view.contact-us.email')"
+                                :aria-label="trans('shop::app.products.view.contact-us.email')"
+                                aria-required="true"
+                            />
+
+                            <x-shop::form.control-group.error control-name="email" />
+                        </x-shop::form.control-group>
+
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label>
+                                @lang('shop::app.products.view.contact-us.phone-number')
+                            </x-shop::form.control-group.label>
+
+                            <x-shop::form.control-group.control
+                                type="text"
+                                name="contact"
+                                rules="phone"
+                                :value="old('contact')"
+                                :label="trans('shop::app.products.view.contact-us.phone-number')"
+                                :placeholder="trans('shop::app.products.view.contact-us.phone-number')"
+                                :aria-label="trans('shop::app.products.view.contact-us.phone-number')"
+                            />
+
+                            <x-shop::form.control-group.error control-name="contact" />
+                        </x-shop::form.control-group>
+
+                        <x-shop::form.control-group>
+                            <x-shop::form.control-group.label class="required">
+                                @lang('shop::app.products.view.contact-us.desc')
+                            </x-shop::form.control-group.label>
+
+                            <x-shop::form.control-group.control
+                                type="textarea"
+                                name="message"
+                                rules="required"
+                                :label="trans('shop::app.products.view.contact-us.message')"
+                                :placeholder="trans('shop::app.products.view.contact-us.describe-here')"
+                                :aria-label="trans('shop::app.products.view.contact-us.message')"
+                                aria-required="true"
+                                rows="6"
+                            />
+
+                            <x-shop::form.control-group.error control-name="message" />
+                        </x-shop::form.control-group>
+
+                        @if (core()->getConfigData('customer.captcha.credentials.status'))
+                            <x-shop::form.control-group class="mt-5">
+                                {!! \Webkul\Customer\Facades\Captcha::render() !!}
+
+                                <x-shop::form.control-group.error control-name="recaptcha_token" />
+                            </x-shop::form.control-group>
+                        @endif
+
+                        <div class="mt-6 flex justify-end">
+                            <button
+                                type="submit"
+                                class="primary-button rounded-2xl px-8 py-3 max-sm:rounded-lg max-sm:px-6 max-sm:py-2"
+                            >
+                                @lang('shop::app.products.view.contact-us.submit')
+                            </button>
+                        </div>
+                    </x-shop::form>
+                </x-slot>
+            </x-shop::modal>
         </script>
 
         <script type="module">
@@ -732,5 +845,9 @@
                 }
             });
         </script>
+
+        @if (core()->getConfigData('customer.captcha.credentials.status'))
+            {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
+        @endif
     @endPushOnce
 </x-shop::layouts>

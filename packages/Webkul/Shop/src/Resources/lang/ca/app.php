@@ -861,6 +861,18 @@ return [
                 'write-a-review' => 'Escriure una ressenya',
             ],
 
+            'contact-us' => [
+                'about' => 'Deixa\'ns una nota i et responem el més ràpid possible',
+                'desc' => 'En què estàs pensant?',
+                'describe-here' => 'Descriu-ho aquí',
+                'email' => 'Correu electrònic',
+                'message' => 'Missatge',
+                'name' => 'Nom',
+                'phone-number' => 'Número de telèfon',
+                'submit' => 'Envia',
+                'title' => 'Contacta\'ns',
+            ],
+
             'add-to-cart' => 'Afegir a la cistella',
             'add-to-compare' => 'Producte afegit a la llista de comparació.',
             'add-to-wishlist' => 'Afegir a la llista de desitjos',

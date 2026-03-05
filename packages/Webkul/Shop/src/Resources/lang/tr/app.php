@@ -861,6 +861,18 @@ return [
                 'write-a-review' => 'Yorum Yaz',
             ],
 
+            'contact-us' => [
+                'about' => 'Bize bir not bırakın, size mümkün olan en kısa sürede geri döneceğiz',
+                'desc' => 'Aklınızda ne var?',
+                'describe-here' => 'Burada açıklayın',
+                'email' => 'E-posta',
+                'message' => 'Mesaj',
+                'name' => 'Ad',
+                'phone-number' => 'Telefon Numarası',
+                'submit' => 'Gönder',
+                'title' => 'Bize Ulaşın',
+            ],
+
             'add-to-cart' => 'Sepete Ekle',
             'add-to-compare' => 'Karşılaştır',
             'add-to-wishlist' => 'Dilek Listesine Ekle',

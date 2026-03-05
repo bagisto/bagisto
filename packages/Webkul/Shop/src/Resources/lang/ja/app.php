@@ -861,6 +861,18 @@ return [
                 'write-a-review' => 'レビューを書く',
             ],
 
+            'contact-us' => [
+                'about' => 'メモを送ってください。できるだけ早くご返信します。',
+                'desc' => '何をお考えですか？',
+                'describe-here' => 'ここに説明してください',
+                'email' => 'メール',
+                'message' => 'メッセージ',
+                'name' => '名前',
+                'phone-number' => '電話番号',
+                'submit' => '送信',
+                'title' => 'お問い合わせ',
+            ],
+
             'add-to-cart' => 'カートに追加',
             'add-to-compare' => '比較に追加',
             'add-to-wishlist' => 'ウィッシュリストに追加',
