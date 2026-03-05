@@ -28,7 +28,6 @@ enum OpenAiModel: string implements AiModelContract
      */
     case GptImage15 = 'gpt-image-1.5';
     case GptImage1 = 'gpt-image-1';
-    case DallE3 = 'dall-e-3';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -54,7 +53,6 @@ enum OpenAiModel: string implements AiModelContract
             self::GPT41Nano => 'GPT-4.1 Nano',
             self::GptImage15 => 'GPT Image 1.5',
             self::GptImage1 => 'GPT Image 1',
-            self::DallE3 => 'DALL-E 3',
         };
     }
 
@@ -64,7 +62,7 @@ enum OpenAiModel: string implements AiModelContract
     public function isImageModel(): bool
     {
         return match ($this) {
-            self::GptImage15, self::GptImage1, self::DallE3 => true,
+            self::GptImage15, self::GptImage1 => true,
             default => false,
         };
     }

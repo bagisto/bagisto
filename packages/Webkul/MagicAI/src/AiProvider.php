@@ -21,36 +21,66 @@ class AiProvider
      * Adding a new provider requires only one new entry here
      * and a corresponding model enum.
      *
-     * @var array<string, array{label: string, enum: class-string<AiModelContract>}>
+     * Keys are Lab enum cases so the registry is tightly coupled
+     * to what the Laravel AI SDK actually supports.
+     *
+     * @var array<int, array{provider: Lab, label: string, model_enum: class-string<AiModelContract>}>
      */
     private static array $providers = [
-        'openai' => ['label' => 'OpenAI', 'enum' => OpenAiModel::class],
-        'anthropic' => ['label' => 'Anthropic', 'enum' => AnthropicModel::class],
-        'gemini' => ['label' => 'Gemini', 'enum' => GeminiModel::class],
-        'groq' => ['label' => 'Groq', 'enum' => GroqModel::class],
-        'xai' => ['label' => 'xAI', 'enum' => XAiModel::class],
-        'deepseek' => ['label' => 'DeepSeek', 'enum' => DeepSeekModel::class],
-        'mistral' => ['label' => 'Mistral', 'enum' => MistralModel::class],
-        'ollama' => ['label' => 'Ollama', 'enum' => OllamaModel::class],
+        ['provider' => Lab::Anthropic,  'label' => 'Anthropic',  'model_enum' => AnthropicModel::class],
+        ['provider' => Lab::DeepSeek,   'label' => 'DeepSeek',   'model_enum' => DeepSeekModel::class],
+        ['provider' => Lab::Gemini,     'label' => 'Gemini',     'model_enum' => GeminiModel::class],
+        ['provider' => Lab::Groq,       'label' => 'Groq',       'model_enum' => GroqModel::class],
+        ['provider' => Lab::Mistral,    'label' => 'Mistral',    'model_enum' => MistralModel::class],
+        ['provider' => Lab::Ollama,     'label' => 'Ollama',     'model_enum' => OllamaModel::class],
+        ['provider' => Lab::OpenAI,     'label' => 'OpenAI',     'model_enum' => OpenAiModel::class],
+        ['provider' => Lab::xAI,        'label' => 'xAI',        'model_enum' => XAiModel::class],
     ];
 
     /**
-     * Cached flat list of all model enum cases.
-     *
-     * @var AiModelContract[]|null
+     * Get the human-readable label for a provider.
      */
-    private static ?array $allModelsCache = null;
+    public static function label(string $provider): string
+    {
+        return self::findProvider($provider)['label'] ?? ucfirst($provider);
+    }
 
-    // -------------------------------------------------------------------------
-    // Provider lookups.
-    // -------------------------------------------------------------------------
+    /**
+     * Check whether a provider is registered and supported.
+     */
+    public static function isProviderSupported(string $provider): bool
+    {
+        return self::findProvider($provider) !== null;
+    }
 
     /**
      * Resolve a provider string to its Lab enum instance.
+     *
+     * Only providers registered in the $providers array can be resolved.
      */
     public static function resolve(string $provider): Lab
     {
-        return Lab::from($provider);
+        $entry = self::findProvider($provider);
+
+        if (! $entry) {
+            throw new \ValueError("\"{$provider}\" is not a registered AI provider.");
+        }
+
+        return $entry['provider'];
+    }
+
+    /**
+     * Resolve a model identifier string to its AiModelContract enum case.
+     */
+    public static function resolveModel(string $model): ?AiModelContract
+    {
+        foreach (self::allModels() as $m) {
+            if ($m->value === $model) {
+                return $m;
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -70,32 +100,24 @@ class AiProvider
     }
 
     /**
-     * Get the human-readable label for a provider.
+     * Get the recommended default text model for the given provider.
      */
-    public static function label(string $provider): string
+    public static function defaultTextModel(string $provider): ?AiModelContract
     {
-        return self::$providers[$provider]['label'] ?? ucfirst($provider);
+        $entry = self::findProvider($provider);
+
+        return $entry ? $entry['model_enum']::defaultTextModel() : null;
     }
 
     /**
-     * Resolve the provider string for a given model identifier.
-     *
-     * Searches all registered model enums for a matching case value.
+     * Get the recommended default image model for the given provider.
      */
-    public static function resolveProviderForModel(string $model): ?string
+    public static function defaultImageModel(string $provider): ?AiModelContract
     {
-        foreach (self::allModels() as $m) {
-            if ($m->value === $model) {
-                return $m->provider()->value;
-            }
-        }
+        $entry = self::findProvider($provider);
 
-        return null;
+        return $entry ? $entry['model_enum']::defaultImageModel() : null;
     }
-
-    // -------------------------------------------------------------------------
-    // Provider capability queries.
-    // -------------------------------------------------------------------------
 
     /**
      * Get all providers that have at least one text model.
@@ -115,6 +137,26 @@ class AiProvider
     public static function imageProviders(): array
     {
         return self::providersWithModels(fn (AiModelContract $m) => $m->isImageModel());
+    }
+
+    /**
+     * Get all text models across every provider.
+     *
+     * @return AiModelContract[]
+     */
+    public static function textModels(): array
+    {
+        return self::filterModels(fn (AiModelContract $m) => $m->isTextModel());
+    }
+
+    /**
+     * Get all image models across every provider.
+     *
+     * @return AiModelContract[]
+     */
+    public static function imageModels(): array
+    {
+        return self::filterModels(fn (AiModelContract $m) => $m->isImageModel());
     }
 
     // -------------------------------------------------------------------------
@@ -139,70 +181,6 @@ class AiProvider
     public static function imageProviderOptions(): array
     {
         return self::buildProviderOptions(self::imageProviders());
-    }
-
-    // -------------------------------------------------------------------------
-    // Model queries.
-    // -------------------------------------------------------------------------
-
-    /**
-     * Get all text models across every provider.
-     *
-     * @return AiModelContract[]
-     */
-    public static function textModels(): array
-    {
-        return self::filterModels(fn (AiModelContract $m) => $m->isTextModel());
-    }
-
-    /**
-     * Get all image models across every provider.
-     *
-     * @return AiModelContract[]
-     */
-    public static function imageModels(): array
-    {
-        return self::filterModels(fn (AiModelContract $m) => $m->isImageModel());
-    }
-
-    /**
-     * Get all models for a given provider.
-     *
-     * @return AiModelContract[]
-     */
-    public static function forProvider(string $provider): array
-    {
-        $lab = self::resolve($provider);
-
-        return self::filterModels(fn (AiModelContract $m) => $m->provider() === $lab);
-    }
-
-    /**
-     * Get text models for the given provider.
-     *
-     * @return AiModelContract[]
-     */
-    public static function textModelsForProvider(string $provider): array
-    {
-        $lab = self::resolve($provider);
-
-        return self::filterModels(
-            fn (AiModelContract $m) => $m->isTextModel() && $m->provider() === $lab
-        );
-    }
-
-    /**
-     * Get image models for the given provider.
-     *
-     * @return AiModelContract[]
-     */
-    public static function imageModelsForProvider(string $provider): array
-    {
-        $lab = self::resolve($provider);
-
-        return self::filterModels(
-            fn (AiModelContract $m) => $m->isImageModel() && $m->provider() === $lab
-        );
     }
 
     // -------------------------------------------------------------------------
@@ -249,7 +227,7 @@ class AiProvider
         $models = [];
 
         foreach ($enabledProviders as $provider) {
-            if (! isset(self::$providers[$provider])) {
+            if (! self::findProvider($provider)) {
                 continue;
             }
 
@@ -267,30 +245,6 @@ class AiProvider
     }
 
     // -------------------------------------------------------------------------
-    // Default models (delegated to each provider enum).
-    // -------------------------------------------------------------------------
-
-    /**
-     * Get the recommended default text model for the given provider.
-     */
-    public static function defaultTextModel(string $provider): ?AiModelContract
-    {
-        $enum = self::$providers[$provider]['enum'] ?? null;
-
-        return $enum ? $enum::defaultTextModel() : null;
-    }
-
-    /**
-     * Get the recommended default image model for the given provider.
-     */
-    public static function defaultImageModel(string $provider): ?AiModelContract
-    {
-        $enum = self::$providers[$provider]['enum'] ?? null;
-
-        return $enum ? $enum::defaultImageModel() : null;
-    }
-
-    // -------------------------------------------------------------------------
     // Internals.
     // -------------------------------------------------------------------------
 
@@ -303,12 +257,28 @@ class AiProvider
      */
     private static function allModels(): array
     {
-        return self::$allModelsCache ??= array_merge(
-            ...array_values(array_map(
-                fn (array $entry) => $entry['enum']::cases(),
+        return array_merge(
+            ...array_map(
+                fn (array $entry) => $entry['model_enum']::cases(),
                 self::$providers,
-            )),
+            ),
         );
+    }
+
+    /**
+     * Find a provider entry by its string value.
+     *
+     * @return array{provider: Lab, label: string, model_enum: class-string<AiModelContract>}|null
+     */
+    private static function findProvider(string $provider): ?array
+    {
+        foreach (self::$providers as $entry) {
+            if ($entry['provider']->value === $provider) {
+                return $entry;
+            }
+        }
+
+        return null;
     }
 
     /**

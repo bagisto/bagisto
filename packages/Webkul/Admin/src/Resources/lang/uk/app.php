@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Налаштуйте параметри, провайдерів та функції Magic AI.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Загальні налаштування Magic AI.',
+                    'title' => 'Загальне',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'Увімкнено',
+                        'title' => 'Налаштування',
+                        'title-info' => 'Увімкнути або вимкнути Magic AI у всьому додатку.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'API-ключ',
+                    'info' => 'Налаштуйте API-ключі для ваших провайдерів ШІ.',
+                    'title' => 'Провайдери',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'Налаштуйте облікові дані API OpenAI.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'Налаштуйте облікові дані API Anthropic.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'Налаштуйте облікові дані API Google Gemini.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'Налаштуйте облікові дані API Groq.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'Налаштуйте облікові дані API xAI.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'Налаштуйте облікові дані API DeepSeek.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'Налаштуйте облікові дані API Mistral.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Налаштуйте облікові дані API Ollama.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'Увімкнення та налаштування функцій ШІ для панелі адміністрування.',
+                    'title' => 'Функції адміністрування',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'Увімкнено',
+                        'providers' => 'Провайдери',
+                        'title' => 'Генерація тексту',
+                        'title-info' => 'Увімкнути генерацію тексту на основі ШІ в WYSIWYG-редакторах панелі адміністрування.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'Увімкнено',
+                        'providers' => 'Провайдери',
+                        'title' => 'Генерація зображень',
+                        'title-info' => 'Увімкнути генерацію зображень на основі ШІ для зображень товарів та контенту.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'Увімкнення та налаштування функцій ШІ для вітрини магазину.',
+                    'title' => 'Функції вітрини',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'Увімкнено',
+                        'model' => 'Модель',
+                        'title' => 'Переклад відгуків',
+                        'title-info' => 'Дозволити покупцям перекладати відгуки своєю мовою на вітрині магазину.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'Увімкнено',
+                        'model' => 'Модель',
+                        'title' => 'Персоналізоване повідомлення при оформленні замовлення',
+                        'title-info' => 'Генерація персоналізованих повідомлень при оформленні замовлення для покупців на сторінці подяки.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Застосувати',
-                    'dall-e-2' => 'Далл.Е 2',
-                    'dall-e-3' => 'Далл.Е 3',
                     'generate' => 'Створити',
                     'generating' => 'Створюється...',
-                    'hd' => 'HD',
+                    'high' => 'Висока',
+                    'landscape' => 'Альбомна (3:2)',
+                    'low' => 'Низька',
+                    'medium' => 'Середня',
                     'model' => 'Модель',
                     'number-of-images' => 'Кількість Зображень',
+                    'portrait' => 'Портретна (2:3)',
                     'prompt' => 'Підказка',
                     'quality' => 'Якість',
                     'regenerate' => 'Перестворити',
                     'regenerating' => 'Перестворюється...',
                     'size' => 'Розмір',
-                    'standard' => 'Стандарт',
+                    'square' => 'Квадрат (1:1)',
                     'title' => 'Генерація Зображень з Використанням ШІ',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'Зверху',
                     'next' => 'Наступний',
                     'size' => 'Розмір',
+                    'square' => 'Квадрат (1:1)',
                     'use-cases' => 'Використання',
                     'zoom' => 'Збільшення',
                 ],

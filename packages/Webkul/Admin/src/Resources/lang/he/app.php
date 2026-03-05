@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'הגדרת הגדרות, ספקים ותכונות של Magic AI.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'הגדרות כלליות של Magic AI.',
+                    'title' => 'כללי',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'מופעל',
+                        'title' => 'הגדרות',
+                        'title-info' => 'הפעלה או השבתה של Magic AI בכל היישום.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'מפתח API',
+                    'info' => 'הגדרת מפתחות API עבור ספקי ה-AI שלך.',
+                    'title' => 'ספקים',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'הגדרת אישורי API של OpenAI.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'הגדרת אישורי API של Anthropic.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'הגדרת אישורי API של Google Gemini.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'הגדרת אישורי API של Groq.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'הגדרת אישורי API של xAI.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'הגדרת אישורי API של DeepSeek.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'הגדרת אישורי API של Mistral.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'הגדרת אישורי API של Ollama.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'הפעלה והגדרת תכונות AI עבור לוח הניהול.',
+                    'title' => 'תכונות ניהול',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'מופעל',
+                        'providers' => 'ספקים',
+                        'title' => 'יצירת טקסט',
+                        'title-info' => 'הפעלת יצירת טקסט מבוססת AI בעורכי WYSIWYG בלוח הניהול.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'מופעל',
+                        'providers' => 'ספקים',
+                        'title' => 'יצירת תמונות',
+                        'title-info' => 'הפעלת יצירת תמונות מבוססת AI עבור תמונות מוצרים ותוכן.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'הפעלה והגדרת תכונות AI עבור חזית החנות.',
+                    'title' => 'תכונות חזית החנות',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'מופעל',
+                        'model' => 'מודל',
+                        'title' => 'תרגום ביקורות',
+                        'title-info' => 'אפשר ללקוחות לתרגם ביקורות לשפתם בחזית החנות.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'מופעל',
+                        'model' => 'מודל',
+                        'title' => 'הודעת תשלום מותאמת אישית',
+                        'title-info' => 'יצירת הודעות תשלום מותאמות אישית ללקוחות בדף התודה.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'החל',
-                    'dall-e-2' => 'דאל.ה 2',
-                    'dall-e-3' => 'דאל.ה 3',
                     'generate' => 'יצירה',
                     'generating' => 'יוצר...',
-                    'hd' => 'HD',
+                    'high' => 'גבוהה',
+                    'landscape' => 'לרוחב (3:2)',
+                    'low' => 'נמוכה',
+                    'medium' => 'בינונית',
                     'model' => 'מודל',
                     'number-of-images' => 'מספר התמונות',
+                    'portrait' => 'לאורך (2:3)',
                     'prompt' => 'הנחיה',
                     'quality' => 'איכות',
                     'regenerate' => 'יצירה מחדש',
                     'regenerating' => 'יוצר מחדש...',
                     'size' => 'גודל',
-                    'standard' => 'תקן',
+                    'square' => 'ריבוע (1:1)',
                     'title' => 'יצירת תמונה עם בינה מלאכותית',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'קדמית',
                     'next' => 'הבאה',
                     'size' => 'גודל',
+                    'square' => 'ריבוע (1:1)',
                     'use-cases' => 'מטרות שימוש',
                     'zoom' => 'הגדלה',
                 ],

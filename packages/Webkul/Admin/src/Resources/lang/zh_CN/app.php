@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => '配置 Magic AI 设置、提供商和功能。',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Magic AI 常规设置。',
+                    'title' => '常规',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => '已启用',
+                        'title' => '设置',
+                        'title-info' => '在整个应用程序中启用或禁用 Magic AI。',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'API 密钥',
+                    'info' => '配置 AI 提供商的 API 密钥。',
+                    'title' => '提供商',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => '配置您的 OpenAI API 凭证。',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => '配置您的 Anthropic API 凭证。',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => '配置您的 Google Gemini API 凭证。',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => '配置您的 Groq API 凭证。',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => '配置您的 xAI API 凭证。',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => '配置您的 DeepSeek API 凭证。',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => '配置您的 Mistral API 凭证。',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => '配置您的 Ollama API 凭证。',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => '启用并配置管理面板的 AI 功能。',
+                    'title' => '管理功能',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => '已启用',
+                        'providers' => '提供商',
+                        'title' => '文本生成',
+                        'title-info' => '在管理面板的 WYSIWYG 编辑器中启用 AI 驱动的文本生成。',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => '已启用',
+                        'providers' => '提供商',
+                        'title' => '图像生成',
+                        'title-info' => '启用 AI 驱动的产品和内容图像生成。',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => '启用并配置店面的 AI 功能。',
+                    'title' => '店面功能',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => '已启用',
+                        'model' => '模型',
+                        'title' => '评价翻译',
+                        'title-info' => '允许客户在店面将评价翻译为他们的语言。',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => '已启用',
+                        'model' => '模型',
+                        'title' => '个性化结账消息',
+                        'title-info' => '在感谢页面为客户生成个性化的结账消息。',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => '应用',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => '生成',
                     'generating' => '生成中...',
-                    'hd' => '高清',
+                    'high' => '高',
+                    'landscape' => '横版 (3:2)',
+                    'low' => '低',
+                    'medium' => '中',
                     'model' => '模型',
                     'number-of-images' => '图片数量',
+                    'portrait' => '竖版 (2:3)',
                     'prompt' => '提示词',
                     'quality' => '质量',
                     'regenerate' => '重新生成',
                     'regenerating' => '重新生成中...',
                     'size' => '大小',
-                    'standard' => '标准',
+                    'square' => '正方形 (1:1)',
                     'title' => 'AI 图像生成',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => '正面',
                     'next' => '下一个',
                     'size' => '尺寸',
+                    'square' => '正方形 (1:1)',
                     'use-cases' => '用途',
                     'zoom' => '缩放',
                 ],

@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Magic AIの設定、プロバイダー、機能を構成します。',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Magic AIの一般設定。',
+                    'title' => '一般',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => '有効',
+                        'title' => '設定',
+                        'title-info' => 'アプリケーション全体でMagic AIを有効または無効にします。',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'APIキー',
+                    'info' => 'AIプロバイダーのAPIキーを設定します。',
+                    'title' => 'プロバイダー',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'OpenAI APIの認証情報を設定します。',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'Anthropic APIの認証情報を設定します。',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'Google Gemini APIの認証情報を設定します。',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'Groq APIの認証情報を設定します。',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'xAI APIの認証情報を設定します。',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'DeepSeek APIの認証情報を設定します。',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'Mistral APIの認証情報を設定します。',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Ollama APIの認証情報を設定します。',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => '管理パネルのAI機能を有効にして設定します。',
+                    'title' => '管理機能',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => '有効',
+                        'providers' => 'プロバイダー',
+                        'title' => 'テキスト生成',
+                        'title-info' => '管理パネルのWYSIWYGエディターでAIによるテキスト生成を有効にします。',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => '有効',
+                        'providers' => 'プロバイダー',
+                        'title' => '画像生成',
+                        'title-info' => '商品およびコンテンツ画像のAIによる画像生成を有効にします。',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'ストアフロントのAI機能を有効にして設定します。',
+                    'title' => 'ストアフロント機能',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => '有効',
+                        'model' => 'モデル',
+                        'title' => 'レビュー翻訳',
+                        'title-info' => 'ストアフロントで顧客がレビューを自分の言語に翻訳できるようにします。',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => '有効',
+                        'model' => 'モデル',
+                        'title' => 'パーソナライズされたチェックアウトメッセージ',
+                        'title-info' => 'サンキューページで顧客向けのパーソナライズされたチェックアウトメッセージを生成します。',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => '適用',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => '生成',
                     'generating' => '生成中...',
-                    'hd' => 'HD',
+                    'high' => '高',
+                    'landscape' => '横長 (3:2)',
+                    'low' => '低',
+                    'medium' => '中',
                     'model' => 'モデル',
                     'number-of-images' => '画像の数',
+                    'portrait' => '縦長 (2:3)',
                     'prompt' => 'プロンプト',
                     'quality' => '品質',
                     'regenerate' => '再生成',
                     'regenerating' => '再生成中...',
                     'size' => 'サイズ',
-                    'standard' => '標準',
+                    'square' => '正方形 (1:1)',
                     'title' => 'AI画像生成',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => '前面',
                     'next' => '次',
                     'size' => 'サイズ',
+                    'square' => '正方形 (1:1)',
                     'use-cases' => '用途',
                     'zoom' => 'ズーム',
                 ],

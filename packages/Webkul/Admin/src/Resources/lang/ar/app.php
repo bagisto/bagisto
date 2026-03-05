@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
-                'title' => 'Magic AI',
+                'info' => 'إعدادات الذكاء الاصطناعي، المزودين، والميزات.',
+                'title' => 'الذكاء الاصطناعي',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'إعدادات الذكاء الاصطناعي العامة.',
+                    'title' => 'عام',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'مُفعّل',
+                        'title' => 'الإعدادات',
+                        'title-info' => 'تفعيل أو تعطيل الذكاء الاصطناعي عبر التطبيق بالكامل.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'مفتاح API',
+                    'info' => 'إعداد مفاتيح API لمزودي الذكاء الاصطناعي.',
+                    'title' => 'المزودون',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'إعداد بيانات اعتماد OpenAI API.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'إعداد بيانات اعتماد Anthropic API.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'إعداد بيانات اعتماد Google Gemini API.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'إعداد بيانات اعتماد Groq API.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'إعداد بيانات اعتماد xAI API.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'إعداد بيانات اعتماد DeepSeek API.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'إعداد بيانات اعتماد Mistral API.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'إعداد بيانات اعتماد Ollama API.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'تفعيل وإعداد ميزات الذكاء الاصطناعي للوحة الإدارة.',
+                    'title' => 'ميزات الإدارة',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'مُفعّل',
+                        'providers' => 'المزودون',
+                        'title' => 'إنشاء النصوص',
+                        'title-info' => 'تفعيل إنشاء النصوص بالذكاء الاصطناعي في محررات WYSIWYG في لوحة الإدارة.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'مُفعّل',
+                        'providers' => 'المزودون',
+                        'title' => 'إنشاء الصور',
+                        'title-info' => 'تفعيل إنشاء الصور بالذكاء الاصطناعي لصور المنتجات والمحتوى.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'تفعيل وإعداد ميزات الذكاء الاصطناعي لواجهة المتجر.',
+                    'title' => 'ميزات واجهة المتجر',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'مُفعّل',
+                        'model' => 'النموذج',
+                        'title' => 'ترجمة المراجعات',
+                        'title-info' => 'السماح للعملاء بترجمة المراجعات إلى لغتهم في واجهة المتجر.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'مُفعّل',
+                        'model' => 'النموذج',
+                        'title' => 'رسالة الدفع المخصصة',
+                        'title-info' => 'إنشاء رسائل دفع مخصصة للعملاء في صفحة الشكر.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'تطبيق',
-                    'dall-e-2' => 'دال.إ 2',
-                    'dall-e-3' => 'دال.إ 3',
                     'generate' => 'إنشاء',
                     'generating' => 'جاري الإنشاء...',
-                    'hd' => 'عالي الجودة',
+                    'high' => 'عالية',
+                    'landscape' => 'أفقي (3:2)',
+                    'low' => 'منخفضة',
+                    'medium' => 'متوسطة',
                     'model' => 'نموذج',
                     'number-of-images' => 'عدد الصور',
+                    'portrait' => 'عمودي (2:3)',
                     'prompt' => 'موجّه',
                     'quality' => 'الجودة',
                     'regenerate' => 'إعادة إنشاء',
                     'regenerating' => 'جاري إعادة الإنشاء...',
                     'size' => 'الحجم',
-                    'standard' => 'قياسي',
+                    'square' => 'مربع (1:1)',
                     'title' => 'إنشاء صورة بالذكاء الاصطناعي',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'الواجهة الأمامية',
                     'next' => 'التالي',
                     'size' => 'الحجم',
+                    'square' => 'مربع (1:1)',
                     'use-cases' => 'حالات الاستخدام',
                     'zoom' => 'التكبير',
                 ],

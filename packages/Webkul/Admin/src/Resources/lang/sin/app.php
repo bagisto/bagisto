@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Magic AI සැකසුම්, සපයන්නන් සහ විශේෂාංග වින්‍යාස කරන්න.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'සාමාන්‍ය Magic AI සැකසුම්.',
+                    'title' => 'සාමාන්‍ය',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'සක්‍රිය',
+                        'title' => 'සැකසුම්',
+                        'title-info' => 'ඔබගේ සම්පූර්ණ යෙදුම පුරා Magic AI සක්‍රිය හෝ අක්‍රිය කරන්න.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'API යතුර',
+                    'info' => 'ඔබගේ AI සපයන්නන් සඳහා API යතුරු වින්‍යාස කරන්න.',
+                    'title' => 'සපයන්නන්',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'ඔබගේ OpenAI API අක්තපත්‍ර වින්‍යාස කරන්න.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'ඔබගේ Anthropic API අක්තපත්‍ර වින්‍යාස කරන්න.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'ඔබගේ Google Gemini API අක්තපත්‍ර වින්‍යාස කරන්න.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'ඔබගේ Groq API අක්තපත්‍ර වින්‍යාස කරන්න.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'ඔබගේ xAI API අක්තපත්‍ර වින්‍යාස කරන්න.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'ඔබගේ DeepSeek API අක්තපත්‍ර වින්‍යාස කරන්න.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'ඔබගේ Mistral API අක්තපත්‍ර වින්‍යාස කරන්න.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'ඔබගේ Ollama API අක්තපත්‍ර වින්‍යාස කරන්න.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'පරිපාලක පැනලය සඳහා AI විශේෂාංග සක්‍රිය සහ වින්‍යාස කරන්න.',
+                    'title' => 'පරිපාලක විශේෂාංග',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'සක්‍රිය',
+                        'providers' => 'සපයන්නන්',
+                        'title' => 'පෙළ ජනනය',
+                        'title-info' => 'පරිපාලක පැනලයේ WYSIWYG සංස්කාරකවල AI-බලගැන්වූ පෙළ ජනනය සක්‍රිය කරන්න.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'සක්‍රිය',
+                        'providers' => 'සපයන්නන්',
+                        'title' => 'රූප ජනනය',
+                        'title-info' => 'නිෂ්පාදන සහ අන්තර්ගත රූප සඳහා AI-බලගැන්වූ රූප ජනනය සක්‍රිය කරන්න.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'වෙළඳසැල සඳහා AI විශේෂාංග සක්‍රිය සහ වින්‍යාස කරන්න.',
+                    'title' => 'වෙළඳසැල විශේෂාංග',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'සක්‍රිය',
+                        'model' => 'මාදිලිය',
+                        'title' => 'සමාලෝචන පරිවර්තනය',
+                        'title-info' => 'වෙළඳසැලෙහි පාරිභෝගිකයින්ට සමාලෝචන ඔවුන්ගේ භාෂාවට පරිවර්තනය කිරීමට ඉඩ දෙන්න.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'සක්‍රිය',
+                        'model' => 'මාදිලිය',
+                        'title' => 'පුද්ගලීකරණය කළ ගෙවීම් පණිවිඩය',
+                        'title-info' => 'ස්තුති පිටුවේ පාරිභෝගිකයින් සඳහා පුද්ගලීකරණය කළ ගෙවීම් පණිවිඩ ජනනය කරන්න.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'අයැදීම',
-                    'dall-e-2' => 'ඩොල්.ඊ 2',
-                    'dall-e-3' => 'ඩොල්.ඊ 3',
                     'generate' => 'උදාහරින්න',
                     'generating' => 'උදාහරින්නෙම...',
-                    'hd' => 'HD',
+                    'high' => 'ඉහළ',
+                    'landscape' => 'තිරස් (3:2)',
+                    'low' => 'පහළ',
+                    'medium' => 'මධ්‍යම',
                     'model' => 'ආකෘතිය',
                     'number-of-images' => 'රූපවාහින් ගන්නවාද?',
+                    'portrait' => 'සිරස් (2:3)',
                     'prompt' => 'ඉල්ලීම',
                     'quality' => 'වර්ගය',
                     'regenerate' => 'නැවතුම් කරන්න',
                     'regenerating' => 'නැවතුම් කරමු...',
                     'size' => 'ප්‍රමාණය',
-                    'standard' => 'සම්මත',
+                    'square' => 'සම------ුරස්‍ර (1:1)',
                     'title' => 'මැජික් පින්තුර සහිතව කියවන්න',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'මුර',
                     'next' => 'ඊළඟ',
                     'size' => 'ප්‍රමාණය',
+                    'square' => 'සම------ුරස්‍ර (1:1)',
                     'use-cases' => 'භාවිතා කිරීම්',
                     'zoom' => 'ස්මෙයිල්',
                 ],

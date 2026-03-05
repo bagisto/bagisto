@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Настройка параметров, провайдеров и функций Magic AI.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Общие настройки Magic AI.',
+                    'title' => 'Общие',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'Включено',
+                        'title' => 'Настройки',
+                        'title-info' => 'Включить или отключить Magic AI во всём приложении.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'API-ключ',
+                    'info' => 'Настройте API-ключи для ваших провайдеров ИИ.',
+                    'title' => 'Провайдеры',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'Настройте учётные данные API OpenAI.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'Настройте учётные данные API Anthropic.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'Настройте учётные данные API Google Gemini.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'Настройте учётные данные API Groq.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'Настройте учётные данные API xAI.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'Настройте учётные данные API DeepSeek.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'Настройте учётные данные API Mistral.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Настройте учётные данные API Ollama.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'Включение и настройка функций ИИ для панели администрирования.',
+                    'title' => 'Функции администрирования',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'Включено',
+                        'providers' => 'Провайдеры',
+                        'title' => 'Генерация текста',
+                        'title-info' => 'Включить генерацию текста с помощью ИИ в WYSIWYG-редакторах панели администрирования.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'Включено',
+                        'providers' => 'Провайдеры',
+                        'title' => 'Генерация изображений',
+                        'title-info' => 'Включить генерацию изображений с помощью ИИ для изображений товаров и контента.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'Включение и настройка функций ИИ для витрины магазина.',
+                    'title' => 'Функции витрины',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'Включено',
+                        'model' => 'Модель',
+                        'title' => 'Перевод отзывов',
+                        'title-info' => 'Разрешить покупателям переводить отзывы на свой язык на витрине магазина.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'Включено',
+                        'model' => 'Модель',
+                        'title' => 'Персонализированное сообщение при оформлении заказа',
+                        'title-info' => 'Генерация персонализированных сообщений при оформлении заказа для покупателей на странице благодарности.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Применить',
-                    'dall-e-2' => 'Далл.Э 2',
-                    'dall-e-3' => 'Далл.Э 3',
                     'generate' => 'Создать',
                     'generating' => 'Создание...',
-                    'hd' => 'HD',
+                    'high' => 'Высокое',
+                    'landscape' => 'Альбомная (3:2)',
+                    'low' => 'Низкое',
+                    'medium' => 'Среднее',
                     'model' => 'Модель',
                     'number-of-images' => 'Количество изображений',
+                    'portrait' => 'Портретная (2:3)',
                     'prompt' => 'Подсказка',
                     'quality' => 'Качество',
                     'regenerate' => 'Регенерировать',
                     'regenerating' => 'Регенерация...',
                     'size' => 'Размер',
-                    'standard' => 'Стандарт',
+                    'square' => 'Квадрат (1:1)',
                     'title' => 'Генерация изображений с использованием ИИ',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'Спереди',
                     'next' => 'Следующий',
                     'size' => 'Размер',
+                    'square' => 'Квадрат (1:1)',
                     'use-cases' => 'Использование',
                     'zoom' => 'Увеличить',
                 ],

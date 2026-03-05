@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Configureer Magic AI instellingen, providers en functies.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Algemene Magic AI instellingen.',
+                    'title' => 'Algemeen',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'Ingeschakeld',
+                        'title' => 'Instellingen',
+                        'title-info' => 'Magic AI in- of uitschakelen in de gehele applicatie.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
+                    'api-key' => 'API-sleutel',
+                    'info' => 'Configureer API-sleutels voor uw AI-providers.',
                     'title' => 'Providers',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'Configureer uw OpenAI API-referenties.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'Configureer uw Anthropic API-referenties.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'Configureer uw Google Gemini API-referenties.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'Configureer uw Groq API-referenties.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'Configureer uw xAI API-referenties.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'Configureer uw DeepSeek API-referenties.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'Configureer uw Mistral API-referenties.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Configureer uw Ollama API-referenties.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'AI-functies voor het beheerderspaneel in- en configureren.',
+                    'title' => 'Beheerdersfuncties',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
+                        'enabled' => 'Ingeschakeld',
                         'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'title' => 'Tekstgeneratie',
+                        'title-info' => 'AI-gestuurde tekstgeneratie in WYSIWYG-editors in het beheerderspaneel inschakelen.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
+                        'enabled' => 'Ingeschakeld',
                         'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'title' => 'Afbeeldingsgeneratie',
+                        'title-info' => 'AI-gestuurde afbeeldingsgeneratie voor product- en inhoudsafbeeldingen inschakelen.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'AI-functies voor de winkel inschakelen en configureren.',
+                    'title' => 'Winkelfuncties',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
+                        'enabled' => 'Ingeschakeld',
                         'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'title' => 'Beoordelingsvertaling',
+                        'title-info' => 'Klanten toestaan beoordelingen naar hun taal te vertalen in de winkel.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
+                        'enabled' => 'Ingeschakeld',
                         'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'title' => 'Gepersonaliseerd afrekenbericht',
+                        'title-info' => 'Gepersonaliseerde afrekenberichten genereren voor klanten op de bedankpagina.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Toepassen',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Genereren',
                     'generating' => 'Genereren...',
-                    'hd' => 'HD',
+                    'high' => 'Hoog',
+                    'landscape' => 'Liggend (3:2)',
+                    'low' => 'Laag',
+                    'medium' => 'Gemiddeld',
                     'model' => 'Model',
                     'number-of-images' => 'Aantal afbeeldingen',
+                    'portrait' => 'Staand (2:3)',
                     'prompt' => 'Prompt',
                     'quality' => 'Kwaliteit',
                     'regenerate' => 'Regenereren',
                     'regenerating' => 'Regenereren...',
                     'size' => 'Formaat',
-                    'standard' => 'Standaard',
+                    'square' => 'Vierkant (1:1)',
                     'title' => 'AI Afbeelding Generatie',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'Voorkant',
                     'next' => 'Volgende',
                     'size' => 'Formaat',
+                    'square' => 'Vierkant (1:1)',
                     'use-cases' => 'Gebruiksscenario\'s',
                     'zoom' => 'Inzoomen',
                 ],

@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Konfigurasikan pengaturan, penyedia, dan fitur Magic AI.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Pengaturan umum Magic AI.',
+                    'title' => 'Umum',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'Aktif',
+                        'title' => 'Pengaturan',
+                        'title-info' => 'Aktifkan atau nonaktifkan Magic AI di seluruh aplikasi.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'Kunci API',
+                    'info' => 'Konfigurasikan kunci API untuk penyedia AI Anda.',
+                    'title' => 'Penyedia',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'Konfigurasikan kredensial API OpenAI Anda.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'Konfigurasikan kredensial API Anthropic Anda.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'Konfigurasikan kredensial API Google Gemini Anda.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'Konfigurasikan kredensial API Groq Anda.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'Konfigurasikan kredensial API xAI Anda.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'Konfigurasikan kredensial API DeepSeek Anda.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'Konfigurasikan kredensial API Mistral Anda.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Konfigurasikan kredensial API Ollama Anda.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'Aktifkan dan konfigurasikan fitur AI untuk panel admin.',
+                    'title' => 'Fitur Admin',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'Aktif',
+                        'providers' => 'Penyedia',
+                        'title' => 'Pembuatan Teks',
+                        'title-info' => 'Aktifkan pembuatan teks bertenaga AI di editor WYSIWYG di seluruh panel admin.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'Aktif',
+                        'providers' => 'Penyedia',
+                        'title' => 'Pembuatan Gambar',
+                        'title-info' => 'Aktifkan pembuatan gambar bertenaga AI untuk gambar produk dan konten.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'Aktifkan dan konfigurasikan fitur AI untuk etalase.',
+                    'title' => 'Fitur Etalase',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
+                        'enabled' => 'Aktif',
                         'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'title' => 'Terjemahan Ulasan',
+                        'title-info' => 'Izinkan pelanggan menerjemahkan ulasan ke bahasa mereka di etalase.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
+                        'enabled' => 'Aktif',
                         'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'title' => 'Pesan Checkout Dipersonalisasi',
+                        'title-info' => 'Buat pesan checkout yang dipersonalisasi untuk pelanggan di halaman Terima Kasih.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Terapkan',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Hasilkan',
                     'generating' => 'Sedang Dihasilkan...',
-                    'hd' => 'HD',
+                    'high' => 'Tinggi',
+                    'landscape' => 'Lanskap (3:2)',
+                    'low' => 'Rendah',
+                    'medium' => 'Sedang',
                     'model' => 'Model',
                     'number-of-images' => 'Jumlah Gambar',
+                    'portrait' => 'Potret (2:3)',
                     'prompt' => 'Perintah',
                     'quality' => 'Kualitas',
                     'regenerate' => 'Hasilkan Ulang',
                     'regenerating' => 'Sedang Menghasilkan Ulang...',
                     'size' => 'Ukuran',
-                    'standard' => 'Standar',
+                    'square' => 'Persegi (1:1)',
                     'title' => 'Generasi Gambar AI',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'Depan',
                     'next' => 'Selanjutnya',
                     'size' => 'Ukuran',
+                    'square' => 'Persegi (1:1)',
                     'use-cases' => 'Kasus Penggunaan',
                     'zoom' => 'Perbesar',
                 ],

@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
-                'title' => 'Magic AI',
+                'info' => 'Magic AI সেটিংস, প্রদানকারী এবং বৈশিষ্ট্য কনফিগার করুন।',
+                'title' => 'ম্যাজিক AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'সাধারণ Magic AI সেটিংস।',
+                    'title' => 'সাধারণ',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'সক্রিয়',
+                        'title' => 'সেটিংস',
+                        'title-info' => 'আপনার সম্পূর্ণ অ্যাপ্লিকেশন জুড়ে Magic AI সক্রিয় বা নিষ্ক্রিয় করুন।',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'API কী',
+                    'info' => 'আপনার AI প্রদানকারীদের জন্য API কী কনফিগার করুন।',
+                    'title' => 'প্রদানকারী',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'আপনার OpenAI API শংসাপত্র কনফিগার করুন।',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'আপনার Anthropic API শংসাপত্র কনফিগার করুন।',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'আপনার Google Gemini API শংসাপত্র কনফিগার করুন।',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'আপনার Groq API শংসাপত্র কনফিগার করুন।',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'আপনার xAI API শংসাপত্র কনফিগার করুন।',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'আপনার DeepSeek API শংসাপত্র কনফিগার করুন।',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'আপনার Mistral API শংসাপত্র কনফিগার করুন।',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'আপনার Ollama API শংসাপত্র কনফিগার করুন।',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'অ্যাডমিন প্যানেলের জন্য AI বৈশিষ্ট্য সক্রিয় এবং কনফিগার করুন।',
+                    'title' => 'অ্যাডমিন বৈশিষ্ট্য',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'সক্রিয়',
+                        'providers' => 'প্রদানকারী',
+                        'title' => 'টেক্সট জেনারেশন',
+                        'title-info' => 'অ্যাডমিন প্যানেলে WYSIWYG সম্পাদকগুলিতে AI-চালিত টেক্সট জেনারেশন সক্রিয় করুন।',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'সক্রিয়',
+                        'providers' => 'প্রদানকারী',
+                        'title' => 'ছবি জেনারেশন',
+                        'title-info' => 'পণ্য এবং কন্টেন্ট ছবির জন্য AI-চালিত ছবি জেনারেশন সক্রিয় করুন।',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'স্টোরফ্রন্টের জন্য AI বৈশিষ্ট্য সক্রিয় এবং কনফিগার করুন।',
+                    'title' => 'স্টোরফ্রন্ট বৈশিষ্ট্য',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'সক্রিয়',
+                        'model' => 'মডেল',
+                        'title' => 'পর্যালোচনা অনুবাদ',
+                        'title-info' => 'গ্রাহকদের স্টোরফ্রন্টে তাদের ভাষায় পর্যালোচনা অনুবাদ করার অনুমতি দিন।',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'সক্রিয়',
+                        'model' => 'মডেল',
+                        'title' => 'ব্যক্তিগতকৃত চেকআউট বার্তা',
+                        'title-info' => 'ধন্যবাদ পৃষ্ঠায় গ্রাহকদের জন্য ব্যক্তিগতকৃত চেকআউট বার্তা তৈরি করুন।',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'প্রয়োগ করুন',
-                    'dall-e-2' => 'ডাল.ই 2',
-                    'dall-e-3' => 'ডাল.ই 3',
                     'generate' => 'তৈরি করুন',
                     'generating' => 'তৈরি হচ্ছে...',
-                    'hd' => 'এইচডি',
+                    'high' => 'উচ্চ',
+                    'landscape' => 'ল্যান্ডস্কেপ (3:2)',
+                    'low' => 'নিম্ন',
+                    'medium' => 'মাঝারি',
                     'model' => 'মডেল',
                     'number-of-images' => 'চিত্রের সংখ্যা',
+                    'portrait' => 'পোর্ট্ (2:3)',
                     'prompt' => 'প্রম্পট',
                     'quality' => 'মান',
                     'regenerate' => 'পুনরায় তৈরি করুন',
                     'regenerating' => 'পুনরায় তৈরি হচ্ছে...',
                     'size' => 'আকার',
-                    'standard' => 'মানসম্মত',
+                    'square' => 'বর্গাকার (1:1)',
                     'title' => 'এআই চিত্র তৈরি',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'আগে',
                     'next' => 'পরবর্তী',
                     'size' => 'আকার',
+                    'square' => 'বর্গাকার (1:1)',
                     'use-cases' => 'ব্যবহারের উদ্দেশ্য',
                     'zoom' => 'জুম',
                 ],

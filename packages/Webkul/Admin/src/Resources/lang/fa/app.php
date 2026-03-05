@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
-                'title' => 'Magic AI',
+                'info' => 'تنظیمات، ارائه‌دهندگان و ویژگی‌های Magic AI را پیکربندی کنید.',
+                'title' => 'هوش مصنوعی جادویی',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'تنظیمات عمومی Magic AI.',
+                    'title' => 'عمومی',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'فعال',
+                        'title' => 'تنظیمات',
+                        'title-info' => 'فعال یا غیرفعال کردن Magic AI در کل برنامه.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'کلید API',
+                    'info' => 'کلیدهای API ارائه‌دهندگان هوش مصنوعی خود را پیکربندی کنید.',
+                    'title' => 'ارائه‌دهندگان',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'اعتبارنامه API OpenAI خود را پیکربندی کنید.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'اعتبارنامه API Anthropic خود را پیکربندی کنید.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'اعتبارنامه API Google Gemini خود را پیکربندی کنید.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'اعتبارنامه API Groq خود را پیکربندی کنید.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'اعتبارنامه API xAI خود را پیکربندی کنید.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'اعتبارنامه API DeepSeek خود را پیکربندی کنید.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'اعتبارنامه API Mistral خود را پیکربندی کنید.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'اعتبارنامه API Ollama خود را پیکربندی کنید.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'ویژگی‌های هوش مصنوعی برای پنل مدیریت را فعال و پیکربندی کنید.',
+                    'title' => 'ویژگی‌های مدیریت',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'فعال',
+                        'providers' => 'ارائه‌دهندگان',
+                        'title' => 'تولید متن',
+                        'title-info' => 'تولید متن مبتنی بر هوش مصنوعی را در ویرایشگرهای WYSIWYG پنل مدیریت فعال کنید.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'فعال',
+                        'providers' => 'ارائه‌دهندگان',
+                        'title' => 'تولید تصویر',
+                        'title-info' => 'تولید تصویر مبتنی بر هوش مصنوعی برای تصاویر محصولات و محتوا را فعال کنید.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'ویژگی‌های هوش مصنوعی برای فروشگاه را فعال و پیکربندی کنید.',
+                    'title' => 'ویژگی‌های فروشگاه',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'فعال',
+                        'model' => 'مدل',
+                        'title' => 'ترجمه نظرات',
+                        'title-info' => 'به مشتریان اجازه دهید نظرات را به زبان خود در فروشگاه ترجمه کنند.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'فعال',
+                        'model' => 'مدل',
+                        'title' => 'پیام پرداخت شخصی‌سازی شده',
+                        'title-info' => 'پیام‌های پرداخت شخصی‌سازی شده برای مشتریان در صفحه تشکر تولید کنید.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'اعمال',
-                    'dall-e-2' => 'دال.إ 2',
-                    'dall-e-3' => 'دال.إ 3',
                     'generate' => 'تولید',
                     'generating' => 'در حال تولید...',
-                    'hd' => 'بالا (HD)',
+                    'high' => 'بالا',
+                    'landscape' => 'افقی (3:2)',
+                    'low' => 'پایین',
+                    'medium' => 'متوسط',
                     'model' => 'مدل',
                     'number-of-images' => 'تعداد تصاویر',
+                    'portrait' => 'عمودی (2:3)',
                     'prompt' => 'پرامت',
                     'quality' => 'کیفیت',
                     'regenerate' => 'تولید مجدد',
                     'regenerating' => 'در حال تولید مجدد...',
                     'size' => 'اندازه',
-                    'standard' => 'استاندارد',
+                    'square' => 'مربع (1:1)',
                     'title' => 'تولید تصویر با هوش مصنوعی',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'جلو',
                     'next' => 'بعدی',
                     'size' => 'اندازه',
+                    'square' => 'مربع (1:1)',
                     'use-cases' => 'موارد استفاده',
                     'zoom' => 'بزرگ‌نمایی',
                 ],

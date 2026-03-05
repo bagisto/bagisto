@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Configurez les paramètres, fournisseurs et fonctionnalités de Magic AI.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Paramètres généraux de Magic AI.',
+                    'title' => 'Général',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'Activé',
+                        'title' => 'Paramètres',
+                        'title-info' => 'Activer ou désactiver Magic AI dans toute l\'application.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'Clé API',
+                    'info' => 'Configurez les clés API pour vos fournisseurs d\'IA.',
+                    'title' => 'Fournisseurs',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'Configurez vos identifiants API OpenAI.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'Configurez vos identifiants API Anthropic.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'Configurez vos identifiants API Google Gemini.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'Configurez vos identifiants API Groq.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'Configurez vos identifiants API xAI.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'Configurez vos identifiants API DeepSeek.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'Configurez vos identifiants API Mistral.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Configurez vos identifiants API Ollama.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'Activer et configurer les fonctionnalités IA pour le panneau d\'administration.',
+                    'title' => 'Fonctionnalités d\'administration',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'Activé',
+                        'providers' => 'Fournisseurs',
+                        'title' => 'Génération de texte',
+                        'title-info' => 'Activer la génération de texte par IA dans les éditeurs WYSIWYG du panneau d\'administration.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'Activé',
+                        'providers' => 'Fournisseurs',
+                        'title' => 'Génération d\'images',
+                        'title-info' => 'Activer la génération d\'images par IA pour les images de produits et de contenu.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'Activer et configurer les fonctionnalités IA pour la boutique.',
+                    'title' => 'Fonctionnalités de la boutique',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'Activé',
+                        'model' => 'Modèle',
+                        'title' => 'Traduction des avis',
+                        'title-info' => 'Permettre aux clients de traduire les avis dans leur langue sur la boutique.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'Activé',
+                        'model' => 'Modèle',
+                        'title' => 'Message de paiement personnalisé',
+                        'title-info' => 'Générer des messages de paiement personnalisés pour les clients sur la page de remerciement.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Seuls les fichiers d\'images (.jpeg, .jpg, .png, ..) sont autorisés.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Appliquer',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Générer',
                     'generating' => 'Génération en cours...',
-                    'hd' => 'HD',
+                    'high' => 'Haute',
+                    'landscape' => 'Paysage (3:2)',
+                    'low' => 'Basse',
+                    'medium' => 'Moyenne',
                     'model' => 'Modèle',
                     'number-of-images' => 'Nombre d\'images',
+                    'portrait' => 'Portrait (2:3)',
                     'prompt' => 'Invite',
                     'quality' => 'Qualité',
                     'regenerate' => 'Régénérer',
                     'regenerating' => 'Régénération en cours...',
                     'size' => 'Taille',
-                    'standard' => 'Standard',
+                    'square' => 'Carré (1:1)',
                     'title' => 'Génération d\'images par IA',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'Avant',
                     'next' => 'Suivant',
                     'size' => 'Taille',
+                    'square' => 'Carré (1:1)',
                     'use-cases' => 'Utilisations',
                     'zoom' => 'Zoom',
                 ],

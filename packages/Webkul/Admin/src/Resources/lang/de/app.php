@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Magic AI Einstellungen, Anbieter und Funktionen konfigurieren.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Allgemeine Magic AI Einstellungen.',
+                    'title' => 'Allgemein',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'Aktiviert',
+                        'title' => 'Einstellungen',
+                        'title-info' => 'Magic AI in der gesamten Anwendung aktivieren oder deaktivieren.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'API-Schlüssel',
+                    'info' => 'API-Schlüssel für Ihre KI-Anbieter konfigurieren.',
+                    'title' => 'Anbieter',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'OpenAI API-Zugangsdaten konfigurieren.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'Anthropic API-Zugangsdaten konfigurieren.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'Google Gemini API-Zugangsdaten konfigurieren.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'Groq API-Zugangsdaten konfigurieren.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'xAI API-Zugangsdaten konfigurieren.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'DeepSeek API-Zugangsdaten konfigurieren.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'Mistral API-Zugangsdaten konfigurieren.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Ollama API-Zugangsdaten konfigurieren.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'KI-Funktionen für das Admin-Panel aktivieren und konfigurieren.',
+                    'title' => 'Admin-Funktionen',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'Aktiviert',
+                        'providers' => 'Anbieter',
+                        'title' => 'Textgenerierung',
+                        'title-info' => 'KI-gestützte Textgenerierung in WYSIWYG-Editoren im Admin-Panel aktivieren.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'Aktiviert',
+                        'providers' => 'Anbieter',
+                        'title' => 'Bildgenerierung',
+                        'title-info' => 'KI-gestützte Bildgenerierung für Produkt- und Inhaltsbilder aktivieren.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'KI-Funktionen für die Storefront aktivieren und konfigurieren.',
+                    'title' => 'Storefront-Funktionen',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'Aktiviert',
+                        'model' => 'Modell',
+                        'title' => 'Bewertungsübersetzung',
+                        'title-info' => 'Kunden erlauben, Bewertungen in ihre Sprache in der Storefront zu übersetzen.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'Aktiviert',
+                        'model' => 'Modell',
+                        'title' => 'Personalisierte Checkout-Nachricht',
+                        'title-info' => 'Personalisierte Checkout-Nachrichten für Kunden auf der Dankesseite generieren.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Anwenden',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Generieren',
                     'generating' => 'Generiere...',
-                    'hd' => 'HD',
+                    'high' => 'Hoch',
+                    'landscape' => 'Querformat (3:2)',
+                    'low' => 'Niedrig',
+                    'medium' => 'Mittel',
                     'model' => 'Modell',
                     'number-of-images' => 'Anzahl der Bilder',
+                    'portrait' => 'Hochformat (2:3)',
                     'prompt' => 'Eingabeaufforderung',
                     'quality' => 'Qualität',
                     'regenerate' => 'Neu generieren',
                     'regenerating' => 'Regeneriere...',
                     'size' => 'Größe',
-                    'standard' => 'Standard',
+                    'square' => 'Quadrat (1:1)',
                     'title' => 'KI-Bildgenerierung',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'Vorderseite',
                     'next' => 'Nächste',
                     'size' => 'Größe',
+                    'square' => 'Quadrat (1:1)',
                     'use-cases' => 'Verwendungszwecke',
                     'zoom' => 'Vergrößern',
                 ],

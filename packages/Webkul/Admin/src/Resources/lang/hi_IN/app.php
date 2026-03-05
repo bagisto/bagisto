@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
-                'title' => 'Magic AI',
+                'info' => 'Magic AI सेटिंग्स, प्रदाता और सुविधाएँ कॉन्फ़िगर करें।',
+                'title' => 'मैजिक AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'सामान्य Magic AI सेटिंग्स।',
+                    'title' => 'सामान्य',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'सक्रिय',
+                        'title' => 'सेटिंग्स',
+                        'title-info' => 'अपने पूरे एप्लिकेशन में Magic AI को सक्रिय या निष्क्रिय करें।',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'API कुंजी',
+                    'info' => 'अपने AI प्रदाताओं के लिए API कुंजियाँ कॉन्फ़िगर करें।',
+                    'title' => 'प्रदाता',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'अपने OpenAI API प्रमाणपत्र कॉन्फ़िगर करें।',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'अपने Anthropic API प्रमाणपत्र कॉन्फ़िगर करें।',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'अपने Google Gemini API प्रमाणपत्र कॉन्फ़िगर करें।',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'अपने Groq API प्रमाणपत्र कॉन्फ़िगर करें।',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'अपने xAI API प्रमाणपत्र कॉन्फ़िगर करें।',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'अपने DeepSeek API प्रमाणपत्र कॉन्फ़िगर करें।',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'अपने Mistral API प्रमाणपत्र कॉन्फ़िगर करें।',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'अपने Ollama API प्रमाणपत्र कॉन्फ़िगर करें।',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'व्यवस्थापक पैनल के लिए AI सुविधाएँ सक्रिय और कॉन्फ़िगर करें।',
+                    'title' => 'व्यवस्थापक सुविधाएँ',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'सक्रिय',
+                        'providers' => 'प्रदाता',
+                        'title' => 'टेक्स्ट जेनरेशन',
+                        'title-info' => 'व्यवस्थापक पैनल में WYSIWYG संपादकों में AI-संचालित टेक्स्ट जेनरेशन सक्रिय करें।',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'सक्रिय',
+                        'providers' => 'प्रदाता',
+                        'title' => 'छवि जेनरेशन',
+                        'title-info' => 'उत्पाद और सामग्री छवियों के लिए AI-संचालित छवि जेनरेशन सक्रिय करें।',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'स्टोरफ्रंट के लिए AI सुविधाएँ सक्रिय और कॉन्फ़िगर करें।',
+                    'title' => 'स्टोरफ्रंट सुविधाएँ',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'enabled' => 'सक्रिय',
+                        'model' => 'मॉडल',
+                        'title' => 'समीक्षा अनुवाद',
+                        'title-info' => 'ग्राहकों को स्टोरफ्रंट पर अपनी भाषा में समीक्षाओं का अनुवाद करने की अनुमति दें।',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
-                        'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'enabled' => 'सक्रिय',
+                        'model' => 'मॉडल',
+                        'title' => 'व्यक्तिगत चेकआउट संदेश',
+                        'title-info' => 'धन्यवाद पृष्ठ पर ग्राहकों के लिए व्यक्तिगत चेकआउट संदेश उत्पन्न करें।',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'लागू करें',
-                    'dall-e-2' => 'डाल.ई 2',
-                    'dall-e-3' => 'डाल.ई 3',
                     'generate' => 'उत्पन्न करें',
                     'generating' => 'उत्पन्न हो रहा है...',
-                    'hd' => 'एचडी',
+                    'high' => 'उच्च',
+                    'landscape' => 'लैंडस्केप (3:2)',
+                    'low' => 'निम्न',
+                    'medium' => 'मध्यम',
                     'model' => 'मॉडल',
                     'number-of-images' => 'छवियों की संख्या',
+                    'portrait' => 'पोर्ट्रेट (2:3)',
                     'prompt' => 'प्रॉम्प्ट',
                     'quality' => 'गुणवत्ता',
                     'regenerate' => 'पुनर्जन्म',
                     'regenerating' => 'पुनर्जन्म हो रहा है...',
                     'size' => 'आकार',
-                    'standard' => 'मानक',
+                    'square' => 'वर्गाकार (1:1)',
                     'title' => 'ए.आई. इमेज उत्पन्न',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'सामना',
                     'next' => 'अगला',
                     'size' => 'आकार',
+                    'square' => 'वर्गाकार (1:1)',
                     'use-cases' => 'उपयोग केस',
                     'zoom' => 'ज़ूम करें',
                 ],

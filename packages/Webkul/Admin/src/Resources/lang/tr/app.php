@@ -4161,101 +4161,101 @@ return [
             ],
 
             'magic-ai' => [
-                'info' => 'Configure Magic AI settings, providers, and features.',
+                'info' => 'Magic AI ayarlarını, sağlayıcıları ve özelliklerini yapılandırın.',
                 'title' => 'Magic AI',
 
                 'general' => [
-                    'info' => 'General Magic AI settings.',
-                    'title' => 'General',
+                    'info' => 'Genel Magic AI ayarları.',
+                    'title' => 'Genel',
 
                     'settings' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Settings',
-                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                        'enabled' => 'Etkin',
+                        'title' => 'Ayarlar',
+                        'title-info' => 'Tüm uygulamanızda Magic AI\'ı etkinleştirin veya devre dışı bırakın.',
                     ],
                 ],
 
                 'providers' => [
-                    'api-key' => 'API Key',
-                    'info' => 'Configure API keys for your AI providers.',
-                    'title' => 'Providers',
+                    'api-key' => 'API Anahtarı',
+                    'info' => 'AI sağlayıcılarınız için API anahtarlarını yapılandırın.',
+                    'title' => 'Sağlayıcılar',
 
                     'openai' => [
                         'title' => 'OpenAI',
-                        'title-info' => 'Configure your OpenAI API credentials.',
+                        'title-info' => 'OpenAI API kimlik bilgilerinizi yapılandırın.',
                     ],
 
                     'anthropic' => [
                         'title' => 'Anthropic',
-                        'title-info' => 'Configure your Anthropic API credentials.',
+                        'title-info' => 'Anthropic API kimlik bilgilerinizi yapılandırın.',
                     ],
 
                     'gemini' => [
                         'title' => 'Gemini',
-                        'title-info' => 'Configure your Google Gemini API credentials.',
+                        'title-info' => 'Google Gemini API kimlik bilgilerinizi yapılandırın.',
                     ],
 
                     'groq' => [
                         'title' => 'Groq',
-                        'title-info' => 'Configure your Groq API credentials.',
+                        'title-info' => 'Groq API kimlik bilgilerinizi yapılandırın.',
                     ],
 
                     'xai' => [
                         'title' => 'xAI',
-                        'title-info' => 'Configure your xAI API credentials.',
+                        'title-info' => 'xAI API kimlik bilgilerinizi yapılandırın.',
                     ],
 
                     'deepseek' => [
                         'title' => 'DeepSeek',
-                        'title-info' => 'Configure your DeepSeek API credentials.',
+                        'title-info' => 'DeepSeek API kimlik bilgilerinizi yapılandırın.',
                     ],
 
                     'mistral' => [
                         'title' => 'Mistral',
-                        'title-info' => 'Configure your Mistral API credentials.',
+                        'title-info' => 'Mistral API kimlik bilgilerinizi yapılandırın.',
                     ],
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Ollama API kimlik bilgilerinizi yapılandırın.',
                     ],
                 ],
 
                 'admin-features' => [
-                    'info' => 'Enable and configure AI features for the admin panel.',
-                    'title' => 'Admin Features',
+                    'info' => 'Yönetim paneli için AI özelliklerini etkinleştirin ve yapılandırın.',
+                    'title' => 'Yönetici Özellikleri',
 
                     'text-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Text Generation',
-                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                        'enabled' => 'Etkin',
+                        'providers' => 'Sağlayıcılar',
+                        'title' => 'Metin Oluşturma',
+                        'title-info' => 'Yönetim panelindeki WYSIWYG editörlerinde AI destekli metin oluşturmayı etkinleştirin.',
                     ],
 
                     'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'providers' => 'Providers',
-                        'title' => 'Image Generation',
-                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                        'enabled' => 'Etkin',
+                        'providers' => 'Sağlayıcılar',
+                        'title' => 'Görsel Oluşturma',
+                        'title-info' => 'Ürün ve içerik görselleri için AI destekli görsel oluşturmayı etkinleştirin.',
                     ],
                 ],
 
                 'storefront-features' => [
-                    'info' => 'Enable and configure AI features for the storefront.',
-                    'title' => 'Storefront Features',
+                    'info' => 'Mağaza için AI özelliklerini etkinleştirin ve yapılandırın.',
+                    'title' => 'Mağaza Özellikleri',
 
                     'review-translation' => [
-                        'enabled' => 'Enabled',
+                        'enabled' => 'Etkin',
                         'model' => 'Model',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                        'title' => 'Yorum Çevirisi',
+                        'title-info' => 'Müşterilerin mağazada yorumları kendi dillerine çevirmesine izin verin.',
                     ],
 
                     'checkout-message' => [
-                        'enabled' => 'Enabled',
+                        'enabled' => 'Etkin',
                         'model' => 'Model',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
+                        'title' => 'Kişiselleştirilmiş Ödeme Mesajı',
+                        'title-info' => 'Teşekkür sayfasında müşteriler için kişiselleştirilmiş ödeme mesajları oluşturun.',
                     ],
                 ],
             ],
@@ -5231,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Uygula',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Oluştur',
                     'generating' => 'Oluşturuluyor...',
-                    'hd' => 'HD',
+                    'high' => 'Yüksek',
+                    'landscape' => 'Yatay (3:2)',
+                    'low' => 'Düşük',
+                    'medium' => 'Orta',
                     'model' => 'Model',
                     'number-of-images' => 'Resim Sayısı',
+                    'portrait' => 'Dikey (2:3)',
                     'prompt' => 'İstem',
                     'quality' => 'Kalite',
                     'regenerate' => 'Yeniden Oluştur',
                     'regenerating' => 'Yeniden Oluşturuluyor...',
                     'size' => 'Boyut',
-                    'standard' => 'Standart',
+                    'square' => 'Kare (1:1)',
                     'title' => 'AI İmaj Oluşturma',
                 ],
 
@@ -5255,6 +5254,7 @@ return [
                     'front' => 'Ön',
                     'next' => 'Sonraki',
                     'size' => 'Boyut',
+                    'square' => 'Kare (1:1)',
                     'use-cases' => 'Kullanım Alanları',
                     'zoom' => 'Yakınlaştırma',
                 ],

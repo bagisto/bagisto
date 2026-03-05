@@ -2,7 +2,9 @@
     use Webkul\MagicAI\AiProvider;
 
     $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.text_generation.providers') ?? ''));
+    
     $models = AiProvider::modelsForProviders($enabledProviders, 'text');
+    
     $defaultModel = $models[0]['value'] ?? '';
 @endphp
 
