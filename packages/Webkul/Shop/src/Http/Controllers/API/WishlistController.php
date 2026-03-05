@@ -110,9 +110,16 @@ class WishlistController extends APIController
             Event::dispatch('customer.wishlist.move-to-cart.after', $id);
 
             if ($result) {
+                $wishlistItems = $this->wishlistRepository
+                    ->where([
+                        'customer_id' => auth()->guard('customer')->user()->id,
+                        'channel_id' => core()->getCurrentChannel()->id,
+                    ])
+                    ->get();
+
                 return new JsonResource([
                     'data' => [
-                        'wishlist' => WishlistResource::collection($this->wishlistRepository->get()),
+                        'wishlist' => WishlistResource::collection($wishlistItems),
                         'cart' => new CartResource(Cart::getCart()),
                     ],
 
@@ -156,8 +163,15 @@ class WishlistController extends APIController
             ]);
         }
 
+        $wishlistItems = $this->wishlistRepository
+            ->where([
+                'customer_id' => auth()->guard('customer')->user()->id,
+                'channel_id' => core()->getCurrentChannel()->id,
+            ])
+            ->get();
+
         return new JsonResource([
-            'data' => WishlistResource::collection($this->wishlistRepository->get()),
+            'data' => WishlistResource::collection($wishlistItems),
             'message' => trans('shop::app.customers.account.wishlist.removed'),
         ]);
     }
