@@ -861,6 +861,18 @@ return [
                 'write-a-review' => 'Tulis Ulasan',
             ],
 
+            'contact-us' => [
+                'about' => 'Tulis pesan untuk kami, dan kami akan segera merespons.',
+                'desc' => 'Apa yang ada di pikiran Anda?',
+                'describe-here' => 'Tulis di sini',
+                'email' => 'Email',
+                'message' => 'Pesan',
+                'name' => 'Nama',
+                'phone-number' => 'Nomor Telepon',
+                'submit' => 'Kirim',
+                'title' => 'Hubungi Kami',
+            ],
+
             'add-to-cart' => 'Tambahkan ke Keranjang',
             'add-to-compare' => 'Produk ditambahkan ke perbandingan.',
             'add-to-wishlist' => 'Tambahkan ke Wishlist',
