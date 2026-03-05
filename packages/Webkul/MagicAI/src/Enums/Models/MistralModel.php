@@ -8,6 +8,13 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum MistralModel: string implements AiModelContract
 {
     /**
+     * Rolling aliases — always resolve to latest stable.
+     */
+    case MistralLargeLatest = 'mistral-large-latest';
+    case MistralMediumLatest = 'mistral-medium-latest';
+    case MistralSmallLatest = 'mistral-small-latest';
+
+    /**
      * Mistral 3 family (latest generation — recommended for most use cases). All are suitable for chat and non-chat use cases.
      *
      * Note: Mistral Large 3 is the most capable model currently available, and is recommended for most use cases.
@@ -21,21 +28,6 @@ enum MistralModel: string implements AiModelContract
      */
     case MagistralMedium = 'magistral-medium-2509';
     case MagistralSmall = 'magistral-small-2509';
-
-    /**
-     * Codestral family (code-specialized models, latest generation — recommended for coding use cases). All are suitable for chat and non-chat use cases.
-     *
-     * Note: Codestral is the most capable model currently available, and is recommended for most coding-related use cases.
-     */
-    case Codestral = 'codestral-2508';
-
-    /**
-     * Rolling aliases — always resolve to latest stable.
-     */
-    case MistralLargeLatest = 'mistral-large-latest';
-    case MistralMediumLatest = 'mistral-medium-latest';
-    case MistralSmallLatest = 'mistral-small-latest';
-    case CodestralLatest = 'codestral-latest';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -54,7 +46,6 @@ enum MistralModel: string implements AiModelContract
             self::MistralLargeLatest => 'Mistral Large (Latest)',
             self::MistralMediumLatest => 'Mistral Medium (Latest)',
             self::MistralSmallLatest => 'Mistral Small (Latest)',
-            self::CodestralLatest => 'Codestral (Latest)',
             self::MistralLarge3 => 'Mistral Large 3',
             self::MistralMedium31 => 'Mistral Medium 3.1',
             self::MistralSmall32 => 'Mistral Small 3.2',
