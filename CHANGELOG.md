@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.3.14 (5th of March 2026)** - *Release*
+
+- Fixed an issue where wishlist items were being fetched for all customers when performing "Move to Cart" or deleting wishlist items.
+
 ## **v2.3.13 (2nd of March 2026)** - *Release*
 
 - Fixed catalog rule and cart rule condition validation where boolean value `0` was being incorrectly treated as empty and causing the condition to fail.
