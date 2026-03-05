@@ -22,7 +22,12 @@ Route::get('/switch/{ln}',[HomeController::class,'languageArabicSwitch'])->name(
 Route::get('/Switch/{ln}',[HomeController::class,'languageEnglishSwitch'])->name('language.switch.english');
 
 // Header search box
+Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
+
+// Search box
 Route::get('/booking/search', [SearchController::class, 'bookingSearch'])->name('booking.search');   
+
+
 
 // Index page 
 Route::get('/', [HomeController::class, 'index'])
@@ -52,25 +57,14 @@ Route::get('/gallery', [HomeController::class, 'galleryIndex'])
 
 // About Us page
 Route::get('about', [HomeController::class, 'about'])
-    ->name('shop.home.about');
+    ->name('shop.home.aboutus');
 
 // Contact Us page
 Route::get('contact', [HomeController::class, 'contactUs'])
-    ->name('shop.home.contact');
+    ->name('shop.home.contactus');
 
 Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail'])
-    ->name('shop.home.contact_us.send_mail')
-    ->middleware('cache.response');
-
-
-
-
-/**
- * Store front search.
- */
-Route::get('search', [SearchController::class, 'index'])
-    ->name('shop.search.index')
-    ->middleware('cache.response');
+    ->name('shop.home.contact_us.send_mail');
 
 Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
 

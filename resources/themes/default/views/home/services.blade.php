@@ -1,158 +1,145 @@
 <style>
-.no-scrollbar::-webkit-scrollbar {
-    display: none;
-}
-.no-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
+.no-scrollbar::-webkit-scrollbar{display:none;}
+.no-scrollbar{-ms-overflow-style:none;scrollbar-width:none;}
 </style>
 
 <script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          oswald: ['Oswald', 'sans-serif'],
-          jost: ['Jost', 'sans-serif'],
-        }
+tailwind.config = {
+  theme:{
+    extend:{
+      fontFamily:{
+        oswald:['Oswald','sans-serif'],
+        roboto:['Roboto','sans-serif'],
       }
     }
   }
+}
 </script>
-</head>
 
-<section class="max-w-7xl mx-auto px-4 py-32 mt-6 relative">
-  <!-- Title -->
-  <h2 class="font-oswald font-semibold text-[38px] uppercase tracking-widest text-[#2a1f14] text-center mb-6">
-    Services Treatment
-  </h2>
+<section class="max-w-7xl mx-auto px-4 py-16 md:py-28">
 
-<!-- Tab Navigation — centered -->
-<div id="categoryTabsWrapper"
-     class="flex items-center justify-center gap-1 mb-8 border-b border-gray-200 pb-2 relative">
+<h2 class="font-oswald font-normal text-[36px] md:text-[60px] leading-[100%] uppercase text-center text-[#371E0F] mb-10 md:mb-14">
+Services Treatment
+</h2>
 
-    <!-- Left Arrow -->
-    <button id="scrollLeft"
-        class="p-1 text-gray-400 hover:text-gray-600 flex-shrink-0">
-        <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
-            <polyline points="15 18 9 12 15 6"/>
-        </svg>
-    </button>
+<div class="flex items-center justify-center gap-2 mb-10 md:mb-14">
 
-<div id="categoryTabs"
-     class="flex gap-2 overflow-x-auto scroll-smooth no-scrollbar max-w-[800px]">
+<button id="scrollLeft" class="p-1 text-gray-400 hover:text-gray-600">
+<svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+<polyline points="15 18 9 12 15 6"/>
+</svg>
+</button>
+
+<div id="categoryTabs" class="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth no-scrollbar max-w-full md:max-w-[800px]">
 
 @foreach($categories as $category)
-    <a href="{{ route('shop.home.services', $category->slug) }}"
-       class="px-4 py-1.5 text-[13px] whitespace-nowrap transition-colors
-       {{ request()->route('slug') == $category->slug 
-            ? 'text-[#2a1f14] border-b-2 border-[#2a1f14] font-semibold' 
-            : 'text-gray-400 hover:text-[#2a1f14]' }}">
-        {{ $category->name }}
-    </a>
+<a href="#"
+class="px-2 py-2 whitespace-nowrap text-center font-roboto text-[16px] leading-[24px] tracking-[0.02em] transition-colors
+{{ ($activeCategorySlug ?? request()->route('slug')) == $category->slug 
+? 'text-[#DFAA8B]' 
+: 'text-[#78718B] hover:text-[#DFAA8B]' }}">
+{{ $category->name }}
+</a>
 @endforeach
 
 </div>
 
-    <!-- Right Arrow -->
-    <button id="scrollRight"
-        class="p-1 text-gray-400 hover:text-gray-600 flex-shrink-0 ml-1">
-        <svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
-            <polyline points="9 18 15 12 9 6"/>
-        </svg>
-    </button>
-</div>
-
-  <!-- Service Cards Grid -->
-<div class="grid grid-cols-2 gap-5 mb-10">
-    @forelse($services as $service)
-        <div class="flex gap-4 bg-white border border-gray-100 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow">
-            
-            <!-- Image -->
-            <div class="relative flex-shrink-0 w-[150px] h-[150px] rounded-xl overflow-hidden bg-[#d4c4b0]">
-                
-                <img 
-                    src="{{ $service->base_image_url ?? asset('images/placeholder.png') }}" 
-                    alt="{{ $service->name }}" 
-                    class="w-full h-full object-cover"
-                />
-
-                @if($service->duration)
-                    <span class="absolute top-2 left-2 bg-white/90 text-[#2a1f14] text-[10px] font-medium px-2 py-0.5 rounded-full">
-                        {{ $service->duration }}
-                    </span>
-                @endif
-            </div>
-
-            <!-- Content -->
-            <div class="flex flex-col flex-1 py-1">
-
-                <div class="flex items-start justify-between mb-1">
-                    <span class="font-oswald font-semibold text-[16px] uppercase tracking-wide text-[#2a1f14]">
-                        {{ $service->name }}
-                    </span>
-
-                    <span class="font-oswald font-semibold text-[14px] text-[#c07a3a] ml-2 whitespace-nowrap">
-                        {{ core()->currency($service->price) }}
-                    </span>
-                </div>
-
-                <p class="text-[12px] text-gray-400 mb-1">
-                    {{ $service->short_description }}
-                </p>
-
-                <p class="text-[12px] text-gray-500 leading-relaxed mb-3 line-clamp-3">
-                    {{ Str::limit(strip_tags($service->description), 120) }}
-                </p>
-
-                <button class="self-start bg-[#2a1f14] text-white text-[11px] font-medium tracking-wide px-5 py-2 rounded-full hover:bg-[#3d2e1e] transition-colors mt-auto">
-                    Book Now
-                </button>
-
-            </div>
-        </div>
-
-    @empty
-        <div class="col-span-2 text-center py-10 text-gray-400">
-            No services found.
-        </div>
-    @endforelse
+<button id="scrollRight" class="p-1 text-gray-400 hover:text-gray-600">
+<svg class="w-4 h-4 fill-none stroke-current" stroke-width="2" viewBox="0 0 24 24">
+<polyline points="9 18 15 12 9 6"/>
+</svg>
+</button>
 
 </div>
 
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 
-  <!-- View All Button -->
-  <div class="flex justify-center">
-    <button class="bg-[#2a1f14] text-white font-jost font-medium text-[13px] uppercase tracking-widest px-10 py-4 rounded-full hover:bg-[#3d2e1e] transition-colors">
-      View All Service
-    </button>
-  </div>
+@forelse($services as $service)
+
+<div class="flex flex-col sm:flex-row bg-white rounded-2xl overflow-hidden border border-[#CACACA]">
+
+<div class="relative w-full sm:w-[180px] h-[220px] sm:h-auto flex-shrink-0">
+<img 
+src="{{ $service->product->images->first() 
+        ? asset('storage/' . $service->product->images->first()->path) 
+        : asset('images/placeholder.png') }}"
+alt="{{ $service->name }}"
+class="w-full h-full object-cover"
+/>
+
+@if($service->duration)
+<span class="absolute top-3 left-3 bg-white text-[#371E0F] 
+font-roboto text-[14px] px-3 py-1 rounded-full">
+{{ $service->duration }}
+</span>
+@endif
+
+</div>
+
+<div class="flex flex-col flex-1 p-4 md:p-6">
+
+<div class="flex justify-between items-start mb-2">
+
+<div>   
+
+<span class="font-oswald font-medium text-[24px] leading-[100%] tracking-[0.1em] uppercase text-[#371E0F] block">
+{{ $service->name }}
+</span>
+
+<span class="font-roboto text-[14px] text-[#C9C0D4]">
+{{ $service->slug }}
+</span>
+
+</div>
+
+<span class="font-oswald text-[20px] text-[#DFAA8B] uppercase">
+{{ core()->currency($service->price) }}
+</span>
+
+</div>
+
+<div class="font-roboto text-[15px] leading-[24px] tracking-[0.02em] text-[#78718B] mb-4">
+{!! $service->short_description !!}
+</div>
+
+<button class="bg-[#D7CDBA] text-[#371E0F] 
+font-roboto font-medium text-[14px] px-5 py-1 rounded-full w-fit">
+Book Now
+</button>
+
+</div>
+
+</div>
+
+@empty
+<div class="col-span-2 text-center py-10 text-gray-400">
+No services found.
+</div>
+@endforelse
+
+</div>
 
 </section>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded",function(){
 
-    const container = document.getElementById("categoryTabs");
-    const btnLeft = document.getElementById("scrollLeft");
-    const btnRight = document.getElementById("scrollRight");
+const container=document.getElementById("categoryTabs");
+const btnLeft=document.getElementById("scrollLeft");
+const btnRight=document.getElementById("scrollRight");
 
-    const scrollAmount = 200; // adjust speed here
+btnRight.addEventListener("click",()=>{
+container.scrollBy({left:200,behavior:"smooth"});
+});
 
-    btnRight.addEventListener("click", () => {
-        container.scrollBy({
-            left: scrollAmount,
-            behavior: "smooth"
-        });
-    });
-
-    btnLeft.addEventListener("click", () => {
-        container.scrollBy({
-            left: -scrollAmount,
-            behavior: "smooth"
-        });
-    });
+btnLeft.addEventListener("click",()=>{
+container.scrollBy({left:-200,behavior:"smooth"});
+});
 
 });
+
 </script>
+
+
+
+

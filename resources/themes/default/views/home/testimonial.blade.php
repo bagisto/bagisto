@@ -1,126 +1,170 @@
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 
 <script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        fontFamily: {
-          oswald: ['Oswald', 'sans-serif'],
-          jost: ['Jost', 'sans-serif'],
-        }
+tailwind.config = {
+  theme:{
+    extend:{
+      fontFamily:{
+        oswald:['Oswald','sans-serif'],
+        jost:['Jost','sans-serif'],
       }
     }
   }
+}
 </script>
 
-<section class="w-full max-w-[1400px] mx-auto px-8 py-16">
+<section class="w-full max-w-[1400px] mx-auto px-6 md:px-8 py-16 md:py-24">
 
-  <!-- Section Title -->
-  <h2 class="font-oswald font-semibold text-[36px] uppercase tracking-widest text-[#2a1f14] text-center mb-10">
-    Testimonial
-  </h2>
+<!-- TITLE -->
+<h2 class="font-oswald text-[#371E0F] uppercase text-center mb-12"
+style="
+font-weight:400;
+font-size:60px;
+line-height:100%;
+letter-spacing:0%;
+">
+Testimonial
+</h2>
 
-  <div class="relative max-w-[860px] mx-auto">
 
-    <!-- ================= TESTIMONIAL 1 ================= -->
-    <div class="testimonial-item">
+<div class="relative max-w-[900px] mx-auto">
 
-      <div class="flex items-stretch gap-0 rounded-2xl">
+<!-- TESTIMONIAL 1 -->
+<div class="testimonial-item">
 
-        <!-- Left Image -->
-        <div class="flex-shrink-0 w-[240px]">
-          <img
-            src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=face"
-            class="w-full h-full object-cover rounded-2xl"
-            style="min-height:280px;"
-          />
-        </div>
+<div class="flex flex-col md:flex-row items-stretch rounded-2xl overflow-hidden">
 
-        <!-- Right Content -->
-        <div class="flex-1 bg-white px-10 py-8 flex flex-col justify-between"
-             style="border-radius: 0 1rem 1rem 0;">
+<!-- IMAGE -->
+<div class="flex-shrink-0 w-full md:w-[260px]">
+<img
+src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=400&h=500&fit=crop&crop=face"
+class="w-full h-[280px] md:h-full object-cover"/>
+</div>
 
-          <div>
-            <div class="text-[#c07a3a] text-5xl mb-4">&ldquo;</div>
-            <p class="text-gray-500 text-[15px] leading-relaxed mb-6">
-              Best service ever .. and they came at the time
-            </p>
-            <p class="font-oswald font-semibold text-[13px] uppercase tracking-widest text-[#2a1f14] mb-2">
-              Mariam
-            </p>
-            <div class="flex gap-1 text-yellow-400 text-lg">
-              ★ ★ ★ ★ <span class="text-gray-300">★</span>
-            </div>
-          </div>
+<!-- CONTENT -->
+<div class="flex-1 bg-white px-6 md:px-10 py-8 flex flex-col justify-between">
 
-        </div>
-      </div>
+<div>
 
-    </div>
+<div class="text-[#DFAA8B] text-6xl mb-6 leading-none">“</div>
 
-    <!-- ================= TESTIMONIAL 2 ================= -->
-    <div class="testimonial-item hidden">
+<p class="font-oswald text-[#78718B] mb-8"
+style="
+font-weight:400;
+font-size:24px;
+line-height:100%;
+letter-spacing:10%;
+">
+Best service ever .. and they came at the time
+</p>
 
-      <div class="flex items-stretch gap-0 rounded-2xl">
+<p class="font-oswald uppercase text-[#371E0F]"
+style="
+font-weight:400;
+font-size:24px;
+line-height:100%;
+letter-spacing:10%;
+">
+Mariam
+</p>
 
-        <div class="flex-shrink-0 w-[240px]">
-          <img
-            src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=500&fit=crop&crop=face"
-            class="w-full h-full object-cover rounded-2xl"
-            style="min-height:280px;"
-          />
-        </div>
+<div class="flex gap-1 text-yellow-400 text-lg mt-3">
+★ ★ ★ ★ <span class="text-gray-300">★</span>
+</div>
 
-        <div class="flex-1 bg-white px-10 py-8 flex flex-col justify-between"
-             style="border-radius: 0 1rem 1rem 0;">
+</div>
 
-          <div>
-            <div class="text-[#c07a3a] text-5xl mb-4">&ldquo;</div>
-            <p class="text-gray-500 text-[15px] leading-relaxed mb-6">
-              Very professional and clean work. Highly recommended!
-            </p>
-            <p class="font-oswald font-semibold text-[13px] uppercase tracking-widest text-[#2a1f14] mb-2">
-              Aisha
-            </p>
-            <div class="flex gap-1 text-yellow-400 text-lg">
-              ★ ★ ★ ★ ★
-            </div>
-          </div>
+</div>
 
-        </div>
-      </div>
+</div>
+</div>
 
-    </div>
 
-    <!-- ================= NAV ARROWS ================= -->
-    <div class="flex justify-between items-center mt-8">
-      <button onclick="changeTestimonial(-1)"
-        class="w-9 h-9 rounded-full border border-[#c9b9a8] flex items-center justify-center hover:border-[#c07a3a] transition-colors">
-        ‹
-      </button>
+<!-- TESTIMONIAL 2 -->
+<div class="testimonial-item hidden">
 
-      <button onclick="changeTestimonial(1)"
-        class="w-9 h-9 rounded-full border border-[#c9b9a8] flex items-center justify-center hover:border-[#c07a3a] transition-colors">
-        ›
-      </button>
-    </div>
+<div class="flex flex-col md:flex-row items-stretch rounded-2xl overflow-hidden">
 
-  </div>
+<div class="flex-shrink-0 w-full md:w-[260px]">
+<img
+src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&h=500&fit=crop&crop=face"
+class="w-full h-[280px] md:h-full object-cover"/>
+</div>
+
+<div class="flex-1 bg-white px-6 md:px-10 py-8 flex flex-col justify-between">
+
+<div>
+
+<div class="text-[#DFAA8B] text-6xl mb-6 leading-none">“</div>
+
+<p class="font-oswald text-[#78718B] mb-8"
+style="
+font-weight:400;
+font-size:24px;
+line-height:100%;
+letter-spacing:10%;
+">
+Very professional and clean work. Highly recommended!
+</p>
+
+<p class="font-oswald uppercase text-[#371E0F]"
+style="
+font-weight:400;
+font-size:24px;
+line-height:100%;
+letter-spacing:10%;
+">
+Aisha
+</p>
+
+<div class="flex gap-1 text-yellow-400 text-lg mt-3">
+★ ★ ★ ★ ★
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+<!-- NAVIGATION -->
+<div class="flex justify-between items-center mt-10">
+
+<button onclick="changeTestimonial(-1)"
+class="w-10 h-10 rounded-full border border-[#c9b9a8] flex items-center justify-center hover:border-[#DFAA8B] transition-colors">
+‹
+</button>
+
+<button onclick="changeTestimonial(1)"
+class="w-10 h-10 rounded-full border border-[#c9b9a8] flex items-center justify-center hover:border-[#DFAA8B] transition-colors">
+›
+</button>
+
+</div>
+
+</div>
 
 </section>
 
+
 <script>
-  let currentIndex = 0;
-  const items = document.querySelectorAll('.testimonial-item');
 
-  function changeTestimonial(direction) {
-    items[currentIndex].classList.add('hidden');
+let currentIndex = 0;
+const items = document.querySelectorAll('.testimonial-item');
 
-    currentIndex += direction;
+function changeTestimonial(direction){
 
-    if (currentIndex < 0) currentIndex = items.length - 1;
-    if (currentIndex >= items.length) currentIndex = 0;
+items[currentIndex].classList.add('hidden');
 
-    items[currentIndex].classList.remove('hidden');
-  }
+currentIndex += direction;
+
+if(currentIndex < 0) currentIndex = items.length - 1;
+if(currentIndex >= items.length) currentIndex = 0;
+
+items[currentIndex].classList.remove('hidden');
+
+}
+
 </script>

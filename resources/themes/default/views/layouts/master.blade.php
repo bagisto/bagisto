@@ -16,8 +16,9 @@
 
     @yield('main-content')  
 
-     {{-- FOOTER --}}
+    {{-- FOOTER --}}
     @include('shop::components.footer')
+
     
 </body>
 

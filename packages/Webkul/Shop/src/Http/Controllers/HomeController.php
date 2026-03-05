@@ -32,97 +32,68 @@ class HomeController extends Controller
      */
     public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository, protected CategoryRepository $categoryRepository) {}
 
-    /**
-     * Loads the home page for the storefront.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index(){
 
-        // Fetch a single product from the flat table
-        $products = ProductFlat::where('type', 'simple')
-         ->where('status', 1)
-        ->where('visible_individually', 1)
-        ->get();
+    public function index(Request $req){
 
-      // Get root category (parent_id = null in Bagisto usually)
-     $rootCategory = Category::whereNull('parent_id')->first();
+        // service list shown on the hero banner
+        // Root category
+        $rootCategory = Category::whereNull('parent_id')->first();
+        // find all categories based on root category
+        $categories = Category::where('parent_id', $rootCategory->id)
+            ->with('translations')
+            ->get();        
 
-        if (!$rootCategory) {
-         return view('shop::home.index', [
-            'categories' => collect(),
-            'services'   => collect(),
-        ]);
-        }
+        // service location shown on hero banner 
+        $service_locations = BookingProduct::pluck('location');
 
-    $service_locations = BookingProduct::get();
+        // product as a services 
+         $services = collect();
+        $activeCategorySlug = null;
 
-    // Get child categories under root
-    $categories = Category::where('parent_id', $rootCategory->id)->get();
-
-    // Load services from first category (default)
-    $services = collect();
-
-    if ($categories->count()) {
+      // fetching product as a service as per default category
+       if ($categories->count()) {
 
         $firstCategory = $categories->first();
+        $activeCategorySlug = $firstCategory->slug;
 
-        $services = $firstCategory->products()
+    $services = ProductFlat::with(['product.images'])
     ->where('type', 'booking')
-    ->whereHas('product_flats', function ($q) {
-        $q->where('status', 1)
-          ->where('visible_individually', 1);
-    })->take(4)->get();
-    }
-    return view('shop::home.index', compact('categories', 'services','products','service_locations'));
-    }
-
-
-public function servicesByCategory(Request $req)
-{
-      // Fetching all products for the our products section on homepage
-     $products = ProductFlat::where('type', 'simple')
     ->where('status', 1)
     ->where('visible_individually', 1)
+    ->where('locale', app()->getLocale()) // current locale
+    ->where('channel', core()->getCurrentChannel()->code) // current channel
+    ->whereHas('product.categories', function ($q) use ($firstCategory) {
+        $q->where('category_id', $firstCategory->id);
+    })
+    ->take(4)
     ->get();
-     // Get root category (parent_id = null in Bagisto usually)
-    $rootCategory = Category::whereNull('parent_id')->first();
+     }
 
-    if (!$rootCategory) {
-        return view('shop::home.index', [
-            'categories' => collect(),
-            'services'   => collect(),
-        ]);
-    }
-
-    // Get child categories under root
-    $categories = Category::where('parent_id', $rootCategory->id)->get();
+    //fetching simple products  
+     $products = ProductFlat::with(['product.images'])
+    ->where('type', 'simple')
+    ->where('status', 1)
+    ->where('visible_individually', 1)
+    ->where('locale', app()->getLocale()) // current locale
+    ->where('channel', core()->getCurrentChannel()->code) // current channel
+    ->get();
  
-    // Step 1: Find translation
-    $translation = CategoryTranslation::where('slug', $req->slug)->first();
+    return view('shop::home.index', compact(
+        'service_locations',
+        'categories',
+        'services',
+        'activeCategorySlug',
+        'products'
+      ));
 
-    if (!$translation) {
-        return response()->json([]);
     }
 
-    // Step 2: Get actual category
-    $category = Category::find($translation->category_id);
 
-    if (!$category) {
-        return response()->json([]);
-    }
+public function servicesByCategory(Request $request)
+{
+    $slug = $request->get('slug');
+    dd($slug);
 
-    // Step 3: Get services
-    $services = $category->products()
-        ->where('type', 'booking')
-        ->whereHas('product_flats', function ($q) {
-            $q->where('status', 1)
-              ->where('visible_individually', 1);
-        })->take(4)->get();
-
-    $service_locations = BookingProduct::get();
-
-        return view('shop::home.index', compact('categories', 'services','products','service_locations'));
 }
 
 

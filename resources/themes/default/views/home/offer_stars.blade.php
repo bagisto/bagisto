@@ -12,7 +12,7 @@
 </script>
 </head>
 
-<section class="w-full max-w-[1400px] mx-auto px-8 py-32">
+<section class="w-full max-w-[1400px] mx-auto px-8 py-8">
   <!-- Offer Cards Row -->
   <div class="grid grid-cols-2 gap-5 mb-14">
 
@@ -20,7 +20,7 @@
     <div class="relative rounded-2xl overflow-hidden h-[200px]">
       <!-- Background Image -->
       <img
-        src="https://images.unsplash.com/photo-1519751138087-5bf79df62d5b?w=700&h=300&fit=crop"
+        src="{{ asset('images/offer_one.png') }}"
         alt="Offer 330"
         class="absolute inset-0 w-full h-full object-cover"
       />
