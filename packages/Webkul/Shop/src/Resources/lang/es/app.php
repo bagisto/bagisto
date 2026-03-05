@@ -860,7 +860,19 @@ return [
                 'translating' => 'Traduciendo...',
                 'write-a-review' => 'Escribir una reseña',
             ],
-
+            
+            'contact-us' => [
+                'about' => 'Déjanos una nota y te responderemos lo más rápido posible',
+                'desc' => '¿En qué estás pensando?',
+                'describe-here' => 'Describe aquí',
+                'email' => 'Correo electrónico',
+                'message' => 'Mensaje',
+                'name' => 'Nombre',
+                'phone-number' => 'Número de teléfono',
+                'submit' => 'Enviar',
+                'title' => 'Contáctanos',
+            ],
+            
             'add-to-cart' => 'Agregar al carrito',
             'add-to-compare' => 'Producto añadido a la lista de comparación.',
             'add-to-wishlist' => 'Agregar a la lista de deseos',

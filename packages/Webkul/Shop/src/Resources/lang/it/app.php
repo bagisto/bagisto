@@ -861,6 +861,18 @@ return [
                 'write-a-review' => 'Scrivi una recensione',
             ],
 
+            'contact-us' => [
+                'about' => 'Scrivici una nota e ti risponderemo il prima possibile',
+                'desc' => 'Cosa hai in mente?',
+                'describe-here' => 'Descrivi qui',
+                'email' => 'Email',
+                'message' => 'Messaggio',
+                'name' => 'Nome',
+                'phone-number' => 'Numero di telefono',
+                'submit' => 'Invia',
+                'title' => 'Contattaci',
+            ],
+            
             'add-to-cart' => 'Aggiungi al carrello',
             'add-to-compare' => 'Prodotto aggiunto al confronto.',
             'add-to-wishlist' => 'Aggiungi alla lista dei desideri',
