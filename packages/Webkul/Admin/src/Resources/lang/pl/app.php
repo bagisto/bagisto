@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Ustaw opcje Magic AI i zezwól na niektóre opcje automatyzacji tworzenia treści.',
-                    'title' => 'Magiczna AI',
-
-                    'settings' => [
-                        'api-key' => 'Klucz API',
-                        'enabled' => 'Włączone',
-                        'llm-api-domain' => 'Domena LLM API',
-                        'organization' => 'Organizacja',
-                        'title' => 'Ustawienia ogólne',
-                        'title-info' => 'Ulepsz swoje doświadczenie z funkcją Magic AI, wprowadzając swój wyłączny klucz API i wskazując odpowiednią organizację dla łatwej integracji. Opanuj swoje poświadczenia OpenAI i dostosuj ustawienia według swoich konkretnych potrzeb.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'Włączone',
-                        'title' => 'Generowanie treści',
-                        'title-info' => 'Ta funkcja umożliwi włączenie Magic AI dla każdego edytora WYSIWYG, w którym chcesz zarządzać treścią za pomocą sztucznej inteligencji.<br/><br/>Po włączeniu przejdź do dowolnego edytora, aby wygenerować treść.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Włączone',
-                        'title' => 'Generowanie obrazów',
-                        'title-info' => 'Ta funkcja umożliwi włączenie Magic AI dla każdego przesyłania obrazu, w którym chcesz generować obrazy za pomocą DALL-E.<br/><br/>Po włączeniu przejdź do dowolnego przesyłania obrazu, aby wygenerować obraz.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'Włączone',
-                        'title' => 'Tłumaczenie recenzji',
-                        'title-info' => 'Zapewnij klientowi lub odwiedzającemu opcję przetłumaczenia recenzji klienta na język angielski.<br/><br/>Po włączeniu przejdź do recenzji i znajdziesz przycisk „Przetłumacz na angielski”, jeśli recenzja jest w innym języku niż angielski.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'Włączone',
-                        'title' => 'Spersonalizowana wiadomość przy kasie',
-                        'title-info' => 'Stwórz spersonalizowaną wiadomość przy kasie dla klientów na stronie podziękowania, dostosowując treść do indywidualnych preferencji i poprawiając ogólne doświadczenie po zakupie.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'Podpowiedź',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'Ustawienia zgodności z GDPR',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'Maksymalny rozmiar pliku',
                         'max-url-per-file' => 'Maksymalna liczba URL na plik',
                         'title' => 'Limity plików',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Skonfiguruj ustawienia, dostawców i funkcje Magic AI.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Ogólne ustawienia Magic AI.',
+                    'title' => 'Ogólne',
+
+                    'settings' => [
+                        'enabled' => 'Włączony',
+                        'title' => 'Ustawienia',
+                        'title-info' => 'Włącz lub wyłącz Magic AI w całej aplikacji.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'Klucz API',
+                    'info' => 'Skonfiguruj klucze API dla swoich dostawców AI.',
+                    'title' => 'Dostawcy',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające API OpenAI.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające API Anthropic.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające API Google Gemini.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające API Groq.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające API xAI.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające API DeepSeek.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające API Mistral.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Skonfiguruj dane uwierzytelniające API Ollama.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Włącz i skonfiguruj funkcje AI dla panelu administracyjnego.',
+                    'title' => 'Funkcje administracyjne',
+
+                    'text-generation' => [
+                        'enabled' => 'Włączony',
+                        'providers' => 'Dostawcy',
+                        'title' => 'Generowanie tekstu',
+                        'title-info' => 'Włącz generowanie tekstu AI w edytorach WYSIWYG w panelu administracyjnym.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Włączony',
+                        'providers' => 'Dostawcy',
+                        'title' => 'Generowanie obrazów',
+                        'title-info' => 'Włącz generowanie obrazów AI dla zdjęć produktów i treści.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Włącz i skonfiguruj funkcje AI dla sklepu.',
+                    'title' => 'Funkcje sklepu',
+
+                    'review-translation' => [
+                        'enabled' => 'Włączony',
+                        'model' => 'Model',
+                        'title' => 'Tłumaczenie recenzji',
+                        'title-info' => 'Pozwól klientom tłumaczyć recenzje na ich język w sklepie.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Włączony',
+                        'model' => 'Model',
+                        'title' => 'Spersonalizowana wiadomość przy kasie',
+                        'title-info' => 'Generuj spersonalizowane wiadomości przy kasie dla klientów na stronie podziękowania.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Zastosuj',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Generuj',
                     'generating' => 'Generowanie...',
-                    'hd' => 'HD',
+                    'high' => 'Wysoka',
+                    'landscape' => 'Poziomy (3:2)',
+                    'low' => 'Niska',
+                    'medium' => 'Średnia',
                     'model' => 'Model',
                     'number-of-images' => 'Liczba obrazów',
+                    'portrait' => 'Pionowy (2:3)',
                     'prompt' => 'Monit',
                     'quality' => 'Jakość',
                     'regenerate' => 'Regeneruj',
                     'regenerating' => 'Regenerowanie...',
                     'size' => 'Rozmiar',
-                    'standard' => 'Standard',
+                    'square' => 'Kwadrat (1:1)',
                     'title' => 'Generacja Obrazów z Wykorzystaniem AI',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'Przód',
                     'next' => 'Następny',
                     'size' => 'Rozmiar',
+                    'square' => 'Kwadrat (1:1)',
                     'use-cases' => 'Zastosowanie',
                     'zoom' => 'Powiększenie',
                 ],

@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'මැජික් AI විකල්ප සකසන්න සහ අන්තර්ගතය ස්වයංක්‍රීයව නිර්මාණය කිරීමට විකල්ප කිහිපයක් සක්‍රීය කරන්න.',
-                    'title' => 'මැජික් එයි',
-
-                    'settings' => [
-                        'api-key' => 'API යතුර',
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'llm-api-domain' => 'LLM API ඩොමේන්',
-                        'organization' => 'සංවිධානය',
-                        'title' => 'සාමාන්‍ය සැකසීම්',
-                        'title-info' => 'ඔබේ විවිධ අවස්ථාවක් සඳහා Magic AI විස්තර සැකසීම් සඳහා ඔබේ විවිධ API යතුර සහ අන්තර්ගතය අතුරුම්කරන්න. OpenAI හි ඔබේ විවිධ අංකයන් සහාය සඳහා සැකසීම් අනුව ඔබේ විවිධ අවස්ථාවක් සක්‍රිය කරන්න.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'title' => 'අන්තර්ගතය සැකසීම්',
-                        'title-info' => 'මෙම විස්තරය සැකසීම සඳහා Magic AI සක්‍රිය කරයි, ඔබට AI භාවිතා කරන්නේ කොටස් සඳහා අන්තර්ගතය කළ හැකි විකල්පයක් සඳහා.<br/><br/>සක්‍රිය කිරීමෙන් පෙර කිසිදු සංවිධානයක් සක්‍රිය වීමට යම් සංවිධානයක් සඳහා යෙදුමක් යොමු කරන්න.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'title' => 'රූප සැකසීම්',
-                        'title-info' => 'මෙම විස්තරය සඳහා Magic AI සක්‍රිය කරයි, ඔබට DALL-E භාවිතා කරන්නේ රූප උදව් කිරීමට කොටස් සඳහා අන්තර්ගතය කළ හැකි විකල්පයක් සඳහා.<br/><br/>සක්‍රිය කිරීමෙන් පෙර කිසිදු රූපයක් උදව් කිරීමට යම් රූපයක් උදව් කිරීමට යොමු කරන්න.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'සක්‍රීයයි',
-                        'title' => 'සමාලෝචන පරිවර්තනය',
-                        'title-info' => 'පාරිභෝගික සමාලෝචනය ඉංග්‍රීසිට පරිවර්තනය කිරීමට පාරිභෝගිකයා හෝ සංචාරකයාට විකල්පයක් සපයන්න.<br/><br/>සක්‍රීය කිරීමෙන් පසු, සමාලෝචනයට යන්න, ඔබට "ඉංග්‍රීසිට පරිවර්තනය කරන්න" බොත්තමක් සොයාගත හැකිය, ඔබේ සමාලෝචනය ඉංග්‍රීසි නොවන විට.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'සක්‍රීයයි',
-                        'title' => 'පිටවීමේ පණිවිඩය',
-                        'title-info' => 'පාරිභෝගිකයින් සඳහා ස්වයංක්‍රීය පිටවීමේ පණිවිඩයක් නිර්මාණය කරන්න, ස්වයංක්‍රීයව පසු-මිලදී ගැනීමේ අත්දැකීම වැඩිදියුණු කිරීම සඳහා අන්තර්ගතය අභිරුචි කරන්න.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'ප්‍රවර්ධනය',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR අනුකූලතා සැකසුම්',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'උපරිම ගොනුවේ විශාලත්වය',
                         'max-url-per-file' => 'ගොනුවකට උපරිම URL සංඛ්‍යාව',
                         'title' => 'ගොනු සීමා',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Magic AI සැකසුම්, සපයන්නන් සහ විශේෂාංග වින්‍යාස කරන්න.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'සාමාන්‍ය Magic AI සැකසුම්.',
+                    'title' => 'සාමාන්‍ය',
+
+                    'settings' => [
+                        'enabled' => 'සක්‍රිය',
+                        'title' => 'සැකසුම්',
+                        'title-info' => 'ඔබගේ සම්පූර්ණ යෙදුම පුරා Magic AI සක්‍රිය හෝ අක්‍රිය කරන්න.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API යතුර',
+                    'info' => 'ඔබගේ AI සපයන්නන් සඳහා API යතුරු වින්‍යාස කරන්න.',
+                    'title' => 'සපයන්නන්',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'ඔබගේ OpenAI API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'ඔබගේ Anthropic API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'ඔබගේ Google Gemini API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'ඔබගේ Groq API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'ඔබගේ xAI API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'ඔබගේ DeepSeek API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'ඔබගේ Mistral API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'ඔබගේ Ollama API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'පරිපාලක පැනලය සඳහා AI විශේෂාංග සක්‍රිය සහ වින්‍යාස කරන්න.',
+                    'title' => 'පරිපාලක විශේෂාංග',
+
+                    'text-generation' => [
+                        'enabled' => 'සක්‍රිය',
+                        'providers' => 'සපයන්නන්',
+                        'title' => 'පෙළ ජනනය',
+                        'title-info' => 'පරිපාලක පැනලයේ WYSIWYG සංස්කාරකවල AI-බලගැන්වූ පෙළ ජනනය සක්‍රිය කරන්න.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'සක්‍රිය',
+                        'providers' => 'සපයන්නන්',
+                        'title' => 'රූප ජනනය',
+                        'title-info' => 'නිෂ්පාදන සහ අන්තර්ගත රූප සඳහා AI-බලගැන්වූ රූප ජනනය සක්‍රිය කරන්න.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'වෙළඳසැල සඳහා AI විශේෂාංග සක්‍රිය සහ වින්‍යාස කරන්න.',
+                    'title' => 'වෙළඳසැල විශේෂාංග',
+
+                    'review-translation' => [
+                        'enabled' => 'සක්‍රිය',
+                        'model' => 'මාදිලිය',
+                        'title' => 'සමාලෝචන පරිවර්තනය',
+                        'title-info' => 'වෙළඳසැලෙහි පාරිභෝගිකයින්ට සමාලෝචන ඔවුන්ගේ භාෂාවට පරිවර්තනය කිරීමට ඉඩ දෙන්න.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'සක්‍රිය',
+                        'model' => 'මාදිලිය',
+                        'title' => 'පුද්ගලීකරණය කළ ගෙවීම් පණිවිඩය',
+                        'title-info' => 'ස්තුති පිටුවේ පාරිභෝගිකයින් සඳහා පුද්ගලීකරණය කළ ගෙවීම් පණිවිඩ ජනනය කරන්න.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'අයැදීම',
-                    'dall-e-2' => 'ඩොල්.ඊ 2',
-                    'dall-e-3' => 'ඩොල්.ඊ 3',
                     'generate' => 'උදාහරින්න',
                     'generating' => 'උදාහරින්නෙම...',
-                    'hd' => 'HD',
+                    'high' => 'ඉහළ',
+                    'landscape' => 'තිරස් (3:2)',
+                    'low' => 'පහළ',
+                    'medium' => 'මධ්‍යම',
                     'model' => 'ආකෘතිය',
                     'number-of-images' => 'රූපවාහින් ගන්නවාද?',
+                    'portrait' => 'සිරස් (2:3)',
                     'prompt' => 'ඉල්ලීම',
                     'quality' => 'වර්ගය',
                     'regenerate' => 'නැවතුම් කරන්න',
                     'regenerating' => 'නැවතුම් කරමු...',
                     'size' => 'ප්‍රමාණය',
-                    'standard' => 'සම්මත',
+                    'square' => 'සම------ුරස්‍ර (1:1)',
                     'title' => 'මැජික් පින්තුර සහිතව කියවන්න',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'මුර',
                     'next' => 'ඊළඟ',
                     'size' => 'ප්‍රමාණය',
+                    'square' => 'සම------ුරස්‍ර (1:1)',
                     'use-cases' => 'භාවිතා කිරීම්',
                     'zoom' => 'ස්මෙයිල්',
                 ],

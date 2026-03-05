@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'تعيين خيارات الذكاء الاصطناعي السحري والسماح ببعض الخيارات لأتمتة إنشاء المحتوى.',
-                    'title' => 'الذكاء الاصطناعي السحري',
-
-                    'settings' => [
-                        'api-key' => 'مفتاح API',
-                        'enabled' => 'ممكّن',
-                        'llm-api-domain' => 'نطاق LLM API',
-                        'organization' => 'المؤسسة',
-                        'title' => 'الإعدادات العامة',
-                        'title-info' => 'قم بتعزيز تجربتك مع ميزة الذكاء الاصطناعي السحري عن طريق إدخال مفتاح API الحصري الخاص بك وتحديد المؤسسة المناسبة للتكامل السهل. استول على السيطرة على بيانات اعتماد OpenAI الخاصة بك وقم بتخصيص الإعدادات وفقًا لاحتياجاتك الخاصة.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'ممكّن',
-                        'title' => 'إنشاء المحتوى',
-                        'title-info' => 'سيتيح هذا الميزة الذكاء الاصطناعي السحري لكل محرر WYSIWYG، حيث ترغب في إدارة المحتوى باستخدام الذكاء الاصطناعي.<br/><br/>عند التمكين، انتقل إلى أي محرر لإنشاء المحتوى.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'ممكّن',
-                        'title' => 'إنشاء الصور',
-                        'title-info' => 'سيتيح هذا الميزة الذكاء الاصطناعي السحري لكل تحميل صورة، حيث ترغب في إنشاء صور باستخدام DALL-E.<br/><br/>عند التمكين، انتقل إلى أي تحميل صورة لإنشاء صورة.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'ممكّن',
-                        'title' => 'ترجمة المراجعة',
-                        'title-info' => 'توفير خيار للعميل أو الزائر لترجمة مراجعة العميل إلى الإنجليزية.<br/><br/>عند التمكين، انتقل إلى المراجعة وستجد الزر "ترجمة إلى الإنجليزية" إذا كانت المراجعة بغير الإنجليزية.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'ممكّن',
-                        'title' => 'رسالة الدفع المخصصة',
-                        'title-info' => 'قم بإنشاء رسالة دفع مخصصة للعملاء على صفحة الشكر، وتخصيص المحتوى ليتناسب مع تفضيلات الأفراد وتعزيز تجربة ما بعد الشراء بشكل عام.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'المحفز',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'إعدادات الامتثال لـ GDPR',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'الحد الأقصى لحجم الملف',
                         'max-url-per-file' => 'الحد الأقصى لعدد عناوين URL لكل ملف',
                         'title' => 'حدود الملف',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'إعدادات الذكاء الاصطناعي، المزودين، والميزات.',
+                'title' => 'الذكاء الاصطناعي',
+
+                'general' => [
+                    'info' => 'إعدادات الذكاء الاصطناعي العامة.',
+                    'title' => 'عام',
+
+                    'settings' => [
+                        'enabled' => 'مُفعّل',
+                        'title' => 'الإعدادات',
+                        'title-info' => 'تفعيل أو تعطيل الذكاء الاصطناعي عبر التطبيق بالكامل.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'مفتاح API',
+                    'info' => 'إعداد مفاتيح API لمزودي الذكاء الاصطناعي.',
+                    'title' => 'المزودون',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'إعداد بيانات اعتماد OpenAI API.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'إعداد بيانات اعتماد Anthropic API.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'إعداد بيانات اعتماد Google Gemini API.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'إعداد بيانات اعتماد Groq API.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'إعداد بيانات اعتماد xAI API.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'إعداد بيانات اعتماد DeepSeek API.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'إعداد بيانات اعتماد Mistral API.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'إعداد بيانات اعتماد Ollama API.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'تفعيل وإعداد ميزات الذكاء الاصطناعي للوحة الإدارة.',
+                    'title' => 'ميزات الإدارة',
+
+                    'text-generation' => [
+                        'enabled' => 'مُفعّل',
+                        'providers' => 'المزودون',
+                        'title' => 'إنشاء النصوص',
+                        'title-info' => 'تفعيل إنشاء النصوص بالذكاء الاصطناعي في محررات WYSIWYG في لوحة الإدارة.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'مُفعّل',
+                        'providers' => 'المزودون',
+                        'title' => 'إنشاء الصور',
+                        'title-info' => 'تفعيل إنشاء الصور بالذكاء الاصطناعي لصور المنتجات والمحتوى.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'تفعيل وإعداد ميزات الذكاء الاصطناعي لواجهة المتجر.',
+                    'title' => 'ميزات واجهة المتجر',
+
+                    'review-translation' => [
+                        'enabled' => 'مُفعّل',
+                        'model' => 'النموذج',
+                        'title' => 'ترجمة المراجعات',
+                        'title-info' => 'السماح للعملاء بترجمة المراجعات إلى لغتهم في واجهة المتجر.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'مُفعّل',
+                        'model' => 'النموذج',
+                        'title' => 'رسالة الدفع المخصصة',
+                        'title-info' => 'إنشاء رسائل دفع مخصصة للعملاء في صفحة الشكر.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'تطبيق',
-                    'dall-e-2' => 'دال.إ 2',
-                    'dall-e-3' => 'دال.إ 3',
                     'generate' => 'إنشاء',
                     'generating' => 'جاري الإنشاء...',
-                    'hd' => 'عالي الجودة',
+                    'high' => 'عالية',
+                    'landscape' => 'أفقي (3:2)',
+                    'low' => 'منخفضة',
+                    'medium' => 'متوسطة',
                     'model' => 'نموذج',
                     'number-of-images' => 'عدد الصور',
+                    'portrait' => 'عمودي (2:3)',
                     'prompt' => 'موجّه',
                     'quality' => 'الجودة',
                     'regenerate' => 'إعادة إنشاء',
                     'regenerating' => 'جاري إعادة الإنشاء...',
                     'size' => 'الحجم',
-                    'standard' => 'قياسي',
+                    'square' => 'مربع (1:1)',
                     'title' => 'إنشاء صورة بالذكاء الاصطناعي',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'الواجهة الأمامية',
                     'next' => 'التالي',
                     'size' => 'الحجم',
+                    'square' => 'مربع (1:1)',
                     'use-cases' => 'حالات الاستخدام',
                     'zoom' => 'التكبير',
                 ],

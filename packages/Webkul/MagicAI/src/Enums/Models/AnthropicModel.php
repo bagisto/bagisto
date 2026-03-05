@@ -8,22 +8,20 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum AnthropicModel: string implements AiModelContract
 {
     /**
-     * Claude 4 family.
+     * Current Anthropic text models (ordered from most to least capable). All are suitable for chat
+     * and non-chat use cases.
      */
     case ClaudeOpus46 = 'claude-opus-4-6';
     case ClaudeSonnet46 = 'claude-sonnet-4-6';
     case ClaudeHaiku45 = 'claude-haiku-4-5-20251001';
 
     /**
-     * Claude 3.5 family.
+     * Older Anthropic text models (ordered from most to least capable). All are suitable for chat
+     * and non-chat use cases.
      */
-    case Claude35Sonnet = 'claude-3-5-sonnet-20241022';
-    case Claude35Haiku = 'claude-3-5-haiku-20241022';
-
-    /**
-     * Claude 3 family.
-     */
-    case Claude3Haiku = 'claude-3-haiku-20240307';
+    case ClaudeOpus45 = 'claude-opus-4-5-20251101';
+    case ClaudeSonnet45 = 'claude-sonnet-4-5-20250929';
+    case ClaudeSonnet4 = 'claude-sonnet-4-20250514';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -31,6 +29,21 @@ enum AnthropicModel: string implements AiModelContract
     public function provider(): Lab
     {
         return Lab::Anthropic;
+    }
+
+    /**
+     * Get the human-readable display name.
+     */
+    public function label(): string
+    {
+        return match ($this) {
+            self::ClaudeOpus46 => 'Claude Opus 4.6',
+            self::ClaudeOpus45 => 'Claude Opus 4.5',
+            self::ClaudeSonnet46 => 'Claude Sonnet 4.6',
+            self::ClaudeSonnet45 => 'Claude Sonnet 4.5',
+            self::ClaudeSonnet4 => 'Claude Sonnet 4',
+            self::ClaudeHaiku45 => 'Claude Haiku 4.5',
+        };
     }
 
     /**
@@ -50,26 +63,11 @@ enum AnthropicModel: string implements AiModelContract
     }
 
     /**
-     * Get the human-readable display name.
-     */
-    public function label(): string
-    {
-        return match ($this) {
-            self::ClaudeOpus46 => 'Claude Opus 4.6',
-            self::ClaudeSonnet46 => 'Claude Sonnet 4.6',
-            self::ClaudeHaiku45 => 'Claude Haiku 4.5',
-            self::Claude35Sonnet => 'Claude 3.5 Sonnet',
-            self::Claude35Haiku => 'Claude 3.5 Haiku',
-            self::Claude3Haiku => 'Claude 3 Haiku',
-        };
-    }
-
-    /**
      * Get the recommended default model for text generation.
      */
     public static function defaultTextModel(): ?static
     {
-        return self::Claude35Haiku;
+        return self::ClaudeHaiku45;
     }
 
     /**

@@ -1,13 +1,11 @@
 @php
     use Webkul\MagicAI\AiProvider;
 
-    $provider = core()->getConfigData('general.magic_ai.image_generation.provider') ?? AiProvider::defaultImageProvider();
-
-    $activeModel = core()->getConfigData('general.magic_ai.image_generation.model')
-        ?? AiProvider::defaultImageModel($provider)?->value
-        ?? '';
-
-    $modelOptions = AiProvider::imageModelSelectOptions($provider);
+    $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.image_generation.providers') ?? ''));
+    
+    $models = AiProvider::modelsForProviders($enabledProviders, 'image');
+    
+    $defaultModel = $models[0]['value'] ?? '';
 @endphp
 
 @props([
@@ -212,16 +210,16 @@
                                                 v-model="ai.size"
                                                 :label="trans('admin::app.components.media.images.ai-generation.size')"
                                             >
-                                                <option value="1024x1024">
-                                                    @lang('admin::app.components.media.images.ai-generation.1024x1024')
+                                                <option value="1:1">
+                                                    @lang('admin::app.components.media.images.ai-generation.square')
                                                 </option>
 
-                                                <option value="1024x1792">
-                                                    @lang('admin::app.components.media.images.ai-generation.1024x1792')
+                                                <option value="2:3">
+                                                    @lang('admin::app.components.media.images.ai-generation.portrait')
                                                 </option>
 
-                                                <option value="1792x1024">
-                                                    @lang('admin::app.components.media.images.ai-generation.1792x1024')
+                                                <option value="3:2">
+                                                    @lang('admin::app.components.media.images.ai-generation.landscape')
                                                 </option>
                                             </x-admin::form.control-group.control>
 
@@ -240,16 +238,16 @@
                                                 v-model="ai.quality"
                                                 :label="trans('admin::app.components.media.images.ai-generation.quality')"
                                             >
-                                                <option value="standard">
-                                                    @lang('admin::app.components.media.images.ai-generation.standard')
+                                                <option value="high">
+                                                    @lang('admin::app.components.media.images.ai-generation.high')
                                                 </option>
 
-                                                <option value="hd">
-                                                    @lang('admin::app.components.media.images.ai-generation.hd')
+                                                <option value="medium">
+                                                    @lang('admin::app.components.media.images.ai-generation.medium')
                                                 </option>
 
-                                                <option value="">
-                                                    Auto
+                                                <option value="low">
+                                                    @lang('admin::app.components.media.images.ai-generation.low')
                                                 </option>
                                             </x-admin::form.control-group.control>
 
@@ -272,7 +270,7 @@
                                                     v-for="option in ai.models"
                                                     :key="option.value"
                                                     :value="option.value"
-                                                    v-text="option.label"
+                                                    v-text="option.title"
                                                 ></option>
                                             </x-admin::form.control-group.control>
 
@@ -472,19 +470,19 @@
                     isLoading: false,
 
                     ai: {
-                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
+                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled') }}"),
 
-                        models: {!! json_encode($modelOptions) !!},
+                        models: {!! json_encode($models) !!},
 
-                        model: "{{ $activeModel }}",
+                        model: "{{ $defaultModel }}",
 
                         prompt: null,
 
                         n: 1,
 
-                        size: '1024x1024',
+                        size: '1:1',
 
-                        quality: 'standard',
+                        quality: 'medium',
 
                         images: [],
                     },
@@ -585,19 +583,19 @@
 
                 resetAIModal() {
                     this.ai = {
-                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.image_generation.enabled') }}"),
+                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled') }}"),
 
-                        models: {!! json_encode($modelOptions) !!},
+                        models: {!! json_encode($models) !!},
 
-                        model: "{{ $activeModel }}",
+                        model: "{{ $defaultModel }}",
 
                         prompt: null,
 
                         n: 1,
 
-                        size: '1024x1024',
+                        size: '1:1',
 
-                        quality: 'standard',
+                        quality: 'medium',
 
                         images: [],
                     };

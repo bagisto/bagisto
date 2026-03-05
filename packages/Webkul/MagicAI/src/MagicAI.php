@@ -9,28 +9,32 @@ use function Laravel\Ai\agent;
 class MagicAI
 {
     /**
-     * Generate text content from a prompt using the content_generation settings.
+     * Generate text content from a prompt.
+     *
+     * The provider is resolved automatically from the model name.
      */
     public function generateContent(string $prompt, ?string $model = null): string
     {
-        ['provider' => $provider, 'model' => $configuredModel] = $this->loadFeatureConfig('content_generation');
+        $provider = $this->prepareProvider($model);
 
         return trim(
-            agent()->prompt($prompt, provider: $provider, model: $model ?? $configuredModel)->text
+            agent()->prompt($prompt, provider: $provider, model: $model)->text
         );
     }
 
     /**
-     * Generate images from a prompt using the image_generation settings.
+     * Generate images from a prompt.
+     *
+     * The provider is resolved automatically from the model name.
      *
      * @param  array{n?: int, size?: string, quality?: string}  $options
      * @return array<int, array{url: string}>
      */
     public function generateImage(string $prompt, array $options = [], ?string $model = null): array
     {
-        ['provider' => $provider, 'model' => $configuredModel] = $this->loadFeatureConfig('image_generation');
+        $provider = $this->prepareProvider($model);
 
-        return $this->executeImages($prompt, $options, $provider, $model ?? $configuredModel);
+        return $this->executeImages($prompt, $options, $provider, $model);
     }
 
     /**
@@ -38,7 +42,13 @@ class MagicAI
      */
     public function checkoutMessage(mixed $order): string
     {
-        return $this->generateContent($this->buildCheckoutPrompt($order));
+        $model = $this->loadStorefrontModel('checkout_message');
+
+        $provider = $this->prepareProvider($model);
+
+        return trim(
+            agent()->prompt($this->buildCheckoutPrompt($order), provider: $provider, model: $model)->text
+        );
     }
 
     /**
@@ -54,59 +64,79 @@ class MagicAI
             'Translation:',
         ]);
 
-        return $this->generateContent($prompt);
+        $model = $this->loadStorefrontModel('review_translation');
+
+        $provider = $this->prepareProvider($model);
+
+        return trim(
+            agent()->prompt($prompt, provider: $provider, model: $model)->text
+        );
     }
 
     /**
-     * Resolve the provider and model for a named feature from admin config.
-     *
-     * Injects the stored API key into the Laravel AI runtime config.
+     * Resolve the model for a named storefront feature from admin config.
      *
      * Falls back to the enum's recommended default when no model is saved.
-     *
-     * @return array{provider: ?string, model: ?string}
      */
-    protected function loadFeatureConfig(string $feature): array
+    protected function loadStorefrontModel(string $feature): ?string
     {
-        $configKey = "general.magic_ai.{$feature}";
+        $model = core()->getConfigData("magic_ai.storefront_features.{$feature}.model") ?: null;
 
-        $provider = core()->getConfigData("{$configKey}.provider");
-
-        if ($provider && array_key_exists($provider, config('ai.providers', []))) {
-            $this->injectApiKey($provider, core()->getConfigData("{$configKey}.api_key"));
-        } else {
-            $provider = null;
-        }
-
-        $model = core()->getConfigData("{$configKey}.model") ?: null;
-
-        if (! $model && $provider) {
-            $default = $feature === 'image_generation'
-                ? AiProvider::defaultImageModel($provider)
-                : AiProvider::defaultTextModel($provider);
+        if (! $model) {
+            $default = AiProvider::defaultTextModel(AiProvider::defaultTextProvider());
 
             $model = $default?->value;
         }
 
-        return ['provider' => $provider, 'model' => $model];
+        return $model;
     }
 
     /**
-     * Write the API key into the Laravel AI runtime config for the given provider.
+     * Resolve the provider from a model, validate it, and inject the stored API key.
+     *
+     * Model-first flow:
+     *   1. Resolve the model string to its AiModelContract enum case.
+     *   2. Derive the provider from the model.
+     *   3. Verify the provider is supported by the Laravel AI SDK.
+     *   4. Inject the Bagisto-stored API key into Laravel AI configuration.
+     *   5. Return the provider string so callers can pass it to agent()/Image.
      */
-    protected function injectApiKey(string $provider, ?string $apiKey): void
+    protected function prepareProvider(?string $model): ?string
     {
+        if (! $model) {
+            return null;
+        }
+
+        $modelEnum = AiProvider::resolveModel($model);
+
+        if (! $modelEnum) {
+            return null;
+        }
+
+        $provider = $modelEnum->provider()->value;
+
+        if (! AiProvider::isProviderSupported($provider)) {
+            throw new \RuntimeException("AI provider [{$provider}] is not supported by the Laravel AI SDK.");
+        }
+
+        $apiKey = core()->getConfigData("magic_ai.providers.{$provider}.api_key");
+
         if ($apiKey) {
             config(["ai.providers.{$provider}.key" => $apiKey]);
         }
+
+        return $provider;
     }
 
     /**
      * Execute image generation requests and return base64-encoded results.
      *
-     * Supported sizes:   1024x1024 (square) · 1792x1024 (landscape) · 1024x1792 (portrait)
+     * Supported aspect ratios: 1:1 (square) · 3:2 (landscape) · 2:3 (portrait)
      *
-     * Supported quality: 'hd' → 'high'  |  'standard' → 'medium'
+     * Supported quality: 'high' · 'medium' · 'low'
+     *
+     * For providers that do not handle size/quality via API parameters
+     * (e.g. xAI), these requirements are embedded directly into the prompt.
      *
      * @param  array{n?: int, size?: string, quality?: string}  $options
      * @return array<int, array{url: string}>
@@ -115,18 +145,20 @@ class MagicAI
     {
         $count = max((int) ($options['n'] ?? 1), 1);
 
-        $size = $options['size'] ?? '1024x1024';
+        $aspectRatio = $this->resolveAspectRatio($options['size'] ?? null);
 
         $quality = $this->resolveQuality($options['quality'] ?? null);
+
+        // For providers that don't handle size/quality via API parameters,
+        // encode these requirements directly into the prompt.
+        $imagePrompt = $this->supportsNativeImageOptions($provider)
+            ? $prompt
+            : $this->enrichImagePrompt($prompt, $aspectRatio, $quality);
 
         $images = [];
 
         for ($i = 0; $i < $count; $i++) {
-            $request = match ($size) {
-                '1792x1024' => Image::of($prompt)->landscape(),
-                '1024x1792' => Image::of($prompt)->portrait(),
-                default => Image::of($prompt)->square(),
-            };
+            $request = Image::of($imagePrompt)->size($aspectRatio);
 
             if ($quality) {
                 $request->quality($quality);
@@ -143,24 +175,77 @@ class MagicAI
     }
 
     /**
+     * Map the frontend size value to an SDK aspect ratio.
+     */
+    protected function resolveAspectRatio(?string $size): string
+    {
+        return match ($size) {
+            '3:2' => '3:2',
+            '2:3' => '2:3',
+            default => '1:1',
+        };
+    }
+
+    /**
      * Map the frontend quality string to the SDK's quality constant.
      */
     protected function resolveQuality(?string $quality): ?string
     {
         return match ($quality) {
-            'hd' => 'high',
-            'standard' => 'medium',
+            'high' => 'high',
+            'medium' => 'medium',
+            'low' => 'low',
             default => null,
         };
     }
 
     /**
-     * Build the checkout success message prompt from config and order context.
+     * Check whether the given provider handles size/quality via API parameters.
+     *
+     * Providers that return empty from defaultImageOptions() (e.g. xAI)
+     * do not support these options natively, so we embed them in the prompt.
+     */
+    protected function supportsNativeImageOptions(?string $provider): bool
+    {
+        return in_array($provider, ['openai', 'gemini']);
+    }
+
+    /**
+     * Enrich the image prompt with size and quality requirements.
+     *
+     * Used for providers that do not handle these options natively.
+     */
+    protected function enrichImagePrompt(string $prompt, string $aspectRatio, ?string $quality): string
+    {
+        $orientation = match ($aspectRatio) {
+            '3:2' => 'landscape orientation (wider than tall)',
+            '2:3' => 'portrait orientation (taller than wide)',
+            default => 'square format (equal width and height)',
+        };
+
+        $hints = [$orientation];
+
+        if ($quality) {
+            $qualityHint = match ($quality) {
+                'high' => 'high detail and resolution',
+                'medium' => 'standard detail and resolution',
+                'low' => 'basic detail, quick draft quality',
+                default => null,
+            };
+
+            if ($qualityHint) {
+                $hints[] = $qualityHint;
+            }
+        }
+
+        return $prompt."\n\nImage requirements: ".implode(', ', $hints).'.';
+    }
+
+    /**
+     * Build the checkout success message prompt from order context.
      */
     protected function buildCheckoutPrompt(mixed $order): string
     {
-        $basePrompt = (string) (core()->getConfigData('general.magic_ai.default_prompts.checkout_message') ?? '');
-
         $productLines = '';
 
         foreach ($order->items as $item) {
@@ -169,12 +254,13 @@ class MagicAI
             $productLines .= 'Price: '.core()->formatPrice($item->total)."\n\n";
         }
 
-        return implode("\n\n", array_filter([
-            $basePrompt,
+        return implode("\n\n", [
+            'Generate a personalized checkout success message for the customer.',
+            'Return ONLY plain text. Do not use Markdown, HTML, bold, italic, headings, bullet points, or any formatting syntax.',
             "Product Details:\n{$productLines}",
             "Customer Details:\n{$order->customer_full_name}",
             'Current Locale: '.core()->getCurrentLocale()->name,
             'Store Name: '.core()->getCurrentChannel()->name,
-        ]));
+        ]);
     }
 }

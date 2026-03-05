@@ -79,9 +79,8 @@ class OnepageController extends Controller
         }
 
         if (
-            core()->getConfigData('general.magic_ai.settings.enabled')
-            && core()->getConfigData('general.magic_ai.content_generation.checkout_message')
-            && ! empty(core()->getConfigData('general.magic_ai.default_prompts.checkout_message'))
+            core()->getConfigData('magic_ai.general.settings.enabled')
+            && core()->getConfigData('magic_ai.storefront_features.checkout_message.enabled')
         ) {
             try {
                 $order->checkout_message = MagicAI::checkoutMessage($order);

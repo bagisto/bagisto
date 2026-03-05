@@ -46,7 +46,6 @@
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
             :label="$attribute->admin_name"
             :tinymce="(bool) $attribute->enable_wysiwyg"
-            :prompt="core()->getConfigData('general.magic_ai.default_prompts.product_' . $attribute->code)"
         />
 
         @break

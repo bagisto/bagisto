@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Configurar opcions de Magic AI.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'Clau d\'API',
-                        'enabled' => 'Habilitat',
-                        'llm-api-domain' => 'Dominio d\'API LLM',
-                        'organization' => 'Organització',
-                        'title' => 'Configuració General',
-                        'title-info' => 'Millora la teva experiència amb la funció de Magic AI introduint la teva exclusiva Clau d\'API i indicant l\'Organització pertinent per a una integració sense esforços. Pren el control de les teves credencials d\'OpenAI i personalitza la configuració segons les teves necessitats específiques.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'Habilitat',
-                        'title' => 'Generació de Contingut',
-                        'title-info' => 'Aquesta funció habilitarà el Magic AI per a cada editor WYSIWYG, on vulguis gestionar el contingut utilitzant la IA.<br/><br/>Quan estigui habilitat, ves a qualsevol editor per generar contingut.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Habilitat',
-                        'title' => 'Generació d\'Imatges',
-                        'title-info' => 'Aquesta funció habilitarà el Magic AI per a cada càrrega d\'imatges, on vulguis generar imatges utilitzant DALL-E.<br/><br/>Quan estigui habilitat, ves a qualsevol càrrega d\'imatges per generar imatges.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'Habilitat',
-                        'title' => 'Traducció de ressenyes',
-                        'title-info' => 'Proporciona l\'opció al client o visitant de traduir la ressenya del client a l\'anglès.<br/><br/>Quan estigui habilitat, ves a la ressenya i trobaràs el botó "Traduir a l\'anglès" si la ressenya és en un altre idioma que no sigui l\'anglès.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'Habilitat',
-                        'title' => 'Missatge Personalitzat de Finalització de Compra',
-                        'title-info' => 'Crea un missatge personalitzat de finalització de compra per als clients a la pàgina de gràcies, adaptant el contingut per ressonar amb les preferències individuals i millorant l\'experiència post-compra.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'Indicació',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'Configuració de compliment de GDPR',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'Mida màxima de l\'arxiu',
                         'max-url-per-file' => 'Nombre màxim d\'URL per arxiu',
                         'title' => 'Límits d\'arxius',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configureu els paràmetres, proveïdors i funcions de Magic AI.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Configuració general de Magic AI.',
+                    'title' => 'General',
+
+                    'settings' => [
+                        'enabled' => 'Activat',
+                        'title' => 'Configuració',
+                        'title-info' => 'Activeu o desactiveu Magic AI a tota l\'aplicació.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'Clau API',
+                    'info' => 'Configureu les claus API per als vostres proveïdors d\'IA.',
+                    'title' => 'Proveïdors',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configureu les credencials de l\'API d\'OpenAI.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configureu les credencials de l\'API d\'Anthropic.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configureu les credencials de l\'API de Google Gemini.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configureu les credencials de l\'API de Groq.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configureu les credencials de l\'API de xAI.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configureu les credencials de l\'API de DeepSeek.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configureu les credencials de l\'API de Mistral.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configureu les credencials de l\'API d\'Ollama.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Activeu i configureu les funcions d\'IA per al panell d\'administració.',
+                    'title' => 'Funcions d\'administració',
+
+                    'text-generation' => [
+                        'enabled' => 'Activat',
+                        'providers' => 'Proveïdors',
+                        'title' => 'Generació de text',
+                        'title-info' => 'Activeu la generació de text amb IA als editors WYSIWYG del panell d\'administració.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Activat',
+                        'providers' => 'Proveïdors',
+                        'title' => 'Generació d\'imatges',
+                        'title-info' => 'Activeu la generació d\'imatges amb IA per a imatges de productes i contingut.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Activeu i configureu les funcions d\'IA per a la botiga.',
+                    'title' => 'Funcions de la botiga',
+
+                    'review-translation' => [
+                        'enabled' => 'Activat',
+                        'model' => 'Model',
+                        'title' => 'Traducció de ressenyes',
+                        'title-info' => 'Permeteu als clients traduir ressenyes al seu idioma a la botiga.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Activat',
+                        'model' => 'Model',
+                        'title' => 'Missatge de compra personalitzat',
+                        'title-info' => 'Genereu missatges de compra personalitzats per als clients a la pàgina de gràcies.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Només es permeten arxius d\'imatge (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Aplicar',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Generar',
                     'generating' => 'Generant...',
-                    'hd' => 'HD',
+                    'high' => 'Alta',
+                    'landscape' => 'Horitzontal (3:2)',
+                    'low' => 'Baixa',
+                    'medium' => 'Mitjana',
                     'model' => 'Model',
                     'number-of-images' => 'Número d\'Imatges',
+                    'portrait' => 'Vertical (2:3)',
                     'prompt' => 'Indicació',
                     'quality' => 'Qualitat',
                     'regenerate' => 'Regenerar',
                     'regenerating' => 'Regenerant...',
                     'size' => 'Mida',
-                    'standard' => 'Estàndard',
+                    'square' => 'Quadrat (1:1)',
                     'title' => 'Generació d\'Imatges amb IA',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'Frontal',
                     'next' => 'Següent',
                     'size' => 'Mida',
+                    'square' => 'Quadrat (1:1)',
                     'use-cases' => 'Casos d\'Ús',
                     'zoom' => 'Zoom',
                 ],

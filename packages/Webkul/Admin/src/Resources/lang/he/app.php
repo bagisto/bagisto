@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'הגדר אפשרויות Magic AI ואפשר אפשרויות מסוימות לאוטומציה של יצירת תוכן.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'מפתח API',
-                        'enabled' => 'מופעל',
-                        'llm-api-domain' => 'תחום LLM API',
-                        'organization' => 'ארגון',
-                        'title' => 'הגדרות כלליות',
-                        'title-info' => 'שפר את החוויה שלך עם תכונת Magic AI על ידי הזנת מפתח API בלעדי וציון הארגון הרלוונטי לשילוב ללא מאמץ. תפוס בידיים את השליטה על פרטי הזיהוי שלך ב-OpenAI והתאם אישית את ההגדרות לפי צרכיך המיוחדים.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'יצירת תוכן',
-                        'title-info' => 'תכונה זו תאפשר את Magic AI עבור כל עורך WYSIWYG, בו תרצה לנהל תוכן באמצעות AI.<br/><br/>כאשר מופעל, עבור לכל עורך כדי ליצור תוכן.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'יצירת תמונה',
-                        'title-info' => 'תכונה זו תאפשר את Magic AI עבור כל העלאת תמונה, בה תרצה ליצור תמונות באמצעות DALL-E.<br/><br/>כאשר מופעל, עבור לכל העלאת תמונה כדי ליצור תמונה.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'תרגום ביקורת',
-                        'title-info' => 'ספק אפשרות ללקוח או למבקר לתרגם ביקורת לקוח לאנגלית.<br/><br/>כאשר מופעל, עבור לביקורת ותמצא את הכפתור "תרגם לאנגלית" אם הביקורת אינה באנגלית.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'הודעת תשלום מותאמת אישית',
-                        'title-info' => 'צור הודעת תשלום מותאמת אישית ללקוחות בעמוד התודה, התאמת התוכן להעדפות אישיות ושיפור חווית הרכישה הכוללת.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'הנחיה',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'הגדרות תאימות ל-GDPR',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'גודל קובץ מרבי',
                         'max-url-per-file' => 'מספר מרבי של כתובות URL לכל קובץ',
                         'title' => 'גבולות קובץ',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'הגדרת הגדרות, ספקים ותכונות של Magic AI.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'הגדרות כלליות של Magic AI.',
+                    'title' => 'כללי',
+
+                    'settings' => [
+                        'enabled' => 'מופעל',
+                        'title' => 'הגדרות',
+                        'title-info' => 'הפעלה או השבתה של Magic AI בכל היישום.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'מפתח API',
+                    'info' => 'הגדרת מפתחות API עבור ספקי ה-AI שלך.',
+                    'title' => 'ספקים',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'הגדרת אישורי API של OpenAI.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'הגדרת אישורי API של Anthropic.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'הגדרת אישורי API של Google Gemini.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'הגדרת אישורי API של Groq.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'הגדרת אישורי API של xAI.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'הגדרת אישורי API של DeepSeek.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'הגדרת אישורי API של Mistral.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'הגדרת אישורי API של Ollama.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'הפעלה והגדרת תכונות AI עבור לוח הניהול.',
+                    'title' => 'תכונות ניהול',
+
+                    'text-generation' => [
+                        'enabled' => 'מופעל',
+                        'providers' => 'ספקים',
+                        'title' => 'יצירת טקסט',
+                        'title-info' => 'הפעלת יצירת טקסט מבוססת AI בעורכי WYSIWYG בלוח הניהול.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'מופעל',
+                        'providers' => 'ספקים',
+                        'title' => 'יצירת תמונות',
+                        'title-info' => 'הפעלת יצירת תמונות מבוססת AI עבור תמונות מוצרים ותוכן.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'הפעלה והגדרת תכונות AI עבור חזית החנות.',
+                    'title' => 'תכונות חזית החנות',
+
+                    'review-translation' => [
+                        'enabled' => 'מופעל',
+                        'model' => 'מודל',
+                        'title' => 'תרגום ביקורות',
+                        'title-info' => 'אפשר ללקוחות לתרגם ביקורות לשפתם בחזית החנות.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'מופעל',
+                        'model' => 'מודל',
+                        'title' => 'הודעת תשלום מותאמת אישית',
+                        'title-info' => 'יצירת הודעות תשלום מותאמות אישית ללקוחות בדף התודה.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'החל',
-                    'dall-e-2' => 'דאל.ה 2',
-                    'dall-e-3' => 'דאל.ה 3',
                     'generate' => 'יצירה',
                     'generating' => 'יוצר...',
-                    'hd' => 'HD',
+                    'high' => 'גבוהה',
+                    'landscape' => 'לרוחב (3:2)',
+                    'low' => 'נמוכה',
+                    'medium' => 'בינונית',
                     'model' => 'מודל',
                     'number-of-images' => 'מספר התמונות',
+                    'portrait' => 'לאורך (2:3)',
                     'prompt' => 'הנחיה',
                     'quality' => 'איכות',
                     'regenerate' => 'יצירה מחדש',
                     'regenerating' => 'יוצר מחדש...',
                     'size' => 'גודל',
-                    'standard' => 'תקן',
+                    'square' => 'ריבוע (1:1)',
                     'title' => 'יצירת תמונה עם בינה מלאכותית',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'קדמית',
                     'next' => 'הבאה',
                     'size' => 'גודל',
+                    'square' => 'ריבוע (1:1)',
                     'use-cases' => 'מטרות שימוש',
                     'zoom' => 'הגדלה',
                 ],

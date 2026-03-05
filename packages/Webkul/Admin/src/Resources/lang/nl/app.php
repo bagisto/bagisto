@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Stel Magic AI-opties in en sta enkele opties toe om de creatie van inhoud te automatiseren.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'API-sleutel',
-                        'enabled' => 'Ingeschakeld',
-                        'llm-api-domain' => 'LLM API-domein',
-                        'organization' => 'Organisatie',
-                        'title' => 'Algemene instellingen',
-                        'title-info' => 'Verbeter uw ervaring met de Magic AI-functie door uw exclusieve API-sleutel in te voeren en de relevante organisatie aan te geven voor moeiteloze integratie. Neem de controle over uw OpenAI-inloggegevens en pas de instellingen aan volgens uw specifieke behoeften.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'Ingeschakeld',
-                        'title' => 'Inhoudsgeneratie',
-                        'title-info' => 'Met deze functie kunt u Magic AI inschakelen voor elke WYSIWYG-editor, waar u inhoud wilt beheren met behulp van AI.<br/><br/>Wanneer ingeschakeld, ga naar een willekeurige editor om inhoud te genereren.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Ingeschakeld',
-                        'title' => 'Afbeeldingsgeneratie',
-                        'title-info' => 'Met deze functie kunt u Magic AI inschakelen voor elke afbeeldingsupload, waar u afbeeldingen wilt genereren met behulp van DALL-E.<br/><br/>Wanneer ingeschakeld, ga naar een willekeurige afbeeldingsupload om afbeeldingen te genereren.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'Ingeschakeld',
-                        'title' => 'Beoordeling Vertaling',
-                        'title-info' => 'Bied klanten of bezoekers de mogelijkheid om klantbeoordelingen naar het Engels te vertalen.<br/><br/>Wanneer ingeschakeld, ga naar de beoordeling en je vindt de knop "Vertalen naar Engels" als je beoordeling anders is dan Engels.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'Ingeschakeld',
-                        'title' => 'Gepersonaliseerd Afrekenbericht',
-                        'title-info' => 'Stel een gepersonaliseerd afrekenbericht op voor klanten op de Bedankt-pagina, waarbij de inhoud wordt afgestemd op individuele voorkeuren en de algehele ervaring na aankoop wordt verbeterd.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'Prompt',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR-nalevingsinstellingen',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'Maximale bestandsgrootte',
                         'max-url-per-file' => 'Maximaal aantal URL\'s per bestand',
                         'title' => 'Bestandslimieten',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configureer Magic AI instellingen, providers en functies.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Algemene Magic AI instellingen.',
+                    'title' => 'Algemeen',
+
+                    'settings' => [
+                        'enabled' => 'Ingeschakeld',
+                        'title' => 'Instellingen',
+                        'title-info' => 'Magic AI in- of uitschakelen in de gehele applicatie.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API-sleutel',
+                    'info' => 'Configureer API-sleutels voor uw AI-providers.',
+                    'title' => 'Providers',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configureer uw OpenAI API-referenties.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configureer uw Anthropic API-referenties.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configureer uw Google Gemini API-referenties.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configureer uw Groq API-referenties.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configureer uw xAI API-referenties.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configureer uw DeepSeek API-referenties.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configureer uw Mistral API-referenties.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configureer uw Ollama API-referenties.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'AI-functies voor het beheerderspaneel in- en configureren.',
+                    'title' => 'Beheerdersfuncties',
+
+                    'text-generation' => [
+                        'enabled' => 'Ingeschakeld',
+                        'providers' => 'Providers',
+                        'title' => 'Tekstgeneratie',
+                        'title-info' => 'AI-gestuurde tekstgeneratie in WYSIWYG-editors in het beheerderspaneel inschakelen.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Ingeschakeld',
+                        'providers' => 'Providers',
+                        'title' => 'Afbeeldingsgeneratie',
+                        'title-info' => 'AI-gestuurde afbeeldingsgeneratie voor product- en inhoudsafbeeldingen inschakelen.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'AI-functies voor de winkel inschakelen en configureren.',
+                    'title' => 'Winkelfuncties',
+
+                    'review-translation' => [
+                        'enabled' => 'Ingeschakeld',
+                        'model' => 'Model',
+                        'title' => 'Beoordelingsvertaling',
+                        'title-info' => 'Klanten toestaan beoordelingen naar hun taal te vertalen in de winkel.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Ingeschakeld',
+                        'model' => 'Model',
+                        'title' => 'Gepersonaliseerd afrekenbericht',
+                        'title-info' => 'Gepersonaliseerde afrekenberichten genereren voor klanten op de bedankpagina.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Toepassen',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Genereren',
                     'generating' => 'Genereren...',
-                    'hd' => 'HD',
+                    'high' => 'Hoog',
+                    'landscape' => 'Liggend (3:2)',
+                    'low' => 'Laag',
+                    'medium' => 'Gemiddeld',
                     'model' => 'Model',
                     'number-of-images' => 'Aantal afbeeldingen',
+                    'portrait' => 'Staand (2:3)',
                     'prompt' => 'Prompt',
                     'quality' => 'Kwaliteit',
                     'regenerate' => 'Regenereren',
                     'regenerating' => 'Regenereren...',
                     'size' => 'Formaat',
-                    'standard' => 'Standaard',
+                    'square' => 'Vierkant (1:1)',
                     'title' => 'AI Afbeelding Generatie',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'Voorkant',
                     'next' => 'Volgende',
                     'size' => 'Formaat',
+                    'square' => 'Vierkant (1:1)',
                     'use-cases' => 'Gebruiksscenario\'s',
                     'zoom' => 'Inzoomen',
                 ],

@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Magic AIオプションを設定し、コンテンツの作成を自動化するためのいくつかのオプションを許可します。',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'APIキー',
-                        'enabled' => '有効',
-                        'llm-api-domain' => 'LLM APIドメイン',
-                        'organization' => '組織',
-                        'title' => '一般設定',
-                        'title-info' => 'Magic AI機能を利用するために、独占的なAPIキーを入力し、関連する組織を指定してMagic AI機能を強化します。 OpenAIの資格情報を制御し、特定のニーズに応じて設定をカスタマイズします。',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => '有効',
-                        'title' => 'コンテンツ生成',
-                        'title-info' => 'この機能を有効にすると、AIを使用してコンテンツを管理するためのすべてのWYSIWYGエディタでMagic AIが有効になります。<br/><br/>有効にすると、任意のエディタに移動してコンテンツを生成できます。',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => '有効',
-                        'title' => '画像生成',
-                        'title-info' => 'この機能を有効にすると、DALL-Eを使用して画像を生成するためのすべての画像アップロードでMagic AIが有効になります。<br/><br/>有効にすると、任意の画像アップロードに移動して画像を生成できます。',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => '有効',
-                        'title' => 'レビュー翻訳',
-                        'title-info' => '顧客または訪問者に、顧客レビューを英語に翻訳するオプションを提供します。<br/><br/>有効にすると、レビューに移動し、英語以外のレビューの場合、「英語に翻訳」ボタンが表示されます。',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => '有効',
-                        'title' => 'パーソナライズされたチェックアウトメッセージ',
-                        'title-info' => 'Thank-Youページで顧客にパーソナライズされたチェックアウトメッセージを作成し、個々の好みに合わせたコンテンツを提供することで、購入後の体験を向上させます。',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'プロンプト',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPRコンプライアンス設定',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => '最大ファイルサイズ',
                         'max-url-per-file' => 'ファイルあたりの最大URL数',
                         'title' => 'ファイル制限',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Magic AIの設定、プロバイダー、機能を構成します。',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Magic AIの一般設定。',
+                    'title' => '一般',
+
+                    'settings' => [
+                        'enabled' => '有効',
+                        'title' => '設定',
+                        'title-info' => 'アプリケーション全体でMagic AIを有効または無効にします。',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'APIキー',
+                    'info' => 'AIプロバイダーのAPIキーを設定します。',
+                    'title' => 'プロバイダー',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'OpenAI APIの認証情報を設定します。',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Anthropic APIの認証情報を設定します。',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Google Gemini APIの認証情報を設定します。',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Groq APIの認証情報を設定します。',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'xAI APIの認証情報を設定します。',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'DeepSeek APIの認証情報を設定します。',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Mistral APIの認証情報を設定します。',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Ollama APIの認証情報を設定します。',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => '管理パネルのAI機能を有効にして設定します。',
+                    'title' => '管理機能',
+
+                    'text-generation' => [
+                        'enabled' => '有効',
+                        'providers' => 'プロバイダー',
+                        'title' => 'テキスト生成',
+                        'title-info' => '管理パネルのWYSIWYGエディターでAIによるテキスト生成を有効にします。',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => '有効',
+                        'providers' => 'プロバイダー',
+                        'title' => '画像生成',
+                        'title-info' => '商品およびコンテンツ画像のAIによる画像生成を有効にします。',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'ストアフロントのAI機能を有効にして設定します。',
+                    'title' => 'ストアフロント機能',
+
+                    'review-translation' => [
+                        'enabled' => '有効',
+                        'model' => 'モデル',
+                        'title' => 'レビュー翻訳',
+                        'title-info' => 'ストアフロントで顧客がレビューを自分の言語に翻訳できるようにします。',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => '有効',
+                        'model' => 'モデル',
+                        'title' => 'パーソナライズされたチェックアウトメッセージ',
+                        'title-info' => 'サンキューページで顧客向けのパーソナライズされたチェックアウトメッセージを生成します。',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => '適用',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => '生成',
                     'generating' => '生成中...',
-                    'hd' => 'HD',
+                    'high' => '高',
+                    'landscape' => '横長 (3:2)',
+                    'low' => '低',
+                    'medium' => '中',
                     'model' => 'モデル',
                     'number-of-images' => '画像の数',
+                    'portrait' => '縦長 (2:3)',
                     'prompt' => 'プロンプト',
                     'quality' => '品質',
                     'regenerate' => '再生成',
                     'regenerating' => '再生成中...',
                     'size' => 'サイズ',
-                    'standard' => '標準',
+                    'square' => '正方形 (1:1)',
                     'title' => 'AI画像生成',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => '前面',
                     'next' => '次',
                     'size' => 'サイズ',
+                    'square' => '正方形 (1:1)',
                     'use-cases' => '用途',
                     'zoom' => 'ズーム',
                 ],

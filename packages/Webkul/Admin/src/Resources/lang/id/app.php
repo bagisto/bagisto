@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Atur opsi Magic AI dan izinkan beberapa opsi untuk mengotomatisasi pembuatan konten.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'Kunci API',
-                        'enabled' => 'Diaktifkan',
-                        'llm-api-domain' => 'Domain API LLM',
-                        'organization' => 'Organisasi',
-                        'title' => 'Pengaturan Umum',
-                        'title-info' => 'Tingkatkan pengalaman Anda dengan fitur Magic AI dengan memasukkan Kunci API eksklusif Anda dan menunjukkan Organisasi terkait untuk integrasi yang mudah. Kuasai kredensial OpenAI Anda dan sesuaikan pengaturan sesuai kebutuhan spesifik Anda.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'Diaktifkan',
-                        'title' => 'Pembuatan Konten',
-                        'title-info' => 'Fitur ini akan mengaktifkan Magic AI untuk setiap editor WYSIWYG, di mana Anda ingin mengelola konten menggunakan AI.<br/><br/>Saat diaktifkan, buka editor apa pun untuk menghasilkan konten.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Diaktifkan',
-                        'title' => 'Pembuatan Gambar',
-                        'title-info' => 'Fitur ini akan mengaktifkan Magic AI untuk setiap unggahan gambar, di mana Anda ingin menghasilkan gambar menggunakan DALL-E.<br/><br/>Saat diaktifkan, buka unggahan gambar apa pun untuk menghasilkan gambar.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'Diaktifkan',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Provide option to customer or visitor to translate customer review into english.<br/><br/>When enable, go to review and you will find the button ‘Translate to English’ if you review other then English.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'Diaktifkan',
-                        'title' => 'Pesan Checkout Personalisasi',
-                        'title-info' => 'Buat pesan checkout yang dipersonalisasi untuk pelanggan di halaman Terima Kasih, menyesuaikan kontennya dengan preferensi individu dan meningkatkan pengalaman pasca-pembelian secara keseluruhan.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'Prompt',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'Pengaturan Kepatuhan GDPR',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'Ukuran Maksimum File',
                         'max-url-per-file' => 'Jumlah Maksimum URL per File',
                         'title' => 'Batasan File',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Konfigurasikan pengaturan, penyedia, dan fitur Magic AI.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Pengaturan umum Magic AI.',
+                    'title' => 'Umum',
+
+                    'settings' => [
+                        'enabled' => 'Aktif',
+                        'title' => 'Pengaturan',
+                        'title-info' => 'Aktifkan atau nonaktifkan Magic AI di seluruh aplikasi.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'Kunci API',
+                    'info' => 'Konfigurasikan kunci API untuk penyedia AI Anda.',
+                    'title' => 'Penyedia',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Konfigurasikan kredensial API OpenAI Anda.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Konfigurasikan kredensial API Anthropic Anda.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Konfigurasikan kredensial API Google Gemini Anda.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Konfigurasikan kredensial API Groq Anda.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Konfigurasikan kredensial API xAI Anda.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Konfigurasikan kredensial API DeepSeek Anda.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Konfigurasikan kredensial API Mistral Anda.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Konfigurasikan kredensial API Ollama Anda.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Aktifkan dan konfigurasikan fitur AI untuk panel admin.',
+                    'title' => 'Fitur Admin',
+
+                    'text-generation' => [
+                        'enabled' => 'Aktif',
+                        'providers' => 'Penyedia',
+                        'title' => 'Pembuatan Teks',
+                        'title-info' => 'Aktifkan pembuatan teks bertenaga AI di editor WYSIWYG di seluruh panel admin.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Aktif',
+                        'providers' => 'Penyedia',
+                        'title' => 'Pembuatan Gambar',
+                        'title-info' => 'Aktifkan pembuatan gambar bertenaga AI untuk gambar produk dan konten.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Aktifkan dan konfigurasikan fitur AI untuk etalase.',
+                    'title' => 'Fitur Etalase',
+
+                    'review-translation' => [
+                        'enabled' => 'Aktif',
+                        'model' => 'Model',
+                        'title' => 'Terjemahan Ulasan',
+                        'title-info' => 'Izinkan pelanggan menerjemahkan ulasan ke bahasa mereka di etalase.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Aktif',
+                        'model' => 'Model',
+                        'title' => 'Pesan Checkout Dipersonalisasi',
+                        'title-info' => 'Buat pesan checkout yang dipersonalisasi untuk pelanggan di halaman Terima Kasih.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Terapkan',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Hasilkan',
                     'generating' => 'Sedang Dihasilkan...',
-                    'hd' => 'HD',
+                    'high' => 'Tinggi',
+                    'landscape' => 'Lanskap (3:2)',
+                    'low' => 'Rendah',
+                    'medium' => 'Sedang',
                     'model' => 'Model',
                     'number-of-images' => 'Jumlah Gambar',
+                    'portrait' => 'Potret (2:3)',
                     'prompt' => 'Perintah',
                     'quality' => 'Kualitas',
                     'regenerate' => 'Hasilkan Ulang',
                     'regenerating' => 'Sedang Menghasilkan Ulang...',
                     'size' => 'Ukuran',
-                    'standard' => 'Standar',
+                    'square' => 'Persegi (1:1)',
                     'title' => 'Generasi Gambar AI',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'Depan',
                     'next' => 'Selanjutnya',
                     'size' => 'Ukuran',
+                    'square' => 'Persegi (1:1)',
                     'use-cases' => 'Kasus Penggunaan',
                     'zoom' => 'Perbesar',
                 ],

@@ -1,13 +1,11 @@
 @php
     use Webkul\MagicAI\AiProvider;
 
-    $provider = core()->getConfigData('general.magic_ai.content_generation.provider') ?? AiProvider::defaultTextProvider();
-
-    $activeModel = core()->getConfigData('general.magic_ai.content_generation.model')
-        ?? AiProvider::defaultTextModel($provider)?->value
-        ?? '';
-
-    $modelOptions = AiProvider::textModelSelectOptions($provider);
+    $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.text_generation.providers') ?? ''));
+    
+    $models = AiProvider::modelsForProviders($enabledProviders, 'text');
+    
+    $defaultModel = $models[0]['value'] ?? '';
 @endphp
 
 <v-tinymce {{ $attributes }}></v-tinymce>
@@ -79,7 +77,7 @@
                                     v-for="option in ai.models"
                                     :key="option.value"
                                     :value="option.value"
-                                    v-text="option.label"
+                                    v-text="option.title"
                                 ></option>
                             </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
@@ -158,11 +156,11 @@
                     isLoading: false,
 
                     ai: {
-                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.content_generation.enabled') }}"),
+                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.text_generation.enabled') }}"),
 
-                        models: {!! json_encode($modelOptions) !!},
+                        models: {!! json_encode($models) !!},
 
-                        model: "{{ $activeModel }}",
+                        model: "{{ $defaultModel }}",
 
                         prompt: null,
 

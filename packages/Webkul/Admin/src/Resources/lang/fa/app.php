@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'تنظیم گزینه‌های هوش مصنوعی جادویی و اجازه دادن به برخی گزینه‌ها برای خودکارسازی ایجاد محتوا.',
-                    'title' => 'هوش مصنوعی جادویی',
-
-                    'settings' => [
-                        'api-key' => 'کلید API',
-                        'enabled' => 'فعال شده',
-                        'llm-api-domain' => 'دامنه LLM API',
-                        'organization' => 'سازمان',
-                        'title' => 'تنظیمات عمومی',
-                        'title-info' => 'تجربه خود را با ویژگی هوش مصنوعی جادویی بهبود دهید با وارد کردن کلید API اختصاصی خود و اشاره به سازمان مربوطه برای یکپارچه سازی بی‌دردسر. کنترل کامل بر مدارک OpenAI خود را در دست بگیرید و تنظیمات را بر اساس نیازهای خاص خود سفارشی کنید.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'فعال شده',
-                        'title' => 'تولید محتوا',
-                        'title-info' => 'این ویژگی هوش مصنوعی جادویی را برای هر ویرایشگر WYSIWYG فعال می کند، جایی که می خواهید محتوا را با استفاده از هوش مصنوعی مدیریت کنید. <br/> <br/> وقتی فعال شود، به هر ویرایشگری بروید تا محتوا تولید شود.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'فعال شده',
-                        'title' => 'تولید تصویر',
-                        'title-info' => 'این ویژگی هوش مصنوعی جادویی را برای هر بار بارگذاری تصویر فعال می کند، جایی که می خواهید تصاویر را با استفاده از DALL-E تولید کنید. <br/> <br/> وقتی فعال شود، به هر بار بارگذاری تصویری بروید تا تصویر تولید شود.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'فعال شده',
-                        'title' => 'ترجمه بررسی',
-                        'title-info' => 'به مشتری یا بازدیدکننده امکان ترجمه بررسی مشتری به انگلیسی را بدهید.<br/><br/>وقتی فعال شود، به بررسی بروید و دکمه "ترجمه به انگلیسی" را پیدا خواهید کرد اگر بررسی به غیر از انگلیسی باشد.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'فعال شده',
-                        'title' => 'پیام شخصی‌سازی شده تسویه حساب',
-                        'title-info' => 'ایجاد یک پیام شخصی‌سازی شده برای مشتریان در صفحه تشکر، با محتوایی که با ترجیحات فردی هماهنگ است و تجربه پس از خرید را بهبود می‌بخشد.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'پیشنهاد',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'تنظیمات انطباق با GDPR',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'حداکثر اندازه فایل',
                         'max-url-per-file' => 'حداکثر تعداد URL‌ها در هر فایل',
                         'title' => 'محدودیت‌های فایل',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'تنظیمات، ارائه‌دهندگان و ویژگی‌های Magic AI را پیکربندی کنید.',
+                'title' => 'هوش مصنوعی جادویی',
+
+                'general' => [
+                    'info' => 'تنظیمات عمومی Magic AI.',
+                    'title' => 'عمومی',
+
+                    'settings' => [
+                        'enabled' => 'فعال',
+                        'title' => 'تنظیمات',
+                        'title-info' => 'فعال یا غیرفعال کردن Magic AI در کل برنامه.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'کلید API',
+                    'info' => 'کلیدهای API ارائه‌دهندگان هوش مصنوعی خود را پیکربندی کنید.',
+                    'title' => 'ارائه‌دهندگان',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'اعتبارنامه API OpenAI خود را پیکربندی کنید.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'اعتبارنامه API Anthropic خود را پیکربندی کنید.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'اعتبارنامه API Google Gemini خود را پیکربندی کنید.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'اعتبارنامه API Groq خود را پیکربندی کنید.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'اعتبارنامه API xAI خود را پیکربندی کنید.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'اعتبارنامه API DeepSeek خود را پیکربندی کنید.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'اعتبارنامه API Mistral خود را پیکربندی کنید.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'اعتبارنامه API Ollama خود را پیکربندی کنید.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'ویژگی‌های هوش مصنوعی برای پنل مدیریت را فعال و پیکربندی کنید.',
+                    'title' => 'ویژگی‌های مدیریت',
+
+                    'text-generation' => [
+                        'enabled' => 'فعال',
+                        'providers' => 'ارائه‌دهندگان',
+                        'title' => 'تولید متن',
+                        'title-info' => 'تولید متن مبتنی بر هوش مصنوعی را در ویرایشگرهای WYSIWYG پنل مدیریت فعال کنید.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'فعال',
+                        'providers' => 'ارائه‌دهندگان',
+                        'title' => 'تولید تصویر',
+                        'title-info' => 'تولید تصویر مبتنی بر هوش مصنوعی برای تصاویر محصولات و محتوا را فعال کنید.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'ویژگی‌های هوش مصنوعی برای فروشگاه را فعال و پیکربندی کنید.',
+                    'title' => 'ویژگی‌های فروشگاه',
+
+                    'review-translation' => [
+                        'enabled' => 'فعال',
+                        'model' => 'مدل',
+                        'title' => 'ترجمه نظرات',
+                        'title-info' => 'به مشتریان اجازه دهید نظرات را به زبان خود در فروشگاه ترجمه کنند.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'فعال',
+                        'model' => 'مدل',
+                        'title' => 'پیام پرداخت شخصی‌سازی شده',
+                        'title-info' => 'پیام‌های پرداخت شخصی‌سازی شده برای مشتریان در صفحه تشکر تولید کنید.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'اعمال',
-                    'dall-e-2' => 'دال.إ 2',
-                    'dall-e-3' => 'دال.إ 3',
                     'generate' => 'تولید',
                     'generating' => 'در حال تولید...',
-                    'hd' => 'بالا (HD)',
+                    'high' => 'بالا',
+                    'landscape' => 'افقی (3:2)',
+                    'low' => 'پایین',
+                    'medium' => 'متوسط',
                     'model' => 'مدل',
                     'number-of-images' => 'تعداد تصاویر',
+                    'portrait' => 'عمودی (2:3)',
                     'prompt' => 'پرامت',
                     'quality' => 'کیفیت',
                     'regenerate' => 'تولید مجدد',
                     'regenerating' => 'در حال تولید مجدد...',
                     'size' => 'اندازه',
-                    'standard' => 'استاندارد',
+                    'square' => 'مربع (1:1)',
                     'title' => 'تولید تصویر با هوش مصنوعی',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'جلو',
                     'next' => 'بعدی',
                     'size' => 'اندازه',
+                    'square' => 'مربع (1:1)',
                     'use-cases' => 'موارد استفاده',
                     'zoom' => 'بزرگ‌نمایی',
                 ],

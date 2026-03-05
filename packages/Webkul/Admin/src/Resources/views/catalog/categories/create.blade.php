@@ -132,7 +132,6 @@
                                 :value="old('description')"
                                 :label="trans('admin::app.catalog.categories.create.description')"
                                 :tinymce="true"
-                                :prompt="core()->getConfigData('general.magic_ai.default_prompts.category_description')"
                             />
 
                             <x-admin::form.control-group.error control-name="description" />

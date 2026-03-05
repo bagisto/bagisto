@@ -25,8 +25,8 @@ class ImageGenerationRequest extends FormRequest
             'prompt' => ['required', 'string'],
             'model' => ['nullable', 'string'],
             'n' => ['nullable', 'integer', 'min:1', 'max:10'],
-            'size' => ['required', 'in:1024x1024,1024x1792,1792x1024'],
-            'quality' => ['nullable', 'in:standard,hd'],
+            'size' => ['required', 'in:1:1,2:3,3:2'],
+            'quality' => ['nullable', 'in:high,medium,low'],
         ];
     }
 }

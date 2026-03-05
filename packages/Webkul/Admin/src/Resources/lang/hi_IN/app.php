@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'मैजिक एआई विकल्प सेट करें और सामग्री निर्माण को स्वचालित करने के लिए कुछ विकल्पों की अनुमति दें।',
-                    'title' => 'मैजिक एआई',
-
-                    'settings' => [
-                        'api-key' => 'एपीआई कुंजी',
-                        'enabled' => 'सक्षम',
-                        'llm-api-domain' => 'एलएलएम एपीआई डोमेन',
-                        'organization' => 'संगठन',
-                        'title' => 'सामान्य सेटिंग्स',
-                        'title-info' => 'अपने अनन्य एपीआई कुंजी दर्ज करके और संबंधित संगठन को दर्ज करके मैजिक एआई सुविधा के साथ अपने अनुभव को बढ़ाएं। अपने OpenAI क्रेडेंशियल पर कमांड लें और अपनी विशेष आवश्यकताओं के अनुसार सेटिंग्स को अनुकूलित करें।',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'सक्षम',
-                        'title' => 'सामग्री उत्पादन',
-                        'title-info' => 'यह सुविधा हर WYSIWYG संपादक के लिए मैजिक एआई को सक्षम करेगी, जहां आप AI का उपयोग करके सामग्री को प्रबंधित करना चाहते हैं।<br/><br/>सक्षम करने पर, किसी भी संपादक में जाएं और सामग्री उत्पन्न करें।',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'सक्षम',
-                        'title' => 'इमेज उत्पादन',
-                        'title-info' => 'यह सुविधा हर छवि अपलोड के लिए मैजिक एआई को सक्षम करेगी, जहां आप DALL-E का उपयोग करके छवियाँ उत्पन्न करना चाहते हैं।<br/><br/>सक्षम करने पर, किसी भी छवि अपलोड में जाएं और छवि उत्पन्न करें।',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'सक्षम',
-                        'title' => 'समीक्षा अनुवाद',
-                        'title-info' => 'ग्राहक या आगंतुक को ग्राहक समीक्षा को अंग्रेजी में अनुवाद करने का विकल्प प्रदान करें।<br/><br/>सक्षम होने पर, समीक्षा पर जाएं और यदि आप अंग्रेजी के अलावा अन्य समीक्षा करते हैं तो आपको "अंग्रेजी में अनुवाद करें" बटन मिलेगा।',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'सक्षम',
-                        'title' => 'व्यक्तिगत चेकआउट संदेश',
-                        'title-info' => 'ग्राहकों के लिए धन्यवाद पृष्ठ पर एक व्यक्तिगत चेकआउट संदेश तैयार करें, सामग्री को व्यक्तिगत प्राथमिकताओं के साथ मेल खाते हुए और समग्र खरीद के बाद के अनुभव को बढ़ाते हुए।',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'प्रॉम्प्ट',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR अनुपालन सेटिंग्स',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'अधिकतम फ़ाइल आकार',
                         'max-url-per-file' => 'प्रति फ़ाइल अधिकतम URL की संख्या',
                         'title' => 'फ़ाइल सीमाएं',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Magic AI सेटिंग्स, प्रदाता और सुविधाएँ कॉन्फ़िगर करें।',
+                'title' => 'मैजिक AI',
+
+                'general' => [
+                    'info' => 'सामान्य Magic AI सेटिंग्स।',
+                    'title' => 'सामान्य',
+
+                    'settings' => [
+                        'enabled' => 'सक्रिय',
+                        'title' => 'सेटिंग्स',
+                        'title-info' => 'अपने पूरे एप्लिकेशन में Magic AI को सक्रिय या निष्क्रिय करें।',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API कुंजी',
+                    'info' => 'अपने AI प्रदाताओं के लिए API कुंजियाँ कॉन्फ़िगर करें।',
+                    'title' => 'प्रदाता',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'अपने OpenAI API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'अपने Anthropic API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'अपने Google Gemini API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'अपने Groq API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'अपने xAI API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'अपने DeepSeek API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'अपने Mistral API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'अपने Ollama API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'व्यवस्थापक पैनल के लिए AI सुविधाएँ सक्रिय और कॉन्फ़िगर करें।',
+                    'title' => 'व्यवस्थापक सुविधाएँ',
+
+                    'text-generation' => [
+                        'enabled' => 'सक्रिय',
+                        'providers' => 'प्रदाता',
+                        'title' => 'टेक्स्ट जेनरेशन',
+                        'title-info' => 'व्यवस्थापक पैनल में WYSIWYG संपादकों में AI-संचालित टेक्स्ट जेनरेशन सक्रिय करें।',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'सक्रिय',
+                        'providers' => 'प्रदाता',
+                        'title' => 'छवि जेनरेशन',
+                        'title-info' => 'उत्पाद और सामग्री छवियों के लिए AI-संचालित छवि जेनरेशन सक्रिय करें।',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'स्टोरफ्रंट के लिए AI सुविधाएँ सक्रिय और कॉन्फ़िगर करें।',
+                    'title' => 'स्टोरफ्रंट सुविधाएँ',
+
+                    'review-translation' => [
+                        'enabled' => 'सक्रिय',
+                        'model' => 'मॉडल',
+                        'title' => 'समीक्षा अनुवाद',
+                        'title-info' => 'ग्राहकों को स्टोरफ्रंट पर अपनी भाषा में समीक्षाओं का अनुवाद करने की अनुमति दें।',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'सक्रिय',
+                        'model' => 'मॉडल',
+                        'title' => 'व्यक्तिगत चेकआउट संदेश',
+                        'title-info' => 'धन्यवाद पृष्ठ पर ग्राहकों के लिए व्यक्तिगत चेकआउट संदेश उत्पन्न करें।',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'लागू करें',
-                    'dall-e-2' => 'डाल.ई 2',
-                    'dall-e-3' => 'डाल.ई 3',
                     'generate' => 'उत्पन्न करें',
                     'generating' => 'उत्पन्न हो रहा है...',
-                    'hd' => 'एचडी',
+                    'high' => 'उच्च',
+                    'landscape' => 'लैंडस्केप (3:2)',
+                    'low' => 'निम्न',
+                    'medium' => 'मध्यम',
                     'model' => 'मॉडल',
                     'number-of-images' => 'छवियों की संख्या',
+                    'portrait' => 'पोर्ट्रेट (2:3)',
                     'prompt' => 'प्रॉम्प्ट',
                     'quality' => 'गुणवत्ता',
                     'regenerate' => 'पुनर्जन्म',
                     'regenerating' => 'पुनर्जन्म हो रहा है...',
                     'size' => 'आकार',
-                    'standard' => 'मानक',
+                    'square' => 'वर्गाकार (1:1)',
                     'title' => 'ए.आई. इमेज उत्पन्न',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'सामना',
                     'next' => 'अगला',
                     'size' => 'आकार',
+                    'square' => 'वर्गाकार (1:1)',
                     'use-cases' => 'उपयोग केस',
                     'zoom' => 'ज़ूम करें',
                 ],

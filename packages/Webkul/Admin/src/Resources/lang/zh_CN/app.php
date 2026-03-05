@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => '设置魔法AI选项，并允许一些选项自动创建内容。',
-                    'title' => '魔法AI',
-
-                    'settings' => [
-                        'api-key' => 'API密钥',
-                        'enabled' => '已启用',
-                        'llm-api-domain' => 'LLM API域',
-                        'organization' => '组织',
-                        'title' => '常规设置',
-                        'title-info' => '通过输入您的独家API密钥和指示相关组织来增强您使用魔法AI功能的体验。掌握OpenAI凭据并根据您的特定需求自定义设置。',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => '已启用',
-                        'title' => '内容生成',
-                        'title-info' => '此功能将为每个所见即所得编辑器启用魔法AI，您可以使用AI管理内容。<br/><br/>启用后，转到任何编辑器生成内容。',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => '已启用',
-                        'title' => '图像生成',
-                        'title-info' => '此功能将为每个图像上传启用魔法AI，您可以使用DALL-E生成图像。<br/><br/>启用后，转到任何图像上传生成图像。',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => '启用',
-                        'title' => '评论翻译',
-                        'title-info' => '为客户或访客提供将客户评论翻译成英语的选项。<br/><br/>启用后，转到评论页面，如果评论不是英语，您会找到“翻译成英语”按钮。',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => '启用',
-                        'title' => '个性化结账消息',
-                        'title-info' => '为客户在感谢页面上制作个性化的结账消息，定制内容以符合个人偏好，增强整体购买后的体验。',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => '提示',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR 合规设置',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => '最大文件大小',
                         'max-url-per-file' => '每个文件的最大 URL 数量',
                         'title' => '文件限制',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => '配置 Magic AI 设置、提供商和功能。',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Magic AI 常规设置。',
+                    'title' => '常规',
+
+                    'settings' => [
+                        'enabled' => '已启用',
+                        'title' => '设置',
+                        'title-info' => '在整个应用程序中启用或禁用 Magic AI。',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API 密钥',
+                    'info' => '配置 AI 提供商的 API 密钥。',
+                    'title' => '提供商',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => '配置您的 OpenAI API 凭证。',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => '配置您的 Anthropic API 凭证。',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => '配置您的 Google Gemini API 凭证。',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => '配置您的 Groq API 凭证。',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => '配置您的 xAI API 凭证。',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => '配置您的 DeepSeek API 凭证。',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => '配置您的 Mistral API 凭证。',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => '配置您的 Ollama API 凭证。',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => '启用并配置管理面板的 AI 功能。',
+                    'title' => '管理功能',
+
+                    'text-generation' => [
+                        'enabled' => '已启用',
+                        'providers' => '提供商',
+                        'title' => '文本生成',
+                        'title-info' => '在管理面板的 WYSIWYG 编辑器中启用 AI 驱动的文本生成。',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => '已启用',
+                        'providers' => '提供商',
+                        'title' => '图像生成',
+                        'title-info' => '启用 AI 驱动的产品和内容图像生成。',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => '启用并配置店面的 AI 功能。',
+                    'title' => '店面功能',
+
+                    'review-translation' => [
+                        'enabled' => '已启用',
+                        'model' => '模型',
+                        'title' => '评价翻译',
+                        'title-info' => '允许客户在店面将评价翻译为他们的语言。',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => '已启用',
+                        'model' => '模型',
+                        'title' => '个性化结账消息',
+                        'title-info' => '在感谢页面为客户生成个性化的结账消息。',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => '应用',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => '生成',
                     'generating' => '生成中...',
-                    'hd' => '高清',
+                    'high' => '高',
+                    'landscape' => '横版 (3:2)',
+                    'low' => '低',
+                    'medium' => '中',
                     'model' => '模型',
                     'number-of-images' => '图片数量',
+                    'portrait' => '竖版 (2:3)',
                     'prompt' => '提示词',
                     'quality' => '质量',
                     'regenerate' => '重新生成',
                     'regenerating' => '重新生成中...',
                     'size' => '大小',
-                    'standard' => '标准',
+                    'square' => '正方形 (1:1)',
                     'title' => 'AI 图像生成',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => '正面',
                     'next' => '下一个',
                     'size' => '尺寸',
+                    'square' => '正方形 (1:1)',
                     'use-cases' => '用途',
                     'zoom' => '缩放',
                 ],

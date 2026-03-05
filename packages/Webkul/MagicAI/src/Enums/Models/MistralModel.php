@@ -8,20 +8,26 @@ use Webkul\MagicAI\Enums\Contracts\AiModelContract;
 enum MistralModel: string implements AiModelContract
 {
     /**
-     * Versioned (pinned) model IDs.
+     * Rolling aliases — always resolve to latest stable.
+     */
+    case MistralLargeLatest = 'mistral-large-latest';
+    case MistralMediumLatest = 'mistral-medium-latest';
+    case MistralSmallLatest = 'mistral-small-latest';
+
+    /**
+     * Mistral 3 family (latest generation — recommended for most use cases). All are suitable for chat and non-chat use cases.
+     *
+     * Note: Mistral Large 3 is the most capable model currently available, and is recommended for most use cases.
      */
     case MistralLarge3 = 'mistral-large-2512';
     case MistralMedium31 = 'mistral-medium-2508';
     case MistralSmall32 = 'mistral-small-2506';
-    case MagistralMedium = 'magistral-medium-2509';
-    case MagistralSmall = 'magistral-small-2509';
 
     /**
-     * Rolling aliases that always resolve to the latest stable release.
+     * Older Mistral 2 family (previous generation — still available). All are suitable for chat and non-chat use cases.
      */
-    case MistralLarge = 'mistral-large-latest';
-    case MistralSmall = 'mistral-small-latest';
-    case Codestral = 'codestral-latest';
+    case MagistralMedium = 'magistral-medium-2509';
+    case MagistralSmall = 'magistral-small-2509';
 
     /**
      * Get the SDK Lab provider this model belongs to.
@@ -29,6 +35,23 @@ enum MistralModel: string implements AiModelContract
     public function provider(): Lab
     {
         return Lab::Mistral;
+    }
+
+    /**
+     * Get the human-readable display name.
+     */
+    public function label(): string
+    {
+        return match ($this) {
+            self::MistralLargeLatest => 'Mistral Large (Latest)',
+            self::MistralMediumLatest => 'Mistral Medium (Latest)',
+            self::MistralSmallLatest => 'Mistral Small (Latest)',
+            self::MistralLarge3 => 'Mistral Large 3',
+            self::MistralMedium31 => 'Mistral Medium 3.1',
+            self::MistralSmall32 => 'Mistral Small 3.2',
+            self::MagistralMedium => 'Magistral Medium',
+            self::MagistralSmall => 'Magistral Small',
+        };
     }
 
     /**
@@ -48,28 +71,11 @@ enum MistralModel: string implements AiModelContract
     }
 
     /**
-     * Get the human-readable display name.
-     */
-    public function label(): string
-    {
-        return match ($this) {
-            self::MistralLarge3 => 'Mistral Large 3',
-            self::MistralMedium31 => 'Mistral Medium 3.1',
-            self::MistralSmall32 => 'Mistral Small 3.2',
-            self::MagistralMedium => 'Magistral Medium',
-            self::MagistralSmall => 'Magistral Small',
-            self::MistralLarge => 'Mistral Large (Latest)',
-            self::MistralSmall => 'Mistral Small (Latest)',
-            self::Codestral => 'Codestral (Latest)',
-        };
-    }
-
-    /**
      * Get the recommended default model for text generation.
      */
     public static function defaultTextModel(): ?static
     {
-        return self::MistralSmall;
+        return self::MistralSmallLatest;
     }
 
     /**

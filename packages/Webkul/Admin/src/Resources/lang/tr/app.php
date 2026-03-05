@@ -4098,54 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Magic AI seçeneklerini ayarlayın ve içerik oluşturmayı otomatikleştirmek için bazı seçeneklere izin verin.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'API Anahtarı',
-                        'enabled' => 'Etkin',
-                        'llm-api-domain' => 'LLM API Alanı',
-                        'organization' => 'Organizasyon',
-                        'title' => 'Genel Ayarlar',
-                        'title-info' => 'Magic AI özelliğinden tam anlamıyla yararlanmak için özel API Anahtarınızı girin ve ilgili Organizasyonu belirtin. OpenAI kimlik bilgilerinizi kontrol edin ve ayarları belirli ihtiyaçlarınıza göre özelleştirin.',
-                    ],
-
-                    'content-generation' => [
-                        'enabled' => 'Etkin',
-                        'title' => 'İçerik Oluşturma',
-                        'title-info' => 'Bu özellik, AI kullanarak içeriği yönetmek istediğiniz her WYSIWYG düzenleyici için Magic AI\'yi etkinleştirir.<br/><br/>Etkinleştirildiğinde, herhangi bir düzenleyiciye giderek içerik oluşturabilirsiniz.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Etkin',
-                        'title' => 'Görüntü Oluşturma',
-                        'title-info' => 'Bu özellik, DALL-E kullanarak görüntü oluşturmak istediğiniz her görüntü yüklemesi için Magic AI\'yi etkinleştirir.<br/><br/>Etkinleştirildiğinde, herhangi bir görüntü yüklemeye giderek görüntü oluşturabilirsiniz.',
-                    ],
-
-                    'review-translation' => [
-                        'enabled' => 'Etkin',
-                        'title' => 'İnceleme Çevirisi',
-                        'title-info' => 'Müşteriye veya ziyaretçiye müşteri incelemesini İngilizceye çevirme seçeneği sunun.<br/><br/>Etkinleştirildiğinde, incelemeye gidin ve İngilizce dışındaki bir incelemeyi İngilizceye çevirmek için "İngilizceye Çevir" düğmesini bulacaksınız.',
-                    ],
-
-                    'checkout-message' => [
-                        'enabled' => 'Etkin',
-                        'title' => 'Kişiselleştirilmiş Ödeme Mesajı',
-                        'title-info' => 'Müşterilere Teşekkür Sayfasında kişiselleştirilmiş bir ödeme mesajı hazırlayın, içeriği bireysel tercihlere göre uyarlayarak genel satın alma sonrası deneyimini geliştirin.',
-                    ],
-
-                    'default-prompts' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'checkout-message-prompt' => 'İstek',
-                        'cms-page-content-prompt' => 'Cms Page Content Prompt',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Default Prompts',
-                        'title-info' => 'Configure the default prompts used by Magic AI for content generation, checkout messaging, and other AI-powered features.',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR Uyumluluk Ayarları',
@@ -4204,6 +4156,106 @@ return [
                         'max-file-size' => 'Maksimum dosya boyutu',
                         'max-url-per-file' => 'Dosya başına maksimum URL sayısı',
                         'title' => 'Dosya Limitleri',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Magic AI ayarlarını, sağlayıcıları ve özelliklerini yapılandırın.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Genel Magic AI ayarları.',
+                    'title' => 'Genel',
+
+                    'settings' => [
+                        'enabled' => 'Etkin',
+                        'title' => 'Ayarlar',
+                        'title-info' => 'Tüm uygulamanızda Magic AI\'ı etkinleştirin veya devre dışı bırakın.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API Anahtarı',
+                    'info' => 'AI sağlayıcılarınız için API anahtarlarını yapılandırın.',
+                    'title' => 'Sağlayıcılar',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'OpenAI API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Anthropic API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Google Gemini API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Groq API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'xAI API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'DeepSeek API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Mistral API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Ollama API kimlik bilgilerinizi yapılandırın.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Yönetim paneli için AI özelliklerini etkinleştirin ve yapılandırın.',
+                    'title' => 'Yönetici Özellikleri',
+
+                    'text-generation' => [
+                        'enabled' => 'Etkin',
+                        'providers' => 'Sağlayıcılar',
+                        'title' => 'Metin Oluşturma',
+                        'title-info' => 'Yönetim panelindeki WYSIWYG editörlerinde AI destekli metin oluşturmayı etkinleştirin.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Etkin',
+                        'providers' => 'Sağlayıcılar',
+                        'title' => 'Görsel Oluşturma',
+                        'title-info' => 'Ürün ve içerik görselleri için AI destekli görsel oluşturmayı etkinleştirin.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Mağaza için AI özelliklerini etkinleştirin ve yapılandırın.',
+                    'title' => 'Mağaza Özellikleri',
+
+                    'review-translation' => [
+                        'enabled' => 'Etkin',
+                        'model' => 'Model',
+                        'title' => 'Yorum Çevirisi',
+                        'title-info' => 'Müşterilerin mağazada yorumları kendi dillerine çevirmesine izin verin.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Etkin',
+                        'model' => 'Model',
+                        'title' => 'Kişiselleştirilmiş Ödeme Mesajı',
+                        'title-info' => 'Teşekkür sayfasında müşteriler için kişiselleştirilmiş ödeme mesajları oluşturun.',
                     ],
                 ],
             ],
@@ -5179,23 +5231,22 @@ return [
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Uygula',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Oluştur',
                     'generating' => 'Oluşturuluyor...',
-                    'hd' => 'HD',
+                    'high' => 'Yüksek',
+                    'landscape' => 'Yatay (3:2)',
+                    'low' => 'Düşük',
+                    'medium' => 'Orta',
                     'model' => 'Model',
                     'number-of-images' => 'Resim Sayısı',
+                    'portrait' => 'Dikey (2:3)',
                     'prompt' => 'İstem',
                     'quality' => 'Kalite',
                     'regenerate' => 'Yeniden Oluştur',
                     'regenerating' => 'Yeniden Oluşturuluyor...',
                     'size' => 'Boyut',
-                    'standard' => 'Standart',
+                    'square' => 'Kare (1:1)',
                     'title' => 'AI İmaj Oluşturma',
                 ],
 
@@ -5203,6 +5254,7 @@ return [
                     'front' => 'Ön',
                     'next' => 'Sonraki',
                     'size' => 'Boyut',
+                    'square' => 'Kare (1:1)',
                     'use-cases' => 'Kullanım Alanları',
                     'zoom' => 'Yakınlaştırma',
                 ],
