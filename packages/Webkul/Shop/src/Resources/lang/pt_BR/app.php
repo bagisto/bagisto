@@ -860,7 +860,7 @@ return [
                 'translating' => 'Traduzindo...',
                 'write-a-review' => 'Escrever uma Avaliação',
             ],
-            
+
             'contact-us' => [
                 'about' => 'Deixe-nos uma mensagem e entraremos em contato o mais rápido possível',
                 'desc' => 'No que você está pensando?',
@@ -872,7 +872,7 @@ return [
                 'submit' => 'Enviar',
                 'title' => 'Entre em contato',
             ],
-            
+
             'add-to-cart' => 'Adicionar ao Carrinho',
             'add-to-compare' => 'Produto adicionado à comparação.',
             'add-to-wishlist' => 'Adicionar à Lista de Desejos',

@@ -872,7 +872,7 @@ return [
                 'submit' => 'Wyślij',
                 'title' => 'Skontaktuj się z nami',
             ],
-            
+
             'add-to-cart' => 'Dodaj do koszyka',
             'add-to-compare' => 'Produkt dodany do porównania.',
             'add-to-wishlist' => 'Dodaj do listy życzeń',

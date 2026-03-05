@@ -872,7 +872,7 @@ return [
                 'submit' => 'Gönder',
                 'title' => 'Bize Ulaşın',
             ],
-            
+
             'add-to-cart' => 'Sepete Ekle',
             'add-to-compare' => 'Karşılaştır',
             'add-to-wishlist' => 'Dilek Listesine Ekle',

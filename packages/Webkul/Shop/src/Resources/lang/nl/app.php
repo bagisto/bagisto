@@ -872,7 +872,7 @@ return [
                 'submit' => 'Verzenden',
                 'title' => 'Neem contact met ons op',
             ],
-            
+
             'add-to-cart' => 'Toevoegen aan winkelwagen',
             'add-to-compare' => 'Product toegevoegd aan vergelijking.',
             'add-to-wishlist' => 'Toevoegen aan verlanglijstje',

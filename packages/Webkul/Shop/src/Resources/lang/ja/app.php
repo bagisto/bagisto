@@ -872,7 +872,7 @@ return [
                 'submit' => '送信',
                 'title' => 'お問い合わせ',
             ],
-            
+
             'add-to-cart' => 'カートに追加',
             'add-to-compare' => '比較に追加',
             'add-to-wishlist' => 'ウィッシュリストに追加',

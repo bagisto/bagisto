@@ -872,7 +872,7 @@ return [
                 'submit' => '提交',
                 'title' => '联系我们',
             ],
-            
+
             'add-to-cart' => '加入购物车',
             'add-to-compare' => '已添加到比较。',
             'add-to-wishlist' => '添加到愿望清单',

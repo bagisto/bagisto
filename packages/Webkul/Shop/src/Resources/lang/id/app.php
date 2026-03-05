@@ -872,7 +872,7 @@ return [
                 'submit' => 'Kirim',
                 'title' => 'Hubungi Kami',
             ],
-            
+
             'add-to-cart' => 'Tambahkan ke Keranjang',
             'add-to-compare' => 'Produk ditambahkan ke perbandingan.',
             'add-to-wishlist' => 'Tambahkan ke Wishlist',
