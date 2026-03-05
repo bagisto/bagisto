@@ -2,6 +2,12 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.4.0-beta4 (5th of March 2026)** - **Release**
+
+* Enhanced the Laravel AI SDK integration for Magic AI and improved the related configuration sections.
+
+* Updated all outdated AI models and image model configurations.
+
 ## **v2.4.0-beta3 (3rd of March 2026)** - **Release**
 
 * Integrated Laravel AI SDK for Magic AI, refactoring the provider and model layer into per-provider enums with a unified `AiProvider` entry point.
