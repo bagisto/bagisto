@@ -83,7 +83,7 @@ tailwind.config = {
                 {{ Str::limit(strip_tags($service->short_description), 120) }}
             </p>
 
-            <a href="{{ route('shop.home.service.details',$service->id) }}">
+            <a href="{{ route('shop.home.service.details',$service->url_key) }}">
             <button class="self-start bg-[#2a1f14] text-white text-[11px] font-medium tracking-wide px-5 py-2 rounded-full hover:bg-[#3d2e1e] transition-colors mt-auto">
                 Book Now
             </button>
