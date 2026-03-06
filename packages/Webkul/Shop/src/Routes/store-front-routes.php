@@ -15,11 +15,8 @@ use App\Http\Middleware\LocaleMiddleware;
 
 // Homepage Routes 
 
-// Header language switcher (Arabic)
-Route::get('/switch/{ln}',[HomeController::class,'languageArabicSwitch'])->name('language.switch.arabic');
-
-// Header language switcher (English)
-Route::get('/Switch/{ln}',[HomeController::class,'languageEnglishSwitch'])->name('language.switch.english');
+// Language Switch
+Route::get('/switch/lang/{ln}',[HomeController::class,'switchLanguage'])->name('switch.language');
 
 // Header search box
 Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
@@ -42,9 +39,8 @@ Route::get('/service/{id}', [HomeController::class, 'servicesDetails'])
     ->name('shop.home.service.details');
 
 // Product details page
-Route::get('/product/{id}', [HomeController::class, 'productDetails'])
+Route::get('/product/{url_key}', [HomeController::class, 'productDetails'])
     ->name('shop.home.product.details');
-
 
 // Inner pages
 // Services page

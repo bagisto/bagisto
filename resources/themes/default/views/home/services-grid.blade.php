@@ -33,12 +33,12 @@ Services Treatment
 <div id="categoryTabs" class="flex gap-4 md:gap-6 overflow-x-auto scroll-smooth no-scrollbar max-w-full md:max-w-[800px]">
 
 @foreach($categories as $category)
-<a href="{{ route('shop.home.services', $category->slug) }}"
-class="px-2 py-2 whitespace-nowrap text-center font-roboto text-[16px] leading-[24px] tracking-[0.02em] transition-colors
-{{ ($activeCategorySlug ?? request()->route('slug')) == $category->slug 
-? 'text-[#DFAA8B]' 
-: 'text-[#78718B] hover:text-[#DFAA8B]' }}">
-{{ $category->name }}
+<a href="{{ route('shop.home.services', $category->translate(app()->getLocale())->slug) }}"
+   class="px-2 py-2 whitespace-nowrap text-center font-roboto text-[16px] leading-[24px] tracking-[0.02em] transition-colors
+   {{ ($activeCategorySlug ?? request()->route('slug')) == $category->translate(app()->getLocale())->slug 
+       ? 'text-[#DFAA8B]' 
+       : 'text-[#78718B] hover:text-[#DFAA8B]' }}">
+    {{ $category->translate(app()->getLocale())->name }}
 </a>
 @endforeach
 

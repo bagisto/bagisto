@@ -6,8 +6,9 @@ return [
 
     'nav' => [
         'home' => 'Home',
-        'shop' => 'Shop',
         'about' => 'About Us',
+        'service' => 'Service',
+        'gallery' => 'Gallery',
         'contact' => 'Contact Us',
     ],
 
@@ -26,6 +27,8 @@ return [
     ],
     'description' => 'WE ARE A HOME SERVICE BEAUTY SALON AND SPA FOR WOMEN IN ABU DHABI.',
     'service_label' => 'SERVICE',
+    'select_service' => 'Select Service',
+    'select_location' => 'Select Location',
     'location_label' => 'LOCATION',
     'date_label' => 'DATE',
     'time_label' => 'TIME',

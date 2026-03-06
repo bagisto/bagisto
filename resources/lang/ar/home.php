@@ -4,10 +4,11 @@ return [
     'phone' => '+971 123 456 7890',
     'location' => 'خدمة منزلية، أبو ظبي',
 
-    'nav' => [
-        'home' => 'الرئيسية',
-        'shop' => 'متجر',
-        'about' => 'من نحن',
+     'nav' => [
+        'home'    => 'الرئيسية',
+        'about'   => 'معلومات عنا',
+        'service' => 'الخدمات',
+        'gallery' => 'معرض الصور',
         'contact' => 'اتصل بنا',
     ],
 
@@ -27,6 +28,8 @@ return [
     'description' => 'نحن صالون تجميل وخدمة سبا منزلية للنساء في أبو ظبي.',
     'service_label' => 'الخدمة',
     'location_label' => 'الموقع',
+    'select_service'  => 'اختر الخدمة',
+    'select_location' => 'اختر الموقع',
     'date_label' => 'التاريخ',
     'time_label' => 'الوقت',
     'search_button' => 'بحث',

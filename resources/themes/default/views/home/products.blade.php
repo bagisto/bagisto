@@ -38,49 +38,46 @@
   </div>
 
 
-  <!-- Carousel -->
-  <div id="productCarousel"
-       class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar">
+<!-- Carousel -->
+<div id="productCarousel"
+     class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar">
 
-    @forelse($products as $product)
+@forelse($products as $product)
 
-      <div class="flex-shrink-0 w-full sm:w-[48%] lg:w-[23%] flex flex-col items-center cursor-pointer">
+<a href="{{ route('shop.home.product.details', $product->url_key) }}"
+   class="flex-shrink-0 w-full sm:w-[48%] lg:w-[23%] flex flex-col items-center cursor-pointer">
 
-        <div
-          class="relative w-full h-[240px] md:h-[300px] rounded-xl overflow-hidden bg-[#e8e3dc] mb-5 transition-transform transform hover:translate-y-1 hover:shadow-2xl">
+    <div
+      class="relative w-full h-[240px] md:h-[300px] rounded-xl overflow-hidden bg-[#e8e3dc] mb-5 transition-transform transform hover:translate-y-1 hover:shadow-2xl">
 
-          <img class="w-full h-full object-cover"
-               src="{{ $product->product->base_image_url ?? 'https://via.placeholder.com/400' }}"
-               alt="{{ $product->name }}">
-        </div>
+      <img class="w-full h-full object-cover"
+           src="{{ $product->product->base_image_url ?? 'https://via.placeholder.com/400' }}"
+           alt="{{ $product->name }}">
+    </div>  
 
-        <!-- Product Title -->
-        <span class="font-oswald text-center uppercase text-[#371E0F]"
-              style="
-                font-weight:400;
-                font-size:24px;
-                line-height:100%;
-                letter-spacing:10%;
-              ">
-          {{ $product->name }}
-        </span>
+    <!-- Product Title -->
+    <span class="font-oswald text-center uppercase text-[#371E0F]"
+          style="
+            font-weight:400;
+            font-size:24px;
+            line-height:100%;
+            letter-spacing:10%;
+          ">
+      {{ $product->name }}
+    </span>
 
-        <!-- Product Price -->
-<span class="font-oswald text-[24px] tracking-[0.1em] uppercase text-[#DFAA8B] text-center">
-  {{ core()->currency($product->price) }}
-</span>
+    <!-- Product Price -->
+    <span class="font-oswald text-[24px] tracking-[0.1em] uppercase text-[#DFAA8B] text-center">
+        {{ core()->currency($product->price) }}
+    </span>
 
-      </div>
+</a>
 
-    @empty
+@empty
+<p>No products found</p>
+@endforelse
 
-      <div class="w-full text-center py-10 text-gray-500">
-        No products available.
-      </div>
-
-    @endforelse
-
-  </div>
+</div>
 
 </section>
 

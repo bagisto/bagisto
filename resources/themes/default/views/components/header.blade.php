@@ -1,6 +1,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 
+@php
+    $channel = core()->getCurrentChannel();
+    $locales = $channel->locales;
+    $currentLocale = app()->getLocale();
+
+    // Flags
+    $flags = [
+        'en' => 'us',
+        'ar' => 'ae',
+    ];
+@endphp
+
 {{-- ================= TOP BAR ================= --}}
 <div class="bg-[#F3EFEE] w-full text-[#371E0F] font-['Roboto'] text-sm">
     <div class="max-w-[1400px] mx-auto px-4 md:px-8">
@@ -11,12 +23,12 @@
                 <!-- Phone -->
                 <div class="flex items-center gap-2">
                     <img src="{{ asset('images/support.png') }}" alt="Support" class="h-4 w-4">
-                    <span class="topbar-text">+971 123 456 7890</span>
+                    <span class="topbar-text">{{ __('home.phone') }}</span>
                 </div>
                 <!-- Location -->
                 <div class="flex items-center gap-2">
                     <img src="{{ asset('images/location.png') }}" alt="Location" class="h-4 w-4">
-                    <span class="topbar-text">Home Service, Abu Dhabi</span>
+                    <span class="topbar-text">{{ __('home.location') }}</span>
                 </div>
             </div>
 
@@ -24,21 +36,26 @@
             <div class="flex items-center gap-4 md:gap-8 mt-2 md:mt-0 flex-wrap">
 
                 <!-- Language Dropdown -->
-                <div class="relative">
-                    <div class="flex items-center gap-2 cursor-pointer topbar-text dropdown-toggle">
-                        <img src="https://flagcdn.com/w20/ae.png" class="w-5 h-5 rounded-full" alt="UAE Flag">
-                        <span>Arabic</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#371E0F" class="w-4 h-4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                <div class="relative inline-block text-left">
+                    <button id="localeBtn" class="flex items-center gap-2 px-4 py-2 border rounded hover:bg-gray-100">
+                        <img src="https://flagcdn.com/w20/{{ $flags[$currentLocale] ?? 'us' }}.png" class="w-5 h-5 rounded-full">
+                        {{ $locales->where('code', $currentLocale)->first()->name ?? $currentLocale }}
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
-                    </div>
-                    <div class="dropdown-menu absolute right-0 mt-2 w-36 bg-white border rounded shadow-lg hidden z-50">
-                        <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
-                            <img src="https://flagcdn.com/w20/ae.png" class="w-5 h-5 rounded-full"> Arabic
-                        </div>
-                        <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
-                            <img src="https://flagcdn.com/w20/gb.png" class="w-5 h-5 rounded-full"> English
-                        </div>
+                    </button>
+
+                    <div id="localeDropdown" class="absolute mt-2 w-36 bg-white border rounded shadow-lg hidden z-50">
+                        @foreach($locales as $locale)
+                            @if($locale->code !== $currentLocale)
+                                <a href="{{ route('switch.language',$locale->code) }}">
+                                    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                                        <img src="https://flagcdn.com/w20/{{ $flags[$locale->code] ?? 'us' }}.png" class="w-5 h-5 rounded-full">
+                                        {{ $locale->name }}
+                                    </div>
+                                </a>
+                            @endif
+                        @endforeach
                     </div>
                 </div>
 
@@ -61,7 +78,6 @@
         </div>
     </div>
 </div>
-{{-- ================= END TOP BAR ================= --}}
 
 {{-- ================= MAIN HEADER ================= --}}
 <header class="w-full bg-white shadow-sm">
@@ -84,7 +100,7 @@
                         <input 
                             type="text" 
                             name="q"
-                            placeholder="Search services/products here..." 
+                            placeholder="{{ __('home.search_placeholder') }}"
                             class="w-full h-[45px] pl-4 pr-12 text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-[0.02em] font-['Roboto'] font-normal text-[#371E0F] placeholder-[#371E0F] border border-gray-200 focus:border-black focus:outline-none rounded-md"
                         >
                         <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-[#371E0F]">
@@ -102,11 +118,11 @@
 
                 {{-- NAVIGATION --}}
                 <nav class="hidden lg:flex items-center gap-10 text-[#371E0F]">
-                    <a href="{{ route('shop.home.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.index' ? 'active' : '' }}">Home</a>
-                    <a href="{{ route('shop.home.aboutus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.aboutus' ? 'active' : '' }}">About Us</a>
-                    <a href="{{ route('shop.home.all.services') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.all.services' ? 'active' : '' }}">Services</a>
-                    <a href="{{ route('shop.gallery.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.gallery.index' ? 'active' : '' }}">Gallery</a>
-                    <a href="{{ route('shop.home.contactus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.contactus' ? 'active' : '' }}">Contact Us</a>
+                    <a href="{{ route('shop.home.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.index' ? 'active' : '' }}">{{ __('home.nav.home') }}</a>
+                    <a href="{{ route('shop.home.aboutus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.aboutus' ? 'active' : '' }}">{{ __('home.nav.about') }}</a>
+                    <a href="{{ route('shop.home.all.services') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.all.services' ? 'active' : '' }}">{{ __('home.nav.service') }}</a>
+                    <a href="{{ route('shop.gallery.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.gallery.index' ? 'active' : '' }}">{{ __('home.nav.gallery') }}</a>
+                    <a href="{{ route('shop.home.contactus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.contactus' ? 'active' : '' }}">{{ __('home.nav.contact') }}</a>
                 </nav>
 
                 {{-- HAMBURGER MENU FOR MOBILE & TABLET --}}
@@ -125,6 +141,7 @@
                 <div class="relative cursor-pointer">
                     <img src="{{ asset('images/wishlist.png') }}" alt="Wishlist" class="w-6 h-6">
                 </div>
+
             </div>
 
         </div>
@@ -132,69 +149,27 @@
         {{-- MOBILE/TABLET NAVIGATION --}}
         <div class="lg:hidden" id="mobile-menu" style="display:none;">
             <nav class="flex flex-col gap-3 mt-3">
-                <a href="{{ route('shop.home.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.index' ? 'active' : '' }}">Home</a>
-                <a href="{{ route('shop.home.aboutus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.aboutus' ? 'active' : '' }}">About Us</a>
-                <a href="{{ route('shop.home.all.services') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.all.services' ? 'active' : '' }}">Services</a>
-                <a href="{{ route('shop.gallery.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.gallery.index' ? 'active' : '' }}">Gallery</a>
-                <a href="{{ route('shop.home.contactus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.contactus' ? 'active' : '' }}">Contact Us</a>
+                <a href="{{ route('shop.home.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.index' ? 'active' : '' }}">{{ __('home.nav.home') }}</a>
+                <a href="{{ route('shop.home.aboutus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.aboutus' ? 'active' : '' }}">{{ __('home.nav.about') }}</a>
+                <a href="{{ route('shop.home.all.services') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.all.services' ? 'active' : '' }}">{{ __('home.nav.service') }}</a>
+                <a href="{{ route('shop.gallery.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.gallery.index' ? 'active' : '' }}">{{ __('home.nav.gallery') }}</a>
+                <a href="{{ route('shop.home.contactus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.contactus' ? 'active' : '' }}">{{ __('home.nav.contact') }}</a>
             </nav>
         </div>
     </div>
 </header>
 
-<style>
-.nav-link {
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 24px;
-    letter-spacing: 0.02em;
-    color: #371E0F;
-    position: relative;
-    padding-bottom: 4px;
-    transition: 0.3s ease;
-}
-
-/* Smaller font for mobile */
-@media (max-width: 639px) {
-    .nav-link { font-size: 14px; line-height: 20px; }
-    .topbar-text { font-size: 12px; line-height: 16px; }
-}
-
-.nav-link:hover {
-    opacity: 0.7;
-}
-.nav-link.active::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 24px;
-    height: 2px;
-    background-color: #F3EFEE;
-}
-.topbar-text {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0.02em;
-}
-
-/* Dropdown hidden by default */
-.dropdown-menu { display: none; }
-</style>
-
+{{-- ================= JS ================= --}}
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile/tablet menu toggle
+    // Mobile menu toggle
     const mobileToggle = document.getElementById('mobile-menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
-    mobileToggle.addEventListener('click', () => {
+    mobileToggle?.addEventListener('click', () => {
         mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
     });
 
-    // Dropdowns
+    // Top bar dropdowns
     document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
         toggle.addEventListener('click', () => {
             const menu = toggle.nextElementSibling;
@@ -202,10 +177,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close dropdown if clicked outside
-    document.addEventListener('click', function(e) {
-        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-            if (!menu.previousElementSibling.contains(e.target) && !menu.contains(e.target)) {
+    // Language dropdown
+    const btn = document.getElementById('localeBtn');
+    const dropdown = document.getElementById('localeDropdown');
+
+    btn?.addEventListener('click', () => {
+        dropdown.classList.toggle('hidden');
+    });
+
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+        document.querySelectorAll('.dropdown-menu, #localeDropdown').forEach(menu => {
+            if (!menu.previousElementSibling.contains(event.target) && !menu.contains(event.target)) {
                 menu.classList.add('hidden');
             }
         });

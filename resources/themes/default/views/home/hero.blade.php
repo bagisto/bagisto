@@ -10,15 +10,17 @@
             <!-- LEFT SIDE -->
             <div class="bg-[#E9E4DF] flex items-center">
                 <div class="px-6 md:px-16 py-8 md:py-12">
-                    <p class="text-sm text-[#371E0F] mb-4">SPA & Beauty Center</p>
+                    <p class="text-sm text-[#371E0F] mb-4">{{ __('home.spa_name') }}</p>
 
                     <h1 class="font-oswald text-[32px] md:text-[64px] leading-[1.1] text-[#371E0F] uppercase">
-                        THE BEST TIME TO <span class="text-[#DFAA8B]">RELAX</span><br>
-                        WITH BEAUTY <span class="text-[#DFAA8B]">SALON</span>
+                        {{ __('home.title.line1') }} 
+                        <span class="text-[#DFAA8B]">{{ __('home.title.highlight1') }}</span><br>
+                        {{ __('home.title.line2') }} 
+                        <span class="text-[#DFAA8B]">{{ __('home.title.highlight2') }}</span>
                     </h1>
 
                     <p class="mt-6 text-[#371E0F] text-sm max-w-md">
-                        WE ARE A HOME SERVICE BEAUTY SALON AND SPA FOR WOMEN IN ABU DHABI.  
+                        {{ __('home.description') }}
                     </p>
                 </div>
             </div>
@@ -39,60 +41,63 @@
         <form id="bookingForm" action="{{ route('booking.search') }}" method="GET" class="max-w-5xl mx-auto">
             <div class="bg-white rounded-2xl shadow-xl p-6 grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
 
-                <!-- SERVICE -->
-                <div>
-                    <label class="text-xs text-gray-500 block mb-1">SERVICE</label>
-                    <select name="service_category_id" required class="w-full border rounded-full px-4 py-2 text-sm">
-                        <option value="">Select service</option>
-                        @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
-                    </select>
-                    <span class="text-red-500 text-xs hidden" id="serviceError">Please select a service</span>
-                </div>
-
+  <!-- SERVICE -->  
+    <div>
+        <label class="text-xs text-gray-500 block mb-1">{{ __('home.service_label') }}</label>
+        <select name="service_category_id" required class="w-full border rounded-full px-4 py-2 text-sm">
+        <option value="">{{ __('home.select_service') ?? 'Select service' }}</option>
+        @foreach($categories as $category)
+            <option value="{{ $category->id }}">
+                {{ $category->translate(app()->getLocale())?->name ?? $category->name }}
+            </option>
+        @endforeach
+        </select>
+        <span class="text-red-500 text-xs hidden" id="serviceError">
+        {{ __('home.select_service_error') ?? 'Please select a service' }}
+        </span>
+    </div>
                 <!-- LOCATION -->
                 <div>
-                    <label class="text-xs text-gray-500 block mb-1">LOCATION</label>
+                    <label class="text-xs text-gray-500 block mb-1">{{ __('home.location_label') }}</label>
                     <select name="service_location" required class="w-full border rounded-full px-4 py-2 text-sm">
-                        <option value="">Select location</option>
+                        <option value="">{{ __('home.select_location') ?? 'Select location' }}</option>
                         @foreach($service_locations as $location)
                         <option value="{{ $location }}">{{ $location }}</option>
                         @endforeach
                     </select>
-                    <span class="text-red-500 text-xs hidden" id="locationError">Please select a location</span>
+                    <span class="text-red-500 text-xs hidden" id="locationError">{{ __('home.select_location_error') ?? 'Please select a location' }}</span>
                 </div>
 
                 <!-- DATE -->
                 <div>
-                    <label class="text-xs text-gray-500 block mb-1">DATE</label>
+                    <label class="text-xs text-gray-500 block mb-1">{{ __('home.date_label') }}</label>
                     <input 
                         type="date"
                         name="service_date"
                         required
                         class="w-full border rounded-full px-4 py-2 text-sm">
-                    <span class="text-red-500 text-xs hidden" id="dateError">Please select a date</span>
+                    <span class="text-red-500 text-xs hidden" id="dateError">{{ __('home.select_date_error') ?? 'Please select a date' }}</span>
                 </div>
 
-               
-               <div>
-    <label class="text-xs text-gray-500 block mb-1">TIME</label>
-    <input 
-        type="time"
-        id="service_time"
-        name="service_time"
-        required
-        class="w-full border rounded-full px-4 py-2 text-sm"
-        placeholder="Select Time">
-    <span class="text-red-500 text-xs hidden" id="timeError">Please select a time</span>
-</div>
+                <!-- TIME -->
+                <div>
+                    <label class="text-xs text-gray-500 block mb-1">{{ __('home.time_label') }}</label>
+                    <input 
+                        type="time"
+                        id="service_time"
+                        name="service_time"
+                        required
+                        class="w-full border rounded-full px-4 py-2 text-sm"
+                        placeholder="{{ __('home.select_time') ?? 'Select Time' }}">
+                    <span class="text-red-500 text-xs hidden" id="timeError">{{ __('home.select_time_error') ?? 'Please select a time' }}</span>
+                </div>
 
                 <!-- SUBMIT BUTTON -->
                 <div class="flex items-center">
                     <button 
                         type="submit"
                         class="w-full bg-[#DFAA8B] hover:bg-[#c58a61] text-white rounded-full py-2 text-sm font-medium">
-                        SEARCH
+                        {{ __('home.search_button') }}
                     </button>
                 </div>
 
@@ -134,5 +139,4 @@
 
         if(!valid) e.preventDefault();
     });
-
 </script>

@@ -263,92 +263,92 @@ return [
     /**
      * Settings.
      */
-    // [
-    //     'key' => 'settings',
-    //     'name' => 'admin::app.components.layouts.sidebar.settings',
-    //     'route' => 'admin.settings.locales.index',
-    //     'sort' => 8,
-    //     'icon' => 'icon-settings',
-    //     'icon-class' => 'settings-icon',
-    // ], [
-    //     'key' => 'settings.locales',
-    //     'name' => 'admin::app.components.layouts.sidebar.locales',
-    //     'route' => 'admin.settings.locales.index',
-    //     'sort' => 1,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.currencies',
-    //     'name' => 'admin::app.components.layouts.sidebar.currencies',
-    //     'route' => 'admin.settings.currencies.index',
-    //     'sort' => 2,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.exchange_rates',
-    //     'name' => 'admin::app.components.layouts.sidebar.exchange-rates',
-    //     'route' => 'admin.settings.exchange_rates.index',
-    //     'sort' => 3,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.inventory_sources',
-    //     'name' => 'admin::app.components.layouts.sidebar.inventory-sources',
-    //     'route' => 'admin.settings.inventory_sources.index',
-    //     'sort' => 4,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.channels',
-    //     'name' => 'admin::app.components.layouts.sidebar.channels',
-    //     'route' => 'admin.settings.channels.index',
-    //     'sort' => 5,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.users',
-    //     'name' => 'admin::app.components.layouts.sidebar.users',
-    //     'route' => 'admin.settings.users.index',
-    //     'sort' => 6,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.roles',
-    //     'name' => 'admin::app.components.layouts.sidebar.roles',
-    //     'route' => 'admin.settings.roles.index',
-    //     'sort' => 7,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.themes',
-    //     'name' => 'admin::app.components.layouts.sidebar.themes',
-    //     'route' => 'admin.settings.themes.index',
-    //     'sort' => 8,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.taxes',
-    //     'name' => 'admin::app.components.layouts.sidebar.taxes',
-    //     'route' => 'admin.settings.taxes.categories.index',
-    //     'sort' => 9,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.taxes.tax_categories',
-    //     'name' => 'admin::app.components.layouts.sidebar.tax-categories',
-    //     'route' => 'admin.settings.taxes.categories.index',
-    //     'sort' => 1,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.taxes.tax_rates',
-    //     'name' => 'admin::app.components.layouts.sidebar.tax-rates',
-    //     'route' => 'admin.settings.taxes.rates.index',
-    //     'sort' => 2,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.data_transfer',
-    //     'name' => 'admin::app.components.layouts.sidebar.data-transfer',
-    //     'route' => 'admin.settings.data_transfer.imports.index',
-    //     'sort' => 10,
-    //     'icon' => '',
-    // ], [
-    //     'key' => 'settings.data_transfer.imports',
-    //     'name' => 'admin::app.components.layouts.sidebar.imports',
-    //     'route' => 'admin.settings.data_transfer.imports.index',
-    //     'sort' => 1,
-    //     'icon' => '',
-    // ],
+    [
+        'key' => 'settings',
+        'name' => 'admin::app.components.layouts.sidebar.settings',
+        'route' => 'admin.settings.locales.index',
+        'sort' => 8,
+        'icon' => 'icon-settings',
+        'icon-class' => 'settings-icon',
+    ], [
+        'key' => 'settings.locales',
+        'name' => 'admin::app.components.layouts.sidebar.locales',
+        'route' => 'admin.settings.locales.index',
+        'sort' => 1,
+        'icon' => '',
+    ], [
+        'key' => 'settings.currencies',
+        'name' => 'admin::app.components.layouts.sidebar.currencies',
+        'route' => 'admin.settings.currencies.index',
+        'sort' => 2,
+        'icon' => '',
+    ], [
+        'key' => 'settings.exchange_rates',
+        'name' => 'admin::app.components.layouts.sidebar.exchange-rates',
+        'route' => 'admin.settings.exchange_rates.index',
+        'sort' => 3,
+        'icon' => '',
+    ], [
+        'key' => 'settings.inventory_sources',
+        'name' => 'admin::app.components.layouts.sidebar.inventory-sources',
+        'route' => 'admin.settings.inventory_sources.index',
+        'sort' => 4,
+        'icon' => '',
+    ], [
+        'key' => 'settings.channels',
+        'name' => 'admin::app.components.layouts.sidebar.channels',
+        'route' => 'admin.settings.channels.index',
+        'sort' => 5,
+        'icon' => '',
+    ], [
+        'key' => 'settings.users',
+        'name' => 'admin::app.components.layouts.sidebar.users',
+        'route' => 'admin.settings.users.index',
+        'sort' => 6,
+        'icon' => '',
+    ], [
+        'key' => 'settings.roles',
+        'name' => 'admin::app.components.layouts.sidebar.roles',
+        'route' => 'admin.settings.roles.index',
+        'sort' => 7,
+        'icon' => '',
+    ], [
+        'key' => 'settings.themes',
+        'name' => 'admin::app.components.layouts.sidebar.themes',
+        'route' => 'admin.settings.themes.index',
+        'sort' => 8,
+        'icon' => '',
+    ], [
+        'key' => 'settings.taxes',
+        'name' => 'admin::app.components.layouts.sidebar.taxes',
+        'route' => 'admin.settings.taxes.categories.index',
+        'sort' => 9,
+        'icon' => '',
+    ], [
+        'key' => 'settings.taxes.tax_categories',
+        'name' => 'admin::app.components.layouts.sidebar.tax-categories',
+        'route' => 'admin.settings.taxes.categories.index',
+        'sort' => 1,
+        'icon' => '',
+    ], [
+        'key' => 'settings.taxes.tax_rates',
+        'name' => 'admin::app.components.layouts.sidebar.tax-rates',
+        'route' => 'admin.settings.taxes.rates.index',
+        'sort' => 2,
+        'icon' => '',
+    ], [
+        'key' => 'settings.data_transfer',
+        'name' => 'admin::app.components.layouts.sidebar.data-transfer',
+        'route' => 'admin.settings.data_transfer.imports.index',
+        'sort' => 10,
+        'icon' => '',
+    ], [
+        'key' => 'settings.data_transfer.imports',
+        'name' => 'admin::app.components.layouts.sidebar.imports',
+        'route' => 'admin.settings.data_transfer.imports.index',
+        'sort' => 1,
+        'icon' => '',
+    ],
 
     /**
      * Configuration.
