@@ -167,15 +167,10 @@ public function servicesByCategory(Request $request)
         return view('shop::gallery.index');
     }
 
-    public function servicesDetails($id){
-        $service = ProductFlat::find($id)->first();
-        return view('shop::service_details.index',compact('service'));
-    }
-
     // Product details page
     public function productDetails($url_key){
 
-        // fetch single product based on current channel and locale
+        // fetch single product based on url,current channel and locale
         $productFlat = ProductFlat::with(['product.images'])
                    ->where('url_key',$url_key)
                    ->where('locale',app()->getLocale())
@@ -194,21 +189,32 @@ public function servicesByCategory(Request $request)
     }
 
 
-    /**
-     * Loads the home page for the storefront if something wrong.
-     *
-     * @return \Exception
-     */
+    // Service details page
+    public function servicesDetails($url_key){
+        // fetch single product based on current channel and locale
+        $serviceFlat = ProductFlat::with(['product.images'])
+                   ->where('url_key',$url_key)
+                   ->where('locale',app()->getLocale())
+                   ->where('channel',core()->getCurrentChannelCode())
+                   ->firstOrFail();
+        
+        // fetch product images by sorting as per position
+        $images = $serviceFlat->product->images->sortBy('position')->values();
+
+        // Remove first image (main image)
+        $otherImages = $images->slice(1)->take(4);
+
+        // dd($otherImages[3]['path']);
+
+        return view('shop::service_details.index',compact('serviceFlat','otherImages'));
+    }
+
     public function notFound()
     {
         abort(404);
     }
 
-    /**
-     * Summary of contact.
-     *
-     * @return \Illuminate\View\View
-     */
+
     public function contactUs()
     {
         return view('shop::home.contact-us');

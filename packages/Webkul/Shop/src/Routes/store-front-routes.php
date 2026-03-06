@@ -35,7 +35,7 @@ Route::get('/services/{slug}', [HomeController::class, 'servicesByCategory'])
     ->name('shop.home.services');
 
 // Service details page
-Route::get('/service/{id}', [HomeController::class, 'servicesDetails'])
+Route::get('/service/{url_key}', [HomeController::class, 'servicesDetails'])
     ->name('shop.home.service.details');
 
 // Product details page

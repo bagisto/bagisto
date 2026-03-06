@@ -72,8 +72,10 @@ Services Treatment
                     </div>
                     <span class="font-oswald text-[20px] text-[#DFAA8B] uppercase">{{ core()->currency($service->price) }}</span>
                 </div>
-                <div class="font-roboto text-[15px] leading-[24px] tracking-[0.02em] text-[#78718B] mb-4">{!! $service->short_description !!}</div>
+                <div class="font-roboto text-[15px] leading-[24px] tracking-[0.02em] text-[#78718B] mb-4">{!! $service->short_description !!}</div> 
+               <a href="{{ route('shop.home.service.details',$service->product->url_key) }}">
                 <button class="bg-[#D7CDBA] text-[#371E0F] font-roboto font-medium text-[14px] px-5 py-1 rounded-full w-fit">Book Now</button>
+                </a>
             </div>
         </div>
     @empty
@@ -125,7 +127,9 @@ document.addEventListener("DOMContentLoaded", function() {
             <span class="font-oswald text-[20px] text-[#DFAA8B] uppercase">${service.price}</span>
         </div>
         <div class="font-roboto text-[15px] leading-[24px] tracking-[0.02em] text-[#78718B] mb-4">${service.short_description}</div>
+         <a href="{{ route('shop.home.service.details',$service->product->url_key) }}">
         <button class="bg-[#D7CDBA] text-[#371E0F] font-roboto font-medium text-[14px] px-5 py-1 rounded-full w-fit">Book Now</button>
+        </a>
     </div>
 </div>`;
                     });
