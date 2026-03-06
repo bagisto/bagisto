@@ -31,9 +31,9 @@ class CartController extends Controller
 
     $cart = Cart::create([
     'customer_id' => auth()->id(),
-    'customer_email' => $user->email,
-    'customer_first_name' => $user->first_name,
-    'customer_last_name' => $user->last_name,
+    'customer_email' => $user->email ?? '',
+    'customer_first_name' => $user->first_name ?? '',
+    'customer_last_name' => $user->last_name ?? '',
     'channel_id' => core()->getCurrentChannel()->id,
     'currency_code' => core()->getCurrentCurrencyCode(),
     ]);

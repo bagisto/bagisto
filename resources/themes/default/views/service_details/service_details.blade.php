@@ -87,17 +87,12 @@
             </div>
 
 <!-- Book Now Button -->
-@auth
 <button onclick="openModal()"
-    class="inline-block bg-[#c07a3a] text-white px-8 py-3 rounded-full text-sm tracking-wide hover:bg-[#a8652f] transition" style="width:25%">
+    class="inline-block bg-[#c07a3a] text-white px-8 py-3 rounded-full text-sm tracking-wide hover:bg-[#a8652f] transition"
+    style="width:25%">
     BOOK NOW
 </button>
-@else
-<a href="{{ route('shop.customer.session.create') }}"
-   class="bg-[#c07a3a] text-white px-8 py-3 rounded-full text-sm tracking-wide hover:bg-[#a8652f] transition" style="width:25%">
-   BOOK NOW
-</a>
-@endauth
+
         </div>
 
     </div>
@@ -218,7 +213,7 @@
             <div class="text-sm mt-1 text-[#371E0F]">⭐ 4.6</div>
         </div>
         @empty
-        No 
+        No Professional Available
         @endforelse
 
     </div>
