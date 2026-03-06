@@ -521,4 +521,10 @@ class Product extends Model implements ProductContract
     {
         return ProductFactory::new();
     }
+
+
+public function bookingProducts()
+{
+    return $this->hasOne(BookingProductProxy::modelClass(), 'product_id');
+}
 }

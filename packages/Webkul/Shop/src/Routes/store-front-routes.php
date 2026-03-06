@@ -22,7 +22,7 @@ Route::get('/switch/lang/{ln}',[HomeController::class,'switchLanguage'])->name('
 Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
 
 // Search box
-Route::get('/booking/search', [SearchController::class, 'bookingSearch'])->name('booking.search');   
+Route::get('/booking/search', [SearchController::class, 'serviceSearchResult'])->name('booking.search');   
 
 
 

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Webkul\Category\Models\CategoryTranslation;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Category\Models\Category;
+use Webkul\BookingProduct\Models\BookingProduct;
 
 
 class SearchController extends Controller
@@ -86,21 +87,50 @@ class SearchController extends Controller
     }
 
 
-public function bookingSearch(Request $req)
+
+public function serviceSearchResult(Request $req)
 {
-       $req->validate([
-    'service_category_id' => ['required', 'integer'],
-    'service_location' => ['required', 'string'],
-    'service_date' => ['required', 'date'],
-    'service_time' => ['required', 'date_format:H:i'], // <-- validate time format
+    $req->validate([
+        'service_category_id' => ['required', 'integer'],
+        'service_location' => ['required', 'string'],
+        'service_date' => ['required', 'date'],
+        'service_time' => ['required', 'date_format:H:i'], // validate time format
     ]);
 
-    return redirect()->route('shop.search.index', [
-    'category_id' => $req->service_category_id,
-    'service_location' => $req->service_location,
-    'service_date' => $req->service_date,
-    'service_time' => $req->service_time,
-]);
+    $service_category_id = $req->service_category_id;
+    $service_location = $req->service_location;
+    $service_date = $req->service_date; // YYYY-MM-DD
 
+    // Fetch all root categories and children
+    $rootCategory = Category::whereNull('parent_id')->first();
+    $categories = Category::where('parent_id', $rootCategory->id)
+        ->where('status',1)
+        ->with('translations')
+        ->get();
+
+    // Fetch services filtered by category, location, and date
+    $services = ProductFlat::with(['product.images'])
+        ->where('type', 'booking')
+        ->where('status', 1)
+        ->where('visible_individually', 1)
+        ->where('locale', app()->getLocale())
+        ->where('channel', core()->getCurrentChannel()->code)
+        ->whereHas('product.categories', function ($q) use ($service_category_id) {
+            $q->where('category_id', $service_category_id);
+        })
+        ->whereHas('product.bookingProducts', function ($q) use ($service_location, $service_date) {
+            $q->where('location', $service_location)
+              ->whereDate('available_from', '<=', $service_date)
+              ->whereDate('available_to', '>=', $service_date);
+        })
+        ->get();
+
+    // Send the selected category id so Blade can mark the active tab
+    return view('shop::services.index', compact(
+        'services',
+        'service_category_id',
+        'categories',
+    ));
 }
+
 }

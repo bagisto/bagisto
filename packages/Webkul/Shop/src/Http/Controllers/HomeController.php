@@ -76,14 +76,6 @@ class HomeController extends Controller
     ->where('channel', core()->getCurrentChannel()->code) // current channel
     ->get();
 
-    // service location shown on hero banner 
-    // $service_locations = ProductFlat::where('status',1)
-    //     ->where('type','booking')
-    //     ->where('visible_individually',1)
-    //     ->where('locale',app()->getLocale())
-    //     ->where('channel',core()->getCurrentChannel()->code)
-    //     ->get();
-
     $service_locations = BookingProduct::pluck('location');
  
     return view('shop::home.index', compact(
@@ -264,36 +256,8 @@ public function switchLanguage($locale)
 
 
 
-    public function allServices(){
-        // Get root category (parent_id = null in Bagisto usually)
-    $rootCategory = Category::whereNull('parent_id')->first();
+// public function serviceSearchResult(){
+//        return view('shop::services.index');
+// }
 
-    if (!$rootCategory) {
-        return view('shop::home.index', [
-            'categories' => collect(),
-            'services'   => collect(),
-        ]);
-    }
-
-    // Get child categories under root
-    $categories = Category::where('parent_id', $rootCategory->id)->get();
-
-    // Load services from first category (default)
-    $services = collect();
-
-    if ($categories->count()) {
-
-        $firstCategory = $categories->first();
-
-        $services = $firstCategory->products()
-    ->where('type', 'booking')
-    ->whereHas('product_flats', function ($q) {
-        $q->where('status', 1)
-          ->where('visible_individually', 1);
-    })->get();
-    }
-
-        return view('shop::services.index',compact('categories','services'));
-    }
-    
 }
