@@ -139,7 +139,12 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Component -->
-                    <x-admin::seo slug="page"/>
+                    <x-admin::seo
+                        slug="page"
+                        meta-title-field="meta_title"
+                        url-key-field="url_key"
+                        meta-description-field="meta_description"
+                    />
 
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label>

@@ -293,7 +293,12 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Componnet -->
-                    <x-admin::seo/>
+                    <x-admin::seo
+                        meta-title-field="meta_title"
+                        url-key-field="hostname"
+                        meta-description-field="meta_description"
+                        url-type="host"
+                    />
 
                     <!-- Meta Title -->
                     <x-admin::form.control-group>

@@ -181,7 +181,11 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Component -->
-                    <x-admin::seo />
+                    <x-admin::seo
+                        meta-title-field="meta_title"
+                        url-key-field="slug"
+                        meta-description-field="meta_description"
+                    />
 
                     <div class="mt-8">
                         <!-- Meta Title -->

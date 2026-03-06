@@ -230,7 +230,11 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Component -->
-                    <x-admin::seo/>
+                    <x-admin::seo
+                        meta-title-field="{{ $currentLocale->code }}[meta_title]"
+                        url-key-field="{{ $currentLocale->code }}[slug]"
+                        meta-description-field="{{ $currentLocale->code }}[meta_description]"
+                    />
 
                     <div class="mt-8">
                         <!-- Meta Title -->
