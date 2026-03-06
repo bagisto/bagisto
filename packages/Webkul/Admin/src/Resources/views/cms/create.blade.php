@@ -83,7 +83,12 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Component -->
-                    <x-admin::seo/>
+                    <x-admin::seo
+                        slug="page"
+                        meta-title-field="meta_title"
+                        url-key-field="url_key"
+                        meta-description-field="meta_description"
+                    />
 
                     <!-- Meta Title -->
                     <x-admin::form.control-group>
