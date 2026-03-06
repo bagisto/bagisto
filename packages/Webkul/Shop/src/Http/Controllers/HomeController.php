@@ -17,6 +17,7 @@ use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Models\Product;
 use Webkul\BookingProduct\Models\BookingProduct;
+use App\Models\Professional;
 
 class HomeController extends Controller
 {
@@ -204,9 +205,9 @@ public function servicesByCategory(Request $request)
         // Remove first image (main image)
         $otherImages = $images->slice(1)->take(4);
 
-        // dd($otherImages[3]['path']);
+        $professionals =  Professional::where('status',1)->get();
 
-        return view('shop::service_details.index',compact('serviceFlat','otherImages'));
+        return view('shop::service_details.index',compact('serviceFlat','otherImages','professionals'));
     }
 
     public function notFound()
@@ -262,8 +263,5 @@ public function switchLanguage($locale)
 
 
 
-// public function serviceSearchResult(){
-//        return view('shop::services.index');
-// }
 
 }

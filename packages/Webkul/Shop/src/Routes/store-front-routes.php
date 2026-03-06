@@ -4,9 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\BookingProductController;
 use Webkul\Shop\Http\Controllers\CompareController;
 use Webkul\Shop\Http\Controllers\HomeController;
+use Webkul\Shop\Http\Controllers\CartController;
 use Webkul\Shop\Http\Controllers\PageController;
 use Webkul\Shop\Http\Controllers\ProductController;
-use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
+use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController; 
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
 use Webkul\Admin\Http\Controllers\Settings\LocaleController;
@@ -63,6 +64,11 @@ Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail']
     ->name('shop.home.contact_us.send_mail');
 
 Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
+
+Route::post('add/cart',[CartController::class,'addToCart'])->name('shop.add.cart');
+
+Route::get('cart/index',[CartController::class,'indexCart'])->name('shop.cart.index');
+
 
 /**
  * Subscription routes.
