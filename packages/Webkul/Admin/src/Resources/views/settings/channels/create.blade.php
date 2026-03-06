@@ -280,7 +280,12 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Component -->
-                    <x-admin::seo/>
+                    <x-admin::seo
+                        meta-title-field="meta_title"
+                        url-key-field="hostname"
+                        meta-description-field="meta_description"
+                        url-type="host"
+                    />
 
                     <!-- SEO Title -->
                     <x-admin::form.control-group>

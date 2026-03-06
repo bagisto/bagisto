@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed an issue where wishlist items were being fetched for all customers when performing "Move to Cart" or deleting wishlist items.
 
+- #11107 [fixed] - Fixed SEO URL Preview Issue.
+
 ## **v2.3.13 (2nd of March 2026)** - *Release*
 
 - Fixed catalog rule and cart rule condition validation where boolean value `0` was being incorrectly treated as empty and causing the condition to fail.

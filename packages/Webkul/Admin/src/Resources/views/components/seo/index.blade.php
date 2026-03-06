@@ -1,3 +1,4 @@
+<!-- Blade Template -->
 <v-seo-helper {{ $attributes }}></v-seo-helper>
 
 @pushOnce('scripts')
@@ -16,11 +17,11 @@
             <!-- SEO Meta Title -->
             <p 
                 class="text-[#135F29]"
-                v-text="'{{ URL::to('/') }}/' + (slug ? slug + '/' : '') + (metaTitle ? metaTitle.toLowerCase().replace(/\s+/g, '-') : '')"
+                v-text="urlPreview"
             >
             </p>
 
-            <!-- SEP Meta Description -->
+            <!-- SEO Meta Description -->
             <p 
                 class="text-gray-600 dark:text-gray-300"
                 v-text="metaDescription"
@@ -30,32 +31,107 @@
     </script>
 
     <script type="module">
+        const BASE_URL = '{{ rtrim(URL::to('/'), '/') }}';
+
         app.component('v-seo-helper', {
             template: '#v-seo-helper-template',
 
-            props: ["slug"],
+            props: {
+                metaTitleField: {
+                    type: String,
+                    default: 'meta_title',
+                },
+
+                urlKeyField: {
+                    type: String,
+                    default: 'url_key',
+                },
+
+                metaDescriptionField: {
+                    type: String,
+                    default: 'meta_description',
+                },
+
+                slug: {
+                    type: String,
+                    default: '',
+                },
+
+                urlType: {
+                    type: String,
+                    default: 'path',
+                },
+            },
 
             data() {
                 return {
-                    metaTitle: this.$parent.getValues()['meta_title'],
+                    metaTitle: '',
+                    urlKey: '',
+                    metaDescription: ''
+                };
+            },
 
-                    metaDescription: this.$parent.getValues()['meta_description'],
+            computed: {
+                urlPreview() {
+                    const rawUrlValue = (this.urlKey || '').trim();
+
+                    if (this.urlType === 'host') {
+                        if (! rawUrlValue) {
+                            return `${BASE_URL}/`;
+                        }
+
+                        if (/^https?:\/\//i.test(rawUrlValue)) {
+                            return rawUrlValue.replace(/\/+$/, '');
+                        }
+
+                        return `https://${rawUrlValue.replace(/^\/+|\/+$/g, '')}`;
+                    }
+
+                    const path = [
+                        (this.slug || '').trim().replace(/^\/+|\/+$/g, ''),
+                        rawUrlValue.toLowerCase().replace(/\s+/g, '-')
+                    ].filter(Boolean).join('/');
+
+                    return path ? `${BASE_URL}/${path}` : `${BASE_URL}/`;
                 }
             },
 
             mounted() {
-                this.metaTitle = document.getElementById('meta_title').value;
+                this.bindField('metaTitle', this.metaTitleField);
 
-                this.metaDescription = document.getElementById('meta_description').value;
-
-                document.getElementById('meta_title').addEventListener('input', (e) => {
-                    this.metaTitle = e.target.value;
-                });
-
-                document.getElementById('meta_description').addEventListener('input', (e) => {
-                    this.metaDescription = e.target.value;
-                });
+                this.bindField('urlKey', this.urlKeyField);
+                
+                this.bindField('metaDescription', this.metaDescriptionField);
             },
+
+            methods: {
+                escapeSelector(value) {
+                    return window.CSS?.escape ? window.CSS.escape(value) : value.replace(/"/g, '\\"');
+                },
+
+                findElement(fieldIdentifier) {
+                    if (! fieldIdentifier) return null;
+                    
+                    const escaped = this.escapeSelector(fieldIdentifier);
+                    
+                    return document.querySelector(`#${escaped}, [name="${escaped}"]`);
+                },
+
+                bindField(stateKey, fieldIdentifier) {
+                    const element = this.findElement(fieldIdentifier);
+                    
+                    if (! element) {
+                        this[stateKey] = '';
+                        return;
+                    }
+
+                    this[stateKey] = element.value || '';
+                    
+                    element.addEventListener('input', (e) => {
+                        this[stateKey] = e.target?.value || '';
+                    });
+                }
+            }
         });
     </script>
 @endPushOnce
