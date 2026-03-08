@@ -13,7 +13,7 @@
                     {{ $header->attributes->merge(['class' => 'flex cursor-pointer select-none items-center justify-between p-4']) }}
                     role="button"
                     tabindex="0"
-                    @click="toggle"
+                    v-on:click="toggle"
                 >
                     {{ $header }}
 
