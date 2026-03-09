@@ -70,7 +70,7 @@ class CartController extends Controller
 
     // Create Cart  
     $cart = Cart::create([
-    'customer_id'        => auth()->id(),
+    'customer_id'        => auth()->id() ?? '',
     'customer_email'     => $user->email ?? '',
     'customer_first_name'=> $user->first_name ?? '',
     'customer_last_name' => $user->last_name ?? '',
