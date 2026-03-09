@@ -128,7 +128,7 @@
 <form action="{{ route('shop.add.cart') }}" id="bookingForm" method="post">
 @csrf
 
-<input type="hidden" name="product_id" value="{{ $serviceFlat->id }}">
+<input type="hidden" name="product_id" value="{{ $serviceFlat->product_id }}">
 <input type="hidden" name="quantity" value="1">
 <input type="hidden" name="professional_id" id="professional_id">
 

@@ -32,7 +32,7 @@ tailwind.config = {
          class="flex gap-2 overflow-x-auto scroll-smooth no-scrollbar max-w-[800px]">
 
         @foreach($categories as $category)
-            <a href="{{ route('shop.home.services', $category->slug) }}"
+            <a href="{{ route('shop.home.services.single', $category->slug) }}"
                class="category-link px-4 py-1.5 text-[13px] whitespace-nowrap transition-colors
                {{ request()->route('slug') == $category->slug 
                     ? 'text-[#2a1f14] border-b-2 border-[#2a1f14] font-semibold' 

@@ -16,3 +16,6 @@ Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(f
 
     Route::get('success', 'success')->name('shop.checkout.onepage.success');
 });
+
+
+Route::get('checkout/index',[OnepageController::class,'checkoutIndex'])->name('shop.checkout.index');

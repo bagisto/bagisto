@@ -4,7 +4,7 @@
 
 <section class="max-w-7xl mx-auto px-4 py-24 font-oswald text-[#2a1f14]">
 
-  <h2 class="text-3xl uppercase mb-12">Cart</h2>
+  <h2 class="text-3xl uppercase mb-12">Checkout</h2>
 
   <div class="grid grid-cols-12 gap-12">
 
@@ -67,7 +67,7 @@
     <span>{{ core()->currency($total) }}</span>
   </div>
 
-  <a href="{{ route('shop.checkout.index') }}">
+  <a href="{{ route('shop.checkout.onepage.index') }}">
     <button
       class="mt-10 w-full bg-[#c07a3a] hover:bg-[#a8652f] transition-colors text-white uppercase font-semibold py-3 rounded-full"
     >

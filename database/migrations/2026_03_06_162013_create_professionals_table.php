@@ -17,6 +17,7 @@ Schema::create('professionals', function (Blueprint $table) {
     $table->string('email')->unique();
     $table->string('image')->nullable();
     $table->boolean('status')->default(true);
+    $table->Integer('cart_id');
     $table->timestamps();
 });
     }

@@ -103,4 +103,10 @@ class CartItem extends Model implements CartItemContract
     {
         return CartItemFactory::new();
     }
+
+    // CartItem.php
+public function professional()
+{
+    return $this->belongsTo(\App\Models\Professional::class, 'professional_id');
+}
 }

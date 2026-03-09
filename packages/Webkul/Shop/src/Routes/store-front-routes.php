@@ -35,6 +35,10 @@ Route::get('/', [HomeController::class, 'index'])
 Route::get('/services/{slug}', [HomeController::class, 'servicesByCategory'])
     ->name('shop.home.services');
 
+Route::get('/single/service/{slug}', [HomeController::class, 'singleServicesByCategory'])
+    ->name('shop.home.services.single');
+
+
 // Service details page
 Route::get('/service/{url_key}', [HomeController::class, 'servicesDetails'])
     ->name('shop.home.service.details');

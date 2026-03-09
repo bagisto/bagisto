@@ -20,13 +20,39 @@ class CartController extends Controller
         return view('shop::checkout.cart.index');
     }
 
-    public function indexCart(){
-        return view('shop::cart.index');
+    public function indexCart()
+{
+    $user = Auth::user();
+
+    if (!$user) {
+        return redirect()->route('shop.home.index')->with('error', 'Please login to view your cart.');
     }
+
+    // Sabhi carts for this user
+    $carts = Cart::where('customer_id', $user->id)->get();
+
+    // Merge all cart items from all carts
+    $cartItems = collect(); // empty collection
+    foreach ($carts as $cart) {
+        $cartItems = $cartItems->merge(
+            $cart->items()->with(['product', 'professional'])->get()
+        );
+    }
+
+    // Calculate totals
+    $subtotal = $cartItems->sum(function ($item) {
+        return $item->quantity * ($item->product->price ?? 0);
+    });
+
+    $discount = 0; // implement discount logic if needed
+    $total = $subtotal - $discount;
+
+    return view('shop::cart.index', compact('cartItems', 'subtotal', 'discount', 'total'));
+}
 
     public function addToCart(Request $req)
     {
-
+    
     $user = Auth::user();
 
     $cart = Cart::create([
@@ -41,6 +67,7 @@ class CartController extends Controller
     $CartItem = CartItem::create([
     'cart_id' => $cart->id,
     'product_id' => $req->product_id,
+    'professional_id' => $req->professional_id,
     'quantity' => $req->quantity,
     'type' => 'booking',
     'additional' => json_encode([

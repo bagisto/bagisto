@@ -158,6 +158,76 @@ public function servicesByCategory(Request $request)
 }
 
 
+
+public function singleServicesByCategory(Request $request)
+{
+    $slug = $request->slug;
+
+    // Find the category by slug
+    $category = CategoryTranslation::where('slug', $slug)->first();
+
+    if (!$category) {
+        abort(404, 'Category not found');
+    }
+
+    $category_id = $category->category_id;
+
+    // Fetch products belonging to this category
+    $services = ProductFlat::where('status', 1) // active products
+        ->where('visible_individually', 1)
+        ->where('type','booking')
+        ->select('id', 'name', 'price', 'url_key', 'product_id')
+        ->where('locale', app()->getLocale()) // current locale
+        ->where('channel', core()->getCurrentChannel()->code) // current channel   
+        ->whereHas('product.categories', function ($q) use ($category_id) {
+            $q->where('category_id', $category_id);
+        })
+        ->take(4)
+        ->get();
+
+    // If AJAX request, return JSON
+    if ($request->ajax()) {
+        $servicesData = $services->map(function($s) {
+            return [
+                'name' => $s->name,
+                'slug' => $s->slug,
+                'duration' => $s->duration,
+                'price' => core()->currency($s->price),
+                'short_description' => $s->short_description,
+                'image' => $s->product->images->first() 
+                            ? asset('storage/' . $s->product->images->first()->path)
+                            : asset('images/placeholder.png'),
+            ];
+        });
+
+        return response()->json(['services' => $servicesData]);
+    }
+
+    // Normal page load data
+    $rootCategory = Category::whereNull('parent_id')->first();
+
+    $categories = Category::where('parent_id', $rootCategory->id)
+                ->with('translations')
+                ->get();     
+
+    $service_locations = BookingProduct::pluck('location');
+
+    $products = ProductFlat::with(['product.images'])
+        ->where('type', 'simple')
+        ->where('status', 1)
+        ->where('visible_individually', 1)
+        ->select('id', 'name', 'price', 'url_key', 'product_id')
+        ->where('locale', app()->getLocale())
+        ->where('channel', core()->getCurrentChannel()->code)
+        ->get();
+
+    
+
+    return view('shop::services.index', compact('services','categories','service_locations','products'));
+}
+
+
+
     // this will render about page
     public function about(){
         return view('shop::about.index');

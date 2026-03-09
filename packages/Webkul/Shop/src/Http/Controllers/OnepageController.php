@@ -128,4 +128,8 @@ class OnepageController extends Controller
 
         return $prompt;
     }
+
+    public function checkoutIndex(){
+        return view('shop::checkout.index');
+    }
 }
