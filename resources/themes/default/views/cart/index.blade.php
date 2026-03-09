@@ -67,7 +67,7 @@
     <span>{{ core()->currency($total) }}</span>
   </div>
 
-  <a href="{{ route('shop.checkout.index') }}">
+  <a href="{{ route('shop.checkout.onepage.index') }}">
     <button
       class="mt-10 w-full bg-[#c07a3a] hover:bg-[#a8652f] transition-colors text-white uppercase font-semibold py-3 rounded-full"
     >

@@ -18,4 +18,7 @@ Route::controller(OnepageController::class)->prefix('checkout/onepage')->group(f
 });
 
 
-Route::get('checkout/index',[OnepageController::class,'checkoutIndex'])->name('shop.checkout.index');
+Route::post('checkout/service',[OnepageController::class,'checkoutService'])->name('shop.checkout.service');
+
+Route::get('/payment/{order}', [OnepageController::class, 'paymentPage'])
+    ->name('shop.payment.page');

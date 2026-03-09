@@ -6,6 +6,7 @@ use Webkul\Product\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Auth;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\Cart;
+use Webkul\Product\Models\Product;
 
 
 class CartController extends Controller
@@ -55,30 +56,55 @@ class CartController extends Controller
     
     $user = Auth::user();
 
+    // Get product
+    $product = Product::findOrFail($req->product_id);
+
+    // Product price
+    $price = $product->price;
+
+    // Quantity
+    $qty = $req->quantity;
+
+    // Calculate total
+    $total = $price * $qty;
+
+    // Create Cart  
     $cart = Cart::create([
-    'customer_id' => auth()->id(),
-    'customer_email' => $user->email ?? '',
-    'customer_first_name' => $user->first_name ?? '',
+    'customer_id'        => auth()->id(),
+    'customer_email'     => $user->email ?? '',
+    'customer_first_name'=> $user->first_name ?? '',
     'customer_last_name' => $user->last_name ?? '',
-    'channel_id' => core()->getCurrentChannel()->id,
-    'currency_code' => core()->getCurrentCurrencyCode(),
+    'channel_id'         => core()->getCurrentChannel()->id,
+    'currency_code'      => core()->getCurrentCurrencyCode(),
+    'items_qty'          => $qty,
+    'sub_total'          => $total,
+    'grand_total'        => $total,
     ]);
 
-    $CartItem = CartItem::create([
-    'cart_id' => $cart->id,
-    'product_id' => $req->product_id,
-    'professional_id' => $req->professional_id,
-    'quantity' => $req->quantity,
-    'type' => 'booking',
-    'additional' => json_encode([
+// Create Cart Item
+$cartItem = CartItem::create([
+    'cart_id'        => $cart->id,
+    'product_id'     => $req->product_id,
+    'professional_id'=> $req->professional_id,
+    'quantity'       => $qty,
+    'price'          => $price,
+    'base_price'     => $price,
+    'total'          => $total,
+    'base_total'     => $total,
+    'type'           => 'booking',
+    'additional'     => json_encode([
         'pending_booking' => true
     ]),
-    ]);
+]);
 
-    if($cart && $CartItem){
-       return redirect()->route('shop.cart.index')->with('success','Service Added to Cart Successfully');
-    }else{
-        return redirect()->route('shop.cart.index')->with('falied','Somthing Went Wrong, Try Again');
-    }
-    }   
+if ($cart && $cartItem) {
+    return redirect()->route('shop.cart.index')
+        ->with('success', 'Service Added to Cart Successfully');
+} else {
+    return redirect()->route('shop.cart.index')
+        ->with('failed', 'Something Went Wrong, Try Again');
 }
+
+}
+}
+
