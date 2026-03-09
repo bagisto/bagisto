@@ -3,6 +3,7 @@
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
 ## Unreleased
+- #10250 [fixed] - Make Support Email Configurable through .env for Error Page
 
 - #11107 [fixed] - Fixed an issue with the SEO URL preview.
 
