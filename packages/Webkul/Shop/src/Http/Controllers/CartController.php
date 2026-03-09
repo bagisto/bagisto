@@ -70,10 +70,10 @@ class CartController extends Controller
 
     // Create Cart  
     $cart = Cart::create([
-    'customer_id'        => auth()->id() ?? '',
-    'customer_email'     => $user->email ?? '',
-    'customer_first_name'=> $user->first_name ?? '',
-    'customer_last_name' => $user->last_name ?? '',
+    'customer_id'        => auth()->id() ?? null,
+    'customer_email'     => $user->email ?? null,
+    'customer_first_name'=> $user->first_name ?? null,
+    'customer_last_name' => $user->last_name ?? null,
     'channel_id'         => core()->getCurrentChannel()->id,
     'currency_code'      => core()->getCurrentCurrencyCode(),
     'items_qty'          => $qty,
@@ -93,7 +93,7 @@ $cartItem = CartItem::create([
     'base_total'     => $total,
     'type'           => 'booking',
     'additional'     => json_encode([
-        'pending_booking' => true
+    'pending_booking' => true
     ]),
 ]);
 
