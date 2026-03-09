@@ -226,7 +226,42 @@ public function singleServicesByCategory(Request $request)
     return view('shop::services.index', compact('services','categories','service_locations','products'));
 }
 
+    // this will render about page
+    public function allServices(){
+         // service list shown on the hero banner
+        // Root category
+        $rootCategory = Category::whereNull('parent_id')->first();
+        // find all categories based on root category 
+        $categories = Category::where('parent_id', $rootCategory->id)
+            ->where('status',1)
+            ->with('translations')
+            ->get();        
 
+        // product as a services 
+         $services = collect();
+        $activeCategorySlug = null;
+
+      // fetching product as a service as per default category
+       if ($categories->count()) {
+
+        $firstCategory = $categories->first();
+        $activeCategorySlug = $firstCategory->slug;
+
+    $services = ProductFlat::with(['product.images'])
+    ->where('type', 'booking')
+    ->where('status', 1)
+    ->where('visible_individually', 1)
+    ->where('locale', app()->getLocale()) // current locale
+    ->where('channel', core()->getCurrentChannel()->code) // current channel
+    ->whereHas('product.categories', function ($q) use ($firstCategory) {
+        $q->where('category_id', $firstCategory->id);
+    })
+    ->take(4)
+    ->get();
+     }
+
+        return view('shop::services.index',compact('categories','services'));
+    }
 
     // this will render about page
     public function about(){

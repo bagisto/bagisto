@@ -1,243 +1,197 @@
-{!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.before') !!}
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 
-<v-topbar>
-    <!-- Shimmer Effect -->
-    <div class="flex items-center justify-between border border-b border-l-0 border-r-0 border-t-0 px-16">
-        <!-- Currencies -->
-        <div class="flex w-20 items-center justify-between gap-2.5 py-3">
-            <div
-                class="shimmer h-6 w-12 rounded"
-                role="presentation"
-            >
+@php
+    $channel = core()->getCurrentChannel();
+    $locales = $channel->locales;
+    $currentLocale = app()->getLocale();
+
+    // Flags
+    $flags = [
+        'en' => 'us',
+        'ar' => 'ae',
+    ];
+@endphp
+
+{{-- ================= TOP BAR ================= --}}
+<div class="bg-[#F3EFEE] w-full text-[#371E0F] font-['Roboto'] text-sm">
+    <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+        <div class="flex justify-between items-center py-2 md:py-3 flex-wrap md:flex-nowrap">
+
+            <!-- LEFT SIDE -->
+            <div class="flex items-center gap-4 md:gap-8 flex-wrap">
+                <!-- Phone -->
+                <div class="flex items-center gap-2">
+                    <img src="{{ asset('images/support.png') }}" alt="Support" class="h-4 w-4">
+                    <span class="topbar-text">{{ __('home.phone') }}</span>
+                </div>
+                <!-- Location -->
+                <div class="flex items-center gap-2">
+                    <img src="{{ asset('images/location.png') }}" alt="Location" class="h-4 w-4">
+                    <span class="topbar-text">{{ __('home.location') }}</span>
+                </div>
             </div>
 
-            <div
-                class="shimmer h-6 w-6 rounded"
-                role="presentation"
-            >
-            </div>
-        </div>
+            <!-- RIGHT SIDE -->
+            <div class="flex items-center gap-4 md:gap-8 mt-2 md:mt-0 flex-wrap">
 
-        <!-- Offers -->
-        <div
-            class="shimmer h-6 w-72 rounded py-3"
-            role="presentation"
-        >
-        </div>
+                <!-- Language Dropdown -->
+                <div class="relative inline-block text-left">
+                    <button id="localeBtn" class="flex items-center gap-2 px-4 py-2 border rounded hover:bg-gray-100">
+                        <img src="https://flagcdn.com/w20/{{ $flags[$currentLocale] ?? 'us' }}.png" class="w-5 h-5 rounded-full">
+                        {{ $locales->where('code', $currentLocale)->first()->name ?? $currentLocale }}
+                        <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
 
-        <!-- Locales -->
-        <div class="flex w-32 items-center justify-between gap-2.5 py-3">
-            <div
-                class="shimmer h-6 w-6"
-                role="presentation"
-            >
-            </div>
+                    <div id="localeDropdown" class="absolute mt-2 w-36 bg-white border rounded shadow-lg hidden z-50">
+                        @foreach($locales as $locale)
+                            @if($locale->code !== $currentLocale)
+                                <a href="{{ route('switch.language',$locale->code) }}">
+                                    <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-2">
+                                        <img src="https://flagcdn.com/w20/{{ $flags[$locale->code] ?? 'us' }}.png" class="w-5 h-5 rounded-full">
+                                        {{ $locale->name }}
+                                    </div>
+                                </a>
+                            @endif
+                        @endforeach
+                    </div>
+                </div>
 
-            <div
-                class="shimmer h-6 w-14 rounded"
-                role="presentation"
-            >
-            </div>
+                <!-- Currency Dropdown -->
+                <div class="relative">
+                    <div class="flex items-center gap-2 cursor-pointer topbar-text dropdown-toggle">
+                        <span>Currency: UAE</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#371E0F" class="w-4 h-4">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/>
+                        </svg>
+                    </div>
+                    <div class="dropdown-menu absolute right-0 mt-2 w-36 bg-white border rounded shadow-lg hidden z-50">
+                        <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer">UAE Dirham (AED)</div>
+                        <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer">US Dollar (USD)</div>
+                        <div class="px-4 py-2 hover:bg-gray-100 cursor-pointer">Euro (EUR)</div>
+                    </div>
+                </div>
 
-            <div
-                class="shimmer h-6 w-6"
-                role="presentation"
-            >
             </div>
         </div>
     </div>
-</v-topbar>
+</div>
 
-{!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.after') !!}
+{{-- ================= MAIN HEADER ================= --}}
+<header class="w-full bg-white shadow-sm">
+    <div class="max-w-[1400px] mx-auto px-4 md:px-8">
+        <div class="flex items-center justify-between py-4 md:py-5 flex-wrap md:flex-nowrap">
 
-@pushOnce('scripts')
-    <script
-        type="text/x-template"
-        id="v-topbar-template"
-    >
-        <div class="flex w-full items-center justify-between border border-b border-l-0 border-r-0 border-t-0 px-16">
-            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.before') !!}
+            {{-- LEFT SECTION --}}
+            <div class="flex items-center gap-4 md:gap-8 w-full md:w-auto justify-between">
 
-            <!-- Currency Switcher -->
-            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}">
-                <!-- Dropdown Toggler -->
-                <x-slot:toggle>
-                    <div
-                        class="flex cursor-pointer gap-2.5 py-3"
-                        role="button"
-                        tabindex="0"
-                        @click="currencyToggler = ! currencyToggler"
-                    >
-                        <span v-pre>
-                            {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
-                        </span>
+                {{-- LOGO --}}
+                <div class="flex-shrink-0">
+                    <a href="{{ route('shop.home.index') }}">
+                        <img src="{{ asset('themes/shop/default/images/logo.png') }}" alt="Logo" class="h-10 md:h-12">
+                    </a>
+                </div>
 
-                        <span
-                            class="text-2xl"
-                            :class="{'icon-arrow-up': currencyToggler, 'icon-arrow-down': ! currencyToggler}"
-                            role="presentation"
+                {{-- SEARCH BOX --}}
+                <div class="relative flex-1 md:flex-none w-full md:w-[380px] mt-2 md:mt-0">
+                    <form action="{{ route('shop.search.index') }}" method="get">
+                        <input 
+                            type="text" 
+                            name="q"
+                            placeholder="{{ __('home.search_placeholder') }}"
+                            class="w-full h-[45px] pl-4 pr-12 text-[14px] md:text-[16px] leading-[20px] md:leading-[24px] tracking-[0.02em] font-['Roboto'] font-normal text-[#371E0F] placeholder-[#371E0F] border border-gray-200 focus:border-black focus:outline-none rounded-md"
                         >
-                        </span>
-                    </div>
-                </x-slot>
+                        <button type="submit" class="absolute right-3 top-1/2 -translate-y-1/2 text-[#371E0F]">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="w-5 h-5">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.35-4.35m1.6-5.65a7.25 7.25 0 11-14.5 0 7.25 7.25 0 0114.5 0z"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
 
-                <!-- Dropdown Content -->
-                <x-slot:content class="journal-scroll max-h-[500px] !p-0">
-                    <v-currency-switcher></v-currency-switcher>
-                </x-slot>
-            </x-shop::dropdown>
+            </div>
 
-            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.currency_switcher.after') !!}
+            {{-- RIGHT SECTION --}}
+            <div class="flex items-center gap-4 lg:gap-10 mt-3 lg:mt-0">
 
-            <p
-                class="py-3 text-xs font-medium"
-                v-pre
-            >
-                {{ core()->getConfigData('general.content.header_offer.title') }}
-                
-                <a 
-                    href="{{ core()->getConfigData('general.content.header_offer.redirection_link') }}" 
-                    class="underline"
-                    role="button"
-                >
-                    {{ core()->getConfigData('general.content.header_offer.redirection_title') }}
-                </a>
-            </p>
+                {{-- NAVIGATION --}}
+                <nav class="hidden lg:flex items-center gap-10 text-[#371E0F]">
+                    <a href="{{ route('shop.home.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.index' ? 'active' : '' }}">{{ __('home.nav.home') }}</a>
+                    <a href="{{ route('shop.home.aboutus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.aboutus' ? 'active' : '' }}">{{ __('home.nav.about') }}</a>
+                    <a href="{{ route('shop.home.all.services') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.all.services' ? 'active' : '' }}">{{ __('home.nav.service') }}</a>
+                    <a href="{{ route('shop.gallery.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.gallery.index' ? 'active' : '' }}">{{ __('home.nav.gallery') }}</a>
+                    <a href="{{ route('shop.home.contactus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.contactus' ? 'active' : '' }}">{{ __('home.nav.contact') }}</a>
+                </nav>
 
-            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.before') !!}
+                {{-- HAMBURGER MENU FOR MOBILE & TABLET --}}
+                <div class="flex lg:hidden items-center cursor-pointer" id="mobile-menu-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#371E0F" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </div>
 
-            <!-- Locales Switcher -->
-            <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
-                <x-slot:toggle>
-                    <!-- Dropdown Toggler -->
-                    <div
-                        class="flex cursor-pointer items-center gap-2.5 py-3"
-                        role="button"
-                        tabindex="0"
-                        @click="localeToggler = ! localeToggler"
-                    >
-                        <img
-                            src="{{ ! empty(core()->getCurrentLocale()->logo_url)
-                                    ? core()->getCurrentLocale()->logo_url
-                                    : bagisto_asset('images/default-language.svg')
-                                }}"
-                            class="h-full"
-                            alt="@lang('shop::app.components.layouts.header.desktop.top.default-locale')"
-                            width="24"
-                            height="16"
-                        />
-                        
-                        <span v-pre>
-                            {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
-                        </span>
+                {{-- CART --}}
+                <div class="relative cursor-pointer">
+                    <img src="{{ asset('images/cart.png') }}" alt="Cart" class="w-6 h-6">
+                </div>
 
-                        <span
-                            class="text-2xl"
-                            :class="{'icon-arrow-up': localeToggler, 'icon-arrow-down': ! localeToggler}"
-                            role="presentation"
-                        ></span>
-                    </div>
-                </x-slot>
-            
-                <!-- Dropdown Content -->
-                <x-slot:content class="journal-scroll max-h-[500px] !p-0">
-                    <v-locale-switcher></v-locale-switcher>
-                </x-slot>
-            </x-shop::dropdown>
+                {{-- WISHLIST --}}
+                <div class="relative cursor-pointer">
+                    <img src="{{ asset('images/wishlist.png') }}" alt="Wishlist" class="w-6 h-6">
+                </div>
 
-            {!! view_render_event('bagisto.shop.components.layouts.header.desktop.top.locale_switcher.after') !!}
+            </div>
+
         </div>
-    </script>
 
-    <script
-        type="text/x-template"
-        id="v-currency-switcher-template"
-    >
-        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-[500px]">
-            <span
-                class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
-                v-for="currency in currencies"
-                :class="{'bg-gray-100': currency.code == '{{ core()->getCurrentCurrencyCode() }}'}"
-                @click="change(currency)"
-            >
-                @{{ currency.symbol + ' ' + currency.code }}
-            </span>
+        {{-- MOBILE/TABLET NAVIGATION --}}
+        <div class="lg:hidden" id="mobile-menu" style="display:none;">
+            <nav class="flex flex-col gap-3 mt-3">
+                <a href="{{ route('shop.home.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.index' ? 'active' : '' }}">{{ __('home.nav.home') }}</a>
+                <a href="{{ route('shop.home.aboutus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.aboutus' ? 'active' : '' }}">{{ __('home.nav.about') }}</a>
+                <a href="{{ route('shop.home.all.services') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.all.services' ? 'active' : '' }}">{{ __('home.nav.service') }}</a>
+                <a href="{{ route('shop.gallery.index') }}" class="nav-link {{ Route::currentRouteName()=='shop.gallery.index' ? 'active' : '' }}">{{ __('home.nav.gallery') }}</a>
+                <a href="{{ route('shop.home.contactus') }}" class="nav-link {{ Route::currentRouteName()=='shop.home.contactus' ? 'active' : '' }}">{{ __('home.nav.contact') }}</a>
+            </nav>
         </div>
-    </script>
+    </div>
+</header>
 
-    <script
-        type="text/x-template"
-        id="v-locale-switcher-template"
-    >
-        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-[500px]">
-            <span
-                class="flex cursor-pointer items-center gap-2.5 px-5 py-2 text-base hover:bg-gray-100"
-                :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
-                v-for="locale in locales"
-                @click="change(locale)"                  
-            >
-                <img
-                    :src="locale.logo_url || '{{ bagisto_asset('images/default-language.svg') }}'"
-                    width="24"
-                    height="16"
-                />
+{{-- ================= JS ================= --}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileToggle?.addEventListener('click', () => {
+        mobileMenu.style.display = mobileMenu.style.display === 'none' ? 'block' : 'none';
+    });
 
-                @{{ locale.name }}
-            </span>
-        </div>
-    </script>
-
-    <script type="module">
-        app.component('v-topbar', {
-            template: '#v-topbar-template',
-
-            data() {
-                return {
-                    localeToggler: '',
-
-                    currencyToggler: '',
-                };
-            },
+    // Top bar dropdowns
+    document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const menu = toggle.nextElementSibling;
+            menu.classList.toggle('hidden');
         });
+    });
 
-        app.component('v-currency-switcher', {
-            template: '#v-currency-switcher-template',
+    // Language dropdown
+    const btn = document.getElementById('localeBtn');
+    const dropdown = document.getElementById('localeDropdown');
 
-            data() {
-                return {
-                    currencies: @json(core()->getCurrentChannel()->currencies),
-                };
-            },
+    btn?.addEventListener('click', () => {
+        dropdown.classList.toggle('hidden');
+    });
 
-            methods: {
-                change(currency) {
-                    let url = new URL(window.location.href);
-
-                    url.searchParams.set('currency', currency.code);
-
-                    window.location.href = url.href;
-                }
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', function(event) {
+        document.querySelectorAll('.dropdown-menu, #localeDropdown').forEach(menu => {
+            if (!menu.previousElementSibling.contains(event.target) && !menu.contains(event.target)) {
+                menu.classList.add('hidden');
             }
         });
-
-        app.component('v-locale-switcher', {
-            template: '#v-locale-switcher-template',
-
-            data() {
-                return {
-                    locales: @json(core()->getCurrentChannel()->locales()->orderBy('name')->get()),
-                };
-            },
-
-            methods: {
-                change(locale) {
-                    let url = new URL(window.location.href);
-
-                    url.searchParams.set('locale', locale.code);
-
-                    window.location.href = url.href;
-                }
-            }
-        });
-    </script>
-@endPushOnce
+    });
+});
+</script>

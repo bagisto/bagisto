@@ -141,6 +141,13 @@
                 <div class="relative cursor-pointer">
                     <img src="{{ asset('images/wishlist.png') }}" alt="Wishlist" class="w-6 h-6">
                 </div>
+             
+                {{-- ACCOUNT --}}
+                <div class="relative cursor-pointer">
+                    <a href="{{ route('shop.customer.session.create') }}">
+                    <img src="{{ asset('images/account.png') }}" alt="Account" class="w-6 h-6">
+                    </a>
+                </div>
 
             </div>
 

@@ -1,155 +1,197 @@
-{!! view_render_event('bagisto.shop.layout.footer.before') !!}
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400&family=Roboto:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 
-<!--
-    The category repository is injected directly here because there is no way
-    to retrieve it from the view composer, as this is an anonymous component.
--->
-@inject('themeCustomizationRepository', 'Webkul\Theme\Repositories\ThemeCustomizationRepository')
+<div class="relative mt-20">
 
-<!--
-    This code needs to be refactored to reduce the amount of PHP in the Blade
-    template as much as possible.
--->
-@php
-    $channel = core()->getCurrentChannel();
+<footer class="w-full bg-[#7B7A79] text-white pt-16 md:pt-20 pb-10">
 
-    $customization = $themeCustomizationRepository->findOneWhere([
-        'type'       => 'footer_links',
-        'status'     => 1,
-        'theme_code' => $channel->theme,
-        'channel_id' => $channel->id,
-    ]);
-@endphp
+<div class="max-w-[1400px] mx-auto px-4 md:px-8">
 
-<footer class="mt-9 bg-lightOrange max-sm:mt-10">
-    <div class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-md:gap-5 max-md:p-8 max-sm:px-4 max-sm:py-5">
-        <!-- For Desktop View -->
-        <div
-            class="flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:hidden"
-            v-pre
-        >
-            @if ($customization?->options)
-                @foreach ($customization->options as $footerLinkSection)
-                    <ul class="grid gap-5 text-sm">
-                        @php
-                            usort($footerLinkSection, function ($a, $b) {
-                                return $a['sort_order'] - $b['sort_order'];
-                            });
-                        @endphp
+<!-- NEWSLETTER -->
+<div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-6 mb-12">
 
-                        @foreach ($footerLinkSection as $link)
-                            <li>
-                                <a href="{{ $link['url'] }}">
-                                    {{ $link['title'] }}
-                                </a>
-                            </li>
-                        @endforeach
-                    </ul>
-                @endforeach
-            @endif
-        </div>
+<h2 class="newsletter-title">
+NEWSLETTER
+</h2>
 
-        <!-- For Mobile view -->
-        <x-shop::accordion
-            :is-active="false"
-            class="hidden !w-full rounded-xl !border-2 !border-[#e9decc] max-1060:block max-sm:rounded-lg"
-        >
-            <x-slot:header class="rounded-t-lg bg-[#F1EADF] font-medium max-md:p-2.5 max-sm:px-3 max-sm:py-2 max-sm:text-sm">
-                @lang('shop::app.components.layouts.footer.footer-content')
-            </x-slot>
+<!-- FIXED MOBILE FORM -->
+<div class="flex flex-col sm:flex-row items-stretch gap-3 w-full lg:w-[600px]">
 
-            <x-slot:content class="flex justify-between !bg-transparent !p-4">
-                @if ($customization?->options)
-                    @foreach ($customization->options as $footerLinkSection)
-                        <ul
-                            class="grid gap-5 text-sm"
-                            v-pre
-                        >
-                            @php
-                                usort($footerLinkSection, function ($a, $b) {
-                                    return $a['sort_order'] - $b['sort_order'];
-                                });
-                            @endphp
+<input 
+type="email"
+placeholder="Enter email"
+class="newsletter-input w-full h-[48px] px-6 rounded-full bg-[#8A8887] placeholder-white/70 focus:outline-none text-white"
+/>
 
-                            @foreach ($footerLinkSection as $link)
-                                <li>
-                                    <a
-                                        href="{{ $link['url'] }}"
-                                        class="text-sm font-medium max-sm:text-xs"
-                                    >
-                                        {{ $link['title'] }}
-                                    </a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    @endforeach
-                @endif
-            </x-slot>
-        </x-shop::accordion>
+<button class="newsletter-btn w-full sm:w-auto px-10 h-[48px] rounded-full bg-white hover:opacity-90 transition">
+SUBMIT
+</button>
 
-        {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.before') !!}
+</div>
 
-        <!-- News Letter subscription -->
-        @if (core()->getConfigData('customer.settings.newsletter.subscription'))
-            <div class="grid gap-2.5">
-                <p
-                    class="max-w-[288px] text-3xl italic leading-[45px] text-navyBlue max-md:text-2xl max-sm:text-lg"
-                    role="heading"
-                    aria-level="2"
-                >
-                    @lang('shop::app.components.layouts.footer.newsletter-text')
-                </p>
+</div>
 
-                <p class="text-xs">
-                    @lang('shop::app.components.layouts.footer.subscribe-stay-touch')
-                </p>
+<div class="border-t border-white/30 mb-12 md:mb-16"></div>
 
-                <div>
-                    <x-shop::form
-                        :action="route('shop.subscription.store')"
-                        class="mt-2.5 rounded max-sm:mt-0"
-                    >
-                        <div class="relative w-full">
-                            <x-shop::form.control-group.control
-                                type="email"
-                                class="block w-[420px] max-w-full rounded-xl border-2 border-[#e9decc] bg-[#F1EADF] px-5 py-4 text-base max-1060:w-full max-md:p-3.5 max-sm:mb-0 max-sm:rounded-lg max-sm:border-2 max-sm:p-2 max-sm:text-sm"
-                                name="email"
-                                rules="required|email"
-                                label="Email"
-                                :aria-label="trans('shop::app.components.layouts.footer.email')"
-                                placeholder="email@example.com"
-                            />
-    
-                            <x-shop::form.control-group.error control-name="email" />
-    
-                            <button
-                                type="submit"
-                                class="absolute top-1.5 flex w-max items-center rounded-xl bg-white px-7 py-2.5 font-medium hover:bg-zinc-100 ltr:right-2 rtl:left-2 max-md:top-1 max-md:px-5 max-md:text-xs max-sm:mt-0 max-sm:rounded-lg max-sm:px-4 max-sm:py-2"
-                            >
-                                @lang('shop::app.components.layouts.footer.subscribe')
-                            </button>
-                        </div>
-                    </x-shop::form>
-                </div>
-            </div>
-        @endif
+<!-- MAIN FOOTER -->
+<div class="flex flex-col md:flex-row md:flex-wrap lg:grid lg:grid-cols-3 gap-10 lg:gap-20">
 
-        {!! view_render_event('bagisto.shop.layout.footer.newsletter_subscription.after') !!}
-    </div>
+<!-- LEFT -->
+<div class="md:w-1/2 lg:w-auto">
 
-    <div class="flex justify-between bg-[#F1EADF] px-[60px] py-3.5 max-md:justify-center max-sm:px-5">
-        {!! view_render_event('bagisto.shop.layout.footer.footer_text.before') !!}
+<h1 class="text-[60px] font-serif tracking-[6px] mb-4">
+SBT
+</h1>
 
-        <p class="text-sm text-zinc-600 max-md:text-center">
-            @if (core()->getConfigData('general.content.footer.copyright_content'))
-                {!! core()->getConfigData('general.content.footer.copyright_content') !!}
-            @else
-                @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])
-            @endif
-        </p>
+<p class="footer-paragraph max-w-[420px]">
+We are a Home Service Beauty Salon and Spa for women 
+in Abu Dhabi. We come to you anywhere in Abu Dhabi! 
+For your comfort we provide services in your home, office,
+hospital, hotel or wherever you like.
+</p>
 
-        {!! view_render_event('bagisto.shop.layout.footer.footer_text.after') !!}
-    </div>
+</div>
+
+<!-- QUICK LINKS -->
+<div class="md:w-1/2 lg:w-auto">
+
+<h3 class="footer-heading mb-3">
+QUICK LINKS
+</h3>
+
+<ul class="space-y-2 footer-links">
+<li><a href="#" class="hover:underline">Home</a></li>
+<li><a href="#" class="hover:underline">About</a></li>
+<li><a href="#" class="hover:underline">Services</a></li>
+<li><a href="#" class="hover:underline">Gallery</a></li>
+<li><a href="#" class="hover:underline">Contact Us</a></li>
+</ul>
+
+</div>
+
+<!-- RIGHT -->
+<div class="space-y-8 lg:w-auto md:w-full">
+
+<div class="flex items-start gap-4">
+
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+stroke-width="1.5" stroke="white" class="w-6 h-6 mt-1">
+<path stroke-linecap="round" stroke-linejoin="round"
+d="M12 6v6l4 2m6-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+</svg>
+
+<div>
+<h3 class="footer-heading mb-1">OPENING TIMES</h3>
+<p class="footer-paragraph">Mon-Sun: 12:00 pm - 10:00 pm</p>
+</div>
+
+</div>
+
+<div class="flex items-start gap-4">
+
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+stroke-width="1.5" stroke="white" class="w-6 h-6 mt-1">
+<path stroke-linecap="round" stroke-linejoin="round"
+d="M3 12a9 9 0 0118 0v3a3 3 0 01-3 3h-1v-6h4M3 15h4v6H6a3 3 0 01-3-3v-3z"/>
+</svg>
+
+<div>
+<h3 class="footer-heading mb-1">CALL US</h3>
+<p class="footer-paragraph">+971 123 456 7890</p>
+</div>
+
+</div>
+
+<div class="flex items-start gap-4">
+
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+stroke-width="1.5" stroke="white" class="w-6 h-6 mt-1">
+<path stroke-linecap="round" stroke-linejoin="round"
+d="M21.75 6.75v10.5A2.25 2.25 0 0119.5 19.5h-15A2.25 2.25 0 012.25 17.25V6.75m19.5 0L12 13.5 2.25 6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15A2.25 2.25 0 002.25 6.75"/>
+</svg>
+
+<div>
+<h3 class="footer-heading mb-1">EMAIL US</h3>
+<p class="footer-paragraph">sbt.info@gmail.com</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- COPYRIGHT -->
+<div class="copyright-text mt-16">
+Copyright © 2026. All Rights Reserved
+</div>
+
+</div>
 </footer>
 
-{!! view_render_event('bagisto.shop.layout.footer.after') !!}
+</div>
+
+<style>
+
+.newsletter-title{
+font-family:'Oswald',sans-serif;
+font-weight:400;
+font-size:24px;
+line-height:100%;
+letter-spacing:0.1em;
+text-transform:uppercase;
+}
+
+.newsletter-input{
+font-family:'Roboto',sans-serif;
+font-weight:400;
+font-size:14px;
+line-height:24px;
+letter-spacing:0.02em;
+}
+
+.newsletter-btn{
+font-family:'Oswald',sans-serif;
+font-weight:400;
+font-size:18px;
+line-height:100%;
+text-transform:uppercase;
+color:#371E0F;
+}
+
+.footer-paragraph{
+font-family:'Roboto',sans-serif;
+font-weight:400;
+font-size:16px;
+line-height:24px;
+letter-spacing:0.02em;
+}
+
+.footer-heading{
+font-family:'Oswald',sans-serif;
+font-weight:400;
+font-size:24px;
+line-height:100%;
+letter-spacing:0.1em;
+text-transform:uppercase;
+}
+
+.footer-links a{
+font-family:'Roboto',sans-serif;
+font-weight:400;
+font-size:16px;
+line-height:24px;
+letter-spacing:0.02em;
+}
+
+.copyright-text{
+font-family:'Roboto',sans-serif;
+font-weight:400;
+font-size:16px;
+line-height:24px;
+letter-spacing:0.02em;
+text-align:center;
+opacity:0.9;
+}
+
+</style>
