@@ -55,7 +55,7 @@
 
                 <p class="text-sm text-gray-800">
                     @lang('admin::app.errors.support', [
-                        'link'  => 'mailto:support@example.com',
+                        'link'  => 'mailto:' . (core()->getAdminEmailDetails()['email'] ?? 'support@example.com'),
                         'email' => core()->getAdminEmailDetails()['email'] ?? 'support@example.com',
                         'class' => 'font-semibold text-blue-600 transition-all hover:underline',
                     ])
