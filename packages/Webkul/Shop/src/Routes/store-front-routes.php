@@ -14,6 +14,9 @@ use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use App\Http\Middleware\LocaleMiddleware;
 
 
+// Landing Pages
+Route::get('sbt-perfumes',[HomeController::class,'sbtPerfumeIndex'])->name('sbt.perfume.index');
+
 // Homepage Routes 
 
 // Language Switch

@@ -109,7 +109,7 @@
     </h2>
 
     <!-- Button -->
-    <a href="/perfumes"
+    <a href="{{ route('sbt.perfume.index') }}"
        class="inline-flex items-center justify-center relative z-10"
        style="
        width:166px;

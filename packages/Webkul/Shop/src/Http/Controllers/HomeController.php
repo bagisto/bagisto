@@ -18,6 +18,8 @@ use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Models\Product;
 use Webkul\BookingProduct\Models\BookingProduct;
 use App\Models\Professional;
+use Exception;
+use Webkul\Sitemap\Models\CategoryTranslation as ModelsCategoryTranslation;
 
 class HomeController extends Controller
 {
@@ -366,7 +368,45 @@ public function switchLanguage($locale)
     return redirect()->back();
 }
 
+// Get products as per category and product type
+public function getProducts($type){
 
+    $category_id = CategoryTranslation::join('categories', 'categories.id', '=',            'category_translations.category_id')
+    ->where('category_translations.slug', 'perfumes')
+    ->where('categories.status', 1)
+    ->value('categories.id');
 
+    $products = ProductFlat::with(['product.images'])
+    ->where('type', $type)
+    ->where('status', 1)
+    ->where('visible_individually', 1)
+    ->where('locale', app()->getLocale()) // current locale
+    ->where('channel', core()->getCurrentChannel()->code) // current channel
+    ->whereHas('product.categories', function ($q) use ($category_id) {
+        $q->where('category_id', $category_id);
+    })->take(12)->get();
+     
+
+    if($products->count()){
+        return $products;
+    }else{
+        return $products = [];
+    }
+}
+
+// sbt-perfume index page
+public function sbtPerfumeIndex(){
+
+    $perfumes = $this->getProducts('simple');
+
+    if($perfumes->count()){
+        $sbt_perfumes = $perfumes;
+        return view('shop::sbt_perfume.index',compact('sbt_perfumes'));
+    }else{
+         $sbt_perfumes = [];
+         return view('shop::sbt_perfume.index',compact('sbt_perfumes'));
+    }
+    
+}
 
 }
