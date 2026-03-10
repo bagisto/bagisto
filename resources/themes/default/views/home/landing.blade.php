@@ -161,10 +161,10 @@
         </h2>
 
         <!-- Button -->
-        <a href="/perfumes"
+        <a href="{{ route('spa.product.index') }}"
            class="inline-flex items-center justify-center"
            style="
-           width:166px;
+           width:170px;
            height:47px;
            border-radius:50px;
            background:#371E0F;
@@ -175,7 +175,7 @@
            text-transform:uppercase;
            padding:10px 32px;
            ">
-           BUY PERFUMES
+           BUY PRODUCTS
         </a>
 
     </div>
@@ -210,7 +210,7 @@
                 FLOWERS <br> PRODUCT
             </h2>
 
-            <a href="/flowers"
+            <a href="{{ route('flower.product.index') }}"
                class="inline-flex items-center justify-center"
                style="
                width:166px;

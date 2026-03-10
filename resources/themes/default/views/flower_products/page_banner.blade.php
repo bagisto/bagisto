@@ -31,12 +31,12 @@ tailwind.config = {
 
         <!-- Heading -->
         <h1 class="font-oswald font-normal text-[34px] md:text-[48px] lg:text-[60px] leading-[100%] uppercase text-[#371E0F]">
-            Spa Perfume
+            Spa Product
         </h1>
 
         <!-- Breadcrumb -->
         <p class="font-roboto font-normal text-[12px] md:text-[14px] leading-[24px] tracking-[0.02em] text-[#371E0F]">
-            Home / Spa Perfume
+            Home / Spa Product
         </p>
 
     </div>

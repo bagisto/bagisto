@@ -368,11 +368,11 @@ public function switchLanguage($locale)
     return redirect()->back();
 }
 
-// Get products as per category and product type
-public function getProducts($type){
+// Get products as per category slug and product type
+public function getProducts($type,$category_slug){
 
     $category_id = CategoryTranslation::join('categories', 'categories.id', '=',            'category_translations.category_id')
-    ->where('category_translations.slug', 'perfumes')
+    ->where('category_translations.slug', $category_slug)
     ->where('categories.status', 1)
     ->value('categories.id');
 
@@ -397,7 +397,7 @@ public function getProducts($type){
 // sbt-perfume index page
 public function sbtPerfumeIndex(){
 
-    $perfumes = $this->getProducts('simple');
+    $perfumes = $this->getProducts('simple','perfumes');
 
     if(count($perfumes)){
         $sbt_perfumes = $perfumes;
@@ -408,5 +408,37 @@ public function sbtPerfumeIndex(){
     }
     
 }
+
+// sbt-products index page
+public function spaProductsIndex(){
+
+    $products = $this->getProducts('simple','spa-products');
+
+    if(count($products)){
+        $spa_products = $products;
+        return view('shop::spa_products.index',compact('spa_products'));
+    }else{
+         $spa_products = [];
+         return view('shop::spa_products.index',compact('spa_products'));
+    }
+    
+}
+
+
+// flower-product index page
+public function flowerProductsIndex(){
+
+    $products = $this->getProducts('simple','flower-products');
+
+    if(count($products)){
+        $flower_products = $products;
+        return view('shop::flower_products.index',compact('flower_products'));
+    }else{
+         $flower_products = [];
+         return view('shop::flower_products.index',compact('flower_products'));
+    }
+    
+}
+
 
 }

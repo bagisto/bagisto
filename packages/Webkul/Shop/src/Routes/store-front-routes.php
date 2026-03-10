@@ -16,6 +16,8 @@ use App\Http\Middleware\LocaleMiddleware;
 
 // Landing Pages
 Route::get('sbt-perfumes',[HomeController::class,'sbtPerfumeIndex'])->name('sbt.perfume.index');
+Route::get('spa-products',[HomeController::class,'spaProductsIndex'])->name('spa.product.index');
+Route::get('flower-products',[HomeController::class,'flowerProductsIndex'])->name('flower.product.index');
 
 // Homepage Routes 
 
