@@ -32,9 +32,9 @@ Route::get('/booking/search', [SearchController::class, 'serviceSearchResult'])-
 
 
 // Index page 
-Route::view('/', 'shop::home.landing');
+Route::view('/', 'shop::home.landing')->name('spa.home');
 
-Route::get('/home', [HomeController::class, 'index'])
+Route::get('/spa-services', [HomeController::class, 'index'])
     ->name('shop.home.index');
 
 // Services as per category  

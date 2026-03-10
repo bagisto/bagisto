@@ -17,7 +17,7 @@
 
     <!-- Logo -->
     <div class="flex justify-center mb-12">
-        <a href="{{ route('shop.home.index') }}">
+        <a href="{{ route('spa.home') }}">
             <img src="{{ asset('themes/shop/default/images/logo.png') }}" alt="Logo" class="h-10 md:h-16">
         </a>
     </div>
@@ -63,7 +63,7 @@
     </ul>
 
     <!-- Button -->
-    <a href="/services"
+    <a href="{{ route('shop.home.index') }}"
         class="inline-flex items-center justify-center relative z-10"
         style="
         width:170px;
