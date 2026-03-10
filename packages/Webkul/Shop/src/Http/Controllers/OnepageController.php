@@ -212,7 +212,7 @@ public function checkoutService(AddressRequest $req)
 
             DB::table('order_items')->insert([
                 'order_id'        => $orderId,
-                'method' => $paymentMethod,
+                'method'          =>  $paymentMethod,
                 'product_id'      => $item->product_id,
                 'type'            => $item->type,
                 'name'            => $item->product->name ?? 'Service',
@@ -228,8 +228,7 @@ public function checkoutService(AddressRequest $req)
                 'updated_at'      => now(),
             ]);
         }
-
-        DB::commit();
+DB::commit();
 
         return redirect()->route('shop.checkout.page', $orderId);
 

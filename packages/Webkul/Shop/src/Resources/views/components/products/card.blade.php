@@ -144,12 +144,11 @@
                     @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
-                        <a href="{{ route('shop.cart.index') }}">
-                        <button
-                            class="secondary-button w-full max-w-full p-2.5 text-sm font-medium max-sm:rounded-xl max-sm:p-2">
+                        <button @click = "bookNow()" class="secondary-button w-full max-w-full p-2.5 text-sm font-medium max-sm:rounded-xl max-sm:p-2">
                             Book Now
                         </button>
-                        </a>
+
+
 
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.after') !!}
                     @endif
@@ -171,17 +170,6 @@
                     {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.after') !!}
 
                     {!! view_render_event('bagisto.shop.components.products.card.compare_option.before') !!}
-
-                    @if (core()->getConfigData('catalog.products.settings.compare_option'))
-                        <span
-                            class="icon-compare cursor-pointer p-2.5 text-2xl max-sm:hidden"
-                            role="button"
-                            aria-label="@lang('shop::app.components.products.card.add-to-compare')"
-                            tabindex="0"
-                            @click="addToCompare(product.id)"
-                        >
-                        </span>
-                    @endif
 
                     {!! view_render_event('bagisto.shop.components.products.card.compare_option.after') !!}
                 </div>
@@ -453,6 +441,16 @@ addToCart() {
             this.isAddingToCart = false;
         });
 },
+
+
+bookNow() {
+    this.isAddingToCart = true;
+    let product_slug = this.product.url_key;
+
+    window.location.href = `/service/${product_slug}`;
+
+}
+
             },
         });
     </script>

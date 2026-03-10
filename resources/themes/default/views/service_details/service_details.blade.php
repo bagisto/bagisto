@@ -141,7 +141,7 @@
     <div class="relative h-[159px] px-10 pt-8 border-b">
 
         <!-- CLOSE -->
-        <button onclick="closeModal()" class="absolute right-8 top-8 text-gray-500 hover:text-black text-2xl">
+        <button type="button" onclick="closeModal()" class="absolute right-8 top-8 text-gray-500 hover:text-black text-2xl">
             ✕
         </button>
 
