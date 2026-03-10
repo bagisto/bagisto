@@ -1,6 +1,46 @@
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 
+{{-- Login Success Message  --}}
+@if(session('success'))
+<div id="flash-success"
+     class="fixed top-6 right-6 z-50 flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg">
+
+    <span>{{ session('success') }}</span>
+
+    <button onclick="closeSuccess()" class="text-white text-lg font-bold ml-2">
+        ×
+    </button>
+</div>
+@endif
+
+{{-- Logout Success Message  --}}
+@if(session('logout-success'))
+<div id="flash-logout"
+     class="fixed top-6 right-6 z-50 flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg">
+
+    <span>{{ session('logout-success') }}</span>
+
+    <button onclick="closeLogout()" class="text-white text-lg font-bold ml-2">
+        ×
+    </button>
+</div>
+@endif
+
+
+
+@if(session('logout-success'))
+<div id="flash-logout"
+     class="fixed top-20 right-6 z-50 flex items-center gap-3 bg-green-500 text-white px-5 py-3 rounded-lg shadow-lg">
+
+    <span>{{ session('logout-success') }}</span>
+
+    <button onclick="closeFlash('flash-logout')" class="text-white text-lg font-bold ml-2">
+        ×
+    </button>
+</div>
+@endif
+
 @php
     $channel = core()->getCurrentChannel();
     $locales = $channel->locales;
@@ -133,22 +173,62 @@
                 </div>
 
                 {{-- CART --}}
+                @auth('customer')
                 <div class="relative cursor-pointer">
+                    <a href="{{ route('shop.cart.index') }}">
                     <img src="{{ asset('images/cart.png') }}" alt="Cart" class="w-6 h-6">
+                    </a>
                 </div>
+                @endauth
+
 
                 {{-- WISHLIST --}}
                 <div class="relative cursor-pointer">
                     <img src="{{ asset('images/wishlist.png') }}" alt="Wishlist" class="w-6 h-6">
                 </div>
-             
-                {{-- ACCOUNT --}}
-                <div class="relative cursor-pointer">
-                    <a href="{{ route('shop.customer.session.create') }}">
-                    <img src="{{ asset('images/account.png') }}" alt="Account" class="w-6 h-6">
-                    </a>
-                </div>
 
+               {{-- ACCOUNT --}}
+                <div class="relative cursor-pointer">
+
+            @auth('customer')
+            <!-- Account Icon -->
+            <img 
+            src="{{ asset('images/account.png') }}" 
+            alt="Account"
+            class="w-6 h-6"
+            onclick="toggleAccountDropdown()"
+            >
+
+        <!-- Dropdown -->
+        <div 
+            id="accountDropdown"
+            class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+        >
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">
+                Profile
+            </a>
+
+            <a href="#" class="block px-4 py-2 hover:bg-gray-100">
+                Orders
+            </a>
+
+            <form method="POST" action="{{ route('shop.customer.session.destroy') }}">
+    @csrf
+    @method('DELETE')
+
+    <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100">
+        Logout
+      </button>
+    </form>
+        </div>
+
+    @else
+        <a href="{{ route('shop.customer.session.index') }}">
+            <img src="{{ asset('images/account.png') }}" alt="Account" class="w-6 h-6">
+        </a>
+    @endauth
+
+</div>
             </div>
 
         </div>
@@ -201,4 +281,37 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+
+function toggleAccountDropdown() {
+    const dropdown = document.getElementById('accountDropdown');
+    dropdown.classList.toggle('hidden');
+}
+
+
+
+// SUCCESS MESSAGE
+function closeSuccess() {
+    const msg = document.getElementById('flash-success');
+    if (msg) msg.style.display = 'none';
+}
+
+setTimeout(function () {
+    const msg = document.getElementById('flash-success');
+    if (msg) msg.style.display = 'none';
+}, 4000);
+
+
+// LOGOUT MESSAGE
+function closeLogout() {
+    const msg = document.getElementById('flash-logout');
+    if (msg) msg.style.display = 'none';
+}
+
+setTimeout(function () {
+    const msg = document.getElementById('flash-logout');
+    if (msg) msg.style.display = 'none';
+}, 4000);
+
+
 </script>

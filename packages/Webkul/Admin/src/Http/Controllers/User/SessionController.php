@@ -96,6 +96,6 @@ class SessionController extends Controller
     {
         auth()->guard('admin')->logout();
 
-        return redirect()->route('admin.session.create');
+        return redirect()->route('admin.session.create')->with('logout-sucess','Logout Successfully');
     }
 }

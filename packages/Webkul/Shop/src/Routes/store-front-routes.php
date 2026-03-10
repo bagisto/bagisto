@@ -26,9 +26,10 @@ Route::get('search', [SearchController::class, 'index'])->name('shop.search.inde
 Route::get('/booking/search', [SearchController::class, 'serviceSearchResult'])->name('booking.search');   
 
 
-
 // Index page 
-Route::get('/', [HomeController::class, 'index'])
+Route::view('/', 'shop::home.landing');
+
+Route::get('/home', [HomeController::class, 'index'])
     ->name('shop.home.index');
 
 // Services as per category  
@@ -47,7 +48,7 @@ Route::get('/service/{url_key}', [HomeController::class, 'servicesDetails'])
 Route::get('/product/{url_key}', [HomeController::class, 'productDetails'])
     ->name('shop.home.product.details');
 
-// Inner pages
+// Inner pagesf
 // Services page
 Route::get('/services', [HomeController::class, 'allServices'])
     ->name('shop.home.all.services');
@@ -74,6 +75,9 @@ Route::post('add/cart',[CartController::class,'addToCart'])->name('shop.add.cart
 Route::get('cart/index',[CartController::class,'indexCart'])->name('shop.cart.index');
 
 
+/**
+ * Subscription routes.
+ */
 Route::controller(SubscriptionController::class)->group(function () {
     Route::post('subscription', 'store')->name('shop.subscription.store');
     Route::get('subscription/{token}', 'destroy')->name('shop.subscription.destroy');

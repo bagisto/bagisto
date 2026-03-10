@@ -30,7 +30,7 @@ class SessionController extends Controller
      */
     public function store(LoginRequest $loginRequest)
     {
-        if (! auth()->guard('customer')->attempt($loginRequest->only(['email', 'password']))) {
+            if (! auth()->guard('customer')->attempt($loginRequest->only(['email', 'password']))) {
             session()->flash('error', trans('shop::app.customers.login-form.invalid-credentials'));
 
             return redirect()->back();
@@ -65,7 +65,7 @@ class SessionController extends Controller
             return redirect()->route('shop.customers.account.profile.index');
         }
 
-        return redirect()->route('shop.home.index');
+        return redirect()->route('shop.home.index')->with('success','Login successfully');
     }
 
     /**
