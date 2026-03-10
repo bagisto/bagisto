@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11107 [fixed] - Fixed an issue with the SEO URL preview.
 
+- #10964 [fixed] - Fixed an issue where the search query was not populated in the search box on the customer end.
+
 ## **v2.3.14 (5th of March 2026)** - *Release*
 
 - Fixed an issue where wishlist items were being fetched for all customers when performing "Move to Cart" or deleting wishlist items.
@@ -254,7 +256,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Side Bar Menu: Introduced a new sidebar menu that provides users with quick access to various sections of the application, improving navigation and user experience.
 
-* Default Menu Feature: Added the ability to set a default menu for users, allowing for a more personalized and streamlined interface. 
+* Default Menu Feature: Added the ability to set a default menu for users, allowing for a more personalized and streamlined interface.
 
 * #10679 [enhancement] - Some options in the products need to be enabled by default.
 
@@ -302,7 +304,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Improved test stability and maintainability by implementing best practices,
 
-* #10596 [feature] - In Shop Front, we should have an option to revoke the request which is added.  
+* #10596 [feature] - In Shop Front, we should have an option to revoke the request which is added.
 
 * #9953 [enhancement] - Need to have "Back Button" in each view all sections of Reporting Side Menu Options.
 
@@ -330,7 +332,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10589 [fixed] - Add character Validation in GDPR Static Block Identifier and Description.
 
-* #10590 [fixed] - GDPR Cookie Box Must be Responsive. 
+* #10590 [fixed] - GDPR Cookie Box Must be Responsive.
 
 * #10592 [fixed] - In GDPR Your Cookie Consent Preference the content which is added should appear properly in Shop Front without Tags.
 
@@ -342,11 +344,11 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #10599 [fixed] - Export All GDPR Requests in Admin Panel.
 
-* #10601 [fixed] - GDPR Feature is disabled and still we are able to access with URL. 
+* #10601 [fixed] - GDPR Feature is disabled and still we are able to access with URL.
 
 * #10605 [fixed] - When we click on Save and Continue for Your Cookie Consent Preferences in Shop Front it is not redirecting to Shop.
 
-* #10606 [fixed] - GDPR Agreement should not be a mandatory field to be selected while registration page. 
+* #10606 [fixed] - GDPR Agreement should not be a mandatory field to be selected while registration page.
 
 * #10618 [fixed] - Priority Detail Not Modify & Maximum no. of URLs per file In Sitemap Configuration.
 
