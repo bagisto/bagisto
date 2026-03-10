@@ -41,32 +41,64 @@ tailwind.config = {
 
     </div>
 
+<!-- Search Bar -->
+<div id="searchContainer" class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 w-full max-w-[92%] sm:max-w-xl md:max-w-2xl px-4">
 
-    <!-- Search Bar -->
-    <div class="absolute left-1/2 bottom-0 -translate-x-1/2 translate-y-1/2 w-full max-w-[92%] sm:max-w-xl md:max-w-2xl px-4">
+    <form id="searchForm" action="{{ route('sbt.perfumes.search') }}" method="POST"
+          class="flex items-center bg-white rounded-full px-5 md:px-6 py-3 md:py-4 shadow-lg border border-gray-200">
+        @csrf
 
-        <form class="flex items-center bg-white rounded-full px-5 md:px-6 py-3 md:py-4 shadow-lg border border-gray-200">
+        <input 
+            type="text"
+            placeholder="Search perfumes here..."
+            name="search_input"
+            id="search_input"
+            value="{{ old('search_input') }}"
+            class="flex-1 bg-transparent outline-none font-roboto text-[14px] md:text-[16px] leading-[24px] tracking-[0.02em] 
+                   text-[#371E0F] placeholder:text-[#371E0F]"
+        >
 
-            <input 
-                type="text"
-                placeholder="Search products here..."
-                class="flex-1 bg-transparent outline-none font-roboto text-[14px] md:text-[16px] leading-[24px] tracking-[0.02em] text-[#371E0F] placeholder:text-[#371E0F]"
-            >
+        <button type="submit" class="ml-3 md:ml-4 text-[#371E0F]">
+            <svg xmlns="http://www.w3.org/2000/svg"
+                 class="w-5 h-5 md:w-6 md:h-6"
+                 fill="none"
+                 viewBox="0 0 24 24"
+                 stroke="currentColor"
+                 stroke-width="2.5">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </button>
+    </form>
 
-            <button type="submit" class="ml-3 md:ml-4 text-[#371E0F]">
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="w-5 h-5 md:w-6 md:h-6"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                     stroke-width="2.5">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-            </button>
+    <p id="searchError" class="text-red-500 text-sm mt-1 ml-2 hidden">Please enter a search term.</p>
 
-        </form>
-
-    </div>
+</div>
 
 </section>
+
+<script>
+    const form = document.getElementById('searchForm');
+    const input = document.getElementById('search_input');
+    const container = document.getElementById('searchContainer');
+    const errorMsg = document.getElementById('searchError');
+
+    form.addEventListener('submit', function(e) {
+        if (!input.value.trim()) {
+            e.preventDefault(); // stop form submission
+            errorMsg.classList.remove('hidden');
+            container.classList.add('border-red-500'); // red border on whole search section
+        } else {
+            errorMsg.classList.add('hidden');
+            container.classList.remove('border-red-500');
+        }
+    });
+
+    // Optional: live removal of red border when user types
+    input.addEventListener('input', function() {
+        if (input.value.trim()) {
+            errorMsg.classList.add('hidden');
+            container.classList.remove('border-red-500');
+        }
+    });
+</script>

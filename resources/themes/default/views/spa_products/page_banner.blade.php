@@ -49,7 +49,7 @@ tailwind.config = {
 
             <input 
                 type="text"
-                placeholder="Search products here..."
+                placeholder="Search perfumes here..."
                 class="flex-1 bg-transparent outline-none font-roboto text-[14px] md:text-[16px] leading-[24px] tracking-[0.02em] text-[#371E0F] placeholder:text-[#371E0F]"
             >
 

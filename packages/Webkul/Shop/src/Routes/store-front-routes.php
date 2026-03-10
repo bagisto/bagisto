@@ -7,37 +7,38 @@ use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\CartController;
 use Webkul\Shop\Http\Controllers\PageController;
 use Webkul\Shop\Http\Controllers\ProductController;
-use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController; 
+use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
 use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use App\Http\Middleware\LocaleMiddleware;
 
+// Main Landing Page
+Route::view('/', 'shop::home.landing')->name('spa.home');
 
-// Landing Pages
-Route::get('sbt-perfumes',[HomeController::class,'sbtPerfumeIndex'])->name('sbt.perfume.index');
-Route::get('spa-products',[HomeController::class,'spaProductsIndex'])->name('spa.product.index');
-Route::get('flower-products',[HomeController::class,'flowerProductsIndex'])->name('flower.product.index');
+// Inner Landing Page
+Route::get('sbt-perfumes', [HomeController::class,'sbtPerfumeIndex'])->name('sbt.perfume.index');
+Route::post('sbt-perfumes', [SearchController::class,'sbtPerfumeSearch'])->name('sbt.perfumes.search');
 
-// Homepage Routes 
+Route::get('spa-products', [HomeController::class,'spaProductsIndex'])->name('spa.product.index');
+Route::get('flower-products', [HomeController::class,'flowerProductsIndex'])->name('flower.product.index');
+
+// Homepage Routes
 
 // Language Switch
-Route::get('/switch/lang/{ln}',[HomeController::class,'switchLanguage'])->name('switch.language');
+Route::get('/switch/lang/{ln}', [HomeController::class,'switchLanguage'])->name('switch.language');
 
 // Header search box
 Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
 
 // Search box
-Route::get('/booking/search', [SearchController::class, 'serviceSearchResult'])->name('booking.search');   
+Route::get('/booking/search', [SearchController::class, 'serviceSearchResult'])->name('booking.search');
 
-
-// Index page 
-Route::view('/', 'shop::home.landing')->name('spa.home');
 
 Route::get('/spa-services', [HomeController::class, 'index'])
     ->name('shop.home.index');
 
-// Services as per category  
+// Services as per category
 Route::get('/services/{slug}', [HomeController::class, 'servicesByCategory'])
     ->name('shop.home.services');
 
@@ -60,7 +61,7 @@ Route::get('/services', [HomeController::class, 'allServices'])
 
 // Gallery page
 Route::get('/gallery', [HomeController::class, 'galleryIndex'])
-    ->name('shop.gallery.index');      
+    ->name('shop.gallery.index');
 
 // About Us page
 Route::get('about', [HomeController::class, 'about'])
@@ -75,9 +76,9 @@ Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail']
 
 Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
 
-Route::post('add/cart',[CartController::class,'addToCart'])->name('shop.add.cart');
+Route::post('add/cart', [CartController::class,'addToCart'])->name('shop.add.cart');
 
-Route::get('cart/index',[CartController::class,'indexCart'])->name('shop.cart.index');
+Route::get('cart/index', [CartController::class,'indexCart'])->name('shop.cart.index');
 
 
 /**
@@ -111,7 +112,7 @@ Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])
     ->name('shop.booking-product.slots.index');
 
 
-    /**
+/**
  * CMS pages.
  */
 Route::get('page/{slug}', [PageController::class, 'view'])
