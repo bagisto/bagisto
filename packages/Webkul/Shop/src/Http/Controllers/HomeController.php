@@ -399,7 +399,7 @@ public function sbtPerfumeIndex(){
 
     $perfumes = $this->getProducts('simple');
 
-    if($perfumes->count()){
+    if(count($perfumes)){
         $sbt_perfumes = $perfumes;
         return view('shop::sbt_perfume.index',compact('sbt_perfumes'));
     }else{
