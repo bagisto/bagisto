@@ -2,19 +2,41 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- #11107 [fixed] - Fixed an issue with the SEO URL preview.
+
+## **v2.3.14 (5th of March 2026)** - *Release*
+
+- Fixed an issue where wishlist items were being fetched for all customers when performing "Move to Cart" or deleting wishlist items.
+
+## **v2.3.13 (2nd of March 2026)** - *Release*
+
+- Fixed catalog rule and cart rule condition validation where boolean value `0` was being incorrectly treated as empty and causing the condition to fail.
+
+- #11034 [fixed] - Fixed an issue where the `createOrderIfNotThenRetry` method caused an infinite loop by adding a configurable max retry attempts limit.
+
+- #10876 [fixed] - Fixed an issue where customers were unable to resubscribe to the newsletter after unsubscribing or after an admin changed their subscription status from True to False.
+
+- #10854 [fixed] - Fixed an issue where incomplete product data was exported in CSV, XLS, and XLSX formats.
+
+- #10828 [fixed] - Fixed an issue in the customer order view where the parent SKU was being displayed instead of the variant SKU for configurable products.
+
+- #10827 [fixed] - Fixed an issue where customers from one channel could see orders from another channel. Now customers are bound to a specific channel at registration and login, ensuring orders are channel-specific.
+
 ## **v2.3.12 (20th of February 2026)** - *Release*
 
 - Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.
 
-- #11141 [fixed] - Fixed an issue where, in certain scenarios, adding a bundle product with a quantity greater than 1 calculated the cart subtotal for only a single quantity, resulting in incorrect pricing.
-
-- #11137 [fixed] - Fixed an issue where invoice email attachments were not being sent correctly.
-
 - #11030 [fixed] - Added management support for shop footer copyright content in the admin panel.
+
+- #10960 [fixed] - Fixed an issue where, in certain scenarios, adding a bundle product with a quantity greater than 1 calculated the cart subtotal for only a single quantity, resulting in incorrect pricing.
 
 - #10929 [fixed] - Added redirect URI configuration support for social authentication login.
 
 - #10831 [fixed] - Fixed COD appearing for downloadable products in mixed cart.
+
+- #9879 [fixed] - Fixed an issue where invoice email attachments were not being sent correctly.
 
 ## **v2.3.11 (22nd of January 2026)** - *Release*
 

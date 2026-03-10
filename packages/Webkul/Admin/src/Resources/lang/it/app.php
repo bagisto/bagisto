@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Canale',
                     'contact-number' => 'Numero di Contatto',
                     'create-btn' => 'Crea Cliente',
                     'create-success' => 'Cliente creato con successo',
@@ -4424,6 +4425,12 @@ return [
                     'info' => 'Imposta numeri di ordine, ordini minimi e ordini in sospeso.',
                     'title' => 'Impostazioni Ordine',
 
+                    'order-creation' => [
+                        'info' => 'Configura il numero di tentativi di creazione dell\'ordine in caso di errori durante il checkout.',
+                        'max-retry-attempts' => 'Numero Massimo di Tentativi',
+                        'title' => 'Creazione Ordine',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Generatore di Numero di Ordine',
                         'info' => 'Identificatore univoco assegnato a un ordine specifico del cliente, che aiuta nel tracciamento, nella comunicazione e nel riferimento durante il processo di acquisto.',
@@ -4973,9 +4980,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Scarica',
         'export' => 'Esporta',
+        'no' => 'No',
         'no-records' => 'Niente da esportare',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Sì',
     ],
 
     'validations' => [

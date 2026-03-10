@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Kanaal',
                     'contact-number' => 'Contactnummer',
                     'create-btn' => 'Klant aanmaken',
                     'create-success' => 'Klant succesvol aangemaakt',
@@ -4424,6 +4425,12 @@ return [
                     'info' => 'Stel ordernummers, minimale bestellingen en backorders in.',
                     'title' => 'Bestelinstellingen',
 
+                    'order-creation' => [
+                        'info' => 'Configureer het aantal nieuwe pogingen voor het maken van een bestelling bij fouten tijdens het afrekenen.',
+                        'max-retry-attempts' => 'Maximale Aantal Pogingen',
+                        'title' => 'Bestelling Maken',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Ordernummergenerator',
                         'info' => 'Unieke identificatie toegewezen aan een specifieke klantbestelling, ter ondersteuning van tracking, communicatie en referentie gedurende het aankoopproces.',
@@ -4973,9 +4980,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Downloaden',
         'export' => 'Exporteer',
+        'no' => 'Nee',
         'no-records' => 'Niets te exporteren',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Ja',
     ],
 
     'validations' => [

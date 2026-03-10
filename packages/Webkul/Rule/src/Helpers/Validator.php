@@ -25,7 +25,8 @@ class Validator
         foreach ($rule->conditions as $condition) {
             if (
                 ! $condition['attribute']
-                || empty($condition['value'])
+                || ! isset($condition['value'])
+                || is_null($condition['value'])
             ) {
                 continue;
             }

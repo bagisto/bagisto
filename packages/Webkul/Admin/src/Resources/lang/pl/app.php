@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Kanał',
                     'contact-number' => 'Numer kontaktowy',
                     'create-btn' => 'Utwórz klienta',
                     'create-success' => 'Klient został pomyślnie utworzony',
@@ -4424,6 +4425,12 @@ return [
                     'info' => 'Ustaw numery zamówień, minimalne zamówienia i zamówienia oczekujące.',
                     'title' => 'Ustawienia zamówienia',
 
+                    'order-creation' => [
+                        'info' => 'Skonfiguruj liczbę ponownych prób utworzenia zamówienia w przypadku błędów podczas realizacji zamówienia.',
+                        'max-retry-attempts' => 'Maksymalna liczba prób',
+                        'title' => 'Tworzenie zamówienia',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Generator numerów zamówień',
                         'info' => 'Unikalny identyfikator przypisany do konkretnego zamówienia klienta, ułatwiający śledzenie, komunikację i odniesienie w całym procesie zakupowym.',
@@ -4973,9 +4980,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Pobierz',
         'export' => 'Eksport',
+        'no' => 'Nie',
         'no-records' => 'Nic do wyeksportowania',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Tak',
     ],
 
     'validations' => [

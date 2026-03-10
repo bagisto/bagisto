@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Kanal',
                     'contact-number' => 'İletişim Numarası',
                     'create-btn' => 'Müşteri Oluştur',
                     'create-success' => 'Müşteri başarıyla oluşturuldu',
@@ -4424,6 +4425,12 @@ return [
                     'info' => 'Sipariş numaralarını, minimum siparişleri ve geri siparişleri ayarlayın.',
                     'title' => 'Sipariş Ayarları',
 
+                    'order-creation' => [
+                        'info' => 'Ödeme sırasında hata oluştuğunda sipariş oluşturma yeniden deneme sayısını yapılandırın.',
+                        'max-retry-attempts' => 'Maksimum Yeniden Deneme Sayısı',
+                        'title' => 'Sipariş Oluşturma',
+                    ],
+
                     'order-number' => [
                         'generator' => 'Sipariş Numarası Oluşturucusu',
                         'info' => 'Bir müşteri siparişine atanan benzersiz bir tanımlayıcıdır ve satın alma süreci boyunca takip, iletişim ve referans sağlar.',
@@ -4973,9 +4980,11 @@ return [
         'csv' => 'CSV',
         'download' => 'İndir',
         'export' => 'Dışa Aktar',
+        'no' => 'Hayır',
         'no-records' => 'Dışa aktarılacak hiçbir şey yok',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Evet',
     ],
 
     'validations' => [

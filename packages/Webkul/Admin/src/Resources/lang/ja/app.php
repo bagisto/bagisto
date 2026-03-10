@@ -1713,6 +1713,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'チャンネル',
                     'contact-number' => '連絡先番号',
                     'create-btn' => '顧客を作成',
                     'create-success' => '顧客が正常に作成されました',
@@ -4424,6 +4425,12 @@ return [
                     'info' => '注文番号、最小注文数、バックオーダーを設定します。',
                     'title' => '注文設定',
 
+                    'order-creation' => [
+                        'info' => 'チェックアウト中にエラーが発生した場合の注文作成の再試行回数を設定します。',
+                        'max-retry-attempts' => '最大再試行回数',
+                        'title' => '注文作成',
+                    ],
+
                     'order-number' => [
                         'generator' => '注文番号ジェネレータ',
                         'info' => '特定の顧客注文に割り当てられた一意の識別子で、購入プロセス全体での追跡、コミュニケーション、参照を支援します。',
@@ -4973,9 +4980,11 @@ return [
         'csv' => 'CSV',
         'download' => 'ダウンロード',
         'export' => 'エクスポート',
+        'no' => 'いいえ',
         'no-records' => 'エクスポート対象がありません',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'はい',
     ],
 
     'validations' => [
