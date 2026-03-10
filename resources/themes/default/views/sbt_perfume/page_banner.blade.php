@@ -1,3 +1,4 @@
+
 <script>
 tailwind.config = {
   theme: {
@@ -53,7 +54,7 @@ tailwind.config = {
             placeholder="Search perfumes here..."
             name="search_input"
             id="search_input"
-            value="{{ old('search_input') }}"
+            value="{{ old('search_input', $search_input ?? '') }}"
             class="flex-1 bg-transparent outline-none font-roboto text-[14px] md:text-[16px] leading-[24px] tracking-[0.02em] 
                    text-[#371E0F] placeholder:text-[#371E0F]"
         >

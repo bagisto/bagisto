@@ -163,7 +163,6 @@ class SearchController extends Controller
     }
 
 
-
     // Search result for sbt perfume
     public function sbtPerfumeSearch(Request $req)
     {
@@ -171,15 +170,17 @@ class SearchController extends Controller
             'search_input' => 'required | string'
         ]);
 
+        $search_input = $req->search_input;
+
         $searched_perfumes  =
-        $this->getSearchProducts('simple', 'perfumes', $req->search_input);
+        $this->getSearchProducts('simple', 'perfumes', $search_input);
 
         if (count($searched_perfumes)) {
             $sbt_perfumes = $searched_perfumes;
-            return view('shop::sbt_perfume.index', compact('sbt_perfumes'));
+            return view('shop::sbt_perfume.index', compact('sbt_perfumes', 'search_input'));
         } else {
             $sbt_perfumes = [];
-            return view('shop::sbt_perfume.index', compact('sbt_perfumes'));
+            return view('shop::sbt_perfume.index', compact('sbt_perfumes', 'search_input'));
         }
 
     }
