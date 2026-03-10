@@ -1,3 +1,10 @@
+
+<style>
+.social-login-buttons {
+    display: none !important;
+}
+</style>
+
 <!-- SEO Meta Content -->
 @push('meta')
     <meta
@@ -32,7 +39,7 @@
                 aria-label="@lang('shop::app.customers.signup-form.bagisto')"
             >
                 <img
-                    src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                    src="{{ asset('themes/shop/default/images/logo.png') }}"
                     alt="{{ config('app.name') }}"
                     width="131"
                     height="29"
@@ -250,10 +257,10 @@
                         >
                             @lang('shop::app.customers.signup-form.button-title')
                         </button>
-
+<!-- 
                         <div class="flex flex-wrap gap-4">
                             {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
-                        </div>
+                        </div> -->
                     </div>
 
                     {!! view_render_event('bagisto.shop.customers.signup_form_controls.after') !!}
@@ -281,18 +288,4 @@
         {!! \Webkul\Customer\Facades\Captcha::renderJS() !!}
     @endpush
 
-    <!-- Terms & Conditions Modal -->
-    <x-shop::modal ref="termsModal">
-        <x-slot:toggle></x-slot>
-
-        <x-slot:header class="!p-5">
-            <p>@lang('shop::app.customers.signup-form.terms-conditions')</p>
-        </x-slot>
-
-        <x-slot:content class="!p-5">
-            <div class="max-h-[500px] overflow-auto">
-                {!! core()->getConfigData('general.gdpr.agreement.agreement_content') !!}
-            </div>
-        </x-slot>
-    </x-admin::modal>
 </x-shop::layouts>

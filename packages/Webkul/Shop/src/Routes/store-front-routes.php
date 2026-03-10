@@ -74,9 +74,6 @@ Route::post('add/cart',[CartController::class,'addToCart'])->name('shop.add.cart
 Route::get('cart/index',[CartController::class,'indexCart'])->name('shop.cart.index');
 
 
-/**
- * Subscription routes.
- */
 Route::controller(SubscriptionController::class)->group(function () {
     Route::post('subscription', 'store')->name('shop.subscription.store');
     Route::get('subscription/{token}', 'destroy')->name('shop.subscription.destroy');

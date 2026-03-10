@@ -26,7 +26,7 @@
                 aria-label="@lang('shop::app.customers.login-form.bagisto')"
             >
                 <img
-                    src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                    src="{{ asset('themes/shop/default/images/logo.png') }}"
                     alt="{{ config('app.name') }}"
                     width="131"
                     height="29"
@@ -148,7 +148,7 @@
                             @lang('shop::app.customers.login-form.button-title')
                         </button>
 
-                        {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!}
+                        <!-- {!! view_render_event('bagisto.shop.customers.login_form_controls.after') !!} -->
                     </div>
                 </x-shop::form>
             </div>
