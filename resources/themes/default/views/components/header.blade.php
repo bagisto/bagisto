@@ -134,7 +134,7 @@
                     </a>
                 </div>
 
-                @if(Route::currentRouteName() == 'sbt.perfume.index' || Route::currentRouteName() == 'sbt.perfumes.search' || Route::currentRouteName() == 'spa.product.index' || Route::currentRouteName() == 'spa.product.search'
+                @if(Route::currentRouteName() == 'shop.home.index' || Route::currentRouteName() == 'sbt.perfume.index' || Route::currentRouteName() == 'sbt.perfumes.search' || Route::currentRouteName() == 'spa.product.index' || Route::currentRouteName() == 'spa.product.search'
                  || Route::currentRouteName() == 'flower.product.index' || Route::currentRouteName() == 'flower.product.search')
                 
                 @else
@@ -178,14 +178,11 @@
                 </div>
 
                 {{-- CART --}}
-                @auth('customer')
                 <div class="relative cursor-pointer">
                     <a href="{{ route('shop.cart.index') }}">
                     <img src="{{ asset('images/cart.png') }}" alt="Cart" class="w-6 h-6">
                     </a>
                 </div>
-                @endauth
-
 
                 {{-- WISHLIST --}}
                 <div class="relative cursor-pointer">
