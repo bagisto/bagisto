@@ -50,8 +50,10 @@ class ShopServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'shop');
 
-        Paginator::defaultView('shop::partials.pagination');
-        Paginator::defaultSimpleView('shop::partials.pagination');
+        // Paginator::defaultView('shop::partials.pagination');
+        // Paginator::defaultSimpleView('shop::partials.pagination');
+
+        Paginator::useTailwind();
 
         Blade::anonymousComponentPath(__DIR__.'/../Resources/views/components', 'shop');
 
