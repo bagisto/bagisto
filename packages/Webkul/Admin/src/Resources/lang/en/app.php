@@ -3669,7 +3669,7 @@ return [
             'title' => 'Configuration',
 
             'general' => [
-                'info' => 'Set units options.',
+                'info' => 'General',
                 'title' => 'General',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'Experience Enhancements',
                         'measurement' => 'Measurements',
                         'targeting-advertising' => 'Targeting & Advertising',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Configure exchange rate API services and credentials.',
+                    'title' => 'Exchange Rates',
+
+                    'settings' => [
+                        'default-service' => 'Default Service',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'General Settings',
+                        'title-info' => 'Select the default exchange rate service to use for automatic currency rate updates.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Enter your Fixer.io API key for automatic exchange rate updates.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Enter your ExchangeRate-API key for automatic exchange rate updates (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Daily',
+                        'enabled' => 'Enabled',
+                        'frequency' => 'Frequency',
+                        'monthly' => 'Monthly',
+                        'time' => 'Start Time (HH:MM)',
+                        'title' => 'Scheduled Import',
+                        'title-info' => 'Automatically update exchange rates on a scheduled basis using the configured API service.',
+                        'weekly' => 'Weekly',
                     ],
                 ],
 

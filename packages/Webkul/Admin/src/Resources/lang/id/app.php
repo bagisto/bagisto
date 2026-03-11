@@ -3669,7 +3669,7 @@ return [
             'title' => 'Konfigurasi',
 
             'general' => [
-                'info' => 'Atur opsi unit.',
+                'info' => 'Umum',
                 'title' => 'Umum',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'Peningkatan Pengalaman',
                         'measurement' => 'Pengukuran',
                         'targeting-advertising' => 'Penargetan & Periklanan',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Konfigurasi layanan API dan kredensial nilai tukar.',
+                    'title' => 'Nilai Tukar',
+
+                    'settings' => [
+                        'default-service' => 'Layanan Default',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Pengaturan Umum',
+                        'title-info' => 'Pilih layanan nilai tukar default yang akan digunakan untuk pembaruan kurs mata uang otomatis.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Masukkan kunci API Fixer.io Anda untuk pembaruan nilai tukar otomatis.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Masukkan kunci ExchangeRate-API Anda untuk pembaruan nilai tukar otomatis (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Harian',
+                        'enabled' => 'Diaktifkan',
+                        'frequency' => 'Frekuensi',
+                        'monthly' => 'Bulanan',
+                        'time' => 'Waktu Mulai (HH:MM)',
+                        'title' => 'Impor Terjadwal',
+                        'title-info' => 'Perbarui nilai tukar secara otomatis berdasarkan jadwal menggunakan layanan API yang telah dikonfigurasi.',
+                        'weekly' => 'Mingguan',
                     ],
                 ],
 

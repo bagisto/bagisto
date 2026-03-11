@@ -3669,7 +3669,7 @@ return [
             'title' => 'Konfiguracja',
 
             'general' => [
-                'info' => 'Ustaw opcje jednostek.',
+                'info' => 'Ogólne',
                 'title' => 'Ogólne',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'Poprawa doświadczenia',
                         'measurement' => 'Pomiar',
                         'targeting-advertising' => 'Targetowanie i reklamy',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Skonfiguruj usługi API kursów walut i dane uwierzytelniające.',
+                    'title' => 'Kursy Walut',
+
+                    'settings' => [
+                        'default-service' => 'Domyślna Usługa',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Ustawienia Ogólne',
+                        'title-info' => 'Wybierz domyślną usługę kursów walut do automatycznej aktualizacji kursów walutowych.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Wprowadź klucz API Fixer.io do automatycznej aktualizacji kursów walut.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Wprowadź klucz ExchangeRate-API do automatycznej aktualizacji kursów walut (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Codziennie',
+                        'enabled' => 'Włączone',
+                        'frequency' => 'Częstotliwość',
+                        'monthly' => 'Miesięcznie',
+                        'time' => 'Czas Rozpoczęcia (HH:MM)',
+                        'title' => 'Zaplanowany Import',
+                        'title-info' => 'Automatycznie aktualizuj kursy walut zgodnie z harmonogramem, korzystając ze skonfigurowanej usługi API.',
+                        'weekly' => 'Tygodniowo',
                     ],
                 ],
 

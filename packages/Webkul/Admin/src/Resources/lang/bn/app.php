@@ -3669,7 +3669,7 @@ return [
             'title' => 'কনফিগারেশন',
 
             'general' => [
-                'info' => 'ইউনিট অপশন সেট করুন।',
+                'info' => 'সাধারণ',
                 'title' => 'সাধারণ',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'অভিজ্ঞতা উন্নতি',
                         'measurement' => 'পরিমাপ',
                         'targeting-advertising' => 'লক্ষ্যবস্তু এবং বিজ্ঞাপন',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'বিনিময় হার API পরিষেবা এবং শংসাপত্র কনফিগার করুন।',
+                    'title' => 'বিনিময় হার',
+
+                    'settings' => [
+                        'default-service' => 'ডিফল্ট পরিষেবা',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'সাধারণ সেটিংস',
+                        'title-info' => 'স্বয়ংক্রিয় মুদ্রা হার আপডেটের জন্য ব্যবহার করতে ডিফল্ট বিনিময় হার পরিষেবা নির্বাচন করুন।',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'স্বয়ংক্রিয় বিনিময় হার আপডেটের জন্য আপনার Fixer.io API Key লিখুন।',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'স্বয়ংক্রিয় বিনিময় হার আপডেটের জন্য আপনার ExchangeRate-API Key লিখুন (https://www.exchangerate-api.com)।',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'দৈনিক',
+                        'enabled' => 'সক্রিয়',
+                        'frequency' => 'ফ্রিকোয়েন্সি',
+                        'monthly' => 'মাসিক',
+                        'time' => 'শুরুর সময় (HH:MM)',
+                        'title' => 'নির্ধারিত আমদানি',
+                        'title-info' => 'কনফিগার করা API পরিষেবা ব্যবহার করে নির্ধারিত সময়সূচী অনুযায়ী স্বয়ংক্রিয়ভাবে বিনিময় হার আপডেট করুন।',
+                        'weekly' => 'সাপ্তাহিক',
                     ],
                 ],
 

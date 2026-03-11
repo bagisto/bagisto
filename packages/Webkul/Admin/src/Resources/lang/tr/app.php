@@ -3669,7 +3669,7 @@ return [
             'title' => 'Ayarlar',
 
             'general' => [
-                'info' => 'Birim seçeneklerini ayarlayın.',
+                'info' => 'Genel',
                 'title' => 'Genel',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'Deneyim Geliştirme',
                         'measurement' => 'Ölçüm',
                         'targeting-advertising' => 'Hedefleme ve Reklam',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Döviz kuru API hizmetlerini ve kimlik bilgilerini yapılandırın.',
+                    'title' => 'Döviz Kurları',
+
+                    'settings' => [
+                        'default-service' => 'Varsayılan Hizmet',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Genel Ayarlar',
+                        'title-info' => 'Otomatik döviz kuru güncellemeleri için kullanılacak varsayılan döviz kuru hizmetini seçin.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Otomatik döviz kuru güncellemeleri için Fixer.io API anahtarınızı girin.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Otomatik döviz kuru güncellemeleri için ExchangeRate-API anahtarınızı girin (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Günlük',
+                        'enabled' => 'Etkin',
+                        'frequency' => 'Sıklık',
+                        'monthly' => 'Aylık',
+                        'time' => 'Başlangıç Zamanı (HH:MM)',
+                        'title' => 'Zamanlanmış İçe Aktarma',
+                        'title-info' => 'Yapılandırılmış API hizmetini kullanarak döviz kurlarını planlı olarak otomatik güncelleyin.',
+                        'weekly' => 'Haftalık',
                     ],
                 ],
 

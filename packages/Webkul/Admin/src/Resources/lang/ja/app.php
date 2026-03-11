@@ -3669,7 +3669,7 @@ return [
             'title' => '設定',
 
             'general' => [
-                'info' => 'ユニットオプションを設定します。',
+                'info' => '一般',
                 'title' => '一般',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => '体験の向上',
                         'measurement' => '測定',
                         'targeting-advertising' => 'ターゲティングと広告',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => '為替レートAPIサービスと認証情報を設定します。',
+                    'title' => '為替レート',
+
+                    'settings' => [
+                        'default-service' => 'デフォルトサービス',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => '一般設定',
+                        'title-info' => '自動通貨レート更新に使用するデフォルトの為替レートサービスを選択してください。',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => '為替レートの自動更新のためにFixer.ioのAPIキーを入力してください。',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => '為替レートの自動更新のためにExchangeRate-APIキーを入力してください (https://www.exchangerate-api.com)。',
+                    ],
+
+                    'schedule' => [
+                        'daily' => '毎日',
+                        'enabled' => '有効',
+                        'frequency' => '頻度',
+                        'monthly' => '毎月',
+                        'time' => '開始時刻 (HH:MM)',
+                        'title' => 'スケジュールインポート',
+                        'title-info' => '設定されたAPIサービスを使用して、スケジュールに基づいて為替レートを自動的に更新します。',
+                        'weekly' => '毎週',
                     ],
                 ],
 
