@@ -230,7 +230,7 @@ class Simple extends AbstractType
             /**
              * Store the file in the storage.
              */
-            $formattedCustomizableOptions = $formattedCustomizableOptions->map(function ($option) use (&$data) {
+            $formattedCustomizableOptions = $formattedCustomizableOptions->map(function ($option) use ($data) {
                 if ($option['type'] === 'file') {
                     $file = $option['prices'][0]['label'];
 
@@ -247,14 +247,21 @@ class Simple extends AbstractType
 
                         $option['prices'][0]['label'] = $filePath['prices'][0]['label'] ?? '';
                     }
-
-                    $data['customizable_options'][$option['id']] = [$option['prices'][0]['label']];
                 }
 
                 return $option;
             });
 
             $price += $formattedCustomizableOptions->sum('total_price');
+
+            foreach ($formattedCustomizableOptions as $option) {
+                if (
+                    $option['type'] === 'file'
+                    && ! empty($option['prices'][0]['label'])
+                ) {
+                    $data['customizable_options'][$option['id']] = [$option['prices'][0]['label']];
+                }
+            }
 
             $data['formatted_customizable_options'] = $formattedCustomizableOptions->toArray();
         }
