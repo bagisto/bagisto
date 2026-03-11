@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Helpers\Indexers\Price\Simple as SimpleIndexer;
@@ -66,7 +67,7 @@ class Simple extends AbstractType
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function update(array $data, $id, $attributes = [])
     {
@@ -213,7 +214,7 @@ class Simple extends AbstractType
             foreach ($formattedCustomizableOptions->where('type', 'file') as $option) {
                 if (
                     isset($option['prices'][0]['label'])
-                    && $option['prices'][0]['label'] instanceof \Illuminate\Http\UploadedFile
+                    && $option['prices'][0]['label'] instanceof UploadedFile
                 ) {
                     $extension = $option['prices'][0]['label']->getClientOriginalExtension();
 

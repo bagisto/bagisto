@@ -3,6 +3,7 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 use Webkul\Product\Contracts\ProductPriceIndex as ProductPriceIndexContract;
@@ -27,7 +28,7 @@ class ProductPriceIndex extends Model implements ProductPriceIndexContract
     /**
      * Get the product that owns the price index.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function product()
     {

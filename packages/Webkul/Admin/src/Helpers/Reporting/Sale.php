@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Sales\Repositories\InvoiceRepository;
@@ -64,8 +65,8 @@ class Sale extends AbstractReporting
     /**
      * Retrieves total orders
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalOrders($startDate, $endDate): int
     {
@@ -79,8 +80,8 @@ class Sale extends AbstractReporting
     /**
      * Returns orders over time
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
      */
@@ -163,8 +164,8 @@ class Sale extends AbstractReporting
     /**
      * Retrieves total sales
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalSales($startDate, $endDate): float
     {
@@ -178,8 +179,8 @@ class Sale extends AbstractReporting
     /**
      * Retrieves sub total sales
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getSubTotalSales($startDate, $endDate): float
     {
@@ -215,8 +216,8 @@ class Sale extends AbstractReporting
     /**
      * Returns sales over time
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
      */
@@ -246,8 +247,8 @@ class Sale extends AbstractReporting
     /**
      * Retrieves average sales
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @return array
      */
     public function getAverageSales($startDate, $endDate): ?float
@@ -284,8 +285,8 @@ class Sale extends AbstractReporting
     /**
      * Returns average sales over time
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
      */
@@ -315,8 +316,8 @@ class Sale extends AbstractReporting
     /**
      * Retrieves refunds
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @return array
      */
     public function getRefunds($startDate, $endDate): float
@@ -353,8 +354,8 @@ class Sale extends AbstractReporting
     /**
      * Returns refunds over time
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
      */
@@ -384,8 +385,8 @@ class Sale extends AbstractReporting
     /**
      * Retrieves tax collected
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @return array
      */
     public function getTaxCollected($startDate, $endDate): float
@@ -422,8 +423,8 @@ class Sale extends AbstractReporting
     /**
      * Returns tax collected over time
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
      */
@@ -477,8 +478,8 @@ class Sale extends AbstractReporting
     /**
      * Retrieves shipping collected
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getShippingCollected($startDate, $endDate): float
     {
@@ -514,8 +515,8 @@ class Sale extends AbstractReporting
     /**
      * Returns shipping collected over time
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      * @param  bool  $includeEmpty
      */
@@ -581,8 +582,8 @@ class Sale extends AbstractReporting
     /**
      * Retrieves total unique cart users
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @return array
      */
     public function getTotalUniqueOrdersUsers($startDate, $endDate): int
@@ -599,8 +600,8 @@ class Sale extends AbstractReporting
     /**
      * Returns over time stats.
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $valueColumn
      * @param  string  $period
      */

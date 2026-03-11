@@ -77,7 +77,7 @@ class DatabaseManager
             DB::connection()->getPdo();
 
             return true;
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             report($e);
 
             return false;

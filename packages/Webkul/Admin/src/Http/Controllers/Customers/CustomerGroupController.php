@@ -4,6 +4,7 @@ namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Customers\GroupDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Rules\Code;
@@ -21,7 +22,7 @@ class CustomerGroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {

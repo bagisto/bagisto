@@ -1,5 +1,9 @@
 <?php
 
+use Webkul\Shop\CacheFilters\Large;
+use Webkul\Shop\CacheFilters\Medium;
+use Webkul\Shop\CacheFilters\Small;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -52,9 +56,9 @@ return [
     */
 
     'templates' => [
-        'small' => \Webkul\Shop\CacheFilters\Small::class,
-        'medium' => \Webkul\Shop\CacheFilters\Medium::class,
-        'large' => \Webkul\Shop\CacheFilters\Large::class,
+        'small' => Small::class,
+        'medium' => Medium::class,
+        'large' => Large::class,
     ],
 
     /*

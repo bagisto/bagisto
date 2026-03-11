@@ -6,7 +6,7 @@ if (! function_exists('payment')) {
     /**
      * Payment helper.
      *
-     * @return \Webkul\Payment\Payment
+     * @return Webkul\Payment\Payment
      */
     function payment()
     {

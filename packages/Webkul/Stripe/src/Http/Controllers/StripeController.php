@@ -2,6 +2,7 @@
 
 namespace Webkul\Stripe\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Sales\Repositories\InvoiceRepository;
@@ -29,7 +30,7 @@ class StripeController extends Controller
     /**
      * Redirects to Stripe checkout.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function redirect()
     {
@@ -61,7 +62,7 @@ class StripeController extends Controller
     /**
      * Handle payment success callback.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function success()
     {
@@ -158,7 +159,7 @@ class StripeController extends Controller
     /**
      * Handle payment cancellation.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function cancel()
     {

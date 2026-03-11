@@ -3,6 +3,19 @@
 namespace Webkul\Sales\Providers;
 
 use Webkul\Core\Providers\CoreModuleServiceProvider;
+use Webkul\Sales\Models\DownloadableLinkPurchased;
+use Webkul\Sales\Models\Invoice;
+use Webkul\Sales\Models\InvoiceItem;
+use Webkul\Sales\Models\Order;
+use Webkul\Sales\Models\OrderAddress;
+use Webkul\Sales\Models\OrderComment;
+use Webkul\Sales\Models\OrderItem;
+use Webkul\Sales\Models\OrderPayment;
+use Webkul\Sales\Models\OrderTransaction;
+use Webkul\Sales\Models\Refund;
+use Webkul\Sales\Models\RefundItem;
+use Webkul\Sales\Models\Shipment;
+use Webkul\Sales\Models\ShipmentItem;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
@@ -12,18 +25,18 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\Sales\Models\DownloadableLinkPurchased::class,
-        \Webkul\Sales\Models\Invoice::class,
-        \Webkul\Sales\Models\InvoiceItem::class,
-        \Webkul\Sales\Models\Order::class,
-        \Webkul\Sales\Models\OrderAddress::class,
-        \Webkul\Sales\Models\OrderComment::class,
-        \Webkul\Sales\Models\OrderItem::class,
-        \Webkul\Sales\Models\OrderPayment::class,
-        \Webkul\Sales\Models\OrderTransaction::class,
-        \Webkul\Sales\Models\Refund::class,
-        \Webkul\Sales\Models\RefundItem::class,
-        \Webkul\Sales\Models\Shipment::class,
-        \Webkul\Sales\Models\ShipmentItem::class,
+        DownloadableLinkPurchased::class,
+        Invoice::class,
+        InvoiceItem::class,
+        Order::class,
+        OrderAddress::class,
+        OrderComment::class,
+        OrderItem::class,
+        OrderPayment::class,
+        OrderTransaction::class,
+        Refund::class,
+        RefundItem::class,
+        Shipment::class,
+        ShipmentItem::class,
     ];
 }

@@ -2,6 +2,7 @@
 
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Contracts\ProductFlat;
+use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
@@ -28,7 +29,7 @@ it('should copy the existing product', function () {
         ->assertJsonPath('message', trans('admin::app.catalog.products.product-copied'));
 
     // Get the newly created product (last one).
-    $copiedProduct = \Webkul\Product\Models\Product::latest('id')->first();
+    $copiedProduct = Product::latest('id')->first();
 
     // Assert the copied product has a different ID.
     expect($copiedProduct->id)->not->toBe($product->id);

@@ -3,8 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Catalog;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Catalog\ProductDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\InventoryRequest;
@@ -49,7 +51,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -65,7 +67,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -83,7 +85,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function store()
     {
@@ -133,7 +135,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
@@ -145,7 +147,7 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(ProductForm $request, int $id)
     {
@@ -163,7 +165,7 @@ class ProductController extends Controller
     /**
      * Update inventories.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function updateInventories(InventoryRequest $inventoryRequest, int $id)
     {
@@ -184,7 +186,7 @@ class ProductController extends Controller
     /**
      * Uploads downloadable file.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function uploadLink(int $id)
     {
@@ -196,7 +198,7 @@ class ProductController extends Controller
     /**
      * Copy a given Product.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function copy(int $id)
     {
@@ -220,7 +222,7 @@ class ProductController extends Controller
     /**
      * Uploads downloadable sample file.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function uploadSample(int $id)
     {
@@ -308,7 +310,7 @@ class ProductController extends Controller
     /**
      * To be manually invoked when data is seeded into products.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function sync()
     {
@@ -320,7 +322,7 @@ class ProductController extends Controller
     /**
      * Result of search product.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function search()
     {
@@ -375,7 +377,7 @@ class ProductController extends Controller
      *
      * @param  int  $productId
      * @param  int  $attributeId
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function download($productId, $attributeId)
     {

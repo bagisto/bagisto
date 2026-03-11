@@ -2,28 +2,39 @@
 
 namespace Webkul\Product\Type;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Attribute\Contracts\Attribute;
+use Webkul\Attribute\Contracts\Group;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartItem;
+use Webkul\Customer\Contracts\Wishlist;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Contracts\ProductInventoryIndex;
+use Webkul\Product\Contracts\ProductPriceIndex;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Facades\ProductImage;
+use Webkul\Product\Models\Product;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
 use Webkul\Product\Repositories\ProductInventoryRepository;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Repositories\ProductVideoRepository;
+use Webkul\Sales\Contracts\InvoiceItem;
+use Webkul\Sales\Contracts\OrderItem;
+use Webkul\Sales\Contracts\ShipmentItem;
+use Webkul\Tax\Models\TaxCategory;
 
 abstract class AbstractType
 {
     /**
      * Product instance.
      *
-     * @var \Webkul\Product\Models\Product
+     * @var Product
      */
     protected $product;
 
@@ -198,7 +209,7 @@ abstract class AbstractType
 
     /**
      * @param  string  $code
-     * @return \Webkul\Attribute\Contracts\Attribute
+     * @return Attribute
      */
     public function getAttributeByCode($code)
     {
@@ -238,7 +249,7 @@ abstract class AbstractType
     /**
      * Copy attribute values.
      *
-     * @param  \Webkul\Product\Models\Product  $product
+     * @param  Product  $product
      */
     protected function copyAttributeValues($product): void
     {
@@ -281,7 +292,7 @@ abstract class AbstractType
     /**
      * Copy relationships.
      *
-     * @param  \Webkul\Product\Models\Product  $product
+     * @param  Product  $product
      * @return void
      */
     protected function copyRelationships($product)
@@ -364,7 +375,7 @@ abstract class AbstractType
      * Specify type instance product.
      *
      * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Webkul\Product\Type\AbstractType
+     * @return AbstractType
      */
     public function setProduct($product)
     {
@@ -536,9 +547,9 @@ abstract class AbstractType
     /**
      * Retrieve product attributes.
      *
-     * @param  \Webkul\Attribute\Contracts\Group  $group
+     * @param  Group  $group
      * @param  bool  $skipSuperAttribute
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getEditableAttributes($group = null, $skipSuperAttribute = true)
     {
@@ -675,7 +686,7 @@ abstract class AbstractType
     /**
      * Returns product price index of current customer group.
      *
-     * @return \Webkul\Product\Contracts\ProductPriceIndex
+     * @return ProductPriceIndex
      */
     public function getPriceIndex()
     {
@@ -693,7 +704,7 @@ abstract class AbstractType
     /**
      * Returns product inventory index of current channel.
      *
-     * @return \Webkul\Product\Contracts\ProductInventoryIndex
+     * @return ProductInventoryIndex
      */
     public function getInventoryIndex()
     {
@@ -756,7 +767,7 @@ abstract class AbstractType
     /**
      * Get tax category.
      *
-     * @return \Webkul\Tax\Models\TaxCategory
+     * @return TaxCategory
      */
     public function getTaxCategory()
     {
@@ -881,7 +892,7 @@ abstract class AbstractType
      * Get actual ordered item.
      *
      * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return \Webkul\Checkout\Contracts\CartItem|\Webkul\Sales\Contracts\OrderItem|\Webkul\Sales\Contracts\InvoiceItem|\Webkul\Sales\Contracts\ShipmentItem|\Webkul\Customer\Contracts\Wishlist
+     * @return \Webkul\Checkout\Contracts\CartItem|OrderItem|InvoiceItem|ShipmentItem|Wishlist
      */
     public function getOrderedItem($item)
     {

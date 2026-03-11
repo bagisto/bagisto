@@ -48,7 +48,7 @@ class ElasticSearchRepository
             $filters['filter'][]['term']['type'] = $params['type'];
         }
 
-        $results = Elasticsearch::search([
+        $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
             'body' => [
                 'from' => $options['from'],
@@ -76,7 +76,7 @@ class ElasticSearchRepository
             return null;
         }
 
-        $results = Elasticsearch::search([
+        $results = ElasticSearch::search([
             'index' => $this->getIndexName(),
             'body' => [
                 'suggest' => [
@@ -245,7 +245,7 @@ class ElasticSearchRepository
 
         $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
 
-        $results = Elasticsearch::search([
+        $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
             'body' => [
                 'size' => 0,
@@ -282,7 +282,7 @@ class ElasticSearchRepository
 
         $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
 
-        $results = Elasticsearch::search([
+        $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
             'body' => [
                 'size' => 0,

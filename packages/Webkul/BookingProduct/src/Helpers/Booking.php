@@ -147,7 +147,7 @@ class Booking
     /**
      * Returns slots for a particular day.
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  BookingProduct  $bookingProduct
      */
     public function getSlotsByDate($bookingProduct, string $date): array
     {
@@ -475,7 +475,7 @@ class Booking
                                 'qty' => $qty,
                             ];
 
-                            usort($slots, fn ($first, $second) => \Carbon\Carbon::parse($first['from'])->timestamp <=> \Carbon\Carbon::parse($second['from'])->timestamp);
+                            usort($slots, fn ($first, $second) => Carbon::parse($first['from'])->timestamp <=> Carbon::parse($second['from'])->timestamp);
                         }
                     }
                 } else {

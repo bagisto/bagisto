@@ -2,6 +2,7 @@
 
 namespace Webkul\User\Http\Middleware;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 class Bouncer
@@ -9,7 +10,7 @@ class Bouncer
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  string|null  $guard
      * @return mixed
      */

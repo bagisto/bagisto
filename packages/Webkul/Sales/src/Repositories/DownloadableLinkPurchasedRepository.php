@@ -5,6 +5,7 @@ namespace Webkul\Sales\Repositories;
 use Illuminate\Container\Container;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
+use Webkul\Sales\Contracts\OrderItem;
 
 class DownloadableLinkPurchasedRepository extends Repository
 {
@@ -29,7 +30,7 @@ class DownloadableLinkPurchasedRepository extends Repository
     }
 
     /**
-     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
+     * @param  OrderItem  $orderItem
      * @return void
      */
     public function saveLinks($orderItem)
@@ -62,7 +63,7 @@ class DownloadableLinkPurchasedRepository extends Repository
     /**
      * Return true, if ordered item is valid downloadable product with links
      *
-     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
+     * @param  OrderItem  $orderItem
      */
     private function isValidDownloadableProduct($orderItem): bool
     {
@@ -77,7 +78,7 @@ class DownloadableLinkPurchasedRepository extends Repository
     }
 
     /**
-     * @param  \Webkul\Sales\Contracts\OrderItem  $orderItem
+     * @param  OrderItem  $orderItem
      * @param  string  $status
      * @return void
      */

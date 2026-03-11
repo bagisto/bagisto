@@ -5,6 +5,8 @@ namespace Webkul\CartRule\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\CartRule\Contracts\CartRule as CartRuleContract;
 use Webkul\Core\Database\Factories\CartRuleFactory;
 use Webkul\Core\Models\ChannelProxy;
@@ -56,7 +58,7 @@ class CartRule extends Model implements CartRuleContract
     /**
      * Get the channels that owns the cart rule.
      */
-    public function cart_rule_channels(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function cart_rule_channels(): BelongsToMany
     {
         return $this->belongsToMany(ChannelProxy::modelClass(), 'cart_rule_channels');
     }
@@ -64,7 +66,7 @@ class CartRule extends Model implements CartRuleContract
     /**
      * @deprecated laravel standard should be used
      */
-    public function channels(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function channels(): BelongsToMany
     {
         return $this->cart_rule_channels();
     }
@@ -72,7 +74,7 @@ class CartRule extends Model implements CartRuleContract
     /**
      * Get the customer groups that owns the cart rule.
      */
-    public function cart_rule_customer_groups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function cart_rule_customer_groups(): BelongsToMany
     {
         return $this->belongsToMany(CustomerGroupProxy::modelClass(), 'cart_rule_customer_groups');
     }
@@ -80,7 +82,7 @@ class CartRule extends Model implements CartRuleContract
     /**
      * @deprecated laravel standard should be used
      */
-    public function customer_groups(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function customer_groups(): BelongsToMany
     {
         return $this->cart_rule_customer_groups();
     }
@@ -88,7 +90,7 @@ class CartRule extends Model implements CartRuleContract
     /**
      * Get the coupons that owns the cart rule.
      */
-    public function cart_rule_coupon(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function cart_rule_coupon(): HasOne
     {
         return $this->hasOne(CartRuleCouponProxy::modelClass());
     }
@@ -96,7 +98,7 @@ class CartRule extends Model implements CartRuleContract
     /**
      * @deprecated laravel standard should be used
      */
-    public function coupons(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function coupons(): HasOne
     {
         return $this->cart_rule_coupon();
     }
@@ -104,7 +106,7 @@ class CartRule extends Model implements CartRuleContract
     /**
      * Get primary coupon code for cart rule.
      */
-    public function coupon_code(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function coupon_code(): HasOne
     {
         return $this->cart_rule_coupon()->where('is_primary', 1);
     }

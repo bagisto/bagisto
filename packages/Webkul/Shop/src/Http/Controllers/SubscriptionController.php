@@ -2,6 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Repositories\SubscribersListRepository;
 
@@ -17,7 +19,7 @@ class SubscriptionController extends Controller
     /**
      * Subscribes email to the email subscription list.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function store()
     {
@@ -50,7 +52,7 @@ class SubscriptionController extends Controller
      * To unsubscribe from a the subscription list.
      *
      * @param  string  $token
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($token)
     {

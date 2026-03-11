@@ -3,6 +3,8 @@
 namespace Webkul\Theme\Providers;
 
 use Webkul\Core\Providers\CoreModuleServiceProvider;
+use Webkul\Theme\Models\ThemeCustomization;
+use Webkul\Theme\Models\ThemeCustomizationTranslation;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
@@ -12,7 +14,7 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\Theme\Models\ThemeCustomization::class,
-        \Webkul\Theme\Models\ThemeCustomizationTranslation::class,
+        ThemeCustomization::class,
+        ThemeCustomizationTranslation::class,
     ];
 }

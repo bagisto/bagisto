@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Checkout\Repositories\CartItemRepository;
@@ -93,8 +94,8 @@ class Cart extends AbstractReporting
     /**
      * Retrieves total carts
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalCarts($startDate, $endDate): int
     {
@@ -108,8 +109,8 @@ class Cart extends AbstractReporting
     /**
      * Retrieves total abandoned carts
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalAbandonedCarts($startDate, $endDate): int
     {
@@ -124,8 +125,8 @@ class Cart extends AbstractReporting
     /**
      * Retrieves total abandoned cart rate
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalAbandonedCartRate($startDate, $endDate): float
     {
@@ -141,8 +142,8 @@ class Cart extends AbstractReporting
     /**
      * Retrieves total abandoned sales
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalAbandonedSales($startDate, $endDate): int
     {
@@ -193,8 +194,8 @@ class Cart extends AbstractReporting
     /**
      * Retrieves total unique cart users
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @return array
      */
     public function getTotalUniqueCartsUsers($startDate, $endDate): int

@@ -5,6 +5,7 @@ namespace Webkul\Core\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance as BasePreventRequestsDuringMaintenance;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -37,10 +38,10 @@ class PreventRequestsDuringMaintenance extends BasePreventRequestsDuringMaintena
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return mixed
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\HttpException
+     * @throws HttpException
      */
     public function handle($request, Closure $next)
     {

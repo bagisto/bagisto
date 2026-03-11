@@ -3,6 +3,28 @@
 namespace Webkul\Product\Providers;
 
 use Webkul\Core\Providers\CoreModuleServiceProvider;
+use Webkul\Product\Models\Product;
+use Webkul\Product\Models\ProductAttributeValue;
+use Webkul\Product\Models\ProductBundleOption;
+use Webkul\Product\Models\ProductBundleOptionProduct;
+use Webkul\Product\Models\ProductBundleOptionTranslation;
+use Webkul\Product\Models\ProductCustomerGroupPrice;
+use Webkul\Product\Models\ProductCustomizableOption;
+use Webkul\Product\Models\ProductCustomizableOptionPrice;
+use Webkul\Product\Models\ProductCustomizableOptionTranslation;
+use Webkul\Product\Models\ProductDownloadableLink;
+use Webkul\Product\Models\ProductDownloadableSample;
+use Webkul\Product\Models\ProductFlat;
+use Webkul\Product\Models\ProductGroupedProduct;
+use Webkul\Product\Models\ProductImage;
+use Webkul\Product\Models\ProductInventory;
+use Webkul\Product\Models\ProductInventoryIndex;
+use Webkul\Product\Models\ProductOrderedInventory;
+use Webkul\Product\Models\ProductPriceIndex;
+use Webkul\Product\Models\ProductReview;
+use Webkul\Product\Models\ProductReviewAttachment;
+use Webkul\Product\Models\ProductSalableInventory;
+use Webkul\Product\Models\ProductVideo;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
@@ -12,27 +34,27 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\Product\Models\Product::class,
-        \Webkul\Product\Models\ProductAttributeValue::class,
-        \Webkul\Product\Models\ProductBundleOption::class,
-        \Webkul\Product\Models\ProductBundleOptionProduct::class,
-        \Webkul\Product\Models\ProductBundleOptionTranslation::class,
-        \Webkul\Product\Models\ProductCustomerGroupPrice::class,
-        \Webkul\Product\Models\ProductCustomizableOption::class,
-        \Webkul\Product\Models\ProductCustomizableOptionPrice::class,
-        \Webkul\Product\Models\ProductCustomizableOptionTranslation::class,
-        \Webkul\Product\Models\ProductDownloadableLink::class,
-        \Webkul\Product\Models\ProductDownloadableSample::class,
-        \Webkul\Product\Models\ProductFlat::class,
-        \Webkul\Product\Models\ProductGroupedProduct::class,
-        \Webkul\Product\Models\ProductImage::class,
-        \Webkul\Product\Models\ProductInventory::class,
-        \Webkul\Product\Models\ProductInventoryIndex::class,
-        \Webkul\Product\Models\ProductOrderedInventory::class,
-        \Webkul\Product\Models\ProductPriceIndex::class,
-        \Webkul\Product\Models\ProductReview::class,
-        \Webkul\Product\Models\ProductReviewAttachment::class,
-        \Webkul\Product\Models\ProductSalableInventory::class,
-        \Webkul\Product\Models\ProductVideo::class,
+        Product::class,
+        ProductAttributeValue::class,
+        ProductBundleOption::class,
+        ProductBundleOptionProduct::class,
+        ProductBundleOptionTranslation::class,
+        ProductCustomerGroupPrice::class,
+        ProductCustomizableOption::class,
+        ProductCustomizableOptionPrice::class,
+        ProductCustomizableOptionTranslation::class,
+        ProductDownloadableLink::class,
+        ProductDownloadableSample::class,
+        ProductFlat::class,
+        ProductGroupedProduct::class,
+        ProductImage::class,
+        ProductInventory::class,
+        ProductInventoryIndex::class,
+        ProductOrderedInventory::class,
+        ProductPriceIndex::class,
+        ProductReview::class,
+        ProductReviewAttachment::class,
+        ProductSalableInventory::class,
+        ProductVideo::class,
     ];
 }

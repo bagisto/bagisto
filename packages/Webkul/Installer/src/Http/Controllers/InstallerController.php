@@ -2,6 +2,8 @@
 
 namespace Webkul\Installer\Http\Controllers;
 
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Webkul\Installer\Helpers\DatabaseManager;
 use Webkul\Installer\Helpers\EnvironmentManager;
@@ -23,7 +25,7 @@ class InstallerController extends Controller
     /**
      * Display the installer welcome page.
      *
-     * @return \Illuminate\Contracts\View\View
+     * @return View
      */
     public function index()
     {
@@ -41,7 +43,7 @@ class InstallerController extends Controller
     /**
      * Run migration.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function runMigration(Request $request)
     {
@@ -65,7 +67,7 @@ class InstallerController extends Controller
     /**
      * Run seeder.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function runSeeder()
     {
@@ -117,7 +119,7 @@ class InstallerController extends Controller
     /**
      * Seed sample products.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function seedSampleProducts()
     {
@@ -144,7 +146,7 @@ class InstallerController extends Controller
     /**
      * Create admin user.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function createAdminUser(Request $request)
     {

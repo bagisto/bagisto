@@ -3,13 +3,14 @@
 namespace Webkul\Product\Observers;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Product\Contracts\Product;
 
 class ProductObserver
 {
     /**
      * Handle the Product "deleted" event.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function deleted($product)

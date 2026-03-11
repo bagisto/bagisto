@@ -2,6 +2,10 @@
 
 namespace Webkul\Admin\Http\Controllers\User;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
 
 class SessionController extends Controller
@@ -9,7 +13,7 @@ class SessionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -31,7 +35,7 @@ class SessionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store()
     {
@@ -67,7 +71,7 @@ class SessionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy()
     {
@@ -81,7 +85,7 @@ class SessionController extends Controller
     /**
      * Redirect to the first accessible route based on user permissions.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     private function redirectToFirstAccessibleRoute()
     {
@@ -112,7 +116,7 @@ class SessionController extends Controller
     /**
      * Recursively find the first accessible child permission.
      *
-     * @param  \Illuminate\Support\Collection  $allPermissions
+     * @param  Collection  $allPermissions
      * @param  string  $parentKey
      * @return array|null
      */
@@ -146,7 +150,7 @@ class SessionController extends Controller
     /**
      * Check if user has all required permissions for a given route.
      *
-     * @param  \Illuminate\Support\Collection  $allPermissions
+     * @param  Collection  $allPermissions
      * @param  string  $route
      * @return bool
      */

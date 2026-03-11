@@ -2,6 +2,7 @@
 
 namespace Webkul\Sales\Traits;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Shop\Mail\Customer\InvoiceOverdueReminder;
 
@@ -72,8 +73,8 @@ trait InvoiceReminder
     /**
      * Scope a query to include only the overdue invoices and at the limit of reminders.
      *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param  Builder  $query
+     * @return Builder
      */
     public function scopeInOverdueAndRemindersLimit($query)
     {

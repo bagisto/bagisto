@@ -2,8 +2,11 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Shop\Http\Controllers\Controller;
 use Webkul\Shop\Http\Requests\Customer\LoginRequest;
 
@@ -12,7 +15,7 @@ class SessionController extends Controller
     /**
      * Display the resource.
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     * @return RedirectResponse|View
      */
     public function index()
     {
@@ -26,7 +29,7 @@ class SessionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(LoginRequest $loginRequest)
     {
@@ -75,7 +78,7 @@ class SessionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy()
     {

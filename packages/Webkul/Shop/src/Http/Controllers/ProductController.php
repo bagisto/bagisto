@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductDownloadableLinkRepository;
@@ -27,7 +28,7 @@ class ProductController extends Controller
      *
      * @param  int  $productId
      * @param  int  $attributeId
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function download($productId, $attributeId)
     {
@@ -44,7 +45,7 @@ class ProductController extends Controller
     /**
      * Download the for the specified resource.
      *
-     * @return \Illuminate\Http\Response|\Exception
+     * @return Response|\Exception
      */
     public function downloadSample()
     {

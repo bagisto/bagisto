@@ -4,8 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\CartRuleRequest;
@@ -23,7 +25,7 @@ class CartRuleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -37,7 +39,7 @@ class CartRuleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -48,7 +50,7 @@ class CartRuleController extends Controller
      * Copy a given Cart Rule id. Always make the copy is inactive so the
      * user is able to configure it before setting it live.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function copy(int $cartRuleId)
     {
@@ -77,7 +79,7 @@ class CartRuleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(CartRuleRequest $cartRuleRequest)
     {
@@ -103,7 +105,7 @@ class CartRuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
@@ -115,7 +117,7 @@ class CartRuleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(CartRuleRequest $cartRuleRequest, int $id)
     {

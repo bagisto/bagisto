@@ -1,5 +1,8 @@
 <?php
 
+use Shetabit\Visitor\Drivers\JenssegersAgent;
+use Shetabit\Visitor\Drivers\UAParser;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -31,7 +34,7 @@ return [
     |
     */
     'drivers' => [
-        'jenssegers' => \Shetabit\Visitor\Drivers\JenssegersAgent::class,
-        'UAParser' => \Shetabit\Visitor\Drivers\UAParser::class,
+        'jenssegers' => JenssegersAgent::class,
+        'UAParser' => UAParser::class,
     ],
 ];

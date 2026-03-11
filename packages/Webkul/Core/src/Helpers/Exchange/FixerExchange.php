@@ -2,6 +2,8 @@
 
 namespace Webkul\Core\Helpers\Exchange;
 
+use Carbon\Carbon;
+use GuzzleHttp\Client;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
@@ -42,14 +44,14 @@ class FixerExchange extends ExchangeRate
      */
     public function updateRates()
     {
-        $client = new \GuzzleHttp\Client;
+        $client = new Client;
 
         foreach ($this->currencyRepository->all() as $currency) {
             if ($currency->code == config('app.currency')) {
                 continue;
             }
 
-            $result = $client->request('GET', $this->apiEndPoint.'/'.\Carbon\Carbon::now()->format('Y-m-d').'?access_key='.$this->apiKey.'&base='.config('app.currency').'&symbols='.$currency->code);
+            $result = $client->request('GET', $this->apiEndPoint.'/'.Carbon::now()->format('Y-m-d').'?access_key='.$this->apiKey.'&base='.config('app.currency').'&symbols='.$currency->code);
 
             $result = json_decode($result->getBody()->getContents(), true);
 

@@ -6,7 +6,7 @@ if (! function_exists('cart')) {
     /**
      * Cart helper.
      *
-     * @return \Webkul\Checkout\Cart
+     * @return Webkul\Checkout\Cart
      */
     function cart()
     {

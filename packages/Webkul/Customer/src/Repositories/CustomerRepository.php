@@ -4,6 +4,8 @@ namespace Webkul\Customer\Repositories;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Customer\Models\Customer;
+use Webkul\Customer\Models\CustomerGroup;
 use Webkul\Sales\Models\Order;
 
 class CustomerRepository extends Repository
@@ -19,7 +21,7 @@ class CustomerRepository extends Repository
     /**
      * Check if customer has order pending or processing.
      *
-     * @param  \Webkul\Customer\Models\Customer
+     * @param  Customer
      * @return bool
      */
     public function haveActiveOrders($customer)
@@ -32,7 +34,7 @@ class CustomerRepository extends Repository
     /**
      * Returns current customer group
      *
-     * @return \Webkul\Customer\Models\CustomerGroup
+     * @return CustomerGroup
      */
     public function getCurrentGroup()
     {
@@ -45,7 +47,7 @@ class CustomerRepository extends Repository
      * Upload customer's images.
      *
      * @param  array  $data
-     * @param  \Webkul\Customer\Models\Customer  $customer
+     * @param  Customer  $customer
      * @param  string  $type
      * @return void
      */
@@ -91,7 +93,7 @@ class CustomerRepository extends Repository
         Order::where('customer_email', $customer->email)->update([
             'is_guest' => 0,
             'customer_id' => $customer->id,
-            'customer_type' => \Webkul\Customer\Models\Customer::class,
+            'customer_type' => Customer::class,
         ]);
 
         /**
@@ -109,7 +111,7 @@ class CustomerRepository extends Repository
 
             $order->shipments()->update([
                 'customer_id' => $customer->id,
-                'customer_type' => \Webkul\Customer\Models\Customer::class,
+                'customer_type' => Customer::class,
             ]);
 
             $order->downloadable_link_purchased()->update([

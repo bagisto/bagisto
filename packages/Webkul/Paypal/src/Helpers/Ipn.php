@@ -4,6 +4,7 @@ namespace Webkul\Paypal\Helpers;
 
 use Illuminate\Support\Facades\Http;
 use Webkul\Paypal\Payment\Standard;
+use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
@@ -20,7 +21,7 @@ class Ipn
     /**
      * Order $order
      *
-     * @var \Webkul\Sales\Contracts\Order
+     * @var Order
      */
     protected $order;
 
