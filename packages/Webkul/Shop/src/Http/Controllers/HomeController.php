@@ -2,7 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Shop\Http\Requests\ContactRequest;
 use Webkul\Shop\Http\Resources\CategoryTreeResource;
@@ -26,7 +28,7 @@ class HomeController extends Controller
     /**
      * Loads the home page for the storefront.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -58,7 +60,7 @@ class HomeController extends Controller
     /**
      * Summary of contact.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function contactUs()
     {
@@ -68,7 +70,7 @@ class HomeController extends Controller
     /**
      * Summary of store.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function sendContactUsMail(ContactRequest $contactRequest)
     {

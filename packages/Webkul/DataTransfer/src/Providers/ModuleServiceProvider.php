@@ -3,6 +3,8 @@
 namespace Webkul\DataTransfer\Providers;
 
 use Webkul\Core\Providers\CoreModuleServiceProvider;
+use Webkul\DataTransfer\Models\Import;
+use Webkul\DataTransfer\Models\ImportBatch;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
@@ -12,7 +14,7 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\DataTransfer\Models\Import::class,
-        \Webkul\DataTransfer\Models\ImportBatch::class,
+        Import::class,
+        ImportBatch::class,
     ];
 }

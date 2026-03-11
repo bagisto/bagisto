@@ -2,6 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers\User;
 
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
 
 class SessionController extends Controller
@@ -9,7 +11,7 @@ class SessionController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -31,7 +33,7 @@ class SessionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store()
     {
@@ -90,7 +92,7 @@ class SessionController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy()
     {

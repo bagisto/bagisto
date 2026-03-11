@@ -3,6 +3,7 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Product\Contracts\ProductImage as ProductImageContract;
 
@@ -37,7 +38,7 @@ class ProductImage extends Model implements ProductImageContract
     /**
      * Get the product that owns the image.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function product()
     {

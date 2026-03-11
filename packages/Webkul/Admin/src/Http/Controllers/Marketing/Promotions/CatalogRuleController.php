@@ -3,7 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CatalogRuleDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\CatalogRuleRequest;
@@ -21,7 +23,7 @@ class CatalogRuleController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -35,7 +37,7 @@ class CatalogRuleController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -45,7 +47,7 @@ class CatalogRuleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(CatalogRuleRequest $catalogRuleRequest)
     {
@@ -63,7 +65,7 @@ class CatalogRuleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
@@ -75,7 +77,7 @@ class CatalogRuleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(CatalogRuleRequest $catalogRuleRequest, int $id)
     {

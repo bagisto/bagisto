@@ -193,7 +193,7 @@ class CartController extends Controller
     /**
      * Store shipping method.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function storeShippingMethod(int $id)
     {

@@ -8,6 +8,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Webkul\CatalogRule\Helpers\CatalogRuleIndex;
+use Webkul\Product\Contracts\Product;
 
 class UpdateCreateProductIndex implements ShouldQueue
 {
@@ -16,7 +17,7 @@ class UpdateCreateProductIndex implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function __construct(protected $product)

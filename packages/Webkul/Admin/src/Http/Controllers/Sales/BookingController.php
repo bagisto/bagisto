@@ -3,6 +3,8 @@
 namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Carbon\Carbon;
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\BookingDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\BookingProduct\Repositories\BookingRepository;
@@ -19,7 +21,7 @@ class BookingController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -33,7 +35,7 @@ class BookingController extends Controller
     /**
      * Returns a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function get()
     {

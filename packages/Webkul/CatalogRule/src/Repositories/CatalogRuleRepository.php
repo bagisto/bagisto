@@ -5,6 +5,7 @@ namespace Webkul\CatalogRule\Repositories;
 use Illuminate\Container\Container;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
@@ -37,7 +38,7 @@ class CatalogRuleRepository extends Repository
     /**
      * Create.
      *
-     * @return \Webkul\CatalogRule\Contracts\CatalogRule
+     * @return CatalogRule
      */
     public function create(array $data)
     {
@@ -56,7 +57,7 @@ class CatalogRuleRepository extends Repository
      * Update.
      *
      * @param  int  $id
-     * @return \Webkul\CatalogRule\Contracts\CatalogRule
+     * @return CatalogRule
      */
     public function update(array $data, $id)
     {

@@ -4,7 +4,10 @@ namespace Webkul\Product\Helpers\Indexers\Price;
 
 use Illuminate\Support\Carbon;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
+use Webkul\Core\Contracts\Channel;
+use Webkul\Customer\Contracts\CustomerGroup;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 
 abstract class AbstractType
@@ -12,21 +15,21 @@ abstract class AbstractType
     /**
      * Product instance.
      *
-     * @var \Webkul\Product\Contracts\Product
+     * @var Product
      */
     protected $product;
 
     /**
      * Channel instance.
      *
-     * @var \Webkul\Core\Contracts\Channel
+     * @var Channel
      */
     protected $channel;
 
     /**
      * Customer Group instance.
      *
-     * @var \Webkul\Customer\Contracts\CustomerGroup
+     * @var CustomerGroup
      */
     protected $customerGroup;
 
@@ -44,8 +47,8 @@ abstract class AbstractType
     /**
      * Set current product
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Webkul\Product\Helpers\Indexers\Price\AbstractPriceIndex
+     * @param  Product  $product
+     * @return AbstractPriceIndex
      */
     public function setProduct($product)
     {
@@ -57,8 +60,8 @@ abstract class AbstractType
     /**
      * Set channel
      *
-     * @param  \Webkul\Core\Contracts\Channel  $channel
-     * @return \Webkul\Product\Helpers\Indexers\Price\AbstractPriceIndex
+     * @param  Channel  $channel
+     * @return AbstractPriceIndex
      */
     public function setChannel($channel)
     {
@@ -70,8 +73,8 @@ abstract class AbstractType
     /**
      * Set customer group
      *
-     * @param  \Webkul\Customer\Contracts\CustomerGroup  $customerGroup
-     * @return \Webkul\Product\Helpers\Indexers\Price\AbstractPriceIndex
+     * @param  CustomerGroup  $customerGroup
+     * @return AbstractPriceIndex
      */
     public function setCustomerGroup($customerGroup)
     {

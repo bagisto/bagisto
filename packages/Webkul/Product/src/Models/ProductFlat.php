@@ -3,7 +3,10 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webkul\Product\Contracts\ProductFlat as ProductFlatContract;
+use Webkul\Product\Type\AbstractType;
 
 class ProductFlat extends Model implements ProductFlatContract
 {
@@ -39,7 +42,7 @@ class ProductFlat extends Model implements ProductFlatContract
     /**
      * Get the product that owns the attribute value.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function product()
     {
@@ -49,7 +52,7 @@ class ProductFlat extends Model implements ProductFlatContract
     /**
      * Get the product that owns the product.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function parent()
     {
@@ -59,7 +62,7 @@ class ProductFlat extends Model implements ProductFlatContract
     /**
      * Get the product variants that owns the product.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function variants()
     {
@@ -69,7 +72,7 @@ class ProductFlat extends Model implements ProductFlatContract
     /**
      * Retrieve type instance.
      *
-     * @return \Webkul\Product\Type\AbstractType
+     * @return AbstractType
      */
     public function getTypeInstance()
     {

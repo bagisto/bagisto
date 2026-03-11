@@ -11,7 +11,7 @@ class Medium implements FilterInterface
     /**
      * Apply filter.
      *
-     * @return \Intervention\Image\Image
+     * @return Image
      */
     public function applyFilter(Image $image)
     {

@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
@@ -48,7 +49,7 @@ class ProductRepository extends Repository
     /**
      * Create product.
      *
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function create(array $data)
     {
@@ -64,7 +65,7 @@ class ProductRepository extends Repository
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function update(array $data, $id, $attributes = [])
     {
@@ -96,7 +97,7 @@ class ProductRepository extends Repository
      * Copy product.
      *
      * @param  int  $id
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function copy($id)
     {
@@ -134,7 +135,7 @@ class ProductRepository extends Repository
      *
      * @param  string  $code
      * @param  mixed  $value
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function findByAttributeCode($code, $value)
     {
@@ -218,7 +219,7 @@ class ProductRepository extends Repository
     /**
      * Get all products.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getAll(array $params = [])
     {
@@ -232,7 +233,7 @@ class ProductRepository extends Repository
     /**
      * Search product from database.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function searchFromDatabase(array $params = [])
     {
@@ -455,7 +456,7 @@ class ProductRepository extends Repository
     /**
      * Search product from elastic search.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function searchFromElastic(array $params = [])
     {
@@ -532,8 +533,8 @@ class ProductRepository extends Repository
     /**
      * Returns product's super attribute with options.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Illuminate\Support\Collection
+     * @param  Product  $product
+     * @return Collection
      */
     public function getSuperAttributes($product)
     {

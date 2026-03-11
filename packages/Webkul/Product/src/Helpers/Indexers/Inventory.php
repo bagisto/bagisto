@@ -2,7 +2,9 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
+use Webkul\Core\Contracts\Channel;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductInventoryIndexRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -16,14 +18,14 @@ class Inventory extends AbstractIndexer
     /**
      * Product instance.
      *
-     * @var \Webkul\Product\Contracts\Product
+     * @var Product
      */
     protected $product;
 
     /**
      * Channel instance.
      *
-     * @var \Webkul\Core\Contracts\Channel
+     * @var Channel
      */
     protected $channel;
 
@@ -50,8 +52,8 @@ class Inventory extends AbstractIndexer
     /**
      * Set current product
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Webkul\Product\Helpers\Indexers\Inventory\Product
+     * @param  Product  $product
+     * @return Inventory\Product
      */
     public function setProduct($product)
     {
@@ -63,8 +65,8 @@ class Inventory extends AbstractIndexer
     /**
      * Set channel
      *
-     * @param  \Webkul\Core\Contracts\Channel  $channel
-     * @return \Webkul\Product\Helpers\Indexers\Inventory\Product
+     * @param  Channel  $channel
+     * @return Inventory\Product
      */
     public function setChannel($channel)
     {

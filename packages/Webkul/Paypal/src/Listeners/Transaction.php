@@ -3,6 +3,7 @@
 namespace Webkul\Paypal\Listeners;
 
 use Webkul\Paypal\Payment\SmartButton;
+use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Repositories\OrderTransactionRepository;
 
 class Transaction
@@ -20,7 +21,7 @@ class Transaction
     /**
      * Save the transaction data for online payment.
      *
-     * @param  \Webkul\Sales\Models\Invoice  $invoice
+     * @param  Invoice  $invoice
      * @return void
      */
     public function saveTransaction($invoice)

@@ -3,6 +3,7 @@
 namespace Webkul\Attribute\Repositories;
 
 use Illuminate\Http\UploadedFile;
+use Webkul\Attribute\Contracts\AttributeOption;
 use Webkul\Core\Eloquent\Repository;
 
 class AttributeOptionRepository extends Repository
@@ -16,7 +17,7 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
-     * @return \Webkul\Attribute\Contracts\AttributeOption
+     * @return AttributeOption
      */
     public function create(array $data)
     {
@@ -30,7 +31,7 @@ class AttributeOptionRepository extends Repository
     /**
      * @param  int  $id
      * @param  string  $attribute
-     * @return \Webkul\Attribute\Contracts\AttributeOption
+     * @return AttributeOption
      */
     public function update(array $data, $id)
     {

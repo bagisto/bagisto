@@ -4,6 +4,7 @@ namespace Webkul\BookingProduct\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Webkul\BookingProduct\Contracts\BookingProduct;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 
@@ -12,7 +13,7 @@ class EventTicket extends Booking
     /**
      * Returns event date
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  BookingProduct  $bookingProduct
      */
     public function getEventDate($bookingProduct): string
     {
@@ -26,7 +27,7 @@ class EventTicket extends Booking
     /**
      * Returns tickets
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  BookingProduct  $bookingProduct
      */
     public function getTickets($bookingProduct)
     {

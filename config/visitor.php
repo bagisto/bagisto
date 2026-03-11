@@ -1,4 +1,10 @@
 <?php
+
+use Shetabit\Visitor\Drivers\JenssegersAgent;
+use Shetabit\Visitor\Drivers\UAParser;
+use Shetabit\Visitor\Resolvers\GeoIp\NullResolver;
+use Shetabit\Visitor\Resolvers\GeoIp\SteveBaumanResolver;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -11,9 +17,8 @@ return [
     */
     'default' => 'jenssegers',
 
-    //except save request or route names
-    'except' =>  ['login', 'register'],
-
+    // except save request or route names
+    'except' => ['login', 'register'],
 
     // name of the table which visit records should save in
     'table_name' => 'visits',
@@ -31,26 +36,26 @@ return [
     |
     */
     'drivers' => [
-        'jenssegers' => \Shetabit\Visitor\Drivers\JenssegersAgent::class,
-        'UAParser' => \Shetabit\Visitor\Drivers\UAParser::class,
+        'jenssegers' => JenssegersAgent::class,
+        'UAParser' => UAParser::class,
     ],
-	
-	/*
-	|--------------------------------------------------------------------------
-	| GeoIP Enrichment
-	|--------------------------------------------------------------------------
-	|
-	| When enabled, visits can be enriched with geolocation data stored
-	| in the "geo_raw" JSON column. This package ships with a default
-	| resolver (stevebauman/location). You may implement your own by
-	| adding it to the drivers array below. Each driver must implement
-	| Shetabit\Visitor\Contracts\GeoIpResolver.
-	|
-	*/
-	'geoip'   => false,           // disable enrichment by default
-	'resolver'=> 'stevebauman',   // default resolver
-	'resolvers' => [
-		'stevebauman' => \Shetabit\Visitor\Resolvers\GeoIp\SteveBaumanResolver::class,
-		'null'        => \Shetabit\Visitor\Resolvers\GeoIp\NullResolver::class,
-	],	
+
+    /*
+    |--------------------------------------------------------------------------
+    | GeoIP Enrichment
+    |--------------------------------------------------------------------------
+    |
+    | When enabled, visits can be enriched with geolocation data stored
+    | in the "geo_raw" JSON column. This package ships with a default
+    | resolver (stevebauman/location). You may implement your own by
+    | adding it to the drivers array below. Each driver must implement
+    | Shetabit\Visitor\Contracts\GeoIpResolver.
+    |
+    */
+    'geoip' => false,           // disable enrichment by default
+    'resolver' => 'stevebauman',   // default resolver
+    'resolvers' => [
+        'stevebauman' => SteveBaumanResolver::class,
+        'null' => NullResolver::class,
+    ],
 ];

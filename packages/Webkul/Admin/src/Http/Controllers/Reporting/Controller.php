@@ -2,7 +2,9 @@
 
 namespace Webkul\Admin\Http\Controllers\Reporting;
 
+use Illuminate\Http\JsonResponse;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Webkul\Admin\Exports\ReportingExport;
 use Webkul\Admin\Helpers\Reporting as ReportingHelper;
 use Webkul\Admin\Http\Controllers\Controller as BaseController;
@@ -26,7 +28,7 @@ class Controller extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function stats()
     {
@@ -41,7 +43,7 @@ class Controller extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function viewStats()
     {
@@ -56,7 +58,7 @@ class Controller extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
     public function export()
     {

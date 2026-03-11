@@ -4,6 +4,8 @@ namespace Webkul\BookingProduct\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Webkul\BookingProduct\Contracts\BookingProduct;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 
 class RentalSlot extends Booking
@@ -11,7 +13,7 @@ class RentalSlot extends Booking
     /**
      * Returns slots for a particular day.
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  BookingProduct  $bookingProduct
      */
     public function getSlotsByDate($bookingProduct, string $date): array
     {
@@ -63,7 +65,7 @@ class RentalSlot extends Booking
     /**
      * Returns slots that are going to expire.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
+     * @param  CartItem  $cartItem
      */
     public function isSlotExpired($cartItem): bool
     {

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\ImageManager;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
 
 class ProductMediaRepository extends Repository
 {
@@ -29,7 +30,7 @@ class ProductMediaRepository extends Repository
     /**
      * Get product directory.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      */
     public function getProductDirectory($product): string
     {
@@ -40,7 +41,7 @@ class ProductMediaRepository extends Repository
      * Upload.
      *
      * @param  array  $data
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      */
     public function upload($data, $product, string $uploadFileType): void
     {
@@ -98,10 +99,10 @@ class ProductMediaRepository extends Repository
     /**
      * Resolve file type query builder.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return mixed
      *
-     * @throws \Exception
+     * @throws Exception
      */
     private function resolveFileTypeQueryBuilder($product, string $uploadFileType)
     {

@@ -4,6 +4,7 @@ namespace Webkul\CatalogRule\Helpers;
 
 use Carbon\Carbon;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductPriceRepository;
+use Webkul\Product\Contracts\Product;
 
 class CatalogRuleProductPrice
 {
@@ -21,7 +22,7 @@ class CatalogRuleProductPrice
      * Collect discount on cart
      *
      * @param  int  $batchCount
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function indexRuleProductPrice($batchCount, $product = null)
@@ -106,7 +107,7 @@ class CatalogRuleProductPrice
      * Calculates product price based on rule
      *
      * @param  array  $rule
-     * @param  \Webkul\Product\Contracts\Product|null  $productData
+     * @param  Product|null  $productData
      * @return float
      */
     public function calculate($rule, $productData = null)

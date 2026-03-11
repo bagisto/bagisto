@@ -153,7 +153,7 @@ class Import
     /**
      * Returns error helper instance.
      *
-     * @return \Webkul\DataTransfer\Helpers\Error
+     * @return Error
      */
     public function getErrorHelper()
     {

@@ -3,6 +3,7 @@
 namespace Webkul\DataGrid\Providers;
 
 use Webkul\Core\Providers\CoreModuleServiceProvider;
+use Webkul\DataGrid\Models\SavedFilter;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
@@ -12,6 +13,6 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\DataGrid\Models\SavedFilter::class,
+        SavedFilter::class,
     ];
 }

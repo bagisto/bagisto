@@ -3,6 +3,7 @@
 namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Product\Contracts\ProductInventoryIndex as ProductInventoryIndexContract;
 
@@ -22,7 +23,7 @@ class ProductInventoryIndex extends Model implements ProductInventoryIndexContra
     /**
      * Get the product that owns the inventory index.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function product()
     {
@@ -32,7 +33,7 @@ class ProductInventoryIndex extends Model implements ProductInventoryIndexContra
     /**
      * Get the channel owns the inventory index.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function channel()
     {

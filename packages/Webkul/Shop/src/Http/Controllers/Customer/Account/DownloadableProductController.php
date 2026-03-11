@@ -2,7 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
 use Webkul\Shop\DataGrids\DownloadableProductDataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -19,7 +21,7 @@ class DownloadableProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -34,7 +36,7 @@ class DownloadableProductController extends Controller
      * Download the for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function download($id)
     {

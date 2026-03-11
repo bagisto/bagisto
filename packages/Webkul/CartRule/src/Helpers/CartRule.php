@@ -4,6 +4,7 @@ namespace Webkul\CartRule\Helpers;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
 use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
@@ -98,7 +99,7 @@ class CartRule
     /**
      * Returns cart rules
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getCartRules()
     {

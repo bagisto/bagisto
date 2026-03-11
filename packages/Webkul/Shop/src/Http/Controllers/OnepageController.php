@@ -2,9 +2,12 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\MagicAI\Facades\MagicAI;
+use Webkul\Sales\Contracts\Order;
 use Webkul\Sales\Repositories\OrderRepository;
 
 class OnepageController extends Controller
@@ -12,7 +15,7 @@ class OnepageController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -70,7 +73,7 @@ class OnepageController extends Controller
     /**
      * Order success page.
      *
-     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
+     * @return View|RedirectResponse
      */
     public function success(OrderRepository $orderRepository)
     {
@@ -103,7 +106,7 @@ class OnepageController extends Controller
     /**
      * Order success page.
      *
-     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  Order  $order
      * @return string
      */
     public function getCheckoutPrompt($order)

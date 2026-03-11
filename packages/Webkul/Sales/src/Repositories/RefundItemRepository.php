@@ -3,6 +3,7 @@
 namespace Webkul\Sales\Repositories;
 
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\Order;
 
 class RefundItemRepository extends Repository
 {
@@ -17,7 +18,7 @@ class RefundItemRepository extends Repository
     /**
      * Returns qty to product inventory after order refund
      *
-     * @param  \Webkul\Sales\Contracts\Order  $orderItem
+     * @param  Order  $orderItem
      * @param  int  $quantity
      * @return void
      */

@@ -3,7 +3,9 @@
 namespace Webkul\Attribute\Repositories;
 
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Collection;
 use Webkul\Attribute\Contracts\Attribute;
+use Webkul\Attribute\Contracts\AttributeFamily;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Eloquent\Repository;
 
@@ -39,7 +41,7 @@ class AttributeRepository extends Repository
     /**
      * Create attribute.
      *
-     * @return \Webkul\Attribute\Contracts\Attribute
+     * @return Attribute
      */
     public function create(array $data)
     {
@@ -71,7 +73,7 @@ class AttributeRepository extends Repository
      *
      * @param  int  $id
      * @param  string  $attribute
-     * @return \Webkul\Attribute\Contracts\Attribute
+     * @return Attribute
      */
     public function update(array $data, $id)
     {
@@ -160,7 +162,7 @@ class AttributeRepository extends Repository
      * Get product default attributes.
      *
      * @param  array  $codes
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function getProductDefaultAttributes($codes = null)
     {
@@ -201,8 +203,8 @@ class AttributeRepository extends Repository
     /**
      * Get family attributes.
      *
-     * @param  \Webkul\Attribute\Contracts\AttributeFamily  $attributeFamily
-     * @return \Webkul\Attribute\Contracts\Attribute
+     * @param  AttributeFamily  $attributeFamily
+     * @return Attribute
      */
     public function getFamilyAttributes($attributeFamily)
     {

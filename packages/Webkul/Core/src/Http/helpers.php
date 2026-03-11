@@ -10,7 +10,7 @@ if (! function_exists('core')) {
     /**
      * Core helper.
      *
-     * @return \Webkul\Core\Core
+     * @return Webkul\Core\Core
      */
     function core()
     {
@@ -22,7 +22,7 @@ if (! function_exists('menu')) {
     /**
      * Menu helper.
      *
-     * @return \Webkul\Core\Menu
+     * @return Webkul\Core\Menu
      */
     function menu()
     {
@@ -34,7 +34,7 @@ if (! function_exists('acl')) {
     /**
      * Acl helper.
      *
-     * @return \Webkul\Core\Acl
+     * @return Webkul\Core\Acl
      */
     function acl()
     {
@@ -46,7 +46,7 @@ if (! function_exists('system_config')) {
     /**
      * System Config helper.
      *
-     * @return \Webkul\Core\SystemConfig
+     * @return Webkul\Core\SystemConfig
      */
     function system_config()
     {

@@ -2,6 +2,8 @@
 
 namespace Webkul\Shop\Http\Resources;
 
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 
@@ -18,7 +20,7 @@ class CompareItemResource extends JsonResource
      * Create a new anonymous resource collection.
      *
      * @param  mixed  $resource
-     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
+     * @return AnonymousResourceCollection
      */
     public static function collection($resource)
     {
@@ -30,7 +32,7 @@ class CompareItemResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return array
      */
     public function toArray($request)

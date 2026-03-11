@@ -3,6 +3,7 @@
 namespace Webkul\SocialLogin\Providers;
 
 use Webkul\Core\Providers\CoreModuleServiceProvider;
+use Webkul\SocialLogin\Models\CustomerSocialAccount;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
@@ -12,6 +13,6 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\SocialLogin\Models\CustomerSocialAccount::class,
+        CustomerSocialAccount::class,
     ];
 }

@@ -10,7 +10,7 @@ class CartAddressFactory extends Factory
     /**
      * The name of the factory's corresponding model.
      *
-     * @var \Webkul\Checkout\Models\CartAddress
+     * @var CartAddress
      */
     protected $model = CartAddress::class;
 

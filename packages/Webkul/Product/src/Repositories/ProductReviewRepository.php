@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Repositories;
 
+use Illuminate\Support\Collection;
 use Webkul\Core\Eloquent\Repository;
 
 class ProductReviewRepository extends Repository
@@ -17,7 +18,7 @@ class ProductReviewRepository extends Repository
     /**
      * Retrieve review for customerId
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getCustomerReview()
     {

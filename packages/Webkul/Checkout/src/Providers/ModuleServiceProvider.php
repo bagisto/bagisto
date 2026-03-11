@@ -2,6 +2,11 @@
 
 namespace Webkul\Checkout\Providers;
 
+use Webkul\Checkout\Models\Cart;
+use Webkul\Checkout\Models\CartAddress;
+use Webkul\Checkout\Models\CartItem;
+use Webkul\Checkout\Models\CartPayment;
+use Webkul\Checkout\Models\CartShippingRate;
 use Webkul\Core\Providers\CoreModuleServiceProvider;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
@@ -12,10 +17,10 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\Checkout\Models\Cart::class,
-        \Webkul\Checkout\Models\CartAddress::class,
-        \Webkul\Checkout\Models\CartItem::class,
-        \Webkul\Checkout\Models\CartPayment::class,
-        \Webkul\Checkout\Models\CartShippingRate::class,
+        Cart::class,
+        CartAddress::class,
+        CartItem::class,
+        CartPayment::class,
+        CartShippingRate::class,
     ];
 }

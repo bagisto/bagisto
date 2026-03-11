@@ -3,8 +3,12 @@
 namespace Webkul\CatalogRule\Helpers;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Collection;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\CatalogRule\Repositories\CatalogRuleProductRepository;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Rule\Helpers\Validator;
 
@@ -25,7 +29,7 @@ class CatalogRuleProduct
     /**
      * Collect discount on cart
      *
-     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param  CatalogRule  $rule
      * @param  int  $batchCount
      * @return void
      */
@@ -80,7 +84,7 @@ class CatalogRuleProduct
     /**
      * Clean catalog rule product indices
      *
-     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param  CatalogRule  $rule
      * @return void
      */
     public function cleanRuleIndices($rule)
@@ -108,8 +112,8 @@ class CatalogRuleProduct
     /**
      * Get array of product ids which are matched by rule
      *
-     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  CatalogRule  $rule
+     * @param  Product  $product
      * @return array
      */
     public function getMatchingProductIds($rule, $product = null)
@@ -169,8 +173,8 @@ class CatalogRuleProduct
     /**
      * Returns catalog rule products
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Illuminate\Support\Collection
+     * @param  Product  $product
+     * @return Collection
      */
     public function getCatalogRuleProducts($product = null)
     {
@@ -210,8 +214,8 @@ class CatalogRuleProduct
      * Add product attribute condition to query
      *
      * @param  string  $attributeCode
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @param  Builder  $query
+     * @return Builder
      */
     public function addAttributeToSelect($attributeCode, $query)
     {

@@ -4,7 +4,9 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\OrderInvoiceDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
@@ -29,7 +31,7 @@ class InvoiceController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -43,7 +45,7 @@ class InvoiceController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create(int $orderId)
     {
@@ -59,7 +61,7 @@ class InvoiceController extends Controller
     /**
      * (Store) a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(int $orderId)
     {
@@ -100,7 +102,7 @@ class InvoiceController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function view(int $id)
     {
@@ -112,7 +114,7 @@ class InvoiceController extends Controller
     /**
      * Send duplicate invoice.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function sendDuplicateEmail(Request $request, int $id)
     {
@@ -135,7 +137,7 @@ class InvoiceController extends Controller
     /**
      * Print and download the for the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function printInvoice(int $id)
     {
@@ -152,7 +154,7 @@ class InvoiceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function massUpdateState(MassUpdateRequest $massUpdateRequest)
     {
