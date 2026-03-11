@@ -3669,7 +3669,7 @@ return [
             'title' => 'Configuratie',
 
             'general' => [
-                'info' => 'Stel eenhedensopties in.',
+                'info' => 'Algemeen',
                 'title' => 'Algemeen',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'Ervaringsverbetering',
                         'measurement' => 'Meting',
                         'targeting-advertising' => 'Targeting en advertenties',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Configureer wisselkoers API-services en inloggegevens.',
+                    'title' => 'Wisselkoersen',
+
+                    'settings' => [
+                        'default-service' => 'Standaard Service',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Algemene Instellingen',
+                        'title-info' => 'Selecteer de standaard wisselkoersservice voor automatische valutakoersupdates.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Voer uw Fixer.io API-sleutel in voor automatische wisselkoersupdates.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Voer uw ExchangeRate-API-sleutel in voor automatische wisselkoersupdates (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Dagelijks',
+                        'enabled' => 'Ingeschakeld',
+                        'frequency' => 'Frequentie',
+                        'monthly' => 'Maandelijks',
+                        'time' => 'Starttijd (HH:MM)',
+                        'title' => 'Geplande Import',
+                        'title-info' => 'Wisselkoersen automatisch bijwerken op een gepland schema met behulp van de geconfigureerde API-service.',
+                        'weekly' => 'Wekelijks',
                     ],
                 ],
 

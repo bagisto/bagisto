@@ -3669,7 +3669,7 @@ return [
             'title' => 'Configuration',
 
             'general' => [
-                'info' => 'Définir les options d\'unités.',
+                'info' => 'Général',
                 'title' => 'Général',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'Amélioration de l\'expérience',
                         'measurement' => 'Mesure',
                         'targeting-advertising' => 'Ciblage et publicité',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Configurer les services et identifiants API des taux de change.',
+                    'title' => 'Taux de change',
+
+                    'settings' => [
+                        'default-service' => 'Service par défaut',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Paramètres généraux',
+                        'title-info' => 'Sélectionnez le service de taux de change par défaut à utiliser pour les mises à jour automatiques des taux de devises.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Entrez votre clé API Fixer.io pour les mises à jour automatiques des taux de change.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Entrez votre clé ExchangeRate-API pour les mises à jour automatiques des taux de change (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Quotidien',
+                        'enabled' => 'Activé',
+                        'frequency' => 'Fréquence',
+                        'monthly' => 'Mensuel',
+                        'time' => 'Heure de début (HH:MM)',
+                        'title' => 'Importation planifiée',
+                        'title-info' => 'Mettre à jour automatiquement les taux de change selon un calendrier en utilisant le service API configuré.',
+                        'weekly' => 'Hebdomadaire',
                     ],
                 ],
 

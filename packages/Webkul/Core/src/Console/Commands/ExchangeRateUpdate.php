@@ -3,6 +3,7 @@
 namespace Webkul\Core\Console\Commands;
 
 use Illuminate\Console\Command;
+use Webkul\Core\Helpers\Exchange\ExchangeRate;
 
 class ExchangeRateUpdate extends Command
 {
@@ -18,19 +19,19 @@ class ExchangeRateUpdate extends Command
      *
      * @var string
      */
-    protected $description = 'Automatically updates currency exchange rates ';
+    protected $description = 'Automatically updates currency exchange rates';
 
     /**
      * Execute the console command.
-     *
-     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         try {
-            app(config('services.exchange_api.'.config('services.exchange_api.default').'.class'))->updateRates();
-        } catch (\Exception $e) {
+            ExchangeRate::resolve()->updateRates();
 
+            $this->info('Exchange rates updated successfully.');
+        } catch (\Exception $e) {
+            $this->error('Failed to update exchange rates: '.$e->getMessage());
         }
     }
 }

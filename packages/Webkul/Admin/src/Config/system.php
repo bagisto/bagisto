@@ -534,11 +534,101 @@ return [
             ],
         ],
     ], [
+        'key' => 'general.exchange_rates',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.info',
+        'icon' => 'settings/exchange-rate.svg',
+        'sort' => 4,
+    ], [
+        'key' => 'general.exchange_rates.settings',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.settings.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.settings.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'default_service',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.settings.default-service',
+                'type' => 'select',
+                'default' => 'exchange_rates',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.settings.exchange-rates-api',
+                        'value' => 'exchange_rates',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.settings.fixer-api',
+                        'value' => 'fixer',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key' => 'general.exchange_rates.fixer',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.fixer.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.fixer.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.fixer.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'general.exchange_rates.exchange_rates_api',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.exchange-rates-api-section.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.exchange-rates-api-section.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.exchange-rates-api-section.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'general.exchange_rates.schedule',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.schedule.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.schedule.title-info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.enabled',
+                'type' => 'boolean',
+                'default' => false,
+            ], [
+                'name' => 'frequency',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.frequency',
+                'type' => 'select',
+                'default' => 'daily',
+                'depends' => 'enabled:true',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.daily',
+                        'value' => 'daily',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.weekly',
+                        'value' => 'weekly',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.monthly',
+                        'value' => 'monthly',
+                    ],
+                ],
+            ], [
+                'name' => 'time',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.time',
+                'type' => 'text',
+                'default' => '00:00',
+                'depends' => 'enabled:true',
+                'validation' => 'date_format:H:i',
+            ],
+        ],
+    ], [
         'key' => 'general.sitemap',
         'name' => 'admin::app.configuration.index.general.sitemap.title',
         'info' => 'admin::app.configuration.index.general.sitemap.info',
-        'icon' => 'settings/store.svg',
-        'sort' => 3,
+        'icon' => 'settings/sitemap.svg',
+        'sort' => 5,
     ], [
         'key' => 'general.sitemap.settings',
         'name' => 'admin::app.configuration.index.general.sitemap.settings.title',
@@ -572,8 +662,8 @@ return [
         'key' => 'general.gdpr',
         'name' => 'admin::app.configuration.index.general.gdpr.title',
         'info' => 'admin::app.configuration.index.general.gdpr.info',
-        'icon' => 'settings/store.svg',
-        'sort' => 4,
+        'icon' => 'settings/gdpr.svg',
+        'sort' => 6,
     ], [
         'key' => 'general.gdpr.settings',
         'name' => 'admin::app.configuration.index.general.gdpr.settings.title',

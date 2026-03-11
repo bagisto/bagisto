@@ -376,6 +376,14 @@
     "file": "assets/email-5AJwT575.svg",
     "src": "src/Resources/assets/images/settings/email.svg"
   },
+  "src/Resources/assets/images/settings/exchange-rate.svg": {
+    "file": "assets/exchange-rate-nueYe-Ml.svg",
+    "src": "src/Resources/assets/images/settings/exchange-rate.svg"
+  },
+  "src/Resources/assets/images/settings/gdpr.svg": {
+    "file": "assets/gdpr-C6B4e0VA.svg",
+    "src": "src/Resources/assets/images/settings/gdpr.svg"
+  },
   "src/Resources/assets/images/settings/inventory.svg": {
     "file": "assets/inventory-D1uKZcKj.svg",
     "src": "src/Resources/assets/images/settings/inventory.svg"
@@ -412,6 +420,10 @@
     "file": "assets/shipping-B_qRLPCF.svg",
     "src": "src/Resources/assets/images/settings/shipping.svg"
   },
+  "src/Resources/assets/images/settings/sitemap.svg": {
+    "file": "assets/sitemap-wmaW9q7Q.svg",
+    "src": "src/Resources/assets/images/settings/sitemap.svg"
+  },
   "src/Resources/assets/images/settings/store-information.svg": {
     "file": "assets/store-information-Cjd5D_oN.svg",
     "src": "src/Resources/assets/images/settings/store-information.svg"
@@ -445,7 +457,7 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-DJP0iOXV.js",
+    "file": "assets/app-gSfGm5ou.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,

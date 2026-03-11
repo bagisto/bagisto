@@ -3669,7 +3669,7 @@ return [
             'title' => 'تنظیمات',
 
             'general' => [
-                'info' => 'تنظیم گزینه‌های واحد.',
+                'info' => 'عمومی',
                 'title' => 'عمومی',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'بهبود تجربه',
                         'measurement' => 'اندازه‌گیری',
                         'targeting-advertising' => 'هدف‌گیری و تبلیغات',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'پیکربندی سرویس‌ها و اعتبارنامه‌های API نرخ ارز.',
+                    'title' => 'نرخ‌های ارز',
+
+                    'settings' => [
+                        'default-service' => 'سرویس پیش‌فرض',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'تنظیمات عمومی',
+                        'title-info' => 'سرویس پیش‌فرض نرخ ارز را برای به‌روزرسانی خودکار نرخ ارزها انتخاب کنید.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'کلید API خود از Fixer.io را برای به‌روزرسانی خودکار نرخ ارز وارد کنید.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'کلید ExchangeRate-API خود را برای به‌روزرسانی خودکار نرخ ارز وارد کنید (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'روزانه',
+                        'enabled' => 'فعال',
+                        'frequency' => 'تناوب',
+                        'monthly' => 'ماهانه',
+                        'time' => 'زمان شروع (HH:MM)',
+                        'title' => 'واردسازی زمان‌بندی شده',
+                        'title-info' => 'به‌روزرسانی خودکار نرخ‌های ارز بر اساس زمان‌بندی با استفاده از سرویس API پیکربندی شده.',
+                        'weekly' => 'هفتگی',
                     ],
                 ],
 
