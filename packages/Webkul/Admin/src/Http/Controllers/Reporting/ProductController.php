@@ -2,6 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers\Reporting;
 
+use Illuminate\View\View;
+
 class ProductController extends Controller
 {
     /**
@@ -23,7 +25,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -36,7 +38,7 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function view()
     {

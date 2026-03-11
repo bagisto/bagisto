@@ -5,6 +5,7 @@ namespace Webkul\Product\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Product\Contracts\ProductOrderedInventory as ProductOrderedInventoryContract;
 use Webkul\Product\Database\Factories\ProductOrderedInventoryFactory;
@@ -34,7 +35,7 @@ class ProductOrderedInventory extends Model implements ProductOrderedInventoryCo
     /**
      * Get the channel owns the inventory.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function channel()
     {
@@ -44,7 +45,7 @@ class ProductOrderedInventory extends Model implements ProductOrderedInventoryCo
     /**
      * Get the product that owns the product inventory.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function product()
     {

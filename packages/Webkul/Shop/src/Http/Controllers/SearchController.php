@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\View\View;
 use Webkul\Marketing\Repositories\SearchTermRepository;
 use Webkul\Product\Repositories\SearchRepository;
 
@@ -20,7 +21,7 @@ class SearchController extends Controller
     /**
      * Index to handle the view loaded with the search results
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {

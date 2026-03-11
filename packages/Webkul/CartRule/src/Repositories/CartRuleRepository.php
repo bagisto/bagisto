@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\CartRule\Contracts\CartRule;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Core\Repositories\CountryRepository;
@@ -41,7 +42,7 @@ class CartRuleRepository extends Repository
     }
 
     /**
-     * @return \Webkul\CartRule\Contracts\CartRule
+     * @return CartRule
      */
     public function create(array $data)
     {
@@ -76,7 +77,7 @@ class CartRuleRepository extends Repository
 
     /**
      * @param  int  $id
-     * @return \Webkul\CartRule\Contracts\CartRule
+     * @return CartRule
      */
     public function update(array $data, $id)
     {

@@ -3,13 +3,14 @@
 namespace Webkul\Product\Helpers;
 
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
+use Webkul\Product\Contracts\Product;
 
 class View
 {
     /**
      * Returns the visible custom attributes
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void|array
      */
     public function getAdditionalData($product)

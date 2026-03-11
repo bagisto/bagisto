@@ -2,6 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Core\Traits\PDFHandler;
 use Webkul\Sales\Repositories\InvoiceRepository;
@@ -26,7 +28,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -41,7 +43,7 @@ class OrderController extends Controller
      * Show the view for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function view($id)
     {
@@ -58,7 +60,7 @@ class OrderController extends Controller
     /**
      * Reorder action for the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function reorder(int $id)
     {
@@ -83,7 +85,7 @@ class OrderController extends Controller
      * Print and download the for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function printInvoice($id)
     {
@@ -105,7 +107,7 @@ class OrderController extends Controller
      * Cancel action for the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function cancel($id)
     {

@@ -2,12 +2,14 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
+use Illuminate\Http\JsonResponse;
+
 class CoreController extends APIController
 {
     /**
      * Get countries.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getCountries()
     {
@@ -23,7 +25,7 @@ class CoreController extends APIController
     /**
      * Get states.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function getStates()
     {

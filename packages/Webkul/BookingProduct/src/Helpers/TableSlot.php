@@ -3,13 +3,14 @@
 namespace Webkul\BookingProduct\Helpers;
 
 use Carbon\Carbon;
+use Webkul\Checkout\Contracts\CartItem;
 
 class TableSlot extends Booking
 {
     /**
      * Return the item if it has a quantity.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
+     * @param  CartItem  $cartItem
      */
     public function isItemHaveQuantity($cartItem): bool
     {

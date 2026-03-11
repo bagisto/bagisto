@@ -5,6 +5,7 @@ namespace Webkul\Admin\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable as BaseMailable;
+use Illuminate\Mail\Message;
 use Illuminate\Queue\SerializesModels;
 
 class Mailable extends BaseMailable implements ShouldQueue
@@ -14,7 +15,7 @@ class Mailable extends BaseMailable implements ShouldQueue
     /**
      * Add the sender to the message.
      *
-     * @param  \Illuminate\Mail\Message  $message
+     * @param  Message  $message
      */
     protected function buildFrom($message): Mailable
     {

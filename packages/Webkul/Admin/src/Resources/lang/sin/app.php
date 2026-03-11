@@ -3669,7 +3669,7 @@ return [
             'title' => 'වින්‍යාසය',
 
             'general' => [
-                'info' => 'ඒකක විකල්ප සකසන්න.',
+                'info' => 'සාමාන්‍ය',
                 'title' => 'සාමාන්‍ය',
 
                 'general' => [
@@ -3906,6 +3906,42 @@ return [
                         'experience-enhancement' => 'අත්දැකීම් වැඩිදියුණු කිරීම',
                         'measurement' => 'මාන',
                         'targeting-advertising' => 'ඉලක්කගත කිරීම සහ ප්‍රචාරණය',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'විනිමය අනුපාත API සේවා සහ අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    'title' => 'විනිමය අනුපාත',
+
+                    'settings' => [
+                        'default-service' => 'පෙරනිමි සේවාව',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'සාමාන්‍ය සැකසුම්',
+                        'title-info' => 'ස්වයංක්‍රීය මුදල් අනුපාත යාවත්කාලීන කිරීම සඳහා පෙරනිමි විනිමය අනුපාත සේවාව තෝරන්න.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'ස්වයංක්‍රීය විනිමය අනුපාත යාවත්කාලීන කිරීම සඳහා ඔබගේ Fixer.io API යතුර ඇතුළත් කරන්න.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'ස්වයංක්‍රීය විනිමය අනුපාත යාවත්කාලීන කිරීම සඳහා ඔබගේ ExchangeRate-API යතුර ඇතුළත් කරන්න (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'දිනපතා',
+                        'enabled' => 'සක්‍රීයයි',
+                        'frequency' => 'සංඛ්‍යාතය',
+                        'monthly' => 'මාසිකව',
+                        'time' => 'ආරම්භක වේලාව (HH:MM)',
+                        'title' => 'කාලසටහන්ගත ආනයනය',
+                        'title-info' => 'වින්‍යාස කළ API සේවාව භාවිතයෙන් කාලසටහනක් අනුව විනිමය අනුපාත ස්වයංක්‍රීයව යාවත්කාලීන කරන්න.',
+                        'weekly' => 'සතිපතා',
                     ],
                 ],
 

@@ -2,12 +2,14 @@
 
 namespace Webkul\Admin\Http\Requests;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -23,14 +25,14 @@ class ProductForm extends FormRequest
     /**
      * Product instance.
      *
-     * @var \Webkul\Product\Contracts\Product
+     * @var Product
      */
     protected $product;
 
     /**
      * Product editable attributes.
      *
-     * @var \Illuminate\Database\Eloquent\Collection
+     * @var Collection
      */
     protected $productEditableAttributes;
 

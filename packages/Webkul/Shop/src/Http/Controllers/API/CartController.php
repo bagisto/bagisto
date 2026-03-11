@@ -273,7 +273,7 @@ class CartController extends APIController
     /**
      * Cross-sell product listings.
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource::collection
+     * @return JsonResource::collection
      */
     public function crossSellProducts()
     {

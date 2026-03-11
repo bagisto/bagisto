@@ -4,6 +4,8 @@ namespace Webkul\Customer\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Contracts\Wishlist as WishlistContract;
 use Webkul\Customer\Database\Factories\CustomerWishlistFactory;
@@ -43,7 +45,7 @@ class Wishlist extends Model implements WishlistContract
     /**
      * The product that belong to the wishlist.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function product()
     {
@@ -53,7 +55,7 @@ class Wishlist extends Model implements WishlistContract
     /**
      * The Channel that belong to the wishlist.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function channel()
     {
@@ -63,7 +65,7 @@ class Wishlist extends Model implements WishlistContract
     /**
      * The Customer that belong to the wishlist.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
     public function customer()
     {

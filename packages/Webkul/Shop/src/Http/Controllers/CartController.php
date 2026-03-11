@@ -2,12 +2,14 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\View\View;
+
 class CartController extends Controller
 {
     /**
      * Cart page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {

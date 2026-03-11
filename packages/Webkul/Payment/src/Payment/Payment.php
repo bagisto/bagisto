@@ -2,6 +2,7 @@
 
 namespace Webkul\Payment\Payment;
 
+use Illuminate\Database\Eloquent\Collection;
 use Webkul\Checkout\Facades\Cart;
 
 abstract class Payment
@@ -114,7 +115,7 @@ abstract class Payment
     /**
      * Return paypal redirect url.
      *
-     * @var \Illuminate\Database\Eloquent\Collection
+     * @var Collection
      */
     public function getCartItems()
     {

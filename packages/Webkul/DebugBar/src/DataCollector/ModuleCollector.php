@@ -8,6 +8,7 @@ use DebugBar\DataCollector\DataCollectorInterface;
 use DebugBar\DataCollector\PDO\PDOCollector;
 use DebugBar\DataCollector\Renderable;
 use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Str;
 use Konekt\Concord\Facades\Concord;
 
@@ -60,7 +61,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
     }
 
     /**
-     * @param  \Illuminate\Database\Events\QueryExecuted  $query
+     * @param  QueryExecuted  $query
      * @return string
      */
     public function addQueryBindings($query)

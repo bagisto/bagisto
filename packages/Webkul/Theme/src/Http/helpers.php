@@ -7,7 +7,7 @@ if (! function_exists('themes')) {
     /**
      * Themes.
      *
-     * @return \Webkul\Theme\Themes
+     * @return Webkul\Theme\Themes
      */
     function themes()
     {

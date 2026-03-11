@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\CurrencyDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Enums\CurrencyPositionEnum;
@@ -21,7 +22,7 @@ class CurrencyController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {

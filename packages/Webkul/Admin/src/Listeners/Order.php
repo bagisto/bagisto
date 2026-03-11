@@ -29,7 +29,7 @@ class Order extends Base
     /**
      * Send cancel order mail.
      *
-     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  OrderContract  $order
      * @return void
      */
     public function afterCanceled($order)

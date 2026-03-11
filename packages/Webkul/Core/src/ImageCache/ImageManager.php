@@ -5,6 +5,7 @@ namespace Webkul\Core\ImageCache;
 use Intervention\Image\AbstractDriver;
 use Intervention\Image\Exception\NotReadableException;
 use Intervention\Image\Exception\NotSupportedException;
+use Intervention\Image\Image;
 use Intervention\Image\ImageManager as BaseImageManager;
 
 class ImageManager extends BaseImageManager
@@ -13,7 +14,7 @@ class ImageManager extends BaseImageManager
      * Initiates an Image instance from different input types
      *
      * @param  mixed  $data
-     * @return \Intervention\Image\Image
+     * @return Image
      */
     public function make($data)
     {
@@ -31,7 +32,7 @@ class ImageManager extends BaseImageManager
      *
      * @param  mixed  $driver
      * @param  string  $url
-     * @return \Intervention\Image\Image
+     * @return Image
      */
     public function initFromUrl($driver, $url)
     {
@@ -61,7 +62,7 @@ class ImageManager extends BaseImageManager
     /**
      * Creates a driver instance according to config settings
      *
-     * @return \Intervention\Image\AbstractDriver
+     * @return AbstractDriver
      */
     private function createDriver()
     {

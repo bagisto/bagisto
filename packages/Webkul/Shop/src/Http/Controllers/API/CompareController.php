@@ -48,7 +48,7 @@ class CompareController extends APIController
     /**
      * Method for customers to get products in comparison.
      *
-     * @return \Illuminate\Http\Resources\Json\JsonResource
+     * @return JsonResource
      */
     public function store()
     {

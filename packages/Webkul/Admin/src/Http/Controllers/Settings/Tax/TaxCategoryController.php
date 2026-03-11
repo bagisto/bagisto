@@ -3,7 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\Settings\Tax;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\TaxCategoryDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Resources\TaxCategoryResource;
@@ -25,7 +27,7 @@ class TaxCategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -39,7 +41,7 @@ class TaxCategoryController extends Controller
     /**
      * Function to create the tax category.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(): JsonResponse
     {

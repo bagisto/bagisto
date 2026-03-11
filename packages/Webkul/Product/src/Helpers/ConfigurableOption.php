@@ -2,6 +2,9 @@
 
 namespace Webkul\Product\Helpers;
 
+use Illuminate\Support\Collection;
+use Webkul\Attribute\Contracts\Attribute;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Facades\ProductVideo;
 
@@ -24,7 +27,7 @@ class ConfigurableOption
     /**
      * Returns the allowed variants.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     public function getAllowedVariants($product)
@@ -77,8 +80,8 @@ class ConfigurableOption
     /**
      * Get allowed attributes.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Illuminate\Support\Collection
+     * @param  Product  $product
+     * @return Collection
      */
     public function getAllowAttributes($product)
     {
@@ -94,7 +97,7 @@ class ConfigurableOption
     /**
      * Get configurable product options.
      *
-     * @param  \Webkul\Product\Contracts\Product  $currentProduct
+     * @param  Product  $currentProduct
      * @param  array  $allowedProducts
      * @return array
      */
@@ -122,7 +125,7 @@ class ConfigurableOption
     /**
      * Get product attributes.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     public function getAttributesData($product, array $options = [])
@@ -147,7 +150,7 @@ class ConfigurableOption
     /**
      * Get attribute options data.
      *
-     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
+     * @param  Attribute  $attribute
      * @param  array  $options
      * @return array
      */
@@ -176,7 +179,7 @@ class ConfigurableOption
     /**
      * Get product prices for configurable variations.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     protected function getVariantPrices($product)
@@ -193,7 +196,7 @@ class ConfigurableOption
     /**
      * Get product images for configurable variations.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     protected function getVariantImages($product)
@@ -210,7 +213,7 @@ class ConfigurableOption
     /**
      * Get product videos for configurable variations.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     protected function getVariantVideos($product)

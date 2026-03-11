@@ -3,8 +3,10 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Theme\ThemeDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
@@ -23,7 +25,7 @@ class ThemeController extends Controller
     /**
      * Display a listing resource for the available tax rates.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -37,7 +39,7 @@ class ThemeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\JsonResponse|string
+     * @return JsonResponse|string
      */
     public function store()
     {
@@ -73,7 +75,7 @@ class ThemeController extends Controller
     /**
      * Edit the theme
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
@@ -85,7 +87,7 @@ class ThemeController extends Controller
     /**
      * Update the specified resource
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(int $id)
     {
@@ -126,7 +128,7 @@ class ThemeController extends Controller
     /**
      * Delete a specified theme.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function destroy(int $id)
     {

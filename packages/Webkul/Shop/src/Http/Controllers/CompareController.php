@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\View\View;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 
 class CompareController extends Controller
@@ -16,7 +17,7 @@ class CompareController extends Controller
     /**
      * Address route index page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {

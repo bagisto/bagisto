@@ -5,6 +5,7 @@ namespace Webkul\Product\Type;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Helpers\BundleOption;
@@ -103,7 +104,7 @@ class Bundle extends AbstractType
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function update(array $data, $id, $attributes = [])
     {

@@ -3,9 +3,11 @@
 namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Cookie;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Webkul\Core\Repositories\SubscribersListRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -30,7 +32,7 @@ class RegistrationController extends Controller
     /**
      * Opens up the user's sign up form.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -40,7 +42,7 @@ class RegistrationController extends Controller
     /**
      * Method to store user's sign up form data to DB.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(RegistrationRequest $registrationRequest)
     {
@@ -108,7 +110,7 @@ class RegistrationController extends Controller
      * Method to verify account.
      *
      * @param  string  $token
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function verifyAccount($token)
     {
@@ -138,7 +140,7 @@ class RegistrationController extends Controller
      * Resend verification email.
      *
      * @param  string  $email
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function resendVerificationEmail($email)
     {
@@ -155,11 +157,11 @@ class RegistrationController extends Controller
             Mail::queue(new EmailVerificationNotification($verificationData));
 
             if (Cookie::has('enable-resend')) {
-                \Cookie::queue(\Cookie::forget('enable-resend'));
+                Cookie::queue(Cookie::forget('enable-resend'));
             }
 
             if (Cookie::has('email-for-resend')) {
-                \Cookie::queue(\Cookie::forget('email-for-resend'));
+                Cookie::queue(Cookie::forget('email-for-resend'));
             }
         } catch (\Exception $e) {
             report($e);

@@ -3,10 +3,13 @@
 namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\ChannelDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Core\Repositories\ChannelRepository;
+use Webkul\Core\Rules\Code;
 
 class ChannelController extends Controller
 {
@@ -20,7 +23,7 @@ class ChannelController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -34,7 +37,7 @@ class ChannelController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -44,13 +47,13 @@ class ChannelController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store()
     {
         $data = $this->validate(request(), [
             /* general */
-            'code' => ['required', 'unique:channels,code', new \Webkul\Core\Rules\Code],
+            'code' => ['required', 'unique:channels,code', new Code],
             'name' => 'required',
             'description' => 'nullable',
             'inventory_sources' => 'required|array|min:1',
@@ -101,7 +104,7 @@ class ChannelController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
@@ -113,7 +116,7 @@ class ChannelController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(int $id)
     {
@@ -121,7 +124,7 @@ class ChannelController extends Controller
 
         $data = $this->validate(request(), [
             /* general */
-            'code' => ['required', 'unique:channels,code,'.$id, new \Webkul\Core\Rules\Code],
+            'code' => ['required', 'unique:channels,code,'.$id, new Code],
             $locale.'.name' => 'required',
             $locale.'.description' => 'nullable',
             'inventory_sources' => 'required|array|min:1',

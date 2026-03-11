@@ -3,9 +3,12 @@
 namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Customers\CustomerDataGrid;
 use Webkul\Admin\DataGrids\Customers\View\InvoiceDataGrid;
 use Webkul\Admin\DataGrids\Customers\View\OrderDataGrid;
@@ -55,7 +58,7 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -132,7 +135,7 @@ class CustomerController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function update(int $id)
     {
@@ -179,7 +182,7 @@ class CustomerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(int $id)
     {
@@ -206,7 +209,7 @@ class CustomerController extends Controller
     /**
      * Login as customer.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function loginAsCustomer(int $id)
     {
@@ -222,7 +225,7 @@ class CustomerController extends Controller
     /**
      * To store the response of the note.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function storeNotes(int $id)
     {
@@ -273,7 +276,7 @@ class CustomerController extends Controller
     /**
      * Result of search customer.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function search()
     {

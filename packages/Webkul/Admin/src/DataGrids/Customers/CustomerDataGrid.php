@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids\Customers;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\DataGrid\DataGrid;
@@ -27,7 +28,7 @@ class CustomerDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function prepareQueryBuilder()
     {

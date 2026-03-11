@@ -3,6 +3,7 @@
 namespace Webkul\Payment;
 
 use Illuminate\Support\Facades\Config;
+use Webkul\Checkout\Contracts\Cart;
 
 class Payment
 {
@@ -55,7 +56,7 @@ class Payment
     /**
      * Returns payment redirect url if have any
      *
-     * @param  \Webkul\Checkout\Contracts\Cart  $cart
+     * @param  Cart  $cart
      * @return string
      */
     public function getRedirectUrl($cart)

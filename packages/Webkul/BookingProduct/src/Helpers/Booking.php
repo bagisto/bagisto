@@ -147,7 +147,7 @@ class Booking
     /**
      * Returns slots for a particular day.
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  BookingProduct  $bookingProduct
      */
     public function getSlotsByDate($bookingProduct, string $date): array
     {

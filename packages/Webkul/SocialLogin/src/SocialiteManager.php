@@ -4,6 +4,7 @@ namespace Webkul\SocialLogin;
 
 use Laravel\Socialite\One\TwitterProvider;
 use Laravel\Socialite\SocialiteManager as BaseSocialiteManager;
+use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\FacebookProvider;
 use Laravel\Socialite\Two\GithubProvider;
 use Laravel\Socialite\Two\GoogleProvider;
@@ -15,7 +16,7 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
     protected function createGithubDriver()
     {
@@ -42,7 +43,7 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
     protected function createFacebookDriver()
     {
@@ -69,7 +70,7 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
     protected function createGoogleDriver()
     {
@@ -96,7 +97,7 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
     protected function createLinkedinOpenidDriver()
     {
@@ -123,7 +124,7 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
+     * @return \Laravel\Socialite\One\AbstractProvider|AbstractProvider
      */
     protected function createTwitterDriver()
     {

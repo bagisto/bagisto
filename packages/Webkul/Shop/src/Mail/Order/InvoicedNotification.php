@@ -53,7 +53,7 @@ class InvoicedNotification extends Mailable
     /**
      * Get the attachments.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array<int, Attachment>
      */
     public function attachments(): array
     {

@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\Shipment;
 use Webkul\Sales\Models\Order;
 
 class ShipmentRepository extends Repository
@@ -36,7 +37,7 @@ class ShipmentRepository extends Repository
      * Create.
      *
      * @param  string  $orderState
-     * @return \Webkul\Sales\Contracts\Shipment
+     * @return Shipment
      */
     public function create(array $data, $orderState = null)
     {

@@ -3,6 +3,7 @@
 namespace Webkul\GDPR\Providers;
 
 use Webkul\Core\Providers\CoreModuleServiceProvider;
+use Webkul\GDPR\Models\GDPRDataRequest;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
@@ -12,6 +13,6 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\GDPR\Models\GDPRDataRequest::class,
+        GDPRDataRequest::class,
     ];
 }

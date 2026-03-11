@@ -2,87 +2,65 @@
 
 namespace Webkul\Core\Helpers\Exchange;
 
+use Illuminate\Support\Facades\Http;
+use RuntimeException;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
 class ExchangeRates extends ExchangeRate
 {
     /**
-     * API key.
-     *
-     * @var string
-     */
-    protected $apiKey;
-
-    /**
      * API endpoint.
-     *
-     * @var string
      */
-    protected $apiEndPoint;
+    protected string $apiEndPoint = 'https://v6.exchangerate-api.com/v6';
 
     /**
-     * Create a new helper instance.
-     *
-     * @return void
+     * API key.
+     */
+    protected ?string $apiKey;
+
+    /**
+     * Create a new instance.
      */
     public function __construct(
         protected CurrencyRepository $currencyRepository,
         protected ExchangeRateRepository $exchangeRateRepository
     ) {
-        $this->apiEndPoint = config('services.exchange_api.exchange_rates.url');
+        parent::__construct($currencyRepository, $exchangeRateRepository);
 
-        $this->apiKey = config('services.exchange_api.exchange_rates.key');
+        $this->apiKey = $this->getApiKey(
+            'general.exchange_rates.exchange_rates_api.api_key',
+            'services.exchange_api.exchange_rates.key'
+        );
     }
 
     /**
-     * Fetch rates and updates in `currency_exchange_rates` table.
-     *
-     * @return \Exception|void
+     * Fetch rates and update the `currency_exchange_rates` table.
      */
-    public function updateRates()
+    public function updateRates(): void
     {
-        $client = new \GuzzleHttp\Client;
+        $baseCurrency = config('app.currency');
+
+        $response = Http::get("{$this->apiEndPoint}/{$this->apiKey}/latest/{$baseCurrency}");
+
+        $result = $response->json();
+
+        if ($result['result'] !== 'success') {
+            throw new RuntimeException($result['error-type'] ?? 'Unknown error');
+        }
+
+        $rates = $result['conversion_rates'];
 
         foreach ($this->currencyRepository->all() as $currency) {
-            if ($currency->code == config('app.currency')) {
+            if ($currency->code === $baseCurrency) {
                 continue;
             }
 
-            $result = $client->request(
-                'GET',
-                $this->apiEndPoint, [
-                    'headers' => [
-                        'Content-Type' => 'text/plain',
-                        'apikey' => $this->apiKey,
-                    ],
-                    'query' => [
-                        'to' => $currency->code,
-                        'from' => config('app.currency'),
-                        'amount' => 1,
-                    ],
-                ]
-            );
-
-            $result = json_decode($result->getBody()->getContents(), true);
-
-            if (
-                isset($result['success'])
-                && ! $result['success']
-            ) {
-                throw new \Exception($result['error']['info'] ?? $result['error']['type'], 1);
+            if (! isset($rates[$currency->code])) {
+                continue;
             }
 
-            if ($exchangeRate = $currency->exchange_rate) {
-                $this->exchangeRateRepository->update([
-                    'rate' => $result['result'],
-                ], $exchangeRate->id);
-            } else {
-                $this->exchangeRateRepository->create([
-                    'rate' => $result['result'],
-                    'target_currency' => $currency->id,
-                ]);
-            }
+            $this->updateOrCreateRate($currency, $rates[$currency->code]);
         }
     }
 }

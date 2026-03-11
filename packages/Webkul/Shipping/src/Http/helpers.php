@@ -6,7 +6,7 @@ if (! function_exists('shipping')) {
     /**
      * Shipping helper.
      *
-     * @return \Webkul\Shipping\Shipping
+     * @return Webkul\Shipping\Shipping
      */
     function shipping()
     {

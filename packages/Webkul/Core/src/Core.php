@@ -3,15 +3,19 @@
 namespace Webkul\Core;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Concerns\CurrencyFormatter;
 use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\Currency;
+use Webkul\Core\Models\Locale;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Repositories\CountryRepository;
 use Webkul\Core\Repositories\CountryStateRepository;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 use Webkul\Core\Repositories\LocaleRepository;
+use Webkul\Customer\Models\CustomerGroup;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Tax\Repositories\TaxCategoryRepository;
 
@@ -24,47 +28,47 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.3.14';
+    const BAGISTO_VERSION = '2.3.15';
 
     /**
      * Current Channel.
      *
-     * @var \Webkul\Core\Models\Channel
+     * @var Channel
      */
     protected $currentChannel;
 
     /**
      * Default Channel.
      *
-     * @var \Webkul\Core\Models\Channel
+     * @var Channel
      */
     protected $defaultChannel;
 
     /**
      * Currency.
      *
-     * @var \Webkul\Core\Models\Currency
+     * @var Currency
      */
     protected $currentCurrency;
 
     /**
      * Base Currency.
      *
-     * @var \Webkul\Core\Models\Currency
+     * @var Currency
      */
     protected $baseCurrency;
 
     /**
      * Current Locale.
      *
-     * @var \Webkul\Core\Models\Locale
+     * @var Locale
      */
     protected $currentLocale;
 
     /**
      * Guest Customer Group
      *
-     * @var \Webkul\Customer\Models\CustomerGroup
+     * @var CustomerGroup
      */
     protected $guestCustomerGroup;
 
@@ -118,7 +122,7 @@ class Core
     /**
      * Returns all channels.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getAllChannels()
     {
@@ -128,7 +132,7 @@ class Core
     /**
      * Returns current channel models.
      *
-     * @return \Webkul\Core\Contracts\Channel
+     * @return Contracts\Channel
      */
     public function getCurrentChannel(?string $hostname = null)
     {
@@ -172,7 +176,7 @@ class Core
     /**
      * Returns default channel models.
      *
-     * @return \Webkul\Core\Contracts\Channel
+     * @return Contracts\Channel
      */
     public function getDefaultChannel(): ?Channel
     {
@@ -216,7 +220,7 @@ class Core
     /**
      * Get channel code from request.
      *
-     * @return \Webkul\Core\Contracts\Channel
+     * @return Contracts\Channel
      */
     public function getRequestedChannel()
     {
@@ -257,7 +261,7 @@ class Core
     /**
      * Return all locales.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getAllLocales()
     {
@@ -267,7 +271,7 @@ class Core
     /**
      * Returns current locale.
      *
-     * @return \Webkul\Core\Contracts\Locale
+     * @return Contracts\Locale
      */
     public function getCurrentLocale()
     {
@@ -341,7 +345,7 @@ class Core
     /**
      * Returns all currencies.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getAllCurrencies()
     {
@@ -351,7 +355,7 @@ class Core
     /**
      * Returns base channel's currency model.
      *
-     * @return \Webkul\Core\Contracts\Currency
+     * @return Contracts\Currency
      */
     public function getBaseCurrency()
     {
@@ -381,7 +385,7 @@ class Core
     /**
      * Returns base channel's currency model.
      *
-     * @return \Webkul\Core\Contracts\Currency
+     * @return Contracts\Currency
      */
     public function getChannelBaseCurrency()
     {
@@ -420,7 +424,7 @@ class Core
      *
      * Will fallback to base currency if not set.
      *
-     * @return \Webkul\Core\Contracts\Currency
+     * @return Contracts\Currency
      */
     public function getCurrentCurrency()
     {
@@ -562,7 +566,7 @@ class Core
     /**
      * Checks if current date of the given channel (in the channel timezone) is within the range.
      *
-     * @param  int|string|\Webkul\Core\Contracts\Channel  $channel
+     * @param  int|string|Contracts\Channel  $channel
      * @param  string|null  $dateFrom
      * @param  string|null  $dateTo
      * @return bool
@@ -601,7 +605,7 @@ class Core
     /**
      * Get channel timestamp, timestamp will be builded with channel timezone settings.
      *
-     * @param  \Webkul\Core\Contracts\Channel  $channel
+     * @param  Contracts\Channel  $channel
      * @return int
      */
     public function channelTimeStamp($channel)
@@ -665,7 +669,7 @@ class Core
     /**
      * Retrieve all countries.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function countries()
     {
@@ -689,7 +693,7 @@ class Core
      * Retrieve all country states.
      *
      * @param  string  $countryCode
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function states($countryCode)
     {
@@ -699,7 +703,7 @@ class Core
     /**
      * Retrieve all grouped states by country code.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function groupedStatesByCountries()
     {
@@ -715,7 +719,7 @@ class Core
     /**
      * Retrieve all grouped states by country code.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function findStateByCountryCode($countryCode = null, $stateCode = null)
     {

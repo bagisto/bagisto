@@ -1,12 +1,13 @@
 <?php
 
+use Webkul\User\Bouncer;
 use Webkul\User\Facades\Bouncer as BouncerFacade;
 
 if (! function_exists('bouncer')) {
     /**
      * Bouncer helper.
      *
-     * @return \Webkul\User\Bouncer
+     * @return Bouncer
      */
     function bouncer()
     {
