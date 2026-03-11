@@ -6,7 +6,7 @@
 
   @forelse($sbt_perfumes as $sbt_perfume)
 
-  <a href="#"
+  <a href="{{ route('shop.home.product.details',$sbt_perfume->url_key) }}"
      class="flex flex-col items-center cursor-pointer">
 
       <!-- Image -->

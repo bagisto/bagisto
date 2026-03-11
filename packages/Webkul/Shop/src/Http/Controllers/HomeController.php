@@ -422,7 +422,6 @@ class HomeController extends Controller
     // sbt-products index page
     public function spaProductsIndex()
     {
-
         $products = $this->getProducts('simple', 'spa-products');
 
         if (count($products)) {

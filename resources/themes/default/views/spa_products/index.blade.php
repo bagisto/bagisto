@@ -4,6 +4,6 @@
 
 @include('shop::spa_products.page_banner')
 
-@include('shop::spa_products.sbt_perfume')
+@include('shop::spa_products.spa_products')
 
 @endsection
