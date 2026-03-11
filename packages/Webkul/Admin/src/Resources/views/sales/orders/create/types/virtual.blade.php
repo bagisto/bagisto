@@ -497,6 +497,8 @@
                                     totalPrice += parseFloat(item.price);
                                 }
 
+                                break;
+
                             case 'file':
                                 if (selectedItemValues[0] instanceof File) {
                                     totalPrice += parseFloat(item.price);
