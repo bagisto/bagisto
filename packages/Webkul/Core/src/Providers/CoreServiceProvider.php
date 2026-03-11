@@ -83,21 +83,25 @@ class CoreServiceProvider extends ServiceProvider
      */
     protected function registerExchangeRateSchedule(Schedule $schedule): void
     {
-        if (! core()->getConfigData('general.exchange_rates.schedule.enabled')) {
-            return;
+        try {
+            if (! core()->getConfigData('general.exchange_rates.schedule.enabled')) {
+                return;
+            }
+
+            $frequency = core()->getConfigData('general.exchange_rates.schedule.frequency') ?: 'daily';
+
+            $time = core()->getConfigData('general.exchange_rates.schedule.time') ?: '00:00';
+
+            $command = $schedule->command('exchange-rate:update');
+
+            match ($frequency) {
+                'weekly' => $command->weeklyOn(1, $time),
+                'monthly' => $command->monthlyOn(1, $time),
+                default => $command->dailyAt($time),
+            };
+        } catch (\Exception) {
+            // Silently skip when database is not yet available (e.g., during installation).
         }
-
-        $frequency = core()->getConfigData('general.exchange_rates.schedule.frequency') ?: 'daily';
-
-        $time = core()->getConfigData('general.exchange_rates.schedule.time') ?: '00:00';
-
-        $command = $schedule->command('exchange-rate:update');
-
-        match ($frequency) {
-            'weekly' => $command->weeklyOn(1, $time),
-            'monthly' => $command->monthlyOn(1, $time),
-            default => $command->dailyAt($time),
-        };
     }
 
     /**
