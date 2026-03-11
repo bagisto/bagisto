@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11107 [fixed] - Fixed an issue with the SEO URL preview.
 
+- #11176 [fixed] - Fixed an issue with customizable options file handling.
+
 ## **v2.3.14 (5th of March 2026)** - *Release*
 
 - Fixed an issue where wishlist items were being fetched for all customers when performing "Move to Cart" or deleting wishlist items.

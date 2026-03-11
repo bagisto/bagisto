@@ -229,7 +229,7 @@ class Simple extends AbstractType
             /**
              * Store the file in the storage.
              */
-            $formattedCustomizableOptions = $formattedCustomizableOptions->map(function ($option) use ($data) {
+            $formattedCustomizableOptions = $formattedCustomizableOptions->map(function ($option) use (&$data) {
                 if ($option['type'] === 'file') {
                     $file = $option['prices'][0]['label'];
 
@@ -246,6 +246,8 @@ class Simple extends AbstractType
 
                         $option['prices'][0]['label'] = $filePath['prices'][0]['label'] ?? '';
                     }
+
+                    $data['customizable_options'][$option['id']] = [$option['prices'][0]['label']];
                 }
 
                 return $option;
