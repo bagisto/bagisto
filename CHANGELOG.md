@@ -14,7 +14,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #10964 [fixed] - Fixed an issue where the search query was not populated in the search box on the customer end.
 
-- #10250 [fixed] - Added support email configuration through the core configuration settings
+- #10250 [fixed] - Added support email configuration through the core configuration settings.
 
 ## **v2.3.14 (5th of March 2026)** - *Release*
 
