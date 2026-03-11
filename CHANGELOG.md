@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- #11187 [fixed] - Fixed an issue causing an "Undefined array key 'resolver'" error.
+
 - #11107 [fixed] - Fixed an issue with the SEO URL preview.
 
 - #10250 [fixed] - Added support email configuration through the core configuration settings.
