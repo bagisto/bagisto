@@ -393,7 +393,7 @@ class HomeController extends Controller
         ->where('channel', core()->getCurrentChannel()->code) // current channel
         ->whereHas('product.categories', function ($q) use ($category_id) {
             $q->where('category_id', $category_id);
-        })->take(12)->get();
+        })->paginate(12);
 
 
         if ($products->count()) {
@@ -439,15 +439,14 @@ class HomeController extends Controller
     // flower-product index page
     public function flowerProductsIndex()
     {
-
-        $products = $this->getProducts('simple', 'flower-products');
+        $products = $this->getProducts('simple', 'flower-product');
 
         if (count($products)) {
             $flower_products = $products;
             return view('shop::flower_products.index', compact('flower_products'));
         } else {
             $flower_products = [];
-            return view('shop::flower_products.index',compact('flower_products'));
+            return view('shop::flower_products.index', compact('flower_products'));
         }
 
     }

@@ -152,7 +152,7 @@ class SearchController extends Controller
         ->where('channel', core()->getCurrentChannel()->code)
         ->whereHas('product.categories', function ($q) use ($category_id) {
             $q->where('category_id', $category_id);
-        })->take(12)->get();
+        })->paginate(12);
 
 
         if ($products->count()) {
@@ -182,7 +182,49 @@ class SearchController extends Controller
             $sbt_perfumes = [];
             return view('shop::sbt_perfume.index', compact('sbt_perfumes', 'search_input'));
         }
-
     }
+
+    // Search result for spa-products
+    public function spaProductsSearch(Request $req)
+    {
+        $req->validate([
+            'search_input' => 'required | string'
+        ]);
+
+        $search_input = $req->search_input;
+
+        $searched_products  =
+        $this->getSearchProducts('simple', 'spa-products', $search_input);
+
+        if (count($searched_products)) {
+            $spa_products = $searched_products;
+            return view('shop::spa_products.index', compact('spa_products', 'search_input'));
+        } else {
+            $spa_products = [];
+            return view('shop::spa_products.index', compact('spa_products', 'search_input'));
+        }
+    }
+
+    // Search result for spa-products
+    public function flowerProductsSearch(Request $req)
+    {
+        $req->validate([
+            'search_input' => 'required | string'
+        ]);
+
+        $search_input = $req->search_input;
+
+        $searched_products  =
+        $this->getSearchProducts('simple', 'flower-product', $search_input);
+
+        if (count($searched_products)) {
+            $flower_products = $searched_products;
+            return view('shop::flower_products.index', compact('flower_products', 'search_input'));
+        } else {
+            $flower_products = [];
+            return view('shop::flower_products.index', compact('flower_products', 'search_input'));
+        }
+    }
+
 
 }

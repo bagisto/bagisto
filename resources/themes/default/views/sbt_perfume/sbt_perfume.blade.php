@@ -35,4 +35,13 @@
 
   </div>
 
+
+  <!-- Pagination -->
+  @if (count($sbt_perfumes))
+   <div class="mt-12 flex justify-center">
+      {{ $sbt_perfumes->links('vendor.pagination.tailwind') }}
+  </div>    
+  @endif
+ 
+
 </section>

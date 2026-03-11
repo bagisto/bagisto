@@ -35,4 +35,11 @@
 
   </div>
 
+    <!-- Pagination -->
+  @if (count($spa_products))
+   <div class="mt-12 flex justify-center">
+      {{ $spa_products->links('vendor.pagination.tailwind') }}
+  </div>    
+  @endif 
+
 </section>

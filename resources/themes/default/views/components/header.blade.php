@@ -134,7 +134,11 @@
                     </a>
                 </div>
 
-                {{-- SEARCH BOX --}}
+                @if(Route::currentRouteName() == 'sbt.perfume.index' || Route::currentRouteName() == 'sbt.perfumes.search' || Route::currentRouteName() == 'spa.product.index' || Route::currentRouteName() == 'spa.product.search'
+                 || Route::currentRouteName() == 'flower.product.index' || Route::currentRouteName() == 'flower.product.search')
+                
+                @else
+                   {{-- SEARCH BOX --}}
                 <div class="relative flex-1 md:flex-none w-full md:w-[380px] mt-2 md:mt-0">
                     <form action="{{ route('shop.search.index') }}" method="get">
                         <input 
@@ -150,7 +154,8 @@
                         </button>
                     </form>
                 </div>
-
+                @endif
+                
             </div>
 
             {{-- RIGHT SECTION --}}

@@ -21,7 +21,11 @@ Route::get('sbt-perfumes', [HomeController::class,'sbtPerfumeIndex'])->name('sbt
 Route::post('sbt-perfumes', [SearchController::class,'sbtPerfumeSearch'])->name('sbt.perfumes.search');
 
 Route::get('spa-products', [HomeController::class,'spaProductsIndex'])->name('spa.product.index');
+Route::post('spa-products', [SearchController::class,'spaProductsSearch'])->name('spa.product.search');
+
 Route::get('flower-products', [HomeController::class,'flowerProductsIndex'])->name('flower.product.index');
+Route::post('flower-products', [SearchController::class,'flowerProductsSearch'])->name('flower.product.search');
+
 
 // Homepage Routes
 

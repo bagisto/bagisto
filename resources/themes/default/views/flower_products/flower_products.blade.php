@@ -35,4 +35,12 @@
 
   </div>
 
+
+     <!-- Pagination -->
+  @if (count($flower_products))
+   <div class="mt-12 flex justify-center">
+      {{ $flower_products->links('vendor.pagination.tailwind') }}
+  </div>    
+  @endif 
+
 </section>
