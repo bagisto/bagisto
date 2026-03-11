@@ -19,7 +19,7 @@
 
       <!-- Title -->
       <span class="font-oswald text-center uppercase text-[#371E0F] font-normal text-[20px] md:text-[24px] leading-[100%] tracking-[0.1em]">
-        {{ $flower_product->name }}
+       {{ \Illuminate\Support\Str::limit($flower_product->name, 15) }}
       </span>
 
       <!-- Price -->
