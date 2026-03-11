@@ -195,7 +195,7 @@
             @auth('customer')
             <!-- Account Icon -->
             <img 
-            src="{{ asset('images/account.png') }}" 
+            src="{{ asset('images/account_open.png') }}" 
             alt="Account"
             class="w-6 h-6"
             onclick="toggleAccountDropdown()"
@@ -206,7 +206,7 @@
             id="accountDropdown"
             class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
         >
-            <a href="#" class="block px-4 py-2 hover:bg-gray-100">
+            <a href="{{ route('customer.profile.index') }}" class="block px-4 py-2 hover:bg-gray-100">
                 Profile
             </a>
 

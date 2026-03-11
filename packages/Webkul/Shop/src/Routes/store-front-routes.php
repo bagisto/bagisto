@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Shop\Http\Controllers\BookingProductController;
 use Webkul\Shop\Http\Controllers\CompareController;
 use Webkul\Shop\Http\Controllers\HomeController;
+use Webkul\Shop\Http\Controllers\CustomerController;
 use Webkul\Shop\Http\Controllers\CartController;
 use Webkul\Shop\Http\Controllers\PageController;
 use Webkul\Shop\Http\Controllers\ProductController;
@@ -17,6 +18,9 @@ use App\Http\Middleware\LocaleMiddleware;
 Route::view('/', 'shop::home.landing')->name('spa.home');
 
 // Inner Landing Page
+
+Route::get('/spa-services', [HomeController::class, 'index'])->name('shop.home.index');
+
 Route::get('sbt-perfumes', [HomeController::class,'sbtPerfumeIndex'])->name('sbt.perfume.index');
 Route::post('sbt-perfumes', [SearchController::class,'sbtPerfumeSearch'])->name('sbt.perfumes.search');
 
@@ -27,7 +31,8 @@ Route::get('flower-products', [HomeController::class,'flowerProductsIndex'])->na
 Route::post('flower-products', [SearchController::class,'flowerProductsSearch'])->name('flower.product.search');
 
 
-// Homepage Routes
+
+// Header Routes
 
 // Language Switch
 Route::get('/switch/lang/{ln}', [HomeController::class,'switchLanguage'])->name('switch.language');
@@ -38,9 +43,10 @@ Route::get('search', [SearchController::class, 'index'])->name('shop.search.inde
 // Search box
 Route::get('/booking/search', [SearchController::class, 'serviceSearchResult'])->name('booking.search');
 
+// customer profile
+Route::get('customer/profile', [CustomerController::class, 'customerProfileIndex'])->name('customer.profile.index');
 
-Route::get('/spa-services', [HomeController::class, 'index'])
-    ->name('shop.home.index');
+
 
 // Services as per category
 Route::get('/services/{slug}', [HomeController::class, 'servicesByCategory'])
