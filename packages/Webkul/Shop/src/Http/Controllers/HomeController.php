@@ -284,10 +284,10 @@ class HomeController extends Controller
     // Product details page
     public function productDetails($url_key)
     {
-
         // fetch single product based on url,current channel and locale
         $productFlat = ProductFlat::with(['product.images'])
                    ->where('url_key', $url_key)
+                   ->where('status', 1)
                    ->where('locale', app()->getLocale())
                    ->where('channel', core()->getCurrentChannelCode())
                    ->firstOrFail();
@@ -298,9 +298,9 @@ class HomeController extends Controller
         // Remove first image (main image)
         $otherImages = $images->slice(1)->take(4);
 
-        // dd($otherImages[3]['path']);
+        $stockQty = $productFlat->product->inventories->sum('qty');
 
-        return view('shop::product_details.index', compact('productFlat', 'otherImages'));
+        return view('shop::product_details.index', compact('productFlat', 'otherImages', 'stockQty'));
     }
 
 

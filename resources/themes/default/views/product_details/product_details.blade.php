@@ -64,6 +64,13 @@ input[type="number"] {
                              text-[#DFAA8B]">
                     {{ core()->currency($productFlat->price) }}
                 </span>
+
+                @if($stockQty < 1)
+                    <span class="text-xs bg-gray-200 text-gray-600 px-3 py-1 rounded-full">
+                        Sold out
+                    </span>
+                @endif
+
             </div>
 
             <!-- Tax Text -->
@@ -132,8 +139,7 @@ input[type="number"] {
 
 </div>
 
-   <!-- Buy Now Button -->
-   <!-- Add To Cart Section -->
+   @if($stockQty > 0)
 <form action="{{ route('shop.add.cart',$productFlat->url_key) }}" method="POST" class="flex items-center gap-6">
     @csrf
     <div class="flex items-center border-2 border-[#DFAA8B] rounded-[50px] overflow-hidden h-[47px]">
@@ -144,10 +150,10 @@ input[type="number"] {
         </button>
 
         <input type="number"
-       name="quantity"
-       value="1"
-       min="1"
-       class="w-14 text-center outline-none text-[#371E0F] font-roboto bg-transparent">
+               name="quantity"
+               value="1"
+               min="1"
+               class="w-14 text-center outline-none text-[#371E0F] font-roboto bg-transparent">
 
         <button type="button"
                 onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
@@ -168,6 +174,18 @@ input[type="number"] {
         Add to Cart
     </button>
 </form>
+@else
+<button
+    class="w-[228px] h-[47px] 
+           bg-gray-400 text-white 
+           rounded-[50px] 
+           px-[32px] 
+           font-roboto text-sm tracking-wide 
+           cursor-not-allowed"
+    disabled>
+    Out of Stock
+</button>
+@endif
 
         </div>
 

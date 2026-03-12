@@ -1,3 +1,22 @@
+@if(session('error'))
+
+<div id="error-alert"
+     class="fixed top-6 right-6 z-50 bg-red-500 text-white px-6 py-4 rounded-lg shadow-lg flex items-center gap-4">
+
+    <span class="text-sm font-semibold">
+        {{ session('error') }}
+    </span>
+
+    <button onclick="document.getElementById('error-alert').remove()"
+            class="text-white text-xl font-bold leading-none hover:opacity-80">
+        ×
+    </button>
+
+</div>
+
+@endif
+
+
 @extends('shop::layouts.master')
 
 @section('main-content')
@@ -95,7 +114,14 @@ Add Products
 
 @endforelse
 
+@if($cartItems && $cartItems->count() > 0 && method_exists($cartItems, 'links'))
+    <div class="mt-6">
+        {{ $cartItems->links() }}
+    </div>
+@endif
 </div>
+
+
 
 <!-- Order Summary -->
 <div class="col-span-5 bg-gray-50 rounded-lg p-8 shadow-lg h-fit">
@@ -119,7 +145,7 @@ Order Summary
 <span>{{ core()->currency($total) }}</span>
 </div>
 
-<a href="{{ route('shop.checkout.onepage.index') }}">
+<a href="{{ route('shop.checkout.product') }}">
 
 <button
 class="mt-10 w-full bg-[#c07a3a] hover:bg-[#a8652f] text-white uppercase font-semibold py-3 rounded-full">
@@ -135,3 +161,12 @@ Continue
 </section>
 
 @endsection
+
+<script>
+setTimeout(function(){
+    let alert = document.getElementById('error-alert');
+    if(alert){
+        alert.remove();
+    }
+},4000);
+</script>

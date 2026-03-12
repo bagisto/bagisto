@@ -31,11 +31,11 @@ Route::get('/switch/lang/{ln}', [HomeController::class,'switchLanguage'])->name(
 Route::get('/booking/search', [SearchController::class, 'serviceSearchResult'])->name('booking.search');
 // customer profile
 Route::get('customer/profile', [CustomerController::class, 'customerProfileIndex'])->name('customer.profile.index');
-// Cart routes
+
+// Cart routes only for products (simple products)
 Route::get('cart/index', [CartController::class,'indexCart'])->name('shop.cart.index');
 Route::post('cart/add/{slug}', [CartController::class,'addToCart'])->name('shop.add.cart');
 Route::delete('cart/remove/{id}', [CartController::class,'removeCartItem'])->name('shop.remove.cart');
-
 
 // Services as per category
 Route::get('/services/{slug}', [HomeController::class, 'servicesByCategory'])

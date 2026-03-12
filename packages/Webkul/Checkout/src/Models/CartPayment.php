@@ -14,6 +14,13 @@ class CartPayment extends Model implements CartPaymentContract
 
     protected $table = 'cart_payment';
 
+    protected $fillable = [
+        'cart_id',
+        'method',
+        'method_title',
+        'additional',
+    ];
+
     /**
      * Create a new factory instance for the model
      */

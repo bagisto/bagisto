@@ -43,7 +43,7 @@
      class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar">
 
 @forelse($products as $product)
-  
+    
 <a href="{{ route('shop.home.product.details', $product->url_key) }}"
    class="flex-shrink-0 w-full sm:w-[48%] lg:w-[23%] flex flex-col items-center cursor-pointer">
 

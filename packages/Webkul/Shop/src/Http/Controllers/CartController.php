@@ -32,27 +32,25 @@ class CartController extends Controller
 
         // LOGGED IN USER
         if ($logged_id) {
-
             $carts = Cart::where('customer_id', $logged_id)->get();
-
             foreach ($carts as $cart) {
                 $cartItems = $cartItems->merge(
-                    $cart->items()->with(['product', 'professional'])->get()
+                    $cart->items()->with('product')
+                        ->whereHas('product', fn ($q) => $q->where('type', 'simple'))
+                        ->paginate(3)
                 );
             }
         }
 
         // GUEST USER
         else {
-
             $cartId = session()->get('guest_cart_id');
-
             if ($cartId) {
-
                 $cart = Cart::find($cartId);
-
                 if ($cart) {
-                    $cartItems = $cart->items()->with(['product', 'professional'])->get();
+                    $cartItems = $cart->items()->with('product')
+                        ->whereHas('product', fn ($q) => $q->where('type', 'simple'))
+                        ->paginate(3);
                 }
             }
         }
@@ -68,111 +66,75 @@ class CartController extends Controller
     }
 
 
+    // adding items to cart for guest and logged in user
     public function addToCart(Request $req, $slug)
     {
         $product = ProductFlat::where('url_key', $slug)->firstOrFail();
         $product_type = $product->type;
         $qty = $req->quantity ?? 1;
         $total = $product->price * $qty;
-        $professional_id = $req->professional_id ?? null;
-
         $logged_id = Auth::check() ? Auth::id() : null;
 
-        // GUEST USER
-        if (!$logged_id) {
+        // --- Get or create cart ---
+        $cartId = session()->get('guest_cart_id');
+        $cart = null;
 
-            // check cart in session
-            $cartId = session()->get('guest_cart_id');
-
-            if ($cartId) {
-                $cart = Cart::find($cartId);
-            }
-
-            // if cart not exist create new
-            if (!isset($cart)) {
-
-                $cart = Cart::create([
-                    'customer_id'   => null,
-                    'is_guest'      => 1,
-                    'channel_id'    => core()->getCurrentChannel()->id,
-                    'currency_code' => core()->getCurrentCurrencyCode(),
-                    'items_qty'     => 0,
-                    'sub_total'     => 0,
-                    'grand_total'   => 0,
-                ]);
-
-                session()->put('guest_cart_id', $cart->id);
-            }
-
-            // create cart item
-            CartItem::create([
-                'cart_id'        => $cart->id,
-                'product_id'     => $product->product_id,
-                'quantity'       => $qty,
-                'price'          => $product->price,
-                'base_price'     => $product->price,
-                'total'          => $total,
-                'base_total'     => $total,
-                'type'           => $product_type,
-                'professional_id' => $professional_id
-            ]);
-
-            // update cart totals
-            $cart->items_qty += $qty;
-            $cart->sub_total += $total;
-            $cart->grand_total += $total;
-            $cart->save();
-
-            return redirect()->route('shop.cart.index')
-                ->with('success', 'Product added to cart');
-        } else {
-
-            // check cart in session
-            $cartId = session()->get('guest_cart_id');
-
-            if ($cartId) {
-                $cart = Cart::find($cartId);
-            }
-
-            // if cart not exist create new
-            if (!isset($cart)) {
-
-                $cart = Cart::create([
-                    'customer_id'   => null,
-                    'is_guest'      => 1,
-                    'channel_id'    => core()->getCurrentChannel()->id,
-                    'currency_code' => core()->getCurrentCurrencyCode(),
-                    'items_qty'     => 0,
-                    'sub_total'     => 0,
-                    'grand_total'   => 0,
-                ]);
-
-                session()->put('guest_cart_id', $cart->id);
-            }
-
-            // create cart item
-            CartItem::create([
-                'cart_id'        => $cart->id,
-                'product_id'     => $product->product_id,
-                'quantity'       => $qty,
-                'price'          => $product->price,
-                'base_price'     => $product->price,
-                'total'          => $total,
-                'base_total'     => $total,
-                'type'           => $product_type,
-                'professional_id' => $professional_id
-            ]);
-
-            // update cart totals
-            $cart->items_qty += $qty;
-            $cart->sub_total += $total;
-            $cart->grand_total += $total;
-            $cart->save();
-
-            return redirect()->route('shop.cart.index')
-                ->with('success', 'Product added to cart');
-
+        if ($logged_id) {
+            // Logged-in user: try to get cart by customer
+            $cart = Cart::where('customer_id', $logged_id)->first();
+        } elseif ($cartId) {
+            // Guest user: try session cart
+            $cart = Cart::find($cartId);
         }
+
+        // If cart does not exist, create a new one
+        if (!isset($cart)) {
+            $cart = Cart::create([
+                'customer_id'   => $logged_id,
+                'is_guest'      => $logged_id ? 0 : 1,
+                'channel_id'    => core()->getCurrentChannel()->id,
+                'currency_code' => core()->getCurrentCurrencyCode(),
+                'items_qty'     => 0,
+                'sub_total'     => 0,
+                'grand_total'   => 0,
+            ]);
+
+            if (!$logged_id) {
+                session()->put('guest_cart_id', $cart->id);
+            }
+        }
+
+        // --- Check if product already exists in cart ---
+        $cartItem = $cart->items()->where('product_id', $product->product_id)->first();
+
+        if ($cartItem) {
+            // Product exists: increment quantity and update totals
+            $cartItem->quantity += $qty;
+            $cartItem->total = $cartItem->price * $cartItem->quantity;
+            $cartItem->base_total = $cartItem->total;
+            $cartItem->save();
+        } else {
+            // Product does not exist: create new cart item
+            CartItem::create([
+                'cart_id'    => $cart->id,
+                'product_id' => $product->product_id,
+                'quantity'   => $qty,
+                'price'      => $product->price,
+                'base_price' => $product->price,
+                'total'      => $total,
+                'base_total' => $total,
+                'type'       => $product_type,
+            ]);
+        }
+
+        // --- Update cart totals ---
+        $cart->items_qty = $cart->items()->sum('quantity');
+        $cart->sub_total = $cart->items()->sum('total');
+        $cart->grand_total = $cart->sub_total;
+        $cart->save();
+
+        return redirect()->route('shop.cart.index')
+            ->with('success', 'Product added to cart');
     }
 
 

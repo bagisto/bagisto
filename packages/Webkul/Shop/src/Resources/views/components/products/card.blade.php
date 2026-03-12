@@ -144,11 +144,13 @@
                     @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.before') !!}
 
-                        <button @click = "bookNow()" class="secondary-button w-full max-w-full p-2.5 text-sm font-medium max-sm:rounded-xl max-sm:p-2">
-                            Book Now
+                        <button
+                            class="secondary-button w-full max-w-full p-2.5 text-sm font-medium max-sm:rounded-xl max-sm:p-2"
+                            :disabled="! product.is_saleable || isAddingToCart"
+                            @click="addToCart()"
+                        >
+                            @lang('shop::app.components.products.card.add-to-cart')
                         </button>
-
-
 
                         {!! view_render_event('bagisto.shop.components.products.card.add_to_cart.after') !!}
                     @endif
@@ -170,6 +172,17 @@
                     {!! view_render_event('bagisto.shop.components.products.card.wishlist_option.after') !!}
 
                     {!! view_render_event('bagisto.shop.components.products.card.compare_option.before') !!}
+
+                    @if (core()->getConfigData('catalog.products.settings.compare_option'))
+                        <span
+                            class="icon-compare cursor-pointer p-2.5 text-2xl max-sm:hidden"
+                            role="button"
+                            aria-label="@lang('shop::app.components.products.card.add-to-compare')"
+                            tabindex="0"
+                            @click="addToCompare(product.id)"
+                        >
+                        </span>
+                    @endif
 
                     {!! view_render_event('bagisto.shop.components.products.card.compare_option.after') !!}
                 </div>
@@ -414,43 +427,34 @@
                     return JSON.parse(value);
                 },
 
-addToCart() {
-    this.isAddingToCart = true;
+                addToCart() {
+                    this.isAddingToCart = true;
 
-    this.$axios.post('{{ route("shop.add.cart") }}', {
-            'quantity': 1,
-            'product_id': this.product.id,
-        })
-        .then(response => {
-            if (response.data.message) {
-                this.$emitter.emit('update-mini-cart', response.data.data );
-                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-            } else {
-                this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
-            }
+                    this.$axios.post('{{ route("shop.api.checkout.cart.store") }}', {
+                            'quantity': 1,
+                            'product_id': this.product.id,
+                        })
+                        .then(response => {
+                            if (response.data.message) {
+                                this.$emitter.emit('update-mini-cart', response.data.data );
 
-            this.isAddingToCart = false;
-        })
-        .catch(error => {
-            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                            }
 
-            if (error.response.data.redirect_uri) {
-                window.location.href = error.response.data.redirect_uri;
-            }
+                            this.isAddingToCart = false;
+                        })
+                        .catch(error => {
+                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
 
-            this.isAddingToCart = false;
-        });
-},
+                            if (error.response.data.redirect_uri) {
+                                window.location.href = error.response.data.redirect_uri;
+                            }
 
-
-bookNow() {
-    this.isAddingToCart = true;
-    let product_slug = this.product.url_key;
-
-    window.location.href = `/service/${product_slug}`;
-
-}
-
+                            this.isAddingToCart = false;
+                        });
+                },
             },
         });
     </script>

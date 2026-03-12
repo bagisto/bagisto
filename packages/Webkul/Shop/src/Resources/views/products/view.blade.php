@@ -11,7 +11,6 @@
     $attributeData = collect($customAttributeValues)->filter(fn ($item) => ! empty($item['value']));
 @endphp
 
-<!-- SEO Meta Content -->
 @push('meta')
     <meta name="description" content="{{ trim($product->meta_description) != "" ? $product->meta_description : \Illuminate\Support\Str::limit(strip_tags($product->description), 120, '') }}"/>
 

@@ -3,23 +3,19 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Webkul\Checkout\Repositories\CartRepository;
-use Illuminate\Support\Facades\Event;
 use Webkul\Checkout\Facades\Cart;
-use Webkul\MagicAI\Facades\MagicAI;
-use Webkul\Sales\Repositories\OrderRepository;
-use Webkul\BookingProduct\Models\BookingProduct;
+use App\Http\Controllers\Controller;
+use Webkul\Shop\Http\Requests\Customer\AddressRequest;
+use Webkul\Checkout\Models\Cart as CartModel;
+use Webkul\Payment\Facades\Payment;
+use Webkul\Checkout\Models\CartAddress;
+use Webkul\Sales\Repositories\OrderItemRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Controller;
-use Webkul\BookingProduct\Models\BookingProductDefaultSlot;
-use Exception;
-use Illuminate\Support\Facades\DB;
-use Webkul\Checkout\Models\CartItem;
-use Webkul\Shop\Http\Requests\Customer\AddressRequest;
+use Webkul\Sales\Models\Order;
 
 class OnepageController extends Controller
 {
-
     protected $cartRepository;
 
     public function __construct(CartRepository $cartRepository)
@@ -27,218 +23,192 @@ class OnepageController extends Controller
         $this->cartRepository = $cartRepository;
     }
 
-    public function index(CartRepository $cartRepository){
 
-    $user = auth()->guard('customer')->user();
-
-    if (! $user && ! core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')) {
-        return redirect()->route('shop.customer.session.index');
-    }
-
-    if ($user?->is_suspended) {
-        session()->flash('warning', trans('shop::app.checkout.cart.suspended-account-message'));
-        return redirect()->route('shop.checkout.cart.index');
-    }
-
-    $carts = $user ? $cartRepository->findWhere(['customer_id' => $user->id]) : collect();
-
-    $cartItems = collect();
-
-    foreach ($carts as $cart) {
-        $cartItems = $cartItems->merge(
-            $cart->items()->with(['product','professional'])->get()
-        );
-    }
-
-    $subtotal = $cartItems->sum(fn($item) => $item->quantity * ($item->product->price ?? 0));
-    $discount = 0;
-    $total = $subtotal - $discount;
-    $tax = $subtotal * 0.05;
-
-    $availability = [];
-
-    foreach ($cartItems as $item) {
-
-        $productId = $item->product->id;
-
-        $booking = BookingProduct::where('product_id',$productId)->first();
-
-        if (!$booking) {
-            continue;
-        }
-
-        // get all slots once
-        $slots = BookingProductDefaultSlot::
-                    where('booking_product_id',$booking->id)
-                    ->pluck('slots')
-                    ->toArray();
-
-        $start = \Carbon\Carbon::parse($booking->available_from);
-        $end   = \Carbon\Carbon::parse($booking->available_to);
-
-        while ($start->lte($end)) {
-
-            $date = $start->format('Y-m-d');
-
-            $availability[$productId][$date] = $slots;
-
-            $start->addDay();
-        }
-    }
-
-    return view('shop::checkout.onepage.index', compact(
-        'cartItems',
-        'subtotal',
-        'discount',
-        'total',
-        'tax',
-        'availability'
-    ));
-}
-
-    public function success(OrderRepository $orderRepository)
+    // checkout for products that are in cart
+    public function checkoutProduct()
     {
-        if (! $order = $orderRepository->find(session('order_id'))) {
-            return redirect()->route('shop.checkout.cart.index');
-        }
+        $cart = Cart::getCart();
 
-        if (
-            core()->getConfigData('general.magic_ai.settings.enabled')
-            && core()->getConfigData('general.magic_ai.checkout_message.enabled')
-            && ! empty(core()->getConfigData('general.magic_ai.checkout_message.prompt'))
-        ) {
+        // check guest cart
+        if (!$cart) {
+            $guestCartId = session()->get('guest_cart_id');
 
-            try {
-                $model = core()->getConfigData('general.magic_ai.checkout_message.model');
+            if ($guestCartId) {
+                $cart = CartModel::find($guestCartId);
 
-                $response = MagicAI::setModel($model)
-                    ->setTemperature(0)
-                    ->setPrompt($this->getCheckoutPrompt($order))
-                    ->ask();
-
-                $order->checkout_message = $response;
-            } catch (\Exception $e) {
+                // IMPORTANT: tell Bagisto this is the current cart
+                if ($cart) {
+                    Cart::setCart($cart);
+                }
             }
         }
 
-        return view('shop::checkout.success', compact('order'));
+        if (!$cart || $cart->items->isEmpty()) {
+            return back()->with('error', 'Cart Is Empty');
+        }
+
+        $user = auth()->guard('customer')->user();
+
+        if (!$user && !core()->getConfigData('sales.checkout.shopping_cart.allow_guest_checkout')) {
+            return redirect()->route('shop.customer.session.index');
+        }
+
+        if ($user?->is_suspended) {
+            session()->flash('warning', trans('shop::app.checkout.cart.suspended-account-message'));
+            return redirect()->route('shop.checkout.cart.index');
+        }
+
+        // GET CART ITEMS
+        $cartItems = $cart->items()->with(['product'])->get();
+
+        // CALCULATE TOTALS
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->quantity * ($item->product->price ?? 0);
+        });
+
+        $discount = 0;
+
+        $tax = $subtotal * 0.05;
+
+        $total = $subtotal + $tax - $discount;
+
+        // IMPORTANT: collect totals for payment methods
+        Cart::collectTotals();
+
+        // LOAD PAYMENT METHODS
+        $methods = Payment::getSupportedPaymentMethods();
+
+        return view('shop::checkout.onepage.product_checkout', compact(
+            'cartItems',
+            'subtotal',
+            'discount',
+            'tax',
+            'total',
+            'methods'
+        ));
     }
 
-    /**
-     * Order success page.
-     *
-     * @param  \Webkul\Sales\Contracts\Order  $order
-     * @return string
-     */
-    public function getCheckoutPrompt($order)
+    public function checkoutProductFinal(Request $request)
     {
-        $prompt = core()->getConfigData('general.magic_ai.checkout_message.prompt');
+        $cart = Cart::getCart();
 
-        $products = '';
-
-        foreach ($order->items as $item) {
-            $products .= "Name: $item->name\n";
-            $products .= "Qty: $item->qty_ordered\n";
-            $products .= 'Price: '.core()->formatPrice($item->total)."\n\n";
+        if (!$cart || $cart->items->isEmpty()) {
+            return back()->with('error', 'Cart is empty');
         }
 
-        $prompt .= "\n\nProduct Details:\n $products";
+        $billing  = $request->billing ?? [];
+        $shipping = ($request->same_as_billing ?? false) ? $billing : ($request->shipping ?? []);
 
-        $prompt .= "Customer Details:\n $order->customer_full_name \n\n";
+        // Safely handle address arrays
+        $billingAddress  = is_array($billing['address'] ?? null) ? $billing['address'] : [];
+        $shippingAddress = is_array($shipping['address'] ?? null) ? $shipping['address'] : [];
 
-        $prompt .= "Current Locale:\n ".core()->getCurrentLocale()->name."\n\n";
+        $params = [
+            'billing' => [
+                'first_name' => $billing['first_name'] ?? '',
+                'last_name'  => $billing['last_name'] ?? '',
+                'email'      => $billing['email'] ?? '',
+                'phone'      => $billing['phone'] ?? '',
+                'address'    => [
+                    $billingAddress[0] ?? '',
+                    $billingAddress[1] ?? '',
+                ],
+                'city'     => $billing['city'] ?? '',
+                'state'    => $billing['state'] ?? '',
+                'country'  => $billing['country'] ?? '',
+                'postcode' => $billing['postcode'] ?? '',
+            ],
 
-        $prompt .= "Store Name:\n".core()->getCurrentChannel()->name;
+            'shipping' => [
+                'first_name' => $shipping['first_name'] ?? '',
+                'last_name'  => $shipping['last_name'] ?? '',
+                'email'      => $shipping['email'] ?? '',
+                'phone'      => $shipping['phone'] ?? '',
+                'address'    => [
+                    $shippingAddress[0] ?? '',
+                    $shippingAddress[1] ?? '',
+                ],
+                'city'     => $shipping['city'] ?? '',
+                'state'    => $shipping['state'] ?? '',
+                'country'  => $shipping['country'] ?? '',
+                'postcode' => $shipping['postcode'] ?? '',
+            ],
+        ];
 
-        return $prompt;
+        // Save addresses
+        Cart::saveAddresses($params);
+
+        // Save payment method safely
+        $paymentMethod = $request->payment['method'] ?? null;
+        if ($paymentMethod) {
+            Cart::savePaymentMethod(['method' => $paymentMethod]);
+        }
+
+
+
+        $orderData = [
+            'customer_id' => $cart->customer_id,
+            'cart_id'     => $cart->id,
+            'grand_total' => $cart->grand_total,
+            'sub_total'   => $cart->sub_total,
+            'discount'    => $cart->sub_total - $cart->grand_total,
+            'currency_code' => $cart->currency_code,
+            'channel_id'  => $cart->channel_id,
+            'payment'     => $request->payment,          // same structure as repository expects
+            'billing_address'  => $params['billing'],
+            'shipping_address' => $params['shipping'],
+            'items'       => $cart->items->map(function ($item) {
+                return [
+                    'product_id' => $item->product_id,
+                    'price'      => $item->price,
+                    'quantity'   => $item->quantity,
+                    'total'      => $item->total,
+                    'type'       => $item->type,
+                ];
+            })->toArray(),
+        ];
+
+        $order = app(\Webkul\Sales\Repositories\OrderRepository::class)
+                 ->createOrderIfNotThenRetry($orderData);
+
+        // Clear cart
+        $cart->items()->delete();
+        $cart->delete();
+
+        return redirect()->route('shop.checkout.success')
+                 ->with('order_id', $order->increment_id);
     }
 
+    public function productcheckoutSuccess()
+    {
+        $order = null;
 
-public function checkoutService(AddressRequest $req)
-{
-    $cart = Cart::getCart();
+        if (Auth::check()) {
+            // Logged-in user: get latest order
+            $order = Order::where('customer_id', Auth::id())
+                          ->latest()
+                          ->first();
+        } else {
+            // Guest user: get latest order from session
+            $guestOrderId = session()->get('guest_order_id');
+            if ($guestOrderId) {
+                $order = Order::find($guestOrderId);
+                // optionally remove it from session after fetching
+                session()->forget('guest_order_id');
+            }
+        }
 
-    if (!$cart) {
-        return redirect()->back()->with('error', 'Cart not found');
-    }
+        if (!$order) {
+            return redirect()->route('sbt.perfume.index')
+                             ->with('error', 'No recent order found.');
+        }
 
-    DB::beginTransaction();
-
-    try {
-
-        $user = Auth::user();
-
-        // Create Order
-        $orderId = DB::table('orders')->insertGetId([
-            'increment_id'            => 'ORD' . time(),
-            'status'                  => 'pending',
-            'payment_method'          => $paymentMethod,
-            'channel_name'            => core()->getCurrentChannel()->name,
-            'is_guest'                => 0,
-            'customer_email'          => $user->email,
-            'customer_first_name'     => $user->first_name,
-            'customer_last_name'      => $user->last_name,
-
-            'total_item_count'        => $cart->items_qty,
-            'total_qty_ordered'       => $cart->items_qty,
-
-            'base_currency_code'      => core()->getBaseCurrencyCode(),
-            'channel_currency_code'   => core()->getCurrentCurrencyCode(),
-            'order_currency_code'     => core()->getCurrentCurrencyCode(),
-
-            'grand_total'             => $cart->grand_total,
-            'base_grand_total'        => $cart->grand_total,
-
-            'sub_total'               => $cart->sub_total,
-            'base_sub_total'          => $cart->sub_total,
-
-            'customer_id'             => $user->id,
-            'customer_type'           => 'customer',
-
-            'channel_id'              => core()->getCurrentChannel()->id,
-            'channel_type'            => 'Webkul\Channel\Models\Channel',
-
-            'cart_id'                 => $cart->id,
-
-            'created_at'              => now(),
-            'updated_at'              => now(),
+        // Pass order data to the view
+        return view('shop::checkout.success', [
+            'orderId' => $order->id,
+            'message' => 'Your order has been placed successfully!',
         ]);
-
-
-        // Fetch Cart Items
-        $cartItems = CartItem::where('cart_id', $cart->id)->get();
-
-        foreach ($cartItems as $item) {
-
-            DB::table('order_items')->insert([
-                'order_id'        => $orderId,
-                'method'          =>  $paymentMethod,
-                'product_id'      => $item->product_id,
-                'type'            => $item->type,
-                'name'            => $item->product->name ?? 'Service',
-                'qty_ordered'     => $item->quantity,
-
-                'price'           => $item->price,
-                'base_price'      => $item->price,
-
-                'total'           => $item->total,
-                'base_total'      => $item->total,
-
-                'created_at'      => now(),
-                'updated_at'      => now(),
-            ]);
-        }
-DB::commit();
-
-        return redirect()->route('shop.checkout.page', $orderId);
-
-    } catch (\Exception $e) {
-
-        DB::rollBack();
-
-        return redirect()->back()->with('error', $e->getMessage());
     }
-}
 
-   
+
 }
