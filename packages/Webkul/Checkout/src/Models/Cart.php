@@ -5,6 +5,9 @@ namespace Webkul\Checkout\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\Checkout\Contracts\Cart as CartContract;
 use Webkul\Checkout\Database\Factories\CartFactory;
 use Webkul\Core\Models\ChannelProxy;
@@ -44,7 +47,7 @@ class Cart extends Model implements CartContract
     /**
      * Get the customer record associated with the address.
      */
-    public function customer(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(CustomerProxy::modelClass());
     }
@@ -52,7 +55,7 @@ class Cart extends Model implements CartContract
     /**
      * Get the channel record associated with the address.
      */
-    public function channel(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function channel(): BelongsTo
     {
         return $this->belongsTo(ChannelProxy::modelClass());
     }
@@ -60,16 +63,17 @@ class Cart extends Model implements CartContract
     /**
      * To get relevant associated items with the cart instance.
      */
-    public function items(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function items(): HasMany
     {
         return $this->hasMany(CartItemProxy::modelClass())
-            ->whereNull('parent_id');
+            ->whereNull('parent_id')
+            ->with(['child', 'children']);
     }
 
     /**
      * To get all the associated items with the cart instance even the parent and child items of configurable products.
      */
-    public function all_items(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function all_items(): HasMany
     {
         return $this->hasMany(CartItemProxy::modelClass());
     }
@@ -77,7 +81,7 @@ class Cart extends Model implements CartContract
     /**
      * Get the billing address for the cart.
      */
-    public function billing_address(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function billing_address(): HasOne
     {
         return $this->hasOne(CartAddressProxy::modelClass())->where('address_type', CartAddress::ADDRESS_TYPE_BILLING);
     }
@@ -85,7 +89,7 @@ class Cart extends Model implements CartContract
     /**
      * Get the shipping address for the cart.
      */
-    public function shipping_address(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function shipping_address(): HasOne
     {
         return $this->hasOne(CartAddressProxy::modelClass())->where('address_type', CartAddress::ADDRESS_TYPE_SHIPPING);
     }
@@ -93,7 +97,7 @@ class Cart extends Model implements CartContract
     /**
      * Get the shipping rates for the cart.
      */
-    public function shipping_rates(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function shipping_rates(): HasMany
     {
         return $this->hasMany(CartShippingRateProxy::modelClass());
     }
@@ -119,7 +123,7 @@ class Cart extends Model implements CartContract
     /**
      * Get the payment associated with the cart.
      */
-    public function payment(): \Illuminate\Database\Eloquent\Relations\HasOne
+    public function payment(): HasOne
     {
         return $this->hasOne(CartPaymentProxy::modelClass());
     }
@@ -136,6 +140,20 @@ class Cart extends Model implements CartContract
         }
 
         return false;
+    }
+
+    /**
+     * Checks if cart has only stockable items.
+     */
+    public function hasOnlyStockableItems(): bool
+    {
+        foreach ($this->items as $item) {
+            if (! $item->product->isStockable()) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**

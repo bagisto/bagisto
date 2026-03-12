@@ -300,7 +300,7 @@ describe('two factor authentication backup codes email notifications', function 
 
     it('handles email failure gracefully', function () {
         // Arrange
-        Mail::shouldReceive('to->send')->andThrow(new \Exception('Mail server error'));
+        Mail::shouldReceive('to->send')->andThrow(new Exception('Mail server error'));
 
         $secret = $this->google2fa->generateSecretKey();
 

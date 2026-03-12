@@ -177,7 +177,6 @@
                                 :value="old($currentLocale->code)['description'] ?? ($category->translate($currentLocale->code)['description'] ?? '')"
                                 :label="trans('admin::app.catalog.categories.edit.description')"
                                 :tinymce="true"
-                                :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
                             />
 
                             <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[description]" />
@@ -231,7 +230,11 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Component -->
-                    <x-admin::seo/>
+                    <x-admin::seo
+                        meta-title-field="{{ $currentLocale->code }}[meta_title]"
+                        url-key-field="{{ $currentLocale->code }}[slug]"
+                        meta-description-field="{{ $currentLocale->code }}[meta_description]"
+                    />
 
                     <div class="mt-8">
                         <!-- Meta Title -->

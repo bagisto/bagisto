@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids\Marketing\SearchSEO;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
@@ -10,7 +11,7 @@ class SearchSynonymDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function prepareQueryBuilder()
     {
@@ -63,7 +64,7 @@ class SearchSynonymDataGrid extends DataGrid
      */
     public function prepareActions()
     {
-        if (bouncer()->hasPermission('marketing.search_synonyms.edit')) {
+        if (bouncer()->hasPermission('marketing.search_seo.search_synonyms.edit')) {
             $this->addAction([
                 'index' => 'edit',
                 'icon' => 'icon-edit',
@@ -76,7 +77,7 @@ class SearchSynonymDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('marketing.search_synonyms.delete')) {
+        if (bouncer()->hasPermission('marketing.search_seo.search_synonyms.delete')) {
             $this->addAction([
                 'index' => 'delete',
                 'icon' => 'icon-delete',

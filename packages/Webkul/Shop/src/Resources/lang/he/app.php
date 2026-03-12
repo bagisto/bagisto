@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'אסמכתת הזמנה',
                         'rma-status' => 'סטטוס הבקשה',
                         'create' => 'נוצר בתאריך',
+                        'quantity' => 'כמות',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'תרגום',
                 'translating' => 'מתרגם...',
                 'write-a-review' => 'כתוב ביקורת',
+            ],
+
+            'contact-us' => [
+                'about' => 'שלח לנו הודעה ונחזור אליך בהקדם האפשרי',
+                'desc' => 'מה על דעתך?',
+                'describe-here' => 'תיאור כאן',
+                'email' => 'אימייל',
+                'message' => 'הודעה',
+                'name' => 'שם',
+                'phone-number' => 'מספר טלפון',
+                'submit' => 'שלח',
+                'title' => 'צור קשר',
             ],
 
             'add-to-cart' => 'הוסף לעגלת הקניות',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'לא ניתן לעדכן את סטטוס ה-RMA מכיוון שהחשבונית להזמנה זו לא נוצרה.',
             'permission-denied' => 'אתה מחובר',
             'rma-disabled' => 'RMA מנוטרל עבור מוצר זה',
+            'reopen-not-allowed' => 'פתיחה מחדש של בקשת RMA זו אינה מותרת.',
             'send-message' => ':name נשלח בהצלחה.',
             'update-success' => ':name עודכן בהצלחה.',
         ],

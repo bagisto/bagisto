@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Numer zamówienia',
                         'rma-status' => 'Status zgłoszenia',
                         'create' => 'Utworzono',
+                        'quantity' => 'Ilość',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'Tłumaczyć',
                 'translating' => 'Tłumaczenie...',
                 'write-a-review' => 'Napisz recenzję',
+            ],
+
+            'contact-us' => [
+                'about' => 'Napisz do nas, a odpowiemy tak szybko, jak to możliwe',
+                'desc' => 'Co Cię nurtuje?',
+                'describe-here' => 'Opisz tutaj',
+                'email' => 'E-mail',
+                'message' => 'Wiadomość',
+                'name' => 'Imię',
+                'phone-number' => 'Numer telefonu',
+                'submit' => 'Wyślij',
+                'title' => 'Skontaktuj się z nami',
             ],
 
             'add-to-cart' => 'Dodaj do koszyka',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'Status RMA nie może zostać zaktualizowany, ponieważ faktura za to zamówienie nie została wystawiona.',
             'permission-denied' => 'Jesteś zalogowany',
             'rma-disabled' => 'RMA jest wyłączone dla tego produktu',
+            'reopen-not-allowed' => 'Ponowne otwarcie tego żądania RMA nie jest dozwolone.',
             'send-message' => ':name zostało pomyślnie wysłane.',
             'update-success' => ':name zostało pomyślnie zaktualizowane.',
         ],

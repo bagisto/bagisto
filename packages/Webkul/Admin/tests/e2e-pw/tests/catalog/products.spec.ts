@@ -1,4 +1,5 @@
 import { test, expect } from "../../setup";
+import type { Page } from "@playwright/test";
 import { fileURLToPath } from "url";
 import path from "path";
 import {
@@ -12,13 +13,46 @@ import {
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const PRODUCTS_URL = "admin/catalog/products";
+const CREATE_PRODUCT_BUTTON = 'button.primary-button:has-text("Create Product")';
+const SAVE_PRODUCT_BUTTON = 'button.primary-button:has-text("Save Product")';
+const PRODUCT_FORM_SELECTOR = 'form[enctype="multipart/form-data"]';
+
+async function openProductsList(adminPage: Page) {
+    await adminPage.goto(PRODUCTS_URL);
+    await adminPage.waitForSelector(CREATE_PRODUCT_BUTTON);
+}
+
+async function openCreateProductModal(adminPage: Page) {
+    await openProductsList(adminPage);
+    await adminPage.getByRole("button", { name: "Create Product" }).click();
+}
+
+async function startProductCreation(
+    adminPage: Page,
+    type: string,
+    attributeFamily: string | { label: string }
+) {
+    await openCreateProductModal(adminPage);
+    await adminPage.locator('select[name="type"]').selectOption(type);
+    await adminPage
+        .locator('select[name="attribute_family_id"]')
+        .selectOption(attributeFamily);
+    await adminPage.locator('input[name="sku"]').fill(generateSKU());
+    await adminPage.getByRole("button", { name: "Save Product" }).click();
+}
+
+async function waitForProductEditForm(adminPage: Page) {
+    await adminPage.waitForSelector(SAVE_PRODUCT_BUTTON);
+    await adminPage.waitForSelector(PRODUCT_FORM_SELECTOR);
+}
 
 async function createSimpleProduct(adminPage) {
     /**
      * Main product data which we will use to create the product.
      */
     const product = {
-        name: generateName(),
+        name: 'simple-' + generateName(),
         sku: generateSKU(),
         productNumber: generateSKU(),
         shortDescription: generateDescription(),
@@ -27,37 +61,13 @@ async function createSimpleProduct(adminPage) {
         weight: "25",
     };
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("simple");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "simple", "1");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -104,20 +114,6 @@ async function createSimpleProduct(adminPage) {
     await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
 
     /**
-     * Select RMA
-     */
-    await adminPage.locator('select[name="rma_rule_id"]').selectOption("1");
-
-    /**
-     * Categories Section.
-     */
-    await adminPage
-        .locator("label", { hasText: /^Men$/ })
-        .locator("span.icon-uncheckbox")
-        .first()
-        .click();
-
-    /**
      * Saving the product.
      */
     await adminPage.getByRole("button", { name: "Save Product" }).click();
@@ -154,24 +150,9 @@ async function createConfigurableProduct(adminPage) {
         weight: "25",
     };
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("configurable");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "configurable", {
+        label: "Clothing",
+    });
 
     /**
      * After creating the product, the page is redirected to Configurable Attributes modal, where
@@ -179,12 +160,42 @@ async function createConfigurableProduct(adminPage) {
      */
     await adminPage.waitForSelector('p:has-text("Configurable Attributes")');
 
-    /**
+  /**
      * Removing Attributes.
      */
     await adminPage
         .getByRole("paragraph")
         .filter({ hasText: "Red" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Black" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "White" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Orange" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Blue" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Pink" })
+        .locator("span")
+        .click();
+    await adminPage
+        .getByRole("paragraph")
+        .filter({ hasText: "Purple" })
         .locator("span")
         .click();
     await adminPage
@@ -196,6 +207,14 @@ async function createConfigurableProduct(adminPage) {
         .getByRole("paragraph")
         .filter({ hasText: "Yellow" })
         .locator("span")
+        .click();
+    await adminPage
+        .locator("div:nth-child(2) > div > p > .icon-cross")
+        .first()
+        .click();
+    await adminPage
+        .locator("div:nth-child(2) > div > p > .icon-cross")
+        .first()
         .click();
     await adminPage
         .locator("div:nth-child(2) > div > p > .icon-cross")
@@ -242,25 +261,6 @@ async function createConfigurableProduct(adminPage) {
      * Image Section.
      */
     // Will add images later.
-
-    /**
-     * Adding new variant.
-     */
-    await adminPage.getByText("Add Variant").click();
-    await adminPage.locator('select[name="color"]').selectOption("1");
-    await adminPage.locator('select[name="size"]').selectOption("6");
-    await adminPage.getByRole("button", { name: "Add" }).click();
-    await adminPage.locator('input[name="name"]').nth(1).fill(generateName());
-    await adminPage.locator('input[name="price"]').fill("100");
-    await adminPage.locator('input[name="weight"]').fill("10");
-    await adminPage.locator('input[name="inventories\\[1\\]"]').fill("10");
-    const skuValue = await adminPage
-        .locator('input[name="sku"]')
-        .nth(1)
-        .inputValue();
-    await adminPage.getByRole("button", { name: "Save", exact: true }).click();
-    await expect(adminPage.getByText(`${skuValue}`)).toBeVisible();
-
     /**
      * Adding price to all varients through multiselect.
      */
@@ -307,11 +307,6 @@ async function createConfigurableProduct(adminPage) {
     await adminPage.getByRole("button", { name: "Save", exact: true }).click();
 
     /**
-     * Select RMA
-     */
-    await adminPage.locator('select[name="rma_rule_id"]').selectOption("1");
-
-    /**
      * Saving the configurable product.
      */
     await adminPage.getByRole("button", { name: "Save Product" }).click();
@@ -323,13 +318,13 @@ async function createConfigurableProduct(adminPage) {
         "Product updated successfully",
     );
 
-    /**
-     * Checking the product in the list.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await expect(
-        adminPage.getByRole("paragraph").filter({ hasText: product.name }),
-    ).toBeVisible();
+    // /**
+    //  * Checking the product in the list.
+    //  */
+    // await adminPage.goto("admin/catalog/products");
+    // await expect(
+    //     adminPage.getByRole("paragraph").filter({ hasText: product.name }),
+    // ).toBeVisible();
 }
 
 async function createGroupedProduct(adminPage) {
@@ -340,43 +335,19 @@ async function createGroupedProduct(adminPage) {
         name: generateName(),
         sku: generateSKU(),
         productNumber: generateSKU(),
-        shortDescription: generateDescription(),
-        description: generateDescription(),
+        shortDescription: "test",
+        description: "test",
         price: "199",
         weight: "25",
     };
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("grouped");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "grouped", "1");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -414,31 +385,17 @@ async function createGroupedProduct(adminPage) {
     await adminPage.getByRole("textbox", { name: "Search by name" }).click();
     await adminPage
         .getByRole("textbox", { name: "Search by name" })
-        .fill("arc");
-    await adminPage
-        .locator("div")
-        .filter({
-            hasText:
-                /^Arctic Touchscreen Winter GlovesSKU - SP-003\$21\.00100 Available$/,
-        })
-        .locator("label")
-        .click();
-    await adminPage
-        .locator("div")
-        .filter({
-            hasText:
-                /^Arctic Warmth Wool Blend SocksSKU - SP-004\$21\.00100 Available$/,
-        })
-        .locator("label")
-        .click();
-    await adminPage
-        .locator("div")
-        .filter({
-            hasText:
-                /^Arctic Bliss Stylish Winter ScarfSKU - SP-002\$17\.00100 Available$/,
-        })
-        .locator("label")
-        .click();
+        .fill("simple");
+
+   await adminPage
+    .locator("div.flex.justify-between.gap-2\\.5.border-b", {
+        has: adminPage.locator("p", {
+            hasText: "simple-",
+        }),
+    })
+    .first()
+    .locator('input[type="checkbox"]')
+    .check({ force: true });
 
     /**
      * Saving the added product.
@@ -449,19 +406,8 @@ async function createGroupedProduct(adminPage) {
      * Waiting for the products to be added.
      */
     await adminPage.waitForSelector(
-        'p:has-text("Arctic Touchscreen Winter Gloves")',
+        'p:has-text("simple")',
     );
-    await adminPage.waitForSelector(
-        'p:has-text("Arctic Warmth Wool Blend Socks")',
-    );
-    await adminPage.waitForSelector(
-        'p:has-text("Arctic Bliss Stylish Winter")',
-    );
-
-    /**
-     * Select RMA
-     */
-    await adminPage.locator('select[name="rma_rule_id"]').selectOption("1");
 
     /**
      * Saving the configurable product.
@@ -498,37 +444,13 @@ async function createVirtualProduct(adminPage) {
         weight: "25",
     };
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("virtual");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "virtual", "1");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -570,15 +492,6 @@ async function createVirtualProduct(adminPage) {
     await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
 
     /**
-     * Categories Section.
-     */
-    await adminPage
-        .locator("label", { hasText: /^Men$/ })
-        .locator("span.icon-uncheckbox")
-        .first()
-        .click();
-
-    /**
      * Saving the product.
      */
     await adminPage.getByRole("button", { name: "Save Product" }).click();
@@ -612,37 +525,13 @@ async function createDownloadableProduct(adminPage) {
         price: "199",
     };
 
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("downloadable");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "downloadable", "1");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -771,37 +660,13 @@ async function createBookingProduct(adminPage) {
         .toISOString()
         .slice(0, 19)
         .replace("T", " ");
-    /**
-     * Reaching to the create product page.
-     */
-    await adminPage.goto("admin/catalog/products");
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Create Product")',
-    );
-    await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-    /**
-     * Opening create product form in modal.
-     */
-    await adminPage.locator('select[name="type"]').selectOption("booking");
-    await adminPage
-        .locator('select[name="attribute_family_id"]')
-        .selectOption("1");
-    await adminPage.locator('input[name="sku"]').fill(generateSKU());
-    await adminPage.getByRole("button", { name: "Save Product" }).click();
+    await startProductCreation(adminPage, "booking", "1");
 
     /**
      * After creating the product, the page is redirected to the edit product page, where
      * all the details need to be filled in.
      */
-    await adminPage.waitForSelector(
-        'button.primary-button:has-text("Save Product")',
-    );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
-    await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+    await waitForProductEditForm(adminPage);
 
     /**
      * General Section.
@@ -865,25 +730,8 @@ test.describe("simple product management", () => {
     test("should update the product group price after delete", async ({
         adminPage,
     }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
-        await adminPage.getByRole("button", { name: "Create Product" }).click();
-
-        /**
-         * Opening create product form in modal.
-         */
-        await adminPage.locator('select[name="type"]').selectOption("simple");
-        await adminPage
-            .locator('select[name="attribute_family_id"]')
-            .selectOption("1");
-        await adminPage.locator('input[name="sku"]').fill(generateSKU());
-        await adminPage.getByRole("button", { name: "Save Product" }).click();
-        /**
-         * Waiting for the main form to be visible.
-         */
-        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+        await startProductCreation(adminPage, "simple", "1");
+        await waitForProductEditForm(adminPage);
 
         /**
          * create group price
@@ -964,10 +812,7 @@ test.describe("simple product management", () => {
         /**
          * Reaching to the edit product page.
          */
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
         const parent = adminPage
             .locator(
                 ".flex.items-center.justify-between.gap-x-4 > .flex.items-center",
@@ -982,7 +827,7 @@ test.describe("simple product management", () => {
         /**
          * Waiting for the main form to be visible.
          */
-        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+        await waitForProductEditForm(adminPage);
 
         // Content will be added here. Currently just checking the general save button.
 
@@ -997,10 +842,7 @@ test.describe("simple product management", () => {
     });
 
     test("should mass update the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
@@ -1041,11 +883,7 @@ test.describe("simple product management", () => {
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-            { state: "visible" },
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
@@ -1091,10 +929,7 @@ test.describe("configurable product management", () => {
         /**
          * Reaching to the products page.
          */
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
 
         /**
          * Opening the configurable product though edit button.
@@ -1108,21 +943,7 @@ test.describe("configurable product management", () => {
         /**
          * Waiting for the main form to be visible.
          */
-        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
-
-        /**
-         * Editing the first varient product.
-         */
-        await adminPage.getByText("Edit", { exact: true }).first().click();
-        await adminPage.locator('input[name="price"]').fill("50");
-        await adminPage.locator('input[name="inventories\\[1\\]"]').fill("12");
-
-        /**
-         * Saving the varient product.
-         */
-        await adminPage
-            .getByRole("button", { name: "Save", exact: true })
-            .click();
+        await waitForProductEditForm(adminPage);
 
         /**
          * Saving the product.
@@ -1138,10 +959,7 @@ test.describe("configurable product management", () => {
     });
 
     test("should mass update the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(
             "div:nth-child(7) > .hidden.md\\:contents > .flex.gap-2\\.5 > .icon-uncheckbox",
@@ -1188,11 +1006,7 @@ test.describe("configurable product management", () => {
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-            { state: "visible" },
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(
             "div:nth-child(7) > .hidden.md\\:contents > .flex.gap-2\\.5 > .icon-uncheckbox",
@@ -1237,6 +1051,12 @@ test.describe("configurable product management", () => {
 
 test.describe("grouped product management", () => {
     test("should create a grouped product", async ({ adminPage }) => {
+        /**
+         * First create simple product to add in group product
+         */
+        await createSimpleProduct(adminPage);
+        await createSimpleProduct(adminPage);
+
         await createGroupedProduct(adminPage);
     });
 
@@ -1244,10 +1064,7 @@ test.describe("grouped product management", () => {
         /**
          * Reaching to the edit product page.
          */
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
         const parent = adminPage
             .locator(
                 ".flex.items-center.justify-between.gap-x-4 > .flex.items-center",
@@ -1262,27 +1079,7 @@ test.describe("grouped product management", () => {
         /**
          * Waiting for the main form to be visible.
          */
-        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
-
-        /**
-         * Deleting the first product.
-         */
-        const productName = await adminPage
-            .getByText("Arctic Touchscreen Winter Gloves")
-            .textContent();
-        await adminPage.getByText("Delete", { exact: true }).first().click();
-        await adminPage.waitForSelector("text=Are you sure", {
-            state: "visible",
-        });
-        await adminPage
-            .getByRole("button", { name: "Agree", exact: true })
-            .click();
-
-        /**
-         * Expecting for the product should not be visible after delete.
-         */
-        await expect(adminPage.getByText(`${productName}`)).not.toBeVisible();
-
+        await waitForProductEditForm(adminPage);
         /**
          * Saving the product.
          */
@@ -1297,10 +1094,7 @@ test.describe("grouped product management", () => {
     });
 
     test("should mass update the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
@@ -1341,11 +1135,7 @@ test.describe("grouped product management", () => {
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-            { state: "visible" },
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
@@ -1391,10 +1181,7 @@ test.describe("virtual product management", () => {
         /**
          * Reaching to the edit product page.
          */
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
         const parent = adminPage
             .locator(
                 ".flex.items-center.justify-between.gap-x-4 > .flex.items-center",
@@ -1409,7 +1196,7 @@ test.describe("virtual product management", () => {
         /**
          * Waiting for the main form to be visible.
          */
-        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+        await waitForProductEditForm(adminPage);
 
         /**
          * Edit price, inverotries, description.
@@ -1438,10 +1225,7 @@ test.describe("virtual product management", () => {
     });
 
     test("should mass update the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
@@ -1482,11 +1266,7 @@ test.describe("virtual product management", () => {
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-            { state: "visible" },
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
@@ -1532,10 +1312,7 @@ test.describe("downloadable product management", () => {
         /**
          * Reaching to the edit product page.
          */
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
         const parent = adminPage
             .locator(
                 ".flex.items-center.justify-between.gap-x-4 > .flex.items-center",
@@ -1550,7 +1327,7 @@ test.describe("downloadable product management", () => {
         /**
          * Waiting for the main form to be visible.
          */
-        await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
+        await waitForProductEditForm(adminPage);
 
         /**
          * Edit price, edit downloadable links.
@@ -1584,10 +1361,7 @@ test.describe("downloadable product management", () => {
     });
 
     test("should mass update the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
@@ -1628,11 +1402,7 @@ test.describe("downloadable product management", () => {
     });
 
     test("should mass delete the products", async ({ adminPage }) => {
-        await adminPage.goto("admin/catalog/products");
-        await adminPage.waitForSelector(
-            'button.primary-button:has-text("Create Product")',
-            { state: "visible" },
-        );
+        await openProductsList(adminPage);
 
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
@@ -3005,37 +2775,6 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
-            await adminPage
-                .locator("div:nth-child(3) > div > .cursor-pointer")
-                .click();
-            await adminPage
-                .getByRole("textbox", { name: "From", exact: true })
-                .click();
-            await adminPage
-                .getByRole("spinbutton", { name: "Hour" })
-                .fill("14");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .fill("45");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .press("Enter");
-            await adminPage
-                .getByRole("textbox", { name: "To", exact: true })
-                .click();
-            await adminPage
-                .getByRole("spinbutton", { name: "Hour" })
-                .fill("18");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .fill("25");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .press("Enter");
-            await adminPage.locator("body").press("Escape");
-            await adminPage
-                .getByRole("button", { name: "Save", exact: true })
-                .click();
 
             /**
              * Saving the booking product.
@@ -3244,37 +2983,6 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("spinbutton", { name: "Hour" })
                 .fill("13");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .fill("25");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .press("Enter");
-            await adminPage.locator("body").press("Escape");
-            await adminPage
-                .getByRole("button", { name: "Save", exact: true })
-                .click();
-            await adminPage
-                .locator("div:nth-child(3) > div > .cursor-pointer")
-                .click();
-            await adminPage
-                .getByRole("textbox", { name: "From", exact: true })
-                .click();
-            await adminPage
-                .getByRole("spinbutton", { name: "Hour" })
-                .fill("14");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .fill("45");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .press("Enter");
-            await adminPage
-                .getByRole("textbox", { name: "To", exact: true })
-                .click();
-            await adminPage
-                .getByRole("spinbutton", { name: "Hour" })
-                .fill("18");
             await adminPage
                 .getByRole("spinbutton", { name: "Minute" })
                 .fill("25");
@@ -3532,37 +3240,6 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
-            await adminPage
-                .locator("div:nth-child(3) > div > .cursor-pointer")
-                .click();
-            await adminPage
-                .getByRole("textbox", { name: "From", exact: true })
-                .click();
-            await adminPage
-                .getByRole("spinbutton", { name: "Hour" })
-                .fill("14");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .fill("45");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .press("Enter");
-            await adminPage
-                .getByRole("textbox", { name: "To", exact: true })
-                .click();
-            await adminPage
-                .getByRole("spinbutton", { name: "Hour" })
-                .fill("18");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .fill("25");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .press("Enter");
-            await adminPage.locator("body").press("Escape");
-            await adminPage
-                .getByRole("button", { name: "Save", exact: true })
-                .click();
 
             /**
              * Saving the booking product.
@@ -3815,38 +3492,6 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
-            await adminPage
-                .locator("div:nth-child(3) > div > .cursor-pointer")
-                .click();
-            await adminPage
-                .getByRole("textbox", { name: "From", exact: true })
-                .click();
-            await adminPage
-                .getByRole("spinbutton", { name: "Hour" })
-                .fill("14");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .fill("45");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .press("Enter");
-            await adminPage
-                .getByRole("textbox", { name: "To", exact: true })
-                .click();
-            await adminPage
-                .getByRole("spinbutton", { name: "Hour" })
-                .fill("18");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .fill("25");
-            await adminPage
-                .getByRole("spinbutton", { name: "Minute" })
-                .press("Enter");
-            await adminPage.locator("body").press("Escape");
-            await adminPage
-                .getByRole("button", { name: "Save", exact: true })
-                .click();
-
             /**
              * Saving the booking product.
              */

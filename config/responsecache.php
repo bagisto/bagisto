@@ -1,5 +1,11 @@
 <?php
 
+use Spatie\ResponseCache\CacheProfiles\CacheAllSuccessfulGetRequests;
+use Spatie\ResponseCache\Replacers\CsrfTokenReplacer;
+use Spatie\ResponseCache\Serializers\DefaultSerializer;
+use Webkul\FPC\Hasher\DefaultHasher;
+use Webkul\FPC\Replacers\FlashMessagesReplacer;
+
 return [
     /*
      * Determine if the response cache middleware should be enabled.
@@ -13,7 +19,7 @@ return [
      *  You can provide your own class given that it implements the
      *  CacheProfile interface.
      */
-    'cache_profile' => Spatie\ResponseCache\CacheProfiles\CacheAllSuccessfulGetRequests::class,
+    'cache_profile' => CacheAllSuccessfulGetRequests::class,
 
     /*
      *  Optionally, you can specify a header that will force a cache bypass.
@@ -69,8 +75,8 @@ return [
      * Each replacer must implement the Replacer interface.
      */
     'replacers' => [
-        \Spatie\ResponseCache\Replacers\CsrfTokenReplacer::class,
-        \Webkul\FPC\Replacers\FlashMessagesReplacer::class,
+        CsrfTokenReplacer::class,
+        FlashMessagesReplacer::class,
     ],
 
     /*
@@ -86,10 +92,10 @@ return [
      * This class is responsible for generating a hash for a request. This hash
      * is used to look up a cached response.
      */
-    'hasher' => \Webkul\FPC\Hasher\DefaultHasher::class,
+    'hasher' => DefaultHasher::class,
 
     /*
      * This class is responsible for serializing responses.
      */
-    'serializer' => \Spatie\ResponseCache\Serializers\DefaultSerializer::class,
+    'serializer' => DefaultSerializer::class,
 ];

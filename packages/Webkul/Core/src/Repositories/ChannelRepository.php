@@ -3,6 +3,7 @@
 namespace Webkul\Core\Repositories;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Contracts\Channel;
 use Webkul\Core\Eloquent\Repository;
 
 class ChannelRepository extends Repository
@@ -18,7 +19,7 @@ class ChannelRepository extends Repository
     /**
      * Create.
      *
-     * @return \Webkul\Core\Contracts\Channel
+     * @return Channel
      */
     public function create(array $data)
     {
@@ -52,7 +53,7 @@ class ChannelRepository extends Repository
      * Update.
      *
      * @param  int  $id
-     * @return \Webkul\Core\Contracts\Channel
+     * @return Channel
      */
     public function update(array $data, $id)
     {
@@ -75,7 +76,7 @@ class ChannelRepository extends Repository
      * Upload images.
      *
      * @param  array  $data
-     * @param  \Webkul\Core\Contracts\Channel  $channel
+     * @param  Channel  $channel
      * @param  string  $type
      * @return void
      */

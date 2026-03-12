@@ -73,6 +73,6 @@ class Indexer extends Command
 
         $end = microtime(true);
 
-        echo 'The code took '.($end - $start)." seconds to complete.\n";
+        $this->components->success('The code took '.(round($end - $start, 2)).' seconds to complete.');
     }
 }

@@ -34,7 +34,6 @@ export class ProductCreation {
         await this.openCreateModal(product.type, product.sku);
         await this.fillCommonDetails(product);
         await this.handleProductType(product);
-        await this.page.locator('label[for="allow_rma"]').click();
         await this.saveAndVerify();
         this.saveProductToJson(product);
     }
@@ -70,7 +69,6 @@ export class ProductCreation {
         );
     }
 
-
     /**
      * PRODUCT TYPE HANDLERS
      */
@@ -96,6 +94,7 @@ export class ProductCreation {
             await this.locators.productInventory
                 .first()
                 .fill(product.inventory.toString());
+        await this.page.locator('label[for="allow_rma"]').click();
         await this.locators.rmaSelection.selectOption("1");
     }
 

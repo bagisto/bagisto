@@ -3,6 +3,7 @@
 namespace Webkul\Product\Helpers\Indexers;
 
 use Illuminate\Support\Facades\Schema;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductFlatRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -105,7 +106,7 @@ class Flat extends AbstractIndexer
     /**
      * Refresh product flat indices
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function refresh($product)
@@ -124,7 +125,7 @@ class Flat extends AbstractIndexer
     /**
      * Creates product flat
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function updateOrCreate($product)
@@ -195,7 +196,7 @@ class Flat extends AbstractIndexer
     }
 
     /**
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return mixed
      */
     public function getCachedFamilyAttributes($product)

@@ -106,26 +106,26 @@ class StatusDataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        if (bouncer()->hasPermission('sales.rma-status.edit')) {
+        if (bouncer()->hasPermission('sales.rma.statuses.edit')) {
             $this->addAction([
                 'icon' => 'icon-edit',
                 'title' => trans('admin::app.sales.rma.rma-status.index.datagrid.edit'),
                 'type' => 'Edit',
                 'method' => 'GET',
                 'url' => function ($row) {
-                    return route('admin.sales.rma.rma-status.edit', $row->id);
+                    return route('admin.sales.rma.statuses.edit', $row->id);
                 },
             ]);
         }
 
-        if (bouncer()->hasPermission('sales.rma-status.delete')) {
+        if (bouncer()->hasPermission('sales.rma.statuses.delete')) {
             $this->addAction([
                 'icon' => 'icon-delete',
                 'title' => trans('admin::app.sales.rma.rma-status.index.datagrid.delete'),
                 'type' => 'Delete',
                 'method' => 'DELETE',
                 'url' => function ($row) {
-                    return route('admin.sales.rma.rma-status.delete', $row->id);
+                    return route('admin.sales.rma.statuses.delete', $row->id);
                 },
             ]);
         }
@@ -136,11 +136,11 @@ class StatusDataGrid extends DataGrid
      */
     public function prepareMassActions(): void
     {
-        if (bouncer()->hasPermission('sales.rma-status.edit')) {
+        if (bouncer()->hasPermission('sales.rma.statuses.edit')) {
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.rma-status.index.datagrid.update'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.rma-status.mass-update'),
+                'url' => route('admin.sales.rma.statuses.mass-update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.sales.rma.rma-status.index.datagrid.enabled'),
@@ -153,11 +153,11 @@ class StatusDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('sales.rma-status.delete')) {
+        if (bouncer()->hasPermission('sales.rma.statuses.delete')) {
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.rma-status.index.datagrid.delete'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.rma-status.mass-delete'),
+                'url' => route('admin.sales.rma.statuses.mass-delete'),
             ]);
         }
     }

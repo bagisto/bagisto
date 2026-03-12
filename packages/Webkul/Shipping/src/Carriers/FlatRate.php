@@ -24,7 +24,7 @@ class FlatRate extends AbstractShipping
     /**
      * Calculate rate for flatrate.
      *
-     * @return \Webkul\Checkout\Models\CartShippingRate|false
+     * @return CartShippingRate|false
      */
     public function calculate()
     {

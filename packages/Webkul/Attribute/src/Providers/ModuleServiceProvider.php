@@ -2,6 +2,12 @@
 
 namespace Webkul\Attribute\Providers;
 
+use Webkul\Attribute\Models\Attribute;
+use Webkul\Attribute\Models\AttributeFamily;
+use Webkul\Attribute\Models\AttributeGroup;
+use Webkul\Attribute\Models\AttributeOption;
+use Webkul\Attribute\Models\AttributeOptionTranslation;
+use Webkul\Attribute\Models\AttributeTranslation;
 use Webkul\Core\Providers\CoreModuleServiceProvider;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
@@ -12,11 +18,11 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\Attribute\Models\Attribute::class,
-        \Webkul\Attribute\Models\AttributeFamily::class,
-        \Webkul\Attribute\Models\AttributeGroup::class,
-        \Webkul\Attribute\Models\AttributeOption::class,
-        \Webkul\Attribute\Models\AttributeOptionTranslation::class,
-        \Webkul\Attribute\Models\AttributeTranslation::class,
+        Attribute::class,
+        AttributeFamily::class,
+        AttributeGroup::class,
+        AttributeOption::class,
+        AttributeOptionTranslation::class,
+        AttributeTranslation::class,
     ];
 }

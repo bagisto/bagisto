@@ -3,6 +3,8 @@
 namespace Webkul\BookingProduct\Helpers;
 
 use Carbon\Carbon;
+use Webkul\BookingProduct\Contracts\BookingProduct;
+use Webkul\BookingProduct\Contracts\BookingProductTableSlot;
 
 class DefaultSlot extends Booking
 {
@@ -22,7 +24,7 @@ class DefaultSlot extends Booking
     /**
      * Returns slots for a particular day
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  BookingProduct  $bookingProduct
      */
     public function getSlotsByDate($bookingProduct, string $date): array
     {
@@ -57,7 +59,7 @@ class DefaultSlot extends Booking
     /**
      * Returns slots for One Booking For Many Days
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProductTableSlot  $bookingProductSlot
+     * @param  BookingProductTableSlot  $bookingProductSlot
      */
     public function getOneBookingForManyDaysSlots($bookingProductSlot, object $requestedDate)
     {
@@ -89,7 +91,7 @@ class DefaultSlot extends Booking
     /**
      * Returns slots for Many Bookings for One Day
      *
-     * @param  \Webkul\BookingProduct\Contracts\BookingProductTableSlot  $bookingProductSlot
+     * @param  BookingProductTableSlot  $bookingProductSlot
      */
     public function getManyBookingsForOneDaySlots($bookingProductSlot, object $requestedDate)
     {

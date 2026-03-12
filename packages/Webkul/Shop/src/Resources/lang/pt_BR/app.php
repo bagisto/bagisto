@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Referência do pedido',
                         'rma-status' => 'Status da solicitação',
                         'create' => 'Criado em',
+                        'quantity' => 'Quantidade',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'Traduzir',
                 'translating' => 'Traduzindo...',
                 'write-a-review' => 'Escrever uma Avaliação',
+            ],
+
+            'contact-us' => [
+                'about' => 'Deixe-nos uma mensagem e entraremos em contato o mais rápido possível',
+                'desc' => 'No que você está pensando?',
+                'describe-here' => 'Descreva aqui',
+                'email' => 'E-mail',
+                'message' => 'Mensagem',
+                'name' => 'Nome',
+                'phone-number' => 'Número de telefone',
+                'submit' => 'Enviar',
+                'title' => 'Entre em contato',
             ],
 
             'add-to-cart' => 'Adicionar ao Carrinho',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'O status do RMA não pode ser atualizado, pois a fatura para este pedido não foi criada.',
             'permission-denied' => 'Você está logado',
             'rma-disabled' => 'RMA está desativado para este produto',
+            'reopen-not-allowed' => 'Não é permitido reabrir esta solicitação de RMA.',
             'send-message' => ':name enviado com sucesso.',
             'update-success' => ':name atualizado com sucesso.',
         ],

@@ -5,6 +5,7 @@ namespace Webkul\User\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Webkul\User\Contracts\Role as RoleContract;
 use Webkul\User\Database\Factories\RoleFactory;
 
@@ -36,7 +37,7 @@ class Role extends Model implements RoleContract
     /**
      * Get the admins.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function admins()
     {

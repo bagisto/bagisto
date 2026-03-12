@@ -1,25 +1,30 @@
 <?php
 
-use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Route;
 use Webkul\Installer\Http\Controllers\InstallerController;
 
-Route::middleware(['web', 'installer_locale'])->group(function () {
-    Route::controller(InstallerController::class)->group(function () {
-        Route::get('install', 'index')->name('installer.index');
+Route::middleware([
+    'installer_file_session',
+    'web',
+    'installer_locale',
+])
+    ->group(function () {
+        Route::controller(InstallerController::class)->group(function () {
+            Route::get('install', 'index')->name('installer.index');
 
-        Route::middleware(StartSession::class)->prefix('install/api')->group(function () {
-            Route::post('env-file-setup', 'envFileSetup')->name('installer.env_file_setup');
+            Route::prefix('install/api')
+                ->withoutMiddleware([
+                    VerifyCsrfToken::class,
+                ])
+                ->group(function () {
+                    Route::post('run-migration', 'runMigration')->name('installer.run_migration');
 
-            Route::post('run-migration', 'runMigration')->name('installer.run_migration')->withoutMiddleware('web');
+                    Route::post('run-seeder', 'runSeeder')->name('installer.run_seeder');
 
-            Route::post('run-seeder', 'runSeeder')->name('installer.run_seeder')->withoutMiddleware('web');
+                    Route::post('seed-sample-products', 'seedSampleProducts')->name('installer.seed_sample_products');
 
-            Route::get('download-sample', 'downloadSample')->name('installer.download_sample')->withoutMiddleware('web');
-
-            Route::post('admin-config-setup', 'adminConfigSetup')->name('installer.admin_config_setup')->withoutMiddleware('web');
-
-            Route::post('sample-products-setup', 'createSampleProducts')->name('installer.sample_products_setup')->withoutMiddleware('web');
+                    Route::post('create-admin-user', 'createAdminUser')->name('installer.create_admin_user');
+                });
         });
     });
-});

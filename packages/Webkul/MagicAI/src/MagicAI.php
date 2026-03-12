@@ -2,157 +2,265 @@
 
 namespace Webkul\MagicAI;
 
-use Webkul\MagicAI\Services\Gemini;
-use Webkul\MagicAI\Services\GroqAI;
-use Webkul\MagicAI\Services\Ollama;
-use Webkul\MagicAI\Services\OpenAI;
+use Laravel\Ai\Image;
+
+use function Laravel\Ai\agent;
 
 class MagicAI
 {
     /**
-     * LLM model.
+     * Generate text content from a prompt.
+     *
+     * The provider is resolved automatically from the model name.
      */
-    protected string $model;
-
-    /**
-     * LLM agent.
-     */
-    protected string $agent;
-
-    /**
-     * Stream Response.
-     */
-    protected bool $stream = false;
-
-    /**
-     * Raw Response.
-     */
-    protected bool $raw = true;
-
-    /**
-     * Raw Response.
-     */
-    protected float $temperature = 0.7;
-
-    /**
-     * LLM prompt text.
-     */
-    protected string $prompt;
-
-    /**
-     * Set LLM model
-     */
-    public function setModel(string $model): self
+    public function generateContent(string $prompt, ?string $model = null): string
     {
-        $this->model = $model;
+        $provider = $this->prepareProvider($model);
 
-        return $this;
-    }
-
-    /**
-     * Set LLM agent
-     */
-    public function setAgent(string $agent): self
-    {
-        $this->agent = $agent;
-
-        return $this;
-    }
-
-    /**
-     * Set stream response.
-     */
-    public function setStream(bool $stream): self
-    {
-        $this->stream = $stream;
-
-        return $this;
-    }
-
-    /**
-     * Set response raw.
-     */
-    public function setRaw(bool $raw): self
-    {
-        $this->raw = $raw;
-
-        return $this;
-    }
-
-    /**
-     * Set LLM prompt text.
-     */
-    public function setTemperature(float $temperature): self
-    {
-        $this->temperature = $temperature;
-
-        return $this;
-    }
-
-    /**
-     * Set LLM prompt text.
-     */
-    public function setPrompt(string $prompt): self
-    {
-        $this->prompt = $prompt;
-
-        return $this;
-    }
-
-    /**
-     * Set LLM prompt text.
-     */
-    public function ask(): string
-    {
-        return $this->getModelInstance()->ask();
-    }
-
-    /**
-     * Generate Images
-     */
-    public function images(array $options): array
-    {
-        return $this->getModelInstance()->images($options);
-    }
-
-    /**
-     * Get LLM model instance.
-     */
-    public function getModelInstance(): OpenAI|Ollama|Gemini|GroqAI
-    {
-        if (in_array($this->model, ['gpt-4-turbo', 'gpt-4o', 'gpt-4o-mini', 'dall-e-2', 'dall-e-3'])) {
-            return new OpenAI(
-                $this->model,
-                $this->prompt,
-                $this->temperature,
-                $this->stream,
-            );
-        }
-
-        if (in_array($this->model, ['llama3-8b-8192'])) {
-            return new GroqAI(
-                $this->model,
-                $this->prompt,
-                $this->temperature,
-                $this->stream,
-            );
-        }
-
-        if (in_array($this->model, ['gemini-2.0-flash'])) {
-            return new Gemini(
-                $this->model,
-                $this->prompt,
-                $this->stream,
-                $this->raw,
-            );
-        }
-
-        return new Ollama(
-            $this->model,
-            $this->prompt,
-            $this->temperature,
-            $this->stream,
-            $this->raw,
+        return trim(
+            agent()->prompt($prompt, provider: $provider, model: $model)->text
         );
+    }
+
+    /**
+     * Generate images from a prompt.
+     *
+     * The provider is resolved automatically from the model name.
+     *
+     * @param  array{n?: int, size?: string, quality?: string}  $options
+     * @return array<int, array{url: string}>
+     */
+    public function generateImage(string $prompt, array $options = [], ?string $model = null): array
+    {
+        $provider = $this->prepareProvider($model);
+
+        return $this->executeImages($prompt, $options, $provider, $model);
+    }
+
+    /**
+     * Generate a personalised checkout success message for an order.
+     */
+    public function checkoutMessage(mixed $order): string
+    {
+        $model = $this->loadStorefrontModel('checkout_message');
+
+        $provider = $this->prepareProvider($model);
+
+        return trim(
+            agent()->prompt($this->buildCheckoutPrompt($order), provider: $provider, model: $model)->text
+        );
+    }
+
+    /**
+     * Translate any text content into the given locale.
+     */
+    public function translate(string $content, string $locale): string
+    {
+        $prompt = implode("\n\n", [
+            "Translate the following text to {$locale}.",
+            'Ensure the translation retains the original sentiment and conveys the meaning accurately.',
+            "Adapt any context-specific expressions to {$locale} where appropriate.",
+            "---\n{$content}\n---",
+            'Translation:',
+        ]);
+
+        $model = $this->loadStorefrontModel('review_translation');
+
+        $provider = $this->prepareProvider($model);
+
+        return trim(
+            agent()->prompt($prompt, provider: $provider, model: $model)->text
+        );
+    }
+
+    /**
+     * Resolve the model for a named storefront feature from admin config.
+     *
+     * Falls back to the enum's recommended default when no model is saved.
+     */
+    protected function loadStorefrontModel(string $feature): ?string
+    {
+        $model = core()->getConfigData("magic_ai.storefront_features.{$feature}.model") ?: null;
+
+        if (! $model) {
+            $default = AiProvider::defaultTextModel(AiProvider::defaultTextProvider());
+
+            $model = $default?->value;
+        }
+
+        return $model;
+    }
+
+    /**
+     * Resolve the provider from a model, validate it, and inject the stored API key.
+     *
+     * Model-first flow:
+     *   1. Resolve the model string to its AiModelContract enum case.
+     *   2. Derive the provider from the model.
+     *   3. Verify the provider is supported by the Laravel AI SDK.
+     *   4. Inject the Bagisto-stored API key into Laravel AI configuration.
+     *   5. Return the provider string so callers can pass it to agent()/Image.
+     */
+    protected function prepareProvider(?string $model): ?string
+    {
+        if (! $model) {
+            return null;
+        }
+
+        $modelEnum = AiProvider::resolveModel($model);
+
+        if (! $modelEnum) {
+            return null;
+        }
+
+        $provider = $modelEnum->provider()->value;
+
+        if (! AiProvider::isProviderSupported($provider)) {
+            throw new \RuntimeException("AI provider [{$provider}] is not supported by the Laravel AI SDK.");
+        }
+
+        $apiKey = core()->getConfigData("magic_ai.providers.{$provider}.api_key");
+
+        if ($apiKey) {
+            config(["ai.providers.{$provider}.key" => $apiKey]);
+        }
+
+        return $provider;
+    }
+
+    /**
+     * Execute image generation requests and return base64-encoded results.
+     *
+     * Supported aspect ratios: 1:1 (square) · 3:2 (landscape) · 2:3 (portrait)
+     *
+     * Supported quality: 'high' · 'medium' · 'low'
+     *
+     * For providers that do not handle size/quality via API parameters
+     * (e.g. xAI), these requirements are embedded directly into the prompt.
+     *
+     * @param  array{n?: int, size?: string, quality?: string}  $options
+     * @return array<int, array{url: string}>
+     */
+    protected function executeImages(string $prompt, array $options, ?string $provider, ?string $model): array
+    {
+        $count = max((int) ($options['n'] ?? 1), 1);
+
+        $aspectRatio = $this->resolveAspectRatio($options['size'] ?? null);
+
+        $quality = $this->resolveQuality($options['quality'] ?? null);
+
+        // For providers that don't handle size/quality via API parameters,
+        // encode these requirements directly into the prompt.
+        $imagePrompt = $this->supportsNativeImageOptions($provider)
+            ? $prompt
+            : $this->enrichImagePrompt($prompt, $aspectRatio, $quality);
+
+        $images = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $request = Image::of($imagePrompt)->size($aspectRatio);
+
+            if ($quality) {
+                $request->quality($quality);
+            }
+
+            $generated = $request->generate(provider: $provider, model: $model);
+
+            $images[] = [
+                'url' => 'data:'.$generated->firstImage()->mime.';base64,'.$generated->firstImage()->image,
+            ];
+        }
+
+        return $images;
+    }
+
+    /**
+     * Map the frontend size value to an SDK aspect ratio.
+     */
+    protected function resolveAspectRatio(?string $size): string
+    {
+        return match ($size) {
+            '3:2' => '3:2',
+            '2:3' => '2:3',
+            default => '1:1',
+        };
+    }
+
+    /**
+     * Map the frontend quality string to the SDK's quality constant.
+     */
+    protected function resolveQuality(?string $quality): ?string
+    {
+        return match ($quality) {
+            'high' => 'high',
+            'medium' => 'medium',
+            'low' => 'low',
+            default => null,
+        };
+    }
+
+    /**
+     * Check whether the given provider handles size/quality via API parameters.
+     *
+     * Providers that return empty from defaultImageOptions() (e.g. xAI)
+     * do not support these options natively, so we embed them in the prompt.
+     */
+    protected function supportsNativeImageOptions(?string $provider): bool
+    {
+        return in_array($provider, ['openai', 'gemini']);
+    }
+
+    /**
+     * Enrich the image prompt with size and quality requirements.
+     *
+     * Used for providers that do not handle these options natively.
+     */
+    protected function enrichImagePrompt(string $prompt, string $aspectRatio, ?string $quality): string
+    {
+        $orientation = match ($aspectRatio) {
+            '3:2' => 'landscape orientation (wider than tall)',
+            '2:3' => 'portrait orientation (taller than wide)',
+            default => 'square format (equal width and height)',
+        };
+
+        $hints = [$orientation];
+
+        if ($quality) {
+            $qualityHint = match ($quality) {
+                'high' => 'high detail and resolution',
+                'medium' => 'standard detail and resolution',
+                'low' => 'basic detail, quick draft quality',
+                default => null,
+            };
+
+            if ($qualityHint) {
+                $hints[] = $qualityHint;
+            }
+        }
+
+        return $prompt."\n\nImage requirements: ".implode(', ', $hints).'.';
+    }
+
+    /**
+     * Build the checkout success message prompt from order context.
+     */
+    protected function buildCheckoutPrompt(mixed $order): string
+    {
+        $productLines = '';
+
+        foreach ($order->items as $item) {
+            $productLines .= "Name: {$item->name}\n";
+            $productLines .= "Qty: {$item->qty_ordered}\n";
+            $productLines .= 'Price: '.core()->formatPrice($item->total)."\n\n";
+        }
+
+        return implode("\n\n", [
+            'Generate a personalized checkout success message for the customer.',
+            'Return ONLY plain text. Do not use Markdown, HTML, bold, italic, headings, bullet points, or any formatting syntax.',
+            "Product Details:\n{$productLines}",
+            "Customer Details:\n{$order->customer_full_name}",
+            'Current Locale: '.core()->getCurrentLocale()->name,
+            'Store Name: '.core()->getCurrentChannel()->name,
+        ]);
     }
 }

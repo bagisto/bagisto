@@ -189,7 +189,7 @@ Route::prefix('customer')->group(function () {
 
                 Route::post('reopen/{id}', 'reOpenRequest')->name('shop.customers.account.rma.re-open');
 
-                Route::get('cancel/{id}', 'cancelRequest')->name('shop.customers.account.rma.cancel');
+                Route::post('cancel/{id}', 'cancelRequest')->name('shop.customers.account.rma.cancel');
 
                 Route::get('get-messages', 'getMessages')->name('shop.customers.account.rma.get-messages');
 

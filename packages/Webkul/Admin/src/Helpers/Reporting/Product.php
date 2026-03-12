@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
@@ -69,8 +70,8 @@ class Product extends AbstractReporting
     /**
      * Retrieves total sold quantities.
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalSoldQuantities($startDate, $endDate): int
     {
@@ -121,8 +122,8 @@ class Product extends AbstractReporting
     /**
      * Retrieves total products added to wishlist.
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalProductsAddedToWishlist($startDate, $endDate): int
     {
@@ -148,8 +149,8 @@ class Product extends AbstractReporting
     /**
      * Retrieves total reviews by date
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalReviews($startDate, $endDate): int
     {
@@ -317,8 +318,8 @@ class Product extends AbstractReporting
     /**
      * Returns sold quantities over time
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      */
     public function getTotalSoldQuantitiesOverTime($startDate, $endDate, $period = 'auto'): array
@@ -358,8 +359,8 @@ class Product extends AbstractReporting
     /**
      * Returns products added to wishlist over time
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      */
     public function getTotalProductsAddedToWishlistOverTime($startDate, $endDate, $period = 'auto'): array

@@ -168,7 +168,7 @@ class RazorpayPayment extends Payment
     /**
      * Get Razorpay API instance.
      *
-     * @return \Razorpay\Api\Api
+     * @return Api
      */
     public function getApi()
     {

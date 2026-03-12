@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\MagicAI\AiProvider;
 use Webkul\Sales\Models\Order;
 
 $short = [
@@ -122,6 +123,20 @@ return [
                 'name' => 'redirection_link',
                 'title' => 'admin::app.configuration.index.general.content.header-offer.redirection-link',
                 'type' => 'text',
+            ],
+        ],
+    ], [
+        'key' => 'general.content.footer',
+        'name' => 'admin::app.configuration.index.general.content.copyright-content.title',
+        'info' => 'admin::app.configuration.index.general.content.copyright-content.info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'copyright_content',
+                'title' => 'admin::app.configuration.index.general.content.copyright-content.title',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => true,
             ],
         ],
     ], [
@@ -289,270 +304,101 @@ return [
             ],
         ],
     ], [
-        'key' => 'general.magic_ai',
-        'name' => 'admin::app.configuration.index.general.magic-ai.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.info',
-        'icon' => 'settings/magic-ai.svg',
-        'sort' => 3,
+        'key' => 'general.exchange_rates',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.info',
+        'icon' => 'settings/exchange-rate.svg',
+        'sort' => 4,
     ], [
-        'key' => 'general.magic_ai.settings',
-        'name' => 'admin::app.configuration.index.general.magic-ai.settings.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.settings.title-info',
+        'key' => 'general.exchange_rates.settings',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.settings.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.settings.title-info',
         'sort' => 1,
         'fields' => [
             [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ], [
+                'name' => 'default_service',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.settings.default-service',
+                'type' => 'select',
+                'default' => 'exchange_rates',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.settings.exchange-rates-api',
+                        'value' => 'exchange_rates',
+                    ], [
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.settings.fixer-api',
+                        'value' => 'fixer',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key' => 'general.exchange_rates.fixer',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.fixer.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.fixer.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
                 'name' => 'api_key',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.fixer.api-key',
                 'type' => 'password',
-                'channel_based' => true,
-            ], [
-                'name' => 'organization',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.organization',
-                'type' => 'text',
-                'channel_based' => true,
-            ], [
-                'name' => 'api_domain',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.llm-api-domain',
-                'type' => 'text',
-                'channel_based' => true,
             ],
         ],
     ], [
-        'key' => 'general.magic_ai.content_generation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.content-generation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.content-generation.title-info',
-        'sort' => 1,
+        'key' => 'general.exchange_rates.exchange_rates_api',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.exchange-rates-api-section.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.exchange-rates-api-section.title-info',
+        'sort' => 3,
         'fields' => [
             [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.enabled',
-                'type' => 'boolean',
-            ], [
-                'name' => 'product_short_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-short-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'product_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'category_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.category-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'cms_page_content_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.cms-page-content-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.exchange-rates-api-section.api-key',
+                'type' => 'password',
             ],
         ],
     ], [
-        'key' => 'general.magic_ai.image_generation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.image-generation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.image-generation.title-info',
-        'sort' => 1,
+        'key' => 'general.exchange_rates.schedule',
+        'name' => 'admin::app.configuration.index.general.exchange-rates.schedule.title',
+        'info' => 'admin::app.configuration.index.general.exchange-rates.schedule.title-info',
+        'sort' => 4,
         'fields' => [
             [
                 'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.image-generation.enabled',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.enabled',
                 'type' => 'boolean',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.review_translation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
+                'default' => false,
             ], [
-                'name' => 'model',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.model',
+                'name' => 'frequency',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.frequency',
                 'type' => 'select',
-                'channel_based' => true,
+                'default' => 'daily',
+                'depends' => 'enabled:true',
                 'options' => [
                     [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4-turbo',
-                        'value' => 'gpt-4-turbo',
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.daily',
+                        'value' => 'daily',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o',
-                        'value' => 'gpt-4o',
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.weekly',
+                        'value' => 'weekly',
                     ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gemini-2-0-flash',
-                        'value' => 'gemini-2.0-flash',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.deepseek-r1-8b',
-                        'value' => 'deepseek-r1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama-groq',
-                        'value' => 'llama3-8b-8192',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-3b',
-                        'value' => 'llama3.2:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-1b',
-                        'value' => 'llama3.2:1b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-1-8b',
-                        'value' => 'llama3.1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-8b',
-                        'value' => 'llama3:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llava-7b',
-                        'value' => 'llava:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-13b',
-                        'value' => 'vicuna:13b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-7b',
-                        'value' => 'vicuna:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-14b',
-                        'value' => 'qwen2.5:14b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-7b',
-                        'value' => 'qwen2.5:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-3b',
-                        'value' => 'qwen2.5:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-1-5b',
-                        'value' => 'qwen2.5:1.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-0-5b',
-                        'value' => 'qwen2.5:0.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.mistral-7b',
-                        'value' => 'mistral:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.starling-lm-7b',
-                        'value' => 'starling-lm:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.phi3-5',
-                        'value' => 'phi3.5',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.orca-mini',
-                        'value' => 'orca-mini',
-                    ],
-                ],
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.checkout_message',
-        'name' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ], [
-                'name' => 'model',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.model',
-                'type' => 'select',
-                'channel_based' => true,
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4-turbo',
-                        'value' => 'gpt-4-turbo',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o',
-                        'value' => 'gpt-4o',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gemini-2-0-flash',
-                        'value' => 'gemini-2.0-flash',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.deepseek-r1-8b',
-                        'value' => 'deepseek-r1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama-groq',
-                        'value' => 'llama3.3',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-3b',
-                        'value' => 'llama3.2:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-1b',
-                        'value' => 'llama3.2:1b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-1-8b',
-                        'value' => 'llama3.1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-8b',
-                        'value' => 'llama3:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava-7b',
-                        'value' => 'llava:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-13b',
-                        'value' => 'vicuna:13b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-7b',
-                        'value' => 'vicuna:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-14b',
-                        'value' => 'qwen2.5:14b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-7b',
-                        'value' => 'qwen2.5:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-3b',
-                        'value' => 'qwen2.5:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-1-5b',
-                        'value' => 'qwen2.5:1.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-0-5b',
-                        'value' => 'qwen2.5:0.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral-7b',
-                        'value' => 'mistral:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm-7b',
-                        'value' => 'starling-lm:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi3-5',
-                        'value' => 'phi3.5',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.orca-mini',
-                        'value' => 'orca-mini',
+                        'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.monthly',
+                        'value' => 'monthly',
                     ],
                 ],
             ], [
-                'name' => 'prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.prompt',
-                'type' => 'textarea',
-                'channel_based' => true,
-                'locale_based' => true,
+                'name' => 'time',
+                'title' => 'admin::app.configuration.index.general.exchange-rates.schedule.time',
+                'type' => 'text',
+                'default' => '00:00',
+                'depends' => 'enabled:true',
+                'validation' => 'date_format:H:i',
             ],
         ],
     ], [
         'key' => 'general.sitemap',
         'name' => 'admin::app.configuration.index.general.sitemap.title',
         'info' => 'admin::app.configuration.index.general.sitemap.info',
-        'icon' => 'settings/store.svg',
-        'sort' => 3,
+        'icon' => 'settings/sitemap.svg',
+        'sort' => 5,
     ], [
         'key' => 'general.sitemap.settings',
         'name' => 'admin::app.configuration.index.general.sitemap.settings.title',
@@ -586,8 +432,8 @@ return [
         'key' => 'general.gdpr',
         'name' => 'admin::app.configuration.index.general.gdpr.title',
         'info' => 'admin::app.configuration.index.general.gdpr.info',
-        'icon' => 'settings/store.svg',
-        'sort' => 4,
+        'icon' => 'settings/gdpr.svg',
+        'sort' => 6,
     ], [
         'key' => 'general.gdpr.settings',
         'name' => 'admin::app.configuration.index.general.gdpr.settings.title',
@@ -736,13 +582,227 @@ return [
     ],
 
     /**
+     * Magic AI.
+     */
+    [
+        'key' => 'magic_ai',
+        'name' => 'admin::app.configuration.index.magic-ai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.info',
+        'sort' => 2,
+    ], [
+        'key' => 'magic_ai.general',
+        'name' => 'admin::app.configuration.index.magic-ai.general.title',
+        'info' => 'admin::app.configuration.index.magic-ai.general.info',
+        'icon' => 'settings/magic-ai.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'magic_ai.general.settings',
+        'name' => 'admin::app.configuration.index.magic-ai.general.settings.title',
+        'info' => 'admin::app.configuration.index.magic-ai.general.settings.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.general.settings.enabled',
+                'type' => 'boolean',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.info',
+        'icon' => 'settings/magic-ai-providers.svg',
+        'sort' => 2,
+    ], [
+        'key' => 'magic_ai.providers.openai',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.openai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.openai.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.anthropic',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.anthropic.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.anthropic.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.gemini',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.gemini.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.gemini.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.groq',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.groq.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.groq.title-info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.xai',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.xai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.xai.title-info',
+        'sort' => 5,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.deepseek',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.deepseek.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.deepseek.title-info',
+        'sort' => 6,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.mistral',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.mistral.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.mistral.title-info',
+        'sort' => 7,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.ollama',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.ollama.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.ollama.title-info',
+        'sort' => 8,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.admin_features',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.info',
+        'icon' => 'settings/magic-ai-admin-features.svg',
+        'sort' => 3,
+    ], [
+        'key' => 'magic_ai.admin_features.text_generation',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.enabled',
+                'type' => 'boolean',
+            ], [
+                'name' => 'providers',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.providers',
+                'type' => 'multiselect',
+                'options' => AiProvider::textProviderOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.admin_features.image_generation',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.enabled',
+                'type' => 'boolean',
+            ], [
+                'name' => 'providers',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.providers',
+                'type' => 'multiselect',
+                'options' => AiProvider::imageProviderOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.storefront_features',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.info',
+        'icon' => 'settings/magic-ai-storefront-features.svg',
+        'sort' => 4,
+    ], [
+        'key' => 'magic_ai.storefront_features.review_translation',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.enabled',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.storefront_features.checkout_message',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.enabled',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
+            ],
+        ],
+    ],
+
+    /**
      * Catalog.
      */
     [
         'key' => 'catalog',
         'name' => 'admin::app.configuration.index.catalog.title',
         'info' => 'admin::app.configuration.index.catalog.info',
-        'sort' => 2,
+        'sort' => 3,
     ], [
         'key' => 'catalog.products',
         'name' => 'admin::app.configuration.index.catalog.products.title',
@@ -1181,7 +1241,7 @@ return [
         'key' => 'customer',
         'name' => 'admin::app.configuration.index.customer.title',
         'info' => 'admin::app.configuration.index.customer.info',
-        'sort' => 3,
+        'sort' => 4,
     ], [
         'key' => 'customer.address',
         'name' => 'admin::app.configuration.index.customer.address.title',
@@ -1226,7 +1286,7 @@ return [
                 'type' => 'text',
                 'validation' => 'between:1,4|integer',
                 'channel_based' => true,
-                'default_value' => 1,
+                'default' => 1,
             ],
         ],
     ], [
@@ -1408,7 +1468,10 @@ return [
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.facebook.redirect.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.facebook.redirect.title-info',
                 'type' => 'text',
+                'validation' => 'url',
                 'depends' => 'enable_facebook:1',
+                'default' => config('app.url').'/customer/social-login/facebook/callback',
+                'placeholder' => config('app.url').'/customer/social-login/facebook/callback',
             ], [
                 'name' => 'enable_twitter',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.twitter.enable-twitter',
@@ -1431,7 +1494,10 @@ return [
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.twitter.redirect.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.twitter.redirect.title-info',
                 'type' => 'text',
+                'validation' => 'url',
                 'depends' => 'enable_twitter:1',
+                'default' => config('app.url').'/customer/social-login/twitter/callback',
+                'placeholder' => config('app.url').'/customer/social-login/twitter/callback',
             ], [
                 'name' => 'enable_google',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.google.enable-google',
@@ -1454,7 +1520,10 @@ return [
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.google.redirect.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.google.redirect.title-info',
                 'type' => 'text',
+                'validation' => 'url',
                 'depends' => 'enable_google:1',
+                'default' => config('app.url').'/customer/social-login/google/callback',
+                'placeholder' => config('app.url').'/customer/social-login/google/callback',
             ], [
                 'name' => 'enable_linkedin-openid',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.enable-linkedin',
@@ -1477,7 +1546,10 @@ return [
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title-info',
                 'type' => 'text',
+                'validation' => 'url',
                 'depends' => 'enable_linkedin-openid:1',
+                'placeholder' => config('app.url').'/customer/social-login/linkedin-openid/callback',
+                'default' => config('app.url').'/customer/social-login/linkedin-openid/callback',
             ], [
                 'name' => 'enable_github',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.github.enable-github',
@@ -1500,7 +1572,10 @@ return [
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.github.redirect.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.github.redirect.title-info',
                 'type' => 'text',
+                'validation' => 'url',
                 'depends' => 'enable_github:1',
+                'placeholder' => config('app.url').'/customer/social-login/github/callback',
+                'default' => config('app.url').'/customer/social-login/github/callback',
             ],
         ],
     ],
@@ -1512,7 +1587,7 @@ return [
         'key' => 'emails',
         'name' => 'admin::app.configuration.index.email.title',
         'info' => 'admin::app.configuration.index.email.info',
-        'sort' => 4,
+        'sort' => 5,
     ], [
         'key' => 'emails.configure',
         'name' => 'admin::app.configuration.index.email.email-settings.title',
@@ -1520,27 +1595,78 @@ return [
         'icon' => 'settings/email.svg',
         'sort' => 1,
     ], [
-        'key' => 'emails.configure.email_settings',
-        'name' => 'admin::app.configuration.index.email.email-settings.title',
-        'info' => 'admin::app.configuration.index.email.email-settings.info',
+        'key' => 'emails.configure.smtp',
+        'name' => 'admin::app.configuration.index.email.smtp.title',
+        'info' => 'admin::app.configuration.index.email.smtp.info',
         'sort' => 1,
         'fields' => [
             [
-                'name' => 'sender_name',
-                'title' => 'admin::app.configuration.index.email.email-settings.email-sender-name',
+                'name' => 'driver_notice',
+                'title' => 'admin::app.configuration.index.email.smtp.driver-notice',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.smtp-driver-notice',
+            ],
+            [
+                'name' => 'host',
+                'title' => 'admin::app.configuration.index.email.smtp.host',
                 'type' => 'text',
-                'info' => 'admin::app.configuration.index.email.email-settings.email-sender-name-tip',
+                'validation' => 'required',
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.host'),
+            ], [
+                'name' => 'port',
+                'title' => 'admin::app.configuration.index.email.smtp.port',
+                'type' => 'text',
+                'validation' => 'required|numeric',
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.port'),
+            ], [
+                'name' => 'encryption',
+                'title' => 'admin::app.configuration.index.email.smtp.encryption',
+                'type' => 'select',
+                'options' => [
+                    ['title' => 'TLS',  'value' => 'tls'],
+                    ['title' => 'SSL',  'value' => 'ssl'],
+                    ['title' => 'None', 'value' => 'none'],
+                ],
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.encryption', 'tls'),
+            ], [
+                'name' => 'username',
+                'title' => 'admin::app.configuration.index.email.smtp.username',
+                'type' => 'text',
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.username'),
+            ], [
+                'name' => 'password',
+                'title' => 'admin::app.configuration.index.email.smtp.password',
+                'type' => 'password',
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.password'),
+            ],
+        ],
+    ], [
+        'key' => 'emails.configure.email_settings',
+        'name' => 'admin::app.configuration.index.email.email-settings.title',
+        'info' => 'admin::app.configuration.index.email.email-settings.info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'sender_name',
+                'title' => 'admin::app.configuration.index.email.email-settings.sender-name',
+                'type' => 'text',
+                'info' => 'admin::app.configuration.index.email.email-settings.sender-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.from.name'),
+                'default' => config('mail.from.name'),
             ], [
-                'name' => 'shop_email_from',
-                'title' => 'admin::app.configuration.index.email.email-settings.shop-email-from',
+                'name' => 'sender_email',
+                'title' => 'admin::app.configuration.index.email.email-settings.sender-email',
                 'type' => 'text',
-                'info' => 'admin::app.configuration.index.email.email-settings.shop-email-from-tip',
+                'info' => 'admin::app.configuration.index.email.email-settings.sender-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.from.address'),
+                'default' => config('mail.from.address'),
             ], [
                 'name' => 'admin_name',
                 'title' => 'admin::app.configuration.index.email.email-settings.admin-name',
@@ -1548,7 +1674,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.admin-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.admin.name'),
+                'default' => config('mail.admin.name'),
             ], [
                 'name' => 'admin_email',
                 'title' => 'admin::app.configuration.index.email.email-settings.admin-email',
@@ -1556,7 +1682,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.admin-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.admin.address'),
+                'default' => config('mail.admin.address'),
             ], [
                 'name' => 'contact_name',
                 'title' => 'admin::app.configuration.index.email.email-settings.contact-name',
@@ -1564,7 +1690,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.contact-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.contact.name'),
+                'default' => config('mail.contact.name'),
             ], [
                 'name' => 'contact_email',
                 'title' => 'admin::app.configuration.index.email.email-settings.contact-email',
@@ -1572,7 +1698,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.contact-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.contact.address'),
+                'default' => config('mail.contact.address'),
             ],
         ],
     ], [
@@ -1654,7 +1780,7 @@ return [
         'key' => 'sales',
         'name' => 'admin::app.configuration.index.sales.title',
         'info' => 'admin::app.configuration.index.sales.info',
-        'sort' => 5,
+        'sort' => 6,
     ], [
         'key' => 'sales.shipping',
         'name' => 'admin::app.configuration.index.sales.shipping-setting.title',
@@ -2504,10 +2630,25 @@ return [
         'icon' => 'settings/order.svg',
         'sort' => 4,
     ], [
+        'key' => 'sales.order_settings.order_creation',
+        'name' => 'admin::app.configuration.index.sales.order-settings.order-creation.title',
+        'info' => 'admin::app.configuration.index.sales.order-settings.order-creation.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'max_retry_attempts',
+                'title' => 'admin::app.configuration.index.sales.order-settings.order-creation.max-retry-attempts',
+                'type' => 'number',
+                'validation' => 'required|integer|min:1',
+                'default' => 3,
+                'channel_based' => true,
+            ],
+        ],
+    ], [
         'key' => 'sales.order_settings.order_number',
         'name' => 'admin::app.configuration.index.sales.order-settings.order-number.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.order-number.info',
-        'sort' => 0,
+        'sort' => 2,
         'fields' => [
             [
                 'name' => 'order_number_prefix',
@@ -2539,7 +2680,7 @@ return [
         'key' => 'sales.order_settings.minimum_order',
         'name' => 'admin::app.configuration.index.sales.order-settings.minimum-order.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.minimum-order.info',
-        'sort' => 1,
+        'sort' => 3,
         'fields' => [
             [
                 'name' => 'enable',
@@ -2574,7 +2715,7 @@ return [
         'key' => 'sales.order_settings.reorder',
         'name' => 'admin::app.configuration.index.sales.order-settings.reorder.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.reorder.info',
-        'sort' => 2,
+        'sort' => 4,
         'fields' => [
             [
                 'name' => 'admin',
@@ -3111,23 +3252,6 @@ return [
                     ], [
                         'title' => 'admin::app.configuration.index.sales.rma.no',
                         'value' => 'no',
-                    ],
-                ],
-                'channel_based' => true,
-                'locale_based' => false,
-            ], [
-                'name' => 'select_allowed_order_status',
-                'title' => 'admin::app.configuration.index.sales.rma.select-allowed-order-status',
-                'type' => 'select',
-                'validation' => 'required',
-                'default' => 'all',
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.sales.rma.all-status',
-                        'value' => 'all',
-                    ], [
-                        'title' => 'admin::app.configuration.index.sales.rma.complete',
-                        'value' => 'complete',
                     ],
                 ],
                 'channel_based' => true,

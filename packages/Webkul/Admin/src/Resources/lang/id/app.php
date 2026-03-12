@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'Buka Kembali Permintaan',
                     'title' => 'RMA',
                     'update-success' => 'Status RMA berhasil diperbarui.',
+                    'reopen-not-allowed' => 'Membuka kembali permintaan RMA ini tidak diizinkan.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Saluran',
                     'contact-number' => 'Nomor Kontak',
                     'create-btn' => 'Tambah Pelanggan',
                     'create-success' => 'Pelanggan berhasil ditambahkan',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'Konfigurasi',
 
             'general' => [
-                'info' => 'Atur opsi unit.',
+                'info' => 'Umum',
                 'title' => 'Umum',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'Judul Penawaran',
                         'redirection-title' => 'Judul Pengalihan',
                         'redirection-link' => 'Tautan Pengalihan',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'Contenuto del copyright',
+                        'info' => 'Configura il contenuto del copyright visualizzato nel piè di pagina del tuo sito web per proteggere la tua proprietà intellettuale e migliorare il riconoscimento del marchio.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Atur opsi Magic AI dan izinkan beberapa opsi untuk mengotomatisasi pembuatan konten.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'Kunci API',
-                        'enabled' => 'Diaktifkan',
-                        'llm-api-domain' => 'Domain API LLM',
-                        'organization' => 'Organisasi',
-                        'title' => 'Pengaturan Umum',
-                        'title-info' => 'Tingkatkan pengalaman Anda dengan fitur Magic AI dengan memasukkan Kunci API eksklusif Anda dan menunjukkan Organisasi terkait untuk integrasi yang mudah. Kuasai kredensial OpenAI Anda dan sesuaikan pengaturan sesuai kebutuhan spesifik Anda.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'Prompt Deskripsi Kategori',
-                        'cms-page-content-prompt' => 'Prompt Konten Halaman CMS',
-                        'enabled' => 'Diaktifkan',
-                        'product-description-prompt' => 'Prompt Deskripsi Produk',
-                        'product-short-description-prompt' => 'Prompt Deskripsi Singkat Produk',
-                        'title' => 'Pembuatan Konten',
-                        'title-info' => 'Fitur ini akan mengaktifkan Magic AI untuk setiap editor WYSIWYG, di mana Anda ingin mengelola konten menggunakan AI.<br/><br/>Saat diaktifkan, buka editor apa pun untuk menghasilkan konten.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Diaktifkan',
-                        'title' => 'Pembuatan Gambar',
-                        'title-info' => 'Fitur ini akan mengaktifkan Magic AI untuk setiap unggahan gambar, di mana Anda ingin menghasilkan gambar menggunakan DALL-E.<br/><br/>Saat diaktifkan, buka unggahan gambar apa pun untuk menghasilkan gambar.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Diaktifkan',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Provide option to customer or visitor to translate customer review into english.<br/><br/>When enable, go to review and you will find the button ‘Translate to English’ if you review other then English.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Diaktifkan',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'Prompt',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Pesan Checkout Personalisasi',
-                        'title-info' => 'Buat pesan checkout yang dipersonalisasi untuk pelanggan di halaman Terima Kasih, menyesuaikan kontennya dengan preferensi individu dan meningkatkan pengalaman pasca-pembelian secara keseluruhan.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'Pengaturan Kepatuhan GDPR',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'Konfigurasi layanan API dan kredensial nilai tukar.',
+                    'title' => 'Nilai Tukar',
+
+                    'settings' => [
+                        'default-service' => 'Layanan Default',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Pengaturan Umum',
+                        'title-info' => 'Pilih layanan nilai tukar default yang akan digunakan untuk pembaruan kurs mata uang otomatis.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Masukkan kunci API Fixer.io Anda untuk pembaruan nilai tukar otomatis.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Masukkan kunci ExchangeRate-API Anda untuk pembaruan nilai tukar otomatis (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Harian',
+                        'enabled' => 'Diaktifkan',
+                        'frequency' => 'Frekuensi',
+                        'monthly' => 'Bulanan',
+                        'time' => 'Waktu Mulai (HH:MM)',
+                        'title' => 'Impor Terjadwal',
+                        'title-info' => 'Perbarui nilai tukar secara otomatis berdasarkan jadwal menggunakan layanan API yang telah dikonfigurasi.',
+                        'weekly' => 'Mingguan',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'Atur opsi sitemap.',
                     'title' => 'Sitemap',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'Ukuran Maksimum File',
                         'max-url-per-file' => 'Jumlah Maksimum URL per File',
                         'title' => 'Batasan File',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Konfigurasikan pengaturan, penyedia, dan fitur Magic AI.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Pengaturan umum Magic AI.',
+                    'title' => 'Umum',
+
+                    'settings' => [
+                        'enabled' => 'Aktif',
+                        'title' => 'Pengaturan',
+                        'title-info' => 'Aktifkan atau nonaktifkan Magic AI di seluruh aplikasi.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'Kunci API',
+                    'info' => 'Konfigurasikan kunci API untuk penyedia AI Anda.',
+                    'title' => 'Penyedia',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Konfigurasikan kredensial API OpenAI Anda.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Konfigurasikan kredensial API Anthropic Anda.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Konfigurasikan kredensial API Google Gemini Anda.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Konfigurasikan kredensial API Groq Anda.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Konfigurasikan kredensial API xAI Anda.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Konfigurasikan kredensial API DeepSeek Anda.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Konfigurasikan kredensial API Mistral Anda.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Konfigurasikan kredensial API Ollama Anda.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Aktifkan dan konfigurasikan fitur AI untuk panel admin.',
+                    'title' => 'Fitur Admin',
+
+                    'text-generation' => [
+                        'enabled' => 'Aktif',
+                        'providers' => 'Penyedia',
+                        'title' => 'Pembuatan Teks',
+                        'title-info' => 'Aktifkan pembuatan teks bertenaga AI di editor WYSIWYG di seluruh panel admin.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Aktif',
+                        'providers' => 'Penyedia',
+                        'title' => 'Pembuatan Gambar',
+                        'title-info' => 'Aktifkan pembuatan gambar bertenaga AI untuk gambar produk dan konten.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Aktifkan dan konfigurasikan fitur AI untuk etalase.',
+                    'title' => 'Fitur Etalase',
+
+                    'review-translation' => [
+                        'enabled' => 'Aktif',
+                        'model' => 'Model',
+                        'title' => 'Terjemahan Ulasan',
+                        'title-info' => 'Izinkan pelanggan menerjemahkan ulasan ke bahasa mereka di etalase.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Aktif',
+                        'model' => 'Model',
+                        'title' => 'Pesan Checkout Dipersonalisasi',
+                        'title-info' => 'Buat pesan checkout yang dipersonalisasi untuk pelanggan di halaman Terima Kasih.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Google. Harus sesuai dengan URL yang dikonfigurasi di konsol Google Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Google. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol Google Anda.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Facebook. Harus sesuai dengan URL yang dikonfigurasi di pengaturan aplikasi Facebook Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Facebook. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di pengaturan aplikasi Facebook Anda.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan GitHub. Harus sesuai dengan URL yang dikonfigurasi di konsol GitHub Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan GitHub. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol GitHub Anda.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan LinkedIn. Harus sesuai dengan URL yang dikonfigurasi di konsol LinkedIn Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan LinkedIn. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol LinkedIn Anda.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Twitter. Harus sesuai dengan URL yang dikonfigurasi di konsol Twitter Anda.',
+                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Twitter. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol Twitter Anda.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'Email',
                 'title' => 'Email',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'Driver email Anda diatur ke ":driver" alih-alih "bagisto-dynamic-smtp". Setiap perubahan yang dilakukan di sini tidak akan berpengaruh. Harap perbarui MAIL_MAILER=bagisto-dynamic-smtp di file .env Anda untuk mengaktifkan pengaturan ini.',
+                    'driver-mismatch-title' => 'Pengaturan ini saat ini tidak aktif.',
+                    'encryption' => 'Enkripsi',
+                    'host' => 'Host',
+                    'info' => 'Konfigurasikan pengaturan server SMTP untuk mengirim email dari toko Anda.',
+                    'password' => 'Kata Sandi',
+                    'port' => 'Port',
+                    'title' => 'SMTP',
+                    'username' => 'Nama Pengguna',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'Email Admin',
-                    'admin-email-tip' => 'Alamat email admin untuk saluran ini agar menerima email',
+                    'admin-email' => 'Alamat Email Admin',
+                    'admin-email-tip' => 'Semua notifikasi admin untuk saluran ini akan dikirim ke alamat ini.',
                     'admin-name' => 'Nama Admin',
-                    'admin-name-tip' => 'Nama ini akan ditampilkan di semua email admin',
+                    'admin-name-tip' => 'Nama ini akan muncul di semua email yang dikirim ke admin.',
                     'admin-page-limit' => 'Item Default Per Halaman (Admin)',
-                    'contact-email' => 'Email Kontak',
-                    'contact-email-tip' => 'Alamat email ini akan ditampilkan di bagian bawah email Anda',
+                    'contact-email' => 'Alamat Email Kontak',
+                    'contact-email-tip' => 'Alamat email ini akan muncul di footer email Anda.',
                     'contact-name' => 'Nama Kontak',
-                    'contact-name-tip' => 'Nama ini akan ditampilkan di bagian bawah email Anda',
-                    'email-sender-name' => 'Nama Pengirim Email',
-                    'email-sender-name-tip' => 'Nama ini akan ditampilkan di kotak masuk pelanggan',
-                    'info' => 'Setel nama pengirim email, alamat email toko, nama admin, dan alamat email admin.',
-                    'shop-email-from' => 'Alamat Email Toko',
-                    'shop-email-from-tip' => 'Alamat email dari saluran ini untuk mengirim email ke pelanggan Anda',
+                    'contact-name-tip' => 'Nama ini akan muncul di footer email Anda.',
+                    'info' => 'Konfigurasi nama pengirim, alamat email toko, detail admin, dan kontak yang digunakan di semua email.',
+                    'sender-email' => 'Alamat Email Pengirim',
+                    'sender-email-tip' => 'Email kepada pelanggan Anda akan dikirim dari alamat ini.',
+                    'sender-name' => 'Nama Pengirim',
+                    'sender-name-tip' => 'Nama ini akan muncul di kotak masuk pelanggan Anda sebagai pengirim email.',
                     'title' => 'Pengaturan Email',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'Atur nomor pesanan, pesanan minimum, dan pesanan balik.',
                     'title' => 'Pengaturan Pesanan',
+
+                    'order-creation' => [
+                        'info' => 'Konfigurasi jumlah percobaan pembuatan pesanan saat terjadi kesalahan selama checkout.',
+                        'max-retry-attempts' => 'Jumlah Percobaan Maksimum',
+                        'title' => 'Pembuatan Pesanan',
+                    ],
 
                     'order-number' => [
                         'generator' => 'Generator Nomor Pesanan',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'Izinkan Jenis Produk untuk RMA',
                     'allow-rma-for-digital-product' => 'Izinkan RMA untuk produk digital',
                     'allowed-file-extension' => 'Ekstensi File yang Diizinkan',
-                    'allowed-file-types' => 'Silakan pilih tipe file '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' saja',
+                    'allowed-file-types' => 'Silakan pilih tipe file :allowed_types saja',
                     'allowed-info' => 'Pisahkan dengan koma. Contoh: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Izinkan Permintaan RMA Baru untuk Permintaan yang Dibatalkan',
                     'allowed-request-declined-request' => 'Izinkan Permintaan RMA Baru untuk Permintaan yang Ditolak',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'Alamat Pengambilan Pengembalian',
                     'return-pickup-time' => 'Waktu Pengambilan Pengembalian',
                     'return-policy' => 'Kebijakan Pengembalian',
-                    'select-allowed-order-status' => 'Pilih Status Pesanan yang Diizinkan',
                     'specific-products' => 'Produk Tertentu',
                     'title' => 'RMA',
                     'yes' => 'Ya',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'Komunikasi',
                 'configure' => 'Konfigurasi',
                 'currencies' => 'Mata Uang',
-                'custom-field' => 'Bidang Kustom',
+                'custom-fields' => 'Bidang Kustom',
                 'customers' => 'Pelanggan',
                 'dashboard' => 'Dasbor',
                 'data-transfer' => 'Transfer Data',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'Pesanan',
                 'products' => 'Produk',
                 'promotions' => 'Promosi',
-                'reason' => 'Alasan',
+                'reasons' => 'Alasan',
                 'refunds' => 'Pengembalian Dana',
                 'reporting' => 'Pelaporan',
                 'requests' => 'Permintaan',
                 'reviews' => 'Ulasan',
                 'rma' => 'RMA',
-                'rma-status' => 'Status RMA',
                 'roles' => 'Peran',
                 'rules' => 'Aturan',
                 'sales' => 'Penjualan',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'Pengaturan',
                 'shipments' => 'Pengiriman',
                 'sitemaps' => 'Peta Situs',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'Kategori Pajak',
                 'tax-rates' => 'Tarif Pajak',
                 'taxes' => 'Pajak',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Terapkan',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Hasilkan',
                     'generating' => 'Sedang Dihasilkan...',
-                    'hd' => 'HD',
+                    'high' => 'Tinggi',
+                    'landscape' => 'Lanskap (3:2)',
+                    'low' => 'Rendah',
+                    'medium' => 'Sedang',
                     'model' => 'Model',
                     'number-of-images' => 'Jumlah Gambar',
-                    'prompt' => 'Prompt',
+                    'portrait' => 'Potret (2:3)',
+                    'prompt' => 'Perintah',
                     'quality' => 'Kualitas',
                     'regenerate' => 'Hasilkan Ulang',
                     'regenerating' => 'Sedang Menghasilkan Ulang...',
                     'size' => 'Ukuran',
-                    'standard' => 'Standar',
+                    'square' => 'Persegi (1:1)',
                     'title' => 'Generasi Gambar AI',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'Depan',
                     'next' => 'Selanjutnya',
                     'size' => 'Ukuran',
+                    'square' => 'Persegi (1:1)',
                     'use-cases' => 'Kasus Penggunaan',
                     'zoom' => 'Perbesar',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'Terapkan',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'Aktifkan',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'Buat',
                 'generated-content' => 'Konten yang Dihasilkan',
                 'generated-content-info' => 'Konten yang dihasilkan AI bisa saja menyesatkan. Harap periksa konten yang dihasilkan sebelum diterapkan.',
                 'generating' => 'Membuat...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o Mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => '(Ollama) Llama 3.1 (8B)',
-                'llama3-2-1b' => '(Ollama) Llama 3.2 (1B)',
-                'llama3-2-3b' => '(Ollama) Llama 3.2 (3B)',
-                'llama3-8b' => '(Ollama) Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'Model',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
-                'prompt' => 'Prompt',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
+                'prompt' => 'Perintah',
                 'title' => 'AI Assistance',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5347,37 +5395,40 @@ return [
         'view' => 'Lihat',
 
         'rma' => [
-            'create' => 'Buat',
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'view' => 'Lihat',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Buat',
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'title' => 'Alasan RMA',
-        ],
+            'requests' => [
+                'create' => 'Buat',
+                'title' => 'Permintaan RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'title' => 'Aturan RMA',
-        ],
+            'reasons' => [
+                'create' => 'Buat',
+                'delete' => 'Hapus',
+                'edit' => 'Edit',
+                'title' => 'Alasan RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'title' => 'Status RMA',
-        ],
+            'rules' => [
+                'create' => 'Buat',
+                'delete' => 'Hapus',
+                'edit' => 'Edit',
+                'title' => 'Aturan RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'Buat',
-            'delete' => 'Hapus',
-            'edit' => 'Edit',
-            'title' => 'Bidang Kustom',
+            'statuses' => [
+                'create' => 'Buat',
+                'delete' => 'Hapus',
+                'edit' => 'Edit',
+                'title' => 'Status RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Buat',
+                'delete' => 'Hapus',
+                'edit' => 'Edit',
+                'title' => 'Bidang Kustom',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Unduh',
         'export' => 'Ekspor',
+        'no' => 'Tidak',
         'no-records' => 'Tidak ada yang dapat diekspor',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Ya',
     ],
 
     'validations' => [

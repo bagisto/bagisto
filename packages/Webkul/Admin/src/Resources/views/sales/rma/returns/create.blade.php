@@ -16,7 +16,7 @@
 
         <div class="flex items-center gap-x-2.5">
             <a
-                href="{{ route('admin.sales.rma.index') }}"
+                href="{{ route('admin.sales.rma.requests.index') }}"
                 class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800"
             >
                 @lang('admin::app.settings.channels.edit.back-btn')
@@ -36,7 +36,7 @@
             id="v-admin-new-rma-template"
         >
             <div class="w-full overflow-auto">
-                <x-admin::datagrid :src="route('admin.sales.rma.create')" >
+                <x-admin::datagrid :src="route('admin.sales.rma.requests.create')" >
                     <template #header="{
                         isLoading,
                         available,
@@ -319,23 +319,8 @@
                                     </span>
                                 </p>
 
-                                <template v-if="product.rma_rules && products['0'].order_status != 'pending'">
-                                    <p
-                                        v-if="resolutionType[getProductId(product)] == 'return'"
-                                        class="flex text-sm justify-between gap-3 whitespace-nowrap"
-                                    >
-                                        <span>
-                                            @lang('admin::app.sales.rma.all-rma.index.datagrid.return-window'):
-                                        </span>
-
-                                        <span>
-                                            @{{ calculateDeliveredReturnWindow(product.created_at, product.rma_return_period) }}
-                                        </span>
-                                    </p>
-                                </template>
-
                                 <p
-                                    v-else-if="! product.rma_return_period"
+                                    v-if="resolutionType[getProductId(product)] == 'return' && products['0'].order_status != 'pending'"
                                     class="flex text-sm justify-between gap-3 whitespace-nowrap"
                                 >
                                     <span>
@@ -343,7 +328,7 @@
                                     </span>
 
                                     <span>
-                                        @{{ calculateReturnWindow(product.created_at) }}
+                                        @{{ calculateReturnWindow(product.created_at, product.rma_return_period) }}
                                     </span>
                                 </p>
                             </p>
@@ -866,7 +851,7 @@
                         this.rmaFormSubmit = false;
 
                         try {
-                            const response = await this.$axios.post("{{ route('admin.sales.rma.store') }}", formData);
+                            const response = await this.$axios.post("{{ route('admin.sales.rma.requests.store') }}", formData);
 
                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
 
@@ -963,7 +948,7 @@
 
                     getOrderItems(orderId) {
                         if (this.orderId) {
-                            this.$axios.get('{{ route("admin.sales.rma.get-order-items", ":id") }}'.replace(':id', this.orderId))
+                            this.$axios.get('{{ route("admin.sales.rma.requests.get-order-items", ":id") }}'.replace(':id', this.orderId))
                                 .then(response => {
                                     this.isLoading = false;
 
@@ -974,11 +959,12 @@
                         }
                     },
 
-                    calculateReturnWindow(createdAt) {
+                    calculateReturnWindow(createdAt, returnDays = null) {
+                        const days = returnDays ?? this.returnWindowDays;
                         const createdDate = new Date(createdAt);
                         const returnDate = new Date(createdDate);
                         
-                        returnDate.setDate(createdDate.getDate() + this.returnWindowDays);
+                        returnDate.setDate(createdDate.getDate() + days);
 
                         const currentDate = new Date();
 
@@ -995,35 +981,12 @@
                         }).format(returnDate);
                     },
 
-                    calculateDeliveredReturnWindow(created_At, rulesDays) {
-                        const createdAt = new Date(created_At);
-                        const returnDate = new Date(
-                            createdAt.getTime() + rulesDays * 24 * 60 * 60 * 1000
-                        );
-
-                        returnDate.setUTCDate(returnDate.getDate());
-
-                        const currentDate = new Date();
-
-                        if (returnDate < currentDate) {
-                            this.notAllowed = true;
-
-                            return 'Not Allowed';
-                        }
-
-                        return new Intl.DateTimeFormat('en-GB', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric',
-                        }).format(returnDate);
-                    },
-
                     getResolutionReason(product_id) {
                         let resolutionType = this.resolutionType[product_id];
 
                         this.rma_qty[product_id] = null;
 
-                        let url = '{{route("admin.sales.rma.get-resolution-reasons", ":resolutionType")}}';
+                        let url = '{{route("admin.sales.rma.requests.get-resolution-reasons", ":resolutionType")}}';
 
                         url = url.replace(':resolutionType', resolutionType);
 

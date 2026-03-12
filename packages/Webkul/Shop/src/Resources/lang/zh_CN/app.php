@@ -482,6 +482,7 @@ return [
                         'order-ref' => '订单参考',
                         'rma-status' => '请求状态',
                         'create' => '创建时间',
+                        'quantity' => '数量',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => '翻译',
                 'translating' => '翻译中...',
                 'write-a-review' => '写评论',
+            ],
+
+            'contact-us' => [
+                'about' => '给我们留言，我们会尽快回复您',
+                'desc' => '您有什么问题？',
+                'describe-here' => '在这里描述',
+                'email' => '电子邮件',
+                'message' => '留言',
+                'name' => '姓名',
+                'phone-number' => '电话号码',
+                'submit' => '提交',
+                'title' => '联系我们',
             ],
 
             'add-to-cart' => '加入购物车',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => '无法更新 RMA 状态，因为尚未为此订单创建发票。',
             'permission-denied' => '您已登录',
             'rma-disabled' => '该产品的 RMA 功能已禁用',
+            'reopen-not-allowed' => '不允许重新打开此RMA请求。',
             'send-message' => ':name 发送成功。',
             'update-success' => ':name 更新成功。',
         ],

@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'Aanvraag heropenen',
                     'title' => 'RMA',
                     'update-success' => 'RMA-status succesvol bijgewerkt.',
+                    'reopen-not-allowed' => 'Het heropenen van dit RMA-verzoek is niet toegestaan.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Kanaal',
                     'contact-number' => 'Contactnummer',
                     'create-btn' => 'Klant aanmaken',
                     'create-success' => 'Klant succesvol aangemaakt',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'Configuratie',
 
             'general' => [
-                'info' => 'Stel eenhedensopties in.',
+                'info' => 'Algemeen',
                 'title' => 'Algemeen',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'Aanbiedingstitel',
                         'redirection-title' => 'Titel van omleiding',
                         'redirection-link' => 'Omleidingslink',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'Auteursrechtinhoud',
+                        'info' => 'Configureer de auteursrechtinhoud die in de voettekst van uw website wordt weergegeven om uw intellectuele eigendom te beschermen en de merkherkenning te verbeteren.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Stel Magic AI-opties in en sta enkele opties toe om de creatie van inhoud te automatiseren.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'API-sleutel',
-                        'enabled' => 'Ingeschakeld',
-                        'llm-api-domain' => 'LLM API-domein',
-                        'organization' => 'Organisatie',
-                        'title' => 'Algemene instellingen',
-                        'title-info' => 'Verbeter uw ervaring met de Magic AI-functie door uw exclusieve API-sleutel in te voeren en de relevante organisatie aan te geven voor moeiteloze integratie. Neem de controle over uw OpenAI-inloggegevens en pas de instellingen aan volgens uw specifieke behoeften.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'Prompt voor categoriebeschrijving',
-                        'cms-page-content-prompt' => 'Prompt voor CMS-pagina-inhoud',
-                        'enabled' => 'Ingeschakeld',
-                        'product-description-prompt' => 'Prompt voor productbeschrijving',
-                        'product-short-description-prompt' => 'Prompt voor korte productbeschrijving',
-                        'title' => 'Inhoudsgeneratie',
-                        'title-info' => 'Met deze functie kunt u Magic AI inschakelen voor elke WYSIWYG-editor, waar u inhoud wilt beheren met behulp van AI.<br/><br/>Wanneer ingeschakeld, ga naar een willekeurige editor om inhoud te genereren.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Ingeschakeld',
-                        'title' => 'Afbeeldingsgeneratie',
-                        'title-info' => 'Met deze functie kunt u Magic AI inschakelen voor elke afbeeldingsupload, waar u afbeeldingen wilt genereren met behulp van DALL-E.<br/><br/>Wanneer ingeschakeld, ga naar een willekeurige afbeeldingsupload om afbeeldingen te genereren.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Ingeschakeld',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Beoordeling Vertaling',
-                        'title-info' => 'Bied klanten of bezoekers de mogelijkheid om klantbeoordelingen naar het Engels te vertalen.<br/><br/>Wanneer ingeschakeld, ga naar de beoordeling en je vindt de knop "Vertalen naar Engels" als je beoordeling anders is dan Engels.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Ingeschakeld',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'Prompt',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Gepersonaliseerd Afrekenbericht',
-                        'title-info' => 'Stel een gepersonaliseerd afrekenbericht op voor klanten op de Bedankt-pagina, waarbij de inhoud wordt afgestemd op individuele voorkeuren en de algehele ervaring na aankoop wordt verbeterd.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR-nalevingsinstellingen',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'Configureer wisselkoers API-services en inloggegevens.',
+                    'title' => 'Wisselkoersen',
+
+                    'settings' => [
+                        'default-service' => 'Standaard Service',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Algemene Instellingen',
+                        'title-info' => 'Selecteer de standaard wisselkoersservice voor automatische valutakoersupdates.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Voer uw Fixer.io API-sleutel in voor automatische wisselkoersupdates.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Voer uw ExchangeRate-API-sleutel in voor automatische wisselkoersupdates (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Dagelijks',
+                        'enabled' => 'Ingeschakeld',
+                        'frequency' => 'Frequentie',
+                        'monthly' => 'Maandelijks',
+                        'time' => 'Starttijd (HH:MM)',
+                        'title' => 'Geplande Import',
+                        'title-info' => 'Wisselkoersen automatisch bijwerken op een gepland schema met behulp van de geconfigureerde API-service.',
+                        'weekly' => 'Wekelijks',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'Stel sitemapopties in.',
                     'title' => 'Sitemap',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'Maximale bestandsgrootte',
                         'max-url-per-file' => 'Maximaal aantal URL\'s per bestand',
                         'title' => 'Bestandslimieten',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configureer Magic AI instellingen, providers en functies.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Algemene Magic AI instellingen.',
+                    'title' => 'Algemeen',
+
+                    'settings' => [
+                        'enabled' => 'Ingeschakeld',
+                        'title' => 'Instellingen',
+                        'title-info' => 'Magic AI in- of uitschakelen in de gehele applicatie.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API-sleutel',
+                    'info' => 'Configureer API-sleutels voor uw AI-providers.',
+                    'title' => 'Providers',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configureer uw OpenAI API-referenties.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configureer uw Anthropic API-referenties.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configureer uw Google Gemini API-referenties.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configureer uw Groq API-referenties.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configureer uw xAI API-referenties.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configureer uw DeepSeek API-referenties.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configureer uw Mistral API-referenties.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configureer uw Ollama API-referenties.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'AI-functies voor het beheerderspaneel in- en configureren.',
+                    'title' => 'Beheerdersfuncties',
+
+                    'text-generation' => [
+                        'enabled' => 'Ingeschakeld',
+                        'providers' => 'Providers',
+                        'title' => 'Tekstgeneratie',
+                        'title-info' => 'AI-gestuurde tekstgeneratie in WYSIWYG-editors in het beheerderspaneel inschakelen.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Ingeschakeld',
+                        'providers' => 'Providers',
+                        'title' => 'Afbeeldingsgeneratie',
+                        'title-info' => 'AI-gestuurde afbeeldingsgeneratie voor product- en inhoudsafbeeldingen inschakelen.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'AI-functies voor de winkel inschakelen en configureren.',
+                    'title' => 'Winkelfuncties',
+
+                    'review-translation' => [
+                        'enabled' => 'Ingeschakeld',
+                        'model' => 'Model',
+                        'title' => 'Beoordelingsvertaling',
+                        'title-info' => 'Klanten toestaan beoordelingen naar hun taal te vertalen in de winkel.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Ingeschakeld',
+                        'model' => 'Model',
+                        'title' => 'Gepersonaliseerd afrekenbericht',
+                        'title-info' => 'Gepersonaliseerde afrekenberichten genereren voor klanten op de bedankpagina.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Google. Moet overeenkomen met de URL in de Google-console.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Google. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de Google-console.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Facebook. Moet overeenkomen met de URL in de app-instellingen van Facebook.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Facebook. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de app-instellingen van Facebook.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via GitHub. Moet overeenkomen met de URL in de GitHub-console.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via GitHub. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de GitHub-console.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via LinkedIn. Moet overeenkomen met de URL in de LinkedIn-console.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via LinkedIn. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de LinkedIn-console.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect-URL',
-                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Twitter. Moet overeenkomen met de URL in de Twitter-console.',
+                                'title-info' => 'Callback-URL waar gebruikers naartoe worden geleid na authenticatie via Twitter. Gebruik het weergegeven placeholder-URL-formaat (wijzig alleen uw domein). Moet overeenkomen met de URL in de Twitter-console.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'E-mail',
                 'title' => 'E-mail',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'Uw maildriver is ingesteld op ":driver" in plaats van "bagisto-dynamic-smtp". Eventuele wijzigingen hier hebben geen effect. Werk MAIL_MAILER=bagisto-dynamic-smtp bij in uw .env-bestand om deze instellingen te activeren.',
+                    'driver-mismatch-title' => 'Deze instellingen zijn momenteel inactief.',
+                    'encryption' => 'Versleuteling',
+                    'host' => 'Host',
+                    'info' => 'Configureer SMTP-serverinstellingen voor het verzenden van e-mails vanuit uw winkel.',
+                    'password' => 'Wachtwoord',
+                    'port' => 'Poort',
+                    'title' => 'SMTP',
+                    'username' => 'Gebruikersnaam',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'Admin E-mail',
-                    'admin-email-tip' => 'Het e-mailadres van de beheerder van dit kanaal om e-mails te ontvangen',
-                    'admin-name' => 'Admin Naam',
-                    'admin-name-tip' => 'Deze naam wordt weergegeven in alle beheerders-e-mails',
-                    'admin-page-limit' => 'Standaard items per pagina (beheerder)',
-                    'contact-email' => 'Contact E-mail',
-                    'contact-email-tip' => 'Het e-mailadres wordt onderaan uw e-mails weergegeven',
+                    'admin-email' => 'Beheerder E-mailadres',
+                    'admin-email-tip' => 'Alle beheerdersmeldingen voor dit kanaal worden naar dit adres gestuurd.',
+                    'admin-name' => 'Beheerder Naam',
+                    'admin-name-tip' => 'Deze naam wordt weergegeven in alle e-mails die naar de beheerder worden gestuurd.',
+                    'admin-page-limit' => 'Standaard Items per Pagina (Beheerder)',
+                    'contact-email' => 'Contact E-mailadres',
+                    'contact-email-tip' => 'Dit e-mailadres wordt weergegeven in de voettekst van uw e-mails.',
                     'contact-name' => 'Contact Naam',
-                    'contact-name-tip' => 'Deze naam wordt onderaan uw e-mails weergegeven',
-                    'email-sender-name' => 'E-mail Afzender Naam',
-                    'email-sender-name-tip' => 'Deze naam wordt weergegeven in de inbox van de klanten',
-                    'info' => 'Stel de naam van de e-mailafzender, het e-mailadres van de winkel, de naam van de beheerder en het e-mailadres van de beheerder in.',
-                    'shop-email-from' => 'Winkel E-mailadres',
-                    'shop-email-from-tip' => 'Het e-mailadres van dit kanaal om e-mails naar uw klanten te sturen',
+                    'contact-name-tip' => 'Deze naam wordt weergegeven in de voettekst van uw e-mails.',
+                    'info' => 'Configureer de naam van de afzender, het e-mailadres van de winkel, de gegevens van de beheerder en de contactgegevens die in alle e-mails worden gebruikt.',
+                    'sender-email' => 'Afzender E-mailadres',
+                    'sender-email-tip' => 'E-mails aan uw klanten worden van dit adres verzonden.',
+                    'sender-name' => 'Afzender Naam',
+                    'sender-name-tip' => 'Deze naam wordt weergegeven in de inbox van uw klanten als de e-mailafzender.',
                     'title' => 'E-mailinstellingen',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'Stel ordernummers, minimale bestellingen en backorders in.',
                     'title' => 'Bestelinstellingen',
+
+                    'order-creation' => [
+                        'info' => 'Configureer het aantal nieuwe pogingen voor het maken van een bestelling bij fouten tijdens het afrekenen.',
+                        'max-retry-attempts' => 'Maximale Aantal Pogingen',
+                        'title' => 'Bestelling Maken',
+                    ],
 
                     'order-number' => [
                         'generator' => 'Ordernummergenerator',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'Sta producttype toe voor RMA',
                     'allow-rma-for-digital-product' => 'Sta RMA toe voor digitaal product',
                     'allowed-file-extension' => 'Toegestane bestandsextensie',
-                    'allowed-file-types' => 'Selecteer alleen de bestandstypen '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => 'Selecteer alleen de bestandstypen :allowed_types',
                     'allowed-info' => 'Gescheiden door komma’s. Bijvoorbeeld: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Sta een nieuw RMA-verzoek toe voor geannuleerd verzoek',
                     'allowed-request-declined-request' => 'Sta een nieuw RMA-verzoek toe voor afgewezen verzoek',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'Retour ophaaladres',
                     'return-pickup-time' => 'Retour ophaaltijd',
                     'return-policy' => 'Retourbeleid',
-                    'select-allowed-order-status' => 'Selecteer toegestane orderstatus',
                     'specific-products' => 'Specifieke producten',
                     'title' => 'RMA',
                     'yes' => 'Ja',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'Communicatie',
                 'configure' => 'Configureren',
                 'currencies' => 'Valuta',
-                'custom-field' => 'Aangepast veld',
+                'custom-fields' => 'Aangepast veld',
                 'customers' => 'Klanten',
                 'dashboard' => 'Dashboard',
                 'data-transfer' => 'Data overdracht',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'Bestellingen',
                 'products' => 'Producten',
                 'promotions' => 'Promoties',
-                'reason' => 'Reden',
+                'reasons' => 'Reden',
                 'refunds' => 'Terugbetalingen',
                 'reporting' => 'Rapportage',
                 'requests' => 'Verzoeken',
                 'reviews' => 'Beoordelingen',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA-status',
                 'roles' => 'Rollen',
                 'rules' => 'Regels',
                 'sales' => 'Verkopen',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'Instellingen',
                 'shipments' => 'Zendingen',
                 'sitemaps' => 'Sitemaps',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'BTW categorieën',
                 'tax-rates' => 'Belastingtarieven',
                 'taxes' => 'Belastingen',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Toepassen',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Genereren',
                     'generating' => 'Genereren...',
-                    'hd' => 'HD',
+                    'high' => 'Hoog',
+                    'landscape' => 'Liggend (3:2)',
+                    'low' => 'Laag',
+                    'medium' => 'Gemiddeld',
                     'model' => 'Model',
                     'number-of-images' => 'Aantal afbeeldingen',
+                    'portrait' => 'Staand (2:3)',
                     'prompt' => 'Prompt',
                     'quality' => 'Kwaliteit',
                     'regenerate' => 'Regenereren',
                     'regenerating' => 'Regenereren...',
                     'size' => 'Formaat',
-                    'standard' => 'Standaard',
+                    'square' => 'Vierkant (1:1)',
                     'title' => 'AI Afbeelding Generatie',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'Voorkant',
                     'next' => 'Volgende',
                     'size' => 'Formaat',
+                    'square' => 'Vierkant (1:1)',
                     'use-cases' => 'Gebruiksscenario\'s',
                     'zoom' => 'Inzoomen',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'Toepassen',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'Ingeschakeld',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'Genereren',
                 'generated-content' => 'Gegenereerde Inhoud',
                 'generated-content-info' => 'AI-inhoud kan misleidend zijn. Controleer de gegenereerde inhoud voordat u deze toepast.',
                 'generating' => 'Genereren...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'Model',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
                 'prompt' => 'Prompt',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
                 'title' => 'AI Assistentie',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5289,38 +5337,38 @@ return [
 
     'acl' => [
         'addresses' => 'Adressen',
-        'attribute-families' => 'Attribuut Families',
-        'attributes' => 'Eigenschappen',
+        'attribute-families' => 'Attribuutfamilies',
+        'attributes' => 'Attributen',
         'campaigns' => 'Campagnes',
         'cancel' => 'Annuleren',
-        'cart-rules' => 'Winkelwagen Regels',
+        'cart-rules' => 'Winkelwagenregels',
         'catalog' => 'Catalogus',
-        'catalog-rules' => 'Catalogus Regels',
+        'catalog-rules' => 'Catalogusregels',
         'categories' => 'Categorieën',
         'channels' => 'Kanalen',
         'cms' => 'CMS',
-        'communications' => 'Communicaties',
+        'communications' => 'Communicatie',
         'configure' => 'Configureren',
         'copy' => 'Kopiëren',
-        'create' => 'Creëren',
+        'create' => 'Aanmaken',
         'currencies' => 'Valuta\'s',
         'customers' => 'Klanten',
         'dashboard' => 'Dashboard',
-        'data-transfer' => 'Data overdracht',
+        'data-transfer' => 'Gegevensoverdracht',
         'delete' => 'Verwijderen',
         'edit' => 'Bewerken',
-        'email-templates' => 'E-mail Sjablonen',
+        'email-templates' => 'E-mailsjablonen',
         'events' => 'Evenementen',
         'exchange-rates' => 'Wisselkoersen',
         'gdpr' => 'AVG',
         'groups' => 'Groepen',
         'import' => 'Importeren',
-        'imports' => 'Importeert',
+        'imports' => 'Importeren',
         'inventory-sources' => 'Voorraadbronnen',
         'invoices' => 'Facturen',
         'locales' => 'Talen',
         'marketing' => 'Marketing',
-        'newsletter-subscriptions' => 'Nieuwsbrief Abonnementen',
+        'newsletter-subscriptions' => 'Nieuwsbriefabonnementen',
         'note' => 'Notitie',
         'orders' => 'Bestellingen',
         'products' => 'Producten',
@@ -5329,15 +5377,15 @@ return [
         'reporting' => 'Rapportage',
         'reviews' => 'Beoordelingen',
         'roles' => 'Rollen',
-        'sales' => 'Verkoop',
+        'sales' => 'Verkopen',
         'search-seo' => 'Zoeken en SEO',
-        'search-synonyms' => 'Zoek Synoniemen',
+        'search-synonyms' => 'Zoeksynoniemen',
         'search-terms' => 'Zoektermen',
         'settings' => 'Instellingen',
-        'shipments' => 'Verzendingen',
+        'shipments' => 'Zendingen',
         'sitemaps' => 'Sitemaps',
-        'subscribers' => 'Nieuwsbrief Abonnees',
-        'tax-categories' => 'BTW categorieën',
+        'subscribers' => 'Nieuwsbriefabonnees',
+        'tax-categories' => 'BTW-categorieën',
         'tax-rates' => 'Belastingtarieven',
         'taxes' => 'Belastingen',
         'themes' => 'Thema\'s',
@@ -5347,37 +5395,40 @@ return [
         'view' => 'Bekijken',
 
         'rma' => [
-            'create' => 'Aanmaken',
-            'delete' => 'Verwijderen',
-            'edit' => 'Bewerken',
-            'view' => 'Bekijken',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Aanmaken',
-            'delete' => 'Verwijderen',
-            'edit' => 'Bewerken',
-            'title' => 'RMA Redenen',
-        ],
+            'requests' => [
+                'create' => 'Aanmaken',
+                'title' => 'RMA-verzoeken',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Verwijderen',
-            'edit' => 'Bewerken',
-            'title' => 'RMA Regels',
-        ],
+            'reasons' => [
+                'create' => 'Aanmaken',
+                'delete' => 'Verwijderen',
+                'edit' => 'Bewerken',
+                'title' => 'RMA-redenen',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Verwijderen',
-            'edit' => 'Bewerken',
-            'title' => 'RMA Status',
-        ],
+            'rules' => [
+                'create' => 'Aanmaken',
+                'delete' => 'Verwijderen',
+                'edit' => 'Bewerken',
+                'title' => 'RMA-regels',
+            ],
 
-        'custom-field' => [
-            'create' => 'Aanmaken',
-            'delete' => 'Verwijderen',
-            'edit' => 'Bewerken',
-            'title' => 'Aangepaste Velden',
+            'statuses' => [
+                'create' => 'Aanmaken',
+                'delete' => 'Verwijderen',
+                'edit' => 'Bewerken',
+                'title' => 'RMA-statussen',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Aanmaken',
+                'delete' => 'Verwijderen',
+                'edit' => 'Bewerken',
+                'title' => 'Aangepaste velden',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Downloaden',
         'export' => 'Exporteer',
+        'no' => 'Nee',
         'no-records' => 'Niets te exporteren',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Ja',
     ],
 
     'validations' => [

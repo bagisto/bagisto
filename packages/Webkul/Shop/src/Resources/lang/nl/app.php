@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Bestelreferentie',
                         'rma-status' => 'Aanvraagstatus',
                         'create' => 'Aangemaakt op',
+                        'quantity' => 'Hoeveelheid',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'Vertalen',
                 'translating' => 'Vertalen...',
                 'write-a-review' => 'Schrijf een beoordeling',
+            ],
+
+            'contact-us' => [
+                'about' => 'Stuur ons een bericht en we zullen zo snel mogelijk reageren',
+                'desc' => 'Waar denk je aan?',
+                'describe-here' => 'Beschrijf hier',
+                'email' => 'E-mail',
+                'message' => 'Bericht',
+                'name' => 'Naam',
+                'phone-number' => 'Telefoonnummer',
+                'submit' => 'Verzenden',
+                'title' => 'Neem contact met ons op',
             ],
 
             'add-to-cart' => 'Toevoegen aan winkelwagen',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'De RMA-status kan niet worden bijgewerkt omdat de factuur voor deze bestelling niet is aangemaakt.',
             'permission-denied' => 'U bent ingelogd',
             'rma-disabled' => 'RMA is uitgeschakeld voor dit product',
+            'reopen-not-allowed' => 'Het heropenen van dit RMA-verzoek is niet toegestaan.',
             'send-message' => ':name succesvol verzonden.',
             'update-success' => ':name succesvol bijgewerkt.',
         ],

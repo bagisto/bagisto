@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
 
 class ProductCustomerGroupPriceRepository extends Repository
 {
@@ -16,7 +17,7 @@ class ProductCustomerGroupPriceRepository extends Repository
     }
 
     /**
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function saveCustomerGroupPrices(array $data, $product)

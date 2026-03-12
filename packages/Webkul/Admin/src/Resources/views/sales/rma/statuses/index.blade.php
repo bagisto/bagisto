@@ -24,23 +24,29 @@
                         @lang('admin::app.sales.rma.rma-status.index.title')
                     </p>
 
-                    <!-- Create Button -->
-                    <div class="flex items-center gap-x-2.5">
-                        <button
-                            class="primary-button"
-                            @click="selectedRules=0; resetForm(); $refs.rulesModal.toggle()"
-                        >
-                            @lang('admin::app.sales.rma.rma-status.index.create-btn')
-                        </button>
-                    </div>
+                    @if (bouncer()->hasPermission('sales.rma.statuses.create'))
+                        <!-- Create Button -->
+                        <div class="flex items-center gap-x-2.5">
+                            <button
+                                class="primary-button"
+                                @click="selectedRules=0; resetForm(); $refs.rulesModal.toggle()"
+                            >
+                                @lang('admin::app.sales.rma.rma-status.index.create-btn')
+                            </button>
+                        </div>
+                    @endif
                 </div>
 
                 <x-admin::datagrid
-                    :src="route('admin.sales.rma.rma-status.index')"
+                    :src="route('admin.sales.rma.statuses.index')"
                     ref="datagrid"
                 >
                     @php
-                        $hasPermission = bouncer()->hasPermission('rma.reason.edit') || bouncer()->hasPermission('rma.reason.delete');
+                        $hasEditPermission = bouncer()->hasPermission('sales.rma.statuses.edit');
+
+                        $hasDeletePermission = bouncer()->hasPermission('sales.rma.statuses.delete');
+
+                        $hasPermission = $hasEditPermission || $hasDeletePermission;
                     @endphp
 
                     <!-- DataGrid Body -->
@@ -55,7 +61,7 @@
                         <div
                             v-for="record in available.records"
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
-                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', 1fr);'"
+                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 4) + ', 1fr);'"
                         >
                             @if ($hasPermission)
                                 <input
@@ -89,25 +95,29 @@
 
                             <!-- Actions -->
                             <div class="flex justify-end">
-                                <a @click="selectedRules=1; editModal(record.actions.find(action => action.method === 'GET').url)">
-                                    <span
-                                        :class="record.actions.find(action => action.title === 'Edit')?.icon"
-                                        class="cursor-pointer rounded-md p-1 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                        :title="record.actions.find(action => action.title === 'Edit')?.title"
-                                    >
-                                    </span>
-                                </a>
-
-                                <span v-if="record.default != 1">
-                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                @if ($hasEditPermission)
+                                    <a @click="selectedRules=1; editModal(record.actions.find(action => action.method === 'GET').url)">
                                         <span
-                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                            class="icon-delete cursor-pointer rounded-md p-2 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                            :title="record.actions.find(action => action.method === 'DELETE')?.title"
+                                            :class="record.actions.find(action => action.title === 'Edit')?.icon"
+                                            class="cursor-pointer rounded-md p-1 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            :title="record.actions.find(action => action.title === 'Edit')?.title"
                                         >
                                         </span>
                                     </a>
-                                </span>
+                                @endif
+
+                                @if ($hasDeletePermission)
+                                    <span v-if="record.default != 1">
+                                        <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                            <span
+                                                :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                                class="icon-delete cursor-pointer rounded-md p-2 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                                :title="record.actions.find(action => action.method === 'DELETE')?.title"
+                                            >
+                                            </span>
+                                        </a>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                     </template>
@@ -334,10 +344,10 @@
 
                         let url;
 
-                        url = `{{ route('admin.sales.rma.rma-status.store') }}`;
+                        url = `{{ route('admin.sales.rma.statuses.store') }}`;
 
                         if (params.id) {
-                            url = '{{ route('admin.sales.rma.rma-status.update', ':id') }}'.replace(':id', params.id);
+                            url = '{{ route('admin.sales.rma.statuses.update', ':id') }}'.replace(':id', params.id);
 
                             formData.append('_method', 'put');
                         }

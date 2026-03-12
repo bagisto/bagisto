@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Controllers\Marketing\Promotions;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Admin\DataGrids\Marketing\Promotions\CartRuleCouponDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -21,7 +22,7 @@ class CartRuleCouponController extends Controller
     /**
      * Index.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index(int $id)
     {

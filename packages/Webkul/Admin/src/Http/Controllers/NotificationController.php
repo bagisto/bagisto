@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use Illuminate\View\View;
 use Webkul\Notification\Repositories\NotificationRepository;
 
 class NotificationController extends Controller
@@ -16,7 +17,7 @@ class NotificationController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -51,7 +52,7 @@ class NotificationController extends Controller
      * Update the notification is reade or not.
      *
      * @param  int  $orderId
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function viewedNotifications($orderId)
     {

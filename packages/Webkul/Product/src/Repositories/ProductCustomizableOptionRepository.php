@@ -5,6 +5,7 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Container\Container;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Contracts\ProductCustomizableOption;
 
 class ProductCustomizableOptionRepository extends Repository
@@ -33,7 +34,7 @@ class ProductCustomizableOptionRepository extends Repository
      * Save customizable options.
      *
      * @param  array  $data
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function saveCustomizableOptions($data, $product)

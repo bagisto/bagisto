@@ -25,23 +25,29 @@
                         @lang('admin::app.sales.rma.reasons.index.title')
                     </p>
 
-                    <!-- Create Button -->
-                    <div class="flex items-center gap-x-2.5">
-                        <button
-                            class="primary-button"
-                            @click="selectedLocales=0; resetForm(); $refs.reasonsModal.toggle()"
-                        >
-                            @lang('admin::app.sales.rma.reasons.index.create-btn')
-                        </button>
-                    </div>
+                    @if (bouncer()->hasPermission('sales.rma.reasons.create'))
+                        <!-- Create Button -->
+                        <div class="flex items-center gap-x-2.5">
+                            <button
+                                class="primary-button"
+                                @click="selectedLocales=0; resetForm(); $refs.reasonsModal.toggle()"
+                            >
+                                @lang('admin::app.sales.rma.reasons.index.create-btn')
+                            </button>
+                        </div>
+                    @endif
                 </div>
 
                 <x-admin::datagrid
-                    :src="route('admin.sales.rma.reason.index')"
+                    :src="route('admin.sales.rma.reasons.index')"
                     ref="datagrid"
                 >
                     @php
-                        $hasPermission = bouncer()->hasPermission('rma.reason.edit') || bouncer()->hasPermission('rma.reason.delete');
+                        $hasEditPermission = bouncer()->hasPermission('sales.rma.reasons.edit');
+
+                        $hasDeletePermission = bouncer()->hasPermission('sales.rma.reasons.delete');
+
+                        $hasPermission = $hasEditPermission || $hasDeletePermission;
                     @endphp
 
                     <!-- DataGrid Body -->
@@ -56,7 +62,7 @@
                         <div
                             v-for="record in available.records"
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
-                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 8 : 7) + ', 1fr);'"
+                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 8 : 6) + ', 1fr);'"
                         >
                             @if ($hasPermission)
                                 <input
@@ -96,22 +102,27 @@
 
                             <!-- Actions -->
                             <div class="flex justify-end">
-                                <a @click="selectedLocales=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
-                                    <span
-                                        :class="record.actions.find(action => action.index === 'edit')?.icon"
-                                        class="cursor-pointer rounded-md p-1 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                    >
-                                    </span>
-                                </a>
 
-                                <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
-                                    <span
-                                        :class="record.actions.find(action => action.method === 'DELETE')?.icon"
-                                        class="icon-delete cursor-pointer rounded-md p-2 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
-                                        :title="record.actions.find(action => action.method === 'DELETE')?.title"
-                                    >
-                                    </span>
-                                </a>
+                                @if ($hasEditPermission)
+                                    <a @click="selectedLocales=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
+                                        <span
+                                            :class="record.actions.find(action => action.index === 'edit')?.icon"
+                                            class="cursor-pointer rounded-md p-1 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                        >
+                                        </span>
+                                    </a>
+                                @endif
+
+                                @if ($hasDeletePermission)
+                                    <a @click="performAction(record.actions.find(action => action.method === 'DELETE'))">
+                                        <span
+                                            :class="record.actions.find(action => action.method === 'DELETE')?.icon"
+                                            class="icon-delete cursor-pointer rounded-md p-2 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
+                                            :title="record.actions.find(action => action.method === 'DELETE')?.title"
+                                        >
+                                        </span>
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </template>
@@ -292,10 +303,10 @@
 
                         formData.set('title', sanitizedMessage);
 
-                        url = `{{ route('admin.sales.rma.reason.store') }}`;
+                        url = `{{ route('admin.sales.rma.reasons.store') }}`;
 
                         if (params.id) {
-                            url = '{{ route('admin.sales.rma.reason.update', ':id') }}'.replace(':id', params.id);
+                            url = '{{ route('admin.sales.rma.reasons.update', ':id') }}'.replace(':id', params.id);
 
                             formData.append('_method', 'put');
                         }

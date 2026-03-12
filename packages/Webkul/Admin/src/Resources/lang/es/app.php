@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'Reabrir solicitud',
                     'title' => 'RMA',
                     'update-success' => 'Estado de la RMA actualizado exitosamente.',
+                    'reopen-not-allowed' => 'No se permite reabrir esta solicitud de RMA.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Canal',
                     'contact-number' => 'Número de Contacto',
                     'create-btn' => 'Crear Cliente',
                     'create-success' => 'Cliente creado exitosamente',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'Configuración',
 
             'general' => [
-                'info' => 'Establecer opciones de unidades.',
+                'info' => 'General',
                 'title' => 'General',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'Título de la Oferta',
                         'redirection-title' => 'Título de Redirección',
                         'redirection-link' => 'Enlace de Redirección',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'Contenido de derechos de autor',
+                        'info' => 'Configura el contenido de derechos de autor que se muestra en el pie de página de tu sitio web para proteger tu propiedad intelectual y mejorar el reconocimiento de tu marca.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Configurar opciones de Magic AI y permitir algunas opciones para automatizar la creación de contenido.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'Clave de API',
-                        'enabled' => 'Habilitado',
-                        'llm-api-domain' => 'Dominio de API LLM',
-                        'organization' => 'Organización',
-                        'title' => 'Configuración General',
-                        'title-info' => 'Mejora tu experiencia con la función de Magic AI ingresando tu exclusiva Clave de API e indicando la Organización pertinente para una integración sin esfuerzo. Toma el control de tus credenciales de OpenAI y personaliza la configuración según tus necesidades específicas.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'Indicación de Descripción de Categoría',
-                        'cms-page-content-prompt' => 'Indicación de Contenido de Página CMS',
-                        'enabled' => 'Habilitado',
-                        'product-description-prompt' => 'Indicación de Descripción de Producto',
-                        'product-short-description-prompt' => 'Indicación de Descripción Corta de Producto',
-                        'title' => 'Generación de Contenido',
-                        'title-info' => 'Esta función habilitará el Magic AI para cada editor WYSIWYG, donde quieras gestionar el contenido utilizando la IA.<br/><br/>Cuando esté habilitado, ve a cualquier editor para generar contenido.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Habilitado',
-                        'title' => 'Generación de Imágenes',
-                        'title-info' => 'Esta función habilitará el Magic AI para cada carga de imágenes, donde quieras generar imágenes utilizando DALL-E.<br/><br/>Cuando esté habilitado, ve a cualquier carga de imágenes para generar imágenes.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Habilitado',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Modelo',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Traducción de Reseñas',
-                        'title-info' => 'Proporcionar opción al cliente o visitante para traducir la reseña del cliente al inglés.<br/><br/>Cuando esté habilitado, ve a la reseña y encontrarás el botón "Traducir al inglés" si la reseña está en otro idioma que no sea inglés.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Habilitado',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Modelo',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'Indicación',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Mensaje Personalizado de Pago',
-                        'title-info' => 'Crea un mensaje de pago personalizado para los clientes en la página de agradecimiento, adaptando el contenido para resonar con las preferencias individuales y mejorando la experiencia post-compra en general.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'Configuraciones de cumplimiento de GDPR',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'Configurar los servicios y credenciales de la API de tipos de cambio.',
+                    'title' => 'Tipos de cambio',
+
+                    'settings' => [
+                        'default-service' => 'Servicio predeterminado',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Configuración general',
+                        'title-info' => 'Seleccione el servicio de tipos de cambio predeterminado para las actualizaciones automáticas de las tasas de divisas.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Introduzca su clave de Fixer.io API para las actualizaciones automáticas de los tipos de cambio.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Introduzca su clave de ExchangeRate-API para las actualizaciones automáticas de los tipos de cambio (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Diariamente',
+                        'enabled' => 'Habilitado',
+                        'frequency' => 'Frecuencia',
+                        'monthly' => 'Mensualmente',
+                        'time' => 'Hora de inicio (HH:MM)',
+                        'title' => 'Importación programada',
+                        'title-info' => 'Actualizar automáticamente los tipos de cambio de forma programada utilizando el servicio API configurado.',
+                        'weekly' => 'Semanalmente',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'Configurar opciones del mapa del sitio.',
                     'title' => 'Mapa del Sitio',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'Tamaño máximo de archivo',
                         'max-url-per-file' => 'Número máximo de URLs por archivo',
                         'title' => 'Límites de Archivo',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configure los ajustes, proveedores y funciones de Magic AI.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Ajustes generales de Magic AI.',
+                    'title' => 'General',
+
+                    'settings' => [
+                        'enabled' => 'Habilitado',
+                        'title' => 'Ajustes',
+                        'title-info' => 'Habilitar o deshabilitar Magic AI en toda la aplicación.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'Clave API',
+                    'info' => 'Configure las claves API para sus proveedores de IA.',
+                    'title' => 'Proveedores',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configure sus credenciales de API de OpenAI.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configure sus credenciales de API de Anthropic.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configure sus credenciales de API de Google Gemini.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configure sus credenciales de API de Groq.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configure sus credenciales de API de xAI.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configure sus credenciales de API de DeepSeek.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configure sus credenciales de API de Mistral.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configure sus credenciales de API de Ollama.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Habilitar y configurar funciones de IA para el panel de administración.',
+                    'title' => 'Funciones de administración',
+
+                    'text-generation' => [
+                        'enabled' => 'Habilitado',
+                        'providers' => 'Proveedores',
+                        'title' => 'Generación de texto',
+                        'title-info' => 'Habilitar la generación de texto con IA en los editores WYSIWYG del panel de administración.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Habilitado',
+                        'providers' => 'Proveedores',
+                        'title' => 'Generación de imágenes',
+                        'title-info' => 'Habilitar la generación de imágenes con IA para imágenes de productos y contenido.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Habilitar y configurar funciones de IA para la tienda.',
+                    'title' => 'Funciones de la tienda',
+
+                    'review-translation' => [
+                        'enabled' => 'Habilitado',
+                        'model' => 'Modelo',
+                        'title' => 'Traducción de reseñas',
+                        'title-info' => 'Permitir a los clientes traducir reseñas a su idioma en la tienda.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Habilitado',
+                        'model' => 'Modelo',
+                        'title' => 'Mensaje de pago personalizado',
+                        'title-info' => 'Generar mensajes de pago personalizados para los clientes en la página de agradecimiento.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Google. Debe coincidir con la URL configurada en tu consola de Google.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Google. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en tu consola de Google.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Facebook. Debe coincidir con la URL configurada en la configuración de tu aplicación de Facebook.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Facebook. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en la configuración de tu aplicación de Facebook.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con GitHub. Debe coincidir con la URL configurada en tu consola de GitHub.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con GitHub. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en tu consola de GitHub.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con LinkedIn. Debe coincidir con la URL configurada en tu consola de LinkedIn.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con LinkedIn. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en tu consola de LinkedIn.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirección',
-                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Twitter. Debe coincidir con la URL configurada en tu consola de Twitter.',
+                                'title-info' => 'URL de retorno donde los usuarios son redirigidos después de autenticarse con Twitter. Usa el formato de URL de marcador de posición mostrado (solo cambia tu dominio). Debe coincidir con la URL configurada en tu consola de Twitter.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'Correo electrónico',
                 'title' => 'Correo electrónico',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'Su controlador de correo está establecido en ":driver" en lugar de "bagisto-dynamic-smtp". Cualquier cambio realizado aquí no tendrá efecto. Por favor, actualice MAIL_MAILER=bagisto-dynamic-smtp en su archivo .env para activar esta configuración.',
+                    'driver-mismatch-title' => 'Esta configuración está actualmente inactiva.',
+                    'encryption' => 'Cifrado',
+                    'host' => 'Host',
+                    'info' => 'Configure los ajustes del servidor SMTP para enviar correos electrónicos desde su tienda.',
+                    'password' => 'Contraseña',
+                    'port' => 'Puerto',
+                    'title' => 'SMTP',
+                    'username' => 'Nombre de usuario',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'Correo electrónico del administrador',
-                    'admin-email-tip' => 'La dirección de correo electrónico del administrador de este canal para recibir correos electrónicos',
+                    'admin-email' => 'Dirección de correo electrónico del administrador',
+                    'admin-email-tip' => 'Todas las notificaciones de administrador para este canal se enviarán a esta dirección.',
                     'admin-name' => 'Nombre del administrador',
-                    'admin-name-tip' => 'Este nombre se mostrará en todos los correos electrónicos del administrador',
-                    'admin-page-limit' => 'Elementos por página predeterminados (Administrador)',
-                    'contact-email' => 'Correo electrónico de contacto',
-                    'contact-email-tip' => 'La dirección de correo electrónico se mostrará en la parte inferior de sus correos electrónicos',
+                    'admin-name-tip' => 'Este nombre aparecerá en todos los correos electrónicos enviados al administrador.',
+                    'admin-page-limit' => 'Elementos predeterminados por página (administrador)',
+                    'contact-email' => 'Dirección de correo electrónico de contacto',
+                    'contact-email-tip' => 'Esta dirección de correo electrónico aparecerá en el pie de página de sus correos electrónicos.',
                     'contact-name' => 'Nombre de contacto',
-                    'contact-name-tip' => 'Este nombre se mostrará en la parte inferior de sus correos electrónicos',
-                    'email-sender-name' => 'Nombre del remitente del correo electrónico',
-                    'email-sender-name-tip' => 'Este nombre se mostrará en la bandeja de entrada de los clientes',
-                    'info' => 'Establecer nombre del remitente del correo electrónico, dirección de correo electrónico de la tienda, nombre del administrador y dirección de correo electrónico del administrador.',
-                    'shop-email-from' => 'Dirección de correo electrónico de la tienda',
-                    'shop-email-from-tip' => 'La dirección de correo electrónico de este canal para enviar correos electrónicos a sus clientes',
+                    'contact-name-tip' => 'Este nombre aparecerá en el pie de página de sus correos electrónicos.',
+                    'info' => 'Configure el nombre del remitente, la dirección de correo electrónico de la tienda, los detalles del administrador y la información de contacto utilizados en todos los correos electrónicos.',
+                    'sender-email' => 'Dirección de correo electrónico del remitente',
+                    'sender-email-tip' => 'Los correos electrónicos a sus clientes se enviarán desde esta dirección.',
+                    'sender-name' => 'Nombre del remitente',
+                    'sender-name-tip' => 'Este nombre aparecerá en la bandeja de entrada de sus clientes como remitente del correo electrónico.',
                     'title' => 'Configuración de correo electrónico',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'Configurar números de pedido, pedidos mínimos y pedidos pendientes.',
                     'title' => 'Configuración de pedidos',
+
+                    'order-creation' => [
+                        'info' => 'Configure el número de intentos de creación de pedido cuando ocurran errores durante el pago.',
+                        'max-retry-attempts' => 'Número Máximo de Intentos',
+                        'title' => 'Creación de Pedido',
+                    ],
 
                     'order-number' => [
                         'generator' => 'Generador de números de pedido',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'Permitir tipo de producto para RMA',
                     'allow-rma-for-digital-product' => 'Permitir RMA para producto digital',
                     'allowed-file-extension' => 'Extensión de archivo permitida',
-                    'allowed-file-types' => 'Por favor, seleccione solo los tipos de archivo '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => 'Por favor, seleccione solo los tipos de archivo :allowed_types',
                     'allowed-info' => 'Separado por comas. Por ejemplo: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Permitir nueva solicitud de RMA para solicitud cancelada',
                     'allowed-request-declined-request' => 'Permitir nueva solicitud de RMA para solicitud rechazada',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'Dirección de recogida de devoluciones',
                     'return-pickup-time' => 'Hora de recogida de devoluciones',
                     'return-policy' => 'Política de devoluciones',
-                    'select-allowed-order-status' => 'Seleccionar estado de pedido permitido',
                     'specific-products' => 'Productos específicos',
                     'title' => 'RMA',
                     'yes' => 'Sí',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'Comunicaciones',
                 'configure' => 'Configurar',
                 'currencies' => 'Monedas',
-                'custom-field' => 'Campo personalizado',
+                'custom-fields' => 'Campo personalizado',
                 'customers' => 'Clientes',
                 'dashboard' => 'Panel de control',
                 'data-transfer' => 'Transferencia de datos',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'Pedidos',
                 'products' => 'Productos',
                 'promotions' => 'Promociones',
-                'reason' => 'Razón',
+                'reasons' => 'Razón',
                 'refunds' => 'Reembolsos',
                 'reporting' => 'Informes',
                 'requests' => 'Solicitudes',
                 'reviews' => 'Reseñas',
                 'rma' => 'RMA',
-                'rma-status' => 'Estado de RMA',
                 'roles' => 'Roles',
                 'rules' => 'Reglas',
                 'sales' => 'Ventas',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'Configuraciones',
                 'shipments' => 'Envíos',
                 'sitemaps' => 'Mapas del sitio',
+                'statuses' => 'Estado de RMA',
                 'tax-categories' => 'Categorías de impuestos',
                 'tax-rates' => 'Tasas de impuestos',
                 'taxes' => 'Impuestos',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Aplicar',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Generar',
                     'generating' => 'Generando...',
-                    'hd' => 'HD',
+                    'high' => 'Alta',
+                    'landscape' => 'Horizontal (3:2)',
+                    'low' => 'Baja',
+                    'medium' => 'Media',
                     'model' => 'Modelo',
                     'number-of-images' => 'Número de Imágenes',
+                    'portrait' => 'Vertical (2:3)',
                     'prompt' => 'Indicación',
                     'quality' => 'Calidad',
                     'regenerate' => 'Regenerar',
                     'regenerating' => 'Regenerando...',
                     'size' => 'Tamaño',
-                    'standard' => 'Estándar',
+                    'square' => 'Cuadrado (1:1)',
                     'title' => 'Generación de Imágenes con IA',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'Frontal',
                     'next' => 'Siguiente',
                     'size' => 'Tamaño',
+                    'square' => 'Cuadrado (1:1)',
                     'use-cases' => 'Casos de Uso',
                     'zoom' => 'Zoom',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'Aplicar',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'Habilitado',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'Generar',
                 'generated-content' => 'Contenido Generado',
                 'generated-content-info' => 'El contenido generado por IA puede ser engañoso. Por favor, revise el contenido generado antes de aplicarlo.',
                 'generating' => 'Generando...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'Modelo',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
                 'prompt' => 'Indicación',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
                 'title' => 'Asistencia de IA',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5302,7 +5350,7 @@ return [
         'communications' => 'Comunicaciones',
         'configure' => 'Configurar',
         'copy' => 'Copiar',
-        'create' => 'crear',
+        'create' => 'Crear',
         'currencies' => 'Monedas',
         'customers' => 'Clientes',
         'dashboard' => 'Tablero',
@@ -5347,37 +5395,40 @@ return [
         'view' => 'Ver',
 
         'rma' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'view' => 'Ver',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Motivos de RMA',
-        ],
+            'requests' => [
+                'create' => 'Crear',
+                'title' => 'Solicitudes de RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Reglas de RMA',
-        ],
+            'reasons' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Motivos de RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Estado de RMA',
-        ],
+            'rules' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Reglas de RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Campos personalizados',
+            'statuses' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Estados de RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Campos Personalizados',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Descargar',
         'export' => 'Exportar',
+        'no' => 'No',
         'no-records' => 'Nada que exportar',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Sí',
     ],
 
     'validations' => [

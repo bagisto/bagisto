@@ -122,7 +122,6 @@
                             :label="trans('admin::app.cms.edit.content')"
                             :placeholder="trans('admin::app.cms.edit.content')"
                             :tinymce="true"
-                            :prompt="core()->getConfigData('general.magic_ai.content_generation.cms_page_content_prompt')"
                         />
 
                         <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[html_content]" />
@@ -140,7 +139,12 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Component -->
-                    <x-admin::seo slug="page"/>
+                    <x-admin::seo
+                        slug="page"
+                        meta-title-field="meta_title"
+                        url-key-field="url_key"
+                        meta-description-field="meta_description"
+                    />
 
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label>

@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'Reobrir sol·licitud',
                     'title' => 'RMA',
                     'update-success' => 'Estat de la RMA actualitzat correctament.',
+                    'reopen-not-allowed' => 'No es permet reobrir aquesta sol·licitud RMA.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Canal',
                     'contact-number' => 'Número de Contacte',
                     'create-btn' => 'Crear Client',
                     'create-success' => 'Client creat amb éxit',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'Configuració',
 
             'general' => [
-                'info' => 'Estableix opcions d\'unitats.',
+                'info' => 'General',
                 'title' => 'General',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'Títol de l\'Oferta',
                         'redirection-title' => 'Títol de Redirecció',
                         'redirection-link' => 'Enllaç de Redirecció',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'Contingut de drets d\'autor',
+                        'info' => 'Configura el contingut de drets d\'autor que es mostra al peu de pàgina del teu lloc web per protegir la teva propietat intel·lectual i millorar el reconeixement de la marca.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Configurar opcions de Magic AI.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'Clau d\'API',
-                        'enabled' => 'Habilitat',
-                        'llm-api-domain' => 'Dominio d\'API LLM',
-                        'organization' => 'Organització',
-                        'title' => 'Configuració General',
-                        'title-info' => 'Millora la teva experiència amb la funció de Magic AI introduint la teva exclusiva Clau d\'API i indicant l\'Organització pertinent per a una integració sense esforços. Pren el control de les teves credencials d\'OpenAI i personalitza la configuració segons les teves necessitats específiques.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'Indicación de Descripció de Categoria',
-                        'cms-page-content-prompt' => 'Indicación de Contingut de Pàgina CMS',
-                        'enabled' => 'Habilitat',
-                        'product-description-prompt' => 'Indicación de Descripció de Producte',
-                        'product-short-description-prompt' => 'Indicación de Descripció Curta de Producte',
-                        'title' => 'Generació de Contingut',
-                        'title-info' => 'Aquesta funció habilitarà el Magic AI per a cada editor WYSIWYG, on vulguis gestionar el contingut utilitzant la IA.<br/><br/>Quan estigui habilitat, ves a qualsevol editor per generar contingut.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Habilitat',
-                        'title' => 'Generació d\'Imatges',
-                        'title-info' => 'Aquesta funció habilitarà el Magic AI per a cada càrrega d\'imatges, on vulguis generar imatges utilitzant DALL-E.<br/><br/>Quan estigui habilitat, ves a qualsevol càrrega d\'imatges per generar imatges.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Habilitat',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Traducció de ressenyes',
-                        'title-info' => 'Proporciona l\'opció al client o visitant de traduir la ressenya del client a l\'anglès.<br/><br/>Quan estigui habilitat, ves a la ressenya i trobaràs el botó "Traduir a l\'anglès" si la ressenya és en un altre idioma que no sigui l\'anglès.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Habilitat',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'Indicació',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Missatge Personalitzat de Finalització de Compra',
-                        'title-info' => 'Crea un missatge personalitzat de finalització de compra per als clients a la pàgina de gràcies, adaptant el contingut per ressonar amb les preferències individuals i millorant l\'experiència post-compra.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'Configuració de compliment de GDPR',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'Configura els serveis i les credencials de l\'API de tipus de canvi.',
+                    'title' => 'Tipus de canvi',
+
+                    'settings' => [
+                        'default-service' => 'Servei predeterminat',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Configuració general',
+                        'title-info' => 'Selecciona el servei de tipus de canvi predeterminat per utilitzar en les actualitzacions automàtiques de les taxes de divises.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Introdueix la teva clau de Fixer.io API per a les actualitzacions automàtiques dels tipus de canvi.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Introdueix la teva clau d\'ExchangeRate-API per a les actualitzacions automàtiques dels tipus de canvi (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Diàriament',
+                        'enabled' => 'Habilitat',
+                        'frequency' => 'Freqüència',
+                        'monthly' => 'Mensualment',
+                        'time' => 'Hora d\'inici (HH:MM)',
+                        'title' => 'Importació programada',
+                        'title-info' => 'Actualitza automàticament els tipus de canvi de manera programada utilitzant el servei API configurat.',
+                        'weekly' => 'Setmanalment',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'Estableix les opcions del mapa del lloc.',
                     'title' => 'Mapa del lloc',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'Mida màxima de l\'arxiu',
                         'max-url-per-file' => 'Nombre màxim d\'URL per arxiu',
                         'title' => 'Límits d\'arxius',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configureu els paràmetres, proveïdors i funcions de Magic AI.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Configuració general de Magic AI.',
+                    'title' => 'General',
+
+                    'settings' => [
+                        'enabled' => 'Activat',
+                        'title' => 'Configuració',
+                        'title-info' => 'Activeu o desactiveu Magic AI a tota l\'aplicació.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'Clau API',
+                    'info' => 'Configureu les claus API per als vostres proveïdors d\'IA.',
+                    'title' => 'Proveïdors',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configureu les credencials de l\'API d\'OpenAI.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configureu les credencials de l\'API d\'Anthropic.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configureu les credencials de l\'API de Google Gemini.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configureu les credencials de l\'API de Groq.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configureu les credencials de l\'API de xAI.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configureu les credencials de l\'API de DeepSeek.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configureu les credencials de l\'API de Mistral.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configureu les credencials de l\'API d\'Ollama.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Activeu i configureu les funcions d\'IA per al panell d\'administració.',
+                    'title' => 'Funcions d\'administració',
+
+                    'text-generation' => [
+                        'enabled' => 'Activat',
+                        'providers' => 'Proveïdors',
+                        'title' => 'Generació de text',
+                        'title-info' => 'Activeu la generació de text amb IA als editors WYSIWYG del panell d\'administració.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Activat',
+                        'providers' => 'Proveïdors',
+                        'title' => 'Generació d\'imatges',
+                        'title-info' => 'Activeu la generació d\'imatges amb IA per a imatges de productes i contingut.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Activeu i configureu les funcions d\'IA per a la botiga.',
+                    'title' => 'Funcions de la botiga',
+
+                    'review-translation' => [
+                        'enabled' => 'Activat',
+                        'model' => 'Model',
+                        'title' => 'Traducció de ressenyes',
+                        'title-info' => 'Permeteu als clients traduir ressenyes al seu idioma a la botiga.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Activat',
+                        'model' => 'Model',
+                        'title' => 'Missatge de compra personalitzat',
+                        'title-info' => 'Genereu missatges de compra personalitzats per als clients a la pàgina de gràcies.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després de la seva autenticació amb Google. Ha de coincidir amb la URL configurada a la teva consola de Google.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després de la seva autenticació amb Google. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de Google.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Facebook. Ha de coincidir amb la URL configurada als paràmetres de la teva aplicació de Facebook.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Facebook. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada als paràmetres de la teva aplicació de Facebook.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb GitHub. Ha de coincidir amb la URL configurada a la teva consola de GitHub.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb GitHub. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de GitHub.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb LinkedIn. Ha de coincidir amb la URL configurada a la teva consola de LinkedIn.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb LinkedIn. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de LinkedIn.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'URL de redirecció',
-                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Twitter. Ha de coincidir amb la URL configurada a la teva consola de Twitter.',
+                                'title-info' => 'URL de retorn on els usuaris són redirigits després d\'autenticar-se amb Twitter. Utilitza el format d\'URL de marcador de posició mostrat (només canvia el teu domini). Ha de coincidir amb la URL configurada a la teva consola de Twitter.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'Correu electrònic',
                 'title' => 'Correu electrònic',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'El vostre controlador de correu està establert a ":driver" en lloc de "bagisto-dynamic-smtp". Qualsevol canvi fet aquí no tindrà efecte. Si us plau, actualitzeu MAIL_MAILER=bagisto-dynamic-smtp al vostre fitxer .env per activar aquesta configuració.',
+                    'driver-mismatch-title' => 'Aquesta configuració està actualment inactiva.',
+                    'encryption' => 'Xifratge',
+                    'host' => 'Amfitrió',
+                    'info' => 'Configureu la configuració del servidor SMTP per enviar correus electrònics des de la vostra botiga.',
+                    'password' => 'Contrasenya',
+                    'port' => 'Port',
+                    'title' => 'SMTP',
+                    'username' => 'Nom d\'usuari',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'Correu electrònic de l\'administrador',
-                    'admin-email-tip' => 'L\'adreça de correu electrònic de l\'administrador d\'aquest canal per rebre correus electrònics',
+                    'admin-email' => 'Adreça de correu electrònic de l\'administrador',
+                    'admin-email-tip' => 'Totes les notificacions d\'administrador per a aquest canal s\'enviaran a aquesta adreça.',
                     'admin-name' => 'Nom de l\'administrador',
-                    'admin-name-tip' => 'Aquest nom es mostrarà en tots els correus electrònics de l\'administrador',
-                    'admin-page-limit' => 'Elements per pàgina per defecte (Administrador)',
-                    'contact-email' => 'Correu electrònic de contacte',
-                    'contact-email-tip' => 'L\'adreça de correu electrònic es mostrarà a la part inferior dels seus correus electrònics',
+                    'admin-name-tip' => 'Aquest nom apareixerà en tots els correus electrònics enviats a l\'administrador.',
+                    'admin-page-limit' => 'Elements per pàgina per defecte (administrador)',
+                    'contact-email' => 'Adreça de correu electrònic de contacte',
+                    'contact-email-tip' => 'Aquesta adreça de correu electrònic apareixerà al peu de pàgina dels seus correus electrònics.',
                     'contact-name' => 'Nom de contacte',
-                    'contact-name-tip' => 'Aquest nom es mostrarà a la part inferior dels seus correus electrònics',
-                    'email-sender-name' => 'Nom del remitent del correu electrònic',
-                    'email-sender-name-tip' => 'Aquest nom es mostrarà a la safata d\'entrada dels clients',
-                    'info' => 'Establir nom del remitent del correu electrònic, adreça de correu electrònic de la botiga, nom de l\'administrador i adreça de correu electrònic de l\'administrador.',
-                    'shop-email-from' => 'Adreça de correu electrònic de la botiga',
-                    'shop-email-from-tip' => 'L\'adreça de correu electrònic d\'aquest canal per enviar correus electrònics als seus clients',
+                    'contact-name-tip' => 'Aquest nom apareixerà al peu de pàgina dels seus correus electrònics.',
+                    'info' => 'Configureu el nom del remitent, l\'adreça de correu electrònic de la botiga, els detalls de l\'administrador i la informació de contacte utilitzats en tots els correus electrònics.',
+                    'sender-email' => 'Adreça de correu electrònic del remitent',
+                    'sender-email-tip' => 'Els correus electrònics als seus clients s\'enviaran des d\'aquesta adreça.',
+                    'sender-name' => 'Nom del remitent',
+                    'sender-name-tip' => 'Aquest nom apareixerà a la safata d\'entrada dels seus clients com a remitent del correu electrònic.',
                     'title' => 'Configuració de correu electrònic',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'Configura els números de comanda, les comandes mínimes i les comandes pendents.',
                     'title' => 'Configuració de comandes',
+
+                    'order-creation' => [
+                        'info' => 'Configureu el nombre de intents de creació de comanda quan es produeixin errors durant el pagament.',
+                        'max-retry-attempts' => 'Nombre Màxim d\'Intents',
+                        'title' => 'Creació de Comanda',
+                    ],
 
                     'order-number' => [
                         'generator' => 'Generador de números de comanda',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'Permetre tipus de producte per a RMA',
                     'allow-rma-for-digital-product' => 'Permetre RMA per producte digital',
                     'allowed-file-extension' => 'Extensions de fitxer permeses',
-                    'allowed-file-types' => 'Seleccioneu només els tipus de fitxer '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => 'Seleccioneu només els tipus de fitxer :allowed_types',
                     'allowed-info' => 'Separat per comes. Exemple: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'Permetre nova sol·licitud RMA per sol·licitud cancel·lada',
                     'allowed-request-declined-request' => 'Permetre nova sol·licitud RMA per sol·licitud rebutjada',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'Adreça de recollida de devolució',
                     'return-pickup-time' => 'Hora de recollida de devolució',
                     'return-policy' => 'Política de devolució',
-                    'select-allowed-order-status' => 'Selecciona l\'estat de comanda permès',
                     'specific-products' => 'Productes específics',
                     'title' => 'RMA',
                     'yes' => 'Sí',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'Comunicacions',
                 'configure' => 'Configurar',
                 'currencies' => 'Monedes',
-                'custom-field' => 'Camp personalitzat',
+                'custom-fields' => 'Camp personalitzat',
                 'customers' => 'Clients',
                 'dashboard' => 'Tauler de control',
                 'data-transfer' => 'Transferència de dades',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'Comandes',
                 'products' => 'Productes',
                 'promotions' => 'Promocions',
-                'reason' => 'Reason',
+                'reasons' => 'Reason',
                 'refunds' => 'Reemborsaments',
                 'reporting' => 'Informes',
                 'requests' => 'Requests',
                 'reviews' => 'Resenyes',
                 'rma' => 'RMA',
-                'rma-status' => 'Estat RMA',
                 'roles' => 'Rols',
                 'rules' => 'Regles',
                 'sales' => 'Vendes',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'Configuració',
                 'shipments' => 'Enviaments',
                 'sitemaps' => 'Mapes del lloc',
+                'statuses' => 'Estat RMA',
                 'tax-categories' => 'Categories d\'impostos',
                 'tax-rates' => 'Taxes d\'impostos',
                 'taxes' => 'Impostos',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'Només es permeten arxius d\'imatge (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Aplicar',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Generar',
                     'generating' => 'Generant...',
-                    'hd' => 'HD',
+                    'high' => 'Alta',
+                    'landscape' => 'Horitzontal (3:2)',
+                    'low' => 'Baixa',
+                    'medium' => 'Mitjana',
                     'model' => 'Model',
                     'number-of-images' => 'Número d\'Imatges',
+                    'portrait' => 'Vertical (2:3)',
                     'prompt' => 'Indicació',
                     'quality' => 'Qualitat',
                     'regenerate' => 'Regenerar',
                     'regenerating' => 'Regenerant...',
                     'size' => 'Mida',
-                    'standard' => 'Estàndard',
+                    'square' => 'Quadrat (1:1)',
                     'title' => 'Generació d\'Imatges amb IA',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'Frontal',
                     'next' => 'Següent',
                     'size' => 'Mida',
+                    'square' => 'Quadrat (1:1)',
                     'use-cases' => 'Casos d\'Ús',
                     'zoom' => 'Zoom',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'Aplicar',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'Habilitat',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'Generar',
                 'generated-content' => 'Contingut Generat',
                 'generated-content-info' => 'El contingut generat per IA pot ser enganyós. Si us plau, revisa el contingut generat abans d\'aplicar-lo.',
                 'generating' => 'Generant...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'Model',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
                 'prompt' => 'Indicació',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
                 'title' => 'Assistència IA',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5293,7 +5341,7 @@ return [
         'attributes' => 'Atributs',
         'campaigns' => 'Campanyes',
         'cancel' => 'Cancel·lar',
-        'cart-rules' => 'Regles del Carret',
+        'cart-rules' => 'Regles de la Cistella',
         'catalog' => 'Catàleg',
         'catalog-rules' => 'Regles del Catàleg',
         'categories' => 'Categories',
@@ -5305,7 +5353,7 @@ return [
         'create' => 'Crear',
         'currencies' => 'Monedes',
         'customers' => 'Clients',
-        'dashboard' => 'Tauler',
+        'dashboard' => 'Tauler de control',
         'data-transfer' => 'Transferència de Dades',
         'delete' => 'Eliminar',
         'edit' => 'Editar',
@@ -5315,19 +5363,19 @@ return [
         'gdpr' => 'RGPD',
         'groups' => 'Grups',
         'import' => 'Importar',
-        'imports' => 'Imports',
+        'imports' => 'Importacions',
         'inventory-sources' => 'Fonts d\'Inventari',
         'invoices' => 'Factures',
-        'locales' => 'Ubicacions',
+        'locales' => 'Idiomes',
         'marketing' => 'Màrqueting',
-        'newsletter-subscriptions' => 'Subscricpions al Butlletí',
+        'newsletter-subscriptions' => 'Subscripcions al Butlletí',
         'note' => 'Nota',
         'orders' => 'Comandes',
         'products' => 'Productes',
         'promotions' => 'Promocions',
         'refunds' => 'Reemborsaments',
         'reporting' => 'Informes',
-        'reviews' => 'Resenyes',
+        'reviews' => 'Ressenyes',
         'roles' => 'Rols',
         'sales' => 'Vendes',
         'search-seo' => 'Cerca i SEO',
@@ -5347,37 +5395,40 @@ return [
         'view' => 'Veure',
 
         'rma' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'view' => 'Veure',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Raons de RMA',
-        ],
+            'requests' => [
+                'create' => 'Crear',
+                'title' => 'Sol·licituds RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Regles de RMA',
-        ],
+            'reasons' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Motius RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Estat de RMA',
-        ],
+            'rules' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Regles RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'Crear',
-            'delete' => 'Eliminar',
-            'edit' => 'Editar',
-            'title' => 'Camps personalitzats',
+            'statuses' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Estats RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Crear',
+                'delete' => 'Eliminar',
+                'edit' => 'Editar',
+                'title' => 'Camps personalitzats',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Descarregar',
         'export' => 'Exportar',
+        'no' => 'No',
         'no-records' => 'Res que exportar',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Sí',
     ],
 
     'validations' => [

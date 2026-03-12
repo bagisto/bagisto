@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Sales\Contracts\Refund;
 use Webkul\Sales\Exceptions\InvalidRefundQuantityException;
 
 class RefundRepository extends Repository
@@ -34,7 +35,7 @@ class RefundRepository extends Repository
     /**
      * Create refund.
      *
-     * @return \Webkul\Sales\Contracts\Refund
+     * @return Refund
      */
     public function create(array $data)
     {
@@ -173,8 +174,8 @@ class RefundRepository extends Repository
     /**
      * Collect totals.
      *
-     * @param  \Webkul\Sales\Contracts\Refund  $refund
-     * @return \Webkul\Sales\Contracts\Refund
+     * @param  Refund  $refund
+     * @return Refund
      */
     public function collectTotals($refund)
     {

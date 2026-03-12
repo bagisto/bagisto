@@ -43,7 +43,13 @@ export default {
         /**
          * Registration of all global validators.
          */
-        Object.entries(all).forEach(([name, rule]) => defineRule(name, rule));
+        Object.entries(all).forEach(([name, rule]) => {
+            defineRule(name, (value, params, ctx) => {
+                const processedValue = typeof value === 'string' ? value.trim() : value;
+                
+                return rule(processedValue, params, ctx);
+            });
+        });
 
         /**
          * This regular expression allows phone numbers with the following conditions:
@@ -58,7 +64,9 @@ export default {
                 return true;
             }
 
-            if (!/^\+?\d+$/.test(value)) {
+            const trimmedValue = value.trim();
+
+            if (!/^\+?\d+$/.test(trimmedValue)) {
                 return false;
             }
 
@@ -70,9 +78,11 @@ export default {
                 return true;
             }
 
+            const trimmedValue = value.trim();
+
             if (
                 !/^[a-zA-Z0-9\s.\/*'\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u0590-\u05FF\u3040-\u309F\u30A0-\u30FF\u0400-\u04FF\u0D80-\u0DFF\u3400-\u4DBF\u2000-\u2A6D\u00C0-\u017F\u0980-\u09FF\u0900-\u097F\u4E00-\u9FFF,\(\)-]{1,60}$/iu.test(
-                    value
+                    trimmedValue
                 )
             ) {
                 return false;
@@ -86,7 +96,9 @@ export default {
                 return true;
             }
 
-            if (! /^[a-zA-Z0-9][a-zA-Z0-9\s-]*[a-zA-Z0-9]$/.test(value)) {
+            const trimmedValue = value.trim();
+
+            if (! /^[a-zA-Z0-9][a-zA-Z0-9\s-]*[a-zA-Z0-9]$/.test(trimmedValue)) {
                 return false;
             }
 

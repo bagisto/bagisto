@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Helpers\Indexers\Price;
 
+use Webkul\Product\Contracts\ProductBundleOption;
+
 class Bundle extends AbstractType
 {
     /**
@@ -201,7 +203,7 @@ class Bundle extends AbstractType
     /**
      * Get product regular minimal price.
      *
-     * @param  \Webkul\Product\Contracts\ProductBundleOption  $option
+     * @param  ProductBundleOption  $option
      * @param  bool  $minPrice
      * @return float
      */

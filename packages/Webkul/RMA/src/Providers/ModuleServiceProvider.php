@@ -3,6 +3,17 @@
 namespace Webkul\RMA\Providers;
 
 use Konekt\Concord\BaseModuleServiceProvider;
+use Webkul\RMA\Models\RMA;
+use Webkul\RMA\Models\RMAAdditionalField;
+use Webkul\RMA\Models\RMACustomField;
+use Webkul\RMA\Models\RMACustomFieldOption;
+use Webkul\RMA\Models\RMAImage;
+use Webkul\RMA\Models\RMAItem;
+use Webkul\RMA\Models\RMAMessage;
+use Webkul\RMA\Models\RMAReason;
+use Webkul\RMA\Models\RMAReasonResolution;
+use Webkul\RMA\Models\RMARule;
+use Webkul\RMA\Models\RMAStatus;
 
 class ModuleServiceProvider extends BaseModuleServiceProvider
 {
@@ -10,16 +21,16 @@ class ModuleServiceProvider extends BaseModuleServiceProvider
      * Define the models provided by this module
      */
     protected $models = [
-        \Webkul\RMA\Models\RMA::class,
-        \Webkul\RMA\Models\RMAAdditionalField::class,
-        \Webkul\RMA\Models\RMACustomField::class,
-        \Webkul\RMA\Models\RMACustomFieldOption::class,
-        \Webkul\RMA\Models\RMAImage::class,
-        \Webkul\RMA\Models\RMAItem::class,
-        \Webkul\RMA\Models\RMAMessage::class,
-        \Webkul\RMA\Models\RMAReason::class,
-        \Webkul\RMA\Models\RMAReasonResolution::class,
-        \Webkul\RMA\Models\RMARule::class,
-        \Webkul\RMA\Models\RMAStatus::class,
+        RMA::class,
+        RMAAdditionalField::class,
+        RMACustomField::class,
+        RMACustomFieldOption::class,
+        RMAImage::class,
+        RMAItem::class,
+        RMAMessage::class,
+        RMAReason::class,
+        RMAReasonResolution::class,
+        RMARule::class,
+        RMAStatus::class,
     ];
 }

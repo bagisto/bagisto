@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Sipariş Referansı',
                         'rma-status' => 'Talep Durumu',
                         'create' => 'Oluşturulma Tarihi',
+                        'quantity' => 'Miktar',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'Çevir',
                 'translating' => 'Çevriliyor...',
                 'write-a-review' => 'Yorum Yaz',
+            ],
+
+            'contact-us' => [
+                'about' => 'Bize bir not bırakın, size mümkün olan en kısa sürede geri döneceğiz',
+                'desc' => 'Aklınızda ne var?',
+                'describe-here' => 'Burada açıklayın',
+                'email' => 'E-posta',
+                'message' => 'Mesaj',
+                'name' => 'Ad',
+                'phone-number' => 'Telefon Numarası',
+                'submit' => 'Gönder',
+                'title' => 'Bize Ulaşın',
             ],
 
             'add-to-cart' => 'Sepete Ekle',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'RMA durumu güncellenemiyor çünkü bu sipariş için fatura oluşturulmamış.',
             'permission-denied' => 'Giriş yaptınız',
             'rma-disabled' => 'Bu ürün için RMA devre dışı bırakıldı',
+            'reopen-not-allowed' => 'Bu RMA talebini yeniden açmaya izin verilmiyor.',
             'send-message' => ':name başarıyla gönderildi.',
             'update-success' => ':name başarıyla güncellendi.',
         ],

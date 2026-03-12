@@ -233,6 +233,7 @@ test.describe("theme management", () => {
             adminPage
                 .locator("label")
                 .filter({ hasText: "Add Image png, jpeg, jpg" })
+                .last()
                 .click(),
         ]);
         await fileChooser.setFiles(getImageFile());

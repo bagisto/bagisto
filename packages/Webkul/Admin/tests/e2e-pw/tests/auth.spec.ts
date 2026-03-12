@@ -9,9 +9,7 @@ test("should be able to login", async ({ page }) => {
 
 test("should be able to logout", async ({ page }) => {
     await loginAsAdmin(page);
-
-    await page.click("button:text('E')");
+    await page.locator("div.flex.select-none >> button").click();
     await page.getByRole("link", { name: "Logout" }).click();
-
     await expect(page.getByPlaceholder("Password").first()).toBeVisible();
 });

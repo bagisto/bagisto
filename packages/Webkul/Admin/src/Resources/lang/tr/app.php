@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'Talebi yeniden aç',
                     'title' => 'RMA',
                     'update-success' => 'RMA durumu başarıyla güncellendi.',
+                    'reopen-not-allowed' => 'Bu RMA talebini yeniden açmaya izin verilmiyor.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Kanal',
                     'contact-number' => 'İletişim Numarası',
                     'create-btn' => 'Müşteri Oluştur',
                     'create-success' => 'Müşteri başarıyla oluşturuldu',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'Ayarlar',
 
             'general' => [
-                'info' => 'Birim seçeneklerini ayarlayın.',
+                'info' => 'Genel',
                 'title' => 'Genel',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'Teklif Başlığı',
                         'redirection-title' => 'Yönlendirme Başlığı',
                         'redirection-link' => 'Yönlendirme Bağlantısı',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'Telif Hakkı İçeriği',
+                        'info' => 'Fikri mülkiyetinizi korumak ve marka bilinirliğini artırmak için web sitenizin alt bilgisinde görüntülenen telif hakkı içeriğini yapılandırın.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Magic AI seçeneklerini ayarlayın ve içerik oluşturmayı otomatikleştirmek için bazı seçeneklere izin verin.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'API Anahtarı',
-                        'enabled' => 'Etkin',
-                        'llm-api-domain' => 'LLM API Alanı',
-                        'organization' => 'Organizasyon',
-                        'title' => 'Genel Ayarlar',
-                        'title-info' => 'Magic AI özelliğinden tam anlamıyla yararlanmak için özel API Anahtarınızı girin ve ilgili Organizasyonu belirtin. OpenAI kimlik bilgilerinizi kontrol edin ve ayarları belirli ihtiyaçlarınıza göre özelleştirin.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'Kategori Açıklama İsteği',
-                        'cms-page-content-prompt' => 'CMS Sayfa İçeriği İsteği',
-                        'enabled' => 'Etkin',
-                        'product-description-prompt' => 'Ürün Açıklama İsteği',
-                        'product-short-description-prompt' => 'Ürün Kısa Açıklama İsteği',
-                        'title' => 'İçerik Oluşturma',
-                        'title-info' => 'Bu özellik, AI kullanarak içeriği yönetmek istediğiniz her WYSIWYG düzenleyici için Magic AI\'yi etkinleştirir.<br/><br/>Etkinleştirildiğinde, herhangi bir düzenleyiciye giderek içerik oluşturabilirsiniz.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Etkin',
-                        'title' => 'Görüntü Oluşturma',
-                        'title-info' => 'Bu özellik, DALL-E kullanarak görüntü oluşturmak istediğiniz her görüntü yüklemesi için Magic AI\'yi etkinleştirir.<br/><br/>Etkinleştirildiğinde, herhangi bir görüntü yüklemeye giderek görüntü oluşturabilirsiniz.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Etkin',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'İnceleme Çevirisi',
-                        'title-info' => 'Müşteriye veya ziyaretçiye müşteri incelemesini İngilizceye çevirme seçeneği sunun.<br/><br/>Etkinleştirildiğinde, incelemeye gidin ve İngilizce dışındaki bir incelemeyi İngilizceye çevirmek için "İngilizceye Çevir" düğmesini bulacaksınız.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Etkin',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'İstek',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Kişiselleştirilmiş Ödeme Mesajı',
-                        'title-info' => 'Müşterilere Teşekkür Sayfasında kişiselleştirilmiş bir ödeme mesajı hazırlayın, içeriği bireysel tercihlere göre uyarlayarak genel satın alma sonrası deneyimini geliştirin.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR Uyumluluk Ayarları',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'Döviz kuru API hizmetlerini ve kimlik bilgilerini yapılandırın.',
+                    'title' => 'Döviz Kurları',
+
+                    'settings' => [
+                        'default-service' => 'Varsayılan Hizmet',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Genel Ayarlar',
+                        'title-info' => 'Otomatik döviz kuru güncellemeleri için kullanılacak varsayılan döviz kuru hizmetini seçin.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Otomatik döviz kuru güncellemeleri için Fixer.io API anahtarınızı girin.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Otomatik döviz kuru güncellemeleri için ExchangeRate-API anahtarınızı girin (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Günlük',
+                        'enabled' => 'Etkin',
+                        'frequency' => 'Sıklık',
+                        'monthly' => 'Aylık',
+                        'time' => 'Başlangıç Zamanı (HH:MM)',
+                        'title' => 'Zamanlanmış İçe Aktarma',
+                        'title-info' => 'Yapılandırılmış API hizmetini kullanarak döviz kurlarını planlı olarak otomatik güncelleyin.',
+                        'weekly' => 'Haftalık',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'Site haritası seçeneklerini ayarlayın.',
                     'title' => 'Site Haritası',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'Maksimum dosya boyutu',
                         'max-url-per-file' => 'Dosya başına maksimum URL sayısı',
                         'title' => 'Dosya Limitleri',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Magic AI ayarlarını, sağlayıcıları ve özelliklerini yapılandırın.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Genel Magic AI ayarları.',
+                    'title' => 'Genel',
+
+                    'settings' => [
+                        'enabled' => 'Etkin',
+                        'title' => 'Ayarlar',
+                        'title-info' => 'Tüm uygulamanızda Magic AI\'ı etkinleştirin veya devre dışı bırakın.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API Anahtarı',
+                    'info' => 'AI sağlayıcılarınız için API anahtarlarını yapılandırın.',
+                    'title' => 'Sağlayıcılar',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'OpenAI API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Anthropic API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Google Gemini API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Groq API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'xAI API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'DeepSeek API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Mistral API kimlik bilgilerinizi yapılandırın.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Ollama API kimlik bilgilerinizi yapılandırın.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Yönetim paneli için AI özelliklerini etkinleştirin ve yapılandırın.',
+                    'title' => 'Yönetici Özellikleri',
+
+                    'text-generation' => [
+                        'enabled' => 'Etkin',
+                        'providers' => 'Sağlayıcılar',
+                        'title' => 'Metin Oluşturma',
+                        'title-info' => 'Yönetim panelindeki WYSIWYG editörlerinde AI destekli metin oluşturmayı etkinleştirin.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Etkin',
+                        'providers' => 'Sağlayıcılar',
+                        'title' => 'Görsel Oluşturma',
+                        'title-info' => 'Ürün ve içerik görselleri için AI destekli görsel oluşturmayı etkinleştirin.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Mağaza için AI özelliklerini etkinleştirin ve yapılandırın.',
+                    'title' => 'Mağaza Özellikleri',
+
+                    'review-translation' => [
+                        'enabled' => 'Etkin',
+                        'model' => 'Model',
+                        'title' => 'Yorum Çevirisi',
+                        'title-info' => 'Müşterilerin mağazada yorumları kendi dillerine çevirmesine izin verin.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Etkin',
+                        'model' => 'Model',
+                        'title' => 'Kişiselleştirilmiş Ödeme Mesajı',
+                        'title-info' => 'Teşekkür sayfasında müşteriler için kişiselleştirilmiş ödeme mesajları oluşturun.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar Google ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Google konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar Google ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). Google konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar Facebook ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Facebook uygulama ayarlarınızda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar Facebook ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). Facebook uygulama ayarlarınızda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar GitHub ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. GitHub konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar GitHub ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). GitHub konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar LinkedIn ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. LinkedIn konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar LinkedIn ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). LinkedIn konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Yönlendirme URL\'si',
-                                'title-info' => 'Kullanıcılar Twitter ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Twitter konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
+                                'title-info' => 'Kullanıcılar Twitter ile kimlik doğrulamasından sonra yönlendirilen geri çağırma URL\'si. Gösterilen yer tutucu URL formatını kullanın (yalnızca alan adınızı değiştirin). Twitter konsolunuzda yapılandırılan URL ile aynı olmalıdır.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'E-posta',
                 'title' => 'E-posta',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'Posta sürücünüz "bagisto-dynamic-smtp" yerine ":driver" olarak ayarlanmış. Burada yapılan herhangi bir değişiklik etkili olmayacaktır. Bu ayarları etkinleştirmek için lütfen .env dosyanızda MAIL_MAILER=bagisto-dynamic-smtp güncelleyin.',
+                    'driver-mismatch-title' => 'Bu ayarlar şu anda etkin değil.',
+                    'encryption' => 'Şifreleme',
+                    'host' => 'Ana Bilgisayar',
+                    'info' => 'Mağazanızdan e-posta göndermek için SMTP sunucu ayarlarını yapılandırın.',
+                    'password' => 'Şifre',
+                    'port' => 'Port',
+                    'title' => 'SMTP',
+                    'username' => 'Kullanıcı Adı',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'Yönetici E-postası',
-                    'admin-email-tip' => 'Bu kanal için yöneticiye e-posta göndermek için kullanılan e-posta adresi',
+                    'admin-email' => 'Yönetici E-posta Adresi',
+                    'admin-email-tip' => 'Bu kanal için tüm yönetici bildirimleri bu adrese gönderilecektir.',
                     'admin-name' => 'Yönetici Adı',
-                    'admin-name-tip' => 'Bu isim tüm yönetici e-postalarında görünecektir',
-                    'admin-page-limit' => 'Varsayılan Sayfa Başına Öğe (Yönetici)',
-                    'contact-email' => 'İletişim E-postası',
-                    'contact-email-tip' => 'E-postalarınızın altında gösterilecek e-posta adresi',
+                    'admin-name-tip' => 'Bu isim yöneticiye gönderilen tüm e-postalarda görünecektir.',
+                    'admin-page-limit' => 'Varsayılan Sayfa Başına Öğe Sayısı (Yönetici)',
+                    'contact-email' => 'İletişim E-posta Adresi',
+                    'contact-email-tip' => 'Bu e-posta adresi e-postalarınızın altbilgisinde görünecektir.',
                     'contact-name' => 'İletişim Adı',
-                    'contact-name-tip' => 'E-postalarınızın altında gösterilecek isim',
-                    'email-sender-name' => 'E-posta Gönderen Adı',
-                    'email-sender-name-tip' => 'Bu isim müşterilerin gelen kutusunda görünecektir',
-                    'info' => 'E-posta gönderen adını, mağaza e-posta adresini, yönetici adını ve yönetici e-posta adresini ayarlayın.',
-                    'shop-email-from' => 'Mağaza E-posta Adresi',
-                    'shop-email-from-tip' => 'Müşterilerinize e-posta göndermek için bu kanalın e-posta adresi',
+                    'contact-name-tip' => 'Bu isim e-postalarınızın altbilgisinde görünecektir.',
+                    'info' => 'Tüm e-postalarda kullanılan gönderen adı, mağaza e-posta adresi, yönetici ve iletişim ayrıntılarını yapılandırın.',
+                    'sender-email' => 'Gönderen E-posta Adresi',
+                    'sender-email-tip' => 'Müşterilerinize gönderilecek e-postalar bu adresten gönderilecektir.',
+                    'sender-name' => 'Gönderen Adı',
+                    'sender-name-tip' => 'Bu isim müşterilerin gelen kutusunda e-posta göndereni olarak görünecektir.',
                     'title' => 'E-posta Ayarları',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'Sipariş numaralarını, minimum siparişleri ve geri siparişleri ayarlayın.',
                     'title' => 'Sipariş Ayarları',
+
+                    'order-creation' => [
+                        'info' => 'Ödeme sırasında hata oluştuğunda sipariş oluşturma yeniden deneme sayısını yapılandırın.',
+                        'max-retry-attempts' => 'Maksimum Yeniden Deneme Sayısı',
+                        'title' => 'Sipariş Oluşturma',
+                    ],
 
                     'order-number' => [
                         'generator' => 'Sipariş Numarası Oluşturucusu',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'RMA için ürün türüne izin ver',
                     'allow-rma-for-digital-product' => 'Dijital ürün için RMA\'ya izin ver',
                     'allowed-file-extension' => 'İzin verilen dosya uzantısı',
-                    'allowed-file-types' => 'Lütfen yalnızca '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' dosya türlerini seçin',
+                    'allowed-file-types' => 'Lütfen yalnızca :allowed_types dosya türlerini seçin',
                     'allowed-info' => 'Virgülle ayrılmış. Örneğin: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'İptal edilen talep için yeni RMA talebine izin ver',
                     'allowed-request-declined-request' => 'Reddedilen talep için yeni RMA talebine izin ver',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'İade Alma Adresi',
                     'return-pickup-time' => 'İade Alma Zamanı',
                     'return-policy' => 'İade Politikası',
-                    'select-allowed-order-status' => 'İzin verilen sipariş durumunu seçin',
                     'specific-products' => 'Belirli Ürünler',
                     'title' => 'RMA',
                     'yes' => 'Evet',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'İletişim',
                 'configure' => 'Yapılandır',
                 'currencies' => 'Para Birimleri',
-                'custom-field' => 'Özel Alan',
+                'custom-fields' => 'Özel Alan',
                 'customers' => 'Müşteriler',
                 'dashboard' => 'Kontrol Paneli',
                 'data-transfer' => 'Veri aktarımı',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'Siparişler',
                 'products' => 'Ürünler',
                 'promotions' => 'Promosyonlar',
-                'reason' => 'Sebep',
+                'reasons' => 'Sebep',
                 'refunds' => 'İade',
                 'reporting' => 'Raporlama',
                 'requests' => 'Talepler',
                 'reviews' => 'Yorumlar',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA Durumu',
                 'roles' => 'Roller',
                 'rules' => 'Kurallar',
                 'sales' => 'Satışlar',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'Ayarlar',
                 'shipments' => 'Gönderiler',
                 'sitemaps' => 'Site Haritaları',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'Vergi Kategorileri',
                 'tax-rates' => 'Vergi Oranları',
                 'taxes' => 'Vergiler',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Uygula',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Oluştur',
                     'generating' => 'Oluşturuluyor...',
-                    'hd' => 'HD',
+                    'high' => 'Yüksek',
+                    'landscape' => 'Yatay (3:2)',
+                    'low' => 'Düşük',
+                    'medium' => 'Orta',
                     'model' => 'Model',
                     'number-of-images' => 'Resim Sayısı',
-                    'prompt' => 'İpucu',
+                    'portrait' => 'Dikey (2:3)',
+                    'prompt' => 'İstem',
                     'quality' => 'Kalite',
                     'regenerate' => 'Yeniden Oluştur',
                     'regenerating' => 'Yeniden Oluşturuluyor...',
                     'size' => 'Boyut',
-                    'standard' => 'Standart',
+                    'square' => 'Kare (1:1)',
                     'title' => 'AI İmaj Oluşturma',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'Ön',
                     'next' => 'Sonraki',
                     'size' => 'Boyut',
+                    'square' => 'Kare (1:1)',
                     'use-cases' => 'Kullanım Alanları',
                     'zoom' => 'Yakınlaştırma',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'Uygula',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'Etkin',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'Oluştur',
                 'generated-content' => 'Oluşturulan İçerik',
                 'generated-content-info' => 'AI içeriği yanıltıcı olabilir. Lütfen oluşturulan içeriği uygulamadan önce gözden geçirin.',
                 'generating' => 'Oluşturuluyor...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'Model',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
-                'prompt' => 'İpucu',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
+                'prompt' => 'İstem',
                 'title' => 'AI Yardımı',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5347,37 +5395,40 @@ return [
         'view' => 'Görüntüle',
 
         'rma' => [
-            'create' => 'Oluştur',
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'view' => 'Görüntüle',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Oluştur',
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'title' => 'RMA Nedenleri',
-        ],
+            'requests' => [
+                'create' => 'Oluştur',
+                'title' => 'RMA Talepleri',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'title' => 'RMA Kuralları',
-        ],
+            'reasons' => [
+                'create' => 'Oluştur',
+                'delete' => 'Sil',
+                'edit' => 'Düzenle',
+                'title' => 'RMA Sebepleri',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'title' => 'RMA Durumu',
-        ],
+            'rules' => [
+                'create' => 'Oluştur',
+                'delete' => 'Sil',
+                'edit' => 'Düzenle',
+                'title' => 'RMA Kuralları',
+            ],
 
-        'custom-field' => [
-            'create' => 'Oluştur',
-            'delete' => 'Sil',
-            'edit' => 'Düzenle',
-            'title' => 'Özel Alanlar',
+            'statuses' => [
+                'create' => 'Oluştur',
+                'delete' => 'Sil',
+                'edit' => 'Düzenle',
+                'title' => 'RMA Durumları',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Oluştur',
+                'delete' => 'Sil',
+                'edit' => 'Düzenle',
+                'title' => 'Özel Alanlar',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'İndir',
         'export' => 'Dışa Aktar',
+        'no' => 'Hayır',
         'no-records' => 'Dışa aktarılacak hiçbir şey yok',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Evet',
     ],
 
     'validations' => [

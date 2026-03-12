@@ -2,6 +2,8 @@
 
 namespace Webkul\PayU\Http\Controllers;
 
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\PayU\Payment\PayU;
@@ -34,7 +36,7 @@ class PayUController extends Controller
     /**
      * Redirect to PayU payment gateway.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function redirect()
     {
@@ -63,7 +65,7 @@ class PayUController extends Controller
     /**
      * Handle payment success callback.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function success()
     {
@@ -143,7 +145,7 @@ class PayUController extends Controller
     /**
      * Handle payment failure callback.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function failure()
     {
@@ -155,7 +157,7 @@ class PayUController extends Controller
     /**
      * Handle payment cancel callback.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function cancel()
     {

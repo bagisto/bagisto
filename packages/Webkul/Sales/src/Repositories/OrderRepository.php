@@ -39,10 +39,12 @@ class OrderRepository extends Repository
     /**
      * This method will try attempt to a create order.
      *
-     * @return \Webkul\Sales\Contracts\Order
+     * @return OrderContract
      */
-    public function createOrderIfNotThenRetry(array $data)
+    public function createOrderIfNotThenRetry(array $data, int $attempt = 1, ?int $maxAttempts = null)
     {
+        $maxAttempts = $maxAttempts ?? core()->getConfigData('sales.order_settings.order_creation.max_retry_attempts') ?? 3;
+
         DB::beginTransaction();
 
         try {
@@ -88,11 +90,16 @@ class OrderRepository extends Repository
             /* storing log for errors */
             Log::error(
                 'OrderRepository:createOrderIfNotThenRetry: '.$e->getMessage(),
-                ['data' => $data]
+                ['data' => $data, 'attempt' => $attempt, 'max_attempts' => $maxAttempts]
             );
 
-            /* recalling */
-            return $this->createOrderIfNotThenRetry($data);
+            /* recalling if max attempts not reached */
+            if ($attempt < $maxAttempts) {
+                return $this->createOrderIfNotThenRetry($data, $attempt + 1, $maxAttempts);
+            }
+
+            /* rethrow the exception if max attempts reached */
+            throw $e;
         } finally {
             /* commit in each case */
             DB::commit();
@@ -104,7 +111,7 @@ class OrderRepository extends Repository
     /**
      * Create order.
      *
-     * @return \Webkul\Sales\Contracts\Order
+     * @return OrderContract
      */
     public function create(array $data)
     {
@@ -114,7 +121,7 @@ class OrderRepository extends Repository
     /**
      * Cancel order. This method should be independent as admin also can cancel the order.
      *
-     * @param  \Webkul\Sales\Models\Order|int  $orderOrId
+     * @param  Order|int  $orderOrId
      * @return bool
      */
     public function cancel($orderOrId)
@@ -187,7 +194,7 @@ class OrderRepository extends Repository
     /**
      * Is order in completed state.
      *
-     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  OrderContract  $order
      * @return bool
      */
     public function isInCompletedState($order)
@@ -252,7 +259,7 @@ class OrderRepository extends Repository
     /**
      * Is order in cancelled state.
      *
-     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  OrderContract  $order
      * @return bool
      */
     public function isInCanceledState($order)
@@ -289,7 +296,7 @@ class OrderRepository extends Repository
     /**
      * Update order status.
      *
-     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  OrderContract  $order
      * @param  string  $orderState
      * @return void
      */
@@ -323,7 +330,7 @@ class OrderRepository extends Repository
     /**
      * Collect totals.
      *
-     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  OrderContract  $order
      * @return mixed
      */
     public function collectTotals($order)
@@ -386,8 +393,8 @@ class OrderRepository extends Repository
     /**
      * This method will find order if id is given else pass the order as it is.
      *
-     * @param  \Webkul\Sales\Models\Order|int  $orderOrId
-     * @return \Webkul\Sales\Contracts\Order
+     * @param  Order|int  $orderOrId
+     * @return OrderContract
      */
     protected function resolveOrderInstance($orderOrId)
     {

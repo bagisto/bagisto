@@ -48,8 +48,21 @@ class RMARepository extends Repository
      */
     public function canReopenRma($rma): bool
     {
-        return core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') === 'yes'
-            && $rma->rma_status_id === DefaultRMAStatusEnum::CANCELED->value;
+        if (
+            $rma->rma_status_id === DefaultRMAStatusEnum::CANCELED->value
+            && core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') === 'yes'
+        ) {
+            return true;
+        }
+
+        if (
+            $rma->rma_status_id === DefaultRMAStatusEnum::DECLINED->value
+            && core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_declined_request') === 'yes'
+        ) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

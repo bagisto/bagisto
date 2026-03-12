@@ -17,6 +17,7 @@
         validations="{{ $field->getValidations() }}"
         is-require="{{ $field->isRequired() }}"
         depend-name="{{ $field->getDependFieldName() }}"
+        placeholder="{{ $field->getPlaceholder() }}"
         src="{{ Storage::url($value) }}"
         field-data="{{ json_encode($field) }}"
         channel-count="{{ $channels->count() }}"
@@ -68,6 +69,7 @@
                     ::value="value"
                     ::rules="validations"
                     ::label="label"
+                    ::placeholder="placeholder"
                 />
             </template>
         
@@ -80,6 +82,7 @@
                     ::value="value"
                     ::rules="validations"
                     ::label="label"
+                    ::placeholder="placeholder"
                 />
             </template>
         
@@ -93,6 +96,7 @@
                     ::value="value"
                     ::label="label"
                     ::min="field.name == 'minimum_order_amount'"
+                    ::placeholder="placeholder"
                 />
             </template>
 
@@ -125,6 +129,7 @@
                     ::rules="validations"
                     ::value="value"
                     ::label="label"
+                    ::placeholder="placeholder"
                 />
             </template>
 
@@ -223,7 +228,7 @@
                         :checked="parseInt(value || 0)"
                     >
 
-                    <div class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"></div>
+                    <div class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950"></div>
                 </label>
             </template>
         
@@ -447,6 +452,7 @@
                 'src',
                 'validations',
                 'value',
+                'placeholder',
             ],
 
             data() {

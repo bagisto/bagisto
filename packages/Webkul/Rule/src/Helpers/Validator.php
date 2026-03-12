@@ -2,16 +2,20 @@
 
 namespace Webkul\Rule\Helpers;
 
+use Webkul\CartRule\Contracts\CartRule;
+use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\Checkout\Contracts\Cart as CheckoutContract;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Checkout\Facades\Cart;
+use Webkul\Product\Contracts\Product;
 
 class Validator
 {
     /**
      * Validate cart rule for condition
      *
-     * @param  \Webkul\CartRule\Contracts\CartRule|\Webkul\CatalogRule\Contracts\CatalogRule  $rule
-     * @param  \Webkul\Checkout\Contracts\Cart|\Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $entity
+     * @param  CartRule|CatalogRule  $rule
+     * @param  CheckoutContract|CartItem|Product  $entity
      * @return bool
      */
     public function validate($rule, $entity)
@@ -25,7 +29,8 @@ class Validator
         foreach ($rule->conditions as $condition) {
             if (
                 ! $condition['attribute']
-                || empty($condition['value'])
+                || ! isset($condition['value'])
+                || is_null($condition['value'])
             ) {
                 continue;
             }
@@ -59,7 +64,7 @@ class Validator
      * Return value for the attribute
      *
      * @param  array  $condition
-     * @param  \Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $entity
+     * @param  CartItem|Product  $entity
      * @return bool
      */
     public function getAttributeValue($condition, $entity)
@@ -126,7 +131,7 @@ class Validator
      * Validate object
      *
      * @param  array  $condition
-     * @param  \Webkul\Checkout\Contracts\CartItem  $entity
+     * @param  CartItem  $entity
      * @return bool
      */
     private function validateObject($condition, $entity)
@@ -148,7 +153,7 @@ class Validator
      * Return all cart items
      *
      * @param  string  $attributeScope
-     * @param  \Webkul\Checkout\Contracts\Cart|\Webkul\Checkout\Contracts\CartItem|\Webkul\Product\Contracts\Product  $item
+     * @param  CheckoutContract|CartItem|Product  $item
      * @return array
      */
     private function getAllItems($attributeScope, $item)

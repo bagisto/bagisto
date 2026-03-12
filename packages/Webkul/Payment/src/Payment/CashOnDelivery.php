@@ -31,7 +31,7 @@ class CashOnDelivery extends Payment
             $this->setCart();
         }
 
-        return $this->getConfigData('active') && $this->cart?->haveStockableItems();
+        return $this->getConfigData('active') && $this->cart?->hasOnlyStockableItems();
     }
 
     /**

@@ -1,3 +1,13 @@
+@php
+    use Webkul\MagicAI\AiProvider;
+
+    $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.text_generation.providers') ?? ''));
+    
+    $models = AiProvider::modelsForProviders($enabledProviders, 'text');
+    
+    $defaultModel = $models[0]['value'] ?? '';
+@endphp
+
 <v-tinymce {{ $attributes }}></v-tinymce>
 
 @pushOnce('scripts')
@@ -33,111 +43,6 @@
 
                     <!-- Modal Content -->
                     <x-slot:content>
-                        <!-- LLM Model -->
-                        <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required">
-                                @lang('admin::app.components.tinymce.ai-generation.model')
-                            </x-admin::form.control-group.label>
-
-                            <x-admin::form.control-group.control
-                                type="select"
-                                name="model"
-                                rules="required"
-                                v-model="ai.model"
-                                :label="trans('admin::app.components.tinymce.ai-generation.model')"
-                            >
-                                <option value="gpt-4-turbo">
-                                    @lang('admin::app.components.tinymce.ai-generation.gpt-4-turbo')
-                                </option>
-
-                                <option value="gpt-4o">
-                                    @lang('admin::app.components.tinymce.ai-generation.gpt-4o')
-                                </option>
-
-                                <option value="gpt-4o-mini">
-                                    @lang('admin::app.components.tinymce.ai-generation.gpt-4o-mini')
-                                </option>
-
-                                <option value="gemini-2.0-flash">
-                                    @lang('admin::app.components.tinymce.ai-generation.gemini-2-0-flash')
-                                </option>
-
-                                <option value="deepseek-r1:8b">
-                                    @lang('admin::app.components.tinymce.ai-generation.deepseek-r1-8b')
-                                </option>
-
-                                <option value="llama3-8b-8192">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama-groq')
-                                </option>
-
-                                <option value="llama3.2:3b">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama3-2-3b')
-                                </option>
-
-                                <option value="llama3.2:1b">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama3-2-1b')
-                                </option>
-
-                                <option value="llama3.1:8b">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama3-1-8b')
-                                </option>
-
-                                <option value="llama3:8b">
-                                    @lang('admin::app.components.tinymce.ai-generation.llama3-8b')
-                                </option>
-
-                                <option value="llava:7b">
-                                    @lang('admin::app.components.tinymce.ai-generation.llava-7b')
-                                </option>
-
-                                <option value="vicuna:13b">
-                                    @lang('admin::app.components.tinymce.ai-generation.vicuna-13b')
-                                </option>
-
-                                <option value="vicuna:7b">
-                                    @lang('admin::app.components.tinymce.ai-generation.vicuna-7b')
-                                </option>
-
-                                <option value="qwen2.5:14b">
-                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-14b')
-                                </option>
-
-                                <option value="qwen2.5:7b">
-                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-7b')
-                                </option>
-
-                                <option value="qwen2.5:3b">
-                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-3b')
-                                </option>
-
-                                <option value="qwen2.5:1.5b">
-                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-1-5b')
-                                </option>
-
-                                <option value="qwen2.5:0.5b">
-                                    @lang('admin::app.components.tinymce.ai-generation.qwen2-5-0-5b')
-                                </option>
-
-                                <option value="mistral:7b">
-                                    @lang('admin::app.components.tinymce.ai-generation.mistral-7b')
-                                </option>
-
-                                <option value="starling-lm:7b">
-                                    @lang('admin::app.components.tinymce.ai-generation.starling-lm-7b')
-                                </option>
-
-                                <option value="phi3.5">
-                                    @lang('admin::app.components.tinymce.ai-generation.phi3-5')
-                                </option>
-
-                                <option value="orca-mini">
-                                    @lang('admin::app.components.tinymce.ai-generation.orca-mini')
-                                </option>
-                            </x-admin::form.control-group.control>
-
-                            <x-admin::form.control-group.error control-name="model"></x-admin::form.control-group.error>
-                        </x-admin::form.control-group>
-
                         <!-- Prompt -->
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="required">
@@ -154,6 +59,27 @@
                             />
 
                             <x-admin::form.control-group.error control-name="prompt" />
+                        </x-admin::form.control-group>
+
+                        <!-- Model Select -->
+                        <x-admin::form.control-group v-if="ai.models && ai.models.length">
+                            <x-admin::form.control-group.label>
+                                @lang('admin::app.components.tinymce.ai-generation.model')
+                            </x-admin::form.control-group.label>
+
+                            <x-admin::form.control-group.control
+                                type="select"
+                                name="model"
+                                v-model="ai.model"
+                                :label="trans('admin::app.components.tinymce.ai-generation.model')"
+                            >
+                                <option
+                                    v-for="option in ai.models"
+                                    :key="option.value"
+                                    :value="option.value"
+                                    v-text="option.title"
+                                ></option>
+                            </x-admin::form.control-group.control>
                         </x-admin::form.control-group>
 
                         <!-- Modal Submission -->
@@ -230,9 +156,11 @@
                     isLoading: false,
 
                     ai: {
-                        enabled: Boolean("{{ core()->getConfigData('general.magic_ai.settings.enabled') && core()->getConfigData('general.magic_ai.content_generation.enabled') }}"),
+                        enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.text_generation.enabled') }}"),
 
-                        model: null,
+                        models: {!! json_encode($models) !!},
+
+                        model: "{{ $defaultModel }}",
 
                         prompt: null,
 
@@ -392,6 +320,10 @@
 
                                 onAction: function () {
                                     self.ai = {
+                                        models: self.ai.models,
+
+                                        model: self.ai.model,
+
                                         prompt: self.prompt,
 
                                         content: null,
@@ -413,7 +345,7 @@
 
                     this.$axios.post("{{ route('admin.magic_ai.content') }}", {
                         prompt: params['prompt'],
-                        model: params['model']
+                        model: this.ai.model,
                     })
                         .then(response => {
                             this.isLoading = false;

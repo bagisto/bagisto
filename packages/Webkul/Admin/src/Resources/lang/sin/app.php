@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'ඉල්ලීම නැවත විවෘත කරන්න',
                     'title' => 'RMA',
                     'update-success' => 'RMA තත්ත්වය සාර්ථකව යාවත්කාලීන කර ඇත.',
+                    'reopen-not-allowed' => 'මෙම RMA ඉල්ලීම නැවත විවෘත කිරීමට අවසර නැත.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'නාලිකාව',
                     'contact-number' => 'සම්බන්ධ අංකය',
                     'create-btn' => 'පාරිභෝගිකයාගේ සාදය',
                     'create-success' => 'පාරිභෝගිකයා සාර්ථකව හරියට එකඟයි',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'වින්‍යාසය',
 
             'general' => [
-                'info' => 'ඒකක විකල්ප සකසන්න.',
+                'info' => 'සාමාන්‍ය',
                 'title' => 'සාමාන්‍ය',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'ප්‍රවාහන සිතියම් මාතෘකාව',
                         'redirection-title' => 'නැවත යළි මාතෘකාව',
                         'redirection-link' => 'නැවත යළි සබැඳියාව',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'කතෘ හිමිකම් අන්තර්ගතය',
+                        'info' => 'ඔබගේ වෙබ් අඩවියේ පාදක කොටසේ පෙන්වන කතෘ හිමිකම් අන්තර්ගතය වින්‍යාස කර ඔබගේ බුද්ධිමය දේපළ ආරක්ෂා කරමින් වෙළඳ නාම හඳුනාගැනීම වැඩි කරන්න.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'මැජික් AI විකල්ප සකසන්න සහ අන්තර්ගතය ස්වයංක්‍රීයව නිර්මාණය කිරීමට විකල්ප කිහිපයක් සක්‍රීය කරන්න.',
-                    'title' => 'මැජික් එයි',
-
-                    'settings' => [
-                        'api-key' => 'API යතුර',
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'llm-api-domain' => 'LLM API ඩොමේන්',
-                        'organization' => 'සංවිධානය',
-                        'title' => 'සාමාන්‍ය සැකසීම්',
-                        'title-info' => 'ඔබේ විවිධ අවස්ථාවක් සඳහා Magic AI විස්තර සැකසීම් සඳහා ඔබේ විවිධ API යතුර සහ අන්තර්ගතය අතුරුම්කරන්න. OpenAI හි ඔබේ විවිධ අංකයන් සහාය සඳහා සැකසීම් අනුව ඔබේ විවිධ අවස්ථාවක් සක්‍රිය කරන්න.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'ප්‍රවර්ග විස්තර ප්‍රවර්ගය',
-                        'cms-page-content-prompt' => 'CMS පිටුව අන්තර්ගතය ප්‍රවර්ගය',
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'product-description-prompt' => 'නිෂ්පාදන විස්තර ප්‍රවර්ගය',
-                        'product-short-description-prompt' => 'නිෂ්පාදන කෙටි විස්තර ප්‍රවර්ගය',
-                        'title' => 'අන්තර්ගතය සැකසීම්',
-                        'title-info' => 'මෙම විස්තරය සැකසීම සඳහා Magic AI සක්‍රිය කරයි, ඔබට AI භාවිතා කරන්නේ කොටස් සඳහා අන්තර්ගතය කළ හැකි විකල්පයක් සඳහා.<br/><br/>සක්‍රිය කිරීමෙන් පෙර කිසිදු සංවිධානයක් සක්‍රිය වීමට යම් සංවිධානයක් සඳහා යෙදුමක් යොමු කරන්න.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'සක්‍රිය කරන්න',
-                        'title' => 'රූප සැකසීම්',
-                        'title-info' => 'මෙම විස්තරය සඳහා Magic AI සක්‍රිය කරයි, ඔබට DALL-E භාවිතා කරන්නේ රූප උදව් කිරීමට කොටස් සඳහා අන්තර්ගතය කළ හැකි විකල්පයක් සඳහා.<br/><br/>සක්‍රිය කිරීමෙන් පෙර කිසිදු රූපයක් උදව් කිරීමට යම් රූපයක් උදව් කිරීමට යොමු කරන්න.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'සක්‍රීයයි',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'ආකෘතිය',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'සමාලෝචන පරිවර්තනය',
-                        'title-info' => 'පාරිභෝගික සමාලෝචනය ඉංග්‍රීසිට පරිවර්තනය කිරීමට පාරිභෝගිකයා හෝ සංචාරකයාට විකල්පයක් සපයන්න.<br/><br/>සක්‍රීය කිරීමෙන් පසු, සමාලෝචනයට යන්න, ඔබට "ඉංග්‍රීසිට පරිවර්තනය කරන්න" බොත්තමක් සොයාගත හැකිය, ඔබේ සමාලෝචනය ඉංග්‍රීසි නොවන විට.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'සක්‍රීයයි',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'ආකෘතිය',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'ප්‍රවර්ධනය',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'පිටවීමේ පණිවිඩය',
-                        'title-info' => 'පාරිභෝගිකයින් සඳහා ස්වයංක්‍රීය පිටවීමේ පණිවිඩයක් නිර්මාණය කරන්න, ස්වයංක්‍රීයව පසු-මිලදී ගැනීමේ අත්දැකීම වැඩිදියුණු කිරීම සඳහා අන්තර්ගතය අභිරුචි කරන්න.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR අනුකූලතා සැකසුම්',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'විනිමය අනුපාත API සේවා සහ අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    'title' => 'විනිමය අනුපාත',
+
+                    'settings' => [
+                        'default-service' => 'පෙරනිමි සේවාව',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'සාමාන්‍ය සැකසුම්',
+                        'title-info' => 'ස්වයංක්‍රීය මුදල් අනුපාත යාවත්කාලීන කිරීම සඳහා පෙරනිමි විනිමය අනුපාත සේවාව තෝරන්න.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'ස්වයංක්‍රීය විනිමය අනුපාත යාවත්කාලීන කිරීම සඳහා ඔබගේ Fixer.io API යතුර ඇතුළත් කරන්න.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'ස්වයංක්‍රීය විනිමය අනුපාත යාවත්කාලීන කිරීම සඳහා ඔබගේ ExchangeRate-API යතුර ඇතුළත් කරන්න (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'දිනපතා',
+                        'enabled' => 'සක්‍රීයයි',
+                        'frequency' => 'සංඛ්‍යාතය',
+                        'monthly' => 'මාසිකව',
+                        'time' => 'ආරම්භක වේලාව (HH:MM)',
+                        'title' => 'කාලසටහන්ගත ආනයනය',
+                        'title-info' => 'වින්‍යාස කළ API සේවාව භාවිතයෙන් කාලසටහනක් අනුව විනිමය අනුපාත ස්වයංක්‍රීයව යාවත්කාලීන කරන්න.',
+                        'weekly' => 'සතිපතා',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'සයිට්මැප් විකල්ප සකසන්න.',
                     'title' => 'සයිට්මැප්',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'උපරිම ගොනුවේ විශාලත්වය',
                         'max-url-per-file' => 'ගොනුවකට උපරිම URL සංඛ්‍යාව',
                         'title' => 'ගොනු සීමා',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Magic AI සැකසුම්, සපයන්නන් සහ විශේෂාංග වින්‍යාස කරන්න.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'සාමාන්‍ය Magic AI සැකසුම්.',
+                    'title' => 'සාමාන්‍ය',
+
+                    'settings' => [
+                        'enabled' => 'සක්‍රිය',
+                        'title' => 'සැකසුම්',
+                        'title-info' => 'ඔබගේ සම්පූර්ණ යෙදුම පුරා Magic AI සක්‍රිය හෝ අක්‍රිය කරන්න.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API යතුර',
+                    'info' => 'ඔබගේ AI සපයන්නන් සඳහා API යතුරු වින්‍යාස කරන්න.',
+                    'title' => 'සපයන්නන්',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'ඔබගේ OpenAI API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'ඔබගේ Anthropic API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'ඔබගේ Google Gemini API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'ඔබගේ Groq API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'ඔබගේ xAI API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'ඔබගේ DeepSeek API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'ඔබගේ Mistral API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'ඔබගේ Ollama API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'පරිපාලක පැනලය සඳහා AI විශේෂාංග සක්‍රිය සහ වින්‍යාස කරන්න.',
+                    'title' => 'පරිපාලක විශේෂාංග',
+
+                    'text-generation' => [
+                        'enabled' => 'සක්‍රිය',
+                        'providers' => 'සපයන්නන්',
+                        'title' => 'පෙළ ජනනය',
+                        'title-info' => 'පරිපාලක පැනලයේ WYSIWYG සංස්කාරකවල AI-බලගැන්වූ පෙළ ජනනය සක්‍රිය කරන්න.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'සක්‍රිය',
+                        'providers' => 'සපයන්නන්',
+                        'title' => 'රූප ජනනය',
+                        'title-info' => 'නිෂ්පාදන සහ අන්තර්ගත රූප සඳහා AI-බලගැන්වූ රූප ජනනය සක්‍රිය කරන්න.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'වෙළඳසැල සඳහා AI විශේෂාංග සක්‍රිය සහ වින්‍යාස කරන්න.',
+                    'title' => 'වෙළඳසැල විශේෂාංග',
+
+                    'review-translation' => [
+                        'enabled' => 'සක්‍රිය',
+                        'model' => 'මාදිලිය',
+                        'title' => 'සමාලෝචන පරිවර්තනය',
+                        'title-info' => 'වෙළඳසැලෙහි පාරිභෝගිකයින්ට සමාලෝචන ඔවුන්ගේ භාෂාවට පරිවර්තනය කිරීමට ඉඩ දෙන්න.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'සක්‍රිය',
+                        'model' => 'මාදිලිය',
+                        'title' => 'පුද්ගලීකරණය කළ ගෙවීම් පණිවිඩය',
+                        'title-info' => 'ස්තුති පිටුවේ පාරිභෝගිකයින් සඳහා පුද්ගලීකරණය කළ ගෙවීම් පණිවිඩ ජනනය කරන්න.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'අවසන් කිරීමේ URL',
-                                'title-info' => 'ගූගල් සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. එය ඔබගේ ගූගල් කන්සෝලයේ සකස් කළ URL එක සමඟ සමාන විය යුතුය.',
+                                'title-info' => 'ගූගල් සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. ප්‍රදර්ශිත ප්ලේසහෝල්ඩාර URL ෆර්මාට් භාවහාර කරන්න (ඔබගේ ඩොමේයින පමණක් පරිවර්තනය කරන්න). එය ඔබගේ Google කන්සෝලයේ සකස් කළ URL එක සමඟ සමාන විය යුතුය.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'අවසන් කිරීමේ URL',
-                                'title-info' => 'ෆේස්බුක් සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. එය ඔබගේ ෆේස්බුක් යෙදුම් සකසනයන් සමඟ සමාන විය යුතුය.',
+                                'title-info' => 'ෆේස්බුක් සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. ප්‍රදර්ශිත ප්ලේසහෝල්ඩාර URL ෆර්මාට් භාවහාර කරන්න (ඔබගේ ඩොමේයින පමණක් පරිවර්තනය කරන්න). එය ඔබගේ ෆේස්බුක් යෙදුම් සකසනයන් සමඟ සමාන විය යුතුය.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'අවසන් කිරීමේ URL',
-                                'title-info' => 'GitHub සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. එය ඔබගේ GitHub කන්සෝලයේ සකස් කළ URL එක සමඟ සමාන විය යුතුය.',
+                                'title-info' => 'GitHub සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. ප්‍රදර්ශිත ප්ලේසහෝල්ඩාර URL ෆර්මාට් භාවහාර කරන්න (ඔබගේ ඩොමේයින පමණක් පරිවර්තනය කරන්න). එය ඔබගේ GitHub කන්සෝලයේ සකස් කළ URL එක සමඟ සමාන විය යුතුය.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'අවසන් කිරීමේ URL',
-                                'title-info' => 'LinkedIn සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. එය ඔබගේ LinkedIn කන්සෝලයේ සකස් කළ URL එක සමඟ සමාන විය යුතුය.',
+                                'title-info' => 'LinkedIn සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. ප්‍රදර්ශිත ප්ලේසහෝල්ඩාර URL ෆර්මාට් භාවහාර කරන්න (ඔබගේ ඩොමේයින පමණක් පරිවර්තනය කරන්න). එය ඔබගේ LinkedIn කන්සෝලයේ සකස් කළ URL එක සමඟ සමාන විය යුතුය.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'අවසන් කිරීමේ URL',
-                                'title-info' => 'Twitter සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. එය ඔබගේ Twitter කන්සෝලයේ සකස් කළ URL එක සමඟ සමාන විය යුතුය.',
+                                'title-info' => 'Twitter සමඟ සත්‍යාපනය කිරීමෙන් පසුව පරිශීලකයන් redirected වන callback URL. ප්‍රදර්ශිත ප්ලේසහෝල්ඩාර URL ෆර්මාට් භාවහාර කරන්න (ඔබගේ ඩොමේයින පමණක් පරිවර්තනය කරන්න). එය ඔබගේ Twitter කන්සෝලයේ සකස් කළ URL එක සමඟ සමාන විය යුතුය.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'ඊමේල්',
                 'title' => 'ඊමේල්',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'ඔබේ තැපෑලේ ධාවකය ":driver" වෙනුවට "bagisto-dynamic-smtp" ලෙස සකසා ඇත. මෙහි සිදු කරන ඕනෑම වෙනසක් ක්‍රියා නොකරයි. මෙම සැකසුම් ක්‍රියාත්මක කිරීමට කරුණාකර .env ගොනුවේ MAIL_MAILER=bagisto-dynamic-smtp යාවත්කාලීන කරන්න.',
+                    'driver-mismatch-title' => 'මෙම සැකසුම් මේ වන විට ක්‍රියා නොකරයි.',
+                    'encryption' => 'සංකේතනය',
+                    'host' => 'සත්කාරක',
+                    'info' => 'ඔබේ ගබඩාවෙන් විද්‍යුත් තැපෑල යැවීමට SMTP සේවාදායක සැකසුම් වින්‍යාස කරන්න.',
+                    'password' => 'මුරපදය',
+                    'port' => 'තොට',
+                    'title' => 'SMTP',
+                    'username' => 'පරිශීලක නාමය',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'පරිපාලක ඊමේල්',
-                    'admin-email-tip' => 'මෙම නාලිකාව සඳහා පරිපාලකයාගේ ඊමේල් ලිපිනයට ඊමේල් ලැබෙයි',
+                    'admin-email' => 'පරිපාලක ඊමේල් ලිපිනය',
+                    'admin-email-tip' => 'මෙම නාලිකාව සඳහා සියලු පරිපාලක දැනුම්දීම් මෙම ලිපිනයට යවනු ඇත.',
                     'admin-name' => 'පරිපාලක නම',
-                    'admin-name-tip' => 'සියලු පරිපාලක ඊමේල් වල මෙය පෙන්වනු ඇත',
-                    'admin-page-limit' => 'පෙරනිමි අයිතම සංඛ්‍යාව (පරිපාලක)',
-                    'contact-email' => 'සම්බන්ධතා ඊමේල්',
-                    'contact-email-tip' => 'ඔබේ ඊමේල් වල පතුළින් මෙම ඊමේල් ලිපිනය පෙන්වනු ඇත',
+                    'admin-name-tip' => 'පරිපාලකට යවන සියලු ඊමේල් වල මෙම නම පෙන්වනු ඇත.',
+                    'admin-page-limit' => 'පෙරනිමි අයිතම සංඛ්‍යාව පිටුවකට (පරිපාලක)',
+                    'contact-email' => 'සම්බන්ධතා ඊමේල් ලිපිනය',
+                    'contact-email-tip' => 'මෙම ඊමේල් ලිපිනය ඔබේ ඊමේල් වල පතුළින් පෙන්වනු ඇත.',
                     'contact-name' => 'සම්බන්ධතා නම',
-                    'contact-name-tip' => 'ඔබේ ඊමේල් වල පතුළින් මෙම නම පෙන්වනු ඇත',
-                    'email-sender-name' => 'ඊමේල් යවන්නාගේ නම',
-                    'email-sender-name-tip' => 'පාරිභෝගිකයාගේ ප්‍රතිලාභක පෙට්ටියේ මෙය පෙන්වනු ඇත',
-                    'info' => 'ඊමේල් යවන්නාගේ නම, සාප්පු ඊමේල් ලිපිනය, පරිපාලක නම සහ පරිපාලක ඊමේල් ලිපිනය සකසන්න.',
-                    'shop-email-from' => 'සාප්පු ඊමේල් ලිපිනය',
-                    'shop-email-from-tip' => 'ඔබේ පාරිභෝගිකයන්ට ඊමේල් යවන්නට මෙම නාලිකාවේ ඊමේල් ලිපිනය',
+                    'contact-name-tip' => 'මෙම නම ඔබේ ඊමේල් වල පතුළින් පෙන්වනු ඇත.',
+                    'info' => 'සියලු ඊමේල් වලදී භාවිතා කරන යවන්නාගේ නම, සාප්පු ඊමේල් ලිපිනය, පරිපාලක සහ සම්බන්ධතා තොරතුරු වින්‍යාස කරන්න.',
+                    'sender-email' => 'යවන්නාගේ ඊමේල් ලිපිනය',
+                    'sender-email-tip' => 'ඔබේ පාරිභෝගිකයන්ට ඊමේල් මෙම ලිපිනයෙන් යවනු ඇත.',
+                    'sender-name' => 'යවන්නාගේ නම',
+                    'sender-name-tip' => 'මෙම නම පාරිභෝගිකයාගේ ප්‍රතිලාභක පෙට්ටියේ ඊමේල් යවන්නා ලෙස පෙන්වනු ඇත.',
                     'title' => 'ඊමේල් සැකසීම්',
                 ],
 
@@ -4778,6 +4843,12 @@ return [
                     'info' => 'ඇණවුම් අංක, අන්තිම ඇණවුම් සහ පසුබැසීම් සකසන්න.',
                     'title' => 'ඇණවුම් සැකසුම්',
 
+                    'order-creation' => [
+                        'info' => 'චෙක්පත් කිරීමේදී දෝෂ ඇති වූ විට ඇණවුම් නිර්මාණය උත්සාහ කිරීම් ගණන වින්‍යාස කරන්න.',
+                        'max-retry-attempts' => 'උත්සාහ කිරීම් උපරිම ගණන',
+                        'title' => 'ඇණවුම් නිර්මාණය',
+                    ],
+
                     'order-number' => [
                         'generator' => 'ඇණවුම් අංක ජනකය',
                         'info' => 'ඇනවුම් පරිසරය සඳහා සුවිශේෂී අංකය, මිලදී ගැනීම් ක්‍රියාවලිය පුරා පිවිසුම්, සන්නිවේදනය, සහ යොමු කිරීම සඳහා උපකාර වේ.',
@@ -4798,12 +4869,12 @@ return [
                     ],
 
                     'reorder' => [
-                        'admin-reorder' => 'ප්‍රධාන පුනරීතන',
-                        'admin-reorder-info' => 'ප්‍රධාන පරිශීලකයන් සඳහා පුනරීතන විශේෂාංග සක්‍රීය හෝ අක්‍රීය කරන්න.',
-                        'info' => 'ප්‍රධාන පරිශීලකයන් සඳහා පුනරීතන විශේෂාංග සක්‍රීය හෝ අක්‍රීය කරන්න.',
-                        'shop-reorder' => 'සැපයුම් පුනරීතන',
-                        'shop-reorder-info' => 'සැපයුම් පරිශීලකයන් සඳහා පුනරීතන විශේෂාංග සක්‍රීය හෝ අක්‍රීය කරන්න.',
-                        'title' => 'පුනරීතනය ඉඩ දී',
+                        'admin-reorder' => 'ප්‍රධාන පුන�ීතන',
+                        'admin-reorder-info' => 'ප්‍රධාන පරිශීලකයන් සඳහා පුන�ීතන විශේෂාංග සක්‍රීය හෝ අක්‍රීය කරන්න.',
+                        'info' => 'ප්‍රධාන පරිශීලකයන් සඳහා පුන�ීතන විශේෂාංග සක්‍රීය හෝ අක්‍රීය කරන්න.',
+                        'shop-reorder' => 'සැපයුම් පුන�ීතන',
+                        'shop-reorder-info' => 'සැපයුම් පරිශීලකයන් සඳහා පුන�ීතන විශේෂාංග සක්‍රීය හෝ අක්‍රීය කරන්න.',
+                        'title' => 'පුන�ීතනය ඉඩ දී',
                     ],
 
                     'stock-options' => [
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'RMA සඳහා නිෂ්පාදන වර්ගය අවසර දීම',
                     'allow-rma-for-digital-product' => 'ඩිජිටල් නිෂ්පාදනයකට RMA වලට අවසර දීම',
                     'allowed-file-extension' => 'අනුමත කළ ගොනු විස්තාරණය',
-                    'allowed-file-types' => 'කරුණාකර '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' පමණක් තෝරන්න',
+                    'allowed-file-types' => 'කරුණාකර :allowed_types පමණක් තෝරන්න',
                     'allowed-info' => 'අලංකාරක සලකුණු එක්ක වෙන් කළා. උදාහරණයක්: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'අවලංගු කළ ඉල්ලීම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
                     'allowed-request-declined-request' => 'ප්‍රතික්ෂේප කළ ඉල්ලීම සඳහා නව RMA ඉල්ලීමකට අවසර දීම',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'ආපසු ලබාගැනීමේ ලිපිනය',
                     'return-pickup-time' => 'ආපසු ලබාගැනීමේ වේලාව',
                     'return-policy' => 'ආපසු ලබාගැනීමේ ප්‍රතිපත්තිය',
-                    'select-allowed-order-status' => 'අනුමත කරන ලද ඇණවුම් තත්ත්වය තෝරන්න',
                     'specific-products' => 'පිළිබඳ නිෂ්පාදන',
                     'title' => 'RMA',
                     'yes' => 'ඔව්',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'සන්නිවේදන',
                 'configure' => 'සකසන්න',
                 'currencies' => 'මුදල්',
-                'custom-field' => 'අභිරුචි ක්ෂේත්‍රය',
+                'custom-fields' => 'අභිරුචි ක්ෂේත්‍රය',
                 'customers' => 'පාරිභාවයෙන්',
                 'dashboard' => 'මුල් පටුන',
                 'data-transfer' => 'දත්ත හුවමාරු',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'ඇණවුම්',
                 'products' => 'නිෂ්පාදන',
                 'promotions' => 'ප්‍රමාදයොන්',
-                'reason' => 'හේතුව',
+                'reasons' => 'හේතුව',
                 'refunds' => 'ආපසු',
                 'reporting' => 'වාර්ථාව',
                 'requests' => 'අයදුම්',
                 'reviews' => 'විභාග',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA තත්ත්වය',
                 'roles' => 'භූමිකා',
                 'rules' => 'නියම',
                 'sales' => 'මිල',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'සැකසුම්',
                 'shipments' => 'වෙළෙන්දා',
                 'sitemaps' => 'සටහන්ද',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'බදු කාණ්ඩ',
                 'tax-rates' => 'බදු තනි',
                 'taxes' => 'බදු',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'අයැදීම',
-                    'dall-e-2' => 'ඩොල්.ඊ 2',
-                    'dall-e-3' => 'ඩොල්.ඊ 3',
                     'generate' => 'උදාහරින්න',
                     'generating' => 'උදාහරින්නෙම...',
-                    'hd' => 'HD',
-                    'model' => 'ආකාරය',
+                    'high' => 'ඉහළ',
+                    'landscape' => 'තිරස් (3:2)',
+                    'low' => 'පහළ',
+                    'medium' => 'මධ්‍යම',
+                    'model' => 'ආකෘතිය',
                     'number-of-images' => 'රූපවාහින් ගන්නවාද?',
-                    'prompt' => 'උපාංග',
+                    'portrait' => 'සිරස් (2:3)',
+                    'prompt' => 'ඉල්ලීම',
                     'quality' => 'වර්ගය',
                     'regenerate' => 'නැවතුම් කරන්න',
                     'regenerating' => 'නැවතුම් කරමු...',
                     'size' => 'ප්‍රමාණය',
-                    'standard' => 'සම්මත',
+                    'square' => 'සම------ුරස්‍ර (1:1)',
                     'title' => 'මැජික් පින්තුර සහිතව කියවන්න',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'මුර',
                     'next' => 'ඊළඟ',
                     'size' => 'ප්‍රමාණය',
+                    'square' => 'සම------ුරස්‍ර (1:1)',
                     'use-cases' => 'භාවිතා කිරීම්',
                     'zoom' => 'ස්මෙයිල්',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'අයැදීම',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'සක්‍රීයයි',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'උදාහරින්න',
                 'generated-content' => 'උදාහරින ලද අන්තර්ගතය',
                 'generated-content-info' => 'AI අන්තර්ගතය වංචාකාරී විය හැක. කරුණාකර අයැදීමෙන් පෙර උදාහරින ලද අන්තර්ගතය සමාලෝචනය කරන්න.',
                 'generating' => 'උදාහරිනවා...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
-                'model' => 'ආකාරය',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
-                'prompt' => 'උපාංග',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
+                'model' => 'ආකෘතිය',
+                'prompt' => 'ඉල්ලීම',
                 'title' => 'AI සහාය',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5347,37 +5395,40 @@ return [
         'view' => 'දර්ශනය',
 
         'rma' => [
-            'create' => 'නිර්මාණය කරන්න',
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'view' => 'බැලීම',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'නිර්මාණය කරන්න',
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'title' => 'RMA හේතු',
-        ],
+            'requests' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'title' => 'RMA ඉල්ලීම්',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'title' => 'RMA නීති',
-        ],
+            'reasons' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'delete' => 'මකන්න',
+                'edit' => 'සංස්කරණය කරන්න',
+                'title' => 'RMA හේතු',
+            ],
 
-        'rma-status' => [
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'title' => 'RMA තත්ත්වය',
-        ],
+            'rules' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'delete' => 'මකන්න',
+                'edit' => 'සංස්කරණය කරන්න',
+                'title' => 'RMA නීති',
+            ],
 
-        'custom-field' => [
-            'create' => 'නිර්මාණය කරන්න',
-            'delete' => 'මකන්න',
-            'edit' => 'සංස්කරණය කරන්න',
-            'title' => 'අභිරුචි ක්ෂේත්‍ර',
+            'statuses' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'delete' => 'මකන්න',
+                'edit' => 'සංස්කරණය කරන්න',
+                'title' => 'RMA තත්ත්වයන්',
+            ],
+
+            'custom-fields' => [
+                'create' => 'නිර්මාණය කරන්න',
+                'delete' => 'මකන්න',
+                'edit' => 'සංස්කරණය කරන්න',
+                'title' => 'අභිරුචි ක්ෂේත්‍ර',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'බාගත කරන්න',
         'export' => 'අපාරයට පිටවන්න',
+        'no' => 'නැත',
         'no-records' => 'අපාරයට හවුල් සාර්ථකවීමට හිතන්න',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'ඔව්',
     ],
 
     'validations' => [

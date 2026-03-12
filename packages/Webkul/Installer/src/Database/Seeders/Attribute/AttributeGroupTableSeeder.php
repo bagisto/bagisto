@@ -95,7 +95,7 @@ class AttributeGroupTableSeeder extends Seeder
 
         DB::table('attribute_group_mappings')->insert([
             /**
-             * General Group Attributes
+             * General group attributes.
              */
             [
                 'attribute_id' => 1,
@@ -132,7 +132,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Description Group Attributes
+             * Description group attributes.
              */
             [
                 'attribute_id' => 9,
@@ -145,7 +145,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Meta Description Group Attributes
+             * Meta description group attributes.
              */
             [
                 'attribute_id' => 11,
@@ -170,7 +170,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Price Group Attributes
+             * Price group attributes.
              */
             [
                 'attribute_id' => 16,
@@ -187,7 +187,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Shipping Group Attributes
+             * Shipping group attributes.
              */
             [
                 'attribute_id' => 19,
@@ -208,7 +208,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Settings Group Attributes
+             * Settings group attributes.
              */
             [
                 'attribute_id' => 5,
@@ -233,7 +233,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Inventories Group Attributes
+             * Inventories group attributes.
              */
             [
                 'attribute_id' => 28,
@@ -242,7 +242,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * RMA Group Attributes
+             * RMA group attributes.
              */
             [
                 'attribute_id' => 29,

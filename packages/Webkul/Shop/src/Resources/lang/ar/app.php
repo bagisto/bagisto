@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'مرجع الطلب',
                         'rma-status' => 'حالة الطلب',
                         'create' => 'تاريخ الإنشاء',
+                        'quantity' => 'الكمية',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'ترجمة',
                 'translating' => 'جار الترجمة...',
                 'write-a-review' => 'كتابة مراجعة',
+            ],
+
+            'contact-us' => [
+                'about' => 'أكتب لنا ملاحظة وسنعود إليك في أقرب وقت ممكن',
+                'desc' => 'ما الذي يجول في ذهنك؟',
+                'describe-here' => 'صف هنا',
+                'email' => 'البريد الإلكتروني',
+                'message' => 'الرسالة',
+                'name' => 'الاسم',
+                'phone-number' => 'رقم الهاتف',
+                'submit' => 'إرسال',
+                'title' => 'اتصل بنا',
             ],
 
             'add-to-cart' => 'أضف إلى السلة',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'لا يمكن تحديث حالة RMA لأن الفاتورة الخاصة بهذا الطلب لم يتم إنشاؤها.',
             'permission-denied' => 'أنت مسجل الدخول',
             'rma-disabled' => 'تم تعطيل RMA لهذا المنتج',
+            'reopen-not-allowed' => 'غير مسموح بإعادة فتح طلب RMA هذا.',
             'send-message' => 'تم إرسال :name بنجاح.',
             'update-success' => 'تم تحديث :name بنجاح.',
         ],

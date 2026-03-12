@@ -15,8 +15,11 @@ class DatabaseSeeder extends Seeder
     public function run($parameters = [])
     {
         $this->call(AttributeFamilyTableSeeder::class, false, ['parameters' => $parameters]);
+
         $this->call(AttributeGroupTableSeeder::class, false, ['parameters' => $parameters]);
+
         $this->call(AttributeTableSeeder::class, false, ['parameters' => $parameters]);
+
         $this->call(AttributeOptionTableSeeder::class, false, ['parameters' => $parameters]);
     }
 }

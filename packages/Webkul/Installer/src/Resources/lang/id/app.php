@@ -265,6 +265,24 @@ return [
                     'name' => 'Koleksi Berani',
                 ],
 
+                'bold-collections-2' => [
+                    'content' => [
+                        'btn-title' => 'Lihat Koleksi',
+                        'description' => 'Koleksi Berani kami hadir untuk mendefinisikan ulang lemari pakaian Anda dengan desain tak kenal takut dan warna-warna cerah yang mencolok. Dari pola berani hingga nuansa kuat, ini adalah kesempatan Anda untuk keluar dari kebiasaan dan masuk ke luar biasa.',
+                        'title' => 'Keluarkan Keberanian Anda dengan Koleksi Baru Kami!',
+                    ],
+
+                    'name' => 'Koleksi Berani',
+                ],
+
+                'booking-products' => [
+                    'name' => 'Produk Pemesanan',
+
+                    'options' => [
+                        'title' => 'Pesan Tiket',
+                    ],
+                ],
+
                 'categories-collections' => [
                     'name' => 'Koleksi Kategori',
                 ],
@@ -377,243 +395,403 @@ return [
         'sample-categories' => [
             'category-translation' => [
                 '2' => [
-                    'description' => 'Deskripsi Kategori Pria',
-                    'meta-description' => 'Meta Deskripsi Kategori Pria',
-                    'meta-keywords' => 'Meta Keyword Kategori Pria',
-                    'meta-title' => 'Meta Judul Kategori Pria',
+                    'description' => '<p>Pria</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
                     'name' => 'Pria',
-                    'slug' => 'pria',
+                    'slug' => 'mens',
+                    'url-path' => 'men',
                 ],
 
                 '3' => [
-                    'description' => 'Deskripsi Kategori Pakaian Musim Dingin',
-                    'meta-description' => 'Meta Deskripsi Kategori Pakaian Musim Dingin',
-                    'meta-keywords' => 'Meta Keyword Kategori Pakaian Musim Dingin',
-                    'meta-title' => 'Meta Judul Kategori Pakaian Musim Dingin',
-                    'name' => 'Pakaian Musim Dingin',
-                    'slug' => 'pakaian-musim-dingin',
-                ],
-            ],
-        ],
-
-        'sample-products' => [
-            'product-flat' => [
-                '1' => [
-                    'description' => 'Kupluk Rajut Arctic Cozy adalah solusi andalan Anda untuk tetap hangat, nyaman, dan bergaya selama bulan-bulan yang lebih dingin. Dibuat dari campuran rajutan akrilik yang lembut dan tahan lama, kupluk ini dirancang untuk memberikan kenyamanan dan pas di kepala. Desain klasiknya cocok untuk pria maupun wanita, menawarkan aksesori serbaguna yang melengkapi berbagai gaya. Baik Anda bepergian untuk hari santai di kota atau menjelajahi alam bebas, kupluk ini menambahkan sentuhan kenyamanan dan kehangatan pada penampilan Anda. Bahan yang lembut dan breathable memastikan Anda tetap nyaman tanpa mengorbankan gaya. Kupluk Rajut Arctic Cozy bukan hanya aksesori; ini adalah pernyataan mode musim dingin. Kesederhanaannya membuatnya mudah dipadukan dengan berbagai pakaian, menjadikannya item pokok dalam lemari pakaian musim dingin Anda. Ideal sebagai hadiah atau untuk memanjakan diri sendiri, kupluk ini adalah tambahan yang bijaksana untuk setiap ansambel musim dingin. Ini adalah aksesori serbaguna yang lebih dari sekadar fungsionalitas, menambahkan sentuhan kehangatan dan gaya pada penampilan Anda. Rangkullah esensi musim dingin dengan Kupluk Rajut Arctic Cozy. Baik Anda menikmati hari santai di luar atau menghadapi berbagai elemen cuaca, biarkan kupluk ini menjadi teman Anda untuk kenyamanan dan gaya. Tingkatkan koleksi pakaian musim dingin Anda dengan aksesori klasik ini yang dengan mudah memadukan kehangatan dengan selera mode yang tak lekang oleh waktu.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Kupluk Rajut Unisex Arctic Cozy',
-                    'short-description' => 'Hadapi hari-hari dingin dengan penuh gaya bersama Kupluk Rajut Arctic Cozy kami. Dibuat dari campuran akrilik yang lembut dan tahan lama, kupluk klasik ini menawarkan kehangatan dan keserbagunaan. Cocok untuk pria maupun wanita, ini adalah aksesori ideal untuk pakaian kasual atau luar ruangan. Tingkatkan koleksi pakaian musim dingin Anda atau berikan hadiah kepada seseorang yang istimewa dengan kupluk esensial ini.',
-                ],
-
-                '2' => [
-                    'description' => 'Syal Musim Dingin Arctic Bliss lebih dari sekadar aksesori cuaca dingin; ini adalah pernyataan kehangatan, kenyamanan, dan gaya untuk musim dingin. Dibuat dengan cermat dari campuran mewah akrilik dan wol, syal ini dirancang untuk membuat Anda tetap nyaman dan hangat bahkan dalam suhu terdingin sekalipun. Tekstur yang lembut dan mewah tidak hanya memberikan insulasi terhadap dingin tetapi juga menambahkan sentuhan kemewahan pada koleksi pakaian musim dingin Anda. Desain Syal Musim Dingin Arctic Bliss bergaya dan serbaguna, menjadikannya tambahan yang sempurna untuk berbagai pakaian musim dingin. Baik Anda berdandan untuk acara khusus atau menambahkan lapisan chic pada penampilan sehari-hari Anda, syal ini melengkapi gaya Anda dengan mudah. Panjang ekstra syal menawarkan pilihan gaya yang dapat disesuaikan. Lilitkan untuk kehangatan tambahan, sampirkan secara longgar untuk tampilan kasual, atau bereksperimenlah dengan berbagai simpul untuk mengekspresikan gaya unik Anda. Keserbagunaan ini menjadikannya aksesori wajib untuk musim dingin. Mencari hadiah yang sempurna? Syal Musim Dingin Arctic Bliss adalah pilihan ideal. Baik Anda mengejutkan orang terkasih atau memanjakan diri sendiri, syal ini adalah hadiah abadi dan praktis yang akan dihargai sepanjang bulan-bulan musim dingin. Sambut musim dingin dengan Syal Musim Dingin Arctic Bliss, di mana kehangatan bertemu gaya dalam harmoni yang sempurna. Tingkatkan koleksi pakaian musim dingin Anda dengan aksesori esensial ini yang tidak hanya membuat Anda tetap hangat tetapi juga menambahkan sentuhan kecanggihan pada ansambel cuaca dingin Anda.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Syal Musim Dingin Arctic Bliss Penuh Gaya',
-                    'short-description' => 'Rasakan dekapan kehangatan dan gaya dengan Syal Musim Dingin Arctic Bliss kami. Dibuat dari campuran mewah akrilik dan wol, syal yang nyaman ini dirancang untuk membuat Anda tetap hangat selama hari-hari terdingin. Desainnya yang penuh gaya dan serbaguna, dikombinasikan dengan panjang ekstra, menawarkan pilihan gaya yang dapat disesuaikan. Tingkatkan koleksi pakaian musim dingin Anda atau bahagiakan seseorang yang istimewa dengan aksesori musim dingin esensial ini.',
-                ],
-
-                '3' => [
-                    'description' => 'Memperkenalkan Sarung Tangan Musim Dingin Layar Sentuh Arctic – tempat kehangatan, gaya, dan konektivitas bertemu untuk meningkatkan pengalaman musim dingin Anda. Dibuat dari akrilik berkualitas tinggi, sarung tangan ini dirancang untuk memberikan kehangatan dan daya tahan yang luar biasa. Ujung jari yang kompatibel dengan layar sentuh memungkinkan Anda tetap terhubung tanpa memaparkan tangan Anda pada dingin. Jawab panggilan, kirim pesan, dan navigasikan perangkat Anda dengan mudah, semuanya sambil menjaga tangan Anda tetap hangat. Lapisan berinsulasi menambahkan lapisan kenyamanan ekstra, menjadikan sarung tangan ini pilihan utama Anda untuk menghadapi dinginnya musim dingin. Baik Anda sedang dalam perjalanan, melakukan berbagai urusan, atau menikmati aktivitas luar ruangan, sarung tangan ini memberikan kehangatan dan perlindungan yang Anda butuhkan. Manset elastis memastikan sarung tangan pas dan aman, mencegah masuknya angin dingin dan menjaga sarung tangan tetap di tempatnya selama aktivitas harian Anda. Desain yang penuh gaya menambahkan sentuhan elegan pada ansambel musim dingin Anda, menjadikan sarung tangan ini modis sekaligus fungsional. Ideal sebagai hadiah atau untuk memanjakan diri sendiri, Sarung Tangan Musim Dingin Layar Sentuh Arctic adalah aksesori wajib bagi individu modern. Ucapkan selamat tinggal pada ketidaknyamanan melepas sarung tangan Anda untuk menggunakan perangkat dan rangkullah perpaduan sempurna antara kehangatan, gaya, dan konektivitas. Tetap terhubung, tetap hangat, dan tetap bergaya dengan Sarung Tangan Musim Dingin Layar Sentuh Arctic – teman andal Anda untuk menaklukkan musim dingin dengan percaya diri.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Sarung Tangan Musim Dingin Arctic Layar Sentuh',
-                    'short-description' => 'Tetap terhubung dan hangat dengan Sarung Tangan Musim Dingin Layar Sentuh Arctic kami. Sarung tangan ini tidak hanya dibuat dari akrilik berkualitas tinggi untuk kehangatan dan daya tahan tetapi juga dilengkapi desain yang kompatibel dengan layar sentuh. Dengan lapisan berinsulasi, manset elastis agar pas dan aman, serta tampilan yang penuh gaya, sarung tangan ini sempurna untuk penggunaan sehari-hari dalam kondisi dingin.',
+                    'description' => '<p>Anak-anak</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Anak-anak',
+                    'slug' => 'kids',
+                    'url-path' => 'kids',
                 ],
 
                 '4' => [
-                    'description' => 'Memperkenalkan Kaus Kaki Campuran Wol Arctic Warmth – teman penting Anda untuk kaki yang nyaman dan hangat selama musim dingin. Dibuat dari campuran premium wol Merino, akrilik, nilon, dan spandeks, kaus kaki ini dirancang untuk memberikan kehangatan dan kenyamanan tak tertandingi. Campuran wol memastikan kaki Anda tetap hangat bahkan dalam suhu terdingin, menjadikan kaus kaki ini pilihan sempurna untuk petualangan musim dingin atau sekadar bersantai di rumah. Tekstur kaus kaki yang lembut dan nyaman menawarkan sensasi mewah di kulit Anda. Ucapkan selamat tinggal pada kaki yang dingin saat Anda merasakan kehangatan mewah yang diberikan oleh kaus kaki campuran wol ini. Didesain untuk daya tahan, kaus kaki ini memiliki tumit dan ujung kaki yang diperkuat, menambahkan kekuatan ekstra pada area yang sering aus. Ini memastikan kaus kaki Anda tahan lama, memberikan kenyamanan dan kehangatan yang awet. Sifat bahan yang breathable mencegah panas berlebih, memungkinkan kaki Anda tetap nyaman dan kering sepanjang hari. Baik Anda pergi ke luar untuk pendakian musim dingin atau bersantai di dalam ruangan, kaus kaki ini menawarkan keseimbangan sempurna antara kehangatan dan sirkulasi udara. Serbaguna dan penuh gaya, kaus kaki campuran wol ini cocok untuk berbagai kesempatan. Padukan dengan sepatu bot favorit Anda untuk tampilan musim dingin yang modis atau kenakan di sekitar rumah untuk kenyamanan maksimal. Tingkatkan koleksi pakaian musim dingin Anda dan prioritaskan kenyamanan dengan Kaus Kaki Campuran Wol Arctic Warmth. Manjakan kaki Anda dengan kemewahan yang layak mereka dapatkan dan masuki dunia kenyamanan yang bertahan sepanjang musim.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Kaus Kaki Campuran Wol Arctic Warmth',
-                    'short-description' => 'Rasakan kehangatan dan kenyamanan tak tertandingi dari Kaus Kaki Campuran Wol Arctic Warmth kami. Dibuat dari campuran wol Merino, akrilik, nilon, dan spandeks, kaus kaki ini menawarkan kenyamanan tertinggi untuk cuaca dingin. Dengan tumit dan ujung kaki yang diperkuat untuk daya tahan, kaus kaki serbaguna dan penuh gaya ini sempurna untuk berbagai kesempatan.',
+                    'description' => '<p>Wanita</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Wanita',
+                    'slug' => 'womens',
+                    'url-path' => 'woman',
                 ],
 
                 '5' => [
-                    'description' => 'Memperkenalkan Paket Aksesori Musim Dingin Arctic Frost, solusi andalan Anda untuk tetap hangat, bergaya, dan terhubung selama hari-hari musim dingin yang dingin. Set yang dikurasi dengan cermat ini menyatukan empat aksesori musim dingin esensial untuk menciptakan ansambel yang harmonis. Syal mewah, ditenun dari campuran akrilik dan wol, tidak hanya menambah lapisan kehangatan tetapi juga menghadirkan sentuhan elegan pada koleksi pakaian musim dingin Anda. Kupluk rajut lembut, dibuat dengan hati-hati, menjanjikan untuk membuat Anda tetap nyaman sambil menambahkan sentuhan modis pada penampilan Anda. Tapi tidak berhenti di situ – paket kami juga menyertakan sarung tangan yang kompatibel dengan layar sentuh. Tetap terhubung tanpa mengorbankan kehangatan saat Anda menavigasi perangkat Anda dengan mudah. Baik Anda menjawab panggilan, mengirim pesan, atau mengabadikan momen musim dingin di ponsel cerdas Anda, sarung tangan ini memastikan kenyamanan tanpa mengurangi gaya. Tekstur kaus kaki yang lembut dan nyaman menawarkan sensasi mewah di kulit Anda. Ucapkan selamat tinggal pada kaki yang dingin saat Anda merasakan kehangatan mewah yang diberikan oleh kaus kaki campuran wol ini. Paket Aksesori Musim Dingin Arctic Frost bukan hanya tentang fungsionalitas; ini adalah pernyataan mode musim dingin. Setiap item dirancang tidak hanya untuk melindungi Anda dari dingin tetapi juga untuk meningkatkan gaya Anda selama musim dingin. Bahan yang dipilih untuk paket ini memprioritaskan daya tahan dan kenyamanan, memastikan Anda dapat menikmati keindahan musim dingin dengan penuh gaya. Baik Anda memanjakan diri sendiri atau mencari hadiah yang sempurna, Paket Aksesori Musim Dingin Arctic Frost adalah pilihan serbaguna. Bahagiakan seseorang yang istimewa selama musim liburan atau tingkatkan koleksi pakaian musim dingin Anda sendiri dengan ansambel yang bergaya dan fungsional ini. Hadapi udara dingin dengan percaya diri, mengetahui bahwa Anda memiliki aksesori yang sempurna untuk membuat Anda tetap hangat dan chic.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Paket Aksesori Musim Dingin Arctic Frost',
-                    'short-description' => 'Hadapi dinginnya musim dingin dengan Paket Aksesori Musim Dingin Arctic Frost kami. Set pilihan ini mencakup syal mewah, kupluk yang nyaman, sarung tangan yang kompatibel dengan layar sentuh, dan Kaus Kaki Campuran Wol. Penuh gaya dan fungsional, ansambel ini dibuat dari bahan berkualitas tinggi, memastikan daya tahan dan kenyamanan. Tingkatkan koleksi pakaian musim dingin Anda atau bahagiakan seseorang yang istimewa dengan pilihan hadiah yang sempurna ini.',
+                    'description' => '<p>Pakaian Formal</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Formal',
+                    'slug' => 'formal-wear-men',
+                    'url-path' => 'men/formal-wear-men',
                 ],
 
                 '6' => [
-                    'description' => 'Memperkenalkan Paket Aksesori Musim Dingin Arctic Frost, solusi andalan Anda untuk tetap hangat, bergaya, dan terhubung selama hari-hari musim dingin yang dingin. Set yang dikurasi dengan cermat ini menyatukan empat aksesori musim dingin esensial untuk menciptakan ansambel yang harmonis. Syal mewah, ditenun dari campuran akrilik dan wol, tidak hanya menambah lapisan kehangatan tetapi juga menghadirkan sentuhan elegan pada koleksi pakaian musim dingin Anda. Kupluk rajut lembut, dibuat dengan hati-hati, menjanjikan untuk membuat Anda tetap nyaman sambil menambahkan sentuhan modis pada penampilan Anda. Tapi tidak berhenti di situ – paket kami juga menyertakan sarung tangan yang kompatibel dengan layar sentuh. Tetap terhubung tanpa mengorbankan kehangatan saat Anda menavigasi perangkat Anda dengan mudah. Baik Anda menjawab panggilan, mengirim pesan, atau mengabadikan momen musim dingin di ponsel cerdas Anda, sarung tangan ini memastikan kenyamanan tanpa mengurangi gaya. Tekstur kaus kaki yang lembut dan nyaman menawarkan sensasi mewah di kulit Anda. Ucapkan selamat tinggal pada kaki yang dingin saat Anda merasakan kehangatan mewah yang diberikan oleh kaus kaki campuran wol ini. Paket Aksesori Musim Dingin Arctic Frost bukan hanya tentang fungsionalitas; ini adalah pernyataan mode musim dingin. Setiap item dirancang tidak hanya untuk melindungi Anda dari dingin tetapi juga untuk meningkatkan gaya Anda selama musim dingin. Bahan yang dipilih untuk paket ini memprioritaskan daya tahan dan kenyamanan, memastikan Anda dapat menikmati keindahan musim dingin dengan penuh gaya. Baik Anda memanjakan diri sendiri atau mencari hadiah yang sempurna, Paket Aksesori Musim Dingin Arctic Frost adalah pilihan serbaguna. Bahagiakan seseorang yang istimewa selama musim liburan atau tingkatkan koleksi pakaian musim dingin Anda sendiri dengan ansambel yang bergaya dan fungsional ini. Hadapi udara dingin dengan percaya diri, mengetahui bahwa Anda memiliki aksesori yang sempurna untuk membuat Anda tetap hangat dan chic.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Paket Aksesori Musim Dingin Arctic Frost', // Nama produknya sama dengan ID 5
-                    'short-description' => 'Hadapi dinginnya musim dingin dengan Paket Aksesori Musim Dingin Arctic Frost kami. Set pilihan ini mencakup syal mewah, kupluk yang nyaman, sarung tangan yang kompatibel dengan layar sentuh, dan Kaus Kaki Campuran Wol. Penuh gaya dan fungsional, ansambel ini dibuat dari bahan berkualitas tinggi, memastikan daya tahan dan kenyamanan. Tingkatkan koleksi pakaian musim dingin Anda atau bahagiakan seseorang yang istimewa dengan pilihan hadiah yang sempurna ini.',
+                    'description' => '<p>Pakaian Kasual</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Kasual',
+                    'slug' => 'casual-wear-men',
+                    'url-path' => 'men/casual-wear-men',
                 ],
 
                 '7' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Pria OmniHeat Solid Bertudung, solusi andalan Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mengutamakan daya tahan dan kehangatan, memastikannya menjadi teman tepercaya Anda. Desain bertudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan panjang menawarkan cakupan penuh, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku samping, jaket puffer ini memberikan kemudahan untuk membawa barang-barang penting Anda atau menjaga tangan tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari lapisan luar dan dalam poliester yang tahan lama, jaket ini dibuat agar awet dan tahan terhadap berbagai elemen cuaca. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Pria OmniHeat Solid Bertudung cocok untuk berbagai kesempatan, baik Anda pergi bekerja, jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Pria OmniHeat Solid Bertudung. Tingkatkan koleksi pakaian musim dingin Anda dan tetap nyaman saat beraktivitas di luar ruangan. Taklukkan dingin dengan gaya dan buat pernyataan dengan item penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Pria OmniHeat Solid Bertudung',
-                    'short-description' => 'Tetap hangat dan bergaya dengan Jaket Puffer Pria OmniHeat Solid Bertudung kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku samping untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman di cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai acara.',
+                    'description' => '<p>Pakaian Olahraga</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Olahraga',
+                    'slug' => 'active-wear',
+                    'url-path' => 'men/active-wear',
                 ],
 
                 '8' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Pria OmniHeat Solid Bertudung, solusi andalan Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mengutamakan daya tahan dan kehangatan, memastikannya menjadi teman tepercaya Anda. Desain bertudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan panjang menawarkan cakupan penuh, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku samping, jaket puffer ini memberikan kemudahan untuk membawa barang-barang penting Anda atau menjaga tangan tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari lapisan luar dan dalam poliester yang tahan lama, jaket ini dibuat agar awet dan tahan terhadap berbagai elemen cuaca. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Pria OmniHeat Solid Bertudung cocok untuk berbagai kesempatan, baik Anda pergi bekerja, jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Pria OmniHeat Solid Bertudung. Tingkatkan koleksi pakaian musim dingin Anda dan tetap nyaman saat beraktivitas di luar ruangan. Taklukkan dingin dengan gaya dan buat pernyataan dengan item penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Pria OmniHeat Solid Bertudung-Biru-Kuning-M',
-                    'short-description' => 'Tetap hangat dan bergaya dengan Jaket Puffer Pria OmniHeat Solid Bertudung kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku samping untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman di cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai acara.',
+                    'description' => '<p>Alas Kaki</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Alas Kaki',
+                    'slug' => 'footwear',
+                    'url-path' => 'men/footwear',
                 ],
 
                 '9' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Pria OmniHeat Solid Bertudung, solusi andalan Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mengutamakan daya tahan dan kehangatan, memastikannya menjadi teman tepercaya Anda. Desain bertudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan panjang menawarkan cakupan penuh, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku samping, jaket puffer ini memberikan kemudahan untuk membawa barang-barang penting Anda atau menjaga tangan tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari lapisan luar dan dalam poliester yang tahan lama, jaket ini dibuat agar awet dan tahan terhadap berbagai elemen cuaca. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Pria OmniHeat Solid Bertudung cocok untuk berbagai kesempatan, baik Anda pergi bekerja, jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Pria OmniHeat Solid Bertudung. Tingkatkan koleksi pakaian musim dingin Anda dan tetap nyaman saat beraktivitas di luar ruangan. Taklukkan dingin dengan gaya dan buat pernyataan dengan item penting ini. Deskripsi 9', // Ada tambahan "Description 9" di akhir teks asli, saya ikutkan.
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Pria OmniHeat Solid Bertudung-Biru-Kuning-L',
-                    'short-description' => 'Tetap hangat dan bergaya dengan Jaket Puffer Pria OmniHeat Solid Bertudung kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku samping untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman di cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai acara.',
+                    'description' => '<p>Pakaian Anak Perempuan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Anak Perempuan',
+                    'slug' => 'formal-wear-female',
+                    'url-path' => 'woman/formal-wear-female',
                 ],
 
                 '10' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Pria OmniHeat Solid Bertudung, solusi andalan Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mengutamakan daya tahan dan kehangatan, memastikannya menjadi teman tepercaya Anda. Desain bertudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan panjang menawarkan cakupan penuh, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku samping, jaket puffer ini memberikan kemudahan untuk membawa barang-barang penting Anda atau menjaga tangan tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari lapisan luar dan dalam poliester yang tahan lama, jaket ini dibuat agar awet dan tahan terhadap berbagai elemen cuaca. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Pria OmniHeat Solid Bertudung cocok untuk berbagai kesempatan, baik Anda pergi bekerja, jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Pria OmniHeat Solid Bertudung. Tingkatkan koleksi pakaian musim dingin Anda dan tetap nyaman saat beraktivitas di luar ruangan. Taklukkan dingin dengan gaya dan buat pernyataan dengan item penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Pria OmniHeat Solid Bertudung-Biru-Hijau-M',
-                    'short-description' => 'Tetap hangat dan bergaya dengan Jaket Puffer Pria OmniHeat Solid Bertudung kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku samping untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman di cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai acara.',
+                    'description' => '<p>Pakaian Anak Laki-laki</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pakaian Anak Laki-laki',
+                    'slug' => 'casual-wear-female',
+                    'url-path' => 'woman/casual-wear-female',
                 ],
 
                 '11' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Pria OmniHeat Solid Bertudung, solusi andalan Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mengutamakan daya tahan dan kehangatan, memastikannya menjadi teman tepercaya Anda. Desain bertudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan panjang menawarkan cakupan penuh, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku samping, jaket puffer ini memberikan kemudahan untuk membawa barang-barang penting Anda atau menjaga tangan tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari lapisan luar dan dalam poliester yang tahan lama, jaket ini dibuat agar awet dan tahan terhadap berbagai elemen cuaca. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Pria OmniHeat Solid Bertudung cocok untuk berbagai kesempatan, baik Anda pergi bekerja, jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Pria OmniHeat Solid Bertudung. Tingkatkan koleksi pakaian musim dingin Anda dan tetap nyaman saat beraktivitas di luar ruangan. Taklukkan dingin dengan gaya dan buat pernyataan dengan item penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Pria OmniHeat Solid Bertudung-Biru-Hijau-L',
-                    'short-description' => 'Tetap hangat dan bergaya dengan Jaket Puffer Pria OmniHeat Solid Bertudung kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku samping untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman di cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai acara.',
-                ],
-            ],
-
-            'product-attribute-values' => [
-                '1' => [
-                    'description' => 'Topi Kupluk Rajut Nyaman Arctic adalah pilihan utama Anda untuk tetap hangat, nyaman, dan bergaya selama bulan-bulan dingin. Dibuat dari campuran rajutan akrilik yang lembut dan tahan lama, topi kupluk ini dirancang untuk memberikan kenyamanan dan pas yang pas. Desain klasiknya cocok untuk pria dan wanita, menawarkan aksesori serbaguna yang melengkapi berbagai gaya. Baik Anda akan keluar untuk hari santai di kota atau menikmati alam bebas, topi kupluk ini menambah sentuhan kenyamanan dan kehangatan pada penampilan Anda. Bahan yang lembut dan mudah bernapas memastikan Anda tetap nyaman tanpa mengorbankan gaya. Topi Kupluk Rajut Nyaman Arctic bukan hanya aksesori; ini adalah pernyataan mode musim dingin. Kesederhanaannya membuatnya mudah dipadukan dengan berbagai pakaian, menjadikannya barang wajib di lemari pakaian musim dingin Anda. Ideal untuk hadiah atau sebagai hadiah untuk diri sendiri, topi kupluk ini adalah tambahan yang berarti untuk setiap pakaian musim dingin. Ini adalah aksesori serbaguna yang melampaui fungsionalitas, menambahkan sentuhan kehangatan dan gaya pada penampilan Anda. Rangkullah esensi musim dingin dengan Topi Kupluk Rajut Nyaman Arctic. Baik Anda menikmati hari santai di luar atau menghadapi elemen, biarkan topi kupluk ini menjadi teman Anda untuk kenyamanan dan gaya. Tingkatkan lemari pakaian musim dingin Anda dengan aksesori klasik ini yang dengan mudah memadukan kehangatan dengan selera mode yang tak lekang oleh waktu.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Topi Kupluk Rajut Nyaman Unisex Arctic',
-                    'sort-description' => 'Hadapi hari-hari yang dingin dengan gaya bersama Topi Kupluk Rajut Nyaman Arctic kami. Dibuat dari campuran akrilik yang lembut dan tahan lama, topi kupluk klasik ini menawarkan kehangatan dan keserbagunaan. Cocok untuk pria dan wanita, ini adalah aksesori ideal untuk pakaian kasual atau luar ruangan. Tingkatkan lemari pakaian musim dingin Anda atau berikan hadiah kepada seseorang yang spesial dengan topi kupluk esensial ini.',
+                    'description' => '<p>Sepatu Anak Perempuan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Sepatu Anak Perempuan',
+                    'slug' => 'active-wear-female',
+                    'url-path' => 'woman/active-wear-female',
                 ],
 
-                '2' => [
-                    'description' => 'Syal Musim Dingin Arctic Bliss lebih dari sekadar aksesori cuaca dingin; ini adalah pernyataan kehangatan, kenyamanan, dan gaya untuk musim dingin. Dibuat dengan cermat dari perpaduan mewah akrilik dan wol, syal ini dirancang untuk membuat Anda tetap nyaman dan hangat bahkan di suhu terdingin sekalipun. Teksturnya yang lembut dan mewah tidak hanya memberikan insulasi terhadap dingin tetapi juga menambah sentuhan kemewahan pada lemari pakaian musim dingin Anda. Desain Syal Musim Dingin Arctic Bliss stylish dan serbaguna, menjadikannya tambahan yang sempurna untuk berbagai pakaian musim dingin. Baik Anda berdandan untuk acara khusus atau menambahkan lapisan chic pada tampilan sehari-hari, syal ini melengkapi gaya Anda dengan mudah. Panjang syal yang ekstra memberikan pilihan gaya yang dapat disesuaikan. Lingkarkan untuk kehangatan ekstra, biarkan menjuntai longgar untuk tampilan kasual, atau bereksperimen dengan berbagai simpul untuk mengekspresikan gaya unik Anda. Keserbagunaan ini menjadikannya aksesori yang harus dimiliki untuk musim dingin. Mencari hadiah yang sempurna? Syal Musim Dingin Arctic Bliss adalah pilihan yang ideal. Baik Anda mengejutkan orang yang dicintai atau memanjakan diri sendiri, syal ini adalah hadiah abadi dan praktis yang akan dihargai sepanjang bulan-bulan musim dingin. Rangkullah musim dingin dengan Syal Musim Dingin Arctic Bliss, di mana kehangatan bertemu gaya dalam harmoni yang sempurna. Tingkatkan lemari pakaian musim dingin Anda dengan aksesori penting ini yang tidak hanya membuat Anda tetap hangat tetapi juga menambah sentuhan kecanggihan pada pakaian cuaca dingin Anda.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Syal Musim Dingin Stylish Arctic Bliss',
-                    'sort-description' => 'Rasakan kehangatan dan kenyamanan tak tertandingi dari Syal Musim Dingin Arctic Bliss kami. Dibuat dari campuran mewah akrilik dan wol, syal nyaman ini dirancang untuk membuat Anda tetap hangat selama hari-hari terdingin. Desainnya yang stylish dan serbaguna, dikombinasikan dengan panjang ekstra, menawarkan pilihan gaya yang dapat disesuaikan. Tingkatkan lemari pakaian musim dingin Anda atau bahagiakan seseorang yang spesial dengan aksesori musim dingin penting ini.',
+                '12' => [
+                    'description' => '<p>Sepatu Anak Laki-laki</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Sepatu Anak Laki-laki',
+                    'slug' => 'footwear-female',
+                    'url-path' => 'woman/footwear-female',
                 ],
 
-                '3' => [
-                    'description' => 'Memperkenalkan Sarung Tangan Musim Dingin Layar Sentuh Arctic – di mana kehangatan, gaya, dan konektivitas bertemu untuk meningkatkan pengalaman musim dingin Anda. Dibuat dari akrilik berkualitas tinggi, sarung tangan ini dirancang untuk memberikan kehangatan dan daya tahan yang luar biasa. Ujung jari yang kompatibel dengan layar sentuh memungkinkan Anda tetap terhubung tanpa memaparkan tangan Anda pada dingin. Jawab panggilan, kirim pesan, dan navigasikan perangkat Anda dengan mudah, sambil tetap menjaga tangan Anda tetap hangat. Lapisan berinsulasi menambahkan lapisan kenyamanan ekstra, menjadikan sarung tangan ini pilihan utama Anda untuk menghadapi dinginnya musim dingin. Baik Anda bepergian, melakukan tugas, atau menikmati aktivitas di luar ruangan, sarung tangan ini memberikan kehangatan dan perlindungan yang Anda butuhkan. Manset elastis memastikan pas yang aman, mencegah angin dingin dan menjaga sarung tangan tetap di tempat selama aktivitas harian Anda. Desain yang stylish menambah sentuhan gaya pada pakaian musim dingin Anda, membuat sarung tangan ini modis sekaligus fungsional. Ideal untuk hadiah atau sebagai hadiah untuk diri sendiri, Sarung Tangan Musim Dingin Layar Sentuh Arctic adalah aksesori yang harus dimiliki untuk individu modern. Ucapkan selamat tinggal pada ketidaknyamanan melepas sarung tangan Anda untuk menggunakan perangkat Anda dan rangkul perpaduan kehangatan, gaya, dan konektivitas yang mulus. Tetap terhubung, tetap hangat, dan tetap stylish dengan Sarung Tangan Musim Dingin Layar Sentuh Arctic – teman terpercaya Anda untuk menaklukkan musim dingin dengan percaya diri.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Sarung Tangan Musim Dingin Layar Sentuh Arctic',
-                    'sort-description' => 'Tetap terhubung dan hangat dengan Sarung Tangan Musim Dingin Layar Sentuh Arctic kami. Sarung tangan ini tidak hanya dibuat dari akrilik berkualitas tinggi untuk kehangatan dan daya tahan, tetapi juga memiliki desain yang kompatibel dengan layar sentuh. Dengan lapisan berinsulasi, manset elastis untuk pas yang aman, dan tampilan yang stylish, sarung tangan ini sempurna untuk dipakai sehari-hari dalam kondisi dingin.',
+                '13' => [
+                    'description' => '<p>Pakaian Formal</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Girls Clothing',
+                    'name' => 'Pakaian Formal',
+                    'slug' => 'girls-clothing',
+                    'url-path' => 'kids/girls-clothing',
                 ],
 
-                '4' => [
-                    'description' => 'Memperkenalkan Kaos Kaki Campuran Wol Kehangatan Arctic – teman penting Anda untuk kaki yang nyaman dan hangat selama musim dingin. Dibuat dari perpaduan premium wol Merino, akrilik, nilon, dan spandeks, kaos kaki ini dirancang untuk memberikan kehangatan dan kenyamanan yang tak tertandingi. Perpaduan wol memastikan kaki Anda tetap hangat bahkan di suhu terdingin, menjadikan kaos kaki ini pilihan sempurna untuk petualangan musim dingin atau sekadar berdiam diri di rumah. Tekstur kaos kaki yang lembut dan nyaman menawarkan sentuhan mewah pada kulit Anda. Ucapkan selamat tinggal pada kaki yang dingin saat Anda merangkul kehangatan mewah yang disediakan oleh kaos kaki campuran wol ini. Dirancang untuk daya tahan, kaos kaki ini dilengkapi tumit dan jari kaki yang diperkuat, menambah kekuatan ekstra pada area yang sering aus. Ini memastikan kaos kaki Anda tahan uji waktu, memberikan kenyamanan dan kehangatan yang tahan lama. Sifat bahan yang mudah bernapas mencegah panas berlebih, memungkinkan kaki Anda tetap nyaman dan kering sepanjang hari. Baik Anda akan keluar untuk mendaki di musim dingin atau bersantai di dalam ruangan, kaos kaki ini menawarkan keseimbangan sempurna antara kehangatan dan kemampuan bernapas. Serbaguna dan stylish, kaos kaki campuran wol ini cocok untuk berbagai kesempatan. Padukan dengan sepatu bot favorit Anda untuk tampilan musim dingin yang modis atau kenakan di sekitar rumah untuk kenyamanan maksimal. Tingkatkan lemari pakaian musim dingin Anda dan prioritaskan kenyamanan dengan Kaos Kaki Campuran Wol Kehangatan Arctic. Manjakan kaki Anda dengan kemewahan yang layak mereka dapatkan dan masuki dunia kenyamanan yang bertahan sepanjang musim.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Kaos Kaki Campuran Wol Kehangatan Arctic',
-                    'sort-description' => 'Rasakan kehangatan dan kenyamanan tak tertandingi dari Kaos Kaki Campuran Wol Kehangatan Arctic kami. Dibuat dari campuran wol Merino, akrilik, nilon, dan spandeks, kaos kaki ini menawarkan kenyamanan maksimal untuk cuaca dingin. Dengan tumit dan jari kaki yang diperkuat untuk daya tahan, kaos kaki serbaguna dan stylish ini sempurna untuk berbagai kesempatan.',
+                '14' => [
+                    'description' => '<p>Pakaian Kasual</p>',
+                    'meta-description' => 'Boys Fashion',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Boys Clothing',
+                    'name' => 'Pakaian Kasual',
+                    'slug' => 'boys-clothing',
+                    'url-path' => 'kids/boys-clothing',
                 ],
 
-                '5' => [
-                    'description' => 'Memperkenalkan Paket Aksesori Musim Dingin Arctic Frost, solusi utama Anda untuk tetap hangat, stylish, dan terhubung selama hari-hari musim dingin yang dingin. Set yang dikurasi dengan cermat ini menyatukan empat aksesori musim dingin penting untuk menciptakan ansambel yang harmonis. Syal mewah, ditenun dari campuran akrilik dan wol, tidak hanya menambah lapisan kehangatan tetapi juga membawa sentuhan elegan pada lemari pakaian musim dingin Anda. Topi kupluk rajut lembut, dibuat dengan cermat, berjanji untuk membuat Anda tetap nyaman sambil menambahkan sentuhan modis pada penampilan Anda. Tapi itu belum semuanya – paket kami juga mencakup sarung tangan yang kompatibel dengan layar sentuh. Tetap terhubung tanpa mengorbankan kehangatan saat Anda menavigasi perangkat Anda dengan mudah. Baik Anda menjawab panggilan, mengirim pesan, atau mengabadikan momen musim dingin di ponsel pintar Anda, sarung tangan ini memastikan kenyamanan tanpa mengorbankan gaya. Tekstur kaos kaki yang lembut dan nyaman menawarkan sentuhan mewah pada kulit Anda. Ucapkan selamat tinggal pada kaki yang dingin saat Anda merangkul kehangatan mewah yang disediakan oleh kaos kaki campuran wol ini. Paket Aksesori Musim Dingin Arctic Frost bukan hanya tentang fungsionalitas; ini adalah pernyataan mode musim dingin. Setiap bagian dirancang tidak hanya untuk melindungi Anda dari dingin tetapi juga untuk meningkatkan gaya Anda selama musim dingin yang membeku. Bahan yang dipilih untuk paket ini mengutamakan daya tahan dan kenyamanan, memastikan Anda dapat menikmati negeri ajaib musim dingin dengan gaya. Baik Anda memanjakan diri sendiri atau mencari hadiah yang sempurna, Paket Aksesori Musim Dingin Arctic Frost adalah pilihan serbaguna. Bahagiakan seseorang yang spesial selama musim liburan atau tingkatkan lemari pakaian musim dingin Anda sendiri dengan ansambel yang stylish dan fungsional ini. Rangkullah dinginnya dengan percaya diri, mengetahui bahwa Anda memiliki aksesori yang sempurna untuk membuat Anda tetap hangat dan chic.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Aksesori Musim Dingin Arctic Frost',
-                    'sort-description' => 'Hadapi dinginnya musim dingin dengan Paket Aksesori Musim Dingin Arctic Frost kami. Set yang dikurasi ini mencakup syal mewah, topi kupluk nyaman, sarung tangan yang kompatibel dengan layar sentuh, dan Kaos Kaki Campuran Wol. Stylish dan fungsional, ansambel ini dibuat dari bahan berkualitas tinggi, memastikan daya tahan dan kenyamanan. Tingkatkan lemari pakaian musim dingin Anda atau bahagiakan seseorang yang spesial dengan pilihan hadiah sempurna ini.',
+                '15' => [
+                    'description' => '<p>Pakaian Olahraga</p>',
+                    'meta-description' => 'Girls Fashionable Footwear Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Girls Footwear',
+                    'name' => 'Pakaian Olahraga',
+                    'slug' => 'girls-footwear',
+                    'url-path' => 'kids/girls-footwear',
                 ],
 
-                '6' => [
-                    'description' => 'Memperkenalkan Paket Aksesori Musim Dingin Arctic Frost, solusi utama Anda untuk tetap hangat, stylish, dan terhubung selama hari-hari musim dingin yang dingin. Set yang dikurasi dengan cermat ini menyatukan empat aksesori musim dingin penting untuk menciptakan ansambel yang harmonis. Syal mewah, ditenun dari campuran akrilik dan wol, tidak hanya menambah lapisan kehangatan tetapi juga membawa sentuhan elegan pada lemari pakaian musim dingin Anda. Topi kupluk rajut lembut, dibuat dengan cermat, berjanji untuk membuat Anda tetap nyaman sambil menambahkan sentuhan modis pada penampilan Anda. Tapi itu belum semuanya – paket kami juga mencakup sarung tangan yang kompatibel dengan layar sentuh. Tetap terhubung tanpa mengorbankan kehangatan saat Anda menavigasi perangkat Anda dengan mudah. Baik Anda menjawab panggilan, mengirim pesan, atau mengabadikan momen musim dingin di ponsel pintar Anda, sarung tangan ini memastikan kenyamanan tanpa mengorbankan gaya. Tekstur kaos kaki yang lembut dan nyaman menawarkan sentuhan mewah pada kulit Anda. Ucapkan selamat tinggal pada kaki yang dingin saat Anda merangkul kehangatan mewah yang disediakan oleh kaos kaki campuran wol ini. Paket Aksesori Musim Dingin Arctic Frost bukan hanya tentang fungsionalitas; ini adalah pernyataan mode musim dingin. Setiap bagian dirancang tidak hanya untuk melindungi Anda dari dingin tetapi juga untuk meningkatkan gaya Anda selama musim dingin yang membeku. Bahan yang dipilih untuk paket ini mengutamakan daya tahan dan kenyamanan, memastikan Anda dapat menikmati negeri ajaib musim dingin dengan gaya. Baik Anda memanjakan diri sendiri atau mencari hadiah yang sempurna, Paket Aksesori Musim Dingin Arctic Frost adalah pilihan serbaguna. Bahagiakan seseorang yang spesial selama musim liburan atau tingkatkan lemari pakaian musim dingin Anda sendiri dengan ansambel yang stylish dan fungsional ini. Rangkullah dinginnya dengan percaya diri, mengetahui bahwa Anda memiliki aksesori yang sempurna untuk membuat Anda tetap hangat dan chic.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Paket Aksesori Musim Dingin Arctic Frost',
-                    'sort-description' => 'Hadapi dinginnya musim dingin dengan Paket Aksesori Musim Dingin Arctic Frost kami. Set yang dikurasi ini mencakup syal mewah, topi kupluk nyaman, sarung tangan yang kompatibel dengan layar sentuh, dan Kaos Kaki Campuran Wol. Stylish dan fungsional, ansambel ini dibuat dari bahan berkualitas tinggi, memastikan daya tahan dan kenyamanan. Tingkatkan lemari pakaian musim dingin Anda atau bahagiakan seseorang yang spesial dengan pilihan hadiah sempurna ini.',
+                '16' => [
+                    'description' => '<p>Alas Kaki</p>',
+                    'meta-description' => 'Boys Stylish Footwear Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Boys Footwear',
+                    'name' => 'Alas Kaki',
+                    'slug' => 'boys-footwear',
+                    'url-path' => 'kids/boys-footwear',
                 ],
 
-                '7' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Berkerudung Solid Pria OmniHeat, solusi utama Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mempertimbangkan daya tahan dan kehangatan, memastikan jaket ini menjadi teman terpercaya Anda. Desain berkerudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan penuh menawarkan cakupan lengkap, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku sisipan, jaket puffer ini memberikan kenyamanan untuk membawa barang-barang penting Anda atau menjaga tangan Anda tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari cangkang dan lapisan poliester yang tahan lama, jaket ini dibangun untuk bertahan lama dan tahan terhadap elemen. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Berkerudung Solid Pria OmniHeat cocok untuk berbagai kesempatan, baik Anda akan bekerja, pergi untuk jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Berkerudung Solid Pria OmniHeat. Tingkatkan lemari pakaian musim dingin Anda dan tetap hangat saat menikmati alam bebas. Kalahkan dinginnya dengan gaya dan buat pernyataan dengan pakaian penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Berkerudung Solid Pria OmniHeat',
-                    'sort-description' => 'Tetap hangat dan stylish dengan Jaket Puffer Berkerudung Solid Pria OmniHeat kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku sisipan untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman dalam cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai kesempatan.',
+                '17' => [
+                    'description' => '<p>Kesehatan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Kesehatan',
+                    'slug' => 'wellness',
+                    'url-path' => 'wellness',
                 ],
 
-                '8' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Berkerudung Solid Pria OmniHeat, solusi utama Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mempertimbangkan daya tahan dan kehangatan, memastikan jaket ini menjadi teman terpercaya Anda. Desain berkerudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan penuh menawarkan cakupan lengkap, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku sisipan, jaket puffer ini memberikan kenyamanan untuk membawa barang-barang penting Anda atau menjaga tangan Anda tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari cangkang dan lapisan poliester yang tahan lama, jaket ini dibangun untuk bertahan lama dan tahan terhadap elemen. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Berkerudung Solid Pria OmniHeat cocok untuk berbagai kesempatan, baik Anda akan bekerja, pergi untuk jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Berkerudung Solid Pria OmniHeat. Tingkatkan lemari pakaian musim dingin Anda dan tetap hangat saat menikmati alam bebas. Kalahkan dinginnya dengan gaya dan buat pernyataan dengan pakaian penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Berkerudung Solid Pria OmniHeat-Biru-Kuning-M',
-                    'sort-description' => 'Tetap hangat dan stylish dengan Jaket Puffer Berkerudung Solid Pria OmniHeat kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku sisipan untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman dalam cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai kesempatan.',
+                '18' => [
+                    'description' => '<p>Tutorial Yoga yang Dapat Diunduh</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Tutorial Yoga yang Dapat Diunduh',
+                    'slug' => 'downloadable-yoga-tutorial',
+                    'url-path' => 'wellness/downloadable-yoga-tutorial',
                 ],
 
-                '9' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Berkerudung Solid Pria OmniHeat, solusi utama Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mempertimbangkan daya tahan dan kehangatan, memastikan jaket ini menjadi teman terpercaya Anda. Desain berkerudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan penuh menawarkan cakupan lengkap, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku sisipan, jaket puffer ini memberikan kenyamanan untuk membawa barang-barang penting Anda atau menjaga tangan Anda tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari cangkang dan lapisan poliester yang tahan lama, jaket ini dibangun untuk bertahan lama dan tahan terhadap elemen. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Berkerudung Solid Pria OmniHeat cocok untuk berbagai kesempatan, baik Anda akan bekerja, pergi untuk jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Berkerudung Solid Pria OmniHeat. Tingkatkan lemari pakaian musim dingin Anda dan tetap hangat saat menikmati alam bebas. Kalahkan dinginnya dengan gaya dan buat pernyataan dengan pakaian penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Berkerudung Solid Pria OmniHeat-Biru-Kuning-L',
-                    'sort-description' => 'Tetap hangat dan stylish dengan Jaket Puffer Berkerudung Solid Pria OmniHeat kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku sisipan untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman dalam cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai kesempatan.',
+                '19' => [
+                    'description' => '<p>E-Book</p>',
+                    'meta-description' => 'Books Collection',
+                    'meta-keywords' => '',
+                    'meta-title' => 'Books Collection',
+                    'name' => 'E-Book',
+                    'slug' => 'e-books',
+                    'url-path' => 'wellness/e-books',
                 ],
 
-                '10' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Berkerudung Solid Pria OmniHeat, solusi utama Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mempertimbangkan daya tahan dan kehangatan, memastikan jaket ini menjadi teman terpercaya Anda. Desain berkerudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan penuh menawarkan cakupan lengkap, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku sisipan, jaket puffer ini memberikan kenyamanan untuk membawa barang-barang penting Anda atau menjaga tangan Anda tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari cangkang dan lapisan poliester yang tahan lama, jaket ini dibangun untuk bertahan lama dan tahan terhadap elemen. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Berkerudung Solid Pria OmniHeat cocok untuk berbagai kesempatan, baik Anda akan bekerja, pergi untuk jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Berkerudung Solid Pria OmniHeat. Tingkatkan lemari pakaian musim dingin Anda dan tetap hangat saat menikmati alam bebas. Kalahkan dinginnya dengan gaya dan buat pernyataan dengan pakaian penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Berkerudung Solid Pria OmniHeat-Biru-Hijau-M',
-                    'sort-description' => 'Tetap hangat dan stylish dengan Jaket Puffer Berkerudung Solid Pria OmniHeat kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku sisipan untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman dalam cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai kesempatan.',
+                '20' => [
+                    'description' => '<p>Tiket Film</p>',
+                    'meta-description' => 'Immerse yourself in the magic of 10 movies each month without extra charges. Valid nationwide with no blackout dates, this pass offers exclusive perks and concession discounts, making it a must-have for movie enthusiasts.',
+                    'meta-keywords' => '',
+                    'meta-title' => 'CineXperience Monthly Movie Pass',
+                    'name' => 'Tiket Film',
+                    'slug' => 'movie-pass',
+                    'url-path' => 'wellness/movie-pass',
                 ],
 
-                '11' => [
-                    'description' => 'Memperkenalkan Jaket Puffer Berkerudung Solid Pria OmniHeat, solusi utama Anda untuk tetap hangat dan modis selama musim dingin. Jaket ini dibuat dengan mempertimbangkan daya tahan dan kehangatan, memastikan jaket ini menjadi teman terpercaya Anda. Desain berkerudung tidak hanya menambah sentuhan gaya tetapi juga memberikan kehangatan tambahan, melindungi Anda dari angin dingin dan cuaca. Lengan penuh menawarkan cakupan lengkap, memastikan Anda tetap nyaman dari bahu hingga pergelangan tangan. Dilengkapi dengan saku sisipan, jaket puffer ini memberikan kenyamanan untuk membawa barang-barang penting Anda atau menjaga tangan Anda tetap hangat. Isian sintetis berinsulasi menawarkan kehangatan yang ditingkatkan, menjadikannya ideal untuk melawan hari dan malam yang dingin. Terbuat dari cangkang dan lapisan poliester yang tahan lama, jaket ini dibangun untuk bertahan lama dan tahan terhadap elemen. Tersedia dalam 5 warna menarik, Anda dapat memilih yang sesuai dengan gaya dan preferensi Anda. Serbaguna dan fungsional, Jaket Puffer Berkerudung Solid Pria OmniHeat cocok untuk berbagai kesempatan, baik Anda akan bekerja, pergi untuk jalan-jalan santai, atau menghadiri acara di luar ruangan. Rasakan perpaduan sempurna antara gaya, kenyamanan, dan fungsionalitas dengan Jaket Puffer Berkerudung Solid Pria OmniHeat. Tingkatkan lemari pakaian musim dingin Anda dan tetap hangat saat menikmati alam bebas. Kalahkan dinginnya dengan gaya dan buat pernyataan dengan pakaian penting ini.',
-                    'meta-description' => 'deskripsi meta',
-                    'meta-keywords' => 'meta1, meta2, meta3',
-                    'meta-title' => 'Judul Meta',
-                    'name' => 'Jaket Puffer Berkerudung Solid Pria OmniHeat-Biru-Hijau-L',
-                    'sort-description' => 'Tetap hangat dan stylish dengan Jaket Puffer Berkerudung Solid Pria OmniHeat kami. Jaket ini dirancang untuk memberikan kehangatan maksimal dan dilengkapi saku sisipan untuk kenyamanan tambahan. Bahan berinsulasi memastikan Anda tetap nyaman dalam cuaca dingin. Tersedia dalam 5 warna menarik, menjadikannya pilihan serbaguna untuk berbagai kesempatan.',
-                ],
-            ],
-
-            'product-bundle-option-translations' => [
-                '1' => [
-                    'label' => 'Opsi Paket 1',
+                '21' => [
+                    'description' => '<p>Pemesanan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan',
+                    'slug' => 'bookings',
+                    'url-path' => '',
                 ],
 
-                '2' => [
-                    'label' => 'Opsi Paket 1',
+                '22' => [
+                    'description' => '<p>Pemesanan Janji</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Janji',
+                    'slug' => 'appointment-booking',
+                    'url-path' => '',
                 ],
 
-                '3' => [
-                    'label' => 'Opsi Paket 2',
+                '23' => [
+                    'description' => '<p>Pemesanan Acara</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Acara',
+                    'slug' => 'event-booking',
+                    'url-path' => '',
                 ],
 
-                '4' => [
-                    'label' => 'Opsi Paket 2',
+                '24' => [
+                    'description' => '<p>Pemesanan Balai Komunitas</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Balai Komunitas',
+                    'slug' => 'community-hall-bookings',
+                    'url-path' => '',
+                ],
+
+                '25' => [
+                    'description' => '<p>Pemesanan Meja</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Meja',
+                    'slug' => 'table-booking',
+                    'url-path' => '',
+                ],
+
+                '26' => [
+                    'description' => '<p>Pemesanan Sewa</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pemesanan Sewa',
+                    'slug' => 'rental-booking',
+                    'url-path' => '',
+                ],
+
+                '27' => [
+                    'description' => '<p>Elektronik</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Elektronik',
+                    'slug' => 'electronics',
+                    'url-path' => '',
+                ],
+
+                '28' => [
+                    'description' => '<p>Ponsel & Aksesori</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Ponsel & Aksesori',
+                    'slug' => 'mobile-phones-accessories',
+                    'url-path' => '',
+                ],
+
+                '29' => [
+                    'description' => '<p>Laptop & Tablet</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Laptop & Tablet',
+                    'slug' => 'laptops-tablets',
+                    'url-path' => '',
+                ],
+
+                '30' => [
+                    'description' => '<p>Perangkat Audio</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Perangkat Audio',
+                    'slug' => 'audio-devices',
+                    'url-path' => '',
+                ],
+
+                '31' => [
+                    'description' => '<p>Rumah Pintar & Otomatisasi</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Rumah Pintar & Otomatisasi',
+                    'slug' => 'smart-home-automation',
+                    'url-path' => '',
+                ],
+
+                '32' => [
+                    'description' => '<p>Rumah Tangga</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Rumah Tangga',
+                    'slug' => 'household',
+                    'url-path' => '',
+                ],
+
+                '33' => [
+                    'description' => '<p>Peralatan Dapur</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Peralatan Dapur',
+                    'slug' => 'kitchen-appliances',
+                    'url-path' => '',
+                ],
+
+                '34' => [
+                    'description' => '<p>Peralatan Masak & Makan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Peralatan Masak & Makan',
+                    'slug' => 'cookware-dining',
+                    'url-path' => '',
+                ],
+
+                '35' => [
+                    'description' => '<p>Furnitur & Dekorasi</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Furnitur & Dekorasi',
+                    'slug' => 'furniture-decor',
+                    'url-path' => '',
+                ],
+
+                '36' => [
+                    'description' => '<p>Perlengkapan Kebersihan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Perlengkapan Kebersihan',
+                    'slug' => 'cleaning-supplies',
+                    'url-path' => '',
+                ],
+
+                '37' => [
+                    'description' => '<p>Buku & Alat Tulis</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Buku & Alat Tulis',
+                    'slug' => 'books-stationery',
+                    'url-path' => '',
+                ],
+
+                '38' => [
+                    'description' => '<p>Fiksi & Non-Fiksi</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Fiksi & Non-Fiksi',
+                    'slug' => 'fiction-non-fiction-books',
+                    'url-path' => '',
+                ],
+
+                '39' => [
+                    'description' => '<p>Pendidikan & Akademik</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Pendidikan & Akademik',
+                    'slug' => 'educational-academic',
+                    'url-path' => '',
+                ],
+
+                '40' => [
+                    'description' => '<p>Perlengkapan Kantor</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Perlengkapan Kantor',
+                    'slug' => 'office-supplies',
+                    'url-path' => '',
+                ],
+
+                '41' => [
+                    'description' => '<p>Bahan Seni & Kerajinan</p>',
+                    'meta-description' => '',
+                    'meta-keywords' => '',
+                    'meta-title' => '',
+                    'name' => 'Bahan Seni & Kerajinan',
+                    'slug' => 'art-craft-materials',
+                    'url-path' => '',
                 ],
             ],
         ],
@@ -727,8 +905,8 @@ return [
             ],
 
             'sample-products' => [
-                'download-sample' => 'Unduh Sampel',
                 'no' => 'Tidak',
+                'note' => 'Catatan: Waktu pengindeksan tergantung pada jumlah lokal yang dipilih. Proses ini dapat memakan waktu hingga 2 menit untuk diselesaikan. Jika Anda menambahkan lebih banyak lokal, cobalah untuk meningkatkan waktu eksekusi maksimum di pengaturan server dan PHP Anda, atau Anda dapat menggunakan penginstal CLI kami untuk menghindari batas waktu permintaan.',
                 'sample-products' => 'Produk Sampel',
                 'title' => 'Produk Sampel',
                 'yes' => 'Ya',
@@ -750,11 +928,12 @@ return [
             ],
 
             'ready-for-installation' => [
-                'create-database-table' => 'Buat tabel database',
+                'create-database-tables' => 'Buat tabel database',
+                'drop-existing-tables' => 'Hapus tabel yang ada',
                 'install' => 'Instalasi',
                 'install-info' => 'Bagisto untuk Instalasi',
                 'install-info-button' => 'Klik tombol di bawah untuk',
-                'populate-database-table' => 'Isi tabel database',
+                'populate-database-tables' => 'Isi tabel database',
                 'start-installation' => 'Mulai Instalasi',
                 'title' => 'Siap untuk Instalasi',
             ],
@@ -783,7 +962,7 @@ return [
                 'pcre' => 'pcre',
                 'pdo' => 'pdo',
                 'php' => 'PHP',
-                'php-version' => '8.1 atau yang lebih tinggi',
+                'php-version' => ':version atau yang lebih tinggi',
                 'session' => 'session',
                 'title' => 'Persyaratan Sistem',
                 'tokenizer' => 'tokenizer',

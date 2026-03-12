@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'إعادة فتح الطلب',
                     'title' => 'RMA',
                     'update-success' => 'تم تحديث حالة RMA بنجاح.',
+                    'reopen-not-allowed' => 'غير مسموح بإعادة فتح طلب RMA هذا.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'القناة',
                     'contact-number' => 'رقم الاتصال',
                     'create-btn' => 'إنشاء عميل',
                     'create-success' => 'تم إنشاء العميل بنجاح',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'الإعدادات',
 
             'general' => [
-                'info' => 'تعيين خيارات الوحدات.',
+                'info' => 'عام',
                 'title' => 'عام',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'عنوان العرض',
                         'redirection-title' => 'عنوان إعادة التوجيه',
                         'redirection-link' => 'رابط إعادة التوجيه',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'محتوى حقوق الطبع والنشر',
+                        'info' => 'قم بتكوين محتوى حقوق الطبع والنشر المعروض في تذييل موقعك لحماية ملكيتك الفكرية وتعزيز التعرف على علامتك التجارية.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'تعيين خيارات الذكاء الاصطناعي السحري والسماح ببعض الخيارات لأتمتة إنشاء المحتوى.',
-                    'title' => 'الذكاء الاصطناعي السحري',
-
-                    'settings' => [
-                        'api-key' => 'مفتاح API',
-                        'enabled' => 'ممكّن',
-                        'llm-api-domain' => 'نطاق LLM API',
-                        'organization' => 'المؤسسة',
-                        'title' => 'الإعدادات العامة',
-                        'title-info' => 'قم بتعزيز تجربتك مع ميزة الذكاء الاصطناعي السحري عن طريق إدخال مفتاح API الحصري الخاص بك وتحديد المؤسسة المناسبة للتكامل السهل. استول على السيطرة على بيانات اعتماد OpenAI الخاصة بك وقم بتخصيص الإعدادات وفقًا لاحتياجاتك الخاصة.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'تعليمات وصف الفئة',
-                        'cms-page-content-prompt' => 'تعليمات محتوى صفحة CMS',
-                        'enabled' => 'ممكّن',
-                        'product-description-prompt' => 'تعليمات وصف المنتج',
-                        'product-short-description-prompt' => 'تعليمات وصف المنتج المختصر',
-                        'title' => 'إنشاء المحتوى',
-                        'title-info' => 'سيتيح هذا الميزة الذكاء الاصطناعي السحري لكل محرر WYSIWYG، حيث ترغب في إدارة المحتوى باستخدام الذكاء الاصطناعي.<br/><br/>عند التمكين، انتقل إلى أي محرر لإنشاء المحتوى.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'ممكّن',
-                        'title' => 'إنشاء الصور',
-                        'title-info' => 'سيتيح هذا الميزة الذكاء الاصطناعي السحري لكل تحميل صورة، حيث ترغب في إنشاء صور باستخدام DALL-E.<br/><br/>عند التمكين، انتقل إلى أي تحميل صورة لإنشاء صورة.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'ممكّن',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'النموذج',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'ترجمة المراجعة',
-                        'title-info' => 'توفير خيار للعميل أو الزائر لترجمة مراجعة العميل إلى الإنجليزية.<br/><br/>عند التمكين، انتقل إلى المراجعة وستجد الزر "ترجمة إلى الإنجليزية" إذا كانت المراجعة بغير الإنجليزية.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'ممكّن',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'النموذج',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'المحفز',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'رسالة الدفع المخصصة',
-                        'title-info' => 'قم بإنشاء رسالة دفع مخصصة للعملاء على صفحة الشكر، وتخصيص المحتوى ليتناسب مع تفضيلات الأفراد وتعزيز تجربة ما بعد الشراء بشكل عام.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'إعدادات الامتثال لـ GDPR',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'تكوين خدمات وبيانات اعتماد واجهة برمجة تطبيقات أسعار الصرف.',
+                    'title' => 'أسعار الصرف',
+
+                    'settings' => [
+                        'default-service' => 'الخدمة الافتراضية',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'الإعدادات العامة',
+                        'title-info' => 'حدد خدمة أسعار الصرف الافتراضية لاستخدامها في التحديثات التلقائية لأسعار العملات.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'أدخل مفتاح Fixer.io API الخاص بك لتحديثات أسعار الصرف التلقائية.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'أدخل مفتاح ExchangeRate-API الخاص بك لتحديثات أسعار الصرف التلقائية (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'يومي',
+                        'enabled' => 'مفعل',
+                        'frequency' => 'التكرار',
+                        'monthly' => 'شهري',
+                        'time' => 'وقت البدء (HH:MM)',
+                        'title' => 'الاستيراد المجدول',
+                        'title-info' => 'تحديث أسعار الصرف تلقائيًا وفقًا لجدول زمني باستخدام خدمة API المكونة.',
+                        'weekly' => 'أسبوعي',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'تعيين خيارات خريطة الموقع.',
                     'title' => 'خريطة الموقع',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'الحد الأقصى لحجم الملف',
                         'max-url-per-file' => 'الحد الأقصى لعدد عناوين URL لكل ملف',
                         'title' => 'حدود الملف',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'إعدادات الذكاء الاصطناعي، المزودين، والميزات.',
+                'title' => 'الذكاء الاصطناعي',
+
+                'general' => [
+                    'info' => 'إعدادات الذكاء الاصطناعي العامة.',
+                    'title' => 'عام',
+
+                    'settings' => [
+                        'enabled' => 'مُفعّل',
+                        'title' => 'الإعدادات',
+                        'title-info' => 'تفعيل أو تعطيل الذكاء الاصطناعي عبر التطبيق بالكامل.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'مفتاح API',
+                    'info' => 'إعداد مفاتيح API لمزودي الذكاء الاصطناعي.',
+                    'title' => 'المزودون',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'إعداد بيانات اعتماد OpenAI API.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'إعداد بيانات اعتماد Anthropic API.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'إعداد بيانات اعتماد Google Gemini API.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'إعداد بيانات اعتماد Groq API.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'إعداد بيانات اعتماد xAI API.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'إعداد بيانات اعتماد DeepSeek API.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'إعداد بيانات اعتماد Mistral API.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'إعداد بيانات اعتماد Ollama API.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'تفعيل وإعداد ميزات الذكاء الاصطناعي للوحة الإدارة.',
+                    'title' => 'ميزات الإدارة',
+
+                    'text-generation' => [
+                        'enabled' => 'مُفعّل',
+                        'providers' => 'المزودون',
+                        'title' => 'إنشاء النصوص',
+                        'title-info' => 'تفعيل إنشاء النصوص بالذكاء الاصطناعي في محررات WYSIWYG في لوحة الإدارة.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'مُفعّل',
+                        'providers' => 'المزودون',
+                        'title' => 'إنشاء الصور',
+                        'title-info' => 'تفعيل إنشاء الصور بالذكاء الاصطناعي لصور المنتجات والمحتوى.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'تفعيل وإعداد ميزات الذكاء الاصطناعي لواجهة المتجر.',
+                    'title' => 'ميزات واجهة المتجر',
+
+                    'review-translation' => [
+                        'enabled' => 'مُفعّل',
+                        'model' => 'النموذج',
+                        'title' => 'ترجمة المراجعات',
+                        'title-info' => 'السماح للعملاء بترجمة المراجعات إلى لغتهم في واجهة المتجر.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'مُفعّل',
+                        'model' => 'النموذج',
+                        'title' => 'رسالة الدفع المخصصة',
+                        'title-info' => 'إنشاء رسائل دفع مخصصة للعملاء في صفحة الشكر.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'إعادة التوجيه',
-                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام Google. يجب أن يتطابق مع ما تم تعيينه في وحدة تحكم Google.',
+                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام Google. استخدم تنسيق عنوان URL الموضح (قم بتغيير النطاق فقط). يجب أن يتطابق مع عنوان URL المُعيّن في وحدة تحكم Google.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'عنوان URL لإعادة التوجيه',
-                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام Facebook. يجب أن يتطابق مع ما تم تكوينه في إعدادات تطبيق Facebook الخاص بك.',
+                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام Facebook. استخدم تنسيق عنوان URL الموضح (قم بتغيير النطاق فقط). يجب أن يتطابق مع عنوان URL المُكوّن في إعدادات تطبيق Facebook.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'عنوان URL لإعادة التوجيه',
-                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام Github. يجب أن يتطابق مع ما تم تعيينه في وحدة تحكم Github.',
+                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام GitHub. استخدم تنسيق عنوان URL الموضح (قم بتغيير النطاق فقط). يجب أن يتطابق مع عنوان URL المُعيّن في وحدة تحكم GitHub.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'عنوان URL لإعادة التوجيه',
-                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام LinkedIn. يجب أن يتطابق مع ما تم تعيينه في وحدة تحكم LinkedIn.',
+                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام LinkedIn. استخدم تنسيق عنوان URL الموضح (قم بتغيير النطاق فقط). يجب أن يتطابق مع عنوان URL المُعيّن في وحدة تحكم LinkedIn.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'عنوان URL لإعادة التوجيه',
-                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام Twitter. يجب أن يتطابق مع ما تم تعيينه في وحدة تحكم Twitter.',
+                                'title-info' => 'عنوان URL الذي يتم إعادة توجيه المستخدمين إليه بعد المصادقة باستخدام Twitter. استخدم تنسيق عنوان URL الموضح (قم بتغيير النطاق فقط). يجب أن يتطابق مع عنوان URL المُعيّن في وحدة تحكم Twitter.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'البريد الإلكتروني',
                 'title' => 'البريد الإلكتروني',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'برنامج تشغيل البريد الإلكتروني الخاص بك مضبوط على ":driver" بدلاً من "bagisto-dynamic-smtp". أي تغييرات يتم إجراؤها هنا لن يكون لها أي تأثير. يرجى تحديث MAIL_MAILER=bagisto-dynamic-smtp في ملف .env الخاص بك لتنشيط هذه الإعدادات.',
+                    'driver-mismatch-title' => 'هذه الإعدادات غير نشطة حاليًا.',
+                    'encryption' => 'التشفير',
+                    'host' => 'المضيف',
+                    'info' => 'تكوين إعدادات خادم SMTP لإرسال رسائل البريد الإلكتروني من متجرك.',
+                    'password' => 'كلمة المرور',
+                    'port' => 'المنفذ',
+                    'title' => 'SMTP',
+                    'username' => 'اسم المستخدم',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'بريد المشرف',
-                    'admin-email-tip' => 'عنوان البريد الإلكتروني للمشرف لاستقبال الرسائل الإلكترونية',
-                    'admin-name' => 'اسم المشرف',
-                    'admin-name-tip' => 'سيتم عرض هذا الاسم في جميع رسائل البريد الإلكتروني للمشرف',
-                    'admin-page-limit' => 'عدد العناصر الافتراضي في الصفحة (المشرف)',
-                    'contact-email' => 'بريد الاتصال',
-                    'contact-email-tip' => 'سيتم عرض عنوان البريد الإلكتروني في أسفل رسائلك',
-                    'contact-name' => 'اسم الاتصال',
-                    'contact-name-tip' => 'سيتم عرض هذا الاسم في أسفل رسائلك',
-                    'email-sender-name' => 'اسم مرسل البريد الإلكتروني',
-                    'email-sender-name-tip' => 'سيتم عرض هذا الاسم في صندوق الوارد للعملاء',
-                    'info' => 'تعيين اسم مرسل البريد الإلكتروني، عنوان البريد الإلكتروني للمتجر، اسم المشرف وعنوان البريد الإلكتروني للمشرف.',
-                    'shop-email-from' => 'عنوان البريد الإلكتروني للمتجر',
-                    'shop-email-from-tip' => 'عنوان البريد الإلكتروني لهذه القناة لإرسال رسائل البريد الإلكتروني إلى عملائك',
+                    'admin-email' => 'عنوان البريد الإلكتروني للمدير',
+                    'admin-email-tip' => 'سيتم إرسال جميع إشعارات المدير لهذه القناة إلى هذا العنوان.',
+                    'admin-name' => 'اسم المدير',
+                    'admin-name-tip' => 'سيظهر هذا الاسم في جميع رسائل البريد الإلكتروني المرسلة إلى المدير.',
+                    'admin-page-limit' => 'العناصر الافتراضية لكل صفحة (مدير)',
+                    'contact-email' => 'عنوان البريد الإلكتروني للاتصال',
+                    'contact-email-tip' => 'سيظهر عنوان البريد الإلكتروني هذا في تذييل رسائل البريد الإلكتروني الخاصة بك.',
+                    'contact-name' => 'اسم جهة الاتصال',
+                    'contact-name-tip' => 'سيظهر هذا الاسم في تذييل رسائل البريد الإلكتروني الخاصة بك.',
+                    'info' => 'قم بتكوين اسم المرسل وعنوان البريد الإلكتروني للمتجر وتفاصيل المدير وجهات الاتصال المستخدمة في جميع رسائل البريد الإلكتروني.',
+                    'sender-email' => 'عنوان البريد الإلكتروني للمرسل',
+                    'sender-email-tip' => 'سيتم إرسال رسائل البريد الإلكتروني إلى عملائك من هذا العنوان.',
+                    'sender-name' => 'اسم المرسل',
+                    'sender-name-tip' => 'سيظهر هذا الاسم في صندوق الوارد لعملائك باعتباره مرسل البريد الإلكتروني.',
                     'title' => 'إعدادات البريد الإلكتروني',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'تعيين أرقام الطلبات والحد الأدنى للطلبات والطلبات السابقة.',
                     'title' => 'إعدادات الطلب',
+
+                    'order-creation' => [
+                        'info' => 'قم بتكوين عدد محاولات إنشاء الطلب عند حدوث أخطاء أثناء عملية الدفع.',
+                        'max-retry-attempts' => 'الحد الأقصى لعدد المحاولات',
+                        'title' => 'إنشاء الطلب',
+                    ],
 
                     'order-number' => [
                         'generator' => 'مولد رقم الطلب',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'السماح بنوع المنتج لـ RMA',
                     'allow-rma-for-digital-product' => 'السماح بـ RMA للمنتجات الرقمية',
                     'allowed-file-extension' => 'الامتدادات المسموح بها للملفات',
-                    'allowed-file-types' => 'يرجى اختيار أنواع الملفات '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' فقط',
+                    'allowed-file-types' => 'يرجى اختيار أنواع الملفات :allowed_types فقط',
                     'allowed-info' => 'مفصولة بفواصل. على سبيل المثال: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'السماح بطلب RMA جديد للطلبات الملغاة',
                     'allowed-request-declined-request' => 'السماح بطلب RMA جديد للطلبات المرفوضة',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'عنوان استلام الإرجاع',
                     'return-pickup-time' => 'وقت استلام الإرجاع',
                     'return-policy' => 'سياسة الإرجاع',
-                    'select-allowed-order-status' => 'اختر حالة الطلب المسموح بها',
                     'specific-products' => 'منتجات محددة',
                     'title' => 'RMA',
                     'yes' => 'نعم',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'الاتصالات',
                 'configure' => 'تكوين',
                 'currencies' => 'العملات',
-                'custom-field' => 'حقل مخصص',
+                'custom-fields' => 'حقل مخصص',
                 'customers' => 'العملاء',
                 'dashboard' => 'لوحة التحكم',
                 'data-transfer' => 'نقل البيانات',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'الطلبات',
                 'products' => 'المنتجات',
                 'promotions' => 'العروض',
-                'reason' => 'سبب',
+                'reasons' => 'سبب',
                 'refunds' => 'المستردات',
                 'reporting' => 'تقرير',
                 'requests' => 'طلبات',
                 'reviews' => 'المراجعات',
                 'rma' => 'RMA',
-                'rma-status' => 'حالة RMA',
                 'roles' => 'الأدوار',
                 'rules' => 'قواعد',
                 'sales' => 'المبيعات',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'الإعدادات',
                 'shipments' => 'الشحنات',
                 'sitemaps' => 'خرائط الموقع',
+                'statuses' => 'حالة RMA',
                 'tax-categories' => 'فئات الضرائب',
                 'tax-rates' => 'معدلات الضرائب',
                 'taxes' => 'الضرائب',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'تطبيق',
-                    'dall-e-2' => 'دال.إ 2',
-                    'dall-e-3' => 'دال.إ 3',
                     'generate' => 'إنشاء',
                     'generating' => 'جاري الإنشاء...',
-                    'hd' => 'عالي الجودة',
-                    'model' => 'النموذج',
+                    'high' => 'عالية',
+                    'landscape' => 'أفقي (3:2)',
+                    'low' => 'منخفضة',
+                    'medium' => 'متوسطة',
+                    'model' => 'نموذج',
                     'number-of-images' => 'عدد الصور',
-                    'prompt' => 'محفز',
+                    'portrait' => 'عمودي (2:3)',
+                    'prompt' => 'موجّه',
                     'quality' => 'الجودة',
                     'regenerate' => 'إعادة إنشاء',
                     'regenerating' => 'جاري إعادة الإنشاء...',
                     'size' => 'الحجم',
-                    'standard' => 'قياسي',
+                    'square' => 'مربع (1:1)',
                     'title' => 'إنشاء صورة بالذكاء الاصطناعي',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'الواجهة الأمامية',
                     'next' => 'التالي',
                     'size' => 'الحجم',
+                    'square' => 'مربع (1:1)',
                     'use-cases' => 'حالات الاستخدام',
                     'zoom' => 'التكبير',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'تطبيق',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'ممكّن',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'إنشاء',
                 'generated-content' => 'المحتوى المُنشأ',
                 'generated-content-info' => 'قد يكون محتوى الذكاء الاصطناعي مضللًا. يرجى مراجعة المحتوى المُنشأ قبل تطبيقه.',
                 'generating' => 'جاري الإنشاء...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
-                'model' => 'النموذج',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
-                'prompt' => 'المحفز',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
+                'model' => 'نموذج',
+                'prompt' => 'موجّه',
                 'title' => 'مساعدة الذكاء الاصطناعي',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5347,37 +5395,40 @@ return [
         'view' => 'عرض',
 
         'rma' => [
-            'create' => 'إنشاء',
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'view' => 'عرض',
-            'title' => 'إرجاع المنتجات (RMA)',
-        ],
+            'title' => 'RMA',
 
-        'rma-reason' => [
-            'create' => 'إنشاء',
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'title' => 'أسباب الإرجاع',
-        ],
+            'requests' => [
+                'create' => 'إنشاء',
+                'title' => 'طلبات RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'title' => 'قواعد الإرجاع',
-        ],
+            'reasons' => [
+                'create' => 'إنشاء',
+                'delete' => 'حذف',
+                'edit' => 'تعديل',
+                'title' => 'أسباب RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'title' => 'حالة الإرجاع',
-        ],
+            'rules' => [
+                'create' => 'إنشاء',
+                'delete' => 'حذف',
+                'edit' => 'تعديل',
+                'title' => 'قواعد RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'إنشاء',
-            'delete' => 'حذف',
-            'edit' => 'تعديل',
-            'title' => 'حقول مخصصة',
+            'statuses' => [
+                'create' => 'إنشاء',
+                'delete' => 'حذف',
+                'edit' => 'تعديل',
+                'title' => 'حالات RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'إنشاء',
+                'delete' => 'حذف',
+                'edit' => 'تعديل',
+                'title' => 'حقول مخصصة',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'تحميل',
         'export' => 'تصدير',
+        'no' => 'لا',
         'no-records' => 'لا يوجد شيء للتصدير',
         'xls' => 'XLS',
         'xlsx' => 'إكس إل إس إكس',
+        'yes' => 'نعم',
     ],
 
     'validations' => [

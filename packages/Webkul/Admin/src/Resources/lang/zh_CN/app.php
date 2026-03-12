@@ -855,6 +855,7 @@ return [
                     'status-reopen' => '重新打开请求',
                     'title' => 'RMA',
                     'update-success' => 'RMA 状态更新成功。',
+                    'reopen-not-allowed' => '不允许重新打开此RMA请求。',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => '渠道',
                     'contact-number' => '联系号码',
                     'create-btn' => '创建客户',
                     'create-success' => '成功创建客户',
@@ -3989,7 +3991,7 @@ return [
             'title' => '配置',
 
             'general' => [
-                'info' => '设置单位选项。',
+                'info' => '常规',
                 'title' => '常规',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => '优惠标题',
                         'redirection-title' => '重定向标题',
                         'redirection-link' => '重定向链接',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => '版权内容',
+                        'info' => '配置在您网站页脚显示的版权内容，以保护您的知识产权并提升品牌知名度。',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => '设置魔法AI选项，并允许一些选项自动创建内容。',
-                    'title' => '魔法AI',
-
-                    'settings' => [
-                        'api-key' => 'API密钥',
-                        'enabled' => '已启用',
-                        'llm-api-domain' => 'LLM API域',
-                        'organization' => '组织',
-                        'title' => '常规设置',
-                        'title-info' => '通过输入您的独家API密钥和指示相关组织来增强您使用魔法AI功能的体验。掌握OpenAI凭据并根据您的特定需求自定义设置。',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => '类别描述提示',
-                        'cms-page-content-prompt' => 'CMS页面内容提示',
-                        'enabled' => '已启用',
-                        'product-description-prompt' => '产品描述提示',
-                        'product-short-description-prompt' => '产品简短描述提示',
-                        'title' => '内容生成',
-                        'title-info' => '此功能将为每个所见即所得编辑器启用魔法AI，您可以使用AI管理内容。<br/><br/>启用后，转到任何编辑器生成内容。',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => '已启用',
-                        'title' => '图像生成',
-                        'title-info' => '此功能将为每个图像上传启用魔法AI，您可以使用DALL-E生成图像。<br/><br/>启用后，转到任何图像上传生成图像。',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => '启用',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => '模型',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => '评论翻译',
-                        'title-info' => '为客户或访客提供将客户评论翻译成英语的选项。<br/><br/>启用后，转到评论页面，如果评论不是英语，您会找到“翻译成英语”按钮。',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => '启用',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => '模型',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => '提示',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => '个性化结账消息',
-                        'title-info' => '为客户在感谢页面上制作个性化的结账消息，定制内容以符合个人偏好，增强整体购买后的体验。',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR 合规设置',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => '配置汇率 API 服务和凭据。',
+                    'title' => '汇率',
+
+                    'settings' => [
+                        'default-service' => '默认服务',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => '常规设置',
+                        'title-info' => '选择用于自动货币汇率更新的默认汇率服务。',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => '输入您的 Fixer.io API 密钥以自动更新汇率。',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => '输入您的 ExchangeRate-API 密钥以自动更新汇率 (https://www.exchangerate-api.com)。',
+                    ],
+
+                    'schedule' => [
+                        'daily' => '每天',
+                        'enabled' => '启用',
+                        'frequency' => '频率',
+                        'monthly' => '每月',
+                        'time' => '开始时间 (HH:MM)',
+                        'title' => '计划导入',
+                        'title-info' => '使用已配置的 API 服务按计划自动更新汇率。',
+                        'weekly' => '每周',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => '设置站点地图选项。',
                     'title' => '站点地图',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => '最大文件大小',
                         'max-url-per-file' => '每个文件的最大 URL 数量',
                         'title' => '文件限制',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => '配置 Magic AI 设置、提供商和功能。',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Magic AI 常规设置。',
+                    'title' => '常规',
+
+                    'settings' => [
+                        'enabled' => '已启用',
+                        'title' => '设置',
+                        'title-info' => '在整个应用程序中启用或禁用 Magic AI。',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API 密钥',
+                    'info' => '配置 AI 提供商的 API 密钥。',
+                    'title' => '提供商',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => '配置您的 OpenAI API 凭证。',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => '配置您的 Anthropic API 凭证。',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => '配置您的 Google Gemini API 凭证。',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => '配置您的 Groq API 凭证。',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => '配置您的 xAI API 凭证。',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => '配置您的 DeepSeek API 凭证。',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => '配置您的 Mistral API 凭证。',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => '配置您的 Ollama API 凭证。',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => '启用并配置管理面板的 AI 功能。',
+                    'title' => '管理功能',
+
+                    'text-generation' => [
+                        'enabled' => '已启用',
+                        'providers' => '提供商',
+                        'title' => '文本生成',
+                        'title-info' => '在管理面板的 WYSIWYG 编辑器中启用 AI 驱动的文本生成。',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => '已启用',
+                        'providers' => '提供商',
+                        'title' => '图像生成',
+                        'title-info' => '启用 AI 驱动的产品和内容图像生成。',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => '启用并配置店面的 AI 功能。',
+                    'title' => '店面功能',
+
+                    'review-translation' => [
+                        'enabled' => '已启用',
+                        'model' => '模型',
+                        'title' => '评价翻译',
+                        'title-info' => '允许客户在店面将评价翻译为他们的语言。',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => '已启用',
+                        'model' => '模型',
+                        'title' => '个性化结账消息',
+                        'title-info' => '在感谢页面为客户生成个性化的结账消息。',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过Google认证后被重定向的回调URL。必须与您在Google控制台中配置的URL匹配。',
+                                'title-info' => '用户在通过Google认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在Google控制台中配置的URL匹配。',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过Facebook认证后被重定向的回调URL。必须与您在Facebook应用设置中配置的URL匹配。',
+                                'title-info' => '用户在通过Facebook认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在Facebook应用设置中配置的URL匹配。',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过GitHub认证后被重定向的回调URL。必须与您在GitHub控制台中配置的URL匹配。',
+                                'title-info' => '用户在通过GitHub认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在GitHub控制台中配置的URL匹配。',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过LinkedIn认证后被重定向的回调URL。必须与您在LinkedIn控制台中配置的URL匹配。',
+                                'title-info' => '用户在通过LinkedIn认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在LinkedIn控制台中配置的URL匹配。',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过Twitter认证后被重定向的回调URL。必须与您在Twitter控制台中配置的URL匹配。',
+                                'title-info' => '用户在通过Twitter认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在Twitter控制台中配置的URL匹配。',
                             ],
                         ],
                     ],
@@ -4617,22 +4670,34 @@ return [
                 'info' => '电子邮件',
                 'title' => '电子邮件',
 
+                'smtp' => [
+                    'driver-mismatch-info' => '您的邮件驱动已设置为 ":driver" 而不是 "bagisto-dynamic-smtp"。此处所做的任何更改都不会生效。请在 .env 文件中更新 MAIL_MAILER=bagisto-dynamic-smtp 以激活这些设置。',
+                    'driver-mismatch-title' => '这些设置目前处于非活动状态。',
+                    'encryption' => '加密',
+                    'host' => '主机',
+                    'info' => '配置SMTP服务器设置以从您的商店发送电子邮件。',
+                    'password' => '密码',
+                    'port' => '端口',
+                    'title' => 'SMTP',
+                    'username' => '用户名',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => '管理员邮箱',
-                    'admin-email-tip' => '此频道的管理员邮箱地址，用于接收邮件',
-                    'admin-name' => '管理员名称',
-                    'admin-name-tip' => '此名称将显示在所有管理员邮件中',
-                    'admin-page-limit' => '默认每页显示的项目数量（管理员）',
-                    'contact-email' => '联系邮箱',
-                    'contact-email-tip' => '显示在邮件底部的邮箱地址',
-                    'contact-name' => '联系名称',
-                    'contact-name-tip' => '显示在邮件底部的名称',
-                    'email-sender-name' => '邮件发送者名称',
-                    'email-sender-name-tip' => '此名称将显示在客户的收件箱中',
-                    'info' => '设置邮件发送者名称、商店邮箱地址、管理员名称和管理员邮箱地址。',
-                    'shop-email-from' => '商店邮箱地址',
-                    'shop-email-from-tip' => '用于向客户发送邮件的此频道的邮箱地址',
-                    'title' => '电子邮件设置',
+                    'admin-email' => '管理员邮箱地址',
+                    'admin-email-tip' => '此频道的所有管理员通知将发送到该地址。',
+                    'admin-name' => '管理员姓名',
+                    'admin-name-tip' => '此名称将出现在发送给管理员的所有电子邮件中。',
+                    'admin-page-limit' => '默认每页项目数（管理员）',
+                    'contact-email' => '联系邮箱地址',
+                    'contact-email-tip' => '此邮箱地址将显示在您邮件的页脚中。',
+                    'contact-name' => '联系人姓名',
+                    'contact-name-tip' => '此名称将显示在您邮件的页脚中。',
+                    'info' => '配置用于所有电子邮件的发件人姓名、商店邮箱地址、管理员和联系方式。',
+                    'sender-email' => '发件人邮箱地址',
+                    'sender-email-tip' => '向客户发送的邮件将从此地址发出。',
+                    'sender-name' => '发件人姓名',
+                    'sender-name-tip' => '此名称将显示在客户收件箱中作为邮件发件人。',
+                    'title' => '邮件设置',
                 ],
 
                 'notifications' => [
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => '设置订单编号、最低订单量和预购选项。',
                     'title' => '订单设置',
+
+                    'order-creation' => [
+                        'info' => '配置结账时发生错误时的订单创建重试次数。',
+                        'max-retry-attempts' => '最大重试次数',
+                        'title' => '订单创建',
+                    ],
 
                     'order-number' => [
                         'generator' => '订单编号生成器',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => '允许产品类型用于RMA',
                     'allow-rma-for-digital-product' => '允许数字产品的RMA',
                     'allowed-file-extension' => '允许的文件扩展名',
-                    'allowed-file-types' => '请选择仅文件类型 '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => '请选择仅文件类型 :allowed_types',
                     'allowed-info' => '用逗号分隔。例如：jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => '允许取消请求的新RMA请求',
                     'allowed-request-declined-request' => '允许被拒请求的新RMA请求',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => '退货取件地址',
                     'return-pickup-time' => '退货取件时间',
                     'return-policy' => '退货政策',
-                    'select-allowed-order-status' => '选择允许的订单状态',
                     'specific-products' => '特定产品',
                     'title' => 'RMA',
                     'yes' => '是',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => '通信',
                 'configure' => '配置',
                 'currencies' => '货币',
-                'custom-field' => '自定义字段',
+                'custom-fields' => '自定义字段',
                 'customers' => '客户',
                 'dashboard' => '仪表板',
                 'data-transfer' => '数据传输',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => '订单',
                 'products' => '产品',
                 'promotions' => '促销',
-                'reason' => '原因',
+                'reasons' => '原因',
                 'refunds' => '退款',
                 'reporting' => '报告',
                 'requests' => '请求',
                 'reviews' => '评论',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA 状态',
                 'roles' => '角色',
                 'rules' => '规则',
                 'sales' => '销售',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => '设置',
                 'shipments' => '发货',
                 'sitemaps' => '站点地图',
+                'statuses' => 'RMA Status',
                 'tax-categories' => '税收分类',
                 'tax-rates' => '税率',
                 'taxes' => '税收',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => '应用',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => '生成',
                     'generating' => '生成中...',
-                    'hd' => '高清',
+                    'high' => '高',
+                    'landscape' => '横版 (3:2)',
+                    'low' => '低',
+                    'medium' => '中',
                     'model' => '模型',
                     'number-of-images' => '图片数量',
-                    'prompt' => '提示',
+                    'portrait' => '竖版 (2:3)',
+                    'prompt' => '提示词',
                     'quality' => '质量',
                     'regenerate' => '重新生成',
                     'regenerating' => '重新生成中...',
                     'size' => '大小',
-                    'standard' => '标准',
+                    'square' => '正方形 (1:1)',
                     'title' => 'AI 图像生成',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => '正面',
                     'next' => '下一个',
                     'size' => '尺寸',
+                    'square' => '正方形 (1:1)',
                     'use-cases' => '用途',
                     'zoom' => '缩放',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => '应用',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => '启用',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => '生成',
                 'generated-content' => '生成的内容',
                 'generated-content-info' => 'AI内容可能会误导。请在应用之前审查生成的内容。',
                 'generating' => '生成中...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => '模型',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
-                'prompt' => '提示',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
+                'prompt' => '提示词',
                 'title' => 'AI 辅助',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5289,7 +5337,7 @@ return [
 
     'acl' => [
         'addresses' => '地址',
-        'attribute-families' => '属性族',
+        'attribute-families' => '属性家族',
         'attributes' => '属性',
         'campaigns' => '活动',
         'cancel' => '取消',
@@ -5298,14 +5346,14 @@ return [
         'catalog-rules' => '目录规则',
         'categories' => '分类',
         'channels' => '渠道',
-        'cms' => 'CMS',
+        'cms' => '内容管理系统',
         'communications' => '通信',
         'configure' => '配置',
         'copy' => '复制',
-        'create' => '创造',
+        'create' => '创建',
         'currencies' => '货币',
-        'customers' => '顾客',
-        'dashboard' => '仪表板',
+        'customers' => '客户',
+        'dashboard' => '仪表盘',
         'data-transfer' => '数据传输',
         'delete' => '删除',
         'edit' => '编辑',
@@ -5313,31 +5361,31 @@ return [
         'events' => '事件',
         'exchange-rates' => '汇率',
         'gdpr' => 'GDPR',
-        'groups' => '群组',
-        'import' => '进口',
-        'imports' => '进口',
+        'groups' => '分组',
+        'import' => '导入',
+        'imports' => '导入',
         'inventory-sources' => '库存来源',
         'invoices' => '发票',
         'locales' => '区域设置',
         'marketing' => '营销',
-        'newsletter-subscriptions' => '电子报订阅',
+        'newsletter-subscriptions' => '通讯订阅',
         'note' => '备注',
         'orders' => '订单',
         'products' => '产品',
-        'promotions' => '促销活动',
+        'promotions' => '促销',
         'refunds' => '退款',
         'reporting' => '报告',
         'reviews' => '评论',
         'roles' => '角色',
         'sales' => '销售',
-        'search-seo' => '搜索和SEO',
+        'search-seo' => '搜索与SEO',
         'search-synonyms' => '搜索同义词',
         'search-terms' => '搜索词',
         'settings' => '设置',
         'shipments' => '发货',
-        'sitemaps' => '网站地图',
-        'subscribers' => '电子报订阅者',
-        'tax-categories' => '税务类别',
+        'sitemaps' => '站点地图',
+        'subscribers' => '通讯订阅者',
+        'tax-categories' => '税收分类',
         'tax-rates' => '税率',
         'taxes' => '税费',
         'themes' => '主题',
@@ -5347,37 +5395,40 @@ return [
         'view' => '查看',
 
         'rma' => [
-            'create' => '创建',
-            'delete' => '删除',
-            'edit' => '编辑',
-            'view' => '查看',
             'title' => '退货授权 (RMA)',
-        ],
 
-        'rma-reason' => [
-            'create' => '创建',
-            'delete' => '删除',
-            'edit' => '编辑',
-            'title' => '退货原因',
-        ],
+            'requests' => [
+                'create' => '创建',
+                'title' => 'RMA 请求',
+            ],
 
-        'rma-rules' => [
-            'delete' => '删除',
-            'edit' => '编辑',
-            'title' => '退货规则',
-        ],
+            'reasons' => [
+                'create' => '创建',
+                'delete' => '删除',
+                'edit' => '编辑',
+                'title' => 'RMA 原因',
+            ],
 
-        'rma-status' => [
-            'delete' => '删除',
-            'edit' => '编辑',
-            'title' => '退货状态',
-        ],
+            'rules' => [
+                'create' => '创建',
+                'delete' => '删除',
+                'edit' => '编辑',
+                'title' => 'RMA 规则',
+            ],
 
-        'custom-field' => [
-            'create' => '创建',
-            'delete' => '删除',
-            'edit' => '编辑',
-            'title' => '自定义字段',
+            'statuses' => [
+                'create' => '创建',
+                'delete' => '删除',
+                'edit' => '编辑',
+                'title' => 'RMA 状态',
+            ],
+
+            'custom-fields' => [
+                'create' => '创建',
+                'delete' => '删除',
+                'edit' => '编辑',
+                'title' => '自定义字段',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => '下载',
         'export' => '导出',
+        'no' => '否',
         'no-records' => '没有要导出的内容',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => '是',
     ],
 
     'validations' => [

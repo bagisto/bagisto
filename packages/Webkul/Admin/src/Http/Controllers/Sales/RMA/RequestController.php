@@ -77,7 +77,9 @@ class RequestController extends Controller
 
         $statusArray = $this->rmaStatusForRequest($rma);
 
-        return view('admin::sales.rma.returns.view', compact('rma', 'statusArray'));
+        $canReopenRma = $this->rmaRepository->canReopenRma($rma);
+
+        return view('admin::sales.rma.returns.view', compact('rma', 'statusArray', 'canReopenRma'));
     }
 
     /**
@@ -88,6 +90,12 @@ class RequestController extends Controller
         $data = request()->only(['close_rma']);
 
         $rma = $this->rmaRepository->findOrFail($id);
+
+        if (! $this->rmaRepository->canReopenRma($rma)) {
+            session()->flash('error', trans('admin::app.sales.rma.all-rma.view.reopen-not-allowed'));
+
+            return back();
+        }
 
         if (! empty($data['close_rma'])) {
             $order = $this->orderRepository->find($rma->order_id);
@@ -276,13 +284,13 @@ class RequestController extends Controller
 
             return response()->json([
                 'messages' => trans('admin::app.sales.rma.create-rma.create-success'),
-                'redirect_url' => route('admin.sales.rma.view', $rma->id),
+                'redirect_url' => route('admin.sales.rma.requests.view', $rma->id),
             ]);
         }
 
         return response()->json([
             'messages' => trans('admin::app.sales.rma.create-rma.failed'),
-            'redirect_url' => route('admin.sales.rma.create'),
+            'redirect_url' => route('admin.sales.rma.requests.create'),
         ]);
     }
 

@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Referència de comanda',
                         'rma-status' => 'Estat de la sol·licitud',
                         'create' => 'Creat el',
+                        'quantity' => 'Quantitat',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'Traduir',
                 'translating' => 'Traduint...',
                 'write-a-review' => 'Escriure una ressenya',
+            ],
+
+            'contact-us' => [
+                'about' => 'Deixa\'ns una nota i et responem el més ràpid possible',
+                'desc' => 'En què estàs pensant?',
+                'describe-here' => 'Descriu-ho aquí',
+                'email' => 'Correu electrònic',
+                'message' => 'Missatge',
+                'name' => 'Nom',
+                'phone-number' => 'Número de telèfon',
+                'submit' => 'Envia',
+                'title' => 'Contacta\'ns',
             ],
 
             'add-to-cart' => 'Afegir a la cistella',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'No es pot actualitzar l\'estat de la RMA perquè la factura d\'aquesta comanda no s\'ha creat.',
             'permission-denied' => 'Estàs connectat',
             'rma-disabled' => 'La RMA està desactivada per aquest producte',
+            'reopen-not-allowed' => 'No es permet reobrir aquesta sol·licitud RMA.',
             'send-message' => ':name enviat correctament.',
             'update-success' => ':name actualitzat correctament.',
         ],

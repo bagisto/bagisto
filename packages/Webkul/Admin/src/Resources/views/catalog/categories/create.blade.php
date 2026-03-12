@@ -132,7 +132,6 @@
                                 :value="old('description')"
                                 :label="trans('admin::app.catalog.categories.create.description')"
                                 :tinymce="true"
-                                :prompt="core()->getConfigData('general.magic_ai.content_generation.category_description_prompt')"
                             />
 
                             <x-admin::form.control-group.error control-name="description" />
@@ -182,7 +181,11 @@
                     </p>
 
                     <!-- SEO Title & Description Blade Component -->
-                    <x-admin::seo />
+                    <x-admin::seo
+                        meta-title-field="meta_title"
+                        url-key-field="slug"
+                        meta-description-field="meta_description"
+                    />
 
                     <div class="mt-8">
                         <!-- Meta Title -->

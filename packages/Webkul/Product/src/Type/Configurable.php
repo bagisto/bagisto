@@ -2,13 +2,20 @@
 
 namespace Webkul\Product\Type;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Str;
 use Webkul\Admin\Validations\ConfigurableUniqueSku;
+use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Checkout\Models\CartItem as CartItemModel;
+use Webkul\Customer\Contracts\Wishlist;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
 use Webkul\Product\Facades\ProductImage;
 use Webkul\Product\Helpers\Indexers\Price\Configurable as ConfigurableIndexer;
+use Webkul\Sales\Contracts\InvoiceItem;
+use Webkul\Sales\Contracts\OrderItem;
+use Webkul\Sales\Contracts\ShipmentItem;
 use Webkul\Tax\Facades\Tax;
 
 class Configurable extends AbstractType
@@ -51,7 +58,7 @@ class Configurable extends AbstractType
     /**
      * These are the types which can be fillable when generating variant.
      *
-     * @var \Illuminate\Database\Eloquent\Collection
+     * @var Collection
      */
     protected $fillableVariantAttributes;
 
@@ -86,7 +93,7 @@ class Configurable extends AbstractType
     /**
      * Create configurable product.
      *
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function create(array $data)
     {
@@ -128,7 +135,7 @@ class Configurable extends AbstractType
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function update(array $data, $id, $attributes = [])
     {
@@ -182,10 +189,10 @@ class Configurable extends AbstractType
     /**
      * Create variant.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @param  array  $superAttributes
      * @param  array  $data
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function createVariant($product, $superAttributes, $data = [])
     {
@@ -228,7 +235,7 @@ class Configurable extends AbstractType
      * Update variant.
      *
      * @param  int  $id
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function updateVariant(array $data, $id)
     {
@@ -292,7 +299,7 @@ class Configurable extends AbstractType
     /**
      * Is item have quantity.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
+     * @param  CartItem  $cartItem
      * @return bool
      */
     public function isItemHaveQuantity($cartItem)
@@ -321,7 +328,7 @@ class Configurable extends AbstractType
     /**
      * Return true if item can be moved to cart from wishlist.
      *
-     * @param  \Webkul\Customer\Contracts\Wishlist  $item
+     * @param  Wishlist  $item
      * @return bool
      */
     public function canBeMovedFromWishlistToCart($item)
@@ -473,8 +480,8 @@ class Configurable extends AbstractType
     /**
      * Get actual ordered item.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem  $item
-     * @return \Webkul\Checkout\Contracts\CartItem|\Webkul\Sales\Contracts\OrderItem|\Webkul\Sales\Contracts\InvoiceItem|\Webkul\Sales\Contracts\ShipmentItem|\Webkul\Customer\Contracts\Wishlist
+     * @param  CartItem  $item
+     * @return CartItem|OrderItem|InvoiceItem|ShipmentItem|Wishlist
      */
     public function getOrderedItem($item)
     {
@@ -484,14 +491,14 @@ class Configurable extends AbstractType
     /**
      * Get product base image.
      *
-     * @param  \Webkul\Customer\Contracts\Wishlist|\Webkul\Checkout\Contracts\CartItem  $item
+     * @param  Wishlist|CartItem  $item
      * @return array
      */
     public function getBaseImage($item)
     {
         $product = $item->product;
 
-        if ($item instanceof \Webkul\Customer\Contracts\Wishlist) {
+        if ($item instanceof Wishlist) {
             if (isset($item->additional['selected_configurable_option'])) {
                 $product = $this->productRepository->find($item->additional['selected_configurable_option']);
             }

@@ -2,6 +2,8 @@
 
 namespace Webkul\CMS\Providers;
 
+use Webkul\CMS\Models\Page;
+use Webkul\CMS\Models\PageTranslation;
 use Webkul\Core\Providers\CoreModuleServiceProvider;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
@@ -12,7 +14,7 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\CMS\Models\Page::class,
-        \Webkul\CMS\Models\PageTranslation::class,
+        Page::class,
+        PageTranslation::class,
     ];
 }

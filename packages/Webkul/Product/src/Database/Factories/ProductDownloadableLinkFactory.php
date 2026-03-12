@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Webkul\Product\Models\ProductDownloadableLink;
 
@@ -19,7 +20,7 @@ class ProductDownloadableLinkFactory extends Factory
      */
     public function definition(): array
     {
-        $now = \Carbon\Carbon::now()->format('Y-m-d H:i:s');
+        $now = Carbon::now()->format('Y-m-d H:i:s');
 
         $filename = 'ProductImageExampleForUpload.jpg';
 

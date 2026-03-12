@@ -5,6 +5,7 @@ namespace Webkul\Customer\Models;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\Customer\Contracts\CompareItem as CompareItemContract;
 use Webkul\Customer\Database\Factories\CompareItemFactory;
 use Webkul\Product\Models\ProductProxy;
@@ -30,7 +31,7 @@ class CompareItem extends Model implements CompareItemContract
     /**
      * The customer that belong to the compare product.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function customer()
     {
@@ -40,7 +41,7 @@ class CompareItem extends Model implements CompareItemContract
     /**
      * The product that belong to the compare product.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function product()
     {

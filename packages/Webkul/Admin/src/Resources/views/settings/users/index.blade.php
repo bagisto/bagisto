@@ -11,7 +11,7 @@
 
             <div class="flex items-center gap-x-2.5">
                 <!-- Create Button -->
-                @if (bouncer()->hasPermission('settings.users.users.create'))
+                @if (bouncer()->hasPermission('settings.users.create'))
                     <button
                         type="button"
                         class="primary-button"
@@ -36,7 +36,7 @@
                 </p>
 
                 <div class="flex items-center gap-x-2.5">
-                    @if (bouncer()->hasPermission('settings.users.users.create'))
+                    @if (bouncer()->hasPermission('settings.users.create'))
                         <button
                             type="button"
                             class="primary-button"
@@ -53,7 +53,7 @@
                 ref="datagrid"
             >
                 @php
-                    $hasPermission = bouncer()->hasPermission('settings.users.users.edit') || bouncer()->hasPermission('settings.users.users.delete');
+                    $hasPermission = bouncer()->hasPermission('settings.users.edit') || bouncer()->hasPermission('settings.users.delete');
                 @endphp
 
                 <template #header="{
@@ -64,7 +64,10 @@
                     sort,
                     performAction
                 }">
-                    <div class="row grid grid-cols-{{ $hasPermission ? '6' : '5' }} grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold">
+                    <div 
+                        class="row grid grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                        style="grid-template-columns: repeat({{ $hasPermission ? '6' : '5' }}, minmax(150px, 1fr));"
+                    >
                         <div
                             class="flex cursor-pointer gap-2.5"
                             v-for="(columnGroup, index) in ['user_id', 'user_name', 'status', 'email', 'role_name']"
@@ -119,7 +122,7 @@
                         <div
                             v-for="record in available.records"
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
-                            :style="'grid-template-columns: repeat(' + (record.actions.length ? 6 : 5) + ', minmax(150px, 1fr));'"
+                            style="grid-template-columns: repeat({{ $hasPermission ? '6' : '5' }}, minmax(150px, 1fr));"
                         >
                             <!-- ID -->
                             <p>@{{ record.user_id }}</p>

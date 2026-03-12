@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'פתח מחדש בקשה',
                     'title' => 'RMA',
                     'update-success' => 'סטטוס ה-RMA עודכן בהצלחה.',
+                    'reopen-not-allowed' => 'פתיחה מחדש של בקשת RMA זו אינה מותרת.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'ערוץ',
                     'contact-number' => 'מספר טלפון',
                     'create-btn' => 'צור לקוח',
                     'create-success' => 'יצירת הלקוח בוצעה בהצלחה',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'הגדרות',
 
             'general' => [
-                'info' => 'הגדר אפשרויות יחידות.',
+                'info' => 'כללי',
                 'title' => 'כללי',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'כותרת הצעה',
                         'redirection-title' => 'כותרת הפניה',
                         'redirection-link' => 'קישור הפניה',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'תוכן זכויות יוצרים',
+                        'info' => 'הגדר את תוכן זכויות היוצרים המוצג בכותרת התחתונה של האתר שלך כדי להגן על הקניין הרוחני שלך ולחזק את זיהוי המותג.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'הגדר אפשרויות Magic AI ואפשר אפשרויות מסוימות לאוטומציה של יצירת תוכן.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'מפתח API',
-                        'enabled' => 'מופעל',
-                        'llm-api-domain' => 'תחום LLM API',
-                        'organization' => 'ארגון',
-                        'title' => 'הגדרות כלליות',
-                        'title-info' => 'שפר את החוויה שלך עם תכונת Magic AI על ידי הזנת מפתח API בלעדי וציון הארגון הרלוונטי לשילוב ללא מאמץ. תפוס בידיים את השליטה על פרטי הזיהוי שלך ב-OpenAI והתאם אישית את ההגדרות לפי צרכיך המיוחדים.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'קטגוריה תיאור הקלט',
-                        'cms-page-content-prompt' => 'תוכן דף CMS הקלט',
-                        'enabled' => 'מופעל',
-                        'product-description-prompt' => 'תיאור מוצר הקלט',
-                        'product-short-description-prompt' => 'תיאור קצר של מוצר הקלט',
-                        'title' => 'יצירת תוכן',
-                        'title-info' => 'תכונה זו תאפשר את Magic AI עבור כל עורך WYSIWYG, בו תרצה לנהל תוכן באמצעות AI.<br/><br/>כאשר מופעל, עבור לכל עורך כדי ליצור תוכן.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'מופעל',
-                        'title' => 'יצירת תמונה',
-                        'title-info' => 'תכונה זו תאפשר את Magic AI עבור כל העלאת תמונה, בה תרצה ליצור תמונות באמצעות DALL-E.<br/><br/>כאשר מופעל, עבור לכל העלאת תמונה כדי ליצור תמונה.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'מופעל',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'מודל',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'תרגום ביקורת',
-                        'title-info' => 'ספק אפשרות ללקוח או למבקר לתרגם ביקורת לקוח לאנגלית.<br/><br/>כאשר מופעל, עבור לביקורת ותמצא את הכפתור "תרגם לאנגלית" אם הביקורת אינה באנגלית.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'מופעל',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'מודל',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'הנחיה',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'הודעת תשלום מותאמת אישית',
-                        'title-info' => 'צור הודעת תשלום מותאמת אישית ללקוחות בעמוד התודה, התאמת התוכן להעדפות אישיות ושיפור חווית הרכישה הכוללת.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'הגדרות תאימות ל-GDPR',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'הגדר שירותי API ואישורים לשערי חליפין.',
+                    'title' => 'שערי חליפין',
+
+                    'settings' => [
+                        'default-service' => 'שירות ברירת מחדל',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'הגדרות כלליות',
+                        'title-info' => 'בחר את שירות שער החליפין המוגדר כברירת מחדל לשימוש בעדכוני שערי מטבע אוטומטיים.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'הזן את מפתח ה-API שלך מ-Fixer.io לעדכוני שערי חליפין אוטומטיים.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'הזן את מפתח ה-ExchangeRate-API שלך לעדכוני שערי חליפין אוטומטיים (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'יומי',
+                        'enabled' => 'מופעל',
+                        'frequency' => 'תדירות',
+                        'monthly' => 'חודשי',
+                        'time' => 'שעת התחלה (HH:MM)',
+                        'title' => 'ייבוא מתוזמן',
+                        'title-info' => 'עדכן אוטומטית שערי חליפין על בסיס מתוזמן באמצעות שירות ה-API המוגדר.',
+                        'weekly' => 'שבועי',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'הגדר אפשרויות מפת אתר.',
                     'title' => 'מפת אתר',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'גודל קובץ מרבי',
                         'max-url-per-file' => 'מספר מרבי של כתובות URL לכל קובץ',
                         'title' => 'גבולות קובץ',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'הגדרת הגדרות, ספקים ותכונות של Magic AI.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'הגדרות כלליות של Magic AI.',
+                    'title' => 'כללי',
+
+                    'settings' => [
+                        'enabled' => 'מופעל',
+                        'title' => 'הגדרות',
+                        'title-info' => 'הפעלה או השבתה של Magic AI בכל היישום.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'מפתח API',
+                    'info' => 'הגדרת מפתחות API עבור ספקי ה-AI שלך.',
+                    'title' => 'ספקים',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'הגדרת אישורי API של OpenAI.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'הגדרת אישורי API של Anthropic.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'הגדרת אישורי API של Google Gemini.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'הגדרת אישורי API של Groq.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'הגדרת אישורי API של xAI.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'הגדרת אישורי API של DeepSeek.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'הגדרת אישורי API של Mistral.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'הגדרת אישורי API של Ollama.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'הפעלה והגדרת תכונות AI עבור לוח הניהול.',
+                    'title' => 'תכונות ניהול',
+
+                    'text-generation' => [
+                        'enabled' => 'מופעל',
+                        'providers' => 'ספקים',
+                        'title' => 'יצירת טקסט',
+                        'title-info' => 'הפעלת יצירת טקסט מבוססת AI בעורכי WYSIWYG בלוח הניהול.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'מופעל',
+                        'providers' => 'ספקים',
+                        'title' => 'יצירת תמונות',
+                        'title-info' => 'הפעלת יצירת תמונות מבוססת AI עבור תמונות מוצרים ותוכן.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'הפעלה והגדרת תכונות AI עבור חזית החנות.',
+                    'title' => 'תכונות חזית החנות',
+
+                    'review-translation' => [
+                        'enabled' => 'מופעל',
+                        'model' => 'מודל',
+                        'title' => 'תרגום ביקורות',
+                        'title-info' => 'אפשר ללקוחות לתרגם ביקורות לשפתם בחזית החנות.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'מופעל',
+                        'model' => 'מודל',
+                        'title' => 'הודעת תשלום מותאמת אישית',
+                        'title-info' => 'יצירת הודעות תשלום מותאמות אישית ללקוחות בדף התודה.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'כתובת הפנייה (Redirect)',
-                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Google. חייבת להתאים לכתובת שהוגדרה בקונסולה של Google.',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Google. השתמש בפורמט כתובת URL מציין מיקום המוצג (שנה רק את הדומיין שלך). חייבת להתאים לכתובת שהוגדרה בקונסולה של Google.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'כתובת הפנייה (Redirect URL)',
-                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Facebook. חייבת להתאים לכתובת שהוגדרה בהגדרות האפליקציה שלך בפייסבוק.',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Facebook. השתמש בפורמט כתובת URL מציין מיקום המוצג (שנה רק את הדומיין שלך). חייבת להתאים לכתובת שהוגדרה בהגדרות האפליקציה שלך בפייסבוק.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'כתובת הפנייה (Redirect URL)',
-                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם GitHub. חייבת להתאים לכתובת שהוגדרה בקונסולה של GitHub.',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם GitHub. השתמש בפורמט כתובת URL מציין מיקום המוצג (שנה רק את הדומיין שלך). חייבת להתאים לכתובת שהוגדרה בקונסולה של GitHub.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'כתובת הפנייה (Redirect URL)',
-                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם LinkedIn. חייבת להתאים לכתובת שהוגדרה בקונסולה של LinkedIn.',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם LinkedIn. השתמש בפורמט כתובת URL מציין מיקום המוצג (שנה רק את הדומיין שלך). חייבת להתאים לכתובת שהוגדרה בקונסולה של LinkedIn.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'כתובת הפנייה (Redirect URL)',
-                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Twitter. חייבת להתאים לכתובת שהוגדרה בקונסולה של Twitter.',
+                                'title-info' => 'כתובת ה-URL שאליה המשתמשים מנותבים לאחר ההזדהות עם Twitter. השתמש בפורמט כתובת URL מציין מיקום המוצג (שנה רק את הדומיין שלך). חייבת להתאים לכתובת שהוגדרה בקונסולה של Twitter.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'אימייל',
                 'title' => 'אימייל',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'מנהל הדואר שלך מוגדר כ-":driver" במקום "bagisto-dynamic-smtp". כל שינוי שייעשה כאן לא יהיה לו כל אפקט. אנא עדכן את MAIL_MAILER=bagisto-dynamic-smtp בקובץ .env שלך כדי להפעיל את ההגדרות האלה.',
+                    'driver-mismatch-title' => 'הגדרות אלו כרגע לא פעילות.',
+                    'encryption' => 'הצפנה',
+                    'host' => 'מארח',
+                    'info' => 'הגדר את הגדרות שרת SMTP לשליחת דוא"ל מהחנות שלך.',
+                    'password' => 'סיסמה',
+                    'port' => 'פורט',
+                    'title' => 'SMTP',
+                    'username' => 'שם משתמש',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'אימייל מנהל',
-                    'admin-email-tip' => 'כתובת האימייל של המנהל עבור הערוץ הזה לקבלת הודעות אימייל',
+                    'admin-email' => 'כתובת אימייל מנהל',
+                    'admin-email-tip' => 'כל ההודעות למנהל עבור ערוץ זה יישלחו לכתובת זו.',
                     'admin-name' => 'שם מנהל',
-                    'admin-name-tip' => 'שם זה יוצג בכל הודעות האימייל של המנהל',
+                    'admin-name-tip' => 'שם זה יוצג בכל האימיילים הנשלחים למנהל.',
                     'admin-page-limit' => 'כמות פריטים ברירת מחדל לעמוד (מנהל)',
-                    'contact-email' => 'אימייל ליצירת קשר',
-                    'contact-email-tip' => 'כתובת האימייל תוצג בתחתית ההודעות שלך',
+                    'contact-email' => 'כתובת אימייל ליצירת קשר',
+                    'contact-email-tip' => 'כתובת אימייל זו תוצג בפוטר של האימיילים שלך.',
                     'contact-name' => 'שם ליצירת קשר',
-                    'contact-name-tip' => 'שם זה יוצג בתחתית ההודעות שלך',
-                    'email-sender-name' => 'שם שולח האימייל',
-                    'email-sender-name-tip' => 'שם זה יוצג בתיבת הדואר הנכנס של הלקוח',
-                    'info' => 'הגדר שם שולח האימייל, כתובת האימייל של החנות, שם המנהל וכתובת האימייל של המנהל.',
-                    'shop-email-from' => 'כתובת האימייל של החנות',
-                    'shop-email-from-tip' => 'כתובת האימייל של הערוץ הזה לשליחת הודעות אימייל ללקוחות שלך',
+                    'contact-name-tip' => 'שם זה יוצג בפוטר של האימיילים שלך.',
+                    'info' => 'קבע את שם השולח, כתובת אימייל החנות, פרטי המנהל ופרטי הקשר המשמשים בכל האימיילים.',
+                    'sender-email' => 'כתובת אימייל שולח',
+                    'sender-email-tip' => 'אימיילים ללקוחות שלך יישלחו מכתובת זו.',
+                    'sender-name' => 'שם שולח',
+                    'sender-name-tip' => 'שם זה יוצג בתיבת הדואר הנכנס של הלקוחות שלך כשולח האימייל.',
                     'title' => 'הגדרות אימייל',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'הגדר מספרי הזמנות, הזמנה מינימלית והזמנות חוזרות.',
                     'title' => 'הגדרות הזמנה',
+
+                    'order-creation' => [
+                        'info' => 'קבע את מספר ניסיונות יצירת ההזמנה מחדש במקרה של שגיאות במהלך התשלום.',
+                        'max-retry-attempts' => 'מספר ניסיונות מקסימלי',
+                        'title' => 'יצירת הזמנה',
+                    ],
 
                     'order-number' => [
                         'generator' => 'מחולל מספר הזמנה',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'אפשר סוג מוצר עבור RMA',
                     'allow-rma-for-digital-product' => 'אפשר RMA עבור מוצר דיגיטלי',
                     'allowed-file-extension' => 'סיומת קובץ מותרת',
-                    'allowed-file-types' => 'אנא בחר סוגי קבצים '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' בלבד',
+                    'allowed-file-types' => 'אנא בחר סוגי קבצים :allowed_types בלבד',
                     'allowed-info' => 'מופרד באמצעות פסיקים. לדוגמה: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'אפשר בקשת RMA חדשה עבור בקשה מבוטלת',
                     'allowed-request-declined-request' => 'אפשר בקשת RMA חדשה עבור בקשה נדחתה',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'כתובת איסוף החזרה',
                     'return-pickup-time' => 'זמן איסוף החזרה',
                     'return-policy' => 'מדיניות החזרה',
-                    'select-allowed-order-status' => 'בחר סטטוס הזמנה מותר',
                     'specific-products' => 'מוצרים ספציפיים',
                     'title' => 'RMA',
                     'yes' => 'כן',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'תקשורת',
                 'configure' => 'הגדר',
                 'currencies' => 'מטבעות',
-                'custom-field' => 'שדה מותאם אישית',
+                'custom-fields' => 'שדה מותאם אישית',
                 'customers' => 'לקוחות',
                 'dashboard' => 'לוח בקרה',
                 'data-transfer' => 'העברת נתונים',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'הזמנות',
                 'products' => 'מוצרים',
                 'promotions' => 'קידום מכירות',
-                'reason' => 'סיבה',
+                'reasons' => 'סיבה',
                 'refunds' => 'החזרים',
                 'reporting' => 'דיווח',
                 'requests' => 'בקשות',
                 'reviews' => 'ביקורות',
                 'rma' => 'RMA',
-                'rma-status' => 'סטטוס RMA',
                 'roles' => 'תפקידים',
                 'rules' => 'כללים',
                 'sales' => 'מכירות',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'הגדרות',
                 'shipments' => 'משלוחים',
                 'sitemaps' => 'מפות אתר',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'קטגוריות מס',
                 'tax-rates' => 'שערי מס',
                 'taxes' => 'מיסים',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'החל',
-                    'dall-e-2' => 'דאל.ה 2',
-                    'dall-e-3' => 'דאל.ה 3',
                     'generate' => 'יצירה',
                     'generating' => 'יוצר...',
-                    'hd' => 'HD',
+                    'high' => 'גבוהה',
+                    'landscape' => 'לרוחב (3:2)',
+                    'low' => 'נמוכה',
+                    'medium' => 'בינונית',
                     'model' => 'מודל',
                     'number-of-images' => 'מספר התמונות',
-                    'prompt' => 'פרומט',
+                    'portrait' => 'לאורך (2:3)',
+                    'prompt' => 'הנחיה',
                     'quality' => 'איכות',
                     'regenerate' => 'יצירה מחדש',
                     'regenerating' => 'יוצר מחדש...',
                     'size' => 'גודל',
-                    'standard' => 'תקן',
+                    'square' => 'ריבוע (1:1)',
                     'title' => 'יצירת תמונה עם בינה מלאכותית',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'קדמית',
                     'next' => 'הבאה',
                     'size' => 'גודל',
+                    'square' => 'ריבוע (1:1)',
                     'use-cases' => 'מטרות שימוש',
                     'zoom' => 'הגדלה',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'החל',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'מופעל',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'יצירה',
                 'generated-content' => 'תוכן שנוצר',
                 'generated-content-info' => 'תוכן שנוצר על ידי AI יכול להיות מטעה. אנא בדוק את התוכן שנוצר לפני החלתו.',
                 'generating' => 'יוצר...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'מודל',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
-                'prompt' => 'פרומט',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
+                'prompt' => 'הנחיה',
                 'title' => 'סיוע AI',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5293,29 +5341,29 @@ return [
         'attributes' => 'מאפיינים',
         'campaigns' => 'קמפיינים',
         'cancel' => 'ביטול',
-        'cart-rules' => 'חוקי העגלה',
+        'cart-rules' => 'חוקי עגלה',
         'catalog' => 'קטלוג',
-        'catalog-rules' => 'חוקי הקטלוג',
+        'catalog-rules' => 'חוקי קטלוג',
         'categories' => 'קטגוריות',
         'channels' => 'ערוצים',
         'cms' => 'CMS',
         'communications' => 'תקשורת',
         'configure' => 'הגדר',
         'copy' => 'העתק',
-        'create' => 'לִיצוֹר',
+        'create' => 'צור',
         'currencies' => 'מטבעות',
         'customers' => 'לקוחות',
         'dashboard' => 'לוח בקרה',
         'data-transfer' => 'העברת נתונים',
-        'delete' => 'מחיקה',
+        'delete' => 'מחק',
         'edit' => 'ערוך',
         'email-templates' => 'תבניות אימייל',
         'events' => 'אירועים',
         'exchange-rates' => 'שערי חליפין',
         'gdpr' => 'GDPR',
         'groups' => 'קבוצות',
-        'import' => 'יְבוּא',
-        'imports' => 'יבוא',
+        'import' => 'ייבוא',
+        'imports' => 'ייבוא',
         'inventory-sources' => 'מקורות מלאי',
         'invoices' => 'חשבוניות',
         'locales' => 'אזורים',
@@ -5324,7 +5372,7 @@ return [
         'note' => 'הערה',
         'orders' => 'הזמנות',
         'products' => 'מוצרים',
-        'promotions' => 'קידומות',
+        'promotions' => 'קידום מכירות',
         'refunds' => 'החזרים',
         'reporting' => 'דיווח',
         'reviews' => 'ביקורות',
@@ -5332,9 +5380,9 @@ return [
         'sales' => 'מכירות',
         'search-seo' => 'חיפוש וקידום אתרים',
         'search-synonyms' => 'מילים נרדפות לחיפוש',
-        'search-terms' => 'מונחים לחיפוש',
+        'search-terms' => 'מונחי חיפוש',
         'settings' => 'הגדרות',
-        'shipments' => 'שליחות',
+        'shipments' => 'משלוחים',
         'sitemaps' => 'מפות אתר',
         'subscribers' => 'מנויים לניוזלטר',
         'tax-categories' => 'קטגוריות מס',
@@ -5342,42 +5390,45 @@ return [
         'taxes' => 'מיסים',
         'themes' => 'ערכות נושא',
         'transactions' => 'עסקאות',
-        'url-rewrites' => 'כתיבת URL מחדש',
+        'url-rewrites' => 'כתובות URL משוכתבות',
         'users' => 'משתמשים',
         'view' => 'הצג',
 
         'rma' => [
-            'create' => 'צור',
-            'delete' => 'מחק',
-            'edit' => 'ערוך',
-            'view' => 'צפה',
             'title' => 'החזרת מוצרים (RMA)',
-        ],
 
-        'rma-reason' => [
-            'create' => 'צור',
-            'delete' => 'מחק',
-            'edit' => 'ערוך',
-            'title' => 'סיבות להחזרה',
-        ],
+            'requests' => [
+                'create' => 'צור',
+                'title' => 'בקשות RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'מחק',
-            'edit' => 'ערוך',
-            'title' => 'כללי החזרה',
-        ],
+            'reasons' => [
+                'create' => 'צור',
+                'delete' => 'מחק',
+                'edit' => 'ערוך',
+                'title' => 'סיבות RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'מחק',
-            'edit' => 'ערוך',
-            'title' => 'מצב החזרה',
-        ],
+            'rules' => [
+                'create' => 'צור',
+                'delete' => 'מחק',
+                'edit' => 'ערוך',
+                'title' => 'כללי RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'צור',
-            'delete' => 'מחק',
-            'edit' => 'ערוך',
-            'title' => 'שדות מותאמים',
+            'statuses' => [
+                'create' => 'צור',
+                'delete' => 'מחק',
+                'edit' => 'ערוך',
+                'title' => 'סטטוסים של RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'צור',
+                'delete' => 'מחק',
+                'edit' => 'ערוך',
+                'title' => 'שדות מותאמים אישית',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'הורדה',
         'export' => 'ייצוא',
+        'no' => 'לא',
         'no-records' => 'אין מידע לייצוא',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'כן',
     ],
 
     'validations' => [

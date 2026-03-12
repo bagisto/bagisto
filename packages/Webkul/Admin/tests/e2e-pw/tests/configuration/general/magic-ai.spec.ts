@@ -1,40 +1,68 @@
 import { test, expect } from "../../../setup";
-import { generateName, generateDescription, generateHostname } from "../../../utils/faker";
+import { generateDescription } from "../../../utils/faker";
 
 test.describe("magic ai configuration", () => {
-    test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto("admin/configuration/general/magic_ai");
+    test("should update the openai credential", async ({ adminPage }) => {
+        /**
+         * Enable Magic AI from the general settings page.
+         */
+        await adminPage.goto("admin/configuration/magic_ai/general");
+
+        const isSettingsEnabled = await adminPage
+            .locator(
+                'input[type="checkbox"][name="magic_ai[general][settings][enabled]"]'
+            )
+            .isChecked();
+
+        if (!isSettingsEnabled) {
+            await adminPage.click(
+                'label[for="magic_ai[general][settings][enabled]"]'
+            );
+        }
+
+        await adminPage.click('button[type="submit"].primary-button:visible');
+
+        await expect(
+            adminPage.getByText("Configuration saved successfully")
+        ).toBeVisible();
+
+        await expect(
+            await adminPage.locator(
+                'input[type="checkbox"][name="magic_ai[general][settings][enabled]"]'
+            )
+        ).toBeChecked();
+
+        /**
+         * Fill the OpenAI API key on the providers page.
+         */
+        await adminPage.goto("admin/configuration/magic_ai/providers");
+
+        await adminPage
+            .locator('input[name="magic_ai[providers][openai][api_key]"]')
+            .fill(generateDescription(20));
+
+        await adminPage.click('button[type="submit"].primary-button:visible');
+
+        await expect(
+            adminPage.getByText("Configuration saved successfully")
+        ).toBeVisible();
     });
 
-    test("should update the openai credential", async ({ adminPage }) => {
+    test("should manage content using ai", async ({ adminPage }) => {
+        await adminPage.goto("admin/configuration/magic_ai/admin_features");
+
         const isChecked = await adminPage
             .locator(
-                'input[type="checkbox"][name="general[magic_ai][settings][enabled]"]'
+                'input[type="checkbox"][name="magic_ai[admin_features][text_generation][enabled]"]'
             )
             .isChecked();
 
         if (!isChecked) {
             await adminPage.click(
-                'label[for="general[magic_ai][settings][enabled]"]'
+                'label[for="magic_ai[admin_features][text_generation][enabled]"]'
             );
         }
 
-        /**
-         * Fill the Open AI credentials.
-         */
-        await adminPage
-            .locator('input[name="general[magic_ai][settings][api_key]"]')
-            .fill(generateDescription(20));
-        await adminPage
-            .locator('input[name="general[magic_ai][settings][organization]"]')
-            .fill(generateName());
-        await adminPage
-            .locator('input[name="general[magic_ai][settings][api_domain]"]')
-            .fill(generateHostname());
-
-        /**
-         * Save the configuration.
-         */
         await adminPage.click('button[type="submit"].primary-button:visible');
 
         /**
@@ -46,65 +74,23 @@ test.describe("magic ai configuration", () => {
 
         await expect(
             await adminPage.locator(
-                'input[type="checkbox"][name="general[magic_ai][settings][enabled]"]'
+                'input[type="checkbox"][name="magic_ai[admin_features][text_generation][enabled]"]'
             )
         ).toBeChecked();
     });
 
-    test("should manage content using ai", async ({ adminPage }) => {
-        const isChecked = await adminPage
-            .locator(
-                'input[type="checkbox"][name="general[magic_ai][content_generation][enabled]"]'
-            )
-            .isChecked();
-
-        if (!isChecked) {
-            await adminPage.click(
-                'label[for="general[magic_ai][content_generation][enabled]"]'
-            );
-        }
-
-        await adminPage
-            .locator(
-                'textarea[name="general[magic_ai][content_generation][product_short_description_prompt]"]'
-            )
-            .fill(generateDescription(100));
-        await adminPage
-            .locator(
-                'textarea[name="general[magic_ai][content_generation][product_description_prompt]"]'
-            )
-            .fill(generateDescription(100));
-        await adminPage
-            .locator(
-                'textarea[name="general[magic_ai][content_generation][category_description_prompt]"]'
-            )
-            .fill(generateDescription(100));
-        await adminPage
-            .locator(
-                'textarea[name="general[magic_ai][content_generation][cms_page_content_prompt]"]'
-            )
-            .fill(generateDescription(100));
-
-        await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
-    });
-
     test("should enable image generation using ai", async ({ adminPage }) => {
+        await adminPage.goto("admin/configuration/magic_ai/admin_features");
+
         const isChecked = await adminPage
             .locator(
-                'input[type="checkbox"][name="general[magic_ai][image_generation][enabled]"]'
+                'input[type="checkbox"][name="magic_ai[admin_features][image_generation][enabled]"]'
             )
             .isChecked();
 
         if (!isChecked) {
             await adminPage.click(
-                'label[for="general[magic_ai][image_generation][enabled]"]'
+                'label[for="magic_ai[admin_features][image_generation][enabled]"]'
             );
         }
 
@@ -116,18 +102,26 @@ test.describe("magic ai configuration", () => {
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
+
+        await expect(
+            await adminPage.locator(
+                'input[type="checkbox"][name="magic_ai[admin_features][image_generation][enabled]"]'
+            )
+        ).toBeChecked();
     });
 
     test("should enable review translation using ai", async ({ adminPage }) => {
+        await adminPage.goto("admin/configuration/magic_ai/storefront_features");
+
         const isChecked = await adminPage
             .locator(
-                'input[type="checkbox"][name="general[magic_ai][review_translation][enabled]"]'
+                'input[type="checkbox"][name="magic_ai[storefront_features][review_translation][enabled]"]'
             )
             .isChecked();
 
         if (!isChecked) {
             await adminPage.click(
-                'label[for="general[magic_ai][review_translation][enabled]"]'
+                'label[for="magic_ai[storefront_features][review_translation][enabled]"]'
             );
         }
 
@@ -135,8 +129,8 @@ test.describe("magic ai configuration", () => {
          * Selecting the model.
          */
         await adminPage.selectOption(
-            'select[name="general[magic_ai][review_translation][model]"]',
-            "gemini-2.0-flash"
+            'select[name="magic_ai[storefront_features][review_translation][model]"]',
+            "gemini-2.5-flash"
         );
 
         /**
@@ -153,7 +147,7 @@ test.describe("magic ai configuration", () => {
 
         await expect(
             await adminPage.locator(
-                'input[type="checkbox"][name="general[magic_ai][review_translation][enabled]"]'
+                'input[type="checkbox"][name="magic_ai[storefront_features][review_translation][enabled]"]'
             )
         ).toBeChecked();
     });
@@ -161,31 +155,19 @@ test.describe("magic ai configuration", () => {
     test("should craft a personalized checkout message for customers using AI", async ({
         adminPage,
     }) => {
+        await adminPage.goto("admin/configuration/magic_ai/storefront_features");
+
         const isChecked = await adminPage
             .locator(
-                'input[type="checkbox"][name="general[magic_ai][checkout_message][enabled]"]'
+                'input[type="checkbox"][name="magic_ai[storefront_features][checkout_message][enabled]"]'
             )
             .isChecked();
 
         if (!isChecked) {
             await adminPage.click(
-                'label[for="general[magic_ai][checkout_message][enabled]"]'
+                'label[for="magic_ai[storefront_features][checkout_message][enabled]"]'
             );
         }
-
-        /**
-         * Fill the form.
-         */
-        await adminPage.selectOption(
-            'select[name="general[magic_ai][checkout_message][model]"]',
-            "gemini-2.0-flash"
-        );
-
-        await adminPage
-            .locator(
-                'textarea[name="general[magic_ai][checkout_message][prompt]"]'
-            )
-            .fill(generateDescription(100));
 
         /**
          * Save the configuration.
@@ -200,9 +182,9 @@ test.describe("magic ai configuration", () => {
         ).toBeVisible();
 
         await expect(
-            adminPage.locator(
-                'select[name="general[magic_ai][checkout_message][model]"]'
+            await adminPage.locator(
+                'input[type="checkbox"][name="magic_ai[storefront_features][checkout_message][enabled]"]'
             )
-        ).toHaveValue("gemini-2.0-flash");
+        ).toBeChecked();
     });
 });

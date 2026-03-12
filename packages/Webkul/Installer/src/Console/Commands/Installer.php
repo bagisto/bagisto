@@ -4,13 +4,12 @@ namespace Webkul\Installer\Console\Commands;
 
 use DateTimeZone;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Events\ComposerEvents;
 use Webkul\Installer\Helpers\DatabaseManager;
+use Webkul\Installer\Helpers\EnvironmentManager;
 
 use function Laravel\Prompts\multiselect;
 use function Laravel\Prompts\password;
@@ -168,6 +167,16 @@ class Installer extends Command
     ];
 
     /**
+     * Create a new command instance.
+     */
+    public function __construct(
+        public EnvironmentManager $environmentManager,
+        public DatabaseManager $databaseManager
+    ) {
+        parent::__construct();
+    }
+
+    /**
      * Install and configure bagisto.
      */
     public function handle(): void
@@ -203,7 +212,7 @@ class Installer extends Command
         $this->call('migrate:fresh');
 
         $this->warn('Step: Seeding basic data for Bagisto kickstart...');
-        app(BagistoDatabaseSeeder::class)->run($this->getSeederConfiguration());
+        $this->databaseManager->seed($this->getSeederConfiguration());
         $this->components->info('Basic data seeded successfully.');
 
         $this->warn('Step: Linking storage directory...');
@@ -212,6 +221,8 @@ class Installer extends Command
         if (! $this->option('skip-admin-creation')) {
             $this->warn('Step: Create admin credentials...');
             $this->askForAdminDetails();
+        } else {
+            $this->databaseManager->createAdminUser();
         }
 
         $this->warn('Step: Clearing cached bootstrap files...');
@@ -407,30 +418,25 @@ class Installer extends Command
             hint    : 'The action will create products after installation.',
         );
 
-        $password = password_hash($adminPassword, PASSWORD_BCRYPT, ['cost' => 10]);
-
         try {
-            DB::table('admins')->updateOrInsert(
-                ['id' => 1],
-                [
-                    'name' => $adminName,
-                    'email' => $adminEmail,
-                    'password' => $password,
-                    'role_id' => 1,
-                    'status' => 1,
-                ]
-            );
+            $this->databaseManager->createAdminUser([
+                'name' => $adminName,
+                'email' => $adminEmail,
+                'password' => $adminPassword,
+            ]);
 
             if ($sampleProduct === 'true') {
                 $this->warn('Step: Seeding sample product data. Please Wait...');
 
-                app(DatabaseManager::class)->seedSampleProducts($this->getSeederConfiguration());
+                $this->components->info('Seeding time depends on the number of locales selected. This process may take up to 2 minutes to complete.');
 
-                $this->warn('Step: Reindexing data...');
+                $this->databaseManager->seedSampleProducts($this->getSeederConfiguration());
+
+                $this->components->info('Now Indexing data...');
 
                 $this->call('indexer:index', ['--mode' => ['full']]);
 
-                $this->components->info('Sample product data seeded successfully.');
+                $this->components->success('Sample product data seeded successfully.');
             }
 
             $filePath = storage_path('installed');
@@ -526,6 +532,14 @@ class Installer extends Command
     }
 
     /**
+     * Check key in `.env` file because it will help to find values at runtime.
+     */
+    protected function getEnvVariable(string $key, $default = null): string|bool
+    {
+        return $this->environmentManager->getEnvVariable($key, $default);
+    }
+
+    /**
      * Update the `.env` file with the provided details.
      */
     protected function updateEnvVariables(): void
@@ -537,25 +551,8 @@ class Installer extends Command
 
             $value = trim($value, '"');
 
-            $this->updateEnvVariable($key, $value, Str::startsWith($key, 'DB_'));
+            $this->environmentManager->updateEnvVariable($key, $value, Str::startsWith($key, 'DB_'));
         }
-    }
-
-    /**
-     * Update the single `.env` value.
-     */
-    protected function updateEnvVariable(string $key, string $value, bool $addQuotes = false): void
-    {
-        $data = file_get_contents(base_path('.env'));
-
-        // Check if $value contains spaces, and if so, add double quotes, or if $addQuotes is true.
-        if ($addQuotes || preg_match('/\s/', $value)) {
-            $value = '"'.$value.'"';
-        }
-
-        $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
-
-        file_put_contents(base_path('.env'), $data);
     }
 
     /**
@@ -565,74 +562,13 @@ class Installer extends Command
     {
         $this->warn('Step: Loading configurations...');
 
-        /**
-         * Setting application environment.
-         */
-        app()['env'] = $this->getEnvVariable('APP_ENV');
+        $this->environmentManager->loadEnvConfigs();
 
-        /**
-         * Setting application configuration.
-         */
-        config([
-            'app.env' => $this->getEnvVariable('APP_ENV'),
-            'app.name' => $this->getEnvVariable('APP_NAME'),
-            'app.url' => $this->getEnvVariable('APP_URL'),
-            'app.timezone' => $this->getEnvVariable('APP_TIMEZONE'),
-            'app.locale' => $this->getEnvVariable('APP_LOCALE'),
-            'app.currency' => $this->getEnvVariable('APP_CURRENCY'),
-        ]);
-
-        /**
-         * Setting database configurations.
-         */
-        $databaseConnection = $this->getEnvVariable('DB_CONNECTION');
-
-        DB::purge();
-
-        config([
-            "database.connections.{$databaseConnection}.host" => $this->getEnvVariable('DB_HOST'),
-            "database.connections.{$databaseConnection}.port" => $this->getEnvVariable('DB_PORT'),
-            "database.connections.{$databaseConnection}.database" => $this->getEnvVariable('DB_DATABASE'),
-            "database.connections.{$databaseConnection}.username" => $this->getEnvVariable('DB_USERNAME'),
-            "database.connections.{$databaseConnection}.password" => $this->getEnvVariable('DB_PASSWORD'),
-            "database.connections.{$databaseConnection}.prefix" => $this->getEnvVariable('DB_PREFIX'),
-        ]);
-
-        DB::reconnect();
-
-        try {
-            DB::connection()->getPdo();
-
+        if ($this->databaseManager->checkDatabaseConnection()) {
             $this->components->info('Database connection established successfully.');
-        } catch (\Exception $e) {
-            $this->error('Database connection failed. Please check your credentials.');
 
-            abort(400);
+            $this->components->info('Configuration loaded successfully.');
         }
-
-        $this->components->info('Configuration loaded successfully.');
-    }
-
-    /**
-     * Check key in `.env` file because it will help to find values at runtime.
-     */
-    protected function getEnvVariable(string $key, $default = null): string|bool
-    {
-        if ($data = file(base_path('.env'))) {
-            foreach ($data as $line) {
-                $line = preg_replace('/\s+/', '', $line);
-
-                $rowValues = explode('=', $line);
-
-                if (strlen($line) !== 0) {
-                    if (strpos($key, $rowValues[0]) !== false) {
-                        return trim($rowValues[1], '"');
-                    }
-                }
-            }
-        }
-
-        return $default;
     }
 
     /**
@@ -667,6 +603,7 @@ class Installer extends Command
             'allowed_locales' => $this->envDetails['APP_ALLOWED_LOCALES'] ?? [$this->getEnvVariable('APP_LOCALE', 'en')],
             'default_currency' => $this->envDetails['APP_CURRENCY'] ?? $this->getEnvVariable('APP_CURRENCY', 'USD'),
             'allowed_currencies' => $this->envDetails['APP_ALLOWED_CURRENCIES'] ?? [$this->getEnvVariable('APP_CURRENCY', 'USD')],
+            'skip_admin_creation' => true,
         ];
     }
 
@@ -675,7 +612,7 @@ class Installer extends Command
      */
     protected function askForGithubStar(): void
     {
-        if (! $this->confirm('Would you like to star our repo on GitHub?')) {
+        if (! $this->confirm('Would you like to star our repo on GitHub?', true)) {
             return;
         }
 

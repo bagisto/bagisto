@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids\Catalog;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 
@@ -10,7 +11,7 @@ class AttributeFamilyDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function prepareQueryBuilder()
     {
@@ -74,7 +75,7 @@ class AttributeFamilyDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('catalog.families.edit')) {
+        if (bouncer()->hasPermission('catalog.families.delete')) {
             $this->addAction([
                 'icon' => 'icon-delete',
                 'title' => trans('admin::app.catalog.families.index.datagrid.catalog.families.index.datagrid.delete'),

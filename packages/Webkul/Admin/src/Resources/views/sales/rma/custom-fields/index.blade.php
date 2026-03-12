@@ -12,10 +12,10 @@
 
         <!-- Create Button -->
         <div class="flex items-center gap-x-2.5">
-            @if (bouncer()->hasPermission('sales.custom-field.create'))
+            @if (bouncer()->hasPermission('sales.rma.custom-fields.create'))
                 <a
                     class="primary-button"
-                    href="{{ route('admin.sales.rma.custom-field.create') }}"
+                    href="{{ route('admin.sales.rma.custom-fields.create') }}"
                 >
                     @lang('admin::app.sales.rma.custom-field.index.create-btn')
                 </a>
@@ -25,7 +25,7 @@
 
     {!! view_render_event('bagisto.admin.catalog.rma.custom-field.list.before') !!}
 
-    <x-admin::datagrid :src="route('admin.sales.rma.custom-field.index')"/>
+    <x-admin::datagrid :src="route('admin.sales.rma.custom-fields.index')"/>
 
     {!! view_render_event('bagisto.admin.catalog.rma.custom-field.list.after') !!}
 

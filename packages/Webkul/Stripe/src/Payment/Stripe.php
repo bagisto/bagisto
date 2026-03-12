@@ -116,7 +116,7 @@ class Stripe extends Payment
     /**
      * Create Stripe Checkout Session.
      *
-     * @return \Stripe\Checkout\Session
+     * @return Session
      */
     public function createCheckoutSession($cart = null)
     {
@@ -144,7 +144,7 @@ class Stripe extends Payment
      * Retrieve and validate Stripe checkout session.
      *
      * @param  string  $sessionId
-     * @return \Stripe\Checkout\Session|false
+     * @return Session|false
      */
     public function retrieveCheckoutSession($sessionId)
     {

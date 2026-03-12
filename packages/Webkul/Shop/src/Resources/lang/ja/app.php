@@ -482,6 +482,7 @@ return [
                         'order-ref' => '注文参照',
                         'rma-status' => 'リクエスト状況',
                         'create' => '作成日',
+                        'quantity' => '数量',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => '翻訳',
                 'translating' => '翻訳中...',
                 'write-a-review' => 'レビューを書く',
+            ],
+
+            'contact-us' => [
+                'about' => 'メモを送ってください。できるだけ早くご返信します。',
+                'desc' => '何をお考えですか？',
+                'describe-here' => 'ここに説明してください',
+                'email' => 'メール',
+                'message' => 'メッセージ',
+                'name' => '名前',
+                'phone-number' => '電話番号',
+                'submit' => '送信',
+                'title' => 'お問い合わせ',
             ],
 
             'add-to-cart' => 'カートに追加',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'この注文の請求書が作成されていないため、RMA ステータスを更新できません。',
             'permission-denied' => 'ログインしています',
             'rma-disabled' => 'この製品のRMAは無効です',
+            'reopen-not-allowed' => 'このRMAリクエストを再開することは許可されていません。',
             'send-message' => ':name が正常に送信されました。',
             'update-success' => ':name が正常に更新されました。',
         ],

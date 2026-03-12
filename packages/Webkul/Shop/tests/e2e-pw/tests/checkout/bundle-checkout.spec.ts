@@ -12,6 +12,34 @@ import { loginAsCustomer, addAddress } from "../../utils/customer";
  * 2. Completing checkout for the bundle product.
  */
 test.describe("bundle product checkout flow", () => {
+    test("should create simple product to add in bundle", async ({ adminPage }) => {
+        const productCreation = new ProductCreation(adminPage);
+
+        await productCreation.createProduct({
+            type: "simple",
+            sku: `SKU-${Date.now()}`,
+            name: `Simple-${Date.now()}`,
+            shortDescription: "Short desc",
+            description: "Full desc",
+            price: 199,
+            weight: 1,
+            inventory: 100,
+        });
+    });
+    test("should create simple product again to add in bundle", async ({ adminPage }) => {
+        const productCreation = new ProductCreation(adminPage);
+
+        await productCreation.createProduct({
+            type: "simple",
+            sku: `SKU-${Date.now()}`,
+            name: `Simple-${Date.now()}`,
+            shortDescription: "Short desc",
+            description: "Full desc",
+            price: 199,
+            weight: 1,
+            inventory: 100,
+        });
+    });
     test("should create bundle product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
 

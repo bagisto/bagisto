@@ -1,5 +1,8 @@
 <?php
 
+use Webkul\Customer\Models\Customer;
+use Webkul\User\Models\Admin;
+
 return [
 
     /*
@@ -67,12 +70,12 @@ return [
     'providers' => [
         'customers' => [
             'driver' => 'eloquent',
-            'model' => Webkul\Customer\Models\Customer::class,
+            'model' => Customer::class,
         ],
 
         'admins' => [
             'driver' => 'eloquent',
-            'model' => Webkul\User\Models\Admin::class,
+            'model' => Admin::class,
         ],
     ],
 

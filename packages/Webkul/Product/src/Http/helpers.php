@@ -8,7 +8,7 @@ if (! function_exists('product_image')) {
     /**
      * Product image helper.
      *
-     * @return \Webkul\Product\ProductImage
+     * @return Webkul\Product\ProductImage
      */
     function product_image()
     {
@@ -20,7 +20,7 @@ if (! function_exists('product_video')) {
     /**
      * Product video helper.
      *
-     * @return \Webkul\Product\ProductVideo
+     * @return Webkul\Product\ProductVideo
      */
     function product_video()
     {
@@ -32,7 +32,7 @@ if (! function_exists('product_toolbar')) {
     /**
      * Product tolbar helper.
      *
-     * @return \Webkul\Product\Helpers\Toolbar
+     * @return Toolbar
      */
     function product_toolbar()
     {

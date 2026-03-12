@@ -4,7 +4,9 @@ namespace Webkul\Admin\Http\Controllers\Catalog;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Catalog\CategoryDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\CategoryRequest;
@@ -12,6 +14,7 @@ use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Admin\Http\Resources\CategoryTreeResource;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Contracts\Category;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Repositories\ChannelRepository;
 
@@ -31,7 +34,7 @@ class CategoryController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -45,7 +48,7 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -59,7 +62,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store(CategoryRequest $categoryRequest)
     {
@@ -98,7 +101,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
@@ -114,7 +117,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(CategoryRequest $categoryRequest, int $id)
     {
@@ -230,7 +233,7 @@ class CategoryController extends Controller
     /**
      * Mass update Category.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function massUpdate(MassUpdateRequest $massUpdateRequest)
     {
@@ -265,7 +268,7 @@ class CategoryController extends Controller
      * This method will fetch all root category ids from the channel. If `id` is present,
      * then it is not deletable.
      *
-     * @param  \Webkul\Category\Contracts\Category  $category
+     * @param  Category  $category
      * @return bool
      */
     private function isCategoryDeletable($category)
@@ -290,7 +293,7 @@ class CategoryController extends Controller
     /**
      * Get all the searched categories.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function search()
     {

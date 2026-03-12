@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'بازگشایی درخواست',
                     'title' => 'RMA',
                     'update-success' => 'وضعیت RMA با موفقیت به‌روزرسانی شد.',
+                    'reopen-not-allowed' => 'بازگشایی مجدد این درخواست RMA مجاز نیست.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'کانال',
                     'contact-number' => 'شماره تماس',
                     'create-btn' => 'ایجاد مشتری',
                     'create-success' => 'مشتری با موفقیت ایجاد شد',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'تنظیمات',
 
             'general' => [
-                'info' => 'تنظیم گزینه‌های واحد.',
+                'info' => 'عمومی',
                 'title' => 'عمومی',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'عنوان پیشنهاد',
                         'redirection-title' => 'عنوان هدایت',
                         'redirection-link' => 'لینک هدایت',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'محتوای حق نشر',
+                        'info' => 'محتوای حق نشر نمایش‌داده‌شده در فوتر وب‌سایت خود را پیکربندی کنید تا از مالکیت فکری خود محافظت کرده و شناخت برند را افزایش دهید.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'تنظیم گزینه‌های هوش مصنوعی جادویی و اجازه دادن به برخی گزینه‌ها برای خودکارسازی ایجاد محتوا.',
-                    'title' => 'هوش مصنوعی جادویی',
-
-                    'settings' => [
-                        'api-key' => 'کلید API',
-                        'enabled' => 'فعال شده',
-                        'llm-api-domain' => 'دامنه LLM API',
-                        'organization' => 'سازمان',
-                        'title' => 'تنظیمات عمومی',
-                        'title-info' => 'تجربه خود را با ویژگی هوش مصنوعی جادویی بهبود دهید با وارد کردن کلید API اختصاصی خود و اشاره به سازمان مربوطه برای یکپارچه سازی بی‌دردسر. کنترل کامل بر مدارک OpenAI خود را در دست بگیرید و تنظیمات را بر اساس نیازهای خاص خود سفارشی کنید.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'پیشنهاد توضیحات دسته بندی',
-                        'cms-page-content-prompt' => 'پیشنهاد محتوای صفحه CMS',
-                        'enabled' => 'فعال شده',
-                        'product-description-prompt' => 'پیشنهاد توضیحات محصول',
-                        'product-short-description-prompt' => 'پیشنهاد توضیحات کوتاه محصول',
-                        'title' => 'تولید محتوا',
-                        'title-info' => 'این ویژگی هوش مصنوعی جادویی را برای هر ویرایشگر WYSIWYG فعال می کند، جایی که می خواهید محتوا را با استفاده از هوش مصنوعی مدیریت کنید. <br/> <br/> وقتی فعال شود، به هر ویرایشگری بروید تا محتوا تولید شود.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'فعال شده',
-                        'title' => 'تولید تصویر',
-                        'title-info' => 'این ویژگی هوش مصنوعی جادویی را برای هر بار بارگذاری تصویر فعال می کند، جایی که می خواهید تصاویر را با استفاده از DALL-E تولید کنید. <br/> <br/> وقتی فعال شود، به هر بار بارگذاری تصویری بروید تا تصویر تولید شود.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'فعال شده',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'مدل',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'ترجمه بررسی',
-                        'title-info' => 'به مشتری یا بازدیدکننده امکان ترجمه بررسی مشتری به انگلیسی را بدهید.<br/><br/>وقتی فعال شود، به بررسی بروید و دکمه "ترجمه به انگلیسی" را پیدا خواهید کرد اگر بررسی به غیر از انگلیسی باشد.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'فعال شده',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'مدل',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'پیشنهاد',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'پیام شخصی‌سازی شده تسویه حساب',
-                        'title-info' => 'ایجاد یک پیام شخصی‌سازی شده برای مشتریان در صفحه تشکر، با محتوایی که با ترجیحات فردی هماهنگ است و تجربه پس از خرید را بهبود می‌بخشد.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'تنظیمات انطباق با GDPR',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'پیکربندی سرویس‌ها و اعتبارنامه‌های API نرخ ارز.',
+                    'title' => 'نرخ‌های ارز',
+
+                    'settings' => [
+                        'default-service' => 'سرویس پیش‌فرض',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'تنظیمات عمومی',
+                        'title-info' => 'سرویس پیش‌فرض نرخ ارز را برای به‌روزرسانی خودکار نرخ ارزها انتخاب کنید.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'کلید API خود از Fixer.io را برای به‌روزرسانی خودکار نرخ ارز وارد کنید.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'کلید ExchangeRate-API خود را برای به‌روزرسانی خودکار نرخ ارز وارد کنید (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'روزانه',
+                        'enabled' => 'فعال',
+                        'frequency' => 'تناوب',
+                        'monthly' => 'ماهانه',
+                        'time' => 'زمان شروع (HH:MM)',
+                        'title' => 'واردسازی زمان‌بندی شده',
+                        'title-info' => 'به‌روزرسانی خودکار نرخ‌های ارز بر اساس زمان‌بندی با استفاده از سرویس API پیکربندی شده.',
+                        'weekly' => 'هفتگی',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'تنظیم گزینه‌های نقشه سایت.',
                     'title' => 'نقشه سایت',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'حداکثر اندازه فایل',
                         'max-url-per-file' => 'حداکثر تعداد URL‌ها در هر فایل',
                         'title' => 'محدودیت‌های فایل',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'تنظیمات، ارائه‌دهندگان و ویژگی‌های Magic AI را پیکربندی کنید.',
+                'title' => 'هوش مصنوعی جادویی',
+
+                'general' => [
+                    'info' => 'تنظیمات عمومی Magic AI.',
+                    'title' => 'عمومی',
+
+                    'settings' => [
+                        'enabled' => 'فعال',
+                        'title' => 'تنظیمات',
+                        'title-info' => 'فعال یا غیرفعال کردن Magic AI در کل برنامه.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'کلید API',
+                    'info' => 'کلیدهای API ارائه‌دهندگان هوش مصنوعی خود را پیکربندی کنید.',
+                    'title' => 'ارائه‌دهندگان',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'اعتبارنامه API OpenAI خود را پیکربندی کنید.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'اعتبارنامه API Anthropic خود را پیکربندی کنید.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'اعتبارنامه API Google Gemini خود را پیکربندی کنید.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'اعتبارنامه API Groq خود را پیکربندی کنید.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'اعتبارنامه API xAI خود را پیکربندی کنید.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'اعتبارنامه API DeepSeek خود را پیکربندی کنید.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'اعتبارنامه API Mistral خود را پیکربندی کنید.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'اعتبارنامه API Ollama خود را پیکربندی کنید.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'ویژگی‌های هوش مصنوعی برای پنل مدیریت را فعال و پیکربندی کنید.',
+                    'title' => 'ویژگی‌های مدیریت',
+
+                    'text-generation' => [
+                        'enabled' => 'فعال',
+                        'providers' => 'ارائه‌دهندگان',
+                        'title' => 'تولید متن',
+                        'title-info' => 'تولید متن مبتنی بر هوش مصنوعی را در ویرایشگرهای WYSIWYG پنل مدیریت فعال کنید.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'فعال',
+                        'providers' => 'ارائه‌دهندگان',
+                        'title' => 'تولید تصویر',
+                        'title-info' => 'تولید تصویر مبتنی بر هوش مصنوعی برای تصاویر محصولات و محتوا را فعال کنید.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'ویژگی‌های هوش مصنوعی برای فروشگاه را فعال و پیکربندی کنید.',
+                    'title' => 'ویژگی‌های فروشگاه',
+
+                    'review-translation' => [
+                        'enabled' => 'فعال',
+                        'model' => 'مدل',
+                        'title' => 'ترجمه نظرات',
+                        'title-info' => 'به مشتریان اجازه دهید نظرات را به زبان خود در فروشگاه ترجمه کنند.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'فعال',
+                        'model' => 'مدل',
+                        'title' => 'پیام پرداخت شخصی‌سازی شده',
+                        'title-info' => 'پیام‌های پرداخت شخصی‌سازی شده برای مشتریان در صفحه تشکر تولید کنید.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'آدرس بازگشت (Redirect)',
-                                'title-info' => 'آدرس URL که پس از احراز هویت کاربران با گوگل به آن هدایت می‌شوند. باید با آدرسی که در کنسول گوگل تنظیم کرده‌اید مطابقت داشته باشد.',
+                                'title-info' => 'آدرس URL که پس از احراز هویت کاربران با گوگل به آن هدایت می‌شوند. از قالب URL نگهدارنده نشان‌داده‌شده استفاده کنید (فقط دامنه خود را تغییر دهید). باید با آدرس پیکربندی‌شده در کنسول Google مطابقت داشته باشد.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'آدرس بازگشت (Redirect URL)',
-                                'title-info' => 'آدرس URL که کاربران پس از احراز هویت با فیسبوک به آن بازگردانده می‌شوند. باید با آدرس تنظیم‌شده در اپلیکیشن فیسبوک مطابقت داشته باشد.',
+                                'title-info' => 'آدرس URL که کاربران پس از احراز هویت با فیسبوک به آن بازگردانده می‌شوند. از قالب URL نگهدارنده نشان‌داده‌شده استفاده کنید (فقط دامنه خود را تغییر دهید). باید با آدرس پیکربندی‌شده در تنظیمات برنامه Facebook مطابقت داشته باشد.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'آدرس بازگشت (Redirect URL)',
-                                'title-info' => 'آدرس URL که کاربران پس از احراز هویت با گیت‌هاب به آن هدایت می‌شوند. باید با آدرس تنظیم‌شده در کنسول گیت‌هاب مطابقت داشته باشد.',
+                                'title-info' => 'آدرس URL که کاربران پس از احراز هویت با گیت‌هاب به آن هدایت می‌شوند. از قالب URL نگهدارنده نشان‌داده‌شده استفاده کنید (فقط دامنه خود را تغییر دهید). باید با آدرس پیکربندی‌شده در کنسول GitHub مطابقت داشته باشد.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'آدرس بازگشت (Redirect URL)',
-                                'title-info' => 'آدرس URL که کاربران پس از احراز هویت با لینکدین به آن هدایت می‌شوند. باید با آدرس تنظیم‌شده در کنسول لینکدین مطابقت داشته باشد.',
+                                'title-info' => 'آدرس URL که کاربران پس از احراز هویت با لینکدین به آن هدایت می‌شوند. از قالب URL نگهدارنده نشان‌داده‌شده استفاده کنید (فقط دامنه خود را تغییر دهید). باید با آدرس پیکربندی‌شده در کنسول LinkedIn مطابقت داشته باشد.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'آدرس بازگشت (Redirect URL)',
-                                'title-info' => 'آدرس URL که کاربران پس از احراز هویت با توییتر به آن هدایت می‌شوند. باید با آدرس تنظیم‌شده در کنسول توییتر مطابقت داشته باشد.',
+                                'title-info' => 'آدرس URL که کاربران پس از احراز هویت با توییتر به آن هدایت می‌شوند. از قالب URL نگهدارنده نشان‌داده‌شده استفاده کنید (فقط دامنه خود را تغییر دهید). باید با آدرس پیکربندی‌شده در کنسول Twitter مطابقت داشته باشد.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'ایمیل',
                 'title' => 'ایمیل',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'درایور ایمیل شما به جای "bagisto-dynamic-smtp" روی ":driver" تنظیم شده است. هرگونه تغییری که در اینجا ایجاد شود بی‌اثر خواهد بود. لطفاً MAIL_MAILER=bagisto-dynamic-smtp را در فایل .env خود به‌روزرسانی کنید تا این تنظیمات فعال شوند.',
+                    'driver-mismatch-title' => 'این تنظیمات در حال حاضر غیرفعال هستند.',
+                    'encryption' => 'رمزگذاری',
+                    'host' => 'میزبان',
+                    'info' => 'تنظیمات سرور SMTP را برای ارسال ایمیل از فروشگاه خود پیکربندی کنید.',
+                    'password' => 'رمز عبور',
+                    'port' => 'پورت',
+                    'title' => 'SMTP',
+                    'username' => 'نام کاربری',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'ایمیل مدیر',
-                    'admin-email-tip' => 'آدرس ایمیل مدیر برای دریافت ایمیل‌ها',
+                    'admin-email' => 'آدرس ایمیل مدیر',
+                    'admin-email-tip' => 'تمام اعلان‌های مدیر برای این کانال به این آدرس ارسال می‌شود.',
                     'admin-name' => 'نام مدیر',
-                    'admin-name-tip' => 'این نام در تمام ایمیل‌های مدیر نمایش داده می‌شود',
-                    'admin-page-limit' => 'تعداد موارد در هر صفحه (مدیر)',
-                    'contact-email' => 'ایمیل تماس',
-                    'contact-email-tip' => 'آدرس ایمیلی که در پایین ایمیل‌های شما نمایش داده می‌شود',
+                    'admin-name-tip' => 'این نام در تمام ایمیل‌های ارسالی به مدیر نمایش داده می‌شود.',
+                    'admin-page-limit' => 'موارد پیش‌فرض در هر صفحه (مدیر)',
+                    'contact-email' => 'آدرس ایمیل تماس',
+                    'contact-email-tip' => 'این آدرس ایمیل در پاورقی ایمیل‌های شما نمایش داده می‌شود.',
                     'contact-name' => 'نام تماس',
-                    'contact-name-tip' => 'این نام در پایین ایمیل‌های شما نمایش داده می‌شود',
-                    'email-sender-name' => 'نام فرستنده ایمیل',
-                    'email-sender-name-tip' => 'این نام در صندوق ورودی مشتریان نمایش داده می‌شود',
-                    'info' => 'نام فرستنده ایمیل، آدرس ایمیل فروشگاه، نام مدیر و آدرس ایمیل مدیر را تنظیم کنید.',
-                    'shop-email-from' => 'آدرس ایمیل فروشگاه',
-                    'shop-email-from-tip' => 'آدرس ایمیل این کانال برای ارسال ایمیل به مشتریان شما',
+                    'contact-name-tip' => 'این نام در پاورقی ایمیل‌های شما نمایش داده می‌شود.',
+                    'info' => 'نام فرستنده، آدرس ایمیل فروشگاه، جزئیات مدیر و اطلاعات تماس مورد استفاده در تمام ایمیل‌ها را پیکربندی کنید.',
+                    'sender-email' => 'آدرس ایمیل فرستنده',
+                    'sender-email-tip' => 'ایمیل‌های ارسالی به مشتریان از این آدرس ارسال می‌شوند.',
+                    'sender-name' => 'نام فرستنده',
+                    'sender-name-tip' => 'این نام در صندوق ورودی مشتریان شما به عنوان فرستنده ایمیل نمایش داده می‌شود.',
                     'title' => 'تنظیمات ایمیل',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'شماره سفارش، حداقل سفارش و سفارشات پشتیبانی شده را تنظیم کنید.',
                     'title' => 'تنظیمات سفارش',
+
+                    'order-creation' => [
+                        'info' => 'تعداد تلاش‌های مجدد برای ایجاد سفارش در صورت بروز خطا در هنگام پرداخت را پیکربندی کنید.',
+                        'max-retry-attempts' => 'حداکثر تعداد تلاش',
+                        'title' => 'ایجاد سفارش',
+                    ],
 
                     'order-number' => [
                         'generator' => 'مولد شماره سفارش',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'اجازه نوع محصول برای RMA',
                     'allow-rma-for-digital-product' => 'اجازه RMA برای محصول دیجیتال',
                     'allowed-file-extension' => 'پسوند فایل مجاز',
-                    'allowed-file-types' => 'لطفاً فقط نوع فایل‌های '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' را انتخاب کنید',
+                    'allowed-file-types' => 'لطفاً فقط نوع فایل‌های :allowed_types را انتخاب کنید',
                     'allowed-info' => 'با کاما جدا شده. به عنوان مثال: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'اجازه درخواست جدید RMA برای درخواست لغو شده',
                     'allowed-request-declined-request' => 'اجازه درخواست جدید RMA برای درخواست رد شده',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'آدرس برداشت بازگشت',
                     'return-pickup-time' => 'زمان برداشت بازگشت',
                     'return-policy' => 'سیاست بازگشت',
-                    'select-allowed-order-status' => 'وضعیت سفارش مجاز را انتخاب کنید',
                     'specific-products' => 'محصولات خاص',
                     'title' => 'RMA',
                     'yes' => 'بله',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'ارتباطات',
                 'configure' => 'پیکربندی',
                 'currencies' => 'ارزها',
-                'custom-field' => 'فیلد سفارشی',
+                'custom-fields' => 'فیلد سفارشی',
                 'customers' => 'مشتریان',
                 'dashboard' => 'پیشخوان',
                 'data-transfer' => 'انتقال اطلاعات',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'سفارش‌ها',
                 'products' => 'محصولات',
                 'promotions' => 'تبلیغات',
-                'reason' => 'دلیل',
+                'reasons' => 'دلیل',
                 'refunds' => 'بازپرداخت‌ها',
                 'reporting' => 'گزارش‌دهی',
                 'requests' => 'درخواست‌ها',
                 'reviews' => 'نقد و بررسی‌ها',
                 'rma' => 'RMA',
-                'rma-status' => 'وضعیت RMA',
                 'roles' => 'نقش‌ها',
                 'rules' => 'قوانین',
                 'sales' => 'فروش‌ها',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'تنظیمات',
                 'shipments' => 'ارسال‌ها',
                 'sitemaps' => 'نقشه‌های سایت',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'دسته‌های مالیات',
                 'tax-rates' => 'نرخ‌های مالیاتی',
                 'taxes' => 'مالیات‌ها',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'اعمال',
-                    'dall-e-2' => 'دال.إ 2',
-                    'dall-e-3' => 'دال.إ 3',
                     'generate' => 'تولید',
                     'generating' => 'در حال تولید...',
-                    'hd' => 'بالا (HD)',
+                    'high' => 'بالا',
+                    'landscape' => 'افقی (3:2)',
+                    'low' => 'پایین',
+                    'medium' => 'متوسط',
                     'model' => 'مدل',
                     'number-of-images' => 'تعداد تصاویر',
-                    'prompt' => 'ترغیب',
+                    'portrait' => 'عمودی (2:3)',
+                    'prompt' => 'پرامت',
                     'quality' => 'کیفیت',
                     'regenerate' => 'تولید مجدد',
                     'regenerating' => 'در حال تولید مجدد...',
                     'size' => 'اندازه',
-                    'standard' => 'استاندارد',
+                    'square' => 'مربع (1:1)',
                     'title' => 'تولید تصویر با هوش مصنوعی',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'جلو',
                     'next' => 'بعدی',
                     'size' => 'اندازه',
+                    'square' => 'مربع (1:1)',
                     'use-cases' => 'موارد استفاده',
                     'zoom' => 'بزرگ‌نمایی',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'اعمال',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'فعال شده',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'تولید',
                 'generated-content' => 'محتوای تولید شده',
                 'generated-content-info' => 'محتوای هوش مصنوعی ممکن است گمراه‌کننده باشد. لطفاً قبل از اعمال، محتوای تولید شده را بررسی کنید.',
                 'generating' => 'در حال تولید...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'مدل',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
-                'prompt' => 'پیشنهاد',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
+                'prompt' => 'پرامت',
                 'title' => 'کمک هوش مصنوعی',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5302,7 +5350,7 @@ return [
         'communications' => 'ارتباطات',
         'configure' => 'پیکربندی',
         'copy' => 'کپی',
-        'create' => 'ايجاد كردن',
+        'create' => 'ایجاد',
         'currencies' => 'ارزها',
         'customers' => 'مشتریان',
         'dashboard' => 'داشبورد',
@@ -5314,11 +5362,11 @@ return [
         'exchange-rates' => 'نرخ‌های ارزی',
         'gdpr' => 'GDPR',
         'groups' => 'گروه‌ها',
-        'import' => 'وارد كردن',
+        'import' => 'وارد کردن',
         'imports' => 'واردات',
         'inventory-sources' => 'منابع موجودی',
         'invoices' => 'فاکتورها',
-        'locales' => 'منطقه‌ها',
+        'locales' => 'زبان‌ها',
         'marketing' => 'بازاریابی',
         'newsletter-subscriptions' => 'اشتراک‌های خبرنامه',
         'note' => 'یادداشت',
@@ -5336,7 +5384,7 @@ return [
         'settings' => 'تنظیمات',
         'shipments' => 'ارسال‌ها',
         'sitemaps' => 'نقشه‌های سایت',
-        'subscribers' => 'مشترکان خبرنامه',
+        'subscribers' => 'مشترکین خبرنامه',
         'tax-categories' => 'دسته‌بندی‌های مالیات',
         'tax-rates' => 'نرخ‌های مالیات',
         'taxes' => 'مالیات‌ها',
@@ -5347,37 +5395,40 @@ return [
         'view' => 'مشاهده',
 
         'rma' => [
-            'create' => 'ایجاد',
-            'delete' => 'حذف',
-            'edit' => 'ویرایش',
-            'view' => 'مشاهده',
             'title' => 'بازگشت کالا (RMA)',
-        ],
 
-        'rma-reason' => [
-            'create' => 'ایجاد',
-            'delete' => 'حذف',
-            'edit' => 'ویرایش',
-            'title' => 'دلایل بازگشت کالا',
-        ],
+            'requests' => [
+                'create' => 'ایجاد',
+                'title' => 'درخواست‌های RMA',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'حذف',
-            'edit' => 'ویرایش',
-            'title' => 'قوانین بازگشت کالا',
-        ],
+            'reasons' => [
+                'create' => 'ایجاد',
+                'delete' => 'حذف',
+                'edit' => 'ویرایش',
+                'title' => 'دلایل RMA',
+            ],
 
-        'rma-status' => [
-            'delete' => 'حذف',
-            'edit' => 'ویرایش',
-            'title' => 'وضعیت بازگشت کالا',
-        ],
+            'rules' => [
+                'create' => 'ایجاد',
+                'delete' => 'حذف',
+                'edit' => 'ویرایش',
+                'title' => 'قوانین RMA',
+            ],
 
-        'custom-field' => [
-            'create' => 'ایجاد',
-            'delete' => 'حذف',
-            'edit' => 'ویرایش',
-            'title' => 'فیلدهای سفارشی',
+            'statuses' => [
+                'create' => 'ایجاد',
+                'delete' => 'حذف',
+                'edit' => 'ویرایش',
+                'title' => 'وضعیت‌های RMA',
+            ],
+
+            'custom-fields' => [
+                'create' => 'ایجاد',
+                'delete' => 'حذف',
+                'edit' => 'ویرایش',
+                'title' => 'فیلدهای سفارشی',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'دانلود',
         'export' => 'خروجی گرفتن',
+        'no' => 'خیر',
         'no-records' => 'چیزی برای خروجی گرفتن وجود ندارد',
         'xls' => 'XLS',
         'xlsx' => 'اکس ال اس ایکس',
+        'yes' => 'بله',
     ],
 
     'validations' => [

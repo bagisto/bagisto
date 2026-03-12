@@ -2,9 +2,21 @@
 
 namespace Webkul\Core\Providers;
 
+use Elastic\Elasticsearch\Client;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Contracts\Debug\ExceptionHandler;
+use Illuminate\Foundation\Console\DownCommand;
+use Illuminate\Foundation\Console\UpCommand;
+use Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Core\Console\Commands\BagistoVersion;
+use Webkul\Core\Console\Commands\ExchangeRateUpdate;
+use Webkul\Core\Console\Commands\InvoiceOverdueCron;
+use Webkul\Core\Console\Commands\TranslationsChecker;
+use Webkul\Core\Exceptions\Handler;
+use Webkul\Core\Facades\ElasticSearch;
+use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 
 class CoreServiceProvider extends ServiceProvider
@@ -42,10 +54,13 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('invoice:cron')->dailyAt('3:00');
+
+            $this->registerExchangeRateSchedule($schedule);
         });
 
         $this->app->register(EventServiceProvider::class);
         $this->app->register(VisitorServiceProvider::class);
+        $this->app->register(DynamicSmtpServiceProvider::class);
     }
 
     /**
@@ -55,11 +70,37 @@ class CoreServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \Webkul\Core\Console\Commands\BagistoVersion::class,
-                \Webkul\Core\Console\Commands\ExchangeRateUpdate::class,
-                \Webkul\Core\Console\Commands\InvoiceOverdueCron::class,
-                \Webkul\Core\Console\Commands\TranslationsChecker::class,
+                BagistoVersion::class,
+                ExchangeRateUpdate::class,
+                InvoiceOverdueCron::class,
+                TranslationsChecker::class,
             ]);
+        }
+    }
+
+    /**
+     * Register the exchange rate update schedule based on core configuration.
+     */
+    protected function registerExchangeRateSchedule(Schedule $schedule): void
+    {
+        try {
+            if (! core()->getConfigData('general.exchange_rates.schedule.enabled')) {
+                return;
+            }
+
+            $frequency = core()->getConfigData('general.exchange_rates.schedule.frequency') ?: 'daily';
+
+            $time = core()->getConfigData('general.exchange_rates.schedule.time') ?: '00:00';
+
+            $command = $schedule->command('exchange-rate:update');
+
+            match ($frequency) {
+                'weekly' => $command->weeklyOn(1, $time),
+                'monthly' => $command->monthlyOn(1, $time),
+                default => $command->dailyAt($time),
+            };
+        } catch (\Exception) {
+            // Silently skip when database is not yet available (e.g., during installation).
         }
     }
 
@@ -69,33 +110,33 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerOverrides(): void
     {
         $this->app->extend(
-            \Illuminate\Foundation\Console\UpCommand::class,
+            UpCommand::class,
             fn () => new \Webkul\Core\Console\Commands\UpCommand
         );
 
         $this->app->extend(
-            \Illuminate\Foundation\Console\DownCommand::class,
+            DownCommand::class,
             fn () => new \Webkul\Core\Console\Commands\DownCommand
         );
 
         $this->app->bind(
-            \Illuminate\Contracts\Debug\ExceptionHandler::class,
-            \Webkul\Core\Exceptions\Handler::class
+            ExceptionHandler::class,
+            Handler::class
         );
 
         $this->app->bind(
-            \Illuminate\Foundation\Http\Middleware\PreventRequestsDuringMaintenance::class,
+            PreventRequestsDuringMaintenance::class,
             fn ($app) => new \Webkul\Core\Http\Middleware\PreventRequestsDuringMaintenance($app)
         );
 
         $this->app->singleton(
-            \Elastic\Elasticsearch\Client::class,
-            fn () => \Webkul\Core\Facades\ElasticSearch::getFacadeApplication()->connection()
+            Client::class,
+            fn () => ElasticSearch::getFacadeApplication()->connection()
         );
 
         $this->app->singleton(
             'blade.compiler',
-            fn ($app) => new \Webkul\Core\View\Compilers\BladeCompiler($app['files'], $app['config']['view.compiled'])
+            fn ($app) => new BladeCompiler($app['files'], $app['config']['view.compiled'])
         );
     }
 }

@@ -8,13 +8,34 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Database\Seeders\ProductTableSeeder;
+use Webkul\Product\Console\Commands\Indexer;
 
 class DatabaseManager
 {
     /**
-     * Check Database Connection.
+     * Admin User ID for which the admin user will be created during installation.
      */
-    public function isInstalled()
+    const int USER_ID = 1;
+
+    /**
+     * Default admin name for which the admin user will be created during installation.
+     */
+    const string DEFAULT_ADMIN_NAME = 'Admin';
+
+    /**
+     * Default admin email for which the admin user will be created during installation.
+     */
+    const string DEFAULT_ADMIN_EMAIL = 'admin@example.com';
+
+    /**
+     * Default admin password for which the admin user will be created during installation.
+     */
+    const string DEFAULT_ADMIN_PASSWORD = 'admin123';
+
+    /**
+     * Check if the application is installed.
+     */
+    public function isInstalled(): bool
     {
         if (! file_exists(base_path('.env'))) {
             return false;
@@ -48,61 +69,50 @@ class DatabaseManager
     }
 
     /**
-     * Drop all the tables and migrate in the database
-     *
-     * @return void|string
+     * Check database connection.
      */
-    public function migration()
+    public function checkDatabaseConnection(): bool
+    {
+        try {
+            DB::connection()->getPdo();
+
+            return true;
+        } catch (Exception $e) {
+            report($e);
+
+            return false;
+        }
+    }
+
+    /**
+     * Drop all the tables and migrate in the database.
+     */
+    public function migrateFresh(): bool
     {
         try {
             Artisan::call('migrate:fresh');
+
+            return true;
         } catch (Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage(),
-            ], 500);
+            report($e);
+
+            return false;
         }
     }
 
     /**
      * Seed the database.
-     *
-     * @return void|string
      */
-    public function seeder($data)
-    {
-        $data['parameter'] = [
-            'default_locale' => $data['parameter']['default_locales'],
-            'allowed_locales' => $data['parameter']['allowed_locales'],
-            'default_currency' => $data['parameter']['default_currency'],
-            'allowed_currencies' => $data['parameter']['allowed_currencies'],
-            'skip_admin_creation' => $data['parameter']['skip_admin_creation'],
-        ];
-
-        try {
-            app(BagistoDatabaseSeeder::class)->run($data['parameter']);
-
-            $this->storageLink();
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
-
-    /**
-     * Storage Link.
-     */
-    private function storageLink()
-    {
-        Artisan::call('storage:link');
-    }
-
-    /**
-     * Generate New Application Key
-     */
-    public function generateKey()
+    public function seed($parameter): bool
     {
         try {
-            Artisan::call('key:generate');
+            app(BagistoDatabaseSeeder::class)->run($parameter);
+
+            return true;
         } catch (Exception $e) {
+            report($e);
+
+            return false;
         }
     }
 
@@ -111,14 +121,48 @@ class DatabaseManager
      *
      * @return void|string
      */
-    public function seedSampleProducts($parameters)
+    public function seedSampleProducts($parameters): bool
     {
         try {
             app(ProductTableSeeder::class)->run($parameters);
+
+            Artisan::registerCommand(app(Indexer::class));
+
+            Artisan::call('indexer:index', [
+                '--mode' => ['full'],
+                '--quiet' => true,
+            ]);
+
+            return true;
         } catch (Exception $e) {
-            return response()->json([
-                'error' => $e->getMessage(),
-            ], 500);
+            report($e);
+
+            return false;
+        }
+    }
+
+    /**
+     * Create admin user.
+     */
+    public function createAdminUser(array $data = []): bool
+    {
+        try {
+            DB::table('admins')->insert([
+                'id' => self::USER_ID,
+                'name' => $data['name'] ?? self::DEFAULT_ADMIN_NAME,
+                'email' => $data['email'] ?? self::DEFAULT_ADMIN_EMAIL,
+                'password' => bcrypt($data['password'] ?? self::DEFAULT_ADMIN_PASSWORD),
+                'role_id' => 1,
+                'status' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+
+            return true;
+        } catch (Exception $e) {
+            report($e);
+
+            return false;
         }
     }
 }

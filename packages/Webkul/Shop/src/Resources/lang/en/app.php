@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Order Reference',
                         'rma-status' => 'Request Status',
                         'create' => 'Created At',
+                        'quantity' => 'Quantity',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'Translate',
                 'translating' => 'Translating...',
                 'write-a-review' => 'Write a Review',
+            ],
+
+            'contact-us' => [
+                'about' => 'Jot us a note, and we\'ll get back to you as quickly as possible',
+                'desc' => 'What\'s on your mind?',
+                'describe-here' => 'Describe Here',
+                'email' => 'Email',
+                'message' => 'Message',
+                'name' => 'Name',
+                'phone-number' => 'Phone Number',
+                'submit' => 'Submit',
+                'title' => 'Contact Us',
             ],
 
             'add-to-cart' => 'Add To Cart',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'RMA status cannot be updated as the invoice for this order has not been created.',
             'permission-denied' => 'You are logged in',
             'rma-disabled' => 'RMA is disabled for this product',
+            'reopen-not-allowed' => 'Reopening this RMA request is not allowed.',
             'send-message' => ':name sent successfully.',
             'update-success' => 'Status updated successfully.',
         ],

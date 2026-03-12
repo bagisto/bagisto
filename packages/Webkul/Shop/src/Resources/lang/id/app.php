@@ -482,6 +482,7 @@ return [
                         'order-ref' => 'Referensi Pesanan',
                         'rma-status' => 'Status Permintaan',
                         'create' => 'Dibuat Pada',
+                        'quantity' => 'Kuantitas',
                     ],
                 ],
 
@@ -858,6 +859,18 @@ return [
                 'translate' => 'Terjemahkan',
                 'translating' => 'Menerjemahkan...',
                 'write-a-review' => 'Tulis Ulasan',
+            ],
+
+            'contact-us' => [
+                'about' => 'Tulis pesan untuk kami, dan kami akan segera merespons.',
+                'desc' => 'Apa yang ada di pikiran Anda?',
+                'describe-here' => 'Tulis di sini',
+                'email' => 'Email',
+                'message' => 'Pesan',
+                'name' => 'Nama',
+                'phone-number' => 'Nomor Telepon',
+                'submit' => 'Kirim',
+                'title' => 'Hubungi Kami',
             ],
 
             'add-to-cart' => 'Tambahkan ke Keranjang',
@@ -1677,6 +1690,7 @@ return [
             'creation-error' => 'Status RMA tidak dapat diperbarui karena faktur untuk pesanan ini belum dibuat.',
             'permission-denied' => 'Anda sudah masuk',
             'rma-disabled' => 'RMA dinonaktifkan untuk produk ini',
+            'reopen-not-allowed' => 'Membuka kembali permintaan RMA ini tidak diizinkan.',
             'send-message' => ':name berhasil dikirim.',
             'update-success' => ':name berhasil diperbarui.',
         ],

@@ -4,6 +4,7 @@ namespace Webkul\SocialLogin;
 
 use Laravel\Socialite\One\TwitterProvider;
 use Laravel\Socialite\SocialiteManager as BaseSocialiteManager;
+use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\FacebookProvider;
 use Laravel\Socialite\Two\GithubProvider;
 use Laravel\Socialite\Two\GoogleProvider;
@@ -15,13 +16,14 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
     protected function createGithubDriver()
     {
         $clientId = core()->getConfigData('customer.settings.social_login.github_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.github_client_secret');
-        $callbackUrl = core()->getConfigData('customer.settings.social_login.github_callback_url');
+        $callbackUrl = core()->getConfigData('customer.settings.social_login.github_callback_url')
+            ?: route('customer.social-login.callback', ['provider' => 'github']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
@@ -41,13 +43,14 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
     protected function createFacebookDriver()
     {
         $clientId = core()->getConfigData('customer.settings.social_login.facebook_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.facebook_client_secret');
-        $callbackUrl = core()->getConfigData('customer.settings.social_login.facebook_callback_url');
+        $callbackUrl = core()->getConfigData('customer.settings.social_login.facebook_callback_url')
+            ?: route('customer.social-login.callback', ['provider' => 'facebook']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
@@ -67,13 +70,14 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
     protected function createGoogleDriver()
     {
         $clientId = core()->getConfigData('customer.settings.social_login.google_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.google_client_secret');
-        $callbackUrl = core()->getConfigData('customer.settings.social_login.google_callback_url');
+        $callbackUrl = core()->getConfigData('customer.settings.social_login.google_callback_url')
+            ?: route('customer.social-login.callback', ['provider' => 'google']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
@@ -93,13 +97,14 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\Two\AbstractProvider
+     * @return AbstractProvider
      */
     protected function createLinkedinOpenidDriver()
     {
         $clientId = core()->getConfigData('customer.settings.social_login.linkedin_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.linkedin_client_secret');
-        $callbackUrl = core()->getConfigData('customer.settings.social_login.linkedin_callback_url');
+        $callbackUrl = core()->getConfigData('customer.settings.social_login.linkedin_callback_url')
+            ?: route('customer.social-login.callback', ['provider' => 'linkedin-openid']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [
@@ -119,13 +124,14 @@ class SocialiteManager extends BaseSocialiteManager
     /**
      * Create an instance of the specified driver.
      *
-     * @return \Laravel\Socialite\One\AbstractProvider|\Laravel\Socialite\Two\AbstractProvider
+     * @return \Laravel\Socialite\One\AbstractProvider|AbstractProvider
      */
     protected function createTwitterDriver()
     {
         $clientId = core()->getConfigData('customer.settings.social_login.twitter_client_id');
         $clientSecret = core()->getConfigData('customer.settings.social_login.twitter_client_secret');
-        $callbackUrl = core()->getConfigData('customer.settings.social_login.twitter_callback_url');
+        $callbackUrl = core()->getConfigData('customer.settings.social_login.twitter_callback_url')
+            ?: route('customer.social-login.callback', ['provider' => 'twitter']);
 
         if ($clientId || $clientSecret || $callbackUrl) {
             $config = [

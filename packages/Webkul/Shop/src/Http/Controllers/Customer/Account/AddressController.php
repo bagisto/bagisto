@@ -2,6 +2,8 @@
 
 namespace Webkul\Shop\Http\Controllers\Customer\Account;
 
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\Shop\Http\Controllers\Controller;
@@ -102,7 +104,7 @@ class AddressController extends Controller
     /**
      * Edit's the pre-made resource of customer called Address.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(int $id, AddressRequest $request)
     {
@@ -146,7 +148,7 @@ class AddressController extends Controller
      * To change the default address or make the default address,
      * by default when first address is created will be the default address.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function makeDefault(int $id)
     {
@@ -172,7 +174,7 @@ class AddressController extends Controller
     /**
      * Delete address of the current customer.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy(int $id)
     {

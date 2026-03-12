@@ -3,7 +3,9 @@
 namespace Webkul\Admin\Http\Controllers\CMS;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\CMS\CMSPageDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassDestroyRequest;
@@ -22,7 +24,7 @@ class PageController extends Controller
     /**
      * Loads the index page showing the static pages resources.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -36,7 +38,7 @@ class PageController extends Controller
     /**
      * To create a new CMS page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
@@ -46,12 +48,12 @@ class PageController extends Controller
     /**
      * To store a new CMS page in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store()
     {
         $this->validate(request(), [
-            'url_key' => ['required', 'unique:cms_page_translations,url_key', new \Webkul\Core\Rules\Slug],
+            'url_key' => ['required', 'unique:cms_page_translations,url_key', new Slug],
             'page_title' => 'required',
             'html_content' => 'required',
             'channels' => 'required|array|min:1',
@@ -83,7 +85,7 @@ class PageController extends Controller
     /**
      * To edit a previously created CMS page.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
@@ -95,7 +97,7 @@ class PageController extends Controller
     /**
      * To update the previously created CMS page in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(int $id)
     {

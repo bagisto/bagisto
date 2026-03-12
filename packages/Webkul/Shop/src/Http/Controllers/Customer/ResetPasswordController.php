@@ -3,11 +3,15 @@
 namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use Illuminate\Contracts\Auth\PasswordBroker;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Shop\Http\Controllers\Controller;
 
@@ -28,7 +32,7 @@ class ResetPasswordController extends Controller
      * If no token is present, display the link request form.
      *
      * @param  string|null  $token
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create($token = null)
     {
@@ -41,7 +45,7 @@ class ResetPasswordController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function store()
     {
@@ -81,7 +85,7 @@ class ResetPasswordController extends Controller
     /**
      * Reset the given customer password.
      *
-     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $customer
+     * @param  CanResetPassword  $customer
      * @param  string  $password
      * @return void
      */
@@ -99,7 +103,7 @@ class ResetPasswordController extends Controller
     /**
      * Get the broker to be used during password reset.
      *
-     * @return \Illuminate\Contracts\Auth\PasswordBroker
+     * @return PasswordBroker
      */
     public function broker()
     {

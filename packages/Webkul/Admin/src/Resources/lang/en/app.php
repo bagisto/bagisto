@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'Reopen Request',
                     'title' => 'RMA',
                     'update-success' => 'RMA Status updated successfully.',
+                    'reopen-not-allowed' => 'Reopening this RMA request is not allowed.',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'Channel',
                     'contact-number' => 'Contact Number',
                     'create-btn' => 'Create Customer',
                     'create-success' => 'Customer created successfully',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'Configuration',
 
             'general' => [
-                'info' => 'Set units options.',
+                'info' => 'General',
                 'title' => 'General',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'Offer Title',
                         'redirection-title' => 'Redirection Title',
                         'redirection-link' => 'Redirection Link',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'Copyright Content',
+                        'info' => 'Configure the copyright content displayed in the footer of your website to protect your intellectual property and enhance brand recognition.',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Set Magic AI options and allow some options to automate the creation of content.',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'API Key',
-                        'enabled' => 'Enabled',
-                        'llm-api-domain' => 'LLM API Domain',
-                        'organization' => 'Organization',
-                        'title' => 'General Settings',
-                        'title-info' => 'Enhance your experience with the Magic AI feature by entering your exclusive API Key and indicating the pertinent Organization for effortless integration. Seize command over your OpenAI credentials and customize the settings according to your specific needs.',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'Category Description Prompt',
-                        'cms-page-content-prompt' => 'CMS Page Content Prompt',
-                        'enabled' => 'Enabled',
-                        'product-description-prompt' => 'Product Description Prompt',
-                        'product-short-description-prompt' => 'Product Short Description Prompt',
-                        'title' => 'Content Generation',
-                        'title-info' => 'This feature will enable the Magic AI for every WYSIWYG editor, where you want to mange content using AI.<br/><br/>When Enable, go to any editor to generate content.',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'Enabled',
-                        'title' => 'Image Generation',
-                        'title-info' => 'This feature will enable the Magic AI for every image upload, where you want to generate images using DALL-E.<br/><br/>When Enable, go to any image upload to generate image.',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Enabled',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Review Translation',
-                        'title-info' => 'Provide option to customer or visitor to translate customer review into english.<br/><br/>When enable, go to review and you will find the button ‘Translate to English’ if you review other then English.',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'Enabled',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'Model',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'Prompt',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'Personalized Checkout Message',
-                        'title-info' => 'Craft a personalized checkout message for customers on the Thank-You page, tailoring the content to resonate with individual preferences and enhancing the overall post-purchase experience.',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR Compliance Settings',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'Configure exchange rate API services and credentials.',
+                    'title' => 'Exchange Rates',
+
+                    'settings' => [
+                        'default-service' => 'Default Service',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'General Settings',
+                        'title-info' => 'Select the default exchange rate service to use for automatic currency rate updates.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Enter your Fixer.io API key for automatic exchange rate updates.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Enter your ExchangeRate-API key for automatic exchange rate updates (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Daily',
+                        'enabled' => 'Enabled',
+                        'frequency' => 'Frequency',
+                        'monthly' => 'Monthly',
+                        'time' => 'Start Time (HH:MM)',
+                        'title' => 'Scheduled Import',
+                        'title-info' => 'Automatically update exchange rates on a scheduled basis using the configured API service.',
+                        'weekly' => 'Weekly',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'Set sitemap options.',
                     'title' => 'Sitemap',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'Maximum file size',
                         'max-url-per-file' => 'Maximum no. of URLs per file',
                         'title' => 'File Limits',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Configure Magic AI settings, providers, and features.',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'General Magic AI settings.',
+                    'title' => 'General',
+
+                    'settings' => [
+                        'enabled' => 'Enabled',
+                        'title' => 'Settings',
+                        'title-info' => 'Enable or disable Magic AI across your entire application.',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API Key',
+                    'info' => 'Configure API keys for your AI providers.',
+                    'title' => 'Providers',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'Configure your OpenAI API credentials.',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Configure your Anthropic API credentials.',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Configure your Google Gemini API credentials.',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Configure your Groq API credentials.',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'Configure your xAI API credentials.',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'Configure your DeepSeek API credentials.',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Configure your Mistral API credentials.',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Configure your Ollama API credentials.',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'Enable and configure AI features for the admin panel.',
+                    'title' => 'Admin Features',
+
+                    'text-generation' => [
+                        'enabled' => 'Enabled',
+                        'providers' => 'Providers',
+                        'title' => 'Text Generation',
+                        'title-info' => 'Enable AI-powered text generation in WYSIWYG editors throughout the admin panel.',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'Enabled',
+                        'providers' => 'Providers',
+                        'title' => 'Image Generation',
+                        'title-info' => 'Enable AI-powered image generation for product and content images.',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'Enable and configure AI features for the storefront.',
+                    'title' => 'Storefront Features',
+
+                    'review-translation' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'Review Translation',
+                        'title-info' => 'Allow customers to translate reviews into their language on the storefront.',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'Personalized Checkout Message',
+                        'title-info' => 'Generate personalized checkout messages for customers on the Thank-You page.',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with Google. Must match the URL configured in your Google console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Google. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your Google Console.',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with Facebook. Must match the URL configured in your Facebook app settings.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Facebook. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your Facebook app settings.',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with GitHub. Must match the URL configured in your GitHub console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with GitHub. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your GitHub console.',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with LinkedIn. Must match the URL configured in your LinkedIn console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with LinkedIn. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your LinkedIn console.',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with Twitter. Must match the URL configured in your Twitter console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with Twitter. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your Twitter console.',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'Email',
                 'title' => 'Email',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'Your mail driver is set to ":driver" instead of "bagisto-dynamic-smtp". Any changes made here will have no effect. Please update MAIL_MAILER=bagisto-dynamic-smtp in your .env file to activate these settings.',
+                    'driver-mismatch-title' => 'These settings are currently inactive.',
+                    'encryption' => 'Encryption',
+                    'host' => 'Host',
+                    'info' => 'Configure SMTP server settings for sending emails from your store.',
+                    'password' => 'Password',
+                    'port' => 'Port',
+                    'title' => 'SMTP',
+                    'username' => 'Username',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'Admin Email',
-                    'admin-email-tip' => 'The email address of the admin for this channel to receive emails',
+                    'admin-email' => 'Admin Email Address',
+                    'admin-email-tip' => 'All admin notifications for this channel will be sent to this address.',
                     'admin-name' => 'Admin Name',
-                    'admin-name-tip' => 'This name will be displayed in all admin emails',
+                    'admin-name-tip' => 'This name will appear in all emails sent to the admin.',
                     'admin-page-limit' => 'Default Items Per Page (Admin)',
-                    'contact-email' => 'Contact Email',
-                    'contact-email-tip' => 'The email address will be shown at the bottom of your emails',
+                    'contact-email' => 'Contact Email Address',
+                    'contact-email-tip' => 'This email address will appear in the footer of your emails.',
                     'contact-name' => 'Contact Name',
-                    'contact-name-tip' => 'This name will be shown at the bottom of your emails',
-                    'email-sender-name' => 'Email Sender Name',
-                    'email-sender-name-tip' => 'This name will be displayed in the customers inbox',
-                    'info' => 'Set email sender name, shop email address, admin name and admin email address.',
-                    'shop-email-from' => 'Shop Email Address',
-                    'shop-email-from-tip' => 'The email address of this channel to send emails to your customers',
+                    'contact-name-tip' => 'This name will appear in the footer of your emails.',
+                    'info' => 'Configure the sender name, shop email address, admin, and contact details used across all emails.',
+                    'sender-email' => 'Sender Email Address',
+                    'sender-email-tip' => 'Emails to your customers will be sent from this address.',
+                    'sender-name' => 'Sender Name',
+                    'sender-name-tip' => 'This name will appear in your customers\' inbox as the email sender.',
                     'title' => 'Email Settings',
                 ],
 
@@ -4778,6 +4843,12 @@ return [
                 'order-settings' => [
                     'info' => 'Set order numbers, minimum orders and back orders.',
                     'title' => 'Order Settings',
+
+                    'order-creation' => [
+                        'info' => 'Configure order creation retry attempts when errors occur during checkout.',
+                        'max-retry-attempts' => 'Max Retry Attempts',
+                        'title' => 'Order Creation',
+                    ],
 
                     'order-number' => [
                         'generator' => 'Order Number Generator',
@@ -4953,10 +5024,10 @@ return [
                     'allow-product-type-for-rma' => 'Allow Product Type For RMA',
                     'allow-rma-for-digital-product' => 'Allow RMA for digital product',
                     'allowed-file-extension' => 'Allowed File Extension',
-                    'allowed-file-types' => 'Please Select File Types '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' only',
+                    'allowed-file-types' => 'Please Select File Types :allowed_types only',
                     'allowed-info' => 'Comma Separated. For example: jpg,jpeg,pdf',
-                    'allowed-request-cancelled-request' => 'Allowed New RMA Request For Cancelled Request',
-                    'allowed-request-declined-request' => 'Allowed New RMA Request For Declined Request',
+                    'allowed-request-cancelled-request' => 'Allow New RMA Request For Cancelled Request',
+                    'allowed-request-declined-request' => 'Allow New RMA Request For Declined Request',
                     'allowed-rma-for-product' => 'Allowed Rma For Product',
                     'cancel-items' => 'Cancel-items',
                     'complete' => 'Complete',
@@ -4981,7 +5052,6 @@ return [
                     'return-pickup-address' => 'Return Pickup Address',
                     'return-pickup-time' => 'Return Pickup Time',
                     'return-policy' => 'Return Policy',
-                    'select-allowed-order-status' => 'Select Allowed Order Status',
                     'specific-products' => 'Specific Products',
                     'title' => 'RMA',
                     'yes' => 'Yes',
@@ -5038,7 +5108,7 @@ return [
                 'communications' => 'Communications',
                 'configure' => 'Configure',
                 'currencies' => 'Currencies',
-                'custom-field' => 'Custom Field',
+                'custom-fields' => 'Custom Fields',
                 'customers' => 'Customers',
                 'dashboard' => 'Dashboard',
                 'data-transfer' => 'Data Transfer',
@@ -5058,13 +5128,12 @@ return [
                 'orders' => 'Orders',
                 'products' => 'Products',
                 'promotions' => 'Promotions',
-                'reason' => 'Reason',
+                'reasons' => 'Reasons',
                 'refunds' => 'Refunds',
                 'reporting' => 'Reporting',
                 'requests' => 'Requests',
                 'reviews' => 'Reviews',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA Status',
                 'roles' => 'Roles',
                 'rules' => 'Rules',
                 'sales' => 'Sales',
@@ -5074,6 +5143,7 @@ return [
                 'settings' => 'Settings',
                 'shipments' => 'Shipments',
                 'sitemaps' => 'Sitemaps',
+                'statuses' => 'Statuses',
                 'tax-categories' => 'Tax Categories',
                 'tax-rates' => 'Tax Rates',
                 'taxes' => 'Taxes',
@@ -5203,23 +5273,22 @@ return [
                 'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'Apply',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => 'Generate',
                     'generating' => 'Generating...',
-                    'hd' => 'HD',
+                    'high' => 'High',
+                    'landscape' => 'Landscape (3:2)',
+                    'low' => 'Low',
+                    'medium' => 'Medium',
                     'model' => 'Model',
                     'number-of-images' => 'Number of Images',
+                    'portrait' => 'Portrait (2:3)',
                     'prompt' => 'Prompt',
                     'quality' => 'Quality',
                     'regenerate' => 'Regenerate',
                     'regenerating' => 'Regenerating...',
                     'size' => 'Size',
-                    'standard' => 'Standard',
+                    'square' => 'Square (1:1)',
                     'title' => 'AI Image Generation',
                 ],
 
@@ -5227,6 +5296,7 @@ return [
                     'front' => 'Front',
                     'next' => 'Next',
                     'size' => 'Size',
+                    'square' => 'Square (1:1)',
                     'use-cases' => 'Use Cases',
                     'zoom' => 'Zoom',
                 ],
@@ -5244,36 +5314,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'Apply',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'Enabled',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'Generate',
                 'generated-content' => 'Generated Content',
                 'generated-content-info' => 'AI-generated content may be misleading. Review the generated content before applying.',
                 'generating' => 'Generating...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o Mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => '(Ollama) Llama 3.1 (8B)',
-                'llama3-2-1b' => '(Ollama) Llama 3.2 (1B)',
-                'llama3-2-3b' => '(Ollama) Llama 3.2 (3B)',
-                'llama3-8b' => '(Ollama) Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'Model',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
                 'prompt' => 'Prompt',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
                 'title' => 'AI Assistance',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5348,37 +5396,40 @@ return [
         'view' => 'View',
 
         'rma' => [
-            'create' => 'Create',
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'view' => 'View',
             'title' => 'RMA',
-        ],
 
-        'rma-reason' => [
-            'create' => 'Create',
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'title' => 'RMA Reasons',
-        ],
+            'requests' => [
+                'create' => 'Create',
+                'title' => 'RMA Requests',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'title' => 'RMA Rules',
-        ],
+            'reasons' => [
+                'create' => 'Create',
+                'delete' => 'Delete',
+                'edit' => 'Edit',
+                'title' => 'RMA Reasons',
+            ],
 
-        'rma-status' => [
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'title' => 'RMA Status',
-        ],
+            'rules' => [
+                'create' => 'Create',
+                'delete' => 'Delete',
+                'edit' => 'Edit',
+                'title' => 'RMA Rules',
+            ],
 
-        'custom-field' => [
-            'create' => 'Create',
-            'delete' => 'Delete',
-            'edit' => 'Edit',
-            'title' => 'Custom Fields',
+            'statuses' => [
+                'create' => 'Create',
+                'delete' => 'Delete',
+                'edit' => 'Edit',
+                'title' => 'RMA Statuses',
+            ],
+
+            'custom-fields' => [
+                'create' => 'Create',
+                'delete' => 'Delete',
+                'edit' => 'Edit',
+                'title' => 'Custom Fields',
+            ],
         ],
     ],
 
@@ -5417,9 +5468,11 @@ return [
         'csv' => 'CSV',
         'download' => 'Download',
         'export' => 'Export',
+        'no' => 'No',
         'no-records' => 'Nothing to export',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'Yes',
     ],
 
     'validations' => [

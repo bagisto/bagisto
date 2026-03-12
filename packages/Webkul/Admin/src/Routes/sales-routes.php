@@ -127,63 +127,63 @@ Route::prefix('sales')->group(function () {
          * Request routes.
          */
         Route::controller(RequestController::class)->prefix('requests')->group(function () {
-            Route::get('', 'index')->name('admin.sales.rma.index');
+            Route::get('', 'index')->name('admin.sales.rma.requests.index');
 
-            Route::get('view/{id}', 'view')->name('admin.sales.rma.view');
+            Route::get('view/{id}', 'view')->name('admin.sales.rma.requests.view');
 
-            Route::get('create', 'create')->name('admin.sales.rma.create');
+            Route::get('create', 'create')->name('admin.sales.rma.requests.create');
 
-            Route::post('store', 'store')->name('admin.sales.rma.store');
+            Route::post('store', 'store')->name('admin.sales.rma.requests.store');
 
-            Route::get('get-order-items/{orderId}', 'getOrderItems')->name('admin.sales.rma.get-order-items');
+            Route::get('get-order-items/{orderId}', 'getOrderItems')->name('admin.sales.rma.requests.get-order-items');
 
-            Route::get('get-resolution-reasons/{resolutionType}', 'getResolutionReasons')->name('admin.sales.rma.get-resolution-reasons');
+            Route::get('get-resolution-reasons/{resolutionType}', 'getResolutionReasons')->name('admin.sales.rma.requests.get-resolution-reasons');
 
-            Route::post('update-status/{id}', 'updateStatus')->name('admin.sales.rma.update-status');
+            Route::post('update-status/{id}', 'updateStatus')->name('admin.sales.rma.requests.update-status');
 
-            Route::post('reopen/{id}', 'reOpenRequest')->name('admin.sales.rma.re-open');
+            Route::post('reopen/{id}', 'reOpenRequest')->name('admin.sales.rma.requests.re-open');
 
-            Route::get('get-messages', 'getMessages')->name('admin.sales.rma.get-messages');
+            Route::get('get-messages', 'getMessages')->name('admin.sales.rma.requests.get-messages');
 
-            Route::post('send-message', 'sendMessage')->name('admin.sales.rma.send-message');
+            Route::post('send-message', 'sendMessage')->name('admin.sales.rma.requests.send-message');
         });
 
         /**
          * Reason routes.
          */
         Route::controller(ReasonController::class)->prefix('reasons')->group(function () {
-            Route::get('', 'index')->name('admin.sales.rma.reason.index');
+            Route::get('', 'index')->name('admin.sales.rma.reasons.index');
 
-            Route::post('store', 'store')->name('admin.sales.rma.reason.store');
+            Route::post('store', 'store')->name('admin.sales.rma.reasons.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.reason.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.reasons.edit');
 
-            Route::put('update/{id}', 'update')->name('admin.sales.rma.reason.update');
+            Route::put('update/{id}', 'update')->name('admin.sales.rma.reasons.update');
 
-            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.reason.delete');
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.reasons.delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.reason.mass-update');
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.reasons.mass-update');
 
-            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.reason.mass-delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.reasons.mass-delete');
         });
 
         /**
          * Status routes.
          */
         Route::controller(StatusController::class)->prefix('rma-status')->group(function () {
-            Route::get('', 'index')->name('admin.sales.rma.rma-status.index');
+            Route::get('', 'index')->name('admin.sales.rma.statuses.index');
 
-            Route::post('store', 'store')->name('admin.sales.rma.rma-status.store');
+            Route::post('store', 'store')->name('admin.sales.rma.statuses.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.rma-status.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.statuses.edit');
 
-            Route::put('update/{id}', 'update')->name('admin.sales.rma.rma-status.update');
+            Route::put('update/{id}', 'update')->name('admin.sales.rma.statuses.update');
 
-            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.rma-status.delete');
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.statuses.delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.rma-status.mass-update');
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.statuses.mass-update');
 
-            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.rma-status.mass-delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.statuses.mass-delete');
         });
 
         /**
@@ -208,22 +208,22 @@ Route::prefix('sales')->group(function () {
         /**
          * Custom field routes.
          */
-        Route::controller(CustomFieldController::class)->prefix('custom-field')->group(function () {
-            Route::get('', 'index')->name('admin.sales.rma.custom-field.index');
+        Route::controller(CustomFieldController::class)->prefix('custom-fields')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.custom-fields.index');
 
-            Route::get('create', 'create')->name('admin.sales.rma.custom-field.create');
+            Route::get('create', 'create')->name('admin.sales.rma.custom-fields.create');
 
-            Route::post('store', 'store')->name('admin.sales.rma.custom-field.store');
+            Route::post('store', 'store')->name('admin.sales.rma.custom-fields.store');
 
-            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.custom-field.edit');
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.custom-fields.edit');
 
-            Route::post('update/{id}', 'update')->name('admin.sales.rma.custom-field.update');
+            Route::post('update/{id}', 'update')->name('admin.sales.rma.custom-fields.update');
 
-            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.custom-field.delete');
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.custom-fields.delete');
 
-            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.custom-field.mass-update');
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.custom-fields.mass-update');
 
-            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.custom-field.mass-delete');
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.custom-fields.mass-delete');
         });
     });
 });

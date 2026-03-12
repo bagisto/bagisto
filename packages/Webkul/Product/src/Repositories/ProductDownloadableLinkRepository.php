@@ -5,6 +5,7 @@ namespace Webkul\Product\Repositories;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Models\Product;
 
 class ProductDownloadableLinkRepository extends Repository
 {
@@ -43,7 +44,7 @@ class ProductDownloadableLinkRepository extends Repository
     /**
      * Save links.
      *
-     * @param  \Webkul\Product\Models\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function saveLinks(array $data, $product)

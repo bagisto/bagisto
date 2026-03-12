@@ -56,7 +56,7 @@ Bagisto can help you cut down your time, cost, and workforce for building online
 
 # Getting Started
 
-![Getting Started](https://raw.githubusercontent.com/bagisto/temp-media/master/geting-started.png)
+![Getting Started](https://raw.githubusercontent.com/bagisto/temp-media/master/geting-starded.png)
 
 [Install Bagisto](https://devdocs.bagisto.com/2.3/introduction/installation.html#install-using-gui-installer) with or without Composer (Check [Requirement Details](https://bagisto.com/en/download/))
 

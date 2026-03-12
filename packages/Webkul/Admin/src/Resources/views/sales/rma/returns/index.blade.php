@@ -10,9 +10,9 @@
         </h1>
 
         <div class="flex items-center gap-x-2.5">
-            @if (bouncer()->hasPermission('sales.rma.create'))
+            @if (bouncer()->hasPermission('sales.rma.requests.create'))
                 <a
-                    href="{{ route('admin.sales.rma.create') }}"
+                    href="{{ route('admin.sales.rma.requests.create') }}"
                     class="primary-button"
                 >
                     @lang('admin::app.sales.rma.index.create-rma-title')
@@ -23,7 +23,7 @@
 
     {!! view_render_event('bagisto.admin.rma.list.before') !!}
 
-    <x-admin::datagrid src="{{ route('admin.sales.rma.index') }}" />
+    <x-admin::datagrid src="{{ route('admin.sales.rma.requests.index') }}" />
 
     {!! view_render_event('bagisto.admin.rma.list.after') !!}
 

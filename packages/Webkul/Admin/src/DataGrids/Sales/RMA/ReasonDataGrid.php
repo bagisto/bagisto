@@ -120,26 +120,26 @@ class ReasonDataGrid extends DataGrid
      */
     public function prepareActions(): void
     {
-        if (bouncer()->hasPermission('sales.rma-reason.edit')) {
+        if (bouncer()->hasPermission('sales.rma.reasons.edit')) {
             $this->addAction([
                 'index' => 'edit',
                 'icon' => 'icon-edit',
                 'title' => trans('admin::app.sales.rma.reasons.index.datagrid.edit'),
                 'method' => 'GET',
                 'url' => function ($row) {
-                    return route('admin.sales.rma.reason.edit', $row->id);
+                    return route('admin.sales.rma.reasons.edit', $row->id);
                 },
             ]);
         }
 
-        if (bouncer()->hasPermission('sales.rma-reason.delete')) {
+        if (bouncer()->hasPermission('sales.rma.reasons.delete')) {
             $this->addAction([
                 'icon' => 'icon-delete',
                 'title' => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
                 'type' => 'Delete',
                 'method' => 'DELETE',
                 'url' => function ($row) {
-                    return route('admin.sales.rma.reason.delete', $row->id);
+                    return route('admin.sales.rma.reasons.delete', $row->id);
                 },
             ]);
         }
@@ -150,11 +150,11 @@ class ReasonDataGrid extends DataGrid
      */
     public function prepareMassActions(): void
     {
-        if (bouncer()->hasPermission('sales.rma-reason.edit')) {
+        if (bouncer()->hasPermission('sales.rma.reasons.edit')) {
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.reasons.index.datagrid.update'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.reason.mass-update'),
+                'url' => route('admin.sales.rma.reasons.mass-update'),
                 'options' => [
                     [
                         'label' => trans('admin::app.sales.rma.reasons.index.datagrid.enabled'),
@@ -167,11 +167,11 @@ class ReasonDataGrid extends DataGrid
             ]);
         }
 
-        if (bouncer()->hasPermission('sales.rma-reason.delete')) {
+        if (bouncer()->hasPermission('sales.rma.reasons.delete')) {
             $this->addMassAction([
                 'title' => trans('admin::app.sales.rma.reasons.index.datagrid.delete'),
                 'method' => 'POST',
-                'url' => route('admin.sales.rma.reason.mass-delete'),
+                'url' => route('admin.sales.rma.reasons.mass-delete'),
             ]);
         }
     }

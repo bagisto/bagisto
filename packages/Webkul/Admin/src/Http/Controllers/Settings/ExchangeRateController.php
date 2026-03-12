@@ -4,8 +4,10 @@ namespace Webkul\Admin\Http\Controllers\Settings;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\ExchangeRatesDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Helpers\Exchange\ExchangeRate;
 use Webkul\Core\Repositories\CurrencyRepository;
 use Webkul\Core\Repositories\ExchangeRateRepository;
 
@@ -13,8 +15,6 @@ class ExchangeRateController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct(
         protected ExchangeRateRepository $exchangeRateRepository,
@@ -23,10 +23,8 @@ class ExchangeRateController extends Controller
 
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(): View|JsonResponse
     {
         if (request()->ajax()) {
             return datagrid(ExchangeRatesDataGrid::class)->process();
@@ -115,14 +113,12 @@ class ExchangeRateController extends Controller
     }
 
     /**
-     * Update Rates Using Exchange Rates API
-     *
-     * @return \Illuminate\Http\JsonResponse
+     * Update rates using the configured exchange rate API service.
      */
     public function updateRates()
     {
         try {
-            app(config('services.exchange_api.'.config('services.exchange_api.default').'.class'))->updateRates();
+            ExchangeRate::resolve()->updateRates();
 
             session()->flash('success', trans('admin::app.settings.exchange-rates.index.update-success'));
         } catch (\Exception $e) {

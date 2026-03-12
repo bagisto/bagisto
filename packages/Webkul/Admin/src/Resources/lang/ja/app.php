@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'リクエストを再開',
                     'title' => 'RMA',
                     'update-success' => 'RMAステータスが正常に更新されました。',
+                    'reopen-not-allowed' => 'このRMAリクエストを再開することは許可されていません。',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'チャンネル',
                     'contact-number' => '連絡先番号',
                     'create-btn' => '顧客を作成',
                     'create-success' => '顧客が正常に作成されました',
@@ -3989,7 +3991,7 @@ return [
             'title' => '設定',
 
             'general' => [
-                'info' => 'ユニットオプションを設定します。',
+                'info' => '一般',
                 'title' => '一般',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'オファータイトル',
                         'redirection-title' => 'リダイレクションタイトル',
                         'redirection-link' => 'リダイレクションリンク',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => '著作権コンテンツ',
+                        'info' => '知的財産を保護し、ブランド認知を高めるために、ウェブサイトのフッターに表示される著作権コンテンツを設定してください。',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'Magic AIオプションを設定し、コンテンツの作成を自動化するためのいくつかのオプションを許可します。',
-                    'title' => 'Magic AI',
-
-                    'settings' => [
-                        'api-key' => 'APIキー',
-                        'enabled' => '有効',
-                        'llm-api-domain' => 'LLM APIドメイン',
-                        'organization' => '組織',
-                        'title' => '一般設定',
-                        'title-info' => 'Magic AI機能を利用するために、独占的なAPIキーを入力し、関連する組織を指定してMagic AI機能を強化します。 OpenAIの資格情報を制御し、特定のニーズに応じて設定をカスタマイズします。',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'カテゴリの説明プロンプト',
-                        'cms-page-content-prompt' => 'CMSページのコンテンツプロンプト',
-                        'enabled' => '有効',
-                        'product-description-prompt' => '製品の説明プロンプト',
-                        'product-short-description-prompt' => '製品の短い説明プロンプト',
-                        'title' => 'コンテンツ生成',
-                        'title-info' => 'この機能を有効にすると、AIを使用してコンテンツを管理するためのすべてのWYSIWYGエディタでMagic AIが有効になります。<br/><br/>有効にすると、任意のエディタに移動してコンテンツを生成できます。',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => '有効',
-                        'title' => '画像生成',
-                        'title-info' => 'この機能を有効にすると、DALL-Eを使用して画像を生成するためのすべての画像アップロードでMagic AIが有効になります。<br/><br/>有効にすると、任意の画像アップロードに移動して画像を生成できます。',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => '有効',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'モデル',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'レビュー翻訳',
-                        'title-info' => '顧客または訪問者に、顧客レビューを英語に翻訳するオプションを提供します。<br/><br/>有効にすると、レビューに移動し、英語以外のレビューの場合、「英語に翻訳」ボタンが表示されます。',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => '有効',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'モデル',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'プロンプト',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'パーソナライズされたチェックアウトメッセージ',
-                        'title-info' => 'Thank-Youページで顧客にパーソナライズされたチェックアウトメッセージを作成し、個々の好みに合わせたコンテンツを提供することで、購入後の体験を向上させます。',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPRコンプライアンス設定',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => '為替レートAPIサービスと認証情報を設定します。',
+                    'title' => '為替レート',
+
+                    'settings' => [
+                        'default-service' => 'デフォルトサービス',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => '一般設定',
+                        'title-info' => '自動通貨レート更新に使用するデフォルトの為替レートサービスを選択してください。',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => '為替レートの自動更新のためにFixer.ioのAPIキーを入力してください。',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => '為替レートの自動更新のためにExchangeRate-APIキーを入力してください (https://www.exchangerate-api.com)。',
+                    ],
+
+                    'schedule' => [
+                        'daily' => '毎日',
+                        'enabled' => '有効',
+                        'frequency' => '頻度',
+                        'monthly' => '毎月',
+                        'time' => '開始時刻 (HH:MM)',
+                        'title' => 'スケジュールインポート',
+                        'title-info' => '設定されたAPIサービスを使用して、スケジュールに基づいて為替レートを自動的に更新します。',
+                        'weekly' => '毎週',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'サイトマップのオプションを設定します。',
                     'title' => 'サイトマップ',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => '最大ファイルサイズ',
                         'max-url-per-file' => 'ファイルあたりの最大URL数',
                         'title' => 'ファイル制限',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Magic AIの設定、プロバイダー、機能を構成します。',
+                'title' => 'Magic AI',
+
+                'general' => [
+                    'info' => 'Magic AIの一般設定。',
+                    'title' => '一般',
+
+                    'settings' => [
+                        'enabled' => '有効',
+                        'title' => '設定',
+                        'title-info' => 'アプリケーション全体でMagic AIを有効または無効にします。',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'APIキー',
+                    'info' => 'AIプロバイダーのAPIキーを設定します。',
+                    'title' => 'プロバイダー',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'OpenAI APIの認証情報を設定します。',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'Anthropic APIの認証情報を設定します。',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'Google Gemini APIの認証情報を設定します。',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'Groq APIの認証情報を設定します。',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'xAI APIの認証情報を設定します。',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'DeepSeek APIの認証情報を設定します。',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'Mistral APIの認証情報を設定します。',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'Ollama APIの認証情報を設定します。',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => '管理パネルのAI機能を有効にして設定します。',
+                    'title' => '管理機能',
+
+                    'text-generation' => [
+                        'enabled' => '有効',
+                        'providers' => 'プロバイダー',
+                        'title' => 'テキスト生成',
+                        'title-info' => '管理パネルのWYSIWYGエディターでAIによるテキスト生成を有効にします。',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => '有効',
+                        'providers' => 'プロバイダー',
+                        'title' => '画像生成',
+                        'title-info' => '商品およびコンテンツ画像のAIによる画像生成を有効にします。',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'ストアフロントのAI機能を有効にして設定します。',
+                    'title' => 'ストアフロント機能',
+
+                    'review-translation' => [
+                        'enabled' => '有効',
+                        'model' => 'モデル',
+                        'title' => 'レビュー翻訳',
+                        'title-info' => 'ストアフロントで顧客がレビューを自分の言語に翻訳できるようにします。',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => '有効',
+                        'model' => 'モデル',
+                        'title' => 'パーソナライズされたチェックアウトメッセージ',
+                        'title-info' => 'サンキューページで顧客向けのパーソナライズされたチェックアウトメッセージを生成します。',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'リダイレクトURL',
-                                'title-info' => 'Google認証後にユーザーがリダイレクトされるコールバックURL。Googleコンソールに設定したURLと一致する必要があります。',
+                                'title-info' => 'Google認証後にユーザーがリダイレクトされるコールバックURL。表示されているプレースホルダーURL形式を使用してください（ドメインのみを変更）。Googleコンソールに設定したURLと一致する必要があります。',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'リダイレクトURL',
-                                'title-info' => 'Facebook認証後にユーザーがリダイレクトされるコールバックURL。Facebookアプリの設定に登録されたURLと一致する必要があります。',
+                                'title-info' => 'Facebook認証後にユーザーがリダイレクトされるコールバックURL。表示されているプレースホルダーURL形式を使用してください（ドメインのみを変更）。Facebookアプリの設定に登録されたURLと一致する必要があります。',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'リダイレクトURL',
-                                'title-info' => 'GitHub認証後にユーザーがリダイレクトされるコールバックURL。GitHubコンソールに設定されたURLと一致する必要があります。',
+                                'title-info' => 'GitHub認証後にユーザーがリダイレクトされるコールバックURL。表示されているプレースホルダーURL形式を使用してください（ドメインのみを変更）。GitHubコンソールに設定されたURLと一致する必要があります。',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'リダイレクトURL',
-                                'title-info' => 'LinkedIn認証後にユーザーがリダイレクトされるコールバックURL。LinkedInコンソールに設定されたURLと一致する必要があります。',
+                                'title-info' => 'LinkedIn認証後にユーザーがリダイレクトされるコールバックURL。表示されているプレースホルダーURL形式を使用してください（ドメインのみを変更）。LinkedInコンソールに設定されたURLと一致する必要があります。',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'リダイレクトURL',
-                                'title-info' => 'Twitter認証後にユーザーがリダイレクトされるコールバックURL。Twitterコンソールに設定されたURLと一致する必要があります。',
+                                'title-info' => 'Twitter認証後にユーザーがリダイレクトされるコールバックURL。表示されているプレースホルダーURL形式を使用してください（ドメインのみを変更）。Twitterコンソールに設定されたURLと一致する必要があります。',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'メール',
                 'title' => 'メール',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'メールドライバーは "bagisto-dynamic-smtp" ではなく ":driver" に設定されていますここで行った変更は有効になりません。.envファイルでMAIL_MAILER=bagisto-dynamic-smtpを更新して、これらの設定をアクティブにしてください。',
+                    'driver-mismatch-title' => 'これらの設定は現在無効です。',
+                    'encryption' => '暗号化',
+                    'host' => 'ホスト',
+                    'info' => 'ストアからメールを送信するためのSMTPサーバー設定を構成します。',
+                    'password' => 'パスワード',
+                    'port' => 'ポート',
+                    'title' => 'SMTP',
+                    'username' => 'ユーザー名',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => '管理者メール',
-                    'admin-email-tip' => 'このチャネルの管理者のメールアドレス',
+                    'admin-email' => '管理者メールアドレス',
+                    'admin-email-tip' => 'このチャネルのすべての管理者通知はこのアドレスに送信されます。',
                     'admin-name' => '管理者名',
-                    'admin-name-tip' => 'すべての管理者メールに表示される名前',
-                    'admin-page-limit' => 'デフォルトのページごとのアイテム数（管理者）',
-                    'contact-email' => '連絡先メール',
-                    'contact-email-tip' => 'メールの下部に表示されるメールアドレス',
+                    'admin-name-tip' => '管理者に送信されるすべてのメールにこの名前が表示されます。',
+                    'admin-page-limit' => 'デフォルトの1ページあたりのアイテム数（管理者）',
+                    'contact-email' => '連絡先メールアドレス',
+                    'contact-email-tip' => 'このメールアドレスはメールのフッターに表示されます。',
                     'contact-name' => '連絡先名',
-                    'contact-name-tip' => 'メールの下部に表示される名前',
-                    'email-sender-name' => 'メール送信者名',
-                    'email-sender-name-tip' => '顧客の受信トレイに表示される名前',
-                    'info' => 'メール送信者名、ショップのメールアドレス、管理者名、管理者のメールアドレスを設定します。',
-                    'shop-email-from' => 'ショップのメールアドレス',
-                    'shop-email-from-tip' => '顧客にメールを送信するためのこのチャネルのメールアドレス',
+                    'contact-name-tip' => 'この名前はメールのフッターに表示されます。',
+                    'info' => 'すべてのメールで使用される送信者名、ショップのメールアドレス、管理者連絡先詳細を設定します。',
+                    'sender-email' => '送信者メールアドレス',
+                    'sender-email-tip' => '顧客へのメールはこのアドレスから送信されます。',
+                    'sender-name' => '送信者名',
+                    'sender-name-tip' => 'この名前は顧客の受信トレイにメールの送信者として表示されます。',
                     'title' => 'メール設定',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => '注文番号、最小注文数、バックオーダーを設定します。',
                     'title' => '注文設定',
+
+                    'order-creation' => [
+                        'info' => 'チェックアウト中にエラーが発生した場合の注文作成の再試行回数を設定します。',
+                        'max-retry-attempts' => '最大再試行回数',
+                        'title' => '注文作成',
+                    ],
 
                     'order-number' => [
                         'generator' => '注文番号ジェネレータ',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'RMAのための製品タイプを許可する',
                     'allow-rma-for-digital-product' => 'デジタル製品のRMAを許可する',
                     'allowed-file-extension' => '許可されているファイル拡張子',
-                    'allowed-file-types' => 'ファイルタイプ '.core()->getConfigData('sales.rma.setting.allowed_file_extension').' のみを選択してください',
+                    'allowed-file-types' => 'ファイルタイプ :allowed_types のみを選択してください',
                     'allowed-info' => 'コンマで区切る。例えば: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'キャンセルされたリクエストの新しいRMAリクエストを許可する',
                     'allowed-request-declined-request' => '拒否されたリクエストの新しいRMAリクエストを許可する',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => '返品の受け取り先住所',
                     'return-pickup-time' => '返品の受け取り時間',
                     'return-policy' => '返品ポリシー',
-                    'select-allowed-order-status' => '許可されている注文ステータスを選択',
                     'specific-products' => '特定の製品',
                     'title' => 'RMA',
                     'yes' => 'はい',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'コミュニケーション',
                 'configure' => '設定',
                 'currencies' => '通貨',
-                'custom-field' => 'カスタムフィールド',
+                'custom-fields' => 'カスタムフィールド',
                 'customers' => '顧客',
                 'dashboard' => 'ダッシュボード',
                 'data-transfer' => 'データ転送',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => '注文',
                 'products' => '製品',
                 'promotions' => 'プロモーション',
-                'reason' => '理由',
+                'reasons' => '理由',
                 'refunds' => '返金',
                 'reporting' => 'レポート',
                 'requests' => 'リクエスト',
                 'reviews' => 'レビュー',
                 'rma' => 'RMA',
-                'rma-status' => 'RMAステータス',
                 'roles' => 'ロール',
                 'rules' => 'ルール',
                 'sales' => '販売',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => '設定',
                 'shipments' => '発送',
                 'sitemaps' => 'サイトマップ',
+                'statuses' => 'RMA Status',
                 'tax-categories' => '税カテゴリ',
                 'tax-rates' => '税率',
                 'taxes' => '税金',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => '適用',
-                    'dall-e-2' => 'Dall.E 2',
-                    'dall-e-3' => 'Dall.E 3',
                     'generate' => '生成',
                     'generating' => '生成中...',
-                    'hd' => 'HD',
+                    'high' => '高',
+                    'landscape' => '横長 (3:2)',
+                    'low' => '低',
+                    'medium' => '中',
                     'model' => 'モデル',
                     'number-of-images' => '画像の数',
+                    'portrait' => '縦長 (2:3)',
                     'prompt' => 'プロンプト',
                     'quality' => '品質',
                     'regenerate' => '再生成',
                     'regenerating' => '再生成中...',
                     'size' => 'サイズ',
-                    'standard' => '標準',
+                    'square' => '正方形 (1:1)',
                     'title' => 'AI画像生成',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => '前面',
                     'next' => '次',
                     'size' => 'サイズ',
+                    'square' => '正方形 (1:1)',
                     'use-cases' => '用途',
                     'zoom' => 'ズーム',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => '適用',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => '有効',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => '生成',
                 'generated-content' => '生成されたコンテンツ',
                 'generated-content-info' => 'AIによって生成されたコンテンツは誤解を招く可能性があります。適用する前に生成されたコンテンツを確認してください。',
                 'generating' => '生成中...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'モデル',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
                 'prompt' => 'プロンプト',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
                 'title' => 'AIアシスタント',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5302,20 +5350,20 @@ return [
         'communications' => 'コミュニケーション',
         'configure' => '設定',
         'copy' => 'コピー',
-        'create' => '作成する',
+        'create' => '作成',
         'currencies' => '通貨',
         'customers' => '顧客',
         'dashboard' => 'ダッシュボード',
         'data-transfer' => 'データ転送',
         'delete' => '削除',
         'edit' => '編集',
-        'email-templates' => 'Eメールテンプレート',
+        'email-templates' => 'メールテンプレート',
         'events' => 'イベント',
         'exchange-rates' => '為替レート',
         'gdpr' => 'GDPR',
         'groups' => 'グループ',
-        'import' => '輸入',
-        'imports' => '輸入品',
+        'import' => 'インポート',
+        'imports' => 'インポート',
         'inventory-sources' => '在庫ソース',
         'invoices' => '請求書',
         'locales' => 'ロケール',
@@ -5326,7 +5374,7 @@ return [
         'products' => '製品',
         'promotions' => 'プロモーション',
         'refunds' => '返金',
-        'reporting' => '報告',
+        'reporting' => 'レポート',
         'reviews' => 'レビュー',
         'roles' => '役割',
         'sales' => '販売',
@@ -5347,37 +5395,40 @@ return [
         'view' => '表示',
 
         'rma' => [
-            'create' => '作成',
-            'delete' => '削除',
-            'edit' => '編集',
-            'view' => '表示',
             'title' => 'RMA（返品承認）',
-        ],
 
-        'rma-reason' => [
-            'create' => '作成',
-            'delete' => '削除',
-            'edit' => '編集',
-            'title' => 'RMA理由',
-        ],
+            'requests' => [
+                'create' => '作成',
+                'title' => 'RMAリクエスト',
+            ],
 
-        'rma-rules' => [
-            'delete' => '削除',
-            'edit' => '編集',
-            'title' => 'RMA規則',
-        ],
+            'reasons' => [
+                'create' => '作成',
+                'delete' => '削除',
+                'edit' => '編集',
+                'title' => 'RMA理由',
+            ],
 
-        'rma-status' => [
-            'delete' => '削除',
-            'edit' => '編集',
-            'title' => 'RMAステータス',
-        ],
+            'rules' => [
+                'create' => '作成',
+                'delete' => '削除',
+                'edit' => '編集',
+                'title' => 'RMAルール',
+            ],
 
-        'custom-field' => [
-            'create' => '作成',
-            'delete' => '削除',
-            'edit' => '編集',
-            'title' => 'カスタムフィールド',
+            'statuses' => [
+                'create' => '作成',
+                'delete' => '削除',
+                'edit' => '編集',
+                'title' => 'RMAステータス',
+            ],
+
+            'custom-fields' => [
+                'create' => '作成',
+                'delete' => '削除',
+                'edit' => '編集',
+                'title' => 'カスタムフィールド',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'ダウンロード',
         'export' => 'エクスポート',
+        'no' => 'いいえ',
         'no-records' => 'エクスポート対象がありません',
         'xls' => 'XLS',
         'xlsx' => 'XLSX',
+        'yes' => 'はい',
     ],
 
     'validations' => [

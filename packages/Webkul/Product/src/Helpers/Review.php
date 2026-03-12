@@ -2,15 +2,18 @@
 
 namespace Webkul\Product\Helpers;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
+use Webkul\Product\Contracts\Product;
 
 class Review
 {
     /**
      * Returns the product's avg rating
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @param  Product  $product
+     * @return HasMany
      */
     public function getReviews($product)
     {
@@ -20,7 +23,7 @@ class Review
     /**
      * Returns the product's avg rating
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return string
      */
     public function getAverageRating($product)
@@ -31,7 +34,7 @@ class Review
     /**
      * Returns the total review of the product
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return int
      */
     public function getTotalReviews($product)
@@ -42,7 +45,7 @@ class Review
     /**
      * Returns the total rating of the product
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return int
      */
     public function getTotalRating($product)
@@ -53,7 +56,7 @@ class Review
     /**
      * Returns the total active feedback of the product
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return int
      */
     public function getTotalFeedback($product)
@@ -66,8 +69,8 @@ class Review
     /**
      * Returns reviews with ratings.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
-     * @return \Illuminate\Support\Collection
+     * @param  Product  $product
+     * @return Collection
      */
     public function getReviewsWithRatings($product)
     {
@@ -82,7 +85,7 @@ class Review
     /**
      * Returns the Percentage rating of the product
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     public function getPercentageRating($product)

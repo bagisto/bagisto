@@ -17,22 +17,29 @@ class CartItem extends Model implements CartItemContract
 {
     use HasFactory;
 
-    protected $table = 'cart_items';
-
+    /**
+     * Cast the additional attribute to an array.
+     */
     protected $casts = [
         'additional' => 'array',
     ];
 
+    /**
+     * Guarded attributes.
+     */
     protected $guarded = [
         'id',
         'created_at',
         'updated_at',
     ];
 
+    /**
+     * Type instance.
+     */
     protected $typeInstance;
 
     /**
-     * Retrieve type instance
+     * Retrieve type instance.
      */
     public function getTypeInstance(): AbstractType
     {
@@ -49,22 +56,20 @@ class CartItem extends Model implements CartItemContract
         return $this->typeInstance;
     }
 
+    /**
+     * Get the product record associated with the cart item.
+     */
     public function product(): HasOne
     {
         return $this->hasOne(ProductProxy::modelClass(), 'id', 'product_id');
     }
 
+    /**
+     * Get the cart record associated with the cart item.
+     */
     public function cart(): HasOne
     {
         return $this->hasOne(CartProxy::modelClass(), 'id', 'cart_id');
-    }
-
-    /**
-     * Get the child item.
-     */
-    public function child(): BelongsTo
-    {
-        return $this->belongsTo(static::class, 'id', 'parent_id');
     }
 
     /**
@@ -76,7 +81,15 @@ class CartItem extends Model implements CartItemContract
     }
 
     /**
-     * Get the children items.
+     * Get the child item, this is for configurable products.
+     */
+    public function child(): BelongsTo
+    {
+        return $this->belongsTo(static::class, 'id', 'parent_id');
+    }
+
+    /**
+     * Get the children items, this is for bundle products.
      */
     public function children(): HasMany
     {
@@ -84,7 +97,7 @@ class CartItem extends Model implements CartItemContract
     }
 
     /**
-     * Create a new factory instance for the model
+     * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory
     {

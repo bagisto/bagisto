@@ -855,6 +855,7 @@ return [
                     'status-reopen' => 'अनुरोध पुनः खोलें',
                     'title' => 'RMA',
                     'update-success' => 'RMA स्थिति सफलतापूर्वक अपडेट की गई।',
+                    'reopen-not-allowed' => 'इस RMA अनुरोध को फिर से खोलने की अनुमति नहीं है।',
                     'view-title' => 'RMA',
                 ],
             ],
@@ -2034,6 +2035,7 @@ return [
                 ],
 
                 'create' => [
+                    'channel' => 'चैनल',
                     'contact-number' => 'संपर्क नंबर',
                     'create-btn' => 'ग्राहक बनाएं',
                     'create-success' => 'ग्राहक सफलतापूर्वक बनाया गया',
@@ -3989,7 +3991,7 @@ return [
             'title' => 'कॉन्फ़िगरेशन',
 
             'general' => [
-                'info' => 'इकाई विकल्प सेट करें।',
+                'info' => 'सामान्य',
                 'title' => 'सामान्य',
 
                 'general' => [
@@ -4026,6 +4028,11 @@ return [
                         'offer-title' => 'ऑफर शीर्षक',
                         'redirection-title' => 'पुनर्निर्देशन शीर्षक',
                         'redirection-link' => 'पुनर्निर्देशन लिंक',
+                    ],
+
+                    'copyright-content' => [
+                        'title' => 'कॉपीराइट सामग्री',
+                        'info' => 'अपनी बौद्धिक संपत्ति की सुरक्षा और ब्रांड पहचान को मजबूत करने के लिए अपनी वेबसाइट के फुटर में प्रदर्शित कॉपीराइट सामग्री को कॉन्फ़िगर करें।',
                     ],
 
                     'speculation-rules' => [
@@ -4091,96 +4098,6 @@ return [
                     ],
                 ],
 
-                'magic-ai' => [
-                    'info' => 'मैजिक एआई विकल्प सेट करें और सामग्री निर्माण को स्वचालित करने के लिए कुछ विकल्पों की अनुमति दें।',
-                    'title' => 'मैजिक एआई',
-
-                    'settings' => [
-                        'api-key' => 'एपीआई कुंजी',
-                        'enabled' => 'सक्षम',
-                        'llm-api-domain' => 'एलएलएम एपीआई डोमेन',
-                        'organization' => 'संगठन',
-                        'title' => 'सामान्य सेटिंग्स',
-                        'title-info' => 'अपने अनन्य एपीआई कुंजी दर्ज करके और संबंधित संगठन को दर्ज करके मैजिक एआई सुविधा के साथ अपने अनुभव को बढ़ाएं। अपने OpenAI क्रेडेंशियल पर कमांड लें और अपनी विशेष आवश्यकताओं के अनुसार सेटिंग्स को अनुकूलित करें।',
-                    ],
-
-                    'content-generation' => [
-                        'category-description-prompt' => 'श्रेणी विवरण प्रॉम्प्ट',
-                        'cms-page-content-prompt' => 'सीएमएस पेज सामग्री प्रॉम्प्ट',
-                        'enabled' => 'सक्षम',
-                        'product-description-prompt' => 'उत्पाद विवरण प्रॉम्प्ट',
-                        'product-short-description-prompt' => 'उत्पाद संक्षेप विवरण प्रॉम्प्ट',
-                        'title' => 'सामग्री उत्पादन',
-                        'title-info' => 'यह सुविधा हर WYSIWYG संपादक के लिए मैजिक एआई को सक्षम करेगी, जहां आप AI का उपयोग करके सामग्री को प्रबंधित करना चाहते हैं।<br/><br/>सक्षम करने पर, किसी भी संपादक में जाएं और सामग्री उत्पन्न करें।',
-                    ],
-
-                    'image-generation' => [
-                        'enabled' => 'सक्षम',
-                        'title' => 'इमेज उत्पादन',
-                        'title-info' => 'यह सुविधा हर छवि अपलोड के लिए मैजिक एआई को सक्षम करेगी, जहां आप DALL-E का उपयोग करके छवियाँ उत्पन्न करना चाहते हैं।<br/><br/>सक्षम करने पर, किसी भी छवि अपलोड में जाएं और छवि उत्पन्न करें।',
-                    ],
-
-                    'review-translation' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'सक्षम',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'मॉडल',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'समीक्षा अनुवाद',
-                        'title-info' => 'ग्राहक या आगंतुक को ग्राहक समीक्षा को अंग्रेजी में अनुवाद करने का विकल्प प्रदान करें।<br/><br/>सक्षम होने पर, समीक्षा पर जाएं और यदि आप अंग्रेजी के अलावा अन्य समीक्षा करते हैं तो आपको "अंग्रेजी में अनुवाद करें" बटन मिलेगा।',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-
-                    'checkout-message' => [
-                        'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
-                        'enabled' => 'सक्षम',
-                        'gemini-2-0-flash' => 'Gemini 2.0 Flash',
-                        'gpt-4-turbo' => 'OpenAI gpt 4 Turbo',
-                        'gpt-4o' => 'OpenAI gpt-4o',
-                        'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                        'llama-groq' => 'Llama 3.3 (Groq)',
-                        'llama3-1-8b' => 'Llama 3.1 (8B)',
-                        'llama3-2-1b' => 'Llama 3.2 (1B)',
-                        'llama3-2-3b' => 'Llama 3.2 (3B)',
-                        'llama3-8b' => 'Llama 3 (8B)',
-                        'llava-7b' => 'Llava (7b)',
-                        'mistral-7b' => 'Mistral (7b)',
-                        'model' => 'मॉडल',
-                        'orca-mini' => 'Orca Mini',
-                        'phi3-5' => 'Phi 3.5',
-                        'prompt' => 'प्रॉम्प्ट',
-                        'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                        'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                        'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                        'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                        'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                        'starling-lm-7b' => 'Starling-lm (7b)',
-                        'title' => 'व्यक्तिगत चेकआउट संदेश',
-                        'title-info' => 'ग्राहकों के लिए धन्यवाद पृष्ठ पर एक व्यक्तिगत चेकआउट संदेश तैयार करें, सामग्री को व्यक्तिगत प्राथमिकताओं के साथ मेल खाते हुए और समग्र खरीद के बाद के अनुभव को बढ़ाते हुए।',
-                        'vicuna' => 'Vicuna',
-                        'vicuna-13b' => 'Vicuna (13b)',
-                        'vicuna-7b' => 'Vicuna (7b)',
-                    ],
-                ],
-
                 'gdpr' => [
                     'title' => 'GDPR',
                     'info' => 'GDPR अनुपालन सेटिंग्स',
@@ -4224,6 +4141,42 @@ return [
                     ],
                 ],
 
+                'exchange-rates' => [
+                    'info' => 'विनिमय दर API सेवाओं और प्रमाणपत्रों को कॉन्फ़िगर करें।',
+                    'title' => 'विनिमय दरें',
+
+                    'settings' => [
+                        'default-service' => 'डिफ़ॉल्ट सेवा',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'सामान्य सेटिंग्स',
+                        'title-info' => 'स्वचालित मुद्रा दर अपडेट के लिए उपयोग करने हेतु डिफ़ॉल्ट विनिमय दर सेवा चुनें।',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'स्वचालित विनिमय दर अपडेट के लिए अपनी Fixer.io API कुंजी दर्ज करें।',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'स्वचालित विनिमय दर अपडेट के लिए अपनी ExchangeRate-API कुंजी दर्ज करें (https://www.exchangerate-api.com)।',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'दैनिक',
+                        'enabled' => 'सक्रिय',
+                        'frequency' => 'आवृत्ति',
+                        'monthly' => 'मासिक',
+                        'time' => 'प्रारंभ समय (HH:MM)',
+                        'title' => 'निर्धारित आयात',
+                        'title-info' => 'कॉन्फ़िगर की गई API सेवा का उपयोग करके निर्धारित समय पर स्वचालित रूप से विनिमय दरें अपडेट करें।',
+                        'weekly' => 'साप्ताहिक',
+                    ],
+                ],
+
                 'sitemap' => [
                     'info' => 'साइटमैप विकल्प सेट करें।',
                     'title' => 'साइटमैप',
@@ -4239,6 +4192,106 @@ return [
                         'max-file-size' => 'अधिकतम फ़ाइल आकार',
                         'max-url-per-file' => 'प्रति फ़ाइल अधिकतम URL की संख्या',
                         'title' => 'फ़ाइल सीमाएं',
+                    ],
+                ],
+            ],
+
+            'magic-ai' => [
+                'info' => 'Magic AI सेटिंग्स, प्रदाता और सुविधाएँ कॉन्फ़िगर करें।',
+                'title' => 'मैजिक AI',
+
+                'general' => [
+                    'info' => 'सामान्य Magic AI सेटिंग्स।',
+                    'title' => 'सामान्य',
+
+                    'settings' => [
+                        'enabled' => 'सक्रिय',
+                        'title' => 'सेटिंग्स',
+                        'title-info' => 'अपने पूरे एप्लिकेशन में Magic AI को सक्रिय या निष्क्रिय करें।',
+                    ],
+                ],
+
+                'providers' => [
+                    'api-key' => 'API कुंजी',
+                    'info' => 'अपने AI प्रदाताओं के लिए API कुंजियाँ कॉन्फ़िगर करें।',
+                    'title' => 'प्रदाता',
+
+                    'openai' => [
+                        'title' => 'OpenAI',
+                        'title-info' => 'अपने OpenAI API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'anthropic' => [
+                        'title' => 'Anthropic',
+                        'title-info' => 'अपने Anthropic API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'gemini' => [
+                        'title' => 'Gemini',
+                        'title-info' => 'अपने Google Gemini API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'groq' => [
+                        'title' => 'Groq',
+                        'title-info' => 'अपने Groq API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'xai' => [
+                        'title' => 'xAI',
+                        'title-info' => 'अपने xAI API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'deepseek' => [
+                        'title' => 'DeepSeek',
+                        'title-info' => 'अपने DeepSeek API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'mistral' => [
+                        'title' => 'Mistral',
+                        'title-info' => 'अपने Mistral API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+
+                    'ollama' => [
+                        'title' => 'Ollama',
+                        'title-info' => 'अपने Ollama API प्रमाणपत्र कॉन्फ़िगर करें।',
+                    ],
+                ],
+
+                'admin-features' => [
+                    'info' => 'व्यवस्थापक पैनल के लिए AI सुविधाएँ सक्रिय और कॉन्फ़िगर करें।',
+                    'title' => 'व्यवस्थापक सुविधाएँ',
+
+                    'text-generation' => [
+                        'enabled' => 'सक्रिय',
+                        'providers' => 'प्रदाता',
+                        'title' => 'टेक्स्ट जेनरेशन',
+                        'title-info' => 'व्यवस्थापक पैनल में WYSIWYG संपादकों में AI-संचालित टेक्स्ट जेनरेशन सक्रिय करें।',
+                    ],
+
+                    'image-generation' => [
+                        'enabled' => 'सक्रिय',
+                        'providers' => 'प्रदाता',
+                        'title' => 'छवि जेनरेशन',
+                        'title-info' => 'उत्पाद और सामग्री छवियों के लिए AI-संचालित छवि जेनरेशन सक्रिय करें।',
+                    ],
+                ],
+
+                'storefront-features' => [
+                    'info' => 'स्टोरफ्रंट के लिए AI सुविधाएँ सक्रिय और कॉन्फ़िगर करें।',
+                    'title' => 'स्टोरफ्रंट सुविधाएँ',
+
+                    'review-translation' => [
+                        'enabled' => 'सक्रिय',
+                        'model' => 'मॉडल',
+                        'title' => 'समीक्षा अनुवाद',
+                        'title-info' => 'ग्राहकों को स्टोरफ्रंट पर अपनी भाषा में समीक्षाओं का अनुवाद करने की अनुमति दें।',
+                    ],
+
+                    'checkout-message' => [
+                        'enabled' => 'सक्रिय',
+                        'model' => 'मॉडल',
+                        'title' => 'व्यक्तिगत चेकआउट संदेश',
+                        'title-info' => 'धन्यवाद पृष्ठ पर ग्राहकों के लिए व्यक्तिगत चेकआउट संदेश उत्पन्न करें।',
                     ],
                 ],
             ],
@@ -4530,7 +4583,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'रीडायरेक्ट URL',
-                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को Google से पुनः निर्देशित किए जाने वाला URL। यह Google कंसोल में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
+                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को Google से पुनः निर्देशित किए जाने वाला URL। दिखाए गए प्लेसहोल्डर URL प्रारूप का उपयोग करें (केवल अपना डोमेन बदलें)। यह आपके Google कंसोल में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
                             ],
                         ],
 
@@ -4549,7 +4602,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'रीडायरेक्ट URL',
-                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को Facebook से पुनः निर्देशित किए जाने वाला URL। यह आपके Facebook ऐप सेटिंग्स में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
+                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को Facebook से पुनः निर्देशित किए जाने वाला URL। दिखाए गए प्लेसहोल्डर URL प्रारूप का उपयोग करें (केवल अपना डोमेन बदलें)। यह आपके Facebook ऐप सेटिंग्स में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
                             ],
                         ],
 
@@ -4568,7 +4621,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'रीडायरेक्ट URL',
-                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को GitHub से पुनः निर्देशित किए जाने वाला URL। यह GitHub कंसोल में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
+                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को GitHub से पुनः निर्देशित किए जाने वाला URL। दिखाए गए प्लेसहोल्डर URL प्रारूप का उपयोग करें (केवल अपना डोमेन बदलें)। यह आपके GitHub कंसोल में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
                             ],
                         ],
 
@@ -4587,7 +4640,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'रीडायरेक्ट URL',
-                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को LinkedIn से पुनः निर्देशित किए जाने वाला URL। यह LinkedIn कंसोल में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
+                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को LinkedIn से पुनः निर्देशित किए जाने वाला URL। दिखाए गए प्लेसहोल्डर URL प्रारूप का उपयोग करें (केवल अपना डोमेन बदलें)। यह आपके LinkedIn कंसोल में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
                             ],
                         ],
 
@@ -4606,7 +4659,7 @@ return [
 
                             'redirect' => [
                                 'title' => 'रीडायरेक्ट URL',
-                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को Twitter से पुनः निर्देशित किए जाने वाला URL। यह Twitter कंसोल में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
+                                'title-info' => 'प्रमाणीकरण के बाद उपयोगकर्ताओं को Twitter से पुनः निर्देशित किए जाने वाला URL। दिखाए गए प्लेसहोल्डर URL प्रारूप का उपयोग करें (केवल अपना डोमेन बदलें)। यह आपके Twitter कंसोल में कॉन्फ़िगर किए गए URL से मेल खाना चाहिए।',
                             ],
                         ],
                     ],
@@ -4617,21 +4670,33 @@ return [
                 'info' => 'ईमेल',
                 'title' => 'ईमेल',
 
+                'smtp' => [
+                    'driver-mismatch-info' => 'आपका मेल ड्राइवर "bagisto-dynamic-smtp" के बजाय ":driver" पर सेट है। यहां किए गए कोई भी परिवर्तन प्रभावी नहीं होंगे। कृपया इन सेटिंग्स को सक्रिय करने के लिए अपनी .env फ़ाइल में MAIL_MAILER=bagisto-dynamic-smtp अपडेट करें।',
+                    'driver-mismatch-title' => 'ये सेटिंग्स वर्तमान में निष्क्रिय हैं।',
+                    'encryption' => 'एन्क्रिप्शन',
+                    'host' => 'होस्ट',
+                    'info' => 'अपने स्टोर से ईमेल भेजने के लिए SMTP सर्वर सेटिंग्स कॉन्फ़िगर करें।',
+                    'password' => 'पासवर्ड',
+                    'port' => 'पोर्ट',
+                    'title' => 'SMTP',
+                    'username' => 'उपयोगकर्ता नाम',
+                ],
+
                 'email-settings' => [
-                    'admin-email' => 'व्यवस्थापक ईमेल',
-                    'admin-email-tip' => 'ईमेल पता जो व्यवस्थापक को ईमेल प्राप्त करने के लिए इस चैनल के लिए होगा',
+                    'admin-email' => 'व्यवस्थापक ईमेल पता',
+                    'admin-email-tip' => 'इस चैनल के लिए सभी व्यवस्थापक सूचनाएं इस पते पर भेजी जाएंगी।',
                     'admin-name' => 'व्यवस्थापक का नाम',
-                    'admin-name-tip' => 'यह नाम सभी व्यवस्थापक ईमेल में प्रदर्शित होगा',
+                    'admin-name-tip' => 'यह नाम व्यवस्थापक को भेजे गए सभी ईमेल में प्रदर्शित होगा।',
                     'admin-page-limit' => 'डिफ़ॉल्ट आइटम प्रति पृष्ठ (व्यवस्थापक)',
-                    'contact-email' => 'संपर्क ईमेल',
-                    'contact-email-tip' => 'ईमेल पता जो आपके ईमेलों के नीचे दिखाया जाएगा',
+                    'contact-email' => 'संपर्क ईमेल पता',
+                    'contact-email-tip' => 'यह ईमेल पता आपके ईमेल के फुटर में प्रदर्शित होगा।',
                     'contact-name' => 'संपर्क का नाम',
-                    'contact-name-tip' => 'यह नाम आपके ईमेलों के नीचे दिखाया जाएगा',
-                    'email-sender-name' => 'ईमेल भेजने वाले का नाम',
-                    'email-sender-name-tip' => 'यह नाम ग्राहकों के इनबॉक्स में प्रदर्शित होगा',
-                    'info' => 'ईमेल भेजने वाले का नाम, दुकान ईमेल पता, व्यवस्थापक का नाम और व्यवस्थापक ईमेल पता सेट करें।',
-                    'shop-email-from' => 'दुकान ईमेल पता',
-                    'shop-email-from-tip' => 'आपके ग्राहकों को ईमेल भेजने के लिए इस चैनल का ईमेल पता',
+                    'contact-name-tip' => 'यह नाम आपके ईमेल के फुटर में प्रदर्शित होगा।',
+                    'info' => 'सभी ईमेल में उपयोग किए जाने वाले भेजने वाले का नाम, दुकान ईमेल पता, व्यवस्थापक और संपर्क विवरण कॉन्फ़िगर करें।',
+                    'sender-email' => 'भेजने वाले का ईमेल पता',
+                    'sender-email-tip' => 'आपके ग्राहकों को ईमेल इस पते से भेजे जाएंगे।',
+                    'sender-name' => 'भेजने वाले का नाम',
+                    'sender-name-tip' => 'यह नाम आपके ग्राहकों के इनबॉक्स में ईमेल भेजने वाले के रूप में प्रदर्शित होगा।',
                     'title' => 'ईमेल सेटिंग्स',
                 ],
 
@@ -4777,6 +4842,12 @@ return [
                 'order-settings' => [
                     'info' => 'ऑर्डर नंबर, न्यूनतम आदेश और बैक आर्डर को सेट करें।',
                     'title' => 'ऑर्डर सेटिंग्स',
+
+                    'order-creation' => [
+                        'info' => 'चेकआउट के दौरान त्रुटियों के होने पर ऑर्डर बनाने के पुनः प्रयासों की संख्या कॉन्फ़िगर करें।',
+                        'max-retry-attempts' => 'अधिकतम पुनः प्रयास संख्या',
+                        'title' => 'ऑर्डर बनाना',
+                    ],
 
                     'order-number' => [
                         'generator' => 'ऑर्डर नंबर जेनरेटर',
@@ -4952,7 +5023,7 @@ return [
                     'allow-product-type-for-rma' => 'RMA के लिए उत्पाद प्रकार की अनुमति दें',
                     'allow-rma-for-digital-product' => 'डिजिटल उत्पाद के लिए RMA की अनुमति दें',
                     'allowed-file-extension' => 'अनुमत फ़ाइल एक्सटेंशन',
-                    'allowed-file-types' => 'कृपया केवल फ़ाइल प्रकार चुनें '.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+                    'allowed-file-types' => 'कृपया केवल फ़ाइल प्रकार चुनें :allowed_types',
                     'allowed-info' => 'अल्पविराम द्वारा विभाजित। उदाहरण के लिए: jpg,jpeg,pdf',
                     'allowed-request-cancelled-request' => 'रद्द किए गए अनुरोध के लिए नए RMA अनुरोध की अनुमति दें',
                     'allowed-request-declined-request' => 'अस्वीकृत अनुरोध के लिए नए RMA अनुरोध की अनुमति दें',
@@ -4980,7 +5051,6 @@ return [
                     'return-pickup-address' => 'वापसी पिकअप पता',
                     'return-pickup-time' => 'वापसी पिकअप समय',
                     'return-policy' => 'वापसी नीति',
-                    'select-allowed-order-status' => 'अनुमत ऑर्डर स्थिति चुनें',
                     'specific-products' => 'विशिष्ट उत्पाद',
                     'title' => 'RMA',
                     'yes' => 'हाँ',
@@ -5037,7 +5107,7 @@ return [
                 'communications' => 'संचार',
                 'configure' => 'कॉन्फ़िगर करें',
                 'currencies' => 'मुद्राएँ',
-                'custom-field' => 'कस्टम फ़ील्ड',
+                'custom-fields' => 'कस्टम फ़ील्ड',
                 'customers' => 'ग्राहक',
                 'dashboard' => 'डैशबोर्ड',
                 'data-transfer' => 'डेटा स्थानांतरण',
@@ -5057,13 +5127,12 @@ return [
                 'orders' => 'आदेश',
                 'products' => 'उत्पाद',
                 'promotions' => 'प्रचार',
-                'reason' => 'कारण',
+                'reasons' => 'कारण',
                 'refunds' => 'रिफंड',
                 'reporting' => 'रिपोर्टिंग',
                 'requests' => 'अनुरोध',
                 'reviews' => 'समीक्षा',
                 'rma' => 'RMA',
-                'rma-status' => 'RMA स्थिति',
                 'roles' => 'भूमिकाएँ',
                 'rules' => 'नियम',
                 'sales' => 'बिक्री',
@@ -5073,6 +5142,7 @@ return [
                 'settings' => 'सेटिंग्स',
                 'shipments' => 'शिपमेंट्स',
                 'sitemaps' => 'साइटमैप्स',
+                'statuses' => 'RMA Status',
                 'tax-categories' => 'कर श्रेणियाँ',
                 'tax-rates' => 'कर दरें',
                 'taxes' => 'कर',
@@ -5202,23 +5272,22 @@ return [
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
 
                 'ai-generation' => [
-                    '1024x1024' => '1024x1024',
-                    '1024x1792' => '1024x1792',
-                    '1792x1024' => '1792x1024',
                     'apply' => 'लागू करें',
-                    'dall-e-2' => 'डाल.ई 2',
-                    'dall-e-3' => 'डाल.ई 3',
                     'generate' => 'उत्पन्न करें',
                     'generating' => 'उत्पन्न हो रहा है...',
-                    'hd' => 'एचडी',
+                    'high' => 'उच्च',
+                    'landscape' => 'लैंडस्केप (3:2)',
+                    'low' => 'निम्न',
+                    'medium' => 'मध्यम',
                     'model' => 'मॉडल',
                     'number-of-images' => 'छवियों की संख्या',
-                    'prompt' => 'प्रम्पट',
+                    'portrait' => 'पोर्ट्रेट (2:3)',
+                    'prompt' => 'प्रॉम्प्ट',
                     'quality' => 'गुणवत्ता',
                     'regenerate' => 'पुनर्जन्म',
                     'regenerating' => 'पुनर्जन्म हो रहा है...',
                     'size' => 'आकार',
-                    'standard' => 'मानक',
+                    'square' => 'वर्गाकार (1:1)',
                     'title' => 'ए.आई. इमेज उत्पन्न',
                 ],
 
@@ -5226,6 +5295,7 @@ return [
                     'front' => 'सामना',
                     'next' => 'अगला',
                     'size' => 'आकार',
+                    'square' => 'वर्गाकार (1:1)',
                     'use-cases' => 'उपयोग केस',
                     'zoom' => 'ज़ूम करें',
                 ],
@@ -5243,36 +5313,14 @@ return [
 
             'ai-generation' => [
                 'apply' => 'लागू करें',
-                'deepseek-r1-8b' => 'DeepSeek R1 (8b)',
                 'enabled' => 'सक्षम',
-                'gemini-2-0-flash' => 'Gemini 2.0 Flash',
                 'generate' => 'उत्पन्न करें',
                 'generated-content' => 'उत्पन्न सामग्री',
                 'generated-content-info' => 'एआई सामग्री भ्रामक हो सकती है। कृपया उत्पन्न सामग्री को लागू करने से पहले उसकी समीक्षा करें।',
                 'generating' => 'उत्पन्न हो रहा है...',
-                'gpt-4-turbo' => 'OpenAI gpt-4 Turbo',
-                'gpt-4o' => 'OpenAI gpt-4o',
-                'gpt-4o-mini' => 'OpenAI gpt-4o mini',
-                'llama-groq' => 'Llama 3.3 (Groq)',
-                'llama3-1-8b' => 'Llama 3.1 (8B)',
-                'llama3-2-1b' => 'Llama 3.2 (1B)',
-                'llama3-2-3b' => 'Llama 3.2 (3B)',
-                'llama3-8b' => 'Llama 3 (8B)',
-                'llava-7b' => 'Llava (7b)',
-                'mistral-7b' => 'Mistral (7b)',
                 'model' => 'मॉडल',
-                'orca-mini' => 'Orca Mini',
-                'phi3-5' => 'Phi 3.5',
                 'prompt' => 'प्रॉम्प्ट',
-                'qwen2-5-0-5b' => 'Qwen 2.5 (0.5b)',
-                'qwen2-5-1-5b' => 'Qwen 2.5 (1.5b)',
-                'qwen2-5-14b' => 'Qwen 2.5 (14b)',
-                'qwen2-5-3b' => 'Qwen 2.5 (3b)',
-                'qwen2-5-7b' => 'Qwen 2.5 (7b)',
-                'starling-lm-7b' => 'Starling-lm (7b)',
                 'title' => 'एआई सहायता',
-                'vicuna-13b' => 'Vicuna (13b)',
-                'vicuna-7b' => 'Vicuna (7b)',
             ],
 
             'errors' => [
@@ -5291,7 +5339,7 @@ return [
         'addresses' => 'पते',
         'attribute-families' => 'विशेषता परिवार',
         'attributes' => 'विशेषताएँ',
-        'campaigns' => 'कैंपेन्स',
+        'campaigns' => 'कैंपेन',
         'cancel' => 'रद्द करें',
         'cart-rules' => 'कार्ट नियम',
         'catalog' => 'कैटलॉग',
@@ -5299,12 +5347,12 @@ return [
         'categories' => 'श्रेणियाँ',
         'channels' => 'चैनल्स',
         'cms' => 'सीएमएस',
-        'communications' => 'संचालन',
+        'communications' => 'संचार',
         'configure' => 'कॉन्फ़िगर करें',
         'copy' => 'कॉपी करें',
-        'create' => 'बनाएं',
+        'create' => 'बनाएँ',
         'currencies' => 'मुद्राएँ',
-        'customers' => 'ग्राहकों',
+        'customers' => 'ग्राहक',
         'dashboard' => 'डैशबोर्ड',
         'data-transfer' => 'डेटा स्थानांतरण',
         'delete' => 'हटाएँ',
@@ -5320,7 +5368,7 @@ return [
         'invoices' => 'चालान',
         'locales' => 'स्थान',
         'marketing' => 'मार्केटिंग',
-        'newsletter-subscriptions' => 'समाचार पत्रिका सदस्यता',
+        'newsletter-subscriptions' => 'न्यूज़लेटर सदस्यता',
         'note' => 'टिप्पणी',
         'orders' => 'आदेश',
         'products' => 'उत्पाद',
@@ -5336,48 +5384,51 @@ return [
         'settings' => 'सेटिंग्स',
         'shipments' => 'शिपमेंट्स',
         'sitemaps' => 'साइटमैप्स',
-        'subscribers' => 'समाचार पत्रिका सदस्य',
+        'subscribers' => 'न्यूज़लेटर सदस्य',
         'tax-categories' => 'कर श्रेणियाँ',
         'tax-rates' => 'कर दरें',
         'taxes' => 'कर',
         'themes' => 'थीम्स',
         'transactions' => 'लेन-देन',
         'url-rewrites' => 'URL पुनर्लेखन',
-        'users' => 'उपयोगकर्ताओं',
+        'users' => 'उपयोगकर्ता',
         'view' => 'देखें',
 
         'rma' => [
-            'create' => 'बनाएँ',
-            'delete' => 'हटाएँ',
-            'edit' => 'संपादित करें',
-            'view' => 'देखें',
             'title' => 'आरएमए (RMA)',
-        ],
 
-        'rma-reason' => [
-            'create' => 'बनाएँ',
-            'delete' => 'हटाएँ',
-            'edit' => 'संपादित करें',
-            'title' => 'आरएमए कारण',
-        ],
+            'requests' => [
+                'create' => 'बनाएँ',
+                'title' => 'RMA अनुरोध',
+            ],
 
-        'rma-rules' => [
-            'delete' => 'हटाएँ',
-            'edit' => 'संपादित करें',
-            'title' => 'आरएमए नियम',
-        ],
+            'reasons' => [
+                'create' => 'बनाएँ',
+                'delete' => 'हटाएँ',
+                'edit' => 'संपादित करें',
+                'title' => 'RMA कारण',
+            ],
 
-        'rma-status' => [
-            'delete' => 'हटाएँ',
-            'edit' => 'संपादित करें',
-            'title' => 'आरएमए स्थिति',
-        ],
+            'rules' => [
+                'create' => 'बनाएँ',
+                'delete' => 'हटाएँ',
+                'edit' => 'संपादित करें',
+                'title' => 'RMA नियम',
+            ],
 
-        'custom-field' => [
-            'create' => 'बनाएँ',
-            'delete' => 'हटाएँ',
-            'edit' => 'संपादित करें',
-            'title' => 'कस्टम फ़ील्ड',
+            'statuses' => [
+                'create' => 'बनाएँ',
+                'delete' => 'हटाएँ',
+                'edit' => 'संपादित करें',
+                'title' => 'RMA स्थिति',
+            ],
+
+            'custom-fields' => [
+                'create' => 'बनाएँ',
+                'delete' => 'हटाएँ',
+                'edit' => 'संपादित करें',
+                'title' => 'कस्टम फ़ील्ड्स',
+            ],
         ],
     ],
 
@@ -5416,9 +5467,11 @@ return [
         'csv' => 'CSV',
         'download' => 'डाउनलोड करें',
         'export' => 'निर्यात',
+        'no' => 'नहीं',
         'no-records' => 'निर्यात के लिए कुछ नहीं है',
         'xls' => 'XLS',
         'xlsx' => 'एक्सएलएसएक्स',
+        'yes' => 'हाँ',
     ],
 
     'validations' => [

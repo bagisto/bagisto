@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Helpers\Reporting;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -72,8 +73,8 @@ class Customer extends AbstractReporting
     /**
      * Retrieves total customers by date
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalCustomers($startDate, $endDate): int
     {
@@ -99,8 +100,8 @@ class Customer extends AbstractReporting
     /**
      * Retrieves total reviews by date
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      */
     public function getTotalReviews($startDate, $endDate): int
     {
@@ -217,8 +218,8 @@ class Customer extends AbstractReporting
     /**
      * Returns over time stats.
      *
-     * @param  \Carbon\Carbon  $startDate
-     * @param  \Carbon\Carbon  $endDate
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
      * @param  string  $period
      */
     public function getTotalCustomersOverTime($startDate, $endDate, $period = 'auto'): array

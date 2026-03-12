@@ -367,7 +367,7 @@ it('returns false when response structure is invalid', function () {
 it('returns false when exception occurs during validation', function () {
     // Arrange
     Http::fake(function () {
-        throw new \Exception('API Error');
+        throw new Exception('API Error');
     });
 
     // Act

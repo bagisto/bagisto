@@ -2,6 +2,7 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\View\View;
 use Webkul\CMS\Repositories\PageRepository;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
 
@@ -21,7 +22,7 @@ class PageController extends Controller
      * To extract the page content and load it in the respective view file
      *
      * @param  string  $urlKey
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function view($urlKey)
     {
