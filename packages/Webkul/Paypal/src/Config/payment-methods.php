@@ -12,7 +12,7 @@ return [
         'active' => true,
         'client_id' => 'sb',
         'accepted_currencies' => 'USD',
-        'sort' => 4,
+        'sort' => 5,
     ],
 
     'paypal_standard' => [
@@ -22,6 +22,6 @@ return [
         'description' => 'PayPal Standard',
         'active' => true,
         'business_account' => 'test@webkul.com',
-        'sort' => 5,
+        'sort' => 6,
     ],
 ];

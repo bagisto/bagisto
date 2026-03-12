@@ -3,6 +3,34 @@
 use Webkul\MagicAI\AiProvider;
 use Webkul\Sales\Models\Order;
 
+$short = [
+                [
+                    'title' => '1',
+                    'value' => 1,
+                ], [
+                    'title' => '2',
+                    'value' => 2,
+                ], [
+                    'title' => '3',
+                    'value' => 3,
+                ], [
+                    'title' => '4',
+                    'value' => 4,
+                ], [
+                    'title' => '5',
+                    'value' => 5,
+                ], [
+                    'title' => '6',
+                    'value' => 6,
+                ], [
+                    'title' => '7',
+                    'value' => 7,
+                ], [
+                    'title' => '8',
+                    'value' => 8,
+                ],
+            ];
+
 return [
     /**
      * General.
@@ -1996,30 +2024,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type' => 'select',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'options' => $short,
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2127,30 +2132,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type' => 'select',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'options' => $short,
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2219,30 +2201,92 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type' => 'select',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'options' => $short,
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key'    => 'sales.payment_methods.phonepe',
+        'name'   => 'admin::app.configuration.index.sales.payment-methods.phonepe',
+        'info'   => 'admin::app.configuration.index.sales.payment-methods.phonepe-info',
+        'sort'   => 4,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'default_value' => true,
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'default_value' => 'PhonePe',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'default_value' => 'Pay securely via PhonePe (UPI/QR).',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => false,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'client_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-id',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-client-id-info',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'client_secret',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-client-secret-info',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'merchant_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-id',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-merchant-info',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'select',
+                'depends' => 'active:1',
+                'options' => $short,
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2251,7 +2295,7 @@ return [
         'key' => 'sales.payment_methods.paypal_smart_button',
         'name' => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
         'info' => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
-        'sort' => 4,
+        'sort' => 5,
         'fields' => [
             [
                 'name' => 'active',
@@ -2319,30 +2363,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type' => 'select',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'options' => $short,
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2351,7 +2372,7 @@ return [
         'key' => 'sales.payment_methods.paypal_standard',
         'name' => 'admin::app.configuration.index.sales.payment-methods.paypal-standard',
         'info' => 'admin::app.configuration.index.sales.payment-methods.paypal-standard-info',
-        'sort' => 5,
+        'sort' => 6,
         'fields' => [
             [
                 'name' => 'active',
@@ -2403,30 +2424,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type' => 'select',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'options' => $short,
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2435,7 +2433,7 @@ return [
         'key' => 'sales.payment_methods.cashondelivery',
         'name' => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery',
         'info' => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery-info',
-        'sort' => 6,
+        'sort' => 7,
         'fields' => [
             [
                 'name' => 'active',
@@ -2523,30 +2521,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type' => 'select',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'options' => $short,
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2555,7 +2530,7 @@ return [
         'key' => 'sales.payment_methods.moneytransfer',
         'name' => 'admin::app.configuration.index.sales.payment-methods.money-transfer',
         'info' => 'admin::app.configuration.index.sales.payment-methods.money-transfer-info',
-        'sort' => 7,
+        'sort' => 8,
         'fields' => [
             [
                 'name' => 'active',
@@ -2643,30 +2618,7 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
                 'type' => 'select',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'options' => $short,
                 'channel_based' => true,
                 'locale_based' => false,
             ],
