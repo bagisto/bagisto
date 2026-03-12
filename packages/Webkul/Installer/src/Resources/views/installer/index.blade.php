@@ -344,7 +344,7 @@
                                         <!-- Installer Language -->
                                         <x-installer::form.control-group class="mb-2.5">
                                             <x-installer::form.control-group.label>
-                                                @lang('Installation Wizard language')
+                                                @lang('installer::app.installer.index.start.language')
                                             </x-installer::form.control-group.label>
 
                                             <x-installer::form.control-group.control
@@ -700,7 +700,7 @@
                                     tabindex="0"
                                     @click="back"
                                 >
-                                    Back
+                                    @lang('installer::app.installer.index.back')
                                 </div>
 
                                 <button
