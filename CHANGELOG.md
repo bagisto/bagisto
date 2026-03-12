@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **v2.4.0-beta5 (12th of March 2026)** - **Release**
+
+* Included bug fix updates from version 2.3.
+
 ## **v2.4.0-beta4 (5th of March 2026)** - **Release**
 
 * Enhanced the Laravel AI SDK integration for Magic AI and improved the related configuration sections.
