@@ -55,6 +55,12 @@ class PhonePeController extends Controller
         }
 
         $paymentUrl = $this->phonePe->initiatePayment($cart);
+        
+        if(! $paymentUrl) {
+            session()->flash('error', trans('phonepe::app.response.phonepe-payment-failed'));
+
+            return redirect()->route('shop.checkout.cart.index');
+        }
 
         return redirect()->away($paymentUrl);
     }

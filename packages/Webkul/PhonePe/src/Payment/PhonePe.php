@@ -115,20 +115,28 @@ class PhonePe extends Payment
     /**
      * Check if merchant credentials are valid.
      */
-    public function initiatePayment($cart): string
+    public function initiatePayment($cart): mixed
     {
-        /**
-         * Prepare payment data payload for PhonePe API, including merchant order ID, amount, and callback URL.
-         * The callback URL will be used by PhonePe to notify about payment status changes.
-         */
-        $payload = $this->getPaymentData($cart);
+        try {
+            /**
+             * Prepare payment data payload for PhonePe API, including merchant order ID, amount, and callback URL.
+             * The callback URL will be used by PhonePe to notify about payment status changes.
+             */
+            $payload = $this->getPaymentData($cart);
 
-        $response = Http::withHeaders($this->getHeader())->post(
-            $this->getPaymentUrl() . '/checkout/v2/pay',
-            $payload
-        );
+            $response = Http::withHeaders($this->getHeader())->post(
+                $this->getPaymentUrl() . '/checkout/v2/pay',
+                $payload
+            );
 
-        return $response->json('redirectUrl') ?? null;
+            return $response->json('redirectUrl') ?? null;
+        } catch (\Exception $e) {
+            // Log the exception for debugging purposes
+            logger()->error('PhonePe Payment Initiation Failed: ' . $e->getMessage());
+
+            return null;
+        }
+        
     }
 
     /**
