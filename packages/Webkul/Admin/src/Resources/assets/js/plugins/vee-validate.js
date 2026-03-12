@@ -299,6 +299,7 @@ export default {
                     ...pl,
                     messages: {
                         ...pl.messages,
+                        confirmed: "Pole {field} nie zgadza się z polem potwierdzającym",
                         date_format: "Pole {field} musi mieć prawidłowy format czasu (np.: 23:59).",
                         decimal: "Pole {field} musi być prawidłową liczbą dziesiętną.",
                         phone: "Pole {field} musi zawierać prawidłowy numer telefonu",
