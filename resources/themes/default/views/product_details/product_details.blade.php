@@ -1,3 +1,17 @@
+<style>
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+</style>
+
+
+
 <section class="max-w-7xl mx-auto px-4 py-24">
 
     <!-- Top Section -->
@@ -118,16 +132,11 @@
 
 </div>
 
-            <!-- Buy Now Button -->
-            <!-- Add To Cart Section -->
-<form action="#" method="POST" class="flex items-center gap-6">
+   <!-- Buy Now Button -->
+   <!-- Add To Cart Section -->
+<form action="{{ route('shop.add.cart',$productFlat->url_key) }}" method="POST" class="flex items-center gap-6">
     @csrf
-
-    <input type="hidden" name="product_id" value="{{ $productFlat->product_id }}">
-
-    <!-- Quantity Selector -->
     <div class="flex items-center border-2 border-[#DFAA8B] rounded-[50px] overflow-hidden h-[47px]">
-
         <button type="button"
                 onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
                 class="px-4 text-[#371E0F] text-xl font-semibold">
@@ -135,10 +144,10 @@
         </button>
 
         <input type="number"
-               name="quantity"
-               value="1"
-               min="1"
-               class="w-14 text-center outline-none text-[#371E0F] font-roboto bg-transparent">
+       name="quantity"
+       value="1"
+       min="1"
+       class="w-14 text-center outline-none text-[#371E0F] font-roboto bg-transparent">
 
         <button type="button"
                 onclick="this.parentNode.querySelector('input[type=number]').stepUp()"

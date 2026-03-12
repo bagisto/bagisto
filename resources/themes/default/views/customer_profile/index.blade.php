@@ -15,21 +15,20 @@
 <div class="flex items-center gap-6 border-b border-gray-200 pb-6">
 
 <img 
-src="{{ auth()->guard('customer')->user()->image ?? asset('images/account.png') }}"
+src="{{ $customer->image ?? asset('images/account.png') }}"
 class="w-28 h-28 rounded-full object-cover">
 
 <div>
 <h3 class="text-2xl uppercase">
-  {{ auth()->guard('customer')->user()->first_name  . 
-  " " . auth()->guard('customer')->user()->last_name  ?? "John Doe" }}
+  {{ $customer->first_name  . " " . $customer->last_name  ?? "John Doe" }}
 </h3>
 
 <p class="text-gray-500 text-sm">
- {{ auth()->guard('customer')->user()->email ?? "john@example.com" }}
+ {{ $custome->remail ?? "john@example.com" }}
 </p>
 
 <p class="text-gray-500 text-sm">
-{{ auth()->guard('customer')->user()->phone ?? "+971 123 456 789" }}
+{{ $customer->phone ?? "+971 123 456 789" }}
 </p>
 </div>
 
@@ -46,28 +45,28 @@ class="w-28 h-28 rounded-full object-cover">
 <div>
 <label class="text-sm text-gray-500">First Name</label>
 <p class="text-lg">
-  {{ auth()->guard('customer')->user()->first_name ?? "John" }}
+  {{ $customer->first_name  ?? "John" }}
 </p>
 </div>
 
 <div>
 <label class="text-sm text-gray-500">Last Name</label>
 <p class="text-lg">
-  {{ auth()->guard('customer')->user()->last_name ?? "Doe" }}
+  {{ $customer->last_name  ?? "Doew" }}
 </p>
 </div>
 
 <div>
 <label class="text-sm text-gray-500">Email</label>
 <p class="text-lg">
-   {{ auth()->guard('customer')->user()->email ?? "john@example.com" }}
+ {{ $custome->remail ?? "john@example.com" }}
 </p>
 </div>
 
 <div>
 <label class="text-sm text-gray-500">Phone</label>
 <p class="text-lg">
-  {{ auth()->guard('customer')->user()->phone ?? "+971 123 456 789" }}
+{{ $customer->phone ?? "+971 123 456 789" }}
 </p>
 </div>
 

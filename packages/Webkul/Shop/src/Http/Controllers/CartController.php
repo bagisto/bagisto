@@ -1,17 +1,16 @@
 <?php
 
 namespace Webkul\Shop\Http\Controllers;
+
 use Illuminate\Http\Request;
-use Webkul\Product\Repositories\ProductRepository;
 use Illuminate\Support\Facades\Auth;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Checkout\Models\Cart;
 use Webkul\Product\Models\Product;
-
+use Webkul\Product\Models\ProductFlat;
 
 class CartController extends Controller
 {
-
     public function index()
     {
         if (! core()->getConfigData('sales.checkout.shopping_cart.cart_page')) {
@@ -21,91 +20,177 @@ class CartController extends Controller
         return view('shop::checkout.cart.index');
     }
 
+    // cart index page for guest user and logeed in user
     public function indexCart()
-{
-    $user = Auth::user();
-
-    if (!$user) {
-        return redirect()->route('shop.home.index')->with('error', 'Please login to view your cart.');
-    }
-
-    // Sabhi carts for this user
-    $carts = Cart::where('customer_id', $user->id)->get();
-
-    // Merge all cart items from all carts
-    $cartItems = collect(); // empty collection
-    foreach ($carts as $cart) {
-        $cartItems = $cartItems->merge(
-            $cart->items()->with(['product', 'professional'])->get()
-        );
-    }
-
-    // Calculate totals
-    $subtotal = $cartItems->sum(function ($item) {
-        return $item->quantity * ($item->product->price ?? 0);
-    });
-
-    $discount = 0; // implement discount logic if needed
-    $total = $subtotal - $discount;
-
-    return view('shop::cart.index', compact('cartItems', 'subtotal', 'discount', 'total'));
-}
-
-    public function addToCart(Request $req)
     {
-    
-    $user = Auth::user();
+        $logged_id = Auth::check() ? Auth::id() : null;
 
-    // Get product
-    $product = Product::findOrFail($req->product_id);
+        $cartItems = collect();
+        $subtotal = 0;
+        $discount = 0;
+        $total = 0;
 
-    // Product price
-    $price = $product->price;
+        // LOGGED IN USER
+        if ($logged_id) {
 
-    // Quantity
-    $qty = $req->quantity;
+            $carts = Cart::where('customer_id', $logged_id)->get();
 
-    // Calculate total
-    $total = $price * $qty;
+            foreach ($carts as $cart) {
+                $cartItems = $cartItems->merge(
+                    $cart->items()->with(['product', 'professional'])->get()
+                );
+            }
+        }
 
-    // Create Cart  
-    $cart = Cart::create([
-    'customer_id'        => auth()->id() ?? null,
-    'customer_email'     => $user->email ?? null,
-    'customer_first_name'=> $user->first_name ?? null,
-    'customer_last_name' => $user->last_name ?? null,
-    'channel_id'         => core()->getCurrentChannel()->id,
-    'currency_code'      => core()->getCurrentCurrencyCode(),
-    'items_qty'          => $qty,
-    'sub_total'          => $total,
-    'grand_total'        => $total,
-    ]);
+        // GUEST USER
+        else {
 
-    
-// Create Cart Item
-$cartItem = CartItem::create([
-    'cart_id'        => $cart->id,
-    'product_id'     => $req->product_id,
-    'professional_id'=> $req->professional_id,
-    'quantity'       => $qty,
-    'price'          => $price,
-    'base_price'     => $price,
-    'total'          => $total,
-    'base_total'     => $total,
-    'type'           => 'booking',
-    'additional'     => json_encode([
-    'pending_booking' => true
-    ]),
-]);
+            $cartId = session()->get('guest_cart_id');
 
-if ($cart && $cartItem) {
-    return redirect()->route('shop.cart.index')
-        ->with('success', 'Service Added to Cart Successfully');
-} else {
-    return redirect()->route('shop.cart.index')
-        ->with('failed', 'Something Went Wrong, Try Again');
+            if ($cartId) {
+
+                $cart = Cart::find($cartId);
+
+                if ($cart) {
+                    $cartItems = $cart->items()->with(['product', 'professional'])->get();
+                }
+            }
+        }
+
+        // CALCULATE TOTALS
+        $subtotal = $cartItems->sum(function ($item) {
+            return $item->quantity * ($item->product->price ?? 0);
+        });
+
+        $total = $subtotal - $discount;
+
+        return view('shop::cart.index', compact('cartItems', 'subtotal', 'discount', 'total'));
+    }
+
+
+    public function addToCart(Request $req, $slug)
+    {
+        $product = ProductFlat::where('url_key', $slug)->firstOrFail();
+        $product_type = $product->type;
+        $qty = $req->quantity ?? 1;
+        $total = $product->price * $qty;
+        $professional_id = $req->professional_id ?? null;
+
+        $logged_id = Auth::check() ? Auth::id() : null;
+
+        // GUEST USER
+        if (!$logged_id) {
+
+            // check cart in session
+            $cartId = session()->get('guest_cart_id');
+
+            if ($cartId) {
+                $cart = Cart::find($cartId);
+            }
+
+            // if cart not exist create new
+            if (!isset($cart)) {
+
+                $cart = Cart::create([
+                    'customer_id'   => null,
+                    'is_guest'      => 1,
+                    'channel_id'    => core()->getCurrentChannel()->id,
+                    'currency_code' => core()->getCurrentCurrencyCode(),
+                    'items_qty'     => 0,
+                    'sub_total'     => 0,
+                    'grand_total'   => 0,
+                ]);
+
+                session()->put('guest_cart_id', $cart->id);
+            }
+
+            // create cart item
+            CartItem::create([
+                'cart_id'        => $cart->id,
+                'product_id'     => $product->product_id,
+                'quantity'       => $qty,
+                'price'          => $product->price,
+                'base_price'     => $product->price,
+                'total'          => $total,
+                'base_total'     => $total,
+                'type'           => $product_type,
+                'professional_id' => $professional_id
+            ]);
+
+            // update cart totals
+            $cart->items_qty += $qty;
+            $cart->sub_total += $total;
+            $cart->grand_total += $total;
+            $cart->save();
+
+            return redirect()->route('shop.cart.index')
+                ->with('success', 'Product added to cart');
+        } else {
+
+            // check cart in session
+            $cartId = session()->get('guest_cart_id');
+
+            if ($cartId) {
+                $cart = Cart::find($cartId);
+            }
+
+            // if cart not exist create new
+            if (!isset($cart)) {
+
+                $cart = Cart::create([
+                    'customer_id'   => null,
+                    'is_guest'      => 1,
+                    'channel_id'    => core()->getCurrentChannel()->id,
+                    'currency_code' => core()->getCurrentCurrencyCode(),
+                    'items_qty'     => 0,
+                    'sub_total'     => 0,
+                    'grand_total'   => 0,
+                ]);
+
+                session()->put('guest_cart_id', $cart->id);
+            }
+
+            // create cart item
+            CartItem::create([
+                'cart_id'        => $cart->id,
+                'product_id'     => $product->product_id,
+                'quantity'       => $qty,
+                'price'          => $product->price,
+                'base_price'     => $product->price,
+                'total'          => $total,
+                'base_total'     => $total,
+                'type'           => $product_type,
+                'professional_id' => $professional_id
+            ]);
+
+            // update cart totals
+            $cart->items_qty += $qty;
+            $cart->sub_total += $total;
+            $cart->grand_total += $total;
+            $cart->save();
+
+            return redirect()->route('shop.cart.index')
+                ->with('success', 'Product added to cart');
+
+        }
+    }
+
+
+    public function removeCartItem($id)
+    {
+        $item = CartItem::findOrFail($id);
+
+        $cart = $item->cart;
+
+        $cart->items_qty -= $item->quantity;
+        $cart->sub_total -= $item->total;
+        $cart->grand_total -= $item->total;
+
+        $cart->save();
+
+        $item->delete();
+
+        return back()->with('success', 'Item removed from cart');
+
+    }
 }
-
-}
-}
-

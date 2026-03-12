@@ -125,7 +125,7 @@
 </section>
 
 <!-- MODAL -->
-<form action="{{ route('shop.add.cart') }}" id="bookingForm" method="post">
+<form action="{{ route('shop.add.cart', $serviceFlat->url_key) }}" id="bookingForm" method="post">
 @csrf
 
 <input type="hidden" name="product_id" value="{{ $serviceFlat->product_id }}">

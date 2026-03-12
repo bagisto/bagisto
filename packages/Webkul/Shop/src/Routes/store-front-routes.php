@@ -11,41 +11,30 @@ use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
-use Webkul\Admin\Http\Controllers\Settings\LocaleController;
-use App\Http\Middleware\LocaleMiddleware;
 
 // Main Landing Page
 Route::view('/', 'shop::home.landing')->name('spa.home');
 
 // Inner Landing Page
-
 Route::get('/spa-services', [HomeController::class, 'index'])->name('shop.home.index');
-
 Route::get('sbt-perfumes', [HomeController::class,'sbtPerfumeIndex'])->name('sbt.perfume.index');
 Route::post('sbt-perfumes', [SearchController::class,'sbtPerfumeSearch'])->name('sbt.perfumes.search');
-
 Route::get('spa-products', [HomeController::class,'spaProductsIndex'])->name('spa.product.index');
 Route::post('spa-products', [SearchController::class,'spaProductsSearch'])->name('spa.product.search');
-
 Route::get('flower-products', [HomeController::class,'flowerProductsIndex'])->name('flower.product.index');
 Route::post('flower-products', [SearchController::class,'flowerProductsSearch'])->name('flower.product.search');
 
-
-
 // Header Routes
-
 // Language Switch
 Route::get('/switch/lang/{ln}', [HomeController::class,'switchLanguage'])->name('switch.language');
-
-// Header search box
-Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');
-
 // Search box
 Route::get('/booking/search', [SearchController::class, 'serviceSearchResult'])->name('booking.search');
-
 // customer profile
 Route::get('customer/profile', [CustomerController::class, 'customerProfileIndex'])->name('customer.profile.index');
-
+// Cart routes
+Route::get('cart/index', [CartController::class,'indexCart'])->name('shop.cart.index');
+Route::post('cart/add/{slug}', [CartController::class,'addToCart'])->name('shop.add.cart');
+Route::delete('cart/remove/{id}', [CartController::class,'removeCartItem'])->name('shop.remove.cart');
 
 
 // Services as per category
@@ -55,7 +44,6 @@ Route::get('/services/{slug}', [HomeController::class, 'servicesByCategory'])
 Route::get('/single/service/{slug}', [HomeController::class, 'singleServicesByCategory'])
     ->name('shop.home.services.single');
 
-
 // Service details page
 Route::get('/service/{url_key}', [HomeController::class, 'servicesDetails'])
     ->name('shop.home.service.details');
@@ -64,7 +52,7 @@ Route::get('/service/{url_key}', [HomeController::class, 'servicesDetails'])
 Route::get('/product/{url_key}', [HomeController::class, 'productDetails'])
     ->name('shop.home.product.details');
 
-// Inner pagesf
+// Inner pages
 // Services page
 Route::get('/services', [HomeController::class, 'allServices'])
     ->name('shop.home.all.services');
@@ -84,12 +72,8 @@ Route::get('contact', [HomeController::class, 'contactUs'])
 Route::post('contact-us/send-mail', [HomeController::class, 'sendContactUsMail'])
     ->name('shop.home.contact_us.send_mail');
 
+// Default routes
 Route::post('search/upload', [SearchController::class, 'upload'])->name('shop.search.upload');
-
-Route::post('add/cart', [CartController::class,'addToCart'])->name('shop.add.cart');
-
-Route::get('cart/index', [CartController::class,'indexCart'])->name('shop.cart.index');
-
 
 /**
  * Subscription routes.
@@ -121,7 +105,6 @@ Route::controller(ProductController::class)->group(function () {
 Route::get('booking-slots/{id}', [BookingProductController::class, 'index'])
     ->name('shop.booking-product.slots.index');
 
-
 /**
  * CMS pages.
  */
@@ -135,3 +118,6 @@ Route::get('page/{slug}', [PageController::class, 'view'])
 Route::fallback(ProductsCategoriesProxyController::class.'@index')
     ->name('shop.product_or_category.index')
     ->middleware('cache.response');
+
+// Header search box
+Route::get('search', [SearchController::class, 'index'])->name('shop.search.index');

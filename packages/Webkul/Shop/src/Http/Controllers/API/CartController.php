@@ -23,7 +23,8 @@ class CartController extends APIController
     public function __construct(
         protected ProductRepository $productRepository,
         protected CartRuleCouponRepository $cartRuleCouponRepository
-    ) {}
+    ) {
+    }
 
     /**
      * Cart.
@@ -177,7 +178,7 @@ class CartController extends APIController
 
         $cart = Cart::getCart();
 
-        $address = (new CartAddress)->fill([
+        $address = (new CartAddress())->fill([
             'country' => request()->input('country'),
             'state' => request()->input('state'),
             'postcode' => request()->input('postcode'),
