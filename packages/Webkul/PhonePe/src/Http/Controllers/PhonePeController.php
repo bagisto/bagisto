@@ -4,6 +4,7 @@ namespace Webkul\PhonePe\Http\Controllers;
 
 use Webkul\Checkout\Facades\Cart;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 use Webkul\PhonePe\Payment\PhonePe;
 use Illuminate\Support\Facades\Cache;
 use Webkul\Sales\Transformers\OrderResource;
@@ -165,6 +166,159 @@ class PhonePeController extends Controller
             session()->flash('error', trans('phonepe::app.response.order-creation-failed'));
 
             return redirect()->route('shop.checkout.cart.index');
+        }
+    }
+
+    /**
+     * Handle incoming webhook notifications from PhonePe.
+     *
+     * PhonePe POSTs a JSON payload to this endpoint after every payment event.
+     * The raw payload is logged so it can be debugged at any time.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function webhook()
+    {
+        $rawPayload  = request()->getContent();
+        $payload     = request()->all();
+
+        /**
+         * Log the raw incoming webhook payload for debugging.
+         * Logs are written to storage/logs/laravel.log (or the configured channel).
+         */
+        Log::channel('daily')->info('[PhonePe Webhook] Received', [
+            'timestamp'   => now()->toIso8601String(),
+            'ip'          => request()->ip(),
+            'headers'     => request()->headers->all(),
+            'raw_payload' => $rawPayload,
+            'payload'     => $payload,
+        ]);
+
+        try {
+            $merchantOrderId = $payload['merchantOrderId']
+                ?? $payload['data']['merchantOrderId']
+                ?? null;
+
+            $state = strtoupper(
+                $payload['type']
+                ?? $payload['state']
+                ?? $payload['data']['state']
+                ?? ''
+            );
+
+            Log::channel('daily')->info('[PhonePe Webhook] Parsed event', [
+                'merchantOrderId' => $merchantOrderId,
+                'state'          => $state,
+            ]);
+
+            /**
+             * Only process CHECKOUT_ORDER_COMPLETED events (or a SUCCESS state).
+             * All other events (PENDING, FAILED, etc.) are acknowledged but ignored.
+             */
+            if (! $merchantOrderId || ! in_array($state, ['CHECKOUT_ORDER_COMPLETED', 'COMPLETED', 'SUCCESS'], true)) {
+                Log::channel('daily')->warning('[PhonePe Webhook] Skipped – not a successful payment event', [
+                    'merchantOrderId' => $merchantOrderId,
+                    'state'          => $state,
+                ]);
+
+                return response()->json(['status' => 'skipped'], 200);
+            }
+
+            /**
+             * Verify the actual payment status via PhonePe API before acting on
+             * the webhook to protect against forged / replayed callbacks.
+             */
+            $response = $this->phonePe->checkPaymentStatus($merchantOrderId);
+
+            Log::channel('daily')->info('[PhonePe Webhook] Verified payment status', [
+                'merchantOrderId' => $merchantOrderId,
+                'api_response'   => $response,
+            ]);
+
+            $verifiedState = strtoupper($response['data']['state'] ?? '');
+
+            if (! in_array($verifiedState, ['COMPLETED', 'SUCCESS'], true)) {
+                Log::channel('daily')->warning('[PhonePe Webhook] Payment not confirmed by API', [
+                    'merchantOrderId' => $merchantOrderId,
+                    'verifiedState'  => $verifiedState,
+                ]);
+
+                return response()->json(['status' => 'payment_not_confirmed'], 200);
+            }
+
+            /**
+             * Retrieve cart ID stored in metaInfo.udf1 during payment initiation.
+             */
+            $cartId = $response['data']['metaInfo']['udf1'] ?? null;
+
+            if (! $cartId) {
+                Log::channel('daily')->error('[PhonePe Webhook] Cart ID missing in API response', [
+                    'merchantOrderId' => $merchantOrderId,
+                ]);
+
+                return response()->json(['status' => 'cart_not_found'], 200);
+            }
+
+            $cart = $this->cartRepository->find($cartId);
+
+            if (! $cart || ! $cart->is_active) {
+                Log::channel('daily')->warning('[PhonePe Webhook] Cart inactive or not found – order may already exist', [
+                    'merchantOrderId' => $merchantOrderId,
+                    'cartId'         => $cartId,
+                ]);
+
+                return response()->json(['status' => 'cart_inactive'], 200);
+            }
+
+            Cart::setCart($cart);
+            Cart::collectTotals();
+
+            $data = (new OrderResource($cart))->jsonSerialize();
+
+            $data['payment']['additional'] = [
+                'phonePe_merchant_order_id' => $merchantOrderId,
+                'phonePe_token'            => $response['data']['token'] ?? '',
+                'phonePe_status'           => $verifiedState,
+                'phonePe_source'           => 'webhook',
+            ];
+
+            $order = $this->orderRepository->create($data);
+
+            $this->orderRepository->update(['status' => 'processing'], $order->id);
+
+            if ($order->canInvoice()) {
+                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+
+                $this->orderTransactionRepository->create([
+                    'transaction_id' => $response['data']['paymentDetails'][0]['transactionId'] ?? '',
+                    'status'         => self::PAYMENT_SUCCESS,
+                    'type'           => $order->payment->method,
+                    'payment_method' => $order->payment->method,
+                    'order_id'       => $order->id,
+                    'invoice_id'     => $invoice->id,
+                    'amount'         => $order->base_grand_total,
+                    'data'           => json_encode($response['raw']),
+                ]);
+            }
+
+            Cart::deActivateCart();
+
+            Log::channel('daily')->info('[PhonePe Webhook] Order created successfully', [
+                'merchantOrderId' => $merchantOrderId,
+                'orderId'        => $order->id,
+            ]);
+
+            return response()->json(['status' => 'success', 'order_id' => $order->id], 200);
+        } catch (\Exception $e) {
+            report($e);
+
+            Log::channel('daily')->error('[PhonePe Webhook] Exception', [
+                'message' => $e->getMessage(),
+                'trace'   => $e->getTraceAsString(),
+                'payload' => $payload,
+            ]);
+
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
     }
 
