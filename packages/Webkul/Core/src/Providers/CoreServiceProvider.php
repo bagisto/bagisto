@@ -54,6 +54,8 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('invoice:cron')->dailyAt('3:00');
+
+            $this->registerExchangeRateSchedule($schedule);
         });
 
         $this->app->register(EventServiceProvider::class);
@@ -73,6 +75,32 @@ class CoreServiceProvider extends ServiceProvider
                 InvoiceOverdueCron::class,
                 TranslationsChecker::class,
             ]);
+        }
+    }
+
+    /**
+     * Register the exchange rate update schedule based on core configuration.
+     */
+    protected function registerExchangeRateSchedule(Schedule $schedule): void
+    {
+        try {
+            if (! core()->getConfigData('general.exchange_rates.schedule.enabled')) {
+                return;
+            }
+
+            $frequency = core()->getConfigData('general.exchange_rates.schedule.frequency') ?: 'daily';
+
+            $time = core()->getConfigData('general.exchange_rates.schedule.time') ?: '00:00';
+
+            $command = $schedule->command('exchange-rate:update');
+
+            match ($frequency) {
+                'weekly' => $command->weeklyOn(1, $time),
+                'monthly' => $command->monthlyOn(1, $time),
+                default => $command->dailyAt($time),
+            };
+        } catch (\Exception) {
+            // Silently skip when database is not yet available (e.g., during installation).
         }
     }
 

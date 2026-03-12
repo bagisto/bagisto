@@ -3991,7 +3991,7 @@ return [
             'title' => '配置',
 
             'general' => [
-                'info' => '设置单位选项。',
+                'info' => '常规',
                 'title' => '常规',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => '体验增强',
                         'measurement' => '测量',
                         'targeting-advertising' => '目标广告',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => '配置汇率 API 服务和凭据。',
+                    'title' => '汇率',
+
+                    'settings' => [
+                        'default-service' => '默认服务',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => '常规设置',
+                        'title-info' => '选择用于自动货币汇率更新的默认汇率服务。',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => '输入您的 Fixer.io API 密钥以自动更新汇率。',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => '输入您的 ExchangeRate-API 密钥以自动更新汇率 (https://www.exchangerate-api.com)。',
+                    ],
+
+                    'schedule' => [
+                        'daily' => '每天',
+                        'enabled' => '启用',
+                        'frequency' => '频率',
+                        'monthly' => '每月',
+                        'time' => '开始时间 (HH:MM)',
+                        'title' => '计划导入',
+                        'title-info' => '使用已配置的 API 服务按计划自动更新汇率。',
+                        'weekly' => '每周',
                     ],
                 ],
 

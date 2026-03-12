@@ -3991,7 +3991,7 @@ return [
             'title' => 'Konfiguration',
 
             'general' => [
-                'info' => 'Einheitsoptionen festlegen.',
+                'info' => 'Allgemein',
                 'title' => 'Allgemein',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'Erlebnisverbesserung',
                         'measurement' => 'Messung',
                         'targeting-advertising' => 'Targeting und Werbung',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Wechselkurs-API-Dienste und Zugangsdaten konfigurieren.',
+                    'title' => 'Wechselkurse',
+
+                    'settings' => [
+                        'default-service' => 'Standarddienst',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Allgemeine Einstellungen',
+                        'title-info' => 'Wählen Sie den Standard-Wechselkursdienst für automatische Währungskursaktualisierungen aus.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Geben Sie Ihren Fixer.io API Key für automatische Wechselkursaktualisierungen ein.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Geben Sie Ihren ExchangeRate-API Key für automatische Wechselkursaktualisierungen ein (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Täglich',
+                        'enabled' => 'Aktiviert',
+                        'frequency' => 'Häufigkeit',
+                        'monthly' => 'Monatlich',
+                        'time' => 'Startzeit (HH:MM)',
+                        'title' => 'Geplanter Import',
+                        'title-info' => 'Wechselkurse automatisch nach einem Zeitplan mit dem konfigurierten API-Dienst aktualisieren.',
+                        'weekly' => 'Wöchentlich',
                     ],
                 ],
 

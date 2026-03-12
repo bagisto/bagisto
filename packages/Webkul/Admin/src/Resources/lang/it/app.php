@@ -3991,7 +3991,7 @@ return [
             'title' => 'Configurazione',
 
             'general' => [
-                'info' => 'Imposta le opzioni delle unità.',
+                'info' => 'Generale',
                 'title' => 'Generale',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'Miglioramento dell\'esperienza',
                         'measurement' => 'Misurazione',
                         'targeting-advertising' => 'Targeting e pubblicità',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Configura i servizi API per i tassi di cambio e le credenziali.',
+                    'title' => 'Tassi di Cambio',
+
+                    'settings' => [
+                        'default-service' => 'Servizio Predefinito',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Impostazioni Generali',
+                        'title-info' => 'Seleziona il servizio predefinito per i tassi di cambio da utilizzare per gli aggiornamenti automatici dei tassi di valuta.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Inserisci la tua chiave API di Fixer.io per gli aggiornamenti automatici dei tassi di cambio.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Inserisci la tua chiave ExchangeRate-API per gli aggiornamenti automatici dei tassi di cambio (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Giornaliero',
+                        'enabled' => 'Abilitato',
+                        'frequency' => 'Frequenza',
+                        'monthly' => 'Mensile',
+                        'time' => 'Ora di Inizio (HH:MM)',
+                        'title' => 'Importazione Programmata',
+                        'title-info' => 'Aggiorna automaticamente i tassi di cambio su base programmata utilizzando il servizio API configurato.',
+                        'weekly' => 'Settimanale',
                     ],
                 ],
 

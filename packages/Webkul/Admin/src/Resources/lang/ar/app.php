@@ -3991,7 +3991,7 @@ return [
             'title' => 'الإعدادات',
 
             'general' => [
-                'info' => 'تعيين خيارات الوحدات.',
+                'info' => 'عام',
                 'title' => 'عام',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'تحسينات التجربة',
                         'measurement' => 'القياسات',
                         'targeting-advertising' => 'الاستهداف والإعلانات',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'تكوين خدمات وبيانات اعتماد واجهة برمجة تطبيقات أسعار الصرف.',
+                    'title' => 'أسعار الصرف',
+
+                    'settings' => [
+                        'default-service' => 'الخدمة الافتراضية',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'الإعدادات العامة',
+                        'title-info' => 'حدد خدمة أسعار الصرف الافتراضية لاستخدامها في التحديثات التلقائية لأسعار العملات.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'أدخل مفتاح Fixer.io API الخاص بك لتحديثات أسعار الصرف التلقائية.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'أدخل مفتاح ExchangeRate-API الخاص بك لتحديثات أسعار الصرف التلقائية (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'يومي',
+                        'enabled' => 'مفعل',
+                        'frequency' => 'التكرار',
+                        'monthly' => 'شهري',
+                        'time' => 'وقت البدء (HH:MM)',
+                        'title' => 'الاستيراد المجدول',
+                        'title-info' => 'تحديث أسعار الصرف تلقائيًا وفقًا لجدول زمني باستخدام خدمة API المكونة.',
+                        'weekly' => 'أسبوعي',
                     ],
                 ],
 

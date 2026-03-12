@@ -3991,7 +3991,7 @@ return [
             'title' => 'Налаштування',
 
             'general' => [
-                'info' => 'Встановіть параметри одиниць.',
+                'info' => 'Загальне',
                 'title' => 'Загальне',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'Покращення досвіду',
                         'measurement' => 'Вимірювання',
                         'targeting-advertising' => 'Цільова реклама',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Налаштуйте сервіси та облікові дані API обмінних курсів.',
+                    'title' => 'Обмінні курси',
+
+                    'settings' => [
+                        'default-service' => 'Сервіс за замовчуванням',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Загальні налаштування',
+                        'title-info' => 'Виберіть сервіс обмінних курсів за замовчуванням для автоматичного оновлення курсів валют.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Введіть ваш API-ключ Fixer.io для автоматичного оновлення обмінних курсів.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Введіть ваш ключ ExchangeRate-API для автоматичного оновлення обмінних курсів (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Щоденно',
+                        'enabled' => 'Увімкнено',
+                        'frequency' => 'Частота',
+                        'monthly' => 'Щомісячно',
+                        'time' => 'Час початку (HH:MM)',
+                        'title' => 'Запланований імпорт',
+                        'title-info' => 'Автоматичне оновлення обмінних курсів за розкладом з використанням налаштованого сервісу API.',
+                        'weekly' => 'Щотижнево',
                     ],
                 ],
 

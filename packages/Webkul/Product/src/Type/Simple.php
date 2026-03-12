@@ -300,7 +300,26 @@ class Simple extends AbstractType
          * and retrieve the formatted options from the database again, similar to how we handled the base price above.
          */
         if (! empty($item->additional['customizable_options'])) {
-            $formattedCustomizableOptions = $this->formatRequestedCustomizableOptions($item->additional['customizable_options']);
+            $customizableOptions = $item->additional['customizable_options'];
+
+            /**
+             * For file type options, the UploadedFile object is lost after JSON serialization/deserialization.
+             * We restore the file paths from the stored formatted customizable options so that the emptiness
+             * check in formatRequestedCustomizableOptions does not incorrectly skip non-required file options.
+             */
+            if (! empty($item->additional['formatted_customizable_options'])) {
+                foreach ($item->additional['formatted_customizable_options'] as $formattedOption) {
+                    if (
+                        $formattedOption['type'] === 'file'
+                        && isset($customizableOptions[$formattedOption['id']])
+                        && ! empty($formattedOption['prices'][0]['label'])
+                    ) {
+                        $customizableOptions[$formattedOption['id']][0] = $formattedOption['prices'][0]['label'];
+                    }
+                }
+            }
+
+            $formattedCustomizableOptions = $this->formatRequestedCustomizableOptions($customizableOptions);
 
             $basePrice += round($formattedCustomizableOptions->sum('total_price'), 4);
         }
