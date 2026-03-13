@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'روش پرداخت',
+
+                'Paytm' => [
+                    'redirecting' => 'در چند ثانیه به Paytm هدایت خواهید شد.',
+                    'cart-empty' => 'سبد خرید شما خالی است.',
+                    'general-error' => 'مشکلی پیش آمد. لطفاً دوباره تلاش کنید.',
+                    'missing-cart-id' => 'شناسه سبد خرید موجود نیست.',
+                    'cart-not-found' => 'سبد خرید پیدا نشد.',
+                    'checksum-failed' => 'اعتبارسنجی Checksum ناموفق بود.',
+                    'payment-failed' => 'پرداخت Paytm ناموفق بود یا لغو شد. لطفاً دوباره تلاش کنید.',
+                ],
             ],
 
             'shipping' => [

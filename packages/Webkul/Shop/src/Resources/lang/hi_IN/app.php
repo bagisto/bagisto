@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'भुगतान विधि',
+
+                'Paytm' => [
+                    'redirecting' => 'आपको कुछ ही सेकंड में Paytm पर रीडायरेक्ट किया जाएगा।',
+                    'cart-empty' => 'आपका कार्ट खाली है।',
+                    'general-error' => 'कुछ गलत हो गया। कृपया फिर से प्रयास करें।',
+                    'missing-cart-id' => 'कार्ट आईडी नहीं मिली।',
+                    'cart-not-found' => 'कार्ट नहीं मिला।',
+                    'checksum-failed' => 'चेकसम सत्यापन विफल रहा।',
+                    'payment-failed' => 'Paytm भुगतान विफल या रद्द हो गया। कृपया फिर से प्रयास करें।',
+                ],
             ],
 
             'shipping' => [

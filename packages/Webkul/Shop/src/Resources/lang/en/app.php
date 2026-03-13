@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'Payment Method',
+
+                'Paytm' => [
+                    'redirecting' => 'You will be redirected to Paytm in a few seconds.',
+                    'cart-empty' => 'Your cart is empty.',
+                    'general-error' => 'Something went wrong. Please try again.',
+                    'missing-cart-id' => 'Missing cart id.',
+                    'cart-not-found' => 'Cart not found.',
+                    'checksum-failed' => 'Checksum validation failed.',
+                    'payment-failed' => 'Paytm payment failed or cancelled. Please try again.',
+                ],
             ],
 
             'shipping' => [

@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => '付款方法',
+
+                'Paytm' => [
+                    'redirecting' => '您将在几秒钟内被重定向到 Paytm。',
+                    'cart-empty' => '您的购物车为空。',
+                    'general-error' => '出现错误。请再试一次。',
+                    'missing-cart-id' => '缺少购物车ID。',
+                    'cart-not-found' => '未找到购物车。',
+                    'checksum-failed' => 'Checksum 验证失败。',
+                    'payment-failed' => 'Paytm 支付失败或已取消。请再试一次。',
+                ],
             ],
 
             'shipping' => [

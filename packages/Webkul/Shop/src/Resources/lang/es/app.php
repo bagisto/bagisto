@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'Método de Pago',
+
+                'Paytm' => [
+                    'redirecting' => 'Serás redirigido a Paytm en unos segundos.',
+                    'cart-empty' => 'Tu carrito está vacío.',
+                    'general-error' => 'Algo salió mal. Por favor, inténtalo de nuevo.',
+                    'missing-cart-id' => 'Falta el ID del carrito.',
+                    'cart-not-found' => 'Carrito no encontrado.',
+                    'checksum-failed' => 'La validación de checksum falló.',
+                    'payment-failed' => 'El pago de Paytm falló o fue cancelado. Por favor, inténtalo de nuevo.',
+                ],
             ],
 
             'shipping' => [

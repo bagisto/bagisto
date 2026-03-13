@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'ගෙවීම් ක්රමය',
+
+                'Paytm' => [
+                    'redirecting' => 'තත්පර කිහිපයකින් ඔබ Paytm වෙත යොමු කරනු ලැබේ.',
+                    'cart-empty' => 'ඔබගේ කරට් එක හිස්ය.',
+                    'general-error' => 'කිසියම් දෝෂයක් ඇතිවිය. කරුණාකර නැවත උත්සාහ කරන්න.',
+                    'missing-cart-id' => 'කරට් ID නොමැත.',
+                    'cart-not-found' => 'කරට් එක හමු නොවීය.',
+                    'checksum-failed' => 'Checksum වලංගු කිරීම අසාර්ථක විය.',
+                    'payment-failed' => 'Paytm ගෙවීම අසාර්ථක විය හෝ අවලංගු කරන ලදී. කරුණාකර නැවත උත්සාහ කරන්න.',
+                ],
             ],
 
             'shipping' => [
