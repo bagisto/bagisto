@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'Zahlungsmethode',
+
+                'Paytm' => [
+                    'redirecting' => 'Sie werden in wenigen Sekunden zu Paytm weitergeleitet.',
+                    'cart-empty' => 'Ihr Warenkorb ist leer.',
+                    'general-error' => 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
+                    'missing-cart-id' => 'Warenkorb-ID fehlt.',
+                    'cart-not-found' => 'Warenkorb nicht gefunden.',
+                    'checksum-failed' => 'Checksum-Validierung fehlgeschlagen.',
+                    'payment-failed' => 'Paytm-Zahlung fehlgeschlagen oder abgebrochen. Bitte versuchen Sie es erneut.',
+                ],
             ],
 
             'shipping' => [

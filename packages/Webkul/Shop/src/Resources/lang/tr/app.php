@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'Ödeme Yöntemi',
+
+                'Paytm' => [
+                    'redirecting' => 'Birkaç saniye içinde Paytm\'e yönlendirileceksiniz.',
+                    'cart-empty' => 'Sepetiniz boş.',
+                    'general-error' => 'Bir şeyler yanlış gitti. Lütfen tekrar deneyin.',
+                    'missing-cart-id' => 'Sepet kimliği eksik.',
+                    'cart-not-found' => 'Sepet bulunamadı.',
+                    'checksum-failed' => 'Checksum doğrulaması başarısız oldu.',
+                    'payment-failed' => 'Paytm ödemesi başarısız oldu veya iptal edildi. Lütfen tekrar deneyin.',
+                ],
             ],
 
             'shipping' => [

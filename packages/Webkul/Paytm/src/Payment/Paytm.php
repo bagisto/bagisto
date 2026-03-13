@@ -52,9 +52,9 @@ class Paytm extends Payment
      */
     public function getPaytmUrl()
     {
-        return $this->getConfigData('environment') === 'production'
-            ? 'https://securegw.paytm.in/order/process'
-            : 'https://securegw-stage.paytm.in/order/process';
+        return $this->getConfigData('sandbox')
+            ? 'https://securegw-stage.paytm.in/order/process'
+            : 'https://securegw.paytm.in/order/process';
     }
 
     /**
@@ -66,7 +66,7 @@ class Paytm extends Payment
     {
         $url = $this->getConfigData('image');
 
-        return $url ? Storage::url($url) : Storage::url('paytm/paytm.png');
+        return $url ? Storage::url($url) : bagisto_asset('images/paytm.png', 'shop');
     }
 
     /**
@@ -98,9 +98,6 @@ class Paytm extends Payment
             $fields,
             (string) $this->getConfigData('merchant_key')
         );
-
-        \Log::info('$fields => '. print_r($fields, true));
-        \Log::info('merchant_key => '. print_r($this->getConfigData('merchant_key'), true));
 
         return $fields;
     }
@@ -137,9 +134,9 @@ class Paytm extends Payment
      */
     protected function getWebsite()
     {
-        return $this->getConfigData('environment') === 'production'
-            ? 'DEFAULT'
-            : 'WEBSTAGING';
+        return $this->getConfigData('sandbox')
+            ? 'WEBSTAGING'
+            : 'DEFAULT';
     }
 
     /**

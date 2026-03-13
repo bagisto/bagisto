@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'طريقة الدفع',
+
+                'Paytm' => [
+                    'redirecting' => 'سيتم توجيهك إلى Paytm خلال بضع ثوانٍ.',
+                    'cart-empty' => 'سلة التسوق الخاصة بك فارغة.',
+                    'general-error' => 'حدث خطأ ما. يرجى المحاولة مرة أخرى.',
+                    'missing-cart-id' => 'معرّف السلة مفقود.',
+                    'cart-not-found' => 'لم يتم العثور على السلة.',
+                    'checksum-failed' => 'فشل التحقق من Checksum.',
+                    'payment-failed' => 'فشل أو تم إلغاء الدفع عبر Paytm. يرجى المحاولة مرة أخرى.',
+                ],
             ],
 
             'shipping' => [

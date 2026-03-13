@@ -29,7 +29,7 @@ class PaytmController extends Controller
         $cart = Cart::getCart();
 
         if (! $cart) {
-            session()->flash('error', trans('paytm::app.shop.payment.cart-empty'));
+            session()->flash('error', trans('shop::app.checkout.cart.mini-cart.empty-cart'));
 
             return redirect()->route('shop.checkout.cart.index');
         }
@@ -50,12 +50,7 @@ class PaytmController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
-        \Log::info(' full payload => '. print_r([
-            'paytmUrl' => $this->paytm->getPaytmUrl(),
-            'paytmFields' => $this->paytm->getFormFields($cart),
-        ], true));
-
-        return view('paytm::redirect', [
+        return view('shop::handoff.paytm', [
             'paytmUrl' => $this->paytm->getPaytmUrl(),
             'paytmFields' => $this->paytm->getFormFields($cart),
         ]);
@@ -66,7 +61,6 @@ class PaytmController extends Controller
      */
     public function callback(Request $request)
     {
-
         $payload = $request->all();
 
         $status = $payload['STATUS'] ?? '';
@@ -125,7 +119,6 @@ class PaytmController extends Controller
                     'message' => $message ?: trans('paytm::app.shop.payment.payment-success'),
                 ]);
             } catch (\Exception $e) {
-
                 $message = trans('paytm::app.shop.payment.general-error');
             }
         }
@@ -176,29 +169,29 @@ class PaytmController extends Controller
         $minimumOrderAmount = (float) core()->getConfigData('sales.order_settings.minimum_order.minimum_order_amount') ?: 0;
 
         if (! Cart::haveMinimumOrderAmount()) {
-            throw new \Exception(trans('paytm::app.shop.payment.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
+            throw new \Exception(trans('shop::app.checkout.cart.minimum-order-message', ['amount' => core()->currency($minimumOrderAmount)]));
         }
 
         if (
             $cart->haveStockableItems()
             && ! $cart->shipping_address
         ) {
-            throw new \Exception(trans('paytm::app.shop.payment.check-shipping-address'));
+            throw new \Exception(trans('shop::app.checkout.cart.check-shipping-address'));
         }
 
         if (! $cart->billing_address) {
-            throw new \Exception(trans('paytm::app.shop.payment.check-billing-address'));
+            throw new \Exception(trans('shop::app.checkout.cart.check-billing-address'));
         }
 
         if (
             $cart->haveStockableItems()
             && ! $cart->selected_shipping_rate
         ) {
-            throw new \Exception(trans('paytm::app.shop.payment.specify-shipping-method'));
+            throw new \Exception(trans('shop::app.checkout.cart.specify-shipping-method'));
         }
 
         if (! $cart->payment) {
-            throw new \Exception(trans('paytm::app.shop.payment.specify-payment-method'));
+            throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
     }
 

@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'Mètode de Pagament',
+
+                'Paytm' => [
+                    'redirecting' => 'Seràs redirigit a Paytm en uns segons.',
+                    'cart-empty' => 'El teu carret està buit.',
+                    'general-error' => 'Alguna cosa ha anat malament. Si us plau, torna-ho a provar.',
+                    'missing-cart-id' => 'Falta l’ID del carret.',
+                    'cart-not-found' => 'No s’ha trobat el carret.',
+                    'checksum-failed' => 'La validació del checksum ha fallat.',
+                    'payment-failed' => 'El pagament amb Paytm ha fallat o s’ha cancel·lat. Si us plau, torna-ho a provar.',
+                ],
             ],
 
             'shipping' => [

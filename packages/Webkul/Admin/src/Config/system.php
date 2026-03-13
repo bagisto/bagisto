@@ -2582,6 +2582,63 @@ return [
             ],
         ],
     ], [
+        'key' => 'sales.payment_methods.paytm',
+        'name' => 'paytm::app.admin.configuration.index.sales.payment-methods.paytm',
+        'info' => 'paytm::app.admin.configuration.index.sales.payment-methods.paytm-info',
+        'sort' => 8,
+        'fields' => [
+            [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'merchant_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-id',
+                'type' => 'text',
+                'validation' => 'required',
+                'channel_based' => true,
+            ], [
+                'name' => 'merchant_key',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'type' => 'password',
+                'validation' => 'required',
+                'channel_based' => true,
+            ], [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'default_value' => false,
+                'channel_based' => true,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'text',
+                'default_value' => '5',
+            ],
+        ],
+    ], [
         'key' => 'sales.order_settings',
         'name' => 'admin::app.configuration.index.sales.order-settings.title',
         'info' => 'admin::app.configuration.index.sales.order-settings.info',

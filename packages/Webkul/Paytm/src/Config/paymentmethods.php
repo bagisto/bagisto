@@ -3,8 +3,8 @@
 return [
     'paytm' => [
         'code' => 'paytm',
-        'title' => 'paytm::app.shop.payment.title',
-        'description' => 'paytm::app.shop.payment.description',
+        'title' => 'Paytm',
+        'description' => 'Paytm Payment Gateway',
         'class' => 'Webkul\Paytm\Payment\Paytm',
         'active' => true,
         'sort' => 5,

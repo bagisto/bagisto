@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => '支払方法',
+
+                'Paytm' => [
+                    'redirecting' => '数秒以内にPaytmへリダイレクトされます。',
+                    'cart-empty' => 'カートは空です。',
+                    'general-error' => '問題が発生しました。もう一度お試しください。',
+                    'missing-cart-id' => 'カートIDがありません。',
+                    'cart-not-found' => 'カートが見つかりません。',
+                    'checksum-failed' => 'チェックサムの検証に失敗しました。',
+                    'payment-failed' => 'Paytmの支払いが失敗またはキャンセルされました。もう一度お試しください。',
+                ],
             ],
 
             'shipping' => [

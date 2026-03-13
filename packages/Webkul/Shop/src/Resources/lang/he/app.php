@@ -1116,6 +1116,16 @@ return [
 
             'payment' => [
                 'payment-method' => 'אמצעי תשלום',
+
+                'Paytm' => [
+                    'redirecting' => 'תועבר ל-Paytm בעוד מספר שניות.',
+                    'cart-empty' => 'העגלה שלך ריקה.',
+                    'general-error' => 'משהו השתבש. אנא נסה שוב.',
+                    'missing-cart-id' => 'מזהה העגלה חסר.',
+                    'cart-not-found' => 'העגלה לא נמצאה.',
+                    'checksum-failed' => 'אימות ה-Checksum נכשל.',
+                    'payment-failed' => 'התשלום ב-Paytm נכשל או בוטל. אנא נסה שוב.',
+                ],
             ],
 
             'shipping' => [
