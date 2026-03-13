@@ -16,7 +16,7 @@ tailwind.config = {
 }
 </script>
 
-<section class="max-w-7xl mx-auto px-4 py-16 md:py-28">
+<section class="max-w-7xl mx-auto px-4 py-16 md:py-28 A">
 
 <h2 class="font-oswald font-normal text-[36px] md:text-[60px] leading-[100%] uppercase text-center text-[#371E0F] mb-10 md:mb-14">
 Services Treatment
