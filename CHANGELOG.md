@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## **Unreleased**
+
+- Added support for Romanian language.
+
 ## **v2.3.15 (11th of March 2026)** - *Release*
 
 - Added Exchange Rates core configuration with scheduled auto-update, API key management (Fixer & ExchangeRate-API), and `date_format` vee-validate rules.
