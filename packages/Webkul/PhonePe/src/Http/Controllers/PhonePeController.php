@@ -113,8 +113,7 @@ class PhonePeController extends Controller
 
             $cart = $this->cartRepository->findOrFail($cartId);
 
-            if (! $cart
-                || ! $cart->is_active) {
+            if (! $cart) {
                 session()->flash('info', trans('phonepe::app.response.cart-not-found'));
 
                 return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
@@ -221,7 +220,7 @@ class PhonePeController extends Controller
 
             $cart = $this->cartRepository->find($cartId);
 
-            if (! $cart || ! $cart->is_active) {
+            if (! $cart) {
                 return response()->json(['status' => 'cart_inactive'], 200);
             }
 
