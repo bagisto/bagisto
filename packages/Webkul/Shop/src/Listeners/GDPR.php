@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Listeners;
 
 use Illuminate\Support\Facades\Mail;
+use Webkul\GDPR\Models\GDPRDataRequest;
 use Webkul\Shop\Mail\Customer\GDPR\NewRequestNotification;
 use Webkul\Shop\Mail\Customer\GDPR\StatusUpdateNotification;
 
@@ -11,7 +12,7 @@ class GDPR extends Base
     /**
      * Send mail on creating GDPR request
      *
-     * @param  \Webkul\GDPR\Models\GDPRDataRequest  $gdprRequest
+     * @param  GDPRDataRequest  $gdprRequest
      * @return void
      */
     public function afterGdprRequestCreated($gdprRequest)
@@ -32,7 +33,7 @@ class GDPR extends Base
     /**
      * Send mail on creating GDPR request
      *
-     * @param  \Webkul\GDPR\Models\GDPRDataRequest  $gdprRequest
+     * @param  GDPRDataRequest  $gdprRequest
      * @return void
      */
     public function afterGdprRequestUpdated($gdprRequest)

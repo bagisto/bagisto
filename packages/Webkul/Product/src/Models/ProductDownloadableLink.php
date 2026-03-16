@@ -4,6 +4,7 @@ namespace Webkul\Product\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Product\Contracts\ProductDownloadableLink as ProductDownloadableLinkContract;
@@ -36,7 +37,7 @@ class ProductDownloadableLink extends TranslatableModel implements ProductDownlo
     /**
      * Get the product that owns the image.
      */
-    public function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function product(): BelongsTo
     {
         return $this->belongsTo(ProductProxy::modelClass());
     }

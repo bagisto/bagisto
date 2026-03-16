@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids\Catalog;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -30,7 +31,7 @@ class ProductDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function prepareQueryBuilder()
     {
@@ -319,7 +320,7 @@ class ProductDataGrid extends DataGrid
             return Product::formatElasticSearchIndexName($channelCode, app()->getLocale());
         })->toArray();
 
-        $results = Elasticsearch::search([
+        $results = ElasticSearch::search([
             'index' => $indexNames,
             'body' => [
                 'from' => ($pagination['page'] * $pagination['per_page']) - $pagination['per_page'],

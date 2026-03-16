@@ -4,6 +4,7 @@ namespace Webkul\Paypal\Payment;
 
 use PaypalServerSdkLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
 use PaypalServerSdkLib\Environment;
+use PaypalServerSdkLib\PaypalServerSdkClient;
 use PaypalServerSdkLib\PaypalServerSdkClientBuilder;
 
 class SmartButton extends Paypal
@@ -25,7 +26,7 @@ class SmartButton extends Paypal
     /**
      * PayPal SDK Client.
      *
-     * @var \PaypalServerSdkLib\PaypalServerSdkClient
+     * @var PaypalServerSdkClient
      */
     protected $client;
 
@@ -54,7 +55,7 @@ class SmartButton extends Paypal
     /**
      * Returns PayPal SDK client instance.
      *
-     * @return \PaypalServerSdkLib\PaypalServerSdkClient
+     * @return PaypalServerSdkClient
      */
     public function getClient()
     {
@@ -68,7 +69,7 @@ class SmartButton extends Paypal
     /**
      * Build PayPal SDK client.
      *
-     * @return \PaypalServerSdkLib\PaypalServerSdkClient
+     * @return PaypalServerSdkClient
      */
     protected function buildClient()
     {

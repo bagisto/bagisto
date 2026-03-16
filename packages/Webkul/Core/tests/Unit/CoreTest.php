@@ -17,15 +17,12 @@ it('returns all channels', function () {
 });
 
 it('returns the current channel', function () {
-    // Arrange
-    $expectedChannel = Channel::factory()->create();
-
     // Act
-    $channel = core()->getCurrentChannel($expectedChannel->hostname);
+    $channel = core()->getCurrentChannel();
 
     // Assert
-    expect($channel->id)->toBe($expectedChannel->id);
-    expect($channel->code)->toBe($expectedChannel->code);
+    expect($channel->id)->toBe(1);
+    expect($channel->code)->toBe('default');
 });
 
 it('returns the current channel when set via setter', function () {

@@ -2,6 +2,8 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\View\View;
 use Webkul\Admin\Helpers\Dashboard;
 
 class DashboardController extends Controller
@@ -31,7 +33,7 @@ class DashboardController extends Controller
     /**
      * Dashboard page.
      *
-     * @return \Illuminate\View\View|\Illuminate\Http\JsonResponse
+     * @return View|JsonResponse
      */
     public function index()
     {
@@ -44,7 +46,7 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function stats()
     {

@@ -3,6 +3,7 @@
 namespace Webkul\Shop\CacheFilters;
 
 use Illuminate\Support\Str;
+use Intervention\Image\CachedImage;
 use Intervention\Image\Interfaces\ImageInterface;
 
 class Large
@@ -10,8 +11,8 @@ class Large
     /**
      * Apply filter.
      *
-     * @param  ImageInterface|\Intervention\Image\CachedImage  $image
-     * @return ImageInterface|\Intervention\Image\CachedImage
+     * @param  ImageInterface|CachedImage  $image
+     * @return ImageInterface|CachedImage
      */
     public function applyFilter($image)
     {

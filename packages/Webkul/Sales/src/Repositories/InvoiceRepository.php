@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Sales\Generators\InvoiceSequencer;
+use Webkul\Sales\Models\Invoice;
 
 class InvoiceRepository extends Repository
 {
@@ -38,7 +39,7 @@ class InvoiceRepository extends Repository
      *
      * @param  string  $invoiceState
      * @param  string  $orderState
-     * @return \Webkul\Sales\Models\Invoice
+     * @return Invoice
      */
     public function create(array $data, $invoiceState = null, $orderState = null)
     {
@@ -235,8 +236,8 @@ class InvoiceRepository extends Repository
     /**
      * Collect totals.
      *
-     * @param  \Webkul\Sales\Models\Invoice  $invoice
-     * @return \Webkul\Sales\Models\Invoice
+     * @param  Invoice  $invoice
+     * @return Invoice
      */
     public function collectTotals($invoice)
     {
@@ -314,7 +315,7 @@ class InvoiceRepository extends Repository
     /**
      * Update state.
      *
-     * @param  \Webkul\Sales\Models\Invoice  $invoice
+     * @param  Invoice  $invoice
      * @return bool
      */
     public function updateState($invoice, $status)

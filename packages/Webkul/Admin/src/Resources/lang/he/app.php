@@ -3991,7 +3991,7 @@ return [
             'title' => 'הגדרות',
 
             'general' => [
-                'info' => 'הגדר אפשרויות יחידות.',
+                'info' => 'כללי',
                 'title' => 'כללי',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'שיפור חווית המשתמש',
                         'measurement' => 'מדידה',
                         'targeting-advertising' => 'מיקוד ופרסום',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'הגדר שירותי API ואישורים לשערי חליפין.',
+                    'title' => 'שערי חליפין',
+
+                    'settings' => [
+                        'default-service' => 'שירות ברירת מחדל',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'הגדרות כלליות',
+                        'title-info' => 'בחר את שירות שער החליפין המוגדר כברירת מחדל לשימוש בעדכוני שערי מטבע אוטומטיים.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'הזן את מפתח ה-API שלך מ-Fixer.io לעדכוני שערי חליפין אוטומטיים.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'הזן את מפתח ה-ExchangeRate-API שלך לעדכוני שערי חליפין אוטומטיים (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'יומי',
+                        'enabled' => 'מופעל',
+                        'frequency' => 'תדירות',
+                        'monthly' => 'חודשי',
+                        'time' => 'שעת התחלה (HH:MM)',
+                        'title' => 'ייבוא מתוזמן',
+                        'title-info' => 'עדכן אוטומטית שערי חליפין על בסיס מתוזמן באמצעות שירות ה-API המוגדר.',
+                        'weekly' => 'שבועי',
                     ],
                 ],
 

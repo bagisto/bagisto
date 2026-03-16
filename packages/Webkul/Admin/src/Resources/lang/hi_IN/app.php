@@ -3991,7 +3991,7 @@ return [
             'title' => 'कॉन्फ़िगरेशन',
 
             'general' => [
-                'info' => 'इकाई विकल्प सेट करें।',
+                'info' => 'सामान्य',
                 'title' => 'सामान्य',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'अनुभव वृद्धि',
                         'measurement' => 'मापन',
                         'targeting-advertising' => 'लक्ष्यीकरण और विज्ञापन',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'विनिमय दर API सेवाओं और प्रमाणपत्रों को कॉन्फ़िगर करें।',
+                    'title' => 'विनिमय दरें',
+
+                    'settings' => [
+                        'default-service' => 'डिफ़ॉल्ट सेवा',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'सामान्य सेटिंग्स',
+                        'title-info' => 'स्वचालित मुद्रा दर अपडेट के लिए उपयोग करने हेतु डिफ़ॉल्ट विनिमय दर सेवा चुनें।',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'स्वचालित विनिमय दर अपडेट के लिए अपनी Fixer.io API कुंजी दर्ज करें।',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'स्वचालित विनिमय दर अपडेट के लिए अपनी ExchangeRate-API कुंजी दर्ज करें (https://www.exchangerate-api.com)।',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'दैनिक',
+                        'enabled' => 'सक्रिय',
+                        'frequency' => 'आवृत्ति',
+                        'monthly' => 'मासिक',
+                        'time' => 'प्रारंभ समय (HH:MM)',
+                        'title' => 'निर्धारित आयात',
+                        'title-info' => 'कॉन्फ़िगर की गई API सेवा का उपयोग करके निर्धारित समय पर स्वचालित रूप से विनिमय दरें अपडेट करें।',
+                        'weekly' => 'साप्ताहिक',
                     ],
                 ],
 

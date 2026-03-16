@@ -77,7 +77,7 @@ class Dashboard
     /**
      * Returns the today statistics.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return EloquentCollection
      */
     public function getStockThresholdProducts()
     {

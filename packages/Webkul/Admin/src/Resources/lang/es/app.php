@@ -3991,7 +3991,7 @@ return [
             'title' => 'Configuración',
 
             'general' => [
-                'info' => 'Establecer opciones de unidades.',
+                'info' => 'General',
                 'title' => 'General',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'Mejora de la experiencia',
                         'measurement' => 'Medición',
                         'targeting-advertising' => 'Segmentación y publicidad',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Configurar los servicios y credenciales de la API de tipos de cambio.',
+                    'title' => 'Tipos de cambio',
+
+                    'settings' => [
+                        'default-service' => 'Servicio predeterminado',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Configuración general',
+                        'title-info' => 'Seleccione el servicio de tipos de cambio predeterminado para las actualizaciones automáticas de las tasas de divisas.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Introduzca su clave de Fixer.io API para las actualizaciones automáticas de los tipos de cambio.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Introduzca su clave de ExchangeRate-API para las actualizaciones automáticas de los tipos de cambio (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Diariamente',
+                        'enabled' => 'Habilitado',
+                        'frequency' => 'Frecuencia',
+                        'monthly' => 'Mensualmente',
+                        'time' => 'Hora de inicio (HH:MM)',
+                        'title' => 'Importación programada',
+                        'title-info' => 'Actualizar automáticamente los tipos de cambio de forma programada utilizando el servicio API configurado.',
+                        'weekly' => 'Semanalmente',
                     ],
                 ],
 

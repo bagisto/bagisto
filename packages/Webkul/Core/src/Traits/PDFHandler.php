@@ -27,7 +27,7 @@ trait PDFHandler
             );
         }
 
-        return PDF::loadHTML($html)
+        return Pdf::loadHTML($html)
             ->setPaper('A4', 'portrait')
             ->set_option('defaultFont', 'Courier')
             ->download($fileName.'.pdf');
@@ -44,7 +44,7 @@ trait PDFHandler
             return $this->buildMpdf($html)->Output('', 'S');
         }
 
-        return PDF::loadHTML($html)
+        return Pdf::loadHTML($html)
             ->setPaper('A4', 'portrait')
             ->set_option('defaultFont', 'Courier')
             ->output();

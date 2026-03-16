@@ -40,7 +40,7 @@ class CatalogRuleRepository extends Repository
     /**
      * Create.
      *
-     * @return \Webkul\CatalogRule\Contracts\CatalogRule
+     * @return CatalogRule
      */
     public function create(array $data)
     {
@@ -59,7 +59,7 @@ class CatalogRuleRepository extends Repository
      * Update.
      *
      * @param  int  $id
-     * @return \Webkul\CatalogRule\Contracts\CatalogRule
+     * @return CatalogRule
      */
     public function update(array $data, $id)
     {

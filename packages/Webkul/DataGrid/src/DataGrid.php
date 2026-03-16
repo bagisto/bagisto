@@ -2,11 +2,14 @@
 
 namespace Webkul\DataGrid;
 
+use Illuminate\Database\Query\Builder;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Webkul\DataGrid\Enums\ColumnTypeEnum;
 use Webkul\DataGrid\Exports\DataGridExport;
 
@@ -402,7 +405,7 @@ abstract class DataGrid
     /**
      * Download export file.
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     * @return BinaryFileResponse
      */
     public function downloadExportFile()
     {
@@ -412,7 +415,7 @@ abstract class DataGrid
     /**
      * Process the datagrid.
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\JsonResponse
+     * @return BinaryFileResponse|JsonResponse
      */
     public function process()
     {
@@ -431,7 +434,7 @@ abstract class DataGrid
      *
      * @deprecated
      *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|\Illuminate\Http\JsonResponse
+     * @return BinaryFileResponse|JsonResponse
      */
     public function toJson()
     {
@@ -457,7 +460,7 @@ abstract class DataGrid
     /**
      * Process requested filters.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     protected function processRequestedFilters(array $requestedFilters)
     {
@@ -488,7 +491,7 @@ abstract class DataGrid
     /**
      * Process requested sorting.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     protected function processRequestedSorting($requestedSort)
     {

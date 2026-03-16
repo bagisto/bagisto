@@ -1,5 +1,6 @@
 <?php
 
+use Stevebauman\Purify\Cache\CacheDefinitionCache;
 use Webkul\Core\Purifier\Definitions\ExtendedHtml5Definition;
 
 return [
@@ -102,7 +103,7 @@ return [
 
     'serializer' => [
         'driver' => env('CACHE_STORE', env('CACHE_DRIVER', 'file')),
-        'cache' => \Stevebauman\Purify\Cache\CacheDefinitionCache::class,
+        'cache' => CacheDefinitionCache::class,
     ],
 
     // 'serializer' => [

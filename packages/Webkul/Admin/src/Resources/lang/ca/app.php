@@ -3991,7 +3991,7 @@ return [
             'title' => 'Configuració',
 
             'general' => [
-                'info' => 'Estableix opcions d\'unitats.',
+                'info' => 'General',
                 'title' => 'General',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'Millora de l\'experiència',
                         'measurement' => 'Mesura',
                         'targeting-advertising' => 'Orientació i publicitat',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Configura els serveis i les credencials de l\'API de tipus de canvi.',
+                    'title' => 'Tipus de canvi',
+
+                    'settings' => [
+                        'default-service' => 'Servei predeterminat',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Configuració general',
+                        'title-info' => 'Selecciona el servei de tipus de canvi predeterminat per utilitzar en les actualitzacions automàtiques de les taxes de divises.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Introdueix la teva clau de Fixer.io API per a les actualitzacions automàtiques dels tipus de canvi.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Introdueix la teva clau d\'ExchangeRate-API per a les actualitzacions automàtiques dels tipus de canvi (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Diàriament',
+                        'enabled' => 'Habilitat',
+                        'frequency' => 'Freqüència',
+                        'monthly' => 'Mensualment',
+                        'time' => 'Hora d\'inici (HH:MM)',
+                        'title' => 'Importació programada',
+                        'title-info' => 'Actualitza automàticament els tipus de canvi de manera programada utilitzant el servei API configurat.',
+                        'weekly' => 'Setmanalment',
                     ],
                 ],
 

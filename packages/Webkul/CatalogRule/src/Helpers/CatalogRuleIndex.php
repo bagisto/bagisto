@@ -3,7 +3,10 @@
 namespace Webkul\CatalogRule\Helpers;
 
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
+use Webkul\CatalogRule\Contracts\CatalogRule;
 use Webkul\CatalogRule\Repositories\CatalogRuleRepository;
+use Webkul\Product\Contracts\Product;
 
 class CatalogRuleIndex
 {
@@ -41,7 +44,7 @@ class CatalogRuleIndex
     /**
      * Re-index rule indices
      *
-     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param  CatalogRule  $rule
      * @return void
      */
     public function reIndexRule($rule)
@@ -71,7 +74,7 @@ class CatalogRuleIndex
     /**
      * Re-index single product
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return void
      */
     public function reIndexProduct($product)
@@ -100,7 +103,7 @@ class CatalogRuleIndex
     /**
      * Clean rule indices
      *
-     * @param  \Webkul\CatalogRule\Contracts\CatalogRule  $rule
+     * @param  CatalogRule  $rule
      * @return void
      */
     public function cleanRuleIndices($rule)
@@ -126,7 +129,7 @@ class CatalogRuleIndex
     /**
      * Returns catalog rules
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getCatalogRules()
     {

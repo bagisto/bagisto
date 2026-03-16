@@ -2,6 +2,8 @@
 
 namespace Webkul\Paypal\Http\Controllers;
 
+use Illuminate\Http\Response;
+use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Paypal\Helpers\Ipn;
 use Webkul\Sales\Repositories\OrderRepository;
@@ -22,7 +24,7 @@ class StandardController extends Controller
     /**
      * Redirects to the paypal.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function redirect()
     {
@@ -32,7 +34,7 @@ class StandardController extends Controller
     /**
      * Cancel payment from paypal.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function cancel()
     {
@@ -44,7 +46,7 @@ class StandardController extends Controller
     /**
      * Success payment.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function success()
     {
@@ -64,7 +66,7 @@ class StandardController extends Controller
     /**
      * Paypal IPN listener.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function ipn()
     {

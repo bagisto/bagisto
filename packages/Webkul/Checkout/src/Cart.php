@@ -25,7 +25,7 @@ class Cart
     /**
      * The cart instance.
      *
-     * @var \Webkul\Checkout\Contracts\Cart
+     * @var Contracts\Cart
      */
     private $cart;
 

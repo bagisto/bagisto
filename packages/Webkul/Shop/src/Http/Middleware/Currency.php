@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Webkul\Core\Repositories\CurrencyRepository;
 
 class Currency
@@ -17,7 +18,7 @@ class Currency
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return mixed
      */
     public function handle($request, Closure $next)

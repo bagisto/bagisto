@@ -2,6 +2,7 @@
 
 namespace Webkul\Category\Repositories;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -66,7 +67,7 @@ class CategoryRepository extends Repository
     /**
      * Create category.
      *
-     * @return \Webkul\Category\Contracts\Category
+     * @return Category
      */
     public function create(array $data)
     {
@@ -105,7 +106,7 @@ class CategoryRepository extends Repository
      *
      * @param  int  $id
      * @param  string  $attribute
-     * @return \Webkul\Category\Contracts\Category
+     * @return Category
      */
     public function update(array $data, $id)
     {
@@ -129,7 +130,7 @@ class CategoryRepository extends Repository
     /**
      * Specify category tree.
      *
-     * @return \Webkul\Category\Contracts\Category
+     * @return Category
      */
     public function getCategoryTree(?int $id = null)
     {
@@ -141,7 +142,7 @@ class CategoryRepository extends Repository
     /**
      * Specify category tree.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getCategoryTreeWithoutDescendant(?int $id = null)
     {
@@ -153,7 +154,7 @@ class CategoryRepository extends Repository
     /**
      * Get root categories.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getRootCategories()
     {
@@ -163,7 +164,7 @@ class CategoryRepository extends Repository
     /**
      * Get child categories.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getChildCategories($parentId)
     {
@@ -174,7 +175,7 @@ class CategoryRepository extends Repository
      * get visible category tree.
      *
      * @param  int  $id
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getVisibleCategoryTree($id = null)
     {
@@ -205,7 +206,7 @@ class CategoryRepository extends Repository
      * Retrieve category from slug.
      *
      * @param  string  $slug
-     * @return \Webkul\Category\Contracts\Category
+     * @return Category
      */
     public function findBySlug($slug)
     {
@@ -218,7 +219,7 @@ class CategoryRepository extends Repository
      * Retrieve category from slug.
      *
      * @param  string  $slug
-     * @return \Webkul\Category\Contracts\Category
+     * @return Category
      */
     public function findBySlugOrFail($slug)
     {
@@ -229,7 +230,7 @@ class CategoryRepository extends Repository
      * Upload category's images.
      *
      * @param  array  $data
-     * @param  \Webkul\Category\Contracts\Category  $category
+     * @param  Category  $category
      * @param  string  $type
      * @return void
      */

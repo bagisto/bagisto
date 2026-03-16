@@ -3,6 +3,7 @@
 namespace Webkul\Installer\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 
 class UseFileSession
@@ -12,7 +13,7 @@ class UseFileSession
      *
      * Forces file-based sessions during installation to avoid database dependency.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return mixed
      */
     public function handle($request, Closure $next)

@@ -4,6 +4,7 @@ namespace Webkul\Product\Type;
 
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Helpers\Indexers\Price\Grouped as GroupedIndexer;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
@@ -81,7 +82,7 @@ class Grouped extends AbstractType
      *
      * @param  int  $id
      * @param  array  $attributes
-     * @return \Webkul\Product\Contracts\Product
+     * @return Product
      */
     public function update(array $data, $id, $attributes = [])
     {

@@ -2,6 +2,14 @@
 
 namespace Webkul\BookingProduct\Providers;
 
+use Webkul\BookingProduct\Models\Booking;
+use Webkul\BookingProduct\Models\BookingProduct;
+use Webkul\BookingProduct\Models\BookingProductAppointmentSlot;
+use Webkul\BookingProduct\Models\BookingProductDefaultSlot;
+use Webkul\BookingProduct\Models\BookingProductEventTicket;
+use Webkul\BookingProduct\Models\BookingProductEventTicketTranslation;
+use Webkul\BookingProduct\Models\BookingProductRentalSlot;
+use Webkul\BookingProduct\Models\BookingProductTableSlot;
 use Webkul\Core\Providers\CoreModuleServiceProvider;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
@@ -12,13 +20,13 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\BookingProduct\Models\BookingProduct::class,
-        \Webkul\BookingProduct\Models\BookingProductDefaultSlot::class,
-        \Webkul\BookingProduct\Models\BookingProductAppointmentSlot::class,
-        \Webkul\BookingProduct\Models\BookingProductEventTicket::class,
-        \Webkul\BookingProduct\Models\BookingProductEventTicketTranslation::class,
-        \Webkul\BookingProduct\Models\BookingProductRentalSlot::class,
-        \Webkul\BookingProduct\Models\BookingProductTableSlot::class,
-        \Webkul\BookingProduct\Models\Booking::class,
+        BookingProduct::class,
+        BookingProductDefaultSlot::class,
+        BookingProductAppointmentSlot::class,
+        BookingProductEventTicket::class,
+        BookingProductEventTicketTranslation::class,
+        BookingProductRentalSlot::class,
+        BookingProductTableSlot::class,
+        Booking::class,
     ];
 }

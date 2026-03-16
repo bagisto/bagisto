@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids\Settings;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Webkul\DataGrid\DataGrid;
@@ -26,7 +27,7 @@ class UserDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function prepareQueryBuilder()
     {

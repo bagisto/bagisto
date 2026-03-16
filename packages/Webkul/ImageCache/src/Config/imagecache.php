@@ -1,5 +1,9 @@
 <?php
 
+use Webkul\ImageCache\Templates\Large;
+use Webkul\ImageCache\Templates\Medium;
+use Webkul\ImageCache\Templates\Small;
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -52,9 +56,9 @@ return [
     */
 
     'templates' => [
-        'small' => Webkul\ImageCache\Templates\Small::class,
-        'medium' => Webkul\ImageCache\Templates\Medium::class,
-        'large' => Webkul\ImageCache\Templates\Large::class,
+        'small' => Small::class,
+        'medium' => Medium::class,
+        'large' => Large::class,
     ],
 
     /*

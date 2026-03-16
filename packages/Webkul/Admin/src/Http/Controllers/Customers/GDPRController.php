@@ -4,6 +4,7 @@ namespace Webkul\Admin\Http\Controllers\Customers;
 
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Customers\GDPRDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -24,7 +25,7 @@ class GDPRController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {

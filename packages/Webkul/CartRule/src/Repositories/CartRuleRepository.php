@@ -46,7 +46,7 @@ class CartRuleRepository extends Repository
     /**
      * Create.
      *
-     * @return \Webkul\CartRule\Contracts\CartRule
+     * @return CartRule
      */
     public function create(array $data)
     {
@@ -83,7 +83,7 @@ class CartRuleRepository extends Repository
      * Update.
      *
      * @param  int  $id
-     * @return \Webkul\CartRule\Contracts\CartRule
+     * @return CartRule
      */
     public function update(array $data, $id)
     {

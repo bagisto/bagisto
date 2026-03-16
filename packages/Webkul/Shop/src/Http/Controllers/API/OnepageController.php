@@ -88,7 +88,7 @@ class OnepageController extends APIController
     /**
      * Store shipping method.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function storeShippingMethod()
     {

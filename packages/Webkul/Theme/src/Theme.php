@@ -9,7 +9,7 @@ class Theme
     /**
      * Contains theme parent.
      *
-     * @var \Webkul\Theme\Theme
+     * @var Theme
      */
     public $parent;
 
@@ -38,7 +38,7 @@ class Theme
     /**
      * Sets the parent.
      *
-     * @param  \Webkul\Theme\Theme
+     * @param  Theme
      * @return void
      */
     public function setParent(Theme $parent)
@@ -49,7 +49,7 @@ class Theme
     /**
      * Return the parent.
      *
-     * @return \Webkul\Theme\Theme
+     * @return Theme
      */
     public function getParent()
     {

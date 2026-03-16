@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\DataGrids\Sales;
 
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Sales\Models\OrderAddress;
@@ -18,7 +19,7 @@ class OrderShipmentDataGrid extends DataGrid
     /**
      * Prepare query builder.
      *
-     * @return \Illuminate\Database\Query\Builder
+     * @return Builder
      */
     public function prepareQueryBuilder()
     {

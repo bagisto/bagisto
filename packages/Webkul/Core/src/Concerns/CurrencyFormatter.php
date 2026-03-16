@@ -90,11 +90,11 @@ trait CurrencyFormatter
     /**
      * Return currency symbol from currency code.
      *
-     * @param  string|\Webkul\Core\Contracts\Currency  $currency
+     * @param  string|Currency  $currency
      */
     public function currencySymbol($currency): string
     {
-        $code = $currency instanceof \Webkul\Core\Contracts\Currency ? $currency->code : $currency;
+        $code = $currency instanceof Currency ? $currency->code : $currency;
 
         $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
 

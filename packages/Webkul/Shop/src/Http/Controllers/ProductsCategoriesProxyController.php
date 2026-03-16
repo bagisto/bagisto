@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
 use Webkul\Product\Repositories\ProductRepository;
@@ -32,7 +33,7 @@ class ProductsCategoriesProxyController extends Controller
     /**
      * Show product or category view. If neither category nor product matches, abort with code 404.
      *
-     * @return \Illuminate\View\View|\Exception
+     * @return View|\Exception
      */
     public function index(Request $request)
     {

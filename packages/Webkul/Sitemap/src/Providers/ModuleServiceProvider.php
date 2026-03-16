@@ -3,6 +3,7 @@
 namespace Webkul\Sitemap\Providers;
 
 use Webkul\Core\Providers\CoreModuleServiceProvider;
+use Webkul\Sitemap\Models\Sitemap;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
 {
@@ -12,6 +13,6 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\Sitemap\Models\Sitemap::class,
+        Sitemap::class,
     ];
 }

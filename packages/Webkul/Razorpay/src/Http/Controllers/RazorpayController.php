@@ -3,7 +3,9 @@
 namespace Webkul\Razorpay\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Razorpay\Payment\RazorpayPayment;
 use Webkul\Sales\Models\Invoice;
@@ -33,7 +35,7 @@ class RazorpayController extends Controller
     /**
      * Redirects to checkout.
      */
-    public function redirect(): \Illuminate\Http\RedirectResponse|\Illuminate\View\View
+    public function redirect(): RedirectResponse|View
     {
         if (! $this->razorpayPayment->hasValidCredentials()) {
             session()->flash('error', trans('razorpay::app.response.something-went-wrong'));
@@ -72,7 +74,7 @@ class RazorpayController extends Controller
     /**
      * Payment success.
      */
-    public function paymentSuccess(Request $request): \Illuminate\Http\RedirectResponse
+    public function paymentSuccess(Request $request): RedirectResponse
     {
         if (! $this->razorpayPayment->hasValidCredentials()) {
             session()->flash('error', trans('razorpay::app.response.something-went-wrong'));
@@ -118,7 +120,7 @@ class RazorpayController extends Controller
     /**
      * Payment fail.
      */
-    public function paymentFail(): \Illuminate\Http\RedirectResponse
+    public function paymentFail(): RedirectResponse
     {
         session()->flash('error', trans('razorpay::app.response.payment.cancelled'));
 
@@ -128,7 +130,7 @@ class RazorpayController extends Controller
     /**
      * Handle payment error.
      */
-    protected function handlePaymentError(Request $request): \Illuminate\Http\RedirectResponse
+    protected function handlePaymentError(Request $request): RedirectResponse
     {
         $errorDescription = $request->input('error.description', trans('razorpay::app.response.something-went-wrong'));
 
@@ -140,7 +142,7 @@ class RazorpayController extends Controller
     /**
      * Handle successful payment.
      */
-    protected function handlePaymentSuccess(Request $request, $cart): \Illuminate\Http\RedirectResponse
+    protected function handlePaymentSuccess(Request $request, $cart): RedirectResponse
     {
         try {
             $orderData = (new OrderResource($cart))->jsonSerialize();

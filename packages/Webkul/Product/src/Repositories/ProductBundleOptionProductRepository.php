@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\ProductBundleOption;
 
 class ProductBundleOptionProductRepository extends Repository
 {
@@ -17,7 +18,7 @@ class ProductBundleOptionProductRepository extends Repository
 
     /**
      * @param  array  $data
-     * @param  \Webkul\Product\Contracts\ProductBundleOption  $productBundleOption
+     * @param  ProductBundleOption  $productBundleOption
      * @return void
      */
     public function saveBundleOptionProducts($data, $productBundleOption)

@@ -3991,7 +3991,7 @@ return [
             'title' => 'Configuração',
 
             'general' => [
-                'info' => 'Definir opções de unidades.',
+                'info' => 'Geral',
                 'title' => 'Geral',
 
                 'general' => [
@@ -4138,6 +4138,42 @@ return [
                         'experience-enhancement' => 'Melhoria da experiência',
                         'measurement' => 'Medição',
                         'targeting-advertising' => 'Segmentação e publicidade',
+                    ],
+                ],
+
+                'exchange-rates' => [
+                    'info' => 'Configure os serviços de API de taxas de câmbio e credenciais.',
+                    'title' => 'Taxas de Câmbio',
+
+                    'settings' => [
+                        'default-service' => 'Serviço Padrão',
+                        'exchange-rates-api' => 'Exchange Rates API',
+                        'fixer-api' => 'Fixer API',
+                        'title' => 'Configurações Gerais',
+                        'title-info' => 'Selecione o serviço padrão de taxas de câmbio para atualizações automáticas de cotações de moedas.',
+                    ],
+
+                    'fixer' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Fixer API',
+                        'title-info' => 'Insira sua chave API do Fixer.io para atualizações automáticas das taxas de câmbio.',
+                    ],
+
+                    'exchange-rates-api-section' => [
+                        'api-key' => 'API Key',
+                        'title' => 'Exchange Rates API',
+                        'title-info' => 'Insira sua chave ExchangeRate-API para atualizações automáticas das taxas de câmbio (https://www.exchangerate-api.com).',
+                    ],
+
+                    'schedule' => [
+                        'daily' => 'Diariamente',
+                        'enabled' => 'Ativado',
+                        'frequency' => 'Frequência',
+                        'monthly' => 'Mensalmente',
+                        'time' => 'Hora de Início (HH:MM)',
+                        'title' => 'Importação Agendada',
+                        'title-info' => 'Atualize automaticamente as taxas de câmbio em uma base programada usando o serviço de API configurado.',
+                        'weekly' => 'Semanalmente',
                     ],
                 ],
 

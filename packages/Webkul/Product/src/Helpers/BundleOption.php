@@ -2,19 +2,22 @@
 
 namespace Webkul\Product\Helpers;
 
+use Product\Product\Contracts\ProductBundleOption;
+use Webkul\Product\Contracts\Product;
+
 class BundleOption
 {
     /**
      * Product
      *
-     * @var \Webkul\Product\Contracts\Product
+     * @var Product
      */
     protected $product;
 
     /**
      * Returns bundle option config
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     public function getBundleConfig($product)
@@ -65,7 +68,7 @@ class BundleOption
     /**
      * Get formed data from bundle option
      *
-     * @param  \Product\Product\Contracts\ProductBundleOption  $option
+     * @param  ProductBundleOption  $option
      * @return array
      */
     private function getOptionItemData($option)
@@ -83,7 +86,7 @@ class BundleOption
     /**
      * Get formed data from bundle option product
      *
-     * @param  \Product\Product\Contracts\ProductBundleOption  $option
+     * @param  ProductBundleOption  $option
      * @return array
      */
     private function getOptionProducts($option)

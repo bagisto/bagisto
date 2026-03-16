@@ -4,6 +4,7 @@ namespace Webkul\Product\Repositories;
 
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Product\Contracts\Product;
 
 class ProductAttributeValueRepository extends Repository
 {
@@ -19,7 +20,7 @@ class ProductAttributeValueRepository extends Repository
      * Save attribute values
      *
      * @param  array  $data
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @param  mixed  $attributes
      * @return void
      */

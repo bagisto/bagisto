@@ -2,10 +2,12 @@
 
 namespace Webkul\Admin\Http\Controllers\Sales;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
+use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\OrderDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Resources\AddressResource;
@@ -34,7 +36,7 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function index()
     {
@@ -52,7 +54,7 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create(int $cartId)
     {
@@ -119,7 +121,7 @@ class OrderController extends Controller
     /**
      * Show the view for the specified resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function view(int $id)
     {
@@ -131,7 +133,7 @@ class OrderController extends Controller
     /**
      * Reorder action for the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function reorder(int $id)
     {
@@ -158,7 +160,7 @@ class OrderController extends Controller
     /**
      * Cancel action for the specified resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function cancel(int $id)
     {
@@ -176,7 +178,7 @@ class OrderController extends Controller
     /**
      * Add comment to the order
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function comment(int $id)
     {
@@ -201,7 +203,7 @@ class OrderController extends Controller
     /**
      * Result of search product.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function search()
     {

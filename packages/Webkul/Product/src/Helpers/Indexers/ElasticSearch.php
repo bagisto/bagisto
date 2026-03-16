@@ -3,11 +3,16 @@
 namespace Webkul\Product\Helpers\Indexers;
 
 use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Illuminate\Database\Eloquent\Collection;
+use Webkul\Attribute\Contracts\Attribute;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Core\Contracts\Channel;
+use Webkul\Core\Contracts\Locale;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Product\Contracts\ProductAttributeValue;
 use Webkul\Product\Helpers\Product;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -51,14 +56,14 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Channel instance.
      *
-     * @var \Webkul\Core\Contracts\Channel
+     * @var Channel
      */
     protected $channel;
 
     /**
      * Locale instance.
      *
-     * @var \Webkul\Core\Contracts\Locale
+     * @var Locale
      */
     protected $locale;
 
@@ -92,7 +97,7 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Set Channel.
      *
-     * @param  \Webkul\Core\Contracts\Channel  $channel
+     * @param  Channel  $channel
      * @return self
      */
     public function setChannel($channel)
@@ -105,7 +110,7 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Set Locale.
      *
-     * @param  \Webkul\Core\Contracts\Locale  $locale
+     * @param  Locale  $locale
      * @return self
      */
     public function setLocale($locale)
@@ -194,7 +199,7 @@ class ElasticSearch extends AbstractIndexer
         }
 
         if (! empty($refreshIndices['body'])) {
-            ElasticsearchClient::bulk($refreshIndices);
+            ElasticSearchClient::bulk($refreshIndices);
         }
 
         if (! empty($removeIndices)) {
@@ -218,7 +223,7 @@ class ElasticSearch extends AbstractIndexer
                 ];
 
                 try {
-                    ElasticsearchClient::delete($params);
+                    ElasticSearchClient::delete($params);
                 } catch (ClientResponseException $e) {
                 }
             }
@@ -303,7 +308,7 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Returns attributes to index.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function getAttributes()
     {
@@ -336,8 +341,8 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Returns filterable attribute values.
      *
-     * @param  \Webkul\Attribute\Contracts\Attribute  $attribute
-     * @param  \Webkul\Product\Contracts\ProductAttributeValue
+     * @param  Attribute  $attribute
+     * @param  ProductAttributeValue
      * @return void
      */
     public function getAttributeValue($attribute)
@@ -367,7 +372,7 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Returns all channels.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function getChannels()
     {
@@ -381,7 +386,7 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Returns all customer groups.
      *
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return Collection
      */
     public function getCustomerGroups()
     {

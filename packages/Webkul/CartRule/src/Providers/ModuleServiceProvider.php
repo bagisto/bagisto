@@ -2,6 +2,11 @@
 
 namespace Webkul\CartRule\Providers;
 
+use Webkul\CartRule\Models\CartRule;
+use Webkul\CartRule\Models\CartRuleCoupon;
+use Webkul\CartRule\Models\CartRuleCouponUsage;
+use Webkul\CartRule\Models\CartRuleCustomer;
+use Webkul\CartRule\Models\CartRuleTranslation;
 use Webkul\Core\Providers\CoreModuleServiceProvider;
 
 class ModuleServiceProvider extends CoreModuleServiceProvider
@@ -12,10 +17,10 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
      * @var array
      */
     protected $models = [
-        \Webkul\CartRule\Models\CartRule::class,
-        \Webkul\CartRule\Models\CartRuleCoupon::class,
-        \Webkul\CartRule\Models\CartRuleCouponUsage::class,
-        \Webkul\CartRule\Models\CartRuleCustomer::class,
-        \Webkul\CartRule\Models\CartRuleTranslation::class,
+        CartRule::class,
+        CartRuleCoupon::class,
+        CartRuleCouponUsage::class,
+        CartRuleCustomer::class,
+        CartRuleTranslation::class,
     ];
 }

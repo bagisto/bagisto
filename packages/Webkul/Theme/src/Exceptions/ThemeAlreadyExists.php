@@ -2,12 +2,14 @@
 
 namespace Webkul\Theme\Exceptions;
 
+use Webkul\Theme\Theme;
+
 class ThemeAlreadyExists extends \Exception
 {
     /**
      * Create an instance.
      *
-     * @param  \Webkul\Theme\Theme  $theme
+     * @param  Theme  $theme
      * @return void
      */
     public function __construct($theme)

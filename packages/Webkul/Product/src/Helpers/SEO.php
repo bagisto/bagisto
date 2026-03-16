@@ -3,13 +3,15 @@
 namespace Webkul\Product\Helpers;
 
 use Illuminate\Support\Facades\Storage;
+use Webkul\Category\Contracts\Category;
+use Webkul\Product\Contracts\Product;
 
 class SEO
 {
     /**
      * Returns product json ld data for product
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return string
      */
     public function getProductJsonLd($product)
@@ -56,7 +58,7 @@ class SEO
     /**
      * Returns product categories
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return string
      */
     public function getProductCategories($product)
@@ -75,7 +77,7 @@ class SEO
     /**
      * Returns product images
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     public function getProductImages($product)
@@ -96,7 +98,7 @@ class SEO
     /**
      * Returns product reviews
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     public function getProductReviews($product)
@@ -124,7 +126,7 @@ class SEO
     /**
      * Returns product average ratings
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     public function getProductAggregateRating($product)
@@ -141,7 +143,7 @@ class SEO
     /**
      * Returns product average ratings
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return array
      */
     public function getProductOffers($product)
@@ -157,7 +159,7 @@ class SEO
     /**
      * Returns product json ld data for category
      *
-     * @param  \Webkul\Category\Contracts\Category  $category
+     * @param  Category  $category
      * @return array
      */
     public function getCategoryJsonLd($category)

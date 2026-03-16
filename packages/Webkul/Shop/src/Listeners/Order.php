@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Listeners;
 
 use Webkul\Sales\Contracts\Order as OrderContract;
+use Webkul\Sales\Contracts\OrderComment;
 use Webkul\Shop\Mail\Order\CanceledNotification;
 use Webkul\Shop\Mail\Order\CommentedNotification;
 use Webkul\Shop\Mail\Order\CreatedNotification;
@@ -30,7 +31,7 @@ class Order extends Base
     /**
      * Send cancel order mail.
      *
-     * @param  \Webkul\Sales\Contracts\Order  $order
+     * @param  OrderContract  $order
      * @return void
      */
     public function afterCanceled($order)
@@ -49,7 +50,7 @@ class Order extends Base
     /**
      * Send order comment mail.
      *
-     * @param  \Webkul\Sales\Contracts\OrderComment  $comment
+     * @param  OrderComment  $comment
      * @return void
      */
     public function afterCommented($comment)

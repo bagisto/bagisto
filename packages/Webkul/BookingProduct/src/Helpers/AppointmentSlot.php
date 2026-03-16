@@ -2,10 +2,12 @@
 
 namespace Webkul\BookingProduct\Helpers;
 
+use Webkul\BookingProduct\Contracts\BookingProduct;
+
 class AppointmentSlot extends Booking
 {
     /**
-     * @param  \Webkul\BookingProduct\Contracts\BookingProduct  $bookingProduct
+     * @param  BookingProduct  $bookingProduct
      */
     public function haveSufficientQuantity(int $qty, $bookingProduct): bool
     {

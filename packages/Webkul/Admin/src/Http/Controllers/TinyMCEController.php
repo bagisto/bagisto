@@ -2,6 +2,7 @@
 
 namespace Webkul\Admin\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Traits\Sanitizer;
 
@@ -33,7 +34,7 @@ class TinyMCEController extends Controller
     /**
      * Upload file from tinymce.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return JsonResponse
      */
     public function upload()
     {
