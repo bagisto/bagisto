@@ -17,7 +17,7 @@
                     <span class="text-[#DFAA8B]">{{ __('home.title.highlight2') }}</span>
                 </h1>
 
-                <p class="mt-6 text-[#000] max-w-md txt-lg">
+                <p class="mt-5 text-[#000] max-w-md txt-lg">
                     {{ __('home.description') }}
                 </p>
             </div>
