@@ -4818,6 +4818,8 @@ return [
                     'pending-payment' => 'Betaling in behandeling',
                     'processing' => 'Verwerken',
                     'production-mode-info' => 'Alleen voor productiemodus.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Paytm-betaalgateway',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay is een financieel technologieplatform dat bedrijven helpt betalingen te accepteren, verwerken en uitkeren.',
                     'sandbox' => 'Sandbox',

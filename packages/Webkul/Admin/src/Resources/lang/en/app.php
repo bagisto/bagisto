@@ -4818,6 +4818,8 @@ return [
                     'pending-payment' => 'Pending Payment',
                     'processing' => 'Processing',
                     'production-mode-info' => 'For production mode only.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Paytm Payment Gateway',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay is a financial technology platform that helps businesses accept, process, and disburse payments.',
                     'sandbox' => 'Sandbox',

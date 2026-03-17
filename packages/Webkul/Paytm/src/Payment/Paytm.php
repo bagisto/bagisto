@@ -53,8 +53,8 @@ class Paytm extends Payment
     public function getPaytmUrl()
     {
         return $this->getConfigData('sandbox')
-            ? 'https://securegw-stage.paytm.in/order/process'
-            : 'https://securegw.paytm.in/order/process';
+            ? 'https://securestage.paytmpayments.com/order/process'
+            : 'https://secure.paytmpayments.com/order/process';
     }
 
     /**

@@ -4818,6 +4818,8 @@ return [
                     'pending-payment' => 'תשלום ממתין',
                     'processing' => 'מעבד',
                     'production-mode-info' => 'למצב ייצור בלבד.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'שער תשלום Paytm',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay היא פלטפורמת טכנולוגיה פיננסית שמסייעת לעסקים לקבל, לעבד ולשלם תשלומים.',
                     'sandbox' => 'סנדבוקס',

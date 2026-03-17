@@ -4818,6 +4818,8 @@ return [
                     'pending-payment' => 'Pagamento in Sospeso',
                     'processing' => 'In Elaborazione',
                     'production-mode-info' => 'Solo per modalità di produzione.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Gateway di pagamento Paytm',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay è una piattaforma di tecnologia finanziaria che aiuta le aziende ad accettare, elaborare e distribuire pagamenti.',
                     'sandbox' => 'Sandbox',

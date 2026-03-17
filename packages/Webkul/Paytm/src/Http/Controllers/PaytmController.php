@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Repositories\CartRepository;
 use Webkul\Paytm\Payment\Paytm;
-use Webkul\Sales\Models\Order as OrderModel;
 use Webkul\Sales\Repositories\OrderRepository;
 use Webkul\Sales\Transformers\OrderResource;
 
@@ -23,6 +22,8 @@ class PaytmController extends Controller
 
     /**
      * Redirects to Paytm payment page.
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function redirect()
     {
@@ -35,7 +36,7 @@ class PaytmController extends Controller
         }
 
         if (Cart::hasError()) {
-            session()->flash('error', trans('paytm::app.shop.payment.general-error'));
+            session()->flash('error', trans('paytm::app.checkout.onepage.payment.paytm.general-error'));
 
             return redirect()->route('shop.checkout.cart.index');
         }
@@ -50,7 +51,7 @@ class PaytmController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
-        return view('shop::handoff.paytm', [
+        return view('paytm::checkout.redirect', [
             'paytmUrl' => $this->paytm->getPaytmUrl(),
             'paytmFields' => $this->paytm->getFormFields($cart),
         ]);
@@ -58,11 +59,13 @@ class PaytmController extends Controller
 
     /**
      * Handle Paytm callback.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function callback(Request $request)
     {
         $payload = $request->all();
-
         $status = $payload['STATUS'] ?? '';
         $message = $payload['RESPMSG'] ?? null;
 
@@ -71,56 +74,10 @@ class PaytmController extends Controller
 
             $cartId = $this->extractCartId($orderId);
 
-            if (! $cartId) {
-                return redirect()->route('paytm.cancel', [
-                    'message' => trans('paytm::app.shop.payment.missing-cart-id'),
-                ]);
-            }
-
-            $cart = $this->cartRepository->find($cartId);
-
-            if (! $cart) {
-                return redirect()->route('paytm.cancel', [
-                    'message' => trans('paytm::app.shop.payment.cart-not-found'),
-                ]);
-            }
-
-            if (! $this->paytm->verifyChecksum($payload)) {
-                return redirect()->route('paytm.cancel', [
-                    'message' => trans('paytm::app.shop.payment.checksum-failed'),
-                ]);
-            }
-
-            Cart::setCart($cart);
-
-            try {
-                Cart::collectTotals();
-
-                $this->validateOrder();
-
-                $data = (new OrderResource($cart))->jsonSerialize();
-
-                $order = $this->orderRepository->create($data);
-
-                $this->orderRepository->update([
-                    'status' => OrderModel::STATUS_PROCESSING,
-                ], $order->id);
-
-                if ($order->payment) {
-                    $order->payment->update([
-                        'additional' => $this->formatPaymentAdditional($payload),
-                    ]);
-                }
-
-                Cart::deActivateCart();
-
-                return redirect()->route('paytm.success', [
-                    'orderId' => $order->id,
-                    'message' => $message ?: trans('paytm::app.shop.payment.payment-success'),
-                ]);
-            } catch (\Exception $e) {
-                $message = trans('paytm::app.shop.payment.general-error');
-            }
+            return redirect()->route('paytm.success', [
+                'cart_id' => $cartId,
+                'payload' => $payload,
+            ]);
         }
 
         return redirect()->route('paytm.cancel', [
@@ -130,39 +87,94 @@ class PaytmController extends Controller
 
     /**
      * Handle Paytm cancel/failure redirect.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function cancel(Request $request)
     {
-        $customerMessage = $request->get('message') ?: trans('paytm::app.shop.payment.payment-failed');
+        $message = $request->get('message');
 
-        session()->flash('error', $customerMessage);
+        if (empty($message)) {
+            $message = trans('paytm::app.checkout.onepage.payment.paytm.payment-failed');
+        }
+
+        session()->flash('error', $message);
 
         return redirect()->route('shop.checkout.cart.index');
     }
 
     /**
      * Handle Paytm success redirect.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function success(Request $request)
     {
-        $customerMessage = $request->get('message') ?: trans('paytm::app.shop.payment.payment-success');
-        $orderId = $request->get('orderId');
+        $cartId = $request->get('cart_id', null);
 
-        session()->flash('success', $customerMessage);
-
-        if ($orderId) {
-            session()->flash('order_id', $orderId);
+        if (! $cartId) {
+            return redirect()->route('paytm.cancel', [
+                'message' => trans('paytm::app.checkout.onepage.payment.paytm.missing-cart-id'),
+            ]);
         }
 
-        return redirect()->route('shop.checkout.onepage.success');
+        $cart = $this->cartRepository->find($cartId);
+
+        if (! $cart) {
+            return redirect()->route('paytm.cancel', [
+                'message' => trans('paytm::app.checkout.onepage.payment.paytm.cart-not-found'),
+            ]);
+        }
+
+        $payload = $request->get('payload', []);
+
+        if (! $this->paytm->verifyChecksum($payload)) {
+            return redirect()->route('paytm.cancel', [
+                'message' => trans('paytm::app.checkout.onepage.payment.paytm.checksum-failed'),
+            ]);
+        }
+
+        Cart::setCart($cart);
+
+        try {
+            Cart::collectTotals();
+
+            $this->validateOrder();
+
+            $data = (new OrderResource($cart))->jsonSerialize();
+
+            $order = $this->orderRepository->create($data);
+
+            Cart::deActivateCart();
+
+            if ($order->payment) {
+                $order->payment->update([
+                    'additional' => $this->formatPaymentAdditional($payload),
+                ]);
+            }
+
+            session()->flash('order_id', $order->id);
+
+            return redirect()->route('shop.checkout.onepage.success');
+        } catch (\Exception $e) {
+            $message = trans('paytm::app.checkout.onepage.payment.paytm.general-error');
+        }
+
+         return redirect()->route('paytm.cancel', [
+            'message' => $message,
+        ]);
     }
 
     /**
      * Validate order before creation.
      *
-     * @return void|\Exception
+     * @return void
+     *
+     * @throws \Exception
      */
-    protected function validateOrder()
+    protected function validateOrder(): void
     {
         $cart = Cart::getCart();
 
@@ -196,12 +208,12 @@ class PaytmController extends Controller
     }
 
     /**
-     * Prepare payment additional data.
+     * Prepare payment additional data from Paytm response.
      *
      * @param  array  $payload
      * @return array
      */
-    protected function formatPaymentAdditional(array $payload)
+    protected function formatPaymentAdditional(array $payload): array
     {
         $fields = [
             'ORDERID',
@@ -234,7 +246,7 @@ class PaytmController extends Controller
      * @param  string|null  $orderId
      * @return int|null
      */
-    protected function extractCartId(?string $orderId)
+    protected function extractCartId(?string $orderId): ?int
     {
         if (! $orderId) {
             return null;

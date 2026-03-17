@@ -4818,6 +4818,8 @@ return [
                     'pending-payment' => 'Очікується оплата',
                     'processing' => 'Обробка',
                     'production-mode-info' => 'Тільки для виробничого режиму.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Платіжний шлюз Paytm',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay - це платформа фінансових технологій, яка допомагає підприємствам приймати, обробляти та виплачувати платежі.',
                     'sandbox' => 'Пісочниця',

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Paytm\Http\Controllers\PaytmController;
+use App\Http\Middleware\VerifyCsrfToken;
 
 Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function () {
     Route::prefix('paytm')->controller(PaytmController::class)->group(function () {
@@ -14,5 +15,5 @@ Route::group(['middleware' => ['web', 'theme', 'locale', 'currency']], function 
 });
 
 Route::post('paytm/callback', [PaytmController::class, 'callback'])
-    ->withoutMiddleware(\App\Http\Middleware\VerifyCsrfToken::class)
+    ->withoutMiddleware(VerifyCsrfToken::class)
     ->name('paytm.callback');

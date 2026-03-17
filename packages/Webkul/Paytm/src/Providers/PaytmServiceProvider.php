@@ -12,7 +12,8 @@ class PaytmServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__).'/Config/paymentmethods.php', 'payment_methods'
+            dirname(__DIR__).'/Config/paymentmethods.php',
+            'payment_methods'
         );
     }
 
@@ -22,5 +23,11 @@ class PaytmServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadRoutesFrom(__DIR__.'/../Routes/frount-routes.php');
+
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'paytm');
+
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'paytm');
+
+        $this->app->register(EventServiceProvider::class);
     }
 }
