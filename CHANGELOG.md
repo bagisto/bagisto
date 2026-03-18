@@ -2,9 +2,13 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.4.0-beta6 (18th of March 2026)** - **Release**
 
 * Removed `shetabit/visitor` package and all visitor tracking functionality including dashboard visitors widget, products with most visits reporting, customers traffic reporting, and purchase funnel visitor metrics.
+
+* Updated the upgrade guide (UPGRADE.md) with breaking changes from v2.3 including Laravel 12, reCAPTCHA Enterprise, PayPal SDK upgrade, visitor tracking removal, and Magic AI SDK migration.
+
+* Rewrote AGENTS.md with accurate codebase documentation covering architecture, conventions, commands, and development guidelines.
 
 ## **v2.4.0-beta5 (18th of March 2026)** - **Release**
 
