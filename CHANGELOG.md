@@ -2,6 +2,12 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Fixed an issue with Elasticsearch search for grouped products.
+
+- #10378 [fixed] - Added Elasticsearch index prefix support to avoid index conflicts when multiple Bagisto instances share the same Elasticsearch cluster.
+
 ## **v2.3.15 (11th of March 2026)** - *Release*
 
 - Added Exchange Rates core configuration with scheduled auto-update, API key management (Fixer & ExchangeRate-API), and `date_format` vee-validate rules.

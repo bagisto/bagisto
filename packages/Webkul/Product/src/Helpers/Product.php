@@ -10,6 +10,8 @@ class Product
      */
     public static function formatElasticSearchIndexName(string $channelCode, string $localeCode): string
     {
-        return 'products_'.strtolower($channelCode).'_'.strtolower($localeCode).'_index';
+        $prefix = config('elasticsearch.index_prefix');
+
+        return $prefix.'products_'.strtolower($channelCode).'_'.strtolower($localeCode).'_index';
     }
 }
