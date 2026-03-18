@@ -1078,6 +1078,7 @@ return [
             'remove' => 'Eliminar Cupón',
             'subtotal' => 'Subtotal',
             'success-apply' => 'Código de cupón aplicado con éxito.',
+            'usage-limit-exceeded' => 'Este código de cupón ha alcanzado su límite de uso y ya no es válido.',
         ],
 
         'login' => [
