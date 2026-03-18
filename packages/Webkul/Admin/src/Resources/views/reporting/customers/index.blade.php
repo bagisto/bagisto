@@ -36,9 +36,6 @@
             @include('admin::reporting.customers.most-orders')
         </div>
 
-        <!-- Customers Traffic Section -->
-        @include('admin::reporting.customers.total-traffic')
-
         <!-- Top Customer Groups Sections Container -->
         <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
             <!-- Top Customer Groups Section -->

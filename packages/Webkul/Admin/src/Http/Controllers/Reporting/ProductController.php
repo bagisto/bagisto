@@ -17,7 +17,6 @@ class ProductController extends Controller
         'top-selling-products-by-revenue' => 'getTopSellingProductsByRevenue',
         'top-selling-products-by-quantity' => 'getTopSellingProductsByQuantity',
         'products-with-most-reviews' => 'getProductsWithMostReviews',
-        'products-with-most-visits' => 'getProductsWithMostVisits',
         'last-search-terms' => 'getLastSearchTerms',
         'top-search-terms' => 'getTopSearchTerms',
     ];

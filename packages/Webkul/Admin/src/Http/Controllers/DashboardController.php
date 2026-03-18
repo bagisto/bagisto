@@ -18,7 +18,6 @@ class DashboardController extends Controller
         'today' => 'getTodayStats',
         'stock-threshold-products' => 'getStockThresholdProducts',
         'total-sales' => 'getSalesStats',
-        'total-visitors' => 'getVisitorStats',
         'top-selling-products' => 'getTopSellingProducts',
         'top-customers' => 'getTopCustomers',
     ];

@@ -20,15 +20,7 @@ return new class extends Migration
             }
         });
 
-        Schema::table('visits', function (Blueprint $table) {
-            if (! Schema::hasIndex('visits', 'visits_cid_ip_m_vid_vt_ca_idx')) {
-                $table->index(
-                    ['channel_id', 'ip', 'method', 'visitor_id', 'visitor_type', 'created_at'],
-                    'visits_cid_ip_m_vid_vt_ca_idx'
-                );
-            }
-        });
-    }
+}
 
     /**
      * Reverse the migrations.

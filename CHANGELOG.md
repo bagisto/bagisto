@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+* Removed `shetabit/visitor` package and all visitor tracking functionality including dashboard visitors widget, products with most visits reporting, customers traffic reporting, and purchase funnel visitor metrics.
+
 ## **v2.4.0-beta5 (18th of March 2026)** - **Release**
 
 * Included bug fix updates from version 2.3.
