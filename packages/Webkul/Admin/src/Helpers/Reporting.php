@@ -8,7 +8,6 @@ use Webkul\Admin\Helpers\Reporting\Cart;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Sale;
-use Webkul\Product\Models\Product as ProductModel;
 
 class Reporting
 {

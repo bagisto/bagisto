@@ -8,6 +8,7 @@ use Illuminate\Support\Collection;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Sale;
+
 class Dashboard
 {
     /**
