@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Fixed a critical race condition vulnerability in coupon usage during concurrent checkout, where two simultaneous orders could both redeem a single-use coupon. Coupon validation and usage consumption are now atomic using row-level locking inside the order creation transaction.
+
 - Fixed an issue with Elasticsearch search for grouped products.
 
 - #10378 [fixed] - Added Elasticsearch index prefix support to avoid index conflicts when multiple Bagisto instances share the same Elasticsearch cluster.
