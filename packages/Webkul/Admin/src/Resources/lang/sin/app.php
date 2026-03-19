@@ -4800,6 +4800,8 @@ return [
                     'pending-payment' => 'ඉල්ලා සිටින ගෙවීම',
                     'processing' => 'සංස්කරණය කිරීම',
                     'production-mode-info' => 'නිෂ්පාදන මාදිලිය සඳහා පමණක්.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Paytm ගෙවීම් ගේට්වේ',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay යනු ව්‍යාපාරයන්ට ගෙවීම් පිළිගැනීමට, සැකසීමට සහ බෙදා හැරීමට උපකාර කරන මූල්‍ය තාක්ෂණ වේදිකාවකි.',
                     'sandbox' => 'සැම්ප්ලින්',

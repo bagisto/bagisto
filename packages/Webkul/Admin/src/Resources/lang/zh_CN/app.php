@@ -4800,6 +4800,8 @@ return [
                     'pending-payment' => '待处理付款',
                     'processing' => '处理中',
                     'production-mode-info' => '仅限生产模式。',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Paytm 支付网关',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay 是一个金融技术平台，帮助企业接受、处理和支付款项。',
                     'sandbox' => '沙盒',

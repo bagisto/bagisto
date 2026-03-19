@@ -4800,6 +4800,8 @@ return [
                     'pending-payment' => 'Ожидающий платеж',
                     'processing' => 'Обработка',
                     'production-mode-info' => 'Только для производственного режима.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Платежный шлюз Paytm',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay - это платформа финансовых технологий, которая помогает предприятиям принимать, обрабатывать и выплачивать платежи.',
                     'sandbox' => 'Песочница',

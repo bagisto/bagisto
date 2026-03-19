@@ -69,6 +69,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Included bug fix updates from version 2.3.
 
+* Added Paytm payment gateway integration with redirect-based checkout flow.
+
 ## **v2.4.0-beta4 (5th of March 2026)** - **Release**
 
 * Enhanced the Laravel AI SDK integration for Magic AI and improved the related configuration sections.

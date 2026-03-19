@@ -4800,6 +4800,8 @@ return [
                     'pending-payment' => '保留中の支払い',
                     'processing' => '処理中',
                     'production-mode-info' => '本番モードのみ。',
+                    'paytm' => 'ペイティーエム',
+                    'paytm-info' => 'Paytm決済ゲートウェイ',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpayは、企業が支払いを受け入れ、処理し、支払いを行うのを支援する金融技術プラットフォームです。',
                     'sandbox' => 'サンドボックス',

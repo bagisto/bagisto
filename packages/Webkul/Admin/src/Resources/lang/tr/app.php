@@ -4800,6 +4800,8 @@ return [
                     'pending-payment' => 'Bekleyen Ödeme',
                     'processing' => 'İşleniyor',
                     'production-mode-info' => 'Yalnızca üretim modu için.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Paytm Ödeme Geçidi',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay, işletmelerin ödemeleri kabul etmesine, işlemesine ve ödemesine yardımcı olan bir finansal teknoloji platformudur.',
                     'sandbox' => 'Kum Havuzu',

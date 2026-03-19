@@ -4800,6 +4800,8 @@ return [
                     'pending-payment' => 'Paiement en attente',
                     'processing' => 'En cours de traitement',
                     'production-mode-info' => 'Pour le mode production uniquement.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Passerelle de paiement Paytm',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay est une plateforme de technologie financière qui aide les entreprises à accepter, traiter et décaisser des paiements.',
                     'sandbox' => 'Environnement de test',

@@ -4800,6 +4800,8 @@ return [
                     'pending-payment' => 'Pembayaran Menunggu',
                     'processing' => 'Proses',
                     'production-mode-info' => 'Hanya untuk mode produksi.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Gateway Pembayaran Paytm',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay adalah platform teknologi keuangan yang membantu bisnis menerima, memproses, dan mencairkan pembayaran.',
                     'sandbox' => 'Sandbox',

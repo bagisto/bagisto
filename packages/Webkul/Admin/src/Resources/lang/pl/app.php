@@ -4800,6 +4800,8 @@ return [
                     'pending-payment' => 'Oczekująca płatność',
                     'processing' => 'Przetwarzanie',
                     'production-mode-info' => 'Tylko dla trybu produkcyjnego.',
+                    'paytm' => 'Paytm',
+                    'paytm-info' => 'Bramka płatności Paytm',
                     'razorpay' => 'Razorpay',
                     'razorpay-info' => 'Razorpay to platforma technologii finansowej, która pomaga firmom akceptować, przetwarzać i wypłacać płatności.',
                     'sandbox' => 'Piaskownica',
