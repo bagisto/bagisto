@@ -169,6 +169,6 @@ class Dashboard
      */
     public function getDateRange(): string
     {
-        return $this->getStartDate()->format('d M').' - '.$this->getEndDate()->format('d M');
+        return $this->getStartDate()->translatedFormat('d M').' - '.$this->getEndDate()->translatedFormat('d M');
     }
 }
