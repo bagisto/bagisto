@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Cache-Verwaltung',
+                'info' => 'Anwendungscache verwalten, zwischengespeicherte Daten für Konfiguration, Routen, Ansichten und mehr löschen oder neu aufbauen.',
+
+                'general' => [
+                    'title' => 'Allgemein',
+                    'info' => 'Anwendungscaches löschen und neu aufbauen.',
+
+                    'cache-actions' => [
+                        'title' => 'Cache-Aktionen',
+                        'info' => 'Verwenden Sie die folgenden Schaltflächen, um bestimmte Caches zu löschen oder neu aufzubauen.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Cache leeren',
+                'clear-cache-info' => 'Zwischengespeicherte Daten entfernen, um die Anwendung zu zwingen, sie bei der nächsten Anfrage neu zu generieren.',
+                'build-cache-title' => 'Cache aufbauen',
+                'build-cache-info' => 'Caches vorab aufbauen und optimieren für bessere Leistung.',
+                'warning-title' => 'Wichtige Hinweise',
+                'warning-route-closures' => 'route:cache schlägt fehl, wenn eine Routendatei Closures anstelle von Controller-Referenzen verwendet.',
+                'warning-config-closures' => 'config:cache schlägt fehl, wenn eine Konfigurationsdatei Closures zurückgibt.',
+                'warning-permissions' => 'Dateisystem-Berechtigungsprobleme können die Cache-Erzeugung oder -Löschung verhindern.',
+                'invalid-action' => 'Ungültige Cache-Aktion angefordert.',
+                'action-success' => 'Befehl ":action" erfolgreich ausgeführt.',
+                'action-failed' => 'Befehl ":action" fehlgeschlagen. Überprüfen Sie die Ausgabe unten.',
+                'action-exception' => 'Cache-Aktion fehlgeschlagen: :message',
+                'clear-console' => 'Konsole leeren',
+                'console-title' => 'Ausgabekonsole',
+                'console-entries' => 'Einträge',
+                'console-empty' => 'Führen Sie eine Cache-Aktion aus, um die Ausgabe hier zu sehen...',
+                'console-unknown-error' => 'Ein unerwarteter Fehler ist aufgetreten.',
+
+                'actions' => [
+                    'clear-all' => 'Gesamten Cache leeren',
+                    'clear-config' => 'Konfigurations-Cache leeren',
+                    'clear-cache' => 'Anwendungs-Cache leeren',
+                    'clear-compiled' => 'Kompilierten Cache leeren',
+                    'clear-events' => 'Event-Cache leeren',
+                    'clear-routes' => 'Routen-Cache leeren',
+                    'clear-views' => 'Ansichten-Cache leeren',
+                    'build-all' => 'Gesamten Cache neu aufbauen',
+                    'build-config' => 'Konfiguration cachen',
+                    'build-routes' => 'Routen cachen',
+                    'build-views' => 'Ansichten cachen',
+                ],
+            ],
         ],
     ],
 

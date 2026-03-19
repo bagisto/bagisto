@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'ניהול מטמון',
+                'info' => 'נהל את מטמון האפליקציה, נקה או בנה מחדש נתונים מאוחסנים עבור הגדרות, נתיבים, תצוגות ועוד.',
+
+                'general' => [
+                    'title' => 'כללי',
+                    'info' => 'נקה ובנה מחדש מטמוני אפליקציה.',
+
+                    'cache-actions' => [
+                        'title' => 'פעולות מטמון',
+                        'info' => 'השתמש בכפתורים למטה כדי לנקות או לבנות מחדש מטמונים ספציפיים.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'נקה מטמון',
+                'clear-cache-info' => 'הסר נתונים מאוחסנים כדי לאלץ את האפליקציה לייצר אותם מחדש בבקשה הבאה.',
+                'build-cache-title' => 'בנה מטמון',
+                'build-cache-info' => 'בנה מראש ומטב מטמונים לביצועים טובים יותר.',
+                'warning-title' => 'הערות חשובות',
+                'warning-route-closures' => 'route:cache ייכשל אם קובץ נתיבים כלשהו משתמש ב-closures במקום הפניות לבקרים.',
+                'warning-config-closures' => 'config:cache ייכשל אם קובץ הגדרות כלשהו מחזיר closures.',
+                'warning-permissions' => 'בעיות הרשאות מערכת קבצים עלולות למנוע יצירה או ניקוי מטמון.',
+                'invalid-action' => 'פעולת מטמון לא חוקית.',
+                'action-success' => 'הפקודה ":action" בוצעה בהצלחה.',
+                'action-failed' => 'הפקודה ":action" נכשלה. בדוק את הפלט למטה.',
+                'action-exception' => 'פעולת מטמון נכשלה: :message',
+                'clear-console' => 'נקה קונסול',
+                'console-title' => 'קונסול פלט',
+                'console-entries' => 'רשומות',
+                'console-empty' => 'הפעל פעולת מטמון כדי לראות פלט כאן...',
+                'console-unknown-error' => 'אירעה שגיאה בלתי צפויה.',
+
+                'actions' => [
+                    'clear-all' => 'נקה את כל המטמון',
+                    'clear-config' => 'נקה מטמון הגדרות',
+                    'clear-cache' => 'נקה מטמון אפליקציה',
+                    'clear-compiled' => 'נקה מטמון מקומפל',
+                    'clear-events' => 'נקה מטמון אירועים',
+                    'clear-routes' => 'נקה מטמון נתיבים',
+                    'clear-views' => 'נקה מטמון תצוגות',
+                    'build-all' => 'בנה מחדש את כל המטמון',
+                    'build-config' => 'אחסן הגדרות במטמון',
+                    'build-routes' => 'אחסן נתיבים במטמון',
+                    'build-views' => 'אחסן תצוגות במטמון',
+                ],
+            ],
         ],
     ],
 

@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Manajemen Cache',
+                'info' => 'Kelola cache aplikasi, hapus atau bangun ulang data cache untuk konfigurasi, rute, tampilan, dan lainnya.',
+
+                'general' => [
+                    'title' => 'Umum',
+                    'info' => 'Hapus dan bangun ulang cache aplikasi.',
+
+                    'cache-actions' => [
+                        'title' => 'Tindakan Cache',
+                        'info' => 'Gunakan tombol di bawah untuk menghapus atau membangun ulang cache tertentu.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Hapus Cache',
+                'clear-cache-info' => 'Hapus data cache untuk memaksa aplikasi membuat ulang pada permintaan berikutnya.',
+                'build-cache-title' => 'Bangun Cache',
+                'build-cache-info' => 'Pra-bangun dan optimalkan cache untuk performa lebih baik.',
+                'warning-title' => 'Catatan Penting',
+                'warning-route-closures' => 'route:cache akan gagal jika ada file rute yang menggunakan closure alih-alih referensi controller.',
+                'warning-config-closures' => 'config:cache akan gagal jika ada file konfigurasi yang mengembalikan closure.',
+                'warning-permissions' => 'Masalah izin sistem file dapat mencegah pembuatan atau penghapusan cache.',
+                'invalid-action' => 'Tindakan cache tidak valid.',
+                'action-success' => 'Perintah ":action" berhasil dijalankan.',
+                'action-failed' => 'Perintah ":action" gagal. Periksa output di bawah.',
+                'action-exception' => 'Tindakan cache gagal: :message',
+                'clear-console' => 'Bersihkan Konsol',
+                'console-title' => 'Konsol Output',
+                'console-entries' => 'entri',
+                'console-empty' => 'Jalankan tindakan cache untuk melihat output di sini...',
+                'console-unknown-error' => 'Terjadi kesalahan tak terduga.',
+
+                'actions' => [
+                    'clear-all' => 'Hapus Semua Cache',
+                    'clear-config' => 'Hapus Cache Konfigurasi',
+                    'clear-cache' => 'Hapus Cache Aplikasi',
+                    'clear-compiled' => 'Hapus Cache Terkompilasi',
+                    'clear-events' => 'Hapus Cache Event',
+                    'clear-routes' => 'Hapus Cache Rute',
+                    'clear-views' => 'Hapus Cache Tampilan',
+                    'build-all' => 'Bangun Ulang Semua Cache',
+                    'build-config' => 'Cache Konfigurasi',
+                    'build-routes' => 'Cache Rute',
+                    'build-views' => 'Cache Tampilan',
+                ],
+            ],
         ],
     ],
 

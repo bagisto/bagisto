@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Gestione cache',
+                'info' => 'Gestisci la cache dell\'applicazione, cancella o ricostruisci i dati memorizzati per configurazione, rotte, viste e altro.',
+
+                'general' => [
+                    'title' => 'Generale',
+                    'info' => 'Cancella e ricostruisci le cache dell\'applicazione.',
+
+                    'cache-actions' => [
+                        'title' => 'Azioni cache',
+                        'info' => 'Usa i pulsanti qui sotto per cancellare o ricostruire cache specifiche.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Svuota cache',
+                'clear-cache-info' => 'Rimuovi i dati memorizzati per forzare l\'applicazione a rigenerarli alla prossima richiesta.',
+                'build-cache-title' => 'Costruisci cache',
+                'build-cache-info' => 'Pre-costruisci e ottimizza le cache per prestazioni migliori.',
+                'warning-title' => 'Note importanti',
+                'warning-route-closures' => 'route:cache fallirà se un file di rotte usa closure invece di riferimenti ai controller.',
+                'warning-config-closures' => 'config:cache fallirà se un file di configurazione restituisce closure.',
+                'warning-permissions' => 'I problemi di permessi del filesystem possono impedire la generazione o la cancellazione della cache.',
+                'invalid-action' => 'Azione cache non valida.',
+                'action-success' => 'Comando ":action" eseguito con successo.',
+                'action-failed' => 'Comando ":action" fallito. Controlla l\'output qui sotto.',
+                'action-exception' => 'Azione cache fallita: :message',
+                'clear-console' => 'Pulisci console',
+                'console-title' => 'Console di output',
+                'console-entries' => 'voci',
+                'console-empty' => 'Esegui un\'azione cache per vedere l\'output qui...',
+                'console-unknown-error' => 'Si è verificato un errore imprevisto.',
+
+                'actions' => [
+                    'clear-all' => 'Svuota tutta la cache',
+                    'clear-config' => 'Svuota cache configurazione',
+                    'clear-cache' => 'Svuota cache applicazione',
+                    'clear-compiled' => 'Svuota cache compilata',
+                    'clear-events' => 'Svuota cache eventi',
+                    'clear-routes' => 'Svuota cache rotte',
+                    'clear-views' => 'Svuota cache viste',
+                    'build-all' => 'Ricostruisci tutta la cache',
+                    'build-config' => 'Metti in cache la configurazione',
+                    'build-routes' => 'Metti in cache le rotte',
+                    'build-views' => 'Metti in cache le viste',
+                ],
+            ],
         ],
     ],
 

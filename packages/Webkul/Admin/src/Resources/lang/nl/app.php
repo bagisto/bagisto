@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Cachebeheer',
+                'info' => 'Beheer de applicatiecache, wis of herbouw gecachte gegevens voor configuratie, routes, weergaven en meer.',
+
+                'general' => [
+                    'title' => 'Algemeen',
+                    'info' => 'Applicatiecaches wissen en herbouwen.',
+
+                    'cache-actions' => [
+                        'title' => 'Cache-acties',
+                        'info' => 'Gebruik de onderstaande knoppen om specifieke caches te wissen of te herbouwen.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Cache wissen',
+                'clear-cache-info' => 'Verwijder gecachte gegevens om de applicatie te dwingen deze opnieuw te genereren bij het volgende verzoek.',
+                'build-cache-title' => 'Cache opbouwen',
+                'build-cache-info' => 'Bouw caches vooraf op en optimaliseer ze voor betere prestaties.',
+                'warning-title' => 'Belangrijke opmerkingen',
+                'warning-route-closures' => 'route:cache zal mislukken als een routebestand closures gebruikt in plaats van controllerverwijzingen.',
+                'warning-config-closures' => 'config:cache zal mislukken als een configuratiebestand closures retourneert.',
+                'warning-permissions' => 'Bestandssysteemrechten kunnen het genereren of wissen van cache voorkomen.',
+                'invalid-action' => 'Ongeldige cache-actie aangevraagd.',
+                'action-success' => 'Commando ":action" succesvol uitgevoerd.',
+                'action-failed' => 'Commando ":action" mislukt. Controleer de uitvoer hieronder.',
+                'action-exception' => 'Cache-actie mislukt: :message',
+                'clear-console' => 'Console wissen',
+                'console-title' => 'Uitvoerconsole',
+                'console-entries' => 'vermeldingen',
+                'console-empty' => 'Voer een cache-actie uit om de uitvoer hier te zien...',
+                'console-unknown-error' => 'Er is een onverwachte fout opgetreden.',
+
+                'actions' => [
+                    'clear-all' => 'Alle cache wissen',
+                    'clear-config' => 'Configuratiecache wissen',
+                    'clear-cache' => 'Applicatiecache wissen',
+                    'clear-compiled' => 'Gecompileerde cache wissen',
+                    'clear-events' => 'Eventcache wissen',
+                    'clear-routes' => 'Routecache wissen',
+                    'clear-views' => 'Weergavecache wissen',
+                    'build-all' => 'Alle cache herbouwen',
+                    'build-config' => 'Configuratie cachen',
+                    'build-routes' => 'Routes cachen',
+                    'build-views' => 'Weergaven cachen',
+                ],
+            ],
         ],
     ],
 

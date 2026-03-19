@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Önbellek Yönetimi',
+                'info' => 'Uygulama önbelleğini yönetin, yapılandırma, rotalar, görünümler ve daha fazlası için önbellek verilerini temizleyin veya yeniden oluşturun.',
+
+                'general' => [
+                    'title' => 'Genel',
+                    'info' => 'Uygulama önbelleklerini temizleyin ve yeniden oluşturun.',
+
+                    'cache-actions' => [
+                        'title' => 'Önbellek İşlemleri',
+                        'info' => 'Belirli önbellekleri temizlemek veya yeniden oluşturmak için aşağıdaki düğmeleri kullanın.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Önbelleği Temizle',
+                'clear-cache-info' => 'Uygulamayı bir sonraki istekte yeniden oluşturmaya zorlamak için önbellek verilerini kaldırın.',
+                'build-cache-title' => 'Önbellek Oluştur',
+                'build-cache-info' => 'Daha iyi performans için önbellekleri önceden oluşturun ve optimize edin.',
+                'warning-title' => 'Önemli Notlar',
+                'warning-route-closures' => 'Herhangi bir rota dosyası denetleyici referansları yerine closure kullanıyorsa route:cache başarısız olur.',
+                'warning-config-closures' => 'Herhangi bir yapılandırma dosyası closure döndürüyorsa config:cache başarısız olur.',
+                'warning-permissions' => 'Dosya sistemi izin sorunları önbellek oluşturmayı veya temizlemeyi engelleyebilir.',
+                'invalid-action' => 'Geçersiz önbellek işlemi istendi.',
+                'action-success' => '":action" komutu başarıyla yürütüldü.',
+                'action-failed' => '":action" komutu başarısız oldu. Aşağıdaki çıktıyı kontrol edin.',
+                'action-exception' => 'Önbellek işlemi başarısız: :message',
+                'clear-console' => 'Konsolu Temizle',
+                'console-title' => 'Çıktı Konsolu',
+                'console-entries' => 'girdi',
+                'console-empty' => 'Çıktıyı burada görmek için bir önbellek işlemi çalıştırın...',
+                'console-unknown-error' => 'Beklenmeyen bir hata oluştu.',
+
+                'actions' => [
+                    'clear-all' => 'Tüm Önbelleği Temizle',
+                    'clear-config' => 'Yapılandırma Önbelleğini Temizle',
+                    'clear-cache' => 'Uygulama Önbelleğini Temizle',
+                    'clear-compiled' => 'Derlenmiş Önbelleği Temizle',
+                    'clear-events' => 'Olay Önbelleğini Temizle',
+                    'clear-routes' => 'Rota Önbelleğini Temizle',
+                    'clear-views' => 'Görünüm Önbelleğini Temizle',
+                    'build-all' => 'Tüm Önbelleği Yeniden Oluştur',
+                    'build-config' => 'Yapılandırmayı Önbellekle',
+                    'build-routes' => 'Rotaları Önbellekle',
+                    'build-views' => 'Görünümleri Önbellekle',
+                ],
+            ],
         ],
     ],
 

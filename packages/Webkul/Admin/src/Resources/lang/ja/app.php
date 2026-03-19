@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'キャッシュ管理',
+                'info' => 'アプリケーションキャッシュを管理し、設定、ルート、ビューなどのキャッシュデータをクリアまたは再構築します。',
+
+                'general' => [
+                    'title' => '一般',
+                    'info' => 'アプリケーションキャッシュのクリアと再構築。',
+
+                    'cache-actions' => [
+                        'title' => 'キャッシュアクション',
+                        'info' => '以下のボタンを使用して、特定のキャッシュをクリアまたは再構築します。',
+                    ],
+                ],
+
+                'clear-cache-title' => 'キャッシュをクリア',
+                'clear-cache-info' => 'キャッシュデータを削除して、次のリクエストでアプリケーションに再生成を強制します。',
+                'build-cache-title' => 'キャッシュを構築',
+                'build-cache-info' => 'パフォーマンス向上のためにキャッシュを事前構築・最適化します。',
+                'warning-title' => '重要な注意事項',
+                'warning-route-closures' => 'route:cacheは、ルートファイルがコントローラー参照の代わりにクロージャを使用している場合に失敗します。',
+                'warning-config-closures' => 'config:cacheは、設定ファイルがクロージャを返す場合に失敗します。',
+                'warning-permissions' => 'ファイルシステムの権限の問題により、キャッシュの生成またはクリアが妨げられる場合があります。',
+                'invalid-action' => '無効なキャッシュアクションがリクエストされました。',
+                'action-success' => 'コマンド「:action」が正常に実行されました。',
+                'action-failed' => 'コマンド「:action」が失敗しました。以下の出力を確認してください。',
+                'action-exception' => 'キャッシュアクションが失敗しました: :message',
+                'clear-console' => 'コンソールをクリア',
+                'console-title' => '出力コンソール',
+                'console-entries' => 'エントリ',
+                'console-empty' => 'キャッシュアクションを実行して出力をここに表示...',
+                'console-unknown-error' => '予期しないエラーが発生しました。',
+
+                'actions' => [
+                    'clear-all' => 'すべてのキャッシュをクリア',
+                    'clear-config' => '設定キャッシュをクリア',
+                    'clear-cache' => 'アプリケーションキャッシュをクリア',
+                    'clear-compiled' => 'コンパイル済みキャッシュをクリア',
+                    'clear-events' => 'イベントキャッシュをクリア',
+                    'clear-routes' => 'ルートキャッシュをクリア',
+                    'clear-views' => 'ビューキャッシュをクリア',
+                    'build-all' => 'すべてのキャッシュを再構築',
+                    'build-config' => '設定をキャッシュ',
+                    'build-routes' => 'ルートをキャッシュ',
+                    'build-views' => 'ビューをキャッシュ',
+                ],
+            ],
         ],
     ],
 

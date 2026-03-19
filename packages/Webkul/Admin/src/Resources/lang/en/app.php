@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Cache Management',
+                'info' => 'Manage application cache, clear or rebuild cached data for configuration, routes, views, and more.',
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'Clear and rebuild application caches.',
+
+                    'cache-actions' => [
+                        'title' => 'Cache Actions',
+                        'info' => 'Use the buttons below to clear or rebuild specific caches.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Clear Cache',
+                'clear-cache-info' => 'Remove cached data to force the application to regenerate it on next request.',
+                'build-cache-title' => 'Build Cache',
+                'build-cache-info' => 'Pre-build and optimize caches for better performance.',
+                'warning-title' => 'Important Notes',
+                'warning-route-closures' => 'route:cache will fail if any route file uses closures instead of controller references.',
+                'warning-config-closures' => 'config:cache will fail if any configuration file returns closures.',
+                'warning-permissions' => 'Filesystem permission issues may prevent cache generation or clearing.',
+                'invalid-action' => 'Invalid cache action requested.',
+                'action-success' => 'Command ":action" executed successfully.',
+                'action-failed' => 'Command ":action" failed. Check the output below.',
+                'action-exception' => 'Cache action failed: :message',
+                'clear-console' => 'Clear Console',
+                'console-title' => 'Output Console',
+                'console-entries' => 'entries',
+                'console-empty' => 'Run a cache action to see output here...',
+                'console-unknown-error' => 'An unexpected error occurred.',
+
+                'actions' => [
+                    'clear-all' => 'Clear All Cache',
+                    'clear-config' => 'Clear Config Cache',
+                    'clear-cache' => 'Clear Application Cache',
+                    'clear-compiled' => 'Clear Compiled Cache',
+                    'clear-events' => 'Clear Event Cache',
+                    'clear-routes' => 'Clear Route Cache',
+                    'clear-views' => 'Clear View Cache',
+                    'build-all' => 'Rebuild All Cache',
+                    'build-config' => 'Cache Config',
+                    'build-routes' => 'Cache Routes',
+                    'build-views' => 'Cache Views',
+                ],
+            ],
         ],
     ],
 

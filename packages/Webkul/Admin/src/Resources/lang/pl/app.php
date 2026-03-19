@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Zarządzanie pamięcią podręczną',
+                'info' => 'Zarządzaj pamięcią podręczną aplikacji, wyczyść lub odbuduj dane z pamięci podręcznej dla konfiguracji, tras, widoków i więcej.',
+
+                'general' => [
+                    'title' => 'Ogólne',
+                    'info' => 'Wyczyść i odbuduj pamięci podręczne aplikacji.',
+
+                    'cache-actions' => [
+                        'title' => 'Akcje pamięci podręcznej',
+                        'info' => 'Użyj poniższych przycisków, aby wyczyścić lub odbudować określone pamięci podręczne.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Wyczyść pamięć podręczną',
+                'clear-cache-info' => 'Usuń dane z pamięci podręcznej, aby wymusić na aplikacji ich ponowne wygenerowanie przy następnym żądaniu.',
+                'build-cache-title' => 'Zbuduj pamięć podręczną',
+                'build-cache-info' => 'Wstępnie zbuduj i zoptymalizuj pamięci podręczne dla lepszej wydajności.',
+                'warning-title' => 'Ważne uwagi',
+                'warning-route-closures' => 'route:cache nie powiedzie się, jeśli jakikolwiek plik tras używa domknięć zamiast referencji do kontrolerów.',
+                'warning-config-closures' => 'config:cache nie powiedzie się, jeśli jakikolwiek plik konfiguracji zwraca domknięcia.',
+                'warning-permissions' => 'Problemy z uprawnieniami systemu plików mogą uniemożliwić generowanie lub czyszczenie pamięci podręcznej.',
+                'invalid-action' => 'Żądano nieprawidłowej akcji pamięci podręcznej.',
+                'action-success' => 'Polecenie ":action" wykonane pomyślnie.',
+                'action-failed' => 'Polecenie ":action" nie powiodło się. Sprawdź dane wyjściowe poniżej.',
+                'action-exception' => 'Akcja pamięci podręcznej nie powiodła się: :message',
+                'clear-console' => 'Wyczyść konsolę',
+                'console-title' => 'Konsola wyjściowa',
+                'console-entries' => 'wpisów',
+                'console-empty' => 'Uruchom akcję pamięci podręcznej, aby zobaczyć dane wyjściowe tutaj...',
+                'console-unknown-error' => 'Wystąpił nieoczekiwany błąd.',
+
+                'actions' => [
+                    'clear-all' => 'Wyczyść całą pamięć podręczną',
+                    'clear-config' => 'Wyczyść pamięć konfiguracji',
+                    'clear-cache' => 'Wyczyść pamięć aplikacji',
+                    'clear-compiled' => 'Wyczyść skompilowaną pamięć',
+                    'clear-events' => 'Wyczyść pamięć zdarzeń',
+                    'clear-routes' => 'Wyczyść pamięć tras',
+                    'clear-views' => 'Wyczyść pamięć widoków',
+                    'build-all' => 'Odbuduj całą pamięć podręczną',
+                    'build-config' => 'Zbuduj pamięć konfiguracji',
+                    'build-routes' => 'Zbuduj pamięć tras',
+                    'build-views' => 'Zbuduj pamięć widoków',
+                ],
+            ],
         ],
     ],
 
