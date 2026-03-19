@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed an issue with Elasticsearch search for grouped products.
 
+- #11204 [fixed] - Fixed a Chrome browser display issue caused by `v-pre` handling related to SSTI protection.
+
 - #10378 [fixed] - Added Elasticsearch index prefix support to avoid index conflicts when multiple Bagisto instances share the same Elasticsearch cluster.
 
 ## **v2.3.15 (11th of March 2026)** - *Release*
