@@ -1154,6 +1154,7 @@ return [
             'remove' => 'Kuponu Kaldır',
             'subtotal' => 'Ara Toplam',
             'success-apply' => 'Kupon başarıyla uygulandı.',
+            'usage-limit-exceeded' => 'Bu kupon kodu kullanım sınırına ulaştı ve artık geçerli değil.',
         ],
 
         'login' => [

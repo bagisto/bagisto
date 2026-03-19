@@ -1154,6 +1154,7 @@ return [
             'remove' => 'Remover Cupom',
             'subtotal' => 'Subtotal',
             'success-apply' => 'Código do cupom aplicado com sucesso.',
+            'usage-limit-exceeded' => 'Este código de cupom atingiu seu limite de uso e não é mais válido.',
         ],
 
         'login' => [
