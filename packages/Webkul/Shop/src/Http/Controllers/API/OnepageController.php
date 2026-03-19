@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Webkul\CartRule\Exceptions\CouponUsageLimitExceededException;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Payment\Facades\Payment;
@@ -174,7 +175,18 @@ class OnepageController extends APIController
 
         $data = (new OrderResource($cart))->jsonSerialize();
 
-        $order = $this->orderRepository->create($data);
+        try {
+            $order = $this->orderRepository->create($data);
+        } catch (CouponUsageLimitExceededException $e) {
+            cart()->removeCouponCode();
+
+            Cart::collectTotals();
+
+            return new JsonResource([
+                'redirect' => false,
+                'message' => trans('shop::app.checkout.cart.coupon.usage-limit-exceeded'),
+            ]);
+        }
 
         Cart::deActivateCart();
 

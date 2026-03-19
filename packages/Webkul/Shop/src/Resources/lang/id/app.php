@@ -1154,6 +1154,7 @@ return [
             'remove' => 'Hapus Kupon',
             'subtotal' => 'Subtotal',
             'success-apply' => 'Kode kupon berhasil diterapkan.',
+            'usage-limit-exceeded' => 'Kode kupon ini telah mencapai batas penggunaan dan tidak lagi valid.',
         ],
 
         'login' => [

@@ -1154,6 +1154,7 @@ return [
             'remove' => 'Remove Coupon',
             'subtotal' => 'Subtotal',
             'success-apply' => 'Coupon code applied successfully.',
+            'usage-limit-exceeded' => 'This coupon code has reached its usage limit and is no longer valid.',
         ],
 
         'login' => [

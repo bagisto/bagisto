@@ -1154,6 +1154,7 @@ return [
             'remove' => 'Eliminar Codi',
             'subtotal' => 'Subtotal',
             'success-apply' => 'Codi de descompte aplicat amb èxit.',
+            'usage-limit-exceeded' => 'Aquest codi de cupó ha assolit el seu límit d\'ús i ja no és vàlid.',
         ],
 
         'login' => [

@@ -2,6 +2,7 @@
 
 namespace Webkul\CartRule\Listeners;
 
+use Webkul\CartRule\Exceptions\CouponUsageLimitExceededException;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\CartRule\Repositories\CartRuleCouponUsageRepository;
 use Webkul\CartRule\Repositories\CartRuleCustomerRepository;
@@ -22,10 +23,17 @@ class Order
     ) {}
 
     /**
-     * Save cart rule and cart rule coupon properties after place order
+     * Validate and record cart rule and coupon usage atomically after order save.
+     *
+     * This listener runs inside the order creation transaction. It acquires
+     * row-level locks on coupon and usage records, re-validates usage limits,
+     * and increments counters atomically. If limits are exceeded (due to a
+     * concurrent request), it throws an exception to roll back the order.
      *
      * @param  \Webkul\Sales\Contracts\Order  $order
      * @return void
+     *
+     * @throws CouponUsageLimitExceededException
      */
     public function manageCartRule($order)
     {
@@ -33,30 +41,58 @@ class Order
             return;
         }
 
-        $cartRuleIds = explode(',', $order->applied_cart_rule_ids);
+        $this->processCartRuleUsage($order);
 
-        $cartRuleIds = array_unique($cartRuleIds);
+        $this->processCouponUsage($order);
+    }
+
+    /**
+     * Process and increment cart rule usage with per-customer validation.
+     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     *
+     * @throws CouponUsageLimitExceededException
+     */
+    protected function processCartRuleUsage($order): void
+    {
+        $cartRuleIds = array_unique(array_filter(explode(',', $order->applied_cart_rule_ids)));
 
         foreach ($cartRuleIds as $ruleId) {
-            $rule = $this->cartRuleRepository->find($ruleId);
+            $rule = $this->cartRuleRepository
+                ->getModel()
+                ->newQuery()
+                ->lockForUpdate()
+                ->find($ruleId);
 
             if (! $rule) {
                 continue;
             }
 
-            $rule->update(['times_used' => $rule->times_used + 1]);
+            $rule->increment('times_used');
 
             if (! $order->customer_id) {
                 continue;
             }
 
-            $ruleCustomer = $this->cartRuleCustomerRepository->findOneWhere([
-                'customer_id' => $order->customer_id,
-                'cart_rule_id' => $ruleId,
-            ]);
+            $ruleCustomer = $this->cartRuleCustomerRepository
+                ->getModel()
+                ->newQuery()
+                ->lockForUpdate()
+                ->where('customer_id', $order->customer_id)
+                ->where('cart_rule_id', $ruleId)
+                ->first();
 
             if ($ruleCustomer) {
-                $this->cartRuleCustomerRepository->update(['times_used' => $ruleCustomer->times_used + 1], $ruleCustomer->id);
+                if (
+                    $rule->usage_per_customer
+                    && $ruleCustomer->times_used >= $rule->usage_per_customer
+                ) {
+                    throw new CouponUsageLimitExceededException(
+                        trans('shop::app.checkout.cart.coupon.usage-limit-exceeded')
+                    );
+                }
+
+                $ruleCustomer->increment('times_used');
             } else {
                 $this->cartRuleCustomerRepository->create([
                     'customer_id' => $order->customer_id,
@@ -65,32 +101,91 @@ class Order
                 ]);
             }
         }
+    }
 
+    /**
+     * Process and increment coupon usage with global and per-customer validation.
+     *
+     * @param  \Webkul\Sales\Contracts\Order  $order
+     *
+     * @throws CouponUsageLimitExceededException
+     */
+    protected function processCouponUsage($order): void
+    {
         if (! $order->coupon_code) {
             return;
         }
 
-        $coupon = $this->cartRuleCouponRepository->findOneByField('code', $order->coupon_code);
+        $coupon = $this->cartRuleCouponRepository
+            ->getModel()
+            ->newQuery()
+            ->lockForUpdate()
+            ->where('code', $order->coupon_code)
+            ->first();
 
-        if ($coupon) {
-            $this->cartRuleCouponRepository->update(['times_used' => $coupon->times_used + 1], $coupon->id);
+        if (! $coupon) {
+            return;
+        }
 
-            if ($order->customer_id) {
-                $couponUsage = $this->cartRuleCouponUsageRepository->findOneWhere([
-                    'customer_id' => $order->customer_id,
-                    'cart_rule_coupon_id' => $coupon->id,
-                ]);
+        /**
+         * Validate global coupon usage limit. The lock ensures only one
+         * transaction can read and increment this value at a time.
+         */
+        if (
+            $coupon->usage_limit
+            && $coupon->times_used >= $coupon->usage_limit
+        ) {
+            throw new CouponUsageLimitExceededException(
+                trans('shop::app.checkout.cart.coupon.usage-limit-exceeded')
+            );
+        }
 
-                if ($couponUsage) {
-                    $this->cartRuleCouponUsageRepository->update(['times_used' => $couponUsage->times_used + 1], $couponUsage->id);
-                } else {
-                    $this->cartRuleCouponUsageRepository->create([
-                        'customer_id' => $order->customer_id,
-                        'cart_rule_coupon_id' => $coupon->id,
-                        'times_used' => 1,
-                    ]);
-                }
+        /**
+         * Validate per-customer coupon usage limit.
+         */
+        $couponUsage = null;
+
+        if ($order->customer_id && $coupon->usage_per_customer) {
+            $couponUsage = $this->cartRuleCouponUsageRepository
+                ->getModel()
+                ->newQuery()
+                ->lockForUpdate()
+                ->where('customer_id', $order->customer_id)
+                ->where('cart_rule_coupon_id', $coupon->id)
+                ->first();
+
+            if (
+                $couponUsage
+                && $couponUsage->times_used >= $coupon->usage_per_customer
+            ) {
+                throw new CouponUsageLimitExceededException(
+                    trans('shop::app.checkout.cart.coupon.usage-limit-exceeded')
+                );
             }
+        }
+
+        /**
+         * All limits validated under lock — safe to increment.
+         */
+        $coupon->increment('times_used');
+
+        if (! $order->customer_id) {
+            return;
+        }
+
+        $couponUsage = $couponUsage ?? $this->cartRuleCouponUsageRepository->findOneWhere([
+            'customer_id' => $order->customer_id,
+            'cart_rule_coupon_id' => $coupon->id,
+        ]);
+
+        if ($couponUsage) {
+            $couponUsage->increment('times_used');
+        } else {
+            $this->cartRuleCouponUsageRepository->create([
+                'customer_id' => $order->customer_id,
+                'cart_rule_coupon_id' => $coupon->id,
+                'times_used' => 1,
+            ]);
         }
     }
 }
