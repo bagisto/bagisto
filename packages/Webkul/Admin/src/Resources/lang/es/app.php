@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Gestión de caché',
+                'info' => 'Administre la caché de la aplicación, borre o reconstruya los datos en caché para configuración, rutas, vistas y más.',
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'Borrar y reconstruir cachés de la aplicación.',
+
+                    'cache-actions' => [
+                        'title' => 'Acciones de caché',
+                        'info' => 'Use los botones de abajo para borrar o reconstruir cachés específicas.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Borrar caché',
+                'clear-cache-info' => 'Eliminar datos en caché para forzar a la aplicación a regenerarlos en la próxima solicitud.',
+                'build-cache-title' => 'Construir caché',
+                'build-cache-info' => 'Pre-construir y optimizar cachés para un mejor rendimiento.',
+                'warning-title' => 'Notas importantes',
+                'warning-route-closures' => 'route:cache fallará si algún archivo de rutas usa closures en lugar de referencias a controladores.',
+                'warning-config-closures' => 'config:cache fallará si algún archivo de configuración devuelve closures.',
+                'warning-permissions' => 'Los problemas de permisos del sistema de archivos pueden impedir la generación o el borrado de caché.',
+                'invalid-action' => 'Acción de caché no válida.',
+                'action-success' => 'Comando ":action" ejecutado exitosamente.',
+                'action-failed' => 'Comando ":action" falló. Revise la salida a continuación.',
+                'action-exception' => 'La acción de caché falló: :message',
+                'clear-console' => 'Limpiar consola',
+                'console-title' => 'Consola de salida',
+                'console-entries' => 'entradas',
+                'console-empty' => 'Ejecute una acción de caché para ver la salida aquí...',
+                'console-unknown-error' => 'Ocurrió un error inesperado.',
+
+                'actions' => [
+                    'clear-all' => 'Borrar toda la caché',
+                    'clear-config' => 'Borrar caché de configuración',
+                    'clear-cache' => 'Borrar caché de aplicación',
+                    'clear-compiled' => 'Borrar caché compilada',
+                    'clear-events' => 'Borrar caché de eventos',
+                    'clear-routes' => 'Borrar caché de rutas',
+                    'clear-views' => 'Borrar caché de vistas',
+                    'build-all' => 'Reconstruir toda la caché',
+                    'build-config' => 'Cachear configuración',
+                    'build-routes' => 'Cachear rutas',
+                    'build-views' => 'Cachear vistas',
+                ],
+            ],
         ],
     ],
 

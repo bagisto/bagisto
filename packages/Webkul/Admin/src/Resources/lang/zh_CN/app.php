@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => '缓存管理',
+                'info' => '管理应用程序缓存，清除或重建配置、路由、视图等的缓存数据。',
+
+                'general' => [
+                    'title' => '常规',
+                    'info' => '清除和重建应用程序缓存。',
+
+                    'cache-actions' => [
+                        'title' => '缓存操作',
+                        'info' => '使用下面的按钮清除或重建特定缓存。',
+                    ],
+                ],
+
+                'clear-cache-title' => '清除缓存',
+                'clear-cache-info' => '删除缓存数据以强制应用程序在下次请求时重新生成。',
+                'build-cache-title' => '构建缓存',
+                'build-cache-info' => '预构建和优化缓存以获得更好的性能。',
+                'warning-title' => '重要说明',
+                'warning-route-closures' => '如果任何路由文件使用闭包而不是控制器引用，route:cache 将失败。',
+                'warning-config-closures' => '如果任何配置文件返回闭包，config:cache 将失败。',
+                'warning-permissions' => '文件系统权限问题可能会阻止缓存生成或清除。',
+                'invalid-action' => '请求了无效的缓存操作。',
+                'action-success' => '命令 ":action" 执行成功。',
+                'action-failed' => '命令 ":action" 失败。请检查下方输出。',
+                'action-exception' => '缓存操作失败：:message',
+                'clear-console' => '清除控制台',
+                'console-title' => '输出控制台',
+                'console-entries' => '条记录',
+                'console-empty' => '运行缓存操作以在此处查看输出...',
+                'console-unknown-error' => '发生意外错误。',
+
+                'actions' => [
+                    'clear-all' => '清除所有缓存',
+                    'clear-config' => '清除配置缓存',
+                    'clear-cache' => '清除应用程序缓存',
+                    'clear-compiled' => '清除编译缓存',
+                    'clear-events' => '清除事件缓存',
+                    'clear-routes' => '清除路由缓存',
+                    'clear-views' => '清除视图缓存',
+                    'build-all' => '重建所有缓存',
+                    'build-config' => '缓存配置',
+                    'build-routes' => '缓存路由',
+                    'build-views' => '缓存视图',
+                ],
+            ],
         ],
     ],
 

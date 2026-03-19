@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Gestion du cache',
+                'info' => 'Gérez le cache de l\'application, effacez ou reconstruisez les données en cache pour la configuration, les routes, les vues et plus encore.',
+
+                'general' => [
+                    'title' => 'Général',
+                    'info' => 'Effacer et reconstruire les caches de l\'application.',
+
+                    'cache-actions' => [
+                        'title' => 'Actions de cache',
+                        'info' => 'Utilisez les boutons ci-dessous pour effacer ou reconstruire des caches spécifiques.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Vider le cache',
+                'clear-cache-info' => 'Supprimer les données en cache pour forcer l\'application à les régénérer lors de la prochaine requête.',
+                'build-cache-title' => 'Construire le cache',
+                'build-cache-info' => 'Pré-construire et optimiser les caches pour de meilleures performances.',
+                'warning-title' => 'Notes importantes',
+                'warning-route-closures' => 'route:cache échouera si un fichier de routes utilise des closures au lieu de références de contrôleurs.',
+                'warning-config-closures' => 'config:cache échouera si un fichier de configuration retourne des closures.',
+                'warning-permissions' => 'Les problèmes de permissions du système de fichiers peuvent empêcher la génération ou la suppression du cache.',
+                'invalid-action' => 'Action de cache invalide demandée.',
+                'action-success' => 'Commande ":action" exécutée avec succès.',
+                'action-failed' => 'Commande ":action" échouée. Vérifiez la sortie ci-dessous.',
+                'action-exception' => 'L\'action de cache a échoué : :message',
+                'clear-console' => 'Effacer la console',
+                'console-title' => 'Console de sortie',
+                'console-entries' => 'entrées',
+                'console-empty' => 'Exécutez une action de cache pour voir la sortie ici...',
+                'console-unknown-error' => 'Une erreur inattendue s\'est produite.',
+
+                'actions' => [
+                    'clear-all' => 'Vider tout le cache',
+                    'clear-config' => 'Vider le cache de configuration',
+                    'clear-cache' => 'Vider le cache de l\'application',
+                    'clear-compiled' => 'Vider le cache compilé',
+                    'clear-events' => 'Vider le cache des événements',
+                    'clear-routes' => 'Vider le cache des routes',
+                    'clear-views' => 'Vider le cache des vues',
+                    'build-all' => 'Reconstruire tout le cache',
+                    'build-config' => 'Mettre en cache la configuration',
+                    'build-routes' => 'Mettre en cache les routes',
+                    'build-views' => 'Mettre en cache les vues',
+                ],
+            ],
         ],
     ],
 

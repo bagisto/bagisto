@@ -5040,6 +5040,53 @@ return [
                     ],
                 ],
             ],
+
+            'cache-management' => [
+                'title' => 'Gestió de memòria cau',
+                'info' => 'Gestioneu la memòria cau de l\'aplicació, esborreu o reconstruïu les dades en memòria cau per a la configuració, rutes, vistes i molt més.',
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'Esborreu i reconstruïu les memòries cau de l\'aplicació.',
+
+                    'cache-actions' => [
+                        'title' => 'Accions de memòria cau',
+                        'info' => 'Utilitzeu els botons següents per esborrar o reconstruir memòries cau específiques.',
+                    ],
+                ],
+
+                'clear-cache-title' => 'Esborrar memòria cau',
+                'clear-cache-info' => 'Elimineu les dades en memòria cau per forçar l\'aplicació a regenerar-les en la propera sol·licitud.',
+                'build-cache-title' => 'Construir memòria cau',
+                'build-cache-info' => 'Pre-construïu i optimitzeu les memòries cau per a un millor rendiment.',
+                'warning-title' => 'Notes importants',
+                'warning-route-closures' => 'route:cache fallarà si algun fitxer de rutes utilitza closures en lloc de referències a controladors.',
+                'warning-config-closures' => 'config:cache fallarà si algun fitxer de configuració retorna closures.',
+                'warning-permissions' => 'Els problemes de permisos del sistema de fitxers poden impedir la generació o l\'esborrat de la memòria cau.',
+                'invalid-action' => 'Acció de memòria cau no vàlida.',
+                'action-success' => 'L\'ordre ":action" s\'ha executat correctament.',
+                'action-failed' => 'L\'ordre ":action" ha fallat. Consulteu la sortida a continuació.',
+                'action-exception' => 'L\'acció de memòria cau ha fallat: :message',
+                'clear-console' => 'Esborrar consola',
+                'console-title' => 'Consola de sortida',
+                'console-entries' => 'entrades',
+                'console-empty' => 'Executeu una acció de memòria cau per veure la sortida aquí...',
+                'console-unknown-error' => 'S\'ha produït un error inesperat.',
+
+                'actions' => [
+                    'clear-all' => 'Esborrar tota la memòria cau',
+                    'clear-config' => 'Esborrar memòria cau de configuració',
+                    'clear-cache' => 'Esborrar memòria cau de l\'aplicació',
+                    'clear-compiled' => 'Esborrar memòria cau compilada',
+                    'clear-events' => 'Esborrar memòria cau d\'esdeveniments',
+                    'clear-routes' => 'Esborrar memòria cau de rutes',
+                    'clear-views' => 'Esborrar memòria cau de vistes',
+                    'build-all' => 'Reconstruir tota la memòria cau',
+                    'build-config' => 'Posar en memòria cau la configuració',
+                    'build-routes' => 'Posar en memòria cau les rutes',
+                    'build-views' => 'Posar en memòria cau les vistes',
+                ],
+            ],
         ],
     ],
 

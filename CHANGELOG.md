@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+* #10792 [feature] - Added Cache Management in Admin Configuration panel.
+
 ## **v2.4.0 (19th of March 2026)** - **Release**
 
 ### New Features

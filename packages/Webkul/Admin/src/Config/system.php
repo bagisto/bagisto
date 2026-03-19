@@ -3316,4 +3316,33 @@ return [
             ],
         ],
     ],
+
+    /**
+     * Cache Management.
+     */
+    [
+        'key' => 'cache_management',
+        'name' => 'admin::app.configuration.index.cache-management.title',
+        'info' => 'admin::app.configuration.index.cache-management.info',
+        'sort' => 7,
+    ], [
+        'key' => 'cache_management.general',
+        'name' => 'admin::app.configuration.index.cache-management.general.title',
+        'info' => 'admin::app.configuration.index.cache-management.general.info',
+        'icon' => 'settings/settings.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'cache_management.general.cache_actions',
+        'name' => 'admin::app.configuration.index.cache-management.general.cache-actions.title',
+        'info' => 'admin::app.configuration.index.cache-management.general.cache-actions.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'cache_management_ui',
+                'title' => 'admin::app.configuration.index.cache-management.general.cache-actions.title',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.cache-management',
+            ],
+        ],
+    ],
 ];
