@@ -668,6 +668,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Spedizione e Gestione (Escl. Tasse)',
                 'shipping-and-handling-incl-tax' => 'Spedizione e Gestione (Incl. Tasse)',
                 'shipping-and-handling' => 'Spedizione e Gestione',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => 'Subtotale (Escl. Tasse) - :sub_total',
                 'sub-total-incl-tax' => 'Subtotale (Incl. Tasse) - :sub_total',
@@ -679,6 +680,7 @@ return [
                 'summary-tax' => 'Importo Tasse',
                 'tax' => 'Importo Tasse - :tax',
                 'title' => 'Fattura #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

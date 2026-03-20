@@ -668,6 +668,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Доставка та обробка (без податку)',
                 'shipping-and-handling-incl-tax' => 'Доставка та обробка (з податком)',
                 'shipping-and-handling' => 'Доставка та обробка',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'Артикул - :sku',
                 'sub-total-excl-tax' => 'Підсумок (без податку) - :sub_total',
                 'sub-total-incl-tax' => 'Підсумок (з податком) - :sub_total',
@@ -679,6 +680,7 @@ return [
                 'summary-tax' => 'Сума податку',
                 'tax' => 'Сума податку - :tax',
                 'title' => 'Рахунок #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

@@ -668,6 +668,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Verzendkosten en Behandeling (Excl. BTW)',
                 'shipping-and-handling-incl-tax' => 'Verzendkosten en Behandeling (Incl. BTW)',
                 'shipping-and-handling' => 'Verzendkosten en Behandeling',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'Artikelnummer - :sku',
                 'sub-total-excl-tax' => 'Subtotaal (Excl. BTW) - :sub_total',
                 'sub-total-incl-tax' => 'Subtotaal (Incl. BTW) - :sub_total',
@@ -679,6 +680,7 @@ return [
                 'summary-tax' => 'BTW Bedrag',
                 'tax' => 'BTW Bedrag - :tax',
                 'title' => 'Factuur #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

@@ -668,6 +668,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'משלוח וטיפול (לא כולל מס)',
                 'shipping-and-handling-incl-tax' => 'משלוח וטיפול (כולל מס)',
                 'shipping-and-handling' => 'משלוח וטיפול',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'מק"ט - :sku',
                 'sub-total-excl-tax' => 'סה"כ ביניים (לא כולל מס) - :sub_total',
                 'sub-total-incl-tax' => 'סה"כ ביניים (כולל מס) - :sub_total',
@@ -679,6 +680,7 @@ return [
                 'summary-tax' => 'סכום מס',
                 'tax' => 'סכום מס - :tax',
                 'title' => 'חשבונית #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

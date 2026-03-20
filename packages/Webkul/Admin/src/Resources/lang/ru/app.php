@@ -668,6 +668,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Стоимость доставки и обработки (без налога)',
                 'shipping-and-handling-incl-tax' => 'Стоимость доставки и обработки (с налогом)',
                 'shipping-and-handling' => 'Стоимость доставки и обработки',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'Артикул - :sku',
                 'sub-total-excl-tax' => 'Подытог (без налога) - :sub_total',
                 'sub-total-incl-tax' => 'Подытог (с налогом) - :sub_total',
@@ -679,6 +680,7 @@ return [
                 'summary-tax' => 'Сумма налога',
                 'tax' => 'Сумма налога - :tax',
                 'title' => 'Счет #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

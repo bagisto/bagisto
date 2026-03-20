@@ -668,6 +668,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Frais de port et de manutention (Hors taxe)',
                 'shipping-and-handling-incl-tax' => 'Frais de port et de manutention (TTC)',
                 'shipping-and-handling' => 'Frais de port et de manutention',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => 'Sous-total (Hors taxe) - :sub_total',
                 'sub-total-incl-tax' => 'Sous-total (TTC) - :sub_total',
@@ -679,6 +680,7 @@ return [
                 'summary-tax' => 'Montant de taxe',
                 'tax' => 'Montant de taxe - :tax',
                 'title' => 'Facture #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

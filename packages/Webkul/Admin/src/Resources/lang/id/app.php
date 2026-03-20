@@ -668,6 +668,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Pengiriman dan Penanganan (Tanpa Pajak)',
                 'shipping-and-handling-incl-tax' => 'Pengiriman dan Penanganan (Termasuk Pajak)',
                 'shipping-and-handling' => 'Pengiriman dan Penanganan',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => 'Subtotal (Tanpa Pajak) - :sub_total',
                 'sub-total-incl-tax' => 'Subtotal (Termasuk Pajak) - :sub_total',
@@ -679,6 +680,7 @@ return [
                 'summary-tax' => 'Jumlah Pajak',
                 'tax' => 'Jumlah Pajak - :tax',
                 'title' => 'Faktur #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

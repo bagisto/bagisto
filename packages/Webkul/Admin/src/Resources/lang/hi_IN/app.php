@@ -668,6 +668,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'शिपिंग और हैंडलिंग (कर छोड़कर)',
                 'shipping-and-handling-incl-tax' => 'शिपिंग और हैंडलिंग (कर सहित)',
                 'shipping-and-handling' => 'शिपिंग और हैंडलिंग',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'एसकेयू - :sku',
                 'sub-total-excl-tax' => 'उप कुल (कर छोड़कर) - :sub_total',
                 'sub-total-incl-tax' => 'उप कुल (कर सहित) - :sub_total',
@@ -679,6 +680,7 @@ return [
                 'summary-tax' => 'कर राशि',
                 'tax' => 'कर राशि - :tax',
                 'title' => 'चालान #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [
