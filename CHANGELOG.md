@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+* Fixed an issue where the price slider was not displaying on the layered navigation.
+
 * #10792 [feature] - Added Cache Management in Admin Configuration panel.
 
 ## **v2.4.0 (19th of March 2026)** - **Release**

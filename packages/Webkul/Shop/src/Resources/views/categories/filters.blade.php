@@ -568,8 +568,7 @@
 
             methods: {
                 getMaxPrice() {
-                    @if(isset($category) && $category->id)
-                    this.$axios.get('{{ route("shop.api.categories.max_price", $category->id) }}')
+                    this.$axios.get('{{ route("shop.api.categories.max_price", isset($category) && $category->id ? $category->id : null) }}')
                         .then((response) => {
                             this.isLoading = false;
 
@@ -589,7 +588,6 @@
                         .catch((error) => {
                             console.log(error);
                         });
-                    @endif
                 },
 
                 setPriceRange($event) {
