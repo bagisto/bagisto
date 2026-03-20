@@ -10,6 +10,12 @@
 
 - [PayPal SDK Upgrade](#paypal-sdk-upgrade)
 
+- [Visitor Tracking Removed](#visitor-tracking-removed)
+
+## Medium Impact Changes
+
+- [Magic AI — Laravel AI SDK Migration](#magic-ai--laravel-ai-sdk-migration)
+
 ## Upgrading To v2.4 From v2.3
 
 > [!NOTE]
@@ -401,3 +407,98 @@ $captureId = $result->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->ge
 - Improved error handling and logging.
 - OAuth 2.0 Client Credentials authentication.
 - Built-in retry logic for API calls.
+
+### Visitor Tracking Removed
+
+**Impact Probability: High**
+
+Bagisto v2.4 has completely removed the `shetabit/visitor` package and all visitor tracking functionality. This is a breaking change if your custom code relies on visitor data.
+
+#### What Was Removed
+
+- The `shetabit/visitor` Composer dependency
+- The `visitor()` helper function
+- The `visits` database table (no longer created or used)
+- The `Visitable` trait from Product and Category models
+- The `Visitor` trait from the Customer model
+- Dashboard "Total Visitors" widget
+- Reporting "Products With Most Visits" section
+- Reporting "Customers Traffic" section
+- Purchase funnel "Total Visits" and "Product Views" metrics
+- All visitor-related translation keys
+- `config/visitor.php` configuration file
+- `Webkul\Core\Visitor`, `Webkul\Core\Models\Visit`, `Webkul\Core\Repositories\VisitRepository`
+- `Webkul\Core\Jobs\UpdateCreateVisitIndex`, `Webkul\Core\Jobs\UpdateCreateVisitableIndex`
+- `Webkul\Core\Listeners\ResponseCacheHit`
+- `Webkul\Admin\Helpers\Reporting\Visitor`
+
+#### Migration Steps
+
+1. **Remove custom visitor code:**
+
+   If your custom code calls `visitor()->visit()` or uses the `Visitable`/`Visitor` traits, remove those references:
+
+   ```diff
+   - use Shetabit\Visitor\Traits\Visitable;
+
+   - class MyModel extends Model {
+   -     use Visitable;
+   - }
+
+   - visitor()->visit($model);
+   ```
+
+2. **Remove the Composer dependency (if separately required):**
+
+   ```bash
+   composer remove shetabit/visitor
+   ```
+
+3. **Drop the visits table (optional):**
+
+   If you want to clean up the database, create a migration:
+
+   ```php
+   Schema::dropIfExists('visits');
+   ```
+
+4. **Update custom dashboards/reports:**
+
+   If you built custom dashboards or reports using visitor data, replace them with an external analytics solution (e.g., Google Analytics, Plausible, Matomo).
+
+5. **Remove the visitor config check:**
+
+   If your code references `core()->getConfigData('general.general.visitor_options.enabled')`, remove it. The system configuration field no longer exists.
+
+### Magic AI — Laravel AI SDK Migration
+
+**Impact Probability: Medium**
+
+Bagisto v2.4 has migrated the Magic AI feature from direct OpenAI integration to the Laravel AI SDK (`laravel/ai`), introducing a unified multi-provider architecture.
+
+#### What Changed
+
+**v2.3:**
+- Direct OpenAI API integration only
+- Configuration via `config/openai.php`
+
+**v2.4:**
+- Unified `laravel/ai` SDK supporting 8 providers: Anthropic, DeepSeek, Gemini, Groq, Mistral, Ollama, OpenAI, xAI
+- Per-provider model enums in `Webkul\MagicAI\Enums\Models\`
+- Unified entry point via `Webkul\MagicAI\AiProvider`
+- Configuration via `config/ai.php`
+
+#### Migration Steps
+
+1. **Run Composer update** to install the `laravel/ai` dependency (handled automatically).
+
+2. **If you have custom Magic AI code:**
+
+   Update any direct references to OpenAI-specific classes to use the new `AiProvider` unified interface:
+
+   ```diff
+   - use OpenAI\Client;
+   + use Webkul\MagicAI\AiProvider;
+   ```
+
+3. **Update AI configuration** in Admin > Configuration > Magic AI to select your preferred provider and model.

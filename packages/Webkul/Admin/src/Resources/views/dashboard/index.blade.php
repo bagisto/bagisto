@@ -87,9 +87,6 @@
                 <!-- Total Sales Details -->
                 @include('admin::dashboard.total-sales')
 
-                <!-- Total Visitors Details -->
-                @include('admin::dashboard.total-visitors')
-
                 <!-- Top Selling Products -->
                 @include('admin::dashboard.top-selling-products')
 

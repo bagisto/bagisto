@@ -1154,6 +1154,7 @@ return [
             'remove' => 'クーポンを削除',
             'subtotal' => '小計',
             'success-apply' => 'クーポンコードが正常に適用されました。',
+            'usage-limit-exceeded' => 'このクーポンコードは使用回数の上限に達しており、無効です。',
         ],
 
         'login' => [

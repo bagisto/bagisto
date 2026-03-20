@@ -6,6 +6,7 @@ use Illuminate\Container\Container;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Webkul\CartRule\Exceptions\CouponUsageLimitExceededException;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Product\Repositories\ProductCustomizableOptionRepository;
 use Webkul\Sales\Contracts\Order as OrderContract;
@@ -86,6 +87,14 @@ class OrderRepository extends Repository
         } catch (\Exception $e) {
             /* rolling back first */
             DB::rollBack();
+
+            /**
+             * Do not retry when coupon usage limits are exceeded — this is a
+             * definitive business-logic failure, not a transient DB error.
+             */
+            if ($e instanceof CouponUsageLimitExceededException) {
+                throw $e;
+            }
 
             /* storing log for errors */
             Log::error(

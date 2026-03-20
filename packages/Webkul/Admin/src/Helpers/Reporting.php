@@ -8,8 +8,6 @@ use Webkul\Admin\Helpers\Reporting\Cart;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Sale;
-use Webkul\Admin\Helpers\Reporting\Visitor;
-use Webkul\Product\Models\Product as ProductModel;
 
 class Reporting
 {
@@ -22,8 +20,7 @@ class Reporting
         protected Cart $cartReporting,
         protected Sale $saleReporting,
         protected Product $productReporting,
-        protected Customer $customerReporting,
-        protected Visitor $visitorReporting
+        protected Customer $customerReporting
     ) {}
 
     /**
@@ -152,29 +149,23 @@ class Reporting
      */
     public function getPurchaseFunnelStats(): array
     {
-        $startDate = $this->visitorReporting->getStartDate();
+        $startDate = $this->saleReporting->getStartDate();
 
-        $endDate = $this->visitorReporting->getEndDate();
+        $endDate = $this->saleReporting->getEndDate();
+
+        $totalCarts = $this->cartReporting->getTotalUniqueCartsUsers($startDate, $endDate);
+
+        $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate);
 
         return [
-            'visitors' => [
-                'total' => $totalVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate),
-                'progress' => $totalVisitors ? 100 : 0,
-            ],
-
-            'product_visitors' => [
-                'total' => $totalProductVisitors = $this->visitorReporting->getTotalUniqueVisitors($startDate, $endDate, ProductModel::class),
-                'progress' => round($totalVisitors > 0 ? ($totalProductVisitors * 100) / $totalVisitors : 0, 1),
-            ],
-
             'carts' => [
-                'total' => $totalCarts = $this->cartReporting->getTotalUniqueCartsUsers($startDate, $endDate),
-                'progress' => round(min($totalVisitors > 0 ? ($totalCarts * 100) / $totalVisitors : 0, 100), 1),
+                'total' => $totalCarts,
+                'progress' => $totalCarts ? 100 : 0,
             ],
 
             'orders' => [
-                'total' => $totalOrders = $this->saleReporting->getTotalUniqueOrdersUsers($startDate, $endDate),
-                'progress' => round(min($totalVisitors > 0 ? ($totalOrders * 100) / $totalVisitors : 0, 100), 1),
+                'total' => $totalOrders,
+                'progress' => round(min($totalCarts > 0 ? ($totalOrders * 100) / $totalCarts : 0, 100), 1),
             ],
         ];
     }
@@ -481,22 +472,6 @@ class Reporting
             'over_time' => [
                 'previous' => $this->customerReporting->getPreviousTotalCustomersOverTime(),
                 'current' => $this->customerReporting->getCurrentTotalCustomersOverTime(),
-            ],
-        ];
-    }
-
-    /**
-     * Returns the total customers statistics.
-     */
-    public function getCustomersTrafficStats(): array
-    {
-        return [
-            'total' => $this->visitorReporting->getTotalVisitorsProgress(),
-            'unique' => $this->visitorReporting->getTotalUniqueVisitorsProgress(),
-
-            'over_time' => [
-                'previous' => $this->visitorReporting->getPreviousTotalVisitorsOverWeek(),
-                'current' => $this->visitorReporting->getCurrentTotalVisitorsOverWeek(),
             ],
         ];
     }
@@ -876,49 +851,6 @@ class Reporting
                 $product->progress = 0;
             } else {
                 $product->progress = ($product->reviews * 100) / $totalReviews['current'];
-            }
-        });
-
-        return $products;
-    }
-
-    /**
-     * Returns the products with most visits
-     *
-     * @param  string  $type
-     */
-    public function getProductsWithMostVisits($type = 'graph'): EloquentCollection|array
-    {
-        if ($type == 'table') {
-            $records = $this->visitorReporting->getVisitableWithMostVisits(ProductModel::class);
-
-            return [
-                'columns' => [
-                    [
-                        'key' => 'visitable_id',
-                        'label' => trans('admin::app.reporting.products.index.id'),
-                    ], [
-                        'key' => 'name',
-                        'label' => trans('admin::app.reporting.products.index.name'),
-                    ], [
-                        'key' => 'visits',
-                        'label' => trans('admin::app.reporting.products.index.visits'),
-                    ],
-                ],
-
-                'records' => $records,
-            ];
-        }
-
-        $totalVisits = $this->visitorReporting->getTotalVisitorsProgress(ProductModel::class);
-
-        $products = $this->visitorReporting->getVisitableWithMostVisits(ProductModel::class, 5);
-
-        $products->map(function ($product) use ($totalVisits) {
-            if (! $totalVisits['current']) {
-                $product->progress = 0;
-            } else {
-                $product->progress = ($product->visits * 100) / $totalVisits['current'];
             }
         });
 

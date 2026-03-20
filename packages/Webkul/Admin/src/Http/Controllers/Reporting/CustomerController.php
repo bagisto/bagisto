@@ -13,7 +13,6 @@ class CustomerController extends Controller
      */
     protected $typeFunctions = [
         'total-customers' => 'getTotalCustomersStats',
-        'customers-traffic' => 'getCustomersTrafficStats',
         'customers-with-most-sales' => 'getCustomersWithMostSales',
         'customers-with-most-orders' => 'getCustomersWithMostOrders',
         'customers-with-most-reviews' => 'getCustomersWithMostReviews',

@@ -1154,6 +1154,7 @@ return [
             'remove' => '删除优惠券',
             'subtotal' => '小计',
             'success-apply' => '优惠券码已成功应用。',
+            'usage-limit-exceeded' => '此优惠券码已达到使用上限，不再有效。',
         ],
 
         'login' => [

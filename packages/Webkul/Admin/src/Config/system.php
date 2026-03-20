@@ -55,19 +55,6 @@ return [
             ],
         ],
     ], [
-        'key' => 'general.general.visitor_options',
-        'name' => 'admin::app.configuration.index.general.general.visitor-options.title',
-        'info' => 'admin::app.configuration.index.general.general.visitor-options.title-info',
-        'sort' => 3,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.general.visitor-options.enable',
-                'type' => 'boolean',
-                'default' => false,
-            ],
-        ],
-    ], [
         'key' => 'general.content',
         'name' => 'admin::app.configuration.index.general.content.title',
         'info' => 'admin::app.configuration.index.general.content.info',
@@ -3326,6 +3313,35 @@ return [
                 ],
                 'channel_based' => true,
                 'locale_based' => false,
+            ],
+        ],
+    ],
+
+    /**
+     * Cache Management.
+     */
+    [
+        'key' => 'cache_management',
+        'name' => 'admin::app.configuration.index.cache-management.title',
+        'info' => 'admin::app.configuration.index.cache-management.info',
+        'sort' => 7,
+    ], [
+        'key' => 'cache_management.general',
+        'name' => 'admin::app.configuration.index.cache-management.general.title',
+        'info' => 'admin::app.configuration.index.cache-management.general.info',
+        'icon' => 'settings/settings.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'cache_management.general.cache_actions',
+        'name' => 'admin::app.configuration.index.cache-management.general.cache-actions.title',
+        'info' => 'admin::app.configuration.index.cache-management.general.cache-actions.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'cache_management_ui',
+                'title' => 'admin::app.configuration.index.cache-management.general.cache-actions.title',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.cache-management',
             ],
         ],
     ],

@@ -1153,6 +1153,7 @@ return [
             'invalid' => 'Kod rabatowy jest nieprawidłowy',
             'remove' => 'Usuń kod rabatowy',
             'subtotal' => 'Suma częściowa',
+            'usage-limit-exceeded' => 'Ten kod rabatowy został wykorzystany.',
             'success-apply' => 'Kod rabatowy został pomyślnie zastosowany',
         ],
 

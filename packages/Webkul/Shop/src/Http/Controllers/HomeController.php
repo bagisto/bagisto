@@ -32,8 +32,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        visitor()->visit();
-
         $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
             'status' => self::STATUS,
             'channel_id' => core()->getCurrentChannel()->id,

@@ -32,7 +32,6 @@ it('should returns the reporting product page', function () {
         ->assertSeeText(trans('admin::app.reporting.products.index.title'))
         ->assertSeeText(trans('admin::app.reporting.products.index.last-search-terms'))
         ->assertSeeText(trans('admin::app.reporting.products.index.products-with-most-reviews'))
-        ->assertSeeText(trans('admin::app.reporting.products.index.products-with-most-visits'))
         ->assertSeeText(trans('admin::app.reporting.products.index.view-details'))
         ->assertSeeText(trans('admin::app.reporting.products.index.top-selling-products-by-quantity'))
         ->assertSeeText(trans('admin::app.reporting.products.index.top-selling-products-by-revenue'))

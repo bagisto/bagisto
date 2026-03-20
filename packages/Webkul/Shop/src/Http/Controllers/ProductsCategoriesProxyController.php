@@ -43,8 +43,6 @@ class ProductsCategoriesProxyController extends Controller
          * Support url for chinese, japanese, arabic and english with numbers.
          */
         if (! preg_match('/^([\p{L}\p{N}\p{M}\x{0900}-\x{097F}\x{0590}-\x{05FF}\x{0600}-\x{06FF}\x{0400}-\x{04FF}_-]+\/?)+$/u', $slugOrURLKey)) {
-            visitor()->visit();
-
             $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
                 'status' => self::STATUS,
                 'channel_id' => core()->getCurrentChannel()->id,
@@ -56,8 +54,6 @@ class ProductsCategoriesProxyController extends Controller
         $category = $this->categoryRepository->findBySlug($slugOrURLKey);
 
         if ($category) {
-            visitor()->visit($category);
-
             return view('shop::categories.view', [
                 'category' => $category,
                 'params' => [
@@ -84,8 +80,6 @@ class ProductsCategoriesProxyController extends Controller
             ) {
                 abort(404);
             }
-
-            visitor()->visit($product);
 
             return view('shop::products.view', compact('product'));
         }
