@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File as Filesystem;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Installer\Database\Seeders\Category\CategoryTableSeeder;
+use Webkul\Installer\Database\Seeders\Shop\ThemeCustomizationTableSeeder;
 
 class ProductTableSeeder extends Seeder
 {
@@ -146,6 +147,8 @@ class ProductTableSeeder extends Seeder
         $this->seedAttributeInfrastructure();
 
         (new CategoryTableSeeder)->sampleCategories($parameters);
+
+        (new ThemeCustomizationTableSeeder)->updateLinksForSampleProducts();
 
         $this->seedProducts($this->defaultLocale);
 
