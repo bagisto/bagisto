@@ -169,27 +169,27 @@ class ThemeCustomizationTableSeeder extends Seeder
                             'images' => [
                                 [
                                     'title' => trans('installer::app.seeders.shop.theme-customizations.image-carousel.sliders.title', [], $locale),
-                                    'link' => 'formal-wear-female',
+                                    'link' => '#formal-wear-female',
                                     'image' => $this->storeFileIfExists('theme/1', 'sliders/'.$locale.'/1.webp', 'sliders/en/1.webp'),
                                 ], [
                                     'title' => trans('installer::app.seeders.shop.theme-customizations.image-carousel.sliders.title', [], $locale),
-                                    'link' => 'formal-wear-men',
+                                    'link' => '#formal-wear-men',
                                     'image' => $this->storeFileIfExists('theme/1', 'sliders/'.$locale.'/2.webp', 'sliders/en/2.webp'),
                                 ], [
                                     'title' => trans('installer::app.seeders.shop.theme-customizations.image-carousel.sliders.title', [], $locale),
-                                    'link' => 'active-wear-female',
+                                    'link' => '#active-wear-female',
                                     'image' => $this->storeFileIfExists('theme/1', 'sliders/'.$locale.'/3.webp', 'sliders/en/3.webp'),
                                 ], [
                                     'title' => trans('installer::app.seeders.shop.theme-customizations.image-carousel.sliders.title', [], $locale),
-                                    'link' => 'smart-home-automation',
+                                    'link' => '#smart-home-automation',
                                     'image' => $this->storeFileIfExists('theme/1', 'sliders/'.$locale.'/4.webp', 'sliders/en/4.webp'),
                                 ], [
                                     'title' => trans('installer::app.seeders.shop.theme-customizations.image-carousel.sliders.title', [], $locale),
-                                    'link' => 'mobile-phones-accessories',
+                                    'link' => '#mobile-phones-accessories',
                                     'image' => $this->storeFileIfExists('theme/1', 'sliders/'.$locale.'/5.webp', 'sliders/en/5.webp'),
                                 ], [
                                     'title' => trans('installer::app.seeders.shop.theme-customizations.image-carousel.sliders.title', [], $locale),
-                                    'link' => 'laptops-tablets',
+                                    'link' => '#laptops-tablets',
                                     'image' => $this->storeFileIfExists('theme/1', 'sliders/'.$locale.'/6.webp', 'sliders/en/6.webp'),
                                 ],
                             ],
@@ -243,37 +243,37 @@ class ThemeCustomizationTableSeeder extends Seeder
 
                                 <div class="top-collection-grid container">
                                     <div class="top-collection-card">
-                                        <a href="electronics">
+                                        <a href="#electronics">
                                             <img src="" data-src="'.$this->storeFileIfExists('theme/5', 'static/'.$locale.'/1.webp', 'static/en/1.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
-                                        <a href="mens">
+                                        <a href="#mens">
                                             <img src="" data-src="'.$this->storeFileIfExists('theme/5', 'static/'.$locale.'/2.webp', 'static/en/2.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
-                                        <a href="womens">
+                                        <a href="#womens">
                                             <img src="" data-src="'.$this->storeFileIfExists('theme/5', 'static/'.$locale.'/3.webp', 'static/en/3.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
-                                        <a href="formal-wear-men">
+                                        <a href="#formal-wear-men">
                                             <img src="" data-src="'.$this->storeFileIfExists('theme/5', 'static/'.$locale.'/4.webp', 'static/en/4.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
-                                        <a href="formal-wear-female">
+                                        <a href="#formal-wear-female">
                                             <img src="" data-src="'.$this->storeFileIfExists('theme/5', 'static/'.$locale.'/5.webp', 'static/en/5.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
 
                                     <div class="top-collection-card">
-                                        <a href="wellness">
+                                        <a href="#wellness">
                                             <img src="" data-src="'.$this->storeFileIfExists('theme/5', 'static/'.$locale.'/6.webp', 'static/en/6.webp').'" class="lazy" width="396" height="396" alt="'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'">
                                         </a>
                                     </div>
@@ -299,7 +299,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                                         
                                         <p class="inline-col-description">'.trans('installer::app.seeders.shop.theme-customizations.bold-collections.content.description', [], $locale).'</p>
                                         
-                                        <a href="wellness">
+                                        <a href="#wellness">
                                             <button class="primary-button max-md:rounded-lg max-md:px-4 max-md:py-2.5 max-md:text-sm">'.trans('installer::app.seeders.shop.theme-customizations.bold-collections.content.btn-title', [], $locale).'</button>
                                         </a>
                                     </div>
@@ -336,7 +336,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                                 <div class="section-gap container">
                                     <div class="collection-card-wrapper">
                                         <div class="single-collection-card">
-                                            <a href="active-wear">
+                                            <a href="#active-wear">
                                                 <img src="" data-src="'.$this->storeFileIfExists('theme/8', 'static/'.$locale.'/8.webp', 'static/en/8.webp').'" class="lazy" width="615" height="600" alt="'.trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale).'">
                                                 
                                                 <h3 class="overlay-text">'.trans('installer::app.seeders.shop.theme-customizations.game-container.content.sub-title-1', [], $locale).'</h3> 
@@ -344,7 +344,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                                         </div>
 
                                         <div class="single-collection-card">
-                                            <a href="active-wear-female">
+                                            <a href="#active-wear-female">
                                                 <img src="" data-src="'.$this->storeFileIfExists('theme/8', 'static/'.$locale.'/9.webp', 'static/en/9.webp').'" class="lazy" width="615" height="600" alt="'.trans('installer::app.seeders.shop.theme-customizations.game-container.content.title', [], $locale).'">
                                                 
                                                 <h3 class="overlay-text"> '.trans('installer::app.seeders.shop.theme-customizations.game-container.content.sub-title-2', [], $locale).' </h3> 
@@ -387,7 +387,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                                         
                                         <p class="inline-col-description">'.trans('installer::app.seeders.shop.theme-customizations.bold-collections-2.content.description', [], $locale).'</p>
                                         
-                                        <a href="electronics">
+                                        <a href="#electronics">
                                             <button class="primary-button max-md:rounded-lg max-md:px-4 max-md:py-2.5 max-md:text-sm">'.trans('installer::app.seeders.shop.theme-customizations.bold-collections-2.content.btn-title', [], $locale).'</button>
                                         </a>
                                     </div>
@@ -497,6 +497,43 @@ class ThemeCustomizationTableSeeder extends Seeder
                     ],
                 ]);
         }
+    }
+
+    /**
+     * Update theme customization links to point to actual category slugs.
+     *
+     * Called after sample categories are seeded so the links resolve correctly.
+     */
+    public function updateLinksForSampleProducts(): void
+    {
+        $categorySlugs = [
+            'formal-wear-female',
+            'formal-wear-men',
+            'active-wear-female',
+            'smart-home-automation',
+            'mobile-phones-accessories',
+            'laptops-tablets',
+            'electronics',
+            'mens',
+            'womens',
+            'wellness',
+            'active-wear',
+        ];
+
+        DB::table('theme_customization_translations')
+            ->whereIn('theme_customization_id', [1, 5, 6, 8, 10])
+            ->get()
+            ->each(function ($translation) use ($categorySlugs) {
+                $options = $translation->options;
+
+                foreach ($categorySlugs as $slug) {
+                    $options = str_replace('#'.$slug, $slug, $options);
+                }
+
+                DB::table('theme_customization_translations')
+                    ->where('id', $translation->id)
+                    ->update(['options' => $options]);
+            });
     }
 
     /**
