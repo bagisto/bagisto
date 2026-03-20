@@ -229,12 +229,10 @@ class Visitor extends AbstractReporting
     {
         $stats = [];
 
-        $weekDays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
         $visits = $this->visitRepository
             ->resetModel()
             ->select(
-                DB::raw('DAYNAME(created_at) AS day'),
+                DB::raw('DAYOFWEEK(created_at) AS day'),
                 DB::raw('COUNT(*) AS count')
             )
             ->whereNull('visitable_id')
@@ -243,10 +241,10 @@ class Visitor extends AbstractReporting
             ->groupBy('day')
             ->get();
 
-        foreach ($weekDays as $day) {
-            $total = $visits->where('day', $day)->first();
+        for ($i = 1; $i <= 7; $i++) {
+            $total = $visits->where('day', $i)->first();
 
-            $stats['label'][] = $day;
+            $stats['label'][] = Carbon::today()->startOfWeek(Carbon::SUNDAY)->addDays($i - 1)->translatedFormat('l');
             $stats['total'][] = $total?->count ?? 0;
         }
 
