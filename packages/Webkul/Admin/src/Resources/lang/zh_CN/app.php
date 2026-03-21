@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => '配送和处理（不含税）',
                 'shipping-and-handling-incl-tax' => '配送和处理（含税）',
                 'shipping-and-handling' => '配送和处理',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => '小计（不含税） - :sub_total',
                 'sub-total-incl-tax' => '小计（含税） - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => '税费金额',
                 'tax' => '税费金额 - :tax',
                 'title' => '发票 #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

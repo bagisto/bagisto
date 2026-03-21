@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => '送料・手数料（税抜き）',
                 'shipping-and-handling-incl-tax' => '送料・手数料（税込み）',
                 'shipping-and-handling' => '送料・手数料',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => '小計（税抜き） - :sub_total',
                 'sub-total-incl-tax' => '小計（税込み） - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => '税額',
                 'tax' => '税額 - :tax',
                 'title' => '請求書 #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

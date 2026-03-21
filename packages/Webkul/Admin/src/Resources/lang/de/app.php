@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Versand und Bearbeitung (exkl. MwSt.)',
                 'shipping-and-handling-incl-tax' => 'Versand und Bearbeitung (inkl. MwSt.)',
                 'shipping-and-handling' => 'Versand und Bearbeitung',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'Artikelnummer (SKU) - :sku',
                 'sub-total-excl-tax' => 'Zwischensumme (exkl. MwSt.) - :sub_total',
                 'sub-total-incl-tax' => 'Zwischensumme (inkl. MwSt.) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'MwSt.-Betrag',
                 'tax' => 'MwSt.-Betrag - :tax',
                 'title' => 'Rechnung #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

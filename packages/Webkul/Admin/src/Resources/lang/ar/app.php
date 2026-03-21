@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'تكلفة الشحن والتوصيل (بدون ضريبة)',
                 'shipping-and-handling-incl-tax' => 'تكلفة الشحن والتوصيل (شامل الضريبة)',
                 'shipping-and-handling' => 'تكلفة الشحن والتوصيل',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'رمز المنتج - :sku',
                 'sub-total-excl-tax' => 'المجموع الفرعي (بدون ضريبة) - :sub_total',
                 'sub-total-incl-tax' => 'المجموع الفرعي (شامل الضريبة) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'مبلغ الضريبة',
                 'tax' => 'مبلغ الضريبة - :tax',
                 'title' => 'الفاتورة #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

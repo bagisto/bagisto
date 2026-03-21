@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'هزینه حمل و نقل (بدون مالیات)',
                 'shipping-and-handling-incl-tax' => 'هزینه حمل و نقل (شامل مالیات)',
                 'shipping-and-handling' => 'هزینه حمل و نقل',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'کد SKU - :sku',
                 'sub-total-excl-tax' => 'جمع جزئی (بدون مالیات) - :sub_total',
                 'sub-total-incl-tax' => 'جمع جزئی (شامل مالیات) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'مقدار مالیات',
                 'tax' => 'مقدار مالیات - :tax',
                 'title' => 'فاکتور #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

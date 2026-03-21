@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Envio e Manuseio (Excl. Impostos)',
                 'shipping-and-handling-incl-tax' => 'Envio e Manuseio (Incl. Impostos)',
                 'shipping-and-handling' => 'Envio e Manuseio',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => 'Subtotal (Excl. Impostos) - :sub_total',
                 'sub-total-incl-tax' => 'Subtotal (Incl. Impostos) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'Valor dos Impostos',
                 'tax' => 'Valor dos Impostos - :tax',
                 'title' => 'Fatura #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

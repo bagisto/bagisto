@@ -944,6 +944,7 @@ return [
                 'select-locale' => 'ロケールを選択',
                 'title' => 'Bagistoのインストール',
                 'welcome-title' => 'Bagistoへようこそ',
+                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [

@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'නැවුම් සහ ප්‍රමාණය (බදු නොමැති)',
                 'shipping-and-handling-incl-tax' => 'නැවුම් සහ ප්‍රමාණය (බදු සහිත)',
                 'shipping-and-handling' => 'නැවුම් සහ ප්‍රමාණය',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => 'උප මුදල (බදු නොමැති) - :sub_total',
                 'sub-total-incl-tax' => 'උප මුදල (බදු සහිත) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'බදු මුළුව',
                 'tax' => 'බදු - :tax',
                 'title' => 'ඉල්ලීම් #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Kargo ve İşlem Ücreti (KDV Hariç)',
                 'shipping-and-handling-incl-tax' => 'Kargo ve İşlem Ücreti (KDV Dahil)',
                 'shipping-and-handling' => 'Kargo ve İşlem Ücreti',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'Ürün Kodu - :sku',
                 'sub-total-excl-tax' => 'Ara Toplam (KDV Hariç) - :sub_total',
                 'sub-total-incl-tax' => 'Ara Toplam (KDV Dahil) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'KDV Tutarı',
                 'tax' => 'KDV Tutarı - :tax',
                 'title' => 'Fatura #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

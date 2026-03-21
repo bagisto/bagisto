@@ -944,6 +944,7 @@ return [
                 'select-locale' => 'Locale තෝරන්න',
                 'title' => 'ඔබේ Bagisto ස්ථාපනය',
                 'welcome-title' => 'Bagisto වෙත සාදරයෙන් පිළිගනිමු.',
+                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [

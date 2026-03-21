@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Shipping and Handling (Excl. Tax)',
                 'shipping-and-handling-incl-tax' => 'Shipping and Handling (Incl. Tax)',
                 'shipping-and-handling' => 'Shipping and Handling',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => 'Sub Total (Excl. Tax) - :sub_total',
                 'sub-total-incl-tax' => 'Sub Total (Incl. Tax) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'Tax Amount',
                 'tax' => 'Tax Amount - :tax',
                 'title' => 'Invoice #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

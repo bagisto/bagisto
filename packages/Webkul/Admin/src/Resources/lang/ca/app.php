@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'Enviament i Manipulació (Excl. Impostos)',
                 'shipping-and-handling-incl-tax' => 'Enviament i Manipulació (Incl. Impostos)',
                 'shipping-and-handling' => 'Enviament i Manipulació',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => 'Subtotal (Excl. Impostos) - :sub_total',
                 'sub-total-incl-tax' => 'Subtotal (Incl. Impostos) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'Import d\'Impostos',
                 'tax' => 'Import d\'Impostos - :tax',
                 'title' => 'Factura #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

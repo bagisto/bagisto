@@ -666,6 +666,7 @@ return [
                 'shipping-and-handling-excl-tax' => 'শিপিং এবং হ্যান্ডলিং (কর ব্যতিত)',
                 'shipping-and-handling-incl-tax' => 'শিপিং এবং হ্যান্ডলিং (কর সহ)',
                 'shipping-and-handling' => 'শিপিং এবং হ্যান্ডলিং',
+                'shipping-address' => 'Shipping Address',
                 'sku' => 'SKU - :sku',
                 'sub-total-excl-tax' => 'উপমোট (কর ব্যতিত) - :sub_total',
                 'sub-total-incl-tax' => 'উপমোট (কর সহ) - :sub_total',
@@ -677,6 +678,7 @@ return [
                 'summary-tax' => 'করের পরিমাণ',
                 'tax' => 'করের পরিমাণ - :tax',
                 'title' => 'চালান #:invoice_id',
+                'billing-address' => 'Billing Address',
             ],
 
             'create' => [

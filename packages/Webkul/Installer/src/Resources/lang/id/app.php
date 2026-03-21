@@ -944,6 +944,7 @@ return [
                 'select-locale' => 'Pilih Locale',
                 'title' => 'Instalasi Bagisto Anda',
                 'welcome-title' => 'Selamat datang di Bagisto',
+                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [
