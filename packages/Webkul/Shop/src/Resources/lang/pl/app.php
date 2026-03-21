@@ -1153,8 +1153,8 @@ return [
             'invalid' => 'Kod rabatowy jest nieprawidłowy',
             'remove' => 'Usuń kod rabatowy',
             'subtotal' => 'Suma częściowa',
-            'usage-limit-exceeded' => 'Ten kod rabatowy został wykorzystany.',
             'success-apply' => 'Kod rabatowy został pomyślnie zastosowany',
+            'usage-limit-exceeded' => 'Ten kod rabatowy został wykorzystany.',
         ],
 
         'login' => [
@@ -1250,13 +1250,13 @@ return [
 
         'customers' => [
             'registration' => [
-                'credentials-description' => 'Sua conta foi criada. Os detalhes da sua conta estão abaixo:',
+                'credentials-description' => 'Twoje konto zostało utworzone. Szczegóły Twojego konta znajdują się poniżej:',
                 'description' => 'Twoje konto zostało teraz pomyślnie utworzone, możesz się zalogować za pomocą swojego adresu e-mail i hasła. Po zalogowaniu będziesz mógł korzystać z innych usług, w tym przeglądania wcześniejszych zamówień, list życzeń i edytowania informacji o koncie.',
                 'greeting' => 'Witamy i dziękujemy za zarejestrowanie się u nas!',
-                'password' => 'Senha',
+                'password' => 'Hasło',
                 'sign-in' => 'Zaloguj się',
                 'subject' => 'Rejestracja nowego klienta',
-                'username-email' => 'Nome de usuário/Email',
+                'username-email' => 'Nazwa użytkownika/E-mail',
             ],
 
             'forgot-password' => [
