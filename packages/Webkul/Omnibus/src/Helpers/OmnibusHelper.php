@@ -38,7 +38,7 @@ class OmnibusHelper
                 return null;
             }
 
-            return (float) $this->omnibusPriceRepository->model()
+            return (float) $this->omnibusPriceRepository->getModel()
                 ->whereIn('product_id', $variantIds)
                 ->where('channel_id', $channelId)
                 ->where('currency_code', $currencyCode)
@@ -53,6 +53,24 @@ class OmnibusHelper
             $currencyCode,
             $promoStartDate
         );
+    }
+
+    /**
+     * Zwraca sformatowaną najniższą cenę dango produktu dla JS (Vue).
+     *
+     * @param Product $product
+     * @return string
+     */
+    public function getLowestPriceFormatted(Product $product): ?string
+    {
+        $price = $this->getLowestPrice($product);
+
+        // Jeśli brak ceny lub brak promocji (według logiki getLowestPrice)
+        if (is_null($price)) {
+            return null;
+        }
+
+        return core()->formatPrice($price, core()->getCurrentCurrencyCode());
     }
 
     public function getOmnibusPriceHtml(Product $product): string

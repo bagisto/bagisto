@@ -1,40 +1,68 @@
 @php
     $omnibusHelper = app(\Webkul\Omnibus\Helpers\OmnibusHelper::class);
-    $initialHtml = $omnibusHelper->getOmnibusPriceHtml($product);
 
-    // Przygotowujemy mapę najniższych cen dla wszystkich wariantów
     $variantPrices = [];
     if ($product->type === 'configurable') {
         foreach ($product->variants as $variant) {
-            $variantPrices[$variant->id] = $omnibusHelper->getLowestPriceFormatted($variant);
+            $formatted = $omnibusHelper->getLowestPriceFormatted($variant);
+            if ($formatted) {
+                $variantPrices[$variant->id] = $formatted;
+            }
         }
     }
+
+    $initialHtml = $omnibusHelper->getOmnibusPriceHtml($product);
 @endphp
 
-<div id="omnibus-wrapper">
-    {!! $initialHtml !!}
+<div id="omnibus-manager" data-variants='@json($variantPrices)' class="omnibus-container">
+    <div id="omnibus-wrapper">
+        {!! $initialHtml !!}
+    </div>
 </div>
 
+@push('scripts')
 <script>
-    window.omnibusPrices = @json($variantPrices);
+    (function() {
+        function initOmnibus() {
+            const container = document.getElementById('omnibus-manager');
+            if (!container) return;
 
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof window.eventBus !== 'undefined') {
-            window.eventBus.$on('configurable-variant-update-price', function (data) {
-                const variantId = data.variantId;
-                const lowestPrice = window.omnibusPrices[variantId];
-                const wrapper = document.getElementById('omnibus-wrapper');
+            const variantPrices = JSON.parse(container.dataset.variants || '{}');
+            
+            // Czekamy na emitter Bagisto
+            const interval = setInterval(() => {
+                const emitter = window.app?.config?.globalProperties?.$emitter;
+                
+                if (emitter) {
+                    clearInterval(interval);
+                    
+                    emitter.on('configurable-variant-selected-event', (variant) => {
+                        const wrapper = document.getElementById('omnibus-wrapper');
+                        const variantId = variant ? variant.id : null;
+                        const lowestPrice = variantId ? variantPrices[variantId] : null;
 
-                if (wrapper && lowestPrice) {
-                    const priceElement = wrapper.querySelector('strong');
-                    if (priceElement) {
-                        priceElement.innerText = lowestPrice;
-                    }
-                    wrapper.style.display = 'block';
-                } else if (wrapper) {
-                    wrapper.style.display = 'none';
+                        if (wrapper && lowestPrice) {
+                            wrapper.innerHTML = `
+                                <div class="omnibus-price-info mt-2 text-sm text-gray-500 flex items-center gap-1">
+                                    <span>Najniższa cena z 30 dni przed obniżką: 
+                                        <strong class="font-medium text-gray-700">${lowestPrice}</strong>
+                                    </span>
+                                </div>`;
+                            wrapper.style.display = 'block';
+                        } else if (wrapper) {
+                            wrapper.style.display = 'none';
+                        }
+                    });
                 }
-            });
+            }, 100);
         }
-    });
+
+        // Odpalenie po załadowaniu DOM
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initOmnibus);
+        } else {
+            initOmnibus();
+        }
+    })();
 </script>
+@endpush
