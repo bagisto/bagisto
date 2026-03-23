@@ -41,7 +41,7 @@ class SnapshotPrices extends Command
      */
     public function handle()
     {
-        if (!core()->getConfigData('catalog.products.omnibus.is_enabled')) {
+        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
             $this->info('Omnibus is disabled in configuration.');
 
             return;
@@ -69,7 +69,7 @@ class SnapshotPrices extends Command
         $this->output->progressFinish();
         $this->info("Completed. Added {$snapshotCount} new price snapshots.");
 
-        $this->info("Cleaning up old history...");
+        $this->info('Cleaning up old history...');
         $this->omnibusPriceManager->cleanOldRecords();
     }
 }

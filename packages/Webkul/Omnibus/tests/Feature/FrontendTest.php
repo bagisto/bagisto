@@ -1,9 +1,8 @@
 <?php
 
 use Webkul\Faker\Helpers\Product as ProductFaker;
+use Webkul\Omnibus\Helpers\OmnibusHelper;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
-use Illuminate\Support\Facades\Event;
-use Carbon\Carbon;
 
 use function Pest\Laravel\get;
 
@@ -24,15 +23,15 @@ it('renders the omnibus wrapper inside the product view page alongside variant J
 
     // Mock OmnibusHelper to simulate that the product has valid historical promo logs
     // This allows us to bypass creating massive EAV architecture datasets in the integration environment
-    $mockHelper = Mockery::mock(Webkul\Omnibus\Helpers\OmnibusHelper::class);
+    $mockHelper = Mockery::mock(OmnibusHelper::class);
     $mockHelper->shouldReceive('getOmnibusPriceHtml')
         ->once()
-        ->andReturn('<div id="omnibus-manager" data-variants=\'{"' . $configurableProduct->variants->first()->id . '":"Lowest price 30 days prior to the discount: 20.00 PLN"}\' style="display: none;"></div>');
-        
+        ->andReturn('<div id="omnibus-manager" data-variants=\'{"'.$configurableProduct->variants->first()->id.'":"Lowest price 30 days prior to the discount: 20.00 PLN"}\' style="display: none;"></div>');
+
     $mockHelper->shouldReceive('getLowestPriceFormatted')
         ->andReturn('Lowest price 30 days prior to the discount: 20.00 PLN');
-        
-    app()->instance(Webkul\Omnibus\Helpers\OmnibusHelper::class, $mockHelper);
+
+    app()->instance(OmnibusHelper::class, $mockHelper);
 
     // Act
     $response = get(route('shop.product_or_category.index', $configurableProduct->url_key));

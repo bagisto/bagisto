@@ -1,17 +1,17 @@
 <?php
 
 use Carbon\Carbon;
+use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Omnibus\Helpers\OmnibusHelper;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 
 beforeEach(function () {
     config(['catalog.products.omnibus.is_enabled' => true]);
     $this->helper = app(OmnibusHelper::class);
     $this->manager = app(OmnibusPriceManager::class);
     $this->repository = app(OmnibusPriceRepository::class);
-    
+
     $this->channelId = core()->getCurrentChannel()->id;
     $this->currencyCode = core()->getCurrentCurrencyCode();
 });
@@ -25,9 +25,9 @@ it('propagates the snapshot recursively down to configurable variants', function
         ],
     ]))->getConfigurableProductFactory()->create();
 
-    \DB::table('product_omnibus_prices')->truncate(); // Purge factory event noise
+    DB::table('product_omnibus_prices')->truncate(); // Purge factory event noise
 
-    \DB::table('product_price_indices')->updateOrInsert([
+    DB::table('product_price_indices')->updateOrInsert([
         'product_id' => $configurableProduct->id,
         'customer_group_id' => 1,
         'channel_id' => $this->channelId,
@@ -37,7 +37,7 @@ it('propagates the snapshot recursively down to configurable variants', function
     ]);
 
     foreach ($configurableProduct->variants as $variant) {
-        \DB::table('product_price_indices')->updateOrInsert([
+        DB::table('product_price_indices')->updateOrInsert([
             'product_id' => $variant->id,
             'customer_group_id' => 1,
             'channel_id' => $this->channelId,
@@ -50,17 +50,17 @@ it('propagates the snapshot recursively down to configurable variants', function
     $snapshotsCreated = $this->manager->recordPriceIfNeeded($configurableProduct);
 
     expect($snapshotsCreated)->toBeGreaterThanOrEqual(1); // Iterates variants
-    
+
     $parentLog = $this->repository->where('product_id', $configurableProduct->id)->first();
     expect($parentLog)->not->toBeNull();
 });
 
 it('prevents duplicated records when prices have not changed consecutively', function () {
     $product = (new ProductFaker)->getSimpleProductFactory()->create();
-    
-    \DB::table('product_omnibus_prices')->truncate();
 
-    \DB::table('product_price_indices')->updateOrInsert([
+    DB::table('product_omnibus_prices')->truncate();
+
+    DB::table('product_price_indices')->updateOrInsert([
         'product_id' => $product->id,
         'customer_group_id' => 1,
         'channel_id' => $this->channelId,
@@ -73,7 +73,7 @@ it('prevents duplicated records when prices have not changed consecutively', fun
     $snapshotsCreatedDay2 = $this->manager->recordPriceIfNeeded($product);
 
     expect($snapshotsCreatedDay1)->toBeGreaterThan(0);
-    expect($snapshotsCreatedDay2)->toBe(0); 
+    expect($snapshotsCreatedDay2)->toBe(0);
 
     $totalLogs = $this->repository->where('product_id', $product->id)->count();
     expect($totalLogs)->toBe(count(core()->getCurrentChannel()->currencies));
@@ -82,7 +82,7 @@ it('prevents duplicated records when prices have not changed consecutively', fun
 it('purges records older than 35 days silently', function () {
     $product = (new ProductFaker)->getSimpleProductFactory()->create();
 
-    \DB::table('product_omnibus_prices')->truncate();
+    DB::table('product_omnibus_prices')->truncate();
 
     $this->repository->create([
         'product_id' => $product->id,
@@ -103,7 +103,7 @@ it('purges records older than 35 days silently', function () {
     $this->manager->cleanOldRecords();
 
     $logs = $this->repository->where('product_id', $product->id)->get();
-    
+
     expect($logs->count())->toBe(1);
     expect($logs->first()->id)->toBe($record20->id);
 });

@@ -9,12 +9,11 @@ class OmnibusHelper
 {
     public function __construct(
         protected OmnibusPriceRepository $omnibusPriceRepository
-    ) {
-    }
+    ) {}
 
     public function getLowestPrice(Product $product): ?float
     {
-        if (!core()->getConfigData('catalog.products.omnibus.is_enabled')) {
+        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
             return null;
         }
 
@@ -22,7 +21,7 @@ class OmnibusHelper
         $currencyCode = core()->getCurrentCurrencyCode();
         $promoStartDate = $product->special_price_from;
 
-        if (!$promoStartDate) {
+        if (! $promoStartDate) {
             $latestSnapshot = $this->omnibusPriceRepository->getLatestByProductIdAndChannel(
                 $product->id,
                 $channelId,
@@ -57,9 +56,6 @@ class OmnibusHelper
 
     /**
      * Zwraca sformatowaną najniższą cenę dango produktu dla JS (Vue).
-     *
-     * @param Product $product
-     * @return string
      */
     public function getLowestPriceFormatted(Product $product): ?string
     {
@@ -75,11 +71,11 @@ class OmnibusHelper
 
     public function getOmnibusPriceHtml(Product $product): string
     {
-        if (!core()->getConfigData('catalog.products.omnibus.is_enabled')) {
+        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
             return '';
         }
 
-        if (!$product->getTypeInstance()->haveDiscount()) {
+        if (! $product->getTypeInstance()->haveDiscount()) {
             return '';
         }
 

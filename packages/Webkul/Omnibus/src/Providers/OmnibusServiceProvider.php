@@ -15,11 +15,11 @@ class OmnibusServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'omnibus');
-        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'omnibus');
+        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'omnibus');
+        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'omnibus');
 
         $this->publishes([
-            __DIR__ . '/../Config/system.php' => config_path('system.php'),
+            __DIR__.'/../Config/system.php' => config_path('system.php'),
         ]);
 
         $this->app->booted(function () {
@@ -54,7 +54,7 @@ class OmnibusServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__) . '/Config/system.php',
+            dirname(__DIR__).'/Config/system.php',
             'core'
         );
     }

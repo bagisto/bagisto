@@ -11,8 +11,7 @@ class OmnibusPriceManager
     public function __construct(
         protected ChannelRepository $channelRepository,
         protected OmnibusPriceRepository $omnibusPriceRepository
-    ) {
-    }
+    ) {}
 
     /**
      * Records the precise price of a product evaluated per active channel and currency.
@@ -24,7 +23,7 @@ class OmnibusPriceManager
      */
     public function recordPriceIfNeeded(Product $product, ?string $recordedAt = null): int
     {
-        if (!core()->getConfigData('catalog.products.omnibus.is_enabled')) {
+        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
             return 0;
         }
 
