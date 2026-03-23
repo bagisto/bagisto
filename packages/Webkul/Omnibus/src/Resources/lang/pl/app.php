@@ -8,4 +8,8 @@ return [
             'is-enabled' => 'Włącz Omnibusa',
         ],
     ],
+
+    'shop' => [
+        'price-info' => 'Najniższa cena z 30 dni przed obniżką:',
+    ],
 ];
