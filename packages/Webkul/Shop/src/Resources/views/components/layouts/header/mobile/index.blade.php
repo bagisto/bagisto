@@ -21,10 +21,17 @@
 
             {!! view_render_event('bagisto.shop.components.layouts.header.mobile.logo.before') !!}
 
-            <a href="{{ route('shop.home.index') }}" class="max-h-[30px]"
-                aria-label="@lang('shop::app.components.layouts.header.mobile.bagisto')">
-                <img src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-                    alt="{{ config('app.name') }}" width="131" height="29">
+            <a
+                href="{{ route('shop.home.index') }}"
+                class="max-h-[30px]"
+                aria-label="@lang('shop::app.components.layouts.header.mobile.bagisto')"
+            >
+                <img
+                    src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                    alt="{{ config('app.name') }}"
+                    width="131"
+                    height="29"
+                >
             </a>
 
             {!! view_render_event('bagisto.shop.components.layouts.header.mobile.logo.after') !!}
@@ -36,8 +43,10 @@
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.compare.before') !!}
 
                 @if($showCompare)
-                    <a href="{{ route('shop.compare.index') }}"
-                        aria-label="@lang('shop::app.components.layouts.header.mobile.compare')">
+                    <a
+                        href="{{ route('shop.compare.index') }}"
+                        aria-label="@lang('shop::app.components.layouts.header.mobile.compare')"
+                    >
                         <span class="text-2xl cursor-pointer icon-compare"></span>
                     </a>
                 @endif
@@ -54,8 +63,7 @@
 
                 <!-- For Large screens -->
                 <div class="max-md:hidden">
-                    <x-shop::dropdown
-                        position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
+                    <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                         <x-slot:toggle>
                             <span class="text-2xl cursor-pointer icon-users"></span>
                             </x-slot>
@@ -80,13 +88,17 @@
                                     <div class="flex gap-4 mt-6">
                                         {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.sign_in_button.before') !!}
 
-                                        <a href="{{ route('shop.customer.session.create') }}"
-                                            class="block py-4 m-0 mx-auto text-base font-medium text-center text-white cursor-pointer w-max rounded-2xl bg-navyBlue px-7 ltr:ml-0 rtl:mr-0">
+                                    <a
+                                        href="{{ route('shop.customer.session.create') }}"
+                                        class="block py-4 m-0 mx-auto text-base font-medium text-center text-white cursor-pointer w-max rounded-2xl bg-navyBlue px-7 ltr:ml-0 rtl:mr-0"
+                                    >
                                             @lang('shop::app.components.layouts.header.mobile.sign-in')
                                         </a>
 
-                                        <a href="{{ route('shop.customers.register.index') }}"
-                                            class="m-0 mx-auto block w-max cursor-pointer rounded-2xl border-2 border-navyBlue bg-white px-7 py-3.5 text-center text-base font-medium text-navyBlue ltr:ml-0 rtl:mr-0">
+                                    <a
+                                        href="{{ route('shop.customers.register.index') }}"
+                                        class="m-0 mx-auto block w-max cursor-pointer rounded-2xl border-2 border-navyBlue bg-white px-7 py-3.5 text-center text-base font-medium text-navyBlue ltr:ml-0 rtl:mr-0"
+                                    >
                                             @lang('shop::app.components.layouts.header.mobile.sign-up')
                                         </a>
 
@@ -102,7 +114,7 @@
                                     <x-slot:content class="!p-0">
                                         <div class="grid gap-2.5 p-5 pb-0">
                                             <p class="text-xl font-dmserif" v-pre>
-                                                @lang('shop::app.components.layouts.header.mobile.welcome')
+                                        @lang('shop::app.components.layouts.header.mobile.welcome')’
                                                 {{ auth()->guard('customer')->user()->first_name }}
                                             </p>
 
@@ -116,31 +128,42 @@
                                         <div class="mt-2.5 grid gap-1 pb-2.5">
                                             {!! view_render_event('bagisto.shop.components.layouts.header.mobile.index.profile_dropdown.links.before') !!}
 
-                                            <a class="px-5 py-2 text-base cursor-pointer"
-                                                href="{{ route('shop.customers.account.profile.index') }}">
+                                    <a
+                                        class="px-5 py-2 text-base cursor-pointer"
+                                        href="{{ route('shop.customers.account.profile.index') }}"
+                                    >
                                                 @lang('shop::app.components.layouts.header.mobile.profile')
                                             </a>
 
-                                            <a class="px-5 py-2 text-base cursor-pointer"
-                                                href="{{ route('shop.customers.account.orders.index') }}">
+                                    <a
+                                        class="px-5 py-2 text-base cursor-pointer"
+                                        href="{{ route('shop.customers.account.orders.index') }}"
+                                    >
                                                 @lang('shop::app.components.layouts.header.mobile.orders')
                                             </a>
 
                                             @if ($showWishlist)
-                                                <a class="px-5 py-2 text-base cursor-pointer"
-                                                    href="{{ route('shop.customers.account.wishlist.index') }}">
+                                        <a
+                                            class="px-5 py-2 text-base cursor-pointer"
+                                            href="{{ route('shop.customers.account.wishlist.index') }}"
+                                        >
                                                     @lang('shop::app.components.layouts.header.mobile.wishlist')
                                                 </a>
                                             @endif
 
                                             <!--Customers logout-->
                                             @auth('customer')
-                                                <x-shop::form method="DELETE"
-                                                    action="{{ route('shop.customer.session.destroy') }}" id="customerLogout" />
+                                        <x-shop::form
+                                            method="DELETE"
+                                            action="{{ route('shop.customer.session.destroy') }}"
+                                            id="customerLogout"
+                                        />
 
-                                                <a class="px-5 py-2 text-base cursor-pointer"
+                                        <a
+                                            class="px-5 py-2 text-base cursor-pointer"
                                                     href="{{ route('shop.customer.session.destroy') }}"
-                                                    onclick="event.preventDefault(); document.getElementById('customerLogout').submit();">
+                                            onclick="event.preventDefault(); document.getElementById('customerLogout').submit();"
+                                        >
                                                     @lang('shop::app.components.layouts.header.mobile.logout')
                                                 </a>
                                             @endauth
@@ -155,16 +178,20 @@
                 <!-- For Medium and small screen -->
                 <div class="md:hidden">
                     @guest('customer')
-                        <a href="{{ route('shop.customer.session.create') }}"
-                            aria-label="@lang('shop::app.components.layouts.header.mobile.account')">
+                        <a
+                            href="{{ route('shop.customer.session.create') }}"
+                            aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
+                        >
                             <span class="text-2xl cursor-pointer icon-users"></span>
                         </a>
                     @endguest
 
                     <!-- Customers Dropdown -->
                     @auth('customer')
-                        <a href="{{ route('shop.customers.account.index') }}"
-                            aria-label="@lang('shop::app.components.layouts.header.mobile.account')">
+                        <a
+                            href="{{ route('shop.customers.account.index') }}"
+                            aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
+                        >
                             <span class="text-2xl cursor-pointer icon-users"></span>
                         </a>
                     @endauth
@@ -177,19 +204,24 @@
 
     <!-- Serach Catalog Form -->
     <form action="{{ route('shop.search.index') }}" class="flex items-center w-full">
-        <label for="organic-search" class="sr-only">
+        <label
+            for="organic-search"
+            class="sr-only"
+        >
             @lang('shop::app.components.layouts.header.mobile.search')
         </label>
 
         <div class="relative w-full">
-            <div
-                class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3">
-            </div>
+            <div class="icon-search pointer-events-none absolute top-3 flex items-center text-2xl max-md:text-xl max-sm:top-2.5 ltr:left-3 rtl:right-3"></div>
 
-            <input type="text"
+            <input
+                type="text"
                 class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
-                name="query" value="{{ request('query') }}"
-                placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')" required>
+                name="query"
+                value="{{ request('query') }}"
+                placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
+                required
+            >
 
             @if (core()->getConfigData('catalog.products.settings.image_search'))
                 @include('shop::search.images.index')
@@ -230,7 +262,7 @@
                         <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">
                             <div>
                                 <img
-                                    src="{{ auth()->user()?->image_url ?? bagisto_asset('images/user-placeholder.png') }}"
+                                src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
                                     class="h-[60px] w-[60px] rounded-full max-md:rounded-full"
                                 >
                             </div>
@@ -269,7 +301,7 @@
 
                 <x-slot:footer>
                     <!-- Localization & Currency Section -->
-                    @if(core()->getCurrentChannel()->locales()->count() > 1 || core()->getCurrentChannel()->currencies()->count() > 1)
+                @if(core()->getCurrentChannel()->locales()->count() > 1 || core()->getCurrentChannel()->currencies()->count() > 1 )
                                     <div class="fixed bottom-0 z-10 grid w-full max-w-full grid-cols-[1fr_auto_1fr] items-center justify-items-center border-t border-zinc-200 bg-white px-5 ltr:left-0 rtl:right-0">
                                         <!-- Filter Drawer -->
                                         <x-shop::drawer
@@ -323,7 +355,7 @@
                                                     v-pre
                                                 >
                                                     <img
-                                                        src="{{ !empty(core()->getCurrentLocale()->logo_url)
+                                        src="{{ ! empty(core()->getCurrentLocale()->logo_url)
                         ? core()->getCurrentLocale()->logo_url
                         : bagisto_asset('images/default-language.svg')
                                                             }}"
@@ -362,19 +394,28 @@
             </x-shop::drawer>
         </script>
 
-    <script type="text/x-template" id="v-mobile-category-template">
+    <script
+        type="text/x-template"
+        id="v-mobile-category-template"
+    >
             <!-- Wrapper with transition effects -->
     <div class="relative h-full overflow-hidden">
         <!-- Sliding container -->
-        <div class="flex h-full transition-transform duration-300" :class="{
+            <div
+                class="flex h-full transition-transform duration-300"
+                :class="{
                         'ltr:translate-x-0 rtl:translate-x-0': currentViewLevel !== 'third',
                         'ltr:-translate-x-full rtl:translate-x-full': currentViewLevel === 'third'
-                    }">
+                }"
+            >
             <!-- First level view -->
             <div class="flex-shrink-0 w-full h-full px-6 overflow-auto">
                 <div class="py-4">
-                    <div v-for="category in categories" :key="category.id"
-                        :class="{'mb-2': category.children && category.children.length}">
+                        <div
+                            v-for="category in categories"
+                            :key="category.id"
+                            :class="{'mb-2': category.children && category.children.length}"
+                        >
                         <div class="flex items-center justify-between py-2 transition-colors duration-200 cursor-pointer">
                             <a :href="category.url" class="text-base font-medium text-black">
                                 @{{ category.name }}
@@ -382,16 +423,23 @@
                         </div>
 
                         <!-- Second Level Categories -->
-                        <div v-if="category.children && category.children.length">
-                            <div v-for="secondLevelCategory in category.children" :key="secondLevelCategory.id">
-                                <div class="flex items-center justify-between py-2 transition-colors duration-200 cursor-pointer"
-                                    @click="showThirdLevel(secondLevelCategory, category, $event)">
+                            <div v-if="category.children && category.children.length" >
+                                <div
+                                    v-for="secondLevelCategory in category.children"
+                                    :key="secondLevelCategory.id"
+                                >
+                                    <div
+                                        class="flex items-center justify-between py-2 transition-colors duration-200 cursor-pointer"
+                                        @click="showThirdLevel(secondLevelCategory, category, $event)"
+                                    >
                                     <a :href="secondLevelCategory.url" class="text-sm font-normal">
                                         @{{ secondLevelCategory.name }}
                                     </a>
 
-                                    <span v-if="secondLevelCategory.children && secondLevelCategory.children.length"
-                                        class="icon-arrow-right rtl:icon-arrow-left"></span>
+                                        <span
+                                            v-if="secondLevelCategory.children && secondLevelCategory.children.length"
+                                            class="icon-arrow-right rtl:icon-arrow-left"
+                                        ></span>
                                 </div>
                             </div>
                         </div>
@@ -400,10 +448,16 @@
             </div>
 
             <!-- Third level view -->
-            <div class="flex-shrink-0 w-full h-full" v-if="currentViewLevel === 'third'">
+                <div
+                    class="flex-shrink-0 w-full h-full"
+                    v-if="currentViewLevel === 'third'"
+                >
                 <div class="px-6 py-4 border-b border-gray-200">
-                    <button @click="goBackToMainView" class="flex items-center justify-center gap-2 focus:outline-none"
-                        aria-label="Go back">
+                        <button
+                            @click="goBackToMainView"
+                            class="flex items-center justify-center gap-2 focus:outline-none"
+                            aria-label="Go back"
+                        >
                         <span class="text-lg icon-arrow-left rtl:icon-arrow-right"></span>
                         <div class="text-base font-medium text-black">
                             @lang('shop::app.components.layouts.header.mobile.back-button')
@@ -413,9 +467,15 @@
 
                 <!-- Third Level Content -->
                 <div class="px-6 py-4">
-                    <div v-for="thirdLevelCategory in currentSecondLevelCategory?.children" :key="thirdLevelCategory.id"
-                        class="mb-2">
-                        <a :href="thirdLevelCategory.url" class="block py-2 text-sm transition-colors duration-200">
+                        <div
+                            v-for="thirdLevelCategory in currentSecondLevelCategory?.children"
+                            :key="thirdLevelCategory.id"
+                            class="mb-2"
+                        >
+                            <a
+                                :href="thirdLevelCategory.url"
+                                class="block py-2 text-sm transition-colors duration-200"
+                            >
                             @{{ thirdLevelCategory.name }}
                         </a>
                     </div>
@@ -430,7 +490,7 @@
             template: '#v-mobile-category-template',
 
             data() {
-                return {
+                return  {
                     categories: [],
                     currentViewLevel: 'main',
                     currentSecondLevelCategory: null,
@@ -459,7 +519,7 @@
                             return;
                         }
 
-                    } catch (e) { }
+                    } catch (e) {}
 
                     this.getCategories();
                 },

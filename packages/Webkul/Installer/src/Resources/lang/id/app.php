@@ -939,12 +939,12 @@ return [
             ],
 
             'start' => [
+                'language' => 'Bahasa Wizard Instalasi',
                 'locale' => 'Locale',
                 'main' => 'Mulai',
                 'select-locale' => 'Pilih Locale',
                 'title' => 'Instalasi Bagisto Anda',
                 'welcome-title' => 'Selamat datang di Bagisto',
-                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [

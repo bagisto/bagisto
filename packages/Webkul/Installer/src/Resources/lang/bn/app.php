@@ -939,12 +939,12 @@ return [
             ],
 
             'start' => [
+                'language' => 'ইনস্টলেশন উইজার্ডের ভাষা',
                 'locale' => 'লোকেল',
                 'main' => 'শুরু',
                 'select-locale' => 'লোকেল নির্বাচন করুন',
                 'title' => 'আপনার Bagisto ইনস্টলেশন',
                 'welcome-title' => 'Bagisto এ আপনাকে স্বাগতম',
-                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [

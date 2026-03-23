@@ -939,12 +939,12 @@ return [
             ],
 
             'start' => [
+                'language' => 'Taal van de installatiewizard',
                 'locale' => 'Locatie',
                 'main' => 'Start',
                 'select-locale' => 'Selecteer Locatie',
                 'title' => 'Uw Bagisto-installatie',
                 'welcome-title' => 'Welkom bij Bagisto',
-                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [

@@ -939,12 +939,12 @@ return [
             ],
 
             'start' => [
+                'language' => 'زبان جادوگر نصب',
                 'locale' => 'محلی',
                 'main' => 'شروع',
                 'select-locale' => 'انتخاب محلی',
                 'title' => 'نصب Bagisto شما',
                 'welcome-title' => 'خوش آمدید به Bagisto',
-                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [

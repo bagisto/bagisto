@@ -939,12 +939,12 @@ return [
             ],
 
             'start' => [
+                'language' => 'Idioma del asistente de instalación',
                 'locale' => 'Local',
                 'main' => 'Comienzo',
                 'select-locale' => 'Seleccionar Local',
                 'title' => 'Tu instalación de Bagisto',
                 'welcome-title' => 'Bienvenido a Bagisto',
-                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [

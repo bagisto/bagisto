@@ -939,12 +939,12 @@ return [
             ],
 
             'start' => [
+                'language' => 'שפת אשף ההתקנה',
                 'locale' => 'אזור',
                 'main' => 'הַתְחָלָה',
                 'select-locale' => 'בחר אזור',
                 'title' => 'התקנת Bagisto שלך',
                 'welcome-title' => 'ברוך הבא ל-Bagisto',
-                'language' => 'Installation Wizard language',
             ],
 
             'server-requirements' => [
