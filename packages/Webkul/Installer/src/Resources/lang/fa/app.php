@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'زبان جادوگر نصب',
                 'locale' => 'محلی',
                 'main' => 'شروع',
                 'select-locale' => 'انتخاب محلی',

@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed an issue where static content was pointing to demo categories and giving 404 errors when installed without sample products.
 
+* #11207 [fixed] - Performed a major update and cleanup of Polish translations across both Admin and Shop sections.
+
 * #10792 [feature] - Added Cache Management in Admin Configuration panel.
 
 ## **v2.4.0 (19th of March 2026)** - **Release**

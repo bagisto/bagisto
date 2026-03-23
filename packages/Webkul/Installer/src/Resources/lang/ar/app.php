@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'لغة معالج التثبيت',
                 'locale' => 'اللغة',
                 'main' => 'بداية',
                 'select-locale' => 'اختر اللغة',

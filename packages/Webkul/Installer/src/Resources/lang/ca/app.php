@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Idioma de l\'assistent d\'instal·lació',
                 'locale' => 'Idioma',
                 'main' => 'Inici',
                 'select-locale' => 'Selecciona l\'idioma',

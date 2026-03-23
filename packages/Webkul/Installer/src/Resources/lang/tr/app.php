@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Kurulum Sihirbazı dili',
                 'locale' => 'Yerel',
                 'main' => 'Başlangıç',
                 'select-locale' => 'Yerel Seçin',

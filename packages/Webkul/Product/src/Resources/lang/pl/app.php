@@ -27,12 +27,12 @@ return [
 
     'sort-by' => [
         'options' => [
-            'cheapest-first' => 'Najtańsze najpierw',
-            'expensive-first' => 'Najdroższe najpierw',
+            'cheapest-first' => 'Od najtańszych',
+            'expensive-first' => 'Od najdroższych',
             'from-a-z' => 'Od A do Z',
             'from-z-a' => 'Od Z do A',
-            'latest-first' => 'Najnowsze najpierw',
-            'oldest-first' => 'Najstarsze najpierw',
+            'latest-first' => 'Od najnowszych',
+            'oldest-first' => 'Od najstarszych',
         ],
     ],
 

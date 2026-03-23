@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Taal van de installatiewizard',
                 'locale' => 'Locatie',
                 'main' => 'Start',
                 'select-locale' => 'Selecteer Locatie',

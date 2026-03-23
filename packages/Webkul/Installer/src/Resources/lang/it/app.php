@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Lingua della procedura guidata di installazione',
                 'locale' => 'Località',
                 'main' => 'Inizio',
                 'select-locale' => 'Seleziona la località',

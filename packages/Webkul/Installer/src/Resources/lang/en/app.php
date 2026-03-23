@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Installation Wizard language',
                 'locale' => 'Locale',
                 'main' => 'Start',
                 'select-locale' => 'Select Locale',

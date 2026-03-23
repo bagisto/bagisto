@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'インストールウィザードの言語',
                 'locale' => 'ロケール',
                 'main' => '開始',
                 'select-locale' => 'ロケールを選択',

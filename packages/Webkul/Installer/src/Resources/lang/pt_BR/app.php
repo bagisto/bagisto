@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Idioma do assistente de instalação',
                 'locale' => 'Locatie',
                 'main' => 'Iniciar',
                 'select-locale' => 'Selecteer Locatie',

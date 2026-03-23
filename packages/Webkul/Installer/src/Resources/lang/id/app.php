@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Bahasa Wizard Instalasi',
                 'locale' => 'Locale',
                 'main' => 'Mulai',
                 'select-locale' => 'Pilih Locale',

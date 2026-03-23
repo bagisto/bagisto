@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'ස්ථාපන විශාරද භාෂාව',
                 'locale' => 'දේශීය',
                 'main' => 'ආරම්භක',
                 'select-locale' => 'Locale තෝරන්න',

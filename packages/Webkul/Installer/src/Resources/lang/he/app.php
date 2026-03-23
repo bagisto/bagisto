@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'שפת אשף ההתקנה',
                 'locale' => 'אזור',
                 'main' => 'הַתְחָלָה',
                 'select-locale' => 'בחר אזור',

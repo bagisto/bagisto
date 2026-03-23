@@ -399,7 +399,7 @@
 
                                 <div class="flex items-center justify-between">
                                     <p class="py-4 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                        @lang('Billing Address')
+                                        @lang('admin::app.sales.invoices.view.billing-address')
                                     </p>
                                 </div>
 
@@ -415,7 +415,7 @@
 
                             <div class="flex items-center justify-between">
                                 <p class="py-4 text-base font-semibold text-gray-600 dark:text-gray-300">
-                                    @lang('Shipping Address')
+                                    @lang('admin::app.sales.invoices.view.shipping-address')
                                 </p>
                             </div>
 

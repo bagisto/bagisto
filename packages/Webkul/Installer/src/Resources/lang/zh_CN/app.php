@@ -939,6 +939,7 @@ return [
             ],
 
             'start' => [
+                'language' => '安装向导语言',
                 'locale' => '区域设置',
                 'main' => '开始',
                 'select-locale' => '选择区域设置',
