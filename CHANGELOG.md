@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.16 (23rd of March 2026)** - *Release*
 
 - Fixed a critical race condition vulnerability in coupon usage during concurrent checkout, where two simultaneous orders could both redeem a single-use coupon. Coupon validation and usage consumption are now atomic using row-level locking inside the order creation transaction.
 
