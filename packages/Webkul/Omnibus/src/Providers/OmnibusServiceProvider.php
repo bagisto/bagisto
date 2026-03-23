@@ -2,7 +2,9 @@
 
 namespace Webkul\Omnibus\Providers;
 
+use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Omnibus\Console\Commands\SnapshotPrices;
 
 class OmnibusServiceProvider extends ServiceProvider
 {
@@ -13,11 +15,17 @@ class OmnibusServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'omnibus');
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'omnibus');
+        $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'omnibus');
 
         $this->publishes([
-            __DIR__.'/../Config/system.php' => config_path('system.php'),
+            __DIR__ . '/../Config/system.php' => config_path('system.php'),
         ]);
+
+        $this->app->booted(function () {
+            $schedule = $this->app->make(Schedule::class);
+            $schedule->command('omnibus:snapshot-prices')->everyFifteenMinutes();
+        });
     }
 
     /**
@@ -30,6 +38,12 @@ class OmnibusServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->app->register(EventServiceProvider::class);
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                SnapshotPrices::class,
+            ]);
+        }
     }
 
     /**
@@ -40,7 +54,8 @@ class OmnibusServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->mergeConfigFrom(
-            dirname(__DIR__).'/Config/system.php', 'core'
+            dirname(__DIR__) . '/Config/system.php',
+            'core'
         );
     }
 }

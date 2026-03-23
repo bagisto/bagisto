@@ -17,7 +17,8 @@ class EventServiceProvider extends ServiceProvider
         Event::listen('catalog.product.create.after', 'Webkul\Omnibus\Listeners\ProductPriceChange@afterSave');
         Event::listen('catalog.product.update.after', 'Webkul\Omnibus\Listeners\ProductPriceChange@afterSave');
 
-        Event::listen('promotions.catalog_rule.update.after', 'Webkul\Omnibus\Listeners\CatalogRuleChange@afterSave');
-        Event::listen('promotions.catalog_rule.create.after', 'Webkul\Omnibus\Listeners\CatalogRuleChange@afterSave');
+        Event::listen('bagisto.shop.products.price.after', function ($viewRenderEventManager) {
+            $viewRenderEventManager->addTemplate('omnibus::shop.inject');
+        });
     }
 }
