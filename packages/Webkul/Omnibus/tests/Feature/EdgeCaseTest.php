@@ -54,6 +54,13 @@ it('bypasses calculation logic totally when the module toggle is set to disabled
     expect($snapshotsCreated)->toBe(0);
     expect($lowestPrice)->toBeNull();
     expect($htmlOutput)->toBeEmpty();
+
+    // Restoration: Revert the DB configuration state back so following tests don't bleed out
+    DB::table('core_config')->updateOrInsert(
+        ['code' => 'catalog.products.omnibus.is_enabled'],
+        ['value' => '1', 'channel_code' => core()->getCurrentChannel()->code]
+    );
+    app()->forgetInstance('core');
 });
 
 it('properly equates microscopic float discrepancies stopping fractional spam', function () {
