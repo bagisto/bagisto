@@ -140,6 +140,16 @@ class ElasticSearchEngine implements SearchEngine
     }
 
     /**
+     * Execute a raw search query against Elasticsearch.
+     *
+     * Intended for consumers (e.g., DataGrid) that build their own query body.
+     */
+    public function rawSearch(array $params): array
+    {
+        return ElasticSearch::search($params);
+    }
+
+    /**
      * Format the elastic search index name.
      *
      * Elasticsearch index names must be lowercase.
