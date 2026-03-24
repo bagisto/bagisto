@@ -2,10 +2,9 @@
 
 namespace Webkul\Product\Services\Search\Engines;
 
-use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Customer\Repositories\CustomerRepository;
-use Webkul\Product\Contracts\Product;
 use Webkul\Product\Contracts\SearchEngine;
+use Webkul\Product\Repositories\ProductRepository;
 
 class DatabaseEngine implements SearchEngine
 {
@@ -14,7 +13,7 @@ class DatabaseEngine implements SearchEngine
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
-        protected AttributeRepository $attributeRepository,
+        protected ProductRepository $productRepository,
     ) {}
 
     /**
@@ -45,7 +44,7 @@ class DatabaseEngine implements SearchEngine
     {
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        $query = app(Product::class)::query()
+        $query = $this->productRepository
             ->leftJoin('product_price_indices', 'products.id', 'product_price_indices.product_id')
             ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
             ->where('product_price_indices.customer_group_id', $customerGroup->id);

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Admin\Exports\ProductDataGridExport;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Enums\SearchEngineEnum;
 use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
@@ -321,9 +322,7 @@ class ProductDataGrid extends DataGrid
             return ElasticSearchEngine::formatIndexName($channelCode, app()->getLocale());
         })->toArray();
 
-        $engine = app(ElasticSearchEngine::class);
-
-        $results = $engine->rawSearch([
+        $results = ElasticSearch::search([
             'index' => $indexNames,
             'body' => [
                 'from' => ($pagination['page'] * $pagination['per_page']) - $pagination['per_page'],

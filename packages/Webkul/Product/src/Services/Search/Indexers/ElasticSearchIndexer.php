@@ -4,7 +4,6 @@ namespace Webkul\Product\Services\Search\Indexers;
 
 use Webkul\Product\Contracts\SearchIndexer;
 use Webkul\Product\Helpers\Indexers\ElasticSearch;
-use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
 
 class ElasticSearchIndexer implements SearchIndexer
@@ -14,7 +13,6 @@ class ElasticSearchIndexer implements SearchIndexer
      */
     public function __construct(
         protected ElasticSearch $elasticSearchIndexer,
-        protected ProductRepository $productRepository,
     ) {}
 
     /**
