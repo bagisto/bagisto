@@ -89,7 +89,9 @@ class ProductRepository extends Repository
             return null;
         }
 
-        return $this->searchEngineManager->engine($this->searchContext)->getSuggestions($query);
+        return $this->searchEngineManager
+            ->engine($this->searchContext)
+            ->getSuggestions($query);
     }
 
     /**
@@ -564,6 +566,8 @@ class ProductRepository extends Repository
      */
     public function getMaxPrice($params = [])
     {
-        return $this->searchEngineManager->engine($this->searchContext)->getMaxPrice($params);
+        return $this->searchEngineManager
+            ->engine($this->searchContext)
+            ->getMaxPrice($params);
     }
 }

@@ -12,6 +12,9 @@ use Webkul\Product\Helpers\Product;
 
 class ElasticSearchEngine implements SearchEngine
 {
+    /**
+     * Create a new instance.
+     */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,

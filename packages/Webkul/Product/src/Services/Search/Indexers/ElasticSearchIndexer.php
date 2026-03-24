@@ -8,6 +8,9 @@ use Webkul\Product\Repositories\ProductRepository;
 
 class ElasticSearchIndexer implements SearchIndexer
 {
+    /**
+     * Create a new instance.
+     */
     public function __construct(
         protected ElasticSearch $elasticSearchIndexer,
         protected ProductRepository $productRepository,

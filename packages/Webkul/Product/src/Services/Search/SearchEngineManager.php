@@ -11,6 +11,9 @@ use Webkul\Product\Services\Search\Indexers\NullIndexer;
 
 class SearchEngineManager
 {
+    /**
+     * Create a new instance.
+     */
     public function __construct(
         protected Application $app,
     ) {}

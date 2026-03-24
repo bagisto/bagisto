@@ -8,6 +8,9 @@ use Webkul\Product\Contracts\SearchEngine;
 
 class DatabaseEngine implements SearchEngine
 {
+    /**
+     * Create a new instance.
+     */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
@@ -15,6 +18,7 @@ class DatabaseEngine implements SearchEngine
 
     /**
      * Database engine does not support search by IDs — returns empty.
+     *
      * Product listing is handled by ProductRepository::searchFromDatabase().
      */
     public function search(array $params, array $options): array
@@ -54,6 +58,7 @@ class DatabaseEngine implements SearchEngine
 
     /**
      * Database engine does not support slug lookup — returns null.
+     *
      * ProductRepository falls back to findByAttributeCode().
      */
     public function findBySlug(string $slug): ?int
