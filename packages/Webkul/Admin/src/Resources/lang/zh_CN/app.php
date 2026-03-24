@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => '配置您的 Ollama API 凭证。',
+                        'title-info' => '配置您的 Ollama 连接设置。',
+                        'url' => '基础 URL',
                     ],
                 ],
 

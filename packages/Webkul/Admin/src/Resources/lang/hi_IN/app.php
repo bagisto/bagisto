@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'अपने Ollama API प्रमाणपत्र कॉन्फ़िगर करें।',
+                        'title-info' => 'अपनी Ollama कनेक्शन सेटिंग्स कॉन्फ़िगर करें।',
+                        'url' => 'बेस URL',
                     ],
                 ],
 

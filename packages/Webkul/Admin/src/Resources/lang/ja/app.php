@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Ollama APIの認証情報を設定します。',
+                        'title-info' => 'Ollamaの接続設定を構成します。',
+                        'url' => 'ベースURL',
                     ],
                 ],
 

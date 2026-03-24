@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Konfigurasikan kredensial API Ollama Anda.',
+                        'title-info' => 'Konfigurasikan pengaturan koneksi Ollama Anda.',
+                        'url' => 'URL Dasar',
                     ],
                 ],
 

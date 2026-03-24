@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+* Added Base URL configuration field for Ollama provider in Magic AI settings.
+
 ## **v2.4.1 (23rd of March 2026)** - **Release**
 
 * Fixed an issue where the price slider was not displaying on the layered navigation.
