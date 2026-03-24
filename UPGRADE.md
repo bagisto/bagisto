@@ -26,6 +26,7 @@ The following classes have been **deleted**:
 | `Webkul\Product\Repositories\ElasticSearchRepository` | `Webkul\Product\Services\Search\Engines\ElasticSearchEngine` |
 | `Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex` | `Webkul\Product\Jobs\Search\IndexProducts` |
 | `Webkul\Product\Jobs\ElasticSearch\DeleteIndex` | `Webkul\Product\Jobs\Search\DeleteProducts` |
+| `Webkul\Product\Helpers\Product` | See "Renamed Methods" below |
 
 If your custom code imports any of these classes, update the imports to their replacements.
 
@@ -34,6 +35,21 @@ If your custom code imports any of these classes, update the imports to their re
 | Removed | Replacement |
 |---------|-------------|
 | `ProductRepository::setSearchEngine(string)` | `ProductRepository::setSearchContext(SearchContextEnum)` |
+
+#### Renamed Methods
+
+| Old | New |
+|-----|-----|
+| `Product::formatElasticSearchIndexName(channel, locale)` | `ElasticSearchEngine::formatIndexName(channel, locale)` |
+
+The `Webkul\Product\Helpers\Product` class has been deleted. Its only method moved to `ElasticSearchEngine`:
+
+```diff
+- use Webkul\Product\Helpers\Product;
+- Product::formatElasticSearchIndexName($channelCode, $localeCode);
++ use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
++ ElasticSearchEngine::formatIndexName($channelCode, $localeCode);
+```
 
 #### New Enums
 
@@ -134,7 +150,50 @@ Two contracts define the engine abstraction:
    + php artisan indexer:index --type=search --mode=full
    ```
 
-5. **Update `SearchEngineManager` usage for config checks:**
+5. **Update `Product::formatElasticSearchIndexName()` calls:**
+
+   ```diff
+   - use Webkul\Product\Helpers\Product;
+   - $index = Product::formatElasticSearchIndexName($channelCode, $localeCode);
+   + use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
+   + $index = ElasticSearchEngine::formatIndexName($channelCode, $localeCode);
+   ```
+
+6. **Update direct `ElasticSearch` facade usage in DataGrids:**
+
+   If your custom DataGrid calls the `ElasticSearch` facade directly, route it through `ElasticSearchEngine::rawSearch()` instead:
+
+   ```diff
+   - use Webkul\Core\Facades\ElasticSearch;
+   + use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
+
+   - $results = ElasticSearch::search([
+   + $engine = app(ElasticSearchEngine::class);
+   + $results = $engine->rawSearch([
+         'index' => $indexNames,
+         'body'  => [ /* your query body */ ],
+     ]);
+   ```
+
+   Use `SearchEngineManager::resolveDriver()` for the config check instead of reading config directly:
+
+   ```diff
+   - if (
+   -     core()->getConfigData('catalog.products.search.engine') != 'elastic'
+   -     || core()->getConfigData('catalog.products.search.admin_mode') != 'elastic'
+   - ) {
+   + use Webkul\Product\Enums\SearchContextEnum;
+   + use Webkul\Product\Enums\SearchEngineEnum;
+   + use Webkul\Product\Services\Search\SearchEngineManager;
+   +
+   + $manager = app(SearchEngineManager::class);
+   + if ($manager->resolveDriver(SearchContextEnum::ADMIN) === SearchEngineEnum::DATABASE) {
+         parent::processRequest();
+         return;
+     }
+   ```
+
+7. **Update `SearchEngineManager` usage for config checks:**
 
    If you need to check whether an external engine is enabled:
 
