@@ -10,7 +10,10 @@ use Webkul\Admin\Exports\ProductDataGridExport;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Product\Enums\SearchContextEnum;
+use Webkul\Product\Enums\SearchEngineEnum;
 use Webkul\Product\Helpers\Product;
+use Webkul\Product\Services\Search\SearchEngineManager;
 
 class ProductDataGrid extends DataGrid
 {
@@ -290,10 +293,9 @@ class ProductDataGrid extends DataGrid
      */
     protected function processRequest(): void
     {
-        if (
-            core()->getConfigData('catalog.products.search.engine') != 'elastic'
-            || core()->getConfigData('catalog.products.search.admin_mode') != 'elastic'
-        ) {
+        $manager = app(SearchEngineManager::class);
+
+        if ($manager->resolveDriver(SearchContextEnum::ADMIN) === SearchEngineEnum::DATABASE) {
             parent::processRequest();
 
             return;

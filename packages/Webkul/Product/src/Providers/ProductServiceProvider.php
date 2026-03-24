@@ -7,6 +7,10 @@ use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Console\Commands\Indexer;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
+use Webkul\Product\Services\Search\Engines\DatabaseEngine;
+use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
+use Webkul\Product\Services\Search\Indexers\ElasticSearchIndexer;
+use Webkul\Product\Services\Search\SearchEngineManager;
 
 class ProductServiceProvider extends ServiceProvider
 {
@@ -20,6 +24,8 @@ class ProductServiceProvider extends ServiceProvider
         $this->registerConfig();
 
         $this->registerCommands();
+
+        $this->registerSearchBindings();
     }
 
     /**
@@ -56,5 +62,19 @@ class ProductServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([Indexer::class]);
         }
+    }
+
+    /**
+     * Register search engine bindings.
+     */
+    protected function registerSearchBindings(): void
+    {
+        $this->app->singleton(SearchEngineManager::class);
+
+        $this->app->singleton('product.search.engine.database', DatabaseEngine::class);
+
+        $this->app->singleton('product.search.engine.elastic', ElasticSearchEngine::class);
+
+        $this->app->singleton('product.search.indexer.elastic', ElasticSearchIndexer::class);
     }
 }

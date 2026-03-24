@@ -1,0 +1,63 @@
+<?php
+
+namespace Webkul\Product\Services\Search\Engines;
+
+use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Product\Contracts\SearchEngine;
+
+class DatabaseEngine implements SearchEngine
+{
+    public function __construct(
+        protected CustomerRepository $customerRepository,
+        protected AttributeRepository $attributeRepository,
+    ) {}
+
+    /**
+     * Database engine does not support search by IDs — returns empty.
+     * Product listing is handled by ProductRepository::searchFromDatabase().
+     */
+    public function search(array $params, array $options): array
+    {
+        return [
+            'ids' => [],
+            'total' => 0,
+        ];
+    }
+
+    /**
+     * Database engine does not support search suggestions.
+     */
+    public function getSuggestions(?string $query): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Get maximum product price from database.
+     */
+    public function getMaxPrice(array $params = []): float
+    {
+        $customerGroup = $this->customerRepository->getCurrentGroup();
+
+        $query = app(\Webkul\Product\Contracts\Product::class)::query()
+            ->leftJoin('product_price_indices', 'products.id', 'product_price_indices.product_id')
+            ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
+            ->where('product_price_indices.customer_group_id', $customerGroup->id);
+
+        if (! empty($params['category_id'])) {
+            $query->where('product_categories.category_id', $params['category_id']);
+        }
+
+        return $query->max('min_price') ?? 0;
+    }
+
+    /**
+     * Database engine does not support slug lookup — returns null.
+     * ProductRepository falls back to findByAttributeCode().
+     */
+    public function findBySlug(string $slug): ?int
+    {
+        return null;
+    }
+}
