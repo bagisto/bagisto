@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'আপনার Ollama API শংসাপত্র কনফিগার করুন।',
+                        'title-info' => 'আপনার Ollama সংযোগ সেটিংস কনফিগার করুন।',
+                        'url' => 'বেস URL',
                     ],
                 ],
 

@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'ඔබගේ Ollama API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                        'title-info' => 'ඔබගේ Ollama සම්බන්ධතා සැකසුම් වින්‍යාස කරන්න.',
+                        'url' => 'මූලික URL',
                     ],
                 ],
 

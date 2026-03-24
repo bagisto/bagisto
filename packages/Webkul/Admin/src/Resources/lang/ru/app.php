@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Настройте учётные данные API Ollama.',
+                        'title-info' => 'Настройте параметры подключения Ollama.',
+                        'url' => 'Базовый URL',
                     ],
                 ],
 

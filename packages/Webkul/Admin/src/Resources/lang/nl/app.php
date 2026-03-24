@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configureer uw Ollama API-referenties.',
+                        'title-info' => 'Configureer uw Ollama-verbindingsinstellingen.',
+                        'url' => 'Basis-URL',
                     ],
                 ],
 
