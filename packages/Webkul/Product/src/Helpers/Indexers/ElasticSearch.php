@@ -12,6 +12,7 @@ use Webkul\Core\Contracts\Locale;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
+use Webkul\Product\Contracts\Product;
 use Webkul\Product\Contracts\ProductAttributeValue;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
@@ -49,7 +50,7 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Product instance.
      *
-     * @var \Webkul\Product\Contracts\Product
+     * @var Product
      */
     protected $product;
 
@@ -84,7 +85,7 @@ class ElasticSearch extends AbstractIndexer
     /**
      * Set current product.
      *
-     * @param  \Webkul\Product\Contracts\Product  $product
+     * @param  Product  $product
      * @return self
      */
     public function setProduct($product)
