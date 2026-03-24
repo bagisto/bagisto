@@ -12,7 +12,7 @@ use Webkul\Core\Facades\ElasticSearch;
 use Webkul\DataGrid\DataGrid;
 use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Enums\SearchEngineEnum;
-use Webkul\Product\Helpers\Product;
+use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
 use Webkul\Product\Services\Search\SearchEngineManager;
 
 class ProductDataGrid extends DataGrid
@@ -319,7 +319,7 @@ class ProductDataGrid extends DataGrid
         $channelCodes = request()->input('filters.channel') ?? core()->getAllChannels()->pluck('code')->toArray();
 
         $indexNames = collect($channelCodes)->map(function ($channelCode) {
-            return Product::formatElasticSearchIndexName($channelCode, app()->getLocale());
+            return ElasticSearchEngine::formatIndexName($channelCode, app()->getLocale());
         })->toArray();
 
         $results = ElasticSearch::search([

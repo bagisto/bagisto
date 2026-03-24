@@ -8,7 +8,6 @@ use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Marketing\Repositories\SearchSynonymRepository;
 use Webkul\Product\Contracts\SearchEngine;
-use Webkul\Product\Helpers\Product;
 
 class ElasticSearchEngine implements SearchEngine
 {
@@ -141,11 +140,23 @@ class ElasticSearchEngine implements SearchEngine
     }
 
     /**
-     * Return elastic search index name.
+     * Format the elastic search index name.
+     *
+     * Elasticsearch index names must be lowercase.
+     */
+    public static function formatIndexName(string $channelCode, string $localeCode): string
+    {
+        $prefix = config('elasticsearch.index_prefix');
+
+        return $prefix.'products_'.strtolower($channelCode).'_'.strtolower($localeCode).'_index';
+    }
+
+    /**
+     * Return elastic search index name for current request context.
      */
     public function getIndexName(): string
     {
-        return Product::formatElasticSearchIndexName(
+        return static::formatIndexName(
             core()->getRequestedChannelCode(),
             core()->getRequestedLocaleCodeInRequestedChannel()
         );

@@ -13,8 +13,8 @@ use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\Product\Contracts\ProductAttributeValue;
-use Webkul\Product\Helpers\Product;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
 
 class ElasticSearch extends AbstractIndexer
 {
@@ -237,7 +237,7 @@ class ElasticSearch extends AbstractIndexer
      */
     public function getIndexName()
     {
-        return Product::formatElasticSearchIndexName($this->channel->code, $this->locale->code);
+        return ElasticSearchEngine::formatIndexName($this->channel->code, $this->locale->code);
     }
 
     /**
