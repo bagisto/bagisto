@@ -125,6 +125,14 @@ class MagicAI
             config(["ai.providers.{$provider}.key" => $apiKey]);
         }
 
+        if ($provider === 'ollama') {
+            $url = core()->getConfigData('magic_ai.providers.ollama.url');
+
+            if ($url) {
+                config(['ai.providers.ollama.url' => $url]);
+            }
+        }
+
         return $provider;
     }
 

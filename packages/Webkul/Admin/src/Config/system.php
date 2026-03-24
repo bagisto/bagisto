@@ -663,6 +663,11 @@ return [
         'sort' => 8,
         'fields' => [
             [
+                'name' => 'url',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.ollama.url',
+                'type' => 'text',
+                'default' => 'http://localhost:11434',
+            ], [
                 'name' => 'api_key',
                 'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
                 'type' => 'password',

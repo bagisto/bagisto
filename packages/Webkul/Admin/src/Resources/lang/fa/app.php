@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'اعتبارنامه API Ollama خود را پیکربندی کنید.',
+                        'title-info' => 'تنظیمات اتصال Ollama خود را پیکربندی کنید.',
+                        'url' => 'آدرس URL پایه',
                     ],
                 ],
 

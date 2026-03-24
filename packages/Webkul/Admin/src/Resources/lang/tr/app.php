@@ -4237,7 +4237,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Ollama API kimlik bilgilerinizi yapılandırın.',
+                        'title-info' => 'Ollama bağlantı ayarlarınızı yapılandırın.',
+                        'url' => 'Temel URL',
                     ],
                 ],
 
