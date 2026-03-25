@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Activeu i configureu les funcions d\'IA per a la botiga.',
                     'title' => 'Funcions de la botiga',
 
+                    'image-search' => [
+                        'enabled' => 'Activat',
+                        'model' => 'Model',
+                        'title' => 'Cerca d\'imatges amb IA',
+                        'title-info' => 'Utilitza la visió d\'IA per analitzar imatges pujades i extreure paraules clau de cerca de productes a la botiga.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Activat',
                         'model' => 'Model',

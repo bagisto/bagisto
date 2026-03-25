@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Włącz i skonfiguruj funkcje AI dla sklepu.',
                     'title' => 'Funkcje sklepu',
 
+                    'image-search' => [
+                        'enabled' => 'Włączone',
+                        'model' => 'Model',
+                        'title' => 'Wyszukiwanie obrazów AI',
+                        'title-info' => 'Użyj wizji AI do analizy przesłanych obrazów i wyodrębnienia słów kluczowych wyszukiwania produktów w sklepie.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Włączony',
                         'model' => 'Model',

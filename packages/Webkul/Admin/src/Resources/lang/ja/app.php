@@ -4265,6 +4265,13 @@ return [
                     'info' => 'ストアフロントのAI機能を有効にして設定します。',
                     'title' => 'ストアフロント機能',
 
+                    'image-search' => [
+                        'enabled' => '有効',
+                        'model' => 'モデル',
+                        'title' => 'AI画像検索',
+                        'title-info' => 'AIビジョンを使用してアップロードされた画像を分析し、ストアフロントで商品検索キーワードを抽出します。',
+                    ],
+
                     'review-translation' => [
                         'enabled' => '有効',
                         'model' => 'モデル',

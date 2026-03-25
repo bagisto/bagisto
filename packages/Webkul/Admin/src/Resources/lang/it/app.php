@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Abilita e configura le funzionalità IA per il negozio.',
                     'title' => 'Funzionalità del negozio',
 
+                    'image-search' => [
+                        'enabled' => 'Abilitato',
+                        'model' => 'Modello',
+                        'title' => 'Ricerca immagini con IA',
+                        'title-info' => 'Usa la visione IA per analizzare le immagini caricate ed estrarre le parole chiave di ricerca dei prodotti nel negozio.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Abilitato',
                         'model' => 'Modello',
