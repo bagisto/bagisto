@@ -81,46 +81,45 @@ class ProductsCategoriesProxyController extends Controller
                 abort(404);
             }
 
+            $productURLRewrite = $this->urlRewriteRepository->findOneWhere([
+                'entity_type' => 'product',
+                'request_path' => $slugOrURLKey,
+                'locale' => app()->getLocale(),
+            ]);
+
+            if ($productURLRewrite) {
+                return redirect()->to($productURLRewrite->target_path, $productURLRewrite->redirect_type);
+            }
+
             return view('shop::products.view', compact('product'));
         }
 
         /**
-         * If category is not found, try to find it by slug.
-         * If category is found by slug, redirect to category path.
+         * If category is not found, try to find it by trimmed slug.
+         *
+         * Only needed when URL contains nested path segments.
          */
-        $trimmedSlug = last(explode('/', $slugOrURLKey));
+        if (str_contains($slugOrURLKey, '/')) {
+            $trimmedSlug = last(explode('/', $slugOrURLKey));
 
-        $category = $this->categoryRepository->findBySlug($trimmedSlug);
+            $category = $this->categoryRepository->findBySlug($trimmedSlug);
 
-        if ($category) {
-            return redirect()->to($trimmedSlug, 301);
+            if ($category) {
+                return redirect()->to($trimmedSlug, 301);
+            }
         }
 
         /**
          * If neither category nor product matches,
-         * try to find it by url rewrite for category.
+         * try to find it by url rewrite.
          */
-        $categoryURLRewrite = $this->urlRewriteRepository->findOneWhere([
-            'entity_type' => 'category',
+        $urlRewrite = $this->urlRewriteRepository->findOneWhere([
             'request_path' => $slugOrURLKey,
             'locale' => app()->getLocale(),
         ]);
 
-        if ($categoryURLRewrite) {
-            return redirect()->to($categoryURLRewrite->target_path, $categoryURLRewrite->redirect_type);
-        }
-
-        /**
-         * If neither category nor product matches,
-         * try to find it by url rewrite for product.
-         */
-        $productURLRewrite = $this->urlRewriteRepository->findOneWhere([
-            'entity_type' => 'product',
-            'request_path' => $slugOrURLKey,
-        ]);
-
-        if ($productURLRewrite) {
-            return redirect()->to($productURLRewrite->target_path, $productURLRewrite->redirect_type);
+        if ($urlRewrite) {
+            return redirect()->to($urlRewrite->target_path, $urlRewrite->redirect_type);
         }
 
         abort(404);
