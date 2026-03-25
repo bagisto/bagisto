@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Aktifkan dan konfigurasikan fitur AI untuk etalase.',
                     'title' => 'Fitur Etalase',
 
+                    'image-search' => [
+                        'enabled' => 'Diaktifkan',
+                        'model' => 'Model',
+                        'title' => 'Pencarian Gambar AI',
+                        'title-info' => 'Gunakan AI vision untuk menganalisis gambar yang diunggah dan mengekstrak kata kunci pencarian produk di etalase.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Aktif',
                         'model' => 'Model',

@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Enable and configure AI features for the storefront.',
                     'title' => 'Storefront Features',
 
+                    'image-search' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'AI Image Search',
+                        'title-info' => 'Use AI vision to analyze uploaded images and extract product search keywords on the storefront.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Enabled',
                         'model' => 'Model',

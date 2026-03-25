@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Mağaza için AI özelliklerini etkinleştirin ve yapılandırın.',
                     'title' => 'Mağaza Özellikleri',
 
+                    'image-search' => [
+                        'enabled' => 'Etkin',
+                        'model' => 'Model',
+                        'title' => 'AI Görsel Arama',
+                        'title-info' => 'Mağazada yüklenen görselleri analiz etmek ve ürün arama anahtar kelimelerini çıkarmak için AI vizyonunu kullanın.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Etkin',
                         'model' => 'Model',

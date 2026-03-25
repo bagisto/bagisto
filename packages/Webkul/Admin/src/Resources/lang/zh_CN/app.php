@@ -4265,6 +4265,13 @@ return [
                     'info' => '启用并配置店面的 AI 功能。',
                     'title' => '店面功能',
 
+                    'image-search' => [
+                        'enabled' => '已启用',
+                        'model' => '模型',
+                        'title' => 'AI图片搜索',
+                        'title-info' => '使用AI视觉分析上传的图片并在店面提取产品搜索关键词。',
+                    ],
+
                     'review-translation' => [
                         'enabled' => '已启用',
                         'model' => '模型',

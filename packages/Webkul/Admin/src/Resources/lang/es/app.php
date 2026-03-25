@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Habilitar y configurar funciones de IA para la tienda.',
                     'title' => 'Funciones de la tienda',
 
+                    'image-search' => [
+                        'enabled' => 'Habilitado',
+                        'model' => 'Modelo',
+                        'title' => 'Búsqueda de imágenes con IA',
+                        'title-info' => 'Usa la visión de IA para analizar imágenes subidas y extraer palabras clave de búsqueda de productos en la tienda.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Habilitado',
                         'model' => 'Modelo',

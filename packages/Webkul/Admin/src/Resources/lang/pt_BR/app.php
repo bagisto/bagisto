@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Habilitar e configurar recursos de IA para a loja.',
                     'title' => 'Recursos da loja',
 
+                    'image-search' => [
+                        'enabled' => 'Habilitado',
+                        'model' => 'Modelo',
+                        'title' => 'Pesquisa de imagens com IA',
+                        'title-info' => 'Use a visão de IA para analisar imagens enviadas e extrair palavras-chave de pesquisa de produtos na loja.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Habilitado',
                         'model' => 'Modelo',

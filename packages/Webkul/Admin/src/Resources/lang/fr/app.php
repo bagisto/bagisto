@@ -4265,6 +4265,13 @@ return [
                     'info' => 'Activer et configurer les fonctionnalités IA pour la boutique.',
                     'title' => 'Fonctionnalités de la boutique',
 
+                    'image-search' => [
+                        'enabled' => 'Activé',
+                        'model' => 'Modèle',
+                        'title' => 'Recherche d\'images par IA',
+                        'title-info' => 'Utilisez la vision IA pour analyser les images téléchargées et extraire les mots-clés de recherche de produits sur la boutique.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Activé',
                         'model' => 'Modèle',
