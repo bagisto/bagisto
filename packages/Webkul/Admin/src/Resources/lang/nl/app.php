@@ -4265,6 +4265,13 @@ return [
                     'info' => 'AI-functies voor de winkel inschakelen en configureren.',
                     'title' => 'Winkelfuncties',
 
+                    'image-search' => [
+                        'enabled' => 'Ingeschakeld',
+                        'model' => 'Model',
+                        'title' => 'AI-afbeeldingen zoeken',
+                        'title-info' => 'Gebruik AI-visie om geüploade afbeeldingen te analyseren en productzoekopdrachten te extraheren in de winkel.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Ingeschakeld',
                         'model' => 'Model',

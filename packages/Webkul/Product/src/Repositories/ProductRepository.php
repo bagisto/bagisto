@@ -153,10 +153,14 @@ class ProductRepository extends Repository
                     ->where('channel', core()->getRequestedChannelCode())
                     ->where('locale', core()->getRequestedLocaleCode());
 
-                if ($attributeValues->isEmpty()) {
+                if ($filteredAttributeValues->isEmpty()) {
                     $filteredAttributeValues = $attributeValues
                         ->where('channel', core()->getRequestedChannelCode())
                         ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel());
+                }
+
+                if ($filteredAttributeValues->isEmpty()) {
+                    $filteredAttributeValues = $attributeValues;
                 }
             } else {
                 $filteredAttributeValues = $attributeValues
@@ -170,6 +174,10 @@ class ProductRepository extends Repository
                 if ($filteredAttributeValues->isEmpty()) {
                     $filteredAttributeValues = $attributeValues
                         ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel());
+                }
+
+                if ($filteredAttributeValues->isEmpty()) {
+                    $filteredAttributeValues = $attributeValues;
                 }
             } else {
                 $filteredAttributeValues = $attributeValues;

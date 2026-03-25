@@ -4265,6 +4265,13 @@ return [
                     'info' => 'KI-Funktionen für die Storefront aktivieren und konfigurieren.',
                     'title' => 'Storefront-Funktionen',
 
+                    'image-search' => [
+                        'enabled' => 'Aktiviert',
+                        'model' => 'Modell',
+                        'title' => 'KI-Bildsuche',
+                        'title-info' => 'Verwenden Sie KI-Vision, um hochgeladene Bilder zu analysieren und Produktsuchbegriffe im Storefront zu extrahieren.',
+                    ],
+
                     'review-translation' => [
                         'enabled' => 'Aktiviert',
                         'model' => 'Modell',
