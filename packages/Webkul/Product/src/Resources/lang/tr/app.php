@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => 'Aynı miktar ve müşteri grubuna sahip müşteri grubu fiyatı zaten mevcut.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => ':qty adet al, her biri için :price öde ve :discount tasarruf et',

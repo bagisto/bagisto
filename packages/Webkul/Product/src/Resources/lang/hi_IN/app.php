@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => 'समान मात्रा और ग्राहक समूह वाला ग्राहक समूह मूल्य पहले से मौजूद है।',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => 'हर एक के लिए :qty खरीदें, प्रति इकाई :price और :discount बचाएं',

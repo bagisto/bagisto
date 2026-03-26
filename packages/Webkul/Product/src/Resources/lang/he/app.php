@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => 'מחיר קבוצת לקוחות עם אותה כמות וקבוצת לקוחות כבר קיים.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => 'קנה :qty במחיר :price לכל יחידה וחסוך :discount',

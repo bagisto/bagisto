@@ -277,6 +277,24 @@
                 },
 
                 create(params) {
+                    let duplicate = this.prices.find(price => {
+                        if (this.selectedPrice.id && price.id === this.selectedPrice.id) {
+                            return false;
+                        }
+
+                        return price.qty == params.qty
+                            && price.customer_group_id == params.customer_group_id;
+                    });
+
+                    if (duplicate) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'warning',
+                            message: "@lang('product::app.catalog.products.edit.price.group.duplicate-group-price-error')"
+                        });
+
+                        return;
+                    }
+
                     if (this.selectedPrice.id == undefined) {
                         params.id = 'price_' + this.prices.length;
 

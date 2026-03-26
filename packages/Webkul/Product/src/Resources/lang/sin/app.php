@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => 'එකම ප්‍රමාණය සහ පාරිභෝගික කණ්ඩායම සහිත පාරිභෝගික කණ්ඩායම් මිල දැනටමත් පවතී.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => ':qty සඳහා :price සහිත කිසිවක් වෙනුවෙයි සහ :discount සහිතයි',
