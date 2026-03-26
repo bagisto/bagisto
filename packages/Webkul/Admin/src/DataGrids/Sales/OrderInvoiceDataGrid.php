@@ -86,7 +86,7 @@ class OrderInvoiceDataGrid extends DataGrid
 
                 $todayDate = Carbon::now();
 
-                $dueDate = Carbon::parse($row->created_at)->addDays($dueDuration);
+                $dueDate = Carbon::parse($row->created_at)->addDays((int) $dueDuration);
 
                 if ($row->state == Invoice::STATUS_PAID) {
                     return '<p class="label-active">'.trans('admin::app.sales.invoices.index.datagrid.paid').'</p>';

@@ -6,7 +6,7 @@
 - `public/themes/*/build/` — Vite build output
 - `storage/` — runtime caches, logs, compiled views
 - `*.hot` files — Vite HMR markers
-- `packages/Webkul/*/src/Resources/assets/` — only edit if working on frontend; always run `npm run build` after
+- `packages/Webkul/*/src/Resources/assets/` — only edit if working on frontend; always run `npm run build` from the respective package directory after
 
 ## Repository Map
 
@@ -116,7 +116,7 @@ Every package in `packages/Webkul/{Name}/src/` follows:
 - **Path Repositories**: `composer.json` uses `"type": "path"` for `packages/*/*`, packages are symlinked — no `composer update` needed for package code changes. Run `composer dump-autoload` after adding new packages.
 - **Service Providers**: Each package has a main ServiceProvider (routes, views, translations, migrations, config) registered in `bootstrap/providers.php`.
 - **Dual Route Files**: Admin routes (`['web', 'admin']` middleware, `config('app.admin_url')` prefix) and Shop routes (`['web', 'locale', 'theme', 'currency']` middleware).
-- **21 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ru, sin, tr, uk, zh_CN. Translation changes must be applied to ALL locale files.
+- **21 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ru, sin, tr, uk, zh_CN. Translation changes must be applied to ALL locale files. Verify with `php artisan bagisto:translations:check`.
 
 ## Commands
 
@@ -127,11 +127,13 @@ php artisan test --compact                              # Run all tests
 php artisan test --compact --filter=testName             # Run specific test
 php artisan test --compact packages/Webkul/Admin/tests   # Run package tests
 
-# Playwright (E2E) — Admin
-cd packages/Webkul/Admin/tests/e2e-pw && npx playwright test
+# Playwright (E2E) — Admin (run from packages/Webkul/Admin)
+cd packages/Webkul/Admin && npm install && npx playwright install --with-deps chromium
+cd packages/Webkul/Admin && npx playwright test --config=tests/e2e-pw/playwright.config.ts
 
-# Playwright (E2E) — Shop
-cd packages/Webkul/Shop/tests/e2e-pw && npx playwright test
+# Playwright (E2E) — Shop (run from packages/Webkul/Shop)
+cd packages/Webkul/Shop && npm install && npx playwright install --with-deps chromium
+cd packages/Webkul/Shop && npx playwright test --config=tests/e2e-pw/playwright.config.ts
 ```
 
 ### Code Style
@@ -141,10 +143,12 @@ vendor/bin/pint                  # Fix all files
 vendor/bin/pint --test           # Check only (CI uses this)
 ```
 
-### Frontend
+### Frontend (run from within each package: Admin, Shop, or Installer)
 ```bash
-npm run build                    # Production build (Vite)
-npm run dev                      # Dev server with HMR
+cd packages/Webkul/Admin && npm install && npm run build    # Admin production build
+cd packages/Webkul/Shop && npm install && npm run build     # Shop production build
+cd packages/Webkul/Admin && npm run dev                     # Admin dev server with HMR
+cd packages/Webkul/Shop && npm run dev                      # Shop dev server with HMR
 ```
 
 ### Database
@@ -176,7 +180,7 @@ php artisan db:seed              # Seed database
 
 1. `vendor/bin/pint --dirty` — no style violations
 2. `php artisan test --compact` — affected tests pass
-3. Translation keys exist in all 21 locale files (if changed)
+3. `php artisan bagisto:translations:check` — translation keys exist in all 21 locale files (if changed)
 4. No `env()` calls outside `config/` files
 5. New models have Contract + Model + Proxy + Repository
 6. New packages registered in `bootstrap/providers.php` and `config/concord.php`
