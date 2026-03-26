@@ -34,7 +34,7 @@ return [
      * When using the default CacheRequestFilter this setting controls the
      * default number of seconds responses must be cached.
      */
-    'cache_lifetime_in_seconds' => env('RESPONSE_CACHE_LIFETIME', 60 * 60 * 24 * 7),
+    'cache_lifetime_in_seconds' => (int) env('RESPONSE_CACHE_LIFETIME', 60 * 60 * 24 * 7),
 
     /*
      * This setting determines if a http header named with the cache time
