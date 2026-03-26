@@ -60,7 +60,7 @@ class ProductCustomerGroupPriceRepository extends Repository
                 }
             }
         }
-        
+
         foreach ($previousCustomerGroupPriceIds as $customerGroupPriceId) {
             $this->delete($customerGroupPriceId);
         }
