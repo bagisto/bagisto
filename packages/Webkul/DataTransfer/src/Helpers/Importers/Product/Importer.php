@@ -25,8 +25,8 @@ use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
-use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteIndexJob;
-use Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex as UpdateCreateElasticSearchIndexJob;
+use Webkul\Product\Jobs\Search\DeleteProducts as DeleteSearchIndexJob;
+use Webkul\Product\Jobs\Search\IndexProducts as IndexSearchJob;
 use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
 use Webkul\Product\Jobs\UpdateCreatePriceIndex as UpdateCreatePriceIndexJob;
 use Webkul\Product\Models\Product as ProductModel;
@@ -845,7 +845,7 @@ class Importer extends AbstractImporter
         Bus::chain([
             new UpdateCreateInventoryIndexJob($productIdsToIndex),
             new UpdateCreatePriceIndexJob($productIdsToIndex),
-            new UpdateCreateElasticSearchIndexJob($productIdsToIndex),
+            new IndexSearchJob($productIdsToIndex),
         ])->onConnection('sync')->dispatch();
 
         /**
@@ -901,7 +901,7 @@ class Importer extends AbstractImporter
             Storage::deleteDirectory($imageDirectory);
         }
 
-        DeleteIndexJob::dispatch($idsToDelete)->onConnection('sync');
+        DeleteSearchIndexJob::dispatch($idsToDelete)->onConnection('sync');
 
         return true;
     }

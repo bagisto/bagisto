@@ -1,37 +1,24 @@
 <?php
 
-namespace Webkul\Product\Repositories;
+namespace Webkul\Product\Services\Search\Engines;
 
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Marketing\Repositories\SearchSynonymRepository;
-use Webkul\Product\Helpers\Product;
+use Webkul\Product\Contracts\SearchEngine;
 
-class ElasticSearchRepository
+class ElasticSearchEngine implements SearchEngine
 {
     /**
-     * Create a new repository instance.
-     *
-     * @return void
+     * Create a new instance.
      */
     public function __construct(
         protected CustomerRepository $customerRepository,
         protected AttributeRepository $attributeRepository,
-        protected SearchSynonymRepository $searchSynonymRepository
+        protected SearchSynonymRepository $searchSynonymRepository,
     ) {}
-
-    /**
-     * Return elastic search index name.
-     */
-    public function getIndexName(): string
-    {
-        return Product::formatElasticSearchIndexName(
-            core()->getRequestedChannelCode(),
-            core()->getRequestedLocaleCodeInRequestedChannel()
-        );
-    }
 
     /**
      * Return product ids from elasticsearch.
@@ -68,11 +55,11 @@ class ElasticSearchRepository
     }
 
     /**
-     * Get suggestions based on the query text.
+     * Get search suggestions based on the query text.
      */
-    public function getSuggestions(?string $queryText): ?string
+    public function getSuggestions(?string $query): ?string
     {
-        if (empty($queryText)) {
+        if (empty($query)) {
             return null;
         }
 
@@ -81,7 +68,7 @@ class ElasticSearchRepository
             'body' => [
                 'suggest' => [
                     'name_suggest' => [
-                        'text' => $queryText,
+                        'text' => $query,
                         'term' => [
                             'field' => 'name',
                             'suggest_mode' => 'always',
@@ -93,6 +80,86 @@ class ElasticSearchRepository
         ]);
 
         return $results['suggest']['name_suggest'][0]['options'][0]['text'] ?? null;
+    }
+
+    /**
+     * Get product maximum price from the product indexes.
+     */
+    public function getMaxPrice(array $params = []): float
+    {
+        $filters = $this->getFilters($params);
+
+        if (! empty($params['category_id'])) {
+            $filters['filter'][]['term']['category_ids'] = $params['category_id'];
+        }
+
+        if (! empty($params['type'])) {
+            $filters['filter'][]['term']['type'] = $params['type'];
+        }
+
+        $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
+
+        $results = ElasticSearch::search([
+            'index' => $params['index'] ?? $this->getIndexName(),
+            'body' => [
+                'size' => 0,
+                'query' => [
+                    'bool' => $filters ?: new \stdClass,
+                ],
+                'aggs' => [
+                    'max_price' => [
+                        'max' => [
+                            'field' => 'price_'.$customerGroupId,
+                        ],
+                    ],
+                ],
+            ],
+        ]);
+
+        return $results['aggregations']['max_price']['value'] ?? 0;
+    }
+
+    /**
+     * Find a product by URL slug via Elasticsearch.
+     */
+    public function findBySlug(string $slug): ?int
+    {
+        $indices = $this->search([
+            'url_key' => $slug,
+        ], [
+            'type' => '',
+            'from' => 0,
+            'limit' => 1,
+            'sort' => 'id',
+            'order' => 'desc',
+        ]);
+
+        $id = current($indices['ids']);
+
+        return $id ? (int) $id : null;
+    }
+
+    /**
+     * Format the elastic search index name.
+     *
+     * Elasticsearch index names must be lowercase.
+     */
+    public static function formatIndexName(string $channelCode, string $localeCode): string
+    {
+        $prefix = config('elasticsearch.index_prefix');
+
+        return $prefix.'products_'.strtolower($channelCode).'_'.strtolower($localeCode).'_index';
+    }
+
+    /**
+     * Return elastic search index name for current request context.
+     */
+    public function getIndexName(): string
+    {
+        return static::formatIndexName(
+            core()->getRequestedChannelCode(),
+            core()->getRequestedLocaleCodeInRequestedChannel()
+        );
     }
 
     /**
@@ -132,8 +199,6 @@ class ElasticSearchRepository
     {
         switch ($attribute->type) {
             case AttributeTypeEnum::BOOLEAN->value:
-                $values = array_map('intval', explode(',', $params[$attribute->code]));
-
                 $values = array_map('intval', explode(',', $params[$attribute->code]));
 
                 return [
@@ -229,46 +294,9 @@ class ElasticSearchRepository
     }
 
     /**
-     * Get product maximum price from the product indexes.
-     */
-    public function getMaxPrice(array $params = [])
-    {
-        $filters = $this->getFilters($params);
-
-        if (! empty($params['category_id'])) {
-            $filters['filter'][]['term']['category_ids'] = $params['category_id'];
-        }
-
-        if (! empty($params['type'])) {
-            $filters['filter'][]['term']['type'] = $params['type'];
-        }
-
-        $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
-
-        $results = ElasticSearch::search([
-            'index' => $params['index'] ?? $this->getIndexName(),
-            'body' => [
-                'size' => 0,
-                'query' => [
-                    'bool' => $filters ?: new \stdClass,
-                ],
-                'aggs' => [
-                    'max_price' => [
-                        'max' => [
-                            'field' => 'price_'.$customerGroupId,
-                        ],
-                    ],
-                ],
-            ],
-        ]);
-
-        return $results['aggregations']['max_price']['value'] ?? 0;
-    }
-
-    /**
      * Get product minimum price from the product indexes.
      */
-    public function getMinPrice(array $params = [])
+    public function getMinPrice(array $params = []): float
     {
         $filters = $this->getFilters($params);
 

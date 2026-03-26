@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
+use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Theme\Repositories\ThemeCustomizationRepository;
 
@@ -64,12 +65,8 @@ class ProductsCategoriesProxyController extends Controller
             ]);
         }
 
-        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
-            $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
-        }
-
         $product = $this->productRepository
-            ->setSearchEngine($searchEngine ?? 'database')
+            ->setSearchContext(SearchContextEnum::STOREFRONT)
             ->findBySlug($slugOrURLKey);
 
         if ($product) {

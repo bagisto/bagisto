@@ -4,8 +4,8 @@ namespace Webkul\Product\Listeners;
 
 use Illuminate\Support\Facades\Bus;
 use Webkul\Product\Helpers\Indexers\Flat as FlatIndexer;
-use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteElasticSearchIndexJob;
-use Webkul\Product\Jobs\ElasticSearch\UpdateCreateIndex as UpdateCreateElasticSearchIndexJob;
+use Webkul\Product\Jobs\Search\DeleteProducts as DeleteSearchIndexJob;
+use Webkul\Product\Jobs\Search\IndexProducts as IndexSearchJob;
 use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
 use Webkul\Product\Jobs\UpdateCreatePriceIndex as UpdateCreatePriceIndexJob;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
@@ -38,7 +38,7 @@ class Product
 
         $productIds = $this->getAllRelatedProductIds($product);
 
-        UpdateCreateElasticSearchIndexJob::dispatch($productIds);
+        IndexSearchJob::dispatch($productIds);
     }
 
     /**
@@ -56,7 +56,7 @@ class Product
         Bus::chain([
             new UpdateCreateInventoryIndexJob($productIds),
             new UpdateCreatePriceIndexJob($productIds),
-            new UpdateCreateElasticSearchIndexJob($productIds),
+            new IndexSearchJob($productIds),
         ])->dispatch();
     }
 
@@ -68,10 +68,6 @@ class Product
      */
     public function beforeDelete($productId)
     {
-        if (core()->getConfigData('catalog.products.search.engine') != 'elastic') {
-            return;
-        }
-
         $product = $this->productRepository->find($productId);
 
         if (! $product) {
@@ -80,7 +76,7 @@ class Product
 
         $productIds = $this->getAllRelatedProductIds($product);
 
-        DeleteElasticSearchIndexJob::dispatch($productIds);
+        DeleteSearchIndexJob::dispatch($productIds);
     }
 
     /**

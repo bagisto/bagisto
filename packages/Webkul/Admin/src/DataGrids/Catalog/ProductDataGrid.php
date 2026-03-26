@@ -10,7 +10,10 @@ use Webkul\Admin\Exports\ProductDataGridExport;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\DataGrid\DataGrid;
-use Webkul\Product\Helpers\Product;
+use Webkul\Product\Enums\SearchContextEnum;
+use Webkul\Product\Enums\SearchEngineEnum;
+use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
+use Webkul\Product\Services\Search\SearchEngineManager;
 
 class ProductDataGrid extends DataGrid
 {
@@ -290,10 +293,9 @@ class ProductDataGrid extends DataGrid
      */
     protected function processRequest(): void
     {
-        if (
-            core()->getConfigData('catalog.products.search.engine') != 'elastic'
-            || core()->getConfigData('catalog.products.search.admin_mode') != 'elastic'
-        ) {
+        $manager = app(SearchEngineManager::class);
+
+        if ($manager->resolveDriver(SearchContextEnum::ADMIN) === SearchEngineEnum::DATABASE) {
             parent::processRequest();
 
             return;
@@ -317,7 +319,7 @@ class ProductDataGrid extends DataGrid
         $channelCodes = request()->input('filters.channel') ?? core()->getAllChannels()->pluck('code')->toArray();
 
         $indexNames = collect($channelCodes)->map(function ($channelCode) {
-            return Product::formatElasticSearchIndexName($channelCode, app()->getLocale());
+            return ElasticSearchEngine::formatIndexName($channelCode, app()->getLocale());
         })->toArray();
 
         $results = ElasticSearch::search([
@@ -361,9 +363,9 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Process request.
+     * Build Elasticsearch filters from DataGrid filter parameters.
      */
-    protected function getElasticFilters($params): array
+    protected function getElasticFilters(array $params): array
     {
         $filters = [];
 
@@ -383,70 +385,64 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Return applied filters
+     * Return applied filter clause for the given attribute.
      */
-    public function getFilterValue(mixed $attribute, mixed $values): array
+    protected function getFilterValue(string $attribute, mixed $values): array
     {
-        switch ($attribute) {
-            case 'product_id':
-                return [
-                    'terms' => [
-                        'id' => $values,
-                    ],
-                ];
+        return match ($attribute) {
+            'product_id' => [
+                'terms' => [
+                    'id' => $values,
+                ],
+            ],
 
-            case 'attribute_family':
-                return [
-                    'terms' => [
-                        'attribute_family_id' => $values,
-                    ],
-                ];
+            'attribute_family' => [
+                'terms' => [
+                    'attribute_family_id' => $values,
+                ],
+            ],
 
-            case 'sku':
-            case 'name':
-                $filters = [];
+            'sku', 'name' => $this->getTextFilterValue($attribute, $values),
 
-                foreach ($values as $value) {
-                    $filters['bool']['should'][] = [
-                        'match_phrase_prefix' => [
-                            $attribute => $value,
-                        ],
-                    ];
-                }
-
-                return $filters;
-
-            default:
-                return [
-                    'terms' => [
-                        $attribute => $values,
-                    ],
-                ];
-        }
+            default => [
+                'terms' => [
+                    $attribute => $values,
+                ],
+            ],
+        };
     }
 
     /**
-     * Process request.
+     * Build a text-based filter with phrase prefix matching.
      */
-    protected function getElasticSort($params): array
+    protected function getTextFilterValue(string $attribute, mixed $values): array
+    {
+        $filters = [];
+
+        foreach ($values as $value) {
+            $filters['bool']['should'][] = [
+                'match_phrase_prefix' => [
+                    $attribute => $value,
+                ],
+            ];
+        }
+
+        return $filters;
+    }
+
+    /**
+     * Build Elasticsearch sort options from DataGrid sort parameters.
+     */
+    protected function getElasticSort(array $params): array
     {
         $sort = $params['column'] ?? $this->primaryColumn;
 
-        if ($sort == 'type') {
-            $sort .= '.keyword';
-        }
-
-        if ($sort == 'name') {
-            $sort .= '.keyword';
-        }
-
-        if ($sort == 'attribute_family') {
-            $sort .= '_id';
-        }
-
-        if ($sort == 'product_id') {
-            $sort = 'id';
-        }
+        $sort = match ($sort) {
+            'type', 'name' => $sort.'.keyword',
+            'attribute_family' => $sort.'_id',
+            'product_id' => 'id',
+            default => $sort,
+        };
 
         return [
             $sort => [

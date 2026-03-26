@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
 use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Marketing\Repositories\SearchTermRepository;
+use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Repositories\SearchRepository;
 
 class SearchController extends Controller
@@ -49,12 +50,8 @@ class SearchController extends Controller
             ! request()->has('suggest')
             || request()->query('suggest') !== '0'
         ) {
-            $searchEngine = core()->getConfigData('catalog.products.search.engine') === 'elastic'
-                ? core()->getConfigData('catalog.products.search.storefront_mode')
-                : 'database';
-
             $suggestion = $this->searchRepository
-                ->setSearchEngine($searchEngine)
+                ->setSearchContext(SearchContextEnum::STOREFRONT)
                 ->getSuggestions($query);
         }
 

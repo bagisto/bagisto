@@ -7,6 +7,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\AttributeOptionResource;
 use Webkul\Shop\Http\Resources\AttributeResource;
@@ -110,12 +111,8 @@ class CategoryController extends APIController
      */
     public function getProductMaxPrice($categoryId = null): JsonResource
     {
-        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
-            $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
-        }
-
         $maxPrice = $this->productRepository
-            ->setSearchEngine($searchEngine ?? 'database')
+            ->setSearchContext(SearchContextEnum::STOREFRONT)
             ->getMaxPrice(['category_id' => $categoryId]);
 
         return new JsonResource([

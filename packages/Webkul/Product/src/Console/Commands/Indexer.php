@@ -3,10 +3,10 @@
 namespace Webkul\Product\Console\Commands;
 
 use Illuminate\Console\Command;
-use Webkul\Product\Helpers\Indexers\ElasticSearch;
 use Webkul\Product\Helpers\Indexers\Flat;
 use Webkul\Product\Helpers\Indexers\Inventory;
 use Webkul\Product\Helpers\Indexers\Price;
+use Webkul\Product\Services\Search\SearchEngineManager;
 
 class Indexer extends Command
 {
@@ -14,7 +14,6 @@ class Indexer extends Command
         'inventory' => Inventory::class,
         'price' => Price::class,
         'flat' => Flat::class,
-        'elastic' => ElasticSearch::class,
     ];
 
     /**
@@ -36,11 +35,11 @@ class Indexer extends Command
      *
      * @return void
      */
-    public function handle()
+    public function handle(SearchEngineManager $manager)
     {
         $start = microtime(true);
 
-        $indexerIds = ['inventory', 'price', 'flat', 'elastic'];
+        $indexerIds = ['inventory', 'price', 'flat', 'search'];
 
         if (! empty($this->option('type'))) {
             $indexerIds = $this->option('type');
@@ -53,10 +52,21 @@ class Indexer extends Command
         }
 
         foreach ($indexerIds as $indexerId) {
-            if (
-                $indexerId == 'elastic'
-                && core()->getConfigData('catalog.products.search.engine') != 'elastic'
-            ) {
+            if ($indexerId === 'search') {
+                if ($manager->isExternalEngineEnabled()) {
+                    $searchIndexer = $manager->indexer();
+
+                    if ($mode == 'full') {
+                        $searchIndexer->reindexFull();
+                    }
+                }
+
+                continue;
+            }
+
+            if (! isset($this->indexers[$indexerId])) {
+                $this->components->warn("Unknown indexer: {$indexerId}");
+
                 continue;
             }
 
