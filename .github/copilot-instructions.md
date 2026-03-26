@@ -23,21 +23,37 @@ Bagisto follows a modular, package-based architecture. All core features are org
 - `CatalogRule` - Catalog-based promotions
 - `Category` - Category management
 - `Checkout` - Cart and checkout process
+- `CMS` - CMS pages
 - `Core` - Core utilities and helpers
 - `Customer` - Customer management
-- `DataGrid` - Tabular data display
+- `DataGrid` - Tabular data display component
 - `DataTransfer` - Import/export data
+- `DebugBar` - Debug toolbar
 - `FPC` - Full page caching
+- `GDPR` - GDPR compliance
+- `ImageCache` - Image caching/resizing
+- `Installer` - Installation wizard
 - `Inventory` - Stock management
-- `Marketing` - Marketing tools
-- `Payment` - Payment integrations
+- `MagicAI` - AI features (Laravel AI SDK)
+- `Marketing` - SEO, URL rewrites, search terms, campaigns
+- `Notification` - Notifications
+- `Payment` - Base payment classes (CashOnDelivery, MoneyTransfer)
+- `Paypal` - PayPal integration
+- `PayU` - PayU integration
 - `Product` - Product management
+- `Razorpay` - Razorpay integration
+- `RMA` - Return merchandise authorization
+- `Rule` - Shared rule engine base
 - `Sales` - Order management
 - `Shipping` - Shipping methods
 - `Shop` - Customer storefront
+- `Sitemap` - XML sitemap generation
+- `SocialLogin` - OAuth social login
+- `SocialShare` - Social sharing
+- `Stripe` - Stripe integration
 - `Tax` - Tax calculations
 - `Theme` - Theme management
-- `User` - User management
+- `User` - Admin user management
 
 ### Standard Package Structure
 
@@ -97,8 +113,9 @@ Models use proxy classes (e.g., `ProductProxy`) for extensibility.
 
 1. Add namespace to `composer.json` psr-4 autoload
 2. Run `composer dump-autoload`
-3. Register service provider in `bootstrap/providers.php`
-4. Run `php artisan optimize:clear`
+3. Register ServiceProvider in `bootstrap/providers.php`
+4. Register ModuleServiceProvider in `config/concord.php`
+5. Run `php artisan optimize:clear`
 
 ### Creating New Packages
 
@@ -130,7 +147,7 @@ Or manually create:
 
 ### Themes
 - Create in `packages/Webkul/<Theme>/`
-- Use Vite for asset bundling
+- Use Vite for asset bundling — run `npm install` and `npm run build` from within the respective package directory (Admin, Shop, or Installer), not from the project root
 - Follow Blade templating conventions
 
 ## Code Style
@@ -142,9 +159,33 @@ Or manually create:
 
 ## Testing
 
-- Use PHPUnit for testing
-- Tests located in `tests/` directory
-- Follow existing test patterns
+### Pest (PHP)
+```bash
+vendor/bin/pest                                         # Run all tests
+vendor/bin/pest --testsuite="Admin Feature Test"        # Run a specific test suite
+vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directory
+vendor/bin/pest --filter="test name"                    # Run a single test by name
+```
+Tests use **Pest 3** with package-specific TestCase classes. Each package's tests live in `packages/Webkul/<Package>/tests/`.
+
+### E2E Tests (Playwright)
+Run from within each package directory:
+```bash
+# Admin
+cd packages/Webkul/Admin && npm install && npx playwright install --with-deps chromium
+cd packages/Webkul/Admin && npx playwright test --config=tests/e2e-pw/playwright.config.ts
+
+# Shop
+cd packages/Webkul/Shop && npm install && npx playwright install --with-deps chromium
+cd packages/Webkul/Shop && npx playwright test --config=tests/e2e-pw/playwright.config.ts
+```
+Tests require a running Laravel server (`php artisan serve`) and seeded database.
+
+### Translations
+When adding new translation keys, provide translations for **all 21 locales** in the package's `Resources/lang/` directory. Verify with:
+```bash
+php artisan bagisto:translations:check
+```
 
 ## Documentation References
 
