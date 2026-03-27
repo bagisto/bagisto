@@ -7,6 +7,7 @@
     >
         <button
             v-if="! loading"
+            :type="buttonType"
             :class="[buttonClass, '']"
         >
             @{{ title }}
@@ -14,6 +15,7 @@
 
         <button
             v-else
+            :type="buttonType"
             :class="[buttonClass, '']"
         >
             <!-- Spinner -->

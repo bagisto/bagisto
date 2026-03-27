@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => '同じ数量と顧客グループの顧客グループ価格はすでに存在します。',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => ':qty個をそれぞれ:priceで購入し、:discountを節約',

@@ -66,7 +66,7 @@
 
                         <p
                             class="cursor-pointer text-blue-600 transition-all hover:underline"
-                            @click="selectedPrice = item; $refs.groupPriceCreateModal.open()"
+                            @click="selectedPrice = {...item}; $refs.groupPriceCreateModal.open()"
                         >
                             @lang('admin::app.catalog.products.edit.price.group.edit-btn')
                         </p>
@@ -237,7 +237,7 @@
 
                                 <!-- Save Button -->
                                 <x-admin::button
-                                    button-type="button"
+                                    button-type="submit"
                                     class="primary-button"
                                     :title="trans('admin::app.catalog.products.edit.price.group.create.save-btn')"
                                 />
@@ -277,6 +277,28 @@
                 },
 
                 create(params) {
+                    const normalizedParamGroupId = params.customer_group_id === '' ? null : params.customer_group_id;
+
+                    let duplicate = this.prices.find(price => {
+                        if (this.selectedPrice.id && price.id === this.selectedPrice.id) {
+                            return false;
+                        }
+
+                        const normalizedPriceGroupId = price.customer_group_id === '' ? null : price.customer_group_id;
+
+                        return price.qty == params.qty
+                            && normalizedPriceGroupId == normalizedParamGroupId;
+                    });
+
+                    if (duplicate) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'warning',
+                            message: "@lang('product::app.catalog.products.edit.price.group.duplicate-group-price-error')"
+                        });
+
+                        return;
+                    }
+
                     if (this.selectedPrice.id == undefined) {
                         params.id = 'price_' + this.prices.length;
 
@@ -284,7 +306,7 @@
                     } else {
                         const indexToUpdate = this.prices.findIndex(price => price.id === this.selectedPrice.id);
 
-                        this.prices[indexToUpdate] = this.selectedPrice;
+                        this.prices[indexToUpdate] = {...this.selectedPrice};
                     }
 
                     this.resetForm();

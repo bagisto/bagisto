@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => 'Цена группы клиентов с таким же количеством и группой клиентов уже существует.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => 'Покупайте :qty по :price за каждый и экономьте :discount',

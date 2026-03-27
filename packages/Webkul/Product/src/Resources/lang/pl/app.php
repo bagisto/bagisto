@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => 'Cena grupy klientów z tą samą ilością i grupą klientów już istnieje.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => 'Kup :qty za :price każdy i zaoszczędź :discount',

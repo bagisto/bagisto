@@ -14,6 +14,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #11212 [fixed] - Fixed TypeError in Carbon when RESPONSE_CACHE_ENABLED is enabled.
 
+* #10976 [fixed] - Fixed Internal Server Error occurring when applying the same group discount to a product.
+
 ## **v2.4.1 (23rd of March 2026)** - **Release**
 
 * Fixed an issue where the price slider was not displaying on the layered navigation.

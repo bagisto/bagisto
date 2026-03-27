@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => 'سعر مجموعة العملاء بنفس الكمية ومجموعة العملاء موجود بالفعل.',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => 'اشترِ :qty بسعر :price لكل وحدة ووفر :discount',

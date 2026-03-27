@@ -36,6 +36,18 @@ return [
         ],
     ],
 
+    'catalog' => [
+        'products' => [
+            'edit' => [
+                'price' => [
+                    'group' => [
+                        'duplicate-group-price-error' => 'একই পরিমাণ এবং গ্রাহক গোষ্ঠীর সাথে গ্রাহক গোষ্ঠী মূল্য ইতিমধ্যে বিদ্যমান।',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
     'type' => [
         'abstract' => [
             'offers' => ':price প্রতি :qty কিনুন এবং :discount জন্য সেভ করুন',
