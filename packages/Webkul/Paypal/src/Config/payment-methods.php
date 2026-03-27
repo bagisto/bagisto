@@ -13,7 +13,7 @@ return [
         'client_id' => 'sb',
         'accepted_currencies' => 'USD',
         'sandbox' => true,
-        'sort' => 4,
+        'sort' => 5,
     ],
 
     'paypal_standard' => [
@@ -24,6 +24,6 @@ return [
         'active' => true,
         'business_account' => 'test@webkul.com',
         'sandbox' => true,
-        'sort' => 5,
+        'sort' => 6,
     ],
 ];
