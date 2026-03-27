@@ -122,46 +122,56 @@ class PhonePeController extends Controller
                 return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
             }
 
-            Cart::setCart($cart);
-
-            Cart::collectTotals();
-
-            $data = (new OrderResource($cart))->jsonSerialize();
-
             /**
-             * Prepare additional payment data for order creation, including PhonePe transaction details.
+             * Check if an order already exists for this cart (e.g., created by the callback).
              */
-            $data['payment']['additional'] = [
-                'phonePe_merchant_order_id' => $merchantOrderId ?? '',
-                'phonePe_token' => $response['data']['token'] ?? '',
-                'phonePe_status' => $state ?? '',
-            ];
+            $existingOrder = $this->orderRepository->findOneWhere(['cart_id' => $cartId]);
 
-            $order = $this->orderRepository->create($data);
+            if (! $existingOrder) {
+                Cart::setCart($cart);
 
-            $this->orderRepository->update(['status' => 'processing'], $order->id);
+                Cart::collectTotals();
 
-            if ($order->canInvoice()) {
-                $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+                $data = (new OrderResource($cart))->jsonSerialize();
 
                 /**
-                 * Record the order transaction with PhonePe payment details, including transaction ID and status.
+                 * Prepare additional payment data for order creation, including PhonePe transaction details.
                  */
-                $this->orderTransactionRepository->create([
-                    'transaction_id' => $response['data']['paymentDetails'][0]['transactionId'] ?? '',
-                    'status' => self::PAYMENT_SUCCESS,
-                    'type' => $order->payment->method,
-                    'payment_method' => $order->payment->method,
-                    'order_id' => $order->id,
-                    'invoice_id' => $invoice->id,
-                    'amount' => $order->base_grand_total,
-                    'data' => json_encode($response['raw']),
-                ]);
+                $data['payment']['additional'] = [
+                    'phonePe_merchant_order_id' => $merchantOrderId ?? '',
+                    'phonePe_token' => $response['data']['token'] ?? '',
+                    'phonePe_status' => $state ?? '',
+                ];
+
+                $order = $this->orderRepository->create($data);
+
+                $this->orderRepository->update(['status' => 'processing'], $order->id);
+
+                if ($order->canInvoice()) {
+                    $invoice = $this->invoiceRepository->create($this->prepareInvoiceData($order));
+
+                    /**
+                     * Record the order transaction with PhonePe payment details, including transaction ID and status.
+                     */
+                    $this->orderTransactionRepository->create([
+                        'transaction_id' => $response['data']['paymentDetails'][0]['transactionId'] ?? '',
+                        'status' => self::PAYMENT_SUCCESS,
+                        'type' => $order->payment->method,
+                        'payment_method' => $order->payment->method,
+                        'order_id' => $order->id,
+                        'invoice_id' => $invoice->id,
+                        'amount' => $order->base_grand_total,
+                        'data' => json_encode($response['raw']),
+                    ]);
+                }
+
+                Cart::deActivateCart();
             }
 
-            Cart::deActivateCart();
-
-            session()->flash('order_id', $order->id);
+            /**
+             * Store the order ID in the session for the success page.
+             */
+            session()->flash('order_id', $existingOrder?->id);
 
             session()->flash('success', trans('phonepe::app.response.payment-success'));
 
@@ -247,6 +257,7 @@ class PhonePeController extends Controller
             }
 
             Cart::setCart($cart);
+
             Cart::collectTotals();
 
             $data = (new OrderResource($cart))->jsonSerialize();
@@ -278,8 +289,6 @@ class PhonePeController extends Controller
             }
 
             Cart::deActivateCart();
-
-            return response()->json(['status' => 'success', 'order_id' => $order->id], 200);
         } catch (\Exception $e) {
             report($e);
 
