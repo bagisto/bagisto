@@ -33,10 +33,15 @@
             <!-- For Same Slot All Days -->
             <template v-if="parseInt(bookingProduct.same_slot_all_days)">
                 <template v-if="slots['same_for_week'].length || Object.keys(slots['same_for_week']).length">
-                    <div class="flex flex-wrap gap-x-2.5">
-                        <div
+                    <div class="flex flex-wrap items-start gap-x-2.5">
+                        <v-field
+                            v-slot="{ field, errors }"
                             class="flex min-h-[38px] flex-wrap items-center gap-1 dark:border-gray-800"
                             v-for="(data, index) in slots['same_for_week']"
+                            :name="'booking[slots][' + index + ']'"
+                            :rules="{
+                                slot_duration: [bookingProduct.duration, data.from, data.to],
+                            }"
                         >
                             <!-- Hidden Inputs -->
                             <input
@@ -52,16 +57,28 @@
                             />
 
                             <!-- Panel Details -->
-                            <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
-                                @{{ data.from }} - @{{ data.to }}
+                            <p
+                                class="flex flex-col px-2 py-1 font-semibold text-white rounded" 
+                                :class="errors.length ? 'bg-red-600' : 'bg-gray-600'"
+                            >
+                                <div class="flex items-center justify-between">
+                                    @{{ data.from }} - @{{ data.to }}
 
-                                <span
-                                    class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
-                                    @click="removeIndex(index)"
+                                    <span
+                                        class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                        @click="removeIndex(index)"
+                                    >
+                                    </span>
+                                </div>
+
+                                <p
+                                    v-if="errors.length"
+                                    class="mt-1 text-xs italic text-white"
+                                    v-text="errors[0]"
                                 >
-                                </span>
+                                </p>
                             </p>
-                        </div>
+                        </v-field>
                     </div>
                 </template>
 
@@ -281,6 +298,27 @@
     </script>
 
     <script type="module">
+        defineRule('slot_duration', (value, [duration, from, to]) => {
+            if (!from || !to || !duration) {
+                return true;
+            }
+
+            const toMinutes = (time) => {
+                const [h, m] = time.split(':').map(Number);
+                return h * 60 + m;
+            };
+
+            const start = toMinutes(from);
+            const end = toMinutes(to);
+            const slotDuration = end - start;
+
+            if (slotDuration !== parseInt(duration)) {
+                return false
+            }
+
+            return true;
+        });
+
         app.component('v-slots', {
             template: '#v-slots-template',
 
@@ -431,6 +469,8 @@
                         return;
                     }
 
+                    if (! this.isValidSlotDuration(fromValue, toValue)) return;
+
                     if (key === 'same_for_week') {
                         this.slots[key] = this.slots[key] || {};
 
@@ -485,6 +525,29 @@
                     return existingSlots.some(s => {
                         return (newSlot.from < s.to && newSlot.to > s.from);
                     });
+                },
+
+                isValidSlotDuration(from, to) {
+                    const toMinutes = (time) => {
+                        const [h, m] = time.split(':').map(Number);
+                        
+                        return h * 60 + m;
+                    };
+
+                    const paramsStart = toMinutes(from);
+                    const paramsEnd = toMinutes(to);
+                    const duration = parseInt(this.bookingProduct.duration);
+
+                    if ((paramsEnd - paramsStart) != duration) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'error',
+                            message: "@lang('admin::app.catalog.products.edit.types.booking.validations.slot-duration-validation')",
+                        });
+                        
+                        return false;
+                    }
+                    
+                    return true;
                 },
             },
         });
