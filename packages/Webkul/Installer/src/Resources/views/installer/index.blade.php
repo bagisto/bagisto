@@ -55,6 +55,7 @@
             'nl'    => 'dutch',
             'pl'    => 'polish',
             'pt_BR' => 'portuguese',
+            'ro'    => 'romanian',
             'ru'    => 'russian',
             'sin'   => 'sinhala',
             'tr'    => 'turkish',
