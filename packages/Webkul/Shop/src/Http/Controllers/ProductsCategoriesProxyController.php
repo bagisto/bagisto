@@ -86,7 +86,7 @@ class ProductsCategoriesProxyController extends Controller
             }
 
             visitor()->visit($product);
-            
+
             $productURLRewrite = $this->urlRewriteRepository->findOneWhere([
                 'entity_type' => 'product',
                 'request_path' => $slugOrURLKey,

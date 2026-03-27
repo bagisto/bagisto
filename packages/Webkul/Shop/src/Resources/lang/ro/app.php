@@ -1078,6 +1078,7 @@ return [
             'remove' => 'Elimină cupon',
             'subtotal' => 'Subtotal',
             'success-apply' => 'Codul cuponului a fost aplicat cu succes.',
+            'usage-limit-exceeded' => 'Acest cod de cupon a atins limita de utilizare și nu mai este valid.',
         ],
 
         'login' => [
