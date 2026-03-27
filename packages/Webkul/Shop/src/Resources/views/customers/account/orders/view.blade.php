@@ -415,10 +415,8 @@
                     </div>
 
                     <!-- For Mobile View -->
-                    <div
-                        class="grid gap-4 md:hidden"
-                        v-pre
-                    >
+                    <div class="grid gap-4 md:hidden">
+
                         <div class="rounded-lg border">
                             <div class="grid gap-1.5 px-4 py-2.5 text-xs font-medium text-zinc-500 [&>*]:flex [&>*]:justify-between">
                                 <div>
@@ -672,7 +670,10 @@
                         </x-shop::accordion>
 
                         <!--Summary -->
-                        <div class="w-full rounded-md bg-gray-100">
+                        <div 
+                            class="w-full rounded-md bg-gray-100"
+                            v-pre
+                        >
                             <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                 @lang('shop::app.customers.account.orders.view.information.order-summary')
                             </div>
@@ -884,14 +885,14 @@
                         class="max-md:!px-0 max-md:pb-0 max-md:pt-2"
                         :title="trans('shop::app.customers.account.orders.view.invoices.invoices')"
                     >
-                        <div
-                            class="flex flex-col gap-10 max-md:gap-8"
-                            v-pre
-                        >
+                        <div class="flex flex-col gap-10 max-md:gap-8">
                             @foreach ($order->invoices as $invoice)
                                 <!-- For Mobile View -->
                                 <div class="grid gap-4 md:hidden">
-                                    <div class="rounded-lg border">
+                                    <div
+                                        class="rounded-lg border"
+                                        v-pre
+                                    >
                                         <div class="grid gap-1.5 px-4 py-2.5 text-xs font-medium text-zinc-500 [&>*]:flex [&>*]:justify-between">
                                             <div class="flex justify-between">
                                                 @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
@@ -1014,7 +1015,10 @@
                                     </x-shop::accordion>
 
                                     <!--Summary -->
-                                    <div class="w-full rounded-md bg-gray-100">
+                                    <div
+                                        class="w-full rounded-md bg-gray-100"
+                                        v-pre
+                                    >
                                         <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                             @lang('Order Summary')
                                         </div>
@@ -1154,7 +1158,10 @@
                                 </div>
 
                                 <!-- For Desktop View -->
-                                <div class="max-md:hidden">
+                                <div
+                                    class="max-md:hidden"
+                                    v-pre
+                                >
                                     <div class="flex justify-between">
                                         <label class="text-base font-medium">
                                             @lang('shop::app.customers.account.orders.view.invoices.individual-invoice', ['invoice_id' => $invoice->increment_id ?? $invoice->id])
@@ -1404,13 +1411,13 @@
                         class="max-md:!px-0 max-md:py-1.5"
                         title="{{ trans('shop::app.customers.account.orders.view.shipments.shipments') }}"
                     >
-                        <div
-                            class="flex flex-col gap-10 max-md:gap-8"
-                            v-pre
-                        >
+                        <div class="flex flex-col gap-10 max-md:gap-8">
                             @foreach ($order->shipments as $shipment)
                                 <!-- For Desktop View -->
-                                <div class="max-md:hidden">
+                                <div
+                                    class="max-md:hidden"
+                                    v-pre
+                                >
                                     <div>
                                         <label class="text-base font-medium">
                                             @lang('shop::app.customers.account.orders.view.shipments.tracking-number')
@@ -1477,7 +1484,10 @@
 
                                 <!-- For Mobile view -->
                                 <div class="grid gap-4 md:hidden">
-                                    <div class="rounded-lg border">
+                                    <div
+                                        class="rounded-lg border"
+                                        v-pre
+                                    >
                                         <div class="grid gap-1.5 px-4 py-2.5 text-xs font-medium text-zinc-500 [&>*]:flex [&>*]:justify-between">
                                             <div class="flex justify-between">
                                                 @lang('shop::app.customers.account.orders.view.shipments.tracking-number'):
@@ -1659,11 +1669,12 @@
                             </div>
 
                             <!-- For Mobile View -->
-                            <div
-                                class="grid gap-4 md:hidden"
-                                v-pre
-                            >
-                                <div class="rounded-lg border">
+                            <div class="grid gap-4 md:hidden">
+
+                                <div
+                                    class="rounded-lg border"
+                                    v-pre
+                                >
                                     <div class="grid gap-1.5 px-4 py-2.5 text-xs font-medium text-zinc-500 [&>*]:flex [&>*]:justify-between">
                                         @lang('shop::app.customers.account.orders.view.refunds.individual-refund', ['refund_id' => $refund->id])
                                     </div>
@@ -1767,7 +1778,10 @@
                                 </x-shop::accordion>
 
                                 <!-- Summary -->
-                                <div class="w-full rounded-md bg-gray-100">
+                                <div
+                                    class="w-full rounded-md bg-gray-100"
+                                    v-pre
+                                >
                                     <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.refunds.order-summary')
                                     </div>

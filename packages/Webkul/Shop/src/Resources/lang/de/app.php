@@ -1078,6 +1078,7 @@ return [
             'remove' => 'Gutschein entfernen',
             'subtotal' => 'Zwischensumme',
             'success-apply' => 'Gutscheincode erfolgreich angewendet.',
+            'usage-limit-exceeded' => 'Dieser Gutscheincode hat sein Nutzungslimit erreicht und ist nicht mehr gültig.',
         ],
 
         'login' => [

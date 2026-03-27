@@ -52,6 +52,16 @@ return [
     ],
 
     /**
+     * Index Prefix
+     *
+     * This prefix will be prepended to all Elasticsearch index names.
+     * Useful when multiple Bagisto instances share the same Elasticsearch cluster.
+     *
+     * Example: 'bg_23x_' will create indices like 'bg_23x_products_default_en_index'
+     */
+    'index_prefix' => env('ELASTICSEARCH_INDEX_PREFIX', ''),
+
+    /**
      * CA Bundle
      *
      * If you have the http_ca.crt certificate copied during the start of Elasticsearch

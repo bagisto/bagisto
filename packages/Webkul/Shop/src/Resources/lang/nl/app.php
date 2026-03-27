@@ -1078,6 +1078,7 @@ return [
             'remove' => 'Coupon verwijderen',
             'subtotal' => 'Subtotaal',
             'success-apply' => 'Couponcode succesvol toegepast.',
+            'usage-limit-exceeded' => 'Deze couponcode heeft de gebruikslimiet bereikt en is niet meer geldig.',
         ],
 
         'login' => [

@@ -1078,6 +1078,7 @@ return [
             'remove' => 'Usuń kupon',
             'subtotal' => 'Suma częściowa',
             'success-apply' => 'Kod kuponu został pomyślnie zastosowany',
+            'usage-limit-exceeded' => 'Ten kod kuponu osiągnął limit użycia i nie jest już ważny.',
         ],
 
         'login' => [

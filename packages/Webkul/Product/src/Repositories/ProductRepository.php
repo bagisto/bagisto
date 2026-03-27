@@ -152,10 +152,14 @@ class ProductRepository extends Repository
                     ->where('channel', core()->getRequestedChannelCode())
                     ->where('locale', core()->getRequestedLocaleCode());
 
-                if ($attributeValues->isEmpty()) {
+                if ($filteredAttributeValues->isEmpty()) {
                     $filteredAttributeValues = $attributeValues
                         ->where('channel', core()->getRequestedChannelCode())
                         ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel());
+                }
+
+                if ($filteredAttributeValues->isEmpty()) {
+                    $filteredAttributeValues = $attributeValues;
                 }
             } else {
                 $filteredAttributeValues = $attributeValues
@@ -169,6 +173,10 @@ class ProductRepository extends Repository
                 if ($filteredAttributeValues->isEmpty()) {
                     $filteredAttributeValues = $attributeValues
                         ->where('locale', core()->getDefaultLocaleCodeFromDefaultChannel());
+                }
+
+                if ($filteredAttributeValues->isEmpty()) {
+                    $filteredAttributeValues = $attributeValues;
                 }
             } else {
                 $filteredAttributeValues = $attributeValues;
@@ -488,6 +496,7 @@ class ProductRepository extends Repository
             'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($params, $indices) {
             $qb = $query->distinct()
+                ->select('products.*')
                 ->whereIn('products.id', $indices['ids']);
 
             if (
@@ -499,7 +508,9 @@ class ProductRepository extends Repository
                     ->whereNull('product_customizable_options.id');
             }
 
-            $qb->orderBy(DB::raw('FIELD(id, '.implode(',', $indices['ids']).')'));
+            $table = DB::getTablePrefix().$query->getModel()->getTable();
+
+            $qb->orderBy(DB::raw('FIELD('.$table.'.id, '.implode(',', $indices['ids']).')'));
 
             return $qb;
         });

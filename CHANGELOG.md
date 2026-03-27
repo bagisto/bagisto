@@ -2,81 +2,95 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **Unreleased**
+## Unreleased
 
-- Added support for Romanian language.
+* Added support for Romanian language.
+
+* Fixed product 404 when locale-specific URL keys differ across locales by adding cross-locale fallback in product slug resolution and locale-aware URL rewrite redirects.
+
+## **v2.3.16 (23rd of March 2026)** - *Release*
+
+* Fixed a critical race condition vulnerability in coupon usage during concurrent checkout, where two simultaneous orders could both redeem a single-use coupon. Coupon validation and usage consumption are now atomic using row-level locking inside the order creation transaction.
+
+* Fixed an issue with Elasticsearch search for grouped products.
+
+* #11204 [fixed] - Fixed a Chrome browser display issue caused by `v-pre` handling related to SSTI protection.
+
+* #11196 [fixed] - Fixed an issue where Vue.js `@click` directives were not working on mobile Chrome on the order detail page.
+
+* #10378 [fixed] - Added Elasticsearch index prefix support to avoid index conflicts when multiple Bagisto instances share the same Elasticsearch cluster.
 
 ## **v2.3.15 (11th of March 2026)** - *Release*
 
-- Added Exchange Rates core configuration with scheduled auto-update, API key management (Fixer & ExchangeRate-API), and `date_format` vee-validate rules.
+* Added Exchange Rates core configuration with scheduled auto-update, API key management (Fixer & ExchangeRate-API), and `date_format` vee-validate rules.
 
-- #11187 [fixed] - Fixed an issue causing an "Undefined array key 'resolver'" error.
+* #11187 [fixed] - Fixed an issue causing an "Undefined array key 'resolver'" error.
 
-- #11176 [fixed] - Fixed an issue where the extra price for image/file customizable options was not applied in the cart and checkout for simple products.
+* #11176 [fixed] - Fixed an issue where the extra price for image/file customizable options was not applied in the cart and checkout for simple products.
 
-- #11107 [fixed] - Fixed an issue with the SEO URL preview.
+* #11107 [fixed] - Fixed an issue with the SEO URL preview.
 
-- #10964 [fixed] - Fixed an issue where the search query was not populated in the search box on the customer end.
+* #10964 [fixed] - Fixed an issue where the search query was not populated in the search box on the customer end.
 
-- #10250 [fixed] - Added support email configuration through the core configuration settings.
+* #10250 [fixed] - Added support email configuration through the core configuration settings.
 
 ## **v2.3.14 (5th of March 2026)** - *Release*
 
-- Fixed an issue where wishlist items were being fetched for all customers when performing "Move to Cart" or deleting wishlist items.
+* Fixed an issue where wishlist items were being fetched for all customers when performing "Move to Cart" or deleting wishlist items.
 
 ## **v2.3.13 (2nd of March 2026)** - *Release*
 
-- Fixed catalog rule and cart rule condition validation where boolean value `0` was being incorrectly treated as empty and causing the condition to fail.
+* Fixed catalog rule and cart rule condition validation where boolean value `0` was being incorrectly treated as empty and causing the condition to fail.
 
-- #11034 [fixed] - Fixed an issue where the `createOrderIfNotThenRetry` method caused an infinite loop by adding a configurable max retry attempts limit.
+* #11034 [fixed] - Fixed an issue where the `createOrderIfNotThenRetry` method caused an infinite loop by adding a configurable max retry attempts limit.
 
-- #10876 [fixed] - Fixed an issue where customers were unable to resubscribe to the newsletter after unsubscribing or after an admin changed their subscription status from True to False.
+* #10876 [fixed] - Fixed an issue where customers were unable to resubscribe to the newsletter after unsubscribing or after an admin changed their subscription status from True to False.
 
-- #10854 [fixed] - Fixed an issue where incomplete product data was exported in CSV, XLS, and XLSX formats.
+* #10854 [fixed] - Fixed an issue where incomplete product data was exported in CSV, XLS, and XLSX formats.
 
-- #10828 [fixed] - Fixed an issue in the customer order view where the parent SKU was being displayed instead of the variant SKU for configurable products.
+* #10828 [fixed] - Fixed an issue in the customer order view where the parent SKU was being displayed instead of the variant SKU for configurable products.
 
-- #10827 [fixed] - Fixed an issue where customers from one channel could see orders from another channel. Now customers are bound to a specific channel at registration and login, ensuring orders are channel-specific.
+* #10827 [fixed] - Fixed an issue where customers from one channel could see orders from another channel. Now customers are bound to a specific channel at registration and login, ensuring orders are channel-specific.
 
 ## **v2.3.12 (20th of February 2026)** - *Release*
 
-- Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.
+* Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.
 
-- #11030 [fixed] - Added management support for shop footer copyright content in the admin panel.
+* #11030 [fixed] - Added management support for shop footer copyright content in the admin panel.
 
-- #10960 [fixed] - Fixed an issue where, in certain scenarios, adding a bundle product with a quantity greater than 1 calculated the cart subtotal for only a single quantity, resulting in incorrect pricing.
+* #10960 [fixed] - Fixed an issue where, in certain scenarios, adding a bundle product with a quantity greater than 1 calculated the cart subtotal for only a single quantity, resulting in incorrect pricing.
 
-- #10929 [fixed] - Added redirect URI configuration support for social authentication login.
+* #10929 [fixed] - Added redirect URI configuration support for social authentication login.
 
-- #10831 [fixed] - Fixed COD appearing for downloadable products in mixed cart.
+* #10831 [fixed] - Fixed COD appearing for downloadable products in mixed cart.
 
-- #9879 [fixed] - Fixed an issue where invoice email attachments were not being sent correctly.
+* #9879 [fixed] - Fixed an issue where invoice email attachments were not being sent correctly.
 
 ## **v2.3.11 (22nd of January 2026)** - *Release*
 
-- Security updates.
+* Security updates.
 
-- Enhanced form validation by implementing auto-scroll to the first error field, with support for regular inputs, array fields (categories, channels), nested fields, and TinyMCE editors. Added fallback flash messages when error fields cannot be located or scrolled to.
+* Enhanced form validation by implementing auto-scroll to the first error field, with support for regular inputs, array fields (categories, channels), nested fields, and TinyMCE editors. Added fallback flash messages when error fields cannot be located or scrolled to.
 
-- #11080 [fixed] - Fixed a currency display issue in invoices when the channel currency differed from the admin panel currency.
+* #11080 [fixed] - Fixed a currency display issue in invoices when the channel currency differed from the admin panel currency.
 
-- #10973 [fixed] - Fixed an unnecessary validation error triggered by VeeValidate on input fields containing spaces.
+* #10973 [fixed] - Fixed an unnecessary validation error triggered by VeeValidate on input fields containing spaces.
 
 ## **v2.3.10 (2nd of January 2026)** - *Release*
 
-- Fixed a security issue in the customer order reorder functionality.
+* Fixed a security issue in the customer order reorder functionality.
 
-- Fixed a Server-Side Template Injection (SSTI) vulnerability in the first and last name fields that could be exploited by low-privileged users.
+* Fixed a Server-Side Template Injection (SSTI) vulnerability in the first and last name fields that could be exploited by low-privileged users.
 
-- Refined the Blade tracer to track only view files, ensuring accurate view-level tracing.
+* Refined the Blade tracer to track only view files, ensuring accurate view-level tracing.
 
-- Fixed SSTI vulnerability in type parameter handling — user input is now properly sanitized/validated to prevent server-side template injection.
+* Fixed SSTI vulnerability in type parameter handling — user input is now properly sanitized/validated to prevent server-side template injection.
 
-- Sanitized product review attachments to prevent stored XSS.
+* Sanitized product review attachments to prevent stored XSS.
 
-- Sanitized CMS `html_content` during create and update operations to prevent stored XSS vulnerabilities.
+* Sanitized CMS `html_content` during create and update operations to prevent stored XSS vulnerabilities.
 
-- Added validation for external URLs in downloadable product samples to block access to private and reserved IP ranges.
+* Added validation for external URLs in downloadable product samples to block access to private and reserved IP ranges.
 
 * #11058 [fixed] - Fixed the speculation issue and resolved the revoke endpoint issue.
 
