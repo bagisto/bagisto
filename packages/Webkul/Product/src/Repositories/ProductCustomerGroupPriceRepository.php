@@ -39,7 +39,7 @@ class ProductCustomerGroupPriceRepository extends Repository
                     $row['qty'],
                     $product->id,
                     $row['customer_group_id'],
-                ]));
+                ], fn ($value) => ! is_null($value)));
 
                 if (in_array($row['unique_id'], $uniqueIds)) {
                     throw ValidationException::withMessages([

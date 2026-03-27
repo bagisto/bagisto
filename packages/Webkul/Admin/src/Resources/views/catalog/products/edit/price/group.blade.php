@@ -277,13 +277,17 @@
                 },
 
                 create(params) {
+                    const normalizedParamGroupId = params.customer_group_id === '' ? null : params.customer_group_id;
+
                     let duplicate = this.prices.find(price => {
                         if (this.selectedPrice.id && price.id === this.selectedPrice.id) {
                             return false;
                         }
 
+                        const normalizedPriceGroupId = price.customer_group_id === '' ? null : price.customer_group_id;
+
                         return price.qty == params.qty
-                            && price.customer_group_id == params.customer_group_id;
+                            && normalizedPriceGroupId == normalizedParamGroupId;
                     });
 
                     if (duplicate) {
