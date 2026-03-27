@@ -128,8 +128,10 @@
 
                     <!-- Order items -->
                     <div class="grid">
+                        {!! view_render_event('bagisto.admin.sales.order.list.before', ['order' => $order]) !!}
+
                         @foreach ($order->items as $item)
-                            {!! view_render_event('bagisto.admin.sales.order.list.before', ['order' => $order]) !!}
+                            {!! view_render_event('bagisto.admin.sales.order.list.item.before', ['order' => $order, 'item' => $item]) !!}
 
                             <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800">
                                 <div class="flex gap-2.5">
@@ -269,9 +271,10 @@
                                 </div>
                             </div>
 
-                            {!! view_render_event('bagisto.admin.sales.order.list.after', ['order' => $order]) !!}
-
+                            {!! view_render_event('bagisto.admin.sales.order.list.item.after', ['order' => $order, 'item' => $item]) !!}
                         @endforeach
+
+                        {!! view_render_event('bagisto.admin.sales.order.list.after', ['order' => $order]) !!}
                     </div>
 
                     <div class="mt-4 flex flex-auto justify-end p-4">
