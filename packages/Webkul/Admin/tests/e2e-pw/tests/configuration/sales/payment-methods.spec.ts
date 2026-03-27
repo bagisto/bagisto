@@ -73,12 +73,12 @@ test.describe("payment methods configuration", () => {
         //     await adminPage.fill('input[name="sales[payment_methods][cashondelivery][title]"]', generateName());
         // }
 
-        await adminPage.selectOption(
-            'select[name="sales[payment_methods][cashondelivery][sort]"]',
+        await adminPage.fill(
+            'input[name="sales[payment_methods][cashondelivery][sort]"]',
             "2"
         );
         const sort = adminPage.locator(
-            'select[name="sales[payment_methods][cashondelivery][sort]"]'
+            'input[name="sales[payment_methods][cashondelivery][sort]"]'
         );
         await expect(sort).toHaveValue("2");
 
@@ -151,12 +151,12 @@ test.describe("payment methods configuration", () => {
         //     await adminPage.fill('input[name="sales[payment_methods][moneytransfer][title]"]', generateName());
         // }
 
-        await adminPage.selectOption(
-            'select[name="sales[payment_methods][moneytransfer][sort]"]',
+        await adminPage.fill(
+            'input[name="sales[payment_methods][moneytransfer][sort]"]',
             "2"
         );
         const sort = adminPage.locator(
-            'select[name="sales[payment_methods][moneytransfer][sort]"]'
+            'input[name="sales[payment_methods][moneytransfer][sort]"]'
         );
         await expect(sort).toHaveValue("2");
 
@@ -205,12 +205,12 @@ test.describe("payment methods configuration", () => {
         // const paypalToggle = await adminPage.locator('input[name="sales[payment_methods][paypal_standard][sandbox]"]');
         // await expect(paypalToggle).toBeChecked();
 
-        await adminPage.selectOption(
-            'select[name="sales[payment_methods][paypal_standard][sort]"]',
+        await adminPage.fill(
+            'input[name="sales[payment_methods][paypal_standard][sort]"]',
             "2"
         );
         const sort = adminPage.locator(
-            'select[name="sales[payment_methods][paypal_standard][sort]"]'
+            'input[name="sales[payment_methods][paypal_standard][sort]"]'
         );
         await expect(sort).toHaveValue("2");
 
@@ -260,12 +260,12 @@ test.describe("payment methods configuration", () => {
         // const paypalSmartButtonToggle = await adminPage.locator('input[name="sales[payment_methods][paypal_smart_button][sandbox]"]');
         // await expect(paypalSmartButtonToggle).toBeChecked();
 
-        await adminPage.selectOption(
-            'select[name="sales[payment_methods][paypal_standard][sort]"]',
+        await adminPage.fill(
+            'input[name="sales[payment_methods][paypal_smart_button][sort]"]',
             "2"
         );
         const sort = adminPage.locator(
-            'select[name="sales[payment_methods][paypal_standard][sort]"]'
+            'input[name="sales[payment_methods][paypal_smart_button][sort]"]'
         );
         await expect(sort).toHaveValue("2");
 
