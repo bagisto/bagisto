@@ -193,6 +193,7 @@ class Importer extends AbstractImporter
         'configurable_variants',
         'bundle_options',
         'associated_skus',
+        'brand'
     ];
 
     /**
@@ -1240,13 +1241,24 @@ class Importer extends AbstractImporter
                 continue;
             }
 
+            if ($attributeCode === 'brand' && $attribute->type === 'select') {
+                $brandOption = $this->attributeOptionRepository->findWhere([
+                    ['attribute_id', '=', $attribute->id],
+                    ['admin_name', '=', $value],
+                ])->first();
+                if (! $brandOption) {
+                    continue;
+                }
+                $value = $brandOption->id;
+            }
+
             $attributeTypeValues = array_fill_keys(array_values($attribute->attributeTypeFields), null);
 
             $attributeValues[$rowData['sku']][] = array_merge($attributeTypeValues, [
-                'attribute_id' => $attribute->id,
+                'attribute_id'          => $attribute->id,
                 $attribute->column_name => $value,
-                'channel' => $attribute->value_per_channel ? $rowData['channel'] : null,
-                'locale' => $attribute->value_per_locale ? $rowData['locale'] : null,
+                'channel'               => $attribute->value_per_channel ? $rowData['channel'] : null,
+                'locale'                => $attribute->value_per_locale ? $rowData['locale'] : null,
             ]);
         }
     }
