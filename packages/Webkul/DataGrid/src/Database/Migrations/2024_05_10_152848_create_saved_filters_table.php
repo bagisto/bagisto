@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('user_id')->unsigned();
             $table->string('name');
             $table->string('src');
-            $table->json('applied');
+            $table->jsonb('applied');
             $table->timestamps();
 
             $table->unique(['user_id', 'name', 'src']);

@@ -5,7 +5,6 @@ namespace Webkul\Admin\Http\Controllers\Sales;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\OrderDataGrid;
@@ -210,7 +209,8 @@ class OrderController extends Controller
         $orders = $this->orderRepository->scopeQuery(function ($query) {
             return $query->where('customer_email', 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orWhere('status', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orWhere(DB::raw('CONCAT(customer_first_name, " ", customer_last_name)'), 'like', '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('customer_first_name', 'like', '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('customer_last_name', 'like', '%'.urldecode(request()->input('query')).'%')
                 ->orWhere('increment_id', request()->input('query'))
                 ->orderBy('created_at', 'desc');
         })->paginate(10);

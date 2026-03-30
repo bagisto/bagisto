@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('status')->default(0);
             $table->string('display_mode')->default('products_and_description')->nullable();
             NestedSet::columns($table);
-            $table->json('additional')->nullable();
+            $table->jsonb('additional')->nullable();
             $table->timestamps();
         });
     }

@@ -4,9 +4,12 @@ namespace Webkul\Installer\Database\Seeders\Attribute;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
 
 class AttributeGroupTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Seed the application's database.
      *
@@ -15,8 +18,6 @@ class AttributeGroupTableSeeder extends Seeder
      */
     public function run($parameters = [])
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
         DB::table('attribute_groups')->delete();
 
         DB::table('attribute_group_mappings')->delete();
@@ -255,6 +256,6 @@ class AttributeGroupTableSeeder extends Seeder
             ],
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        $this->syncPostgresSequences();
     }
 }

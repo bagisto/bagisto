@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('order_id')->nullable()->unsigned();
             $table->string('method');
             $table->string('method_title')->nullable();
-            $table->json('additional')->nullable();
+            $table->jsonb('additional')->nullable();
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

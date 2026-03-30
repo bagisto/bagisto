@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('vat_id')->nullable();
             $table->boolean('default_address')->default(false)->comment('only for customer_addresses');
-            $table->json('additional')->nullable();
+            $table->jsonb('additional')->nullable();
             $table->timestamps();
 
             $table->foreign(['customer_id'])->references('id')->on('customers')->onDelete('cascade');

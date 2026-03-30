@@ -79,7 +79,7 @@ class Campaign
     {
         return $campaign->customer_group
             ->customers()
-            ->whereRaw('DATE_FORMAT(date_of_birth, "%m-%d") = ?', [Carbon::now()->format('m-d')])
+            ->whereRaw(db_grammar()->monthDay('date_of_birth').' = ?', [Carbon::now()->format('m-d')])
             ->where('subscribed_to_news_letter', 1)
             ->pluck('email')
             ->toArray();

@@ -4,9 +4,12 @@ namespace Webkul\Installer\Database\Seeders\Attribute;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
 
 class AttributeFamilyTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Seed the application's database.
      *
@@ -15,8 +18,6 @@ class AttributeFamilyTableSeeder extends Seeder
      */
     public function run($parameters = [])
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
         DB::table('attribute_families')->delete();
 
         $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
@@ -31,6 +32,6 @@ class AttributeFamilyTableSeeder extends Seeder
             ],
         ]);
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        $this->syncPostgresSequences();
     }
 }

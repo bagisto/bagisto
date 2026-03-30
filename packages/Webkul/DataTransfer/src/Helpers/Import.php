@@ -396,9 +396,9 @@ class Import
     {
         $summary = $this->importBatchRepository
             ->select(
-                DB::raw('SUM(json_unquote(json_extract(summary, \'$."created"\'))) AS created'),
-                DB::raw('SUM(json_unquote(json_extract(summary, \'$."updated"\'))) AS updated'),
-                DB::raw('SUM(json_unquote(json_extract(summary, \'$."deleted"\'))) AS deleted'),
+                DB::raw('SUM('.db_grammar()->jsonExtractNumeric('summary', '$."created"').') AS created'),
+                DB::raw('SUM('.db_grammar()->jsonExtractNumeric('summary', '$."updated"').') AS updated'),
+                DB::raw('SUM('.db_grammar()->jsonExtractNumeric('summary', '$."deleted"').') AS deleted'),
             )
             ->where('import_id', $this->import->id)
             ->groupBy('import_id')
@@ -431,9 +431,9 @@ class Import
 
         $summary = $this->importBatchRepository
             ->select(
-                DB::raw('SUM(json_unquote(json_extract(summary, \'$."created"\'))) AS created'),
-                DB::raw('SUM(json_unquote(json_extract(summary, \'$."updated"\'))) AS updated'),
-                DB::raw('SUM(json_unquote(json_extract(summary, \'$."deleted"\'))) AS deleted'),
+                DB::raw('SUM('.db_grammar()->jsonExtractNumeric('summary', '$."created"').') AS created'),
+                DB::raw('SUM('.db_grammar()->jsonExtractNumeric('summary', '$."updated"').') AS updated'),
+                DB::raw('SUM('.db_grammar()->jsonExtractNumeric('summary', '$."deleted"').') AS deleted'),
             )
             ->where('import_id', $this->import->id)
             ->where('state', $state)

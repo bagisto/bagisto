@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('admins', function (Blueprint $table) {
             $table->text('two_factor_secret')->after('remember_token')->nullable();
             $table->boolean('two_factor_enabled')->after('two_factor_secret')->default(false);
-            $table->json('two_factor_backup_codes')->after('two_factor_enabled')->nullable();
+            $table->jsonb('two_factor_backup_codes')->after('two_factor_enabled')->nullable();
             $table->timestamp('two_factor_verified_at')->after('two_factor_backup_codes')->nullable();
         });
     }

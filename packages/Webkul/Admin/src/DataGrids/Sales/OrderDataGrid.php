@@ -30,7 +30,7 @@ class OrderDataGrid extends DataGrid
             ->leftJoin('order_payment', 'orders.id', '=', 'order_payment.order_id')
             ->select(
                 'orders.id',
-                DB::raw('GROUP_CONCAT('.DB::getTablePrefix().'order_payment.method SEPARATOR "|") as method'),
+                DB::raw(db_grammar()->groupConcat(DB::getTablePrefix().'order_payment.method', '|').' as method'),
                 'orders.increment_id',
                 'orders.base_grand_total',
                 'orders.created_at',
@@ -39,12 +39,27 @@ class OrderDataGrid extends DataGrid
                 'status',
                 'customer_email',
                 'orders.cart_id as items',
-                DB::raw('CONCAT('.DB::getTablePrefix().'orders.customer_first_name, " ", '.DB::getTablePrefix().'orders.customer_last_name) as full_name'),
-                DB::raw('CONCAT('.DB::getTablePrefix().'order_address_billing.city, ", ", '.DB::getTablePrefix().'order_address_billing.state,", ", '.DB::getTablePrefix().'order_address_billing.country) as location')
+                DB::raw(db_grammar()->concat(DB::getTablePrefix().'orders.customer_first_name', "' '", DB::getTablePrefix().'orders.customer_last_name').' as full_name'),
+                DB::raw(db_grammar()->concat(DB::getTablePrefix().'order_address_billing.city', "', '", DB::getTablePrefix().'order_address_billing.state', "', '", DB::getTablePrefix().'order_address_billing.country').' as location')
             )
-            ->groupBy('orders.id');
+            ->groupBy(
+                'orders.id',
+                'orders.increment_id',
+                'orders.base_grand_total',
+                'orders.created_at',
+                'orders.channel_name',
+                'orders.channel_id',
+                'orders.status',
+                'orders.customer_email',
+                'orders.cart_id',
+                'orders.customer_first_name',
+                'orders.customer_last_name',
+                'order_address_billing.city',
+                'order_address_billing.state',
+                'order_address_billing.country'
+            );
 
-        $this->addFilter('full_name', DB::raw('CONCAT('.DB::getTablePrefix().'orders.customer_first_name, " ", '.DB::getTablePrefix().'orders.customer_last_name)'));
+        $this->addFilter('full_name', DB::raw(db_grammar()->concat(DB::getTablePrefix().'orders.customer_first_name', "' '", DB::getTablePrefix().'orders.customer_last_name')));
         $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;
