@@ -14,6 +14,10 @@ use Webkul\Core\Console\Commands\BagistoVersion;
 use Webkul\Core\Console\Commands\ExchangeRateUpdate;
 use Webkul\Core\Console\Commands\InvoiceOverdueCron;
 use Webkul\Core\Console\Commands\TranslationsChecker;
+use Webkul\Core\Contracts\DatabaseGrammar;
+use Webkul\Core\Database\Grammar\MySqlGrammar;
+use Webkul\Core\Database\Grammar\PgSqlGrammar;
+use Webkul\Core\Enums\SupportedDatabaseEnum;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Core\View\Compilers\BladeCompiler;
@@ -31,6 +35,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerOverrides();
+
+        $this->registerDatabaseGrammar();
     }
 
     /**
@@ -60,6 +66,22 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->app->register(EventServiceProvider::class);
         $this->app->register(DynamicSmtpServiceProvider::class);
+    }
+
+    /**
+     * Register the database grammar abstraction based on the active driver.
+     */
+    protected function registerDatabaseGrammar(): void
+    {
+        $this->app->singleton(
+            DatabaseGrammar::class,
+            fn ($app) => match ($app['db']->getDriverName()) {
+                SupportedDatabaseEnum::PGSQL->value => new PgSqlGrammar,
+                SupportedDatabaseEnum::MYSQL->value,
+                SupportedDatabaseEnum::MARIADB->value => new MySqlGrammar,
+                default => new MySqlGrammar,
+            }
+        );
     }
 
     /**

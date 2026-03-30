@@ -5,9 +5,12 @@ namespace Webkul\Installer\Database\Seeders\CMS;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
 
 class CMSPagesTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Seed the application's database.
      *
@@ -197,5 +200,7 @@ class CMSPagesTableSeeder extends Seeder
                 'channel_id' => 1,
             ],
         ]);
+
+        $this->syncPostgresSequences();
     }
 }

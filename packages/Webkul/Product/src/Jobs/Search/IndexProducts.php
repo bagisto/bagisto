@@ -24,11 +24,9 @@ class IndexProducts implements ShouldQueue
      */
     public function handle(SearchEngineManager $manager, ProductRepository $productRepository): void
     {
-        $ids = implode(',', $this->productIds);
-
         $products = $productRepository
             ->whereIn('id', $this->productIds)
-            ->orderByRaw("FIELD(id, $ids)")
+            ->orderByRaw(db_grammar()->orderByField('id', $this->productIds))
             ->get();
 
         $manager->indexer()->indexBatch($products->all());

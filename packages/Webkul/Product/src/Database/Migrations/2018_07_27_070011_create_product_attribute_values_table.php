@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('float_value', 12, 4)->nullable();
             $table->dateTime('datetime_value')->nullable();
             $table->date('date_value')->nullable();
-            $table->json('json_value')->nullable();
+            $table->jsonb('json_value')->nullable();
             $table->integer('product_id')->unsigned();
             $table->integer('attribute_id')->unsigned();
 

@@ -5,9 +5,12 @@ namespace Webkul\Installer\Database\Seeders\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
 
 class AdminsTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Seed the application's database.
      *
@@ -35,5 +38,7 @@ class AdminsTableSeeder extends Seeder
             'status' => 1,
             'role_id' => 1,
         ]);
+
+        $this->syncPostgresSequences();
     }
 }

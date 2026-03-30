@@ -6,9 +6,12 @@ use Illuminate\Database\Seeder;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
 
 class LocalesTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Base path for the images.
      */
@@ -47,5 +50,7 @@ class LocalesTableSeeder extends Seeder
                 ],
             ]);
         }
+
+        $this->syncPostgresSequences();
     }
 }

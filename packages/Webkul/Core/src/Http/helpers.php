@@ -1,6 +1,7 @@
 <?php
 
 use Stevebauman\Purify\Facades\Purify;
+use Webkul\Core\Contracts\DatabaseGrammar;
 use Webkul\Core\Facades\Acl;
 use Webkul\Core\Facades\Core;
 use Webkul\Core\Facades\Menu;
@@ -51,6 +52,18 @@ if (! function_exists('system_config')) {
     function system_config()
     {
         return SystemConfig::getFacadeRoot();
+    }
+}
+
+if (! function_exists('db_grammar')) {
+    /**
+     * Database grammar helper.
+     *
+     * @return DatabaseGrammar
+     */
+    function db_grammar()
+    {
+        return app(DatabaseGrammar::class);
     }
 }
 

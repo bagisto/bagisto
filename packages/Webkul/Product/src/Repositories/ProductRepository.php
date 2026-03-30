@@ -264,7 +264,7 @@ class ProductRepository extends Repository
         ])->scopeQuery(function ($query) use ($params) {
             $prefix = DB::getTablePrefix();
 
-            $qb = $query->distinct()
+            $qb = $query
                 ->select('products.*')
                 ->leftJoin('products as variants', DB::raw('COALESCE('.$prefix.'variants.parent_id, '.$prefix.'variants.id)'), '=', 'products.id')
                 ->leftJoin('product_price_indices', function ($join) {
@@ -395,7 +395,7 @@ class ProductRepository extends Repository
 
                                     $subFilterQuery->where(function ($query) use ($paramValues, $alias, $attribute, $prefix) {
                                         foreach ($paramValues as $value) {
-                                            $query->orWhereRaw("FIND_IN_SET(?, {$prefix}{$alias}.{$attribute->column_name})", [$value]);
+                                            $query->orWhereRaw(db_grammar()->findInSet('?', "{$prefix}{$alias}.{$attribute->column_name}"), [$value]);
                                         }
                                     });
                                 } else {
@@ -419,7 +419,7 @@ class ProductRepository extends Repository
 
                 if ($attribute) {
                     if ($attribute->code === 'price') {
-                        $qb->orderBy('product_price_indices.min_price', $sortOptions['order']);
+                        $qb->orderByRaw('MIN('.$prefix.'product_price_indices.min_price) '.$sortOptions['order']);
                     } else {
                         $alias = 'sort_product_attribute_values';
 
@@ -440,7 +440,7 @@ class ProductRepository extends Repository
                                 }
                             }
                         })
-                            ->orderBy($alias.'.'.$attribute->column_name, $sortOptions['order']);
+                            ->orderByRaw('MIN('.$prefix.$alias.'.'.$attribute->column_name.') '.$sortOptions['order']);
                     }
                 } else {
                     /* `created_at` is not an attribute so it will be in else case */
@@ -494,7 +494,7 @@ class ProductRepository extends Repository
             'variants.price_indices',
             'variants.inventory_indices',
         ])->scopeQuery(function ($query) use ($params, $indices) {
-            $qb = $query->distinct()
+            $qb = $query
                 ->select('products.*')
                 ->whereIn('products.id', $indices['ids']);
 
@@ -509,7 +509,7 @@ class ProductRepository extends Repository
 
             $table = DB::getTablePrefix().$query->getModel()->getTable();
 
-            $qb->orderBy(DB::raw('FIELD('.$table.'.id, '.implode(',', $indices['ids']).')'));
+            $qb->orderByRaw(db_grammar()->orderByField($table.'.id', $indices['ids']));
 
             return $qb;
         });

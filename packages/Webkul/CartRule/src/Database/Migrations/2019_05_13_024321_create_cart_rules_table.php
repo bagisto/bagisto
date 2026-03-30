@@ -26,7 +26,7 @@ return new class extends Migration
             $table->integer('uses_per_coupon')->default(0);
             $table->integer('times_used')->unsigned()->default(0);
             $table->boolean('condition_type')->default(1);
-            $table->json('conditions')->nullable();
+            $table->jsonb('conditions')->nullable();
             $table->boolean('end_other_rules')->default(0);
             $table->boolean('uses_attribute_conditions')->default(0);
             $table->string('action_type')->nullable();

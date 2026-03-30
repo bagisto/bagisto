@@ -128,13 +128,13 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'orders.customer_id as id',
                 'orders.customer_email as email',
-                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'),
+                DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name').' as full_name'),
                 DB::raw('SUM(base_grand_total_invoiced - base_grand_total_refunded) as total'),
                 DB::raw('COUNT(*) as orders')
             )
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
-            ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
+            ->groupBy('orders.customer_email', 'orders.customer_id', 'orders.customer_first_name', 'orders.customer_last_name')
             ->orderByDesc('total')
             ->limit($limit)
             ->get();
@@ -154,12 +154,12 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'orders.customer_id as id',
                 'orders.customer_email as email',
-                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'),
+                DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name').' as full_name'),
                 DB::raw('COUNT(*) as orders')
             )
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
-            ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
+            ->groupBy('orders.customer_email', 'orders.customer_id', 'orders.customer_first_name', 'orders.customer_last_name')
             ->orderByDesc('orders')
             ->limit($limit)
             ->get();
@@ -181,7 +181,7 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'customers.id as id',
                 'customers.email as email',
-                DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name) as full_name'),
+                DB::raw(db_grammar()->concat($tablePrefix.'customers.first_name', "' '", $tablePrefix.'customers.last_name').' as full_name'),
                 DB::raw('COUNT(*) as reviews')
             )
             ->whereIn('customers.channel_id', $this->channelIds)
@@ -189,7 +189,7 @@ class Customer extends AbstractReporting
             ->whereBetween('product_reviews.created_at', [$this->startDate, $this->endDate])
             ->where('product_reviews.status', 'approved')
             ->whereNotNull('customer_id')
-            ->groupBy(DB::raw('CONCAT(email, "-", '.$tablePrefix.'customers.id)'))
+            ->groupBy('customers.id', 'customers.email', 'customers.first_name', 'customers.last_name')
             ->orderByDesc('reviews')
             ->limit($limit)
             ->get();
@@ -205,11 +205,11 @@ class Customer extends AbstractReporting
         return $this->customerRepository
             ->resetModel()
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
-            ->select('customers.id as id', 'customer_groups.name as group_name')
+            ->select('customer_groups.id as id', 'customer_groups.name as group_name')
             ->addSelect(DB::raw('COUNT(*) as total'))
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('customers.created_at', [$this->startDate, $this->endDate])
-            ->groupBy('customer_group_id')
+            ->groupBy('customer_groups.id', 'customer_groups.name')
             ->orderByDesc('total')
             ->limit($limit)
             ->get();

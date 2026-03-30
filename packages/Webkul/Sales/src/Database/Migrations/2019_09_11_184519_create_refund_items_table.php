@@ -33,7 +33,7 @@ return new class extends Migration
             $table->string('product_type')->nullable();
             $table->integer('order_item_id')->unsigned()->nullable();
             $table->integer('refund_id')->unsigned()->nullable();
-            $table->json('additional')->nullable();
+            $table->jsonb('additional')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('refund_items')->onDelete('cascade');

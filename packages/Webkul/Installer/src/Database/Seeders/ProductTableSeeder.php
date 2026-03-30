@@ -15,6 +15,8 @@ use Webkul\Installer\Database\Seeders\Shop\ThemeCustomizationTableSeeder;
 
 class ProductTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Base path for product images within the package.
      */
@@ -153,6 +155,8 @@ class ProductTableSeeder extends Seeder
         $this->seedProducts($this->defaultLocale);
 
         $this->seedProductRelations();
+
+        $this->syncPostgresSequences();
     }
 
     // =========================================================================
