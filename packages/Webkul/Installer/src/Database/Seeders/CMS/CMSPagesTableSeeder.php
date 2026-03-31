@@ -201,6 +201,6 @@ class CMSPagesTableSeeder extends Seeder
             ],
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['cms_pages']);
     }
 }

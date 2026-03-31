@@ -67,7 +67,7 @@ class CategoryTableSeeder extends Seeder
             ]);
         }
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['categories']);
     }
 
     /**

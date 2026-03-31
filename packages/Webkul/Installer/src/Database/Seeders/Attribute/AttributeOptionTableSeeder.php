@@ -117,6 +117,6 @@ class AttributeOptionTableSeeder extends Seeder
             ]);
         }
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['attribute_options']);
     }
 }

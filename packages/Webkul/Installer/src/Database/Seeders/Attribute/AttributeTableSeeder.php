@@ -759,6 +759,6 @@ class AttributeTableSeeder extends Seeder
             ]);
         }
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['attributes']);
     }
 }

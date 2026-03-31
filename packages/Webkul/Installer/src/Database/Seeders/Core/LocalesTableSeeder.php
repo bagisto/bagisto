@@ -51,6 +51,6 @@ class LocalesTableSeeder extends Seeder
             ]);
         }
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['locales']);
     }
 }

@@ -31,6 +31,6 @@ class RolesTableSeeder extends Seeder
             'permission_type' => 'all',
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['roles']);
     }
 }
