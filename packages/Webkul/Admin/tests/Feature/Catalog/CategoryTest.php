@@ -74,7 +74,7 @@ it('should fails the image validation error when provided tempered logo and bann
         'slug' => fake()->slug(),
         'name' => fake()->name(),
         'position' => rand(1, 5),
-        'description' => substr(fake()->paragraph(), 0, 50),
+        'description' => rtrim(substr(fake()->paragraph(), 0, 50)),
         'attributes' => $attributes,
         'logo_path' => [
             UploadedFile::fake()->image('logo.php'),
@@ -99,7 +99,7 @@ it('should create a category', function () {
         'slug' => fake()->slug(),
         'name' => fake()->name(),
         'position' => rand(1, 5),
-        'description' => substr(fake()->paragraph(), 0, 50),
+        'description' => rtrim(substr(fake()->paragraph(), 0, 50)),
         'attributes' => $attributes,
         'logo_path' => [
             UploadedFile::fake()->image('logo.png'),
@@ -213,7 +213,7 @@ it('should fails the validation with certain provided inputs', function () {
         'en' => [
             'name' => $name = fake()->name(),
             'slug' => $category->slug,
-            'description' => $description = substr(fake()->paragraph(), 0, 50),
+            'description' => $description = rtrim(substr(fake()->paragraph(), 0, 50)),
         ],
         'locale' => config('app.locale'),
         'attributes' => $attributes,
@@ -242,7 +242,7 @@ it('should update a category', function () {
     putJson(route('admin.catalog.categories.update', $category->id), [
         'en' => $data = [
             'name' => fake()->name(),
-            'description' => substr(fake()->paragraph(), 0, 50),
+            'description' => rtrim(substr(fake()->paragraph(), 0, 50)),
             'slug' => $category->slug,
         ],
         'locale' => config('app.locale'),

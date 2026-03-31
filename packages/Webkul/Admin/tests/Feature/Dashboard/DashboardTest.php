@@ -55,7 +55,7 @@ it('should show the dashboard over all stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -318,7 +318,7 @@ it('should show the dashboard today stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -584,7 +584,7 @@ it('should show the dashboard stock threshold products stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -847,7 +847,7 @@ it('should show the dashboard total sales stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1124,7 +1124,7 @@ it('should show the dashboard top selling products stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1384,7 +1384,7 @@ it('should show the dashboard top customers stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [

@@ -31,6 +31,17 @@ class RMACustomField extends Model implements RMACustomFieldContracts
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'boolean',
+        'is_required' => 'boolean',
+        'position' => 'integer',
+    ];
+
+    /**
      * Get the options for the custom field.
      */
     public function options(): HasMany

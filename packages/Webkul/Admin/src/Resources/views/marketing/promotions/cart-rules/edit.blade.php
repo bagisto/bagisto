@@ -729,11 +729,11 @@
 
                 data() {
                     return {
-                        couponType: {{ old('coupon_type') ?? $cartRule->coupon_type }},
+                        couponType: {{ (int) (old('coupon_type') ?? $cartRule->coupon_type) }},
 
-                        useAutoGeneration: {{ old('use_auto_generation') ?? $cartRule->use_auto_generation }},
+                        useAutoGeneration: {{ (int) (old('use_auto_generation') ?? $cartRule->use_auto_generation) }},
 
-                        conditionType: {{ old('condition_type') ?? $cartRule->condition_type }},
+                        conditionType: {{ (int) (old('condition_type') ?? $cartRule->condition_type) }},
 
                         conditions: @json($cartRule->conditions ?? []),
 

@@ -64,7 +64,7 @@ it('should store the newly created channels', function () {
         'locales' => [1],
         'currencies' => [1],
         'seo_title' => fake()->title(),
-        'seo_description' => substr(fake()->paragraph(), 0, 50),
+        'seo_description' => rtrim(substr(fake()->paragraph(), 0, 50)),
         'seo_keywords' => fake()->name(),
         'is_maintenance_on' => fake()->boolean(),
         'logo' => [
@@ -139,7 +139,7 @@ it('should update the existing channel', function () {
         app()->getLocale() => [
             'name' => fake()->name(),
             'seo_title' => fake()->title(),
-            'seo_description' => substr(fake()->paragraph(), 0, 50),
+            'seo_description' => rtrim(substr(fake()->paragraph(), 0, 50)),
             'seo_keywords' => fake()->name(),
             'description' => substr(fake()->paragraph, 0, 50),
         ],

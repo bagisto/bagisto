@@ -101,7 +101,7 @@ it('should return the top customers group stats report', function () {
         'type' => 'top-customer-groups',
     ]))
         ->assertOk()
-        ->assertJsonPath('statistics.0.id', $customer->id)
+        ->assertJsonPath('statistics.0.id', $customer->customer_group_id)
         ->assertJsonPath('statistics.0.group_name', 'General');
 });
 
@@ -128,7 +128,7 @@ it('should return the customers with most orders stats report', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -341,7 +341,7 @@ it('should return the customers with most sales stats report', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [

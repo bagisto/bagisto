@@ -116,7 +116,7 @@ it('should handle certain validation errors when storing the customer address fo
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -517,7 +517,7 @@ it('should store the shipping address as the billing address when use_for_shippi
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -630,7 +630,7 @@ it('should store the billing and shipping address for customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -748,7 +748,7 @@ it('should store the billing address for non stockable items for customer', func
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -857,7 +857,7 @@ it('should fails the certain validation errors when use for shipping is set to f
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1076,7 +1076,7 @@ it('should fails the validation error when shipping method not providing when st
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1246,7 +1246,7 @@ it('should store the shipping method for customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1467,7 +1467,7 @@ it('should store the payment method for guest user', function () {
         ],
     ])
         ->assertJsonPath('cart.id', $cart->id)
-        ->assertJsonPath('cart.is_guest', 1)
+        ->assertJsonPath('cart.is_guest', true)
         ->assertJsonPath('cart.items_count', 1)
         ->assertJsonPath('cart.customer_id', null)
         ->assertJsonPath('cart.items_count', 1)
@@ -1553,7 +1553,7 @@ it('should store the payment method for customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1607,7 +1607,7 @@ it('should store the payment method for customer', function () {
         ],
     ])
         ->assertJsonPath('cart.id', $cart->id)
-        ->assertJsonPath('cart.is_guest', 0)
+        ->assertJsonPath('cart.is_guest', false)
         ->assertJsonPath('cart.items_count', 1)
         ->assertJsonPath('cart.customer_id', $customer->id)
         ->assertJsonPath('cart.items_count', 1)
@@ -2019,7 +2019,7 @@ it('should place a simple product order for a customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'shipping_method' => 'free_free',
     ]);
 
@@ -2184,7 +2184,7 @@ it('should place a simple product order for a customer and send email to the cus
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'shipping_method' => 'free_free',
     ]);
 
@@ -2730,7 +2730,7 @@ it('should place a configurable product order for a customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'shipping_method' => 'free_free',
     ]);
 
@@ -2911,7 +2911,7 @@ it('should place a configurable product order for a customer and send email to t
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'shipping_method' => 'free_free',
     ]);
 
@@ -3359,7 +3359,7 @@ it('should place a virtual product order for a customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -3504,7 +3504,7 @@ it('should place a virtual product order for a customer and send email to the us
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -3653,7 +3653,7 @@ it('should place a downloadable product order for a customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -3794,7 +3794,7 @@ it('should place a downloadable product order for a customer and send email to t
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -3939,7 +3939,7 @@ it('should not return the cash on delivery payment method if product is download
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -4041,7 +4041,7 @@ it('should not return the shipping methods if product is downloadable', function
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -4142,7 +4142,7 @@ it('should not return the cash on delivery payment method if product is virtual'
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -4244,7 +4244,7 @@ it('should not return the shipping methods if product is virtual', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -4370,7 +4370,7 @@ it('should place order with two products with simple and configurable product ty
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'shipping_method' => 'free_free',
     ]);
 
@@ -4850,7 +4850,7 @@ it('should place order with two products with simple and downloadable product ty
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'shipping_method' => 'free_free',
     ]);
 

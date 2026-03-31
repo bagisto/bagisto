@@ -53,7 +53,7 @@ it('should fails the validation error when store the transaction when certain in
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -259,7 +259,7 @@ it('should store the order transaction', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -508,7 +508,7 @@ it('should view the transaction', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [

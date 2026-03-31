@@ -27,6 +27,17 @@ class RMAReason extends Model implements RMAReasonContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'boolean',
+        'position' => 'integer',
+        'is_admin' => 'boolean',
+    ];
+
+    /**
      * Define has many relationship with rma resolution.
      */
     public function reasonResolutions(): HasMany

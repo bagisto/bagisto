@@ -58,7 +58,7 @@ it('should store the newly create email template', function () {
     postJson(route('admin.marketing.communications.email_templates.store', [
         'name' => $name = fake()->name(),
         'status' => $status = fake()->randomElement(['active', 'inactive', 'draft']),
-        'content' => $content = substr(fake()->paragraph(), 0, 50),
+        'content' => $content = rtrim(substr(fake()->paragraph(), 0, 50)),
     ]))
         ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
         ->isRedirect();
@@ -126,7 +126,7 @@ it('should update the existing the template', function () {
     putJson(route('admin.marketing.communications.email_templates.update', $marketingEmailTemplate->id), $data = [
         'name' => $marketingEmailTemplate->name,
         'status' => fake()->randomElement(['active', 'inactive', 'draft']),
-        'content' => substr(fake()->paragraph(), 0, 50),
+        'content' => rtrim(substr(fake()->paragraph(), 0, 50)),
     ])
         ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
         ->isRedirect();

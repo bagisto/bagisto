@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('attribute_family_id')->unsigned();
             $table->string('name');
-            $table->integer('position');
+            $table->integer('position')->default(0);
             $table->boolean('is_user_defined')->default(1);
 
             $table->unique(['attribute_family_id', 'name']);

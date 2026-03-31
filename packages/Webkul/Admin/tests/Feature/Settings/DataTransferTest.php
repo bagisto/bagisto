@@ -399,11 +399,11 @@ it('should handle process_in_queue option correctly', function () {
         ->assertSessionHas('success');
 
     // Verify the import with process_in_queue = 1 exists
-    $importWithQueue = Import::where('process_in_queue', 1)->latest()->first();
+    $importWithQueue = Import::where('process_in_queue', true)->latest()->first();
 
     expect($importWithQueue)->not->toBeNull();
 
-    expect($importWithQueue->process_in_queue)->toBe(1);
+    expect($importWithQueue->process_in_queue)->toBe(true);
 
     expect($importWithQueue->type)->toBe('customers');
 
@@ -429,7 +429,7 @@ it('should handle process_in_queue option correctly', function () {
 
     expect($importWithoutQueue)->not->toBeNull();
 
-    expect($importWithoutQueue->process_in_queue)->toBe(0);
+    expect($importWithoutQueue->process_in_queue)->toBe(false);
 });
 
 it('should sanitize filename when storing import', function () {

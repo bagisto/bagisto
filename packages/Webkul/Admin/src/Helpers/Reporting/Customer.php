@@ -25,7 +25,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves total customers and their progress.
+     * Retrieve total customers and their progress.
      */
     public function getTotalCustomersProgress(): array
     {
@@ -37,7 +37,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Returns previous customers over time
+     * Return previous customers over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -48,7 +48,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Returns current customers over time
+     * Return current customers over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -59,7 +59,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves today customers and their progress.
+     * Retrieve today's customers and their progress.
      */
     public function getTodayCustomersProgress(): array
     {
@@ -71,7 +71,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves total customers by date
+     * Retrieve total customers for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -86,7 +86,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves total reviews and their progress.
+     * Retrieve total reviews and their progress.
      */
     public function getTotalReviewsProgress(): array
     {
@@ -98,7 +98,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves total reviews by date
+     * Retrieve total reviews for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -115,7 +115,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Gets customer with most sales.
+     * Retrieve customers with the highest total sales revenue.
      *
      * @param  int  $limit
      */
@@ -141,7 +141,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Gets customer with most orders.
+     * Retrieve customers with the highest number of orders.
      *
      * @param  int  $limit
      */
@@ -166,7 +166,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Gets customer with most orders.
+     * Retrieve customers with the highest number of approved reviews.
      *
      * @param  int  $limit
      */
@@ -196,7 +196,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Gets customer with most sales.
+     * Retrieve customer groups with the highest number of customers.
      *
      * @param  int  $limit
      */
@@ -216,7 +216,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Returns over time stats.
+     * Return total customers over time for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate

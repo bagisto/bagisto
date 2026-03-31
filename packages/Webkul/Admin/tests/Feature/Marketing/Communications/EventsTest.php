@@ -34,7 +34,7 @@ it('should store the newly create event', function () {
 
     postJson(route('admin.marketing.communications.events.store', $data = [
         'name' => fake()->name(),
-        'description' => substr(fake()->paragraph(), 0, 50),
+        'description' => rtrim(substr(fake()->paragraph(), 0, 50)),
         'date' => fake()->date(),
     ]))
         ->assertOk()
@@ -87,7 +87,7 @@ it('should update the existing the events', function () {
     putJson(route('admin.marketing.communications.events.update'), [
         'id' => $event->id,
         'name' => $event->name,
-        'description' => $description = substr(fake()->paragraph(), 0, 50),
+        'description' => $description = rtrim(substr(fake()->paragraph(), 0, 50)),
         'date' => $date = fake()->date(),
     ])
         ->assertOk()

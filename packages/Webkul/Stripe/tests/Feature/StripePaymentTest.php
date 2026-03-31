@@ -194,5 +194,5 @@ it('successfully processes stripe payment and creates order with invoice', funct
     // Verify cart was deactivated
     $cart->refresh();
 
-    expect($cart->is_active)->toBe(0);
+    expect($cart->is_active)->toBe(false);
 });

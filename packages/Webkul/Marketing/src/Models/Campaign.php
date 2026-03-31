@@ -38,6 +38,15 @@ class Campaign extends Model implements CampaignContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'boolean',
+    ];
+
+    /**
      * Get the event
      */
     public function event()

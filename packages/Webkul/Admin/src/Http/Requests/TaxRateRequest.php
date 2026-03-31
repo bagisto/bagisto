@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class TaxRateRequest extends FormRequest
 {
@@ -33,7 +34,7 @@ class TaxRateRequest extends FormRequest
         ];
 
         if ($this->id) {
-            $rules['identifier'] = 'required|string|unique:tax_rates,identifier,'.$this->id;
+            $rules['identifier'] = ['required', 'string', Rule::unique('tax_rates', 'identifier')->ignore($this->id)];
         } else {
             $rules['identifier'] = 'required|string|unique:tax_rates,identifier';
         }

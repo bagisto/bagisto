@@ -22,6 +22,7 @@ class CampaignFactory extends Factory
         return [
             'name' => fake()->name(),
             'subject' => fake()->title(),
+            'status' => true,
         ];
     }
 }
