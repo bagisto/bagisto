@@ -14,18 +14,12 @@ namespace Webkul\Core\Contracts;
 interface DatabaseGrammar
 {
     /**
-     * Concatenate columns/literals.
-     *
-     * MySQL:  CONCAT(a, ' ', b)
-     * PgSQL:  (COALESCE(a, '') || ' ' || COALESCE(b, ''))
+     * Concatenate columns or literals into a single string expression.
      */
     public function concat(string ...$parts): string;
 
     /**
-     * Aggregate values into a separated string.
-     *
-     * MySQL:  GROUP_CONCAT([DISTINCT] col [ORDER BY col] SEPARATOR ',')
-     * PgSQL:  STRING_AGG([DISTINCT] col::text, ',' [ORDER BY col])
+     * Aggregate column values into a delimited string.
      */
     public function groupConcat(
         string $column,
@@ -36,72 +30,49 @@ interface DatabaseGrammar
     ): string;
 
     /**
-     * Search for a value in a comma-separated string column.
-     *
-     * MySQL:  FIND_IN_SET(?, column)
-     * PgSQL:  ? = ANY(STRING_TO_ARRAY(column, ','))
+     * Search for a value within a comma-separated string column.
      *
      * @deprecated Prefer normalized pivot tables over comma-separated storage.
      */
     public function findInSet(string $needle, string $column): string;
 
     /**
-     * Order by a specific sequence of values.
-     *
-     * MySQL:  FIELD(column, 1,2,3)
-     * PgSQL:  COALESCE(ARRAY_POSITION(ARRAY[1,2,3], column), N+1)
+     * Order results by a specific sequence of values.
      */
     public function orderByField(string $column, array $values): string;
 
     /**
-     * Format a date column. Accepts MySQL-style format: %Y, %m, %d, %H, %i, %s
-     *
-     * MySQL:  DATE_FORMAT(col, '%Y-%m')
-     * PgSQL:  TO_CHAR(col, 'YYYY-MM')
+     * Format a date column using MySQL-style placeholders: %Y, %m, %d, %H, %i, %s.
      */
     public function dateFormat(string $column, string $format): string;
 
     /**
-     * Days between two date expressions (date1 - date2).
-     *
-     * MySQL:  DATEDIFF(date1, date2)
-     * PgSQL:  (date1::date - date2::date)
+     * Calculate the number of days between two date expressions (date1 - date2).
      */
     public function dateDiff(string $date1, string $date2): string;
 
     /**
-     * Current timestamp expression.
+     * Return the current timestamp expression.
      */
     public function now(): string;
 
     /**
-     * Extract a date part as integer.
-     *
-     * Supported parts: MONTH, WEEK, DAYOFYEAR, YEAR, DAY
+     * Extract a date part (MONTH, WEEK, DAYOFYEAR, YEAR, DAY) as an integer expression.
      */
     public function extractDatePart(string $part, string $column): string;
 
     /**
-     * Extract month-day from a date column (for birthday matching).
-     *
-     * MySQL:  DATE_FORMAT(col, '%m-%d')
-     * PgSQL:  TO_CHAR(col, 'MM-DD')
+     * Extract the month and day from a date column, formatted as MM-DD.
      */
     public function monthDay(string $column): string;
 
     /**
-     * Extract a text value from a JSON column.
-     *
-     * MySQL:  json_unquote(json_extract(col, '$.key'))
-     * PgSQL:  (col::jsonb->>'key')
+     * Extract a text value from a JSON column at the given path.
      */
     public function jsonExtractText(string $column, string $path): string;
 
     /**
-     * Extract a numeric value from a JSON column (safe for SUM/AVG).
-     *
-     * MySQL:  COALESCE(CAST(json_unquote(json_extract(col, '$.key')) AS SIGNED), 0)
-     * PgSQL:  COALESCE(NULLIF(col::jsonb->>'key', '')::bigint, 0)
+     * Extract a numeric value from a JSON column, returning 0 for null or empty values.
      */
     public function jsonExtractNumeric(string $column, string $path): string;
 }

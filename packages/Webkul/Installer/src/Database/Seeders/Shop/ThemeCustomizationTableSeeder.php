@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class ThemeCustomizationTableSeeder extends Seeder
 {

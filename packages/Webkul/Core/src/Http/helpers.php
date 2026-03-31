@@ -4,6 +4,7 @@ use Stevebauman\Purify\Facades\Purify;
 use Webkul\Core\Contracts\DatabaseGrammar;
 use Webkul\Core\Facades\Acl;
 use Webkul\Core\Facades\Core;
+use Webkul\Core\Facades\DbGrammar;
 use Webkul\Core\Facades\Menu;
 use Webkul\Core\Facades\SystemConfig;
 
@@ -63,7 +64,7 @@ if (! function_exists('db_grammar')) {
      */
     function db_grammar()
     {
-        return app(DatabaseGrammar::class);
+        return DbGrammar::getFacadeRoot();
     }
 }
 

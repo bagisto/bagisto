@@ -4,7 +4,7 @@ namespace Webkul\Installer\Database\Seeders\RMA;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class RMAStatusSeeder extends Seeder
 {
