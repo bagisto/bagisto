@@ -37,6 +37,6 @@ class InventorySourceTableSeeder extends Seeder
             'postcode' => '48127',
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['inventory_sources']);
     }
 }

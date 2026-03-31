@@ -88,6 +88,6 @@ class ChannelTableSeeder extends Seeder
             'inventory_source_id' => 1,
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['channels']);
     }
 }

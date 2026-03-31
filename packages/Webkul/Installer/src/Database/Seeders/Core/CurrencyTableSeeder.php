@@ -113,6 +113,6 @@ class CurrencyTableSeeder extends Seeder
             ]);
         }
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['currencies']);
     }
 }

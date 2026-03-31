@@ -22,8 +22,6 @@ class AttributeGroupTableSeeder extends Seeder
 
         DB::table('attribute_group_mappings')->delete();
 
-        DB::table('attribute_groups')->delete();
-
         $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
 
         DB::table('attribute_groups')->insert([
@@ -256,6 +254,6 @@ class AttributeGroupTableSeeder extends Seeder
             ],
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['attribute_groups']);
     }
 }

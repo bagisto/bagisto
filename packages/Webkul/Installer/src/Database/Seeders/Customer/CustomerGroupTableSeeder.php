@@ -41,6 +41,6 @@ class CustomerGroupTableSeeder extends Seeder
             ],
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['customer_groups']);
     }
 }

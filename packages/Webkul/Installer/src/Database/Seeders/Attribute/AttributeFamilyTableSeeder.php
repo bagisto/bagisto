@@ -32,6 +32,6 @@ class AttributeFamilyTableSeeder extends Seeder
             ],
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['attribute_families']);
     }
 }

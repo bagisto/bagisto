@@ -170,6 +170,6 @@ class ConfigTableSeeder extends Seeder
             ],
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['core_config']);
     }
 }

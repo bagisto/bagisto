@@ -79,6 +79,6 @@ class RMAStatusSeeder extends Seeder
 
         DB::table('rma_statuses')->insert($defaultStatuses);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['rma_statuses']);
     }
 }

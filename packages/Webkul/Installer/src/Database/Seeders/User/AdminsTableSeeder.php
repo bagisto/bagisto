@@ -39,6 +39,6 @@ class AdminsTableSeeder extends Seeder
             'role_id' => 1,
         ]);
 
-        $this->syncPostgresSequences();
+        $this->syncPostgresSequences(['admins']);
     }
 }
