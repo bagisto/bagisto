@@ -54,7 +54,7 @@ it('should returns the sales stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -324,7 +324,7 @@ it('should returns the abandoned carts stats', function () {
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
         'created_at' => Carbon::now()->subMonth()->toDateString(),
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     CartItem::factory()->create([
@@ -385,7 +385,7 @@ it('should returns the total orders stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -645,7 +645,7 @@ it('should returns the average sale stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -908,7 +908,7 @@ it('should returns the shipping collected stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1167,7 +1167,7 @@ it('should returns the tax collected stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1427,7 +1427,7 @@ it('should returns the refunds stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1687,7 +1687,7 @@ it('should returns the top payment methods stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -1946,7 +1946,7 @@ it('should return the view page of sales stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -2202,7 +2202,7 @@ it('should export the sales stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $customer = Customer::factory()->create();
@@ -2212,7 +2212,7 @@ it('should export the sales stats', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [

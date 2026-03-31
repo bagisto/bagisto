@@ -51,7 +51,7 @@ it('should create the customer if none exists when creating an order', function 
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'is_active' => 0,
         'items_count' => null,
     ]);
@@ -121,7 +121,7 @@ it('should add product to the cart after search the product', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'is_active' => 0,
         'items_count' => null,
     ]);
@@ -182,7 +182,7 @@ it('should update the cart item after add product to the cart', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'is_active' => 0,
         'items_count' => null,
     ]);
@@ -277,7 +277,7 @@ it('should fails the validation error if billing and shipping address is not pro
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'is_active' => 0,
         'items_count' => null,
     ]);
@@ -355,7 +355,7 @@ it('should add billing address after add item to the cart', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'is_active' => 0,
         'items_count' => null,
     ]);
@@ -467,7 +467,7 @@ it('should add billing and shipping address after add item to the cart', functio
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'is_active' => 0,
         'items_count' => null,
     ]);
@@ -589,7 +589,7 @@ it('should the shipping rates after storing address', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'is_active' => 0,
         'items_count' => null,
     ]);
@@ -620,13 +620,13 @@ it('should the shipping rates after storing address', function () {
 
     CartAddress::factory()->create([
         'cart_id' => $cart->id,
-        'customer_Id' => $customer->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
     ]);
 
     CartAddress::factory()->create([
         'cart_id' => $cart->id,
-        'customer_Id' => $customer->id,
+        'customer_id' => $customer->id,
         'address_type' => CartAddress::ADDRESS_TYPE_SHIPPING,
     ]);
 
@@ -697,7 +697,7 @@ it('should store the payment method after storing the shipping method', function
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'is_active' => 0,
         'items_count' => null,
     ]);
@@ -751,7 +751,7 @@ it('should store the payment method after storing the shipping method', function
         ],
     ])
         ->assertJsonPath('cart.id', $cart->id)
-        ->assertJsonPath('cart.is_guest', 0)
+        ->assertJsonPath('cart.is_guest', false)
         ->assertJsonPath('cart.items_count', 1)
         ->assertJsonPath('cart.customer_id', $customer->id)
         ->assertJsonPath('cart.items_count', 1)
@@ -840,7 +840,7 @@ it('should place order via admin', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'shipping_method' => 'free_free',
         'is_active' => 0,
     ]);
@@ -1017,7 +1017,7 @@ it('should add a simple product wishlisted item to the cart', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $wishlist = Wishlist::factory()->create([
@@ -1079,7 +1079,7 @@ it('should add a configurable product wishlisted item to the cart', function () 
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $wishlist = Wishlist::factory()->create([
@@ -1231,7 +1231,7 @@ it('show add a simple product to the cart from compared items', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $compare = CompareItem::factory()->create([
@@ -1292,7 +1292,7 @@ it('show add a configurable product to the cart from compared items', function (
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $compare = CompareItem::factory()->create([
@@ -1362,7 +1362,7 @@ it('should return the list of the recent orders', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [

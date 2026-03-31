@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('usage_per_customer')->default(0);
             $table->integer('uses_per_coupon')->default(0);
             $table->integer('times_used')->unsigned()->default(0);
-            $table->boolean('condition_type')->default(1);
+            $table->tinyInteger('condition_type')->default(1);
             $table->jsonb('conditions')->nullable();
             $table->boolean('end_other_rules')->default(0);
             $table->boolean('uses_attribute_conditions')->default(0);

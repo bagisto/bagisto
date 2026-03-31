@@ -80,7 +80,7 @@ it('should update the subscriber', function () {
         SubscribersList::class => [
             [
                 'id' => $subscriber->id,
-                'is_subscribed' => $isSubscribed,
+                'is_subscribed' => (bool) $isSubscribed,
             ],
         ],
     ]);

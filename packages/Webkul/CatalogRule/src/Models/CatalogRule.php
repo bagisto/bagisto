@@ -42,6 +42,10 @@ class CatalogRule extends Model implements CatalogRuleContract
      */
     protected $casts = [
         'conditions' => 'array',
+        'status' => 'boolean',
+        'condition_type' => 'integer',
+        'end_other_rules' => 'boolean',
+        'sort_order' => 'integer',
     ];
 
     /**

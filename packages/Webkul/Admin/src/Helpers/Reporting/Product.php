@@ -32,7 +32,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Retrieves total sold quantities and their progress.
+     * Retrieve total sold quantities and their progress.
      *
      * @return array
      */
@@ -46,7 +46,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Returns previous sold quantities over time
+     * Return previous sold quantities over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -57,7 +57,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Returns current sold quantities over time
+     * Return current sold quantities over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -68,7 +68,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Retrieves total sold quantities.
+     * Retrieve total sold quantities for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -84,7 +84,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Retrieves total products added to wishlist and their progress.
+     * Retrieve total products added to wishlist and their progress.
      *
      * @return array
      */
@@ -98,7 +98,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Returns previous products added to wishlist over time
+     * Return previous products added to wishlist over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -109,7 +109,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Returns current products added to wishlist over time
+     * Return current products added to wishlist over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -120,7 +120,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Retrieves total products added to wishlist.
+     * Retrieve total products added to wishlist for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -135,7 +135,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Retrieves total reviews and their progress.
+     * Retrieve total reviews and their progress.
      */
     public function getTotalReviewsProgress(): array
     {
@@ -147,7 +147,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Retrieves total reviews by date
+     * Retrieve total reviews for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -164,17 +164,24 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Gets stock threshold.
+     * Retrieve products with stock below threshold, grouped by product and inventory source.
      *
      * @param  int  $limit
      */
     public function getStockThresholdProducts($limit = null): EloquentCollection
     {
+        $prefix = DB::getTablePrefix();
+
         return $this->productInventoryRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->leftJoin('product_channels', 'product_inventories.product_id', '=', 'product_channels.product_id')
-            ->select('product_inventories.product_id', 'product_inventories.inventory_source_id', DB::raw('SUM(qty) as total_qty'))
+            ->select(
+                DB::raw("MIN({$prefix}product_inventories.id) as id"),
+                'product_inventories.product_id',
+                'product_inventories.inventory_source_id',
+                DB::raw('SUM(qty) as total_qty')
+            )
             ->whereIn('channel_id', $this->channelIds)
             ->groupBy('product_inventories.product_id', 'product_inventories.inventory_source_id')
             ->orderBy('total_qty', 'ASC')
@@ -183,22 +190,31 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Gets top-selling products by revenue.
+     * Retrieve top-selling products ranked by revenue.
      *
      * @param  int  $limit
      */
     public function getTopSellingProductsByRevenue($limit = null): Collection
     {
+        $prefix = DB::getTablePrefix();
+
         $items = $this->orderItemRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
-            ->addSelect('order_items.product_id', 'order_items.name', 'order_items.price', DB::raw('SUM(base_total_invoiced - base_amount_refunded) as revenue'))
+            ->addSelect(
+                DB::raw("MIN({$prefix}order_items.id) as id"),
+                'order_items.product_id',
+                'order_items.product_type',
+                'order_items.name',
+                'order_items.price',
+                DB::raw('SUM(base_total_invoiced - base_amount_refunded) as revenue')
+            )
             ->whereNull('parent_id')
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
             ->having(DB::raw('SUM(base_total_invoiced - base_amount_refunded)'), '>', 0)
-            ->groupBy('order_items.product_id', 'order_items.name', 'order_items.price')
+            ->groupBy('order_items.product_id', 'order_items.product_type', 'order_items.name', 'order_items.price')
             ->orderBy('revenue', 'DESC')
             ->limit($limit)
             ->get();
@@ -219,22 +235,31 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Gets top-selling products by quantity.
+     * Retrieve top-selling products ranked by quantity sold.
      *
      * @param  int  $limit
      */
     public function getTopSellingProductsByQuantity($limit = null): Collection
     {
+        $prefix = DB::getTablePrefix();
+
         $items = $this->orderItemRepository
             ->resetModel()
             ->with(['product', 'product.attribute_family', 'product.attribute_values', 'product.images'])
             ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
-            ->addSelect('order_items.product_id', 'order_items.name', 'order_items.price', DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_ordered'))
+            ->addSelect(
+                DB::raw("MIN({$prefix}order_items.id) as id"),
+                'order_items.product_id',
+                'order_items.product_type',
+                'order_items.name',
+                'order_items.price',
+                DB::raw('SUM(qty_invoiced - qty_refunded) as total_qty_ordered')
+            )
             ->whereNull('parent_id')
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('order_items.created_at', [$this->startDate, $this->endDate])
             ->having(DB::raw('SUM(qty_invoiced - qty_refunded)'), '>', 0)
-            ->groupBy('order_items.product_id', 'order_items.name', 'order_items.price')
+            ->groupBy('order_items.product_id', 'order_items.product_type', 'order_items.name', 'order_items.price')
             ->orderBy('total_qty_ordered', 'DESC')
             ->limit($limit)
             ->get();
@@ -254,18 +279,19 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Gets products with most orders.
+     * Retrieve products with the most approved reviews.
      *
      * @param  int  $limit
      */
     public function getProductsWithMostReviews($limit = null): EloquentCollection
     {
-        $tablePrefix = DB::getTablePrefix();
+        $prefix = DB::getTablePrefix();
 
         $products = $this->reviewRepository
             ->resetModel()
             ->leftJoin('product_channels', 'product_reviews.product_id', '=', 'product_channels.product_id')
             ->addSelect(
+                DB::raw("MIN({$prefix}product_reviews.id) as id"),
                 'product_reviews.product_id',
                 DB::raw('COUNT(*) as reviews')
             )
@@ -285,7 +311,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Gets last search terms
+     * Retrieve the most recent search terms.
      *
      * @param  int  $limit
      */
@@ -301,7 +327,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Gets top search terms
+     * Retrieve the most used search terms.
      *
      * @param  int  $limit
      */
@@ -316,7 +342,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Returns sold quantities over time
+     * Return sold quantities over time for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -357,7 +383,7 @@ class Product extends AbstractReporting
     }
 
     /**
-     * Returns products added to wishlist over time
+     * Return products added to wishlist over time for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate

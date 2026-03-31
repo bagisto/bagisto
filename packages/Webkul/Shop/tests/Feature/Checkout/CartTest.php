@@ -125,7 +125,7 @@ it('should display the cart items for a customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -269,7 +269,7 @@ it('should fails the validation error when the cart item id not provided when re
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -355,7 +355,7 @@ it('should fails the validation error when the wrong cart item id provided when 
 
     // Act and Assert.
     deleteJson(route('shop.api.checkout.cart.destroy'), [
-        'cart_item_id' => 'WRONG_ID',
+        'cart_item_id' => 0,
     ])
         ->assertJsonValidationErrorFor('cart_item_id')
         ->assertUnprocessable();
@@ -384,7 +384,7 @@ it('should fails the validation error when the wrong cart item id provided when 
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -415,7 +415,7 @@ it('should fails the validation error when the wrong cart item id provided when 
 
     // Act and Assert.
     deleteJson(route('shop.api.checkout.cart.destroy'), [
-        'cart_item_id' => 'WRONG_ID',
+        'cart_item_id' => 0,
     ])
         ->assertJsonValidationErrorFor('cart_item_id')
         ->assertUnprocessable();
@@ -520,7 +520,7 @@ it('should remove only one product item from the cart for the customer', functio
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional = [
@@ -740,7 +740,7 @@ it('should only remove one product from the cart for now the cart will contains 
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional1 = [
@@ -881,7 +881,7 @@ it('should not allow a user to remove another user\'s cart item', function () {
 
     $cartA = Cart::factory()->create([
         'customer_id' => $customerA->id,
-        'is_guest' => 0,
+        'is_guest' => false,
         'customer_first_name' => $customerA->first_name,
         'customer_last_name' => $customerA->last_name,
         'customer_email' => $customerA->email,
@@ -916,7 +916,7 @@ it('should not allow a user to remove another user\'s cart item', function () {
 
     $cartB = Cart::factory()->create([
         'customer_id' => $customerB->id,
-        'is_guest' => 0,
+        'is_guest' => false,
         'customer_first_name' => $customerB->first_name,
         'customer_last_name' => $customerB->last_name,
         'customer_email' => $customerB->email,
@@ -969,7 +969,7 @@ it('should not allow a guest user to remove another guest user\'s cart item', fu
 
     // Create Guest A's cart
     $cartA = Cart::factory()->create([
-        'is_guest' => 1,
+        'is_guest' => true,
     ]);
 
     $additional = [
@@ -998,7 +998,7 @@ it('should not allow a guest user to remove another guest user\'s cart item', fu
 
     // Create Guest B's cart and set it as active session
     $cartB = Cart::factory()->create([
-        'is_guest' => 1,
+        'is_guest' => true,
     ]);
 
     cart()->setCart($cartB);
@@ -1019,7 +1019,7 @@ it('should not allow a guest user to remove another guest user\'s cart item', fu
     // Assert that Guest A's cart still exists
     $this->assertDatabaseHas('cart', [
         'id' => $cartA->id,
-        'is_guest' => 1,
+        'is_guest' => true,
     ]);
 });
 
@@ -1049,7 +1049,7 @@ it('should not allow a guest user to remove a customer\'s cart item', function (
 
     $customerCart = Cart::factory()->create([
         'customer_id' => $customer->id,
-        'is_guest' => 0,
+        'is_guest' => false,
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
@@ -1081,7 +1081,7 @@ it('should not allow a guest user to remove a customer\'s cart item', function (
 
     // Create guest cart and set it as active session
     $guestCart = Cart::factory()->create([
-        'is_guest' => 1,
+        'is_guest' => true,
     ]);
 
     cart()->setCart($guestCart);
@@ -1103,7 +1103,7 @@ it('should not allow a guest user to remove a customer\'s cart item', function (
     $this->assertDatabaseHas('cart', [
         'id' => $customerCart->id,
         'customer_id' => $customer->id,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 });
 
@@ -1130,7 +1130,7 @@ it('should not allow a customer to remove a guest user\'s cart item', function (
 
     // Create guest cart
     $guestCart = Cart::factory()->create([
-        'is_guest' => 1,
+        'is_guest' => true,
     ]);
 
     $additional = [
@@ -1162,7 +1162,7 @@ it('should not allow a customer to remove a guest user\'s cart item', function (
 
     $customerCart = Cart::factory()->create([
         'customer_id' => $customer->id,
-        'is_guest' => 0,
+        'is_guest' => false,
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
@@ -1188,7 +1188,7 @@ it('should not allow a customer to remove a guest user\'s cart item', function (
     // Assert that guest's cart still exists
     $this->assertDatabaseHas('cart', [
         'id' => $guestCart->id,
-        'is_guest' => 1,
+        'is_guest' => true,
     ]);
 });
 
@@ -1310,7 +1310,7 @@ it('should remove all products from the cart for a customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional1 = [
@@ -1539,7 +1539,7 @@ it('should update cart quantities for customer', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
     ]);
 
     $additional1 = [
@@ -1709,7 +1709,7 @@ it('should add a simple product to the cart for guest user', function () {
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
-        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.is_guest', true)
         ->assertJsonPath('data.customer_id', null)
         ->assertJsonPath('data.items_qty', $quantity)
         ->assertJsonPath('data.tax_total', 0)
@@ -1761,7 +1761,7 @@ it('should add a simple product to the cart for customer', function () {
     ]))
         ->assertOk()
         ->assertJsonPath('data.items_count', 1)
-        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.is_guest', false)
         ->assertJsonPath('data.customer_id', $customer->id)
         ->assertJsonPath('data.items_qty', $quantity)
         ->assertJsonPath('data.tax_total', 0)
@@ -1895,7 +1895,7 @@ it('should add a bundle product to the cart for guest user', function () {
         ->assertJsonPath('data.items.0.quantity', 1)
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.is_guest', true)
         ->assertJsonPath('data.customer_id', null)
         ->assertJsonPath('data.tax_total', 0)
         ->assertJsonPath('data.discount_amount', 0)
@@ -1967,7 +1967,7 @@ it('should add a bundle product to the cart for customer', function () {
         ->assertJsonPath('data.items.0.quantity', 1)
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.is_guest', false)
         ->assertJsonPath('data.customer_id', $customer->id)
         ->assertJsonPath('data.tax_total', 0)
         ->assertJsonPath('data.discount_amount', 0)
@@ -2070,7 +2070,7 @@ it('should add a configurable product to the cart for guest user', function () {
         ->assertJsonPath('data.items.0.quantity', 1)
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.is_guest', true)
         ->assertJsonPath('data.discount_amount', 0)
         ->assertJsonPath('data.tax_total', 0)
         ->assertJsonPath('data.have_stockable_items', true)
@@ -2132,7 +2132,7 @@ it('should add a configurable product to the cart for customer', function () {
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.quantity', 1)
         ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.is_guest', false)
         ->assertJsonPath('data.have_stockable_items', true)
         ->assertJsonPath('data.customer_id', $customer->id)
         ->assertJsonPath('data.coupon_code', null)
@@ -2223,7 +2223,7 @@ it('should add a downloadable product to the cart for guest user', function () {
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.quantity', 1)
         ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.is_guest', true)
         ->assertJsonPath('data.have_stockable_items', false)
         ->assertJsonPath('data.customer_id', null)
         ->assertJsonPath('data.coupon_code', null)
@@ -2276,7 +2276,7 @@ it('should add a downloadable product to the cart for customer', function () {
         ->assertJsonPath('data.items.0.type', $product->type)
         ->assertJsonPath('data.items.0.quantity', 1)
         ->assertJsonPath('data.items.0.name', $product->name)
-        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.is_guest', false)
         ->assertJsonPath('data.have_stockable_items', false)
         ->assertJsonPath('data.customer_id', $customer->id)
         ->assertJsonPath('data.coupon_code', null)
@@ -2390,7 +2390,7 @@ it('should add a grouped product to the cart for guest user', function () {
         ->assertJsonPath('data.items_count', 4)
         ->assertJsonPath('data.shipping_address', null)
         ->assertJsonPath('data.payment_method', null)
-        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.is_guest', true)
         ->assertJsonPath('data.have_stockable_items', true)
         ->assertJsonPath('data.customer_id', null)
         ->assertJsonPath('data.coupon_code', null)
@@ -2463,7 +2463,7 @@ it('should add a grouped product to the cart for customer', function () {
         ->assertJsonPath('data.items_count', 4)
         ->assertJsonPath('data.shipping_address', null)
         ->assertJsonPath('data.payment_method', null)
-        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.is_guest', false)
         ->assertJsonPath('data.have_stockable_items', true)
         ->assertJsonPath('data.customer_id', $customer->id)
         ->assertJsonPath('data.coupon_code', null)
@@ -2554,7 +2554,7 @@ it('should add a virtual product to the cart for guest user', function () {
         ->assertJsonPath('data.items.0.name', $product->name)
         ->assertJsonPath('data.shipping_address', null)
         ->assertJsonPath('data.payment_method', null)
-        ->assertJsonPath('data.is_guest', 1)
+        ->assertJsonPath('data.is_guest', true)
         ->assertJsonPath('data.have_stockable_items', false)
         ->assertJsonPath('data.customer_id', null)
         ->assertJsonPath('data.coupon_code', null)
@@ -2604,7 +2604,7 @@ it('should add a virtual product to the cart for customer', function () {
         ->assertJsonPath('data.items.0.name', $product->name)
         ->assertJsonPath('data.shipping_address', null)
         ->assertJsonPath('data.payment_method', null)
-        ->assertJsonPath('data.is_guest', 0)
+        ->assertJsonPath('data.is_guest', false)
         ->assertJsonPath('data.have_stockable_items', false)
         ->assertJsonPath('data.customer_id', $customer->id)
         ->assertJsonPath('data.coupon_code', null)

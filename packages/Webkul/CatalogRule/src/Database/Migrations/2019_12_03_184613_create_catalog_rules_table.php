@@ -20,7 +20,7 @@ return new class extends Migration
             $table->date('starts_from')->nullable();
             $table->date('ends_till')->nullable();
             $table->boolean('status')->default(0);
-            $table->boolean('condition_type')->default(1);
+            $table->tinyInteger('condition_type')->default(1);
             $table->jsonb('conditions')->nullable();
             $table->boolean('end_other_rules')->default(0);
             $table->string('action_type')->nullable();

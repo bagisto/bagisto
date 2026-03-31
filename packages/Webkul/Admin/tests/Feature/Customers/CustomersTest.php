@@ -191,7 +191,7 @@ it('should store the notes for the customer', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.customer.note.store', $customer->id), [
-        'note' => $note = substr(fake()->paragraph(), 0, 50),
+        'note' => $note = rtrim(substr(fake()->paragraph(), 0, 50)),
     ])
         ->assertRedirect(route('admin.customers.customers.view', $customer->id))
         ->isRedirection();
@@ -217,7 +217,7 @@ it('should store the notes for the customer and send email to the customer', fun
     $this->loginAsAdmin();
 
     postJson(route('admin.customer.note.store', $customer->id), [
-        'note' => $note = substr(fake()->paragraph(), 0, 50),
+        'note' => $note = rtrim(substr(fake()->paragraph(), 0, 50)),
         'customer_notified' => 1,
     ])
         ->assertRedirect(route('admin.customers.customers.view', $customer->id))

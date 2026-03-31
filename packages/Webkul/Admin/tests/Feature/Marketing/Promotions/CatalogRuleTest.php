@@ -47,7 +47,7 @@ it('should store the newly created catalog rule', function () {
 
     postJson(route('admin.marketing.promotions.catalog_rules.store', [
         'name' => $name = fake()->name(),
-        'description' => $description = substr(fake()->paragraph(), 0, 50),
+        'description' => $description = rtrim(substr(fake()->paragraph(), 0, 50)),
         'channels' => [
             1,
         ],

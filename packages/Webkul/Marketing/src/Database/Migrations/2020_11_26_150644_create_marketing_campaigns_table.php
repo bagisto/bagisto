@@ -18,8 +18,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('subject');
             $table->boolean('status')->default(0);
-            $table->string('type');
-            $table->string('mail_to');
             $table->string('spooling')->nullable();
             $table->integer('channel_id')->unsigned()->nullable();
             $table->integer('customer_group_id')->unsigned()->nullable();

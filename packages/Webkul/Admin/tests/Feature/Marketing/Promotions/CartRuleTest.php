@@ -48,7 +48,7 @@ it('should store the newly created cart rule', function () {
 
     postJson(route('admin.marketing.promotions.cart_rules.store', [
         'name' => $name = fake()->name(),
-        'description' => $description = substr(fake()->paragraph(), 0, 50),
+        'description' => $description = rtrim(substr(fake()->paragraph(), 0, 50)),
 
         'channels' => [
             1,
@@ -142,7 +142,7 @@ it('should update the cart rule', function () {
 
     putJson(route('admin.marketing.promotions.cart_rules.update', $cartRule->id), [
         'name' => $name = fake()->name(),
-        'description' => $description = substr(substr(fake()->paragraph(), 0, 50), 0, 50),
+        'description' => $description = substr(rtrim(substr(fake()->paragraph(), 0, 50)), 0, 50),
 
         'channels' => [
             1,
