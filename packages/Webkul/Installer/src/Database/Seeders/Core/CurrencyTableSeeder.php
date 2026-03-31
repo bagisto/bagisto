@@ -4,7 +4,7 @@ namespace Webkul\Installer\Database\Seeders\Core;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class CurrencyTableSeeder extends Seeder
 {

@@ -5,7 +5,7 @@ namespace Webkul\Installer\Database\Seeders\Core;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class ConfigTableSeeder extends Seeder
 {

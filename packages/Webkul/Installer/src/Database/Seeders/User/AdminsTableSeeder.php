@@ -5,7 +5,7 @@ namespace Webkul\Installer\Database\Seeders\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
-use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class AdminsTableSeeder extends Seeder
 {

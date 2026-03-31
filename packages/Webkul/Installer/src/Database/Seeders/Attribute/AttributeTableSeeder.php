@@ -5,7 +5,7 @@ namespace Webkul\Installer\Database\Seeders\Attribute;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Webkul\Installer\Database\Seeders\SyncsPostgresSequences;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class AttributeTableSeeder extends Seeder
 {

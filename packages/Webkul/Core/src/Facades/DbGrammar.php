@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Facade;
 use Webkul\Core\Contracts\DatabaseGrammar;
 
 /**
+ * Database-dialect-specific SQL fragment generator.
+ *
  * @method static string concat(string ...$parts)
  * @method static string groupConcat(string $column, string $separator = ',', bool $distinct = false, ?string $orderBy = null, string $orderDirection = 'ASC')
  * @method static string findInSet(string $needle, string $column)
@@ -22,6 +24,9 @@ use Webkul\Core\Contracts\DatabaseGrammar;
  */
 class DbGrammar extends Facade
 {
+    /**
+     * Get the facade accessor for the database grammar implementation.
+     */
     protected static function getFacadeAccessor()
     {
         return DatabaseGrammar::class;
