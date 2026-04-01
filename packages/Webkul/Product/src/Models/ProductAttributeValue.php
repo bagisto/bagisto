@@ -41,6 +41,15 @@ class ProductAttributeValue extends Model implements ProductAttributeValueContra
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'boolean_value' => 'boolean',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
