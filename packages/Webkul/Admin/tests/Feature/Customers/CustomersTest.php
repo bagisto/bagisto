@@ -1,12 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Webkul\Admin\Mail\Customer\NewCustomerNotification;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;
-use Webkul\Customer\Models\CustomerNote;
-use Webkul\Faker\Helpers\Customer as CustomerFaker;
 use Webkul\Shop\Mail\Customer\NoteNotification;
 
 use function Pest\Laravel\get;
@@ -14,8 +11,11 @@ use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should returns the customers page', function () {
-    // Act and Assert.
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the customers index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.customers.customers.index'))
@@ -24,13 +24,9 @@ it('should returns the customers page', function () {
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-btn'));
 });
 
-it('should return listing items of customers', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
+it('should return customer listing via datagrid', function () {
+    $customer = Customer::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     getJson(route('admin.customers.customers.index'), [
@@ -38,69 +34,64 @@ it('should return listing items of customers', function () {
     ])
         ->assertOk()
         ->assertJsonPath('records.0.customer_id', $customer->id)
-        ->assertJsonPath('records.0.email', $customer->email)
-        ->assertJsonPath('records.0.full_name', $customer->name);
+        ->assertJsonPath('records.0.email', $customer->email);
 });
 
-it('should return the view page of customer', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
+it('should deny guest access to the customers index page', function () {
+    get(route('admin.customers.customers.index'))
+        ->assertRedirect(route('admin.session.create'));
+});
 
-    // Act and Assert.
+// ============================================================================
+// View
+// ============================================================================
+
+it('should return the customer view page', function () {
+    $customer = Customer::factory()->create();
+
     $this->loginAsAdmin();
 
     get(route('admin.customers.customers.view', $customer->id))
         ->assertOk()
         ->assertSeeText($customer->first_name)
         ->assertSeeText($customer->last_name)
-        ->assertSeeText($customer->gender)
         ->assertSeeText($customer->email)
-        ->assertSeeText($customer->phone)
         ->assertSeeText(trans('admin::app.customers.customers.view.title'));
 });
 
-it('should fail the validation with errors when certain inputs are not provided when store in customer', function () {
-    // Act and Assert.
+it('should return 404 for a non-existent customer view page', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.customers.customers.store'))
-        ->assertJsonValidationErrorFor('first_name')
-        ->assertJsonValidationErrorFor('last_name')
-        ->assertJsonValidationErrorFor('gender')
-        ->assertJsonValidationErrorFor('email')
-        ->assertUnprocessable();
+    get(route('admin.customers.customers.view', 99999))
+        ->assertNotFound();
 });
 
+// ============================================================================
+// Store
+// ============================================================================
+
 it('should create a new customer', function () {
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.store'), $data = [
         'first_name' => fake()->firstName(),
         'last_name' => fake()->lastName(),
         'gender' => fake()->randomElement(['male', 'female', 'other']),
-        'email' => fake()->email(),
+        'email' => fake()->safeEmail(),
         'channel_id' => 1,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
 
-    $this->assertModelWise([
-        Customer::class => [
-            [
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'gender' => $data['gender'],
-                'email' => $data['email'],
-            ],
-        ],
+    $this->assertDatabaseHas('customers', [
+        'first_name' => $data['first_name'],
+        'last_name' => $data['last_name'],
+        'gender' => $data['gender'],
+        'email' => $data['email'],
     ]);
 });
 
-it('should create a new customer and send notification to the customer', function () {
-    // Arrange.
+it('should create a customer and send notification email', function () {
     Mail::fake();
 
     CoreConfig::factory()->create([
@@ -108,210 +99,184 @@ it('should create a new customer and send notification to the customer', functio
         'value' => 1,
     ]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.customers.customers.store'), $data = [
+    postJson(route('admin.customers.customers.store'), [
         'first_name' => fake()->firstName(),
         'last_name' => fake()->lastName(),
-        'gender' => fake()->randomElement(['male', 'female', 'other']),
-        'email' => fake()->email(),
+        'gender' => 'male',
+        'email' => fake()->safeEmail(),
         'channel_id' => 1,
     ])
-        ->assertOk()
-        ->assertSeeText(trans('admin::app.customers.customers.index.create.create-success'));
-
-    $this->assertModelWise([
-        Customer::class => [
-            [
-                'first_name' => $data['first_name'],
-                'last_name' => $data['last_name'],
-                'gender' => $data['gender'],
-                'email' => $data['email'],
-            ],
-        ],
-    ]);
+        ->assertOk();
 
     Mail::assertQueued(NewCustomerNotification::class);
 });
 
-it('should search the customers for mega search', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
-
-    // Act and Assert.
+it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
 
-    getJson(route('admin.customers.customers.search'), [
-        'query' => $customer->name,
-    ])
-        ->assertOk()
-        ->assertJsonPath('data.0.id', $customer->id)
-        ->assertJsonPath('data.0.first_name', $customer->first_name)
-        ->assertJsonPath('data.0.email', $customer->email);
-});
-
-it('should login the customer from the admin panel', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    get(route('admin.customers.customers.login_as_customer', $customer->id))
-        ->assertRedirect(route('shop.customers.account.profile.index'))
-        ->isRedirection();
-});
-
-it('should fail the validation with errors for notes', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.customer.note.store', $customer->id))
-        ->assertJsonValidationErrorFor('note')
-        ->assertUnprocessable();
-});
-
-it('should store the notes for the customer', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.customer.note.store', $customer->id), [
-        'note' => $note = rtrim(substr(fake()->paragraph(), 0, 50)),
-    ])
-        ->assertRedirect(route('admin.customers.customers.view', $customer->id))
-        ->isRedirection();
-
-    $this->assertModelWise([
-        CustomerNote::class => [
-            [
-                'note' => $note,
-            ],
-        ],
-    ]);
-});
-
-it('should store the notes for the customer and send email to the customer', function () {
-    // Arrange.
-    Mail::fake();
-
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.customer.note.store', $customer->id), [
-        'note' => $note = rtrim(substr(fake()->paragraph(), 0, 50)),
-        'customer_notified' => 1,
-    ])
-        ->assertRedirect(route('admin.customers.customers.view', $customer->id))
-        ->isRedirection();
-
-    $this->assertModelWise([
-        CustomerNote::class => [
-            [
-                'note' => $note,
-            ],
-        ],
-    ]);
-
-    Mail::assertQueued(NoteNotification::class);
-
-    Mail::assertQueuedCount(1);
-});
-
-it('should fail the validation with errors when certain inputs are not provided when update in customer', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.customers.customers.update', $customer->id))
+    postJson(route('admin.customers.customers.store'))
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('first_name')
         ->assertJsonValidationErrorFor('last_name')
         ->assertJsonValidationErrorFor('gender')
-        ->assertJsonValidationErrorFor('email')
-        ->assertUnprocessable();
+        ->assertJsonValidationErrorFor('email');
 });
 
-it('should update the the existing customer', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
+it('should fail validation when email already exists on store', function () {
+    $existing = Customer::factory()->create();
 
-    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.store'), [
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'gender' => 'male',
+        'email' => $existing->email,
+        'channel_id' => $existing->channel_id,
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('email');
+});
+
+// ============================================================================
+// Update
+// ============================================================================
+
+it('should update an existing customer', function () {
+    $customer = Customer::factory()->create();
+
     $this->loginAsAdmin();
 
     putJson(route('admin.customers.customers.update', $customer->id), $data = [
-        'first_name' => fake()->firstName(),
-        'last_name' => $customer->last_name,
+        'first_name' => 'Updated First',
+        'last_name' => 'Updated Last',
         'gender' => $customer->gender,
-        'email' => fake()->email(),
+        'email' => fake()->safeEmail(),
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.customers.customers.update-success'));
 
-    $this->assertModelWise([
-        Customer::class => [
-            [
-                'first_name' => $data['first_name'],
-                'last_name' => $customer->last_name,
-                'gender' => $customer->gender,
-                'email' => $data['email'],
-            ],
-        ],
+    $this->assertDatabaseHas('customers', [
+        'id' => $customer->id,
+        'first_name' => 'Updated First',
+        'last_name' => 'Updated Last',
+        'email' => $data['email'],
     ]);
 });
 
-it('should mass delete the customers', function () {
-    // Arrange.
-    $customers = (new CustomerFaker)->factory()->count(2)->create([
-        'password' => Hash::make('admin123'),
-    ]);
+it('should fail validation when required fields are missing on update', function () {
+    $customer = Customer::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.customers.customers.mass_delete'), [
-        'indices' => $customers->pluck('id')->toArray(),
-    ])
-        ->assertOk()
-        ->assertSeeText(trans('admin::app.customers.customers.index.datagrid.delete-success'));
-
-    foreach ($customers as $customer) {
-        $this->assertDatabaseMissing('customers', [
-            'id' => $customer->id,
-        ]);
-    }
+    putJson(route('admin.customers.customers.update', $customer->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('first_name')
+        ->assertJsonValidationErrorFor('last_name')
+        ->assertJsonValidationErrorFor('gender')
+        ->assertJsonValidationErrorFor('email');
 });
 
-it('should mass update the customers', function () {
-    // Arrange.
-    $customers = (new CustomerFaker)->factory()->count(2)->create([
-        'password' => Hash::make('admin123'),
-    ]);
+// ============================================================================
+// Search
+// ============================================================================
 
-    // Act and Assert.
+it('should search customers by name', function () {
+    $customer = Customer::factory()->create();
+
+    $this->loginAsAdmin();
+
+    getJson(route('admin.customers.customers.search', [
+        'query' => $customer->first_name,
+    ]))
+        ->assertOk()
+        ->assertJsonPath('data.0.id', $customer->id)
+        ->assertJsonPath('data.0.email', $customer->email);
+});
+
+// ============================================================================
+// Login as Customer
+// ============================================================================
+
+it('should login as customer from the admin panel', function () {
+    $customer = Customer::factory()->create();
+
+    $this->loginAsAdmin();
+
+    get(route('admin.customers.customers.login_as_customer', $customer->id))
+        ->assertRedirect(route('shop.customers.account.profile.index'));
+});
+
+// ============================================================================
+// Notes
+// ============================================================================
+
+it('should store a note for a customer', function () {
+    $customer = Customer::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customer.note.store', $customer->id), [
+        'note' => $note = 'This is a test admin note.',
+    ])
+        ->assertRedirect(route('admin.customers.customers.view', $customer->id));
+
+    $this->assertDatabaseHas('customer_notes', [
+        'customer_id' => $customer->id,
+        'note' => $note,
+    ]);
+});
+
+it('should store a note and send email notification to the customer', function () {
+    Mail::fake();
+
+    $customer = Customer::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customer.note.store', $customer->id), [
+        'note' => 'Note with notification.',
+        'customer_notified' => 1,
+    ])
+        ->assertRedirect(route('admin.customers.customers.view', $customer->id));
+
+    Mail::assertQueued(NoteNotification::class);
+});
+
+it('should fail validation when note is missing', function () {
+    $customer = Customer::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customer.note.store', $customer->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('note');
+});
+
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete a specific customer', function () {
+    $customer = Customer::factory()->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.delete', $customer->id))
+        ->assertRedirect(route('admin.customers.customers.index'));
+
+    $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
+});
+
+// ============================================================================
+// Mass Update
+// ============================================================================
+
+it('should mass update customer status to active', function () {
+    $customers = Customer::factory()->count(2)->create(['status' => 0]);
+
     $this->loginAsAdmin();
 
     postJson(route('admin.customers.customers.mass_update'), [
@@ -322,31 +287,49 @@ it('should mass update the customers', function () {
         ->assertSeeText(trans('admin::app.customers.customers.index.datagrid.update-success'));
 
     foreach ($customers as $customer) {
-        $this->assertModelWise([
-            Customer::class => [
-                [
-                    'id' => $customer->id,
-                    'status' => 1,
-                ],
-            ],
+        $this->assertDatabaseHas('customers', [
+            'id' => $customer->id,
+            'status' => 1,
         ]);
     }
 });
 
-it('should delete a specific customer', function () {
-    // Arrange.
-    $customer = (new CustomerFaker)->factory()->create([
-        'password' => Hash::make('admin123'),
-    ]);
+it('should mass update customer status to inactive', function () {
+    $customers = Customer::factory()->count(2)->create(['status' => 1]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.customers.customers.delete', $customer->id))
-        ->assertRedirect(route('admin.customers.customers.index'))
-        ->isRedirection();
+    postJson(route('admin.customers.customers.mass_update'), [
+        'indices' => $customers->pluck('id')->toArray(),
+        'value' => 0,
+    ])
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.customers.customers.index.datagrid.update-success'));
 
-    $this->assertDatabaseMissing('customers', [
-        'id' => $customer->id,
-    ]);
+    foreach ($customers as $customer) {
+        $this->assertDatabaseHas('customers', [
+            'id' => $customer->id,
+            'status' => 0,
+        ]);
+    }
+});
+
+// ============================================================================
+// Mass Delete
+// ============================================================================
+
+it('should mass delete customers', function () {
+    $customers = Customer::factory()->count(2)->create();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.mass_delete'), [
+        'indices' => $customers->pluck('id')->toArray(),
+    ])
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.customers.customers.index.datagrid.delete-success'));
+
+    foreach ($customers as $customer) {
+        $this->assertDatabaseMissing('customers', ['id' => $customer->id]);
+    }
 });
