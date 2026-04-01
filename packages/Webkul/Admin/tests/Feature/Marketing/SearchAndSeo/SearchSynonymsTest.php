@@ -7,8 +7,11 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should show the search synonyms index page', function () {
-    // Act and Assert.
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the search synonyms index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.search_seo.search_synonyms.index'))
@@ -17,108 +20,106 @@ it('should show the search synonyms index page', function () {
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.create-btn'));
 });
 
-it('should fail the validation with errors when certain field not provided when store the search synonyms', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.marketing.search_seo.search_synonyms.store'))
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('terms')
-        ->assertUnprocessable();
+it('should deny guest access to the search synonyms index page', function () {
+    get(route('admin.marketing.search_seo.search_synonyms.index'))
+        ->assertRedirect(route('admin.session.create'));
 });
 
-it('should store the newly created search synonyms', function () {
-    // Act and Assert.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a newly created search synonym', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_synonyms.store'), [
-        'terms' => $term = fake()->randomElement(['jackets', 'shoes', 'footwear',  'phone', 'computers', 'electronics']),
-        'name' => $name = fake()->name(),
+        'name' => $name = fake()->words(2, true),
+        'terms' => $terms = 'sneakers, trainers, running shoes',
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.create.success'));
 
-    $this->assertModelWise([
-        SearchSynonym::class => [
-            [
-                'terms' => $term,
-                'name' => $name,
-            ],
-        ],
+    $this->assertDatabaseHas('search_synonyms', [
+        'name' => $name,
+        'terms' => $terms,
     ]);
 });
 
-it('should fail the validation with errors when certain field not provided when update the search synonyms', function () {
-    // Arrange.
-    $searchSynonym = SearchSynonym::factory()->create();
-
-    // Act and Assert.
+it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
 
-    putJson(route('admin.marketing.search_seo.search_synonyms.update', $searchSynonym->id))
+    postJson(route('admin.marketing.search_seo.search_synonyms.store'))
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('terms')
-        ->assertUnprocessable();
+        ->assertJsonValidationErrorFor('terms');
 });
 
-it('should update the search synonyms', function () {
-    // Arrange.
-    $searchSynonym = SearchSynonym::factory()->create();
+// ============================================================================
+// Update
+// ============================================================================
 
-    // Act and Assert.
+it('should update an existing search synonym', function () {
+    $synonym = SearchSynonym::factory()->create();
+
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.search_synonyms.update'), [
-        'id' => $searchSynonym->id,
-        'terms' => $term = fake()->randomElement(['jackets', 'phone', 'computers', 'electronics']),
-        'name' => $searchSynonym->name,
+        'id' => $synonym->id,
+        'name' => $synonym->name,
+        'terms' => $terms = 'laptop, notebook, ultrabook',
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.edit.success'));
 
-    $this->assertModelWise([
-        SearchSynonym::class => [
-            [
-                'id' => $searchSynonym->id,
-                'terms' => $term,
-                'name' => $searchSynonym->name,
-            ],
-        ],
+    $this->assertDatabaseHas('search_synonyms', [
+        'id' => $synonym->id,
+        'terms' => $terms,
     ]);
 });
 
-it('should delete the search synonyms', function () {
-    // Arrange.
-    $searchSynonym = SearchSynonym::factory()->create();
+it('should fail validation when required fields are missing on update', function () {
+    $synonym = SearchSynonym::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.marketing.search_seo.search_synonyms.delete', $searchSynonym->id))
+    putJson(route('admin.marketing.search_seo.search_synonyms.update', $synonym->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('terms');
+});
+
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete a search synonym', function () {
+    $synonym = SearchSynonym::factory()->create();
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.marketing.search_seo.search_synonyms.delete', $synonym->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.edit.delete-success'));
 
-    $this->assertDatabaseMissing('search_synonyms', [
-        'id' => $searchSynonym->id,
-    ]);
+    $this->assertDatabaseMissing('search_synonyms', ['id' => $synonym->id]);
 });
 
-it('should mass delete the search synonyms', function () {
-    // Arrange.
-    $searchSynonyms = SearchSynonym::factory()->count(2)->create();
+// ============================================================================
+// Mass Delete
+// ============================================================================
 
-    // Act and Assert.
+it('should mass delete search synonyms', function () {
+    $synonyms = SearchSynonym::factory()->count(2)->create();
+
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.search_synonyms.mass_delete'), [
-        'indices' => $searchSynonyms->pluck('id')->toArray(),
+        'indices' => $synonyms->pluck('id')->toArray(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.search-synonyms.index.datagrid.mass-delete-success'));
 
-    foreach ($searchSynonyms as $searchSynonym) {
-        $this->assertDatabaseMissing('search_synonyms', [
-            'id' => $searchSynonym->id,
-        ]);
+    foreach ($synonyms as $synonym) {
+        $this->assertDatabaseMissing('search_synonyms', ['id' => $synonym->id]);
     }
 });

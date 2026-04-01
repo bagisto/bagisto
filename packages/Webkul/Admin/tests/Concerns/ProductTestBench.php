@@ -171,7 +171,7 @@ trait ProductTestBench
         $this->putJson(route('admin.catalog.products.update', $product->id), $data)
             ->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::with('attribute_values.attribute')->find($product->id);
+        return Product::find($product->id);
     }
 
     /**
@@ -217,7 +217,7 @@ trait ProductTestBench
         $this->putJson(route('admin.catalog.products.update', $product->id), $data)
             ->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::with('attribute_values.attribute')->find($product->id);
+        return Product::find($product->id);
     }
 
     /**
@@ -276,8 +276,7 @@ trait ProductTestBench
             'variants' => $variants,
         ])->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::with(['variants.attribute_values.attribute', 'attribute_values.attribute'])
-            ->find($product->id);
+        return Product::find($product->id);
     }
 
     /**
@@ -345,8 +344,7 @@ trait ProductTestBench
         $this->putJson(route('admin.catalog.products.update', $product->id), $data)
             ->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::with(['attribute_values.attribute', 'downloadable_links', 'downloadable_samples'])
-            ->find($product->id);
+        return Product::find($product->id);
     }
 
     /**
@@ -398,8 +396,7 @@ trait ProductTestBench
             ],
         ])->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::with(['grouped_products', 'attribute_values.attribute'])
-            ->find($product->id);
+        return Product::find($product->id);
     }
 
     /**
@@ -462,8 +459,7 @@ trait ProductTestBench
             ],
         ])->assertRedirect(route('admin.catalog.products.index'));
 
-        return Product::with(['bundle_options.bundle_option_products', 'attribute_values.attribute'])
-            ->find($product->id);
+        return Product::find($product->id);
     }
 
     // ========================================================================

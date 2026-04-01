@@ -7,8 +7,11 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+// ============================================================================
+// Index
+// ============================================================================
+
 it('should return the events index page', function () {
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.events.index'))
@@ -17,102 +20,105 @@ it('should return the events index page', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.events.index.create-btn'));
 });
 
-it('should fail the validation with errors when certain inputs are not provided when store in events', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.marketing.communications.events.store'))
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('description')
-        ->assertJsonValidationErrorFor('date')
-        ->assertUnprocessable();
+it('should deny guest access to the events index page', function () {
+    get(route('admin.marketing.communications.events.index'))
+        ->assertRedirect(route('admin.session.create'));
 });
 
-it('should store the newly create event', function () {
-    // Act and Assert.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a newly created event', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.marketing.communications.events.store', $data = [
-        'name' => fake()->name(),
-        'description' => rtrim(substr(fake()->paragraph(), 0, 50)),
+    postJson(route('admin.marketing.communications.events.store'), $data = [
+        'name' => fake()->words(3, true),
+        'description' => fake()->sentence(),
         'date' => fake()->date(),
-    ]))
+    ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.events.index.create.success'));
 
-    $this->assertModelWise([
-        Event::class => [
-            [
-                'name' => $data['name'],
-                'description' => $data['description'],
-                'date' => $data['date'],
-            ],
-        ],
+    $this->assertDatabaseHas('marketing_events', [
+        'name' => $data['name'],
+        'description' => $data['description'],
+        'date' => $data['date'],
     ]);
 });
 
-it('should edit the events template', function () {
-    // Arrange.
+it('should fail validation when required fields are missing on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.communications.events.store'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('date');
+});
+
+// ============================================================================
+// Edit
+// ============================================================================
+
+it('should return event details as JSON', function () {
     $event = Event::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.events.edit', $event->id))
         ->assertOk()
-        ->assertJsonFragment($event->toArray());
+        ->assertJsonFragment(['name' => $event->name]);
 });
 
-it('should fail the validation with errors when certain inputs are not provided when update in events', function () {
-    // Arrange.
+// ============================================================================
+// Update
+// ============================================================================
+
+it('should update an existing event', function () {
     $event = Event::factory()->create();
 
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.marketing.communications.events.store', $event->id))
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('description')
-        ->assertJsonValidationErrorFor('date')
-        ->assertUnprocessable();
-});
-
-it('should update the existing the events', function () {
-    // Arrange.
-    $event = Event::factory()->create();
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.events.update'), [
         'id' => $event->id,
         'name' => $event->name,
-        'description' => $description = rtrim(substr(fake()->paragraph(), 0, 50)),
+        'description' => $description = fake()->sentence(),
         'date' => $date = fake()->date(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.events.index.edit.success'));
 
-    $this->assertModelWise([
-        Event::class => [
-            [
-                'id' => $event->id,
-                'name' => $event->name,
-                'description' => $description,
-                'date' => $date,
-            ],
-        ],
+    $this->assertDatabaseHas('marketing_events', [
+        'id' => $event->id,
+        'name' => $event->name,
+        'description' => $description,
+        'date' => $date,
     ]);
 });
 
-it('should delete the specified events', function () {
-    // Arrange.
+it('should fail validation when required fields are missing on update', function () {
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.events.update'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('description')
+        ->assertJsonValidationErrorFor('date');
+});
+
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete an event', function () {
     $event = Event::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.events.delete', $event->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.events.delete-success'));
+
+    $this->assertDatabaseMissing('marketing_events', ['id' => $event->id]);
 });
