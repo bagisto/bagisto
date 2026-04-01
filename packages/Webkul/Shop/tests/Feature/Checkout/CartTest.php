@@ -1869,14 +1869,17 @@ it('should add a bundle product to the cart for guest user', function () {
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        // The cart expects the ProductBundleOptionProduct ID, not the option ID.
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -1939,14 +1942,17 @@ it('should add a bundle product to the cart for customer', function () {
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        // The cart expects the ProductBundleOptionProduct ID, not the option ID.
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.

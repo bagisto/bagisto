@@ -204,7 +204,7 @@ class Configurable extends AbstractType
             'price' => 0,
             'weight' => 0,
             'status' => 1,
-            'tax_category_id' => '',
+            'tax_category_id' => null,
             'url_key' => $sku,
             'short_description' => $sku,
             'description' => $sku,

@@ -160,6 +160,32 @@ vendor/bin/pint                  # Fix all files
 vendor/bin/pint --test           # Check only (CI uses this)
 ```
 
+**Important:** Always run `vendor/bin/pint` on modified files after every code change before running tests or marking work as complete.
+
+### Commenting Conventions
+
+- **Section headers / titles**: Title Case, no trailing period.
+  ```php
+  // Store
+  // Product Attribute Values
+  // Store — All Product Types
+  ```
+- **Inline labels** (grouping assertions inside a test): Title Case, no trailing period.
+  ```php
+  // Core fields
+  // Text fields indexed from attribute values
+  // Numeric fields
+  // Boolean fields
+  // Locale and channel
+  ```
+- **Sentence comments** (explanations, steps, notes): Start with a capital letter and end with a period.
+  ```php
+  // Step 1: Store the product skeleton via the controller.
+  // Virtual products do not require weight, length, width, or height.
+  // Verify product_flat reflects the changed values.
+  ```
+- **PHPDoc**: Every method should have a single-line description ending with a period.
+
 ### Frontend (run from within each package: Admin, Shop, or Installer)
 ```bash
 cd packages/Webkul/Admin && npm install && npm run build    # Admin production build
