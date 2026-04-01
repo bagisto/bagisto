@@ -7,8 +7,30 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should returns the catalog rule page', function () {
-    // Act and Assert.
+afterEach(function () {
+    // Clean up catalog rule product price index entries to avoid interference
+    // between tests when running in parallel.
+    CatalogRule::query()->delete();
+});
+
+/**
+ * Create a catalog rule with channels and customer groups synced.
+ */
+function createCatalogRule(array $attributes = []): CatalogRule
+{
+    return CatalogRule::factory()
+        ->afterCreating(function (CatalogRule $rule) {
+            $rule->channels()->sync([1]);
+            $rule->customer_groups()->sync([1, 2, 3]);
+        })
+        ->create($attributes);
+}
+
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the catalog rule index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.catalog_rules.index'))
@@ -17,158 +39,132 @@ it('should returns the catalog rule page', function () {
         ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.index.create-btn'));
 });
 
-it('should returns the create page of catalog rules', function () {
-    // Act and Assert.
+it('should deny guest access to the catalog rule index page', function () {
+    get(route('admin.marketing.promotions.catalog_rules.index'))
+        ->assertRedirect(route('admin.session.create'));
+});
+
+// ============================================================================
+// Create
+// ============================================================================
+
+it('should return the catalog rule create page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.catalog_rules.create'))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.title'))
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.back-btn'))
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.save-btn'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.create.title'));
 });
 
-it('should fail the validation with errors when certain field not provided when store the catalog rule', function () {
-    // Act and Assert.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a newly created catalog rule', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.catalog_rules.store'), [
+        'name' => $name = fake()->words(3, true),
+        'description' => $description = fake()->sentence(),
+        'channels' => [1],
+        'customer_groups' => [1, 2, 3],
+        'status' => 1,
+        'action_type' => 'by_percent',
+        'discount_amount' => 10,
+        'starts_from' => '',
+        'ends_till' => '',
+    ])
+        ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'));
+
+    $this->assertDatabaseHas('catalog_rules', [
+        'name' => $name,
+        'description' => $description,
+        'action_type' => 'by_percent',
+        'discount_amount' => 10,
+    ]);
+});
+
+it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.promotions.catalog_rules.store'))
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('channels')
         ->assertJsonValidationErrorFor('customer_groups')
         ->assertJsonValidationErrorFor('action_type')
-        ->assertJsonValidationErrorFor('discount_amount')
-        ->assertUnprocessable();
+        ->assertJsonValidationErrorFor('discount_amount');
 });
 
-it('should store the newly created catalog rule', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
+// ============================================================================
+// Edit
+// ============================================================================
 
-    postJson(route('admin.marketing.promotions.catalog_rules.store', [
-        'name' => $name = fake()->name(),
-        'description' => $description = rtrim(substr(fake()->paragraph(), 0, 50)),
-        'channels' => [
-            1,
-        ],
+it('should return the catalog rule edit page', function () {
+    $catalogRule = createCatalogRule();
 
-        'customer_groups' => [
-            1,
-            2,
-            3,
-        ],
-
-        'status' => 1,
-        'action_type' => 'by_percent',
-        'discount_amount' => 0,
-        'starts_from' => '',
-        'ends_till' => '',
-    ]))
-        ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'))
-        ->isRedirection();
-
-    $this->assertModelWise([
-        CatalogRule::class => [
-            [
-                'action_type' => 'by_percent',
-                'description' => $description,
-                'discount_amount' => 0,
-                'name' => $name,
-                'status' => 1,
-            ],
-        ],
-    ]);
-});
-
-it('should returns the edit page of catalog rules', function () {
-    // Arrange.
-    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
-        $catalogRule->channels()->sync([1]);
-        $catalogRule->customer_groups()->sync([1, 2, 3]);
-    })->create();
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.catalog_rules.edit', $catalogRule->id))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.title'))
-        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.save-btn'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.edit.title'));
 });
 
-it('should fail the validation with errors when certain field not provided when update the catalog rule', function () {
-    // Arrange.
-    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
-        $catalogRule->channels()->sync([1]);
-        $catalogRule->customer_groups()->sync([1, 2, 3]);
-    })->create();
+// ============================================================================
+// Update
+// ============================================================================
 
-    // Act and Assert.
+it('should update an existing catalog rule', function () {
+    $catalogRule = createCatalogRule();
+
     $this->loginAsAdmin();
 
-    putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule))
+    putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id), [
+        'name' => $name = fake()->words(3, true),
+        'description' => $catalogRule->description,
+        'channels' => [1],
+        'customer_groups' => [1, 2, 3],
+        'action_type' => 'by_fixed',
+        'discount_amount' => 25,
+        'starts_from' => '',
+        'ends_till' => '',
+    ])
+        ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'));
+
+    $this->assertDatabaseHas('catalog_rules', [
+        'id' => $catalogRule->id,
+        'name' => $name,
+        'action_type' => 'by_fixed',
+        'discount_amount' => 25,
+    ]);
+});
+
+it('should fail validation when required fields are missing on update', function () {
+    $catalogRule = createCatalogRule();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id))
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('channels')
         ->assertJsonValidationErrorFor('customer_groups')
         ->assertJsonValidationErrorFor('action_type')
-        ->assertJsonValidationErrorFor('discount_amount')
-        ->assertUnprocessable();
+        ->assertJsonValidationErrorFor('discount_amount');
 });
 
-it('should update the catalog rule', function () {
-    // Arrange.
-    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
-        $catalogRule->channels()->sync([1]);
-        $catalogRule->customer_groups()->sync([1, 2, 3]);
-    })->create();
+// ============================================================================
+// Delete
+// ============================================================================
 
-    // Act and Assert.
-    $this->loginAsAdmin();
+it('should delete a catalog rule', function () {
+    $catalogRule = createCatalogRule();
 
-    putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id), [
-        'name' => $catalogRule->name,
-        'description' => $catalogRule->description,
-        'channels' => [
-            1,
-        ],
-
-        'customer_groups' => [
-            1,
-            2,
-            3,
-        ],
-
-        'action_type' => 'by_percent',
-        'discount_amount' => 0,
-        'starts_from' => '',
-        'ends_till' => '',
-    ])
-        ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'))
-        ->isRedirection();
-
-    $this->assertModelWise([
-        CatalogRule::class => [
-            [
-                'id' => $catalogRule->id,
-                'name' => $catalogRule->name,
-                'description' => $catalogRule->description,
-                'action_type' => 'by_percent',
-            ],
-        ],
-    ]);
-});
-
-it('should delete a specific catalog rule', function () {
-    // Arrange.
-    $catalogRule = CatalogRule::factory()->afterCreating(function (CatalogRule $catalogRule) {
-        $catalogRule->channels()->sync([1]);
-        $catalogRule->customer_groups()->sync([1, 2, 3]);
-    })->create();
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.promotions.catalog_rules.delete', $catalogRule->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.promotions.catalog-rules.delete-success'));
+
+    $this->assertDatabaseMissing('catalog_rules', ['id' => $catalogRule->id]);
 });

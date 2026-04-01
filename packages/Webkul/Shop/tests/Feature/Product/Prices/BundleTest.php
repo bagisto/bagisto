@@ -75,14 +75,16 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -167,14 +169,16 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -268,14 +272,16 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -360,14 +366,16 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -461,14 +469,16 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -557,14 +567,16 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -660,14 +672,16 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -756,14 +770,16 @@ it('should add a bundle product to the cart with a cart rule of the no coupon ty
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $grandTotal += $firstOptionProduct->product->price;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -861,12 +877,14 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -963,12 +981,14 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -1074,12 +1094,14 @@ it('should fails the validation error when certain inputs not provided when add 
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -1176,12 +1198,14 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -1287,12 +1311,14 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -1391,12 +1417,14 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -1506,12 +1534,14 @@ it('should fails the validation error when the certain inputs not provided when 
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -1612,12 +1642,14 @@ it('should add a bundle product to the cart with a cart rule of the specific cou
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -1708,12 +1740,14 @@ it('should check tax is applying for the bundle product into the cart for bundle
 
     $grandTotal = 0;
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $grandTotal += $bundleOption->product->price;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $grandTotal += $firstOptionProduct->product->price;
+
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     $cart = cart()->addProduct($product, [
@@ -1799,7 +1833,7 @@ it('should fails the validation error when the certain inputs not provided check
             'customer_group_id' => 1,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -1872,7 +1906,7 @@ it('should check customer group price for guest customer with fixed price type f
             'customer_group_id' => 1,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -1945,7 +1979,7 @@ it('should fails the validation error when the certain inputs not provided when 
             'customer_group_id' => 2,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2017,7 +2051,7 @@ it('should check customer group price for general customer with fixed price type
             'customer_group_id' => 2,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2095,7 +2129,7 @@ it('should fails the validation error when the certain inputs not provided when 
             'customer_group_id' => 3,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2168,7 +2202,7 @@ it('should check customer group price for wholesaler customer with fixed price t
             'customer_group_id' => 3,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2252,7 +2286,7 @@ it('should fails the validation error when the certain inputs not provided when 
             'customer_group_id' => 1,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2325,7 +2359,7 @@ it('should check customer group price for guest customer with discount price typ
             'customer_group_id' => 1,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2400,7 +2434,7 @@ it('should fails the validation error when the certain inputs not provided when 
             'customer_group_id' => 2,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2473,7 +2507,7 @@ it('should check customer group price for general customer with discount price t
             'customer_group_id' => 2,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2552,7 +2586,7 @@ it('should fails the validation error when the certain inputs not provided when 
             'customer_group_id' => 3,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2625,7 +2659,7 @@ it('should check customer group price for wholesaler customer with discount pric
             'customer_group_id' => 3,
         ]);
 
-        $bundleOptions['bundle_options'][$option->id] = [$option->id];
+        $bundleOptions['bundle_options'][$option->id] = [$option->bundle_option_products[0]->id];
 
         $bundleOptions['bundle_option_quantities'][$option->id] = $quantity;
 
@@ -2702,14 +2736,16 @@ it('should fails the validation error when the certain inputs not provided when 
         'prices' => [],
     ];
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100));
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - ($firstOptionProduct->product->price * ($catalogRule->discount_amount / 100));
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -2778,14 +2814,16 @@ it('should check discount price if catalog rule applied for percentage price for
         'prices' => [],
     ];
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100));
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - ($firstOptionProduct->product->price * ($catalogRule->discount_amount / 100));
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -2852,7 +2890,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getBundleProductFactory()->create();
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
@@ -2861,11 +2899,13 @@ it('should fails the validation error when the certain inputs not provided when 
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100));
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - ($firstOptionProduct->product->price * ($catalogRule->discount_amount / 100));
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -2928,7 +2968,7 @@ it('should check discount price if catalog rule applied for percentage price for
         ],
     ]))->getBundleProductFactory()->create();
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
@@ -2937,11 +2977,13 @@ it('should check discount price if catalog rule applied for percentage price for
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100));
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - ($firstOptionProduct->product->price * ($catalogRule->discount_amount / 100));
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3010,7 +3052,7 @@ it('should fails the validation error when the certain inputs not provided when 
         ],
     ]))->getBundleProductFactory()->create();
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
@@ -3019,11 +3061,13 @@ it('should fails the validation error when the certain inputs not provided when 
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100));
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - ($firstOptionProduct->product->price * ($catalogRule->discount_amount / 100));
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3086,7 +3130,7 @@ it('should check discount price if catalog rule applied for percentage price for
         ],
     ]))->getBundleProductFactory()->create();
 
-    $product->load('bundle_options.product');
+    $product->load('bundle_options.bundle_option_products.product');
 
     $bundleOptions = [
         'bundle_option_quantities' => [],
@@ -3095,11 +3139,13 @@ it('should check discount price if catalog rule applied for percentage price for
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100));
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - ($firstOptionProduct->product->price * ($catalogRule->discount_amount / 100));
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3178,11 +3224,13 @@ it('should fails the validation error when the certain inputs not provided when 
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - $catalogRule->discount_amount;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - $catalogRule->discount_amount;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3253,11 +3301,13 @@ it('should check discount price if catalog rule applied for fixed price for bund
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - $catalogRule->discount_amount;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - $catalogRule->discount_amount;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3336,11 +3386,13 @@ it('should fails the validation error when the certain inputs not provided when 
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - $catalogRule->discount_amount;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - $catalogRule->discount_amount;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3415,11 +3467,13 @@ it('should check discount price if catalog rule applied for fixed price for bund
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - $catalogRule->discount_amount;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - $catalogRule->discount_amount;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3500,11 +3554,13 @@ it('should fails the validation error when the certain inputs not provided when 
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - $catalogRule->discount_amount;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - $catalogRule->discount_amount;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3579,11 +3635,13 @@ it('should check discount price if catalog rule applied for fixed price for bund
     ];
 
     foreach ($product->bundle_options as $bundleOption) {
-        $bundleOptions['prices'][] = $bundleOption->product->price - $catalogRule->discount_amount;
+        $firstOptionProduct = $bundleOption->bundle_option_products->first();
+
+        $bundleOptions['prices'][] = $firstOptionProduct->product->price - $catalogRule->discount_amount;
 
         $bundleOptions['bundle_option_quantities'][$bundleOption->id] = 1;
 
-        $bundleOptions['bundle_options'][$bundleOption->id] = [$bundleOption->id];
+        $bundleOptions['bundle_options'][$bundleOption->id] = [$firstOptionProduct->id];
     }
 
     // Act and Assert.
@@ -3674,7 +3732,7 @@ it('should check discount price if catalog rule applied for fixed price for bund
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price' => $bundleOption->product->price - $catalogRule->discount_amount,
+                    'price' => $bundleOption->bundle_option_products->first()->product->price - $catalogRule->discount_amount,
                     'customer_group_id' => 1,
                     'catalog_rule_id' => $catalogRule->id,
                 ],
@@ -3737,7 +3795,7 @@ it('should check discount price if catalog rule applied for fixed price for bund
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price' => $bundleOption->product->price - $catalogRule->discount_amount,
+                    'price' => $bundleOption->bundle_option_products->first()->product->price - $catalogRule->discount_amount,
                     'customer_group_id' => 2,
                     'catalog_rule_id' => $catalogRule->id,
                 ],
@@ -3800,7 +3858,7 @@ it('should check discount price if catalog rule applied for fixed price for bund
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price' => $bundleOption->product->price - $catalogRule->discount_amount,
+                    'price' => $bundleOption->bundle_option_products->first()->product->price - $catalogRule->discount_amount,
                     'customer_group_id' => 3,
                     'catalog_rule_id' => $catalogRule->id,
                 ],
@@ -3862,7 +3920,7 @@ it('should check discount price if catalog rule applied for percentage price for
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price' => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
+                    'price' => $bundleOption->bundle_option_products->first()->product->price - ($bundleOption->bundle_option_products->first()->product->price * ($catalogRule->discount_amount / 100)),
                     'customer_group_id' => 1,
                     'catalog_rule_id' => $catalogRule->id,
                 ],
@@ -3923,7 +3981,7 @@ it('should check discount price if catalog rule applied for percentage price for
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price' => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
+                    'price' => $bundleOption->bundle_option_products->first()->product->price - ($bundleOption->bundle_option_products->first()->product->price * ($catalogRule->discount_amount / 100)),
                     'customer_group_id' => 2,
                     'catalog_rule_id' => $catalogRule->id,
                 ],
@@ -3985,7 +4043,7 @@ it('should check discount price if catalog rule applied for percentage price for
         $this->assertModelWise([
             CatalogRuleProductPrice::class => [
                 [
-                    'price' => $bundleOption->product->price - ($bundleOption->product->price * ($catalogRule->discount_amount / 100)),
+                    'price' => $bundleOption->bundle_option_products->first()->product->price - ($bundleOption->bundle_option_products->first()->product->price * ($catalogRule->discount_amount / 100)),
                     'customer_group_id' => 3,
                     'catalog_rule_id' => $catalogRule->id,
                 ],

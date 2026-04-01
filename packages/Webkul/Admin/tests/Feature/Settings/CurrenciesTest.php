@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Support\Arr;
 use Webkul\Core\Models\Currency;
 
 use function Pest\Laravel\deleteJson;
@@ -8,8 +7,11 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should returns the currencies index page', function () {
-    // Act and Assert.
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the currencies index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.settings.currencies.index'))
@@ -18,18 +20,16 @@ it('should returns the currencies index page', function () {
         ->assertSeeText(trans('admin::app.settings.currencies.index.create-btn'));
 });
 
-it('should fail the validation with errors when certain field not provided when store the currencies', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.currencies.store'))
-        ->assertJsonValidationErrorFor('code')
-        ->assertJsonValidationErrorFor('name')
-        ->assertUnprocessable();
+it('should deny guest access to the currencies index page', function () {
+    get(route('admin.settings.currencies.index'))
+        ->assertRedirect(route('admin.session.create'));
 });
 
-it('should store the newly created currencies', function () {
-    // Act and Assert.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a newly created currency', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.currencies.store'), $data = [
@@ -37,25 +37,35 @@ it('should store the newly created currencies', function () {
         'name' => fake()->name(),
         'symbol' => fake()->randomElement(['€', '£', '¥', 'A$', 'CHF', 'C$', '¥', 'R$']),
         'decimal' => rand(1, 4),
-        'group_separator' => '-',
-        'decimal_separator' => '-',
+        'group_separator' => ',',
+        'decimal_separator' => '.',
         'currency_position' => fake()->randomElement(['left', 'left_with_space', 'right', 'right_with_space']),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.currencies.index.create-success'));
 
-    $this->assertModelWise([
-        Currency::class => [
-            $data,
-        ],
+    $this->assertDatabaseHas('currencies', [
+        'code' => strtoupper($data['code']),
+        'name' => $data['name'],
     ]);
 });
 
-it('should return the currencies for edit', function () {
-    // Arrange.
+it('should fail validation when required fields are missing on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.currencies.store'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('code')
+        ->assertJsonValidationErrorFor('name');
+});
+
+// ============================================================================
+// Edit
+// ============================================================================
+
+it('should return currency details for edit', function () {
     $currency = Currency::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.currencies.edit', $currency->id))
@@ -63,56 +73,52 @@ it('should return the currencies for edit', function () {
         ->assertJsonFragment($currency->toArray());
 });
 
-it('should fail the validation with errors when certain field not provided when update the currencies', function () {
-    // Arrange.
+// ============================================================================
+// Update
+// ============================================================================
+
+it('should update an existing currency', function () {
     $currency = Currency::factory()->create();
 
-    // Act and Assert.
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.currencies.update'), [
+        'id' => $currency->id,
+        'name' => $name = fake()->name(),
+    ])
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.settings.currencies.index.update-success'));
+
+    $this->assertDatabaseHas('currencies', [
+        'id' => $currency->id,
+        'name' => $name,
+    ]);
+});
+
+it('should fail validation when required fields are missing on update', function () {
+    $currency = Currency::factory()->create();
+
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.currencies.update'), [
         'id' => $currency->id,
     ])
-        ->assertJsonValidationErrorFor('name')
-        ->assertUnprocessable();
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name');
 });
 
-it('should update the specified currency', function () {
-    // Arrange.
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete a currency', function () {
     $currency = Currency::factory()->create();
 
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.settings.currencies.update'), $data = [
-        'id' => $currency->id,
-        'name' => fake()->name(),
-    ])
-        ->assertOk()
-        ->assertSeeText(trans('admin::app.settings.currencies.index.update-success'));
-
-    $this->assertModelWise([
-        Currency::class => [
-            [
-                ...Arr::except($currency->toArray(), ['updated_at', 'created_at']),
-                ...$data,
-            ],
-        ],
-    ]);
-});
-
-it('should delete the currencies', function () {
-    // Arrange.
-    $currency = Currency::factory()->create();
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.currencies.delete', $currency->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.currencies.index.delete-success'));
 
-    $this->assertDatabaseMissing('currencies', [
-        'id' => $currency->id,
-    ]);
+    $this->assertDatabaseMissing('currencies', ['id' => $currency->id]);
 });

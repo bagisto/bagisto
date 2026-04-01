@@ -8,8 +8,11 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should returns the exchange rate index page', function () {
-    // Act and Assert.
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the exchange rate index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.settings.exchange_rates.index'))
@@ -19,24 +22,21 @@ it('should returns the exchange rate index page', function () {
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.update-rates'));
 });
 
-it('should fail the validation with errors when certain field not provided when store the exchange rates', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.exchange_rates.store'))
-        ->assertJsonValidationErrorFor('target_currency')
-        ->assertJsonValidationErrorFor('rate')
-        ->assertUnprocessable();
+it('should deny guest access to the exchange rate index page', function () {
+    get(route('admin.settings.exchange_rates.index'))
+        ->assertRedirect(route('admin.session.create'));
 });
 
-it('should store the newly created exchange rates', function () {
-    // Arrange.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a newly created exchange rate', function () {
     $currency = Currency::factory()->create([
         'code' => 'EUR',
         'name' => 'Euro',
     ]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.exchange_rates.store'), [
@@ -46,23 +46,30 @@ it('should store the newly created exchange rates', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.create-success'));
 
-    $this->assertModelWise([
-        CurrencyExchangeRate::class => [
-            [
-                'rate' => $rate,
-                'target_currency' => $currency->id,
-            ],
-        ],
+    $this->assertDatabaseHas('currency_exchange_rates', [
+        'rate' => $rate,
+        'target_currency' => $currency->id,
     ]);
 });
 
-it('should return the exchange rate data for edit', function () {
-    // Arrange.
+it('should fail validation when required fields are missing on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.exchange_rates.store'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('target_currency')
+        ->assertJsonValidationErrorFor('rate');
+});
+
+// ============================================================================
+// Edit
+// ============================================================================
+
+it('should return exchange rate data for edit', function () {
     $exchangeRate = CurrencyExchangeRate::factory()->create([
         'target_currency' => Currency::factory()->create()->id,
     ]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.exchange_rates.edit', $exchangeRate->id))
@@ -71,30 +78,15 @@ it('should return the exchange rate data for edit', function () {
         ->assertJsonPath('data.exchangeRate.target_currency', $exchangeRate->target_currency);
 });
 
-it('should fail the validation with errors when certain field not provided when update the exchange rates', function () {
-    // Arrange.
+// ============================================================================
+// Update
+// ============================================================================
+
+it('should update an existing exchange rate', function () {
     $exchangeRate = CurrencyExchangeRate::factory()->create([
         'target_currency' => Currency::factory()->create()->id,
     ]);
 
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.settings.exchange_rates.update'), [
-        'id' => $exchangeRate->id,
-    ])
-        ->assertJsonValidationErrorFor('target_currency')
-        ->assertJsonValidationErrorFor('rate')
-        ->assertUnprocessable();
-});
-
-it('should update the currency exchange rate', function () {
-    // Arrange.
-    $exchangeRate = CurrencyExchangeRate::factory()->create([
-        'target_currency' => Currency::factory()->create()->id,
-    ]);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.exchange_rates.update'), [
@@ -105,30 +97,41 @@ it('should update the currency exchange rate', function () {
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.settings.exchange-rates.index.update-success'));
 
-    $this->assertModelWise([
-        CurrencyExchangeRate::class => [
-            [
-                'rate' => $rate,
-                'target_currency' => $exchangeRate->target_currency,
-            ],
-        ],
+    $this->assertDatabaseHas('currency_exchange_rates', [
+        'id' => $exchangeRate->id,
+        'rate' => $rate,
     ]);
 });
 
-it('should delete the exchange rate', function () {
-    // Arrange.
-    $currencyExchangeRate = CurrencyExchangeRate::factory()->create([
+it('should fail validation when required fields are missing on update', function () {
+    $exchangeRate = CurrencyExchangeRate::factory()->create([
         'target_currency' => Currency::factory()->create()->id,
     ]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.settings.exchange_rates.delete', $currencyExchangeRate->id))
+    putJson(route('admin.settings.exchange_rates.update'), [
+        'id' => $exchangeRate->id,
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('target_currency')
+        ->assertJsonValidationErrorFor('rate');
+});
+
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete an exchange rate', function () {
+    $exchangeRate = CurrencyExchangeRate::factory()->create([
+        'target_currency' => Currency::factory()->create()->id,
+    ]);
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.settings.exchange_rates.delete', $exchangeRate->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.exchange-rates.index.delete-success'));
 
-    $this->assertDatabaseMissing('locales', [
-        'id' => $currencyExchangeRate->id,
-    ]);
+    $this->assertDatabaseMissing('currency_exchange_rates', ['id' => $exchangeRate->id]);
 });

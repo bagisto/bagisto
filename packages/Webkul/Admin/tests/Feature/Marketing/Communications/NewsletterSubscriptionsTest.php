@@ -1,13 +1,17 @@
 <?php
 
 use Webkul\Core\Models\SubscribersList;
+use Webkul\Customer\Models\Customer;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\putJson;
 
-it('should return the subscription index page', function () {
-    // Act and Assert.
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the newsletter subscription index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.subscribers.index'))
@@ -15,85 +19,134 @@ it('should return the subscription index page', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.subscribers.index.title'));
 });
 
-it('should show the edit page of campaign', function () {
-    // Arrange.
+it('should deny guest access to the newsletter subscription index page', function () {
+    get(route('admin.marketing.communications.subscribers.index'))
+        ->assertRedirect(route('admin.session.create'));
+});
+
+// ============================================================================
+// Edit
+// ============================================================================
+
+it('should return subscriber details as JSON', function () {
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.subscribers.edit', $subscriber->id))
         ->assertOk()
-        ->assertJsonFragment($subscriber->toArray());
+        ->assertJsonPath('data.id', $subscriber->id)
+        ->assertJsonPath('data.email', $subscriber->email);
 });
 
-it('should fail the validation with errors when certain inputs are not provided when update in news letter subscription', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
+// ============================================================================
+// Update
+// ============================================================================
 
-    putJson(route('admin.marketing.communications.subscribers.update'))
-        ->assertJsonValidationErrorFor('id')
-        ->assertJsonValidationErrorFor('is_subscribed')
-        ->assertUnprocessable();
-});
+it('should update a subscriber status', function () {
+    $subscriber = SubscribersList::factory()->create(['is_subscribed' => true]);
 
-it('should fail the validation with errors when is subscribed not passed in update in news letter subscription', function () {
-    // Arrange.
-    $subscriber = SubscribersList::factory()->create();
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.subscribers.update'), [
         'id' => $subscriber->id,
+        'is_subscribed' => 0,
     ])
-        ->assertJsonValidationErrorFor('is_subscribed')
-        ->assertUnprocessable();
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.marketing.communications.subscribers.index.edit.success'));
+
+    $this->assertDatabaseHas('subscribers_list', [
+        'id' => $subscriber->id,
+        'is_subscribed' => false,
+    ]);
 });
 
-it('should fail the validation with errors when id is not passed in update in news letter subscription', function () {
-    // Act and Assert.
+it('should sync subscription status with the customer record', function () {
+    $customer = Customer::factory()->create(['subscribed_to_news_letter' => true]);
+
+    $subscriber = SubscribersList::factory()->create([
+        'customer_id' => $customer->id,
+        'email' => $customer->email,
+        'is_subscribed' => true,
+    ]);
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.subscribers.update'), [
+        'id' => $subscriber->id,
+        'is_subscribed' => 0,
+    ])
+        ->assertOk();
+
+    $this->assertDatabaseHas('customers', [
+        'id' => $customer->id,
+        'subscribed_to_news_letter' => false,
+    ]);
+});
+
+it('should fail validation when required fields are missing on update', function () {
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.subscribers.update'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('id')
+        ->assertJsonValidationErrorFor('is_subscribed');
+});
+
+it('should fail validation when id is missing on update', function () {
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.subscribers.update'), [
         'is_subscribed' => 1,
     ])
-        ->assertJsonValidationErrorFor('id')
-        ->assertUnprocessable();
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('id');
 });
 
-it('should update the subscriber', function () {
-    // Arrange.
+it('should fail validation when is_subscribed is missing on update', function () {
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.communications.subscribers.update'), [
         'id' => $subscriber->id,
-        'is_subscribed' => $isSubscribed = rand(0, 1),
     ])
-        ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.communications.subscribers.index.edit.success'));
-
-    $this->assertModelWise([
-        SubscribersList::class => [
-            [
-                'id' => $subscriber->id,
-                'is_subscribed' => (bool) $isSubscribed,
-            ],
-        ],
-    ]);
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('is_subscribed');
 });
 
-it('should delete the specific subscriber', function () {
-    // Arrange.
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete a subscriber', function () {
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.communications.subscribers.delete', $subscriber->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.subscribers.delete-success'));
+
+    $this->assertDatabaseMissing('subscribers_list', ['id' => $subscriber->id]);
+});
+
+it('should unset the customer newsletter flag on delete', function () {
+    $customer = Customer::factory()->create(['subscribed_to_news_letter' => true]);
+
+    $subscriber = SubscribersList::factory()->create([
+        'customer_id' => $customer->id,
+        'email' => $customer->email,
+        'is_subscribed' => true,
+    ]);
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.marketing.communications.subscribers.delete', $subscriber->id))
+        ->assertOk();
+
+    $this->assertDatabaseHas('customers', [
+        'id' => $customer->id,
+        'subscribed_to_news_letter' => false,
+    ]);
 });

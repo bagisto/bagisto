@@ -1,9 +1,8 @@
 <?php
 
-namespace Webkul\Core\Database\Factories;
+namespace Webkul\CartRule\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
 use Webkul\CartRule\Models\CartRule;
 
 class CartRuleFactory extends Factory
@@ -21,16 +20,18 @@ class CartRuleFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => Str::uuid(),
+            'name' => $this->faker->words(3, true),
             'description' => $this->faker->sentence(),
             'starts_from' => null,
             'ends_till' => null,
-            'coupon_type' => 1,
+            'coupon_type' => 0,
             'use_auto_generation' => false,
             'usage_per_customer' => 100,
             'uses_per_coupon' => 100,
             'times_used' => 0,
             'condition_type' => 2,
+            'action_type' => 'by_percent',
+            'discount_amount' => $this->faker->numberBetween(1, 50),
             'end_other_rules' => false,
             'uses_attribute_conditions' => false,
             'discount_quantity' => 0,
@@ -41,35 +42,5 @@ class CartRuleFactory extends Factory
             'status' => true,
             'conditions' => null,
         ];
-    }
-
-    /**
-     * Indicate that the user is guest.
-     */
-    public function guest(): Factory
-    {
-        return $this->state(function (array $attributes) {
-            return 1;
-        });
-    }
-
-    /**
-     * Indicate that the user is general.
-     */
-    public function general(): Factory
-    {
-        return $this->state(function (array $attributes) {
-            return 2;
-        });
-    }
-
-    /**
-     * Indicate that the user is wholesaler.
-     */
-    public function wholesale(): Factory
-    {
-        return $this->state(function (array $attributes) {
-            return 3;
-        });
     }
 }

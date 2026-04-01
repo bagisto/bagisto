@@ -1,6 +1,6 @@
 <?php
 
-namespace Webkul\Admin\Database\Factories;
+namespace Webkul\CatalogRule\Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Event;
@@ -27,8 +27,8 @@ class CatalogRuleFactory extends Factory
             'starts_from' => $this->faker->dateTimeThisMonth,
             'ends_till' => $this->faker->dateTimeBetween($startsFrom, $endsTill),
             'status' => $this->faker->boolean(),
-            'name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
-            'description' => substr($this->faker->paragraph, 0, 50),
+            'name' => $this->faker->words(3, true),
+            'description' => $this->faker->sentence(),
             'action_type' => 'by_percent',
             'discount_amount' => rand(1, 50),
         ];

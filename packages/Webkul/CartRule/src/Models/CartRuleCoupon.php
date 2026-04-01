@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\CartRule\Contracts\CartRuleCoupon as CartRuleCouponContract;
-use Webkul\Core\Database\Factories\CartRuleCouponFactory;
+use Webkul\CartRule\Database\Factories\CartRuleCouponFactory;
 
 class CartRuleCoupon extends Model implements CartRuleCouponContract
 {

@@ -13,8 +13,27 @@ beforeEach(function () {
     Storage::fake('private');
 });
 
+/**
+ * Create an import record with sensible defaults.
+ */
+function createImport(array $attributes = []): Import
+{
+    return Import::create(array_merge([
+        'type' => 'products',
+        'state' => 'pending',
+        'file_path' => 'imports/test.csv',
+        'action' => 'append',
+        'validation_strategy' => 'stop-on-errors',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+    ], $attributes));
+}
+
+// ============================================================================
+// Index
+// ============================================================================
+
 it('should return the data transfer imports index page', function () {
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.data_transfer.imports.index'))
@@ -22,8 +41,16 @@ it('should return the data transfer imports index page', function () {
         ->assertSeeText(trans('admin::app.settings.data-transfer.imports.index.title'));
 });
 
-it('should return the create page of data transfer import', function () {
-    // Act and Assert.
+it('should deny guest access to the data transfer imports index page', function () {
+    get(route('admin.settings.data_transfer.imports.index'))
+        ->assertRedirect(route('admin.session.create'));
+});
+
+// ============================================================================
+// Create
+// ============================================================================
+
+it('should return the data transfer import create page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.settings.data_transfer.imports.create'))
@@ -31,47 +58,13 @@ it('should return the create page of data transfer import', function () {
         ->assertSeeText(trans('admin::app.settings.data-transfer.imports.create.title'));
 });
 
-it('should fail validation when required fields are not provided when storing import', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
+// ============================================================================
+// Store
+// ============================================================================
 
-    postJson(route('admin.settings.data_transfer.imports.store'))
-        ->assertJsonValidationErrorFor('type')
-        ->assertJsonValidationErrorFor('action')
-        ->assertJsonValidationErrorFor('validation_strategy')
-        ->assertJsonValidationErrorFor('allowed_errors')
-        ->assertJsonValidationErrorFor('field_separator')
-        ->assertJsonValidationErrorFor('file')
-        ->assertUnprocessable();
-});
+it('should store an import with a CSV file', function () {
+    $file = UploadedFile::fake()->createWithContent('customers.csv', "email,first_name,last_name\njohn@example.com,John,Doe");
 
-it('should fail validation with invalid file type when storing import', function () {
-    // Arrange
-    $file = UploadedFile::fake()->create('invalid.txt', 100, 'text/plain');
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type' => 'products',
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-        'file' => $file,
-    ])
-        ->assertJsonValidationErrorFor('file')
-        ->assertUnprocessable();
-});
-
-it('should successfully store import with CSV file', function () {
-    // Arrange
-    Storage::fake('private');
-
-    $csvContent = "email,first_name,last_name\njohn@example.com,John,Doe";
-    $file = UploadedFile::fake()->createWithContent('customers.csv', $csvContent);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
@@ -92,36 +85,12 @@ it('should successfully store import with CSV file', function () {
     ]);
 });
 
-it('should accept CSV file with text/plain MIME type (small files)', function () {
-    // Arrange
-    Storage::fake('private');
+it('should store an import with an XML file', function () {
+    $file = UploadedFile::fake()->createWithContent(
+        'customers.xml',
+        '<?xml version="1.0"?><customers><customer email="test@example.com"/></customers>'
+    );
 
-    $csvContent = "id,name\n1,Test";
-    $file = UploadedFile::fake()->createWithContent('test.csv', $csvContent);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type' => 'products',
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 0,
-        'field_separator' => ',',
-        'file' => $file,
-    ])
-        ->assertRedirect()
-        ->assertSessionHas('success');
-});
-
-it('should successfully store import with XML file', function () {
-    // Arrange
-    Storage::fake('private');
-
-    $xmlContent = '<?xml version="1.0"?><customers><customer email="test@example.com"/></customers>';
-    $file = UploadedFile::fake()->createWithContent('customers.xml', $xmlContent);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.data_transfer.imports.store'), [
@@ -141,19 +110,171 @@ it('should successfully store import with XML file', function () {
     ]);
 });
 
-it('should return the edit page for an existing import', function () {
-    // Arrange
-    $import = Import::create([
+it('should accept all supported file formats', function () {
+    $this->loginAsAdmin();
+
+    $formats = [
+        'csv' => 'text/csv',
+        'xml' => 'text/xml',
+        'xls' => 'application/vnd.ms-excel',
+        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    ];
+
+    foreach ($formats as $extension => $mimeType) {
+        postJson(route('admin.settings.data_transfer.imports.store'), [
+            'type' => 'products',
+            'action' => 'append',
+            'validation_strategy' => 'stop-on-errors',
+            'allowed_errors' => 10,
+            'field_separator' => ',',
+            'file' => UploadedFile::fake()->create("test.{$extension}", 100, $mimeType),
+        ])
+            ->assertRedirect();
+    }
+});
+
+it('should accept a CSV file with text/plain MIME type', function () {
+    $file = UploadedFile::fake()->createWithContent('test.csv', "id,name\n1,Test");
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.data_transfer.imports.store'), [
         'type' => 'products',
-        'state' => 'pending',
-        'file_path' => 'imports/test.csv',
+        'action' => 'append',
+        'validation_strategy' => 'stop-on-errors',
+        'allowed_errors' => 0,
+        'field_separator' => ',',
+        'file' => $file,
+    ])
+        ->assertRedirect()
+        ->assertSessionHas('success');
+});
+
+it('should fail validation when required fields are missing on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.data_transfer.imports.store'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('type')
+        ->assertJsonValidationErrorFor('action')
+        ->assertJsonValidationErrorFor('validation_strategy')
+        ->assertJsonValidationErrorFor('allowed_errors')
+        ->assertJsonValidationErrorFor('field_separator')
+        ->assertJsonValidationErrorFor('file');
+});
+
+it('should fail validation with an invalid file type on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.data_transfer.imports.store'), [
+        'type' => 'products',
         'action' => 'append',
         'validation_strategy' => 'stop-on-errors',
         'allowed_errors' => 10,
         'field_separator' => ',',
-    ]);
+        'file' => UploadedFile::fake()->create('invalid.txt', 100, 'text/plain'),
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('file');
+});
 
-    // Act and Assert.
+it('should fail validation with an invalid action on store', function () {
+    $file = UploadedFile::fake()->createWithContent('test.csv', 'data');
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.data_transfer.imports.store'), [
+        'type' => 'products',
+        'action' => 'invalid_action',
+        'validation_strategy' => 'stop-on-errors',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('action');
+});
+
+it('should fail validation with an invalid validation strategy on store', function () {
+    $file = UploadedFile::fake()->createWithContent('test.csv', 'data');
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.data_transfer.imports.store'), [
+        'type' => 'products',
+        'action' => 'append',
+        'validation_strategy' => 'invalid_strategy',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => $file,
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('validation_strategy');
+});
+
+it('should handle the process_in_queue option on store', function () {
+    $this->loginAsAdmin();
+
+    // With process_in_queue enabled.
+    postJson(route('admin.settings.data_transfer.imports.store'), [
+        'type' => 'customers',
+        'action' => 'append',
+        'validation_strategy' => 'stop-on-errors',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => UploadedFile::fake()->createWithContent('queue.csv', 'data'),
+        'process_in_queue' => 1,
+    ])
+        ->assertRedirect()
+        ->assertSessionHas('success');
+
+    $queued = Import::where('process_in_queue', true)->latest()->first();
+
+    expect($queued)->not->toBeNull();
+    expect($queued->process_in_queue)->toBe(true);
+
+    // Without process_in_queue (defaults to false).
+    postJson(route('admin.settings.data_transfer.imports.store'), [
+        'type' => 'products',
+        'action' => 'delete',
+        'validation_strategy' => 'skip-errors',
+        'allowed_errors' => 5,
+        'field_separator' => ';',
+        'file' => UploadedFile::fake()->createWithContent('no_queue.csv', 'data'),
+    ])
+        ->assertRedirect();
+
+    $notQueued = Import::where('type', 'products')->where('field_separator', ';')->latest()->first();
+
+    expect($notQueued->process_in_queue)->toBe(false);
+});
+
+it('should sanitize the filename on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.data_transfer.imports.store'), [
+        'type' => 'products',
+        'action' => 'append',
+        'validation_strategy' => 'stop-on-errors',
+        'allowed_errors' => 10,
+        'field_separator' => ',',
+        'file' => UploadedFile::fake()->createWithContent('../../malicious.csv', 'data'),
+    ])
+        ->assertRedirect();
+
+    $import = Import::latest()->first();
+
+    expect($import->file_path)->toContain('imports/');
+    expect($import->file_path)->not()->toContain('../');
+});
+
+// ============================================================================
+// Edit
+// ============================================================================
+
+it('should return the edit page for an existing import', function () {
+    $import = createImport();
+
     $this->loginAsAdmin();
 
     get(route('admin.settings.data_transfer.imports.edit', $import->id))
@@ -161,25 +282,13 @@ it('should return the edit page for an existing import', function () {
         ->assertSeeText(trans('admin::app.settings.data-transfer.imports.edit.title'));
 });
 
-it('should successfully update an existing import', function () {
-    // Arrange
-    Storage::fake('private');
+// ============================================================================
+// Update
+// ============================================================================
 
-    $import = Import::create([
-        'type' => 'products',
-        'state' => 'pending',
-        'file_path' => 'imports/old.csv',
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-    ]);
+it('should update an existing import with a new file', function () {
+    $import = createImport(['file_path' => 'imports/old.csv']);
 
-    $csvContent = "sku,name\nSKU-001,Product 1";
-
-    $newFile = UploadedFile::fake()->createWithContent('products.csv', $csvContent);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.data_transfer.imports.update', $import->id), [
@@ -188,7 +297,7 @@ it('should successfully update an existing import', function () {
         'validation_strategy' => 'stop-on-errors',
         'allowed_errors' => 15,
         'field_separator' => ',',
-        'file' => $newFile,
+        'file' => UploadedFile::fake()->createWithContent('products.csv', "sku,name\nSKU-001,Product 1"),
     ])
         ->assertRedirect()
         ->assertSessionHas('success');
@@ -199,21 +308,9 @@ it('should successfully update an existing import', function () {
     expect($import->state)->toBe('pending');
 });
 
-it('should allow updating import without providing a new file', function () {
-    // Arrange
-    Storage::fake('private');
+it('should update an existing import without providing a new file', function () {
+    $import = createImport(['type' => 'customers', 'file_path' => 'imports/existing.csv']);
 
-    $import = Import::create([
-        'type' => 'customers',
-        'state' => 'pending',
-        'file_path' => 'imports/existing.csv',
-        'allowed_errors' => 10,
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'field_separator' => ',',
-    ]);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.data_transfer.imports.update', $import->id), [
@@ -232,229 +329,34 @@ it('should allow updating import without providing a new file', function () {
     expect($import->file_path)->toBe('imports/existing.csv');
 });
 
-it('should successfully delete an import', function () {
-    // Arrange
-    Storage::fake('private');
+// ============================================================================
+// Delete
+// ============================================================================
 
-    $import = Import::create([
-        'type' => 'products',
-        'file_path' => 'imports/test.csv',
-        'state' => 'pending',
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-    ]);
+it('should delete an import and its file', function () {
+    $import = createImport();
 
     Storage::disk('private')->put($import->file_path, 'test content');
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.data_transfer.imports.delete', $import->id))
         ->assertOk()
         ->assertJsonFragment(['message' => trans('admin::app.settings.data-transfer.imports.delete-success')]);
 
-    $this->assertDatabaseMissing('imports', [
-        'id' => $import->id,
-    ]);
+    $this->assertDatabaseMissing('imports', ['id' => $import->id]);
 });
 
-it('should return import page with stats', function () {
-    // Arrange
-    $import = Import::create([
-        'type' => 'customers',
-        'state' => 'pending',
-        'file_path' => 'imports/customers.csv',
-        'processed_rows_count' => 0,
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-    ]);
+// ============================================================================
+// Import
+// ============================================================================
 
-    // Act and Assert.
+it('should return the import page with stats', function () {
+    $import = createImport(['type' => 'customers', 'processed_rows_count' => 0]);
+
     $this->loginAsAdmin();
 
     get(route('admin.settings.data_transfer.imports.import', $import->id))
         ->assertOk()
         ->assertSeeText($import->type);
-});
-
-it('should validate action field with correct syntax', function () {
-    // Arrange
-    Storage::fake('private');
-
-    $file = UploadedFile::fake()->createWithContent('test.csv', 'data');
-
-    // Act and Assert
-    $this->loginAsAdmin();
-
-    // Valid action values should pass
-    postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type' => 'products',
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-        'file' => $file,
-    ])
-        ->assertRedirect();
-
-    // Invalid action value should fail
-    postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type' => 'products',
-        'action' => 'invalid_action',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-        'file' => $file,
-    ])
-        ->assertJsonValidationErrorFor('action')
-        ->assertUnprocessable();
-});
-
-it('should validate validation_strategy field with correct syntax', function () {
-    // Arrange
-    Storage::fake('private');
-
-    $file = UploadedFile::fake()->createWithContent('test.csv', 'data');
-
-    // Act and Assert
-    $this->loginAsAdmin();
-
-    // Valid validation_strategy values should pass
-    foreach (['stop-on-errors', 'skip-errors'] as $strategy) {
-        postJson(route('admin.settings.data_transfer.imports.store'), [
-            'type' => 'products',
-            'action' => 'append',
-            'validation_strategy' => $strategy,
-            'allowed_errors' => 10,
-            'field_separator' => ',',
-            'file' => $file,
-        ])
-            ->assertRedirect();
-    }
-
-    // Invalid validation_strategy value should fail
-    postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type' => 'products',
-        'action' => 'append',
-        'validation_strategy' => 'invalid_strategy',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-        'file' => $file,
-    ])
-        ->assertJsonValidationErrorFor('validation_strategy')
-        ->assertUnprocessable();
-});
-
-it('should accept all supported file formats', function () {
-    // Arrange
-    Storage::fake('private');
-
-    $this->loginAsAdmin();
-
-    $formats = [
-        'csv' => 'text/csv',
-        'xml' => 'text/xml',
-        'xls' => 'application/vnd.ms-excel',
-        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-    ];
-
-    foreach ($formats as $extension => $mimeType) {
-        $file = UploadedFile::fake()->create("test.{$extension}", 100, $mimeType);
-
-        postJson(route('admin.settings.data_transfer.imports.store'), [
-            'type' => 'products',
-            'action' => 'append',
-            'validation_strategy' => 'stop-on-errors',
-            'allowed_errors' => 10,
-            'field_separator' => ',',
-            'file' => $file,
-        ])
-            ->assertRedirect();
-    }
-});
-
-it('should handle process_in_queue option correctly', function () {
-    // Arrange
-    Storage::fake('private');
-
-    $this->loginAsAdmin();
-
-    // Test with process_in_queue enabled
-    $file = UploadedFile::fake()->createWithContent('queue_test.csv', 'test data content');
-
-    postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type' => 'customers',
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-        'file' => $file,
-        'process_in_queue' => 1,
-    ])
-        ->assertRedirect()
-        ->assertSessionHas('success');
-
-    // Verify the import with process_in_queue = 1 exists
-    $importWithQueue = Import::where('process_in_queue', true)->latest()->first();
-
-    expect($importWithQueue)->not->toBeNull();
-
-    expect($importWithQueue->process_in_queue)->toBe(true);
-
-    expect($importWithQueue->type)->toBe('customers');
-
-    // Test without process_in_queue (should default to 0)
-    $file2 = UploadedFile::fake()->createWithContent('no_queue_test.csv', 'different test data');
-
-    postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type' => 'products',
-        'action' => 'delete',
-        'validation_strategy' => 'skip-errors',
-        'allowed_errors' => 5,
-        'field_separator' => ';',
-        'file' => $file2,
-    ])
-        ->assertRedirect();
-
-    // Verify the import without process_in_queue defaults to 0
-    $importWithoutQueue = Import::where('type', 'products')
-        ->where('action', 'delete')
-        ->where('field_separator', ';')
-        ->latest()
-        ->first();
-
-    expect($importWithoutQueue)->not->toBeNull();
-
-    expect($importWithoutQueue->process_in_queue)->toBe(false);
-});
-
-it('should sanitize filename when storing import', function () {
-    // Arrange
-    Storage::fake('private');
-
-    $file = UploadedFile::fake()->createWithContent('../../malicious.csv', 'data');
-
-    // Act and Assert
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.data_transfer.imports.store'), [
-        'type' => 'products',
-        'action' => 'append',
-        'validation_strategy' => 'stop-on-errors',
-        'allowed_errors' => 10,
-        'field_separator' => ',',
-        'file' => $file,
-    ])
-        ->assertRedirect();
-
-    $import = Import::latest()->first();
-
-    // Verify the filename is sanitized (contains hash and unique ID)
-    expect($import->file_path)->toContain('imports/');
-
-    expect($import->file_path)->not()->toContain('../');
 });
