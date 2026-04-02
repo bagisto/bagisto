@@ -12,7 +12,7 @@ it('should apply special price to downloadable product when within date range', 
         'special_price_to' => ['date_value' => now()->addMonth()->format('Y-m-d'), 'channel' => core()->getCurrentChannelCode()],
     ], [0]);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 800);
 });
@@ -25,7 +25,7 @@ it('should use regular price when downloadable product special price has expired
         'special_price_to' => ['date_value' => now()->subDay()->format('Y-m-d'), 'channel' => core()->getCurrentChannelCode()],
     ], [0]);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 1000);
 });
@@ -38,7 +38,7 @@ it('should use regular price when downloadable product special price has not sta
         'special_price_to' => ['date_value' => now()->addMonth()->format('Y-m-d'), 'channel' => core()->getCurrentChannelCode()],
     ], [0]);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 1000);
 });
@@ -49,7 +49,7 @@ it('should apply special price to downloadable product when no date range is set
         'special_price' => ['float_value' => 750],
     ], [0]);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 750);
 });

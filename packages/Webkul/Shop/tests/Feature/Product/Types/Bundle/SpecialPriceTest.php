@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Event;
-
 // ============================================================================
 // Active Special Price
 // ============================================================================
@@ -12,19 +10,7 @@ it('should apply special price to bundle option product when within date range',
     $option = $product->bundle_options->first();
     $optionSimple = $option->bundle_option_products->first()->product;
 
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 700]);
-
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_from']->id)
-        ->update(['date_value' => now()->subDay()->format('Y-m-d')]);
-
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_to']->id)
-        ->update(['date_value' => now()->addMonth()->format('Y-m-d')]);
-
-    Event::dispatch('catalog.product.update.after', $optionSimple);
+    $this->setSpecialPriceOnProduct($optionSimple, 700, now()->subDay()->format('Y-m-d'), now()->addMonth()->format('Y-m-d'));
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 
@@ -37,19 +23,7 @@ it('should use regular price when bundle option product special price has expire
     $option = $product->bundle_options->first();
     $optionSimple = $option->bundle_option_products->first()->product;
 
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 700]);
-
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_from']->id)
-        ->update(['date_value' => now()->subMonth()->format('Y-m-d')]);
-
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_to']->id)
-        ->update(['date_value' => now()->subDay()->format('Y-m-d')]);
-
-    Event::dispatch('catalog.product.update.after', $optionSimple);
+    $this->setSpecialPriceOnProduct($optionSimple, 700, now()->subMonth()->format('Y-m-d'), now()->subDay()->format('Y-m-d'));
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 
@@ -62,19 +36,7 @@ it('should use regular price when bundle option product special price has not st
     $option = $product->bundle_options->first();
     $optionSimple = $option->bundle_option_products->first()->product;
 
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 700]);
-
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_from']->id)
-        ->update(['date_value' => now()->addDay()->format('Y-m-d')]);
-
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_to']->id)
-        ->update(['date_value' => now()->addMonth()->format('Y-m-d')]);
-
-    Event::dispatch('catalog.product.update.after', $optionSimple);
+    $this->setSpecialPriceOnProduct($optionSimple, 700, now()->addDay()->format('Y-m-d'), now()->addMonth()->format('Y-m-d'));
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 
@@ -87,11 +49,7 @@ it('should apply special price to bundle option product when no date range is se
     $option = $product->bundle_options->first();
     $optionSimple = $option->bundle_option_products->first()->product;
 
-    $optionSimple->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 750]);
-
-    Event::dispatch('catalog.product.update.after', $optionSimple);
+    $this->setSpecialPriceOnProduct($optionSimple, 750);
 
     $response = $this->addBundleProductToCart($product)->assertOk();
 

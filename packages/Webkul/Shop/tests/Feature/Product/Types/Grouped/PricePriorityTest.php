@@ -9,11 +9,7 @@ it('should use the lower of special price and catalog rule for grouped associate
     $associated = $product->grouped_products->first()->associated_product;
 
     // Set special price = 800 on associated product.
-    $associated->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 800]);
-
-    Event::dispatch('catalog.product.update.after', $associated);
+    $this->setSpecialPriceOnProduct($associated, 800);
 
     // Catalog rule: 10% off → 900. MIN(800, 900) = 800.
     $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10], [1, 2, 3]);
@@ -28,11 +24,7 @@ it('should use catalog rule when lower than special price for grouped associated
     $associated = $product->grouped_products->first()->associated_product;
 
     // Set special price = 800 on associated product.
-    $associated->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 800]);
-
-    Event::dispatch('catalog.product.update.after', $associated);
+    $this->setSpecialPriceOnProduct($associated, 800);
 
     // Catalog rule: 30% off → 700. MIN(800, 700) = 700.
     $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30], [1, 2, 3]);
@@ -50,12 +42,8 @@ it('should use group price when lower than special price for grouped associated 
     $product = $this->createGroupedProduct([1000]);
     $associated = $product->grouped_products->first()->associated_product;
 
-    // Set special price = 800.
-    $associated->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 800]);
-
-    // Set group price = 600. MIN(800, 600) = 600.
+    // Set special price = 800, group price = 600. MIN(800, 600) = 600.
+    $this->setSpecialPriceOnProduct($associated, 800);
     $this->setCustomerGroupPrice($associated, 1, 'fixed', 600);
 
     $response = $this->addGroupedProductToCart($product)->assertOk();

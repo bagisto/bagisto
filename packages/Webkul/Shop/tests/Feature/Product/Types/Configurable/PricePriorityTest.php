@@ -9,11 +9,7 @@ it('should use the lower of special price and catalog rule for configurable vari
     $variant = $product->variants->first();
 
     // Set special price on variant.
-    $variant->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 800]);
-
-    Event::dispatch('catalog.product.update.after', $variant);
+    $this->setSpecialPriceOnProduct($variant, 800);
 
     // Catalog rule: 10% off → 900. MIN(800, 900) = 800.
     $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10], [1, 2, 3]);

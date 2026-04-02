@@ -20,21 +20,6 @@ trait CartHelpers
     }
 
     /**
-     * Smart add-to-cart that resolves the correct payload based on product type.
-     */
-    public function addProductByType(Product $product, int $qty = 1): TestResponse
-    {
-        return match ($product->type) {
-            'simple', 'virtual' => $this->addProductToCart($product->id, $qty),
-            'configurable' => $this->addConfigurableProductToCart($product, $qty),
-            'grouped' => $this->addGroupedProductToCart($product, $qty),
-            'bundle' => $this->addBundleProductToCart($product, $qty),
-            'downloadable' => $this->addDownloadableProductToCart($product, $qty),
-            default => throw new \InvalidArgumentException("Unsupported product type: {$product->type}"),
-        };
-    }
-
-    /**
      * Add a configurable product's first variant to the cart.
      */
     public function addConfigurableProductToCart(Product $product, int $qty = 1): TestResponse
@@ -89,6 +74,21 @@ trait CartHelpers
         return $this->addProductToCart($product->id, $qty, [
             'links' => $product->downloadable_links->pluck('id')->toArray(),
         ]);
+    }
+
+    /**
+     * Smart add-to-cart that resolves the correct payload based on product type.
+     */
+    public function addProductByType(Product $product, int $qty = 1): TestResponse
+    {
+        return match ($product->type) {
+            'simple', 'virtual' => $this->addProductToCart($product->id, $qty),
+            'configurable' => $this->addConfigurableProductToCart($product, $qty),
+            'grouped' => $this->addGroupedProductToCart($product, $qty),
+            'bundle' => $this->addBundleProductToCart($product, $qty),
+            'downloadable' => $this->addDownloadableProductToCart($product, $qty),
+            default => throw new \InvalidArgumentException("Unsupported product type: {$product->type}"),
+        };
     }
 
     /**

@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Event;
-
 // ============================================================================
 // Active Special Price
 // ============================================================================
@@ -10,12 +8,7 @@ it('should apply special price to configurable variant when within date range', 
     $product = $this->createConfigurableProduct([1000]);
     $variant = $product->variants->first();
 
-    // Set special price on the variant.
-    $variant->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 800]);
-
-    Event::dispatch('catalog.product.update.after', $variant);
+    $this->setSpecialPriceOnProduct($variant, 800);
 
     $response = $this->addProductToCart($product->id, 1, [
         'selected_configurable_option' => $variant->id,

@@ -13,6 +13,69 @@ use Webkul\Product\Models\ProductCustomerGroupPrice;
 trait PricingHelpers
 {
     /**
+     * Set a special price on a product and re-index.
+     *
+     * Used for composite types (configurable variants, grouped associated
+     * products, bundle option products) where the special price must be
+     * set on the child product after creation.
+     */
+    public function setSpecialPriceOnProduct(Product $product, float $price, ?string $from = null, ?string $to = null): void
+    {
+        $attributes = $this->getAttributeMap();
+
+        $product->attribute_values()
+            ->where('attribute_id', $attributes['special_price']->id)
+            ->update(['float_value' => $price]);
+
+        if ($from !== null) {
+            $product->attribute_values()
+                ->where('attribute_id', $attributes['special_price_from']->id)
+                ->update(['date_value' => $from]);
+        }
+
+        if ($to !== null) {
+            $product->attribute_values()
+                ->where('attribute_id', $attributes['special_price_to']->id)
+                ->update(['date_value' => $to]);
+        }
+
+        Event::dispatch('catalog.product.update.after', $product);
+    }
+
+    /**
+     * Set a customer group price on a product and re-index.
+     */
+    public function setCustomerGroupPrice(Product $product, int $customerGroupId, string $valueType, float $value, int $qty = 1): void
+    {
+        ProductCustomerGroupPrice::factory()->create([
+            'qty' => $qty,
+            'value_type' => $valueType,
+            'value' => $value,
+            'product_id' => $product->id,
+            'customer_group_id' => $customerGroupId,
+        ]);
+
+        Event::dispatch('catalog.product.update.after', $product);
+    }
+
+    /**
+     * Create and apply a catalog rule with index.
+     */
+    public function createCatalogRuleForPricing(array $overrides = [], array $customerGroups = [1, 2, 3]): CatalogRule
+    {
+        $channelId = core()->getCurrentChannel()->id;
+
+        return CatalogRule::factory()
+            ->withIndex([$channelId], $customerGroups)
+            ->create(array_merge([
+                'name' => 'test-catalog-rule-'.Str::uuid(),
+                'status' => 1,
+                'action_type' => 'by_percent',
+                'discount_amount' => 20,
+            ], $overrides));
+    }
+
+    /**
      * Create a cart rule with channel and customer group sync.
      */
     public function createCartRuleForPricing(array $overrides = [], array $customerGroups = [1, 2, 3]): CartRule
@@ -47,38 +110,5 @@ trait PricingHelpers
         ]);
 
         return $cartRule;
-    }
-
-    /**
-     * Set a customer group price on a product and re-index.
-     */
-    public function setCustomerGroupPrice(Product $product, int $customerGroupId, string $valueType, float $value, int $qty = 1): void
-    {
-        ProductCustomerGroupPrice::factory()->create([
-            'qty' => $qty,
-            'value_type' => $valueType,
-            'value' => $value,
-            'product_id' => $product->id,
-            'customer_group_id' => $customerGroupId,
-        ]);
-
-        Event::dispatch('catalog.product.update.after', $product);
-    }
-
-    /**
-     * Create and apply a catalog rule with index.
-     */
-    public function createCatalogRuleForPricing(array $overrides = [], array $customerGroups = [1, 2, 3]): CatalogRule
-    {
-        $channelId = core()->getCurrentChannel()->id;
-
-        return CatalogRule::factory()
-            ->withIndex([$channelId], $customerGroups)
-            ->create(array_merge([
-                'name' => 'test-catalog-rule-'.Str::uuid(),
-                'status' => 1,
-                'action_type' => 'by_percent',
-                'discount_amount' => 20,
-            ], $overrides));
     }
 }
