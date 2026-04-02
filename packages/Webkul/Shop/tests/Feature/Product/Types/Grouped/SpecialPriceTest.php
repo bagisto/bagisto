@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Event;
-
 // ============================================================================
 // Active Special Price
 // ============================================================================
@@ -11,19 +9,7 @@ it('should apply special price to grouped associated product when within date ra
 
     $associatedProduct = $product->grouped_products->first()->associated_product;
 
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 700]);
-
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_from']->id)
-        ->update(['date_value' => now()->subDay()->format('Y-m-d')]);
-
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_to']->id)
-        ->update(['date_value' => now()->addMonth()->format('Y-m-d')]);
-
-    Event::dispatch('catalog.product.update.after', $associatedProduct);
+    $this->setSpecialPriceOnProduct($associatedProduct, 700, now()->subDay()->format('Y-m-d'), now()->addMonth()->format('Y-m-d'));
 
     $qty = [];
     foreach ($product->grouped_products as $gp) {
@@ -40,19 +26,7 @@ it('should use regular price when grouped associated product special price has e
 
     $associatedProduct = $product->grouped_products->first()->associated_product;
 
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 700]);
-
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_from']->id)
-        ->update(['date_value' => now()->subMonth()->format('Y-m-d')]);
-
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_to']->id)
-        ->update(['date_value' => now()->subDay()->format('Y-m-d')]);
-
-    Event::dispatch('catalog.product.update.after', $associatedProduct);
+    $this->setSpecialPriceOnProduct($associatedProduct, 700, now()->subMonth()->format('Y-m-d'), now()->subDay()->format('Y-m-d'));
 
     $qty = [];
     foreach ($product->grouped_products as $gp) {
@@ -69,19 +43,7 @@ it('should use regular price when grouped associated product special price has n
 
     $associatedProduct = $product->grouped_products->first()->associated_product;
 
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 700]);
-
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_from']->id)
-        ->update(['date_value' => now()->addDay()->format('Y-m-d')]);
-
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price_to']->id)
-        ->update(['date_value' => now()->addMonth()->format('Y-m-d')]);
-
-    Event::dispatch('catalog.product.update.after', $associatedProduct);
+    $this->setSpecialPriceOnProduct($associatedProduct, 700, now()->addDay()->format('Y-m-d'), now()->addMonth()->format('Y-m-d'));
 
     $qty = [];
     foreach ($product->grouped_products as $gp) {
@@ -98,11 +60,7 @@ it('should apply special price to grouped associated product when no date range 
 
     $associatedProduct = $product->grouped_products->first()->associated_product;
 
-    $associatedProduct->attribute_values()
-        ->where('attribute_id', $this->getAttributeMap()['special_price']->id)
-        ->update(['float_value' => 750]);
-
-    Event::dispatch('catalog.product.update.after', $associatedProduct);
+    $this->setSpecialPriceOnProduct($associatedProduct, 750);
 
     $qty = [];
     foreach ($product->grouped_products as $gp) {

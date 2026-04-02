@@ -11,7 +11,7 @@ it('should apply percentage catalog rule discount for guest on downloadable prod
 
     $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 800);
 });
@@ -24,7 +24,7 @@ it('should apply percentage catalog rule discount for general customer on downlo
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 750);
 });
@@ -37,7 +37,7 @@ it('should apply percentage catalog rule discount for wholesaler on downloadable
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 700);
 });
@@ -51,7 +51,7 @@ it('should apply fixed catalog rule discount for guest on downloadable product',
 
     $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 150], [1, 2, 3]);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 850);
 });
@@ -64,7 +64,7 @@ it('should apply fixed catalog rule discount for general customer on downloadabl
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 800);
 });
@@ -77,7 +77,7 @@ it('should apply fixed catalog rule discount for wholesaler on downloadable prod
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);
 
-    $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
+    $response = $this->addDownloadableProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 750);
 });
