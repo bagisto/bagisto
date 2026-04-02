@@ -29,10 +29,10 @@ class Aggregate extends Column
 
         return $queryBuilder->having(function ($scopeQueryBuilder) use ($requestedValues) {
             if (is_string($requestedValues)) {
-                $scopeQueryBuilder->orHaving($this->columnName, 'LIKE', '%'.$requestedValues.'%');
+                $scopeQueryBuilder->orHaving($this->columnName, $this->likeOperator(), '%'.$requestedValues.'%');
             } elseif (is_array($requestedValues)) {
                 foreach ($requestedValues as $value) {
-                    $scopeQueryBuilder->orHaving($this->columnName, 'LIKE', '%'.$value.'%');
+                    $scopeQueryBuilder->orHaving($this->columnName, $this->likeOperator(), '%'.$value.'%');
                 }
             } else {
                 throw new InvalidColumnExpressionException('Only string and array are allowed for text column type.');

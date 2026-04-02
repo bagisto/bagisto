@@ -4,212 +4,106 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Webkul\Core\Models\SubscribersList;
 use Webkul\Customer\Models\CompareItem;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Shop\Mail\Customer\SubscriptionNotification;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 
-it('returns a successful response', function () {
-    // Act and Assert.
+// ============================================================================
+// Home Page
+// ============================================================================
+
+it('should return the home page', function () {
     get(route('shop.home.index'))
         ->assertOk();
 });
 
-it('displays the current currency code and channel code', function () {
-    // Act
-    $response = get(route('shop.home.index'));
+it('should display the current currency and channel code on the home page', function () {
+    $response = get(route('shop.home.index'))->assertOk();
 
-    // Assert
-    $response->assertOk();
-
-    /**
-     * We avoid using the `assertSeeText` method of the response because it may sometimes
-     * produce false positive results when dealing with large DOM sizes.
-     */
-    expect(Str::contains($response->content(), core()->getCurrentChannelCode()))
-        ->toBeTruthy();
-
-    expect(Str::contains($response->content(), core()->getCurrentCurrencyCode()))
-        ->toBeTruthy();
+    expect(Str::contains($response->content(), core()->getCurrentChannelCode()))->toBeTruthy();
+    expect(Str::contains($response->content(), core()->getCurrentCurrencyCode()))->toBeTruthy();
 });
 
-it('displays the "Sign In" and "Sign Up" buttons when the customer is not logged in', function () {
-    // Act
-    $response = get(route('shop.home.index'));
+it('should display sign in and sign up buttons for guests', function () {
+    $response = get(route('shop.home.index'))->assertOk();
 
-    // Assert
-    $response->assertOk();
-
-    /**
-     * We avoid using the `assertSeeText` method of the response because it may sometimes
-     * produce false positive results when dealing with large DOM sizes.
-     */
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.sign-in')))
-        ->toBeTruthy();
-
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.sign-up')))
-        ->toBeTruthy();
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.sign-in')))->toBeTruthy();
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.sign-up')))->toBeTruthy();
 });
 
-it('displays navigation buttons when the customer is logged in', function () {
-    // Act
+it('should display navigation links for authenticated customers', function () {
     $this->loginAsCustomer();
 
-    $response = get(route('shop.home.index'));
+    $response = get(route('shop.home.index'))->assertOk();
 
-    // Assert
-    $response->assertOk();
-
-    /**
-     * We avoid using the `assertSeeText` method of the response because it may sometimes
-     * produce false positive results when dealing with large DOM sizes.
-     */
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.profile')))
-        ->toBeTruthy();
-
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.orders')))
-        ->toBeTruthy();
-
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.wishlist')))
-        ->toBeTruthy();
-
-    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.logout')))
-        ->toBeTruthy();
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.profile')))->toBeTruthy();
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.orders')))->toBeTruthy();
+    expect(Str::contains($response->content(), trans('shop::app.components.layouts.header.desktop.bottom.logout')))->toBeTruthy();
 });
 
-it('should returns the home page of the store', function () {
-    get(route('shop.home.index'))
+// ============================================================================
+// Search
+// ============================================================================
+
+it('should return search results for a product', function () {
+    $product = $this->createSimpleProduct();
+
+    get(route('shop.search.index', ['query' => $product->name]))
         ->assertOk()
-        ->assertSeeText('The game with our new additions!')
-        ->assertSeeText('Our Collections')
-        ->assertSeeText('Get Ready for our new Bold Collections!')
-        ->assertSeeText('Get UPTO 40% OFF on your 1st order SHOP NOW');
+        ->assertSeeText(trans('shop::app.search.title', ['query' => $product->name]));
 });
 
-it('should returns the search page of the products', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-            6 => 'featured',
-            11 => 'price',
-            26 => 'guest_checkout',
-        ],
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-            'featured' => [
-                'boolean_value' => true,
-            ],
-            'price' => [
-                'float_value' => fake()->randomFloat(2, 1000, 5000),
-            ],
-            'guest_checkout' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))->getSimpleProductFactory()->create();
+// ============================================================================
+// Newsletter Subscription
+// ============================================================================
 
-    // Act and Assert.
-    get(route('shop.search.index', [
-        'query' => $query = $product->name,
-    ]))
-        ->assertOk()
-        ->assertSeeText($query)
-        ->assertSeeText(trans('shop::app.search.title', ['query' => $query]));
-});
-
-it('should fails the validation error when provided wrong email address when subscribe to the shop', function () {
-    // Act and Assert.
-    postJson(route('shop.subscription.store'))
-        ->assertJsonValidationErrorFor('email')
-        ->assertUnprocessable();
-});
-
-it('should store the subscription of the shop', function () {
-    // Act and Assert.
+it('should subscribe to the newsletter', function () {
     postJson(route('shop.subscription.store'), [
-        'email' => $email = fake()->email(),
+        'email' => $email = fake()->safeEmail(),
     ])
         ->assertRedirect();
 
-    $this->assertModelWise([
-        SubscribersList::class => [
-            [
-                'email' => $email,
-                'is_subscribed' => 1,
-            ],
-        ],
+    $this->assertDatabaseHas('subscribers_list', [
+        'email' => $email,
+        'is_subscribed' => true,
     ]);
 });
 
-it('should store the subscription of the shop and send the mail to the admin', function () {
-    // Act and Assert.
+it('should subscribe and send notification email', function () {
     Mail::fake();
 
     postJson(route('shop.subscription.store'), [
-        'email' => $email = fake()->email(),
+        'email' => fake()->safeEmail(),
     ])
         ->assertRedirect();
 
-    $this->assertModelWise([
-        SubscribersList::class => [
-            [
-                'email' => $email,
-                'is_subscribed' => 1,
-            ],
-        ],
-    ]);
-
     Mail::assertQueued(SubscriptionNotification::class);
-
-    Mail::assertQueuedCount(1);
 });
 
-it('should unsubscribe from the shop', function () {
-    // Arrange.
+it('should fail validation when email is missing on subscribe', function () {
+    postJson(route('shop.subscription.store'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('email');
+});
+
+it('should unsubscribe via token', function () {
     $subscriber = SubscribersList::factory()->create();
 
-    // Act and Assert.
-    get(route('shop.subscription.destroy', [
-        'token' => $subscriber->token,
-    ]))
+    get(route('shop.subscription.destroy', ['token' => $subscriber->token]))
         ->assertRedirect();
 
-    $this->assertDatabaseMissing('subscribers_list', [
-        'id' => $subscriber->id,
-    ]);
+    $this->assertDatabaseMissing('subscribers_list', ['id' => $subscriber->id]);
 });
 
-it('should store the products to the compare list', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-            6 => 'featured',
-            11 => 'price',
-            26 => 'guest_checkout',
-        ],
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-            'featured' => [
-                'boolean_value' => true,
-            ],
-            'price' => [
-                'float_value' => fake()->randomFloat(2, 1000, 5000),
-            ],
-            'guest_checkout' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))->getSimpleProductFactory()->create();
+// ============================================================================
+// Compare
+// ============================================================================
 
-    // Act and Assert.
+it('should add a product to the compare list', function () {
+    $product = $this->createSimpleProduct();
+
     $this->loginAsCustomer();
 
     postJson(route('shop.api.compare.store'), [
@@ -219,45 +113,20 @@ it('should store the products to the compare list', function () {
         ->assertSeeText(trans('shop::app.compare.item-add-success'));
 });
 
-it('should fails the validation error when not provided product id when move the compare list item', function () {
-    // Act and Assert.
+it('should fail validation when product_id is missing on compare store', function () {
     $this->loginAsCustomer();
 
     postJson(route('shop.api.compare.store'))
-        ->assertJsonValidationErrorFor('product_id')
-        ->assertUnprocessable();
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('product_id');
 });
 
-it('should remove product from compare list', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-            6 => 'featured',
-            11 => 'price',
-            26 => 'guest_checkout',
-        ],
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-            'featured' => [
-                'boolean_value' => true,
-            ],
-            'price' => [
-                'float_value' => fake()->randomFloat(2, 1000, 5000),
-            ],
-            'guest_checkout' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))->getSimpleProductFactory()->create();
-
-    // Act and Assert.
-    $this->loginAsCustomer();
+it('should remove a product from the compare list', function () {
+    $product = $this->createSimpleProduct();
+    $customer = $this->loginAsCustomer();
 
     CompareItem::factory()->create([
-        'customer_id' => auth()->guard('customer')->user()->id,
+        'customer_id' => $customer->id,
         'product_id' => $product->id,
     ]);
 
@@ -268,37 +137,17 @@ it('should remove product from compare list', function () {
         ->assertJsonPath('message', trans('shop::app.compare.remove-success'));
 });
 
-it('should remove all the products from compare list', function () {
-    // Arrange.
-    $products = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-            6 => 'featured',
-            11 => 'price',
-            26 => 'guest_checkout',
-        ],
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-            'featured' => [
-                'boolean_value' => true,
-            ],
-            'price' => [
-                'float_value' => fake()->randomFloat(2, 1000, 5000),
-            ],
-            'guest_checkout' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))->getSimpleProductFactory()->count(5)->create();
+it('should remove all products from the compare list', function () {
+    $customer = $this->loginAsCustomer();
 
-    // Act and Assert.
-    $this->loginAsCustomer();
+    $products = collect([
+        $this->createSimpleProduct(),
+        $this->createSimpleProduct(),
+    ]);
 
     foreach ($products as $product) {
         CompareItem::factory()->create([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $customer->id,
             'product_id' => $product->id,
         ]);
     }

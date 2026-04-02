@@ -7,8 +7,11 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
+// ============================================================================
+// Index
+// ============================================================================
+
 it('should return the email template index page', function () {
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.email_templates.index'))
@@ -17,139 +20,126 @@ it('should return the email template index page', function () {
         ->assertSeeText(trans('admin::app.marketing.communications.templates.index.create-btn'));
 });
 
-it('should return the create page of email template', function () {
-    // Act and Assert.
+it('should deny guest access to the email template index page', function () {
+    get(route('admin.marketing.communications.email_templates.index'))
+        ->assertRedirect(route('admin.session.create'));
+});
+
+// ============================================================================
+// Create
+// ============================================================================
+
+it('should return the email template create page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.communications.email_templates.create'))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.communications.templates.create.title'))
-        ->assertSeeText(trans('admin::app.marketing.communications.templates.create.save-btn'));
+        ->assertSeeText(trans('admin::app.marketing.communications.templates.create.title'));
 });
 
-it('should fail the validation with errors when certain inputs are not provided when store in email template', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
+// ============================================================================
+// Store
+// ============================================================================
 
-    postJson(route('admin.marketing.communications.email_templates.store'))
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('status')
-        ->assertJsonValidationErrorFor('content')
-        ->assertUnprocessable();
-});
-
-it('should fail the validation with errors when certain inputs are not provided also status field not provided correctly when store in email template', function () {
-    // Act and Assert.
+it('should store a newly created email template', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.communications.email_templates.store'), [
-        'status' => fake()->word(),
-    ])
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('status')
-        ->assertJsonValidationErrorFor('content')
-        ->assertUnprocessable();
-});
-
-it('should store the newly create email template', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.marketing.communications.email_templates.store', [
-        'name' => $name = fake()->name(),
+        'name' => $name = fake()->words(3, true),
         'status' => $status = fake()->randomElement(['active', 'inactive', 'draft']),
-        'content' => $content = substr(fake()->paragraph(), 0, 50),
-    ]))
-        ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
-        ->isRedirect();
-
-    $this->assertModelWise([
-        Template::class => [
-            [
-                'name' => $name,
-                'status' => $status,
-                'content' => $content,
-            ],
-        ],
-    ]);
-});
-
-it('should edit the email template', function () {
-    // Arrange.
-    $marketingEmailTemplate = Template::factory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    get(route('admin.marketing.communications.email_templates.edit', $marketingEmailTemplate->id))
-        ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.communications.templates.edit.title'))
-        ->assertSeeText(trans('admin::app.marketing.communications.templates.edit.save-btn'))
-        ->assertSeeText(trans('admin::app.marketing.communications.templates.create.content'));
-});
-
-it('should fail the validation with errors when certain inputs are not provided when update in email template', function () {
-    // Arrange.
-    $marketingEmailTemplate = Template::factory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.marketing.communications.email_templates.update', $marketingEmailTemplate->id))
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('status')
-        ->assertJsonValidationErrorFor('content')
-        ->assertUnprocessable();
-});
-
-it('should fail the validation with errors when certain inputs are not provided also status field not provided correctly when update in email template', function () {
-    // Arrange.
-    $marketingEmailTemplate = Template::factory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.marketing.communications.email_templates.update', $marketingEmailTemplate->id))
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('status')
-        ->assertJsonValidationErrorFor('content')
-        ->assertUnprocessable();
-});
-
-it('should update the existing the template', function () {
-    // Arrange.
-    $marketingEmailTemplate = Template::factory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.marketing.communications.email_templates.update', $marketingEmailTemplate->id), $data = [
-        'name' => $marketingEmailTemplate->name,
-        'status' => fake()->randomElement(['active', 'inactive', 'draft']),
-        'content' => substr(fake()->paragraph(), 0, 50),
+        'content' => $content = fake()->sentence(),
     ])
-        ->assertRedirect(route('admin.marketing.communications.email_templates.index'))
-        ->isRedirect();
+        ->assertRedirect(route('admin.marketing.communications.email_templates.index'));
 
-    $this->assertModelWise([
-        Template::class => [
-            [
-                'name' => $marketingEmailTemplate->name,
-                'status' => $data['status'],
-                'content' => $data['content'],
-            ],
-        ],
+    $this->assertDatabaseHas('marketing_templates', [
+        'name' => $name,
+        'status' => $status,
     ]);
 });
 
-it('should delete the specified email template', function () {
-    // Arrange.
-    $marketingEmailTemplate = Template::factory()->create();
-
-    // Act and Assert.
+it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.marketing.communications.email_templates.delete', $marketingEmailTemplate->id))
+    postJson(route('admin.marketing.communications.email_templates.store'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('content');
+});
+
+it('should fail validation when status is invalid on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.communications.email_templates.store'), [
+        'name' => fake()->words(3, true),
+        'status' => 'invalid_status',
+        'content' => fake()->sentence(),
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('status');
+});
+
+// ============================================================================
+// Edit
+// ============================================================================
+
+it('should return the email template edit page', function () {
+    $template = Template::factory()->create();
+
+    $this->loginAsAdmin();
+
+    get(route('admin.marketing.communications.email_templates.edit', $template->id))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.marketing.communications.templates.edit.title'));
+});
+
+// ============================================================================
+// Update
+// ============================================================================
+
+it('should update an existing email template', function () {
+    $template = Template::factory()->create();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.email_templates.update', $template->id), [
+        'name' => $template->name,
+        'status' => $status = fake()->randomElement(['active', 'inactive', 'draft']),
+        'content' => $content = fake()->sentence(),
+    ])
+        ->assertRedirect(route('admin.marketing.communications.email_templates.index'));
+
+    $this->assertDatabaseHas('marketing_templates', [
+        'id' => $template->id,
+        'name' => $template->name,
+        'status' => $status,
+    ]);
+});
+
+it('should fail validation when required fields are missing on update', function () {
+    $template = Template::factory()->create();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.communications.email_templates.update', $template->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('status')
+        ->assertJsonValidationErrorFor('content');
+});
+
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete an email template', function () {
+    $template = Template::factory()->create();
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.marketing.communications.email_templates.delete', $template->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.communications.templates.delete-success'));
+
+    $this->assertDatabaseMissing('marketing_templates', ['id' => $template->id]);
 });

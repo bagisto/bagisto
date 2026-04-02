@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Webkul\CartRule\Contracts\CartRule as CartRuleContract;
-use Webkul\Core\Database\Factories\CartRuleFactory;
+use Webkul\CartRule\Database\Factories\CartRuleFactory;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 
@@ -53,6 +53,19 @@ class CartRule extends Model implements CartRuleContract
      */
     protected $casts = [
         'conditions' => 'array',
+        'status' => 'boolean',
+        'coupon_type' => 'integer',
+        'use_auto_generation' => 'boolean',
+        'condition_type' => 'integer',
+        'end_other_rules' => 'boolean',
+        'uses_attribute_conditions' => 'boolean',
+        'apply_to_shipping' => 'boolean',
+        'free_shipping' => 'boolean',
+        'usage_per_customer' => 'integer',
+        'uses_per_coupon' => 'integer',
+        'times_used' => 'integer',
+        'discount_quantity' => 'integer',
+        'sort_order' => 'integer',
     ];
 
     /**

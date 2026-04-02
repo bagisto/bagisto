@@ -10,11 +10,14 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File as Filesystem;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 use Webkul\Installer\Database\Seeders\Category\CategoryTableSeeder;
 use Webkul\Installer\Database\Seeders\Shop\ThemeCustomizationTableSeeder;
 
 class ProductTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Base path for product images within the package.
      */
@@ -153,6 +156,8 @@ class ProductTableSeeder extends Seeder
         $this->seedProducts($this->defaultLocale);
 
         $this->seedProductRelations();
+
+        $this->syncPostgresSequences();
     }
 
     // =========================================================================

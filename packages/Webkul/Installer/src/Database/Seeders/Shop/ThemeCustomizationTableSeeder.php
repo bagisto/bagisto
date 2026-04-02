@@ -7,9 +7,12 @@ use Illuminate\Database\Seeder;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class ThemeCustomizationTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Base path for the images.
      */
@@ -497,6 +500,8 @@ class ThemeCustomizationTableSeeder extends Seeder
                     ],
                 ]);
         }
+
+        $this->syncPostgresSequences(['theme_customizations']);
     }
 
     /**

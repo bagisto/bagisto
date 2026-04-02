@@ -162,7 +162,7 @@ it('handles payment failure gracefully', function () {
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'customer_email' => $customer->email,
-        'is_guest' => 0,
+        'is_guest' => false,
         'base_grand_total' => 100.00,
     ]);
 

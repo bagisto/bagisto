@@ -5,9 +5,12 @@ namespace Webkul\Installer\Database\Seeders\Attribute;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class AttributeTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Seed the application's database.
      *
@@ -755,5 +758,7 @@ class AttributeTableSeeder extends Seeder
                 ],
             ]);
         }
+
+        $this->syncPostgresSequences(['attributes']);
     }
 }

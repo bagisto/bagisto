@@ -4,9 +4,12 @@ namespace Webkul\Installer\Database\Seeders\RMA;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class RMAStatusSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Run the database seeds.
      *
@@ -75,5 +78,7 @@ class RMAStatusSeeder extends Seeder
         ];
 
         DB::table('rma_statuses')->insert($defaultStatuses);
+
+        $this->syncPostgresSequences(['rma_statuses']);
     }
 }

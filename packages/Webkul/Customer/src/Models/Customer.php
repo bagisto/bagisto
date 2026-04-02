@@ -40,6 +40,9 @@ class Customer extends Authenticatable implements CustomerContract
      */
     protected $casts = [
         'subscribed_to_news_letter' => 'boolean',
+        'status' => 'boolean',
+        'is_verified' => 'boolean',
+        'is_suspended' => 'boolean',
     ];
 
     /**

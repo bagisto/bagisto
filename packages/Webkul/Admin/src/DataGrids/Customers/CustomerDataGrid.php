@@ -53,13 +53,24 @@ class CustomerDataGrid extends DataGrid
             )
             ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'addresses.id) as address_count'))
             ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'orders.id) as order_count'))
-            ->addSelect(DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name) as full_name'))
-            ->groupBy('customers.id');
+            ->addSelect(DB::raw(db_grammar()->concat($tablePrefix.'customers.first_name', "' '", $tablePrefix.'customers.last_name').' as full_name'))
+            ->groupBy(
+                'customers.id',
+                'customers.email',
+                'customers.phone',
+                'customers.gender',
+                'customers.status',
+                'customers.is_suspended',
+                'customer_groups.name',
+                'customers.channel_id',
+                'customers.first_name',
+                'customers.last_name'
+            );
 
         $this->addFilter('channel_id', 'customers.channel_id');
         $this->addFilter('customer_id', 'customers.id');
         $this->addFilter('email', 'customers.email');
-        $this->addFilter('full_name', DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name)'));
+        $this->addFilter('full_name', DB::raw(db_grammar()->concat($tablePrefix.'customers.first_name', "' '", $tablePrefix.'customers.last_name')));
         $this->addFilter('group', 'customer_groups.name');
         $this->addFilter('phone', 'customers.phone');
         $this->addFilter('status', 'customers.status');

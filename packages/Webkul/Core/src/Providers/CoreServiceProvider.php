@@ -14,8 +14,12 @@ use Webkul\Core\Console\Commands\BagistoVersion;
 use Webkul\Core\Console\Commands\ExchangeRateUpdate;
 use Webkul\Core\Console\Commands\InvoiceOverdueCron;
 use Webkul\Core\Console\Commands\TranslationsChecker;
+use Webkul\Core\Contracts\DatabaseGrammar;
+use Webkul\Core\Enums\SupportedDatabaseEnum;
 use Webkul\Core\Exceptions\Handler;
 use Webkul\Core\Facades\ElasticSearch;
+use Webkul\Core\Helpers\Database\Grammar\MySqlGrammar;
+use Webkul\Core\Helpers\Database\Grammar\PgSqlGrammar;
 use Webkul\Core\View\Compilers\BladeCompiler;
 use Webkul\Theme\ViewRenderEventManager;
 
@@ -31,6 +35,8 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerCommands();
 
         $this->registerOverrides();
+
+        $this->registerDatabaseGrammar();
     }
 
     /**
@@ -63,21 +69,6 @@ class CoreServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the console commands of this package.
-     */
-    protected function registerCommands(): void
-    {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                BagistoVersion::class,
-                ExchangeRateUpdate::class,
-                InvoiceOverdueCron::class,
-                TranslationsChecker::class,
-            ]);
-        }
-    }
-
-    /**
      * Register the exchange rate update schedule based on core configuration.
      */
     protected function registerExchangeRateSchedule(Schedule $schedule): void
@@ -100,6 +91,21 @@ class CoreServiceProvider extends ServiceProvider
             };
         } catch (\Exception) {
             // Silently skip when database is not yet available (e.g., during installation).
+        }
+    }
+
+    /**
+     * Register the console commands of this package.
+     */
+    protected function registerCommands(): void
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                BagistoVersion::class,
+                ExchangeRateUpdate::class,
+                InvoiceOverdueCron::class,
+                TranslationsChecker::class,
+            ]);
         }
     }
 
@@ -136,6 +142,22 @@ class CoreServiceProvider extends ServiceProvider
         $this->app->singleton(
             'blade.compiler',
             fn ($app) => new BladeCompiler($app['files'], $app['config']['view.compiled'])
+        );
+    }
+
+    /**
+     * Register the database grammar abstraction based on the active driver.
+     */
+    protected function registerDatabaseGrammar(): void
+    {
+        $this->app->singleton(
+            DatabaseGrammar::class,
+            fn ($app) => match ($app['db']->getDriverName()) {
+                SupportedDatabaseEnum::PGSQL->value => new PgSqlGrammar,
+                SupportedDatabaseEnum::MYSQL->value,
+                SupportedDatabaseEnum::MARIADB->value => new MySqlGrammar,
+                default => new MySqlGrammar,
+            }
         );
     }
 }

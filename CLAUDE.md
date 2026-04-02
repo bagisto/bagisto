@@ -19,6 +19,7 @@ php artisan optimize:clear      # Clear all caches (run after config/code change
 ### Testing
 ```bash
 vendor/bin/pest                                         # Run all tests
+vendor/bin/pest --parallel                              # Run all tests in parallel (6 processes)
 vendor/bin/pest --testsuite="Admin Feature Test"        # Run a specific test suite
 vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directory
 vendor/bin/pest --filter="test name"                    # Run a single test by name
@@ -27,6 +28,22 @@ vendor/bin/pest --filter="test name"                    # Run a single test by n
 Test suites defined in `phpunit.xml`: Admin Feature, Core Unit, Customer Unit, DataGrid Unit, Installer Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
 
 Tests use **Pest 3** with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
+
+### Fresh Database Setup for Testing
+Parallel testing creates databases named `{DB_DATABASE}_test_1`, `{DB_DATABASE}_test_2`, etc. based on the number of CPU cores. For example, with `DB_DATABASE=bagisto` on a 6-core machine, it creates `bagisto_test_1` through `bagisto_test_6`. This applies to both MySQL and PostgreSQL.
+
+When the schema changes, these test databases become stale and must be dropped before re-running:
+
+```bash
+# Drop parallel test databases (adjust the count to match your CPU cores)
+php artisan tinker --execute="for (\$i = 1; \$i <= 6; \$i++) { try { DB::statement(\"DROP DATABASE IF EXISTS bagisto_test_{\$i}\"); } catch (\Exception \$e) {} }"
+
+# Fresh install
+php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
+
+# Run tests
+vendor/bin/pest --parallel --no-coverage
+```
 
 ### E2E Tests (Playwright)
 E2E tests are run from within each package directory. Each package has its own Playwright config and tests:
@@ -54,6 +71,32 @@ Tests require a running Laravel server (`php artisan serve`) and seeded database
 vendor/bin/pint             # Fix PHP code style (Laravel Pint)
 vendor/bin/pint --test      # Check style without fixing
 ```
+
+**Important:** Always run `vendor/bin/pint` on modified files after every code change before running tests or marking work as complete.
+
+### Commenting Conventions
+
+- **Section headers / titles**: Title Case, no trailing period.
+  ```php
+  // Store
+  // Product Attribute Values
+  // Store — All Product Types
+  ```
+- **Inline labels** (grouping assertions inside a test): Title Case, no trailing period.
+  ```php
+  // Core fields
+  // Text fields indexed from attribute values
+  // Numeric fields
+  // Boolean fields
+  // Locale and channel
+  ```
+- **Sentence comments** (explanations, steps, notes): Start with a capital letter and end with a period.
+  ```php
+  // Step 1: Store the product skeleton via the controller.
+  // Virtual products do not require weight, length, width, or height.
+  // Verify product_flat reflects the changed values.
+  ```
+- **PHPDoc**: Every method should have a single-line description ending with a period.
 
 ### Translations
 When adding new translation keys, always provide translations for **all locales** in the package's `Resources/lang/` directory. Verify with:

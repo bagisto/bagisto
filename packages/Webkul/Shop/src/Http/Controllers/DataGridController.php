@@ -36,7 +36,7 @@ class DataGridController extends Controller
          */
         return app($column->options['params']['repository'])
             ->select([$column->options['params']['column']['label'].' as label', $column->options['params']['column']['value'].' as value'])
-            ->where($column->options['params']['column']['label'], 'LIKE', '%'.$params['search'].'%')
+            ->where($column->options['params']['column']['label'], $column->likeOperator(), '%'.$params['search'].'%')
             ->get();
     }
 }

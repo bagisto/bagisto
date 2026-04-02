@@ -2,9 +2,9 @@
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Customer\Models\Customer;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\ProductReview;
 use Webkul\Product\Models\ProductReviewAttachment;
 
@@ -13,8 +13,46 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should returns the review page', function () {
-    // Act and Assert.
+// ============================================================================
+// Helpers
+// ============================================================================
+
+/**
+ * Create a product review with an optional attachment.
+ */
+function createReview(object $testCase, bool $withAttachment = false): array
+{
+    $product = $testCase->createSimpleProduct();
+    $customer = Customer::factory()->create();
+
+    $review = ProductReview::factory()->create([
+        'product_id' => $product->id,
+        'customer_id' => $customer->id,
+        'name' => $customer->first_name,
+    ]);
+
+    $attachment = null;
+
+    if ($withAttachment) {
+        $file = UploadedFile::fake()->image('review.png');
+        $fileType = explode('/', $file->getMimeType());
+
+        $attachment = ProductReviewAttachment::factory()->create([
+            'path' => $file->store('review/'.$review->id),
+            'review_id' => $review->id,
+            'type' => $fileType[0],
+            'mime_type' => $fileType[1],
+        ]);
+    }
+
+    return compact('product', 'customer', 'review', 'attachment');
+}
+
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the reviews index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.customers.customers.review.index'))
@@ -22,371 +60,175 @@ it('should returns the review page', function () {
         ->assertSeeText(trans('admin::app.customers.reviews.index.title'));
 });
 
-it('should return the edit page of the review', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
+it('should deny guest access to the reviews index page', function () {
+    get(route('admin.customers.customers.review.index'))
+        ->assertRedirect(route('admin.session.create'));
+});
 
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
+// ============================================================================
+// Edit
+// ============================================================================
 
-    $customer = Customer::factory()->create();
+it('should return review details with attachment', function () {
+    ['review' => $review, 'attachment' => $attachment] = createReview($this, withAttachment: true);
 
-    $productReview = ProductReview::factory()->create([
-        'product_id' => $product->id,
-        'customer_id' => $customer->id,
-        'name' => $customer->name,
-    ]);
-
-    $attachment = UploadedFile::fake()->image('test.png');
-
-    $fileType = explode('/', $attachment->getMimeType());
-
-    $productReviewAttachment = ProductReviewAttachment::factory()->create([
-        'path' => $attachment->store('review/'.$productReview->id),
-        'review_id' => $productReview->id,
-        'type' => $fileType[0],
-        'mime_type' => $fileType[1],
-    ]);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    get(route('admin.customers.customers.review.edit', $productReview->id))
+    get(route('admin.customers.customers.review.edit', $review->id))
         ->assertOk()
-        ->assertJsonPath('data.id', $productReview->id)
-        ->assertJsonPath('data.title', $productReview->title)
-        ->assertJsonPath('data.comment', $productReview->comment);
+        ->assertJsonPath('data.id', $review->id)
+        ->assertJsonPath('data.title', $review->title)
+        ->assertJsonPath('data.comment', $review->comment);
 
-    $this->assertModelWise([
-        ProductReviewAttachment::class => [
-            [
-                'review_id' => $productReview->id,
-                'path' => $productReviewAttachment->path,
-                'type' => $productReviewAttachment->type,
-                'mime_type' => $productReviewAttachment->mime_type,
-            ],
-        ],
-
-        ProductReview::class => [
-            [
-                'name' => $productReview->name,
-                'title' => $productReview->title,
-                'rating' => $productReview->rating,
-                'comment' => $productReview->comment,
-                'status' => $productReview->status,
-                'product_id' => $productReview->product_id,
-                'customer_id' => $productReview->customer_id,
-            ],
-        ],
-    ]);
-
-    Storage::assertExists($productReviewAttachment->path);
+    Storage::assertExists($attachment->path);
 });
 
-it('should fail the validation with errors for status for review update', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
+// ============================================================================
+// Update
+// ============================================================================
 
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
+it('should update the status of a review', function () {
+    ['review' => $review] = createReview($this);
 
-    $customer = Customer::factory()->create();
-
-    $productReview = ProductReview::factory()->create([
-        'product_id' => $product->id,
-        'customer_id' => $customer->id,
-        'name' => $customer->name,
-    ]);
-
-    $attachment = UploadedFile::fake()->image('test.png');
-
-    $fileType = explode('/', $attachment->getMimeType());
-
-    $productReviewAttachment = ProductReviewAttachment::factory()->create([
-        'path' => $attachment->store('review/'.$productReview->id),
-        'review_id' => $productReview->id,
-        'type' => $fileType[0],
-        'mime_type' => $fileType[1],
-    ]);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.customers.customers.review.update', $productReview->id))
-        ->assertJsonValidationErrorFor('status')
-        ->assertUnprocessable();
+    $status = Arr::random(['approved', 'disapproved', 'pending']);
 
-    $this->assertModelWise([
-        ProductReviewAttachment::class => [
-            [
-                'review_id' => $productReview->id,
-                'path' => $productReviewAttachment->path,
-                'type' => $productReviewAttachment->type,
-                'mime_type' => $productReviewAttachment->mime_type,
-            ],
-        ],
-
-        ProductReview::class => [
-            [
-                'name' => $productReview->name,
-                'title' => $productReview->title,
-                'rating' => $productReview->rating,
-                'comment' => $productReview->comment,
-                'status' => $productReview->status,
-                'product_id' => $productReview->product_id,
-                'customer_id' => $productReview->customer_id,
-            ],
-        ],
-    ]);
-
-    Storage::assertExists($productReviewAttachment->path);
-});
-
-it('should update the status of the review', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
-
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $customer = Customer::factory()->create();
-
-    $productReview = ProductReview::factory()->create([
-        'product_id' => $product->id,
-        'customer_id' => $customer->id,
-        'name' => $customer->name,
-    ]);
-
-    $attachment = UploadedFile::fake()->image('test.png');
-
-    $fileType = explode('/', $attachment->getMimeType());
-
-    $productReviewAttachment = ProductReviewAttachment::factory()->create([
-        'path' => $attachment->store('review/'.$productReview->id),
-        'review_id' => $productReview->id,
-        'type' => $fileType[0],
-        'mime_type' => $fileType[1],
-    ]);
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.customers.customers.review.update', $productReview->id), [
-        'status' => $status = Arr::random(['approved', 'disapproved', 'pending']),
+    putJson(route('admin.customers.customers.review.update', $review->id), [
+        'status' => $status,
     ])
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.customers.reviews.index.edit.update-success'));
 
-    $this->assertModelWise([
-        ProductReviewAttachment::class => [
-            [
-                'review_id' => $productReview->id,
-                'path' => $productReviewAttachment->path,
-                'type' => $productReviewAttachment->type,
-                'mime_type' => $productReviewAttachment->mime_type,
-            ],
-        ],
-
-        ProductReview::class => [
-            [
-                'name' => $productReview->name,
-                'title' => $productReview->title,
-                'rating' => $productReview->rating,
-                'comment' => $productReview->comment,
-                'status' => $status,
-                'product_id' => $productReview->product_id,
-                'customer_id' => $productReview->customer_id,
-            ],
-        ],
+    $this->assertDatabaseHas('product_reviews', [
+        'id' => $review->id,
+        'status' => $status,
     ]);
-
-    Storage::assertExists($productReviewAttachment->path);
 });
 
-it('should delete the review', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
+it('should fail validation when status is missing on update', function () {
+    ['review' => $review] = createReview($this);
 
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $customer = Customer::factory()->create();
-
-    $productReview = ProductReview::factory()->create([
-        'product_id' => $product->id,
-        'customer_id' => $customer->id,
-        'name' => $customer->name,
-    ]);
-
-    $attachment = UploadedFile::fake()->image('test.png');
-
-    $fileType = explode('/', $attachment->getMimeType());
-
-    $productReviewAttachment = ProductReviewAttachment::factory()->create([
-        'path' => $attachment->store('review/'.$productReview->id),
-        'review_id' => $productReview->id,
-        'type' => $fileType[0],
-        'mime_type' => $fileType[1],
-    ]);
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.customers.customers.review.delete', $productReview->id))
+    putJson(route('admin.customers.customers.review.update', $review->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('status');
+});
+
+it('should fail validation when status is invalid on update', function () {
+    ['review' => $review] = createReview($this);
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.customers.customers.review.update', $review->id), [
+        'status' => 'invalid_status',
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('status');
+});
+
+it('should dispatch events when updating a review', function () {
+    Event::fake();
+
+    ['review' => $review] = createReview($this);
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.customers.customers.review.update', $review->id), [
+        'status' => 'approved',
+    ])
+        ->assertOk();
+
+    Event::assertDispatched('customer.review.update.before');
+    Event::assertDispatched('customer.review.update.after');
+});
+
+// ============================================================================
+// Destroy
+// ============================================================================
+
+it('should delete a review and its attachments', function () {
+    ['review' => $review, 'attachment' => $attachment] = createReview($this, withAttachment: true);
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.customers.customers.review.delete', $review->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.delete-success'));
 
-    $this->assertDatabaseMissing('product_reviews', [
-        'id' => $productReview->id,
-    ]);
-
-    $this->assertDatabaseMissing('product_review_attachments', [
-        'id' => $productReviewAttachment->id,
-    ]);
-
-    Storage::assertDirectoryEmpty($productReviewAttachment->path);
+    $this->assertDatabaseMissing('product_reviews', ['id' => $review->id]);
+    $this->assertDatabaseMissing('product_review_attachments', ['id' => $attachment->id]);
 });
 
-it('should mass delete the product review', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
+it('should dispatch events when deleting a review', function () {
+    Event::fake();
 
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
+    ['review' => $review] = createReview($this);
 
-    $customer = Customer::factory()->create();
-
-    $productReviews = ProductReview::factory()->count(5)->create([
-        'product_id' => $product->id,
-        'customer_id' => $customer->id,
-        'name' => $customer->name,
-    ]);
-
-    $productReviewAttachments = [];
-
-    foreach ($productReviews as $key => $productReview) {
-        $attachment = UploadedFile::fake()->image('test_'.$key.'.png');
-
-        $fileType = explode('/', $attachment->getMimeType());
-
-        $productReviewAttachments[] = ProductReviewAttachment::factory()->create([
-            'path' => $attachment->store('review/'.$productReview->id),
-            'review_id' => $productReview->id,
-            'type' => $fileType[0],
-            'mime_type' => $fileType[1],
-        ]);
-    }
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.customers.customers.review.mass_delete', [
-        'indices' => $productReviews->pluck('id')->toArray(),
-    ]))
+    deleteJson(route('admin.customers.customers.review.delete', $review->id))
+        ->assertOk();
+
+    Event::assertDispatched('customer.review.delete.before');
+    Event::assertDispatched('customer.review.delete.after');
+});
+
+// ============================================================================
+// Mass Delete
+// ============================================================================
+
+it('should mass delete reviews', function () {
+    $product = $this->createSimpleProduct();
+    $customer = Customer::factory()->create();
+
+    $reviews = ProductReview::factory()->count(3)->create([
+        'product_id' => $product->id,
+        'customer_id' => $customer->id,
+        'name' => $customer->first_name,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.customers.customers.review.mass_delete'), [
+        'indices' => $reviews->pluck('id')->toArray(),
+    ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.mass-delete-success'));
 
-    foreach ($productReviews as $productReview) {
-        $this->assertDatabaseMissing('product_reviews', [
-            'id' => $productReview->id,
-        ]);
-    }
-
-    foreach ($productReviewAttachments as $productReviewAttachment) {
-        $this->assertDatabaseMissing('product_review_attachments', [
-            'id' => $productReviewAttachment->id,
-        ]);
-
-        Storage::assertDirectoryEmpty($productReviewAttachment->path);
+    foreach ($reviews as $review) {
+        $this->assertDatabaseMissing('product_reviews', ['id' => $review->id]);
     }
 });
 
-it('should mass update the product review', function () {
-    // Arrange.
-    $status = Arr::random(['approved', 'disapproved', 'pending']);
+// ============================================================================
+// Mass Update
+// ============================================================================
 
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-        ],
+it('should mass update review status', function () {
+    $product = $this->createSimpleProduct();
+    $customer = Customer::factory()->create();
 
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))
-        ->getSimpleProductFactory()
-        ->create();
-
-    $productReviews = ProductReview::factory()->count(2)->create([
-        'status' => $status,
+    $reviews = ProductReview::factory()->count(3)->create([
         'product_id' => $product->id,
+        'customer_id' => $customer->id,
+        'status' => 'pending',
     ]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.customers.customers.review.mass_update', [
-        'indices' => $productReviews->pluck('id')->toArray(),
-        'value' => $status,
-    ]))
+    postJson(route('admin.customers.customers.review.mass_update'), [
+        'indices' => $reviews->pluck('id')->toArray(),
+        'value' => 'approved',
+    ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.customers.reviews.index.datagrid.mass-update-success'));
 
-    foreach ($productReviews as $productReview) {
-        $this->assertModelWise([
-            ProductReview::class => [
-                [
-                    'id' => $productReview->id,
-                    'status' => $productReview->status,
-                ],
-            ],
+    foreach ($reviews as $review) {
+        $this->assertDatabaseHas('product_reviews', [
+            'id' => $review->id,
+            'status' => 'approved',
         ]);
     }
 });

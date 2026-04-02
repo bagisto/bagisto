@@ -52,7 +52,7 @@ return new class extends Migration
             $table->string('product_type')->nullable();
             $table->integer('order_id')->unsigned()->nullable();
             $table->integer('parent_id')->unsigned()->nullable();
-            $table->json('additional')->nullable();
+            $table->jsonb('additional')->nullable();
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

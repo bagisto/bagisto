@@ -88,7 +88,6 @@ class Price extends AbstractIndexer
     {
         while (true) {
             $paginator = $this->productRepository
-                ->distinct()
                 ->select('products.*')
                 ->with([
                     'variants',
@@ -117,6 +116,7 @@ class Price extends AbstractIndexer
                         ->orWhere('special_price_to_pav.date_value', Carbon::now()->subDays(1)->format('Y-m-d'))
                         ->orWhere('catalog_rule_product_prices.rule_date', Carbon::now()->subDays(1)->format('Y-m-d'));
                 })
+                ->groupBy('products.id')
                 ->cursorPaginate($this->batchSize);
 
             $this->reindexBatch($paginator->items());

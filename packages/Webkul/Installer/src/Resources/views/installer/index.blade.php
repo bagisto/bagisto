@@ -496,6 +496,10 @@
                                         >
                                             @lang('installer::app.installer.index.environment-configuration.mysql')
                                         </option>
+
+                                        <option value="pgsql">
+                                            PostgreSQL
+                                        </option>
                                     </x-installer::form.control-group.control>
 
                                     <x-installer::form.control-group.error control-name="db_connection" />
@@ -1298,13 +1302,9 @@
                         formSubmit(params, { setErrors }) {
                             const stepActions = {
                                 envDatabase: (params, setErrors) => {
-                                    if (params.db_connection === 'mysql') {
-                                        this.completeStep('envDatabase', 'readyForInstallation', 'active', 'complete', setErrors);
+                                    this.completeStep('envDatabase', 'readyForInstallation', 'active', 'complete', setErrors);
 
-                                        this.envData = { ...this.envData, ...params };
-                                    } else {
-                                        setErrors({ 'db_connection': ["Bagisto currently supports MySQL only."] });
-                                    }
+                                    this.envData = { ...this.envData, ...params };
                                 },
 
                                 readyForInstallation: (params, setErrors) => {

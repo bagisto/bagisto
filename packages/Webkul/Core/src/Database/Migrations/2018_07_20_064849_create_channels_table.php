@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('hostname')->nullable();
             $table->string('logo')->nullable();
             $table->string('favicon')->nullable();
-            $table->json('home_seo')->nullable();
+            $table->jsonb('home_seo')->nullable();
             $table->boolean('is_maintenance_on')->default(0);
             $table->text('allowed_ips')->nullable();
             $table->integer('root_category_id')->nullable()->unsigned();

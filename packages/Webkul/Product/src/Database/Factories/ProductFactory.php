@@ -15,99 +15,62 @@ class ProductFactory extends Factory
     protected $model = Product::class;
 
     /**
-     * States.
-     *
-     * @var string[]
-     */
-    protected $states = [
-        'simple',
-        'configurable',
-        'virtual',
-        'grouped',
-        'downloadable',
-        'bundle',
-    ];
-
-    /**
      * Define the model's default state.
      */
     public function definition(): array
     {
         return [
-            'sku' => $this->faker->uuid,
+            'sku' => $this->faker->uuid(),
+            'type' => 'simple',
             'attribute_family_id' => 1,
         ];
     }
 
     /**
-     * Simple state.
+     * Set the product type to simple.
      */
-    public function simple(): ProductFactory
+    public function simple(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => 'simple',
-            ];
-        });
+        return $this->state(fn () => ['type' => 'simple']);
     }
 
     /**
-     * Virtual state.
+     * Set the product type to virtual.
      */
-    public function virtual(): ProductFactory
+    public function virtual(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => 'virtual',
-            ];
-        });
+        return $this->state(fn () => ['type' => 'virtual']);
     }
 
     /**
-     * Grouped state.
+     * Set the product type to grouped.
      */
-    public function grouped(): ProductFactory
+    public function grouped(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => 'grouped',
-            ];
-        });
+        return $this->state(fn () => ['type' => 'grouped']);
     }
 
     /**
-     * Configurable state.
+     * Set the product type to configurable.
      */
-    public function configurable(): ProductFactory
+    public function configurable(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => 'configurable',
-            ];
-        });
+        return $this->state(fn () => ['type' => 'configurable']);
     }
 
     /**
-     * Downloadable state.
+     * Set the product type to downloadable.
      */
-    public function downloadable(): ProductFactory
+    public function downloadable(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => 'downloadable',
-            ];
-        });
+        return $this->state(fn () => ['type' => 'downloadable']);
     }
 
     /**
-     * Bundle state.
+     * Set the product type to bundle.
      */
-    public function bundle(): ProductFactory
+    public function bundle(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'type' => 'bundle',
-            ];
-        });
+        return $this->state(fn () => ['type' => 'bundle']);
     }
 }

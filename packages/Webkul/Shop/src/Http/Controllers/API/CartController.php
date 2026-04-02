@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Webkul\CartRule\Repositories\CartRuleCouponRepository;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Checkout\Models\CartAddress;
@@ -287,12 +288,14 @@ class CartController extends APIController
 
         $productIds = $cart->items->pluck('product_id')->toArray();
 
+        $crossSellIds = DB::table('product_cross_sells')
+            ->whereIn('parent_id', $productIds)
+            ->whereNotIn('child_id', $productIds)
+            ->distinct()
+            ->pluck('child_id');
+
         $products = $this->productRepository
-            ->select('products.*', 'product_cross_sells.child_id')
-            ->join('product_cross_sells', 'products.id', '=', 'product_cross_sells.child_id')
-            ->whereIn('product_cross_sells.parent_id', $productIds)
-            ->whereNotIn('product_cross_sells.child_id', $productIds)
-            ->groupBy('product_cross_sells.child_id')
+            ->whereIn('products.id', $crossSellIds)
             ->take(core()->getConfigData('catalog.products.cart_view_page.no_of_cross_sells_products'))
             ->get();
 

@@ -41,7 +41,16 @@ class RMADataGrid extends DataGrid
                 DB::raw('SUM('.$tablePrefix.'rma_items.quantity) as total_quantity'),
             )
             ->where('orders.customer_id', auth()->guard('customer')->user()->id)
-            ->groupBy('rma.id');
+            ->groupBy(
+                'rma.id',
+                'rma.order_id',
+                'rma.rma_status_id',
+                'rma.created_at',
+                'orders.customer_email',
+                'orders.status',
+                'rma_statuses.title',
+                'rma_statuses.color'
+            );
 
         $this->addFilter('id', 'rma.id');
         $this->addFilter('order_id', 'rma.order_id');

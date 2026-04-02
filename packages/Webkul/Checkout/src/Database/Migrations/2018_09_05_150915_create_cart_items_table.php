@@ -39,7 +39,7 @@ return new class extends Migration
             $table->integer('cart_id')->unsigned();
             $table->integer('tax_category_id')->unsigned()->nullable();
             $table->string('applied_cart_rule_ids')->nullable();
-            $table->json('additional')->nullable();
+            $table->jsonb('additional')->nullable();
             $table->timestamps();
 
             $table->foreign('parent_id')->references('id')->on('cart_items')->onDelete('cascade');

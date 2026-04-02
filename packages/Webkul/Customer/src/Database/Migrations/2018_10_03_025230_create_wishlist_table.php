@@ -18,11 +18,11 @@ return new class extends Migration
             $table->integer('channel_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->integer('customer_id')->unsigned();
-            $table->json('item_options')->nullable();
+            $table->jsonb('item_options')->nullable();
             $table->date('moved_to_cart')->nullable();
             $table->boolean('shared')->nullable();
             $table->date('time_of_moving')->nullable();
-            $table->json('additional')->nullable();
+            $table->jsonb('additional')->nullable();
             $table->timestamps();
 
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');

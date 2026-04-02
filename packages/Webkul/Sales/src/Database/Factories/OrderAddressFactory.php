@@ -28,6 +28,15 @@ class OrderAddressFactory extends Factory
     {
         return [
             'address_type' => OrderAddress::ADDRESS_TYPE_BILLING,
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'email' => $this->faker->email(),
+            'address' => $this->faker->streetAddress(),
+            'city' => $this->faker->city(),
+            'state' => $this->faker->state(),
+            'country' => $this->faker->countryCode(),
+            'postcode' => $this->faker->postcode(),
+            'phone' => $this->faker->phoneNumber(),
         ];
     }
 

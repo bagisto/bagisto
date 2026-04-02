@@ -36,11 +36,9 @@ class UpdateCreateIndex implements ShouldQueue
             return;
         }
 
-        $ids = implode(',', $this->productIds);
-
         $products = app(ProductRepository::class)
             ->whereIn('id', $this->productIds)
-            ->orderByRaw("FIELD(id, $ids)")
+            ->orderByRaw(db_grammar()->orderByField('id', $this->productIds))
             ->get();
 
         app(ElasticSearch::class)->reindexRows($products);

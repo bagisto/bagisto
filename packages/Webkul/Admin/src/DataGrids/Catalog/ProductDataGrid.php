@@ -69,7 +69,22 @@ class ProductDataGrid extends DataGrid
             ->addSelect(DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity'))
             ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
             ->where('product_flat.locale', app()->getLocale())
-            ->groupBy('product_flat.product_id');
+            ->groupBy(
+                'product_flat.product_id',
+                'product_flat.locale',
+                'product_flat.channel',
+                'product_images.path',
+                'pc.category_id',
+                'ct.name',
+                'product_flat.sku',
+                'product_flat.name',
+                'product_flat.type',
+                'product_flat.status',
+                'product_flat.price',
+                'product_flat.url_key',
+                'product_flat.visible_individually',
+                'af.name'
+            );
 
         $this->addFilter('product_id', 'product_flat.product_id');
         $this->addFilter('channel', 'product_flat.channel');
@@ -341,7 +356,7 @@ class ProductDataGrid extends DataGrid
 
         if ($ids) {
             $this->queryBuilder
-                ->orderBy(DB::raw('FIELD('.DB::getTablePrefix().'product_flat.product_id, '.implode(',', $ids).')'));
+                ->orderByRaw(db_grammar()->orderByField(DB::getTablePrefix().'product_flat.product_id', $ids));
         }
 
         $total = $results['hits']['total']['value'];

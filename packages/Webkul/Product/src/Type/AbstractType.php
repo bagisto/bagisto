@@ -990,12 +990,14 @@ abstract class AbstractType
 
         $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        $customerGroupPrices = $this->product->customer_group_prices()->where(function ($query) use ($customerGroup) {
-            $query->where('customer_group_id', $customerGroup->id)
-                ->orWhereNull('customer_group_id');
-        })
+        $customerGroupPrices = $this->product->customer_group_prices()
+            ->select('qty', 'value', 'value_type', 'customer_group_id')
+            ->where(function ($query) use ($customerGroup) {
+                $query->where('customer_group_id', $customerGroup->id)
+                    ->orWhereNull('customer_group_id');
+            })
             ->where('qty', '>', 1)
-            ->groupBy('qty')
+            ->groupBy('qty', 'value', 'value_type', 'customer_group_id')
             ->orderBy('qty')
             ->get();
 

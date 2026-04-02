@@ -456,7 +456,7 @@
 
                 data() {
                     return {
-                        conditionType: {{ old('condition_type') ?: $catalogRule->condition_type }},
+                        conditionType: {{ (int) (old('condition_type') ?: $catalogRule->condition_type) }},
 
                         conditions: @json($catalogRule->conditions ?: [])
                     }

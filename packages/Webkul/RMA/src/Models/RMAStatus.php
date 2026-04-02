@@ -24,4 +24,14 @@ class RMAStatus extends Model implements RMAStatusContract
         'status',
         'color',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'boolean',
+        'default' => 'integer',
+    ];
 }

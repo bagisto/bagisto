@@ -475,7 +475,7 @@ abstract class DataGrid
                                 ColumnTypeEnum::BOOLEAN->value,
                                 ColumnTypeEnum::AGGREGATE->value,
                             ]))
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getColumnName(), 'LIKE', '%'.$value.'%'));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getColumnName(), $column->likeOperator(), '%'.$value.'%'));
                     }
                 });
             } else {
