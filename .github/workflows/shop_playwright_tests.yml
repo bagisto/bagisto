@@ -20,18 +20,40 @@ jobs:
         node-version: ['22.13.1']
         shard-index: [1,2,3,4,5,6]
         shard-total: [6]
+        db: [mysql, pgsql]
+        include:
+          - db: mysql
+            db-label: MySQL
+            db-image: mysql:8.0
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: mysqladmin ping
+            php-db-ext: pdo_mysql
 
-    name: Shop | Playwright Tests | Shard ${{ matrix.shard-index }} Of ${{ matrix.shard-total }}
+          - db: pgsql
+            db-label: PostgreSQL
+            db-image: postgres:16
+            db-port: 5432
+            db-user: postgres
+            db-password: postgres
+            db-health: pg_isready
+            php-db-ext: pdo_pgsql
+
+    name: Shop | ${{ matrix.db-label }} | Shard ${{ matrix.shard-index }} Of ${{ matrix.shard-total }}
 
     services:
-      mysql:
-        image: mysql:8.0
+      database:
+        image: ${{ matrix.db-image }}
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: ${{ matrix.db-password }}
           MYSQL_DATABASE: bagisto
+          POSTGRES_USER: ${{ matrix.db-user }}
+          POSTGRES_PASSWORD: ${{ matrix.db-password }}
+          POSTGRES_DB: bagisto
         ports:
-          - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+          - ${{ matrix.db-port }}
+        options: --health-cmd="${{ matrix.db-health }}" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
       - name: Checkout
@@ -41,7 +63,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-versions }}
-          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, ${{ matrix.php-db-ext }}, tokenizer, zip
           ini-values: error_reporting=E_ALL
           tools: composer:v2
 
@@ -63,14 +85,14 @@ jobs:
       - name: Setting Environment
         run: |
           cp .env.example .env
+          sed -i "s|^\(DB_CONNECTION=\s*\).*$|\1${{ matrix.db }}|" .env
           sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
-          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.database.ports[matrix.db-port] }}|" .env
           sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
-          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
-          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
+          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1${{ matrix.db-user }}|" .env
+          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1${{ matrix.db-password }}|" .env
           sed -i "s|^\(APP_DEBUG=\s*\).*$|\1false|" .env
           sed -i "s|^\(APP_URL=\s*\).*$|\1http://127.0.0.1:8000|" .env
-          cat .env
 
       - name: Install Composer Dependencies
         run: composer install
@@ -98,9 +120,9 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-results-${{ matrix.shard-index }}-${{ github.run_id }}-${{ github.run_number }}
+          name: shop-results-${{ matrix.db }}-shard-${{ matrix.shard-index }}-${{ github.run_id }}
           path: |
             packages/Webkul/Shop/tests/e2e-pw/playwright-report
-            packages/Webkul/Shop/tests/e2e-pw/test-results
+            packages/Webkul/Shop/tests/Feature/e2e-pw/test-results
             storage/logs/laravel.log
           retention-days: 1
