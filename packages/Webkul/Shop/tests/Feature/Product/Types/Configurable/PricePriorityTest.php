@@ -1,10 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Event;
-use Webkul\CartRule\Models\CartRule;
-use Webkul\CatalogRule\Models\CatalogRule;
-use Webkul\Product\Models\ProductCustomerGroupPrice;
-
 // ============================================================================
 // Special Price vs Catalog Rule
 // ============================================================================
@@ -21,9 +16,7 @@ it('should use the lower of special price and catalog rule for configurable vari
     Event::dispatch('catalog.product.update.after', $variant);
 
     // Catalog rule: 10% off → 900. MIN(800, 900) = 800.
-    CatalogRule::factory()
-        ->withIndex([1], [1, 2, 3])
-        ->create(['status' => 1, 'action_type' => 'by_percent', 'discount_amount' => 10]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10], [1, 2, 3]);
 
     $response = $this->addProductToCart($product->id, 1, [
         'selected_configurable_option' => $variant->id,
@@ -40,15 +33,7 @@ it('should use group price when lower than regular price for configurable varian
     $product = $this->createConfigurableProduct([1000]);
     $variant = $product->variants->first();
 
-    ProductCustomerGroupPrice::factory()->create([
-        'qty' => 1,
-        'value_type' => 'fixed',
-        'value' => 600,
-        'product_id' => $variant->id,
-        'customer_group_id' => 1,
-    ]);
-
-    Event::dispatch('catalog.product.update.after', $variant);
+    $this->setCustomerGroupPrice($variant, 1, 'fixed', 600);
 
     $response = $this->addProductToCart($product->id, 1, [
         'selected_configurable_option' => $variant->id,
@@ -65,15 +50,7 @@ it('should apply cart rule discount on top of variant price for configurable pro
     $product = $this->createConfigurableProduct([800]);
     $variant = $product->variants->first();
 
-    CartRule::factory()->afterCreating(function (CartRule $rule) {
-        $rule->cart_rule_customer_groups()->sync([1, 2, 3]);
-        $rule->cart_rule_channels()->sync([1]);
-    })->create([
-        'status' => 1,
-        'action_type' => 'by_fixed',
-        'discount_amount' => 50,
-        'coupon_type' => 0,
-    ]);
+    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 50]);
 
     $response = $this->addProductToCart($product->id, 1, [
         'selected_configurable_option' => $variant->id,
