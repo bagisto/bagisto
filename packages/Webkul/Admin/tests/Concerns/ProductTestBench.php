@@ -123,6 +123,119 @@ trait ProductTestBench
         return $product->fresh();
     }
 
+    /**
+     * Create a configurable product with variants via factory.
+     *
+     * Returns the parent product with variants loaded. Each variant is a
+     * fully-indexed simple product with its own price.
+     */
+    public function createConfigurableProduct(array $variantPrices = [100, 200]): Product
+    {
+        $channel = core()->getCurrentChannel();
+
+        // Create parent configurable product.
+        $parent = Product::factory()->state(['type' => 'configurable'])->create();
+        $parent->channels()->sync([$channel->id]);
+
+        // Create variant simple products and attach as children.
+        foreach ($variantPrices as $price) {
+            $variant = $this->createSimpleProduct(['price' => ['float_value' => $price]]);
+            $variant->update(['parent_id' => $parent->id]);
+        }
+
+        Event::dispatch('catalog.product.update.after', $parent);
+
+        return $parent->fresh()->load('variants');
+    }
+
+    /**
+     * Create a grouped product with associated simple products via factory.
+     *
+     * Returns the grouped parent. Associated simple products are accessible
+     * via the `grouped_products` relationship.
+     */
+    public function createGroupedProduct(array $associatedPrices = [100, 200]): Product
+    {
+        $channel = core()->getCurrentChannel();
+
+        $parent = Product::factory()->state(['type' => 'grouped'])->create();
+        $parent->channels()->sync([$channel->id]);
+
+        $sortOrder = 0;
+
+        foreach ($associatedPrices as $price) {
+            $simple = $this->createSimpleProduct(['price' => ['float_value' => $price]]);
+
+            $parent->grouped_products()->create([
+                'associated_product_id' => $simple->id,
+                'sort_order' => $sortOrder++,
+                'qty' => 1,
+            ]);
+        }
+
+        Event::dispatch('catalog.product.update.after', $parent);
+
+        return $parent->fresh()->load('grouped_products');
+    }
+
+    /**
+     * Create a downloadable product with links via factory.
+     */
+    public function createDownloadableProduct(array $overrides = [], array $linkPrices = [10, 20]): Product
+    {
+        $product = $this->createProduct('downloadable', $overrides);
+
+        foreach ($linkPrices as $i => $price) {
+            $product->downloadable_links()->create([
+                'title' => "Link {$i}",
+                'price' => $price,
+                'type' => 'url',
+                'url' => "https://example.com/file{$i}.pdf",
+                'sort_order' => $i,
+                'downloads' => 0,
+            ]);
+        }
+
+        return $product->fresh();
+    }
+
+    /**
+     * Create a bundle product with one select option containing simple products.
+     */
+    public function createBundleProduct(array $optionProductPrices = [100, 200]): Product
+    {
+        $channel = core()->getCurrentChannel();
+        $locale = app()->getLocale();
+
+        $parent = Product::factory()->state(['type' => 'bundle'])->create();
+        $parent->channels()->sync([$channel->id]);
+
+        // Create a bundle option with its translation.
+        $option = $parent->bundle_options()->create([
+            'type' => 'select',
+            'is_required' => 1,
+            'sort_order' => 0,
+            $locale => ['label' => 'Select Option'],
+        ]);
+
+        $sortOrder = 0;
+
+        foreach ($optionProductPrices as $price) {
+            $simple = $this->createSimpleProduct(['price' => ['float_value' => $price]]);
+
+            $option->bundle_option_products()->create([
+                'product_id' => $simple->id,
+                'qty' => 1,
+                'sort_order' => $sortOrder++,
+                'is_default' => $sortOrder === 1 ? 1 : 0,
+            ]);
+        }
+
+        Event::dispatch('catalog.product.update.after', $parent);
+
+        return $parent->fresh()->load('bundle_options.bundle_option_products');
+    }
+
     // ========================================================================
     // Route-Based Helpers (for real store + update flow verification)
     // ========================================================================

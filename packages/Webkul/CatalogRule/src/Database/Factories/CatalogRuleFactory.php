@@ -35,11 +35,18 @@ class CatalogRuleFactory extends Factory
     }
 
     /**
-     * Configure the model factory.
+     * Sync channels, customer groups, and trigger the catalog rule indexer.
+     *
+     * Call this after creating a rule that needs its price indices populated.
+     * The event must fire AFTER channels and customer groups are synced,
+     * otherwise the indexing job finds no relationships and skips the product.
      */
-    public function configure(): static
+    public function withIndex(array $channelIds = [1], array $customerGroupIds = [1, 2, 3]): static
     {
-        return $this->afterCreating(function (CatalogRule $catalogRule) {
+        return $this->afterCreating(function (CatalogRule $catalogRule) use ($channelIds, $customerGroupIds) {
+            $catalogRule->channels()->sync($channelIds);
+            $catalogRule->customer_groups()->sync($customerGroupIds);
+
             Event::dispatch('promotions.catalog_rule.update.after', $catalogRule);
         });
     }
