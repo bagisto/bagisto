@@ -1,6 +1,5 @@
 <?php
 
-use Webkul\CatalogRule\Models\CatalogRule;
 use Webkul\Customer\Models\Customer;
 
 // ============================================================================
@@ -14,9 +13,7 @@ it('should apply percentage catalog rule to bundle product for guest', function 
     $option = $product->bundle_options->first();
     $firstOptionProduct = $option->bundle_option_products->first();
 
-    CatalogRule::factory()
-        ->withIndex([1], [1, 2, 3])
-        ->create(['status' => 1, 'action_type' => 'by_percent', 'discount_amount' => 20]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
 
     $response = $this->addProductToCart($product->id, 1, [
         'bundle_options' => [$option->id => [$firstOptionProduct->id]],
@@ -33,9 +30,7 @@ it('should apply percentage catalog rule to bundle product for general customer'
     $option = $product->bundle_options->first();
     $firstOptionProduct = $option->bundle_option_products->first();
 
-    CatalogRule::factory()
-        ->withIndex([1], [2])
-        ->create(['status' => 1, 'action_type' => 'by_percent', 'discount_amount' => 25]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 25], [2]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
@@ -55,9 +50,7 @@ it('should apply percentage catalog rule to bundle product for wholesaler', func
     $option = $product->bundle_options->first();
     $firstOptionProduct = $option->bundle_option_products->first();
 
-    CatalogRule::factory()
-        ->withIndex([1], [3])
-        ->create(['status' => 1, 'action_type' => 'by_percent', 'discount_amount' => 30]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30], [3]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);
@@ -81,9 +74,7 @@ it('should apply fixed catalog rule to bundle product for guest', function () {
     $option = $product->bundle_options->first();
     $firstOptionProduct = $option->bundle_option_products->first();
 
-    CatalogRule::factory()
-        ->withIndex([1], [1, 2, 3])
-        ->create(['status' => 1, 'action_type' => 'by_fixed', 'discount_amount' => 150]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 150], [1, 2, 3]);
 
     $response = $this->addProductToCart($product->id, 1, [
         'bundle_options' => [$option->id => [$firstOptionProduct->id]],
@@ -100,9 +91,7 @@ it('should apply fixed catalog rule to bundle product for general customer', fun
     $option = $product->bundle_options->first();
     $firstOptionProduct = $option->bundle_option_products->first();
 
-    CatalogRule::factory()
-        ->withIndex([1], [2])
-        ->create(['status' => 1, 'action_type' => 'by_fixed', 'discount_amount' => 200]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 200], [2]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
@@ -122,9 +111,7 @@ it('should apply fixed catalog rule to bundle product for wholesaler', function 
     $option = $product->bundle_options->first();
     $firstOptionProduct = $option->bundle_option_products->first();
 
-    CatalogRule::factory()
-        ->withIndex([1], [3])
-        ->create(['status' => 1, 'action_type' => 'by_fixed', 'discount_amount' => 250]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 250], [3]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);

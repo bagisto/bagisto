@@ -1,24 +1,6 @@
 <?php
 
-use Webkul\CartRule\Models\CartRule;
-use Webkul\CartRule\Models\CartRuleCoupon;
 use Webkul\Customer\Models\Customer;
-
-/**
- * Create a cart rule for virtual pricing tests.
- */
-function createVirtualCartRule(array $overrides = [], array $customerGroups = [1, 2, 3]): CartRule
-{
-    return CartRule::factory()->afterCreating(function (CartRule $rule) use ($customerGroups) {
-        $rule->cart_rule_customer_groups()->sync($customerGroups);
-        $rule->cart_rule_channels()->sync([1]);
-    })->create(array_merge([
-        'status' => 1,
-        'action_type' => 'by_fixed',
-        'discount_amount' => 50,
-        'coupon_type' => 0,
-    ], $overrides));
-}
 
 // ============================================================================
 // No Coupon — Fixed Discount
@@ -27,7 +9,7 @@ function createVirtualCartRule(array $overrides = [], array $customerGroups = [1
 it('should apply fixed cart rule discount to virtual product for all groups', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
 
-    createVirtualCartRule(['action_type' => 'by_fixed', 'discount_amount' => 50]);
+    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 50]);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
@@ -37,7 +19,7 @@ it('should apply fixed cart rule discount to virtual product for all groups', fu
 it('should apply fixed cart rule discount to virtual product for guest', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
 
-    createVirtualCartRule(['action_type' => 'by_fixed', 'discount_amount' => 25], [1]);
+    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 25], [1]);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
@@ -47,7 +29,7 @@ it('should apply fixed cart rule discount to virtual product for guest', functio
 it('should apply fixed cart rule discount to virtual product for general customer', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
 
-    createVirtualCartRule(['action_type' => 'by_fixed', 'discount_amount' => 40], [2]);
+    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 40], [2]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
@@ -60,7 +42,7 @@ it('should apply fixed cart rule discount to virtual product for general custome
 it('should apply fixed cart rule discount to virtual product for wholesaler', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
 
-    createVirtualCartRule(['action_type' => 'by_fixed', 'discount_amount' => 60], [3]);
+    $this->createCartRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 60], [3]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);
@@ -77,7 +59,7 @@ it('should apply fixed cart rule discount to virtual product for wholesaler', fu
 it('should apply percentage cart rule discount to virtual product for all groups', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 1000]]);
 
-    createVirtualCartRule(['action_type' => 'by_percent', 'discount_amount' => 10]);
+    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 10]);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
@@ -87,7 +69,7 @@ it('should apply percentage cart rule discount to virtual product for all groups
 it('should apply percentage cart rule discount to virtual product for guest', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 1000]]);
 
-    createVirtualCartRule(['action_type' => 'by_percent', 'discount_amount' => 15], [1]);
+    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 15], [1]);
 
     $response = $this->addProductToCart($product->id)->assertOk();
 
@@ -97,7 +79,7 @@ it('should apply percentage cart rule discount to virtual product for guest', fu
 it('should apply percentage cart rule discount to virtual product for general customer', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 1000]]);
 
-    createVirtualCartRule(['action_type' => 'by_percent', 'discount_amount' => 20], [2]);
+    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [2]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
@@ -110,7 +92,7 @@ it('should apply percentage cart rule discount to virtual product for general cu
 it('should apply percentage cart rule discount to virtual product for wholesaler', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 1000]]);
 
-    createVirtualCartRule(['action_type' => 'by_percent', 'discount_amount' => 25], [3]);
+    $this->createCartRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 25], [3]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);
@@ -127,44 +109,24 @@ it('should apply percentage cart rule discount to virtual product for wholesaler
 it('should apply coupon with fixed discount to virtual product for all groups', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
 
-    $cartRule = createVirtualCartRule([
-        'coupon_type' => 1,
-        'use_auto_generation' => 0,
-        'action_type' => 'by_fixed',
-        'discount_amount' => 75,
-    ]);
-
-    CartRuleCoupon::factory()->create([
-        'cart_rule_id' => $cartRule->id,
-        'code' => $code = 'VSAVE75',
-    ]);
+    $this->createCouponCartRule('VSAVE75', ['action_type' => 'by_fixed', 'discount_amount' => 75]);
 
     $this->addProductToCart($product->id)->assertOk();
 
-    $response = $this->applyCoupon($code)->assertOk();
+    $response = $this->applyCoupon('VSAVE75')->assertOk();
 
     $this->assertCartDiscount($response, 75);
-    $response->assertJsonPath('data.coupon_code', $code);
+    $response->assertJsonPath('data.coupon_code', 'VSAVE75');
 });
 
 it('should apply coupon with fixed discount to virtual product for guest', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
 
-    $cartRule = createVirtualCartRule([
-        'coupon_type' => 1,
-        'use_auto_generation' => 0,
-        'action_type' => 'by_fixed',
-        'discount_amount' => 50,
-    ], [1]);
-
-    CartRuleCoupon::factory()->create([
-        'cart_rule_id' => $cartRule->id,
-        'code' => $code = 'VGUEST50',
-    ]);
+    $this->createCouponCartRule('VGUEST50', ['action_type' => 'by_fixed', 'discount_amount' => 50], [1]);
 
     $this->addProductToCart($product->id)->assertOk();
 
-    $response = $this->applyCoupon($code)->assertOk();
+    $response = $this->applyCoupon('VGUEST50')->assertOk();
 
     $this->assertCartDiscount($response, 50);
 });
@@ -172,24 +134,14 @@ it('should apply coupon with fixed discount to virtual product for guest', funct
 it('should apply coupon with fixed discount to virtual product for general customer', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
 
-    $cartRule = createVirtualCartRule([
-        'coupon_type' => 1,
-        'use_auto_generation' => 0,
-        'action_type' => 'by_fixed',
-        'discount_amount' => 60,
-    ], [2]);
-
-    CartRuleCoupon::factory()->create([
-        'cart_rule_id' => $cartRule->id,
-        'code' => $code = 'VGEN60',
-    ]);
+    $this->createCouponCartRule('VGEN60', ['action_type' => 'by_fixed', 'discount_amount' => 60], [2]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
 
     $this->addProductToCart($product->id)->assertOk();
 
-    $response = $this->applyCoupon($code)->assertOk();
+    $response = $this->applyCoupon('VGEN60')->assertOk();
 
     $this->assertCartDiscount($response, 60);
 });
@@ -197,24 +149,14 @@ it('should apply coupon with fixed discount to virtual product for general custo
 it('should apply coupon with fixed discount to virtual product for wholesaler', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 500]]);
 
-    $cartRule = createVirtualCartRule([
-        'coupon_type' => 1,
-        'use_auto_generation' => 0,
-        'action_type' => 'by_fixed',
-        'discount_amount' => 80,
-    ], [3]);
-
-    CartRuleCoupon::factory()->create([
-        'cart_rule_id' => $cartRule->id,
-        'code' => $code = 'VWHOLE80',
-    ]);
+    $this->createCouponCartRule('VWHOLE80', ['action_type' => 'by_fixed', 'discount_amount' => 80], [3]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);
 
     $this->addProductToCart($product->id)->assertOk();
 
-    $response = $this->applyCoupon($code)->assertOk();
+    $response = $this->applyCoupon('VWHOLE80')->assertOk();
 
     $this->assertCartDiscount($response, 80);
 });
@@ -222,22 +164,12 @@ it('should apply coupon with fixed discount to virtual product for wholesaler', 
 it('should apply coupon with percentage discount to virtual product for all groups', function () {
     $product = $this->createVirtualProduct(['price' => ['float_value' => 1000]]);
 
-    $cartRule = createVirtualCartRule([
-        'coupon_type' => 1,
-        'use_auto_generation' => 0,
-        'action_type' => 'by_percent',
-        'discount_amount' => 20,
-    ]);
-
-    CartRuleCoupon::factory()->create([
-        'cart_rule_id' => $cartRule->id,
-        'code' => $code = 'VSAVE20',
-    ]);
+    $this->createCouponCartRule('VSAVE20', ['action_type' => 'by_percent', 'discount_amount' => 20]);
 
     $this->addProductToCart($product->id)->assertOk();
 
-    $response = $this->applyCoupon($code)->assertOk();
+    $response = $this->applyCoupon('VSAVE20')->assertOk();
 
     $this->assertCartDiscount($response, 200);
-    $response->assertJsonPath('data.coupon_code', $code);
+    $response->assertJsonPath('data.coupon_code', 'VSAVE20');
 });

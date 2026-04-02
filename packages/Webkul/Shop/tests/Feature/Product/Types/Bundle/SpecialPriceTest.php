@@ -2,22 +2,6 @@
 
 use Illuminate\Support\Facades\Event;
 
-/**
- * Add a bundle product's first option to cart.
- */
-function addBundleToCartForSpecialPrice($test, $product)
-{
-    $product->load('bundle_options.bundle_option_products');
-
-    $option = $product->bundle_options->first();
-    $firstOptionProduct = $option->bundle_option_products->first();
-
-    return $test->addProductToCart($product->id, 1, [
-        'bundle_options' => [$option->id => [$firstOptionProduct->id]],
-        'bundle_option_qty' => [$option->id => 1],
-    ]);
-}
-
 // ============================================================================
 // Active Special Price
 // ============================================================================
@@ -42,7 +26,7 @@ it('should apply special price to bundle option product when within date range',
 
     Event::dispatch('catalog.product.update.after', $optionSimple);
 
-    $response = addBundleToCartForSpecialPrice($this, $product)->assertOk();
+    $response = $this->addBundleProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 700);
 });
@@ -67,7 +51,7 @@ it('should use regular price when bundle option product special price has expire
 
     Event::dispatch('catalog.product.update.after', $optionSimple);
 
-    $response = addBundleToCartForSpecialPrice($this, $product)->assertOk();
+    $response = $this->addBundleProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 1000);
 });
@@ -92,7 +76,7 @@ it('should use regular price when bundle option product special price has not st
 
     Event::dispatch('catalog.product.update.after', $optionSimple);
 
-    $response = addBundleToCartForSpecialPrice($this, $product)->assertOk();
+    $response = $this->addBundleProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 1000);
 });
@@ -109,7 +93,7 @@ it('should apply special price to bundle option product when no date range is se
 
     Event::dispatch('catalog.product.update.after', $optionSimple);
 
-    $response = addBundleToCartForSpecialPrice($this, $product)->assertOk();
+    $response = $this->addBundleProductToCart($product)->assertOk();
 
     $this->assertCartItemPrice($response, 750);
 });

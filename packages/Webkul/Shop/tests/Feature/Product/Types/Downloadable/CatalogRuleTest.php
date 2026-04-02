@@ -1,6 +1,5 @@
 <?php
 
-use Webkul\CatalogRule\Models\CatalogRule;
 use Webkul\Customer\Models\Customer;
 
 // ============================================================================
@@ -10,9 +9,7 @@ use Webkul\Customer\Models\Customer;
 it('should apply percentage catalog rule discount for guest on downloadable product', function () {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    CatalogRule::factory()
-        ->withIndex([1], [1, 2, 3])
-        ->create(['status' => 1, 'action_type' => 'by_percent', 'discount_amount' => 20]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 20], [1, 2, 3]);
 
     $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
 
@@ -22,9 +19,7 @@ it('should apply percentage catalog rule discount for guest on downloadable prod
 it('should apply percentage catalog rule discount for general customer on downloadable product', function () {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    CatalogRule::factory()
-        ->withIndex([1], [2])
-        ->create(['status' => 1, 'action_type' => 'by_percent', 'discount_amount' => 25]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 25], [2]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
@@ -37,9 +32,7 @@ it('should apply percentage catalog rule discount for general customer on downlo
 it('should apply percentage catalog rule discount for wholesaler on downloadable product', function () {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    CatalogRule::factory()
-        ->withIndex([1], [3])
-        ->create(['status' => 1, 'action_type' => 'by_percent', 'discount_amount' => 30]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_percent', 'discount_amount' => 30], [3]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);
@@ -56,9 +49,7 @@ it('should apply percentage catalog rule discount for wholesaler on downloadable
 it('should apply fixed catalog rule discount for guest on downloadable product', function () {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    CatalogRule::factory()
-        ->withIndex([1], [1, 2, 3])
-        ->create(['status' => 1, 'action_type' => 'by_fixed', 'discount_amount' => 150]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 150], [1, 2, 3]);
 
     $response = $this->addProductToCart($product->id, 1, ['links' => $product->downloadable_links->pluck('id')->toArray()])->assertOk();
 
@@ -68,9 +59,7 @@ it('should apply fixed catalog rule discount for guest on downloadable product',
 it('should apply fixed catalog rule discount for general customer on downloadable product', function () {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    CatalogRule::factory()
-        ->withIndex([1], [2])
-        ->create(['status' => 1, 'action_type' => 'by_fixed', 'discount_amount' => 200]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 200], [2]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 2]);
     $this->loginAsCustomer($customer);
@@ -83,9 +72,7 @@ it('should apply fixed catalog rule discount for general customer on downloadabl
 it('should apply fixed catalog rule discount for wholesaler on downloadable product', function () {
     $product = $this->createDownloadableProduct(['price' => ['float_value' => 1000]], [0]);
 
-    CatalogRule::factory()
-        ->withIndex([1], [3])
-        ->create(['status' => 1, 'action_type' => 'by_fixed', 'discount_amount' => 250]);
+    $this->createCatalogRuleForPricing(['action_type' => 'by_fixed', 'discount_amount' => 250], [3]);
 
     $customer = Customer::factory()->create(['customer_group_id' => 3]);
     $this->loginAsCustomer($customer);
