@@ -58,10 +58,21 @@ class Date extends Column
                 }
             } elseif (is_array($requestedDates)) {
                 foreach ($requestedDates as $value) {
-                    $scopeQueryBuilder->whereBetween($this->columnName, [
-                        $value[0] ? (str_contains($value[0], ' ') ? $value[0] : $value[0].' 00:00:01') : '',
-                        $value[1] ? (str_contains($value[1], ' ') ? $value[1] : $value[1].' 23:59:59') : '',
-                    ]);
+                    $from = ! empty($value[0])
+                        ? (str_contains($value[0], ' ') ? $value[0] : $value[0].' 00:00:01')
+                        : null;
+
+                    $to = ! empty($value[1])
+                        ? (str_contains($value[1], ' ') ? $value[1] : $value[1].' 23:59:59')
+                        : null;
+
+                    if ($from && $to) {
+                        $scopeQueryBuilder->whereBetween($this->columnName, [$from, $to]);
+                    } elseif ($from) {
+                        $scopeQueryBuilder->where($this->columnName, '>=', $from);
+                    } elseif ($to) {
+                        $scopeQueryBuilder->where($this->columnName, '<=', $to);
+                    }
                 }
             } else {
                 throw new InvalidColumnExpressionException('Only string and array are allowed for date column type.');
