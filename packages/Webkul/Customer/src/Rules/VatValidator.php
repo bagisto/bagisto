@@ -57,16 +57,16 @@ class VatValidator
         [$country, $number] = $this->splitVat($vatNumber);
 
         if (! isset(self::$pattern_expression[$country])) {
-            if (! $formCountry) {
-                return false;
-            }
-
-            if (! isset(self::$pattern_expression[$formCountry])) {
+            if (! $formCountry || ! isset(self::$pattern_expression[$formCountry])) {
                 return false;
             }
 
             $country = $formCountry;
             $number = $vatNumber;
+        }
+
+        if (! isset(self::$pattern_expression[$country])) {
+            return false;
         }
 
         return preg_match('/^'.self::$pattern_expression[$country].'$/', $number) > 0;
