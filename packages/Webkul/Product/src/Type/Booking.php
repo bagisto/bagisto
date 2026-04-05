@@ -216,6 +216,14 @@ class Booking extends AbstractType
 
         $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
+        if ($bookingProduct->type !== 'event') {
+            foreach ($products as $product) {
+                if ($typeHelper->isSlotExpired($product)) {
+                    throw new InsufficientProductInventoryException(trans('shop::app.products.booking.cart.integrity.slot_unavailable'));
+                }
+            }
+        }
+
         if (! $typeHelper->isSlotAvailable($products)) {
             throw new InsufficientProductInventoryException(trans('shop::app.products.booking.cart.integrity.inventory_warning'));
         }

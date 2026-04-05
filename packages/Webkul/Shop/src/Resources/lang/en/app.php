@@ -913,6 +913,7 @@ return [
                     'missing_options' => 'Options are missing for this product.',
                     'inventory_warning' => 'The requested quantity is not available, please try again later.',
                     'select_hourly_duration' => 'Select a slot duration of one hour.',
+                    'slot_unavailable' => 'The selected slot is not available. Please choose a different date or time.',
                 ],
 
                 'rent-from' => 'Rent From',
