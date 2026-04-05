@@ -103,6 +103,17 @@ class Booking
                 $slots = $bookingProductSlot->same_slot_all_days ? ($bookingProductSlot->slots ?? []) : ($bookingProductSlot->slots[$index] ?? []);
             }
 
+            if (! empty($bookingProductSlot->duration) && ! empty($slots)) {
+                $slots = array_values(array_filter($slots, function ($slot) use ($bookingProductSlot) {
+                    $fromChunks = explode(':', $slot['from']);
+                    $toChunks = explode(':', $slot['to']);
+
+                    $rangeInMinutes = ($toChunks[0] * 60 + $toChunks[1]) - ($fromChunks[0] * 60 + $fromChunks[1]);
+
+                    return $rangeInMinutes >= $bookingProductSlot->duration;
+                }));
+            }
+
             $slotsByDays[] = [
                 'name' => trans($this->daysOfWeek[$index]),
                 'slots' => isset($availableDays[$index]) ? $this->convert24To12Hours($slots) : [],
