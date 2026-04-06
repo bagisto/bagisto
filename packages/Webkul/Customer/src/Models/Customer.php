@@ -43,7 +43,24 @@ class Customer extends Authenticatable implements CustomerContract
         'status' => 'boolean',
         'is_verified' => 'boolean',
         'is_suspended' => 'boolean',
+        'date_of_birth' => 'date',
     ];
+
+    /**
+     * Set date of birth with empty string to null conversion.
+     */
+    public function setDateOfBirthAttribute($value): void
+    {
+        $this->attributes['date_of_birth'] = $value !== '' && $value !== null ? $value : null;
+    }
+
+    /**
+     * Set phone with empty string to null conversion.
+     */
+    public function setPhoneAttribute($value): void
+    {
+        $this->attributes['phone'] = $value !== '' && $value !== null ? $value : null;
+    }
 
     /**
      * The attributes that are mass assignable.

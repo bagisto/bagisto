@@ -105,10 +105,6 @@ class CustomerController extends Controller
             'channel_id',
         ]));
 
-        if (empty($data['phone'])) {
-            $data['phone'] = null;
-        }
-
         Event::dispatch('customer.create.before');
 
         $customer = $this->customerRepository->create($data);
@@ -158,14 +154,6 @@ class CustomerController extends Controller
             'status',
             'is_suspended',
         ]);
-
-        if (empty($data['phone'])) {
-            $data['phone'] = null;
-        }
-
-        if (empty($data['date_of_birth'])) {
-            $data['date_of_birth'] = null;
-        }
 
         Event::dispatch('customer.update.before', $id);
 

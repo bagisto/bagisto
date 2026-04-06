@@ -50,14 +50,6 @@ class CartRuleRepository extends Repository
      */
     public function create(array $data)
     {
-        $data['starts_from'] = $data['starts_from'] ?: null;
-
-        $data['ends_till'] = $data['ends_till'] ?: null;
-
-        $data['status'] = isset($data['status']);
-
-        $data['usage_per_customer'] = $data['usage_per_customer'] ?: 0;
-
         $cartRule = parent::create($data);
 
         $cartRule->channels()->sync($data['channels']);
@@ -90,10 +82,6 @@ class CartRuleRepository extends Repository
     public function update(array $data, $id)
     {
         $data = array_merge($data, [
-            'starts_from' => $data['starts_from'] ?: null,
-            'ends_till' => $data['ends_till'] ?: null,
-            'status' => isset($data['status']),
-            'usage_per_customer' => $data['usage_per_customer'] ?: 0,
             'conditions' => $data['conditions'] ?? [],
         ]);
 

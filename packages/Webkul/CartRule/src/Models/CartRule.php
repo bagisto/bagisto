@@ -69,6 +69,38 @@ class CartRule extends Model implements CartRuleContract
     ];
 
     /**
+     * Set starts from with empty string to null conversion.
+     */
+    public function setStartsFromAttribute($value): void
+    {
+        $this->attributes['starts_from'] = $value !== '' && $value !== null ? $value : null;
+    }
+
+    /**
+     * Set ends till with empty string to null conversion.
+     */
+    public function setEndsTillAttribute($value): void
+    {
+        $this->attributes['ends_till'] = $value !== '' && $value !== null ? $value : null;
+    }
+
+    /**
+     * Set status with proper boolean conversion.
+     */
+    public function setStatusAttribute($value): void
+    {
+        $this->attributes['status'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set usage per customer with empty string to zero conversion.
+     */
+    public function setUsagePerCustomerAttribute($value): void
+    {
+        $this->attributes['usage_per_customer'] = $value !== '' && $value !== null ? (int) $value : 0;
+    }
+
+    /**
      * Get the channels that owns the cart rule.
      */
     public function cart_rule_channels(): BelongsToMany

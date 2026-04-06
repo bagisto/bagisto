@@ -157,6 +157,9 @@ class Helper
                 'order_items.rma_return_period',
                 'product_images.path',
                 'orders.status',
+                'orders.id',
+                'products.type',
+                'parent_products.id',
             )
             ->get();
 
