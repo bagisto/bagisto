@@ -56,6 +56,8 @@ class CartRuleRepository extends Repository
 
         $data['status'] = isset($data['status']);
 
+        $data['usage_per_customer'] = $data['usage_per_customer'] ?: 0;
+
         $cartRule = parent::create($data);
 
         $cartRule->channels()->sync($data['channels']);
@@ -91,6 +93,7 @@ class CartRuleRepository extends Repository
             'starts_from' => $data['starts_from'] ?: null,
             'ends_till' => $data['ends_till'] ?: null,
             'status' => isset($data['status']),
+            'usage_per_customer' => $data['usage_per_customer'] ?: 0,
             'conditions' => $data['conditions'] ?? [],
         ]);
 

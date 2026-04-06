@@ -163,6 +163,10 @@ class CustomerController extends Controller
             $data['phone'] = null;
         }
 
+        if (empty($data['date_of_birth'])) {
+            $data['date_of_birth'] = null;
+        }
+
         Event::dispatch('customer.update.before', $id);
 
         $customer = $this->customerRepository->update($data, $id);
