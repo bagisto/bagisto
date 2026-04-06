@@ -30,15 +30,27 @@ class UpdateCreateSearchTerm implements ShouldQueue
      *
      * @return void
      */
-    public function handle()
+    public function handle(SearchTermRepository $searchTermRepository)
     {
-        app(SearchTermRepository::class)->updateOrCreate([
+        $searchTerm = $searchTermRepository->findOneWhere([
             'term' => $this->data['term'],
             'channel_id' => $this->data['channel_id'],
             'locale' => $this->data['locale'],
-        ], [
-            'uses' => DB::raw('uses + 1'),
-            'results' => $this->data['results'],
         ]);
+
+        if ($searchTerm) {
+            $searchTerm->update([
+                'uses' => DB::raw('uses + 1'),
+                'results' => $this->data['results'],
+            ]);
+        } else {
+            $searchTermRepository->create([
+                'term' => $this->data['term'],
+                'channel_id' => $this->data['channel_id'],
+                'locale' => $this->data['locale'],
+                'uses' => 1,
+                'results' => $this->data['results'],
+            ]);
+        }
     }
 }
