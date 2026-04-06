@@ -335,16 +335,16 @@ class ProductRepository extends Repository
                 if ($attribute->code == 'name') {
                     $synonyms = $this->searchSynonymRepository->getSynonymsByQuery(urldecode($params['name']));
 
-                    $qb->where(function ($subQuery) use ($alias, $synonyms) {
+                    $qb->where(function ($subQuery) use ($alias, $prefix, $synonyms) {
                         foreach ($synonyms as $synonym) {
-                            $subQuery->orWhere($alias.'.text_value', 'like', '%'.$synonym.'%');
+                            $subQuery->orWhereRaw('LOWER('.$prefix.$alias.'.text_value) LIKE ?', ['%'.strtolower($synonym).'%']);
                         }
                     });
                 } elseif ($attribute->code == 'url_key') {
                     if (empty($params['url_key'])) {
                         $qb->whereNotNull($alias.'.text_value');
                     } else {
-                        $qb->where($alias.'.text_value', 'like', '%'.urldecode($params['url_key']).'%');
+                        $qb->whereRaw('LOWER('.$prefix.$alias.'.text_value) LIKE ?', ['%'.strtolower(urldecode($params['url_key'])).'%']);
                     }
                 } else {
                     if (is_null($params[$attribute->code])) {
