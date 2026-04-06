@@ -103,6 +103,9 @@ jobs:
       - name: Seed Product Table
         run: php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
 
+      - name: Index Products
+        run: php artisan indexer:index
+
       - name: Start Laravel server
         run: |
           php artisan serve --host=0.0.0.0 --port=8000 > server.log 2>&1 &
