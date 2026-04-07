@@ -1274,7 +1274,7 @@ class CategoryTableSeeder extends Seeder
     public function storeFileIfExists($targetPath, $file)
     {
         if (file_exists(base_path(self::BASE_PATH.$file))) {
-            return 'storage/'.Storage::putFile($targetPath, new File(base_path(self::BASE_PATH.$file)));
+            return Storage::putFile($targetPath, new File(base_path(self::BASE_PATH.$file)));
         }
 
         return null;
