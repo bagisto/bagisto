@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed product 404 when locale-specific URL keys differ across locales by adding cross-locale fallback in product slug resolution and locale-aware URL rewrite redirects.
 
+* #11223 - Fixed `explode()` null deprecation in `AppServiceProvider` when `APP_DEBUG_ALLOWED_IPS` is unset.
+
 ## **v2.3.16 (23rd of March 2026)** - *Release*
 
 * Fixed a critical race condition vulnerability in coupon usage during concurrent checkout, where two simultaneous orders could both redeem a single-use coupon. Coupon validation and usage consumption are now atomic using row-level locking inside the order creation transaction.
