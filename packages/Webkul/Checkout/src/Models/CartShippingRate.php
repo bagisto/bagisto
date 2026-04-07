@@ -36,6 +36,15 @@ class CartShippingRate extends Model implements CartShippingRateContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_calculate_tax' => 'boolean',
+    ];
+
+    /**
      * Get the post that owns the comment.
      */
     public function shipping_address()

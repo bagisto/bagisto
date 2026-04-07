@@ -29,6 +29,7 @@ class Wishlist extends Model implements WishlistContract
      */
     protected $casts = [
         'additional' => 'array',
+        'shared' => 'boolean',
     ];
 
     /**

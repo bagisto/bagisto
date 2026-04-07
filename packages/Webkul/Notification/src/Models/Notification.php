@@ -15,6 +15,15 @@ class Notification extends Model implements NotificationContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'read' => 'boolean',
+    ];
+
+    /**
      * Get Order Details.
      */
     public function order()

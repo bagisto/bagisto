@@ -104,7 +104,7 @@ class CatalogRuleProduct
             $this->catalogRuleProductRepository->whereIn('product_id', $productIds)->delete();
         } else {
             $this->catalogRuleProductRepository->deleteWhere([
-                ['product_id', 'like', '%%'],
+                ['product_id', db_grammar()->caseInsensitiveLike(), '%%'],
             ]);
         }
     }

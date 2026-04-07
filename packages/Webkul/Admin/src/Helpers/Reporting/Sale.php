@@ -590,6 +590,7 @@ class Sale extends AbstractReporting
     {
         return $this->orderRepository
             ->resetModel()
+            ->select('customer_email', 'customer_id')
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->groupBy('customer_email', 'customer_id')

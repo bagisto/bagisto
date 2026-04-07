@@ -31,6 +31,15 @@ class TaxRate extends Model implements TaxRateContract
         'tax_rate',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_zip' => 'boolean',
+    ];
+
     public function tax_categories(): BelongsToMany
     {
         return $this->belongsToMany(TaxCategoryProxy::modelClass(), 'tax_categories_tax_rates', 'tax_rate_id', 'id');

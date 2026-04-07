@@ -77,6 +77,7 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
      */
     protected $casts = [
         'options' => 'array',
+        'status' => 'boolean',
     ];
 
     /**

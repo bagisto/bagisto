@@ -26,6 +26,15 @@ class CatalogRuleProduct extends Model implements CatalogRuleProductContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'end_other_rules' => 'boolean',
+    ];
+
+    /**
      * Get the Catalog Rule that owns the catalog rule.
      */
     public function catalog_rule()

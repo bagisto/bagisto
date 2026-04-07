@@ -202,9 +202,10 @@ class Cart extends AbstractReporting
     {
         return $this->cartRepository
             ->resetModel()
-            ->groupBy('customer_email', 'customer_id')
+            ->select('customer_email', 'customer_id')
             ->whereIn('cart.channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
+            ->groupBy('customer_email', 'customer_id')
             ->get()
             ->count();
     }
