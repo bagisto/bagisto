@@ -59,7 +59,7 @@ class Date extends Column
             } elseif (is_array($requestedDates)) {
                 foreach ($requestedDates as $value) {
                     $from = ! empty($value[0])
-                        ? (str_contains($value[0], ' ') ? $value[0] : $value[0].' 00:00:01')
+                        ? (str_contains($value[0], ' ') ? $value[0] : $value[0].' 00:00:00')
                         : null;
 
                     $to = ! empty($value[1])
