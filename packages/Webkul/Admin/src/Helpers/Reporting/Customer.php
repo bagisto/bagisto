@@ -25,7 +25,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves total customers and their progress.
+     * Retrieve total customers and their progress.
      */
     public function getTotalCustomersProgress(): array
     {
@@ -37,7 +37,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Returns previous customers over time
+     * Return previous customers over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -48,7 +48,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Returns current customers over time
+     * Return current customers over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -59,7 +59,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves today customers and their progress.
+     * Retrieve today's customers and their progress.
      */
     public function getTodayCustomersProgress(): array
     {
@@ -71,7 +71,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves total customers by date
+     * Retrieve total customers for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -86,7 +86,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves total reviews and their progress.
+     * Retrieve total reviews and their progress.
      */
     public function getTotalReviewsProgress(): array
     {
@@ -98,7 +98,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Retrieves total reviews by date
+     * Retrieve total reviews for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -115,7 +115,7 @@ class Customer extends AbstractReporting
     }
 
     /**
-     * Gets customer with most sales.
+     * Retrieve customers with the highest total sales revenue.
      *
      * @param  int  $limit
      */
@@ -128,20 +128,20 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'orders.customer_id as id',
                 'orders.customer_email as email',
-                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'),
+                DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name').' as full_name'),
                 DB::raw('SUM(base_grand_total_invoiced - base_grand_total_refunded) as total'),
                 DB::raw('COUNT(*) as orders')
             )
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
-            ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
+            ->groupBy('orders.customer_email', 'orders.customer_id', 'orders.customer_first_name', 'orders.customer_last_name')
             ->orderByDesc('total')
             ->limit($limit)
             ->get();
     }
 
     /**
-     * Gets customer with most orders.
+     * Retrieve customers with the highest number of orders.
      *
      * @param  int  $limit
      */
@@ -154,19 +154,19 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'orders.customer_id as id',
                 'orders.customer_email as email',
-                DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'),
+                DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name').' as full_name'),
                 DB::raw('COUNT(*) as orders')
             )
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$this->startDate, $this->endDate])
-            ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
+            ->groupBy('orders.customer_email', 'orders.customer_id', 'orders.customer_first_name', 'orders.customer_last_name')
             ->orderByDesc('orders')
             ->limit($limit)
             ->get();
     }
 
     /**
-     * Gets customer with most orders.
+     * Retrieve customers with the highest number of approved reviews.
      *
      * @param  int  $limit
      */
@@ -181,7 +181,7 @@ class Customer extends AbstractReporting
             ->addSelect(
                 'customers.id as id',
                 'customers.email as email',
-                DB::raw('CONCAT('.$tablePrefix.'customers.first_name, " ", '.$tablePrefix.'customers.last_name) as full_name'),
+                DB::raw(db_grammar()->concat($tablePrefix.'customers.first_name', "' '", $tablePrefix.'customers.last_name').' as full_name'),
                 DB::raw('COUNT(*) as reviews')
             )
             ->whereIn('customers.channel_id', $this->channelIds)
@@ -189,14 +189,14 @@ class Customer extends AbstractReporting
             ->whereBetween('product_reviews.created_at', [$this->startDate, $this->endDate])
             ->where('product_reviews.status', 'approved')
             ->whereNotNull('customer_id')
-            ->groupBy(DB::raw('CONCAT(email, "-", '.$tablePrefix.'customers.id)'))
+            ->groupBy('customers.id', 'customers.email', 'customers.first_name', 'customers.last_name')
             ->orderByDesc('reviews')
             ->limit($limit)
             ->get();
     }
 
     /**
-     * Gets customer with most sales.
+     * Retrieve customer groups with the highest number of customers.
      *
      * @param  int  $limit
      */
@@ -205,18 +205,18 @@ class Customer extends AbstractReporting
         return $this->customerRepository
             ->resetModel()
             ->leftJoin('customer_groups', 'customers.customer_group_id', '=', 'customer_groups.id')
-            ->select('customers.id as id', 'customer_groups.name as group_name')
+            ->select('customer_groups.id as id', 'customer_groups.name as group_name')
             ->addSelect(DB::raw('COUNT(*) as total'))
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('customers.created_at', [$this->startDate, $this->endDate])
-            ->groupBy('customer_group_id')
+            ->groupBy('customer_groups.id', 'customer_groups.name')
             ->orderByDesc('total')
             ->limit($limit)
             ->get();
     }
 
     /**
-     * Returns over time stats.
+     * Return total customers over time for the given date range.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate

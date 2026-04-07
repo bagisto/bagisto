@@ -35,7 +35,13 @@ class CategoryDataGrid extends DataGrid
                     ->where('category_translations.locale', '=', app()->getLocale());
             })
             ->where('category_translations.locale', app()->getLocale())
-            ->groupBy('categories.id');
+            ->groupBy(
+                'categories.id',
+                'category_translations.name',
+                'categories.position',
+                'categories.status',
+                'category_translations.locale'
+            );
 
         $this->addFilter('category_id', 'categories.id');
 

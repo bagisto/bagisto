@@ -20,7 +20,7 @@ class AttributeOptionFactory extends Factory
     public function definition(): array
     {
         return [
-            'admin_name' => $this->faker->word,
+            'admin_name' => $this->faker->word(),
             'sort_order' => $this->faker->randomDigit(),
             'swatch_value' => null,
         ];

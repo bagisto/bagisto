@@ -4,9 +4,12 @@ namespace Webkul\Installer\Database\Seeders\Core;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class CurrencyTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Currency symbols.
      *
@@ -109,5 +112,7 @@ class CurrencyTableSeeder extends Seeder
                 ],
             ]);
         }
+
+        $this->syncPostgresSequences(['currencies']);
     }
 }

@@ -45,6 +45,17 @@ class Category extends TranslatableModel implements CategoryContract
     ];
 
     /**
+     * Attribute casting.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'boolean',
+        'position' => 'integer',
+        'additional' => 'array',
+    ];
+
+    /**
      * Eager loading.
      *
      * @var array

@@ -7,24 +7,47 @@ permissions:
 
 jobs:
   pest_tests:
-    runs-on: ${{ matrix.operating-systems }}
+    runs-on: ${{ matrix.os }}
 
     strategy:
+      fail-fast: false
       matrix:
-        operating-systems: [ubuntu-latest]
-        php-versions: ['8.3']
+        os: [ubuntu-latest]
+        php: ['8.3']
+        db: [mysql, pgsql]
+        include:
+          - db: mysql
+            db-label: MySQL
+            db-image: mysql:8.0
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: mysqladmin ping
+            php-db-ext: pdo_mysql
 
-    name: PHP ${{ matrix.php-versions }} test on ${{ matrix.operating-systems }}
+          - db: pgsql
+            db-label: PostgreSQL
+            db-image: postgres:16
+            db-port: 5432
+            db-user: postgres
+            db-password: postgres
+            db-health: pg_isready
+            php-db-ext: pdo_pgsql
+
+    name: PHP ${{ matrix.php }} - ${{ matrix.db-label }}
 
     services:
-      mysql:
-        image: mysql:8.0
+      database:
+        image: ${{ matrix.db-image }}
         env:
-          MYSQL_ROOT_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: ${{ matrix.db-password }}
           MYSQL_DATABASE: bagisto
+          POSTGRES_USER: ${{ matrix.db-user }}
+          POSTGRES_PASSWORD: ${{ matrix.db-password }}
+          POSTGRES_DB: bagisto
         ports:
-          - 3306
-        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+          - ${{ matrix.db-port }}
+        options: --health-cmd="${{ matrix.db-health }}" --health-interval=10s --health-timeout=5s --health-retries=5
 
     steps:
       - name: Checkout
@@ -33,8 +56,8 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
-          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, pdo_mysql, tokenizer, zip
+          php-version: ${{ matrix.php }}
+          extensions: curl, fileinfo, gd, intl, mbstring, openssl, pdo, ${{ matrix.php-db-ext }}, tokenizer, zip
           ini-values: error_reporting=E_ALL
           tools: composer:v2
 
@@ -45,15 +68,15 @@ jobs:
         run: |
           cp .env.example .env
           sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env
+          sed -i "s|^\(DB_CONNECTION=\s*\).*$|\1${{ matrix.db }}|" .env
           sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
-          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env
+          sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.database.ports[matrix.db-port] }}|" .env
           sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
-          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1root|" .env
-          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
-          cat .env
+          sed -i "s|^\(DB_USERNAME=\s*\).*$|\1${{ matrix.db-user }}|" .env
+          sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1${{ matrix.db-password }}|" .env
 
       - name: Running Bagisto Installer
         run: php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
 
       - name: Running Pest Test
-        run: vendor/bin/pest --colors=always
+        run: vendor/bin/pest --parallel --colors=always

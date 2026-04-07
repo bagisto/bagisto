@@ -42,6 +42,7 @@ class Import extends Model implements ImportContract
     protected $casts = [
         'summary' => 'array',
         'errors' => 'array',
+        'process_in_queue' => 'boolean',
         'started_at' => 'datetime',
         'completed_at' => 'datetime',
     ];

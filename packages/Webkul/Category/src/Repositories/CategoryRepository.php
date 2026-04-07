@@ -34,11 +34,11 @@ class CategoryRepository extends Repository
         foreach ($params as $key => $value) {
             switch ($key) {
                 case 'name':
-                    $queryBuilder->where('category_translations.name', 'like', '%'.urldecode($value).'%');
+                    $queryBuilder->where('category_translations.name', db_grammar()->caseInsensitiveLike(), '%'.urldecode($value).'%');
 
                     break;
                 case 'description':
-                    $queryBuilder->where('category_translations.description', 'like', '%'.urldecode($value).'%');
+                    $queryBuilder->where('category_translations.description', db_grammar()->caseInsensitiveLike(), '%'.urldecode($value).'%');
 
                     break;
                 case 'status':

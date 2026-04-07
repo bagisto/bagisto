@@ -5,7 +5,6 @@ namespace Webkul\Admin\Http\Controllers\Customers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -106,10 +105,6 @@ class CustomerController extends Controller
             'channel_id',
         ]));
 
-        if (empty($data['phone'])) {
-            $data['phone'] = null;
-        }
-
         Event::dispatch('customer.create.before');
 
         $customer = $this->customerRepository->create($data);
@@ -159,10 +154,6 @@ class CustomerController extends Controller
             'status',
             'is_suspended',
         ]);
-
-        if (empty($data['phone'])) {
-            $data['phone'] = null;
-        }
 
         Event::dispatch('customer.update.before', $id);
 
@@ -281,8 +272,9 @@ class CustomerController extends Controller
     public function search()
     {
         $customers = $this->customerRepository->scopeQuery(function ($query) {
-            return $query->where('email', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orWhere(DB::raw('CONCAT(first_name, " ", last_name)'), 'like', '%'.urldecode(request()->input('query')).'%')
+            return $query->where('email', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('first_name', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('last_name', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
                 ->orderBy('created_at', 'desc');
         })->paginate(self::COUNT);
 

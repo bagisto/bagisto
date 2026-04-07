@@ -22,12 +22,12 @@ return new class extends Migration
             $table->integer('processed_rows_count')->default(0);
             $table->integer('invalid_rows_count')->default(0);
             $table->integer('errors_count')->default(0);
-            $table->json('errors')->nullable();
+            $table->jsonb('errors')->nullable();
             $table->string('field_separator');
             $table->string('file_path');
             $table->string('images_directory_path')->nullable();
             $table->string('error_file_path')->nullable();
-            $table->json('summary')->nullable();
+            $table->jsonb('summary')->nullable();
 
             $table->datetime('started_at')->nullable();
             $table->datetime('completed_at')->nullable();

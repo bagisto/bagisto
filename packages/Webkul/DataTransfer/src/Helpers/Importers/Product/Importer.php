@@ -1529,6 +1529,8 @@ class Importer extends AbstractImporter
                 $parentAssociations[] = [
                     'sku' => $variantSku,
                     'parent_id' => $product['id'],
+                    'type' => $variant['type'] ?? 'simple',
+                    'attribute_family_id' => $variant['attribute_family_id'] ?? $product['attribute_family_id'],
                 ];
 
                 foreach ($variantSuperAttributes as $superAttributeCode => $optionLabel) {

@@ -39,6 +39,15 @@ class ProductBundleOption extends TranslatableModel implements ProductBundleOpti
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_required' => 'boolean',
+    ];
+
+    /**
      * Get the product that owns the image.
      */
     public function product()

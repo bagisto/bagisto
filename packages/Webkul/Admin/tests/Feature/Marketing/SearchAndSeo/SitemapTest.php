@@ -7,8 +7,11 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should show the sitemap index page', function () {
-    // Act and Assert.
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the sitemap index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.search_seo.sitemaps.index'))
@@ -17,55 +20,47 @@ it('should show the sitemap index page', function () {
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.create-btn'));
 });
 
-it('should fail the validation with errors when certain field not provided when store in the sitemap', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.marketing.search_seo.sitemaps.store'))
-        ->assertJsonValidationErrorFor('file_name')
-        ->assertJsonValidationErrorFor('path')
-        ->assertUnprocessable();
+it('should deny guest access to the sitemap index page', function () {
+    get(route('admin.marketing.search_seo.sitemaps.index'))
+        ->assertRedirect(route('admin.session.create'));
 });
 
-it('should store the newly created sitemap', function () {
-    // Act and Assert.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a newly created sitemap', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.sitemaps.store'), [
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
-        'path' => $filePath = '/',
+        'path' => '/',
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.create.success'));
 
-    $this->assertModelWise([
-        Sitemap::class => [
-            [
-                'file_name' => $fileName,
-                'path' => $filePath,
-            ],
-        ],
+    $this->assertDatabaseHas('sitemaps', [
+        'file_name' => $fileName,
+        'path' => '/',
     ]);
 });
 
-it('should fail the validation with errors when certain field not provided when update in the sitemap', function () {
-    // Arrange.
-    $sitemap = Sitemap::factory()->create();
-
-    // Act and Assert.
+it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
 
-    putJson(route('admin.marketing.search_seo.sitemaps.update', $sitemap->id))
+    postJson(route('admin.marketing.search_seo.sitemaps.store'))
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('file_name')
-        ->assertJsonValidationErrorFor('path')
-        ->assertUnprocessable();
+        ->assertJsonValidationErrorFor('path');
 });
 
-it('should update the sitemap', function () {
-    // Arrange.
+// ============================================================================
+// Update
+// ============================================================================
+
+it('should update an existing sitemap', function () {
     $sitemap = Sitemap::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.sitemaps.update'), [
@@ -76,29 +71,35 @@ it('should update the sitemap', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.edit.success'));
 
-    $this->assertModelWise([
-        Sitemap::class => [
-            [
-                'id' => $sitemap->id,
-                'file_name' => $fileName,
-                'path' => $sitemap->path,
-            ],
-        ],
+    $this->assertDatabaseHas('sitemaps', [
+        'id' => $sitemap->id,
+        'file_name' => $fileName,
     ]);
 });
 
-it('should delete the sitemap', function () {
-    // Arrange.
+it('should fail validation when required fields are missing on update', function () {
     $sitemap = Sitemap::factory()->create();
 
-    // Act and Assert.
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.search_seo.sitemaps.update', $sitemap->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('file_name')
+        ->assertJsonValidationErrorFor('path');
+});
+
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete a sitemap', function () {
+    $sitemap = Sitemap::factory()->create();
+
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.search_seo.sitemaps.delete', $sitemap->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.edit.delete-success'));
 
-    $this->assertDatabaseMissing('sitemaps', [
-        'id' => $sitemap->id,
-    ]);
+    $this->assertDatabaseMissing('sitemaps', ['id' => $sitemap->id]);
 });

@@ -52,10 +52,20 @@ class OrderDataGrid extends DataGrid
          * has not expired. Product type eligibility is also captured at order
          * placement in rma_return_period.
          */
-        $queryBuilder->whereNotNull('order_items.rma_return_period')
-            ->whereRaw("DATEDIFF(NOW(), {$tablePrefix}order_items.created_at) <= {$tablePrefix}order_items.rma_return_period");
+        $g = db_grammar();
 
-        $queryBuilder->groupBy('orders.id')
+        $queryBuilder->whereNotNull('order_items.rma_return_period')
+            ->whereRaw($g->dateDiff($g->now(), "{$tablePrefix}order_items.created_at")." <= {$tablePrefix}order_items.rma_return_period");
+
+        $queryBuilder->groupBy(
+            'orders.id',
+            'orders.increment_id',
+            'orders.status',
+            'orders.created_at',
+            'orders.grand_total',
+            'orders.order_currency_code',
+            'order_payment.method_title'
+        )
             ->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0)");
 
         $this->addFilter('id', 'orders.id');

@@ -46,7 +46,7 @@ class GDPRDataGrid extends DataGrid
             ->leftJoin('customers', 'gdpr.customer_id', '=', 'customers.id')
             ->addSelect(
                 'gdpr.id',
-                DB::raw("CONCAT({$tablePrefix}customers.first_name, ' ', {$tablePrefix}customers.last_name) as customer_name"),
+                DB::raw(db_grammar()->concat($tablePrefix.'customers.first_name', "' '", $tablePrefix.'customers.last_name').' as customer_name'),
                 'gdpr.customer_id',
                 'gdpr.status',
                 'gdpr.type',
@@ -58,7 +58,7 @@ class GDPRDataGrid extends DataGrid
         $this->addFilter('type', 'gdpr.type');
         $this->addFilter('created_at', 'gdpr.created_at');
         $this->addFilter('status', 'gdpr.status');
-        $this->addFilter('customer_name', DB::raw("CONCAT({$tablePrefix}customers.first_name, ' ', {$tablePrefix}customers.last_name)"));
+        $this->addFilter('customer_name', DB::raw(db_grammar()->concat($tablePrefix.'customers.first_name', "' '", $tablePrefix.'customers.last_name')));
 
         return $queryBuilder;
     }

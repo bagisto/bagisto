@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('break_time');
             $table->integer('prevent_scheduling_before');
             $table->boolean('same_slot_all_days')->nullable();
-            $table->json('slots')->nullable();
+            $table->jsonb('slots')->nullable();
 
             $table->foreign('booking_product_id')
                 ->references('id')

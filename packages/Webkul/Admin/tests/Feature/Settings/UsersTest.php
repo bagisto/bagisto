@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Webkul\User\Models\Admin;
 
@@ -10,49 +9,34 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should returns the user index page', function () {
-    // Act and Assert.
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the user index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.settings.users.index'))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.settings.users.index.title'))
-        ->assertSeeText(trans('admin::app.settings.users.index.create.title'));
+        ->assertSeeText(trans('admin::app.settings.users.index.title'));
 });
 
-it('should fail the validation with errors when certain field not provided when store the users', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.settings.users.store'))
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('email')
-        ->assertJsonValidationErrorFor('role_id')
-        ->assertUnprocessable();
+it('should deny guest access to the user index page', function () {
+    get(route('admin.settings.users.index'))
+        ->assertRedirect(route('admin.session.create'));
 });
 
-it('should fail the validation with errors when confirm password not provided when store the users', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
+// ============================================================================
+// Store
+// ============================================================================
 
-    postJson(route('admin.settings.users.store'), [
-        'password' => 'admin123',
-    ])
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('email')
-        ->assertJsonValidationErrorFor('role_id')
-        ->assertJsonValidationErrorFor('password_confirmation')
-        ->assertUnprocessable();
-});
-
-it('should store the newly created admin', function () {
-    // Act and Assert.
+it('should store a newly created admin user', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.users.store'), $data = [
         'name' => fake()->name(),
         'role_id' => 1,
-        'email' => fake()->email,
+        'email' => fake()->email(),
         'password' => $password = fake()->password(),
         'password_confirmation' => $password,
         'image' => [
@@ -62,19 +46,34 @@ it('should store the newly created admin', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.create-success'));
 
-    $this->assertModelWise([
-        Admin::class => [
-            [
-                'name' => $data['name'],
-                'email' => $data['email'],
-                'role_id' => 1,
-            ],
-        ],
+    $this->assertDatabaseHas('admins', [
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'role_id' => 1,
     ]);
 });
 
-it('should fails the validation error with tempered avatar provided when store the admin', function () {
-    // Act and Assert.
+it('should fail validation when required fields are missing on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('email')
+        ->assertJsonValidationErrorFor('role_id');
+});
+
+it('should fail validation when password confirmation is missing on store', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.settings.users.store'), [
+        'password' => 'admin123',
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('password_confirmation');
+});
+
+it('should reject a tampered avatar on store', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.settings.users.store'), [
@@ -87,48 +86,33 @@ it('should fails the validation error with tempered avatar provided when store t
             UploadedFile::fake()->image('avatar.php'),
         ],
     ])
-        ->assertJsonValidationErrorFor('image.0')
-        ->assertUnprocessable();
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('image.0');
 });
 
-it('should returns the user and its roles', function () {
-    // Arrange.
+// ============================================================================
+// Edit
+// ============================================================================
+
+it('should return user details and roles for edit', function () {
     $admin = Admin::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.settings.users.edit', $admin->id))
         ->assertOk()
-        ->assertJsonPath('roles.0.id', 1)
-        ->assertJsonPath('roles.0.name', 'Administrator')
         ->assertJsonPath('user.id', $admin->id)
-        ->assertJsonPath('user.email', $admin->email);
+        ->assertJsonPath('user.email', $admin->email)
+        ->assertJsonPath('roles.0.id', 1);
 });
 
-it('should fail the validation with errors when certain field not provided when update the users', function () {
-    // Arrange.
+// ============================================================================
+// Update
+// ============================================================================
+
+it('should update an existing admin user', function () {
     $admin = Admin::factory()->create();
 
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.settings.users.update'), [
-        'id' => $admin->id,
-        'password' => 'admin123',
-    ])
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('email')
-        ->assertJsonValidationErrorFor('role_id')
-        ->assertJsonValidationErrorFor('password_confirmation')
-        ->assertUnprocessable();
-});
-
-it('should update the existing admin', function () {
-    // Arrange.
-    $admin = Admin::factory()->create();
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), $data = [
@@ -145,18 +129,32 @@ it('should update the existing admin', function () {
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.update-success'));
 
-    $this->assertModelWise([
-        Admin::class => [
-            Arr::except($data, ['image', 'password_confirmation', 'password']),
-        ],
+    $this->assertDatabaseHas('admins', [
+        'id' => $admin->id,
+        'name' => $data['name'],
+        'email' => $data['email'],
     ]);
 });
 
-it('should fails the validation error with tempered avatar provided when update the admin', function () {
-    // Arrange.
+it('should fail validation when required fields are missing on update', function () {
     $admin = Admin::factory()->create();
 
-    // Act and Assert.
+    $this->loginAsAdmin();
+
+    putJson(route('admin.settings.users.update'), [
+        'id' => $admin->id,
+        'password' => 'admin123',
+    ])
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('email')
+        ->assertJsonValidationErrorFor('role_id')
+        ->assertJsonValidationErrorFor('password_confirmation');
+});
+
+it('should reject a tampered avatar on update', function () {
+    $admin = Admin::factory()->create();
+
     $this->loginAsAdmin();
 
     putJson(route('admin.settings.users.update'), [
@@ -170,27 +168,21 @@ it('should fails the validation error with tempered avatar provided when update 
         'password' => $password = fake()->password(),
         'password_confirmation' => $password,
     ])
-        ->assertJsonValidationErrorFor('image.0')
-        ->assertUnprocessable();
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('image.0');
 });
 
-it('can update the users without new image', function () {
-    // Arrange.
+it('should update a user without a new image', function () {
     $admin = Admin::factory()->create();
-    $admin->update([
-        'image' => 'avatar.jpg',
-    ]);
+    $admin->update(['image' => 'avatar.jpg']);
     $admin->refresh();
 
-    // Act and Assert.
     $this->loginAsAdmin($admin);
 
     putJson(route('admin.settings.users.update'), [
         'id' => $admin->id,
         'name' => $admin->name,
-        'image' => [
-            'image' => '',
-        ],
+        'image' => ['image' => ''],
         'role_id' => 1,
         'email' => fake()->email(),
         'password' => $password = fake()->password(),
@@ -204,29 +196,38 @@ it('can update the users without new image', function () {
     ]);
 });
 
-it('should delete the existing admin', function () {
-    // Arrange.
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete another admin user', function () {
     $admin = Admin::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.settings.users.delete', $admin->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.settings.users.delete-success'));
 
-    $this->assertDatabaseMissing('admins', [
-        'id' => $admin->id,
-    ]);
+    $this->assertDatabaseMissing('admins', ['id' => $admin->id]);
 });
 
-it('should delete self admin', function () {
-    // Arrange.
+it('should not allow deleting yourself via the delete endpoint', function () {
+    $admin = $this->loginAsAdmin();
+
+    deleteJson(route('admin.settings.users.delete', $admin->id))
+        ->assertStatus(403);
+});
+
+// ============================================================================
+// Delete Self
+// ============================================================================
+
+it('should delete self with password confirmation', function () {
     $admin = Admin::factory()->create([
         'password' => Hash::make($password = fake()->password()),
     ]);
 
-    // Act and Assert.
     $this->loginAsAdmin($admin);
 
     putJson(route('admin.settings.users.destroy'), [

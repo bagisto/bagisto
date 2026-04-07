@@ -4,9 +4,12 @@ namespace Webkul\Installer\Database\Seeders\Inventory;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class InventorySourceTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Seed the application's database.
      *
@@ -33,5 +36,7 @@ class InventorySourceTableSeeder extends Seeder
             'city' => 'Detroit',
             'postcode' => '48127',
         ]);
+
+        $this->syncPostgresSequences(['inventory_sources']);
     }
 }

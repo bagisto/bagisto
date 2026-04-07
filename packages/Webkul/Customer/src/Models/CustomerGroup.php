@@ -32,6 +32,15 @@ class CustomerGroup extends Model implements CustomerGroupContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_user_defined' => 'boolean',
+    ];
+
+    /**
      * Get the customers for this group.
      */
     public function customers(): HasMany

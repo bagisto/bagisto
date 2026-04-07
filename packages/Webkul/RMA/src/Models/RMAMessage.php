@@ -28,6 +28,15 @@ class RMAMessage extends Model implements RMAMessageContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_admin' => 'boolean',
+    ];
+
+    /**
      * Get the RMA that owns the message.
      */
     public function rma()

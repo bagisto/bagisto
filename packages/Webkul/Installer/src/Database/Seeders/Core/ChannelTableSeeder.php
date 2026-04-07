@@ -4,9 +4,12 @@ namespace Webkul\Installer\Database\Seeders\Core;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class ChannelTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Seed the application's database.
      *
@@ -84,5 +87,7 @@ class ChannelTableSeeder extends Seeder
             'channel_id' => 1,
             'inventory_source_id' => 1,
         ]);
+
+        $this->syncPostgresSequences(['channels']);
     }
 }

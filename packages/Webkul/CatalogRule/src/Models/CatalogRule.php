@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Webkul\Admin\Database\Factories\CatalogRuleFactory;
 use Webkul\CatalogRule\Contracts\CatalogRule as CatalogRuleContract;
+use Webkul\CatalogRule\Database\Factories\CatalogRuleFactory;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 
@@ -42,6 +42,10 @@ class CatalogRule extends Model implements CatalogRuleContract
      */
     protected $casts = [
         'conditions' => 'array',
+        'status' => 'boolean',
+        'condition_type' => 'integer',
+        'end_other_rules' => 'boolean',
+        'sort_order' => 'integer',
     ];
 
     /**

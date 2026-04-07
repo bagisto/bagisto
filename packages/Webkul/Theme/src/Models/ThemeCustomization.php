@@ -4,9 +4,9 @@ namespace Webkul\Theme\Models;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Webkul\Admin\Database\Factories\ThemeFactory;
 use Webkul\Core\Eloquent\TranslatableModel;
 use Webkul\Theme\Contracts\ThemeCustomization as ThemeCustomizationContract;
+use Webkul\Theme\Database\Factories\ThemeCustomizationFactory;
 
 class ThemeCustomization extends TranslatableModel implements ThemeCustomizationContract
 {
@@ -77,6 +77,7 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
      */
     protected $casts = [
         'options' => 'array',
+        'status' => 'boolean',
     ];
 
     /**
@@ -99,6 +100,6 @@ class ThemeCustomization extends TranslatableModel implements ThemeCustomization
      */
     protected static function newFactory(): Factory
     {
-        return ThemeFactory::new();
+        return ThemeCustomizationFactory::new();
     }
 }

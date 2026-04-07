@@ -124,7 +124,28 @@ class AttributeRepository extends Repository
      */
     public function validateUserInput($data)
     {
-        if (isset($data['is_configurable'])) {
+        $booleanFields = [
+            'is_required',
+            'is_unique',
+            'is_filterable',
+            'is_configurable',
+            'is_visible_on_front',
+            'is_comparable',
+            'value_per_locale',
+            'value_per_channel',
+            'enable_wysiwyg',
+        ];
+
+        foreach ($booleanFields as $field) {
+            if (array_key_exists($field, $data)) {
+                $data[$field] = $data[$field] ? 1 : 0;
+            }
+        }
+
+        if (
+            isset($data['is_configurable'])
+            && $data['is_configurable']
+        ) {
             $data['value_per_channel'] = $data['value_per_locale'] = 0;
         }
 

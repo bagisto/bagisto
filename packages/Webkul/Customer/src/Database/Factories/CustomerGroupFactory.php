@@ -16,15 +16,13 @@ class CustomerGroupFactory extends Factory
 
     /**
      * Define the model's default state.
-     *
-     * @throws \Exception
      */
     public function definition(): array
     {
         return [
-            'name' => ucfirst($this->faker->word),
-            'is_user_defined' => $this->faker->boolean,
-            'code' => $this->faker->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
+            'name' => ucfirst($this->faker->word()),
+            'is_user_defined' => true,
+            'code' => $this->faker->unique()->lexify('group_??????????'),
         ];
     }
 }

@@ -15,44 +15,28 @@ class AttributeFactory extends Factory
     protected $model = Attribute::class;
 
     /**
-     * @var array
-     */
-    protected $states = [
-        'validation_numeric',
-        'validation_email',
-        'validation_decimal',
-        'validation_url',
-        'required',
-        'unique',
-        'filterable',
-        'configurable',
-    ];
-
-    /**
      * Define the model's default state.
      */
     public function definition(): array
     {
-        $types = [
-            'text',
-            'textarea',
-            'price',
-            'boolean',
-            'select',
-            'multiselect',
-            'datetime',
-            'date',
-            'image',
-            'file',
-            'checkbox',
-        ];
-
         return [
-            'admin_name' => $this->faker->word,
-            'code' => $this->faker->regexify('/^[a-zA-Z]+[a-zA-Z0-9_]+$/'),
-            'type' => array_rand($types),
+            'admin_name' => $this->faker->word(),
+            'code' => $this->faker->unique()->lexify('attr_??????????'),
+            'type' => $this->faker->randomElement([
+                'text',
+                'textarea',
+                'price',
+                'boolean',
+                'select',
+                'multiselect',
+                'datetime',
+                'date',
+                'image',
+                'file',
+                'checkbox',
+            ]),
             'validation' => '',
-            'position' => $this->faker->randomDigit,
+            'position' => $this->faker->randomDigit(),
             'is_required' => false,
             'is_unique' => false,
             'value_per_locale' => false,
@@ -65,75 +49,67 @@ class AttributeFactory extends Factory
         ];
     }
 
-    public function validation_numeric(): AttributeFactory
+    /**
+     * Set the attribute's validation to numeric.
+     */
+    public function validationNumeric(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'validation' => 'numeric',
-            ];
-        });
+        return $this->state(fn () => ['validation' => 'numeric']);
     }
 
-    public function validation_email(): AttributeFactory
+    /**
+     * Set the attribute's validation to email.
+     */
+    public function validationEmail(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'validation' => 'email',
-            ];
-        });
+        return $this->state(fn () => ['validation' => 'email']);
     }
 
-    public function validation_decimal(): AttributeFactory
+    /**
+     * Set the attribute's validation to decimal.
+     */
+    public function validationDecimal(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'validation' => 'decimal',
-            ];
-        });
+        return $this->state(fn () => ['validation' => 'decimal']);
     }
 
-    public function validation_url(): AttributeFactory
+    /**
+     * Set the attribute's validation to URL.
+     */
+    public function validationUrl(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'validation' => 'url',
-            ];
-        });
+        return $this->state(fn () => ['validation' => 'url']);
     }
 
-    public function required(): AttributeFactory
+    /**
+     * Mark the attribute as required.
+     */
+    public function required(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'is_required' => true,
-            ];
-        });
+        return $this->state(fn () => ['is_required' => true]);
     }
 
-    public function unique(): AttributeFactory
+    /**
+     * Mark the attribute as unique.
+     */
+    public function unique(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'is_unique' => true,
-            ];
-        });
+        return $this->state(fn () => ['is_unique' => true]);
     }
 
-    public function filterable(): AttributeFactory
+    /**
+     * Mark the attribute as filterable.
+     */
+    public function filterable(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'is_filterable' => true,
-            ];
-        });
+        return $this->state(fn () => ['is_filterable' => true]);
     }
 
-    public function configurable(): AttributeFactory
+    /**
+     * Mark the attribute as configurable.
+     */
+    public function configurable(): static
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'is_configurable' => true,
-            ];
-        });
+        return $this->state(fn () => ['is_configurable' => true]);
     }
 }

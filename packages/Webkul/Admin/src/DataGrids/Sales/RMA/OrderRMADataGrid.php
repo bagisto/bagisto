@@ -30,7 +30,7 @@ class OrderRMADataGrid extends DataGrid
                 'orders.grand_total',
                 'orders.order_currency_code',
                 'orders.is_guest',
-                DB::raw("CONCAT({$tablePrefix}orders.customer_first_name, ' ', {$tablePrefix}orders.customer_last_name) as customer_name"),
+                DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name').' as customer_name'),
                 'order_payment.method_title',
                 DB::raw("SUM({$tablePrefix}order_items.qty_ordered) as total_qty_ordered"),
                 DB::raw("COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0) as total_rma_qty"),
@@ -52,17 +52,30 @@ class OrderRMADataGrid extends DataGrid
          * has not expired. Product type eligibility is also captured at order
          * placement in rma_return_period.
          */
-        $queryBuilder->whereNotNull('order_items.rma_return_period')
-            ->whereRaw("DATEDIFF(NOW(), {$tablePrefix}order_items.created_at) <= {$tablePrefix}order_items.rma_return_period");
+        $g = db_grammar();
 
-        $queryBuilder->groupBy('orders.id')
+        $queryBuilder->whereNotNull('order_items.rma_return_period')
+            ->whereRaw($g->dateDiff($g->now(), "{$tablePrefix}order_items.created_at")." <= {$tablePrefix}order_items.rma_return_period");
+
+        $queryBuilder->groupBy(
+            'orders.id',
+            'orders.increment_id',
+            'orders.status',
+            'orders.created_at',
+            'orders.grand_total',
+            'orders.order_currency_code',
+            'orders.is_guest',
+            'orders.customer_first_name',
+            'orders.customer_last_name',
+            'order_payment.method_title'
+        )
             ->havingRaw("SUM({$tablePrefix}order_items.qty_ordered) > COALESCE(SUM({$tablePrefix}rma_items_agg.total_rma_qty), 0)");
 
         $this->addFilter('id', 'orders.id');
         $this->addFilter('status', 'orders.status');
         $this->addFilter('grand_total', 'orders.grand_total');
         $this->addFilter('method_title', 'order_payment.method_title');
-        $this->addFilter('customer_name', DB::raw("CONCAT({$tablePrefix}orders.customer_first_name, ' ', {$tablePrefix}orders.customer_last_name)"));
+        $this->addFilter('customer_name', DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name')));
         $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;

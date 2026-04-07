@@ -7,8 +7,11 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should show the url rewrite index page', function () {
-    // Act and Assert.
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the URL rewrites index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.search_seo.url_rewrites.index'))
@@ -17,126 +20,122 @@ it('should show the url rewrite index page', function () {
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.create-btn'));
 });
 
-it('should fail the validation with errors when certain field not provided when store the url rewrites', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    postJson(route('admin.marketing.search_seo.url_rewrites.store'))
-        ->assertJsonValidationErrorFor('entity_type')
-        ->assertJsonValidationErrorFor('request_path')
-        ->assertJsonValidationErrorFor('target_path')
-        ->assertJsonValidationErrorFor('redirect_type')
-        ->assertJsonValidationErrorFor('locale')
-        ->assertUnprocessable();
+it('should deny guest access to the URL rewrites index page', function () {
+    get(route('admin.marketing.search_seo.url_rewrites.index'))
+        ->assertRedirect(route('admin.session.create'));
 });
 
-it('should store the newly created url', function () {
-    // Act and Assert.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a newly created URL rewrite', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.url_rewrites.store'), [
         'entity_type' => $entityType = fake()->randomElement(['product', 'category', 'cms_page']),
         'request_path' => $requestPath = fake()->url(),
         'target_path' => $targetPath = fake()->url(),
-        'redirect_type' => $redirectType = fake()->randomElement([302, 301]),
-        'locale' => $localeCode = core()->getCurrentLocale()->code,
+        'redirect_type' => $redirectType = fake()->randomElement([301, 302]),
+        'locale' => $locale = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.create.success'));
 
-    $this->assertModelWise([
-        URLRewrite::class => [
-            [
-                'entity_type' => $entityType,
-                'request_path' => $requestPath,
-                'target_path' => $targetPath,
-                'redirect_type' => $redirectType,
-                'locale' => $localeCode,
-            ],
-        ],
+    $this->assertDatabaseHas('url_rewrites', [
+        'entity_type' => $entityType,
+        'request_path' => $requestPath,
+        'target_path' => $targetPath,
+        'redirect_type' => $redirectType,
+        'locale' => $locale,
     ]);
 });
 
-it('should fail the validation with errors when certain field not provided when update the url rewrites', function () {
-    // Arrange.
-    $urlRewrite = URLRewrite::factory()->create();
-
-    // Act and Assert.
+it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
 
-    putJson(route('admin.marketing.search_seo.url_rewrites.update', $urlRewrite->id))
+    postJson(route('admin.marketing.search_seo.url_rewrites.store'))
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('entity_type')
         ->assertJsonValidationErrorFor('request_path')
         ->assertJsonValidationErrorFor('target_path')
         ->assertJsonValidationErrorFor('redirect_type')
-        ->assertJsonValidationErrorFor('locale')
-        ->assertUnprocessable();
+        ->assertJsonValidationErrorFor('locale');
 });
 
-it('should update the existing url rewrite', function () {
-    // Arrange.
-    $urlRewrite = URLRewrite::factory()->create();
+// ============================================================================
+// Update
+// ============================================================================
 
-    // Act and Assert.
+it('should update an existing URL rewrite', function () {
+    $rewrite = URLRewrite::factory()->create();
+
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.search_seo.url_rewrites.update'), [
-        'id' => $urlRewrite->id,
+        'id' => $rewrite->id,
         'entity_type' => $entityType = fake()->randomElement(['product', 'category', 'cms_page']),
         'request_path' => $requestPath = fake()->url(),
         'target_path' => $targetPath = fake()->url(),
-        'redirect_type' => $redirectType = fake()->randomElement([302, 301]),
-        'locale' => $localeCode = core()->getCurrentLocale()->code,
+        'redirect_type' => $redirectType = fake()->randomElement([301, 302]),
+        'locale' => $locale = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.edit.success'));
 
-    $this->assertModelWise([
-        URLRewrite::class => [
-            [
-                'id' => $urlRewrite->id,
-                'entity_type' => $entityType,
-                'request_path' => $requestPath,
-                'target_path' => $targetPath,
-                'redirect_type' => $redirectType,
-                'locale' => $localeCode,
-            ],
-        ],
+    $this->assertDatabaseHas('url_rewrites', [
+        'id' => $rewrite->id,
+        'entity_type' => $entityType,
+        'redirect_type' => $redirectType,
     ]);
 });
 
-it('should delete the existing url rewrite', function () {
-    // Arrange.
-    $urlRewrite = URLRewrite::factory()->create();
+it('should fail validation when required fields are missing on update', function () {
+    $rewrite = URLRewrite::factory()->create();
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.marketing.search_seo.url_rewrites.delete', $urlRewrite->id))
+    putJson(route('admin.marketing.search_seo.url_rewrites.update', $rewrite->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('entity_type')
+        ->assertJsonValidationErrorFor('request_path')
+        ->assertJsonValidationErrorFor('target_path')
+        ->assertJsonValidationErrorFor('redirect_type')
+        ->assertJsonValidationErrorFor('locale');
+});
+
+// ============================================================================
+// Delete
+// ============================================================================
+
+it('should delete a URL rewrite', function () {
+    $rewrite = URLRewrite::factory()->create();
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.marketing.search_seo.url_rewrites.delete', $rewrite->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.edit.delete-success'));
 
-    $this->assertDatabaseMissing('url_rewrites', [
-        'id' => $urlRewrite->id,
-    ]);
+    $this->assertDatabaseMissing('url_rewrites', ['id' => $rewrite->id]);
 });
 
-it('should mass delete the existing url rewrites', function () {
-    // Arrange.
-    $urlRewrites = URLRewrite::factory()->count(2)->create();
+// ============================================================================
+// Mass Delete
+// ============================================================================
 
-    // Act and Assert.
+it('should mass delete URL rewrites', function () {
+    $rewrites = URLRewrite::factory()->count(2)->create();
+
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.search_seo.url_rewrites.mass_delete'), [
-        'indices' => $urlRewrites->pluck('id')->toArray(),
+        'indices' => $rewrites->pluck('id')->toArray(),
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.url-rewrites.index.datagrid.mass-delete-success'));
 
-    foreach ($urlRewrites as $urlRewrite) {
-        $this->assertDatabaseMissing('url_rewrites', [
-            'id' => $urlRewrite->id,
-        ]);
+    foreach ($rewrites as $rewrite) {
+        $this->assertDatabaseMissing('url_rewrites', ['id' => $rewrite->id]);
     }
 });

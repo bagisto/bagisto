@@ -34,6 +34,16 @@ class ProductBundleOptionProduct extends Model implements ProductBundleOptionPro
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_user_defined' => 'boolean',
+        'is_default' => 'boolean',
+    ];
+
+    /**
      * Get the bundle option that owns this resource.
      */
     public function bundle_option()

@@ -29,11 +29,28 @@ class Currency extends Model implements CurrencyContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'decimal' => 'integer',
+    ];
+
+    /**
      * Set currency code in capital letter.
      */
     public function setCodeAttribute($code): void
     {
         $this->attributes['code'] = strtoupper($code);
+    }
+
+    /**
+     * Set decimal digits with fallback to default.
+     */
+    public function setDecimalAttribute($value): void
+    {
+        $this->attributes['decimal'] = $value !== '' && $value !== null ? (int) $value : 2;
     }
 
     /**

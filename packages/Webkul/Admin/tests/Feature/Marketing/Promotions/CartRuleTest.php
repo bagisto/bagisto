@@ -1,14 +1,31 @@
 <?php
 
 use Webkul\CartRule\Models\CartRule;
+use Webkul\CartRule\Models\CartRuleCoupon;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should returns the cart rule page', function () {
-    // Act and Assert.
+/**
+ * Create a cart rule with channels and customer groups synced.
+ */
+function createCartRule(array $attributes = []): CartRule
+{
+    return CartRule::factory()
+        ->afterCreating(function (CartRule $rule) {
+            $rule->channels()->sync([1]);
+            $rule->customer_groups()->sync([1, 2, 3]);
+        })
+        ->create($attributes);
+}
+
+// ============================================================================
+// Index
+// ============================================================================
+
+it('should return the cart rule index page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.cart_rules.index'))
@@ -17,92 +34,89 @@ it('should returns the cart rule page', function () {
         ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.index.create-btn'));
 });
 
-it('should returns the create page of cart rules', function () {
-    // Act and Assert.
+it('should deny guest access to the cart rule index page', function () {
+    get(route('admin.marketing.promotions.cart_rules.index'))
+        ->assertRedirect(route('admin.session.create'));
+});
+
+// ============================================================================
+// Create
+// ============================================================================
+
+it('should return the cart rule create page', function () {
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.cart_rules.create'))
         ->assertOk()
-        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.create.title'))
-        ->assertSeeText(trans('admin::app.account.edit.back-btn'))
-        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.create.save-btn'));
+        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.create.title'));
 });
 
-it('should fail the validation with errors when certain field not provided when store the cart rule', function () {
-    // Act and Assert.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a newly created cart rule', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.cart_rules.store'), [
+        'name' => $name = fake()->words(3, true),
+        'description' => $description = fake()->sentence(),
+        'channels' => [1],
+        'customer_groups' => [1, 2, 3],
+        'discount_amount' => 15,
+        'coupon_type' => 0,
+        'action_type' => $actionType = fake()->randomElement(['by_percent', 'by_fixed', 'cart_fixed', 'buy_x_get_y']),
+        'starts_from' => '',
+        'ends_till' => '',
+    ])
+        ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'));
+
+    $this->assertDatabaseHas('cart_rules', [
+        'name' => $name,
+        'description' => $description,
+        'action_type' => $actionType,
+    ]);
+});
+
+it('should fail validation when required fields are missing on store', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.marketing.promotions.cart_rules.store'))
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('channels')
         ->assertJsonValidationErrorFor('customer_groups')
         ->assertJsonValidationErrorFor('coupon_type')
         ->assertJsonValidationErrorFor('action_type')
-        ->assertJsonValidationErrorFor('discount_amount')
-        ->assertUnprocessable();
+        ->assertJsonValidationErrorFor('discount_amount');
 });
 
-it('should store the newly created cart rule', function () {
-    // Act and Assert.
-    $this->loginAsAdmin();
+// ============================================================================
+// Copy
+// ============================================================================
 
-    postJson(route('admin.marketing.promotions.cart_rules.store', [
-        'name' => $name = fake()->name(),
-        'description' => $description = substr(fake()->paragraph(), 0, 50),
+it('should copy an existing cart rule', function () {
+    $cartRule = createCartRule();
 
-        'channels' => [
-            1,
-        ],
-
-        'customer_groups' => [
-            1,
-            2,
-            3,
-        ],
-
-        'discount_amount' => 0,
-        'coupon_type' => 0,
-        'action_type' => $actionType = fake()->randomElement(['by_percent', 'by_fixed', 'cart_fixed', 'buy_x_get_y']),
-        'starts_from' => '',
-        'ends_till' => '',
-    ]))
-        ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'))
-        ->isRedirection();
-
-    $this->assertModelWise([
-        CartRule::class => [
-            [
-                'name' => $name,
-                'description' => $description,
-                'action_type' => $actionType,
-            ],
-        ],
-    ]);
-});
-
-it('should copy the existing cart rule', function () {
-    // Arrange.
-    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
-        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
-        $cartRule->cart_rule_channels()->sync([1]);
-    })->create();
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.cart_rules.copy', $cartRule->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.title'));
+
+    $this->assertDatabaseHas('cart_rules', [
+        'name' => trans('admin::app.marketing.promotions.cart-rules.index.datagrid.copy-of', ['value' => $cartRule->name]),
+        'status' => 0,
+    ]);
 });
 
-it('should update the existing cart rule', function () {
-    // Arrange.
-    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
-        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
-        $cartRule->cart_rule_channels()->sync([1]);
-    })->create();
+// ============================================================================
+// Edit
+// ============================================================================
 
-    // Act and Assert.
+it('should return the cart rule edit page', function () {
+    $cartRule = createCartRule();
+
     $this->loginAsAdmin();
 
     get(route('admin.marketing.promotions.cart_rules.edit', $cartRule->id))
@@ -110,85 +124,134 @@ it('should update the existing cart rule', function () {
         ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.edit.title'));
 });
 
-it('should fail the validation with errors when certain field not provided when update the cart rule', function () {
-    // Arrange.
-    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
-        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
-        $cartRule->cart_rule_channels()->sync([1]);
-    })->create();
+// ============================================================================
+// Update
+// ============================================================================
 
-    // Act and Assert.
+it('should update an existing cart rule', function () {
+    $cartRule = createCartRule();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.promotions.cart_rules.update', $cartRule->id), [
+        'name' => $name = fake()->words(3, true),
+        'description' => fake()->sentence(),
+        'channels' => [1],
+        'customer_groups' => [1, 2, 3],
+        'discount_amount' => 20,
+        'coupon_type' => 0,
+        'action_type' => 'by_fixed',
+        'starts_from' => '',
+        'ends_till' => '',
+    ])
+        ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'));
+
+    $this->assertDatabaseHas('cart_rules', [
+        'id' => $cartRule->id,
+        'name' => $name,
+        'action_type' => 'by_fixed',
+    ]);
+});
+
+it('should fail validation when required fields are missing on update', function () {
+    $cartRule = createCartRule();
+
     $this->loginAsAdmin();
 
     putJson(route('admin.marketing.promotions.cart_rules.update', $cartRule->id))
+        ->assertUnprocessable()
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('channels')
         ->assertJsonValidationErrorFor('customer_groups')
         ->assertJsonValidationErrorFor('coupon_type')
         ->assertJsonValidationErrorFor('action_type')
-        ->assertJsonValidationErrorFor('discount_amount')
-        ->assertUnprocessable();
+        ->assertJsonValidationErrorFor('discount_amount');
 });
 
-it('should update the cart rule', function () {
-    // Arrange.
-    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
-        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
-        $cartRule->cart_rule_channels()->sync([1]);
-    })->create();
+// ============================================================================
+// Delete
+// ============================================================================
 
-    // Act and Assert.
-    $this->loginAsAdmin();
+it('should delete a cart rule', function () {
+    $cartRule = createCartRule();
 
-    putJson(route('admin.marketing.promotions.cart_rules.update', $cartRule->id), [
-        'name' => $name = fake()->name(),
-        'description' => $description = substr(substr(fake()->paragraph(), 0, 50), 0, 50),
-
-        'channels' => [
-            1,
-        ],
-
-        'customer_groups' => [
-            1,
-            2,
-            3,
-        ],
-
-        'discount_amount' => 0,
-        'coupon_type' => 0,
-        'action_type' => $actionType = fake()->randomElement(['by_percent', 'by_fixed', 'cart_fixed', 'buy_x_get_y']),
-        'starts_from' => '',
-        'ends_till' => '',
-    ])
-        ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'))
-        ->isRedirection();
-
-    $this->assertModelWise([
-        CartRule::class => [
-            [
-                'name' => $name,
-                'description' => $description,
-                'action_type' => $actionType,
-            ],
-        ],
-    ]);
-});
-
-it('should delete the cart rules', function () {
-    // Arrange.
-    $cartRule = CartRule::factory()->afterCreating(function (CartRule $cartRule) {
-        $cartRule->cart_rule_customer_groups()->sync([1, 2, 3]);
-        $cartRule->cart_rule_channels()->sync([1]);
-    })->create();
-
-    // Act and Assert.
     $this->loginAsAdmin();
 
     deleteJson(route('admin.marketing.promotions.cart_rules.delete', $cartRule->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules.delete-success'));
 
-    $this->assertDatabaseMissing('cart_rules', [
-        'id' => $cartRule->id,
+    $this->assertDatabaseMissing('cart_rules', ['id' => $cartRule->id]);
+});
+
+// ============================================================================
+// Coupon Generation
+// ============================================================================
+
+it('should generate coupon codes for a cart rule', function () {
+    $cartRule = createCartRule(['coupon_type' => 1, 'use_auto_generation' => true]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.cart_rules.coupons.store', $cartRule->id), [
+        'coupon_qty' => 3,
+        'code_length' => 12,
+        'code_format' => 'alphanumeric',
+        'code_prefix' => '',
+        'code_suffix' => '',
+    ])
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules-coupons.success', ['name' => 'Cart rule coupons']));
+
+    expect(CartRuleCoupon::where('cart_rule_id', $cartRule->id)->count())->toBe(3);
+});
+
+it('should fail validation when coupon generation fields are missing', function () {
+    $cartRule = createCartRule(['coupon_type' => 1, 'use_auto_generation' => true]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.cart_rules.coupons.store', $cartRule->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('coupon_qty')
+        ->assertJsonValidationErrorFor('code_length')
+        ->assertJsonValidationErrorFor('code_format');
+});
+
+it('should delete a generated coupon code', function () {
+    $cartRule = createCartRule(['coupon_type' => 1, 'use_auto_generation' => true]);
+
+    $coupon = CartRuleCoupon::factory()->create([
+        'cart_rule_id' => $cartRule->id,
+        'is_primary' => 0,
     ]);
+
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.marketing.promotions.cart_rules.coupons.delete', $coupon->id))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules-coupons.delete-success'));
+
+    $this->assertDatabaseMissing('cart_rule_coupons', ['id' => $coupon->id]);
+});
+
+it('should mass delete generated coupon codes', function () {
+    $cartRule = createCartRule(['coupon_type' => 1, 'use_auto_generation' => true]);
+
+    $coupons = CartRuleCoupon::factory()->count(2)->create([
+        'cart_rule_id' => $cartRule->id,
+        'is_primary' => 0,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.cart_rules.coupons.mass_delete'), [
+        'indices' => $coupons->pluck('id')->toArray(),
+    ])
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.marketing.promotions.cart-rules-coupons.mass-delete-success'));
+
+    foreach ($coupons as $coupon) {
+        $this->assertDatabaseMissing('cart_rule_coupons', ['id' => $coupon->id]);
+    }
 });

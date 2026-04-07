@@ -44,6 +44,7 @@ class Channel extends TranslatableModel implements ChannelContract
      */
     protected $casts = [
         'home_seo' => 'array',
+        'is_maintenance_on' => 'boolean',
     ];
 
     /**

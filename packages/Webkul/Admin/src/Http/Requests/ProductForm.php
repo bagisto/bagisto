@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Requests;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Rules\Decimal;
@@ -75,7 +76,7 @@ class ProductForm extends FormRequest
         $this->product = $this->productRepository->find($this->id);
 
         $this->rules = array_merge($this->product->getTypeInstance()->getTypeValidationRules(), [
-            'sku' => ['required', 'unique:products,sku,'.$this->id, new Slug],
+            'sku' => ['required', Rule::unique('products', 'sku')->ignore($this->id), new Slug],
             'url_key' => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
             'images.files.*' => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
             'images.positions.*' => ['nullable', 'integer'],

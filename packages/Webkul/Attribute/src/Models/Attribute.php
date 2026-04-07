@@ -14,8 +14,18 @@ class Attribute extends TranslatableModel implements AttributeContract
 {
     use HasFactory;
 
+    /**
+     * The translatable attributes.
+     *
+     * @var array
+     */
     public $translatedAttributes = ['name'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'code',
         'admin_name',
@@ -35,6 +45,24 @@ class Attribute extends TranslatableModel implements AttributeContract
         'is_user_defined',
         'swatch_type',
         'is_comparable',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_required' => 'boolean',
+        'is_unique' => 'boolean',
+        'is_filterable' => 'boolean',
+        'is_configurable' => 'boolean',
+        'is_visible_on_front' => 'boolean',
+        'is_comparable' => 'boolean',
+        'is_user_defined' => 'boolean',
+        'value_per_locale' => 'boolean',
+        'value_per_channel' => 'boolean',
+        'enable_wysiwyg' => 'boolean',
     ];
 
     /**
@@ -65,7 +93,7 @@ class Attribute extends TranslatableModel implements AttributeContract
     }
 
     /**
-     * Scope a query to only include popular users.
+     * Scope a query to only include filterable attributes.
      */
     public function scopeFilterableAttributes(Builder $query): Builder
     {
@@ -75,7 +103,7 @@ class Attribute extends TranslatableModel implements AttributeContract
     }
 
     /**
-     * Returns attribute value table column based attribute type
+     * Returns attribute value table column based on attribute type.
      *
      * @return string
      */
@@ -85,7 +113,7 @@ class Attribute extends TranslatableModel implements AttributeContract
     }
 
     /**
-     * Returns attribute validation rules
+     * Returns attribute validation rules.
      *
      * @return string
      */
@@ -129,7 +157,7 @@ class Attribute extends TranslatableModel implements AttributeContract
     }
 
     /**
-     * Create a new factory instance for the model
+     * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory
     {
