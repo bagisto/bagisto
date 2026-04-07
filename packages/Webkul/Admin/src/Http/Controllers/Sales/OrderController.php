@@ -207,10 +207,10 @@ class OrderController extends Controller
     public function search()
     {
         $orders = $this->orderRepository->scopeQuery(function ($query) {
-            return $query->where('customer_email', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orWhere('status', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orWhere('customer_first_name', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orWhere('customer_last_name', 'like', '%'.urldecode(request()->input('query')).'%')
+            return $query->where('customer_email', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('status', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('customer_first_name', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('customer_last_name', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
                 ->orWhere('increment_id', request()->input('query'))
                 ->orderBy('created_at', 'desc');
         })->paginate(10);

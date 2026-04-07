@@ -204,11 +204,42 @@ php artisan db:seed              # Seed database
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `pest_tests.yml` | push, PR | Installs Bagisto, runs `vendor/bin/pest` |
+| `pest_tests.yml` | push, PR | Installs Bagisto, runs `vendor/bin/pest` (MySQL + PostgreSQL) |
 | `pint_tests.yml` | push, PR | Runs `pint --test` (style check) |
-| `admin_playwright_tests.yml` | push, PR | Admin E2E tests |
-| `shop_playwright_tests.yml` | push, PR | Shop E2E tests |
+| `admin_playwright_tests.yml` | push, PR | Admin E2E tests (6 shards × MySQL + PostgreSQL) |
+| `shop_playwright_tests.yml` | push, PR | Shop E2E tests (6 shards × MySQL + PostgreSQL) |
 | `translation_tests.yml` | push, PR | Translation key consistency |
+
+## PostgreSQL Compatibility
+
+All code must work on both MySQL 8.0 and PostgreSQL 16. Use the existing `db_grammar()` abstraction for DB-specific syntax.
+
+### Case-Insensitive LIKE
+MySQL `LIKE` is case-insensitive by default; PostgreSQL `LIKE` is case-sensitive. Use the grammar helper:
+```php
+// Correct — uses LIKE on MySQL, ILIKE on PostgreSQL
+$query->where('name', db_grammar()->caseInsensitiveLike(), '%'.$search.'%');
+
+// For exact-case matching (rare)
+$query->where('code', db_grammar()->caseSensitiveLike(), '%'.$search.'%');
+```
+Never hardcode `'like'` for user-facing text searches.
+
+### Empty Strings → Use Model Mutators
+MySQL coerces `""` to `0`/`NULL`. PostgreSQL rejects it. Add set mutators on models:
+```php
+public function setPriorityAttribute($value): void
+{
+    $this->attributes['priority'] = $value !== '' && $value !== null ? (int) $value : 0;
+}
+```
+Always pair with `$casts` for read-side consistency. Never sanitize in controllers.
+
+### Other Pitfalls
+- **CASE types must match**: `CASE WHEN x THEN varchar_col ELSE CAST(int_col AS CHAR) END`
+- **GROUP BY must include all non-aggregated SELECT columns**
+- **`DB::raw('col + 1')` in `updateOrCreate()`** fails on INSERT — split into find + update/create
+- **DB-specific SQL**: Use `db_grammar()` methods (`concat`, `groupConcat`, `findInSet`, `dateFormat`, `jsonExtract`, `caseInsensitiveLike`, `caseSensitiveLike`, etc.)
 
 ## Safety Rails
 
@@ -216,6 +247,7 @@ php artisan db:seed              # Seed database
 - **Translations are 21 files per key.** Missing a locale will fail CI. When adding/removing translation keys, hit all 21 files.
 - **Pint must pass.** Run `vendor/bin/pint --dirty` before finalizing any PHP change.
 - **Tests must pass.** Run affected package tests after changes. Do not delete tests without approval.
+- **PostgreSQL compatibility is required.** Never hardcode `'like'` for text searches — use `db_grammar()->caseInsensitiveLike()`. Never rely on MySQL-specific implicit coercions. Handle type normalization in models via `$casts` and set mutators.
 - **Do not add/remove composer dependencies without approval.**
 - **Do not create documentation files unless explicitly requested.**
 

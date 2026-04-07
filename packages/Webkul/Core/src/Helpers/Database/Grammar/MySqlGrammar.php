@@ -117,4 +117,20 @@ class MySqlGrammar implements DatabaseGrammar
     {
         return "COALESCE(CAST(json_unquote(json_extract({$column}, '{$path}')) AS SIGNED), 0)";
     }
+
+    /**
+     * Return the case-insensitive LIKE operator.
+     */
+    public function caseInsensitiveLike(): string
+    {
+        return 'LIKE';
+    }
+
+    /**
+     * Return the case-sensitive LIKE operator.
+     */
+    public function caseSensitiveLike(): string
+    {
+        return 'LIKE BINARY';
+    }
 }

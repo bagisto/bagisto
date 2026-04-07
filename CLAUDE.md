@@ -170,7 +170,19 @@ Or use: `php artisan package:make Webkul/<Name>` (requires `bagisto/bagisto-pack
 
 ## CI Pipeline
 
-- **pest_tests.yml**: Pest tests on PHP 8.3 + MySQL 8.0
+- **pest_tests.yml**: Pest tests on PHP 8.3 + MySQL 8.0 & PostgreSQL 16
 - **pint_tests.yml**: Code style checks with Laravel Pint
-- **admin_playwright_tests.yml / shop_playwright_tests.yml**: E2E tests (6 parallel shards)
+- **admin_playwright_tests.yml / shop_playwright_tests.yml**: E2E tests (6 shards × 2 databases)
 - **translation_tests.yml**: Translation file validation
+
+## PostgreSQL Compatibility
+
+The codebase must work on both MySQL and PostgreSQL. Use the existing abstractions:
+
+- **Case-insensitive LIKE**: Use `db_grammar()->caseInsensitiveLike()` instead of hardcoded `'like'`. Returns `LIKE` on MySQL (already case-insensitive), `ILIKE` on PostgreSQL. Use `db_grammar()->caseSensitiveLike()` when exact case matching is needed.
+- **Empty strings → NULL/default**: Use model set mutators (`setXxxAttribute`), never sanitize in controllers.
+- **Boolean columns**: Add `$casts` with `'boolean'`. For write-side, use repository validation or model mutators.
+- **DB-specific SQL**: Use `db_grammar()` methods (`concat`, `groupConcat`, `findInSet`, `dateFormat`, `jsonExtract`, `caseInsensitiveLike`, `caseSensitiveLike`, etc.).
+- **CASE expression types**: Both branches must return same type. Use `CAST(id AS CHAR)`.
+- **GROUP BY**: PostgreSQL requires every non-aggregated SELECT column in GROUP BY.
+- **DB::raw() in updateOrCreate**: Fails on INSERT; split into find + update/create.

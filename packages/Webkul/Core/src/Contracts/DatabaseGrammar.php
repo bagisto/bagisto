@@ -75,4 +75,14 @@ interface DatabaseGrammar
      * Extract a numeric value from a JSON column, returning 0 for null or empty values.
      */
     public function jsonExtractNumeric(string $column, string $path): string;
+
+    /**
+     * Return the case-insensitive LIKE operator for the current database driver.
+     */
+    public function caseInsensitiveLike(): string;
+
+    /**
+     * Return the case-sensitive LIKE operator for the current database driver.
+     */
+    public function caseSensitiveLike(): string;
 }

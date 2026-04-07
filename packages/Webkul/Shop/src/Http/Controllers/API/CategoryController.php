@@ -96,8 +96,8 @@ class CategoryController extends APIController
 
         if ($search = request('search')) {
             $query->where(function ($query) use ($search) {
-                $query->whereHas('translation', fn ($query) => $query->where('label', 'like', "%{$search}%"))
-                    ->orWhere('admin_name', 'like', "%{$search}%");
+                $query->whereHas('translation', fn ($query) => $query->where('label', db_grammar()->caseInsensitiveLike(), "%{$search}%"))
+                    ->orWhere('admin_name', db_grammar()->caseInsensitiveLike(), "%{$search}%");
             });
         }
 

@@ -272,9 +272,9 @@ class CustomerController extends Controller
     public function search()
     {
         $customers = $this->customerRepository->scopeQuery(function ($query) {
-            return $query->where('email', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orWhere('first_name', 'like', '%'.urldecode(request()->input('query')).'%')
-                ->orWhere('last_name', 'like', '%'.urldecode(request()->input('query')).'%')
+            return $query->where('email', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('first_name', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
+                ->orWhere('last_name', db_grammar()->caseInsensitiveLike(), '%'.urldecode(request()->input('query')).'%')
                 ->orderBy('created_at', 'desc');
         })->paginate(self::COUNT);
 

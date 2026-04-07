@@ -148,6 +148,22 @@ class PgSqlGrammar implements DatabaseGrammar
     }
 
     /**
+     * Return the case-insensitive LIKE operator.
+     */
+    public function caseInsensitiveLike(): string
+    {
+        return 'ILIKE';
+    }
+
+    /**
+     * Return the case-sensitive LIKE operator.
+     */
+    public function caseSensitiveLike(): string
+    {
+        return 'LIKE';
+    }
+
+    /**
      * Convert MySQL JSON path ('$.key' or '$."key"') to a plain key name.
      */
     private function mysqlPathToKey(string $path): string
