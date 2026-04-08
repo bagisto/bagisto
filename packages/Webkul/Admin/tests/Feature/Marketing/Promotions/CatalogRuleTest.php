@@ -139,6 +139,52 @@ it('should update an existing catalog rule', function () {
     ]);
 });
 
+it('should persist boolean fields when storing a catalog rule', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.catalog_rules.store'), [
+        'name' => fake()->words(3, true),
+        'channels' => [1],
+        'customer_groups' => [1, 2, 3],
+        'action_type' => 'by_percent',
+        'discount_amount' => 10,
+        'status' => 1,
+        'end_other_rules' => 1,
+        'starts_from' => '',
+        'ends_till' => '',
+    ])
+        ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'));
+
+    $catalogRule = CatalogRule::latest('id')->first();
+
+    expect($catalogRule->status)->toBeTrue()
+        ->and($catalogRule->end_other_rules)->toBeTrue();
+});
+
+it('should persist disabled boolean fields when updating a catalog rule', function () {
+    $catalogRule = createCatalogRule();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.marketing.promotions.catalog_rules.update', $catalogRule->id), [
+        'name' => $catalogRule->name,
+        'channels' => [1],
+        'customer_groups' => [1, 2, 3],
+        'action_type' => 'by_percent',
+        'discount_amount' => 10,
+        'status' => 0,
+        'end_other_rules' => 0,
+        'starts_from' => '',
+        'ends_till' => '',
+    ])
+        ->assertRedirect(route('admin.marketing.promotions.catalog_rules.index'));
+
+    $catalogRule->refresh();
+
+    expect($catalogRule->status)->toBeFalse()
+        ->and($catalogRule->end_other_rules)->toBeFalse();
+});
+
 it('should fail validation when required fields are missing on update', function () {
     $catalogRule = createCatalogRule();
 

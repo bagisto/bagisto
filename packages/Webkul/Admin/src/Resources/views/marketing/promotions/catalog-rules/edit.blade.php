@@ -239,7 +239,7 @@
                                         class="h-[39px]"
                                         id="end_other_rules"
                                         name="end_other_rules"
-                                        :value="old('end_other_rules') ?? $selectedOption"
+                                        :value="(int) (old('end_other_rules') ?? $selectedOption)"
                                         :label="trans('admin::app.marketing.promotions.catalog-rules.edit.end-other-rules')"
                                     >
                                         <option
@@ -376,9 +376,15 @@
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="status"
+                                    value="0"
+                                />
+
+                                <x-admin::form.control-group.control
                                     type="switch"
                                     name="status"
-                                    :value="$catalogRule->status"
+                                    value="1"
                                     :label="trans('admin::app.marketing.promotions.catalog-rules.edit.status')"
                                     :checked="(boolean) $catalogRule->status"
                                 />

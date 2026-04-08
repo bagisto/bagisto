@@ -93,6 +93,46 @@ class CartRule extends Model implements CartRuleContract
     }
 
     /**
+     * Set use auto generation with proper boolean conversion.
+     */
+    public function setUseAutoGenerationAttribute($value): void
+    {
+        $this->attributes['use_auto_generation'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set end other rules with proper boolean conversion.
+     */
+    public function setEndOtherRulesAttribute($value): void
+    {
+        $this->attributes['end_other_rules'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set uses attribute conditions with proper boolean conversion.
+     */
+    public function setUsesAttributeConditionsAttribute($value): void
+    {
+        $this->attributes['uses_attribute_conditions'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set apply to shipping with proper boolean conversion.
+     */
+    public function setApplyToShippingAttribute($value): void
+    {
+        $this->attributes['apply_to_shipping'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set free shipping with proper boolean conversion.
+     */
+    public function setFreeShippingAttribute($value): void
+    {
+        $this->attributes['free_shipping'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
      * Set usage per customer with empty string to zero conversion.
      */
     public function setUsagePerCustomerAttribute($value): void
