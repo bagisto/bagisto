@@ -152,6 +152,19 @@ it('should return the edit page of a product', function () {
         ->assertSeeText(trans('admin::app.catalog.products.edit.title'));
 });
 
+it('should render column 1 attribute groups before column 2 on the edit page', function () {
+    $product = $this->createSimpleProduct();
+
+    $this->loginAsAdmin();
+
+    get(route('admin.catalog.products.edit', $product->id))
+        ->assertOk()
+        ->assertSeeInOrder([
+            'flex-1 max-xl:flex-auto',
+            'w-[360px]',
+        ]);
+});
+
 it('should return 404 for a non-existent product edit page', function () {
     $this->loginAsAdmin();
 
