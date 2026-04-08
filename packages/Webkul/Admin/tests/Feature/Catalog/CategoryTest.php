@@ -273,6 +273,55 @@ it('should update a category', function () {
     ]);
 });
 
+it('should disable visible in menu when status is set to zero on update', function () {
+    $category = createCategory();
+
+    $localeCode = core()->getRequestedLocaleCode();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.categories.update', $category->id), [
+        $localeCode => [
+            'name' => $category->name,
+            'description' => $category->description ?? 'Test description.',
+            'slug' => $category->slug,
+        ],
+        'locale' => $localeCode,
+        'attributes' => filterableAttributeIds(),
+        'position' => 1,
+        'status' => 0,
+    ])
+        ->assertRedirect(route('admin.catalog.categories.index'));
+
+    expect($category->refresh()->status)->toBeFalse();
+});
+
+it('should enable visible in menu when status is set to one on update', function () {
+    $category = createCategory();
+
+    // Ensure status starts as disabled.
+    $category->update(['status' => false]);
+
+    $localeCode = core()->getRequestedLocaleCode();
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.categories.update', $category->id), [
+        $localeCode => [
+            'name' => $category->name,
+            'description' => $category->description ?? 'Test description.',
+            'slug' => $category->slug,
+        ],
+        'locale' => $localeCode,
+        'attributes' => filterableAttributeIds(),
+        'position' => 1,
+        'status' => 1,
+    ])
+        ->assertRedirect(route('admin.catalog.categories.index'));
+
+    expect($category->refresh()->status)->toBeTrue();
+});
+
 it('should fail validation when required fields are missing on update', function () {
     $category = createCategory();
 

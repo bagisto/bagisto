@@ -439,7 +439,7 @@
                                             type="select"
                                             id="apply_to_shipping"
                                             name="apply_to_shipping"
-                                            :value="old('apply_to_shipping') ?? $cartRule->apply_to_shipping"
+                                            :value="(int) (old('apply_to_shipping') ?? $cartRule->apply_to_shipping)"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.apply-to-shipping')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.apply-to-shipping')"
                                             ::disabled="actionType == 'cart_fixed'"
@@ -476,7 +476,7 @@
                                             type="select"
                                             id="free_shipping"
                                             name="free_shipping"
-                                            :value="old('free_shipping') ?? $cartRule->free_shipping"
+                                            :value="(int) (old('free_shipping') ?? $cartRule->free_shipping)"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.free-shipping')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.free-shipping')"
                                         >
@@ -515,7 +515,7 @@
                                             class="!w-1/2 max-sm:!w-full"
                                             id="end_other_rules"
                                             name="end_other_rules"
-                                            :value="old('end_other_rules') ?? $cartRule->end_other_rules"
+                                            :value="(int) (old('end_other_rules') ?? $cartRule->end_other_rules)"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.end-of-other-rules')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.end-of-other-rules')"
                                         >
@@ -653,9 +653,15 @@
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
+                                    type="hidden"
+                                    name="status"
+                                    value="0"
+                                />
+
+                                <x-admin::form.control-group.control
                                     type="switch"
                                     name="status"
-                                    :value="$cartRule->status"
+                                    value="1"
                                     :label="trans('admin::app.marketing.promotions.cart-rules.edit.status')"
                                     :checked="(boolean) $cartRule->status"
                                 />

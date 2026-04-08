@@ -153,6 +153,63 @@ it('should update an existing cart rule', function () {
     ]);
 });
 
+it('should persist boolean fields when storing a cart rule', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.marketing.promotions.cart_rules.store'), [
+        'name' => fake()->words(3, true),
+        'channels' => [1],
+        'customer_groups' => [1, 2, 3],
+        'discount_amount' => 10,
+        'coupon_type' => 0,
+        'action_type' => 'by_percent',
+        'status' => 1,
+        'apply_to_shipping' => 1,
+        'free_shipping' => 1,
+        'end_other_rules' => 1,
+        'starts_from' => '',
+        'ends_till' => '',
+    ])
+        ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'));
+
+    $cartRule = CartRule::latest('id')->first();
+
+    expect($cartRule->status)->toBeTrue()
+        ->and($cartRule->apply_to_shipping)->toBeTrue()
+        ->and($cartRule->free_shipping)->toBeTrue()
+        ->and($cartRule->end_other_rules)->toBeTrue();
+});
+
+it('should persist disabled boolean fields when updating a cart rule', function () {
+    $cartRule = createCartRule();
+
+    $this->loginAsAdmin();
+
+    // Update with all boolean fields disabled.
+    putJson(route('admin.marketing.promotions.cart_rules.update', $cartRule->id), [
+        'name' => $cartRule->name,
+        'channels' => [1],
+        'customer_groups' => [1, 2, 3],
+        'discount_amount' => 10,
+        'coupon_type' => 0,
+        'action_type' => 'by_percent',
+        'status' => 0,
+        'apply_to_shipping' => 0,
+        'free_shipping' => 0,
+        'end_other_rules' => 0,
+        'starts_from' => '',
+        'ends_till' => '',
+    ])
+        ->assertRedirect(route('admin.marketing.promotions.cart_rules.index'));
+
+    $cartRule->refresh();
+
+    expect($cartRule->status)->toBeFalse()
+        ->and($cartRule->apply_to_shipping)->toBeFalse()
+        ->and($cartRule->free_shipping)->toBeFalse()
+        ->and($cartRule->end_other_rules)->toBeFalse();
+});
+
 it('should fail validation when required fields are missing on update', function () {
     $cartRule = createCartRule();
 

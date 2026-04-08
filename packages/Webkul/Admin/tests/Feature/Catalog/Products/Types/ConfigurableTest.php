@@ -83,7 +83,9 @@ it('should create a configurable product with variants when super_attributes are
 // ============================================================================
 
 it('should return the edit page of a configurable product', function () {
-    $product = $this->storeAndUpdateConfigurableProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createConfigurableProduct();
 
     get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
@@ -269,7 +271,9 @@ it('should update variant values and reflect changes in product_flat', function 
 // ============================================================================
 
 it('should fail validation when required fields are missing on configurable product update', function () {
-    $product = $this->storeAndUpdateConfigurableProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createConfigurableProduct();
 
     // Configurable parent does not require price or weight.
     putJson(route('admin.catalog.products.update', $product->id))
@@ -282,7 +286,9 @@ it('should fail validation when required fields are missing on configurable prod
 });
 
 it('should fail validation when boolean fields have invalid values on configurable product update', function () {
-    $product = $this->storeAndUpdateConfigurableProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createConfigurableProduct();
 
     putJson(route('admin.catalog.products.update', $product->id), [
         'visible_individually' => 'invalid',

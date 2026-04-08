@@ -36,7 +36,9 @@ it('should store a grouped product and redirect to edit', function () {
 // ============================================================================
 
 it('should return the edit page of a grouped product', function () {
-    $product = $this->storeAndUpdateGroupedProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createGroupedProduct();
 
     get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
@@ -139,7 +141,9 @@ it('should not create inventory for a grouped product', function () {
 // ============================================================================
 
 it('should fail validation when required fields are missing on grouped product update', function () {
-    $product = $this->storeAndUpdateGroupedProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createGroupedProduct();
 
     // Grouped products do not require price or weight.
     putJson(route('admin.catalog.products.update', $product->id))

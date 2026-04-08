@@ -387,6 +387,8 @@ class ThemeCustomizationTableSeeder extends Seeder
                     ],
                 ]);
         }
+
+        $this->syncPostgresSequences(['theme_customizations']);
     }
 
     /**

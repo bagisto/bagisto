@@ -49,6 +49,38 @@ class CatalogRule extends Model implements CatalogRuleContract
     ];
 
     /**
+     * Set status with proper boolean conversion.
+     */
+    public function setStatusAttribute($value): void
+    {
+        $this->attributes['status'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set end other rules with proper boolean conversion.
+     */
+    public function setEndOtherRulesAttribute($value): void
+    {
+        $this->attributes['end_other_rules'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set starts from with empty string to null conversion.
+     */
+    public function setStartsFromAttribute($value): void
+    {
+        $this->attributes['starts_from'] = $value !== '' && $value !== null ? $value : null;
+    }
+
+    /**
+     * Set ends till with empty string to null conversion.
+     */
+    public function setEndsTillAttribute($value): void
+    {
+        $this->attributes['ends_till'] = $value !== '' && $value !== null ? $value : null;
+    }
+
+    /**
      * Get the channels that owns the catalog rule.
      */
     public function channels(): BelongsToMany
