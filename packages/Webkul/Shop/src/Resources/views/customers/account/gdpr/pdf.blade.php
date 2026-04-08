@@ -193,7 +193,7 @@
                                 <tr>
                                     <td>@lang('shop::app.customers.account.gdpr.pdf.account-info.dob')</td>
 
-                                    <td>{{ $param['customerInformation']->date_of_birth ?? 'NA' }}</td>
+                                    <td>{{ $param['customerInformation']->date_of_birth?->format('Y-m-d') ?? 'NA' }}</td>
                                 </tr>
 
                                 <tr>

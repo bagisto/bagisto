@@ -178,7 +178,7 @@
                 <x-shop::form.control-group.control
                     type="date"
                     name="date_of_birth"
-                    :value="old('date_of_birth') ?? $customer->date_of_birth"
+                    :value="old('date_of_birth') ?? $customer->date_of_birth?->format('Y-m-d')"
                     :label="trans('shop::app.customers.account.profile.edit.dob')"
                     :placeholder="trans('shop::app.customers.account.profile.edit.dob')"
                 />

@@ -43,7 +43,7 @@ class Customer extends Authenticatable implements CustomerContract
         'status' => 'boolean',
         'is_verified' => 'boolean',
         'is_suspended' => 'boolean',
-        'date_of_birth' => 'date',
+        'date_of_birth' => 'date:Y-m-d',
     ];
 
     /**
