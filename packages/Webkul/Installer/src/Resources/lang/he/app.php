@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'כל המוצרים',
-
-                    'options' => [
-                        'title' => 'כל המוצרים',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'צפה באוספים',
@@ -276,8 +268,8 @@ return [
                     'name' => 'קולקציות נועזות',
                 ],
 
-                'booking-products' => [
-                    'name' => 'מוצרי הזמנה',
+                'book-tickets' => [
+                    'name' => 'הזמן כרטיסים',
 
                     'options' => [
                         'title' => 'הזמן כרטיסים',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'אוספי קטגוריות',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'קולקציות מומלצות',
-
-                    'options' => [
-                        'title' => 'מוצרים מומלצים',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'מוצרים חדשים',
+                'kids-collection' => [
+                    'name' => 'קולקציית ילדים',
 
                     'options' => [
-                        'title' => 'מוצרים חדשים',
+                        'title' => 'קולקציית ילדים',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'קולקציית גברים',
+
+                    'options' => [
+                        'title' => 'קולקציית גברים',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'אוספי מובילים',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'קולקציית נשים',
+
+                    'options' => [
+                        'title' => 'קולקציית נשים',
+                    ],
                 ],
             ],
         ],

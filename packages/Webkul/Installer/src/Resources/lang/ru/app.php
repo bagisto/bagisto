@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Все товары',
-
-                    'options' => [
-                        'title' => 'Все товары',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Просмотреть коллекции',
@@ -276,8 +268,8 @@ return [
                     'name' => 'Смелые Коллекции',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Продукты Бронирования',
+                'book-tickets' => [
+                    'name' => 'Забронировать Билеты',
 
                     'options' => [
                         'title' => 'Забронировать Билеты',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Категории и коллекции',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Избранные коллекции',
-
-                    'options' => [
-                        'title' => 'Популярные товары',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Новые товары',
+                'kids-collection' => [
+                    'name' => 'Детская Коллекция',
 
                     'options' => [
-                        'title' => 'Новые товары',
+                        'title' => 'Детская Коллекция',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Мужская Коллекция',
+
+                    'options' => [
+                        'title' => 'Мужская Коллекция',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Лучшие коллекции',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Женская Коллекция',
+
+                    'options' => [
+                        'title' => 'Женская Коллекция',
+                    ],
                 ],
             ],
         ],

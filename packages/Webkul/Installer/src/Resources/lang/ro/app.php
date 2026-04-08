@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Toate produsele',
-
-                    'options' => [
-                        'title' => 'Toate produsele',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Vezi colecțiile',
@@ -276,24 +268,16 @@ return [
                     'name' => 'Colecții îndrăznețe',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Booking Products',
+                'book-tickets' => [
+                    'name' => 'Rezervare Bilete',
 
                     'options' => [
-                        'title' => 'Book Tickets',
+                        'title' => 'Rezervare Bilete',
                     ],
                 ],
 
                 'categories-collections' => [
                     'name' => 'Colecții pe categorii',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Colecții recomandate',
-
-                    'options' => [
-                        'title' => 'Produse recomandate',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Produse noi',
+                'kids-collection' => [
+                    'name' => 'Colecție Copii',
 
                     'options' => [
-                        'title' => 'Produse noi',
+                        'title' => 'Colecție Copii',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Colecție Bărbați',
+
+                    'options' => [
+                        'title' => 'Colecție Bărbați',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Colecții de top',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Colecție Femei',
+
+                    'options' => [
+                        'title' => 'Colecție Femei',
+                    ],
                 ],
             ],
         ],

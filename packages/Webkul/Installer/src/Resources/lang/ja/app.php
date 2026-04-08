@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'すべての製品',
-
-                    'options' => [
-                        'title' => 'すべての製品',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'コレクションを表示',
@@ -276,8 +268,8 @@ return [
                     'name' => 'ボールドコレクション',
                 ],
 
-                'booking-products' => [
-                    'name' => '予約商品',
+                'book-tickets' => [
+                    'name' => 'チケットを予約',
 
                     'options' => [
                         'title' => 'チケットを予約',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'カテゴリーコレクション',
-                ],
-
-                'featured-collections' => [
-                    'name' => '特集コレクション',
-
-                    'options' => [
-                        'title' => '注目製品',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => '新製品',
+                'kids-collection' => [
+                    'name' => 'キッズコレクション',
 
                     'options' => [
-                        'title' => '新製品',
+                        'title' => 'キッズコレクション',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'メンズコレクション',
+
+                    'options' => [
+                        'title' => 'メンズコレクション',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'トップコレクション',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'レディースコレクション',
+
+                    'options' => [
+                        'title' => 'レディースコレクション',
+                    ],
                 ],
             ],
         ],
