@@ -53,25 +53,8 @@ trait ProductTestBench
     protected static ?array $attributeMap = null;
 
     // ========================================================================
-    // Factory-Based Helpers (for setup/validation/delete tests)
+    // Factory-Based Helpers (For setup/validation/delete tests.)
     // ========================================================================
-
-    /**
-     * Create a fully-indexed simple product via factory with all attribute
-     * values, inventory, channel sync, and product_flat record.
-     */
-    public function createSimpleProduct(array $overrides = []): Product
-    {
-        return $this->createProduct('simple', $overrides);
-    }
-
-    /**
-     * Create a fully-indexed virtual product via factory.
-     */
-    public function createVirtualProduct(array $overrides = []): Product
-    {
-        return $this->createProduct('virtual', $overrides);
-    }
 
     /**
      * Create a fully-indexed product of any type via factory.
@@ -121,6 +104,23 @@ trait ProductTestBench
         Event::dispatch('catalog.product.update.after', $product);
 
         return $product->fresh();
+    }
+
+    /**
+     * Create a fully-indexed simple product via factory with all attribute
+     * values, inventory, channel sync, and product_flat record.
+     */
+    public function createSimpleProduct(array $overrides = []): Product
+    {
+        return $this->createProduct('simple', $overrides);
+    }
+
+    /**
+     * Create a fully-indexed virtual product via factory.
+     */
+    public function createVirtualProduct(array $overrides = []): Product
+    {
+        return $this->createProduct('virtual', $overrides);
     }
 
     /**
@@ -179,27 +179,6 @@ trait ProductTestBench
     }
 
     /**
-     * Create a downloadable product with links via factory.
-     */
-    public function createDownloadableProduct(array $overrides = [], array $linkPrices = [10, 20]): Product
-    {
-        $product = $this->createProduct('downloadable', $overrides);
-
-        foreach ($linkPrices as $i => $price) {
-            $product->downloadable_links()->create([
-                'title' => "Link {$i}",
-                'price' => $price,
-                'type' => 'url',
-                'url' => "https://example.com/file{$i}.pdf",
-                'sort_order' => $i,
-                'downloads' => 0,
-            ]);
-        }
-
-        return $product->fresh();
-    }
-
-    /**
      * Create a bundle product with one select option containing simple products.
      */
     public function createBundleProduct(array $optionProductPrices = [100, 200]): Product
@@ -236,8 +215,29 @@ trait ProductTestBench
         return $parent->fresh()->load('bundle_options.bundle_option_products');
     }
 
+    /**
+     * Create a downloadable product with links via factory.
+     */
+    public function createDownloadableProduct(array $overrides = [], array $linkPrices = [10, 20]): Product
+    {
+        $product = $this->createProduct('downloadable', $overrides);
+
+        foreach ($linkPrices as $i => $price) {
+            $product->downloadable_links()->create([
+                'title' => "Link {$i}",
+                'price' => $price,
+                'type' => 'url',
+                'url' => "https://example.com/file{$i}.pdf",
+                'sort_order' => $i,
+                'downloads' => 0,
+            ]);
+        }
+
+        return $product->fresh();
+    }
+
     // ========================================================================
-    // Route-Based Helpers (for real store + update flow verification)
+    // Route-Based Helpers (For real store + update flow verification.)
     // ========================================================================
 
     /**
@@ -393,74 +393,6 @@ trait ProductTestBench
     }
 
     /**
-     * Create a downloadable product via POST store + PUT update.
-     *
-     * Includes two URL-based downloadable links and one sample.
-     */
-    public function storeAndUpdateDownloadableProduct(array $overrides = []): Product
-    {
-        $this->loginAsAdmin();
-
-        $sku = fake()->uuid();
-
-        $this->postJson(route('admin.catalog.products.store'), [
-            'type' => 'downloadable',
-            'attribute_family_id' => 1,
-            'sku' => $sku,
-        ])->assertOk();
-
-        $product = Product::where('sku', $sku)->first();
-
-        $data = array_merge([
-            'sku' => $sku,
-            'url_key' => fake()->unique()->slug(),
-            'name' => 'Test Downloadable Product',
-            'short_description' => 'A short description for the downloadable product.',
-            'description' => 'A full description for the downloadable product.',
-            'price' => 49.99,
-            'channel' => core()->getCurrentChannelCode(),
-            'locale' => app()->getLocale(),
-            'status' => 1,
-            'visible_individually' => 1,
-            'new' => 1,
-            'featured' => 1,
-            'downloadable_links' => [
-                'link_0' => [
-                    'en' => ['title' => 'Link One'],
-                    'price' => 10,
-                    'downloads' => '5',
-                    'sort_order' => '0',
-                    'type' => 'url',
-                    'url' => 'https://example.com/file1.pdf',
-                    'sample_type' => 'url',
-                    'sample_url' => 'https://example.com/sample1.pdf',
-                ],
-                'link_1' => [
-                    'en' => ['title' => 'Link Two'],
-                    'price' => 20,
-                    'downloads' => '10',
-                    'sort_order' => '1',
-                    'type' => 'url',
-                    'url' => 'https://example.com/file2.pdf',
-                ],
-            ],
-            'downloadable_samples' => [
-                'sample_0' => [
-                    'title' => 'Sample One',
-                    'sort_order' => '0',
-                    'type' => 'url',
-                    'url' => 'https://example.com/sample.pdf',
-                ],
-            ],
-        ], $overrides);
-
-        $this->putJson(route('admin.catalog.products.update', $product->id), $data)
-            ->assertRedirect(route('admin.catalog.products.index'));
-
-        return Product::find($product->id);
-    }
-
-    /**
      * Create a grouped product with two associated simple products via
      * POST store + PUT update.
      */
@@ -571,6 +503,74 @@ trait ProductTestBench
                 ],
             ],
         ])->assertRedirect(route('admin.catalog.products.index'));
+
+        return Product::find($product->id);
+    }
+
+    /**
+     * Create a downloadable product via POST store + PUT update.
+     *
+     * Includes two URL-based downloadable links and one sample.
+     */
+    public function storeAndUpdateDownloadableProduct(array $overrides = []): Product
+    {
+        $this->loginAsAdmin();
+
+        $sku = fake()->uuid();
+
+        $this->postJson(route('admin.catalog.products.store'), [
+            'type' => 'downloadable',
+            'attribute_family_id' => 1,
+            'sku' => $sku,
+        ])->assertOk();
+
+        $product = Product::where('sku', $sku)->first();
+
+        $data = array_merge([
+            'sku' => $sku,
+            'url_key' => fake()->unique()->slug(),
+            'name' => 'Test Downloadable Product',
+            'short_description' => 'A short description for the downloadable product.',
+            'description' => 'A full description for the downloadable product.',
+            'price' => 49.99,
+            'channel' => core()->getCurrentChannelCode(),
+            'locale' => app()->getLocale(),
+            'status' => 1,
+            'visible_individually' => 1,
+            'new' => 1,
+            'featured' => 1,
+            'downloadable_links' => [
+                'link_0' => [
+                    'en' => ['title' => 'Link One'],
+                    'price' => 10,
+                    'downloads' => '5',
+                    'sort_order' => '0',
+                    'type' => 'url',
+                    'url' => 'https://example.com/file1.pdf',
+                    'sample_type' => 'url',
+                    'sample_url' => 'https://example.com/sample1.pdf',
+                ],
+                'link_1' => [
+                    'en' => ['title' => 'Link Two'],
+                    'price' => 20,
+                    'downloads' => '10',
+                    'sort_order' => '1',
+                    'type' => 'url',
+                    'url' => 'https://example.com/file2.pdf',
+                ],
+            ],
+            'downloadable_samples' => [
+                'sample_0' => [
+                    'title' => 'Sample One',
+                    'sort_order' => '0',
+                    'type' => 'url',
+                    'url' => 'https://example.com/sample.pdf',
+                ],
+            ],
+        ], $overrides);
+
+        $this->putJson(route('admin.catalog.products.update', $product->id), $data)
+            ->assertRedirect(route('admin.catalog.products.index'));
 
         return Product::find($product->id);
     }

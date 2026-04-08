@@ -36,7 +36,9 @@ it('should store a bundle product and redirect to edit', function () {
 // ============================================================================
 
 it('should return the edit page of a bundle product', function () {
-    $product = $this->storeAndUpdateBundleProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createBundleProduct();
 
     get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
@@ -159,7 +161,9 @@ it('should not create inventory for a bundle product', function () {
 // ============================================================================
 
 it('should fail validation when required fields are missing on bundle product update', function () {
-    $product = $this->storeAndUpdateBundleProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createBundleProduct();
 
     // Bundle products do not require price or weight.
     putJson(route('admin.catalog.products.update', $product->id))

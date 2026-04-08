@@ -38,7 +38,9 @@ it('should store a downloadable product and redirect to edit', function () {
 // ============================================================================
 
 it('should return the edit page of a downloadable product', function () {
-    $product = $this->storeAndUpdateDownloadableProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createDownloadableProduct();
 
     get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
@@ -146,7 +148,9 @@ it('should upload a downloadable sample file', function () {
 // ============================================================================
 
 it('should fail validation when required fields are missing on downloadable product update', function () {
-    $product = $this->storeAndUpdateDownloadableProduct();
+    $this->loginAsAdmin();
+
+    $product = $this->createDownloadableProduct();
 
     // Downloadable products do not require weight.
     putJson(route('admin.catalog.products.update', $product->id))
