@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Wszystkie produkty',
-
-                    'options' => [
-                        'title' => 'Wszystkie produkty',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Zobacz kolekcje',
@@ -276,8 +268,8 @@ return [
                     'name' => 'Odważne Kolekcje',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Produkty Rezerwacyjne',
+                'book-tickets' => [
+                    'name' => 'Zarezerwuj Bilety',
 
                     'options' => [
                         'title' => 'Zarezerwuj Bilety',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Kolekcje kategorii',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Polecane kolekcje',
-
-                    'options' => [
-                        'title' => 'Polecane produkty',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Nowe produkty',
+                'kids-collection' => [
+                    'name' => 'Kolekcja Dziecięca',
 
                     'options' => [
-                        'title' => 'Nowe produkty',
+                        'title' => 'Kolekcja Dziecięca',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Kolekcja Męska',
+
+                    'options' => [
+                        'title' => 'Kolekcja Męska',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Najlepsze kolekcje',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Kolekcja Damska',
+
+                    'options' => [
+                        'title' => 'Kolekcja Damska',
+                    ],
                 ],
             ],
         ],

@@ -58,24 +58,6 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'updated_at' => $now,
                 ], [
                     'id' => 3,
-                    'type' => 'category_carousel',
-                    'name' => trans('installer::app.seeders.shop.theme-customizations.categories-collections.name', [], $defaultLocale),
-                    'sort_order' => 3,
-                    'status' => 1,
-                    'channel_id' => 1,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ], [
-                    'id' => 4,
-                    'type' => 'product_carousel',
-                    'name' => trans('installer::app.seeders.shop.theme-customizations.new-products.name', [], $defaultLocale),
-                    'sort_order' => 4,
-                    'status' => 1,
-                    'channel_id' => 1,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ], [
-                    'id' => 5,
                     'type' => 'static_content',
                     'name' => trans('installer::app.seeders.shop.theme-customizations.top-collections.name', [], $defaultLocale),
                     'sort_order' => 5,
@@ -84,7 +66,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
-                    'id' => 6,
+                    'id' => 4,
                     'type' => 'static_content',
                     'name' => trans('installer::app.seeders.shop.theme-customizations.bold-collections.name', [], $defaultLocale),
                     'sort_order' => 6,
@@ -93,16 +75,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
-                    'id' => 7,
-                    'type' => 'product_carousel',
-                    'name' => trans('installer::app.seeders.shop.theme-customizations.featured-collections.name', [], $defaultLocale),
-                    'sort_order' => 7,
-                    'status' => 1,
-                    'channel_id' => 1,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ], [
-                    'id' => 8,
+                    'id' => 5,
                     'type' => 'static_content',
                     'name' => trans('installer::app.seeders.shop.theme-customizations.game-container.name', [], $defaultLocale),
                     'sort_order' => 8,
@@ -111,16 +84,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
-                    'id' => 9,
-                    'type' => 'product_carousel',
-                    'name' => trans('installer::app.seeders.shop.theme-customizations.all-products.name', [], $defaultLocale),
-                    'sort_order' => 9,
-                    'status' => 1,
-                    'channel_id' => 1,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ], [
-                    'id' => 10,
+                    'id' => 6,
                     'type' => 'static_content',
                     'name' => trans('installer::app.seeders.shop.theme-customizations.bold-collections.name', [], $defaultLocale),
                     'sort_order' => 10,
@@ -129,7 +93,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
-                    'id' => 11,
+                    'id' => 7,
                     'type' => 'footer_links',
                     'name' => trans('installer::app.seeders.shop.theme-customizations.footer-links.name', [], $defaultLocale),
                     'sort_order' => 11,
@@ -138,19 +102,10 @@ class ThemeCustomizationTableSeeder extends Seeder
                     'created_at' => $now,
                     'updated_at' => $now,
                 ], [
-                    'id' => 12,
+                    'id' => 8,
                     'type' => 'services_content',
                     'name' => trans('installer::app.seeders.shop.theme-customizations.services-content.name', [], $defaultLocale),
                     'sort_order' => 12,
-                    'status' => 1,
-                    'channel_id' => 1,
-                    'created_at' => $now,
-                    'updated_at' => $now,
-                ], [
-                    'id' => 13,
-                    'type' => 'product_carousel',
-                    'name' => trans('installer::app.seeders.shop.theme-customizations.booking-products.name', [], $defaultLocale),
-                    'sort_order' => 13,
                     'status' => 1,
                     'channel_id' => 1,
                     'created_at' => $now,
@@ -213,32 +168,6 @@ class ThemeCustomizationTableSeeder extends Seeder
                         'locale' => $locale,
 
                         'options' => json_encode([
-                            'filters' => [
-                                'parent_id' => 1,
-                                'sort' => 'asc',
-                                'limit' => 10,
-                            ],
-                        ]),
-                    ], [
-                        'theme_customization_id' => 4,
-
-                        'locale' => $locale,
-
-                        'options' => json_encode([
-                            'title' => trans('installer::app.seeders.shop.theme-customizations.new-products.options.title', [], $locale),
-
-                            'filters' => [
-                                'category_id' => 4,
-                                'sort' => 'created_at-desc',
-                                'limit' => 10,
-                            ],
-                        ]),
-                    ], [
-                        'theme_customization_id' => 5,
-
-                        'locale' => $locale,
-
-                        'options' => json_encode([
                             'html' => '<div class="top-collection-container">
                                 <div class="top-collection-header">
                                     <h2>'.trans('installer::app.seeders.shop.theme-customizations.top-collections.content.title', [], $locale).'</h2>
@@ -286,7 +215,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                             'css' => '.top-collection-container {overflow: hidden;}.top-collection-header {padding-left: 15px;padding-right: 15px;text-align: center;font-size: 70px;line-height: 90px;color: #060C3B;margin-top: 80px;}.top-collection-header h2 {max-width: 595px;margin-left: auto;margin-right: auto;font-family: DM Serif Display;}.top-collection-grid {display: flex;flex-wrap: wrap;gap: 32px;justify-content: center;margin-top: 60px;width: 100%;margin-right: auto;margin-left: auto;padding-right: 90px;padding-left: 90px;}.top-collection-card {position: relative;background: #f9fafb;overflow:hidden;border-radius:20px;}.top-collection-card img {border-radius: 16px;max-width: 100%;text-indent:-9999px;transition: transform 300ms ease;transform: scale(1);}.top-collection-card:hover img {transform: scale(1.05);transition: all 300ms ease;}.top-collection-card h3 {color: #060C3B;font-size: 30px;font-family: DM Serif Display;transform: translateX(-50%);width: max-content;left: 50%;bottom: 30px;position: absolute;margin: 0;font-weight: inherit;}@media not all and (min-width: 525px) {.top-collection-header {margin-top: 28px;font-size: 20px;line-height: 1.5;}.top-collection-grid {gap: 10px}}@media not all and (min-width: 768px) {.top-collection-header {margin-top: 30px;font-size: 28px;line-height: 3;}.top-collection-header h2 {line-height:2; margin-bottom:20px;} .top-collection-grid {gap: 14px}} @media not all and (min-width: 1024px) {.top-collection-grid {padding-left: 30px;padding-right: 30px;}}@media (max-width: 768px) {.top-collection-grid { row-gap:15px; column-gap:0px;justify-content: space-between;margin-top: 0px;} .top-collection-card{width:48%} .top-collection-card img {width:100%;} .top-collection-card h3 {font-size:24px; bottom: 16px;}}@media (max-width:520px) { .top-collection-grid{padding-left: 15px;padding-right: 15px;} .top-collection-card h3 {font-size:18px; bottom: 10px;}}',
                         ]),
                     ], [
-                        'theme_customization_id' => 6,
+                        'theme_customization_id' => 4,
 
                         'locale' => $locale,
 
@@ -312,21 +241,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                             'css' => '.section-gap{margin-top:80px}.direction-ltr{direction:ltr}.direction-rtl{direction:rtl}.inline-col-wrapper{display:grid;grid-template-columns:auto 1fr;grid-gap:60px;align-items:center}.inline-col-wrapper .inline-col-image-wrapper{overflow:hidden}.inline-col-wrapper .inline-col-image-wrapper img{max-width:100%;height:auto;border-radius:16px;text-indent:-9999px}.inline-col-wrapper .inline-col-content-wrapper{display:flex;flex-wrap:wrap;gap:20px;max-width:464px}.inline-col-wrapper .inline-col-content-wrapper .inline-col-title{max-width:442px;font-size:60px;font-weight:400;color:#060c3b;line-height:70px;font-family:DM Serif Display;margin:0}.inline-col-wrapper .inline-col-content-wrapper .inline-col-description{margin:0;font-size:18px;color:#6e6e6e;font-family:Poppins}@media (max-width:991px){.inline-col-wrapper{grid-template-columns:1fr;grid-gap:16px}.inline-col-wrapper .inline-col-content-wrapper{gap:10px}} @media (max-width:768px){.inline-col-wrapper .inline-col-image-wrapper img {width:100%;} .inline-col-wrapper .inline-col-content-wrapper .inline-col-title{font-size:28px !important;line-height:normal !important}} @media (max-width:525px){.inline-col-wrapper .inline-col-content-wrapper .inline-col-title{font-size:20px !important;} .inline-col-description{font-size:16px} .inline-col-wrapper{grid-gap:10px}}',
                         ]),
                     ], [
-                        'theme_customization_id' => 7,
-
-                        'locale' => $locale,
-
-                        'options' => json_encode([
-                            'title' => trans('installer::app.seeders.shop.theme-customizations.featured-collections.options.title', [], $locale),
-
-                            'filters' => [
-                                'category_id' => 2,
-                                'sort' => 'created_at-desc',
-                                'limit' => 10,
-                            ],
-                        ]),
-                    ], [
-                        'theme_customization_id' => 8,
+                        'theme_customization_id' => 5,
 
                         'locale' => $locale,
 
@@ -360,21 +275,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                             'css' => '.section-game {overflow: hidden;}.section-title,.section-title h2{font-weight:400;font-family:DM Serif Display}.section-title{margin-top:80px;padding-left:15px;padding-right:15px;text-align:center;line-height:90px}.section-title h2{font-size:70px;color:#060c3b;max-width:595px;margin:auto}.collection-card-wrapper{display:flex;flex-wrap:wrap;justify-content:center;gap:30px}.collection-card-wrapper .single-collection-card{position:relative}.collection-card-wrapper .single-collection-card img{border-radius:16px;background-color:#f5f5f5;max-width:100%;height:auto;text-indent:-9999px}.collection-card-wrapper .single-collection-card .overlay-text{font-size:50px;font-weight:400;max-width:234px;font-style:italic;color:#060c3b;font-family:DM Serif Display;position:absolute;bottom:30px;left:30px;margin:0}@media (max-width:1024px){.section-title{padding:0 30px}}@media (max-width:991px){.collection-card-wrapper{flex-wrap:wrap}}@media (max-width:768px) {.collection-card-wrapper .single-collection-card .overlay-text{font-size:32px; bottom:20px}.section-title{margin-top:32px}.section-title h2{font-size:28px;line-height:normal}} @media (max-width:525px){.collection-card-wrapper .single-collection-card .overlay-text{font-size:18px; bottom:10px} .section-title{margin-top:28px}.section-title h2{font-size:20px;} .collection-card-wrapper{gap:10px; 15px; row-gap:15px; column-gap:0px;justify-content: space-between;margin-top: 15px;} .collection-card-wrapper .single-collection-card {width:48%;}}',
                         ]),
                     ], [
-                        'theme_customization_id' => 9,
-
-                        'locale' => $locale,
-
-                        'options' => json_encode([
-                            'title' => trans('installer::app.seeders.shop.theme-customizations.all-products.options.title', [], $locale),
-
-                            'filters' => [
-                                'category_id' => 3,
-                                'sort' => 'price-desc',
-                                'limit' => 10,
-                            ],
-                        ]),
-                    ], [
-                        'theme_customization_id' => 10,
+                        'theme_customization_id' => 6,
 
                         'locale' => $locale,
 
@@ -400,7 +301,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                             'css' => '.section-gap{margin-top:80px}.direction-ltr{direction:ltr}.direction-rtl{direction:rtl}.inline-col-wrapper{display:grid;grid-template-columns:auto 1fr;grid-gap:60px;align-items:center}.inline-col-wrapper .inline-col-image-wrapper{overflow:hidden}.inline-col-wrapper .inline-col-image-wrapper img{max-width:100%;height:auto;border-radius:16px;text-indent:-9999px}.inline-col-wrapper .inline-col-content-wrapper{display:flex;flex-wrap:wrap;gap:20px;max-width:464px}.inline-col-wrapper .inline-col-content-wrapper .inline-col-title{max-width:442px;font-size:60px;font-weight:400;color:#060c3b;line-height:70px;font-family:DM Serif Display;margin:0}.inline-col-wrapper .inline-col-content-wrapper .inline-col-description{margin:0;font-size:18px;color:#6e6e6e;font-family:Poppins}@media (max-width:991px){.inline-col-wrapper{grid-template-columns:1fr;grid-gap:16px}.inline-col-wrapper .inline-col-content-wrapper{gap:10px}}@media (max-width:768px) {.inline-col-wrapper .inline-col-image-wrapper img {max-width:100%;}.inline-col-wrapper .inline-col-content-wrapper{max-width:100%;justify-content:center; text-align:center} .section-gap{padding:0 30px; gap:20px;margin-top:24px} .bold-collections{margin-top:32px;}} @media (max-width:525px){.inline-col-wrapper .inline-col-content-wrapper{gap:10px} .inline-col-wrapper .inline-col-content-wrapper .inline-col-title{font-size:20px;line-height:normal} .section-gap{padding:0 15px; gap:15px;margin-top:10px} .bold-collections{margin-top:28px;}  .inline-col-description{font-size:16px !important} .inline-col-wrapper{grid-gap:15px}',
                         ]),
                     ], [
-                        'theme_customization_id' => 11,
+                        'theme_customization_id' => 7,
 
                         'locale' => $locale,
 
@@ -458,7 +359,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                             ],
                         ]),
                     ], [
-                        'theme_customization_id' => 12,
+                        'theme_customization_id' => 8,
 
                         'locale' => $locale,
 
@@ -483,13 +384,139 @@ class ThemeCustomizationTableSeeder extends Seeder
                                 ],
                             ],
                         ]),
+                    ],
+                ]);
+        }
+    }
+
+    /**
+     * Seed sample theme customizations for demo products.
+     *
+     * @param  array  $parameters
+     * @return void
+     */
+    public function sampleThemeCustomizations($parameters = [])
+    {
+        $now = Carbon::now();
+
+        $defaultLocale = $parameters['default_locale'] ?? config('app.locale');
+
+        DB::table('theme_customizations')
+            ->insert([
+                [
+                    'id' => 9,
+                    'type' => 'category_carousel',
+                    'name' => trans('installer::app.seeders.shop.theme-customizations.categories-collections.name', [], $defaultLocale),
+                    'sort_order' => 3,
+                    'status' => 1,
+                    'channel_id' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ], [
+                    'id' => 10,
+                    'type' => 'product_carousel',
+                    'name' => trans('installer::app.seeders.shop.theme-customizations.mens-collection.name', [], $defaultLocale),
+                    'sort_order' => 4,
+                    'status' => 1,
+                    'channel_id' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ], [
+                    'id' => 11,
+                    'type' => 'product_carousel',
+                    'name' => trans('installer::app.seeders.shop.theme-customizations.womens-collection.name', [], $defaultLocale),
+                    'sort_order' => 7,
+                    'status' => 1,
+                    'channel_id' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ], [
+                    'id' => 12,
+                    'type' => 'product_carousel',
+                    'name' => trans('installer::app.seeders.shop.theme-customizations.kids-collection.name', [], $defaultLocale),
+                    'sort_order' => 9,
+                    'status' => 1,
+                    'channel_id' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ], [
+                    'id' => 13,
+                    'type' => 'product_carousel',
+                    'name' => trans('installer::app.seeders.shop.theme-customizations.book-tickets.name', [], $defaultLocale),
+                    'sort_order' => 13,
+                    'status' => 1,
+                    'channel_id' => 1,
+                    'created_at' => $now,
+                    'updated_at' => $now,
+                ],
+            ]);
+
+        $locales = $parameters['allowed_locales'] ?? [$defaultLocale];
+
+        foreach ($locales as $locale) {
+            DB::table('theme_customization_translations')
+                ->insert([
+                    [
+                        'theme_customization_id' => 9,
+
+                        'locale' => $locale,
+
+                        'options' => json_encode([
+                            'filters' => [
+                                'parent_id' => 1,
+                                'sort' => 'asc',
+                                'limit' => 10,
+                            ],
+                        ]),
+                    ], [
+                        'theme_customization_id' => 10,
+
+                        'locale' => $locale,
+
+                        'options' => json_encode([
+                            'title' => trans('installer::app.seeders.shop.theme-customizations.mens-collection.options.title', [], $locale),
+
+                            'filters' => [
+                                'category_id' => 2,
+                                'sort' => 'created_at-desc',
+                                'limit' => 10,
+                            ],
+                        ]),
+                    ], [
+                        'theme_customization_id' => 11,
+
+                        'locale' => $locale,
+
+                        'options' => json_encode([
+                            'title' => trans('installer::app.seeders.shop.theme-customizations.womens-collection.options.title', [], $locale),
+
+                            'filters' => [
+                                'category_id' => 4,
+                                'sort' => 'created_at-desc',
+                                'limit' => 10,
+                            ],
+                        ]),
+                    ], [
+                        'theme_customization_id' => 12,
+
+                        'locale' => $locale,
+
+                        'options' => json_encode([
+                            'title' => trans('installer::app.seeders.shop.theme-customizations.kids-collection.options.title', [], $locale),
+
+                            'filters' => [
+                                'category_id' => 3,
+                                'sort' => 'price-desc',
+                                'limit' => 10,
+                            ],
+                        ]),
                     ], [
                         'theme_customization_id' => 13,
 
                         'locale' => $locale,
 
                         'options' => json_encode([
-                            'title' => trans('installer::app.seeders.shop.theme-customizations.booking-products.options.title', [], $locale),
+                            'title' => trans('installer::app.seeders.shop.theme-customizations.book-tickets.options.title', [], $locale),
 
                             'filters' => [
                                 'category_id' => 26,
@@ -500,6 +527,8 @@ class ThemeCustomizationTableSeeder extends Seeder
                     ],
                 ]);
         }
+
+        $this->updateLinksForSampleProducts();
 
         $this->syncPostgresSequences(['theme_customizations']);
     }
@@ -526,7 +555,7 @@ class ThemeCustomizationTableSeeder extends Seeder
         ];
 
         DB::table('theme_customization_translations')
-            ->whereIn('theme_customization_id', [1, 5, 6, 8, 10])
+            ->whereIn('theme_customization_id', [1, 3, 4, 5, 6])
             ->get()
             ->each(function ($translation) use ($categorySlugs) {
                 $options = $translation->options;

@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'All Products',
-
-                    'options' => [
-                        'title' => 'Kid\'s Collection',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'View Collections',
@@ -276,8 +268,8 @@ return [
                     'name' => 'Bold Collections',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Booking Products',
+                'book-tickets' => [
+                    'name' => 'Book Tickets',
 
                     'options' => [
                         'title' => 'Book Tickets',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Categories Collections',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Featured Collections',
-
-                    'options' => [
-                        'title' => 'Men\'s Collections',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'New Products',
+                'kids-collection' => [
+                    'name' => 'Kids Collection',
 
                     'options' => [
-                        'title' => 'Women\'s Collections',
+                        'title' => 'Kids Collection',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Mens Collection',
+
+                    'options' => [
+                        'title' => 'Mens Collection',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Top Collections',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Womens Collection',
+
+                    'options' => [
+                        'title' => 'Womens Collection',
+                    ],
                 ],
             ],
         ],

@@ -151,7 +151,7 @@ class ProductTableSeeder extends Seeder
 
         (new CategoryTableSeeder)->sampleCategories($parameters);
 
-        (new ThemeCustomizationTableSeeder)->updateLinksForSampleProducts();
+        (new ThemeCustomizationTableSeeder)->sampleThemeCustomizations($parameters);
 
         $this->seedProducts($this->defaultLocale);
 

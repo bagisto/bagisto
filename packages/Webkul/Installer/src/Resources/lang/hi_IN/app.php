@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'सभी उत्पाद',
-
-                    'options' => [
-                        'title' => 'सभी उत्पाद',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'संग्रह देखें',
@@ -276,8 +268,8 @@ return [
                     'name' => 'बोल्ड कलेक्शन',
                 ],
 
-                'booking-products' => [
-                    'name' => 'बुकिंग उत्पाद',
+                'book-tickets' => [
+                    'name' => 'टिकट बुक करें',
 
                     'options' => [
                         'title' => 'टिकट बुक करें',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'श्रेणियाँ संग्रह',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'विशेष संग्रह',
-
-                    'options' => [
-                        'title' => 'विशेष उत्पाद',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'नई उत्पाद',
+                'kids-collection' => [
+                    'name' => 'बच्चों का संग्रह',
 
                     'options' => [
-                        'title' => 'नई उत्पाद',
+                        'title' => 'बच्चों का संग्रह',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'पुरुष संग्रह',
+
+                    'options' => [
+                        'title' => 'पुरुष संग्रह',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'शीर्ष संग्रह',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'महिला संग्रह',
+
+                    'options' => [
+                        'title' => 'महिला संग्रह',
+                    ],
                 ],
             ],
         ],

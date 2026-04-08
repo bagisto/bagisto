@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Tutti i Prodotti',
-
-                    'options' => [
-                        'title' => 'Tutti i Prodotti',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Visualizza Collezioni',
@@ -276,8 +268,8 @@ return [
                     'name' => 'Collezioni Audaci',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Prodotti Prenotazione',
+                'book-tickets' => [
+                    'name' => 'Prenota Biglietti',
 
                     'options' => [
                         'title' => 'Prenota Biglietti',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Collezioni per Categorie',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Prodotti in Primo Piano',
-
-                    'options' => [
-                        'title' => 'Prodotti in Primo Piano',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Nuovi Prodotti',
+                'kids-collection' => [
+                    'name' => 'Collezione Bambini',
 
                     'options' => [
-                        'title' => 'Nuovi Prodotti',
+                        'title' => 'Collezione Bambini',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Collezione Uomo',
+
+                    'options' => [
+                        'title' => 'Collezione Uomo',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Collezioni Top',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Collezione Donna',
+
+                    'options' => [
+                        'title' => 'Collezione Donna',
+                    ],
                 ],
             ],
         ],

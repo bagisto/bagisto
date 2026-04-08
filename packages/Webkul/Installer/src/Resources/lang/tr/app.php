@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Tüm Ürünler',
-
-                    'options' => [
-                        'title' => 'Tüm Ürünler',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Koleksiyonlara Göz At',
@@ -276,8 +268,8 @@ return [
                     'name' => 'Cesur Koleksiyonlar',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Rezervasyon Ürünleri',
+                'book-tickets' => [
+                    'name' => 'Bilet Rezervasyonu',
 
                     'options' => [
                         'title' => 'Bilet Rezervasyonu',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Kategori Koleksiyonları',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Öne Çıkan Koleksiyonlar',
-
-                    'options' => [
-                        'title' => 'Öne Çıkan Ürünler',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Yeni Ürünler',
+                'kids-collection' => [
+                    'name' => 'Çocuk Koleksiyonu',
 
                     'options' => [
-                        'title' => 'Yeni Ürünler',
+                        'title' => 'Çocuk Koleksiyonu',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Erkek Koleksiyonu',
+
+                    'options' => [
+                        'title' => 'Erkek Koleksiyonu',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'En İyi Koleksiyonlar',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Kadın Koleksiyonu',
+
+                    'options' => [
+                        'title' => 'Kadın Koleksiyonu',
+                    ],
                 ],
             ],
         ],

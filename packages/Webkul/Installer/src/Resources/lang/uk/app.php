@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Усі продукти',
-
-                    'options' => [
-                        'title' => 'Усі продукти',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Переглянути колекції',
@@ -276,8 +268,8 @@ return [
                     'name' => 'Сміливі Колекції',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Продукти Бронювання',
+                'book-tickets' => [
+                    'name' => 'Забронювати Квитки',
 
                     'options' => [
                         'title' => 'Забронювати Квитки',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Колекції за категоріями',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Виділені колекції',
-
-                    'options' => [
-                        'title' => 'Рекомендовані продукти',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Нові продукти',
+                'kids-collection' => [
+                    'name' => 'Дитяча Колекція',
 
                     'options' => [
-                        'title' => 'Нові продукти',
+                        'title' => 'Дитяча Колекція',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Чоловіча Колекція',
+
+                    'options' => [
+                        'title' => 'Чоловіча Колекція',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Топові колекції',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Жіноча Колекція',
+
+                    'options' => [
+                        'title' => 'Жіноча Колекція',
+                    ],
                 ],
             ],
         ],

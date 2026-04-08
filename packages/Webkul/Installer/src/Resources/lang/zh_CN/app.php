@@ -248,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => '所有产品',
-
-                    'options' => [
-                        'title' => '所有产品',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => '查看收藏',
@@ -276,8 +268,8 @@ return [
                     'name' => '大胆系列',
                 ],
 
-                'booking-products' => [
-                    'name' => '预订产品',
+                'book-tickets' => [
+                    'name' => '预订门票',
 
                     'options' => [
                         'title' => '预订门票',
@@ -286,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => '类别 收藏',
-                ],
-
-                'featured-collections' => [
-                    'name' => '特色收藏',
-
-                    'options' => [
-                        'title' => '特色产品',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -332,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => '新产品',
+                'kids-collection' => [
+                    'name' => '儿童系列',
 
                     'options' => [
-                        'title' => '新产品',
+                        'title' => '儿童系列',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => '男士系列',
+
+                    'options' => [
+                        'title' => '男士系列',
                     ],
                 ],
 
@@ -378,6 +370,14 @@ return [
                     ],
 
                     'name' => '热门收藏',
+                ],
+
+                'womens-collection' => [
+                    'name' => '女士系列',
+
+                    'options' => [
+                        'title' => '女士系列',
+                    ],
                 ],
             ],
         ],
