@@ -46,7 +46,6 @@ class ProductDataGrid extends DataGrid
         $queryBuilder = DB::table('product_flat')
             ->distinct()
             ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
-            ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
             ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
             ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
             ->leftJoin('category_translations as ct', function ($leftJoin) {
@@ -69,7 +68,7 @@ class ProductDataGrid extends DataGrid
             ->addSelect(DB::raw('MIN('.$tablePrefix.'product_images.path) as base_image'))
             ->addSelect(DB::raw('MIN('.$tablePrefix.'pc.category_id) as category_id'))
             ->addSelect(DB::raw(db_grammar()->groupConcat($tablePrefix.'ct.name', ', ', true).' as category_name'))
-            ->addSelect(DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity'))
+            ->addSelect(DB::raw('(SELECT SUM(qty) FROM '.$tablePrefix.'product_inventories WHERE '.$tablePrefix.'product_inventories.product_id = '.$tablePrefix.'product_flat.product_id) as quantity'))
             ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
             ->where('product_flat.locale', app()->getLocale())
             ->groupBy(
