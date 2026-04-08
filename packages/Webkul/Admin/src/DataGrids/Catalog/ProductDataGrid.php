@@ -56,9 +56,6 @@ class ProductDataGrid extends DataGrid
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
-                'product_images.path as base_image',
-                'pc.category_id',
-                'ct.name as category_name',
                 'product_flat.product_id',
                 'product_flat.sku',
                 'product_flat.name',
@@ -69,6 +66,9 @@ class ProductDataGrid extends DataGrid
                 'product_flat.visible_individually',
                 'af.name as attribute_family',
             )
+            ->addSelect(DB::raw('MIN('.$tablePrefix.'product_images.path) as base_image'))
+            ->addSelect(DB::raw('MIN('.$tablePrefix.'pc.category_id) as category_id'))
+            ->addSelect(DB::raw(db_grammar()->groupConcat($tablePrefix.'ct.name', ', ', true).' as category_name'))
             ->addSelect(DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity'))
             ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
             ->where('product_flat.locale', app()->getLocale())
@@ -76,9 +76,6 @@ class ProductDataGrid extends DataGrid
                 'product_flat.product_id',
                 'product_flat.locale',
                 'product_flat.channel',
-                'product_images.path',
-                'pc.category_id',
-                'ct.name',
                 'product_flat.sku',
                 'product_flat.name',
                 'product_flat.type',

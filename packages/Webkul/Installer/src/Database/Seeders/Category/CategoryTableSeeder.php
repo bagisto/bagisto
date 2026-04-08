@@ -1268,6 +1268,8 @@ class CategoryTableSeeder extends Seeder
             ['category_id' => 41, 'attribute_id' => 24],
             ['category_id' => 41, 'attribute_id' => 25],
         ]);
+
+        $this->syncPostgresSequences(['categories']);
     }
 
     /**
