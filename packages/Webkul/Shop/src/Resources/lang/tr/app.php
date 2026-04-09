@@ -933,6 +933,8 @@ return [
             'return-to-shop' => 'Alışverişe Dön',
             'rule-applied' => 'Kampanya uygulandı.',
             'select-hourly-duration' => 'Süre seçin.',
+            'specify-payment-method' => 'Lütfen bir ödeme yöntemi belirtin.',
+            'specify-shipping-method' => 'Lütfen bir kargo yöntemi belirtin.',
             'success-remove' => 'Ürün sepetten çıkarıldı.',
             'suspended-account-message' => 'Hesabınız askıya alınmış.',
 

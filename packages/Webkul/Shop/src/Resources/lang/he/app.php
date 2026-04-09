@@ -933,6 +933,8 @@ return [
             'return-to-shop' => 'חזרה לחנות',
             'rule-applied' => 'חוק הסל הוחל',
             'select-hourly-duration' => 'בחר משך זמן של שעה אחת.',
+            'specify-payment-method' => 'אנא ציין שיטת תשלום.',
+            'specify-shipping-method' => 'אנא ציין שיטת משלוח.',
             'success-remove' => 'הפריט הוסר בהצלחה מהעגלה.',
             'suspended-account-message' => 'החשבון שלך הושבת.',
 

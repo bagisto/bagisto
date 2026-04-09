@@ -933,6 +933,8 @@ return [
             'return-to-shop' => 'Tornar a la Botiga',
             'rule-applied' => 'Regla de cistella aplicada',
             'select-hourly-duration' => 'Selecciona una durada d\'una hora.',
+            'specify-payment-method' => 'Si us plau, especifiqueu un mètode de pagament.',
+            'specify-shipping-method' => 'Si us plau, especifiqueu un mètode d\'enviament.',
             'success-remove' => 'L\'article s\'ha eliminat correctament de la cistella.',
             'suspended-account-message' => 'El teu compte ha estat suspès.',
 

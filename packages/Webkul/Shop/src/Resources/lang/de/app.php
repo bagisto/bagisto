@@ -933,6 +933,8 @@ return [
             'return-to-shop' => 'Zurück zum Shop',
             'rule-applied' => 'Warenkorbregel angewendet',
             'select-hourly-duration' => 'Wählen Sie eine Stundendauer von einer Stunde aus.',
+            'specify-payment-method' => 'Bitte geben Sie eine Zahlungsmethode an.',
+            'specify-shipping-method' => 'Bitte geben Sie eine Versandmethode an.',
             'success-remove' => 'Artikel wurde erfolgreich aus dem Warenkorb entfernt.',
             'suspended-account-message' => 'Ihr Konto wurde gesperrt.',
 

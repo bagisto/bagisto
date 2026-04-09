@@ -933,6 +933,8 @@ return [
             'return-to-shop' => 'Вернуться в магазин',
             'rule-applied' => 'Правило корзины применено',
             'select-hourly-duration' => 'Выберите продолжительность слота в один час.',
+            'specify-payment-method' => 'Пожалуйста, укажите способ оплаты.',
+            'specify-shipping-method' => 'Пожалуйста, укажите способ доставки.',
             'success-remove' => 'Товар успешно удален из корзины.',
             'suspended-account-message' => 'Ваш аккаунт был приостановлен.',
 

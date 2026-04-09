@@ -933,6 +933,8 @@ return [
             'return-to-shop' => 'Volver a la Tienda',
             'rule-applied' => 'Regla de carrito aplicada',
             'select-hourly-duration' => 'Selecciona una duración de una hora.',
+            'specify-payment-method' => 'Por favor, especifique un método de pago.',
+            'specify-shipping-method' => 'Por favor, especifique un método de envío.',
             'success-remove' => 'El artículo se ha eliminado correctamente del carrito.',
             'suspended-account-message' => 'Tu cuenta ha sido suspendida.',
 

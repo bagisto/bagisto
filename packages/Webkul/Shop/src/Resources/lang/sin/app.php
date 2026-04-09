@@ -933,6 +933,8 @@ return [
             'return-to-shop' => 'සාප්පු නමට ආපසු',
             'rule-applied' => 'කර්තෘ සාර්ථකව අදිනය',
             'select-hourly-duration' => 'පිරවීමේ කාලය එකක් තෝරන්න.',
+            'specify-payment-method' => 'කරුණාකර ගෙවීම් ක්‍රමයක් සඳහන් කරන්න.',
+            'specify-shipping-method' => 'කරුණාකර නැව්ගත කිරීමේ ක්‍රමයක් සඳහන් කරන්න.',
             'success-remove' => 'අයිතමය සාර්ථකයි, සාර්ථකයි ඉවත් කරන ලදි.',
             'suspended-account-message' => 'ඔබගේ ගිණුම නැවත අක්‍රීය කර ඇත.',
 

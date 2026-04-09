@@ -933,6 +933,8 @@ return [
             'return-to-shop' => 'Retourner à la boutique',
             'rule-applied' => 'Règle du panier appliquée',
             'select-hourly-duration' => 'Sélectionnez une durée d\'une heure.',
+            'specify-payment-method' => 'Veuillez spécifier un mode de paiement.',
+            'specify-shipping-method' => 'Veuillez spécifier un mode de livraison.',
             'success-remove' => 'L\'article a été supprimé avec succès du panier.',
             'suspended-account-message' => 'Votre compte a été suspendu.',
 

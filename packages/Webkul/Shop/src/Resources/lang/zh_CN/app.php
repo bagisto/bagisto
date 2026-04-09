@@ -933,6 +933,8 @@ return [
             'return-to-shop' => '返回商店',
             'rule-applied' => '购物车规则已应用',
             'select-hourly-duration' => '选择一小时的时段。',
+            'specify-payment-method' => '请指定付款方式。',
+            'specify-shipping-method' => '请指定配送方式。',
             'success-remove' => '项目已成功从购物车中移除。',
             'suspended-account-message' => '您的帐户已被暂停。',
 
