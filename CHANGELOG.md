@@ -8,6 +8,16 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed product 404 when locale-specific URL keys differ across locales by adding cross-locale fallback in product slug resolution and locale-aware URL rewrite redirects.
 
+* Fixed tax categories being undeletable once any tax rate was assigned or any historical order referenced them. Removed the misleading guard against tax rate assignments (the pivot table already cascades) and changed the `cart_items.tax_category_id` and `order_items.tax_category_id` foreign keys to `nullOnDelete`, so live carts and historical orders no longer block deletion and their denormalized tax amounts remain intact.
+
+* Fixed an issue where `<img>` tags were stripped from theme static content on save after the recent HTML sanitization hardening. Images inserted from the static-content editor now include an empty `src=""` alongside `data-src`, so they satisfy HTMLPurifier's required-attribute check while still being lazy-loaded by lazysizes.
+
+* Fixed the customer GDPR data request form on the storefront not returning a JSON response for AJAX submissions, causing the success state to fail in the frontend.
+
+* Fixed customer datagrid export failing because the computed `revenue` column was being evaluated per-row during export. The column is now marked as non-exportable.
+
+* Fixed the error message shown when deleting a customer with pending orders. The previous translation key showed an unhelpful "Orders is Pending"; replaced with a dedicated `delete-pending-order-error` key and a clearer message across all locales.
+
 * #11225 - Fixed incorrect translation key for coupon usage limit exceeded message.
 
 * #10967 - Fixed shipment options not showing when adding VAT ID with unsupported country during checkout.
