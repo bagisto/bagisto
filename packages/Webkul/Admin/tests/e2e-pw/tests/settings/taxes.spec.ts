@@ -86,7 +86,7 @@ async function createTaxCategory(adminPage) {
      * Asserting.
      */
     await expect(
-        adminPage.getByText("New Tax Category Created.")
+        adminPage.getByText("Tax category created successfully.")
     ).toBeVisible();
 }
 
@@ -239,7 +239,7 @@ test.describe("tax management", () => {
              * Asserting.
              */
             await expect(
-                adminPage.getByText("Tax Category Successfully Updated.")
+                adminPage.getByText("Tax category updated successfully.")
             ).toBeVisible();
         });
     });
