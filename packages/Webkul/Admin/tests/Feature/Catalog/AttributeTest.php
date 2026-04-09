@@ -502,6 +502,36 @@ it('should fail validation when required fields are missing on update', function
         ->assertJsonValidationErrorFor('type');
 });
 
+it('should disable boolean fields when set to zero on update', function () {
+    $attribute = Attribute::factory()->create([
+        'type' => 'text',
+        'is_required' => true,
+        'is_unique' => true,
+        'is_visible_on_front' => true,
+        'is_comparable' => true,
+    ]);
+
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.attributes.update', $attribute->id), [
+        'code' => $attribute->code,
+        'admin_name' => $attribute->admin_name,
+        'type' => $attribute->type,
+        'is_required' => 0,
+        'is_unique' => 0,
+        'is_visible_on_front' => 0,
+        'is_comparable' => 0,
+    ])
+        ->assertRedirectToRoute('admin.catalog.attributes.index');
+
+    $attribute->refresh();
+
+    expect($attribute->is_required)->toBeFalse()
+        ->and($attribute->is_unique)->toBeFalse()
+        ->and($attribute->is_visible_on_front)->toBeFalse()
+        ->and($attribute->is_comparable)->toBeFalse();
+});
+
 it('should allow updating an attribute with its own code', function () {
     $attribute = Attribute::factory()->create(['type' => 'text']);
 

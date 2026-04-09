@@ -56,14 +56,6 @@ class Category extends TranslatableModel implements CategoryContract
     ];
 
     /**
-     * Set status with proper boolean conversion for PostgreSQL.
-     */
-    public function setStatusAttribute($value): void
-    {
-        $this->attributes['status'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
-    }
-
-    /**
      * Eager loading.
      *
      * @var array

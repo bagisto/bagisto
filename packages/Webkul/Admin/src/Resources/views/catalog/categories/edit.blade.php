@@ -386,21 +386,13 @@
                             <x-admin::form.control-group.error control-name="display_mode" />
                         </x-admin::form.control-group>
 
-                        <!-- Visible in menu -->
+                        <!-- Visible In Menu -->
                         <x-admin::form.control-group class="!mb-0">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.visible-in-menu')
                             </x-admin::form.control-group.label>
 
                             @php $selectedValue = old('status') ?: $category->status @endphp
-
-                            <!-- Visible in menu Hidden field -->
-                            <x-admin::form.control-group.control
-                                type="hidden"
-                                class="cursor-pointer"
-                                name="status"
-                                :checked="(boolean) $selectedValue"
-                            />
 
                             <x-admin::form.control-group.control
                                 type="switch"
@@ -500,5 +492,4 @@
             });
         </script>
     @endPushOnce
-
 </x-admin::layouts>
