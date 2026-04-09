@@ -297,6 +297,123 @@ it('should roll back coupon usage when transaction fails', function () {
     expect($coupon->times_used)->toBe(0);
 });
 
+it('should return correct translated message when coupon global usage limit is exceeded', function () {
+    [$cartRule, $coupon] = createCartRuleWithCoupon([], [
+        'usage_limit' => 1,
+        'usage_per_customer' => 0,
+        'times_used' => 1,
+    ]);
+
+    $customer = Customer::factory()->create();
+    $order = fakeOrder($cartRule->id, $coupon->code, $customer->id);
+
+    try {
+        app(OrderListener::class)->manageCartRule($order);
+    } catch (CouponUsageLimitExceededException $e) {
+        $message = $e->getMessage();
+
+        // Ensure the message resolves to actual translated text, not a raw key.
+        expect($message)->not->toContain('::')
+            ->and($message)->toBe(trans('shop::app.checkout.coupon.usage-limit-exceeded'));
+
+        return;
+    }
+
+    $this->fail('Expected CouponUsageLimitExceededException was not thrown.');
+});
+
+it('should return correct translated message when per-customer coupon usage limit is exceeded', function () {
+    [$cartRule, $coupon] = createCartRuleWithCoupon([], [
+        'usage_limit' => 100,
+        'usage_per_customer' => 1,
+        'times_used' => 0,
+    ]);
+
+    $customer = Customer::factory()->create();
+
+    CartRuleCouponUsage::create([
+        'customer_id' => $customer->id,
+        'cart_rule_coupon_id' => $coupon->id,
+        'times_used' => 1,
+    ]);
+
+    $order = fakeOrder($cartRule->id, $coupon->code, $customer->id);
+
+    try {
+        app(OrderListener::class)->manageCartRule($order);
+    } catch (CouponUsageLimitExceededException $e) {
+        $message = $e->getMessage();
+
+        expect($message)->not->toContain('::')
+            ->and($message)->toBe(trans('shop::app.checkout.coupon.usage-limit-exceeded'));
+
+        return;
+    }
+
+    $this->fail('Expected CouponUsageLimitExceededException was not thrown.');
+});
+
+it('should return correct translated message when per-customer cart rule usage limit is exceeded', function () {
+    [$cartRule, $coupon] = createCartRuleWithCoupon([
+        'usage_per_customer' => 1,
+    ], [
+        'usage_limit' => 100,
+        'usage_per_customer' => 100,
+        'times_used' => 0,
+    ]);
+
+    $customer = Customer::factory()->create();
+
+    CartRuleCustomer::create([
+        'customer_id' => $customer->id,
+        'cart_rule_id' => $cartRule->id,
+        'times_used' => 1,
+    ]);
+
+    $order = fakeOrder($cartRule->id, $coupon->code, $customer->id);
+
+    try {
+        app(OrderListener::class)->manageCartRule($order);
+    } catch (CouponUsageLimitExceededException $e) {
+        $message = $e->getMessage();
+
+        expect($message)->not->toContain('::')
+            ->and($message)->toBe(trans('shop::app.checkout.coupon.usage-limit-exceeded'));
+
+        return;
+    }
+
+    $this->fail('Expected CouponUsageLimitExceededException was not thrown.');
+});
+
+it('should increment coupon usage for guest orders without per-customer tracking', function () {
+    [$cartRule, $coupon] = createCartRuleWithCoupon([], [
+        'usage_limit' => 10,
+        'usage_per_customer' => 1,
+        'times_used' => 0,
+    ]);
+
+    // Guest order — no customer_id.
+    $order = fakeOrder($cartRule->id, $coupon->code, null);
+
+    app(OrderListener::class)->manageCartRule($order);
+
+    $coupon->refresh();
+    $cartRule->refresh();
+
+    expect($coupon->times_used)->toBe(1);
+    expect($cartRule->times_used)->toBe(1);
+
+    // No per-customer records should be created for guests.
+    $this->assertDatabaseMissing('cart_rule_coupon_usage', [
+        'cart_rule_coupon_id' => $coupon->id,
+    ]);
+
+    $this->assertDatabaseMissing('cart_rule_customers', [
+        'cart_rule_id' => $cartRule->id,
+    ]);
+});
+
 it('should increment existing per-customer coupon usage instead of creating duplicate', function () {
     [$cartRule, $coupon] = createCartRuleWithCoupon([], [
         'usage_limit' => 10,
