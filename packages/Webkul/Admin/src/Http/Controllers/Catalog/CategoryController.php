@@ -247,7 +247,7 @@ class CategoryController extends Controller
 
                 $category = $this->categoryRepository->find($categoryId);
 
-                $category->status = $massUpdateRequest->input('value');
+                $category->status = $massUpdateRequest->boolean('value');
 
                 $category->save();
 
