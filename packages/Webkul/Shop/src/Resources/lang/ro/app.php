@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'Înapoi la magazin',
             'rule-applied' => 'Regulă coș aplicată',
             'select-hourly-duration' => 'Selectați o durată de slot de o oră.',
+            'specify-payment-method' => 'Vă rugăm să specificați o metodă de plată.',
+            'specify-shipping-method' => 'Vă rugăm să specificați o metodă de livrare.',
             'success-remove' => 'Articolul a fost eliminat cu succes din coș.',
             'suspended-account-message' => 'Contul dvs. a fost suspendat.',
 

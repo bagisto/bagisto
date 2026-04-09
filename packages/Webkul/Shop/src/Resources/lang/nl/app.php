@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'Terug naar de winkel',
             'rule-applied' => 'Winkelwagenregel toegepast',
             'select-hourly-duration' => 'Selecteer een slotduur van één uur.',
+            'specify-payment-method' => 'Geef een betaalmethode op.',
+            'specify-shipping-method' => 'Geef een verzendmethode op.',
             'success-remove' => 'Item is succesvol verwijderd uit de winkelwagen.',
             'suspended-account-message' => 'Uw account is opgeschort.',
 

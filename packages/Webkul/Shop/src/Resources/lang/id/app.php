@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'Kembali ke Toko',
             'rule-applied' => 'Aturan keranjang belanja telah diterapkan.',
             'select-hourly-duration' => 'Pilih durasi slot selama satu jam.',
+            'specify-payment-method' => 'Silakan tentukan metode pembayaran.',
+            'specify-shipping-method' => 'Silakan tentukan metode pengiriman.',
             'success-remove' => 'Produk berhasil dihapus dari keranjang.',
             'suspended-account-message' => 'Akun Anda telah ditangguhkan.',
 

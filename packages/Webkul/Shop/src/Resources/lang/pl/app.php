@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'Wróć do sklepu',
             'rule-applied' => 'Zastosowano zniżkę koszyka',
             'select-hourly-duration' => 'Wybierz czas trwania jednej godziny',
+            'specify-payment-method' => 'Proszę określić metodę płatności.',
+            'specify-shipping-method' => 'Proszę określić metodę wysyłki.',
             'success-remove' => 'Produkt został pomyślnie usunięty z koszyka',
             'suspended-account-message' => 'Twoje konto zostało zawieszone',
 

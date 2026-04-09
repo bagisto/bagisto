@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'بازگشت به فروشگاه',
             'rule-applied' => 'قانون سبد خرید اعمال شد',
             'select-hourly-duration' => 'یک مدت زمان ساعتی انتخاب کنید.',
+            'specify-payment-method' => 'لطفاً یک روش پرداخت را مشخص کنید.',
+            'specify-shipping-method' => 'لطفاً یک روش ارسال را مشخص کنید.',
             'success-remove' => 'کالا با موفقیت از سبد خرید حذف شد.',
             'suspended-account-message' => 'حساب کاربری شما مسدود شده است.',
 

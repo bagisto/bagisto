@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'Повернутися в магазин',
             'rule-applied' => 'Правило кошика застосовано',
             'select-hourly-duration' => 'Виберіть тривалість слоту одну годину.',
+            'specify-payment-method' => 'Будь ласка, вкажіть спосіб оплати.',
+            'specify-shipping-method' => 'Будь ласка, вкажіть спосіб доставки.',
             'success-remove' => 'Товар успішно видалено з кошика.',
             'suspended-account-message' => 'Ваш обліковий запис призупинено.',
 

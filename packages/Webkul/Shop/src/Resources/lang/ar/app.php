@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'العودة للتسوق',
             'rule-applied' => 'تم تطبيق قاعدة السلة',
             'select-hourly-duration' => 'حدد مدة الفترة بساعة واحدة.',
+            'specify-payment-method' => 'يرجى تحديد طريقة الدفع.',
+            'specify-shipping-method' => 'يرجى تحديد طريقة الشحن.',
             'success-remove' => 'تمت إزالة العنصر بنجاح من السلة.',
             'suspended-account-message' => 'تم تعليق حسابك.',
 

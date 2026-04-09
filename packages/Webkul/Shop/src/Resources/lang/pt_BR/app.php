@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'Voltar para a Loja',
             'rule-applied' => 'Regra do carrinho aplicada',
             'select-hourly-duration' => 'Selecione uma duração de slot de uma hora.',
+            'specify-payment-method' => 'Por favor, especifique um método de pagamento.',
+            'specify-shipping-method' => 'Por favor, especifique um método de envio.',
             'success-remove' => 'Item removido com sucesso do carrinho.',
             'suspended-account-message' => 'Sua conta foi suspensa.',
 

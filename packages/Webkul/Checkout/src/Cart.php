@@ -681,21 +681,38 @@ class Cart
             'product_id' => $cartItem->product_id,
         ]);
 
-        $found = false;
+        $existingWishlistItem = null;
 
         foreach ($wishlistItems as $wishlistItem) {
-            $options = $wishlistItem->item_options;
+            $options = is_array($wishlistItem->additional) ? $wishlistItem->additional : [];
 
             if (! $options) {
                 $options = ['product_id' => $wishlistItem->product_id];
             }
 
             if ($cartItem->getTypeInstance()->compareOptions($cartItem->additional, $options)) {
-                $found = true;
+                $existingWishlistItem = $wishlistItem;
+
+                break;
             }
         }
 
-        if (! $found) {
+        if ($existingWishlistItem) {
+            $existingAdditional = is_array($existingWishlistItem->additional) ? $existingWishlistItem->additional : [];
+
+            $existingQuantity = $existingAdditional['quantity'] ?? 1;
+
+            Event::dispatch('customer.wishlist.update.before', $cartItem->product_id);
+
+            $this->wishlistRepository->update([
+                'additional' => [
+                    ...$existingAdditional,
+                    'quantity' => $existingQuantity + $quantity,
+                ],
+            ], $existingWishlistItem->id);
+
+            Event::dispatch('customer.wishlist.update.after', $existingWishlistItem);
+        } else {
             Event::dispatch('customer.wishlist.create.before', $cartItem->product_id);
 
             $wishlist = $this->wishlistRepository->create([

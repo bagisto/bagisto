@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'Return To Shop',
             'rule-applied' => 'Cart rule applied',
             'select-hourly-duration' => 'Select a slot duration of one hour.',
+            'specify-payment-method' => 'Please specify a payment method.',
+            'specify-shipping-method' => 'Please specify a shipping method.',
             'success-remove' => 'Item is successfully removed from the cart.',
             'suspended-account-message' => 'Your account has been suspended.',
 
