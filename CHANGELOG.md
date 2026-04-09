@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * #11225 - Fixed incorrect translation key for coupon usage limit exceeded message.
 
+* #10967 - Fixed shipment options not showing when adding VAT ID with unsupported country during checkout.
+
 * #11223 - Fixed `explode()` null deprecation in `AppServiceProvider` when `APP_DEBUG_ALLOWED_IPS` is unset.
 
 ## **v2.3.16 (23rd of March 2026)** - *Release*
