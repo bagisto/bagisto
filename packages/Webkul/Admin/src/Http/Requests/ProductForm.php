@@ -75,6 +75,8 @@ class ProductForm extends FormRequest
     {
         $this->product = $this->productRepository->find($this->id);
 
+        $currentRmaRuleId = $this->product->rma_rule_id;
+
         $this->rules = array_merge($this->product->getTypeInstance()->getTypeValidationRules(), [
             'sku' => ['required', Rule::unique('products', 'sku')->ignore($this->id), new Slug],
             'url_key' => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
@@ -90,6 +92,18 @@ class ProductForm extends FormRequest
             'guest_checkout' => ['sometimes', 'required', 'in:0,1'],
             'new' => ['sometimes', 'required', 'in:0,1'],
             'featured' => ['sometimes', 'required', 'in:0,1'],
+            'rma_rule_id' => [
+                'nullable',
+                Rule::exists('rma_rules', 'id')->where(function ($query) use ($currentRmaRuleId) {
+                    $query->where(function ($q) use ($currentRmaRuleId) {
+                        $q->where('status', 1);
+
+                        if ($currentRmaRuleId) {
+                            $q->orWhere('id', $currentRmaRuleId);
+                        }
+                    });
+                }),
+            ],
         ]);
 
         if (request()->images) {

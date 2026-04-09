@@ -85,7 +85,29 @@
                 if ($attribute->code === 'tax_category_id') {
                     $options = app('Webkul\Tax\Repositories\TaxCategoryRepository')->all();
                 } else if ($attribute->code === 'rma_rule_id') {
-                    $options = app('Webkul\RMA\Repositories\RMARuleRepository')->all();
+                    $rmaRuleRepository = app('Webkul\RMA\Repositories\RMARuleRepository');
+
+                    /**
+                     * Only active RMA rules should be assignable to a product.
+                     */
+                    $options = $rmaRuleRepository->getActiveRules();
+
+                    /**
+                     * Safety Net: if this product already has a rule that has since been
+                     * deactivated, append it to the options list so editing the product
+                     * does not silently drop the existing assignment. The admin can then
+                     * choose to switch to an active rule on save.
+                     */
+                    if (
+                        $selectedOption
+                        && ! $options->contains('id', $selectedOption)
+                    ) {
+                        $currentRule = $rmaRuleRepository->find($selectedOption);
+
+                        if ($currentRule) {
+                            $options->push($currentRule);
+                        }
+                    }
                 } else {
                     $options = $attribute->options()->orderBy('sort_order')->get();
                 }

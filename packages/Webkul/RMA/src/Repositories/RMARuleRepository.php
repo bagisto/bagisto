@@ -14,4 +14,12 @@ class RMARuleRepository extends Repository
     {
         return RMARule::class;
     }
+
+    /**
+     * Get all active RMA rules.
+     */
+    public function getActiveRules()
+    {
+        return $this->model->where('status', 1)->get();
+    }
 }
