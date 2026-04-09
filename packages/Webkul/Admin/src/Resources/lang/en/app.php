@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => 'Customer Deleted Failed',
             'delete-success' => 'Customer Deleted Successfully',
-            'order-pending' => 'Orders is Pending',
+            'delete-pending-order-error' => 'This customer has pending orders and cannot be deleted.',
             'update-success' => 'Customer Updated Successfully',
         ],
 
@@ -3444,11 +3444,10 @@ return [
                         'title' => 'Edit Tax Categories',
                     ],
 
-                    'can-not-delete' => 'Tax Rates Assigned Categories cannot be deleted.',
-                    'create-success' => 'New Tax Category Created.',
-                    'delete-failed' => 'Tax Category Deleted Failed',
-                    'delete-success' => 'Tax Category Deleted Successfully.',
-                    'update-success' => 'Tax Category Successfully Updated.',
+                    'create-success' => 'Tax category created successfully.',
+                    'delete-failed' => 'Failed to delete tax category.',
+                    'delete-success' => 'Tax category deleted successfully.',
+                    'update-success' => 'Tax category updated successfully.',
                 ],
             ],
 

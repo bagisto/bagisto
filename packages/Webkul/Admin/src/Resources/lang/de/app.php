@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => 'Kundenlöschung fehlgeschlagen',
             'delete-success' => 'Kunde erfolgreich gelöscht',
-            'order-pending' => 'Bestellungen stehen aus',
+            'delete-pending-order-error' => 'Dieser Kunde hat ausstehende Bestellungen und kann nicht gelöscht werden.',
             'update-success' => 'Kunde erfolgreich aktualisiert',
         ],
 
@@ -3444,7 +3444,6 @@ return [
                         'title' => 'Steuerkategorien bearbeiten',
                     ],
 
-                    'can-not-delete' => 'Steuersätze zugewiesene Kategorien können nicht gelöscht werden.',
                     'create-success' => 'Neue Steuerkategorie erstellt',
                     'delete-failed' => 'Steuerkategorie löschen fehlgeschlagen',
                     'delete-success' => 'Steuerkategorie erfolgreich gelöscht',

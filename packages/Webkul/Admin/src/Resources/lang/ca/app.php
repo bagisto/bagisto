@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => 'S\'ha produït un error en eliminar el client',
             'delete-success' => 'Client eliminat amb éxit',
-            'order-pending' => 'Hi ha comandes pendents',
+            'delete-pending-order-error' => 'Aquest client té comandes pendents i no es pot eliminar.',
             'update-success' => 'Client actualitzat amb éxit',
         ],
 
@@ -3444,7 +3444,6 @@ return [
                         'title' => 'Editar Categories d\'Impostos',
                     ],
 
-                    'can-not-delete' => 'No es poden eliminar les categories assignades a les taxes d\'impostos.',
                     'create-success' => 'Nova Categoria d\'Impostos Creat',
                     'delete-failed' => 'Error en Eliminar la Categoria d\'Impostos',
                     'delete-success' => 'Categoria d\'Impostos Eliminada Correctament',

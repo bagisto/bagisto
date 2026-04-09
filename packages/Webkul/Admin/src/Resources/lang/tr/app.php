@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => 'Müşteri Silme Başarısız',
             'delete-success' => 'Müşteri Başarıyla Silindi',
-            'order-pending' => 'Sipariş Beklemede',
+            'delete-pending-order-error' => 'Bu müşterinin bekleyen siparişleri var ve silinemez.',
             'update-success' => 'Müşteri Başarıyla Güncellendi',
         ],
 
@@ -3444,7 +3444,6 @@ return [
                         'title' => 'Vergi Kategorilerini Düzenle',
                     ],
 
-                    'can-not-delete' => 'Vergi Oranı Atanmış Kategoriler silinemez.',
                     'create-success' => 'Yeni Vergi Kategorisi Oluşturuldu',
                     'delete-failed' => 'Vergi Kategorisi Silme Başarısız',
                     'delete-success' => 'Vergi Kategorisi Başarıyla Silindi',

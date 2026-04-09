@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Http\Controllers\Customer;
 
 use Carbon\Carbon;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Event;
 use Webkul\Customer\Repositories\CustomerAddressRepository;
 use Webkul\GDPR\Repositories\GDPRDataRequestRepository;
@@ -66,6 +67,12 @@ class GDPRController extends Controller
         Event::dispatch('customer.account.gdpr-request.create.after', $gdprRequest);
 
         Event::dispatch('customer.gdpr-request.create.after', $gdprRequest);
+
+        if (request()->ajax()) {
+            return new JsonResponse([
+                'message' => trans('shop::app.customers.account.gdpr.create-success'),
+            ]);
+        }
 
         session()->flash('success', trans('shop::app.customers.account.gdpr.create-success'));
 

@@ -182,6 +182,7 @@ class CustomerDataGrid extends DataGrid
             'index' => 'revenue',
             'label' => trans('admin::app.customers.customers.index.datagrid.revenue'),
             'type' => 'integer',
+            'exportable' => false,
             'closure' => function ($row) {
                 return app(OrderRepository::class)->scopeQuery(function ($q) use ($row) {
                     return $q->whereNotIn('status', [Order::STATUS_CANCELED, Order::STATUS_CLOSED])

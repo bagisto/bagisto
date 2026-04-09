@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => '删除客户失败',
             'delete-success' => '成功删除客户',
-            'order-pending' => '订单待处理',
+            'delete-pending-order-error' => '该客户有待处理的订单，无法删除。',
             'update-success' => '成功更新客户',
         ],
 
@@ -3444,7 +3444,6 @@ return [
                         'title' => '编辑税收分类',
                     ],
 
-                    'can-not-delete' => '分配了税率的类别无法删除。',
                     'create-success' => '新税收分类已创建',
                     'delete-failed' => '税收分类删除失败',
                     'delete-success' => '税收分类已成功删除',

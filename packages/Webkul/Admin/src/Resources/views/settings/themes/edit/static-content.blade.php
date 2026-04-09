@@ -289,7 +289,7 @@
 
                             let cursorPointer = editor.getCursor();
 
-                            editor.replaceRange(`<img class="lazy" data-src="${response.data}">`, {
+                            editor.replaceRange(`<img class="lazy" src="" data-src="${response.data}">`, {
                                 line: cursorPointer.line, ch: cursorPointer.ch
                             });
 

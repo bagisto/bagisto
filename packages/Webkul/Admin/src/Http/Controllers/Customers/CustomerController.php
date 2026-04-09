@@ -192,7 +192,7 @@ class CustomerController extends Controller
             return redirect()->route('admin.customers.customers.index');
         }
 
-        session()->flash('error', trans('admin::app.customers.customers.view.order-pending'));
+        session()->flash('error', trans('admin::app.customers.customers.delete-pending-order-error'));
 
         return redirect()->route('admin.customers.customers.index');
     }
