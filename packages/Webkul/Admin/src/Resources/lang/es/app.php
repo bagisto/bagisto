@@ -3122,7 +3122,6 @@ return [
                         'title' => 'Editar Categorías de Impuestos',
                     ],
 
-                    'can-not-delete' => 'No se pueden eliminar las categorías asignadas a las tasas de impuestos.',
                     'create-success' => 'Nueva Categoría de Impuestos Creada',
                     'delete-failed' => 'Error al Eliminar Categoría de Impuestos',
                     'delete-success' => 'Categoría de Impuestos Eliminada Exitosamente',

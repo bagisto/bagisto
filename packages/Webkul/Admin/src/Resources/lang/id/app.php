@@ -3122,7 +3122,6 @@ return [
                         'title' => 'Edit Kategori Pajak',
                     ],
 
-                    'can-not-delete' => 'Kategori dengan Tarif Pajak yang Terpasang tidak bisa dihapus.',
                     'create-success' => 'Kategori Pajak Baru Berhasil Dibuat.',
                     'delete-failed' => 'Penghapusan Kategori Pajak Gagal.',
                     'delete-success' => 'Kategori Pajak Berhasil Dihapus.',

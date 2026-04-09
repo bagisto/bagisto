@@ -3122,7 +3122,6 @@ return [
                         'title' => 'Modifica Categorie Fiscali',
                     ],
 
-                    'can-not-delete' => 'Le categorie assegnate alle aliquote fiscali non possono essere eliminate.',
                     'create-success' => 'Nuova Categoria Fiscale Creata',
                     'delete-failed' => 'Eliminazione Categoria Fiscale Fallita',
                     'delete-success' => 'Categoria Fiscale Eliminata con Successo',

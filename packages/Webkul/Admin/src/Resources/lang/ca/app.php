@@ -3122,7 +3122,6 @@ return [
                         'title' => 'Editar Categories d\'Impostos',
                     ],
 
-                    'can-not-delete' => 'No es poden eliminar les categories assignades a les taxes d\'impostos.',
                     'create-success' => 'Nova Categoria d\'Impostos Creat',
                     'delete-failed' => 'Error en Eliminar la Categoria d\'Impostos',
                     'delete-success' => 'Categoria d\'Impostos Eliminada Correctament',
