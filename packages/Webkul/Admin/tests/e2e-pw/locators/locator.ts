@@ -981,13 +981,13 @@ export class WebLocators {
             .getByText("Tax Rate delete successfully");
         this.selectTaxRate = page.locator('select[name="taxrates[]"]');
         this.successCreateTaxCategory = page.getByText(
-            "New Tax Category created",
+            "Tax category created successfully.",
         );
         this.successUpdateTaxCategory = page.getByText(
-            "Tax Category Successfully Updated.",
+            "Tax category updated successfully.",
         );
         this.successDeleteTaxCategory = page.getByText(
-            "Tax Rates Assigned Categories cannot be deleted.",
+            "Tax category deleted successfully.",
         );
         this.selectCountry = page.locator('select[name="country"]');
         this.searchBar = page.locator('input[name="query"]');
