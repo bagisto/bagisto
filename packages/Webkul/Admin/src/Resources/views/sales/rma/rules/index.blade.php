@@ -334,9 +334,7 @@
                     },
 
                     resetForm() {
-                        this.reason = {};
-
-                        this.reasonResolutions = [];
+                        this.rules = {};
                     },
                 },
             });

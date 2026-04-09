@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Added Base URL configuration field for Ollama provider in Magic AI settings.
 
+* Fixed RMA rules issues where inactive rules were still selectable on the product create/edit form, and where the "Create" modal would update the last-edited rule after an edit modal had been opened.
+
 * #11220 [fixed] - Fixed SQL injection in DataGrid sort column and unauthenticated path traversal via ImageCache.
 
 * #11212 [fixed] - Fixed TypeError in Carbon when RESPONSE_CACHE_ENABLED is enabled.
