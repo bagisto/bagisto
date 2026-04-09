@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => '顧客の削除に失敗しました',
             'delete-success' => '顧客が正常に削除されました',
-            'order-pending' => '注文が保留中です',
+            'delete-pending-order-error' => 'この顧客には保留中の注文があり、削除できません。',
             'update-success' => '顧客が正常に更新されました',
         ],
 
@@ -3444,7 +3444,6 @@ return [
                         'title' => '税カテゴリーを編集',
                     ],
 
-                    'can-not-delete' => '税率が割り当てられているカテゴリは削除できません。',
                     'create-success' => '新しい税カテゴリーが作成されました',
                     'delete-failed' => '税カテゴリーの削除に失敗しました',
                     'delete-success' => '税カテゴリーが正常に削除されました',

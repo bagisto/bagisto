@@ -48,10 +48,11 @@
                 </a>
     
                 <button
+                    type="button"
                     class="primary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm"
-                    @click="$refs.loginModel.open()"
+                    @click="$emitter.emit('open-gdpr-modal')"
                 >
-                    @lang('shop::app.customers.account.gdpr.index.create-btn') 
+                    @lang('shop::app.customers.account.gdpr.index.create-btn')
                 </button>
             </div>
         </div>
@@ -156,80 +157,146 @@
         {!! view_render_event('bagisto.shop.customers.account.gdpr.list.after') !!}
     </div>
 
-    <!-- Login Form -->
-    <x-shop::form action="{{ route('shop.customers.account.gdpr.store') }}">
-        {!! view_render_event('bagisto.shop.customers.account.gdpr.request.form_controls.before') !!}
+    <!-- GDPR Request Form -->
+    <v-account-gdpr></v-account-gdpr>
 
-        <x-shop::modal ref="loginModel">
-            <!-- Modal Header -->
-            <x-slot:header>
-                <h2 class="text-2xl">
-                    @lang('shop::app.customers.account.gdpr.index.modal.title')
-                </h2>
-            </x-slot>
+    @pushOnce('scripts')
+        <script
+            type="text/x-template"
+            id="v-account-gdpr-template"
+        >
+            <x-shop::form
+                v-slot="{ meta, errors, handleSubmit }"
+                as="div"
+            >
+                {!! view_render_event('bagisto.shop.customers.account.gdpr.request.form_controls.before') !!}
 
-            <!-- Modal Content -->
-            <x-slot:content>
-                <!-- Type -->
-                <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="required">
-                        @lang('shop::app.customers.account.gdpr.index.modal.type.title')
-                    </x-shop::form.control-group.label>
+                <form @submit="handleSubmit($event, store)">
+                    <x-shop::modal ref="loginModel">
+                        <!-- Modal Header -->
+                        <x-slot:header>
+                            <h2 class="text-2xl">
+                                @lang('shop::app.customers.account.gdpr.index.modal.title')
+                            </h2>
+                        </x-slot>
 
-                    <x-shop::form.control-group.control
-                        type="select"
-                        name="type"
-                        rules="required"
-                    >
-                        <option
-                            value=""
-                            disabled
-                            selected
-                        >
-                            @lang('shop::app.customers.account.gdpr.index.modal.type.choose')
-                        </option>
+                        <!-- Modal Content -->
+                        <x-slot:content>
+                            <!-- Type -->
+                            <x-shop::form.control-group>
+                                <x-shop::form.control-group.label class="required">
+                                    @lang('shop::app.customers.account.gdpr.index.modal.type.title')
+                                </x-shop::form.control-group.label>
 
-                        <option value="update">
-                            @lang('shop::app.customers.account.gdpr.index.modal.type.update')
-                        </option>
+                                <x-shop::form.control-group.control
+                                    type="select"
+                                    name="type"
+                                    rules="required"
+                                >
+                                    <option
+                                        value=""
+                                        disabled
+                                        selected
+                                    >
+                                        @lang('shop::app.customers.account.gdpr.index.modal.type.choose')
+                                    </option>
 
-                        <option value="delete">
-                            @lang('shop::app.customers.account.gdpr.index.modal.type.delete')
-                        </option>
-                    </x-shop::form.control-group.control>
+                                    <option value="update">
+                                        @lang('shop::app.customers.account.gdpr.index.modal.type.update')
+                                    </option>
 
-                    <x-shop::form.control-group.error control-name="type" />
-                </x-shop::form.control-group>
+                                    <option value="delete">
+                                        @lang('shop::app.customers.account.gdpr.index.modal.type.delete')
+                                    </option>
+                                </x-shop::form.control-group.control>
 
-                <!-- Message -->
-                <x-shop::form.control-group class="!mb-0">
-                    <x-shop::form.control-group.label class="required">
-                        @lang('shop::app.customers.account.gdpr.index.modal.message')
-                    </x-shop::form.control-group.label>
+                                <x-shop::form.control-group.error control-name="type" />
+                            </x-shop::form.control-group>
 
-                    <x-shop::form.control-group.control
-                        type="textarea"
-                        name="message"
-                        rules="required"
-                    />
+                            <!-- Message -->
+                            <x-shop::form.control-group class="!mb-0">
+                                <x-shop::form.control-group.label class="required">
+                                    @lang('shop::app.customers.account.gdpr.index.modal.message')
+                                </x-shop::form.control-group.label>
 
-                    <x-shop::form.control-group.error control-name="message" />
-                </x-shop::form.control-group>
-            </x-slot>
+                                <x-shop::form.control-group.control
+                                    type="textarea"
+                                    name="message"
+                                    rules="required"
+                                />
 
-            <!-- Modal Footer -->
-            <x-slot:footer>
-                <div class="flex flex-wrap items-center gap-4">
-                    <x-shop::button
-                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:rounded-lg max-md:py-1.5"
-                        :title="trans('shop::app.customers.account.gdpr.index.modal.save')"
-                        ::loading="isStoring"
-                        ::disabled="isStoring"
-                    />
-                </div>
-            </x-slot>
-        </x-shop::modal>
+                                <x-shop::form.control-group.error control-name="message" />
+                            </x-shop::form.control-group>
+                        </x-slot>
 
-        {!! view_render_event('bagisto.shop.customers.account.gdpr.request.form_controls.after') !!}
-    </x-shop::form>
+                        <!-- Modal Footer -->
+                        <x-slot:footer>
+                            <div class="flex flex-wrap items-center gap-4">
+                                <x-shop::button
+                                    class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:rounded-lg max-md:py-1.5"
+                                    :title="trans('shop::app.customers.account.gdpr.index.modal.save')"
+                                    ::loading="isStoring"
+                                    ::disabled="isStoring"
+                                />
+                            </div>
+                        </x-slot>
+                    </x-shop::modal>
+                </form>
+
+                {!! view_render_event('bagisto.shop.customers.account.gdpr.request.form_controls.after') !!}
+            </x-shop::form>
+        </script>
+
+        <script type="module">
+            app.component('v-account-gdpr', {
+                template: '#v-account-gdpr-template',
+
+                data() {
+                    return {
+                        isStoring: false,
+                    };
+                },
+
+                mounted() {
+                    this.$emitter.on('open-gdpr-modal', () => {
+                        this.$refs.loginModel?.open();
+                    });
+                },
+
+                methods: {
+                    store(params, { resetForm, setErrors }) {
+                        if (this.isStoring) {
+                            return;
+                        }
+
+                        this.isStoring = true;
+
+                        this.$axios.post("{{ route('shop.customers.account.gdpr.store') }}", params)
+                            .then((response) => {
+                                this.$emitter.emit('add-flash', {
+                                    type: 'success',
+                                    message: response.data.message,
+                                });
+
+                                window.location.reload();
+                            })
+                            .catch((error) => {
+                                this.isStoring = false;
+
+                                if (error.response?.status == 422) {
+                                    setErrors(error.response.data.errors);
+
+                                    return;
+                                }
+
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: error.response?.data?.message,
+                                });
+                            });
+                    },
+                },
+            });
+        </script>
+    @endPushOnce
 </x-shop::layouts.account>

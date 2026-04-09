@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => 'Eliminazione Cliente Fallita',
             'delete-success' => 'Cliente Eliminato con Successo',
-            'order-pending' => 'Ordini in Attesa',
+            'delete-pending-order-error' => 'Questo cliente ha ordini in sospeso e non può essere eliminato.',
             'update-success' => 'Cliente Aggiornato con Successo',
         ],
 
@@ -3444,7 +3444,6 @@ return [
                         'title' => 'Modifica Categorie Fiscali',
                     ],
 
-                    'can-not-delete' => 'Le categorie assegnate alle aliquote fiscali non possono essere eliminate.',
                     'create-success' => 'Nuova Categoria Fiscale Creata',
                     'delete-failed' => 'Eliminazione Categoria Fiscale Fallita',
                     'delete-success' => 'Categoria Fiscale Eliminata con Successo',

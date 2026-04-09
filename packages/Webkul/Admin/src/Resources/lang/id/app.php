@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => 'Gagal menghapus pelanggan',
             'delete-success' => 'Pelanggan berhasil dihapus',
-            'order-pending' => 'Pesanan masih tertunda',
+            'delete-pending-order-error' => 'Pelanggan ini memiliki pesanan yang tertunda dan tidak dapat dihapus.',
             'update-success' => 'Pelanggan berhasil diperbarui',
         ],
 
@@ -3444,7 +3444,6 @@ return [
                         'title' => 'Edit Kategori Pajak',
                     ],
 
-                    'can-not-delete' => 'Kategori dengan Tarif Pajak yang Terpasang tidak bisa dihapus.',
                     'create-success' => 'Kategori Pajak Baru Berhasil Dibuat.',
                     'delete-failed' => 'Penghapusan Kategori Pajak Gagal.',
                     'delete-success' => 'Kategori Pajak Berhasil Dihapus.',

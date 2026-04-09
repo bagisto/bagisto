@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => 'Usunięcie klienta nie powiodło się',
             'delete-success' => 'Klient został pomyślnie usunięty',
-            'order-pending' => 'Zamówienia są w trakcie oczekiwania',
+            'delete-pending-order-error' => 'Ten klient ma oczekujące zamówienia i nie można go usunąć.',
             'update-success' => 'Klient został pomyślnie zaktualizowany',
         ],
 
@@ -3444,11 +3444,10 @@ return [
                         'title' => 'Edytuj grupę podatkową',
                     ],
 
-                    'can-not-delete' => 'Nie można usunąć grup podatkowych przypisanych do stawek podatkowych.',
-                    'create-success' => 'Nowa grupa podatkowa utworzona',
-                    'delete-failed' => 'Usuwanie grup podatkowych nie powiodło się',
-                    'delete-success' => 'Grupa podatkowa usunięta pomyślnie',
-                    'update-success' => 'Grupa podatkowa pomyślnie zaktualizowana',
+                    'create-success' => 'Nowa Kategoria Podatków utworzona',
+                    'delete-failed' => 'Usuwanie Kategorii Podatków nie powiodło się',
+                    'delete-success' => 'Kategoria Podatków usunięta pomyślnie',
+                    'update-success' => 'Kategoria Podatków pomyślnie zaktualizowana',
                 ],
             ],
 

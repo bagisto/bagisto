@@ -2238,7 +2238,7 @@ return [
 
             'delete-failed' => 'Verwijderen van klant mislukt',
             'delete-success' => 'Klant succesvol verwijderd',
-            'order-pending' => 'Bestellingen in behandeling',
+            'delete-pending-order-error' => 'Deze klant heeft openstaande bestellingen en kan niet worden verwijderd.',
             'update-success' => 'Klant succesvol bijgewerkt',
         ],
 
@@ -3444,7 +3444,6 @@ return [
                         'title' => 'Belastingcategorieën Bewerken',
                     ],
 
-                    'can-not-delete' => 'Belastingtarieven toegewezen categorieën kunnen niet worden verwijderd.',
                     'create-success' => 'Nieuwe belastingcategorie aangemaakt',
                     'delete-failed' => 'Verwijderen van belastingcategorie mislukt',
                     'delete-success' => 'Belastingcategorie succesvol verwijderd',
