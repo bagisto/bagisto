@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed product 404 when locale-specific URL keys differ across locales by adding cross-locale fallback in product slug resolution and locale-aware URL rewrite redirects.
 
+* #11225 - Fixed incorrect translation key for coupon usage limit exceeded message.
+
 * #11223 - Fixed `explode()` null deprecation in `AppServiceProvider` when `APP_DEBUG_ALLOWED_IPS` is unset.
 
 ## **v2.3.16 (23rd of March 2026)** - *Release*
