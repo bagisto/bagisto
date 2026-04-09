@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'वापस खरीदारी करें',
             'rule-applied' => 'कार्ट नियम लागू हुआ',
             'select-hourly-duration' => 'एक घंटे की अवधि का चयन करें।',
+            'specify-payment-method' => 'कृपया भुगतान विधि निर्दिष्ट करें।',
+            'specify-shipping-method' => 'कृपया शिपिंग विधि निर्दिष्ट करें।',
             'success-remove' => 'आइटम को कार्ट से सफलतापूर्वक हटा दिया गया है।',
             'suspended-account-message' => 'आपका खाता निलंबित कर दिया गया है।',
 
