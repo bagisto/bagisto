@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'מחיקת הלקוח נכשלה',
             'delete-success' => 'הלקוח נמחק בהצלחה',
-            'order-pending' => 'ישנם הזמנות ממתינות',
+            'delete-pending-order-error' => 'ללקוח זה יש הזמנות ממתינות ולא ניתן למחוק אותו.',
             'update-success' => 'הלקוח עודכן בהצלחה',
         ],
 

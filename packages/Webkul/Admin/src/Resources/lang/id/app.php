@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Gagal menghapus pelanggan',
             'delete-success' => 'Pelanggan berhasil dihapus',
-            'order-pending' => 'Pesanan masih tertunda',
+            'delete-pending-order-error' => 'Pelanggan ini memiliki pesanan yang tertunda dan tidak dapat dihapus.',
             'update-success' => 'Pelanggan berhasil diperbarui',
         ],
 

@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'S\'ha produït un error en eliminar el client',
             'delete-success' => 'Client eliminat amb éxit',
-            'order-pending' => 'Hi ha comandes pendents',
+            'delete-pending-order-error' => 'Aquest client té comandes pendents i no es pot eliminar.',
             'update-success' => 'Client actualitzat amb éxit',
         ],
 

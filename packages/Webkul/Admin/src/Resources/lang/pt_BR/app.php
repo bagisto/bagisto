@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Falha ao Excluir Cliente',
             'delete-success' => 'Cliente Excluído com Sucesso',
-            'order-pending' => 'Pedido Pendente',
+            'delete-pending-order-error' => 'Este cliente possui pedidos pendentes e não pode ser excluído.',
             'update-success' => 'Cliente Atualizado com Sucesso',
         ],
 

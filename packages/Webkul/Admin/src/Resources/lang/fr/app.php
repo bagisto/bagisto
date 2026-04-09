@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Échec de la suppression du client',
             'delete-success' => 'Suppression du client réussie',
-            'order-pending' => 'Les commandes sont en attente',
+            'delete-pending-order-error' => 'Ce client a des commandes en attente et ne peut pas être supprimé.',
             'update-success' => 'Mise à jour du client réussie',
         ],
 

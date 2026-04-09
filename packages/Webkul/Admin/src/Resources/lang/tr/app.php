@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Müşteri Silme Başarısız',
             'delete-success' => 'Müşteri Başarıyla Silindi',
-            'order-pending' => 'Sipariş Beklemede',
+            'delete-pending-order-error' => 'Bu müşterinin bekleyen siparişleri var ve silinemez.',
             'update-success' => 'Müşteri Başarıyla Güncellendi',
         ],
 

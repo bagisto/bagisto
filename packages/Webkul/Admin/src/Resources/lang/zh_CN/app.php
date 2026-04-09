@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => '删除客户失败',
             'delete-success' => '成功删除客户',
-            'order-pending' => '订单待处理',
+            'delete-pending-order-error' => '该客户有待处理的订单，无法删除。',
             'update-success' => '成功更新客户',
         ],
 

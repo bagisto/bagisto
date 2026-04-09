@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Eliminación del cliente fallida',
             'delete-success' => 'Cliente eliminado exitosamente',
-            'order-pending' => 'Existen pedidos pendientes',
+            'delete-pending-order-error' => 'Este cliente tiene pedidos pendientes y no se puede eliminar.',
             'update-success' => 'Cliente actualizado exitosamente',
         ],
 

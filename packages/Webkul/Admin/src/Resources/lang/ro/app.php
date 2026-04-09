@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Customer Deleted Failed',
             'delete-success' => 'Customer Deleted Successfully',
-            'order-pending' => 'Orders is Pending',
+            'delete-pending-order-error' => 'This customer has pending orders and cannot be deleted.',
             'update-success' => 'Customer Updated Successfully',
         ],
 

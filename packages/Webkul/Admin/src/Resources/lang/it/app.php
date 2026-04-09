@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Eliminazione Cliente Fallita',
             'delete-success' => 'Cliente Eliminato con Successo',
-            'order-pending' => 'Ordini in Attesa',
+            'delete-pending-order-error' => 'Questo cliente ha ordini in sospeso e non può essere eliminato.',
             'update-success' => 'Cliente Aggiornato con Successo',
         ],
 

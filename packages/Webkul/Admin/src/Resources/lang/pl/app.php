@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Usunięcie klienta nie powiodło się',
             'delete-success' => 'Klient został pomyślnie usunięty',
-            'order-pending' => 'Zamówienia są w trakcie oczekiwania',
+            'delete-pending-order-error' => 'Ten klient ma oczekujące zamówienia i nie można go usunąć.',
             'update-success' => 'Klient został pomyślnie zaktualizowany',
         ],
 

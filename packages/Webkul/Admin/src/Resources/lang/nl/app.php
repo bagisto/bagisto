@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Verwijderen van klant mislukt',
             'delete-success' => 'Klant succesvol verwijderd',
-            'order-pending' => 'Bestellingen in behandeling',
+            'delete-pending-order-error' => 'Deze klant heeft openstaande bestellingen en kan niet worden verwijderd.',
             'update-success' => 'Klant succesvol bijgewerkt',
         ],
 

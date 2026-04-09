@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'Kundenlöschung fehlgeschlagen',
             'delete-success' => 'Kunde erfolgreich gelöscht',
-            'order-pending' => 'Bestellungen stehen aus',
+            'delete-pending-order-error' => 'Dieser Kunde hat ausstehende Bestellungen und kann nicht gelöscht werden.',
             'update-success' => 'Kunde erfolgreich aktualisiert',
         ],
 

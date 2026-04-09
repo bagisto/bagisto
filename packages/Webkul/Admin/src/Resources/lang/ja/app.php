@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => '顧客の削除に失敗しました',
             'delete-success' => '顧客が正常に削除されました',
-            'order-pending' => '注文が保留中です',
+            'delete-pending-order-error' => 'この顧客には保留中の注文があり、削除できません。',
             'update-success' => '顧客が正常に更新されました',
         ],
 

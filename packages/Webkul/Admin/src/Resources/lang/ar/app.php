@@ -1916,7 +1916,7 @@ return [
 
             'delete-failed' => 'فشل حذف العميل',
             'delete-success' => 'تم حذف العميل بنجاح',
-            'order-pending' => 'الطلبات قيد الانتظار',
+            'delete-pending-order-error' => 'هذا العميل لديه طلبات قيد الانتظار ولا يمكن حذفه.',
             'update-success' => 'تم تحديث العميل بنجاح',
         ],
 
