@@ -1,6 +1,6 @@
 import fs from "fs";
 import { expect, Page } from "@playwright/test";
-import { WebLocators } from "../locators/locator";
+import { ProductAdminLocators } from "../locators/admin/product-admin";
 import { CommonPage } from "../utils/tinymce";
 import { BaseProduct } from "./types/product.types";
 
@@ -8,7 +8,7 @@ export class ProductCreation {
     constructor(
         private page: Page,
 
-        private locators = new WebLocators(page),
+        private productAdminLocators = new ProductAdminLocators(page),
 
         private editor = new CommonPage(page),
     ) {}
@@ -42,11 +42,11 @@ export class ProductCreation {
      * COMMON STEPS
      */
     private async openCreateModal(type: string, sku: string) {
-        await this.locators.createProductButton.click();
-        await this.locators.selectProductType.selectOption(type);
-        await this.locators.selectAttribute.selectOption("1");
-        await this.locators.productSku.fill(sku);
-        await this.locators.saveProduct.click();
+        await this.productAdminLocators.createProductButton.click();
+        await this.productAdminLocators.selectProductType.selectOption(type);
+        await this.productAdminLocators.selectAttribute.selectOption("1");
+        await this.productAdminLocators.productSku.fill(sku);
+        await this.productAdminLocators.saveProduct.click();
         //         await expect(this.page.locator("#app")).toContainText(
         //     /product created successfully/i
         // );
@@ -58,13 +58,13 @@ export class ProductCreation {
 
     private async fillCommonDetails(product: BaseProduct) {
         await this.page.waitForTimeout(1000);
-        await this.locators.productName.fill(product.name);
+        await this.productAdminLocators.productName.fill(product.name);
         await this.editor.fillInTinymce(
-            this.locators.productShortDescription,
+            this.productAdminLocators.productShortDescription,
             product.shortDescription,
         );
         await this.editor.fillInTinymce(
-            this.locators.productDescription,
+            this.productAdminLocators.productDescription,
             product.description,
         );
     }
@@ -85,25 +85,30 @@ export class ProductCreation {
 
     private async simple(product: BaseProduct) {
         if (product.price)
-            await this.locators.productPrice.fill(product.price.toString());
+            await this.productAdminLocators.productPrice.fill(
+                product.price.toString(),
+            );
 
         if (product.weight)
-            await this.locators.productWeight.fill(product.weight.toString());
+            await this.productAdminLocators.productWeight.fill(
+                product.weight.toString(),
+            );
 
         if (product.inventory)
-            await this.locators.productInventory
+            await this.productAdminLocators.productInventory
                 .first()
                 .fill(product.inventory.toString());
         await this.page.locator('label[for="allow_rma"]').click();
-        await this.locators.rmaSelection.selectOption("1");
     }
 
     /**
      * Save & Verify The Product Creation
      */
     private async saveAndVerify() {
-        await this.locators.saveProduct.click();
-        await expect(this.locators.updateProductSuccessToast).toBeVisible();
+        await this.productAdminLocators.saveProduct.click();
+        await expect(
+            this.productAdminLocators.updateProductSuccessToast,
+        ).toBeVisible();
     }
 
     /**
