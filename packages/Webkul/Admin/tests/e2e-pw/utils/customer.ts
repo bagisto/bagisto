@@ -37,7 +37,7 @@ export async function register(page) {
         .isVisible();
 
     if (isAgreementVisible) {
-        await page.getByText("I agree with the terms and conditions.").click();
+        await page.getByText(/I agree/i).click();
     }
 
     const isNewsletterVisible = await page
