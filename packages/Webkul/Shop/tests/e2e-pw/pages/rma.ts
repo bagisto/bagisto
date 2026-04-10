@@ -2,6 +2,7 @@ import fs from "fs";
 import { expect, Page } from "@playwright/test";
 import { WebLocators } from "../locators/locator";
 import { CommonPage } from "../utils/tinymce";
+import { loginAsAdmin } from "../utils/admin";
 
 /**
  * Reads product data from JSON file
@@ -25,22 +26,6 @@ export class RMACreation {
 
     private async gotoProductPage() {
         await this.page.goto("admin/sales/orders");
-    }
-
-    async adminLogin() {
-        const adminCredentials = {
-            email: "admin@example.com",
-            password: "admin123",
-        };
-        await this.page.goto("admin/login");
-        await this.page
-            .locator('input[name="email"]')
-            .fill(adminCredentials.email);
-        await this.page
-            .locator('input[name="password"]')
-            .fill(adminCredentials.password);
-        await this.page.press('input[name="password"]', "Enter");
-        await this.page.waitForURL("**/admin/dashboard");
     }
 
     private async createInvoice() {
@@ -97,7 +82,7 @@ export class RMACreation {
      * Public functions
      */
     async rmaCreation() {
-        await this.adminLogin();
+        await loginAsAdmin(this.page);
         await this.gotoProductPage();
         await this.createInvoice();
         await this.createRMA();
@@ -105,7 +90,7 @@ export class RMACreation {
     }
 
     async invalidRMARequest() {
-        await this.adminLogin();
+        await loginAsAdmin(this.page);
         await this.gotoProductPage();
         await this.createInvoice();
         await this.createInvalidRMA();

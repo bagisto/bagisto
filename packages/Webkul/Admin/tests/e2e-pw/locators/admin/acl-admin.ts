@@ -671,7 +671,7 @@ export class ACLAdminLocators {
 
     get successDeleteTaxCategory() {
         return this.page.getByText(
-            "Tax Rates Assigned Categories cannot be deleted.",
+            "Tax category deleted successfully.",
         );
     }
 
@@ -764,7 +764,7 @@ export class ACLAdminLocators {
     }
 
     get successUpdateTaxCategory() {
-        return this.page.getByText("Tax Category Successfully Updated.");
+        return this.page.getByText("Tax category updated successfully.");
     }
 
     get successUpdateTaxRate() {

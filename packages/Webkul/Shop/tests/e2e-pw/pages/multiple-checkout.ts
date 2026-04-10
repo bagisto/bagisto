@@ -1,16 +1,16 @@
 import { Page, expect } from "@playwright/test";
-import { WebLocators } from "../locators/locator";
+import { CheckoutShopLocators } from "../locators/shop/shop-checkout-locator";
 import { ProductCheckout } from "./checkout-flow";
 
 export class MultipleCheckout {
     readonly page: Page;
-    readonly locators: WebLocators;
+    readonly chekoutShopLocators: CheckoutShopLocators;
     readonly productCheckout: ProductCheckout;
 
     constructor(page: Page) {
         this.page = page;
 
-        this.locators = new WebLocators(page);
+        this.chekoutShopLocators = new CheckoutShopLocators(page);
 
         this.productCheckout = new ProductCheckout(page);
     }
@@ -23,17 +23,17 @@ export class MultipleCheckout {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
         await this.productCheckout.searchProduct("simple");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("config");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.getByLabel("Color").selectOption("4");
         await this.page.getByLabel("Size").selectOption("8");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.chekoutShopLocators.chooseShippingMethod.click();
+        await this.chekoutShopLocators.choosePaymentMethod.click();
         await this.productCheckout.placeOrder();
     }
 
@@ -45,18 +45,18 @@ export class MultipleCheckout {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
         await this.productCheckout.searchProduct("virtual");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("group");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.chekoutShopLocators.chooseShippingMethod.click();
+        await this.chekoutShopLocators.choosePaymentMethod.click();
         await this.productCheckout.placeOrder();
     }
 
@@ -68,16 +68,16 @@ export class MultipleCheckout {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
         await this.productCheckout.searchProduct("simple");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("bundle");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.chekoutShopLocators.chooseShippingMethod.click();
+        await this.chekoutShopLocators.choosePaymentMethod.click();
         await this.productCheckout.placeOrder();
     }
 
@@ -89,18 +89,18 @@ export class MultipleCheckout {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
         await this.productCheckout.searchProduct("bundle");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("group");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.chekoutShopLocators.chooseShippingMethod.click();
+        await this.chekoutShopLocators.choosePaymentMethod.click();
         await this.productCheckout.placeOrder();
     }
 
@@ -112,19 +112,19 @@ export class MultipleCheckout {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
         await this.productCheckout.searchProduct("group");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("down");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(2000);
-        await this.locators.clickLink.click();
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.clickLink.click();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.chekoutShopLocators.chooseShippingMethod.click();
+        await this.chekoutShopLocators.choosePaymentMethod.click();
         await this.productCheckout.placeOrder();
     }
 
@@ -136,24 +136,24 @@ export class MultipleCheckout {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
         await this.productCheckout.searchProduct("config");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.getByLabel("Color").selectOption("4");
         await this.page.getByLabel("Size").selectOption("8");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("virtual");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("group");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.chekoutShopLocators.chooseShippingMethod.click();
+        await this.chekoutShopLocators.choosePaymentMethod.click();
         await this.productCheckout.placeOrder();
     }
 
@@ -165,27 +165,27 @@ export class MultipleCheckout {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
         await this.productCheckout.searchProduct("simple");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("config");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.getByLabel("Color").selectOption("4");
         await this.page.getByLabel("Size").selectOption("8");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("virtual");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("group");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(3000);
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.chekoutShopLocators.chooseShippingMethod.click();
+        await this.chekoutShopLocators.choosePaymentMethod.click();
         await this.productCheckout.placeOrder();
     }
 
@@ -197,17 +197,17 @@ export class MultipleCheckout {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
         await this.productCheckout.searchProduct("simple");
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.searchProduct("down");
-        await this.locators.addToCartButton.click();
+        await this.chekoutShopLocators.addToCartButton.click();
         await this.page.waitForTimeout(2000);
-        await this.locators.clickLink.click();
-        await this.locators.addToCartButton.click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
+        await this.chekoutShopLocators.clickLink.click();
+        await this.chekoutShopLocators.addToCartButton.click();
+        await expect(this.chekoutShopLocators.addCartSuccess.first()).toBeVisible();
         await this.productCheckout.proceedToCheckout();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.chekoutShopLocators.chooseShippingMethod.click();
+        await this.chekoutShopLocators.choosePaymentMethod.click();
         await this.productCheckout.placeOrder();
     }
 }
