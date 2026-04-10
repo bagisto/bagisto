@@ -69,7 +69,7 @@ export class RMACreation {
         await this.rmaShopLocators.info.fill("Changed My Mind.");
         await this.rmaShopLocators.agreement.check();
         await this.rmaShopLocators.submit.click();
-        await expect(this.rmaShopLocators.successRMA).toBeVisible();
+        await expect(this.rmaShopLocators.successRMA.first()).toBeVisible();
     }
 
     private async createInvalidRMA() {
