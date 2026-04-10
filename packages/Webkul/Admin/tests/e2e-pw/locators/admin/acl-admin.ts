@@ -646,7 +646,7 @@ export class ACLAdminLocators {
     }
 
     get successCreateTaxCategory() {
-        return this.page.getByText("New Tax Category created");
+        return this.page.getByText("Tax category created successfully.");
     }
 
     get successCreateTaxRate() {
