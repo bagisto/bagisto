@@ -623,7 +623,7 @@ export class ACLAdminPage {
     }
 
     get successCreateTaxCategory() {
-        return this.page.getByText("New Tax Category created");
+        return this.page.getByText("Tax category created successfully.");
     }
 
     get successCreateTaxRate() {
@@ -648,7 +648,7 @@ export class ACLAdminPage {
 
     get successDeleteTaxCategory() {
         return this.page.getByText(
-            "Tax Rates Assigned Categories cannot be deleted.",
+            "Tax category deleted successfully.",
         );
     }
 
@@ -741,7 +741,7 @@ export class ACLAdminPage {
     }
 
     get successUpdateTaxCategory() {
-        return this.page.getByText("Tax Category Successfully Updated.");
+        return this.page.getByText("Tax category updated successfully.");
     }
 
     get successUpdateTaxRate() {
