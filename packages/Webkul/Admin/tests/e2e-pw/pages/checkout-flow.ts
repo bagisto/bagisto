@@ -1,5 +1,5 @@
 import { Page, expect } from "@playwright/test";
-import { CheckoutShopLocators } from "../locators/shop/checkout-shop"; //
+import { CheckoutShopPage } from "../locators/shop/checkout"; //
 import fs from "fs";
 
 /**
@@ -15,12 +15,12 @@ function readProductData() {
 
 export class ProductCheckout {
     readonly page: Page;
-    readonly checkoutShopLocators: CheckoutShopLocators;
+    readonly checkoutShopPage: CheckoutShopPage;
 
     constructor(page: Page) {
         this.page = page;
 
-        this.checkoutShopLocators = new CheckoutShopLocators(page);
+        this.checkoutShopPage = new CheckoutShopPage(page);
     }
 
     /**
@@ -29,18 +29,18 @@ export class ProductCheckout {
     async searchProduct(productName: string) {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
-        await this.checkoutShopLocators.searchInput.fill(productName);
-        await this.checkoutShopLocators.searchInput.press("Enter");
+        await this.checkoutShopPage.searchInput.fill(productName);
+        await this.checkoutShopPage.searchInput.press("Enter");
     }
 
     /**
      * Common steps to reach checkout page
      */
     async proceedToCheckout() {
-        await this.checkoutShopLocators.ShoppingCartIcon.click();
-        await this.checkoutShopLocators.ContinueButton.click();
+        await this.checkoutShopPage.shoppingCartIcon.click();
+        await this.checkoutShopPage.continueButton.click();
         await this.page.locator(".icon-radio-unselect").first().click();
-        await this.checkoutShopLocators.clickProcessButton.click();
+        await this.checkoutShopPage.clickProcessButton.click();
     }
 
     /**
@@ -48,7 +48,7 @@ export class ProductCheckout {
      */
     async placeOrder() {
         await this.page.waitForTimeout(2000);
-        await this.checkoutShopLocators.clickPlaceOrderButton.click();
+        await this.checkoutShopPage.clickPlaceOrderButton.click();
         await this.page.waitForTimeout(8000);
     }
 
@@ -64,13 +64,13 @@ export class ProductCheckout {
 
         const productName = readProductData();
         await this.searchProduct(productName);
-        await this.checkoutShopLocators.addToCartButton.click();
+        await this.checkoutShopPage.addToCartButton.click();
         await expect(
-            this.checkoutShopLocators.addCartSuccess.first(),
+            this.checkoutShopPage.addCartSuccess.first(),
         ).toBeVisible();
         await this.proceedToCheckout();
-        await this.checkoutShopLocators.chooseShippingMethod.click();
-        await this.checkoutShopLocators.choosePaymentMethod.click();
+        await this.checkoutShopPage.chooseShippingMethod.click();
+        await this.checkoutShopPage.choosePaymentMethod.click();
         await this.placeOrder();
     }
 }

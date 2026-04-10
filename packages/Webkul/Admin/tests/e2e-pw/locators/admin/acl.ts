@@ -1,23 +1,14 @@
 import { Locator, Page } from "@playwright/test";
 
-export class ACLAdminLocators {
+export class ACLAdminPage {
     constructor(private page: Page) {}
 
-    /** ---------------- COMMON / GENERIC ---------------- */
-
-    get addCartSuccess() {
-        return this.page.getByText("Item Added Successfully");
-    }
     get addConditionBtn() {
         return this.page.locator(
             'div.secondary-button:has-text("Add Condition")',
         );
     }
-    get addToCartButton() {
-        return this.page.locator(
-            "(//button[contains(@class,'secondary-button')])[2]",
-        );
-    }
+
     get agreeBtn() {
         return this.page.getByRole("button", { name: "Agree", exact: true });
     }
@@ -135,12 +126,6 @@ export class ACLAdminLocators {
     }
     get contactNumber() {
         return this.page.getByRole("textbox", { name: "Contact Number" });
-    }
-
-    get ContinueButton() {
-        return this.page.locator(
-            '(//a[contains(.," Continue to Checkout ")])[1]',
-        );
     }
 
     get copyBtn() {
@@ -511,10 +496,6 @@ export class ACLAdminLocators {
         return this.page.getByRole("button", { name: "Save User" });
     }
 
-    get searchInput() {
-        return this.page.getByRole("textbox", { name: "Search products here" });
-    }
-
     get searchQuery() {
         return this.page.getByRole("textbox", { name: "Search Query" });
     }
@@ -591,10 +572,6 @@ export class ACLAdminLocators {
         return this.page.locator("#seo_keywords");
     }
 
-    get ShoppingCartIcon() {
-        return this.page.locator("(//span[contains(@class,'icon-cart')])[1]");
-    }
-
     get sitemapCreateSuccess() {
         return this.page.getByText("Sitemap created successfully");
     }
@@ -646,7 +623,7 @@ export class ACLAdminLocators {
     }
 
     get successCreateTaxCategory() {
-        return this.page.getByText("Tax category created successfully.");
+        return this.page.getByText("New Tax Category created");
     }
 
     get successCreateTaxRate() {
@@ -671,7 +648,7 @@ export class ACLAdminLocators {
 
     get successDeleteTaxCategory() {
         return this.page.getByText(
-            "Tax category deleted successfully.",
+            "Tax Rates Assigned Categories cannot be deleted.",
         );
     }
 
@@ -764,7 +741,7 @@ export class ACLAdminLocators {
     }
 
     get successUpdateTaxCategory() {
-        return this.page.getByText("Tax category updated successfully.");
+        return this.page.getByText("Tax Category Successfully Updated.");
     }
 
     get successUpdateTaxRate() {

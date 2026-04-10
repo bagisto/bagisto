@@ -1,6 +1,6 @@
 import fs from "fs";
 import { expect, Page } from "@playwright/test";
-import { ProductAdminLocators } from "../locators/admin/product-admin";
+import { ProductEditPage } from "../locators/admin/product";
 import { CommonPage } from "../utils/tinymce";
 import { BaseProduct } from "./types/product.types";
 
@@ -8,7 +8,7 @@ export class ProductCreation {
     constructor(
         private page: Page,
 
-        private productAdminLocators = new ProductAdminLocators(page),
+        private productEditPage = new ProductEditPage(page),
 
         private editor = new CommonPage(page),
     ) {}
@@ -42,11 +42,11 @@ export class ProductCreation {
      * COMMON STEPS
      */
     private async openCreateModal(type: string, sku: string) {
-        await this.productAdminLocators.createProductButton.click();
-        await this.productAdminLocators.selectProductType.selectOption(type);
-        await this.productAdminLocators.selectAttribute.selectOption("1");
-        await this.productAdminLocators.productSku.fill(sku);
-        await this.productAdminLocators.saveProduct.click();
+        await this.productEditPage.createProductButton.click();
+        await this.productEditPage.selectProductType.selectOption(type);
+        await this.productEditPage.selectAttribute.selectOption("1");
+        await this.productEditPage.productSku.fill(sku);
+        await this.productEditPage.saveProduct.click();
         //         await expect(this.page.locator("#app")).toContainText(
         //     /product created successfully/i
         // );
@@ -58,13 +58,13 @@ export class ProductCreation {
 
     private async fillCommonDetails(product: BaseProduct) {
         await this.page.waitForTimeout(1000);
-        await this.productAdminLocators.productName.fill(product.name);
+        await this.productEditPage.productName.fill(product.name);
         await this.editor.fillInTinymce(
-            this.productAdminLocators.productShortDescription,
+            this.productEditPage.productShortDescription,
             product.shortDescription,
         );
         await this.editor.fillInTinymce(
-            this.productAdminLocators.productDescription,
+            this.productEditPage.productDescription,
             product.description,
         );
     }
@@ -85,17 +85,17 @@ export class ProductCreation {
 
     private async simple(product: BaseProduct) {
         if (product.price)
-            await this.productAdminLocators.productPrice.fill(
+            await this.productEditPage.productPrice.fill(
                 product.price.toString(),
             );
 
         if (product.weight)
-            await this.productAdminLocators.productWeight.fill(
+            await this.productEditPage.productWeight.fill(
                 product.weight.toString(),
             );
 
         if (product.inventory)
-            await this.productAdminLocators.productInventory
+            await this.productEditPage.productInventory
                 .first()
                 .fill(product.inventory.toString());
         await this.page.locator('label[for="allow_rma"]').click();
@@ -105,9 +105,9 @@ export class ProductCreation {
      * Save & Verify The Product Creation
      */
     private async saveAndVerify() {
-        await this.productAdminLocators.saveProduct.click();
+        await this.productEditPage.saveProduct.click();
         await expect(
-            this.productAdminLocators.updateProductSuccessToast,
+            this.productEditPage.updateProductSuccessToast,
         ).toBeVisible();
     }
 

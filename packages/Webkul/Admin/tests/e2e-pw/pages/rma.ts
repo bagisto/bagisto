@@ -1,7 +1,7 @@
 import fs from "fs";
 import { expect, Page } from "@playwright/test";
-import { RMAShopLocators } from "../locators/shop/rma-shop";
-import { RMAAdminLocators } from "../locators/admin/rma-admin";
+import { RMAShopPage } from "../locators/shop/rma";
+import { RMAAdminPage } from "../locators/admin/rma";
 import { CommonPage } from "../utils/tinymce";
 
 /**
@@ -19,9 +19,9 @@ export class RMACreation {
     constructor(
         private page: Page,
 
-        private rmaShopLocators = new RMAShopLocators(page),
+        private rmaShopPage = new RMAShopPage(page),
 
-        private rmaAdminLocators = new RMAAdminLocators(page),
+        private rmaAdminPage = new RMAAdminPage(page),
 
         private editor = new CommonPage(page),
     ) {}
@@ -47,43 +47,43 @@ export class RMACreation {
     }
 
     private async createInvoice() {
-        await this.rmaAdminLocators.viewOrder.click();
-        await this.rmaAdminLocators.Invoice.click();
-        await this.rmaAdminLocators.createInvoice.click();
-        await expect(this.rmaAdminLocators.successInvoice).toBeVisible();
+        await this.rmaAdminPage.viewOrder.click();
+        await this.rmaAdminPage.Invoice.click();
+        await this.rmaAdminPage.createInvoice.click();
+        await expect(this.rmaAdminPage.successInvoice).toBeVisible();
     }
 
     private async createRMA() {
         await this.page.goto("customer/account/rma");
-        await this.rmaShopLocators.reqRMA.click();
+        await this.rmaShopPage.reqRMA.click();
         await this.page.waitForLoadState("networkidle");
-        await this.rmaShopLocators.editIcon.first().click();
-        await this.rmaShopLocators.checkBox.check();
+        await this.rmaShopPage.editIcon.first().click();
+        await this.rmaShopPage.checkBox.check();
         await this.page.waitForLoadState("networkidle");
-        await this.rmaShopLocators.resolution.selectOption("return");
-        await this.rmaShopLocators.resolution.selectOption("return");
+        await this.rmaShopPage.resolution.selectOption("return");
+        await this.rmaShopPage.resolution.selectOption("return");
         await this.page.waitForLoadState("networkidle");
-        await this.rmaShopLocators.reason.selectOption("1");
-        await this.rmaShopLocators.rmaQTY.fill("1");
-        await this.rmaShopLocators.orderStatus.selectOption({ value: "open" });
-        await this.rmaShopLocators.info.fill("Changed My Mind.");
-        await this.rmaShopLocators.agreement.check();
-        await this.rmaShopLocators.submit.click();
-        await expect(this.rmaShopLocators.successRMA.first()).toBeVisible();
+        await this.rmaShopPage.reason.selectOption("1");
+        await this.rmaShopPage.rmaQTY.fill("1");
+        await this.rmaShopPage.orderStatus.selectOption({ value: "open" });
+        await this.rmaShopPage.info.fill("Changed My Mind.");
+        await this.rmaShopPage.agreement.check();
+        await this.rmaShopPage.submit.click();
+        await expect(this.rmaShopPage.successRMA.first()).toBeVisible();
     }
 
     private async createInvalidRMA() {
         await this.page.goto("customer/account/rma");
-        await this.rmaShopLocators.reqRMA.click();
-        await this.rmaShopLocators.editIcon.first().click();
-        await this.rmaShopLocators.checkBox.check();
+        await this.rmaShopPage.reqRMA.click();
+        await this.rmaShopPage.editIcon.first().click();
+        await this.rmaShopPage.checkBox.check();
         await this.page.waitForLoadState("networkidle");
-        await this.rmaShopLocators.resolution.selectOption("return");
-        await this.rmaShopLocators.resolution.selectOption("return");
+        await this.rmaShopPage.resolution.selectOption("return");
+        await this.rmaShopPage.resolution.selectOption("return");
         await this.page.waitForLoadState("networkidle");
-        await this.rmaShopLocators.reason.selectOption("1");
-        await this.rmaShopLocators.rmaQTY.fill("4");
-        await expect(this.rmaShopLocators.invalidRMAMessage).toBeVisible();
+        await this.rmaShopPage.reason.selectOption("1");
+        await this.rmaShopPage.rmaQTY.fill("4");
+        await expect(this.rmaShopPage.invalidRMAMessage).toBeVisible();
     }
 
     private async verfiyRMADetails() {
@@ -113,61 +113,61 @@ export class RMACreation {
 
     async adminAcceptRMA() {
         await this.page.goto("admin/sales/rma/requests");
-        await this.rmaAdminLocators.view.first().click();
-        await this.rmaAdminLocators.status.selectOption("2");
-        await this.rmaAdminLocators.save.click();
-        await this.rmaAdminLocators.agreeButton.click();
-        await expect(this.rmaAdminLocators.rmaAcceptmsg).toBeVisible();
-        await expect(this.rmaAdminLocators.acceptStatus).toBeVisible();
+        await this.rmaAdminPage.view.first().click();
+        await this.rmaAdminPage.status.selectOption("2");
+        await this.rmaAdminPage.save.click();
+        await this.rmaAdminPage.agreeButton.click();
+        await expect(this.rmaAdminPage.rmaAcceptmsg).toBeVisible();
+        await expect(this.rmaAdminPage.acceptStatus).toBeVisible();
         await this.page.waitForLoadState("networkidle");
-        await this.rmaAdminLocators.status.selectOption("5");
-        await this.rmaAdminLocators.save.click();
-        await this.rmaAdminLocators.agreeButton.click();
-        await expect(this.rmaAdminLocators.receivedPack).toBeVisible();
+        await this.rmaAdminPage.status.selectOption("5");
+        await this.rmaAdminPage.save.click();
+        await this.rmaAdminPage.agreeButton.click();
+        await expect(this.rmaAdminPage.receivedPack).toBeVisible();
     }
 
     async adminDeclinedRMA() {
         await this.page.goto("admin/sales/rma/requests");
-        await this.rmaAdminLocators.view.first().click();
-        await this.rmaAdminLocators.status.selectOption("7");
-        await this.rmaAdminLocators.save.click();
-        await this.rmaAdminLocators.agreeButton.click();
-        await expect(this.rmaAdminLocators.rmaAcceptmsg).toBeVisible();
-        await expect(this.rmaAdminLocators.rmaDeclined).toBeVisible();
+        await this.rmaAdminPage.view.first().click();
+        await this.rmaAdminPage.status.selectOption("7");
+        await this.rmaAdminPage.save.click();
+        await this.rmaAdminPage.agreeButton.click();
+        await expect(this.rmaAdminPage.rmaAcceptmsg).toBeVisible();
+        await expect(this.rmaAdminPage.rmaDeclined).toBeVisible();
     }
 
     async adminCraeteRMAReason() {
         await this.page.goto("admin/sales/rma/reasons");
-        await this.rmaAdminLocators.createRMAReason.click();
-        await this.rmaAdminLocators.reasonTitle.fill("Broken Product");
-        await this.rmaAdminLocators.reasonStatus.check();
-        await this.rmaAdminLocators.position.fill("1");
-        await this.rmaAdminLocators.reasonType.selectOption("return");
-        await this.rmaAdminLocators.saveReason.click();
-        await expect(this.rmaAdminLocators.saveReasonSuccess).toBeVisible();
+        await this.rmaAdminPage.createRMAReason.click();
+        await this.rmaAdminPage.reasonTitle.fill("Broken Product");
+        await this.rmaAdminPage.reasonStatus.check();
+        await this.rmaAdminPage.position.fill("1");
+        await this.rmaAdminPage.reasonType.selectOption("return");
+        await this.rmaAdminPage.saveReason.click();
+        await expect(this.rmaAdminPage.saveReasonSuccess).toBeVisible();
     }
 
     async adminCraeteRMARules() {
         await this.page.goto("admin/sales/rma/rules");
-        await this.rmaAdminLocators.rmaRulesCreate.click();
+        await this.rmaAdminPage.rmaRulesCreate.click();
         await this.page.waitForLoadState("networkidle");
-        await this.rmaAdminLocators.ruleTitle.fill("Test Rule");
-        await this.rmaAdminLocators.reasonStatus.check();
-        await this.rmaAdminLocators.ruleDescription.fill(
+        await this.rmaAdminPage.ruleTitle.fill("Test Rule");
+        await this.rmaAdminPage.reasonStatus.check();
+        await this.rmaAdminPage.ruleDescription.fill(
             "Test Rule Description",
         );
-        await this.rmaAdminLocators.returnPeriod.fill("15");
-        await this.rmaAdminLocators.saveRule.click();
-        await expect(this.rmaAdminLocators.ruleSuccessMSG).toBeVisible();
+        await this.rmaAdminPage.returnPeriod.fill("15");
+        await this.rmaAdminPage.saveRule.click();
+        await expect(this.rmaAdminPage.ruleSuccessMSG).toBeVisible();
     }
 
     async adminCraeteRMAStatus() {
         await this.page.goto("admin/sales/rma/rma-status");
-        await this.rmaAdminLocators.createRMAStatus.click();
+        await this.rmaAdminPage.createRMAStatus.click();
         await this.page.waitForLoadState("networkidle");
-        await this.rmaAdminLocators.rmaStatusTitle.fill("RMA Status");
-        await this.rmaAdminLocators.reasonStatus.click();
-        await this.rmaAdminLocators.saveStatus.click();
-        await expect(this.rmaAdminLocators.statusSuccess).toBeVisible();
+        await this.rmaAdminPage.rmaStatusTitle.fill("RMA Status");
+        await this.rmaAdminPage.reasonStatus.click();
+        await this.rmaAdminPage.saveStatus.click();
+        await expect(this.rmaAdminPage.statusSuccess).toBeVisible();
     }
 }

@@ -1,9 +1,7 @@
 import { Locator, Page } from "@playwright/test";
 
-export class ProductAdminLocators {
+export class ProductEditPage {
     constructor(private page: Page) {}
-
-    /** ---------------- PRODUCT ---------------- */
 
     get createProductButton() {
         return this.page.getByRole("button", { name: " Create Product " });

@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 
-export class RMAAdminLocators {
+export class RMAAdminPage {
     constructor(private page: Page) {}
 
     get view() {

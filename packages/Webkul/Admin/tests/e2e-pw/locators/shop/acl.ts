@@ -1,8 +1,8 @@
 import { Locator, Page } from "@playwright/test";
 
-export class CheckoutShopLocators {
+export class ACLShopPage {
     constructor(private page: Page) {}
-
+    
     get searchInput() {
         return this.page.getByRole("textbox", {
             name: "Search products here",
@@ -15,7 +15,7 @@ export class CheckoutShopLocators {
         );
     }
 
-    get ShoppingCartIcon() {
+    get shoppingCartIcon() {
         return this.page.locator("(//span[contains(@class,'icon-cart')])[1]");
     }
 
@@ -23,58 +23,10 @@ export class CheckoutShopLocators {
         return this.page.getByText("Item Added Successfully");
     }
 
-    get ContinueButton() {
+    get continueButton() {
         return this.page.locator(
             '(//a[contains(.," Continue to Checkout ")])[1]',
         );
-    }
-
-    get companyName() {
-        return this.page.getByRole("textbox", { name: "Company Name" });
-    }
-
-    get firstName() {
-        return this.page.getByRole("textbox", { name: "First Name" });
-    }
-
-    get lastName() {
-        return this.page.getByRole("textbox", { name: "Last Name" });
-    }
-
-    get shippingEmail() {
-        return this.page.getByRole("textbox", { name: "email@example.com" });
-    }
-
-    get streetAddress() {
-        return this.page.getByRole("textbox", { name: "Street Address" });
-    }
-
-    get addNewAddress() {
-        return this.page.getByText("Add new address");
-    }
-
-    get billingCountry() {
-        return this.page.locator('select[name="billing\\.country"]');
-    }
-
-    get billingState() {
-        return this.page.locator('select[name="billing\\.state"]');
-    }
-
-    get billingCity() {
-        return this.page.getByRole("textbox", { name: "City" });
-    }
-
-    get billingZip() {
-        return this.page.getByRole("textbox", { name: "Zip/Postcode" });
-    }
-
-    get billingTelephone() {
-        return this.page.getByRole("textbox", { name: "Telephone" });
-    }
-
-    get clickSaveAddressButton() {
-        return this.page.getByRole("button", { name: "Save" });
     }
 
     get clickProcessButton() {
@@ -101,7 +53,7 @@ export class CheckoutShopLocators {
         return this.page.getByRole("button", { name: "Place Order" });
     }
 
-    get CheckoutsuccessPage() {
+    get checkoutsuccessPage() {
         return this.page.locator("text=Thank you for your order!");
     }
 }
