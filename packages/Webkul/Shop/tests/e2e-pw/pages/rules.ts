@@ -1,38 +1,38 @@
 import { expect, Page } from "@playwright/test";
-import { RulesAdminLocators } from "../locators/admin/rules-admin";
+import { RulesEditPage } from "../locators/admin/RulesEditPage";
 import { generateName } from "../utils/faker";
-import { RulesShopLocators } from "../locators/shop/rules-shop";
+import { RulesShopPage } from "../locators/shop/RulesShopPage";
 
 export class CreateRules {
     readonly page: Page;
-    readonly rulesAdminLocators: RulesAdminLocators;
-    readonly rulesShopLocators: RulesShopLocators;
+    readonly rulesEditPage: RulesEditPage;
+    readonly rulesShopPage: RulesShopPage;
     readonly couponCode: string;
 
     constructor(page: Page) {
         this.page = page;
-        this.rulesAdminLocators = new RulesAdminLocators(page);
-        this.rulesShopLocators = new RulesShopLocators(page);
+        this.rulesEditPage = new RulesEditPage(page);
+        this.rulesShopPage = new RulesShopPage(page);
         this.couponCode = `CP-${Date.now()}`;
     }
 
     private async fillGeneralCartDetails() {
-        await this.rulesAdminLocators.createCartRuleButton.waitFor();
-        await this.rulesAdminLocators.createCartRuleButton.click();
-        await this.rulesAdminLocators.cartRuleForm.waitFor();
-        await this.rulesAdminLocators.nameInput.fill(generateName());
-        await this.rulesAdminLocators.descriptionInput.fill(generateName());
-        await this.rulesAdminLocators.couponTypeSelect.selectOption("1");
-        await this.rulesAdminLocators.autoGenerationSelect.selectOption("0");
-        await this.rulesAdminLocators.couponCodeInput.fill(this.couponCode);
-        await this.rulesAdminLocators.usesPerCouponInput.fill("100");
-        await this.rulesAdminLocators.usesPerCustomerInput.fill("100");
+        await this.rulesEditPage.createCartRuleButton.waitFor();
+        await this.rulesEditPage.createCartRuleButton.click();
+        await this.rulesEditPage.cartRuleForm.waitFor();
+        await this.rulesEditPage.nameInput.fill(generateName());
+        await this.rulesEditPage.descriptionInput.fill(generateName());
+        await this.rulesEditPage.couponTypeSelect.selectOption("1");
+        await this.rulesEditPage.autoGenerationSelect.selectOption("0");
+        await this.rulesEditPage.couponCodeInput.fill(this.couponCode);
+        await this.rulesEditPage.usesPerCouponInput.fill("100");
+        await this.rulesEditPage.usesPerCustomerInput.fill("100");
     }
 
     private async fillGeneralCatalogDetails() {
-        await this.rulesAdminLocators.createCatalogRuleButton.click();
-        await this.rulesAdminLocators.nameInput.fill(generateName());
-        await this.rulesAdminLocators.descriptionInput.fill(generateName());
+        await this.rulesEditPage.createCatalogRuleButton.click();
+        await this.rulesEditPage.nameInput.fill(generateName());
+        await this.rulesEditPage.descriptionInput.fill(generateName());
     }
 
     public async addCondition({
@@ -48,18 +48,18 @@ export class CreateRules {
         optionSelect?: string;
         checkboxSelect?: string;
     }) {
-        await this.rulesAdminLocators.addConditionButton.click();
-        await this.rulesAdminLocators.conditionAttributeSelect.waitFor();
-        await this.rulesAdminLocators.conditionAttributeSelect.selectOption(attribute);
-        await this.rulesAdminLocators.conditionOperatorSelect.selectOption(operator);
+        await this.rulesEditPage.addConditionButton.click();
+        await this.rulesEditPage.conditionAttributeSelect.waitFor();
+        await this.rulesEditPage.conditionAttributeSelect.selectOption(attribute);
+        await this.rulesEditPage.conditionOperatorSelect.selectOption(operator);
 
         if (optionSelect) {
-            await this.rulesAdminLocators.selectCodintionOption.waitFor();
-            await this.rulesAdminLocators.selectCodintionOption.selectOption(
+            await this.rulesEditPage.selectCodintionOption.waitFor();
+            await this.rulesEditPage.selectCodintionOption.selectOption(
                 optionSelect,
             );
         } else if (value) {
-            await this.rulesAdminLocators.conditionValueInput.fill(value);
+            await this.rulesEditPage.conditionValueInput.fill(value);
         } else if (checkboxSelect) {
             const label = this.page.locator(
                 `label:has(div:text-is("${checkboxSelect}"))`,
@@ -72,28 +72,28 @@ export class CreateRules {
             }
         }
 
-        await this.rulesAdminLocators.actionTypeSelect.selectOption("by_percent");
-        await this.rulesAdminLocators.discountAmountInput.fill("50");
+        await this.rulesEditPage.actionTypeSelect.selectOption("by_percent");
+        await this.rulesEditPage.discountAmountInput.fill("50");
     }
 
     private async configureSettings() {
-        await this.rulesAdminLocators.sortOrderInput.fill("1");
-        await this.rulesAdminLocators.channelCheckbox.first().click();
-        await this.rulesAdminLocators.customerGroupCheckbox.nth(1).click();
-        await this.rulesAdminLocators.customerGroupCheckbox2.first().click();
-        await this.rulesAdminLocators.statusToggle.first().click();
+        await this.rulesEditPage.sortOrderInput.fill("1");
+        await this.rulesEditPage.channelCheckbox.first().click();
+        await this.rulesEditPage.customerGroupCheckbox.nth(1).click();
+        await this.rulesEditPage.customerGroupCheckbox2.first().click();
+        await this.rulesEditPage.statusToggle.first().click();
     }
 
     public async saveCartRule() {
-        await this.rulesAdminLocators.saveCartRuleButton.click();
-        await expect(this.rulesAdminLocators.successMessage).toContainText(
+        await this.rulesEditPage.saveCartRuleButton.click();
+        await expect(this.rulesEditPage.successMessage).toContainText(
             "Cart rule created successfully",
         );
     }
 
     public async saveCatalogRule() {
-        await this.rulesAdminLocators.catalogRuleButton.click();
-        await expect(this.rulesAdminLocators.successMessage).toContainText(
+        await this.rulesEditPage.catalogRuleButton.click();
+        await expect(this.rulesEditPage.successMessage).toContainText(
             "Catalog rule created successfully",
         );
     }
@@ -113,36 +113,36 @@ export class CreateRules {
     async applyCoupon(incrementTimes?: number) {
         await this.page.goto("");
 
-        await this.rulesShopLocators.searchInput.fill("simple");
-        await this.rulesShopLocators.searchInput.press("Enter");
+        await this.rulesShopPage.searchInput.fill("simple");
+        await this.rulesShopPage.searchInput.press("Enter");
 
-        await this.rulesShopLocators.addToCartButton.first().click();
+        await this.rulesShopPage.addToCartButton.first().click();
         await expect(
-            this.rulesShopLocators.addToCartSuccessMessage.first(),
+            this.rulesShopPage.addToCartSuccessMessage.first(),
         ).toBeVisible();
 
         await this.page.goto("checkout/cart");
 
         if (incrementTimes && incrementTimes > 0) {
             for (let i = 0; i < incrementTimes; i++) {
-                await this.rulesShopLocators.incrementQtyButton.first().click();
+                await this.rulesShopPage.incrementQtyButton.first().click();
             }
 
-            await this.rulesShopLocators.updateCart.click();
-            await expect(this.rulesShopLocators.cartUpdateSuccess.first()).toBeVisible();
+            await this.rulesShopPage.updateCart.click();
+            await expect(this.rulesShopPage.cartUpdateSuccess.first()).toBeVisible();
         }
 
-        await this.rulesShopLocators.applyCouponButton.click();
-        await this.rulesShopLocators.couponInput.first().fill(this.couponCode);
-        await this.rulesShopLocators.applyButton.click();
-        await expect(this.rulesShopLocators.couponSuccessMessage).toBeVisible();
+        await this.rulesShopPage.applyCouponButton.click();
+        await this.rulesShopPage.couponInput.first().fill(this.couponCode);
+        await this.rulesShopPage.applyButton.click();
+        await expect(this.rulesShopPage.couponSuccessMessage).toBeVisible();
     }
 
     async verifyCatalogRule() {
         await this.page.goto("");
 
-        await this.rulesShopLocators.searchInput.fill("simple");
-        await this.rulesShopLocators.searchInput.press("Enter");
+        await this.rulesShopPage.searchInput.fill("simple");
+        await this.rulesShopPage.searchInput.press("Enter");
 
         const actualPrice = 199;
         const expectedDiscountedPrice = `$${(actualPrice * 0.5).toFixed(2)}`;
@@ -159,63 +159,63 @@ export class CreateRules {
     async applyCouponAtCheckout() {
         await this.page.goto("");
 
-        await this.rulesShopLocators.searchInput.fill("simple");
-        await this.rulesShopLocators.searchInput.press("Enter");
-        await this.rulesShopLocators.addToCartButton.first().click();
+        await this.rulesShopPage.searchInput.fill("simple");
+        await this.rulesShopPage.searchInput.press("Enter");
+        await this.rulesShopPage.addToCartButton.first().click();
         await expect(
-            this.rulesShopLocators.addToCartSuccessMessage.first(),
+            this.rulesShopPage.addToCartSuccessMessage.first(),
         ).toBeVisible();
 
-        await this.rulesShopLocators.ShoppingCartIcon.click();
-        await this.rulesShopLocators.ContinueButton.click();
-        await this.rulesShopLocators.companyName.fill("Web");
-        await this.rulesShopLocators.firstName.fill("demo");
-        await this.rulesShopLocators.lastName.fill("guest");
-        await this.rulesShopLocators.shippingEmail.fill("demo@example.com");
-        await this.rulesShopLocators.streetAddress.fill("north street");
-        await this.rulesShopLocators.billingCountry.selectOption({ value: "IN" });
-        await this.rulesShopLocators.billingState.selectOption({ value: "UP" });
-        await this.rulesShopLocators.billingCity.fill("test city");
-        await this.rulesShopLocators.billingZip.fill("123456");
-        await this.rulesShopLocators.billingTelephone.fill("2365432789");
-        await this.rulesShopLocators.clickProcessButton.click();
-        await this.rulesShopLocators.chooseShippingMethod.click();
-        await this.rulesShopLocators.choosePaymentMethod.click();
+        await this.rulesShopPage.ShoppingCartIcon.click();
+        await this.rulesShopPage.ContinueButton.click();
+        await this.rulesShopPage.companyName.fill("Web");
+        await this.rulesShopPage.firstName.fill("demo");
+        await this.rulesShopPage.lastName.fill("guest");
+        await this.rulesShopPage.shippingEmail.fill("demo@example.com");
+        await this.rulesShopPage.streetAddress.fill("north street");
+        await this.rulesShopPage.billingCountry.selectOption({ value: "IN" });
+        await this.rulesShopPage.billingState.selectOption({ value: "UP" });
+        await this.rulesShopPage.billingCity.fill("test city");
+        await this.rulesShopPage.billingZip.fill("123456");
+        await this.rulesShopPage.billingTelephone.fill("2365432789");
+        await this.rulesShopPage.clickProcessButton.click();
+        await this.rulesShopPage.chooseShippingMethod.click();
+        await this.rulesShopPage.choosePaymentMethod.click();
 
-        await this.rulesShopLocators.applyCouponButton.click();
+        await this.rulesShopPage.applyCouponButton.click();
         await this.page.waitForTimeout(1000);
-        await this.rulesShopLocators.couponInput.fill(this.couponCode);
-        await this.rulesShopLocators.applyButton.click();
-        await expect(this.rulesShopLocators.couponSuccessMessage).toBeVisible();
+        await this.rulesShopPage.couponInput.fill(this.couponCode);
+        await this.rulesShopPage.applyButton.click();
+        await expect(this.rulesShopPage.couponSuccessMessage).toBeVisible();
     }
 
     async deleteRuleAndProduct() {
         await this.page.goto("admin/marketing/promotions/cart-rules");
-        await this.rulesAdminLocators.deleteIcon.first().click();
-        await this.rulesAdminLocators.agree.click();
+        await this.rulesEditPage.deleteIcon.first().click();
+        await this.rulesEditPage.agree.click();
         await expect(
             this.page.getByText("Cart Rule Deleted Successfully"),
         ).toBeVisible();
         await this.page.goto("admin/catalog/products");
-        await this.rulesAdminLocators.selectRowBtn.nth(2).click();
-        await this.rulesAdminLocators.selectAction.click();
-        await this.rulesAdminLocators.selectDelete.click();
-        await this.rulesAdminLocators.agree.click();
-        await expect(this.rulesAdminLocators.productDeleteSuccess).toBeVisible();
+        await this.rulesEditPage.selectRowBtn.nth(2).click();
+        await this.rulesEditPage.selectAction.click();
+        await this.rulesEditPage.selectDelete.click();
+        await this.rulesEditPage.agree.click();
+        await expect(this.rulesEditPage.productDeleteSuccess).toBeVisible();
     }
 
     async deleteCatalogRuleAndProduct() {
         await this.page.goto("admin/marketing/promotions/catalog-rules");
-        await this.rulesAdminLocators.deleteIcon.first().click();
-        await this.rulesAdminLocators.agree.click();
+        await this.rulesEditPage.deleteIcon.first().click();
+        await this.rulesEditPage.agree.click();
         await expect(
             this.page.getByText("Catalog Rule Deleted Successfully"),
         ).toBeVisible();
         await this.page.goto("admin/catalog/products");
-        await this.rulesAdminLocators.selectRowBtn.nth(2).click();
-        await this.rulesAdminLocators.selectAction.click();
-        await this.rulesAdminLocators.selectDelete.click();
-        await this.rulesAdminLocators.agree.click();
-        await expect(this.rulesAdminLocators.productDeleteSuccess).toBeVisible();
+        await this.rulesEditPage.selectRowBtn.nth(2).click();
+        await this.rulesEditPage.selectAction.click();
+        await this.rulesEditPage.selectDelete.click();
+        await this.rulesEditPage.agree.click();
+        await expect(this.rulesEditPage.productDeleteSuccess).toBeVisible();
     }
 }

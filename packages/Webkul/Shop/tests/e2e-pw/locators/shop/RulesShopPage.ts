@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 
-export class RulesShopLocators {
+export class RulesShopPage {
     constructor(private page: Page) {}
 
     // Product search & cart

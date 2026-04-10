@@ -1,6 +1,6 @@
 import { Locator, Page } from "@playwright/test";
 
-export class RulesAdminLocators {
+export class RulesEditPage {
     constructor(private page: Page) {}
 
 // Auth

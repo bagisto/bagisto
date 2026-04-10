@@ -1,6 +1,6 @@
 import fs from "fs";
 import { expect, Page } from "@playwright/test";
-import { ProductAdminLocators } from "../locators/admin/product-admin";
+import { ProductEditPage } from "../locators/admin/ProductEditPage";
 import { CommonPage } from "../utils/tinymce";
 import { BaseProduct } from "./types/product.types";
 import {
@@ -13,7 +13,7 @@ export class ProductCreation {
     constructor(
         private page: Page,
 
-        private productAdminLocator = new ProductAdminLocators(page),
+        private productEditPage = new ProductEditPage(page),
 
         private editor = new CommonPage(page),
     ) {}
@@ -45,15 +45,15 @@ export class ProductCreation {
 
     async createConfigProduct(product: BaseProduct) {
         await this.gotoProductPage();
-        await this.productAdminLocator.createProductButton.click();
-        await this.productAdminLocator.selectProductType.selectOption(product.type);
-        await this.productAdminLocator.selectAttribute.selectOption("1");
-        await this.productAdminLocator.productSku.fill(product.sku);
-        await this.productAdminLocator.saveProduct.click();
+        await this.productEditPage.createProductButton.click();
+        await this.productEditPage.selectProductType.selectOption(product.type);
+        await this.productEditPage.selectAttribute.selectOption("1");
+        await this.productEditPage.productSku.fill(product.sku);
+        await this.productEditPage.saveProduct.click();
         await this.handleProductType(product);
         await this.fillCommonDetails(product);
         await this.page.locator('label[for="allow_rma"]').click();
-        await this.productAdminLocator.rmaSelection.selectOption("1");
+        await this.productEditPage.rmaSelection.selectOption("1");
         await this.saveAndVerify();
         this.saveProductToJson(product);
     }
@@ -62,11 +62,11 @@ export class ProductCreation {
      * COMMON STEPS
      */
     private async openCreateModal(type: string, sku: string) {
-        await this.productAdminLocator.createProductButton.click();
-        await this.productAdminLocator.selectProductType.selectOption(type);
-        await this.productAdminLocator.selectAttribute.selectOption("1");
-        await this.productAdminLocator.productSku.fill(sku);
-        await this.productAdminLocator.saveProduct.click();
+        await this.productEditPage.createProductButton.click();
+        await this.productEditPage.selectProductType.selectOption(type);
+        await this.productEditPage.selectAttribute.selectOption("1");
+        await this.productEditPage.productSku.fill(sku);
+        await this.productEditPage.saveProduct.click();
         //         await expect(this.page.locator("#app")).toContainText(
         //     /product created successfully/i
         // );
@@ -78,28 +78,28 @@ export class ProductCreation {
 
     private async fillCommonDetails(product: BaseProduct) {
         await this.page.waitForTimeout(1000);
-        await this.productAdminLocator.productName.fill(product.name);
+        await this.productEditPage.productName.fill(product.name);
         await this.editor.fillInTinymce(
-            this.productAdminLocator.productShortDescription,
+            this.productEditPage.productShortDescription,
             product.shortDescription,
         );
         await this.editor.fillInTinymce(
-            this.productAdminLocator.productDescription,
+            this.productEditPage.productDescription,
             product.description,
         );
     }
 
     private async bundleAddOption(optionType: string, title: string) {
-        await this.productAdminLocator.addOptionButton.first().click();
-        await this.productAdminLocator.addLableInput.fill(title);
-        await this.productAdminLocator.selectType.selectOption({ value: optionType });
-        await this.productAdminLocator.isRequiredCheckbox.selectOption({
+        await this.productEditPage.addOptionButton.first().click();
+        await this.productEditPage.addLableInput.fill(title);
+        await this.productEditPage.selectType.selectOption({ value: optionType });
+        await this.productEditPage.isRequiredCheckbox.selectOption({
             value: "1",
         });
-        await this.productAdminLocator.saveButton.click();
-        await this.productAdminLocator.addProduct.first().click();
-        await this.productAdminLocator.searchByNameInput.click();
-        await this.productAdminLocator.searchByNameInput.fill("simple");
+        await this.productEditPage.saveButton.click();
+        await this.productEditPage.addProduct.first().click();
+        await this.productEditPage.searchByNameInput.click();
+        await this.productEditPage.searchByNameInput.fill("simple");
         await this.page.waitForTimeout(2000);
         const productRowCheck1 = this.page
             .locator("div.flex.justify-between")
@@ -121,7 +121,7 @@ export class ProductCreation {
                 (el as HTMLInputElement).checked = true;
                 el.dispatchEvent(new Event("change", { bubbles: true }));
             });
-        await this.productAdminLocator.addSelectedProductButton.click();
+        await this.productEditPage.addSelectedProductButton.click();
     }
 
     /**
@@ -164,88 +164,88 @@ export class ProductCreation {
 
     private async simple(product: BaseProduct) {
         if (product.price)
-            await this.productAdminLocator.productPrice.fill(product.price.toString());
+            await this.productEditPage.productPrice.fill(product.price.toString());
 
         if (product.weight)
-            await this.productAdminLocator.productWeight.fill(product.weight.toString());
+            await this.productEditPage.productWeight.fill(product.weight.toString());
 
         if (product.inventory)
-            await this.productAdminLocator.productInventory
+            await this.productEditPage.productInventory
                 .first()
                 .fill(product.inventory.toString());
         await this.page.locator('label[for="allow_rma"]').click();
-        await this.productAdminLocator.rmaSelection.selectOption("1");
+        await this.productEditPage.rmaSelection.selectOption("1");
     }
 
     /**
      * Configurable Product
      */
     private async configurable(product: BaseProduct) {
-        await this.productAdminLocator.removeRed.click();
-        await this.productAdminLocator.removeGreen.click();
-        await this.productAdminLocator.removeYellow.click();
-        await this.productAdminLocator.iconCross.click();
-        await this.productAdminLocator.iconCross.click();
-        await this.productAdminLocator.saveProduct.click();
-        await this.productAdminLocator.addVariantButton.click();
-        await this.productAdminLocator.variantColorSelect.selectOption("1");
-        await this.productAdminLocator.variantSizeSelect.selectOption("6");
-        await this.productAdminLocator.addVariantConfirmButton.click();
-        await this.productAdminLocator.variantNameInput.fill(generateName());
-        await this.productAdminLocator.variantPriceInput.fill("100");
-        await this.productAdminLocator.variantWeightInput.fill("10");
-        await this.productAdminLocator.variantInventoryInput.fill("10");
-        const skuValue = await this.productAdminLocator.variantSkuInput.inputValue();
-        await this.productAdminLocator.variantSaveButton.click();
+        await this.productEditPage.removeRed.click();
+        await this.productEditPage.removeGreen.click();
+        await this.productEditPage.removeYellow.click();
+        await this.productEditPage.iconCross.click();
+        await this.productEditPage.iconCross.click();
+        await this.productEditPage.saveProduct.click();
+        await this.productEditPage.addVariantButton.click();
+        await this.productEditPage.variantColorSelect.selectOption("1");
+        await this.productEditPage.variantSizeSelect.selectOption("6");
+        await this.productEditPage.addVariantConfirmButton.click();
+        await this.productEditPage.variantNameInput.fill(generateName());
+        await this.productEditPage.variantPriceInput.fill("100");
+        await this.productEditPage.variantWeightInput.fill("10");
+        await this.productEditPage.variantInventoryInput.fill("10");
+        const skuValue = await this.productEditPage.variantSkuInput.inputValue();
+        await this.productEditPage.variantSaveButton.click();
         await expect(this.page.getByText(skuValue)).toBeVisible();
 
         /**
          * edit config products
          */
-        await this.productAdminLocator.firstCheckbox.click();
-        await this.productAdminLocator.selectActionButton.click();
-        await this.productAdminLocator.editPricesOption.click();
-        await this.productAdminLocator.confirmationText.click();
-        await this.productAdminLocator.agreeButton.click();
-        await this.productAdminLocator.editPricesPanel.click();
-        await this.productAdminLocator.bulkPriceInput.click();
-        await this.productAdminLocator.bulkPriceInput.fill("45");
-        await this.productAdminLocator.applyToAllButton.click();
-        await this.productAdminLocator.bulkSaveButton.click();
-        await this.productAdminLocator.firstCheckbox.click();
-        await this.productAdminLocator.selectActionButton.click();
-        await this.productAdminLocator.editInventoriesOption.click();
-        await this.productAdminLocator.confirmationText.click();
-        await this.productAdminLocator.agreeButton.click();
-        await this.productAdminLocator.inventoryInput.click();
-        await this.productAdminLocator.inventoryInput.fill("100");
-        await this.productAdminLocator.applyToAllButton.click();
-        await this.productAdminLocator.saveButton.click();
+        await this.productEditPage.firstCheckbox.click();
+        await this.productEditPage.selectActionButton.click();
+        await this.productEditPage.editPricesOption.click();
+        await this.productEditPage.confirmationText.click();
+        await this.productEditPage.agreeButton.click();
+        await this.productEditPage.editPricesPanel.click();
+        await this.productEditPage.bulkPriceInput.click();
+        await this.productEditPage.bulkPriceInput.fill("45");
+        await this.productEditPage.applyToAllButton.click();
+        await this.productEditPage.bulkSaveButton.click();
+        await this.productEditPage.firstCheckbox.click();
+        await this.productEditPage.selectActionButton.click();
+        await this.productEditPage.editInventoriesOption.click();
+        await this.productEditPage.confirmationText.click();
+        await this.productEditPage.agreeButton.click();
+        await this.productEditPage.inventoryInput.click();
+        await this.productEditPage.inventoryInput.fill("100");
+        await this.productEditPage.applyToAllButton.click();
+        await this.productEditPage.saveButton.click();
         await this.page.waitForTimeout(1000);
-        await this.productAdminLocator.firstCheckbox.click();
-        await this.productAdminLocator.selectActionButton.click();
-        await this.productAdminLocator.editWeightOption.click();
-        await this.productAdminLocator.confirmationText.click();
-        await this.productAdminLocator.agreeButton.click();
-        await this.productAdminLocator.weightInput.click();
-        await this.productAdminLocator.weightInput.fill("2");
-        await this.productAdminLocator.applyToAllButton.click();
-        await this.productAdminLocator.saveButton.click();
-        await this.productAdminLocator.saveProduct.click();
+        await this.productEditPage.firstCheckbox.click();
+        await this.productEditPage.selectActionButton.click();
+        await this.productEditPage.editWeightOption.click();
+        await this.productEditPage.confirmationText.click();
+        await this.productEditPage.agreeButton.click();
+        await this.productEditPage.weightInput.click();
+        await this.productEditPage.weightInput.fill("2");
+        await this.productEditPage.applyToAllButton.click();
+        await this.productEditPage.saveButton.click();
+        await this.productEditPage.saveProduct.click();
     }
 
     private async grouped(product: BaseProduct) {
         /**
          * Open product selector
          */
-        await this.productAdminLocator.addGroupedProductButton.click();
-        await expect(this.productAdminLocator.selectProductsModalTitle).toBeVisible();
+        await this.productEditPage.addGroupedProductButton.click();
+        await expect(this.productEditPage.selectProductsModalTitle).toBeVisible();
 
         /**
          * Search Product & Select
          */
-        await this.productAdminLocator.searchByNameInput.click();
-        await this.productAdminLocator.searchByNameInput.fill("simple");
+        await this.productEditPage.searchByNameInput.click();
+        await this.productEditPage.searchByNameInput.fill("simple");
         const productRow = this.page
             .locator("div.flex.justify-between")
             .filter({ hasText: /Simple-\d+/ })
@@ -262,12 +262,12 @@ export class ProductCreation {
             (el as HTMLInputElement).checked = true;
             el.dispatchEvent(new Event("change", { bubbles: true }));
         });
-        await this.productAdminLocator.addSelectedProductButton.click();
+        await this.productEditPage.addSelectedProductButton.click();
         await this.page.locator('label[for="allow_rma"]').click();
-        await this.productAdminLocator.rmaSelection.selectOption("1");
+        await this.productEditPage.rmaSelection.selectOption("1");
 
         await expect(
-            this.productAdminLocator.groupedProductVisibleByName(/simple-\d+/i).first(),
+            this.productEditPage.groupedProductVisibleByName(/simple-\d+/i).first(),
         ).toBeVisible();
     }
 
@@ -276,45 +276,45 @@ export class ProductCreation {
      */
     private async virtual(product: BaseProduct) {
         if (product.price)
-            await this.productAdminLocator.productPrice.fill(product.price.toString());
+            await this.productEditPage.productPrice.fill(product.price.toString());
 
-        await this.productAdminLocator.productInventory.first().fill("100");
+        await this.productEditPage.productInventory.first().fill("100");
     }
 
     /**
      * Downloadable Products
      */
     async addDownloadableLink(filePath: string, title: string, url: string) {
-        await this.productAdminLocator.addLinkButton.click();
+        await this.productEditPage.addLinkButton.click();
         await this.page.waitForTimeout(1000);
-        await this.productAdminLocator.linkTitleInput.fill(title);
-        const linkTitle = await this.productAdminLocator.linkTitleInput.inputValue();
-        await this.productAdminLocator.linkPriceInput.fill("100");
-        await this.productAdminLocator.linkDownloadsInput.fill("2");
-        await this.productAdminLocator.linkTypeSelect.selectOption("url");
-        await this.productAdminLocator.linkFileInput.fill(url);
-        await this.productAdminLocator.sampleTypeSelect.selectOption("url");
-        await this.productAdminLocator.sampleUrlInput.fill(url);
-        await this.productAdminLocator.linkSaveButton.click();
-        await this.productAdminLocator.saveButton.click();
+        await this.productEditPage.linkTitleInput.fill(title);
+        const linkTitle = await this.productEditPage.linkTitleInput.inputValue();
+        await this.productEditPage.linkPriceInput.fill("100");
+        await this.productEditPage.linkDownloadsInput.fill("2");
+        await this.productEditPage.linkTypeSelect.selectOption("url");
+        await this.productEditPage.linkFileInput.fill(url);
+        await this.productEditPage.sampleTypeSelect.selectOption("url");
+        await this.productEditPage.sampleUrlInput.fill(url);
+        await this.productEditPage.linkSaveButton.click();
+        await this.productEditPage.saveButton.click();
         await expect(this.page.getByText(linkTitle)).toBeVisible();
     }
 
     async addDownloadableSample(title: string, url: string) {
-        await this.productAdminLocator.addSampleButton.click();
+        await this.productEditPage.addSampleButton.click();
         await this.page.waitForTimeout(1000);
-        await this.productAdminLocator.sampleTitleInput.fill(title);
-        const sampleTitle = await this.productAdminLocator.sampleTitleInput.inputValue();
-        await this.productAdminLocator.sampleTypeDropdown.selectOption("url");
-        await this.productAdminLocator.sampleUrlField.fill(url);
-        await this.productAdminLocator.linkSaveButton.click();
-        await this.productAdminLocator.saveButton.click();
+        await this.productEditPage.sampleTitleInput.fill(title);
+        const sampleTitle = await this.productEditPage.sampleTitleInput.inputValue();
+        await this.productEditPage.sampleTypeDropdown.selectOption("url");
+        await this.productEditPage.sampleUrlField.fill(url);
+        await this.productEditPage.linkSaveButton.click();
+        await this.productEditPage.saveButton.click();
         await expect(this.page.getByText(sampleTitle)).toBeVisible();
     }
 
     private async downloadable(product: BaseProduct) {
         if (product.price)
-            await this.productAdminLocator.productPrice.fill(product.price.toString());
+            await this.productEditPage.productPrice.fill(product.price.toString());
         await this.addDownloadableLink(
             "../data/images/1.webp",
             generateName(),
@@ -343,11 +343,11 @@ export class ProductCreation {
             .slice(0, 19)
             .replace("T", " ");
 
-        await this.productAdminLocator.bookingLocationInput.fill(generateLocation());
-        await this.productAdminLocator.bookingAvailableFromInput.fill(
+        await this.productEditPage.bookingLocationInput.fill(generateLocation());
+        await this.productEditPage.bookingAvailableFromInput.fill(
             formattedAvailableFromDate,
         );
-        await this.productAdminLocator.bookingAvailableToInput.fill(
+        await this.productEditPage.bookingAvailableToInput.fill(
             formattedAvailableToDate,
         );
         await this.page.locator('input[name="booking[qty]"]').fill("2");
@@ -374,7 +374,7 @@ export class ProductCreation {
         await this.page
             .getByRole("button", { name: "Save", exact: true })
             .click();
-        await this.productAdminLocator.productPrice.fill("199");
+        await this.productEditPage.productPrice.fill("199");
     }
 
     private async bundle(product: BaseProduct) {
@@ -392,15 +392,15 @@ export class ProductCreation {
         //  */
         // await this.bundleAddOption("multiselect", "Bundle Option 3");
         await this.page.locator('label[for="allow_rma"]').click();
-        await this.productAdminLocator.rmaSelection.selectOption("1");
+        await this.productEditPage.rmaSelection.selectOption("1");
     }
 
     /**
      * Save & Verify The Product Creation
      */
     private async saveAndVerify() {
-        await this.productAdminLocator.saveProduct.click();
-        await expect(this.productAdminLocator.updateProductSuccessToast).toBeVisible();
+        await this.productEditPage.saveProduct.click();
+        await expect(this.productEditPage.updateProductSuccessToast).toBeVisible();
     }
 
     /**
