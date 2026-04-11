@@ -131,6 +131,12 @@ class Booking extends AbstractType
 
     public function haveSufficientQuantity(int $qty): bool
     {
+        $maxPurchaseQty = $this->getMaximumPurchaseQuantity();
+
+        if ($maxPurchaseQty > 0 && $qty > $maxPurchaseQty) {
+            return false;
+        }
+
         return true;
     }
 

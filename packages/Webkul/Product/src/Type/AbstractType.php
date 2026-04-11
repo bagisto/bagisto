@@ -830,6 +830,30 @@ abstract class AbstractType
     }
 
     /**
+     * Maximum units of this product allowed per cart line. Zero means no catalog limit.
+     *
+     * Resolved from product attributes when present in the attribute family (e.g. max_purchase_qty).
+     */
+    public function getMaximumPurchaseQuantity(): int
+    {
+        foreach (['max_purchase_qty', 'max_sale_qty'] as $code) {
+            $value = $this->product->{$code} ?? null;
+
+            if ($value === null || $value === '') {
+                continue;
+            }
+
+            $max = (int) $value;
+
+            if ($max > 0) {
+                return $max;
+            }
+        }
+
+        return 0;
+    }
+
+    /**
      * Get request quantity.
      *
      * @param  array  $data

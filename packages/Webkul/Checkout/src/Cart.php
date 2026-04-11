@@ -361,9 +361,19 @@ class Cart
                 throw new \Exception(trans('shop::app.checkout.cart.illegal'));
             }
 
+            $maxPurchaseQty = $item->getTypeInstance()->getMaximumPurchaseQuantity();
+
+            if ($maxPurchaseQty > 0 && $quantity > $maxPurchaseQty) {
+                throw new \Exception(trans('shop::app.checkout.cart.inventory-warning'));
+            }
+
+            $previousQuantity = $item->quantity;
+
             $item->quantity = $quantity;
 
             if (! $this->isItemHaveQuantity($item)) {
+                $item->quantity = $previousQuantity;
+
                 throw new \Exception(trans('shop::app.checkout.cart.inventory-warning'));
             }
 
