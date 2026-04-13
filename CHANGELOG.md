@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.17 (13th of April 2026)** - *Release*
 
 * Added support for Romanian language.
 
