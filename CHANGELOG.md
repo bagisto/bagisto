@@ -18,13 +18,13 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed the error message shown when deleting a customer with pending orders. The previous translation key showed an unhelpful "Orders is Pending"; replaced with a dedicated `delete-pending-order-error` key and a clearer message across all locales.
 
-* #11225 - Fixed incorrect translation key for coupon usage limit exceeded message.
+* #11225 [fixed] - Fixed incorrect translation key for coupon usage limit exceeded message.
 
-* #10967 - Fixed shipment options not showing when adding VAT ID with unsupported country during checkout.
+* #10967 [fixed] - Fixed shipment options not showing when adding VAT ID with unsupported country during checkout.
 
-* #10846 - Fixed wishlist quantity not updating when moving the same product from cart to wishlist.
+* #10846 [fixed] - Fixed wishlist quantity not updating when moving the same product from cart to wishlist.
 
-* #11223 - Fixed `explode()` null deprecation in `AppServiceProvider` when `APP_DEBUG_ALLOWED_IPS` is unset.
+* #11223 [fixed] - Fixed `explode()` null deprecation in `AppServiceProvider` when `APP_DEBUG_ALLOWED_IPS` is unset.
 
 ## **v2.3.16 (23rd of March 2026)** - *Release*
 
