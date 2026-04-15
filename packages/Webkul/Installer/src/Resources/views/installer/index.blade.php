@@ -489,6 +489,7 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-connection')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-connection')"
+                                        @change="$refs.envDatabase.setFieldValue('db_port', $event.target.value === 'pgsql' ? '5432' : '3306')"
                                     >
                                         <option
                                             value="mysql"
