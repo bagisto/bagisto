@@ -631,11 +631,15 @@ class Booking
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
                 'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp($timestamps[0])->isoFormat('Do MMM, YYYY h:mm A'),
+                'option_label' => Carbon::createFromTimestampUTC((int) $timestamps[0])
+                    ->setTimezone(config('app.timezone'))
+                    ->isoFormat('Do MMM, YYYY h:mm A'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-till'),
                 'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp($timestamps[1])->isoFormat('Do MMM, YYYY h:mm A'),
+                'option_label' => Carbon::createFromTimestampUTC((int) $timestamps[1])
+                    ->setTimezone(config('app.timezone'))
+                    ->isoFormat('Do MMM, YYYY h:mm A'),
             ],
         ];
 
@@ -661,11 +665,15 @@ class Booking
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
                 'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp($timestamps[0])->format('d F, Y h:i A'),
+                'option_label' => Carbon::createFromTimestampUTC((int) $timestamps[0])
+                    ->setTimezone(config('app.timezone'))
+                    ->format('d F, Y h:i A'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-till'),
                 'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp($timestamps[1])->format('d F, Y h:i A'),
+                'option_label' => Carbon::createFromTimestampUTC((int) $timestamps[1])
+                    ->setTimezone(config('app.timezone'))
+                    ->format('d F, Y h:i A'),
             ],
         ];
     }

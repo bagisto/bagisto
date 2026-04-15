@@ -71,7 +71,7 @@ class BookingDataGrid extends DataGrid
             'filterable' => true,
             'filterable_type' => 'datetime_range',
             'closure' => function ($value) {
-                return Carbon::createFromTimestamp($value->from)->format('d M, Y H:iA');
+                return Carbon::createFromTimestamp($value->from)->format('d M, Y h:i A');
             },
         ]);
 
@@ -84,7 +84,7 @@ class BookingDataGrid extends DataGrid
             'filterable' => true,
             'filterable_type' => 'datetime_range',
             'closure' => function ($value) {
-                return Carbon::createFromTimestamp($value->to)->format('d M, Y H:iA');
+                return Carbon::createFromTimestamp($value->to)->format('d M, Y h:i A');
             },
         ]);
 

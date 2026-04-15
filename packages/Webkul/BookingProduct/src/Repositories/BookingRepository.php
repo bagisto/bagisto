@@ -55,6 +55,9 @@ class BookingRepository extends Repository
                 $to = Carbon::createFromTimeString($bookingItem['date_to'].' 23:59:59')->getTimestamp();
             }
 
+            $from = is_numeric($from) ? (int) $from : null;
+            $to = is_numeric($to) ? (int) $to : null;
+
             $booking = parent::create([
                 'qty' => $item->qty_ordered,
                 'from' => $from,

@@ -53,9 +53,13 @@ class BookingController extends Controller
 
         $bookings = $this->bookingRepository->getBookings([Carbon::parse($startDate)->timestamp, Carbon::parse($endDate)->timestamp])
             ->map(function ($booking) {
-                $booking['start'] = Carbon::createFromTimestamp($booking->start)->format('Y-m-d h:i A');
+                $booking['start'] = Carbon::createFromTimestampUTC($booking->start)
+                    ->setTimezone(config('app.timezone'))
+                    ->format('Y-m-d h:i A');
 
-                $booking['end'] = Carbon::createFromTimestamp($booking->end)->format('Y-m-d h:i A');
+                $booking['end'] = Carbon::createFromTimestampUTC($booking->end)
+                    ->setTimezone(config('app.timezone'))
+                    ->format('Y-m-d h:i A');
 
                 $booking->total = core()->formatBasePrice($booking->total);
 
