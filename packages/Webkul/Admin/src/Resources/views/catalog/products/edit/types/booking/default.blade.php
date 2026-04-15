@@ -631,9 +631,14 @@
 
                 slotType() {
                     if (this.default_booking.booking_type == 'one') {
-                        this.slots['one'] = [];
-                    } else {
                         this.slots['many'] = [[], [], [], [], [], [], []];
+
+                        this.selectedStatus = [];
+
+                        this.default_booking.duration = null;
+                        this.default_booking.break_time = null;
+                    } else {
+                        this.slots['one'] = [];
                     }
 
                     this.optionRowCount = 0;
