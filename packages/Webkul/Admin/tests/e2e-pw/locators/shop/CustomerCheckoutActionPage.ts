@@ -1,8 +1,8 @@
-import { Locator, Page } from "@playwright/test";
+import { Page } from "@playwright/test";
 
-export class ACLShopPage {
+export class CustomerCheckoutActionPage {
     constructor(private page: Page) {}
-    
+
     get searchInput() {
         return this.page.getByRole("textbox", {
             name: "Search products here",
@@ -55,5 +55,53 @@ export class ACLShopPage {
 
     get checkoutsuccessPage() {
         return this.page.locator("text=Thank you for your order!");
+    }
+
+    get companyName() {
+        return this.page.getByRole("textbox", { name: "Company Name" });
+    }
+
+    get firstName() {
+        return this.page.getByRole("textbox", { name: "First Name" });
+    }
+
+    get lastName() {
+        return this.page.getByRole("textbox", { name: "Last Name" });
+    }
+
+    get shippingEmail() {
+        return this.page.getByRole("textbox", { name: "email@example.com" });
+    }
+
+    get streetAddress() {
+        return this.page.getByRole("textbox", { name: "Street Address" });
+    }
+
+    get addNewAddress() {
+        return this.page.getByText("Add new address");
+    }
+
+    get billingCountry() {
+        return this.page.locator('select[name="billing\\.country"]');
+    }
+
+    get billingState() {
+        return this.page.locator('select[name="billing\\.state"]');
+    }
+
+    get billingCity() {
+        return this.page.getByRole("textbox", { name: "City" });
+    }
+
+    get billingZip() {
+        return this.page.getByRole("textbox", { name: "Zip/Postcode" });
+    }
+
+    get billingTelephone() {
+        return this.page.getByRole("textbox", { name: "Telephone" });
+    }
+
+    get clickSaveAddressButton() {
+        return this.page.getByRole("button", { name: "Save" });
     }
 }

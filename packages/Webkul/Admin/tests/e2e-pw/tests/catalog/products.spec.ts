@@ -591,6 +591,7 @@ async function createDownloadableProduct(adminPage) {
     /**
      * Saving the Downloadable Link.
      */
+    await adminPage.waitForTimeout(1000);
     await adminPage.getByText("Link Save").click();
     await adminPage.getByRole("button", { name: "Save", exact: true }).click();
     await adminPage.waitForLoadState("networkidle");
@@ -611,6 +612,7 @@ async function createDownloadableProduct(adminPage) {
     /**
      * Saving the Downloadable Sample.
      */
+    await adminPage.waitForTimeout(1000);
     await adminPage.getByText("Link Save").click();
     await adminPage.getByRole("button", { name: "Save", exact: true }).click();
     await adminPage.waitForLoadState("networkidle");

@@ -1,6 +1,4 @@
 import { Page, expect } from "@playwright/test";
-import { ACLAdminPage } from "../locators/admin/acl";
-import { ACLShopPage } from "../locators/shop/acl";
 import { loginAsCustomer, addAddress } from "../utils/customer";
 import {
     generateFirstName,
@@ -16,6 +14,37 @@ import {
     generatePhoneNumber,
 } from "../utils/faker";
 import { fillInTinymce } from "../utils/tinymce";
+
+import { AdminSessionPage } from "../locators/admin/AdminSessionPage";
+import { ProductActionPage } from "../locators/admin/catalog/ProductActionPage";
+import { OrderActionPage } from "../locators/admin/sales/OrderActionPage";
+import { RoleActionPage } from "../locators/admin/settings/RoleActionPage";
+import { UserActionPage } from "../locators/admin/settings/UserActionPage";
+import { CategoryActionPage } from "../locators/admin/catalog/CategoryActionPage";
+import { AttributeActionPage } from "../locators/admin/catalog/AttributeActionPage";
+import { FamilyActionPage } from "../locators/admin/catalog/FamilyActionpage";
+import { CustomerActionPage } from "../locators/admin/customers/CustomerActionPage";
+import { GroupActionPage } from "../locators/admin/customers/GroupActionPage";
+import { CMSActionPage } from "../locators/admin/cms/CMSActionPage";
+import { CartRuleActionPage } from "../locators/admin/marketing/promotions/CartRuleActionPage";
+import { CatalogRuleActionPage } from "../locators/admin/marketing/promotions/CatalogRuleActionPage";
+import { EmailTemplateActionPage } from "../locators/admin/marketing/communication/EmailTemplateActionPage";
+import { EventActionPage } from "../locators/admin/marketing/communication/EventActionPage";
+import { CampaignActionPage } from "../locators/admin/marketing/communication/CampaignActionPage";
+import { URLRewriteActionPage } from "../locators/admin/marketing/search-seo/URLRewriteActionPage";
+import { SearchTermActionPage } from "../locators/admin/marketing/search-seo/SearchTermActionPage";
+import { SearchSynonymsActionPage } from "../locators/admin/marketing/search-seo/SearchSynonymsActionPage";
+import { SiteMapActionPage } from "../locators/admin/marketing/search-seo/SiteMapAction";
+import { LocaleActionPage } from "../locators/admin/settings/LocaleActionPage";
+import { CurrencyActionPage } from "../locators/admin/settings/CurrencyActionPage";
+import { ExchangeRateActionPage } from "../locators/admin/settings/ExchangeRateActionPage";
+import { InventorySourceActionPage } from "../locators/admin/settings/InventorySourceActionPage";
+import { ChannelActionPage } from "../locators/admin/settings/ChannelActionPage";
+import { ThemeActionPage } from "../locators/admin/settings/ThemeActionPage";
+import { TaxRateActionPage } from "../locators/admin/settings/TaxRateActionPage";
+import { TaxCategoryActionPage } from "../locators/admin/settings/TaxCategoryActionPage";
+import { RMAActionPage } from "../locators/admin/sales/RMAActionPage";
+import { CustomerCheckoutActionPage } from "../locators/shop/CustomerCheckoutActionPage";
 
 const ACL_Routes: Record<
     string,
@@ -809,19 +838,80 @@ const ACL_Routes: Record<
 
 export class ACLManagement {
     readonly page: Page;
-    readonly aclAdminPage: ACLAdminPage;
-    readonly aclShopPage: ACLShopPage;
     readonly roleName: string;
     readonly userName: string;
     readonly userEmail: string;
+    readonly adminSessionPage: AdminSessionPage;
+    readonly productActionPage: ProductActionPage;
+    readonly orderActionPage: OrderActionPage;
+    readonly roleActionPage: RoleActionPage;
+    readonly userActionPage: UserActionPage;
+    readonly categoryActionPage: CategoryActionPage;
+    readonly attributeActionPage: AttributeActionPage;
+    readonly familyActionPage: FamilyActionPage;
+    readonly customersActionPage: CustomerActionPage;
+    readonly groupActionPage: GroupActionPage;
+    readonly cmsActionPage: CMSActionPage;
+    readonly cartRuleActionPage: CartRuleActionPage;
+    readonly catalogRuleActionPage: CatalogRuleActionPage;
+    readonly emailTemplateActionPage: EmailTemplateActionPage;
+    readonly eventActionPage: EventActionPage;
+    readonly campaignActionPage: CampaignActionPage;
+    readonly urlRewriteActionPage: URLRewriteActionPage;
+    readonly searchTermActionPage: SearchTermActionPage;
+    readonly searchSynonymsActionPage: SearchSynonymsActionPage;
+    readonly siteMapActionPage: SiteMapActionPage;
+    readonly localeActionPage: LocaleActionPage;
+    readonly currencyActionPage: CurrencyActionPage;
+    readonly exchangeRateActionPage: ExchangeRateActionPage;
+    readonly inventorySourceActionPage: InventorySourceActionPage;
+    readonly channelActionPage: ChannelActionPage;
+    readonly themeActionPage: ThemeActionPage;
+    readonly taxRateActionPage: TaxRateActionPage;
+    readonly taxCategoryActionPage: TaxCategoryActionPage;
+    readonly rmaActionPage: RMAActionPage;
+    readonly customerCheckoutActionPage: CustomerCheckoutActionPage;
 
     constructor(page: Page) {
         this.page = page;
-        this.aclAdminPage = new ACLAdminPage(page);
-        this.aclShopPage = new ACLShopPage(page);
         this.roleName = `role-${Date.now()}`;
         this.userName = `user-${Date.now()}`;
         this.userEmail = `user_${Date.now()}_${Math.floor(Math.random() * 10000)}${generateEmail()}`;
+        this.adminSessionPage = new AdminSessionPage(this.page);
+        this.productActionPage = new ProductActionPage(this.page);
+        this.orderActionPage = new OrderActionPage(this.page);
+        this.roleActionPage = new RoleActionPage(this.page);
+        this.userActionPage = new UserActionPage(this.page);
+        this.categoryActionPage = new CategoryActionPage(this.page);
+        this.attributeActionPage = new AttributeActionPage(this.page);
+        this.familyActionPage = new FamilyActionPage(this.page);
+        this.customersActionPage = new CustomerActionPage(this.page);
+        this.groupActionPage = new GroupActionPage(this.page);
+        this.cmsActionPage = new CMSActionPage(this.page);
+        this.cartRuleActionPage = new CartRuleActionPage(this.page);
+        this.catalogRuleActionPage = new CatalogRuleActionPage(this.page);
+        this.emailTemplateActionPage = new EmailTemplateActionPage(this.page);
+        this.eventActionPage = new EventActionPage(this.page);
+        this.campaignActionPage = new CampaignActionPage(this.page);
+        this.urlRewriteActionPage = new URLRewriteActionPage(this.page);
+        this.searchTermActionPage = new SearchTermActionPage(this.page);
+        this.searchSynonymsActionPage = new SearchSynonymsActionPage(this.page);
+        this.siteMapActionPage = new SiteMapActionPage(this.page);
+        this.localeActionPage = new LocaleActionPage(this.page);
+        this.currencyActionPage = new CurrencyActionPage(this.page);
+        this.exchangeRateActionPage = new ExchangeRateActionPage(this.page);
+        this.inventorySourceActionPage = new InventorySourceActionPage(
+            this.page,
+        );
+        this.channelActionPage = new ChannelActionPage(this.page);
+        this.userActionPage = new UserActionPage(this.page);
+        this.themeActionPage = new ThemeActionPage(this.page);
+        this.taxRateActionPage = new TaxRateActionPage(this.page);
+        this.taxCategoryActionPage = new TaxCategoryActionPage(this.page);
+        this.rmaActionPage = new RMAActionPage(this.page);
+        this.customerCheckoutActionPage = new CustomerCheckoutActionPage(
+            this.page,
+        );
     }
 
     private async togglePermissionCheckbox(
@@ -850,13 +940,13 @@ export class ACLManagement {
 
     async editRolePermission(permissionValues: string[]): Promise<void> {
         await this.page.goto("admin/settings/roles");
-        await this.aclAdminPage.iconEdit.first().click();
+        await this.roleActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
         for (const value of permissionValues) {
             await this.togglePermissionCheckbox(value, false);
         }
-        await this.aclAdminPage.saveRole.click();
-        await expect(this.aclAdminPage.successEditRole).toBeVisible();
+        await this.roleActionPage.saveRole.click();
+        await expect(this.roleActionPage.successEditRole).toBeVisible();
     }
 
     async createRole(
@@ -864,9 +954,9 @@ export class ACLManagement {
         permissions?: string[],
     ): Promise<void> {
         await this.page.goto("admin/settings/roles");
-        await this.aclAdminPage.createRole.click();
-        await this.aclAdminPage.name.fill(this.roleName);
-        await this.aclAdminPage.selectRoleType.selectOption(permissionType);
+        await this.roleActionPage.createRole.click();
+        await this.roleActionPage.name.fill(this.roleName);
+        await this.roleActionPage.selectRoleType.selectOption(permissionType);
         if (
             permissionType === "custom" &&
             permissions &&
@@ -874,49 +964,51 @@ export class ACLManagement {
         ) {
             await this.rolePermission(permissions);
         }
-        await this.aclAdminPage.roleDescription.fill("test description");
-        await this.aclAdminPage.saveRole.click();
-        await expect(this.aclAdminPage.successRole.first()).toBeVisible();
+        await this.roleActionPage.roleDescription.fill("test description");
+        await this.roleActionPage.saveRole.click();
+        await expect(this.roleActionPage.successRole.first()).toBeVisible();
     }
 
     async createUser(): Promise<void> {
         await this.page.goto("admin/settings/users");
-        await this.aclAdminPage.createUser.click();
-        await this.aclAdminPage.name.fill(this.userName);
-        await this.aclAdminPage.selectRole.selectOption({ label: this.roleName });
-        await this.aclAdminPage.userEmail.fill(this.userEmail);
-        await this.aclAdminPage.userPassword.fill("user123");
-        await this.aclAdminPage.confirmPassword.fill("user123");
-        await this.aclAdminPage.statusToggle.click();
-        const toggleInput = await this.aclAdminPage.statusToggle;
+        await this.userActionPage.createUser.click();
+        await this.userActionPage.name.fill(this.userName);
+        await this.userActionPage.selectRole.selectOption({
+            label: this.roleName,
+        });
+        await this.userActionPage.userEmail.fill(this.userEmail);
+        await this.userActionPage.userPassword.fill("user123");
+        await this.userActionPage.confirmPassword.fill("user123");
+        await this.userActionPage.statusToggle.click();
+        const toggleInput = await this.userActionPage.statusToggle;
         await expect(toggleInput).toBeChecked();
-        await this.aclAdminPage.saveUser.click();
-        await expect(this.aclAdminPage.successUser.first()).toBeVisible();
+        await this.userActionPage.saveUser.click();
+        await expect(this.userActionPage.successUser.first()).toBeVisible();
     }
 
     async expectUnauthorizedFor(routes: string[]) {
         for (const route of routes) {
             await this.page.goto(route);
-            await expect(this.aclAdminPage.unauthorized).toBeVisible();
+            await expect(this.userActionPage.unauthorized).toBeVisible();
         }
     }
 
     async expectAuthorizedFor(route: string) {
         await this.page.goto(route);
-        await expect(this.aclAdminPage.unauthorized).not.toBeVisible();
+        await expect(this.userActionPage.unauthorized).not.toBeVisible();
     }
 
     async verfiyAssignedRole(permissions: string[] = []) {
         await this.page.goto("admin/dashboard");
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.profile.first().click();
-        await this.aclAdminPage.logout.click();
+        await this.adminSessionPage.profile.first().click();
+        await this.adminSessionPage.logout.click();
         await this.page.goto("admin/login");
         await this.page.waitForURL("**/admin/login");
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.userEmail.fill(this.userEmail);
-        await this.aclAdminPage.userPassword.fill("user123");
-        await this.aclAdminPage.userPassword.press("Enter");
+        await this.adminSessionPage.userEmail.fill(this.userEmail);
+        await this.adminSessionPage.userPassword.fill("user123");
+        await this.adminSessionPage.userPassword.press("Enter");
         await this.page.waitForLoadState("networkidle");
 
         const sidebar = this.page.locator("div.fixed.top-14 nav");
@@ -956,321 +1048,385 @@ export class ACLManagement {
     }
 
     async orderCreateVerify() {
-        await expect(this.aclAdminPage.createBtn).toBeVisible();
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.saveBtn).toBeVisible();
+        await expect(this.orderActionPage.createBtn).toBeVisible();
+        await this.orderActionPage.createBtn.click();
+        await expect(this.orderActionPage.saveBtn).toBeVisible();
     }
 
     async productEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.editBtn.click();
+        await expect(this.productActionPage.createBtn).not.toBeVisible();
+        await this.productActionPage.editBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.successMSG.first()).toBeVisible();
+        await this.productActionPage.createBtn.click();
+        await expect(this.productActionPage.successMSG.first()).toBeVisible();
     }
 
     async productCopyVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.viewBtn.nth(1)).not.toBeVisible();
-        await this.aclAdminPage.copyBtn.nth(1).click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.copySuccess.first()).toBeVisible();
+        await expect(this.productActionPage.createBtn).not.toBeVisible();
+        await expect(this.productActionPage.viewBtn.nth(1)).not.toBeVisible();
+        await this.productActionPage.copyBtn.nth(1).click();
+        await this.productActionPage.agreeBtn.click();
+        await expect(this.productActionPage.copySuccess.first()).toBeVisible();
     }
 
     async productDeleteVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.viewBtn.nth(1)).not.toBeVisible();
-        await this.aclAdminPage.selectRowBtn.nth(2).click();
-        await this.aclAdminPage.selectAction.click();
-        await this.aclAdminPage.selectDelete.click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.productDeleteSuccess.first()).toBeVisible();
+        await expect(this.productActionPage.createBtn).not.toBeVisible();
+        await expect(this.productActionPage.viewBtn.nth(1)).not.toBeVisible();
+        await this.productActionPage.selectRowBtn.nth(2).click();
+        await this.productActionPage.selectAction.click();
+        await this.productActionPage.selectDelete.click();
+        await this.productActionPage.agreeBtn.click();
+        await expect(
+            this.productActionPage.productDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async categoryEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.categoryActionPage.createBtn).not.toBeVisible();
+        await this.categoryActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.saveCategoryBtn.click();
-        await expect(this.aclAdminPage.categorySuccess.first()).toBeVisible();
+        await this.categoryActionPage.saveCategoryBtn.click();
+        await expect(
+            this.categoryActionPage.categorySuccess.first(),
+        ).toBeVisible();
     }
 
     async categoryDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.selectRowBtn.nth(1).click();
-        await this.aclAdminPage.selectAction.click();
-        await this.aclAdminPage.deleteBtn.click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.categoryDeleteSuccess.first()).toBeVisible();
+        await expect(this.categoryActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.categoryActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.categoryActionPage.selectRowBtn.nth(1).click();
+        await this.categoryActionPage.selectAction.click();
+        await this.categoryActionPage.deleteBtn.click();
+        await this.categoryActionPage.agreeBtn.click();
+        await expect(
+            this.categoryActionPage.categoryDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async attributeCreateVerify() {
-        await expect(this.aclAdminPage.createBtn).toBeVisible();
-        await expect(this.aclAdminPage.editBtn.first()).not.toBeVisible();
-        await this.aclAdminPage.createBtn.click();
+        await expect(this.attributeActionPage.createBtn).toBeVisible();
+        await expect(
+            this.attributeActionPage.editBtn.first(),
+        ).not.toBeVisible();
+        await this.attributeActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.fillname.fill("Test Attribute");
-        await this.aclAdminPage.fillCode.fill("testattribute");
-        await this.aclAdminPage.selectTypeAttribute.selectOption("text");
-        await this.aclAdminPage.saveAttributeBtn.click();
-        await expect(this.aclAdminPage.attributeSuccess.first()).toBeVisible();
+        await this.attributeActionPage.fillname.fill("Test Attribute");
+        await this.attributeActionPage.fillCode.fill("testattribute");
+        await this.attributeActionPage.selectTypeAttribute.selectOption("text");
+        await this.attributeActionPage.saveAttributeBtn.click();
+        await expect(
+            this.attributeActionPage.attributeSuccess.first(),
+        ).toBeVisible();
     }
 
     async attributeEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.attributeActionPage.createBtn).not.toBeVisible();
+        await expect(this.attributeActionPage.iconEdit.first()).toBeVisible();
+        await this.attributeActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.saveAttributeBtn.click();
+        await this.attributeActionPage.saveAttributeBtn.click();
         await expect(
-            this.aclAdminPage.attributeUpdateSuccess.first(),
+            this.attributeActionPage.attributeUpdateSuccess.first(),
         ).toBeVisible();
     }
 
     async attributeDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
+        await expect(this.attributeActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.aclAdminPage.attributeDeleteSuccess.first(),
+            this.attributeActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.attributeActionPage.deleteIcon.first().click();
+        await this.attributeActionPage.agreeBtn.click();
+        await expect(
+            this.attributeActionPage.attributeDeleteSuccess.first(),
         ).toBeVisible();
     }
 
     async familyCreateVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.aclAdminPage.editBtn.first()).not.toBeVisible();
-        await this.aclAdminPage.createBtn.click();
+        await expect(this.familyActionPage.editBtn.first()).not.toBeVisible();
+        await this.familyActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.familyName.fill("Test Family");
-        await this.aclAdminPage.fillCode.fill("family");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.familySuccess.first()).toBeVisible();
+        await this.familyActionPage.familyName.fill("Test Family");
+        await this.familyActionPage.fillCode.fill("family");
+        await this.familyActionPage.createBtn.click();
+        await expect(this.familyActionPage.familySuccess.first()).toBeVisible();
     }
 
     async familyEditVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.familyActionPage.createBtn).not.toBeVisible();
+        await this.familyActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.familyUpdateSuccess.first()).toBeVisible();
+        await this.familyActionPage.createBtn.click();
+        await expect(
+            this.familyActionPage.familyUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async familyDeleteVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.editBtn.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.familyDeleteSuccess.first()).toBeVisible();
+        await expect(this.familyActionPage.createBtn).not.toBeVisible();
+        await expect(this.familyActionPage.editBtn.first()).not.toBeVisible();
+        await this.familyActionPage.deleteIcon.first().click();
+        await this.familyActionPage.agreeBtn.click();
+        await expect(
+            this.familyActionPage.familyDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async customerCreateVerify() {
         await this.page.goto("admin/customers");
-        await this.aclAdminPage.createBtn.click();
-        await this.aclAdminPage.customerfirstname.fill(generateFirstName());
-        await this.aclAdminPage.customerlastname.fill(generateLastName());
-        await this.aclAdminPage.customeremail.fill(generateEmail());
-        await this.aclAdminPage.customergender.selectOption(
+        await this.customersActionPage.createBtn.click();
+        await this.customersActionPage.customerfirstname.fill(
+            generateFirstName(),
+        );
+        await this.customersActionPage.customerlastname.fill(
+            generateLastName(),
+        );
+        await this.customersActionPage.customeremail.fill(generateEmail());
+        await this.customersActionPage.customergender.selectOption(
             randomElement(["Male", "Female", "Other"]),
         );
-        await this.aclAdminPage.customerNumber.fill("1234567890");
-        await this.aclAdminPage.customerNumber.press("Enter");
+        await this.customersActionPage.customerNumber.fill("1234567890");
+        await this.customersActionPage.customerNumber.press("Enter");
         await expect(
-            this.aclAdminPage.customercreatedsuccess.first(),
+            this.customersActionPage.customercreatedsuccess.first(),
         ).toBeVisible();
     }
 
     async customerEditVerify() {
         await this.page.goto("admin/customers");
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.viewIcon.first()).toBeVisible();
+        await expect(this.customersActionPage.createBtn).not.toBeVisible();
+        await expect(this.customersActionPage.viewIcon.first()).toBeVisible();
     }
 
     async customerDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.selectRowBtn.nth(1).click();
-        await this.aclAdminPage.selectAction.click();
-        await this.aclAdminPage.deleteBtn.click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.customerDeleteSuccess.first()).toBeVisible();
+        await expect(this.customersActionPage.createBtn).not.toBeVisible();
+        await this.customersActionPage.selectRowBtn.nth(1).click();
+        await this.customersActionPage.selectAction.click();
+        await this.customersActionPage.deleteBtn.click();
+        await this.customersActionPage.agreeBtn.click();
+        await expect(
+            this.customersActionPage.customerDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async groupCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
-        await this.aclAdminPage.name.fill(generateName());
-        await this.aclAdminPage.fillCode.fill("code");
-        await this.aclAdminPage.createBtn.nth(1).click();
-        await expect(this.aclAdminPage.successGroupMSG.first()).toBeVisible();
+        await this.groupActionPage.createBtn.click();
+        await this.groupActionPage.name.fill(generateName());
+        await this.groupActionPage.fillCode.fill("code");
+        await this.groupActionPage.createBtn.nth(1).click();
+        await expect(
+            this.groupActionPage.successGroupMSG.first(),
+        ).toBeVisible();
     }
 
     async groupEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.groupActionPage.createBtn).not.toBeVisible();
+        await this.groupActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.successUpdateMSG.first()).toBeVisible();
+        await this.groupActionPage.createBtn.click();
+        await expect(
+            this.groupActionPage.successUpdateMSG.first(),
+        ).toBeVisible();
     }
 
     async groupDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.successGroupDeleteMSG.first()).toBeVisible();
+        await expect(this.groupActionPage.createBtn).not.toBeVisible();
+        await expect(this.groupActionPage.iconEdit.first()).not.toBeVisible();
+        await this.groupActionPage.deleteIcon.first().click();
+        await this.groupActionPage.agreeBtn.click();
+        await expect(
+            this.groupActionPage.successGroupDeleteMSG.first(),
+        ).toBeVisible();
     }
 
     async cmsCreateVerify() {
-        await this.aclAdminPage.pagetitle.fill(generateName());
-        await this.aclAdminPage.urlKey.fill(generateSlug());
-        await this.aclAdminPage.metaTitle.fill(generateName());
-        await this.aclAdminPage.metaKeywords.fill("keywords");
-        await this.aclAdminPage.metaDescription.fill(generateDescription());
-        await this.aclAdminPage.statusBTN.first().click();
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.successPageCreate).toBeVisible();
+        await this.cmsActionPage.pagetitle.fill(generateName());
+        await this.cmsActionPage.urlKey.fill(generateSlug());
+        await this.cmsActionPage.metaTitle.fill(generateName());
+        await this.cmsActionPage.metaKeywords.fill("keywords");
+        await this.cmsActionPage.metaDescription.fill(generateDescription());
+        await this.cmsActionPage.channelBTN.first().click();
+        await this.cmsActionPage.createBtn.click();
+        await expect(this.cmsActionPage.successPageCreate.first()).toBeVisible();
     }
 
     async cmsEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.cmsActionPage.createBtn).not.toBeVisible();
+        await this.cmsActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.successPageUpdate).toBeVisible();
+        await this.cmsActionPage.createBtn.click();
+        await expect(this.cmsActionPage.successPageUpdate).toBeVisible();
     }
 
     async cmsDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.successPageDelete).toBeVisible();
+        await expect(this.cmsActionPage.createBtn).not.toBeVisible();
+        await expect(this.cmsActionPage.iconEdit.first()).not.toBeVisible();
+        await this.cmsActionPage.deleteIcon.first().click();
+        await this.cmsActionPage.agreeBtn.click();
+        await expect(this.cmsActionPage.successPageDelete).toBeVisible();
     }
 
     async cartRuleCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.cartRuleActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.ruleName.fill(generateName());
-        await this.aclAdminPage.promotionRuleDescription.fill(
+        await this.cartRuleActionPage.ruleName.fill(generateName());
+        await this.cartRuleActionPage.promotionRuleDescription.fill(
             generateDescription(),
         );
-        await this.aclAdminPage.addConditionBtn.click();
-        await this.aclAdminPage.selectCondition.selectOption("product|name");
-        await this.aclAdminPage.conditionName.fill(generateName());
-        await this.aclAdminPage.discountAmmount.fill("10");
-        await this.aclAdminPage.sortOrder.fill("1");
-        await this.aclAdminPage.channelSelect.first().click();
-        await expect(this.aclAdminPage.channelSelect.first()).toBeChecked();
-        await this.aclAdminPage.customerGroupSelect.first().click();
-        await expect(this.aclAdminPage.customerGroupSelect.first()).toBeChecked();
-        await this.aclAdminPage.statusToggle.click();
-        await expect(this.aclAdminPage.toggleInput).toBeChecked();
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.cartRuleSuccess.first()).toBeVisible();
+        await this.cartRuleActionPage.addConditionBtn.click();
+        await this.cartRuleActionPage.selectCondition.selectOption(
+            "product|name",
+        );
+        await this.cartRuleActionPage.conditionName.fill(generateName());
+        await this.cartRuleActionPage.discountAmmount.fill("10");
+        await this.cartRuleActionPage.sortOrder.fill("1");
+        await this.cartRuleActionPage.channelSelect.first().click();
+        await expect(
+            this.cartRuleActionPage.channelSelect.first(),
+        ).toBeChecked();
+        await this.cartRuleActionPage.customerGroupSelect.first().click();
+        await expect(
+            this.cartRuleActionPage.customerGroupSelect.first(),
+        ).toBeChecked();
+        await this.cartRuleActionPage.statusToggle.click();
+        await expect(this.cartRuleActionPage.toggleInput).toBeChecked();
+        await this.cartRuleActionPage.createBtn.click();
+        await expect(
+            this.cartRuleActionPage.cartRuleSuccess.first(),
+        ).toBeVisible();
     }
 
     async cartRuleCopyVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.copyBtn.first().click();
-        // await expect(this.aclAdminPage.cartRuleCopySuccess.first()).toBeVisible();
-        await expect(this.aclAdminPage.saveCartRuleBTN).toBeVisible();
+        await expect(this.cartRuleActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.cartRuleActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.cartRuleActionPage.copyBtn.first().click();
+        // await expect(this.cartRuleActionPage.cartRuleCopySuccess.first()).toBeVisible();
+        await expect(this.cartRuleActionPage.saveCartRuleBTN).toBeVisible();
     }
 
     async cartRuleEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.copyBtn.first()).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.cartRuleActionPage.createBtn).not.toBeVisible();
+        await expect(this.cartRuleActionPage.copyBtn.first()).not.toBeVisible();
+        await this.cartRuleActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.cartRuleEditSuccess.first()).toBeVisible();
+        await this.cartRuleActionPage.createBtn.click();
+        await expect(
+            this.cartRuleActionPage.cartRuleEditSuccess.first(),
+        ).toBeVisible();
     }
 
     async cartRuleDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.copyBtn.first()).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.cartRuleDeleteSuccess.first()).toBeVisible();
+        await expect(this.cartRuleActionPage.createBtn).not.toBeVisible();
+        await expect(this.cartRuleActionPage.copyBtn.first()).not.toBeVisible();
+        await expect(
+            this.cartRuleActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.cartRuleActionPage.deleteIcon.first().click();
+        await this.cartRuleActionPage.agreeBtn.click();
+        await expect(
+            this.cartRuleActionPage.cartRuleDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async catalogRuleCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.catalogRuleActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.ruleName.fill(generateName());
-        await this.aclAdminPage.promotionRuleDescription.fill(
+        await this.catalogRuleActionPage.ruleName.fill(generateName());
+        await this.catalogRuleActionPage.promotionRuleDescription.fill(
             generateDescription(),
         );
-        await this.aclAdminPage.addConditionBtn.click();
-        await this.aclAdminPage.selectCondition.selectOption("product|name");
-        await this.aclAdminPage.conditionName.fill(generateName());
-        await this.aclAdminPage.discountAmmount.fill("10");
-        await this.aclAdminPage.sortOrder.fill("1");
-        await this.aclAdminPage.channelSelect.first().click();
-        await expect(this.aclAdminPage.channelSelect.first()).toBeChecked();
-        await this.aclAdminPage.customerGroupSelect.first().click();
-        await expect(this.aclAdminPage.customerGroupSelect.first()).toBeChecked();
-        await this.aclAdminPage.statusToggle.click();
-        await expect(this.aclAdminPage.toggleInput).toBeChecked();
-        await this.aclAdminPage.createBtn.click();
+        await this.catalogRuleActionPage.addConditionBtn.click();
+        await this.catalogRuleActionPage.selectCondition.selectOption(
+            "product|name",
+        );
+        await this.catalogRuleActionPage.conditionName.fill(generateName());
+        await this.catalogRuleActionPage.discountAmmount.fill("10");
+        await this.catalogRuleActionPage.sortOrder.fill("1");
+        await this.catalogRuleActionPage.channelSelect.first().click();
         await expect(
-            this.aclAdminPage.catalogRuleCreateSuccess.first(),
+            this.catalogRuleActionPage.channelSelect.first(),
+        ).toBeChecked();
+        await this.catalogRuleActionPage.customerGroupSelect.first().click();
+        await expect(
+            this.catalogRuleActionPage.customerGroupSelect.first(),
+        ).toBeChecked();
+        await this.catalogRuleActionPage.statusToggle.click();
+        await expect(this.catalogRuleActionPage.toggleInput).toBeChecked();
+        await this.catalogRuleActionPage.createBtn.click();
+        await expect(
+            this.catalogRuleActionPage.catalogRuleCreateSuccess.first(),
         ).toBeVisible();
     }
 
     async catalogRuleEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.catalogRuleActionPage.createBtn).not.toBeVisible();
+        await expect(this.catalogRuleActionPage.iconEdit.first()).toBeVisible();
+        await this.catalogRuleActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
+        await this.catalogRuleActionPage.createBtn.click();
         await expect(
-            this.aclAdminPage.catalogRuleUpdateSuccess.first(),
+            this.catalogRuleActionPage.catalogRuleUpdateSuccess.first(),
         ).toBeVisible();
     }
 
     async catalogRuleDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
+        await expect(this.catalogRuleActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.aclAdminPage.catalogRuleDeleteSuccess.first(),
+            this.catalogRuleActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.catalogRuleActionPage.deleteIcon.first().click();
+        await this.catalogRuleActionPage.agreeBtn.click();
+        await expect(
+            this.catalogRuleActionPage.catalogRuleDeleteSuccess.first(),
         ).toBeVisible();
     }
 
     async communicationEmailTemplateCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.emailTemplateActionPage.createBtn.click();
         const description = generateDescription();
-        await this.aclAdminPage.name.fill("template");
+        await this.emailTemplateActionPage.name.fill("template");
         await fillInTinymce(this.page, "#content_ifr", description);
-        await this.aclAdminPage.emailStatusSeletct.selectOption("active");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.emailSuccessMSG.first()).toBeVisible();
+        await this.emailTemplateActionPage.emailStatusSeletct.selectOption(
+            "active",
+        );
+        await this.emailTemplateActionPage.createBtn.click();
+        await expect(
+            this.emailTemplateActionPage.emailSuccessMSG.first(),
+        ).toBeVisible();
     }
 
     async communicationEmailTemplateEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.emailTemplateActionPage.createBtn).not.toBeVisible();
+        await this.emailTemplateActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.emailUpdateSuccessMSG.first()).toBeVisible();
+        await this.emailTemplateActionPage.createBtn.click();
+        await expect(
+            this.emailTemplateActionPage.emailUpdateSuccessMSG.first(),
+        ).toBeVisible();
     }
 
     async communicationEmailTemplateDeleteVerify() {
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.emailDeleteSuccessMSG.first()).toBeVisible();
+        await expect(
+            this.emailTemplateActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.emailTemplateActionPage.deleteIcon.first().click();
+        await this.emailTemplateActionPage.agreeBtn.click();
+        await expect(
+            this.emailTemplateActionPage.emailDeleteSuccessMSG.first(),
+        ).toBeVisible();
     }
 
     async eventCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.eventActionPage.createBtn.click();
         await this.page.hover('input[name="name"]');
         const inputs = await this.page.$$(
             'textarea.rounded-md:visible, input[type="text"].rounded-md:visible',
@@ -1279,55 +1435,71 @@ export class ACLManagement {
         for (let input of inputs) {
             await input.fill(generateName());
         }
-        await this.aclAdminPage.date.fill(generateRandomDate());
-        await this.aclAdminPage.createBtn.nth(1).click();
-        await expect(this.aclAdminPage.eventCreateSuccess.first()).toBeVisible();
+        await this.eventActionPage.date.fill(generateRandomDate());
+        await this.eventActionPage.createBtn.nth(1).click();
+        await expect(
+            this.eventActionPage.eventCreateSuccess.first(),
+        ).toBeVisible();
     }
 
     async eventEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.eventActionPage.createBtn).not.toBeVisible();
+        await this.eventActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.nth(1).click();
-        await expect(this.aclAdminPage.eventUpdateSuccess.first()).toBeVisible();
+        await this.eventActionPage.createBtn.nth(1).click();
+        await expect(
+            this.eventActionPage.eventUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async eventDeleteVerify() {
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await expect(this.aclAdminPage.createBtn.nth(1)).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.eventDeleteSuccess.first()).toBeVisible();
+        await expect(this.eventActionPage.iconEdit.first()).not.toBeVisible();
+        await expect(this.eventActionPage.createBtn.nth(1)).not.toBeVisible();
+        await this.eventActionPage.deleteIcon.first().click();
+        await this.eventActionPage.agreeBtn.click();
+        await expect(
+            this.eventActionPage.eventDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async campaignCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.campaignActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.name.fill(generateName());
-        await this.aclAdminPage.subject.fill(generateName());
-        await this.aclAdminPage.event.selectOption({ label: "Birthday" });
-        await this.aclAdminPage.emailTemplate.selectOption({ label: "template" });
-        await this.aclAdminPage.selectChannel.selectOption("1");
-        await this.aclAdminPage.customerGroup.selectOption("1");
-        await this.aclAdminPage.campaignStatus.click();
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.campaignCreateSuccess.first()).toBeVisible();
+        await this.campaignActionPage.name.fill(generateName());
+        await this.campaignActionPage.subject.fill(generateName());
+        await this.campaignActionPage.event.selectOption({ label: "Birthday" });
+        await this.campaignActionPage.emailTemplate.selectOption({
+            label: "template",
+        });
+        await this.campaignActionPage.selectChannel.selectOption("1");
+        await this.campaignActionPage.customerGroup.selectOption("1");
+        await this.campaignActionPage.campaignStatus.click();
+        await this.campaignActionPage.createBtn.click();
+        await expect(
+            this.campaignActionPage.campaignCreateSuccess.first(),
+        ).toBeVisible();
     }
 
     async campaignEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.campaignActionPage.createBtn).not.toBeVisible();
+        await this.campaignActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.campaignUpdateSuccess.first()).toBeVisible();
+        await this.campaignActionPage.createBtn.click();
+        await expect(
+            this.campaignActionPage.campaignUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async campaignDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.campaignDeleteSuccess.first()).toBeVisible();
+        await expect(this.campaignActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.campaignActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.campaignActionPage.deleteIcon.first().click();
+        await this.campaignActionPage.agreeBtn.click();
+        await expect(
+            this.campaignActionPage.campaignDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async urlRewriteCreateVerify() {
@@ -1335,439 +1507,529 @@ export class ACLManagement {
             url: generateHostname(),
             product: "product",
         };
-        await this.aclAdminPage.createBtn.click();
-        await this.aclAdminPage.entityType.selectOption(seo.product);
-        await this.aclAdminPage.requestPath.fill(seo.url);
-        await this.aclAdminPage.targetPath.fill(seo.url);
-        await this.aclAdminPage.redirectPath.selectOption("301");
-        await this.aclAdminPage.locale.selectOption("en");
-        await this.aclAdminPage.createBtn.nth(1).click();
-        await expect(this.aclAdminPage.saveRedirectSuccess).toBeVisible();
+        await this.urlRewriteActionPage.createBtn.click();
+        await this.urlRewriteActionPage.entityType.selectOption(seo.product);
+        await this.urlRewriteActionPage.requestPath.fill(seo.url);
+        await this.urlRewriteActionPage.targetPath.fill(seo.url);
+        await this.urlRewriteActionPage.redirectPath.selectOption("301");
+        await this.urlRewriteActionPage.locale.selectOption("en");
+        await this.urlRewriteActionPage.createBtn.nth(1).click();
+        await expect(
+            this.urlRewriteActionPage.saveRedirectSuccess,
+        ).toBeVisible();
     }
 
     async urlRewriteEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.urlRewriteActionPage.createBtn).not.toBeVisible();
+        await this.urlRewriteActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.saveRedirectUpdatedSuccess).toBeVisible();
+        await this.urlRewriteActionPage.createBtn.click();
+        await expect(
+            this.urlRewriteActionPage.saveRedirectUpdatedSuccess,
+        ).toBeVisible();
     }
 
     async urlRewriteDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.deleteRedirectSuccess).toBeVisible();
+        await expect(this.urlRewriteActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.urlRewriteActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.urlRewriteActionPage.deleteIcon.first().click();
+        await this.urlRewriteActionPage.agreeBtn.click();
+        await expect(
+            this.urlRewriteActionPage.deleteRedirectSuccess,
+        ).toBeVisible();
     }
 
     async searchTermsCreateVerify() {
-        await expect(this.aclAdminPage.deleteIcon.first()).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.createBtn.click();
-        await this.aclAdminPage.searchQuery.fill(generateName());
-        await this.aclAdminPage.redirectURL.fill("https://example.com");
-        await this.aclAdminPage.selectChannel.selectOption("1");
-        await this.aclAdminPage.locale.selectOption("en");
-        await this.aclAdminPage.createBtn.nth(1).click();
         await expect(
-            this.aclAdminPage.searchTermCreateSuccess.first(),
+            this.searchTermActionPage.deleteIcon.first(),
+        ).not.toBeVisible();
+        await expect(
+            this.searchTermActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.searchTermActionPage.createBtn.click();
+        await this.searchTermActionPage.searchQuery.fill(generateName());
+        await this.searchTermActionPage.redirectURL.fill("https://example.com");
+        await this.searchTermActionPage.selectChannel.selectOption("1");
+        await this.searchTermActionPage.locale.selectOption("en");
+        await this.searchTermActionPage.createBtn.nth(1).click();
+        await expect(
+            this.searchTermActionPage.searchTermCreateSuccess.first(),
         ).toBeVisible();
     }
 
     async searchTermsEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.searchTermActionPage.createBtn).not.toBeVisible();
+        await this.searchTermActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
+        await this.searchTermActionPage.createBtn.click();
         await expect(
-            this.aclAdminPage.searchTermUpdateSuccess.first(),
+            this.searchTermActionPage.searchTermUpdateSuccess.first(),
         ).toBeVisible();
     }
 
     async searchTermsDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
+        await expect(this.searchTermActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.aclAdminPage.searchTermDeleteSuccess.first(),
+            this.searchTermActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.searchTermActionPage.deleteIcon.first().click();
+        await this.searchTermActionPage.agreeBtn.click();
+        await expect(
+            this.searchTermActionPage.searchTermDeleteSuccess.first(),
         ).toBeVisible();
     }
 
     async searchSynonymsCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.name.fill(generateName());
-        await this.aclAdminPage.terms.fill("test, synonym");
-        await this.aclAdminPage.createBtn.nth(1).click();
+        await this.searchSynonymsActionPage.createBtn.click();
         await expect(
-            this.aclAdminPage.searchSynonymCreateSuccess.first(),
+            this.searchSynonymsActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.searchSynonymsActionPage.name.fill(generateName());
+        await this.searchSynonymsActionPage.terms.fill("test, synonym");
+        await this.searchSynonymsActionPage.createBtn.nth(1).click();
+        await expect(
+            this.searchSynonymsActionPage.searchSynonymCreateSuccess.first(),
         ).toBeVisible();
     }
 
     async searchSynonymsEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.searchSynonymsActionPage.createBtn).not.toBeVisible();
+        await this.searchSynonymsActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
+        await this.searchSynonymsActionPage.createBtn.click();
         await expect(
-            this.aclAdminPage.searchSynonymUpdateSuccess.first(),
+            this.searchSynonymsActionPage.searchSynonymUpdateSuccess.first(),
         ).toBeVisible();
     }
 
     async searchSynonymsDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
+        await expect(this.searchSynonymsActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.aclAdminPage.searchSynonymDeleteSuccess.first(),
+            this.searchSynonymsActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.searchSynonymsActionPage.deleteIcon.first().click();
+        await this.searchSynonymsActionPage.agreeBtn.click();
+        await expect(
+            this.searchSynonymsActionPage.searchSynonymDeleteSuccess.first(),
         ).toBeVisible();
     }
 
     async sitemapCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await expect(this.aclAdminPage.deleteIcon.first()).not.toBeVisible();
-        await this.aclAdminPage.fileName.fill("sitemap.xml");
-        await this.aclAdminPage.path.fill("/sitemapxml/test/example/");
-        await this.aclAdminPage.createBtn.nth(1).click();
-        await expect(this.aclAdminPage.sitemapCreateSuccess.first()).toBeVisible();
+        await this.siteMapActionPage.createBtn.click();
+        await expect(this.siteMapActionPage.iconEdit.first()).not.toBeVisible();
+        await expect(
+            this.siteMapActionPage.deleteIcon.first(),
+        ).not.toBeVisible();
+        await this.siteMapActionPage.fileName.fill("sitemap.xml");
+        await this.siteMapActionPage.path.fill("/sitemapxml/test/example/");
+        await this.siteMapActionPage.createBtn.nth(1).click();
+        await expect(
+            this.siteMapActionPage.sitemapCreateSuccess.first(),
+        ).toBeVisible();
     }
 
     async sitemapEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.deleteIcon.first()).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.siteMapActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.siteMapActionPage.deleteIcon.first(),
+        ).not.toBeVisible();
+        await this.siteMapActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.sitemapUpdateSuccess.first()).toBeVisible();
+        await this.siteMapActionPage.createBtn.click();
+        await expect(
+            this.siteMapActionPage.sitemapUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async sitemapDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.sitemapDeleteSuccess.first()).toBeVisible();
+        await expect(this.siteMapActionPage.createBtn).not.toBeVisible();
+        await expect(this.siteMapActionPage.iconEdit.first()).not.toBeVisible();
+        await this.siteMapActionPage.deleteIcon.first().click();
+        await this.siteMapActionPage.agreeBtn.click();
+        await expect(
+            this.siteMapActionPage.sitemapDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async localeCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.localeActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.fillCode.fill("test");
-        await this.aclAdminPage.name.fill("TestLocale");
-        await this.aclAdminPage.direction.selectOption("ltr");
-        await this.aclAdminPage.createBtn.nth(1).click();
-        await expect(this.aclAdminPage.successLocaleCreate.first()).toBeVisible();
+        await this.localeActionPage.fillCode.fill("test");
+        await this.localeActionPage.name.fill("TestLocale");
+        await this.localeActionPage.direction.selectOption("ltr");
+        await this.localeActionPage.createBtn.nth(1).click();
+        await expect(
+            this.localeActionPage.successLocaleCreate.first(),
+        ).toBeVisible();
     }
 
     async localeEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.localeActionPage.createBtn).not.toBeVisible();
+        await this.localeActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.successLocaleUpdate.first()).toBeVisible();
+        await this.localeActionPage.createBtn.click();
+        await expect(
+            this.localeActionPage.successLocaleUpdate.first(),
+        ).toBeVisible();
     }
 
     async localeDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.successLocaleDelete.first()).toBeVisible();
+        await expect(this.localeActionPage.createBtn).not.toBeVisible();
+        await expect(this.localeActionPage.iconEdit.first()).not.toBeVisible();
+        await this.localeActionPage.deleteIcon.first().click();
+        await this.localeActionPage.agreeBtn.click();
+        await expect(
+            this.localeActionPage.successLocaleDelete.first(),
+        ).toBeVisible();
     }
 
     async currencyCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.fillCode.fill("TST");
-        await this.aclAdminPage.name.fill("Test Currency");
-        await this.aclAdminPage.createBtn.nth(1).click();
-        await expect(this.aclAdminPage.successCurrencyCreate.first()).toBeVisible();
+        await this.currencyActionPage.createBtn.click();
+        await expect(
+            this.currencyActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.currencyActionPage.fillCode.fill("TST");
+        await this.currencyActionPage.name.fill("Test Currency");
+        await this.currencyActionPage.createBtn.nth(1).click();
+        await expect(
+            this.currencyActionPage.successCurrencyCreate.first(),
+        ).toBeVisible();
     }
 
     async currencyEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.currencyActionPage.createBtn).not.toBeVisible();
+        await this.currencyActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.successCurrencyUpdate.first()).toBeVisible();
+        await this.currencyActionPage.createBtn.click();
+        await expect(
+            this.currencyActionPage.successCurrencyUpdate.first(),
+        ).toBeVisible();
     }
 
     async currencyDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.successCurrencyDelete.first()).toBeVisible();
+        await expect(this.currencyActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.currencyActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.currencyActionPage.deleteIcon.first().click();
+        await this.currencyActionPage.agreeBtn.click();
+        await expect(
+            this.currencyActionPage.successCurrencyDelete.first(),
+        ).toBeVisible();
     }
 
     async exchangeRateCreateVerify() {
         await this.page.goto("admin/settings/currencies");
         await this.currencyCreateVerify();
         await this.page.goto("admin/settings/channels");
-        await this.aclAdminPage.iconEdit.first().click();
+        await this.exchangeRateActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
         await this.page.getByText("Test Currency").first().click();
-        await this.aclAdminPage.createBtn.first().click();
+        await this.exchangeRateActionPage.createBtn.first().click();
         await this.page.waitForLoadState("networkidle");
         await this.page.goto("admin/settings/exchange-rates");
-        await this.aclAdminPage.createBtn.nth(1).click();
+        await this.exchangeRateActionPage.createBtn.nth(1).click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.targetCurrency.selectOption({
+        await this.exchangeRateActionPage.targetCurrency.selectOption({
             label: "Test Currency",
         });
-        await this.aclAdminPage.rate.fill("100");
-        await this.aclAdminPage.createBtn.nth(2).click();
+        await this.exchangeRateActionPage.rate.fill("100");
+        await this.exchangeRateActionPage.createBtn.nth(2).click();
         await expect(
-            this.aclAdminPage.successExchangeRateCreate.first(),
+            this.exchangeRateActionPage.successExchangeRateCreate.first(),
         ).toBeVisible();
     }
 
     async exchangeRateEditVerify() {
-        await expect(this.aclAdminPage.createBtn.nth(1)).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
-        await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.nth(1).click();
         await expect(
-            this.aclAdminPage.successExchangeRateUpdate.first(),
+            this.exchangeRateActionPage.createBtn.nth(1),
+        ).not.toBeVisible();
+        await this.exchangeRateActionPage.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.exchangeRateActionPage.createBtn.nth(1).click();
+        await expect(
+            this.exchangeRateActionPage.successExchangeRateUpdate.first(),
         ).toBeVisible();
     }
 
     async exchangeRateDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn.nth(1)).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
         await expect(
-            this.aclAdminPage.successExchangeRateDelete.first(),
+            this.exchangeRateActionPage.createBtn.nth(1),
+        ).not.toBeVisible();
+        await expect(
+            this.exchangeRateActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.exchangeRateActionPage.deleteIcon.first().click();
+        await this.exchangeRateActionPage.agreeBtn.click();
+        await expect(
+            this.exchangeRateActionPage.successExchangeRateDelete.first(),
         ).toBeVisible();
     }
 
     async inventorySourceCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.inventorySourceActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.fillCode.fill("testsource");
-        await this.aclAdminPage.name.fill(generateName());
-        await this.aclAdminPage.description.fill(generateDescription());
-        await this.aclAdminPage.contactName.fill(generateName());
-        await this.aclAdminPage.enterEmail.fill(generateEmail());
-        await this.aclAdminPage.contactNumber.fill(generatePhoneNumber());
-        await this.aclAdminPage.fax.fill(generatePhoneNumber());
-        await this.aclAdminPage.country.selectOption("IN");
-        await this.aclAdminPage.state.selectOption("DL");
-        await this.aclAdminPage.city.fill("New Delhi");
-        await this.aclAdminPage.street.fill("Some street address");
-        await this.aclAdminPage.postcode.fill("110001");
-        await this.aclAdminPage.statusToggle.click();
-        await this.aclAdminPage.createBtn.click();
+        await this.inventorySourceActionPage.fillCode.fill("testsource");
+        await this.inventorySourceActionPage.name.fill(generateName());
+        await this.inventorySourceActionPage.description.fill(
+            generateDescription(),
+        );
+        await this.inventorySourceActionPage.contactName.fill(generateName());
+        await this.inventorySourceActionPage.enterEmail.fill(generateEmail());
+        await this.inventorySourceActionPage.contactNumber.fill(
+            generatePhoneNumber(),
+        );
+        await this.inventorySourceActionPage.fax.fill(generatePhoneNumber());
+        await this.inventorySourceActionPage.country.selectOption("IN");
+        await this.inventorySourceActionPage.state.selectOption("DL");
+        await this.inventorySourceActionPage.city.fill("New Delhi");
+        await this.inventorySourceActionPage.street.fill("Some street address");
+        await this.inventorySourceActionPage.postcode.fill("110001");
+        await this.inventorySourceActionPage.statusToggle.click();
+        await this.inventorySourceActionPage.createBtn.click();
         await expect(
-            this.aclAdminPage.successInventorySourceCreate.first(),
+            this.inventorySourceActionPage.successInventorySourceCreate.first(),
         ).toBeVisible();
     }
 
     async inventorySourceEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
-        await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
         await expect(
-            this.aclAdminPage.successInventorySourceUpdate.first(),
+            this.inventorySourceActionPage.createBtn,
+        ).not.toBeVisible();
+        await this.inventorySourceActionPage.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.inventorySourceActionPage.createBtn.click();
+        await expect(
+            this.inventorySourceActionPage.successInventorySourceUpdate.first(),
         ).toBeVisible();
     }
 
     async inventorySourceDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
         await expect(
-            this.aclAdminPage.successInventorySourceDelete.first(),
+            this.inventorySourceActionPage.createBtn,
+        ).not.toBeVisible();
+        await expect(
+            this.inventorySourceActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.inventorySourceActionPage.deleteIcon.first().click();
+        await this.inventorySourceActionPage.agreeBtn.click();
+        await expect(
+            this.inventorySourceActionPage.successInventorySourceDelete.first(),
         ).toBeVisible();
     }
 
     async channelCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.inventorySourceActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.name.fill(generateName());
+        await this.channelActionPage.name.fill(generateName());
         const code = generateSlug("_");
         const name = generateName();
         const description = generateDescription();
-        await this.aclAdminPage.fillCode.fill(code);
-        await this.aclAdminPage.promotionRuleDescription.fill(description);
-        await this.aclAdminPage.inventoryToggle.first().click();
-        await this.aclAdminPage.categoryID.selectOption("1");
-        await this.aclAdminPage.hostname.fill(generateHostname());
-        await this.aclAdminPage.selectLocale.first().click();
-        await this.aclAdminPage.selectCurrency.first().click();
-        await this.aclAdminPage.baseCurrencyID.selectOption("1");
-        await this.aclAdminPage.defaultLocaleID.selectOption("1");
-        await this.aclAdminPage.metaTitleChannel.fill(name);
-        await this.aclAdminPage.seoKeywords.fill("keywords");
-        await this.aclAdminPage.metaDescription.fill(description);
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.channleCreateSuccess.first()).toBeVisible();
+        await this.channelActionPage.fillCode.fill(code);
+        await this.channelActionPage.promotionRuleDescription.fill(description);
+        await this.channelActionPage.inventoryToggle.first().click();
+        await this.channelActionPage.categoryID.selectOption("1");
+        await this.channelActionPage.hostname.fill(generateHostname());
+        await this.channelActionPage.selectLocale.first().click();
+        await this.channelActionPage.selectCurrency.first().click();
+        await this.channelActionPage.baseCurrencyID.selectOption("1");
+        await this.channelActionPage.defaultLocaleID.selectOption("1");
+        await this.channelActionPage.metaTitleChannel.fill(name);
+        await this.channelActionPage.seoKeywords.fill("keywords");
+        await this.channelActionPage.metaDescription.fill(description);
+        await this.channelActionPage.createBtn.click();
+        await expect(
+            this.channelActionPage.channleCreateSuccess.first(),
+        ).toBeVisible();
     }
 
     async channelEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.channelActionPage.createBtn).not.toBeVisible();
+        await this.channelActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.channlUpdateSuccess.first()).toBeVisible();
+        await this.channelActionPage.createBtn.click();
+        await expect(
+            this.channelActionPage.channlUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async channelDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.channelDeleteSuccess.first()).toBeVisible();
+        await expect(this.channelActionPage.createBtn).not.toBeVisible();
+        await this.channelActionPage.deleteIcon.first().click();
+        await this.channelActionPage.agreeBtn.click();
+        await expect(
+            this.channelActionPage.channelDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async createUserVerify() {
-        await this.aclAdminPage.createUser.click();
-        await this.aclAdminPage.name.fill(this.userName);
-        await this.aclAdminPage.selectRole.selectOption({ label: this.roleName });
-        await this.aclAdminPage.userEmail.fill(generateEmail());
-        await this.aclAdminPage.userPassword.fill("user123");
-        await this.aclAdminPage.confirmPassword.fill("user123");
-        await this.aclAdminPage.statusToggle.click();
-        const toggleInput = await this.aclAdminPage.statusToggle;
+        await this.userActionPage.createUser.click();
+        await this.userActionPage.name.fill(this.userName);
+        await this.userActionPage.selectRole.selectOption({
+            label: this.roleName,
+        });
+        await this.userActionPage.userEmail.fill(generateEmail());
+        await this.userActionPage.userPassword.fill("user123");
+        await this.userActionPage.confirmPassword.fill("user123");
+        await this.userActionPage.statusToggle.click();
+        const toggleInput = await this.userActionPage.statusToggle;
         await expect(toggleInput).toBeChecked();
-        await this.aclAdminPage.saveUser.click();
-        await expect(this.aclAdminPage.successUser.first()).toBeVisible();
+        await this.userActionPage.saveUser.click();
+        await expect(this.userActionPage.successUser.first()).toBeVisible();
     }
 
     async editUserVerify() {
-        await expect(this.aclAdminPage.createUser).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.userActionPage.createUser).not.toBeVisible();
+        await this.userActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.saveUser.click();
-        await expect(this.aclAdminPage.successUserUpdate.first()).toBeVisible();
+        await this.userActionPage.saveUser.click();
+        await expect(
+            this.userActionPage.successUserUpdate.first(),
+        ).toBeVisible();
     }
 
     async deleteUserVerify() {
-        await expect(this.aclAdminPage.createUser).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.nth(2).click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.successUserDelete.first()).toBeVisible();
+        await expect(this.userActionPage.createUser).not.toBeVisible();
+        await expect(this.userActionPage.iconEdit.first()).not.toBeVisible();
+        await this.userActionPage.deleteIcon.nth(2).click();
+        await this.userActionPage.agreeBtn.click();
+        await expect(
+            this.userActionPage.successUserDelete.first(),
+        ).toBeVisible();
     }
 
     async roleCreateVerify() {
-        await this.aclAdminPage.createRole.click();
-        await this.aclAdminPage.name.fill(this.roleName);
-        await this.aclAdminPage.selectRoleType.selectOption("all");
-        await this.aclAdminPage.roleDescription.fill("test description");
-        await this.aclAdminPage.saveRole.click();
-        await expect(this.aclAdminPage.successRole.first()).toBeVisible();
+        await this.roleActionPage.createRole.click();
+        await this.roleActionPage.name.fill(this.roleName);
+        await this.roleActionPage.selectRoleType.selectOption("all");
+        await this.roleActionPage.roleDescription.fill("test description");
+        await this.roleActionPage.saveRole.click();
+        await expect(this.roleActionPage.successRole.first()).toBeVisible();
     }
 
     async roleEditVerify() {
-        await expect(this.aclAdminPage.createRole).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.roleActionPage.createRole).not.toBeVisible();
+        await this.roleActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.saveRole.click();
-        await expect(this.aclAdminPage.successUpdateRole.first()).toBeVisible();
+        await this.roleActionPage.saveRole.click();
+        await expect(
+            this.roleActionPage.successUpdateRole.first(),
+        ).toBeVisible();
     }
 
     async roleDeleteVerify() {
-        await expect(this.aclAdminPage.createRole).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.nth(2).click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.successDeleteRole.first()).toBeVisible();
+        await expect(this.roleActionPage.createRole).not.toBeVisible();
+        await this.roleActionPage.deleteIcon.nth(2).click();
+        await this.roleActionPage.agreeBtn.click();
+        await expect(
+            this.roleActionPage.successDeleteRole.first(),
+        ).toBeVisible();
     }
 
     async themeCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.themeActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.name.fill(generateName());
-        await this.aclAdminPage.sortOrder.fill("1");
-        await this.aclAdminPage.selectTypeAttribute.selectOption(
+        await this.themeActionPage.name.fill(generateName());
+        await this.themeActionPage.sortOrder.fill("1");
+        await this.themeActionPage.selectTypeAttribute.selectOption(
             "product_carousel",
         );
-        await this.aclAdminPage.selectChannel.selectOption("1");
-        await this.aclAdminPage.createBtn.nth(1).click();
-        await expect(this.aclAdminPage.athorization.first()).toBeVisible();
+        await this.themeActionPage.selectChannel.selectOption("1");
+        await this.themeActionPage.createBtn.nth(1).click();
+        await expect(this.themeActionPage.athorization.first()).toBeVisible();
     }
 
     async themeEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
+        await expect(this.themeActionPage.createBtn).not.toBeVisible();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.iconEdit.nth(3).click();
+        await this.themeActionPage.iconEdit.nth(3).click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.click();
-        await expect(this.aclAdminPage.successEditTheme.first()).toBeVisible();
+        await this.themeActionPage.createBtn.click();
+        await expect(
+            this.themeActionPage.successEditTheme.first(),
+        ).toBeVisible();
     }
 
     async themeDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.nth(3)).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.successDeleteTheme.first()).toBeVisible();
+        await expect(this.themeActionPage.createBtn).not.toBeVisible();
+        await expect(this.themeActionPage.iconEdit.nth(3)).not.toBeVisible();
+        await this.themeActionPage.deleteIcon.first().click();
+        await this.themeActionPage.agreeBtn.click();
+        await expect(
+            this.themeActionPage.successDeleteTheme.first(),
+        ).toBeVisible();
     }
 
     async taxrateCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.taxRateActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.identifier.fill("test-tax-rate");
-        await this.aclAdminPage.selectCountry.selectOption("IN");
-        await this.aclAdminPage.taxRate.fill("10");
-        await this.aclAdminPage.createBtn.first().click();
-        await expect(this.aclAdminPage.successCreateTaxRate.first()).toBeVisible();
+        await this.taxRateActionPage.identifier.fill("test-tax-rate");
+        await this.taxRateActionPage.selectCountry.selectOption("IN");
+        await this.taxRateActionPage.taxRate.fill("10");
+        await this.taxRateActionPage.createBtn.first().click();
+        await expect(
+            this.taxRateActionPage.successCreateTaxRate.first(),
+        ).toBeVisible();
     }
 
     async taxrateEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.taxRateActionPage.createBtn).not.toBeVisible();
+        await this.taxRateActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.first().click();
-        await expect(this.aclAdminPage.successUpdateTaxRate.first()).toBeVisible();
+        await this.taxRateActionPage.createBtn.first().click();
+        await expect(
+            this.taxRateActionPage.successUpdateTaxRate.first(),
+        ).toBeVisible();
     }
 
     async taxrateDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.successDeleteTaxRate.first()).toBeVisible();
+        await expect(this.taxRateActionPage.createBtn).not.toBeVisible();
+        await expect(this.taxRateActionPage.iconEdit.first()).not.toBeVisible();
+        await this.taxRateActionPage.deleteIcon.first().click();
+        await this.taxRateActionPage.agreeBtn.click();
+        await expect(
+            this.taxRateActionPage.successDeleteTaxRate.first(),
+        ).toBeVisible();
     }
 
     async taxcategoryCreateVerify() {
-        await this.aclAdminPage.createBtn.click();
+        await this.taxCategoryActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.fillCode.fill("test-tax-category");
-        await this.aclAdminPage.name.fill("Test Tax Category");
-        await this.aclAdminPage.description.fill("This is a test tax category");
-        await this.aclAdminPage.selectTaxRate.selectOption({
+        await this.taxCategoryActionPage.fillCode.fill("test-tax-category");
+        await this.taxCategoryActionPage.name.fill("Test Tax Category");
+        await this.taxCategoryActionPage.description.fill(
+            "This is a test tax category",
+        );
+        await this.taxCategoryActionPage.selectTaxRate.selectOption({
             label: "test-tax-rate",
         });
-        await this.aclAdminPage.createBtn.nth(1).click();
+        await this.taxCategoryActionPage.createBtn.nth(1).click();
         await expect(
-            this.aclAdminPage.successCreateTaxCategory.first(),
+            this.taxCategoryActionPage.successCreateTaxCategory.first(),
         ).toBeVisible();
     }
 
     async taxcategoryEditVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.taxCategoryActionPage.createBtn).not.toBeVisible();
+        await this.taxCategoryActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.createBtn.first().click();
+        await this.taxCategoryActionPage.createBtn.first().click();
         await expect(
-            this.aclAdminPage.successUpdateTaxCategory.first(),
+            this.taxCategoryActionPage.successUpdateTaxCategory.first(),
         ).toBeVisible();
     }
 
     async taxcategoryDeleteVerify() {
-        await expect(this.aclAdminPage.createBtn).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
+        await expect(this.taxCategoryActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.aclAdminPage.successDeleteTaxCategory.first(),
+            this.taxCategoryActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.taxCategoryActionPage.deleteIcon.first().click();
+        await this.taxCategoryActionPage.agreeBtn.click();
+        await expect(
+            this.taxCategoryActionPage.successDeleteTaxCategory.first(),
         ).toBeVisible();
     }
 
@@ -1781,18 +2043,20 @@ export class ACLManagement {
         }
         await addAddress(this.page);
         await this.page.goto("");
-        await this.aclShopPage.searchInput.fill("simple");
-        await this.aclShopPage.searchInput.press("Enter");
-        await this.aclShopPage.addToCartButton.first().click();
-        await expect(this.aclShopPage.addCartSuccess.first()).toBeVisible();
-        await this.aclShopPage.shoppingCartIcon.click();
-        await this.aclShopPage.continueButton.click();
+        await this.customerCheckoutActionPage.searchInput.fill("simple");
+        await this.customerCheckoutActionPage.searchInput.press("Enter");
+        await this.customerCheckoutActionPage.addToCartButton.first().click();
+        await expect(
+            this.customerCheckoutActionPage.addCartSuccess.first(),
+        ).toBeVisible();
+        await this.customerCheckoutActionPage.shoppingCartIcon.click();
+        await this.customerCheckoutActionPage.continueButton.click();
         await this.page.locator(".icon-radio-unselect").first().click();
-        await this.aclShopPage.clickProcessButton.click();
-        await this.aclShopPage.chooseShippingMethod.click();
-        await this.aclShopPage.choosePaymentMethod.click();
+        await this.customerCheckoutActionPage.clickProcessButton.click();
+        await this.customerCheckoutActionPage.chooseShippingMethod.click();
+        await this.customerCheckoutActionPage.choosePaymentMethod.click();
         await this.page.waitForTimeout(2000);
-        await this.aclShopPage.clickPlaceOrderButton.click();
+        await this.customerCheckoutActionPage.clickPlaceOrderButton.click();
         await this.page.waitForTimeout(8000);
     }
 
@@ -1895,7 +2159,6 @@ export class ACLManagement {
          */
 
         await this.page.locator('label[for="allow_rma"]').click();
-        await this.aclAdminPage.rmaSelection.selectOption("1");
 
         /**
          * Saving the product.
@@ -1924,116 +2187,112 @@ export class ACLManagement {
         await this.createSimpleProduct(this.page);
         await this.createOrder();
         await this.page.goto("admin/sales/rma/requests");
-        await this.aclAdminPage.createBtn.click();
-        await this.aclAdminPage.iconEdit.first().click();
-        await this.aclAdminPage.checkBox.check();
+        await this.rmaActionPage.createBtn.click();
+        await this.rmaActionPage.iconEdit.first().click();
+        await this.rmaActionPage.checkBox.check();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.resolution.selectOption("cancel_items");
-        await this.aclAdminPage.resolution.selectOption("cancel_items");
+        await this.rmaActionPage.resolution.selectOption("cancel_items");
+        await this.rmaActionPage.resolution.selectOption("cancel_items");
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.reason.selectOption("1");
-        await this.aclAdminPage.rmaQTY.fill("1");
-        await this.aclAdminPage.info.fill("Changed My Mind.");
-        await this.aclAdminPage.createBtn.first().click();
-        await expect(this.aclAdminPage.successAdminRMA).toBeVisible();
+        await this.rmaActionPage.reason.selectOption("1");
+        await this.rmaActionPage.rmaQty.fill("1");
+        await this.rmaActionPage.info.fill("Changed My Mind.");
+        await this.rmaActionPage.createBtn.first().click();
+        await expect(this.rmaActionPage.successRMA).toBeVisible();
     }
 
     async rmaReasonCreateVerify() {
         await this.page.goto("admin/sales/rma/reasons");
-        await this.aclAdminPage.createRMAReason.click();
-        await this.aclAdminPage.reasonTitle.fill("Broken Product");
-        await this.aclAdminPage.reasonStatus.check();
-        await this.aclAdminPage.position.fill("1");
-        await this.aclAdminPage.reasonType.selectOption("return");
-        await this.aclAdminPage.saveReason.click();
-        await expect(this.aclAdminPage.saveReasonSuccess).toBeVisible();
+        await this.rmaActionPage.createReasonBtn.click();
+        await this.rmaActionPage.reasonTitle.fill("Broken Product");
+        await this.rmaActionPage.reasonStatus.check();
+        await this.rmaActionPage.position.fill("1");
+        await this.rmaActionPage.reasonType.selectOption("return");
+        await this.rmaActionPage.saveReasonBtn.click();
+        await expect(this.rmaActionPage.successReasonCreate).toBeVisible();
     }
 
     async rmaReasonEditVerify() {
         await this.page.goto("admin/sales/rma/reasons");
-        await expect(this.aclAdminPage.createRMAReason).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
-        await this.aclAdminPage.position.fill("5");
-        await this.aclAdminPage.saveReason.click();
-        await expect(
-            this.aclAdminPage.saveReasonUpdateSuccess.first(),
-        ).toBeVisible();
+        await expect(this.rmaActionPage.createReasonBtn).not.toBeVisible();
+        await this.rmaActionPage.iconEdit.first().click();
+        await this.rmaActionPage.position.fill("5");
+        await this.rmaActionPage.saveReasonBtn.click();
+        await expect(this.rmaActionPage.successReasonUpdate).toBeVisible();
     }
 
     async rmaReasonDeleteVerify() {
         await this.page.goto("admin/sales/rma/reasons");
-        await expect(this.aclAdminPage.createRMAReason).not.toBeVisible();
-        await expect(this.aclAdminPage.editIcon.first()).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(
-            this.aclAdminPage.saveReasonDeleteSuccess.first(),
-        ).toBeVisible();
+        await expect(this.rmaActionPage.createReasonBtn).not.toBeVisible();
+        await expect(this.rmaActionPage.iconEdit.first()).not.toBeVisible();
+        await this.rmaActionPage.deleteIcon.first().click();
+        await this.rmaActionPage.agreeBtn.click();
+        await expect(this.rmaActionPage.successReasonDelete).toBeVisible();
     }
 
     async rmaRulesCreateVerify() {
         await this.page.goto("admin/sales/rma/rules");
-        await this.aclAdminPage.rmaRulesCreate.click();
+        await this.rmaActionPage.createRuleBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.ruleTitle.fill("Test Rule1");
-        await this.aclAdminPage.reasonStatus.check();
-        await this.aclAdminPage.ruleDescription.fill("Test Rule Description");
-        await this.aclAdminPage.returnPeriod.fill("15");
-        await this.aclAdminPage.saveRule.click();
-        await expect(this.aclAdminPage.ruleSuccessMSG).toBeVisible();
+        await this.rmaActionPage.ruleTitle.fill("Test Rule1");
+        await this.rmaActionPage.reasonStatus.check();
+        await this.rmaActionPage.ruleDescription.fill("Test Rule Description");
+        await this.rmaActionPage.returnPeriod.fill("15");
+        await this.rmaActionPage.saveRuleBtn.click();
+        await expect(this.rmaActionPage.successRuleCreate).toBeVisible();
     }
 
     async rmaRulesEditVerify() {
         await this.page.goto("admin/sales/rma/rules");
-        await expect(this.aclAdminPage.rmaRulesCreate).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.rmaActionPage.createRuleBtn).not.toBeVisible();
+        await this.rmaActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.ruleTitle.fill("Test Rule1");
-        await this.aclAdminPage.reasonStatus.check();
-        await this.aclAdminPage.ruleDescription.fill("Test Rule Description");
-        await this.aclAdminPage.returnPeriod.fill("15");
-        await this.aclAdminPage.saveRule.click();
-        await expect(this.aclAdminPage.ruleSuccessUpdatedMSG).toBeVisible();
+        await this.rmaActionPage.ruleTitle.fill("Test Rule1");
+        await this.rmaActionPage.reasonStatus.check();
+        await this.rmaActionPage.ruleDescription.fill("Test Rule Description");
+        await this.rmaActionPage.returnPeriod.fill("15");
+        await this.rmaActionPage.saveRuleBtn.click();
+        await expect(this.rmaActionPage.successRuleUpdate).toBeVisible();
     }
 
     async rmaRulesDeleteVerify() {
         await this.page.goto("admin/sales/rma/rules");
-        await expect(this.aclAdminPage.rmaRulesCreate).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit).not.toBeVisible();
-        await this.aclAdminPage.deleteIcon.first().click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.ruleDeleteSuccessMSG).toBeVisible();
+        await expect(this.rmaActionPage.createRuleBtn).not.toBeVisible();
+        await expect(this.rmaActionPage.iconEdit).not.toBeVisible();
+        await this.rmaActionPage.deleteIcon.first().click();
+        await this.rmaActionPage.agreeBtn.click();
+        await expect(this.rmaActionPage.successRuleDelete).toBeVisible();
     }
 
     async rmaStatusCreateVerify() {
         await this.page.goto("admin/sales/rma/rma-status");
-        await this.aclAdminPage.createRMAStatus.click();
+        await this.rmaActionPage.createStatusBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.rmaStatusTitle.fill("RMA Status");
-        await this.aclAdminPage.reasonStatus.click();
-        await this.aclAdminPage.saveStatus.click();
-        await expect(this.aclAdminPage.statusSuccess).toBeVisible();
+        await this.rmaActionPage.statusTitle.fill("RMA Status");
+        await this.rmaActionPage.reasonStatus.click();
+        await this.rmaActionPage.saveStatusBtn.click();
+        await expect(this.rmaActionPage.successStatusCreate).toBeVisible();
     }
 
     async rmaStatusEditVerify() {
         await this.page.goto("admin/sales/rma/rma-status");
-        await expect(this.aclAdminPage.createRMAStatus).not.toBeVisible();
-        await this.aclAdminPage.iconEdit.first().click();
+        await expect(this.rmaActionPage.createStatusBtn).not.toBeVisible();
+        await this.rmaActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.aclAdminPage.rmaStatusTitle.fill("RMA Status edited");
-        await this.aclAdminPage.saveStatus.click();
-        await expect(this.aclAdminPage.statusUpdateSuccess).toBeVisible();
+        await this.rmaActionPage.statusTitle.fill("RMA Status edited");
+        await this.rmaActionPage.saveStatusBtn.click();
+        await expect(this.rmaActionPage.successStatusUpdate).toBeVisible();
     }
 
     async rmaStatusDeleteVerify() {
         await this.page.goto("admin/sales/rma/rma-status");
-        await expect(this.aclAdminPage.createRMAStatus).not.toBeVisible();
-        await expect(this.aclAdminPage.iconEdit.first()).not.toBeVisible();
-        await expect(this.aclAdminPage.deleteIcon.first()).not.toBeVisible();
-        await this.aclAdminPage.selectRowBtn.first().click();
-        await this.aclAdminPage.selectAction.click();
-        await this.aclAdminPage.deleteBtn.click();
-        await this.aclAdminPage.agreeBtn.click();
-        await expect(this.aclAdminPage.statusDeleteSuccess).toBeVisible();
+        await expect(this.rmaActionPage.createStatusBtn).not.toBeVisible();
+        await expect(this.rmaActionPage.iconEdit.first()).not.toBeVisible();
+        await expect(this.rmaActionPage.deleteIcon.first()).not.toBeVisible();
+        await this.rmaActionPage.selectRow.first().click();
+        await this.rmaActionPage.selectAction.click();
+        await this.rmaActionPage.deleteAction.click();
+        await this.rmaActionPage.agreeBtn.click();
+        await expect(this.rmaActionPage.successStatusDelete).toBeVisible();
     }
 }

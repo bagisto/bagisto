@@ -1,5 +1,5 @@
 import { Page, expect } from "@playwright/test";
-import { CheckoutShopPage } from "../locators/shop/checkout"; //
+import { CustomerCheckoutActionPage } from "../locators/shop/CustomerCheckoutActionPage"; //
 import fs from "fs";
 
 /**
@@ -15,12 +15,12 @@ function readProductData() {
 
 export class ProductCheckout {
     readonly page: Page;
-    readonly checkoutShopPage: CheckoutShopPage;
+    readonly customerCheckoutActionPage: CustomerCheckoutActionPage;
 
     constructor(page: Page) {
         this.page = page;
 
-        this.checkoutShopPage = new CheckoutShopPage(page);
+        this.customerCheckoutActionPage = new CustomerCheckoutActionPage(page);
     }
 
     /**
@@ -29,18 +29,18 @@ export class ProductCheckout {
     async searchProduct(productName: string) {
         await this.page.goto("");
         await this.page.waitForLoadState("networkidle");
-        await this.checkoutShopPage.searchInput.fill(productName);
-        await this.checkoutShopPage.searchInput.press("Enter");
+        await this.customerCheckoutActionPage.searchInput.fill(productName);
+        await this.customerCheckoutActionPage.searchInput.press("Enter");
     }
 
     /**
      * Common steps to reach checkout page
      */
     async proceedToCheckout() {
-        await this.checkoutShopPage.shoppingCartIcon.click();
-        await this.checkoutShopPage.continueButton.click();
+        await this.customerCheckoutActionPage.shoppingCartIcon.click();
+        await this.customerCheckoutActionPage.continueButton.click();
         await this.page.locator(".icon-radio-unselect").first().click();
-        await this.checkoutShopPage.clickProcessButton.click();
+        await this.customerCheckoutActionPage.clickProcessButton.click();
     }
 
     /**
@@ -48,7 +48,7 @@ export class ProductCheckout {
      */
     async placeOrder() {
         await this.page.waitForTimeout(2000);
-        await this.checkoutShopPage.clickPlaceOrderButton.click();
+        await this.customerCheckoutActionPage.clickPlaceOrderButton.click();
         await this.page.waitForTimeout(8000);
     }
 
@@ -64,13 +64,13 @@ export class ProductCheckout {
 
         const productName = readProductData();
         await this.searchProduct(productName);
-        await this.checkoutShopPage.addToCartButton.click();
+        await this.customerCheckoutActionPage.addToCartButton.click();
         await expect(
-            this.checkoutShopPage.addCartSuccess.first(),
+            this.customerCheckoutActionPage.addCartSuccess.first(),
         ).toBeVisible();
         await this.proceedToCheckout();
-        await this.checkoutShopPage.chooseShippingMethod.click();
-        await this.checkoutShopPage.choosePaymentMethod.click();
+        await this.customerCheckoutActionPage.chooseShippingMethod.click();
+        await this.customerCheckoutActionPage.choosePaymentMethod.click();
         await this.placeOrder();
     }
 }
