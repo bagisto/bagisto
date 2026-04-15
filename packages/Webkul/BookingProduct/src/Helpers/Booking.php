@@ -145,6 +145,25 @@ class Booking
     }
 
     /**
+     * Returns the booking-specific slot availability error message.
+     */
+    public function getSlotAvailabilityErrorMessage(array $cartProducts): string
+    {
+        foreach ($cartProducts as $cartProduct) {
+            if ($this->isSlotExpired($cartProduct)) {
+                return trans('shop::app.products.view.type.booking.slots.no-slots-available');
+            }
+
+            if (! $this->isItemHaveQuantity($cartProduct)) {
+                return trans('shop::app.products.booking.cart.integrity.inventory_warning');
+            }
+        }
+
+        return trans('shop::app.products.booking.cart.integrity.inventory_warning');
+    }
+
+
+    /**
      * Returns slots for a particular day.
      *
      * @param  BookingProduct  $bookingProduct
