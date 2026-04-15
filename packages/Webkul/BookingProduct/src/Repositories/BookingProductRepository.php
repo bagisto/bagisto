@@ -51,6 +51,8 @@ class BookingProductRepository extends Repository
      */
     public function create(array $data)
     {
+        $data = $this->sanitizeTypeSpecificData($data);
+
         if (isset($data['slots'])) {
             $data['slots'] = $this->validateSlots($data);
         }
@@ -75,6 +77,8 @@ class BookingProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
+        $data = $this->sanitizeTypeSpecificData($data);
+
         if (isset($data['slots'])) {
             $data['slots'] = $this->skipOverLappingSlots($data['slots']);
         }
@@ -108,6 +112,24 @@ class BookingProductRepository extends Repository
                 $this->typeRepositories[$data['type']]->update($data, $bookingProductTypeSlot->id);
             }
         }
+    }
+
+    /**
+     * Normalize type-specific fields so stale values do not survive mode switches.
+     */
+    protected function sanitizeTypeSpecificData(array $data): array
+    {
+        if (
+            ($data['type'] ?? null) !== 'default'
+            || ($data['booking_type'] ?? null) !== 'one'
+        ) {
+            return $data;
+        }
+
+        $data['duration'] = null;
+        $data['break_time'] = null;
+
+        return $data;
     }
 
     /**
