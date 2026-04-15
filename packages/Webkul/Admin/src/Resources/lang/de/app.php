@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Tickets',
                             'valid-from' => 'Gültig ab',
                             'valid-until' => 'Gültig bis',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'Das Ticket-Enddatum muss kleiner oder gleich dem Veranstaltungsenddatum sein.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Tickets bearbeiten',

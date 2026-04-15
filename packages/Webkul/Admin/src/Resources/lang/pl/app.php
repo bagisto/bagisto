@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Bilety',
                             'valid-from' => 'Ważne od',
                             'valid-until' => 'Ważne do',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'Data zakończenia biletu musi być mniejsza lub równa dacie zakończenia wydarzenia.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Edytuj bilety',

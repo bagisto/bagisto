@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Tickets',
                             'valid-from' => 'Geldig Vanaf',
                             'valid-until' => 'Geldig Tot',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'De einddatum van het ticket moet kleiner dan of gelijk zijn aan de einddatum van het evenement.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Tickets Bewerken',

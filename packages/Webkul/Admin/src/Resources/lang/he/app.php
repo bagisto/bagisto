@@ -1495,6 +1495,9 @@ return [
                             'title' => 'כרטיסים',
                             'valid-from' => 'תקף מ',
                             'valid-until' => 'תקף עד',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'תאריך סיום הכרטיס חייב להיות קטן או שווה לתאריך סיום האירוע.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'ערוך כרטיסים',

@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Квитки',
                             'valid-from' => 'Дійсно з',
                             'valid-until' => 'Дійсно до',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'Дата закінчення квитка має бути меншою або дорівнювати даті закінчення події.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Редагувати квитки',

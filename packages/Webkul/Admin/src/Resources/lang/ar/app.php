@@ -1495,6 +1495,9 @@ return [
                             'title' => 'التذاكر',
                             'valid-from' => 'صالح من',
                             'valid-until' => 'صالح حتى',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'يجب أن يكون تاريخ انتهاء التذكرة أقل من أو يساوي تاريخ انتهاء الحدث.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'تحرير التذاكر',

@@ -1495,6 +1495,9 @@ return [
                             'title' => 'टिकट',
                             'valid-from' => 'से मान्य',
                             'valid-until' => 'तक मान्य',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'टिकट की समाप्ति तिथि इवेंट की समाप्ति तिथि से कम या उसके बराबर होनी चाहिए।',
+                            ],
 
                             'modal' => [
                                 'edit' => 'टिकट संपादित करें',

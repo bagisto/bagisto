@@ -2,7 +2,9 @@
 
 namespace Webkul\BookingProduct\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Str;
 use Webkul\BookingProduct\Contracts\BookingProduct;
 use Webkul\BookingProduct\Contracts\BookingProductEventTicket;
@@ -39,6 +41,8 @@ class BookingProductEventTicketRepository extends Repository
                 $this->sanitizeInput('special_price_from', $ticketInputs);
 
                 $this->sanitizeInput('special_price_to', $ticketInputs);
+
+                $this->validateTicketDates($ticketInputs, $bookingProduct);
 
                 if (Str::contains($ticketId, 'ticket_')) {
                     $ticket = $this->create(array_merge([
@@ -83,6 +87,25 @@ class BookingProductEventTicketRepository extends Repository
             || $fieldValue === '0000-00-00 00:00:00'
         ) {
             $inputs[$fieldName] = null;
+        }
+    }
+
+    /**
+     * Ensure ticket validity dates stay within the event availability window.
+     */
+    private function validateTicketDates(array $ticketInputs, BookingProduct $bookingProduct): void
+    {
+        if (
+            empty($ticketInputs['special_price_to'])
+            || ! $bookingProduct->available_to
+        ) {
+            return;
+        }
+
+        if (Carbon::parse($ticketInputs['special_price_to'])->gt($bookingProduct->available_to)) {
+            throw ValidationException::withMessages([
+                'booking.tickets' => trans('admin::app.catalog.products.edit.types.booking.event.validations.ticket-end-date-before-event-end-date'),
+            ]);
         }
     }
 }

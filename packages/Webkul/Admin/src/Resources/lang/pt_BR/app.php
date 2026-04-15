@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Ingressos',
                             'valid-from' => 'Válido de',
                             'valid-until' => 'Válido até',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'A data de término do ingresso deve ser menor ou igual à data de término do evento.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Editar Ingressos',

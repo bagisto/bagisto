@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Entradas',
                             'valid-from' => 'Válido Desde',
                             'valid-until' => 'Válido Hasta',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'La fecha de finalización del ticket debe ser menor o igual a la fecha de finalización del evento.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Editar Entradas',

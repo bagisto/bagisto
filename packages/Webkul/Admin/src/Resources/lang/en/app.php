@@ -1495,7 +1495,10 @@ return [
                             'title' => 'Tickets',
                             'valid-from' => 'Valid From',
                             'valid-until' => 'Valid Until',
-
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'Ticket end date must be less than or equal to the event end date.',
+                            ],
+                            
                             'modal' => [
                                 'edit' => 'Edit Tickets',
                                 'save' => 'Save',

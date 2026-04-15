@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Billets',
                             'valid-from' => 'Valide à partir de',
                             'valid-until' => 'Valide jusqu\'à',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'La date de fin du billet doit être inférieure ou égale à la date de fin de l\'événement.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Modifier les billets',

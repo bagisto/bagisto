@@ -1495,6 +1495,9 @@ return [
                             'title' => 'ටිකට්',
                             'valid-from' => 'වලංගු දිනය සිට',
                             'valid-until' => 'වලංගු දිනය දක්වා',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'ටිකට් අවසන් දිනය සිදුවීමේ අවසන් දිනයට වඩා අඩු හෝ සමාන විය යුතුය.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'ටිකට් සංස්කරණය',

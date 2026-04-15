@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Biletler',
                             'valid-from' => 'Geçerli Başlangıç',
                             'valid-until' => 'Geçerli Bitiş',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'Bilet bitiş tarihi, etkinlik bitiş tarihinden küçük veya eşit olmalıdır.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Biletleri Düzenle',

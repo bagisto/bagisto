@@ -1495,6 +1495,9 @@ return [
                             'title' => 'টিকিট',
                             'valid-from' => 'বৈধ শুরু',
                             'valid-until' => 'বৈধ শেষ',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'টিকিটের শেষ তারিখ ইভেন্টের শেষ তারিখের সমান বা তার আগে হতে হবে।',
+                            ],
 
                             'modal' => [
                                 'edit' => 'টিকিট সম্পাদনা করুন',

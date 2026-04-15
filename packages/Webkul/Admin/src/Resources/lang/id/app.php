@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Tiket',
                             'valid-from' => 'Berlaku Dari',
                             'valid-until' => 'Berlaku Sampai',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'Tanggal akhir tiket harus kurang dari atau sama dengan tanggal akhir acara.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Ubah Tiket',

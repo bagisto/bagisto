@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Entrades',
                             'valid-from' => 'Vàlid Des de',
                             'valid-until' => 'Vàlid Fins a',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'La data de finalització del tiquet ha de ser inferior o igual a la data de finalització de l\'esdeveniment.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Editar Entrades',

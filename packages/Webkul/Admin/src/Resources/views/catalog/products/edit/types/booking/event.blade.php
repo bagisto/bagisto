@@ -351,6 +351,22 @@
 
             methods: {
                 store(params) {
+
+                    const eventEndDate = this.getEventEndDate();
+
+                    if (
+                        params.special_price_to
+                        && eventEndDate
+                        && new Date(params.special_price_to) > new Date(eventEndDate)
+                    ) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'error',
+                            message: "@lang('admin::app.catalog.products.edit.types.booking.event.validations.ticket-end-date-before-event-end-date')",
+                        });
+
+                        return;
+                    }
+
                     if (! params.id) {
                             this.optionRowCount++;
 
@@ -395,6 +411,10 @@
 
                 toggle() {
                     this.$refs.drawerForm.toggle();
+                },
+
+                getEventEndDate() {
+                    return document.querySelector('[name="booking[available_to]"]')?.value || '';
                 },
             }
         });

@@ -1495,6 +1495,9 @@ return [
                             'title' => 'Tickets',
                             'valid-from' => 'Valid From',
                             'valid-until' => 'Valid Until',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'Data de sfârșit a biletului trebuie să fie mai mică sau egală cu data de sfârșit a evenimentului.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'Edit Tickets',

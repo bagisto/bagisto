@@ -1495,6 +1495,9 @@ return [
                             'title' => '票',
                             'valid-from' => '有效起始日期',
                             'valid-until' => '有效结束日期',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => '门票结束日期必须小于或等于活动结束日期。',
+                            ],
 
                             'modal' => [
                                 'edit' => '编辑票',

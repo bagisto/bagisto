@@ -1495,6 +1495,9 @@ return [
                             'title' => 'チケット',
                             'valid-from' => '有効開始日',
                             'valid-until' => '有効終了日',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'チケットの終了日はイベントの終了日以下である必要があります。',
+                            ],
 
                             'modal' => [
                                 'edit' => 'チケットを編集',

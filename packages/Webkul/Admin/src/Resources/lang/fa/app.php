@@ -1495,6 +1495,9 @@ return [
                             'title' => 'بلیط‌ها',
                             'valid-from' => 'معتبر از',
                             'valid-until' => 'معتبر تا',
+                            'validations' => [
+                                'ticket-end-date-before-event-end-date' => 'تاریخ پایان بلیت باید کمتر یا مساوی تاریخ پایان رویداد باشد.',
+                            ],
 
                             'modal' => [
                                 'edit' => 'ویرایش بلیط‌ها',
