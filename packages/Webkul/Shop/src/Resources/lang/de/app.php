@@ -823,11 +823,15 @@ return [
             'cart' => [
                 'booking-from' => 'Buchung von',
                 'booking-till' => 'Buchung bis',
+                'charged-per' => 'Berechnet pro',
                 'daily' => 'Tagesbasis',
                 'event-from' => 'Veranstaltung von',
                 'event-ticket' => 'Veranstaltungsticket',
                 'event-till' => 'Veranstaltung bis',
+                'guest' => 'Gast',
+                'guest-limit' => 'Gastlimit',
                 'hourly' => 'Stundenbasis',
+                'table' => 'Tisch',
 
                 'integrity' => [
                     'event' => [

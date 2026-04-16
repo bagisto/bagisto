@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'Квиток на подію',
                 'event-till' => 'Подія до',
                 'hourly' => 'Погодинна основа',
+                'charged-per' => 'Стягується за',
+                'guest'        => 'Гість',
+                'guest-limit'  => 'Ліміт гостей',
+                'table'        => 'Стіл',
 
                 'integrity' => [
                     'event' => [

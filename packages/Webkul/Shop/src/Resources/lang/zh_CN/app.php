@@ -828,6 +828,10 @@ return [
                 'event-ticket' => '活动票',
                 'event-till' => '活动到',
                 'hourly' => '按小时计算',
+                'charged-per' => '按...收费',
+                'guest'        => '客人',
+                'guest-limit'  => '客人限制',
+                'table'        => '桌子',
 
                 'integrity' => [
                     'event' => [

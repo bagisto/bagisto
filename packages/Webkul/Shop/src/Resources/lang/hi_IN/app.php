@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'कार्यक्रम टिकट',
                 'event-till' => 'कार्यक्रम तक',
                 'hourly' => 'घंटे के आधार पर',
+                'charged-per' => 'प्रति शुल्क',
+                'guest'        => 'अतिथि',
+                'guest-limit'  => 'अतिथि सीमा',
+                'table'        => 'टेबल',
 
                 'integrity' => [
                     'event' => [

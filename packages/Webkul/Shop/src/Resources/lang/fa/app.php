@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'بلیط رویداد',
                 'event-till' => 'رویداد تا',
                 'hourly' => 'به صورت ساعتی',
+                'charged-per' => 'هزینه به ازای هر',
+                'guest'        => 'مهمان',
+                'guest-limit'  => 'محدودیت مهمان',
+                'table'        => 'میز',
 
                 'integrity' => [
                     'event' => [

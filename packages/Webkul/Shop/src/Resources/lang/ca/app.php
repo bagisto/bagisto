@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'Entrada per a l\'esdeveniment',
                 'event-till' => 'Esdeveniment fins a',
                 'hourly' => 'Per hores',
+                'charged-per' => 'Cobrat per',
+                'guest'        => 'Convidat',
+                'guest-limit'  => 'Límit de convidats',
+                'table'        => 'Taula',
 
                 'integrity' => [
                     'event' => [

@@ -827,8 +827,12 @@ return [
                 'event-from' => 'Event From',
                 'event-ticket' => 'Event Ticket',
                 'event-till' => 'Event Till',
+                'charged-per' => 'Charged Per',
+                'guest' => 'Guest',
+                'guest-limit' => 'Guest Limit',
+                'table' => 'Table',
                 'hourly' => 'Hourly Basis',
-
+                
                 'integrity' => [
                     'event' => [
                         'expired' => 'This event has been expired.',

@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'Evenement Ticket',
                 'event-till' => 'Evenement Tot',
                 'hourly' => 'Per Uur',
+                'charged-per' => 'Gefactureerd per',
+                'guest'        => 'Gast',
+                'guest-limit'  => 'Gastlimiet',
+                'table'        => 'Tafel',
 
                 'integrity' => [
                     'event' => [

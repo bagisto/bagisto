@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'Billet d\'événement',
                 'event-till' => 'Événement jusqu\'à',
                 'hourly' => 'Base horaire',
+                'charged-per' => 'Facturé par',
+                'guest'        => 'Invité',
+                'guest-limit'  => 'Limite d\'invités',
+                'table'        => 'Table',
 
                 'integrity' => [
                     'event' => [

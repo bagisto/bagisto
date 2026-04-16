@@ -41,7 +41,7 @@
 
     <!-- Notes -->
     <x-shop::form.control-group class="!mb-0 w-full">
-        <x-shop::form.control-group.label class="required">
+        <x-shop::form.control-group.label>
             @lang('shop::app.products.view.type.booking.table.special-notes')
         </x-shop::form.control-group.label>
 
@@ -49,7 +49,6 @@
             type="textarea"
             class="!mb-0 max-sm:px-2.5 max-sm:py-1.5 max-sm:text-xs"
             name="booking[note]"
-            rules="required"
             :label="trans('shop::app.products.view.type.booking.table.special-notes')"
             :placeholder="trans('shop::app.products.view.type.booking.table.special-notes')"
         />

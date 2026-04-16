@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'Билет на событие',
                 'event-till' => 'Событие до',
                 'hourly' => 'Почасовая основа',
+                'charged-per' => 'Taxat per',
+                'guest'        => 'Oaspete',
+                'guest-limit'  => 'Limită de oaspeți',
+                'table'        => 'Masă',
 
                 'integrity' => [
                     'event' => [

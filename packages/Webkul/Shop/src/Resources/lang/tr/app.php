@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'Etkinlik Bileti',
                 'event-till' => 'Etkinlik Bitişi',
                 'hourly' => 'Saatlik',
+                'charged-per' => 'Başına ücretlendirilir',
+                'guest'        => 'Misafir',
+                'guest-limit'  => 'Misafir limiti',
+                'table'        => 'Masa',
 
                 'integrity' => [
                     'event' => [

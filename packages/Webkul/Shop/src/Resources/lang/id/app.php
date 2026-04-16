@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'Tiket Acara',
                 'event-till' => 'Acara Hingga',
                 'hourly' => 'Per Jam',
+                'charged-per' => 'Dikenakan per',
+                'guest'        => 'Tamu',
+                'guest-limit'  => 'Batas tamu',
+                'table'        => 'Meja',
 
                 'integrity' => [
                     'event' => [

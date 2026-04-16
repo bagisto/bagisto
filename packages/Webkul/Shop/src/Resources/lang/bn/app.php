@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'ইভেন্ট টিকিট',
                 'event-till' => 'ইভেন্ট পর্যন্ত',
                 'hourly' => 'ঘণ্টা ভিত্তিতে',
+                'charged-per' => 'প্রতি অনুযায়ী চার্জ',
+                'guest'        => 'অতিথি',
+                'guest-limit'  => 'অতিথি সীমা',
+                'table'        => 'টেবিল',
 
                 'integrity' => [
                     'event' => [

@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'כרטיס אירוע',
                 'event-till' => 'אירוע עד',
                 'hourly' => 'בסיס שעתי',
+                'charged-per' => 'מחויב לפי',
+                'guest'        => 'אורח',
+                'guest-limit'  => 'מגבלת אורחים',
+                'table'        => 'שולחן',
 
                 'integrity' => [
                     'event' => [

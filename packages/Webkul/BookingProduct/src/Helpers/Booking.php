@@ -262,7 +262,7 @@ class Booking
                 return $this->getRentalAttributes($bookingProduct, $data);
 
             case 'table':
-                return $this->getTableAttributes($data);
+                return $this->getTableAttributes($bookingProduct, $data);
 
             default:
                 return $this->getDefaultAttributes($data);
@@ -623,19 +623,29 @@ class Booking
     /**
      * Get table booking attributes.
      */
-    private function getTableAttributes($data): array
+    private function getTableAttributes($bookingProduct, $data): array
     {
         $timestamps = explode('-', $data['booking']['slot']);
 
+        $tableSlot = $bookingProduct->table_slot;
+
         $attributes = [
             [
+                'attribute_name' => trans('shop::app.products.booking.cart.charged-per'),
+                'option_id'      => 0,
+                'option_label'   => trans('shop::app.products.booking.cart.' . $tableSlot->price_type),
+            ], [
+                'attribute_name' => trans('shop::app.products.booking.cart.guest-limit'),
+                'option_id'      => 0,
+                'option_label'   => $tableSlot->guest_limit,
+            ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
-                'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp($timestamps[0])->isoFormat('Do MMM, YYYY h:mm A'),
+                'option_id'      => 0,
+                'option_label'   => Carbon::createFromTimestamp($timestamps[0])->isoFormat('Do MMM, YYYY h:mm A'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-till'),
-                'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp($timestamps[1])->isoFormat('Do MMM, YYYY h:mm A'),
+                'option_id'      => 0,
+                'option_label'   => Carbon::createFromTimestamp($timestamps[1])->isoFormat('Do MMM, YYYY h:mm A'),
             ],
         ];
 

@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'සිදුවීම් ටිකට්පත',
                 'event-till' => 'සිදුවීමේ දක්වා',
                 'hourly' => 'පැය පදනම',
+                'charged-per' => 'එකට අය කෙරේ',
+                'guest'        => 'අමුත්තා',
+                'guest-limit'  => 'අමුත්තා සීමාව',
+                'table'        => 'මේසය',
 
                 'integrity' => [
                     'event' => [

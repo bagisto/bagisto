@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'イベントチケット',
                 'event-till' => 'イベント終了',
                 'hourly' => '時間単位',
+                'charged-per' => '単位ごとに課金',
+                'guest'        => 'ゲスト',
+                'guest-limit'  => 'ゲスト上限',
+                'table'        => 'テーブル',
 
                 'integrity' => [
                     'event' => [

@@ -828,6 +828,10 @@ return [
                 'event-ticket' => 'تذكرة الحدث',
                 'event-till' => 'الحدث حتى',
                 'hourly' => 'على أساس الساعة',
+                'charged-per' => 'يتم التحصيل لكل',
+                'guest'        => 'ضيف',
+                'guest-limit'  => 'حد الضيوف',
+                'table'        => 'طاولة',
 
                 'integrity' => [
                     'event' => [
