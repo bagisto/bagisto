@@ -8,6 +8,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11235 [fixed] - Fixed an issue causing incorrect slot visibility based on selected day and date in appointment booking.
 
+- #10902 [fixed] - Updated appointment booking products to display only available time slots.
+
 ## **v2.3.17 (13th of April 2026)** - *Release*
 
 * Added support for Romanian language.
