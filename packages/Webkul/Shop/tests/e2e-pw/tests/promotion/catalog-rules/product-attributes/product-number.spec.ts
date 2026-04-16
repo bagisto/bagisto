@@ -1,6 +1,7 @@
 import { expect, test } from "../../../../setup";
 import { ProductCreation } from "../../../../pages/product";
 import { CreateRules } from "../../../../pages/rules";
+import { loginAsAdmin } from "../../../../utils/admin";
 
 let generatedProductNumber: string;
 generatedProductNumber = `PN-${Date.now()}`;
@@ -34,7 +35,7 @@ test.describe("catalog rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.catalogRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|product_number",
@@ -66,7 +67,7 @@ test.describe("catalog rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.catalogRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|product_number",
@@ -98,7 +99,7 @@ test.describe("catalog rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.catalogRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|product_number",
@@ -130,7 +131,7 @@ test.describe("catalog rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.catalogRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|product_number",

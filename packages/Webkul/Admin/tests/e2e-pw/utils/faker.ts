@@ -185,7 +185,7 @@ export function generateSlug(delimiter = "-") {
     return slug;
 }
 
-export function generateDescription(length = 255) {
+export function generateDescription(length = 200) {
     const phrases = [
         "An innovative and sleek design.",
         "Built for speed and efficiency.",

@@ -132,7 +132,7 @@ async function createSimpleProduct(adminPage) {
     await expect(
         adminPage
             .locator("p.break-all.text-base")
-            .filter({ hasText: product.name }),
+            .filter({ hasText: new RegExp(`^${product.name}$`) }),
     ).toBeVisible();
 }
 
@@ -323,7 +323,7 @@ async function createConfigurableProduct(adminPage) {
     //  */
     // await adminPage.goto("admin/catalog/products");
     // await expect(
-    //     adminPage.getByRole("paragraph").filter({ hasText: product.name }),
+    //     adminPage.getByRole("paragraph").filter({ hasText: new RegExp(`^${product.name}$`) }),
     // ).toBeVisible();
 }
 
@@ -426,7 +426,7 @@ async function createGroupedProduct(adminPage) {
      */
     await adminPage.goto("admin/catalog/products");
     await expect(
-        adminPage.getByRole("paragraph").filter({ hasText: product.name }),
+        adminPage.getByRole("paragraph").filter({ hasText: new RegExp(`^${product.name}$`) }),
     ).toBeVisible();
 }
 
@@ -508,7 +508,7 @@ async function createVirtualProduct(adminPage) {
      */
     await adminPage.goto("admin/catalog/products");
     await expect(
-        adminPage.getByRole("paragraph").filter({ hasText: product.name }),
+        adminPage.getByRole("paragraph").filter({ hasText: new RegExp(`^${product.name}$`) }),
     ).toBeVisible();
 }
 
@@ -591,8 +591,10 @@ async function createDownloadableProduct(adminPage) {
     /**
      * Saving the Downloadable Link.
      */
+    await adminPage.waitForTimeout(1000);
     await adminPage.getByText("Link Save").click();
     await adminPage.getByRole("button", { name: "Save", exact: true }).click();
+    await adminPage.waitForLoadState("networkidle");
     await expect(adminPage.getByText(`${linkTitle}`)).toBeVisible();
 
     /**
@@ -610,8 +612,10 @@ async function createDownloadableProduct(adminPage) {
     /**
      * Saving the Downloadable Sample.
      */
+    await adminPage.waitForTimeout(1000);
     await adminPage.getByText("Link Save").click();
     await adminPage.getByRole("button", { name: "Save", exact: true }).click();
+    await adminPage.waitForLoadState("networkidle");
     await expect(adminPage.getByText(`${sampleTitle}`)).toBeVisible();
 
     /**
@@ -630,7 +634,7 @@ async function createDownloadableProduct(adminPage) {
      */
     await adminPage.goto("admin/catalog/products");
     await expect(
-        adminPage.getByRole("paragraph").filter({ hasText: product.name }),
+        adminPage.getByRole("paragraph").filter({ hasText: new RegExp(`^${product.name}$`) }),
     ).toBeVisible();
 }
 
@@ -1346,6 +1350,7 @@ test.describe("downloadable product management", () => {
         await adminPage
             .getByRole("button", { name: "Save", exact: true })
             .click();
+        await adminPage.waitForLoadState("networkidle");
 
         /**
          * Saving the product.
@@ -1497,7 +1502,7 @@ test.describe("booking product management", () => {
             await expect(
                 adminPage
                     .getByRole("paragraph")
-                    .filter({ hasText: product.name }),
+                    .filter({ hasText: new RegExp(`^${product.name}$`) }),
             ).toBeVisible();
         });
 
@@ -1663,7 +1668,7 @@ test.describe("booking product management", () => {
             await expect(
                 adminPage
                     .getByRole("paragraph")
-                    .filter({ hasText: product.name }),
+                    .filter({ hasText: new RegExp(`^${product.name}$`) }),
             ).toBeVisible();
         });
     });
@@ -1839,7 +1844,7 @@ test.describe("booking product management", () => {
             await expect(
                 adminPage
                     .getByRole("paragraph")
-                    .filter({ hasText: product.name }),
+                    .filter({ hasText: new RegExp(`^${product.name}$`) }),
             ).toBeVisible();
         });
 
@@ -2019,7 +2024,7 @@ test.describe("booking product management", () => {
             await expect(
                 adminPage
                     .getByRole("paragraph")
-                    .filter({ hasText: product.name }),
+                    .filter({ hasText: new RegExp(`^${product.name}$`) }),
             ).toBeVisible();
         });
 
@@ -2206,7 +2211,7 @@ test.describe("booking product management", () => {
             await expect(
                 adminPage
                     .getByRole("paragraph")
-                    .filter({ hasText: product.name }),
+                    .filter({ hasText: new RegExp(`^${product.name}$`) }),
             ).toBeVisible();
         });
 
@@ -2383,7 +2388,7 @@ test.describe("booking product management", () => {
             await expect(
                 adminPage
                     .getByRole("paragraph")
-                    .filter({ hasText: product.name }),
+                    .filter({ hasText: new RegExp(`^${product.name}$`) }),
             ).toBeVisible();
         });
     });
@@ -2452,7 +2457,7 @@ test.describe("booking product management", () => {
             await expect(
                 adminPage
                     .getByRole("paragraph")
-                    .filter({ hasText: product.name }),
+                    .filter({ hasText: new RegExp(`^${product.name}$`) }),
             ).toBeVisible();
         });
     });

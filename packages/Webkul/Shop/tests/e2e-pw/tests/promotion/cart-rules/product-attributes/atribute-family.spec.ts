@@ -3,6 +3,7 @@ import { expect } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/product";
 import { CreateRules } from "../../../../pages/rules";
 import { generateName, generateSlug } from "../../../../utils/faker";
+import { loginAsAdmin } from "../../../../utils/admin";
 
 test("should create attribute family for creating rule", async ({
     adminPage,
@@ -83,7 +84,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|attribute_family_id",
@@ -98,7 +99,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|attribute_family_id",
