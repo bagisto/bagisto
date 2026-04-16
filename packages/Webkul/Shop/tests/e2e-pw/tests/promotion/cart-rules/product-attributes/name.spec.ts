@@ -1,6 +1,7 @@
 import { test } from "../../../../setup";
 import { ProductCreation } from "../../../../pages/product";
 import { CreateRules } from "../../../../pages/rules";
+import { loginAsAdmin } from "../../../../utils/admin";
 
 let generatedName: string;
 generatedName = `Simple-${Date.now()}`;
@@ -34,7 +35,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|name",
@@ -49,7 +50,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|name",
@@ -64,7 +65,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|name",
@@ -79,7 +80,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|name",

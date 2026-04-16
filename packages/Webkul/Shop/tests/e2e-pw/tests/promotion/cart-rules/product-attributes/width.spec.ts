@@ -1,6 +1,7 @@
 import { expect, test } from "../../../../setup";
 import { ProductCreation } from "../../../../pages/product";
 import { CreateRules } from "../../../../pages/rules";
+import { loginAsAdmin } from "../../../../utils/admin";
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
@@ -28,7 +29,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|width",
@@ -57,7 +58,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|width",
@@ -86,7 +87,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|width",
@@ -115,7 +116,7 @@ test.describe("cart rules", () => {
             page,
         }) => {
             const createRules = new CreateRules(page);
-            await createRules.adminlogin();
+            await loginAsAdmin(page);
             await createRules.cartRuleCreationFlow();
             await createRules.addCondition({
                 attribute: "product|width",

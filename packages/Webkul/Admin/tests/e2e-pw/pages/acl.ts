@@ -1,5 +1,4 @@
 import { Page, expect } from "@playwright/test";
-import { WebLocators } from "../locators/locator";
 import { loginAsCustomer, addAddress } from "../utils/customer";
 import {
     generateFirstName,
@@ -15,6 +14,37 @@ import {
     generatePhoneNumber,
 } from "../utils/faker";
 import { fillInTinymce } from "../utils/tinymce";
+
+import { AdminSessionPage } from "../locators/admin/AdminSessionPage";
+import { ProductActionPage } from "../locators/admin/catalog/ProductActionPage";
+import { OrderActionPage } from "../locators/admin/sales/OrderActionPage";
+import { RoleActionPage } from "../locators/admin/settings/RoleActionPage";
+import { UserActionPage } from "../locators/admin/settings/UserActionPage";
+import { CategoryActionPage } from "../locators/admin/catalog/CategoryActionPage";
+import { AttributeActionPage } from "../locators/admin/catalog/AttributeActionPage";
+import { FamilyActionPage } from "../locators/admin/catalog/FamilyActionpage";
+import { CustomerActionPage } from "../locators/admin/customers/CustomerActionPage";
+import { GroupActionPage } from "../locators/admin/customers/GroupActionPage";
+import { CMSActionPage } from "../locators/admin/cms/CMSActionPage";
+import { CartRuleActionPage } from "../locators/admin/marketing/promotions/CartRuleActionPage";
+import { CatalogRuleActionPage } from "../locators/admin/marketing/promotions/CatalogRuleActionPage";
+import { EmailTemplateActionPage } from "../locators/admin/marketing/communication/EmailTemplateActionPage";
+import { EventActionPage } from "../locators/admin/marketing/communication/EventActionPage";
+import { CampaignActionPage } from "../locators/admin/marketing/communication/CampaignActionPage";
+import { URLRewriteActionPage } from "../locators/admin/marketing/search-seo/URLRewriteActionPage";
+import { SearchTermActionPage } from "../locators/admin/marketing/search-seo/SearchTermActionPage";
+import { SearchSynonymsActionPage } from "../locators/admin/marketing/search-seo/SearchSynonymsActionPage";
+import { SiteMapActionPage } from "../locators/admin/marketing/search-seo/SiteMapAction";
+import { LocaleActionPage } from "../locators/admin/settings/LocaleActionPage";
+import { CurrencyActionPage } from "../locators/admin/settings/CurrencyActionPage";
+import { ExchangeRateActionPage } from "../locators/admin/settings/ExchangeRateActionPage";
+import { InventorySourceActionPage } from "../locators/admin/settings/InventorySourceActionPage";
+import { ChannelActionPage } from "../locators/admin/settings/ChannelActionPage";
+import { ThemeActionPage } from "../locators/admin/settings/ThemeActionPage";
+import { TaxRateActionPage } from "../locators/admin/settings/TaxRateActionPage";
+import { TaxCategoryActionPage } from "../locators/admin/settings/TaxCategoryActionPage";
+import { RMAActionPage } from "../locators/admin/sales/RMAActionPage";
+import { CustomerCheckoutActionPage } from "../locators/shop/CustomerCheckoutActionPage";
 
 const ACL_Routes: Record<
     string,
@@ -808,17 +838,80 @@ const ACL_Routes: Record<
 
 export class ACLManagement {
     readonly page: Page;
-    readonly locators: WebLocators;
     readonly roleName: string;
     readonly userName: string;
     readonly userEmail: string;
+    readonly adminSessionPage: AdminSessionPage;
+    readonly productActionPage: ProductActionPage;
+    readonly orderActionPage: OrderActionPage;
+    readonly roleActionPage: RoleActionPage;
+    readonly userActionPage: UserActionPage;
+    readonly categoryActionPage: CategoryActionPage;
+    readonly attributeActionPage: AttributeActionPage;
+    readonly familyActionPage: FamilyActionPage;
+    readonly customersActionPage: CustomerActionPage;
+    readonly groupActionPage: GroupActionPage;
+    readonly cmsActionPage: CMSActionPage;
+    readonly cartRuleActionPage: CartRuleActionPage;
+    readonly catalogRuleActionPage: CatalogRuleActionPage;
+    readonly emailTemplateActionPage: EmailTemplateActionPage;
+    readonly eventActionPage: EventActionPage;
+    readonly campaignActionPage: CampaignActionPage;
+    readonly urlRewriteActionPage: URLRewriteActionPage;
+    readonly searchTermActionPage: SearchTermActionPage;
+    readonly searchSynonymsActionPage: SearchSynonymsActionPage;
+    readonly siteMapActionPage: SiteMapActionPage;
+    readonly localeActionPage: LocaleActionPage;
+    readonly currencyActionPage: CurrencyActionPage;
+    readonly exchangeRateActionPage: ExchangeRateActionPage;
+    readonly inventorySourceActionPage: InventorySourceActionPage;
+    readonly channelActionPage: ChannelActionPage;
+    readonly themeActionPage: ThemeActionPage;
+    readonly taxRateActionPage: TaxRateActionPage;
+    readonly taxCategoryActionPage: TaxCategoryActionPage;
+    readonly rmaActionPage: RMAActionPage;
+    readonly customerCheckoutActionPage: CustomerCheckoutActionPage;
 
     constructor(page: Page) {
         this.page = page;
-        this.locators = new WebLocators(page);
         this.roleName = `role-${Date.now()}`;
         this.userName = `user-${Date.now()}`;
         this.userEmail = `user_${Date.now()}_${Math.floor(Math.random() * 10000)}${generateEmail()}`;
+        this.adminSessionPage = new AdminSessionPage(this.page);
+        this.productActionPage = new ProductActionPage(this.page);
+        this.orderActionPage = new OrderActionPage(this.page);
+        this.roleActionPage = new RoleActionPage(this.page);
+        this.userActionPage = new UserActionPage(this.page);
+        this.categoryActionPage = new CategoryActionPage(this.page);
+        this.attributeActionPage = new AttributeActionPage(this.page);
+        this.familyActionPage = new FamilyActionPage(this.page);
+        this.customersActionPage = new CustomerActionPage(this.page);
+        this.groupActionPage = new GroupActionPage(this.page);
+        this.cmsActionPage = new CMSActionPage(this.page);
+        this.cartRuleActionPage = new CartRuleActionPage(this.page);
+        this.catalogRuleActionPage = new CatalogRuleActionPage(this.page);
+        this.emailTemplateActionPage = new EmailTemplateActionPage(this.page);
+        this.eventActionPage = new EventActionPage(this.page);
+        this.campaignActionPage = new CampaignActionPage(this.page);
+        this.urlRewriteActionPage = new URLRewriteActionPage(this.page);
+        this.searchTermActionPage = new SearchTermActionPage(this.page);
+        this.searchSynonymsActionPage = new SearchSynonymsActionPage(this.page);
+        this.siteMapActionPage = new SiteMapActionPage(this.page);
+        this.localeActionPage = new LocaleActionPage(this.page);
+        this.currencyActionPage = new CurrencyActionPage(this.page);
+        this.exchangeRateActionPage = new ExchangeRateActionPage(this.page);
+        this.inventorySourceActionPage = new InventorySourceActionPage(
+            this.page,
+        );
+        this.channelActionPage = new ChannelActionPage(this.page);
+        this.userActionPage = new UserActionPage(this.page);
+        this.themeActionPage = new ThemeActionPage(this.page);
+        this.taxRateActionPage = new TaxRateActionPage(this.page);
+        this.taxCategoryActionPage = new TaxCategoryActionPage(this.page);
+        this.rmaActionPage = new RMAActionPage(this.page);
+        this.customerCheckoutActionPage = new CustomerCheckoutActionPage(
+            this.page,
+        );
     }
 
     private async togglePermissionCheckbox(
@@ -847,13 +940,13 @@ export class ACLManagement {
 
     async editRolePermission(permissionValues: string[]): Promise<void> {
         await this.page.goto("admin/settings/roles");
-        await this.locators.iconEdit.first().click();
+        await this.roleActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
         for (const value of permissionValues) {
             await this.togglePermissionCheckbox(value, false);
         }
-        await this.locators.saveRole.click();
-        await expect(this.locators.successEditRole).toBeVisible();
+        await this.roleActionPage.saveRole.click();
+        await expect(this.roleActionPage.successEditRole).toBeVisible();
     }
 
     async createRole(
@@ -861,9 +954,9 @@ export class ACLManagement {
         permissions?: string[],
     ): Promise<void> {
         await this.page.goto("admin/settings/roles");
-        await this.locators.createRole.click();
-        await this.locators.name.fill(this.roleName);
-        await this.locators.selectRoleType.selectOption(permissionType);
+        await this.roleActionPage.createRole.click();
+        await this.roleActionPage.name.fill(this.roleName);
+        await this.roleActionPage.selectRoleType.selectOption(permissionType);
         if (
             permissionType === "custom" &&
             permissions &&
@@ -871,49 +964,51 @@ export class ACLManagement {
         ) {
             await this.rolePermission(permissions);
         }
-        await this.locators.roleDescription.fill("test description");
-        await this.locators.saveRole.click();
-        await expect(this.locators.successRole.first()).toBeVisible();
+        await this.roleActionPage.roleDescription.fill("test description");
+        await this.roleActionPage.saveRole.click();
+        await expect(this.roleActionPage.successRole.first()).toBeVisible();
     }
 
     async createUser(): Promise<void> {
         await this.page.goto("admin/settings/users");
-        await this.locators.createUser.click();
-        await this.locators.name.fill(this.userName);
-        await this.locators.selectRole.selectOption({ label: this.roleName });
-        await this.locators.userEmail.fill(this.userEmail);
-        await this.locators.userPassword.fill("user123");
-        await this.locators.confirmPassword.fill("user123");
-        await this.locators.statusToggle.click();
-        const toggleInput = await this.locators.statusToggle;
+        await this.userActionPage.createUser.click();
+        await this.userActionPage.name.fill(this.userName);
+        await this.userActionPage.selectRole.selectOption({
+            label: this.roleName,
+        });
+        await this.userActionPage.userEmail.fill(this.userEmail);
+        await this.userActionPage.userPassword.fill("user123");
+        await this.userActionPage.confirmPassword.fill("user123");
+        await this.userActionPage.statusToggle.click();
+        const toggleInput = await this.userActionPage.statusToggle;
         await expect(toggleInput).toBeChecked();
-        await this.locators.saveUser.click();
-        await expect(this.locators.successUser.first()).toBeVisible();
+        await this.userActionPage.saveUser.click();
+        await expect(this.userActionPage.successUser.first()).toBeVisible();
     }
 
     async expectUnauthorizedFor(routes: string[]) {
         for (const route of routes) {
             await this.page.goto(route);
-            await expect(this.locators.unauthorized).toBeVisible();
+            await expect(this.userActionPage.unauthorized).toBeVisible();
         }
     }
 
     async expectAuthorizedFor(route: string) {
         await this.page.goto(route);
-        await expect(this.locators.unauthorized).not.toBeVisible();
+        await expect(this.userActionPage.unauthorized).not.toBeVisible();
     }
 
     async verfiyAssignedRole(permissions: string[] = []) {
         await this.page.goto("admin/dashboard");
         await this.page.waitForLoadState("networkidle");
-        await this.locators.profile.first().click();
-        await this.locators.logout.click();
+        await this.adminSessionPage.profile.first().click();
+        await this.adminSessionPage.logout.click();
         await this.page.goto("admin/login");
         await this.page.waitForURL("**/admin/login");
         await this.page.waitForLoadState("networkidle");
-        await this.locators.userEmail.fill(this.userEmail);
-        await this.locators.userPassword.fill("user123");
-        await this.locators.userPassword.press("Enter");
+        await this.adminSessionPage.userEmail.fill(this.userEmail);
+        await this.adminSessionPage.userPassword.fill("user123");
+        await this.adminSessionPage.userPassword.press("Enter");
         await this.page.waitForLoadState("networkidle");
 
         const sidebar = this.page.locator("div.fixed.top-14 nav");
@@ -953,321 +1048,385 @@ export class ACLManagement {
     }
 
     async orderCreateVerify() {
-        await expect(this.locators.createBtn).toBeVisible();
-        await this.locators.createBtn.click();
-        await expect(this.locators.saveBtn).toBeVisible();
+        await expect(this.orderActionPage.createBtn).toBeVisible();
+        await this.orderActionPage.createBtn.click();
+        await expect(this.orderActionPage.saveBtn).toBeVisible();
     }
 
     async productEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.editBtn.click();
+        await expect(this.productActionPage.createBtn).not.toBeVisible();
+        await this.productActionPage.editBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.successMSG.first()).toBeVisible();
+        await this.productActionPage.createBtn.click();
+        await expect(this.productActionPage.successMSG.first()).toBeVisible();
     }
 
     async productCopyVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.viewBtn.nth(1)).not.toBeVisible();
-        await this.locators.copyBtn.nth(1).click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.copySuccess.first()).toBeVisible();
+        await expect(this.productActionPage.createBtn).not.toBeVisible();
+        await expect(this.productActionPage.viewBtn.nth(1)).not.toBeVisible();
+        await this.productActionPage.copyBtn.nth(1).click();
+        await this.productActionPage.agreeBtn.click();
+        await expect(this.productActionPage.copySuccess.first()).toBeVisible();
     }
 
     async productDeleteVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.viewBtn.nth(1)).not.toBeVisible();
-        await this.locators.selectRowBtn.nth(2).click();
-        await this.locators.selectAction.click();
-        await this.locators.selectDelete.click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.productDeleteSuccess.first()).toBeVisible();
+        await expect(this.productActionPage.createBtn).not.toBeVisible();
+        await expect(this.productActionPage.viewBtn.nth(1)).not.toBeVisible();
+        await this.productActionPage.selectRowBtn.nth(2).click();
+        await this.productActionPage.selectAction.click();
+        await this.productActionPage.selectDelete.click();
+        await this.productActionPage.agreeBtn.click();
+        await expect(
+            this.productActionPage.productDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async categoryEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.categoryActionPage.createBtn).not.toBeVisible();
+        await this.categoryActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.saveCategoryBtn.click();
-        await expect(this.locators.categorySuccess.first()).toBeVisible();
+        await this.categoryActionPage.saveCategoryBtn.click();
+        await expect(
+            this.categoryActionPage.categorySuccess.first(),
+        ).toBeVisible();
     }
 
     async categoryDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.selectRowBtn.nth(1).click();
-        await this.locators.selectAction.click();
-        await this.locators.deleteBtn.click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.categoryDeleteSuccess.first()).toBeVisible();
+        await expect(this.categoryActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.categoryActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.categoryActionPage.selectRowBtn.nth(1).click();
+        await this.categoryActionPage.selectAction.click();
+        await this.categoryActionPage.deleteBtn.click();
+        await this.categoryActionPage.agreeBtn.click();
+        await expect(
+            this.categoryActionPage.categoryDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async attributeCreateVerify() {
-        await expect(this.locators.createBtn).toBeVisible();
-        await expect(this.locators.editBtn.first()).not.toBeVisible();
-        await this.locators.createBtn.click();
+        await expect(this.attributeActionPage.createBtn).toBeVisible();
+        await expect(
+            this.attributeActionPage.editBtn.first(),
+        ).not.toBeVisible();
+        await this.attributeActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.fillname.fill("Test Attribute");
-        await this.locators.fillCode.fill("testattribute");
-        await this.locators.selectTypeAttribute.selectOption("text");
-        await this.locators.saveAttributeBtn.click();
-        await expect(this.locators.attributeSuccess.first()).toBeVisible();
+        await this.attributeActionPage.fillname.fill("Test Attribute");
+        await this.attributeActionPage.fillCode.fill("testattribute");
+        await this.attributeActionPage.selectTypeAttribute.selectOption("text");
+        await this.attributeActionPage.saveAttributeBtn.click();
+        await expect(
+            this.attributeActionPage.attributeSuccess.first(),
+        ).toBeVisible();
     }
 
     async attributeEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.attributeActionPage.createBtn).not.toBeVisible();
+        await expect(this.attributeActionPage.iconEdit.first()).toBeVisible();
+        await this.attributeActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.saveAttributeBtn.click();
+        await this.attributeActionPage.saveAttributeBtn.click();
         await expect(
-            this.locators.attributeUpdateSuccess.first(),
+            this.attributeActionPage.attributeUpdateSuccess.first(),
         ).toBeVisible();
     }
 
     async attributeDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
+        await expect(this.attributeActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.locators.attributeDeleteSuccess.first(),
+            this.attributeActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.attributeActionPage.deleteIcon.first().click();
+        await this.attributeActionPage.agreeBtn.click();
+        await expect(
+            this.attributeActionPage.attributeDeleteSuccess.first(),
         ).toBeVisible();
     }
 
     async familyCreateVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.locators.editBtn.first()).not.toBeVisible();
-        await this.locators.createBtn.click();
+        await expect(this.familyActionPage.editBtn.first()).not.toBeVisible();
+        await this.familyActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.familyName.fill("Test Family");
-        await this.locators.fillCode.fill("family");
-        await this.locators.createBtn.click();
-        await expect(this.locators.familySuccess.first()).toBeVisible();
+        await this.familyActionPage.familyName.fill("Test Family");
+        await this.familyActionPage.fillCode.fill("family");
+        await this.familyActionPage.createBtn.click();
+        await expect(this.familyActionPage.familySuccess.first()).toBeVisible();
     }
 
     async familyEditVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.familyActionPage.createBtn).not.toBeVisible();
+        await this.familyActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.familyUpdateSuccess.first()).toBeVisible();
+        await this.familyActionPage.createBtn.click();
+        await expect(
+            this.familyActionPage.familyUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async familyDeleteVerify() {
         await this.page.waitForLoadState("networkidle");
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.editBtn.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.familyDeleteSuccess.first()).toBeVisible();
+        await expect(this.familyActionPage.createBtn).not.toBeVisible();
+        await expect(this.familyActionPage.editBtn.first()).not.toBeVisible();
+        await this.familyActionPage.deleteIcon.first().click();
+        await this.familyActionPage.agreeBtn.click();
+        await expect(
+            this.familyActionPage.familyDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async customerCreateVerify() {
         await this.page.goto("admin/customers");
-        await this.locators.createBtn.click();
-        await this.locators.customerfirstname.fill(generateFirstName());
-        await this.locators.customerlastname.fill(generateLastName());
-        await this.locators.customeremail.fill(generateEmail());
-        await this.locators.customergender.selectOption(
+        await this.customersActionPage.createBtn.click();
+        await this.customersActionPage.customerfirstname.fill(
+            generateFirstName(),
+        );
+        await this.customersActionPage.customerlastname.fill(
+            generateLastName(),
+        );
+        await this.customersActionPage.customeremail.fill(generateEmail());
+        await this.customersActionPage.customergender.selectOption(
             randomElement(["Male", "Female", "Other"]),
         );
-        await this.locators.customerNumber.fill("1234567890");
-        await this.locators.customerNumber.press("Enter");
+        await this.customersActionPage.customerNumber.fill("1234567890");
+        await this.customersActionPage.customerNumber.press("Enter");
         await expect(
-            this.locators.customercreatedsuccess.first(),
+            this.customersActionPage.customercreatedsuccess.first(),
         ).toBeVisible();
     }
 
     async customerEditVerify() {
         await this.page.goto("admin/customers");
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.viewIcon.first()).toBeVisible();
+        await expect(this.customersActionPage.createBtn).not.toBeVisible();
+        await expect(this.customersActionPage.viewIcon.first()).toBeVisible();
     }
 
     async customerDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.selectRowBtn.nth(1).click();
-        await this.locators.selectAction.click();
-        await this.locators.deleteBtn.click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.customerDeleteSuccess.first()).toBeVisible();
+        await expect(this.customersActionPage.createBtn).not.toBeVisible();
+        await this.customersActionPage.selectRowBtn.nth(1).click();
+        await this.customersActionPage.selectAction.click();
+        await this.customersActionPage.deleteBtn.click();
+        await this.customersActionPage.agreeBtn.click();
+        await expect(
+            this.customersActionPage.customerDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async groupCreateVerify() {
-        await this.locators.createBtn.click();
-        await this.locators.name.fill(generateName());
-        await this.locators.fillCode.fill("code");
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.successGroupMSG.first()).toBeVisible();
+        await this.groupActionPage.createBtn.click();
+        await this.groupActionPage.name.fill(generateName());
+        await this.groupActionPage.fillCode.fill("code");
+        await this.groupActionPage.createBtn.nth(1).click();
+        await expect(
+            this.groupActionPage.successGroupMSG.first(),
+        ).toBeVisible();
     }
 
     async groupEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.groupActionPage.createBtn).not.toBeVisible();
+        await this.groupActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.successUpdateMSG.first()).toBeVisible();
+        await this.groupActionPage.createBtn.click();
+        await expect(
+            this.groupActionPage.successUpdateMSG.first(),
+        ).toBeVisible();
     }
 
     async groupDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.successGroupDeleteMSG.first()).toBeVisible();
+        await expect(this.groupActionPage.createBtn).not.toBeVisible();
+        await expect(this.groupActionPage.iconEdit.first()).not.toBeVisible();
+        await this.groupActionPage.deleteIcon.first().click();
+        await this.groupActionPage.agreeBtn.click();
+        await expect(
+            this.groupActionPage.successGroupDeleteMSG.first(),
+        ).toBeVisible();
     }
 
     async cmsCreateVerify() {
-        await this.locators.pagetitle.fill(generateName());
-        await this.locators.urlKey.fill(generateSlug());
-        await this.locators.metaTitle.fill(generateName());
-        await this.locators.metaKeywords.fill("keywords");
-        await this.locators.metaDescription.fill(generateDescription());
-        await this.locators.statusBTN.first().click();
-        await this.locators.createBtn.click();
-        await expect(this.locators.successPageCreate).toBeVisible();
+        await this.cmsActionPage.pagetitle.fill(generateName());
+        await this.cmsActionPage.urlKey.fill(generateSlug());
+        await this.cmsActionPage.metaTitle.fill(generateName());
+        await this.cmsActionPage.metaKeywords.fill("keywords");
+        await this.cmsActionPage.metaDescription.fill(generateDescription());
+        await this.cmsActionPage.channelBTN.first().click();
+        await this.cmsActionPage.createBtn.click();
+        await expect(this.cmsActionPage.successPageCreate.first()).toBeVisible();
     }
 
     async cmsEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.cmsActionPage.createBtn).not.toBeVisible();
+        await this.cmsActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.successPageUpdate).toBeVisible();
+        await this.cmsActionPage.createBtn.click();
+        await expect(this.cmsActionPage.successPageUpdate).toBeVisible();
     }
 
     async cmsDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.successPageDelete).toBeVisible();
+        await expect(this.cmsActionPage.createBtn).not.toBeVisible();
+        await expect(this.cmsActionPage.iconEdit.first()).not.toBeVisible();
+        await this.cmsActionPage.deleteIcon.first().click();
+        await this.cmsActionPage.agreeBtn.click();
+        await expect(this.cmsActionPage.successPageDelete).toBeVisible();
     }
 
     async cartRuleCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.cartRuleActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.ruleName.fill(generateName());
-        await this.locators.promotionRuleDescription.fill(
+        await this.cartRuleActionPage.ruleName.fill(generateName());
+        await this.cartRuleActionPage.promotionRuleDescription.fill(
             generateDescription(),
         );
-        await this.locators.addConditionBtn.click();
-        await this.locators.selectCondition.selectOption("product|name");
-        await this.locators.conditionName.fill(generateName());
-        await this.locators.discountAmmount.fill("10");
-        await this.locators.sortOrder.fill("1");
-        await this.locators.channelSelect.first().click();
-        await expect(this.locators.channelSelect.first()).toBeChecked();
-        await this.locators.customerGroupSelect.first().click();
-        await expect(this.locators.customerGroupSelect.first()).toBeChecked();
-        await this.locators.statusToggle.click();
-        await expect(this.locators.toggleInput).toBeChecked();
-        await this.locators.createBtn.click();
-        await expect(this.locators.cartRuleSuccess.first()).toBeVisible();
+        await this.cartRuleActionPage.addConditionBtn.click();
+        await this.cartRuleActionPage.selectCondition.selectOption(
+            "product|name",
+        );
+        await this.cartRuleActionPage.conditionName.fill(generateName());
+        await this.cartRuleActionPage.discountAmmount.fill("10");
+        await this.cartRuleActionPage.sortOrder.fill("1");
+        await this.cartRuleActionPage.channelSelect.first().click();
+        await expect(
+            this.cartRuleActionPage.channelSelect.first(),
+        ).toBeChecked();
+        await this.cartRuleActionPage.customerGroupSelect.first().click();
+        await expect(
+            this.cartRuleActionPage.customerGroupSelect.first(),
+        ).toBeChecked();
+        await this.cartRuleActionPage.statusToggle.click();
+        await expect(this.cartRuleActionPage.toggleInput).toBeChecked();
+        await this.cartRuleActionPage.createBtn.click();
+        await expect(
+            this.cartRuleActionPage.cartRuleSuccess.first(),
+        ).toBeVisible();
     }
 
     async cartRuleCopyVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.copyBtn.first().click();
-        // await expect(this.locators.cartRuleCopySuccess.first()).toBeVisible();
-        await expect(this.locators.saveCartRuleBTN).toBeVisible();
+        await expect(this.cartRuleActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.cartRuleActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.cartRuleActionPage.copyBtn.first().click();
+        // await expect(this.cartRuleActionPage.cartRuleCopySuccess.first()).toBeVisible();
+        await expect(this.cartRuleActionPage.saveCartRuleBTN).toBeVisible();
     }
 
     async cartRuleEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.copyBtn.first()).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.cartRuleActionPage.createBtn).not.toBeVisible();
+        await expect(this.cartRuleActionPage.copyBtn.first()).not.toBeVisible();
+        await this.cartRuleActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.cartRuleEditSuccess.first()).toBeVisible();
+        await this.cartRuleActionPage.createBtn.click();
+        await expect(
+            this.cartRuleActionPage.cartRuleEditSuccess.first(),
+        ).toBeVisible();
     }
 
     async cartRuleDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.copyBtn.first()).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.cartRuleDeleteSuccess.first()).toBeVisible();
+        await expect(this.cartRuleActionPage.createBtn).not.toBeVisible();
+        await expect(this.cartRuleActionPage.copyBtn.first()).not.toBeVisible();
+        await expect(
+            this.cartRuleActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.cartRuleActionPage.deleteIcon.first().click();
+        await this.cartRuleActionPage.agreeBtn.click();
+        await expect(
+            this.cartRuleActionPage.cartRuleDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async catalogRuleCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.catalogRuleActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.ruleName.fill(generateName());
-        await this.locators.promotionRuleDescription.fill(
+        await this.catalogRuleActionPage.ruleName.fill(generateName());
+        await this.catalogRuleActionPage.promotionRuleDescription.fill(
             generateDescription(),
         );
-        await this.locators.addConditionBtn.click();
-        await this.locators.selectCondition.selectOption("product|name");
-        await this.locators.conditionName.fill(generateName());
-        await this.locators.discountAmmount.fill("10");
-        await this.locators.sortOrder.fill("1");
-        await this.locators.channelSelect.first().click();
-        await expect(this.locators.channelSelect.first()).toBeChecked();
-        await this.locators.customerGroupSelect.first().click();
-        await expect(this.locators.customerGroupSelect.first()).toBeChecked();
-        await this.locators.statusToggle.click();
-        await expect(this.locators.toggleInput).toBeChecked();
-        await this.locators.createBtn.click();
+        await this.catalogRuleActionPage.addConditionBtn.click();
+        await this.catalogRuleActionPage.selectCondition.selectOption(
+            "product|name",
+        );
+        await this.catalogRuleActionPage.conditionName.fill(generateName());
+        await this.catalogRuleActionPage.discountAmmount.fill("10");
+        await this.catalogRuleActionPage.sortOrder.fill("1");
+        await this.catalogRuleActionPage.channelSelect.first().click();
         await expect(
-            this.locators.catalogRuleCreateSuccess.first(),
+            this.catalogRuleActionPage.channelSelect.first(),
+        ).toBeChecked();
+        await this.catalogRuleActionPage.customerGroupSelect.first().click();
+        await expect(
+            this.catalogRuleActionPage.customerGroupSelect.first(),
+        ).toBeChecked();
+        await this.catalogRuleActionPage.statusToggle.click();
+        await expect(this.catalogRuleActionPage.toggleInput).toBeChecked();
+        await this.catalogRuleActionPage.createBtn.click();
+        await expect(
+            this.catalogRuleActionPage.catalogRuleCreateSuccess.first(),
         ).toBeVisible();
     }
 
     async catalogRuleEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.catalogRuleActionPage.createBtn).not.toBeVisible();
+        await expect(this.catalogRuleActionPage.iconEdit.first()).toBeVisible();
+        await this.catalogRuleActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
+        await this.catalogRuleActionPage.createBtn.click();
         await expect(
-            this.locators.catalogRuleUpdateSuccess.first(),
+            this.catalogRuleActionPage.catalogRuleUpdateSuccess.first(),
         ).toBeVisible();
     }
 
     async catalogRuleDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
+        await expect(this.catalogRuleActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.locators.catalogRuleDeleteSuccess.first(),
+            this.catalogRuleActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.catalogRuleActionPage.deleteIcon.first().click();
+        await this.catalogRuleActionPage.agreeBtn.click();
+        await expect(
+            this.catalogRuleActionPage.catalogRuleDeleteSuccess.first(),
         ).toBeVisible();
     }
 
     async communicationEmailTemplateCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.emailTemplateActionPage.createBtn.click();
         const description = generateDescription();
-        await this.locators.name.fill("template");
+        await this.emailTemplateActionPage.name.fill("template");
         await fillInTinymce(this.page, "#content_ifr", description);
-        await this.locators.emailStatusSeletct.selectOption("active");
-        await this.locators.createBtn.click();
-        await expect(this.locators.emailSuccessMSG.first()).toBeVisible();
+        await this.emailTemplateActionPage.emailStatusSeletct.selectOption(
+            "active",
+        );
+        await this.emailTemplateActionPage.createBtn.click();
+        await expect(
+            this.emailTemplateActionPage.emailSuccessMSG.first(),
+        ).toBeVisible();
     }
 
     async communicationEmailTemplateEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.emailTemplateActionPage.createBtn).not.toBeVisible();
+        await this.emailTemplateActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.emailUpdateSuccessMSG.first()).toBeVisible();
+        await this.emailTemplateActionPage.createBtn.click();
+        await expect(
+            this.emailTemplateActionPage.emailUpdateSuccessMSG.first(),
+        ).toBeVisible();
     }
 
     async communicationEmailTemplateDeleteVerify() {
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.emailDeleteSuccessMSG.first()).toBeVisible();
+        await expect(
+            this.emailTemplateActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.emailTemplateActionPage.deleteIcon.first().click();
+        await this.emailTemplateActionPage.agreeBtn.click();
+        await expect(
+            this.emailTemplateActionPage.emailDeleteSuccessMSG.first(),
+        ).toBeVisible();
     }
 
     async eventCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.eventActionPage.createBtn.click();
         await this.page.hover('input[name="name"]');
         const inputs = await this.page.$$(
             'textarea.rounded-md:visible, input[type="text"].rounded-md:visible',
@@ -1276,55 +1435,71 @@ export class ACLManagement {
         for (let input of inputs) {
             await input.fill(generateName());
         }
-        await this.locators.date.fill(generateRandomDate());
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.eventCreateSuccess.first()).toBeVisible();
+        await this.eventActionPage.date.fill(generateRandomDate());
+        await this.eventActionPage.createBtn.nth(1).click();
+        await expect(
+            this.eventActionPage.eventCreateSuccess.first(),
+        ).toBeVisible();
     }
 
     async eventEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.eventActionPage.createBtn).not.toBeVisible();
+        await this.eventActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.eventUpdateSuccess.first()).toBeVisible();
+        await this.eventActionPage.createBtn.nth(1).click();
+        await expect(
+            this.eventActionPage.eventUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async eventDeleteVerify() {
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await expect(this.locators.createBtn.nth(1)).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.eventDeleteSuccess.first()).toBeVisible();
+        await expect(this.eventActionPage.iconEdit.first()).not.toBeVisible();
+        await expect(this.eventActionPage.createBtn.nth(1)).not.toBeVisible();
+        await this.eventActionPage.deleteIcon.first().click();
+        await this.eventActionPage.agreeBtn.click();
+        await expect(
+            this.eventActionPage.eventDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async campaignCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.campaignActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.name.fill(generateName());
-        await this.locators.subject.fill(generateName());
-        await this.locators.event.selectOption({ label: "Birthday" });
-        await this.locators.emailTemplate.selectOption({ label: "template" });
-        await this.locators.selectChannel.selectOption("1");
-        await this.locators.customerGroup.selectOption("1");
-        await this.locators.campaignStatus.click();
-        await this.locators.createBtn.click();
-        await expect(this.locators.campaignCreateSuccess.first()).toBeVisible();
+        await this.campaignActionPage.name.fill(generateName());
+        await this.campaignActionPage.subject.fill(generateName());
+        await this.campaignActionPage.event.selectOption({ label: "Birthday" });
+        await this.campaignActionPage.emailTemplate.selectOption({
+            label: "template",
+        });
+        await this.campaignActionPage.selectChannel.selectOption("1");
+        await this.campaignActionPage.customerGroup.selectOption("1");
+        await this.campaignActionPage.campaignStatus.click();
+        await this.campaignActionPage.createBtn.click();
+        await expect(
+            this.campaignActionPage.campaignCreateSuccess.first(),
+        ).toBeVisible();
     }
 
     async campaignEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.campaignActionPage.createBtn).not.toBeVisible();
+        await this.campaignActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.campaignUpdateSuccess.first()).toBeVisible();
+        await this.campaignActionPage.createBtn.click();
+        await expect(
+            this.campaignActionPage.campaignUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async campaignDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.campaignDeleteSuccess.first()).toBeVisible();
+        await expect(this.campaignActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.campaignActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.campaignActionPage.deleteIcon.first().click();
+        await this.campaignActionPage.agreeBtn.click();
+        await expect(
+            this.campaignActionPage.campaignDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async urlRewriteCreateVerify() {
@@ -1332,439 +1507,529 @@ export class ACLManagement {
             url: generateHostname(),
             product: "product",
         };
-        await this.locators.createBtn.click();
-        await this.locators.entityType.selectOption(seo.product);
-        await this.locators.requestPath.fill(seo.url);
-        await this.locators.targetPath.fill(seo.url);
-        await this.locators.redirectPath.selectOption("301");
-        await this.locators.locale.selectOption("en");
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.saveRedirectSuccess).toBeVisible();
+        await this.urlRewriteActionPage.createBtn.click();
+        await this.urlRewriteActionPage.entityType.selectOption(seo.product);
+        await this.urlRewriteActionPage.requestPath.fill(seo.url);
+        await this.urlRewriteActionPage.targetPath.fill(seo.url);
+        await this.urlRewriteActionPage.redirectPath.selectOption("301");
+        await this.urlRewriteActionPage.locale.selectOption("en");
+        await this.urlRewriteActionPage.createBtn.nth(1).click();
+        await expect(
+            this.urlRewriteActionPage.saveRedirectSuccess,
+        ).toBeVisible();
     }
 
     async urlRewriteEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.urlRewriteActionPage.createBtn).not.toBeVisible();
+        await this.urlRewriteActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.saveRedirectUpdatedSuccess).toBeVisible();
+        await this.urlRewriteActionPage.createBtn.click();
+        await expect(
+            this.urlRewriteActionPage.saveRedirectUpdatedSuccess,
+        ).toBeVisible();
     }
 
     async urlRewriteDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.deleteRedirectSuccess).toBeVisible();
+        await expect(this.urlRewriteActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.urlRewriteActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.urlRewriteActionPage.deleteIcon.first().click();
+        await this.urlRewriteActionPage.agreeBtn.click();
+        await expect(
+            this.urlRewriteActionPage.deleteRedirectSuccess,
+        ).toBeVisible();
     }
 
     async searchTermsCreateVerify() {
-        await expect(this.locators.deleteIcon.first()).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.createBtn.click();
-        await this.locators.searchQuery.fill(generateName());
-        await this.locators.redirectURL.fill("https://example.com");
-        await this.locators.selectChannel.selectOption("1");
-        await this.locators.locale.selectOption("en");
-        await this.locators.createBtn.nth(1).click();
         await expect(
-            this.locators.searchTermCreateSuccess.first(),
+            this.searchTermActionPage.deleteIcon.first(),
+        ).not.toBeVisible();
+        await expect(
+            this.searchTermActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.searchTermActionPage.createBtn.click();
+        await this.searchTermActionPage.searchQuery.fill(generateName());
+        await this.searchTermActionPage.redirectURL.fill("https://example.com");
+        await this.searchTermActionPage.selectChannel.selectOption("1");
+        await this.searchTermActionPage.locale.selectOption("en");
+        await this.searchTermActionPage.createBtn.nth(1).click();
+        await expect(
+            this.searchTermActionPage.searchTermCreateSuccess.first(),
         ).toBeVisible();
     }
 
     async searchTermsEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.searchTermActionPage.createBtn).not.toBeVisible();
+        await this.searchTermActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
+        await this.searchTermActionPage.createBtn.click();
         await expect(
-            this.locators.searchTermUpdateSuccess.first(),
+            this.searchTermActionPage.searchTermUpdateSuccess.first(),
         ).toBeVisible();
     }
 
     async searchTermsDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
+        await expect(this.searchTermActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.locators.searchTermDeleteSuccess.first(),
+            this.searchTermActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.searchTermActionPage.deleteIcon.first().click();
+        await this.searchTermActionPage.agreeBtn.click();
+        await expect(
+            this.searchTermActionPage.searchTermDeleteSuccess.first(),
         ).toBeVisible();
     }
 
     async searchSynonymsCreateVerify() {
-        await this.locators.createBtn.click();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.name.fill(generateName());
-        await this.locators.terms.fill("test, synonym");
-        await this.locators.createBtn.nth(1).click();
+        await this.searchSynonymsActionPage.createBtn.click();
         await expect(
-            this.locators.searchSynonymCreateSuccess.first(),
+            this.searchSynonymsActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.searchSynonymsActionPage.name.fill(generateName());
+        await this.searchSynonymsActionPage.terms.fill("test, synonym");
+        await this.searchSynonymsActionPage.createBtn.nth(1).click();
+        await expect(
+            this.searchSynonymsActionPage.searchSynonymCreateSuccess.first(),
         ).toBeVisible();
     }
 
     async searchSynonymsEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.searchSynonymsActionPage.createBtn).not.toBeVisible();
+        await this.searchSynonymsActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
+        await this.searchSynonymsActionPage.createBtn.click();
         await expect(
-            this.locators.searchSynonymUpdateSuccess.first(),
+            this.searchSynonymsActionPage.searchSynonymUpdateSuccess.first(),
         ).toBeVisible();
     }
 
     async searchSynonymsDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
+        await expect(this.searchSynonymsActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.locators.searchSynonymDeleteSuccess.first(),
+            this.searchSynonymsActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.searchSynonymsActionPage.deleteIcon.first().click();
+        await this.searchSynonymsActionPage.agreeBtn.click();
+        await expect(
+            this.searchSynonymsActionPage.searchSynonymDeleteSuccess.first(),
         ).toBeVisible();
     }
 
     async sitemapCreateVerify() {
-        await this.locators.createBtn.click();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await expect(this.locators.deleteIcon.first()).not.toBeVisible();
-        await this.locators.fileName.fill("sitemap.xml");
-        await this.locators.path.fill("/sitemapxml/test/example/");
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.sitemapCreateSuccess.first()).toBeVisible();
+        await this.siteMapActionPage.createBtn.click();
+        await expect(this.siteMapActionPage.iconEdit.first()).not.toBeVisible();
+        await expect(
+            this.siteMapActionPage.deleteIcon.first(),
+        ).not.toBeVisible();
+        await this.siteMapActionPage.fileName.fill("sitemap.xml");
+        await this.siteMapActionPage.path.fill("/sitemapxml/test/example/");
+        await this.siteMapActionPage.createBtn.nth(1).click();
+        await expect(
+            this.siteMapActionPage.sitemapCreateSuccess.first(),
+        ).toBeVisible();
     }
 
     async sitemapEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.deleteIcon.first()).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.siteMapActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.siteMapActionPage.deleteIcon.first(),
+        ).not.toBeVisible();
+        await this.siteMapActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.sitemapUpdateSuccess.first()).toBeVisible();
+        await this.siteMapActionPage.createBtn.click();
+        await expect(
+            this.siteMapActionPage.sitemapUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async sitemapDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.sitemapDeleteSuccess.first()).toBeVisible();
+        await expect(this.siteMapActionPage.createBtn).not.toBeVisible();
+        await expect(this.siteMapActionPage.iconEdit.first()).not.toBeVisible();
+        await this.siteMapActionPage.deleteIcon.first().click();
+        await this.siteMapActionPage.agreeBtn.click();
+        await expect(
+            this.siteMapActionPage.sitemapDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async localeCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.localeActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.fillCode.fill("test");
-        await this.locators.name.fill("TestLocale");
-        await this.locators.direction.selectOption("ltr");
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.successLocaleCreate.first()).toBeVisible();
+        await this.localeActionPage.fillCode.fill("test");
+        await this.localeActionPage.name.fill("TestLocale");
+        await this.localeActionPage.direction.selectOption("ltr");
+        await this.localeActionPage.createBtn.nth(1).click();
+        await expect(
+            this.localeActionPage.successLocaleCreate.first(),
+        ).toBeVisible();
     }
 
     async localeEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.localeActionPage.createBtn).not.toBeVisible();
+        await this.localeActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.successLocaleUpdate.first()).toBeVisible();
+        await this.localeActionPage.createBtn.click();
+        await expect(
+            this.localeActionPage.successLocaleUpdate.first(),
+        ).toBeVisible();
     }
 
     async localeDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.successLocaleDelete.first()).toBeVisible();
+        await expect(this.localeActionPage.createBtn).not.toBeVisible();
+        await expect(this.localeActionPage.iconEdit.first()).not.toBeVisible();
+        await this.localeActionPage.deleteIcon.first().click();
+        await this.localeActionPage.agreeBtn.click();
+        await expect(
+            this.localeActionPage.successLocaleDelete.first(),
+        ).toBeVisible();
     }
 
     async currencyCreateVerify() {
-        await this.locators.createBtn.click();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.fillCode.fill("TST");
-        await this.locators.name.fill("Test Currency");
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.successCurrencyCreate.first()).toBeVisible();
+        await this.currencyActionPage.createBtn.click();
+        await expect(
+            this.currencyActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.currencyActionPage.fillCode.fill("TST");
+        await this.currencyActionPage.name.fill("Test Currency");
+        await this.currencyActionPage.createBtn.nth(1).click();
+        await expect(
+            this.currencyActionPage.successCurrencyCreate.first(),
+        ).toBeVisible();
     }
 
     async currencyEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.currencyActionPage.createBtn).not.toBeVisible();
+        await this.currencyActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.successCurrencyUpdate.first()).toBeVisible();
+        await this.currencyActionPage.createBtn.click();
+        await expect(
+            this.currencyActionPage.successCurrencyUpdate.first(),
+        ).toBeVisible();
     }
 
     async currencyDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.successCurrencyDelete.first()).toBeVisible();
+        await expect(this.currencyActionPage.createBtn).not.toBeVisible();
+        await expect(
+            this.currencyActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.currencyActionPage.deleteIcon.first().click();
+        await this.currencyActionPage.agreeBtn.click();
+        await expect(
+            this.currencyActionPage.successCurrencyDelete.first(),
+        ).toBeVisible();
     }
 
     async exchangeRateCreateVerify() {
         await this.page.goto("admin/settings/currencies");
         await this.currencyCreateVerify();
         await this.page.goto("admin/settings/channels");
-        await this.locators.iconEdit.first().click();
+        await this.exchangeRateActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
         await this.page.getByText("Test Currency").first().click();
-        await this.locators.createBtn.first().click();
+        await this.exchangeRateActionPage.createBtn.first().click();
         await this.page.waitForLoadState("networkidle");
         await this.page.goto("admin/settings/exchange-rates");
-        await this.locators.createBtn.nth(1).click();
+        await this.exchangeRateActionPage.createBtn.nth(1).click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.targetCurrency.selectOption({
+        await this.exchangeRateActionPage.targetCurrency.selectOption({
             label: "Test Currency",
         });
-        await this.locators.rate.fill("100");
-        await this.locators.createBtn.nth(2).click();
+        await this.exchangeRateActionPage.rate.fill("100");
+        await this.exchangeRateActionPage.createBtn.nth(2).click();
         await expect(
-            this.locators.successExchangeRateCreate.first(),
+            this.exchangeRateActionPage.successExchangeRateCreate.first(),
         ).toBeVisible();
     }
 
     async exchangeRateEditVerify() {
-        await expect(this.locators.createBtn.nth(1)).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
-        await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.nth(1).click();
         await expect(
-            this.locators.successExchangeRateUpdate.first(),
+            this.exchangeRateActionPage.createBtn.nth(1),
+        ).not.toBeVisible();
+        await this.exchangeRateActionPage.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.exchangeRateActionPage.createBtn.nth(1).click();
+        await expect(
+            this.exchangeRateActionPage.successExchangeRateUpdate.first(),
         ).toBeVisible();
     }
 
     async exchangeRateDeleteVerify() {
-        await expect(this.locators.createBtn.nth(1)).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
         await expect(
-            this.locators.successExchangeRateDelete.first(),
+            this.exchangeRateActionPage.createBtn.nth(1),
+        ).not.toBeVisible();
+        await expect(
+            this.exchangeRateActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.exchangeRateActionPage.deleteIcon.first().click();
+        await this.exchangeRateActionPage.agreeBtn.click();
+        await expect(
+            this.exchangeRateActionPage.successExchangeRateDelete.first(),
         ).toBeVisible();
     }
 
     async inventorySourceCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.inventorySourceActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.fillCode.fill("testsource");
-        await this.locators.name.fill(generateName());
-        await this.locators.description.fill(generateDescription());
-        await this.locators.contactName.fill(generateName());
-        await this.locators.enterEmail.fill(generateEmail());
-        await this.locators.contactNumber.fill(generatePhoneNumber());
-        await this.locators.fax.fill(generatePhoneNumber());
-        await this.locators.country.selectOption("IN");
-        await this.locators.state.selectOption("DL");
-        await this.locators.city.fill("New Delhi");
-        await this.locators.street.fill("Some street address");
-        await this.locators.postcode.fill("110001");
-        await this.locators.statusToggle.click();
-        await this.locators.createBtn.click();
+        await this.inventorySourceActionPage.fillCode.fill("testsource");
+        await this.inventorySourceActionPage.name.fill(generateName());
+        await this.inventorySourceActionPage.description.fill(
+            generateDescription(),
+        );
+        await this.inventorySourceActionPage.contactName.fill(generateName());
+        await this.inventorySourceActionPage.enterEmail.fill(generateEmail());
+        await this.inventorySourceActionPage.contactNumber.fill(
+            generatePhoneNumber(),
+        );
+        await this.inventorySourceActionPage.fax.fill(generatePhoneNumber());
+        await this.inventorySourceActionPage.country.selectOption("IN");
+        await this.inventorySourceActionPage.state.selectOption("DL");
+        await this.inventorySourceActionPage.city.fill("New Delhi");
+        await this.inventorySourceActionPage.street.fill("Some street address");
+        await this.inventorySourceActionPage.postcode.fill("110001");
+        await this.inventorySourceActionPage.statusToggle.click();
+        await this.inventorySourceActionPage.createBtn.click();
         await expect(
-            this.locators.successInventorySourceCreate.first(),
+            this.inventorySourceActionPage.successInventorySourceCreate.first(),
         ).toBeVisible();
     }
 
     async inventorySourceEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
-        await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
         await expect(
-            this.locators.successInventorySourceUpdate.first(),
+            this.inventorySourceActionPage.createBtn,
+        ).not.toBeVisible();
+        await this.inventorySourceActionPage.iconEdit.first().click();
+        await this.page.waitForLoadState("networkidle");
+        await this.inventorySourceActionPage.createBtn.click();
+        await expect(
+            this.inventorySourceActionPage.successInventorySourceUpdate.first(),
         ).toBeVisible();
     }
 
     async inventorySourceDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
         await expect(
-            this.locators.successInventorySourceDelete.first(),
+            this.inventorySourceActionPage.createBtn,
+        ).not.toBeVisible();
+        await expect(
+            this.inventorySourceActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.inventorySourceActionPage.deleteIcon.first().click();
+        await this.inventorySourceActionPage.agreeBtn.click();
+        await expect(
+            this.inventorySourceActionPage.successInventorySourceDelete.first(),
         ).toBeVisible();
     }
 
     async channelCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.inventorySourceActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.name.fill(generateName());
+        await this.channelActionPage.name.fill(generateName());
         const code = generateSlug("_");
         const name = generateName();
         const description = generateDescription();
-        await this.locators.fillCode.fill(code);
-        await this.locators.promotionRuleDescription.fill(description);
-        await this.locators.inventoryToggle.first().click();
-        await this.locators.categoryID.selectOption("1");
-        await this.locators.hostname.fill(generateHostname());
-        await this.locators.selectLocale.first().click();
-        await this.locators.selectCurrency.first().click();
-        await this.locators.baseCurrencyID.selectOption("1");
-        await this.locators.defaultLocaleID.selectOption("1");
-        await this.locators.metaTitleChannel.fill(name);
-        await this.locators.seoKeywords.fill("keywords");
-        await this.locators.metaDescription.fill(description);
-        await this.locators.createBtn.click();
-        await expect(this.locators.channleCreateSuccess.first()).toBeVisible();
+        await this.channelActionPage.fillCode.fill(code);
+        await this.channelActionPage.promotionRuleDescription.fill(description);
+        await this.channelActionPage.inventoryToggle.first().click();
+        await this.channelActionPage.categoryID.selectOption("1");
+        await this.channelActionPage.hostname.fill(generateHostname());
+        await this.channelActionPage.selectLocale.first().click();
+        await this.channelActionPage.selectCurrency.first().click();
+        await this.channelActionPage.baseCurrencyID.selectOption("1");
+        await this.channelActionPage.defaultLocaleID.selectOption("1");
+        await this.channelActionPage.metaTitleChannel.fill(name);
+        await this.channelActionPage.seoKeywords.fill("keywords");
+        await this.channelActionPage.metaDescription.fill(description);
+        await this.channelActionPage.createBtn.click();
+        await expect(
+            this.channelActionPage.channleCreateSuccess.first(),
+        ).toBeVisible();
     }
 
     async channelEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.channelActionPage.createBtn).not.toBeVisible();
+        await this.channelActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.channlUpdateSuccess.first()).toBeVisible();
+        await this.channelActionPage.createBtn.click();
+        await expect(
+            this.channelActionPage.channlUpdateSuccess.first(),
+        ).toBeVisible();
     }
 
     async channelDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.channelDeleteSuccess.first()).toBeVisible();
+        await expect(this.channelActionPage.createBtn).not.toBeVisible();
+        await this.channelActionPage.deleteIcon.first().click();
+        await this.channelActionPage.agreeBtn.click();
+        await expect(
+            this.channelActionPage.channelDeleteSuccess.first(),
+        ).toBeVisible();
     }
 
     async createUserVerify() {
-        await this.locators.createUser.click();
-        await this.locators.name.fill(this.userName);
-        await this.locators.selectRole.selectOption({ label: this.roleName });
-        await this.locators.userEmail.fill(generateEmail());
-        await this.locators.userPassword.fill("user123");
-        await this.locators.confirmPassword.fill("user123");
-        await this.locators.statusToggle.click();
-        const toggleInput = await this.locators.statusToggle;
+        await this.userActionPage.createUser.click();
+        await this.userActionPage.name.fill(this.userName);
+        await this.userActionPage.selectRole.selectOption({
+            label: this.roleName,
+        });
+        await this.userActionPage.userEmail.fill(generateEmail());
+        await this.userActionPage.userPassword.fill("user123");
+        await this.userActionPage.confirmPassword.fill("user123");
+        await this.userActionPage.statusToggle.click();
+        const toggleInput = await this.userActionPage.statusToggle;
         await expect(toggleInput).toBeChecked();
-        await this.locators.saveUser.click();
-        await expect(this.locators.successUser.first()).toBeVisible();
+        await this.userActionPage.saveUser.click();
+        await expect(this.userActionPage.successUser.first()).toBeVisible();
     }
 
     async editUserVerify() {
-        await expect(this.locators.createUser).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.userActionPage.createUser).not.toBeVisible();
+        await this.userActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.saveUser.click();
-        await expect(this.locators.successUserUpdate.first()).toBeVisible();
+        await this.userActionPage.saveUser.click();
+        await expect(
+            this.userActionPage.successUserUpdate.first(),
+        ).toBeVisible();
     }
 
     async deleteUserVerify() {
-        await expect(this.locators.createUser).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.nth(2).click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.successUserDelete.first()).toBeVisible();
+        await expect(this.userActionPage.createUser).not.toBeVisible();
+        await expect(this.userActionPage.iconEdit.first()).not.toBeVisible();
+        await this.userActionPage.deleteIcon.nth(2).click();
+        await this.userActionPage.agreeBtn.click();
+        await expect(
+            this.userActionPage.successUserDelete.first(),
+        ).toBeVisible();
     }
 
     async roleCreateVerify() {
-        await this.locators.createRole.click();
-        await this.locators.name.fill(this.roleName);
-        await this.locators.selectRoleType.selectOption("all");
-        await this.locators.roleDescription.fill("test description");
-        await this.locators.saveRole.click();
-        await expect(this.locators.successRole.first()).toBeVisible();
+        await this.roleActionPage.createRole.click();
+        await this.roleActionPage.name.fill(this.roleName);
+        await this.roleActionPage.selectRoleType.selectOption("all");
+        await this.roleActionPage.roleDescription.fill("test description");
+        await this.roleActionPage.saveRole.click();
+        await expect(this.roleActionPage.successRole.first()).toBeVisible();
     }
 
     async roleEditVerify() {
-        await expect(this.locators.createRole).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.roleActionPage.createRole).not.toBeVisible();
+        await this.roleActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.saveRole.click();
-        await expect(this.locators.successUpdateRole.first()).toBeVisible();
+        await this.roleActionPage.saveRole.click();
+        await expect(
+            this.roleActionPage.successUpdateRole.first(),
+        ).toBeVisible();
     }
 
     async roleDeleteVerify() {
-        await expect(this.locators.createRole).not.toBeVisible();
-        await this.locators.deleteIcon.nth(2).click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.successDeleteRole.first()).toBeVisible();
+        await expect(this.roleActionPage.createRole).not.toBeVisible();
+        await this.roleActionPage.deleteIcon.nth(2).click();
+        await this.roleActionPage.agreeBtn.click();
+        await expect(
+            this.roleActionPage.successDeleteRole.first(),
+        ).toBeVisible();
     }
 
     async themeCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.themeActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.name.fill(generateName());
-        await this.locators.sortOrder.fill("1");
-        await this.locators.selectTypeAttribute.selectOption(
+        await this.themeActionPage.name.fill(generateName());
+        await this.themeActionPage.sortOrder.fill("1");
+        await this.themeActionPage.selectTypeAttribute.selectOption(
             "product_carousel",
         );
-        await this.locators.selectChannel.selectOption("1");
-        await this.locators.createBtn.nth(1).click();
-        await expect(this.locators.athorization.first()).toBeVisible();
+        await this.themeActionPage.selectChannel.selectOption("1");
+        await this.themeActionPage.createBtn.nth(1).click();
+        await expect(this.themeActionPage.athorization.first()).toBeVisible();
     }
 
     async themeEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
+        await expect(this.themeActionPage.createBtn).not.toBeVisible();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.iconEdit.nth(3).click();
+        await this.themeActionPage.iconEdit.nth(3).click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.click();
-        await expect(this.locators.successEditTheme.first()).toBeVisible();
+        await this.themeActionPage.createBtn.click();
+        await expect(
+            this.themeActionPage.successEditTheme.first(),
+        ).toBeVisible();
     }
 
     async themeDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.nth(3)).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.successDeleteTheme.first()).toBeVisible();
+        await expect(this.themeActionPage.createBtn).not.toBeVisible();
+        await expect(this.themeActionPage.iconEdit.nth(3)).not.toBeVisible();
+        await this.themeActionPage.deleteIcon.first().click();
+        await this.themeActionPage.agreeBtn.click();
+        await expect(
+            this.themeActionPage.successDeleteTheme.first(),
+        ).toBeVisible();
     }
 
     async taxrateCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.taxRateActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.identifier.fill("test-tax-rate");
-        await this.locators.selectCountry.selectOption("IN");
-        await this.locators.taxRate.fill("10");
-        await this.locators.createBtn.first().click();
-        await expect(this.locators.successCreateTaxRate.first()).toBeVisible();
+        await this.taxRateActionPage.identifier.fill("test-tax-rate");
+        await this.taxRateActionPage.selectCountry.selectOption("IN");
+        await this.taxRateActionPage.taxRate.fill("10");
+        await this.taxRateActionPage.createBtn.first().click();
+        await expect(
+            this.taxRateActionPage.successCreateTaxRate.first(),
+        ).toBeVisible();
     }
 
     async taxrateEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.taxRateActionPage.createBtn).not.toBeVisible();
+        await this.taxRateActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.first().click();
-        await expect(this.locators.successUpdateTaxRate.first()).toBeVisible();
+        await this.taxRateActionPage.createBtn.first().click();
+        await expect(
+            this.taxRateActionPage.successUpdateTaxRate.first(),
+        ).toBeVisible();
     }
 
     async taxrateDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.successDeleteTaxRate.first()).toBeVisible();
+        await expect(this.taxRateActionPage.createBtn).not.toBeVisible();
+        await expect(this.taxRateActionPage.iconEdit.first()).not.toBeVisible();
+        await this.taxRateActionPage.deleteIcon.first().click();
+        await this.taxRateActionPage.agreeBtn.click();
+        await expect(
+            this.taxRateActionPage.successDeleteTaxRate.first(),
+        ).toBeVisible();
     }
 
     async taxcategoryCreateVerify() {
-        await this.locators.createBtn.click();
+        await this.taxCategoryActionPage.createBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.fillCode.fill("test-tax-category");
-        await this.locators.name.fill("Test Tax Category");
-        await this.locators.description.fill("This is a test tax category");
-        await this.locators.selectTaxRate.selectOption({
+        await this.taxCategoryActionPage.fillCode.fill("test-tax-category");
+        await this.taxCategoryActionPage.name.fill("Test Tax Category");
+        await this.taxCategoryActionPage.description.fill(
+            "This is a test tax category",
+        );
+        await this.taxCategoryActionPage.selectTaxRate.selectOption({
             label: "test-tax-rate",
         });
-        await this.locators.createBtn.nth(1).click();
+        await this.taxCategoryActionPage.createBtn.nth(1).click();
         await expect(
-            this.locators.successCreateTaxCategory.first(),
+            this.taxCategoryActionPage.successCreateTaxCategory.first(),
         ).toBeVisible();
     }
 
     async taxcategoryEditVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.taxCategoryActionPage.createBtn).not.toBeVisible();
+        await this.taxCategoryActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.createBtn.first().click();
+        await this.taxCategoryActionPage.createBtn.first().click();
         await expect(
-            this.locators.successUpdateTaxCategory.first(),
+            this.taxCategoryActionPage.successUpdateTaxCategory.first(),
         ).toBeVisible();
     }
 
     async taxcategoryDeleteVerify() {
-        await expect(this.locators.createBtn).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
+        await expect(this.taxCategoryActionPage.createBtn).not.toBeVisible();
         await expect(
-            this.locators.successDeleteTaxCategory.first(),
+            this.taxCategoryActionPage.iconEdit.first(),
+        ).not.toBeVisible();
+        await this.taxCategoryActionPage.deleteIcon.first().click();
+        await this.taxCategoryActionPage.agreeBtn.click();
+        await expect(
+            this.taxCategoryActionPage.successDeleteTaxCategory.first(),
         ).toBeVisible();
     }
 
@@ -1778,18 +2043,20 @@ export class ACLManagement {
         }
         await addAddress(this.page);
         await this.page.goto("");
-        await this.locators.searchInput.fill("simple");
-        await this.locators.searchInput.press("Enter");
-        await this.locators.addToCartButton.first().click();
-        await expect(this.locators.addCartSuccess.first()).toBeVisible();
-        await this.locators.ShoppingCartIcon.click();
-        await this.locators.ContinueButton.click();
+        await this.customerCheckoutActionPage.searchInput.fill("simple");
+        await this.customerCheckoutActionPage.searchInput.press("Enter");
+        await this.customerCheckoutActionPage.addToCartButton.first().click();
+        await expect(
+            this.customerCheckoutActionPage.addCartSuccess.first(),
+        ).toBeVisible();
+        await this.customerCheckoutActionPage.shoppingCartIcon.click();
+        await this.customerCheckoutActionPage.continueButton.click();
         await this.page.locator(".icon-radio-unselect").first().click();
-        await this.locators.clickProcessButton.click();
-        await this.locators.chooseShippingMethod.click();
-        await this.locators.choosePaymentMethod.click();
+        await this.customerCheckoutActionPage.clickProcessButton.click();
+        await this.customerCheckoutActionPage.chooseShippingMethod.click();
+        await this.customerCheckoutActionPage.choosePaymentMethod.click();
         await this.page.waitForTimeout(2000);
-        await this.locators.clickPlaceOrderButton.click();
+        await this.customerCheckoutActionPage.clickPlaceOrderButton.click();
         await this.page.waitForTimeout(8000);
     }
 
@@ -1892,7 +2159,6 @@ export class ACLManagement {
          */
 
         await this.page.locator('label[for="allow_rma"]').click();
-        await this.locators.rmaSelection.selectOption("1");
 
         /**
          * Saving the product.
@@ -1921,116 +2187,112 @@ export class ACLManagement {
         await this.createSimpleProduct(this.page);
         await this.createOrder();
         await this.page.goto("admin/sales/rma/requests");
-        await this.locators.createBtn.click();
-        await this.locators.iconEdit.first().click();
-        await this.locators.checkBox.check();
+        await this.rmaActionPage.createBtn.click();
+        await this.rmaActionPage.iconEdit.first().click();
+        await this.rmaActionPage.checkBox.check();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.resolution.selectOption("cancel_items");
-        await this.locators.resolution.selectOption("cancel_items");
+        await this.rmaActionPage.resolution.selectOption("cancel_items");
+        await this.rmaActionPage.resolution.selectOption("cancel_items");
         await this.page.waitForLoadState("networkidle");
-        await this.locators.reason.selectOption("1");
-        await this.locators.rmaQTY.fill("1");
-        await this.locators.info.fill("Changed My Mind.");
-        await this.locators.createBtn.first().click();
-        await expect(this.locators.successAdminRMA).toBeVisible();
+        await this.rmaActionPage.reason.selectOption("1");
+        await this.rmaActionPage.rmaQty.fill("1");
+        await this.rmaActionPage.info.fill("Changed My Mind.");
+        await this.rmaActionPage.createBtn.first().click();
+        await expect(this.rmaActionPage.successRMA).toBeVisible();
     }
 
     async rmaReasonCreateVerify() {
         await this.page.goto("admin/sales/rma/reasons");
-        await this.locators.createRMAReason.click();
-        await this.locators.reasonTitle.fill("Broken Product");
-        await this.locators.reasonStatus.check();
-        await this.locators.position.fill("1");
-        await this.locators.reasonType.selectOption("return");
-        await this.locators.saveReason.click();
-        await expect(this.locators.saveReasonSuccess).toBeVisible();
+        await this.rmaActionPage.createReasonBtn.click();
+        await this.rmaActionPage.reasonTitle.fill("Broken Product");
+        await this.rmaActionPage.reasonStatus.check();
+        await this.rmaActionPage.position.fill("1");
+        await this.rmaActionPage.reasonType.selectOption("return");
+        await this.rmaActionPage.saveReasonBtn.click();
+        await expect(this.rmaActionPage.successReasonCreate).toBeVisible();
     }
 
     async rmaReasonEditVerify() {
         await this.page.goto("admin/sales/rma/reasons");
-        await expect(this.locators.createRMAReason).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
-        await this.locators.position.fill("5");
-        await this.locators.saveReason.click();
-        await expect(
-            this.locators.saveReasonUpdateSuccess.first(),
-        ).toBeVisible();
+        await expect(this.rmaActionPage.createReasonBtn).not.toBeVisible();
+        await this.rmaActionPage.iconEdit.first().click();
+        await this.rmaActionPage.position.fill("5");
+        await this.rmaActionPage.saveReasonBtn.click();
+        await expect(this.rmaActionPage.successReasonUpdate).toBeVisible();
     }
 
     async rmaReasonDeleteVerify() {
         await this.page.goto("admin/sales/rma/reasons");
-        await expect(this.locators.createRMAReason).not.toBeVisible();
-        await expect(this.locators.editIcon.first()).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(
-            this.locators.saveReasonDeleteSuccess.first(),
-        ).toBeVisible();
+        await expect(this.rmaActionPage.createReasonBtn).not.toBeVisible();
+        await expect(this.rmaActionPage.iconEdit.first()).not.toBeVisible();
+        await this.rmaActionPage.deleteIcon.first().click();
+        await this.rmaActionPage.agreeBtn.click();
+        await expect(this.rmaActionPage.successReasonDelete).toBeVisible();
     }
 
     async rmaRulesCreateVerify() {
         await this.page.goto("admin/sales/rma/rules");
-        await this.locators.rmaRulesCreate.click();
+        await this.rmaActionPage.createRuleBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.ruleTitle.fill("Test Rule1");
-        await this.locators.reasonStatus.check();
-        await this.locators.ruleDescription.fill("Test Rule Description");
-        await this.locators.returnPeriod.fill("15");
-        await this.locators.saveRule.click();
-        await expect(this.locators.ruleSuccessMSG).toBeVisible();
+        await this.rmaActionPage.ruleTitle.fill("Test Rule1");
+        await this.rmaActionPage.reasonStatus.check();
+        await this.rmaActionPage.ruleDescription.fill("Test Rule Description");
+        await this.rmaActionPage.returnPeriod.fill("15");
+        await this.rmaActionPage.saveRuleBtn.click();
+        await expect(this.rmaActionPage.successRuleCreate).toBeVisible();
     }
 
     async rmaRulesEditVerify() {
         await this.page.goto("admin/sales/rma/rules");
-        await expect(this.locators.rmaRulesCreate).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.rmaActionPage.createRuleBtn).not.toBeVisible();
+        await this.rmaActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.ruleTitle.fill("Test Rule1");
-        await this.locators.reasonStatus.check();
-        await this.locators.ruleDescription.fill("Test Rule Description");
-        await this.locators.returnPeriod.fill("15");
-        await this.locators.saveRule.click();
-        await expect(this.locators.ruleSuccessUpdatedMSG).toBeVisible();
+        await this.rmaActionPage.ruleTitle.fill("Test Rule1");
+        await this.rmaActionPage.reasonStatus.check();
+        await this.rmaActionPage.ruleDescription.fill("Test Rule Description");
+        await this.rmaActionPage.returnPeriod.fill("15");
+        await this.rmaActionPage.saveRuleBtn.click();
+        await expect(this.rmaActionPage.successRuleUpdate).toBeVisible();
     }
 
     async rmaRulesDeleteVerify() {
         await this.page.goto("admin/sales/rma/rules");
-        await expect(this.locators.rmaRulesCreate).not.toBeVisible();
-        await expect(this.locators.iconEdit).not.toBeVisible();
-        await this.locators.deleteIcon.first().click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.ruleDeleteSuccessMSG).toBeVisible();
+        await expect(this.rmaActionPage.createRuleBtn).not.toBeVisible();
+        await expect(this.rmaActionPage.iconEdit).not.toBeVisible();
+        await this.rmaActionPage.deleteIcon.first().click();
+        await this.rmaActionPage.agreeBtn.click();
+        await expect(this.rmaActionPage.successRuleDelete).toBeVisible();
     }
 
     async rmaStatusCreateVerify() {
         await this.page.goto("admin/sales/rma/rma-status");
-        await this.locators.createRMAStatus.click();
+        await this.rmaActionPage.createStatusBtn.click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.rmaStatusTitle.fill("RMA Status");
-        await this.locators.reasonStatus.click();
-        await this.locators.saveStatus.click();
-        await expect(this.locators.statusSuccess).toBeVisible();
+        await this.rmaActionPage.statusTitle.fill("RMA Status");
+        await this.rmaActionPage.reasonStatus.click();
+        await this.rmaActionPage.saveStatusBtn.click();
+        await expect(this.rmaActionPage.successStatusCreate).toBeVisible();
     }
 
     async rmaStatusEditVerify() {
         await this.page.goto("admin/sales/rma/rma-status");
-        await expect(this.locators.createRMAStatus).not.toBeVisible();
-        await this.locators.iconEdit.first().click();
+        await expect(this.rmaActionPage.createStatusBtn).not.toBeVisible();
+        await this.rmaActionPage.iconEdit.first().click();
         await this.page.waitForLoadState("networkidle");
-        await this.locators.rmaStatusTitle.fill("RMA Status edited");
-        await this.locators.saveStatus.click();
-        await expect(this.locators.statusUpdateSuccess).toBeVisible();
+        await this.rmaActionPage.statusTitle.fill("RMA Status edited");
+        await this.rmaActionPage.saveStatusBtn.click();
+        await expect(this.rmaActionPage.successStatusUpdate).toBeVisible();
     }
 
     async rmaStatusDeleteVerify() {
         await this.page.goto("admin/sales/rma/rma-status");
-        await expect(this.locators.createRMAStatus).not.toBeVisible();
-        await expect(this.locators.iconEdit.first()).not.toBeVisible();
-        await expect(this.locators.deleteIcon.first()).not.toBeVisible();
-        await this.locators.selectRowBtn.first().click();
-        await this.locators.selectAction.click();
-        await this.locators.deleteBtn.click();
-        await this.locators.agreeBtn.click();
-        await expect(this.locators.statusDeleteSuccess).toBeVisible();
+        await expect(this.rmaActionPage.createStatusBtn).not.toBeVisible();
+        await expect(this.rmaActionPage.iconEdit.first()).not.toBeVisible();
+        await expect(this.rmaActionPage.deleteIcon.first()).not.toBeVisible();
+        await this.rmaActionPage.selectRow.first().click();
+        await this.rmaActionPage.selectAction.click();
+        await this.rmaActionPage.deleteAction.click();
+        await this.rmaActionPage.agreeBtn.click();
+        await expect(this.rmaActionPage.successStatusDelete).toBeVisible();
     }
 }
