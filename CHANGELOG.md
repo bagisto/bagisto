@@ -2,6 +2,12 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- #11236 [fixed] - Fixed an issue with incorrect slot visibility on the product page for table booking products when the selected weekday or date was out of range.
+
+- #11235 [fixed] - Fixed an issue causing incorrect slot visibility based on selected day and date in appointment booking.
+
 ## **v2.3.17 (13th of April 2026)** - *Release*
 
 * Added support for Romanian language.
