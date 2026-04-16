@@ -35,6 +35,15 @@ class SearchTerm extends Model implements SearchTermContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'display_in_suggested_terms' => 'boolean',
+    ];
+
+    /**
      * Create a new factory instance for the model.
      */
     protected static function newFactory(): Factory

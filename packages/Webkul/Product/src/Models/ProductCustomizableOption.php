@@ -36,6 +36,15 @@ class ProductCustomizableOption extends TranslatableModel implements ProductCust
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_required' => 'boolean',
+    ];
+
+    /**
      * Get the product that owns the option.
      */
     public function product()

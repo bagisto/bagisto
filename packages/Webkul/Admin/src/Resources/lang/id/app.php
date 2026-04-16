@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount Per Unit x :qty Jumlah',
+                'billing-address' => 'Alamat Penagihan',
                 'channel' => 'Saluran',
-                'customer-email' => 'Email - :email',
                 'customer' => 'Pelanggan',
+                'customer-email' => 'Email - :email',
                 'discount' => 'Jumlah Diskon - :discount',
                 'email' => 'Email',
                 'grand-total' => 'Total Keseluruhan',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'ID Pesanan',
                 'order-information' => 'Informasi Pesanan',
                 'order-status' => 'Status Pesanan',
+                'price' => 'Harga - :price',
                 'price-excl-tax' => 'Harga (Tanpa Pajak) - :price',
                 'price-incl-tax' => 'Harga (Termasuk Pajak) - :price',
-                'price' => 'Harga - :price',
                 'print' => 'Cetak',
                 'product-image' => 'Gambar Produk',
                 'qty' => 'Jumlah - :qty',
+                'send' => 'Kirim',
                 'send-btn' => 'Kirim',
                 'send-duplicate-invoice' => 'Kirim Faktur Duplikat',
-                'send' => 'Kirim',
+                'shipping-address' => 'Alamat Pengiriman',
+                'shipping-and-handling' => 'Pengiriman dan Penanganan',
                 'shipping-and-handling-excl-tax' => 'Pengiriman dan Penanganan (Tanpa Pajak)',
                 'shipping-and-handling-incl-tax' => 'Pengiriman dan Penanganan (Termasuk Pajak)',
-                'shipping-and-handling' => 'Pengiriman dan Penanganan',
                 'sku' => 'SKU - :sku',
+                'sub-total' => 'Subtotal - :sub_total',
                 'sub-total-excl-tax' => 'Subtotal (Tanpa Pajak) - :sub_total',
                 'sub-total-incl-tax' => 'Subtotal (Termasuk Pajak) - :sub_total',
+                'sub-total-summary' => 'Subtotal',
                 'sub-total-summary-excl-tax' => 'Subtotal (Tanpa Pajak)',
                 'sub-total-summary-incl-tax' => 'Subtotal (Termasuk Pajak)',
-                'sub-total-summary' => 'Subtotal',
-                'sub-total' => 'Subtotal - :sub_total',
                 'summary-discount' => 'Jumlah Diskon',
                 'summary-tax' => 'Jumlah Pajak',
                 'tax' => 'Jumlah Pajak - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'Gagal menghapus pelanggan',
             'delete-success' => 'Pelanggan berhasil dihapus',
-            'order-pending' => 'Pesanan masih tertunda',
+            'delete-pending-order-error' => 'Pelanggan ini memiliki pesanan yang tertunda dan tidak dapat dihapus.',
             'update-success' => 'Pelanggan berhasil diperbarui',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'Edit Kategori Pajak',
                     ],
 
-                    'can-not-delete' => 'Kategori dengan Tarif Pajak yang Terpasang tidak bisa dihapus.',
                     'create-success' => 'Kategori Pajak Baru Berhasil Dibuat.',
                     'delete-failed' => 'Penghapusan Kategori Pajak Gagal.',
                     'delete-success' => 'Kategori Pajak Berhasil Dihapus.',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Konfigurasikan kredensial API Ollama Anda.',
+                        'title-info' => 'Konfigurasikan pengaturan koneksi Ollama Anda.',
+                        'url' => 'URL Dasar',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'Aktifkan dan konfigurasikan fitur AI untuk etalase.',
                     'title' => 'Fitur Etalase',
+
+                    'image-search' => [
+                        'enabled' => 'Diaktifkan',
+                        'model' => 'Model',
+                        'title' => 'Pencarian Gambar AI',
+                        'title-info' => 'Gunakan AI vision untuk menganalisis gambar yang diunggah dan mengekstrak kata kunci pencarian produk di etalase.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Aktif',

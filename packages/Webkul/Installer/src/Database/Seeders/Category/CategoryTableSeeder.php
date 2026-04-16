@@ -7,9 +7,12 @@ use Illuminate\Database\Seeder;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class CategoryTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Base path for the images.
      */
@@ -53,6 +56,7 @@ class CategoryTableSeeder extends Seeder
                 [
                     'name' => trans('installer::app.seeders.category.categories.name', [], $locale),
                     'slug' => 'root',
+                    'url_path' => '',
                     'description' => trans('installer::app.seeders.category.categories.description', [], $locale),
                     'meta_title' => '',
                     'meta_description' => '',
@@ -62,6 +66,8 @@ class CategoryTableSeeder extends Seeder
                 ],
             ]);
         }
+
+        $this->syncPostgresSequences(['categories']);
     }
 
     /**
@@ -1262,6 +1268,8 @@ class CategoryTableSeeder extends Seeder
             ['category_id' => 41, 'attribute_id' => 24],
             ['category_id' => 41, 'attribute_id' => 25],
         ]);
+
+        $this->syncPostgresSequences(['categories']);
     }
 
     /**
@@ -1274,7 +1282,7 @@ class CategoryTableSeeder extends Seeder
     public function storeFileIfExists($targetPath, $file)
     {
         if (file_exists(base_path(self::BASE_PATH.$file))) {
-            return 'storage/'.Storage::putFile($targetPath, new File(base_path(self::BASE_PATH.$file)));
+            return Storage::putFile($targetPath, new File(base_path(self::BASE_PATH.$file)));
         }
 
         return null;

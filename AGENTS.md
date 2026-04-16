@@ -6,7 +6,7 @@
 - `public/themes/*/build/` — Vite build output
 - `storage/` — runtime caches, logs, compiled views
 - `*.hot` files — Vite HMR markers
-- `packages/Webkul/*/src/Resources/assets/` — only edit if working on frontend; always run `npm run build` after
+- `packages/Webkul/*/src/Resources/assets/` — only edit if working on frontend; always run `npm run build` from the respective package directory after
 
 ## Repository Map
 
@@ -116,22 +116,41 @@ Every package in `packages/Webkul/{Name}/src/` follows:
 - **Path Repositories**: `composer.json` uses `"type": "path"` for `packages/*/*`, packages are symlinked — no `composer update` needed for package code changes. Run `composer dump-autoload` after adding new packages.
 - **Service Providers**: Each package has a main ServiceProvider (routes, views, translations, migrations, config) registered in `bootstrap/providers.php`.
 - **Dual Route Files**: Admin routes (`['web', 'admin']` middleware, `config('app.admin_url')` prefix) and Shop routes (`['web', 'locale', 'theme', 'currency']` middleware).
-- **21 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ru, sin, tr, uk, zh_CN. Translation changes must be applied to ALL locale files.
+- **21 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ru, sin, tr, uk, zh_CN. Translation changes must be applied to ALL locale files. Verify with `php artisan bagisto:translations:check`.
 
 ## Commands
 
 ### Testing
 ```bash
 # Pest (PHP)
-php artisan test --compact                              # Run all tests
-php artisan test --compact --filter=testName             # Run specific test
-php artisan test --compact packages/Webkul/Admin/tests   # Run package tests
+vendor/bin/pest                                          # Run all tests
+vendor/bin/pest --parallel                               # Run all tests in parallel
+vendor/bin/pest --filter=testName                        # Run specific test
+vendor/bin/pest packages/Webkul/Admin/tests/Feature      # Run package tests
 
-# Playwright (E2E) — Admin
-cd packages/Webkul/Admin/tests/e2e-pw && npx playwright test
+# Playwright (E2E) — Admin (run from packages/Webkul/Admin)
+cd packages/Webkul/Admin && npm install && npx playwright install --with-deps chromium
+cd packages/Webkul/Admin && npx playwright test --config=tests/e2e-pw/playwright.config.ts
 
-# Playwright (E2E) — Shop
-cd packages/Webkul/Shop/tests/e2e-pw && npx playwright test
+# Playwright (E2E) — Shop (run from packages/Webkul/Shop)
+cd packages/Webkul/Shop && npm install && npx playwright install --with-deps chromium
+cd packages/Webkul/Shop && npx playwright test --config=tests/e2e-pw/playwright.config.ts
+```
+
+### Fresh Database Setup for Parallel Testing
+Parallel testing creates `{DB_DATABASE}_test_1`, `{DB_DATABASE}_test_2`, etc. based on the number of CPU cores. For example, with `DB_DATABASE=bagisto` on a 6-core machine, it creates `bagisto_test_1` through `bagisto_test_6`. This applies to both MySQL and PostgreSQL.
+
+When the schema changes, these test databases become stale and must be dropped before re-running:
+
+```bash
+# Drop parallel test databases (adjust the count to match your CPU cores)
+php artisan tinker --execute="for (\$i = 1; \$i <= 6; \$i++) { try { DB::statement(\"DROP DATABASE IF EXISTS bagisto_test_{\$i}\"); } catch (\Exception \$e) {} }"
+
+# Fresh install
+php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
+
+# Run tests
+vendor/bin/pest --parallel --no-coverage
 ```
 
 ### Code Style
@@ -141,10 +160,38 @@ vendor/bin/pint                  # Fix all files
 vendor/bin/pint --test           # Check only (CI uses this)
 ```
 
-### Frontend
+**Important:** Always run `vendor/bin/pint` on modified files after every code change before running tests or marking work as complete.
+
+### Commenting Conventions
+
+- **Section headers / titles**: Title Case, no trailing period.
+  ```php
+  // Store
+  // Product Attribute Values
+  // Store — All Product Types
+  ```
+- **Inline labels** (grouping assertions inside a test): Title Case, no trailing period.
+  ```php
+  // Core fields
+  // Text fields indexed from attribute values
+  // Numeric fields
+  // Boolean fields
+  // Locale and channel
+  ```
+- **Sentence comments** (explanations, steps, notes): Start with a capital letter and end with a period.
+  ```php
+  // Step 1: Store the product skeleton via the controller.
+  // Virtual products do not require weight, length, width, or height.
+  // Verify product_flat reflects the changed values.
+  ```
+- **PHPDoc**: Every method should have a single-line description ending with a period.
+
+### Frontend (run from within each package: Admin, Shop, or Installer)
 ```bash
-npm run build                    # Production build (Vite)
-npm run dev                      # Dev server with HMR
+cd packages/Webkul/Admin && npm install && npm run build    # Admin production build
+cd packages/Webkul/Shop && npm install && npm run build     # Shop production build
+cd packages/Webkul/Admin && npm run dev                     # Admin dev server with HMR
+cd packages/Webkul/Shop && npm run dev                      # Shop dev server with HMR
 ```
 
 ### Database
@@ -157,11 +204,42 @@ php artisan db:seed              # Seed database
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `pest_tests.yml` | push, PR | Installs Bagisto, runs `vendor/bin/pest` |
+| `pest_tests.yml` | push, PR | Installs Bagisto, runs `vendor/bin/pest` (MySQL + PostgreSQL) |
 | `pint_tests.yml` | push, PR | Runs `pint --test` (style check) |
-| `admin_playwright_tests.yml` | push, PR | Admin E2E tests |
-| `shop_playwright_tests.yml` | push, PR | Shop E2E tests |
+| `admin_playwright_tests.yml` | push, PR | Admin E2E tests (6 shards × MySQL + PostgreSQL) |
+| `shop_playwright_tests.yml` | push, PR | Shop E2E tests (6 shards × MySQL + PostgreSQL) |
 | `translation_tests.yml` | push, PR | Translation key consistency |
+
+## PostgreSQL Compatibility
+
+All code must work on both MySQL 8.0 and PostgreSQL 16. Use the existing `db_grammar()` abstraction for DB-specific syntax.
+
+### Case-Insensitive LIKE
+MySQL `LIKE` is case-insensitive by default; PostgreSQL `LIKE` is case-sensitive. Use the grammar helper:
+```php
+// Correct — uses LIKE on MySQL, ILIKE on PostgreSQL
+$query->where('name', db_grammar()->caseInsensitiveLike(), '%'.$search.'%');
+
+// For exact-case matching (rare)
+$query->where('code', db_grammar()->caseSensitiveLike(), '%'.$search.'%');
+```
+Never hardcode `'like'` for user-facing text searches.
+
+### Empty Strings → Use Model Mutators
+MySQL coerces `""` to `0`/`NULL`. PostgreSQL rejects it. Add set mutators on models:
+```php
+public function setPriorityAttribute($value): void
+{
+    $this->attributes['priority'] = $value !== '' && $value !== null ? (int) $value : 0;
+}
+```
+Always pair with `$casts` for read-side consistency. Never sanitize in controllers.
+
+### Other Pitfalls
+- **CASE types must match**: `CASE WHEN x THEN varchar_col ELSE CAST(int_col AS CHAR) END`
+- **GROUP BY must include all non-aggregated SELECT columns**
+- **`DB::raw('col + 1')` in `updateOrCreate()`** fails on INSERT — split into find + update/create
+- **DB-specific SQL**: Use `db_grammar()` methods (`concat`, `groupConcat`, `findInSet`, `dateFormat`, `jsonExtract`, `caseInsensitiveLike`, `caseSensitiveLike`, etc.)
 
 ## Safety Rails
 
@@ -169,6 +247,7 @@ php artisan db:seed              # Seed database
 - **Translations are 21 files per key.** Missing a locale will fail CI. When adding/removing translation keys, hit all 21 files.
 - **Pint must pass.** Run `vendor/bin/pint --dirty` before finalizing any PHP change.
 - **Tests must pass.** Run affected package tests after changes. Do not delete tests without approval.
+- **PostgreSQL compatibility is required.** Never hardcode `'like'` for text searches — use `db_grammar()->caseInsensitiveLike()`. Never rely on MySQL-specific implicit coercions. Handle type normalization in models via `$casts` and set mutators.
 - **Do not add/remove composer dependencies without approval.**
 - **Do not create documentation files unless explicitly requested.**
 
@@ -176,7 +255,7 @@ php artisan db:seed              # Seed database
 
 1. `vendor/bin/pint --dirty` — no style violations
 2. `php artisan test --compact` — affected tests pass
-3. Translation keys exist in all 21 locale files (if changed)
+3. `php artisan bagisto:translations:check` — translation keys exist in all 21 locale files (if changed)
 4. No `env()` calls outside `config/` files
 5. New models have Contract + Model + Proxy + Repository
 6. New packages registered in `bootstrap/providers.php` and `config/concord.php`

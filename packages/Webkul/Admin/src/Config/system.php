@@ -663,6 +663,11 @@ return [
         'sort' => 8,
         'fields' => [
             [
+                'name' => 'url',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.ollama.url',
+                'type' => 'text',
+                'default' => 'http://localhost:11434',
+            ], [
                 'name' => 'api_key',
                 'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
                 'type' => 'password',
@@ -715,10 +720,29 @@ return [
         'icon' => 'settings/magic-ai-storefront-features.svg',
         'sort' => 4,
     ], [
+        'key' => 'magic_ai.storefront_features.image_search',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.image-search.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.image-search.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.image-search.enabled',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.image-search.model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
+            ],
+        ],
+    ], [
         'key' => 'magic_ai.storefront_features.review_translation',
         'name' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.title',
         'info' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.title-info',
-        'sort' => 1,
+        'sort' => 2,
         'fields' => [
             [
                 'name' => 'enabled',
@@ -737,7 +761,7 @@ return [
         'key' => 'magic_ai.storefront_features.checkout_message',
         'name' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.title',
         'info' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.title-info',
-        'sort' => 2,
+        'sort' => 3,
         'fields' => [
             [
                 'name' => 'enabled',
@@ -1981,32 +2005,9 @@ return [
             ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
+                'type' => 'number',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'validation' => 'required_if:active,1|integer|min:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2112,32 +2113,9 @@ return [
             ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
+                'type' => 'number',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'validation' => 'required_if:active,1|integer|min:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2204,32 +2182,9 @@ return [
             ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
+                'type' => 'number',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'validation' => 'required_if:active,1|integer|min:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2304,32 +2259,9 @@ return [
             ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
+                'type' => 'number',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'validation' => 'required_if:active,1|integer|min:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2388,32 +2320,9 @@ return [
             ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
+                'type' => 'number',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'validation' => 'required_if:active,1|integer|min:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2508,32 +2417,9 @@ return [
             ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
+                'type' => 'number',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'validation' => 'required_if:active,1|integer|min:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],
@@ -2628,32 +2514,9 @@ return [
             ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
+                'type' => 'number',
                 'depends' => 'active:1',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ], [
-                        'title' => '5',
-                        'value' => 5,
-                    ], [
-                        'title' => '6',
-                        'value' => 6,
-                    ], [
-                        'title' => '7',
-                        'value' => 7,
-                    ],
-                ],
+                'validation' => 'required_if:active,1|integer|min:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ],

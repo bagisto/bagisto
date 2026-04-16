@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount प्रति इकाई x :qty मात्रा',
+                'billing-address' => 'बिलिंग पता',
                 'channel' => 'चैनल',
-                'customer-email' => 'ईमेल - :email',
                 'customer' => 'ग्राहक',
+                'customer-email' => 'ईमेल - :email',
                 'discount' => 'छूट राशि - :discount',
                 'email' => 'ईमेल',
                 'grand-total' => 'कुल योग',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'आदेश आईडी',
                 'order-information' => 'आदेश जानकारी',
                 'order-status' => 'आदेश स्थिति',
+                'price' => 'मूल्य - :price',
                 'price-excl-tax' => 'मूल्य (कर छोड़कर) - :price',
                 'price-incl-tax' => 'मूल्य (कर सहित) - :price',
-                'price' => 'मूल्य - :price',
                 'print' => 'प्रिंट',
                 'product-image' => 'उत्पाद छवि',
                 'qty' => 'मात्रा - :qty',
+                'send' => 'भेजें',
                 'send-btn' => 'भेजें',
                 'send-duplicate-invoice' => 'डुप्लिकेट चालान भेजें',
-                'send' => 'भेजें',
+                'shipping-address' => 'शिपिंग पता',
+                'shipping-and-handling' => 'शिपिंग और हैंडलिंग',
                 'shipping-and-handling-excl-tax' => 'शिपिंग और हैंडलिंग (कर छोड़कर)',
                 'shipping-and-handling-incl-tax' => 'शिपिंग और हैंडलिंग (कर सहित)',
-                'shipping-and-handling' => 'शिपिंग और हैंडलिंग',
                 'sku' => 'एसकेयू - :sku',
+                'sub-total' => 'उप कुल - :sub_total',
                 'sub-total-excl-tax' => 'उप कुल (कर छोड़कर) - :sub_total',
                 'sub-total-incl-tax' => 'उप कुल (कर सहित) - :sub_total',
+                'sub-total-summary' => 'उप कुल',
                 'sub-total-summary-excl-tax' => 'उप कुल (कर छोड़कर)',
                 'sub-total-summary-incl-tax' => 'उप कुल (कर सहित)',
-                'sub-total-summary' => 'उप कुल',
-                'sub-total' => 'उप कुल - :sub_total',
                 'summary-discount' => 'छूट राशि',
                 'summary-tax' => 'कर राशि',
                 'tax' => 'कर राशि - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'ग्राहक हटाना विफल रहा',
             'delete-success' => 'ग्राहक सफलतापूर्वक हटा गया',
-            'order-pending' => 'आदेश लंबित है',
+            'delete-pending-order-error' => 'इस ग्राहक के लंबित ऑर्डर हैं और इसे हटाया नहीं जा सकता।',
             'update-success' => 'ग्राहक सफलतापूर्वक अपडेट किया गया',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'कर श्रेणियाँ संपादित करें',
                     ],
 
-                    'can-not-delete' => 'कर दर असाइन की गई श्रेणियाँ हटाई नहीं जा सकतीं।',
                     'create-success' => 'नई कर श्रेणी बनाई गई',
                     'delete-failed' => 'कर श्रेणी हटाने में विफल हुआ',
                     'delete-success' => 'कर श्रेणी सफलतापूर्वक हटाई गई',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'अपने Ollama API प्रमाणपत्र कॉन्फ़िगर करें।',
+                        'title-info' => 'अपनी Ollama कनेक्शन सेटिंग्स कॉन्फ़िगर करें।',
+                        'url' => 'बेस URL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'स्टोरफ्रंट के लिए AI सुविधाएँ सक्रिय और कॉन्फ़िगर करें।',
                     'title' => 'स्टोरफ्रंट सुविधाएँ',
+
+                    'image-search' => [
+                        'enabled' => 'सक्रिय',
+                        'model' => 'मॉडल',
+                        'title' => 'एआई छवि खोज',
+                        'title-info' => 'स्टोरफ्रंट पर अपलोड की गई छवियों का विश्लेषण करने और उत्पाद खोज कीवर्ड निकालने के लिए एआई विज़न का उपयोग करें।',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'सक्रिय',

@@ -223,6 +223,7 @@ return [
                 'nl' => 'Belanda',
                 'pl' => 'Polandia',
                 'pt_BR' => 'Portugis Brasil',
+                'ro' => 'Rumania',
                 'ru' => 'Rusia',
                 'sin' => 'Sinhala',
                 'tr' => 'Turki',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Semua Produk',
-
-                    'options' => [
-                        'title' => 'Semua Produk',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Lihat Koleksi',
@@ -275,8 +268,8 @@ return [
                     'name' => 'Koleksi Berani',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Produk Pemesanan',
+                'book-tickets' => [
+                    'name' => 'Pesan Tiket',
 
                     'options' => [
                         'title' => 'Pesan Tiket',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Koleksi Kategori',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Koleksi Unggulan',
-
-                    'options' => [
-                        'title' => 'Produk Unggulan',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Produk Baru',
+                'kids-collection' => [
+                    'name' => 'Koleksi Anak-anak',
 
                     'options' => [
-                        'title' => 'Produk Baru',
+                        'title' => 'Koleksi Anak-anak',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Koleksi Pria',
+
+                    'options' => [
+                        'title' => 'Koleksi Pria',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Koleksi Terbaik',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Koleksi Wanita',
+
+                    'options' => [
+                        'title' => 'Koleksi Wanita',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Bahasa Wizard Instalasi',
                 'locale' => 'Locale',
                 'main' => 'Mulai',
                 'select-locale' => 'Pilih Locale',
@@ -993,6 +995,7 @@ return [
             'persian' => 'Persia',
             'polish' => 'Polandia',
             'portuguese' => 'Portugis Brasil',
+            'romanian' => 'Rumania',
             'russian' => 'Rusia',
             'sinhala' => 'Sinhala',
             'spanish' => 'Spanyol',

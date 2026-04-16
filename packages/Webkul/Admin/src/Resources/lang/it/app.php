@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount Per Unità x :qty Quantità',
+                'billing-address' => 'Indirizzo di Fatturazione',
                 'channel' => 'Canale',
-                'customer-email' => 'Email - :email',
                 'customer' => 'Cliente',
+                'customer-email' => 'Email - :email',
                 'discount' => 'Importo Sconto - :discount',
                 'email' => 'Email',
                 'grand-total' => 'Totale Generale',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'ID Ordine',
                 'order-information' => 'Informazioni Ordine',
                 'order-status' => 'Stato Ordine',
+                'price' => 'Prezzo - :price',
                 'price-excl-tax' => 'Prezzo (Escl. Tasse) - :price',
                 'price-incl-tax' => 'Prezzo (Incl. Tasse) - :price',
-                'price' => 'Prezzo - :price',
                 'print' => 'Stampa',
                 'product-image' => 'Immagine Prodotto',
                 'qty' => 'Quantità - :qty',
+                'send' => 'Invia',
                 'send-btn' => 'Invia',
                 'send-duplicate-invoice' => 'Invia Fattura Duplicata',
-                'send' => 'Invia',
+                'shipping-address' => 'Indirizzo di Spedizione',
+                'shipping-and-handling' => 'Spedizione e Gestione',
                 'shipping-and-handling-excl-tax' => 'Spedizione e Gestione (Escl. Tasse)',
                 'shipping-and-handling-incl-tax' => 'Spedizione e Gestione (Incl. Tasse)',
-                'shipping-and-handling' => 'Spedizione e Gestione',
                 'sku' => 'SKU - :sku',
+                'sub-total' => 'Subtotale - :sub_total',
                 'sub-total-excl-tax' => 'Subtotale (Escl. Tasse) - :sub_total',
                 'sub-total-incl-tax' => 'Subtotale (Incl. Tasse) - :sub_total',
+                'sub-total-summary' => 'Subtotale',
                 'sub-total-summary-excl-tax' => 'Subtotale (Escl. Tasse)',
                 'sub-total-summary-incl-tax' => 'Subtotale (Incl. Tasse)',
-                'sub-total-summary' => 'Subtotale',
-                'sub-total' => 'Subtotale - :sub_total',
                 'summary-discount' => 'Importo Sconto',
                 'summary-tax' => 'Importo Tasse',
                 'tax' => 'Importo Tasse - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'Eliminazione Cliente Fallita',
             'delete-success' => 'Cliente Eliminato con Successo',
-            'order-pending' => 'Ordini in Attesa',
+            'delete-pending-order-error' => 'Questo cliente ha ordini in sospeso e non può essere eliminato.',
             'update-success' => 'Cliente Aggiornato con Successo',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'Modifica Categorie Fiscali',
                     ],
 
-                    'can-not-delete' => 'Le categorie assegnate alle aliquote fiscali non possono essere eliminate.',
                     'create-success' => 'Nuova Categoria Fiscale Creata',
                     'delete-failed' => 'Eliminazione Categoria Fiscale Fallita',
                     'delete-success' => 'Categoria Fiscale Eliminata con Successo',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configura le credenziali API di Ollama.',
+                        'title-info' => 'Configura le impostazioni di connessione di Ollama.',
+                        'url' => 'URL di base',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'Abilita e configura le funzionalità IA per il negozio.',
                     'title' => 'Funzionalità del negozio',
+
+                    'image-search' => [
+                        'enabled' => 'Abilitato',
+                        'model' => 'Modello',
+                        'title' => 'Ricerca immagini con IA',
+                        'title-info' => 'Usa la visione IA per analizzare le immagini caricate ed estrarre le parole chiave di ricerca dei prodotti nel negozio.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Abilitato',

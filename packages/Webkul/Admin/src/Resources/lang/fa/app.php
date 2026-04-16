@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount در هر واحد x :qty تعداد',
+                'billing-address' => 'آدرس صورتحساب',
                 'channel' => 'کانال',
-                'customer-email' => 'ایمیل - :email',
                 'customer' => 'مشتری',
+                'customer-email' => 'ایمیل - :email',
                 'discount' => 'مقدار تخفیف - :discount',
                 'email' => 'ایمیل',
                 'grand-total' => 'جمع کل',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'شماره سفارش',
                 'order-information' => 'اطلاعات سفارش',
                 'order-status' => 'وضعیت سفارش',
+                'price' => 'قیمت - :price',
                 'price-excl-tax' => 'قیمت (بدون مالیات) - :price',
                 'price-incl-tax' => 'قیمت (شامل مالیات) - :price',
-                'price' => 'قیمت - :price',
                 'print' => 'چاپ',
                 'product-image' => 'تصویر محصول',
                 'qty' => 'تعداد - :qty',
+                'send' => 'ارسال',
                 'send-btn' => 'ارسال',
                 'send-duplicate-invoice' => 'ارسال فاکتور تکراری',
-                'send' => 'ارسال',
+                'shipping-address' => 'آدرس حمل و نقل',
+                'shipping-and-handling' => 'هزینه حمل و نقل',
                 'shipping-and-handling-excl-tax' => 'هزینه حمل و نقل (بدون مالیات)',
                 'shipping-and-handling-incl-tax' => 'هزینه حمل و نقل (شامل مالیات)',
-                'shipping-and-handling' => 'هزینه حمل و نقل',
                 'sku' => 'کد SKU - :sku',
+                'sub-total' => 'جمع جزئی - :sub_total',
                 'sub-total-excl-tax' => 'جمع جزئی (بدون مالیات) - :sub_total',
                 'sub-total-incl-tax' => 'جمع جزئی (شامل مالیات) - :sub_total',
+                'sub-total-summary' => 'جمع جزئی',
                 'sub-total-summary-excl-tax' => 'جمع جزئی (بدون مالیات)',
                 'sub-total-summary-incl-tax' => 'جمع جزئی (شامل مالیات)',
-                'sub-total-summary' => 'جمع جزئی',
-                'sub-total' => 'جمع جزئی - :sub_total',
                 'summary-discount' => 'مقدار تخفیف',
                 'summary-tax' => 'مقدار مالیات',
                 'tax' => 'مقدار مالیات - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'حذف مشتری ناموفق بود',
             'delete-success' => 'مشتری با موفقیت حذف شد',
-            'order-pending' => 'سفارش در انتظار است',
+            'delete-pending-order-error' => 'این مشتری دارای سفارش‌های در انتظار است و قابل حذف نیست.',
             'update-success' => 'مشتری با موفقیت به‌روزرسانی شد',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'ویرایش دسته‌بندی مالیاتی',
                     ],
 
-                    'can-not-delete' => 'نرخ‌های مالیاتی اختصاص داده شده به دسته‌بندی‌ها قابل حذف نیستند.',
                     'create-success' => 'دسته‌بندی مالیاتی جدید ایجاد شد.',
                     'delete-failed' => 'حذف دسته‌بندی مالیاتی با شکست مواجه شد.',
                     'delete-success' => 'دسته‌بندی مالیاتی با موفقیت حذف شد.',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'اعتبارنامه API Ollama خود را پیکربندی کنید.',
+                        'title-info' => 'تنظیمات اتصال Ollama خود را پیکربندی کنید.',
+                        'url' => 'آدرس URL پایه',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'ویژگی‌های هوش مصنوعی برای فروشگاه را فعال و پیکربندی کنید.',
                     'title' => 'ویژگی‌های فروشگاه',
+
+                    'image-search' => [
+                        'enabled' => 'فعال',
+                        'model' => 'مدل',
+                        'title' => 'جستجوی تصویر با هوش مصنوعی',
+                        'title-info' => 'استفاده از بینایی هوش مصنوعی برای تحلیل تصاویر آپلود شده و استخراج کلمات کلیدی جستجوی محصول در فروشگاه.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'فعال',

@@ -4,9 +4,12 @@ namespace Webkul\Installer\Database\Seeders\Customer;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 
 class CustomerGroupTableSeeder extends Seeder
 {
+    use SyncsPostgresSequences;
+
     /**
      * Seed the application's database.
      *
@@ -37,5 +40,7 @@ class CustomerGroupTableSeeder extends Seeder
                 'is_user_defined' => 0,
             ],
         ]);
+
+        $this->syncPostgresSequences(['customer_groups']);
     }
 }

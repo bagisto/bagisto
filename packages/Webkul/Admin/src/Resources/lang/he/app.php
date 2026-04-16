@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount ליחידה x :qty כמות',
+                'billing-address' => 'כתובת לחיוב',
                 'channel' => 'ערוץ',
-                'customer-email' => 'אימייל - :email',
                 'customer' => 'לקוח',
+                'customer-email' => 'אימייל - :email',
                 'discount' => 'סכום הנחה - :discount',
                 'email' => 'אימייל',
                 'grand-total' => 'סכום כולל',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'מספר הזמנה',
                 'order-information' => 'מידע על הזמנה',
                 'order-status' => 'סטטוס הזמנה',
+                'price' => 'מחיר - :price',
                 'price-excl-tax' => 'מחיר (לא כולל מס) - :price',
                 'price-incl-tax' => 'מחיר (כולל מס) - :price',
-                'price' => 'מחיר - :price',
                 'print' => 'הדפסה',
                 'product-image' => 'תמונת מוצר',
                 'qty' => 'כמות - :qty',
+                'send' => 'שלח',
                 'send-btn' => 'שלח',
                 'send-duplicate-invoice' => 'שלח חשבונית כפולה',
-                'send' => 'שלח',
+                'shipping-address' => 'כתובת למשלוח',
+                'shipping-and-handling' => 'משלוח וטיפול',
                 'shipping-and-handling-excl-tax' => 'משלוח וטיפול (לא כולל מס)',
                 'shipping-and-handling-incl-tax' => 'משלוח וטיפול (כולל מס)',
-                'shipping-and-handling' => 'משלוח וטיפול',
                 'sku' => 'מק"ט - :sku',
+                'sub-total' => 'סה"כ ביניים - :sub_total',
                 'sub-total-excl-tax' => 'סה"כ ביניים (לא כולל מס) - :sub_total',
                 'sub-total-incl-tax' => 'סה"כ ביניים (כולל מס) - :sub_total',
+                'sub-total-summary' => 'סה"כ ביניים',
                 'sub-total-summary-excl-tax' => 'סה"כ ביניים (לא כולל מס)',
                 'sub-total-summary-incl-tax' => 'סה"כ ביניים (כולל מס)',
-                'sub-total-summary' => 'סה"כ ביניים',
-                'sub-total' => 'סה"כ ביניים - :sub_total',
                 'summary-discount' => 'סכום הנחה',
                 'summary-tax' => 'סכום מס',
                 'tax' => 'סכום מס - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'מחיקת הלקוח נכשלה',
             'delete-success' => 'הלקוח נמחק בהצלחה',
-            'order-pending' => 'ישנם הזמנות ממתינות',
+            'delete-pending-order-error' => 'ללקוח זה יש הזמנות ממתינות ולא ניתן למחוק אותו.',
             'update-success' => 'הלקוח עודכן בהצלחה',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'ערוך קטגוריות מס',
                     ],
 
-                    'can-not-delete' => 'לא ניתן למחוק קטגוריות שהוקצו לשערי מס.',
                     'create-success' => 'קטגוריית מס חדשה נוצרה בהצלחה',
                     'delete-failed' => 'מחיקת קטגוריית מס נכשלה',
                     'delete-success' => 'קטגוריית מס נמחקה בהצלחה',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'הגדרת אישורי API של Ollama.',
+                        'title-info' => 'הגדר את הגדרות החיבור של Ollama.',
+                        'url' => 'כתובת URL בסיסית',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'הפעלה והגדרת תכונות AI עבור חזית החנות.',
                     'title' => 'תכונות חזית החנות',
+
+                    'image-search' => [
+                        'enabled' => 'מופעל',
+                        'model' => 'מודל',
+                        'title' => 'חיפוש תמונות בינה מלאכותית',
+                        'title-info' => 'השתמש בראיית בינה מלאכותית לניתוח תמונות שהועלו ולחילוץ מילות מפתח לחיפוש מוצרים בחנות.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'מופעל',

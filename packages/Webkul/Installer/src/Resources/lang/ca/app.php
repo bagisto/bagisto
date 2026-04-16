@@ -223,6 +223,7 @@ return [
                 'nl' => 'Holandès',
                 'pl' => 'Polonès',
                 'pt_BR' => 'Portuguès Brasiler',
+                'ro' => 'Romanès',
                 'ru' => 'Rus',
                 'sin' => 'Singalès',
                 'tr' => 'Turc',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Tots els Productes',
-
-                    'options' => [
-                        'title' => 'Tots els Productes',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Veure Col·leccions',
@@ -275,8 +268,8 @@ return [
                     'name' => 'Col·leccions Agosarades',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Productes de Reserva',
+                'book-tickets' => [
+                    'name' => 'Reservar Entrades',
 
                     'options' => [
                         'title' => 'Reservar Entrades',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Col·leccions de Categories',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Col·leccions Destacades',
-
-                    'options' => [
-                        'title' => 'Productes Destacats',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Nous Productes',
+                'kids-collection' => [
+                    'name' => 'Col·lecció Nens',
 
                     'options' => [
-                        'title' => 'Nous Productes',
+                        'title' => 'Col·lecció Nens',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Col·lecció Home',
+
+                    'options' => [
+                        'title' => 'Col·lecció Home',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Millors Col·leccions',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Col·lecció Dona',
+
+                    'options' => [
+                        'title' => 'Col·lecció Dona',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Idioma de l\'assistent d\'instal·lació',
                 'locale' => 'Idioma',
                 'main' => 'Inici',
                 'select-locale' => 'Selecciona l\'idioma',
@@ -993,6 +995,7 @@ return [
             'persian' => 'Persa',
             'polish' => 'Polonès',
             'portuguese' => 'Portuguès brasiler',
+            'romanian' => 'Romanès',
             'russian' => 'Rus',
             'sinhala' => 'Singalès',
             'spanish' => 'Espanyol',

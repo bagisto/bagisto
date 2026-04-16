@@ -223,6 +223,7 @@ return [
                 'nl' => 'Nederlands',
                 'pl' => 'Pools',
                 'pt_BR' => 'Braziliaans Portugees',
+                'ro' => 'Roemeens',
                 'ru' => 'Russisch',
                 'sin' => 'Singalees',
                 'tr' => 'Turks',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Alle Producten',
-
-                    'options' => [
-                        'title' => 'Alle Producten',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Bekijk Collecties',
@@ -275,8 +268,8 @@ return [
                     'name' => 'Gedurfde Collecties',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Boekingsproducten',
+                'book-tickets' => [
+                    'name' => 'Tickets Boeken',
 
                     'options' => [
                         'title' => 'Tickets Boeken',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Categorieën Collecties',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Uitgelichte Collecties',
-
-                    'options' => [
-                        'title' => 'Uitgelichte Producten',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Nieuwe Producten',
+                'kids-collection' => [
+                    'name' => 'Kinder Collectie',
 
                     'options' => [
-                        'title' => 'Nieuwe Producten',
+                        'title' => 'Kinder Collectie',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Heren Collectie',
+
+                    'options' => [
+                        'title' => 'Heren Collectie',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Top Collecties',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Dames Collectie',
+
+                    'options' => [
+                        'title' => 'Dames Collectie',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Taal van de installatiewizard',
                 'locale' => 'Locatie',
                 'main' => 'Start',
                 'select-locale' => 'Selecteer Locatie',
@@ -993,6 +995,7 @@ return [
             'persian' => 'Perzisch',
             'polish' => 'Pools',
             'portuguese' => 'Braziliaans Portugees',
+            'romanian' => 'Roemeens',
             'russian' => 'Russisch',
             'sinhala' => 'Singalees',
             'spanish' => 'Spaans',

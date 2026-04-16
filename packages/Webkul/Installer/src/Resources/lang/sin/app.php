@@ -223,6 +223,7 @@ return [
                 'nl' => 'ලංදු',
                 'pl' => 'පොලිෂ්',
                 'pt_BR' => 'බ්‍රසිලියන් පෙරෙසියන්',
+                'ro' => 'රොමේනියානු',
                 'ru' => 'රුසියන්',
                 'sin' => 'සිංහල',
                 'tr' => 'තුර්කි',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'සියලුම භාණයන්',
-
-                    'options' => [
-                        'title' => 'සියලුම වෙළඳ සංයලුම',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'ආභර බලන්න',
@@ -275,8 +268,8 @@ return [
                     'name' => 'Bold එකතුව',
                 ],
 
-                'booking-products' => [
-                    'name' => 'වෙන්කරවා ගැනීමේ නිෂ්පාදන',
+                'book-tickets' => [
+                    'name' => 'ටිකට් වෙන්කරවා ගන්න',
 
                     'options' => [
                         'title' => 'ටිකට් වෙන්කරවා ගන්න',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'ප්රෘදාආභර',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'ප්‍රකාශ සංයලුම',
-
-                    'options' => [
-                        'title' => 'ප්‍රකාශ නිළ භාණයන්',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'නව නිෂ්කල',
+                'kids-collection' => [
+                    'name' => 'ළමා එකතුව',
 
                     'options' => [
-                        'title' => 'නව නිෂ්කල',
+                        'title' => 'ළමා එකතුව',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'පිරිමි එකතුව',
+
+                    'options' => [
+                        'title' => 'පිරිමි එකතුව',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'ඉහල ආභර',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'කාන්තා එකතුව',
+
+                    'options' => [
+                        'title' => 'කාන්තා එකතුව',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'ස්ථාපන විශාරද භාෂාව',
                 'locale' => 'දේශීය',
                 'main' => 'ආරම්භක',
                 'select-locale' => 'Locale තෝරන්න',
@@ -993,6 +995,7 @@ return [
             'persian' => 'පර්සියානු',
             'polish' => 'පෝලන්ත',
             'portuguese' => 'බ්රසීලියානු පෘතුගීසි',
+            'romanian' => 'රොමේනියානු',
             'russian' => 'රුසියානු',
             'sinhala' => 'සිංහල',
             'spanish' => 'ස්පාඤ්ඤ',

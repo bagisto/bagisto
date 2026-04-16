@@ -35,6 +35,15 @@ class SubscribersList extends Model implements SubscribersListContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'is_subscribed' => 'boolean',
+    ];
+
+    /**
      * Hide the token attribute to the model.
      *
      * @var array

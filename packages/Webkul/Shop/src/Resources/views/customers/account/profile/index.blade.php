@@ -101,7 +101,7 @@
                     class="text-sm font-medium text-zinc-500"
                     v-pre
                 >
-                    {{ $customer->date_of_birth ?? '-' }}
+                    {{ $customer->date_of_birth?->format('Y-m-d') ?? '-' }}
                 </p>
             </div>
 

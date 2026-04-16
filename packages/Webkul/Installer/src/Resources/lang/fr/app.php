@@ -223,6 +223,7 @@ return [
                 'nl' => 'Néerlandais',
                 'pl' => 'Polonais',
                 'pt_BR' => 'Portugais brésilien',
+                'ro' => 'Roumain',
                 'ru' => 'Russe',
                 'sin' => 'Sinhala',
                 'tr' => 'Turc',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Tous les produits',
-
-                    'options' => [
-                        'title' => 'Tous les produits',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Voir les collections',
@@ -275,8 +268,8 @@ return [
                     'name' => 'Collections Audacieuses',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Produits de Réservation',
+                'book-tickets' => [
+                    'name' => 'Réserver des Billets',
 
                     'options' => [
                         'title' => 'Réserver des Billets',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Collections de catégories',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Collections en vedette',
-
-                    'options' => [
-                        'title' => 'Produits en vedette',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Nouveaux produits',
+                'kids-collection' => [
+                    'name' => 'Collection Enfants',
 
                     'options' => [
-                        'title' => 'Nouveaux produits',
+                        'title' => 'Collection Enfants',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Collection Hommes',
+
+                    'options' => [
+                        'title' => 'Collection Hommes',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Collections phares',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Collection Femmes',
+
+                    'options' => [
+                        'title' => 'Collection Femmes',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Langue de l\'assistant d\'installation',
                 'locale' => 'Locale',
                 'main' => 'Début',
                 'select-locale' => 'Sélectionner la langue',
@@ -993,6 +995,7 @@ return [
             'persian' => 'Persan',
             'polish' => 'Polonais',
             'portuguese' => 'Portugais brésilien',
+            'romanian' => 'Roumain',
             'russian' => 'Russe',
             'sinhala' => 'Sinhala',
             'spanish' => 'Espagnol',

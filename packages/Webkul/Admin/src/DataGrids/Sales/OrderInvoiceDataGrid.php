@@ -28,7 +28,7 @@ class OrderInvoiceDataGrid extends DataGrid
                 'invoices.base_grand_total as base_grand_total',
                 'invoices.created_at as created_at'
             )
-            ->selectRaw("CASE WHEN {$tablePrefix}invoices.increment_id IS NOT NULL THEN {$tablePrefix}invoices.increment_id ELSE {$tablePrefix}invoices.id END AS increment_id");
+            ->selectRaw("CASE WHEN {$tablePrefix}invoices.increment_id IS NOT NULL THEN {$tablePrefix}invoices.increment_id ELSE CAST({$tablePrefix}invoices.id AS CHAR) END AS increment_id");
 
         $this->addFilter('increment_id', 'invoices.increment_id');
         $this->addFilter('order_id', 'orders.increment_id');
@@ -86,7 +86,7 @@ class OrderInvoiceDataGrid extends DataGrid
 
                 $todayDate = Carbon::now();
 
-                $dueDate = Carbon::parse($row->created_at)->addDays($dueDuration);
+                $dueDate = Carbon::parse($row->created_at)->addDays((int) $dueDuration);
 
                 if ($row->state == Invoice::STATUS_PAID) {
                     return '<p class="label-active">'.trans('admin::app.sales.invoices.index.datagrid.paid').'</p>';

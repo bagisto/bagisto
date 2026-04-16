@@ -223,6 +223,7 @@ return [
                 'nl' => 'הולנדית',
                 'pl' => 'פולנית',
                 'pt_BR' => 'פורטוגזית ברזילאית',
+                'ro' => 'רומנית',
                 'ru' => 'רוסית',
                 'sin' => 'סינהלה',
                 'tr' => 'טורקית',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'כל המוצרים',
-
-                    'options' => [
-                        'title' => 'כל המוצרים',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'צפה באוספים',
@@ -275,8 +268,8 @@ return [
                     'name' => 'קולקציות נועזות',
                 ],
 
-                'booking-products' => [
-                    'name' => 'מוצרי הזמנה',
+                'book-tickets' => [
+                    'name' => 'הזמן כרטיסים',
 
                     'options' => [
                         'title' => 'הזמן כרטיסים',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'אוספי קטגוריות',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'קולקציות מומלצות',
-
-                    'options' => [
-                        'title' => 'מוצרים מומלצים',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'מוצרים חדשים',
+                'kids-collection' => [
+                    'name' => 'קולקציית ילדים',
 
                     'options' => [
-                        'title' => 'מוצרים חדשים',
+                        'title' => 'קולקציית ילדים',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'קולקציית גברים',
+
+                    'options' => [
+                        'title' => 'קולקציית גברים',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'אוספי מובילים',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'קולקציית נשים',
+
+                    'options' => [
+                        'title' => 'קולקציית נשים',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'שפת אשף ההתקנה',
                 'locale' => 'אזור',
                 'main' => 'הַתְחָלָה',
                 'select-locale' => 'בחר אזור',
@@ -993,6 +995,7 @@ return [
             'persian' => 'פרסי',
             'polish' => 'פולני',
             'portuguese' => 'פורטוגזי ברזילאי',
+            'romanian' => 'רומנית',
             'russian' => 'רוסי',
             'sinhala' => 'סינהלה',
             'spanish' => 'ספרדית',

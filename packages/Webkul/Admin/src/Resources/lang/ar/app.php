@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount لكل وحدة × :qty الكمية',
+                'billing-address' => 'عنوان الفوترة',
                 'channel' => 'القناة',
-                'customer-email' => 'البريد الإلكتروني - :email',
                 'customer' => 'العميل',
+                'customer-email' => 'البريد الإلكتروني - :email',
                 'discount' => 'مبلغ الخصم - :discount',
                 'email' => 'البريد الإلكتروني',
                 'grand-total' => 'الإجمالي الكلي',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'رقم الطلب',
                 'order-information' => 'معلومات الطلب',
                 'order-status' => 'حالة الطلب',
+                'price' => 'السعر - :price',
                 'price-excl-tax' => 'السعر (بدون ضريبة) - :price',
                 'price-incl-tax' => 'السعر (شامل الضريبة) - :price',
-                'price' => 'السعر - :price',
                 'print' => 'طباعة',
                 'product-image' => 'صورة المنتج',
                 'qty' => 'الكمية - :qty',
+                'send' => 'إرسال',
                 'send-btn' => 'إرسال',
                 'send-duplicate-invoice' => 'إرسال فاتورة مكررة',
-                'send' => 'إرسال',
+                'shipping-address' => 'عنوان الشحن',
+                'shipping-and-handling' => 'تكلفة الشحن والتوصيل',
                 'shipping-and-handling-excl-tax' => 'تكلفة الشحن والتوصيل (بدون ضريبة)',
                 'shipping-and-handling-incl-tax' => 'تكلفة الشحن والتوصيل (شامل الضريبة)',
-                'shipping-and-handling' => 'تكلفة الشحن والتوصيل',
                 'sku' => 'رمز المنتج - :sku',
+                'sub-total' => 'المجموع الفرعي - :sub_total',
                 'sub-total-excl-tax' => 'المجموع الفرعي (بدون ضريبة) - :sub_total',
                 'sub-total-incl-tax' => 'المجموع الفرعي (شامل الضريبة) - :sub_total',
+                'sub-total-summary' => 'المجموع الفرعي',
                 'sub-total-summary-excl-tax' => 'المجموع الفرعي (بدون ضريبة)',
                 'sub-total-summary-incl-tax' => 'المجموع الفرعي (شامل الضريبة)',
-                'sub-total-summary' => 'المجموع الفرعي',
-                'sub-total' => 'المجموع الفرعي - :sub_total',
                 'summary-discount' => 'مبلغ الخصم',
                 'summary-tax' => 'مبلغ الضريبة',
                 'tax' => 'مبلغ الضريبة - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'فشل حذف العميل',
             'delete-success' => 'تم حذف العميل بنجاح',
-            'order-pending' => 'الطلبات قيد الانتظار',
+            'delete-pending-order-error' => 'هذا العميل لديه طلبات قيد الانتظار ولا يمكن حذفه.',
             'update-success' => 'تم تحديث العميل بنجاح',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'تعديل فئات الضرائب',
                     ],
 
-                    'can-not-delete' => 'لا يمكن حذف فئات الضرائب المعينة.',
                     'create-success' => 'تم إنشاء فئة ضريبية جديدة',
                     'delete-failed' => 'فشل حذف فئة الضريبة',
                     'delete-success' => 'تم حذف فئة الضريبة بنجاح',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'إعداد بيانات اعتماد Ollama API.',
+                        'title-info' => 'تكوين إعدادات اتصال Ollama الخاصة بك.',
+                        'url' => 'عنوان URL الأساسي',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'تفعيل وإعداد ميزات الذكاء الاصطناعي لواجهة المتجر.',
                     'title' => 'ميزات واجهة المتجر',
+
+                    'image-search' => [
+                        'enabled' => 'مُفعّل',
+                        'model' => 'النموذج',
+                        'title' => 'البحث بالصور بالذكاء الاصطناعي',
+                        'title-info' => 'استخدام الذكاء الاصطناعي لتحليل الصور المرفوعة واستخراج كلمات البحث عن المنتجات في واجهة المتجر.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'مُفعّل',

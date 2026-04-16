@@ -184,7 +184,7 @@ class OnepageController extends APIController
 
             return new JsonResource([
                 'redirect' => false,
-                'message' => trans('shop::app.checkout.cart.coupon.usage-limit-exceeded'),
+                'message' => trans('shop::app.checkout.coupon.usage-limit-exceeded'),
             ]);
         }
 

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('category_id')->unsigned();
             $table->text('name');
             $table->string('slug');
-            $table->string('url_path', 2048);
+            $table->string('url_path', 2048)->nullable();
             $table->text('description')->nullable();
             $table->text('meta_title')->nullable();
             $table->text('meta_description')->nullable();

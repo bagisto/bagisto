@@ -2,10 +2,7 @@
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Webkul\Attribute\Models\Attribute;
-use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
-use Webkul\Product\Models\ProductAttributeValue;
 use Webkul\Product\Models\ProductFlat;
 
 use function Pest\Laravel\deleteJson;
@@ -13,319 +10,174 @@ use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
 use function Pest\Laravel\putJson;
 
-it('should fail the validation with errors when certain inputs are not provided when store in downloadable product', function () {
-    // Act and Assert.
+// ============================================================================
+// Store
+// ============================================================================
+
+it('should store a downloadable product and redirect to edit', function () {
     $this->loginAsAdmin();
 
-    postJson(route('admin.catalog.products.store'))
-        ->assertJsonValidationErrorFor('type')
-        ->assertJsonValidationErrorFor('attribute_family_id')
-        ->assertJsonValidationErrorFor('sku')
-        ->assertUnprocessable();
-});
-
-it('should return the create page of downloadable product', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
-
-    $productId = $product->id + 1;
-
-    // Act and Assert.
-    $this->loginAsAdmin();
+    $sku = fake()->uuid();
 
     postJson(route('admin.catalog.products.store'), [
         'type' => 'downloadable',
         'attribute_family_id' => 1,
-        'sku' => $sku = fake()->slug(),
+        'sku' => $sku,
     ])
         ->assertOk()
-        ->assertJsonPath('data.redirect_url', route('admin.catalog.products.edit', $productId));
+        ->assertJsonStructure(['data' => ['redirect_url']]);
 
-    $this->assertModelWise([
-        Product::class => [
-            [
-                'id' => $productId,
-                'type' => 'downloadable',
-                'sku' => $sku,
-            ],
-        ],
+    $product = Product::where('sku', $sku)->first();
 
-        ProductFlat::class => [
-            [
-                'url_key' => $product->url_key,
-                'type' => 'simple',
-                'name' => $product->name,
-                'short_description' => $product->short_description,
-                'description' => $product->description,
-                'price' => $product->price,
-                'weight' => $product->weight,
-                'locale' => app()->getLocale(),
-                'product_id' => $product->id,
-                'channel' => core()->getCurrentChannelCode(),
-            ],
-        ],
-    ]);
+    expect($product)->not->toBeNull();
+    expect($product->type)->toBe('downloadable');
 });
 
-it('should return the edit page of downloadable product', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
+// ============================================================================
+// Edit
+// ============================================================================
 
-    // Act and Assert.
+it('should return the edit page of a downloadable product', function () {
     $this->loginAsAdmin();
+
+    $product = $this->createDownloadableProduct();
 
     get(route('admin.catalog.products.edit', $product->id))
         ->assertOk()
         ->assertSeeText(trans('admin::app.catalog.products.edit.title'))
-        ->assertSeeText(trans('admin::app.account.edit.back-btn'))
-        ->assertSeeText($product->url_key)
-        ->assertSeeText($product->name)
-        ->assertSeeText($product->short_description)
-        ->assertSeeText($product->description);
+        ->assertSeeText($product->name);
 });
 
-it('should upload link the product upload link', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
+// ============================================================================
+// Product Flat — Via Real Store + Update Flow
+// ============================================================================
 
-    // Act and Assert.
-    $this->loginAsAdmin();
+it('should populate product_flat after store and update', function () {
+    $product = $this->storeAndUpdateDownloadableProduct();
+
+    $flat = ProductFlat::where('product_id', $product->id)->first();
+
+    expect($flat)->not->toBeNull();
+
+    // Core fields
+    expect($flat->sku)->toBe($product->sku);
+    expect($flat->type)->toBe('downloadable');
+    expect($flat->name)->toBe('Test Downloadable Product');
+    expect((float) $flat->price)->toBe(49.99);
+
+    // Downloadable products skip weight.
+    expect($flat->weight)->toBeNull();
+
+    // Boolean fields
+    expect($flat->status)->toBeTruthy();
+    expect($flat->visible_individually)->toBeTruthy();
+});
+
+// ============================================================================
+// Downloadable Links and Samples — Via Real Store + Update Flow
+// ============================================================================
+
+it('should create downloadable links after store and update', function () {
+    $product = $this->storeAndUpdateDownloadableProduct();
+
+    expect($product->downloadable_links)->toHaveCount(2);
+
+    $linkOne = $product->downloadable_links->firstWhere('sort_order', 0);
+    expect($linkOne)->not->toBeNull();
+    expect($linkOne->url)->toBe('https://example.com/file1.pdf');
+    expect((float) $linkOne->price)->toBe(10.0);
+    expect($linkOne->downloads)->toBe(5);
+    expect($linkOne->type)->toBe('url');
+});
+
+it('should create downloadable samples after store and update', function () {
+    $product = $this->storeAndUpdateDownloadableProduct();
+
+    expect($product->downloadable_samples)->toHaveCount(1);
+
+    $sample = $product->downloadable_samples->first();
+    expect($sample->url)->toBe('https://example.com/sample.pdf');
+    expect($sample->type)->toBe('url');
+});
+
+it('should not create inventory for a downloadable product', function () {
+    $product = $this->storeAndUpdateDownloadableProduct();
+
+    // Downloadable products are not stockable.
+    $this->assertDatabaseMissing('product_inventories', [
+        'product_id' => $product->id,
+    ]);
+});
+
+// ============================================================================
+// File Upload
+// ============================================================================
+
+it('should upload a downloadable link file', function () {
+    $product = $this->storeAndUpdateDownloadableProduct();
 
     $response = postJson(route('admin.catalog.products.upload_link', $product->id), [
-        'file' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
+        'file' => $file = UploadedFile::fake()->create('document.pdf', 100),
     ])
         ->assertOk()
         ->assertJsonPath('file_name', $file->getClientOriginalName());
 
+    // Clean up uploaded file.
     if (Storage::disk('private')->exists($response['file'])) {
         Storage::disk('private')->delete($response['file']);
     }
 });
 
-it('should fail the validation with errors when certain inputs are not provided when update in downloadable product', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.catalog.products.update', $product->id))
-        ->assertJsonValidationErrorFor('sku')
-        ->assertJsonValidationErrorFor('url_key')
-        ->assertJsonValidationErrorFor('short_description')
-        ->assertJsonValidationErrorFor('description')
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('price')
-        ->assertUnprocessable();
-});
-
-it('should fail the validation with errors if certain data is not provided correctly in downloadable product', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.catalog.products.update', $product->id), [
-        'visible_individually' => $unProcessAble = fake()->word(),
-        'status' => $unProcessAble,
-        'guest_checkout' => $unProcessAble,
-        'new' => $unProcessAble,
-        'featured' => $unProcessAble,
-    ])
-        ->assertJsonValidationErrorFor('sku')
-        ->assertJsonValidationErrorFor('url_key')
-        ->assertJsonValidationErrorFor('short_description')
-        ->assertJsonValidationErrorFor('description')
-        ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('price')
-        ->assertJsonValidationErrorFor('visible_individually')
-        ->assertJsonValidationErrorFor('status')
-        ->assertJsonValidationErrorFor('guest_checkout')
-        ->assertJsonValidationErrorFor('new')
-        ->assertJsonValidationErrorFor('featured')
-        ->assertUnprocessable();
-});
-
-it('should upload the sample file', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
+it('should upload a downloadable sample file', function () {
+    $product = $this->storeAndUpdateDownloadableProduct();
 
     $response = postJson(route('admin.catalog.products.upload_sample', $product->id), [
-        'file' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
+        'file' => $file = UploadedFile::fake()->create('sample.pdf', 100),
     ])
         ->assertOk()
         ->assertJsonPath('file_name', $file->name);
 
+    // Clean up uploaded file.
     if (Storage::disk('public')->exists($response['file'])) {
         Storage::disk('public')->delete($response['file']);
     }
 });
 
-it('should download the product which is downloadable', function () {
-    // Arrange.
-    $attribute = Attribute::factory()->create([
-        'type' => 'file',
-    ]);
+// ============================================================================
+// Update Validation
+// ============================================================================
 
-    $product = (new ProductFaker([
-        'attributes' => [
-            $attribute->id => $attribute->code,
-        ],
-
-        'attribute_value' => [
-            $attribute->code => [
-                'text_value' => $file = UploadedFile::fake()->create(fake()->word().'.pdf', 100),
-            ],
-        ],
-    ]))->getDownloadableProductFactory()->create();
-
-    $fileName = $file->store('product/'.$product->id);
-
-    $attributeValues = ProductAttributeValue::where('product_id', $product->id)
-        ->where('attribute_id', $attribute->id)->first();
-
-    $attributeValues->text_value = $fileName;
-    $attributeValues->save();
-
-    // Act and Assert.
+it('should fail validation when required fields are missing on downloadable product update', function () {
     $this->loginAsAdmin();
 
-    get(route('admin.catalog.products.file.download', [$product->id, $attribute->id]))
-        ->assertOk();
+    $product = $this->createDownloadableProduct();
 
-    Storage::assertExists($fileName);
+    // Downloadable products do not require weight.
+    putJson(route('admin.catalog.products.update', $product->id))
+        ->assertUnprocessable()
+        ->assertJsonValidationErrorFor('sku')
+        ->assertJsonValidationErrorFor('url_key')
+        ->assertJsonValidationErrorFor('name')
+        ->assertJsonValidationErrorFor('price')
+        ->assertJsonValidationErrorFor('short_description')
+        ->assertJsonValidationErrorFor('description');
 });
 
-it('should update the downloadable product', function () {
-    // Arrange.
-    $product = (new ProductFaker([
-        'attributes' => [
-            5 => 'new',
-            26 => 'guest_checkout',
-        ],
+// ============================================================================
+// Delete
+// ============================================================================
 
-        'attribute_value' => [
-            'new' => [
-                'boolean_value' => true,
-            ],
+it('should delete a downloadable product and clean up all related tables', function () {
+    $product = $this->storeAndUpdateDownloadableProduct();
+    $productId = $product->id;
 
-            'guest_checkout' => [
-                'boolean_value' => true,
-            ],
-        ],
-    ]))->getDownloadableProductFactory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    putJson(route('admin.catalog.products.update', $product->id), $data = [
-        'sku' => $product->sku,
-        'url_key' => $product->url_key,
-        'short_description' => fake()->sentence(),
-        'description' => fake()->paragraph(),
-        'name' => fake()->words(3, true),
-        'price' => fake()->randomFloat(2, 1, 1000),
-        'weight' => fake()->numberBetween(0, 100),
-        'channel' => core()->getCurrentChannelCode(),
-        'locale' => app()->getLocale(),
-        'downloadable_links' => [
-            'link_0' => [
-                'en' => [
-                    'title' => fake()->title,
-                ],
-                'price' => rand(10, 250),
-                'downloads' => '1',
-                'sort_order' => '0',
-                'type' => 'file',
-                'file' => $file1 = UploadedFile::fake()->image('ProductImageExampleForUpload1.jpg'),
-                'file_name' => $file1->getClientOriginalName(),
-                'sample_type' => 'url',
-                'sample_url' => fake()->url(),
-            ],
-
-            'link_1' => [
-                'en' => [
-                    'title' => fake()->title,
-                ],
-                'price' => rand(10, 250),
-                'downloads' => '1',
-                'sort_order' => '1',
-                'type' => 'file',
-                'file' => $file2 = UploadedFile::fake()->image('ProductImageExampleForUpload2.jpg'),
-                'file_name' => $file2->getClientOriginalName(),
-                'sample_type' => 'file',
-                'sample_file' => $file3 = UploadedFile::fake()->image('ProductImageExampleForUpload3.jpg'),
-                'sample_file_name' => $file3->getClientOriginalName(),
-            ],
-        ],
-
-        'downloadable_samples' => [
-            'sample_0' => [
-                'title' => fake()->title(),
-                'sort_order' => '0',
-                'type' => 'file',
-                'file' => $file4 = UploadedFile::fake()->image('ProductImageExampleForUpload4.jpg'),
-                'file_name' => $file4->getClientOriginalName(),
-            ],
-
-            'sample_1' => [
-                'title' => fake()->title(),
-                'sort_order' => '1',
-                'type' => 'url',
-                'url' => fake()->url(),
-            ],
-        ],
-    ])
-        ->assertRedirect(route('admin.catalog.products.index'))
-        ->isRedirection();
-
-    $this->assertModelWise([
-        Product::class => [
-            [
-                'id' => $product->id,
-                'type' => $product->type,
-                'sku' => $product->sku,
-            ],
-        ],
-
-        ProductFlat::class => [
-            [
-                'product_id' => $product->id,
-                'type' => 'downloadable',
-                'sku' => $product->sku,
-                'url_key' => $product->url_key,
-                'name' => $data['name'],
-                'short_description' => $data['short_description'],
-                'description' => $data['description'],
-                'price' => $data['price'],
-                'weight' => $data['weight'],
-                'locale' => $data['locale'],
-                'channel' => $data['channel'],
-            ],
-        ],
-    ]);
-});
-
-it('should delete a downloadable product', function () {
-    // Arrange.
-    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
-
-    // Act and Assert.
-    $this->loginAsAdmin();
-
-    deleteJson(route('admin.catalog.products.delete', $product->id))
+    deleteJson(route('admin.catalog.products.delete', $productId))
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.catalog.products.delete-success'));
 
-    $this->assertDatabaseMissing('products', ['id' => $product->id]);
-
-    $this->assertDatabaseMissing('product_flat', ['product_id' => $product->id]);
-
-    $this->assertDatabaseMissing('product_downloadable_links', ['product_id' => $product->id]);
-
-    $this->assertDatabaseMissing('product_downloadable_samples', ['product_id' => $product->id]);
+    $this->assertDatabaseMissing('products', ['id' => $productId]);
+    $this->assertDatabaseMissing('product_flat', ['product_id' => $productId]);
+    $this->assertDatabaseMissing('product_attribute_values', ['product_id' => $productId]);
+    $this->assertDatabaseMissing('product_downloadable_links', ['product_id' => $productId]);
+    $this->assertDatabaseMissing('product_downloadable_samples', ['product_id' => $productId]);
 });

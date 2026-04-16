@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('sitemaps', function (Blueprint $table) {
-            $table->json('additional')->after('path')->nullable();
+            $table->jsonb('additional')->after('path')->nullable();
         });
     }
 

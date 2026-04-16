@@ -260,7 +260,7 @@
 
                                                 <i
                                                     class="text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"
-                                                    :class="[parseInt(element.is_user_defined) ? 'icon-attribute' : 'icon-attribute-block']"
+                                                    :class="[element.is_user_defined ? 'icon-attribute' : 'icon-attribute-block']"
                                                 ></i>
                                                 
                                                 <span class="font-regular text-sm transition-all group-hover:text-gray-800 dark:group-hover:text-white max-xl:text-xs">

@@ -6,12 +6,15 @@ use Exception;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Webkul\Core\Concerns\SyncsPostgresSequences;
 use Webkul\Installer\Database\Seeders\DatabaseSeeder as BagistoDatabaseSeeder;
 use Webkul\Installer\Database\Seeders\ProductTableSeeder;
 use Webkul\Product\Console\Commands\Indexer;
 
 class DatabaseManager
 {
+    use SyncsPostgresSequences;
+
     /**
      * Admin User ID for which the admin user will be created during installation.
      */
@@ -157,6 +160,8 @@ class DatabaseManager
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
+
+            $this->syncPostgresSequences(['admins']);
 
             return true;
         } catch (Exception $e) {

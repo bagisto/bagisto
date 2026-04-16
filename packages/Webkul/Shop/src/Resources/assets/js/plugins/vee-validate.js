@@ -20,6 +20,7 @@ import ja from "@vee-validate/i18n/dist/locale/ja.json";
 import nl from "@vee-validate/i18n/dist/locale/nl.json";
 import pl from "@vee-validate/i18n/dist/locale/pl.json";
 import pt_BR from "@vee-validate/i18n/dist/locale/pt_BR.json";
+import ro from "../../locales/ro.json";
 import ru from "@vee-validate/i18n/dist/locale/ru.json";
 import sin from "../../locales/sin.json";
 import tr from "@vee-validate/i18n/dist/locale/tr.json";
@@ -261,6 +262,7 @@ export default {
                     ...pl,
                     messages: {
                         ...pl.messages,
+                        confirmed: "Pole {field} nie zgadza się z polem potwierdzającym",
                         phone: "Pole {field} musi zawierać prawidłowy numer telefonu",
                         address: "Pole {field} musi zawierać prawidłowy adres",
                     },
@@ -272,6 +274,15 @@ export default {
                         ...pt_BR.messages,
                         phone: "Este {field} deve ser um número de telefone válido",
                         address: "Este {field} deve ser um endereço válido",
+                    },
+                },
+
+                ro: {
+                    ...ro,
+                    messages: {
+                        ...ro.messages,
+                        phone: "Acest {field} trebuie să fie un număr de telefon valid",
+                        address: "Acest {field} trebuie să fie o adresă validă",
                     },
                 },
 

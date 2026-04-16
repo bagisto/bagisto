@@ -39,8 +39,11 @@ class UpdateCreateCatalogRuleIndex implements ShouldQueue
             app(CatalogRuleIndex::class)->reIndexRule($this->catalogRule);
 
             /**
-             * Reindex price index for the products associated with the catalog rule.
+             * Refresh the relationship to pick up the newly indexed products,
+             * then reindex the price indices for those products.
              */
+            $this->catalogRule->unsetRelation('catalog_rule_products');
+
             $productIds = $this->catalogRule->catalog_rule_products->pluck('product_id')->unique();
         } else {
             $productIds = $this->catalogRule->catalog_rule_products->pluck('product_id')->unique();

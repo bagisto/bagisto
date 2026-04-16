@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal('daily_price', 12, 4)->default(0)->nullable();
             $table->decimal('hourly_price', 12, 4)->default(0)->nullable();
             $table->boolean('same_slot_all_days')->nullable();
-            $table->json('slots')->nullable();
+            $table->jsonb('slots')->nullable();
 
             $table->foreign('booking_product_id')
                 ->references('id')

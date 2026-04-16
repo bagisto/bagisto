@@ -151,7 +151,7 @@ class CatalogRuleProductPrice
             $this->catalogRuleProductPriceRepository->whereIn('product_id', $productIds)->delete();
         } else {
             $this->catalogRuleProductPriceRepository->deleteWhere([
-                ['product_id', 'like', '%%'],
+                ['product_id', db_grammar()->caseInsensitiveLike(), '%%'],
             ]);
         }
     }

@@ -126,7 +126,7 @@ class Helper
                 'order_items.created_at',
                 'order_items.additional',
                 'order_items.rma_return_period',
-                'product_images.path as base_image',
+                DB::raw('MIN('.$tablePrefix.'product_images.path) as base_image'),
                 'orders.status as order_status',
                 'orders.id as order_id',
                 'products.type as product_type',
@@ -137,7 +137,29 @@ class Helper
             ->leftJoin('products as parent_products', 'products.parent_id', '=', 'parent_products.id')
             ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
             ->leftJoin('orders', 'order_items.order_id', '=', 'orders.id')
-            ->groupBy('order_items.id')
+            ->groupBy(
+                'order_items.id',
+                'product_flat.product_id',
+                'product_flat.name',
+                'product_flat.url_key',
+                'product_flat.visible_individually',
+                'product_flat.sku',
+                'product_flat.type',
+                'order_items.price',
+                'order_items.order_id',
+                'order_items.qty_ordered',
+                'order_items.qty_canceled',
+                'order_items.qty_shipped',
+                'order_items.qty_refunded',
+                'order_items.qty_invoiced',
+                'order_items.created_at',
+                'order_items.additional',
+                'order_items.rma_return_period',
+                'orders.status',
+                'orders.id',
+                'products.type',
+                'parent_products.id',
+            )
             ->get();
 
         $orderItemIds = $orderItems->pluck('order_item_id')->toArray();

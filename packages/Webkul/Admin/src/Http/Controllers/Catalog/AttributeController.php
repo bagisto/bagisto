@@ -19,6 +19,22 @@ use Webkul\Product\Repositories\ProductRepository;
 class AttributeController extends Controller
 {
     /**
+     * Boolean fields on the attribute form that must default to false when
+     * absent from the request (e.g., when a checkbox is unchecked).
+     */
+    const BOOLEAN_FIELDS = [
+        'is_required',
+        'is_unique',
+        'is_filterable',
+        'is_configurable',
+        'is_visible_on_front',
+        'is_comparable',
+        'value_per_locale',
+        'value_per_channel',
+        'enable_wysiwyg',
+    ];
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -82,6 +98,10 @@ class AttributeController extends Controller
         $requestData = request()->all();
 
         $requestData['default_value'] ??= null;
+
+        foreach (self::BOOLEAN_FIELDS as $field) {
+            $requestData[$field] = request()->boolean($field);
+        }
 
         Event::dispatch('catalog.attribute.create.before');
 
@@ -148,6 +168,10 @@ class AttributeController extends Controller
         $requestData = request()->all();
 
         $requestData['default_value'] ??= null;
+
+        foreach (self::BOOLEAN_FIELDS as $field) {
+            $requestData[$field] = request()->boolean($field);
+        }
 
         Event::dispatch('catalog.attribute.update.before', $id);
 

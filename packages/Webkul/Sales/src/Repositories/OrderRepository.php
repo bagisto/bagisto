@@ -84,8 +84,9 @@ class OrderRepository extends Repository
             }
 
             Event::dispatch('checkout.order.save.after', $order);
+
+            DB::commit();
         } catch (\Exception $e) {
-            /* rolling back first */
             DB::rollBack();
 
             /**
@@ -109,9 +110,6 @@ class OrderRepository extends Repository
 
             /* rethrow the exception if max attempts reached */
             throw $e;
-        } finally {
-            /* commit in each case */
-            DB::commit();
         }
 
         return $order;

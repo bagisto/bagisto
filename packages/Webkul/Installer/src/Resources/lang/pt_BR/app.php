@@ -223,6 +223,7 @@ return [
                 'nl' => 'Holandês',
                 'pl' => 'Polonês',
                 'pt_BR' => 'Português do Brasil',
+                'ro' => 'Romeno',
                 'ru' => 'Russo',
                 'sin' => 'Cingalês',
                 'tr' => 'Turco',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Todos os Produtos',
-
-                    'options' => [
-                        'title' => 'Todos os Produtos',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Ver Coleções',
@@ -275,8 +268,8 @@ return [
                     'name' => 'Coleções Ousadas',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Produtos de Reserva',
+                'book-tickets' => [
+                    'name' => 'Reservar Ingressos',
 
                     'options' => [
                         'title' => 'Reservar Ingressos',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Coleções de Categorias',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Coleções em Destaque',
-
-                    'options' => [
-                        'title' => 'Produtos em Destaque',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Novos Produtos',
+                'kids-collection' => [
+                    'name' => 'Coleção Infantil',
 
                     'options' => [
-                        'title' => 'Novos Produtos',
+                        'title' => 'Coleção Infantil',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Coleção Masculina',
+
+                    'options' => [
+                        'title' => 'Coleção Masculina',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Melhores Coleções',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Coleção Feminina',
+
+                    'options' => [
+                        'title' => 'Coleção Feminina',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Idioma do assistente de instalação',
                 'locale' => 'Locatie',
                 'main' => 'Iniciar',
                 'select-locale' => 'Selecteer Locatie',
@@ -993,6 +995,7 @@ return [
             'persian' => 'Perski',
             'polish' => 'Polski',
             'portuguese' => 'Portugalski (Brazylijski)',
+            'romanian' => 'Romeno',
             'russian' => 'Rosyjski',
             'sinhala' => 'Syngaleski',
             'spanish' => 'Hiszpański',

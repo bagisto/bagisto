@@ -475,7 +475,7 @@ abstract class DataGrid
                                 ColumnTypeEnum::BOOLEAN->value,
                                 ColumnTypeEnum::AGGREGATE->value,
                             ]))
-                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getColumnName(), 'LIKE', '%'.$value.'%'));
+                            ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getColumnName(), $column->likeOperator(), '%'.$value.'%'));
                     }
                 });
             } else {
@@ -501,7 +501,22 @@ abstract class DataGrid
             $this->sortColumn = $this->primaryColumn;
         }
 
-        $this->queryBuilder->orderBy($requestedSort['column'] ?? $this->sortColumn, $requestedSort['order'] ?? $this->sortOrder);
+        $sortColumn = $this->sortColumn;
+
+        if (isset($requestedSort['column'])) {
+            $column = collect($this->columns)
+                ->first(fn ($column) => $column->getIndex() === $requestedSort['column'] && $column->getSortable());
+
+            if ($column) {
+                $sortColumn = $column->getColumnName();
+            }
+        }
+
+        $sortOrder = isset($requestedSort['order']) && in_array(strtolower($requestedSort['order']), ['asc', 'desc'])
+            ? $requestedSort['order']
+            : $this->sortOrder;
+
+        $this->queryBuilder->orderBy($sortColumn, $sortOrder);
 
         $this->dispatchEvent('process_request.sorting.after', $this);
     }

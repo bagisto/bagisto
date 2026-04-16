@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount প্রতি একক x :qty পরিমাণ',
+                'billing-address' => 'বিলিং ঠিকানা',
                 'channel' => 'চ্যানেল',
-                'customer-email' => 'ইমেইল - :email',
                 'customer' => 'গ্রাহক',
+                'customer-email' => 'ইমেইল - :email',
                 'discount' => 'ডিসকাউন্ট পরিমাণ - :discount',
                 'email' => 'ইমেইল',
                 'grand-total' => 'মোট টোটাল',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'অর্ডার আইডি',
                 'order-information' => 'অর্ডার তথ্য',
                 'order-status' => 'অর্ডারের স্থিতি',
+                'price' => 'মূল্য - :price',
                 'price-excl-tax' => 'মূল্য (কর ব্যতিত) - :price',
                 'price-incl-tax' => 'মূল্য (কর সহ) - :price',
-                'price' => 'মূল্য - :price',
                 'print' => 'প্রিন্ট',
                 'product-image' => 'পণ্যের চিত্র',
                 'qty' => 'পরিমাণ - :qty',
+                'send' => 'পাঠান',
                 'send-btn' => 'পাঠান',
                 'send-duplicate-invoice' => 'প্রতিলিপি চালান পাঠান',
-                'send' => 'পাঠান',
+                'shipping-address' => 'শিপিং ঠিকানা',
+                'shipping-and-handling' => 'শিপিং এবং হ্যান্ডলিং',
                 'shipping-and-handling-excl-tax' => 'শিপিং এবং হ্যান্ডলিং (কর ব্যতিত)',
                 'shipping-and-handling-incl-tax' => 'শিপিং এবং হ্যান্ডলিং (কর সহ)',
-                'shipping-and-handling' => 'শিপিং এবং হ্যান্ডলিং',
                 'sku' => 'SKU - :sku',
+                'sub-total' => 'উপমোট - :sub_total',
                 'sub-total-excl-tax' => 'উপমোট (কর ব্যতিত) - :sub_total',
                 'sub-total-incl-tax' => 'উপমোট (কর সহ) - :sub_total',
+                'sub-total-summary' => 'উপমোট',
                 'sub-total-summary-excl-tax' => 'উপমোট (কর ব্যতিত)',
                 'sub-total-summary-incl-tax' => 'উপমোট (কর সহ)',
-                'sub-total-summary' => 'উপমোট',
-                'sub-total' => 'উপমোট - :sub_total',
                 'summary-discount' => 'ডিসকাউন্ট পরিমাণ',
                 'summary-tax' => 'করের পরিমাণ',
                 'tax' => 'করের পরিমাণ - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'গ্রাহক মোছা হয়নি',
             'delete-success' => 'গ্রাহক সফলভাবে মোছা হয়েছে',
-            'order-pending' => 'অর্ডার মুলতুবি',
+            'delete-pending-order-error' => 'এই গ্রাহকের মুলতুবি অর্ডার রয়েছে এবং এটি মুছে ফেলা যাবে না।',
             'update-success' => 'গ্রাহক সফলভাবে আপডেট হয়েছে',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'কর শ্রেণী সম্পাদনা করুন',
                     ],
 
-                    'can-not-delete' => 'কর হার নির্ধারিত বিভাগগুলি মুছে ফেলা যাবে না।',
                     'create-success' => 'নতুন কর শ্রেণী তৈরি হয়েছে',
                     'delete-failed' => 'কর শ্রেণী মুছে ফেলা ব্যর্থ হয়েছে',
                     'delete-success' => 'কর শ্রেণী সফলভাবে মুছে ফেলা হয়েছে',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'আপনার Ollama API শংসাপত্র কনফিগার করুন।',
+                        'title-info' => 'আপনার Ollama সংযোগ সেটিংস কনফিগার করুন।',
+                        'url' => 'বেস URL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'স্টোরফ্রন্টের জন্য AI বৈশিষ্ট্য সক্রিয় এবং কনফিগার করুন।',
                     'title' => 'স্টোরফ্রন্ট বৈশিষ্ট্য',
+
+                    'image-search' => [
+                        'enabled' => 'সক্রিয়',
+                        'model' => 'মডেল',
+                        'title' => 'এআই ছবি অনুসন্ধান',
+                        'title-info' => 'স্টোরফ্রন্টে আপলোড করা ছবি বিশ্লেষণ করতে এবং পণ্য অনুসন্ধান কীওয়ার্ড বের করতে এআই ভিশন ব্যবহার করুন।',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'সক্রিয়',

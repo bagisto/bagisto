@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Webkul\CartRule\Contracts\CartRuleCoupon as CartRuleCouponContract;
-use Webkul\Core\Database\Factories\CartRuleCouponFactory;
+use Webkul\CartRule\Database\Factories\CartRuleCouponFactory;
 
 class CartRuleCoupon extends Model implements CartRuleCouponContract
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'code',
         'usage_limit',
@@ -23,6 +28,27 @@ class CartRuleCoupon extends Model implements CartRuleCouponContract
         'expired_at',
         'is_primary',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'usage_limit' => 'integer',
+        'usage_per_customer' => 'integer',
+        'times_used' => 'integer',
+        'is_primary' => 'boolean',
+        'expired_at' => 'datetime',
+    ];
+
+    /**
+     * Set expired at with empty string to null conversion.
+     */
+    public function setExpiredAtAttribute($value): void
+    {
+        $this->attributes['expired_at'] = $value !== '' && $value !== null ? $value : null;
+    }
 
     /**
      * Get the cart rule that owns the cart rule coupon.

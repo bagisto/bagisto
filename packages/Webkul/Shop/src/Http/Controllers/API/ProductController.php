@@ -5,6 +5,7 @@ namespace Webkul\Shop\Http\Controllers\API;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Marketing\Jobs\UpdateCreateSearchTerm as UpdateCreateSearchTermJob;
+use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Repositories\ProductRepository;
 use Webkul\Shop\Http\Resources\ProductResource;
 
@@ -25,18 +26,12 @@ class ProductController extends APIController
      */
     public function index(): JsonResource
     {
-        $searchEngine = 'database';
-
-        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
-            $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
-        }
-
-        $searchData = $this->resolveSearchQueryData($searchEngine);
+        $searchData = $this->resolveSearchQueryData();
 
         $query = $searchData['effective_query'] ?? $searchData['original_query'];
 
         $products = $this->productRepository
-            ->setSearchEngine($searchEngine)
+            ->setSearchContext(SearchContextEnum::STOREFRONT)
             ->getAll(array_merge(request()->query(), [
                 'query' => $query,
                 'channel_id' => core()->getCurrentChannel()->id,
@@ -65,7 +60,7 @@ class ProductController extends APIController
     /**
      * Resolve search query data.
      */
-    protected function resolveSearchQueryData($searchEngine): array
+    protected function resolveSearchQueryData(): array
     {
         if (request()->query('suggest', '') === '0') {
             return [
@@ -78,18 +73,16 @@ class ProductController extends APIController
 
         return [
             'original_query' => $originalQuery,
-            'effective_query' => $this->getEffectiveQuery($originalQuery, $searchEngine),
+            'effective_query' => $this->getEffectiveQuery($originalQuery),
         ];
     }
 
     /**
      * It will return the effective query based on the search engine.
      */
-    protected function getEffectiveQuery(string $originalQuery, string $searchEngine): ?string
+    protected function getEffectiveQuery(string $originalQuery): ?string
     {
-        $effectiveQuery = $this->productRepository->setSearchEngine($searchEngine)->getSuggestions($originalQuery);
-
-        return $effectiveQuery;
+        return $this->productRepository->setSearchContext(SearchContextEnum::STOREFRONT)->getSuggestions($originalQuery);
     }
 
     /**

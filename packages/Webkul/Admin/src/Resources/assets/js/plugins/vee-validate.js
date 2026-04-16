@@ -20,6 +20,7 @@ import ja from "@vee-validate/i18n/dist/locale/ja.json";
 import nl from "@vee-validate/i18n/dist/locale/nl.json";
 import pl from "@vee-validate/i18n/dist/locale/pl.json";
 import pt_BR from "@vee-validate/i18n/dist/locale/pt_BR.json";
+import ro from "../../locales/ro.json";
 import ru from "@vee-validate/i18n/dist/locale/ru.json";
 import sin from "../../locales/sin.json";
 import tr from "@vee-validate/i18n/dist/locale/tr.json";
@@ -299,6 +300,7 @@ export default {
                     ...pl,
                     messages: {
                         ...pl.messages,
+                        confirmed: "Pole {field} nie zgadza się z polem potwierdzającym",
                         date_format: "Pole {field} musi mieć prawidłowy format czasu (np.: 23:59).",
                         decimal: "Pole {field} musi być prawidłową liczbą dziesiętną.",
                         phone: "Pole {field} musi zawierać prawidłowy numer telefonu",
@@ -312,6 +314,15 @@ export default {
                         date_format: "O {field} deve estar em um formato de hora válido (ex.: 23:59).",
                         decimal: "Este {field} deve ser um número decimal válido.",
                         phone: "Este {field} deve ser um número de telefone válido.",
+                    },
+                },
+
+                ro: {
+                    ...ro,
+                    messages: {
+                        ...ro.messages,
+                        decimal: "Acest {field} trebuie să fie un număr zecimal valid.",
+                        phone: "Acest {field} trebuie să fie un număr de telefon valid.",
                     },
                 },
 

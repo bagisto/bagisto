@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Webkul\Admin\Database\Factories\CatalogRuleFactory;
 use Webkul\CatalogRule\Contracts\CatalogRule as CatalogRuleContract;
+use Webkul\CatalogRule\Database\Factories\CatalogRuleFactory;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Customer\Models\CustomerGroupProxy;
 
@@ -42,7 +42,43 @@ class CatalogRule extends Model implements CatalogRuleContract
      */
     protected $casts = [
         'conditions' => 'array',
+        'status' => 'boolean',
+        'condition_type' => 'integer',
+        'end_other_rules' => 'boolean',
+        'sort_order' => 'integer',
     ];
+
+    /**
+     * Set status with proper boolean conversion.
+     */
+    public function setStatusAttribute($value): void
+    {
+        $this->attributes['status'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set end other rules with proper boolean conversion.
+     */
+    public function setEndOtherRulesAttribute($value): void
+    {
+        $this->attributes['end_other_rules'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
+    }
+
+    /**
+     * Set starts from with empty string to null conversion.
+     */
+    public function setStartsFromAttribute($value): void
+    {
+        $this->attributes['starts_from'] = $value !== '' && $value !== null ? $value : null;
+    }
+
+    /**
+     * Set ends till with empty string to null conversion.
+     */
+    public function setEndsTillAttribute($value): void
+    {
+        $this->attributes['ends_till'] = $value !== '' && $value !== null ? $value : null;
+    }
 
     /**
      * Get the channels that owns the catalog rule.

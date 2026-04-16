@@ -456,12 +456,6 @@
                                         @lang('admin::app.catalog.attributes.edit.enable-wysiwyg')
                                     </x-admin::form.control-group.label>
 
-                                    <input
-                                        type="hidden"
-                                        name="enable_wysiwyg"
-                                        value="0"
-                                    />
-
                                     @php $selectedOption = old('enable_wysiwyg') ?: $attribute->enable_wysiwyg @endphp
 
                                     <x-admin::form.control-group.control
@@ -568,12 +562,6 @@
                             <!-- Is Required -->
                             <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
                                 <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="is_required"
-                                    :value="(boolean) $selectedOption"
-                                />
-
-                                <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="is_required"
                                     id="is_required"
@@ -592,12 +580,6 @@
 
                             <!-- Is Unique -->
                             <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="is_unique"
-                                    :value="(boolean) (old('is_unique') ?? $attribute->is_unique)"
-                                />
-
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     id="is_unique"
@@ -651,12 +633,6 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.value-per-locale')
                                 </label>
-
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="value_per_locale"
-                                    :value="(boolean) $valuePerLocale"
-                                />
                             </x-admin::form.control-group>
 
                             <!-- Value Per Channel -->
@@ -678,11 +654,6 @@
                                     @lang('admin::app.catalog.attributes.edit.value-per-channel')
                                 </label>
 
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="value_per_channel"
-                                    :value="(boolean) $valuePerChannel"
-                                />
                             </x-admin::form.control-group>
 
                             <!-- Use In Layered -->
@@ -711,11 +682,6 @@
                                     @lang('admin::app.catalog.attributes.edit.is-filterable')
                                 </label>
 
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="is_filterable"
-                                    :value="(boolean) $isFilterable"
-                                />
                             </x-admin::form.control-group>
 
                             <!-- Use To Create Configurable Product -->
@@ -743,12 +709,6 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-configurable')
                                 </label>
-
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="is_configurable"
-                                    :value="(boolean) $isConfigurable"
-                                />
                             </x-admin::form.control-group>
 
                             <!-- Visible On Product View Page On Front End -->
@@ -772,12 +732,6 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
                                 </label>
-
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="is_visible_on_front"
-                                    :value="(boolean) $isVisibleOnFront"
-                                />
                             </x-admin::form.control-group>
 
                             <!-- Attribute Is Comparable -->
@@ -801,12 +755,6 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-comparable')
                                 </label>
-
-                                <x-admin::form.control-group.control
-                                    type="hidden"
-                                    name="is_comparable"
-                                    :value="(boolean) $isComparable"
-                                />
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>

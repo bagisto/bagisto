@@ -150,6 +150,8 @@
                         .catch(error => {
                             this.isStoring = false;
 
+                            this.$emit('processing', 'address');
+
                             if (error.response.status == 422) {
                                 setErrors(error.response.data.errors);
                             }

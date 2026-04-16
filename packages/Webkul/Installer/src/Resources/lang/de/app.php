@@ -223,6 +223,7 @@ return [
                 'nl' => 'Niederländisch',
                 'pl' => 'Polnisch',
                 'pt_BR' => 'Brasilianisches Portugiesisch',
+                'ro' => 'Rumänisch',
                 'ru' => 'Russisch',
                 'sin' => 'Sinhala',
                 'tr' => 'Türkisch',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Alle Produkte',
-
-                    'options' => [
-                        'title' => 'Alle Produkte',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Kollektionen anzeigen',
@@ -275,24 +268,16 @@ return [
                     'name' => 'Bold-Kollektionen',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Buchungsprodukte',
+                'book-tickets' => [
+                    'name' => 'Tickets Buchen',
 
                     'options' => [
-                        'title' => 'Tickets buchen',
+                        'title' => 'Tickets Buchen',
                     ],
                 ],
 
                 'categories-collections' => [
                     'name' => 'Kategorienkollektionen',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Hervorgehobene Kollektionen',
-
-                    'options' => [
-                        'title' => 'Hervorgehobene Produkte',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Neue Produkte',
+                'kids-collection' => [
+                    'name' => 'Kinder Kollektion',
 
                     'options' => [
-                        'title' => 'Neue Produkte',
+                        'title' => 'Kinder Kollektion',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Herren Kollektion',
+
+                    'options' => [
+                        'title' => 'Herren Kollektion',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'Top-Kollektionen',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Damen Kollektion',
+
+                    'options' => [
+                        'title' => 'Damen Kollektion',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'Sprache des Installationsassistenten',
                 'locale' => 'Lokale',
                 'main' => 'Start',
                 'select-locale' => 'Wähle Lokale',
@@ -993,6 +995,7 @@ return [
             'persian' => 'Persisch',
             'polish' => 'Polnisch',
             'portuguese' => 'Brasilianisches Portugiesisch',
+            'romanian' => 'Rumänisch',
             'russian' => 'Russisch',
             'sinhala' => 'Singhalesisch',
             'spanish' => 'Spanisch',

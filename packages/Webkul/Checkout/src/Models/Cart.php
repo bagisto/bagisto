@@ -42,6 +42,8 @@ class Cart extends Model implements CartContract
      */
     protected $casts = [
         'additional' => 'json',
+        'is_guest' => 'boolean',
+        'is_active' => 'boolean',
     ];
 
     /**

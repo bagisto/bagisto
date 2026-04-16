@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount ප්රයෝජනයට x :qty ප්‍රමාණය',
+                'billing-address' => 'බිල්පත් ලිපිනය',
                 'channel' => 'චැනලය',
-                'customer-email' => 'ඊමේල් - :email',
                 'customer' => 'පාරිභෝගිකයා',
+                'customer-email' => 'ඊමේල් - :email',
                 'discount' => 'වට්ටම් - :discount',
                 'email' => 'ඊමේල්',
                 'grand-total' => 'මුළු මුදල',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'ඇණවුම් අංකය',
                 'order-information' => 'ඇණවුම් තොරතුරු',
                 'order-status' => 'ඇණවුම් තත්වය',
+                'price' => 'මිල - :price',
                 'price-excl-tax' => 'මිල (බදු නොමැති) - :price',
                 'price-incl-tax' => 'මිල (බදු සහිත) - :price',
-                'price' => 'මිල - :price',
                 'print' => 'මුද්‍රණය',
                 'product-image' => 'නිෂ්පාදන පින්තූරය',
                 'qty' => 'ප්‍රමාණය - :qty',
+                'send' => 'යවන්න',
                 'send-btn' => 'යවන්න',
                 'send-duplicate-invoice' => 'අනුමත ඉල්ලීම් යවන්න',
-                'send' => 'යවන්න',
+                'shipping-address' => 'නැවත ගෙවීම් ලිපිනය',
+                'shipping-and-handling' => 'නැවුම් සහ ප්‍රමාණය',
                 'shipping-and-handling-excl-tax' => 'නැවුම් සහ ප්‍රමාණය (බදු නොමැති)',
                 'shipping-and-handling-incl-tax' => 'නැවුම් සහ ප්‍රමාණය (බදු සහිත)',
-                'shipping-and-handling' => 'නැවුම් සහ ප්‍රමාණය',
                 'sku' => 'SKU - :sku',
+                'sub-total' => 'උප මුදල - :sub_total',
                 'sub-total-excl-tax' => 'උප මුදල (බදු නොමැති) - :sub_total',
                 'sub-total-incl-tax' => 'උප මුදල (බදු සහිත) - :sub_total',
+                'sub-total-summary' => 'උප මුදල',
                 'sub-total-summary-excl-tax' => 'උප මුදල (බදු නොමැති)',
                 'sub-total-summary-incl-tax' => 'උප මුදල (බදු සහිත)',
-                'sub-total-summary' => 'උප මුදල',
-                'sub-total' => 'උප මුදල - :sub_total',
                 'summary-discount' => 'වට්ටම් මුළුව',
                 'summary-tax' => 'බදු මුළුව',
                 'tax' => 'බදු - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'පාරිභෝගිකයා ඉවත්වීම අසාර්ථකයි',
             'delete-success' => 'පාරිභෝගිකයා සාර්ථකව ඉවත්වීම සාර්ථකයි',
-            'order-pending' => 'ඇපයැස් වෙමින් ඇත',
+            'delete-pending-order-error' => 'මෙම පාරිභෝගිකයාට අපේක්ෂිත ඇණවුම් ඇති අතර එය මැකිය නොහැක.',
             'update-success' => 'පාරිභෝගිකයා සාර්ථකව යාවත් කරන ලදි',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'බදා කාටිකවරු සාදන්න',
                     ],
 
-                    'can-not-delete' => 'බදා අනුපාතය පවරන ප්‍රවර්ග මකා දැමිය නොහැක.',
                     'create-success' => 'නව බදා කාටිකය සාදන්න සාර්ථකව සැකසීම',
                     'delete-failed' => 'බදා කාටිකය සාර්ථකව මකා නොදමා ඇත',
                     'delete-success' => 'බදා කාටිකය සාර්ථකව මකා දමන ලදි',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'ඔබගේ Ollama API අක්තපත්‍ර වින්‍යාස කරන්න.',
+                        'title-info' => 'ඔබගේ Ollama සම්බන්ධතා සැකසුම් වින්‍යාස කරන්න.',
+                        'url' => 'මූලික URL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'වෙළඳසැල සඳහා AI විශේෂාංග සක්‍රිය සහ වින්‍යාස කරන්න.',
                     'title' => 'වෙළඳසැල විශේෂාංග',
+
+                    'image-search' => [
+                        'enabled' => 'සක්‍රිය',
+                        'model' => 'මොඩලය',
+                        'title' => 'AI රූප සෙවුම',
+                        'title-info' => 'වෙළඳසැලේ උඩුගත කළ රූප විශ්ලේෂණය කර නිෂ්පාදන සෙවුම් මූල පද ලබා ගැනීමට AI දැක්ම භාවිතා කරන්න.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'සක්‍රිය',

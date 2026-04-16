@@ -14,6 +14,15 @@ class OrderComment extends Model implements OrderCommentContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'customer_notified' => 'boolean',
+    ];
+
+    /**
      * Get the order record associated with the order comment.
      */
     public function order()

@@ -89,7 +89,7 @@ class Product
             'entity_type' => 'product',
             'request_path' => $product->url_key,
             'target_path' => $currentURLKey ?? '',
-            'locale' => app()->getLocale(),
+            'locale' => core()->getRequestedLocaleCode(),
             'redirect_type' => self::PERMANENT_REDIRECT_CODE,
         ]);
 

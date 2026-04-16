@@ -223,6 +223,7 @@ return [
                 'nl' => 'Holenderski',
                 'pl' => 'Polski',
                 'pt_BR' => 'Portugalski brazylijski',
+                'ro' => 'Rumuński',
                 'ru' => 'Rosyjski',
                 'sin' => 'Syngaleski',
                 'tr' => 'Turecki',
@@ -247,18 +248,10 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'Wszystkie produkty',
-
-                    'options' => [
-                        'title' => 'Wszystkie produkty',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'Zobacz kolekcje',
-                        'description' => 'Przedstawiamy nasze nowe odważne kolekcje! Podnieś swój styl dzięki śmiałym wzorom i żywym deklaracjom. Odkryj uderzające wzory i odważne kolory, które redefiniują Twoją garderobę. Przygotuj się, by zaakceptować niezwykłość!',
+                        'description' => 'Przedstawiamy nasze nowe odważne kolekcje! Podnieś swój styl dzięki śmiałym wzorom i żywym deklaracjom. Odkryj uderzające wzory i odważne kolory, które redefiniują Twoją garderobę. Przygotuj się, by otworzyć się na niezwykłość!',
                         'title' => 'Przygotuj się na nasze nowe odważne kolekcje!',
                     ],
 
@@ -275,8 +268,8 @@ return [
                     'name' => 'Odważne Kolekcje',
                 ],
 
-                'booking-products' => [
-                    'name' => 'Produkty Rezerwacyjne',
+                'book-tickets' => [
+                    'name' => 'Zarezerwuj Bilety',
 
                     'options' => [
                         'title' => 'Zarezerwuj Bilety',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'Kolekcje kategorii',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'Polecane kolekcje',
-
-                    'options' => [
-                        'title' => 'Polecane produkty',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -317,7 +302,7 @@ return [
                     'content' => [
                         'sub-title-1' => 'Nasze kolekcje',
                         'sub-title-2' => 'Nasze kolekcje',
-                        'title' => 'Gra z naszymi nowymi dodatkami!',
+                        'title' => 'Baw się naszymi nowymi kolekcjami!',
                     ],
 
                     'name' => 'Kontener gier',
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'Nowe produkty',
+                'kids-collection' => [
+                    'name' => 'Kolekcja Dziecięca',
 
                     'options' => [
-                        'title' => 'Nowe produkty',
+                        'title' => 'Kolekcja Dziecięca',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'Kolekcja Męska',
+
+                    'options' => [
+                        'title' => 'Kolekcja Męska',
                     ],
                 ],
 
@@ -349,18 +342,18 @@ return [
 
                 'services-content' => [
                     'description' => [
-                        'emi-available-info' => 'EMI bez kosztów dostępne na wszystkich głównych kartach kredytowych',
+                        'emi-available-info' => 'Raty 0% dostępne dla wszystkich głównych kart kredytowych',
                         'free-shipping-info' => 'Ciesz się darmową wysyłką na wszystkie zamówienia',
-                        'product-replace-info' => 'Dostępna łatwa zamiana produktu!',
+                        'product-replace-info' => 'Dostępna łatwa wymiana produktu!',
                         'time-support-info' => 'Dedykowane wsparcie 24/7 za pośrednictwem czatu i e-maila',
                     ],
 
                     'name' => 'Zawartość usług',
 
                     'title' => [
-                        'emi-available' => 'EMI dostępne',
+                        'emi-available' => 'Dostępne Raty',
                         'free-shipping' => 'Darmowa wysyłka',
-                        'product-replace' => 'Zamiana produktu',
+                        'product-replace' => 'Wymiana produktu',
                         'time-support' => 'Wsparcie 24/7',
                     ],
                 ],
@@ -373,17 +366,25 @@ return [
                         'sub-title-4' => 'Nasze kolekcje',
                         'sub-title-5' => 'Nasze kolekcje',
                         'sub-title-6' => 'Nasze kolekcje',
-                        'title' => 'Gra z naszymi nowymi dodatkami!',
+                        'title' => 'Baw się naszymi nowymi kolekcjami!',
                     ],
 
                     'name' => 'Najlepsze kolekcje',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'Kolekcja Damska',
+
+                    'options' => [
+                        'title' => 'Kolekcja Damska',
+                    ],
                 ],
             ],
         ],
 
         'user' => [
             'roles' => [
-                'description' => 'Użytkownicy o tej roli będą miały pełny dostęp',
+                'description' => 'Użytkownicy o tej roli będą mieli pełny dostęp',
                 'name' => 'Administrator',
             ],
 
@@ -930,28 +931,29 @@ return [
             'ready-for-installation' => [
                 'create-database-tables' => 'Utwórz tabele bazy danych',
                 'drop-existing-tables' => 'Usuń istniejące tabele',
-                'install' => 'Installatie',
-                'install-info' => 'Bagisto Voor Installatie',
-                'install-info-button' => 'Klik op de knop hieronder om',
-                'populate-database-tables' => 'Vul de databasetabellen',
-                'start-installation' => 'Start Installatie',
-                'title' => 'Klaar voor Installatie',
+                'install' => 'Instalacja',
+                'install-info' => 'Informacje o instalacji Bagisto',
+                'install-info-button' => 'Kliknięcie przycisku poniżej rozpocznie instalację i spowoduje:',
+                'populate-database-tables' => 'Wypełnij tabele bazy danych',
+                'start-installation' => 'Rozpocznij instalację',
+                'title' => 'Gotowe do instalacji',
             ],
 
             'start' => [
-                'locale' => 'Locatie',
+                'language' => 'Język instalacji',
+                'locale' => 'Lokalizacja',
                 'main' => 'Rozpocznij',
-                'select-locale' => 'Selecteer Locatie',
-                'title' => 'Uw Bagisto-installatie',
-                'welcome-title' => 'Welkom bij Bagisto',
+                'select-locale' => 'Wybierz język',
+                'title' => 'Instalacja Bagisto',
+                'welcome-title' => 'Witaj w Bagisto',
             ],
 
             'server-requirements' => [
-                'calendar' => 'Kalender',
+                'calendar' => 'Kalendarz (Calendar)',
                 'ctype' => 'cType',
                 'curl' => 'cURL',
                 'dom' => 'DOM',
-                'fileinfo' => 'Bestandsinformatie',
+                'fileinfo' => 'Fileinfo',
                 'filter' => 'Filter',
                 'gd' => 'GD',
                 'hash' => 'Hash',
@@ -962,9 +964,9 @@ return [
                 'pcre' => 'PCRE',
                 'pdo' => 'PDO',
                 'php' => 'PHP',
-                'php-version' => ':version of hoger',
-                'session' => 'Sessie',
-                'title' => 'Serververeisten',
+                'php-version' => ':version lub wyższa',
+                'session' => 'Sesja (Session)',
+                'title' => 'Wymagania serwera',
                 'tokenizer' => 'Tokenizer',
                 'xml' => 'XML',
             ],
@@ -993,6 +995,7 @@ return [
             'persian' => 'Perski',
             'polish' => 'Polski',
             'portuguese' => 'Portugalski (Brazylijski)',
+            'romanian' => 'Rumuński',
             'russian' => 'Rosyjski',
             'sinhala' => 'Syngaleski',
             'spanish' => 'Hiszpański',

@@ -2,6 +2,7 @@
 
 namespace Webkul\MagicAI;
 
+use Laravel\Ai\Files\LocalImage;
 use Laravel\Ai\Image;
 
 use function Laravel\Ai\agent;
@@ -38,16 +39,28 @@ class MagicAI
     }
 
     /**
-     * Generate a personalised checkout success message for an order.
+     * Analyze an uploaded image and return e-commerce search keywords.
+     *
+     * @return string Comma-separated keywords suitable for product search.
      */
-    public function checkoutMessage(mixed $order): string
+    public function analyzeImage(string $imagePath): string
     {
-        $model = $this->loadStorefrontModel('checkout_message');
+        $prompt = implode("\n\n", [
+            'Analyze this image and identify the product(s) shown.',
+            'Return a comma-separated list of short, specific search keywords that would help find this product in an e-commerce store.',
+            'Focus on: product type, material, color, style, brand (if visible), and key features.',
+            'Return ONLY the comma-separated keywords, nothing else.',
+            'Example: red cotton t-shirt, casual wear, crew neck, solid color',
+        ]);
+
+        $model = $this->loadStorefrontModel('image_search');
 
         $provider = $this->prepareProvider($model);
 
+        $image = new LocalImage($imagePath);
+
         return trim(
-            agent()->prompt($this->buildCheckoutPrompt($order), provider: $provider, model: $model)->text
+            agent()->prompt($prompt, attachments: [$image], provider: $provider, model: $model)->text
         );
     }
 
@@ -70,6 +83,20 @@ class MagicAI
 
         return trim(
             agent()->prompt($prompt, provider: $provider, model: $model)->text
+        );
+    }
+
+    /**
+     * Generate a personalised checkout success message for an order.
+     */
+    public function checkoutMessage(mixed $order): string
+    {
+        $model = $this->loadStorefrontModel('checkout_message');
+
+        $provider = $this->prepareProvider($model);
+
+        return trim(
+            agent()->prompt($this->buildCheckoutPrompt($order), provider: $provider, model: $model)->text
         );
     }
 
@@ -123,6 +150,14 @@ class MagicAI
 
         if ($apiKey) {
             config(["ai.providers.{$provider}.key" => $apiKey]);
+        }
+
+        if ($provider === 'ollama') {
+            $url = core()->getConfigData('magic_ai.providers.ollama.url');
+
+            if ($url) {
+                config(['ai.providers.ollama.url' => $url]);
+            }
         }
 
         return $provider;

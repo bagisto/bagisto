@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount Par Unité x :qty Quantité',
+                'billing-address' => 'Adresse de facturation',
                 'channel' => 'Canal',
-                'customer-email' => 'Email - :email',
                 'customer' => 'Client',
+                'customer-email' => 'Email - :email',
                 'discount' => 'Montant de réduction - :discount',
                 'email' => 'Email',
                 'grand-total' => 'Total général',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'ID de la commande',
                 'order-information' => 'Informations sur la commande',
                 'order-status' => 'Statut de la commande',
+                'price' => 'Prix - :price',
                 'price-excl-tax' => 'Prix (Hors taxe) - :price',
                 'price-incl-tax' => 'Prix (TTC) - :price',
-                'price' => 'Prix - :price',
                 'print' => 'Imprimer',
                 'product-image' => 'Image du produit',
                 'qty' => 'Quantité - :qty',
+                'send' => 'Envoyer',
                 'send-btn' => 'Envoyer',
                 'send-duplicate-invoice' => 'Envoyer une facture en double',
-                'send' => 'Envoyer',
+                'shipping-address' => 'Adresse de livraison',
+                'shipping-and-handling' => 'Frais de port et de manutention',
                 'shipping-and-handling-excl-tax' => 'Frais de port et de manutention (Hors taxe)',
                 'shipping-and-handling-incl-tax' => 'Frais de port et de manutention (TTC)',
-                'shipping-and-handling' => 'Frais de port et de manutention',
                 'sku' => 'SKU - :sku',
+                'sub-total' => 'Sous-total - :sub_total',
                 'sub-total-excl-tax' => 'Sous-total (Hors taxe) - :sub_total',
                 'sub-total-incl-tax' => 'Sous-total (TTC) - :sub_total',
+                'sub-total-summary' => 'Sous-total',
                 'sub-total-summary-excl-tax' => 'Sous-total (Hors taxe)',
                 'sub-total-summary-incl-tax' => 'Sous-total (TTC)',
-                'sub-total-summary' => 'Sous-total',
-                'sub-total' => 'Sous-total - :sub_total',
                 'summary-discount' => 'Montant de réduction',
                 'summary-tax' => 'Montant de taxe',
                 'tax' => 'Montant de taxe - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'Échec de la suppression du client',
             'delete-success' => 'Suppression du client réussie',
-            'order-pending' => 'Les commandes sont en attente',
+            'delete-pending-order-error' => 'Ce client a des commandes en attente et ne peut pas être supprimé.',
             'update-success' => 'Mise à jour du client réussie',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'Modifier les catégories de taxe',
                     ],
 
-                    'can-not-delete' => 'Les catégories assignées aux taux de taxe ne peuvent pas être supprimées.',
                     'create-success' => 'Nouvelle catégorie de taxe créée',
                     'delete-failed' => 'Échec de la suppression de la catégorie de taxe',
                     'delete-success' => 'Catégorie de taxe supprimée avec succès',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configurez vos identifiants API Ollama.',
+                        'title-info' => 'Configurez les paramètres de connexion Ollama.',
+                        'url' => 'URL de base',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'Activer et configurer les fonctionnalités IA pour la boutique.',
                     'title' => 'Fonctionnalités de la boutique',
+
+                    'image-search' => [
+                        'enabled' => 'Activé',
+                        'model' => 'Modèle',
+                        'title' => 'Recherche d\'images par IA',
+                        'title-info' => 'Utilisez la vision IA pour analyser les images téléchargées et extraire les mots-clés de recherche de produits sur la boutique.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Activé',

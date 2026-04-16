@@ -26,4 +26,15 @@ class RMARule extends Model implements RMARuleContract
         'return_period',
         'default',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'status' => 'boolean',
+        'default' => 'boolean',
+        'return_period' => 'integer',
+    ];
 }

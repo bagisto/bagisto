@@ -194,7 +194,7 @@ abstract class AbstractReporting
 
             if (! empty($intervals)) {
                 return [
-                    'group_column' => 'MONTH(created_at)',
+                    'group_column' => db_grammar()->extractDatePart('MONTH', 'created_at'),
                     'intervals' => $intervals,
                 ];
             }
@@ -206,7 +206,7 @@ abstract class AbstractReporting
 
             if (! empty($intervals)) {
                 return [
-                    'group_column' => 'WEEK(created_at)',
+                    'group_column' => db_grammar()->extractDatePart('WEEK', 'created_at'),
                     'intervals' => $intervals,
                 ];
             }
@@ -215,7 +215,7 @@ abstract class AbstractReporting
              * If the difference between the start and end date is less than 6 weeks
              */
             return [
-                'group_column' => 'DAYOFYEAR(created_at)',
+                'group_column' => db_grammar()->extractDatePart('DAYOFYEAR', 'created_at'),
                 'intervals' => $this->getDaysInterval($startDate, $endDate),
             ];
         } else {
@@ -229,7 +229,7 @@ abstract class AbstractReporting
                 $formatter = '?-?-?';
             }
 
-            $groupColumn = 'DATE_FORMAT(created_at, "'.Str::replaceArray('?', ['%Y', '%m', '%d'], $formatter).'")';
+            $groupColumn = db_grammar()->dateFormat('created_at', Str::replaceArray('?', ['%Y', '%m', '%d'], $formatter));
 
             $intervals = [];
 
@@ -282,8 +282,8 @@ abstract class AbstractReporting
 
             $intervals[] = [
                 'filter' => $start->month,
-                'start' => $start->format('d M'),
-                'end' => $end->format('d M'),
+                'start' => $start->translatedFormat('d M'),
+                'end' => $end->translatedFormat('d M'),
             ];
         }
 
@@ -329,8 +329,8 @@ abstract class AbstractReporting
 
             $intervals[] = [
                 'filter' => $start->week,
-                'start' => $start->format('d M'),
-                'end' => $end->format('d M'),
+                'start' => $start->translatedFormat('d M'),
+                'end' => $end->translatedFormat('d M'),
             ];
         }
 
@@ -357,8 +357,8 @@ abstract class AbstractReporting
 
             $intervals[] = [
                 'filter' => $intervalStartDate->dayOfYear,
-                'start' => $intervalStartDate->startOfDay()->format('d M'),
-                'end' => $intervalStartDate->endOfDay()->format('d M'),
+                'start' => $intervalStartDate->startOfDay()->translatedFormat('d M'),
+                'end' => $intervalStartDate->endOfDay()->translatedFormat('d M'),
             ];
         }
 

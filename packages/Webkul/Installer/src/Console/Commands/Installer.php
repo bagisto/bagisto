@@ -7,6 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Webkul\Core\Enums\SupportedDatabaseEnum;
 use Webkul\Installer\Events\ComposerEvents;
 use Webkul\Installer\Helpers\DatabaseManager;
 use Webkul\Installer\Helpers\EnvironmentManager;
@@ -86,6 +87,7 @@ class Installer extends Command
         'nl' => 'Dutch',
         'pl' => 'Polish',
         'pt_BR' => 'Brazilian Portuguese',
+        'ro' => 'Romanian',
         'ru' => 'Russian',
         'sin' => 'Sinhala',
         'tr' => 'Turkish',
@@ -308,12 +310,16 @@ class Installer extends Command
      */
     protected function askForDatabaseDetails()
     {
+        $dbConnection = select(
+            label   : 'Please select the database connection',
+            options : SupportedDatabaseEnum::options(),
+            default : SupportedDatabaseEnum::MYSQL->value,
+        );
+
+        $defaultPort = SupportedDatabaseEnum::from($dbConnection)->defaultPort();
+
         $databaseDetails = [
-            'DB_CONNECTION' => select(
-                label   : 'Please select the database connection',
-                options : ['mysql'],
-                default : 'mysql',
-            ),
+            'DB_CONNECTION' => $dbConnection,
 
             'DB_HOST' => text(
                 label    : 'Please enter the database host',
@@ -323,7 +329,7 @@ class Installer extends Command
 
             'DB_PORT' => text(
                 label    : 'Please enter the database port',
-                default  : $this->getEnvVariable('DB_PORT', '3306'),
+                default  : $this->getEnvVariable('DB_PORT', $defaultPort),
                 required : true
             ),
 

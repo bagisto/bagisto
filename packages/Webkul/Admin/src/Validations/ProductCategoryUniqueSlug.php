@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\DB;
 use Webkul\Category\Models\CategoryTranslationProxy;
+use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Repositories\ProductRepository;
 
 class ProductCategoryUniqueSlug implements ValidationRule
@@ -91,12 +92,8 @@ class ProductCategoryUniqueSlug implements ValidationRule
      */
     protected function isSlugExistsInProducts($slug)
     {
-        if (core()->getConfigData('catalog.products.search.engine') == 'elastic') {
-            $searchEngine = core()->getConfigData('catalog.products.search.storefront_mode');
-        }
-
         $product = app(ProductRepository::class)
-            ->setSearchEngine($searchEngine ?? 'database')
+            ->setSearchContext(SearchContextEnum::STOREFRONT)
             ->findBySlug($slug);
 
         if (

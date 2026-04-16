@@ -223,6 +223,7 @@ return [
                 'nl' => 'ডাচ',
                 'pl' => 'পোলিশ',
                 'pt_BR' => 'ব্রাজিলিয়ান পর্তুগিজ',
+                'ro' => 'রোমানীয়',
                 'ru' => 'রাশিয়ান',
                 'sin' => 'সিংহলা',
                 'tr' => 'তুর্কি',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'সব পণ্য',
-
-                    'options' => [
-                        'title' => 'সমস্ত পণ্য',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'সংগ্রহ দেখুন',
@@ -275,8 +268,8 @@ return [
                     'name' => 'বোল্ড কালেকশন',
                 ],
 
-                'booking-products' => [
-                    'name' => 'বুকিং পণ্য',
+                'book-tickets' => [
+                    'name' => 'টিকিট বুক করুন',
 
                     'options' => [
                         'title' => 'টিকিট বুক করুন',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'বিভাগ সংগ্রহ',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'নির্দেশিত সংগ্রহ',
-
-                    'options' => [
-                        'title' => 'নির্দেশিত পণ্য',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'নতুন পণ্য',
+                'kids-collection' => [
+                    'name' => 'শিশুদের সংগ্রহ',
 
                     'options' => [
-                        'title' => 'নতুন পণ্য',
+                        'title' => 'শিশুদের সংগ্রহ',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'পুরুষদের সংগ্রহ',
+
+                    'options' => [
+                        'title' => 'পুরুষদের সংগ্রহ',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'শীর্ষ সংগ্রহ',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'মহিলাদের সংগ্রহ',
+
+                    'options' => [
+                        'title' => 'মহিলাদের সংগ্রহ',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'ইনস্টলেশন উইজার্ডের ভাষা',
                 'locale' => 'লোকেল',
                 'main' => 'শুরু',
                 'select-locale' => 'লোকেল নির্বাচন করুন',
@@ -993,6 +995,7 @@ return [
             'persian' => 'পার্সি',
             'polish' => 'পোলিশ',
             'portuguese' => 'পর্তুগিজ',
+            'romanian' => 'রোমানীয়',
             'russian' => 'রুশ',
             'sinhala' => 'সিংহলি',
             'spanish' => 'স্পেনীয়',

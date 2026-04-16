@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('import_batches', function (Blueprint $table) {
             $table->increments('id');
             $table->string('state')->default('pending');
-            $table->json('data');
-            $table->json('summary')->nullable();
+            $table->jsonb('data');
+            $table->jsonb('summary')->nullable();
             $table->integer('import_id')->unsigned();
 
             $table->foreign('import_id')->references('id')->on('imports')->onDelete('cascade');

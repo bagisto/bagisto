@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount pro Einheit x :qty Menge',
+                'billing-address' => 'Rechnungsadresse',
                 'channel' => 'Kanal',
-                'customer-email' => 'E-Mail - :email',
                 'customer' => 'Kunde',
+                'customer-email' => 'E-Mail - :email',
                 'discount' => 'Rabattbetrag - :discount',
                 'email' => 'E-Mail',
                 'grand-total' => 'Gesamtsumme',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'Bestellnummer',
                 'order-information' => 'Bestellinformationen',
                 'order-status' => 'Bestellstatus',
+                'price' => 'Preis - :price',
                 'price-excl-tax' => 'Preis (exkl. MwSt.) - :price',
                 'price-incl-tax' => 'Preis (inkl. MwSt.) - :price',
-                'price' => 'Preis - :price',
                 'print' => 'Drucken',
                 'product-image' => 'Produktbild',
                 'qty' => 'Menge - :qty',
+                'send' => 'Senden',
                 'send-btn' => 'Senden',
                 'send-duplicate-invoice' => 'Doppelte Rechnung senden',
-                'send' => 'Senden',
+                'shipping-address' => 'Lieferadresse',
+                'shipping-and-handling' => 'Versand und Bearbeitung',
                 'shipping-and-handling-excl-tax' => 'Versand und Bearbeitung (exkl. MwSt.)',
                 'shipping-and-handling-incl-tax' => 'Versand und Bearbeitung (inkl. MwSt.)',
-                'shipping-and-handling' => 'Versand und Bearbeitung',
                 'sku' => 'Artikelnummer (SKU) - :sku',
+                'sub-total' => 'Zwischensumme - :sub_total',
                 'sub-total-excl-tax' => 'Zwischensumme (exkl. MwSt.) - :sub_total',
                 'sub-total-incl-tax' => 'Zwischensumme (inkl. MwSt.) - :sub_total',
+                'sub-total-summary' => 'Zwischensumme',
                 'sub-total-summary-excl-tax' => 'Zwischensumme (exkl. MwSt.)',
                 'sub-total-summary-incl-tax' => 'Zwischensumme (inkl. MwSt.)',
-                'sub-total-summary' => 'Zwischensumme',
-                'sub-total' => 'Zwischensumme - :sub_total',
                 'summary-discount' => 'Rabattbetrag',
                 'summary-tax' => 'MwSt.-Betrag',
                 'tax' => 'MwSt.-Betrag - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'Kundenlöschung fehlgeschlagen',
             'delete-success' => 'Kunde erfolgreich gelöscht',
-            'order-pending' => 'Bestellungen stehen aus',
+            'delete-pending-order-error' => 'Dieser Kunde hat ausstehende Bestellungen und kann nicht gelöscht werden.',
             'update-success' => 'Kunde erfolgreich aktualisiert',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'Steuerkategorien bearbeiten',
                     ],
 
-                    'can-not-delete' => 'Steuersätze zugewiesene Kategorien können nicht gelöscht werden.',
                     'create-success' => 'Neue Steuerkategorie erstellt',
                     'delete-failed' => 'Steuerkategorie löschen fehlgeschlagen',
                     'delete-success' => 'Steuerkategorie erfolgreich gelöscht',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Ollama API-Zugangsdaten konfigurieren.',
+                        'title-info' => 'Ollama-Verbindungseinstellungen konfigurieren.',
+                        'url' => 'Basis-URL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'KI-Funktionen für die Storefront aktivieren und konfigurieren.',
                     'title' => 'Storefront-Funktionen',
+
+                    'image-search' => [
+                        'enabled' => 'Aktiviert',
+                        'model' => 'Modell',
+                        'title' => 'KI-Bildsuche',
+                        'title-info' => 'Verwenden Sie KI-Vision, um hochgeladene Bilder zu analysieren und Produktsuchbegriffe im Storefront zu extrahieren.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Aktiviert',

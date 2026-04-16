@@ -223,6 +223,7 @@ return [
                 'nl' => '荷蘭語',
                 'pl' => '波蘭語',
                 'pt_BR' => '巴西葡萄牙語',
+                'ro' => '罗马尼亚语',
                 'ru' => '俄語',
                 'sin' => '僧伽羅語',
                 'tr' => '土耳其語',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => '所有产品',
-
-                    'options' => [
-                        'title' => '所有产品',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => '查看收藏',
@@ -275,8 +268,8 @@ return [
                     'name' => '大胆系列',
                 ],
 
-                'booking-products' => [
-                    'name' => '预订产品',
+                'book-tickets' => [
+                    'name' => '预订门票',
 
                     'options' => [
                         'title' => '预订门票',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => '类别 收藏',
-                ],
-
-                'featured-collections' => [
-                    'name' => '特色收藏',
-
-                    'options' => [
-                        'title' => '特色产品',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => '新产品',
+                'kids-collection' => [
+                    'name' => '儿童系列',
 
                     'options' => [
-                        'title' => '新产品',
+                        'title' => '儿童系列',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => '男士系列',
+
+                    'options' => [
+                        'title' => '男士系列',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => '热门收藏',
+                ],
+
+                'womens-collection' => [
+                    'name' => '女士系列',
+
+                    'options' => [
+                        'title' => '女士系列',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => '安装向导语言',
                 'locale' => '区域设置',
                 'main' => '开始',
                 'select-locale' => '选择区域设置',
@@ -993,6 +995,7 @@ return [
             'persian' => '波斯语',
             'polish' => '波兰语',
             'portuguese' => '巴西葡萄牙语',
+            'romanian' => '罗马尼亚语',
             'russian' => '俄语',
             'sinhala' => '僧伽罗语',
             'spanish' => '西班牙语',

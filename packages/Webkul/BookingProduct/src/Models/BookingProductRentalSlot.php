@@ -15,7 +15,10 @@ class BookingProductRentalSlot extends Model implements BookingProductRentalSlot
     /**
      * The attributes that should be cast.
      */
-    protected $casts = ['slots' => 'array'];
+    protected $casts = [
+        'same_slot_all_days' => 'boolean',
+        'slots' => 'array',
+    ];
 
     /**
      * The attributes that are mass assignable.

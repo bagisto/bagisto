@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount За единицу x :qty Количество',
+                'billing-address' => 'Платежный адрес',
                 'channel' => 'Канал',
-                'customer-email' => 'Email - :email',
                 'customer' => 'Клиент',
+                'customer-email' => 'Email - :email',
                 'discount' => 'Скидка - :discount',
                 'email' => 'Email',
                 'grand-total' => 'Общая сумма',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'ID заказа',
                 'order-information' => 'Информация о заказе',
                 'order-status' => 'Статус заказа',
+                'price' => 'Цена - :price',
                 'price-excl-tax' => 'Цена (без налога) - :price',
                 'price-incl-tax' => 'Цена (с налогом) - :price',
-                'price' => 'Цена - :price',
                 'print' => 'Печать',
                 'product-image' => 'Изображение товара',
                 'qty' => 'Количество - :qty',
+                'send' => 'Отправить',
                 'send-btn' => 'Отправить',
                 'send-duplicate-invoice' => 'Отправить дубликат счета',
-                'send' => 'Отправить',
+                'shipping-address' => 'Адрес доставки',
+                'shipping-and-handling' => 'Стоимость доставки и обработки',
                 'shipping-and-handling-excl-tax' => 'Стоимость доставки и обработки (без налога)',
                 'shipping-and-handling-incl-tax' => 'Стоимость доставки и обработки (с налогом)',
-                'shipping-and-handling' => 'Стоимость доставки и обработки',
                 'sku' => 'Артикул - :sku',
+                'sub-total' => 'Подытог - :sub_total',
                 'sub-total-excl-tax' => 'Подытог (без налога) - :sub_total',
                 'sub-total-incl-tax' => 'Подытог (с налогом) - :sub_total',
+                'sub-total-summary' => 'Подытог',
                 'sub-total-summary-excl-tax' => 'Подытог (без налога)',
                 'sub-total-summary-incl-tax' => 'Подытог (с налогом)',
-                'sub-total-summary' => 'Подытог',
-                'sub-total' => 'Подытог - :sub_total',
                 'summary-discount' => 'Скидка',
                 'summary-tax' => 'Сумма налога',
                 'tax' => 'Сумма налога - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'Ошибка при удалении клиента',
             'delete-success' => 'Клиент успешно удален',
-            'order-pending' => 'Заказы находятся в ожидании',
+            'delete-pending-order-error' => 'У этого клиента есть ожидающие заказы, и его нельзя удалить.',
             'update-success' => 'Клиент успешно обновлен',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'Редактировать налоговые категории',
                     ],
 
-                    'can-not-delete' => 'Категории, назначенные налоговым ставкам, не могут быть удалены.',
                     'create-success' => 'Новая налоговая категория создана',
                     'delete-failed' => 'Ошибка при удалении налоговой категории',
                     'delete-success' => 'Налоговая категория успешно удалена',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Настройте учётные данные API Ollama.',
+                        'title-info' => 'Настройте параметры подключения Ollama.',
+                        'url' => 'Базовый URL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'Включение и настройка функций ИИ для витрины магазина.',
                     'title' => 'Функции витрины',
+
+                    'image-search' => [
+                        'enabled' => 'Включено',
+                        'model' => 'Модель',
+                        'title' => 'Поиск по изображениям с ИИ',
+                        'title-info' => 'Используйте ИИ для анализа загруженных изображений и извлечения ключевых слов для поиска товаров в магазине.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Включено',

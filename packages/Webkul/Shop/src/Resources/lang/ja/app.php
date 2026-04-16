@@ -1009,6 +1009,8 @@ return [
             'return-to-shop' => 'ショップに戻る',
             'rule-applied' => 'カートルールが適用されました',
             'select-hourly-duration' => '1時間のスロット期間を選択してください。',
+            'specify-payment-method' => '支払い方法を指定してください。',
+            'specify-shipping-method' => '配送方法を指定してください。',
             'success-remove' => 'アイテムはカートから正常に削除されました。',
             'suspended-account-message' => 'アカウントは一時停止されました。',
 

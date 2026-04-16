@@ -108,6 +108,6 @@ export async function createTaxCategory(adminPage) {
      * Asserting.
      */
     await expect(
-        adminPage.getByText("New Tax Category Created."),
+        adminPage.getByText("Tax category created successfully."),
     ).toBeVisible();
 }

@@ -223,6 +223,7 @@ return [
                 'nl' => 'オランダ語',
                 'pl' => 'ポーランド語',
                 'pt_BR' => 'ブラジルポルトガル語',
+                'ro' => 'ルーマニア語',
                 'ru' => 'ロシア語',
                 'sin' => 'シンハラ語',
                 'tr' => 'トルコ語',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'すべての製品',
-
-                    'options' => [
-                        'title' => 'すべての製品',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'コレクションを表示',
@@ -275,8 +268,8 @@ return [
                     'name' => 'ボールドコレクション',
                 ],
 
-                'booking-products' => [
-                    'name' => '予約商品',
+                'book-tickets' => [
+                    'name' => 'チケットを予約',
 
                     'options' => [
                         'title' => 'チケットを予約',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'カテゴリーコレクション',
-                ],
-
-                'featured-collections' => [
-                    'name' => '特集コレクション',
-
-                    'options' => [
-                        'title' => '注目製品',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => '新製品',
+                'kids-collection' => [
+                    'name' => 'キッズコレクション',
 
                     'options' => [
-                        'title' => '新製品',
+                        'title' => 'キッズコレクション',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'メンズコレクション',
+
+                    'options' => [
+                        'title' => 'メンズコレクション',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'トップコレクション',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'レディースコレクション',
+
+                    'options' => [
+                        'title' => 'レディースコレクション',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'インストールウィザードの言語',
                 'locale' => 'ロケール',
                 'main' => '開始',
                 'select-locale' => 'ロケールを選択',
@@ -993,6 +995,7 @@ return [
             'persian' => 'ペルシャ語',
             'polish' => 'ポーランド語',
             'portuguese' => 'ブラジルポルトガル語',
+            'romanian' => 'ルーマニア語',
             'russian' => 'ロシア語',
             'sinhala' => 'シンハラ語',
             'spanish' => 'スペイン語',

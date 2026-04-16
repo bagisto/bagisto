@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount Birim Başına x :qty Miktar',
+                'billing-address' => 'Fatura Adresi',
                 'channel' => 'Kanal',
-                'customer-email' => 'E-posta - :email',
                 'customer' => 'Müşteri',
+                'customer-email' => 'E-posta - :email',
                 'discount' => 'İndirim Miktarı - :discount',
                 'email' => 'E-posta',
                 'grand-total' => 'Genel Toplam',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'Sipariş Kimliği',
                 'order-information' => 'Sipariş Bilgileri',
                 'order-status' => 'Sipariş Durumu',
+                'price' => 'Fiyat - :price',
                 'price-excl-tax' => 'Fiyat (KDV Hariç) - :price',
                 'price-incl-tax' => 'Fiyat (KDV Dahil) - :price',
-                'price' => 'Fiyat - :price',
                 'print' => 'Yazdır',
                 'product-image' => 'Ürün Resmi',
                 'qty' => 'Miktar - :qty',
+                'send' => 'Gönder',
                 'send-btn' => 'Gönder',
                 'send-duplicate-invoice' => 'Yinelenen Fatura Gönder',
-                'send' => 'Gönder',
+                'shipping-address' => 'Teslimat Adresi',
+                'shipping-and-handling' => 'Kargo ve İşlem Ücreti',
                 'shipping-and-handling-excl-tax' => 'Kargo ve İşlem Ücreti (KDV Hariç)',
                 'shipping-and-handling-incl-tax' => 'Kargo ve İşlem Ücreti (KDV Dahil)',
-                'shipping-and-handling' => 'Kargo ve İşlem Ücreti',
                 'sku' => 'Ürün Kodu - :sku',
+                'sub-total' => 'Ara Toplam - :sub_total',
                 'sub-total-excl-tax' => 'Ara Toplam (KDV Hariç) - :sub_total',
                 'sub-total-incl-tax' => 'Ara Toplam (KDV Dahil) - :sub_total',
+                'sub-total-summary' => 'Ara Toplam',
                 'sub-total-summary-excl-tax' => 'Ara Toplam (KDV Hariç)',
                 'sub-total-summary-incl-tax' => 'Ara Toplam (KDV Dahil)',
-                'sub-total-summary' => 'Ara Toplam',
-                'sub-total' => 'Ara Toplam - :sub_total',
                 'summary-discount' => 'İndirim Miktarı',
                 'summary-tax' => 'KDV Tutarı',
                 'tax' => 'KDV Tutarı - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'Müşteri Silme Başarısız',
             'delete-success' => 'Müşteri Başarıyla Silindi',
-            'order-pending' => 'Sipariş Beklemede',
+            'delete-pending-order-error' => 'Bu müşterinin bekleyen siparişleri var ve silinemez.',
             'update-success' => 'Müşteri Başarıyla Güncellendi',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'Vergi Kategorilerini Düzenle',
                     ],
 
-                    'can-not-delete' => 'Vergi Oranı Atanmış Kategoriler silinemez.',
                     'create-success' => 'Yeni Vergi Kategorisi Oluşturuldu',
                     'delete-failed' => 'Vergi Kategorisi Silme Başarısız',
                     'delete-success' => 'Vergi Kategorisi Başarıyla Silindi',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Ollama API kimlik bilgilerinizi yapılandırın.',
+                        'title-info' => 'Ollama bağlantı ayarlarınızı yapılandırın.',
+                        'url' => 'Temel URL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'Mağaza için AI özelliklerini etkinleştirin ve yapılandırın.',
                     'title' => 'Mağaza Özellikleri',
+
+                    'image-search' => [
+                        'enabled' => 'Etkin',
+                        'model' => 'Model',
+                        'title' => 'AI Görsel Arama',
+                        'title-info' => 'Mağazada yüklenen görselleri analiz etmek ve ürün arama anahtar kelimelerini çıkarmak için AI vizyonunu kullanın.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Etkin',

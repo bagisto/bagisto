@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount за одиницю x :qty Кількість',
+                'billing-address' => 'Платіжна адреса',
                 'channel' => 'Канал',
-                'customer-email' => 'Електронна пошта - :email',
                 'customer' => 'Клієнт',
+                'customer-email' => 'Електронна пошта - :email',
                 'discount' => 'Сума знижки - :discount',
                 'email' => 'Електронна пошта',
                 'grand-total' => 'Загальна сума',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'ID замовлення',
                 'order-information' => 'Інформація про замовлення',
                 'order-status' => 'Статус замовлення',
+                'price' => 'Ціна - :price',
                 'price-excl-tax' => 'Ціна (без податку) - :price',
                 'price-incl-tax' => 'Ціна (з податком) - :price',
-                'price' => 'Ціна - :price',
                 'print' => 'Друк',
                 'product-image' => 'Зображення товару',
                 'qty' => 'Кількість - :qty',
+                'send' => 'Надіслати',
                 'send-btn' => 'Надіслати',
                 'send-duplicate-invoice' => 'Надіслати дублікат рахунку',
-                'send' => 'Надіслати',
+                'shipping-address' => 'Адреса доставки',
+                'shipping-and-handling' => 'Доставка та обробка',
                 'shipping-and-handling-excl-tax' => 'Доставка та обробка (без податку)',
                 'shipping-and-handling-incl-tax' => 'Доставка та обробка (з податком)',
-                'shipping-and-handling' => 'Доставка та обробка',
                 'sku' => 'Артикул - :sku',
+                'sub-total' => 'Підсумок - :sub_total',
                 'sub-total-excl-tax' => 'Підсумок (без податку) - :sub_total',
                 'sub-total-incl-tax' => 'Підсумок (з податком) - :sub_total',
+                'sub-total-summary' => 'Підсумок',
                 'sub-total-summary-excl-tax' => 'Підсумок (без податку)',
                 'sub-total-summary-incl-tax' => 'Підсумок (з податком)',
-                'sub-total-summary' => 'Підсумок',
-                'sub-total' => 'Підсумок - :sub_total',
                 'summary-discount' => 'Сума знижки',
                 'summary-tax' => 'Сума податку',
                 'tax' => 'Сума податку - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'Видалення клієнта не вдалося',
             'delete-success' => 'Клієнта успішно видалено',
-            'order-pending' => 'Замовлення в очікуванні',
+            'delete-pending-order-error' => 'Цей клієнт має невиконані замовлення, і його не можна видалити.',
             'update-success' => 'Клієнта успішно оновлено',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'Редагувати податкові категорії',
                     ],
 
-                    'can-not-delete' => 'Категорії, призначені податковим ставкам, не можуть бути видалені.',
                     'create-success' => 'Нова податкова категорія створена',
                     'delete-failed' => 'Помилка видалення податкової категорії',
                     'delete-success' => 'Податкова категорія успішно видалена',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Налаштуйте облікові дані API Ollama.',
+                        'title-info' => 'Налаштуйте параметри підключення Ollama.',
+                        'url' => 'Базова URL-адреса',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'Увімкнення та налаштування функцій ШІ для вітрини магазину.',
                     'title' => 'Функції вітрини',
+
+                    'image-search' => [
+                        'enabled' => 'Увімкнено',
+                        'model' => 'Модель',
+                        'title' => 'Пошук зображень з ШІ',
+                        'title-info' => 'Використовуйте ШІ для аналізу завантажених зображень та вилучення ключових слів для пошуку товарів у магазині.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Увімкнено',

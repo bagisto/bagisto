@@ -21,6 +21,7 @@ class ResetPasswordNotification extends ResetPassword
 
         return (new MailMessage)
             ->from(core()->getSenderEmailDetails()['email'], core()->getSenderEmailDetails()['name'])
+            ->subject(trans('admin::app.emails.admin.forgot-password.subject'))
             ->view('admin::emails.admin.forget-password', [
                 'userName' => $notifiable->name,
                 'token' => $this->token,

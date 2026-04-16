@@ -20,14 +20,20 @@ class ReasonDataGrid extends DataGrid
                 'rma_reasons.status',
                 'rma_reasons.position',
                 'rma_reasons.created_at',
-                DB::raw('GROUP_CONCAT('.DB::getTablePrefix().'rma_reason_resolutions.resolution_type SEPARATOR ", ") as resolution_types'),
+                DB::raw(db_grammar()->groupConcat(DB::getTablePrefix().'rma_reason_resolutions.resolution_type', ', ').' as resolution_types'),
             )
             ->leftJoin('rma_reason_resolutions', 'rma_reasons.id', '=', 'rma_reason_resolutions.rma_reason_id')
-            ->groupBy('rma_reasons.id');
+            ->groupBy(
+                'rma_reasons.id',
+                'rma_reasons.title',
+                'rma_reasons.status',
+                'rma_reasons.position',
+                'rma_reasons.created_at'
+            );
 
         $this->addFilter('id', 'rma_reasons.id');
         $this->addFilter('created_at', 'rma_reasons.created_at');
-        $this->addFilter('resolution_types', DB::raw('GROUP_CONCAT('.DB::getTablePrefix().'rma_reason_resolutions.resolution_type SEPARATOR ", ")'));
+        $this->addFilter('resolution_types', DB::raw(db_grammar()->groupConcat(DB::getTablePrefix().'rma_reason_resolutions.resolution_type', ', ')));
 
         return $queryBuilder;
     }

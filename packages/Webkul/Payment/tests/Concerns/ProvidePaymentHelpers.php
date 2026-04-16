@@ -38,7 +38,7 @@ trait ProvidePaymentHelpers
             'customer_first_name' => $customer->first_name,
             'customer_last_name' => $customer->last_name,
             'customer_email' => $customer->email,
-            'is_guest' => 0,
+            'is_guest' => false,
             'shipping_method' => 'free_free',
         ], $overrides));
 

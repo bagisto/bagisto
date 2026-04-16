@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('booking_type');
             $table->integer('duration')->nullable();
             $table->integer('break_time')->nullable();
-            $table->json('slots')->nullable();
+            $table->jsonb('slots')->nullable();
 
             $table->foreign('booking_product_id')
                 ->references('id')->on('booking_products')

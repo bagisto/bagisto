@@ -223,6 +223,7 @@ return [
                 'nl' => 'هلندی',
                 'pl' => 'لهستانی',
                 'pt_BR' => 'پرتغالی برزیل',
+                'ro' => 'رومانیایی',
                 'ru' => 'روسی',
                 'sin' => 'سینهالی',
                 'tr' => 'ترکی',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'همه محصولات',
-
-                    'options' => [
-                        'title' => 'همه محصولات',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'مشاهده مجموعه‌ها',
@@ -275,8 +268,8 @@ return [
                     'name' => 'مجموعه‌های جسورانه',
                 ],
 
-                'booking-products' => [
-                    'name' => 'محصولات رزرو',
+                'book-tickets' => [
+                    'name' => 'رزرو بلیط',
 
                     'options' => [
                         'title' => 'رزرو بلیط',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'مجموعه‌های دسته‌بندی',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'مجموعه‌های ویژه',
-
-                    'options' => [
-                        'title' => 'محصولات ویژه',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'محصولات جدید',
+                'kids-collection' => [
+                    'name' => 'مجموعه کودکان',
 
                     'options' => [
-                        'title' => 'محصولات جدید',
+                        'title' => 'مجموعه کودکان',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'مجموعه مردانه',
+
+                    'options' => [
+                        'title' => 'مجموعه مردانه',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'مجموعه‌های برتر',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'مجموعه زنانه',
+
+                    'options' => [
+                        'title' => 'مجموعه زنانه',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'زبان جادوگر نصب',
                 'locale' => 'محلی',
                 'main' => 'شروع',
                 'select-locale' => 'انتخاب محلی',
@@ -993,6 +995,7 @@ return [
             'persian' => 'فارسی',
             'polish' => 'لهستانی',
             'portuguese' => 'پرتغالی برزیلی',
+            'romanian' => 'رومانیایی',
             'russian' => 'روسی',
             'sinhala' => 'سینهالا',
             'spanish' => 'اسپانیایی',

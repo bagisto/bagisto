@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount Per Unitat x :qty Quantitat',
+                'billing-address' => 'Adreça de Facturació',
                 'channel' => 'Canal',
-                'customer-email' => 'Correu electrònic - :email',
                 'customer' => 'Client',
+                'customer-email' => 'Correu electrònic - :email',
                 'discount' => 'Import de descompte - :discount',
                 'email' => 'Correu electrònic',
                 'grand-total' => 'Total General',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'ID de la Comanda',
                 'order-information' => 'Informació de la Comanda',
                 'order-status' => 'Estat de la Comanda',
+                'price' => 'Preu - :price',
                 'price-excl-tax' => 'Preu (Excl. Impostos) - :price',
                 'price-incl-tax' => 'Preu (Incl. Impostos) - :price',
-                'price' => 'Preu - :price',
                 'print' => 'Imprimir',
                 'product-image' => 'Imatge del Producte',
                 'qty' => 'Quantitat - :qty',
+                'send' => 'Enviar',
                 'send-btn' => 'Enviar',
                 'send-duplicate-invoice' => 'Enviar Factura Duplicada',
-                'send' => 'Enviar',
+                'shipping-address' => 'Adreça d\'Enviament',
+                'shipping-and-handling' => 'Enviament i Manipulació',
                 'shipping-and-handling-excl-tax' => 'Enviament i Manipulació (Excl. Impostos)',
                 'shipping-and-handling-incl-tax' => 'Enviament i Manipulació (Incl. Impostos)',
-                'shipping-and-handling' => 'Enviament i Manipulació',
                 'sku' => 'SKU - :sku',
+                'sub-total' => 'Subtotal - :sub_total',
                 'sub-total-excl-tax' => 'Subtotal (Excl. Impostos) - :sub_total',
                 'sub-total-incl-tax' => 'Subtotal (Incl. Impostos) - :sub_total',
+                'sub-total-summary' => 'Subtotal',
                 'sub-total-summary-excl-tax' => 'Subtotal (Excl. Impostos)',
                 'sub-total-summary-incl-tax' => 'Subtotal (Incl. Impostos)',
-                'sub-total-summary' => 'Subtotal',
-                'sub-total' => 'Subtotal - :sub_total',
                 'summary-discount' => 'Import de descompte',
                 'summary-tax' => 'Import d\'Impostos',
                 'tax' => 'Import d\'Impostos - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'S\'ha produït un error en eliminar el client',
             'delete-success' => 'Client eliminat amb éxit',
-            'order-pending' => 'Hi ha comandes pendents',
+            'delete-pending-order-error' => 'Aquest client té comandes pendents i no es pot eliminar.',
             'update-success' => 'Client actualitzat amb éxit',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => 'Editar Categories d\'Impostos',
                     ],
 
-                    'can-not-delete' => 'No es poden eliminar les categories assignades a les taxes d\'impostos.',
                     'create-success' => 'Nova Categoria d\'Impostos Creat',
                     'delete-failed' => 'Error en Eliminar la Categoria d\'Impostos',
                     'delete-success' => 'Categoria d\'Impostos Eliminada Correctament',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configureu les credencials de l\'API d\'Ollama.',
+                        'title-info' => 'Configureu els paràmetres de connexió d\'Ollama.',
+                        'url' => 'URL base',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'Activeu i configureu les funcions d\'IA per a la botiga.',
                     'title' => 'Funcions de la botiga',
+
+                    'image-search' => [
+                        'enabled' => 'Activat',
+                        'model' => 'Model',
+                        'title' => 'Cerca d\'imatges amb IA',
+                        'title-info' => 'Utilitza la visió d\'IA per analitzar imatges pujades i extreure paraules clau de cerca de productes a la botiga.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Activat',

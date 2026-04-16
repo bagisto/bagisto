@@ -137,6 +137,7 @@ class EnvironmentManager
         DB::purge();
 
         config([
+            'database.default' => $databaseConnection,
             "database.connections.{$databaseConnection}.host" => $this->getEnvVariable('DB_HOST'),
             "database.connections.{$databaseConnection}.port" => $this->getEnvVariable('DB_PORT'),
             "database.connections.{$databaseConnection}.database" => $this->getEnvVariable('DB_DATABASE'),
@@ -145,7 +146,7 @@ class EnvironmentManager
             "database.connections.{$databaseConnection}.prefix" => $this->getEnvVariable('DB_PREFIX'),
         ]);
 
-        DB::reconnect();
+        DB::reconnect($databaseConnection);
     }
 
     /**

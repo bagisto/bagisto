@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount 每单位 x :qty 数量',
+                'billing-address' => '账单地址',
                 'channel' => '渠道',
-                'customer-email' => '邮箱 - :email',
                 'customer' => '客户',
+                'customer-email' => '邮箱 - :email',
                 'discount' => '折扣金额 - :discount',
                 'email' => '邮箱',
                 'grand-total' => '总计',
@@ -654,25 +655,26 @@ return [
                 'order-id' => '订单ID',
                 'order-information' => '订单信息',
                 'order-status' => '订单状态',
+                'price' => '价格 - :price',
                 'price-excl-tax' => '价格（不含税） - :price',
                 'price-incl-tax' => '价格（含税） - :price',
-                'price' => '价格 - :price',
                 'print' => '打印',
                 'product-image' => '产品图片',
                 'qty' => '数量 - :qty',
+                'send' => '发送',
                 'send-btn' => '发送',
                 'send-duplicate-invoice' => '发送重复发票',
-                'send' => '发送',
+                'shipping-address' => '配送地址',
+                'shipping-and-handling' => '配送和处理',
                 'shipping-and-handling-excl-tax' => '配送和处理（不含税）',
                 'shipping-and-handling-incl-tax' => '配送和处理（含税）',
-                'shipping-and-handling' => '配送和处理',
                 'sku' => 'SKU - :sku',
+                'sub-total' => '小计 - :sub_total',
                 'sub-total-excl-tax' => '小计（不含税） - :sub_total',
                 'sub-total-incl-tax' => '小计（含税） - :sub_total',
+                'sub-total-summary' => '小计',
                 'sub-total-summary-excl-tax' => '小计（不含税）',
                 'sub-total-summary-incl-tax' => '小计（含税）',
-                'sub-total-summary' => '小计',
-                'sub-total' => '小计 - :sub_total',
                 'summary-discount' => '折扣金额',
                 'summary-tax' => '税费金额',
                 'tax' => '税费金额 - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => '删除客户失败',
             'delete-success' => '成功删除客户',
-            'order-pending' => '订单待处理',
+            'delete-pending-order-error' => '该客户有待处理的订单，无法删除。',
             'update-success' => '成功更新客户',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => '编辑税收分类',
                     ],
 
-                    'can-not-delete' => '分配了税率的类别无法删除。',
                     'create-success' => '新税收分类已创建',
                     'delete-failed' => '税收分类删除失败',
                     'delete-success' => '税收分类已成功删除',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => '配置您的 Ollama API 凭证。',
+                        'title-info' => '配置您的 Ollama 连接设置。',
+                        'url' => '基础 URL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => '启用并配置店面的 AI 功能。',
                     'title' => '店面功能',
+
+                    'image-search' => [
+                        'enabled' => '已启用',
+                        'model' => '模型',
+                        'title' => 'AI图片搜索',
+                        'title-info' => '使用AI视觉分析上传的图片并在店面提取产品搜索关键词。',
+                    ],
 
                     'review-translation' => [
                         'enabled' => '已启用',

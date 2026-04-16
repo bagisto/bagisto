@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount Per Unit x :qty Quantity',
+                'billing-address' => 'Billing Address',
                 'channel' => 'Channel',
-                'customer-email' => 'Email - :email',
                 'customer' => 'Customer',
+                'customer-email' => 'Email - :email',
                 'discount' => 'Discount Amount - :discount',
                 'email' => 'Email',
                 'grand-total' => 'Grand Total',
@@ -654,25 +655,26 @@ return [
                 'order-id' => 'Order ID',
                 'order-information' => 'Order Information',
                 'order-status' => 'Order Status',
+                'price' => 'Price - :price',
                 'price-excl-tax' => 'Price (Excl. Tax) - :price',
                 'price-incl-tax' => 'Price (Incl. Tax) - :price',
-                'price' => 'Price - :price',
                 'print' => 'Print',
                 'product-image' => 'Product Image',
                 'qty' => 'Quantity - :qty',
+                'send' => 'Send',
                 'send-btn' => 'Send',
                 'send-duplicate-invoice' => 'Send Duplicate Invoice',
-                'send' => 'Send',
+                'shipping-address' => 'Shipping Address',
+                'shipping-and-handling' => 'Shipping and Handling',
                 'shipping-and-handling-excl-tax' => 'Shipping and Handling (Excl. Tax)',
                 'shipping-and-handling-incl-tax' => 'Shipping and Handling (Incl. Tax)',
-                'shipping-and-handling' => 'Shipping and Handling',
                 'sku' => 'SKU - :sku',
+                'sub-total' => 'Sub Total - :sub_total',
                 'sub-total-excl-tax' => 'Sub Total (Excl. Tax) - :sub_total',
                 'sub-total-incl-tax' => 'Sub Total (Incl. Tax) - :sub_total',
+                'sub-total-summary' => 'Sub Total',
                 'sub-total-summary-excl-tax' => 'Sub Total (Excl. Tax)',
                 'sub-total-summary-incl-tax' => 'Sub Total (Incl. Tax)',
-                'sub-total-summary' => 'Sub Total',
-                'sub-total' => 'Sub Total - :sub_total',
                 'summary-discount' => 'Discount Amount',
                 'summary-tax' => 'Tax Amount',
                 'tax' => 'Tax Amount - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => 'Customer Deleted Failed',
             'delete-success' => 'Customer Deleted Successfully',
-            'order-pending' => 'Orders is Pending',
+            'delete-pending-order-error' => 'This customer has pending orders and cannot be deleted.',
             'update-success' => 'Customer Updated Successfully',
         ],
 
@@ -3442,11 +3444,10 @@ return [
                         'title' => 'Edit Tax Categories',
                     ],
 
-                    'can-not-delete' => 'Tax Rates Assigned Categories cannot be deleted.',
-                    'create-success' => 'New Tax Category Created.',
-                    'delete-failed' => 'Tax Category Deleted Failed',
-                    'delete-success' => 'Tax Category Deleted Successfully.',
-                    'update-success' => 'Tax Category Successfully Updated.',
+                    'create-success' => 'Tax category created successfully.',
+                    'delete-failed' => 'Failed to delete tax category.',
+                    'delete-success' => 'Tax category deleted successfully.',
+                    'update-success' => 'Tax category updated successfully.',
                 ],
             ],
 
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Configure your Ollama API credentials.',
+                        'title-info' => 'Configure your Ollama connection settings.',
+                        'url' => 'Base URL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'Enable and configure AI features for the storefront.',
                     'title' => 'Storefront Features',
+
+                    'image-search' => [
+                        'enabled' => 'Enabled',
+                        'model' => 'Model',
+                        'title' => 'AI Image Search',
+                        'title-info' => 'Use AI vision to analyze uploaded images and extract product search keywords on the storefront.',
+                    ],
 
                     'review-translation' => [
                         'enabled' => 'Enabled',

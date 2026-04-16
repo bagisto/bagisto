@@ -29,6 +29,18 @@ class ProductFlat extends Model implements ProductFlatContract
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'featured' => 'boolean',
+        'new' => 'boolean',
+        'status' => 'boolean',
+        'visible_individually' => 'boolean',
+    ];
+
+    /**
      * Ignorable attributes.
      *
      * @var array

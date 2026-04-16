@@ -223,6 +223,7 @@ return [
                 'nl' => 'الهولندية',
                 'pl' => 'البولندية',
                 'pt_BR' => 'البرتغالية البرازيلية',
+                'ro' => 'الرومانية',
                 'ru' => 'الروسية',
                 'sin' => 'السينهالية',
                 'tr' => 'التركية',
@@ -247,14 +248,6 @@ return [
 
         'shop' => [
             'theme-customizations' => [
-                'all-products' => [
-                    'name' => 'جميع المنتجات',
-
-                    'options' => [
-                        'title' => 'مجموعة الأطفال',
-                    ],
-                ],
-
                 'bold-collections' => [
                     'content' => [
                         'btn-title' => 'عرض المجموعات',
@@ -275,8 +268,8 @@ return [
                     'name' => 'مجموعات بارزة',
                 ],
 
-                'booking-products' => [
-                    'name' => 'منتجات الحجز',
+                'book-tickets' => [
+                    'name' => 'حجز التذاكر',
 
                     'options' => [
                         'title' => 'حجز التذاكر',
@@ -285,14 +278,6 @@ return [
 
                 'categories-collections' => [
                     'name' => 'تصنيفات المجموعات',
-                ],
-
-                'featured-collections' => [
-                    'name' => 'مجموعات مميزة',
-
-                    'options' => [
-                        'title' => 'مجموعات الرجال',
-                    ],
                 ],
 
                 'footer-links' => [
@@ -331,11 +316,19 @@ return [
                     ],
                 ],
 
-                'new-products' => [
-                    'name' => 'منتجات جديدة',
+                'kids-collection' => [
+                    'name' => 'مجموعة الأطفال',
 
                     'options' => [
-                        'title' => 'مجموعات النساء',
+                        'title' => 'مجموعة الأطفال',
+                    ],
+                ],
+
+                'mens-collection' => [
+                    'name' => 'مجموعة الرجال',
+
+                    'options' => [
+                        'title' => 'مجموعة الرجال',
                     ],
                 ],
 
@@ -377,6 +370,14 @@ return [
                     ],
 
                     'name' => 'أفضل المجموعات',
+                ],
+
+                'womens-collection' => [
+                    'name' => 'مجموعة النساء',
+
+                    'options' => [
+                        'title' => 'مجموعة النساء',
+                    ],
                 ],
             ],
         ],
@@ -939,6 +940,7 @@ return [
             ],
 
             'start' => [
+                'language' => 'لغة معالج التثبيت',
                 'locale' => 'اللغة',
                 'main' => 'بداية',
                 'select-locale' => 'اختر اللغة',
@@ -993,6 +995,7 @@ return [
             'persian' => 'الفارسية',
             'polish' => 'البولندية',
             'portuguese' => 'البرتغالية البرازيلية',
+            'romanian' => 'الرومانية',
             'russian' => 'الروسية',
             'sinhala' => 'السنهالية',
             'spanish' => 'الإسبانية',

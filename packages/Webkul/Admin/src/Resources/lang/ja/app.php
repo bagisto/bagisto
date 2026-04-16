@@ -641,9 +641,10 @@ return [
 
             'view' => [
                 'amount-per-unit' => ':amount 単位あたり × :qty 個数',
+                'billing-address' => '請求先住所',
                 'channel' => 'チャネル',
-                'customer-email' => 'メール - :email',
                 'customer' => '顧客',
+                'customer-email' => 'メール - :email',
                 'discount' => '割引額 - :discount',
                 'email' => 'メール',
                 'grand-total' => '総合計',
@@ -654,25 +655,26 @@ return [
                 'order-id' => '注文ID',
                 'order-information' => '注文情報',
                 'order-status' => '注文ステータス',
+                'price' => '価格 - :price',
                 'price-excl-tax' => '価格（税抜き） - :price',
                 'price-incl-tax' => '価格（税込み） - :price',
-                'price' => '価格 - :price',
                 'print' => '印刷',
                 'product-image' => '商品画像',
                 'qty' => '数量 - :qty',
+                'send' => '送信',
                 'send-btn' => '送信',
                 'send-duplicate-invoice' => '複製請求書を送信',
-                'send' => '送信',
+                'shipping-address' => '配送先住所',
+                'shipping-and-handling' => '送料・手数料',
                 'shipping-and-handling-excl-tax' => '送料・手数料（税抜き）',
                 'shipping-and-handling-incl-tax' => '送料・手数料（税込み）',
-                'shipping-and-handling' => '送料・手数料',
                 'sku' => 'SKU - :sku',
+                'sub-total' => '小計 - :sub_total',
                 'sub-total-excl-tax' => '小計（税抜き） - :sub_total',
                 'sub-total-incl-tax' => '小計（税込み） - :sub_total',
+                'sub-total-summary' => '小計',
                 'sub-total-summary-excl-tax' => '小計（税抜き）',
                 'sub-total-summary-incl-tax' => '小計（税込み）',
-                'sub-total-summary' => '小計',
-                'sub-total' => '小計 - :sub_total',
                 'summary-discount' => '割引額',
                 'summary-tax' => '税額',
                 'tax' => '税額 - :tax',
@@ -2236,7 +2238,7 @@ return [
 
             'delete-failed' => '顧客の削除に失敗しました',
             'delete-success' => '顧客が正常に削除されました',
-            'order-pending' => '注文が保留中です',
+            'delete-pending-order-error' => 'この顧客には保留中の注文があり、削除できません。',
             'update-success' => '顧客が正常に更新されました',
         ],
 
@@ -3442,7 +3444,6 @@ return [
                         'title' => '税カテゴリーを編集',
                     ],
 
-                    'can-not-delete' => '税率が割り当てられているカテゴリは削除できません。',
                     'create-success' => '新しい税カテゴリーが作成されました',
                     'delete-failed' => '税カテゴリーの削除に失敗しました',
                     'delete-success' => '税カテゴリーが正常に削除されました',
@@ -4235,7 +4236,8 @@ return [
 
                     'ollama' => [
                         'title' => 'Ollama',
-                        'title-info' => 'Ollama APIの認証情報を設定します。',
+                        'title-info' => 'Ollamaの接続設定を構成します。',
+                        'url' => 'ベースURL',
                     ],
                 ],
 
@@ -4261,6 +4263,13 @@ return [
                 'storefront-features' => [
                     'info' => 'ストアフロントのAI機能を有効にして設定します。',
                     'title' => 'ストアフロント機能',
+
+                    'image-search' => [
+                        'enabled' => '有効',
+                        'model' => 'モデル',
+                        'title' => 'AI画像検索',
+                        'title-info' => 'AIビジョンを使用してアップロードされた画像を分析し、ストアフロントで商品検索キーワードを抽出します。',
+                    ],
 
                     'review-translation' => [
                         'enabled' => '有効',

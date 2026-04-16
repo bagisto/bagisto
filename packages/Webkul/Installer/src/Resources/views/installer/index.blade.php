@@ -55,6 +55,7 @@
             'nl'    => 'dutch',
             'pl'    => 'polish',
             'pt_BR' => 'portuguese',
+            'ro'    => 'romanian',
             'ru'    => 'russian',
             'sin'   => 'sinhala',
             'tr'    => 'turkish',
@@ -344,7 +345,7 @@
                                         <!-- Installer Language -->
                                         <x-installer::form.control-group class="mb-2.5">
                                             <x-installer::form.control-group.label>
-                                                @lang('Installation Wizard language')
+                                                @lang('installer::app.installer.index.start.language')
                                             </x-installer::form.control-group.label>
 
                                             <x-installer::form.control-group.control
@@ -488,12 +489,17 @@
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-connection')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.database-connection')"
+                                        @change="$refs.envDatabase.setFieldValue('db_port', $event.target.value === 'pgsql' ? '5432' : '3306')"
                                     >
                                         <option
                                             value="mysql"
                                             selected
                                         >
                                             @lang('installer::app.installer.index.environment-configuration.mysql')
+                                        </option>
+
+                                        <option value="pgsql">
+                                            PostgreSQL
                                         </option>
                                     </x-installer::form.control-group.control>
 
@@ -700,7 +706,7 @@
                                     tabindex="0"
                                     @click="back"
                                 >
-                                    Back
+                                    @lang('installer::app.installer.index.back')
                                 </div>
 
                                 <button
@@ -1297,13 +1303,9 @@
                         formSubmit(params, { setErrors }) {
                             const stepActions = {
                                 envDatabase: (params, setErrors) => {
-                                    if (params.db_connection === 'mysql') {
-                                        this.completeStep('envDatabase', 'readyForInstallation', 'active', 'complete', setErrors);
+                                    this.completeStep('envDatabase', 'readyForInstallation', 'active', 'complete', setErrors);
 
-                                        this.envData = { ...this.envData, ...params };
-                                    } else {
-                                        setErrors({ 'db_connection': ["Bagisto currently supports MySQL only."] });
-                                    }
+                                    this.envData = { ...this.envData, ...params };
                                 },
 
                                 readyForInstallation: (params, setErrors) => {

@@ -159,35 +159,85 @@ class ImageCacheController extends Controller
      */
     protected function getImagePath(string $filename): string
     {
+        $filename = $this->sanitizeFilename($filename);
+
         $paths = config('imagecache.paths', []);
 
         foreach ($paths as $basePath) {
-            $fullPath = rtrim($basePath, '/').'/'.ltrim($filename, '/');
+            $basePath = realpath(rtrim($basePath, '/'));
 
-            if (file_exists($fullPath)) {
-                return $fullPath;
+            if (! $basePath) {
+                continue;
+            }
+
+            $realPath = realpath($basePath.'/'.$filename);
+
+            if (
+                $realPath
+                && str_starts_with($realPath, $basePath.'/')
+            ) {
+                return $realPath;
             }
         }
 
-        $storagePath = storage_path('app/public/'.$filename);
+        $storageBase = realpath(storage_path('app/public'));
 
-        if (file_exists($storagePath)) {
-            return $storagePath;
+        if ($storageBase) {
+            $realPath = realpath($storageBase.'/'.$filename);
+
+            if (
+                $realPath
+                && str_starts_with($realPath, $storageBase.'/')
+            ) {
+                return $realPath;
+            }
         }
 
-        $publicPath = public_path($filename);
+        $publicBase = realpath(public_path());
 
-        if (file_exists($publicPath)) {
-            return $publicPath;
+        if ($publicBase) {
+            $realPath = realpath($publicBase.'/'.$filename);
+
+            if (
+                $realPath
+                && str_starts_with($realPath, $publicBase.'/')
+            ) {
+                return $realPath;
+            }
         }
 
-        $storagePublicPath = public_path('storage/'.$filename);
+        $storagePublicBase = realpath(public_path('storage'));
 
-        if (file_exists($storagePublicPath)) {
-            return $storagePublicPath;
+        if ($storagePublicBase) {
+            $realPath = realpath($storagePublicBase.'/'.$filename);
+
+            if (
+                $realPath
+                && str_starts_with($realPath, $storagePublicBase.'/')
+            ) {
+                return $realPath;
+            }
         }
 
-        return $storagePath;
+        return storage_path('app/public/'.$filename);
+    }
+
+    /**
+     * Sanitize the filename to prevent path traversal.
+     */
+    protected function sanitizeFilename(string $filename): string
+    {
+        do {
+            $sanitized = str_replace(['../', '..\\', '/..', '\\..'], '', $filename);
+
+            if ($sanitized === $filename) {
+                break;
+            }
+
+            $filename = $sanitized;
+        } while (true);
+
+        return ltrim($filename, '/\\');
     }
 
     /**

@@ -88,7 +88,7 @@ class Order
                     && $ruleCustomer->times_used >= $rule->usage_per_customer
                 ) {
                     throw new CouponUsageLimitExceededException(
-                        trans('shop::app.checkout.cart.coupon.usage-limit-exceeded')
+                        trans('shop::app.checkout.coupon.usage-limit-exceeded')
                     );
                 }
 
@@ -136,7 +136,7 @@ class Order
             && $coupon->times_used >= $coupon->usage_limit
         ) {
             throw new CouponUsageLimitExceededException(
-                trans('shop::app.checkout.cart.coupon.usage-limit-exceeded')
+                trans('shop::app.checkout.coupon.usage-limit-exceeded')
             );
         }
 
@@ -159,7 +159,7 @@ class Order
                 && $couponUsage->times_used >= $coupon->usage_per_customer
             ) {
                 throw new CouponUsageLimitExceededException(
-                    trans('shop::app.checkout.cart.coupon.usage-limit-exceeded')
+                    trans('shop::app.checkout.coupon.usage-limit-exceeded')
                 );
             }
         }

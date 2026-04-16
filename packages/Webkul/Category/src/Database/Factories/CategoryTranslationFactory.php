@@ -19,9 +19,12 @@ class CategoryTranslationFactory extends Factory
      */
     public function definition(): array
     {
+        $slug = $this->faker->unique()->slug();
+
         return [
-            'name' => $this->faker->word,
-            'slug' => $this->faker->unique()->slug,
+            'name' => $this->faker->word(),
+            'slug' => $slug,
+            'url_path' => $slug,
             'description' => $this->faker->sentence(),
             'locale' => 'en',
             'locale_id' => 1,

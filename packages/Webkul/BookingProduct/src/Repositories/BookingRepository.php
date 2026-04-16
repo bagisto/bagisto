@@ -92,7 +92,7 @@ class BookingRepository extends Repository
             'addresses.country as country',
             'addresses.postcode as postcode',
         )
-            ->addSelect(DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'))
+            ->addSelect(DB::raw(db_grammar()->concat($tablePrefix.'orders.customer_first_name', "' '", $tablePrefix.'orders.customer_last_name').' as full_name'))
             ->leftJoin('orders', 'bookings.order_id', '=', 'orders.id')
             ->leftJoin('addresses', 'bookings.order_id', '=', 'addresses.order_id')
             ->whereBetween('bookings.from', $dateRange)

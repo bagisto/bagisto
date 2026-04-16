@@ -84,6 +84,17 @@ class Order extends Model implements OrderContract
     ];
 
     /**
+     * Attribute casting.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'total_item_count' => 'integer',
+        'total_qty_ordered' => 'integer',
+        'is_guest' => 'boolean',
+    ];
+
+    /**
      * Status label.
      *
      * @var array

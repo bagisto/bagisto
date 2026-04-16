@@ -45,7 +45,7 @@ class AttributeRepository extends Repository
      */
     public function create(array $data)
     {
-        $data = $this->validateUserInput($data);
+        $data = $this->applyAttributeTypeRules($data);
 
         $options = $data['options'] ?? [];
 
@@ -77,7 +77,7 @@ class AttributeRepository extends Repository
      */
     public function update(array $data, $id)
     {
-        $data = $this->validateUserInput($data);
+        $data = $this->applyAttributeTypeRules($data);
 
         $attribute = $this->find($id);
 
@@ -117,15 +117,20 @@ class AttributeRepository extends Repository
     }
 
     /**
-     * Validate user input.
+     * Apply attribute type rules to the given data.
+     *
+     * Configurable attributes cannot vary per channel or locale. Attribute
+     * types that don't support filtering are forced to non-filterable.
+     * Option-based types don't use per-locale values.
      *
      * @param  array  $data
      * @return array
      */
-    public function validateUserInput($data)
+    public function applyAttributeTypeRules($data)
     {
-        if (isset($data['is_configurable'])) {
-            $data['value_per_channel'] = $data['value_per_locale'] = 0;
+        if (! empty($data['is_configurable'])) {
+            $data['value_per_channel'] = false;
+            $data['value_per_locale'] = false;
         }
 
         if (! in_array($data['type'], [
@@ -134,7 +139,7 @@ class AttributeRepository extends Repository
             AttributeTypeEnum::MULTISELECT->value,
             AttributeTypeEnum::BOOLEAN->value,
         ])) {
-            $data['is_filterable'] = 0;
+            $data['is_filterable'] = false;
         }
 
         if (in_array($data['type'], [

@@ -58,7 +58,9 @@ class AttributeFamily extends Model implements AttributeFamilyContract
      */
     public function attribute_groups(): HasMany
     {
-        return $this->hasMany(AttributeGroupProxy::modelClass())->orderBy('position');
+        return $this->hasMany(AttributeGroupProxy::modelClass())
+            ->orderBy('column')
+            ->orderBy('position');
     }
 
     /**
