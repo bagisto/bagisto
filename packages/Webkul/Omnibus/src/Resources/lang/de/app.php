@@ -4,12 +4,12 @@ return [
     'admin' => [
         'system' => [
             'omnibus' => 'Omnibus',
-            'omnibus-info' => 'Omnibus directive configuration',
-            'is-enabled' => 'Enable Omnibus',
+            'omnibus-info' => 'Konfiguration der Omnibus-Richtlinie',
+            'is-enabled' => 'Omnibus aktivieren',
         ],
     ],
 
     'shop' => [
-        'price-info' => 'Lowest price 30 days prior to the discount:',
+        'price-info' => 'Niedrigster Preis 30 Tage vor der Ermäßigung:',
     ],
 ];

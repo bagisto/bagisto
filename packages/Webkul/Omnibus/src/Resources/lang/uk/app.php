@@ -3,13 +3,13 @@
 return [
     'admin' => [
         'system' => [
-            'omnibus' => 'Omnibus',
-            'omnibus-info' => 'Omnibus directive configuration',
-            'is-enabled' => 'Enable Omnibus',
+            'omnibus' => 'Омнібус',
+            'omnibus-info' => 'Конфігурація директиви Омнібус',
+            'is-enabled' => 'Увімкнути Омнібус',
         ],
     ],
 
     'shop' => [
-        'price-info' => 'Lowest price 30 days prior to the discount:',
+        'price-info' => 'Найнижча ціна за 30 днів до знижки:',
     ],
 ];

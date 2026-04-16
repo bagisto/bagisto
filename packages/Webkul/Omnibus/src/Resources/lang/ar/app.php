@@ -3,13 +3,13 @@
 return [
     'admin' => [
         'system' => [
-            'omnibus' => 'Omnibus',
-            'omnibus-info' => 'Omnibus directive configuration',
-            'is-enabled' => 'Enable Omnibus',
+            'omnibus' => 'أومنيبوس',
+            'omnibus-info' => 'تكوين توجيه أومنيبوس',
+            'is-enabled' => 'تمكين أومنيبوس',
         ],
     ],
 
     'shop' => [
-        'price-info' => 'Lowest price 30 days prior to the discount:',
+        'price-info' => 'أقل سعر خلال 30 يومًا قبل الخصم:',
     ],
 ];
