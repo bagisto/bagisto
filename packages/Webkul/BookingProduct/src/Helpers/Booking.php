@@ -629,16 +629,24 @@ class Booking
 
         $tableSlot = $bookingProduct->table_slot;
 
-        $attributes = [
-            [
+        $attributes = [];
+
+        if ($tableSlot->price_type == 'table') {
+            $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.charged-per'),
                 'option_id'      => 0,
                 'option_label'   => trans('shop::app.products.booking.cart.' . $tableSlot->price_type),
-            ], [
+            ];
+
+            $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.guest-limit'),
                 'option_id'      => 0,
                 'option_label'   => $tableSlot->guest_limit,
-            ], [
+            ];
+        }
+
+        $attributes = array_merge($attributes, [
+            [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
                 'option_id'      => 0,
                 'option_label'   => Carbon::createFromTimestamp($timestamps[0])->isoFormat('Do MMM, YYYY h:mm A'),
@@ -647,7 +655,7 @@ class Booking
                 'option_id'      => 0,
                 'option_label'   => Carbon::createFromTimestamp($timestamps[1])->isoFormat('Do MMM, YYYY h:mm A'),
             ],
-        ];
+        ]);
 
         if ($data['booking']['note'] !== '') {
             $attributes[] = [
