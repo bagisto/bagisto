@@ -92,20 +92,40 @@ class Booking
     {
         $slotsByDays = [];
 
-        $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]->findOneByField('booking_product_id', $bookingProduct->id);
+        $bookingProductSlot = $this->typeRepositories[$bookingProduct->type]
+            ->findOneByField('booking_product_id', $bookingProduct->id);
 
         $availableDays = $this->getAvailableWeekDays($bookingProduct);
+
+        $minDuration = $bookingProduct->appointment_slot->duration;
 
         foreach ($this->daysOfWeek as $index => $isOpen) {
             $slots = [];
 
             if ($isOpen) {
-                $slots = $bookingProductSlot->same_slot_all_days ? ($bookingProductSlot->slots ?? []) : ($bookingProductSlot->slots[$index] ?? []);
+                $slots = $bookingProductSlot->same_slot_all_days
+                    ? ($bookingProductSlot->slots ?? [])
+                    : ($bookingProductSlot->slots[$index] ?? []);
             }
+
+            $convertedSlots = isset($availableDays[$index])
+                ? $this->convert24To12Hours($slots)
+                : [];
+
+            $filteredSlots = array_values(array_filter($convertedSlots, function ($slot) use ($minDuration) {
+                if (empty($slot['from']) || empty($slot['to'])) {
+                    return false;
+                }
+
+                $from = strtotime($slot['from']);
+                $to = strtotime($slot['to']);
+
+                return ($to - $from) >= ($minDuration * 60);
+            }));
 
             $slotsByDays[] = [
                 'name' => trans($this->daysOfWeek[$index]),
-                'slots' => in_array($this->daysOfWeek[$index], $availableDays) ? $this->convert24To12Hours($slots) : [],
+                'slots' => $filteredSlots,
             ];
         }
 
