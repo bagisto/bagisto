@@ -105,7 +105,7 @@ class Booking
 
             $slotsByDays[] = [
                 'name' => trans($this->daysOfWeek[$index]),
-                'slots' => isset($availableDays[$index]) ? $this->convert24To12Hours($slots) : [],
+                'slots' => in_array($this->daysOfWeek[$index], $availableDays) ? $this->convert24To12Hours($slots) : [],
             ];
         }
 
