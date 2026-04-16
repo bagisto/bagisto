@@ -1,5 +1,10 @@
 # CHANGELOG for v2.3.x
 
+# Unreleased
+
+* #11232 [fixed] - Guest Limit and Booking Slot Not Visible in Cart for Table Booking Product.
+
+
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
 ## **v2.3.17 (13th of April 2026)** - *Release*
