@@ -227,8 +227,8 @@ class Booking extends AbstractType
         if (! $typeHelper->isSlotAvailable($products)) {
             $messageKey = match ($bookingProduct->type) {
                 'rental' => 'shop::app.products.booking.cart.integrity.rental_unavailable',
-                'event'  => 'shop::app.products.booking.cart.integrity.event.sold_out',
-                default  => 'shop::app.products.booking.cart.integrity.inventory_warning',
+                'event' => 'shop::app.products.booking.cart.integrity.event.sold_out',
+                default => 'shop::app.products.booking.cart.integrity.inventory_warning',
             };
 
             throw new InsufficientProductInventoryException(trans($messageKey));
