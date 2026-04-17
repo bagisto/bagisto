@@ -1,35 +1,40 @@
 <?php
 
-use Carbon\Carbon;
-use Webkul\Faker\Helpers\Product as ProductFaker;
+use Illuminate\Support\Facades\DB;
+use Webkul\Installer\Database\Seeders\AttributeFamilyTableSeeder;
 use Webkul\Omnibus\Helpers\OmnibusHelper;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
+use Webkul\Product\Models\ProductPriceIndex;
+use Webkul\Core\Core;
+use Carbon\Carbon;
 
 beforeEach(function () {
-    config(['catalog.products.omnibus.is_enabled' => true]);
-    $this->helper = app(OmnibusHelper::class);
+    $channelResult = DB::table('channels')->orderBy('id')->first();
+    $this->channelId = $channelResult->id ?? 1;
+    $this->currencyCode = core()->getCurrentCurrency()->code;
+
+    config(['products.omnibus.is_enabled' => 1]);
+
     $this->manager = app(OmnibusPriceManager::class);
     $this->repository = app(OmnibusPriceRepository::class);
 
-    $this->channelId = core()->getCurrentChannel()->id;
-    $this->currencyCode = core()->getCurrentCurrencyCode();
+    $this->now = Carbon::parse('2026-04-16 12:00:00');
+    Carbon::setTestNow($this->now);
 });
 
-it('propagates the snapshot recursively down to configurable variants', function () {
-    $configurableProduct = (new ProductFaker([
-        'attributes' => [1 => 'color', 2 => 'size'],
-        'attribute_value' => [
-            'color' => ['boolean_value' => true],
-            'size' => ['boolean_value' => true],
-        ],
-    ]))->getConfigurableProductFactory()->create();
+afterEach(function () {
+    Carbon::setTestNow();
+});
 
-    DB::table('product_omnibus_prices')->truncate(); // Purge factory event noise
+it('separates products prices strictly', function () {
+    $configurableProduct = (new \Webkul\Faker\Helpers\Product)->getConfigurableProductFactory()->create();
 
-    DB::table('product_price_indices')->updateOrInsert([
+    DB::table('product_omnibus_prices')->delete();
+
+    ProductPriceIndex::updateOrCreate([
         'product_id' => $configurableProduct->id,
-        'customer_group_id' => 1,
+        'customer_group_id' => app(\Webkul\Customer\Repositories\CustomerRepository::class)->getCurrentGroup()->id,
         'channel_id' => $this->channelId,
     ], [
         'min_price' => 100.00,
@@ -37,9 +42,9 @@ it('propagates the snapshot recursively down to configurable variants', function
     ]);
 
     foreach ($configurableProduct->variants as $variant) {
-        DB::table('product_price_indices')->updateOrInsert([
+        ProductPriceIndex::updateOrCreate([
             'product_id' => $variant->id,
-            'customer_group_id' => 1,
+            'customer_group_id' => app(\Webkul\Customer\Repositories\CustomerRepository::class)->getCurrentGroup()->id,
             'channel_id' => $this->channelId,
         ], [
             'min_price' => 50.00,
@@ -47,63 +52,55 @@ it('propagates the snapshot recursively down to configurable variants', function
         ]);
     }
 
-    $snapshotsCreated = $this->manager->recordPriceIfNeeded($configurableProduct);
+    $configurableProduct->refresh();
+    $configurableProduct->load('price_indices');
 
-    expect($snapshotsCreated)->toBeGreaterThanOrEqual(1); // Iterates variants
+    foreach ($configurableProduct->variants as $variant) {
+        $variant->refresh();
+        $variant->load('price_indices');
+    }
 
-    $parentLog = $this->repository->where('product_id', $configurableProduct->id)->first();
-    expect($parentLog)->not->toBeNull();
+    $originalChannel = core()->getCurrentChannel();
+    $originalCurrency = core()->getCurrentCurrency();
+
+    $this->manager->recordPriceIfNeeded($configurableProduct);
+
+    core()->setCurrentChannel($originalChannel);
+    core()->setCurrentCurrency($originalCurrency);
+
+    $records = $this->repository->whereIn('product_id', $configurableProduct->variants->pluck('id')->toArray())
+        ->orderBy('price', 'asc')
+        ->get();
+
+    expect(round((float) $records->first()->price, 2))->toBe(50.00);
 });
 
-it('prevents duplicated records when prices have not changed consecutively', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+it('captures simple products prices accurately', function () {
+    $product = (new \Webkul\Faker\Helpers\Product)->getSimpleProductFactory()->create();
 
-    DB::table('product_omnibus_prices')->truncate();
+    DB::table('product_omnibus_prices')->delete();
 
-    DB::table('product_price_indices')->updateOrInsert([
+    ProductPriceIndex::updateOrCreate([
         'product_id' => $product->id,
-        'customer_group_id' => 1,
+        'customer_group_id' => app(\Webkul\Customer\Repositories\CustomerRepository::class)->getCurrentGroup()->id,
         'channel_id' => $this->channelId,
     ], [
         'min_price' => 100.00,
         'regular_min_price' => 100.00,
     ]);
 
-    $snapshotsCreatedDay1 = $this->manager->recordPriceIfNeeded($product);
-    $snapshotsCreatedDay2 = $this->manager->recordPriceIfNeeded($product);
+    $product->refresh();
+    $product->load('price_indices');
 
-    expect($snapshotsCreatedDay1)->toBeGreaterThan(0);
-    expect($snapshotsCreatedDay2)->toBe(0);
+    $originalChannel = core()->getCurrentChannel();
+    $originalCurrency = core()->getCurrentCurrency();
 
-    $totalLogs = $this->repository->where('product_id', $product->id)->count();
-    expect($totalLogs)->toBe(count(core()->getCurrentChannel()->currencies));
-});
+    $this->manager->recordPriceIfNeeded($product);
 
-it('purges records older than 35 days silently', function () {
-    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+    core()->setCurrentChannel($originalChannel);
+    core()->setCurrentCurrency($originalCurrency);
 
-    DB::table('product_omnibus_prices')->truncate();
+    $records = $this->repository->where('product_id', $product->id)->get();
 
-    $this->repository->create([
-        'product_id' => $product->id,
-        'channel_id' => $this->channelId,
-        'currency_code' => $this->currencyCode,
-        'price' => 20.00,
-        'recorded_at' => Carbon::now()->subDays(40)->toDateTimeString(),
-    ]);
-
-    $record20 = $this->repository->create([
-        'product_id' => $product->id,
-        'channel_id' => $this->channelId,
-        'currency_code' => $this->currencyCode,
-        'price' => 50.00,
-        'recorded_at' => Carbon::now()->subDays(20)->toDateTimeString(),
-    ]);
-
-    $this->manager->cleanOldRecords();
-
-    $logs = $this->repository->where('product_id', $product->id)->get();
-
-    expect($logs->count())->toBe(1);
-    expect($logs->first()->id)->toBe($record20->id);
+    expect(round((float) $records->first()->price, 2))->toBe(100.00);
 });

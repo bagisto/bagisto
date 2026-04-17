@@ -53,7 +53,7 @@ class SnapshotPrices extends Command
             ->whereHas('attribute_values', function ($q) {
                 $q->join('attributes', 'product_attribute_values.attribute_id', '=', 'attributes.id')
                     ->where('attributes.code', 'status')
-                    ->where('product_attribute_values.boolean_value', 1);
+                    ->where('product_attribute_values.boolean_value', true);
             });
         $snapshotCount = 0;
 

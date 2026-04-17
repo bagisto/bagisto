@@ -29,6 +29,15 @@ class OmnibusPrice extends Model implements OmnibusPriceContract
         'recorded_at',
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'recorded_at' => 'datetime',
+    ];
+
     public function product()
     {
         return $this->belongsTo(ProductProxy::modelClass());

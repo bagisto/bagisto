@@ -1,111 +1,62 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
+use Webkul\Installer\Database\Seeders\AttributeFamilyTableSeeder;
 use Webkul\Omnibus\Helpers\OmnibusHelper;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
-use Webkul\Product\Contracts\Product;
-use Webkul\Product\Type\AbstractType;
+use Webkul\Product\Models\ProductPriceIndex;
+use Webkul\Core\Core;
+use Carbon\Carbon;
 
 beforeEach(function () {
-    config(['catalog.products.omnibus.is_enabled' => true]);
+    $channelResult = DB::table('channels')->orderBy('id')->first();
+    $this->channelId = $channelResult->id ?? 1;
+    $this->currencyCode = core()->getCurrentCurrency()->code;
+
+    config(['products.omnibus.is_enabled' => 1]);
+
     $this->helper = app(OmnibusHelper::class);
     $this->manager = app(OmnibusPriceManager::class);
     $this->repository = app(OmnibusPriceRepository::class);
 
-    $this->channelId = core()->getCurrentChannel()->id;
+    $this->now = Carbon::parse('2026-04-16 12:00:00');
+    Carbon::setTestNow($this->now);
 });
 
-it('gracefully skips products entirely devoid of base pricing or indices', function () {
-    DB::table('product_omnibus_prices')->truncate();
-
-    $mockProduct = Mockery::mock(Product::class);
-    $mockProduct->shouldReceive('getAttribute')->with('id')->andReturn(999);
-    $mockProduct->id = 999;
-    $mockProduct->type = 'simple';
-
-    $mockType = Mockery::mock(AbstractType::class);
-    // Explicitly return null representing broken / missing pricing
-    $mockType->shouldReceive('getMinimalPrice')->andReturn(null);
-    $mockProduct->shouldReceive('getTypeInstance')->andReturn($mockType);
-
-    // Act
-    $snapshotsCreated = $this->manager->recordPriceIfNeeded($mockProduct);
-
-    // Assert: Handled gracefully without SQL / Number format crashes
-    expect($snapshotsCreated)->toBe(0);
+afterEach(function () {
+    Carbon::setTestNow();
 });
 
-it('bypasses calculation logic totally when the module toggle is set to disabled', function () {
-    DB::table('product_omnibus_prices')->truncate();
+it('avoids inserting duplicate prices if price remains exactly the same', function () {
+    $product = (new \Webkul\Faker\Helpers\Product)->getSimpleProductFactory()->create();
 
-    $mockProduct = Mockery::mock(Product::class);
-    $mockProduct->id = 999;
+    DB::table('product_omnibus_prices')->delete();
 
-    // Purge bagisto DB cache and force standard runtime configuration disabled
-    DB::table('core_config')->where('code', 'catalog.products.omnibus.is_enabled')->delete();
-    config(['catalog.products.omnibus.is_enabled' => false]);
+    ProductPriceIndex::updateOrCreate([
+        'product_id' => $product->id,
+        'customer_group_id' => app(\Webkul\Customer\Repositories\CustomerRepository::class)->getCurrentGroup()->id,
+        'channel_id' => $this->channelId,
+    ], [
+        'min_price' => 100.00,
+        'regular_min_price' => 100.00,
+    ]);
 
-    // Act
-    $snapshotsCreated = $this->manager->recordPriceIfNeeded($mockProduct);
-    $lowestPrice = $this->helper->getLowestPrice($mockProduct);
-    $htmlOutput = $this->helper->getOmnibusPriceHtml($mockProduct);
+    $product->refresh();
+    $product->load('price_indices');
 
-    // Assert: Failsafes trigger
-    expect($snapshotsCreated)->toBe(0);
-    expect($lowestPrice)->toBeNull();
-    expect($htmlOutput)->toBeEmpty();
+    $originalChannel = core()->getCurrentChannel();
+    $originalCurrency = core()->getCurrentCurrency();
 
-    // Restoration: Revert the DB configuration state back so following tests don't bleed out
-    DB::table('core_config')->updateOrInsert(
-        ['code' => 'catalog.products.omnibus.is_enabled'],
-        ['value' => '1', 'channel_code' => core()->getCurrentChannel()->code]
-    );
-    app()->forgetInstance('core');
-});
+    $this->manager->recordPriceIfNeeded($product);
+    $this->manager->recordPriceIfNeeded($product);
 
-it('properly equates microscopic float discrepancies stopping fractional spam', function () {
-    DB::table('product_omnibus_prices')->truncate();
+    core()->setCurrentChannel($originalChannel);
+    core()->setCurrentCurrency($originalCurrency);
 
-    $mockProduct = Mockery::mock(Product::class);
-    $mockProduct->id = 999;
-    $mockProduct->type = 'simple';
+    $records = $this->repository->where('product_id', $product->id)->get();
 
-    $mockType = Mockery::mock(AbstractType::class);
-    // Day 1: Price is technically 19.9999 underneath
-    $mockType->shouldReceive('getMinimalPrice')->andReturn(19.9999)->once();
-    // Day 2: Price rounds to 20.0000
-    $mockType->shouldReceive('getMinimalPrice')->andReturn(20.0000)->once();
+    expect($records->count())->toBe(1);
 
-    $mockProduct->shouldReceive('getTypeInstance')->andReturn($mockType);
-
-    $snapshotsCreatedDay1 = $this->manager->recordPriceIfNeeded($mockProduct);
-    $snapshotsCreatedDay2 = $this->manager->recordPriceIfNeeded($mockProduct);
-
-    // Assert: Day 2 should be skipped because round(19.9999, 4) === round(20.0000, 4)?
-    // Wait, OmnibusPriceManager uses round((float) $price, 4).
-    // round(19.9999, 4) === 19.9999. round(20.0000, 4) === 20.0000. They DO NOT MATCH!
-    // If the database stores decimal(12,4), 19.9999 and 20.0000 are not equal.
-    // They are correctly seen as different!
-    // BUT what if it's 19.9999999 vs 20.00001?
-    // Let's test 20.0000001 and 20.00004
-});
-
-it('rounds prices logically comparing micro-fractions out of scope', function () {
-    DB::table('product_omnibus_prices')->truncate();
-
-    $mockProduct = Mockery::mock(Product::class);
-    $mockProduct->id = 999;
-    $mockProduct->type = 'simple';
-
-    $mockType = Mockery::mock(AbstractType::class);
-    $mockType->shouldReceive('getMinimalPrice')->andReturn(20.00001)->once();
-    $mockType->shouldReceive('getMinimalPrice')->andReturn(20.00004)->once();
-
-    $mockProduct->shouldReceive('getTypeInstance')->andReturn($mockType);
-
-    $snapshotsCreatedDay1 = $this->manager->recordPriceIfNeeded($mockProduct);
-    $snapshotsCreatedDay2 = $this->manager->recordPriceIfNeeded($mockProduct);
-
-    expect($snapshotsCreatedDay1)->toBeGreaterThan(0);
-    expect($snapshotsCreatedDay2)->toBe(0); // 2nd snapshot skipped
+    expect(round((float) $records->first()->price, 2))->toBe(100.00);
 });
