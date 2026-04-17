@@ -2,9 +2,9 @@
 
 namespace Webkul\Omnibus\Repositories;
 
+use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\Omnibus\Contracts\OmnibusPrice;
-use Carbon\Carbon;
 
 class OmnibusPriceRepository extends Repository
 {

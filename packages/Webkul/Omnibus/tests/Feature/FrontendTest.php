@@ -1,13 +1,13 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Faker\Helpers\Product as ProductFaker;
-use Webkul\Omnibus\Helpers\OmnibusHelper;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
+use Webkul\Product\Models\ProductPriceIndex;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Core\Core;
-use Carbon\Carbon;
 
 use function Pest\Laravel\get;
 
@@ -38,7 +38,7 @@ it('renders the omnibus directive string correctly for simple products', functio
         'recorded_at' => $this->now->copy()->subDays(10),
     ]);
 
-    app(\Webkul\Product\Repositories\ProductRepository::class)->update([
+    app(ProductRepository::class)->update([
         'channel' => core()->getCurrentChannel()->code,
         'locale' => core()->getCurrentLocale()->code,
         'status' => 1,
@@ -51,9 +51,9 @@ it('renders the omnibus directive string correctly for simple products', functio
 
     $product->refresh();
 
-    \Webkul\Product\Models\ProductPriceIndex::updateOrCreate([
+    ProductPriceIndex::updateOrCreate([
         'product_id' => $product->id,
-        'customer_group_id' => app(\Webkul\Customer\Repositories\CustomerRepository::class)->getCurrentGroup()->id ?? 1,
+        'customer_group_id' => app(CustomerRepository::class)->getCurrentGroup()->id ?? 1,
         'channel_id' => $this->channelId,
     ], [
         'min_price' => 80.00,

@@ -9,8 +9,7 @@ class OmnibusHelper
 {
     public function __construct(
         protected OmnibusPriceRepository $omnibusPriceRepository
-    ) {
-    }
+    ) {}
 
     public function getLowestPrice(Product $product): ?float
     {
@@ -22,7 +21,7 @@ class OmnibusHelper
         $currencyCode = core()->getCurrentCurrencyCode();
         $promoStartDate = $product->special_price_from;
 
-        if (!$promoStartDate) {
+        if (! $promoStartDate) {
             $latestSnapshot = $this->omnibusPriceRepository->getLatestByProductIdAndChannel(
                 $product->id,
                 $channelId,
@@ -67,11 +66,11 @@ class OmnibusHelper
 
     public function getOmnibusPriceHtml(Product $product): string
     {
-        if (!core()->getConfigData('catalog.products.omnibus.is_enabled')) {
+        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
             return '';
         }
 
-        if (!$product->getTypeInstance()->haveDiscount()) {
+        if (! $product->getTypeInstance()->haveDiscount()) {
             return '';
         }
 

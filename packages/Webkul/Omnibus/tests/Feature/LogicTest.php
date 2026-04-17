@@ -1,13 +1,12 @@
 <?php
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use Webkul\Installer\Database\Seeders\AttributeFamilyTableSeeder;
-use Webkul\Omnibus\Helpers\OmnibusHelper;
+use Webkul\Customer\Repositories\CustomerRepository;
+use Webkul\Faker\Helpers\Product;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
 use Webkul\Product\Models\ProductPriceIndex;
-use Webkul\Core\Core;
-use Carbon\Carbon;
 
 beforeEach(function () {
     $channelResult = DB::table('channels')->orderBy('id')->first();
@@ -28,13 +27,13 @@ afterEach(function () {
 });
 
 it('calculates the lowest price correctly for the past 30 days', function () {
-    $product = (new \Webkul\Faker\Helpers\Product)->getSimpleProductFactory()->create();
+    $product = (new Product)->getSimpleProductFactory()->create();
 
     DB::table('product_omnibus_prices')->delete();
 
     ProductPriceIndex::updateOrCreate([
         'product_id' => $product->id,
-        'customer_group_id' => app(\Webkul\Customer\Repositories\CustomerRepository::class)->getCurrentGroup()->id,
+        'customer_group_id' => app(CustomerRepository::class)->getCurrentGroup()->id,
         'channel_id' => $this->channelId,
     ], [
         'min_price' => 150.00,
