@@ -1097,6 +1097,18 @@ return [
                         'qty' => 'Cantidad',
                         'title' => 'Tipo de Reserva',
 
+                        'allow-cancellation' => [
+                            'no' => 'No',
+                            'title' => 'Permitir cancelación de reservas',
+                            'yes' => 'Sí',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'No',
+                            'title' => 'Permitir franjas horarias superpuestas',
+                            'yes' => 'Sí',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'No',
                             'title' => 'Disponible Cada Semana',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => 'Tiempo de Descanso entre Slots (Minutos)',
                             'close' => 'Cerrar',
                             'description' => 'Información de la Reserva',
-                            'description-info' => 'De acuerdo con las franjas horarias, se creará y se mostrará la duración del tiempo. Será única en todos los slots y será visible en la tienda en línea',
+                            'description-info' => 'Defina las franjas horarias disponibles para esta reserva. Cada franja representa una ventana de tiempo reservable que se muestra a los clientes en la tienda. Las franjas no deben superponerse a menos que se permita explícitamente.',
                             'edit' => 'Editar',
                             'many' => 'Muchas Reservas Para Un Día',
                             'one' => 'Una Reserva Para Muchos Días',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => 'Agregar Slots',
-                            'description-info' => 'De acuerdo con las franjas horarias, se creará y se mostrará la duración del tiempo. Será única en todos los slots y será visible en la tienda en línea',
+                            'description-info' => 'Defina las franjas horarias disponibles para esta reserva. Las ventanas de tiempo reservables se generarán según la duración de la franja y el tiempo de descanso, y se mostrarán a los clientes en la tienda.',
                             'save' => 'Guardar',
                             'title' => 'Duración del Tiempo de los Slots',
                             'unavailable' => 'No Disponible',

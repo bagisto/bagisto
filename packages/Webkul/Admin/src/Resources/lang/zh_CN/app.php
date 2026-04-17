@@ -1097,6 +1097,18 @@ return [
                         'qty' => '数量',
                         'title' => '预订类型',
 
+                        'allow-cancellation' => [
+                            'no' => '否',
+                            'title' => '允许取消预订',
+                            'yes' => '是',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => '否',
+                            'title' => '允许重叠时间段',
+                            'yes' => '是',
+                        ],
+
                         'available-every-week' => [
                             'no' => '否',
                             'title' => '每周可用',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => '每个时段之间的休息时间（分钟）',
                             'close' => '关闭',
                             'description' => '预订信息',
-                            'description-info' => '时间持续时间将根据时段创建并显示。它将在所有时段中是唯一的，并在商店前台可见。',
+                            'description-info' => '为此预订定义可用时间段。每个时间段代表一个在店面向客户展示的可预订时间窗口。除非明确允许，否则时间段不应重叠。',
                             'edit' => '编辑',
                             'many' => '一天多次预订',
                             'one' => '多天一次预订',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => '添加时段',
-                            'description-info' => '时间持续时间将根据时段创建并显示。它将在所有时段中是唯一的，并在商店前台可见。',
+                            'description-info' => '为此预订定义可用时间段。可预订的时间窗口将根据时间段持续时间和休息时间生成，并在店面向客户展示。',
                             'save' => '保存',
                             'title' => '时段时间持续时间',
                             'unavailable' => '不可用',

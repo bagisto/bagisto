@@ -1097,6 +1097,18 @@ return [
                         'qty' => 'Miktar',
                         'title' => 'Rezervasyon Türü',
 
+                        'allow-cancellation' => [
+                            'no' => 'Hayır',
+                            'title' => 'Rezervasyon iptaline izin ver',
+                            'yes' => 'Evet',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'Hayır',
+                            'title' => 'Çakışan zaman dilimlerine izin ver',
+                            'yes' => 'Evet',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'Hayır',
                             'title' => 'Her Hafta Mevcut',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => 'Slotlar Arası Mola Süresi (Dakika)',
                             'close' => 'Kapat',
                             'description' => 'Rezervasyon Bilgisi',
-                            'description-info' => 'Süre, slotlara göre oluşturulacak ve görüntülenecektir. Tüm slotlar arasında benzersiz olacak ve mağaza vitrinde görünecektir',
+                            'description-info' => 'Bu rezervasyon için mevcut zaman dilimlerini tanımlayın. Her dilim, mağazada müşterilere gösterilen rezerve edilebilir bir zaman penceresini temsil eder. Açıkça izin verilmedikçe dilimler çakışmamalıdır.',
                             'edit' => 'Düzenle',
                             'many' => 'Bir Gün İçin Birden Fazla Rezervasyon',
                             'one' => 'Birden Fazla Gün İçin Bir Rezervasyon',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => 'Slot Ekle',
-                            'description-info' => 'Süre, slotlara göre oluşturulacak ve görüntülenecektir. Tüm slotlar arasında benzersiz olacak ve mağaza vitrinde görünecektir',
+                            'description-info' => 'Bu rezervasyon için mevcut zaman dilimlerini tanımlayın. Rezerve edilebilir zaman pencereleri, dilim süresi ve mola süresine göre oluşturulacak ve mağazada müşterilere gösterilecektir.',
                             'save' => 'Kaydet',
                             'title' => 'Slot Zaman Süresi',
                             'unavailable' => 'Mevcut Değil',

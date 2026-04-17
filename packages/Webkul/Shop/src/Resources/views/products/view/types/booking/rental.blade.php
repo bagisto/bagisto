@@ -261,7 +261,7 @@
 
             data() {
                 return {
-                    renting_type: "{{ $bookingProduct->rental_slot->renting_type }}",
+                    renting_type: "{{ $bookingProduct->rental_slot?->renting_type ?? 'daily' }}",
 
                     sub_renting_type: 'hourly',
 

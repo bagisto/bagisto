@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => '预订您的票',
                         'title' => '活动于 :',
+                        'total-price' => '总价',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => '预订从',
                 'booking-till' => '预订到',
+                'charged-per' => '收费方式',
                 'daily' => '按天计算',
                 'event-from' => '活动从',
                 'event-ticket' => '活动票',
                 'event-till' => '活动到',
+                'guest-limit' => '每桌客人限制',
                 'hourly' => '按小时计算',
 
                 'integrity' => [
                     'event' => [
                         'expired' => '此活动已过期。',
+                        'sold_out' => '此活动的门票已售罄。',
                     ],
 
                     'missing_options' => '此产品缺少选项。',
                     'inventory_warning' => '请求的数量不可用，请稍后再试。',
+                    'rental_unavailable' => '此租赁产品在所选日期不可用。',
                     'select_hourly_duration' => '选择一小时的时段。',
                 ],
 
+                'per-guest' => '每位客人',
+                'per-table' => '每桌',
                 'rent-from' => '租赁从',
                 'rent-till' => '租赁到',
                 'rent-type' => '租赁类型',

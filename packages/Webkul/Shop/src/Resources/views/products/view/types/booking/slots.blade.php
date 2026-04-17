@@ -83,51 +83,38 @@
                 }
             },
 
-            created() {
-                this.minAllowedDate = this.calculateMinDate();
-            },
-
             computed: {
                 preventDays() {
                     return this.bookingProduct?.table_slot?.prevent_scheduling_before || 0;
                 },
 
-                minAllowedDate() {
-                    const today = new Date();
-
-                    today.setDate(today.getDate() + parseInt(this.preventDays, 10));
-                    
-                    return today.toISOString().split('T')[0];
-                },
-
                 disabledDates() {
-                    const dates = [];
-                    
-                    const today = new Date();
-                    
-                    const endDate = new Date(this.minAllowedDate);
+                    let preventDays = parseInt(this.preventDays) || 0;
 
-                    while (today < endDate) {
-                        dates.push(today.toISOString().split('T')[0]);
-                        
-                        today.setDate(today.getDate() + 1);
+                    if (preventDays <= 0) {
+                        return [];
+                    }
+
+                    const dates = [];
+                    const today = new Date();
+
+                    for (let i = 0; i < preventDays; i++) {
+                        const d = new Date(today);
+
+                        d.setDate(today.getDate() + i);
+
+                        const year = d.getFullYear();
+                        const month = String(d.getMonth() + 1).padStart(2, '0');
+                        const day = String(d.getDate()).padStart(2, '0');
+
+                        dates.push(`${year}-${month}-${day}`);
                     }
 
                     return dates;
-                }
+                },
             },
 
             methods: {
-                calculateMinDate() {
-                    let today = new Date();
-                    
-                    let preventDays = parseInt(this.preventDays) || 0;
-                    
-                    today.setDate(today.getDate() + preventDays);
-
-                    return today.toISOString().split('T')[0]; 
-                },
-        
                 getAvailableSlots(params) {
                     let date = params.target.value;
 
@@ -144,7 +131,7 @@
                                 setErrors(error.response.data.errors);
                             }
                         });
-                }
+                },
             }
         });
     </script>

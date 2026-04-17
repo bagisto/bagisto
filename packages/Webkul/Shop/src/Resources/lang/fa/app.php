@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'رزرو بلیط شما',
                         'title' => 'رویداد در :',
+                        'total-price' => 'قیمت کل',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => 'رزرو از',
                 'booking-till' => 'رزرو تا',
+                'charged-per' => 'هزینه به ازای',
                 'daily' => 'به صورت روزانه',
                 'event-from' => 'رویداد از',
                 'event-ticket' => 'بلیط رویداد',
                 'event-till' => 'رویداد تا',
+                'guest-limit' => 'محدودیت مهمان در هر میز',
                 'hourly' => 'به صورت ساعتی',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'این رویداد منقضی شده است.',
+                        'sold_out' => 'بلیت‌های این رویداد تمام شده است.',
                     ],
 
                     'missing_options' => 'گزینه‌ها برای این محصول وجود ندارند.',
                     'inventory_warning' => 'تعداد درخواستی موجود نیست، لطفاً بعداً دوباره امتحان کنید.',
+                    'rental_unavailable' => 'این محصول اجاره‌ای برای تاریخ‌های انتخاب شده موجود نیست.',
                     'select_hourly_duration' => 'یک مدت زمان ساعتی انتخاب کنید.',
                 ],
 
+                'per-guest' => 'به ازای هر مهمان',
+                'per-table' => 'به ازای هر میز',
                 'rent-from' => 'اجاره از',
                 'rent-till' => 'اجاره تا',
                 'rent-type' => 'نوع اجاره',

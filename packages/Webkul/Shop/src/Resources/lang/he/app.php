@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'הזמן כרטיס',
                         'title' => 'אירוע ב-:',
+                        'total-price' => 'מחיר כולל',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => 'הזמנה מ',
                 'booking-till' => 'הזמנה עד',
+                'charged-per' => 'חיוב לפי',
                 'daily' => 'בסיס יומי',
                 'event-from' => 'אירוע מ',
                 'event-ticket' => 'כרטיס אירוע',
                 'event-till' => 'אירוע עד',
+                'guest-limit' => 'מגבלת אורחים לשולחן',
                 'hourly' => 'בסיס שעתי',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'האירוע הזה פג תוקף.',
+                        'sold_out' => 'הכרטיסים לאירוע זה אזלו.',
                     ],
 
                     'missing_options' => 'אפשרויות חסרות עבור מוצר זה.',
                     'inventory_warning' => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
+                    'rental_unavailable' => 'מוצר השכרה זה אינו זמין לתאריכים שנבחרו.',
                     'select_hourly_duration' => 'בחר משבצת זמן של שעה אחת.',
                 ],
 
+                'per-guest' => 'לאורח',
+                'per-table' => 'לשולחן',
                 'rent-from' => 'השכרה מ',
                 'rent-till' => 'השכרה עד',
                 'rent-type' => 'סוג השכרה',

@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'チケットを予約する',
                         'title' => 'イベント：',
+                        'total-price' => '合計価格',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => '予約開始',
                 'booking-till' => '予約終了',
+                'charged-per' => '課金単位',
                 'daily' => '日単位',
                 'event-from' => 'イベント開始',
                 'event-ticket' => 'イベントチケット',
                 'event-till' => 'イベント終了',
+                'guest-limit' => 'テーブルあたりのゲスト上限',
                 'hourly' => '時間単位',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'このイベントは終了しました。',
+                        'sold_out' => 'このイベントのチケットは完売しました。',
                     ],
 
                     'missing_options' => 'この製品にはオプションがありません。',
                     'inventory_warning' => '要求された数量は利用できません。後でやり直してください。',
+                    'rental_unavailable' => 'このレンタル商品は選択された日付では利用できません。',
                     'select_hourly_duration' => '1時間のスロット期間を選択してください。',
                 ],
 
+                'per-guest' => 'ゲストあたり',
+                'per-table' => 'テーブルあたり',
                 'rent-from' => 'レンタル開始',
                 'rent-till' => 'レンタル終了',
                 'rent-type' => 'レンタルタイプ',

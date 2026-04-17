@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Zarezerwuj bilet',
                         'title' => 'Wydarzenie dnia :',
+                        'total-price' => 'Cena całkowita',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => 'Rezerwacja od',
                 'booking-till' => 'Rezerwacja do',
+                'charged-per' => 'Opłata za',
                 'daily' => 'Na dzień',
                 'event-from' => 'Wydarzenie od',
                 'event-ticket' => 'Bilet na wydarzenie',
                 'event-till' => 'Wydarzenie do',
+                'guest-limit' => 'Limit gości na stolik',
                 'hourly' => 'Na godzinę',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'To wydarzenie wygasło.',
+                        'sold_out' => 'Bilety na to wydarzenie zostały wyprzedane.',
                     ],
 
                     'missing_options' => 'Brakujące opcje dla tego produktu.',
                     'inventory_warning' => 'Żądana ilość nie jest dostępna, prosimy spróbować ponownie później.',
+                    'rental_unavailable' => 'Ten produkt do wynajęcia nie jest dostępny w wybranych terminach.',
                     'select_hourly_duration' => 'Wybierz czas trwania jednej godziny.',
                 ],
 
+                'per-guest' => 'Za gościa',
+                'per-table' => 'Za stolik',
                 'rent-from' => 'Wynajem od',
                 'rent-till' => 'Wynajem do',
                 'rent-type' => 'Typ wynajmu',

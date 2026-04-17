@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Reserva la teva entrada',
                         'title' => 'Esdeveniment el :',
+                        'total-price' => 'Preu total',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => 'Reserva des de',
                 'booking-till' => 'Reserva fins a',
+                'charged-per' => 'Cobrat per',
                 'daily' => 'Diari',
                 'event-from' => 'Esdeveniment des de',
                 'event-ticket' => 'Entrada per a l\'esdeveniment',
                 'event-till' => 'Esdeveniment fins a',
+                'guest-limit' => 'Límit de convidats per taula',
                 'hourly' => 'Per hores',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'Aquest esdeveniment ha expirat.',
+                        'sold_out' => 'Les entrades per a aquest esdeveniment estan esgotades.',
                     ],
 
                     'missing_options' => 'Falten opcions per a aquest producte.',
                     'inventory_warning' => 'La quantitat sol·licitada no està disponible, si us plau intenta-ho més tard.',
+                    'rental_unavailable' => 'Aquest producte de lloguer no està disponible per a les dates seleccionades.',
                     'select_hourly_duration' => 'Selecciona una durada d\'una hora.',
                 ],
 
+                'per-guest' => 'Per convidat',
+                'per-table' => 'Per taula',
                 'rent-from' => 'Lloguer des de',
                 'rent-till' => 'Lloguer fins a',
                 'rent-type' => 'Tipus de lloguer',

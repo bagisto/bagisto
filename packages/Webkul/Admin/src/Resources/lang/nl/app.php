@@ -1097,6 +1097,18 @@ return [
                         'qty' => 'Aantal',
                         'title' => 'Boekingstype',
 
+                        'allow-cancellation' => [
+                            'no' => 'Nee',
+                            'title' => 'Annulering van boeking toestaan',
+                            'yes' => 'Ja',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'Nee',
+                            'title' => 'Overlappende tijdsloten toestaan',
+                            'yes' => 'Ja',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'Nee',
                             'title' => 'Elke Week Beschikbaar',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => 'Pauzeduur tussen Tijden (Minuten)',
                             'close' => 'Sluiten',
                             'description' => 'Boekingsinformatie',
-                            'description-info' => 'De tijdsduur wordt aangemaakt en weergegeven volgens de slots. Deze zal uniek zijn voor alle slots en zichtbaar zijn in de etalage.',
+                            'description-info' => 'Definieer de beschikbare tijdsloten voor deze boeking. Elk slot vertegenwoordigt een boekbaar tijdvenster dat aan klanten in de winkel wordt getoond. Slots mogen niet overlappen tenzij dit expliciet is toegestaan.',
                             'edit' => 'Bewerken',
                             'many' => 'Meerdere Boekingen Voor Eén Dag',
                             'one' => 'Eén Boeking Voor Meerdere Dagen',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => 'Tijden Toevoegen',
-                            'description-info' => 'De tijdsduur wordt aangemaakt en weergegeven volgens de slots. Deze zal uniek zijn voor alle slots en zichtbaar zijn in de etalage.',
+                            'description-info' => 'Definieer de beschikbare tijdsloten voor deze boeking. Boekbare tijdvensters worden gegenereerd op basis van de slotduur en pauzetijd, en worden aan klanten in de winkel getoond.',
                             'save' => 'Opslaan',
                             'title' => 'Tijden Tijdsduur',
                             'unavailable' => 'Niet Beschikbaar',

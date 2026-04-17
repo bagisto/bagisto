@@ -1097,6 +1097,18 @@ return [
                         'qty' => 'Ilość',
                         'title' => 'Typ rezerwacji',
 
+                        'allow-cancellation' => [
+                            'no' => 'Nie',
+                            'title' => 'Zezwalaj na anulowanie rezerwacji',
+                            'yes' => 'Tak',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'Nie',
+                            'title' => 'Zezwalaj na nakładające się przedziały czasowe',
+                            'yes' => 'Tak',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'Nie',
                             'title' => 'Dostępne co tydzień',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => 'Czas przerwy między slotami (minuty)',
                             'close' => 'Zamknij',
                             'description' => 'Informacje o rezerwacji',
-                            'description-info' => 'Czas trwania zostanie utworzony i wyświetlony zgodnie ze slotami. Będzie unikalny dla wszystkich slotów i widoczny na witrynie sklepowej',
+                            'description-info' => 'Zdefiniuj dostępne przedziały czasowe dla tej rezerwacji. Każdy przedział reprezentuje okno czasowe dostępne do rezerwacji, widoczne dla klientów w sklepie. Przedziały nie powinny się nakładać, chyba że zostanie to wyraźnie dozwolone.',
                             'edit' => 'Edytuj',
                             'many' => 'Wiele rezerwacji na jeden dzień',
                             'one' => 'Jedna rezerwacja na wiele dni',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => 'Dodaj sloty',
-                            'description-info' => 'Czas trwania zostanie utworzony i wyświetlony zgodnie ze slotami. Będzie unikalny dla wszystkich slotów i widoczny na witrynie sklepowej',
+                            'description-info' => 'Zdefiniuj dostępne przedziały czasowe dla tej rezerwacji. Okna czasowe dostępne do rezerwacji zostaną wygenerowane na podstawie czasu trwania przedziału i czasu przerwy, i będą wyświetlane klientom w sklepie.',
                             'save' => 'Zapisz',
                             'title' => 'Czas trwania slotów',
                             'unavailable' => 'Niedostępne',

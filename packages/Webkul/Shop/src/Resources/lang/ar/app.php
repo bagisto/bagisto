@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'احجز تذكرتك',
                         'title' => 'الحدث في :',
+                        'total-price' => 'السعر الإجمالي',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => 'الحجز من',
                 'booking-till' => 'الحجز حتى',
+                'charged-per' => 'محاسب لكل',
                 'daily' => 'على أساس يومي',
                 'event-from' => 'الحدث من',
                 'event-ticket' => 'تذكرة الحدث',
                 'event-till' => 'الحدث حتى',
+                'guest-limit' => 'حد الضيوف لكل طاولة',
                 'hourly' => 'على أساس الساعة',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'لقد انتهت صلاحية هذا الحدث.',
+                        'sold_out' => 'تم بيع جميع تذاكر هذا الحدث.',
                     ],
 
                     'missing_options' => 'الخيارات مفقودة لهذا المنتج.',
                     'inventory_warning' => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
+                    'rental_unavailable' => 'هذا المنتج الإيجاري غير متاح للتواريخ المحددة.',
                     'select_hourly_duration' => 'اختر مدة الفتحة الزمنية بساعة واحدة.',
                 ],
 
+                'per-guest' => 'لكل ضيف',
+                'per-table' => 'لكل طاولة',
                 'rent-from' => 'الإيجار من',
                 'rent-till' => 'الإيجار حتى',
                 'rent-type' => 'نوع الإيجار',

@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Prenota il tuo biglietto',
                         'title' => 'Evento il :',
+                        'total-price' => 'Prezzo totale',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => 'Prenotazione Da',
                 'booking-till' => 'Prenotazione Fino',
+                'charged-per' => 'Addebitato per',
                 'daily' => 'Base Giornaliera',
                 'event-from' => 'Evento Da',
                 'event-ticket' => 'Biglietto Evento',
                 'event-till' => 'Evento Fino',
+                'guest-limit' => 'Limite ospiti per tavolo',
                 'hourly' => 'Base Oraria',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'Questo evento è scaduto.',
+                        'sold_out' => 'I biglietti per questo evento sono esauriti.',
                     ],
 
                     'missing_options' => 'Mancano opzioni per questo prodotto.',
                     'inventory_warning' => 'La quantità richiesta non è disponibile, riprova più tardi.',
+                    'rental_unavailable' => 'Questo prodotto a noleggio non è disponibile per le date selezionate.',
                     'select_hourly_duration' => 'Seleziona una durata di slot di un\'ora.',
                 ],
 
+                'per-guest' => 'Per ospite',
+                'per-table' => 'Per tavolo',
                 'rent-from' => 'Noleggio Da',
                 'rent-till' => 'Noleggio Fino',
                 'rent-type' => 'Tipo di Noleggio',

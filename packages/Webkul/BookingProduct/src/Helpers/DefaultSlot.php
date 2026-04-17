@@ -37,11 +37,11 @@ class DefaultSlot extends Booking
         $requestedDate = Carbon::createFromTimeString($date.' 00:00:00');
 
         $availableFrom = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-            ? Carbon::createFromTimeString($bookingProduct->available_from)
+            ? Carbon::parse($bookingProduct->available_from)->startOfDay()
             : Carbon::now()->copy()->startOfDay();
 
-        $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_from
-            ? Carbon::createFromTimeString($bookingProduct->available_to)
+        $availableTo = ! $bookingProduct->available_every_week && $bookingProduct->available_to
+            ? Carbon::parse($bookingProduct->available_to)->endOfDay()
             : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
         if (
@@ -65,22 +65,42 @@ class DefaultSlot extends Booking
     {
         $slots = [];
 
-        foreach ($bookingProductSlot->slots as $key => $timeDuration) {
-            if ($requestedDate->dayOfWeek != $timeDuration['from_day']) {
+        foreach ($bookingProductSlot->slots as $timeDuration) {
+            $fromDayIndex = (int) $timeDuration['from_day'];
+            $toDayIndex = (int) $timeDuration['to_day'];
+            $currentDay = $requestedDate->dayOfWeek;
+
+            $inRange = $fromDayIndex <= $toDayIndex
+                ? ($currentDay >= $fromDayIndex && $currentDay <= $toDayIndex)
+                : ($currentDay >= $fromDayIndex || $currentDay <= $toDayIndex);
+
+            if (! $inRange) {
                 continue;
             }
 
-            $startDate = (clone $requestedDate)->modify('this '.$this->daysOfWeek[$timeDuration['from_day']]);
+            $dayDiff = $fromDayIndex <= $currentDay
+                ? $currentDay - $fromDayIndex
+                : 7 - $fromDayIndex + $currentDay;
 
-            $endDate = (clone $requestedDate)->modify('this '.$this->daysOfWeek[$timeDuration['to_day']]);
+            $startDate = (clone $requestedDate)->subDays($dayDiff);
+
+            $endDayDiff = $fromDayIndex <= $toDayIndex
+                ? $toDayIndex - $fromDayIndex
+                : 7 - $fromDayIndex + $toDayIndex;
+
+            $endDate = (clone $startDate)->addDays($endDayDiff);
 
             $startDate = Carbon::createFromTimeString($startDate->format('Y-m-d').' '.$timeDuration['from'].':00');
 
             $endDate = Carbon::createFromTimeString($endDate->format('Y-m-d').' '.$timeDuration['to'].':00');
 
+            if ($endDate <= Carbon::now()) {
+                continue;
+            }
+
             $slots[] = [
-                'from' => $startDate->format('h:i A'),
-                'to' => $endDate->format('h:i A'),
+                'from' => $startDate->format('D, d M h:i A'),
+                'to' => $endDate->format('D, d M h:i A'),
                 'timestamp' => $startDate->getTimestamp().'-'.$endDate->getTimestamp(),
             ];
         }

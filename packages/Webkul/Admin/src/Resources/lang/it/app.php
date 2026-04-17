@@ -1097,6 +1097,18 @@ return [
                         'qty' => 'Quantità',
                         'title' => 'Tipo di Prenotazione',
 
+                        'allow-cancellation' => [
+                            'no' => 'No',
+                            'title' => 'Consenti cancellazione prenotazione',
+                            'yes' => 'Sì',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'No',
+                            'title' => 'Consenti fasce orarie sovrapposte',
+                            'yes' => 'Sì',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'No',
                             'title' => 'Disponibile Ogni Settimana',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => 'Durata della Pausa tra gli Slot (Minuti)',
                             'close' => 'Chiudi',
                             'description' => 'Informazioni sulla Prenotazione',
-                            'description-info' => 'La durata verrà creata e visualizzata in base agli slot. Sarà unica per tutti gli slot e visibile nella vetrina del negozio.',
+                            'description-info' => 'Definisci le fasce orarie disponibili per questa prenotazione. Ogni fascia rappresenta una finestra temporale prenotabile mostrata ai clienti nel negozio. Le fasce non devono sovrapporsi a meno che non sia esplicitamente consentito.',
                             'edit' => 'Modifica',
                             'many' => 'Molte Prenotazioni per un Giorno',
                             'one' => 'Una Prenotazione per Molti Giorni',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => 'Aggiungi Slot',
-                            'description-info' => 'La durata verrà creata e visualizzata in base agli slot. Sarà unica per tutti gli slot e visibile nella vetrina del negozio.',
+                            'description-info' => 'Definisci le fasce orarie disponibili per questa prenotazione. Le finestre temporali prenotabili verranno generate in base alla durata della fascia e al tempo di pausa, e mostrate ai clienti nel negozio.',
                             'save' => 'Salva',
                             'title' => 'Durata del Tempo degli Slot',
                             'unavailable' => 'Non Disponibile',

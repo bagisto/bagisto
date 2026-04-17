@@ -1097,6 +1097,18 @@ return [
                         'qty' => 'Menge',
                         'title' => 'Buchungstyp',
 
+                        'allow-cancellation' => [
+                            'no' => 'Nein',
+                            'title' => 'Buchungsstornierung erlauben',
+                            'yes' => 'Ja',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'Nein',
+                            'title' => 'Überlappende Zeitfenster erlauben',
+                            'yes' => 'Ja',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'Nein',
                             'title' => 'Jede Woche verfügbar',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => 'Pausenzeit zwischen Slots (Minuten)',
                             'close' => 'Schließen',
                             'description' => 'Buchungsinformationen',
-                            'description-info' => 'Die Zeitdauer wird gemäß den Slots erstellt und angezeigt. Sie wird über alle Slots hinweg einzigartig sein und im Storefront sichtbar sein.',
+                            'description-info' => 'Definieren Sie die verfügbaren Zeitfenster für diese Buchung. Jedes Zeitfenster stellt ein buchbares Zeitfenster dar, das den Kunden im Shop angezeigt wird. Zeitfenster dürfen sich nicht überschneiden, es sei denn, dies ist ausdrücklich erlaubt.',
                             'edit' => 'Bearbeiten',
                             'many' => 'Viele Buchungen für einen Tag',
                             'one' => 'Eine Buchung für viele Tage',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => 'Slots hinzufügen',
-                            'description-info' => 'Die Zeitdauer wird gemäß den Slots erstellt und angezeigt. Sie wird über alle Slots hinweg einzigartig sein und im Storefront sichtbar sein.',
+                            'description-info' => 'Definieren Sie die verfügbaren Zeitfenster für diese Buchung. Buchbare Zeitfenster werden basierend auf der Zeitfensterdauer und der Pausenzeit generiert und den Kunden im Shop angezeigt.',
                             'save' => 'Speichern',
                             'title' => 'Slots Zeitdauer',
                             'unavailable' => 'Nicht verfügbar',

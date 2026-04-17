@@ -736,6 +736,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Buchen Sie Ihr Ticket',
                         'title' => 'Veranstaltung am :',
+                        'total-price' => 'Gesamtpreis',
                     ],
 
                     'rental' => [
@@ -823,22 +824,28 @@ return [
             'cart' => [
                 'booking-from' => 'Buchung von',
                 'booking-till' => 'Buchung bis',
+                'charged-per' => 'Berechnet pro',
                 'daily' => 'Tagesbasis',
                 'event-from' => 'Veranstaltung von',
                 'event-ticket' => 'Veranstaltungsticket',
                 'event-till' => 'Veranstaltung bis',
+                'guest-limit' => 'Gästelimit pro Tisch',
                 'hourly' => 'Stundenbasis',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'Diese Veranstaltung ist abgelaufen.',
+                        'sold_out' => 'Die Tickets für diese Veranstaltung sind ausverkauft.',
                     ],
 
                     'missing_options' => 'Optionen fehlen für dieses Produkt.',
                     'inventory_warning' => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
+                    'rental_unavailable' => 'Dieses Mietprodukt ist für die ausgewählten Daten nicht verfügbar.',
                     'select_hourly_duration' => 'Wählen Sie eine Slot-Dauer von einer Stunde.',
                 ],
 
+                'per-guest' => 'Pro Gast',
+                'per-table' => 'Pro Tisch',
                 'rent-from' => 'Mieten von',
                 'rent-till' => 'Mieten bis',
                 'rent-type' => 'Miettyp',

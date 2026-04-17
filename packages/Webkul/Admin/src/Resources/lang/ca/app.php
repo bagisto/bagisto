@@ -1097,6 +1097,18 @@ return [
                         'qty' => 'Quantitat',
                         'title' => 'Tipus de Reserva',
 
+                        'allow-cancellation' => [
+                            'no' => 'No',
+                            'title' => 'Permetre la cancel·lació de reserves',
+                            'yes' => 'Sí',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'No',
+                            'title' => 'Permetre franges horàries sobreposades',
+                            'yes' => 'Sí',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'No',
                             'title' => 'Disponible Cada Setmana',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => 'Temps de Descans entre Franges (Mins)',
                             'close' => 'Tancar',
                             'description' => 'Informació de la Reserva',
-                            'description-info' => 'Segons les franges horàries, es crearà i es mostrarà la durada del temps. Serà única a totes les franges i es mostrarà a la botiga en línia.',
+                            'description-info' => 'Definiu les franges horàries disponibles per a aquesta reserva. Cada franja representa una finestra de temps reservable que es mostra als clients a la botiga. Les franges no s\'han de sobreposar tret que s\'autoritzi explícitament.',
                             'edit' => 'Editar',
                             'many' => 'Moltes Reserves per a Un Dia',
                             'one' => 'Una Reserva per a Molts Dies',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => 'Afegir Franges',
-                            'description-info' => 'Segons les franges horàries, es crearà i es mostrarà la durada del temps. Serà única a totes les franges i es mostrarà a la botiga en línia.',
+                            'description-info' => 'Definiu les franges horàries disponibles per a aquesta reserva. Les finestres de temps reservables es generaran en funció de la durada de la franja i el temps de descans, i es mostraran als clients a la botiga.',
                             'save' => 'Desar',
                             'title' => 'Durada de les Franges',
                             'unavailable' => 'No Disponible',

@@ -30,6 +30,7 @@ class BookingProductDefaultSlot extends Model implements BookingProductDefaultSl
         'duration',
         'break_time',
         'slots',
+        'allow_slot_overlap',
         'booking_product_id',
     ];
 

@@ -1097,6 +1097,18 @@ return [
                         'qty' => 'Qty',
                         'title' => 'Booking Type',
 
+                        'allow-cancellation' => [
+                            'no' => 'No',
+                            'title' => 'Allow Booking Cancellation',
+                            'yes' => 'Yes',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'No',
+                            'title' => 'Allow Overlapping Time Slots',
+                            'yes' => 'Yes',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'No',
                             'title' => 'Available Every Week',
@@ -1119,7 +1131,7 @@ return [
                             'break-duration' => 'Break Time b/w Slots (Mins)',
                             'close' => 'Close',
                             'description' => 'Booking Information',
-                            'description-info' => 'According to slots the time duration will be created and visible. And The time duration will be created and displayed according to the slots. It will be unique across all slots and visible on the storefront.',
+                            'description-info' => 'Define the available time slots for this booking. Each slot represents a bookable time window shown to customers on the storefront. Slots must not overlap unless explicitly allowed.',
                             'edit' => 'Edit',
                             'many' => 'Many Bookings For One Days',
                             'one' => 'One Booking For Many Days',
@@ -1208,7 +1220,7 @@ return [
 
                         'slots' => [
                             'add' => 'Add Slots',
-                            'description-info' => 'According to slots the time duration will be created and visible. And The time duration will be created and displayed according to the slots. It will be unique across all slots and visible on the storefront.',
+                            'description-info' => 'Define the available time slots for this booking. Bookable time windows will be generated based on the slot duration and break time, and displayed to customers on the storefront.',
                             'save' => 'Save',
                             'title' => 'Slots Time Duration',
                             'unavailable' => 'Unavailable',
