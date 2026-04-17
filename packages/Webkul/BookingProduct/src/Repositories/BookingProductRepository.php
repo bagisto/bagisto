@@ -217,7 +217,10 @@ class BookingProductRepository extends Repository
 
             $to = Carbon::createFromTimeString($timeInterval['to'])->getTimestamp();
 
-            if ($from > $to) {
+            $isCrossDaySlot = isset($timeInterval['from_day'], $timeInterval['to_day'])
+                && $timeInterval['from_day'] != $timeInterval['to_day'];
+
+            if ($from > $to && ! $isCrossDaySlot) {
                 continue;
             }
 
