@@ -631,13 +631,14 @@ class Booking
 
         $attributes = [];
 
-        if ($tableSlot->price_type == 'table') {
-            $attributes[] = [
+
+        $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.charged-per'),
                 'option_id'      => 0,
                 'option_label'   => trans('shop::app.products.booking.cart.' . $tableSlot->price_type),
             ];
 
+        if ($tableSlot->price_type == 'table') {
             $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.guest-limit'),
                 'option_id'      => 0,
