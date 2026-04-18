@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Akun Anda memerlukan persetujuan admin untuk aktivasi.',
             'page-title' => 'Masuk Pelanggan',
             'password' => 'Kata Sandi',
+            'resend-verification' => 'Kirim Ulang Email Verifikasi',
             'show-password' => 'Tampilkan Kata Sandi',
             'title' => 'Masuk',
             'verify-first' => 'Harap verifikasi akun email Anda terlebih dahulu.',

@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Tu activación requiere la aprobación del administrador.',
             'page-title' => 'Inicio de Sesión del Cliente',
             'password' => 'Contraseña',
+            'resend-verification' => 'Reenviar correo de verificación',
             'show-password' => 'Mostrar Contraseña',
             'title' => 'Iniciar Sesión',
             'verify-first' => 'Verifica primero tu cuenta de correo electrónico.',

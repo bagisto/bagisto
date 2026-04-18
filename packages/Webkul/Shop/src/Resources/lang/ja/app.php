@@ -41,6 +41,7 @@ return [
             'not-activated' => 'アクティベーションは管理者の承認が必要です',
             'page-title' => '顧客ログイン',
             'password' => 'パスワード',
+            'resend-verification' => '確認メールを再送信',
             'show-password' => 'パスワードを表示',
             'title' => 'サインイン',
             'verify-first' => 'まずメールアカウントを確認してください。',

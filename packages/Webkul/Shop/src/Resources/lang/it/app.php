@@ -41,6 +41,7 @@ return [
             'not-activated' => 'La tua attivazione richiede l’approvazione dell’amministratore',
             'page-title' => 'Accesso Cliente',
             'password' => 'Password',
+            'resend-verification' => 'Reinvia email di verifica',
             'show-password' => 'Mostra Password',
             'title' => 'Accedi',
             'verify-first' => 'Verifica prima il tuo account email.',

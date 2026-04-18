@@ -41,6 +41,7 @@ return [
             'not-activated' => "Votre activation nécessite l'approbation de l'administrateur",
             'page-title' => 'Connexion client',
             'password' => 'Mot de passe',
+            'resend-verification' => 'Renvoyer l\'e-mail de vérification',
             'show-password' => 'Afficher le mot de passe',
             'title' => 'Se connecter',
             'verify-first' => 'Vérifiez d\'abord votre compte e-mail.',

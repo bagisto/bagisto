@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Ihre Aktivierung erfordert die Zustimmung des Administrators',
             'page-title' => 'Kundenanmeldung',
             'password' => 'Passwort',
+            'resend-verification' => 'Bestätigungs-E-Mail erneut senden',
             'show-password' => 'Passwort anzeigen',
             'title' => 'Anmelden',
             'verify-first' => 'Bitte verifizieren Sie zuerst Ihr E-Mail-Konto.',

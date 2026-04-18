@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Twoja aktywacja oczekuje na zatwierdzenie administratora',
             'page-title' => 'Logowanie klienta',
             'password' => 'Hasło',
+            'resend-verification' => 'Wyślij ponownie e-mail weryfikacyjny',
             'show-password' => 'Pokaż hasło',
             'title' => 'Zaloguj się',
             'verify-first' => 'Najpierw zweryfikuj swoje konto e-mail.',
