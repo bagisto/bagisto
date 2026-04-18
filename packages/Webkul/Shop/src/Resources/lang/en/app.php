@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Your activation seeks admin approval',
             'page-title' => 'Customer Login',
             'password' => 'Password',
+            'resend-verification' => 'Resend Verification Email',
             'show-password' => 'Show Password',
             'title' => 'Sign In',
             'verify-first' => 'Verify your email account first.',

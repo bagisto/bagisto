@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- #11258 [security] - Fixed user enumeration vulnerability (CWE-204) in the customer resend-verification endpoint where a missing null-check leaked email existence via differential HTTP responses. Added rate limiting on the route.
+
 - #11236 [fixed] - Fixed an issue with incorrect slot visibility on the product page for table booking products when the selected weekday or date was out of range.
 
 - #11235 [fixed] - Fixed an issue causing incorrect slot visibility based on selected day and date in appointment booking.
