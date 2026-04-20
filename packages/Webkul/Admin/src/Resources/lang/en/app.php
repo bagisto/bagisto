@@ -392,6 +392,7 @@ return [
                 'cancel' => 'Cancel',
                 'cancel-msg' => 'Are your sure you want to cancel this order',
                 'cancel-success' => 'Order cancelled successfully',
+                'reorder-customer-deleted' => 'Cannot reorder because the customer account has been deleted.',
                 'canceled' => 'Canceled',
                 'channel' => 'Channel',
                 'closed' => 'Closed',
