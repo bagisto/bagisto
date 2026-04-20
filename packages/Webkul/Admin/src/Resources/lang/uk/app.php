@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Увімкнути поділ у Facebook?',
                         'enable-share-email' => 'Увімкнути поділ у Email?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Омнібус',
+                        'title-info' => 'Конфігурація директиви Омнібус',
+                        'enable' => 'Увімкнути Омнібус',
+                    ],
                 ],
 
                 'rich-snippets' => [

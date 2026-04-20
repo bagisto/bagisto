@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => '在Facebook中启用分享？',
                         'enable-share-email' => '在电子邮件中启用分享？',
                     ],
+
+                    'omnibus' => [
+                        'title' => '综合指令 (Omnibus)',
+                        'title-info' => '综合指令配置',
+                        'enable' => '启用综合指令',
+                    ],
                 ],
 
                 'rich-snippets' => [

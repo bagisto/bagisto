@@ -1130,6 +1130,20 @@ return [
             ],
         ],
     ], [
+        'key' => 'catalog.products.omnibus',
+        'name' => 'admin::app.configuration.index.catalog.products.omnibus.title',
+        'info' => 'admin::app.configuration.index.catalog.products.omnibus.title-info',
+        'sort' => 11,
+        'fields' => [
+            [
+                'name' => 'is_enabled',
+                'title' => 'admin::app.configuration.index.catalog.products.omnibus.enable',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
         'key' => 'catalog.rich_snippets',
         'name' => 'admin::app.configuration.index.catalog.rich-snippets.title',
         'info' => 'admin::app.configuration.index.catalog.rich-snippets.info',

@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Aktifkan Berbagi di Facebook?',
                         'enable-share-email' => 'Aktifkan Berbagi di Email?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus',
+                        'title-info' => 'Konfigurasi direktif Omnibus',
+                        'enable' => 'Aktifkan Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

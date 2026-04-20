@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'فعالسازی اشتراک گذاری در فیسبوک؟',
                         'enable-share-email' => 'فعالسازی اشتراک گذاری در ایمیل؟',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus',
+                        'title-info' => 'Omnibus directive configuration',
+                        'enable' => 'Enable Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

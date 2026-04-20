@@ -16,11 +16,8 @@ class OmnibusServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'omnibus');
+        
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'omnibus');
-
-        $this->publishes([
-            __DIR__.'/../Config/system.php' => config_path('system.php'),
-        ]);
 
         $this->app->booted(function () {
             $schedule = $this->app->make(Schedule::class);
@@ -35,8 +32,6 @@ class OmnibusServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->registerConfig();
-
         $this->app->register(EventServiceProvider::class);
 
         if ($this->app->runningInConsole()) {
@@ -44,18 +39,5 @@ class OmnibusServiceProvider extends ServiceProvider
                 SnapshotPrices::class,
             ]);
         }
-    }
-
-    /**
-     * Register package config.
-     *
-     * @return void
-     */
-    protected function registerConfig()
-    {
-        $this->mergeConfigFrom(
-            dirname(__DIR__).'/Config/system.php',
-            'core'
-        );
     }
 }

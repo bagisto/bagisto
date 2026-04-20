@@ -73,6 +73,7 @@ return [
     MagicAIServiceProvider::class,
     MarketingServiceProvider::class,
     NotificationServiceProvider::class,
+    OmnibusServiceProvider::class,
     PayUServiceProvider::class,
     PaymentServiceProvider::class,
     PaypalServiceProvider::class,
@@ -90,5 +91,4 @@ return [
     TaxServiceProvider::class,
     ThemeServiceProvider::class,
     UserServiceProvider::class,
-    OmnibusServiceProvider::class,
 ];

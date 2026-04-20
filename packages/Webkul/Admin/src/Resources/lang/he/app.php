@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'אפשר שיתוף בפייסבוק?',
                         'enable-share-email' => 'אפשר שיתוף בדוא"ל?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus',
+                        'title-info' => 'Omnibus directive configuration',
+                        'enable' => 'Enable Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

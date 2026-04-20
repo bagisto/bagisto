@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Включить поделиться в Facebook?',
                         'enable-share-email' => 'Включить поделиться по электронной почте?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus',
+                        'title-info' => 'Конфигурация директивы Omnibus',
+                        'enable' => 'Включить Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

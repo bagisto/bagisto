@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Facebook හුවමාරු සක්‍රීය කරන්නද?',
                         'enable-share-email' => 'Email හුවමාරු සක්‍රීය කරන්නද?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus',
+                        'title-info' => 'Omnibus directive configuration',
+                        'enable' => 'Enable Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

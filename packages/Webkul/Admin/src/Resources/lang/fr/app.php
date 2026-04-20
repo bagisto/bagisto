@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Activer le partage sur Facebook ?',
                         'enable-share-email' => 'Activer le partage par e-mail ?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus',
+                        'title-info' => 'Configuration de la directive Omnibus',
+                        'enable' => 'Activer Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

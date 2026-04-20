@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'تمكين المشاركة في فيسبوك؟',
                         'enable-share-email' => 'تمكين المشاركة في البريد الإلكتروني؟',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'أومنيبوس',
+                        'title-info' => 'تكوين توجيه أومنيبوس',
+                        'enable' => 'تمكين أومنيبوس',
+                    ],
                 ],
 
                 'rich-snippets' => [

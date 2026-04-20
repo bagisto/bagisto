@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Facebookでの共有を有効にする？',
                         'enable-share-email' => 'メールでの共有を有効にする？',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'オムニバス',
+                        'title-info' => 'オムニバス指令の設定',
+                        'enable' => 'オムニバスを有効にする',
+                    ],
                 ],
 
                 'rich-snippets' => [

@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Delen via Facebook inschakelen?',
                         'enable-share-email' => 'Delen via e-mail inschakelen?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus',
+                        'title-info' => 'Configuratie Omnibus-richtlijn',
+                        'enable' => 'Omnibus inschakelen',
+                    ],
                 ],
 
                 'rich-snippets' => [

@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Facebook\'ta Paylaşımı Etkinleştir?',
                         'enable-share-email' => 'E-posta ile Paylaşımı Etkinleştir?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus',
+                        'title-info' => 'İndirim Öncesi Fiyat Geçmişi (Omnibus) yapılandırması',
+                        'enable' => 'Omnibus\'u Etkinleştir',
+                    ],
                 ],
 
                 'rich-snippets' => [
