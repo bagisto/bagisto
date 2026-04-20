@@ -25,6 +25,8 @@ class ProductCustomerGroupPriceRepository extends Repository
         $previousCustomerGroupPriceIds = $product->customer_group_prices()->pluck('id');
 
         if (isset($data['customer_group_prices'])) {
+            $processedUniqueIds = [];
+
             foreach ($data['customer_group_prices'] as $customerGroupPriceId => $row) {
                 $row['customer_group_id'] = $row['customer_group_id'] == '' ? null : $row['customer_group_id'];
 
@@ -33,6 +35,12 @@ class ProductCustomerGroupPriceRepository extends Repository
                     $product->id,
                     $row['customer_group_id'],
                 ]));
+
+                if (in_array($row['unique_id'], $processedUniqueIds)) {
+                    continue;
+                }
+
+                $processedUniqueIds[] = $row['unique_id'];
 
                 if (Str::contains($customerGroupPriceId, 'price_')) {
                     $this->create(array_merge([
