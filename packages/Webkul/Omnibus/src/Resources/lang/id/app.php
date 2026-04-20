@@ -9,8 +9,4 @@ return [
         'old-purged' => 'Cuplikan Omnibus lama dibersihkan.',
         'snapshots-captured' => ':count cuplikan harga baru tercatat.',
     ],
-
-    'shop' => [
-        'price-info' => 'Indirimden önceki son 30 günün en düşük fiyatı:',
-    ],
 ];

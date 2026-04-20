@@ -4,7 +4,7 @@
     class="omnibus-container"
 >
     <div id="omnibus-wrapper">
-        @include('omnibus::shop.price-info.default', ['formattedPrice' => $formattedPrice])
+        @include('shop::products.omnibus.default', ['formattedPrice' => $formattedPrice])
     </div>
 </div>
 
@@ -55,7 +55,7 @@
                             if (lowestPrice) {
                                 wrapper.innerHTML = `
                                     <div class="omnibus-price-info mt-2 text-sm text-gray-500 flex items-center gap-1">
-                                        <span>@lang('omnibus::app.shop.price-info')
+                                        <span>@lang('shop::app.products.omnibus.price-info')
                                             <strong class="font-medium text-gray-700">${lowestPrice}</strong>
                                         </span>
                                     </div>`;

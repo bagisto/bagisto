@@ -47,6 +47,6 @@ class ConfigurableOmnibusPriceProvider extends DefaultOmnibusPriceProvider
             }
         }
 
-        return view('omnibus::shop.price-info.configurable', compact('formattedPrice', 'variantPrices'))->render();
+        return view('shop::products.omnibus.configurable', compact('formattedPrice', 'variantPrices'))->render();
     }
 }

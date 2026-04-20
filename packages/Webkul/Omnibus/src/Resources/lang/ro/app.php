@@ -9,8 +9,4 @@ return [
         'old-purged' => 'Instantaneele Omnibus vechi au fost șterse.',
         'snapshots-captured' => 'S-au capturat :count instantanee de preț noi.',
     ],
-
-    'shop' => [
-        'price-info' => 'Cel mai mic preț în 30 de zile înainte de reducere:',
-    ],
 ];

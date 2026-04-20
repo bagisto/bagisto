@@ -9,8 +9,4 @@ return [
         'old-purged' => 'Eski Omnibus enstantaneleri temizlendi.',
         'snapshots-captured' => ':count yeni fiyat enstantanesi kaydedildi.',
     ],
-
-    'shop' => [
-        'price-info' => 'İndirimden önceki son 30 günün en düşük fiyatı:',
-    ],
 ];

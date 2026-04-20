@@ -9,8 +9,4 @@ return [
         'old-purged' => 'Snapshots antigos do Omnibus removidos.',
         'snapshots-captured' => ':count novo(s) snapshot(s) de preço capturado(s).',
     ],
-
-    'shop' => [
-        'price-info' => 'Menor preço 30 dias antes do desconto:',
-    ],
 ];

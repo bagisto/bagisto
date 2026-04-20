@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => '割引前の30日間の最安値：',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => '最低価格',

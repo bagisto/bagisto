@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => 'Найнижча ціна за 30 днів до знижки:',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => 'Починається з',

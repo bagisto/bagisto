@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => 'Laagste prijs 30 dagen voorafgaand aan de korting:',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => 'Vanaf',

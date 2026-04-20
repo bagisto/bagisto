@@ -9,8 +9,4 @@ return [
         'old-purged' => 'Anciens instantanés Omnibus supprimés.',
         'snapshots-captured' => ':count nouvel(s) instantané(s) de prix capturé(s).',
     ],
-
-    'shop' => [
-        'price-info' => 'Prix le plus bas 30 jours avant la réduction :',
-    ],
 ];

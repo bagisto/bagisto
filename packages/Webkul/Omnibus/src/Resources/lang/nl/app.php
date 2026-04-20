@@ -9,8 +9,4 @@ return [
         'old-purged' => 'Oude Omnibus-snapshots verwijderd.',
         'snapshots-captured' => ':count nieuwe prijssnapshots vastgelegd.',
     ],
-
-    'shop' => [
-        'price-info' => 'Laagste prijs 30 dagen voorafgaand aan de korting:',
-    ],
 ];

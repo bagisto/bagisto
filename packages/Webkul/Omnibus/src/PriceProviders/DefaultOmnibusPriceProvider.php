@@ -172,7 +172,7 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
 
         $formattedPrice = core()->formatPrice($lowestPrice, core()->getCurrentCurrencyCode());
 
-        return view('omnibus::shop.price-info.default', compact('formattedPrice'))->render();
+        return view('shop::products.omnibus.default', compact('formattedPrice'))->render();
     }
 
     /**

@@ -9,8 +9,4 @@ return [
         'old-purged' => 'Instantànies antigues d\'Omnibus eliminades.',
         'snapshots-captured' => 'S\'han capturat :count instantànies de preu noves.',
     ],
-
-    'shop' => [
-        'price-info' => 'Preu més baix 30 dies abans del descompte:',
-    ],
 ];

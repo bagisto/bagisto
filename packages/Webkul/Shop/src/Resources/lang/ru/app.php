@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => 'Самая низкая цена за 30 дней до скидки:',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => 'Начиная с',

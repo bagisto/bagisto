@@ -33,8 +33,6 @@ class OmnibusServiceProvider extends ServiceProvider
     {
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'omnibus');
 
-        $this->loadViewsFrom(__DIR__.'/../Resources/views', 'omnibus');
-
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('omnibus:snapshot-prices')->everyFifteenMinutes();
 

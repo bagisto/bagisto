@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => 'أقل سعر خلال 30 يومًا قبل الخصم:',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => 'بدءًا من',

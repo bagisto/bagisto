@@ -9,8 +9,4 @@ return [
         'old-purged' => 'Stare migawki Omnibus usunięte.',
         'snapshots-captured' => 'Zarejestrowano :count nowych migawek cen.',
     ],
-
-    'shop' => [
-        'price-info' => 'Najniższa cena z 30 dni przed obniżką:',
-    ],
 ];

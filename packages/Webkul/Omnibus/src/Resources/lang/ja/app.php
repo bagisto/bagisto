@@ -9,8 +9,4 @@ return [
         'old-purged' => '古いオムニバススナップショットを削除しました。',
         'snapshots-captured' => ':count 件の新しい価格スナップショットを記録しました。',
     ],
-
-    'shop' => [
-        'price-info' => '割引前の30日間の最安値：',
-    ],
 ];
