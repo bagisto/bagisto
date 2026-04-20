@@ -10,9 +10,11 @@ trait OmnibusEnablement
     /**
      * Toggle the Omnibus is_enabled setting for the current channel.
      *
-     * Writes directly to the core_config table — the same row the admin
-     * settings page creates — and flushes the Prettus repository cache so
-     * CoreConfigRepository picks the new value up.
+     * Writes an explicit '1' or '0' to the core_config row for the current
+     * channel — the same row the admin settings page creates — so the test's
+     * desired state wins over whatever fallback lives in config or env.
+     * Flushes the Prettus repository cache so CoreConfigRepository picks the
+     * new value up.
      */
     protected function setOmnibusEnabled(bool $enabled): void
     {
@@ -23,15 +25,13 @@ trait OmnibusEnablement
             ->where('channel_code', $channelCode)
             ->delete();
 
-        if ($enabled) {
-            DB::table('core_config')->insert([
-                'code' => 'catalog.products.omnibus.is_enabled',
-                'value' => '1',
-                'channel_code' => $channelCode,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+        DB::table('core_config')->insert([
+            'code' => 'catalog.products.omnibus.is_enabled',
+            'value' => $enabled ? '1' : '0',
+            'channel_code' => $channelCode,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
 
         Cache::flush();
     }

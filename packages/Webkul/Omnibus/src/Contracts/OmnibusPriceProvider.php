@@ -32,4 +32,11 @@ interface OmnibusPriceProvider
      * Render the Omnibus price block for a product.
      */
     public function getOmnibusPriceHtml(Product $product): string;
+
+    /**
+     * Get the ids of descendant products whose snapshots must be recorded alongside this one.
+     *
+     * Returns an empty array for leaf types (simple, virtual, downloadable, booking).
+     */
+    public function getDescendantProductIds(Product $product): array;
 }

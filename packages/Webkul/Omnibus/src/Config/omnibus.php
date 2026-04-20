@@ -1,7 +1,9 @@
 <?php
 
+use Webkul\Omnibus\PriceProviders\BundleOmnibusPriceProvider;
 use Webkul\Omnibus\PriceProviders\ConfigurableOmnibusPriceProvider;
 use Webkul\Omnibus\PriceProviders\DefaultOmnibusPriceProvider;
+use Webkul\Omnibus\PriceProviders\GroupedOmnibusPriceProvider;
 
 return [
 
@@ -66,9 +68,9 @@ return [
             'virtual' => DefaultOmnibusPriceProvider::class,
             'downloadable' => DefaultOmnibusPriceProvider::class,
             'booking' => DefaultOmnibusPriceProvider::class,
-            'grouped' => DefaultOmnibusPriceProvider::class,
-            'bundle' => DefaultOmnibusPriceProvider::class,
             'configurable' => ConfigurableOmnibusPriceProvider::class,
+            'grouped' => GroupedOmnibusPriceProvider::class,
+            'bundle' => BundleOmnibusPriceProvider::class,
         ],
     ],
 

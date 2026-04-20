@@ -119,16 +119,13 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
     {
         $channelId = core()->getCurrentChannel()->id;
         $currencyCode = core()->getCurrentCurrencyCode();
-        $promoStartDate = $product->special_price_from;
 
-        if (! $promoStartDate) {
-            $latestSnapshot = $this->omnibusPriceRepository->getLatestByProductIdAndChannel(
-                $product->id,
-                $channelId,
-                $currencyCode
-            );
-            $promoStartDate = $latestSnapshot ? $latestSnapshot->recorded_at : now();
-        }
+        // Ceiling for "prices before the promo started". When special_price_from
+        // is set, it bounds the lookback to snapshots taken before the discount
+        // kicked in. When it's null (open-ended promo, or configurable parent
+        // inheriting haveDiscount() from variants), use now() — exercising the
+        // full 30-day window up to the present moment.
+        $promoStartDate = $product->special_price_from ?: now();
 
         return $this->omnibusPriceRepository->getLowestPrice(
             $this->getAggregatedProductIds($product),
@@ -161,7 +158,17 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
             return '';
         }
 
-        $lowestPrice = $this->getLowestPrice($product) ?? $product->price;
+        $lowestPrice = $this->getLowestPrice($product);
+
+        // No snapshot history yet — don't claim a "lowest price" we cannot
+        // substantiate. The block appears once the scheduler has recorded at
+        // least one snapshot for this product/channel/currency.
+        if (
+            is_null($lowestPrice)
+            || $lowestPrice <= 0
+        ) {
+            return '';
+        }
 
         $formattedPrice = core()->formatPrice($lowestPrice, core()->getCurrentCurrencyCode());
 
@@ -169,14 +176,23 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
     }
 
     /**
+     * Get the ids of descendant products whose snapshots must be recorded alongside this one.
+     *
+     * Leaf types (simple, virtual, downloadable, booking) have no descendant
+     * Products — downloadable links and booking slots are price modifiers on
+     * the parent, not separate Product records. Composite types override this.
+     */
+    public function getDescendantProductIds(Product $product): array
+    {
+        return [];
+    }
+
+    /**
      * Get every product id whose snapshots contribute to this product's lowest price.
      */
     protected function getAggregatedProductIds(Product $product): array
     {
-        return array_merge(
-            [$product->id],
-            $product->getTypeInstance()->getChildrenIds()
-        );
+        return array_merge([$product->id], $this->getDescendantProductIds($product));
     }
 
     /**

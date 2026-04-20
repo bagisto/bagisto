@@ -156,13 +156,19 @@ class OmnibusPriceManager
 
     /**
      * Hydrate descendant Products for the given batch, skipping any already snapshotted in this run.
+     *
+     * Each product's descendants come from its type-specific provider — Omnibus
+     * does not rely on Bagisto's generic getTypeInstance()->getChildrenIds()
+     * because that method returns incorrect data for bundle products.
      */
     protected function collectDescendants(array $products, array $seenIds): array
     {
         $childrenIds = [];
 
         foreach ($products as $product) {
-            foreach ($product->getTypeInstance()->getChildrenIds() as $id) {
+            $provider = $this->providerResolver->resolve($product);
+
+            foreach ($provider->getDescendantProductIds($product) as $id) {
                 if (isset($seenIds[$id])) {
                     continue;
                 }
