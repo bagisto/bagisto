@@ -1,5 +1,5 @@
 @php
-    $provider = app(\Webkul\Omnibus\Services\OmnibusPriceProviderResolver::class)->resolve($product);
+    $manager = app(\Webkul\Omnibus\Services\OmnibusPriceManager::class);
 @endphp
 
-{!! $provider->getOmnibusPriceHtml($product) !!}
+{!! $manager->getOmnibusPriceHtml($product) !!}

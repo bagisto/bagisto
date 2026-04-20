@@ -1,6 +1,10 @@
-<div id="omnibus-manager" data-variants='@json($variantPrices)' class="omnibus-container">
+<div
+    id="omnibus-manager"
+    data-variants='@json($variantPrices)'
+    class="omnibus-container"
+>
     <div id="omnibus-wrapper">
-        @include('omnibus::shop.omnibus-price-info', ['formattedPrice' => $formattedPrice])
+        @include('omnibus::shop.price-info.default', ['formattedPrice' => $formattedPrice])
     </div>
 </div>
 

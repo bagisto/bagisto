@@ -4,6 +4,7 @@ namespace Webkul\Omnibus\Repositories;
 
 use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Omnibus\Contracts\OmnibusPrice;
 
 class OmnibusPriceRepository extends Repository
 {
@@ -12,7 +13,7 @@ class OmnibusPriceRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Omnibus\Contracts\OmnibusPrice';
+        return OmnibusPrice::class;
     }
 
     /**
@@ -29,11 +30,11 @@ class OmnibusPriceRepository extends Repository
     }
 
     /**
-     * Get the lowest snapshot price across the given products over the last 30 days before the promo start.
+     * Get the lowest snapshot price across the given products within the configured lookback window before the promo start.
      */
     public function getLowestPrice(array $productIds, int $channelId, string $currencyCode, $promoStartDate = null): ?float
     {
-        $startDate = Carbon::now()->subDays(30)->toDateTimeString();
+        $startDate = Carbon::now()->subDays(config('omnibus.snapshots.lookback_days'))->toDateTimeString();
 
         $query = $this->model
             ->whereIn('product_id', $productIds)

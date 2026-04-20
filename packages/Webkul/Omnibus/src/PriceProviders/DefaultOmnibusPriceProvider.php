@@ -76,7 +76,7 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
     }
 
     /**
-     * Get the lowest price for a product in the 30 days prior to any active promo.
+     * Get the lowest price for a product within the configured lookback window prior to any active promo.
      */
     public function getLowestPrice(Product $product): ?float
     {
@@ -136,7 +136,7 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
 
         $formattedPrice = core()->formatPrice($lowestPrice, core()->getCurrentCurrencyCode());
 
-        return view('omnibus::shop.omnibus-price-info', compact('formattedPrice'))->render();
+        return view('omnibus::shop.price-info.default', compact('formattedPrice'))->render();
     }
 
     /**

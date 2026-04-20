@@ -12,7 +12,7 @@ interface OmnibusPriceProvider
     public function recordPrice(Product $product, ?string $recordedAt = null): int;
 
     /**
-     * Get the lowest price for a product in the 30 days prior to any active promo.
+     * Get the lowest price for a product within the configured lookback window prior to any active promo.
      */
     public function getLowestPrice(Product $product): ?float;
 

@@ -13,7 +13,7 @@ class OmnibusServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../Config/providers.php', 'omnibus.providers');
+        $this->mergeConfigFrom(__DIR__.'/../Config/omnibus.php', 'omnibus');
 
         $this->app->register(EventServiceProvider::class);
 
