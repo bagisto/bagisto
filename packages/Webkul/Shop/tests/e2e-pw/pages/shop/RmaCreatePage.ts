@@ -2,7 +2,6 @@ import fs from "fs";
 import { expect, Page } from "@playwright/test";
 import { CommonPage } from "../../utils/tinymce";
 import { loginAsAdmin } from "../../utils/admin";
-import { RMAEditPage } from "../../locators/shop/RMAEditPage";
 import { BasePage } from "../BasePage";
 
 /**
@@ -10,21 +9,81 @@ import { BasePage } from "../BasePage";
  */
 function readProductData() {
     const product = JSON.parse(fs.readFileSync("product-data.json", "utf-8"));
-
-    const productName = product.name;
-
-    return productName;
+    return product.name;
 }
 
 export class RMACreatePage extends BasePage {
     constructor(
         page: Page,
-
-        private rmaEditPage = new RMAEditPage(page),
-
         private editor = new CommonPage(page),
     ) {
         super(page);
+    }
+
+    get viewOrder() {
+        return this.page.locator(".row > div:nth-child(4) > a").first();
+    }
+
+    get invoiceTab() {
+        return this.page.getByText("Invoice", { exact: true });
+    }
+
+    get createInvoiceButton() {
+        return this.page.getByRole("button", { name: "Create Invoice" });
+    }
+
+    get successInvoiceMessage() {
+        return this.page.getByText("Invoice created successfully");
+    }
+
+    get requestRMAButton() {
+        return this.page.getByText("New RMA Request");
+    }
+
+    get editIcon() {
+        return this.page.locator("a.icon-edit");
+    }
+
+    get checkBox() {
+        return this.page.locator('input[name^="isChecked["]');
+    }
+
+    get resolutionSelect() {
+        return this.page.locator('select[name^="resolution_type"]');
+    }
+
+    get reasonSelect() {
+        return this.page.locator('select[name="rma_reason_id"]');
+    }
+
+    get rmaQtyInput() {
+        return this.page.locator('input[name^="rma_qty"]');
+    }
+
+    get orderStatusSelect() {
+        return this.page.locator('select[name="package_condition"]');
+    }
+
+    get infoInput() {
+        return this.page.locator('textarea[name="information"]');
+    }
+
+    get agreementCheckbox() {
+        return this.page.locator("label:has(input#agreement)");
+    }
+
+    get submitButton() {
+        return this.page.locator('button:has-text("Submit request")');
+    }
+
+    get successRMAMessage() {
+        return this.page
+            .getByRole("paragraph")
+            .filter({ hasText: "Request created successfully." });
+    }
+
+    get invalidRMAMessage() {
+        return this.page.getByText("The RMA Qty field must be 1 or less");
     }
 
     private async visitOrderPage() {
@@ -32,45 +91,55 @@ export class RMACreatePage extends BasePage {
     }
 
     private async createInvoice() {
-        await this.rmaEditPage.viewOrder.click();
-        await this.rmaEditPage.Invoice.click();
-        await this.rmaEditPage.createInvoice.click();
-        await expect(this.rmaEditPage.successInvoice).toBeVisible();
+        await this.viewOrder.click();
+        await this.invoiceTab.click();
+        await this.createInvoiceButton.click();
+        await expect(this.successInvoiceMessage).toBeVisible();
     }
 
     private async createRMA() {
         await this.visit("customer/account/rma");
-        await this.rmaEditPage.reqRMA.click();
+
+        await this.requestRMAButton.click();
         await this.page.waitForLoadState("networkidle");
-        await this.rmaEditPage.editIcon.first().click();
-        await this.rmaEditPage.checkBox.check();
+
+        await this.editIcon.first().click();
+        await this.checkBox.check();
+
         await this.page.waitForLoadState("networkidle");
-        await this.rmaEditPage.resolution.selectOption("return");
-        await this.rmaEditPage.resolution.selectOption("return");
+        await this.resolutionSelect.selectOption("return");
+        await this.resolutionSelect.selectOption("return");
+
         await this.page.waitForLoadState("networkidle");
-        await this.rmaEditPage.reason.selectOption("1");
-        await this.rmaEditPage.rmaQTY.fill("1");
-        await this.rmaEditPage.orderStatus.selectOption({ value: "open" });
-        await this.rmaEditPage.info.fill("Changed My Mind.");
-        await this.rmaEditPage.agreement.check();
-        await this.rmaEditPage.submit.click();
-        await expect(this.rmaEditPage.successRMA).toBeVisible();
+        await this.reasonSelect.selectOption("1");
+
+        await this.rmaQtyInput.fill("1");
+        await this.orderStatusSelect.selectOption({ value: "open" });
+
+        await this.infoInput.fill("Changed My Mind.");
+        await this.agreementCheckbox.check();
+
+        await this.submitButton.click();
+        await expect(this.successRMAMessage).toBeVisible();
     }
 
     private async createInvalidRMA() {
         await this.visit("customer/account/rma");
-        await this.rmaEditPage.reqRMA.click();
-        await this.rmaEditPage.editIcon.first().click();
-        await this.rmaEditPage.checkBox.check();
+
+        await this.requestRMAButton.click();
+        await this.editIcon.first().click();
+        await this.checkBox.check();
 
         await this.page.waitForLoadState("networkidle");
-        await this.rmaEditPage.resolution.selectOption("return");
-        await this.rmaEditPage.resolution.selectOption("return");
-        await this.page.waitForLoadState("networkidle");
-        await this.rmaEditPage.reason.selectOption("1");
-        await this.rmaEditPage.rmaQTY.fill("4");
+        await this.resolutionSelect.selectOption("return");
+        await this.resolutionSelect.selectOption("return");
 
-        await expect(this.rmaEditPage.invalidRMAMessage).toBeVisible();
+        await this.page.waitForLoadState("networkidle");
+        await this.reasonSelect.selectOption("1");
+
+        await this.rmaQtyInput.fill("4");
+
+        await expect(this.invalidRMAMessage).toBeVisible();
     }
 
     private async verfiyRMADetails() {
@@ -81,9 +150,7 @@ export class RMACreatePage extends BasePage {
         ).toBeVisible();
     }
 
-    /**
-     * Public functions
-     */
+
     async rmaCreation() {
         await loginAsAdmin(this.page);
         await this.visitOrderPage();
