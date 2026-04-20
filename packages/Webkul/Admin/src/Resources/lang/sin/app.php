@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Facebook හුවමාරු සක්‍රීය කරන්නද?',
                         'enable-share-email' => 'Email හුවමාරු සක්‍රීය කරන්නද?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus Price Disclosure',
+                        'title-info' => 'Record daily price snapshots and surface the lowest price in the 30 days prior to each discount, as required by the EU Omnibus Directive.',
+                        'enable' => 'Enable Omnibus disclosure',
+                    ],
                 ],
 
                 'rich-snippets' => [

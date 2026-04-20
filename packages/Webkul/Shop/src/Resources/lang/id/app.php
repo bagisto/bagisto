@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => 'Harga terendah 30 hari sebelum diskon:',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => 'Mulai Dari',

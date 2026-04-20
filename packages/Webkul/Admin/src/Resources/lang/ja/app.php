@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Facebookでの共有を有効にする？',
                         'enable-share-email' => 'メールでの共有を有効にする？',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'オムニバス価格表示',
+                        'title-info' => 'EUオムニバス指令で求められているとおり、毎日の価格スナップショットを記録し、各割引前30日間の最安値を表示します。',
+                        'enable' => 'オムニバス表示を有効化',
+                    ],
                 ],
 
                 'rich-snippets' => [

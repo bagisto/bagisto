@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Увімкнути поділ у Facebook?',
                         'enable-share-email' => 'Увімкнути поділ у Email?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Розкриття цін Omnibus',
+                        'title-info' => 'Щодня зберігає знімки цін і показує найнижчу ціну за 30 днів до кожної знижки, як того вимагає Директива Omnibus ЄС.',
+                        'enable' => 'Увімкнути розкриття Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

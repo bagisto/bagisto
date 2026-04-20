@@ -1,0 +1,17 @@
+{
+    "name": "webkul/omnibus",
+    "description": "Omnibus Package",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Webkul\\Omnibus\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\Omnibus\\Providers\\OmnibusServiceProvider"
+            ]
+        }
+    }
+}

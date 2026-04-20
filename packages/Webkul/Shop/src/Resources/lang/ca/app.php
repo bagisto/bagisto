@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => 'Preu més baix 30 dies abans del descompte:',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => 'A partir de',

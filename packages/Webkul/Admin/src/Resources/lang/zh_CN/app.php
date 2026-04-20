@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => '在Facebook中启用分享？',
                         'enable-share-email' => '在电子邮件中启用分享？',
                     ],
+
+                    'omnibus' => [
+                        'title' => '综合指令价格披露',
+                        'title-info' => '记录每日价格快照,并根据欧盟综合指令要求显示每次折扣前 30 天内的最低价格。',
+                        'enable' => '启用综合指令披露',
+                    ],
                 ],
 
                 'rich-snippets' => [

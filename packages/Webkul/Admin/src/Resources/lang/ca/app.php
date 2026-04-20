@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Habilitar compartir a Facebook?',
                         'enable-share-email' => 'Habilitar compartir per correu electrònic?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Divulgació de preus Omnibus',
+                        'title-info' => 'Enregistra instantànies de preu diàries i mostra el preu més baix dels 30 dies anteriors a cada descompte, tal com exigeix la Directiva Omnibus de la UE.',
+                        'enable' => 'Activa la divulgació Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

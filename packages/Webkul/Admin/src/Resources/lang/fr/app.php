@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Activer le partage sur Facebook ?',
                         'enable-share-email' => 'Activer le partage par e-mail ?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Divulgation des prix Omnibus',
+                        'title-info' => 'Enregistre des instantanés de prix quotidiens et affiche le prix le plus bas dans les 30 jours précédant chaque réduction, conformément à la directive Omnibus de l\'UE.',
+                        'enable' => 'Activer la divulgation Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

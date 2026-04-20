@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Delen via Facebook inschakelen?',
                         'enable-share-email' => 'Delen via e-mail inschakelen?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus-prijsinformatie',
+                        'title-info' => 'Legt dagelijkse prijs-snapshots vast en toont de laagste prijs in de 30 dagen voor elke korting, zoals vereist door de EU-Omnibus-richtlijn.',
+                        'enable' => 'Omnibus-informatie inschakelen',
+                    ],
                 ],
 
                 'rich-snippets' => [

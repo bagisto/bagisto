@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'אפשר שיתוף בפייסבוק?',
                         'enable-share-email' => 'אפשר שיתוף בדוא"ל?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus Price Disclosure',
+                        'title-info' => 'Record daily price snapshots and surface the lowest price in the 30 days prior to each discount, as required by the EU Omnibus Directive.',
+                        'enable' => 'Enable Omnibus disclosure',
+                    ],
                 ],
 
                 'rich-snippets' => [

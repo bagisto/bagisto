@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => '折扣前 30 天的最低价格：',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => '起价',

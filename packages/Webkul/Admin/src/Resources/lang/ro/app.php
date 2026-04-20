@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Enable Share in Facebook?',
                         'enable-share-email' => 'Enable Share in Email?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Divulgarea prețurilor Omnibus',
+                        'title-info' => 'Înregistrează instantanee zilnice de preț și afișează cel mai mic preț din cele 30 de zile dinaintea fiecărei reduceri, conform Directivei Omnibus a UE.',
+                        'enable' => 'Activează divulgarea Omnibus',
+                    ],
                 ],
 
                 'rich-snippets' => [

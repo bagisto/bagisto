@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Teilen in Facebook aktivieren?',
                         'enable-share-email' => 'Teilen per E-Mail aktivieren?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus-Preisangabe',
+                        'title-info' => 'Erfasst täglich Preis-Snapshots und zeigt den niedrigsten Preis der 30 Tage vor jeder Ermäßigung an, wie von der EU-Omnibus-Richtlinie vorgeschrieben.',
+                        'enable' => 'Omnibus-Offenlegung aktivieren',
+                    ],
                 ],
 
                 'rich-snippets' => [

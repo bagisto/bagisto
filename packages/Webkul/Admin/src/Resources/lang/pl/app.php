@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Udostępnianie: Facebook',
                         'enable-share-email' => 'Udostępnianie: E-mail',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Ujawnienie historii cen (Omnibus)',
+                        'title-info' => 'Zapisuje codzienne migawki cen i pokazuje najniższą cenę w ciągu 30 dni przed każdą obniżką, zgodnie z wymogami dyrektywy Omnibus UE.',
+                        'enable' => 'Włącz ujawnianie cen (Omnibus)',
+                    ],
                 ],
 
                 'rich-snippets' => [

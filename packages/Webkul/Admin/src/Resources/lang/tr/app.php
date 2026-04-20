@@ -4425,6 +4425,12 @@ return [
                         'enable-share-facebook' => 'Facebook\'ta Paylaşımı Etkinleştir?',
                         'enable-share-email' => 'E-posta ile Paylaşımı Etkinleştir?',
                     ],
+
+                    'omnibus' => [
+                        'title' => 'Omnibus fiyat bilgilendirmesi',
+                        'title-info' => 'Her gün fiyat görüntüleri kaydeder ve AB Omnibus Direktifi gereği her indirimden önceki 30 günün en düşük fiyatını gösterir.',
+                        'enable' => 'Omnibus bilgilendirmesini etkinleştir',
+                    ],
                 ],
 
                 'rich-snippets' => [

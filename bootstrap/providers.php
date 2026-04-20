@@ -23,6 +23,7 @@ use Webkul\Inventory\Providers\InventoryServiceProvider;
 use Webkul\MagicAI\Providers\MagicAIServiceProvider;
 use Webkul\Marketing\Providers\MarketingServiceProvider;
 use Webkul\Notification\Providers\NotificationServiceProvider;
+use Webkul\Omnibus\Providers\OmnibusServiceProvider;
 use Webkul\Payment\Providers\PaymentServiceProvider;
 use Webkul\Paypal\Providers\PaypalServiceProvider;
 use Webkul\PayU\Providers\PayUServiceProvider;
@@ -50,6 +51,7 @@ return [
     /**
      * Webkul's service providers.
      */
+    OmnibusServiceProvider::class,
     AdminServiceProvider::class,
     AttributeServiceProvider::class,
     BookingProductServiceProvider::class,

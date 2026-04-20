@@ -738,6 +738,10 @@ return [
     ],
 
     'products' => [
+        'omnibus' => [
+            'price-info' => 'İndirimden önceki son 30 günün en düşük fiyatı:',
+        ],
+
         'prices' => [
             'grouped' => [
                 'starting-at' => 'Başlangıç fiyatı',
