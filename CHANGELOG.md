@@ -6,13 +6,37 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11258 [security] - Fixed user enumeration vulnerability (CWE-204) in the customer resend-verification endpoint where a missing null-check leaked email existence via differential HTTP responses. Added rate limiting on the route.
 
+- #11251 [fixed] - Fixed a system crash when viewing refund details after refunding a table booking product. The `Booking` product type was marked as composite, causing the refund view to look for child items that do not exist.
+
+- #11250 [fixed] - Fixed a system crash when viewing refund details after refunding an appointment booking product, caused by the same composite product misconfiguration.
+
+- #11239 [fixed] - Fixed incorrect slot selection time and date displayed in the cart, customer orders, and admin section for default booking products. Timestamps are now converted using the configured application timezone to match the slot selected by the customer.
+
+- #11238 [fixed] - Fixed incorrect slot duration and time visibility in the cart, customer orders, and admin section by casting slot timestamps to integer and applying consistent timezone conversion across all booking attribute formatters.
+
 - #11236 [fixed] - Fixed an issue with incorrect slot visibility on the product page for table booking products when the selected weekday or date was out of range.
 
 - #11235 [fixed] - Fixed an issue causing incorrect slot visibility based on selected day and date in appointment booking.
 
 - #11234 [fixed] - Fixed product categories being silently cleared when saving the product while viewing a channel whose root category differs from another channel's. The edit form now preserves categories outside the current channel's tree via hidden inputs so `sync()` no longer drops them.
 
+- #11232 [fixed] - Fixed guest limit and booking slot details not being visible in the cart for table booking products. The cart attributes now include charged-per type (per table/per guest) and guest limit when applicable.
+
+- #11230 [fixed] - Fixed irrelevant slot time displayed in the cart for hourly rental bookings by casting timestamps to integer and applying timezone conversion consistently.
+
 - #10902 [fixed] - Updated appointment booking products to display only available time slots.
+
+- #10739 [fixed] - Fixed booking information not being displayed properly on the product view page when the booking information was edited on the product edit page. Null guards were added so storefront views do not fail when slot relations are missing.
+
+- #10738 [fixed] - Fixed the "Slots Time Duration" functionality not working correctly for the "One Booking for Many Days" default booking configuration. Overlapping multi-day slot ranges are now matched against the selected day of week and cross-day slots are no longer silently dropped by the backend overlap validator.
+
+- #10708 [fixed] - Fixed event booking cart allowing quantity to exceed the ticket limit. A `max-value` constraint was added to the quantity changer based on the ticket's available quantity.
+
+- #10697 [fixed] - Fixed incorrect alert message being shown when a rental product was unavailable. Type-specific error messages are now returned for rental, event, and other booking types.
+
+- #10696 [fixed] - Fixed the end date not being displayed for "One Booking for Many Days" booking products on the storefront. Multi-day slot labels now include the day and date along with the time.
+
+- #10683 [fixed] - Fixed duplicate slot timing being shown for the same day on booking products. The slot calculation helper now deduplicates slots by timestamp and performs sorting once after slot generation completes.
 
 ## **v2.3.17 (13th of April 2026)** - *Release*
 
