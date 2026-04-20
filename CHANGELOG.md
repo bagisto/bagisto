@@ -8,5 +8,4 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added PostgreSQL support with database grammar abstraction layer, model boolean casts, and cross-database query compatibility.
 
-- Added Omnibus package for EU Omnibus Directive compliance — records per-channel, per-currency lowest-price snapshots, exposes the 30-day historical low on the storefront for discounted products, and provides per-type providers for simple, configurable, grouped, and bundle products.
-
+- #11209 [feature] - Added Omnibus package for EU Omnibus Directive compliance — records per-channel, per-currency lowest-price snapshots, exposes the 30-day historical low on the storefront for discounted products, and provides per-type providers for simple, configurable, grouped, and bundle products.
