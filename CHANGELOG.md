@@ -10,6 +10,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11235 [fixed] - Fixed an issue causing incorrect slot visibility based on selected day and date in appointment booking.
 
+- #11234 [fixed] - Fixed product categories being silently cleared when saving the product while viewing a channel whose root category differs from another channel's. The edit form now preserves categories outside the current channel's tree via hidden inputs so `sync()` no longer drops them.
+
 - #10902 [fixed] - Updated appointment booking products to display only available time slots.
 
 ## **v2.3.17 (13th of April 2026)** - *Release*

@@ -129,6 +129,50 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Retrieve category from slug.
+     *
+     * @param  string  $slug
+     * @return Category
+     */
+    public function findBySlug($slug)
+    {
+        if ($category = $this->model->whereTranslation('slug', $slug)->first()) {
+            return $category;
+        }
+    }
+
+    /**
+     * Retrieve category from slug.
+     *
+     * @param  string  $slug
+     * @return Category
+     */
+    public function findBySlugOrFail($slug)
+    {
+        return $this->model->whereTranslation('slug', $slug)->firstOrFail();
+    }
+
+    /**
+     * Get root categories.
+     *
+     * @return Collection
+     */
+    public function getRootCategories()
+    {
+        return $this->getModel()->where('parent_id', null)->get();
+    }
+
+    /**
+     * Get child categories.
+     *
+     * @return Collection
+     */
+    public function getChildCategories($parentId)
+    {
+        return $this->getModel()->where('parent_id', $parentId)->get();
+    }
+
+    /**
      * Specify category tree.
      *
      * @return Category
@@ -153,26 +197,6 @@ class CategoryRepository extends Repository
     }
 
     /**
-     * Get root categories.
-     *
-     * @return Collection
-     */
-    public function getRootCategories()
-    {
-        return $this->getModel()->where('parent_id', null)->get();
-    }
-
-    /**
-     * Get child categories.
-     *
-     * @return Collection
-     */
-    public function getChildCategories($parentId)
-    {
-        return $this->getModel()->where('parent_id', $parentId)->get();
-    }
-
-    /**
      * get visible category tree.
      *
      * @param  int  $id
@@ -183,6 +207,48 @@ class CategoryRepository extends Repository
         return $id
             ? $this->model::orderBy('position', 'ASC')->where('status', 1)->descendantsAndSelf($id)->toTree($id)
             : $this->model::orderBy('position', 'ASC')->where('status', 1)->get()->toTree();
+    }
+
+    /**
+     * Get the IDs of visible categories under the given root (inclusive).
+     *
+     * @param  int|null  $rootId
+     * @return array
+     */
+    public function getVisibleCategoryIds($rootId = null)
+    {
+        $query = $this->model::where('status', 1);
+
+        if ($rootId) {
+            $query = $query->descendantsAndSelf($rootId);
+        }
+
+        return $query->pluck('id')->all();
+    }
+
+    /**
+     * Get partials.
+     *
+     * @param  array|null  $columns
+     * @return array
+     */
+    public function getPartial($columns = null)
+    {
+        $categories = $this->model->all();
+
+        $trimmed = [];
+
+        foreach ($categories as $key => $category) {
+            if (! empty($category->name)) {
+                $trimmed[$key] = [
+                    'id' => $category->id,
+                    'name' => $category->name,
+                    'slug' => $category->slug,
+                ];
+            }
+        }
+
+        return $trimmed;
     }
 
     /**
@@ -201,30 +267,6 @@ class CategoryRepository extends Repository
             ->exists();
 
         return ! $exists;
-    }
-
-    /**
-     * Retrieve category from slug.
-     *
-     * @param  string  $slug
-     * @return Category
-     */
-    public function findBySlug($slug)
-    {
-        if ($category = $this->model->whereTranslation('slug', $slug)->first()) {
-            return $category;
-        }
-    }
-
-    /**
-     * Retrieve category from slug.
-     *
-     * @param  string  $slug
-     * @return Category
-     */
-    public function findBySlugOrFail($slug)
-    {
-        return $this->model->whereTranslation('slug', $slug)->firstOrFail();
     }
 
     /**
@@ -266,31 +308,6 @@ class CategoryRepository extends Repository
 
             $category->save();
         }
-    }
-
-    /**
-     * Get partials.
-     *
-     * @param  array|null  $columns
-     * @return array
-     */
-    public function getPartial($columns = null)
-    {
-        $categories = $this->model->all();
-
-        $trimmed = [];
-
-        foreach ($categories as $key => $category) {
-            if (! empty($category->name)) {
-                $trimmed[$key] = [
-                    'id' => $category->id,
-                    'name' => $category->name,
-                    'slug' => $category->slug,
-                ];
-            }
-        }
-
-        return $trimmed;
     }
 
     /**
