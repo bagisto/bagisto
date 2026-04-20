@@ -351,6 +351,10 @@ class OrderRepository extends Repository
         $order->discount_invoiced = $order->base_discount_invoiced = 0;
 
         foreach ($order->invoices as $invoice) {
+            if ($invoice->state === 'pending') {
+                continue;
+            }
+
             $order->sub_total_invoiced += $invoice->sub_total;
             $order->base_sub_total_invoiced += $invoice->base_sub_total;
 
