@@ -128,14 +128,27 @@
                         $dateMin = \Carbon\Carbon::yesterday()->format('Y-m-d 23:59:59');
                     @endphp
 
-                    <x-admin::form.control-group.control
-                        type="datetime"
-                        name="booking[available_from]"
-                        :rules="'required|after:' . $dateMin"
-                        v-model="booking.available_from"
-                        :label="trans('admin::app.catalog.products.edit.types.booking.available-from')"
-                        :placeholder="trans('admin::app.catalog.products.edit.types.booking.available-from')"
-                    />
+                    <template v-if="booking.type == 'event'">
+                        <x-admin::form.control-group.control
+                            type="datetime"
+                            name="booking[available_from]"
+                            :rules="'required|after:' . $dateMin"
+                            v-model="booking.available_from"
+                            :label="trans('admin::app.catalog.products.edit.types.booking.available-from')"
+                            :placeholder="trans('admin::app.catalog.products.edit.types.booking.available-from')"
+                        />
+                    </template>
+
+                    <template v-else>
+                        <x-admin::form.control-group.control
+                            type="date"
+                            name="booking[available_from]"
+                            :rules="'required|after:' . $dateMin"
+                            v-model="booking.available_from"
+                            :label="trans('admin::app.catalog.products.edit.types.booking.available-from')"
+                            :placeholder="trans('admin::app.catalog.products.edit.types.booking.available-from')"
+                        />
+                    </template>
 
                     <x-admin::form.control-group.error  control-name="booking[available_from]" />
                 </x-admin::form.control-group>
@@ -146,18 +159,53 @@
                         @lang('admin::app.catalog.products.edit.types.booking.available-to')
                     </x-admin::form.control-group.label>
 
-                    <x-admin::form.control-group.control
-                        type="datetime"
-                        name="booking[available_to]"
-                        ::rules="'required|after:' + booking.available_from"
-                        v-model="booking.available_to"
-                        :label="trans('admin::app.catalog.products.edit.types.booking.available-to')"
-                        :placeholder="trans('admin::app.catalog.products.edit.types.booking.available-to')"
-                    />
+                    <template v-if="booking.type == 'event'">
+                        <x-admin::form.control-group.control
+                            type="datetime"
+                            name="booking[available_to]"
+                            ::rules="'required|after:' + booking.available_from"
+                            v-model="booking.available_to"
+                            :label="trans('admin::app.catalog.products.edit.types.booking.available-to')"
+                            :placeholder="trans('admin::app.catalog.products.edit.types.booking.available-to')"
+                        />
+                    </template>
+
+                    <template v-else>
+                        <x-admin::form.control-group.control
+                            type="date"
+                            name="booking[available_to]"
+                            ::rules="'required|after:' + booking.available_from"
+                            v-model="booking.available_to"
+                            :label="trans('admin::app.catalog.products.edit.types.booking.available-to')"
+                            :placeholder="trans('admin::app.catalog.products.edit.types.booking.available-to')"
+                        />
+                    </template>
 
                     <x-admin::form.control-group.error  control-name="booking[available_to]" />
                 </x-admin::form.control-group>
             </div>
+
+            <!-- Allow Cancellation -->
+            <x-admin::form.control-group class="w-full">
+                <x-admin::form.control-group.label>
+                    @lang('admin::app.catalog.products.edit.types.booking.allow-cancellation.title')
+                </x-admin::form.control-group.label>
+
+                <x-admin::form.control-group.control
+                    type="select"
+                    name="booking[allow_cancellation]"
+                    v-model="booking.allow_cancellation"
+                    :label="trans('admin::app.catalog.products.edit.types.booking.allow-cancellation.title')"
+                >
+                    <option value="1">
+                        @lang('admin::app.catalog.products.edit.types.booking.allow-cancellation.yes')
+                    </option>
+
+                    <option value="0">
+                        @lang('admin::app.catalog.products.edit.types.booking.allow-cancellation.no')
+                    </option>
+                </x-admin::form.control-group.control>
+            </x-admin::form.control-group>
 
             @php
                 $bookingTypes = [
@@ -221,7 +269,9 @@
 
                         available_from: '',
 
-                        available_to: ''
+                        available_to: '',
+
+                        allow_cancellation: 1
                     }
                 }
             },

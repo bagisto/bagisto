@@ -44,7 +44,7 @@ class Booking extends AbstractType
      *
      * @var bool
      */
-    protected $isComposite = true;
+    protected $isComposite = false;
 
     /**
      * Is a stockable product type.
@@ -81,6 +81,19 @@ class Booking extends AbstractType
         $product = parent::update($data, $id, $attribute);
 
         if (request()->route()->getName() != 'admin.catalog.products.mass_update') {
+            if (
+                isset($data['booking']['type'])
+                && $data['booking']['type'] != 'event'
+            ) {
+                if (! empty($data['booking']['available_from']) && strlen($data['booking']['available_from']) <= 10) {
+                    $data['booking']['available_from'] = $data['booking']['available_from'].' 00:00:00';
+                }
+
+                if (! empty($data['booking']['available_to']) && strlen($data['booking']['available_to']) <= 10) {
+                    $data['booking']['available_to'] = $data['booking']['available_to'].' 23:59:59';
+                }
+            }
+
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $id);
 
             $bookingProduct
@@ -175,10 +188,7 @@ class Booking extends AbstractType
 
             $products = parent::prepareForCart($data);
         } elseif ($bookingProduct->type == 'event') {
-            if (
-                Carbon::now() > $bookingProduct->available_from
-                && Carbon::now() > $bookingProduct->available_to
-            ) {
+            if (Carbon::now() > $bookingProduct->available_to) {
                 return trans('shop::app.products.booking.cart.integrity.event.expired');
             }
 
@@ -217,7 +227,13 @@ class Booking extends AbstractType
         $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
         if (! $typeHelper->isSlotAvailable($products)) {
-            throw new InsufficientProductInventoryException(trans('shop::app.products.booking.cart.integrity.inventory_warning'));
+            $messageKey = match ($bookingProduct->type) {
+                'rental' => 'shop::app.products.booking.cart.integrity.rental_unavailable',
+                'event' => 'shop::app.products.booking.cart.integrity.event.sold_out',
+                default => 'shop::app.products.booking.cart.integrity.inventory_warning',
+            };
+
+            throw new InsufficientProductInventoryException(trans($messageKey));
         }
 
         $products = $typeHelper->addAdditionalPrices($products);

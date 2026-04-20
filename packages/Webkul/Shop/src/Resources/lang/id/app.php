@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Akun Anda memerlukan persetujuan admin untuk aktivasi.',
             'page-title' => 'Masuk Pelanggan',
             'password' => 'Kata Sandi',
+            'resend-verification' => 'Kirim Ulang Email Verifikasi',
             'show-password' => 'Tampilkan Kata Sandi',
             'title' => 'Masuk',
             'verify-first' => 'Harap verifikasi akun email Anda terlebih dahulu.',
@@ -800,6 +801,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Pesan Tiket Anda',
                         'title' => 'Acara pada :',
+                        'total-price' => 'Total Harga',
                     ],
 
                     'rental' => [
@@ -899,22 +901,28 @@ return [
             'cart' => [
                 'booking-from' => 'Pemesanan Dari',
                 'booking-till' => 'Pemesanan Hingga',
+                'charged-per' => 'Dikenakan Per',
                 'daily' => 'Harian',
                 'event-from' => 'Acara Dari',
                 'event-ticket' => 'Tiket Acara',
                 'event-till' => 'Acara Hingga',
+                'guest-limit' => 'Batas Tamu Per Meja',
                 'hourly' => 'Per Jam',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'Acara ini telah berakhir.',
+                        'sold_out' => 'Tiket untuk acara ini sudah habis terjual.',
                     ],
 
                     'missing_options' => 'Opsi tidak tersedia untuk produk ini.',
                     'inventory_warning' => 'Jumlah yang diminta tidak tersedia, silakan coba lagi nanti.',
+                    'rental_unavailable' => 'Produk sewa ini tidak tersedia untuk tanggal yang dipilih.',
                     'select_hourly_duration' => 'Pilih durasi slot satu jam.',
                 ],
 
+                'per-guest' => 'Per Tamu',
+                'per-table' => 'Per Meja',
                 'rent-from' => 'Sewa Dari',
                 'rent-till' => 'Sewa Hingga',
                 'rent-type' => 'Jenis Sewa',
