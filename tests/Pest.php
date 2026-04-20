@@ -5,6 +5,7 @@ use Webkul\Core\Tests\CoreTestCase;
 use Webkul\Customer\Tests\CustomerTestCase;
 use Webkul\DataGrid\Tests\DataGridTestCase;
 use Webkul\Installer\Tests\InstallerTestCase;
+use Webkul\Omnibus\Tests\OmnibusTestCase;
 use Webkul\Payment\Tests\PaymentTestCase;
 use Webkul\PayU\Tests\PayUTestCase;
 use Webkul\Razorpay\Tests\RazorpayTestCase;
@@ -33,7 +34,7 @@ uses(PaymentTestCase::class)->in('../packages/Webkul/Payment/tests');
 uses(PayUTestCase::class)->in('../packages/Webkul/PayU/tests');
 uses(RazorpayTestCase::class)->in('../packages/Webkul/Razorpay/tests');
 uses(ShopTestCase::class)->in('../packages/Webkul/Shop/tests');
-uses(ShopTestCase::class)->in('../packages/Webkul/Omnibus/tests');
+uses(OmnibusTestCase::class)->in('../packages/Webkul/Omnibus/tests');
 uses(StripeTestCase::class)->in('../packages/Webkul/Stripe/tests');
 
 /*
