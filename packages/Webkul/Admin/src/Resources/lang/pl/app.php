@@ -4427,9 +4427,9 @@ return [
                     ],
 
                     'omnibus' => [
-                        'title' => 'Omnibus',
-                        'title-info' => 'Konfiguracja dyrektywy Omnibus',
-                        'enable' => 'Włącz Omnibusa',
+                        'title' => 'Ujawnienie historii cen (Omnibus)',
+                        'title-info' => 'Zapisuje codzienne migawki cen i pokazuje najniższą cenę w ciągu 30 dni przed każdą obniżką, zgodnie z wymogami dyrektywy Omnibus UE.',
+                        'enable' => 'Włącz ujawnianie cen (Omnibus)',
                     ],
                 ],
 

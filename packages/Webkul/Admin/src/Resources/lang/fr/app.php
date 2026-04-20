@@ -4427,9 +4427,9 @@ return [
                     ],
 
                     'omnibus' => [
-                        'title' => 'Omnibus',
-                        'title-info' => 'Configuration de la directive Omnibus',
-                        'enable' => 'Activer Omnibus',
+                        'title' => 'Divulgation des prix Omnibus',
+                        'title-info' => 'Enregistre des instantanés de prix quotidiens et affiche le prix le plus bas dans les 30 jours précédant chaque réduction, conformément à la directive Omnibus de l\'UE.',
+                        'enable' => 'Activer la divulgation Omnibus',
                     ],
                 ],
 

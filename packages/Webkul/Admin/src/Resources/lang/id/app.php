@@ -4427,9 +4427,9 @@ return [
                     ],
 
                     'omnibus' => [
-                        'title' => 'Omnibus',
-                        'title-info' => 'Konfigurasi direktif Omnibus',
-                        'enable' => 'Aktifkan Omnibus',
+                        'title' => 'Pengungkapan Harga Omnibus',
+                        'title-info' => 'Mencatat potret harga harian dan menampilkan harga terendah dalam 30 hari sebelum setiap diskon, sesuai Direktif Omnibus Uni Eropa.',
+                        'enable' => 'Aktifkan pengungkapan Omnibus',
                     ],
                 ],
 

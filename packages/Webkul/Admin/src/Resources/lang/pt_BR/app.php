@@ -4427,9 +4427,9 @@ return [
                     ],
 
                     'omnibus' => [
-                        'title' => 'Omnibus',
-                        'title-info' => 'Configuração da diretiva Omnibus',
-                        'enable' => 'Habilitar Omnibus',
+                        'title' => 'Divulgação de preços Omnibus',
+                        'title-info' => 'Registra instantâneas de preço diárias e exibe o menor preço nos 30 dias anteriores a cada desconto, conforme exigido pela Diretiva Omnibus da UE.',
+                        'enable' => 'Habilitar divulgação Omnibus',
                     ],
                 ],
 

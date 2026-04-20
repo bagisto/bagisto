@@ -4427,9 +4427,9 @@ return [
                     ],
 
                     'omnibus' => [
-                        'title' => 'Omnibus',
-                        'title-info' => 'Configurarea directivei Omnibus',
-                        'enable' => 'Activați Omnibus',
+                        'title' => 'Divulgarea prețurilor Omnibus',
+                        'title-info' => 'Înregistrează instantanee zilnice de preț și afișează cel mai mic preț din cele 30 de zile dinaintea fiecărei reduceri, conform Directivei Omnibus a UE.',
+                        'enable' => 'Activează divulgarea Omnibus',
                     ],
                 ],
 

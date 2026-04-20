@@ -4427,9 +4427,9 @@ return [
                     ],
 
                     'omnibus' => [
-                        'title' => 'Omnibus',
-                        'title-info' => 'Configuratie Omnibus-richtlijn',
-                        'enable' => 'Omnibus inschakelen',
+                        'title' => 'Omnibus-prijsinformatie',
+                        'title-info' => 'Legt dagelijkse prijs-snapshots vast en toont de laagste prijs in de 30 dagen voor elke korting, zoals vereist door de EU-Omnibus-richtlijn.',
+                        'enable' => 'Omnibus-informatie inschakelen',
                     ],
                 ],
 

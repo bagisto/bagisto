@@ -4427,9 +4427,9 @@ return [
                     ],
 
                     'omnibus' => [
-                        'title' => 'Omnibus',
-                        'title-info' => 'Konfiguration der Omnibus-Richtlinie',
-                        'enable' => 'Omnibus aktivieren',
+                        'title' => 'Omnibus-Preisangabe',
+                        'title-info' => 'Erfasst täglich Preis-Snapshots und zeigt den niedrigsten Preis der 30 Tage vor jeder Ermäßigung an, wie von der EU-Omnibus-Richtlinie vorgeschrieben.',
+                        'enable' => 'Omnibus-Offenlegung aktivieren',
                     ],
                 ],
 
