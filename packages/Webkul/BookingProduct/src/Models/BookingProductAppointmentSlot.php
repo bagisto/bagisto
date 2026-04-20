@@ -28,6 +28,7 @@ class BookingProductAppointmentSlot extends Model implements BookingProductAppoi
         'break_time',
         'same_slot_all_days',
         'slots',
+        'allow_slot_overlap',
         'booking_product_id',
     ];
 }

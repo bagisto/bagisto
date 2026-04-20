@@ -1419,6 +1419,18 @@ return [
                         'qty' => 'Jumlah',
                         'title' => 'Tipe Booking',
 
+                        'allow-cancellation' => [
+                            'no' => 'Tidak',
+                            'title' => 'Izinkan Pembatalan Pemesanan',
+                            'yes' => 'Ya',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'Tidak',
+                            'title' => 'Izinkan Slot Waktu Tumpang Tindih',
+                            'yes' => 'Ya',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'Tidak',
                             'title' => 'Tersedia Setiap Minggu',
@@ -1441,7 +1453,7 @@ return [
                             'break-duration' => 'Durasi Istirahat antar Slot (Menit)',
                             'close' => 'Tutup',
                             'description' => 'Informasi Booking',
-                            'description-info' => 'Durasi waktu akan dibuat dan ditampilkan berdasarkan slot yang tersedia. Ini akan unik di semua slot dan terlihat di halaman toko.',
+                            'description-info' => 'Tentukan slot waktu yang tersedia untuk pemesanan ini. Setiap slot mewakili jendela waktu yang dapat dipesan yang ditampilkan kepada pelanggan di etalase. Slot tidak boleh tumpang tindih kecuali diizinkan secara eksplisit.',
                             'edit' => 'Edit',
                             'many' => 'Banyak Booking dalam Satu Hari',
                             'one' => 'Satu Booking untuk Banyak Hari',
@@ -1530,7 +1542,7 @@ return [
 
                         'slots' => [
                             'add' => 'Tambah Slot',
-                            'description-info' => 'Durasi waktu akan dibuat dan ditampilkan berdasarkan slot. Setiap durasi waktu akan bersifat unik di semua slot dan akan terlihat di etalase.',
+                            'description-info' => 'Tentukan slot waktu yang tersedia untuk pemesanan ini. Jendela waktu yang dapat dipesan akan dibuat berdasarkan durasi slot dan waktu istirahat, dan ditampilkan kepada pelanggan di etalase.',
                             'save' => 'Simpan',
                             'title' => 'Durasi Waktu Slot',
                             'unavailable' => 'Tidak Tersedia',

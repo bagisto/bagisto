@@ -70,6 +70,31 @@
             </x-admin::form.control-group>
         </template>
 
+        <!-- Allow Slot Overlap (only for one booking for many days) -->
+        <x-admin::form.control-group
+            class="w-full"
+            v-if="default_booking.booking_type == 'one'"
+        >
+            <x-admin::form.control-group.label>
+                @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.title')
+            </x-admin::form.control-group.label>
+
+            <x-admin::form.control-group.control
+                type="select"
+                name="booking[allow_slot_overlap]"
+                v-model="default_booking.allow_slot_overlap"
+                :label="trans('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.title')"
+            >
+                <option value="0">
+                    @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.no')
+                </option>
+
+                <option value="1">
+                    @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.yes')
+                </option>
+            </x-admin::form.control-group.control>
+        </x-admin::form.control-group>
+
         <!-- Slots Component -->
         <div class="flex items-center justify-between gap-5 py-2">
             <div class="flex flex-col gap-2">
@@ -482,6 +507,8 @@
 
                         break_time: 15,
 
+                        allow_slot_overlap: 0,
+
                         slots: []
                     },
 
@@ -543,33 +570,37 @@
                             return;
                         }
                         
-                        const isOverlapping = this.slots.one.some(item => {
-                            const toMinutes = (day, time) => {
-                                const [h, m] = time.split(':').map(Number);
-                                
-                                return day * 1440 + h * 60 + m;
-                            };
-
-                            const itemStart = toMinutes(+item.from_day, item.from);
-
-                            const itemEnd = toMinutes(+item.to_day, item.to);
-                            
-                            const paramsStart = toMinutes(+params.from_day, params.from);
-                            
-                            const paramsEnd = toMinutes(+params.to_day, params.to);
-
-                            return paramsStart < itemEnd && paramsEnd > itemStart;
-                        });
-
-                        if (! isOverlapping) {
+                        if (parseInt(this.default_booking.allow_slot_overlap)) {
                             this.slots.one.push(params);
                         } else {
-                            this.$emitter.emit('add-flash', {
-                                type: 'error',
-                                message: "@lang('admin::app.catalog.products.edit.types.booking.validations.overlap-validation')",
+                            const isOverlapping = this.slots.one.some(item => {
+                                const toMinutes = (day, time) => {
+                                    const [h, m] = time.split(':').map(Number);
+
+                                    return day * 1440 + h * 60 + m;
+                                };
+
+                                const itemStart = toMinutes(+item.from_day, item.from);
+
+                                const itemEnd = toMinutes(+item.to_day, item.to);
+
+                                const paramsStart = toMinutes(+params.from_day, params.from);
+
+                                const paramsEnd = toMinutes(+params.to_day, params.to);
+
+                                return paramsStart < itemEnd && paramsEnd > itemStart;
                             });
-                            
-                            return;
+
+                            if (! isOverlapping) {
+                                this.slots.one.push(params);
+                            } else {
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: "@lang('admin::app.catalog.products.edit.types.booking.validations.overlap-validation')",
+                                });
+
+                                return;
+                            }
                         }
                     } else {
                         params.id = this.currentIndex;

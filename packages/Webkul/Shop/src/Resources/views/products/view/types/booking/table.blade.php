@@ -1,38 +1,42 @@
 <div class="grid grid-cols-1 gap-6">
-    <div class="flex gap-3">
-        <span class="icon-calendar text-2xl"></span>
+    @if ($bookingProduct->table_slot)
+        <div class="flex gap-3">
+            <span class="icon-calendar text-2xl"></span>
 
-        <div class="grid grid-cols-1 gap-1.5 text-sm font-medium">
-            <p class="text-[#6E6E6E]">
-                @lang('shop::app.products.view.type.booking.table.slot-duration') :
-            </p>
-
-            <div>
-                @lang('shop::app.products.view.type.booking.table.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration])
-            </div>
-        </div>
-    </div>
-
-    @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\TableSlot')
-
-    <div class="flex gap-3">
-        <span class="icon-calendar text-2xl"></span>
-
-        <div class="grid grid-cols-1 gap-4">
             <div class="grid grid-cols-1 gap-1.5 text-sm font-medium">
                 <p class="text-[#6E6E6E]">
-                    @lang('shop::app.products.view.type.booking.table.today-availability')
+                    @lang('shop::app.products.view.type.booking.table.slot-duration') :
                 </p>
-    
-                <span>
-                    {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
-                </span>
-            </div>
 
-            <!-- Toggler Vue Component -->
-            <v-toggler></v-toggler>
+                <div>
+                    @lang('shop::app.products.view.type.booking.table.slot-duration-in-minutes', ['minutes' => $bookingProduct->table_slot->duration])
+                </div>
+            </div>
         </div>
-    </div>
+
+        @if ($bookingProduct->available_every_week)
+            @inject ('bookingSlotHelper', 'Webkul\BookingProduct\Helpers\TableSlot')
+
+            <div class="flex gap-3">
+                <span class="icon-calendar text-2xl"></span>
+
+                <div class="grid grid-cols-1 gap-4">
+                    <div class="grid grid-cols-1 gap-1.5 text-sm font-medium">
+                        <p class="text-[#6E6E6E]">
+                            @lang('shop::app.products.view.type.booking.table.today-availability')
+                        </p>
+
+                        <span>
+                            {!! $bookingSlotHelper->getTodaySlotsHtml($bookingProduct) !!}
+                        </span>
+                    </div>
+
+                    <!-- Toggler Vue Component -->
+                    <v-toggler></v-toggler>
+                </div>
+            </div>
+        @endif
+    @endif
 
     @include ('shop::products.view.types.booking.slots', [
         'bookingProduct' => $bookingProduct, 
@@ -41,7 +45,7 @@
 
     <!-- Notes -->
     <x-shop::form.control-group class="!mb-0 w-full">
-        <x-shop::form.control-group.label class="required">
+        <x-shop::form.control-group.label>
             @lang('shop::app.products.view.type.booking.table.special-notes')
         </x-shop::form.control-group.label>
 
@@ -49,7 +53,6 @@
             type="textarea"
             class="!mb-0 max-sm:px-2.5 max-sm:py-1.5 max-sm:text-xs"
             name="booking[note]"
-            rules="required"
             :label="trans('shop::app.products.view.type.booking.table.special-notes')"
             :placeholder="trans('shop::app.products.view.type.booking.table.special-notes')"
         />
@@ -113,7 +116,7 @@
                 return{
                     showDaysAvailability: '',
 
-                    days: @json($bookingSlotHelper->getWeekSlotDurations($bookingProduct)),
+                    days: @json($bookingProduct->table_slot ? app(\Webkul\BookingProduct\Helpers\TableSlot::class)->getWeekSlotDurations($bookingProduct) : []),
                 }
             },
         })

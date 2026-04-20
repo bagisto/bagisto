@@ -51,7 +51,7 @@ class BookingProductRepository extends Repository
      */
     public function create(array $data)
     {
-        if (isset($data['slots'])) {
+        if (isset($data['slots']) && empty($data['allow_slot_overlap'])) {
             $data['slots'] = $this->validateSlots($data);
         }
 
@@ -75,7 +75,9 @@ class BookingProductRepository extends Repository
      */
     public function update(array $data, $id, $attribute = 'id')
     {
-        if (isset($data['slots'])) {
+        $allowOverlap = ! empty($data['allow_slot_overlap']);
+
+        if (isset($data['slots']) && ! $allowOverlap) {
             $data['slots'] = $this->skipOverLappingSlots($data['slots']);
         }
 
@@ -97,7 +99,9 @@ class BookingProductRepository extends Repository
             if (isset($data['slots'])) {
                 $data['slots'] = $this->formatSlots($data);
 
-                $data['slots'] = $this->validateSlots($data);
+                if (! $allowOverlap) {
+                    $data['slots'] = $this->validateSlots($data);
+                }
             } else {
                 $data['slots'] = $this->addSlots($data);
             }
@@ -213,7 +217,10 @@ class BookingProductRepository extends Repository
 
             $to = Carbon::createFromTimeString($timeInterval['to'])->getTimestamp();
 
-            if ($from > $to) {
+            $isCrossDaySlot = isset($timeInterval['from_day'], $timeInterval['to_day'])
+                && $timeInterval['from_day'] != $timeInterval['to_day'];
+
+            if ($from > $to && ! $isCrossDaySlot) {
                 continue;
             }
 

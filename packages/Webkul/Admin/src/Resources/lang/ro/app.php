@@ -1419,6 +1419,18 @@ return [
                         'qty' => 'Qty',
                         'title' => 'Booking Type',
 
+                        'allow-cancellation' => [
+                            'no' => 'Nu',
+                            'title' => 'Permite anularea rezervării',
+                            'yes' => 'Da',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'Nu',
+                            'title' => 'Permite intervale de timp suprapuse',
+                            'yes' => 'Da',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'No',
                             'title' => 'Available Every Week',
@@ -1441,7 +1453,7 @@ return [
                             'break-duration' => 'Break Time b/w Slots (Mins)',
                             'close' => 'Close',
                             'description' => 'Booking Information',
-                            'description-info' => 'According to slots the time duration will be created and visible. And The time duration will be created and displayed according to the slots. It will be unique across all slots and visible on the storefront.',
+                            'description-info' => 'Definiți intervalele de timp disponibile pentru această rezervare. Fiecare interval reprezintă o fereastră de timp rezervabilă afișată clienților în magazin. Intervalele nu trebuie să se suprapună decât dacă este permis explicit.',
                             'edit' => 'Edit',
                             'many' => 'Many Bookings For One Days',
                             'one' => 'One Booking For Many Days',
@@ -1530,7 +1542,7 @@ return [
 
                         'slots' => [
                             'add' => 'Add Slots',
-                            'description-info' => 'According to slots the time duration will be created and visible. And The time duration will be created and displayed according to the slots. It will be unique across all slots and visible on the storefront.',
+                            'description-info' => 'Definiți intervalele de timp disponibile pentru această rezervare. Ferestrele de timp rezervabile vor fi generate pe baza duratei intervalului și a timpului de pauză, și vor fi afișate clienților în magazin.',
                             'save' => 'Save',
                             'title' => 'Slots Time Duration',
                             'unavailable' => 'Unavailable',

@@ -66,6 +66,15 @@
                     >
                     </p>
 
+                    <!-- Combined Total Price -->
+                    <p
+                        v-if="ticket.formatted_total_price"
+                        class="text-sm text-[#6E6E6E]"
+                    >
+                        @lang('shop::app.products.view.type.booking.event.total-price'):
+                        <span class="font-medium text-black" v-text="ticket.formatted_total_price"></span>
+                    </p>
+
                     <!-- Description -->
                     <div v-text="ticket.description"></div>
                 </div>
@@ -77,6 +86,7 @@
                         rules="required|numeric|min_value:0"
                         ::value="tickets.length > 1 ? 1 : 0"
                         ::min-value="0"
+                        ::max-value="ticket.qty || 999"
                     />
                 </div>
             </div>

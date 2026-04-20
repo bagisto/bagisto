@@ -151,11 +151,34 @@
             <x-admin::form.control-group.error control-name="booking[same_slot_all_days]`" />
         </x-admin::form.control-group>
 
+        <!-- Allow Slot Overlap -->
+        <x-admin::form.control-group class="w-full">
+            <x-admin::form.control-group.label>
+                @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.title')
+            </x-admin::form.control-group.label>
+
+            <x-admin::form.control-group.control
+                type="select"
+                name="booking[allow_slot_overlap]"
+                v-model="table_booking.allow_slot_overlap"
+                :label="trans('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.title')"
+            >
+                <option value="0">
+                    @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.no')
+                </option>
+
+                <option value="1">
+                    @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.yes')
+                </option>
+            </x-admin::form.control-group.control>
+        </x-admin::form.control-group>
+
         <!-- Slots Vue Component -->
         <v-slots
             :booking-product="table_booking"
             :booking-type="'table_slot'"
             :same-slot-all-days="table_booking.same_slot_all_days"
+            :allow-slot-overlap="table_booking.allow_slot_overlap"
         >
         </v-slots>
     </script>
@@ -180,6 +203,8 @@
                         prevent_scheduling_before: 0,
 
                         same_slot_all_days: 1,
+
+                        allow_slot_overlap: 0,
 
                         slots: []
                     }

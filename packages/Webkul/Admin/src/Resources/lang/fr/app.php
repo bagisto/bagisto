@@ -1419,6 +1419,18 @@ return [
                         'qty' => 'Quantité',
                         'title' => 'Type de réservation',
 
+                        'allow-cancellation' => [
+                            'no' => 'Non',
+                            'title' => 'Autoriser l\'annulation de réservation',
+                            'yes' => 'Oui',
+                        ],
+
+                        'allow-slot-overlap' => [
+                            'no' => 'Non',
+                            'title' => 'Autoriser les créneaux horaires chevauchants',
+                            'yes' => 'Oui',
+                        ],
+
                         'available-every-week' => [
                             'no' => 'Non',
                             'title' => 'Disponible chaque semaine',
@@ -1441,7 +1453,7 @@ return [
                             'break-duration' => 'Temps de pause entre les créneaux (minutes)',
                             'close' => 'Fermer',
                             'description' => 'Informations sur la réservation',
-                            'description-info' => 'La durée sera créée et affichée en fonction des créneaux. Elle sera unique à travers tous les créneaux et visible sur la vitrine du magasin',
+                            'description-info' => 'Définissez les créneaux horaires disponibles pour cette réservation. Chaque créneau représente une fenêtre de temps réservable affichée aux clients sur la vitrine. Les créneaux ne doivent pas se chevaucher sauf autorisation explicite.',
                             'edit' => 'Modifier',
                             'many' => 'Plusieurs réservations pour un jour',
                             'one' => 'Une réservation pour plusieurs jours',
@@ -1530,7 +1542,7 @@ return [
 
                         'slots' => [
                             'add' => 'Ajouter des créneaux',
-                            'description-info' => 'La durée sera créée et affichée en fonction des créneaux. Elle sera unique à travers tous les créneaux et visible sur la vitrine du magasin',
+                            'description-info' => 'Définissez les créneaux horaires disponibles pour cette réservation. Les fenêtres de temps réservables seront générées en fonction de la durée du créneau et du temps de pause, et affichées aux clients sur la vitrine.',
                             'save' => 'Enregistrer',
                             'title' => 'Durée des créneaux',
                             'unavailable' => 'Indisponible',

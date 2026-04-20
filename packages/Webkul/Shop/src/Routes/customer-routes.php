@@ -58,7 +58,9 @@ Route::prefix('customer')->group(function () {
          */
         Route::get('verify-account/{token}', 'verifyAccount')->name('shop.customers.verify');
 
-        Route::get('resend/verification/{email}', 'resendVerificationEmail')->name('shop.customers.resend.verification_email');
+        Route::get('resend/verification/{email}', 'resendVerificationEmail')
+            ->middleware('throttle:6,1')
+            ->name('shop.customers.resend.verification_email');
     });
 
     /**

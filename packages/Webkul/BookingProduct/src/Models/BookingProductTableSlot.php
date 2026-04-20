@@ -31,6 +31,7 @@ class BookingProductTableSlot extends Model implements BookingProductTableSlotCo
         'prevent_scheduling_before',
         'same_slot_all_days',
         'slots',
+        'allow_slot_overlap',
         'booking_product_id',
     ];
 }

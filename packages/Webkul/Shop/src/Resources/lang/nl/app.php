@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Uw activering wacht op goedkeuring van de beheerder',
             'page-title' => 'Aanmelden',
             'password' => 'Wachtwoord',
+            'resend-verification' => 'Verificatie-e-mail opnieuw verzenden',
             'show-password' => 'Wachtwoord Weergeven',
             'title' => 'Aanmelden',
             'verify-first' => 'Verifieer eerst uw e-mailaccount.',
@@ -800,6 +801,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Boek Uw Ticket',
                         'title' => 'Evenement op :',
+                        'total-price' => 'Totaalprijs',
                     ],
 
                     'rental' => [
@@ -899,22 +901,28 @@ return [
             'cart' => [
                 'booking-from' => 'Boeking Van',
                 'booking-till' => 'Boeking Tot',
+                'charged-per' => 'Kosten per',
                 'daily' => 'Dagelijks',
                 'event-from' => 'Evenement Van',
                 'event-ticket' => 'Evenement Ticket',
                 'event-till' => 'Evenement Tot',
+                'guest-limit' => 'Gastenlimiet per tafel',
                 'hourly' => 'Per Uur',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'Dit evenement is verlopen.',
+                        'sold_out' => 'De tickets voor dit evenement zijn uitverkocht.',
                     ],
 
                     'missing_options' => 'Opties ontbreken voor dit product.',
                     'inventory_warning' => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
+                    'rental_unavailable' => 'Dit huurproduct is niet beschikbaar voor de geselecteerde datums.',
                     'select_hourly_duration' => 'Selecteer een tijdsduur van één uur.',
                 ],
 
+                'per-guest' => 'Per gast',
+                'per-table' => 'Per tafel',
                 'rent-from' => 'Huur Van',
                 'rent-till' => 'Huur Tot',
                 'rent-type' => 'Huur Type',

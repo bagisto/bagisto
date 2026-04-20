@@ -144,17 +144,21 @@ class RegistrationController extends Controller
      */
     public function resendVerificationEmail($email)
     {
-        $verificationData = [
-            'email' => $email,
-            'token' => md5(uniqid(rand(), true)),
-        ];
-
         $customer = $this->customerRepository->findOneByField('email', $email);
 
-        $this->customerRepository->update(['token' => $verificationData['token']], $customer->id);
+        if (! $customer) {
+            session()->flash('success', trans('shop::app.customers.signup-form.verification-sent'));
+
+            return redirect()->back();
+        }
+
+        $customer = $this->customerRepository->update(
+            ['token' => md5(uniqid(rand(), true))],
+            $customer->id
+        );
 
         try {
-            Mail::queue(new EmailVerificationNotification($verificationData));
+            Mail::queue(new EmailVerificationNotification($customer));
 
             if (Cookie::has('enable-resend')) {
                 Cookie::queue(Cookie::forget('enable-resend'));
