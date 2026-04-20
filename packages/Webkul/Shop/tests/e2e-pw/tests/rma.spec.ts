@@ -1,8 +1,8 @@
 import { test } from "../setup";
-import { ProductCreation } from "../pages/product";
-import { ProductCheckout } from "../pages/checkout-flow";
+import { ProductCreation } from "../pages/admin/catalog/products";
+import { SimpleProductCheckout } from "../pages/shop/checkout/product-types/SimpleProductCheckout";
 import { loginAsCustomer, addAddress } from "../utils/customer";
-import { RMACreation } from "../pages/rma";
+import { RMACreatePage } from "../pages/shop/RmaCreatePage";
 
 test.describe("should create rma for order (RMA rule enable)", () => {
     test.beforeEach(
@@ -29,11 +29,10 @@ test.describe("should create rma for order (RMA rule enable)", () => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
 
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.customerCheckout();
-
-        const rmaCreation = new RMACreation(shopPage);
-        await rmaCreation.rmaCreation();
+        const simpleProductCheckout = new SimpleProductCheckout(shopPage);
+        await simpleProductCheckout.checkoutWithDefaultShipping();
+        const rmaCreatePage = new RMACreatePage(shopPage);
+        await rmaCreatePage.rmaCreation();
     });
 
     test("should display validation message for submitting invalid rma request", async ({
@@ -42,11 +41,11 @@ test.describe("should create rma for order (RMA rule enable)", () => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
 
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.customerCheckout();
+        const simpleProductCheckout = new SimpleProductCheckout(shopPage);
+        await simpleProductCheckout.checkoutWithDefaultShipping();
 
-        const rmaCreation = new RMACreation(shopPage);
-        await rmaCreation.invalidRMARequest();
+        const rmaCreatePage = new RMACreatePage(shopPage);
+        await rmaCreatePage.invalidRMARequest();
     });
 });
 
@@ -75,10 +74,10 @@ test.describe("should create rma for order (RMA rule disable)", () => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
 
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.customerCheckout();
-
-        const rmaCreation = new RMACreation(shopPage);
-        await rmaCreation.rmaCreation();
+        const simpleProductCheckout = new SimpleProductCheckout(shopPage);
+        await simpleProductCheckout.checkoutWithDefaultShipping();
+        
+        const rmaCreatePage = new RMACreatePage(shopPage);
+        await rmaCreatePage.rmaCreation();
     });
 });

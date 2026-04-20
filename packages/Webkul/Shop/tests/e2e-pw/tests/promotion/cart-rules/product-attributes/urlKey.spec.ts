@@ -1,6 +1,8 @@
 import { test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/product";
-import { CreateRules } from "../../../../pages/rules";
+import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 let generatedName: string;
@@ -24,8 +26,8 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
 test.afterEach(
     "should delete the created product and rule",
     async ({ page }) => {
-        const createRules = new CreateRules(page);
-        await createRules.deleteRuleAndProduct();
+        const ruleDeletePage = new RuleDeletePage(page);
+        await ruleDeletePage.deleteRuleAndProduct();
     },
 );
 
@@ -34,61 +36,65 @@ test.describe("cart rules", () => {
         test("should apply coupon when url key of product condition is -> is equal to", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|url_key",
                 operator: "==",
                 value: generatedName.toLowerCase(),
             });
-            await createRules.saveCartRule();
-            await createRules.applyCoupon();
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when url key of product condition is -> is not equal to", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|url_key",
                 operator: "!=",
                 value: "simple",
             });
-            await createRules.saveCartRule();
-            await createRules.applyCoupon();
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when url key of product condition is -> contains", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|url_key",
                 operator: "{}",
                 value: generatedName.toLowerCase(),
             });
-            await createRules.saveCartRule();
-            await createRules.applyCoupon();
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when url key of product condition is -> does not contain", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|url_key",
                 operator: "!{}",
                 value: "example",
             });
-            await createRules.saveCartRule();
-            await createRules.applyCoupon();
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCoupon();
         });
     });
 });

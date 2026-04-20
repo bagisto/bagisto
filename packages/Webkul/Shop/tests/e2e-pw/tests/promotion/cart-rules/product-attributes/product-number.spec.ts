@@ -1,6 +1,8 @@
 import { expect, test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/product";
-import { CreateRules } from "../../../../pages/rules";
+import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 let generatedProductNumber: string;
@@ -24,8 +26,8 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
 test.afterEach(
     "should delete the created product and rule",
     async ({ adminPage }) => {
-        const createRules = new CreateRules(adminPage);
-        await createRules.deleteRuleAndProduct();
+        const ruleDeletePage = new RuleDeletePage(adminPage);
+        await ruleDeletePage.deleteRuleAndProduct();
     },
 );
 
@@ -34,15 +36,16 @@ test.describe("cart rules", () => {
         test("should apply coupon when product number condition is -> is equal to", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|product_number",
                 operator: "==",
                 value: generatedProductNumber,
             });
-            await createRules.saveCartRule();
+            await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
             await page
                 .locator("span.cursor-pointer.icon-sort-right")
@@ -60,21 +63,22 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await createRules.applyCoupon();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when product number condition is -> is not equal to", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|product_number",
                 operator: "!=",
                 value: "123456",
             });
-            await createRules.saveCartRule();
+            await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
             await page
                 .locator("span.cursor-pointer.icon-sort-right")
@@ -92,21 +96,22 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await createRules.applyCoupon();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when product number condition is -> contains", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|product_number",
                 operator: "{}",
                 value: generatedProductNumber,
             });
-            await createRules.saveCartRule();
+            await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
             await page
                 .locator("span.cursor-pointer.icon-sort-right")
@@ -124,21 +129,22 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await createRules.applyCoupon();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when product number condition is -> does not contain", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|product_number",
                 operator: "!{}",
                 value: "123456",
             });
-            await createRules.saveCartRule();
+            await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
             await page
                 .locator("span.cursor-pointer.icon-sort-right")
@@ -156,7 +162,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await createRules.applyCoupon();
+            await ruleApplyPage.applyCoupon();
         });
     });
 });

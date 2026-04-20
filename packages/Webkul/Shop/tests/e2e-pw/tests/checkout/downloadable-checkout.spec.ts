@@ -1,6 +1,6 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/product";
-import { ProductCheckout } from "../../pages/checkout-flow";
+import { ProductCreation } from "../../pages/admin/catalog/products";
+import { DownloadableProductCheckout } from "../../pages/shop/checkout/product-types/DownloadableProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
@@ -32,7 +32,7 @@ test.describe("downloadable product checkout flow", () => {
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.downloadableCheckout();
+        const checkout = new DownloadableProductCheckout(shopPage);
+        await checkout.checkout();
     });
 });
