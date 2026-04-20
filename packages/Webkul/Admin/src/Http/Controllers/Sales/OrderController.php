@@ -139,6 +139,12 @@ class OrderController extends Controller
     {
         $order = $this->orderRepository->findOrFail($id);
 
+        if (! $order->customer) {
+            session()->flash('error', trans('admin::app.sales.orders.view.reorder-customer-deleted'));
+
+            return redirect()->back();
+        }
+
         $cart = Cart::createCart([
             'customer' => $order->customer,
             'is_active' => false,
