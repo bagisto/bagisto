@@ -2,25 +2,24 @@
 
 namespace Webkul\Omnibus\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Webkul\Omnibus\Contracts\OmnibusPrice as OmnibusPriceContract;
 use Webkul\Product\Models\ProductProxy;
 
-/**
- * @property int $id
- * @property int $product_id
- * @property int $channel_id
- * @property string $currency_code
- * @property float $price
- * @property string $date
- * @property Carbon $created_at
- * @property Carbon $updated_at
- */
 class OmnibusPrice extends Model implements OmnibusPriceContract
 {
+    /**
+     * Table.
+     *
+     * @var string
+     */
     protected $table = 'product_omnibus_prices';
 
+    /**
+     * Fillable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'product_id',
         'channel_id',
@@ -30,7 +29,7 @@ class OmnibusPrice extends Model implements OmnibusPriceContract
     ];
 
     /**
-     * The attributes that should be cast.
+     * Casts.
      *
      * @var array
      */
@@ -38,6 +37,9 @@ class OmnibusPrice extends Model implements OmnibusPriceContract
         'recorded_at' => 'datetime',
     ];
 
+    /**
+     * Get the product that the snapshot belongs to.
+     */
     public function product()
     {
         return $this->belongsTo(ProductProxy::modelClass());

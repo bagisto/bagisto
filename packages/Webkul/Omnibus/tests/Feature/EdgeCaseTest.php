@@ -4,7 +4,6 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Faker\Helpers\Product;
-use Webkul\Omnibus\Helpers\OmnibusHelper;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
 use Webkul\Product\Models\ProductPriceIndex;
@@ -16,7 +15,6 @@ beforeEach(function () {
 
     config(['products.omnibus.is_enabled' => 1]);
 
-    $this->helper = app(OmnibusHelper::class);
     $this->manager = app(OmnibusPriceManager::class);
     $this->repository = app(OmnibusPriceRepository::class);
 
@@ -48,8 +46,8 @@ it('avoids inserting duplicate prices if price remains exactly the same', functi
     $originalChannel = core()->getCurrentChannel();
     $originalCurrency = core()->getCurrentCurrency();
 
-    $this->manager->recordPriceIfNeeded($product);
-    $this->manager->recordPriceIfNeeded($product);
+    $this->manager->recordPrice($product);
+    $this->manager->recordPrice($product);
 
     core()->setCurrentChannel($originalChannel);
     core()->setCurrentCurrency($originalCurrency);

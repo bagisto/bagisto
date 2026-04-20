@@ -4,12 +4,11 @@ namespace Webkul\Omnibus\Repositories;
 
 use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
-use Webkul\Omnibus\Contracts\OmnibusPrice;
 
 class OmnibusPriceRepository extends Repository
 {
     /**
-     * Specify Model class name
+     * Specify model class name.
      */
     public function model(): string
     {
@@ -17,9 +16,7 @@ class OmnibusPriceRepository extends Repository
     }
 
     /**
-     * Get latest price history for a product and channel.
-     *
-     * @return OmnibusPrice|null
+     * Get the latest price snapshot for a product within a channel and currency.
      */
     public function getLatestByProductIdAndChannel(int $productId, int $channelId, string $currencyCode)
     {
@@ -32,15 +29,14 @@ class OmnibusPriceRepository extends Repository
     }
 
     /**
-     * Get lowest active non-promotional or basic final price over the last 30 days.
-     * Edge case: If product is less than 30 days old, it bounds smoothly via created_at intrinsically.
+     * Get the lowest snapshot price across the given products over the last 30 days before the promo start.
      */
-    public function getLowestPrice(int $productId, int $channelId, string $currencyCode, $promoStartDate = null)
+    public function getLowestPrice(array $productIds, int $channelId, string $currencyCode, $promoStartDate = null): ?float
     {
         $startDate = Carbon::now()->subDays(30)->toDateTimeString();
 
         $query = $this->model
-            ->where('product_id', $productId)
+            ->whereIn('product_id', $productIds)
             ->where('channel_id', $channelId)
             ->where('currency_code', $currencyCode)
             ->where('recorded_at', '>=', $startDate);
@@ -52,6 +48,5 @@ class OmnibusPriceRepository extends Repository
         $minPrice = $query->min('price');
 
         return $minPrice !== null ? (float) $minPrice : null;
-
     }
 }

@@ -24,8 +24,6 @@ class SnapshotPrices extends Command
 
     /**
      * Create a new command instance.
-     *
-     * @return void
      */
     public function __construct(
         protected ProductRepository $productRepository,
@@ -36,10 +34,8 @@ class SnapshotPrices extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
             $this->info('Omnibus is disabled in configuration.');
@@ -61,7 +57,7 @@ class SnapshotPrices extends Command
 
         $query->chunk(500, function ($products) use (&$snapshotCount) {
             foreach ($products as $product) {
-                $snapshotCount += $this->omnibusPriceManager->recordPriceIfNeeded($product);
+                $snapshotCount += $this->omnibusPriceManager->recordPrice($product);
                 $this->output->progressAdvance();
             }
         });

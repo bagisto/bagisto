@@ -62,7 +62,7 @@ it('separates products prices strictly', function () {
     $originalChannel = core()->getCurrentChannel();
     $originalCurrency = core()->getCurrentCurrency();
 
-    $this->manager->recordPriceIfNeeded($configurableProduct);
+    $this->manager->recordPrice($configurableProduct);
 
     core()->setCurrentChannel($originalChannel);
     core()->setCurrentCurrency($originalCurrency);
@@ -94,7 +94,7 @@ it('captures simple products prices accurately', function () {
     $originalChannel = core()->getCurrentChannel();
     $originalCurrency = core()->getCurrentCurrency();
 
-    $this->manager->recordPriceIfNeeded($product);
+    $this->manager->recordPrice($product);
 
     core()->setCurrentChannel($originalChannel);
     core()->setCurrentCurrency($originalCurrency);

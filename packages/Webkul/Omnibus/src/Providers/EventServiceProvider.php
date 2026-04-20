@@ -2,20 +2,33 @@
 
 namespace Webkul\Omnibus\Providers;
 
+use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\ServiceProvider;
+use Webkul\Omnibus\Listeners\ProductPriceChange;
 
 class EventServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap services.
+     * The event handler mappings for the application.
      *
-     * @return void
+     * @var array
      */
-    public function boot()
+    protected $listen = [
+        'catalog.product.create.after' => [
+            ProductPriceChange::class,
+        ],
+
+        'catalog.product.update.after' => [
+            ProductPriceChange::class,
+        ],
+    ];
+
+    /**
+     * Register any other events for the application.
+     */
+    public function boot(): void
     {
-        Event::listen('catalog.product.create.after', 'Webkul\Omnibus\Listeners\ProductPriceChange@afterSave');
-        Event::listen('catalog.product.update.after', 'Webkul\Omnibus\Listeners\ProductPriceChange@afterSave');
+        parent::boot();
 
         Event::listen('bagisto.shop.products.price.after', function ($viewRenderEventManager) {
             $viewRenderEventManager->addTemplate('omnibus::shop.inject');

@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('product_omnibus_prices', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id')->unsigned();
-            $table->integer('channel_id')->unsigned();
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('channel_id');
             $table->string('currency_code', 3);
             $table->decimal('price', 12, 4);
             $table->timestamp('recorded_at');
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
+            $table->foreign('channel_id')->references('id')->on('channels')->cascadeOnDelete();
 
             $table->index(
                 ['product_id', 'channel_id', 'currency_code', 'recorded_at'],

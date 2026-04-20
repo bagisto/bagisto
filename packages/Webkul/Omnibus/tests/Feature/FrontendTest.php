@@ -63,7 +63,7 @@ it('renders the omnibus directive string correctly for simple products', functio
     $originalChannel = core()->getCurrentChannel();
     $originalCurrency = core()->getCurrentCurrency();
 
-    app(OmnibusPriceManager::class)->recordPriceIfNeeded($product);
+    app(OmnibusPriceManager::class)->recordPrice($product);
 
     core()->setCurrentChannel($originalChannel);
     core()->setCurrentCurrency($originalCurrency);

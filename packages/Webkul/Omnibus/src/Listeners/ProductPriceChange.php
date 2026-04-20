@@ -7,18 +7,18 @@ use Webkul\Product\Contracts\Product;
 
 class ProductPriceChange
 {
+    /**
+     * Create a new listener instance.
+     */
     public function __construct(
         protected OmnibusPriceManager $omnibusPriceManager
     ) {}
 
     /**
-     * Handle manual product save via Admin Panel.
-     * Delegates price snapshot logic cleanly without duplications to the Shared Service Layer.
-     *
-     * @param  Product  $product
+     * Record a price snapshot after a product is created or updated.
      */
-    public function afterSave($product)
+    public function handle(Product $product): void
     {
-        $this->omnibusPriceManager->recordPriceIfNeeded($product);
+        $this->omnibusPriceManager->recordPrice($product);
     }
 }

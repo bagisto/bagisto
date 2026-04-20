@@ -47,7 +47,7 @@ it('calculates the lowest price correctly for the past 30 days', function () {
     $originalCurrency = core()->getCurrentCurrency();
 
     // Today
-    $this->manager->recordPriceIfNeeded($product);
+    $this->manager->recordPrice($product);
 
     // 10 days ago (lowest price)
     Carbon::setTestNow($this->now->copy()->subDays(10));
@@ -55,7 +55,7 @@ it('calculates the lowest price correctly for the past 30 days', function () {
 
     $product->refresh();
     $product->load('price_indices');
-    $this->manager->recordPriceIfNeeded($product);
+    $this->manager->recordPrice($product);
 
     // 35 days ago (should be ignored)
     Carbon::setTestNow($this->now->copy()->subDays(35));
@@ -63,7 +63,7 @@ it('calculates the lowest price correctly for the past 30 days', function () {
 
     $product->refresh();
     $product->load('price_indices');
-    $this->manager->recordPriceIfNeeded($product);
+    $this->manager->recordPrice($product);
 
     Carbon::setTestNow($this->now);
 
