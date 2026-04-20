@@ -72,11 +72,34 @@
             <x-admin::form.control-group.error control-name="booking[same_slot_all_days]" />
         </x-admin::form.control-group>
 
+        <!-- Allow Slot Overlap -->
+        <x-admin::form.control-group class="w-full">
+            <x-admin::form.control-group.label>
+                @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.title')
+            </x-admin::form.control-group.label>
+
+            <x-admin::form.control-group.control
+                type="select"
+                name="booking[allow_slot_overlap]"
+                v-model="appointment_booking.allow_slot_overlap"
+                :label="trans('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.title')"
+            >
+                <option value="0">
+                    @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.no')
+                </option>
+
+                <option value="1">
+                    @lang('admin::app.catalog.products.edit.types.booking.allow-slot-overlap.yes')
+                </option>
+            </x-admin::form.control-group.control>
+        </x-admin::form.control-group>
+
         <!-- Slots Vue Component -->
         <v-slots
             :booking-product="appointment_booking"
             :booking-type="'appointment_slot'"
             :same-slot-all-days="appointment_booking.same_slot_all_days"
+            :allow-slot-overlap="appointment_booking.allow_slot_overlap"
         >
         </v-slots>
     </script>
@@ -90,13 +113,15 @@
             data() {
                 return {
                     appointment_booking: {!! json_encode($bookingProduct && $bookingProduct->appointment_slot
-                        ? $bookingProduct->appointment_slot 
+                        ? $bookingProduct->appointment_slot
                         : [
                             'duration' => 45,
 
                             'break_time' => 15,
 
                             'same_slot_all_days' => 1,
+
+                            'allow_slot_overlap' => 0,
 
                             'slots' => [],
                         ]

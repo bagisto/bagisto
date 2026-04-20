@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Hesabınızın aktif edilmesi için yönetici onayı gerekiyor.',
             'page-title' => 'Müşteri Girişi',
             'password' => 'Şifre',
+            'resend-verification' => 'Doğrulama E-postasını Yeniden Gönder',
             'show-password' => 'Şifreyi Göster',
             'title' => 'Oturum Aç',
             'verify-first' => 'Lütfen önce e-posta adresinizi doğrulayın.',
@@ -800,6 +801,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Bilet Al',
                         'title' => 'Etkinlik:',
+                        'total-price' => 'Toplam fiyat',
                     ],
 
                     'rental' => [
@@ -899,22 +901,28 @@ return [
             'cart' => [
                 'booking-from' => 'Başlangıç',
                 'booking-till' => 'Bitiş',
+                'charged-per' => 'Ücret birimi',
                 'daily' => 'Günlük',
                 'event-from' => 'Etkinlik Başlangıcı',
                 'event-ticket' => 'Etkinlik Bileti',
                 'event-till' => 'Etkinlik Bitişi',
+                'guest-limit' => 'Masa başına misafir limiti',
                 'hourly' => 'Saatlik',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'Bu etkinliğin süresi doldu.',
+                        'sold_out' => 'Bu etkinlik için biletler tükenmiştir.',
                     ],
 
                     'missing_options' => 'Seçenekler eksik.',
                     'inventory_warning' => 'Stok yetersiz.',
+                    'rental_unavailable' => 'Bu kiralık ürün seçilen tarihler için mevcut değildir.',
                     'select_hourly_duration' => 'Süre seçiniz.',
                 ],
 
+                'per-guest' => 'Misafir başına',
+                'per-table' => 'Masa başına',
                 'rent-from' => 'Kiralama Başlangıcı',
                 'rent-till' => 'Kiralama Bitişi',
                 'rent-type' => 'Kiralama Türü',

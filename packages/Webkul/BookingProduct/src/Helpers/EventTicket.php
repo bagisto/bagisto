@@ -35,15 +35,18 @@ class EventTicket extends Booking
             return [];
         }
 
-        return $this->formatPrice($bookingProduct->event_tickets);
+        $basePrice = $bookingProduct->product?->getTypeInstance()?->getFinalPrice() ?? 0;
+
+        return $this->formatPrice($bookingProduct->event_tickets, $basePrice);
     }
 
     /**
      * Format ticket price.
      *
      * @param  array  $tickets
+     * @param  float  $basePrice
      */
-    public function formatPrice($tickets)
+    public function formatPrice($tickets, $basePrice = 0)
     {
         foreach ($tickets as $index => $ticket) {
             $price = $ticket->price;
@@ -59,6 +62,10 @@ class EventTicket extends Booking
             $tickets[$index]['converted_price'] = core()->convertPrice($price);
             $tickets[$index]['formatted_price'] = $formattedPrice = core()->currency($price);
             $tickets[$index]['formatted_price_text'] = trans('shop::app.products.booking.per-ticket-price', ['price' => $formattedPrice]);
+
+            $totalPrice = $basePrice + $price;
+            $tickets[$index]['total_price'] = core()->convertPrice($totalPrice);
+            $tickets[$index]['formatted_total_price'] = core()->currency($totalPrice);
         }
 
         return $tickets;

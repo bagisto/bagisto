@@ -22,6 +22,7 @@ class BookingProduct extends Model implements BookingProductContract
         'available_every_week',
         'available_from',
         'available_to',
+        'allow_cancellation',
         'product_id',
     ];
 

@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Your activation seeks admin approval',
             'page-title' => 'Customer Login',
             'password' => 'Password',
+            'resend-verification' => 'Resend Verification Email',
             'show-password' => 'Show Password',
             'title' => 'Sign In',
             'verify-first' => 'Verify your email account first.',
@@ -800,6 +801,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Book Your Ticket',
                         'title' => 'Event on :',
+                        'total-price' => 'Total Price',
                     ],
 
                     'rental' => [
@@ -899,22 +901,28 @@ return [
             'cart' => [
                 'booking-from' => 'Booking From',
                 'booking-till' => 'Booking Till',
+                'charged-per' => 'Charged Per',
                 'daily' => 'Daily Basis',
                 'event-from' => 'Event From',
                 'event-ticket' => 'Event Ticket',
                 'event-till' => 'Event Till',
+                'guest-limit' => 'Guest Limit Per Table',
                 'hourly' => 'Hourly Basis',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'This event has been expired.',
+                        'sold_out' => 'Tickets for this event are sold out.',
                     ],
 
                     'missing_options' => 'Options are missing for this product.',
                     'inventory_warning' => 'The requested quantity is not available, please try again later.',
+                    'rental_unavailable' => 'This rental product is not available for the selected dates.',
                     'select_hourly_duration' => 'Select a slot duration of one hour.',
                 ],
 
+                'per-guest' => 'Per Guest',
+                'per-table' => 'Per Table',
                 'rent-from' => 'Rent From',
                 'rent-till' => 'Rent Till',
                 'rent-type' => 'Rent Type',

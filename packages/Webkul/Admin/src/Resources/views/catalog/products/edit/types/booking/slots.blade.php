@@ -284,7 +284,7 @@
         app.component('v-slots', {
             template: '#v-slots-template',
 
-            props: ['bookingType', 'bookingProduct', 'sameSlotAllDays'],
+            props: ['bookingType', 'bookingProduct', 'sameSlotAllDays', 'allowSlotOverlap'],
 
             data() {
                 return {
@@ -422,12 +422,12 @@
                         ? Object.values(this.slots[key] || [])
                         : this.slots[key][this.currentIndex] || [];
 
-                    if (this.isOverlapping(slot, existingSlots)) {
+                    if (! parseInt(this.allowSlotOverlap) && this.isOverlapping(slot, existingSlots)) {
                         this.$emitter.emit('add-flash', {
                             type: 'error',
                             message: "@lang('admin::app.catalog.products.edit.types.booking.validations.overlap-validation')",
                         });
-                        
+
                         return;
                     }
 

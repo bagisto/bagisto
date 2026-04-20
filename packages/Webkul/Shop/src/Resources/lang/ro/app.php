@@ -41,6 +41,7 @@ return [
             'not-activated' => 'Activarea contului dvs. necesită aprobarea administratorului',
             'page-title' => 'Autentificare client',
             'password' => 'Parolă',
+            'resend-verification' => 'Retrimite emailul de verificare',
             'show-password' => 'Afișează parola',
             'title' => 'Autentificare',
             'verify-first' => 'Verificați mai întâi contul de e-mail.',
@@ -800,6 +801,7 @@ return [
                     'event' => [
                         'book-your-ticket' => 'Rezervă biletul',
                         'title' => 'Eveniment pe:',
+                        'total-price' => 'Preț total',
                     ],
 
                     'rental' => [
@@ -899,22 +901,28 @@ return [
             'cart' => [
                 'booking-from' => 'Rezervare de la',
                 'booking-till' => 'Rezervare până la',
+                'charged-per' => 'Taxat per',
                 'daily' => 'Pe zi',
                 'event-from' => 'Eveniment de la',
                 'event-ticket' => 'Bilet eveniment',
                 'event-till' => 'Eveniment până la',
+                'guest-limit' => 'Limita de oaspeți per masă',
                 'hourly' => 'Pe oră',
 
                 'integrity' => [
                     'event' => [
                         'expired' => 'Acest eveniment a expirat.',
+                        'sold_out' => 'Biletele pentru acest eveniment sunt epuizate.',
                     ],
 
                     'missing_options' => 'Opțiunile lipsesc pentru acest produs.',
                     'inventory_warning' => 'Cantitatea solicitată nu este disponibilă, vă rugăm să încercați din nou mai târziu.',
+                    'rental_unavailable' => 'Acest produs de închiriere nu este disponibil pentru datele selectate.',
                     'select_hourly_duration' => 'Selectați o durată de slot de o oră.',
                 ],
 
+                'per-guest' => 'Per oaspete',
+                'per-table' => 'Per masă',
                 'rent-from' => 'Închiriere de la',
                 'rent-till' => 'Închiriere până la',
                 'rent-type' => 'Tip închiriere',
