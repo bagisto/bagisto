@@ -72,6 +72,10 @@ class OmnibusPriceManager
      */
     public function getLowestPrice(Product $product): ?float
     {
+        if (! $this->isEnabled()) {
+            return null;
+        }
+
         return $this->providerResolver->resolve($product)->getLowestPrice($product);
     }
 
@@ -80,6 +84,10 @@ class OmnibusPriceManager
      */
     public function getLowestPriceFormatted(Product $product): ?string
     {
+        if (! $this->isEnabled()) {
+            return null;
+        }
+
         return $this->providerResolver->resolve($product)->getLowestPriceFormatted($product);
     }
 
@@ -88,6 +96,10 @@ class OmnibusPriceManager
      */
     public function getOmnibusPriceHtml(Product $product): string
     {
+        if (! $this->isEnabled()) {
+            return '';
+        }
+
         return $this->providerResolver->resolve($product)->getOmnibusPriceHtml($product);
     }
 
@@ -107,6 +119,17 @@ class OmnibusPriceManager
     public function cleanAllRecords(): void
     {
         $this->omnibusPriceRepository->getModel()->newQuery()->delete();
+    }
+
+    /**
+     * Whether Omnibus is enabled on the current channel.
+     *
+     * Resolution order handled natively by core()->getConfigData():
+     * core_config DB row → field's default (env OMNIBUS_ENABLED) → null.
+     */
+    public function isEnabled(): bool
+    {
+        return (bool) core()->getConfigData('catalog.products.omnibus.is_enabled');
     }
 
     /**

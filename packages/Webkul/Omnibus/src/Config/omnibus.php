@@ -7,6 +7,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Feature Flag (fallback)
+    |--------------------------------------------------------------------------
+    |
+    | Last-resort default used by core()->getConfigData() when no per-channel
+    | setting is persisted in core_config. Referenced from the admin field's
+    | 'default' key in Admin/src/Config/system.php.
+    |
+    */
+
+    'enabled' => env('OMNIBUS_ENABLED', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Snapshots
     |--------------------------------------------------------------------------
     |

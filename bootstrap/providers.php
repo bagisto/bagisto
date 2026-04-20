@@ -51,6 +51,7 @@ return [
     /**
      * Webkul's service providers.
      */
+    OmnibusServiceProvider::class,
     AdminServiceProvider::class,
     AttributeServiceProvider::class,
     BookingProductServiceProvider::class,
@@ -73,7 +74,6 @@ return [
     MagicAIServiceProvider::class,
     MarketingServiceProvider::class,
     NotificationServiceProvider::class,
-    OmnibusServiceProvider::class,
     PayUServiceProvider::class,
     PaymentServiceProvider::class,
     PaypalServiceProvider::class,

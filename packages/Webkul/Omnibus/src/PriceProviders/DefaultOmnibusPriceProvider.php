@@ -117,10 +117,6 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
      */
     public function getLowestPrice(Product $product): ?float
     {
-        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
-            return null;
-        }
-
         $channelId = core()->getCurrentChannel()->id;
         $currencyCode = core()->getCurrentCurrencyCode();
         $promoStartDate = $product->special_price_from;
@@ -161,10 +157,6 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
      */
     public function getOmnibusPriceHtml(Product $product): string
     {
-        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
-            return '';
-        }
-
         if (! $product->getTypeInstance()->haveDiscount()) {
             return '';
         }

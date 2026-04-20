@@ -11,10 +11,6 @@ class ConfigurableOmnibusPriceProvider extends DefaultOmnibusPriceProvider
      */
     public function getOmnibusPriceHtml(Product $product): string
     {
-        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
-            return '';
-        }
-
         if (! $product->getTypeInstance()->haveDiscount()) {
             return '';
         }

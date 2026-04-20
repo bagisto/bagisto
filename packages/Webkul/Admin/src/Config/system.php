@@ -1141,6 +1141,7 @@ return [
                 'type' => 'boolean',
                 'channel_based' => true,
                 'locale_based' => false,
+                'default' => config('omnibus.enabled', false),
             ],
         ],
     ], [
