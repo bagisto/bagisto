@@ -6,70 +6,107 @@ use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Omnibus\Contracts\OmnibusPriceProvider;
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Product\Contracts\Product;
-use Webkul\Product\Repositories\ProductRepository;
 
 class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
 {
+    /**
+     * Number of rows per bulk INSERT statement.
+     * Keeps Postgres parameter count under its 65 535 limit.
+     */
+    protected const INSERT_CHUNK_SIZE = 500;
+
     /**
      * Create a new provider instance.
      */
     public function __construct(
         protected OmnibusPriceRepository $omnibusPriceRepository,
-        protected ChannelRepository $channelRepository,
-        protected ProductRepository $productRepository
+        protected ChannelRepository $channelRepository
     ) {}
 
     /**
-     * Record a price snapshot for the product across every active channel and currency.
+     * Record a price snapshot for a single product across every active channel and currency.
      */
     public function recordPrice(Product $product, ?string $recordedAt = null): int
     {
-        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
+        return $this->recordBulkPrice([$product], $recordedAt);
+    }
+
+    /**
+     * Record price snapshots for a batch of products of this provider's type across every active channel and currency.
+     *
+     * The optional callback fires once per product after its snapshots have been queued, enabling progress reporting.
+     */
+    public function recordBulkPrice(array $products, ?string $recordedAt = null, ?callable $afterEach = null): int
+    {
+        if (empty($products)) {
             return 0;
         }
 
         $recordedAt = $recordedAt ?? now();
         $snapshotCount = 0;
+        $insertRows = [];
 
-        foreach ($this->channelRepository->all() as $channel) {
-            core()->setCurrentChannel($channel);
+        $latestPriceMap = $this->fetchLatestPriceMap(array_map(fn ($product) => $product->id, $products));
 
-            foreach ($channel->currencies as $currency) {
-                core()->setCurrentCurrency($currency);
+        $enabledChannels = $this->channelRepository->all()
+            ->filter(fn ($channel) => core()->getConfigData('catalog.products.omnibus.is_enabled', $channel->code));
 
-                $price = $product->getTypeInstance()->getMinimalPrice();
+        $originalChannel = core()->getCurrentChannel();
+        $originalCurrency = core()->getCurrentCurrency();
 
-                if (is_null($price) || (float) $price === 0.0) {
-                    continue;
+        try {
+            foreach ($products as $product) {
+                foreach ($enabledChannels as $channel) {
+                    core()->setCurrentChannel($channel);
+
+                    foreach ($channel->currencies as $currency) {
+                        core()->setCurrentCurrency($currency);
+
+                        $price = $product->getTypeInstance()->getMinimalPrice();
+
+                        if (
+                            is_null($price)
+                            || (float) $price === 0.0
+                        ) {
+                            continue;
+                        }
+
+                        $key = $product->id.':'.$channel->id.':'.$currency->code;
+                        $latestPrice = $latestPriceMap[$key] ?? null;
+
+                        if (
+                            $latestPrice !== null
+                            && round((float) $latestPrice, 4) === round((float) $price, 4)
+                        ) {
+                            continue;
+                        }
+
+                        $insertRows[] = [
+                            'product_id' => $product->id,
+                            'channel_id' => $channel->id,
+                            'currency_code' => $currency->code,
+                            'price' => $price,
+                            'recorded_at' => $recordedAt,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ];
+
+                        $latestPriceMap[$key] = $price;
+                        $snapshotCount++;
+                    }
                 }
 
-                $latestSnapshot = $this->omnibusPriceRepository->getLatestByProductIdAndChannel(
-                    $product->id,
-                    $channel->id,
-                    $currency->code
-                );
-
-                if ($latestSnapshot && round((float) $latestSnapshot->price, 4) === round((float) $price, 4)) {
-                    continue;
+                if ($afterEach) {
+                    $afterEach($product);
                 }
-
-                $this->omnibusPriceRepository->create([
-                    'product_id' => $product->id,
-                    'channel_id' => $channel->id,
-                    'currency_code' => $currency->code,
-                    'price' => $price,
-                    'recorded_at' => $recordedAt,
-                ]);
-                $snapshotCount++;
             }
+        } finally {
+            core()->setCurrentChannel($originalChannel);
+            core()->setCurrentCurrency($originalCurrency);
         }
 
-        $childrenIds = $product->getTypeInstance()->getChildrenIds();
-
-        if (! empty($childrenIds)) {
-            foreach ($this->productRepository->findWhereIn('id', $childrenIds) as $child) {
-                $snapshotCount += $this->recordPrice($child, $recordedAt);
-            }
+        foreach (array_chunk($insertRows, self::INSERT_CHUNK_SIZE) as $chunk) {
+            $this->omnibusPriceRepository->getModel()->insert($chunk);
         }
 
         return $snapshotCount;
@@ -148,5 +185,46 @@ class DefaultOmnibusPriceProvider implements OmnibusPriceProvider
             [$product->id],
             $product->getTypeInstance()->getChildrenIds()
         );
+    }
+
+    /**
+     * Fetch the most recent price per (product, channel, currency) tuple for the given products in one query.
+     *
+     * @return array<string, string> keyed by "{productId}:{channelId}:{currencyCode}"
+     */
+    protected function fetchLatestPriceMap(array $productIds): array
+    {
+        if (empty($productIds)) {
+            return [];
+        }
+
+        $table = $this->omnibusPriceRepository->getModel()->getTable();
+
+        $latestTimestamps = $this->omnibusPriceRepository->getModel()
+            ->newQuery()
+            ->whereIn('product_id', $productIds)
+            ->groupBy('product_id', 'channel_id', 'currency_code')
+            ->select('product_id', 'channel_id', 'currency_code')
+            ->selectRaw('MAX(recorded_at) as max_recorded_at');
+
+        $rows = $this->omnibusPriceRepository->getModel()
+            ->newQuery()
+            ->from($table.' as snapshots')
+            ->joinSub($latestTimestamps, 'latest', function ($join) {
+                $join->on('snapshots.product_id', '=', 'latest.product_id')
+                    ->on('snapshots.channel_id', '=', 'latest.channel_id')
+                    ->on('snapshots.currency_code', '=', 'latest.currency_code')
+                    ->on('snapshots.recorded_at', '=', 'latest.max_recorded_at');
+            })
+            ->select('snapshots.product_id', 'snapshots.channel_id', 'snapshots.currency_code', 'snapshots.price')
+            ->get();
+
+        $map = [];
+
+        foreach ($rows as $row) {
+            $map[$row->product_id.':'.$row->channel_id.':'.$row->currency_code] = $row->price;
+        }
+
+        return $map;
     }
 }

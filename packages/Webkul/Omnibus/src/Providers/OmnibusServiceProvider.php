@@ -4,6 +4,7 @@ namespace Webkul\Omnibus\Providers;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Omnibus\Console\Commands\PurgeOldSnapshots;
 use Webkul\Omnibus\Console\Commands\SnapshotPrices;
 
 class OmnibusServiceProvider extends ServiceProvider
@@ -20,6 +21,7 @@ class OmnibusServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 SnapshotPrices::class,
+                PurgeOldSnapshots::class,
             ]);
         }
     }
@@ -33,9 +35,10 @@ class OmnibusServiceProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../Resources/views', 'omnibus');
 
-        $this->app->booted(function () {
-            $schedule = $this->app->make(Schedule::class);
+        $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
             $schedule->command('omnibus:snapshot-prices')->everyFifteenMinutes();
+
+            $schedule->command('omnibus:purge-old-snapshots')->daily();
         });
     }
 }

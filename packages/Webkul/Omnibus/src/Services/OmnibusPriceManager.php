@@ -4,6 +4,7 @@ namespace Webkul\Omnibus\Services;
 
 use Webkul\Omnibus\Repositories\OmnibusPriceRepository;
 use Webkul\Product\Contracts\Product;
+use Webkul\Product\Repositories\ProductRepository;
 
 class OmnibusPriceManager
 {
@@ -12,15 +13,58 @@ class OmnibusPriceManager
      */
     public function __construct(
         protected OmnibusPriceRepository $omnibusPriceRepository,
-        protected OmnibusPriceProviderResolver $providerResolver
+        protected OmnibusPriceProviderResolver $providerResolver,
+        protected ProductRepository $productRepository
     ) {}
 
     /**
-     * Record a price snapshot via the product's type-specific provider.
+     * Record a price snapshot for a single product via its type-specific provider.
      */
     public function recordPrice(Product $product, ?string $recordedAt = null): int
     {
-        return $this->providerResolver->resolve($product)->recordPrice($product, $recordedAt);
+        return $this->recordBulkPrice([$product], $recordedAt);
+    }
+
+    /**
+     * Record price snapshots for many products, batching per type-specific provider and walking into new descendants.
+     *
+     * The optional callback fires once per top-level product for progress reporting; descendants do not trigger it.
+     */
+    public function recordBulkPrice(iterable $products, ?string $recordedAt = null, ?callable $afterEachProduct = null): int
+    {
+        $products = is_array($products) ? $products : iterator_to_array($products);
+
+        if (empty($products)) {
+            return 0;
+        }
+
+        $snapshotCount = 0;
+        $seenIds = [];
+
+        foreach ($products as $product) {
+            $seenIds[$product->id] = true;
+        }
+
+        $currentBatch = $products;
+        $firstLevel = true;
+
+        while (! empty($currentBatch)) {
+            $snapshotCount += $this->dispatchToProviders(
+                $currentBatch,
+                $recordedAt,
+                $firstLevel ? $afterEachProduct : null
+            );
+
+            $currentBatch = $this->collectDescendants($currentBatch, $seenIds);
+
+            foreach ($currentBatch as $descendant) {
+                $seenIds[$descendant->id] = true;
+            }
+
+            $firstLevel = false;
+        }
+
+        return $snapshotCount;
     }
 
     /**
@@ -55,5 +99,61 @@ class OmnibusPriceManager
         $this->omnibusPriceRepository->getModel()
             ->where('recorded_at', '<', now()->subDays(config('omnibus.snapshots.retention_days')))
             ->delete();
+    }
+
+    /**
+     * Delete every snapshot record regardless of age.
+     */
+    public function cleanAllRecords(): void
+    {
+        $this->omnibusPriceRepository->getModel()->newQuery()->delete();
+    }
+
+    /**
+     * Group the batch by product type and dispatch each same-type sub-batch to its provider.
+     */
+    protected function dispatchToProviders(array $products, ?string $recordedAt, ?callable $afterEach): int
+    {
+        $byType = [];
+
+        foreach ($products as $product) {
+            $byType[$product->type][] = $product;
+        }
+
+        $snapshotCount = 0;
+
+        foreach ($byType as $typeBatch) {
+            $provider = $this->providerResolver->resolve($typeBatch[0]);
+
+            $snapshotCount += $provider->recordBulkPrice($typeBatch, $recordedAt, $afterEach);
+        }
+
+        return $snapshotCount;
+    }
+
+    /**
+     * Hydrate descendant Products for the given batch, skipping any already snapshotted in this run.
+     */
+    protected function collectDescendants(array $products, array $seenIds): array
+    {
+        $childrenIds = [];
+
+        foreach ($products as $product) {
+            foreach ($product->getTypeInstance()->getChildrenIds() as $id) {
+                if (isset($seenIds[$id])) {
+                    continue;
+                }
+
+                $childrenIds[] = $id;
+            }
+        }
+
+        if (empty($childrenIds)) {
+            return [];
+        }
+
+        return $this->productRepository
+            ->findWhereIn('id', array_values(array_unique($childrenIds)))
+            ->all();
     }
 }

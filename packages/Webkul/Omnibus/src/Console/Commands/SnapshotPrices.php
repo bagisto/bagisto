@@ -3,6 +3,7 @@
 namespace Webkul\Omnibus\Console\Commands;
 
 use Illuminate\Console\Command;
+use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Omnibus\Services\OmnibusPriceManager;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -20,13 +21,14 @@ class SnapshotPrices extends Command
      *
      * @var string
      */
-    protected $description = 'Snapshot of product regular and special prices for Omnibus compliance';
+    protected $description = 'Capture Omnibus price snapshots for every active product across configured channels and currencies.';
 
     /**
      * Create a new command instance.
      */
     public function __construct(
         protected ProductRepository $productRepository,
+        protected ChannelRepository $channelRepository,
         protected OmnibusPriceManager $omnibusPriceManager
     ) {
         parent::__construct();
@@ -37,35 +39,37 @@ class SnapshotPrices extends Command
      */
     public function handle(): void
     {
-        if (! core()->getConfigData('catalog.products.omnibus.is_enabled')) {
-            $this->info('Omnibus is disabled in configuration.');
+        $hasEnabledChannel = $this->channelRepository->all()->contains(
+            fn ($channel) => core()->getConfigData('catalog.products.omnibus.is_enabled', $channel->code)
+        );
+
+        if (! $hasEnabledChannel) {
+            $this->components->warn(trans('omnibus::app.console.disabled-all-channels'));
 
             return;
         }
 
-        $this->info('Starting Omnibus Daily Snapshot...');
-
-        $query = clone $this->productRepository->getModel()->query()
-            ->whereHas('attribute_values', function ($q) {
-                $q->join('attributes', 'product_attribute_values.attribute_id', '=', 'attributes.id')
+        $query = $this->productRepository->getModel()
+            ->whereHas('attribute_values', function ($query) {
+                $query->join('attributes', 'product_attribute_values.attribute_id', '=', 'attributes.id')
                     ->where('attributes.code', 'status')
                     ->where('product_attribute_values.boolean_value', true);
             });
+
         $snapshotCount = 0;
 
         $this->output->progressStart($query->count());
 
         $query->chunk(500, function ($products) use (&$snapshotCount) {
-            foreach ($products as $product) {
-                $snapshotCount += $this->omnibusPriceManager->recordPrice($product);
-                $this->output->progressAdvance();
-            }
+            $snapshotCount += $this->omnibusPriceManager->recordBulkPrice(
+                $products,
+                null,
+                fn () => $this->output->progressAdvance()
+            );
         });
 
         $this->output->progressFinish();
-        $this->info("Completed. Added {$snapshotCount} new price snapshots.");
 
-        $this->info('Cleaning up old history...');
-        $this->omnibusPriceManager->cleanOldRecords();
+        $this->components->success(trans('omnibus::app.console.snapshots-captured', ['count' => $snapshotCount]));
     }
 }

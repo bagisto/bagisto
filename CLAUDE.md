@@ -74,6 +74,27 @@ vendor/bin/pint --test      # Check style without fixing
 
 **Important:** Always run `vendor/bin/pint` on modified files after every code change before running tests or marking work as complete.
 
+#### Multi-condition control flow
+
+When an `if` / `elseif` / `while` / `for` condition contains more than one expression joined by `&&` or `||`, split it across multiple lines with each expression on its own line and the boolean operator leading the next line:
+
+```php
+// Good
+if (
+    $user->isActive()
+    && $user->hasRole('admin')
+) {
+    return true;
+}
+
+// Avoid
+if ($user->isActive() && $user->hasRole('admin')) {
+    return true;
+}
+```
+
+Single-condition statements stay on one line. Pint/PHP-CS-Fixer has no rule that enforces this automatically — it is a manual convention, so apply it when writing or reviewing code.
+
 ### Commenting Conventions
 
 - **Section headers / titles**: Title Case, no trailing period.
