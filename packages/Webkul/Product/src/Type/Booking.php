@@ -160,7 +160,10 @@ class Booking extends AbstractType
             return false;
         }
 
-        if (Carbon::now() > $bookingProduct->available_to) {
+        if (
+            $bookingProduct->available_to
+            && Carbon::now() > $bookingProduct->available_to
+        ) {
             return false;
         }
 
