@@ -115,7 +115,6 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator("#app");
     }
     
-
     private async fillGeneralCartDetails() {
         await this.createCartRuleButton.waitFor();
         await this.createCartRuleButton.click();

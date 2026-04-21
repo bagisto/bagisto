@@ -33,8 +33,6 @@ export class RuleDeletePage extends BasePage {
         return this.page.getByText("Selected Products Deleted Successfully");
     }
 
-
-
     async deleteRuleAndProduct() {
         await this.visit("admin/marketing/promotions/cart-rules");
         await this.deleteIcon.first().click();

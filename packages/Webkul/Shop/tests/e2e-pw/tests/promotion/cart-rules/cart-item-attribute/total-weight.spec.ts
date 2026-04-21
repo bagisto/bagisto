@@ -76,37 +76,37 @@ test.describe("cart rules", () => {
             await ruleApplyPage.applyCouponAtCheckout();
         });
 
-        // test("should apply coupon when total weight in cart condition is -> equals or less than", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     const ruleApplyPage = new RuleApplyPage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "cart_item|base_total_weight",
-        //         operator: "<=",
-        //         value: "2",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await ruleApplyPage.applyCouponAtCheckout();
-        // });
+        test("should apply coupon when total weight in cart condition is -> equals or less than", async ({
+            page,
+        }) => {
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
+            await loginAsAdmin(page);
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
+                attribute: "cart_item|base_total_weight",
+                operator: "<=",
+                value: "2",
+            });
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCouponAtCheckout();
+        });
 
-        // test("should apply coupon when total weight in cart condition is -> greater than", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     const ruleApplyPage = new RuleApplyPage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "cart_item|base_total_weight",
-        //         operator: ">",
-        //         value: "1",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await ruleApplyPage.applyCouponAtCheckout();
-        // });
+        test("should apply coupon when total weight in cart condition is -> greater than", async ({
+            page,
+        }) => {
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
+            await loginAsAdmin(page);
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
+                attribute: "cart_item|base_total_weight",
+                operator: ">",
+                value: "1",
+            });
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCouponAtCheckout();
+        });
 
         test("should apply coupon when total weight in cart condition is -> less than", async ({
             page,

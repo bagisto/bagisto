@@ -78,21 +78,21 @@ test.describe("cart rules", () => {
             await ruleApplyPage.applyCoupon();
         });
 
-        // test("should apply coupon when total item quantity condition is -> equals or less than", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     const ruleApplyPage = new RuleApplyPage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "cart|items_qty",
-        //         operator: "<=",
-        //         value: "2",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await ruleApplyPage.applyCoupon();
-        // });
+        test("should apply coupon when total item quantity condition is -> equals or less than", async ({
+            page,
+        }) => {
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
+            await loginAsAdmin(page);
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
+                attribute: "cart|items_qty",
+                operator: "<=",
+                value: "2",
+            });
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCoupon();
+        });
 
         test("should apply coupon when total item quantity condition is -> greater than", async ({
             page,

@@ -82,21 +82,21 @@ test.describe("cart rules", () => {
             },
         );
 
-        // test("should apply coupon when attribute family of product condition is -> is equal to", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     const ruleApplyPage = new RuleApplyPage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "product|attribute_family_id",
-        //         operator: "==",
-        //         optionSelect: "1",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await ruleApplyPage.applyCoupon();
-        // });
+        test("should apply coupon when attribute family of product condition is -> is equal to", async ({
+            page,
+        }) => {
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
+            await loginAsAdmin(page);
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
+                attribute: "product|attribute_family_id",
+                operator: "==",
+                optionSelect: "1",
+            });
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCoupon();
+        });
 
         test("should apply coupon when attribute family of product condition is -> is not equal to", async ({
             page,

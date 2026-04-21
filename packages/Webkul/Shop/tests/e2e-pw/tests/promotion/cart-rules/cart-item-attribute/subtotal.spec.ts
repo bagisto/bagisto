@@ -94,21 +94,21 @@ test.describe("cart rules", () => {
             await ruleApplyPage.applyCouponAtCheckout();
         });
 
-        // test("should apply coupon when subtotal condition is -> greater than", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     const ruleApplyPage = new RuleApplyPage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "cart_item|base_total",
-        //         operator: ">",
-        //         value: "198",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await ruleApplyPage.applyCouponAtCheckout();
-        // });
+        test("should apply coupon when subtotal condition is -> greater than", async ({
+            page,
+        }) => {
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
+            await loginAsAdmin(page);
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
+                attribute: "cart_item|base_total",
+                operator: ">",
+                value: "198",
+            });
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCouponAtCheckout();
+        });
 
         test("should apply coupon when subtotal condition is -> less than", async ({
             page,
