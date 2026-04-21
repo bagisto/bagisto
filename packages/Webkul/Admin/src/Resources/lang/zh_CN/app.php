@@ -737,7 +737,7 @@ return [
                 'done' => '已完成',
                 'order-id' => '订单ID',
                 'pending' => '待处理',
-                'price' => '价格',
+                'product' => '产品',
                 'status' => '状态',
                 'time-slot' => '时间段：',
                 'view-details' => '查看详情',

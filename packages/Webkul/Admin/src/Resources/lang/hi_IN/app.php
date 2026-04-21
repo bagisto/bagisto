@@ -737,7 +737,7 @@ return [
                 'done' => 'पूर्ण',
                 'order-id' => 'आदेश आईडी',
                 'pending' => 'लंबित',
-                'price' => 'मूल्य',
+                'product' => 'उत्पाद',
                 'status' => 'स्थिति',
                 'time-slot' => 'समय स्लॉट:',
                 'view-details' => 'विवरण देखें',

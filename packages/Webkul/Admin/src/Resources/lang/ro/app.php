@@ -737,7 +737,7 @@ return [
                 'done' => 'Done',
                 'order-id' => 'Order Id',
                 'pending' => 'Pending',
-                'price' => 'Price',
+                'product' => 'Produs',
                 'status' => 'Status',
                 'time-slot' => 'Time Slot:',
                 'view-details' => 'View Details',

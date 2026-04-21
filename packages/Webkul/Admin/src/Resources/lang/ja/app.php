@@ -737,7 +737,7 @@ return [
                 'done' => '完了',
                 'order-id' => '注文ID',
                 'pending' => '保留中',
-                'price' => '価格',
+                'product' => '製品',
                 'status' => 'ステータス',
                 'time-slot' => '時間枠:',
                 'view-details' => '詳細を見る',

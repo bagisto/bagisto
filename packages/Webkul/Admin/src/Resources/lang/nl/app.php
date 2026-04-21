@@ -737,7 +737,7 @@ return [
                 'done' => 'Voltooid',
                 'order-id' => 'Bestelnummer',
                 'pending' => 'In afwachting',
-                'price' => 'Prijs',
+                'product' => 'Product',
                 'status' => 'Status',
                 'time-slot' => 'Tijdslot:',
                 'view-details' => 'Details bekijken',

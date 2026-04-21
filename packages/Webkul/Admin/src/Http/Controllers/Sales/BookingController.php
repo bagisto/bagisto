@@ -57,7 +57,13 @@ class BookingController extends Controller
 
                 $booking['end'] = Carbon::createFromTimestamp($booking->end)->format('Y-m-d h:i A');
 
-                $booking->total = core()->formatBasePrice($booking->total);
+                $additional = is_string($booking->item_additional)
+                    ? json_decode($booking->item_additional, true)
+                    : ($booking->item_additional ?? []);
+
+                $booking['attributes'] = $additional['attributes'] ?? [];
+
+                unset($booking['item_additional']);
 
                 return $booking;
             });

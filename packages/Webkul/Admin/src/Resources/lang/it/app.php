@@ -737,7 +737,7 @@ return [
                 'done' => 'Fatto',
                 'order-id' => 'ID Ordine',
                 'pending' => 'In Attesa',
-                'price' => 'Prezzo',
+                'product' => 'Prodotto',
                 'status' => 'Stato',
                 'time-slot' => 'Fascia Oraria:',
                 'view-details' => 'Visualizza Dettagli',

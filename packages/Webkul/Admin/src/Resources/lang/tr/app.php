@@ -737,7 +737,7 @@ return [
                 'done' => 'Tamamlandı',
                 'order-id' => 'Sipariş Kimliği',
                 'pending' => 'Beklemede',
-                'price' => 'Fiyat',
+                'product' => 'Ürün',
                 'status' => 'Durum',
                 'time-slot' => 'Zaman Dilimi:',
                 'view-details' => 'Detayları Görüntüle',

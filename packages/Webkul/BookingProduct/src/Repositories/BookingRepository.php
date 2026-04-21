@@ -90,8 +90,10 @@ class BookingRepository extends Repository
             'bookings.to as end',
             'orders.status as status',
             'orders.customer_email as email',
-            'orders.grand_total as total',
             'orders.created_at as created_at',
+            'products.sku as product_sku',
+            'product_flat.name as product_name',
+            'order_items.additional as item_additional',
             'addresses.address as address',
             'addresses.phone as contact',
             'addresses.city as city',
@@ -101,6 +103,13 @@ class BookingRepository extends Repository
         )
             ->addSelect(DB::raw('CONCAT('.$tablePrefix.'orders.customer_first_name, " ", '.$tablePrefix.'orders.customer_last_name) as full_name'))
             ->leftJoin('orders', 'bookings.order_id', '=', 'orders.id')
+            ->leftJoin('order_items', 'bookings.order_item_id', '=', 'order_items.id')
+            ->leftJoin('products', 'bookings.product_id', '=', 'products.id')
+            ->leftJoin('product_flat', function ($join) {
+                $join->on('product_flat.product_id', '=', 'products.id')
+                    ->where('product_flat.locale', core()->getCurrentLocale()->code)
+                    ->where('product_flat.channel', core()->getCurrentChannelCode());
+            })
             ->leftJoin('addresses', 'bookings.order_id', '=', 'addresses.order_id')
             ->whereBetween('bookings.from', $dateRange)
             ->distinct()

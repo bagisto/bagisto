@@ -737,7 +737,7 @@ return [
                 'done' => 'সম্পন্ন',
                 'order-id' => 'অর্ডার আইডি',
                 'pending' => 'মুলতুবি',
-                'price' => 'মূল্য',
+                'product' => 'পণ্য',
                 'status' => 'স্থিতি',
                 'time-slot' => 'সময় স্লট:',
                 'view-details' => 'বিস্তারিত দেখুন',

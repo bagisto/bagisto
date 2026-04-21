@@ -174,7 +174,7 @@
                         <x-admin::form.control-group.control
                             type="date"
                             name="booking[available_to]"
-                            ::rules="'required|after:' + booking.available_from"
+                            ::rules="'required|after_or_equal:' + booking.available_from"
                             v-model="booking.available_to"
                             :label="trans('admin::app.catalog.products.edit.types.booking.available-to')"
                             :placeholder="trans('admin::app.catalog.products.edit.types.booking.available-to')"
@@ -246,6 +246,14 @@
             }
 
             return new Date(value) > new Date(target);
+        });
+
+        defineRule('after_or_equal', (value, [target]) => {
+            if (! value || ! target) {
+                return true;
+            }
+
+            return new Date(value) >= new Date(target);
         });
 
         app.component('v-booking-information', {

@@ -737,7 +737,7 @@ return [
                 'done' => 'Selesai',
                 'order-id' => 'ID Pesanan',
                 'pending' => 'Menunggu',
-                'price' => 'Harga',
+                'product' => 'Produk',
                 'status' => 'Status',
                 'time-slot' => 'Slot Waktu:',
                 'view-details' => 'Lihat Detail',
