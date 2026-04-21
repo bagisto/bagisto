@@ -2,9 +2,6 @@ import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../../BasePage";
 import { generateName, generateSlug } from "../../../../utils/faker";
 
-const OPEN_CREATE_BUTTON = "div.primary-button:visible";
-const SAVE_BUTTON = "button.primary-button:visible";
-const DRAG_HANDLES = "i.icon-drag";
 const GROUP_LISTS =
     "div.flex.gap-5.justify-between.px-4 > div > div.h-\\[calc\\(100vh-285px\\)\\].overflow-auto.border-gray-200.pb-4.ltr\\:border-r.rtl\\:border-l";
 
@@ -15,19 +12,21 @@ export class AttributeFamilyCreatePage extends BasePage {
 
     async visit() {
         await super.visit("admin/catalog/families");
-        await this.page.waitForSelector(OPEN_CREATE_BUTTON, { state: "visible" });
+        await this.page.waitForSelector("div.primary-button:visible", {
+            state: "visible",
+        });
     }
 
     async openCreateForm() {
         await this.visit();
-        await this.page.click(OPEN_CREATE_BUTTON);
+        await this.page.click("div.primary-button:visible");
         await this.page
             .waitForSelector("div#not_avaliable", { timeout: 1000 })
             .catch(() => null);
     }
 
     private async dragAttributesToBothGroups() {
-        const dragHandles = await this.page.$$(DRAG_HANDLES);
+        const dragHandles = await this.page.$$("i.icon-drag");
         const targets = await this.page.$$(GROUP_LISTS);
 
         expect(dragHandles.length).toBeGreaterThan(0);
@@ -77,7 +76,7 @@ export class AttributeFamilyCreatePage extends BasePage {
         await this.page.fill('input[name="name"]', generateName());
         await this.page.fill('input[name="code"]', generateSlug("_"));
         await this.dragAttributesToBothGroups();
-        await this.page.click(SAVE_BUTTON);
+        await this.page.click("button.primary-button:visible");
         await expect(
             this.page.getByText("Family created successfully.").first(),
         ).toBeVisible();
