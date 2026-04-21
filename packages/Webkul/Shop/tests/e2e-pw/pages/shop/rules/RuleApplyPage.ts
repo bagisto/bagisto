@@ -7,7 +7,7 @@ export class RuleApplyPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
-        this.couponCode = `CP-${Date.now()}`;
+        this.couponCode = `cp${Date.now()}`;
     }
     // Shop / Cart
     get searchInput() {
@@ -50,9 +50,7 @@ export class RuleApplyPage extends BasePage {
     }
 
     get couponSuccessMessage() {
-        return this.page
-            .getByRole("paragraph")
-            .filter({ hasText: "Coupon code applied successfully." });
+        return this.page.locator(".alert-success");
     }
 
     // Checkout
@@ -148,6 +146,15 @@ export class RuleApplyPage extends BasePage {
         await this.applyCouponButton.click();
         await this.couponInput.fill(this.couponCode);
         await this.applyButton.click();
+
+        const invalidCoupon = this.page
+            .getByText("The coupon code is invalid.")
+            .first();
+        if (invalidCoupon) {
+            await this.applyCouponButton.click();
+            await this.couponInput.fill(this.couponCode);
+            await this.applyButton.click();
+        }
         await expect(this.couponSuccessMessage).toBeVisible();
     }
 

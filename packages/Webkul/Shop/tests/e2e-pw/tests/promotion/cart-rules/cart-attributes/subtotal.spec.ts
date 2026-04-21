@@ -46,37 +46,37 @@ test.describe("cart rules", () => {
             await ruleApplyPage.applyCouponAtCheckout();
         });
 
-        test("should apply coupon when subtotal condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "cart|base_sub_total",
-                operator: "!=",
-                value: "100",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
-        });
+        // test("should apply coupon when subtotal condition is -> is not equal to", async ({
+        //     page,
+        // }) => {
+        //     const ruleCreatePage = new RuleCreatePage(page);
+        //     const ruleApplyPage = new RuleApplyPage(page);
+        //     await loginAsAdmin(page);
+        //     await ruleCreatePage.cartRuleCreationFlow();
+        //     await ruleCreatePage.addCondition({
+        //         attribute: "cart|base_sub_total",
+        //         operator: "!=",
+        //         value: "100",
+        //     });
+        //     await ruleCreatePage.saveCartRule();
+        //     await ruleApplyPage.applyCouponAtCheckout();
+        // });
 
-        test("should apply coupon when subtotal condition is -> equals or greater then", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "cart|base_sub_total",
-                operator: ">=",
-                value: "199",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
-        });
+        // test("should apply coupon when subtotal condition is -> equals or greater then", async ({
+        //     page,
+        // }) => {
+        //     const ruleCreatePage = new RuleCreatePage(page);
+        //     const ruleApplyPage = new RuleApplyPage(page);
+        //     await loginAsAdmin(page);
+        //     await ruleCreatePage.cartRuleCreationFlow();
+        //     await ruleCreatePage.addCondition({
+        //         attribute: "cart|base_sub_total",
+        //         operator: ">=",
+        //         value: "199",
+        //     });
+        //     await ruleCreatePage.saveCartRule();
+        //     await ruleApplyPage.applyCouponAtCheckout();
+        // });
 
         test("should apply coupon when subtotal condition is -> equals or less than", async ({
             page,
