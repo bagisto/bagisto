@@ -171,7 +171,6 @@ export class RuleApplyPage extends BasePage {
 
         const product = this.getSavedProduct();
         await this.searchInput.fill(product.name);
-
         await this.searchInput.press("Enter");
         await this.addToCartButton.first().click();
         await expect(this.addToCartSuccessMessage).toBeVisible();
