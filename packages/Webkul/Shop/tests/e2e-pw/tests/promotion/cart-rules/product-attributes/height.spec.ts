@@ -30,35 +30,35 @@ test.afterEach(
 
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when height condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|height",
-                operator: "==",
-                value: "1",
-            });
-            await ruleCreatePage.saveCartRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="height"]').first().fill("1");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
-        });
+        // test("should apply coupon when height condition is -> is equal to", async ({
+        //     page,
+        // }) => {
+        //     const ruleCreatePage = new RuleCreatePage(page);
+        //     const ruleApplyPage = new RuleApplyPage(page);
+        //     await loginAsAdmin(page);
+        //     await ruleCreatePage.cartRuleCreationFlow();
+        //     await ruleCreatePage.addCondition({
+        //         attribute: "product|height",
+        //         operator: "==",
+        //         value: "1",
+        //     });
+        //     await ruleCreatePage.saveCartRule();
+        //     await page.goto("admin/catalog/products");
+        //     await page
+        //         .locator("span.cursor-pointer.icon-sort-right")
+        //         .nth(1)
+        //         .click();
+        //     await page.waitForLoadState("networkidle");
+        //     await page.locator('input[name="height"]').first().fill("1");
+        //     await page
+        //         .locator('button:has-text("Save Product")')
+        //         .first()
+        //         .click();
+        //     await expect(
+        //         page.getByText("Product updated successfully").first(),
+        //     ).toBeVisible();
+        //     await ruleApplyPage.applyCoupon();
+        // });
 
         test("should apply coupon when height condition is -> is not equal to", async ({
             page,

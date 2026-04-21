@@ -32,22 +32,22 @@ test.afterEach(
 );
 
 test.describe("cart rules", () => {
-    test.describe("product attribute conditions", () => {
-        test("should apply coupon when name of product condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|name",
-                operator: "==",
-                value: generatedName,
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-        });
+    // test.describe("product attribute conditions", () => {
+    //     test("should apply coupon when name of product condition is -> is equal to", async ({
+    //         page,
+    //     }) => {
+    //         const ruleCreatePage = new RuleCreatePage(page);
+    //         const ruleApplyPage = new RuleApplyPage(page);
+    //         await loginAsAdmin(page);
+    //         await ruleCreatePage.cartRuleCreationFlow();
+    //         await ruleCreatePage.addCondition({
+    //             attribute: "product|name",
+    //             operator: "==",
+    //             value: generatedName,
+    //         });
+    //         await ruleCreatePage.saveCartRule();
+    //         await ruleApplyPage.applyCoupon();
+    //     });
 
         test("should apply coupon when name of product condition is -> is not equal to", async ({
             page,

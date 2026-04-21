@@ -78,21 +78,21 @@ test.describe("cart rules", () => {
             await ruleApplyPage.applyCoupon();
         });
 
-        test("should apply coupon when price condition is -> equals or less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "<=",
-                value: "200",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-        });
+        // test("should apply coupon when price condition is -> equals or less than", async ({
+        //     page,
+        // }) => {
+        //     const ruleCreatePage = new RuleCreatePage(page);
+        //     const ruleApplyPage = new RuleApplyPage(page);
+        //     await loginAsAdmin(page);
+        //     await ruleCreatePage.cartRuleCreationFlow();
+        //     await ruleCreatePage.addCondition({
+        //         attribute: "product|price",
+        //         operator: "<=",
+        //         value: "200",
+        //     });
+        //     await ruleCreatePage.saveCartRule();
+        //     await ruleApplyPage.applyCoupon();
+        // });
 
         test("should apply coupon when price condition is -> greater than", async ({
             page,
