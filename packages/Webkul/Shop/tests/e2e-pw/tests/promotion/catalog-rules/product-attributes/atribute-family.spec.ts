@@ -76,7 +76,7 @@ test.describe("catalog rules", () => {
             "should delete the created product and rule",
             async ({ page }) => {
                 const ruleDeletePage = new RuleDeletePage(page);
-                await ruleDeletePage.deleteRuleAndProduct();
+                await ruleDeletePage.deleteCatalogRuleAndProduct();
             },
         );
 

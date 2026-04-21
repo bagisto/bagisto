@@ -75,7 +75,7 @@ test.describe("cart rules", () => {
                 value: "2",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon(2);
         });
 
         test("should apply coupon when quantity in cart condition is -> equals or less than", async ({
@@ -104,10 +104,10 @@ test.describe("cart rules", () => {
             await ruleCreatePage.addCondition({
                 attribute: "cart_item|quantity",
                 operator: ">",
-                value: "2",
+                value: "1",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon(3);
         });
 
         test("should apply coupon when quantity in cart condition is -> less than", async ({

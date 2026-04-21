@@ -154,19 +154,20 @@ export class RuleApplyPage extends BasePage {
     async verifyCatalogRule() {
         await this.visit("");
 
-        await this.searchInput.fill("simple");
+        const product = this.getSavedProduct();
+        await this.searchInput.fill(product.name);
         await this.searchInput.press("Enter");
 
         const actualPrice = 199;
         const expectedDiscountedPrice = `$${(actualPrice * 0.5).toFixed(2)}`;
 
+        const productCard = this.page
+            .locator("div")
+            .filter({ hasText: product.name });
+
         await expect(
-            this.page
-                .locator("div.flex.items-center")
-                .locator("p")
-                .filter({ hasText: "$" })
-                .last(),
-        ).toHaveText(expectedDiscountedPrice);
+            productCard.locator("div.flex.items-center p").last(),
+        ).toContainText(expectedDiscountedPrice);
     }
 
     async applyCouponAtCheckout() {
@@ -174,7 +175,7 @@ export class RuleApplyPage extends BasePage {
 
         const product = this.getSavedProduct();
         await this.searchInput.fill(product.name);
-        
+
         await this.searchInput.press("Enter");
         await this.addToCartButton.first().click();
         await expect(this.addToCartSuccessMessage).toBeVisible();
