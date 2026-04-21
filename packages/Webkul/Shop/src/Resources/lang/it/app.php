@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Indirizzo di fatturazione',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Cancellazione non consentita',
+                        'description' => 'Questo ordine contiene un prodotto di prenotazione che non può essere annullato. Contatta l\'assistenza se hai bisogno di aiuto.',
+                    ],
+
                     'cancel-btn-title' => 'Annulla',
                     'cancel-confirm-msg' => 'Sei sicuro di voler annullare questo ordine?',
                     'cancel-error' => 'Impossibile annullare il tuo ordine.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'ID ordine',
                     'page-title' => 'Ordine #:order_id',
                     'payment-method' => 'Metodo di pagamento',
+                    'reorder-booking-skipped' => 'I prodotti di prenotazione sono stati saltati durante il nuovo ordine. Prenotali di nuovo con date e fasce orarie nuove.',
                     'reorder-btn-title' => 'Riordina',
                     'shipping-address' => 'Indirizzo di spedizione',
                     'shipping-method' => 'Metodo di spedizione',
@@ -721,6 +728,11 @@ return [
                     'location' => 'Posizione',
                     'view-on-map' => 'Visualizza sulla mappa',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Cancellazione non consentita',
+                        'description' => 'Una volta effettuata questa prenotazione, non può essere annullata. Rivedi attentamente i dettagli prima del checkout.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minuti',
                         'slot-duration' => 'Durata Slot',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'Prenotazione Da',
+                'booking-location' => 'Luogo',
                 'booking-till' => 'Prenotazione Fino',
+                'bookings-count' => 'Numero di prenotazioni',
                 'charged-per' => 'Addebitato per',
                 'daily' => 'Base Giornaliera',
                 'event-from' => 'Evento Da',

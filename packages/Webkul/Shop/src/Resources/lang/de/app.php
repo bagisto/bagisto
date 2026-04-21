@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Rechnungsadresse',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Stornierung nicht erlaubt',
+                        'description' => 'Diese Bestellung enthält ein Buchungsprodukt, das nicht storniert werden kann. Bitte kontaktieren Sie den Support, falls Sie Hilfe benötigen.',
+                    ],
+
                     'cancel-btn-title' => 'Abbrechen',
                     'cancel-confirm-msg' => 'Sind Sie sicher, dass Sie diese Bestellung stornieren möchten?',
                     'cancel-error' => 'Ihre Bestellung kann nicht storniert werden.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'Bestellnummer',
                     'page-title' => 'Bestellung #:order_id',
                     'payment-method' => 'Zahlungsmethode',
+                    'reorder-booking-skipped' => 'Buchungsprodukte wurden bei der Nachbestellung übersprungen. Bitte buchen Sie sie erneut mit neuen Daten und Zeitfenstern.',
                     'reorder-btn-title' => 'Erneut bestellen',
                     'shipping-address' => 'Lieferadresse',
                     'shipping-method' => 'Versandmethode',
@@ -721,6 +728,11 @@ return [
                     'location' => 'Ort',
                     'view-on-map' => 'Auf Karte anzeigen',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Stornierung nicht erlaubt',
+                        'description' => 'Nach Abschluss dieser Buchung kann sie nicht storniert werden. Bitte überprüfen Sie die Details sorgfältig vor dem Checkout.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minuten',
                         'slot-duration' => 'Slot-Dauer',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'Buchung von',
+                'booking-location' => 'Standort',
                 'booking-till' => 'Buchung bis',
+                'bookings-count' => 'Anzahl der Buchungen',
                 'charged-per' => 'Berechnet pro',
                 'daily' => 'Tagesbasis',
                 'event-from' => 'Veranstaltung von',

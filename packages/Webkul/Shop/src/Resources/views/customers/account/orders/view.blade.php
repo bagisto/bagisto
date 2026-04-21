@@ -81,6 +81,36 @@
             </div>
         </div>
 
+        @php
+            $hasNonCancelableBooking = false;
+
+            foreach ($order->items as $item) {
+                if (
+                    $item->type === 'booking'
+                    && $item->product?->getTypeInstance()->isCancelable() === false
+                ) {
+                    $hasNonCancelableBooking = true;
+                    break;
+                }
+            }
+        @endphp
+
+        @if ($hasNonCancelableBooking)
+            <div class="mt-4 flex items-start gap-3 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+                <span class="icon-warning mt-0.5 text-lg"></span>
+
+                <div>
+                    <p class="font-semibold">
+                        @lang('shop::app.customers.account.orders.view.booking-cancellation-not-allowed.title')
+                    </p>
+
+                    <p class="text-xs">
+                        @lang('shop::app.customers.account.orders.view.booking-cancellation-not-allowed.description')
+                    </p>
+                </div>
+            </div>
+        @endif
+
         {!! view_render_event('bagisto.shop.customers.account.orders.view.before', ['order' => $order]) !!}
 
         <!-- Order view tabs -->

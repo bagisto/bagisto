@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => '账单地址',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => '不允许取消',
+                        'description' => '此订单包含无法取消的预订产品。如需帮助，请联系支持团队。',
+                    ],
+
                     'cancel-btn-title' => '取消',
                     'cancel-confirm-msg' => '确定要取消此订单吗？',
                     'cancel-error' => '无法取消您的订单。',
@@ -208,6 +214,7 @@ return [
                     'order-id' => '订单编号',
                     'page-title' => '订单 #:order_id',
                     'payment-method' => '付款方式',
+                    'reorder-booking-skipped' => '重新下单时已跳过预订产品。请使用新的日期和时间段重新预订。',
                     'reorder-btn-title' => '重新下单',
                     'shipping-address' => '收货地址',
                     'shipping-method' => '发货方式',
@@ -721,6 +728,11 @@ return [
                     'location' => '位置',
                     'view-on-map' => '在地图上查看',
 
+                    'cancellation-not-allowed' => [
+                        'title' => '不允许取消',
+                        'description' => '此预订一旦完成，无法取消。请在结账前仔细查看详情。',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes 分钟',
                         'slot-duration' => '时段持续时间',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => '预订从',
+                'booking-location' => '地点',
                 'booking-till' => '预订到',
+                'bookings-count' => '预订数',
                 'charged-per' => '收费方式',
                 'daily' => '按天计算',
                 'event-from' => '活动从',

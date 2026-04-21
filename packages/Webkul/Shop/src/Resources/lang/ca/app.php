@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Adreça de Facturació',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'No es permet la cancel·lació',
+                        'description' => 'Aquesta comanda conté un producte de reserva que no es pot cancel·lar. Poseu-vos en contacte amb el suport si necessiteu ajuda.',
+                    ],
+
                     'cancel-btn-title' => 'Cancel·lar',
                     'cancel-confirm-msg' => 'Estàs segur que vols cancel·lar aquesta comanda?',
                     'cancel-error' => 'No es pot cancel·lar la teva comanda.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'ID de la Comanda',
                     'page-title' => 'Comanda #:order_id',
                     'payment-method' => 'Mètode de Pagament',
+                    'reorder-booking-skipped' => 'Els productes de reserva s\'han omès durant la nova comanda. Si us plau, reserveu-los de nou amb noves dates i franges horàries.',
                     'reorder-btn-title' => 'Tornar a Comandar',
                     'shipping-address' => 'Adreça d\'Enviament',
                     'shipping-method' => 'Mètode d\'Enviament',
@@ -721,6 +728,11 @@ return [
                     'location' => 'Ubicació',
                     'view-on-map' => 'Veure al mapa',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'No es permet la cancel·lació',
+                        'description' => 'Una vegada feta aquesta reserva, no es pot cancel·lar. Reviseu els detalls amb cura abans de finalitzar la compra.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minuts',
                         'slot-duration' => 'Durada del slot',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'Reserva des de',
+                'booking-location' => 'Ubicació',
                 'booking-till' => 'Reserva fins a',
+                'bookings-count' => 'Nombre de reserves',
                 'charged-per' => 'Cobrat per',
                 'daily' => 'Diari',
                 'event-from' => 'Esdeveniment des de',

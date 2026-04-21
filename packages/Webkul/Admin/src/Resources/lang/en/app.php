@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Per Unit x :qty Quantity',
                 'billing-address' => 'Billing Address',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Booking Cancellation Not Allowed',
+                    'description' => 'This order contains a booking product configured as non-cancellable. The customer cannot cancel it from their account, and the cancel action is disabled here as well.',
+                ],
+
                 'cancel' => 'Cancel',
                 'cancel-msg' => 'Are your sure you want to cancel this order',
                 'cancel-success' => 'Order cancelled successfully',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'Refund #:refund',
                 'refunded' => 'Refunded',
                 'reorder' => 'Reorder',
+                'reorder-booking-skipped' => 'Booking products were skipped during reorder. Please book them again with fresh date and time slots.',
                 'ship' => 'Ship',
                 'shipment' => 'Shipment #:shipment',
                 'shipments' => 'Shipments',

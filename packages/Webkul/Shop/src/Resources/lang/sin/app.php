@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'බිල් ලිපිනය',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'අවලංගු කිරීමට අවසර නැත',
+                        'description' => 'මෙම ඇණවුමේ අවලංගු කළ නොහැකි වෙන්කිරීම් නිෂ්පාදනයක් ඇතුළත් වේ. ඔබට සහය අවශ්‍ය නම් කරුණාකර සහාය සම්බන්ධ කර ගන්න.',
+                    ],
+
                     'cancel-btn-title' => 'අවලංගු කරන්න',
                     'cancel-confirm-msg' => 'මෙම ඇණවුම අවලංගු කිරීමට ඔබට හැකියිද?',
                     'cancel-error' => 'ඔබගේ ඇණවුම අවලංගු කළ නොහැක.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'ඇනවුම් අංකය',
                     'page-title' => 'ඇනවුම #:order_id',
                     'payment-method' => 'ගෙවීමේ ක්රමය',
+                    'reorder-booking-skipped' => 'නැවත ඇණවුම් කිරීමේදී වෙන්කිරීම් නිෂ්පාදන මඟහරිනු ලැබීය. කරුණාකර නව දින සහ කාල පරාස සමඟ ඒවා නැවත වෙන්කරවා ගන්න.',
                     'reorder-btn-title' => 'නැවත ඇනවුම් කරන්න',
                     'shipping-address' => 'නැවුම් ලිපිනය',
                     'shipping-method' => 'නැවුම් ක්රමය',
@@ -721,6 +728,11 @@ return [
                     'location' => 'ස්ථානය',
                     'view-on-map' => 'සිතියම මත බලන්න',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'අවලංගු කිරීමට අවසර නැත',
+                        'description' => 'මෙම වෙන්කිරීම සිදු කළ පසු, එය අවලංගු කළ නොහැක. කරුණාකර ගෙවීම් කිරීමට පෙර විස්තර හොඳින් සමාලෝචනය කරන්න.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes මිනිත්තු',
                         'slot-duration' => 'ස්ලොට් කාලය',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'වෙන්කිරීමේ සිට',
+                'booking-location' => 'ස්ථානය',
                 'booking-till' => 'වෙන්කිරීමේ දක්වා',
+                'bookings-count' => 'වෙන්කිරීම් ගණන',
                 'charged-per' => 'අය කරන්නේ',
                 'daily' => 'දිනපතා පදනම',
                 'event-from' => 'සිදුවීමේ සිට',

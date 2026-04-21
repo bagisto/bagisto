@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount ליחידה x :qty כמות',
                 'billing-address' => 'כתובת לחיוב',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'ביטול אינו מורשה',
+                    'description' => 'הזמנה זו מכילה מוצר הזמנה שהוגדר כבלתי ניתן לביטול. הלקוח אינו יכול לבטלה מחשבונו, ופעולת הביטול מושבתת גם כאן.',
+                ],
+
                 'cancel' => 'ביטול',
                 'cancel-msg' => 'האם אתה בטוח שברצונך לבטל הזמנה זו',
                 'cancel-success' => 'ההזמנה בוטלה בהצלחה',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'החזר #:refund',
                 'refunded' => 'הוחזר',
                 'reorder' => 'הזמן שוב',
+                'reorder-booking-skipped' => 'מוצרי הזמנה דולגו במהלך ההזמנה מחדש. אנא הזמינו אותם שוב עם תאריכים ומשבצות זמן חדשות.',
                 'ship' => 'שלח',
                 'shipment' => 'משלוח #:shipment',
                 'shipments' => 'משלוחים',

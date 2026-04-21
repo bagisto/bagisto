@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount pro Einheit x :qty Menge',
                 'billing-address' => 'Rechnungsadresse',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Stornierung nicht erlaubt',
+                    'description' => 'Diese Bestellung enthält ein als nicht stornierbar konfiguriertes Buchungsprodukt. Der Kunde kann sie nicht aus seinem Konto stornieren, und die Stornierungsaktion ist auch hier deaktiviert.',
+                ],
+
                 'cancel' => 'Abbrechen',
                 'cancel-msg' => 'Sind Sie sicher, dass Sie diese Bestellung stornieren möchten?',
                 'cancel-success' => 'Bestellung erfolgreich storniert',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'Rückerstattung #:refund',
                 'refunded' => 'Erstattet',
                 'reorder' => 'Erneut bestellen',
+                'reorder-booking-skipped' => 'Buchungsprodukte wurden bei der Nachbestellung übersprungen. Bitte buchen Sie sie erneut mit neuen Daten und Zeitfenstern.',
                 'ship' => 'Versenden',
                 'shipment' => 'Sendung #:shipment',
                 'shipments' => 'Sendungen',

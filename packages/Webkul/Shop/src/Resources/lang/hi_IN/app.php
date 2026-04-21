@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'बिलिंग पता',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'रद्दीकरण की अनुमति नहीं है',
+                        'description' => 'इस ऑर्डर में एक बुकिंग उत्पाद है जिसे रद्द नहीं किया जा सकता। सहायता की आवश्यकता होने पर कृपया सपोर्ट से संपर्क करें।',
+                    ],
+
                     'cancel-btn-title' => 'रद्द करें',
                     'cancel-confirm-msg' => 'क्या आप वाकई इस आदेश को रद्द करना चाहते हैं?',
                     'cancel-error' => 'आपका आदेश रद्द नहीं किया जा सकता है।',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'आदेश आईडी',
                     'page-title' => 'आदेश #:order_id',
                     'payment-method' => 'भुगतान विधि',
+                    'reorder-booking-skipped' => 'पुनः ऑर्डर के दौरान बुकिंग उत्पादों को छोड़ दिया गया। कृपया उन्हें नई तारीख और समय स्लॉट के साथ फिर से बुक करें।',
                     'reorder-btn-title' => 'फिर से आदेश करें',
                     'shipping-address' => 'शिपिंग पता',
                     'shipping-method' => 'शिपिंग विधि',
@@ -721,6 +728,11 @@ return [
                     'location' => 'स्थान',
                     'view-on-map' => 'नक्शे पर देखें',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'रद्दीकरण की अनुमति नहीं है',
+                        'description' => 'एक बार यह बुकिंग कर दी गई, तो इसे रद्द नहीं किया जा सकता। कृपया चेकआउट से पहले विवरण की सावधानी से समीक्षा करें।',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes मिनट',
                         'slot-duration' => 'स्लॉट अवधि',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'बुकिंग से',
+                'booking-location' => 'स्थान',
                 'booking-till' => 'बुकिंग तक',
+                'bookings-count' => 'बुकिंग की संख्या',
                 'charged-per' => 'प्रति शुल्क',
                 'daily' => 'दैनिक आधार',
                 'event-from' => 'कार्यक्रम से',

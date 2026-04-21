@@ -6,6 +6,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11258 [security] - Fixed user enumeration vulnerability (CWE-204) in the customer resend-verification endpoint where a missing null-check leaked email existence via differential HTTP responses. Added rate limiting on the route.
 
+- #11263 [fixed] - Fixed the Cancel Order option appearing for booking products with cancellation disabled. Added a generic `isCancelable()` method on the product type; the `Booking` type reads the `allow_cancellation` flag, and `Order::canCancel()` now respects it across admin and customer order views and the order cancel action. Added amber warning banners on the product view, customer order view, and admin order view that explain clearly when cancellation is not allowed.
+
+- #11262 [fixed] - Fixed booking products allowing checkout beyond available quantity. The `compareOptions` comparator for booking products now matches on booking slot/date/renting-type so repeated additions of the same slot merge into a single cart item, correctly triggering the out-of-stock validation.
+
+- #11261 [fixed] - Fixed the Reorder button being visible in admin and customer order views for booking products that are out of stock. The `Booking` type now implements a proper `isSaleable()` check based on booking quantity, event ticket stock, and the product's availability window. Booking items are also skipped during reorder with an info message, since their original slot data is typically expired.
+
 - #11260 [fixed] - Fixed event booking showing the "sold out" toast when the requested quantity exceeded the available stock. A dedicated `exceeds_available` message is now shown with the remaining ticket count when stock is still available.
 
 - #11259 [fixed] - Fixed the "Start time must be less than end time" toast appearing for valid multi-day slots (e.g., Saturday to Sunday) on default booking products. Time comparison now runs only for same-day slots, and the frontend overlap check handles cross-week ranges correctly.

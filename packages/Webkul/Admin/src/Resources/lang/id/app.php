@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount per unit x :qty jumlah',
                 'billing-address' => 'Alamat Penagihan',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Pembatalan Tidak Diizinkan',
+                    'description' => 'Pesanan ini berisi produk pemesanan yang dikonfigurasi sebagai tidak dapat dibatalkan. Pelanggan tidak dapat membatalkannya dari akun mereka, dan tindakan pembatalan juga dinonaktifkan di sini.',
+                ],
+
                 'cancel' => 'Batalkan',
                 'cancel-msg' => 'Apakah Anda yakin ingin membatalkan pesanan ini?',
                 'cancel-success' => 'Pesanan berhasil dibatalkan',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'Pengembalian #:refund',
                 'refunded' => 'Dikembalikan',
                 'reorder' => 'Pesan Lagi',
+                'reorder-booking-skipped' => 'Produk pemesanan dilewati saat memesan ulang. Silakan pesan ulang dengan tanggal dan slot waktu baru.',
                 'ship' => 'Kirim',
                 'shipment' => 'Pengiriman #:shipment',
                 'shipments' => 'Pengiriman',

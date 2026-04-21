@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Endereço de Cobrança',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Cancelamento não permitido',
+                        'description' => 'Este pedido contém um produto de reserva que não pode ser cancelado. Entre em contato com o suporte se precisar de ajuda.',
+                    ],
+
                     'cancel-btn-title' => 'Cancelar',
                     'cancel-confirm-msg' => 'Tem certeza de que deseja cancelar este pedido?',
                     'cancel-error' => 'Seu pedido não pode ser cancelado.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'ID do Pedido',
                     'page-title' => 'Pedido #:order_id',
                     'payment-method' => 'Método de Pagamento',
+                    'reorder-booking-skipped' => 'Os produtos de reserva foram ignorados durante o novo pedido. Reserve-os novamente com novas datas e horários.',
                     'reorder-btn-title' => 'Refazer Pedido',
                     'shipping-address' => 'Endereço de Envio',
                     'shipping-method' => 'Método de Envio',
@@ -721,6 +728,11 @@ return [
                     'location' => 'Localização',
                     'view-on-map' => 'Ver no Mapa',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Cancelamento não permitido',
+                        'description' => 'Uma vez feita esta reserva, não poderá ser cancelada. Revise os detalhes cuidadosamente antes de finalizar a compra.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minutos',
                         'slot-duration' => 'Duração do Intervalo',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'Reserva De',
+                'booking-location' => 'Local',
                 'booking-till' => 'Reserva Até',
+                'bookings-count' => 'Número de reservas',
                 'charged-per' => 'Cobrado por',
                 'daily' => 'Base Diária',
                 'event-from' => 'Evento De',

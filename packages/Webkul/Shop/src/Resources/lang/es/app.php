@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Dirección de Facturación',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Cancelación no permitida',
+                        'description' => 'Este pedido contiene un producto de reserva que no se puede cancelar. Contacte con soporte si necesita ayuda.',
+                    ],
+
                     'cancel-btn-title' => 'Cancelar',
                     'cancel-confirm-msg' => '¿Estás seguro de que quieres cancelar este pedido?',
                     'cancel-error' => 'No se puede cancelar tu pedido.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'ID de Pedido',
                     'page-title' => 'Pedido #:order_id',
                     'payment-method' => 'Método de Pago',
+                    'reorder-booking-skipped' => 'Los productos de reserva se omitieron durante el reordenamiento. Por favor, resérvelos nuevamente con nuevas fechas y franjas horarias.',
                     'reorder-btn-title' => 'Volver a Pedir',
                     'shipping-address' => 'Dirección de Envío',
                     'shipping-method' => 'Método de Envío',
@@ -721,6 +728,11 @@ return [
                     'location' => 'Ubicación',
                     'view-on-map' => 'Ver en el Mapa',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Cancelación no permitida',
+                        'description' => 'Una vez realizada esta reserva, no se puede cancelar. Revise los detalles cuidadosamente antes de finalizar la compra.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minutos',
                         'slot-duration' => 'Duración del Intervalo',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'Reserva Desde',
+                'booking-location' => 'Ubicación',
                 'booking-till' => 'Reserva Hasta',
+                'bookings-count' => 'Número de reservas',
                 'charged-per' => 'Cobrado por',
                 'daily' => 'Base Diaria',
                 'event-from' => 'Evento Desde',

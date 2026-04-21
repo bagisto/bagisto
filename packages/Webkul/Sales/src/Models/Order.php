@@ -354,6 +354,12 @@ class Order extends Model implements OrderContract
     public function canCancel(): bool
     {
         foreach ($this->items as $item) {
+            if ($item->product?->getTypeInstance()->isCancelable() === false) {
+                return false;
+            }
+        }
+
+        foreach ($this->items as $item) {
             if (
                 $item->canCancel()
                 && ! in_array($item->order->status, [
@@ -401,13 +407,21 @@ class Order extends Model implements OrderContract
             return false;
         }
 
+        $hasReorderable = false;
+
         foreach ($this->items as $item) {
+            if ($item->type === 'booking') {
+                continue;
+            }
+
             if (! $item->product?->getTypeInstance()->isSaleable()) {
                 return false;
             }
+
+            $hasReorderable = true;
         }
 
-        return true;
+        return $hasReorderable;
     }
 
     /**

@@ -433,6 +433,14 @@ abstract class AbstractType
     }
 
     /**
+     * Return true if orders containing this product can be canceled.
+     */
+    public function isCancelable(): bool
+    {
+        return true;
+    }
+
+    /**
      * Return true if this product can have inventory.
      *
      * @return bool

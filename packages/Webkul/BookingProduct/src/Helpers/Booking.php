@@ -305,7 +305,7 @@ class Booking
                 return $this->getTableAttributes($bookingProduct, $data);
 
             default:
-                return $this->getDefaultAttributes($data);
+                return $this->getDefaultAttributes($bookingProduct, $data);
         }
     }
 
@@ -612,7 +612,7 @@ class Booking
 
         if (! empty($bookingProduct->location)) {
             $attributes[] = [
-                'attribute_name' => trans('shop::app.products.booking.cart.event-location'),
+                'attribute_name' => trans('shop::app.products.booking.cart.booking-location'),
                 'option_id'      => 0,
                 'option_label'   => $bookingProduct->location,
             ];
@@ -654,21 +654,39 @@ class Booking
                 ->format('d F, Y h:i A');
         }
 
-        return [
+        $attributes = [
             [
-                'attribute_name' => trans('shop::app.products.booking.cart.rent-type'),
-                'option_id' => 0,
-                'option_label' => trans('shop::app.products.booking.cart.'.$rentingType),
-            ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.rent-from'),
-                'option_id' => 0,
-                'option_label' => $from,
+                'option_id'      => 0,
+                'option_label'   => $from,
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.rent-till'),
-                'option_id' => 0,
-                'option_label' => $to,
+                'option_id'      => 0,
+                'option_label'   => $to,
             ],
         ];
+
+        if (! empty($bookingProduct->location)) {
+            $attributes[] = [
+                'attribute_name' => trans('shop::app.products.booking.cart.booking-location'),
+                'option_id'      => 0,
+                'option_label'   => $bookingProduct->location,
+            ];
+        }
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.rent-type'),
+            'option_id'      => 0,
+            'option_label'   => trans('shop::app.products.booking.cart.'.$rentingType),
+        ];
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
+            'option_id'      => 0,
+            'option_label'   => (int) ($data['quantity'] ?? 1),
+        ];
+
+        return $attributes;
     }
 
     /**
@@ -682,24 +700,32 @@ class Booking
         $attributes = [
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
-                'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp((int) $timestamps[0])
+                'option_id'      => 0,
+                'option_label'   => Carbon::createFromTimestamp((int) $timestamps[0])
                     ->timezone(config('app.timezone'))
                     ->isoFormat('Do MMM, YYYY h:mm A'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-till'),
-                'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp((int) $timestamps[1])
+                'option_id'      => 0,
+                'option_label'   => Carbon::createFromTimestamp((int) $timestamps[1])
                     ->timezone(config('app.timezone'))
                     ->isoFormat('Do MMM, YYYY h:mm A'),
             ],
         ];
 
+        if (! empty($bookingProduct->location)) {
+            $attributes[] = [
+                'attribute_name' => trans('shop::app.products.booking.cart.booking-location'),
+                'option_id'      => 0,
+                'option_label'   => $bookingProduct->location,
+            ];
+        }
+
         if ($tableSlot) {
             $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.charged-per'),
-                'option_id' => 0,
-                'option_label' => $tableSlot->price_type == 'table'
+                'option_id'      => 0,
+                'option_label'   => $tableSlot->price_type == 'table'
                     ? trans('shop::app.products.booking.cart.per-table')
                     : trans('shop::app.products.booking.cart.per-guest'),
             ];
@@ -707,17 +733,23 @@ class Booking
             if ($tableSlot->price_type == 'table' && $tableSlot->guest_limit) {
                 $attributes[] = [
                     'attribute_name' => trans('shop::app.products.booking.cart.guest-limit'),
-                    'option_id' => 0,
-                    'option_label' => $tableSlot->guest_limit,
+                    'option_id'      => 0,
+                    'option_label'   => $tableSlot->guest_limit,
                 ];
             }
         }
 
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
+            'option_id'      => 0,
+            'option_label'   => (int) ($data['quantity'] ?? 1),
+        ];
+
         if (! empty($data['booking']['note'])) {
             $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.special-note'),
-                'option_id' => 0,
-                'option_label' => $data['booking']['note'],
+                'option_id'      => 0,
+                'option_label'   => $data['booking']['note'],
             ];
         }
 
@@ -725,26 +757,42 @@ class Booking
     }
 
     /**
-     * Get default booking attributes.
+     * Get default booking attributes (used for default and appointment types).
      */
-    private function getDefaultAttributes($data): array
+    private function getDefaultAttributes($bookingProduct, $data): array
     {
         $timestamps = explode('-', $data['booking']['slot']);
 
-        return [
+        $attributes = [
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
-                'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp((int) $timestamps[0])
+                'option_id'      => 0,
+                'option_label'   => Carbon::createFromTimestamp((int) $timestamps[0])
                     ->timezone(config('app.timezone'))
                     ->format('d F, Y h:i A'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-till'),
-                'option_id' => 0,
-                'option_label' => Carbon::createFromTimestamp((int) $timestamps[1])
+                'option_id'      => 0,
+                'option_label'   => Carbon::createFromTimestamp((int) $timestamps[1])
                     ->timezone(config('app.timezone'))
                     ->format('d F, Y h:i A'),
             ],
         ];
+
+        if (! empty($bookingProduct?->location)) {
+            $attributes[] = [
+                'attribute_name' => trans('shop::app.products.booking.cart.booking-location'),
+                'option_id'      => 0,
+                'option_label'   => $bookingProduct->location,
+            ];
+        }
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
+            'option_id'      => 0,
+            'option_label'   => (int) ($data['quantity'] ?? 1),
+        ];
+
+        return $attributes;
     }
 }

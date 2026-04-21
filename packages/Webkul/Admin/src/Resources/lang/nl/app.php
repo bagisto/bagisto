@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Per Eenheid x :qty Hoeveelheid',
                 'billing-address' => 'Factuuradres',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Annulering niet toegestaan',
+                    'description' => 'Deze bestelling bevat een boekingsproduct dat is geconfigureerd als niet-annuleerbaar. De klant kan deze niet annuleren vanuit zijn account, en de annuleringsactie is ook hier uitgeschakeld.',
+                ],
+
                 'cancel' => 'Annuleren',
                 'cancel-msg' => 'Weet je zeker dat je deze bestelling wilt annuleren?',
                 'cancel-success' => 'Bestelling succesvol geannuleerd',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'Terugbetaling #:refund',
                 'refunded' => 'Terugbetaald',
                 'reorder' => 'Opnieuw Bestellen',
+                'reorder-booking-skipped' => 'Boekingsproducten zijn overgeslagen tijdens het opnieuw bestellen. Boek ze opnieuw met nieuwe datums en tijdsloten.',
                 'ship' => 'Verzenden',
                 'shipment' => 'Verzending #:shipment',
                 'shipments' => 'Verzendingen',

@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Adresa de facturare',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Anularea nu este permisă',
+                        'description' => 'Această comandă conține un produs de rezervare care nu poate fi anulat. Vă rugăm să contactați asistența dacă aveți nevoie de ajutor.',
+                    ],
+
                     'cancel-btn-title' => 'Anulează',
                     'cancel-confirm-msg' => 'Sigur doriți să anulați această comandă?',
                     'cancel-error' => 'Comanda dvs. nu poate fi anulată.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'ID comandă',
                     'page-title' => 'Comanda #:order_id',
                     'payment-method' => 'Metodă de plată',
+                    'reorder-booking-skipped' => 'Produsele de rezervare au fost omise în timpul recomandării. Vă rugăm să le rezervați din nou cu date și intervale de timp noi.',
                     'reorder-btn-title' => 'Comandă din nou',
                     'shipping-address' => 'Adresa de livrare',
                     'shipping-method' => 'Metodă de expediere',
@@ -721,6 +728,11 @@ return [
                     'location' => 'Locație',
                     'view-on-map' => 'Vezi pe hartă',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Anularea nu este permisă',
+                        'description' => 'După efectuarea acestei rezervări, nu poate fi anulată. Vă rugăm să verificați cu atenție detaliile înainte de finalizarea comenzii.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minute',
                         'slot-duration' => 'Durată slot',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'Rezervare de la',
+                'booking-location' => 'Locație',
                 'booking-till' => 'Rezervare până la',
+                'bookings-count' => 'Numărul de rezervări',
                 'charged-per' => 'Taxat per',
                 'daily' => 'Pe zi',
                 'event-from' => 'Eveniment de la',

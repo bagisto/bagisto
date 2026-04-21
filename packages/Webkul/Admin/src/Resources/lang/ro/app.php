@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Per Unit x :qty Quantity',
                 'billing-address' => 'Billing Address',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Anularea nu este permisă',
+                    'description' => 'Această comandă conține un produs de rezervare configurat ca neanulabil. Clientul nu îl poate anula din contul său, iar acțiunea de anulare este dezactivată și aici.',
+                ],
+
                 'cancel' => 'Cancel',
                 'cancel-msg' => 'Are your sure you want to cancel this order',
                 'cancel-success' => 'Order cancelled successfully',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'Refund #:refund',
                 'refunded' => 'Refunded',
                 'reorder' => 'Reorder',
+                'reorder-booking-skipped' => 'Produsele de rezervare au fost omise în timpul recomandării. Vă rugăm să le rezervați din nou cu date și intervale de timp noi.',
                 'ship' => 'Ship',
                 'shipment' => 'Shipment #:shipment',
                 'shipments' => 'Shipments',

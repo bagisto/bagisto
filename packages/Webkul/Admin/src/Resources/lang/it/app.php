@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Per Unità x :qty Quantità',
                 'billing-address' => 'Indirizzo di Fatturazione',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Cancellazione non consentita',
+                    'description' => 'Questo ordine contiene un prodotto di prenotazione configurato come non annullabile. Il cliente non può annullarlo dal proprio account e l\'azione di annullamento è disabilitata anche qui.',
+                ],
+
                 'cancel' => 'Annulla',
                 'cancel-msg' => 'Sei sicuro di voler annullare questo ordine',
                 'cancel-success' => 'Ordine annullato con successo',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'Rimborso #:refund',
                 'refunded' => 'Rimborsato',
                 'reorder' => 'Riordina',
+                'reorder-booking-skipped' => 'I prodotti di prenotazione sono stati saltati durante il nuovo ordine. Prenotali di nuovo con date e fasce orarie nuove.',
                 'ship' => 'Spedisci',
                 'shipment' => 'Spedizione #:shipment',
                 'shipments' => 'Spedizioni',

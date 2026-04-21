@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'বিলিং ঠিকানা',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'বাতিলকরণ অনুমোদিত নয়',
+                        'description' => 'এই অর্ডারে একটি বুকিং পণ্য রয়েছে যা বাতিল করা যাবে না। সহায়তার প্রয়োজন হলে দয়া করে সাপোর্টের সাথে যোগাযোগ করুন।',
+                    ],
+
                     'cancel-btn-title' => 'বাতিল করুন',
                     'cancel-confirm-msg' => 'আপনি কি নিশ্চিত যে আপনি এই অর্ডারটি বাতিল করতে চান?',
                     'cancel-error' => 'আপনার অর্ডারটি বাতিল করা যাবে না।',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'অর্ডার আইডি',
                     'page-title' => 'অর্ডার #:order_id',
                     'payment-method' => 'পেমেন্ট পদ্ধতি',
+                    'reorder-booking-skipped' => 'পুনরায় অর্ডারের সময় বুকিং পণ্য এড়িয়ে যাওয়া হয়েছে। অনুগ্রহ করে নতুন তারিখ এবং সময় স্লট দিয়ে সেগুলি আবার বুক করুন।',
                     'reorder-btn-title' => 'পুনরায় অর্ডার করুন',
                     'shipping-address' => 'প্রেরণ ঠিকানা',
                     'shipping-method' => 'প্রেরণ পদ্ধতি',
@@ -721,6 +728,11 @@ return [
                     'location' => 'অবস্থান',
                     'view-on-map' => 'মানচিত্রে দেখুন',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'বাতিলকরণ অনুমোদিত নয়',
+                        'description' => 'একবার এই বুকিং করা হয়ে গেলে, এটি বাতিল করা যাবে না। চেকআউটের আগে দয়া করে বিবরণ সাবধানে পর্যালোচনা করুন।',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes মিনিট',
                         'slot-duration' => 'স্লট সময়কাল',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'বুকিং থেকে',
+                'booking-location' => 'অবস্থান',
                 'booking-till' => 'বুকিং পর্যন্ত',
+                'bookings-count' => 'বুকিংয়ের সংখ্যা',
                 'charged-per' => 'প্রতি চার্জ',
                 'daily' => 'দৈনিক ভিত্তিতে',
                 'event-from' => 'ইভেন্ট থেকে',

@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'כתובת לחיוב',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'ביטול אינו מורשה',
+                        'description' => 'הזמנה זו מכילה מוצר הזמנה שאינו ניתן לביטול. אנא צרו קשר עם התמיכה אם אתם זקוקים לסיוע.',
+                    ],
+
                     'cancel-btn-title' => 'ביטול',
                     'cancel-confirm-msg' => 'האם אתה בטוח שברצונך לבטל הזמנה זו?',
                     'cancel-error' => 'לא ניתן לבטל את ההזמנה שלך.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'מספר הזמנה',
                     'page-title' => 'הזמנה #:order_id',
                     'payment-method' => 'אמצעי תשלום',
+                    'reorder-booking-skipped' => 'מוצרי הזמנה דולגו במהלך ההזמנה מחדש. אנא הזמינו אותם שוב עם תאריכים ומשבצות זמן חדשות.',
                     'reorder-btn-title' => 'הזמן שוב',
                     'shipping-address' => 'כתובת למשלוח',
                     'shipping-method' => 'אמצעי משלוח',
@@ -721,6 +728,11 @@ return [
                     'location' => 'מיקום',
                     'view-on-map' => 'צפה במפה',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'ביטול אינו מורשה',
+                        'description' => 'לאחר ביצוע ההזמנה, לא ניתן לבטל אותה. אנא בדקו את הפרטים בקפידה לפני התשלום.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes דקות',
                         'slot-duration' => 'משך זמן',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'הזמנה מ',
+                'booking-location' => 'מיקום',
                 'booking-till' => 'הזמנה עד',
+                'bookings-count' => 'מספר הזמנות',
                 'charged-per' => 'חיוב לפי',
                 'daily' => 'בסיס יומי',
                 'event-from' => 'אירוע מ',

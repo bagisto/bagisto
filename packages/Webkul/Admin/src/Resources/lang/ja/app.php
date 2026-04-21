@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount ユニットあたり :qty 個',
                 'billing-address' => '請求先住所',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'キャンセルは許可されていません',
+                    'description' => 'この注文にはキャンセル不可として設定された予約商品が含まれています。お客様はアカウントからキャンセルできず、ここでのキャンセル操作も無効になっています。',
+                ],
+
                 'cancel' => 'キャンセル',
                 'cancel-msg' => 'この注文をキャンセルしてもよろしいですか？',
                 'cancel-success' => '注文が正常にキャンセルされました',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => '返金 #:refund',
                 'refunded' => '返金済み',
                 'reorder' => '再注文',
+                'reorder-booking-skipped' => '再注文時に予約商品はスキップされました。新しい日時のスロットで再予約してください。',
                 'ship' => '出荷',
                 'shipment' => '出荷 #:shipment',
                 'shipments' => '出荷',

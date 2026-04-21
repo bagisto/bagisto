@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'آدرس صورتحساب',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'لغو مجاز نیست',
+                        'description' => 'این سفارش شامل محصول رزروی است که قابل لغو نیست. در صورت نیاز به کمک با پشتیبانی تماس بگیرید.',
+                    ],
+
                     'cancel-btn-title' => 'لغو',
                     'cancel-confirm-msg' => 'آیا مطمئن هستید که میخواهید این سفارش را لغو کنید؟',
                     'cancel-error' => 'سفارش شما قابل لغو نیست.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'شناسه سفارش',
                     'page-title' => 'سفارش #:order_id',
                     'payment-method' => 'روش پرداخت',
+                    'reorder-booking-skipped' => 'محصولات رزرو در سفارش مجدد رد شدند. لطفاً آنها را با تاریخ‌ها و بازه‌های زمانی جدید مجدداً رزرو کنید.',
                     'reorder-btn-title' => 'سفارش مجدد',
                     'shipping-address' => 'آدرس ارسال',
                     'shipping-method' => 'روش حمل و نقل',
@@ -721,6 +728,11 @@ return [
                     'location' => 'مکان',
                     'view-on-map' => 'مشاهده روی نقشه',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'لغو مجاز نیست',
+                        'description' => 'پس از ثبت این رزرو، نمی‌توان آن را لغو کرد. لطفاً قبل از پرداخت، جزئیات را با دقت بررسی کنید.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes دقیقه',
                         'slot-duration' => 'مدت زمان اسلات',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'رزرو از',
+                'booking-location' => 'مکان',
                 'booking-till' => 'رزرو تا',
+                'bookings-count' => 'تعداد رزروها',
                 'charged-per' => 'هزینه به ازای',
                 'daily' => 'به صورت روزانه',
                 'event-from' => 'رویداد از',

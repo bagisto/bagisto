@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'عنوان الفاتورة',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'لا يُسمح بالإلغاء',
+                        'description' => 'يحتوي هذا الطلب على منتج حجز لا يمكن إلغاؤه. يُرجى التواصل مع الدعم إذا كنت بحاجة إلى مساعدة.',
+                    ],
+
                     'cancel-btn-title' => 'إلغاء',
                     'cancel-confirm-msg' => 'هل أنت متأكد أنك تريد إلغاء هذا الطلب؟',
                     'cancel-error' => 'لا يمكن إلغاء طلبك.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'معرف الطلب',
                     'page-title' => 'الطلب #:order_id',
                     'payment-method' => 'طريقة الدفع',
+                    'reorder-booking-skipped' => 'تم تخطي منتجات الحجز أثناء إعادة الطلب. يرجى حجزها مرة أخرى بتواريخ وفترات زمنية جديدة.',
                     'reorder-btn-title' => 'إعادة الطلب',
                     'shipping-address' => 'عنوان الشحن',
                     'shipping-method' => 'طريقة الشحن',
@@ -721,6 +728,11 @@ return [
                     'location' => 'الموقع',
                     'view-on-map' => 'عرض على الخريطة',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'لا يُسمح بالإلغاء',
+                        'description' => 'بمجرد تقديم هذا الحجز، لا يمكن إلغاؤه. يُرجى مراجعة التفاصيل بعناية قبل إتمام الطلب.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes دقائق',
                         'slot-duration' => 'مدة الفتحة',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'الحجز من',
+                'booking-location' => 'الموقع',
                 'booking-till' => 'الحجز حتى',
+                'bookings-count' => 'عدد الحجوزات',
                 'charged-per' => 'محاسب لكل',
                 'daily' => 'على أساس يومي',
                 'event-from' => 'الحدث من',

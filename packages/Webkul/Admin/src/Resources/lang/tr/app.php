@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Birim Başına x :qty Miktar',
                 'billing-address' => 'Fatura Adresi',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'İptale izin verilmiyor',
+                    'description' => 'Bu sipariş, iptal edilemez olarak yapılandırılmış bir rezervasyon ürünü içeriyor. Müşteri hesabından iptal edemez ve iptal eylemi burada da devre dışıdır.',
+                ],
+
                 'cancel' => 'İptal',
                 'cancel-msg' => 'Bu siparişi iptal etmek istediğinizden emin misiniz',
                 'cancel-success' => 'Sipariş başarıyla iptal edildi',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'İade #:refund',
                 'refunded' => 'İade Edildi',
                 'reorder' => 'Yeniden Sipariş Ver',
+                'reorder-booking-skipped' => 'Yeniden sipariş sırasında rezervasyon ürünleri atlandı. Lütfen yeni tarih ve zaman dilimleriyle tekrar rezerve edin.',
                 'ship' => 'Gönder',
                 'shipment' => 'Gönderim #:shipment',
                 'shipments' => 'Gönderimler',

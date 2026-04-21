@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Factuuradres',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Annulering niet toegestaan',
+                        'description' => 'Deze bestelling bevat een boekingsproduct dat niet kan worden geannuleerd. Neem contact op met de ondersteuning als u hulp nodig heeft.',
+                    ],
+
                     'cancel-btn-title' => 'Annuleren',
                     'cancel-confirm-msg' => 'Weet u zeker dat u deze bestelling wilt annuleren?',
                     'cancel-error' => 'Uw bestelling kan niet geannuleerd worden.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'Bestelnummer',
                     'page-title' => 'Bestelling #:order_id',
                     'payment-method' => 'Betaalmethode',
+                    'reorder-booking-skipped' => 'Boekingsproducten zijn overgeslagen tijdens het opnieuw bestellen. Boek ze opnieuw met nieuwe datums en tijdsloten.',
                     'reorder-btn-title' => 'Opnieuw bestellen',
                     'shipping-address' => 'Verzendadres',
                     'shipping-method' => 'Verzendmethode',
@@ -721,6 +728,11 @@ return [
                     'location' => 'Locatie',
                     'view-on-map' => 'Bekijk op Kaart',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Annulering niet toegestaan',
+                        'description' => 'Na het plaatsen van deze boeking kan deze niet worden geannuleerd. Controleer de details zorgvuldig voordat u afrekent.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minuten',
                         'slot-duration' => 'Slotduur',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'Boeking Van',
+                'booking-location' => 'Locatie',
                 'booking-till' => 'Boeking Tot',
+                'bookings-count' => 'Aantal boekingen',
                 'charged-per' => 'Kosten per',
                 'daily' => 'Dagelijks',
                 'event-from' => 'Evenement Van',

@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount 每单位 x :qty 数量',
                 'billing-address' => '账单地址',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => '不允许取消',
+                    'description' => '此订单包含配置为不可取消的预订产品。客户无法从其账户取消，取消操作在此也已禁用。',
+                ],
+
                 'cancel' => '取消',
                 'cancel-msg' => '确定要取消此订单吗？',
                 'cancel-success' => '订单取消成功',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => '退款号 #:refund',
                 'refunded' => '已退款',
                 'reorder' => '重新下单',
+                'reorder-booking-skipped' => '重新下单时已跳过预订产品。请使用新的日期和时间段重新预订。',
                 'ship' => '发货',
                 'shipment' => '发货 #:shipment',
                 'shipments' => '发货',

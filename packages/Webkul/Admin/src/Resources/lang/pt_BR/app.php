@@ -348,6 +348,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Por Unidade x :qty Quantidade',
                 'billing-address' => 'Endereço de Cobrança',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Cancelamento não permitido',
+                    'description' => 'Este pedido contém um produto de reserva configurado como não cancelável. O cliente não pode cancelá-lo da sua conta, e a ação de cancelamento também está desativada aqui.',
+                ],
+
                 'cancel' => 'Cancelar',
                 'cancel-msg' => 'Tem certeza de que deseja cancelar este pedido?',
                 'cancel-success' => 'Pedido cancelado com sucesso',
@@ -397,6 +403,7 @@ return [
                 'refund-id' => 'Reembolso #:refund',
                 'refunded' => 'Reembolsado',
                 'reorder' => 'Reordenar',
+                'reorder-booking-skipped' => 'Os produtos de reserva foram ignorados durante o novo pedido. Reserve-os novamente com novas datas e horários.',
                 'ship' => 'Enviar',
                 'shipment' => 'Remessa #:shipment',
                 'shipments' => 'Remessas',

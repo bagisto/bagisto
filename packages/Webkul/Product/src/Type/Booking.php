@@ -146,6 +146,56 @@ class Booking extends AbstractType
     }
 
     /**
+     * Return true if orders containing this booking product can be canceled.
+     */
+    public function isCancelable(): bool
+    {
+        $bookingProduct = $this->getBookingProduct($this->product->id);
+
+        if (! $bookingProduct) {
+            return true;
+        }
+
+        return (bool) ($bookingProduct->allow_cancellation ?? true);
+    }
+
+    /**
+     * Return true if the booking product has bookable inventory for reorder / saleability checks.
+     */
+    public function isSaleable()
+    {
+        if (! $this->product->status) {
+            return false;
+        }
+
+        $bookingProduct = $this->getBookingProduct($this->product->id);
+
+        if (! $bookingProduct) {
+            return false;
+        }
+
+        if (Carbon::now() > $bookingProduct->available_to) {
+            return false;
+        }
+
+        if ($bookingProduct->type === 'event') {
+            foreach ($bookingProduct->event_tickets as $ticket) {
+                if ((int) $ticket->qty > 0) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        if ($bookingProduct->type === 'appointment') {
+            return true;
+        }
+
+        return (int) $bookingProduct->qty > 0;
+    }
+
+    /**
      * Return true if this product can be composite.
      *
      * @return bool
@@ -273,12 +323,34 @@ class Booking extends AbstractType
             return false;
         }
 
+        if (! isset($options1['booking'], $options2['booking'])) {
+            return false;
+        }
+
+        $booking1 = $options1['booking'];
+        $booking2 = $options2['booking'];
+
+        if (isset($booking1['ticket_id'], $booking2['ticket_id'])) {
+            return $booking1['ticket_id'] === $booking2['ticket_id'];
+        }
+
+        if (isset($booking1['date_from'], $booking2['date_from'], $booking1['date_to'], $booking2['date_to'])) {
+            return $booking1['date_from'] === $booking2['date_from']
+                && $booking1['date_to'] === $booking2['date_to']
+                && ($booking1['renting_type'] ?? null) === ($booking2['renting_type'] ?? null);
+        }
+
         if (
-            isset($options1['booking'], $options2['booking'])
-            && isset($options1['booking']['ticket_id'], $options2['booking']['ticket_id'])
-            && $options1['booking']['ticket_id'] === $options2['booking']['ticket_id']
+            isset($booking1['slot']['from'], $booking2['slot']['from'])
+            && isset($booking1['slot']['to'], $booking2['slot']['to'])
         ) {
-            return true;
+            return (string) $booking1['slot']['from'] === (string) $booking2['slot']['from']
+                && (string) $booking1['slot']['to'] === (string) $booking2['slot']['to'];
+        }
+
+        if (isset($booking1['date'], $booking2['date']) && isset($booking1['slot'], $booking2['slot'])) {
+            return $booking1['date'] === $booking2['date']
+                && (string) $booking1['slot'] === (string) $booking2['slot'];
         }
 
         return false;

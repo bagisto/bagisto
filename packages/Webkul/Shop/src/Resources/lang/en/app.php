@@ -196,6 +196,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Billing Address',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Booking Cancellation Not Allowed',
+                        'description' => 'This order contains a booking product that cannot be canceled. Please contact support if you need assistance.',
+                    ],
+
                     'cancel-btn-title' => 'Cancel',
                     'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
                     'cancel-error' => 'Your order can not be canceled.',
@@ -208,6 +214,7 @@ return [
                     'order-id' => 'Order Id',
                     'page-title' => 'Order #:order_id',
                     'payment-method' => 'Payment Method',
+                    'reorder-booking-skipped' => 'Booking products were skipped during reorder. Please book them again with fresh date and time slots.',
                     'reorder-btn-title' => 'Reorder',
                     'shipping-address' => 'Shipping Address',
                     'shipping-method' => 'Shipping Method',
@@ -721,6 +728,11 @@ return [
                     'location' => 'Location',
                     'view-on-map' => 'View on Map',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Cancellation Not Allowed',
+                        'description' => 'Once this booking is placed, it cannot be canceled. Please review the details carefully before checking out.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minutes',
                         'slot-duration' => 'Slot Duration',
@@ -824,7 +836,9 @@ return [
 
             'cart' => [
                 'booking-from' => 'Booking From',
+                'booking-location' => 'Location',
                 'booking-till' => 'Booking Till',
+                'bookings-count' => 'Number of Bookings',
                 'charged-per' => 'Charged Per',
                 'daily' => 'Daily Basis',
                 'event-from' => 'Event From',
