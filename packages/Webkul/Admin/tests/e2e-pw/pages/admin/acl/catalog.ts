@@ -250,49 +250,41 @@ export class CatalogAclPage extends ACLSharedPage {
             'button.primary-button:has-text("Create Product")',
         );
         await adminPage.getByRole("button", { name: "Create Product" }).click();
-
         await adminPage.locator('select[name="type"]').selectOption("simple");
         await adminPage
             .locator('select[name="attribute_family_id"]')
             .selectOption("1");
         await adminPage.locator('input[name="sku"]').fill(generateSKU());
         await adminPage.getByRole("button", { name: "Save Product" }).click();
-
         await adminPage.waitForSelector(
             'button.primary-button:has-text("Save Product")',
         );
         await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
-
         await adminPage.locator("#product_number").fill(product.productNumber);
         await adminPage.locator("#name").fill(product.name);
-
         await fillInTinymce(
             adminPage,
             "#short_description_ifr",
             product.shortDescription,
         );
         await fillInTinymce(adminPage, "#description_ifr", product.description);
-
         await adminPage.locator("#meta_title").fill(product.name);
         await adminPage.locator("#meta_keywords").fill(product.name);
         await adminPage
             .locator("#meta_description")
             .fill(product.shortDescription);
-
         await adminPage.locator("#price").fill(product.price);
         await adminPage.locator("#weight").fill(product.weight);
         await adminPage.locator('input[name="inventories\\[1\\]"]').click();
         await adminPage
             .locator('input[name="inventories\\[1\\]"]')
             .fill("5000");
-
         await this.page.locator('label[for="allow_rma"]').click();
         await adminPage.getByRole("button", { name: "Save Product" }).click();
 
         await expect(adminPage.locator("#app")).toContainText(
             /product updated successfully/i,
         );
-
         await this.visit("admin/catalog/products");
         await expect(
             adminPage

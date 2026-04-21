@@ -2,14 +2,8 @@ import { test, expect } from "../../../setup";
 
 export async function clickIfNotEnabled(adminPage, selector: string) {
     const element = adminPage.locator(selector);
-
-    // Wait for the element to be visible and attached to the DOM
     await element.waitFor({ state: "visible" });
-
-    // Check if the button/element is enabled or disabled
     const isChecked = await element.isChecked();
-
-    // If the element is disabled, click it to enable
     if (!isChecked) {
         await adminPage.locator(selector).click();
     }
@@ -17,9 +11,6 @@ export async function clickIfNotEnabled(adminPage, selector: string) {
 
 test.describe("settings configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        /**
-         * Navigate to the configuration page.
-         */
         await adminPage.goto("admin/configuration/customer/settings");
     });
 
@@ -27,12 +18,7 @@ test.describe("settings configuration", () => {
         await adminPage.click(
             'label[for="customer[settings][wishlist][wishlist_option]"]'
         );
-
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
@@ -51,10 +37,6 @@ test.describe("settings configuration", () => {
         await expect(weightUnitSelect).toHaveValue("home");
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
@@ -71,16 +53,10 @@ test.describe("settings configuration", () => {
             'select[name="customer[settings][create_new_account_options][default_group]"]'
         );
         await expect(defaultGroup).toHaveValue("general");
-
         await adminPage.click(
             'label[for="customer[settings][create_new_account_options][news_letter]"]'
         );
-
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
@@ -102,10 +78,6 @@ test.describe("settings configuration", () => {
         }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
@@ -126,17 +98,9 @@ test.describe("settings configuration", () => {
             await adminPage.click(
                 'button[type="submit"].primary-button:visible'
             );
-
-            /**
-             * Verify the configuration is saved.
-             */
             await expect(adminPage.locator("#app")).toContainText(
                 "Configuration saved successfully"
             );
-
-            /**
-             * Verify the Github login is enabled.
-             */
             await adminPage.goto("customer/login");
             const rect = adminPage.locator(
                 'rect[width="40"][height="40"][rx="20"][fill="black"]'
@@ -153,17 +117,9 @@ test.describe("settings configuration", () => {
             await adminPage.click(
                 'button[type="submit"].primary-button:visible'
             );
-
-            /**
-             * Verify the configuration is saved.
-             */
             await expect(
                 adminPage.locator('p:has-text("Configuration saved successfully")')
               ).toBeVisible();
-
-            /**
-             * Verify the Linkedin login is enabled.
-             */
             await adminPage.goto("customer/login");
             const rect = adminPage.locator(
                 'rect[width="40"][height="40"][rx="20"][fill="#1D8DEE"]'
@@ -180,16 +136,9 @@ test.describe("settings configuration", () => {
             await adminPage.click(
                 'button[type="submit"].primary-button:visible'
             );
-
-            /**
-             * Verify the configuration is saved.
-             */
             await expect(
                 adminPage.locator('p:has-text("Configuration saved successfully")')
               ).toBeVisible();
-            /**
-             * Verify the Google login is enabled.
-             */
             await adminPage.goto("customer/login");
             const rect = adminPage.locator(
                 'rect[width="40"][height="40"][rx="20"][fill="white"]'
@@ -206,17 +155,9 @@ test.describe("settings configuration", () => {
             await adminPage.click(
                 'button[type="submit"].primary-button:visible'
             );
-
-            /**
-             * Verify the configuration is saved.
-             */
             await expect(
                 adminPage.locator('p:has-text("Configuration saved successfully")')
               ).toBeVisible();
-
-            /**
-             * Verify the Twitter login is enabled.
-             */
             await adminPage.goto("customer/login");
             const rect = adminPage.locator(
                 'rect[width="40"][height="40"][rx="20"][fill="#1A1A1A"]'
@@ -233,17 +174,9 @@ test.describe("settings configuration", () => {
             await adminPage.click(
                 'button[type="submit"].primary-button:visible'
             );
-
-            /**
-             * Verify the configuration is saved.
-             */
             await expect(
                 adminPage.locator('p:has-text("Configuration saved successfully")')
               ).toBeVisible();
-
-            /**
-             * Verify the Facebook login is enabled.
-             */
             await adminPage.goto("customer/login");
             const rect = adminPage.locator(
                 'rect[width="40"][height="40"][rx="20"][fill="#1877F2"]'

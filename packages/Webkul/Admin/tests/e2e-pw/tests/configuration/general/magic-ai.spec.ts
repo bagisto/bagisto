@@ -3,9 +3,6 @@ import { generateDescription } from "../../../utils/faker";
 
 test.describe("magic ai configuration", () => {
     test("should update the openai credential", async ({ adminPage }) => {
-        /**
-         * Enable Magic AI from the general settings page.
-         */
         await adminPage.goto("admin/configuration/magic_ai/general");
 
         const isSettingsEnabled = await adminPage
@@ -13,28 +10,20 @@ test.describe("magic ai configuration", () => {
                 'input[type="checkbox"][name="magic_ai[general][settings][enabled]"]'
             )
             .isChecked();
-
         if (!isSettingsEnabled) {
             await adminPage.click(
                 'label[for="magic_ai[general][settings][enabled]"]'
             );
         }
-
         await adminPage.click('button[type="submit"].primary-button:visible');
-
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
-
         await expect(
             await adminPage.locator(
                 'input[type="checkbox"][name="magic_ai[general][settings][enabled]"]'
             )
         ).toBeChecked();
-
-        /**
-         * Fill the OpenAI API key on the providers page.
-         */
         await adminPage.goto("admin/configuration/magic_ai/providers");
 
         await adminPage
@@ -42,7 +31,6 @@ test.describe("magic ai configuration", () => {
             .fill(generateDescription(20));
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
@@ -64,10 +52,6 @@ test.describe("magic ai configuration", () => {
         }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
@@ -95,10 +79,6 @@ test.describe("magic ai configuration", () => {
         }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
@@ -124,27 +104,14 @@ test.describe("magic ai configuration", () => {
                 'label[for="magic_ai[storefront_features][review_translation][enabled]"]'
             );
         }
-
-        /**
-         * Selecting the model.
-         */
         await adminPage.selectOption(
             'select[name="magic_ai[storefront_features][review_translation][model]"]',
             "gemini-2.5-flash"
         );
-
-        /**
-         * Saving configuration.
-         */
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
-
         await expect(
             await adminPage.locator(
                 'input[type="checkbox"][name="magic_ai[storefront_features][review_translation][enabled]"]'
@@ -168,15 +135,7 @@ test.describe("magic ai configuration", () => {
                 'label[for="magic_ai[storefront_features][checkout_message][enabled]"]'
             );
         }
-
-        /**
-         * Save the configuration.
-         */
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();

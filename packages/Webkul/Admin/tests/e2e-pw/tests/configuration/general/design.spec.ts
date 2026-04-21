@@ -3,16 +3,10 @@ import { getImageFile } from "../../../utils/faker";
 
 test.describe("design configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        /**
-         * Navigate to the configuration page.
-         */
         await adminPage.goto("admin/configuration/general/design");
     });
 
     test("should update and delete the logo", async ({ adminPage }) => {
-        /**
-         * Target the only logo input field.
-         */
         const logoInput = await adminPage.$(
             'input[type="file"][name="general[design][admin_logo][logo_image]"]'
         );
@@ -25,15 +19,7 @@ test.describe("design configuration", () => {
         }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
-
-        /**
-         * Delete the uploaded logo.
-         */
         await adminPage
             .locator(
                 '[id="general\\[design\\]\\[admin_logo\\]\\[logo_image\\]\\[delete\\]"]'
@@ -42,40 +28,23 @@ test.describe("design configuration", () => {
             .click();
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 
     test("should update and delete favicon", async ({ adminPage }) => {
-        /**
-         * Target the only favicon input field.
-         */
         const faviconInput = await adminPage.$(
             'input[type="file"][name="general[design][admin_logo][favicon]"]'
         );
-
         if (faviconInput) {
             const filePath = getImageFile();
             await faviconInput.setInputFiles(filePath);
         } else {
             throw new Error("Favicon input field not found");
         }
-
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
-
-        /**
-         * Delete the uploaded favicon.
-         */
         await adminPage
             .locator(
                 '[id="general\\[design\\]\\[admin_logo\\]\\[favicon\\]\\[delete\\]"]'
@@ -84,19 +53,12 @@ test.describe("design configuration", () => {
             .click();
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
     });
 
     test("should Set sidebar Menu category view", async ({ adminPage }) => {
-        /**
-         * Select the default menu category view.
-         */
         await adminPage.selectOption(
             '[name="general[design][categories][category_view]"]',
             "sidebar"
@@ -118,10 +80,6 @@ test.describe("design configuration", () => {
                 hasText: "Configuration saved successfully",
             })
         ).toBeVisible();
-
-        /**
-         * chekk whether the sidebar menu category view is set or not.
-         */
         await adminPage.goto("");
         await expect(adminPage.getByText("All", { exact: true })).toBeVisible();
         await adminPage
@@ -132,9 +90,6 @@ test.describe("design configuration", () => {
         await adminPage.locator(".icon-cancel").first().click();
     });
     test("should Set default Menu category view", async ({ adminPage }) => {
-        /**
-         * Select the default menu category view.
-         */
         await adminPage.selectOption(
             '[name="general[design][categories][category_view]"]',
             "default"
@@ -156,11 +111,6 @@ test.describe("design configuration", () => {
                 hasText: "Configuration saved successfully",
             })
         ).toBeVisible();
-
-        /**
-         * Chekk whether the menu category view is set to default or not.
-         */
-
         await adminPage.goto("");
         await expect(adminPage.getByText("Men").first()).toBeVisible();
         await adminPage.waitForTimeout(2000);
