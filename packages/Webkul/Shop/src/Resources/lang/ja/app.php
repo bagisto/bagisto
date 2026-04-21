@@ -828,7 +828,9 @@ return [
                 'charged-per' => '課金単位',
                 'daily' => '日単位',
                 'event-from' => 'イベント開始',
+                'event-location' => 'イベント会場',
                 'event-ticket' => 'イベントチケット',
+                'event-tickets-count' => 'チケット数',
                 'event-till' => 'イベント終了',
                 'guest-limit' => 'テーブルあたりのゲスト上限',
                 'hourly' => '時間単位',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'このイベントは終了しました。',
+                        'exceeds_available' => 'このイベントでは :qty 枚のチケットのみ利用可能です。',
                         'sold_out' => 'このイベントのチケットは完売しました。',
+                        'ticket_exceeds_available' => '":ticket" のチケットは :qty 枚のみ利用可能です。',
+                        'ticket_sold_out' => '":ticket" のチケットは完売しました。',
                     ],
 
                     'missing_options' => 'この製品にはオプションがありません。',

@@ -828,7 +828,9 @@ return [
                 'charged-per' => '收费方式',
                 'daily' => '按天计算',
                 'event-from' => '活动从',
+                'event-location' => '活动地点',
                 'event-ticket' => '活动票',
+                'event-tickets-count' => '票数',
                 'event-till' => '活动到',
                 'guest-limit' => '每桌客人限制',
                 'hourly' => '按小时计算',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => '此活动已过期。',
+                        'exceeds_available' => '此活动仅剩 :qty 张门票可用。',
                         'sold_out' => '此活动的门票已售罄。',
+                        'ticket_exceeds_available' => '":ticket" 门票仅剩 :qty 张可用。',
+                        'ticket_sold_out' => '":ticket" 门票已售罄。',
                     ],
 
                     'missing_options' => '此产品缺少选项。',

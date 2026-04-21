@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'محاسب لكل',
                 'daily' => 'على أساس يومي',
                 'event-from' => 'الحدث من',
+                'event-location' => 'موقع الحدث',
                 'event-ticket' => 'تذكرة الحدث',
+                'event-tickets-count' => 'عدد التذاكر',
                 'event-till' => 'الحدث حتى',
                 'guest-limit' => 'حد الضيوف لكل طاولة',
                 'hourly' => 'على أساس الساعة',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'لقد انتهت صلاحية هذا الحدث.',
+                        'exceeds_available' => 'يتوفر :qty تذاكر فقط لهذا الحدث.',
                         'sold_out' => 'تم بيع جميع تذاكر هذا الحدث.',
+                        'ticket_exceeds_available' => 'يتوفر :qty تذاكر ":ticket" فقط.',
+                        'ticket_sold_out' => 'تم بيع جميع تذاكر ":ticket".',
                     ],
 
                     'missing_options' => 'الخيارات مفقودة لهذا المنتج.',

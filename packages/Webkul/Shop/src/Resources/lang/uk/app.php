@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Оплата за',
                 'daily' => 'Щоденна основа',
                 'event-from' => 'Подія з',
+                'event-location' => 'Місце проведення',
                 'event-ticket' => 'Квиток на подію',
+                'event-tickets-count' => 'Кількість квитків',
                 'event-till' => 'Подія до',
                 'guest-limit' => 'Ліміт гостей на стіл',
                 'hourly' => 'Погодинна основа',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Ця подія закінчилася.',
+                        'exceeds_available' => 'Для цієї події доступно лише :qty квитків.',
                         'sold_out' => 'Квитки на цю подію розпродані.',
+                        'ticket_exceeds_available' => 'Доступно лише :qty квитків ":ticket".',
+                        'ticket_sold_out' => 'Квитки ":ticket" розпродані.',
                     ],
 
                     'missing_options' => 'Варіанти відсутні для цього продукту.',

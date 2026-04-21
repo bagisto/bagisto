@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Berechnet pro',
                 'daily' => 'Tagesbasis',
                 'event-from' => 'Veranstaltung von',
+                'event-location' => 'Veranstaltungsort',
                 'event-ticket' => 'Veranstaltungsticket',
+                'event-tickets-count' => 'Anzahl der Tickets',
                 'event-till' => 'Veranstaltung bis',
                 'guest-limit' => 'Gästelimit pro Tisch',
                 'hourly' => 'Stundenbasis',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Diese Veranstaltung ist abgelaufen.',
+                        'exceeds_available' => 'Nur :qty Tickets sind für diese Veranstaltung verfügbar.',
                         'sold_out' => 'Die Tickets für diese Veranstaltung sind ausverkauft.',
+                        'ticket_exceeds_available' => 'Nur :qty ":ticket" Tickets sind verfügbar.',
+                        'ticket_sold_out' => '":ticket" Tickets sind ausverkauft.',
                     ],
 
                     'missing_options' => 'Optionen fehlen für dieses Produkt.',

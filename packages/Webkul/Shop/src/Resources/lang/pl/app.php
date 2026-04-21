@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Opłata za',
                 'daily' => 'Na dzień',
                 'event-from' => 'Wydarzenie od',
+                'event-location' => 'Miejsce wydarzenia',
                 'event-ticket' => 'Bilet na wydarzenie',
+                'event-tickets-count' => 'Liczba biletów',
                 'event-till' => 'Wydarzenie do',
                 'guest-limit' => 'Limit gości na stolik',
                 'hourly' => 'Na godzinę',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'To wydarzenie wygasło.',
+                        'exceeds_available' => 'Tylko :qty biletów jest dostępnych na to wydarzenie.',
                         'sold_out' => 'Bilety na to wydarzenie zostały wyprzedane.',
+                        'ticket_exceeds_available' => 'Dostępnych jest tylko :qty biletów ":ticket".',
+                        'ticket_sold_out' => 'Bilety ":ticket" zostały wyprzedane.',
                     ],
 
                     'missing_options' => 'Brakujące opcje dla tego produktu.',

@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Kosten per',
                 'daily' => 'Dagelijks',
                 'event-from' => 'Evenement Van',
+                'event-location' => 'Evenementlocatie',
                 'event-ticket' => 'Evenement Ticket',
+                'event-tickets-count' => 'Aantal tickets',
                 'event-till' => 'Evenement Tot',
                 'guest-limit' => 'Gastenlimiet per tafel',
                 'hourly' => 'Per Uur',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Dit evenement is verlopen.',
+                        'exceeds_available' => 'Er zijn slechts :qty tickets beschikbaar voor dit evenement.',
                         'sold_out' => 'De tickets voor dit evenement zijn uitverkocht.',
+                        'ticket_exceeds_available' => 'Er zijn slechts :qty ":ticket" tickets beschikbaar.',
+                        'ticket_sold_out' => '":ticket" tickets zijn uitverkocht.',
                     ],
 
                     'missing_options' => 'Opties ontbreken voor dit product.',

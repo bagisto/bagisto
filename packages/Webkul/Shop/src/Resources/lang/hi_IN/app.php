@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'प्रति शुल्क',
                 'daily' => 'दैनिक आधार',
                 'event-from' => 'कार्यक्रम से',
+                'event-location' => 'इवेंट स्थान',
                 'event-ticket' => 'कार्यक्रम टिकट',
+                'event-tickets-count' => 'टिकटों की संख्या',
                 'event-till' => 'कार्यक्रम तक',
                 'guest-limit' => 'प्रति टेबल अतिथि सीमा',
                 'hourly' => 'घंटे के आधार पर',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'यह कार्यक्रम समाप्त हो गया है।',
+                        'exceeds_available' => 'इस इवेंट के लिए केवल :qty टिकट उपलब्ध हैं।',
                         'sold_out' => 'इस इवेंट के टिकट बिक चुके हैं।',
+                        'ticket_exceeds_available' => 'केवल :qty ":ticket" टिकट उपलब्ध हैं।',
+                        'ticket_sold_out' => '":ticket" टिकट बिक चुके हैं।',
                     ],
 
                     'missing_options' => 'इस उत्पाद के लिए विकल्प गायब हैं।',

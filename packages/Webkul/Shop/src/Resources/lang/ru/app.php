@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Оплата за',
                 'daily' => 'Ежедневно',
                 'event-from' => 'Событие с',
+                'event-location' => 'Место проведения',
                 'event-ticket' => 'Билет на событие',
+                'event-tickets-count' => 'Количество билетов',
                 'event-till' => 'Событие до',
                 'guest-limit' => 'Лимит гостей на стол',
                 'hourly' => 'Почасовая основа',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Это событие истекло.',
+                        'exceeds_available' => 'Для этого мероприятия доступно только :qty билетов.',
                         'sold_out' => 'Билеты на это мероприятие распроданы.',
+                        'ticket_exceeds_available' => 'Доступно только :qty билетов ":ticket".',
+                        'ticket_sold_out' => 'Билеты ":ticket" распроданы.',
                     ],
 
                     'missing_options' => 'Отсутствуют варианты для этого продукта.',

@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'هزینه به ازای',
                 'daily' => 'به صورت روزانه',
                 'event-from' => 'رویداد از',
+                'event-location' => 'مکان رویداد',
                 'event-ticket' => 'بلیط رویداد',
+                'event-tickets-count' => 'تعداد بلیط‌ها',
                 'event-till' => 'رویداد تا',
                 'guest-limit' => 'محدودیت مهمان در هر میز',
                 'hourly' => 'به صورت ساعتی',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'این رویداد منقضی شده است.',
+                        'exceeds_available' => 'فقط :qty بلیط برای این رویداد موجود است.',
                         'sold_out' => 'بلیت‌های این رویداد تمام شده است.',
+                        'ticket_exceeds_available' => 'فقط :qty بلیط ":ticket" موجود است.',
+                        'ticket_sold_out' => 'بلیط‌های ":ticket" تمام شده است.',
                     ],
 
                     'missing_options' => 'گزینه‌ها برای این محصول وجود ندارند.',

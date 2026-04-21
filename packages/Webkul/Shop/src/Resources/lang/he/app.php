@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'חיוב לפי',
                 'daily' => 'בסיס יומי',
                 'event-from' => 'אירוע מ',
+                'event-location' => 'מיקום האירוע',
                 'event-ticket' => 'כרטיס אירוע',
+                'event-tickets-count' => 'מספר כרטיסים',
                 'event-till' => 'אירוע עד',
                 'guest-limit' => 'מגבלת אורחים לשולחן',
                 'hourly' => 'בסיס שעתי',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'האירוע הזה פג תוקף.',
+                        'exceeds_available' => 'רק :qty כרטיסים זמינים לאירוע זה.',
                         'sold_out' => 'הכרטיסים לאירוע זה אזלו.',
+                        'ticket_exceeds_available' => 'רק :qty כרטיסי ":ticket" זמינים.',
+                        'ticket_sold_out' => 'כרטיסי ":ticket" אזלו.',
                     ],
 
                     'missing_options' => 'אפשרויות חסרות עבור מוצר זה.',

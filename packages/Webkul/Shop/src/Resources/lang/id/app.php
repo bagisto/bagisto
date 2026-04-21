@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Dikenakan Per',
                 'daily' => 'Harian',
                 'event-from' => 'Acara Dari',
+                'event-location' => 'Lokasi Acara',
                 'event-ticket' => 'Tiket Acara',
+                'event-tickets-count' => 'Jumlah Tiket',
                 'event-till' => 'Acara Hingga',
                 'guest-limit' => 'Batas Tamu Per Meja',
                 'hourly' => 'Per Jam',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Acara ini telah berakhir.',
+                        'exceeds_available' => 'Hanya :qty tiket tersedia untuk acara ini.',
                         'sold_out' => 'Tiket untuk acara ini sudah habis terjual.',
+                        'ticket_exceeds_available' => 'Hanya :qty tiket ":ticket" tersedia.',
+                        'ticket_sold_out' => 'Tiket ":ticket" sudah habis.',
                     ],
 
                     'missing_options' => 'Opsi tidak tersedia untuk produk ini.',

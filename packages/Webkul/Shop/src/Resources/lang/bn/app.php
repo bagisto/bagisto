@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'প্রতি চার্জ',
                 'daily' => 'দৈনিক ভিত্তিতে',
                 'event-from' => 'ইভেন্ট থেকে',
+                'event-location' => 'ইভেন্টের অবস্থান',
                 'event-ticket' => 'ইভেন্ট টিকিট',
+                'event-tickets-count' => 'টিকেটের সংখ্যা',
                 'event-till' => 'ইভেন্ট পর্যন্ত',
                 'guest-limit' => 'প্রতি টেবিলে অতিথি সীমা',
                 'hourly' => 'ঘণ্টা ভিত্তিতে',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'এই ইভেন্টটির মেয়াদ শেষ হয়ে গেছে।',
+                        'exceeds_available' => 'এই ইভেন্টের জন্য মাত্র :qty টিকেট উপলব্ধ।',
                         'sold_out' => 'এই ইভেন্টের টিকেট বিক্রি শেষ হয়ে গেছে।',
+                        'ticket_exceeds_available' => 'শুধুমাত্র :qty ":ticket" টিকেট উপলব্ধ।',
+                        'ticket_sold_out' => '":ticket" টিকেট বিক্রি শেষ।',
                     ],
 
                     'missing_options' => 'এই পণ্যের জন্য বিকল্পগুলি অনুপস্থিত।',

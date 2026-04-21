@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'අය කරන්නේ',
                 'daily' => 'දිනපතා පදනම',
                 'event-from' => 'සිදුවීමේ සිට',
+                'event-location' => 'උත්සව ස්ථානය',
                 'event-ticket' => 'සිදුවීම් ටිකට්පත',
+                'event-tickets-count' => 'ටිකට්පත් ගණන',
                 'event-till' => 'සිදුවීමේ දක්වා',
                 'guest-limit' => 'මේසයකට ආගන්තුක සීමාව',
                 'hourly' => 'පැය පදනම',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'මෙම සිදුවීම කල් ඉකුත් වී ඇත.',
+                        'exceeds_available' => 'මෙම උත්සවය සඳහා :qty ටිකට්පත් පමණක් තිබේ.',
                         'sold_out' => 'මෙම උත්සවය සඳහා ටිකට්පත් අලෙවි අවසන්.',
+                        'ticket_exceeds_available' => '":ticket" ටිකට්පත් :qty ක් පමණක් තිබේ.',
+                        'ticket_sold_out' => '":ticket" ටිකට්පත් අලෙවි අවසන්.',
                     ],
 
                     'missing_options' => 'මෙම නිෂ්පාදනය සඳහා විකල්ප අතුරුදහන් වී ඇත.',

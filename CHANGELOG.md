@@ -6,9 +6,15 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11258 [security] - Fixed user enumeration vulnerability (CWE-204) in the customer resend-verification endpoint where a missing null-check leaked email existence via differential HTTP responses. Added rate limiting on the route.
 
+- #11260 [fixed] - Fixed event booking showing the "sold out" toast when the requested quantity exceeded the available stock. A dedicated `exceeds_available` message is now shown with the remaining ticket count when stock is still available.
+
+- #11259 [fixed] - Fixed the "Start time must be less than end time" toast appearing for valid multi-day slots (e.g., Saturday to Sunday) on default booking products. Time comparison now runs only for same-day slots, and the frontend overlap check handles cross-week ranges correctly.
+
 - #11251 [fixed] - Fixed a system crash when viewing refund details after refunding a table booking product. The `Booking` product type was marked as composite, causing the refund view to look for child items that do not exist.
 
 - #11250 [fixed] - Fixed a system crash when viewing refund details after refunding an appointment booking product, caused by the same composite product misconfiguration.
+
+- #11240 [fixed] - Updated the event booking product page to display the combined ticket price (base product price + ticket type price) so customers can see the actual amount payable per ticket.
 
 - #11239 [fixed] - Fixed incorrect slot selection time and date displayed in the cart, customer orders, and admin section for default booking products. Timestamps are now converted using the configured application timezone to match the slot selected by the customer.
 

@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Ücret birimi',
                 'daily' => 'Günlük',
                 'event-from' => 'Etkinlik Başlangıcı',
+                'event-location' => 'Etkinlik Konumu',
                 'event-ticket' => 'Etkinlik Bileti',
+                'event-tickets-count' => 'Bilet sayısı',
                 'event-till' => 'Etkinlik Bitişi',
                 'guest-limit' => 'Masa başına misafir limiti',
                 'hourly' => 'Saatlik',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Bu etkinliğin süresi doldu.',
+                        'exceeds_available' => 'Bu etkinlik için sadece :qty bilet mevcuttur.',
                         'sold_out' => 'Bu etkinlik için biletler tükenmiştir.',
+                        'ticket_exceeds_available' => 'Sadece :qty ":ticket" bileti mevcuttur.',
+                        'ticket_sold_out' => '":ticket" biletleri tükenmiştir.',
                     ],
 
                     'missing_options' => 'Seçenekler eksik.',

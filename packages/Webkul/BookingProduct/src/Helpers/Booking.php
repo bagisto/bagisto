@@ -592,25 +592,45 @@ class Booking
     {
         $ticket = $bookingProduct->event_tickets()->find($data['booking']['ticket_id']);
 
-        return [
+        $quantity = (int) ($data['booking']['qty'][$data['booking']['ticket_id']] ?? $data['quantity'] ?? 0);
+
+        $attributes = [
             [
-                'attribute_name' => trans('shop::app.products.booking.cart.event-ticket'),
-                'option_id' => 0,
-                'option_label' => $ticket?->name ?? '',
-            ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.event-from'),
-                'option_id' => 0,
-                'option_label' => Carbon::createFromTimeString($bookingProduct->available_from)
+                'option_id'      => 0,
+                'option_label'   => Carbon::createFromTimeString($bookingProduct->available_from)
                     ->timezone(config('app.timezone'))
                     ->format('d F, Y h:i A'),
             ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.event-till'),
-                'option_id' => 0,
-                'option_label' => Carbon::createFromTimeString($bookingProduct->available_to)
+                'option_id'      => 0,
+                'option_label'   => Carbon::createFromTimeString($bookingProduct->available_to)
                     ->timezone(config('app.timezone'))
                     ->format('d F, Y h:i A'),
             ],
         ];
+
+        if (! empty($bookingProduct->location)) {
+            $attributes[] = [
+                'attribute_name' => trans('shop::app.products.booking.cart.event-location'),
+                'option_id'      => 0,
+                'option_label'   => $bookingProduct->location,
+            ];
+        }
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.event-ticket'),
+            'option_id'      => 0,
+            'option_label'   => $ticket?->name ?? '',
+        ];
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.event-tickets-count'),
+            'option_id'      => 0,
+            'option_label'   => $quantity,
+        ];
+
+        return $attributes;
     }
 
     /**

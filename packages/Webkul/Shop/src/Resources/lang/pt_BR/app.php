@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Cobrado por',
                 'daily' => 'Base Diária',
                 'event-from' => 'Evento De',
+                'event-location' => 'Local do evento',
                 'event-ticket' => 'Ingresso para Evento',
+                'event-tickets-count' => 'Número de ingressos',
                 'event-till' => 'Evento Até',
                 'guest-limit' => 'Limite de convidados por mesa',
                 'hourly' => 'Base Horária',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Este evento expirou.',
+                        'exceeds_available' => 'Apenas :qty ingressos estão disponíveis para este evento.',
                         'sold_out' => 'Os ingressos para este evento estão esgotados.',
+                        'ticket_exceeds_available' => 'Apenas :qty ingressos ":ticket" estão disponíveis.',
+                        'ticket_sold_out' => 'Os ingressos ":ticket" estão esgotados.',
                     ],
 
                     'missing_options' => 'Faltam opções para este produto.',

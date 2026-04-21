@@ -225,10 +225,34 @@ class Booking extends AbstractType
         $typeHelper = app($this->bookingHelper->getTypeHelper($bookingProduct->type));
 
         if (! $typeHelper->isSlotAvailable($products)) {
+            if ($bookingProduct->type == 'event') {
+                foreach ($products as $product) {
+                    if ($typeHelper->isItemHaveQuantity($product)) {
+                        continue;
+                    }
+
+                    $ticket = $bookingProduct->event_tickets()->find($product['additional']['booking']['ticket_id']);
+
+                    $ticketName = $ticket?->name ?? '';
+
+                    $available = $typeHelper->getAvailableTicketQuantity($product);
+
+                    $message = $available > 0
+                        ? trans('shop::app.products.booking.cart.integrity.event.ticket_exceeds_available', [
+                            'ticket' => $ticketName,
+                            'qty'    => $available,
+                        ])
+                        : trans('shop::app.products.booking.cart.integrity.event.ticket_sold_out', [
+                            'ticket' => $ticketName,
+                        ]);
+
+                    throw new InsufficientProductInventoryException($message);
+                }
+            }
+
             $messageKey = match ($bookingProduct->type) {
                 'rental' => 'shop::app.products.booking.cart.integrity.rental_unavailable',
-                'event' => 'shop::app.products.booking.cart.integrity.event.sold_out',
-                default => 'shop::app.products.booking.cart.integrity.inventory_warning',
+                default  => 'shop::app.products.booking.cart.integrity.inventory_warning',
             };
 
             throw new InsufficientProductInventoryException(trans($messageKey));
@@ -300,6 +324,90 @@ class Booking extends AbstractType
     public function getPriceIndexer()
     {
         return app(VirtualIndexer::class);
+    }
+
+    /**
+     * Override product prices to show a price range (base + cheapest ticket) to (base + most expensive ticket) for event bookings.
+     */
+    public function getProductPrices()
+    {
+        $bookingProduct = $this->getBookingProduct($this->product->id);
+
+        if (
+            $bookingProduct
+            && $bookingProduct->type === 'event'
+            && $bookingProduct->event_tickets->count()
+        ) {
+            $helper = app($this->bookingHelper->getTypeHelper('event'));
+
+            $regularPrices = [];
+            $finalPrices = [];
+
+            foreach ($bookingProduct->event_tickets as $ticket) {
+                $regularPrices[] = (float) $ticket->price;
+
+                $finalPrices[] = $helper->isInSale($ticket)
+                    ? (float) $ticket->special_price
+                    : (float) $ticket->price;
+            }
+
+            $baseRegular = (float) $this->product->price;
+            $baseFinal = (float) parent::getMinimalPrice();
+
+            $fromRegular = $baseRegular + min($regularPrices);
+            $fromFinal = $baseFinal + min($finalPrices);
+            $toRegular = $baseRegular + max($regularPrices);
+            $toFinal = $baseFinal + max($finalPrices);
+
+            return [
+                'from' => [
+                    'regular' => [
+                        'price'           => core()->convertPrice($fromRegular),
+                        'formatted_price' => core()->currency($fromRegular),
+                    ],
+
+                    'final' => [
+                        'price'           => core()->convertPrice($fromFinal),
+                        'formatted_price' => core()->currency($fromFinal),
+                    ],
+                ],
+
+                'to' => [
+                    'regular' => [
+                        'price'           => core()->convertPrice($toRegular),
+                        'formatted_price' => core()->currency($toRegular),
+                    ],
+                    
+                    'final' => [
+                        'price'           => core()->convertPrice($toFinal),
+                        'formatted_price' => core()->currency($toFinal),
+                    ],
+                ],
+            ];
+        }
+
+        return parent::getProductPrices();
+    }
+
+    /**
+     * Use the bundle-style range price template for event booking products.
+     */
+    public function getPriceHtml()
+    {
+        $bookingProduct = $this->getBookingProduct($this->product->id);
+
+        if (
+            $bookingProduct
+            && $bookingProduct->type === 'event'
+            && $bookingProduct->event_tickets->count()
+        ) {
+            return view('shop::products.prices.bundle', [
+                'product' => $this->product,
+                'prices'  => $this->getProductPrices(),
+            ])->render();
+        }
+
+        return parent::getPriceHtml();
     }
 
     /**

@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Taxat per',
                 'daily' => 'Pe zi',
                 'event-from' => 'Eveniment de la',
+                'event-location' => 'Locația evenimentului',
                 'event-ticket' => 'Bilet eveniment',
+                'event-tickets-count' => 'Număr de bilete',
                 'event-till' => 'Eveniment până la',
                 'guest-limit' => 'Limita de oaspeți per masă',
                 'hourly' => 'Pe oră',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Acest eveniment a expirat.',
+                        'exceeds_available' => 'Doar :qty bilete sunt disponibile pentru acest eveniment.',
                         'sold_out' => 'Biletele pentru acest eveniment sunt epuizate.',
+                        'ticket_exceeds_available' => 'Doar :qty bilete ":ticket" sunt disponibile.',
+                        'ticket_sold_out' => 'Biletele ":ticket" sunt epuizate.',
                     ],
 
                     'missing_options' => 'Opțiunile lipsesc pentru acest produs.',

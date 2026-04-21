@@ -828,7 +828,9 @@ return [
                 'charged-per' => 'Cobrat per',
                 'daily' => 'Diari',
                 'event-from' => 'Esdeveniment des de',
+                'event-location' => 'Ubicació de l\'esdeveniment',
                 'event-ticket' => 'Entrada per a l\'esdeveniment',
+                'event-tickets-count' => 'Nombre d\'entrades',
                 'event-till' => 'Esdeveniment fins a',
                 'guest-limit' => 'Límit de convidats per taula',
                 'hourly' => 'Per hores',
@@ -836,7 +838,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Aquest esdeveniment ha expirat.',
+                        'exceeds_available' => 'Només hi ha :qty entrades disponibles per a aquest esdeveniment.',
                         'sold_out' => 'Les entrades per a aquest esdeveniment estan esgotades.',
+                        'ticket_exceeds_available' => 'Només hi ha :qty entrades ":ticket" disponibles.',
+                        'ticket_sold_out' => 'Les entrades ":ticket" estan esgotades.',
                     ],
 
                     'missing_options' => 'Falten opcions per a aquest producte.',
