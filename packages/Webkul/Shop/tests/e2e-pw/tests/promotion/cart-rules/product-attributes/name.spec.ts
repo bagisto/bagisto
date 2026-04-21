@@ -32,7 +32,7 @@ test.afterEach(
 );
 
 test.describe("cart rules", () => {
-    // test.describe("product attribute conditions", () => {
+    test.describe("product attribute conditions", () => {
     //     test("should apply coupon when name of product condition is -> is equal to", async ({
     //         page,
     //     }) => {
