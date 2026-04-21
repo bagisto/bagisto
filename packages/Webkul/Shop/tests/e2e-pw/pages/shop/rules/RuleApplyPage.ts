@@ -3,11 +3,9 @@ import { BasePage } from "../../BasePage";
 import fs from "fs";
 
 export class RuleApplyPage extends BasePage {
-    readonly couponCode: string;
 
     constructor(page: Page) {
         super(page);
-        this.couponCode = `cp${Date.now()}`;
     }
     // Shop / Cart
     get searchInput() {
@@ -50,7 +48,7 @@ export class RuleApplyPage extends BasePage {
     }
 
     get couponSuccessMessage() {
-        return this.page.locator(".alert-success");
+        return this.page.getByText("Coupon code applied successfully.").first();
     }
 
     // Checkout
@@ -144,17 +142,8 @@ export class RuleApplyPage extends BasePage {
         }
 
         await this.applyCouponButton.click();
-        await this.couponInput.fill(this.couponCode);
+        await this.couponInput.fill("TEST50");
         await this.applyButton.click();
-
-        const invalidCoupon = this.page
-            .getByText("The coupon code is invalid.")
-            .first();
-        if (invalidCoupon) {
-            await this.applyCouponButton.click();
-            await this.couponInput.fill(this.couponCode);
-            await this.applyButton.click();
-        }
         await expect(this.couponSuccessMessage).toBeVisible();
     }
 
@@ -207,7 +196,7 @@ export class RuleApplyPage extends BasePage {
 
         await this.applyCouponButton.click();
         await this.page.waitForTimeout(1000);
-        await this.couponInput.fill(this.couponCode);
+        await this.couponInput.fill("TEST50");
         await this.applyButton.click();
         await expect(this.couponSuccessMessage).toBeVisible();
     }

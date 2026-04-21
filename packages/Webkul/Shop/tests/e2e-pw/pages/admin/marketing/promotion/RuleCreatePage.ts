@@ -3,11 +3,9 @@ import { generateName } from "../../../../utils/faker";
 import { BasePage } from "../../../BasePage";
 
 export class RuleCreatePage extends BasePage {
-    readonly couponCode: string;
 
     constructor(page: Page) {
         super(page);
-        this.couponCode = `CP-${Date.now()}`;
     }
 
     // Cart Rule
@@ -126,7 +124,7 @@ export class RuleCreatePage extends BasePage {
         await this.descriptionInput.fill(generateName());
         await this.couponTypeSelect.selectOption("1");
         await this.autoGenerationSelect.selectOption("0");
-        await this.couponCodeInput.fill(this.couponCode);
+        await this.couponCodeInput.fill("TEST50");
         await this.usesPerCouponInput.fill("100");
         await this.usesPerCustomerInput.fill("100");
     }
