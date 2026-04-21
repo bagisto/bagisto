@@ -135,6 +135,7 @@
             :id="$attribute->code . '[]'"
             :name="$attribute->code . '[]'"
             ::rules="{{ $attribute->validations }}"
+            :value="json_encode(array_map('strval', array_filter($selectedOption)))"
             :label="$attribute->admin_name"
         >
             @foreach ($attribute->options()->orderBy('sort_order')->get() as $option)
