@@ -340,6 +340,14 @@
                 },
             },
 
+            watch: {
+                selectedCountry(newCountry, oldCountry) {
+                    if (newCountry !== oldCountry) {
+                        this.address.state = '';
+                    }
+                },
+            },
+
             mounted() {
                 this.getCountries();
 
