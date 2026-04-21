@@ -5,32 +5,18 @@ import {
 } from '../../../utils/faker';
 
 test.describe('order settings configuration', () => {
-    /**
-     * Navigate to the configuration page.
-     */
     test.beforeEach(async ({ adminPage }) => {
         await adminPage.goto('admin/configuration/sales/order_settings');
     });
 
-    /**
-     * Update the Order Number Configuration.
-     */
     test('should update order number settings', async ({ adminPage }) => {
         await adminPage.fill('input[name="sales[order_settings][order_number][order_number_prefix]"]', generateName());
         await adminPage.fill('input[name="sales[order_settings][order_number][order_number_length]"]', '5');
         await adminPage.fill('input[name="sales[order_settings][order_number][order_number_suffix]"]', generateName());
-
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    /**
-     * Update the Minimum Order Settings Configuration.
-     */
     test('should update minimum order settings', async ({ adminPage }) => {
         // await adminPage.click('label[for="sales[order_settings][minimum_order][enable]"]');
         // const minimumOrderToggle = await adminPage.locator('input[name="sales[order_settings][minimum_order][enable]"]');
@@ -51,30 +37,17 @@ test.describe('order settings configuration', () => {
         // }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-    /**
-     * Update the Reorder Configuration.
-     */
     test('should update reorder settings', async ({ adminPage }) => {
         await adminPage.click('label[for="sales[order_settings][reorder][admin]"]');
         const adminReorderToggle = await adminPage.locator('input[name="sales[order_settings][reorder][admin]"]');
         // await expect(adminReorderToggle).toBeChecked();
-
         await adminPage.click('label[for="sales[order_settings][reorder][shop]"]');
         const shopReorderToggle = await adminPage.locator('input[name="sales[order_settings][reorder][shop]"]');
         // await expect(shopReorderToggle).toBeChecked();
-
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 });

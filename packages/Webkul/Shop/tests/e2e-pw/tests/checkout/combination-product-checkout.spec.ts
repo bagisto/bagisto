@@ -1,9 +1,9 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/product";
+import { ProductCreation } from "../../pages/admin/catalog/products";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
-import { MultipleCheckout } from "../../pages/multiple-checkout";
+import { MultipleCheckout } from "../../pages/shop/checkout/MultipleCheckout";
 
-/**
+/**combination 
  * ===============================
  * MULTIPLE PRODUCT CHECKOUT FLOW
  * ===============================

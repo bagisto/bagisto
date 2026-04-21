@@ -1,6 +1,8 @@
 import { expect, test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/product";
-import { CreateRules } from "../../../../pages/rules";
+import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsCustomer } from "../../../../utils/customer";
 import { loginAsAdmin } from "../../../../utils/admin";
 
@@ -25,8 +27,8 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
 test.afterEach(
     "should delete the created product and rule",
     async ({ adminPage }) => {
-        const createRules = new CreateRules(adminPage);
-        await createRules.deleteCatalogRuleAndProduct();
+        const ruleDeletePage = new RuleDeletePage(adminPage);
+        await ruleDeletePage.deleteCatalogRuleAndProduct();
     },
 );
 
@@ -35,33 +37,35 @@ test.describe("catalog rules", () => {
         test("should apply coupon when product guest checkout condition is -> is equal to", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.catalogRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.catalogRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|guest_checkout",
                 operator: "==",
                 optionSelect: "1",
             });
-            await createRules.saveCatalogRule();
+            await ruleCreatePage.saveCatalogRule();
             await loginAsCustomer(page);
-            await createRules.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule();
         });
 
         test("should apply coupon when product guest checkout condition is -> is not equal to", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.catalogRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.catalogRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|guest_checkout",
                 operator: "!=",
                 optionSelect: "0",
             });
-            await createRules.saveCatalogRule();
+            await ruleCreatePage.saveCatalogRule();
             await loginAsCustomer(page);
-            await createRules.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule();
         });
     });
 });

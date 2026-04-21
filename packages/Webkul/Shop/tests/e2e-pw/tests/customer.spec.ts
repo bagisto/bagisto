@@ -8,7 +8,7 @@ import {
     generateEmail,
 } from "../utils/faker";
 import { downloadableOrder } from "../utils/order";
-import { ProductCreation } from "../pages/product";
+import { ProductCreation } from "../pages/admin/catalog/products";
 import path from "path";
 import { fileURLToPath } from "url";
 import { generateName, generateDescription, generateSKU } from "../utils/faker";

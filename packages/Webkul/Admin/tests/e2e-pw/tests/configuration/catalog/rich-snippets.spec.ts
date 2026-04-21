@@ -1,7 +1,5 @@
 import { test, expect } from "../../../setup";
 
-const RICH_SNIPPETS_URL = "admin/configuration/catalog/rich_snippets";
-const SAVE_BUTTON = 'button[type="submit"].primary-button:visible';
 const PRODUCT_TOGGLES = [
     'label[for="catalog[rich_snippets][products][enable]"]',
     'label[for="catalog[rich_snippets][products][show_sku]"]',
@@ -17,12 +15,12 @@ test.describe("rich snippets configuration", () => {
     test("should update products settings including with sku, weight, categories, images, reviews, ratings, offers and etc.", async ({
         adminPage,
     }) => {
-        await adminPage.goto(RICH_SNIPPETS_URL);
+        await adminPage.goto("admin/configuration/catalog/rich_snippets");
 
         for (const toggle of PRODUCT_TOGGLES) {
             await adminPage.click(toggle);
         }
-
+        const SAVE_BUTTON = 'button[type="submit"].primary-button:visible';
         await adminPage.click(SAVE_BUTTON);
 
         await expect(

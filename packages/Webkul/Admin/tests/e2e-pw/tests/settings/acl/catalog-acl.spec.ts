@@ -1,5 +1,5 @@
 import { test, expect } from "../../../setup";
-import { ACLManagement } from "../../../pages/acl";
+import { ACLManagement } from "../../../pages/admin/acl/index";
 
 test.describe("catalog acl", () => {
     test("should create custom role with catalog permission", async ({
@@ -29,7 +29,10 @@ test.describe("catalog acl", () => {
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["catalog.products.create","catalog.products.edit"]);
+        await aclManagement.createRole("custom", [
+            "catalog.products.create",
+            "catalog.products.edit",
+        ]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["catalog->products"]);
         await aclManagement.createSimpleProduct(adminPage);
