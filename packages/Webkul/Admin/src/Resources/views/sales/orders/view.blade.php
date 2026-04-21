@@ -110,17 +110,9 @@
         </div>
 
         @php
-            $hasNonCancelableBooking = false;
-
-            foreach ($order->items as $item) {
-                if (
-                    $item->type === 'booking'
-                    && $item->product?->getTypeInstance()->isCancelable() === false
-                ) {
-                    $hasNonCancelableBooking = true;
-                    break;
-                }
-            }
+            $hasNonCancelableBooking = $order->items->contains(
+                fn ($item) => $item->booking && ! $item->booking->allow_cancellation
+            );
         @endphp
 
         @if ($hasNonCancelableBooking)

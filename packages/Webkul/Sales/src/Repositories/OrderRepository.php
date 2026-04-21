@@ -150,6 +150,10 @@ class OrderRepository extends Repository
                 continue;
             }
 
+            if ($item->booking && ! $item->booking->allow_cancellation) {
+                continue;
+            }
+
             $orderItems = [];
 
             if ($item->getTypeInstance()->isComposite()) {

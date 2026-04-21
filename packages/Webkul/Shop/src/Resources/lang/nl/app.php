@@ -198,8 +198,8 @@ return [
                     'billing-address' => 'Factuuradres',
 
                     'booking-cancellation-not-allowed' => [
-                        'title' => 'Annulering niet toegestaan',
-                        'description' => 'Deze bestelling bevat een boekingsproduct dat niet kan worden geannuleerd. Neem contact op met de ondersteuning als u hulp nodig heeft.',
+                        'title' => 'Boekingsitems worden niet geannuleerd',
+                        'description' => 'Deze bestelling bevat boekingsproducten die als niet-annuleerbaar zijn gemarkeerd. Bij annulering worden alleen de resterende items geannuleerd; boekingsitems blijven actief. Neem contact op met de ondersteuning als u hulp nodig heeft met de boekingsitems.',
                     ],
 
                     'cancel-btn-title' => 'Annuleren',

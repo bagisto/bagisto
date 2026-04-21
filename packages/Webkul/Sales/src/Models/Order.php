@@ -354,12 +354,13 @@ class Order extends Model implements OrderContract
     public function canCancel(): bool
     {
         foreach ($this->items as $item) {
-            if ($item->product?->getTypeInstance()->isCancelable() === false) {
-                return false;
+            if (
+                $item->booking
+                && ! $item->booking->allow_cancellation
+            ) {
+                continue;
             }
-        }
 
-        foreach ($this->items as $item) {
             if (
                 $item->canCancel()
                 && ! in_array($item->order->status, [

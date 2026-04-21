@@ -55,10 +55,17 @@ class BookingRepository extends Repository
                 $to = Carbon::createFromTimeString($bookingItem['date_to'].' 23:59:59')->getTimestamp();
             }
 
+            $bookingProduct = $item->product?->booking_products()->first();
+
+            $allowCancellation = $bookingProduct
+                ? (bool) ($bookingProduct->allow_cancellation ?? true)
+                : true;
+
             $booking = parent::create([
                 'qty' => $item->qty_ordered,
                 'from' => $from,
                 'to' => $to,
+                'allow_cancellation' => $allowCancellation,
                 'order_id' => $order->id,
                 'order_item_id' => $item->id,
                 'product_id' => $item->product_id,

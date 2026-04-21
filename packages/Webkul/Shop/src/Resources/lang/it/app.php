@@ -198,8 +198,8 @@ return [
                     'billing-address' => 'Indirizzo di fatturazione',
 
                     'booking-cancellation-not-allowed' => [
-                        'title' => 'Cancellazione non consentita',
-                        'description' => 'Questo ordine contiene un prodotto di prenotazione che non può essere annullato. Contatta l\'assistenza se hai bisogno di aiuto.',
+                        'title' => 'Gli articoli di prenotazione non verranno annullati',
+                        'description' => 'Questo ordine contiene prodotti di prenotazione contrassegnati come non annullabili. Annullando l\'ordine si annulleranno solo gli articoli rimanenti; gli articoli di prenotazione resteranno attivi. Contatta l\'assistenza se hai bisogno di aiuto con gli articoli di prenotazione.',
                     ],
 
                     'cancel-btn-title' => 'Annulla',

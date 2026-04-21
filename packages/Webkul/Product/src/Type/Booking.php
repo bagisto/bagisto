@@ -146,20 +146,6 @@ class Booking extends AbstractType
     }
 
     /**
-     * Return true if orders containing this booking product can be canceled.
-     */
-    public function isCancelable(): bool
-    {
-        $bookingProduct = $this->getBookingProduct($this->product->id);
-
-        if (! $bookingProduct) {
-            return true;
-        }
-
-        return (bool) ($bookingProduct->allow_cancellation ?? true);
-    }
-
-    /**
      * Return true if the booking product has bookable inventory for reorder / saleability checks.
      */
     public function isSaleable()
@@ -290,7 +276,7 @@ class Booking extends AbstractType
                     $message = $available > 0
                         ? trans('shop::app.products.booking.cart.integrity.event.ticket_exceeds_available', [
                             'ticket' => $ticketName,
-                            'qty'    => $available,
+                            'qty' => $available,
                         ])
                         : trans('shop::app.products.booking.cart.integrity.event.ticket_sold_out', [
                             'ticket' => $ticketName,
@@ -302,7 +288,7 @@ class Booking extends AbstractType
 
             $messageKey = match ($bookingProduct->type) {
                 'rental' => 'shop::app.products.booking.cart.integrity.rental_unavailable',
-                default  => 'shop::app.products.booking.cart.integrity.inventory_warning',
+                default => 'shop::app.products.booking.cart.integrity.inventory_warning',
             };
 
             throw new InsufficientProductInventoryException(trans($messageKey));
@@ -434,24 +420,24 @@ class Booking extends AbstractType
             return [
                 'from' => [
                     'regular' => [
-                        'price'           => core()->convertPrice($fromRegular),
+                        'price' => core()->convertPrice($fromRegular),
                         'formatted_price' => core()->currency($fromRegular),
                     ],
 
                     'final' => [
-                        'price'           => core()->convertPrice($fromFinal),
+                        'price' => core()->convertPrice($fromFinal),
                         'formatted_price' => core()->currency($fromFinal),
                     ],
                 ],
 
                 'to' => [
                     'regular' => [
-                        'price'           => core()->convertPrice($toRegular),
+                        'price' => core()->convertPrice($toRegular),
                         'formatted_price' => core()->currency($toRegular),
                     ],
-                    
+
                     'final' => [
-                        'price'           => core()->convertPrice($toFinal),
+                        'price' => core()->convertPrice($toFinal),
                         'formatted_price' => core()->currency($toFinal),
                     ],
                 ],
@@ -475,7 +461,7 @@ class Booking extends AbstractType
         ) {
             return view('shop::products.prices.bundle', [
                 'product' => $this->product,
-                'prices'  => $this->getProductPrices(),
+                'prices' => $this->getProductPrices(),
             ])->render();
         }
 

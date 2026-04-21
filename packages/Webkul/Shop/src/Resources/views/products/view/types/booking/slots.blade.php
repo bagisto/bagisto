@@ -1,4 +1,11 @@
-<v-book-slots :bookingProduct = "{{ $bookingProduct }}" />
+@php
+    $calendarAvailability = app(\Webkul\BookingProduct\Helpers\Booking::class)->getCalendarAvailability($bookingProduct);
+@endphp
+
+<v-book-slots
+    :booking-product="{{ $bookingProduct }}"
+    :availability="{{ json_encode($calendarAvailability) }}"
+/>
 
 @pushOnce('scripts')
     <script
@@ -24,8 +31,9 @@
                         rules="required"
                         :label="trans('shop::app.products.view.type.booking.slots.date')"
                         :placeholder="trans('YYYY-MM-DD')"
-                        data-min-date="today"
-                        ::disable="disabledDates"                       
+                        ::min-date="minDate"
+                        ::max-date="maxDate"
+                        ::disable="disabledDates"
                         @change="getAvailableSlots"
                     />
 
@@ -73,7 +81,7 @@
         app.component('v-book-slots', {
             template: '#v-book-slots-template',
 
-            props: ['bookingProduct', 'title'],
+            props: ['bookingProduct', 'availability', 'title'],
 
             data() {
                 return {
@@ -85,36 +93,60 @@
 
             computed: {
                 preventDays() {
-                    return this.bookingProduct?.table_slot?.prevent_scheduling_before || 0;
+                    return parseInt(this.availability?.prevent_scheduling_before) || 0;
+                },
+
+                minDate() {
+                    const today = new Date();
+
+                    const minAllowed = new Date(today);
+                    minAllowed.setDate(today.getDate() + this.preventDays);
+
+                    const availableFrom = this.availability?.available_from
+                        ? new Date(this.availability.available_from + 'T00:00:00')
+                        : null;
+
+                    const effective = availableFrom && availableFrom > minAllowed
+                        ? availableFrom
+                        : minAllowed;
+
+                    return this.formatDate(effective);
+                },
+
+                maxDate() {
+                    if (this.availability?.available_every_week) {
+                        return '';
+                    }
+
+                    if (! this.availability?.available_to) {
+                        return '';
+                    }
+
+                    return this.availability.available_to;
                 },
 
                 disabledDates() {
-                    let preventDays = parseInt(this.preventDays) || 0;
+                    const validWeekdays = this.availability?.valid_weekdays ?? [0, 1, 2, 3, 4, 5, 6];
 
-                    if (preventDays <= 0) {
+                    if (validWeekdays.length === 7) {
                         return [];
                     }
 
-                    const dates = [];
-                    const today = new Date();
-
-                    for (let i = 0; i < preventDays; i++) {
-                        const d = new Date(today);
-
-                        d.setDate(today.getDate() + i);
-
-                        const year = d.getFullYear();
-                        const month = String(d.getMonth() + 1).padStart(2, '0');
-                        const day = String(d.getDate()).padStart(2, '0');
-
-                        dates.push(`${year}-${month}-${day}`);
-                    }
-
-                    return dates;
+                    return [
+                        (date) => ! validWeekdays.includes(date.getDay()),
+                    ];
                 },
             },
 
             methods: {
+                formatDate(d) {
+                    const year = d.getFullYear();
+                    const month = String(d.getMonth() + 1).padStart(2, '0');
+                    const day = String(d.getDate()).padStart(2, '0');
+
+                    return `${year}-${month}-${day}`;
+                },
+
                 getAvailableSlots(params) {
                     let date = params.target.value;
 

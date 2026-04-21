@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Billing Address',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Booking Cancellation Not Allowed',
-                    'description' => 'This order contains a booking product configured as non-cancellable. The customer cannot cancel it from their account, and the cancel action is disabled here as well.',
+                    'title' => 'Booking Items Will Not Be Canceled',
+                    'description' => 'This order contains booking products configured as non-cancellable. Cancelling the order will only cancel the remaining items; non-cancellable booking items will stay active.',
                 ],
 
                 'cancel' => 'Cancel',

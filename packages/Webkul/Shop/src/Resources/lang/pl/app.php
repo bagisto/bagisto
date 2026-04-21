@@ -198,8 +198,8 @@ return [
                     'billing-address' => 'Adres rozliczeniowy',
 
                     'booking-cancellation-not-allowed' => [
-                        'title' => 'Anulowanie niedozwolone',
-                        'description' => 'To zamówienie zawiera produkt rezerwacji, którego nie można anulować. Skontaktuj się z pomocą techniczną, jeśli potrzebujesz pomocy.',
+                        'title' => 'Pozycje rezerwacji nie zostaną anulowane',
+                        'description' => 'To zamówienie zawiera produkty rezerwacyjne oznaczone jako nieanulowalne. Anulowanie zamówienia spowoduje anulowanie jedynie pozostałych pozycji; pozycje rezerwacji pozostaną aktywne. Skontaktuj się z pomocą techniczną, jeśli potrzebujesz pomocy z pozycjami rezerwacji.',
                     ],
 
                     'cancel-btn-title' => 'Anuluj',

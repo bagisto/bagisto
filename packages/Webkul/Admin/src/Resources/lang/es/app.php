@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Dirección de Facturación',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Cancelación no permitida',
-                    'description' => 'Este pedido contiene un producto de reserva configurado como no cancelable. El cliente no puede cancelarlo desde su cuenta, y la acción de cancelación también está deshabilitada aquí.',
+                    'title' => 'Los artículos de reserva no se cancelarán',
+                    'description' => 'Este pedido contiene productos de reserva marcados como no cancelables. Al cancelar el pedido solo se cancelarán los artículos restantes; los artículos de reserva seguirán activos. Por favor, contacte con soporte si necesita ayuda con los artículos de reserva.',
                 ],
 
                 'cancel' => 'Cancelar',

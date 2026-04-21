@@ -198,8 +198,8 @@ return [
                     'billing-address' => '账单地址',
 
                     'booking-cancellation-not-allowed' => [
-                        'title' => '不允许取消',
-                        'description' => '此订单包含无法取消的预订产品。如需帮助，请联系支持团队。',
+                        'title' => '预订项目不会被取消',
+                        'description' => '此订单包含被标记为不可取消的预订产品。取消订单只会取消其余项目；预订项目将保持活动状态。如果您需要有关预订项目的帮助，请联系支持团队。',
                     ],
 
                     'cancel-btn-title' => '取消',

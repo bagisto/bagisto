@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Rechnungsadresse',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Stornierung nicht erlaubt',
-                    'description' => 'Diese Bestellung enthält ein als nicht stornierbar konfiguriertes Buchungsprodukt. Der Kunde kann sie nicht aus seinem Konto stornieren, und die Stornierungsaktion ist auch hier deaktiviert.',
+                    'title' => 'Buchungsartikel werden nicht storniert',
+                    'description' => 'Diese Bestellung enthält Buchungsprodukte, die als nicht stornierbar markiert sind. Die Stornierung der Bestellung storniert nur die verbleibenden Artikel; Buchungsartikel bleiben aktiv. Bitte kontaktieren Sie den Support, wenn Sie Hilfe bei den Buchungsartikeln benötigen.',
                 ],
 
                 'cancel' => 'Abbrechen',

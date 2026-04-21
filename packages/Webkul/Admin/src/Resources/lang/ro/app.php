@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Billing Address',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Anularea nu este permisă',
-                    'description' => 'Această comandă conține un produs de rezervare configurat ca neanulabil. Clientul nu îl poate anula din contul său, iar acțiunea de anulare este dezactivată și aici.',
+                    'title' => 'Articolele de rezervare nu vor fi anulate',
+                    'description' => 'Această comandă conține produse de rezervare marcate ca neanulabile. Anularea comenzii va anula doar articolele rămase; articolele de rezervare vor rămâne active. Vă rugăm să contactați asistența dacă aveți nevoie de ajutor cu articolele de rezervare.',
                 ],
 
                 'cancel' => 'Cancel',

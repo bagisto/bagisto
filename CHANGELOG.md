@@ -6,7 +6,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11258 [security] - Fixed user enumeration vulnerability (CWE-204) in the customer resend-verification endpoint where a missing null-check leaked email existence via differential HTTP responses. Added rate limiting on the route.
 
-- #11263 [fixed] - Fixed the Cancel Order option appearing for booking products with cancellation disabled. Added a generic `isCancelable()` method on the product type; the `Booking` type reads the `allow_cancellation` flag, and `Order::canCancel()` now respects it across admin and customer order views and the order cancel action. Added amber warning banners on the product view, customer order view, and admin order view that explain clearly when cancellation is not allowed.
+- #10695 [fixed] - Booking product availability is now visually indicated on the date picker. Weekdays with no slots configured, dates outside the `available_from`/`available_to` window, and dates blocked by `prevent_scheduling_before` are now grayed out in the calendar, so customers no longer have to click each date to check availability. Applies to default, appointment, table, and rental booking types.
+
+- #11263 [fixed] - Fixed the Cancel Order option ignoring the booking `allow_cancellation` flag. The flag is now snapshotted on the `bookings` record at order placement time, so later product edits never affect placed orders. For mixed orders, cancelling now skips only the non-cancellable booking items and cancels the rest — the Cancel button remains available as long as the order has at least one cancellable item. Amber informational banners explain this behaviour on both admin and customer order views, and a separate banner on the product view warns customers before checkout.
 
 - #11262 [fixed] - Fixed booking products allowing checkout beyond available quantity. The `compareOptions` comparator for booking products now matches on booking slot/date/renting-type so repeated additions of the same slot merge into a single cart item, correctly triggering the out-of-stock validation.
 

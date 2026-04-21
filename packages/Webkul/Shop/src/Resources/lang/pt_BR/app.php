@@ -198,8 +198,8 @@ return [
                     'billing-address' => 'Endereço de Cobrança',
 
                     'booking-cancellation-not-allowed' => [
-                        'title' => 'Cancelamento não permitido',
-                        'description' => 'Este pedido contém um produto de reserva que não pode ser cancelado. Entre em contato com o suporte se precisar de ajuda.',
+                        'title' => 'Os itens de reserva não serão cancelados',
+                        'description' => 'Este pedido contém produtos de reserva marcados como não canceláveis. Cancelar o pedido apenas cancelará os itens restantes; os itens de reserva continuarão ativos. Entre em contato com o suporte se precisar de ajuda com os itens de reserva.',
                     ],
 
                     'cancel-btn-title' => 'Cancelar',

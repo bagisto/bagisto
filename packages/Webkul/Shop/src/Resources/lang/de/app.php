@@ -198,8 +198,8 @@ return [
                     'billing-address' => 'Rechnungsadresse',
 
                     'booking-cancellation-not-allowed' => [
-                        'title' => 'Stornierung nicht erlaubt',
-                        'description' => 'Diese Bestellung enthält ein Buchungsprodukt, das nicht storniert werden kann. Bitte kontaktieren Sie den Support, falls Sie Hilfe benötigen.',
+                        'title' => 'Buchungsartikel werden nicht storniert',
+                        'description' => 'Diese Bestellung enthält Buchungsprodukte, die als nicht stornierbar markiert sind. Die Stornierung der Bestellung storniert nur die verbleibenden Artikel; Buchungsartikel bleiben aktiv. Bitte kontaktieren Sie den Support, wenn Sie Hilfe bei den Buchungsartikeln benötigen.',
                     ],
 
                     'cancel-btn-title' => 'Abbrechen',

@@ -277,9 +277,30 @@
             },
 
             created() {
-                this.booking.available_from = "{{ $bookingProduct && $bookingProduct->available_from ? $bookingProduct->available_from->format('Y-m-d H:i:s') : '' }}";
+                const fromRaw = "{{ $bookingProduct && $bookingProduct->available_from ? $bookingProduct->available_from->format('Y-m-d H:i:s') : '' }}";
+                const toRaw = "{{ $bookingProduct && $bookingProduct->available_to ? $bookingProduct->available_to->format('Y-m-d H:i:s') : '' }}";
 
-                this.booking.available_to = "{{ $bookingProduct && $bookingProduct->available_to ? $bookingProduct->available_to->format('Y-m-d H:i:s') : '' }}";
+                if (this.booking.type === 'event') {
+                    this.booking.available_from = fromRaw;
+                    this.booking.available_to = toRaw;
+                } else {
+                    this.booking.available_from = fromRaw ? fromRaw.substring(0, 10) : '';
+                    this.booking.available_to = toRaw ? toRaw.substring(0, 10) : '';
+                }
+            },
+
+            watch: {
+                'booking.type'(newType, oldType) {
+                    if (oldType === 'event' && newType !== 'event') {
+                        if (this.booking.available_from) {
+                            this.booking.available_from = String(this.booking.available_from).substring(0, 10);
+                        }
+
+                        if (this.booking.available_to) {
+                            this.booking.available_to = String(this.booking.available_to).substring(0, 10);
+                        }
+                    }
+                },
             }
         });
     </script>

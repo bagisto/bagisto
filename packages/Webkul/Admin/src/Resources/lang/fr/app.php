@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Adresse de facturation',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Annulation non autorisée',
-                    'description' => 'Cette commande contient un produit de réservation configuré comme non annulable. Le client ne peut pas l\'annuler depuis son compte, et l\'action d\'annulation est également désactivée ici.',
+                    'title' => 'Les articles de réservation ne seront pas annulés',
+                    'description' => 'Cette commande contient des produits de réservation marqués comme non annulables. L\'annulation de la commande n\'annulera que les articles restants ; les articles de réservation resteront actifs. Veuillez contacter le support si vous avez besoin d\'aide avec les articles de réservation.',
                 ],
 
                 'cancel' => 'Annuler',

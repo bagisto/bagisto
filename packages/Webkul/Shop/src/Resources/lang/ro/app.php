@@ -198,8 +198,8 @@ return [
                     'billing-address' => 'Adresa de facturare',
 
                     'booking-cancellation-not-allowed' => [
-                        'title' => 'Anularea nu este permisă',
-                        'description' => 'Această comandă conține un produs de rezervare care nu poate fi anulat. Vă rugăm să contactați asistența dacă aveți nevoie de ajutor.',
+                        'title' => 'Articolele de rezervare nu vor fi anulate',
+                        'description' => 'Această comandă conține produse de rezervare marcate ca neanulabile. Anularea comenzii va anula doar articolele rămase; articolele de rezervare vor rămâne active. Vă rugăm să contactați asistența dacă aveți nevoie de ajutor cu articolele de rezervare.',
                     ],
 
                     'cancel-btn-title' => 'Anulează',
