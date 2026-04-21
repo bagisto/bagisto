@@ -128,15 +128,17 @@ export class ProductCreatePage extends BasePage {
             date: generateRandomDateTime(),
             location: generateLocation(),
         };
-
         const availableFromDate = new Date();
+
         const availableToDate = new Date(
-            availableFromDate.getTime() + 60 * 60000,
+            availableFromDate.getTime() + 24 * 60 * 60000,
         );
+
         const formattedAvailableFromDate = availableFromDate
             .toISOString()
             .slice(0, 19)
             .replace("T", " ");
+
         const formattedAvailableToDate = availableToDate
             .toISOString()
             .slice(0, 19)

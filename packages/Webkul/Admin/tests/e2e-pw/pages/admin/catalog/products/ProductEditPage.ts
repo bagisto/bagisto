@@ -70,6 +70,7 @@ export class ProductEditPage extends BasePage {
     }
 
     async waitForForm() {
+        await this.page.waitForLoadState("networkidle");
         await expect(this.saveButton).toBeVisible();
         await expect(this.skuInput).toHaveValue(/.+/);
     }
