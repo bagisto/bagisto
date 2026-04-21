@@ -18,7 +18,7 @@ export class DownloadableProductCheckout extends CheckoutHelper {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState("networkidle");
         await this.clickLink.click();
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();

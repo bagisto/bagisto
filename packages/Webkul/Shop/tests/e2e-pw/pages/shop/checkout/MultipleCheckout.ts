@@ -95,7 +95,7 @@ export class MultipleCheckout extends CheckoutHelper {
         await this.page.waitForLoadState("networkidle");
         await this.searchProduct("down");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState("networkidle");
         await this.clickLink.click();
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
@@ -181,7 +181,7 @@ export class MultipleCheckout extends CheckoutHelper {
 
         await this.searchProduct("down");
         await this.addToCartButton.click();
-        await this.page.waitForTimeout(2000);
+        await this.page.waitForLoadState("networkidle");
         await this.clickLink.click();
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();

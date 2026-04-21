@@ -109,9 +109,9 @@ export class CheckoutHelper extends BasePage {
     }
 
     get clickLink() {
-        return this.page.locator("input[type='checkbox']").first();
+        return this.page.locator('label.icon-uncheck');
     }
-    
+
     /**
      * Search for product by name
      */

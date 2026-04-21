@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
-import { generateName } from "../../../utils/faker";
 import { BasePage } from "../../BasePage";
+import fs from "fs";
 
 export class RuleApplyPage extends BasePage {
     readonly couponCode: string;
@@ -9,13 +9,15 @@ export class RuleApplyPage extends BasePage {
         super(page);
         this.couponCode = `CP-${Date.now()}`;
     }
-// Shop / Cart
+    // Shop / Cart
     get searchInput() {
         return this.page.getByRole("textbox", { name: "Search products here" });
     }
 
     get addToCartButton() {
-        return this.page.locator("(//button[contains(@class, 'secondary-button')])[2]");
+        return this.page.locator(
+            "(//button[contains(@class, 'secondary-button')])[2]",
+        );
     }
 
     get addToCartSuccessMessage() {
@@ -59,7 +61,9 @@ export class RuleApplyPage extends BasePage {
     }
 
     get continueButton() {
-        return this.page.locator('(//a[contains(., " Continue to Checkout ")])[1]');
+        return this.page.locator(
+            '(//a[contains(., " Continue to Checkout ")])[1]',
+        );
     }
 
     get companyName() {
@@ -114,13 +118,19 @@ export class RuleApplyPage extends BasePage {
         return this.page.getByAltText("Money Transfer");
     }
 
+    getSavedProduct() {
+        const filePath = "product-data.json";
+        const data = fs.readFileSync(filePath, "utf-8");
+        return JSON.parse(data);
+    }
 
-      async applyCoupon(incrementTimes?: number) {
+    async applyCoupon(incrementTimes?: number) {
         await this.visit("");
 
-        await this.searchInput.fill("simple");
-        await this.searchInput.press("Enter");
+        const product = this.getSavedProduct();
+        await this.searchInput.fill(product.name);
 
+        await this.searchInput.press("Enter");
         await this.addToCartButton.first().click();
         await expect(this.addToCartSuccessMessage).toBeVisible();
 
@@ -162,7 +172,9 @@ export class RuleApplyPage extends BasePage {
     async applyCouponAtCheckout() {
         await this.visit("");
 
-        await this.searchInput.fill("simple");
+        const product = this.getSavedProduct();
+        await this.searchInput.fill(product.name);
+        
         await this.searchInput.press("Enter");
         await this.addToCartButton.first().click();
         await expect(this.addToCartSuccessMessage).toBeVisible();

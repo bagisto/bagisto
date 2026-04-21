@@ -446,7 +446,6 @@ export class ProductCreation extends BasePage {
         }
 
         await this.page.locator('label[for="allow_rma"]').click();
-        await this.rmaSelection.selectOption("1");
     }
 
     /**

@@ -59,7 +59,7 @@ test.describe("cart rules", () => {
             await ruleCreatePage.addCondition({
                 attribute: "product|name",
                 operator: "!=",
-                value: "simple",
+                value: "example",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
