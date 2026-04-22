@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => '請求先住所',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => '予約アイテムはキャンセルされません',
+                        'description' => 'この注文にはキャンセル不可としてマークされた予約商品が含まれています。注文をキャンセルすると残りのアイテムのみがキャンセルされ、予約アイテムはそのまま有効です。予約アイテムについてサポートが必要な場合はお問い合わせください。',
+                    ],
+
                     'cancel-btn-title' => 'キャンセル',
                     'cancel-confirm-msg' => 'この注文をキャンセルしてもよろしいですか？',
                     'cancel-error' => '注文をキャンセルできません。',
@@ -219,6 +225,7 @@ return [
                     'order-id' => '注文ID',
                     'page-title' => '注文 #:order_id',
                     'payment-method' => '支払い方法',
+                    'reorder-booking-skipped' => '再注文時に予約商品はスキップされました。新しい日時のスロットで再予約してください。',
                     'reorder-btn-title' => '再注文',
                     'shipping-address' => '配送先住所',
                     'shipping-method' => '配送方法',
@@ -789,6 +796,11 @@ return [
                     'location' => '場所',
                     'view-on-map' => '地図で見る',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'キャンセルは許可されていません',
+                        'description' => 'この予約は、一度行うとキャンセルできません。チェックアウトの前に詳細をよくご確認ください。',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes 分',
                         'slot-duration' => 'スロットの期間',
@@ -904,11 +916,15 @@ return [
 
             'cart' => [
                 'booking-from' => '予約開始',
+                'booking-location' => '場所',
                 'booking-till' => '予約終了',
+                'bookings-count' => '予約数',
                 'charged-per' => '課金単位',
                 'daily' => '日単位',
                 'event-from' => 'イベント開始',
+                'event-location' => 'イベント会場',
                 'event-ticket' => 'イベントチケット',
+                'event-tickets-count' => 'チケット数',
                 'event-till' => 'イベント終了',
                 'guest-limit' => 'テーブルあたりのゲスト上限',
                 'hourly' => '時間単位',
@@ -916,7 +932,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'このイベントは終了しました。',
+                        'exceeds_available' => 'このイベントでは :qty 枚のチケットのみ利用可能です。',
                         'sold_out' => 'このイベントのチケットは完売しました。',
+                        'ticket_exceeds_available' => '":ticket" のチケットは :qty 枚のみ利用可能です。',
+                        'ticket_sold_out' => '":ticket" のチケットは完売しました。',
                     ],
 
                     'missing_options' => 'この製品にはオプションがありません。',

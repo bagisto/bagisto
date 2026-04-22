@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Webkul\BookingProduct\Models\BookingProxy;
 use Webkul\Product\Type\AbstractType;
 use Webkul\Sales\Contracts\OrderItem as OrderItemContract;
 use Webkul\Sales\Database\Factories\OrderItemFactory;
@@ -211,6 +212,14 @@ class OrderItem extends Model implements OrderItemContract
     public function downloadable_link_purchased(): HasMany
     {
         return $this->hasMany(DownloadableLinkPurchasedProxy::modelClass());
+    }
+
+    /**
+     * Get the booking record associated with this order item (for booking type products).
+     */
+    public function booking(): HasOne
+    {
+        return $this->hasOne(BookingProxy::modelClass());
     }
 
     public function toArray(): array

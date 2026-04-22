@@ -71,11 +71,23 @@ class OrderController extends Controller
 
         abort_if(! $order, 404);
 
+        $skippedBooking = false;
+
         foreach ($order->items as $item) {
+            if ($item->type === 'booking') {
+                $skippedBooking = true;
+
+                continue;
+            }
+
             try {
                 Cart::addProduct($item->product, $item->additional);
             } catch (\Exception $e) {
             }
+        }
+
+        if ($skippedBooking) {
+            session()->flash('info', trans('shop::app.customers.account.orders.view.reorder-booking-skipped'));
         }
 
         return redirect()->route('shop.checkout.cart.index');

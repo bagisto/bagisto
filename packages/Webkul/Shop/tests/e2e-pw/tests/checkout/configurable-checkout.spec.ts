@@ -1,6 +1,6 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/product";
-import { ProductCheckout } from "../../pages/checkout-flow";
+import { ProductCreation } from "../../pages/admin/catalog/products";
+import { ConfigurableProductCheckout } from "../../pages/shop/checkout/product-types/ConfigurableProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
@@ -32,29 +32,29 @@ test.describe("configurable product checkout flow", () => {
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.configCheckout();
+        const checkout = new ConfigurableProductCheckout(shopPage);
+        await checkout.checkoutWithDefaultShipping();
     });
 
     test("should allow guest to complete checkout for configurable product successfully", async ({
         shopPage,
     }) => {
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.guestCheckoutConfigurable();
+        const checkout = new ConfigurableProductCheckout(shopPage);
+        await checkout.guestCheckout();
     });
 
     test("should use same address for shipping", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.configCheckout();
+        const checkout = new ConfigurableProductCheckout(shopPage);
+        await checkout.checkoutWithDefaultShipping();
     });
 
     test("should not use same address for shipping", async ({ shopPage }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.shippingChangeCheckoutConfig();
+        const checkout = new ConfigurableProductCheckout(shopPage);
+        await checkout.checkoutWithNewAddress();
     });
     
     test("should allow customer to complete checkout for configurable product via flat rate shipping successfully", async ({
@@ -62,8 +62,8 @@ test.describe("configurable product checkout flow", () => {
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.configCheckoutFlatRate();
+        const checkout = new ConfigurableProductCheckout(shopPage);
+        await checkout.checkoutWithFlatRateShipping();
     });
 
     test("should allow customer to complete checkout for configurable product via cash on delivery successfully", async ({
@@ -71,7 +71,7 @@ test.describe("configurable product checkout flow", () => {
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.configCheckoutCOD();
+        const checkout = new ConfigurableProductCheckout(shopPage);
+        await checkout.checkoutWithCOD();
     });
 });

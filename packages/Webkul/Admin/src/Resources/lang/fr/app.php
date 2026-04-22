@@ -389,6 +389,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Par Unité x :qty Quantité',
                 'billing-address' => 'Adresse de facturation',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Les articles de réservation ne seront pas annulés',
+                    'description' => 'Cette commande contient des produits de réservation marqués comme non annulables. L\'annulation de la commande n\'annulera que les articles restants ; les articles de réservation resteront actifs. Veuillez contacter le support si vous avez besoin d\'aide avec les articles de réservation.',
+                ],
+
                 'cancel' => 'Annuler',
                 'cancel-msg' => 'Êtes-vous sûr de vouloir annuler cette commande',
                 'cancel-success' => 'Commande annulée avec succès',
@@ -438,6 +444,7 @@ return [
                 'refund-id' => 'Remboursement #:refund',
                 'refunded' => 'Remboursé',
                 'reorder' => 'Recommander',
+                'reorder-booking-skipped' => 'Les produits de réservation ont été ignorés lors de la nouvelle commande. Veuillez les réserver à nouveau avec de nouvelles dates et plages horaires.',
                 'ship' => 'Expédier',
                 'shipment' => 'Envoi #:shipment',
                 'shipments' => 'Envois',
@@ -773,7 +780,7 @@ return [
                 'done' => 'Terminé',
                 'order-id' => 'ID de commande',
                 'pending' => 'En attente',
-                'price' => 'Prix',
+                'product' => 'Produit',
                 'status' => 'Statut',
                 'time-slot' => 'Créneau horaire:',
                 'view-details' => 'Voir les détails',

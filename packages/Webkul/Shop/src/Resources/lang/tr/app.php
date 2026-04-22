@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Fatura Adresi',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Rezervasyon öğeleri iptal edilmeyecek',
+                        'description' => 'Bu sipariş, iptal edilemez olarak işaretlenmiş rezervasyon ürünleri içerir. Siparişi iptal etmek yalnızca kalan öğeleri iptal eder; rezervasyon öğeleri aktif kalacaktır. Rezervasyon öğeleriyle ilgili yardıma ihtiyacınız varsa lütfen destek ile iletişime geçin.',
+                    ],
+
                     'cancel-btn-title' => 'İptal Et',
                     'cancel-confirm-msg' => 'Bu siparişi iptal etmek istediğinizden emin misiniz?',
                     'cancel-error' => 'Sipariş iptal edilemez.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'Sipariş ID',
                     'page-title' => 'Sipariş #:order_id',
                     'payment-method' => 'Ödeme Yöntemi',
+                    'reorder-booking-skipped' => 'Yeniden sipariş sırasında rezervasyon ürünleri atlandı. Lütfen yeni tarih ve zaman dilimleriyle tekrar rezerve edin.',
                     'reorder-btn-title' => 'Tekrar Sipariş Ver',
                     'shipping-address' => 'Teslimat Adresi',
                     'shipping-method' => 'Kargo Yöntemi',
@@ -789,6 +796,11 @@ return [
                     'location' => 'Konum',
                     'view-on-map' => 'Haritada Gör',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'İptale izin verilmiyor',
+                        'description' => 'Bu rezervasyon yapıldıktan sonra iptal edilemez. Ödemeyi tamamlamadan önce lütfen detayları dikkatlice inceleyin.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Dakika',
                         'slot-duration' => 'Süre',
@@ -904,11 +916,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Başlangıç',
+                'booking-location' => 'Konum',
                 'booking-till' => 'Bitiş',
+                'bookings-count' => 'Rezervasyon sayısı',
                 'charged-per' => 'Ücret birimi',
                 'daily' => 'Günlük',
                 'event-from' => 'Etkinlik Başlangıcı',
+                'event-location' => 'Etkinlik Konumu',
                 'event-ticket' => 'Etkinlik Bileti',
+                'event-tickets-count' => 'Bilet sayısı',
                 'event-till' => 'Etkinlik Bitişi',
                 'guest-limit' => 'Masa başına misafir limiti',
                 'hourly' => 'Saatlik',
@@ -916,7 +932,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Bu etkinliğin süresi doldu.',
+                        'exceeds_available' => 'Bu etkinlik için sadece :qty bilet mevcuttur.',
                         'sold_out' => 'Bu etkinlik için biletler tükenmiştir.',
+                        'ticket_exceeds_available' => 'Sadece :qty ":ticket" bileti mevcuttur.',
+                        'ticket_sold_out' => '":ticket" biletleri tükenmiştir.',
                     ],
 
                     'missing_options' => 'Seçenekler eksik.',

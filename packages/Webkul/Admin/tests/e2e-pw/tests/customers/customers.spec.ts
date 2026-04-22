@@ -10,30 +10,25 @@ import {
     generateDescription,
 } from "../../utils/faker";
 
-const CUSTOMERS_URL = "admin/customers";
-const PRIMARY_BUTTON = "button.primary-button:visible";
-const OPEN_DETAILS_ICON = "a.cursor-pointer.icon-sort-right";
+
 const CONFIRM_PRIMARY_BUTTON =
     'button[type="button"].transparent-button + button[type="button"].primary-button';
-const MASS_CHECKBOX = ".icon-uncheckbox:visible";
-const SELECT_ACTION_BUTTON = 'button:has-text("Select Action")';
-const AGREE_BUTTON = 'button.primary-button:has-text("Agree")';
 const CUSTOMER_EDIT_LINK =
     'div[class="flex cursor-pointer items-center justify-between gap-1.5 px-2.5 text-blue-600 transition-all hover:underline"]:visible';
 
 async function openCustomersList(adminPage: Page) {
-    await adminPage.goto(CUSTOMERS_URL);
-    await adminPage.waitForSelector(PRIMARY_BUTTON, {
+    await adminPage.goto("admin/customers");
+    await adminPage.waitForSelector('button.primary-button:visible', {
         state: "visible",
     });
 }
 
 async function openFirstCustomerDetails(adminPage: Page) {
     await openCustomersList(adminPage);
-    await adminPage.waitForSelector(OPEN_DETAILS_ICON, {
+    await adminPage.waitForSelector("a.cursor-pointer.icon-sort-right", {
         state: "visible",
     });
-    const detailIcons = await adminPage.$$(OPEN_DETAILS_ICON);
+    const detailIcons = await adminPage.$$("a.cursor-pointer.icon-sort-right");
     expect(detailIcons.length).toBeGreaterThan(0);
     await detailIcons[0].click();
 }
@@ -43,22 +38,22 @@ async function confirmAgreeDialog(adminPage: Page) {
         state: "visible",
         timeout: 1000,
     });
-    const agreeButton = adminPage.locator(AGREE_BUTTON);
+    const agreeButton = adminPage.locator('button.primary-button:has-text("Agree")');
     await expect(agreeButton).toBeVisible();
     await agreeButton.click();
 }
 
 async function openMassActionMenu(adminPage: Page) {
     await openCustomersList(adminPage);
-    await adminPage.waitForSelector(MASS_CHECKBOX, {
+    await adminPage.waitForSelector(".icon-uncheckbox:visible", {
         state: "visible",
     });
-    const checkboxes = await adminPage.$$(MASS_CHECKBOX);
+    const checkboxes = await adminPage.$$(".icon-uncheckbox:visible");
     expect(checkboxes.length).toBeGreaterThan(1);
     await checkboxes[1].click();
 
     const selectActionButton = await adminPage.waitForSelector(
-        SELECT_ACTION_BUTTON,
+        'button:has-text("Select Action")',
         { timeout: 1000 }
     );
     await selectActionButton.click();
@@ -67,7 +62,7 @@ async function openMassActionMenu(adminPage: Page) {
 async function createCustomer(adminPage: Page) {
     await openCustomersList(adminPage);
 
-    await adminPage.click(PRIMARY_BUTTON);
+    await adminPage.click('button.primary-button:visible');
 
     await adminPage.fill(
         'input[name="first_name"]:visible',

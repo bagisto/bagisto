@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'آدرس صورتحساب',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'موارد رزرو لغو نخواهند شد',
+                        'description' => 'این سفارش شامل محصولات رزرو علامت‌گذاری شده به عنوان غیرقابل لغو است. لغو سفارش تنها موارد باقی‌مانده را لغو می‌کند؛ موارد رزرو فعال باقی می‌مانند. در صورت نیاز به کمک در مورد موارد رزرو با پشتیبانی تماس بگیرید.',
+                    ],
+
                     'cancel-btn-title' => 'لغو',
                     'cancel-confirm-msg' => 'آیا مطمئن هستید که میخواهید این سفارش را لغو کنید؟',
                     'cancel-error' => 'سفارش شما قابل لغو نیست.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'شناسه سفارش',
                     'page-title' => 'سفارش #:order_id',
                     'payment-method' => 'روش پرداخت',
+                    'reorder-booking-skipped' => 'محصولات رزرو در سفارش مجدد رد شدند. لطفاً آنها را با تاریخ‌ها و بازه‌های زمانی جدید مجدداً رزرو کنید.',
                     'reorder-btn-title' => 'سفارش مجدد',
                     'shipping-address' => 'آدرس ارسال',
                     'shipping-method' => 'روش حمل و نقل',
@@ -789,6 +796,11 @@ return [
                     'location' => 'مکان',
                     'view-on-map' => 'مشاهده روی نقشه',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'لغو مجاز نیست',
+                        'description' => 'پس از ثبت این رزرو، نمی‌توان آن را لغو کرد. لطفاً قبل از پرداخت، جزئیات را با دقت بررسی کنید.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes دقیقه',
                         'slot-duration' => 'مدت زمان اسلات',
@@ -904,11 +916,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'رزرو از',
+                'booking-location' => 'مکان',
                 'booking-till' => 'رزرو تا',
+                'bookings-count' => 'تعداد رزروها',
                 'charged-per' => 'هزینه به ازای',
                 'daily' => 'به صورت روزانه',
                 'event-from' => 'رویداد از',
+                'event-location' => 'مکان رویداد',
                 'event-ticket' => 'بلیط رویداد',
+                'event-tickets-count' => 'تعداد بلیط‌ها',
                 'event-till' => 'رویداد تا',
                 'guest-limit' => 'محدودیت مهمان در هر میز',
                 'hourly' => 'به صورت ساعتی',
@@ -916,7 +932,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'این رویداد منقضی شده است.',
+                        'exceeds_available' => 'فقط :qty بلیط برای این رویداد موجود است.',
                         'sold_out' => 'بلیت‌های این رویداد تمام شده است.',
+                        'ticket_exceeds_available' => 'فقط :qty بلیط ":ticket" موجود است.',
+                        'ticket_sold_out' => 'بلیط‌های ":ticket" تمام شده است.',
                     ],
 
                     'missing_options' => 'گزینه‌ها برای این محصول وجود ندارند.',

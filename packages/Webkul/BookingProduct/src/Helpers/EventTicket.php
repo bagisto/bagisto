@@ -25,6 +25,28 @@ class EventTicket extends Booking
     }
 
     /**
+     * Returns the cheapest ticket price (special price if on sale, else regular price).
+     */
+    public function getCheapestTicketPrice($bookingProduct): float
+    {
+        if (! $bookingProduct || ! $bookingProduct->event_tickets()->count()) {
+            return 0;
+        }
+
+        $cheapest = null;
+
+        foreach ($bookingProduct->event_tickets as $ticket) {
+            $price = $this->isInSale($ticket) ? $ticket->special_price : $ticket->price;
+
+            if ($cheapest === null || $price < $cheapest) {
+                $cheapest = $price;
+            }
+        }
+
+        return (float) ($cheapest ?? 0);
+    }
+
+    /**
      * Returns tickets
      *
      * @param  BookingProduct  $bookingProduct
@@ -87,6 +109,24 @@ class EventTicket extends Booking
         }
 
         return true;
+    }
+
+    /**
+     * Returns the remaining available quantity for the event ticket.
+     *
+     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
+     */
+    public function getAvailableTicketQuantity($cartItem): int
+    {
+        $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $cartItem['product_id']);
+
+        $ticket = $bookingProduct->event_tickets()->find($cartItem['additional']['booking']['ticket_id']);
+
+        if (! $ticket) {
+            return 0;
+        }
+
+        return max(0, $ticket->qty - $this->getBookedQuantity($cartItem));
     }
 
     /**

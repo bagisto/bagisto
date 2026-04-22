@@ -389,6 +389,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount na jednostkę x :qty Ilość',
                 'billing-address' => 'Adres rozliczeniowy',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Pozycje rezerwacji nie zostaną anulowane',
+                    'description' => 'To zamówienie zawiera produkty rezerwacyjne oznaczone jako nieanulowalne. Anulowanie zamówienia spowoduje anulowanie jedynie pozostałych pozycji; pozycje rezerwacji pozostaną aktywne. Skontaktuj się z pomocą techniczną, jeśli potrzebujesz pomocy z pozycjami rezerwacji.',
+                ],
+
                 'cancel' => 'Anuluj',
                 'cancel-msg' => 'Czy na pewno chcesz anulować to zamówienie',
                 'cancel-success' => 'Zamówienie zostało pomyślnie anulowane',
@@ -438,6 +444,7 @@ return [
                 'refund-id' => 'Zwrot #:refund',
                 'refunded' => 'Zwrócone',
                 'reorder' => 'Zamów ponownie',
+                'reorder-booking-skipped' => 'Produkty rezerwacyjne zostały pominięte podczas ponownego zamawiania. Zarezerwuj je ponownie z nowymi datami i przedziałami czasowymi.',
                 'ship' => 'Wysyłka',
                 'shipment' => 'Przesyłka #:shipment',
                 'shipments' => 'Przesyłki',
@@ -773,7 +780,7 @@ return [
                 'done' => 'Zakończone',
                 'order-id' => 'ID zamówienia',
                 'pending' => 'Oczekujące',
-                'price' => 'Cena',
+                'product' => 'Produkt',
                 'status' => 'Status',
                 'time-slot' => 'Przedział czasowy:',
                 'view-details' => 'Zobacz szczegóły',

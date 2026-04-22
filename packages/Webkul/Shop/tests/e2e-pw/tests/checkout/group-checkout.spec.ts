@@ -1,6 +1,6 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/product";
-import { ProductCheckout } from "../../pages/checkout-flow";
+import { ProductCreation } from "../../pages/admin/catalog/products";
+import { GroupProductCheckout } from "../../pages/shop/checkout/product-types/GroupProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 /**
@@ -67,15 +67,15 @@ test.describe("group product checkout flow", () => {
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.groupCheckout();
+        const checkout = new GroupProductCheckout(shopPage);
+        await checkout.checkoutWithDefaultShipping();
     });
 
     test("should allow guest to complete checkout for group product successfully", async ({
         shopPage,
     }) => {
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.guestCheckoutGroup();
+        const checkout = new GroupProductCheckout(shopPage);
+        await checkout.guestCheckout();
     });
 
     test("should allow customer to complete checkout for group product via flat rate shipping successfully", async ({
@@ -83,8 +83,8 @@ test.describe("group product checkout flow", () => {
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.groupCheckoutFlatRate();
+        const checkout = new GroupProductCheckout(shopPage);
+        await checkout.checkoutWithFlatRateShipping();
     });
 
     test("should allow customer to complete checkout for group product via cash on delivery successfully", async ({
@@ -92,7 +92,7 @@ test.describe("group product checkout flow", () => {
     }) => {
         await loginAsCustomer(shopPage);
         await addAddress(shopPage);
-        const productCheckout = new ProductCheckout(shopPage);
-        await productCheckout.groupCheckoutCOD();
+        const checkout = new GroupProductCheckout(shopPage);
+        await checkout.checkoutWithCOD();
     });
 });

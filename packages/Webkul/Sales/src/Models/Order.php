@@ -366,6 +366,13 @@ class Order extends Model implements OrderContract
     {
         foreach ($this->items as $item) {
             if (
+                $item->booking
+                && ! $item->booking->allow_cancellation
+            ) {
+                continue;
+            }
+
+            if (
                 $item->canCancel()
                 && ! in_array($item->order->status, [
                     self::STATUS_CLOSED,
@@ -412,13 +419,21 @@ class Order extends Model implements OrderContract
             return false;
         }
 
+        $hasReorderable = false;
+
         foreach ($this->items as $item) {
+            if ($item->type === 'booking') {
+                continue;
+            }
+
             if (! $item->product?->getTypeInstance()->isSaleable()) {
                 return false;
             }
+
+            $hasReorderable = true;
         }
 
-        return true;
+        return $hasReorderable;
     }
 
     /**

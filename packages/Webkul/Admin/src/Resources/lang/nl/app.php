@@ -389,6 +389,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Per Eenheid x :qty Hoeveelheid',
                 'billing-address' => 'Factuuradres',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Boekingsitems worden niet geannuleerd',
+                    'description' => 'Deze bestelling bevat boekingsproducten die als niet-annuleerbaar zijn gemarkeerd. Bij annulering worden alleen de resterende items geannuleerd; boekingsitems blijven actief. Neem contact op met de ondersteuning als u hulp nodig heeft met de boekingsitems.',
+                ],
+
                 'cancel' => 'Annuleren',
                 'cancel-msg' => 'Weet je zeker dat je deze bestelling wilt annuleren?',
                 'cancel-success' => 'Bestelling succesvol geannuleerd',
@@ -438,6 +444,7 @@ return [
                 'refund-id' => 'Terugbetaling #:refund',
                 'refunded' => 'Terugbetaald',
                 'reorder' => 'Opnieuw Bestellen',
+                'reorder-booking-skipped' => 'Boekingsproducten zijn overgeslagen tijdens het opnieuw bestellen. Boek ze opnieuw met nieuwe datums en tijdsloten.',
                 'ship' => 'Verzenden',
                 'shipment' => 'Verzending #:shipment',
                 'shipments' => 'Verzendingen',
@@ -773,7 +780,7 @@ return [
                 'done' => 'Voltooid',
                 'order-id' => 'Bestelnummer',
                 'pending' => 'In afwachting',
-                'price' => 'Prijs',
+                'product' => 'Product',
                 'status' => 'Status',
                 'time-slot' => 'Tijdslot:',
                 'view-details' => 'Details bekijken',

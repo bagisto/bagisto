@@ -559,36 +559,43 @@
                         }
 
                         if (
-                            params.from_day > params.to_day || 
-                            (params.from_day === params.to_day && params.from >= params.to)
+                            params.from_day === params.to_day
+                            && params.from >= params.to
                         ) {
                             this.$emitter.emit('add-flash', {
                                 type: 'error',
                                 message: "@lang('admin::app.catalog.products.edit.types.booking.validations.time-validation')"
                             });
-                            
+
                             return;
                         }
                         
                         if (parseInt(this.default_booking.allow_slot_overlap)) {
                             this.slots.one.push(params);
                         } else {
+                            const toMinutes = (day, time) => {
+                                const [h, m] = time.split(':').map(Number);
+
+                                return day * 1440 + h * 60 + m;
+                            };
+
+                            const normalize = (fromDay, fromTime, toDay, toTime) => {
+                                let start = toMinutes(+fromDay, fromTime);
+                                let end = toMinutes(+toDay, toTime);
+
+                                if (end <= start) {
+                                    end += 7 * 1440;
+                                }
+
+                                return { start, end };
+                            };
+
                             const isOverlapping = this.slots.one.some(item => {
-                                const toMinutes = (day, time) => {
-                                    const [h, m] = time.split(':').map(Number);
+                                const a = normalize(item.from_day, item.from, item.to_day, item.to);
+                                const b = normalize(params.from_day, params.from, params.to_day, params.to);
 
-                                    return day * 1440 + h * 60 + m;
-                                };
-
-                                const itemStart = toMinutes(+item.from_day, item.from);
-
-                                const itemEnd = toMinutes(+item.to_day, item.to);
-
-                                const paramsStart = toMinutes(+params.from_day, params.from);
-
-                                const paramsEnd = toMinutes(+params.to_day, params.to);
-
-                                return paramsStart < itemEnd && paramsEnd > itemStart;
+                                return (a.start < b.end && b.start < a.end)
+                                    || (a.start < b.end + 7 * 1440 && b.start + 7 * 1440 < a.end + 7 * 1440);
                             });
 
                             if (! isOverlapping) {

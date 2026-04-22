@@ -7,16 +7,10 @@ import {
 } from "../../../utils/faker";
 
 test.describe("payment methods configuration", () => {
-    /**
-     * Navigate to the configuration page.
-     */
     test.beforeEach(async ({ adminPage }) => {
         await adminPage.goto("admin/configuration/sales/payment_methods");
     });
 
-    /**
-     * Update the Cash On Delivery Payment Method Configuration.
-     */
     test("should configure the cash on delivery payment method", async ({
         adminPage,
     }) => {
@@ -83,18 +77,11 @@ test.describe("payment methods configuration", () => {
         await expect(sort).toHaveValue("2");
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
     });
 
-    /**
-     * Update the Money Transfer Payment Method Configuration.
-     */
     test("should configure the money transfer payment method", async ({
         adminPage,
     }) => {
@@ -161,18 +148,11 @@ test.describe("payment methods configuration", () => {
         await expect(sort).toHaveValue("2");
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
     });
 
-    /**
-     * Update the PayPal Standard Payment Method Configuration.
-     */
     test("should configure the paypal standard payment method", async ({
         adminPage,
     }) => {
@@ -213,20 +193,12 @@ test.describe("payment methods configuration", () => {
             'input[name="sales[payment_methods][paypal_standard][sort]"]'
         );
         await expect(sort).toHaveValue("2");
-
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();
     });
 
-    /**
-     * Update the PayPal Smart Button Payment Method Configuration.
-     */
     test("should configure the paypal smart button payment method", async ({
         adminPage,
     }) => {
@@ -268,12 +240,7 @@ test.describe("payment methods configuration", () => {
             'input[name="sales[payment_methods][paypal_smart_button][sort]"]'
         );
         await expect(sort).toHaveValue("2");
-
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.getByText("Configuration saved successfully")
         ).toBeVisible();

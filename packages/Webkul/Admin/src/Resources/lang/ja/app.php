@@ -389,6 +389,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount ユニットあたり :qty 個',
                 'billing-address' => '請求先住所',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => '予約アイテムはキャンセルされません',
+                    'description' => 'この注文にはキャンセル不可としてマークされた予約商品が含まれています。注文をキャンセルすると残りのアイテムのみがキャンセルされ、予約アイテムはそのまま有効です。予約アイテムについてサポートが必要な場合はお問い合わせください。',
+                ],
+
                 'cancel' => 'キャンセル',
                 'cancel-msg' => 'この注文をキャンセルしてもよろしいですか？',
                 'cancel-success' => '注文が正常にキャンセルされました',
@@ -438,6 +444,7 @@ return [
                 'refund-id' => '返金 #:refund',
                 'refunded' => '返金済み',
                 'reorder' => '再注文',
+                'reorder-booking-skipped' => '再注文時に予約商品はスキップされました。新しい日時のスロットで再予約してください。',
                 'ship' => '出荷',
                 'shipment' => '出荷 #:shipment',
                 'shipments' => '出荷',
@@ -773,7 +780,7 @@ return [
                 'done' => '完了',
                 'order-id' => '注文ID',
                 'pending' => '保留中',
-                'price' => '価格',
+                'product' => '製品',
                 'status' => 'ステータス',
                 'time-slot' => '時間枠:',
                 'view-details' => '詳細を見る',

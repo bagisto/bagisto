@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Alamat Tagihan',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Item Pemesanan Tidak Akan Dibatalkan',
+                        'description' => 'Pesanan ini berisi produk pemesanan yang ditandai sebagai tidak dapat dibatalkan. Membatalkan pesanan hanya akan membatalkan item yang tersisa; item pemesanan akan tetap aktif. Silakan hubungi dukungan jika Anda memerlukan bantuan dengan item pemesanan.',
+                    ],
+
                     'cancel-btn-title' => 'Batalkan',
                     'cancel-confirm-msg' => 'Apakah Anda yakin ingin membatalkan pesanan ini?',
                     'cancel-error' => 'Pesanan Anda tidak dapat dibatalkan.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'ID Pesanan',
                     'page-title' => 'Pesanan #:order_id',
                     'payment-method' => 'Metode Pembayaran',
+                    'reorder-booking-skipped' => 'Produk pemesanan dilewati saat memesan ulang. Silakan pesan ulang dengan tanggal dan slot waktu baru.',
                     'reorder-btn-title' => 'Pesan Ulang',
                     'shipping-address' => 'Alamat Pengiriman',
                     'shipping-method' => 'Metode Pengiriman',
@@ -789,6 +796,11 @@ return [
                     'location' => 'Lokasi',
                     'view-on-map' => 'Lihat di Peta',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Pembatalan Tidak Diizinkan',
+                        'description' => 'Setelah pemesanan ini dilakukan, tidak dapat dibatalkan. Harap tinjau detailnya dengan cermat sebelum checkout.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Menit',
                         'slot-duration' => 'Durasi Slot',
@@ -904,11 +916,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Pemesanan Dari',
+                'booking-location' => 'Lokasi',
                 'booking-till' => 'Pemesanan Hingga',
+                'bookings-count' => 'Jumlah Pemesanan',
                 'charged-per' => 'Dikenakan Per',
                 'daily' => 'Harian',
                 'event-from' => 'Acara Dari',
+                'event-location' => 'Lokasi Acara',
                 'event-ticket' => 'Tiket Acara',
+                'event-tickets-count' => 'Jumlah Tiket',
                 'event-till' => 'Acara Hingga',
                 'guest-limit' => 'Batas Tamu Per Meja',
                 'hourly' => 'Per Jam',
@@ -916,7 +932,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Acara ini telah berakhir.',
+                        'exceeds_available' => 'Hanya :qty tiket tersedia untuk acara ini.',
                         'sold_out' => 'Tiket untuk acara ini sudah habis terjual.',
+                        'ticket_exceeds_available' => 'Hanya :qty tiket ":ticket" tersedia.',
+                        'ticket_sold_out' => 'Tiket ":ticket" sudah habis.',
                     ],
 
                     'missing_options' => 'Opsi tidak tersedia untuk produk ini.',

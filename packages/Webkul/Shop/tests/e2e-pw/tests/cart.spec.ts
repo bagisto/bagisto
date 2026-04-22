@@ -4,7 +4,7 @@ import {
     generateDescription,
     generatePhoneNumber,
 } from "../utils/faker";
-import { ProductCreation } from "../pages/product";
+import { ProductCreation } from "../pages/admin/catalog/products";
 
 /**
  * Waiting time after cart operations to allow for UI updates.

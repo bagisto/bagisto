@@ -1,5 +1,5 @@
 import { test, expect } from "../../../setup";
-import { ACLManagement } from "../../../pages/acl";
+import { ACLManagement } from "../../../pages/admin/acl/index";
 
 test.describe("acl management", () => {
     test("should create role for all permission", async ({ adminPage }) => {
@@ -201,9 +201,7 @@ test.describe("acl management", () => {
     }) => {
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", ["sales.rma.requests"]);
-         await aclManagement.editRolePermission([
-            "sales.rma.requests.create",
-        ]);
+        await aclManagement.editRolePermission(["sales.rma.requests.create"]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["sales->rma"]);
         await expect(
