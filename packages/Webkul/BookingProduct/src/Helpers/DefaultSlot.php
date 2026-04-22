@@ -94,7 +94,7 @@ class DefaultSlot extends Booking
 
             $endDate = Carbon::createFromTimeString($endDate->format('Y-m-d').' '.$timeDuration['to'].':00');
 
-            if ($endDate <= Carbon::now()) {
+            if ($startDate <= Carbon::now()) {
                 continue;
             }
 

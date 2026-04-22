@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => '账单地址',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => '预订项目不会被取消',
+                        'description' => '此订单包含被标记为不可取消的预订产品。取消订单只会取消其余项目；预订项目将保持活动状态。如果您需要有关预订项目的帮助，请联系支持团队。',
+                    ],
+
                     'cancel-btn-title' => '取消',
                     'cancel-confirm-msg' => '确定要取消此订单吗？',
                     'cancel-error' => '无法取消您的订单。',
@@ -219,6 +225,7 @@ return [
                     'order-id' => '订单编号',
                     'page-title' => '订单 #:order_id',
                     'payment-method' => '付款方式',
+                    'reorder-booking-skipped' => '重新下单时已跳过预订产品。请使用新的日期和时间段重新预订。',
                     'reorder-btn-title' => '重新下单',
                     'shipping-address' => '收货地址',
                     'shipping-method' => '发货方式',
@@ -785,6 +792,11 @@ return [
                     'location' => '位置',
                     'view-on-map' => '在地图上查看',
 
+                    'cancellation-not-allowed' => [
+                        'title' => '不允许取消',
+                        'description' => '此预订一旦完成，无法取消。请在结账前仔细查看详情。',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes 分钟',
                         'slot-duration' => '时段持续时间',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => '预订从',
+                'booking-location' => '地点',
                 'booking-till' => '预订到',
+                'bookings-count' => '预订数',
                 'charged-per' => '收费方式',
                 'daily' => '按天计算',
                 'event-from' => '活动从',
+                'event-location' => '活动地点',
                 'event-ticket' => '活动票',
+                'event-tickets-count' => '票数',
                 'event-till' => '活动到',
                 'guest-limit' => '每桌客人限制',
                 'hourly' => '按小时计算',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => '此活动已过期。',
+                        'exceeds_available' => '此活动仅剩 :qty 张门票可用。',
                         'sold_out' => '此活动的门票已售罄。',
+                        'ticket_exceeds_available' => '":ticket" 门票仅剩 :qty 张可用。',
+                        'ticket_sold_out' => '":ticket" 门票已售罄。',
                     ],
 
                     'missing_options' => '此产品缺少选项。',

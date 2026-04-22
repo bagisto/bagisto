@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Billing Address',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Booking Items Will Not Be Canceled',
+                        'description' => 'This order contains booking products marked as non-cancellable. Cancelling the order will only cancel the remaining items; the booking items will remain active. Please contact support if you need assistance with the booking items.',
+                    ],
+
                     'cancel-btn-title' => 'Cancel',
                     'cancel-confirm-msg' => 'Are you sure you want to cancel this order ?',
                     'cancel-error' => 'Your :name can not be canceled.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'Order Id',
                     'page-title' => 'Order #:order_id',
                     'payment-method' => 'Payment Method',
+                    'reorder-booking-skipped' => 'Booking products were skipped during reorder. Please book them again with fresh date and time slots.',
                     'reorder-btn-title' => 'Reorder',
                     'shipping-address' => 'Shipping Address',
                     'shipping-method' => 'Shipping Method',
@@ -785,6 +792,11 @@ return [
                     'location' => 'Location',
                     'view-on-map' => 'View on Map',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Cancellation Not Allowed',
+                        'description' => 'Once this booking is placed, it cannot be canceled. Please review the details carefully before checking out.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minutes',
                         'slot-duration' => 'Slot Duration',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Booking From',
+                'booking-location' => 'Location',
                 'booking-till' => 'Booking Till',
+                'bookings-count' => 'Number of Bookings',
                 'charged-per' => 'Charged Per',
                 'daily' => 'Daily Basis',
                 'event-from' => 'Event From',
+                'event-location' => 'Event Location',
                 'event-ticket' => 'Event Ticket',
+                'event-tickets-count' => 'Number of Tickets',
                 'event-till' => 'Event Till',
                 'guest-limit' => 'Guest Limit Per Table',
                 'hourly' => 'Hourly Basis',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'This event has been expired.',
+                        'exceeds_available' => 'Only :qty tickets are available for this event.',
                         'sold_out' => 'Tickets for this event are sold out.',
+                        'ticket_exceeds_available' => 'Only :qty ":ticket" tickets are available.',
+                        'ticket_sold_out' => '":ticket" tickets are sold out.',
                     ],
 
                     'missing_options' => 'Options are missing for this product.',

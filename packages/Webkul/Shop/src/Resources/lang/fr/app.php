@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Adresse de facturation',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Les articles de réservation ne seront pas annulés',
+                        'description' => 'Cette commande contient des produits de réservation marqués comme non annulables. L\'annulation de la commande n\'annulera que les articles restants ; les articles de réservation resteront actifs. Veuillez contacter le support si vous avez besoin d\'aide avec les articles de réservation.',
+                    ],
+
                     'cancel-btn-title' => 'Annuler',
                     'cancel-confirm-msg' => 'Êtes-vous sûr de vouloir annuler cette commande ?',
                     'cancel-error' => 'Votre commande ne peut pas être annulée.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'ID de commande',
                     'page-title' => 'Commande #:order_id',
                     'payment-method' => 'Moyen de paiement',
+                    'reorder-booking-skipped' => 'Les produits de réservation ont été ignorés lors de la nouvelle commande. Veuillez les réserver à nouveau avec de nouvelles dates et plages horaires.',
                     'reorder-btn-title' => 'Recommander',
                     'shipping-address' => 'Adresse de livraison',
                     'shipping-method' => 'Méthode de livraison',
@@ -785,6 +792,11 @@ return [
                     'location' => 'Emplacement',
                     'view-on-map' => 'Voir sur la carte',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Annulation non autorisée',
+                        'description' => 'Une fois cette réservation passée, elle ne peut être annulée. Veuillez vérifier attentivement les détails avant de passer à la caisse.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minutes',
                         'slot-duration' => 'Durée du créneau',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Réservation de',
+                'booking-location' => 'Lieu',
                 'booking-till' => 'Réservation jusqu\'à',
+                'bookings-count' => 'Nombre de réservations',
                 'charged-per' => 'Facturé par',
                 'daily' => 'Base quotidienne',
                 'event-from' => 'Événement de',
+                'event-location' => 'Lieu de l\'événement',
                 'event-ticket' => 'Billet d\'événement',
+                'event-tickets-count' => 'Nombre de billets',
                 'event-till' => 'Événement jusqu\'à',
                 'guest-limit' => 'Limite d\'invités par table',
                 'hourly' => 'Base horaire',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Cet événement a expiré.',
+                        'exceeds_available' => 'Seulement :qty billets sont disponibles pour cet événement.',
                         'sold_out' => 'Les billets pour cet événement sont épuisés.',
+                        'ticket_exceeds_available' => 'Seulement :qty billets ":ticket" sont disponibles.',
+                        'ticket_sold_out' => 'Les billets ":ticket" sont épuisés.',
                     ],
 
                     'missing_options' => 'Les options sont manquantes pour ce produit.',

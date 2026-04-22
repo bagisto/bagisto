@@ -259,7 +259,7 @@
         </x-shop::accordion>
     </div>
 
-    <v-product-associations />
+    <v-product-associations></v-product-associations>
 
     {!! view_render_event('bagisto.shop.products.view.after', ['product' => $product]) !!}
 

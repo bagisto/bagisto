@@ -276,6 +276,79 @@ class Booking
     }
 
     /**
+     * Returns calendar availability metadata for the storefront date picker.
+     */
+    public function getCalendarAvailability(BookingProduct $bookingProduct): array
+    {
+        return [
+            'valid_weekdays' => $this->getValidWeekdays($bookingProduct),
+            'available_every_week' => (bool) $bookingProduct->available_every_week,
+            'available_from' => $bookingProduct->available_from?->format('Y-m-d'),
+            'available_to' => $bookingProduct->available_to?->format('Y-m-d'),
+            'prevent_scheduling_before' => (int) ($bookingProduct->table_slot?->prevent_scheduling_before ?? 0),
+        ];
+    }
+
+    /**
+     * Returns the weekday indices (0=Sunday, 6=Saturday) that have bookable slots configured.
+     */
+    private function getValidWeekdays(BookingProduct $bookingProduct): array
+    {
+        $allDays = [0, 1, 2, 3, 4, 5, 6];
+
+        $slot = match ($bookingProduct->type) {
+            'default' => $bookingProduct->default_slot,
+            'appointment' => $bookingProduct->appointment_slot,
+            'table' => $bookingProduct->table_slot,
+            'rental' => $bookingProduct->rental_slot,
+            default => null,
+        };
+
+        if (! $slot) {
+            return $allDays;
+        }
+
+        if ($bookingProduct->type === 'default' && ($slot->booking_type ?? null) === 'one') {
+            $weekdays = [];
+
+            foreach ($slot->slots ?? [] as $entry) {
+                $fromDay = (int) ($entry['from_day'] ?? 0);
+                $toDay = (int) ($entry['to_day'] ?? 0);
+
+                if ($fromDay <= $toDay) {
+                    for ($d = $fromDay; $d <= $toDay; $d++) {
+                        $weekdays[] = $d;
+                    }
+                } else {
+                    for ($d = $fromDay; $d <= 6; $d++) {
+                        $weekdays[] = $d;
+                    }
+                    for ($d = 0; $d <= $toDay; $d++) {
+                        $weekdays[] = $d;
+                    }
+                }
+            }
+
+            return array_values(array_unique($weekdays));
+        }
+
+        if (! empty($slot->same_slot_all_days) && ! empty($slot->slots)) {
+            return $allDays;
+        }
+
+        $weekdays = [];
+        $slots = $slot->slots ?? [];
+
+        foreach ($allDays as $i) {
+            if (! empty($slots[$i])) {
+                $weekdays[] = $i;
+            }
+        }
+
+        return $weekdays;
+    }
+
+    /**
      * Returns additional cart item information.
      */
     public function getCartItemOptions(array $data): array
@@ -305,7 +378,7 @@ class Booking
                 return $this->getTableAttributes($bookingProduct, $data);
 
             default:
-                return $this->getDefaultAttributes($data);
+                return $this->getDefaultAttributes($bookingProduct, $data);
         }
     }
 
@@ -592,12 +665,10 @@ class Booking
     {
         $ticket = $bookingProduct->event_tickets()->find($data['booking']['ticket_id']);
 
-        return [
+        $quantity = (int) ($data['booking']['qty'][$data['booking']['ticket_id']] ?? $data['quantity'] ?? 0);
+
+        $attributes = [
             [
-                'attribute_name' => trans('shop::app.products.booking.cart.event-ticket'),
-                'option_id' => 0,
-                'option_label' => $ticket?->name ?? '',
-            ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.event-from'),
                 'option_id' => 0,
                 'option_label' => Carbon::createFromTimeString($bookingProduct->available_from)
@@ -611,6 +682,28 @@ class Booking
                     ->format('d F, Y h:i A'),
             ],
         ];
+
+        if (! empty($bookingProduct->location)) {
+            $attributes[] = [
+                'attribute_name' => trans('shop::app.products.booking.cart.booking-location'),
+                'option_id' => 0,
+                'option_label' => $bookingProduct->location,
+            ];
+        }
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.event-ticket'),
+            'option_id' => 0,
+            'option_label' => $ticket?->name ?? '',
+        ];
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.event-tickets-count'),
+            'option_id' => 0,
+            'option_label' => $quantity,
+        ];
+
+        return $attributes;
     }
 
     /**
@@ -634,12 +727,8 @@ class Booking
                 ->format('d F, Y h:i A');
         }
 
-        return [
+        $attributes = [
             [
-                'attribute_name' => trans('shop::app.products.booking.cart.rent-type'),
-                'option_id' => 0,
-                'option_label' => trans('shop::app.products.booking.cart.'.$rentingType),
-            ], [
                 'attribute_name' => trans('shop::app.products.booking.cart.rent-from'),
                 'option_id' => 0,
                 'option_label' => $from,
@@ -649,6 +738,28 @@ class Booking
                 'option_label' => $to,
             ],
         ];
+
+        if (! empty($bookingProduct->location)) {
+            $attributes[] = [
+                'attribute_name' => trans('shop::app.products.booking.cart.booking-location'),
+                'option_id' => 0,
+                'option_label' => $bookingProduct->location,
+            ];
+        }
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.rent-type'),
+            'option_id' => 0,
+            'option_label' => trans('shop::app.products.booking.cart.'.$rentingType),
+        ];
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
+            'option_id' => 0,
+            'option_label' => (int) ($data['quantity'] ?? 1),
+        ];
+
+        return $attributes;
     }
 
     /**
@@ -675,6 +786,14 @@ class Booking
             ],
         ];
 
+        if (! empty($bookingProduct->location)) {
+            $attributes[] = [
+                'attribute_name' => trans('shop::app.products.booking.cart.booking-location'),
+                'option_id' => 0,
+                'option_label' => $bookingProduct->location,
+            ];
+        }
+
         if ($tableSlot) {
             $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.charged-per'),
@@ -693,6 +812,12 @@ class Booking
             }
         }
 
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
+            'option_id' => 0,
+            'option_label' => (int) ($data['quantity'] ?? 1),
+        ];
+
         if (! empty($data['booking']['note'])) {
             $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.special-note'),
@@ -705,13 +830,13 @@ class Booking
     }
 
     /**
-     * Get default booking attributes.
+     * Get default booking attributes (used for default and appointment types).
      */
-    private function getDefaultAttributes($data): array
+    private function getDefaultAttributes($bookingProduct, $data): array
     {
         $timestamps = explode('-', $data['booking']['slot']);
 
-        return [
+        $attributes = [
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.booking-from'),
                 'option_id' => 0,
@@ -726,5 +851,21 @@ class Booking
                     ->format('d F, Y h:i A'),
             ],
         ];
+
+        if (! empty($bookingProduct?->location)) {
+            $attributes[] = [
+                'attribute_name' => trans('shop::app.products.booking.cart.booking-location'),
+                'option_id' => 0,
+                'option_label' => $bookingProduct->location,
+            ];
+        }
+
+        $attributes[] = [
+            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
+            'option_id' => 0,
+            'option_label' => (int) ($data['quantity'] ?? 1),
+        ];
+
+        return $attributes;
     }
 }

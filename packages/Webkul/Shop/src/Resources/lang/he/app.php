@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'כתובת לחיוב',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'פריטי הזמנה לא יבוטלו',
+                        'description' => 'הזמנה זו מכילה מוצרי הזמנה המסומנים כלא ניתנים לביטול. ביטול ההזמנה יבטל רק את הפריטים הנותרים; פריטי ההזמנה יישארו פעילים. אנא צרו קשר עם התמיכה אם אתם זקוקים לעזרה עם פריטי ההזמנה.',
+                    ],
+
                     'cancel-btn-title' => 'ביטול',
                     'cancel-confirm-msg' => 'האם אתה בטוח שברצונך לבטל הזמנה זו?',
                     'cancel-error' => 'לא ניתן לבטל את ההזמנה שלך.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'מספר הזמנה',
                     'page-title' => 'הזמנה #:order_id',
                     'payment-method' => 'אמצעי תשלום',
+                    'reorder-booking-skipped' => 'מוצרי הזמנה דולגו במהלך ההזמנה מחדש. אנא הזמינו אותם שוב עם תאריכים ומשבצות זמן חדשות.',
                     'reorder-btn-title' => 'הזמן שוב',
                     'shipping-address' => 'כתובת למשלוח',
                     'shipping-method' => 'אמצעי משלוח',
@@ -785,6 +792,11 @@ return [
                     'location' => 'מיקום',
                     'view-on-map' => 'צפה במפה',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'ביטול אינו מורשה',
+                        'description' => 'לאחר ביצוע ההזמנה, לא ניתן לבטל אותה. אנא בדקו את הפרטים בקפידה לפני התשלום.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes דקות',
                         'slot-duration' => 'משך זמן',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'הזמנה מ',
+                'booking-location' => 'מיקום',
                 'booking-till' => 'הזמנה עד',
+                'bookings-count' => 'מספר הזמנות',
                 'charged-per' => 'חיוב לפי',
                 'daily' => 'בסיס יומי',
                 'event-from' => 'אירוע מ',
+                'event-location' => 'מיקום האירוע',
                 'event-ticket' => 'כרטיס אירוע',
+                'event-tickets-count' => 'מספר כרטיסים',
                 'event-till' => 'אירוע עד',
                 'guest-limit' => 'מגבלת אורחים לשולחן',
                 'hourly' => 'בסיס שעתי',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'האירוע הזה פג תוקף.',
+                        'exceeds_available' => 'רק :qty כרטיסים זמינים לאירוע זה.',
                         'sold_out' => 'הכרטיסים לאירוע זה אזלו.',
+                        'ticket_exceeds_available' => 'רק :qty כרטיסי ":ticket" זמינים.',
+                        'ticket_sold_out' => 'כרטיסי ":ticket" אזלו.',
                     ],
 
                     'missing_options' => 'אפשרויות חסרות עבור מוצר זה.',

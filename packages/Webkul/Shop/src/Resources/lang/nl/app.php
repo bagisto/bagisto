@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Factuuradres',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Boekingsitems worden niet geannuleerd',
+                        'description' => 'Deze bestelling bevat boekingsproducten die als niet-annuleerbaar zijn gemarkeerd. Bij annulering worden alleen de resterende items geannuleerd; boekingsitems blijven actief. Neem contact op met de ondersteuning als u hulp nodig heeft met de boekingsitems.',
+                    ],
+
                     'cancel-btn-title' => 'Annuleren',
                     'cancel-confirm-msg' => 'Weet u zeker dat u deze bestelling wilt annuleren?',
                     'cancel-error' => 'Uw bestelling kan niet geannuleerd worden.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'Bestelnummer',
                     'page-title' => 'Bestelling #:order_id',
                     'payment-method' => 'Betaalmethode',
+                    'reorder-booking-skipped' => 'Boekingsproducten zijn overgeslagen tijdens het opnieuw bestellen. Boek ze opnieuw met nieuwe datums en tijdsloten.',
                     'reorder-btn-title' => 'Opnieuw bestellen',
                     'shipping-address' => 'Verzendadres',
                     'shipping-method' => 'Verzendmethode',
@@ -785,6 +792,11 @@ return [
                     'location' => 'Locatie',
                     'view-on-map' => 'Bekijk op Kaart',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Annulering niet toegestaan',
+                        'description' => 'Na het plaatsen van deze boeking kan deze niet worden geannuleerd. Controleer de details zorgvuldig voordat u afrekent.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minuten',
                         'slot-duration' => 'Slotduur',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Boeking Van',
+                'booking-location' => 'Locatie',
                 'booking-till' => 'Boeking Tot',
+                'bookings-count' => 'Aantal boekingen',
                 'charged-per' => 'Kosten per',
                 'daily' => 'Dagelijks',
                 'event-from' => 'Evenement Van',
+                'event-location' => 'Evenementlocatie',
                 'event-ticket' => 'Evenement Ticket',
+                'event-tickets-count' => 'Aantal tickets',
                 'event-till' => 'Evenement Tot',
                 'guest-limit' => 'Gastenlimiet per tafel',
                 'hourly' => 'Per Uur',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Dit evenement is verlopen.',
+                        'exceeds_available' => 'Er zijn slechts :qty tickets beschikbaar voor dit evenement.',
                         'sold_out' => 'De tickets voor dit evenement zijn uitverkocht.',
+                        'ticket_exceeds_available' => 'Er zijn slechts :qty ":ticket" tickets beschikbaar.',
+                        'ticket_sold_out' => '":ticket" tickets zijn uitverkocht.',
                     ],
 
                     'missing_options' => 'Opties ontbreken voor dit product.',

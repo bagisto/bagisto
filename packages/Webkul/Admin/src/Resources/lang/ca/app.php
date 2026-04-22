@@ -389,6 +389,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Per Unitat x :qty Quantitat',
                 'billing-address' => 'Adreça de Facturació',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Els articles de reserva no seran cancel·lats',
+                    'description' => 'Aquesta comanda conté productes de reserva marcats com a no cancel·lables. Cancel·lar la comanda només cancel·larà la resta d\'articles; els articles de reserva es mantindran actius. Si us plau, contacteu amb el suport si necessiteu ajuda amb els articles de reserva.',
+                ],
+
                 'cancel' => 'Cancel·lar',
                 'cancel-msg' => 'Estàs segur que vols cancel·lar aquesta comanda?',
                 'cancel-success' => 'Comanda cancel·lada amb éxit',
@@ -438,6 +444,7 @@ return [
                 'refund-id' => 'Reemborsament #:refund',
                 'refunded' => 'Reemborsat',
                 'reorder' => 'Reordenar',
+                'reorder-booking-skipped' => 'Els productes de reserva s\'han omès durant la nova comanda. Si us plau, reserveu-los de nou amb noves dates i franges horàries.',
                 'ship' => 'Enviar',
                 'shipment' => 'Enviament #:shipment',
                 'shipments' => 'Enviaments',
@@ -773,7 +780,7 @@ return [
                 'done' => 'Fet',
                 'order-id' => 'ID de Comanda',
                 'pending' => 'Pendent',
-                'price' => 'Preu',
+                'product' => 'Producte',
                 'status' => 'Estat',
                 'time-slot' => 'Franja Horària:',
                 'view-details' => 'Veure Detalls',

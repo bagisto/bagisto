@@ -174,7 +174,7 @@
                         <x-admin::form.control-group.control
                             type="date"
                             name="booking[available_to]"
-                            ::rules="'required|after:' + booking.available_from"
+                            ::rules="'required|after_or_equal:' + booking.available_from"
                             v-model="booking.available_to"
                             :label="trans('admin::app.catalog.products.edit.types.booking.available-to')"
                             :placeholder="trans('admin::app.catalog.products.edit.types.booking.available-to')"
@@ -248,6 +248,14 @@
             return new Date(value) > new Date(target);
         });
 
+        defineRule('after_or_equal', (value, [target]) => {
+            if (! value || ! target) {
+                return true;
+            }
+
+            return new Date(value) >= new Date(target);
+        });
+
         app.component('v-booking-information', {
             template: '#v-booking-information-template',
 
@@ -277,9 +285,30 @@
             },
 
             created() {
-                this.booking.available_from = "{{ $bookingProduct && $bookingProduct->available_from ? $bookingProduct->available_from->format('Y-m-d H:i:s') : '' }}";
+                const fromRaw = "{{ $bookingProduct && $bookingProduct->available_from ? $bookingProduct->available_from->format('Y-m-d H:i:s') : '' }}";
+                const toRaw = "{{ $bookingProduct && $bookingProduct->available_to ? $bookingProduct->available_to->format('Y-m-d H:i:s') : '' }}";
 
-                this.booking.available_to = "{{ $bookingProduct && $bookingProduct->available_to ? $bookingProduct->available_to->format('Y-m-d H:i:s') : '' }}";
+                if (this.booking.type === 'event') {
+                    this.booking.available_from = fromRaw;
+                    this.booking.available_to = toRaw;
+                } else {
+                    this.booking.available_from = fromRaw ? fromRaw.substring(0, 10) : '';
+                    this.booking.available_to = toRaw ? toRaw.substring(0, 10) : '';
+                }
+            },
+
+            watch: {
+                'booking.type'(newType, oldType) {
+                    if (oldType === 'event' && newType !== 'event') {
+                        if (this.booking.available_from) {
+                            this.booking.available_from = String(this.booking.available_from).substring(0, 10);
+                        }
+
+                        if (this.booking.available_to) {
+                            this.booking.available_to = String(this.booking.available_to).substring(0, 10);
+                        }
+                    }
+                },
             }
         });
     </script>

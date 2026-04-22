@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Adreça de Facturació',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Els articles de reserva no seran cancel·lats',
+                        'description' => 'Aquesta comanda conté productes de reserva marcats com a no cancel·lables. Cancel·lar la comanda només cancel·larà la resta d\'articles; els articles de reserva es mantindran actius. Si us plau, contacteu amb el suport si necessiteu ajuda amb els articles de reserva.',
+                    ],
+
                     'cancel-btn-title' => 'Cancel·lar',
                     'cancel-confirm-msg' => 'Estàs segur que vols cancel·lar aquesta comanda?',
                     'cancel-error' => 'No es pot cancel·lar la teva comanda.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'ID de la Comanda',
                     'page-title' => 'Comanda #:order_id',
                     'payment-method' => 'Mètode de Pagament',
+                    'reorder-booking-skipped' => 'Els productes de reserva s\'han omès durant la nova comanda. Si us plau, reserveu-los de nou amb noves dates i franges horàries.',
                     'reorder-btn-title' => 'Tornar a Comandar',
                     'shipping-address' => 'Adreça d\'Enviament',
                     'shipping-method' => 'Mètode d\'Enviament',
@@ -785,6 +792,11 @@ return [
                     'location' => 'Ubicació',
                     'view-on-map' => 'Veure al mapa',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'No es permet la cancel·lació',
+                        'description' => 'Una vegada feta aquesta reserva, no es pot cancel·lar. Reviseu els detalls amb cura abans de finalitzar la compra.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minuts',
                         'slot-duration' => 'Durada del slot',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Reserva des de',
+                'booking-location' => 'Ubicació',
                 'booking-till' => 'Reserva fins a',
+                'bookings-count' => 'Nombre de reserves',
                 'charged-per' => 'Cobrat per',
                 'daily' => 'Diari',
                 'event-from' => 'Esdeveniment des de',
+                'event-location' => 'Ubicació de l\'esdeveniment',
                 'event-ticket' => 'Entrada per a l\'esdeveniment',
+                'event-tickets-count' => 'Nombre d\'entrades',
                 'event-till' => 'Esdeveniment fins a',
                 'guest-limit' => 'Límit de convidats per taula',
                 'hourly' => 'Per hores',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Aquest esdeveniment ha expirat.',
+                        'exceeds_available' => 'Només hi ha :qty entrades disponibles per a aquest esdeveniment.',
                         'sold_out' => 'Les entrades per a aquest esdeveniment estan esgotades.',
+                        'ticket_exceeds_available' => 'Només hi ha :qty entrades ":ticket" disponibles.',
+                        'ticket_sold_out' => 'Les entrades ":ticket" estan esgotades.',
                     ],
 
                     'missing_options' => 'Falten opcions per a aquest producte.',

@@ -389,6 +389,12 @@ return [
             'view' => [
                 'amount-per-unit' => ':amount Per Unità x :qty Quantità',
                 'billing-address' => 'Indirizzo di Fatturazione',
+
+                'booking-cancellation-not-allowed' => [
+                    'title' => 'Gli articoli di prenotazione non verranno annullati',
+                    'description' => 'Questo ordine contiene prodotti di prenotazione contrassegnati come non annullabili. Annullando l\'ordine si annulleranno solo gli articoli rimanenti; gli articoli di prenotazione resteranno attivi. Contatta l\'assistenza se hai bisogno di aiuto con gli articoli di prenotazione.',
+                ],
+
                 'cancel' => 'Annulla',
                 'cancel-msg' => 'Sei sicuro di voler annullare questo ordine',
                 'cancel-success' => 'Ordine annullato con successo',
@@ -438,6 +444,7 @@ return [
                 'refund-id' => 'Rimborso #:refund',
                 'refunded' => 'Rimborsato',
                 'reorder' => 'Riordina',
+                'reorder-booking-skipped' => 'I prodotti di prenotazione sono stati saltati durante il nuovo ordine. Prenotali di nuovo con date e fasce orarie nuove.',
                 'ship' => 'Spedisci',
                 'shipment' => 'Spedizione #:shipment',
                 'shipments' => 'Spedizioni',
@@ -773,7 +780,7 @@ return [
                 'done' => 'Fatto',
                 'order-id' => 'ID Ordine',
                 'pending' => 'In Attesa',
-                'price' => 'Prezzo',
+                'product' => 'Prodotto',
                 'status' => 'Stato',
                 'time-slot' => 'Fascia Oraria:',
                 'view-details' => 'Visualizza Dettagli',

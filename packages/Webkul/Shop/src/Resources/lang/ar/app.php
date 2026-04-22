@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'عنوان الفاتورة',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'عناصر الحجز لن يتم إلغاؤها',
+                        'description' => 'يحتوي هذا الطلب على منتجات حجز مُعلّمة كغير قابلة للإلغاء. سيؤدي إلغاء الطلب فقط إلى إلغاء العناصر المتبقية؛ وستبقى عناصر الحجز نشطة. يرجى التواصل مع الدعم إذا كنت بحاجة إلى مساعدة بشأن عناصر الحجز.',
+                    ],
+
                     'cancel-btn-title' => 'إلغاء',
                     'cancel-confirm-msg' => 'هل أنت متأكد أنك تريد إلغاء هذا الطلب؟',
                     'cancel-error' => 'لا يمكن إلغاء طلبك.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'معرف الطلب',
                     'page-title' => 'الطلب #:order_id',
                     'payment-method' => 'طريقة الدفع',
+                    'reorder-booking-skipped' => 'تم تخطي منتجات الحجز أثناء إعادة الطلب. يرجى حجزها مرة أخرى بتواريخ وفترات زمنية جديدة.',
                     'reorder-btn-title' => 'إعادة الطلب',
                     'shipping-address' => 'عنوان الشحن',
                     'shipping-method' => 'طريقة الشحن',
@@ -785,6 +792,11 @@ return [
                     'location' => 'الموقع',
                     'view-on-map' => 'عرض على الخريطة',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'لا يُسمح بالإلغاء',
+                        'description' => 'بمجرد تقديم هذا الحجز، لا يمكن إلغاؤه. يُرجى مراجعة التفاصيل بعناية قبل إتمام الطلب.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes دقائق',
                         'slot-duration' => 'مدة الفتحة',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'الحجز من',
+                'booking-location' => 'الموقع',
                 'booking-till' => 'الحجز حتى',
+                'bookings-count' => 'عدد الحجوزات',
                 'charged-per' => 'محاسب لكل',
                 'daily' => 'على أساس يومي',
                 'event-from' => 'الحدث من',
+                'event-location' => 'موقع الحدث',
                 'event-ticket' => 'تذكرة الحدث',
+                'event-tickets-count' => 'عدد التذاكر',
                 'event-till' => 'الحدث حتى',
                 'guest-limit' => 'حد الضيوف لكل طاولة',
                 'hourly' => 'على أساس الساعة',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'لقد انتهت صلاحية هذا الحدث.',
+                        'exceeds_available' => 'يتوفر :qty تذاكر فقط لهذا الحدث.',
                         'sold_out' => 'تم بيع جميع تذاكر هذا الحدث.',
+                        'ticket_exceeds_available' => 'يتوفر :qty تذاكر ":ticket" فقط.',
+                        'ticket_sold_out' => 'تم بيع جميع تذاكر ":ticket".',
                     ],
 
                     'missing_options' => 'الخيارات مفقودة لهذا المنتج.',

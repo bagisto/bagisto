@@ -146,12 +146,24 @@ class OrderController extends Controller
 
         Cart::setCart($cart);
 
+        $skippedBooking = false;
+
         foreach ($order->items as $item) {
+            if ($item->type === 'booking') {
+                $skippedBooking = true;
+
+                continue;
+            }
+
             try {
                 Cart::addProduct($item->product, $item->additional);
             } catch (\Exception $e) {
                 // do nothing
             }
+        }
+
+        if ($skippedBooking) {
+            session()->flash('info', trans('admin::app.sales.orders.view.reorder-booking-skipped'));
         }
 
         return redirect()->route('admin.sales.orders.create', $cart->id);

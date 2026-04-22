@@ -73,92 +73,89 @@
                 <!-- Modal Content -->
                 <x-slot:content>
                     <div class="grid text-sm font-normal">
-                        <div class="grid grid-cols-1 gap-2.5 border-b pb-4">
+                        <div class="grid grid-cols-[120px_auto] gap-2 border-b pb-4">
                             <!-- Booking Date -->
-                            <div class="grid grid-cols-[100px_auto] gap-2">
+                            <div
+                                class="text-gray-500"
+                                v-text="'@lang('admin::app.sales.booking.calendar.booking-date')'"
+                            >
+                            </div>
+
+                            <div
+                                class="font-medium text-[#1F2937]"
+                                v-text="new Date(event.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })"
+                            >
+                            </div>
+
+                            <!-- Product -->
+                            <div
+                                class="text-gray-500"
+                                v-text="'@lang('admin::app.sales.booking.calendar.product')'"
+                            >
+                            </div>
+
+                            <div
+                                class="font-medium text-[#1F2937]"
+                                v-text="event.product_name"
+                            >
+                            </div>
+
+                            <!-- Booking Attributes (same order as cart) -->
+                            <template
+                                v-if="event.attributes?.length"
+                                v-for="attribute in event.attributes"
+                            >
                                 <div
                                     class="text-gray-500"
-                                    v-text="'@lang('admin::app.sales.booking.calendar.booking-date')'"
+                                    v-text="attribute.attribute_name"
                                 >
                                 </div>
 
                                 <div
                                     class="font-medium text-[#1F2937]"
-                                    v-text="new Date(event.created_at).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' })"
+                                    v-text="attribute.option_label"
                                 >
                                 </div>
-                            </div>
-
-                            <!-- Time Slot -->
-                            <div class="grid grid-cols-[100px_auto] gap-2">
-                                <div
-                                    class="text-gray-500"
-                                    v-text="'@lang('admin::app.sales.booking.calendar.time-slot')'"
-                                >
-                                </div>
-
-                                <div class="font-medium text-[#1F2937]">
-                                    @{{ new Date(event.start).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit' }) }} - @{{ new Date(event.end).toLocaleTimeString('en-US', { hour12: true, hour: 'numeric', minute: '2-digit' }) }}
-                                </div>
-                            </div>
+                            </template>
                         </div>
 
-                        <div class="grid grid-cols-[80px_80px_auto] gap-2.5 border-b py-4">
+                        <div class="grid grid-cols-[120px_auto] gap-2 border-b py-4">
                             <!-- Order Id -->
-                            <div class="grid grid-cols-1 gap-2">
-                                <div
-                                    class="text-gray-500"
-                                    v-text="'@lang('admin::app.sales.booking.calendar.order-id')'"
-                                >
-                                </div>
-
-                                <div class="font-medium text-[#1F2937]">
-                                    #@{{ event.order_id }}
-                                </div>
+                            <div
+                                class="text-gray-500"
+                                v-text="'@lang('admin::app.sales.booking.calendar.order-id')'"
+                            >
                             </div>
 
-                            <!-- Price -->
-                            <div class="grid grid-cols-1 gap-2">
-                                <div
-                                    class="text-gray-500"
-                                    v-text="'@lang('admin::app.sales.booking.calendar.price')'"
-                                >
-                                </div>
-
-                                <div
-                                    class="font-medium text-[#1F2937]"
-                                    v-text="event.total"
-                                >
-                                </div>
+                            <div class="font-medium text-[#1F2937]">
+                                #@{{ event.order_id }}
                             </div>
 
                             <!-- Status -->
-                            <div class="grid grid-cols-1 gap-2">
-                                <div
-                                    class="text-gray-500"
-                                    v-text="'@lang('admin::app.sales.booking.calendar.status')'"
-                                >
-                                </div>
+                            <div
+                                class="text-gray-500"
+                                v-text="'@lang('admin::app.sales.booking.calendar.status')'"
+                            >
+                            </div>
 
-                                <div
-                                    class="w-fit rounded-2xl px-2.5 py-1 font-medium text-white"
-                                    :class="[
-                                        event.status === 'pending' ? 'bg-yellow-500' :
-                                        event.status === 'completed' ? 'bg-darkGreen' :
-                                        event.status === 'closed' ? 'bg-darkBlue':
-                                        event.status === 'canceled' ? 'bg-darkPink' :
-                                        'bg-green-500',
-                                    ]"
+                            <div
+                                class="w-fit rounded-2xl px-2.5 py-1 font-medium text-white"
+                                :class="[
+                                    event.status === 'pending' ? 'bg-yellow-500' :
+                                    event.status === 'completed' ? 'bg-darkGreen' :
+                                    event.status === 'closed' ? 'bg-darkBlue':
+                                    event.status === 'canceled' ? 'bg-darkPink' :
+                                    'bg-green-500',
+                                ]"
+                            >
+                                <span v-text="
+                                    event.status === 'completed' ? '@lang('admin::app.sales.booking.calendar.done')' :
+                                    event.status === 'pending' ? '@lang('admin::app.sales.booking.calendar.pending')' :
+                                    event.status === 'canceled' ? '@lang('admin::app.sales.booking.calendar.canceled')' :
+                                    event.status === 'closed' ? '@lang('admin::app.sales.booking.calendar.closed')' :
+                                    event.status"
                                 >
-                                    <span v-text="
-                                        event.status === 'completed' ? '@lang('admin::app.sales.booking.calendar.done')' :
-                                        event.status === 'pending' ? '@lang('admin::app.sales.booking.calendar.pending')' :
-                                        event.status === 'canceled' ? '@lang('admin::app.sales.booking.calendar.canceled')' :
-                                        event.status === 'closed' ? '@lang('admin::app.sales.booking.calendar.closed')' :
-                                        event.status"
-                                    >
-                                    </span>
-                                </div>
+                                </span>
                             </div>
                         </div>
 

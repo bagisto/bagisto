@@ -109,6 +109,28 @@
             {!! view_render_event('bagisto.admin.sales.order.page_action.after', ['order' => $order]) !!}
         </div>
 
+        @php
+            $hasNonCancelableBooking = $order->items->contains(
+                fn ($item) => $item->booking && ! $item->booking->allow_cancellation
+            );
+        @endphp
+
+        @if ($hasNonCancelableBooking)
+            <div class="mt-4 flex items-start gap-3 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-700 dark:bg-amber-900/20 dark:text-amber-200">
+                <span class="icon-warning mt-0.5 text-lg"></span>
+
+                <div>
+                    <p class="font-semibold">
+                        @lang('admin::app.sales.orders.view.booking-cancellation-not-allowed.title')
+                    </p>
+
+                    <p class="text-xs">
+                        @lang('admin::app.sales.orders.view.booking-cancellation-not-allowed.description')
+                    </p>
+                </div>
+            </div>
+        @endif
+
         <!-- Order details -->
         <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
             <!-- Left Component -->

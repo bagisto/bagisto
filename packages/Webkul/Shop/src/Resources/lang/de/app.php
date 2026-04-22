@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Rechnungsadresse',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Buchungsartikel werden nicht storniert',
+                        'description' => 'Diese Bestellung enthält Buchungsprodukte, die als nicht stornierbar markiert sind. Die Stornierung der Bestellung storniert nur die verbleibenden Artikel; Buchungsartikel bleiben aktiv. Bitte kontaktieren Sie den Support, wenn Sie Hilfe bei den Buchungsartikeln benötigen.',
+                    ],
+
                     'cancel-btn-title' => 'Abbrechen',
                     'cancel-confirm-msg' => 'Sind Sie sicher, dass Sie diese Bestellung stornieren möchten?',
                     'cancel-error' => 'Ihre Bestellung kann nicht storniert werden.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'Bestellnummer',
                     'page-title' => 'Bestellung #:order_id',
                     'payment-method' => 'Zahlungsmethode',
+                    'reorder-booking-skipped' => 'Buchungsprodukte wurden bei der Nachbestellung übersprungen. Bitte buchen Sie sie erneut mit neuen Daten und Zeitfenstern.',
                     'reorder-btn-title' => 'Erneut bestellen',
                     'shipping-address' => 'Lieferadresse',
                     'shipping-method' => 'Versandmethode',
@@ -785,6 +792,11 @@ return [
                     'location' => 'Ort',
                     'view-on-map' => 'Auf Karte anzeigen',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Stornierung nicht erlaubt',
+                        'description' => 'Nach Abschluss dieser Buchung kann sie nicht storniert werden. Bitte überprüfen Sie die Details sorgfältig vor dem Checkout.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minuten',
                         'slot-duration' => 'Slot-Dauer',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Buchung von',
+                'booking-location' => 'Standort',
                 'booking-till' => 'Buchung bis',
+                'bookings-count' => 'Anzahl der Buchungen',
                 'charged-per' => 'Berechnet pro',
                 'daily' => 'Tagesbasis',
                 'event-from' => 'Veranstaltung von',
+                'event-location' => 'Veranstaltungsort',
                 'event-ticket' => 'Veranstaltungsticket',
+                'event-tickets-count' => 'Anzahl der Tickets',
                 'event-till' => 'Veranstaltung bis',
                 'guest-limit' => 'Gästelimit pro Tisch',
                 'hourly' => 'Stundenbasis',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Diese Veranstaltung ist abgelaufen.',
+                        'exceeds_available' => 'Nur :qty Tickets sind für diese Veranstaltung verfügbar.',
                         'sold_out' => 'Die Tickets für diese Veranstaltung sind ausverkauft.',
+                        'ticket_exceeds_available' => 'Nur :qty ":ticket" Tickets sind verfügbar.',
+                        'ticket_sold_out' => '":ticket" Tickets sind ausverkauft.',
                     ],
 
                     'missing_options' => 'Optionen fehlen für dieses Produkt.',

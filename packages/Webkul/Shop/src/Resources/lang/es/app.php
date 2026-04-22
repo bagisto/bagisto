@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Dirección de Facturación',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Los artículos de reserva no se cancelarán',
+                        'description' => 'Este pedido contiene productos de reserva marcados como no cancelables. Al cancelar el pedido solo se cancelarán los artículos restantes; los artículos de reserva seguirán activos. Por favor, contacte con soporte si necesita ayuda con los artículos de reserva.',
+                    ],
+
                     'cancel-btn-title' => 'Cancelar',
                     'cancel-confirm-msg' => '¿Estás seguro de que quieres cancelar este pedido?',
                     'cancel-error' => 'No se puede cancelar tu pedido.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'ID de Pedido',
                     'page-title' => 'Pedido #:order_id',
                     'payment-method' => 'Método de Pago',
+                    'reorder-booking-skipped' => 'Los productos de reserva se omitieron durante el reordenamiento. Por favor, resérvelos nuevamente con nuevas fechas y franjas horarias.',
                     'reorder-btn-title' => 'Volver a Pedir',
                     'shipping-address' => 'Dirección de Envío',
                     'shipping-method' => 'Método de Envío',
@@ -785,6 +792,11 @@ return [
                     'location' => 'Ubicación',
                     'view-on-map' => 'Ver en el Mapa',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Cancelación no permitida',
+                        'description' => 'Una vez realizada esta reserva, no se puede cancelar. Revise los detalles cuidadosamente antes de finalizar la compra.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minutos',
                         'slot-duration' => 'Duración del Intervalo',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Reserva Desde',
+                'booking-location' => 'Ubicación',
                 'booking-till' => 'Reserva Hasta',
+                'bookings-count' => 'Número de reservas',
                 'charged-per' => 'Cobrado por',
                 'daily' => 'Base Diaria',
                 'event-from' => 'Evento Desde',
+                'event-location' => 'Ubicación del evento',
                 'event-ticket' => 'Entrada para Evento',
+                'event-tickets-count' => 'Número de entradas',
                 'event-till' => 'Evento Hasta',
                 'guest-limit' => 'Límite de invitados por mesa',
                 'hourly' => 'Base por Hora',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'Este evento ha expirado.',
+                        'exceeds_available' => 'Solo hay :qty entradas disponibles para este evento.',
                         'sold_out' => 'Las entradas para este evento están agotadas.',
+                        'ticket_exceeds_available' => 'Solo hay :qty entradas ":ticket" disponibles.',
+                        'ticket_sold_out' => 'Las entradas ":ticket" están agotadas.',
                     ],
 
                     'missing_options' => 'Faltan opciones para este producto.',

@@ -206,6 +206,12 @@ return [
 
                 'view' => [
                     'billing-address' => 'Adres rozliczeniowy',
+
+                    'booking-cancellation-not-allowed' => [
+                        'title' => 'Pozycje rezerwacji nie zostaną anulowane',
+                        'description' => 'To zamówienie zawiera produkty rezerwacyjne oznaczone jako nieanulowalne. Anulowanie zamówienia spowoduje anulowanie jedynie pozostałych pozycji; pozycje rezerwacji pozostaną aktywne. Skontaktuj się z pomocą techniczną, jeśli potrzebujesz pomocy z pozycjami rezerwacji.',
+                    ],
+
                     'cancel-btn-title' => 'Anuluj',
                     'cancel-confirm-msg' => 'Czy na pewno chcesz anulować to zamówienie?',
                     'cancel-error' => 'Nie można anulować Twojego zamówienia.',
@@ -219,6 +225,7 @@ return [
                     'order-id' => 'Identyfikator zamówienia',
                     'page-title' => 'Zamówienie #:order_id',
                     'payment-method' => 'Metoda płatności',
+                    'reorder-booking-skipped' => 'Produkty rezerwacyjne zostały pominięte podczas ponownego zamawiania. Zarezerwuj je ponownie z nowymi datami i przedziałami czasowymi.',
                     'reorder-btn-title' => 'Zamów ponownie',
                     'shipping-address' => 'Adres dostawy',
                     'shipping-method' => 'Metoda dostawy',
@@ -785,6 +792,11 @@ return [
                     'location' => 'Lokalizacja',
                     'view-on-map' => 'Zobacz na mapie',
 
+                    'cancellation-not-allowed' => [
+                        'title' => 'Anulowanie niedozwolone',
+                        'description' => 'Po złożeniu tej rezerwacji nie można jej anulować. Sprawdź szczegóły dokładnie przed finalizacją zamówienia.',
+                    ],
+
                     'default' => [
                         'slot-duration-in-minutes' => ':minutes Minut',
                         'slot-duration' => 'Czas trwania slotu',
@@ -900,11 +912,15 @@ return [
 
             'cart' => [
                 'booking-from' => 'Rezerwacja od',
+                'booking-location' => 'Lokalizacja',
                 'booking-till' => 'Rezerwacja do',
+                'bookings-count' => 'Liczba rezerwacji',
                 'charged-per' => 'Opłata za',
                 'daily' => 'Na dzień',
                 'event-from' => 'Wydarzenie od',
+                'event-location' => 'Miejsce wydarzenia',
                 'event-ticket' => 'Bilet na wydarzenie',
+                'event-tickets-count' => 'Liczba biletów',
                 'event-till' => 'Wydarzenie do',
                 'guest-limit' => 'Limit gości na stolik',
                 'hourly' => 'Na godzinę',
@@ -912,7 +928,10 @@ return [
                 'integrity' => [
                     'event' => [
                         'expired' => 'To wydarzenie wygasło.',
+                        'exceeds_available' => 'Tylko :qty biletów jest dostępnych na to wydarzenie.',
                         'sold_out' => 'Bilety na to wydarzenie zostały wyprzedane.',
+                        'ticket_exceeds_available' => 'Dostępnych jest tylko :qty biletów ":ticket".',
+                        'ticket_sold_out' => 'Bilety ":ticket" zostały wyprzedane.',
                     ],
 
                     'missing_options' => 'Brakujące opcje dla tego produktu.',
