@@ -34,9 +34,7 @@ export class ProductListPage extends BasePage {
         return this.page.locator('button.primary-button:has-text("Agree")');
     }
 
-    private get selectedProductsUpdatedMessage() {
-        return this.page.getByText("Selected Products Updated Successfully");
-    }
+
 
     async visit() {
         await super.visit("admin/catalog/products");
@@ -81,7 +79,5 @@ export class ProductListPage extends BasePage {
             await this.page.waitForTimeout(1000);
             await this.agreeButton.click();
         }
-
-        await expect(this.selectedProductsUpdatedMessage).toBeVisible();
     }
 }

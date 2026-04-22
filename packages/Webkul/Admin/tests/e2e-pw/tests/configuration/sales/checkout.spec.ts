@@ -1,9 +1,6 @@
 import { test, expect } from "../../../setup";
 import { generateDescription } from "../../../utils/faker";
 
-const CHECKOUT_CONFIG_URL = "admin/configuration/sales/checkout";
-const SAVE_BUTTON = 'button[type="submit"].primary-button:visible';
-const SUCCESS_MESSAGE = "Configuration saved successfully";
 const SHOPPING_CART_TOGGLES = [
     'label[for="sales[checkout][shopping_cart][allow_guest_checkout]"]',
     'label[for="sales[checkout][shopping_cart][cart_page]"]',
@@ -12,13 +9,13 @@ const SHOPPING_CART_TOGGLES = [
 ];
 
 async function saveAndAssertConfiguration(adminPage) {
-    await adminPage.click(SAVE_BUTTON);
-    await expect(adminPage.getByText(SUCCESS_MESSAGE).first()).toBeVisible();
+    await adminPage.click('button[type="submit"].primary-button:visible');
+    await expect(adminPage.getByText("Configuration saved successfully").first()).toBeVisible();
 }
 
 test.describe("Checkout Configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto(CHECKOUT_CONFIG_URL);
+        await adminPage.goto("admin/configuration/sales/checkout");
     });
 
     test("should enable guest checkout, cart page, cross-sell products, and estimated shipping", async ({

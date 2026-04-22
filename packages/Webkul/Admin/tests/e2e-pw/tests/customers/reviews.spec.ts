@@ -313,37 +313,19 @@ test.describe("review management", () => {
     });
 
     test("should mass delete a reviews", async ({ adminPage }) => {
-        /**
-         * Now navigate to admin panel's review section.
-         */
         await adminPage.goto("admin/customers/reviews");
-
-        /**
-         * Now selecting the recent review.
-         */
         await adminPage.waitForSelector(".icon-uncheckbox:visible", {
             state: "visible",
         });
         const checkboxes = await adminPage.$$(".icon-uncheckbox:visible");
         await checkboxes[1].click();
 
-        /**
-         * After selecting the review, mass actions option will be visible.
-         */
         let selectActionButton = await adminPage.waitForSelector(
             'button:has-text("Select Action")',
             { timeout: 1000 },
         );
         await selectActionButton.click();
-
-        /**
-         * Now selecting the delete option.
-         */
         await adminPage.click('a:has-text("Delete")', { timeout: 1000 });
-
-        /**
-         * Agreeing to the confirmation dialog.
-         */
         await adminPage.waitForSelector("text=Are you sure", {
             state: "visible",
             timeout: 1000,
@@ -351,16 +333,11 @@ test.describe("review management", () => {
         const agreeButton = await adminPage.locator(
             'button.primary-button:has-text("Agree")',
         );
-
         if (await agreeButton.isVisible()) {
             await agreeButton.click();
         } else {
             console.error("Agree button not found or not visible.");
         }
-
-        /**
-         * Checking if the review is deleted successfully or not.
-         */
         await expect(
             adminPage.getByText("Selected Review Deleted Successfully"),
         ).toBeVisible();
