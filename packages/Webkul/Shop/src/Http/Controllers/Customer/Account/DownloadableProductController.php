@@ -8,9 +8,12 @@ use Illuminate\View\View;
 use Webkul\Sales\Repositories\DownloadableLinkPurchasedRepository;
 use Webkul\Shop\DataGrids\DownloadableProductDataGrid;
 use Webkul\Shop\Http\Controllers\Controller;
+use Webkul\Shop\Traits\ValidatesExternalUrl;
 
 class DownloadableProductController extends Controller
 {
+    use ValidatesExternalUrl;
+
     /**
      * Create a new controller instance.
      *
@@ -94,6 +97,10 @@ class DownloadableProductController extends Controller
                 ? $privateDisk->download($downloadableLinkPurchased->file)
                 : abort(404);
         } else {
+            if (! $this->validateExternalUrl($downloadableLinkPurchased->url)) {
+                abort(404);
+            }
+
             $fileName = $name = substr($downloadableLinkPurchased->url, strrpos($downloadableLinkPurchased->url, '/') + 1);
 
             $tempImage = tempnam(sys_get_temp_dir(), $fileName);
