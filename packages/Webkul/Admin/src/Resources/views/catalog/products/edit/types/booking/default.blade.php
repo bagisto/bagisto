@@ -573,6 +573,8 @@
                         if (parseInt(this.default_booking.allow_slot_overlap)) {
                             this.slots.one.push(params);
                         } else {
+                            const WEEK_MIN = 7 * 1440;
+
                             const toMinutes = (day, time) => {
                                 const [h, m] = time.split(':').map(Number);
 
@@ -584,18 +586,40 @@
                                 let end = toMinutes(+toDay, toTime);
 
                                 if (end <= start) {
-                                    end += 7 * 1440;
+                                    end += WEEK_MIN;
                                 }
 
                                 return { start, end };
+                            };
+
+                            const toSegments = (slot) => {
+                                if (slot.end <= WEEK_MIN) {
+                                    return [[slot.start, slot.end]];
+                                }
+
+                                return [
+                                    [slot.start, WEEK_MIN],
+                                    [0, slot.end - WEEK_MIN],
+                                ];
+                            };
+
+                            const overlaps = (a, b) => {
+                                for (const [as, ae] of toSegments(a)) {
+                                    for (const [bs, be] of toSegments(b)) {
+                                        if (as < be && bs < ae) {
+                                            return true;
+                                        }
+                                    }
+                                }
+
+                                return false;
                             };
 
                             const isOverlapping = this.slots.one.some(item => {
                                 const a = normalize(item.from_day, item.from, item.to_day, item.to);
                                 const b = normalize(params.from_day, params.from, params.to_day, params.to);
 
-                                return (a.start < b.end && b.start < a.end)
-                                    || (a.start < b.end + 7 * 1440 && b.start + 7 * 1440 < a.end + 7 * 1440);
+                                return overlaps(a, b);
                             });
 
                             if (! isOverlapping) {

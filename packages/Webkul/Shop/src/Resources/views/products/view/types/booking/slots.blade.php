@@ -127,14 +127,19 @@
 
                 disabledDates() {
                     const validWeekdays = this.availability?.valid_weekdays ?? [0, 1, 2, 3, 4, 5, 6];
+                    const disabledDates = this.availability?.disabled_dates ?? [];
 
-                    if (validWeekdays.length === 7) {
-                        return [];
+                    const predicates = [];
+
+                    if (validWeekdays.length < 7) {
+                        predicates.push((date) => ! validWeekdays.includes(date.getDay()));
                     }
 
-                    return [
-                        (date) => ! validWeekdays.includes(date.getDay()),
-                    ];
+                    if (disabledDates.length) {
+                        predicates.push(...disabledDates);
+                    }
+
+                    return predicates;
                 },
             },
 

@@ -286,7 +286,30 @@ class Booking
             'available_from' => $bookingProduct->available_from?->format('Y-m-d'),
             'available_to' => $bookingProduct->available_to?->format('Y-m-d'),
             'prevent_scheduling_before' => (int) ($bookingProduct->table_slot?->prevent_scheduling_before ?? 0),
+            'disabled_dates' => $this->getDisabledDates($bookingProduct),
         ];
+    }
+
+    /**
+     * Returns specific dates that should be disabled in the date picker even though
+     * the weekday is otherwise valid. Primarily covers the "today with all slots
+     * already passed" case — e.g. a product with a single Monday morning slot should
+     * grey out Monday after the slot start time, instead of letting the customer
+     * click through to an empty slot list.
+     */
+    private function getDisabledDates(BookingProduct $bookingProduct): array
+    {
+        if (! in_array($bookingProduct->type, ['default', 'appointment', 'table'], true)) {
+            return [];
+        }
+
+        $typeHelper = app($this->getTypeHelper($bookingProduct->type));
+
+        $today = Carbon::now()->format('Y-m-d');
+
+        $slots = $typeHelper->getSlotsByDate($bookingProduct, $today);
+
+        return empty($slots) ? [$today] : [];
     }
 
     /**
@@ -312,24 +335,18 @@ class Booking
             $weekdays = [];
 
             foreach ($slot->slots ?? [] as $entry) {
-                $fromDay = (int) ($entry['from_day'] ?? 0);
-                $toDay = (int) ($entry['to_day'] ?? 0);
-
-                if ($fromDay <= $toDay) {
-                    for ($d = $fromDay; $d <= $toDay; $d++) {
-                        $weekdays[] = $d;
-                    }
-                } else {
-                    for ($d = $fromDay; $d <= 6; $d++) {
-                        $weekdays[] = $d;
-                    }
-                    for ($d = 0; $d <= $toDay; $d++) {
-                        $weekdays[] = $d;
-                    }
-                }
+                $weekdays[] = (int) ($entry['from_day'] ?? 0);
             }
 
             return array_values(array_unique($weekdays));
+        }
+
+        /**
+         * Pure-daily rental doesn't use weekday slot config — available every day
+         * within the product's overall availability window.
+         */
+        if ($bookingProduct->type === 'rental' && ($slot->renting_type ?? null) === 'daily') {
+            return $allDays;
         }
 
         if (! empty($slot->same_slot_all_days) && ! empty($slot->slots)) {
@@ -665,8 +682,6 @@ class Booking
     {
         $ticket = $bookingProduct->event_tickets()->find($data['booking']['ticket_id']);
 
-        $quantity = (int) ($data['booking']['qty'][$data['booking']['ticket_id']] ?? $data['quantity'] ?? 0);
-
         $attributes = [
             [
                 'attribute_name' => trans('shop::app.products.booking.cart.event-from'),
@@ -695,12 +710,6 @@ class Booking
             'attribute_name' => trans('shop::app.products.booking.cart.event-ticket'),
             'option_id' => 0,
             'option_label' => $ticket?->name ?? '',
-        ];
-
-        $attributes[] = [
-            'attribute_name' => trans('shop::app.products.booking.cart.event-tickets-count'),
-            'option_id' => 0,
-            'option_label' => $quantity,
         ];
 
         return $attributes;
@@ -751,12 +760,6 @@ class Booking
             'attribute_name' => trans('shop::app.products.booking.cart.rent-type'),
             'option_id' => 0,
             'option_label' => trans('shop::app.products.booking.cart.'.$rentingType),
-        ];
-
-        $attributes[] = [
-            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
-            'option_id' => 0,
-            'option_label' => (int) ($data['quantity'] ?? 1),
         ];
 
         return $attributes;
@@ -812,12 +815,6 @@ class Booking
             }
         }
 
-        $attributes[] = [
-            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
-            'option_id' => 0,
-            'option_label' => (int) ($data['quantity'] ?? 1),
-        ];
-
         if (! empty($data['booking']['note'])) {
             $attributes[] = [
                 'attribute_name' => trans('shop::app.products.booking.cart.special-note'),
@@ -859,12 +856,6 @@ class Booking
                 'option_label' => $bookingProduct->location,
             ];
         }
-
-        $attributes[] = [
-            'attribute_name' => trans('shop::app.products.booking.cart.bookings-count'),
-            'option_id' => 0,
-            'option_label' => (int) ($data['quantity'] ?? 1),
-        ];
 
         return $attributes;
     }

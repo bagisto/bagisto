@@ -125,9 +125,7 @@ class Booking extends AbstractType
      */
     public function showQuantityBox(): bool
     {
-        $bookingProduct = $this->getBookingProduct($this->product->id);
-
-        return in_array($bookingProduct->type, ['default', 'rental', 'table']);
+        return true;
     }
 
     /**
