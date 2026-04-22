@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Adresse de facturation',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Les articles de réservation ne seront pas annulés',
-                    'description' => 'Cette commande contient des produits de réservation marqués comme non annulables. L\'annulation de la commande n\'annulera que les articles restants ; les articles de réservation resteront actifs. Veuillez contacter le support si vous avez besoin d\'aide avec les articles de réservation.',
+                    'title' => 'Articles de réservation non annulables',
+                    'description' => 'Cette commande contient des produits de réservation configurés comme non annulables pour les clients. En tant qu\'administrateur, vous pouvez toujours les annuler — le client ne peut pas le faire depuis sa propre vue de commande.',
                 ],
 
                 'cancel' => 'Annuler',

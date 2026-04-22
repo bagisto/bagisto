@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Adres rozliczeniowy',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Pozycje rezerwacji nie zostaną anulowane',
-                    'description' => 'To zamówienie zawiera produkty rezerwacyjne oznaczone jako nieanulowalne. Anulowanie zamówienia spowoduje anulowanie jedynie pozostałych pozycji; pozycje rezerwacji pozostaną aktywne. Skontaktuj się z pomocą techniczną, jeśli potrzebujesz pomocy z pozycjami rezerwacji.',
+                    'title' => 'Nieanulowalne pozycje rezerwacji',
+                    'description' => 'To zamówienie zawiera produkty rezerwacyjne skonfigurowane jako nieanulowalne dla klientów. Jako administrator nadal możesz je anulować — klient nie może tego zrobić ze swojego własnego widoku zamówienia.',
                 ],
 
                 'cancel' => 'Anuluj',

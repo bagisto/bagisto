@@ -119,11 +119,40 @@ class OrderItem extends Model implements OrderItemContract
     }
 
     /**
-     * Checks if new cancel is allow or not
+     * Checks if this item can be cancelled.
+     *
+     * @param  bool  $force  When true, customer-facing cancellation policies
+     *                       are ignored (admin override). Quantity/state
+     *                       checks still apply.
      */
-    public function canCancel(): bool
+    public function canCancel(bool $force = false): bool
     {
-        return $this->qty_to_cancel > 0;
+        if ($this->qty_to_cancel <= 0) {
+            return false;
+        }
+
+        return $force || $this->isCancelableByCustomer();
+    }
+
+    /**
+     * Checks whether this item respects customer-facing cancellation policies.
+     * Returns false when a per-item restriction is in effect (currently only
+     * the booking `allow_cancellation` snapshot); returns true otherwise.
+     *
+     * Future item types that introduce their own restrictions should extend
+     * this method — all cancel call sites flow through it, so adding a case
+     * here updates every consumer at once.
+     */
+    public function isCancelableByCustomer(): bool
+    {
+        if (
+            $this->booking
+            && ! $this->booking->allow_cancellation
+        ) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

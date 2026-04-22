@@ -82,12 +82,12 @@
         </div>
 
         @php
-            $hasNonCancelableBooking = $order->items->contains(
-                fn ($item) => $item->booking && ! $item->booking->allow_cancellation
+            $hasCustomerRestrictedItem = $order->items->contains(
+                fn ($item) => ! $item->isCancelableByCustomer()
             );
         @endphp
 
-        @if ($hasNonCancelableBooking)
+        @if ($hasCustomerRestrictedItem)
             <div class="mt-4 flex items-start gap-3 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
                 <span class="icon-warning mt-0.5 text-lg"></span>
 

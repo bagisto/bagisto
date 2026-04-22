@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Alamat Penagihan',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Item Pemesanan Tidak Akan Dibatalkan',
-                    'description' => 'Pesanan ini berisi produk pemesanan yang ditandai sebagai tidak dapat dibatalkan. Membatalkan pesanan hanya akan membatalkan item yang tersisa; item pemesanan akan tetap aktif. Silakan hubungi dukungan jika Anda memerlukan bantuan dengan item pemesanan.',
+                    'title' => 'Item Pemesanan Tidak Dapat Dibatalkan',
+                    'description' => 'Pesanan ini berisi produk pemesanan yang dikonfigurasi sebagai tidak dapat dibatalkan untuk pelanggan. Sebagai admin, Anda tetap dapat membatalkannya — pelanggan diblokir untuk melakukannya dari tampilan pesanan mereka sendiri.',
                 ],
 
                 'cancel' => 'Batalkan',

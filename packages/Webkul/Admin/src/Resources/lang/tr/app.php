@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Fatura Adresi',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Rezervasyon öğeleri iptal edilmeyecek',
-                    'description' => 'Bu sipariş, iptal edilemez olarak işaretlenmiş rezervasyon ürünleri içerir. Siparişi iptal etmek yalnızca kalan öğeleri iptal eder; rezervasyon öğeleri aktif kalacaktır. Rezervasyon öğeleriyle ilgili yardıma ihtiyacınız varsa lütfen destek ile iletişime geçin.',
+                    'title' => 'İptal Edilemeyen Rezervasyon Öğeleri',
+                    'description' => 'Bu sipariş, müşteriler için iptal edilemez olarak yapılandırılmış rezervasyon ürünleri içerir. Yönetici olarak bunları yine de iptal edebilirsiniz — müşteri kendi sipariş görünümünden bunu yapamaz.',
                 ],
 
                 'cancel' => 'İptal',

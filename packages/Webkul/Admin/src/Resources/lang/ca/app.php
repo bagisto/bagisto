@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Adreça de Facturació',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Els articles de reserva no seran cancel·lats',
-                    'description' => 'Aquesta comanda conté productes de reserva marcats com a no cancel·lables. Cancel·lar la comanda només cancel·larà la resta d\'articles; els articles de reserva es mantindran actius. Si us plau, contacteu amb el suport si necessiteu ajuda amb els articles de reserva.',
+                    'title' => 'Articles de reserva no cancel·lables',
+                    'description' => 'Aquesta comanda conté productes de reserva configurats com a no cancel·lables per als clients. Com a administrador encara els podeu cancel·lar — el client té bloquejada aquesta opció a la seva pròpia vista de comanda.',
                 ],
 
                 'cancel' => 'Cancel·lar',

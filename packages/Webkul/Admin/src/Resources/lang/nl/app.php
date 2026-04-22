@@ -350,8 +350,8 @@ return [
                 'billing-address' => 'Factuuradres',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Boekingsitems worden niet geannuleerd',
-                    'description' => 'Deze bestelling bevat boekingsproducten die als niet-annuleerbaar zijn gemarkeerd. Bij annulering worden alleen de resterende items geannuleerd; boekingsitems blijven actief. Neem contact op met de ondersteuning als u hulp nodig heeft met de boekingsitems.',
+                    'title' => 'Niet-annuleerbare boekingsitems',
+                    'description' => 'Deze bestelling bevat boekingsproducten die als niet-annuleerbaar zijn geconfigureerd voor klanten. Als beheerder kunt u ze nog steeds annuleren — de klant kan dit niet doen vanuit zijn eigen bestelweergave.',
                 ],
 
                 'cancel' => 'Annuleren',
