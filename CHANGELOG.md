@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Added Booking product support to the DataTransfer (import) package. Booking products can now be imported via CSV/XLS/XLSX/XML using a new `booking_options` column that follows the existing pipe/key=value convention (same pattern as `bundle_options` / `configurable_variants`). The column encodes the product-level config, type-specific config, and slot or ticket records in pipe-separated sections. All five booking subtypes are supported: default (one/many), appointment, event (with tickets + translations), rental (daily/hourly), and table. Updated the sample product files in all four formats with one example per booking subtype.
+
 - #11258 [security] - Fixed user enumeration vulnerability (CWE-204) in the customer resend-verification endpoint where a missing null-check leaked email existence via differential HTTP responses. Added rate limiting on the route.
 
 - #11273 [fixed] - Reworked the Sales → Booking → Calendar event detail modal to focus on booking information. Removed the ordered amount (Price), added the product name, and now reuses the same booking attributes (From/Till, Location, Ticket, Number of Bookings, etc.) that are shown in the cart and order views — rendered in the same logical order (When → Where → What → How many). The underlying booking query no longer pulls the grand total and now joins `order_items.additional` and the localized product name.

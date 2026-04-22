@@ -16,6 +16,7 @@ use Intervention\Image\ImageManager;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeOptionRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Rules\Decimal;
@@ -72,6 +73,11 @@ class Importer extends AbstractImporter
      * Product type grouped
      */
     const PRODUCT_TYPE_GROUPED = 'grouped';
+
+    /**
+     * Product type booking
+     */
+    const PRODUCT_TYPE_BOOKING = 'booking';
 
     /**
      * Error code for invalid product type
@@ -193,6 +199,7 @@ class Importer extends AbstractImporter
         'configurable_variants',
         'bundle_options',
         'associated_skus',
+        'booking_options',
     ];
 
     /**
@@ -218,6 +225,7 @@ class Importer extends AbstractImporter
         protected ProductBundleOptionProductRepository $productBundleOptionProductRepository,
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
+        protected BookingProductRepository $bookingProductRepository,
         protected SKUStorage $skuStorage
     ) {
         parent::__construct($importBatchRepository);
@@ -653,6 +661,8 @@ class Importer extends AbstractImporter
 
         $bundleOptions = [];
 
+        $bookingData = [];
+
         $links = [];
 
         foreach ($batch->data as $rowData) {
@@ -672,6 +682,11 @@ class Importer extends AbstractImporter
             $this->prepareBundleOptions($rowData, $bundleOptions);
 
             /**
+             * Prepare booking data
+             */
+            $this->prepareBookingData($rowData, $bookingData);
+
+            /**
              * Prepare products association for related, cross sell and up sell
              */
             $this->prepareLinks($rowData, $links);
@@ -682,6 +697,8 @@ class Importer extends AbstractImporter
         $this->saveGroupAssociations($groupAssociations);
 
         $this->saveBundleOptions($bundleOptions);
+
+        $this->saveBookingData($bookingData);
 
         $this->saveLinks($links);
 
@@ -835,6 +852,14 @@ class Importer extends AbstractImporter
                     $productIdsToIndex = [
                         ...$associatedProductIds,
                         ...$productIdsToIndex,
+                    ];
+
+                    break;
+
+                case self::PRODUCT_TYPE_BOOKING:
+                    $productIdsToIndex = [
+                        ...$productIdsToIndex,
+                        ...$productIds,
                     ];
 
                     break;
@@ -1814,6 +1839,295 @@ class Importer extends AbstractImporter
                 ],
             );
         }
+    }
+
+    /**
+     * Prepare booking data from current batch.
+     * The `booking_options` column uses the same pipe/key=value convention as bundle_options.
+     *
+     * Layout (pipe-separated sections):
+     *  Section A (required, first): product-level config
+     *      type=default|appointment|event|rental|table,qty=<int>,location=<text>,
+     *      show_location=0|1,available_every_week=0|1,
+     *      available_from=YYYY-MM-DD[ HH:MM:SS],available_to=YYYY-MM-DD[ HH:MM:SS],
+     *      allow_cancellation=0|1
+     *
+     *  Section B (optional, one record): type-specific config
+     *      For default: booking_type=one|many,duration=<int>,break_time=<int>
+     *      For appointment: duration=<int>,break_time=<int>,same_slot_all_days=0|1
+     *      For table: price_type=table|guest,guest_limit=<int>,duration=<int>,
+     *                 break_time=<int>,prevent_scheduling_before=<int>,same_slot_all_days=0|1
+     *      For rental: renting_type=daily|hourly|daily_hourly,daily_price=<dec>,
+     *                  hourly_price=<dec>,same_slot_all_days=0|1
+     *      (No separate config record for event.)
+     *
+     *  Section C+ (optional, repeating): slot or ticket records
+     *      Slot: day=<0-6|all>,from=HH:MM,to=HH:MM[,status=0|1]
+     *      One-booking-many-days slot: from_day=<0-6>,from=HH:MM,to_day=<0-6>,to=HH:MM
+     *      Event ticket: ticket=<ref>,name=<text>,qty=<int>,price=<dec>[,special_price=<dec>,
+     *                    special_price_from=YYYY-MM-DD,special_price_to=YYYY-MM-DD,description=<text>]
+     */
+    public function prepareBookingData(array $rowData, array &$bookingData): void
+    {
+        if (
+            ($rowData['type'] ?? null) != self::PRODUCT_TYPE_BOOKING
+            || empty($rowData['booking_options'])
+        ) {
+            return;
+        }
+
+        $sections = explode('|', $rowData['booking_options']);
+
+        if (empty($sections)) {
+            return;
+        }
+
+        parse_str(str_replace(',', '&', array_shift($sections)), $config);
+
+        if (empty($config['type'])) {
+            return;
+        }
+
+        $entry = [
+            'type' => $config['type'],
+            'qty' => (int) ($config['qty'] ?? 0),
+            'location' => $config['location'] ?? null,
+            'show_location' => ! empty($config['show_location']) ? 1 : 0,
+            'available_every_week' => ! empty($config['available_every_week']) ? 1 : 0,
+            'available_from' => $config['available_from'] ?? null,
+            'available_to' => $config['available_to'] ?? null,
+            'allow_cancellation' => array_key_exists('allow_cancellation', $config)
+                ? (! empty($config['allow_cancellation']) ? 1 : 0)
+                : 1,
+            'type_config' => [],
+            'slots_raw' => [],
+            'tickets_raw' => [],
+        ];
+
+        if ($entry['type'] !== 'event' && ! empty($sections)) {
+            parse_str(str_replace(',', '&', array_shift($sections)), $typeConfig);
+
+            $entry['type_config'] = $typeConfig;
+        }
+
+        foreach ($sections as $section) {
+            parse_str(str_replace(',', '&', $section), $record);
+
+            if (empty($record)) {
+                continue;
+            }
+
+            if ($entry['type'] === 'event' && isset($record['ticket'])) {
+                $entry['tickets_raw'][] = $record;
+            } else {
+                $entry['slots_raw'][] = $record;
+            }
+        }
+
+        $bookingData[$rowData['sku']] = $entry;
+    }
+
+    /**
+     * Save booking data from current batch.
+     */
+    public function saveBookingData(array &$bookingData): void
+    {
+        if (empty($bookingData)) {
+            return;
+        }
+
+        foreach ($bookingData as $sku => $entry) {
+            $product = $this->skuStorage->get($sku);
+
+            if (! $product) {
+                continue;
+            }
+
+            $data = [
+                'type' => $entry['type'],
+                'qty' => $entry['qty'],
+                'location' => $entry['location'],
+                'show_location' => $entry['show_location'],
+                'available_every_week' => $entry['available_every_week'],
+                'available_from' => $entry['available_from'],
+                'available_to' => $entry['available_to'],
+                'allow_cancellation' => $entry['allow_cancellation'],
+                'product_id' => $product['id'],
+            ];
+
+            $this->mergeBookingTypeData($data, $entry);
+
+            $existing = $this->bookingProductRepository->findOneByField('product_id', $product['id']);
+
+            if ($existing) {
+                $this->bookingProductRepository->update($data, $existing->id);
+            } else {
+                $this->bookingProductRepository->create($data);
+            }
+        }
+    }
+
+    /**
+     * Merge type-specific config (slots/tickets) into the booking data payload.
+     */
+    private function mergeBookingTypeData(array &$data, array $entry): void
+    {
+        $type = $entry['type'];
+        $typeConfig = $entry['type_config'] ?? [];
+        $slotsRaw = $entry['slots_raw'] ?? [];
+
+        switch ($type) {
+            case 'default':
+                $data['booking_type'] = $typeConfig['booking_type'] ?? 'many';
+                $data['duration'] = (int) ($typeConfig['duration'] ?? 0);
+                $data['break_time'] = (int) ($typeConfig['break_time'] ?? 0);
+                $data['slots'] = $this->buildSlotsMatrix($slotsRaw, $data['booking_type'] === 'one');
+
+                break;
+
+            case 'appointment':
+                $data['duration'] = (int) ($typeConfig['duration'] ?? 0);
+                $data['break_time'] = (int) ($typeConfig['break_time'] ?? 0);
+                $data['same_slot_all_days'] = ! empty($typeConfig['same_slot_all_days']) ? 1 : 0;
+                $data['slots'] = $this->buildSlotsMatrix($slotsRaw, false, (bool) $data['same_slot_all_days']);
+
+                break;
+
+            case 'table':
+                $data['price_type'] = $typeConfig['price_type'] ?? 'guest';
+                $data['guest_limit'] = (int) ($typeConfig['guest_limit'] ?? 0);
+                $data['duration'] = (int) ($typeConfig['duration'] ?? 0);
+                $data['break_time'] = (int) ($typeConfig['break_time'] ?? 0);
+                $data['prevent_scheduling_before'] = (int) ($typeConfig['prevent_scheduling_before'] ?? 0);
+                $data['same_slot_all_days'] = ! empty($typeConfig['same_slot_all_days']) ? 1 : 0;
+                $data['slots'] = $this->buildSlotsMatrix($slotsRaw, false, (bool) $data['same_slot_all_days']);
+
+                break;
+
+            case 'rental':
+                $data['renting_type'] = $typeConfig['renting_type'] ?? 'daily';
+                $data['daily_price'] = (float) ($typeConfig['daily_price'] ?? 0);
+                $data['hourly_price'] = (float) ($typeConfig['hourly_price'] ?? 0);
+                $data['same_slot_all_days'] = ! empty($typeConfig['same_slot_all_days']) ? 1 : 0;
+                $data['slots'] = $this->buildSlotsMatrix($slotsRaw, false, (bool) $data['same_slot_all_days']);
+
+                break;
+
+            case 'event':
+                $data['tickets'] = $this->buildTickets($entry['tickets_raw'] ?? []);
+
+                break;
+        }
+    }
+
+    /**
+     * Convert slot records into the structure expected by the booking repository.
+     *
+     *  - For "one booking for many days" (default type), returns a flat list of
+     *    `[from_day, from, to_day, to]` entries.
+     *  - For `same_slot_all_days`, returns a flat list of `[from, to]` entries.
+     *  - Otherwise, returns a 7-index array keyed by weekday (0=Sun..6=Sat).
+     *    `day=all` fans the record out to all 7 weekdays.
+     */
+    private function buildSlotsMatrix(array $slotsRaw, bool $isOneForMany, bool $sameSlotAllDays = false): array
+    {
+        if ($isOneForMany) {
+            $slots = [];
+
+            foreach ($slotsRaw as $raw) {
+                if (! isset($raw['from_day'], $raw['to_day'], $raw['from'], $raw['to'])) {
+                    continue;
+                }
+
+                $slots[] = [
+                    'from_day' => (int) $raw['from_day'],
+                    'from' => $raw['from'],
+                    'to_day' => (int) $raw['to_day'],
+                    'to' => $raw['to'],
+                ];
+            }
+
+            return $slots;
+        }
+
+        if ($sameSlotAllDays) {
+            $slots = [];
+
+            foreach ($slotsRaw as $raw) {
+                if (! isset($raw['from'], $raw['to'])) {
+                    continue;
+                }
+
+                $slots[] = [
+                    'from' => $raw['from'],
+                    'to' => $raw['to'],
+                ];
+            }
+
+            return $slots;
+        }
+
+        $slots = [];
+
+        foreach ($slotsRaw as $raw) {
+            if (! isset($raw['from'], $raw['to'])) {
+                continue;
+            }
+
+            $days = isset($raw['day']) && $raw['day'] === 'all'
+                ? range(0, 6)
+                : [(int) ($raw['day'] ?? 0)];
+
+            foreach ($days as $day) {
+                $count = isset($slots[$day]) ? count($slots[$day]) : 0;
+
+                $entry = [
+                    'id' => $day.'_slot_'.$count,
+                    'from' => $raw['from'],
+                    'to' => $raw['to'],
+                ];
+
+                if (array_key_exists('status', $raw)) {
+                    $entry['status'] = (int) $raw['status'];
+                } else {
+                    $entry['status'] = 1;
+                }
+
+                $slots[$day][] = $entry;
+            }
+        }
+
+        ksort($slots);
+
+        return $slots;
+    }
+
+    /**
+     * Convert ticket records into the structure expected by the booking repository.
+     */
+    private function buildTickets(array $ticketsRaw): array
+    {
+        $tickets = [];
+
+        $localeCode = core()->getCurrentLocale()?->code ?? config('app.fallback_locale');
+
+        foreach ($ticketsRaw as $raw) {
+            $ref = $raw['ticket'] ?? count($tickets);
+
+            $tickets['ticket_'.$ref] = [
+                'qty' => (int) ($raw['qty'] ?? 0),
+                'price' => (float) ($raw['price'] ?? 0),
+                'special_price' => isset($raw['special_price']) ? (float) $raw['special_price'] : null,
+                'special_price_from' => $raw['special_price_from'] ?? null,
+                'special_price_to' => $raw['special_price_to'] ?? null,
+                $localeCode => [
+                    'name' => $raw['name'] ?? '',
+                    'description' => $raw['description'] ?? '',
+                ],
+            ];
+        }
+
+        return $tickets;
     }
 
     /**
