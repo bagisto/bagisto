@@ -216,6 +216,22 @@ return [
                         'none' => 'None',
                         'total-amount' => 'Total Amount',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Loading booking configuration…',
+                        'config-missing' => 'Booking configuration is missing for this product.',
+                        'date' => 'Date',
+                        'date-from' => 'From Date',
+                        'date-to' => 'To Date',
+                        'slot' => 'Slot',
+                        'select-slot' => 'Select a slot',
+                        'no-slots-available' => 'No slots available for the selected date',
+                        'note' => 'Note',
+                        'quantity' => 'Quantity',
+                        'renting-type' => 'Renting Type',
+                        'daily' => 'Daily',
+                        'hourly' => 'Hourly',
+                    ],
                 ],
 
                 'cart' => [

@@ -52,6 +52,14 @@ class Booking extends AbstractType
     protected $isStockable = false;
 
     /**
+     * Booking products require slot/ticket/date options before they can be
+     * added to the cart.
+     *
+     * @var bool
+     */
+    protected $canBeAddedToCartWithoutOptions = false;
+
+    /**
      * Create a new product type instance.
      *
      * @return void
