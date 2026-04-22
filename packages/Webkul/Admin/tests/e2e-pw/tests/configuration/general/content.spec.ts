@@ -3,9 +3,7 @@ import { generateHostname, generateName } from "../../../utils/faker";
 
 test.describe("content configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        /**
-         * Navigate to the configuration page.
-         */
+
         await adminPage.goto("admin/configuration/general/content");
     });
 
@@ -26,17 +24,10 @@ test.describe("content configuration", () => {
             )
             .fill(generateHostname());
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 
     test("should add css and javascript", async ({ adminPage }) => {
-        /**
-         * Custom CSS and Javascript.
-         */
         const cssCode = `.test {\n  display: flex;\n  justify-content: center;\n}`;
         const jsCode = `document.addEventListener('DOMContentLoaded', () => {\n  console.log('JavaScript added successfully');\n});`;
 
@@ -51,10 +42,6 @@ test.describe("content configuration", () => {
             )
             .fill(jsCode);
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 });

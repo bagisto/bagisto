@@ -1,6 +1,6 @@
 import { test, expect } from "../setup";
 import { addWishlist, loginAsCustomer } from "../utils/customer";
-import { ProductCreation } from "../pages/product";
+import { ProductCreation } from "../pages/admin/catalog/products";
 
 test.beforeAll("should create simple product to add in wishlist", async ({
     adminPage,

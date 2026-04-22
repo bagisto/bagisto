@@ -2,16 +2,10 @@ import { test, expect } from '../../../setup';
 import { generateName, generateDescription, generateRandomNumericString } from '../../../utils/faker';
 
 test.describe('shipping methods configuration', () => {
-    /**
-     * Navigate to the configuration page.
-     */
     test.beforeEach(async ({ adminPage }) => {
         await adminPage.goto('admin/configuration/sales/carriers');
     });
 
-    /**
-     * Update the Free Shipping Method Configuration.
-     */
     test('should configure the free shipping method', async ({ adminPage }) => {
         await adminPage.fill('textarea[name="sales[carriers][free][description]"]', generateDescription(200));
 
@@ -24,17 +18,9 @@ test.describe('shipping methods configuration', () => {
         // }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
     });
 
-
-    /**
-     * Update the Flat Rate Shipping Configuration.
-     */
     test('should configure the flat rate shipping method', async ({ adminPage }) => {
         await adminPage.fill('textarea[name="sales[carriers][free][description]"]', generateDescription(200));
 
@@ -53,10 +39,6 @@ test.describe('shipping methods configuration', () => {
         // }
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
-         await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
+        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
     });
 });

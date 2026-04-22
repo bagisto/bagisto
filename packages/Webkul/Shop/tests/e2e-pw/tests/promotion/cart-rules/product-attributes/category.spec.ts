@@ -1,7 +1,9 @@
 import { test } from "../../../../setup";
 import { expect } from "@playwright/test";
-import { ProductCreation } from "../../../../pages/product";
-import { CreateRules } from "../../../../pages/rules";
+import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
@@ -22,8 +24,8 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
 test.afterEach(
     "should delete the created product and rule",
     async ({ adminPage }) => {
-        const createRules = new CreateRules(adminPage);
-        await createRules.deleteRuleAndProduct();
+        const ruleDeletePage = new RuleDeletePage(adminPage);
+        await ruleDeletePage.deleteRuleAndProduct();
     },
 );
 
@@ -32,15 +34,16 @@ test.describe("cart rules", () => {
         test("should apply coupon when category of product condition is -> contains", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|category_ids",
                 operator: "{}",
                 checkboxSelect: "Mens",
             });
-            await createRules.saveCartRule();
+            await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
             await page
                 .locator("span.cursor-pointer.icon-sort-right")
@@ -66,21 +69,22 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
 
-            await createRules.applyCoupon();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when category of product condition is -> does not contains", async ({
             page,
         }) => {
-            const createRules = new CreateRules(page);
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
                 attribute: "product|category_ids",
                 operator: "!{}",
                 checkboxSelect: "Mens",
             });
-            await createRules.saveCartRule();
+            await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
             await page
                 .locator("span.cursor-pointer.icon-sort-right")
@@ -106,7 +110,7 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
 
-            await createRules.applyCoupon();
+            await ruleApplyPage.applyCoupon();
         });
     });
 });

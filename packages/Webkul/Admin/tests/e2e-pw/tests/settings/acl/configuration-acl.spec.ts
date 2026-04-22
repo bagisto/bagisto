@@ -1,5 +1,5 @@
 import { test } from "../../../setup";
-import { ACLManagement } from "../../../pages/acl";
+import { ACLManagement } from "../../../pages/admin/acl/index";
 
 test.describe("configuration acl", () => {
     test("should create custom role with configuration permission", async ({
