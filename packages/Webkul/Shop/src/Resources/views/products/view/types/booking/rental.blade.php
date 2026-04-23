@@ -314,15 +314,35 @@
                 },
 
                 disabledDates() {
-                    const validWeekdays = this.availability?.valid_weekdays ?? [0, 1, 2, 3, 4, 5, 6];
+                    const disabledDates = this.availability?.disabled_dates ?? [];
 
-                    if (validWeekdays.length === 7) {
-                        return [];
+                    const predicates = [];
+
+                    /**
+                     * The `valid_weekdays` array reflects the days that have
+                     * *hourly* slot configuration. For a daily rental, every
+                     * day within the availability window should be selectable
+                     * regardless of the hourly schedule, so we only apply the
+                     * weekday filter when the user is actually booking an
+                     * hourly slot.
+                     */
+                    const activeType = this.renting_type === 'daily_hourly'
+                        ? this.sub_renting_type
+                        : this.renting_type;
+
+                    if (activeType === 'hourly') {
+                        const validWeekdays = this.availability?.valid_weekdays ?? [0, 1, 2, 3, 4, 5, 6];
+
+                        if (validWeekdays.length < 7) {
+                            predicates.push((date) => ! validWeekdays.includes(date.getDay()));
+                        }
                     }
 
-                    return [
-                        (date) => ! validWeekdays.includes(date.getDay()),
-                    ];
+                    if (disabledDates.length) {
+                        predicates.push(...disabledDates);
+                    }
+
+                    return predicates;
                 },
             },
 

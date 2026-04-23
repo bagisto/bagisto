@@ -318,6 +318,7 @@
                                             <div class="flex items-center gap-2.5 max-md:mt-2.5">
                                                 <x-shop::quantity-changer
                                                     v-if="item.can_change_qty"
+                                                    ::key="'qty-' + item.id + '-' + refreshKey"
                                                     class="flex max-w-max items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-md:gap-x-1.5 max-md:px-1 max-md:py-0.5"
                                                     name="quantity"
                                                     ::value="item?.quantity"
@@ -456,6 +457,8 @@
 
                 data() {
                     return  {
+                        refreshKey: 0,
+
                         cart: [],
 
                         allSelected: false,
@@ -475,7 +478,7 @@
                         isLoading: true,
 
                         isStoring: false,
-                    }
+                    };
                 },
 
                 mounted() {
@@ -522,19 +525,41 @@
 
                         this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty: this.applied.quantity })
                             .then(response => {
-                                if (response.data.message) {
+                                if (response.data.data?.items !== undefined) {
                                     this.cart = response.data.data;
 
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 } else {
-                                    this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                                    /**
+                                     * On failure the endpoint returns `{ data: { message } }`
+                                     * — the server-thrown reason is inside `data`, not at
+                                     * the top level. Read from `data.message` first so the
+                                     * flash actually shows (e.g. "inventory-warning").
+                                     */
+                                    this.$emitter.emit('add-flash', {
+                                        type: 'warning',
+                                        message: response.data.data?.message || response.data.message,
+                                    });
                                 }
 
                                 this.isStoring = false;
 
+                                /**
+                                 * Bump the key to force the quantity-changers to
+                                 * remount from the server's current values. On a
+                                 * rejected update the `value` prop stays the same,
+                                 * so the component's internal watch never fires
+                                 * and the locally-incremented count would stick
+                                 * on screen otherwise.
+                                 */
+                                this.applied.quantity = {};
+                                this.refreshKey++;
                             })
                             .catch(error => {
                                 this.isStoring = false;
+
+                                this.applied.quantity = {};
+                                this.refreshKey++;
                             });
                     },
 
