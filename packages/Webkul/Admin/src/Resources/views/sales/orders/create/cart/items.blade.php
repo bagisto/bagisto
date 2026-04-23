@@ -294,7 +294,10 @@
                                         @{{ "@lang('admin::app.sales.orders.create.cart.items.search.sku')".replace(':sku', product.sku) }}
                                     </p>
 
-                                    <p class="text-green-600">
+                                    <p
+                                        class="text-green-600"
+                                        v-if="product.type !== 'booking'"
+                                    >
                                         @{{ "@lang('admin::app.sales.orders.create.cart.items.search.available-qty')".replace(':qty', availbleQty(product)) }}
                                     </p>
                                 </div>
