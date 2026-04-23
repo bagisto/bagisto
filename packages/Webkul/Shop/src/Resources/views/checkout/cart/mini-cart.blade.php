@@ -202,6 +202,7 @@
                                 <!-- Cart Item Quantity Changer -->
                                 <x-shop::quantity-changer
                                     v-if="item.can_change_qty"
+                                    ::key="'qty-' + item.id + '-' + refreshKey"
                                     class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
                                     name="quantity"
                                     ::value="item?.quantity"
@@ -383,6 +384,8 @@
 
             data() {
                 return  {
+                    refreshKey: 0,
+
                     cart: null,
 
                     isLoading:false,
@@ -391,7 +394,7 @@
                         prices: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_prices') }}",
                         subtotal: "{{ core()->getConfigData('sales.taxes.shopping_cart.display_subtotal') }}",
                     },
-                }
+                };
             },
 
             mounted() {
@@ -425,14 +428,44 @@
 
                     this.$axios.put('{{ route('shop.api.checkout.cart.update') }}', { qty })
                         .then(response => {
-                            if (response.data.message) {
-                                this.cart = response.data.data;
+                            this.isLoading = false;
+
+                            /**
+                             * The update endpoint returns `{ data: CartResource, message }`
+                             * on success and only `{ message }` on failure (e.g.
+                             * inventory-warning). Only treat the payload as a cart when
+                             * it has an `items` field — otherwise surface the server
+                             * message as a warning flash.
+                             */
+                            const payload = response.data.data;
+
+                            if (payload && payload.items !== undefined) {
+                                this.cart = payload;
                             } else {
-                                this.$emitter.emit('add-flash', { type: 'warning', message: response.data.data.message });
+                                this.$emitter.emit('add-flash', {
+                                    type: 'warning',
+                                    message: payload?.message || response.data.message,
+                                });
                             }
 
+                            /**
+                             * Bump the key so the quantity-changer remounts from the
+                             * current server value even when the update was rejected
+                             * (in which case `value` didn't change and the component's
+                             * `value` watcher wouldn't fire).
+                             */
+                            this.refreshKey++;
+                        })
+                        .catch(error => {
                             this.isLoading = false;
-                        }).catch(error => this.isLoading = false);
+
+                            this.$emitter.emit('add-flash', {
+                                type: 'error',
+                                message: error.response?.data?.message || error.message,
+                            });
+
+                            this.refreshKey++;
+                        });
                 },
 
                 removeItem(itemId) {
