@@ -104,7 +104,7 @@ test.describe("cart rules", () => {
             await ruleCreatePage.addCondition({
                 attribute: "product|price",
                 operator: ">",
-                value: "198",
+                value: "100",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
