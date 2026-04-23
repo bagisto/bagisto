@@ -139,10 +139,13 @@ export class ProductEditPage extends BasePage {
         await this.saveButton.click();
     }
 
-    async saveAndVerifyUpdated() {
+    async saveAndVerifyUpdated(redirectToList: boolean = true) {
         await this.saveProduct();
         await this.verifyProductUpdated();
-        await this.visit("admin/catalog/products");
+
+        if (redirectToList) {
+            await this.visit("admin/catalog/products");
+        }
     }
 
     async verifyProductUpdated() {
@@ -243,7 +246,7 @@ export class ProductEditPage extends BasePage {
             .contentFrame()
             .locator("html")
             .click();
-        await this.saveAndVerifyUpdated();
+        await this.saveAndVerifyUpdated(false);
     }
 
     async editDownloadableProduct() {

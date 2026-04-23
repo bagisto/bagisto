@@ -11,7 +11,6 @@ test.describe('promotion management', () => {
             await adminPage.fill('#name', generateName());
             await adminPage.fill('#description', generateDescription());
             await adminPage.click('div.secondary-button:has-text("Add Condition")');
-            await adminPage.waitForSelector('select[id="conditions[0][attribute]"]');
             await adminPage.selectOption('select[id="conditions[0][attribute]"]', 'product|name');
             await adminPage.waitForSelector('input[name="conditions[0][value]"]');
             await adminPage.fill('input[name="conditions[0][value]"]', generateName());
@@ -26,7 +25,7 @@ test.describe('promotion management', () => {
             await expect(toggleInput).toBeChecked();
             await adminPage.click('button.primary-button:has-text("Save Cart Rule")');
 
-            await expect(adminPage.getByText('Cart rule created successfully')).toBeVisible();
+            await expect(adminPage.getByText('Cart rule created successfully').first()).toBeVisible();
         });
 
         test('should edit a cart rule', async ({ adminPage }) => {
@@ -38,7 +37,7 @@ test.describe('promotion management', () => {
             await adminPage.waitForSelector('form[action*="/promotions/cart-rules/edit"]');
             await adminPage.click('button.primary-button:has-text("Save Cart Rule")');
 
-            await expect(adminPage.getByText('Cart rule updated successfully')).toBeVisible();
+            await expect(adminPage.getByText('Cart rule updated successfully').first()).toBeVisible();
         });
 
         test('should delete a cart rule', async ({ adminPage }) => {
@@ -59,7 +58,7 @@ test.describe('promotion management', () => {
                 console.error("Agree button not found or not visible.");
             }
 
-            await expect(adminPage.getByText('Cart Rule Deleted Successfully')).toBeVisible();
+            await expect(adminPage.getByText('Cart Rule Deleted Successfully').first()).toBeVisible();
         });
     });
 
@@ -71,7 +70,8 @@ test.describe('promotion management', () => {
             await adminPage.waitForSelector('form[action*="/promotions/catalog-rules/create"]');
             await adminPage.fill('#name', generateName());
             await adminPage.fill('#description', generateDescription());
-            await adminPage.waitForSelector('select[id="conditions[0][attribute]"]');
+            await adminPage.click('div.secondary-button:has-text("Add Condition")');
+            await adminPage.waitForTimeout(1000)
             await adminPage.selectOption('select[id="conditions[0][attribute]"]', 'product|name');
             await adminPage.waitForSelector('input[name="conditions[0][value]"]');
             await adminPage.fill('input[name="conditions[0][value]"]', generateName());
@@ -88,7 +88,7 @@ test.describe('promotion management', () => {
             await expect(toggleInput).toBeChecked();
 
             await adminPage.click('button.primary-button:has-text("Save Catalog Rule")');
-            await expect(adminPage.getByText('Catalog rule created successfully')).toBeVisible();
+            await expect(adminPage.getByText('Catalog rule created successfully').first()).toBeVisible();
         });
 
         test('should edit a catalog rule', async ({ adminPage }) => {
@@ -100,7 +100,7 @@ test.describe('promotion management', () => {
             await adminPage.waitForSelector('form[action*="/promotions/catalog-rules/edit"]');
             await adminPage.click('button.primary-button:has-text("Save Catalog Rule")');
 
-            await expect(adminPage.getByText('Catalog rule updated successfully')).toBeVisible();
+            await expect(adminPage.getByText('Catalog rule updated successfully').first()).toBeVisible();
         });
 
         test('should delete a catalog rule', async ({ adminPage }) => {
@@ -123,7 +123,7 @@ test.describe('promotion management', () => {
                 console.error("Agree button not found or not visible.");
             }
 
-            await expect(adminPage.getByText('Catalog rule deleted successfully')).toBeVisible();
+            await expect(adminPage.getByText('Catalog rule deleted successfully').first()).toBeVisible();
         });
     });
 });

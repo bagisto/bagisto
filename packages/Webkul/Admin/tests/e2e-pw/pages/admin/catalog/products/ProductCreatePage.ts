@@ -310,7 +310,6 @@ export class ProductCreatePage extends BasePage {
         };
 
         await this.createSimpleProduct(simpleProduct);
-        await this.createSimpleProduct(simpleProduct);
 
         await this.startProductCreation("grouped", "1");
         const productEditPage = new ProductEditPage(this.page);
