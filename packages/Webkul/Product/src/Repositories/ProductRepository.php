@@ -317,6 +317,31 @@ class ProductRepository extends Repository
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys($params));
 
             /**
+             * Range filter for price-type attributes other than the base `price`
+             * (e.g. special_price, cost, or user-defined price attributes).
+             */
+            foreach ($filterableAttributes as $priceAttribute) {
+                if (
+                    $priceAttribute->type !== AttributeTypeEnum::PRICE->value
+                    || $priceAttribute->code === 'price'
+                    || empty($params[$priceAttribute->code])
+                ) {
+                    continue;
+                }
+
+                $range = explode(',', $params[$priceAttribute->code]);
+                $alias = $priceAttribute->code.'_price_range_values';
+
+                $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $priceAttribute) {
+                    $join->on('products.id', '=', $alias.'.product_id')
+                        ->where($alias.'.attribute_id', $priceAttribute->id);
+                })->whereBetween($alias.'.float_value', [
+                    core()->convertToBasePrice(current($range)),
+                    core()->convertToBasePrice(end($range)),
+                ]);
+            }
+
+            /**
              * Filter the required attributes.
              */
             $attributes = $filterableAttributes->whereIn('code', [
@@ -362,12 +387,13 @@ class ProductRepository extends Repository
              * Filter the filterable attributes.
              */
             $attributes = $filterableAttributes->whereNotIn('code', [
-                'price',
                 'name',
                 'status',
                 'visible_individually',
                 'url_key',
-            ]);
+            ])->filter(function ($attribute) {
+                return $attribute->type !== AttributeTypeEnum::PRICE->value;
+            });
 
             /**
              * Filter query by attributes.
@@ -579,17 +605,43 @@ class ProductRepository extends Repository
             return $this->elasticSearchRepository->getMaxPrice($params);
         }
 
-        $customerGroup = $this->customerRepository->getCurrentGroup();
+        $attributeCode = $params['attribute_code'] ?? 'price';
 
-        $query = $this->model
-            ->leftJoin('product_price_indices', 'products.id', 'product_price_indices.product_id')
-            ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
-            ->where('product_price_indices.customer_group_id', $customerGroup->id);
+        if ($attributeCode === 'price') {
+            $customerGroup = $this->customerRepository->getCurrentGroup();
 
-        if (! empty($params['category_id'])) {
-            $query->where('product_categories.category_id', $params['category_id']);
+            $query = $this->model
+                ->leftJoin('product_price_indices', 'products.id', 'product_price_indices.product_id')
+                ->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
+                ->where('product_price_indices.customer_group_id', $customerGroup->id);
+
+            if (! empty($params['category_id'])) {
+                $query->where('product_categories.category_id', $params['category_id']);
+            }
+
+            return $query->max('min_price') ?? 0;
         }
 
-        return $query->max('min_price') ?? 0;
+        $attribute = $this->attributeRepository->findOneByField('code', $attributeCode);
+
+        if (
+            ! $attribute
+            || $attribute->type !== AttributeTypeEnum::PRICE->value
+        ) {
+            return 0;
+        }
+
+        $query = $this->model
+            ->leftJoin('product_attribute_values as attr_pav', function ($join) use ($attribute) {
+                $join->on('products.id', '=', 'attr_pav.product_id')
+                    ->where('attr_pav.attribute_id', $attribute->id);
+            });
+
+        if (! empty($params['category_id'])) {
+            $query->leftJoin('product_categories', 'products.id', 'product_categories.product_id')
+                ->where('product_categories.category_id', $params['category_id']);
+        }
+
+        return $query->max('attr_pav.float_value') ?? 0;
     }
 }
