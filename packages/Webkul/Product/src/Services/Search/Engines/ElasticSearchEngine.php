@@ -97,7 +97,11 @@ class ElasticSearchEngine implements SearchEngine
             $filters['filter'][]['term']['type'] = $params['type'];
         }
 
-        $customerGroupId = $this->customerRepository->getCurrentGroup()->id;
+        $attributeCode = $params['attribute_code'] ?? 'price';
+
+        $field = $attributeCode === 'price'
+            ? 'price_'.$this->customerRepository->getCurrentGroup()->id
+            : $attributeCode;
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
@@ -109,7 +113,7 @@ class ElasticSearchEngine implements SearchEngine
                 'aggs' => [
                     'max_price' => [
                         'max' => [
-                            'field' => 'price_'.$customerGroupId,
+                            'field' => $field,
                         ],
                     ],
                 ],
@@ -208,13 +212,15 @@ class ElasticSearchEngine implements SearchEngine
                 ];
 
             case AttributeTypeEnum::PRICE->value:
-                $customerGroup = $this->customerRepository->getCurrentGroup();
-
                 $range = explode(',', $params[$attribute->code]);
+
+                $field = $attribute->code === 'price'
+                    ? 'price_'.$this->customerRepository->getCurrentGroup()->id
+                    : $attribute->code;
 
                 return [
                     'range' => [
-                        $attribute->code.'_'.$customerGroup->id => [
+                        $field => [
                             'gte' => core()->convertToBasePrice(current($range)),
                             'lte' => core()->convertToBasePrice(end($range)),
                         ],

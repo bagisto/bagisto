@@ -314,6 +314,31 @@ class ProductRepository extends Repository
             $filterableAttributes = $this->attributeRepository->getProductDefaultAttributes(array_keys($params));
 
             /**
+             * Range filter for price-type attributes other than the base `price`
+             * (e.g. special_price, cost, or user-defined price attributes).
+             */
+            foreach ($filterableAttributes as $priceAttribute) {
+                if (
+                    $priceAttribute->type !== AttributeTypeEnum::PRICE->value
+                    || $priceAttribute->code === 'price'
+                    || empty($params[$priceAttribute->code])
+                ) {
+                    continue;
+                }
+
+                $range = explode(',', $params[$priceAttribute->code]);
+                $alias = $priceAttribute->code.'_price_range_values';
+
+                $qb->leftJoin('product_attribute_values as '.$alias, function ($join) use ($alias, $priceAttribute) {
+                    $join->on('products.id', '=', $alias.'.product_id')
+                        ->where($alias.'.attribute_id', $priceAttribute->id);
+                })->whereBetween($alias.'.float_value', [
+                    core()->convertToBasePrice(current($range)),
+                    core()->convertToBasePrice(end($range)),
+                ]);
+            }
+
+            /**
              * Filter the required attributes.
              */
             $attributes = $filterableAttributes->whereIn('code', [
@@ -359,12 +384,13 @@ class ProductRepository extends Repository
              * Filter the filterable attributes.
              */
             $attributes = $filterableAttributes->whereNotIn('code', [
-                'price',
                 'name',
                 'status',
                 'visible_individually',
                 'url_key',
-            ]);
+            ])->filter(function ($attribute) {
+                return $attribute->type !== AttributeTypeEnum::PRICE->value;
+            });
 
             /**
              * Filter query by attributes.

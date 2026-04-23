@@ -113,7 +113,10 @@ class CategoryController extends APIController
     {
         $maxPrice = $this->productRepository
             ->setSearchContext(SearchContextEnum::STOREFRONT)
-            ->getMaxPrice(['category_id' => $categoryId]);
+            ->getMaxPrice([
+                'category_id' => $categoryId,
+                'attribute_code' => request('attribute_code', 'price'),
+            ]);
 
         return new JsonResource([
             'max_price' => core()->convertPrice($maxPrice),
