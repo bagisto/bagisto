@@ -294,13 +294,26 @@
                 },
 
                 disabledDates() {
-                    const validWeekdays = this.config?.calendar?.valid_weekdays ?? [0, 1, 2, 3, 4, 5, 6];
                     const disabled = this.config?.calendar?.disabled_dates ?? [];
 
                     const predicates = [];
 
-                    if (validWeekdays.length < 7) {
-                        predicates.push((date) => ! validWeekdays.includes(date.getDay()));
+                    /**
+                     * For a rental product `valid_weekdays` reflects the days
+                     * that have *hourly* slot configuration. Daily rentals
+                     * don't depend on that schedule, so only apply the
+                     * weekday filter when the admin is configuring an hourly
+                     * slot. Non-rental types always use `valid_weekdays`.
+                     */
+                    const isRental = this.config?.type === 'rental';
+                    const applyWeekdays = ! isRental || this.rentingType === 'hourly';
+
+                    if (applyWeekdays) {
+                        const validWeekdays = this.config?.calendar?.valid_weekdays ?? [0, 1, 2, 3, 4, 5, 6];
+
+                        if (validWeekdays.length < 7) {
+                            predicates.push((date) => ! validWeekdays.includes(date.getDay()));
+                        }
                     }
 
                     if (disabled.length) {
