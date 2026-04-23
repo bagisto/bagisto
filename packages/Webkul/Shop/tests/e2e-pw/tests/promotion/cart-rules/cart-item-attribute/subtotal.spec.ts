@@ -56,7 +56,7 @@ test.describe("cart rules", () => {
             await ruleCreatePage.addCondition({
                 attribute: "cart_item|base_total",
                 operator: "!=",
-                value: "100",
+                value: "101",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
