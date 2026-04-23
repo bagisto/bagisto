@@ -1,16 +1,8 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products";
+import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { SimpleProductCheckout } from "../../pages/shop/checkout/product-types/SimpleProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-/**
- * =============================
- * SIMPLE PRODUCT CHECKOUT FLOW
- * =============================
- * This test suite covers:
- * 1. Creating a simple product from the admin panel.
- * 2. Completing checkout for the simple product.
- */
 test.describe("simple product checkout flow", () => {
     test("should create simple product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);

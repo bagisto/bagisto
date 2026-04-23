@@ -4,11 +4,8 @@ import {
     generateDescription,
     generatePhoneNumber,
 } from "../utils/faker";
-import { ProductCreation } from "../pages/admin/catalog/products";
+import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
 
-/**
- * Waiting time after cart operations to allow for UI updates.
- */
 const CART_WAITING_TIME = 2000;
 
 test.describe("cart management", () => {

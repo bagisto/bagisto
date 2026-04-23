@@ -1,5 +1,5 @@
 import { expect, test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -42,54 +42,6 @@ test.describe("cart rules", () => {
             await ruleApplyPage.applyCoupon();
             await ruleDeletePage.deleteRuleAndProduct();
         });
-
-        // test("should apply coupon when visible individually product condition is -> is equal to (no)", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "product|visible_individually",
-        //         operator: "==",
-        //         optionSelect: "0",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await page.goto("admin/catalog/products");
-        //     await page
-        //         .locator("span.cursor-pointer.icon-sort-right")
-        //         .nth(1)
-        //         .click();
-        //     await page.waitForLoadState("networkidle");
-        //     await page.locator(".peer.h-5").nth(2).click();
-        //     await page
-        //         .locator('button:has-text("Save Product")')
-        //         .first()
-        //         .click();
-        //     await expect(
-        //         page.getByText("Product updated successfully").first(),
-        //     ).toBeVisible();
-        //     await ruleCreatePage.applyCoupon();
-        //     await ruleDeletePage.deleteRuleAndProduct();
-        // });
-
-        // test("should apply coupon when visible individually product condition is -> is not equal to (yes)", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     const ruleApplyPage = new RuleApplyPage(page);
-        //     const ruleDeletePage = new RuleDeletePage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "product|visible_individually",
-        //         operator: "!=",
-        //         optionSelect: "1",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await ruleApplyPage.applyCoupon();
-        //     await ruleDeletePage.deleteRuleAndProduct();
-        // });
 
         test("should apply coupon when visible individually product condition is -> is not equal to (no)", async ({
             page,

@@ -34,8 +34,6 @@ export class ProductListPage extends BasePage {
         return this.page.locator('button.primary-button:has-text("Agree")');
     }
 
-
-
     async visit() {
         await super.visit("admin/catalog/products");
         await expect(this.createProductButton).toBeVisible();

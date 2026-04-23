@@ -1,19 +1,9 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products";
+import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 import { MultipleCheckout } from "../../pages/shop/checkout/MultipleCheckout";
 
-/**combination 
- * ===============================
- * MULTIPLE PRODUCT CHECKOUT FLOW
- * ===============================
- * This test suite covers:
- * 1. Checkout of multiple products combinations like Simple, Configurable, Group, Virtual, Booking and Bundle
- */
 test.describe("multiple types product combination checkout flow", () => {
-    /**
-     * Admin creates a all Products with basic details to checkout
-     */
     test("should create simple product to checkout", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
 
@@ -125,10 +115,6 @@ test.describe("multiple types product combination checkout flow", () => {
         });
     });
 
-    /**
-     * completes checkout of multiple products successfully
-     * Simple, Config, Booking, Virtual, Group and Bundle
-     */
     test("should allow customer to complete checkout for simple, configurable and virtual product successfully", async ({
         shopPage,
     }) => {

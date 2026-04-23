@@ -1,6 +1,6 @@
 import { test, expect } from "../setup";
 import { loginAsCustomer, addAddress, addWishlist } from "../utils/customer";
-import {loginAsAdmin} from "../utils/admin";
+import { loginAsAdmin } from "../utils/admin";
 import {
     generateFirstName,
     generateLastName,
@@ -8,15 +8,12 @@ import {
     generateEmail,
 } from "../utils/faker";
 import { downloadableOrder } from "../utils/order";
-import { ProductCreation } from "../pages/admin/catalog/products";
+import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
 import path from "path";
 import { fileURLToPath } from "url";
 import { generateName, generateDescription, generateSKU } from "../utils/faker";
 
 async function createSimpleProduct(adminPage) {
-    /**
-     * Main product data which we will use to create the product.
-     */
     const product = {
         name: `simple-${Date.now()}`,
         sku: generateSKU(),
@@ -27,9 +24,6 @@ async function createSimpleProduct(adminPage) {
         weight: "25",
     };
 
-    /**
-     * Reaching to the create product page.
-     */
     await loginAsAdmin(adminPage);
     await adminPage.goto("admin/catalog/products");
     await adminPage.waitForSelector(
@@ -37,88 +31,35 @@ async function createSimpleProduct(adminPage) {
     );
     await adminPage.getByRole("button", { name: "Create Product" }).click();
 
-    /**
-     * Opening create product form in modal.
-     */
     await adminPage.locator('select[name="type"]').selectOption("simple");
     await adminPage
         .locator('select[name="attribute_family_id"]')
         .selectOption("1");
     await adminPage.locator('input[name="sku"]').fill(generateSKU());
     await adminPage.getByRole("button", { name: "Save Product" }).click();
-
-    /**
-     * After creating the product, the page is redirected to the edit product page, where
-     * all the details need to be filled in.
-     */
     await adminPage.waitForSelector(
         'button.primary-button:has-text("Save Product")',
     );
-
-    /**
-     * Waiting for the main form to be visible.
-     */
     await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
-
-    /**
-     * General Section.
-     */
     await adminPage.locator("#product_number").fill(product.productNumber);
     await adminPage.locator("#name").fill(product.name);
     const name = await adminPage.locator('input[name="name"]').inputValue();
-
-    /**
-     * Description Section.
-     */
     await adminPage.fillInTinymce(
         "#short_description_ifr",
         product.shortDescription,
     );
     await adminPage.fillInTinymce("#description_ifr", product.description);
-
-    /**
-     * Meta Description Section.
-     */
     await adminPage.locator("#meta_title").fill(product.name);
     await adminPage.locator("#meta_keywords").fill(product.name);
     await adminPage.locator("#meta_description").fill(product.shortDescription);
-
-    /**
-     * Image Section.
-     */
-    // Will add images later.
-
-    /**
-     * Price Section.
-     */
     await adminPage.locator("#price").fill(product.price);
-
-    /**
-     * Shipping Section.
-     */
     await adminPage.locator("#weight").fill(product.weight);
-
-    /**
-     * Inventories Section.
-     */
     await adminPage.locator('input[name="inventories\\[1\\]"]').click();
     await adminPage.locator('input[name="inventories\\[1\\]"]').fill("5000");
-
-    /**
-     * Saving the product.
-     */
     await adminPage.getByRole("button", { name: "Save Product" }).click();
-
-    /**
-     * Expecting for the product to be saved.
-     */
     await expect(adminPage.locator("#app")).toContainText(
         /product updated successfully/i,
     );
-
-    /**
-     * Checking the product in the list.
-     */
     await adminPage.goto("admin/catalog/products");
     await expect(
         adminPage
@@ -127,23 +68,12 @@ async function createSimpleProduct(adminPage) {
     ).toBeVisible();
 }
 
- async function generateOrder(page) {
-    /**
-     * Customer login.
-     */
+async function generateOrder(page) {
     await loginAsCustomer(page);
-
-    /**
-     * Fill customer default address.
-     */
     await addAddress(page);
-
-    /**
-     * Go to the shop to buy a product.
-     */
     await page.goto("");
     await page.waitForLoadState("networkidle");
-        await page.getByPlaceholder("Search products here").fill("simple");
+    await page.getByPlaceholder("Search products here").fill("simple");
     await page.getByPlaceholder("Search products here").press("Enter");
     await page.getByRole("button", { name: "Add To Cart" }).first().click();
     await expect(page.locator("#app")).toContainText("Item Added Successfully");
@@ -152,30 +82,18 @@ async function createSimpleProduct(adminPage) {
     await page.getByRole("link", { name: "Continue to Checkout" }).click();
     await page
         .locator(
-            'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]'
+            'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]',
         )
         .nth(0)
         .click();
     await page.getByRole("button", { name: "Proceed" }).click();
     await page.waitForTimeout(2000);
-
-    /**
-     * Choose shipping method.
-     */
     await page.waitForSelector("text=Free Shipping");
     await page.getByText("Free Shipping").first().click();
     await page.waitForTimeout(2000);
-
-    /**
-     * Choose payment option.
-     */
     await page.waitForSelector("text=Cash On Delivery");
     await page.getByText("Cash On Delivery").first().click();
     await page.waitForTimeout(2000);
-
-    /**
-     * Place order.
-     */
     await page.getByRole("button", { name: "Place Order" }).click();
     await page.waitForTimeout(2000);
     await page.waitForSelector("text=Thank you for your order!");
@@ -210,9 +128,6 @@ function generateRandomDate() {
 test("should display correct message when email verfication is off", async ({
     page,
 }) => {
-    /**
-     * Customer registration
-     */
     const credentials = {
         firstName: generateFirstName(),
         lastName: generateLastName(),
@@ -277,9 +192,6 @@ test("should display correct message when email verfication is on", async ({
         page.locator("#app").getByText("Configuration saved successfully"),
     ).toBeVisible();
 
-    /**
-     * Customer registration
-     */
     const credentials = {
         firstName: generateFirstName(),
         lastName: generateLastName(),
@@ -324,9 +236,6 @@ test("should display correct message when email verfication is on", async ({
             .first(),
     ).toBeVisible();
 
-    /**
-     * turn off again email verfication for further tests
-     */
     await page.goto("admin/configuration/customer/settings");
     await page.waitForLoadState("networkidle");
     await page
@@ -363,9 +272,6 @@ test("should edit a profile", async ({ page }) => {
     await page
         .getByRole("textbox", { name: "Date of Birth" })
         .fill(generateRandomDate());
-    /**
-     * Upload profile image
-     */
     const profileImageInput = page.getByLabel("Add Image/Video");
     await profileImageInput.setInputFiles(imagePath);
     await page.getByRole("button", { name: "Save" }).click();
@@ -402,32 +308,18 @@ test("Should display profile photo after saving profile again without any change
     await page
         .getByRole("textbox", { name: "Date of Birth" })
         .fill(generateRandomDate());
-    /**
-     * Upload profile image
-     */
     const profileImageInput = page.getByLabel("Add Image/Video");
     await profileImageInput.setInputFiles(imagePath);
 
-    /**
-     * Save profile
-     */
     await page.getByRole("button", { name: "Save" }).click();
     await expect(
         page.getByText("Profile updated successfully").first(),
     ).toBeVisible();
-
-    /**
-     * Again save profile without any changes
-     */
     await page.getByRole("link", { name: "Edit" }).click();
     await page.getByRole("button", { name: "Save" }).click();
     await expect(
         page.getByText("Profile updated successfully").first(),
     ).toBeVisible();
-
-    /**
-     * Verify profile photo should be visible
-     */
     await page.getByRole("link", { name: "Edit" }).click();
     const uploadedImage = page.locator('img[alt="Uploaded Image"]');
 
@@ -436,15 +328,12 @@ test("Should display profile photo after saving profile again without any change
 
 test("should add an address", async ({ page }) => {
     await loginAsCustomer(page);
-
     await addAddress(page);
 });
 
 test("should edit an address", async ({ page }) => {
     await loginAsCustomer(page);
-
     await addAddress(page);
-
     await page.getByLabel("More Options").first().click();
     await page.getByRole("link", { name: "Edit" }).click();
     await page.getByPlaceholder("Company Name").click();
@@ -476,9 +365,7 @@ test("should edit an address", async ({ page }) => {
 
 test("should set the default address", async ({ page }) => {
     await loginAsCustomer(page);
-
     await addAddress(page);
-
     await page.getByLabel("More Options").first().click();
     await page.getByRole("button", { name: "Set as Default" }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
@@ -488,9 +375,7 @@ test("should set the default address", async ({ page }) => {
 
 test("should delete the address", async ({ page }) => {
     await loginAsCustomer(page);
-
     await addAddress(page);
-
     await page.getByLabel("More Options").first().click();
     await page.getByRole("link", { name: "Delete" }).click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
@@ -501,150 +386,146 @@ test("should delete the address", async ({ page }) => {
 });
 
 test.describe("customer actions", () => {
-        test("should create simple product", async ({ adminPage }) => {
-            const productCreation = new ProductCreation(adminPage);
-    
-            await productCreation.createProduct({
-                type: "simple",
-                sku: `SKU-${Date.now()}`,
-                name: `Simple-${Date.now()}`,
-                shortDescription: "Short desc",
-                description: "Full desc",
-                price: 199,
-                weight: 1,
-                inventory: 100,
-            });
+    test("should create simple product", async ({ adminPage }) => {
+        const productCreation = new ProductCreation(adminPage);
+
+        await productCreation.createProduct({
+            type: "simple",
+            sku: `SKU-${Date.now()}`,
+            name: `Simple-${Date.now()}`,
+            shortDescription: "Short desc",
+            description: "Full desc",
+            price: 199,
+            weight: 1,
+            inventory: 100,
         });
-test("should be able to reorder", async ({ page }) => {
-    await generateOrder(page);
+    });
+    test("should be able to reorder", async ({ page }) => {
+        await generateOrder(page);
 
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Orders", exact: true }).click();
-    await page.locator("div").locator("span.icon-eye").first().click();
-    await page.getByRole("link", { name: "Reorder" }).click();
+        await page.goto("");
+        await page.getByLabel("Profile").click();
+        await page.getByRole("link", { name: "Orders", exact: true }).click();
+        await page.locator("div").locator("span.icon-eye").first().click();
+        await page.getByRole("link", { name: "Reorder" }).click();
+        await page.getByRole("button", { name: "Update Cart" }).click();
 
-    await page.getByRole("button", { name: "Update Cart" }).click();
+        await expect(
+            page.getByText("Quantity updated successfully").first(),
+        ).toBeVisible();
+    });
 
-    await expect(
-        page.getByText("Quantity updated successfully").first(),
-    ).toBeVisible();
-});
+    test("should be able to cancel order", async ({ page }) => {
+        await generateOrder(page);
 
-test("should be able to cancel order", async ({ page }) => {
-    await generateOrder(page);
+        await page.goto("");
+        await page.getByLabel("Profile").click();
+        await page.getByRole("link", { name: "Orders", exact: true }).click();
+        await page.locator("div").locator("span.icon-eye").first().click();
+        await page.getByRole("link", { name: "Cancel" }).click();
+        await page.getByRole("button", { name: "Agree", exact: true }).click();
+        await page.waitForTimeout(5000);
+        await expect(
+            page.locator('td[data-value="Item Status"]'),
+        ).toContainText("Canceled");
+    });
 
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Orders", exact: true }).click();
-    await page.locator("div").locator("span.icon-eye").first().click();
-    await page.getByRole("link", { name: "Cancel" }).click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
+    test("should be able to print invoice", async ({ page }) => {
+        await generateOrder(page);
+        const adminCredentials = {
+            email: "admin@example.com",
+            password: "admin123",
+        };
+        await page.goto("admin/login");
+        await page.getByPlaceholder("Email Address").click();
+        await page
+            .getByPlaceholder("Email Address")
+            .fill(adminCredentials.email);
+        await page.getByPlaceholder("Password").click();
+        await page.getByPlaceholder("Password").fill(adminCredentials.password);
+        await page.getByRole("button", { name: "Sign In" }).click();
+        await page.goto("admin/sales/orders");
+        await page.locator(".row > div:nth-child(4) > a").first().click();
+        await page.getByText("Invoice", { exact: true }).click();
+        await page.locator("#can_create_transaction").nth(1).click();
+        await page.getByRole("button", { name: "Create Invoice" }).click();
 
-    await page.waitForTimeout(5000);
-    await expect(page.locator('td[data-value="Item Status"]')).toContainText(
-        "Canceled",
-    );
-});
+        await expect(
+            page.getByText("Invoice created successfully Close"),
+        ).toBeVisible();
 
-test("should be able to print invoice", async ({ page }) => {
-    await generateOrder(page);
+        await expect(
+            page.locator("span").filter({ hasText: "Processing" }),
+        ).toBeVisible();
 
-    /**
-     * Login to admin panel.
-     */
-    const adminCredentials = {
-        email: "admin@example.com",
-        password: "admin123",
-    };
-    await page.goto("admin/login");
-    await page.getByPlaceholder("Email Address").click();
-    await page.getByPlaceholder("Email Address").fill(adminCredentials.email);
-    await page.getByPlaceholder("Password").click();
-    await page.getByPlaceholder("Password").fill(adminCredentials.password);
-    await page.getByRole("button", { name: "Sign In" }).click();
+        await page.goto("");
+        await page.getByLabel("Profile").click();
+        await page.getByRole("link", { name: "Orders", exact: true }).click();
+        await page.locator("div").locator("span.icon-eye").first().click();
+        await page.getByRole("button", { name: "Invoices" }).click();
+        const downloadPromise = page.waitForEvent("download");
+        await page.getByRole("link", { name: " Print" }).click();
+        await downloadPromise;
+    });
 
-    /**
-     * Create invoice
-     */
-    await page.goto("admin/sales/orders");
-    await page.locator(".row > div:nth-child(4) > a").first().click();
-    await page.getByText("Invoice", { exact: true }).click();
-    await page.locator("#can_create_transaction").nth(1).click();
-    await page.getByRole("button", { name: "Create Invoice" }).click();
-    await expect(
-        page.getByText("Invoice created successfully Close"),
-    ).toBeVisible();
-    await expect(
-        page.locator("span").filter({ hasText: "Processing" }),
-    ).toBeVisible();
+    test("should able to download downloadable orders", async ({
+        shopPage,
+    }) => {
+        test.setTimeout(210_000);
+        const adminCredentials = {
+            email: "admin@example.com",
+            password: "admin123",
+        };
 
-    /**
-     * check invoice to customer side.
-     */
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Orders", exact: true }).click();
-    await page.locator("div").locator("span.icon-eye").first().click();
-    await page.getByRole("button", { name: "Invoices" }).click();
-    const downloadPromise = page.waitForEvent("download");
-    await page.getByRole("link", { name: " Print" }).click();
-    await downloadPromise;
-});
+        await shopPage.goto("admin/login");
+        await shopPage.getByPlaceholder("Email Address").click();
+        await shopPage
+            .getByPlaceholder("Email Address")
+            .fill(adminCredentials.email);
+        await shopPage.getByPlaceholder("Password").click();
+        await shopPage
+            .getByPlaceholder("Password")
+            .fill(adminCredentials.password);
+        await shopPage.getByRole("button", { name: "Sign In" }).click();
+        const productName = await downloadableOrder(shopPage);
+        await shopPage.goto("");
+        await shopPage.getByLabel("Profile").click();
+        await shopPage
+            .getByRole("link", { name: "Profile", exact: true })
+            .click();
+        await shopPage
+            .getByRole("link", { name: " Downloadable Products " })
+            .click();
+        const popupPromise = shopPage.waitForEvent("popup").catch(() => null);
+        const downloadPromise = shopPage
+            .waitForEvent("download")
+            .catch(() => null);
+        await shopPage.getByRole("link", { name: productName }).click();
+        const result = await Promise.race([popupPromise, downloadPromise]);
+    });
 
-test("should able to download downloadable orders", async ({ shopPage }) => {
-    test.setTimeout(210_000);
-    /**
-     * Login to admin panel.
-     */
-    const adminCredentials = {
-        email: "admin@example.com",
-        password: "admin123",
-    };
-
-    await shopPage.goto("admin/login");
-    await shopPage.getByPlaceholder("Email Address").click();
-    await shopPage
-        .getByPlaceholder("Email Address")
-        .fill(adminCredentials.email);
-    await shopPage.getByPlaceholder("Password").click();
-    await shopPage.getByPlaceholder("Password").fill(adminCredentials.password);
-    await shopPage.getByRole("button", { name: "Sign In" }).click();
-
-    /**
-     * Create downloadable product.
-     */
-    const productName = await downloadableOrder(shopPage);
-
-    /**
-     * Go to shop for download a product.
-     */
-    await shopPage.goto("");
-    await shopPage.getByLabel("Profile").click();
-    await shopPage.getByRole("link", { name: "Profile", exact: true }).click();
-    await shopPage
-        .getByRole("link", { name: " Downloadable Products " })
-        .click();
-    const popupPromise = shopPage.waitForEvent("popup").catch(() => null);
-    const downloadPromise = shopPage.waitForEvent("download").catch(() => null);
-    await shopPage.getByRole("link", { name: productName }).click();
-    const result = await Promise.race([popupPromise, downloadPromise]);
-});
-
-test("should add wishlist to cart", async ({ page }) => {
-    await loginAsCustomer(page);
-    await page.getByPlaceholder("Search products here").fill("simple");
-    await page.getByPlaceholder("Search products here").press("Enter");
-    await page.getByRole('button', { name: 'Add To Wishlist' }).first().click();
-    await page.waitForTimeout(2000);
-    await page.goto("customer/account/wishlist");
-    await page.getByRole("button", { name: "Move To Cart" }).first().click();
-
+    test("should add wishlist to cart", async ({ page }) => {
+        await loginAsCustomer(page);
+        await page.getByPlaceholder("Search products here").fill("simple");
+        await page.getByPlaceholder("Search products here").press("Enter");
+        await page
+            .getByRole("button", { name: "Add To Wishlist" })
+            .first()
+            .click();
+        await page.waitForTimeout(2000);
+        await page.goto("customer/account/wishlist");
+        await page
+            .getByRole("button", { name: "Move To Cart" })
+            .first()
+            .click();
         await addWishlist(page);
         await page.goto("");
         await page.getByLabel("Profile").click();
         await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-        await page.getByRole("button", { name: "Move To Cart" }).first().click();
+        await page
+            .getByRole("button", { name: "Move To Cart" })
+            .first()
+            .click();
 
         await expect(
             page
@@ -662,6 +543,7 @@ test("should remove product from wishlist", async ({ page }) => {
     await page.getByRole("link", { name: "Wishlist", exact: true }).click();
     await page.locator(".max-md\\:hidden > .flex").first().click();
     await page.getByRole("button", { name: "Agree", exact: true }).click();
+
     await expect(
         page.getByText("Item Successfully Removed From Wishlist").first(),
     ).toBeVisible();
@@ -669,7 +551,6 @@ test("should remove product from wishlist", async ({ page }) => {
 
 test("should change password", async ({ page }) => {
     const credentials = await loginAsCustomer(page);
-
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Profile" }).click();
     await page.getByRole("link", { name: "Edit" }).click();
@@ -691,7 +572,6 @@ test("should change password", async ({ page }) => {
 
 test("should delete a profile", async ({ page }) => {
     const credentials = await loginAsCustomer(page);
-
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Profile" }).click();
     await page.getByText("Delete Profile").first().click();

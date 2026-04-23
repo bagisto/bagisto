@@ -1,16 +1,8 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products";
+import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { VirtualProductCheckout } from "../../pages/shop/checkout/product-types/VirtualProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-/**
- * ==============================
- * VIRTUAL PRODUCT CHECKOUT FLOW
- * ==============================
- * This test suite covers:
- * 1. Creating a virtual product (no shipping required).
- * 2. Completing checkout for the virtual product.
- */
 test.describe("virtual product checkout flow", () => {
     test("should create virtual product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
