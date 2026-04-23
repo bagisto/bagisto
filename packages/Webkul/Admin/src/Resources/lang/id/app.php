@@ -257,6 +257,22 @@ return [
                         'none' => 'Tidak Ada',
                         'total-amount' => 'Jumlah Total',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Memuat konfigurasi pemesanan…',
+                        'config-missing' => 'Konfigurasi pemesanan tidak tersedia untuk produk ini.',
+                        'date' => 'Tanggal',
+                        'date-from' => 'Dari tanggal',
+                        'date-to' => 'Sampai tanggal',
+                        'slot' => 'Slot',
+                        'select-slot' => 'Pilih slot',
+                        'no-slots-available' => 'Tidak ada slot tersedia untuk tanggal yang dipilih',
+                        'note' => 'Catatan',
+                        'quantity' => 'Jumlah',
+                        'renting-type' => 'Tipe sewa',
+                        'daily' => 'Harian',
+                        'hourly' => 'Per jam',
+                    ],
                 ],
 
                 'cart' => [
@@ -391,8 +407,8 @@ return [
                 'billing-address' => 'Alamat Penagihan',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Item Pemesanan Tidak Akan Dibatalkan',
-                    'description' => 'Pesanan ini berisi produk pemesanan yang ditandai sebagai tidak dapat dibatalkan. Membatalkan pesanan hanya akan membatalkan item yang tersisa; item pemesanan akan tetap aktif. Silakan hubungi dukungan jika Anda memerlukan bantuan dengan item pemesanan.',
+                    'title' => 'Item Pemesanan Tidak Dapat Dibatalkan',
+                    'description' => 'Pesanan ini berisi produk pemesanan yang dikonfigurasi sebagai tidak dapat dibatalkan untuk pelanggan. Sebagai admin, Anda tetap dapat membatalkannya — pelanggan diblokir untuk melakukannya dari tampilan pesanan mereka sendiri.',
                 ],
 
                 'cancel' => 'Batalkan',
@@ -1761,6 +1777,15 @@ return [
                 'value-per-locale' => 'Nilai Per Lokal',
                 'yes' => 'Ya',
 
+                'info' => [
+                    'is-filterable' => 'Menambahkan atribut ini ke filter bilah samping kategori. Tipe berbasis opsi dirender sebagai kotak centang; harga dirender sebagai slider rentang.',
+                    'is-configurable' => 'Menandai atribut ini sebagai poros varian (mis. Warna, Ukuran). Hanya tersedia untuk Select. Mengaktifkannya mengunci Value Per Channel dan Value Per Locale — varian diselesaikan secara global berdasarkan id opsi.',
+                    'value-per-locale' => 'Simpan nilai berbeda per locale. Tidak berlaku untuk tipe berbasis opsi atau boolean — labelnya sudah diterjemahkan melalui tabel opsi.',
+                    'value-per-channel' => 'Simpan nilai berbeda per kanal. Dinonaktifkan saat "Use to Create Configurable Product" aktif.',
+                    'is-visible-on-front' => 'Tampilkan atribut ini pada halaman produk di storefront.',
+                    'is-comparable' => 'Sertakan atribut ini saat membandingkan produk berdampingan.',
+                ],
+
                 'option' => [
                     'color' => 'Swatch Warna',
                     'dropdown' => 'Dropdown',
@@ -1825,6 +1850,15 @@ return [
                 'value-per-channel' => 'Nilai Per Saluran',
                 'value-per-locale' => 'Nilai Per Lokal',
                 'yes' => 'Ya',
+
+                'info' => [
+                    'is-filterable' => 'Menambahkan atribut ini ke filter bilah samping kategori. Tipe berbasis opsi dirender sebagai kotak centang; harga dirender sebagai slider rentang.',
+                    'is-configurable' => 'Menandai atribut ini sebagai poros varian (mis. Warna, Ukuran). Hanya tersedia untuk Select. Mengaktifkannya mengunci Value Per Channel dan Value Per Locale — varian diselesaikan secara global berdasarkan id opsi.',
+                    'value-per-locale' => 'Simpan nilai berbeda per locale. Tidak berlaku untuk tipe berbasis opsi atau boolean — labelnya sudah diterjemahkan melalui tabel opsi.',
+                    'value-per-channel' => 'Simpan nilai berbeda per kanal. Dinonaktifkan saat "Use to Create Configurable Product" aktif.',
+                    'is-visible-on-front' => 'Tampilkan atribut ini pada halaman produk di storefront.',
+                    'is-comparable' => 'Sertakan atribut ini saat membandingkan produk berdampingan.',
+                ],
 
                 'option' => [
                     'color' => 'Swatch Warna',

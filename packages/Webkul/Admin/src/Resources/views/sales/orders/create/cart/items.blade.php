@@ -294,7 +294,10 @@
                                         @{{ "@lang('admin::app.sales.orders.create.cart.items.search.sku')".replace(':sku', product.sku) }}
                                     </p>
 
-                                    <p class="text-green-600">
+                                    <p
+                                        class="text-green-600"
+                                        v-if="product.type !== 'booking'"
+                                    >
                                         @{{ "@lang('admin::app.sales.orders.create.cart.items.search.available-qty')".replace(':qty', availbleQty(product)) }}
                                     </p>
                                 </div>
@@ -451,17 +454,36 @@
                                 }
                             })
                                 .then(response => {
-                                    if (! response.data.data) {
+                                    const payload = response.data.data;
+
+                                    if (! payload) {
                                         window.location.reload();
 
                                         return;
                                     }
 
-                                    this.$emit('remove-from-cart', response.data.data);
+                                    /**
+                                     * Cart-shaped payloads are emitted upward; error
+                                     * payloads (only `message`) are surfaced as a flash
+                                     * toast so they don't overwrite the cart state.
+                                     */
+                                    if (payload.items !== undefined) {
+                                        this.$emit('remove-from-cart', payload);
 
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                        this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                    } else {
+                                        this.$emitter.emit('add-flash', {
+                                            type: 'error',
+                                            message: payload.message || response.data.message || 'Unable to remove the cart item.',
+                                        });
+                                    }
                                 })
-                                .catch(error => {});
+                                .catch(error => {
+                                    this.$emitter.emit('add-flash', {
+                                        type: 'error',
+                                        message: error.response?.data?.message || 'Unable to remove the cart item.',
+                                    });
+                                });
                         }
                     });
                 },
@@ -477,19 +499,42 @@
 
                     this.$axios.put("{{ route('admin.sales.cart.items.update', $cart->id) }}", params)
                         .then(response => {
-                            this.$emit('cart-item-updated', response.data.data);
-
-                            this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
-
                             this.isUpdating = false;
 
+                            /**
+                             * updateItem() returns { data: CartResource, message } on success
+                             * and only { message } on failure (e.g. quantity exceeds stock).
+                             * Guard against emitting the error object upward, which would
+                             * clobber the cart state and crash the v-for render.
+                             */
+                            const payload = response.data.data;
+
+                            if (payload && payload.items !== undefined) {
+                                this.$emit('cart-item-updated', payload);
+
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                            } else {
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: payload?.message || response.data.message || 'Unable to update the cart item.',
+                                });
+                            }
                         })
                         .catch(error => {
                             this.isUpdating = false;
+
+                            this.$emitter.emit('add-flash', {
+                                type: 'error',
+                                message: error.response?.data?.message || 'Unable to update the cart item.',
+                            });
                         });
                 },
 
                 availbleQty(product) {
+                    if (product.qty_available !== undefined && product.qty_available !== null) {
+                        return product.qty_available;
+                    }
+
                     let qty = 0;
 
                     product.inventories.forEach(function (inventory) {

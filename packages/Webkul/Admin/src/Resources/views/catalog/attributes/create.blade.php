@@ -569,6 +569,10 @@
                                     >
                                         @lang('admin::app.catalog.attributes.edit.value-per-locale')
                                     </label>
+
+                                    <x-admin::catalog.attributes.flag-info
+                                        :text="trans('admin::app.catalog.attributes.create.info.value-per-locale')"
+                                    />
                                 </x-admin::form.control-group>
 
                             <!-- Value Per Channel -->
@@ -587,6 +591,10 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.value-per-channel')
                                 </label>
+
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.create.info.value-per-channel')"
+                                />
                             </x-admin::form.control-group>
 
                             <!-- Use to create configurable product -->
@@ -609,6 +617,10 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-configurable')
                                 </label>
+
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.create.info.is-configurable')"
+                                />
                             </x-admin::form.control-group>
 
                             <!-- Visible On Product View Page On Front End -->
@@ -627,6 +639,10 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
                                 </label>
+
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.create.info.is-visible-on-front')"
+                                />
                             </x-admin::form.control-group>
 
                             <!-- Attribute is Comparable -->
@@ -645,6 +661,10 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-comparable')
                                 </label>
+
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.create.info.is-comparable')"
+                                />
                             </x-admin::form.control-group>
 
                             <!-- Use in Layered -->
@@ -667,6 +687,10 @@
                                 >
                                     @lang('admin::app.catalog.attributes.create.is-filterable')
                                 </label>
+
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.create.info.is-filterable')"
+                                />
                             </x-admin::form.control-group>
                         </x-slot>
                     </x-admin::accordion>
@@ -849,7 +873,8 @@
                         return this.attributeType == 'checkbox'
                             || this.attributeType == 'select'
                             || this.attributeType == 'multiselect'
-                            || this.attributeType == 'boolean';
+                            || this.attributeType == 'boolean'
+                            || this.attributeType == 'price';
                     },
 
                     isConfigurable() {

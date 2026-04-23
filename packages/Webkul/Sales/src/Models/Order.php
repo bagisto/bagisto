@@ -350,19 +350,16 @@ class Order extends Model implements OrderContract
 
     /**
      * Checks if order can be canceled or not.
+     *
+     * @param  bool  $force  When true, customer-facing cancellation policies
+     *                       (currently the booking `allow_cancellation` flag)
+     *                       are ignored. Intended for admin overrides.
      */
-    public function canCancel(): bool
+    public function canCancel(bool $force = false): bool
     {
         foreach ($this->items as $item) {
             if (
-                $item->booking
-                && ! $item->booking->allow_cancellation
-            ) {
-                continue;
-            }
-
-            if (
-                $item->canCancel()
+                $item->canCancel($force)
                 && ! in_array($item->order->status, [
                     self::STATUS_CLOSED,
                     self::STATUS_FRAUD,

@@ -124,11 +124,12 @@ class AttributeRepository extends Repository
      */
     public function validateUserInput($data)
     {
-        if (isset($data['is_configurable'])) {
+        if (! empty($data['is_configurable'])) {
             $data['value_per_channel'] = $data['value_per_locale'] = 0;
         }
 
         if (! in_array($data['type'], [
+            AttributeTypeEnum::PRICE->value,
             AttributeTypeEnum::CHECKBOX->value,
             AttributeTypeEnum::SELECT->value,
             AttributeTypeEnum::MULTISELECT->value,
@@ -138,6 +139,7 @@ class AttributeRepository extends Repository
         }
 
         if (in_array($data['type'], [
+            AttributeTypeEnum::CHECKBOX->value,
             AttributeTypeEnum::SELECT->value,
             AttributeTypeEnum::MULTISELECT->value,
             AttributeTypeEnum::BOOLEAN->value,

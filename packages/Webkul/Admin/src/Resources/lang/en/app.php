@@ -257,6 +257,22 @@ return [
                         'none' => 'None',
                         'total-amount' => 'Total Amount',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Loading booking configuration…',
+                        'config-missing' => 'Booking configuration is missing for this product.',
+                        'date' => 'Date',
+                        'date-from' => 'From Date',
+                        'date-to' => 'To Date',
+                        'slot' => 'Slot',
+                        'select-slot' => 'Select a slot',
+                        'no-slots-available' => 'No slots available for the selected date',
+                        'note' => 'Note',
+                        'quantity' => 'Quantity',
+                        'renting-type' => 'Renting Type',
+                        'daily' => 'Daily',
+                        'hourly' => 'Hourly',
+                    ],
                 ],
 
                 'cart' => [
@@ -391,8 +407,8 @@ return [
                 'billing-address' => 'Billing Address',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Booking Items Will Not Be Canceled',
-                    'description' => 'This order contains booking products configured as non-cancellable. Cancelling the order will only cancel the remaining items; non-cancellable booking items will stay active.',
+                    'title' => 'Non-Cancellable Booking Items',
+                    'description' => 'This order contains booking products configured as non-cancellable for customers. As an admin you can still cancel them — the customer is blocked from doing so on their own order view.',
                 ],
 
                 'cancel' => 'Cancel',
@@ -1761,6 +1777,15 @@ return [
                 'value-per-locale' => 'Value Per Locale',
                 'yes' => 'Yes',
 
+                'info' => [
+                    'is-filterable' => 'Adds this attribute to the category sidebar filters. Option-based types render as checkboxes; price renders as a range slider.',
+                    'is-configurable' => 'Marks this attribute as a variant axis (e.g. Color, Size). Only available for Select. Enabling it locks Value Per Channel and Value Per Locale off — variants are resolved globally by option id.',
+                    'value-per-locale' => 'Store a different value per locale. Not applicable for option-based or boolean types — their labels already translate via the option table.',
+                    'value-per-channel' => 'Store a different value per channel. Disabled when Use to Create Configurable Product is on.',
+                    'is-visible-on-front' => 'Show this attribute on the product view page on the storefront.',
+                    'is-comparable' => 'Include this attribute when comparing products side-by-side.',
+                ],
+
                 'option' => [
                     'color' => 'Color Swatch',
                     'dropdown' => 'Dropdown',
@@ -1825,6 +1850,15 @@ return [
                 'value-per-channel' => 'Value Per Channel',
                 'value-per-locale' => 'Value Per Locale',
                 'yes' => 'Yes',
+
+                'info' => [
+                    'is-filterable' => 'Adds this attribute to the category sidebar filters. Option-based types render as checkboxes; price renders as a range slider.',
+                    'is-configurable' => 'Marks this attribute as a variant axis (e.g. Color, Size). Only available for Select. Enabling it locks Value Per Channel and Value Per Locale off — variants are resolved globally by option id.',
+                    'value-per-locale' => 'Store a different value per locale. Not applicable for option-based or boolean types — their labels already translate via the option table.',
+                    'value-per-channel' => 'Store a different value per channel. Disabled when Use to Create Configurable Product is on.',
+                    'is-visible-on-front' => 'Show this attribute on the product view page on the storefront.',
+                    'is-comparable' => 'Include this attribute when comparing products side-by-side.',
+                ],
 
                 'option' => [
                     'color' => 'Color Swatch',

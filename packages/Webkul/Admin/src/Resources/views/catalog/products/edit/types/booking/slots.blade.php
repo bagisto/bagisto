@@ -324,22 +324,38 @@
                 if (this.bookingProduct.same_slot_all_days) {
                     this.slots['same_for_week'] = slots ?? this.slots['same_for_week'];
                 } else {
-                    this.slots['different_for_week'] = Object.values(slots).slice(0, 7);
+                    /**
+                     * When `same_slot_all_days` is No, `slots` is keyed by
+                     * day-of-week (0=Sunday .. 6=Saturday). If some days have
+                     * no slots configured, Laravel/MySQL stores the JSON as a
+                     * sparse object (e.g. `{"2": [...]}`) which `Object.values`
+                     * would densify into `[[...]]` — causing Tuesday's slots
+                     * to render under Sunday and shifting every subsequent
+                     * day. Rebuild a 7-entry dense array by indexing each
+                     * entry by its original numeric key instead.
+                     */
+                    const dense = [[], [], [], [], [], [], []];
+
+                    for (const key of Object.keys(slots)) {
+                        const index = parseInt(key, 10);
+
+                        if (index >= 0 && index <= 6) {
+                            dense[index] = slots[key] ?? [];
+                        }
+                    }
+
+                    this.slots['different_for_week'] = dense;
                 }
 
                 this.slots['different_for_week'].forEach((slot, index) => {
                     if (this.slotSpansTwoDays(slot)) {
                         const secondDaySlot = { ...slot, from: '00:00' };
-                        
+
                         this.slots['different_for_week'].splice(index + 1, 0, secondDaySlot);
-                        
+
                         index++;
                     }
                 });
-
-                if (slots.length > 7) {
-                    this.slots['different_for_week'] = this.slots['different_for_week'].concat(slots.slice(7));
-                }
             },
 
             methods: {

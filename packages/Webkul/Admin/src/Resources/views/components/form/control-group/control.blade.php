@@ -122,7 +122,7 @@
             {{ $attributes->only(['name', ':name', 'value', ':value', 'v-model', 'rules', ':rules', 'label', ':label']) }}
             name="{{ $name }}"
         >
-            <x-admin::flat-picker.date>
+            <x-admin::flat-picker.date {{ $attributes }}>
                 <input
                     name="{{ $name }}"
                     v-bind="field"
