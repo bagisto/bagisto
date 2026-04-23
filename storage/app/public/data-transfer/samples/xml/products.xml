@@ -490,7 +490,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
-        booking_options="type=default,qty=10,location=Mountain Retreat Center,show_location=1,available_every_week=1,allow_cancellation=1|booking_type=one|from_day=1,from=09:00,to_day=5,to=17:00"
+        booking_options="type=default,qty=10,location=Mountain Retreat Center,show_location=1,available_from=2026-05-01,available_to=2027-12-31,allow_cancellation=1|booking_type=one|from_day=1,from=09:00,to_day=5,to=17:00"
     />
     <product
         sku="BKP-DEFAULT-002"
@@ -531,7 +531,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
-        booking_options="type=default,qty=10,location=Main Hall,show_location=1,available_every_week=1,allow_cancellation=1|booking_type=many,duration=60,break_time=15|day=1,from=09:00,to=17:00|day=3,from=10:00,to=16:00|day=5,from=09:00,to=15:00"
+        booking_options="type=default,qty=10,location=Main Hall,show_location=1,available_from=2026-05-01,available_to=2027-12-31,allow_cancellation=1|booking_type=many,duration=60,break_time=15|day=1,from=09:00,to=17:00|day=3,from=10:00,to=16:00|day=5,from=09:00,to=15:00"
     />
     <product
         sku="BKP-DEFAULT-003"

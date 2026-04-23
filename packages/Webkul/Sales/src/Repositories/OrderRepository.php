@@ -129,26 +129,25 @@ class OrderRepository extends Repository
      * Cancel order. This method should be independent as admin also can cancel the order.
      *
      * @param  Order|int  $orderOrId
+     * @param  bool  $force  When true, customer-facing cancellation policies
+     *                       (currently the booking `allow_cancellation` flag)
+     *                       are ignored. Intended for admin overrides.
      * @return bool
      */
-    public function cancel($orderOrId)
+    public function cancel($orderOrId, bool $force = false)
     {
         /* order */
         $order = $this->resolveOrderInstance($orderOrId);
 
         /* check wether order can be cancelled or not */
-        if (! $order->canCancel()) {
+        if (! $order->canCancel($force)) {
             return false;
         }
 
         Event::dispatch('sales.order.cancel.before', $order);
 
         foreach ($order->items as $item) {
-            if (! $item->qty_to_cancel) {
-                continue;
-            }
-
-            if ($item->booking && ! $item->booking->allow_cancellation) {
+            if (! $item->canCancel($force)) {
                 continue;
             }
 

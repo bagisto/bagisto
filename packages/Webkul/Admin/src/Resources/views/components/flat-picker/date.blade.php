@@ -41,6 +41,20 @@
                 };
             },
 
+            watch: {
+                minDate: function (value) {
+                    this.datepicker?.set('minDate', value ?? '');
+                },
+
+                maxDate: function (value) {
+                    this.datepicker?.set('maxDate', value ?? '');
+                },
+
+                disable: function (value) {
+                    this.datepicker?.set('disable', value ?? []);
+                },
+            },
+
             mounted: function() {
                 let options = this.setOptions();
 

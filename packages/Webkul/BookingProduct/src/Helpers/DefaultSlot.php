@@ -70,27 +70,17 @@ class DefaultSlot extends Booking
             $toDayIndex = (int) $timeDuration['to_day'];
             $currentDay = $requestedDate->dayOfWeek;
 
-            $inRange = $fromDayIndex <= $toDayIndex
-                ? ($currentDay >= $fromDayIndex && $currentDay <= $toDayIndex)
-                : ($currentDay >= $fromDayIndex || $currentDay <= $toDayIndex);
-
-            if (! $inRange) {
+            if ($currentDay !== $fromDayIndex) {
                 continue;
             }
-
-            $dayDiff = $fromDayIndex <= $currentDay
-                ? $currentDay - $fromDayIndex
-                : 7 - $fromDayIndex + $currentDay;
-
-            $startDate = (clone $requestedDate)->subDays($dayDiff);
 
             $endDayDiff = $fromDayIndex <= $toDayIndex
                 ? $toDayIndex - $fromDayIndex
                 : 7 - $fromDayIndex + $toDayIndex;
 
-            $endDate = (clone $startDate)->addDays($endDayDiff);
+            $endDate = (clone $requestedDate)->addDays($endDayDiff);
 
-            $startDate = Carbon::createFromTimeString($startDate->format('Y-m-d').' '.$timeDuration['from'].':00');
+            $startDate = Carbon::createFromTimeString($requestedDate->format('Y-m-d').' '.$timeDuration['from'].':00');
 
             $endDate = Carbon::createFromTimeString($endDate->format('Y-m-d').' '.$timeDuration['to'].':00');
 

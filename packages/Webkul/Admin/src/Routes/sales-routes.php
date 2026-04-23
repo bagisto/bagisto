@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Sales\BookingController;
+use Webkul\Admin\Http\Controllers\Sales\BookingProductController;
 use Webkul\Admin\Http\Controllers\Sales\CartController;
 use Webkul\Admin\Http\Controllers\Sales\InvoiceController;
 use Webkul\Admin\Http\Controllers\Sales\OrderController;
@@ -89,6 +90,15 @@ Route::prefix('sales')->group(function () {
         Route::post('create', 'store')->name('admin.sales.transactions.store');
 
         Route::get('view/{id}', 'view')->name('admin.sales.transactions.view');
+    });
+
+    /**
+     * Booking-product helpers for the create-order drawer.
+     */
+    Route::controller(BookingProductController::class)->prefix('booking-product')->group(function () {
+        Route::get('config/{productId}', 'config')->name('admin.sales.booking-product.config');
+
+        Route::get('slots/{productId}', 'slots')->name('admin.sales.booking-product.slots');
     });
 
     Route::controller(CartController::class)->prefix('cart')->group(function () {

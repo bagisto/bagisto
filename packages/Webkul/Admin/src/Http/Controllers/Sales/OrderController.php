@@ -175,7 +175,7 @@ class OrderController extends Controller
      */
     public function cancel(int $id)
     {
-        $result = $this->orderRepository->cancel($id);
+        $result = $this->orderRepository->cancel($id, force: true);
 
         if ($result) {
             session()->flash('success', trans('admin::app.sales.orders.view.cancel-success'));

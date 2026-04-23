@@ -1889,12 +1889,26 @@ class Importer extends AbstractImporter
             return;
         }
 
+        $type = $config['type'];
+
+        /**
+         * The admin edit form hides the "Available Every Week" selector for
+         * `default` and `event` booking types — both are always date-range-
+         * based (weekly slot patterns within the window, or one-off events).
+         * Force those types to `available_every_week = 0` here so the saved
+         * row is consistent with what the manual form produces; otherwise
+         * the edit view's `v-if="! parseInt(booking.available_every_week)"`
+         * check would hide the Available From/To fields with no UI to flip
+         * the flag back.
+         */
+        $forceDateRange = in_array($type, ['default', 'event'], true);
+
         $entry = [
-            'type' => $config['type'],
+            'type' => $type,
             'qty' => (int) ($config['qty'] ?? 0),
             'location' => $config['location'] ?? null,
             'show_location' => ! empty($config['show_location']) ? 1 : 0,
-            'available_every_week' => ! empty($config['available_every_week']) ? 1 : 0,
+            'available_every_week' => $forceDateRange ? 0 : (! empty($config['available_every_week']) ? 1 : 0),
             'available_from' => $config['available_from'] ?? null,
             'available_to' => $config['available_to'] ?? null,
             'allow_cancellation' => array_key_exists('allow_cancellation', $config)
@@ -2035,12 +2049,13 @@ class Importer extends AbstractImporter
         if ($isOneForMany) {
             $slots = [];
 
-            foreach ($slotsRaw as $raw) {
+            foreach ($slotsRaw as $index => $raw) {
                 if (! isset($raw['from_day'], $raw['to_day'], $raw['from'], $raw['to'])) {
                     continue;
                 }
 
                 $slots[] = [
+                    'id' => $index,
                     'from_day' => (int) $raw['from_day'],
                     'from' => $raw['from'],
                     'to_day' => (int) $raw['to_day'],

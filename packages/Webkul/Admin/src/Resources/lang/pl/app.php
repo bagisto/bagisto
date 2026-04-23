@@ -257,6 +257,22 @@ return [
                         'none' => 'Brak',
                         'total-amount' => 'Całkowita kwota',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Ładowanie konfiguracji rezerwacji…',
+                        'config-missing' => 'Brak konfiguracji rezerwacji dla tego produktu.',
+                        'date' => 'Data',
+                        'date-from' => 'Data od',
+                        'date-to' => 'Data do',
+                        'slot' => 'Slot',
+                        'select-slot' => 'Wybierz slot',
+                        'no-slots-available' => 'Brak dostępnych slotów dla wybranej daty',
+                        'note' => 'Uwaga',
+                        'quantity' => 'Ilość',
+                        'renting-type' => 'Typ wynajmu',
+                        'daily' => 'Dziennie',
+                        'hourly' => 'Godzinowo',
+                    ],
                 ],
 
                 'cart' => [
@@ -391,8 +407,8 @@ return [
                 'billing-address' => 'Adres rozliczeniowy',
 
                 'booking-cancellation-not-allowed' => [
-                    'title' => 'Pozycje rezerwacji nie zostaną anulowane',
-                    'description' => 'To zamówienie zawiera produkty rezerwacyjne oznaczone jako nieanulowalne. Anulowanie zamówienia spowoduje anulowanie jedynie pozostałych pozycji; pozycje rezerwacji pozostaną aktywne. Skontaktuj się z pomocą techniczną, jeśli potrzebujesz pomocy z pozycjami rezerwacji.',
+                    'title' => 'Nieanulowalne pozycje rezerwacji',
+                    'description' => 'To zamówienie zawiera produkty rezerwacyjne skonfigurowane jako nieanulowalne dla klientów. Jako administrator nadal możesz je anulować — klient nie może tego zrobić ze swojego własnego widoku zamówienia.',
                 ],
 
                 'cancel' => 'Anuluj',
@@ -1761,6 +1777,15 @@ return [
                 'value-per-locale' => 'Wartość zależy od języka',
                 'yes' => 'Tak',
 
+                'info' => [
+                    'is-filterable' => 'Dodaje ten atrybut do filtrów w bocznym panelu kategorii. Typy oparte na opcjach renderowane są jako checkboxy; cena jako suwak zakresu.',
+                    'is-configurable' => 'Oznacza ten atrybut jako oś wariantu (np. Kolor, Rozmiar). Dostępne tylko dla Select. Włączenie blokuje Value Per Channel i Value Per Locale — warianty są rozwiązywane globalnie po id opcji.',
+                    'value-per-locale' => 'Przechowuj różną wartość dla każdego locale. Nie dotyczy typów opartych na opcjach ani boolean — ich etykiety są już tłumaczone przez tabelę opcji.',
+                    'value-per-channel' => 'Przechowuj różną wartość dla każdego kanału. Wyłączone, gdy "Użyj do utworzenia produktu konfigurowalnego" jest włączone.',
+                    'is-visible-on-front' => 'Wyświetl ten atrybut na stronie produktu w sklepie.',
+                    'is-comparable' => 'Uwzględnij ten atrybut przy porównywaniu produktów.',
+                ],
+
                 'option' => [
                     'color' => 'Próbka koloru',
                     'dropdown' => 'Lista rozwijana',
@@ -1825,6 +1850,15 @@ return [
                 'value-per-channel' => 'Wartość zależy od kanału sprzedaży',
                 'value-per-locale' => 'Wartość zależy od języka',
                 'yes' => 'Tak',
+
+                'info' => [
+                    'is-filterable' => 'Dodaje ten atrybut do filtrów w bocznym panelu kategorii. Typy oparte na opcjach renderowane są jako checkboxy; cena jako suwak zakresu.',
+                    'is-configurable' => 'Oznacza ten atrybut jako oś wariantu (np. Kolor, Rozmiar). Dostępne tylko dla Select. Włączenie blokuje Value Per Channel i Value Per Locale — warianty są rozwiązywane globalnie po id opcji.',
+                    'value-per-locale' => 'Przechowuj różną wartość dla każdego locale. Nie dotyczy typów opartych na opcjach ani boolean — ich etykiety są już tłumaczone przez tabelę opcji.',
+                    'value-per-channel' => 'Przechowuj różną wartość dla każdego kanału. Wyłączone, gdy "Użyj do utworzenia produktu konfigurowalnego" jest włączone.',
+                    'is-visible-on-front' => 'Wyświetl ten atrybut na stronie produktu w sklepie.',
+                    'is-comparable' => 'Uwzględnij ten atrybut przy porównywaniu produktów.',
+                ],
 
                 'option' => [
                     'color' => 'Próbka koloru',

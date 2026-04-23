@@ -120,6 +120,11 @@
                                         @include('admin::sales.orders.create.types.virtual')
                                     </template>
 
+                                    <!-- Included Booking Product Configuration Blade File -->
+                                    <template v-if="selectedProductOptions.product.type == 'booking'">
+                                        @include('admin::sales.orders.create.types.booking')
+                                    </template>
+
                                     {!! view_render_event('bagisto.admin.sales.order.create.product_options.after') !!}
                                 </x-slot>
                             </x-admin::drawer>
@@ -174,7 +179,15 @@
 
                 methods: {
                     setCart(cart) {
-                        this.cart = cart;
+                        /**
+                         * Belt-and-braces: only accept cart-shaped payloads. Cart
+                         * endpoints return `{ message }` on failure; ignoring those
+                         * keeps the render from crashing if a child component ever
+                         * emits one upward by accident.
+                         */
+                        if (cart && cart.items !== undefined) {
+                            this.cart = cart;
+                        }
                     },
 
                     getCart() {
@@ -229,11 +242,34 @@
                             .then(response => {
                                 this.isAddingToCart = false;
 
-                                this.cart = response.data.data;
+                                /**
+                                 * storeItem() returns { data: CartResource, message }
+                                 * on success and only { message } on failure. Treat
+                                 * a payload without a cart-shaped body as an error so
+                                 * the Vue render doesn't get poisoned with the error
+                                 * message object.
+                                 */
+                                const payload = response.data.data;
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                if (payload && payload.items !== undefined) {
+                                    this.cart = payload;
+
+                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                } else {
+                                    this.$emitter.emit('add-flash', {
+                                        type: 'error',
+                                        message: payload?.message || response.data.message || 'Unable to add the product to the cart.',
+                                    });
+                                }
                             })
-                            .catch(error => {});
+                            .catch(error => {
+                                this.isAddingToCart = false;
+
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: error.response?.data?.message || 'Unable to add the product to the cart.',
+                                });
+                            });
                     },
 
                     stepReset() {

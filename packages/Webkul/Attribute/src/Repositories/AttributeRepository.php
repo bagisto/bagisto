@@ -134,6 +134,7 @@ class AttributeRepository extends Repository
         }
 
         if (! in_array($data['type'], [
+            AttributeTypeEnum::PRICE->value,
             AttributeTypeEnum::CHECKBOX->value,
             AttributeTypeEnum::SELECT->value,
             AttributeTypeEnum::MULTISELECT->value,
@@ -143,6 +144,7 @@ class AttributeRepository extends Repository
         }
 
         if (in_array($data['type'], [
+            AttributeTypeEnum::CHECKBOX->value,
             AttributeTypeEnum::SELECT->value,
             AttributeTypeEnum::MULTISELECT->value,
             AttributeTypeEnum::BOOLEAN->value,
