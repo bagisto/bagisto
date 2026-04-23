@@ -16,13 +16,24 @@ class BookingDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
+        $tablePrefix = DB::getTablePrefix();
+
         $queryBuilder = DB::table('bookings')
             ->leftJoin('orders', 'bookings.order_id', '=', 'orders.id')
-            ->select('bookings.id as id', 'orders.increment_id as order_id', 'bookings.from as from', 'bookings.to as to', 'bookings.qty as qty', 'orders.created_at as created_at');
+            ->select(
+                'orders.increment_id as order_id',
+                'orders.created_at as created_at',
+                'bookings.id as id',
+                'bookings.from as from',
+                'bookings.to as to',
+                'bookings.qty as qty'
+            );
 
         $this->addFilter('id', 'bookings.id');
         $this->addFilter('order_id', 'orders.increment_id');
         $this->addFilter('qty', 'bookings.qty');
+        $this->addFilter('from', DB::raw('FROM_UNIXTIME(`'.$tablePrefix.'bookings`.`from`)'));
+        $this->addFilter('to', DB::raw('FROM_UNIXTIME(`'.$tablePrefix.'bookings`.`to`)'));
         $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;
@@ -38,7 +49,7 @@ class BookingDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'id',
             'label' => trans('admin::app.sales.booking.index.datagrid.id'),
-            'type' => 'string',
+            'type' => 'integer',
             'searchable' => false,
             'sortable' => true,
             'filterable' => true,
@@ -47,7 +58,7 @@ class BookingDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'order_id',
             'label' => trans('admin::app.sales.booking.index.datagrid.order-id'),
-            'type' => 'string',
+            'type' => 'integer',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true,
@@ -56,7 +67,7 @@ class BookingDataGrid extends DataGrid
         $this->addColumn([
             'index' => 'qty',
             'label' => trans('admin::app.sales.booking.index.datagrid.qty'),
-            'type' => 'string',
+            'type' => 'integer',
             'searchable' => true,
             'sortable' => true,
             'filterable' => true,
