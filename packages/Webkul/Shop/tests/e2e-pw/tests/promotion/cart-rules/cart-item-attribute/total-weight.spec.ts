@@ -1,4 +1,4 @@
-import { test } from "../../../../setup";
+import { test, expect } from "../../../../setup";
 import { ProductCreation } from "../../../../pages/admin/catalog/products";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
@@ -20,11 +20,13 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach("should delete the created product and rule", async ({ adminPage }) => {
-    const ruleDeletePage = new RuleDeletePage(adminPage);
-    await ruleDeletePage.deleteRuleAndProduct();
-});
-
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const ruleDeletePage = new RuleDeletePage(adminPage);
+        await ruleDeletePage.deleteRuleAndProduct();
+    },
+);
 
 test.describe("cart rules", () => {
     test.describe("cart item attribute conditions", () => {
@@ -105,7 +107,21 @@ test.describe("cart rules", () => {
                 value: "1",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await page.goto("admin/catalog/products");
+            await page
+                .locator("span.cursor-pointer.icon-sort-right")
+                .nth(1)
+                .click();
+            await page.waitForLoadState("networkidle");
+            await page.locator('input[name="weight"]').first().fill("2");
+            await page
+                .locator('button:has-text("Save Product")')
+                .first()
+                .click();
+            await expect(
+                page.getByText("Product updated successfully").first(),
+            ).toBeVisible();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when total weight in cart condition is -> less than", async ({
