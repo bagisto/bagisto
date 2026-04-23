@@ -216,6 +216,22 @@ return [
                         'none' => 'Keine',
                         'total-amount' => 'Gesamtsumme',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Buchungskonfiguration wird geladen…',
+                        'config-missing' => 'Buchungskonfiguration für dieses Produkt fehlt.',
+                        'date' => 'Datum',
+                        'date-from' => 'Von Datum',
+                        'date-to' => 'Bis Datum',
+                        'slot' => 'Zeitfenster',
+                        'select-slot' => 'Zeitfenster auswählen',
+                        'no-slots-available' => 'Für das ausgewählte Datum sind keine Zeitfenster verfügbar',
+                        'note' => 'Anmerkung',
+                        'quantity' => 'Menge',
+                        'renting-type' => 'Mietart',
+                        'daily' => 'Täglich',
+                        'hourly' => 'Stündlich',
+                    ],
                 ],
 
                 'cart' => [
@@ -1439,6 +1455,15 @@ return [
                 'value-per-locale' => 'Wert pro Sprache',
                 'yes' => 'Ja',
 
+                'info' => [
+                    'is-filterable' => 'Fügt dieses Attribut den Kategorie-Seitenleisten-Filtern hinzu. Optionsbasierte Typen werden als Kontrollkästchen dargestellt; Preis als Schieberegler.',
+                    'is-configurable' => 'Markiert dieses Attribut als Variantenachse (z. B. Farbe, Größe). Nur für Select verfügbar. Aktivieren sperrt Wert pro Kanal und Wert pro Gebietsschema — Varianten werden global über die Options-ID aufgelöst.',
+                    'value-per-locale' => 'Unterschiedlichen Wert pro Gebietsschema speichern. Nicht anwendbar für optionsbasierte oder boolesche Typen — ihre Labels werden bereits über die Optionstabelle übersetzt.',
+                    'value-per-channel' => 'Unterschiedlichen Wert pro Kanal speichern. Deaktiviert, wenn "Zum Erstellen konfigurierbarer Produkte verwenden" aktiviert ist.',
+                    'is-visible-on-front' => 'Dieses Attribut auf der Produktdetailseite im Storefront anzeigen.',
+                    'is-comparable' => 'Dieses Attribut beim Vergleich von Produkten einbeziehen.',
+                ],
+
                 'option' => [
                     'color' => 'Farbschwamm',
                     'dropdown' => 'Dropdown',
@@ -1503,6 +1528,15 @@ return [
                 'value-per-channel' => 'Wert pro Channel',
                 'value-per-locale' => 'Wert pro Locale',
                 'yes' => 'Ja',
+
+                'info' => [
+                    'is-filterable' => 'Fügt dieses Attribut den Kategorie-Seitenleisten-Filtern hinzu. Optionsbasierte Typen werden als Kontrollkästchen dargestellt; Preis als Schieberegler.',
+                    'is-configurable' => 'Markiert dieses Attribut als Variantenachse (z. B. Farbe, Größe). Nur für Select verfügbar. Aktivieren sperrt Wert pro Kanal und Wert pro Gebietsschema — Varianten werden global über die Options-ID aufgelöst.',
+                    'value-per-locale' => 'Unterschiedlichen Wert pro Gebietsschema speichern. Nicht anwendbar für optionsbasierte oder boolesche Typen — ihre Labels werden bereits über die Optionstabelle übersetzt.',
+                    'value-per-channel' => 'Unterschiedlichen Wert pro Kanal speichern. Deaktiviert, wenn "Zum Erstellen konfigurierbarer Produkte verwenden" aktiviert ist.',
+                    'is-visible-on-front' => 'Dieses Attribut auf der Produktdetailseite im Storefront anzeigen.',
+                    'is-comparable' => 'Dieses Attribut beim Vergleich von Produkten einbeziehen.',
+                ],
 
                 'option' => [
                     'color' => 'Farbmuster',

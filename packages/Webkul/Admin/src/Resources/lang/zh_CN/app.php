@@ -216,6 +216,22 @@ return [
                         'none' => '无',
                         'total-amount' => '总金额',
                     ],
+
+                    'booking' => [
+                        'loading' => '正在加载预订配置…',
+                        'config-missing' => '此产品缺少预订配置。',
+                        'date' => '日期',
+                        'date-from' => '开始日期',
+                        'date-to' => '结束日期',
+                        'slot' => '时段',
+                        'select-slot' => '选择一个时段',
+                        'no-slots-available' => '所选日期没有可用时段',
+                        'note' => '备注',
+                        'quantity' => '数量',
+                        'renting-type' => '租赁类型',
+                        'daily' => '按天',
+                        'hourly' => '按小时',
+                    ],
                 ],
 
                 'cart' => [
@@ -1439,6 +1455,15 @@ return [
                 'value-per-locale' => '区域性值',
                 'yes' => '是',
 
+                'info' => [
+                    'is-filterable' => '将此属性添加到类别侧边栏过滤器。基于选项的类型显示为复选框；价格显示为范围滑块。',
+                    'is-configurable' => '将此属性标记为变体轴（例如颜色、尺寸）。仅 Select 类型可用。启用后会锁定"每渠道值"和"每区域值" — 变体按选项 ID 全局解析。',
+                    'value-per-locale' => '为每个区域存储不同的值。不适用于基于选项或布尔类型 — 其标签已通过选项表翻译。',
+                    'value-per-channel' => '为每个渠道存储不同的值。启用"用于创建可配置产品"时禁用。',
+                    'is-visible-on-front' => '在店铺前台的产品页面上显示此属性。',
+                    'is-comparable' => '比较产品时包含此属性。',
+                ],
+
                 'option' => [
                     'color' => '颜色样本',
                     'dropdown' => '下拉菜单',
@@ -1503,6 +1528,15 @@ return [
                 'value-per-channel' => '渠道性值',
                 'value-per-locale' => '区域性值',
                 'yes' => '是',
+
+                'info' => [
+                    'is-filterable' => '将此属性添加到类别侧边栏过滤器。基于选项的类型显示为复选框；价格显示为范围滑块。',
+                    'is-configurable' => '将此属性标记为变体轴（例如颜色、尺寸）。仅 Select 类型可用。启用后会锁定"每渠道值"和"每区域值" — 变体按选项 ID 全局解析。',
+                    'value-per-locale' => '为每个区域存储不同的值。不适用于基于选项或布尔类型 — 其标签已通过选项表翻译。',
+                    'value-per-channel' => '为每个渠道存储不同的值。启用"用于创建可配置产品"时禁用。',
+                    'is-visible-on-front' => '在店铺前台的产品页面上显示此属性。',
+                    'is-comparable' => '比较产品时包含此属性。',
+                ],
 
                 'option' => [
                     'color' => '颜色样本',

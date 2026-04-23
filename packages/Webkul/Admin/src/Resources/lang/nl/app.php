@@ -216,6 +216,22 @@ return [
                         'none' => 'Geen',
                         'total-amount' => 'Totaalbedrag',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Boekingsconfiguratie wordt geladen…',
+                        'config-missing' => 'Boekingsconfiguratie ontbreekt voor dit product.',
+                        'date' => 'Datum',
+                        'date-from' => 'Vanaf datum',
+                        'date-to' => 'Tot datum',
+                        'slot' => 'Tijdslot',
+                        'select-slot' => 'Selecteer een tijdslot',
+                        'no-slots-available' => 'Geen tijdsloten beschikbaar voor de geselecteerde datum',
+                        'note' => 'Opmerking',
+                        'quantity' => 'Aantal',
+                        'renting-type' => 'Huurtype',
+                        'daily' => 'Dagelijks',
+                        'hourly' => 'Per uur',
+                    ],
                 ],
 
                 'cart' => [
@@ -1439,6 +1455,15 @@ return [
                 'value-per-locale' => 'Waarde per Locatie',
                 'yes' => 'Ja',
 
+                'info' => [
+                    'is-filterable' => 'Voegt dit attribuut toe aan de zijbalkfilters van de categorie. Optiegebaseerde types worden als selectievakjes weergegeven; prijs als schuifregelaar.',
+                    'is-configurable' => 'Markeert dit attribuut als variant-as (bv. Kleur, Maat). Alleen beschikbaar voor Select. Inschakelen vergrendelt Waarde per Kanaal en Waarde per Locale — varianten worden globaal via optie-ID opgelost.',
+                    'value-per-locale' => 'Sla een andere waarde per locale op. Niet van toepassing op optiegebaseerde of booleaanse types — hun labels worden al vertaald via de optie-tabel.',
+                    'value-per-channel' => 'Sla een andere waarde per kanaal op. Uitgeschakeld wanneer "Gebruik om configureerbaar product te maken" aan staat.',
+                    'is-visible-on-front' => 'Toon dit attribuut op de productpagina in de winkel.',
+                    'is-comparable' => 'Neem dit attribuut op bij het naast elkaar vergelijken van producten.',
+                ],
+
                 'option' => [
                     'color' => 'Kleurstaal',
                     'dropdown' => 'Keuzelijst',
@@ -1503,6 +1528,15 @@ return [
                 'value-per-channel' => 'Waarde per Kanaal',
                 'value-per-locale' => 'Waarde per Locatie',
                 'yes' => 'Ja',
+
+                'info' => [
+                    'is-filterable' => 'Voegt dit attribuut toe aan de zijbalkfilters van de categorie. Optiegebaseerde types worden als selectievakjes weergegeven; prijs als schuifregelaar.',
+                    'is-configurable' => 'Markeert dit attribuut als variant-as (bv. Kleur, Maat). Alleen beschikbaar voor Select. Inschakelen vergrendelt Waarde per Kanaal en Waarde per Locale — varianten worden globaal via optie-ID opgelost.',
+                    'value-per-locale' => 'Sla een andere waarde per locale op. Niet van toepassing op optiegebaseerde of booleaanse types — hun labels worden al vertaald via de optie-tabel.',
+                    'value-per-channel' => 'Sla een andere waarde per kanaal op. Uitgeschakeld wanneer "Gebruik om configureerbaar product te maken" aan staat.',
+                    'is-visible-on-front' => 'Toon dit attribuut op de productpagina in de winkel.',
+                    'is-comparable' => 'Neem dit attribuut op bij het naast elkaar vergelijken van producten.',
+                ],
 
                 'option' => [
                     'color' => 'Kleurstaal',

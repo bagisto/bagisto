@@ -216,6 +216,22 @@ return [
                         'none' => 'Cap',
                         'total-amount' => 'Suma total',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Carregant la configuració de la reserva…',
+                        'config-missing' => 'Falta la configuració de reserva per a aquest producte.',
+                        'date' => 'Data',
+                        'date-from' => 'Data d\'inici',
+                        'date-to' => 'Data de fi',
+                        'slot' => 'Franja',
+                        'select-slot' => 'Seleccioneu una franja',
+                        'no-slots-available' => 'No hi ha franges disponibles per a la data seleccionada',
+                        'note' => 'Nota',
+                        'quantity' => 'Quantitat',
+                        'renting-type' => 'Tipus de lloguer',
+                        'daily' => 'Diari',
+                        'hourly' => 'Per hores',
+                    ],
                 ],
 
                 'cart' => [
@@ -1439,6 +1455,15 @@ return [
                 'value-per-locale' => 'Valor per',
                 'yes' => 'Sí',
 
+                'info' => [
+                    'is-filterable' => 'Afegeix aquest atribut als filtres laterals de categoria. Els tipus basats en opcions es mostren com caselles; el preu com un control lliscant de rang.',
+                    'is-configurable' => 'Marca aquest atribut com un eix de variant (p. ex. Color, Mida). Només disponible per a Select. Activar-lo bloqueja Valor per Canal i Valor per Localització — les variants es resolen globalment per id d\'opció.',
+                    'value-per-locale' => 'Emmagatzema un valor diferent per localització. No aplicable per a tipus basats en opcions ni booleans — les seves etiquetes ja es tradueixen a la taula d\'opcions.',
+                    'value-per-channel' => 'Emmagatzema un valor diferent per canal. Desactivat quan "Usar per crear producte configurable" està activat.',
+                    'is-visible-on-front' => 'Mostra aquest atribut a la pàgina del producte a la botiga.',
+                    'is-comparable' => 'Inclou aquest atribut quan es comparen productes costat a costat.',
+                ],
+
                 'option' => [
                     'color' => 'Mostra de Color',
                     'dropdown' => 'Desplegable',
@@ -1503,6 +1528,15 @@ return [
                 'value-per-channel' => 'Valor per Canal',
                 'value-per-locale' => 'Valor per Localització',
                 'yes' => 'Sí',
+
+                'info' => [
+                    'is-filterable' => 'Afegeix aquest atribut als filtres laterals de categoria. Els tipus basats en opcions es mostren com caselles; el preu com un control lliscant de rang.',
+                    'is-configurable' => 'Marca aquest atribut com un eix de variant (p. ex. Color, Mida). Només disponible per a Select. Activar-lo bloqueja Valor per Canal i Valor per Localització — les variants es resolen globalment per id d\'opció.',
+                    'value-per-locale' => 'Emmagatzema un valor diferent per localització. No aplicable per a tipus basats en opcions ni booleans — les seves etiquetes ja es tradueixen a la taula d\'opcions.',
+                    'value-per-channel' => 'Emmagatzema un valor diferent per canal. Desactivat quan "Usar per crear producte configurable" està activat.',
+                    'is-visible-on-front' => 'Mostra aquest atribut a la pàgina del producte a la botiga.',
+                    'is-comparable' => 'Inclou aquest atribut quan es comparen productes costat a costat.',
+                ],
 
                 'option' => [
                     'color' => 'Mostra de Color',

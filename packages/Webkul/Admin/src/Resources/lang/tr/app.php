@@ -216,6 +216,22 @@ return [
                         'none' => 'Yok',
                         'total-amount' => 'Toplam Tutar',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Rezervasyon yapılandırması yükleniyor…',
+                        'config-missing' => 'Bu ürün için rezervasyon yapılandırması eksik.',
+                        'date' => 'Tarih',
+                        'date-from' => 'Başlangıç tarihi',
+                        'date-to' => 'Bitiş tarihi',
+                        'slot' => 'Zaman dilimi',
+                        'select-slot' => 'Bir zaman dilimi seçin',
+                        'no-slots-available' => 'Seçilen tarih için uygun zaman dilimi yok',
+                        'note' => 'Not',
+                        'quantity' => 'Miktar',
+                        'renting-type' => 'Kiralama türü',
+                        'daily' => 'Günlük',
+                        'hourly' => 'Saatlik',
+                    ],
                 ],
 
                 'cart' => [
@@ -1439,6 +1455,15 @@ return [
                 'value-per-locale' => 'Yerel Dile Göre Değer',
                 'yes' => 'Evet',
 
+                'info' => [
+                    'is-filterable' => 'Bu özelliği kategori yan panel filtrelerine ekler. Seçenek tabanlı türler onay kutusu olarak, fiyat aralık kaydırıcısı olarak gösterilir.',
+                    'is-configurable' => 'Bu özelliği bir varyant ekseni olarak işaretler (ör. Renk, Beden). Yalnızca Select için kullanılabilir. Etkinleştirmek Value Per Channel ve Value Per Locale\'i kilitler — varyantlar seçenek kimliğiyle global olarak çözümlenir.',
+                    'value-per-locale' => 'Locale başına farklı değer saklar. Seçenek tabanlı veya boolean türler için geçerli değildir — etiketleri zaten seçenek tablosu aracılığıyla çevrilir.',
+                    'value-per-channel' => 'Kanal başına farklı değer saklar. "Use to Create Configurable Product" aktifken devre dışıdır.',
+                    'is-visible-on-front' => 'Bu özelliği mağaza ön yüzündeki ürün sayfasında gösterir.',
+                    'is-comparable' => 'Ürünleri yan yana karşılaştırırken bu özelliği dahil eder.',
+                ],
+
                 'option' => [
                     'color' => 'Renk Örneği',
                     'dropdown' => 'Açılır Menü',
@@ -1503,6 +1528,15 @@ return [
                 'value-per-channel' => 'Kanal Başına Değer',
                 'value-per-locale' => 'Yerel Dil Başına Değer',
                 'yes' => 'Evet',
+
+                'info' => [
+                    'is-filterable' => 'Bu özelliği kategori yan panel filtrelerine ekler. Seçenek tabanlı türler onay kutusu olarak, fiyat aralık kaydırıcısı olarak gösterilir.',
+                    'is-configurable' => 'Bu özelliği bir varyant ekseni olarak işaretler (ör. Renk, Beden). Yalnızca Select için kullanılabilir. Etkinleştirmek Value Per Channel ve Value Per Locale\'i kilitler — varyantlar seçenek kimliğiyle global olarak çözümlenir.',
+                    'value-per-locale' => 'Locale başına farklı değer saklar. Seçenek tabanlı veya boolean türler için geçerli değildir — etiketleri zaten seçenek tablosu aracılığıyla çevrilir.',
+                    'value-per-channel' => 'Kanal başına farklı değer saklar. "Use to Create Configurable Product" aktifken devre dışıdır.',
+                    'is-visible-on-front' => 'Bu özelliği mağaza ön yüzündeki ürün sayfasında gösterir.',
+                    'is-comparable' => 'Ürünleri yan yana karşılaştırırken bu özelliği dahil eder.',
+                ],
 
                 'option' => [
                     'color' => 'Renk Kartelası',

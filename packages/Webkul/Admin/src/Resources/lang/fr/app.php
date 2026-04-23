@@ -216,6 +216,22 @@ return [
                         'none' => 'Aucun',
                         'total-amount' => 'Montant total',
                     ],
+
+                    'booking' => [
+                        'loading' => 'Chargement de la configuration de réservation…',
+                        'config-missing' => 'Configuration de réservation manquante pour ce produit.',
+                        'date' => 'Date',
+                        'date-from' => 'Date de début',
+                        'date-to' => 'Date de fin',
+                        'slot' => 'Créneau',
+                        'select-slot' => 'Sélectionner un créneau',
+                        'no-slots-available' => 'Aucun créneau disponible pour la date sélectionnée',
+                        'note' => 'Note',
+                        'quantity' => 'Quantité',
+                        'renting-type' => 'Type de location',
+                        'daily' => 'Journalier',
+                        'hourly' => 'Horaire',
+                    ],
                 ],
 
                 'cart' => [
@@ -1439,6 +1455,15 @@ return [
                 'value-per-locale' => 'Valeur par localisation',
                 'yes' => 'Oui',
 
+                'info' => [
+                    'is-filterable' => 'Ajoute cet attribut aux filtres de la barre latérale de catégorie. Les types basés sur des options s\'affichent en cases à cocher ; le prix en curseur de plage.',
+                    'is-configurable' => 'Désigne cet attribut comme axe de variante (par ex. Couleur, Taille). Disponible uniquement pour Select. L\'activer verrouille Valeur par Canal et Valeur par Locale — les variantes sont résolues globalement par id d\'option.',
+                    'value-per-locale' => 'Stocker une valeur différente par locale. Non applicable aux types basés sur options ou booléens — leurs libellés sont déjà traduits via la table d\'options.',
+                    'value-per-channel' => 'Stocker une valeur différente par canal. Désactivé quand "Utiliser pour créer un produit configurable" est activé.',
+                    'is-visible-on-front' => 'Afficher cet attribut sur la page du produit dans la boutique.',
+                    'is-comparable' => 'Inclure cet attribut lors de la comparaison de produits.',
+                ],
+
                 'option' => [
                     'color' => 'Nuancier de couleurs',
                     'dropdown' => 'Menu déroulant',
@@ -1503,6 +1528,15 @@ return [
                 'value-per-channel' => 'Valeur par canal',
                 'value-per-locale' => 'Valeur par localisation',
                 'yes' => 'Oui',
+
+                'info' => [
+                    'is-filterable' => 'Ajoute cet attribut aux filtres de la barre latérale de catégorie. Les types basés sur des options s\'affichent en cases à cocher ; le prix en curseur de plage.',
+                    'is-configurable' => 'Désigne cet attribut comme axe de variante (par ex. Couleur, Taille). Disponible uniquement pour Select. L\'activer verrouille Valeur par Canal et Valeur par Locale — les variantes sont résolues globalement par id d\'option.',
+                    'value-per-locale' => 'Stocker une valeur différente par locale. Non applicable aux types basés sur options ou booléens — leurs libellés sont déjà traduits via la table d\'options.',
+                    'value-per-channel' => 'Stocker une valeur différente par canal. Désactivé quand "Utiliser pour créer un produit configurable" est activé.',
+                    'is-visible-on-front' => 'Afficher cet attribut sur la page du produit dans la boutique.',
+                    'is-comparable' => 'Inclure cet attribut lors de la comparaison de produits.',
+                ],
 
                 'option' => [
                     'color' => 'Nuancier de couleurs',

@@ -208,9 +208,8 @@
                                                 <!-- Locales Tables Heading -->
                                                 <x-admin::table.th 
                                                     v-for="locale in locales"
-                                                    v-pre
+                                                    v-text="locale.name + ' (' + locale.code.toUpperCase() + ')' "
                                                 >
-                                                    @{{ locale.name + '(' + [locale.code] + ')' }}
                                                 </x-admin::table.th>
 
                                                 <!-- Action Tables Heading -->
@@ -653,6 +652,10 @@
                                     @lang('admin::app.catalog.attributes.edit.value-per-locale')
                                 </label>
 
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.edit.info.value-per-locale')"
+                                />
+
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="value_per_locale"
@@ -678,6 +681,10 @@
                                 <label class="cursor-not-allowed text-xs font-medium text-gray-600 dark:text-gray-300">
                                     @lang('admin::app.catalog.attributes.edit.value-per-channel')
                                 </label>
+
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.edit.info.value-per-channel')"
+                                />
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -712,6 +719,10 @@
                                     @lang('admin::app.catalog.attributes.edit.is-filterable')
                                 </label>
 
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.edit.info.is-filterable')"
+                                />
+
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_filterable"
@@ -745,6 +756,10 @@
                                     @lang('admin::app.catalog.attributes.edit.is-configurable')
                                 </label>
 
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.edit.info.is-configurable')"
+                                />
+
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_configurable"
@@ -774,6 +789,10 @@
                                     @lang('admin::app.catalog.attributes.edit.is-visible-on-front')
                                 </label>
 
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.edit.info.is-visible-on-front')"
+                                />
+
                                 <x-admin::form.control-group.control
                                     type="hidden"
                                     name="is_visible_on_front"
@@ -802,6 +821,10 @@
                                 >
                                     @lang('admin::app.catalog.attributes.edit.is-comparable')
                                 </label>
+
+                                <x-admin::catalog.attributes.flag-info
+                                    :text="trans('admin::app.catalog.attributes.edit.info.is-comparable')"
+                                />
 
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -992,7 +1015,8 @@
                         return this.attributeType == 'checkbox'
                             || this.attributeType == 'select'
                             || this.attributeType == 'multiselect'
-                            || this.attributeType == 'boolean';
+                            || this.attributeType == 'boolean'
+                            || this.attributeType == 'price';
                     },
 
                     isConfigurable() {
