@@ -280,9 +280,18 @@ class Booking
      */
     public function getCalendarAvailability(BookingProduct $bookingProduct): array
     {
+        /**
+         * `default` and `event` types are always date-range-based — the admin
+         * form doesn't even expose an "Available Every Week" selector for
+         * them. Force the flag off here so a legacy or imported row with
+         * `available_every_week=1` doesn't make the storefront / admin date
+         * picker treat the availability window as open-ended.
+         */
+        $forceDateRange = in_array($bookingProduct->type, ['default', 'event'], true);
+
         return [
             'valid_weekdays' => $this->getValidWeekdays($bookingProduct),
-            'available_every_week' => (bool) $bookingProduct->available_every_week,
+            'available_every_week' => $forceDateRange ? false : (bool) $bookingProduct->available_every_week,
             'available_from' => $bookingProduct->available_from?->format('Y-m-d'),
             'available_to' => $bookingProduct->available_to?->format('Y-m-d'),
             'prevent_scheduling_before' => (int) ($bookingProduct->table_slot?->prevent_scheduling_before ?? 0),
