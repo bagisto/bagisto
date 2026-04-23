@@ -170,6 +170,19 @@ class AttributeController extends Controller
         $requestData['default_value'] ??= null;
 
         foreach (self::BOOLEAN_FIELDS as $field) {
+            if (
+                in_array($field, [
+                    'is_unique',
+                    'value_per_locale',
+                    'value_per_channel',
+                ])
+                && ! request()->has($field)
+            ) {
+                unset($requestData[$field]);
+
+                continue;
+            }
+
             $requestData[$field] = request()->boolean($field);
         }
 
