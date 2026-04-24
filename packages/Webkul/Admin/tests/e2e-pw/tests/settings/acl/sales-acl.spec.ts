@@ -212,7 +212,7 @@ test.describe("acl management", () => {
     test("should create custom role with sales (rma->create) permission", async ({
         adminPage,
     }) => {
-        test.setTimeout(300 * 1000);
+        test.setTimeout(120 * 1000);
         const aclManagement = new ACLManagement(adminPage);
         await aclManagement.createRole("custom", [
             "sales.rma.requests.create",

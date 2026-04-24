@@ -1,7 +1,8 @@
 import { expect, test } from "../../../../setup";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
-import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
+import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 
 import { loginAsAdmin } from "../../../../utils/admin";
 

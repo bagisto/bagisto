@@ -1,5 +1,5 @@
 import { test } from "../setup";
-import { ProductCreation } from "../pages/admin/catalog/products";
+import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
 import { SimpleProductCheckout } from "../pages/shop/checkout/product-types/SimpleProductCheckout";
 import { loginAsCustomer, addAddress } from "../utils/customer";
 import { RMACreatePage } from "../pages/shop/RmaCreatePage";

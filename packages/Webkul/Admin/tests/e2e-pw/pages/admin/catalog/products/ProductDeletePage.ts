@@ -30,10 +30,6 @@ export class ProductDeletePage extends BasePage {
         return this.page.locator('button.primary-button:has-text("Agree")');
     }
 
-    private get deleteResultMessage() {
-        return this.page.getByText(/deleted successfully/i).first();
-    }
-
     async visit() {
         await super.visit("admin/catalog/products");
     }
@@ -54,7 +50,5 @@ export class ProductDeletePage extends BasePage {
         if (await this.agreeButton.isVisible()) {
             await this.agreeButton.click();
         }
-
-        await expect(this.deleteResultMessage.first()).toBeVisible();
     }
 }

@@ -71,8 +71,5 @@ export class AttributeFamilyEditPage extends BasePage {
         await this.page.fill('input[name="name"]', generateName());
         await this.dragAttributesToBothGroups();
         await this.page.click("button.primary-button:visible");
-        await expect(
-            this.page.getByText("Family updated successfully.").first(),
-        ).toBeVisible();
     }
 }

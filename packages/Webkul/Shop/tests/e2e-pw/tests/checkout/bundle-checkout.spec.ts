@@ -1,16 +1,8 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products";
+import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { BundleProductCheckout } from "../../pages/shop/checkout/product-types/BundleProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-/**
- * =============================
- * BUNDLE PRODUCT CHECKOUT FLOW
- * =============================
- * This test suite covers:
- * 1. Creating a bundle product with variations.
- * 2. Completing checkout for the bundle product.
- */
 test.describe("bundle product checkout flow", () => {
     test("should create simple product to add in bundle", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);

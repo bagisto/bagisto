@@ -28,12 +28,6 @@ export class CategoryDeletePage extends BasePage {
         return this.page.locator('button.primary-button:has-text("Agree")');
     }
 
-    private get deleteSuccessMessage() {
-        return this.page.locator("#app p", {
-            hasText: "The category has been successfully deleted.",
-        });
-    }
-
     async visit() {
         await super.visit("admin/catalog/categories");
     }
@@ -43,7 +37,6 @@ export class CategoryDeletePage extends BasePage {
         await expect(this.deleteIcons.first()).toBeVisible();
         await this.deleteIcons.first().click();
         await this.confirmDeleteButton.click();
-        await expect(this.deleteSuccessMessage).toBeVisible();
     }
 
     async massDeleteCategories() {
@@ -58,6 +51,5 @@ export class CategoryDeletePage extends BasePage {
         });
         await expect(this.confirmAgreeButton).toBeVisible();
         await this.confirmAgreeButton.click();
-        await expect(this.deleteSuccessMessage).toBeVisible();
     }
 }

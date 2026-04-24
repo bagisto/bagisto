@@ -1,5 +1,5 @@
 import { test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -43,24 +43,24 @@ test.describe("cart rules", () => {
                 value: "199",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon();
         });
 
-        // test("should apply coupon when subtotal condition is -> is not equal to", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     const ruleApplyPage = new RuleApplyPage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "cart_item|base_total",
-        //         operator: "!=",
-        //         value: "199",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await ruleApplyPage.applyCouponAtCheckout();
-        // });
+        test("should apply coupon when subtotal condition is -> is not equal to", async ({
+            page,
+        }) => {
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
+            await loginAsAdmin(page);
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
+                attribute: "cart_item|base_total",
+                operator: "!=",
+                value: "101",
+            });
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCoupon();
+        });
 
         test("should apply coupon when subtotal condition is -> equals or greater then", async ({
             page,
@@ -75,7 +75,7 @@ test.describe("cart rules", () => {
                 value: "199",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon();
         });
 
         test("should apply coupon when subtotal condition is -> equals or less than", async ({
