@@ -4855,6 +4855,7 @@ return [
             'table' => [
                 'actions' => '操作',
                 'no-records-available' => '没有可用记录。',
+                'no-records-hint' => '尝试调整过滤器，或在添加数据后稍后再查看。',
             ],
         ],
 

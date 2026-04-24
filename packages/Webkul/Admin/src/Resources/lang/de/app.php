@@ -4855,6 +4855,7 @@ return [
             'table' => [
                 'actions' => 'Aktionen',
                 'no-records-available' => 'Keine Datensätze verfügbar.',
+                'no-records-hint' => 'Passen Sie die Filter an oder schauen Sie später noch einmal vorbei, sobald Daten hinzugefügt wurden.',
             ],
         ],
 

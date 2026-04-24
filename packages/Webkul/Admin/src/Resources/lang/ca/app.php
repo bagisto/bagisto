@@ -4855,6 +4855,7 @@ return [
             'table' => [
                 'actions' => 'Accions',
                 'no-records-available' => 'No hi ha registres disponibles.',
+                'no-records-hint' => 'Proveu d\'ajustar els filtres o torneu més tard quan s\'hagin afegit dades.',
             ],
         ],
 

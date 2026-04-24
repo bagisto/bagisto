@@ -4855,6 +4855,7 @@ return [
             'table' => [
                 'actions' => 'Eylemler',
                 'no-records-available' => 'Kullanılabilir Kayıt Yok.',
+                'no-records-hint' => 'Filtrelerinizi ayarlayın veya veriler eklendiğinde daha sonra tekrar kontrol edin.',
             ],
         ],
 

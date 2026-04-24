@@ -4855,6 +4855,7 @@ return [
             'table' => [
                 'actions' => 'アクション',
                 'no-records-available' => '利用可能なレコードはありません。',
+                'no-records-hint' => 'フィルターを調整するか、データが追加された後にもう一度ご確認ください。',
             ],
         ],
 

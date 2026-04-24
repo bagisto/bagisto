@@ -4855,6 +4855,7 @@ return [
             'table' => [
                 'actions' => 'Tindakan',
                 'no-records-available' => 'Tidak Ada Data Tersedia.',
+                'no-records-hint' => 'Coba sesuaikan filter Anda, atau periksa kembali nanti setelah data ditambahkan.',
             ],
         ],
 
