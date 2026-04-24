@@ -1,5 +1,5 @@
 import { test } from "../../../../setup";
-import { expect } from "@playwright/test";}
+import { expect } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
