@@ -1302,6 +1302,7 @@ return [
                             'type-mismatch' => 'Het boekingstype kan niet worden gewijzigd.',
                             'time-validation' => 'De starttijd moet kleiner zijn dan de eindtijd.',
                             'overlap-validation' => 'Het tijdslot overlapt met een bestaand slot.',
+                            'slot-window-too-short' => 'Een of meer slotvensters zijn korter dan de vereiste duur van :duration minuten. Elk venster moet minimaal :duration minuten duren.',
                         ],
                     ],
 

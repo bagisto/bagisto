@@ -1302,6 +1302,7 @@ return [
                             'type-mismatch' => 'Der Buchungstyp kann nicht geändert werden.',
                             'time-validation' => 'Die Startzeit muss kleiner als die Endzeit sein.',
                             'overlap-validation' => 'Der Zeitraum überschneidet sich mit einem vorhandenen Zeitraum.',
+                            'slot-window-too-short' => 'Ein oder mehrere Slot-Fenster sind kürzer als die erforderliche Dauer von :duration Minuten. Jedes Fenster muss mindestens :duration Minuten lang sein.',
                         ],
                     ],
 

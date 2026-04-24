@@ -1302,6 +1302,7 @@ return [
                             'type-mismatch' => 'Rezervasyon türü değiştirilemez.',
                             'time-validation' => 'Başlangıç zamanı, bitiş zamanından küçük olmalıdır.',
                             'overlap-validation' => 'Zaman aralığı mevcut bir aralıkla çakışıyor.',
+                            'slot-window-too-short' => 'Bir veya daha fazla slot penceresi gerekli :duration dakikalık süreden daha kısa. Her pencere en az :duration dakika olmalıdır.',
                         ],
                     ],
 

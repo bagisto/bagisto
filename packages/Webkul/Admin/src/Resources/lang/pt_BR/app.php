@@ -1302,6 +1302,7 @@ return [
                             'type-mismatch' => 'O tipo de reserva não pode ser alterado.',
                             'time-validation' => 'O horário de início deve ser menor que o horário de término.',
                             'overlap-validation' => 'O intervalo de tempo se sobrepõe a um intervalo existente.',
+                            'slot-window-too-short' => 'Uma ou mais janelas de slot são mais curtas que a duração necessária de :duration minutos. Cada janela deve durar pelo menos :duration minutos.',
                         ],
                     ],
 

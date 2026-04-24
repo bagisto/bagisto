@@ -1302,6 +1302,7 @@ return [
                             'type-mismatch' => 'Le type de réservation ne peut pas être modifié.',
                             'time-validation' => "L'heure de début doit être inférieure à l'heure de fin.",
                             'overlap-validation' => 'Le créneau horaire chevauche un créneau existant.',
+                            'slot-window-too-short' => 'Une ou plusieurs fenêtres de créneau sont plus courtes que la durée requise de :duration minutes. Chaque fenêtre doit durer au moins :duration minutes.',
                         ],
                     ],
 

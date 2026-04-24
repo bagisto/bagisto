@@ -421,7 +421,7 @@
 
                         <!-- Booking Type Many -->
                         <template v-if="default_booking.booking_type == 'many'">
-                            <div class="grid grid-cols-3 gap-2.5 pb-3">
+                            <div class="grid grid-cols-3 gap-2.5 pb-1">
                                 <!-- Hidden ID Field -->
                                 <x-admin::form.control-group.control
                                     type="hidden"
@@ -429,7 +429,7 @@
                                 />
 
                                 <!-- Slots From -->
-                                <x-admin::form.control-group class="w-full">
+                                <x-admin::form.control-group class="w-full !mb-0">
                                     <x-admin::form.control-group.label class="hidden">
                                         @lang('admin::app.catalog.products.edit.types.booking.default.modal.slot.from')
                                     </x-admin::form.control-group.label>
@@ -440,13 +440,14 @@
                                         ::rules="selectedStatus[currentIndex] ? 'required' : ''"
                                         :label="trans('admin::app.catalog.products.edit.types.booking.default.modal.slot.from')"
                                         :placeholder="trans('admin::app.catalog.products.edit.types.booking.default.modal.slot.from')"
+                                        @input="drawerError = ''"
                                     />
 
                                     <x-admin::form.control-group.error control-name="from" />
                                 </x-admin::form.control-group>
 
                                 <!-- Slots To -->
-                                <x-admin::form.control-group class="w-full">
+                                <x-admin::form.control-group class="w-full !mb-0">
                                     <x-admin::form.control-group.label class="hidden">
                                         @lang('admin::app.catalog.products.edit.types.booking.default.modal.slot.to')
                                     </x-admin::form.control-group.label>
@@ -457,13 +458,14 @@
                                         ::rules="selectedStatus[currentIndex] ? 'required' : ''"
                                         :label="trans('admin::app.catalog.products.edit.types.booking.default.modal.slot.to')"
                                         :placeholder="trans('admin::app.catalog.products.edit.types.booking.default.modal.slot.to')"
+                                        @input="drawerError = ''"
                                     />
 
                                     <x-admin::form.control-group.error control-name="to" />
                                 </x-admin::form.control-group>
 
                                 <!-- Status -->
-                                <x-admin::form.control-group class="w-full">
+                                <x-admin::form.control-group class="w-full !mb-0">
                                     <x-admin::form.control-group.label class="hidden">
                                         @lang('admin::app.catalog.products.edit.types.booking.default.modal.slot.status')
                                     </x-admin::form.control-group.label>
@@ -474,6 +476,7 @@
                                         v-model="selectedStatus[currentIndex]"
                                         ::value="selectedStatus[currentIndex]"
                                         :label="trans('admin::app.catalog.products.edit.types.booking.default.modal.slot.status')"
+                                        @change="drawerError = ''"
                                     >
                                         <option value="1">
                                             @lang('admin::app.catalog.products.edit.types.booking.default.modal.slot.open')
@@ -487,6 +490,13 @@
                                     <x-admin::form.control-group.error control-name="status" />
                                 </x-admin::form.control-group>
                             </div>
+
+                            <p
+                                v-if="drawerError"
+                                class="mt-1 text-xs italic text-red-600"
+                                v-text="drawerError"
+                            >
+                            </p>
                         </template>
                     </x-slot:content>
                 </x-admin::drawer>
@@ -533,6 +543,8 @@
                     ],
 
                     selectedStatus : [],
+
+                    drawerError: '',
                 }
             },
 
@@ -636,18 +648,30 @@
                     } else {
                         params.id = this.currentIndex;
 
+                        this.drawerError = '';
+
                         if (params.from && params.to) {
                             const currentSlot = this.slots['many'][this.currentIndex];
 
                             if (params.from >= params.to) {
-                                this.$emitter.emit('add-flash', {
-                                    type: 'error',
-                                    message: "@lang('admin::app.catalog.products.edit.types.booking.validations.time-validation')"
-                                });
+                                this.drawerError = "@lang('admin::app.catalog.products.edit.types.booking.validations.time-validation')";
 
                                 return;
                             }
-                            
+
+                            const minMinutes = parseInt(this.default_booking.duration) || 0;
+
+                            if (
+                                minMinutes > 0
+                                && parseInt(params.status) === 1
+                                && ! this.spansMinimumDuration(params.from, params.to, minMinutes)
+                            ) {
+                                this.drawerError = "@lang('admin::app.catalog.products.edit.types.booking.validations.slot-window-too-short')"
+                                    .replace(/:duration/g, minMinutes);
+
+                                return;
+                            }
+
                             if (! currentSlot.length) {
                                 currentSlot.push(params);
                             } else {
@@ -659,6 +683,21 @@
                     }
 
                     this.$refs.drawerForm.toggle();
+                },
+
+                spansMinimumDuration(from, to, minMinutes) {
+                    const toMinutes = timeString => {
+                        const [h, m] = timeString.split(':').map(n => parseInt(n, 10) || 0);
+                        return h * 60 + m;
+                    };
+
+                    let duration = toMinutes(to) - toMinutes(from);
+
+                    if (duration <= 0) {
+                        duration += 24 * 60;
+                    }
+
+                    return duration >= minMinutes;
                 },
 
                 convertIndexToDay(day) {
@@ -680,6 +719,8 @@
                 },
 
                 toggle(element) {
+                    this.drawerError = '';
+
                     if (element != undefined) {
                         this.$refs.modelForm.setValues(this.slots['many'][element][0]);
 

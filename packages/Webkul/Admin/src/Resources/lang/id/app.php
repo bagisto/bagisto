@@ -1302,6 +1302,7 @@ return [
                             'type-mismatch' => 'Jenis pemesanan tidak dapat diubah.',
                             'time-validation' => 'Waktu mulai harus lebih kecil dari waktu selesai.',
                             'overlap-validation' => 'Slot waktu bertabrakan dengan slot yang sudah ada.',
+                            'slot-window-too-short' => 'Satu atau lebih jendela slot lebih pendek dari durasi :duration menit yang diperlukan. Setiap jendela harus setidaknya :duration menit.',
                         ],
                     ],
 

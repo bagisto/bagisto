@@ -1302,6 +1302,7 @@ return [
                             'type-mismatch' => 'The booking type cannot be changed.',
                             'time-validation' => 'Start time must be less than end time.',
                             'overlap-validation' => 'Time slot overlaps with an existing slot.',
+                            'slot-window-too-short' => 'Una sau mai multe ferestre de slot sunt mai scurte decât durata necesară de :duration minute. Fiecare fereastră trebuie să dureze cel puțin :duration minute.',
                         ],
                     ],
 

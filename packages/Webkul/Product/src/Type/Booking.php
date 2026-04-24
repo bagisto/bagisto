@@ -78,6 +78,8 @@ class Booking extends AbstractType
     ) {}
 
     /**
+     * Update the product type specific data.
+     *
      * @param  int  $id
      * @param  string  $attribute
      * @return Product
@@ -113,7 +115,7 @@ class Booking extends AbstractType
     }
 
     /**
-     * Returns additional views
+     * Returns additional views.
      *
      * @return mixed
      */
@@ -129,7 +131,7 @@ class Booking extends AbstractType
     }
 
     /**
-     * Return true if this product can have inventory
+     * Return true if this product can have inventory.
      */
     public function showQuantityBox(): bool
     {
@@ -137,6 +139,8 @@ class Booking extends AbstractType
     }
 
     /**
+     * If the product has inventory, return true if the given cart item has quantity
+     *
      * @param  \Webkul\Checkout\Contracts\CartItem  $cartItem
      */
     public function isItemHaveQuantity($cartItem): bool
@@ -307,6 +311,9 @@ class Booking extends AbstractType
     }
 
     /**
+     * Compare the booking options of two cart items to determine if they represent the same booking slot/ticket
+     * configuration for the same product, and can thus be merged in the cart.
+     *
      * @param  array  $options1
      * @param  array  $options2
      */
@@ -350,7 +357,7 @@ class Booking extends AbstractType
     }
 
     /**
-     * Returns additional information for items
+     * Returns additional information for items.
      *
      * @param  array  $data
      */
@@ -360,7 +367,7 @@ class Booking extends AbstractType
     }
 
     /**
-     * Validate cart item product price
+     * Validate cart item product price.
      */
     public function validateCartItem(CartItem $item): CartItemValidationResult
     {
@@ -382,7 +389,7 @@ class Booking extends AbstractType
     }
 
     /**
-     * Returns price indexer class for a specific product type
+     * Returns price indexer class for a specific product type.
      *
      * @return string
      */
@@ -508,6 +515,143 @@ class Booking extends AbstractType
                     }
                 },
             ],
+
+            'booking.duration' => [
+                function ($attribute, $value, $fail) {
+                    $booking = request('booking') ?? [];
+
+                    if (! in_array($booking['type'] ?? null, ['default', 'appointment', 'table'], true)) {
+                        return;
+                    }
+
+                    $this->validateSlotWindowDurations($booking, $fail);
+                },
+            ],
+
+            'booking.renting_type' => [
+                function ($attribute, $value, $fail) {
+                    $booking = request('booking') ?? [];
+
+                    if (($booking['type'] ?? null) !== 'rental') {
+                        return;
+                    }
+
+                    $this->validateSlotWindowDurations($booking, $fail);
+                },
+            ],
         ];
+    }
+
+    /**
+     * Rejects configurations where an admin-defined slot window is narrower than
+     * the minimum that can produce a bookable sub-slot. Without this, the saved
+     * product looks fine in the admin form but the storefront grinds out zero
+     * selectable slots on the affected days.
+     */
+    protected function validateSlotWindowDurations(array $booking, \Closure $fail): void
+    {
+        $type = $booking['type'] ?? null;
+
+        if (! in_array($type, ['default', 'appointment', 'table', 'rental'], true)) {
+            return;
+        }
+
+        /**
+         * "One booking for many days" on default spans weekday boundaries with its
+         * own from_day/to_day fields — duration math is different and not the
+         * case the user is hitting. Skip it here.
+         */
+        if (
+            $type === 'default'
+            && ($booking['booking_type'] ?? null) === 'one'
+        ) {
+            return;
+        }
+
+        $minMinutes = match ($type) {
+            'default', 'appointment', 'table' => (int) ($booking['duration'] ?? 0),
+            'rental' => in_array($booking['renting_type'] ?? null, ['hourly', 'daily_hourly'], true)
+                ? 60
+                : 0,
+        };
+
+        if ($minMinutes <= 0) {
+            return;
+        }
+
+        $slots = $booking['slots'] ?? [];
+
+        if (empty($slots)) {
+            return;
+        }
+
+        foreach ($this->flattenSlotWindows($slots) as $entry) {
+            if (! $this->slotWindowMeetsDuration($entry, $minMinutes)) {
+                $message = trans('admin::app.catalog.products.edit.types.booking.validations.slot-window-too-short', [
+                    'duration' => $minMinutes,
+                ]);
+
+                /**
+                 * Also flash as a top-of-page error toast so admins see the
+                 * problem even if the field-level error message component
+                 * isn't bound to the duration / renting_type key on that
+                 * particular booking sub-type.
+                 */
+                session()->flash('error', $message);
+
+                $fail($message);
+
+                return;
+            }
+        }
+    }
+
+    /**
+     * Normalises both "same slot every day" (flat indexed) and per-weekday (nested)
+     * slot arrays into a single iterable of {from, to} entries.
+     */
+    protected function flattenSlotWindows(array $slots): iterable
+    {
+        foreach ($slots as $entry) {
+            if (! is_array($entry)) {
+                continue;
+            }
+
+            if (isset($entry['from'], $entry['to'])) {
+                yield $entry;
+
+                continue;
+            }
+
+            foreach ($entry as $inner) {
+                if (is_array($inner) && isset($inner['from'], $inner['to'])) {
+                    yield $inner;
+                }
+            }
+        }
+    }
+
+    /**
+     * Returns true if the slot window's {from, to} HH:MM strings span at least
+     * the given number of minutes. Overnight windows (to earlier than from) are
+     * treated as crossing midnight.
+     */
+    protected function slotWindowMeetsDuration(array $entry, int $minMinutes): bool
+    {
+        if (empty($entry['from']) || empty($entry['to'])) {
+            return true;
+        }
+
+        [$fromHours, $fromMinutes] = array_pad(array_map('intval', explode(':', $entry['from'])), 2, 0);
+        [$toHours, $toMinutes] = array_pad(array_map('intval', explode(':', $entry['to'])), 2, 0);
+
+        $from = $fromHours * 60 + $fromMinutes;
+        $to = $toHours * 60 + $toMinutes;
+
+        if ($to <= $from) {
+            $to += 24 * 60;
+        }
+
+        return ($to - $from) >= $minMinutes;
     }
 }
