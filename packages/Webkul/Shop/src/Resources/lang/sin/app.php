@@ -814,6 +814,15 @@ return [
                         'book-your-ticket' => 'ඔබගේ ටිකට්පත වෙන්කරන්න',
                         'title' => 'සිදුවීම :',
                         'total-price' => 'මුළු මිල',
+                        'summary-title' => 'ඔබේ වෙන්කිරීම',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'මූලික ගාස්තුව (:count × :price)',
+                        'ticket' => 'ටිකට්',
+                        'tickets' => 'ටිකට්',
+                        'total' => 'මුළු',
+                        'select-tickets-hint' => 'මුළු දැකීමට ඔබේ ටිකට් ප්‍රමාණය තෝරන්න.',
+                        'starting-from' => 'සිට',
+                        'base-fee-note' => 'මූලික ගාස්තුව + ලාභම ටිකට් ඇතුළත් වේ. ඔබේ ටිකට් තේරීම අනුව මුළු යාවත්කාලීන වේ.',
                     ],
 
                     'rental' => [
@@ -829,6 +838,18 @@ return [
                         'slot' => 'ස්ලොට්',
                         'no-slots-available' => 'ස්ලොට් නොමැත',
                         'to' => 'දක්වා',
+                        'summary-title' => 'ඔබේ කුලී',
+                        'base-rental-fee' => 'මූලික කුලී ගාස්තුව',
+                        'daily-rate-line' => 'දෛනික ගාස්තුව (:count × :rate)',
+                        'hourly-rate-line' => 'පැයකට ගාස්තුව (:count × :rate)',
+                        'day' => 'දිනය',
+                        'days' => 'දින',
+                        'hour' => 'පැය',
+                        'hours' => 'පැය',
+                        'total' => 'මුළු',
+                        'select-dates-hint' => 'මුළු දැකීමට ඔබේ කුලී දින තෝරන්න.',
+                        'starting-from' => 'සිට',
+                        'rental-fee-note' => 'මූලික ගාස්තුව + අවම කුලී ගාස්තුව ඇතුළත් වේ. ඔබ තෝරාගත් කාල සීමාව අනුව මුළු යාවත්කාලීන වේ.',
                     ],
 
                     'table' => [
@@ -935,7 +956,7 @@ return [
                     'missing_options' => 'මෙම නිෂ්පාදනය සඳහා විකල්ප අතුරුදහන් වී ඇත.',
                     'inventory_warning' => 'අයදුම් කළ ප්‍රමාණය ලබාගත නොහැක, කරුණාකර පසුව නැවත උත්සාහ කරන්න.',
                     'rental_unavailable' => 'මෙම කුලී නිෂ්පාදනය තෝරාගත් දිනයන් සඳහා නොමැත.',
-                    'select_hourly_duration' => 'පැයක කාල පරාසයක් තෝරන්න.',
+                    'select_hourly_duration' => 'අවම වශයෙන් පැයක කාල සීමාවක් තෝරන්න.',
                 ],
 
                 'per-guest' => 'ආගන්තුකයෙකුට',

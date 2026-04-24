@@ -104,6 +104,10 @@ class EventTicket extends Booking
 
         $ticket = $bookingProduct->event_tickets()->find($cartItem['additional']['booking']['ticket_id']);
 
+        if (! $ticket) {
+            return false;
+        }
+
         if ($ticket->qty - $this->getBookedQuantity($cartItem) < $cartItem['quantity']) {
             return false;
         }
@@ -155,6 +159,10 @@ class EventTicket extends Booking
             $bookingProduct = $this->bookingProductRepository->findOneByField('product_id', $product['product_id']);
 
             $ticket = $bookingProduct->event_tickets()->find($product['additional']['booking']['ticket_id']);
+
+            if (! $ticket) {
+                continue;
+            }
 
             $price = $ticket->price;
 

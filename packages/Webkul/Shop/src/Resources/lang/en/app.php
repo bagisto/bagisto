@@ -814,6 +814,15 @@ return [
                         'book-your-ticket' => 'Book Your Ticket',
                         'title' => 'Event on :',
                         'total-price' => 'Total Price',
+                        'summary-title' => 'Your booking',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'Base fee (:count × :price)',
+                        'ticket' => 'ticket',
+                        'tickets' => 'tickets',
+                        'total' => 'Total',
+                        'select-tickets-hint' => 'Select your ticket quantities to see the total.',
+                        'starting-from' => 'Starting from',
+                        'base-fee-note' => 'Includes base fee + cheapest ticket price. Total updates with your ticket selection.',
                     ],
 
                     'rental' => [
@@ -829,6 +838,18 @@ return [
                         'slot' => 'Slot',
                         'no-slots-available' => 'No slots available',
                         'to' => 'To',
+                        'summary-title' => 'Your rental',
+                        'base-rental-fee' => 'Base rental fee',
+                        'daily-rate-line' => 'Daily rate (:count × :rate)',
+                        'hourly-rate-line' => 'Hourly rate (:count × :rate)',
+                        'day' => 'day',
+                        'days' => 'days',
+                        'hour' => 'hour',
+                        'hours' => 'hours',
+                        'total' => 'Total',
+                        'select-dates-hint' => 'Select your rental dates to see the total.',
+                        'starting-from' => 'Starting from',
+                        'rental-fee-note' => 'Includes base fee + minimum rental rate. Total updates with your selected duration.',
                     ],
 
                     'table' => [
@@ -935,7 +956,7 @@ return [
                     'missing_options' => 'Options are missing for this product.',
                     'inventory_warning' => 'The requested quantity is not available, please try again later.',
                     'rental_unavailable' => 'This rental product is not available for the selected dates.',
-                    'select_hourly_duration' => 'Select a slot duration of one hour.',
+                    'select_hourly_duration' => 'Select a slot duration of at least one hour.',
                 ],
 
                 'per-guest' => 'Per Guest',

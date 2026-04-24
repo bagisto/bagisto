@@ -74,14 +74,31 @@ class RentalSlot extends Booking
         if (isset($cartItem['additional']['booking']['date'])) {
             $timeIntervals = $this->getSlotsByDate($bookingProduct, $cartItem['additional']['booking']['date']);
 
+            $requestedFrom = (int) $cartItem['additional']['booking']['slot']['from'];
+            $requestedTo = (int) $cartItem['additional']['booking']['slot']['to'];
+
+            if ($requestedTo <= $requestedFrom) {
+                return true;
+            }
+
             foreach ($timeIntervals as $timeInterval) {
-                foreach ($timeInterval['slots'] as $slot) {
-                    if (
-                        $slot['from_timestamp'] == $cartItem['additional']['booking']['slot']['from']
-                        && $slot['to_timestamp'] == $cartItem['additional']['booking']['slot']['to']
-                    ) {
-                        return false;
+                $subSlots = $timeInterval['slots'] ?? [];
+
+                $hasFromBoundary = false;
+                $hasToBoundary = false;
+
+                foreach ($subSlots as $slot) {
+                    if ($slot['from_timestamp'] == $requestedFrom) {
+                        $hasFromBoundary = true;
                     }
+
+                    if ($slot['to_timestamp'] == $requestedTo) {
+                        $hasToBoundary = true;
+                    }
+                }
+
+                if ($hasFromBoundary && $hasToBoundary) {
+                    return false;
                 }
             }
 
@@ -100,7 +117,8 @@ class RentalSlot extends Booking
                 : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
             return
-                $requestedFromDate < $availableFrom
+                $requestedToDate <= $requestedFromDate
+                || $requestedFromDate < $availableFrom
                 || $requestedFromDate > $availableTo
                 || $requestedToDate < $availableFrom
                 || $requestedToDate > $availableTo;

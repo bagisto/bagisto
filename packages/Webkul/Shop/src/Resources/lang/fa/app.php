@@ -814,6 +814,15 @@ return [
                         'book-your-ticket' => 'رزرو بلیط شما',
                         'title' => 'رویداد در :',
                         'total-price' => 'قیمت کل',
+                        'summary-title' => 'رزرو شما',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'هزینه پایه (:count × :price)',
+                        'ticket' => 'بلیط',
+                        'tickets' => 'بلیط',
+                        'total' => 'مجموع',
+                        'select-tickets-hint' => 'برای مشاهده مجموع، تعداد بلیط‌ها را انتخاب کنید.',
+                        'starting-from' => 'شروع از',
+                        'base-fee-note' => 'شامل هزینه پایه + ارزان‌ترین بلیط. مجموع بر اساس انتخاب بلیط به‌روزرسانی می‌شود.',
                     ],
 
                     'rental' => [
@@ -829,6 +838,18 @@ return [
                         'slot' => 'اسلات',
                         'no-slots-available' => 'هیچ اسلاتی موجود نیست',
                         'to' => 'تا',
+                        'summary-title' => 'اجاره شما',
+                        'base-rental-fee' => 'هزینه پایه اجاره',
+                        'daily-rate-line' => 'نرخ روزانه (:count × :rate)',
+                        'hourly-rate-line' => 'نرخ ساعتی (:count × :rate)',
+                        'day' => 'روز',
+                        'days' => 'روز',
+                        'hour' => 'ساعت',
+                        'hours' => 'ساعت',
+                        'total' => 'مجموع',
+                        'select-dates-hint' => 'برای مشاهده مجموع، تاریخ‌های اجاره را انتخاب کنید.',
+                        'starting-from' => 'شروع از',
+                        'rental-fee-note' => 'شامل هزینه پایه + حداقل نرخ اجاره. مجموع بر اساس مدت انتخابی به‌روزرسانی می‌شود.',
                     ],
 
                     'table' => [
@@ -935,7 +956,7 @@ return [
                     'missing_options' => 'گزینه‌ها برای این محصول وجود ندارند.',
                     'inventory_warning' => 'تعداد درخواستی موجود نیست، لطفاً بعداً دوباره امتحان کنید.',
                     'rental_unavailable' => 'این محصول اجاره‌ای برای تاریخ‌های انتخاب شده موجود نیست.',
-                    'select_hourly_duration' => 'یک مدت زمان ساعتی انتخاب کنید.',
+                    'select_hourly_duration' => 'حداقل یک ساعت مدت زمان را انتخاب کنید.',
                 ],
 
                 'per-guest' => 'به ازای هر مهمان',

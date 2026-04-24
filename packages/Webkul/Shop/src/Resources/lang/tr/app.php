@@ -814,6 +814,15 @@ return [
                         'book-your-ticket' => 'Bilet Al',
                         'title' => 'Etkinlik:',
                         'total-price' => 'Toplam fiyat',
+                        'summary-title' => 'Rezervasyonunuz',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'Temel ücret (:count × :price)',
+                        'ticket' => 'bilet',
+                        'tickets' => 'bilet',
+                        'total' => 'Toplam',
+                        'select-tickets-hint' => 'Toplamı görmek için bilet adetlerinizi seçin.',
+                        'starting-from' => 'Başlangıç',
+                        'base-fee-note' => 'Temel ücret + en ucuz bilet dahildir. Toplam, bilet seçiminize göre güncellenir.',
                     ],
 
                     'rental' => [
@@ -829,6 +838,18 @@ return [
                         'slot' => 'Zaman Aralığı',
                         'no-slots-available' => 'Uygun aralık yok',
                         'to' => 'Bitiş',
+                        'summary-title' => 'Kiralamanız',
+                        'base-rental-fee' => 'Temel kiralama ücreti',
+                        'daily-rate-line' => 'Günlük ücret (:count × :rate)',
+                        'hourly-rate-line' => 'Saatlik ücret (:count × :rate)',
+                        'day' => 'gün',
+                        'days' => 'gün',
+                        'hour' => 'saat',
+                        'hours' => 'saat',
+                        'total' => 'Toplam',
+                        'select-dates-hint' => 'Toplamı görmek için kiralama tarihlerinizi seçin.',
+                        'starting-from' => 'Başlangıç',
+                        'rental-fee-note' => 'Temel ücret + minimum kiralama oranı dahildir. Toplam, seçtiğiniz süreye göre güncellenir.',
                     ],
 
                     'table' => [
@@ -935,7 +956,7 @@ return [
                     'missing_options' => 'Seçenekler eksik.',
                     'inventory_warning' => 'Stok yetersiz.',
                     'rental_unavailable' => 'Bu kiralık ürün seçilen tarihler için mevcut değildir.',
-                    'select_hourly_duration' => 'Süre seçiniz.',
+                    'select_hourly_duration' => 'En az bir saatlik bir süre seçin.',
                 ],
 
                 'per-guest' => 'Misafir başına',

@@ -15,5 +15,9 @@ class EventServiceProvider extends ServiceProvider
         'checkout.order.save.after' => [
             'Webkul\BookingProduct\Listeners\Order@afterPlaceOrder',
         ],
+
+        'bagisto.shop.products.price.after' => [
+            'Webkul\BookingProduct\Listeners\PriceNote@addNote',
+        ],
     ];
 }
