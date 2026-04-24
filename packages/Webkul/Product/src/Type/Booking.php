@@ -488,7 +488,7 @@ class Booking extends AbstractType
 
             return [
                 'regular' => $cheapestRegular,
-                'final'   => $cheapestFinal,
+                'final' => $cheapestFinal,
             ];
         }
 
@@ -516,7 +516,7 @@ class Booking extends AbstractType
              */
             return [
                 'regular' => $min,
-                'final'   => $min,
+                'final' => $min,
             ];
         }
 

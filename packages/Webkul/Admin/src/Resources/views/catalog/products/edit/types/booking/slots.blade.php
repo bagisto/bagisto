@@ -226,7 +226,10 @@
         id="v-slot-item-template"
     >
         <div class="grid gap-1">
-            <div class="flex gap-2.5">
+            <div
+                class="flex gap-2.5"
+                :index="index"
+            >
                 <!-- From -->
                 <input
                     type="hidden"
@@ -599,8 +602,8 @@
 
         app.component('v-slot-item', {
             template: '#v-slot-item-template',
-    
-            props: ['controlName', 'slotItem'],
+
+            props: ['index', 'controlName', 'slotItem'],
 
             methods: {
                 remove() {
