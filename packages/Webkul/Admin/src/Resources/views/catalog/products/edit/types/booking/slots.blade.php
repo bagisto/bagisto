@@ -476,7 +476,7 @@
                     }
 
                     if (! this.meetsMinimumDuration(fromValue, toValue)) {
-                        return "@lang('admin::app.catalog.products.edit.types.booking.validations.slot-window-too-short')"
+                        return "@lang('admin::app.catalog.products.edit.types.booking.validations.slot-window-too-short-field')"
                             .replace(/:duration/g, parseInt(this.minSlotMinutes) || 0);
                     }
 

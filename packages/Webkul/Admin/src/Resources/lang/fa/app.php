@@ -1303,6 +1303,7 @@ return [
                             'time-validation' => 'زمان شروع باید کمتر از زمان پایان باشد.',
                             'overlap-validation' => 'بازه زمانی با یک بازه موجود همپوشانی دارد.',
                             'slot-window-too-short' => 'یک یا چند پنجره اسلات کوتاه‌تر از مدت زمان مورد نیاز :duration دقیقه است. هر پنجره باید حداقل :duration دقیقه باشد.',
+                            'slot-window-too-short-field' => 'این پنجره باید حداقل :duration دقیقه باشد.',
                         ],
                     ],
 

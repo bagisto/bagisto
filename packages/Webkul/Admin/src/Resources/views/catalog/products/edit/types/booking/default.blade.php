@@ -666,7 +666,7 @@
                                 && parseInt(params.status) === 1
                                 && ! this.spansMinimumDuration(params.from, params.to, minMinutes)
                             ) {
-                                this.drawerError = "@lang('admin::app.catalog.products.edit.types.booking.validations.slot-window-too-short')"
+                                this.drawerError = "@lang('admin::app.catalog.products.edit.types.booking.validations.slot-window-too-short-field')"
                                     .replace(/:duration/g, minMinutes);
 
                                 return;

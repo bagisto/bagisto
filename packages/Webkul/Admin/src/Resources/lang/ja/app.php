@@ -1303,6 +1303,7 @@ return [
                             'time-validation' => '開始時間は終了時間より前でなければなりません。',
                             'overlap-validation' => '時間帯が既存のスロットと重なっています。',
                             'slot-window-too-short' => '1つ以上のスロットウィンドウが必要な:duration分の長さに満たない。各ウィンドウは少なくとも:duration分の長さが必要です。',
+                            'slot-window-too-short-field' => 'このウィンドウは少なくとも:duration分の長さが必要です。',
                         ],
                     ],
 

@@ -1303,6 +1303,7 @@ return [
                             'time-validation' => 'Waktu mulai harus lebih kecil dari waktu selesai.',
                             'overlap-validation' => 'Slot waktu bertabrakan dengan slot yang sudah ada.',
                             'slot-window-too-short' => 'Satu atau lebih jendela slot lebih pendek dari durasi :duration menit yang diperlukan. Setiap jendela harus setidaknya :duration menit.',
+                            'slot-window-too-short-field' => 'Jendela ini harus setidaknya :duration menit.',
                         ],
                     ],
 

@@ -1303,6 +1303,7 @@ return [
                             'time-validation' => 'Start time must be less than end time.',
                             'overlap-validation' => 'Time slot overlaps with an existing slot.',
                             'slot-window-too-short' => 'One or more slot windows are shorter than the required :duration-minute duration. Each window must span at least :duration minutes.',
+                            'slot-window-too-short-field' => 'This window must span at least :duration minutes.',
                         ],
                     ],
 

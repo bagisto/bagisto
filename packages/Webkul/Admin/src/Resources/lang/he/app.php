@@ -1303,6 +1303,7 @@ return [
                             'time-validation' => 'שעת ההתחלה חייבת להיות מוקדמת יותר משעת הסיום.',
                             'overlap-validation' => 'חלון הזמן חופף לחלון קיים.',
                             'slot-window-too-short' => 'חלון משבצת אחד או יותר קצר ממשך הזמן הנדרש של :duration דקות. כל חלון חייב להתפרס על פני :duration דקות לפחות.',
+                            'slot-window-too-short-field' => 'חלון זה חייב להתפרס על פני :duration דקות לפחות.',
                         ],
                     ],
 
