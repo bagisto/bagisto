@@ -412,7 +412,9 @@ class Booking extends AbstractType
             return parent::getPriceHtml();
         }
 
-        $fromPrice = (float) parent::getMinimalPrice() + (float) $cheapestExtra;
+        $regularFrom = (float) parent::getRegularMinimalPrice() + (float) $cheapestExtra;
+
+        $finalFrom = (float) parent::getMinimalPrice() + (float) $cheapestExtra;
 
         $labelKey = match ($bookingProduct->type) {
             'event' => 'shop::app.products.view.type.booking.event.starting-from',
@@ -426,10 +428,16 @@ class Booking extends AbstractType
 
         return view('shop::products.prices.booking-starting-from', [
             'label' => trans($labelKey),
+
             'prices' => [
                 'regular' => [
-                    'price' => core()->convertPrice($fromPrice),
-                    'formatted_price' => core()->currency($fromPrice),
+                    'price' => core()->convertPrice($regularFrom),
+                    'formatted_price' => core()->currency($regularFrom),
+                ],
+
+                'final' => [
+                    'price' => core()->convertPrice($finalFrom),
+                    'formatted_price' => core()->currency($finalFrom),
                 ],
             ],
         ])->render();

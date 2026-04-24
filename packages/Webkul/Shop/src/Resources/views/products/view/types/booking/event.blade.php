@@ -17,7 +17,8 @@
 
     <!-- Event Vue Component -->
     <v-event-tickets
-        :base-price="{{ $product->getTypeInstance()->getFinalPrice() ?? 0 }}"
+        :base-price="{{ $product->getTypeInstance()->getMinimalPrice() ?? 0 }}"
+        :base-regular-price="{{ $product->getTypeInstance()->getRegularMinimalPrice() ?? 0 }}"
     ></v-event-tickets>
 </div>
 
@@ -86,7 +87,7 @@
             </div>
 
             <!-- Event Price Breakdown -->
-            <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-sm dark:border-zinc-800 dark:bg-zinc-900">
+            <div class="rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-sm">
                 <p class="mb-3 font-semibold">
                     @lang('shop::app.products.view.type.booking.event.summary-title')
                 </p>
@@ -98,7 +99,7 @@
                         :key="line.id"
                     >
                         <span
-                            class="text-zinc-600 dark:text-zinc-400"
+                            class="text-zinc-600"
                             v-text="line.label"
                         >
                         </span>
@@ -115,19 +116,28 @@
                         v-if="Number(basePrice) > 0"
                     >
                         <span
-                            class="text-zinc-600 dark:text-zinc-400"
+                            class="text-zinc-600"
                             v-text="baseFeeLabel"
                         >
                         </span>
 
-                        <span
-                            class="font-medium"
-                            v-text="formattedBaseFeeTotal"
-                        >
+                        <span class="flex items-center gap-2">
+                            <span
+                                v-if="hasBaseDiscount"
+                                class="text-zinc-400 line-through"
+                                v-text="formattedBaseFeeRegularTotal"
+                            >
+                            </span>
+
+                            <span
+                                class="font-medium"
+                                v-text="formattedBaseFeeTotal"
+                            >
+                            </span>
                         </span>
                     </div>
 
-                    <div class="mt-3 flex items-center justify-between border-t border-zinc-200 pt-3 dark:border-zinc-800">
+                    <div class="mt-3 flex items-center justify-between border-t border-zinc-200 pt-3">
                         <span class="font-semibold">
                             @lang('shop::app.products.view.type.booking.event.total')
                         </span>
@@ -141,7 +151,7 @@
                 </template>
 
                 <template v-else>
-                    <p class="text-xs text-zinc-500 dark:text-zinc-400">
+                    <p class="text-xs text-zinc-500">
                         @lang('shop::app.products.view.type.booking.event.select-tickets-hint')
                     </p>
                 </template>
@@ -153,7 +163,7 @@
         app.component('v-event-tickets', {
             template: '#v-event-tickets-template',
 
-            props: ['basePrice'],
+            props: ['basePrice', 'baseRegularPrice'],
 
             data() {
                 const tickets = @json($bookingSlotHelper->getTickets($bookingProduct));
@@ -223,6 +233,18 @@
 
                 formattedBaseFeeTotal() {
                     return this.$shop.formatPrice(this.baseFeeTotal);
+                },
+
+                hasBaseDiscount() {
+                    return Number(this.baseRegularPrice ?? 0) > Number(this.basePrice ?? 0);
+                },
+
+                baseFeeRegularTotal() {
+                    return Number(this.baseRegularPrice ?? 0) * this.totalTicketCount;
+                },
+
+                formattedBaseFeeRegularTotal() {
+                    return this.$shop.formatPrice(this.baseFeeRegularTotal);
                 },
 
                 grandTotal() {

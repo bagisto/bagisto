@@ -5,7 +5,8 @@
 <v-rental-slots
     :booking-product="{{ $bookingProduct }}"
     :availability="{{ json_encode($calendarAvailability) }}"
-    :base-price="{{ $product->getTypeInstance()->getFinalPrice() ?? 0 }}"
+    :base-price="{{ $product->getTypeInstance()->getMinimalPrice() ?? 0 }}"
+    :base-regular-price="{{ $product->getTypeInstance()->getRegularMinimalPrice() ?? 0 }}"
 ></v-rental-slots>
 
 @pushOnce('scripts')
@@ -260,27 +261,36 @@
             </div>
 
             <!-- Rental Price Breakdown -->
-            <div class="mt-3 rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-sm dark:border-zinc-800 dark:bg-zinc-900">
+            <div class="mt-3 rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-sm">
                 <p class="mb-3 font-semibold">
                     @lang('shop::app.products.view.type.booking.rental.summary-title')
                 </p>
 
                 <template v-if="hasSelection">
                     <div class="flex items-center justify-between py-1">
-                        <span class="text-zinc-600 dark:text-zinc-400">
+                        <span class="text-zinc-600">
                             @lang('shop::app.products.view.type.booking.rental.base-rental-fee')
                         </span>
 
-                        <span
-                            class="font-medium"
-                            v-text="formattedBasePrice"
-                        >
+                        <span class="flex items-center gap-2">
+                            <span
+                                v-if="hasBaseDiscount"
+                                class="text-zinc-400 line-through"
+                                v-text="formattedBaseRegularPrice"
+                            >
+                            </span>
+
+                            <span
+                                class="font-medium"
+                                v-text="formattedBasePrice"
+                            >
+                            </span>
                         </span>
                     </div>
 
                     <div class="flex items-center justify-between py-1">
                         <span
-                            class="text-zinc-600 dark:text-zinc-400"
+                            class="text-zinc-600"
                             v-text="rateLineLabel"
                         >
                         </span>
@@ -292,7 +302,7 @@
                         </span>
                     </div>
 
-                    <div class="mt-3 flex items-center justify-between border-t border-zinc-200 pt-3 dark:border-zinc-800">
+                    <div class="mt-3 flex items-center justify-between border-t border-zinc-200 pt-3">
                         <span class="font-semibold">
                             @lang('shop::app.products.view.type.booking.rental.total')
                         </span>
@@ -306,7 +316,7 @@
                 </template>
 
                 <template v-else>
-                    <p class="text-xs text-zinc-500 dark:text-zinc-400">
+                    <p class="text-xs text-zinc-500">
                         @lang('shop::app.products.view.type.booking.rental.select-dates-hint')
                     </p>
                 </template>
@@ -326,7 +336,7 @@
         app.component('v-rental-slots', {
             template: '#v-rental-slots-template',
 
-            props: ['bookingProduct', 'availability', 'basePrice'],
+            props: ['bookingProduct', 'availability', 'basePrice', 'baseRegularPrice'],
 
             data() {
                 return {
@@ -491,6 +501,14 @@
 
                 formattedBasePrice() {
                     return this.$shop.formatPrice(Number(this.basePrice ?? 0));
+                },
+
+                hasBaseDiscount() {
+                    return Number(this.baseRegularPrice ?? 0) > Number(this.basePrice ?? 0);
+                },
+
+                formattedBaseRegularPrice() {
+                    return this.$shop.formatPrice(Number(this.baseRegularPrice ?? 0));
                 },
 
                 formattedRateTotal() {

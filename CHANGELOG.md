@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.18 (24th of April 2026)** - *Release*
 
 - Added Booking product support to the DataTransfer (import) package. Booking products can now be imported via CSV/XLS/XLSX/XML using a new `booking_options` column that follows the existing pipe/key=value convention (same pattern as `bundle_options` / `configurable_variants`). The column encodes the product-level config, type-specific config, and slot or ticket records in pipe-separated sections. All five booking subtypes are supported: default (one/many), appointment, event (with tickets + translations), rental (daily/hourly), and table. Updated the sample product files in all four formats with one example per booking subtype.
 
