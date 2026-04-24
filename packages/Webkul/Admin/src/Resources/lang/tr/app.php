@@ -1624,6 +1624,8 @@ return [
                             'type-mismatch' => 'Rezervasyon türü değiştirilemez.',
                             'time-validation' => 'Başlangıç zamanı, bitiş zamanından küçük olmalıdır.',
                             'overlap-validation' => 'Zaman aralığı mevcut bir aralıkla çakışıyor.',
+                            'slot-window-too-short' => 'Bir veya daha fazla slot penceresi gerekli :duration dakikalık süreden daha kısa. Her pencere en az :duration dakika olmalıdır.',
+                            'slot-window-too-short-field' => 'Bu pencere en az :duration dakika olmalıdır.',
                         ],
                     ],
 
@@ -5325,6 +5327,7 @@ return [
             'table' => [
                 'actions' => 'Eylemler',
                 'no-records-available' => 'Kullanılabilir Kayıt Yok.',
+                'no-records-hint' => 'Filtrelerinizi ayarlayın veya veriler eklendiğinde daha sonra tekrar kontrol edin.',
             ],
         ],
 

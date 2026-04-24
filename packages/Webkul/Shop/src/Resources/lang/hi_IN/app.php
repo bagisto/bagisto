@@ -814,6 +814,15 @@ return [
                         'book-your-ticket' => 'अपना टिकट बुक करें',
                         'title' => 'कार्यक्रम :',
                         'total-price' => 'कुल मूल्य',
+                        'summary-title' => 'आपकी बुकिंग',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'बेस शुल्क (:count × :price)',
+                        'ticket' => 'टिकट',
+                        'tickets' => 'टिकट',
+                        'total' => 'कुल',
+                        'select-tickets-hint' => 'कुल देखने के लिए अपनी टिकट मात्रा चुनें।',
+                        'starting-from' => 'शुरू',
+                        'base-fee-note' => 'बेस शुल्क + सबसे सस्ता टिकट शामिल है। कुल आपकी टिकट चयन के अनुसार अपडेट होता है।',
                     ],
 
                     'rental' => [
@@ -829,6 +838,18 @@ return [
                         'slot' => 'स्लॉट',
                         'no-slots-available' => 'कोई स्लॉट उपलब्ध नहीं है',
                         'to' => 'तक',
+                        'summary-title' => 'आपका किराया',
+                        'base-rental-fee' => 'बेस किराया शुल्क',
+                        'daily-rate-line' => 'दैनिक दर (:count × :rate)',
+                        'hourly-rate-line' => 'प्रति घंटा दर (:count × :rate)',
+                        'day' => 'दिन',
+                        'days' => 'दिन',
+                        'hour' => 'घंटा',
+                        'hours' => 'घंटे',
+                        'total' => 'कुल',
+                        'select-dates-hint' => 'कुल देखने के लिए अपनी किराये की तारीखें चुनें।',
+                        'starting-from' => 'शुरू',
+                        'rental-fee-note' => 'बेस शुल्क + न्यूनतम किराया दर शामिल है। कुल आपकी चयनित अवधि के अनुसार अपडेट होता है।',
                     ],
 
                     'table' => [
@@ -935,7 +956,7 @@ return [
                     'missing_options' => 'इस उत्पाद के लिए विकल्प गायब हैं।',
                     'inventory_warning' => 'अनुरोधित मात्रा उपलब्ध नहीं है, कृपया बाद में पुनः प्रयास करें।',
                     'rental_unavailable' => 'यह किराये का उत्पाद चयनित तिथियों के लिए उपलब्ध नहीं है।',
-                    'select_hourly_duration' => 'एक घंटे की अवधि का चयन करें।',
+                    'select_hourly_duration' => 'कम से कम एक घंटे की अवधि चुनें।',
                 ],
 
                 'per-guest' => 'प्रति अतिथि',

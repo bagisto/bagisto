@@ -115,6 +115,7 @@
             :booking-product="rental_booking"
             :booking-type="'rental_slot'"
             :same-slot-all-days="rental_booking.same_slot_all_days"
+            :min-slot-minutes="60"
         >
         </v-slots>
     </script>

@@ -168,6 +168,7 @@
                         <v-price-filter
                             :key="refreshKey"
                             :default-price-range="appliedValues"
+                            :default-attribute-code="filter.code"
                             @set-price-range="applyValue($event)"
                         >
                         </v-price-filter>
@@ -410,7 +411,7 @@
                      * Clearing child components. Improvisation needed here.
                      */
                     this.$refs.filterItemComponent.forEach((filterItem) => {
-                        if (filterItem.filter.code === 'price') {
+                        if (filterItem.filter.type === 'price') {
                             filterItem.$data.appliedValues = null;
                         } else {
                             filterItem.$data.appliedValues = [];
@@ -447,7 +448,7 @@
 
             created() {
                 // Initialize values in created hook
-                if (this.filter.code === 'price') {
+                if (this.filter.type === 'price') {
                     this.appliedValues = this.$parent.$data.filters.applied[this.filter.code]?.join(',');
                 } else {
                     this.appliedValues = this.$parent.$data.filters.applied[this.filter.code] ?? [];
@@ -462,7 +463,7 @@
                 appliedValues: {
                     handler(newVal, oldVal) {
                         if (
-                            this.filter.code === 'price' &&
+                            this.filter.type === 'price' &&
                             newVal !== oldVal &&
                             !newVal
                         ) {
@@ -475,7 +476,7 @@
 
             methods: {
                 applyValue($event) {
-                    if (this.filter.code === 'price') {
+                    if (this.filter.type === 'price') {
                         this.appliedValues = $event;
 
                         this.$emit('values-applied', this.appliedValues);
@@ -534,7 +535,7 @@
         app.component('v-price-filter', {
             template: '#v-price-filter-template',
 
-            props: ['defaultPriceRange'],
+            props: ['defaultPriceRange', 'defaultAttributeCode'],
 
             data() {
                 return {
@@ -559,7 +560,11 @@
 
             created() {
                 // Initialize price range in created hook
-                this.priceRange = this.defaultPriceRange ?? [0, 100].join(',');
+                let defaultRange = Array.isArray(this.defaultPriceRange)
+                    ? this.defaultPriceRange.join(',')
+                    : this.defaultPriceRange;
+
+                this.priceRange = defaultRange || [0, 100].join(',');
             },
 
             mounted() {
@@ -568,7 +573,11 @@
 
             methods: {
                 getMaxPrice() {
-                    this.$axios.get('{{ route("shop.api.categories.max_price", isset($category) && $category->id ? $category->id : null) }}')
+                    this.$axios.get('{{ route("shop.api.categories.max_price", isset($category) && $category->id ? $category->id : null) }}', {
+                            params: {
+                                attribute_code: this.defaultAttributeCode || 'price',
+                            }
+                        })
                         .then((response) => {
                             this.isLoading = false;
 

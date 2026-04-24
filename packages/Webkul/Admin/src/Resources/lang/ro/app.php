@@ -1624,6 +1624,8 @@ return [
                             'type-mismatch' => 'The booking type cannot be changed.',
                             'time-validation' => 'Start time must be less than end time.',
                             'overlap-validation' => 'Time slot overlaps with an existing slot.',
+                            'slot-window-too-short' => 'Una sau mai multe ferestre de slot sunt mai scurte decât durata necesară de :duration minute. Fiecare fereastră trebuie să dureze cel puțin :duration minute.',
+                            'slot-window-too-short-field' => 'Această fereastră trebuie să dureze cel puțin :duration minute.',
                         ],
                     ],
 
@@ -5325,6 +5327,7 @@ return [
             'table' => [
                 'actions' => 'Actions',
                 'no-records-available' => 'No Records Available.',
+                'no-records-hint' => 'Încercați să ajustați filtrele sau reveniți mai târziu după ce datele sunt adăugate.',
             ],
         ],
 
