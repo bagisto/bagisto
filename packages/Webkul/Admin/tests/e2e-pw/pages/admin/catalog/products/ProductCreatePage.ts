@@ -692,7 +692,7 @@ export class ProductCreatePage extends BasePage {
         await this.page
             .getByRole("button", { name: "Save", exact: true })
             .click();
-        await expect(this.page.getByText("Add Slots").nth(2)).toBeVisible();
+        await expect(this.page.getByText("Add Slots").nth(2)).toBeVisible(); 
         await this.saveProductButton.click();
         await this.page.waitForSelector('text="Product updated successfully"');
         await this.verifyProductVisible(product.name);
