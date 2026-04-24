@@ -413,15 +413,15 @@ class Booking extends AbstractType
             return parent::getPriceHtml();
         }
 
-        $cheapestExtra = $this->getCheapestBookingExtra($bookingProduct);
+        $cheapestExtras = $this->getCheapestBookingExtras($bookingProduct);
 
-        if ($cheapestExtra === null) {
+        if ($cheapestExtras === null) {
             return parent::getPriceHtml();
         }
 
-        $regularFrom = (float) parent::getRegularMinimalPrice() + (float) $cheapestExtra;
+        $regularFrom = (float) parent::getRegularMinimalPrice() + (float) $cheapestExtras['regular'];
 
-        $finalFrom = (float) parent::getMinimalPrice() + (float) $cheapestExtra;
+        $finalFrom = (float) parent::getMinimalPrice() + (float) $cheapestExtras['final'];
 
         $labelKey = match ($bookingProduct->type) {
             'event' => 'shop::app.products.view.type.booking.event.starting-from',
@@ -452,10 +452,13 @@ class Booking extends AbstractType
 
     /**
      * Return the smallest additional amount that will be charged on top of the
-     * product's base price for the given booking product, or null if no such
-     * minimum can be computed (unsupported sub-type, missing slot, etc.).
+     * product's base price, split into a regular (pre-discount) and final
+     * (post-discount) value so the starting-from price can surface a
+     * strike-through when a ticket's own special price kicks in. Returns null
+     * if the booking sub-type has no computable extra (e.g. rental daily,
+     * event without tickets).
      */
-    protected function getCheapestBookingExtra($bookingProduct): ?float
+    protected function getCheapestBookingExtras($bookingProduct): ?array
     {
         if ($bookingProduct->type === 'event') {
             if (! $bookingProduct->event_tickets->count()) {
@@ -464,19 +467,29 @@ class Booking extends AbstractType
 
             $helper = app($this->bookingHelper->getTypeHelper('event'));
 
-            $cheapest = null;
+            $cheapestRegular = null;
+            $cheapestFinal = null;
 
             foreach ($bookingProduct->event_tickets as $ticket) {
-                $ticketPrice = $helper->isInSale($ticket)
-                    ? (float) $ticket->special_price
-                    : (float) $ticket->price;
+                $regular = (float) $ticket->price;
 
-                if ($cheapest === null || $ticketPrice < $cheapest) {
-                    $cheapest = $ticketPrice;
+                $final = $helper->isInSale($ticket)
+                    ? (float) $ticket->special_price
+                    : $regular;
+
+                if ($cheapestRegular === null || $regular < $cheapestRegular) {
+                    $cheapestRegular = $regular;
+                }
+
+                if ($cheapestFinal === null || $final < $cheapestFinal) {
+                    $cheapestFinal = $final;
                 }
             }
 
-            return $cheapest;
+            return [
+                'regular' => $cheapestRegular,
+                'final'   => $cheapestFinal,
+            ];
         }
 
         if ($bookingProduct->type === 'rental') {
@@ -491,7 +504,20 @@ class Booking extends AbstractType
                 (float) $slot->daily_price,
             ], fn ($rate) => $rate > 0);
 
-            return $rates ? min($rates) : null;
+            if (! $rates) {
+                return null;
+            }
+
+            $min = min($rates);
+
+            /**
+             * Rental rates don't support a sale / special price, so regular
+             * and final share the same value.
+             */
+            return [
+                'regular' => $min,
+                'final'   => $min,
+            ];
         }
 
         return null;

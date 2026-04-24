@@ -47,19 +47,15 @@
 
                     <div
                         v-if="ticket.original_formatted_price"
-                        class="text-[#6E6E6E] max-sm:text-sm"
+                        class="flex flex-wrap items-baseline gap-x-2 text-[#6E6E6E] max-sm:text-sm"
                     >
-                        <p
-                            class="mr-1.5 line-through"
+                        <span
+                            class="line-through"
                             v-text="ticket.original_formatted_price"
                         >
-                        </p>
+                        </span>
 
-                        <p
-                            class="text-lg max-sm:text-sm"
-                            v-text="ticket.formatted_price_text"
-                        >
-                        </p>
+                        <span v-text="ticket.formatted_price_text"></span>
                     </div>
 
                     <!-- Formatted Price -->
@@ -104,10 +100,19 @@
                         >
                         </span>
 
-                        <span
-                            class="font-medium"
-                            v-text="line.formattedSubtotal"
-                        >
+                        <span class="flex items-center gap-2">
+                            <span
+                                v-if="line.hasDiscount"
+                                class="text-zinc-400 line-through"
+                                v-text="line.formattedOriginalSubtotal"
+                            >
+                            </span>
+
+                            <span
+                                class="font-medium"
+                                v-text="line.formattedSubtotal"
+                            >
+                            </span>
                         </span>
                     </div>
 
@@ -204,6 +209,10 @@
                         const unitPrice = Number(ticket.converted_price ?? 0);
                         const subtotal = unitPrice * qty;
 
+                        const originalUnitPrice = Number(ticket.original_converted_price ?? 0);
+                        const hasDiscount = originalUnitPrice > unitPrice;
+                        const originalSubtotal = originalUnitPrice * qty;
+
                         const label = "@lang('shop::app.products.view.type.booking.event.ticket-line')"
                             .replace(':name', ticket.name)
                             .replace(':count', qty)
@@ -213,6 +222,10 @@
                             id: ticket.id,
                             label,
                             formattedSubtotal: this.$shop.formatPrice(subtotal),
+                            hasDiscount,
+                            formattedOriginalSubtotal: hasDiscount
+                                ? this.$shop.formatPrice(originalSubtotal)
+                                : '',
                         };
                     });
                 },
