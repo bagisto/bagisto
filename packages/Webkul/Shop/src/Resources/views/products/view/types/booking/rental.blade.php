@@ -5,6 +5,8 @@
 <v-rental-slots
     :booking-product="{{ $bookingProduct }}"
     :availability="{{ json_encode($calendarAvailability) }}"
+    :base-price="{{ $product->getTypeInstance()->getMinimalPrice() ?? 0 }}"
+    :base-regular-price="{{ $product->getTypeInstance()->getRegularMinimalPrice() ?? 0 }}"
 ></v-rental-slots>
 
 @pushOnce('scripts')
@@ -155,6 +157,7 @@
                                 type="select"
                                 name="booking[slot][from]"
                                 rules="required"
+                                v-model="booking.slot_from"
                                 :label="trans('shop::app.products.view.type.booking.rental.select-date')"
                                 :placeholder="trans('shop::app.products.view.type.booking.rental.select-date')"
                             >
@@ -183,6 +186,7 @@
                                 type="select"
                                 name="booking[slot][to]"
                                 rules="required"
+                                v-model="booking.slot_to"
                                 :label="trans('shop::app.products.view.type.booking.rental.slot')"
                                 :placeholder="trans('shop::app.products.view.type.booking.rental.slot')"
                             >
@@ -191,7 +195,7 @@
                                 </option>
 
                                 <option
-                                    v-for="slot in slots[selected_slot]?.slots"
+                                    v-for="slot in availableToSlots"
                                     :value="slot?.to_timestamp"
                                     v-text="slot.to"
                                 >
@@ -255,6 +259,68 @@
                     </x-shop::form.control-group>
                 </div>
             </div>
+
+            <!-- Rental Price Breakdown -->
+            <div class="mt-3 rounded-lg border border-zinc-200 bg-zinc-50 p-4 text-sm">
+                <p class="mb-3 font-semibold">
+                    @lang('shop::app.products.view.type.booking.rental.summary-title')
+                </p>
+
+                <template v-if="hasSelection">
+                    <div class="flex items-center justify-between py-1">
+                        <span class="text-zinc-600">
+                            @lang('shop::app.products.view.type.booking.rental.base-rental-fee')
+                        </span>
+
+                        <span class="flex items-center gap-2">
+                            <span
+                                v-if="hasBaseDiscount"
+                                class="text-zinc-400 line-through"
+                                v-text="formattedBaseRegularPrice"
+                            >
+                            </span>
+
+                            <span
+                                class="font-medium"
+                                v-text="formattedBasePrice"
+                            >
+                            </span>
+                        </span>
+                    </div>
+
+                    <div class="flex items-center justify-between py-1">
+                        <span
+                            class="text-zinc-600"
+                            v-text="rateLineLabel"
+                        >
+                        </span>
+
+                        <span
+                            class="font-medium"
+                            v-text="formattedRateTotal"
+                        >
+                        </span>
+                    </div>
+
+                    <div class="mt-3 flex items-center justify-between border-t border-zinc-200 pt-3">
+                        <span class="font-semibold">
+                            @lang('shop::app.products.view.type.booking.rental.total')
+                        </span>
+
+                        <span
+                            class="text-base font-semibold"
+                            v-text="formattedGrandTotal"
+                        >
+                        </span>
+                    </div>
+                </template>
+
+                <template v-else>
+                    <p class="text-xs text-zinc-500">
+                        @lang('shop::app.products.view.type.booking.rental.select-dates-hint')
+                    </p>
+                </template>
+            </div>
         </div>
     </script>
 
@@ -270,7 +336,7 @@
         app.component('v-rental-slots', {
             template: '#v-rental-slots-template',
 
-            props: ['bookingProduct', 'availability'],
+            props: ['bookingProduct', 'availability', 'basePrice', 'baseRegularPrice'],
 
             data() {
                 return {
@@ -286,6 +352,10 @@
                         date_from: '',
 
                         date_to: '',
+
+                        slot_from: '',
+
+                        slot_to: '',
                     },
                 }
             },
@@ -343,6 +413,120 @@
                     }
 
                     return predicates;
+                },
+
+                activeRentingType() {
+                    return this.renting_type === 'daily_hourly'
+                        ? this.sub_renting_type
+                        : this.renting_type;
+                },
+
+                availableToSlots() {
+                    const subSlots = this.slots[this.selected_slot]?.slots ?? [];
+
+                    const from = Number(this.booking.slot_from);
+
+                    if (! from) {
+                        return subSlots;
+                    }
+
+                    return subSlots.filter(slot => Number(slot.to_timestamp) > from);
+                },
+
+                durationDays() {
+                    if (! this.booking.date_from || ! this.booking.date_to) {
+                        return 0;
+                    }
+
+                    const from = new Date(this.booking.date_from + 'T00:00:00');
+                    const to = new Date(this.booking.date_to + 'T00:00:00');
+                    const diff = Math.round((to - from) / (1000 * 60 * 60 * 24)) + 1;
+
+                    return Math.max(1, diff);
+                },
+
+                durationHours() {
+                    if (! this.booking.slot_from || ! this.booking.slot_to) {
+                        return 0;
+                    }
+
+                    const diff = Number(this.booking.slot_to) - Number(this.booking.slot_from);
+
+                    return Math.max(0, Math.round(diff / 3600));
+                },
+
+                duration() {
+                    return this.activeRentingType === 'hourly'
+                        ? this.durationHours
+                        : this.durationDays;
+                },
+
+                rateUnit() {
+                    const slot = this.bookingProduct?.rental_slot ?? {};
+
+                    return this.activeRentingType === 'hourly'
+                        ? Number(slot.hourly_price ?? 0)
+                        : Number(slot.daily_price ?? 0);
+                },
+
+                rateTotal() {
+                    return this.rateUnit * this.duration;
+                },
+
+                grandTotal() {
+                    return Number(this.basePrice ?? 0) + this.rateTotal;
+                },
+
+                hasSelection() {
+                    return this.duration > 0;
+                },
+
+                rateLineLabel() {
+                    const durationWord = this.activeRentingType === 'hourly'
+                        ? (this.duration === 1
+                            ? "@lang('shop::app.products.view.type.booking.rental.hour')"
+                            : "@lang('shop::app.products.view.type.booking.rental.hours')")
+                        : (this.duration === 1
+                            ? "@lang('shop::app.products.view.type.booking.rental.day')"
+                            : "@lang('shop::app.products.view.type.booking.rental.days')");
+
+                    const template = this.activeRentingType === 'hourly'
+                        ? "@lang('shop::app.products.view.type.booking.rental.hourly-rate-line')"
+                        : "@lang('shop::app.products.view.type.booking.rental.daily-rate-line')";
+
+                    return template
+                        .replace(':count', `${this.duration} ${durationWord}`)
+                        .replace(':rate', this.$shop.formatPrice(this.rateUnit));
+                },
+
+                formattedBasePrice() {
+                    return this.$shop.formatPrice(Number(this.basePrice ?? 0));
+                },
+
+                hasBaseDiscount() {
+                    return Number(this.baseRegularPrice ?? 0) > Number(this.basePrice ?? 0);
+                },
+
+                formattedBaseRegularPrice() {
+                    return this.$shop.formatPrice(Number(this.baseRegularPrice ?? 0));
+                },
+
+                formattedRateTotal() {
+                    return this.$shop.formatPrice(this.rateTotal);
+                },
+
+                formattedGrandTotal() {
+                    return this.$shop.formatPrice(this.grandTotal);
+                },
+            },
+
+            watch: {
+                'booking.slot_from'(newVal) {
+                    const from = Number(newVal);
+
+                    if (from && Number(this.booking.slot_to) <= from) {
+                        this.booking.slot_to = '';
+                    }
                 },
             },
 

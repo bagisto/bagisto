@@ -358,7 +358,7 @@
                         if (this.childAttributes.length == selectedOptionCount) {
                             document.querySelector('.price-label').style.display = 'none';
 
-                            if (parseInt(configVariant.regular.price) > parseInt(configVariant.final.price)) {
+                            if (parseFloat(configVariant.regular.price) > parseFloat(configVariant.final.price)) {
                                 regularPrice.style.display = 'block';
 
                                 finalPrice.innerHTML = configVariant.final.formatted_price;
@@ -368,13 +368,31 @@
                                 finalPrice.innerHTML = configVariant.regular.formatted_price;
 
                                 regularPrice.style.display = 'none';
+
+                                regularPrice.innerHTML = '';
                             }
 
                             this.$emitter.emit('configurable-variant-selected-event',this.possibleOptionVariant);
                         } else {
                             document.querySelector('.price-label').style.display = 'inline-block';
 
-                            finalPrice.innerHTML = this.config.regular.formatted_price;
+                            const baseRegular = parseFloat(this.config.regular?.price ?? 0);
+
+                            const baseFinal = parseFloat(this.config.final?.price ?? baseRegular);
+
+                            if (baseFinal < baseRegular) {
+                                regularPrice.style.display = 'block';
+
+                                regularPrice.innerHTML = this.config.regular.formatted_price;
+
+                                finalPrice.innerHTML = this.config.final.formatted_price;
+                            } else {
+                                regularPrice.style.display = 'none';
+
+                                regularPrice.innerHTML = '';
+
+                                finalPrice.innerHTML = this.config.regular.formatted_price;
+                            }
 
                             this.$emitter.emit('configurable-variant-selected-event', 0);
                         }

@@ -27,18 +27,28 @@
 </p>
 
 <p align="center">
-    <img src="https://flagicons.lipis.dev/flags/4x3/ar.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/de.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/us.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/es.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/ir.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/it.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/nl.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/pl.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/pt.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/tr.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/eg.svg" width="24" style="display:block; margin:6px auto;">
-    <img src="https://flagicons.lipis.dev/flags/4x3/cn.svg" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/sa.svg" alt="Arabic" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/bd.svg" alt="Bengali" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/es-ct.svg" alt="Catalan" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/de.svg" alt="German" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/us.svg" alt="English" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/es.svg" alt="Spanish" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/ir.svg" alt="Persian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/fr.svg" alt="French" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/il.svg" alt="Hebrew" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/in.svg" alt="Hindi" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/id.svg" alt="Indonesian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/it.svg" alt="Italian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/jp.svg" alt="Japanese" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/nl.svg" alt="Dutch" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/pl.svg" alt="Polish" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/br.svg" alt="Portuguese (Brazil)" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/ro.svg" alt="Romanian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/ru.svg" alt="Russian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/lk.svg" alt="Sinhalese" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/tr.svg" alt="Turkish" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/ua.svg" alt="Ukrainian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/cn.svg" alt="Chinese (Simplified)" width="24" style="display:block; margin:6px auto;">
 </p>
 
 <a href="https://www.youtube.com/watch?v=OHbte7hdxYU">
@@ -151,7 +161,7 @@ Get Bagisto support on [Facebook Group](https://www.facebook.com/groups/bagisto)
 Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](https://github.com/bagisto/bagisto/blob/master/.github/CONTRIBUTING.md)!
 
 # License
-Bagisto is a fully open-source Laravel eCommerce framework that will always remain free under the [MIT License](https://github.com/bagisto/bagisto/blob/master/LICENSE).
+Bagisto is a fully open-source Laravel eCommerce framework that will always remain free under the [MIT License](https://github.com/bagisto/bagisto/blob/2.4/LICENSE).
 
 # Security Vulnerabilities
 If you think that you have found a security issue in Bagisto, please do not use the issue tracker and do not post it publicly. Instead, all security issues must be sent to [mailto:support@bagisto.com](mailto:support@bagisto.com).

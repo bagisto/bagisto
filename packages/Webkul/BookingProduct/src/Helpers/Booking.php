@@ -308,7 +308,18 @@ class Booking
      */
     private function getDisabledDates(BookingProduct $bookingProduct): array
     {
-        if (! in_array($bookingProduct->type, ['default', 'appointment', 'table'], true)) {
+        if (! in_array($bookingProduct->type, ['default', 'appointment', 'table', 'rental'], true)) {
+            return [];
+        }
+
+        /**
+         * Pure-daily rental doesn't have per-hour slots — today is always a valid
+         * start date if it falls inside the product's availability window.
+         */
+        if (
+            $bookingProduct->type === 'rental'
+            && ($bookingProduct->rental_slot?->renting_type ?? 'daily') === 'daily'
+        ) {
             return [];
         }
 
@@ -358,20 +369,74 @@ class Booking
             return $allDays;
         }
 
-        if (! empty($slot->same_slot_all_days) && ! empty($slot->slots)) {
-            return $allDays;
+        /**
+         * Rental hourly / daily_hourly: a weekday is only truly bookable if at
+         * least one configured slot window is wide enough to produce a usable
+         * 1-hour sub-slot. Without this, admins who saved short windows (e.g.
+         * 9:00-9:30) would leave the frontend with a selectable date whose
+         * slot list comes back empty.
+         */
+        $isRentalHourly = $bookingProduct->type === 'rental'
+            && in_array($slot->renting_type ?? null, ['hourly', 'daily_hourly'], true);
+
+        if (
+            ! empty($slot->same_slot_all_days)
+            && ! empty($slot->slots)
+        ) {
+            if (
+                ! $isRentalHourly
+                || $this->hasUsableRentalSlotEntry($slot->slots)
+            ) {
+                return $allDays;
+            }
+
+            return [];
         }
 
         $weekdays = [];
         $slots = $slot->slots ?? [];
 
         foreach ($allDays as $i) {
-            if (! empty($slots[$i])) {
-                $weekdays[] = $i;
+            if (empty($slots[$i])) {
+                continue;
             }
+
+            if (
+                $isRentalHourly
+                && ! $this->hasUsableRentalSlotEntry($slots[$i])
+            ) {
+                continue;
+            }
+
+            $weekdays[] = $i;
         }
 
         return $weekdays;
+    }
+
+    /**
+     * Checks whether any slot entry in the given list is at least one hour wide —
+     * the minimum window `slotsCalculation` needs to emit a bookable sub-slot for
+     * rental hourly products.
+     */
+    private function hasUsableRentalSlotEntry(array $entries): bool
+    {
+        foreach ($entries as $entry) {
+            if (! isset($entry['from'], $entry['to'])) {
+                continue;
+            }
+
+            [$fromHours, $fromMinutes] = array_pad(array_map('intval', explode(':', $entry['from'])), 2, 0);
+            [$toHours, $toMinutes] = array_pad(array_map('intval', explode(':', $entry['to'])), 2, 0);
+
+            $durationMinutes = (($toHours * 60) + $toMinutes) - (($fromHours * 60) + $fromMinutes);
+
+            if ($durationMinutes >= 60) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**

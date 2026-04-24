@@ -818,6 +818,15 @@ return [
                         'book-your-ticket' => 'Zarezerwuj bilet',
                         'title' => 'Wydarzenie dnia :',
                         'total-price' => 'Cena całkowita',
+                        'summary-title' => 'Twoja rezerwacja',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'Opłata podstawowa (:count × :price)',
+                        'ticket' => 'bilet',
+                        'tickets' => 'bilety',
+                        'total' => 'Razem',
+                        'select-tickets-hint' => 'Wybierz liczbę biletów, aby zobaczyć łączną kwotę.',
+                        'starting-from' => 'Od',
+                        'base-fee-note' => 'Zawiera opłatę podstawową + najtańszy bilet. Suma aktualizuje się zgodnie z wyborem biletów.',
                     ],
 
                     'rental' => [
@@ -833,6 +842,18 @@ return [
                         'slot' => 'Slot',
                         'no-slots-available' => 'Brak dostępnych slotów',
                         'to' => 'Do',
+                        'summary-title' => 'Twój wynajem',
+                        'base-rental-fee' => 'Podstawowa opłata za wynajem',
+                        'daily-rate-line' => 'Stawka dzienna (:count × :rate)',
+                        'hourly-rate-line' => 'Stawka godzinowa (:count × :rate)',
+                        'day' => 'dzień',
+                        'days' => 'dni',
+                        'hour' => 'godzina',
+                        'hours' => 'godziny',
+                        'total' => 'Razem',
+                        'select-dates-hint' => 'Wybierz daty wynajmu, aby zobaczyć łączną kwotę.',
+                        'starting-from' => 'Od',
+                        'rental-fee-note' => 'Zawiera opłatę podstawową + minimalną stawkę wynajmu. Suma aktualizuje się zgodnie z wybranym czasem.',
                     ],
 
                     'table' => [
@@ -939,7 +960,7 @@ return [
                     'missing_options' => 'Brakujące opcje dla tego produktu.',
                     'inventory_warning' => 'Żądana ilość nie jest dostępna, prosimy spróbować ponownie później.',
                     'rental_unavailable' => 'Ten produkt do wynajęcia nie jest dostępny w wybranych terminach.',
-                    'select_hourly_duration' => 'Wybierz czas trwania jednej godziny.',
+                    'select_hourly_duration' => 'Wybierz czas trwania co najmniej jednej godziny.',
                 ],
 
                 'per-guest' => 'Za gościa',

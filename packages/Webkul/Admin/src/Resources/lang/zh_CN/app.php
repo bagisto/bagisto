@@ -1624,6 +1624,8 @@ return [
                             'type-mismatch' => '预订类型无法更改。',
                             'time-validation' => '开始时间必须早于结束时间。',
                             'overlap-validation' => '时间段与已有时间段重叠。',
+                            'slot-window-too-short' => '一个或多个时段窗口短于所需的 :duration 分钟时长。每个窗口必须至少持续 :duration 分钟。',
+                            'slot-window-too-short-field' => '该窗口必须至少持续 :duration 分钟。',
                         ],
                     ],
 
@@ -5331,6 +5333,7 @@ return [
             'table' => [
                 'actions' => '操作',
                 'no-records-available' => '没有可用记录。',
+                'no-records-hint' => '尝试调整过滤器，或在添加数据后稍后再查看。',
             ],
         ],
 

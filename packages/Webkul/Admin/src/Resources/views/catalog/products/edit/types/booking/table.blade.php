@@ -179,6 +179,7 @@
             :booking-type="'table_slot'"
             :same-slot-all-days="table_booking.same_slot_all_days"
             :allow-slot-overlap="table_booking.allow_slot_overlap"
+            :min-slot-minutes="table_booking.duration"
         >
         </v-slots>
     </script>

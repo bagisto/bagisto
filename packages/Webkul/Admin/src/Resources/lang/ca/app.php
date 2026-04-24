@@ -1624,6 +1624,8 @@ return [
                             'type-mismatch' => 'El tipus de reserva no es pot canviar.',
                             'time-validation' => "L'hora d'inici ha de ser menor que l'hora de finalització.",
                             'overlap-validation' => 'La franja horària se solapa amb una franja existent.',
+                            'slot-window-too-short' => 'Una o més finestres de ranura són més curtes que la durada requerida de :duration minuts. Cada finestra ha d\'abastar almenys :duration minuts.',
+                            'slot-window-too-short-field' => 'Aquesta finestra ha d\'abastar almenys :duration minuts.',
                         ],
                     ],
 
@@ -5331,6 +5333,7 @@ return [
             'table' => [
                 'actions' => 'Accions',
                 'no-records-available' => 'No hi ha registres disponibles.',
+                'no-records-hint' => 'Proveu d\'ajustar els filtres o torneu més tard quan s\'hagin afegit dades.',
             ],
         ],
 

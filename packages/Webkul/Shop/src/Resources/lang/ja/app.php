@@ -818,6 +818,15 @@ return [
                         'book-your-ticket' => 'チケットを予約する',
                         'title' => 'イベント：',
                         'total-price' => '合計価格',
+                        'summary-title' => 'ご予約',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => '基本料金 (:count × :price)',
+                        'ticket' => 'チケット',
+                        'tickets' => 'チケット',
+                        'total' => '合計',
+                        'select-tickets-hint' => 'チケット数を選択すると合計が表示されます。',
+                        'starting-from' => '開始料金',
+                        'base-fee-note' => '基本料金 + 最安チケットを含みます。チケットの選択に応じて合計が更新されます。',
                     ],
 
                     'rental' => [
@@ -833,6 +842,18 @@ return [
                         'slot' => 'スロット',
                         'no-slots-available' => '利用可能なスロットがありません',
                         'to' => 'まで',
+                        'summary-title' => 'あなたのレンタル',
+                        'base-rental-fee' => '基本レンタル料金',
+                        'daily-rate-line' => '日額 (:count × :rate)',
+                        'hourly-rate-line' => '時間料金 (:count × :rate)',
+                        'day' => '日',
+                        'days' => '日',
+                        'hour' => '時間',
+                        'hours' => '時間',
+                        'total' => '合計',
+                        'select-dates-hint' => 'レンタル日を選択すると合計が表示されます。',
+                        'starting-from' => '開始料金',
+                        'rental-fee-note' => '基本料金 + 最小レンタル料金を含みます。選択した期間に応じて合計が更新されます。',
                     ],
 
                     'table' => [
@@ -939,7 +960,7 @@ return [
                     'missing_options' => 'この製品にはオプションがありません。',
                     'inventory_warning' => '要求された数量は利用できません。後でやり直してください。',
                     'rental_unavailable' => 'このレンタル商品は選択された日付では利用できません。',
-                    'select_hourly_duration' => '1時間のスロット期間を選択してください。',
+                    'select_hourly_duration' => '1時間以上のスロット時間を選択してください。',
                 ],
 
                 'per-guest' => 'ゲストあたり',

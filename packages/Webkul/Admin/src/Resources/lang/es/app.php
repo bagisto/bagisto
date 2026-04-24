@@ -1624,6 +1624,8 @@ return [
                             'type-mismatch' => 'El tipo de reserva no se puede cambiar.',
                             'time-validation' => 'La hora de inicio debe ser menor que la hora de finalización.',
                             'overlap-validation' => 'El intervalo de tiempo se superpone con un intervalo existente.',
+                            'slot-window-too-short' => 'Una o más ventanas de espacio son más cortas que la duración requerida de :duration minutos. Cada ventana debe durar al menos :duration minutos.',
+                            'slot-window-too-short-field' => 'Esta ventana debe durar al menos :duration minutos.',
                         ],
                     ],
 
@@ -5331,6 +5333,7 @@ return [
             'table' => [
                 'actions' => 'Acciones',
                 'no-records-available' => 'No hay Registros Disponibles.',
+                'no-records-hint' => 'Intente ajustar los filtros o vuelva más tarde cuando se agreguen datos.',
             ],
         ],
 

@@ -818,6 +818,15 @@ return [
                         'book-your-ticket' => 'הזמן כרטיס',
                         'title' => 'אירוע ב-:',
                         'total-price' => 'מחיר כולל',
+                        'summary-title' => 'ההזמנה שלך',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'דמי בסיס (:count × :price)',
+                        'ticket' => 'כרטיס',
+                        'tickets' => 'כרטיסים',
+                        'total' => 'סך הכל',
+                        'select-tickets-hint' => 'בחר את כמויות הכרטיסים כדי לראות את הסכום הכולל.',
+                        'starting-from' => 'החל מ-',
+                        'base-fee-note' => 'כולל דמי בסיס + הכרטיס הזול ביותר. הסכום הכולל מתעדכן לפי בחירת הכרטיסים.',
                     ],
 
                     'rental' => [
@@ -833,6 +842,18 @@ return [
                         'slot' => 'משבצת',
                         'no-slots-available' => 'אין משבצות זמינות',
                         'to' => 'עד',
+                        'summary-title' => 'ההשכרה שלך',
+                        'base-rental-fee' => 'דמי השכרה בסיסיים',
+                        'daily-rate-line' => 'תעריף יומי (:count × :rate)',
+                        'hourly-rate-line' => 'תעריף שעתי (:count × :rate)',
+                        'day' => 'יום',
+                        'days' => 'ימים',
+                        'hour' => 'שעה',
+                        'hours' => 'שעות',
+                        'total' => 'סך הכל',
+                        'select-dates-hint' => 'בחר את תאריכי ההשכרה כדי לראות את הסכום הכולל.',
+                        'starting-from' => 'החל מ-',
+                        'rental-fee-note' => 'כולל דמי בסיס + תעריף השכרה מינימלי. הסכום הכולל מתעדכן לפי משך הזמן שנבחר.',
                     ],
 
                     'table' => [
@@ -939,7 +960,7 @@ return [
                     'missing_options' => 'אפשרויות חסרות עבור מוצר זה.',
                     'inventory_warning' => 'הכמות המבוקשת אינה זמינה, אנא נסה שוב מאוחר יותר.',
                     'rental_unavailable' => 'מוצר השכרה זה אינו זמין לתאריכים שנבחרו.',
-                    'select_hourly_duration' => 'בחר משבצת זמן של שעה אחת.',
+                    'select_hourly_duration' => 'בחר משך זמן של שעה אחת לפחות.',
                 ],
 
                 'per-guest' => 'לאורח',

@@ -818,6 +818,15 @@ return [
                         'book-your-ticket' => 'Boek Uw Ticket',
                         'title' => 'Evenement op :',
                         'total-price' => 'Totaalprijs',
+                        'summary-title' => 'Jouw boeking',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'Basistarief (:count × :price)',
+                        'ticket' => 'ticket',
+                        'tickets' => 'tickets',
+                        'total' => 'Totaal',
+                        'select-tickets-hint' => 'Selecteer uw ticketaantallen om het totaal te zien.',
+                        'starting-from' => 'Vanaf',
+                        'base-fee-note' => 'Inclusief basistarief + goedkoopste ticket. Het totaal wordt bijgewerkt op basis van de ticketkeuze.',
                     ],
 
                     'rental' => [
@@ -833,6 +842,18 @@ return [
                         'slot' => 'Slot',
                         'no-slots-available' => 'Geen slots beschikbaar',
                         'to' => 'Tot',
+                        'summary-title' => 'Jouw verhuur',
+                        'base-rental-fee' => 'Basishuurtarief',
+                        'daily-rate-line' => 'Dagtarief (:count × :rate)',
+                        'hourly-rate-line' => 'Uurtarief (:count × :rate)',
+                        'day' => 'dag',
+                        'days' => 'dagen',
+                        'hour' => 'uur',
+                        'hours' => 'uur',
+                        'total' => 'Totaal',
+                        'select-dates-hint' => 'Selecteer uw verhuurdata om het totaal te zien.',
+                        'starting-from' => 'Vanaf',
+                        'rental-fee-note' => 'Inclusief basistarief + minimumhuurtarief. Het totaal wordt bijgewerkt op basis van de gekozen duur.',
                     ],
 
                     'table' => [
@@ -939,7 +960,7 @@ return [
                     'missing_options' => 'Opties ontbreken voor dit product.',
                     'inventory_warning' => 'De gevraagde hoeveelheid is niet beschikbaar, probeer het later opnieuw.',
                     'rental_unavailable' => 'Dit huurproduct is niet beschikbaar voor de geselecteerde datums.',
-                    'select_hourly_duration' => 'Selecteer een tijdsduur van één uur.',
+                    'select_hourly_duration' => 'Selecteer een slotduur van minimaal één uur.',
                 ],
 
                 'per-guest' => 'Per gast',

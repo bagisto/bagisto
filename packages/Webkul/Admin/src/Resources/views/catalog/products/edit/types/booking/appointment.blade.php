@@ -100,6 +100,7 @@
             :booking-type="'appointment_slot'"
             :same-slot-all-days="appointment_booking.same_slot_all_days"
             :allow-slot-overlap="appointment_booking.allow_slot_overlap"
+            :min-slot-minutes="appointment_booking.duration"
         >
         </v-slots>
     </script>

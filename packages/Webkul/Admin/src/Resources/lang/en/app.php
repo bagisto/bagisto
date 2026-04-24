@@ -1624,6 +1624,8 @@ return [
                             'type-mismatch' => 'The booking type cannot be changed.',
                             'time-validation' => 'Start time must be less than end time.',
                             'overlap-validation' => 'Time slot overlaps with an existing slot.',
+                            'slot-window-too-short' => 'One or more slot windows are shorter than the required :duration-minute duration. Each window must span at least :duration minutes.',
+                            'slot-window-too-short-field' => 'This window must span at least :duration minutes.',
                         ],
                     ],
 
@@ -5331,6 +5333,7 @@ return [
             'table' => [
                 'actions' => 'Actions',
                 'no-records-available' => 'No Records Available.',
+                'no-records-hint' => 'Try adjusting your filters, or check back later once data is added.',
             ],
         ],
 

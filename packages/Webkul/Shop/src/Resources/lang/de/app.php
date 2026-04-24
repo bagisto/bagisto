@@ -818,6 +818,15 @@ return [
                         'book-your-ticket' => 'Buchen Sie Ihr Ticket',
                         'title' => 'Veranstaltung am :',
                         'total-price' => 'Gesamtpreis',
+                        'summary-title' => 'Ihre Buchung',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'Grundgebühr (:count × :price)',
+                        'ticket' => 'Ticket',
+                        'tickets' => 'Tickets',
+                        'total' => 'Gesamt',
+                        'select-tickets-hint' => 'Wählen Sie die Ticketmengen, um den Gesamtbetrag zu sehen.',
+                        'starting-from' => 'Ab',
+                        'base-fee-note' => 'Enthält Grundgebühr + günstigstes Ticket. Die Summe aktualisiert sich je nach Ticketauswahl.',
                     ],
 
                     'rental' => [
@@ -833,6 +842,18 @@ return [
                         'slot' => 'Slot',
                         'no-slots-available' => 'Keine Slots verfügbar',
                         'to' => 'Bis',
+                        'summary-title' => 'Ihre Miete',
+                        'base-rental-fee' => 'Grundmietgebühr',
+                        'daily-rate-line' => 'Tagessatz (:count × :rate)',
+                        'hourly-rate-line' => 'Stundensatz (:count × :rate)',
+                        'day' => 'Tag',
+                        'days' => 'Tage',
+                        'hour' => 'Stunde',
+                        'hours' => 'Stunden',
+                        'total' => 'Gesamt',
+                        'select-dates-hint' => 'Wählen Sie Ihre Mietdaten, um den Gesamtbetrag zu sehen.',
+                        'starting-from' => 'Ab',
+                        'rental-fee-note' => 'Enthält Grundgebühr + Mindestmietsatz. Die Summe aktualisiert sich je nach gewählter Dauer.',
                     ],
 
                     'table' => [
@@ -939,7 +960,7 @@ return [
                     'missing_options' => 'Optionen fehlen für dieses Produkt.',
                     'inventory_warning' => 'Die angeforderte Menge ist nicht verfügbar, bitte versuchen Sie es später erneut.',
                     'rental_unavailable' => 'Dieses Mietprodukt ist für die ausgewählten Daten nicht verfügbar.',
-                    'select_hourly_duration' => 'Wählen Sie eine Slot-Dauer von einer Stunde.',
+                    'select_hourly_duration' => 'Wählen Sie eine Dauer von mindestens einer Stunde.',
                 ],
 
                 'per-guest' => 'Pro Gast',
