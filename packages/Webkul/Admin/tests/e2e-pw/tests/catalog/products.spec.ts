@@ -1921,6 +1921,15 @@ test.describe("booking product management", () => {
                 .selectOption("1");
 
             /**
+             * Narrow the configured slot duration so the short slot windows
+             * below (20 and 25 minutes) satisfy the admin-side
+             * minimum-duration guard.
+             */
+            await adminPage
+                .locator('input[name="booking[duration]"]')
+                .fill("15");
+
+            /**
              * Now adding slots with time duration.
              */
             await adminPage.getByText("Add Slots").first().click();
@@ -2460,6 +2469,15 @@ test.describe("booking product management", () => {
             await adminPage
                 .locator('select[name="booking[same_slot_all_days]"]')
                 .selectOption("1");
+
+            /**
+             * Narrow the configured slot duration so the short slot windows
+             * below (20 and 25 minutes) satisfy the admin-side
+             * minimum-duration guard.
+             */
+            await adminPage
+                .locator('input[name="booking[duration]"]')
+                .fill("15");
 
             /**
              * Now adding slots with time duration.

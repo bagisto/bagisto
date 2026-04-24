@@ -12,7 +12,7 @@ use Webkul\Customer\Repositories\CustomerRepository;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\DataTypes\CartItemValidationResult;
 use Webkul\Product\Exceptions\InsufficientProductInventoryException;
-use Webkul\Product\Helpers\Indexers\Price\Virtual as VirtualIndexer;
+use Webkul\Product\Helpers\Indexers\Price\Booking as BookingIndexer;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
 use Webkul\Product\Repositories\ProductCustomerGroupPriceRepository;
 use Webkul\Product\Repositories\ProductImageRepository;
@@ -395,7 +395,38 @@ class Booking extends AbstractType
      */
     public function getPriceIndexer()
     {
-        return app(VirtualIndexer::class);
+        return app(BookingIndexer::class);
+    }
+
+    /**
+     * Flag the product as discounted whenever any event ticket has an active
+     * special price, so the storefront's "Sale" badge surfaces on the card
+     * even without a catalog rule on the base product.
+     */
+    public function haveDiscount($qty = null)
+    {
+        if (parent::haveDiscount($qty)) {
+            return true;
+        }
+
+        $bookingProduct = $this->getBookingProduct($this->product->id);
+
+        if (
+            ! $bookingProduct
+            || $bookingProduct->type !== 'event'
+        ) {
+            return false;
+        }
+
+        $helper = app($this->bookingHelper->getTypeHelper('event'));
+
+        foreach ($bookingProduct->event_tickets as $ticket) {
+            if ($helper->isInSale($ticket)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
