@@ -750,6 +750,15 @@ return [
                         'book-your-ticket' => '预订您的票',
                         'title' => '活动于 :',
                         'total-price' => '总价',
+                        'summary-title' => '您的预订',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => '基本费用 (:count × :price)',
+                        'ticket' => '张票',
+                        'tickets' => '张票',
+                        'total' => '总计',
+                        'select-tickets-hint' => '选择您的票数以查看总计。',
+                        'starting-from' => '起价',
+                        'base-fee-note' => '包括基本费用 + 最便宜的票。总计会根据您的票选择更新。',
                     ],
 
                     'rental' => [
@@ -765,6 +774,18 @@ return [
                         'slot' => '时段',
                         'no-slots-available' => '没有可用时段',
                         'to' => '到',
+                        'summary-title' => '您的租赁',
+                        'base-rental-fee' => '基本租赁费',
+                        'daily-rate-line' => '每日费率 (:count × :rate)',
+                        'hourly-rate-line' => '每小时费率 (:count × :rate)',
+                        'day' => '天',
+                        'days' => '天',
+                        'hour' => '小时',
+                        'hours' => '小时',
+                        'total' => '总计',
+                        'select-dates-hint' => '选择您的租赁日期以查看总计。',
+                        'starting-from' => '起价',
+                        'rental-fee-note' => '包括基本费用 + 最低租赁费率。总计会根据您选择的时长更新。',
                     ],
 
                     'table' => [
@@ -859,7 +880,7 @@ return [
                     'missing_options' => '此产品缺少选项。',
                     'inventory_warning' => '请求的数量不可用，请稍后再试。',
                     'rental_unavailable' => '此租赁产品在所选日期不可用。',
-                    'select_hourly_duration' => '选择一小时的时段。',
+                    'select_hourly_duration' => '请选择至少一小时的时段时长。',
                 ],
 
                 'per-guest' => '每位客人',

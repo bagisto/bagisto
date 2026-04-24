@@ -750,6 +750,15 @@ return [
                         'book-your-ticket' => 'Rezervă biletul',
                         'title' => 'Eveniment pe:',
                         'total-price' => 'Preț total',
+                        'summary-title' => 'Rezervarea ta',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'Taxă de bază (:count × :price)',
+                        'ticket' => 'bilet',
+                        'tickets' => 'bilete',
+                        'total' => 'Total',
+                        'select-tickets-hint' => 'Selectează cantitățile de bilete pentru a vedea totalul.',
+                        'starting-from' => 'De la',
+                        'base-fee-note' => 'Include taxa de bază + cel mai ieftin bilet. Totalul se actualizează în funcție de selecția biletelor.',
                     ],
 
                     'rental' => [
@@ -765,6 +774,18 @@ return [
                         'slot' => 'Slot',
                         'no-slots-available' => 'Nu sunt sloturi disponibile',
                         'to' => 'Până la',
+                        'summary-title' => 'Închirierea ta',
+                        'base-rental-fee' => 'Taxă de bază pentru închiriere',
+                        'daily-rate-line' => 'Tarif zilnic (:count × :rate)',
+                        'hourly-rate-line' => 'Tarif orar (:count × :rate)',
+                        'day' => 'zi',
+                        'days' => 'zile',
+                        'hour' => 'oră',
+                        'hours' => 'ore',
+                        'total' => 'Total',
+                        'select-dates-hint' => 'Selectează datele de închiriere pentru a vedea totalul.',
+                        'starting-from' => 'De la',
+                        'rental-fee-note' => 'Include taxa de bază + tariful minim de închiriere. Totalul se actualizează în funcție de durata selectată.',
                     ],
 
                     'table' => [
@@ -859,7 +880,7 @@ return [
                     'missing_options' => 'Opțiunile lipsesc pentru acest produs.',
                     'inventory_warning' => 'Cantitatea solicitată nu este disponibilă, vă rugăm să încercați din nou mai târziu.',
                     'rental_unavailable' => 'Acest produs de închiriere nu este disponibil pentru datele selectate.',
-                    'select_hourly_duration' => 'Selectați o durată de slot de o oră.',
+                    'select_hourly_duration' => 'Selectează o durată de cel puțin o oră.',
                 ],
 
                 'per-guest' => 'Per oaspete',

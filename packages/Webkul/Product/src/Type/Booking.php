@@ -219,12 +219,10 @@ class Booking extends AbstractType
         $bookingProduct = $this->getBookingProduct($data['product_id']);
 
         if ($bookingProduct->type == 'rental') {
-            if (isset($data['booking']['slot']['from'])) {
-                $time = $data['booking']['slot']['to'] - $data['booking']['slot']['from'];
+            if (isset($data['booking']['slot']['from'], $data['booking']['slot']['to'])) {
+                $duration = (int) $data['booking']['slot']['to'] - (int) $data['booking']['slot']['from'];
 
-                $hours = floor($time / 60) / 60;
-
-                if ($hours > 1) {
+                if ($duration < 3600) {
                     return trans('shop::app.products.booking.cart.integrity.select_hourly_duration');
                 }
             }
@@ -394,87 +392,94 @@ class Booking extends AbstractType
     }
 
     /**
-     * Override product prices to show a price range (base + cheapest ticket) to (base + most expensive ticket) for event bookings.
-     */
-    public function getProductPrices()
-    {
-        $bookingProduct = $this->getBookingProduct($this->product->id);
-
-        if (
-            $bookingProduct
-            && $bookingProduct->type === 'event'
-            && $bookingProduct->event_tickets->count()
-        ) {
-            $helper = app($this->bookingHelper->getTypeHelper('event'));
-
-            $regularPrices = [];
-            $finalPrices = [];
-
-            foreach ($bookingProduct->event_tickets as $ticket) {
-                $regularPrices[] = (float) $ticket->price;
-
-                $finalPrices[] = $helper->isInSale($ticket)
-                    ? (float) $ticket->special_price
-                    : (float) $ticket->price;
-            }
-
-            $baseRegular = (float) $this->product->price;
-            $baseFinal = (float) parent::getMinimalPrice();
-
-            $fromRegular = $baseRegular + min($regularPrices);
-            $fromFinal = $baseFinal + min($finalPrices);
-            $toRegular = $baseRegular + max($regularPrices);
-            $toFinal = $baseFinal + max($finalPrices);
-
-            return [
-                'from' => [
-                    'regular' => [
-                        'price' => core()->convertPrice($fromRegular),
-                        'formatted_price' => core()->currency($fromRegular),
-                    ],
-
-                    'final' => [
-                        'price' => core()->convertPrice($fromFinal),
-                        'formatted_price' => core()->currency($fromFinal),
-                    ],
-                ],
-
-                'to' => [
-                    'regular' => [
-                        'price' => core()->convertPrice($toRegular),
-                        'formatted_price' => core()->currency($toRegular),
-                    ],
-
-                    'final' => [
-                        'price' => core()->convertPrice($toFinal),
-                        'formatted_price' => core()->currency($toFinal),
-                    ],
-                ],
-            ];
-        }
-
-        return parent::getProductPrices();
-    }
-
-    /**
-     * Use the bundle-style range price template for event booking products.
+     * Render the PDP/card price as "Starting from {base + cheapest extra}" for
+     * booking sub-types whose final price is composed at add-to-cart time:
+     *  - event  → base + cheapest ticket price
+     *  - rental → base + minimum unit rate (1 hour if hourly is offered, otherwise 1 day)
+     * Other sub-types fall through to the default.
      */
     public function getPriceHtml()
     {
         $bookingProduct = $this->getBookingProduct($this->product->id);
 
-        if (
-            $bookingProduct
-            && $bookingProduct->type === 'event'
-            && $bookingProduct->event_tickets->count()
-        ) {
-            return view('shop::products.prices.bundle', [
-                'product' => $this->product,
-                'prices' => $this->getProductPrices(),
-            ])->render();
+        if (! $bookingProduct) {
+            return parent::getPriceHtml();
         }
 
-        return parent::getPriceHtml();
+        $cheapestExtra = $this->getCheapestBookingExtra($bookingProduct);
+
+        if ($cheapestExtra === null) {
+            return parent::getPriceHtml();
+        }
+
+        $fromPrice = (float) parent::getMinimalPrice() + (float) $cheapestExtra;
+
+        $labelKey = match ($bookingProduct->type) {
+            'event' => 'shop::app.products.view.type.booking.event.starting-from',
+            'rental' => 'shop::app.products.view.type.booking.rental.starting-from',
+            default => null,
+        };
+
+        if (! $labelKey) {
+            return parent::getPriceHtml();
+        }
+
+        return view('shop::products.prices.booking-starting-from', [
+            'label' => trans($labelKey),
+            'prices' => [
+                'regular' => [
+                    'price' => core()->convertPrice($fromPrice),
+                    'formatted_price' => core()->currency($fromPrice),
+                ],
+            ],
+        ])->render();
+    }
+
+    /**
+     * Return the smallest additional amount that will be charged on top of the
+     * product's base price for the given booking product, or null if no such
+     * minimum can be computed (unsupported sub-type, missing slot, etc.).
+     */
+    protected function getCheapestBookingExtra($bookingProduct): ?float
+    {
+        if ($bookingProduct->type === 'event') {
+            if (! $bookingProduct->event_tickets->count()) {
+                return null;
+            }
+
+            $helper = app($this->bookingHelper->getTypeHelper('event'));
+
+            $cheapest = null;
+
+            foreach ($bookingProduct->event_tickets as $ticket) {
+                $ticketPrice = $helper->isInSale($ticket)
+                    ? (float) $ticket->special_price
+                    : (float) $ticket->price;
+
+                if ($cheapest === null || $ticketPrice < $cheapest) {
+                    $cheapest = $ticketPrice;
+                }
+            }
+
+            return $cheapest;
+        }
+
+        if ($bookingProduct->type === 'rental') {
+            $slot = $bookingProduct->rental_slot;
+
+            if (! $slot) {
+                return null;
+            }
+
+            $rates = array_filter([
+                (float) $slot->hourly_price,
+                (float) $slot->daily_price,
+            ], fn ($rate) => $rate > 0);
+
+            return $rates ? min($rates) : null;
+        }
+
+        return null;
     }
 
     /**

@@ -750,6 +750,15 @@ return [
                         'book-your-ticket' => 'احجز تذكرتك',
                         'title' => 'الحدث في :',
                         'total-price' => 'السعر الإجمالي',
+                        'summary-title' => 'حجزك',
+                        'ticket-line' => ':name (:count × :price)',
+                        'base-fee-line' => 'الرسوم الأساسية (:count × :price)',
+                        'ticket' => 'تذكرة',
+                        'tickets' => 'تذاكر',
+                        'total' => 'المجموع',
+                        'select-tickets-hint' => 'اختر كميات التذاكر لعرض المجموع.',
+                        'starting-from' => 'يبدأ من',
+                        'base-fee-note' => 'يشمل الرسوم الأساسية + أرخص تذكرة. يتم تحديث الإجمالي بناءً على اختيار التذاكر.',
                     ],
 
                     'rental' => [
@@ -765,6 +774,18 @@ return [
                         'slot' => 'الفتحة',
                         'no-slots-available' => 'لا توجد فتحات متاحة',
                         'to' => 'إلى',
+                        'summary-title' => 'إيجارك',
+                        'base-rental-fee' => 'رسوم الإيجار الأساسية',
+                        'daily-rate-line' => 'السعر اليومي (:count × :rate)',
+                        'hourly-rate-line' => 'السعر بالساعة (:count × :rate)',
+                        'day' => 'يوم',
+                        'days' => 'أيام',
+                        'hour' => 'ساعة',
+                        'hours' => 'ساعات',
+                        'total' => 'المجموع',
+                        'select-dates-hint' => 'اختر تواريخ الإيجار لعرض المجموع.',
+                        'starting-from' => 'يبدأ من',
+                        'rental-fee-note' => 'يشمل الرسوم الأساسية + الحد الأدنى لسعر الإيجار. يتم تحديث الإجمالي بناءً على المدة المحددة.',
                     ],
 
                     'table' => [
@@ -859,7 +880,7 @@ return [
                     'missing_options' => 'الخيارات مفقودة لهذا المنتج.',
                     'inventory_warning' => 'الكمية المطلوبة غير متوفرة، يرجى المحاولة مرة أخرى لاحقًا.',
                     'rental_unavailable' => 'هذا المنتج الإيجاري غير متاح للتواريخ المحددة.',
-                    'select_hourly_duration' => 'اختر مدة الفتحة الزمنية بساعة واحدة.',
+                    'select_hourly_duration' => 'اختر مدة زمنية لا تقل عن ساعة واحدة.',
                 ],
 
                 'per-guest' => 'لكل ضيف',
