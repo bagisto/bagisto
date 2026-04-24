@@ -2,9 +2,14 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.3.18 (24th of April 2026)** - *Release*
+## **v2.4.3 (24th of April 2026)** - *Release*
 
-- Soon.
+* Ported all booking product bug fixes from the 2.3 branch into 2.4. Key highlights:
+  - Added admin-side order creation support for booking products across appointment, event, rental, default, and table sub-types.
+  - Fixed booking slot overlap detection and corrected the calendar window generation for appointment bookings.
+  - Fixed display pricing for rental and event sub-types with a "starting from" price on listings and corrected strike-through pricing.
+  - Hardened cart handling for booking items (quantity updates, missing-ticket guards, inverted rental range checks).
+  - Fixed booking product import by updating the data-transfer sample files and correcting the importer for booking attributes.
 
 ## **v2.4.2 (13th of April 2026)** - *Release*
 
