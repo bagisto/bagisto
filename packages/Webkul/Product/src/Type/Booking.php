@@ -238,7 +238,7 @@ class Booking extends AbstractType
             }
 
             $filtered = Arr::where($data['booking']['qty'], function ($qty, $key) {
-                return $qty != 0;
+                return (int) $qty > 0;
             });
 
             if (! count($filtered)) {
@@ -247,12 +247,8 @@ class Booking extends AbstractType
 
             $cartProductsList = [];
 
-            foreach ($data['booking']['qty'] as $ticketId => $qty) {
-                if (! $qty) {
-                    continue;
-                }
-
-                $data['quantity'] = $qty;
+            foreach ($filtered as $ticketId => $qty) {
+                $data['quantity'] = (int) $qty;
                 $data['booking']['ticket_id'] = $ticketId;
                 $data['booking']['slot'] = implode('-', [$bookingProduct->available_from->timestamp, $bookingProduct->available_to->timestamp]);
                 $cartProducts = parent::prepareForCart($data);

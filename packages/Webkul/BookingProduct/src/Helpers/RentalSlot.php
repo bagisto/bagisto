@@ -117,7 +117,8 @@ class RentalSlot extends Booking
                 : Carbon::createFromTimeString('2080-01-01 00:00:00');
 
             return
-                $requestedFromDate < $availableFrom
+                $requestedToDate <= $requestedFromDate
+                || $requestedFromDate < $availableFrom
                 || $requestedFromDate > $availableTo
                 || $requestedToDate < $availableFrom
                 || $requestedToDate > $availableTo;
