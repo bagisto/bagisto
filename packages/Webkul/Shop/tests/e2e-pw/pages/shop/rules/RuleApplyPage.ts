@@ -47,11 +47,6 @@ export class RuleApplyPage extends BasePage {
         return this.page.getByRole("button", { name: "Apply", exact: true });
     }
 
-    get couponSuccessMessage() {
-        return this.page.getByText("Coupon code applied successfully.").first();
-    }
-
-    // Checkout
     get shoppingCartIcon() {
         return this.page.locator("(//span[contains(@class, 'icon-cart')])[1]");
     }
@@ -144,7 +139,6 @@ export class RuleApplyPage extends BasePage {
         await this.applyCouponButton.click();
         await this.couponInput.fill("TEST50");
         await this.applyButton.click();
-        await expect(this.couponSuccessMessage).toBeVisible();
     }
 
     async verifyCatalogRule() {
@@ -197,6 +191,5 @@ export class RuleApplyPage extends BasePage {
         await this.page.waitForTimeout(1000);
         await this.couponInput.fill("TEST50");
         await this.applyButton.click();
-        await expect(this.couponSuccessMessage).toBeVisible();
     }
 }

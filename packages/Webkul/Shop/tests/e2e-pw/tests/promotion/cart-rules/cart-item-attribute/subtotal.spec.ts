@@ -1,4 +1,5 @@
 import { test } from "../../../../setup";
+import { expect } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
@@ -44,6 +45,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when subtotal condition is -> is not equal to", async ({
@@ -60,6 +65,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when subtotal condition is -> equals or greater then", async ({
@@ -76,6 +85,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when subtotal condition is -> equals or less than", async ({
@@ -92,6 +105,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when subtotal condition is -> greater than", async ({
@@ -108,6 +125,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when subtotal condition is -> less than", async ({
@@ -124,6 +145,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
     });
 });
