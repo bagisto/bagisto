@@ -420,6 +420,7 @@ return [
                 'refunded' => 'Remboursé',
                 'reorder' => 'Recommander',
                 'reorder-booking-skipped' => 'Les produits de réservation ont été ignorés lors de la nouvelle commande. Veuillez les réserver à nouveau avec de nouvelles dates et plages horaires.',
+                'reorder-customer-missing' => 'Impossible de recommander cette commande car le client associé n\'existe plus.',
                 'ship' => 'Expédier',
                 'shipment' => 'Envoi #:shipment',
                 'shipments' => 'Envois',

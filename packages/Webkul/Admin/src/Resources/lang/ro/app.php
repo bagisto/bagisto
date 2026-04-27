@@ -420,6 +420,7 @@ return [
                 'refunded' => 'Refunded',
                 'reorder' => 'Reorder',
                 'reorder-booking-skipped' => 'Produsele de rezervare au fost omise în timpul recomandării. Vă rugăm să le rezervați din nou cu date și intervale de timp noi.',
+                'reorder-customer-missing' => 'Nu se poate recomanda această comandă deoarece clientul asociat nu mai există.',
                 'ship' => 'Ship',
                 'shipment' => 'Shipment #:shipment',
                 'shipments' => 'Shipments',

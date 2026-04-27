@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- #11242 [fixed] - Fixed an exception ("Attempt to read property `addresses` on null") when an admin attempted to reorder an order whose customer had since been deleted. The admin reorder action now checks for a missing customer and redirects back to the order view with a clear flash message instead of letting the null reach the create-order page.
+
 ## **v2.3.18 (24th of April 2026)** - *Release*
 
 - Added Booking product support to the DataTransfer (import) package. Booking products can now be imported via CSV/XLS/XLSX/XML using a new `booking_options` column that follows the existing pipe/key=value convention (same pattern as `bundle_options` / `configurable_variants`). The column encodes the product-level config, type-specific config, and slot or ticket records in pipe-separated sections. All five booking subtypes are supported: default (one/many), appointment, event (with tickets + translations), rental (daily/hourly), and table. Updated the sample product files in all four formats with one example per booking subtype.

@@ -420,6 +420,7 @@ return [
                 'refunded' => 'İade Edildi',
                 'reorder' => 'Yeniden Sipariş Ver',
                 'reorder-booking-skipped' => 'Yeniden sipariş sırasında rezervasyon ürünleri atlandı. Lütfen yeni tarih ve zaman dilimleriyle tekrar rezerve edin.',
+                'reorder-customer-missing' => 'İlişkili müşteri artık mevcut olmadığı için bu sipariş yeniden sipariş edilemez.',
                 'ship' => 'Gönder',
                 'shipment' => 'Gönderim #:shipment',
                 'shipments' => 'Gönderimler',

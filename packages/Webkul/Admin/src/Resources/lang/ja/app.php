@@ -420,6 +420,7 @@ return [
                 'refunded' => '返金済み',
                 'reorder' => '再注文',
                 'reorder-booking-skipped' => '再注文時に予約商品はスキップされました。新しい日時のスロットで再予約してください。',
+                'reorder-customer-missing' => '関連する顧客が存在しないため、この注文を再注文できません。',
                 'ship' => '出荷',
                 'shipment' => '出荷 #:shipment',
                 'shipments' => '出荷',
