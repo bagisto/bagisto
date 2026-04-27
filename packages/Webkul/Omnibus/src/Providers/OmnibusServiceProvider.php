@@ -31,6 +31,8 @@ class OmnibusServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+        
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'omnibus');
 
         $this->callAfterResolving(Schedule::class, function (Schedule $schedule) {
