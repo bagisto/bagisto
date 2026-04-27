@@ -461,6 +461,7 @@ return [
                 'refunded' => 'Dikembalikan',
                 'reorder' => 'Pesan Lagi',
                 'reorder-booking-skipped' => 'Produk pemesanan dilewati saat memesan ulang. Silakan pesan ulang dengan tanggal dan slot waktu baru.',
+                'reorder-customer-missing' => 'Tidak dapat memesan ulang pesanan ini karena pelanggan terkait tidak lagi ada.',
                 'ship' => 'Kirim',
                 'shipment' => 'Pengiriman #:shipment',
                 'shipments' => 'Pengiriman',

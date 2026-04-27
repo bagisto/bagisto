@@ -461,6 +461,7 @@ return [
                 'refunded' => 'Reemborsat',
                 'reorder' => 'Reordenar',
                 'reorder-booking-skipped' => 'Els productes de reserva s\'han omès durant la nova comanda. Si us plau, reserveu-los de nou amb noves dates i franges horàries.',
+                'reorder-customer-missing' => 'No es pot tornar a comandar aquesta comanda perquè el client associat ja no existeix.',
                 'ship' => 'Enviar',
                 'shipment' => 'Enviament #:shipment',
                 'shipments' => 'Enviaments',

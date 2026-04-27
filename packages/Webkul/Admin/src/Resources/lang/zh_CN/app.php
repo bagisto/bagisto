@@ -461,6 +461,7 @@ return [
                 'refunded' => '已退款',
                 'reorder' => '重新下单',
                 'reorder-booking-skipped' => '重新下单时已跳过预订产品。请使用新的日期和时间段重新预订。',
+                'reorder-customer-missing' => '无法重新订购此订单，因为关联的客户不再存在。',
                 'ship' => '发货',
                 'shipment' => '发货 #:shipment',
                 'shipments' => '发货',

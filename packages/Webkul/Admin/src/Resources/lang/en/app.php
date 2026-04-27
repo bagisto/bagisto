@@ -461,6 +461,7 @@ return [
                 'refunded' => 'Refunded',
                 'reorder' => 'Reorder',
                 'reorder-booking-skipped' => 'Booking products were skipped during reorder. Please book them again with fresh date and time slots.',
+                'reorder-customer-missing' => 'Cannot reorder this order because the associated customer no longer exists.',
                 'ship' => 'Ship',
                 'shipment' => 'Shipment #:shipment',
                 'shipments' => 'Shipments',
