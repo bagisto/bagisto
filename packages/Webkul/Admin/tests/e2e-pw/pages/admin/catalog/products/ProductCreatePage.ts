@@ -531,6 +531,82 @@ export class ProductCreatePage extends BasePage {
         await this.verifyProductVisible(product.name);
     }
 
+    async handleDefaultBookingWithShorterTimeRangeThanSlots() {
+        const product = await this.createBookingProductBase();
+        await this.page
+            .locator('select[name="booking\\[booking_type\\]"]')
+            .selectOption("many");
+        await this.page
+            .locator('input[name="booking[qty]"]')
+            .fill(product.weight);
+
+        const weeks = [
+            { name: "Sunday", status: 1 },
+        ];
+
+        for (const day of weeks) {
+            await this.page
+                .locator(
+                    `.overflow-x-auto > div:nth-child(${day.status}) > div:nth-child(2) > .cursor-pointer`,
+                )
+                .first()
+                .click();
+
+            const fromInput = this.page.getByRole("textbox", {
+                name: "From",
+                exact: true,
+            });
+            await fromInput.click();
+            await this.page.waitForSelector(
+                ".flatpickr-calendar.hasTime.noCalendar.open",
+                { state: "visible" },
+            );
+            await this.page
+                .getByRole("spinbutton", { name: "Hour" })
+                .fill("10");
+            await this.page
+                .getByRole("spinbutton", { name: "Minute" })
+                .fill("35");
+            await this.page
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
+            await this.page.waitForTimeout(500);
+
+            const toInput = this.page.getByRole("textbox", {
+                name: "To",
+                exact: true,
+            });
+
+            await toInput.click();
+            await this.page.waitForTimeout(500);
+
+            await this.page.waitForSelector(
+                ".flatpickr-calendar.hasTime.noCalendar.open",
+                { state: "visible" },
+            );
+            await this.page
+                .getByRole("spinbutton", { name: "Hour" })
+                .fill("10");
+            await this.page
+                .getByRole("spinbutton", { name: "Minute" })
+                .fill("50");
+            await this.page
+                .getByRole("spinbutton", { name: "Minute" })
+                .press("Enter");
+
+            await this.page.waitForTimeout(500);
+            await this.page.locator("body").press("Escape");
+
+            await this.page.locator("select[name='status']").selectOption('1')
+            await this.page
+                .getByRole("button", { name: "Save", exact: true })
+                .click();
+            await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+            await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+        }
+    }
+
     async createAppointmentBookingProductNotAvailableEveryWeekWithSameSlotForAllDays() {
         const product = await this.createBookingProductBase();
         await this.page
@@ -694,6 +770,134 @@ export class ProductCreatePage extends BasePage {
         await this.verifyProductVisible(product.name);
     }
 
+    async handleAppointmentBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+        const product = await this.createBookingProductBase();
+        await this.page
+            .locator('select[name="booking[type]"]')
+            .selectOption("appointment");
+        await this.page
+            .locator('input[name="booking[qty]"]')
+            .fill(product.weight);
+
+        if (!isAvailableEveryWeek) {
+            await this.page
+                .locator('select[name="booking[available_every_week]"]')
+                .selectOption("0");
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .fill("2027-04-08 16:00:00");
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .press("Enter");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .fill("2027-04-25 18:00");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .press("Enter");
+
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking[same_slot_all_days]"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "10", "35");
+                await this.fillTimeTextbox("To", 0, "11", "00");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.');
+            } else {
+                await this.page
+                    .locator('select[name="booking[same_slot_all_days]"]')
+                    .selectOption("0");
+                const weeks = [
+                    { status: 0, slots: 1, fromHr: "10", toHr: "10" },
+                ];
+
+                for (const day of weeks) {
+                    await this.page
+                        .locator(
+                            `.overflow-x-auto > div:nth-child(${day.status + 1}) > div:nth-child(2) > .cursor-pointer`,
+                        )
+                        .first()
+                        .click();
+
+                    for (let slot = 0; slot < day.slots; slot++) {
+                        await this.page
+                            .locator(
+                                `div.flex.gap-2\\.5[index="${day.status}_${slot}"]`,
+                            )
+                            .focus();
+                        await this.fillTimeTextbox("From", slot, day.fromHr, "00");
+                        await this.fillTimeTextbox("To", slot, day.toHr, "25");
+                    }
+
+                    await this.page.locator("body").press("Escape");
+                    await this.page
+                        .getByRole("button", { name: "Save", exact: true })
+                        .click();
+                    await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible();
+                    await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.');
+                }
+            }
+        } else {
+            await this.page
+                .locator('select[name="booking[available_every_week]"]')
+                .selectOption("1");
+
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking[same_slot_all_days]"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "10", "35");
+                await this.page.waitForTimeout(500);
+                await this.fillTimeTextbox("To", 0, "11", "00");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.');
+            } else {
+                await this.page
+                    .locator('select[name="booking[same_slot_all_days]"]')
+                    .selectOption("0");
+                const weeks = [
+                    { status: 0, slots: 1, fromHr: "10", toHr: "10" },
+                ];
+
+                for (const day of weeks) {
+                    await this.page
+                        .locator(
+                            `.overflow-x-auto > div:nth-child(${day.status + 1}) > div:nth-child(2) > .cursor-pointer`,
+                        )
+                        .first()
+                        .click();
+
+                    for (let slot = 0; slot < day.slots; slot++) {
+                        await this.page
+                            .locator(
+                                `div.flex.gap-2\\.5[index="${day.status}_${slot}"]`,
+                            )
+                            .focus();
+                        await this.fillTimeTextbox("From", slot, day.fromHr, "00");
+                        await this.fillTimeTextbox("To", slot, day.toHr, "25");
+                    }
+
+                    await this.page.locator("body").press("Escape");
+                    await this.page
+                        .getByRole("button", { name: "Save", exact: true })
+                        .click();
+                    await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible();
+                    await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.');
+                }
+            }
+        }
+    }
     async createEventBookingProduct() {
         const product = await this.createBookingProductBase();
         await this.page
@@ -842,6 +1046,111 @@ export class ProductCreatePage extends BasePage {
         await this.saveProductButton.click();
     }
 
+    async handleRentalBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+        const product = await this.createBookingProductBase();
+        await this.page
+            .locator('select[name="booking[type]"]')
+            .selectOption("rental");
+        await this.page
+            .locator('input[name="booking[location]"]')
+            .fill(product.location);
+        await this.page
+            .locator('input[name="booking[qty]"]')
+            .fill(product.weight);
+        if (isAvailableEveryWeek) {
+            await this.page.selectOption(
+                '//select[@name="booking[available_every_week]"]',
+                { value: "1" },
+            );
+            await this.page
+                .locator('select[name="booking\\[renting_type\\]"]')
+                .selectOption("hourly");
+            await this.page
+                .getByRole("textbox", { name: "Hourly Price" })
+                .fill("300");
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "14", "20");
+                await this.fillTimeTextbox("To", 0, "14", "50");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 60 minutes.')
+            }
+
+            else {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]"]')
+                    .selectOption("0");
+                await this.page.waitForLoadState('networkidle')
+
+                await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 60 minutes.')
+
+            }
+        }
+        else {
+            await this.page.selectOption(
+                '//select[@name="booking[available_every_week]"]',
+                { value: "0" },
+            );
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .fill("2027-04-08 16:00:00");
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .press("Enter");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .fill("2027-04-25 18:00");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .press("Enter");
+            await this.page
+                .locator('select[name="booking\\[renting_type\\]"]')
+                .selectOption("hourly");
+            await this.page
+                .getByRole("textbox", { name: "Hourly Price" })
+                .fill("300");
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "14", "20");
+                await this.fillTimeTextbox("To", 0, "14", "45");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 60 minutes.')
+            }
+            else {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]"]')
+                    .selectOption("0");
+                await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 60 minutes.')
+
+            }
+
+        }
+    }
+
     async createRentalBookingProductBothBasisSameSlotAllDays() {
         const product = await this.createBookingProductBase();
         await this.page
@@ -909,6 +1218,118 @@ export class ProductCreatePage extends BasePage {
         await this.fillInlineDaySlot(1, "10", "35", "13", "45", true);
         await this.fillInlineDaySlot(2, "09", "25", "13", "25", true);
         await this.saveProductButton.click();
+    }
+
+
+    async createRentalBookingProductBothhourlyDailywith_and_withoutRange(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+        const product = await this.createBookingProductBase();
+        await this.page
+            .locator('select[name="booking[type]"]')
+            .selectOption("rental");
+        await this.page
+            .locator('input[name="booking[location]"]')
+            .fill(product.location);
+        await this.page
+            .locator('input[name="booking[qty]"]')
+            .fill(product.weight);
+        if (isAvailableEveryWeek) {
+            await this.page.selectOption(
+                '//select[@name="booking[available_every_week]"]',
+                { value: "1" },
+            );
+            await this.page
+                .locator('select[name="booking\\[renting_type\\]"]')
+                .selectOption("daily_hourly");
+            await this.page
+                .getByRole("textbox", { name: "Daily Price" })
+                .fill("3000");
+            await this.page
+                .getByRole("textbox", { name: "Hourly Price" })
+                .fill("300");
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "14", "20");
+                await this.fillTimeTextbox("To", 0, "14", "50");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 60 minutes.')
+            }
+
+            else {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]"]')
+                    .selectOption("0");
+                await this.page.waitForLoadState('networkidle')
+
+                await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 60 minutes.')
+
+            }
+        }
+        else {
+            await this.page.selectOption(
+                '//select[@name="booking[available_every_week]"]',
+                { value: "0" },
+            );
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .fill("2027-04-08 16:00:00");
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .press("Enter");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .fill("2027-04-25 18:00");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .press("Enter");
+            await this.page
+                .locator('select[name="booking\\[renting_type\\]"]')
+                .selectOption("daily_hourly");
+            await this.page
+                .getByRole("textbox", { name: "Daily Price" })
+                .fill("3000");
+            await this.page
+                .getByRole("textbox", { name: "Hourly Price" })
+                .fill("300");
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "14", "20");
+                await this.fillTimeTextbox("To", 0, "14", "45");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 60 minutes.')
+            }
+            else {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]"]')
+                    .selectOption("0");
+                await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 60 minutes.')
+
+            }
+
+        }
     }
 
     async createTableBookingProductChargePerGuestSameSlotAllDays() {
@@ -1115,6 +1536,235 @@ export class ProductCreatePage extends BasePage {
         await this.saveProductButton.click();
     }
 
+    async handleGuestTableBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+        const product = await this.createBookingProductBase();
+        await this.page
+            .locator('select[name="booking[type]"]')
+            .selectOption("table");
+        await this.page
+            .locator('input[name="booking[location]"]')
+            .fill(product.location);
+
+        if (!isAvailableEveryWeek) {
+            await this.page.selectOption(
+                '//select[@name="booking[available_every_week]"]',
+                { value: "0" },
+            );
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .fill("2027-04-08 16:00:00");
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .press("Enter");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .fill("2027-04-25 18:00");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .press("Enter");
+            await this.page
+                .locator('select[name="booking\\[price_type\\]"]')
+                .selectOption("guest");
+            await this.page
+                .getByRole("textbox", { name: "Guest Capacity" })
+                .fill("2");
+            await this.page
+                .getByRole("textbox", { name: "Slot Duration (Mins)" })
+                .fill("45");
+            await this.page
+                .getByRole("textbox", { name: "Break Time b/w Slots (Mins)" })
+                .fill("10");
+            await this.page
+                .getByRole("textbox", { name: "Prevent Scheduling Before" })
+                .fill("0");
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]\\`"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "14", "20");
+                await this.fillTimeTextbox("To", 0, "14", "35");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+            }
+            else {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]\\`"]')
+                    .selectOption("0");
+                await this.fillInlineDaySlot(1, "10", "35", "10", "55", false);
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+
+            }
+        }
+        else {
+            await this.page.selectOption(
+                '//select[@name="booking[available_every_week]"]',
+                { value: "1" },
+            );
+            await this.page
+                .locator('select[name="booking\\[price_type\\]"]')
+                .selectOption("guest");
+            await this.page
+                .getByRole("textbox", { name: "Guest Capacity" })
+                .fill("2");
+            await this.page
+                .getByRole("textbox", { name: "Slot Duration (Mins)" })
+                .fill("45");
+            await this.page
+                .getByRole("textbox", { name: "Break Time b/w Slots (Mins)" })
+                .fill("10");
+            await this.page
+                .getByRole("textbox", { name: "Prevent Scheduling Before" })
+                .fill("0");
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]\\`"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "14", "20");
+                await this.fillTimeTextbox("To", 0, "14", "45");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+
+            }
+            else {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]\\`"]')
+                    .selectOption("0");
+                await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+            }
+        }
+    }
+
+    async handleTable_TableBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
+        const product = await this.createBookingProductBase();
+        await this.page
+            .locator('select[name="booking[type]"]')
+            .selectOption("table");
+        await this.page
+            .locator('input[name="booking[location]"]')
+            .fill(product.location);
+
+        if (!isAvailableEveryWeek) {
+            await this.page.selectOption(
+                '//select[@name="booking[available_every_week]"]',
+                { value: "0" },
+            );
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .fill("2027-04-08 16:00:00");
+            await this.page
+                .getByRole("textbox", { name: "Available From" })
+                .press("Enter");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .fill("2027-04-25 18:00");
+            await this.page
+                .getByRole("textbox", { name: "Available To" })
+                .press("Enter");
+            await this.page
+                .locator('select[name="booking\\[price_type\\]"]')
+                .selectOption("table");
+            await this.page
+                .getByRole("textbox", { name: "Guest Capacity" })
+                .fill("2");
+            await this.page
+                .getByRole("textbox", { name: "Slot Duration (Mins)" })
+                .fill("45");
+            await this.page
+                .getByRole("textbox", { name: "Break Time b/w Slots (Mins)" })
+                .fill("10");
+            await this.page
+                .getByRole("textbox", { name: "Prevent Scheduling Before" })
+                .fill("0");
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]\\`"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "14", "20");
+                await this.fillTimeTextbox("To", 0, "14", "35");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+            }
+            else {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]\\`"]')
+                    .selectOption("0");
+                await this.fillInlineDaySlot(1, "10", "35", "10", "55", false);
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+
+            }
+        }
+        else {
+            await this.page.selectOption(
+                '//select[@name="booking[available_every_week]"]',
+                { value: "1" },
+            );
+            await this.page
+                .locator('select[name="booking\\[price_type\\]"]')
+                .selectOption("table");
+            await this.page
+                .getByRole("textbox", { name: "Guest Capacity" })
+                .fill("2");
+            await this.page
+                .getByRole("textbox", { name: "Slot Duration (Mins)" })
+                .fill("45");
+            await this.page
+                .getByRole("textbox", { name: "Break Time b/w Slots (Mins)" })
+                .fill("10");
+            await this.page
+                .getByRole("textbox", { name: "Prevent Scheduling Before" })
+                .fill("0");
+            if (isSameSlotAllDays) {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]\\`"]')
+                    .selectOption("1");
+                await this.page.getByText("Add Slots").first().click();
+                await this.fillTimeTextbox("From", 0, "14", "20");
+                await this.fillTimeTextbox("To", 0, "14", "45");
+                await this.page.locator("body").press("Escape");
+                await this.page
+                    .getByRole("button", { name: "Save", exact: true })
+                    .click();
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+            }
+            else {
+                await this.page
+                    .locator('select[name="booking\\[same_slot_all_days\\]\\`"]')
+                    .selectOption("0");
+                await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
+                await expect(this.page.locator('p.text-red-600').nth(0)).toBeVisible()
+                await expect(this.page.locator('p.text-red-600').nth(0)).toHaveText('This window must span at least 45 minutes.')
+
+            }
+        }
+    }
+
     private async fillTimeTextbox(
         label: "From" | "To",
         index: number,
@@ -1136,6 +1786,7 @@ export class ProductCreatePage extends BasePage {
         await this.page
             .getByRole("spinbutton", { name: "Minute" })
             .fill(minute);
+        await this.page.waitForTimeout(500)
         await this.page
             .getByRole("spinbutton", { name: "Minute" })
             .press("Enter");
@@ -1156,6 +1807,7 @@ export class ProductCreatePage extends BasePage {
 
         await this.page.locator(selector).first().click();
         await this.fillTimeTextbox("From", 0, fromHour, fromMinute);
+        await this.page.waitForTimeout(500)
         await this.fillTimeTextbox("To", 0, toHour, toMinute);
         if (pressEscapeBeforeSave) {
             await this.page.locator("body").press("Escape");
