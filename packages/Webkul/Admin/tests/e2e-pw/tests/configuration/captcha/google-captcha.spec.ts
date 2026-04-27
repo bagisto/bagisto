@@ -71,10 +71,12 @@ test.describe("should verfiy google captcha verfication", () => {
         await adminPage
             .getByRole("button", { name: "Save Configuration" })
             .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
+        await expect(
+            adminPage
+                .locator("#app")
+                .getByText("Configuration saved successfully")
+                .first(),
+        ).toBeVisible();
     });
 
     test.afterEach(async ({ adminPage }) => {
@@ -84,10 +86,12 @@ test.describe("should verfiy google captcha verfication", () => {
         await adminPage
             .getByRole("button", { name: "Save Configuration" })
             .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
+        await expect(
+            adminPage
+                .locator("#app")
+                .getByText("Configuration saved successfully")
+                .first(),
+        ).toBeVisible();
     });
 
     test("should display google captcha on customer sigin page", async ({

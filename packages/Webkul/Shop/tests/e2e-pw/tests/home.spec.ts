@@ -1,9 +1,6 @@
 import { test, expect } from "../setup";
 import { loginAsCustomer } from "../utils/customer";
 
-/**
- * Common helper for newsletter subscription
- */
 async function subscribeToNewsletter(
     page,
     email: string,
@@ -58,9 +55,6 @@ test.describe("Newsletter subscription", () => {
     test("should not allow customer to subscribe to newsletter again", async ({
         page,
     }) => {
-        /**
-         * Admin credentials.
-         */
         const adminCredentials = {
             email: "admin@example.com",
             password: "admin123",

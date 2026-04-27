@@ -38,24 +38,18 @@ test.describe("cms management", () => {
     });
 
     test("should delete a page", async ({ adminPage }) => {
-        /**
-         * Creating a page to delete.
-         */
         const cms = await createPage(adminPage);
-
         const cmsDeletePage = new CMSDeletePage(adminPage);
         await cmsDeletePage.deleteFirstPage();
+
         await expect(adminPage.getByText(cms.name)).not.toBeVisible();
     });
 
     test("should mass delete the selected pages", async ({ adminPage }) => {
-        /**
-         * Creating CMS pages for multiselect delete.
-         */
         await createPage(adminPage);
-
         const cmsDeletePage = new CMSDeletePage(adminPage);
         await cmsDeletePage.deleteFirstPage();
+
         await expect(
             adminPage.getByText("CMS deleted successfully.")
         ).toBeVisible();
@@ -64,13 +58,10 @@ test.describe("cms management", () => {
     test("should mass delete all the rows of current pages", async ({
         adminPage,
     }) => {
-        /**
-         * Creating a page to delete.
-         */
         const cms = await createPage(adminPage);
-
         const cmsDeletePage = new CMSDeletePage(adminPage);
         await cmsDeletePage.massDeletePages();
+        
         await expect(adminPage.getByText(cms.name)).not.toBeVisible();
     });
 });

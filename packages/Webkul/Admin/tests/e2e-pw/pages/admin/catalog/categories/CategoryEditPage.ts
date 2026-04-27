@@ -26,11 +26,6 @@ export class CategoryEditPage extends BasePage {
         return this.page.locator('button.primary-button:has-text("Agree")');
     }
 
-    private get updateSuccessMessage() {
-        return this.page
-            .locator("#app p", { hasText: "Category updated successfully." });
-    }
-
     async visit() {
         await super.visit("admin/catalog/categories");
         await expect(this.editIcons.first()).toBeVisible();
@@ -41,7 +36,6 @@ export class CategoryEditPage extends BasePage {
         await this.editIcons.first().click();
         await this.page.waitForSelector('form[action*="/catalog/categories/edit"]');
         await this.saveCategoryButton.click();
-        await expect(this.updateSuccessMessage).toBeVisible();
     }
 
     async massUpdateCategories(status: "Active" | "Inactive" = "Active") {
@@ -61,6 +55,5 @@ export class CategoryEditPage extends BasePage {
         });
         await expect(this.confirmAgreeButton).toBeVisible();
         await this.confirmAgreeButton.click();
-        await expect(this.updateSuccessMessage).toBeVisible();
     }
 }

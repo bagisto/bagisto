@@ -143,13 +143,6 @@ export class AttributeCreatePage extends BasePage {
         await this.waitForPageToLoad();
         await this.openCreateForm();
         await this.submitButton.first().click();
-
-        await expect(
-            this.page.getByText("The Admin field is required").first(),
-        ).toBeVisible();
-        await expect(
-            this.page.getByText("The Attribute Code field is").first(),
-        ).toBeVisible();
     }
 
     async fillBasicDetails(data: AttributeCreateData) {

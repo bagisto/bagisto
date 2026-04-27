@@ -1,7 +1,6 @@
 import { test } from "../../setup";
-import {
-    AttributeCreatePage,
-} from "../../pages/admin/catalog/attribute/AttributeCreatePage";
+import { expect }from "@playwright/test";
+import { AttributeCreatePage } from "../../pages/admin/catalog/attribute/AttributeCreatePage";
 import type { AttributeCreateData } from "../../pages/admin/catalog/attribute/AttributeCreatePage";
 import { AttributeDeletePage } from "../../pages/admin/catalog/attribute/AttributeDeletePage";
 import { AttributeEditPage } from "../../pages/admin/catalog/attribute/AttributeEditPage";
@@ -26,13 +25,17 @@ const buildAttributeData = (
 test.describe("attribute management", () => {
     test("should validate required fields", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.validateRequiredFields();
+        await expect(
+            adminPage.getByText("The Admin field is required").first(),
+        ).toBeVisible();
+        await expect(
+            adminPage.getByText("The Attribute Code field is").first(),
+        ).toBeVisible();
     });
 
     test("should create a new text type attribute", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(buildAttributeData());
     });
 
@@ -40,7 +43,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "textarea",
@@ -53,7 +55,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "textarea",
@@ -65,7 +66,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "select",
@@ -84,7 +84,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "select",
@@ -103,7 +102,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "select",
@@ -122,7 +120,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "select",
@@ -139,7 +136,6 @@ test.describe("attribute management", () => {
 
     test("should create a new price type attribute ", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "price",
@@ -151,7 +147,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "boolean",
@@ -162,7 +157,6 @@ test.describe("attribute management", () => {
 
     test("should create a new date type attribute ", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "date",
@@ -174,7 +168,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "datetime",
@@ -184,7 +177,6 @@ test.describe("attribute management", () => {
 
     test("should create a new image type attribute ", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "image",
@@ -194,7 +186,6 @@ test.describe("attribute management", () => {
 
     test("should create a new file type attribute ", async ({ adminPage }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "file",
@@ -206,7 +197,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "multiselect",
@@ -224,7 +214,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeCreatePage = new AttributeCreatePage(adminPage);
-
         await attributeCreatePage.createAttribute(
             buildAttributeData({
                 type: "multiselect",
@@ -242,13 +231,11 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeEditPage = new AttributeEditPage(adminPage);
-
         await attributeEditPage.editAttribute();
     });
 
     test("should delete an existing attribute", async ({ adminPage }) => {
         const attributeDeletePage = new AttributeDeletePage(adminPage);
-
         await attributeDeletePage.deleteFirstAttribute();
     });
 
@@ -256,7 +243,6 @@ test.describe("attribute management", () => {
         adminPage,
     }) => {
         const attributeDeletePage = new AttributeDeletePage(adminPage);
-
         await attributeDeletePage.massDeleteAttributes();
     });
 });

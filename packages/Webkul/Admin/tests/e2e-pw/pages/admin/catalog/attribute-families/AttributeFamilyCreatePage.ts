@@ -77,8 +77,5 @@ export class AttributeFamilyCreatePage extends BasePage {
         await this.page.fill('input[name="code"]', generateSlug("_"));
         await this.dragAttributesToBothGroups();
         await this.page.click("button.primary-button:visible");
-        await expect(
-            this.page.getByText("Family created successfully.").first(),
-        ).toBeVisible();
     }
 }

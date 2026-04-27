@@ -1,16 +1,8 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products";
+import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { BookingProductCheckout } from "../../pages/shop/checkout/product-types/BookingProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-/**
- * ==============================
- * BOOKING PRODUCT CHECKOUT FLOW
- * ==============================
- * This test suite covers:
- * 1. Creating a booking product.
- * 2. Selecting booking details and completing checkout.
- */
 test.describe("booking product checkout flow", () => {
     test("should create booking product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
