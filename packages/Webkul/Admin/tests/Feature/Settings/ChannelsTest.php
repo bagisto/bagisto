@@ -180,9 +180,7 @@ it('should save seo for a non-default locale via the locale switcher', function 
      * the per-locale switcher actually targets the chosen translation row
      * and not just the default locale.
      */
-    $targetLocale = Locale::query()
-        ->where('code', '!=', app()->getLocale())
-        ->firstOrFail();
+    $targetLocale = Locale::factory()->create();
 
     // Act and Assert.
     $this->loginAsAdmin();
