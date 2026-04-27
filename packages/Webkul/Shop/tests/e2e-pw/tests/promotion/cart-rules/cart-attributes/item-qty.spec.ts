@@ -1,4 +1,4 @@
-import { test } from "../../../../setup";
+import { expect, test } from "../../../../setup";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
@@ -44,6 +44,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when total item quantity condition is -> is not equal to", async ({
@@ -60,6 +64,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when total item quantity condition is -> equals or greater then", async ({
@@ -76,6 +84,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when total item quantity condition is -> equals or less than", async ({
@@ -92,6 +104,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when total item quantity condition is -> greater than", async ({
@@ -108,6 +124,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon(1);
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
     });
 
@@ -125,5 +145,9 @@ test.describe("cart rules", () => {
         });
         await ruleCreatePage.saveCartRule();
         await ruleApplyPage.applyCoupon();
+
+        await expect(
+            page.getByText("Coupon code applied successfully.").first(),
+        ).toBeVisible();
     });
 });

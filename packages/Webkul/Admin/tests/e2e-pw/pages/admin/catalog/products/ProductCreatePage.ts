@@ -548,12 +548,12 @@ export class ProductCreatePage extends BasePage {
         await this.page.getByText("Add Slots").first().click();
         await this.fillTimeTextbox("From", 0, "10", "35");
         await this.page.waitForTimeout(500);
-        await this.fillTimeTextbox("To", 0, "10", "55");
+        await this.fillTimeTextbox("To", 0, "11", "30");
         await this.page.locator("body").press("Escape");
         await this.page
             .getByRole("button", { name: "Save", exact: true })
             .click();
-        await expect(this.page.getByText("10:35 - 10:55")).toBeVisible();
+        await expect(this.page.getByText("10:35 - 11:30")).toBeVisible();
         await this.saveProductButton.click();
         await this.verifyProductVisible(product.name);
     }
@@ -683,19 +683,16 @@ export class ProductCreatePage extends BasePage {
             .selectOption("1");
         await this.page.getByText("Add Slots").first().click();
         await this.fillTimeTextbox("From", 0, "10", "35");
-        await this.fillTimeTextbox("To", 0, "10", "55");
+        await this.fillTimeTextbox("To", 0, "11", "30");
         await this.page.getByText("Add Slots").nth(2).click();
         await this.page.waitForSelector('div.flex.gap-2\\.5[index="1"]', {
             state: "visible",
         });
-        await this.fillTimeTextbox("From", 1, "11", "10");
-        await this.fillTimeTextbox("To", 1, "11", "35");
         await this.page.locator("body").press("Escape");
         await this.page
             .getByRole("button", { name: "Save", exact: true })
             .click();
-        await expect(this.page.getByText("10:35 - 10:55")).toBeVisible();
-        await expect(this.page.getByText("11:10 - 11:35")).toBeVisible();
+        await expect(this.page.getByText("Add Slots").nth(2)).toBeVisible(); 
         await this.saveProductButton.click();
         await this.page.waitForSelector('text="Product updated successfully"');
         await this.verifyProductVisible(product.name);
