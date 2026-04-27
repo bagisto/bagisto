@@ -684,15 +684,11 @@ export class ProductCreatePage extends BasePage {
         await this.page.getByText("Add Slots").first().click();
         await this.fillTimeTextbox("From", 0, "10", "35");
         await this.fillTimeTextbox("To", 0, "11", "30");
-        await this.page.getByText("Add Slots").nth(2).click();
-        await this.page.waitForSelector('div.flex.gap-2\\.5[index="1"]', {
-            state: "visible",
-        });
         await this.page.locator("body").press("Escape");
         await this.page
             .getByRole("button", { name: "Save", exact: true })
             .click();
-        await expect(this.page.getByText("Add Slots").nth(2)).toBeVisible(); 
+        await expect(this.page.getByText(':35 - 11:30').first()).toBeVisible();
         await this.saveProductButton.click();
         await this.page.waitForSelector('text="Product updated successfully"');
         await this.verifyProductVisible(product.name);
