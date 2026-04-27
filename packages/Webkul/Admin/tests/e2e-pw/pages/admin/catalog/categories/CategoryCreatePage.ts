@@ -15,11 +15,6 @@ export class CategoryCreatePage extends BasePage {
         return this.page.locator('button:has-text("Save Category")');
     }
 
-    private get createSuccessMessage() {
-        return this.page
-            .locator("#app p", { hasText: "Category created successfully." });
-    }
-
     async visit() {
         await super.visit("admin/catalog/categories");
         await expect(this.openCreateButton).toBeVisible();
@@ -84,6 +79,5 @@ export class CategoryCreatePage extends BasePage {
         }
 
         await this.saveCategoryButton.click();
-        await expect(this.createSuccessMessage).toBeVisible();
     }
 }

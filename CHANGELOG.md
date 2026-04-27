@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.3.18 (24th of April 2026)** - *Release*
+## Unreleased
 
 - Refactored core search architecture to engine-agnostic design using Strategy + Manager patterns.
 

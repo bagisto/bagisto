@@ -1,17 +1,8 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products";
+import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { GroupProductCheckout } from "../../pages/shop/checkout/product-types/GroupProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-/**
- * ============================
- * GROUP PRODUCT CHECKOUT FLOW
- * ============================
- * This test suite covers:
- * 1. Creating a simple product to be associated with a group product.
- * 2. Creating a grouped product.
- * 3. Completing checkout for the grouped product.
- */
 test.describe("group product checkout flow", () => {
     test("should create simple product to add in group", async ({
         adminPage,

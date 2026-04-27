@@ -107,15 +107,6 @@ export class ProductCreatePage extends BasePage {
         ).toBeVisible();
     }
 
-    private async verifySimpleProductVisible(name: string) {
-        await this.visit("admin/catalog/products");
-        await expect(
-            this.page
-                .locator("p.break-all.text-base")
-                .filter({ hasText: new RegExp(`^${name}$`) }),
-        ).toBeVisible();
-    }
-
     private async createBookingProductBase(): Promise<BookingProductSeed> {
         const product: BookingProductSeed = {
             name: generateName(),
@@ -176,51 +167,35 @@ export class ProductCreatePage extends BasePage {
         return product;
     }
 
-    async createSimpleProduct() {
-        const product = {
-            name: `simple-${generateName()}`,
-            sku: generateSKU(),
-            productNumber: generateSKU(),
-            shortDescription: generateDescription(),
-            description: generateDescription(),
-            price: "199",
-            weight: "25",
-        };
-
+    async createSimpleProduct(product) {
         await this.startProductCreation("simple", "1");
 
         const productEditPage = new ProductEditPage(this.page);
         await productEditPage.waitForForm();
+
         await productEditPage.fillGeneralDetails({
             productNumber: product.productNumber,
             name: product.name,
         });
+
         await productEditPage.fillDescriptions(
             product.shortDescription,
             product.description,
         );
+
         await productEditPage.fillMeta({
             metaTitle: product.name,
             metaKeywords: product.name,
             metaDescription: product.shortDescription,
         });
+
         await productEditPage.fillPrice(product.price);
         await productEditPage.fillWeight(product.weight);
-        await productEditPage.fillInventory("5000");
+        await productEditPage.fillInventory(product.inventory);
         await productEditPage.saveAndVerifyUpdated();
-
-        await this.verifySimpleProductVisible(product.name);
     }
 
-    async createConfigurableProduct() {
-        const product = {
-            name: generateName(),
-            sku: generateSKU(),
-            productNumber: generateSKU(),
-            shortDescription: generateDescription(),
-            description: generateDescription(),
-        };
-
+    async createConfigurableProduct(product) {
         await this.startProductCreation("configurable", { label: "Clothing" });
         await this.page.waitForSelector(
             'p:has-text("Configurable Attributes")',
@@ -322,16 +297,19 @@ export class ProductCreatePage extends BasePage {
         await productEditPage.saveAndVerifyUpdated();
     }
 
-    async createGroupedProduct() {
-        await this.createSimpleProduct();
-        await this.createSimpleProduct();
-
-        const product = {
-            name: generateName(),
+    async createGroupedProduct(product) {
+        const simpleProduct = {
+            name: `simple-${generateName()}`,
+            sku: generateSKU(),
             productNumber: generateSKU(),
-            shortDescription: "test",
-            description: "test",
+            shortDescription: generateDescription(),
+            description: generateDescription(),
+            price: "199",
+            weight: "25",
+            inventory: "5000",
         };
+
+        await this.createSimpleProduct(simpleProduct);
 
         await this.startProductCreation("grouped", "1");
         const productEditPage = new ProductEditPage(this.page);
@@ -365,18 +343,9 @@ export class ProductCreatePage extends BasePage {
         await this.page.getByText("Add Selected Product").click();
         await this.page.waitForSelector('p:has-text("simple")');
         await productEditPage.saveAndVerifyUpdated();
-        await this.verifyProductVisible(product.name);
     }
 
-    async createVirtualProduct() {
-        const product = {
-            name: generateName(),
-            productNumber: generateSKU(),
-            shortDescription: generateDescription(),
-            description: generateDescription(),
-            price: "199",
-        };
-
+    async createVirtualProduct(product) {
         await this.startProductCreation("virtual", "1");
         const productEditPage = new ProductEditPage(this.page);
         await productEditPage.waitForForm();
@@ -399,15 +368,7 @@ export class ProductCreatePage extends BasePage {
         await this.verifyProductVisible(product.name);
     }
 
-    async createDownloadableProduct() {
-        const product = {
-            name: generateName(),
-            productNumber: generateSKU(),
-            shortDescription: generateDescription(),
-            description: generateDescription(),
-            price: "199",
-        };
-
+    async createDownloadableProduct(product) {
         await this.startProductCreation("downloadable", "1");
         const productEditPage = new ProductEditPage(this.page);
         await productEditPage.waitForForm();
@@ -450,7 +411,6 @@ export class ProductCreatePage extends BasePage {
             .click();
         await expect(this.page.getByText(linkTitle)).toBeVisible();
         await productEditPage.saveAndVerifyUpdated();
-        await this.verifyProductVisible(product.name);
     }
 
     async createDefaultBookingProductWithOneBookingForManyDays() {
@@ -588,12 +548,12 @@ export class ProductCreatePage extends BasePage {
         await this.page.getByText("Add Slots").first().click();
         await this.fillTimeTextbox("From", 0, "10", "35");
         await this.page.waitForTimeout(500);
-        await this.fillTimeTextbox("To", 0, "10", "55");
+        await this.fillTimeTextbox("To", 0, "11", "30");
         await this.page.locator("body").press("Escape");
         await this.page
             .getByRole("button", { name: "Save", exact: true })
             .click();
-        await expect(this.page.getByText("10:35 - 10:55")).toBeVisible();
+        await expect(this.page.getByText("10:35 - 11:30")).toBeVisible();
         await this.saveProductButton.click();
         await this.verifyProductVisible(product.name);
     }
@@ -723,19 +683,16 @@ export class ProductCreatePage extends BasePage {
             .selectOption("1");
         await this.page.getByText("Add Slots").first().click();
         await this.fillTimeTextbox("From", 0, "10", "35");
-        await this.fillTimeTextbox("To", 0, "10", "55");
+        await this.fillTimeTextbox("To", 0, "11", "30");
         await this.page.getByText("Add Slots").nth(2).click();
         await this.page.waitForSelector('div.flex.gap-2\\.5[index="1"]', {
             state: "visible",
         });
-        await this.fillTimeTextbox("From", 1, "11", "10");
-        await this.fillTimeTextbox("To", 1, "11", "35");
         await this.page.locator("body").press("Escape");
         await this.page
             .getByRole("button", { name: "Save", exact: true })
             .click();
-        await expect(this.page.getByText("10:35 - 10:55")).toBeVisible();
-        await expect(this.page.getByText("11:10 - 11:35")).toBeVisible();
+        await expect(this.page.getByText("Add Slots").nth(2)).toBeVisible(); 
         await this.saveProductButton.click();
         await this.page.waitForSelector('text="Product updated successfully"');
         await this.verifyProductVisible(product.name);

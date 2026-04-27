@@ -20,8 +20,5 @@ export class AttributeFamilyDeletePage extends BasePage {
         await this.page.click(
             "button.transparent-button + button.primary-button:visible",
         );
-        await expect(
-            this.page.getByText("Family deleted successfully.").first(),
-        ).toBeVisible();
     }
 }

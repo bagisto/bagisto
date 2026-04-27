@@ -1,5 +1,6 @@
 import { test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { expect } from "@playwright/test";
+import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -44,6 +45,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when price in cart condition is -> is not equal to", async ({
@@ -60,6 +65,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when price in cart condition is -> equals or greater then", async ({
@@ -76,6 +85,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when price in cart condition is -> equals or less than", async ({
@@ -92,6 +105,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when price in cart condition is -> greater than", async ({
@@ -108,6 +125,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when price in cart condition is -> less than", async ({
@@ -124,6 +145,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
     });
 });

@@ -1,16 +1,8 @@
 import { test } from "../../setup";
-import { ProductCreation } from "../../pages/admin/catalog/products";
+import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreatePage";
 import { ConfigurableProductCheckout } from "../../pages/shop/checkout/product-types/ConfigurableProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-/**
- * ===================================
- * CONFIGURABLE PRODUCT CHECKOUT FLOW
- * ===================================
- * This test suite covers:
- * 1. Creating a configurable product with variations.
- * 2. Completing checkout for the configurable product.
- */
 test.describe("configurable product checkout flow", () => {
     test("should create configurable product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);

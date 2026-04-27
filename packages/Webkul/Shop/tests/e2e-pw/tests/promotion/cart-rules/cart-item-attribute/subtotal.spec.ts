@@ -1,5 +1,6 @@
 import { test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/admin/catalog/products";
+import { expect } from "@playwright/test";
+import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
@@ -43,24 +44,32 @@ test.describe("cart rules", () => {
                 value: "199",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
-        // test("should apply coupon when subtotal condition is -> is not equal to", async ({
-        //     page,
-        // }) => {
-        //     const ruleCreatePage = new RuleCreatePage(page);
-        //     const ruleApplyPage = new RuleApplyPage(page);
-        //     await loginAsAdmin(page);
-        //     await ruleCreatePage.cartRuleCreationFlow();
-        //     await ruleCreatePage.addCondition({
-        //         attribute: "cart_item|base_total",
-        //         operator: "!=",
-        //         value: "199",
-        //     });
-        //     await ruleCreatePage.saveCartRule();
-        //     await ruleApplyPage.applyCouponAtCheckout();
-        // });
+        test("should apply coupon when subtotal condition is -> is not equal to", async ({
+            page,
+        }) => {
+            const ruleCreatePage = new RuleCreatePage(page);
+            const ruleApplyPage = new RuleApplyPage(page);
+            await loginAsAdmin(page);
+            await ruleCreatePage.cartRuleCreationFlow();
+            await ruleCreatePage.addCondition({
+                attribute: "cart_item|base_total",
+                operator: "!=",
+                value: "101",
+            });
+            await ruleCreatePage.saveCartRule();
+            await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
+        });
 
         test("should apply coupon when subtotal condition is -> equals or greater then", async ({
             page,
@@ -75,7 +84,11 @@ test.describe("cart rules", () => {
                 value: "199",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when subtotal condition is -> equals or less than", async ({
@@ -92,6 +105,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when subtotal condition is -> greater than", async ({
@@ -108,6 +125,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
 
         test("should apply coupon when subtotal condition is -> less than", async ({
@@ -124,6 +145,10 @@ test.describe("cart rules", () => {
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCouponAtCheckout();
+
+            await expect(
+                page.getByText("Coupon code applied successfully.").first(),
+            ).toBeVisible();
         });
     });
 });
