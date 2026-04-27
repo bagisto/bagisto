@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- #10422 [fixed] - Fixed channel Home Page SEO (and other translatable channel fields: name, description, maintenance mode text) only saving for the admin's UI locale. The channel edit page was missing the locale-switcher dropdown that every other translatable resource (categories, products, CMS pages) uses, so admins had no way to change the per-locale binding away from English. Added the standard locale-switcher dropdown listing every system locale; switching reloads with `?locale=<code>` and the form binds, validates, and saves only that locale's translation row. Admins can pre-fill SEO for any system locale, including locales not yet attached to the channel — translations are stored against the locale code regardless of channel-locale attachment.
+
 - #10490 [fixed] - Fixed product images not being updated when re-importing a CSV with the same SKUs but new image filenames. The Product importer used to skip image processing entirely for already-existing SKUs, so updates were silently ignored. The importer now treats the CSV `images` column as the source of truth on every run: existing image rows and stored files for the affected products are removed before the new images from the CSV are inserted.
 
 - #11242 [fixed] - Fixed an exception ("Attempt to read property `addresses` on null") when an admin attempted to reorder an order whose customer had since been deleted. The admin reorder action now checks for a missing customer and redirects back to the order view with a clear flash message instead of letting the null reach the create-order page.

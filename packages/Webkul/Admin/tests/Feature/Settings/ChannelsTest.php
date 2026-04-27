@@ -2,6 +2,7 @@
 
 use Illuminate\Http\UploadedFile;
 use Webkul\Core\Models\Channel;
+use Webkul\Core\Models\Locale;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -168,6 +169,54 @@ it('should update the existing channel', function () {
             ],
         ],
     ]);
+});
+
+it('should save seo for a non-default locale via the locale switcher', function () {
+    // Arrange.
+    $channel = Channel::factory()->create();
+
+    /**
+     * Pick a locale that is not the admin's default locale, so we can verify
+     * the per-locale switcher actually targets the chosen translation row
+     * and not just the default locale.
+     */
+    $targetLocale = Locale::query()
+        ->where('code', '!=', app()->getLocale())
+        ->firstOrFail();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $futureSeoTitle = fake()->title();
+
+    putJson(
+        route('admin.settings.channels.update', ['id' => $channel->id, 'locale' => $targetLocale->code]),
+        [
+            'code' => $channel->code,
+
+            $targetLocale->code => [
+                'name' => fake()->name(),
+                'seo_title' => $futureSeoTitle,
+                'seo_description' => substr(fake()->paragraph(), 0, 50),
+                'seo_keywords' => fake()->name(),
+            ],
+
+            'hostname' => 'http://'.fake()->ipv4(),
+            'root_category_id' => 1,
+            'default_locale_id' => 1,
+            'base_currency_id' => 1,
+            'inventory_sources' => [1],
+            'locales' => [1],
+            'currencies' => [1],
+        ]
+    )
+        ->assertRedirect(route('admin.settings.channels.index'))
+        ->isRedirection();
+
+    $translation = $channel->fresh()->translate($targetLocale->code);
+
+    expect($translation)->not->toBeNull();
+    expect($translation->home_seo['meta_title'] ?? null)->toBe($futureSeoTitle);
 });
 
 it('should delete the existing channel', function () {
