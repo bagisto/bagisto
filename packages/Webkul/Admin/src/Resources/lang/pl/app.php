@@ -461,6 +461,7 @@ return [
                 'refunded' => 'Zwrócone',
                 'reorder' => 'Zamów ponownie',
                 'reorder-booking-skipped' => 'Produkty rezerwacyjne zostały pominięte podczas ponownego zamawiania. Zarezerwuj je ponownie z nowymi datami i przedziałami czasowymi.',
+                'reorder-customer-missing' => 'Nie można ponownie zamówić tego zamówienia, ponieważ powiązany klient już nie istnieje.',
                 'ship' => 'Wysyłka',
                 'shipment' => 'Przesyłka #:shipment',
                 'shipments' => 'Przesyłki',

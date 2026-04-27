@@ -1382,13 +1382,6 @@ class Importer extends AbstractImporter
         }
 
         /**
-         * Skip the image upload if product is already created
-         */
-        if ($this->skuStorage->has($rowData['sku'])) {
-            return;
-        }
-
-        /**
          * Reset the sku images data to prevent
          * data duplication in case of multiple locales
          */
@@ -1417,6 +1410,40 @@ class Importer extends AbstractImporter
     {
         if (empty($imagesData)) {
             return;
+        }
+
+        $productIds = [];
+
+        foreach ($imagesData as $sku => $images) {
+            if (empty($images)) {
+                continue;
+            }
+
+            $product = $this->skuStorage->get($sku);
+
+            $productIds[] = $product['id'];
+        }
+
+        /**
+         * Remove existing images (DB rows + files) for products being updated
+         * so that the CSV becomes the source of truth for the image set.
+         */
+        if (! empty($productIds)) {
+            $existingImages = $this->productImageRepository
+                ->getModel()
+                ->newQuery()
+                ->where('type', 'images')
+                ->whereIn('product_id', $productIds)
+                ->get();
+
+            foreach ($existingImages as $existingImage) {
+                Storage::delete($existingImage->path);
+            }
+
+            $this->productImageRepository->deleteWhere([
+                ['type', '=', 'images'],
+                ['product_id', 'IN', $productIds],
+            ]);
         }
 
         $productImages = [];

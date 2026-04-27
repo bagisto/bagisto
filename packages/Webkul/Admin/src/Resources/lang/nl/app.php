@@ -461,6 +461,7 @@ return [
                 'refunded' => 'Terugbetaald',
                 'reorder' => 'Opnieuw Bestellen',
                 'reorder-booking-skipped' => 'Boekingsproducten zijn overgeslagen tijdens het opnieuw bestellen. Boek ze opnieuw met nieuwe datums en tijdsloten.',
+                'reorder-customer-missing' => 'Deze bestelling kan niet opnieuw worden besteld omdat de bijbehorende klant niet meer bestaat.',
                 'ship' => 'Verzenden',
                 'shipment' => 'Verzending #:shipment',
                 'shipments' => 'Verzendingen',

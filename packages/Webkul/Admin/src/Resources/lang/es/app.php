@@ -461,6 +461,7 @@ return [
                 'refunded' => 'Reembolsado',
                 'reorder' => 'Reordenar',
                 'reorder-booking-skipped' => 'Los productos de reserva se omitieron durante el reordenamiento. Por favor, resérvelos nuevamente con nuevas fechas y franjas horarias.',
+                'reorder-customer-missing' => 'No se puede volver a pedir este pedido porque el cliente asociado ya no existe.',
                 'ship' => 'Enviar',
                 'shipment' => 'Envío #:shipment',
                 'shipments' => 'Envíos',

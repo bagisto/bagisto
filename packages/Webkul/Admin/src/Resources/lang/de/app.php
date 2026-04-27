@@ -461,6 +461,7 @@ return [
                 'refunded' => 'Erstattet',
                 'reorder' => 'Erneut bestellen',
                 'reorder-booking-skipped' => 'Buchungsprodukte wurden bei der Nachbestellung übersprungen. Bitte buchen Sie sie erneut mit neuen Daten und Zeitfenstern.',
+                'reorder-customer-missing' => 'Diese Bestellung kann nicht erneut bestellt werden, da der zugehörige Kunde nicht mehr existiert.',
                 'ship' => 'Versenden',
                 'shipment' => 'Sendung #:shipment',
                 'shipments' => 'Sendungen',

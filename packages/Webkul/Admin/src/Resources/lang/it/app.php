@@ -461,6 +461,7 @@ return [
                 'refunded' => 'Rimborsato',
                 'reorder' => 'Riordina',
                 'reorder-booking-skipped' => 'I prodotti di prenotazione sono stati saltati durante il nuovo ordine. Prenotali di nuovo con date e fasce orarie nuove.',
+                'reorder-customer-missing' => 'Impossibile riordinare questo ordine perché il cliente associato non esiste più.',
                 'ship' => 'Spedisci',
                 'shipment' => 'Spedizione #:shipment',
                 'shipments' => 'Spedizioni',
