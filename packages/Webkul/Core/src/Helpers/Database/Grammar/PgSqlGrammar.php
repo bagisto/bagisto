@@ -18,6 +18,12 @@ class PgSqlGrammar implements DatabaseGrammar
         '%s' => 'SS',
     ];
 
+    /*
+    |--------------------------------------------------------------------------
+    | String Concatenation
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Generates: (COALESCE(part1, '') || COALESCE(part2, '') || ...). Null-safe.
      */
@@ -30,6 +36,20 @@ class PgSqlGrammar implements DatabaseGrammar
 
         return '('.implode(' || ', $safeParts).')';
     }
+
+    /**
+     * Generates: CONCAT_WS('separator', part1, part2, ...). Native to PostgreSQL 9.1+.
+     */
+    public function concatWs(string $separator, string ...$parts): string
+    {
+        return "CONCAT_WS('{$separator}', ".implode(', ', $parts).')';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | String Aggregation and Membership
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Generates: STRING_AGG([DISTINCT] column::text, 'separator' [ORDER BY ...]).
@@ -76,6 +96,42 @@ class PgSqlGrammar implements DatabaseGrammar
         return 'COALESCE(ARRAY_POSITION(ARRAY['.implode(',', $safeValues)."], {$column}), {$maxPos})";
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | LIKE Operators
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Return the case-insensitive LIKE operator.
+     */
+    public function caseInsensitiveLike(): string
+    {
+        return 'ILIKE';
+    }
+
+    /**
+     * Return the case-sensitive LIKE operator.
+     */
+    public function caseSensitiveLike(): string
+    {
+        return 'LIKE';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Date and Time
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Generates: NOW().
+     */
+    public function now(): string
+    {
+        return 'NOW()';
+    }
+
     /**
      * Generates: TO_CHAR(column, 'format'). Converts MySQL format placeholders to PostgreSQL.
      */
@@ -96,14 +152,6 @@ class PgSqlGrammar implements DatabaseGrammar
     public function dateDiff(string $date1, string $date2): string
     {
         return "({$date1}::date - {$date2}::date)";
-    }
-
-    /**
-     * Generates: NOW().
-     */
-    public function now(): string
-    {
-        return 'NOW()';
     }
 
     /**
@@ -128,6 +176,20 @@ class PgSqlGrammar implements DatabaseGrammar
     }
 
     /**
+     * Generates: TO_TIMESTAMP(column). Returns timestamp with time zone.
+     */
+    public function fromUnixtime(string $column): string
+    {
+        return "TO_TIMESTAMP({$column})";
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | JSON Extraction
+    |--------------------------------------------------------------------------
+    */
+
+    /**
      * Generates: (column::jsonb->>'key').
      */
     public function jsonExtractText(string $column, string $path): string
@@ -147,21 +209,11 @@ class PgSqlGrammar implements DatabaseGrammar
         return "COALESCE(NULLIF({$column}::jsonb->>'{$key}', '')::bigint, 0)";
     }
 
-    /**
-     * Return the case-insensitive LIKE operator.
-     */
-    public function caseInsensitiveLike(): string
-    {
-        return 'ILIKE';
-    }
-
-    /**
-     * Return the case-sensitive LIKE operator.
-     */
-    public function caseSensitiveLike(): string
-    {
-        return 'LIKE';
-    }
+    /*
+    |--------------------------------------------------------------------------
+    | Internal Helpers
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Convert MySQL JSON path ('$.key' or '$."key"') to a plain key name.

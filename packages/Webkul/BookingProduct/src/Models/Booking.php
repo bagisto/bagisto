@@ -29,6 +29,13 @@ class Booking extends Model implements BookingContract
     ];
 
     /**
+     * The attributes that should be cast.
+     */
+    protected $casts = [
+        'allow_cancellation' => 'boolean',
+    ];
+
+    /**
      * Get the order record associated with the order item.
      */
     public function order()

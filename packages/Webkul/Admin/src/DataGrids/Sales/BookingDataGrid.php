@@ -32,8 +32,8 @@ class BookingDataGrid extends DataGrid
         $this->addFilter('id', 'bookings.id');
         $this->addFilter('order_id', 'orders.increment_id');
         $this->addFilter('qty', 'bookings.qty');
-        $this->addFilter('from', DB::raw('FROM_UNIXTIME(`'.$tablePrefix.'bookings`.`from`)'));
-        $this->addFilter('to', DB::raw('FROM_UNIXTIME(`'.$tablePrefix.'bookings`.`to`)'));
+        $this->addFilter('from', DB::raw(db_grammar()->fromUnixtime($tablePrefix.'bookings.from')));
+        $this->addFilter('to', DB::raw(db_grammar()->fromUnixtime($tablePrefix.'bookings.to')));
         $this->addFilter('created_at', 'orders.created_at');
 
         return $queryBuilder;

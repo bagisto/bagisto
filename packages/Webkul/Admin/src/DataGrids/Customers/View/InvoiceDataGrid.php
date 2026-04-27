@@ -27,7 +27,7 @@ class InvoiceDataGrid extends DataGrid
                 'invoices.created_at as created_at',
             )
             ->where('orders.customer_id', '=', request()->route('id'))
-            ->selectRaw("CASE WHEN {$dbPrefix}invoices.increment_id IS NOT NULL THEN {$dbPrefix}invoices.increment_id ELSE CAST({$dbPrefix}invoices.id AS CHAR) END AS increment_id");
+            ->selectRaw("CASE WHEN {$dbPrefix}invoices.increment_id IS NOT NULL THEN {$dbPrefix}invoices.increment_id ELSE CAST({$dbPrefix}invoices.id AS VARCHAR(255)) END AS increment_id");
 
         $this->addFilter('increment_id', 'invoices.increment_id');
         $this->addFilter('created_at', 'orders.created_at');

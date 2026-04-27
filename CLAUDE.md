@@ -204,6 +204,6 @@ The codebase must work on both MySQL and PostgreSQL. Use the existing abstractio
 - **Empty strings → NULL/default**: Use model set mutators (`setXxxAttribute`), never sanitize in controllers.
 - **Boolean columns**: Add `$casts` with `'boolean'`. For write-side, use repository validation or model mutators.
 - **DB-specific SQL**: Use `db_grammar()` methods (`concat`, `groupConcat`, `findInSet`, `dateFormat`, `jsonExtract`, `caseInsensitiveLike`, `caseSensitiveLike`, etc.).
-- **CASE expression types**: Both branches must return same type. Use `CAST(id AS CHAR)`.
+- **CASE expression types**: Both branches must return same type. Use `CAST(id AS VARCHAR(255))` — `CAST(... AS CHAR)` truncates to 1 character on PostgreSQL.
 - **GROUP BY**: PostgreSQL requires every non-aggregated SELECT column in GROUP BY.
 - **DB::raw() in updateOrCreate**: Fails on INSERT; split into find + update/create.

@@ -6,6 +6,12 @@ use Webkul\Core\Contracts\DatabaseGrammar;
 
 class MySqlGrammar implements DatabaseGrammar
 {
+    /*
+    |--------------------------------------------------------------------------
+    | String Concatenation
+    |--------------------------------------------------------------------------
+    */
+
     /**
      * Generates: CONCAT(part1, part2, ...).
      */
@@ -13,6 +19,20 @@ class MySqlGrammar implements DatabaseGrammar
     {
         return 'CONCAT('.implode(', ', $parts).')';
     }
+
+    /**
+     * Generates: CONCAT_WS('separator', part1, part2, ...).
+     */
+    public function concatWs(string $separator, string ...$parts): string
+    {
+        return "CONCAT_WS('{$separator}', ".implode(', ', $parts).')';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | String Aggregation and Membership
+    |--------------------------------------------------------------------------
+    */
 
     /**
      * Generates: GROUP_CONCAT([DISTINCT] column [ORDER BY ...] SEPARATOR ',').
@@ -55,6 +75,42 @@ class MySqlGrammar implements DatabaseGrammar
         return 'FIELD('.$column.', '.implode(',', $safeValues).')';
     }
 
+    /*
+    |--------------------------------------------------------------------------
+    | LIKE Operators
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Return the case-insensitive LIKE operator.
+     */
+    public function caseInsensitiveLike(): string
+    {
+        return 'LIKE';
+    }
+
+    /**
+     * Return the case-sensitive LIKE operator.
+     */
+    public function caseSensitiveLike(): string
+    {
+        return 'LIKE BINARY';
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Date and Time
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Generates: NOW().
+     */
+    public function now(): string
+    {
+        return 'NOW()';
+    }
+
     /**
      * Generates: DATE_FORMAT(column, 'format').
      */
@@ -69,14 +125,6 @@ class MySqlGrammar implements DatabaseGrammar
     public function dateDiff(string $date1, string $date2): string
     {
         return "DATEDIFF({$date1}, {$date2})";
-    }
-
-    /**
-     * Generates: NOW().
-     */
-    public function now(): string
-    {
-        return 'NOW()';
     }
 
     /**
@@ -103,6 +151,20 @@ class MySqlGrammar implements DatabaseGrammar
     }
 
     /**
+     * Generates: FROM_UNIXTIME(column).
+     */
+    public function fromUnixtime(string $column): string
+    {
+        return "FROM_UNIXTIME({$column})";
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | JSON Extraction
+    |--------------------------------------------------------------------------
+    */
+
+    /**
      * Generates: json_unquote(json_extract(column, 'path')).
      */
     public function jsonExtractText(string $column, string $path): string
@@ -116,21 +178,5 @@ class MySqlGrammar implements DatabaseGrammar
     public function jsonExtractNumeric(string $column, string $path): string
     {
         return "COALESCE(CAST(json_unquote(json_extract({$column}, '{$path}')) AS SIGNED), 0)";
-    }
-
-    /**
-     * Return the case-insensitive LIKE operator.
-     */
-    public function caseInsensitiveLike(): string
-    {
-        return 'LIKE';
-    }
-
-    /**
-     * Return the case-sensitive LIKE operator.
-     */
-    public function caseSensitiveLike(): string
-    {
-        return 'LIKE BINARY';
     }
 }

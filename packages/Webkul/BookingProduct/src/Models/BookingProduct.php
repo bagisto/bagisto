@@ -45,6 +45,7 @@ class BookingProduct extends Model implements BookingProductContract
         'available_from' => 'datetime',
         'available_to' => 'datetime',
         'show_location' => 'boolean',
+        'allow_cancellation' => 'boolean',
     ];
 
     /**
