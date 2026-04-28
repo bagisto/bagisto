@@ -111,7 +111,8 @@ class BookingRepository extends Repository
                     ->where('product_flat.channel', core()->getCurrentChannelCode());
             })
             ->leftJoin('addresses', 'bookings.order_id', '=', 'addresses.order_id')
-            ->whereBetween('bookings.from', $dateRange)
+            ->where('bookings.from', '<=', $dateRange[1])
+            ->where('bookings.to', '>=', $dateRange[0])
             ->distinct()
             ->get();
     }

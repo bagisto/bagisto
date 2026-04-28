@@ -41,6 +41,10 @@ export class ProductEditPage extends BasePage {
         return this.page.locator("#sku");
     }
 
+    public get updateProductSuccessToast() {
+        return this.page.getByText(/Product updated successfully/i);
+    }
+
     private get nameInput() {
         return this.page.locator("#name");
     }
@@ -147,6 +151,8 @@ export class ProductEditPage extends BasePage {
             await this.visit("admin/catalog/products");
         }
     }
+
+
 
     async verifyProductUpdated() {
         await expect(this.page.locator("#app")).toContainText(
