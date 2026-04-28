@@ -2136,8 +2136,7 @@ test.describe("booking product management", () => {
                  */
                 await adminPage
                     .locator(
-                        `.overflow-x-auto > div:nth-child(${
-                            day.status + 1
+                        `.overflow-x-auto > div:nth-child(${day.status + 1
                         }) > div:nth-child(2) > .cursor-pointer`,
                     )
                     .first()
@@ -2316,8 +2315,7 @@ test.describe("booking product management", () => {
                  */
                 await adminPage
                     .locator(
-                        `.overflow-x-auto > div:nth-child(${
-                            day.status + 1
+                        `.overflow-x-auto > div:nth-child(${day.status + 1
                         }) > div:nth-child(2) > .cursor-pointer`,
                     )
                     .first()
@@ -2976,6 +2974,7 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
+
             await adminPage
                 .locator(
                     ".overflow-x-auto > div:nth-child(2) > div > .cursor-pointer",
@@ -3008,9 +3007,10 @@ test.describe("booking product management", () => {
             await adminPage
                 .getByRole("button", { name: "Save", exact: true })
                 .click();
+            await adminPage.waitForTimeout(1000)
             await adminPage
                 .locator("div:nth-child(3) > div > .cursor-pointer")
-                .click();
+                .nth(0).click();
             await adminPage
                 .getByRole("textbox", { name: "From", exact: true })
                 .click();
@@ -3570,8 +3570,11 @@ test.describe("booking product management", () => {
             /**
              * Saving the booking product.
              */
+
+            await adminPage.waitForTimeout(500);
+            
             await adminPage
-                .getByRole("button", { name: "Save Product" })
+                .getByRole("button", { name: "Save Product", exact: true })
                 .click();
         });
 
@@ -3853,8 +3856,10 @@ test.describe("booking product management", () => {
             /**
              * Saving the booking product.
              */
+            await adminPage.waitForTimeout(500);
+
             await adminPage
-                .getByRole("button", { name: "Save Product" })
+                .getByRole("button", { name: "Save Product", exact: true })
                 .click();
         });
     });
