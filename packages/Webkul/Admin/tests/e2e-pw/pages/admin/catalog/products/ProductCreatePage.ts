@@ -689,7 +689,6 @@ export class ProductCreatePage extends BasePage {
 
         await this.saveProductButton.click();
         return product.name
-        // await this.verifyProductVisible(product.name);
     }
 
     async createDefaultBookingProductWithManyBookingForOneDay() {
@@ -732,7 +731,6 @@ export class ProductCreatePage extends BasePage {
 
         await this.saveProductButton.click();
         return product.name
-        // await this.verifyProductVisible(product.name);
     }
 
     async handleDefaultBookingWithShorterTimeRangeThanSlots() {
@@ -764,9 +762,6 @@ export class ProductCreatePage extends BasePage {
             await this.escapeTarget.press("Escape");
             await this.dayStatusSelect.selectOption("1");
             await this.modalSaveButton.click();
-            // await this.expectBookingErrorText(
-            //     "This window must span at least 45 minutes.",
-            // );
         }
     }
 
@@ -785,7 +780,6 @@ export class ProductCreatePage extends BasePage {
         await expect(this.timeRangeText("10:35 - 11:30")).toBeVisible();
         await this.saveProductButton.click();
         return product.name;
-        // await this.verifyProductVisible(product.name);
     }
 
     async createAppointmentBookingProductNotAvailableEveryWeekWithNoSameSlotForAllDays() {
@@ -821,8 +815,6 @@ export class ProductCreatePage extends BasePage {
         await expect(this.timeRangeText("10:00 - 19:55")).toBeVisible();
         await expect(this.timeRangeText("09:00 - 20:55")).toBeVisible();
         await this.saveProductButton.click();
-        // await expect(this.updateProductSuccessToast).toBeVisible();
-        // await this.verifyProductVisible(product.name);
         return product.name;
     }
 
@@ -857,8 +849,6 @@ export class ProductCreatePage extends BasePage {
         await expect(this.timeRangeText("09:00 - 20:55")).toBeVisible();
         await this.saveProductButton.click();
         return product.name;
-        // await expect(this.updateProductSuccessToast).toBeVisible();
-        // await this.verifyProductVisible(product.name);
     }
 
     async createAppointmentBookingProductAvailableEveryWeekWithSameSlotForAllDays() {
@@ -875,8 +865,7 @@ export class ProductCreatePage extends BasePage {
         await expect(this.timeRangeText(":35 - 11:30").first()).toBeVisible();
         await this.saveProductButton.click();
         return product.name;
-        // await expect(this.updateProductSuccessToast).toBeVisible();
-        // await this.verifyProductVisible(product.name);
+
     }
 
     async handleAppointmentBookingWithShorterTimeRangeThanSlots(isAvailableEveryWeek: boolean, isSameSlotAllDays: boolean) {
@@ -898,9 +887,6 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "11", "00");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
             } else {
                 await this.bookingSelect("same_slot_all_days").selectOption("0");
                 const weeks = [
@@ -918,9 +904,7 @@ export class ProductCreatePage extends BasePage {
 
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
-                    // await this.expectBookingErrorText(
-                    //     "This window must span at least 45 minutes.",
-                    // );
+
                 }
             }
         } else {
@@ -934,9 +918,7 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "11", "00");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
+
             } else {
                 await this.bookingSelect("same_slot_all_days").selectOption("0");
                 const weeks = [
@@ -954,9 +936,7 @@ export class ProductCreatePage extends BasePage {
 
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
-                    // await this.expectBookingErrorText(
-                    //     "This window must span at least 45 minutes.",
-                    // );
+
                 }
             }
         }
@@ -972,7 +952,6 @@ export class ProductCreatePage extends BasePage {
         await this.ticketDescriptionInput.fill(generateDescription());
         await this.modalSaveButton.click();
         await this.saveProductButton.click();
-        // await this.verifyProductVisible(product.name);
         return product.name;
     }
 
@@ -1054,18 +1033,12 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "50");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 60 minutes.",
-                // );
             } else {
                 await this.bookingSelect("same_slot_all_days").selectOption("0");
                 await this.page.waitForLoadState("networkidle");
 
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 60 minutes.",
-                // );
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("0");
@@ -1082,16 +1055,11 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "45");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 60 minutes.",
-                // );
             } else {
                 await this.bookingSelect("same_slot_all_days").selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 60 minutes.",
-                // );
+
             }
         }
     }
@@ -1151,18 +1119,13 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "50");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 60 minutes.",
-                // );
+
             } else {
                 await this.bookingSelect("same_slot_all_days").selectOption("0");
                 await this.page.waitForLoadState("networkidle");
 
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 60 minutes.",
-                // );
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("0");
@@ -1182,16 +1145,11 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "45");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 60 minutes.",
-                // );
             } else {
                 await this.bookingSelect("same_slot_all_days").selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 60 minutes.",
-                // );
+
             }
         }
     }
@@ -1311,15 +1269,11 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "35");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
+
             } else {
                 await this.tableSameSlotAllDaysSelect.selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "10", "55", false);
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
+
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("1");
@@ -1335,15 +1289,10 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "45");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
+
             } else {
                 await this.tableSameSlotAllDaysSelect.selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
             }
         }
     }
@@ -1371,15 +1320,11 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "35");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
+
             } else {
                 await this.tableSameSlotAllDaysSelect.selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "10", "55", false);
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
+
             }
         } else {
             await this.bookingSelect("available_every_week").selectOption("1");
@@ -1395,15 +1340,11 @@ export class ProductCreatePage extends BasePage {
                 await this.fillTimeTextbox("To", 0, "14", "45");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
+
             } else {
                 await this.tableSameSlotAllDaysSelect.selectOption("0");
                 await this.fillInlineDaySlot(1, "10", "35", "11", "00", false);
-                // await this.expectBookingErrorText(
-                //     "This window must span at least 45 minutes.",
-                // );
+
             }
         }
     }
