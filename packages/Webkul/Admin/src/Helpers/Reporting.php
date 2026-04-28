@@ -444,6 +444,82 @@ class Reporting
     }
 
     /**
+     * Returns the sales by coupon statistics.
+     *
+     * @param  string  $type
+     */
+    public function getSalesByCouponStats($type = 'graph'): EloquentCollection|array
+    {
+        $decorate = function ($coupon) {
+            $coupon->formatted_total = core()->formatBasePrice($coupon->base_total);
+            $coupon->formatted_discount_total = core()->formatBasePrice($coupon->base_discount_total);
+            $coupon->link = $coupon->cart_rule_id
+                ? route('admin.marketing.promotions.cart_rules.edit', $coupon->cart_rule_id)
+                : null;
+
+            return $coupon;
+        };
+
+        if ($type == 'table') {
+            $records = collect($this->saleReporting->getCouponOrders())
+                ->map(function ($order) use ($decorate) {
+                    $decorate($order);
+
+                    $order->order_link = route('admin.sales.orders.view', $order->id);
+                    $order->formatted_created_at = $order->created_at
+                        ? \Carbon\Carbon::parse($order->created_at)->translatedFormat('d M Y')
+                        : '';
+
+                    return $order;
+                });
+
+            return [
+                'columns' => [
+                    [
+                        'key' => 'increment_id',
+                        'label' => trans('admin::app.reporting.sales.index.order-id'),
+                        'link' => 'order_link',
+                    ], [
+                        'key' => 'coupon_code',
+                        'label' => trans('admin::app.reporting.sales.index.coupon-code'),
+                        'link' => 'link',
+                    ], [
+                        'key' => 'customer_email',
+                        'label' => trans('admin::app.reporting.sales.index.email'),
+                    ], [
+                        'key' => 'formatted_discount_total',
+                        'label' => trans('admin::app.reporting.sales.index.discount'),
+                    ], [
+                        'key' => 'formatted_total',
+                        'label' => trans('admin::app.reporting.sales.index.total'),
+                    ], [
+                        'key' => 'formatted_created_at',
+                        'label' => trans('admin::app.reporting.sales.index.date'),
+                    ],
+                ],
+
+                'records' => $records,
+            ];
+        }
+
+        $couponDiscount = $this->saleReporting->getCouponDiscountProgress();
+
+        $coupons = $this->saleReporting->getTopCoupons(5);
+
+        $coupons->map(function ($coupon) use ($couponDiscount, $decorate) {
+            $decorate($coupon);
+
+            if (! $couponDiscount['current']) {
+                $coupon->progress = 0;
+            } else {
+                $coupon->progress = ($coupon->base_discount_total * 100) / $couponDiscount['current'];
+            }
+        });
+
+        return $coupons;
+    }
+
+    /**
      * Returns the total customers statistics.
      *
      * @param  string  $type
@@ -477,7 +553,7 @@ class Reporting
     }
 
     /**
-     * Returns the customers with most sales
+     * Returns the customers with most sales.
      *
      * @param  string  $type
      */
@@ -528,7 +604,7 @@ class Reporting
     }
 
     /**
-     * Returns the customers with most orders
+     * Returns the customers with most orders.
      *
      * @param  string  $type
      */
@@ -571,7 +647,7 @@ class Reporting
     }
 
     /**
-     * Returns the customers with most reviews
+     * Returns the customers with most reviews.
      *
      * @param  string  $type
      */
@@ -614,7 +690,7 @@ class Reporting
     }
 
     /**
-     * Returns the top customers
+     * Returns the top customers.
      *
      * @param  string  $type
      */
@@ -815,7 +891,7 @@ class Reporting
     }
 
     /**
-     * Returns the products with most reviews
+     * Returns the products with most reviews.
      *
      * @param  string  $type
      */
@@ -858,7 +934,7 @@ class Reporting
     }
 
     /**
-     * Returns the last search terms
+     * Returns the last search terms.
      *
      * @param  string  $type
      */
@@ -898,7 +974,7 @@ class Reporting
     }
 
     /**
-     * Returns the top search terms
+     * Returns the top search terms.
      *
      * @param  string  $type
      */
@@ -908,7 +984,7 @@ class Reporting
     }
 
     /**
-     * Returns date range
+     * Returns date range.
      */
     public function getDateRange(): array
     {
