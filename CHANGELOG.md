@@ -6,6 +6,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Fixed wrong "From" and "To" dates on the admin Bookings data grid and calendar view caused by the Carbon 3 timezone behavior change in the Laravel 12 upgrade. `Carbon::createFromTimestamp()` now returns UTC by default instead of the app timezone, so the booking timestamps are explicitly converted via `->timezone(config('app.timezone'))` in `BookingDataGrid` and `BookingController`.
 
+* #10832 [feature] - Added a "Sales By Coupon" report to the admin sales reporting dashboard, with a coupon-code badge linking to the corresponding cart rule edit page and a drill-down "View Details" listing showing each order that used a coupon (order ID linking to the order detail, coupon code linking to the cart rule).
+
+* #8738 [fixed] - Added column sorting on every reporting list page (Sales / Customers / Products) with sort direction indicators in the column header, fixing the previously non-functional click target.
+
 ## **v2.4.3 (24th of April 2026)** - *Release*
 
 * Ported all booking product bug fixes from the 2.3 branch into 2.4. Key highlights:
