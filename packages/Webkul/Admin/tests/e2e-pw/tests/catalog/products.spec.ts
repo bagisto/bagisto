@@ -3570,8 +3570,11 @@ test.describe("booking product management", () => {
             /**
              * Saving the booking product.
              */
+
+            await adminPage.waitForTimeout(500);
+            
             await adminPage
-                .getByRole("button", { name: "Save Product" })
+                .getByRole("button", { name: "Save Product", exact: true })
                 .click();
         });
 
@@ -3853,8 +3856,10 @@ test.describe("booking product management", () => {
             /**
              * Saving the booking product.
              */
+            await adminPage.waitForTimeout(500);
+
             await adminPage
-                .getByRole("button", { name: "Save Product" })
+                .getByRole("button", { name: "Save Product", exact: true })
                 .click();
         });
     });
