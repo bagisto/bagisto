@@ -43,7 +43,7 @@ export class BookingProductCheckout extends CheckoutHelper {
     }
 
     private async hourMatch(hour: string) {
-        // const hour = startHour; // e.g., "12"
+        await this.page.locator('p.flex > span.icon-arrow-down').nth(0).click()
         const timePattern = new RegExp(`${hour}:\\d{2} [AP]M`);
         await expect(this.page.locator("div.grid.gap-2>div>p.text-sm").nth(1))
             .toContainText(timePattern);
@@ -75,11 +75,7 @@ export class BookingProductCheckout extends CheckoutHelper {
         await expect(this.addCartSuccess.first()).toBeVisible();
         await this.page.locator('.icon-cart').click();
         await this.page.waitForTimeout(500)
-        await this.page.locator('div.grid.select-none').nth(0).click()
         await this.hourMatch(hour)
-
-        // await expect(this.page.locator('div.grid.gap-2>div>p.text-sm').nth(1)).toHaveText(/12:00 [AP]M/);
-        // await expect(this.page.locator('div.grid.gap-2>div>p.text-sm').nth(3)).toHaveText(/12:00 [AP]M/);
         await this.proceedToCheckout();
         await this.choosePaymentMethod.click();
         await this.placeOrder();

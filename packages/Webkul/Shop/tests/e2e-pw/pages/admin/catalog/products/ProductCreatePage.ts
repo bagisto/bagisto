@@ -7,6 +7,7 @@ import {
     generateName,
     generateHostname,
     generateLocation,
+    generateDescription,
 } from "../../../../utils/faker";
 
 export class ProductCreation extends BasePage {
@@ -293,7 +294,25 @@ export class ProductCreation extends BasePage {
     private get bookingAvailableFromInput() {
         return this.page.locator('input[name="booking[available_from]"]');
     }
+    private get addTicketsButton() {
+        return this.page.getByText("Add Tickets");
+    }
 
+
+    private get ticketNameInput() {
+        return this.page.getByRole("textbox", { name: "Name" });
+    }
+    private get ticketQuantityInput() {
+        return this.page.getByRole("textbox", { name: "Quantity" });
+    }
+
+    private get ticketPriceInput() {
+        return this.page.getByRole("textbox", { name: "Price" });
+    }
+
+    private get ticketDescriptionInput() {
+        return this.page.getByRole("textbox", { name: "Description" });
+    }
     private get bookingAvailableToInput() {
         return this.page.locator('input[name="booking[available_to]"]');
     }
@@ -502,7 +521,10 @@ export class ProductCreation extends BasePage {
             this.productDescription,
             product.description,
         );
-        await this.variantPriceInput.fill(product.price.toString())
+
+        if (product.type === "booking") {
+            await this.variantPriceInput.fill(product.price.toString());
+        }
 
     }
 
@@ -738,9 +760,9 @@ export class ProductCreation extends BasePage {
                 await this.bookingAppointment(product);
                 break;
 
-            // case "event":
-            //     await this.bookingEvent(product);
-            //     break;
+            case "event":
+                await this.bookingEvent(product);
+                break;
 
             // case "rental":
             //     await this.bookingRental(product);
@@ -862,7 +884,7 @@ export class ProductCreation extends BasePage {
                 await this.fillTimeTextbox("To", 0, "11", "35");
                 await this.escapeTarget.press("Escape");
                 await this.modalSaveButton.click();
-                await this.saveProductButton.click();
+
             } else {
                 await this.bookingSelect("same_slot_all_days").selectOption("0");
                 const weeks = [
@@ -918,6 +940,44 @@ export class ProductCreation extends BasePage {
                 }
             }
         }
+    }
+
+    private async bookingEvent(product: BaseProduct) {
+        await this.bookingSelect("type").selectOption("event");
+        await this.bookingLocationInput.fill(generateLocation());
+        const today = new Date();
+
+        const availableFromDate = new Date(today);
+        availableFromDate.setDate(today.getDate() + 1);
+        availableFromDate.setHours(12, 0, 0, 0);
+
+        const availableToDate = new Date(availableFromDate);
+        availableToDate.setDate(availableFromDate.getDate() + 2);
+        availableToDate.setHours(12, 0, 0, 0);
+
+        const formattedAvailableFromDate = availableFromDate
+            .toISOString()
+            .slice(0, 19)
+            .replace("T", " ");
+
+        const formattedAvailableToDate = availableToDate
+            .toISOString()
+            .slice(0, 19)
+            .replace("T", " ");
+
+
+        await this.bookingInput("available_from").fill(
+            formattedAvailableFromDate,
+        );
+        await this.bookingInput("available_to").fill(formattedAvailableToDate);
+
+        await this.addTicketsButton.click();
+        await this.ticketNameInput.fill(generateName());
+        await this.ticketQuantityInput.fill("2");
+        await this.ticketPriceInput.fill("500");
+        await this.ticketDescriptionInput.fill(generateDescription());
+        await this.modalSaveButton.click();
+        return product.name;
     }
 
 

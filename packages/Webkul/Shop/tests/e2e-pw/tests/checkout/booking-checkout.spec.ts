@@ -5,57 +5,58 @@ import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 test.describe("booking product checkout flow @smoke", () => {
 
-    test.describe("One Booking For Many Days", () => {
-        test("should create default booking product with one booking for many days", async ({ adminPage }) => {
-            const productCreation = new ProductCreation(adminPage);
-            await productCreation.createProduct({
-                type: "booking",
-                bookingType: "default",
-                defaultBookingType: "one",
-                sku: `SKU-${Date.now()}`,
-                name: `booking-${Date.now()}`,
-                shortDescription: "Short desc",
-                description: "Full desc",
-                price: 199,
-                weight: 1,
-                inventory: 100,
+    test.describe("Default Booking", () => {
+        test.describe("One Booking For Many Days", () => {
+            test("should create default booking product with one booking for many days", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "default",
+                    defaultBookingType: "one",
+                    sku: `SKU-${Date.now()}`,
+                    name: `default-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 1,
+                    inventory: 100,
+                });
+            });
+
+            test("should allow customer to complete checkout for one booking for many days", async ({ shopPage }) => {
+                await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                await checkout.checkout("12");
             });
         });
 
-        test("should allow customer to complete checkout for one booking for many days", async ({ shopPage }) => {
-            await loginAsCustomer(shopPage);
-            await addAddress(shopPage);
-            const checkout = new BookingProductCheckout(shopPage);
-            await checkout.checkout("12");
-        });
-    });
+        test.describe("Many Bookings For One Day", () => {
+            test("should create default booking product with many bookings for one day", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "default",
+                    defaultBookingType: "many",
+                    sku: `SKU-${Date.now()}`,
+                    name: `default-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 1,
+                    inventory: 100,
+                });
+            });
 
-    test.describe("Many Bookings For One Day", () => {
-        test("should create default booking product with many bookings for one day", async ({ adminPage }) => {
-            const productCreation = new ProductCreation(adminPage);
-            await productCreation.createProduct({
-                type: "booking",
-                bookingType: "default",
-                defaultBookingType: "many",
-                sku: `SKU-${Date.now()}`,
-                name: `booking-${Date.now()}`,
-                shortDescription: "Short desc",
-                description: "Full desc",
-                price: 199,
-                weight: 1,
-                inventory: 100,
+            test("should allow customer to complete checkout for many bookings for one day", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.checkout('10');
+
             });
         });
-
-        test("should allow customer to complete checkout for many bookings for one day", async ({ shopPage }) => {
-            const customer = await loginAsCustomer(shopPage);
-            await addAddress(shopPage);
-            const checkout = new BookingProductCheckout(shopPage);
-            const id = await checkout.checkout('10');
-
-        });
     });
-
 
     test.describe("Appointment Booking", () => {
 
@@ -68,7 +69,7 @@ test.describe("booking product checkout flow @smoke", () => {
                     sameSlotAllDays: true,
                     availableEveryWeek: true,
                     sku: `SKU-${Date.now()}`,
-                    name: `booking-${Date.now()}`,
+                    name: `appointment-${Date.now()}`,
                     shortDescription: "Short desc",
                     description: "Full desc",
                     price: 199,
@@ -95,7 +96,7 @@ test.describe("booking product checkout flow @smoke", () => {
                     sameSlotAllDays: false,
                     availableEveryWeek: true,
                     sku: `SKU-${Date.now()}`,
-                    name: `booking-${Date.now()}`,
+                    name: `appointment-${Date.now()}`,
                     shortDescription: "Short desc",
                     description: "Full desc",
                     price: 199,
@@ -122,7 +123,7 @@ test.describe("booking product checkout flow @smoke", () => {
                     sameSlotAllDays: true,
                     availableEveryWeek: false,
                     sku: `SKU-${Date.now()}`,
-                    name: `booking-${Date.now()}`,
+                    name: `appointment-${Date.now()}`,
                     shortDescription: "Short desc",
                     description: "Full desc",
                     price: 199,
@@ -149,7 +150,7 @@ test.describe("booking product checkout flow @smoke", () => {
                     sameSlotAllDays: false,
                     availableEveryWeek: false,
                     sku: `SKU-${Date.now()}`,
-                    name: `booking-${Date.now()}`,
+                    name: `appointment-${Date.now()}`,
                     shortDescription: "Short desc",
                     description: "Full desc",
                     price: 199,
@@ -168,4 +169,25 @@ test.describe("booking product checkout flow @smoke", () => {
         })
     });
 
+
+    test.describe("Event Booking product", () => {
+        test("Should create event booking product", async ({ adminPage }) => {
+            const productCreation = new ProductCreation(adminPage);
+            await productCreation.createProduct({
+                type: "booking",
+                bookingType: "event",
+                sameSlotAllDays: true,
+                availableEveryWeek: false,
+                sku: `SKU-${Date.now()}`,
+                name: `event-${Date.now()}`,
+                shortDescription: "Short desc",
+                description: "Full desc",
+                price: 199,
+                weight: 10,
+                inventory: 100,
+            });
+        })
+    });
+
 });
+
