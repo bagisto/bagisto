@@ -12,6 +12,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 * Refined the storefront cart and onepage checkout summaries with `+` / `−` indicators, a collapsed dual tax-mode display, an expandable Discount breakdown, and a modernized applied-coupon pill.
 
+* #10832 [feature] - Added a "Sales By Coupon" report to the admin sales reporting dashboard, with a coupon-code badge linking to the corresponding cart rule edit page and a drill-down "View Details" listing showing each order that used a coupon (order ID linking to the order detail, coupon code linking to the cart rule).
+
+* #8738 [fixed] - Added column sorting on every reporting list page (Sales / Customers / Products) with sort direction indicators in the column header, fixing the previously non-functional click target.
+
 ## **v2.4.3 (24th of April 2026)** - *Release*
 
 * Ported all booking product bug fixes from the 2.3 branch into 2.4. Key highlights:

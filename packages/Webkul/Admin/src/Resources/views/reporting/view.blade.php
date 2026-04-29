@@ -172,12 +172,22 @@
                             :style="`grid-template-columns: repeat(${reporting.statistics.columns.length}, minmax(0, 1fr))`"
                         >
                             <div
-                                class="flex cursor-pointer gap-2.5"
+                                class="flex cursor-pointer select-none items-center gap-2.5"
                                 v-for="column in reporting.statistics.columns"
+                                @click="toggleSort(column.key)"
                             >
                                 <p class="text-gray-600 dark:text-gray-300">
                                     @{{ column.label }}
                                 </p>
+
+                                <span
+                                    class="text-base leading-none"
+                                    :class="{
+                                        'icon-sort-up text-blue-600 dark:text-blue-400': sortColumn === column.key && sortDirection === 'asc',
+                                        'icon-sort-down text-blue-600 dark:text-blue-400': sortColumn === column.key && sortDirection === 'desc',
+                                        'icon-sort-up-down text-gray-400': sortColumn !== column.key,
+                                    }"
+                                ></span>
                             </div>
                         </div>
 
@@ -185,11 +195,21 @@
                         <div
                             class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950" style="grid-template-columns: repeat(4, minmax(0, 1fr));"
                             :style="`grid-template-columns: repeat(${reporting.statistics.columns.length}, minmax(0, 1fr))`"
-                            v-if="reporting.statistics.records.length"
-                            v-for="record in reporting.statistics.records"
+                            v-if="sortedRecords.length"
+                            v-for="record in sortedRecords"
                         >
                             <p v-for="column in reporting.statistics.columns">
-                                @{{ record[column.key] }}
+                                <a
+                                    v-if="column.link && record[column.link]"
+                                    :href="record[column.link]"
+                                    class="text-blue-600 transition-all hover:underline dark:text-blue-400"
+                                >
+                                    @{{ record[column.key] }}
+                                </a>
+
+                                <template v-else>
+                                    @{{ record[column.key] }}
+                                </template>
                             </p>
                         </div>
 
@@ -217,10 +237,10 @@
                             },
                             ...@json(core()->getAllChannels()),
                         ],
-                        
+
                         filters: {
                             type: "{{ request()->query('type') }}",
-                            
+
                             period: 'day',
 
                             channel: '',
@@ -235,11 +255,48 @@
                         isLoading: true,
 
                         entity: "{{ $entity }}",
+
+                        sortColumn: null,
+
+                        sortDirection: 'asc',
                     }
                 },
 
                 mounted() {
                     this.getStats();
+                },
+
+                computed: {
+                    sortedRecords() {
+                        const records = this.reporting?.statistics?.records ?? [];
+
+                        if (! this.sortColumn) {
+                            return records;
+                        }
+
+                        const direction = this.sortDirection === 'asc' ? 1 : -1;
+
+                        return [...records].sort((a, b) => {
+                            const aVal = a[this.sortColumn];
+                            const bVal = b[this.sortColumn];
+
+                            if (aVal === null || aVal === undefined) return 1;
+                            if (bVal === null || bVal === undefined) return -1;
+
+                            const aNum = typeof aVal === 'number' ? aVal : parseFloat(String(aVal).replace(/[^0-9.\-]/g, ''));
+                            const bNum = typeof bVal === 'number' ? bVal : parseFloat(String(bVal).replace(/[^0-9.\-]/g, ''));
+
+                            const bothNumeric = ! isNaN(aNum) && ! isNaN(bNum)
+                                && /^[\s\-+]*[\d.,\s$€£¥₹%]+$/.test(String(aVal))
+                                && /^[\s\-+]*[\d.,\s$€£¥₹%]+$/.test(String(bVal));
+
+                            if (bothNumeric) {
+                                return (aNum - bNum) * direction;
+                            }
+
+                            return String(aVal).localeCompare(String(bVal)) * direction;
+                        });
+                    }
                 },
 
                 watch: {
@@ -265,6 +322,15 @@
                                 this.isLoading = false;
                             })
                             .catch(error => {});
+                    },
+
+                    toggleSort(column) {
+                        if (this.sortColumn === column) {
+                            this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+                        } else {
+                            this.sortColumn = column;
+                            this.sortDirection = 'asc';
+                        }
                     },
 
                     exportReporting(format) {
