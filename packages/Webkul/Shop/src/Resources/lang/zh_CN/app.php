@@ -1108,6 +1108,10 @@ return [
                 'delivery-charges-incl-tax' => '运费（含税）',
                 'discount-amount' => '折扣金额',
                 'grand-total' => '总计',
+                'included' => '已含',
+                'incl-tax' => '含税:',
+                'items-discount' => '商品折扣',
+                'shipping-discount' => '运费折扣',
                 'place-order' => '下单',
                 'proceed-to-checkout' => '继续结账',
                 'sub-total' => '小计',
@@ -1178,6 +1182,10 @@ return [
                 'discount-amount' => '折扣金额',
                 'excl-tax' => '不含税：',
                 'grand-total' => '总计',
+                'included' => '已含',
+                'incl-tax' => '含税:',
+                'items-discount' => '商品折扣',
+                'shipping-discount' => '运费折扣',
                 'place-order' => '下单',
                 'price_and_qty' => ':price × :qty',
                 'processing' => '处理中',
@@ -1185,7 +1193,8 @@ return [
                 'sub-total-excl-tax' => '小计（不含税）',
                 'sub-total-incl-tax' => '小计（含税）',
                 'tax' => '税费',
-            ],
+
+                'tax-included' => '已含税:', ],
         ],
 
         'coupon' => [

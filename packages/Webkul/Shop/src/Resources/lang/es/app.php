@@ -1108,6 +1108,10 @@ return [
                 'delivery-charges-incl-tax' => 'Gastos de Envío (Incl. Impuestos)',
                 'discount-amount' => 'Monto de Descuento',
                 'grand-total' => 'Total General',
+                'included' => 'Incluido',
+                'incl-tax' => 'Imp. Inc.:',
+                'items-discount' => 'Descuento de artículos',
+                'shipping-discount' => 'Descuento de envío',
                 'place-order' => 'Realizar Pedido',
                 'proceed-to-checkout' => 'Continuar con el Pago',
                 'sub-total' => 'Subtotal',
@@ -1178,6 +1182,10 @@ return [
                 'discount-amount' => 'Monto de Descuento',
                 'excl-tax' => 'Excl. Impuestos:',
                 'grand-total' => 'Total General',
+                'included' => 'Incluido',
+                'incl-tax' => 'Imp. Inc.:',
+                'items-discount' => 'Descuento de artículos',
+                'shipping-discount' => 'Descuento de envío',
                 'place-order' => 'Realizar Pedido',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Procesando',
@@ -1185,7 +1193,8 @@ return [
                 'sub-total-excl-tax' => 'Subtotal (Excl. Impuestos)',
                 'sub-total-incl-tax' => 'Subtotal (Incl. Impuestos)',
                 'tax' => 'Impuesto',
-            ],
+
+                'tax-included' => 'Impuestos ya incluidos:', ],
         ],
 
         'coupon' => [

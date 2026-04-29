@@ -96,24 +96,24 @@
                 </x-shop::form>
 
                 <!-- Applied Coupon Information Container -->
-                <div 
-                    class="font-small flex items-center justify-between text-xs"
+                <span
+                    class="inline-flex items-center gap-2"
                     v-if="cart.coupon_code"
                 >
-                    <p 
-                        class="text-base font-medium text-navyBlue max-sm:text-sm"
-                        title="@lang('shop::app.checkout.coupon.applied')"
+                    <span
+                        class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-0.5 text-sm font-semibold text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 max-sm:text-xs"
+                        :title="'@lang('shop::app.checkout.coupon.applied')'"
                     >
-                        "@{{ cart.coupon_code }}"
-                    </p>
+                        @{{ cart.coupon_code }}
+                    </span>
 
-                    <span 
-                        class="icon-cancel cursor-pointer text-2xl max-sm:text-base"
+                    <span
+                        class="icon-cancel cursor-pointer text-xl text-gray-400 transition-colors hover:text-red-500 max-sm:text-base"
                         title="@lang('shop::app.checkout.coupon.remove')"
                         @click="destroyCoupon"
                     >
                     </span>
-                </div>
+                </span>
             </p>
 
             {!! view_render_event('bagisto.shop.checkout.cart.coupon.after') !!}

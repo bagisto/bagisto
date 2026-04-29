@@ -1108,6 +1108,10 @@ return [
                 'delivery-charges-incl-tax' => 'Spese di consegna (incl. IVA)',
                 'discount-amount' => 'Importo Sconto',
                 'grand-total' => 'Totale',
+                'included' => 'Incluso',
+                'incl-tax' => 'IVA inclusa:',
+                'items-discount' => 'Sconto articoli',
+                'shipping-discount' => 'Sconto spedizione',
                 'place-order' => 'Effettua Ordine',
                 'proceed-to-checkout' => 'Procedi al Checkout',
                 'sub-total' => 'Subtotale',
@@ -1178,6 +1182,10 @@ return [
                 'discount-amount' => 'Importo Sconto',
                 'excl-tax' => 'Escl. IVA:',
                 'grand-total' => 'Totale',
+                'included' => 'Incluso',
+                'incl-tax' => 'IVA inclusa:',
+                'items-discount' => 'Sconto articoli',
+                'shipping-discount' => 'Sconto spedizione',
                 'place-order' => 'Effettua Ordine',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Elaborazione',
@@ -1185,7 +1193,8 @@ return [
                 'sub-total-excl-tax' => 'Subtotale (Escl. IVA)',
                 'sub-total-incl-tax' => 'Subtotale (Incl. IVA)',
                 'tax' => 'Imposta',
-            ],
+
+                'tax-included' => 'Tasse già incluse:', ],
         ],
 
         'coupon' => [
