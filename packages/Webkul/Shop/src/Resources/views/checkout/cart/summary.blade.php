@@ -38,22 +38,18 @@
         <template v-else-if="displayTax.subtotal == 'both'">
             <div class="flex justify-between text-right">
                 <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.checkout.cart.summary.sub-total-excl-tax')
+                    @lang('shop::app.checkout.cart.summary.sub-total')
                 </p>
 
-                <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_sub_total }}
-                </p>
-            </div>
-            
-            <div class="flex justify-between text-right">
-                <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.checkout.cart.summary.sub-total-incl-tax')
-                </p>
+                <div>
+                    <p class="text-base font-medium max-sm:text-sm">
+                        @{{ cart.formatted_sub_total }}
+                    </p>
 
-                <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_sub_total_incl_tax }}
-                </p>
+                    <p class="text-xs italic text-gray-500 dark:text-gray-400">
+                        @lang('shop::app.checkout.cart.summary.incl-tax') @{{ cart.formatted_sub_total_incl_tax }}
+                    </p>
+                </div>
             </div>
         </template>
 
@@ -74,16 +70,16 @@
         <!-- Discount -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.discount_amount.before') !!}
 
-        <div 
+        <div
             class="flex justify-between text-right"
             v-if="cart.discount_amount && parseFloat(cart.discount_amount) > 0"
         >
-            <p class="text-base max-sm:text-sm">
+            <p class="text-base text-red-600 max-sm:text-sm">
                 @lang('shop::app.checkout.cart.summary.discount-amount')
             </p>
 
-            <p class="text-base font-medium max-sm:text-sm">
-                @{{ cart.formatted_discount_amount }}
+            <p class="text-base font-medium text-red-600 max-sm:text-sm">
+                - @{{ cart.formatted_discount_amount }}
             </p>
         </div>
 
@@ -91,7 +87,7 @@
 
         <!-- Apply Coupon -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.before') !!}
-        
+
         @include('shop::checkout.coupon')
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.coupon.after') !!}
@@ -106,7 +102,7 @@
                 </p>
 
                 <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_shipping_amount_incl_tax }}
+                    + @{{ cart.formatted_shipping_amount_incl_tax }}
                 </p>
             </div>
         </template>
@@ -114,22 +110,18 @@
         <template v-else-if="displayTax.shipping == 'both'">
             <div class="flex justify-between text-right">
                 <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.checkout.cart.summary.delivery-charges-excl-tax')
+                    @lang('shop::app.checkout.cart.summary.delivery-charges')
                 </p>
 
-                <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_shipping_amount }}
-                </p>
-            </div>
-            
-            <div class="flex justify-between text-right">
-                <p class="text-base max-sm:text-sm">
-                    @lang('shop::app.checkout.cart.summary.delivery-charges-incl-tax')
-                </p>
+                <div>
+                    <p class="text-base font-medium max-sm:text-sm">
+                        + @{{ cart.formatted_shipping_amount }}
+                    </p>
 
-                <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_shipping_amount_incl_tax }}
-                </p>
+                    <p class="text-xs italic text-gray-500 dark:text-gray-400">
+                        @lang('shop::app.checkout.cart.summary.incl-tax') @{{ cart.formatted_shipping_amount_incl_tax }}
+                    </p>
+                </div>
             </div>
         </template>
 
@@ -140,7 +132,7 @@
                 </p>
 
                 <p class="text-base font-medium max-sm:text-sm">
-                    @{{ cart.formatted_shipping_amount }}
+                    + @{{ cart.formatted_shipping_amount }}
                 </p>
             </div>
         </template>
@@ -159,7 +151,7 @@
             </p>
 
             <p class="text-lg font-semibold max-md:text-sm">
-                @{{ cart.formatted_tax_total }}
+                + @{{ cart.formatted_tax_total }}
             </p>
         </div>
 
@@ -176,8 +168,8 @@
                 </p>
 
                 <p class="flex items-center gap-1 text-base font-medium max-md:font-medium max-sm:text-sm">
-                    @{{ cart.formatted_tax_total }}
-                    
+                    + @{{ cart.formatted_tax_total }}
+
                     <span
                         class="text-xl"
                         :class="{'icon-arrow-up': cart.show_taxes, 'icon-arrow-down': ! cart.show_taxes}"
@@ -205,7 +197,7 @@
         </div>
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.tax.after') !!}
-   
+
         <!-- Cart Grand Total -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.grand_total.before') !!}
 
