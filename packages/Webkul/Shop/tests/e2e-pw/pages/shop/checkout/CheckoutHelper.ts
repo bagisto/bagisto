@@ -32,7 +32,7 @@ export class CheckoutHelper extends BasePage {
 
     get continueButton() {
         return this.page.locator(
-            '(//a[contains(.," Continue to Checkout ")])[1]',
+            '//a[contains(.," Continue to Checkout ")][1]',
         );
     }
 
@@ -126,7 +126,9 @@ export class CheckoutHelper extends BasePage {
      * Navigate from cart to checkout (billing address step)
      */
     async proceedToCheckout() {
-        await this.shoppingCartIcon.click();
+        if (await this.shoppingCartIcon.isVisible()) {
+            await this.shoppingCartIcon.click();
+        }
         await this.continueButton.click();
         await this.page.locator(".icon-radio-unselect").first().click();
         await this.clickProcessButton.click();

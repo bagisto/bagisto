@@ -16,4 +16,11 @@ export interface BaseProduct {
     price?: number;
     weight?: number;
     inventory?: number;
+    bookingType?: "default" | "appointment" | "event" | "rental" | "table";
+    defaultBookingType?: "one" | "many";
+    rentalType?: "hourly" | "daily" | "both";
+    tableType?: "per_guest" | "per_table";
+    sameSlotAllDays?: boolean;
+    availableEveryWeek?: boolean;
+
 }
