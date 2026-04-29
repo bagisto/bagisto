@@ -1108,7 +1108,10 @@ return [
                 'delivery-charges-incl-tax' => 'Liefergebühren (inkl. Steuern)',
                 'discount-amount' => 'Rabattbetrag',
                 'grand-total' => 'Gesamtsumme',
+                'included' => 'Enthalten',
                 'incl-tax' => 'Inkl. Steuer:',
+                'items-discount' => 'Artikelrabatt',
+                'shipping-discount' => 'Versandrabatt',
                 'place-order' => 'Bestellung aufgeben',
                 'proceed-to-checkout' => 'Zur Kasse gehen',
                 'sub-total' => 'Zwischensumme',
@@ -1179,7 +1182,10 @@ return [
                 'discount-amount' => 'Rabattbetrag',
                 'excl-tax' => 'Exkl. Steuern:',
                 'grand-total' => 'Gesamtsumme',
+                'included' => 'Enthalten',
                 'incl-tax' => 'Inkl. Steuer:',
+                'items-discount' => 'Artikelrabatt',
+                'shipping-discount' => 'Versandrabatt',
                 'place-order' => 'Bestellung aufgeben',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Verarbeitung',
@@ -1187,7 +1193,8 @@ return [
                 'sub-total-excl-tax' => 'Zwischensumme (exkl. Steuern)',
                 'sub-total-incl-tax' => 'Zwischensumme (inkl. Steuern)',
                 'tax' => 'Steuern',
-            ],
+
+                'tax-included' => 'Steuer bereits enthalten:', ],
         ],
 
         'coupon' => [

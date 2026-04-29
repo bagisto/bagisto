@@ -1108,7 +1108,10 @@ return [
                 'delivery-charges-incl-tax' => 'Стоимость доставки (с учетом налога)',
                 'discount-amount' => 'Сумма скидки',
                 'grand-total' => 'Общая сумма',
+                'included' => 'Включено',
                 'incl-tax' => 'С налогом:',
+                'items-discount' => 'Скидка на товары',
+                'shipping-discount' => 'Скидка на доставку',
                 'place-order' => 'Оформить заказ',
                 'proceed-to-checkout' => 'Перейти к оформлению заказа',
                 'sub-total' => 'Подитог',
@@ -1179,7 +1182,10 @@ return [
                 'discount-amount' => 'Сумма скидки',
                 'excl-tax' => 'Без учета налога:',
                 'grand-total' => 'Общая сумма',
+                'included' => 'Включено',
                 'incl-tax' => 'С налогом:',
+                'items-discount' => 'Скидка на товары',
+                'shipping-discount' => 'Скидка на доставку',
                 'place-order' => 'Оформить заказ',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Обработка',
@@ -1187,7 +1193,8 @@ return [
                 'sub-total-excl-tax' => 'Подитог (без учета налога)',
                 'sub-total-incl-tax' => 'Подитог (с учетом налога)',
                 'tax' => 'Налог',
-            ],
+
+                'tax-included' => 'Налог уже включён:', ],
         ],
 
         'coupon' => [

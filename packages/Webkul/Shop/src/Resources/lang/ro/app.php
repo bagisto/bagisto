@@ -1108,7 +1108,10 @@ return [
                 'delivery-charges-incl-tax' => 'Taxe de livrare (cu taxe)',
                 'discount-amount' => 'Sumă reducere',
                 'grand-total' => 'Total general',
+                'included' => 'Inclus',
                 'incl-tax' => 'Cu TVA:',
+                'items-discount' => 'Reducere articole',
+                'shipping-discount' => 'Reducere livrare',
                 'place-order' => 'Plasează comanda',
                 'proceed-to-checkout' => 'Continuă spre finalizare',
                 'sub-total' => 'Subtotal',
@@ -1179,7 +1182,10 @@ return [
                 'discount-amount' => 'Sumă reducere',
                 'excl-tax' => 'Fără taxe:',
                 'grand-total' => 'Total general',
+                'included' => 'Inclus',
                 'incl-tax' => 'Cu TVA:',
+                'items-discount' => 'Reducere articole',
+                'shipping-discount' => 'Reducere livrare',
                 'place-order' => 'Plasează comanda',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'În procesare',
@@ -1187,7 +1193,8 @@ return [
                 'sub-total-excl-tax' => 'Subtotal (fără taxe)',
                 'sub-total-incl-tax' => 'Subtotal (cu taxe)',
                 'tax' => 'Taxă',
-            ],
+
+                'tax-included' => 'TVA deja inclus:', ],
         ],
 
         'coupon' => [

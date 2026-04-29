@@ -1108,7 +1108,10 @@ return [
                 'delivery-charges-incl-tax' => 'דמי משלוח (כולל מס)',
                 'discount-amount' => 'סכום ההנחה',
                 'grand-total' => 'סכום כולל',
+                'included' => 'כלול',
                 'incl-tax' => 'כולל מס:',
+                'items-discount' => 'הנחת פריטים',
+                'shipping-discount' => 'הנחת משלוח',
                 'place-order' => 'בצע הזמנה',
                 'proceed-to-checkout' => 'המשך לתשלום',
                 'sub-total' => 'סיכום ביניים',
@@ -1179,7 +1182,10 @@ return [
                 'discount-amount' => 'סכום ההנחה',
                 'excl-tax' => 'לא כולל מס:',
                 'grand-total' => 'סכום כולל',
+                'included' => 'כלול',
                 'incl-tax' => 'כולל מס:',
+                'items-discount' => 'הנחת פריטים',
+                'shipping-discount' => 'הנחת משלוח',
                 'place-order' => 'בצע הזמנה',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'מעבד',
@@ -1187,7 +1193,8 @@ return [
                 'sub-total-excl-tax' => 'סיכום ביניים (לא כולל מס)',
                 'sub-total-incl-tax' => 'סיכום ביניים (כולל מס)',
                 'tax' => 'מס',
-            ],
+
+                'tax-included' => 'מס כבר כלול:', ],
         ],
 
         'coupon' => [

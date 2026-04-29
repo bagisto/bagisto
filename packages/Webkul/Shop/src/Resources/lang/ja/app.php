@@ -1108,7 +1108,10 @@ return [
                 'delivery-charges-incl-tax' => '配送料（税込み）',
                 'discount-amount' => '割引額',
                 'grand-total' => '合計金額',
+                'included' => '含む',
                 'incl-tax' => '税込:',
+                'items-discount' => '商品割引',
+                'shipping-discount' => '送料割引',
                 'place-order' => '注文する',
                 'proceed-to-checkout' => 'チェックアウトに進む',
                 'sub-total' => '小計',
@@ -1179,7 +1182,10 @@ return [
                 'discount-amount' => '割引額',
                 'excl-tax' => '税抜き:',
                 'grand-total' => '合計金額',
+                'included' => '含む',
                 'incl-tax' => '税込:',
+                'items-discount' => '商品割引',
+                'shipping-discount' => '送料割引',
                 'place-order' => '注文する',
                 'price_and_qty' => ':price × :qty',
                 'processing' => '処理中',
@@ -1187,7 +1193,8 @@ return [
                 'sub-total-excl-tax' => '小計（税抜き）',
                 'sub-total-incl-tax' => '小計（税込み）',
                 'tax' => '税金',
-            ],
+
+                'tax-included' => '税込み:', ],
         ],
 
         'coupon' => [

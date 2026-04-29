@@ -70,18 +70,70 @@
         <!-- Discount -->
         {!! view_render_event('bagisto.shop.checkout.cart.summary.discount_amount.before') !!}
 
-        <div
-            class="flex justify-between text-right"
-            v-if="cart.discount_amount && parseFloat(cart.discount_amount) > 0"
-        >
-            <p class="text-base text-red-600 max-sm:text-sm">
-                @lang('shop::app.checkout.cart.summary.discount-amount')
-            </p>
+        <template v-if="cart.discount_amount && parseFloat(cart.discount_amount) > 0">
+            <!-- Single Source: Simple line. -->
+            <div
+                class="flex justify-between text-right"
+                v-if="parseFloat(cart.items_discount_amount || 0) <= 0 || parseFloat(cart.shipping_discount_amount || 0) <= 0"
+            >
+                <p class="text-base text-red-600 max-sm:text-sm">
+                    @lang('shop::app.checkout.cart.summary.discount-amount')
+                </p>
 
-            <p class="text-base font-medium text-red-600 max-sm:text-sm">
-                - @{{ cart.formatted_discount_amount }}
-            </p>
-        </div>
+                <p class="text-base font-medium text-red-600 max-sm:text-sm">
+                    - @{{ cart.formatted_discount_amount }}
+                </p>
+            </div>
+
+            <!-- Multi Source: Expandable breakdown. -->
+            <div
+                class="flex flex-col gap-2 border-y py-2"
+                v-else
+            >
+                <div
+                    class="flex cursor-pointer justify-between text-right"
+                    @click="cart.show_discount_breakdown = ! cart.show_discount_breakdown"
+                >
+                    <p class="text-base text-red-600 max-sm:text-sm">
+                        @lang('shop::app.checkout.cart.summary.discount-amount')
+                    </p>
+
+                    <p class="flex items-center gap-1 text-base font-medium text-red-600 max-sm:text-sm">
+                        - @{{ cart.formatted_discount_amount }}
+
+                        <span
+                            class="text-xl"
+                            :class="{'icon-arrow-up': cart.show_discount_breakdown, 'icon-arrow-down': ! cart.show_discount_breakdown}"
+                        ></span>
+                    </p>
+                </div>
+
+                <div
+                    class="flex flex-col gap-1"
+                    v-show="cart.show_discount_breakdown"
+                >
+                    <div class="flex justify-between gap-1 text-right">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            @lang('shop::app.checkout.cart.summary.items-discount')
+                        </p>
+
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                            - @{{ cart.formatted_items_discount_amount }}
+                        </p>
+                    </div>
+
+                    <div class="flex justify-between gap-1 text-right">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">
+                            @lang('shop::app.checkout.cart.summary.shipping-discount')
+                        </p>
+
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                            - @{{ cart.formatted_shipping_discount_amount }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </template>
 
         {!! view_render_event('bagisto.shop.checkout.cart.summary.discount_amount.after') !!}
 
@@ -167,8 +219,16 @@
                     @lang('shop::app.checkout.cart.summary.tax')
                 </p>
 
-                <p class="flex items-center gap-1 text-base font-medium max-md:font-medium max-sm:text-sm">
-                    + @{{ cart.formatted_tax_total }}
+                <p class="flex items-center gap-1.5 text-base font-medium max-md:font-medium max-sm:text-sm">
+                    <template v-if="displayTax.subtotal === 'including_tax'">
+                        @{{ cart.formatted_tax_total }}
+
+                        <span class="text-xs italic font-normal text-gray-500 dark:text-gray-400">
+                            (@lang('shop::app.checkout.cart.summary.included'))
+                        </span>
+                    </template>
+
+                    <template v-else>+ @{{ cart.formatted_tax_total }}</template>
 
                     <span
                         class="text-xl"
@@ -185,12 +245,14 @@
                     class="flex justify-between gap-1 text-right"
                     v-for="(amount, index) in cart.applied_taxes"
                 >
-                    <p class="text-sm max-md:text-sm max-md:font-normal">
+                    <p class="text-sm text-gray-500 dark:text-gray-400">
                         @{{ index }}
                     </p>
 
-                    <p class="text-sm font-medium max-md:text-sm max-md:font-medium">
-                        @{{ amount }}
+                    <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <template v-if="displayTax.subtotal === 'including_tax'">@{{ amount }}</template>
+                        
+                        <template v-else>+ @{{ amount }}</template>
                     </p>
                 </div>
             </div>
