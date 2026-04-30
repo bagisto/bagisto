@@ -461,6 +461,15 @@ export class ProductCreation extends BasePage {
         return this.page.locator(selector).first();
     }
 
+
+    private get dailyPriceTextbox() {
+        return this.page.getByRole("textbox", { name: "Daily Price" });
+    }
+
+    private get hourlyPriceTextbox() {
+        return this.page.getByRole("textbox", { name: "Hourly Price" });
+    }
+
     /**
      * CORE FLOW
      */
@@ -764,9 +773,9 @@ export class ProductCreation extends BasePage {
                 await this.bookingEvent(product);
                 break;
 
-            // case "rental":
-            //     await this.bookingRental(product);
-            //     break;
+            case "rental":
+                await this.bookingRental(product);
+                break;
 
             // case "table":
             //     await this.bookingTable(product);
@@ -946,41 +955,166 @@ export class ProductCreation extends BasePage {
         await this.bookingSelect("type").selectOption("event");
         await this.bookingLocationInput.fill(generateLocation());
         const today = new Date();
+        const isPastNoon = today.getHours() >= 12;
 
         const availableFromDate = new Date(today);
-        availableFromDate.setDate(today.getDate() + 1);
+        if (isPastNoon) {
+            availableFromDate.setDate(today.getDate() + 1);
+        }
         availableFromDate.setHours(12, 0, 0, 0);
 
         const availableToDate = new Date(availableFromDate);
         availableToDate.setDate(availableFromDate.getDate() + 2);
         availableToDate.setHours(12, 0, 0, 0);
 
-        const formattedAvailableFromDate = availableFromDate
-            .toISOString()
-            .slice(0, 19)
-            .replace("T", " ");
+        const pad = (num) => String(num).padStart(2, '0');
 
-        const formattedAvailableToDate = availableToDate
-            .toISOString()
-            .slice(0, 19)
-            .replace("T", " ");
+        const formatLocalDate = (date) => {
+            return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+        };
 
+        const formattedAvailableFromDate = formatLocalDate(availableFromDate);
+        const formattedAvailableToDate = formatLocalDate(availableToDate);
 
-        await this.bookingInput("available_from").fill(
-            formattedAvailableFromDate,
-        );
+        await this.bookingInput("available_from").fill(formattedAvailableFromDate);
         await this.bookingInput("available_to").fill(formattedAvailableToDate);
+        const ticketCount = product.numberOfTickets ?? 1;
 
-        await this.addTicketsButton.click();
-        await this.ticketNameInput.fill(generateName());
-        await this.ticketQuantityInput.fill("2");
-        await this.ticketPriceInput.fill("500");
-        await this.ticketDescriptionInput.fill(generateDescription());
-        await this.modalSaveButton.click();
+        for (let i = 0; i < ticketCount; i++) {
+
+            await this.addTicketsButton.nth(0).click();
+            await this.ticketNameInput.fill(generateName());
+            await this.ticketQuantityInput.fill("2");
+            await this.ticketPriceInput.fill("500");
+            await this.ticketDescriptionInput.fill(generateDescription());
+            await this.modalSaveButton.click();
+        }
         return product.name;
     }
 
+    private async bookingRental(product: BaseProduct) {
+        await this.bookingSelect("type").selectOption("rental");
+        await this.bookingLocationInput.fill(generateLocation());
+        await this.bookingInput("qty").fill(product.inventory.toString());
+        if (!product.availableEveryWeek) {
+            await this.bookingSelect("available_every_week").selectOption("0");
+            const today = new Date();
+            const isPastNoon = today.getHours() >= 12;
 
+            const availableFromDate = new Date(today);
+            if (isPastNoon) {
+                availableFromDate.setDate(today.getDate() + 1);
+            }
+            availableFromDate.setHours(12, 0, 0, 0);
+
+            const availableToDate = new Date(availableFromDate);
+            availableToDate.setDate(availableFromDate.getDate() + 7);
+            availableToDate.setHours(12, 0, 0, 0);
+
+            const pad = (num) => String(num).padStart(2, '0');
+
+            const formatLocalDate = (date) => {
+                return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())} ${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
+            };
+
+            const formattedAvailableFromDate = formatLocalDate(availableFromDate);
+            const formattedAvailableToDate = formatLocalDate(availableToDate);
+
+            await this.bookingInput("available_from").fill(formattedAvailableFromDate);
+            await this.bookingInput("available_to").fill(formattedAvailableToDate);
+
+            if (product.rentalType === "daily") {
+                await this.bookingSelect("renting_type").selectOption("daily");
+                await this.dailyPriceTextbox.fill("50");
+                await this.escapeTarget.press("Escape");
+                return product.name;
+
+            }
+            else if (product.rentalType === "hourly") {
+                await this.bookingSelect("renting_type").selectOption("hourly");
+                await this.hourlyPriceTextbox.fill("30");
+                if (product.sameSlotAllDays) {
+                    await this.bookingSelect("same_slot_all_days").selectOption("1");
+                    await this.addSlotsButton.click();
+                    await this.fillTimeTextbox("From", 0, "10", "20");
+                    await this.fillTimeTextbox("To", 0, "11", "20");
+                    await this.escapeTarget.press("Escape");
+                    await this.modalSaveButton.click();
+                    return product.name;
+                }
+                else {
+                    await this.bookingSelect("same_slot_all_days").selectOption("0");
+                    await this.fillInlineDaySlot(1, "10", "20", "11", "20", false);
+                }
+            }
+            else {
+                await this.bookingSelect("renting_type").selectOption("daily_hourly");
+                await this.dailyPriceTextbox.fill("50");
+                await this.hourlyPriceTextbox.fill("30");
+                if (!product.sameSlotAllDays) {
+                    await this.bookingSelect("same_slot_all_days").selectOption("0");
+                    await this.fillInlineDaySlot(1, "10", "35", "11", "35", true);
+
+                } else {
+                    await this.bookingSelect("same_slot_all_days").selectOption("1");
+                    await this.addSlotsButton.click();
+                    await this.fillTimeTextbox("From", 0, "10", "20");
+                    await this.fillTimeTextbox("To", 0, "11", "20");
+                    await this.escapeTarget.press("Escape");
+                    await this.modalSaveButton.click();
+                }
+            }
+
+        }
+
+        else {
+            await this.bookingSelect("available_every_week").selectOption("1");
+
+            if (product.rentalType === "daily") {
+                await this.bookingSelect("renting_type").selectOption("daily");
+                await this.dailyPriceTextbox.fill("50");
+                await this.escapeTarget.press("Escape");
+                return product.name;
+
+            }
+            else if (product.rentalType === "hourly") {
+                await this.bookingSelect("renting_type").selectOption("hourly");
+                await this.hourlyPriceTextbox.fill("30");
+                if (product.sameSlotAllDays) {
+                    await this.bookingSelect("same_slot_all_days").selectOption("1");
+                    await this.addSlotsButton.click();
+                    await this.fillTimeTextbox("From", 0, "10", "20");
+                    await this.fillTimeTextbox("To", 0, "11", "20");
+                    await this.escapeTarget.press("Escape");
+                    await this.modalSaveButton.click();
+                    return product.name;
+                }
+                else {
+                    await this.bookingSelect("same_slot_all_days").selectOption("0");
+                    await this.fillInlineDaySlot(1, "10", "20", "11", "20", false);
+                }
+            }
+            else {
+                await this.bookingSelect("renting_type").selectOption("daily_hourly");
+                await this.dailyPriceTextbox.fill("50");
+                await this.hourlyPriceTextbox.fill("30");
+                if (!product.sameSlotAllDays) {
+                    await this.bookingSelect("same_slot_all_days").selectOption("0");
+                    await this.fillInlineDaySlot(1, "10", "35", "11", "35", true);
+
+                } else {
+                    await this.bookingSelect("same_slot_all_days").selectOption("1");
+                    await this.addSlotsButton.click();
+                    await this.fillTimeTextbox("From", 0, "10", "20");
+                    await this.fillTimeTextbox("To", 0, "11", "20");
+                    await this.escapeTarget.press("Escape");
+                    await this.modalSaveButton.click();
+                }
+            }
+
+        }
+
+    }
     async navigateToBooking(credential: object) {
         await this.visit('admin/sales/bookings')
 

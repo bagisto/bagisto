@@ -22,5 +22,6 @@ export interface BaseProduct {
     tableType?: "per_guest" | "per_table";
     sameSlotAllDays?: boolean;
     availableEveryWeek?: boolean;
+    numberOfTickets?: number;
 
 }

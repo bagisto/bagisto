@@ -112,6 +112,10 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator('label.icon-uncheck');
     }
 
+    get eventTicket(){
+        return this.page.locator('div.place-items-end>div.flex>span.icon-plus[aria-label="Increase Quantity"]')
+    }
+
     /**
      * Search for product by name
      */
