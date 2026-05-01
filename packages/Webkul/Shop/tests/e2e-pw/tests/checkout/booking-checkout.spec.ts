@@ -24,10 +24,11 @@ test.describe("booking product checkout flow @smoke", () => {
             });
 
             test("should allow customer to complete checkout for one booking for many days", async ({ shopPage }) => {
-                await loginAsCustomer(shopPage);
+                const customer = await loginAsCustomer(shopPage);
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
-                await checkout.checkout("12");
+                const id = await checkout.checkout("12");
+                await checkout.verifyduration(customer, id, false)
             });
         });
 
@@ -53,6 +54,7 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.checkout('10');
+                await checkout.verifyduration(customer, id, true)
 
             });
         });
@@ -83,6 +85,7 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.checkout('10');
+                await checkout.verifyduration(customer, id, true)
 
             });
         })
@@ -110,6 +113,7 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.checkout('10');
+                await checkout.verifyduration(customer, id, true)
 
             });
         })
@@ -137,6 +141,7 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.checkout('10');
+                await checkout.verifyduration(customer, id, true)
 
             });
         })
@@ -164,6 +169,7 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.checkout('10');
+                await checkout.verifyduration(customer, id, true)
 
             });
         })
@@ -195,6 +201,8 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.checkout('12', 1)
+                await checkout.verifyduration(customer, id, false)
+
 
             });
 
@@ -225,6 +233,8 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.checkout('12', 2);
+                await checkout.verifyduration(customer, id, false)
+
 
             });
 
@@ -257,7 +267,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalCheckoutDaily();
-                console.log("order id:", id)
 
             });
         })
@@ -282,6 +291,13 @@ test.describe("booking product checkout flow @smoke", () => {
 
 
             })
+            test("should allow customer to complete checkout", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.rentalCheckoutDaily();
+
+            });
 
         })
 
@@ -308,176 +324,488 @@ test.describe("booking product checkout flow @smoke", () => {
                 const customer = await loginAsCustomer(shopPage);
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
-                await checkout.rentalCheckoutHourly('10');
+                const id = await checkout.rentalCheckoutHourly('10');
+                // await checkout.verifyduration(customer, id, true)
+
 
             });
         })
-    })
 
 
-    test.describe("Rental booking product for hourly basis with available every week and not same slot all days", () => {
-        test("should create rental booking product for hourly basis with available every week and not same slot all days", async ({ adminPage }) => {
-            const productCreation = new ProductCreation(adminPage);
-            await productCreation.createProduct({
-                type: "booking",
-                bookingType: "rental",
-                availableEveryWeek: true,
-                sku: `SKU-${Date.now()}`,
-                name: `rental-hourly-${Date.now()}`,
-                shortDescription: "Short desc",
-                description: "Full desc",
-                price: 199,
-                weight: 10,
-                inventory: 100,
-                rentalType: "hourly",
-                sameSlotAllDays: false
+
+        test.describe("Rental booking product for hourly basis with available every week and not same slot all days", () => {
+            test("should create rental booking product for hourly basis with available every week and not same slot all days", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "rental",
+                    availableEveryWeek: true,
+                    sku: `SKU-${Date.now()}`,
+                    name: `rental-hourly-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                    rentalType: "hourly",
+                    sameSlotAllDays: false
+                });
+            });
+
+            test("should allow customer to complete checkout ", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.rentalCheckoutHourly('10');
+                // await checkout.verifyduration(customer, id, true)
+
+
+
+
+            });
+        })
+
+
+        test.describe("Rental booking product for hourly basis without available every week and same slot all days", () => {
+            test("should create rental booking product for hourly basis without available every week and same slot all days", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "rental",
+                    availableEveryWeek: false,
+                    sku: `SKU-${Date.now()}`,
+                    name: `rental-hourly-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                    rentalType: "hourly",
+                    sameSlotAllDays: true
+                });
+            });
+
+            test("should allow customer to complete checkout ", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.rentalCheckoutHourly('10');
+                // await checkout.verifyduration(customer, id, true)
+
+
+            });
+
+        })
+
+        test.describe("Rental booking product for hourly basis without available every week and not same slot all days", () => {
+            test("should create rental booking product for hourly basis without available every week and not same slot all days", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "rental",
+                    availableEveryWeek: false,
+                    sku: `SKU-${Date.now()}`,
+                    name: `rental-hourly-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                    rentalType: "hourly",
+                    sameSlotAllDays: false
+                });
+            });
+
+            test("should allow customer to complete checkout ", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.rentalCheckoutHourly('10');
+                // await checkout.verifyduration(customer, id, true)
+
+
+            });
+
+        })
+
+        test.describe("Rental booking product for hourly and daily basis with available every week and same slot all days", () => {
+            test("should create rental booking product for hourly and daily basis with available every week and same slot all days", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "rental",
+                    availableEveryWeek: true,
+                    sku: `SKU-${Date.now()}`,
+                    name: `rental-both-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                    rentalType: "both",
+                    sameSlotAllDays: true
+                });
+            });
+
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.rentalcheckoutHourlyDaily(true, '10');
+                // await checkout.verifyduration(customer, id, true)
+
+
+            });
+            test("should allow customer to complete checkout for daily", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                await checkout.rentalcheckoutHourlyDaily(false);
+
+
+            });
+        });
+        test.describe("Rental booking product for hourly and daily basis with available every week and not same slot all days", () => {
+            test("should create rental booking product for daily and hourly basis with available every week not same slot all days", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "rental",
+                    availableEveryWeek: true,
+                    sku: `SKU-${Date.now()}`,
+                    name: `rental-both-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                    rentalType: "both",
+                    sameSlotAllDays: false
+                });
+            });
+
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.rentalcheckoutHourlyDaily(true, '10');
+                // await checkout.verifyduration(customer, id, true)
+
+            });
+            test("should allow customer to complete checkout for daily", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                await checkout.rentalcheckoutHourlyDaily(false);
+
             });
         });
 
-        test("should allow customer to complete checkout ", async ({ shopPage }) => {
-            const customer = await loginAsCustomer(shopPage);
-            await addAddress(shopPage);
-            const checkout = new BookingProductCheckout(shopPage);
-            await checkout.rentalCheckoutHourly('10');
+        test.describe("Rental booking product for hourly and daily basis with not available every week and same slot all days", () => {
+            test("should create rental booking product for daily and hourly basis with not available every week and same slot all days", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "rental",
+                    availableEveryWeek: false,
+                    sku: `SKU-${Date.now()}`,
+                    name: `rental-both-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                    rentalType: "both",
+                    sameSlotAllDays: true
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.rentalcheckoutHourlyDaily(true, '10');
+                // await checkout.verifyduration(customer, id, true)
 
+
+            });
+            test("should allow customer to complete checkout for daily", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                await checkout.rentalcheckoutHourlyDaily(false);
+
+
+            });
+        });
+
+        test.describe("Rental booking product for hourly and daily basis with not available every week and not same slot all days", () => {
+            test("should create rental booking product for daily and hourly basis with not available every week and not same slot all days", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "rental",
+                    availableEveryWeek: false,
+                    sku: `SKU-${Date.now()}`,
+                    name: `rental-both-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                    rentalType: "both",
+                    sameSlotAllDays: false
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.rentalcheckoutHourlyDaily(true, '10');
+                // await checkout.verifyduration(customer, id, true)
+
+
+            });
+            test("should allow customer to complete checkout for daily", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                await checkout.rentalcheckoutHourlyDaily(false);
+
+            });
         });
     })
 
+    test.describe('Table Booking product', () => {
+        test.describe("per_guest | every week | same slot all days", () => {
+            test("should create table booking product", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "table",
+                    tableType: "per_guest",
+                    availableEveryWeek: true,
+                    sameSlotAllDays: true,
+                    sku: `SKU-${Date.now()}`,
+                    name: `table-per-guest-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.table_checkout(false, '10');
+                await checkout.verifyduration(customer, id, true)
+
+
+            });
+        });
+
+        test.describe("per_guest | every week | different slots", () => {
+            test("should create table booking product", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "table",
+                    tableType: "per_guest",
+                    availableEveryWeek: true,
+                    sameSlotAllDays: false,
+                    sku: `SKU-${Date.now()}`,
+                    name: `table-per-guest-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                });
+            });
+            test("should allow customer to complete checkout for ", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.table_checkout(false, '10');
+                await checkout.verifyduration(customer, id, true)
+
+
+            });
+        });
+
+        test.describe("per_guest | date range | same slot all days", () => {
+            test("should create table booking product", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "table",
+                    tableType: "per_guest",
+                    availableEveryWeek: false,
+                    sameSlotAllDays: true,
+                    sku: `SKU-${Date.now()}`,
+                    name: `table-per-guest-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.table_checkout(false, '10');
+                await checkout.verifyduration(customer, id, true)
+
+
+            });
+        });
+
+        test.describe("per_guest | date range | different slots", () => {
+            test("should create table booking product", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "table",
+                    tableType: "per_guest",
+                    availableEveryWeek: false,
+                    sameSlotAllDays: false,
+                    sku: `SKU-${Date.now()}`,
+                    name: `table-per-guest-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.table_checkout(false, '10');
+                await checkout.verifyduration(customer, id, true)
+
+
+            });
+        });
+        test.describe("per_table | every week | same slot all days", () => {
+            test("should create table booking product", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "table",
+                    tableType: "per_table",
+                    availableEveryWeek: true,
+                    sameSlotAllDays: true,
+                    sku: `SKU-${Date.now()}`,
+                    name: `table-per-table-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.table_checkout(true, '10');
+                await checkout.verifyduration(customer, id, true)
+
+
+            });
+        });
+
+        test.describe("per_table | every week | different slots", () => {
+            test("should create table booking product", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "table",
+                    tableType: "per_table",
+                    availableEveryWeek: true,
+                    sameSlotAllDays: false,
+                    sku: `SKU-${Date.now()}`,
+                    name: `table-per-table-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.table_checkout(true, '10');
+                await checkout.verifyduration(customer, id, true)
+
+
+            });
+        });
+
+        test.describe("per_table | date range | same slot all days", () => {
+            test("should create table booking product", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "table",
+                    tableType: "per_table",
+                    availableEveryWeek: false,
+                    sameSlotAllDays: true,
+                    sku: `SKU-${Date.now()}`,
+                    name: `table-per-table-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.table_checkout(true, '10');
+                await checkout.verifyduration(customer, id, true)
+
+
+            });
+        });
+
+        test.describe("per_table | date range | different slots", () => {
+            test("should create table booking product", async ({ adminPage }) => {
+                const productCreation = new ProductCreation(adminPage);
+                await productCreation.createProduct({
+                    type: "booking",
+                    bookingType: "table",
+                    tableType: "per_table",
+                    availableEveryWeek: false,
+                    sameSlotAllDays: false,
+                    sku: `SKU-${Date.now()}`,
+                    name: `table-per-table-${Date.now()}`,
+                    shortDescription: "Short desc",
+                    description: "Full desc",
+                    price: 199,
+                    weight: 10,
+                    inventory: 100,
+                });
+            });
+            test("should allow customer to complete checkout for hourly", async ({ shopPage }) => {
+                const customer = await loginAsCustomer(shopPage);
+                await addAddress(shopPage);
+                const checkout = new BookingProductCheckout(shopPage);
+                const id = await checkout.table_checkout(true, '10');
+                await checkout.verifyduration(customer, id, true)
+
+            });
+        });
+
+
+    })
 })
-
-test.describe("Rental booking product for hourly basis without available every week and same slot all days", () => {
-    test("should create rental booking product for hourly basis without available every week and same slot all days", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
-        await productCreation.createProduct({
-            type: "booking",
-            bookingType: "rental",
-            availableEveryWeek: false,
-            sku: `SKU-${Date.now()}`,
-            name: `rental-hourly-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 10,
-            inventory: 100,
-            rentalType: "hourly",
-            sameSlotAllDays: true
-        });
-    });
-
-    test("should allow customer to complete checkout ", async ({ shopPage }) => {
-        const customer = await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const checkout = new BookingProductCheckout(shopPage);
-        await checkout.rentalCheckoutHourly('10');
-
-    });
-
-})
-
-test.describe("Rental booking product for hourly basis without available every week and not same slot all days", () => {
-    test("should create rental booking product for hourly basis without available every week and not same slot all days", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
-        await productCreation.createProduct({
-            type: "booking",
-            bookingType: "rental",
-            availableEveryWeek: false,
-            sku: `SKU-${Date.now()}`,
-            name: `rental-hourly-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 10,
-            inventory: 100,
-            rentalType: "hourly",
-            sameSlotAllDays: false
-        });
-    });
-
-    test("should allow customer to complete checkout ", async ({ shopPage }) => {
-        const customer = await loginAsCustomer(shopPage);
-        await addAddress(shopPage);
-        const checkout = new BookingProductCheckout(shopPage);
-        await checkout.rentalCheckoutHourly('10');
-
-    });
-
-})
-
-test.describe("Rental booking product for hourly and daily basis with available every week and same slot all days", () => {
-    test("should create rental booking product for hourly and daily basis with available every week and same slot all days", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
-        await productCreation.createProduct({
-            type: "booking",
-            bookingType: "rental",
-            availableEveryWeek: true,
-            sku: `SKU-${Date.now()}`,
-            name: `rental-both-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 10,
-            inventory: 100,
-            rentalType: "both",
-            sameSlotAllDays: true
-        });
-    });
-});
-test.describe("Rental booking product for hourly and daily basis with available every week and not same slot all days", () => {
-    test("should create rental booking product for daily and hourly basis with available every week not same slot all days", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
-        await productCreation.createProduct({
-            type: "booking",
-            bookingType: "rental",
-            availableEveryWeek: true,
-            sku: `SKU-${Date.now()}`,
-            name: `rental-both-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 10,
-            inventory: 100,
-            rentalType: "both",
-            sameSlotAllDays: false
-        });
-    });
-});
-
-test.describe("Rental booking product for hourly and daily basis with not available every week and same slot all days", () => {
-    test("should create rental booking product for daily and hourly basis with not available every week and same slot all days", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
-        await productCreation.createProduct({
-            type: "booking",
-            bookingType: "rental",
-            availableEveryWeek: false,
-            sku: `SKU-${Date.now()}`,
-            name: `rental-both-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 10,
-            inventory: 100,
-            rentalType: "both",
-            sameSlotAllDays: true
-        });
-    });
-});
-
-test.describe("Rental booking product for hourly and daily basis with not available every week and not same slot all days", () => {
-    test("should create rental booking product for daily and hourly basis with not available every week and not same slot all days", async ({ adminPage }) => {
-        const productCreation = new ProductCreation(adminPage);
-        await productCreation.createProduct({
-            type: "booking",
-            bookingType: "rental",
-            availableEveryWeek: false,
-            sku: `SKU-${Date.now()}`,
-            name: `rental-both-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 10,
-            inventory: 100,
-            rentalType: "both",
-            sameSlotAllDays: false
-        });
-    });
-});

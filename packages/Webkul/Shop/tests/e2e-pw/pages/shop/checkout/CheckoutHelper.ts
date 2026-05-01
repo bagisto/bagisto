@@ -112,8 +112,20 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator('label.icon-uncheck');
     }
 
-    get eventTicket(){
+    get eventTicket() {
         return this.page.locator('div.place-items-end>div.flex>span.icon-plus[aria-label="Increase Quantity"]')
+    }
+
+    get hourlyRadio() {
+        return this.page.locator('span.flex>label[for="booking[hourly]"].icon-radio-unselect')
+    }
+
+    get dailyRadio() {
+        return this.page.locator('span.flex>label[for="booking[daily]"].icon-radio-unselect')
+    }
+
+    getMinimizebtn(){
+        return this.page.locator('a.phpdebugbar-minimize-btn')
     }
 
     /**
@@ -144,7 +156,7 @@ export class CheckoutHelper extends BasePage {
     async placeOrder() {
         await this.page.waitForTimeout(2000);
         await this.clickPlaceOrderButton.click();
-        await this.page.waitForTimeout(8000);
+        await this.page.waitForTimeout(5000);
     }
 
     /**
