@@ -39,6 +39,7 @@ test.describe("cart rules", () => {
                 attribute: "product|color",
                 operator: "==",
                 optionSelect: "1",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -69,6 +70,7 @@ test.describe("cart rules", () => {
                 attribute: "product|color",
                 operator: "!=",
                 optionSelect: "1",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");

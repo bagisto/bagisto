@@ -44,6 +44,7 @@ test.describe("cart rules", () => {
                 attribute: "product|new",
                 operator: "==",
                 optionSelect: "1",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon2("yes");
@@ -60,6 +61,7 @@ test.describe("cart rules", () => {
                 attribute: "product|new",
                 operator: "!=",
                 optionSelect: "0",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon2("yes");

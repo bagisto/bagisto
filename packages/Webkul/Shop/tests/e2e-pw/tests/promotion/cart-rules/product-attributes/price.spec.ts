@@ -41,6 +41,7 @@ test.describe("cart rules", () => {
                 attribute: "product|price",
                 operator: "==",
                 value: "199",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon2("yes");
@@ -57,6 +58,7 @@ test.describe("cart rules", () => {
                 attribute: "product|price",
                 operator: "!=",
                 value: "100",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon2("yes");
@@ -73,9 +75,10 @@ test.describe("cart rules", () => {
                 attribute: "product|price",
                 operator: ">=",
                 value: "199",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when price condition is -> equals or less than", async ({
@@ -89,9 +92,10 @@ test.describe("cart rules", () => {
                 attribute: "product|price",
                 operator: "<=",
                 value: "200",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when price condition is -> greater than", async ({
@@ -105,9 +109,10 @@ test.describe("cart rules", () => {
                 attribute: "product|price",
                 operator: ">",
                 value: "100",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when price condition is -> less than", async ({
@@ -121,6 +126,7 @@ test.describe("cart rules", () => {
                 attribute: "product|price",
                 operator: "<",
                 value: "200",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();

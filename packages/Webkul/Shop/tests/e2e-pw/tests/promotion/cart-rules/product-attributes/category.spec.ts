@@ -42,6 +42,7 @@ test.describe("cart rules", () => {
                 attribute: "product|category_ids",
                 operator: "{}",
                 checkboxSelect: "Mens",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -83,6 +84,7 @@ test.describe("cart rules", () => {
                 attribute: "product|category_ids",
                 operator: "!{}",
                 checkboxSelect: "Mens",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");

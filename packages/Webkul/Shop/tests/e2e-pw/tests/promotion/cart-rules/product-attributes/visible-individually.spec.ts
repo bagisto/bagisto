@@ -37,6 +37,7 @@ test.describe("cart rules", () => {
                 attribute: "product|visible_individually",
                 operator: "==",
                 optionSelect: "1",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
@@ -55,6 +56,7 @@ test.describe("cart rules", () => {
                 attribute: "product|visible_individually",
                 operator: "!=",
                 optionSelect: "0",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();

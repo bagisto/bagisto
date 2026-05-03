@@ -38,6 +38,7 @@ test.describe("cart rules", () => {
                 attribute: "product|special_price",
                 operator: "==",
                 value: "150",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -68,6 +69,7 @@ test.describe("cart rules", () => {
                 attribute: "product|special_price",
                 operator: "!=",
                 value: "100",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -98,6 +100,7 @@ test.describe("cart rules", () => {
                 attribute: "product|special_price",
                 operator: ">=",
                 value: "150",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -128,6 +131,7 @@ test.describe("cart rules", () => {
                 attribute: "product|special_price",
                 operator: "<=",
                 value: "200",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -158,6 +162,7 @@ test.describe("cart rules", () => {
                 attribute: "product|special_price",
                 operator: ">",
                 value: "100",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -187,6 +192,7 @@ test.describe("cart rules", () => {
                 attribute: "product|special_price",
                 operator: "<",
                 value: "200",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");

@@ -44,6 +44,7 @@ test.describe("cart rules", () => {
                 attribute: "product|sku",
                 operator: "==",
                 value: generatedSku,
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
@@ -60,6 +61,7 @@ test.describe("cart rules", () => {
                 attribute: "product|sku",
                 operator: "!=",
                 value: "sku-123",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
@@ -76,6 +78,7 @@ test.describe("cart rules", () => {
                 attribute: "product|sku",
                 operator: "{}",
                 value: generatedSku,
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
@@ -92,6 +95,7 @@ test.describe("cart rules", () => {
                 attribute: "product|sku",
                 operator: "!{}",
                 value: "example",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();

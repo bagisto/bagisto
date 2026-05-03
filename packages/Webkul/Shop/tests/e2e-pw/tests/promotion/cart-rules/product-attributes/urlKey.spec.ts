@@ -44,6 +44,7 @@ test.describe("cart rules", () => {
                 attribute: "product|url_key",
                 operator: "==",
                 value: generatedName.toLowerCase(),
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
@@ -60,6 +61,7 @@ test.describe("cart rules", () => {
                 attribute: "product|url_key",
                 operator: "!=",
                 value: "simple",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
@@ -76,6 +78,7 @@ test.describe("cart rules", () => {
                 attribute: "product|url_key",
                 operator: "{}",
                 value: generatedName.toLowerCase(),
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();
@@ -92,6 +95,7 @@ test.describe("cart rules", () => {
                 attribute: "product|url_key",
                 operator: "!{}",
                 value: "example",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon();

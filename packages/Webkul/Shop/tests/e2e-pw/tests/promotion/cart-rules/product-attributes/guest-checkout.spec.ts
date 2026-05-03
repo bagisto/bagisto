@@ -43,6 +43,7 @@ test.describe("cart rules", () => {
                 attribute: "product|guest_checkout",
                 operator: "==",
                 optionSelect: "1",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await loginAsCustomer(page);
@@ -60,6 +61,7 @@ test.describe("cart rules", () => {
                 attribute: "product|guest_checkout",
                 operator: "!=",
                 optionSelect: "0",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await loginAsCustomer(page);

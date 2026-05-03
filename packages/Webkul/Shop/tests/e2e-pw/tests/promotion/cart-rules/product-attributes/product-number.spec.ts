@@ -44,6 +44,7 @@ test.describe("cart rules", () => {
                 attribute: "product|product_number",
                 operator: "==",
                 value: generatedProductNumber,
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -77,6 +78,7 @@ test.describe("cart rules", () => {
                 attribute: "product|product_number",
                 operator: "!=",
                 value: "123456",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -110,6 +112,7 @@ test.describe("cart rules", () => {
                 attribute: "product|product_number",
                 operator: "{}",
                 value: generatedProductNumber,
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");
@@ -143,6 +146,7 @@ test.describe("cart rules", () => {
                 attribute: "product|product_number",
                 operator: "!{}",
                 value: "123456",
+                couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
             await page.goto("admin/catalog/products");

@@ -133,6 +133,9 @@ export class RuleApplyPage extends BasePage {
         await this.applyCouponButton.click();
         await this.couponInput.fill("TEST50");
         await this.applyButton.click();
+        await expect(
+            this.page.getByText("Coupon code applied successfully.").first(),
+        ).toBeVisible();
     }
     async applyCoupon2(allow: string) {
         if (allow == "yes") {
@@ -150,6 +153,9 @@ export class RuleApplyPage extends BasePage {
         await this.applyCouponButton.click();
         await this.couponInput.fill("TEST50");
         await this.applyButton.click();
+        await expect(
+            this.page.getByText("Coupon code applied successfully.").first(),
+        ).toBeVisible();
     }
 
     async calculateDiscountedAmmount(
