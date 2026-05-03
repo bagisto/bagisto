@@ -20,10 +20,13 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach("should delete the created product and rule", async ({ adminPage }) => {
-    const ruleDeletePage = new RuleDeletePage(adminPage);
-    await ruleDeletePage.deleteCatalogRuleAndProduct();
-});
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const ruleDeletePage = new RuleDeletePage(adminPage);
+        await ruleDeletePage.deleteCatalogRuleAndProduct();
+    },
+);
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
@@ -34,10 +37,11 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|color",
                 operator: "==",
                 optionSelect: "1",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
@@ -46,7 +50,10 @@ test.describe("catalog rules", () => {
                 .nth(1)
                 .click();
             await page.waitForLoadState("networkidle");
-            await page.locator('select[name="color"]').first().selectOption("1");
+            await page
+                .locator('select[name="color"]')
+                .first()
+                .selectOption("1");
             await page
                 .locator('button:has-text("Save Product")')
                 .first()
@@ -54,7 +61,7 @@ test.describe("catalog rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when color condition is -> is not equal to", async ({
@@ -64,10 +71,11 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|color",
                 operator: "!=",
                 optionSelect: "1",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
@@ -76,7 +84,10 @@ test.describe("catalog rules", () => {
                 .nth(1)
                 .click();
             await page.waitForLoadState("networkidle");
-            await page.locator('select[name="color"]').first().selectOption("2");
+            await page
+                .locator('select[name="color"]')
+                .first()
+                .selectOption("2");
             await page
                 .locator('button:has-text("Save Product")')
                 .first()
@@ -84,7 +95,7 @@ test.describe("catalog rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
     });
 });

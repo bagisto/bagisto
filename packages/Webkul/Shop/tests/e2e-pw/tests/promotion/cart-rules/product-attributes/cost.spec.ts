@@ -57,7 +57,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when cost condition is -> is not equal to", async ({
@@ -87,7 +87,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when cost condition is -> equals or greater then", async ({
@@ -117,7 +117,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when cost condition is -> equals or less than", async ({
@@ -147,7 +147,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when cost condition is -> greater than", async ({
@@ -177,7 +177,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when cost condition is -> less than", async ({
@@ -207,7 +207,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
     });
 });

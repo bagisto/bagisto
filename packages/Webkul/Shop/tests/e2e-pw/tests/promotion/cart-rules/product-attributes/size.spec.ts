@@ -57,7 +57,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when size condition is -> is not equal to", async ({
@@ -87,7 +87,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
     });
 });

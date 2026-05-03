@@ -44,7 +44,7 @@ test.describe("cart rules", () => {
                 value: "1",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon2("yes");
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
@@ -64,7 +64,7 @@ test.describe("cart rules", () => {
                 value: "100",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon2("yes");
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
@@ -81,10 +81,10 @@ test.describe("cart rules", () => {
             await ruleCreatePage.addCondition({
                 attribute: "cart_item|quantity",
                 operator: ">=",
-                value: "2",
+                value: "1",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon(2);
+            await ruleApplyPage.applyCoupon2("yes");
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
@@ -104,7 +104,7 @@ test.describe("cart rules", () => {
                 value: "1",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon2("yes");
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
@@ -124,7 +124,7 @@ test.describe("cart rules", () => {
                 value: "1",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon(3);
+            await ruleApplyPage.applyCoupon2("yes");
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),
@@ -144,7 +144,7 @@ test.describe("cart rules", () => {
                 value: "2",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon2("yes");
 
             await expect(
                 page.getByText("Coupon code applied successfully.").first(),

@@ -37,10 +37,11 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|price",
                 operator: "==",
                 value: "199",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
@@ -57,7 +58,7 @@ test.describe("catalog rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when cost condition is -> is not equal to", async ({
@@ -67,10 +68,11 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|price",
                 operator: "!=",
                 value: "100",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
@@ -87,7 +89,7 @@ test.describe("catalog rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when cost condition is -> equals or greater then", async ({
@@ -97,10 +99,11 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|price",
                 operator: ">=",
                 value: "199",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
@@ -117,7 +120,7 @@ test.describe("catalog rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when cost condition is -> equals or less than", async ({
@@ -127,10 +130,11 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|price",
                 operator: "<=",
                 value: "200",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
@@ -147,7 +151,7 @@ test.describe("catalog rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when cost condition is -> greater than", async ({
@@ -157,10 +161,11 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|price",
                 operator: ">",
                 value: "195",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
@@ -177,7 +182,7 @@ test.describe("catalog rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when cost condition is -> less than", async ({
@@ -187,10 +192,11 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|price",
                 operator: "<",
                 value: "200",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
@@ -207,7 +213,7 @@ test.describe("catalog rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
     });
 });

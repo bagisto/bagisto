@@ -69,7 +69,7 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
 
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when category of product condition is -> does not contains", async ({
@@ -110,7 +110,7 @@ test.describe("cart rules", () => {
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
 
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
     });
 });

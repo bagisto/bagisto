@@ -61,13 +61,14 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|sku",
                 operator: "==",
                 value: generatedSku,
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when sku of product condition is -> is not equal to", async ({
@@ -77,13 +78,14 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|sku",
                 operator: "!=",
                 value: "sku-123",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when sku of product condition is -> contains", async ({
@@ -93,13 +95,14 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|sku",
                 operator: "{}",
                 value: generatedSku,
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when sku of product condition is -> does not contain", async ({
@@ -109,13 +112,14 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|sku",
                 operator: "!{}",
                 value: "example",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
     });
 });

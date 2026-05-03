@@ -87,13 +87,14 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|attribute_family_id",
                 operator: "==",
                 optionSelect: "1",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
 
         test("should apply coupon when attribute family of product condition is -> is not equal to", async ({
@@ -103,13 +104,14 @@ test.describe("catalog rules", () => {
             const ruleApplyPage = new RuleApplyPage(page);
             await loginAsAdmin(page);
             await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
+            const discountValue = await ruleCreatePage.addCondition({
                 attribute: "product|attribute_family_id",
                 operator: "!=",
                 optionSelect: "2",
+                couponType: "percentage",
             });
             await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
+            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
         });
     });
 });

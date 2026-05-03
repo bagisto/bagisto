@@ -3,27 +3,34 @@ import { generateName } from "../../../../utils/faker";
 import { BasePage } from "../../../BasePage";
 
 export class RuleCreatePage extends BasePage {
-
     constructor(page: Page) {
         super(page);
     }
 
     // Cart Rule
     get createCartRuleButton() {
-        return this.page.locator('a.primary-button:has-text("Create Cart Rule")');
+        return this.page.locator(
+            'a.primary-button:has-text("Create Cart Rule")',
+        );
     }
 
     get cartRuleForm() {
-        return this.page.locator('form[action*="/promotions/cart-rules/create"]');
+        return this.page.locator(
+            'form[action*="/promotions/cart-rules/create"]',
+        );
     }
 
     // Catalog Rule
     get createCatalogRuleButton() {
-        return this.page.locator('a.primary-button:has-text("Create Catalog Rule")');
+        return this.page.locator(
+            'a.primary-button:has-text("Create Catalog Rule")',
+        );
     }
 
     get catalogRuleButton() {
-        return this.page.locator('button.primary-button:has-text("Save Catalog Rule")');
+        return this.page.locator(
+            'button.primary-button:has-text("Save Catalog Rule")',
+        );
     }
 
     // General
@@ -57,15 +64,21 @@ export class RuleCreatePage extends BasePage {
 
     // Conditions
     get addConditionButton() {
-        return this.page.locator('div.secondary-button:has-text("Add Condition")');
+        return this.page.locator(
+            'div.secondary-button:has-text("Add Condition")',
+        );
     }
 
     get conditionAttributeSelect() {
-        return this.page.locator('select[id="conditions\\[0\\]\\[attribute\\]"]');
+        return this.page.locator(
+            'select[id="conditions\\[0\\]\\[attribute\\]"]',
+        );
     }
 
     get conditionOperatorSelect() {
-        return this.page.locator('select[name="conditions\\[0\\]\\[operator\\]"]');
+        return this.page.locator(
+            'select[name="conditions\\[0\\]\\[operator\\]"]',
+        );
     }
 
     get conditionValueInput() {
@@ -108,13 +121,15 @@ export class RuleCreatePage extends BasePage {
 
     // Save
     get saveCartRuleButton() {
-        return this.page.locator('button.primary-button:has-text("Save Cart Rule")');
+        return this.page.locator(
+            'button.primary-button:has-text("Save Cart Rule")',
+        );
     }
 
     get successMessage() {
         return this.page.locator("#app");
     }
-    
+
     private async fillGeneralCartDetails() {
         await this.createCartRuleButton.waitFor();
         await this.createCartRuleButton.click();
@@ -140,13 +155,18 @@ export class RuleCreatePage extends BasePage {
         value,
         optionSelect,
         checkboxSelect,
+        couponType,
     }: {
         attribute: string;
         operator: string;
         value?: string;
         optionSelect?: string;
         checkboxSelect?: string;
-    }) {
+        couponType?: string;
+    }): Promise<number | undefined> {
+        const discountValue = Math.floor(Math.random() * 1000);
+        const discountPercentage = Math.floor(Math.random() * 100);
+
         await this.addConditionButton.click();
         await this.conditionAttributeSelect.waitFor();
         await this.conditionAttributeSelect.selectOption(attribute);
@@ -168,9 +188,19 @@ export class RuleCreatePage extends BasePage {
                 await label.click();
             }
         }
+        if (couponType == "fixed") {
+            await this.actionTypeSelect.selectOption("by_fixed");
+            await this.discountAmountInput.fill(discountValue.toString());
 
-        await this.actionTypeSelect.selectOption("by_percent");
-        await this.discountAmountInput.fill("50");
+            return discountValue;
+        }
+
+        if (couponType == "percentage") {
+            await this.actionTypeSelect.selectOption("by_percent");
+            await this.discountAmountInput.fill(discountPercentage.toString());
+
+            return discountPercentage;
+        }
     }
 
     private async configureSettings() {

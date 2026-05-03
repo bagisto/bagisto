@@ -43,7 +43,7 @@ test.describe("cart rules", () => {
                 value: "199",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when price condition is -> is not equal to", async ({
@@ -59,7 +59,7 @@ test.describe("cart rules", () => {
                 value: "100",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when price condition is -> equals or greater then", async ({

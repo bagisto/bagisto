@@ -95,7 +95,7 @@ test.describe("cart rules", () => {
                 optionSelect: "1",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when attribute family of product condition is -> is not equal to", async ({
@@ -111,7 +111,7 @@ test.describe("cart rules", () => {
                 optionSelect: "2",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
     });
 });
