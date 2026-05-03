@@ -121,7 +121,7 @@ test.describe("cart rules", () => {
             await ruleCreatePage.addCondition({
                 attribute: "cart_item|quantity",
                 operator: ">",
-                value: "1",
+                value: "0",
             });
             await ruleCreatePage.saveCartRule();
             await ruleApplyPage.applyCoupon2("yes");

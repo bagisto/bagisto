@@ -6,6 +6,7 @@ import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/Rule
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
+const productPrice = Math.floor(Math.random() * 1000);
 test.beforeEach("should create simple product", async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
@@ -15,7 +16,7 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
         name: `Simple-${Date.now()}`,
         shortDescription: "Short desc",
         description: "Full desc",
-        price: Math.floor(Math.random() * 1000),
+        price: productPrice,
         weight: 1,
         inventory: 100,
     });
@@ -41,7 +42,7 @@ test.describe("cart rules", () => {
             const discountValue = await ruleCreatePage.addCondition({
                 attribute: "cart|base_sub_total",
                 operator: "==",
-                value: "199",
+                value: productPrice.toString(),
                 couponType: "fixed",
             });
             if (discountValue === undefined) {
@@ -85,7 +86,7 @@ test.describe("cart rules", () => {
             const discountValue = await ruleCreatePage.addCondition({
                 attribute: "cart|base_sub_total",
                 operator: "==",
-                value: "199",
+                value: productPrice.toString(),
                 couponType: "percentage",
             });
             if (discountValue === undefined) {
@@ -305,8 +306,8 @@ test.describe("cart rules", () => {
             const discountValue = await ruleCreatePage.addCondition({
                 attribute: "cart|base_sub_total",
                 operator: ">=",
-                value: "199",
-                couponType: "fixed",
+                value: productPrice.toString(),
+                couponType: "percentage",
             });
             if (discountValue === undefined) {
                 throw new Error("Discount value was not created.");
@@ -316,7 +317,7 @@ test.describe("cart rules", () => {
             const discountedAmount =
                 await ruleApplyPage.calculateDiscountedAmmount(
                     discountValue,
-                    "fixed",
+                    "percentage",
                 );
             const grandTotal = Number(discountedAmount.toFixed(2));
             await ruleApplyPage.applyCouponAtCheckout();
@@ -360,7 +361,7 @@ test.describe("cart rules", () => {
             const discountValue = await ruleCreatePage.addCondition({
                 attribute: "cart|base_sub_total",
                 operator: "<=",
-                value: "200",
+                value: productPrice.toString(),
                 couponType: "percentage",
             });
             if (discountValue === undefined) {
@@ -415,7 +416,7 @@ test.describe("cart rules", () => {
             const discountValue = await ruleCreatePage.addCondition({
                 attribute: "cart|base_sub_total",
                 operator: ">",
-                value: "198",
+                value: (productPrice - 1).toString(),
                 couponType: "fixed",
             });
             if (discountValue === undefined) {
@@ -459,7 +460,7 @@ test.describe("cart rules", () => {
             const discountValue = await ruleCreatePage.addCondition({
                 attribute: "cart|base_sub_total",
                 operator: ">",
-                value: "198",
+                value: (productPrice - 1).toString(),
                 couponType: "percentage",
             });
             if (discountValue === undefined) {
@@ -514,7 +515,7 @@ test.describe("cart rules", () => {
             const discountValue = await ruleCreatePage.addCondition({
                 attribute: "cart|base_sub_total",
                 operator: "<",
-                value: "200",
+                value: (productPrice + 1).toString(),
                 couponType: "fixed",
             });
             if (discountValue === undefined) {
@@ -569,7 +570,7 @@ test.describe("cart rules", () => {
             const discountValue = await ruleCreatePage.addCondition({
                 attribute: "cart|base_sub_total",
                 operator: "<",
-                value: "200",
+                value: (productPrice + 1).toString(),
                 couponType: "percentage",
             });
             if (discountValue === undefined) {
