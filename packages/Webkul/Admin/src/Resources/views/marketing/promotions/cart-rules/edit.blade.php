@@ -447,10 +447,10 @@
                                         <x-admin::form.control-group.error control-name="discount_step" />
                                     </x-admin::form.control-group>
 
-                                    <!-- Max Discounted Quantity (hidden for cart_fixed and buy_x_get_y) -->
+                                    <!-- Max Discounted Quantity (shown for by_percent / by_fixed; not relevant for cart_fixed) -->
                                     <x-admin::form.control-group v-else-if="actionType !== 'cart_fixed'">
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.marketing.promotions.cart-rules.edit.maximum-quantity-allowed-to-be-discounted')
+                                            @lang('admin::app.marketing.promotions.cart-rules.edit.maximum-discounted-quantity')
                                         </x-admin::form.control-group.label>
 
                                         <x-admin::form.control-group.control
@@ -458,11 +458,44 @@
                                             id="discount_quantity"
                                             name="discount_quantity"
                                             :value="old('discount_quantity') ?? $cartRule->discount_quantity"
-                                            :label="trans('admin::app.marketing.promotions.cart-rules.edit.maximum-quantity-allowed-to-be-discounted')"
-                                            :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.maximum-quantity-allowed-to-be-discounted')"
+                                            :label="trans('admin::app.marketing.promotions.cart-rules.edit.maximum-discounted-quantity')"
+                                            :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.maximum-discounted-quantity')"
                                         />
 
                                         <x-admin::form.control-group.error control-name="discount_quantity" />
+
+                                        <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.marketing.promotions.cart-rules.edit.maximum-discounted-quantity-info')
+                                        </p>
+                                    </x-admin::form.control-group>
+                                </div>
+                            </div>
+
+                            <!-- Maximum Eligible Quantity (separate row for buy_x_get_y, since the right slot above is taken by Buy X Quantity) -->
+                            <div
+                                class="flex gap-4 max-sm:flex-wrap"
+                                v-if="actionType === 'buy_x_get_y'"
+                            >
+                                <div class="w-full">
+                                    <x-admin::form.control-group>
+                                        <x-admin::form.control-group.label>
+                                            @lang('admin::app.marketing.promotions.cart-rules.edit.maximum-eligible-quantity')
+                                        </x-admin::form.control-group.label>
+
+                                        <x-admin::form.control-group.control
+                                            type="text"
+                                            id="discount_quantity"
+                                            name="discount_quantity"
+                                            :value="old('discount_quantity') ?? $cartRule->discount_quantity"
+                                            :label="trans('admin::app.marketing.promotions.cart-rules.edit.maximum-eligible-quantity')"
+                                            :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.maximum-eligible-quantity')"
+                                        />
+
+                                        <x-admin::form.control-group.error control-name="discount_quantity" />
+
+                                        <p class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300">
+                                            @lang('admin::app.marketing.promotions.cart-rules.edit.maximum-eligible-quantity-info')
+                                        </p>
                                     </x-admin::form.control-group>
                                 </div>
                             </div>
@@ -484,7 +517,7 @@
                                             :value="old('apply_to_shipping') ?? $cartRule->apply_to_shipping"
                                             :label="trans('admin::app.marketing.promotions.cart-rules.edit.apply-to-shipping')"
                                             :placeholder="trans('admin::app.marketing.promotions.cart-rules.edit.apply-to-shipping')"
-                                            ::disabled="actionType == 'cart_fixed'"
+                                            ::disabled="actionType == 'cart_fixed' || actionType == 'buy_x_get_y'"
                                         >
                                             <option
                                                 value="0"
@@ -504,7 +537,7 @@
                                         <x-admin::form.control-group.error control-name="apply_to_shipping" />
 
                                         <p
-                                            v-if="actionType === 'cart_fixed'"
+                                            v-if="actionType === 'cart_fixed' || actionType === 'buy_x_get_y'"
                                             class="mt-1 block text-xs italic leading-5 text-gray-600 dark:text-gray-300"
                                         >
                                             @lang('admin::app.marketing.promotions.cart-rules.edit.apply-to-shipping-disabled-info')
