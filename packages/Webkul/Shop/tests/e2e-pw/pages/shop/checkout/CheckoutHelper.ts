@@ -124,7 +124,7 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator('span.flex>label[for="booking[daily]"].icon-radio-unselect')
     }
 
-    getMinimizebtn(){
+    getMinimizebtn() {
         return this.page.locator('a.phpdebugbar-minimize-btn')
     }
 

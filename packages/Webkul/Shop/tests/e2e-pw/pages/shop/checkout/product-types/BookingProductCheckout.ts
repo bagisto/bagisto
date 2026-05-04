@@ -11,6 +11,7 @@ export class BookingProductCheckout extends CheckoutHelper {
     constructor(page: Page) {
         super(page);
     }
+
     private async selectFirstAvailableDate() {
         const dateInput = this.page.locator('input[name="booking[date]"]');
         await dateInput.click();
@@ -71,8 +72,6 @@ export class BookingProductCheckout extends CheckoutHelper {
         throw new Error("Date not found");
     }
 
-
-
     private async getOrderId() {
         const text = await this.page.locator('p.text-xl:has(.text-blue-700)').nth(0).textContent();
         if (!text) return null;
@@ -90,8 +89,7 @@ export class BookingProductCheckout extends CheckoutHelper {
                 .toContainText('Per Table')
             await expect(this.page.locator('div.grid.gap-2>div>p.text-sm').nth(9))
                 .toContainText('2')
-        }
-        else {
+        } else {
             await expect(this.page.locator('div.grid.gap-2>div>p.text-sm').nth(7))
                 .toContainText('Per Guest')
         }
@@ -107,10 +105,13 @@ export class BookingProductCheckout extends CheckoutHelper {
         await this.page.locator('div.absolute>span.icon-cancel').nth(1).click()
     }
 
-    private async eventCheckout(hour: string, tickets: number) {
+    private async eventCheckout(hour: string, tickets: number, allowCancellation?: boolean) {
         await this.addToCartButton.click();
         if (tickets === 1) {
             await this.eventTicket.nth(0).click()
+        }
+        if (allowCancellation === false) {
+            await this.verifyCancellationNotAllowed()
         }
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.first()).toBeVisible();
@@ -120,10 +121,11 @@ export class BookingProductCheckout extends CheckoutHelper {
         await this.proceedToCheckout();
         await this.choosePaymentMethod.click();
         await this.placeOrder();
-        return await this.getOrderId();
+        const orderId = await this.getOrderId();
+        return orderId
     }
 
-    async rentalCheckoutDaily() {
+    async rentalCheckoutDaily(allowCancellation?: boolean) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         await this.addToCartButton.click();
@@ -132,6 +134,9 @@ export class BookingProductCheckout extends CheckoutHelper {
         await this.page.waitForTimeout(500);
 
         await this.rentalDateSelect(2, 'input[name="booking[date_to]"]');
+        if (allowCancellation === false) {
+            await this.verifyCancellationNotAllowed()
+        }
         await this.addToCartButton.click();
         await expect(this.addCartSuccess.nth(0)).toBeVisible();
         await this.proceedToCheckout();
@@ -139,10 +144,14 @@ export class BookingProductCheckout extends CheckoutHelper {
         await this.placeOrder();
         return await this.getOrderId();
     }
-    async rentalCheckoutHourly(hour: String) {
+
+    async rentalCheckoutHourly(hour: String, allowCancellation?: boolean) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         await this.addToCartButton.click();
+        if (allowCancellation === false) {
+            await this.verifyCancellationNotAllowed()
+        }
         await this.selectFirstAvailableDate();
         await this.selectBookingDateTime();
         await this.selectslot()
@@ -159,10 +168,13 @@ export class BookingProductCheckout extends CheckoutHelper {
         return await this.getOrderId();
     }
 
-    async rentalcheckoutHourlyDaily(hourly: boolean, hour?: string) {
+    async rentalcheckoutHourlyDaily(hourly: boolean, hour?: string, allowCancellation?: boolean) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         await this.addToCartButton.click();
+        if (allowCancellation === false) {
+            await this.verifyCancellationNotAllowed()
+        }
         if (hourly) {
             await this.hourlyRadio.click()
             await this.selectFirstAvailableDate();
@@ -179,7 +191,6 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.choosePaymentMethod.click();
             await this.placeOrder();
             return await this.getOrderId();
-
         } else {
             await this.dailyRadio.click()
 
@@ -199,7 +210,6 @@ export class BookingProductCheckout extends CheckoutHelper {
         }
 
     }
-
 
     private async selectslot() {
         const slotstart = this.page.locator('select[name="booking[slot][from]"]')
@@ -225,10 +235,13 @@ export class BookingProductCheckout extends CheckoutHelper {
         await slotSelect.press("Enter");
     }
 
-    async table_checkout(table: boolean, hour: string) {
+    async table_checkout(table: boolean, hour: string, allowCancellation?: boolean) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         await this.addToCartButton.click();
+        if (allowCancellation === false) {
+            await this.verifyCancellationNotAllowed()
+        }
         await this.selectFirstAvailableDate();
         await this.selectBookingDateTime();
         await this.page.waitForLoadState('networkidle')
@@ -246,18 +259,30 @@ export class BookingProductCheckout extends CheckoutHelper {
 
     }
 
-    /**visit
+    async verifyCancellationNotAllowed(orderId?: string) {
+        if (orderId) {
+            await this.visit(`customer/account/orders/view/${orderId}`)
+            await expect(this.page.getByText(' Booking Items Will Not Be Canceled ').nth(0)).toBeVisible()
+        } else {
+            await expect(this.page.getByText(' Cancellation Not Allowed ').nth(0)).toBeVisible()
+        }
+    }
+
+    /** visit
      * Booking product checkout
      */
-    async checkout(hour?: string, tickets?: number) {
+    async checkout(hour?: string, tickets?: number, allowCancellation?: boolean) {
         const productName = ProductDataManager.readProductData();
         await this.searchProduct(productName);
         if (tickets !== undefined) {
-            await this.eventCheckout(hour!, tickets)
+            return await this.eventCheckout(hour!, tickets, allowCancellation)
         } else {
             await this.addToCartButton.click();
             await this.selectFirstAvailableDate();
             await this.selectBookingDateTime();
+            if (allowCancellation === false) {
+                await this.verifyCancellationNotAllowed()
+            }
             await this.addToCartButton.click();
             await expect(this.addCartSuccess.first()).toBeVisible();
             await this.page.locator('.icon-cart').click();
@@ -325,8 +350,6 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.visit('admin/sales/bookings');
             await this.page.waitForLoadState('networkidle')
 
-
-
             const customerSlot = this.page.locator(`div.slot:has-text('${customer.firstName} ${customer.lastName}')`).nth(0);
 
             for (let i = 0; i < 7; i++) {
@@ -356,6 +379,5 @@ export class BookingProductCheckout extends CheckoutHelper {
             await expect(customerSlot).toBeVisible();
         }
     }
-
 
 }

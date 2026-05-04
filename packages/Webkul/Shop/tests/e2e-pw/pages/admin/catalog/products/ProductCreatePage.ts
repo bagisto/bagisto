@@ -299,7 +299,6 @@ export class ProductCreation extends BasePage {
         return this.page.getByText("Add Tickets");
     }
 
-
     private get ticketNameInput() {
         return this.page.getByRole("textbox", { name: "Name" });
     }
@@ -329,7 +328,6 @@ export class ProductCreation extends BasePage {
     private get fromDaySelect() {
         return this.page.locator('select[name="from_day"]');
     }
-
 
     private bookingInput(name: string) {
         return this.page.locator(`input[name="booking[${name}]"]`);
@@ -452,7 +450,6 @@ export class ProductCreation extends BasePage {
         await this.modalSaveButton.click();
     }
 
-
     private inlineDaySlotTrigger(dayIndex: number) {
         const selector =
             dayIndex === 1
@@ -461,7 +458,6 @@ export class ProductCreation extends BasePage {
 
         return this.page.locator(selector).first();
     }
-
 
     private get dailyPriceTextbox() {
         return this.page.getByRole("textbox", { name: "Daily Price" });
@@ -804,6 +800,9 @@ export class ProductCreation extends BasePage {
         await this.bookingLocationInput.fill(generateLocation());
         await this.bookingAvailableFromInput.fill(formattedAvailableFromDate);
         await this.bookingAvailableToInput.fill(formattedAvailableToDate);
+        if (product.allowCancellation === false) {
+            await this.bookingSelect('allow_cancellation').selectOption('0')
+        }
         await this.bookingInput("qty").fill(product.inventory.toString());
         if (product.defaultBookingType !== "many") {
             await this.addSlotsButton.click();
@@ -879,6 +878,9 @@ export class ProductCreation extends BasePage {
 
         await this.bookingSelect("type").selectOption("appointment");
 
+        if (product.allowCancellation === false) {
+            await this.bookingSelect('allow_cancellation').selectOption('0')
+        }
 
         if (!product.availableEveryWeek) {
             await this.bookingSelect("available_every_week").selectOption("0");
@@ -886,7 +888,6 @@ export class ProductCreation extends BasePage {
             await this.bookingAvailableFromInput.fill(formattedAvailableFromDate);
             await this.bookingAvailableToInput.fill(formattedAvailableToDate);
             await this.bookingInput("qty").fill(product.inventory.toString());
-
 
             if (product.sameSlotAllDays) {
                 await this.bookingSelect("same_slot_all_days").selectOption("1");
@@ -919,7 +920,6 @@ export class ProductCreation extends BasePage {
         } else {
             await this.bookingSelect("available_every_week").selectOption("1");
             await this.bookingInput("qty").fill(product.inventory.toString());
-
 
             if (product.sameSlotAllDays) {
                 await this.bookingSelect("same_slot_all_days").selectOption("1");
@@ -956,6 +956,9 @@ export class ProductCreation extends BasePage {
     private async bookingEvent(product: BaseProduct) {
         await this.bookingSelect("type").selectOption("event");
         await this.bookingLocationInput.fill(generateLocation());
+        if (product.allowCancellation === false) {
+            await this.bookingSelect('allow_cancellation').selectOption('0')
+        }
         const today = new Date();
         const isPastNoon = today.getHours() >= 12;
 
@@ -998,6 +1001,10 @@ export class ProductCreation extends BasePage {
         await this.bookingSelect("type").selectOption("rental");
         await this.bookingLocationInput.fill(generateLocation());
         await this.bookingInput("qty").fill(product.inventory.toString());
+        if (product.allowCancellation === false) {
+            await this.bookingSelect('allow_cancellation').selectOption('0')
+        }
+
         if (!product.availableEveryWeek) {
             await this.bookingSelect("available_every_week").selectOption("0");
             const today = new Date();
@@ -1031,8 +1038,7 @@ export class ProductCreation extends BasePage {
                 await this.escapeTarget.press("Escape");
                 return product.name;
 
-            }
-            else if (product.rentalType === "hourly") {
+            } else if (product.rentalType === "hourly") {
                 await this.bookingSelect("renting_type").selectOption("hourly");
                 await this.hourlyPriceTextbox.fill("30");
                 if (product.sameSlotAllDays) {
@@ -1043,13 +1049,11 @@ export class ProductCreation extends BasePage {
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
-                }
-                else {
+                } else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
                     await this.fillInlineDaySlot(1, "10", "20", "11", "20", false);
                 }
-            }
-            else {
+            } else {
                 await this.bookingSelect("renting_type").selectOption("daily_hourly");
                 await this.dailyPriceTextbox.fill("50");
                 await this.hourlyPriceTextbox.fill("30");
@@ -1078,8 +1082,7 @@ export class ProductCreation extends BasePage {
                 await this.escapeTarget.press("Escape");
                 return product.name;
 
-            }
-            else if (product.rentalType === "hourly") {
+            } else if (product.rentalType === "hourly") {
                 await this.bookingSelect("renting_type").selectOption("hourly");
                 await this.hourlyPriceTextbox.fill("30");
                 if (product.sameSlotAllDays) {
@@ -1090,13 +1093,11 @@ export class ProductCreation extends BasePage {
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
-                }
-                else {
+                } else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
                     await this.fillInlineDaySlot(1, "10", "20", "11", "20", false);
                 }
-            }
-            else {
+            } else {
                 await this.bookingSelect("renting_type").selectOption("daily_hourly");
                 await this.dailyPriceTextbox.fill("50");
                 await this.hourlyPriceTextbox.fill("30");
@@ -1122,6 +1123,9 @@ export class ProductCreation extends BasePage {
         await this.bookingSelect("type").selectOption("table");
         await this.bookingLocationInput.fill(generateLocation());
         await this.bookingInput("qty").fill(product.inventory.toString());
+        if (product.allowCancellation === false) {
+            await this.bookingSelect('allow_cancellation').selectOption('0')
+        }
         if (!product.availableEveryWeek) {
             await this.bookingSelect("available_every_week").selectOption("0");
             const today = new Date();
@@ -1161,15 +1165,12 @@ export class ProductCreation extends BasePage {
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
-                }
-                else {
+                } else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
                     await this.fillInlineDaySlot(1, "10", "35", "11", "35", false);
                 }
 
-
-            }
-            else if (product.tableType === "per_table") {
+            } else if (product.tableType === "per_table") {
                 await this.bookingSelect("price_type").selectOption("table");
                 if (product.sameSlotAllDays) {
                     await this.bookingSelect("same_slot_all_days").selectOption("1");
@@ -1179,16 +1180,13 @@ export class ProductCreation extends BasePage {
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
-                }
-                else {
+                } else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
                     await this.fillInlineDaySlot(1, "10", "35", "11", "35", false);
                 }
             }
 
-        }
-
-        else {
+        } else {
             await this.bookingSelect("available_every_week").selectOption("1");
             if (product.tableType === "per_guest") {
                 await this.bookingSelect("price_type").selectOption("guest");
@@ -1200,15 +1198,12 @@ export class ProductCreation extends BasePage {
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
-                }
-                else {
+                } else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
                     await this.fillInlineDaySlot(1, "10", "35", "11", "35", false);
                 }
 
-
-            }
-            else if (product.tableType === "per_table") {
+            } else if (product.tableType === "per_table") {
                 await this.bookingSelect("price_type").selectOption("table");
                 if (product.sameSlotAllDays) {
                     await this.bookingSelect("same_slot_all_days").selectOption("1");
@@ -1218,8 +1213,7 @@ export class ProductCreation extends BasePage {
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
-                }
-                else {
+                } else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
                     await this.fillInlineDaySlot(1, "10", "35", "11", "35", false);
                 }

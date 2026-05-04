@@ -23,5 +23,6 @@ export interface BaseProduct {
     sameSlotAllDays?: boolean;
     availableEveryWeek?: boolean;
     numberOfTickets?: number;
+    allowCancellation?: boolean;
 
 }
