@@ -634,15 +634,15 @@ return [
     ], [
         'key' => 'marketing.communications.events.create',
         'name' => 'admin::app.acl.create',
-        'route' => [
-            'admin.marketing.communications.events.update',
-            'admin.marketing.communications.events.store',
-        ],
+        'route' => 'admin.marketing.communications.events.store',
         'sort' => 1,
     ], [
         'key' => 'marketing.communications.events.edit',
         'name' => 'admin::app.acl.edit',
-        'route' => 'admin.marketing.communications.events.edit',
+        'route' => [
+            'admin.marketing.communications.events.edit',
+            'admin.marketing.communications.events.update',
+        ],
         'sort' => 2,
     ], [
         'key' => 'marketing.communications.events.delete',
@@ -706,18 +706,12 @@ return [
     ], [
         'key' => 'marketing.search_seo.url_rewrites.create',
         'name' => 'admin::app.acl.create',
-        'route' => [
-            'admin.marketing.search_seo.url_rewrites.update',
-            'admin.marketing.search_seo.url_rewrites.store',
-        ],
+        'route' => 'admin.marketing.search_seo.url_rewrites.store',
         'sort' => 1,
     ], [
         'key' => 'marketing.search_seo.url_rewrites.edit',
         'name' => 'admin::app.acl.edit',
-        'route' => [
-            'admin.marketing.search_seo.url_rewrites.update',
-            'admin.marketing.search_seo.url_rewrites.store',
-        ],
+        'route' => 'admin.marketing.search_seo.url_rewrites.update',
         'sort' => 2,
     ], [
         'key' => 'marketing.search_seo.url_rewrites.delete',
@@ -758,18 +752,12 @@ return [
     ], [
         'key' => 'marketing.search_seo.search_synonyms.create',
         'name' => 'admin::app.acl.create',
-        'route' => [
-            'admin.marketing.search_seo.search_synonyms.update',
-            'admin.marketing.search_seo.search_synonyms.store',
-        ],
+        'route' => 'admin.marketing.search_seo.search_synonyms.store',
         'sort' => 1,
     ], [
         'key' => 'marketing.search_seo.search_synonyms.edit',
         'name' => 'admin::app.acl.edit',
-        'route' => [
-            'admin.marketing.search_seo.search_synonyms.update',
-            'admin.marketing.search_seo.search_synonyms.store',
-        ],
+        'route' => 'admin.marketing.search_seo.search_synonyms.update',
         'sort' => 2,
     ], [
         'key' => 'marketing.search_seo.search_synonyms.delete',
@@ -787,18 +775,12 @@ return [
     ], [
         'key' => 'marketing.search_seo.sitemaps.create',
         'name' => 'admin::app.acl.create',
-        'route' => [
-            'admin.marketing.search_seo.sitemaps.update',
-            'admin.marketing.search_seo.sitemaps.store',
-        ],
+        'route' => 'admin.marketing.search_seo.sitemaps.store',
         'sort' => 1,
     ], [
         'key' => 'marketing.search_seo.sitemaps.edit',
         'name' => 'admin::app.acl.edit',
-        'route' => [
-            'admin.marketing.search_seo.sitemaps.update',
-            'admin.marketing.search_seo.sitemaps.store',
-        ],
+        'route' => 'admin.marketing.search_seo.sitemaps.update',
         'sort' => 2,
     ], [
         'key' => 'marketing.search_seo.sitemaps.delete',
