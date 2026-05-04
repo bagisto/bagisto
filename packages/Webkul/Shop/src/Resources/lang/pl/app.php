@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'Koszt dostawy (z podatkiem)',
                 'discount-amount' => 'Kwota rabatu',
                 'grand-total' => 'Suma ogólna',
+                'included' => 'Wliczone',
+                'incl-tax' => 'Z VAT:',
+                'items-discount' => 'Rabat na pozycje',
+                'shipping-discount' => 'Rabat na wysyłkę',
                 'place-order' => 'Złóż zamówienie',
                 'proceed-to-checkout' => 'Przejdź do realizacji zamówienia',
                 'sub-total' => 'Suma częściowa',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'Kwota rabatu',
                 'excl-tax' => 'Bez podatku:',
                 'grand-total' => 'Suma ogólna',
+                'included' => 'Wliczone',
+                'incl-tax' => 'Z VAT:',
+                'items-discount' => 'Rabat na pozycje',
+                'shipping-discount' => 'Rabat na wysyłkę',
                 'place-order' => 'Złóż zamówienie',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Przetwarzanie',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'Suma częściowa (bez podatku)',
                 'sub-total-incl-tax' => 'Suma częściowa (z podatkiem)',
                 'tax' => 'Podatek',
-            ],
+
+                'tax-included' => 'VAT już wliczony:', ],
         ],
 
         'coupon' => [

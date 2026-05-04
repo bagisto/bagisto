@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'Verzendkosten (Incl. BTW)',
                 'discount-amount' => 'Korting',
                 'grand-total' => 'Totaalbedrag',
+                'included' => 'Inbegrepen',
+                'incl-tax' => 'Incl. btw:',
+                'items-discount' => 'Korting artikelen',
+                'shipping-discount' => 'Korting verzending',
                 'place-order' => 'Bestelling plaatsen',
                 'proceed-to-checkout' => 'Doorgaan naar afrekenen',
                 'sub-total' => 'Subtotaal',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'Kortingbedrag',
                 'excl-tax' => 'Excl. BTW:',
                 'grand-total' => 'Totaalbedrag',
+                'included' => 'Inbegrepen',
+                'incl-tax' => 'Incl. btw:',
+                'items-discount' => 'Korting artikelen',
+                'shipping-discount' => 'Korting verzending',
                 'place-order' => 'Bestelling plaatsen',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Verwerken',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'Subtotaal (Excl. BTW)',
                 'sub-total-incl-tax' => 'Subtotaal (Incl. BTW)',
                 'tax' => 'BTW',
-            ],
+
+                'tax-included' => 'Belasting al inbegrepen:', ],
         ],
 
         'coupon' => [

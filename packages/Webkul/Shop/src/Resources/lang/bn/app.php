@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'ডেলিভারি চার্জ (কর সহ)',
                 'discount-amount' => 'ছাড়ের পরিমাণ',
                 'grand-total' => 'সর্বমোট',
+                'included' => 'অন্তর্ভুক্ত',
+                'incl-tax' => 'ট্যাক্স সহ:',
+                'items-discount' => 'আইটেম ছাড়',
+                'shipping-discount' => 'শিপিং ছাড়',
                 'place-order' => 'অর্ডার করুন',
                 'proceed-to-checkout' => 'চেকআউটে এগিয়ে যান',
                 'sub-total' => 'সাবটোটাল',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'ছাড়ের পরিমাণ',
                 'excl-tax' => 'কর বাদে:',
                 'grand-total' => 'সর্বমোট',
+                'included' => 'অন্তর্ভুক্ত',
+                'incl-tax' => 'ট্যাক্স সহ:',
+                'items-discount' => 'আইটেম ছাড়',
+                'shipping-discount' => 'শিপিং ছাড়',
                 'place-order' => 'অর্ডার স্থাপন',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'প্রক্রিয়াধীন',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'সাবটোটাল (কর বাদে)',
                 'sub-total-incl-tax' => 'সাবটোটাল (কর সহ)',
                 'tax' => 'কর',
-            ],
+
+                'tax-included' => 'ট্যাক্স ইতিমধ্যে অন্তর্ভুক্ত:', ],
         ],
 
         'coupon' => [

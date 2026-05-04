@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'رسوم التوصيل (شاملة الضريبة)',
                 'discount-amount' => 'مبلغ الخصم',
                 'grand-total' => 'المجموع الكلي',
+                'included' => 'مشمول',
+                'incl-tax' => 'شامل الضريبة:',
+                'items-discount' => 'خصم العناصر',
+                'shipping-discount' => 'خصم الشحن',
                 'place-order' => 'تقديم الطلب',
                 'proceed-to-checkout' => 'المتابعة للدفع',
                 'sub-total' => 'المجموع الفرعي',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'مبلغ الخصم',
                 'excl-tax' => 'بدون ضريبة:',
                 'grand-total' => 'المجموع الكلي',
+                'included' => 'مشمول',
+                'incl-tax' => 'شامل الضريبة:',
+                'items-discount' => 'خصم العناصر',
+                'shipping-discount' => 'خصم الشحن',
                 'place-order' => 'تقديم الطلب',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'جارٍ المعالجة',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'المجموع الفرعي (بدون ضريبة)',
                 'sub-total-incl-tax' => 'المجموع الفرعي (شاملة الضريبة)',
                 'tax' => 'الضريبة',
-            ],
+
+                'tax-included' => 'الضريبة مشمولة بالفعل:', ],
         ],
 
         'coupon' => [

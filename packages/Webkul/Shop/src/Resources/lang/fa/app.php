@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'هزینه ارسال (شامل مالیات)',
                 'discount-amount' => 'مقدار تخفیف',
                 'grand-total' => 'مجموع کل',
+                'included' => 'شامل',
+                'incl-tax' => 'شامل مالیات:',
+                'items-discount' => 'تخفیف اقلام',
+                'shipping-discount' => 'تخفیف ارسال',
                 'place-order' => 'ثبت سفارش',
                 'proceed-to-checkout' => 'ادامه به تسویه حساب',
                 'sub-total' => 'جمع جزئی',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'مقدار تخفیف',
                 'excl-tax' => 'بدون مالیات:',
                 'grand-total' => 'مجموع کل',
+                'included' => 'شامل',
+                'incl-tax' => 'شامل مالیات:',
+                'items-discount' => 'تخفیف اقلام',
+                'shipping-discount' => 'تخفیف ارسال',
                 'place-order' => 'ثبت سفارش',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'در حال پردازش',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'جمع جزئی (بدون مالیات)',
                 'sub-total-incl-tax' => 'جمع جزئی (شامل مالیات)',
                 'tax' => 'مالیات',
-            ],
+
+                'tax-included' => 'مالیات از قبل لحاظ شده:', ],
         ],
 
         'coupon' => [

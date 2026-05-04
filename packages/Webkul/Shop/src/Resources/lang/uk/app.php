@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'Вартість доставки (з ПДВ)',
                 'discount-amount' => 'Сума знижки',
                 'grand-total' => 'Загальна сума',
+                'included' => 'Включено',
+                'incl-tax' => 'З податком:',
+                'items-discount' => 'Знижка на товари',
+                'shipping-discount' => 'Знижка на доставку',
                 'place-order' => 'Оформити замовлення',
                 'proceed-to-checkout' => 'Перейти до оформлення',
                 'sub-total' => 'Підсумок',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'Сума знижки',
                 'excl-tax' => 'Без ПДВ:',
                 'grand-total' => 'Загальна сума',
+                'included' => 'Включено',
+                'incl-tax' => 'З податком:',
+                'items-discount' => 'Знижка на товари',
+                'shipping-discount' => 'Знижка на доставку',
                 'place-order' => 'Оформити замовлення',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Обробка',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'Підсумок (без ПДВ)',
                 'sub-total-incl-tax' => 'Підсумок (з ПДВ)',
                 'tax' => 'Податок',
-            ],
+
+                'tax-included' => 'Податок уже включено:', ],
         ],
 
         'coupon' => [

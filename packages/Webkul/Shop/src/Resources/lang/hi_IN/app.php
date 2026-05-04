@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'वितरण शुल्क (कर सहित)',
                 'discount-amount' => 'डिस्काउंट राशि',
                 'grand-total' => 'कुल योग',
+                'included' => 'शामिल',
+                'incl-tax' => 'कर सहित:',
+                'items-discount' => 'आइटम छूट',
+                'shipping-discount' => 'शिपिंग छूट',
                 'place-order' => 'आदेश दें',
                 'proceed-to-checkout' => 'चेकआउट पर आगे बढ़ें',
                 'sub-total' => 'उप-कुल',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'डिस्काउंट राशि',
                 'excl-tax' => 'कर से छूट:',
                 'grand-total' => 'कुल योग',
+                'included' => 'शामिल',
+                'incl-tax' => 'कर सहित:',
+                'items-discount' => 'आइटम छूट',
+                'shipping-discount' => 'शिपिंग छूट',
                 'place-order' => 'आदेश दें',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'प्रसंस्करण',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'उप-कुल (कर से छूट)',
                 'sub-total-incl-tax' => 'उप-कुल (कर सहित)',
                 'tax' => 'कर',
-            ],
+
+                'tax-included' => 'कर पहले से शामिल:', ],
         ],
 
         'coupon' => [

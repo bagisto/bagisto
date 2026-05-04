@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'Biaya Pengiriman (Termasuk Pajak)',
                 'discount-amount' => 'Jumlah Diskon',
                 'grand-total' => 'Total Keseluruhan',
+                'included' => 'Termasuk',
+                'incl-tax' => 'Termasuk Pajak:',
+                'items-discount' => 'Diskon Barang',
+                'shipping-discount' => 'Diskon Pengiriman',
                 'place-order' => 'Buat Pesanan',
                 'proceed-to-checkout' => 'Lanjut ke Pembayaran',
                 'sub-total' => 'Subtotal',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'Jumlah Diskon',
                 'excl-tax' => 'Tidak termasuk pajak:',
                 'grand-total' => 'Total Keseluruhan',
+                'included' => 'Termasuk',
+                'incl-tax' => 'Termasuk Pajak:',
+                'items-discount' => 'Diskon Barang',
+                'shipping-discount' => 'Diskon Pengiriman',
                 'place-order' => 'Buat Pesanan',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Sedang Diproses',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'Subtotal (Tidak Termasuk Pajak)',
                 'sub-total-incl-tax' => 'Subtotal (Termasuk Pajak)',
                 'tax' => 'Pajak',
-            ],
+
+                'tax-included' => 'Pajak sudah termasuk:', ],
         ],
 
         'coupon' => [

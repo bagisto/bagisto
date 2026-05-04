@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'Kargo Ücreti (KDV Dahil)',
                 'discount-amount' => 'İndirim',
                 'grand-total' => 'Genel Toplam',
+                'included' => 'Dahil',
+                'incl-tax' => 'KDV Dahil:',
+                'items-discount' => 'Ürün İndirimi',
+                'shipping-discount' => 'Kargo İndirimi',
                 'place-order' => 'Siparişi Onayla',
                 'proceed-to-checkout' => 'Ödemeye Geç',
                 'sub-total' => 'Ara Toplam',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'İndirim',
                 'excl-tax' => 'KDV Hariç:',
                 'grand-total' => 'Genel Toplam',
+                'included' => 'Dahil',
+                'incl-tax' => 'KDV Dahil:',
+                'items-discount' => 'Ürün İndirimi',
+                'shipping-discount' => 'Kargo İndirimi',
                 'place-order' => 'Siparişi Tamamla',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'İşleniyor...',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'Ara Toplam (KDV Hariç)',
                 'sub-total-incl-tax' => 'Ara Toplam (KDV Dahil)',
                 'tax' => 'Vergi',
-            ],
+
+                'tax-included' => 'Vergi zaten dahil:', ],
         ],
 
         'coupon' => [

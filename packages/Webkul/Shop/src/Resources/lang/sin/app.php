@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'භාණ්ඩ ගෙවීම් (බදා සමග)',
                 'discount-amount' => 'වටාන මුදල',
                 'grand-total' => 'සම්පූර්ණ එකතුව',
+                'included' => 'ඇතුළත්',
+                'incl-tax' => 'බදු සමඟ:',
+                'items-discount' => 'භාණ්ඩ වට්ටම',
+                'shipping-discount' => 'ප්‍රවාහන වට්ටම',
                 'place-order' => 'ඇණවුම ස්ථානයට',
                 'proceed-to-checkout' => 'පරියේෂයට ඉදිරිපත් වන්න',
                 'sub-total' => 'උපකරණය',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'වටාන මුදල',
                 'excl-tax' => 'බදා නොමැතියි:',
                 'grand-total' => 'සම්පූර්ණ එකතුව',
+                'included' => 'ඇතුළත්',
+                'incl-tax' => 'බදු සමඟ:',
+                'items-discount' => 'භාණ්ඩ වට්ටම',
+                'shipping-discount' => 'ප්‍රවාහන වට්ටම',
                 'place-order' => 'ඇණවුම ස්ථානයට',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'ප්‍රතික්ෂේප',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'උපකරණය (බදා නොමැතියි)',
                 'sub-total-incl-tax' => 'උපකරණය (බදා සමග)',
                 'tax' => 'බද්ද',
-            ],
+
+                'tax-included' => 'බදු දැනටමත් ඇතුළත්:', ],
         ],
 
         'coupon' => [

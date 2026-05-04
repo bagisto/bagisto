@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'Frais de livraison (TTC)',
                 'discount-amount' => 'Montant de réduction',
                 'grand-total' => 'Total général',
+                'included' => 'Inclus',
+                'incl-tax' => 'TTC :',
+                'items-discount' => 'Remise sur articles',
+                'shipping-discount' => 'Remise sur livraison',
                 'place-order' => 'Passer la commande',
                 'proceed-to-checkout' => 'Passer à la caisse',
                 'sub-total' => 'Sous-total',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'Montant de réduction',
                 'excl-tax' => 'Hors taxes :',
                 'grand-total' => 'Total général',
+                'included' => 'Inclus',
+                'incl-tax' => 'TTC :',
+                'items-discount' => 'Remise sur articles',
+                'shipping-discount' => 'Remise sur livraison',
                 'place-order' => 'Passer la commande',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'En cours de traitement',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'Sous-total (Hors taxes)',
                 'sub-total-incl-tax' => 'Sous-total (TTC)',
                 'tax' => 'Taxe',
-            ],
+
+                'tax-included' => 'Taxe déjà incluse :', ],
         ],
 
         'coupon' => [

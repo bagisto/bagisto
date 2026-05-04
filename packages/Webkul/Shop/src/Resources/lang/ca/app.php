@@ -1112,6 +1112,10 @@ return [
                 'delivery-charges-incl-tax' => 'Despeses d\'enviament (Incl. Impostos)',
                 'discount-amount' => 'Import de Descompte',
                 'grand-total' => 'Total General',
+                'included' => 'Inclòs',
+                'incl-tax' => 'IVA inclòs:',
+                'items-discount' => 'Descompte d\'articles',
+                'shipping-discount' => 'Descompte d\'enviament',
                 'place-order' => 'Fer comanda',
                 'proceed-to-checkout' => 'Continuar amb el Pagament',
                 'sub-total' => 'Subtotal',
@@ -1182,6 +1186,10 @@ return [
                 'discount-amount' => 'Import de descompte',
                 'excl-tax' => 'Excl. Impostos:',
                 'grand-total' => 'Total General',
+                'included' => 'Inclòs',
+                'incl-tax' => 'IVA inclòs:',
+                'items-discount' => 'Descompte d\'articles',
+                'shipping-discount' => 'Descompte d\'enviament',
                 'place-order' => 'Fer comanda',
                 'price_and_qty' => ':price × :qty',
                 'processing' => 'Processant',
@@ -1189,7 +1197,8 @@ return [
                 'sub-total-excl-tax' => 'Subtotal (Excl. Impostos)',
                 'sub-total-incl-tax' => 'Subtotal (Incl. Impostos)',
                 'tax' => 'Impost',
-            ],
+
+                'tax-included' => 'IVA ja inclòs:', ],
         ],
 
         'coupon' => [
