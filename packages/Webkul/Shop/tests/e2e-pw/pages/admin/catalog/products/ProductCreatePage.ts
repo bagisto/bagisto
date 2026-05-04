@@ -1155,16 +1155,16 @@ export class ProductCreation extends BasePage {
                     await this.bookingSelect("same_slot_all_days").selectOption("1");
                     await this.addSlotsButton.click();
 
-                    await this.fillTimeTextbox("From", 0, "10", "20");
+                    await this.fillTimeTextbox("From", 0, "10", "35");
                     await this.page.waitForTimeout(500)
-                    await this.fillTimeTextbox("To", 0, "11", "20");
+                    await this.fillTimeTextbox("To", 0, "11", "35");
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
                 }
                 else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
-                    await this.fillInlineDaySlot(1, "10", "20", "11", "20", false);
+                    await this.fillInlineDaySlot(1, "10", "35", "11", "35", false);
                 }
 
 
@@ -1174,15 +1174,15 @@ export class ProductCreation extends BasePage {
                 if (product.sameSlotAllDays) {
                     await this.bookingSelect("same_slot_all_days").selectOption("1");
                     await this.addSlotsButton.click();
-                    await this.fillTimeTextbox("From", 0, "10", "20");
-                    await this.fillTimeTextbox("To", 0, "11", "20");
+                    await this.fillTimeTextbox("From", 0, "10", "35");
+                    await this.fillTimeTextbox("To", 0, "11", "35");
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
                 }
                 else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
-                    await this.fillInlineDaySlot(1, "10", "20", "11", "20", false);
+                    await this.fillInlineDaySlot(1, "10", "35", "11", "35", false);
                 }
             }
 
@@ -1195,15 +1195,15 @@ export class ProductCreation extends BasePage {
                 if (product.sameSlotAllDays) {
                     await this.bookingSelect("same_slot_all_days").selectOption("1");
                     await this.addSlotsButton.click();
-                    await this.fillTimeTextbox("From", 0, "10", "20");
-                    await this.fillTimeTextbox("To", 0, "11", "20");
+                    await this.fillTimeTextbox("From", 0, "10", "35");
+                    await this.fillTimeTextbox("To", 0, "11", "35");
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
                 }
                 else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
-                    await this.fillInlineDaySlot(1, "10", "20", "11", "20", false);
+                    await this.fillInlineDaySlot(1, "10", "35", "11", "35", false);
                 }
 
 
@@ -1213,15 +1213,15 @@ export class ProductCreation extends BasePage {
                 if (product.sameSlotAllDays) {
                     await this.bookingSelect("same_slot_all_days").selectOption("1");
                     await this.addSlotsButton.click();
-                    await this.fillTimeTextbox("From", 0, "10", "20");
-                    await this.fillTimeTextbox("To", 0, "11", "20");
+                    await this.fillTimeTextbox("From", 0, "10", "35");
+                    await this.fillTimeTextbox("To", 0, "11", "35");
                     await this.escapeTarget.press("Escape");
                     await this.modalSaveButton.click();
                     return product.name;
                 }
                 else {
                     await this.bookingSelect("same_slot_all_days").selectOption("0");
-                    await this.fillInlineDaySlot(1, "10", "20", "11", "20", false);
+                    await this.fillInlineDaySlot(1, "10", "35", "11", "35", false);
                 }
             }
 

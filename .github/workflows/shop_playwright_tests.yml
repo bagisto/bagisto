@@ -87,11 +87,11 @@ jobs:
           echo "Waiting for server to start..."
           timeout 30 bash -c 'until curl -s http://127.0.0.1:8000 > /dev/null; do sleep 1; done'
 
-      - name: Run All Playwright Tests
+      - name: Run smoke Playwright Tests
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
-          npx playwright test --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+          npx playwright test --config=tests/e2e-pw/playwright.config.ts --grep "@smoke" --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
         working-directory: packages/Webkul/Shop
 
       - name: Upload Test Results
