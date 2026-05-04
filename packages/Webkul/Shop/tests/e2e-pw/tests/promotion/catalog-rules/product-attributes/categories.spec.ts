@@ -83,7 +83,6 @@ test.describe("catalog rules", () => {
                 checkboxSelect: "Mens",
                 couponType: "percentage",
             });
-            console.log("discountValue: ", discountValue);
             await ruleCreatePage.saveCatalogRule();
             await page.goto("admin/catalog/products");
             await page

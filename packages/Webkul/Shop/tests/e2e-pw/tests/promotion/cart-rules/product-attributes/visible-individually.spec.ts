@@ -40,7 +40,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
             await ruleDeletePage.deleteRuleAndProduct();
         });
 
@@ -59,7 +59,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
             await ruleDeletePage.deleteRuleAndProduct();
         });
     });

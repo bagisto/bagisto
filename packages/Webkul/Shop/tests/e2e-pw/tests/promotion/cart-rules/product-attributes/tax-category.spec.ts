@@ -69,7 +69,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when sku of product condition is -> is not equal to", async ({
@@ -86,7 +86,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when sku of product condition is -> contains", async ({
@@ -103,7 +103,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when sku of product condition is -> does not contain", async ({
@@ -120,7 +120,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
     });
 });

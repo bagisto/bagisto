@@ -213,7 +213,7 @@ export class RuleApplyPage extends BasePage {
 
         const actualPrice = 199;
         const expectedDiscountedPrice = `$${(actualPrice * (1 - value / 100)).toFixed(2)}`;
-        console.log("expectedDiscountedPrice: ", expectedDiscountedPrice);
+        // console.log("expectedDiscountedPrice: ", expectedDiscountedPrice);
 
         await expect(
             this.page
