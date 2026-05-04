@@ -61,8 +61,8 @@ class Acl
             return $roles;
         }
 
-        $roles = collect($this->getAclConfig())
-            ->mapWithKeys(fn ($role) => [$role['route'] => $role['key']]);
+        $roles = collect($this->getAclConfig())->flatMap(fn ($role) => collect(Arr::wrap($role['route']))
+            ->mapWithKeys(fn ($routeName) => [$routeName => $role['key']]));
 
         return $roles;
     }
@@ -86,7 +86,7 @@ class Acl
             $this->addItem(new AclItem(
                 key: $aclItemKey,
                 name: trans($aclItem['name']),
-                route: $aclItem['route'],
+                route: Arr::wrap($aclItem['route'])[0] ?? '',
                 sort: $aclItem['sort'],
                 children: $subAclItems,
             ));
@@ -100,14 +100,14 @@ class Acl
     {
         return collect($aclItem)
             ->sortBy('sort')
-            ->filter(fn ($value) => is_array($value))
+            ->filter(fn ($value) => is_array($value) && isset($value['key']))
             ->map(function ($subAclItem) {
                 $subSubAclItems = $this->processSubAclItems($subAclItem);
 
                 return new AclItem(
                     key: $subAclItem['key'],
                     name: trans($subAclItem['name']),
-                    route: $subAclItem['route'],
+                    route: Arr::wrap($subAclItem['route'])[0] ?? '',
                     sort: $subAclItem['sort'],
                     children: $subSubAclItems,
                 );
