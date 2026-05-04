@@ -3,7 +3,7 @@ import { ProductCreation } from "../../pages/admin/catalog/products/ProductCreat
 import { BookingProductCheckout } from "../../pages/shop/checkout/product-types/BookingProductCheckout";
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
-test.describe("booking product checkout flow @smoke", () => {
+test.describe("booking product checkout flow ", () => {
 
     test.describe("Default Booking", () => {
         test.describe("One Booking For Many Days", () => {
@@ -325,8 +325,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalCheckoutHourly('10');
-                // await checkout.verifyduration(customer, id, true)
-
 
             });
         })
@@ -357,8 +355,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalCheckoutHourly('10');
-                // await checkout.verifyduration(customer, id, true)
-
 
 
 
@@ -390,8 +386,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalCheckoutHourly('10');
-                // await checkout.verifyduration(customer, id, true)
-
 
             });
 
@@ -421,7 +415,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalCheckoutHourly('10');
-                // await checkout.verifyduration(customer, id, true)
 
 
             });
@@ -452,8 +445,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalcheckoutHourlyDaily(true, '10');
-                // await checkout.verifyduration(customer, id, true)
-
 
             });
             test("should allow customer to complete checkout for daily", async ({ shopPage }) => {
@@ -489,7 +480,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalcheckoutHourlyDaily(true, '10');
-                // await checkout.verifyduration(customer, id, true)
 
             });
             test("should allow customer to complete checkout for daily", async ({ shopPage }) => {
@@ -524,8 +514,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalcheckoutHourlyDaily(true, '10');
-                // await checkout.verifyduration(customer, id, true)
-
 
             });
             test("should allow customer to complete checkout for daily", async ({ shopPage }) => {
@@ -561,8 +549,6 @@ test.describe("booking product checkout flow @smoke", () => {
                 await addAddress(shopPage);
                 const checkout = new BookingProductCheckout(shopPage);
                 const id = await checkout.rentalcheckoutHourlyDaily(true, '10');
-                // await checkout.verifyduration(customer, id, true)
-
 
             });
             test("should allow customer to complete checkout for daily", async ({ shopPage }) => {
