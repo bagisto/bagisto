@@ -130,6 +130,10 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator("#app");
     }
 
+    get applyToShipping() {
+        return this.page.locator("select[name='apply_to_shipping']");
+    }
+
     private async fillGeneralCartDetails() {
         await this.createCartRuleButton.waitFor();
         await this.createCartRuleButton.click();
@@ -156,6 +160,7 @@ export class RuleCreatePage extends BasePage {
         optionSelect,
         checkboxSelect,
         couponType,
+        allowShipping,
     }: {
         attribute: string;
         operator: string;
@@ -163,6 +168,7 @@ export class RuleCreatePage extends BasePage {
         optionSelect?: string;
         checkboxSelect?: string;
         couponType?: string;
+        allowShipping?: string;
     }): Promise<number | undefined> {
         const discountValue = Math.floor(Math.random() * 1000);
         const discountPercentage = Math.floor(Math.random() * 100);
@@ -188,19 +194,31 @@ export class RuleCreatePage extends BasePage {
                 await label.click();
             }
         }
+        let result;
+
         if (couponType == "fixed") {
             await this.actionTypeSelect.selectOption("by_fixed");
             await this.discountAmountInput.fill(discountValue.toString());
-
-            return discountValue;
+            result = discountValue;
         }
 
         if (couponType == "percentage") {
             await this.actionTypeSelect.selectOption("by_percent");
             await this.discountAmountInput.fill(discountPercentage.toString());
-
-            return discountPercentage;
+            result = discountPercentage;
         }
+
+        if (couponType == "fixedAmmountWholeCart") {
+            await this.actionTypeSelect.selectOption("cart_fixed");
+            await this.discountAmountInput.fill(discountValue.toString());
+            result = discountValue;
+        }
+
+        if (allowShipping == "yes") {
+            await this.applyToShipping.selectOption("1");
+        }
+
+        return result;
     }
 
     private async configureSettings() {

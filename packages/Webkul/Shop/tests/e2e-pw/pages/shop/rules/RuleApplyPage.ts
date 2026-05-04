@@ -104,6 +104,10 @@ export class RuleApplyPage extends BasePage {
         return this.page.getByText("Free Shipping").first();
     }
 
+    get chooseFlatShippingMethod() {
+        return this.page.getByText("Flat Rate").first();
+    }
+
     get choosePaymentMethod() {
         return this.page.getByAltText("Money Transfer");
     }
@@ -189,7 +193,6 @@ export class RuleApplyPage extends BasePage {
 
         if (couponType == "fixed") {
             if (subtotal < Number(discountValue)) {
-                console.log("enter");
                 return 0;
             }
             const discount = Number(discountValue);
@@ -199,6 +202,15 @@ export class RuleApplyPage extends BasePage {
 
         if (couponType == "percentage") {
             return subtotal - (subtotal * discountValue) / 100;
+        }
+
+        if (couponType == "fixedAmmountWholeCart") {
+            if (subtotal < Number(discountValue)) {
+                return 0;
+            }
+            const discount = Number(discountValue);
+
+            return Math.max(subtotal - discount, 0);
         }
 
         return subtotal;
@@ -213,7 +225,6 @@ export class RuleApplyPage extends BasePage {
 
         const actualPrice = 199;
         const expectedDiscountedPrice = `$${(actualPrice * (1 - value / 100)).toFixed(2)}`;
-        // console.log("expectedDiscountedPrice: ", expectedDiscountedPrice);
 
         await expect(
             this.page
@@ -224,7 +235,7 @@ export class RuleApplyPage extends BasePage {
         ).toHaveText(expectedDiscountedPrice);
     }
 
-    async applyCouponAtCheckout() {
+    async applyCouponAtCheckout(allowShipping?: string) {
         await this.visit("");
         await this.page.waitForLoadState("networkidle");
         await this.shoppingCartIcon.click();
@@ -240,11 +251,15 @@ export class RuleApplyPage extends BasePage {
         await this.billingCity.fill("test city");
         await this.billingZip.fill("123456");
         await this.billingTelephone.fill("2365432789");
-
         await this.clickProcessButton.click();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
 
+        if (allowShipping === "yes") {
+            await this.chooseFlatShippingMethod.click();
+        } else {
+            await this.chooseShippingMethod.click();
+        }
+
+        await this.choosePaymentMethod.click();
         await this.applyCouponButton.click();
         await this.page.waitForTimeout(1000);
         await this.couponInput.fill("TEST50");

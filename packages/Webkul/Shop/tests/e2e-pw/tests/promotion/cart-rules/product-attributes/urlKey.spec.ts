@@ -47,7 +47,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
+            await ruleApplyPage.applyCoupon2("yes");
         });
 
         test("should apply coupon when url key of product condition is -> is not equal to", async ({
