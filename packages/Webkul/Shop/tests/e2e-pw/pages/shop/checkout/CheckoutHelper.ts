@@ -128,6 +128,153 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator('a.phpdebugbar-minimize-btn')
     }
 
+    get bookingDateInput() {
+        return this.page.locator('input[name="booking[date]"]');
+    }
+
+    get bookingDateFromInput() {
+        return this.page.locator('input[name="booking[date_from]"]');
+    }
+
+    get bookingDateToInput() {
+        return this.page.locator('input[name="booking[date_to]"]');
+    }
+
+    get bookingSlotSelect() {
+        return this.page.locator('select[name="booking[slot]"]');
+    }
+
+    get bookingSlotStartSelect() {
+        return this.page.locator('select[name="booking[slot][from]"]');
+    }
+
+    get bookingSlotEndSelect() {
+        return this.page.locator('select[name="booking[slot][to]"]');
+    }
+
+    get flatpickrOpenCalendar() {
+        return this.page.locator(".flatpickr-calendar.open");
+    }
+
+    get flatpickrEnabledDates() {
+        return this.page.locator(".flatpickr-day:not(.disabled):not(.prevMonthDay):not(.nextMonthDay)");
+    }
+
+    get flatpickrOpenEnabledDates() {
+        return this.page.locator(
+            ".flatpickr-calendar.open .flatpickr-day:not(.disabled):not(.prevMonthDay):not(.nextMonthDay)",
+        );
+    }
+
+    get flatpickrNextMonthButton() {
+        return this.page.locator(".flatpickr-next-month");
+    }
+
+    get orderIdHeading() {
+        return this.page.locator('p.text-xl:has(.text-blue-700)').first();
+    }
+
+    get cartSummaryToggle() {
+        return this.page.locator("p.flex > span.icon-arrow-down").first();
+    }
+
+    cartSummaryText(index: number) {
+        return this.page.locator("div.grid.gap-2>div>p.text-sm").nth(index);
+    }
+
+    get cartDismissButton() {
+        return this.page.locator("span.icon-cancel").nth(1);
+    }
+
+    get cartOverlayDismissButton() {
+        return this.page.locator("div.absolute>span.icon-cancel").nth(1);
+    }
+
+    get pageBody() {
+        return this.page.locator("body");
+    }
+
+    get bookingItemsWillNotBeCanceledText() {
+        return this.page.getByText(" Booking Items Will Not Be Canceled ").first();
+    }
+
+    get cancellationNotAllowedText() {
+        return this.page.getByText(" Cancellation Not Allowed ").first();
+    }
+
+    get createInvoiceAction() {
+        return this.page.locator("div.transparent-button:has(.icon-sales)");
+    }
+
+    get canCreateTransactionToggle() {
+        return this.page.locator('div.mb-4:has(label[for="can_create_transaction"])');
+    }
+
+    get createInvoiceButton() {
+        return this.page.getByRole("button", { name: " Create Invoice " }).first();
+    }
+
+    get invoiceCreatedSuccessText() {
+        return this.page.getByText("Invoice created successfully", { exact: false }).first();
+    }
+
+    get slotGraphEvent() {
+        return this.page.locator("div.vuecal__event:has(div.slot.border-emerald-500)").first();
+    }
+
+    slotGraphTimeText(slotGraph: Locator) {
+        return slotGraph.locator("span.truncate");
+    }
+
+    bookingDetailText(index: number) {
+        return this.page.locator("div.font-medium.text-gray-900").nth(index);
+    }
+
+    get bookingCustomerNameText() {
+        return this.page.locator("span.font-medium");
+    }
+
+    get bookingDialogCloseButton() {
+        return this.page.locator("span.icon-cancel-1").first();
+    }
+
+    get bookingListToggleButton() {
+        return this.page.locator("button.icon-list").first();
+    }
+
+    bookingRowByOrderId(orderId: string) {
+        return this.page
+            .locator("div.row.py-4")
+            .filter({
+                has: this.page.locator("p").nth(1).filter({ hasText: orderId }),
+            })
+            .first();
+    }
+
+    bookingRowText(row: Locator, index: number) {
+        return row.locator("p").nth(index);
+    }
+
+    get cancelOrderAction() {
+        return this.page.locator("div.transparent-button:has(span.icon-cancel)");
+    }
+
+    get refundButton() {
+        return this.page.getByRole("button", { name: " Refund ", exact: true }).first();
+    }
+
+    get refundCreatedSuccessText() {
+        return this.page.getByText("Refund created successfully").first();
+    }
+
+    get bookingCalendarNextButton() {
+        return this.page.locator("span.icon-sort-right");
+    }
+
+    customerSlotByName(customerName: string) {
+        return this.page.locator(`div.slot:has-text('${customerName}')`).first();
+    }
+
     /**
      * Search for product by name
      */
