@@ -87,7 +87,7 @@ jobs:
           echo "Waiting for server to start..."
           timeout 30 bash -c 'until curl -s http://127.0.0.1:8000 > /dev/null; do sleep 1; done'
 
-      - name: Run smoke Playwright Tests
+      - name: Run ALL Playwright Tests
         env:
           BASE_URL: 'http://127.0.0.1:8000'
         run: |
