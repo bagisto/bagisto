@@ -24,5 +24,4 @@ export interface BaseProduct {
     availableEveryWeek?: boolean;
     numberOfTickets?: number;
     allowCancellation?: boolean;
-
 }
