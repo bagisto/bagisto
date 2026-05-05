@@ -133,15 +133,7 @@ export class RuleApplyPage extends BasePage {
         return JSON.parse(data);
     }
 
-    async applyCoupon() {
-        await this.applyCouponButton.click();
-        await this.couponInput.fill("TEST50");
-        await this.applyButton.click();
-        await expect(
-            this.page.getByText("Coupon code applied successfully.").first(),
-        ).toBeVisible();
-    }
-    async applyCoupon2(allow: string) {
+    async applyCoupon(allow?: string) {
         if (allow == "yes") {
             await this.visit("");
 
@@ -260,33 +252,6 @@ export class RuleApplyPage extends BasePage {
         }
 
         await this.choosePaymentMethod.click();
-        await this.applyCouponButton.click();
-        await this.page.waitForTimeout(1000);
-        await this.couponInput.fill("TEST50");
-        await this.applyButton.click();
-    }
-
-    async applyCouponAtCheckout2() {
-        await this.visit("");
-        await this.page.waitForLoadState("networkidle");
-        await this.shoppingCartIcon.click();
-        await this.continueButton.click();
-
-        await this.companyName.fill("Web");
-        await this.firstName.fill("demo");
-        await this.lastName.fill("guest");
-        await this.shippingEmail.fill("demo@example.com");
-        await this.streetAddress.fill("north street");
-        await this.billingCountry.selectOption({ value: "IN" });
-        await this.billingState.selectOption({ value: "UP" });
-        await this.billingCity.fill("test city");
-        await this.billingZip.fill("123456");
-        await this.billingTelephone.fill("2365432789");
-
-        await this.clickProcessButton.click();
-        await this.chooseShippingMethod.click();
-        await this.choosePaymentMethod.click();
-
         await this.applyCouponButton.click();
         await this.page.waitForTimeout(1000);
         await this.couponInput.fill("TEST50");

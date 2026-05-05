@@ -44,7 +44,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when price condition is -> is not equal to", async ({
@@ -61,7 +61,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when price condition is -> equals or greater then", async ({
@@ -78,7 +78,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when price condition is -> equals or less than", async ({
@@ -95,7 +95,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when price condition is -> greater than", async ({
@@ -112,7 +112,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when price condition is -> less than", async ({
@@ -129,7 +129,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
     });
 });

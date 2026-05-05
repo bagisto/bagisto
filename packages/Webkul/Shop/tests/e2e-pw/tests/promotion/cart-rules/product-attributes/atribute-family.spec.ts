@@ -96,7 +96,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when attribute family of product condition is -> is not equal to", async ({
@@ -113,7 +113,7 @@ test.describe("cart rules", () => {
                 couponType: "fixed",
             });
             await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
     });
 });

@@ -64,7 +64,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when product number condition is -> is not equal to", async ({
@@ -98,7 +98,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when product number condition is -> contains", async ({
@@ -132,7 +132,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
 
         test("should apply coupon when product number condition is -> does not contain", async ({
@@ -166,7 +166,7 @@ test.describe("cart rules", () => {
             await expect(
                 page.getByText("Product updated successfully").first(),
             ).toBeVisible();
-            await ruleApplyPage.applyCoupon2("yes");
+            await ruleApplyPage.applyCoupon("yes");
         });
     });
 });
