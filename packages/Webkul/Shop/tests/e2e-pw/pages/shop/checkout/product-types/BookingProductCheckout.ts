@@ -259,18 +259,18 @@ export class BookingProductCheckout extends CheckoutHelper {
             await this.createInvoiceButton.click();
             await expect(this.invoiceCreatedSuccessText).toBeVisible();
             await this.visit('admin/sales/bookings');
-            await this.page.waitForLoadState('networkidle')
+            await this.page.waitForLoadState('networkidle');
             const slotgraph = this.slotGraphEvent;
             for (let i = 0; i < 7; i++) {
-                await slotgraph.scrollIntoViewIfNeeded();
-                if (await slotgraph.isVisible()) {
+                const isVisible = await slotgraph.isVisible().catch(() => false);
+                if (isVisible) {
                     await expect(this.slotGraphTimeText(slotgraph)).toHaveText("10:35 AM - 11:20 AM");
                     await slotgraph.click();
                     await expect(this.bookingDetailText(2)).toContainText("10:35 AM");
                     await expect(this.bookingDetailText(3)).toContainText("11:20 AM");
                     await expect(this.bookingCustomerNameText).toContainText(`${customer.firstName} ${customer.lastName}`);
-                    await this.bookingDialogCloseButton.click()
-                    await this.bookingListToggleButton.click()
+                    await this.bookingDialogCloseButton.click();
+                    await this.bookingListToggleButton.click();
                     const row = this.bookingRowByOrderId(orderId);
                     await expect(this.bookingRowText(row, 3)).toContainText('10:35AM');
                     await expect(this.bookingRowText(row, 4)).toContainText('11:20AM');
@@ -281,28 +281,30 @@ export class BookingProductCheckout extends CheckoutHelper {
                     return;
                 }
                 await this.bookingCalendarNextButton.click();
-                await this.page.waitForTimeout(500);
+                await this.page.waitForLoadState('networkidle');
+                await this.page.waitForTimeout(1000);
             }
             await expect(slotgraph).toBeVisible();
         } else {
             await this.visit('admin/sales/bookings');
-            await this.page.waitForLoadState('networkidle')
+            await this.page.waitForLoadState('networkidle');
             const customerSlot = this.customerSlotByName(`${customer.firstName} ${customer.lastName}`);
             for (let i = 0; i < 7; i++) {
-                await customerSlot.scrollIntoViewIfNeeded();
-                if (await customerSlot.isVisible()) {
+                const isVisible = await customerSlot.isVisible().catch(() => false);
+                if (isVisible) {
                     await customerSlot.click();
                     await expect(this.bookingDetailText(2)).toContainText("12:00 PM");
                     await expect(this.bookingDetailText(3)).toContainText("12:00 PM");
-                    await this.bookingDialogCloseButton.click()
-                    await this.bookingListToggleButton.click()
+                    await this.bookingDialogCloseButton.click();
+                    await this.bookingListToggleButton.click();
                     const row = this.bookingRowByOrderId(orderId);
                     await expect(this.bookingRowText(row, 3)).toContainText('12:00PM');
                     await expect(this.bookingRowText(row, 4)).toContainText('12:00PM');
                     return;
                 }
                 await this.bookingCalendarNextButton.click();
-                await this.page.waitForTimeout(500);
+                await this.page.waitForLoadState('networkidle');
+                await this.page.waitForTimeout(1000);
             }
             await expect(customerSlot).toBeVisible();
         }
