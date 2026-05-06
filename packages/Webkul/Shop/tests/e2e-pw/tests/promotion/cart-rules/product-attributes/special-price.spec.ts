@@ -1,11 +1,88 @@
-import { expect, test } from "../../../../setup";
+import { test } from "../../../../setup";
+import { expect, Page } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
+type CouponType = "fixed" | "percentage";
+
+const specialPriceValue = "150";
+
+async function expectCouponAppliedWithGrandTotal(
+    page: Page,
+    ruleApplyPage: RuleApplyPage,
+    discountValue: number,
+    couponType: CouponType,
+) {
+    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
+        discountValue,
+        couponType,
+    );
+
+    const formatted =
+        Math.abs(discountedAmount) < 0.01
+            ? "$0.00"
+            : `$${discountedAmount.toFixed(2)}`;
+
+    await ruleApplyPage.applyCouponAtCheckout();
+
+    await expect(
+        page.getByText("Coupon code applied successfully.").first(),
+    ).toBeVisible();
+
+    await expect(
+        page.getByText("Grand Total").locator("..").locator("p").last(),
+    ).toContainText(formatted);
+}
+
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    value,
+    couponType,
+}: {
+    page: Page;
+    operator: string;
+    value: string;
+    couponType: CouponType;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+    await ruleCreatePage.cartRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|special_price",
+        operator,
+        value,
+        couponType,
+    });
+
+    if (!discountValue) throw new Error("Discount not created");
+
+    await ruleCreatePage.saveCartRule();
+
+    await page.goto("admin/catalog/products");
+    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
+    await page.locator('input[name="special_price"]').first().fill(value);
+    await page.locator('button:has-text("Save Product")').first().click();
+
+    await expect(
+        page.getByText("Product updated successfully"),
+    ).toBeVisible();
+
+    await expectCouponAppliedWithGrandTotal(
+        page,
+        ruleApplyPage,
+        discountValue,
+        couponType,
+    );
+}
+
+test.beforeEach(async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
@@ -20,196 +97,40 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach("should delete the created product and rule", async ({ adminPage }) => {
+test.afterEach(async ({ adminPage }) => {
     const ruleDeletePage = new RuleDeletePage(adminPage);
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules", () => {
-    test.describe("product attribute conditions", () => {
-        test("should apply coupon when cost condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|special_price",
-                operator: "==",
-                value: "150",
-                couponType: "fixed",
-            });
-            await ruleCreatePage.saveCartRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("150");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.applyCoupon("yes");
-        });
+test.describe("cart rules - special price conditions", () => {
+    const cases = [
+        { operator: "==", type: "fixed", value: specialPriceValue },
+        { operator: "==", type: "percentage", value: specialPriceValue },
 
-        test("should apply coupon when cost condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|special_price",
-                operator: "!=",
-                value: "100",
-                couponType: "fixed",
-            });
-            await ruleCreatePage.saveCartRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("150");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.applyCoupon("yes");
-        });
+        { operator: "!=", type: "fixed", value: "100" },
+        { operator: "!=", type: "percentage", value: "100" },
 
-        test("should apply coupon when price condition is -> equals or greater then", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|special_price",
-                operator: ">=",
-                value: "150",
-                couponType: "fixed",
-            });
-            await ruleCreatePage.saveCartRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("160");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.applyCoupon("yes");
-        });
+        { operator: ">=", type: "fixed", value: specialPriceValue },
+        { operator: ">=", type: "percentage", value: specialPriceValue },
 
-        test("should apply coupon when price condition is -> equals or less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|special_price",
-                operator: "<=",
-                value: "200",
-                couponType: "fixed",
-            });
-            await ruleCreatePage.saveCartRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("150");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.applyCoupon("yes");
-        });
+        { operator: "<=", type: "fixed", value: "200" },
+        { operator: "<=", type: "percentage", value: "200" },
 
-        test("should apply coupon when price condition is -> greater than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|special_price",
-                operator: ">",
-                value: "100",
-                couponType: "fixed",
-            });
-            await ruleCreatePage.saveCartRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.locator('input[name="special_price"]').first().fill("150");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.applyCoupon("yes");
-        });
+        { operator: ">", type: "fixed", value: "100" },
+        { operator: ">", type: "percentage", value: "100" },
 
-        test("should apply coupon when special price condition is -> less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|special_price",
-                operator: "<",
-                value: "200",
-                couponType: "fixed",
+        { operator: "<", type: "fixed", value: "200" },
+        { operator: "<", type: "percentage", value: "200" },
+    ];
+
+    for (const { operator, type, value } of cases) {
+        test(`special price ${operator} (${type})`, async ({ page }) => {
+            await createRuleAndVerifyCoupon({
+                page,
+                operator,
+                value,
+                couponType: type as CouponType,
             });
-            await ruleCreatePage.saveCartRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="special_price"]').first().fill("195");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.applyCoupon("yes");
         });
-    });
+    }
 });

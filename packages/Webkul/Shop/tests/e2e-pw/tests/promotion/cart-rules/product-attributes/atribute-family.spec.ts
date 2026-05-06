@@ -1,119 +1,127 @@
 import { test } from "../../../../setup";
-import { expect } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { generateName, generateSlug } from "../../../../utils/faker";
 import { loginAsAdmin } from "../../../../utils/admin";
 
-test("should create attribute family for creating rule", async ({
-    adminPage,
-}) => {
-    await adminPage.goto("admin/catalog/families");
-    await adminPage.waitForSelector("div.primary-button", {
-        state: "visible",
-    });
+type CouponType = "fixed" | "percentage";
 
-    await adminPage.click("div.primary-button:visible");
-    await adminPage
-        .waitForSelector("div#not_avaliable", { timeout: 1000 })
-        .catch(() => null);
-
-    await adminPage.fill('input[name="name"]', generateName());
-    await adminPage.fill('input[name="code"]', generateSlug("_"));
-
-    const attributes = await adminPage.$$("i.icon-drag");
-    const targets = await adminPage.$$(
-        'div[class="flex [&>*]:flex-1 gap-5 justify-between px-4"] > div > div[class="h-[calc(100vh-285px)] overflow-auto border-gray-200 pb-4 ltr:border-r rtl:border-l"]',
+async function expectCouponAppliedWithGrandTotal(
+    page: Page,
+    ruleApplyPage: RuleApplyPage,
+    discountValue: number,
+    couponType: CouponType,
+) {
+    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
+        discountValue,
+        couponType,
     );
 
-    for (const attribute of attributes) {
-        const randomTargetIndex = Math.floor(Math.random() * targets.length);
-        const target = targets[randomTargetIndex];
+    const grandTotal = Number(discountedAmount.toFixed(2));
 
-        const attributeBox = await attribute.boundingBox();
-        const targetBox = await target.boundingBox();
+    await ruleApplyPage.applyCouponAtCheckout();
 
-        if (attributeBox && targetBox) {
-            const randomX = targetBox.x + Math.random() * targetBox.width;
-            const randomY = targetBox.y + Math.random() * targetBox.height;
+    await expect(
+        page.getByText("Coupon code applied successfully.").first(),
+    ).toBeVisible();
 
-            await adminPage.mouse.move(
-                attributeBox.x + attributeBox.width / 2,
-                attributeBox.y + attributeBox.height / 2,
-            );
-            await adminPage.mouse.down();
-            await adminPage.mouse.move(randomX, randomY);
-            await adminPage.mouse.up();
-        }
+    const expectedText =
+        grandTotal === 0
+            ? "$0.00"
+            : `$${new Intl.NumberFormat("en-US", {
+                  minimumFractionDigits: 2,
+              }).format(grandTotal)}`;
+
+    await expect(
+        page.locator("text=Grand Total").locator("..").locator("p").nth(1),
+    ).toContainText(expectedText);
+}
+
+async function runCartRuleTest(
+    page: Page,
+    {
+        operator,
+        optionSelect,
+        couponType,
+    }: {
+        operator: string;
+        optionSelect: string;
+        couponType: CouponType;
+    },
+) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+    await ruleCreatePage.cartRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|attribute_family_id",
+        operator,
+        optionSelect,
+        couponType,
+    });
+
+    if (discountValue === undefined) {
+        throw new Error("Discount value was not created.");
     }
 
-    await adminPage.click(".primary-button:visible");
-    await expect(
-        adminPage.getByText("Family created successfully.").first(),
-    ).toBeVisible();
+    await ruleCreatePage.saveCartRule();
+
+    await expectCouponAppliedWithGrandTotal(
+        page,
+        ruleApplyPage,
+        discountValue,
+        couponType,
+    );
+}
+
+test.beforeEach("should create simple product", async ({ adminPage }) => {
+    const productCreation = new ProductCreation(adminPage);
+
+    await productCreation.createProduct({
+        type: "simple",
+        sku: `SKU-${Date.now()}`,
+        name: `Simple-${Date.now()}`,
+        shortDescription: "Short desc",
+        description: "Full desc",
+        price: 199,
+        weight: 1,
+        inventory: 100,
+    });
 });
+
+test.afterEach(
+    "should delete the created product and rule",
+    async ({ adminPage }) => {
+        const ruleDeletePage = new RuleDeletePage(adminPage);
+        await ruleDeletePage.deleteRuleAndProduct();
+    },
+);
+
+type TestCase = {
+    operator: string;
+    optionSelect: string;
+    couponType: CouponType;
+};
+
+const testCases: TestCase[] = [
+    { operator: "==", optionSelect: "1", couponType: "fixed" },
+    { operator: "==", optionSelect: "1", couponType: "percentage" },
+    { operator: "!=", optionSelect: "2", couponType: "fixed" },
+    { operator: "!=", optionSelect: "2", couponType: "percentage" },
+];
 
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
-        test.beforeEach(
-            "should create simple product",
-            async ({ adminPage }) => {
-                const productCreation = new ProductCreation(adminPage);
-
-                await productCreation.createProduct({
-                    type: "simple",
-                    sku: `SKU-${Date.now()}`,
-                    name: `Simple-${Date.now()}`,
-                    shortDescription: "Short desc",
-                    description: "Full desc",
-                    price: 199,
-                    weight: 1,
-                    inventory: 100,
-                });
-            },
-        );
-        test.afterEach(
-            "should delete the created product and rule",
-            async ({ page }) => {
-                const ruleDeletePage = new RuleDeletePage(page);
-                await ruleDeletePage.deleteRuleAndProduct();
-            },
-        );
-
-        test("should apply coupon when attribute family of product condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|attribute_family_id",
-                operator: "==",
-                optionSelect: "1",
-                couponType: "fixed",
+        for (const tc of testCases) {
+            test(`should apply coupon when attribute family ${tc.operator} (${tc.couponType})`, async ({
+                page,
+            }) => {
+                await runCartRuleTest(page, tc);
             });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon("yes");
-        });
-
-        test("should apply coupon when attribute family of product condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|attribute_family_id",
-                operator: "!=",
-                optionSelect: "2",
-                couponType: "fixed",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon("yes");
-        });
+        }
     });
 });

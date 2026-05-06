@@ -16,7 +16,7 @@ async function expectCouponAppliedWithGrandTotal(
     discountValue: number,
     couponType: CouponType,
 ) {
-    const discountedAmount = await ruleApplyPage.calculateDiscountedAmmount(
+    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
         discountValue,
         couponType,
     );

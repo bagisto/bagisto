@@ -154,7 +154,7 @@ export class RuleApplyPage extends BasePage {
         ).toBeVisible();
     }
 
-    async calculateDiscountedAmmount(
+    async calculateDiscountedAmount(
         discountValue: number,
         couponType: string,
         incrementTimes?: number,
