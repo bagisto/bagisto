@@ -104,29 +104,91 @@ type TestCase = {
 };
 
 const testCases: TestCase[] = [
-    { operator: "==", value: "199", couponType: "fixed", label: "is equal to (fixed)" },
-    { operator: "==", value: "199", couponType: "percentage", label: "is equal to (percentage)" },
+    {
+        operator: "==",
+        value: "199",
+        couponType: "fixed",
+        label: "is equal to (fixed)",
+    },
+    {
+        operator: "==",
+        value: "199",
+        couponType: "percentage",
+        label: "is equal to (percentage)",
+    },
 
-    { operator: "!=", value: "100", couponType: "fixed", label: "is not equal to (fixed)" },
-    { operator: "!=", value: "100", couponType: "percentage", label: "is not equal to (percentage)" },
+    {
+        operator: "!=",
+        value: "100",
+        couponType: "fixed",
+        label: "is not equal to (fixed)",
+    },
+    {
+        operator: "!=",
+        value: "100",
+        couponType: "percentage",
+        label: "is not equal to (percentage)",
+    },
 
-    { operator: ">=", value: "199", couponType: "fixed", label: "equals or greater then (fixed)" },
-    { operator: ">=", value: "199", couponType: "percentage", label: "equals or greater then (percentage)" },
+    {
+        operator: ">=",
+        value: "199",
+        couponType: "fixed",
+        label: "equals or greater then (fixed)",
+    },
+    {
+        operator: ">=",
+        value: "199",
+        couponType: "percentage",
+        label: "equals or greater then (percentage)",
+    },
 
-    { operator: "<=", value: "199", couponType: "fixed", label: "equals or less than (fixed)" },
-    { operator: "<=", value: "199", couponType: "percentage", label: "equals or less than (percentage)" },
+    {
+        operator: "<=",
+        value: "199",
+        couponType: "fixed",
+        label: "equals or less than (fixed)",
+    },
+    {
+        operator: "<=",
+        value: "199",
+        couponType: "percentage",
+        label: "equals or less than (percentage)",
+    },
 
-    { operator: ">", value: "198", couponType: "fixed", label: "greater than (fixed)" },
-    { operator: ">", value: "198", couponType: "percentage", label: "greater than (percentage)" },
+    {
+        operator: ">",
+        value: "198",
+        couponType: "fixed",
+        label: "greater than (fixed)",
+    },
+    {
+        operator: ">",
+        value: "198",
+        couponType: "percentage",
+        label: "greater than (percentage)",
+    },
 
-    { operator: "<", value: "200", couponType: "fixed", label: "less than (fixed)" },
-    { operator: "<", value: "200", couponType: "percentage", label: "less than (percentage)" },
+    {
+        operator: "<",
+        value: "200",
+        couponType: "fixed",
+        label: "less than (fixed)",
+    },
+    {
+        operator: "<",
+        value: "200",
+        couponType: "percentage",
+        label: "less than (percentage)",
+    },
 ];
 
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when price condition is -> ${tc.label}`, async ({ page }) => {
+            test(`should apply coupon when price condition is -> ${tc.label}`, async ({
+                page,
+            }) => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: tc.operator,

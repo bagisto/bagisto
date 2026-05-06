@@ -108,16 +108,38 @@ type TestCase = {
 };
 
 const testCases: TestCase[] = [
-    { operator: "==", optionSelect: "1", couponType: "fixed", label: "is equal to (fixed)" },
-    { operator: "==", optionSelect: "1", couponType: "percentage", label: "is equal to (percentage)" },
-    { operator: "!=", optionSelect: "0", couponType: "fixed", label: "is not equal to (fixed)" },
-    { operator: "!=", optionSelect: "0", couponType: "percentage", label: "is not equal to (percentage)" },
+    {
+        operator: "==",
+        optionSelect: "1",
+        couponType: "fixed",
+        label: "is equal to (fixed)",
+    },
+    {
+        operator: "==",
+        optionSelect: "1",
+        couponType: "percentage",
+        label: "is equal to (percentage)",
+    },
+    {
+        operator: "!=",
+        optionSelect: "0",
+        couponType: "fixed",
+        label: "is not equal to (fixed)",
+    },
+    {
+        operator: "!=",
+        optionSelect: "0",
+        couponType: "percentage",
+        label: "is not equal to (percentage)",
+    },
 ];
 
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when new product condition is -> ${tc.label}`, async ({ page }) => {
+            test(`should apply coupon when new product condition is -> ${tc.label}`, async ({
+                page,
+            }) => {
                 await runCartRuleTest(page, tc);
             });
         }

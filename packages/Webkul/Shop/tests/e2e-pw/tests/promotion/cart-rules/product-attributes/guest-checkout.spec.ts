@@ -4,12 +4,9 @@ import { ProductCreation } from "../../../../pages/admin/catalog/products/Produc
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsCustomer } from "../../../../utils/customer";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
-
-let generatedName: string;
 
 async function expectCouponAppliedWithGrandTotal(
     page: Page,
@@ -21,7 +18,11 @@ async function expectCouponAppliedWithGrandTotal(
         discountValue,
         couponType,
     );
-    const grandTotal = Number(discountedAmount.toFixed(2));
+
+    const formatted =
+        Math.abs(discountedAmount) < 0.01
+            ? "$0.00"
+            : `$${discountedAmount.toFixed(2)}`;
 
     await ruleApplyPage.applyCouponAtCheckout();
 
@@ -29,34 +30,27 @@ async function expectCouponAppliedWithGrandTotal(
         page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
 
-    const expectedText =
-        grandTotal === 0
-            ? "$0.00"
-            : `$${new Intl.NumberFormat("en-US", {
-                  minimumFractionDigits: 2,
-              }).format(grandTotal)}`;
-
     await expect(
-        page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-    ).toContainText(expectedText);
+        page.getByText("Grand Total").locator("..").locator("p").last(),
+    ).toContainText(formatted);
 }
 
-async function runCartRuleTest(
-    page: Page,
-    {
-        operator,
-        optionSelect,
-        couponType,
-    }: {
-        operator: string;
-        optionSelect: string;
-        couponType: CouponType;
-    },
-) {
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    optionSelect,
+    couponType,
+}: {
+    page: Page;
+    operator: string;
+    optionSelect: string;
+    couponType: CouponType;
+}) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
 
     await loginAsAdmin(page);
+
     await ruleCreatePage.cartRuleCreationFlow();
 
     const discountValue = await ruleCreatePage.addCondition({
@@ -66,13 +60,9 @@ async function runCartRuleTest(
         couponType,
     });
 
-    if (discountValue === undefined) {
-        throw new Error("Discount value was not created.");
-    }
+    if (!discountValue) throw new Error("Discount not created");
 
     await ruleCreatePage.saveCartRule();
-
-    await loginAsCustomer(page);
 
     await expectCouponAppliedWithGrandTotal(
         page,
@@ -83,13 +73,12 @@ async function runCartRuleTest(
 }
 
 test.beforeEach(async ({ adminPage }) => {
-    generatedName = `Simple-${Date.now()}`;
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
         type: "simple",
         sku: `SKU-${Date.now()}`,
-        name: generatedName,
+        name: `Simple-${Date.now()}`,
         shortDescription: "Short desc",
         description: "Full desc",
         price: 199,
@@ -103,48 +92,43 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-type TestCase = {
-    operator: string;
-    optionSelect: string;
-    couponType: CouponType;
-    label: string;
-};
-
-const testCases: TestCase[] = [
+const cases = [
     {
         operator: "==",
         optionSelect: "1",
-        couponType: "fixed",
+        type: "fixed",
         label: "is equal to (fixed)",
     },
     {
         operator: "==",
         optionSelect: "1",
-        couponType: "percentage",
+        type: "percentage",
         label: "is equal to (percentage)",
     },
+
     {
         operator: "!=",
         optionSelect: "0",
-        couponType: "fixed",
+        type: "fixed",
         label: "is not equal to (fixed)",
     },
     {
         operator: "!=",
         optionSelect: "0",
-        couponType: "percentage",
+        type: "percentage",
         label: "is not equal to (percentage)",
     },
 ];
 
-test.describe("cart rules", () => {
-    test.describe("product attribute conditions", () => {
-        for (const tc of testCases) {
-            test(`should apply coupon when product guest checkout condition is -> ${tc.label}`, async ({
+test.describe("cart rules - guest checkout conditions", () => {
+    for (const { operator, optionSelect, type, label } of cases) {
+        test(`guest checkout ${label}`, async ({ page }) => {
+            await createRuleAndVerifyCoupon({
                 page,
-            }) => {
-                await runCartRuleTest(page, tc);
+                operator,
+                optionSelect,
+                couponType: type as CouponType,
             });
-        }
-    });
+        });
+    }
 });

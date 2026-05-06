@@ -18,29 +18,21 @@ async function expectCouponAppliedWithGrandTotal(
         discountValue,
         couponType,
     );
-    const grandTotal = Number(discountedAmount.toFixed(2));
+
+    const formatted =
+        Math.abs(discountedAmount) < 0.01
+            ? "$0.00"
+            : `$${discountedAmount.toFixed(2)}`;
 
     await ruleApplyPage.applyCouponAtCheckout();
 
     await expect(
-        page.getByText("Coupon code applied successfully.").first(),
+        page.getByText("Coupon code applied successfully."),
     ).toBeVisible();
-    await page.waitForTimeout(2000);
 
-    if (grandTotal == 0) {
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText("$0.00");
-    } else {
-        const formattedAmount = new Intl.NumberFormat("en-US", {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        }).format(grandTotal);
-
-        await expect(
-            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
-        ).toContainText(`$${formattedAmount}`);
-    }
+    await expect(
+        page.getByText("Grand Total").locator("..").locator("p").last(),
+    ).toContainText(formatted);
 }
 
 async function createRuleAndVerifyCoupon({
@@ -61,6 +53,7 @@ async function createRuleAndVerifyCoupon({
 
     await loginAsAdmin(page);
     await ruleCreatePage.cartRuleCreationFlow();
+
     const discountValue = await ruleCreatePage.addCondition({
         attribute,
         operator,
@@ -68,11 +61,10 @@ async function createRuleAndVerifyCoupon({
         couponType,
     });
 
-    if (discountValue === undefined) {
-        throw new Error("Discount value was not created.");
-    }
+    if (!discountValue) throw new Error("Discount not created");
 
     await ruleCreatePage.saveCartRule();
+
     await expectCouponAppliedWithGrandTotal(
         page,
         ruleApplyPage,
@@ -81,7 +73,7 @@ async function createRuleAndVerifyCoupon({
     );
 }
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
+test.beforeEach(async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
@@ -96,158 +88,41 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach(
-    "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const ruleDeletePage = new RuleDeletePage(adminPage);
-        await ruleDeletePage.deleteRuleAndProduct();
-    },
-);
+test.afterEach(async ({ adminPage }) => {
+    const ruleDeletePage = new RuleDeletePage(adminPage);
+    await ruleDeletePage.deleteRuleAndProduct();
+});
 
-test.describe("cart rules", () => {
-    test.describe("cart item attribute conditions", () => {
-        test("should apply coupon when quantity in cart condition is -> is equal to (percentage)", async ({
-            page,
-        }) => {
+test.describe("cart rules - quantity conditions", () => {
+    const cases = [
+        { operator: "==", value: "1", type: "percentage" },
+        { operator: "==", value: "1", type: "fixed" },
+
+        { operator: "!=", value: "100", type: "percentage" },
+        { operator: "!=", value: "100", type: "fixed" },
+
+        { operator: ">=", value: "1", type: "percentage" },
+        { operator: ">=", value: "1", type: "fixed" },
+
+        { operator: "<=", value: "1", type: "percentage" },
+        { operator: "<=", value: "1", type: "fixed" },
+
+        { operator: ">", value: "0", type: "percentage" },
+        { operator: ">", value: "0", type: "fixed" },
+        
+        { operator: "<", value: "2", type: "percentage" },
+        { operator: "<", value: "2", type: "fixed" },
+    ];
+
+    for (const { operator, value, type } of cases) {
+        test(`quantity ${operator} (${type})`, async ({ page }) => {
             await createRuleAndVerifyCoupon({
                 page,
                 attribute: "cart_item|quantity",
-                operator: "==",
-                value: "1",
-                couponType: "percentage",
+                operator,
+                value,
+                couponType: type as CouponType,
             });
         });
-
-        test("should apply coupon when quantity in cart condition is -> is equal to (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: "==",
-                value: "1",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> is not equal to (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: "!=",
-                value: "100",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> is not equal to (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: "!=",
-                value: "100",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> equals or greater then (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: ">=",
-                value: "1",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> equals or greater then (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: ">=",
-                value: "1",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> equals or less than (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: "<=",
-                value: "1",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> equals or less than (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: "<=",
-                value: "1",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> greater than (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: ">",
-                value: "0",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> greater than (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: ">",
-                value: "0",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> less than (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: "<",
-                value: "2",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when quantity in cart condition is -> less than (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                attribute: "cart_item|quantity",
-                operator: "<",
-                value: "2",
-                couponType: "fixed",
-            });
-        });
-    });
+    }
 });

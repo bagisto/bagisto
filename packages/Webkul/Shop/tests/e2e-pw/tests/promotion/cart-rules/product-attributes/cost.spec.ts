@@ -73,7 +73,17 @@ async function createRuleAndVerifyCoupon({
     await page.goto("admin/catalog/products");
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
     await page.waitForLoadState("networkidle");
-    await page.locator('input[name="cost"]').first().fill(value);
+
+    if (operator === "!=" || operator === "<") {
+        const fillValue = (Number(value) - 1).toString();
+        await page.locator('input[name="cost"]').first().fill(fillValue);
+    } else if (operator === ">") {
+        const fillValue = (Number(value) + 1).toString();
+        await page.locator('input[name="cost"]').first().fill(fillValue);
+    } else {
+        await page.locator('input[name="cost"]').first().fill(value);
+    }
+
     await page.locator('button:has-text("Save Product")').first().click();
 
     await expect(
@@ -116,30 +126,91 @@ type TestCase = {
 };
 
 const testCases: TestCase[] = [
-    { operator: "==", value: productCost.toString(), couponType: "fixed", label: "is equal to (fixed)" },
-    { operator: "==", value: productCost.toString(), couponType: "percentage", label: "is equal to (percentage)" },
+    {
+        operator: "==",
+        value: productCost.toString(),
+        couponType: "fixed",
+        label: "is equal to (fixed)",
+    },
+    {
+        operator: "==",
+        value: productCost.toString(),
+        couponType: "percentage",
+        label: "is equal to (percentage)",
+    },
 
-    { operator: "!=", value: "100", couponType: "fixed", label: "is not equal to (fixed)" },
-    { operator: "!=", value: "100", couponType: "percentage", label: "is not equal to (percentage)" },
+    {
+        operator: "!=",
+        value: "100",
+        couponType: "fixed",
+        label: "is not equal to (fixed)",
+    },
+    {
+        operator: "!=",
+        value: "100",
+        couponType: "percentage",
+        label: "is not equal to (percentage)",
+    },
 
-    { operator: ">=", value: productCost.toString(), couponType: "fixed", label: "equals or greater than (fixed)" },
-    { operator: ">=", value: productCost.toString(), couponType: "percentage", label: "equals or greater than (percentage)" },
+    {
+        operator: ">=",
+        value: productCost.toString(),
+        couponType: "fixed",
+        label: "equals or greater than (fixed)",
+    },
+    {
+        operator: ">=",
+        value: productCost.toString(),
+        couponType: "percentage",
+        label: "equals or greater than (percentage)",
+    },
 
-    { operator: "<=", value: productCost.toString(), couponType: "fixed", label: "equals or less than (fixed)" },
-    { operator: "<=", value: productCost.toString(), couponType: "percentage", label: "equals or less than (percentage)" },
+    {
+        operator: "<=",
+        value: productCost.toString(),
+        couponType: "fixed",
+        label: "equals or less than (fixed)",
+    },
+    {
+        operator: "<=",
+        value: productCost.toString(),
+        couponType: "percentage",
+        label: "equals or less than (percentage)",
+    },
 
-    { operator: ">", value: (productCost - 1).toString(), couponType: "fixed", label: "greater than (fixed)" },
-    { operator: ">", value: (productCost - 1).toString(), couponType: "percentage", label: "greater than (percentage)" },
+    {
+        operator: ">",
+        value: (productCost - 1).toString(),
+        couponType: "fixed",
+        label: "greater than (fixed)",
+    },
+    {
+        operator: ">",
+        value: (productCost - 1).toString(),
+        couponType: "percentage",
+        label: "greater than (percentage)",
+    },
 
-    { operator: "<", value: (productCost + 1).toString(), couponType: "fixed", label: "less than (fixed)" },
-    { operator: "<", value: (productCost + 1).toString(), couponType: "percentage", label: "less than (percentage)" },
+    {
+        operator: "<",
+        value: (productCost + 1).toString(),
+        couponType: "fixed",
+        label: "less than (fixed)",
+    },
+    {
+        operator: "<",
+        value: (productCost + 1).toString(),
+        couponType: "percentage",
+        label: "less than (percentage)",
+    },
 ];
 
-/* ---------------- tests ---------------- */
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when cost condition is -> ${tc.label}`, async ({ page }) => {
+            test(`should apply coupon when cost condition is -> ${tc.label}`, async ({
+                page,
+            }) => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: tc.operator,

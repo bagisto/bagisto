@@ -97,14 +97,46 @@ test.afterEach(async ({ adminPage }) => {
 
 test.describe("cart rules - sku conditions", () => {
     const cases = [
-        { operator: "==", type: "fixed", value: () => generatedSku },
-        { operator: "==", type: "percentage", value: () => generatedSku },
-        { operator: "!=", type: "fixed", value: () => "sku-123" },
-        { operator: "!=", type: "percentage", value: () => "sku-123" },
-        { operator: "{}", type: "fixed", value: () => generatedSku },
-        { operator: "{}", type: "percentage", value: () => generatedSku },
-        { operator: "!{}", type: "fixed", value: () => "example" },
-        { operator: "!{}", type: "percentage", value: () => "example" },
+        {
+            operator: "==",
+            type: "fixed",
+            value: () => generatedSku,
+        },
+        {
+            operator: "==",
+            type: "percentage",
+            value: () => generatedSku,
+        },
+        {
+            operator: "!=",
+            type: "fixed",
+            value: () => "sku-123",
+        },
+        {
+            operator: "!=",
+            type: "percentage",
+            value: () => "sku-123",
+        },
+        {
+            operator: "{}",
+            type: "fixed",
+            value: () => generatedSku,
+        },
+        {
+            operator: "{}",
+            type: "percentage",
+            value: () => generatedSku,
+        },
+        {
+            operator: "!{}",
+            type: "fixed",
+            value: () => "example",
+        },
+        {
+            operator: "!{}",
+            type: "percentage",
+            value: () => "example",
+        },
     ];
 
     for (const { operator, type, value } of cases) {

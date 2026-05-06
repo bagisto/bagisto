@@ -8,8 +8,6 @@ import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
 
-const heightValue = "1";
-
 async function expectCouponAppliedWithGrandTotal(
     page: Page,
     ruleApplyPage: RuleApplyPage,
@@ -74,7 +72,12 @@ async function createRuleAndVerifyCoupon({
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
     await page.waitForLoadState("networkidle");
 
-    await page.locator('input[name="height"]').first().fill(value);
+    if (operator === "!=" || operator === "!{}") {
+        const fillValue = (Number(value) + 1).toString();
+        await page.locator('input[name="height"]').first().fill(fillValue);
+    } else {
+        await page.locator('input[name="height"]').first().fill(value);
+    }
 
     await page.locator('button:has-text("Save Product")').first().click();
 
@@ -118,23 +121,65 @@ type TestCase = {
 };
 
 const testCases: TestCase[] = [
-    { operator: "==", value: heightValue, couponType: "fixed", label: "is equal to (fixed)" },
-    { operator: "==", value: heightValue, couponType: "percentage", label: "is equal to (percentage)" },
+    {
+        operator: "==",
+        value: "1",
+        couponType: "fixed",
+        label: "is equal to (fixed)",
+    },
+    {
+        operator: "==",
+        value: "1",
+        couponType: "percentage",
+        label: "is equal to (percentage)",
+    },
 
-    { operator: "!=", value: "2", couponType: "fixed", label: "is not equal to (fixed)" },
-    { operator: "!=", value: "2", couponType: "percentage", label: "is not equal to (percentage)" },
+    {
+        operator: "!=",
+        value: "2",
+        couponType: "fixed",
+        label: "is not equal to (fixed)",
+    },
+    {
+        operator: "!=",
+        value: "2",
+        couponType: "percentage",
+        label: "is not equal to (percentage)",
+    },
 
-    { operator: "{}", value: heightValue, couponType: "fixed", label: "contains (fixed)" },
-    { operator: "{}", value: heightValue, couponType: "percentage", label: "contains (percentage)" },
+    {
+        operator: "{}",
+        value: "1",
+        couponType: "fixed",
+        label: "contains (fixed)",
+    },
+    {
+        operator: "{}",
+        value: "1",
+        couponType: "percentage",
+        label: "contains (percentage)",
+    },
 
-    { operator: "!{}", value: "2", couponType: "fixed", label: "does not contain (fixed)" },
-    { operator: "!{}", value: "2", couponType: "percentage", label: "does not contain (percentage)" },
+    {
+        operator: "!{}",
+        value: "2",
+        couponType: "fixed",
+        label: "does not contain (fixed)",
+    },
+    {
+        operator: "!{}",
+        value: "2",
+        couponType: "percentage",
+        label: "does not contain (percentage)",
+    },
 ];
 
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when height condition is -> ${tc.label}`, async ({ page }) => {
+            test(`should apply coupon when height condition is -> ${tc.label}`, async ({
+                page,
+            }) => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: tc.operator,

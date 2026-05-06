@@ -97,14 +97,46 @@ test.afterEach(async ({ adminPage }) => {
 
 test.describe("cart rules - url key conditions", () => {
     const cases = [
-        { operator: "==", type: "fixed", value: () => generatedName.toLowerCase() },
-        { operator: "==", type: "percentage", value: () => generatedName.toLowerCase() },
-        { operator: "!=", type: "fixed", value: () => "simple" },
-        { operator: "!=", type: "percentage", value: () => "simple" },
-        { operator: "{}", type: "fixed", value: () => generatedName.toLowerCase() },
-        { operator: "{}", type: "percentage", value: () => generatedName.toLowerCase() },
-        { operator: "!{}", type: "fixed", value: () => "example" },
-        { operator: "!{}", type: "percentage", value: () => "example" },
+        {
+            operator: "==",
+            type: "fixed",
+            value: () => generatedName.toLowerCase(),
+        },
+        {
+            operator: "==",
+            type: "percentage",
+            value: () => generatedName.toLowerCase(),
+        },
+        {
+            operator: "!=",
+            type: "fixed",
+            value: () => "simple",
+        },
+        {
+            operator: "!=",
+            type: "percentage",
+            value: () => "simple",
+        },
+        {
+            operator: "{}",
+            type: "fixed",
+            value: () => generatedName.toLowerCase(),
+        },
+        {
+            operator: "{}",
+            type: "percentage",
+            value: () => generatedName.toLowerCase(),
+        },
+        {
+            operator: "!{}",
+            type: "fixed",
+            value: () => "example",
+        },
+        {
+            operator: "!{}",
+            type: "percentage",
+            value: () => "example",
+        },
     ];
 
     for (const { operator, type, value } of cases) {

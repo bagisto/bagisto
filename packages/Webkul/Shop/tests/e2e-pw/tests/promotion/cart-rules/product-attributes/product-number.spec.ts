@@ -10,10 +10,7 @@ type CouponType = "fixed" | "percentage";
 
 let generatedProductNumber: string;
 
-async function expectGrandTotal(
-    page: Page,
-    expectedAmount: number,
-) {
+async function expectGrandTotal(page: Page, expectedAmount: number) {
     const formatted =
         Math.abs(expectedAmount) < 0.01
             ? "$0.00"
@@ -30,11 +27,10 @@ async function applyCouponAndVerify(
     discountValue: number,
     couponType: CouponType,
 ) {
-    const discountedAmount =
-        await ruleApplyPage.calculateDiscountedAmount(
-            discountValue,
-            couponType,
-        );
+    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
+        discountValue,
+        couponType,
+    );
 
     await ruleApplyPage.applyCouponAtCheckout();
 
@@ -77,19 +73,22 @@ async function createRuleAndVerifyCoupon({
     await page.goto("admin/catalog/products");
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
     await page.waitForLoadState("networkidle");
-    await page.locator('input[name="product_number"]').first().fill(value);
+
+    if (operator === "!=" || operator === "!{}") {
+        const fillValue = (Number(value) + 1).toString();
+        await page
+            .locator('input[name="product_number"]')
+            .first()
+            .fill(fillValue);
+    } else {
+        await page.locator('input[name="product_number"]').first().fill(value);
+    }
+
     await page.locator('button:has-text("Save Product")').first().click();
 
-    await expect(
-        page.getByText("Product updated successfully"),
-    ).toBeVisible();
+    await expect(page.getByText("Product updated successfully")).toBeVisible();
 
-    await applyCouponAndVerify(
-        page,
-        ruleApplyPage,
-        discountValue,
-        couponType,
-    );
+    await applyCouponAndVerify(page, ruleApplyPage, discountValue, couponType);
 }
 
 test.beforeEach(async ({ adminPage }) => {
@@ -114,24 +113,54 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - product number conditions", () => {
+test.describe("cart rules - product atribute conditions", () => {
     const testCases = [
-        { operator: "==", type: "fixed", valueType: "match" },
-        { operator: "==", type: "percentage", valueType: "match" },
-        { operator: "!=", type: "fixed", valueType: "non-match" },
-        { operator: "!=", type: "percentage", valueType: "non-match" },
-        { operator: "{}", type: "fixed", valueType: "match" },
-        { operator: "{}", type: "percentage", valueType: "match" },
-        { operator: "!{}", type: "fixed", valueType: "non-match" },
-        { operator: "!{}", type: "percentage", valueType: "non-match" },
+        {
+            operator: "==",
+            type: "fixed",
+            valueType: "match",
+        },
+        {
+            operator: "==",
+            type: "percentage",
+            valueType: "match",
+        },
+        {
+            operator: "!=",
+            type: "fixed",
+            valueType: "non-match",
+        },
+        {
+            operator: "!=",
+            type: "percentage",
+            valueType: "non-match",
+        },
+        {
+            operator: "{}",
+            type: "fixed",
+            valueType: "match",
+        },
+        {
+            operator: "{}",
+            type: "percentage",
+            valueType: "match",
+        },
+        {
+            operator: "!{}",
+            type: "fixed",
+            valueType: "non-match",
+        },
+        {
+            operator: "!{}",
+            type: "percentage",
+            valueType: "non-match",
+        },
     ];
 
     for (const { operator, type, valueType } of testCases) {
         test(`product number ${operator} (${type})`, async ({ page }) => {
             const value =
-                valueType === "match"
-                    ? generatedProductNumber
-                    : "123456";
+                valueType === "match" ? generatedProductNumber : "123456";
 
             await createRuleAndVerifyCoupon({
                 page,

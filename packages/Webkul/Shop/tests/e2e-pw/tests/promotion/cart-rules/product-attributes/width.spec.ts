@@ -70,9 +70,7 @@ async function createRuleAndVerifyCoupon({
     await page.locator('input[name="width"]').first().fill(value);
     await page.locator('button:has-text("Save Product")').first().click();
 
-    await expect(
-        page.getByText("Product updated successfully"),
-    ).toBeVisible();
+    await expect(page.getByText("Product updated successfully")).toBeVisible();
 
     await expectCouponAppliedWithGrandTotal(
         page,

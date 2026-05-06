@@ -108,10 +108,26 @@ type TestCase = {
 };
 
 const testCases: TestCase[] = [
-    { operator: "==", optionSelect: "1", couponType: "fixed" },
-    { operator: "==", optionSelect: "1", couponType: "percentage" },
-    { operator: "!=", optionSelect: "2", couponType: "fixed" },
-    { operator: "!=", optionSelect: "2", couponType: "percentage" },
+    {
+        operator: "==",
+        optionSelect: "1",
+        couponType: "fixed",
+    },
+    {
+        operator: "==",
+        optionSelect: "1",
+        couponType: "percentage",
+    },
+    {
+        operator: "!=",
+        optionSelect: "2",
+        couponType: "fixed",
+    },
+    {
+        operator: "!=",
+        optionSelect: "2",
+        couponType: "percentage",
+    },
 ];
 
 test.describe("cart rules", () => {

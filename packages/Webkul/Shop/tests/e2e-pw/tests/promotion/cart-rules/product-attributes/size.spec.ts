@@ -19,9 +19,10 @@ async function expectCouponAppliedWithGrandTotal(
         couponType,
     );
 
-    const grandTotal = Math.abs(discountedAmount) < 0.01
-        ? "$0.00"
-        : `$${discountedAmount.toFixed(2)}`;
+    const grandTotal =
+        Math.abs(discountedAmount) < 0.01
+            ? "$0.00"
+            : `$${discountedAmount.toFixed(2)}`;
 
     await ruleApplyPage.applyCouponAtCheckout();
 
@@ -68,9 +69,7 @@ async function createRuleAndVerifySize({
     await page.locator('select[name="size"]').first().selectOption(productSize);
     await page.locator('button:has-text("Save Product")').first().click();
 
-    await expect(
-        page.getByText("Product updated successfully"),
-    ).toBeVisible();
+    await expect(page.getByText("Product updated successfully")).toBeVisible();
 
     await expectCouponAppliedWithGrandTotal(
         page,
@@ -102,10 +101,30 @@ test.afterEach(async ({ adminPage }) => {
 
 test.describe("cart rules - size conditions", () => {
     const cases = [
-        { operator: "==", type: "fixed", ruleSize: "6", productSize: "6" },
-        { operator: "==", type: "percentage", ruleSize: "6", productSize: "6" },
-        { operator: "!=", type: "fixed", ruleSize: "6", productSize: "7" },
-        { operator: "!=", type: "percentage", ruleSize: "6", productSize: "7" },
+        {
+            operator: "==",
+            type: "fixed",
+            ruleSize: "6",
+            productSize: "6",
+        },
+        {
+            operator: "==",
+            type: "percentage",
+            ruleSize: "6",
+            productSize: "6",
+        },
+        {
+            operator: "!=",
+            type: "fixed",
+            ruleSize: "6",
+            productSize: "7",
+        },
+        {
+            operator: "!=",
+            type: "percentage",
+            ruleSize: "6",
+            productSize: "7",
+        },
     ];
 
     for (const { operator, type, ruleSize, productSize } of cases) {
