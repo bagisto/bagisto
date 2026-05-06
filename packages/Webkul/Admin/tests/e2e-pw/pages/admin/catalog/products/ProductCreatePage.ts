@@ -10,7 +10,6 @@ import {
     generateSKU,
 } from "../../../../utils/faker";
 import { ProductEditPage } from "./ProductEditPage";
-import { REFUSED } from "dns";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
