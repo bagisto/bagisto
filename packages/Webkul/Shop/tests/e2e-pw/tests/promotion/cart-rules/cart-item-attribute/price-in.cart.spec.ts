@@ -27,7 +27,7 @@ async function expectCouponAppliedWithGrandTotal(
     await ruleApplyPage.applyCouponAtCheckout();
 
     await expect(
-        page.getByText("Coupon code applied successfully."),
+        page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
 
     await expect(

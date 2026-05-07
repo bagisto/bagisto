@@ -27,7 +27,7 @@ async function expectCouponAppliedWithGrandTotal(
     await ruleApplyPage.applyCouponAtCheckout();
 
     await expect(
-        page.getByText("Coupon code applied successfully."),
+        page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
 
     await expect(
@@ -109,7 +109,7 @@ test.describe("cart rules - quantity conditions", () => {
 
         { operator: ">", value: "0", type: "percentage" },
         { operator: ">", value: "0", type: "fixed" },
-        
+
         { operator: "<", value: "2", type: "percentage" },
         { operator: "<", value: "2", type: "fixed" },
     ];

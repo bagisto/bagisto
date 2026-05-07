@@ -10,14 +10,11 @@ type CouponType = "fixed" | "percentage";
 
 async function updateProductWeight(page: Page, weight: string) {
     await page.goto("admin/catalog/products");
-
+    await page.waitForLoadState("networkidle");
     await page.locator('input[name="weight"]').first().fill(weight);
-
     await page.locator('button:has-text("Save Product")').first().click();
 
-    await expect(
-        page.getByText("Product updated successfully"),
-    ).toBeVisible();
+    await expect(page.getByText("Product updated successfully")).toBeVisible();
 }
 
 async function expectCouponAppliedWithGrandTotal(
@@ -39,7 +36,7 @@ async function expectCouponAppliedWithGrandTotal(
     await ruleApplyPage.applyCouponAtCheckout();
 
     await expect(
-        page.getByText("Coupon code applied successfully."),
+        page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
 
     await expect(
@@ -127,7 +124,7 @@ test.describe("cart rules - total weight conditions", () => {
 
         { operator: ">", value: "1", type: "percentage", weight: "2" },
         { operator: ">", value: "1", type: "fixed", weight: "2" },
-        
+
         { operator: "<", value: "2", type: "percentage" },
         { operator: "<", value: "2", type: "fixed" },
     ];

@@ -6,9 +6,38 @@ import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
 let generatedName: string;
-generatedName = `Simple-${Date.now()}`;
+
+async function createRuleAndVerify({
+    page,
+    operator,
+    value,
+}: {
+    page: any;
+    operator: string;
+    value: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|name",
+        operator,
+        value,
+        couponType: "percentage",
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+}
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
+    generatedName = `Simple-${Date.now()}`;
+
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
@@ -27,78 +56,46 @@ test.afterEach(
     "should delete the created product and rule",
     async ({ adminPage }) => {
         const ruleDeletePage = new RuleDeletePage(adminPage);
+
         await ruleDeletePage.deleteCatalogRuleAndProduct();
     },
 );
 
+const testCases = [
+    {
+        title: "is equal to",
+        operator: "==",
+        value: () => generatedName,
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        value: () => "simple",
+    },
+    {
+        title: "contains",
+        operator: "{}",
+        value: () => generatedName,
+    },
+    {
+        title: "does not contain",
+        operator: "!{}",
+        value: () => "example",
+    },
+];
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when name of product condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            const discountValue = await ruleCreatePage.addCondition({
-                attribute: "product|name",
-                operator: "==",
-                value: generatedName,
-                couponType: "percentage",
+        for (const testCase of testCases) {
+            test(`should apply coupon when name of product condition is -> ${testCase.title}`, async ({
+                page,
+            }) => {
+                await createRuleAndVerify({
+                    page,
+                    operator: testCase.operator,
+                    value: testCase.value(),
+                });
             });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
-        });
-
-        test("should apply coupon when name of product condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            const discountValue = await ruleCreatePage.addCondition({
-                attribute: "product|name",
-                operator: "!=",
-                value: "simple",
-                couponType: "percentage",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
-        });
-
-        test("should apply coupon when name of product condition is -> contains", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            const discountValue = await ruleCreatePage.addCondition({
-                attribute: "product|name",
-                operator: "{}",
-                value: generatedName,
-                couponType: "percentage",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
-        });
-
-        test("should apply coupon when name of product condition is -> does not contain", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            const discountValue = await ruleCreatePage.addCondition({
-                attribute: "product|name",
-                operator: "!{}",
-                value: "example",
-                couponType: "percentage",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
-        });
+        }
     });
 });
