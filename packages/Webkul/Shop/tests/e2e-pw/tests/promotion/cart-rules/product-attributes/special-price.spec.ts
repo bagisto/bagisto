@@ -68,7 +68,23 @@ async function createRuleAndVerifyCoupon({
     await page.goto("admin/catalog/products");
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
     await page.waitForLoadState("networkidle");
-    await page.locator('input[name="special_price"]').first().fill(value);
+
+    if (operator === "!=" || operator === ">=" || operator === ">") {
+        const fillValue = (Number(value) + 1).toString();
+        await page
+            .locator('input[name="special_price"]')
+            .first()
+            .fill(fillValue);
+    } else if (operator === "<" || operator === "<=") {
+        const fillValue = (Number(value) - 5).toString();
+        await page
+            .locator('input[name="special_price"]')
+            .first()
+            .fill(fillValue);
+    } else {
+        await page.locator('input[name="special_price"]').first().fill(value);
+    }
+
     await page.locator('button:has-text("Save Product")').first().click();
 
     await expect(

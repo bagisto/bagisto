@@ -76,6 +76,7 @@ test.describe("cart rules - tax category conditions", () => {
     test.beforeEach(async ({ adminPage }) => {
         await createTaxRate(adminPage);
         await createTaxCategory(adminPage);
+        await createTaxCategory(adminPage);
 
         const productCreation = new ProductCreation(adminPage);
 
@@ -91,7 +92,11 @@ test.describe("cart rules - tax category conditions", () => {
         });
 
         await adminPage.goto("admin/catalog/products");
-
+        await adminPage
+            .locator("span.cursor-pointer.icon-sort-right")
+            .nth(1)
+            .click();
+        await adminPage.waitForLoadState("networkidle");
         await adminPage
             .locator('select[name="tax_category_id"]')
             .first()

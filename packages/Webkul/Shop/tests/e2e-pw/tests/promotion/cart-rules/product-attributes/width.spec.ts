@@ -8,8 +8,6 @@ import { loginAsAdmin } from "../../../../utils/admin";
 
 type CouponType = "fixed" | "percentage";
 
-const widthValue = "1";
-
 async function expectCouponAppliedWithGrandTotal(
     page: Page,
     ruleApplyPage: RuleApplyPage,
@@ -67,7 +65,15 @@ async function createRuleAndVerifyCoupon({
 
     await page.goto("admin/catalog/products");
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
-    await page.locator('input[name="width"]').first().fill(value);
+    await page.waitForLoadState("networkidle");
+
+    if (operator === "!=" || operator === "!{}") {
+        const fillValue = (Number(value) + 1).toString();
+        await page.locator('input[name="width"]').first().fill(fillValue);
+    } else {
+        await page.locator('input[name="width"]').first().fill(value);
+    }
+
     await page.locator('button:has-text("Save Product")').first().click();
 
     await expect(page.getByText("Product updated successfully")).toBeVisible();
@@ -102,12 +108,12 @@ test.afterEach(async ({ adminPage }) => {
 
 test.describe("cart rules - width conditions", () => {
     const cases = [
-        { operator: "==", type: "fixed", value: widthValue },
-        { operator: "==", type: "percentage", value: widthValue },
+        { operator: "==", type: "fixed", value: "1" },
+        { operator: "==", type: "percentage", value: "1" },
         { operator: "!=", type: "fixed", value: "2" },
         { operator: "!=", type: "percentage", value: "2" },
-        { operator: "{}", type: "fixed", value: widthValue },
-        { operator: "{}", type: "percentage", value: widthValue },
+        { operator: "{}", type: "fixed", value: "1" },
+        { operator: "{}", type: "percentage", value: "1" },
         { operator: "!{}", type: "fixed", value: "2" },
         { operator: "!{}", type: "percentage", value: "2" },
     ];
