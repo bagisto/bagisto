@@ -96,18 +96,19 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - country conditions", () => {
+test.describe("cart rules", () => {
     const cases = [
         {
             operator: "==",
             option: "IN",
             type: "fixed",
             allowShipping: "yes",
+            label: "is equal to",
         },
     ];
 
-    for (const { operator, option, type, allowShipping } of cases) {
-        test(`country ${operator} (${type})`, async ({ page }) => {
+    for (const { operator, option, type, allowShipping, label } of cases) {
+        test("should apply coupon on shipping price", async ({ page }) => {
             await createRuleAndVerifyCoupon({
                 page,
                 operator,

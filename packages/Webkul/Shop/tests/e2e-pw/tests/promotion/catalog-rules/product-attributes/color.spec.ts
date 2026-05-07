@@ -78,13 +78,13 @@ test.afterEach(
 
 const testCases = [
     {
-        title: "should apply coupon when color condition is -> is equal to",
+        title: "is equal to",
         operator: "==",
         ruleValue: "1",
         productValue: "1",
     },
     {
-        title: "should apply coupon when color condition is -> is not equal to",
+        title: "is not equal to",
         operator: "!=",
         ruleValue: "1",
         productValue: "2",
@@ -94,7 +94,9 @@ const testCases = [
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(tc.title, async ({ page }) => {
+            test(`should apply condition when color condition is -> ${tc.title}`, async ({
+                page,
+            }) => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: tc.operator,

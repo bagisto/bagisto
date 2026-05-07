@@ -1,14 +1,15 @@
-import { expect, test } from "../../../../setup";
+import { test } from "../../../../setup";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
+import { Page } from "@playwright/test";
 
 let generatedName: string;
 generatedName = `Simple-${Date.now()}`;
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
+test.beforeEach(async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
@@ -23,48 +24,64 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach(
-    "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const rulesDeletePage = new RuleDeletePage(adminPage);
-        await rulesDeletePage.deleteCatalogRuleAndProduct();
+test.afterEach(async ({ adminPage }) => {
+    const rulesDeletePage = new RuleDeletePage(adminPage);
+    await rulesDeletePage.deleteCatalogRuleAndProduct();
+});
+
+async function runCatalogRuleTest({
+    page,
+    operator,
+    optionSelect,
+}: {
+    page: Page;
+    operator: string;
+    optionSelect: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|visible_individually",
+        operator,
+        optionSelect,
+        couponType: "percentage",
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+}
+
+const testCases = [
+    {
+        operator: "==",
+        optionSelect: "1",
+        label: "is equal to (yes)",
     },
-);
+    {
+        operator: "!=",
+        optionSelect: "0",
+        label: "is not equal to (no)",
+    },
+];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when visible individually product condition is -> is equal to (yes)", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            const discountValue = await ruleCreatePage.addCondition({
-                attribute: "product|visible_individually",
-                operator: "==",
-                optionSelect: "1",
-                couponType: "percentage",
+        for (const tc of testCases) {
+            test(`should apply coupon when visible individually condition is -> ${tc.label}`, async ({
+                page,
+            }) => {
+                await runCatalogRuleTest({
+                    page,
+                    operator: tc.operator,
+                    optionSelect: tc.optionSelect,
+                });
             });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
-        });
-
-        test("should apply coupon when visible individually product condition is -> is not equal to (no)", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            const discountValue = await ruleCreatePage.addCondition({
-                attribute: "product|visible_individually",
-                operator: "!=",
-                optionSelect: "0",
-                couponType: "percentage",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
-        });
+        }
     });
 });

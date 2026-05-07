@@ -91,14 +91,16 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - payment method conditions", () => {
+test.describe("cart rules", () => {
     const cases = [
         { operator: "==", option: "moneytransfer" },
         { operator: "!=", option: "cashondelivery" },
     ];
 
     for (const { operator, option } of cases) {
-        test(`payment method ${operator}`, async ({ page }) => {
+        test(`should allow coupon for fixed amount whole cart option`, async ({
+            page,
+        }) => {
             await createRuleAndVerifyCoupon({
                 page,
                 operator,

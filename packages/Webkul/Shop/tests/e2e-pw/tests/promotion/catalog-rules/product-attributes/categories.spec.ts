@@ -1,4 +1,4 @@
-import { test, expect } from "../../../../setup";
+import { test } from "../../../../setup";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
@@ -6,12 +6,15 @@ import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 import { Page } from "@playwright/test";
 
+let generatedSku: string;
+generatedSku = `SKU-${Date.now()}`;
+
 test.beforeEach(async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
         type: "simple",
-        sku: `SKU-${Date.now()}`,
+        sku: generatedSku,
         name: `Simple-${Date.now()}`,
         shortDescription: "Short desc",
         description: "Full desc",
@@ -23,47 +26,18 @@ test.beforeEach(async ({ adminPage }) => {
 
 test.afterEach(async ({ adminPage }) => {
     const ruleDeletePage = new RuleDeletePage(adminPage);
+
     await ruleDeletePage.deleteCatalogRuleAndProduct();
 });
-
-async function assignCategory(page: Page, categoryName: string) {
-    await page.goto("admin/catalog/products");
-
-    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
-
-    await page.waitForLoadState("networkidle");
-
-    const categoryLabel = page.locator("label", {
-        hasText: new RegExp(`^${categoryName}$`),
-    });
-
-    const categoryCheckbox = categoryLabel.locator('input[type="checkbox"]');
-
-    await expect(categoryCheckbox).toBeAttached();
-
-    if (!(await categoryCheckbox.isChecked())) {
-        await categoryLabel.click();
-    }
-
-    await expect(categoryCheckbox).toBeChecked();
-
-    await page.locator('button:has-text("Save Product")').first().click();
-
-    await expect(
-        page.getByText("Product updated successfully").first(),
-    ).toBeVisible();
-}
 
 async function runCatalogRuleTest({
     page,
     operator,
-    checkboxSelect,
-    assignCategoryName,
+    value,
 }: {
     page: Page;
     operator: string;
-    checkboxSelect: string;
-    assignCategoryName: string;
+    value: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -73,45 +47,50 @@ async function runCatalogRuleTest({
     await ruleCreatePage.catalogRuleCreationFlow();
 
     const discountValue = await ruleCreatePage.addCondition({
-        attribute: "product|category_ids",
+        attribute: "product|sku",
         operator,
-        checkboxSelect,
+        value,
         couponType: "percentage",
     });
 
     await ruleCreatePage.saveCatalogRule();
-
-    await assignCategory(page, assignCategoryName);
 
     await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
 }
 
 const testCases = [
     {
+        operator: "==",
+        value: generatedSku,
+        label: "is equal to",
+    },
+    {
+        operator: "!=",
+        value: "sku-123",
+        label: "is not equal to",
+    },
+    {
         operator: "{}",
-        checkboxSelect: "Mens",
-        assignCategoryName: "Mens",
+        value: generatedSku,
         label: "contains",
     },
     {
         operator: "!{}",
-        checkboxSelect: "Mens",
-        assignCategoryName: "Womens",
-        label: "does not contains",
+        value: "example",
+        label: "does not contain",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when category of product condition is -> ${tc.label}`, async ({
+            test(`should apply coupon when category condition -> ${tc.label}`, async ({
                 page,
             }) => {
                 await runCatalogRuleTest({
                     page,
                     operator: tc.operator,
-                    checkboxSelect: tc.checkboxSelect,
-                    assignCategoryName: tc.assignCategoryName,
+                    value: tc.value,
                 });
             });
         }

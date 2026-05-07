@@ -93,29 +93,85 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - subtotal conditions", () => {
+test.describe("cart rules", () => {
     const cases = [
-        { operator: "==", value: "199", type: "percentage" },
-        { operator: "==", value: "199", type: "fixed" },
+        {
+            operator: "==",
+            value: "199",
+            type: "percentage",
+            label: "equal to",
+        },
+        {
+            operator: "==",
+            value: "199",
+            type: "fixed",
+            label: "equal to",
+        },
 
-        { operator: "!=", value: "101", type: "percentage" },
-        { operator: "!=", value: "101", type: "fixed" },
-
-        { operator: ">=", value: "199", type: "percentage" },
-        { operator: ">=", value: "199", type: "fixed" },
-
-        { operator: "<=", value: "200", type: "percentage" },
-        { operator: "<=", value: "200", type: "fixed" },
-
-        { operator: ">", value: "198", type: "percentage" },
-        { operator: ">", value: "198", type: "fixed" },
-        
-        { operator: "<", value: "200", type: "percentage" },
-        { operator: "<", value: "200", type: "fixed" },
+        {
+            operator: "!=",
+            value: "101",
+            type: "percentage",
+            label: "not equal to",
+        },
+        {
+            operator: "!=",
+            value: "101",
+            type: "fixed",
+            label: "not equal to",
+        },
+        {
+            operator: ">=",
+            value: "199",
+            type: "percentage",
+            label: "greater than or equal to",
+        },
+        {
+            operator: ">=",
+            value: "199",
+            type: "fixed",
+            label: "greater than or equal to",
+        },
+        {
+            operator: "<=",
+            value: "200",
+            type: "percentage",
+            label: "less than or equal to",
+        },
+        {
+            operator: "<=",
+            value: "200",
+            type: "fixed",
+            label: "less than or equal to",
+        },
+        {
+            operator: ">",
+            value: "198",
+            type: "percentage",
+            label: "greater than",
+        },
+        {
+            operator: ">",
+            value: "198",
+            type: "fixed",
+            label: "greater than",
+        },
+        {
+            operator: "<",
+            value: "200",
+            type: "percentage",
+            label: "less than",
+        },
+        {
+            operator: "<",
+            value: "200",
+            type: "fixed",
+            label: "less than",
+        },
     ];
 
-    for (const { operator, value, type } of cases) {
-        test(`subtotal ${operator} (${type})`, async ({ page }) => {
+    for (const { operator, value, type, label } of cases) {
+        test(`should apply coupon when subtotal condition is -> ${label} (${type})`, async ({ page }) => {
             await createRuleAndVerifyCoupon({
                 page,
                 attribute: "cart_item|base_total",

@@ -64,12 +64,12 @@ test.afterEach(
 
 const testCases = [
     {
-        title: "should apply coupon when product guest checkout condition is -> is equal to",
+        title: "is equal to",
         operator: "==",
         optionSelect: "1",
     },
     {
-        title: "should apply coupon when product guest checkout condition is -> is not equal to",
+        title: "is not equal to",
         operator: "!=",
         optionSelect: "0",
     },
@@ -78,7 +78,9 @@ const testCases = [
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(tc.title, async ({ page }) => {
+            test(`should apply coupon when guest checkout condition is -> ${tc.title}`, async ({
+                page,
+            }) => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: tc.operator,

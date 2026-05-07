@@ -118,7 +118,7 @@ const testCases = [
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when attribute family of product condition is -> ${tc.label}`, async ({
+            test(`should apply coupon when attribute family condition is-> ${tc.label}`, async ({
                 page,
             }) => {
                 await runCatalogRuleTest({

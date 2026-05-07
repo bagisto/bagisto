@@ -75,37 +75,37 @@ test.afterEach(
 
 const testCases = [
     {
-        title: "should apply coupon when cost condition is -> is equal to",
+        title: "is equal to",
         operator: "==",
         ruleValue: "199",
         productValue: "199",
     },
     {
-        title: "should apply coupon when cost condition is -> is not equal to",
+        title: "is not equal to",
         operator: "!=",
         ruleValue: "100",
         productValue: "200",
     },
     {
-        title: "should apply coupon when cost condition is -> equals or greater then",
+        title: "equals or greater then",
         operator: ">=",
         ruleValue: "199",
         productValue: "199",
     },
     {
-        title: "should apply coupon when cost condition is -> equals or less than",
+        title: "equals or less than",
         operator: "<=",
         ruleValue: "200",
         productValue: "198",
     },
     {
-        title: "should apply coupon when cost condition is -> greater than",
+        title: "greater than",
         operator: ">",
         ruleValue: "195",
         productValue: "199",
     },
     {
-        title: "should apply coupon when cost condition is -> less than",
+        title: "less than",
         operator: "<",
         ruleValue: "200",
         productValue: "195",
@@ -115,7 +115,9 @@ const testCases = [
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(tc.title, async ({ page }) => {
+            test(`should apply coupon when cost condition is -> ${tc.title}`, async ({
+                page,
+            }) => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: tc.operator,
