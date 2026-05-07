@@ -98,7 +98,7 @@ test.describe("cart rules", () => {
     ];
 
     for (const { operator, option } of cases) {
-        test(`should allow coupon for fixed amount whole cart option`, async ({
+        test(`should allow coupon for fixed amount whole cart option -> ${operator}`, async ({
             page,
         }) => {
             await createRuleAndVerifyCoupon({

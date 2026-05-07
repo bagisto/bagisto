@@ -20,6 +20,7 @@ async function expectCouponAppliedWithGrandTotal(
         couponType,
         incrementTimes,
     );
+
     const grandTotal = Number(discountedAmount.toFixed(2));
 
     await ruleApplyPage.applyCoupon();
@@ -27,9 +28,10 @@ async function expectCouponAppliedWithGrandTotal(
     await expect(
         page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
+
     await page.waitForTimeout(2000);
 
-    if (grandTotal == 0) {
+    if (grandTotal === 0) {
         await expect(
             page.locator("text=Grand Total").locator("..").locator("p").nth(1),
         ).toContainText("$0.00");
@@ -62,7 +64,9 @@ async function createRuleAndVerifyCoupon({
     const ruleApplyPage = new RuleApplyPage(page);
 
     await loginAsAdmin(page);
+
     await ruleCreatePage.cartRuleCreationFlow();
+
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "cart|items_qty",
         operator,
@@ -75,6 +79,7 @@ async function createRuleAndVerifyCoupon({
     }
 
     await ruleCreatePage.saveCartRule();
+
     await expectCouponAppliedWithGrandTotal(
         page,
         ruleApplyPage,
@@ -84,7 +89,7 @@ async function createRuleAndVerifyCoupon({
     );
 }
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
+test.beforeEach(async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
@@ -99,149 +104,69 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach(
-    "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const ruleDeletePage = new RuleDeletePage(adminPage);
-        await ruleDeletePage.deleteRuleAndProduct();
+test.afterEach(async ({ adminPage }) => {
+    const ruleDeletePage = new RuleDeletePage(adminPage);
+
+    await ruleDeletePage.deleteRuleAndProduct();
+});
+
+const testCases = [
+    {
+        operator: "==",
+        value: "1",
+        incrementTimes: undefined,
+        label: "is equal to",
     },
-);
+    {
+        operator: "!=",
+        value: "2",
+        incrementTimes: undefined,
+        label: "is not equal to",
+    },
+    {
+        operator: ">=",
+        value: "1",
+        incrementTimes: undefined,
+        label: "equals or greater then",
+    },
+    {
+        operator: "<=",
+        value: "2",
+        incrementTimes: undefined,
+        label: "equals or less than",
+    },
+    {
+        operator: ">",
+        value: "1",
+        incrementTimes: 2,
+        label: "greater than",
+    },
+    {
+        operator: "<",
+        value: "2",
+        incrementTimes: undefined,
+        label: "less than",
+    },
+];
+
+const couponTypes: CouponType[] = ["fixed", "percentage"];
 
 test.describe("cart rules", () => {
     test.describe("cart attribute conditions", () => {
-        test("should apply coupon when total item quantity condition is -> is equal to (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "==",
-                value: "1",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> is equal to (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "==",
-                value: "1",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> is not equal to (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "!=",
-                value: "2",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> is not equal to (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "!=",
-                value: "2",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> equals or greater then (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: ">=",
-                value: "1",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> equals or greater then (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: ">=",
-                value: "1",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> equals or less than (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "<=",
-                value: "2",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> equals or less than (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "<=",
-                value: "2",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> greater than (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: ">",
-                value: "1",
-                couponType: "fixed",
-                incrementTimes: 2,
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> greater than (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: ">",
-                value: "1",
-                couponType: "percentage",
-                incrementTimes: 2,
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> less than (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "<",
-                value: "2",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when total item quantity condition is -> less than (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "<",
-                value: "2",
-                couponType: "percentage",
-            });
-        });
+        for (const tc of testCases) {
+            for (const couponType of couponTypes) {
+                test(`should apply coupon when total item quantity condition is -> ${tc.label} (${couponType})`, async ({
+                    page,
+                }) => {
+                    await createRuleAndVerifyCoupon({
+                        page,
+                        operator: tc.operator,
+                        value: tc.value,
+                        couponType,
+                        incrementTimes: tc.incrementTimes,
+                    });
+                });
+            }
+        }
     });
 });
-

@@ -18,6 +18,7 @@ async function expectCouponAppliedWithGrandTotal(
         discountValue,
         couponType,
     );
+
     const grandTotal = Number(discountedAmount.toFixed(2));
 
     await ruleApplyPage.applyCouponAtCheckout();
@@ -25,6 +26,7 @@ async function expectCouponAppliedWithGrandTotal(
     await expect(
         page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
+
     await page.waitForTimeout(2000);
 
     if (grandTotal == 0) {
@@ -58,7 +60,9 @@ async function createRuleAndVerifyCoupon({
     const ruleApplyPage = new RuleApplyPage(page);
 
     await loginAsAdmin(page);
+
     await ruleCreatePage.cartRuleCreationFlow();
+
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "cart|postcode",
         operator,
@@ -71,6 +75,7 @@ async function createRuleAndVerifyCoupon({
     }
 
     await ruleCreatePage.saveCartRule();
+
     await expectCouponAppliedWithGrandTotal(
         page,
         ruleApplyPage,
@@ -79,7 +84,7 @@ async function createRuleAndVerifyCoupon({
     );
 }
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
+test.beforeEach(async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
@@ -94,58 +99,52 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach(
-    "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const ruleDeletePage = new RuleDeletePage(adminPage);
-        await ruleDeletePage.deleteRuleAndProduct();
+test.afterEach(async ({ adminPage }) => {
+    const ruleDeletePage = new RuleDeletePage(adminPage);
+
+    await ruleDeletePage.deleteRuleAndProduct();
+});
+
+const testCases = [
+    {
+        operator: "==",
+        value: "123456",
+        couponType: "fixed" as CouponType,
+        label: "is equal to (fixed)",
     },
-);
+    {
+        operator: "==",
+        value: "123456",
+        couponType: "percentage" as CouponType,
+        label: "is equal to (percentage)",
+    },
+    {
+        operator: "!=",
+        value: "54321",
+        couponType: "fixed" as CouponType,
+        label: "is not equal to (fixed)",
+    },
+    {
+        operator: "!=",
+        value: "54321",
+        couponType: "percentage" as CouponType,
+        label: "is not equal to (percentage)",
+    },
+];
 
 test.describe("cart rules", () => {
     test.describe("cart attribute conditions", () => {
-        test("should apply coupon when shipping postcode condition is -> is equal to (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
+        for (const tc of testCases) {
+            test(`should apply coupon when shipping postcode condition is -> ${tc.label}`, async ({
                 page,
-                operator: "==",
-                value: "123456",
-                couponType: "fixed",
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator: tc.operator,
+                    value: tc.value,
+                    couponType: tc.couponType,
+                });
             });
-        });
-
-        test("should apply coupon when shipping postcode condition is -> is equal to (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "==",
-                value: "123456",
-                couponType: "percentage",
-            });
-        });
-
-        test("should apply coupon when shipping postcode condition is -> is not equal to (fixed)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "!=",
-                value: "54321",
-                couponType: "fixed",
-            });
-        });
-
-        test("should apply coupon when shipping postcode condition is -> is not equal to (percentage)", async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
-                page,
-                operator: "!=",
-                value: "54321",
-                couponType: "percentage",
-            });
-        });
+        }
     });
 });
