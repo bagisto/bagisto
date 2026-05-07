@@ -1,19 +1,18 @@
-import { test } from "../../../../setup";
+import { test } from "../../../setup";
 import { expect, Page } from "@playwright/test";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
-import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
-import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
-import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
+import { ProductCreation } from "../../../pages/admin/catalog/products/ProductCreatePage";
+import { RuleDeletePage } from "../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleCreatePage } from "../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleApplyPage } from "../../../pages/shop/rules/RuleApplyPage";
+import { loginAsAdmin } from "../../../utils/admin";
 
-type CouponType = "fixed" | "percentage" | "fixedAmmountWholeCart";
+type CouponType = "fixedAmmountWholeCart";
 
 async function expectCouponAppliedWithGrandTotal(
     page: Page,
     ruleApplyPage: RuleApplyPage,
     discountValue: number,
     couponType: CouponType,
-    allowShipping?: string,
 ) {
     const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
         discountValue,
@@ -25,10 +24,10 @@ async function expectCouponAppliedWithGrandTotal(
             ? "$0.00"
             : `$${discountedAmount.toFixed(2)}`;
 
-    await ruleApplyPage.applyCouponAtCheckout(allowShipping);
+    await ruleApplyPage.applyCouponAtCheckout();
 
     await expect(
-        page.getByText("Coupon code applied successfully."),
+        page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
 
     await expect(
@@ -41,13 +40,11 @@ async function createRuleAndVerifyCoupon({
     operator,
     optionSelect,
     couponType,
-    allowShipping,
 }: {
     page: Page;
     operator: string;
     optionSelect: string;
     couponType: CouponType;
-    allowShipping?: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -56,11 +53,10 @@ async function createRuleAndVerifyCoupon({
     await ruleCreatePage.cartRuleCreationFlow();
 
     const discountValue = await ruleCreatePage.addCondition({
-        attribute: "cart|country",
+        attribute: "cart|payment_method",
         operator,
         optionSelect,
         couponType,
-        allowShipping,
     });
 
     if (!discountValue) throw new Error("Discount not created");
@@ -72,7 +68,6 @@ async function createRuleAndVerifyCoupon({
         ruleApplyPage,
         discountValue,
         couponType,
-        allowShipping,
     );
 }
 
@@ -96,25 +91,21 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules", () => {
-    const cases = [
-        {
-            operator: "==",
-            option: "IN",
-            type: "fixed",
-            allowShipping: "yes",
-            label: "is equal to",
-        },
-    ];
+const cases = [
+    { operator: "==", option: "moneytransfer" },
+    { operator: "!=", option: "cashondelivery" },
+];
 
-    for (const { operator, option, type, allowShipping, label } of cases) {
-        test("should apply coupon on shipping price", async ({ page }) => {
+test.describe("cart rules", () => {
+    for (const { operator, option } of cases) {
+        test(`should allow coupon for fixed amount whole cart option -> ${operator}`, async ({
+            page,
+        }) => {
             await createRuleAndVerifyCoupon({
                 page,
                 operator,
                 optionSelect: option,
-                couponType: type as CouponType,
-                allowShipping,
+                couponType: "fixedAmmountWholeCart",
             });
         });
     }

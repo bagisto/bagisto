@@ -6,26 +6,6 @@ import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 import { generateName, generateSlug } from "../../../../utils/faker";
 
-test.beforeEach(async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
-
-    await productCreation.createProduct({
-        type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
-        shortDescription: "Short desc",
-        description: "Full desc",
-        price: 199,
-        weight: 1,
-        inventory: 100,
-    });
-});
-
-test.afterEach(async ({ page }) => {
-    const ruleDeletePage = new RuleDeletePage(page);
-    await ruleDeletePage.deleteCatalogRuleAndProduct();
-});
-
 test("should create attribute family for creating rule", async ({
     adminPage,
 }) => {
@@ -117,6 +97,26 @@ const testCases = [
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
+        test.beforeEach(async ({ adminPage }) => {
+            const productCreation = new ProductCreation(adminPage);
+
+            await productCreation.createProduct({
+                type: "simple",
+                sku: `SKU-${Date.now()}`,
+                name: `Simple-${Date.now()}`,
+                shortDescription: "Short desc",
+                description: "Full desc",
+                price: 199,
+                weight: 1,
+                inventory: 100,
+            });
+        });
+
+        test.afterEach(async ({ page }) => {
+            const ruleDeletePage = new RuleDeletePage(page);
+            await ruleDeletePage.deleteCatalogRuleAndProduct();
+        });
+
         for (const tc of testCases) {
             test(`should apply coupon when attribute family condition is-> ${tc.label}`, async ({
                 page,

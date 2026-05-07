@@ -113,61 +113,65 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - product atribute conditions", () => {
-    const testCases = [
-        {
-            operator: "==",
-            type: "fixed",
-            valueType: "match",
-        },
-        {
-            operator: "==",
-            type: "percentage",
-            valueType: "match",
-        },
-        {
-            operator: "!=",
-            type: "fixed",
-            valueType: "non-match",
-        },
-        {
-            operator: "!=",
-            type: "percentage",
-            valueType: "non-match",
-        },
-        {
-            operator: "{}",
-            type: "fixed",
-            valueType: "match",
-        },
-        {
-            operator: "{}",
-            type: "percentage",
-            valueType: "match",
-        },
-        {
-            operator: "!{}",
-            type: "fixed",
-            valueType: "non-match",
-        },
-        {
-            operator: "!{}",
-            type: "percentage",
-            valueType: "non-match",
-        },
-    ];
+const testCases = [
+    {
+        operator: "==",
+        type: "fixed",
+        valueType: "match",
+    },
+    {
+        operator: "==",
+        type: "percentage",
+        valueType: "match",
+    },
+    {
+        operator: "!=",
+        type: "fixed",
+        valueType: "non-match",
+    },
+    {
+        operator: "!=",
+        type: "percentage",
+        valueType: "non-match",
+    },
+    {
+        operator: "{}",
+        type: "fixed",
+        valueType: "match",
+    },
+    {
+        operator: "{}",
+        type: "percentage",
+        valueType: "match",
+    },
+    {
+        operator: "!{}",
+        type: "fixed",
+        valueType: "non-match",
+    },
+    {
+        operator: "!{}",
+        type: "percentage",
+        valueType: "non-match",
+    },
+];
 
-    for (const { operator, type, valueType } of testCases) {
-        test(`product number ${operator} (${type})`, async ({ page }) => {
-            const value =
-                valueType === "match" ? generatedProductNumber : "123456";
-
-            await createRuleAndVerifyCoupon({
+test.describe("cart rules", () => {
+    test.describe("product atribute conditions", () => {
+        for (const { operator, type, valueType } of testCases) {
+            test(`should allow coupon when product number condition is -> ${operator} (${type})`, async ({
                 page,
-                operator,
-                value,
-                couponType: type as CouponType,
+            }) => {
+                const value =
+                    valueType === "match" ? generatedProductNumber : "123456";
+
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator,
+                    value,
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

@@ -119,35 +119,39 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - special price conditions", () => {
-    const cases = [
-        { operator: "==", type: "fixed", value: specialPriceValue },
-        { operator: "==", type: "percentage", value: specialPriceValue },
+const cases = [
+    { operator: "==", type: "fixed", value: specialPriceValue },
+    { operator: "==", type: "percentage", value: specialPriceValue },
 
-        { operator: "!=", type: "fixed", value: "100" },
-        { operator: "!=", type: "percentage", value: "100" },
+    { operator: "!=", type: "fixed", value: "100" },
+    { operator: "!=", type: "percentage", value: "100" },
 
-        { operator: ">=", type: "fixed", value: specialPriceValue },
-        { operator: ">=", type: "percentage", value: specialPriceValue },
+    { operator: ">=", type: "fixed", value: specialPriceValue },
+    { operator: ">=", type: "percentage", value: specialPriceValue },
 
-        { operator: "<=", type: "fixed", value: "200" },
-        { operator: "<=", type: "percentage", value: "200" },
+    { operator: "<=", type: "fixed", value: "200" },
+    { operator: "<=", type: "percentage", value: "200" },
 
-        { operator: ">", type: "fixed", value: "100" },
-        { operator: ">", type: "percentage", value: "100" },
+    { operator: ">", type: "fixed", value: "100" },
+    { operator: ">", type: "percentage", value: "100" },
 
-        { operator: "<", type: "fixed", value: "200" },
-        { operator: "<", type: "percentage", value: "200" },
-    ];
+    { operator: "<", type: "fixed", value: "200" },
+    { operator: "<", type: "percentage", value: "200" },
+];
 
-    for (const { operator, type, value } of cases) {
-        test(`special price ${operator} (${type})`, async ({ page }) => {
-            await createRuleAndVerifyCoupon({
+test.describe("cart rules", () => {
+    test.describe("product attribute condition", () => {
+        for (const { operator, type, value } of cases) {
+            test(`should apply coupon when special price condition is->  ${operator} (${type})`, async ({
                 page,
-                operator,
-                value,
-                couponType: type as CouponType,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator,
+                    value,
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

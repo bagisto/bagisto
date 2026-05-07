@@ -95,22 +95,26 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - visible individually conditions", () => {
-    const cases = [
-        { operator: "==", type: "fixed", option: "1" },
-        { operator: "==", type: "percentage", option: "1" },
-        { operator: "!=", type: "fixed", option: "0" },
-        { operator: "!=", type: "percentage", option: "0" },
-    ];
+const cases = [
+    { operator: "==", type: "fixed", option: "1" },
+    { operator: "==", type: "percentage", option: "1" },
+    { operator: "!=", type: "fixed", option: "0" },
+    { operator: "!=", type: "percentage", option: "0" },
+];
 
-    for (const { operator, type, option } of cases) {
-        test(`visible individually ${operator} (${type})`, async ({ page }) => {
-            await createRuleAndVerifyVisibility({
+test.describe("cart rules", () => {
+    test.describe("product attribute condition", () => {
+        for (const { operator, type, option } of cases) {
+            test(`should allow coupon when visible individually is->  ${operator} (${type})`, async ({
                 page,
-                operator,
-                optionSelect: option,
-                couponType: type as CouponType,
+            }) => {
+                await createRuleAndVerifyVisibility({
+                    page,
+                    operator,
+                    optionSelect: option,
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

@@ -72,66 +72,67 @@ async function createRuleAndVerifyTaxCategory({
     );
 }
 
-test.describe("cart rules - tax category conditions", () => {
-    test.beforeEach(async ({ adminPage }) => {
-        await createTaxRate(adminPage);
-        await createTaxCategory(adminPage);
-        await createTaxCategory(adminPage);
+test.beforeEach(async ({ adminPage }) => {
+    await createTaxRate(adminPage);
+    await createTaxCategory(adminPage);
+    await createTaxCategory(adminPage);
 
-        const productCreation = new ProductCreation(adminPage);
+    const productCreation = new ProductCreation(adminPage);
 
-        await productCreation.createProduct({
-            type: "simple",
-            sku: `SKU-${Date.now()}`,
-            name: `Simple-${Date.now()}`,
-            shortDescription: "Short desc",
-            description: "Full desc",
-            price: 199,
-            weight: 1,
-            inventory: 100,
-        });
-
-        await adminPage.goto("admin/catalog/products");
-        await adminPage
-            .locator("span.cursor-pointer.icon-sort-right")
-            .nth(1)
-            .click();
-        await adminPage.waitForLoadState("networkidle");
-        await adminPage
-            .locator('select[name="tax_category_id"]')
-            .first()
-            .selectOption("1");
-
-        await adminPage
-            .locator('button:has-text("Save Product")')
-            .first()
-            .click();
-
-        await expect(
-            adminPage.getByText("Product updated successfully"),
-        ).toBeVisible();
+    await productCreation.createProduct({
+        type: "simple",
+        sku: `SKU-${Date.now()}`,
+        name: `Simple-${Date.now()}`,
+        shortDescription: "Short desc",
+        description: "Full desc",
+        price: 199,
+        weight: 1,
+        inventory: 100,
     });
 
-    test.afterEach(async ({ adminPage }) => {
-        const ruleDeletePage = new RuleDeletePage(adminPage);
-        await ruleDeletePage.deleteRuleAndProduct();
-    });
+    await adminPage.goto("admin/catalog/products");
+    await adminPage
+        .locator("span.cursor-pointer.icon-sort-right")
+        .nth(1)
+        .click();
+    await adminPage.waitForLoadState("networkidle");
+    await adminPage
+        .locator('select[name="tax_category_id"]')
+        .first()
+        .selectOption("1");
 
-    const cases = [
-        { operator: "==", type: "fixed", option: "1" },
-        { operator: "==", type: "percentage", option: "1" },
-        { operator: "!=", type: "fixed", option: "2" },
-        { operator: "!=", type: "percentage", option: "2" },
-    ];
+    await adminPage.locator('button:has-text("Save Product")').first().click();
 
-    for (const { operator, type, option } of cases) {
-        test(`tax category ${operator} (${type})`, async ({ page }) => {
-            await createRuleAndVerifyTaxCategory({
+    await expect(
+        adminPage.getByText("Product updated successfully"),
+    ).toBeVisible();
+});
+
+test.afterEach(async ({ adminPage }) => {
+    const ruleDeletePage = new RuleDeletePage(adminPage);
+    await ruleDeletePage.deleteRuleAndProduct();
+});
+
+const cases = [
+    { operator: "==", type: "fixed", option: "1" },
+    { operator: "==", type: "percentage", option: "1" },
+    { operator: "!=", type: "fixed", option: "2" },
+    { operator: "!=", type: "percentage", option: "2" },
+];
+
+test.describe("cart rules", () => {
+    test.describe("product attributes condition", () => {
+        for (const { operator, type, option } of cases) {
+            test(`should apply coupon when tax category condition is -> ${operator} (${type})`, async ({
                 page,
-                operator,
-                optionSelect: option,
-                couponType: type as CouponType,
+            }) => {
+                await createRuleAndVerifyTaxCategory({
+                    page,
+                    operator,
+                    optionSelect: option,
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

@@ -95,58 +95,62 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - sku conditions", () => {
-    const cases = [
-        {
-            operator: "==",
-            type: "fixed",
-            value: () => generatedSku,
-        },
-        {
-            operator: "==",
-            type: "percentage",
-            value: () => generatedSku,
-        },
-        {
-            operator: "!=",
-            type: "fixed",
-            value: () => "sku-123",
-        },
-        {
-            operator: "!=",
-            type: "percentage",
-            value: () => "sku-123",
-        },
-        {
-            operator: "{}",
-            type: "fixed",
-            value: () => generatedSku,
-        },
-        {
-            operator: "{}",
-            type: "percentage",
-            value: () => generatedSku,
-        },
-        {
-            operator: "!{}",
-            type: "fixed",
-            value: () => "example",
-        },
-        {
-            operator: "!{}",
-            type: "percentage",
-            value: () => "example",
-        },
-    ];
+const cases = [
+    {
+        operator: "==",
+        type: "fixed",
+        value: () => generatedSku,
+    },
+    {
+        operator: "==",
+        type: "percentage",
+        value: () => generatedSku,
+    },
+    {
+        operator: "!=",
+        type: "fixed",
+        value: () => "sku-123",
+    },
+    {
+        operator: "!=",
+        type: "percentage",
+        value: () => "sku-123",
+    },
+    {
+        operator: "{}",
+        type: "fixed",
+        value: () => generatedSku,
+    },
+    {
+        operator: "{}",
+        type: "percentage",
+        value: () => generatedSku,
+    },
+    {
+        operator: "!{}",
+        type: "fixed",
+        value: () => "example",
+    },
+    {
+        operator: "!{}",
+        type: "percentage",
+        value: () => "example",
+    },
+];
 
-    for (const { operator, type, value } of cases) {
-        test(`sku ${operator} (${type})`, async ({ page }) => {
-            await createRuleAndVerifyCoupon({
+test.describe("cart rules", () => {
+    test.describe("product attribute condition", () => {
+        for (const { operator, type, value } of cases) {
+            test(`should apply coupon when sku consition is->  ${operator} (${type})`, async ({
                 page,
-                operator,
-                value: value(),
-                couponType: type as CouponType,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator,
+                    value: value(),
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

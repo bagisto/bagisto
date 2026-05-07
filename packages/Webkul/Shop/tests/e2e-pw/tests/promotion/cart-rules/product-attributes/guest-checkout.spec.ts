@@ -120,15 +120,19 @@ const cases = [
     },
 ];
 
-test.describe("cart rules - guest checkout conditions", () => {
-    for (const { operator, optionSelect, type, label } of cases) {
-        test(`guest checkout ${label}`, async ({ page }) => {
-            await createRuleAndVerifyCoupon({
+test.describe("cart rules", () => {
+    test.describe("product attribute condtion", () => {
+        for (const { operator, optionSelect, type, label } of cases) {
+            test(`should apply coupon when guest checkout condition is->  ${label}`, async ({
                 page,
-                operator,
-                optionSelect,
-                couponType: type as CouponType,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator,
+                    optionSelect,
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

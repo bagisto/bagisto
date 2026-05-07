@@ -106,26 +106,30 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - width conditions", () => {
-    const cases = [
-        { operator: "==", type: "fixed", value: "1" },
-        { operator: "==", type: "percentage", value: "1" },
-        { operator: "!=", type: "fixed", value: "2" },
-        { operator: "!=", type: "percentage", value: "2" },
-        { operator: "{}", type: "fixed", value: "1" },
-        { operator: "{}", type: "percentage", value: "1" },
-        { operator: "!{}", type: "fixed", value: "2" },
-        { operator: "!{}", type: "percentage", value: "2" },
-    ];
+const cases = [
+    { operator: "==", type: "fixed", value: "1" },
+    { operator: "==", type: "percentage", value: "1" },
+    { operator: "!=", type: "fixed", value: "2" },
+    { operator: "!=", type: "percentage", value: "2" },
+    { operator: "{}", type: "fixed", value: "1" },
+    { operator: "{}", type: "percentage", value: "1" },
+    { operator: "!{}", type: "fixed", value: "2" },
+    { operator: "!{}", type: "percentage", value: "2" },
+];
 
-    for (const { operator, type, value } of cases) {
-        test(`width ${operator} (${type})`, async ({ page }) => {
-            await createRuleAndVerifyCoupon({
+test.describe("cart rules", () => {
+    test.describe("product attribute condition", () => {
+        for (const { operator, type, value } of cases) {
+            test(`should allow coupon when width is-> ${operator} (${type})`, async ({
                 page,
-                operator,
-                value,
-                couponType: type as CouponType,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator,
+                    value,
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

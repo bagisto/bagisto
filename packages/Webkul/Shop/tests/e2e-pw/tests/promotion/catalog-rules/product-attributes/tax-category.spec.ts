@@ -41,13 +41,9 @@ test.afterEach(async ({ adminPage }) => {
 
 async function assignTaxCategory(page: Page) {
     await page.goto("admin/catalog/products");
-
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
-
     await page.waitForLoadState("networkidle");
-
     await page.locator('select[name="tax_category_id"]').selectOption("1");
-
     await page.locator('button:has-text("Save Product")').first().click();
 
     await expect(

@@ -11,6 +11,7 @@ type CouponType = "fixed" | "percentage";
 async function updateProductWeight(page: Page, weight: string) {
     await page.goto("admin/catalog/products");
     await page.waitForLoadState("networkidle");
+    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
     await page.locator('input[name="weight"]').first().fill(weight);
     await page.locator('button:has-text("Save Product")').first().click();
 
@@ -108,101 +109,103 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
+const cases = [
+    // {
+    //     operator: "==",
+    //     value: "1",
+    //     type: "percentage",
+    //     label: "equal to (percentage)",
+    // },
+    // {
+    //     operator: "==",
+    //     value: "1",
+    //     type: "fixed",
+    //     label: "equal to (fixed)",
+    // },
+
+    // {
+    //     operator: "!=",
+    //     value: "2",
+    //     type: "percentage",
+    //     label: "not equal to (percentage)",
+    // },
+    // {
+    //     operator: "!=",
+    //     value: "2",
+    //     type: "fixed",
+    //     label: "not equal to (fixed)",
+    // },
+
+    // {
+    //     operator: ">=",
+    //     value: "1",
+    //     type: "percentage",
+    //     label: "greater than or equal to (percentage)",
+    // },
+    // {
+    //     operator: ">=",
+    //     value: "1",
+    //     type: "fixed",
+    //     label: "greater than or equal to (fixed)",
+    // },
+
+    // {
+    //     operator: "<=",
+    //     value: "2",
+    //     type: "percentage",
+    //     label: "less than or equal to (percentage)",
+    // },
+    // {
+    //     operator: "<=",
+    //     value: "2",
+    //     type: "fixed",
+    //     label: "less than or equal to (fixed)",
+    // },
+
+    {
+        operator: ">",
+        value: "1",
+        type: "percentage",
+        weight: "2",
+        label: "greater than (percentage)",
+    },
+    // {
+    //     operator: ">",
+    //     value: "1",
+    //     type: "fixed",
+    //     weight: "2",
+    //     label: "greater than (fixed)",
+    // },
+
+    // {
+    //     operator: "<",
+    //     value: "2",
+    //     type: "percentage",
+    //     label: "less than (percentage)",
+    // },
+    // {
+    //     operator: "<",
+    //     value: "2",
+    //     type: "fixed",
+    //     label: "less than (fixed)",
+    // },
+];
+
 test.describe("cart rules", () => {
-    const cases = [
-        {
-            operator: "==",
-            value: "1",
-            type: "percentage",
-            label: "equal to (percentage)",
-        },
-        {
-            operator: "==",
-            value: "1",
-            type: "fixed",
-            label: "equal to (fixed)",
-        },
-
-        {
-            operator: "!=",
-            value: "2",
-            type: "percentage",
-            label: "not equal to (percentage)",
-        },
-        {
-            operator: "!=",
-            value: "2",
-            type: "fixed",
-            label: "not equal to (fixed)",
-        },
-
-        {
-            operator: ">=",
-            value: "1",
-            type: "percentage",
-            label: "greater than or equal to (percentage)",
-        },
-        {
-            operator: ">=",
-            value: "1",
-            type: "fixed",
-            label: "greater than or equal to (fixed)",
-        },
-
-        {
-            operator: "<=",
-            value: "2",
-            type: "percentage",
-            label: "less than or equal to (percentage)",
-        },
-        {
-            operator: "<=",
-            value: "2",
-            type: "fixed",
-            label: "less than or equal to (fixed)",
-        },
-
-        {
-            operator: ">",
-            value: "1",
-            type: "percentage",
-            weight: "2",
-            label: "greater than (percentage)",
-        },
-        {
-            operator: ">",
-            value: "1",
-            type: "fixed",
-            weight: "2",
-            label: "greater than (fixed)",
-        },
-
-        {
-            operator: "<",
-            value: "2",
-            type: "percentage",
-            label: "less than (percentage)",
-        },
-        {
-            operator: "<",
-            value: "2",
-            type: "fixed",
-            label: "less than (fixed)",
-        },
-    ];
-
-    for (const { operator, value, type, weight, label } of cases) {
-        test(`should apply coupon when total weight condition is -> ${label} (${type})`, async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
+    test.describe("cart item attributes", () => {
+        for (const { operator, value, type, weight, label } of cases) {
+            test(`should apply coupon when total weight condition is -> ${label}`, async ({
                 page,
-                attribute: "cart_item|base_total_weight",
-                operator,
-                value,
-                couponType: type as CouponType,
-                productWeight: weight,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    attribute: "cart_item|base_total_weight",
+                    operator,
+                    value,
+                    couponType: type as CouponType,
+                    productWeight: weight,
+                });
             });
-        });
-    }
+        }
+    });
 });

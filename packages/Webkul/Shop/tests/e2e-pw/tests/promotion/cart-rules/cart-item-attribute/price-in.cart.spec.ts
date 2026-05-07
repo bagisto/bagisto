@@ -93,98 +93,100 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
+const cases = [
+    {
+        operator: "==",
+        value: "199",
+        type: "percentage",
+        label: "is equal to",
+    },
+    {
+        operator: "==",
+        value: "199",
+        type: "fixed",
+        label: "is equal to",
+    },
+
+    {
+        operator: "!=",
+        value: "100",
+        type: "percentage",
+        label: "is not equal to",
+    },
+    {
+        operator: "!=",
+        value: "100",
+        type: "fixed",
+        label: "is not equal to",
+    },
+
+    {
+        operator: ">=",
+        value: "199",
+        type: "percentage",
+        label: "is greater than or equal to",
+    },
+    {
+        operator: ">=",
+        value: "199",
+        type: "fixed",
+        label: "is greater than or equal to",
+    },
+
+    {
+        operator: "<=",
+        value: "200",
+        type: "percentage",
+        label: "is less than or equal to",
+    },
+    {
+        operator: "<=",
+        value: "200",
+        type: "fixed",
+        label: "is less than or equal to",
+    },
+
+    {
+        operator: ">",
+        value: "198",
+        type: "percentage",
+        label: "is greater than",
+    },
+    {
+        operator: ">",
+        value: "198",
+        type: "fixed",
+        label: "is greater than",
+    },
+
+    {
+        operator: "<",
+        value: "200",
+        type: "percentage",
+        label: "is less than",
+    },
+    {
+        operator: "<",
+        value: "200",
+        type: "fixed",
+        label: "is less than",
+    },
+];
+
 test.describe("cart rules", () => {
-    const cases = [
-        {
-            operator: "==",
-            value: "199",
-            type: "percentage",
-            label: "is equal to",
-        },
-        {
-            operator: "==",
-            value: "199",
-            type: "fixed",
-            label: "is equal to",
-        },
-
-        {
-            operator: "!=",
-            value: "100",
-            type: "percentage",
-            label: "is not equal to",
-        },
-        {
-            operator: "!=",
-            value: "100",
-            type: "fixed",
-            label: "is not equal to",
-        },
-
-        {
-            operator: ">=",
-            value: "199",
-            type: "percentage",
-            label: "is greater than or equal to",
-        },
-        {
-            operator: ">=",
-            value: "199",
-            type: "fixed",
-            label: "is greater than or equal to",
-        },
-
-        {
-            operator: "<=",
-            value: "200",
-            type: "percentage",
-            label: "is less than or equal to",
-        },
-        {
-            operator: "<=",
-            value: "200",
-            type: "fixed",
-            label: "is less than or equal to",
-        },
-
-        {
-            operator: ">",
-            value: "198",
-            type: "percentage",
-            label: "is greater than",
-        },
-        {
-            operator: ">",
-            value: "198",
-            type: "fixed",
-            label: "is greater than",
-        },
-
-        {
-            operator: "<",
-            value: "200",
-            type: "percentage",
-            label: "is less than",
-        },
-        {
-            operator: "<",
-            value: "200",
-            type: "fixed",
-            label: "is less than",
-        },
-    ];
-
-    for (const { operator, value, type, label } of cases) {
-        test(`should apply coupon when price in cart condition -> ${label} (${type})`, async ({
-            page,
-        }) => {
-            await createRuleAndVerifyCoupon({
+    test.describe("cart item attribute", () => {
+        for (const { operator, value, type, label } of cases) {
+            test(`should apply coupon when price in cart condition -> ${label} (${type})`, async ({
                 page,
-                attribute: "cart_item|base_price",
-                operator,
-                value,
-                couponType: type as CouponType,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    attribute: "cart_item|base_price",
+                    operator,
+                    value,
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

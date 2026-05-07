@@ -95,58 +95,62 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - url key conditions", () => {
-    const cases = [
-        {
-            operator: "==",
-            type: "fixed",
-            value: () => generatedName.toLowerCase(),
-        },
-        {
-            operator: "==",
-            type: "percentage",
-            value: () => generatedName.toLowerCase(),
-        },
-        {
-            operator: "!=",
-            type: "fixed",
-            value: () => "simple",
-        },
-        {
-            operator: "!=",
-            type: "percentage",
-            value: () => "simple",
-        },
-        {
-            operator: "{}",
-            type: "fixed",
-            value: () => generatedName.toLowerCase(),
-        },
-        {
-            operator: "{}",
-            type: "percentage",
-            value: () => generatedName.toLowerCase(),
-        },
-        {
-            operator: "!{}",
-            type: "fixed",
-            value: () => "example",
-        },
-        {
-            operator: "!{}",
-            type: "percentage",
-            value: () => "example",
-        },
-    ];
+const cases = [
+    {
+        operator: "==",
+        type: "fixed",
+        value: () => generatedName.toLowerCase(),
+    },
+    {
+        operator: "==",
+        type: "percentage",
+        value: () => generatedName.toLowerCase(),
+    },
+    {
+        operator: "!=",
+        type: "fixed",
+        value: () => "simple",
+    },
+    {
+        operator: "!=",
+        type: "percentage",
+        value: () => "simple",
+    },
+    {
+        operator: "{}",
+        type: "fixed",
+        value: () => generatedName.toLowerCase(),
+    },
+    {
+        operator: "{}",
+        type: "percentage",
+        value: () => generatedName.toLowerCase(),
+    },
+    {
+        operator: "!{}",
+        type: "fixed",
+        value: () => "example",
+    },
+    {
+        operator: "!{}",
+        type: "percentage",
+        value: () => "example",
+    },
+];
 
-    for (const { operator, type, value } of cases) {
-        test(`url key ${operator} (${type})`, async ({ page }) => {
-            await createRuleAndVerifyUrlKey({
+test.describe("cart rules", () => {
+    test.describe("product attribute cndition", () => {
+        for (const { operator, type, value } of cases) {
+            test(`should allow coupon when url key condition is ->  ${operator} (${type})`, async ({
                 page,
-                operator,
-                value: value(),
-                couponType: type as CouponType,
+            }) => {
+                await createRuleAndVerifyUrlKey({
+                    page,
+                    operator,
+                    value: value(),
+                    couponType: type as CouponType,
+                });
             });
-        });
-    }
+        }
+    });
 });

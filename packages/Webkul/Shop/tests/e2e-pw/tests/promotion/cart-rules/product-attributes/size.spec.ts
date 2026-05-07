@@ -99,43 +99,47 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - size conditions", () => {
-    const cases = [
-        {
-            operator: "==",
-            type: "fixed",
-            ruleSize: "6",
-            productSize: "6",
-        },
-        {
-            operator: "==",
-            type: "percentage",
-            ruleSize: "6",
-            productSize: "6",
-        },
-        {
-            operator: "!=",
-            type: "fixed",
-            ruleSize: "6",
-            productSize: "7",
-        },
-        {
-            operator: "!=",
-            type: "percentage",
-            ruleSize: "6",
-            productSize: "7",
-        },
-    ];
+const cases = [
+    {
+        operator: "==",
+        type: "fixed",
+        ruleSize: "6",
+        productSize: "6",
+    },
+    {
+        operator: "==",
+        type: "percentage",
+        ruleSize: "6",
+        productSize: "6",
+    },
+    {
+        operator: "!=",
+        type: "fixed",
+        ruleSize: "6",
+        productSize: "7",
+    },
+    {
+        operator: "!=",
+        type: "percentage",
+        ruleSize: "6",
+        productSize: "7",
+    },
+];
 
-    for (const { operator, type, ruleSize, productSize } of cases) {
-        test(`size ${operator} (${type})`, async ({ page }) => {
-            await createRuleAndVerifySize({
+test.describe("cart rules", () => {
+    test.describe("product attribute condition", () => {
+        for (const { operator, type, ruleSize, productSize } of cases) {
+            test(`should apply coupon when size condition is ->  ${operator} (${type})`, async ({
                 page,
-                operator,
-                couponType: type as CouponType,
-                ruleSize,
-                productSize,
+            }) => {
+                await createRuleAndVerifySize({
+                    page,
+                    operator,
+                    couponType: type as CouponType,
+                    ruleSize,
+                    productSize,
+                });
             });
-        });
-    }
+        }
+    });
 });

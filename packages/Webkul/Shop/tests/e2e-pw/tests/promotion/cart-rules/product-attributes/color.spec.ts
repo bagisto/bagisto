@@ -115,7 +115,6 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-/* ---------------- test matrix ---------------- */
 type TestCase = {
     operator: string;
     colorToSet: string;
@@ -150,7 +149,6 @@ const testCases: TestCase[] = [
     },
 ];
 
-/* ---------------- tests ---------------- */
 test.describe("cart rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
