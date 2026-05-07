@@ -93,29 +93,91 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteRuleAndProduct();
 });
 
-test.describe("cart rules - quantity conditions", () => {
+test.describe("cart rules", () => {
     const cases = [
-        { operator: "==", value: "1", type: "percentage", label: "is equal to" },
-        { operator: "==", value: "1", type: "fixed", label: "is equal to" },
+        {
+            operator: "==",
+            value: "1",
+            type: "percentage",
+            label: "is equal to",
+        },
+        {
+            operator: "==",
+            value: "1",
+            type: "fixed",
+            label: "is equal to",
+        },
 
-        { operator: "!=", value: "100", type: "percentage", label: "is not equal to" },
-        { operator: "!=", value: "100", type: "fixed", label: "is not equal to" },
+        {
+            operator: "!=",
+            value: "100",
+            type: "percentage",
+            label: "is not equal to",
+        },
+        {
+            operator: "!=",
+            value: "100",
+            type: "fixed",
+            label: "is not equal to",
+        },
 
-        { operator: ">=", value: "1", type: "percentage", label: "is greater than or equal to" },
-        { operator: ">=", value: "1", type: "fixed", label: "is greater than or equal to" },
+        {
+            operator: ">=",
+            value: "1",
+            type: "percentage",
+            label: "is greater than or equal to",
+        },
+        {
+            operator: ">=",
+            value: "1",
+            type: "fixed",
+            label: "is greater than or equal to",
+        },
 
-        { operator: "<=", value: "1", type: "percentage", label: "is less than or equal to" },
-        { operator: "<=", value: "1", type: "fixed", label: "is less than or equal to" },
+        {
+            operator: "<=",
+            value: "1",
+            type: "percentage",
+            label: "is less than or equal to",
+        },
+        {
+            operator: "<=",
+            value: "1",
+            type: "fixed",
+            label: "is less than or equal to",
+        },
 
-        { operator: ">", value: "0", type: "percentage", label: "is greater than" },
-        { operator: ">", value: "0", type: "fixed", label: "is greater than" },
+        {
+            operator: ">",
+            value: "0",
+            type: "percentage",
+            label: "is greater than",
+        },
+        {
+            operator: ">",
+            value: "0",
+            type: "fixed",
+            label: "is greater than",
+        },
 
-        { operator: "<", value: "2", type: "percentage", label: "is less than" },
-        { operator: "<", value: "2", type: "fixed", label: "is less than" },
+        {
+            operator: "<",
+            value: "2",
+            type: "percentage",
+            label: "is less than",
+        },
+        {
+            operator: "<",
+            value: "2",
+            type: "fixed",
+            label: "is less than",
+        },
     ];
 
     for (const { operator, value, type, label } of cases) {
-        test(`should apply coupon when quantity in cart condition ${label}`, async ({ page }) => {
+        test(`should apply coupon when qty in cart is ->  ${label} (${operator}) (${type})`, async ({
+            page,
+        }) => {
             await createRuleAndVerifyCoupon({
                 page,
                 attribute: "cart_item|quantity",
