@@ -7,7 +7,6 @@ export class RuleCreatePage extends BasePage {
         super(page);
     }
 
-    // Cart Rule
     get createCartRuleButton() {
         return this.page.locator(
             'a.primary-button:has-text("Create Cart Rule")',
@@ -20,7 +19,6 @@ export class RuleCreatePage extends BasePage {
         );
     }
 
-    // Catalog Rule
     get createCatalogRuleButton() {
         return this.page.locator(
             'a.primary-button:has-text("Create Catalog Rule")',
@@ -89,7 +87,6 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('select[name="conditions[0][value]"]');
     }
 
-    // Actions
     get actionTypeSelect() {
         return this.page.locator("#action_type");
     }
@@ -98,7 +95,6 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('input[name="discount_amount"]');
     }
 
-    // Settings
     get sortOrderInput() {
         return this.page.locator('input[name="sort_order"]');
     }
@@ -119,7 +115,10 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('label[for="status"]');
     }
 
-    // Save
+    get validationErrors() {
+        return this.page.locator("p.text-red-600");
+    }
+
     get saveCartRuleButton() {
         return this.page.locator(
             'button.primary-button:has-text("Save Cart Rule")',

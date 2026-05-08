@@ -28,7 +28,7 @@ async function createRuleAndVerifyCoupon({
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "product|cost",
         operator,
-        optionSelect: ruleValue,
+        value: ruleValue,
         couponType: type,
     });
 
