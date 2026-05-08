@@ -95,6 +95,14 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('input[name="discount_amount"]');
     }
 
+    get discountStepInput() {
+        return this.page.locator("#discount_step");
+    }
+
+    get discountQuantityInput() {
+        return this.page.locator("#discount_quantity");
+    }
+
     get sortOrderInput() {
         return this.page.locator('input[name="sort_order"]');
     }
