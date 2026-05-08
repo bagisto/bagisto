@@ -63,7 +63,7 @@ async function runCatalogRuleTest({
     page: any;
     operator: string;
     optionSelect: string;
-    type:string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -89,25 +89,25 @@ const testCases = [
         operator: "==",
         optionSelect: "1",
         label: "is equal to",
-        type:"percentage"
+        type: "percentage",
     },
-        {
+    {
         operator: "==",
         optionSelect: "1",
         label: "is equal to",
-        type:"fixed"
+        type: "fixed",
     },
     {
         operator: "!=",
         optionSelect: "2",
         label: "is not equal to",
-        type:"percentage"
-    },   
+        type: "percentage",
+    },
     {
         operator: "!=",
-        optionSelect: "1",
+        optionSelect: "2",
         label: "is not equal to",
-        type:"fixed"
+        type: "fixed",
     },
 ];
 
@@ -141,7 +141,7 @@ test.describe("catalog rules", () => {
                     page,
                     operator: tc.operator,
                     optionSelect: tc.optionSelect,
-                    type:tc.type,
+                    type: tc.type,
                 });
             });
         }
