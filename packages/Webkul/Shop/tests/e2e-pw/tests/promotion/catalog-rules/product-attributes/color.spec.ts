@@ -10,11 +10,13 @@ async function createRuleAndVerifyCoupon({
     operator,
     ruleValue,
     productValue,
+    type,
 }: {
     page: any;
     operator: string;
     ruleValue: string;
     productValue: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -27,7 +29,7 @@ async function createRuleAndVerifyCoupon({
         attribute: "product|color",
         operator,
         optionSelect: ruleValue,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
@@ -49,7 +51,7 @@ async function createRuleAndVerifyCoupon({
         page.getByText("Product updated successfully").first(),
     ).toBeVisible();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
@@ -82,19 +84,35 @@ const testCases = [
         operator: "==",
         ruleValue: "1",
         productValue: "1",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        ruleValue: "1",
+        productValue: "1",
+        type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
         ruleValue: "1",
         productValue: "2",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        ruleValue: "1",
+        productValue: "2",
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply condition when color condition is -> ${tc.title}`, async ({
+            test(`should apply condition when color condition is -> ${tc.title} (${tc.type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerifyCoupon({
@@ -102,6 +120,7 @@ test.describe("catalog rules", () => {
                     operator: tc.operator,
                     ruleValue: tc.ruleValue,
                     productValue: tc.productValue,
+                    type: tc.type,
                 });
             });
         }

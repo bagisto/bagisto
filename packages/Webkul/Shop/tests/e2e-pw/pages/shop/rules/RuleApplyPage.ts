@@ -208,7 +208,7 @@ export class RuleApplyPage extends BasePage {
         return subtotal;
     }
 
-    async verifyCatalogRule(value: number) {
+    async verifyCatalogRule(value: number, type: string) {
         await this.visit("");
 
         const product = this.getSavedProduct();
@@ -216,7 +216,20 @@ export class RuleApplyPage extends BasePage {
         await this.searchInput.press("Enter");
 
         const actualPrice = 199;
-        const expectedDiscountedPrice = `$${(actualPrice * (1 - value / 100)).toFixed(2)}`;
+
+        let expectedDiscountedPrice = "";
+
+        if (type === "percentage") {
+            const discountedPrice = actualPrice - (actualPrice * value) / 100;
+
+            expectedDiscountedPrice = `$${discountedPrice.toFixed(2)}`;
+        }
+
+        if (type === "fixed") {
+            const discountedPrice = Math.max(actualPrice - value, 0);
+
+            expectedDiscountedPrice = `$${discountedPrice.toFixed(2)}`;
+        }
 
         await expect(
             this.page

@@ -33,10 +33,12 @@ async function runCatalogRuleTest({
     page,
     operator,
     value,
+    type,
 }: {
     page: Page;
     operator: string;
     value: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -49,12 +51,12 @@ async function runCatalogRuleTest({
         attribute: "product|url_key",
         operator,
         value,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 const testCases = [
@@ -62,34 +64,63 @@ const testCases = [
         operator: "==",
         value: generatedName.toLowerCase(),
         label: "is equal to",
+        type: "percentage",
+    },
+    {
+        operator: "==",
+        value: generatedName.toLowerCase(),
+        label: "is equal to",
+        type: "fixed",
     },
     {
         operator: "!=",
         value: "simple",
         label: "is not equal to",
+        type: "percentage",
+    },
+    {
+        operator: "!=",
+        value: "simple",
+        label: "is not equal to",
+        type: "fixed",
     },
     {
         operator: "{}",
         value: generatedName.toLowerCase(),
         label: "contains",
+        type: "percentage",
+    },
+    {
+        operator: "{}",
+        value: generatedName.toLowerCase(),
+        label: "contains",
+        type: "fixed",
     },
     {
         operator: "!{}",
         value: "example",
         label: "does not contain",
+        type: "percentage",
+    },
+    {
+        operator: "!{}",
+        value: "example",
+        label: "does not contain",
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when url key condition is -> ${tc.label}`, async ({
+            test(`should apply condition when url key condition is -> ${tc.label} (${tc.type})`, async ({
                 page,
             }) => {
                 await runCatalogRuleTest({
                     page,
                     operator: tc.operator,
                     value: tc.value,
+                    type: tc.type,
                 });
             });
         }

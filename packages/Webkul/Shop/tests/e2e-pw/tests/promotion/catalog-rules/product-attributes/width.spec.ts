@@ -47,11 +47,13 @@ async function runCatalogRuleTest({
     operator,
     value,
     width,
+    type,
 }: {
     page: Page;
     operator: string;
     value: string;
     width: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -64,14 +66,14 @@ async function runCatalogRuleTest({
         attribute: "product|width",
         operator,
         value,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
 
     await updateWidth(page, width);
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 const testCases = [
@@ -80,31 +82,63 @@ const testCases = [
         value: "1",
         width: "1",
         label: "is equal to",
+        type: "percentage",
+    },
+    {
+        operator: "==",
+        value: "1",
+        width: "1",
+        label: "is equal to",
+        type: "fixed",
     },
     {
         operator: "!=",
         value: "1",
         width: "2",
         label: "is not equal to",
+        type: "percentage",
+    },
+    {
+        operator: "!=",
+        value: "1",
+        width: "2",
+        label: "is not equal to",
+        type: "fixed",
     },
     {
         operator: "{}",
         value: "1",
         width: "1",
         label: "contains",
+        type: "percentage",
+    },
+    {
+        operator: "{}",
+        value: "1",
+        width: "1",
+        label: "contains",
+        type: "fixed",
     },
     {
         operator: "!{}",
         value: "1",
         width: "2",
         label: "does not contain",
+        type: "percentage",
+    },
+    {
+        operator: "!{}",
+        value: "1",
+        width: "2",
+        label: "does not contain",
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when width condition is -> ${tc.label}`, async ({
+            test(`should apply condition when width condition is -> ${tc.label} (${tc.type})`, async ({
                 page,
             }) => {
                 await runCatalogRuleTest({
@@ -112,6 +146,7 @@ test.describe("catalog rules", () => {
                     operator: tc.operator,
                     value: tc.value,
                     width: tc.width,
+                    type: tc.type,
                 });
             });
         }

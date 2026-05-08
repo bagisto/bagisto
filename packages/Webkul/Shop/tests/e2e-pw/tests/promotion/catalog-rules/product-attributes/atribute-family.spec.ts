@@ -58,10 +58,12 @@ async function runCatalogRuleTest({
     page,
     operator,
     optionSelect,
+    type,
 }: {
     page: any;
     operator: string;
     optionSelect: string;
+    type:string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -74,12 +76,12 @@ async function runCatalogRuleTest({
         attribute: "product|attribute_family_id",
         operator,
         optionSelect,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 const testCases = [
@@ -87,11 +89,25 @@ const testCases = [
         operator: "==",
         optionSelect: "1",
         label: "is equal to",
+        type:"percentage"
+    },
+        {
+        operator: "==",
+        optionSelect: "1",
+        label: "is equal to",
+        type:"fixed"
     },
     {
         operator: "!=",
         optionSelect: "2",
         label: "is not equal to",
+        type:"percentage"
+    },   
+    {
+        operator: "!=",
+        optionSelect: "1",
+        label: "is not equal to",
+        type:"fixed"
     },
 ];
 
@@ -118,13 +134,14 @@ test.describe("catalog rules", () => {
         });
 
         for (const tc of testCases) {
-            test(`should apply coupon when attribute family condition is-> ${tc.label}`, async ({
+            test(`should apply coupon when attribute family condition is -> ${tc.label} (${tc.type})`, async ({
                 page,
             }) => {
                 await runCatalogRuleTest({
                     page,
                     operator: tc.operator,
                     optionSelect: tc.optionSelect,
+                    type:tc.type,
                 });
             });
         }

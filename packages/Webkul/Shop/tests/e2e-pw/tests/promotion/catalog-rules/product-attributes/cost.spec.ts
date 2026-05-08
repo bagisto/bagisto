@@ -10,11 +10,13 @@ async function createRuleAndVerifyCoupon({
     operator,
     ruleValue,
     productValue,
+    type,
 }: {
     page: any;
     operator: string;
     ruleValue: string;
     productValue: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -24,10 +26,10 @@ async function createRuleAndVerifyCoupon({
     await ruleCreatePage.catalogRuleCreationFlow();
 
     const discountValue = await ruleCreatePage.addCondition({
-        attribute: "product|price",
+        attribute: "product|cost",
         operator,
-        value: ruleValue,
-        couponType: "percentage",
+        optionSelect: ruleValue,
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
@@ -46,7 +48,7 @@ async function createRuleAndVerifyCoupon({
         page.getByText("Product updated successfully").first(),
     ).toBeVisible();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
@@ -79,43 +81,91 @@ const testCases = [
         operator: "==",
         ruleValue: "199",
         productValue: "199",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        ruleValue: "199",
+        productValue: "199",
+        type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
         ruleValue: "100",
         productValue: "200",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        ruleValue: "100",
+        productValue: "200",
+        type: "fixed",
     },
     {
         title: "equals or greater then",
         operator: ">=",
         ruleValue: "199",
         productValue: "199",
+        type: "percentage",
+    },
+    {
+        title: "equals or greater then",
+        operator: ">=",
+        ruleValue: "199",
+        productValue: "199",
+        type: "fixed",
     },
     {
         title: "equals or less than",
         operator: "<=",
         ruleValue: "200",
         productValue: "198",
+        type: "percentage",
+    },
+    {
+        title: "equals or less than",
+        operator: "<=",
+        ruleValue: "200",
+        productValue: "198",
+        type: "fixed",
     },
     {
         title: "greater than",
         operator: ">",
         ruleValue: "195",
         productValue: "199",
+        type: "percentage",
+    },
+    {
+        title: "greater than",
+        operator: ">",
+        ruleValue: "195",
+        productValue: "199",
+        type: "fixed",
     },
     {
         title: "less than",
         operator: "<",
         ruleValue: "200",
         productValue: "195",
+        type: "percentage",
+    },
+    {
+        title: "less than",
+        operator: "<",
+        ruleValue: "200",
+        productValue: "195",
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when cost condition is -> ${tc.title}`, async ({
+            test(`should apply condition when cost condition is -> ${tc.title} (${tc.type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerifyCoupon({
@@ -123,6 +173,7 @@ test.describe("catalog rules", () => {
                     operator: tc.operator,
                     ruleValue: tc.ruleValue,
                     productValue: tc.productValue,
+                    type: tc.type,
                 });
             });
         }

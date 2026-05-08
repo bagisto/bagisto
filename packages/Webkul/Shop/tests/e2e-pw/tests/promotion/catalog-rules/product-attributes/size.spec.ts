@@ -10,11 +10,13 @@ async function createRuleAndVerifyCoupon({
     operator,
     optionSelect,
     productOption,
+    type,
 }: {
     page: any;
     operator: string;
     optionSelect: string;
     productOption: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -26,7 +28,7 @@ async function createRuleAndVerifyCoupon({
         attribute: "product|size",
         operator,
         optionSelect,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
@@ -48,7 +50,7 @@ async function createRuleAndVerifyCoupon({
         page.getByText("Product updated successfully").first(),
     ).toBeVisible();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
@@ -80,19 +82,35 @@ const testCases = [
         operator: "==",
         optionSelect: "6",
         productOption: "6",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "6",
+        productOption: "6",
+        type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
         optionSelect: "6",
         productOption: "7",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "6",
+        productOption: "7",
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const condition of testCases) {
-            test(`should apply coupon when size condition is -> ${condition.title}`, async ({
+            test(`should apply condition when size condition is -> ${condition.title} (${condition.type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerifyCoupon({
@@ -100,6 +118,7 @@ test.describe("catalog rules", () => {
                     operator: condition.operator,
                     optionSelect: condition.optionSelect,
                     productOption: condition.productOption,
+                    type: condition.type,
                 });
             });
         }

@@ -23,11 +23,13 @@ async function createRuleAndVerify({
     operator,
     conditionValue,
     productValue,
+    type,
 }: {
     page: Page;
     operator: string;
     conditionValue: string;
     productValue: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -40,14 +42,14 @@ async function createRuleAndVerify({
         attribute: "product|height",
         operator,
         value: conditionValue,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
 
     await updateProductHeight(page, productValue);
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
@@ -80,31 +82,63 @@ const testCases = [
         operator: "==",
         conditionValue: "1",
         productValue: "1",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        conditionValue: "1",
+        productValue: "1",
+        type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
         conditionValue: "1",
         productValue: "2",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        conditionValue: "1",
+        productValue: "2",
+        type: "fixed",
     },
     {
         title: "contains",
         operator: "{}",
         conditionValue: "1",
         productValue: "1",
+        type: "percentage",
+    },
+    {
+        title: "contains",
+        operator: "{}",
+        conditionValue: "1",
+        productValue: "1",
+        type: "fixed",
     },
     {
         title: "does not contain",
         operator: "!{}",
         conditionValue: "1",
         productValue: "2",
+        type: "percentage",
+    },
+    {
+        title: "does not contain",
+        operator: "!{}",
+        conditionValue: "1",
+        productValue: "2",
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const testCase of testCases) {
-            test(`should apply coupon when height condition is -> ${testCase.title}`, async ({
+            test(`should apply condition when height condition is -> ${testCase.title} (${testCase.type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerify({
@@ -112,6 +146,7 @@ test.describe("catalog rules", () => {
                     operator: testCase.operator,
                     conditionValue: testCase.conditionValue,
                     productValue: testCase.productValue,
+                    type: testCase.type,
                 });
             });
         }

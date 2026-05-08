@@ -13,11 +13,25 @@ const conditions = [
         title: "is equal to",
         operator: "==",
         optionSelect: "1",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "1",
+        type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
         optionSelect: "0",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "0",
+        type: "fixed",
     },
 ];
 
@@ -25,10 +39,12 @@ async function createRuleAndVerifyCoupon({
     page,
     operator,
     optionSelect,
+    type,
 }: {
     page: any;
     operator: string;
     optionSelect: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -40,12 +56,12 @@ async function createRuleAndVerifyCoupon({
         attribute: "product|new",
         operator,
         optionSelect,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
@@ -74,13 +90,14 @@ test.afterEach(
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const condition of conditions) {
-            test(`should apply coupon when new product condition is -> ${condition.title}`, async ({
+            test(`should apply condition when new product condition is -> ${condition.title} (${condition.type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: condition.operator,
                     optionSelect: condition.optionSelect,
+                    type: condition.type,
                 });
             });
         }

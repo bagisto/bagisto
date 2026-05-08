@@ -33,10 +33,12 @@ async function runCatalogRuleTest({
     page,
     operator,
     value,
+    type,
 }: {
     page: Page;
     operator: string;
     value: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -49,12 +51,12 @@ async function runCatalogRuleTest({
         attribute: "product|sku",
         operator,
         value,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 const testCases = [
@@ -62,34 +64,63 @@ const testCases = [
         operator: "==",
         value: generatedSku,
         label: "is equal to",
+        type: "percentage",
+    },
+    {
+        operator: "==",
+        value: generatedSku,
+        label: "is equal to",
+        type: "fixed",
     },
     {
         operator: "!=",
         value: "sku-123",
         label: "is not equal to",
+        type: "percentage",
+    },
+    {
+        operator: "!=",
+        value: "sku-123",
+        label: "is not equal to",
+        type: "fixed",
     },
     {
         operator: "{}",
         value: generatedSku,
         label: "contains",
+        type: "percentage",
+    },
+    {
+        operator: "{}",
+        value: generatedSku,
+        label: "contains",
+        type: "fixed",
     },
     {
         operator: "!{}",
         value: "example",
         label: "does not contain",
+        type: "percentage",
+    },
+    {
+        operator: "!{}",
+        value: "example",
+        label: "does not contain",
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when sku condition is -> ${tc.label}`, async ({
+            test(`should apply condition when sku condition is -> ${tc.label} (${tc.type})`, async ({
                 page,
             }) => {
                 await runCatalogRuleTest({
                     page,
                     operator: tc.operator,
                     value: tc.value,
+                    type: tc.type,
                 });
             });
         }

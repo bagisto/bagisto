@@ -13,11 +13,13 @@ async function createRuleAndVerifyCoupon({
     operator,
     value,
     productValue,
+    type,
 }: {
     page: any;
     operator: string;
     value: string;
     productValue: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -29,7 +31,7 @@ async function createRuleAndVerifyCoupon({
         attribute: "product|product_number",
         operator,
         value,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
@@ -47,7 +49,7 @@ async function createRuleAndVerifyCoupon({
         page.getByText("Product updated successfully").first(),
     ).toBeVisible();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
@@ -79,31 +81,63 @@ const conditions = [
         operator: "==",
         value: generatedProductNumber,
         productValue: generatedProductNumber,
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        value: generatedProductNumber,
+        productValue: generatedProductNumber,
+        type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
         value: "123456",
         productValue: generatedProductNumber,
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        value: "123456",
+        productValue: generatedProductNumber,
+        type: "fixed",
     },
     {
         title: "contains",
         operator: "{}",
         value: generatedProductNumber,
         productValue: generatedProductNumber,
+        type: "percentage",
+    },
+    {
+        title: "contains",
+        operator: "{}",
+        value: generatedProductNumber,
+        productValue: generatedProductNumber,
+        type: "fixed",
     },
     {
         title: "does not contain",
         operator: "!{}",
         value: "123456",
         productValue: generatedProductNumber,
+        type: "percentage",
+    },
+    {
+        title: "does not contain",
+        operator: "!{}",
+        value: "123456",
+        productValue: generatedProductNumber,
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const condition of conditions) {
-            test(`should apply coupon when product number condition is -> ${condition.title}`, async ({
+            test(`should apply condition when product number condition is -> ${condition.title} (${condition.type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerifyCoupon({
@@ -111,6 +145,7 @@ test.describe("catalog rules", () => {
                     operator: condition.operator,
                     value: condition.value,
                     productValue: condition.productValue,
+                    type: condition.type,
                 });
             });
         }

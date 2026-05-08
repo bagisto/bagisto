@@ -11,10 +11,12 @@ async function createRuleAndVerifyCoupon({
     page,
     operator,
     optionSelect,
+    type,
 }: {
     page: any;
     operator: string;
     optionSelect: string;
+    type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
     const ruleApplyPage = new RuleApplyPage(page);
@@ -27,12 +29,12 @@ async function createRuleAndVerifyCoupon({
         attribute: "product|featured",
         operator,
         optionSelect,
-        couponType: "percentage",
+        couponType: type,
     });
 
     await ruleCreatePage.saveCatalogRule();
 
-    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0);
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
 }
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
@@ -64,24 +66,39 @@ const testCases = [
         title: "is equal to",
         operator: "==",
         optionSelect: "1",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "1",
+        type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
         optionSelect: "0",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "0",
+        type: "fixed",
     },
 ];
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
         for (const tc of testCases) {
-            test(`should apply coupon when featured condition is -> ${tc.title}`, async ({
+            test(`should apply condition when featured condition is -> ${tc.title} (${tc.type})`, async ({
                 page,
             }) => {
                 await createRuleAndVerifyCoupon({
                     page,
                     operator: tc.operator,
                     optionSelect: tc.optionSelect,
+                    type: tc.type,
                 });
             });
         }
