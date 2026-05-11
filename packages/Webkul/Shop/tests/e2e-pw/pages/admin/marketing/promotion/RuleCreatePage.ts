@@ -3,27 +3,32 @@ import { generateName } from "../../../../utils/faker";
 import { BasePage } from "../../../BasePage";
 
 export class RuleCreatePage extends BasePage {
-
     constructor(page: Page) {
         super(page);
     }
 
-    // Cart Rule
     get createCartRuleButton() {
-        return this.page.locator('a.primary-button:has-text("Create Cart Rule")');
+        return this.page.locator(
+            'a.primary-button:has-text("Create Cart Rule")',
+        );
     }
 
     get cartRuleForm() {
-        return this.page.locator('form[action*="/promotions/cart-rules/create"]');
+        return this.page.locator(
+            'form[action*="/promotions/cart-rules/create"]',
+        );
     }
 
-    // Catalog Rule
     get createCatalogRuleButton() {
-        return this.page.locator('a.primary-button:has-text("Create Catalog Rule")');
+        return this.page.locator(
+            'a.primary-button:has-text("Create Catalog Rule")',
+        );
     }
 
     get catalogRuleButton() {
-        return this.page.locator('button.primary-button:has-text("Save Catalog Rule")');
+        return this.page.locator(
+            'button.primary-button:has-text("Save Catalog Rule")',
+        );
     }
 
     // General
@@ -57,15 +62,21 @@ export class RuleCreatePage extends BasePage {
 
     // Conditions
     get addConditionButton() {
-        return this.page.locator('div.secondary-button:has-text("Add Condition")');
+        return this.page.locator(
+            'div.secondary-button:has-text("Add Condition")',
+        );
     }
 
     get conditionAttributeSelect() {
-        return this.page.locator('select[id="conditions\\[0\\]\\[attribute\\]"]');
+        return this.page.locator(
+            'select[id="conditions\\[0\\]\\[attribute\\]"]',
+        );
     }
 
     get conditionOperatorSelect() {
-        return this.page.locator('select[name="conditions\\[0\\]\\[operator\\]"]');
+        return this.page.locator(
+            'select[name="conditions\\[0\\]\\[operator\\]"]',
+        );
     }
 
     get conditionValueInput() {
@@ -76,7 +87,6 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('select[name="conditions[0][value]"]');
     }
 
-    // Actions
     get actionTypeSelect() {
         return this.page.locator("#action_type");
     }
@@ -85,7 +95,14 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('input[name="discount_amount"]');
     }
 
-    // Settings
+    get discountStepInput() {
+        return this.page.locator("#discount_step");
+    }
+
+    get discountQuantityInput() {
+        return this.page.locator("#discount_quantity");
+    }
+
     get sortOrderInput() {
         return this.page.locator('input[name="sort_order"]');
     }
@@ -106,15 +123,24 @@ export class RuleCreatePage extends BasePage {
         return this.page.locator('label[for="status"]');
     }
 
-    // Save
+    get validationErrors() {
+        return this.page.locator("p.text-red-600");
+    }
+
     get saveCartRuleButton() {
-        return this.page.locator('button.primary-button:has-text("Save Cart Rule")');
+        return this.page.locator(
+            'button.primary-button:has-text("Save Cart Rule")',
+        );
     }
 
     get successMessage() {
         return this.page.locator("#app");
     }
-    
+
+    get applyToShipping() {
+        return this.page.locator("select[name='apply_to_shipping']");
+    }
+
     private async fillGeneralCartDetails() {
         await this.createCartRuleButton.waitFor();
         await this.createCartRuleButton.click();
@@ -140,13 +166,20 @@ export class RuleCreatePage extends BasePage {
         value,
         optionSelect,
         checkboxSelect,
+        couponType,
+        allowShipping,
     }: {
         attribute: string;
         operator: string;
         value?: string;
         optionSelect?: string;
         checkboxSelect?: string;
-    }) {
+        couponType?: string;
+        allowShipping?: string;
+    }): Promise<number | undefined> {
+        const discountValue = Math.floor(Math.random() * 1000);
+        const discountPercentage = Math.floor(Math.random() * 100);
+
         await this.addConditionButton.click();
         await this.conditionAttributeSelect.waitFor();
         await this.conditionAttributeSelect.selectOption(attribute);
@@ -168,9 +201,31 @@ export class RuleCreatePage extends BasePage {
                 await label.click();
             }
         }
+        let result;
 
-        await this.actionTypeSelect.selectOption("by_percent");
-        await this.discountAmountInput.fill("50");
+        if (couponType == "fixed") {
+            await this.actionTypeSelect.selectOption("by_fixed");
+            await this.discountAmountInput.fill(discountValue.toString());
+            result = discountValue;
+        }
+
+        if (couponType == "percentage") {
+            await this.actionTypeSelect.selectOption("by_percent");
+            await this.discountAmountInput.fill(discountPercentage.toString());
+            result = discountPercentage;
+        }
+
+        if (couponType == "fixedAmmountWholeCart") {
+            await this.actionTypeSelect.selectOption("cart_fixed");
+            await this.discountAmountInput.fill(discountValue.toString());
+            result = discountValue;
+        }
+
+        if (allowShipping == "yes") {
+            await this.applyToShipping.selectOption("1");
+        }
+
+        return result;
     }
 
     private async configureSettings() {

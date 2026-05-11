@@ -5,6 +5,54 @@ import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/Rule
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    optionSelect,
+    productOption,
+    type,
+}: {
+    page: any;
+    operator: string;
+    optionSelect: string;
+    productOption: string;
+    type: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|size",
+        operator,
+        optionSelect,
+        couponType: type,
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await page.goto("admin/catalog/products");
+
+    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
+
+    await page.waitForLoadState("networkidle");
+
+    await page
+        .locator('select[name="size"]')
+        .first()
+        .selectOption(productOption);
+
+    await page.locator('button:has-text("Save Product")').first().click();
+
+    await expect(
+        page.getByText("Product updated successfully").first(),
+    ).toBeVisible();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+}
+
 test.beforeEach("should create simple product", async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
@@ -28,66 +76,51 @@ test.afterEach(
     },
 );
 
+const testCases = [
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "6",
+        productOption: "6",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "6",
+        productOption: "6",
+        type: "fixed",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "6",
+        productOption: "7",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "6",
+        productOption: "7",
+        type: "fixed",
+    },
+];
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when size condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|size",
-                operator: "==",
-                optionSelect: "6",
+        for (const condition of testCases) {
+            test(`should apply condition when size condition is -> ${condition.title} (${condition.type})`, async ({
+                page,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator: condition.operator,
+                    optionSelect: condition.optionSelect,
+                    productOption: condition.productOption,
+                    type: condition.type,
+                });
             });
-            await ruleCreatePage.saveCatalogRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('select[name="size"]').first().selectOption("6");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when size condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|size",
-                operator: "!=",
-                optionSelect: "6",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('select[name="size"]').first().selectOption("7");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
-        });
+        }
     });
 });

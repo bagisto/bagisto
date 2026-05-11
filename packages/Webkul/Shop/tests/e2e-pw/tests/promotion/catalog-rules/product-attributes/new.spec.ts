@@ -8,6 +8,62 @@ import { loginAsAdmin } from "../../../../utils/admin";
 let generatedName: string;
 generatedName = `Simple-${Date.now()}`;
 
+const conditions = [
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "1",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "1",
+        type: "fixed",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "0",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "0",
+        type: "fixed",
+    },
+];
+
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    optionSelect,
+    type,
+}: {
+    page: any;
+    operator: string;
+    optionSelect: string;
+    type: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|new",
+        operator,
+        optionSelect,
+        couponType: type,
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+}
+
 test.beforeEach("should create simple product", async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
@@ -33,36 +89,17 @@ test.afterEach(
 
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when new product condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|new",
-                operator: "==",
-                optionSelect: "1",
+        for (const condition of conditions) {
+            test(`should apply condition when new product condition is -> ${condition.title} (${condition.type})`, async ({
+                page,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator: condition.operator,
+                    optionSelect: condition.optionSelect,
+                    type: condition.type,
+                });
             });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when new product condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|new",
-                operator: "!=",
-                optionSelect: "0",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
+        }
     });
 });

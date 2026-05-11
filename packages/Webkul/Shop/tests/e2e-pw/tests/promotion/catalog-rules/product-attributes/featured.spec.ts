@@ -5,8 +5,37 @@ import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/Rule
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
-let generatedName: string;
-generatedName = `Simple-${Date.now()}`;
+let generatedName = `Simple-${Date.now()}`;
+
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    optionSelect,
+    type,
+}: {
+    page: any;
+    operator: string;
+    optionSelect: string;
+    type: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|featured",
+        operator,
+        optionSelect,
+        couponType: type,
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+}
 
 test.beforeEach("should create simple product", async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
@@ -27,42 +56,51 @@ test.afterEach(
     "should delete the created product and rule",
     async ({ adminPage }) => {
         const ruleDeletePage = new RuleDeletePage(adminPage);
+
         await ruleDeletePage.deleteCatalogRuleAndProduct();
     },
 );
 
+const testCases = [
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "1",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        optionSelect: "1",
+        type: "fixed",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "0",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        optionSelect: "0",
+        type: "fixed",
+    },
+];
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when featured product condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|featured",
-                operator: "==",
-                optionSelect: "1",
+        for (const tc of testCases) {
+            test(`should apply condition when featured condition is -> ${tc.title} (${tc.type})`, async ({
+                page,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator: tc.operator,
+                    optionSelect: tc.optionSelect,
+                    type: tc.type,
+                });
             });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when featured product condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|featured",
-                operator: "!=",
-                optionSelect: "0",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
+        }
     });
 });

@@ -1,14 +1,81 @@
 import { test } from "../../../../setup";
+import { expect, Page } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
-let generatedSku: string;
-generatedSku = `SKU-${Date.now()}`;
+type CouponType = "fixed" | "percentage";
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
+let generatedSku: string;
+
+async function expectCouponAppliedWithGrandTotal(
+    page: Page,
+    ruleApplyPage: RuleApplyPage,
+    discountValue: number,
+    couponType: CouponType,
+) {
+    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
+        discountValue,
+        couponType,
+    );
+
+    const formatted =
+        Math.abs(discountedAmount) < 0.01
+            ? "$0.00"
+            : `$${discountedAmount.toFixed(2)}`;
+
+    await ruleApplyPage.applyCouponAtCheckout();
+
+    await expect(
+        page.getByText("Coupon code applied successfully.").first(),
+    ).toBeVisible();
+
+    await expect(
+        page.getByText("Grand Total").locator("..").locator("p").last(),
+    ).toContainText(formatted);
+}
+
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    value,
+    couponType,
+}: {
+    page: Page;
+    operator: string;
+    value: string;
+    couponType: CouponType;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+    await ruleCreatePage.cartRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|sku",
+        operator,
+        value,
+        couponType,
+    });
+
+    if (!discountValue) throw new Error("Discount not created");
+
+    await ruleCreatePage.saveCartRule();
+
+    await expectCouponAppliedWithGrandTotal(
+        page,
+        ruleApplyPage,
+        discountValue,
+        couponType,
+    );
+}
+
+test.beforeEach(async ({ adminPage }) => {
+    generatedSku = `SKU-${Date.now()}`;
+
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
@@ -23,78 +90,67 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach(
-    "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const ruleDeletePage = new RuleDeletePage(adminPage);
-        await ruleDeletePage.deleteRuleAndProduct();
+test.afterEach(async ({ adminPage }) => {
+    const ruleDeletePage = new RuleDeletePage(adminPage);
+    await ruleDeletePage.deleteRuleAndProduct();
+});
+
+const cases = [
+    {
+        operator: "==",
+        type: "fixed",
+        value: () => generatedSku,
     },
-);
+    {
+        operator: "==",
+        type: "percentage",
+        value: () => generatedSku,
+    },
+    {
+        operator: "!=",
+        type: "fixed",
+        value: () => "sku-123",
+    },
+    {
+        operator: "!=",
+        type: "percentage",
+        value: () => "sku-123",
+    },
+    {
+        operator: "{}",
+        type: "fixed",
+        value: () => generatedSku,
+    },
+    {
+        operator: "{}",
+        type: "percentage",
+        value: () => generatedSku,
+    },
+    {
+        operator: "!{}",
+        type: "fixed",
+        value: () => "example",
+    },
+    {
+        operator: "!{}",
+        type: "percentage",
+        value: () => "example",
+    },
+];
 
 test.describe("cart rules", () => {
-    test.describe("product attribute conditions", () => {
-        test("should apply coupon when sku of product condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|sku",
-                operator: "==",
-                value: generatedSku,
+    test.describe("product attribute condition", () => {
+        for (const { operator, type, value } of cases) {
+            test(`should apply coupon when sku consition is->  ${operator} (${type})`, async ({
+                page,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator,
+                    value: value(),
+                    couponType: type as CouponType,
+                });
             });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-        });
-
-        test("should apply coupon when sku of product condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|sku",
-                operator: "!=",
-                value: "sku-123",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-        });
-
-        test("should apply coupon when sku of product condition is -> contains", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|sku",
-                operator: "{}",
-                value: generatedSku,
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-        });
-
-        test("should apply coupon when sku of product condition is -> does not contain", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|sku",
-                operator: "!{}",
-                value: "example",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-        });
+        }
     });
 });
