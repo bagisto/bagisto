@@ -5,117 +5,146 @@ import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/Rule
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
+import { Page } from "@playwright/test";
 
 let generatedSku: string;
 generatedSku = `SKU-${Date.now()}`;
 
+test.beforeEach(
+    "should create simple product and tax category",
+    async ({ adminPage }) => {
+        await createTaxRate(adminPage);
+        await createTaxCategory(adminPage);
+
+        const productCreation = new ProductCreation(adminPage);
+
+        await productCreation.createProduct({
+            type: "simple",
+            sku: generatedSku,
+            name: `Simple-${Date.now()}`,
+            shortDescription: "Short desc",
+            description: "Full desc",
+            price: 199,
+            weight: 1,
+            inventory: 100,
+        });
+
+        await assignTaxCategory(adminPage);
+    },
+);
+
+test.afterEach(async ({ adminPage }) => {
+    const ruleDeletePage = new RuleDeletePage(adminPage);
+
+    await ruleDeletePage.deleteCatalogRuleAndProduct();
+});
+
+async function assignTaxCategory(page: Page) {
+    await page.goto("admin/catalog/products");
+    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
+    await page.waitForLoadState("networkidle");
+    await page.locator('select[name="tax_category_id"]').selectOption("1");
+    await page.locator('button:has-text("Save Product")').first().click();
+
+    await expect(
+        page.getByText("Product updated successfully").first(),
+    ).toBeVisible();
+}
+
+async function runCatalogRuleTest({
+    page,
+    operator,
+    value,
+    type,
+}: {
+    page: Page;
+    operator: string;
+    value: string;
+    type: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|sku",
+        operator,
+        value,
+        couponType: type,
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+}
+
+const testCases = [
+    {
+        operator: "==",
+        value: generatedSku,
+        label: "is equal to",
+        type: "percentage",
+    },
+    {
+        operator: "==",
+        value: generatedSku,
+        label: "is equal to",
+        type: "fixed",
+    },
+    {
+        operator: "!=",
+        value: "sku-123",
+        label: "is not equal to",
+        type: "percentage",
+    },
+    {
+        operator: "!=",
+        value: "sku-123",
+        label: "is not equal to",
+        type: "fixed",
+    },
+    {
+        operator: "{}",
+        value: generatedSku,
+        label: "contains",
+        type: "percentage",
+    },
+    {
+        operator: "{}",
+        value: generatedSku,
+        label: "contains",
+        type: "fixed",
+    },
+    {
+        operator: "!{}",
+        value: "example",
+        label: "does not contain",
+        type: "percentage",
+    },
+    {
+        operator: "!{}",
+        value: "example",
+        label: "does not contain",
+        type: "fixed",
+    },
+];
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test.beforeEach(
-            "should create simple product and tax category",
-            async ({ adminPage }) => {
-                await createTaxRate(adminPage);
-                await createTaxCategory(adminPage);
-
-                const productCreation = new ProductCreation(adminPage);
-                await productCreation.createProduct({
-                    type: "simple",
-                    sku: generatedSku,
-                    name: `Simple-${Date.now()}`,
-                    shortDescription: "Short desc",
-                    description: "Full desc",
-                    price: 199,
-                    weight: 1,
-                    inventory: 100,
+        for (const tc of testCases) {
+            test(`should apply condition when tax category condition is -> ${tc.label} (${tc.type})`, async ({
+                page,
+            }) => {
+                await runCatalogRuleTest({
+                    page,
+                    operator: tc.operator,
+                    value: tc.value,
+                    type: tc.type,
                 });
-                await adminPage.goto("admin/catalog/products");
-                await adminPage
-                    .locator("span.cursor-pointer.icon-sort-right")
-                    .nth(1)
-                    .click();
-                await adminPage
-                    .locator('select[name="tax_category_id"]')
-                    .selectOption("1");
-                await adminPage
-                    .locator('button:has-text("Save Product")')
-                    .first()
-                    .click();
-                await expect(
-                    adminPage.getByText("Product updated successfully").first(),
-                ).toBeVisible();
-            },
-        );
-
-        test.afterEach(
-            "should delete the created product and rule",
-            async ({ adminPage }) => {
-                const ruleDeletePage = new RuleDeletePage(adminPage);
-                await ruleDeletePage.deleteCatalogRuleAndProduct();
-            },
-        );
-
-        test("should apply coupon when sku of product condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|sku",
-                operator: "==",
-                value: generatedSku,
             });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when sku of product condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|sku",
-                operator: "!=",
-                value: "sku-123",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when sku of product condition is -> contains", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|sku",
-                operator: "{}",
-                value: generatedSku,
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when sku of product condition is -> does not contain", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|sku",
-                operator: "!{}",
-                value: "example",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
+        }
     });
 });

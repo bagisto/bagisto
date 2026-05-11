@@ -5,6 +5,35 @@ import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/Rule
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    value,
+    type,
+}: {
+    page: any;
+    operator: string;
+    value: string;
+    type: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|price",
+        operator,
+        value,
+        couponType: type,
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+}
+
 test.beforeEach("should create simple product", async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
@@ -28,102 +57,94 @@ test.afterEach(
     },
 );
 
+const conditions = [
+    {
+        title: "is equal to",
+        operator: "==",
+        value: "199",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        value: "199",
+        type: "fixed",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        value: "100",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        value: "100",
+        type: "fixed",
+    },
+    {
+        title: "equals or greater then",
+        operator: ">=",
+        value: "199",
+        type: "percentage",
+    },
+    {
+        title: "equals or greater then",
+        operator: ">=",
+        value: "199",
+        type: "fixed",
+    },
+    {
+        title: "equals or less than",
+        operator: "<=",
+        value: "200",
+        type: "percentage",
+    },
+    {
+        title: "equals or less than",
+        operator: "<=",
+        value: "200",
+        type: "fixed",
+    },
+    {
+        title: "greater than",
+        operator: ">",
+        value: "198",
+        type: "percentage",
+    },
+    {
+        title: "greater than",
+        operator: ">",
+        value: "198",
+        type: "fixed",
+    },
+    {
+        title: "less than",
+        operator: "<",
+        value: "200",
+        type: "percentage",
+    },
+    {
+        title: "less than",
+        operator: "<",
+        value: "200",
+        type: "fixed",
+    },
+];
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when price condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "==",
-                value: "199",
+        for (const condition of conditions) {
+            test(`should apply condition when price condition is -> ${condition.title} (${condition.type})`, async ({
+                page,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator: condition.operator,
+                    value: condition.value,
+                    type: condition.type,
+                });
             });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when price condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "!=",
-                value: "100",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when price condition is -> equals or greater then", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: ">=",
-                value: "199",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when price condition is -> equals or less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "<=",
-                value: "200",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when price condition is -> greater than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: ">",
-                value: "198",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when price condition is -> less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "<",
-                value: "200",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await ruleApplyPage.verifyCatalogRule();
-        });
+        }
     });
 });

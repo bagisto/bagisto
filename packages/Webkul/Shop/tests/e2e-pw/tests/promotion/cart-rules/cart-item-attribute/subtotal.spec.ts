@@ -1,12 +1,79 @@
 import { test } from "../../../../setup";
-import { expect } from "@playwright/test";
+import { expect, Page } from "@playwright/test";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
+type CouponType = "fixed" | "percentage";
+
+async function expectCouponAppliedWithGrandTotal(
+    page: Page,
+    ruleApplyPage: RuleApplyPage,
+    discountValue: number,
+    couponType: CouponType,
+) {
+    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
+        discountValue,
+        couponType,
+    );
+
+    const formatted =
+        Math.abs(discountedAmount) < 0.01
+            ? "$0.00"
+            : `$${discountedAmount.toFixed(2)}`;
+
+    await ruleApplyPage.applyCouponAtCheckout();
+
+    await expect(
+        page.getByText("Coupon code applied successfully.").first(),
+    ).toBeVisible();
+
+    await expect(
+        page.getByText("Grand Total").locator("..").locator("p").last(),
+    ).toContainText(formatted);
+}
+
+async function createRuleAndVerifyCoupon({
+    page,
+    attribute,
+    operator,
+    value,
+    couponType,
+}: {
+    page: Page;
+    attribute: string;
+    operator: string;
+    value: string;
+    couponType: CouponType;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+    await ruleCreatePage.cartRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute,
+        operator,
+        value,
+        couponType,
+    });
+
+    if (!discountValue) throw new Error("Discount not created");
+
+    await ruleCreatePage.saveCartRule();
+
+    await expectCouponAppliedWithGrandTotal(
+        page,
+        ruleApplyPage,
+        discountValue,
+        couponType,
+    );
+}
+
+test.beforeEach(async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
@@ -21,134 +88,101 @@ test.beforeEach("should create simple product", async ({ adminPage }) => {
     });
 });
 
-test.afterEach(
-    "should delete the created product and rule",
-    async ({ adminPage }) => {
-        const ruleDeletePage = new RuleDeletePage(adminPage);
-        await ruleDeletePage.deleteRuleAndProduct();
+test.afterEach(async ({ adminPage }) => {
+    const ruleDeletePage = new RuleDeletePage(adminPage);
+    await ruleDeletePage.deleteRuleAndProduct();
+});
+
+const cases = [
+    {
+        operator: "==",
+        value: "199",
+        type: "percentage",
+        label: "equal to",
     },
-);
+    {
+        operator: "==",
+        value: "199",
+        type: "fixed",
+        label: "equal to",
+    },
+
+    {
+        operator: "!=",
+        value: "101",
+        type: "percentage",
+        label: "not equal to",
+    },
+    {
+        operator: "!=",
+        value: "101",
+        type: "fixed",
+        label: "not equal to",
+    },
+    {
+        operator: ">=",
+        value: "199",
+        type: "percentage",
+        label: "greater than or equal to",
+    },
+    {
+        operator: ">=",
+        value: "199",
+        type: "fixed",
+        label: "greater than or equal to",
+    },
+    {
+        operator: "<=",
+        value: "200",
+        type: "percentage",
+        label: "less than or equal to",
+    },
+    {
+        operator: "<=",
+        value: "200",
+        type: "fixed",
+        label: "less than or equal to",
+    },
+    {
+        operator: ">",
+        value: "198",
+        type: "percentage",
+        label: "greater than",
+    },
+    {
+        operator: ">",
+        value: "198",
+        type: "fixed",
+        label: "greater than",
+    },
+    {
+        operator: "<",
+        value: "200",
+        type: "percentage",
+        label: "less than",
+    },
+    {
+        operator: "<",
+        value: "200",
+        type: "fixed",
+        label: "less than",
+    },
+];
 
 test.describe("cart rules", () => {
-    test.describe("cart item attribute conditions", () => {
-        test("should apply coupon when subtotal condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "cart_item|base_total",
-                operator: "==",
-                value: "199",
+    test.describe("cart item attrubutes", () => {
+        for (const { operator, value, type, label } of cases) {
+            test(`should apply coupon when subtotal condition is -> ${label} (${type})`, async ({
+                page,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    attribute: "cart_item|base_total",
+                    operator,
+                    value,
+                    couponType: type as CouponType,
+                });
             });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-
-            await expect(
-                page.getByText("Coupon code applied successfully.").first(),
-            ).toBeVisible();
-        });
-
-        test("should apply coupon when subtotal condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "cart_item|base_total",
-                operator: "!=",
-                value: "101",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-
-            await expect(
-                page.getByText("Coupon code applied successfully.").first(),
-            ).toBeVisible();
-        });
-
-        test("should apply coupon when subtotal condition is -> equals or greater then", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "cart|base_sub_total",
-                operator: ">=",
-                value: "199",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCoupon();
-
-            await expect(
-                page.getByText("Coupon code applied successfully.").first(),
-            ).toBeVisible();
-        });
-
-        test("should apply coupon when subtotal condition is -> equals or less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "cart_item|base_total",
-                operator: "<=",
-                value: "200",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
-
-            await expect(
-                page.getByText("Coupon code applied successfully.").first(),
-            ).toBeVisible();
-        });
-
-        test("should apply coupon when subtotal condition is -> greater than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "cart_item|base_total",
-                operator: ">",
-                value: "198",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
-
-            await expect(
-                page.getByText("Coupon code applied successfully.").first(),
-            ).toBeVisible();
-        });
-
-        test("should apply coupon when subtotal condition is -> less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.cartRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "cart_item|base_total",
-                operator: "<",
-                value: "200",
-            });
-            await ruleCreatePage.saveCartRule();
-            await ruleApplyPage.applyCouponAtCheckout();
-
-            await expect(
-                page.getByText("Coupon code applied successfully.").first(),
-            ).toBeVisible();
-        });
+        }
     });
 });

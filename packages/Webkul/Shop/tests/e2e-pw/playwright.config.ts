@@ -7,8 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const TESTS_ROOT_PATH = __dirname;
-export const STATE_DIR_PATH = `${ TESTS_ROOT_PATH }/.state/`;
-export const ADMIN_AUTH_STATE_PATH = `${ STATE_DIR_PATH }/admin-auth.json`;
+export const STATE_DIR_PATH = `${TESTS_ROOT_PATH}/.state/`;
+export const ADMIN_AUTH_STATE_PATH = `${STATE_DIR_PATH}/admin-auth.json`;
 
 dotenv.config({ path: path.resolve(__dirname, "../../../../../.env") });
 
@@ -16,6 +16,8 @@ export default defineConfig({
     testDir: "./tests",
 
     timeout: 120 * 1000,
+
+    globalTimeout: 2 * 60 * 60 * 1000,
 
     expect: { timeout: 20 * 1000 },
 
@@ -33,7 +35,7 @@ export default defineConfig({
 
     reporter: [
         ["list"],
-        
+
         [
             "html",
             {
@@ -43,10 +45,12 @@ export default defineConfig({
     ],
 
     use: {
-        baseURL: `${process.env.APP_URL}/`.replace(/\/+$/, "/"),
+        baseURL: `${"http://127.0.0.1:8000/"}/`.replace(/\/+$/, "/"),
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",
         trace: "retain-on-failure",
+        actionTimeout: 15 * 1000,
+        navigationTimeout: 30 * 1000,
     },
 
     projects: [

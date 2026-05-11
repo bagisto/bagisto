@@ -5,6 +5,52 @@ import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/Rule
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
 
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    ruleValue,
+    productValue,
+    type,
+}: {
+    page: any;
+    operator: string;
+    ruleValue: string;
+    productValue: string;
+    type: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|cost",
+        operator,
+        value: ruleValue,
+        couponType: type,
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await page.goto("admin/catalog/products");
+
+    await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
+
+    await page.waitForLoadState("networkidle");
+
+    await page.locator('input[name="cost"]').first().fill(productValue);
+
+    await page.locator('button:has-text("Save Product")').first().click();
+
+    await expect(
+        page.getByText("Product updated successfully").first(),
+    ).toBeVisible();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+}
+
 test.beforeEach("should create simple product", async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
@@ -24,190 +70,112 @@ test.afterEach(
     "should delete the created product and rule",
     async ({ adminPage }) => {
         const ruleDeletePage = new RuleDeletePage(adminPage);
+
         await ruleDeletePage.deleteCatalogRuleAndProduct();
     },
 );
 
+const testCases = [
+    {
+        title: "is equal to",
+        operator: "==",
+        ruleValue: "199",
+        productValue: "199",
+        type: "percentage",
+    },
+    {
+        title: "is equal to",
+        operator: "==",
+        ruleValue: "199",
+        productValue: "199",
+        type: "fixed",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        ruleValue: "100",
+        productValue: "200",
+        type: "percentage",
+    },
+    {
+        title: "is not equal to",
+        operator: "!=",
+        ruleValue: "100",
+        productValue: "200",
+        type: "fixed",
+    },
+    {
+        title: "equals or greater then",
+        operator: ">=",
+        ruleValue: "199",
+        productValue: "199",
+        type: "percentage",
+    },
+    {
+        title: "equals or greater then",
+        operator: ">=",
+        ruleValue: "199",
+        productValue: "199",
+        type: "fixed",
+    },
+    {
+        title: "equals or less than",
+        operator: "<=",
+        ruleValue: "200",
+        productValue: "198",
+        type: "percentage",
+    },
+    {
+        title: "equals or less than",
+        operator: "<=",
+        ruleValue: "200",
+        productValue: "198",
+        type: "fixed",
+    },
+    {
+        title: "greater than",
+        operator: ">",
+        ruleValue: "195",
+        productValue: "199",
+        type: "percentage",
+    },
+    {
+        title: "greater than",
+        operator: ">",
+        ruleValue: "195",
+        productValue: "199",
+        type: "fixed",
+    },
+    {
+        title: "less than",
+        operator: "<",
+        ruleValue: "200",
+        productValue: "195",
+        type: "percentage",
+    },
+    {
+        title: "less than",
+        operator: "<",
+        ruleValue: "200",
+        productValue: "195",
+        type: "fixed",
+    },
+];
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test("should apply coupon when cost condition is -> is equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "==",
-                value: "199",
+        for (const tc of testCases) {
+            test(`should apply condition when cost condition is -> ${tc.title} (${tc.type})`, async ({
+                page,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator: tc.operator,
+                    ruleValue: tc.ruleValue,
+                    productValue: tc.productValue,
+                    type: tc.type,
+                });
             });
-            await ruleCreatePage.saveCatalogRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="cost"]').first().fill("199");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when cost condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "!=",
-                value: "100",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="cost"]').first().fill("200");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when cost condition is -> equals or greater then", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: ">=",
-                value: "199",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="cost"]').first().fill("199");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when cost condition is -> equals or less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "<=",
-                value: "200",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="cost"]').first().fill("198");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when cost condition is -> greater than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: ">",
-                value: "195",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="cost"]').first().fill("199");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
-        });
-
-        test("should apply coupon when cost condition is -> less than", async ({
-            page,
-        }) => {
-            const ruleCreatePage = new RuleCreatePage(page);
-            const ruleApplyPage = new RuleApplyPage(page);
-            await loginAsAdmin(page);
-            await ruleCreatePage.catalogRuleCreationFlow();
-            await ruleCreatePage.addCondition({
-                attribute: "product|price",
-                operator: "<",
-                value: "200",
-            });
-            await ruleCreatePage.saveCatalogRule();
-            await page.goto("admin/catalog/products");
-            await page
-                .locator("span.cursor-pointer.icon-sort-right")
-                .nth(1)
-                .click();
-            await page.waitForLoadState("networkidle");
-            await page.locator('input[name="cost"]').first().fill("195");
-            await page
-                .locator('button:has-text("Save Product")')
-                .first()
-                .click();
-            await expect(
-                page.getByText("Product updated successfully").first(),
-            ).toBeVisible();
-            await ruleApplyPage.verifyCatalogRule();
-        });
+        }
     });
 });

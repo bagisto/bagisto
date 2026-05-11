@@ -1,12 +1,12 @@
-import { test } from "../../../../setup";
+import { test } from "../../../setup";
 import { expect, Page } from "@playwright/test";
-import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
-import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
-import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
-import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
-import { loginAsAdmin } from "../../../../utils/admin";
+import { ProductCreation } from "../../../pages/admin/catalog/products/ProductCreatePage";
+import { RuleDeletePage } from "../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleCreatePage } from "../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleApplyPage } from "../../../pages/shop/rules/RuleApplyPage";
+import { loginAsAdmin } from "../../../utils/admin";
 
-type CouponType = "fixed" | "percentage";
+type CouponType = "fixedAmmountWholeCart";
 
 async function expectCouponAppliedWithGrandTotal(
     page: Page,
@@ -50,11 +50,10 @@ async function createRuleAndVerifyCoupon({
     const ruleApplyPage = new RuleApplyPage(page);
 
     await loginAsAdmin(page);
-
     await ruleCreatePage.cartRuleCreationFlow();
 
     const discountValue = await ruleCreatePage.addCondition({
-        attribute: "product|guest_checkout",
+        attribute: "cart|payment_method",
         operator,
         optionSelect,
         couponType,
@@ -81,7 +80,7 @@ test.beforeEach(async ({ adminPage }) => {
         name: `Simple-${Date.now()}`,
         shortDescription: "Short desc",
         description: "Full desc",
-        price: 199,
+        price: Math.floor(Math.random() * 1000),
         weight: 1,
         inventory: 100,
     });
@@ -93,46 +92,21 @@ test.afterEach(async ({ adminPage }) => {
 });
 
 const cases = [
-    {
-        operator: "==",
-        optionSelect: "1",
-        type: "fixed",
-        label: "is equal to (fixed)",
-    },
-    {
-        operator: "==",
-        optionSelect: "1",
-        type: "percentage",
-        label: "is equal to (percentage)",
-    },
-
-    {
-        operator: "!=",
-        optionSelect: "0",
-        type: "fixed",
-        label: "is not equal to (fixed)",
-    },
-    {
-        operator: "!=",
-        optionSelect: "0",
-        type: "percentage",
-        label: "is not equal to (percentage)",
-    },
+    { operator: "==", option: "moneytransfer" },
+    { operator: "!=", option: "cashondelivery" },
 ];
 
 test.describe("cart rules", () => {
-    test.describe("product attribute condtion", () => {
-        for (const { operator, optionSelect, type, label } of cases) {
-            test(`should apply coupon when guest checkout condition is->  ${label}`, async ({
+    for (const { operator, option } of cases) {
+        test(`should allow coupon for fixed amount whole cart option -> ${operator}`, async ({
+            page,
+        }) => {
+            await createRuleAndVerifyCoupon({
                 page,
-            }) => {
-                await createRuleAndVerifyCoupon({
-                    page,
-                    operator,
-                    optionSelect,
-                    couponType: type as CouponType,
-                });
+                operator,
+                optionSelect: option,
+                couponType: "fixedAmmountWholeCart",
             });
-        }
-    });
+        });
+    }
 });
