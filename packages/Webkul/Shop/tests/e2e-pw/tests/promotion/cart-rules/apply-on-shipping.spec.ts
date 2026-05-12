@@ -20,20 +20,25 @@ async function expectCouponAppliedWithGrandTotal(
         couponType,
     );
 
-    const formatted =
-        Math.abs(discountedAmount) < 0.01
-            ? "$0.00"
-            : `$${discountedAmount.toFixed(2)}`;
-
     await ruleApplyPage.applyCouponAtCheckout(allowShipping);
 
     await expect(
         page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
+    if (discountedAmount === 0) {
+        await expect(
+            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
+        ).toContainText("$0.00");
+    } else {
+        const formattedAmount = new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(discountedAmount);
 
-    await expect(
-        page.getByText("Grand Total").locator("..").locator("p").last(),
-    ).toContainText(formatted);
+        await expect(
+            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
+        ).toContainText(`$${formattedAmount}`);
+    }
 }
 
 async function createRuleAndVerifyCoupon({
@@ -63,7 +68,7 @@ async function createRuleAndVerifyCoupon({
         allowShipping,
     });
 
-    if (discountValue === undefined) throw new Error("Discount not created");
+    if (!discountValue) throw new Error("Discount not created");
 
     await ruleCreatePage.saveCartRule();
 

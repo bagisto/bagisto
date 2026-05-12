@@ -64,7 +64,7 @@ async function createRuleAndVerifyCoupon({
     if (discountValue === undefined) throw new Error("Discount not created");
 
     await ruleCreatePage.saveCartRule();
-
+        
     await expectCouponAppliedWithGrandTotal(
         page,
         ruleApplyPage,
