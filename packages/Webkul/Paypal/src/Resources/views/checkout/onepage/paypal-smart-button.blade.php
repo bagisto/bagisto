@@ -80,7 +80,7 @@
                             },
 
                             onApprove: (data, actions) => {
-                                this.$axios.post("{{ route('paypal.smart-button.capture-order') }}", {
+                                return this.$axios.post("{{ route('paypal.smart-button.capture-order') }}", {
                                     _token: "{{ csrf_token() }}",
                                     orderData: data
                                 })
