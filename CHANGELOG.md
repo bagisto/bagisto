@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.3.19 (12th of May 2026)** - *Release*
 
 - #10422 [fixed] - Fixed channel Home Page SEO (and other translatable channel fields: name, description, maintenance mode text) only saving for the admin's UI locale. The channel edit page was missing the locale-switcher dropdown that every other translatable resource (categories, products, CMS pages) uses, so admins had no way to change the per-locale binding away from English. Added the standard locale-switcher dropdown listing every system locale; switching reloads with `?locale=<code>` and the form binds, validates, and saves only that locale's translation row. Admins can pre-fill SEO for any system locale, including locales not yet attached to the channel — translations are stored against the locale code regardless of channel-locale attachment.
 
