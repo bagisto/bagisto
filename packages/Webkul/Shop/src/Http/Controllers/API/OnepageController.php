@@ -245,5 +245,9 @@ class OnepageController extends APIController
         if (! $cart->payment) {
             throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
+
+        if ($cart->payment->method === 'paypal_smart_button') {
+            throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
+        }
     }
 }
