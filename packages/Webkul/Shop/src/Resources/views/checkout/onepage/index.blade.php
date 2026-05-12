@@ -109,7 +109,7 @@
                             class="flex justify-end"
                             v-if="canPlaceOrder"
                         >
-                            <template v-if="cart.payment_method == 'paypal_smart_button'">
+                            <template v-if="(selectedPaymentMethod || cart.payment_method) == 'paypal_smart_button'">
                                 {!! view_render_event('bagisto.shop.checkout.onepage.summary.paypal_smart_button.before') !!}
 
                                 <!-- Paypal Smart Button Vue Component -->
@@ -157,6 +157,8 @@
                         shippingMethods: null,
 
                         paymentMethods: null,
+
+                        selectedPaymentMethod: null,
 
                         canPlaceOrder: false,
                     }
@@ -218,7 +220,15 @@
                         });
                     },
 
+                    setSelectedPaymentMethod(method) {
+                        this.selectedPaymentMethod = method;
+                    },
+
                     placeOrder() {
+                        if ((this.selectedPaymentMethod || this.cart.payment_method) == 'paypal_smart_button') {
+                            return;
+                        }
+
                         this.isPlacingOrder = true;
 
                         this.$axios.post('{{ route('shop.checkout.onepage.orders.store') }}')
