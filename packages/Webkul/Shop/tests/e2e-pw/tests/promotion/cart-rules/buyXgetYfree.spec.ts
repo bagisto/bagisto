@@ -86,21 +86,20 @@ async function verifyBuyXGetYAtCheckout(
         page.getByText("Coupon code applied successfully.").first(),
     ).toBeVisible();
 
-    const grandTotalEl = page
-        .getByText("Grand Total")
-        .locator("..")
-        .locator("p")
-        .last();
+    if (expectedGrandTotal === 0) {
+        await expect(
+            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
+        ).toContainText("$0.00");
+    } else {
+        const formattedAmount = new Intl.NumberFormat("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(expectedGrandTotal);
 
-    await expect(grandTotalEl).toBeVisible();
-
-    const actualGrandTotalText = await grandTotalEl.innerText();
-
-    const actualGrandTotal = parseFloat(
-        actualGrandTotalText.replace(/[^0-9.]/g, ""),
-    );
-
-    expect(actualGrandTotal).toBeCloseTo(expectedGrandTotal, 2);
+        await expect(
+            page.locator("text=Grand Total").locator("..").locator("p").nth(1),
+        ).toContainText(`$${formattedAmount}`);
+    }
 }
 
 const cases: {
