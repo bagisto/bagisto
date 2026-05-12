@@ -1,5 +1,5 @@
-import { test, expect } from "../../../../../setup";
-import { OmnibusAdminPage as OmnibusAdmin } from "../../../../../pages/admin/omnibus/OmnibusAdminPage";
+import { test, expect } from "../../../../setup";
+import { OmnibusAdminPage as OmnibusAdmin } from "../../../../pages/admin/omnibus/OmnibusAdminPage";
 
 test.describe("omnibus price disclosure", () => {
     test("should enable omnibus price disclosure in admin configuration", async ({

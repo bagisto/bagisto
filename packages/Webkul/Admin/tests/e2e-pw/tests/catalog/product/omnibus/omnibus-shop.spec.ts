@@ -1,8 +1,8 @@
-import { test, expect } from "../../../../../setup";
+import { test, expect } from "../../../../setup";
 import { type Page } from "@playwright/test";
-import { OmnibusAdminPage as OmnibusAdmin } from "../../../../../pages/admin/omnibus/OmnibusAdminPage";
-import { OmnibusShopPage as OmnibusShop } from "../../../../../pages/shop/OmnibusShopPage";
-import { ProductCreatePage } from "../../../../../pages/admin/catalog/products/ProductCreatePage";
+import { OmnibusAdminPage as OmnibusAdmin } from "../../../../pages/admin/omnibus/OmnibusAdminPage";
+import { OmnibusShopPage as OmnibusShop } from "../../../../pages/shop/OmnibusShopPage";
+import { ProductCreatePage } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import {
     generateDescription,
     generateName,

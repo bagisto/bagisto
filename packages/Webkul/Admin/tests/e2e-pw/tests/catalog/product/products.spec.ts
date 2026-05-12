@@ -1,9 +1,9 @@
-import { test, expect } from "../../../../setup";
+import { test, expect } from "../../../setup";
 import {
     generateDescription,
     generateRandomNumericString,
     getImageFile,
-} from "../../../../utils/faker";
+} from "../../../utils/faker";
 
 test.describe("product configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
@@ -14,17 +14,17 @@ test.describe("product configuration", () => {
         adminPage,
     }) => {
         await adminPage.click(
-            'label[for="catalog[products][settings][compare_option]"]'
+            'label[for="catalog[products][settings][compare_option]"]',
         );
         await adminPage.click(
-            'label[for="catalog[products][settings][image_search]"]'
+            'label[for="catalog[products][settings][image_search]"]',
         );
 
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
@@ -33,19 +33,19 @@ test.describe("product configuration", () => {
     }) => {
         await adminPage
             .locator(
-                'input[name="catalog[products][product_view_page][no_of_related_products]"]'
+                'input[name="catalog[products][product_view_page][no_of_related_products]"]',
             )
             .fill(generateRandomNumericString(2));
         await adminPage
             .locator(
-                'input[name="catalog[products][product_view_page][no_of_up_sells_products]"]'
+                'input[name="catalog[products][product_view_page][no_of_up_sells_products]"]',
             )
             .fill(generateRandomNumericString(2));
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
@@ -54,14 +54,14 @@ test.describe("product configuration", () => {
     }) => {
         await adminPage
             .locator(
-                'input[name="catalog[products][cart_view_page][no_of_cross_sells_products]"]'
+                'input[name="catalog[products][cart_view_page][no_of_cross_sells_products]"]',
             )
             .fill(generateRandomNumericString(2));
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
@@ -70,37 +70,37 @@ test.describe("product configuration", () => {
     }) => {
         await adminPage.selectOption(
             'select[name="catalog[products][storefront][mode]"]',
-            "grid"
+            "grid",
         );
         const defaultListMode = adminPage.locator(
-            'select[name="catalog[products][storefront][mode]"]'
+            'select[name="catalog[products][storefront][mode]"]',
         );
         await expect(defaultListMode).toHaveValue("grid");
 
         await adminPage
             .locator(
-                'input[name="catalog[products][storefront][products_per_page]"]'
+                'input[name="catalog[products][storefront][products_per_page]"]',
             )
             .fill(generateRandomNumericString(2));
 
         await adminPage.selectOption(
             'select[name="catalog[products][storefront][sort_by]"]',
-            "name-asc"
+            "name-asc",
         );
         const sortBy = adminPage.locator(
-            'select[name="catalog[products][storefront][sort_by]"]'
+            'select[name="catalog[products][storefront][sort_by]"]',
         );
         await expect(sortBy).toHaveValue("name-asc");
 
         await adminPage.click(
-            'label[for="catalog[products][storefront][buy_now_button_display]"]'
+            'label[for="catalog[products][storefront][buy_now_button_display]"]',
         );
 
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
@@ -109,12 +109,12 @@ test.describe("product configuration", () => {
     }) => {
         await adminPage
             .locator(
-                'input[name="catalog[products][cache_small_image][width]"]'
+                'input[name="catalog[products][cache_small_image][width]"]',
             )
             .fill(generateRandomNumericString(3));
         await adminPage
             .locator(
-                'input[name="catalog[products][cache_small_image][height]"]'
+                'input[name="catalog[products][cache_small_image][height]"]',
             )
             .fill(generateRandomNumericString(3));
 
@@ -127,7 +127,7 @@ test.describe("product configuration", () => {
         await adminPage.click('button[type="submit"].primary-button:visible');
         await adminPage
             .locator(
-                '[id="catalog\\[products\\]\\[cache_small_image\\]\\[url\\]\\[delete\\]"]'
+                '[id="catalog\\[products\\]\\[cache_small_image\\]\\[url\\]\\[delete\\]"]',
             )
             .nth(1)
             .click();
@@ -135,7 +135,7 @@ test.describe("product configuration", () => {
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
@@ -144,12 +144,12 @@ test.describe("product configuration", () => {
     }) => {
         await adminPage
             .locator(
-                'input[name="catalog[products][cache_medium_image][width]"]'
+                'input[name="catalog[products][cache_medium_image][width]"]',
             )
             .fill(generateRandomNumericString(3));
         await adminPage
             .locator(
-                'input[name="catalog[products][cache_medium_image][height]"]'
+                'input[name="catalog[products][cache_medium_image][height]"]',
             )
             .fill(generateRandomNumericString(3));
 
@@ -162,7 +162,7 @@ test.describe("product configuration", () => {
         await adminPage.click('button[type="submit"].primary-button:visible');
         await adminPage
             .locator(
-                '[id="catalog\\[products\\]\\[cache_medium_image\\]\\[url\\]\\[delete\\]"]'
+                '[id="catalog\\[products\\]\\[cache_medium_image\\]\\[url\\]\\[delete\\]"]',
             )
             .nth(1)
             .click();
@@ -170,7 +170,7 @@ test.describe("product configuration", () => {
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
@@ -179,12 +179,12 @@ test.describe("product configuration", () => {
     }) => {
         await adminPage
             .locator(
-                'input[name="catalog[products][cache_large_image][width]"]'
+                'input[name="catalog[products][cache_large_image][width]"]',
             )
             .fill(generateRandomNumericString(3));
         await adminPage
             .locator(
-                'input[name="catalog[products][cache_large_image][height]"]'
+                'input[name="catalog[products][cache_large_image][height]"]',
             )
             .fill(generateRandomNumericString(3));
 
@@ -197,7 +197,7 @@ test.describe("product configuration", () => {
         await adminPage.click('button[type="submit"].primary-button:visible');
         await adminPage
             .locator(
-                '[id="catalog\\[products\\]\\[cache_large_image\\]\\[url\\]\\[delete\\]"]'
+                '[id="catalog\\[products\\]\\[cache_large_image\\]\\[url\\]\\[delete\\]"]',
             )
             .nth(1)
             .click();
@@ -205,25 +205,25 @@ test.describe("product configuration", () => {
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
     test("should update the review configuration", async ({ adminPage }) => {
         await adminPage.click(
-            'label[for="catalog[products][review][guest_review]"]'
+            'label[for="catalog[products][review][guest_review]"]',
         );
 
         await adminPage.click(
-            'label[for="catalog[products][review][customer_review]"]'
+            'label[for="catalog[products][review][customer_review]"]',
         );
 
         await adminPage.selectOption(
             'select[name="catalog[products][review][summary]"]',
-            "star_counts"
+            "star_counts",
         );
         const searchEngine = adminPage.locator(
-            'select[name="catalog[products][review][summary]"]'
+            'select[name="catalog[products][review][summary]"]',
         );
         await expect(searchEngine).toHaveValue("star_counts");
 
@@ -231,7 +231,7 @@ test.describe("product configuration", () => {
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
@@ -240,54 +240,54 @@ test.describe("product configuration", () => {
     }) => {
         await adminPage
             .locator(
-                'input[name="catalog[products][attribute][image_attribute_upload_size]"]'
+                'input[name="catalog[products][attribute][image_attribute_upload_size]"]',
             )
             .fill(generateRandomNumericString(3));
         await adminPage
             .locator(
-                'input[name="catalog[products][attribute][file_attribute_upload_size]"]'
+                'input[name="catalog[products][attribute][file_attribute_upload_size]"]',
             )
             .fill(generateRandomNumericString(3));
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 
     test("should update social share configuration", async ({ adminPage }) => {
         await adminPage.click(
-            'label[for="catalog[products][social_share][enabled]"]'
+            'label[for="catalog[products][social_share][enabled]"]',
         );
 
         await adminPage.click(
-            'label[for="catalog[products][social_share][facebook]"]'
+            'label[for="catalog[products][social_share][facebook]"]',
         );
 
         await adminPage.click(
-            'label[for="catalog[products][social_share][twitter]"]'
+            'label[for="catalog[products][social_share][twitter]"]',
         );
 
         await adminPage.click(
-            'label[for="catalog[products][social_share][pinterest]"]'
+            'label[for="catalog[products][social_share][pinterest]"]',
         );
 
         await adminPage.click(
-            'label[for="catalog[products][social_share][whatsapp]"]'
+            'label[for="catalog[products][social_share][whatsapp]"]',
         );
 
         await adminPage.click(
-            'label[for="catalog[products][social_share][linkedin]"]'
+            'label[for="catalog[products][social_share][linkedin]"]',
         );
 
         await adminPage.click(
-            'label[for="catalog[products][social_share][email]"]'
+            'label[for="catalog[products][social_share][email]"]',
         );
 
         await adminPage
             .locator(
-                'input[name="catalog[products][social_share][share_message]"]'
+                'input[name="catalog[products][social_share][share_message]"]',
             )
             .fill(generateDescription());
 
@@ -295,7 +295,7 @@ test.describe("product configuration", () => {
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
-            })
+            }),
         ).toBeVisible();
     });
 });
