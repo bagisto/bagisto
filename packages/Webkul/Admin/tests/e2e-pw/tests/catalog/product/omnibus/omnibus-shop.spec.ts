@@ -8,7 +8,7 @@ import {
     generateName,
     generateRandomNumericString,
     generateSKU,
-} from "../../../../../utils/faker";
+} from "../../../../utils/faker";
 
 test.describe.serial("omnibus price disclosure - storefront display", () => {
     test.setTimeout(240000);
