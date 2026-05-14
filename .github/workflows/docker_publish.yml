@@ -30,7 +30,7 @@ on:
 
 env:
   IMAGE_NAME: webkul/bagisto
-  DOCKER_CONTEXT: docker/production
+  BUILD_CONTEXT: docker/production
 
 jobs:
   build_and_push:
@@ -111,8 +111,8 @@ jobs:
       - name: Build & push multi-arch image
         uses: docker/build-push-action@v6
         with:
-          context: ${{ env.DOCKER_CONTEXT }}
-          file: ${{ env.DOCKER_CONTEXT }}/Dockerfile
+          context: ${{ env.BUILD_CONTEXT }}
+          file: ${{ env.BUILD_CONTEXT }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.tags.outputs.tags }}
