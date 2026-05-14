@@ -6,10 +6,8 @@ test.describe("omnibus price disclosure", () => {
         adminPage,
     }) => {
         const omnibusAdmin = new OmnibusAdmin(adminPage);
-
         await omnibusAdmin.enableOmnibus();
         await omnibusAdmin.saveConfig();
-
         await adminPage.reload();
         await adminPage.waitForLoadState("networkidle");
 
@@ -20,13 +18,10 @@ test.describe("omnibus price disclosure", () => {
         adminPage,
     }) => {
         const omnibusAdmin = new OmnibusAdmin(adminPage);
-
         await omnibusAdmin.enableOmnibus();
         await omnibusAdmin.saveConfig();
-
         await omnibusAdmin.disableOmnibus();
         await omnibusAdmin.saveConfig();
-
         await adminPage.reload();
         await adminPage.waitForLoadState("networkidle");
 

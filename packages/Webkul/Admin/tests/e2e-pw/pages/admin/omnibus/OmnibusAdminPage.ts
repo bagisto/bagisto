@@ -9,13 +9,13 @@ export class OmnibusAdminPage extends BasePage {
     protected get omnibusActionPage() {
         return {
             enableToggle: this.page.locator(
-                'label[for="catalog\\[products\\]\\[omnibus\\]\\[is_enabled\\]"]'
+                'label[for="catalog\\[products\\]\\[omnibus\\]\\[is_enabled\\]"]',
             ),
             enableCheckbox: this.page.locator(
-                'input[type="checkbox"][name="catalog[products][omnibus][is_enabled]"]'
+                'input[type="checkbox"][name="catalog[products][omnibus][is_enabled]"]',
             ),
             saveButton: this.page.locator(
-                'button[type="submit"].primary-button:visible'
+                'button[type="submit"].primary-button:visible',
             ),
             successMessage: this.page.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -25,37 +25,33 @@ export class OmnibusAdminPage extends BasePage {
 
     async visitConfig() {
         await super.visit("admin/configuration/catalog/products");
-
         await this.page.waitForLoadState("networkidle");
     }
 
     async enableOmnibus() {
         await this.visitConfig();
-
-        const isChecked = await this.omnibusActionPage.enableCheckbox.isChecked();
+        const isChecked =
+            await this.omnibusActionPage.enableCheckbox.isChecked();
 
         if (!isChecked) {
             await this.omnibusActionPage.enableToggle.click();
-
             await this.page.waitForTimeout(300);
         }
     }
 
     async disableOmnibus() {
         await this.visitConfig();
-
-        const isChecked = await this.omnibusActionPage.enableCheckbox.isChecked();
+        const isChecked =
+            await this.omnibusActionPage.enableCheckbox.isChecked();
 
         if (isChecked) {
             await this.omnibusActionPage.enableToggle.click();
-
             await this.page.waitForTimeout(300);
         }
     }
 
     async saveConfig() {
         await this.omnibusActionPage.saveButton.click();
-
         await expect(this.omnibusActionPage.successMessage).toBeVisible();
     }
 

@@ -25,21 +25,15 @@ export class OmnibusShopPage extends BasePage {
 
     async searchProduct(productName: string) {
         await this.visitHome();
-
         await this.shopActionPage.searchInput.fill(productName);
-
         await this.shopActionPage.searchInput.press("Enter");
     }
 
     async openProductPage(productName: string) {
         await this.searchProduct(productName);
-
         const image = this.productImage(productName);
-
         await image.first().waitFor({ state: "visible" });
-
         await image.first().click();
-
         await this.page.waitForLoadState("domcontentloaded");
     }
 

@@ -21,10 +21,8 @@ test.describe.serial("omnibus price disclosure - storefront display", () => {
 
     test.beforeAll(async ({ adminPage }) => {
         const omnibusAdmin = new OmnibusAdmin(adminPage);
-
         await omnibusAdmin.enableOmnibus();
         await omnibusAdmin.saveConfig();
-
         basePrice = parseInt(generateRandomNumericString(3, 200, 500));
         specialPrice1 =
             basePrice - parseInt(generateRandomNumericString(2, 16, 49));
@@ -69,12 +67,9 @@ test.describe.serial("omnibus price disclosure - storefront display", () => {
         shopPage,
     }) => {
         await setSpecialPrice(adminPage, specialPrice1);
-
         const omnibusShop = new OmnibusShop(shopPage);
-
         await omnibusShop.openProductPage(productName);
         await omnibusShop.verifyOmnibusVisible();
-
         const text = await omnibusShop.getOmnibusText();
 
         expect(text).toContain(basePrice.toString());
@@ -85,12 +80,9 @@ test.describe.serial("omnibus price disclosure - storefront display", () => {
         shopPage,
     }) => {
         await setSpecialPrice(adminPage, specialPrice2);
-
         const omnibusShop = new OmnibusShop(shopPage);
-
         await omnibusShop.openProductPage(productName);
         await omnibusShop.verifyOmnibusVisible();
-
         const text = await omnibusShop.getOmnibusText();
 
         expect(text).toContain(specialPrice1.toString());
@@ -101,12 +93,9 @@ test.describe.serial("omnibus price disclosure - storefront display", () => {
         shopPage,
     }) => {
         await setSpecialPrice(adminPage, specialPrice3);
-
         const omnibusShop = new OmnibusShop(shopPage);
-
         await omnibusShop.openProductPage(productName);
         await omnibusShop.verifyOmnibusVisible();
-
         const text = await omnibusShop.getOmnibusText();
 
         expect(text).toContain(specialPrice2.toString());
@@ -117,12 +106,9 @@ test.describe.serial("omnibus price disclosure - storefront display", () => {
         shopPage,
     }) => {
         const omnibusAdmin = new OmnibusAdmin(adminPage);
-
         await omnibusAdmin.disableOmnibus();
         await omnibusAdmin.saveConfig();
-
         const omnibusShop = new OmnibusShop(shopPage);
-
         await omnibusShop.openProductPage(productName);
         await omnibusShop.verifyOmnibusNotVisible();
     });
