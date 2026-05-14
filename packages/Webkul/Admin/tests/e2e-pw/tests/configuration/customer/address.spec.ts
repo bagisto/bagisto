@@ -1,22 +1,15 @@
-import { test, expect } from "../../../setup";
+import { test, type AdminPage } from "../../../setup";
+import { CustomerAddressPage } from "../../../pages/admin/configuration/customer/CustomerAddressPage";
 
 test.describe("customer address configuration", () => {
     test("should make country, state and zip as a required field", async ({
         adminPage,
+    }: {
+        adminPage: AdminPage;
     }) => {
-        await adminPage.goto("admin/configuration/customer/address");
-        await adminPage.click(
-            'label[for="customer[address][requirements][country]"]',
-        );
-        await adminPage.click(
-            'label[for="customer[address][requirements][state]"]',
-        );
-        await adminPage.click(
-            'label[for="customer[address][requirements][postcode]"]',
-        );
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(
-            adminPage.getByText("Configuration saved successfully"),
-        ).toBeVisible();
+        const page = new CustomerAddressPage(adminPage);
+
+        await page.open();
+        await page.requireCountryStateZip();
     });
 });
