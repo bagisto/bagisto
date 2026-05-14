@@ -165,15 +165,26 @@ The `v` prefix is a Git convention. Docker Hub tags are plain version numbers.
 
 ### Tags published per release (automated)
 
-| Git tag pushed | Docker Hub tags published |
-|---|---|
-| `v2.4.0` (stable) | `webkul/bagisto:2.4.0` **and** `webkul/bagisto:latest` |
-| `v2.4.0-rc1`, `v2.4.0-beta`, etc. (pre-release) | `webkul/bagisto:2.4.0-rc1` only — `latest` is **not** updated |
+The CI workflow uses the **GitHub default branch** as the source of truth for which version line owns the `:latest` tag. Bagisto maintains multiple release lines in parallel (e.g. `2.3.x` and `2.4.x`), so `:latest` is reserved for releases that come from commits on the default branch line. When a new major/minor line becomes the active one, simply change the default branch in GitHub repo settings — the workflow follows automatically.
 
-| Tag | Purpose |
+How the workflow decides:
+
+- For each tagged build, GitHub's compare API is queried for `<default-branch>...<build-commit>`.
+- If the compare status is `identical` or `behind`, the build commit is on the default branch line → `:latest` is updated (for stable tags).
+- If the status is `diverged` (the commit is on a side branch like `2.3` while the default is `2.4`), `:latest` is **not** touched.
+
+| Git tag pushed | Default branch is `2.4` → Docker Hub tags published |
 |---|---|
-| `2.4.0` | Immutable. Always points to this exact build. |
-| `latest` | Mutable. Always points to the most recently pushed stable release. |
+| `v2.4.1` (commit on `2.4`, stable) | `:2.4.1`, `:latest` |
+| `v2.3.20` (commit on `2.3`, stable) | `:2.3.20` (does **not** touch `:latest`) |
+| `v2.4.2-rc1` (pre-release) | `:2.4.2-rc1` only |
+| Later: default branch switched to `2.5`, then `v2.5.0` released | `:2.5.0`, `:latest` |
+| Later: default branch is `2.5`, then a patch `v2.4.5` is released | `:2.4.5` (does **not** touch `:latest`) |
+
+| Tag form | Mutability | Purpose |
+|---|---|---|
+| `:X.Y.Z` (e.g. `:2.4.1`) | Immutable | Pins to one exact build. Use this for reproducible deployments. |
+| `:latest` | Floating | Latest stable release on the default branch line (controlled by GitHub's default-branch setting). |
 
 ### Manual tagging (local builds)
 

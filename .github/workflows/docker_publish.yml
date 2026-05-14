@@ -22,11 +22,6 @@ on:
         description: 'Bagisto git tag to build (e.g. v2.4.0). Defaults to the workflow ref tag.'
         required: false
         type: string
-      push_latest:
-        description: 'Also tag and push :latest'
-        required: false
-        type: boolean
-        default: true
 
 env:
   IMAGE_NAME: webkul/bagisto
@@ -45,6 +40,9 @@ jobs:
 
       - name: Resolve Bagisto version
         id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           # Prefer manual input; otherwise derive from the tag that triggered the run.
           if [ -n "${{ inputs.bagisto_version }}" ]; then
@@ -62,26 +60,43 @@ jobs:
           # Docker tag = git tag without the leading 'v'
           DOCKER_TAG="${BAGISTO_VERSION#v}"
 
-          # Decide whether this release is also :latest.
-          # Only stable tags (no -suffix) become :latest unless overridden.
+          # Pre-release if the tag has any -suffix
           IS_PRERELEASE="false"
           if echo "$BAGISTO_VERSION" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+-'; then
             IS_PRERELEASE="true"
           fi
 
+          # Is the build commit on (or behind) the default branch?
+          # We use the GitHub compare API: status of `default...build_sha` will be
+          #   identical  → same commit as default tip
+          #   behind     → build commit is older but on the default branch line
+          #   ahead      → build commit has commits the default doesn't (unusual for releases)
+          #   diverged   → build commit is on a side branch (e.g. 2.3 while default is 2.4)
+          # Only `identical` and `behind` mean "this release belongs to the active line".
+          BUILD_SHA="${{ github.sha }}"
+          COMPARE_STATUS=$(gh api "repos/${{ github.repository }}/compare/${DEFAULT_BRANCH}...${BUILD_SHA}" --jq '.status' 2>/dev/null || echo "unknown")
+
+          ON_DEFAULT_BRANCH="false"
+          case "$COMPARE_STATUS" in
+            identical|behind) ON_DEFAULT_BRANCH="true" ;;
+          esac
+
+          # :latest — only stable releases on the default branch line.
           PUSH_LATEST="false"
-          if [ "${{ inputs.push_latest }}" = "true" ] && [ "$IS_PRERELEASE" = "false" ]; then
-            PUSH_LATEST="true"
-          elif [ "${{ github.event_name }}" = "push" ] && [ "$IS_PRERELEASE" = "false" ]; then
+          if [ "$IS_PRERELEASE" = "false" ] && [ "$ON_DEFAULT_BRANCH" = "true" ]; then
             PUSH_LATEST="true"
           fi
 
-          echo "bagisto_version=$BAGISTO_VERSION" >> "$GITHUB_OUTPUT"
-          echo "docker_tag=$DOCKER_TAG"           >> "$GITHUB_OUTPUT"
-          echo "push_latest=$PUSH_LATEST"         >> "$GITHUB_OUTPUT"
-          echo "is_prerelease=$IS_PRERELEASE"     >> "$GITHUB_OUTPUT"
+          echo "bagisto_version=$BAGISTO_VERSION"     >> "$GITHUB_OUTPUT"
+          echo "docker_tag=$DOCKER_TAG"               >> "$GITHUB_OUTPUT"
+          echo "push_latest=$PUSH_LATEST"             >> "$GITHUB_OUTPUT"
+          echo "is_prerelease=$IS_PRERELEASE"         >> "$GITHUB_OUTPUT"
+          echo "on_default_branch=$ON_DEFAULT_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "default_branch=$DEFAULT_BRANCH"       >> "$GITHUB_OUTPUT"
 
           echo "Resolved BAGISTO_VERSION=$BAGISTO_VERSION"
+          echo "Default branch: $DEFAULT_BRANCH (build commit status: $COMPARE_STATUS)"
+          echo "On default branch line: $ON_DEFAULT_BRANCH"
           echo "Docker tag: $DOCKER_TAG (latest=$PUSH_LATEST, prerelease=$IS_PRERELEASE)"
 
       - name: Set up QEMU
@@ -139,5 +154,6 @@ jobs:
             if [ "${{ steps.version.outputs.push_latest }}" = "true" ]; then
               echo "- Also tagged: \`${{ env.IMAGE_NAME }}:latest\`"
             fi
+            echo "- Default branch: \`${{ steps.version.outputs.default_branch }}\` (release on default line: \`${{ steps.version.outputs.on_default_branch }}\`)"
             echo "- Platforms: \`linux/amd64\`, \`linux/arm64\`"
           } >> "$GITHUB_STEP_SUMMARY"
