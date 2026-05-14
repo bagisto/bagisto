@@ -1,0 +1,143 @@
+name: Build & Publish Docker Image
+
+# ============================================================================
+# Triggers a multi-arch (amd64 + arm64) build of the production Bagisto image
+# whenever a `v*` tag is pushed (the same tag convention used for Bagisto
+# releases), and also supports manual dispatch for ad-hoc rebuilds.
+#
+# Build context: docker/production/ (Dockerfile + all support scripts).
+#
+# Required repository secrets:
+#   DOCKERHUB_USERNAME  Docker Hub user / org with push access to webkul/bagisto
+#   DOCKERHUB_TOKEN     Docker Hub access token (NOT a password)
+# ============================================================================
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      bagisto_version:
+        description: 'Bagisto git tag to build (e.g. v2.4.0). Defaults to the workflow ref tag.'
+        required: false
+        type: string
+      push_latest:
+        description: 'Also tag and push :latest'
+        required: false
+        type: boolean
+        default: true
+
+env:
+  IMAGE_NAME: webkul/bagisto
+  DOCKER_CONTEXT: docker/production
+
+jobs:
+  build_and_push:
+    name: Build & Push (amd64 + arm64)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve Bagisto version
+        id: version
+        run: |
+          # Prefer manual input; otherwise derive from the tag that triggered the run.
+          if [ -n "${{ inputs.bagisto_version }}" ]; then
+            BAGISTO_VERSION="${{ inputs.bagisto_version }}"
+          else
+            BAGISTO_VERSION="${GITHUB_REF#refs/tags/}"
+          fi
+
+          # Sanity check the format: must look like vX.Y.Z[-suffix]
+          if ! echo "$BAGISTO_VERSION" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.]+)?$'; then
+            echo "::error::BAGISTO_VERSION '$BAGISTO_VERSION' is not a valid semver tag (expected vX.Y.Z or vX.Y.Z-suffix)"
+            exit 1
+          fi
+
+          # Docker tag = git tag without the leading 'v'
+          DOCKER_TAG="${BAGISTO_VERSION#v}"
+
+          # Decide whether this release is also :latest.
+          # Only stable tags (no -suffix) become :latest unless overridden.
+          IS_PRERELEASE="false"
+          if echo "$BAGISTO_VERSION" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+-'; then
+            IS_PRERELEASE="true"
+          fi
+
+          PUSH_LATEST="false"
+          if [ "${{ inputs.push_latest }}" = "true" ] && [ "$IS_PRERELEASE" = "false" ]; then
+            PUSH_LATEST="true"
+          elif [ "${{ github.event_name }}" = "push" ] && [ "$IS_PRERELEASE" = "false" ]; then
+            PUSH_LATEST="true"
+          fi
+
+          echo "bagisto_version=$BAGISTO_VERSION" >> "$GITHUB_OUTPUT"
+          echo "docker_tag=$DOCKER_TAG"           >> "$GITHUB_OUTPUT"
+          echo "push_latest=$PUSH_LATEST"         >> "$GITHUB_OUTPUT"
+          echo "is_prerelease=$IS_PRERELEASE"     >> "$GITHUB_OUTPUT"
+
+          echo "Resolved BAGISTO_VERSION=$BAGISTO_VERSION"
+          echo "Docker tag: $DOCKER_TAG (latest=$PUSH_LATEST, prerelease=$IS_PRERELEASE)"
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Compute image tags
+        id: tags
+        run: |
+          TAGS="${{ env.IMAGE_NAME }}:${{ steps.version.outputs.docker_tag }}"
+          if [ "${{ steps.version.outputs.push_latest }}" = "true" ]; then
+            TAGS="$TAGS,${{ env.IMAGE_NAME }}:latest"
+          fi
+          echo "tags=$TAGS" >> "$GITHUB_OUTPUT"
+          echo "Will push: $TAGS"
+
+      - name: Build & push multi-arch image
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ env.DOCKER_CONTEXT }}
+          file: ${{ env.DOCKER_CONTEXT }}/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.tags.outputs.tags }}
+          build-args: |
+            BAGISTO_VERSION=${{ steps.version.outputs.bagisto_version }}
+          provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          labels: |
+            org.opencontainers.image.title=Bagisto
+            org.opencontainers.image.description=Bagisto production image (Nginx + PHP-FPM 8.3 + MySQL 8.0, fully installed)
+            org.opencontainers.image.version=${{ steps.version.outputs.docker_tag }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.licenses=MIT
+
+      - name: Summary
+        run: |
+          {
+            echo "### Published"
+            echo ""
+            echo "- Bagisto version: \`${{ steps.version.outputs.bagisto_version }}\`"
+            echo "- Image: \`${{ env.IMAGE_NAME }}:${{ steps.version.outputs.docker_tag }}\`"
+            if [ "${{ steps.version.outputs.push_latest }}" = "true" ]; then
+              echo "- Also tagged: \`${{ env.IMAGE_NAME }}:latest\`"
+            fi
+            echo "- Platforms: \`linux/amd64\`, \`linux/arm64\`"
+          } >> "$GITHUB_STEP_SUMMARY"
