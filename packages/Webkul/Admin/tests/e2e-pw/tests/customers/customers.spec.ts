@@ -130,41 +130,43 @@ test.describe("customer management", () => {
 
     test("should mass delete customers", async ({ adminPage }) => {
         const customersPage = new CustomersPage(adminPage);
-
-        await customersPage.createCustomer(
-            generateFirstName(),
-            generateLastName(),
-            generateEmail(),
-            randomElement(["Male", "Female", "Other"]),
-            generatePhoneNumber(),
-        );
+        for (let i = 0; i < 3; i++) {
+            await customersPage.createCustomer(
+                generateFirstName(),
+                generateLastName(),
+                generateEmail(),
+                randomElement(["Male", "Female", "Other"]),
+                generatePhoneNumber(),
+            );
+        }
 
         await customersPage.openMassActionMenu();
         await customersPage.deleteSelectedCustomers();
         await customersPage.confirmAgreeDialog();
 
         await expect(
-            adminPage.getByText("Selected data successfully deleted")
+            adminPage.getByText("Selected data successfully deleted"),
         ).toBeVisible();
     });
 
     test("should mass update customers", async ({ adminPage }) => {
         const customersPage = new CustomersPage(adminPage);
-
-        await customersPage.createCustomer(
-            generateFirstName(),
-            generateLastName(),
-            generateEmail(),
-            randomElement(["Male", "Female", "Other"]),
-            generatePhoneNumber(),
-        );
+        for (let i = 0; i < 3; i++) {
+            await customersPage.createCustomer(
+                generateFirstName(),
+                generateLastName(),
+                generateEmail(),
+                randomElement(["Male", "Female", "Other"]),
+                generatePhoneNumber(),
+            );
+        }
 
         await customersPage.openMassActionMenu();
         await customersPage.updateSelectedCustomersStatusTo("Active");
         await customersPage.confirmAgreeDialog();
 
         await expect(
-            adminPage.getByText("Selected Customers successfully updated")
+            adminPage.getByText("Selected Customers successfully updated"),
         ).toBeVisible();
     });
 });

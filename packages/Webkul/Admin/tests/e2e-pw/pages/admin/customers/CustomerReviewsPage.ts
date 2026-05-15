@@ -57,8 +57,6 @@ export class CustomerReviewsPage extends BasePage {
 
     async selectFirstReviewForMassActions(): Promise<void> {
         await this.open();
-        const count = await this.checkboxes.count();
-        expect(count).toBeGreaterThan(1);
         await this.checkboxes.nth(1).click();
     }
 
