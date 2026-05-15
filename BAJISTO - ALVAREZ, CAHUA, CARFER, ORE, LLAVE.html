@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>UNSA · Bagisto E-Commerce · Scrum + DevOps · IPS-2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+/* ─────────────────────────────────────────────
+   TOKENS DE DISEÑO: Nordic Sand / Claymorphism
+   Paleta: Tierra y Pastel Mate
+───────────────────────────────────────────── */
+:root {
+  /* Fondo principal y paneles (Tonos Arena/Crema mate) */
+  --bg-deep:      #EAE8E3; /* Arena grisáceo suave */
+  --bg-clay:      #F4F2EC; /* Crema mate para las tarjetas */
+  --line:         rgba(0, 0, 0, 0.05);
+  --line-strong:  rgba(0, 0, 0, 0.1);
+  
+  /* Textos (Gris Pizarra Oscuro) */
+  --text-core:    #2D3436; 
+  --text-soft:    #636E72;
+  --text-fade:    #A0AAB2;
+  
+  /* Colores de Acento Profesionales (Tierra y Botánicos) */
+  --accent-green: #52796F; /* Verde Salvia / Musgo */
+  --accent-ind:   #E07A5F; /* Terracota / Coral apagado */
+  --accent-purp:  #D4A373; /* Ocre cálido / Mostaza */
+  
+  /* Estados / Tipos */
+  --status-ok:    #52796F; /* Verde Salvia */
+  --status-warn:  #D4A373; /* Ocre */
+  --status-err:   #E07A5F; /* Terracota */
+  
+  /* Radios y Sombras */
+  --r-clay:       22px;    
+  --r-inner:      12px;    
+  
+  /* Sombras Neumórficas/Clay más suaves para fondos claros */
+  --sh-clay-out:  8px 8px 16px rgba(0, 0, 0, 0.06), -8px -8px 16px rgba(255, 255, 255, 0.7);
+  --sh-clay-in:   inset 4px 4px 8px rgba(0, 0, 0, 0.03), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+  --sh-glow:      0 10px 30px rgba(224, 122, 95, 0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-deep);
+  color: var(--text-core);
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fondo Dinámico con Movimiento */
+.bg-fluid-layer {
+  position: fixed; inset: 0; z-index: -1;
+  background-image: 
+    radial-gradient(ellipse 1000px 700px at 70% 20%, rgba(224, 122, 95, 0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 800px 500px at 20% 80%, rgba(82, 121, 111, 0.08) 0%, transparent 60%);
+  filter: blur(40px);
+  will-change: transform;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-deep); }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+
+/* ─── TYPE ─── */
+.mono { font-family: 'Fira Code', monospace; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 12px; left: 12px; right: 12px; z-index: 200;
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px;
+  border-radius: var(--r-inner);
+  background: rgba(244, 242, 236, 0.7); /* Tono crema semitransparente */
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+
+.nav-logo {
+  display: flex; align-items: center; gap: 8px;
+  font-weight: 800; font-size: 14px; color: var(--text-core); text-decoration: none;
+  letter-spacing: -0.02em;
+}
+.nav-logo::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-ind); box-shadow: 0 0 10px var(--sh-glow); }
+
+.nav-meta {
+  font-family: 'Fira Code', monospace; font-size: 10.5px; color: var(--text-fade);
+  text-transform: uppercase; letter-spacing: 0.1em;
+}
+
+.nav-right { display: flex; align-items: center; gap: 6px; }
+
+.nav-link {
+  font-size: 12.5px; font-weight: 500; color: var(--text-soft); text-decoration: none;
+  padding: 6px 12px; border-radius: 6px;
+  transition: all 0.25s;
+}
+.nav-link:hover { color: var(--text-core); background: rgba(0,0,0,0.04); }
+
+.nav-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 12.5px; font-weight: 600;
+  padding: 6px 14px; border-radius: 8px;
+  background: var(--bg-clay); color: var(--text-core);
+  text-decoration: none; border: 1px solid var(--line-strong);
+  transition: all 0.25s;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+.nav-btn:hover { border-color: var(--accent-green); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(82, 121, 111, 0.2); }
+
+/* ─── LAYOUT ─── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+section { position: relative; z-index: 1; padding: 80px 0; border-top: 1px solid var(--line-strong); }
+
+/* ─── CLAY CARD MOLD ─── */
+.clay-card {
+  background: var(--bg-clay);
+  border-radius: var(--r-clay);
+  padding: 24px;
+  box-shadow: var(--sh-clay-out);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255,255,255,0.6);
+}
+.clay-card::after {
+  content: ''; position: absolute; inset: 0;
+  border-radius: var(--r-clay); pointer-events: none;
+  box-shadow: var(--sh-clay-in); opacity: 0.8;
+}
+.clay-card:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 20px 40px rgba(0,0,0,0.1), 0 0 0 1px rgba(82, 121, 111, 0.2); }
+
+/* ─── HEADER ─── */
+.sh { margin-bottom: 48px; text-align: center; display: flex; flex-direction: column; align-items: center; }
+.sh-eyebrow {
+  font-family: 'Fira Code', monospace;
+  font-size: 11px; color: var(--accent-green);
+  letter-spacing: 0.15em; text-transform: uppercase;
+  margin-bottom: 12px;
+  padding: 4px 12px; border-radius: 6px; background: rgba(82, 121, 111, 0.1);
+}
+.sh h2 {
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 900; letter-spacing: -0.04em;
+  line-height: 1.1; color: var(--text-core);
+}
+.sh p { margin-top: 14px; font-size: 15px; color: var(--text-soft); max-width: 560px; line-height: 1.7; font-weight: 400; }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  padding-top: 70px;
+  overflow: hidden;
+  border-top: none;
+}
+
+.hero-fluid-shapes {
+  position: absolute; inset: 0; pointer-events: none;
+  mask-image: radial-gradient(ellipse 100% 70% at 50% 50%, black 0%, transparent 80%);
+}
+.shape { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.15; animation: moveShape 20s infinite alternate ease-in-out; }
+.s1 { width: 400px; height: 400px; background: var(--accent-ind); top: 10%; left: -10%; animation-delay: -2s; }
+.s2 { width: 350px; height: 350px; background: var(--accent-green); bottom: 10%; right: -5%; animation-delay: -10s; }
+@keyframes moveShape { 0% { transform: translate(0, 0); } 100% { transform: translate(50px, 30px); } }
+
+.hero-inner { text-align: center; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Fira Code', monospace;
+  font-size: 11.5px; color: var(--text-core);
+  background: var(--bg-clay);
+  padding: 6px 14px; border-radius: 10px;
+  margin-bottom: 24px;
+  box-shadow: var(--sh-clay-out); border: 1px solid rgba(255,255,255,0.6);
+}
+.hero-badge::after { content: ''; position: absolute; inset: 0; border-radius: 10px; box-shadow: var(--sh-clay-in); pointer-events: none; }
+
+.hero-status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-green); animation: kpulse 2s ease-in-out infinite; }
+@keyframes kpulse { 0% { box-shadow: 0 0 0 0 rgba(82, 121, 111, 0.6); } 70% { box-shadow: 0 0 0 6px rgba(82, 121, 111, 0); } 100% { box-shadow: 0 0 0 0 rgba(82, 121, 111, 0); } }
+
+h1 {
+  font-size: clamp(36px, 6vw, 68px);
+  font-weight: 900; letter-spacing: -0.05em;
+  line-height: 1; color: var(--text-core);
+  max-width: 800px; margin: 0 auto;
+}
+
+h1 .grad {
+  background: linear-gradient(110deg, #52796F 0%, #354F52 30%, #E07A5F 70%, #D4A373 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  margin: 24px auto 0;
+  font-size: 16px; color: var(--text-soft);
+  max-width: 520px; line-height: 1.8; font-weight: 400;
+}
+
+.hero-actions { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; justify-content: center; }
+
+.hero-btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 700;
+  padding: 12px 24px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-green), var(--accent-ind)); color: #fff;
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(82, 121, 111, 0.3);
+}
+.hero-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(82, 121, 111, 0.4); }
+
+.hero-btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 14px; font-weight: 600;
+  padding: 12px 24px; border-radius: 12px;
+  background: var(--bg-clay); color: var(--text-core);
+  text-decoration: none; border: 1px solid rgba(255,255,255,0.6);
+  transition: all 0.3s ease;
+  box-shadow: var(--sh-clay-out);
+}
+.hero-btn-secondary::after { content: ''; position: absolute; inset: 0; border-radius: 12px; box-shadow: var(--sh-clay-in); pointer-events: none; }
+.hero-btn-secondary:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+
+/* Visualización derecha elegante Dashboard técnico */
+.hero-viz {
+  background: var(--bg-clay); border-radius: var(--r-panel); padding: 24px;
+  border: 1px solid rgba(255,255,255,0.8); box-shadow: var(--sh-panel);
+  font-family: 'Fira Code', monospace; font-size: 12px; line-height: 1.9; color: var(--text-soft);
+  box-shadow: var(--sh-clay-out); margin-top: 36px; max-width: 500px; margin-left: auto; margin-right: auto;
+}
+.hero-viz::after { content: ''; position: absolute; inset: 0; border-radius: var(--r-panel); pointer-events: none; box-shadow: var(--sh-clay-in); }
+
+.viz-header { display: flex; align-items: center; gap: 6px; padding-bottom: 16px; border-bottom: 1px solid var(--line-strong); margin-bottom: 16px; }
+.viz-title { color: var(--text-core); font-weight: 600; }
+.td1 { color: var(--status-ok); } .td2 { color: var(--status-warn); } .td3 { color: var(--accent-ind); }
+
+/* ─── EQUIPO ─── */
+#equipo { padding-top: 70px; border-top: none; }
+.team-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.member-card { text-align: center; border-radius: 20px; }
+.member-av {
+  width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 12px;
+  border: 2px solid rgba(255,255,255,0.8); display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 900; color: var(--accent-ind);
+  box-shadow: var(--sh-clay-out); background: var(--bg-deep);
+}
+.member-av::after { content: ''; position: absolute; inset: 0; border-radius: 50%; box-shadow: var(--sh-clay-in); pointer-events: none; }
+
+.member-name { font-size: 13px; font-weight: 700; line-height: 1.4; color: var(--text-core); }
+.member-role { font-family: 'Fira Code', monospace; font-size: 11px; color: var(--text-soft); }
+
+/* ─── ABOUT / WHY ─── */
+#about {}
+
+.about-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+
+.about-info-col { display: flex; flex-direction: column; gap: 16px; }
+
+.info-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--bg-clay);
+  box-shadow: var(--sh-clay-out);
+  font-size: 13.5px; border: 1px solid rgba(255,255,255,0.4);
+}
+.info-item::after { content: ''; position: absolute; inset: 0; border-radius: 12px; box-shadow: var(--sh-clay-in); pointer-events: none; }
+
+.info-key { font-family: 'Fira Code', monospace; font-size: 11.5px; color: var(--text-soft); }
+.info-val { color: var(--text-core); font-weight: 600; }
+.info-val.ok { color: var(--status-ok); }
+.info-val.accent { color: var(--accent-ind); }
+
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 40px; }
+
+.why-card { border-radius: 16px; }
+.why-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 18px; background: var(--bg-deep); border: 1px solid rgba(255,255,255,0.5); }
+.why-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: var(--text-core); }
+.why-desc { font-size: 13.5px; color: var(--text-soft); line-height: 1.6; font-weight: 400; }
+
+/* ─── STACK ─── */
+#stack { border-top: none; padding-top: 0; margin-top: -40px;}
+
+.stack-group { margin-bottom: 32px; }
+.stack-label { font-family: 'Fira Code', monospace; font-size: 10.5px; color: var(--text-fade); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.stack-label::after { content: ''; flex: 1; height: 1px; background: var(--line-strong); }
+
+.chip-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px;
+  background: var(--bg-clay);
+  border-radius: 12px;
+  font-size: 13.5px; font-weight: 600;
+  color: var(--text-core);
+  transition: all 0.25s;
+  cursor: default;
+  box-shadow: var(--sh-clay-out); border: 1px solid rgba(255,255,255,0.4);
+}
+.chip::after { content: ''; position: absolute; inset: 0; border-radius: 12px; box-shadow: var(--sh-clay-in); pointer-events: none; }
+.chip:hover { transform: translateY(-1px); border-color: var(--accent-ind); }
+
+.chip-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.chip-sub { font-size: 11px; color: var(--text-fade); font-family: 'Fira Code', monospace; }
+
+/* ─── ARCHITECTURE (Diagram Rediseñado) ─── */
+#architecture {}
+.diag-view { width: 100%; max-width: 600px; margin: 0 auto; }
+.diag-header { display: flex; align-items: center; gap: 6px; padding: 12px; border-bottom: 1px solid var(--line-strong); }
+.term-dot { width: 10px; height: 10px; border-radius: 50%; }
+.td1 { background: #E07A5F; } .td2 { background: #D4A373; } .td3 { background: #52796F; }
+.diag-title { font-family: 'Fira Code', monospace; font-size: 10.5px; color: var(--text-fade); margin-left: auto; transform: translateX(-12px); }
+
+/* ─── KANBAN BOARD (Clean view) ─── */
+#kanban {}
+.kanban-board { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-top: 16px; }
+.kb-col { background: var(--bg-deep); border-radius: 16px; border: 1px solid var(--line-strong); overflow: hidden; }
+.kb-col-header { padding: 10px 14px; border-bottom: 1px solid var(--line-strong); display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; color: var(--text-soft); }
+.kb-items { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.kb-item { background: var(--bg-clay); border-radius: 8px; padding: 12px; box-shadow: var(--sh-clay-out); border: 1px solid rgba(255,255,255,0.4); transition: all 0.2s; }
+.kb-item::after { content: ''; position: absolute; inset: 0; border-radius: 8px; box-shadow: var(--sh-clay-in); pointer-events: none; opacity: 0.5; }
+.kb-item:hover { border-color: var(--accent-green); }
+.kb-item-code { font-family: 'Fira Code', monospace; font-size: 10.5px; color: var(--text-fade); margin-bottom: 4px; }
+.kb-item-title { font-size: 12px; color: var(--text-core); line-height: 1.5; font-weight: 500; }
+.kb-col.active-col { border-color: rgba(82, 121, 111, 0.3); }
+.kb-col.active-col .kb-col-header { color: var(--text-core); background: rgba(82, 121, 111, 0.05); }
+
+/* ─── RESULTS ─── */
+#resultados { border-top: none; padding-top: 0; margin-top: -40px;}
+.metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
+.metric-card { padding: 20px; text-align: center; border-radius: 16px;}
+.metric-label { font-family: 'Fira Code', monospace; font-size: 11px; color: var(--text-fade); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 10px; display: block; }
+.metric-val { font-size: 36px; font-weight: 800; color: var(--text-core); letter-spacing: -0.04em; line-height: 1; }
+.metric-val.ok { color: var(--status-ok); }
+.metric-val.accent { color: var(--accent-ind); }
+.metric-desc { font-size: 12.5px; color: var(--text-soft); margin-top: 8px; line-height: 1.5; font-weight: 400; }
+
+/* ─── DEVOPS / PIPELINE (Nuevo Enfoque Modular) ─── */
+#devops {}
+.devops-split { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+.tool-row { display: flex; align-items: flex-start; gap: 14px; background: var(--bg-clay); border-radius: 12px; padding: 16px; box-shadow: var(--sh-clay-out); border: 1px solid rgba(255,255,255,0.4); }
+.tool-row::after { content: ''; position: absolute; inset: 0; border-radius: 12px; box-shadow: var(--sh-clay-in); pointer-events: none; }
+.tool-row-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-deep); display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid var(--line-strong); font-weight:bold; }
+
+/* Pipeline Rediseñado (Visual, modular) */
+.pipe-viz { position: relative; padding: 0; }
+.pipe-viz::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 1px; background: var(--line-strong); }
+
+.pipe-step { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 16px; }
+.pipe-node { width: 10px; height: 10px; border-radius: 50%; background: var(--bg-deep); border: 2px solid; margin-top: 18px; position: relative; z-index: 1; }
+.pipe-step.done .pipe-node { border-color: var(--status-ok); background: var(--status-ok); box-shadow: 0 0 10px rgba(82, 121, 111, 0.6); }
+.pipe-step.active .pipe-node { border-color: var(--accent-ind); animation: kpulse 2.5s infinite; }
+
+.pipe-step-card { border-radius: 16px; padding: 18px; flex: 1; border: 1px solid rgba(255,255,255,0.4); }
+.pipe-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.pipe-name { font-size: 13.5px; font-weight: 700; color: var(--text-core); }
+.pipe-badge { font-family: 'Fira Code', monospace; font-size: 10px; color: var(--text-fade); }
+.pipe-step.done .pipe-badge { color: var(--status-ok); }
+.pipe-step.active .pipe-badge { color: var(--accent-ind); }
+
+/* ─── TIMELINE (Centralized) ─── */
+#timeline {}
+.tl-track { position: relative; padding: 0 0; }
+.tl-track::before { content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--line-strong); transform: translateX(-50%); }
+
+.tl-item { display: grid; grid-template-columns: 1fr 40px 1fr; gap: 0; margin-bottom: 16px; align-items: flex-start; }
+
+.tl-node-col { display: flex; justify-content: center; padding-top: 18px; z-index: 1; }
+.tl-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--bg-deep); border: 2px solid var(--line-strong); position: relative; }
+.tl-dot.done { border-color: var(--status-ok); background: var(--status-ok); box-shadow: 0 0 10px rgba(82, 121, 111, 0.6); }
+.tl-dot.active { border-color: var(--accent-ind); background: var(--accent-ind); box-shadow: 0 0 10px rgba(224, 122, 95, 0.6); animation: kpulse 2.5s infinite; }
+
+.tl-card { border-radius: 16px; padding: 20px; }
+.tl-item:nth-child(odd) .tl-card-col { grid-column: 1; }
+.tl-item:nth-child(even) .tl-card-col { grid-column: 3; }
+.tl-item-meta { display: flex; align-items: center; justify-content: space-between; font-family: 'Fira Code', monospace; font-size: 11px; color: var(--text-fade); margin-bottom: 8px; }
+.tl-item-title { font-size: 14.5px; font-weight: 700; color: var(--text-core); margin-bottom: 8px; }
+.tl-tag { font-family: 'Fira Code', monospace; font-size: 10.5px; padding: 2px 6px; border-radius: 4px; background: rgba(0,0,0,0.04); color: var(--text-soft); }
+.tl-tag.done { color: var(--status-ok); background: rgba(82, 121, 111, 0.1); }
+
+/* ─── FOOTER & ENLACES ─── */
+#enlaces { padding: 60px 0; border-top: 1px solid var(--line-strong); }
+.links-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.link-tile { text-decoration: none; border-radius: 16px; border: 1px solid rgba(255,255,255,0.4); }
+.link-icon { font-size: 20px; margin-bottom: 12px; color: var(--accent-green); font-weight:bold; }
+
+footer { background: var(--bg-clay); padding: 24px 0; border-top: 1px solid var(--line-strong); margin-top: 60px; box-shadow: inset 0 10px 30px rgba(0,0,0,0.03); }
+.footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 13px; color: var(--text-soft); font-weight: 400; }
+.footer-link { color: var(--text-soft); text-decoration: none; font-size: 12.5px; transition: color 0.2s; }
+.footer-link:hover { color: var(--accent-ind); }
+
+/* SCROLL REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal.visible { opacity: 1; transform: none; }
+.rd1 { transition-delay: 0.05s; }
+.rd2 { transition-delay: 0.1s; }
+.rd3 { transition-delay: 0.15s; }
+.rd4 { transition-delay: 0.2s; }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .about-layout { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr 1fr; }
+  .devops-split { grid-template-columns: 1fr; }
+  .kanban-board { grid-template-columns: repeat(3, 1fr); }
+  .tl-item { grid-template-columns: 10% 40px 1fr; }
+  .tl-item:nth-child(odd) .tl-card-col, .tl-item:nth-child(even) .tl-card-col { grid-column: 3; }
+  .tl-track::before { left: 10%; transform: translateX(calc(-10% + 18px)); }
+  .links-grid { grid-template-columns: 1fr 1fr; }
+  .nav-meta { display: none; }
+  .team-grid { grid-template-columns: repeat(3, 1fr); }
+  .metric-card { grid-column: span 1; }
+  .metrics-row { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .hero-actions { flex-direction: column; gap: 10px; }
+  .nav-right .nav-link { display: none; }
+  .why-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: repeat(2, 1fr); }
+  .kanban-board { grid-template-columns: repeat(2, 1fr); }
+  .metrics-row { grid-template-columns: 1fr; }
+  .hero-viz { display: none; }
+  .diag-view { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-fluid-layer"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">bagisto · IPS</a>
+  <span class="nav-meta mono">Sprint 0 · Hito 1</span>
+  <div class="nav-right">
+    <a href="#about" class="nav-link">Proyecto</a>
+    <a href="#kanban" class="nav-link">Tablero</a>
+    <a href="#devops" class="nav-link">Pipeline</a>
+    <a href="#timeline" class="nav-link">Plan</a>
+    <a href="https://github.com/NaginCarferC/bagisto" target="_blank" class="nav-btn">
+      Repo
+    </a>
+  </div>
+</nav>
+
+<section id="hero">
+  <div class="hero-fluid-shapes">
+    <div class="shape s1"></div>
+    <div class="shape s2"></div>
+  </div>
+  <div class="container hero-inner">
+    <div class="hero-badge reveal">
+      <span class="hero-status-dot"></span>
+      UNSA · Mayo 2026 · Proyecto IPS
+    </div>
+    <h1 class="reveal rd1">Integración Ágil en<br/><span class="grad">E-Commerce Bagisto</span></h1>
+    <p class="hero-desc reveal rd2">Aplicación práctica de marcos Scrum y prácticas DevOps sobre la plataforma E-Commerce modular Bagisto (Laravel/Vue).</p>
+    <div class="hero-actions reveal rd3">
+      <a href="https://github.com/NaginCarferC/bagisto" target="_blank" class="hero-btn-primary">
+        Ver Repositorio
+      </a>
+      <a href="https://github.com/users/NaginCarferC/projects/1" target="_blank" class="hero-btn-secondary mono">
+        /dev/board
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="equipo">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-eyebrow">Autores</div>
+      <h2>Equipo IPS</h2>
+      <p>Estudiantes de Ingeniería de Sistemas e Informática — UNSA 2026-A.</p>
+    </div>
+    <div class="team-grid">
+      <div class="clay-card member-card reveal">
+        <div class="member-av">FAA</div>
+        <div class="member-name">Álvarez Llave,<br/>Fabián Andre</div>
+        <div class="member-role">Developer</div>
+      </div>
+      <div class="clay-card member-card reveal rd1">
+        <div class="member-av">EKC</div>
+        <div class="member-name">Cahua Chise,<br/>Elizabeth karina</div>
+        <div class="member-role">Developer</div>
+      </div>
+      <div class="clay-card member-card reveal rd2">
+        <div class="member-av">NCC</div>
+        <div class="member-name">Carfer Carpio,<br/>Nagin Jazmin</div>
+        <div class="member-role">Developer</div>
+      </div>
+      <div class="clay-card member-card reveal rd3">
+        <div class="member-av">ARS</div>
+        <div class="member-name">Ore Soto,<br/>Andres Raul</div>
+        <div class="member-role">Developer</div>
+      </div>
+      <div class="clay-card member-card reveal rd4">
+        <div class="member-av">JML</div>
+        <div class="member-name">Llave Aguilar,<br/>Jafet Martin</div>
+        <div class="member-role">Developer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-eyebrow">Proyecto</div>
+      <h2>Base Académica: Bagisto</h2>
+      <p>Seleccionado por su arquitectura modular moderna que combina la potencia de Laravel con la reactividad de Vue.js.</p>
+    </div>
+    
+    <div class="about-layout">
+      <div class="reveal">
+        <h3 style="font-size:18px;margin-bottom:12px;color:var(--text-core);">Complejidad del Mundo Real</h3>
+        <p style="font-size:14px;color:var(--text-soft);margin-bottom:20px;">Bagisto es un framework de venta online open-source altamente escalable. Su diseño orientado a paquetes permite el desarrollo escalable de tiendas virtuales B2B/B2C complejos, market places y plataformas multi-idioma.</p>
+        
+        <p style="margin-top:20px;">
+          <span class="mono" style="font-size:11px;color:var(--text-fade);">Curso</span><br/>
+          <strong style="color:var(--accent-ind); font-size:16px; font-weight:700;">IPS UNSA</strong>
+          <span style="color:var(--text-soft);font-size:13px;"> · 2026-A</span>
+        </p>
+      </div>
+
+      <div class="about-info-col reveal rd1">
+        <div class="info-item"><span class="info-key">project_base</span><span class="info-val">Bagisto v2+</span></div>
+        <div class="info-item"><span class="info-key">license</span><span class="info-val ok">MIT</span></div>
+        <div class="info-item"><span class="info-key">arch_type</span><span class="info-val accent">Modular Core</span></div>
+        <div class="info-item"><span class="info-key">language</span><span class="info-val">PHP 8.2 / Vue 3</span></div>
+        <div class="info-item"><span class="info-key">loc_approx</span><span class="info-val ok">~150K</span></div>
+        <div class="info-item"><span class="info-key">dev_env</span><span class="info-val">Laravel Sail (Docker)</span></div>
+      </div>
+    </div>
+
+    <div class="why-grid">
+      <div class="clay-card why-card reveal">
+        <div class="why-icon" style="color:var(--accent-green);">✓</div>
+        <div class="why-title">Stack Moderno</div>
+        <div class="why-desc">Arquitectura acoplada de Laravel 10+ y Vue.js 3, ideal para tests CI/CD.</div>
+      </div>
+      <div class="clay-card why-card reveal rd1">
+        <div class="why-icon" style="color:var(--accent-ind);">B2B</div>
+        <div class="why-title">Dominio B2B</div>
+        <div class="why-desc">Soporte nativo para múltiples monedas, idiomas y control de roles.</div>
+      </div>
+      <div class="clay-card why-card reveal rd2">
+        <div class="why-icon" style="color:var(--accent-purp);">🚀</div>
+        <div class="why-title">Escalabilidad</div>
+        <div class="why-desc">Diseño modular basado en paquetes Laravel autónomos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-eyebrow">Ingeniería</div>
+      <h2>Mapa Arquitectónico</h2>
+      <p>Visualización del flujo de datos entre la capa de presentación Vue/Blade y los paquetes del Core de Bagisto.</p>
+    </div>
+    
+    <div class="diag-view clay-card reveal">
+      <div class="diag-header">
+        <div class="term-dot td1"></div><div class="term-dot td2"></div><div class="term-dot td3"></div>
+        <span class="diag-title">bagisto.arch</span>
+      </div>
+      <div style="padding:24px;text-align:center;font-size:13px;color:var(--text-soft);">
+        <svg viewBox="0 0 520 420" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gSalvia" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#52796F"/><stop offset="100%" stop-color="#354F52"/></linearGradient>
+            <linearGradient id="gTerra" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#E07A5F"/><stop offset="100%" stop-color="#C76049"/></linearGradient>
+          </defs>
+          
+          <rect x="160" y="10" width="200" height="80" rx="12" fill="url(#gSalvia)" stroke="rgba(0,0,0,0.1)" stroke-width="1"/>
+          <text x="260" y="45" text-anchor="middle" fill="white" font-weight="700">Presentation</text>
+          <text x="260" y="65" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11px">Vue 3 / Blade / Tailwind</text>
+          
+          <line x1="260" y1="90" x2="260" y2="136" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+          
+          <rect x="180" y="140" width="160" height="30" rx="6" fill="#EAE8E3" stroke="rgba(0,0,0,0.1)"/>
+          <text x="260" y="160" text-anchor="middle" fill="#636E72" font-size="11px" font-family="Fira Code">API / Routes</text>
+          
+          <line x1="260" y1="170" x2="260" y2="206" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+          
+          <rect x="50" y="210" width="420" height="150" rx="16" fill="rgba(0,0,0,0.02)" stroke="rgba(0,0,0,0.06)" stroke-width="1"/>
+          <text x="260" y="226" text-anchor="middle" fill="rgba(0,0,0,0.4)" font-size="10px">Bagisto Core Packages</text>
+          
+          <rect x="70" y="240" width="100" height="100" rx="10" fill="url(#gTerra)" stroke="rgba(0,0,0,0.1)"/>
+          <text x="120" y="290" text-anchor="middle" fill="white" font-weight="600" font-size="13px">Catalogue</text>
+          
+          <rect x="180" y="240" width="100" height="100" rx="10" fill="url(#gTerra)" stroke="rgba(0,0,0,0.1)"/>
+          <text x="230" y="290" text-anchor="middle" fill="white" font-weight="600" font-size="13px">Checkout</text>
+          
+          <rect x="290" y="240" width="160" height="45" rx="8" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.1)"/>
+          <text x="370" y="266" text-anchor="middle" fill="#2D3436" font-weight="600" font-size="12px">Customer API</text>
+          
+          <rect x="290" y="295" width="160" height="45" rx="8" fill="rgba(0,0,0,0.04)" stroke="rgba(0,0,0,0.1)"/>
+          <text x="370" y="321" text-anchor="middle" fill="#2D3436" font-weight="600" font-size="12px">Inventory</text>
+          
+          <line x1="260" y1="360" x2="260" y2="386" stroke="rgba(0,0,0,0.15)" stroke-width="1"/>
+          
+          <rect x="160" y="390" width="200" height="60" rx="12" fill="#EAE8E3" stroke="rgba(0,0,0,0.1)"/>
+          <text x="260" y="420" text-anchor="middle" fill="#2D3436" font-weight="700">Data & Cache</text>
+          <text x="260" y="435" text-anchor="middle" fill="#636E72" font-size="11px">MySQL / MariaDB / Redis</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="stack">
+  <div class="container">
+    <div class="reveal">
+      <div class="stack-group">
+        <div class="stack-label">Core Backend</div>
+        <div class="chip-grid">
+          <div class="chip"><span class="chip-dot" style="background:var(--accent-ind);"></span>Laravel<span class="chip-sub">10+</span></div>
+          <div class="chip"><span class="chip-dot" style="background:var(--accent-purp);"></span>PHP<span class="chip-sub">8.2+</span></div>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-label">Presentación Vue</div>
+        <div class="chip-grid">
+          <div class="chip"><span class="chip-dot" style="background:var(--accent-green);"></span>Vue 3<span class="chip-sub">Options API</span></div>
+          <div class="chip"><span class="chip-dot" style="background:var(--text-soft);"></span>Tailwind<span class="chip-sub">UI</span></div>
+        </div>
+      </div>
+      <div class="stack-group">
+        <div class="stack-label">Infraestructura</div>
+        <div class="chip-grid">
+          <div class="chip"><span class="chip-dot" style="background:var(--accent-green);"></span>Docker<span class="chip-sub">Sail</span></div>
+          <div class="chip"><span class="chip-dot" style="background:var(--text-core);"></span>GitHub Actions<span class="chip-sub">CI/CD</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="kanban">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-eyebrow">Gestión Scrum</div>
+      <h2>Estatus del Tablero Kanban</h2>
+    </div>
+    
+    <div class="kanban-board reveal rd1">
+      <div class="kb-col">
+        <div class="kb-col-header"><span style="color:var(--accent-green);">○</span> Backlog</div>
+        <div class="kb-items">
+          <div class="kb-item"><div class="kb-item-code">bagisto#5</div><div class="kb-item-title">Configuración Pasarela Stripe</div></div>
+        </div>
+      </div>
+      <div class="kb-col">
+        <div class="kb-col-header"><span style="color:var(--accent-ind);">→</span> Ready</div>
+        <div class="kb-items">
+          <div class="kb-item"><div class="kb-item-code">bagisto#7</div><div class="kb-item-title">Cronograma Sprints IEEE</div></div>
+        </div>
+      </div>
+      <div class="kb-col active-col">
+        <div class="kb-col-header"><span style="color:var(--status-warn);">▶</span> In Progress</div>
+        <div class="kb-items">
+          <div class="kb-item"><div class="kb-item-code">bagisto#12</div><div class="kb-item-title">Setup Pipeline Actions</div></div>
+          <div class="kb-item"><div class="kb-item-code">bagisto#11</div><div class="kb-item-title">Docker Setup with Sail</div></div>
+        </div>
+      </div>
+      <div class="kb-col">
+        <div class="kb-col-header"><span style="color:var(--accent-purp);">✓</span> Review</div>
+        <div class="kb-items">
+          <div class="kb-item"><div class="kb-item-code">bagisto#13</div><div class="kb-item-title">Modelo DB Modular Docs</div></div>
+        </div>
+      </div>
+      <div class="kb-col">
+        <div class="kb-col-header"><span style="color:var(--accent-green);">✓✓</span> Done</div>
+        <div class="kb-items">
+          <div class="kb-item"><div class="kb-item-code">bagisto#15</div><div class="kb-item-title">Selección Framework MIT</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resultados">
+  <div class="container">
+    <div class="metrics-row">
+      <div class="clay-card metric-card reveal">
+        <span class="metric-label mono">Código LOC</span>
+        <div class="metric-val mono accent">~150K</div>
+        <div class="metric-desc">Clonación base operativa del repo Bagisto.</div>
+      </div>
+      <div class="clay-card metric-card reveal rd1">
+        <span class="metric-label mono">Stories S0</span>
+        <div class="metric-val mono">9</div>
+        <div class="metric-desc">Historias técnicas y de planeación en curso.</div>
+      </div>
+      <div class="clay-card metric-card reveal rd2">
+        <span class="metric-label mono">Pipeline CI</span>
+        <div class="metric-val ok mono">Pint✓</div>
+        <div class="metric-desc">Workflow de análisis estático activo.</div>
+      </div>
+      <div class="clay-card metric-card reveal rd3">
+        <span class="metric-label mono">Sail✓</span>
+        <div class="metric-val mono ok">Docker</div>
+        <div class="metric-desc">Entorno de desarrollo contenerizado operativo.</div>
+      </div>
+    </div>
+    
+    <div class="clay-card reveal rd1" style="border-radius:16px;">
+      <div class="diag-header" style="padding:12px;border-bottom:1px solid var(--line-strong);">
+        <div class="term-dot td1"></div><div class="term-dot td2"></div><div class="term-dot td3"></div>
+        <span class="diag-title" style="font-size:11px;">bagisto.storie #12</span>
+      </div>
+      <div class="hu-viz mono" style="padding:16px; font-size:12px; line-height:1.7;color:var(--text-core);">
+        HU06 Setup Pipeline Actions Laravel Pint<br/>
+        -------------------------------------------<br/>
+        COMO Desarrollador <br/>
+        QUIERO implementar una Acción de GitHub<br/>
+        PARA validar automáticamente el linter de PHP (Pint) en cada push.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="devops">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-eyebrow">Automatización</div>
+      <h2>DevOps Pipeline Ecosystem</h2>
+    </div>
+    
+    <div class="devops-split">
+      <div class="clay-card tool-panel reveal">
+        <h3 style="font-size:16px;margin-bottom:16px;">Herramientas CI/CD</h3>
+        <div class="tool-row">
+          <div class="tool-row-icon" style="color:var(--text-core);">Ac</div>
+          <div class="tool-row-info">
+            <h4>GitHub Actions</h4>
+            <p>Automatización de builds PHPUnit, tests de Vue, y análisis estático Laravel Pint.</p>
+          </div>
+        </div>
+        <div class="tool-row" style="margin-top:12px;">
+          <div class="tool-row-icon" style="color:var(--accent-ind);">Sa</div>
+          <div class="tool-row-info">
+            <h4>Laravel Sail</h4>
+            <p>Entorno de desarrollo contenerizado (Docker) estandarizado para todo el equipo IPS.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="clay-card pipeline-view reveal rd1">
+        <h3 style="font-size:16px;margin-bottom:16px;">Workflow Sprint 0</h3>
+        <div style="font-family:'Fira Code',monospace;font-size:12px;line-height:1.9;">
+          <div style="color:var(--text-soft); border-bottom:1px solid var(--line-strong); padding-bottom:4px;margin-bottom:6px;"># ips-workflow.yml</div>
+          <div>trigger: push on feature/*</div>
+          <div>steps:</div>
+          <div style="padding-left:12px;color:var(--status-ok);">✓ Setup PHP</div>
+          <div style="padding-left:12px;color:var(--status-ok);">✓ Composer Install</div>
+          <div style="padding-left:12px;color:var(--accent-ind);">▶ Run Pint (Linter) — en curso</div>
+          <div style="padding-left:12px;color:var(--text-fade);">○ PHPUnit Tests</div>
+          <div style="padding-left:12px;color:var(--text-fade);">○ Build Assets</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="timeline">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-eyebrow">Cronograma</div>
+      <h2>Plan de Sprints IPS 2026</h2>
+    </div>
+    
+    <div class="tl-track tl-wrapper reveal">
+      <div class="tl-item">
+        <div class="tl-node-col"><div class="tl-dot done"></div></div>
+        <div class="tl-card-col">
+          <div class="clay-card tl-card">
+            <div class="tl-item-meta"><span>Mayo 2026</span><span class="tl-tag done">Sprint 0</span></div>
+            <div class="tl-item-title">Setup Académico y Docker Sail</div>
+            <p style="font-size:13.5px;color:var(--text-soft);">Repositorio clonado, Docker Sail operativo y tablero Kanban estructurado.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tl-item">
+        <div class="tl-node-col"><div class="tl-dot active"></div></div>
+        <div class="tl-card-col">
+          <div class="clay-card tl-card">
+            <div class="tl-item-meta"><span>Mayo/Junio</span><span class="tl-tag done">Sprint 1</span></div>
+            <div class="tl-item-title">Pipeline CI & Storefront View</div>
+            <p style="font-size:13.5px;color:var(--text-soft);">Implementación de pipeline CI (Actions Pint) y personalización inicial de la vista de tienda.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="tl-item">
+        <div class="tl-node-col"><div class="tl-dot"></div></div>
+        <div class="tl-card-col">
+          <div class="clay-card tl-card">
+            <div class="tl-item-meta"><span>Junio 2026</span><span class="tl-tag">Sprint 2</span></div>
+            <div class="tl-item-title">E-Commerce Flow & Checkout</div>
+            <p style="font-size:13.5px;color:var(--text-soft);">Activación del ciclo de compra completo (Carrito & Checkout) y generación de artefactos IEEE.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="enlaces">
+  <div class="containerlinks">
+    <div class="links-grid container">
+      <a href="https://github.com/NaginCarferC/bagisto" target="_blank" class="clay-card link-tile reveal">
+        <div class="link-icon">G</div>
+        <div class="link-tile-title" style="font-size:14px;font-weight:700;color:var(--text-core);">Repo Equipo</div>
+        <div class="link-tile-desc mono" style="font-size:11px;color:var(--text-fade);">NaginCarferC/bagisto &rarr;</div>
+      </a>
+      <a href="https://github.com/users/NaginCarferC/projects/1" target="_blank" class="clay-card link-tile reveal rd1">
+        <div class="link-icon">P</div>
+        <div class="link-tile-title" style="font-size:14px;font-weight:700;color:var(--text-core);">GitHub Projects</div>
+        <div class="link-tile-desc mono" style="font-size:11px;color:var(--text-fade);">Tablero Scrum &rarr;</div>
+      </a>
+      <a href="https://devdocs.bagisto.com/" target="_blank" class="clay-card link-tile reveal rd2">
+        <div class="link-icon">D</div>
+        <div class="link-tile-title" style="font-size:14px;font-weight:700;color:var(--text-core);">Bagisto Docs</div>
+        <div class="link-tile-desc mono" style="font-size:11px;color:var(--text-fade);">devdocs.bagisto.com &rarr;</div>
+      </a>
+      <a href="https://bagisto.com/" target="_blank" class="clay-card link-tile reveal rd3">
+        <div class="link-icon">W</div>
+        <div class="link-tile-title" style="font-size:14px;font-weight:700;color:var(--text-core);">Official Web</div>
+        <div class="link-tile-desc mono" style="font-size:11px;color:var(--text-fade);">bagisto.com &rarr;</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-left">
+      <strong>IPS 2026 · Bagisto</strong><br/>
+      UNSA · Facultad de Producción y Servicios
+    </div>
+    <div class="footer-rightMono mono">
+      <a href="#hero" class="footer-link">top</a> / 
+      <a href="https://mit-license.org/" target="_blank" class="footer-link">mit_license</a> /
+      <a href="https://github.com/NaginCarferC/bagisto" class="footer-link">github</a>
+    </div>
+  </div>
+  <div class="container" style="margin-top:20px; text-align:center;font-size:11px;color:var(--text-fade);font-family:'Fira Code',monospace;">
+    /Arequipa, Perú/
+  </div>
+</footer>
+
+<script>
+// Scroll reveal simple
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Efecto de fondo dinámico siguiendo el ratón
+const fluidLayer = document.querySelector('.bg-fluid-layer');
+window.addEventListener('mousemove', (e) => {
+  const { clientX, clientY } = e;
+  const moveX = (clientX / window.innerWidth - 0.5) * 30; 
+  const moveY = (clientY / window.innerHeight - 0.5) * 30;
+  fluidLayer.style.transform = `translate(${moveX}px, ${moveY}px) scale(1.05)`;
+});
+</script>
+</body>
+</html>
