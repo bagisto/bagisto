@@ -1,53 +1,29 @@
-import { test, expect } from '../../../setup';
-import {
-    generateName,
-    generateRandomNumericString,
-} from '../../../utils/faker';
+import { test, expect } from "../../../setup";
+import { generateName } from "../../../utils/faker";
+import { OrderSettingsConfigurationPage } from "../../../pages/admin/configuration/sales/OrderSettingsConfigurationPage";
 
-test.describe('order settings configuration', () => {
+test.describe("order settings configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto('admin/configuration/sales/order_settings');
+        await new OrderSettingsConfigurationPage(adminPage).open();
     });
 
-    test('should update order number settings', async ({ adminPage }) => {
-        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_prefix]"]', generateName());
-        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_length]"]', '5');
-        await adminPage.fill('input[name="sales[order_settings][order_number][order_number_suffix]"]', generateName());
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+    test("should update order number settings", async ({ adminPage }) => {
+        const page = new OrderSettingsConfigurationPage(adminPage);
+
+        await page.fillOrderNumberSettings(generateName(), "5", generateName());
+        await page.saveAndVerify();
     });
 
-    test('should update minimum order settings', async ({ adminPage }) => {
-        // await adminPage.click('label[for="sales[order_settings][minimum_order][enable]"]');
-        // const minimumOrderToggle = await adminPage.locator('input[name="sales[order_settings][minimum_order][enable]"]');
-        // await expect(minimumOrderToggle).toBeChecked();
+    test("should update minimum order settings", async ({ adminPage }) => {
+        const page = new OrderSettingsConfigurationPage(adminPage);
 
-        // if (await minimumOrderToggle.toBeChecked()) {
-        //     await adminPage.fill('number[name="sales[order_settings][minimum_order][minimum_order_amount]"]', generateRandomNumericString(2));
-
-        //     await adminPage.click('label[for="sales[order_settings][minimum_order][include_discount_amount]"]');
-        //     const minimumOrderAmountToggle = await adminPage.locator('input[name="sales[order_settings][minimum_order][include_discount_amount]"]');
-        //     // await expect(minimumOrderAmountToggle).toBeChecked();
-
-        //     await adminPage.click('label[for="sales[order_settings][minimum_order][include_tax_to_amount]"]');
-        //     const includeTaxAmountToggle = await adminPage.locator('input[name="sales[order_settings][minimum_order][include_tax_to_amount]"]');
-        //     // await expect(includeDiscountAmountToggle).toBeChecked();
-
-        //     await adminPage.fill('textarea[name="sales[order_settings][minimum_order][description]"]', generateDescription(200));
-        // }
-
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+        await page.saveAndVerify();
     });
 
-    test('should update reorder settings', async ({ adminPage }) => {
-        await adminPage.click('label[for="sales[order_settings][reorder][admin]"]');
-        const adminReorderToggle = await adminPage.locator('input[name="sales[order_settings][reorder][admin]"]');
-        // await expect(adminReorderToggle).toBeChecked();
-        await adminPage.click('label[for="sales[order_settings][reorder][shop]"]');
-        const shopReorderToggle = await adminPage.locator('input[name="sales[order_settings][reorder][shop]"]');
-        // await expect(shopReorderToggle).toBeChecked();
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+    test("should update reorder settings", async ({ adminPage }) => {
+        const page = new OrderSettingsConfigurationPage(adminPage);
+
+        await page.enableReorderOptions();
+        await page.saveAndVerify();
     });
 });

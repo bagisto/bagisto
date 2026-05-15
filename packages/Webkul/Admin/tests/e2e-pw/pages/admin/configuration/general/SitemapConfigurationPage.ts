@@ -43,6 +43,15 @@ export class SitemapConfigurationPage extends BasePage {
         await this.maxUrlsTextbox.fill(count);
     }
 
+    async isSitemapEnabled(): Promise<boolean> {
+        await this.open();
+        return this.toggle.isChecked();
+    }
+
+    async getMaximumUrlsValue(): Promise<string> {
+        return this.maxUrlsTextbox.inputValue();
+    }
+
     async saveAndVerify(): Promise<void> {
         await this.saveButton.click();
         await expect(this.successMessage).toBeVisible();
