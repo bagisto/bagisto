@@ -2,6 +2,7 @@
 
 <v-payment-methods
     :methods="paymentMethods"
+    @payment-method-selected="setSelectedPaymentMethod"
     @processing="stepForward"
     @processed="stepProcessed"
 >
@@ -123,10 +124,12 @@
                 },
             },
 
-            emits: ['processing', 'processed'],
+            emits: ['payment-method-selected', 'processing', 'processed'],
 
             methods: {
                 store(selectedMethod) {
+                    this.$emit('payment-method-selected', selectedMethod.method);
+
                     this.$emit('processing', 'review');
 
                     this.$axios.post("{{ route('shop.checkout.onepage.payment_methods.store') }}", {
