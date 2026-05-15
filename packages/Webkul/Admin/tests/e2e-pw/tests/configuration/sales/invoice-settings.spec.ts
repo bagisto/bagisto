@@ -1,52 +1,47 @@
 import { test, expect } from '../../../setup';
-
-import { 
-    generateName, 
+import {
+    generateName,
     generateRandomNumericString,
     getImageFile,
 } from '../../../utils/faker';
+import { InvoiceSettingsConfigurationPage } from '../../../pages/admin/configuration/sales/InvoiceSettingsConfigurationPage';
 
 test.describe('Invoice Settings Configuration', () => {
     test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto('admin/configuration/sales/invoice_settings');
+        await new InvoiceSettingsConfigurationPage(adminPage).open();
     });
+
     test('should update invoice number settings', async ({ adminPage }) => {
-        await adminPage.fill('input[name="sales[invoice_settings][invoice_number][invoice_number_prefix]"]', generateName());
-        await adminPage.fill('input[name="sales[invoice_settings][invoice_number][invoice_number_length]"]', generateRandomNumericString(1, 10));
-        await adminPage.fill('input[name="sales[invoice_settings][invoice_number][invoice_number_suffix]"]', generateName());
-        await adminPage.fill('input[name="sales[invoice_settings][invoice_number][invoice_number_generator_class]"]', generateRandomNumericString(2));
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+        const page = new InvoiceSettingsConfigurationPage(adminPage);
+
+        await page.fillInvoiceNumberSettings(
+            generateName(),
+            generateRandomNumericString(1, 10),
+            generateName(),
+            generateRandomNumericString(2),
+        );
+        await page.saveAndVerify();
     });
 
     test('should update payment due duration', async ({ adminPage }) => {
-        await adminPage.fill('input[name="sales[invoice_settings][payment_terms][due_duration]"]', generateRandomNumericString(2));
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+        const page = new InvoiceSettingsConfigurationPage(adminPage);
+
+        await page.setPaymentDueDuration(generateRandomNumericString(2));
+        await page.saveAndVerify();
     });
 
     test('should configure PDF print outs ', async ({ adminPage }) => {
-        await adminPage.click('label[for="sales[invoice_settings][pdf_print_outs][invoice_id]"]');
-        const adminReorderToggle = await adminPage.locator('input[name="sales[invoice_settings][pdf_print_outs][invoice_id]"]');
-        await adminPage.click('label[for="sales[invoice_settings][pdf_print_outs][order_id]"]');
-        const shopReorderToggle = await adminPage.locator('input[name="sales[invoice_settings][pdf_print_outs][order_id]"]');
-        // await expect(shopReorderToggle).toBeChecked();
+        const page = new InvoiceSettingsConfigurationPage(adminPage);
 
-        const [fileChooser] = await Promise.all([
-            adminPage.waitForEvent('filechooser'),
-            adminPage.click('input[name="sales[invoice_settings][pdf_print_outs][logo]"]')
-        ]);
-        await fileChooser.setFiles(getImageFile());
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+        await page.configurePdfPrintOuts(getImageFile());
+        await page.saveAndVerify();
     });
 
     test('should configure the invoice reminders', async ({ adminPage }) => {
-        await adminPage.fill('input[name="sales[invoice_settings][invoice_reminders][reminders_limit]"]', generateRandomNumericString(2));
-        await adminPage.selectOption('select[name="sales[invoice_settings][invoice_reminders][interval_between_reminders]"]', 'P2D');
-        const reminderDuration = adminPage.locator('select[name="sales[invoice_settings][invoice_reminders][interval_between_reminders]"]');
-        await expect(reminderDuration).toHaveValue('P2D');
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.getByText('Configuration saved successfully')).toBeVisible();
+        const page = new InvoiceSettingsConfigurationPage(adminPage);
+
+        await page.configureInvoiceReminders(generateRandomNumericString(2), 'P2D');
+        await expect(await page.getInvoiceReminderIntervalValue()).toBe('P2D');
+        await page.saveAndVerify();
     });
 });
