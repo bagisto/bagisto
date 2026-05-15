@@ -2,6 +2,12 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+* Refined Playwright testcases.
+
+* Security fixes.
+
 ## **v2.4.4 (5th of May 2026)** - *Release*
 
 * Fixed wrong "From" and "To" dates on the admin Bookings data grid and calendar view caused by the Carbon 3 timezone behavior change in the Laravel 12 upgrade. `Carbon::createFromTimestamp()` now returns UTC by default instead of the app timezone, so the booking timestamps are explicitly converted via `->timezone(config('app.timezone'))` in `BookingDataGrid` and `BookingController`.

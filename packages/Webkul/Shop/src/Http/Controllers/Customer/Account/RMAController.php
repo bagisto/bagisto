@@ -217,7 +217,7 @@ class RMAController extends Controller
         if ($rma->item) {
             try {
                 Mail::queue(new CustomerRMARequestNotification($rma));
-            } catch (\Exception $e) {
+            } catch (\Exception) {
             }
 
             return new JsonResponse([
@@ -237,6 +237,15 @@ class RMAController extends Controller
      */
     public function getOrderItems(int $orderId)
     {
+        $order = $this->orderRepository->findOneWhere([
+            'id' => $orderId,
+            'customer_id' => auth()->guard('customer')->id(),
+        ]);
+
+        if (! $order) {
+            abort(404);
+        }
+
         return $this->rmaHelper->getOrderItems($orderId);
     }
 
@@ -359,7 +368,7 @@ class RMAController extends Controller
      */
     public function getMessages(): JsonResponse
     {
-        $rma = $this->rmaRepository->findOrFail(request()->get('id'));
+        $rma = $this->rmaRepository->findOrFail(request()->input('id'));
 
         if ($rma->order->customer_id != auth()->guard('customer')->id()) {
             return new JsonResponse([
@@ -368,9 +377,9 @@ class RMAController extends Controller
         }
 
         $messages = $this->rmaMessageRepository
-            ->where('rma_id', request()->get('id'))
+            ->where('rma_id', request()->input('id'))
             ->orderBy('id', 'desc')
-            ->paginate(request()->get('limit') ?? 5);
+            ->paginate(request()->input('limit') ?? 5);
 
         return new JsonResponse([
             'messages' => $messages,
@@ -382,9 +391,13 @@ class RMAController extends Controller
      */
     public function sendMessage(): JsonResponse
     {
-        $data = request()->all();
+        $this->validate(request(), [
+            'rma_id' => 'required|integer|exists:rma,id',
+            'message' => 'nullable|string',
+            'file' => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+        ]);
 
-        $rma = $this->rmaRepository->findOrFail($data['rma_id']);
+        $rma = $this->rmaRepository->findOrFail(request()->input('rma_id'));
 
         if ($rma->order->customer_id != auth()->guard('customer')->id()) {
             return new JsonResponse([
@@ -392,29 +405,27 @@ class RMAController extends Controller
             ]);
         }
 
-        $storedMessage = $this->rmaMessageRepository->create($data);
+        $storedMessage = $this->rmaMessageRepository->create([
+            'rma_id' => $rma->id,
+            'message' => request()->input('message'),
+            'is_admin' => 0,
+        ]);
 
         if (! empty($storedMessage)) {
-            $removedKeys = explode(',', request()->input('removed_key'));
-
-            array_shift($removedKeys);
-
-            if (! empty(request()->file('file'))) {
+            if (request()->hasFile('file')) {
                 $file = request()->file('file');
 
-                $filename = $file->getClientOriginalName();
-
-                $path = $file->storeAs('rma-conversation/'.$storedMessage->id, $filename);
+                $path = $file->store('rma-conversation/'.$storedMessage->id);
 
                 $this->rmaMessageRepository->update([
                     'attachment_path' => $path,
-                    'attachment' => $filename,
+                    'attachment' => $file->getClientOriginalName(),
                 ], $storedMessage->id);
             }
 
             try {
                 Mail::queue(new CustomerToAdminConversationNotification($storedMessage));
-            } catch (\Exception $e) {
+            } catch (\Exception) {
             }
 
             return new JsonResponse([
