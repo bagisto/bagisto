@@ -19,7 +19,7 @@ on:
   workflow_dispatch:
     inputs:
       bagisto_version:
-        description: 'Bagisto git tag to build (e.g. v2.4.0). Defaults to the workflow ref tag.'
+        description: 'Bagisto git tag to build (e.g. v2.3.0). Defaults to the workflow ref tag.'
         required: false
         type: string
 
