@@ -17,7 +17,7 @@ export class PaymentMethodsConfigurationPage extends BasePage {
     }
 
     private getLogoUploadButton() {
-        return this.page.locator('label:has-text("Logo")');
+        return this.page.locator('label:has-text("Logo")').first();
     }
 
     private getCashOnDeliveryDescription() {
