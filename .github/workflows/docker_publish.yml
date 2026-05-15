@@ -1,0 +1,159 @@
+name: Build & Publish Docker Image
+
+# ============================================================================
+# Triggers a multi-arch (amd64 + arm64) build of the production Bagisto image
+# whenever a `v*` tag is pushed (the same tag convention used for Bagisto
+# releases), and also supports manual dispatch for ad-hoc rebuilds.
+#
+# Build context: docker/production/ (Dockerfile + all support scripts).
+#
+# Required repository secrets:
+#   DOCKERHUB_USERNAME  Docker Hub user / org with push access to webkul/bagisto
+#   DOCKERHUB_TOKEN     Docker Hub access token (NOT a password)
+# ============================================================================
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      bagisto_version:
+        description: 'Bagisto git tag to build (e.g. v2.4.0). Defaults to the workflow ref tag.'
+        required: false
+        type: string
+
+env:
+  IMAGE_NAME: webkul/bagisto
+  BUILD_CONTEXT: docker/production
+
+jobs:
+  build_and_push:
+    name: Build & Push (amd64 + arm64)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve Bagisto Version
+        id: version
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          # Prefer manual input; otherwise derive from the tag that triggered the run.
+          if [ -n "${{ inputs.bagisto_version }}" ]; then
+            BAGISTO_VERSION="${{ inputs.bagisto_version }}"
+          else
+            BAGISTO_VERSION="${GITHUB_REF#refs/tags/}"
+          fi
+
+          # Sanity check the format: must look like vX.Y.Z[-suffix]
+          if ! echo "$BAGISTO_VERSION" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9.]+)?$'; then
+            echo "::error::BAGISTO_VERSION '$BAGISTO_VERSION' is not a valid semver tag (expected vX.Y.Z or vX.Y.Z-suffix)"
+            exit 1
+          fi
+
+          # Docker tag = git tag without the leading 'v'
+          DOCKER_TAG="${BAGISTO_VERSION#v}"
+
+          # Pre-release if the tag has any -suffix
+          IS_PRERELEASE="false"
+          if echo "$BAGISTO_VERSION" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+-'; then
+            IS_PRERELEASE="true"
+          fi
+
+          # Is the build commit on (or behind) the default branch?
+          # We use the GitHub compare API: status of `default...build_sha` will be
+          #   identical  → same commit as default tip
+          #   behind     → build commit is older but on the default branch line
+          #   ahead      → build commit has commits the default doesn't (unusual for releases)
+          #   diverged   → build commit is on a side branch (e.g. 2.3 while default is 2.4)
+          # Only `identical` and `behind` mean "this release belongs to the active line".
+          BUILD_SHA="${{ github.sha }}"
+          COMPARE_STATUS=$(gh api "repos/${{ github.repository }}/compare/${DEFAULT_BRANCH}...${BUILD_SHA}" --jq '.status' 2>/dev/null || echo "unknown")
+
+          ON_DEFAULT_BRANCH="false"
+          case "$COMPARE_STATUS" in
+            identical|behind) ON_DEFAULT_BRANCH="true" ;;
+          esac
+
+          # :latest — only stable releases on the default branch line.
+          PUSH_LATEST="false"
+          if [ "$IS_PRERELEASE" = "false" ] && [ "$ON_DEFAULT_BRANCH" = "true" ]; then
+            PUSH_LATEST="true"
+          fi
+
+          echo "bagisto_version=$BAGISTO_VERSION"     >> "$GITHUB_OUTPUT"
+          echo "docker_tag=$DOCKER_TAG"               >> "$GITHUB_OUTPUT"
+          echo "push_latest=$PUSH_LATEST"             >> "$GITHUB_OUTPUT"
+          echo "is_prerelease=$IS_PRERELEASE"         >> "$GITHUB_OUTPUT"
+          echo "on_default_branch=$ON_DEFAULT_BRANCH" >> "$GITHUB_OUTPUT"
+          echo "default_branch=$DEFAULT_BRANCH"       >> "$GITHUB_OUTPUT"
+
+          echo "Resolved BAGISTO_VERSION=$BAGISTO_VERSION"
+          echo "Default branch: $DEFAULT_BRANCH (build commit status: $COMPARE_STATUS)"
+          echo "On default branch line: $ON_DEFAULT_BRANCH"
+          echo "Docker tag: $DOCKER_TAG (latest=$PUSH_LATEST, prerelease=$IS_PRERELEASE)"
+
+      - name: Set Up QEMU
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: linux/amd64,linux/arm64
+
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log In to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Compute Image Tags
+        id: tags
+        run: |
+          TAGS="${{ env.IMAGE_NAME }}:${{ steps.version.outputs.docker_tag }}"
+          if [ "${{ steps.version.outputs.push_latest }}" = "true" ]; then
+            TAGS="$TAGS,${{ env.IMAGE_NAME }}:latest"
+          fi
+          echo "tags=$TAGS" >> "$GITHUB_OUTPUT"
+          echo "Will push: $TAGS"
+
+      - name: Build & Push Multi-Arch Image
+        uses: docker/build-push-action@v6
+        with:
+          context: ${{ env.BUILD_CONTEXT }}
+          file: ${{ env.BUILD_CONTEXT }}/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: ${{ steps.tags.outputs.tags }}
+          build-args: |
+            BAGISTO_VERSION=${{ steps.version.outputs.bagisto_version }}
+          provenance: false
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          labels: |
+            org.opencontainers.image.title=Bagisto
+            org.opencontainers.image.description=Bagisto production image (Nginx + PHP-FPM 8.3 + MySQL 8.0, fully installed)
+            org.opencontainers.image.version=${{ steps.version.outputs.docker_tag }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository }}
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.licenses=MIT
+
+      - name: Summary
+        run: |
+          {
+            echo "### Published"
+            echo ""
+            echo "- Bagisto version: \`${{ steps.version.outputs.bagisto_version }}\`"
+            echo "- Image: \`${{ env.IMAGE_NAME }}:${{ steps.version.outputs.docker_tag }}\`"
+            if [ "${{ steps.version.outputs.push_latest }}" = "true" ]; then
+              echo "- Also tagged: \`${{ env.IMAGE_NAME }}:latest\`"
+            fi
+            echo "- Default branch: \`${{ steps.version.outputs.default_branch }}\` (release on default line: \`${{ steps.version.outputs.on_default_branch }}\`)"
+            echo "- Platforms: \`linux/amd64\`, \`linux/arm64\`"
+          } >> "$GITHUB_STEP_SUMMARY"
