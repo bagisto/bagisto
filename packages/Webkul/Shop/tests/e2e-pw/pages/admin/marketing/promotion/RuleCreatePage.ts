@@ -178,7 +178,7 @@ export class RuleCreatePage extends BasePage {
         allowShipping?: string;
     }): Promise<number | undefined> {
         const discountValue = Math.floor(Math.random() * 1000);
-        const discountPercentage = Math.floor(Math.random() * 100);
+        const discountPercentage = Math.floor(Math.random() * 99) + 1;
 
         await this.addConditionButton.click();
         await this.conditionAttributeSelect.waitFor();
@@ -205,18 +205,36 @@ export class RuleCreatePage extends BasePage {
 
         if (couponType == "fixed") {
             await this.actionTypeSelect.selectOption("by_fixed");
+            await this.discountAmountInput.waitFor({
+                state: "visible",
+            });
+            await this.page.waitForTimeout(1000);
+            await this.discountAmountInput.click();
+            await this.discountAmountInput.clear();
             await this.discountAmountInput.fill(discountValue.toString());
             result = discountValue;
         }
 
         if (couponType == "percentage") {
             await this.actionTypeSelect.selectOption("by_percent");
+            await this.discountAmountInput.waitFor({
+                state: "visible",
+            });
+            await this.page.waitForTimeout(1000);
+            await this.discountAmountInput.click();
+            await this.discountAmountInput.clear();
             await this.discountAmountInput.fill(discountPercentage.toString());
             result = discountPercentage;
         }
 
         if (couponType == "fixedAmmountWholeCart") {
             await this.actionTypeSelect.selectOption("cart_fixed");
+            await this.discountAmountInput.waitFor({
+                state: "visible",
+            });
+            await this.page.waitForTimeout(1000);
+            await this.discountAmountInput.click();
+            await this.discountAmountInput.clear();
             await this.discountAmountInput.fill(discountValue.toString());
             result = discountValue;
         }

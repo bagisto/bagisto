@@ -61,7 +61,7 @@ async function createRuleAndVerifyVisibility({
         couponType,
     });
 
-    if (!discountValue) throw new Error("Discount not created");
+    if (discountValue === undefined) throw new Error("Discount not created");
 
     await ruleCreatePage.saveCartRule();
 
