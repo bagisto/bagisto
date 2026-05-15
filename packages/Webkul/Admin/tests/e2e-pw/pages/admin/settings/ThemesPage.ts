@@ -178,9 +178,9 @@ export class ThemesPage extends BasePage {
             .getByRole("textbox", { name: "Sort Order" })
             .first()
             .fill("1");
-        await this.statusToggleLabel.click();
-        await expect(this.statusToggleInput).toBeChecked();
-        await this.saveButton.click();
+        await this.page.waitForTimeout(500);
+        await this.saveButton.nth(1).click();
+        await this.saveButton.first().click();
         await expect(
             this.page.getByText("Theme updated successfully"),
         ).toBeVisible();

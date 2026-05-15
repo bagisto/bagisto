@@ -7,19 +7,15 @@ export class CustomerDetailsPage extends BasePage {
     }
 
     private get editCustomerLink() {
-        return this.page.locator(
-            "div.flex.cursor-pointer.items-center.justify-between.gap-1.5.px-2.5.text-blue-600.transition-all.hover\\:underline:visible",
-        );
+        return this.page.locator("div.text-blue-600", { hasText: "Edit" });
     }
 
     private get addAddressLink() {
-        return this.editCustomerLink.nth(1);
+        return this.page.locator("div.text-blue-600", { hasText: "Create" });
     }
 
     private get addressEditLinks() {
-        return this.page.locator(
-            "p.cursor-pointer.text-blue-600.transition-all.hover:underline:visible",
-        );
+        return this.page.locator("p", { hasText: "Edit" });
     }
 
     private get setDefaultAddressButtons() {

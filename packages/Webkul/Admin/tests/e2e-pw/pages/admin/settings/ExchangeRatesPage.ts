@@ -39,9 +39,8 @@ export class ExchangeRatesPage extends BasePage {
     }
 
     async open(): Promise<void> {
-        await this.visit("admin/settings/exchange-rates", {
-            waitUntil: "networkidle",
-        });
+        await this.visit("admin/settings/exchange-rates");
+        await this.page.waitForLoadState("networkidle");
     }
 
     async createExchangeRate(): Promise<void> {

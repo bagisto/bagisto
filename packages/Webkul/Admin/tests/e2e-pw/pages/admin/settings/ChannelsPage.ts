@@ -117,14 +117,14 @@ export class ChannelsPage extends BasePage {
         await this.codeInput.fill(code);
         await this.nameInput.fill(name);
         await this.descriptionInput.fill(description);
-        await this.inventorySourcesCheckbox.click();
+        await this.inventorySourcesCheckbox.first().click();
         await expect(this.inventorySourcesInput).toBeChecked();
         await this.rootCategorySelect.selectOption("1");
         await this.hostnameInput.fill(generateHostname());
-        await this.localesCheckbox.click();
+        await this.localesCheckbox.first().click();
         await expect(this.localesInput).toBeChecked();
         await this.defaultLocaleSelect.selectOption("1");
-        await this.currenciesCheckbox.click();
+        await this.currenciesCheckbox.first().click();
         await expect(this.currenciesInput).toBeChecked();
         await this.baseCurrencySelect.selectOption("1");
 

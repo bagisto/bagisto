@@ -68,13 +68,11 @@ export class CustomerReviewsPage extends BasePage {
     }
 
     async applyMassUpdateStatus(
-        status: "Approved" | "Disapproved",
+        status: "Approved" | "Pending" | "Disapproved",
     ): Promise<void> {
         await this.page.hover('a:has-text("Update Status")');
-        await this.page.waitForSelector(
-            'a:has-text("Pending"), a:has-text("Approved"), a:has-text("Disapproved")',
-            { state: "visible", timeout: 10000 },
-        );
+        await this.page.waitForTimeout(500);
+
         await this.page.click(`a:has-text("${status}")`);
     }
 

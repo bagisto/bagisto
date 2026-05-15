@@ -18,7 +18,7 @@ export class TaxesPage extends BasePage {
     }
 
     private get createTaxRateButton() {
-        return this.page.getByRole("button", { name: "Create Tax Rate" });
+        return this.page.locator("a.primary-button");
     }
 
     private get createTaxCategoryButton() {
@@ -85,7 +85,7 @@ export class TaxesPage extends BasePage {
         };
 
         await this.visit("admin/settings/taxes/rates");
-        await this.createTaxRateButton.click();
+        await this.createTaxRateButton.first().click();
         await this.page.waitForSelector(
             'form[action*="/settings/taxes/rates/create"]',
         );
@@ -93,7 +93,7 @@ export class TaxesPage extends BasePage {
         await this.countrySelect.selectOption(taxRate.country);
         await this.stateSelect.selectOption(taxRate.state);
         await this.taxRateInput.fill("18");
-        await this.saveTaxRateButton.click();
+        await this.saveTaxRateButton.first().click();
 
         await expect(
             this.page.getByText("Tax rate created successfully.").first(),
