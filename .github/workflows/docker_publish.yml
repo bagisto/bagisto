@@ -38,7 +38,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Resolve Bagisto version
+      - name: Resolve Bagisto Version
         id: version
         env:
           GH_TOKEN: ${{ github.token }}
@@ -99,21 +99,21 @@ jobs:
           echo "On default branch line: $ON_DEFAULT_BRANCH"
           echo "Docker tag: $DOCKER_TAG (latest=$PUSH_LATEST, prerelease=$IS_PRERELEASE)"
 
-      - name: Set up QEMU
+      - name: Set Up QEMU
         uses: docker/setup-qemu-action@v3
         with:
           platforms: linux/amd64,linux/arm64
 
-      - name: Set up Docker Buildx
+      - name: Set Up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      - name: Log in to Docker Hub
+      - name: Log In to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Compute image tags
+      - name: Compute Image Tags
         id: tags
         run: |
           TAGS="${{ env.IMAGE_NAME }}:${{ steps.version.outputs.docker_tag }}"
@@ -123,7 +123,7 @@ jobs:
           echo "tags=$TAGS" >> "$GITHUB_OUTPUT"
           echo "Will push: $TAGS"
 
-      - name: Build & push multi-arch image
+      - name: Build & Push Multi-Arch Image
         uses: docker/build-push-action@v6
         with:
           context: ${{ env.BUILD_CONTEXT }}
