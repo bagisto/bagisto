@@ -120,6 +120,20 @@ class PgSqlGrammar implements DatabaseGrammar
 
     /*
     |--------------------------------------------------------------------------
+    | Type Casting
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Generates: CAST(expression AS VARCHAR(length)). CAST AS CHAR truncates to one character on PostgreSQL.
+     */
+    public function castToString(string $expression, int $length = 255): string
+    {
+        return "CAST({$expression} AS VARCHAR({$length}))";
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Date and Time
     |--------------------------------------------------------------------------
     */
