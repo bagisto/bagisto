@@ -99,6 +99,20 @@ class MySqlGrammar implements DatabaseGrammar
 
     /*
     |--------------------------------------------------------------------------
+    | Type Casting
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * Generates: CAST(expression AS CHAR(length)). MySQL rejects VARCHAR in CAST.
+     */
+    public function castToString(string $expression, int $length = 255): string
+    {
+        return "CAST({$expression} AS CHAR({$length}))";
+    }
+
+    /*
+    |--------------------------------------------------------------------------
     | Date and Time
     |--------------------------------------------------------------------------
     */
