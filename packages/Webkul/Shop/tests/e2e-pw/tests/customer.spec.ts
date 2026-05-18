@@ -247,7 +247,7 @@ test("should display correct message when email verfication is on", async ({
     ).toBeVisible();
 });
 
-test("should edit a profile", async ({ page }) => {
+test("should edit a profile", async ({ shopPage }) => {
     const credentials = await loginAsCustomer(page);
 
     await page.getByLabel("Profile").click();
@@ -326,12 +326,12 @@ test("Should display profile photo after saving profile again without any change
     await expect(uploadedImage).toBeVisible();
 });
 
-test("should add an address", async ({ page }) => {
+test("should add an address", async ({ shopPage }) => {
     await loginAsCustomer(page);
     await addAddress(page);
 });
 
-test("should edit an address", async ({ page }) => {
+test("should edit an address", async ({ shopPage }) => {
     await loginAsCustomer(page);
     await addAddress(page);
     await page.getByLabel("More Options").first().click();
@@ -363,7 +363,7 @@ test("should edit an address", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("should set the default address", async ({ page }) => {
+test("should set the default address", async ({ shopPage }) => {
     await loginAsCustomer(page);
     await addAddress(page);
     await page.getByLabel("More Options").first().click();
@@ -373,7 +373,7 @@ test("should set the default address", async ({ page }) => {
     await expect(page.getByText("Default Address").first()).toBeVisible();
 });
 
-test("should delete the address", async ({ page }) => {
+test("should delete the address", async ({ shopPage }) => {
     await loginAsCustomer(page);
     await addAddress(page);
     await page.getByLabel("More Options").first().click();
@@ -400,7 +400,7 @@ test.describe("customer actions", () => {
             inventory: 100,
         });
     });
-    test("should be able to reorder", async ({ page }) => {
+    test("should be able to reorder", async ({ shopPage }) => {
         await generateOrder(page);
 
         await page.goto("");
@@ -415,7 +415,7 @@ test.describe("customer actions", () => {
         ).toBeVisible();
     });
 
-    test("should be able to cancel order", async ({ page }) => {
+    test("should be able to cancel order", async ({ shopPage }) => {
         await generateOrder(page);
 
         await page.goto("");
@@ -430,7 +430,7 @@ test.describe("customer actions", () => {
         ).toContainText("Canceled");
     });
 
-    test("should be able to print invoice", async ({ page }) => {
+    test("should be able to print invoice", async ({ shopPage }) => {
         await generateOrder(page);
         const adminCredentials = {
             email: "admin@example.com",
@@ -504,7 +504,7 @@ test.describe("customer actions", () => {
         const result = await Promise.race([popupPromise, downloadPromise]);
     });
 
-    test("should add wishlist to cart", async ({ page }) => {
+    test("should add wishlist to cart", async ({ shopPage }) => {
         await loginAsCustomer(page);
         await page.getByPlaceholder("Search products here").fill("simple");
         await page.getByPlaceholder("Search products here").press("Enter");
@@ -535,7 +535,7 @@ test.describe("customer actions", () => {
     });
 });
 
-test("should remove product from wishlist", async ({ page }) => {
+test("should remove product from wishlist", async ({ shopPage }) => {
     await loginAsCustomer(page);
     await addWishlist(page);
     await page.goto("");
@@ -549,7 +549,7 @@ test("should remove product from wishlist", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("should change password", async ({ page }) => {
+test("should change password", async ({ shopPage }) => {
     const credentials = await loginAsCustomer(page);
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Profile" }).click();
@@ -570,7 +570,7 @@ test("should change password", async ({ page }) => {
     ).toBeVisible();
 });
 
-test("should delete a profile", async ({ page }) => {
+test("should delete a profile", async ({ shopPage }) => {
     const credentials = await loginAsCustomer(page);
     await page.getByLabel("Profile").click();
     await page.getByRole("link", { name: "Profile" }).click();

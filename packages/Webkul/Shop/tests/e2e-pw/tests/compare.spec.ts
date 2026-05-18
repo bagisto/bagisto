@@ -1,53 +1,39 @@
 import { test, expect } from "../setup";
+import { ComparePage } from "../pages/shop/ComparePage";
 
-test("should add product to compare page", async ({ page }) => {
-    await page.goto("");
+test("should add product to compare page", async ({ shopPage }) => {
+    const comparePage = new ComparePage(shopPage);
 
-    await page
-        .locator("div:nth-child(2) > .-mt-9 > .action-items > .icon-compare")
-        .first()
-        .click();
-    await page.locator(".action-items > .icon-compare").first().click();
-    await page
-        .locator("div:nth-child(3) > .-mt-9 > .action-items > .icon-compare")
-        .first()
-        .click();
+    await comparePage.gotoHome();
+    await comparePage.addProductToCompare(0);
+    await comparePage.addProductToCompare(1);
+    await comparePage.addProductToCompare(2);
 
-    await expect(
-        page.getByText("Item added successfully to compare list").first()
-    ).toBeVisible();
+    await comparePage.expectAddedSuccessfully();
 });
 
-test("should remove product from the compare page", async ({ page }) => {
-    await page.goto("");
+test("should remove product from the compare page", async ({ shopPage }) => {
+    const comparePage = new ComparePage(shopPage);
 
-    await page
-        .locator("div:nth-child(2) > .-mt-9 > .action-items > .icon-compare")
-        .first()
-        .click();
-    await page.locator(".action-items > .icon-compare").first().click();
-    await page.locator("div:nth-child(3) > .-mt-9 > div").first().click();
-
-    await page.getByRole("link", { name: "Compare" }).click();
-    await page.locator(".relative > .icon-cancel").first().click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
+    await comparePage.gotoHome();
+    await comparePage.addProductToCompare(0);
+    await comparePage.addProductToCompare(1);
+    await comparePage.addProductToCompare(2);
+    await comparePage.openCompare();
+    await comparePage.removeFirstProductFromCompare();
 });
 
-test("should remove all products from the compare page", async ({ page }) => {
-    await page.goto("");
-    
-    await page
-        .locator("div:nth-child(2) > .-mt-9 > .action-items > .icon-compare")
-        .first()
-        .click();
-    await page.locator(".action-items > .icon-compare").first().click();
-    await page.locator("div:nth-child(3) > .-mt-9 > div").first().click();
+test("should remove all products from the compare page", async ({
+    shopPage,
+}) => {
+    const comparePage = new ComparePage(shopPage);
 
-    await page.getByRole("link", { name: "Compare" }).click();
-    await page.getByText("Delete All", { exact: true }).click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
+    await comparePage.gotoHome();
+    await comparePage.addProductToCompare(0);
+    await comparePage.addProductToCompare(1);
+    await comparePage.addProductToCompare(2);
+    await comparePage.openCompare();
+    await comparePage.deleteAllProductsFromCompare();
 
-    await expect(
-        page.getByText("All items removed successfully.").first()
-    ).toBeVisible();
+    await comparePage.expectAllItemsRemoved();
 });

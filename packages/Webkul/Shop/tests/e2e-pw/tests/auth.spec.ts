@@ -1,43 +1,45 @@
 import { test, expect } from "../setup";
-import { register } from "../utils/customer";
+import { AuthPage, CustomerCredentials } from "../pages/shop/AuthPage";
+import {
+    generateEmail,
+    generateFirstName,
+    generateLastName,
+} from "../utils/faker";
 
-test("should be able to register", async ({ page }) => {
-    await register(page);
+test("should be able to register", async ({ shopPage }) => {
+    const authPage = new AuthPage(shopPage);
+
+    await authPage.register({
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        password: "admin123",
+    });
 });
 
-test("should be able to login", async ({ page }) => {
-    const credentials = await register(page);
+test("should be able to login", async ({ shopPage }) => {
+    const authPage = new AuthPage(shopPage);
+    const credentials: CustomerCredentials = {
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        password: "admin123",
+    };
 
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Sign In" }).click();
-    await page.getByPlaceholder("email@example.com").click();
-    await page.getByPlaceholder("email@example.com").fill(credentials.email);
-    await page.getByPlaceholder("Password").click();
-    await page.getByPlaceholder("Password").fill(credentials.password);
-    await page.getByRole("button", { name: "Sign In" }).click();
-
-    await page.getByLabel("Profile").click();
-    await expect(page.getByText("Logout").first()).toBeVisible();
+    await authPage.register(credentials);
+    await authPage.login(credentials);
 });
 
-test("should be able to logout", async ({ page }) => {
-    const credentials = await register(page);
+test("should be able to logout", async ({ shopPage }) => {
+    const authPage = new AuthPage(shopPage);
+    const credentials: CustomerCredentials = {
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        password: "admin123",
+    };
 
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Sign In" }).click();
-    await page.getByPlaceholder("email@example.com").click();
-    await page.getByPlaceholder("email@example.com").fill(credentials.email);
-    await page.getByPlaceholder("Password").click();
-    await page.getByPlaceholder("Password").fill(credentials.password);
-    await page.getByRole("button", { name: "Sign In" }).click();
-
-    await page.getByLabel("Profile").waitFor({ state: "visible" });
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Logout" }).click();
-
-    await page.getByLabel("Profile").waitFor({ state: "visible" });
-    await page.getByLabel("Profile").click();
-    await expect(page.getByText("Welcome Guest").first()).toBeVisible();
+    await authPage.register(credentials);
+    await authPage.login(credentials);
+    await authPage.logout();
 });
