@@ -3,11 +3,11 @@ import fs from "fs";
 import { ADMIN_AUTH_STATE_PATH } from "./playwright.config";
 import { loginAsAdmin } from "./utils/admin";
 
-interface AdminPage extends Page {
+export interface AdminPage extends Page {
     fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
 }
 
-interface ShopPage extends Page {
+export interface ShopPage extends Page {
     fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
 }
 
@@ -55,7 +55,7 @@ export const test = base.extend<Fixtures>({
         // Extend admin page
         (page as AdminPage).fillInTinymce = async (
             iframeSelector: string,
-            content: string
+            content: string,
         ) => {
             await page.waitForSelector(iframeSelector);
 
@@ -89,7 +89,7 @@ export const test = base.extend<Fixtures>({
          */
         (page as ShopPage).fillInTinymce = async (
             iframeSelector: string,
-            content: string
+            content: string,
         ) => {
             await page.waitForSelector(iframeSelector);
             const iframe = page.frameLocator(iframeSelector);

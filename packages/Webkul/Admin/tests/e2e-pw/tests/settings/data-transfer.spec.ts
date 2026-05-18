@@ -1,6 +1,5 @@
 import { expect, test } from "../../setup";
 import { AdminDataTransfer } from "../../utils/data-transfer";
-import * as fs from "fs";
 
 test.describe("check the data transfer flow", () => {
     test("create/update products using csv file", async ({ adminPage }) => {
@@ -47,7 +46,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -73,7 +72,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -99,7 +98,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -125,7 +124,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -151,7 +150,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -177,7 +176,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -203,7 +202,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -228,7 +227,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -253,7 +252,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -278,7 +277,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -303,7 +302,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -328,7 +327,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -353,7 +352,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -378,7 +377,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -403,7 +402,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -428,7 +427,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -453,7 +452,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -478,7 +477,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -503,7 +502,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -528,7 +527,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -553,7 +552,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -578,7 +577,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',
@@ -603,7 +602,7 @@ test.describe("check the data transfer flow", () => {
             '//p[contains(.," Congratulations! Your import was successful. ")]',
             { state: "visible" },
         );
-        
+
         await expect(
             adminPage.locator(
                 '//p[contains(.," Congratulations! Your import was successful. ")]',

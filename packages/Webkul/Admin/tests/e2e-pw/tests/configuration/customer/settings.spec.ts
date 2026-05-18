@@ -1,188 +1,66 @@
 import { test, expect } from "../../../setup";
-
-export async function clickIfNotEnabled(adminPage, selector: string) {
-    const element = adminPage.locator(selector);
-    await element.waitFor({ state: "visible" });
-    const isChecked = await element.isChecked();
-    if (!isChecked) {
-        await adminPage.locator(selector).click();
-    }
-}
+import { CustomerSettingsPage } from "../../../pages/admin/configuration/customer/CustomerSettingsPage";
 
 test.describe("settings configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto("admin/configuration/customer/settings");
+        await new CustomerSettingsPage(adminPage).open();
     });
 
     test("should enable the wishlist feature", async ({ adminPage }) => {
-        await adminPage.click(
-            'label[for="customer[settings][wishlist][wishlist_option]"]'
-        );
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+        await new CustomerSettingsPage(adminPage).enableWishlist();
     });
 
     test("should update the redirect page option after the login", async ({
         adminPage,
     }) => {
-        await adminPage.selectOption(
-            'select[name="customer[settings][login_options][redirected_to_page]"]',
-            "home"
-        );
-        const weightUnitSelect = adminPage.locator(
-            'select[name="customer[settings][login_options][redirected_to_page]"]'
-        );
-        await expect(weightUnitSelect).toHaveValue("home");
-
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+        await new CustomerSettingsPage(adminPage).updateLoginRedirect("home");
     });
 
     test("should update default customer group and enabling the newsletter subscription option during sign-up", async ({
         adminPage,
     }) => {
-        await adminPage.selectOption(
-            'select[name="customer[settings][create_new_account_options][default_group]"]',
-            "general"
-        );
-        const defaultGroup = adminPage.locator(
-            'select[name="customer[settings][create_new_account_options][default_group]"]'
-        );
-        await expect(defaultGroup).toHaveValue("general");
-        await adminPage.click(
-            'label[for="customer[settings][create_new_account_options][news_letter]"]'
-        );
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+        await new CustomerSettingsPage(
+            adminPage,
+        ).updateDefaultGroupAndNewsletter();
     });
 
     test("should update the newsletter subscription option", async ({
         adminPage,
     }) => {
-        const isChecked = await adminPage
-            .locator(
-                'input[type="checkbox"][name="customer[settings][newsletter][subscription]"]'
-            )
-            .isChecked();
-
-        if (!isChecked) {
-            await adminPage.click(
-                'label[for="customer[settings][newsletter][subscription]"]'
-            );
-        }
-
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
-
-        await expect(
-            await adminPage.locator(
-                'input[type="checkbox"][name="customer[settings][newsletter][subscription]"]'
-            )
-        ).toBeChecked();
+        await new CustomerSettingsPage(
+            adminPage,
+        ).enableNewsletterSubscription();
     });
 
     test.describe("Social login configuration", () => {
         test("should enable the Github login ", async ({ adminPage }) => {
-            await clickIfNotEnabled(
-                adminPage,
-                'label[for="customer[settings][social_login][enable_github]"]'
+            await new CustomerSettingsPage(adminPage).enableSocialLogin(
+                "github",
             );
-            await adminPage.click(
-                'button[type="submit"].primary-button:visible'
-            );
-            await expect(adminPage.locator("#app")).toContainText(
-                "Configuration saved successfully"
-            );
-            await adminPage.goto("customer/login");
-            const rect = adminPage.locator(
-                'rect[width="40"][height="40"][rx="20"][fill="black"]'
-            );
-            await expect(rect).toBeVisible();
-            await rect.click();
         });
 
         test("should enable the linkedin login ", async ({ adminPage }) => {
-            await clickIfNotEnabled(
-                adminPage,
-                'label[for="customer[settings][social_login][enable_linkedin-openid]"]'
+            await new CustomerSettingsPage(adminPage).enableSocialLogin(
+                "linkedin",
             );
-            await adminPage.click(
-                'button[type="submit"].primary-button:visible'
-            );
-            await expect(
-                adminPage.locator('p:has-text("Configuration saved successfully")')
-              ).toBeVisible();
-            await adminPage.goto("customer/login");
-            const rect = adminPage.locator(
-                'rect[width="40"][height="40"][rx="20"][fill="#1D8DEE"]'
-            );
-            await expect(rect).toBeVisible();
-            await rect.click();
         });
 
         test("should enable the google login ", async ({ adminPage }) => {
-            await clickIfNotEnabled(
-                adminPage,
-                'label[for="customer[settings][social_login][enable_google]"]'
+            await new CustomerSettingsPage(adminPage).enableSocialLogin(
+                "google",
             );
-            await adminPage.click(
-                'button[type="submit"].primary-button:visible'
-            );
-            await expect(
-                adminPage.locator('p:has-text("Configuration saved successfully")')
-              ).toBeVisible();
-            await adminPage.goto("customer/login");
-            const rect = adminPage.locator(
-                'rect[width="40"][height="40"][rx="20"][fill="white"]'
-            );
-            await expect(rect).toBeVisible();
-            await rect.click();
         });
 
         test("should enable the twitter login ", async ({ adminPage }) => {
-            await clickIfNotEnabled(
-                adminPage,
-                'label[for="customer[settings][social_login][enable_twitter]"]'
+            await new CustomerSettingsPage(adminPage).enableSocialLogin(
+                "twitter",
             );
-            await adminPage.click(
-                'button[type="submit"].primary-button:visible'
-            );
-            await expect(
-                adminPage.locator('p:has-text("Configuration saved successfully")')
-              ).toBeVisible();
-            await adminPage.goto("customer/login");
-            const rect = adminPage.locator(
-                'rect[width="40"][height="40"][rx="20"][fill="#1A1A1A"]'
-            );
-            await expect(rect).toBeVisible();
-            await rect.click();
         });
 
         test("should enable the facebook login ", async ({ adminPage }) => {
-            await clickIfNotEnabled(
-                adminPage,
-                'label[for="customer[settings][social_login][enable_facebook]"]'
+            await new CustomerSettingsPage(adminPage).enableSocialLogin(
+                "facebook",
             );
-            await adminPage.click(
-                'button[type="submit"].primary-button:visible'
-            );
-            await expect(
-                adminPage.locator('p:has-text("Configuration saved successfully")')
-              ).toBeVisible();
-            await adminPage.goto("customer/login");
-            const rect = adminPage.locator(
-                'rect[width="40"][height="40"][rx="20"][fill="#1877F2"]'
-            );
-            await expect(rect).toBeVisible();
-            await rect.click();
         });
     });
 });

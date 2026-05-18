@@ -1,47 +1,31 @@
-import { test, expect } from "../../../setup";
+import { test } from "../../../setup";
 import { generateHostname, generateName } from "../../../utils/faker";
+import { ContentConfigurationPage } from "../../../pages/admin/configuration/general/ContentConfigurationPage";
 
 test.describe("content configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-
-        await adminPage.goto("admin/configuration/general/content");
+        await new ContentConfigurationPage(adminPage).open();
     });
 
     test("should update header offer title with redirection title and redirection link", async ({
         adminPage,
     }) => {
-        await adminPage
-            .locator('input[name="general[content][header_offer][title]"]')
-            .fill(generateName());
-        await adminPage
-            .locator(
-                'input[name="general[content][header_offer][redirection_title]"]'
-            )
-            .fill(generateName());
-        await adminPage
-            .locator(
-                'input[name="general[content][header_offer][redirection_link]"]'
-            )
-            .fill(generateHostname());
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
+        const page = new ContentConfigurationPage(adminPage);
+
+        await page.fillHeaderOffer(
+            generateName(),
+            generateName(),
+            generateHostname(),
+        );
+        await page.saveAndVerify();
     });
 
     test("should add css and javascript", async ({ adminPage }) => {
+        const page = new ContentConfigurationPage(adminPage);
         const cssCode = `.test {\n  display: flex;\n  justify-content: center;\n}`;
         const jsCode = `document.addEventListener('DOMContentLoaded', () => {\n  console.log('JavaScript added successfully');\n});`;
 
-        await adminPage
-            .locator(
-                'textarea[name="general[content][custom_scripts][custom_css]"]'
-            )
-            .fill(cssCode);
-        await adminPage
-            .locator(
-                'textarea[name="general[content][custom_scripts][custom_javascript]"]'
-            )
-            .fill(jsCode);
-        await adminPage.click('button[type="submit"].primary-button:visible');
-        await expect(adminPage.locator('#app p' , { hasText: 'Configuration saved successfully' })).toBeVisible();
+        await page.fillCustomScripts(cssCode, jsCode);
+        await page.saveAndVerify();
     });
 });

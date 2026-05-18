@@ -1,5 +1,6 @@
 import { test, expect } from "../../../setup";
 import { generateDescription } from "../../../utils/faker";
+import { CheckoutConfigurationPage } from "../../../pages/admin/configuration/sales/CheckoutConfigurationPage";
 
 const SHOPPING_CART_TOGGLES = [
     'label[for="sales[checkout][shopping_cart][allow_guest_checkout]"]',
@@ -8,49 +9,38 @@ const SHOPPING_CART_TOGGLES = [
     'label[for="sales[checkout][shopping_cart][estimate_shipping]"]',
 ];
 
-async function saveAndAssertConfiguration(adminPage) {
-    await adminPage.click('button[type="submit"].primary-button:visible');
-    await expect(adminPage.getByText("Configuration saved successfully").first()).toBeVisible();
-}
-
 test.describe("Checkout Configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        await adminPage.goto("admin/configuration/sales/checkout");
+        await new CheckoutConfigurationPage(adminPage).open();
     });
 
     test("should enable guest checkout, cart page, cross-sell products, and estimated shipping", async ({
         adminPage,
     }) => {
-        for (const toggle of SHOPPING_CART_TOGGLES) {
-            await adminPage.click(toggle);
-        }
-        await saveAndAssertConfiguration(adminPage);
+        const page = new CheckoutConfigurationPage(adminPage);
+
+        await page.toggleShoppingCartSettings(SHOPPING_CART_TOGGLES);
+        await page.saveAndVerify();
     });
 
     test("should enable settings show a summary of item quantities and display the total number of items", async ({
         adminPage,
     }) => {
-        await adminPage.selectOption(
-            'select[name="sales[checkout][my_cart][summary]"]',
+        const page = new CheckoutConfigurationPage(adminPage);
+
+        await page.setMyCartSummary("display_item_quantity");
+        await expect(await page.getMyCartSummaryValue()).toBe(
             "display_item_quantity",
         );
-        const sort = adminPage.locator(
-            'select[name="sales[checkout][my_cart][summary]"]',
-        );
-        await expect(sort).toHaveValue("display_item_quantity");
-        await saveAndAssertConfiguration(adminPage);
+        await page.saveAndVerify();
     });
 
     test("should enable mini cart settings to display the mini cart", async ({
         adminPage,
     }) => {
-        await adminPage.click(
-            'label[for="sales[checkout][mini_cart][display_mini_cart]"]',
-        );
-        await adminPage.fill(
-            'input[name="sales[checkout][mini_cart][offer_info]"]',
-            generateDescription(100),
-        );
-        await saveAndAssertConfiguration(adminPage);
+        const page = new CheckoutConfigurationPage(adminPage);
+
+        await page.enableMiniCart(generateDescription(100));
+        await page.saveAndVerify();
     });
 });
