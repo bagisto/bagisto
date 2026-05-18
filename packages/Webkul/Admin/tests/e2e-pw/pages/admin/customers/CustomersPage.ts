@@ -80,8 +80,6 @@ export class CustomersPage extends BasePage {
 
     async openMassActionMenu(): Promise<void> {
         await this.open();
-        const checkboxCount = await this.massActionCheckboxes.count();
-        expect(checkboxCount).toBeGreaterThan(1);
         await this.massActionCheckboxes.nth(1).click();
         await this.selectActionButton.click();
     }
