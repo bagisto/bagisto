@@ -94,17 +94,17 @@ export class AuthPage extends BasePage {
         await this.firstNameInput.fill(credentials.firstName);
         await this.lastNameInput.fill(credentials.lastName);
         await this.emailInput.fill(credentials.email);
-        await this.passwordInput.fill(credentials.password);
-        await this.confirmPasswordInput.fill(credentials.password);
+        await this.passwordInput.first().fill(credentials.password);
+        await this.confirmPasswordInput.first().fill(credentials.password);
 
         if (await this.agreementCheckbox.isVisible()) {
-            await this.agreementText.click();
+            await this.agreementText.first().click();
         }
 
         await this.newsletterOptIn.click();
         await this.registerButton.click();
 
-        await expect(this.accountCreatedMessage).toBeVisible();
+        await expect(this.accountCreatedMessage.first()).toBeVisible();
 
         return credentials;
     }
@@ -118,12 +118,12 @@ export class AuthPage extends BasePage {
         await this.emailInput.fill(credentials.email);
         await this.passwordInput.fill(credentials.password);
         await this.loginButton.click();
+        await this.profileMenu.click();
 
-        await expect(this.logoutLink).toBeVisible();
+        await expect(this.logoutLink.first()).toBeVisible();
     }
 
     async logout() {
-        await this.profileMenu.click();
         await this.logoutLink.click();
         await this.profileMenu.waitFor({ state: "visible" });
         await this.profileMenu.click();

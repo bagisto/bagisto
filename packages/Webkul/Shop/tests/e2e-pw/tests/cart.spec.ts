@@ -177,7 +177,6 @@ test.describe("cart management", () => {
         const cartPage = new CartPage(shopPage);
         const couponCode = generatePhoneNumber();
 
-        await loginAsAdmin(adminPage);
         await adminPage.goto("admin/marketing/promotions/cart-rules");
         await adminPage.waitForSelector(
             'a.primary-button:has-text("Create Cart Rule")',
