@@ -1750,6 +1750,8 @@ return [
             'cancel-success' => 'RMA status canceled successfully.',
             'create-success' => 'Request created successfully.',
             'creation-error' => 'RMA status cannot be updated as the invoice for this order has not been created.',
+            'invalid-item' => 'Articolul de comandă selectat nu este valid.',
+            'invalid-order' => 'Comanda selectată nu este validă.',
             'permission-denied' => 'You are logged in',
             'rma-disabled' => 'RMA is disabled for this product',
             'reopen-not-allowed' => 'Reopening this RMA request is not allowed.',

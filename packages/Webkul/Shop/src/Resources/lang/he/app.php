@@ -1750,6 +1750,8 @@ return [
             'cancel-success' => 'סטטוס RMA בוטל בהצלחה.',
             'create-success' => 'הבקשה נוצרה בהצלחה.',
             'creation-error' => 'לא ניתן לעדכן את סטטוס ה-RMA מכיוון שהחשבונית להזמנה זו לא נוצרה.',
+            'invalid-item' => 'פריט ההזמנה שנבחר אינו תקין.',
+            'invalid-order' => 'ההזמנה שנבחרה אינה תקינה.',
             'permission-denied' => 'אתה מחובר',
             'rma-disabled' => 'RMA מנוטרל עבור מוצר זה',
             'reopen-not-allowed' => 'פתיחה מחדש של בקשת RMA זו אינה מותרת.',

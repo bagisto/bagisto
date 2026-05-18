@@ -1750,6 +1750,8 @@ return [
             'cancel-success' => 'Le statut RMA a été annulé avec succès.',
             'create-success' => 'Demande créée avec succès.',
             'creation-error' => "Le statut RMA ne peut pas être mis à jour car la facture pour cette commande n'a pas été créée.",
+            'invalid-item' => "L'article de commande sélectionné n'est pas valide.",
+            'invalid-order' => "La commande sélectionnée n'est pas valide.",
             'permission-denied' => 'Vous êtes connecté',
             'rma-disabled' => 'Le RMA est désactivé pour ce produit',
             'reopen-not-allowed' => 'La réouverture de cette demande RMA n\'est pas autorisée.',

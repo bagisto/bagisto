@@ -1750,6 +1750,8 @@ return [
             'cancel-success' => 'L\'estat de la RMA s\'ha cancel·lat correctament.',
             'create-success' => 'Sol·licitud creada correctament.',
             'creation-error' => 'No es pot actualitzar l\'estat de la RMA perquè la factura d\'aquesta comanda no s\'ha creat.',
+            'invalid-item' => 'L\'article seleccionat de la comanda no és vàlid.',
+            'invalid-order' => 'La comanda seleccionada no és vàlida.',
             'permission-denied' => 'Estàs connectat',
             'rma-disabled' => 'La RMA està desactivada per aquest producte',
             'reopen-not-allowed' => 'No es permet reobrir aquesta sol·licitud RMA.',

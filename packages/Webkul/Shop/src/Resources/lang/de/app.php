@@ -1750,6 +1750,8 @@ return [
             'cancel-success' => 'RMA-Status wurde erfolgreich storniert.',
             'create-success' => 'Anfrage erfolgreich erstellt.',
             'creation-error' => 'Der RMA-Status kann nicht aktualisiert werden, da die Rechnung für diese Bestellung nicht erstellt wurde.',
+            'invalid-item' => 'Der ausgewählte Bestellartikel ist ungültig.',
+            'invalid-order' => 'Die ausgewählte Bestellung ist ungültig.',
             'permission-denied' => 'Sie sind angemeldet',
             'rma-disabled' => 'RMA ist für dieses Produkt deaktiviert',
             'reopen-not-allowed' => 'Das Wiedereröffnen dieser RMA-Anfrage ist nicht zulässig.',
