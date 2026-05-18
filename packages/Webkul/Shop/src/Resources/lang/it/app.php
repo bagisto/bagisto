@@ -1746,6 +1746,8 @@ return [
             'cancel-success' => 'Lo stato RMA è stato annullato con successo.',
             'create-success' => 'Richiesta creata con successo.',
             'creation-error' => 'Lo stato RMA non può essere aggiornato perché la fattura per questo ordine non è stata creata.',
+            'invalid-item' => "L'articolo dell'ordine selezionato non è valido.",
+            'invalid-order' => "L'ordine selezionato non è valido.",
             'permission-denied' => 'Sei connesso',
             'rma-disabled' => 'RMA è disabilitato per questo prodotto',
             'reopen-not-allowed' => 'Non è consentito riaprire questa richiesta RMA.',

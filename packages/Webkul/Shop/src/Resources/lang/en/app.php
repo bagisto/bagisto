@@ -1746,6 +1746,8 @@ return [
             'cancel-success' => 'RMA status canceled successfully.',
             'create-success' => 'Request created successfully.',
             'creation-error' => 'RMA status cannot be updated as the invoice for this order has not been created.',
+            'invalid-item' => 'The selected order item is invalid.',
+            'invalid-order' => 'The selected order is invalid.',
             'permission-denied' => 'You are logged in',
             'rma-disabled' => 'RMA is disabled for this product',
             'reopen-not-allowed' => 'Reopening this RMA request is not allowed.',

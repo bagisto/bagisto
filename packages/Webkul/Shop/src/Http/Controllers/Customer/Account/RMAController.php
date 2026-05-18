@@ -152,7 +152,19 @@ class RMAController extends Controller
 
         if (! $order) {
             return new JsonResponse([
-                'messages' => trans('shop::app.customer.signup-form.failed'),
+                'messages' => trans('shop::app.rma.response.invalid-order'),
+                'redirect' => route('shop.customers.account.rma.create'),
+            ]);
+        }
+
+        $orderItem = $this->orderItemRepository->findOneWhere([
+            'id' => $data['order_item_id'],
+            'order_id' => $order->id,
+        ]);
+
+        if (! $orderItem) {
+            return new JsonResponse([
+                'messages' => trans('shop::app.rma.response.invalid-item'),
                 'redirect' => route('shop.customers.account.rma.create'),
             ]);
         }

@@ -1746,6 +1746,8 @@ return [
             'cancel-success' => 'RMA durumu başarıyla iptal edildi.',
             'create-success' => 'İstek başarıyla oluşturuldu.',
             'creation-error' => 'RMA durumu güncellenemiyor çünkü bu sipariş için fatura oluşturulmamış.',
+            'invalid-item' => 'Seçilen sipariş ürünü geçersiz.',
+            'invalid-order' => 'Seçilen sipariş geçersiz.',
             'permission-denied' => 'Giriş yaptınız',
             'rma-disabled' => 'Bu ürün için RMA devre dışı bırakıldı',
             'reopen-not-allowed' => 'Bu RMA talebini yeniden açmaya izin verilmiyor.',

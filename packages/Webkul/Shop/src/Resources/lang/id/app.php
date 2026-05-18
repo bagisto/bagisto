@@ -1746,6 +1746,8 @@ return [
             'cancel-success' => 'Status RMA berhasil dibatalkan.',
             'create-success' => 'Permintaan berhasil dibuat.',
             'creation-error' => 'Status RMA tidak dapat diperbarui karena faktur untuk pesanan ini belum dibuat.',
+            'invalid-item' => 'Item pesanan yang dipilih tidak valid.',
+            'invalid-order' => 'Pesanan yang dipilih tidak valid.',
             'permission-denied' => 'Anda sudah masuk',
             'rma-disabled' => 'RMA dinonaktifkan untuk produk ini',
             'reopen-not-allowed' => 'Membuka kembali permintaan RMA ini tidak diizinkan.',

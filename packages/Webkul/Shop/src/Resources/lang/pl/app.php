@@ -1746,6 +1746,8 @@ return [
             'cancel-success' => 'Status RMA został pomyślnie anulowany.',
             'create-success' => 'Żądanie zostało pomyślnie utworzone.',
             'creation-error' => 'Status RMA nie może zostać zaktualizowany, ponieważ faktura za to zamówienie nie została wystawiona.',
+            'invalid-item' => 'Wybrana pozycja zamówienia jest nieprawidłowa.',
+            'invalid-order' => 'Wybrane zamówienie jest nieprawidłowe.',
             'permission-denied' => 'Jesteś zalogowany',
             'rma-disabled' => 'RMA jest wyłączone dla tego produktu',
             'reopen-not-allowed' => 'Ponowne otwarcie tego żądania RMA nie jest dozwolone.',

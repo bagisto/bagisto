@@ -1746,6 +1746,8 @@ return [
             'cancel-success' => 'RMAステータスが正常にキャンセルされました。',
             'create-success' => 'リクエストが正常に作成されました。',
             'creation-error' => 'この注文の請求書が作成されていないため、RMA ステータスを更新できません。',
+            'invalid-item' => '選択された注文アイテムは無効です。',
+            'invalid-order' => '選択された注文は無効です。',
             'permission-denied' => 'ログインしています',
             'rma-disabled' => 'この製品のRMAは無効です',
             'reopen-not-allowed' => 'このRMAリクエストを再開することは許可されていません。',
