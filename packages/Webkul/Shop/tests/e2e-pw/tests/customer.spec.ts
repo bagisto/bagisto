@@ -57,16 +57,7 @@ test("should display correct message when email verfication is on", async ({
     shopPage,
     adminPage,
 }) => {
-    // Enable email verification setting
     await adminPage.goto("admin/configuration/customer/settings");
-    await adminPage
-        .getByRole("textbox", { name: "Email Address" })
-        .fill("admin@example.com");
-    await adminPage.getByRole("textbox", { name: "Password" }).fill("admin123");
-    await adminPage.waitForTimeout(1000);
-    await adminPage.getByRole("button", { name: "Sign In" }).click();
-    await adminPage.waitForLoadState("networkidle");
-
     const toggle = adminPage.locator(
         "div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5",
     );
