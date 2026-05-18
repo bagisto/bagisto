@@ -468,6 +468,7 @@ test.describe("customer actions", () => {
 test("should remove product from wishlist", async ({ shopPage }) => {
     const customerPage = new CustomerPage(shopPage);
     await loginAsCustomer(shopPage);
+
     await customerPage.gotoHome();
     await customerPage.searchProduct("simple");
     await customerPage.addFirstProductToWishlist();

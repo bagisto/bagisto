@@ -1,12 +1,12 @@
 import { expect, Page } from "@playwright/test";
 import { BasePage } from "../BasePage";
+import { generatePhoneNumber } from "../../utils/faker";
 
 export class CustomerPage extends BasePage {
     constructor(page: Page) {
         super(page);
     }
 
-    // Navigation
     private get profileMenu() {
         return this.page.getByLabel("Profile");
     }
@@ -234,6 +234,8 @@ export class CustomerPage extends BasePage {
     async uploadProfileImage(imagePath: string): Promise<void> {
         await this.editProfileLink.click();
         await this.profileImageInput.setInputFiles(imagePath);
+        await this.phone.fill(generatePhoneNumber());
+        await this.gender.selectOption({ value: "Male" });
         await this.saveButton.click();
         await expect(this.successMessage).toBeVisible();
     }
