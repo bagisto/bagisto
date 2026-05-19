@@ -1,8 +1,33 @@
 @props(['options'])
 
-<v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
+@php
+    $carouselImages = $options['images'] ?? [];
+
+    $firstImage = data_get($carouselImages, '0.image');
+
+    $firstImageTitle = data_get($carouselImages, '0.title');
+@endphp
+
+<v-carousel :images="{{ json_encode($carouselImages) }}">
     <div class="overflow-hidden">
-        <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
+        @if ($firstImage)
+            {{--
+                The first slide is rendered server-side as a plain image so it is
+                present in the initial HTML. This lets the browser discover and
+                fetch the LCP image immediately, before Vue mounts the carousel.
+            --}}
+            <img
+                src="{{ $firstImage }}"
+                srcset="{{ $firstImage }} 1920w, {{ str_replace('storage', 'cache/large', $firstImage) }} 1280w, {{ str_replace('storage', 'cache/medium', $firstImage) }} 1024w, {{ str_replace('storage', 'cache/small', $firstImage) }} 525w"
+                sizes="(max-width: 525px) 525px, (max-width: 1024px) 1024px, (max-width: 1600px) 1280px, 1920px"
+                class="aspect-[2.743/1] max-h-screen w-screen select-none object-cover"
+                alt="{{ $firstImageTitle ?? trans('shop::app.home.index.image-carousel') }}"
+                fetchpriority="high"
+                decoding="sync"
+            >
+        @else
+            <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
+        @endif
     </div>
 </v-carousel>
 

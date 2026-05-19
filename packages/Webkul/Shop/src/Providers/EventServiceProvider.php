@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\Shop\Listeners\CatalogCache;
 use Webkul\Shop\Listeners\Customer;
 use Webkul\Shop\Listeners\GDPR;
 use Webkul\Shop\Listeners\Invoice;
@@ -18,6 +19,34 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        /**
+         * Catalog cache invalidation. Any product or category change bumps the
+         * catalog version so cached storefront API responses are served fresh.
+         */
+        'catalog.product.create.after' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
+        'catalog.product.update.after' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
+        'catalog.product.delete.before' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
+        'catalog.category.create.after' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
+        'catalog.category.update.after' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
+        'catalog.category.delete.before' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
         /**
          * Customer related events.
          */

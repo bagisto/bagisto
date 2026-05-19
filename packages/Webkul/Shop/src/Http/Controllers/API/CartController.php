@@ -30,6 +30,14 @@ class CartController extends APIController
      */
     public function index(): JsonResource
     {
+        /**
+         * Skip the totals recalculation when there is no cart - there is
+         * nothing to collect and the empty response is the same either way.
+         */
+        if (! Cart::getCart()) {
+            return new JsonResource(['data' => null]);
+        }
+
         Cart::collectTotals();
 
         $response = [

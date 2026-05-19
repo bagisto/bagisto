@@ -2,11 +2,13 @@
 
 namespace Webkul\Shop\Http\Controllers\API;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Marketing\Jobs\UpdateCreateSearchTerm as UpdateCreateSearchTermJob;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Shop\Http\Resources\ProductResource;
+use Webkul\Shop\Helpers\CatalogApiCache;
+use Webkul\Shop\Http\Resources\ProductCardResource;
 
 class ProductController extends APIController
 {
@@ -17,13 +19,14 @@ class ProductController extends APIController
      */
     public function __construct(
         protected CategoryRepository $categoryRepository,
-        protected ProductRepository $productRepository
+        protected ProductRepository $productRepository,
+        protected CatalogApiCache $catalogApiCache
     ) {}
 
     /**
      * Product listings.
      */
-    public function index(): JsonResource
+    public function index(): JsonResource|JsonResponse
     {
         $searchEngine = 'database';
 
@@ -35,16 +38,13 @@ class ProductController extends APIController
 
         $query = $searchData['effective_query'] ?? $searchData['original_query'];
 
-        $products = $this->productRepository
-            ->setSearchEngine($searchEngine)
-            ->getAll(array_merge(request()->query(), [
-                'query' => $query,
-                'channel_id' => core()->getCurrentChannel()->id,
-                'status' => 1,
-                'visible_individually' => 1,
-            ]));
-
+        /**
+         * Search results are never cached: the search-term space is unbounded
+         * and the search-term job must run on every request.
+         */
         if (! empty($query)) {
+            $products = $this->getProducts($searchEngine, $query);
+
             /**
              * Update or create search term only if
              * there is only one filter that is query param
@@ -57,9 +57,36 @@ class ProductController extends APIController
                     'locale' => app()->getLocale(),
                 ]);
             }
+
+            return ProductCardResource::collection($products);
         }
 
-        return ProductResource::collection($products);
+        /**
+         * Listing/carousel responses (no search term) are cached per catalog
+         * version, so repeated homepage visits skip the database entirely.
+         */
+        $data = $this->catalogApiCache->remember('products', request()->query(), function () use ($searchEngine) {
+            return ProductCardResource::collection($this->getProducts($searchEngine, ''))
+                ->response()
+                ->getData(true);
+        });
+
+        return response()->json($data)->withHeaders($this->catalogCacheHeaders());
+    }
+
+    /**
+     * Fetch the storefront product listing for the given search engine and query.
+     */
+    protected function getProducts(string $searchEngine, string $query)
+    {
+        return $this->productRepository
+            ->setSearchEngine($searchEngine)
+            ->getAll(array_merge(request()->query(), [
+                'query' => $query,
+                'channel_id' => core()->getCurrentChannel()->id,
+                'status' => 1,
+                'visible_individually' => 1,
+            ]));
     }
 
     /**
@@ -105,7 +132,7 @@ class ProductController extends APIController
             ->take(core()->getConfigData('catalog.products.product_view_page.no_of_related_products'))
             ->get();
 
-        return ProductResource::collection($relatedProducts);
+        return ProductCardResource::collection($relatedProducts);
     }
 
     /**
@@ -121,6 +148,6 @@ class ProductController extends APIController
             ->take(core()->getConfigData('catalog.products.product_view_page.no_of_up_sells_products'))
             ->get();
 
-        return ProductResource::collection($upSellProducts);
+        return ProductCardResource::collection($upSellProducts);
     }
 }
