@@ -20,8 +20,12 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         /**
-         * Catalog cache invalidation. Any product or category change bumps the
-         * catalog version so cached storefront API responses are served fresh.
+         * Catalog cache invalidation. Any change that can alter a cached
+         * storefront API response bumps the catalog version so listings are
+         * served fresh: product/category saves, review status changes or
+         * deletions (ratings and review counts), and order/cancel/refund
+         * (stock-driven saleability). The order and refund events are wired
+         * in the "Sales" section below, next to their existing listeners.
          */
         'catalog.product.create.after' => [
             [CatalogCache::class, 'flush'],
@@ -44,6 +48,14 @@ class EventServiceProvider extends ServiceProvider
         ],
 
         'catalog.category.delete.before' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
+        'customer.review.update.after' => [
+            [CatalogCache::class, 'flush'],
+        ],
+
+        'customer.review.delete.before' => [
             [CatalogCache::class, 'flush'],
         ],
 
@@ -82,10 +94,12 @@ class EventServiceProvider extends ServiceProvider
          */
         'checkout.order.save.after' => [
             [Order::class, 'afterCreated'],
+            [CatalogCache::class, 'flush'],
         ],
 
         'sales.order.cancel.after' => [
             [Order::class, 'afterCanceled'],
+            [CatalogCache::class, 'flush'],
         ],
 
         'sales.order.comment.create.after' => [
@@ -106,6 +120,7 @@ class EventServiceProvider extends ServiceProvider
 
         'sales.refund.save.after' => [
             [Refund::class, 'afterCreated'],
+            [CatalogCache::class, 'flush'],
         ],
     ];
 }

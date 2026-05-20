@@ -3,6 +3,8 @@
 use Webkul\Faker\Helpers\Category as CategoryFaker;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Shop\Helpers\CatalogApiCache;
+use Webkul\Shop\Listeners\CatalogCache;
+use Webkul\Shop\Providers\EventServiceProvider;
 
 use function Pest\Laravel\getJson;
 
@@ -14,6 +16,18 @@ it('increments the catalog version when flushed', function () {
     $cache->flush();
 
     expect($cache->version())->toBe($version + 1);
+});
+
+it('counts every flush so invalidations are not collapsed', function () {
+    $cache = app(CatalogApiCache::class);
+
+    $version = $cache->version();
+
+    $cache->flush();
+    $cache->flush();
+    $cache->flush();
+
+    expect($cache->version())->toBe($version + 3);
 });
 
 it('caches a value until the catalog version is bumped', function () {
@@ -70,16 +84,37 @@ it('invalidates the catalog cache when a category is updated', function () {
     expect($cache->version())->toBe($version + 1);
 });
 
-it('sends a public cache-control header on the products listing for guests', function () {
+it('wires catalog cache invalidation for every event that can change a cached listing', function (string $event) {
+    $listens = (new EventServiceProvider(app()))->listens();
+
+    expect($listens)->toHaveKey($event)
+        ->and($listens[$event])->toContain([CatalogCache::class, 'flush']);
+})->with([
+    'catalog.product.create.after',
+    'catalog.product.update.after',
+    'catalog.product.delete.before',
+    'catalog.category.create.after',
+    'catalog.category.update.after',
+    'catalog.category.delete.before',
+    'customer.review.update.after',
+    'customer.review.delete.before',
+    'checkout.order.save.after',
+    'sales.order.cancel.after',
+    'sales.refund.save.after',
+]);
+
+it('sends a public, cookie-varying cache-control header on the products listing for guests', function () {
     getJson(route('shop.api.products.index'))
         ->assertOk()
-        ->assertHeader('Cache-Control', 'max-age=60, public');
+        ->assertHeader('Cache-Control', 'max-age=60, public')
+        ->assertHeader('Vary', 'Cookie');
 });
 
-it('sends a public cache-control header on the categories listing for guests', function () {
+it('sends a public, cookie-varying cache-control header on the categories listing for guests', function () {
     getJson(route('shop.api.categories.index'))
         ->assertOk()
-        ->assertHeader('Cache-Control', 'max-age=60, public');
+        ->assertHeader('Cache-Control', 'max-age=60, public')
+        ->assertHeader('Vary', 'Cookie');
 });
 
 it('sends a private cache-control header on the products listing for customers', function () {

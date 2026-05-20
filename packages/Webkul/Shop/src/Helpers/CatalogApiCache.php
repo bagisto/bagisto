@@ -13,6 +13,16 @@ class CatalogApiCache
     const VERSION_KEY = 'shop_api_catalog_version';
 
     /**
+     * Lifetime (in seconds) of the catalog version counter.
+     *
+     * The counter only has to outlive any cached catalog response, so a long,
+     * effectively-permanent TTL is used. An explicit (non-null) TTL is what
+     * lets `Cache::add()` seed the counter through the store's atomic path -
+     * never-expiring entries fall back to a non-atomic check-then-write.
+     */
+    const VERSION_TTL = 31536000;
+
+    /**
      * Time (in seconds) a cached catalog response is kept.
      */
     const TTL = 3600;
@@ -26,15 +36,22 @@ class CatalogApiCache
      */
     public function version(): int
     {
-        return (int) Cache::rememberForever(self::VERSION_KEY, fn () => 1);
+        return (int) Cache::get(self::VERSION_KEY, 1);
     }
 
     /**
      * Bump the catalog version so every cached catalog response is invalidated.
+     *
+     * The counter is advanced with an atomic increment - seeded by an atomic
+     * `add()` on first use - so concurrent invalidations are each counted. A
+     * read-then-write would let two simultaneous flushes settle on the same
+     * value and lose an update.
      */
     public function flush(): void
     {
-        Cache::forever(self::VERSION_KEY, $this->version() + 1);
+        Cache::add(self::VERSION_KEY, 1, self::VERSION_TTL);
+
+        Cache::increment(self::VERSION_KEY);
     }
 
     /**

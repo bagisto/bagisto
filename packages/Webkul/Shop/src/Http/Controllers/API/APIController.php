@@ -10,13 +10,21 @@ class APIController extends Controller
     /**
      * Build `Cache-Control` headers for catalog API responses.
      *
-     * Guests receive a publicly cacheable response (so Varnish/CDN can store
-     * it); logged-in customers receive personalised, non-cacheable data.
+     * Guests receive a publicly cacheable response (so nginx/proxy/CDN can
+     * store it); logged-in customers receive personalised, non-cacheable
+     * data. The guest response also carries `Vary: Cookie` because the same
+     * catalog URLs return personalised data per customer session, so a
+     * shared cache stores a separate variant per session cookie.
      */
     protected function catalogCacheHeaders(): array
     {
-        return app(CatalogApiCache::class)->shouldCache()
-            ? ['Cache-Control' => 'public, max-age=60']
-            : ['Cache-Control' => 'private, no-cache'];
+        if (! app(CatalogApiCache::class)->shouldCache()) {
+            return ['Cache-Control' => 'private, no-cache'];
+        }
+
+        return [
+            'Cache-Control' => 'public, max-age=60',
+            'Vary' => 'Cookie',
+        ];
     }
 }
