@@ -378,6 +378,16 @@
         {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.after') !!}
     </script>
 
+    @php
+        /**
+         * When the cart is empty there is nothing to fetch, so the mini-cart is
+         * seeded with an empty cart server-side. This avoids an `/api/checkout/cart`
+         * request (and a `Cart::collectTotals()` recalculation) on every page view
+         * for the common case of a guest with no cart.
+         */
+        $hasCartItems = (bool) \Webkul\Checkout\Facades\Cart::getCart()?->items->isNotEmpty();
+    @endphp
+
     <script type="module">
         app.component("v-mini-cart", {
             template: '#v-mini-cart-template',
@@ -386,7 +396,7 @@
                 return  {
                     refreshKey: 0,
 
-                    cart: null,
+                    cart: {!! $hasCartItems ? 'null' : json_encode(['items_qty' => 0, 'items' => []]) !!},
 
                     isLoading:false,
 
