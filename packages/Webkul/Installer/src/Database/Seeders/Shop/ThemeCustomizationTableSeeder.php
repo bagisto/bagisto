@@ -518,7 +518,7 @@ class ThemeCustomizationTableSeeder extends Seeder
                             'filters' => [
                                 'category_id' => 26,
                                 'sort' => 'name-asc',
-                                'limit' => 30,
+                                'limit' => 10,
                             ],
                         ]),
                     ],

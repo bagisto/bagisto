@@ -115,7 +115,7 @@ class CartController extends APIController
     }
 
     /**
-     * Method for remove selected items from cart
+     * Method for remove selected items from cart.
      */
     public function destroySelected(): JsonResource
     {
@@ -132,7 +132,7 @@ class CartController extends APIController
     }
 
     /**
-     * Method for move to wishlist selected items from cart
+     * Method for move to wishlist selected items from cart.
      */
     public function moveToWishlist(): JsonResource
     {
@@ -172,7 +172,7 @@ class CartController extends APIController
     }
 
     /**
-     * Estimate Shipping and Tax amount
+     * Estimate Shipping and Tax amount.
      */
     public function estimateShippingMethods(): JsonResource
     {
