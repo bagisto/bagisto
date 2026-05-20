@@ -19,11 +19,11 @@ class APIController extends Controller
     protected function catalogCacheHeaders(): array
     {
         if (! app(CatalogApiCache::class)->shouldCache()) {
-            return ['Cache-Control' => 'private, no-cache'];
+            return ['Cache-Control' => 'no-cache, private'];
         }
 
         return [
-            'Cache-Control' => 'public, max-age=60',
+            'Cache-Control' => 'max-age=60, public',
             'Vary' => 'Cookie',
         ];
     }
