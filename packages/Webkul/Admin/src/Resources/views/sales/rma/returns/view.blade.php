@@ -202,7 +202,7 @@
                                                     @if ($rmaItem['resolution'] == DefaultRMAResolution::RETURN->value)
                                                         @lang('admin::app.configuration.index.sales.rma.return')
                                                     @else
-                                                        {!! ucwords(str_replace('_', ' ', $rmaItem['resolution'])) !!}
+                                                        {{ ucwords(str_replace('_', ' ', $rmaItem['resolution'])) }}
                                                     @endif
                                                 </p>
 
