@@ -36,8 +36,11 @@ class Small
         }
 
         /**
-         * Slider image dimensions
+         * Slider image dimensions. Sized so mobile devices (Moto G Power
+         * at 412 CSS px × 1.75 DPR ≈ 721 device px) pick this variant from
+         * the carousel srcset instead of the 1024w medium one — Lighthouse
+         * flags this as the #1 LCP saving on the homepage.
          */
-        return $image->cover(525, 191);
+        return $image->cover(768, 280);
     }
 }
