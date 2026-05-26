@@ -5,6 +5,8 @@ import {
     generatePhoneNumber,
 } from "../utils/faker";
 import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
+import { CartPage } from "../pages/shop/CartPage";
+import { loginAsAdmin } from "../utils/admin";
 
 const CART_WAITING_TIME = 2000;
 
@@ -25,350 +27,219 @@ test.describe("cart management", () => {
     });
 
     test("should increase the quantity from the mini cart drawer", async ({
-        page,
+        shopPage,
     }) => {
-        await page.goto("");
+        const cartPage = new CartPage(shopPage);
 
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
+        await cartPage.openMiniCart();
 
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
-        await page
-            .getByRole("paragraph")
-            .filter({ hasText: "Item Added Successfully" })
-            .click();
+        await cartPage.increaseQuantityFromMiniCart();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
 
-        await page.getByRole("button", { name: "Shopping Cart" }).click();
-
-        await page.getByRole("button", { name: "Increase Quantity" }).click();
-        await expect(
-            page.locator("svg.text-blue.animate-spin.font-semibold"),
-        ).toBeVisible();
-        await page.waitForTimeout(CART_WAITING_TIME);
-
-        await page.getByRole("button", { name: "Increase Quantity" }).click();
-        await expect(
-            page.locator("svg.text-blue.animate-spin.font-semibold"),
-        ).toBeVisible();
-        await page.waitForTimeout(CART_WAITING_TIME);
+        await cartPage.increaseQuantityFromMiniCart();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
     });
 
     test("should decrease the quantity from the mini cart drawer", async ({
-        page,
+        shopPage,
     }) => {
-        await page.goto("");
+        const cartPage = new CartPage(shopPage);
 
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
-        await page.getByRole("button", { name: "Shopping Cart" }).click();
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.openMiniCart();
 
-        await page.getByRole("button", { name: "Increase Quantity" }).click();
-        await expect(
-            page.locator("svg.text-blue.animate-spin.font-semibold"),
-        ).toBeVisible();
-        await page.waitForTimeout(CART_WAITING_TIME);
+        await cartPage.increaseQuantityFromMiniCart();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
+        await cartPage.increaseQuantityFromMiniCart();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
 
-        await page.getByRole("button", { name: "Increase Quantity" }).click();
-        await expect(
-            page.locator("svg.text-blue.animate-spin.font-semibold"),
-        ).toBeVisible();
-        await page.waitForTimeout(CART_WAITING_TIME);
-
-        await page.getByRole("button", { name: "Decrease Quantity" }).click();
-        await expect(
-            page.locator("svg.text-blue.animate-spin.font-semibold"),
-        ).toBeVisible();
-        await page.waitForTimeout(CART_WAITING_TIME);
-
-        await page.getByRole("button", { name: "Decrease Quantity" }).click();
-        await expect(
-            page.locator("svg.text-blue.animate-spin.font-semibold"),
-        ).toBeVisible();
-        await page.waitForTimeout(CART_WAITING_TIME);
+        await cartPage.decreaseQuantityFromMiniCart();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
+        await cartPage.decreaseQuantityFromMiniCart();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
     });
 
     test("should remove the product from the mini cart drawer", async ({
-        page,
+        shopPage,
     }) => {
-        await page.goto("");
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
-        await page.getByRole("button", { name: "Shopping Cart" }).click();
-        await page.getByRole("button", { name: "Remove" }).click();
-        await page.getByRole("button", { name: "Agree", exact: true }).click();
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.openMiniCart();
+        await cartPage.removeProductFromMiniCart();
 
         await expect(
-            page
+            shopPage
                 .getByText("Item is successfully removed from the cart.")
                 .first(),
         ).toBeVisible();
     });
 
-    test("should add product to cart", async ({ page }) => {
-        await page.goto("");
+    test("should add product to cart", async ({ shopPage }) => {
+        const cartPage = new CartPage(shopPage);
 
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
-        await expect(
-            page.getByText("Item Added Successfully").first(),
-        ).toBeVisible();
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
     });
 
     test("should add different product to cart and update quantity from cart view page", async ({
-        page,
+        shopPage,
     }) => {
-        await page.goto("");
+        const cartPage = new CartPage(shopPage);
 
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
-        await expect(
-            page.getByText("Item Added Successfully").first(),
-        ).toBeVisible();
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
 
-        await page.goto("checkout/cart");
-
-        await page
-            .getByLabel("Increase Quantity")
-            .first()
-            .waitFor({ state: "visible" });
-        await page.getByLabel("Increase Quantity").first().click();
-        await page.getByRole("button", { name: "Update Cart" }).click();
+        await cartPage.goToCartView();
+        await cartPage.increaseQuantityFromCartView();
+        await cartPage.updateCart();
 
         await expect(
-            page.getByText("Quantity updated successfully").first(),
+            shopPage.getByText("Quantity updated successfully").first(),
         ).toBeVisible();
     });
 
     test("should add product to cart and decrement the quantity of product from the cart view page", async ({
-        page,
+        shopPage,
     }) => {
-        await page.goto("");
+        const cartPage = new CartPage(shopPage);
 
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
-        await expect(
-            page.getByText("Item Added Successfully").first(),
-        ).toBeVisible();
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
 
-        await page.goto("checkout/cart");
-
-        await page
-            .getByLabel("Increase Quantity")
-            .first()
-            .waitFor({ state: "visible" });
-        await page.getByLabel("Increase Quantity").first().click();
-
-        await page
-            .getByLabel("Decrease Quantity")
-            .first()
-            .waitFor({ state: "visible" });
-        await page.getByLabel("Decrease Quantity").first().click();
-
-        await page.getByRole("button", { name: "Update Cart" }).click();
+        await cartPage.goToCartView();
+        await cartPage.increaseQuantityFromCartView();
+        await cartPage.decreaseQuantityFromCartView();
+        await cartPage.updateCart();
 
         await expect(
-            page.getByText("Quantity updated successfully").first(),
+            shopPage.getByText("Quantity updated successfully").first(),
         ).toBeVisible();
     });
 
-    test("should remove product from the cart view page", async ({ page }) => {
-        await page.goto("");
+    test("should remove product from the cart view page", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
 
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
+
+        await cartPage.goToCartView();
+        await cartPage.removeProductFromCartView();
+
         await expect(
-            page.getByText("Item Added Successfully").first(),
-        ).toBeVisible();
-        await page.waitForTimeout(CART_WAITING_TIME);
-
-        await page.goto("checkout/cart");
-
-        await page
-            .getByRole("button", { name: "Remove" })
-            .first()
-            .waitFor({ state: "visible" });
-
-        await page.getByRole("button", { name: "Remove" }).first().click();
-        await page.waitForTimeout(CART_WAITING_TIME);
-
-        await page.getByRole("button", { name: "Agree", exact: true }).click();
-        await expect(
-            page
+            shopPage
                 .getByText("Item is successfully removed from the cart.")
                 .first(),
         ).toBeVisible();
-        await page.waitForTimeout(CART_WAITING_TIME);
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
     });
 
     test("should remove all products from the cart view page", async ({
-        page,
+        shopPage,
     }) => {
-        await page.goto("");
+        const cartPage = new CartPage(shopPage);
 
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
-        await expect(
-            page.getByText("Item Added Successfully").first(),
-        ).toBeVisible();
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
 
-        await page.goto("checkout/cart");
-
-        await page
-            .locator(".icon-uncheck")
-            .first()
-            .waitFor({ state: "visible" });
-        await page.locator(".icon-uncheck").first().click();
-        await page
-            .getByRole("button", { name: "Remove" })
-            .first()
-            .waitFor({ state: "visible" });
-
-        await page.getByRole("button", { name: "Remove" }).first().click();
-        await page.getByRole("button", { name: "Agree", exact: true }).click();
+        await cartPage.goToCartView();
+        await cartPage.removeAllFromCartView();
 
         await expect(
-            page
+            shopPage
                 .getByText("Selected items successfully removed from cart.")
                 .first(),
         ).toBeVisible();
     });
 
-    test("should apply coupon", async ({ page }) => {
+    test("should apply coupon", async ({ adminPage, shopPage }) => {
+        const cartPage = new CartPage(shopPage);
         const couponCode = generatePhoneNumber();
 
-        /**
-         * Login to admin panel.
-         */
-        const adminCredentials = {
-            email: "admin@example.com",
-            password: "admin123",
-        };
-        await page.goto("admin/login");
-        await page.getByPlaceholder("Email Address").click();
-        await page
-            .getByPlaceholder("Email Address")
-            .fill(adminCredentials.email);
-        await page.getByPlaceholder("Password").click();
-        await page.getByPlaceholder("Password").fill(adminCredentials.password);
-        await page.getByRole("button", { name: "Sign In" }).click();
-
-        /**
-         * Reaching to the create cart rules page.
-         */
-        await page.goto("admin/marketing/promotions/cart-rules");
-        await page.waitForSelector(
+        await adminPage.goto("admin/marketing/promotions/cart-rules");
+        await adminPage.waitForSelector(
             'a.primary-button:has-text("Create Cart Rule")',
         );
-        await page.click('a.primary-button:has-text("Create Cart Rule")');
+        await adminPage.click('a.primary-button:has-text("Create Cart Rule")');
 
-        /**
-         * Waiting for the main form to be visible.
-         */
-        await page.waitForSelector(
+        await adminPage.waitForSelector(
             'form[action*="/promotions/cart-rules/create"]',
         );
 
-        /**
-         * General Section.
-         */
-        await page.fill("#name", generateName());
-        await page.fill("#description", generateDescription());
-        await page.locator("#coupon_type").selectOption("1");
-        await page.locator("#use_auto_generation").selectOption("0");
-        await page
+        await adminPage.fill("#name", generateName());
+        await adminPage.fill("#description", generateDescription());
+        await adminPage.locator("#coupon_type").selectOption("1");
+        await adminPage.locator("#use_auto_generation").selectOption("0");
+        await adminPage
             .getByRole("textbox", { name: "Coupon Code" })
             .fill(couponCode);
-        await page
+        await adminPage
             .getByRole("textbox", { name: "Uses Per Coupon" })
             .fill("100");
-        await page
+        await adminPage
             .getByRole("textbox", { name: "Uses Per Customer" })
             .fill("100");
 
-        /**
-         * Conditions Section.
-         */
-        await page.click('div.secondary-button:has-text("Add Condition")');
-
-        /**
-         * Selecting the condition attribute.
-         */
-        await page.waitForSelector(
+        await adminPage.click('div.secondary-button:has-text("Add Condition")');
+        await adminPage.waitForSelector(
             'select[id="conditions\\[0\\]\\[attribute\\]"]',
         );
-        await page
+        await adminPage
             .locator('[id="conditions\\[0\\]\\[attribute\\]"]')
             .selectOption("cart_item|quantity");
-        await page
+        await adminPage
             .locator('select[name="conditions\\[0\\]\\[operator\\]"]')
             .selectOption(">=");
-
-        /**
-         * Filling the condition value.
-         */
-        await page
+        await adminPage
             .locator('input[name="conditions\\[0\\]\\[value\\]"]')
             .fill("1");
-
-        /**
-         * Actions Section.
-         */
-        await page.locator("#action_type").selectOption("by_fixed");
-        await page.fill('input[name="discount_amount"]', "10");
-
-        /**
-         * Settings Section.
-         */
-        await page.fill('input[name="sort_order"]', "1");
-
-        // Selecting the channel and verifying it.
-        await page.click('label[for="channel__1"]');
-        await expect(page.locator("input#channel__1")).toBeChecked();
-
-        // Selecting the customer group and verifying it.
-        await page.locator("#customer_group__1").nth(1).click();
-        await page.click('label[for="customer_group__2"]');
-        await expect(page.locator("input#customer_group__2")).toBeChecked();
-
-        // Clicking the status and verify the toggle state.
-        await page.click('label[for="status"]');
-        const toggleInput = await page.locator('input[name="status"]');
+        await adminPage.locator("#action_type").selectOption("by_fixed");
+        await adminPage.fill('input[name="discount_amount"]', "10");
+        await adminPage.fill('input[name="sort_order"]', "1");
+        await adminPage.click('label[for="channel__1"]');
+        await expect(adminPage.locator("input#channel__1")).toBeChecked();
+        await adminPage.locator("#customer_group__1").nth(1).click();
+        await adminPage.click('label[for="customer_group__2"]');
+        await expect(
+            adminPage.locator("input#customer_group__2"),
+        ).toBeChecked();
+        await adminPage.click('label[for="status"]');
+        const toggleInput = await adminPage.locator('input[name="status"]');
         await expect(toggleInput).toBeChecked();
-
-        /**
-         * Saving the cart rule.
-         */
-        await page.click('button.primary-button:has-text("Save Cart Rule")');
-        await expect(page.locator("#app")).toContainText(
+        await adminPage.click(
+            'button.primary-button:has-text("Save Cart Rule")',
+        );
+        await expect(adminPage.locator("#app")).toContainText(
             "Cart rule created successfully",
         );
 
-        /**
-         * Go to Shop
-         */
-        await page.goto("");
-        await page.getByPlaceholder("Search products here").fill("simple");
-        await page.getByPlaceholder("Search products here").press("Enter");
-        await page.getByRole("button", { name: "Add To Cart" }).first().click();
-        await expect(
-            page.getByText("Item Added Successfully").first(),
-        ).toBeVisible();
-        await page.goto("checkout/cart");
-        await page.getByRole("button", { name: "Apply Coupon" }).click();
-        await page.getByPlaceholder("Enter your code").click();
-        await page.getByPlaceholder("Enter your code").fill(couponCode);
-        await page.getByRole("button", { name: "Apply", exact: true }).click();
-        await expect(
-            page
-                .getByRole("paragraph")
-                .filter({ hasText: "Coupon code applied" }),
-        ).toBeVisible();
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
+        await cartPage.goToCartView();
+        await cartPage.applyCoupon(couponCode);
+        await cartPage.expectCouponApplied();
     });
 });

@@ -9,6 +9,7 @@ use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Repositories\ProductRepository;
+use Webkul\Shop\Helpers\CatalogApiCache;
 use Webkul\Shop\Http\Resources\AttributeOptionResource;
 use Webkul\Shop\Http\Resources\AttributeResource;
 use Webkul\Shop\Http\Resources\CategoryResource;
@@ -24,13 +25,14 @@ class CategoryController extends APIController
     public function __construct(
         protected AttributeRepository $attributeRepository,
         protected CategoryRepository $categoryRepository,
-        protected ProductRepository $productRepository
+        protected ProductRepository $productRepository,
+        protected CatalogApiCache $catalogApiCache
     ) {}
 
     /**
      * Get all categories.
      */
-    public function index(): JsonResource
+    public function index(): JsonResponse
     {
         /**
          * These are the default parameters. By default, only the enabled category
@@ -41,9 +43,19 @@ class CategoryController extends APIController
             'locale' => app()->getLocale(),
         ];
 
-        $categories = $this->categoryRepository->getAll(array_merge($defaultParams, request()->all()));
+        /**
+         * Category listings are cached per catalog version, so repeated
+         * storefront visits skip the database entirely.
+         */
+        $data = $this->catalogApiCache->remember('categories', request()->all(), function () use ($defaultParams) {
+            $categories = $this->categoryRepository->getAll(array_merge($defaultParams, request()->all()));
 
-        return CategoryResource::collection($categories);
+            return CategoryResource::collection($categories)
+                ->response()
+                ->getData(true);
+        });
+
+        return response()->json($data)->withHeaders($this->catalogCacheHeaders());
     }
 
     /**

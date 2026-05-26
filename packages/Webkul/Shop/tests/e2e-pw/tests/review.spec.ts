@@ -1,8 +1,9 @@
 import { test, expect } from "../setup";
 import { loginAsCustomer } from "../utils/customer";
 import { generateName, generateDescription, generateSKU } from "../utils/faker";
+import { ReviewPage } from "../pages/shop/ReviewPage";
 
-async function createSimpleProduct(adminPage) {
+async function createSimpleProduct(adminPage: any) {
     const product = {
         name: `simple-${Date.now()}`,
         sku: generateSKU(),
@@ -30,7 +31,6 @@ async function createSimpleProduct(adminPage) {
     await adminPage.waitForSelector('form[enctype="multipart/form-data"]');
     await adminPage.locator("#product_number").fill(product.productNumber);
     await adminPage.locator("#name").fill(product.name);
-    const name = await adminPage.locator('input[name="name"]').inputValue();
     await adminPage.fillInTinymce(
         "#short_description_ifr",
         product.shortDescription,
@@ -48,7 +48,7 @@ async function createSimpleProduct(adminPage) {
         /product updated successfully/i,
     );
     await adminPage.goto("admin/catalog/products");
-    
+
     await expect(
         adminPage
             .locator("p.break-all.text-base")
@@ -56,25 +56,14 @@ async function createSimpleProduct(adminPage) {
     ).toBeVisible();
 }
 
-test("should review a product", async ({ adminPage }) => {
+test("should review a product", async ({ adminPage, shopPage }) => {
+    const reviewPage = new ReviewPage(shopPage);
+
     await createSimpleProduct(adminPage);
-    await loginAsCustomer(adminPage);
+    await loginAsCustomer(shopPage);
 
-    await adminPage.getByPlaceholder("Search products here").fill("simple");
-    await adminPage.getByPlaceholder("Search products here").press("Enter");
-    await adminPage.locator(".group img").first().click();
-    await adminPage.getByRole("button", { name: "Reviews" }).click();
-    await adminPage.waitForSelector("#review-tab");
-    await adminPage.locator("#review-tab").getByText("Write a Review").click();
-    await adminPage.locator("#review-tab span").nth(3).click();
-    await adminPage.locator("#review-tab span").nth(4).click();
-    await adminPage.getByPlaceholder("Title").click();
-    await adminPage.getByPlaceholder("Title").fill(generateName());
-    await adminPage.getByPlaceholder("Comment").click();
-    await adminPage.getByPlaceholder("Comment").fill(generateDescription());
-    await adminPage.getByRole("button", { name: "Submit Review" }).click();
-
-    await expect(
-        adminPage.getByText("Review submitted successfully.").first(),
-    ).toBeVisible();
+    await reviewPage.searchProduct("simple");
+    await reviewPage.openFirstProduct();
+    await reviewPage.writeReview(generateName(), generateDescription());
+    await reviewPage.expectReviewSuccess();
 });

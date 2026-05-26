@@ -31,6 +31,14 @@ class CartController extends APIController
      */
     public function index(): JsonResource
     {
+        /**
+         * Skip the totals recalculation when there is no cart - there is
+         * nothing to collect and the empty response is the same either way.
+         */
+        if (! Cart::getCart()) {
+            return new JsonResource(['data' => null]);
+        }
+
         Cart::collectTotals();
 
         $response = [
@@ -108,7 +116,7 @@ class CartController extends APIController
     }
 
     /**
-     * Method for remove selected items from cart
+     * Method for remove selected items from cart.
      */
     public function destroySelected(): JsonResource
     {
@@ -125,7 +133,7 @@ class CartController extends APIController
     }
 
     /**
-     * Method for move to wishlist selected items from cart
+     * Method for move to wishlist selected items from cart.
      */
     public function moveToWishlist(): JsonResource
     {
@@ -165,7 +173,7 @@ class CartController extends APIController
     }
 
     /**
-     * Estimate Shipping and Tax amount
+     * Estimate Shipping and Tax amount.
      */
     public function estimateShippingMethods(): JsonResource
     {

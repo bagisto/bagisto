@@ -1,54 +1,48 @@
 import { test, expect } from "../setup";
-import { addWishlist, loginAsCustomer } from "../utils/customer";
+import { loginAsCustomer } from "../utils/customer";
 import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
+import { WishlistPage } from "../pages/shop/WishlistPage";
 
-test.beforeAll("should create simple product to add in wishlist", async ({
-    adminPage,
-}) => {
-    const productCreation = new ProductCreation(adminPage);
+test.beforeAll(
+    "should create simple product to add in wishlist",
+    async ({ adminPage }) => {
+        const productCreation = new ProductCreation(adminPage);
 
-    await productCreation.createProduct({
-        type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
-        shortDescription: "Short desc",
-        description: "Full desc",
-        price: 199,
-        weight: 1,
-        inventory: 100,
-    });
+        await productCreation.createProduct({
+            type: "simple",
+            sku: `SKU-${Date.now()}`,
+            name: `Simple-${Date.now()}`,
+            shortDescription: "Short desc",
+            description: "Full desc",
+            price: 199,
+            weight: 1,
+            inventory: 100,
+        });
+    },
+);
+
+test("should add wishlist", async ({ shopPage }) => {
+    const wishlistPage = new WishlistPage(shopPage);
+
+    await loginAsCustomer(shopPage);
+    await wishlistPage.addProductToWishlist();
+    await wishlistPage.expectWishlistAdded();
 });
 
-test("should add wishlist", async ({ page }) => {
-    await loginAsCustomer(page);
+test("should remove wishlist", async ({ shopPage }) => {
+    const wishlistPage = new WishlistPage(shopPage);
 
-    await addWishlist(page);
+    await loginAsCustomer(shopPage);
+    await wishlistPage.addProductToWishlist();
+    await wishlistPage.removeFirstWishlistItem();
+    await wishlistPage.expectWishlistRemoved();
 });
 
-test("should remove wishlist", async ({ page }) => {
-    await loginAsCustomer(page);
+test("should clear all wishlist", async ({ shopPage }) => {
+    const wishlistPage = new WishlistPage(shopPage);
 
-    await addWishlist(page);
-
-    await page.locator(".action-items > span").first().click();
-
-    await expect(
-        page.getByText("Item Successfully Removed From Wishlist").first(),
-    ).toBeVisible();
-});
-
-test("should clear all wishlist", async ({ page }) => {
-    await loginAsCustomer(page);
-
-    await addWishlist(page);
-
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-    await page.getByText("Delete All", { exact: true }).click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
-
-    await expect(
-        page.getByText("Item Successfully Removed From Wishlist").first(),
-    ).toBeVisible();
+    await loginAsCustomer(shopPage);
+    await wishlistPage.addProductToWishlist();
+    await wishlistPage.clearWishlist();
+    await wishlistPage.expectWishlistRemoved();
 });
