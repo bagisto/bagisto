@@ -92,7 +92,7 @@
                 };
             },
 
-            created() {
+            mounted() {
                 var self = this;
 
                 setTimeout(function() {
