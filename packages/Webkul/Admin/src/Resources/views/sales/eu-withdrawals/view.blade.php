@@ -259,88 +259,118 @@
                     </p>
                 </div>
 
+                @php
+                    $isTerminalStatus = in_array($withdrawal->status, [WithdrawalStatus::REFUNDED, WithdrawalStatus::DECLINED], true);
+
+                    $confirmationButtonLabel = $isTerminalStatus
+                        ? 'admin::app.eu_withdrawal.view.send_final_confirmation'
+                        : 'admin::app.eu_withdrawal.view.resend_confirmation';
+
+                    $confirmationModalMessage = $isTerminalStatus
+                        ? 'admin::app.eu_withdrawal.view.send_final_confirmation_confirm_msg'
+                        : 'admin::app.eu_withdrawal.view.resend_confirmation_confirm_msg';
+                @endphp
+
                 @if (bouncer()->hasPermission('sales.eu_withdrawals.resend_confirmation'))
                     <form
                         method="POST"
                         action="{{ route('admin.sales.eu-withdrawals.resend_confirmation', $withdrawal->id) }}"
+                        ref="resendConfirmationForm"
                         class="border-t border-slate-200 p-4 dark:border-gray-800"
                     >
                         @csrf
 
                         <button
-                            type="submit"
+                            type="button"
                             class="secondary-button w-full"
+                            @click="$emitter.emit('open-confirm-modal', {
+                                message: '{{ trans($confirmationModalMessage) }}',
+                                agree: () => this.$refs['resendConfirmationForm'].submit(),
+                            })"
                         >
-                            @lang('admin::app.eu_withdrawal.view.resend_confirmation')
+                            @lang($confirmationButtonLabel)
                         </button>
                     </form>
                 @endif
 
-                @if ($withdrawal->status === WithdrawalStatus::RECEIVED)
-                    @if (bouncer()->hasPermission('sales.eu_withdrawals.mark_refunded'))
-                        <form
-                            method="POST"
-                            action="{{ route('admin.sales.eu-withdrawals.mark_refunded', $withdrawal->id) }}"
-                            class="grid gap-2 border-t border-slate-200 p-4 dark:border-gray-800"
+                @if (bouncer()->hasPermission('sales.eu_withdrawals.mark_refunded'))
+                    <form
+                        method="POST"
+                        action="{{ route('admin.sales.eu-withdrawals.mark_refunded', $withdrawal->id) }}"
+                        ref="markRefundedForm"
+                        class="grid gap-2 border-t border-slate-200 p-4 dark:border-gray-800"
+                    >
+                        @csrf
+
+                        <label class="text-sm font-medium text-gray-700 dark:text-gray-200">
+                            @lang('admin::app.eu_withdrawal.view.refund_note_label')
+                        </label>
+
+                        <input
+                            type="text"
+                            name="refund_note"
+                            maxlength="500"
+                            placeholder="@lang('admin::app.eu_withdrawal.view.refund_note_placeholder')"
+                            class="w-full rounded-lg border bg-white px-3 py-2 text-sm text-gray-700 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                         >
-                            @csrf
 
-                            <label class="text-sm font-medium text-gray-700 dark:text-gray-200">
-                                @lang('admin::app.eu_withdrawal.view.refund_note_label')
-                            </label>
-                            
-                            <input
-                                type="text"
-                                name="refund_note"
-                                maxlength="500"
-                                placeholder="@lang('admin::app.eu_withdrawal.view.refund_note_placeholder')"
-                                class="w-full rounded-lg border bg-white px-3 py-2 text-sm text-gray-700 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                            >
-
-                            <button
-                                type="submit"
-                                class="primary-button w-full"
-                            >
-                                @lang('admin::app.eu_withdrawal.view.mark_refunded')
-                            </button>
-                        </form>
-                    @endif
-
-                    @if (bouncer()->hasPermission('sales.eu_withdrawals.decline'))
-                        <form
-                            method="POST"
-                            action="{{ route('admin.sales.eu-withdrawals.decline', $withdrawal->id) }}"
-                            class="grid gap-2 border-t border-slate-200 p-4 dark:border-gray-800"
+                        <button
+                            type="button"
+                            @class([
+                                'w-full',
+                                'primary-button' => $withdrawal->status !== WithdrawalStatus::REFUNDED,
+                                'secondary-button' => $withdrawal->status === WithdrawalStatus::REFUNDED,
+                            ])
+                            @click="$emitter.emit('open-confirm-modal', {
+                                message: '@lang('admin::app.eu_withdrawal.view.mark_refunded_confirm_msg')',
+                                agree: () => this.$refs['markRefundedForm'].submit(),
+                            })"
                         >
-                            @csrf
+                            @lang('admin::app.eu_withdrawal.view.mark_refunded')
+                        </button>
+                    </form>
+                @endif
 
-                            <label class="text-sm font-medium text-gray-700 dark:text-gray-200">
-                                @lang('admin::app.eu_withdrawal.view.decline_reason_label')
-                            </label>
+                @if (bouncer()->hasPermission('sales.eu_withdrawals.decline'))
+                    <form
+                        method="POST"
+                        action="{{ route('admin.sales.eu-withdrawals.decline', $withdrawal->id) }}"
+                        ref="declineForm"
+                        class="grid gap-2 border-t border-slate-200 p-4 dark:border-gray-800"
+                    >
+                        @csrf
 
-                            <input
-                                type="text"
-                                name="declined_reason"
-                                maxlength="500"
-                                required
-                                placeholder="@lang('admin::app.eu_withdrawal.view.decline_reason_placeholder')"
-                                class="w-full rounded-lg border bg-white px-3 py-2 text-sm text-gray-700 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
-                            >
-                            
-                            <button
-                                type="submit"
-                                class="secondary-button w-full !border-red-200 !text-red-700 hover:!bg-red-50 dark:!text-red-300 dark:hover:!bg-red-900/30"
-                            >
-                                @lang('admin::app.eu_withdrawal.view.decline')
-                            </button>
-                        </form>
-                    @endif
-                @else
-                    <div class="border-t border-slate-200 p-4 dark:border-gray-800">
-                        <p class="text-xs italic text-gray-500 dark:text-gray-400">
-                            @lang('admin::app.eu_withdrawal.view.terminal_state_note')
-                        </p>
-                    </div>
+                        <label class="text-sm font-medium text-gray-700 dark:text-gray-200">
+                            @lang('admin::app.eu_withdrawal.view.decline_reason_label')
+                        </label>
+
+                        <input
+                            type="text"
+                            name="declined_reason"
+                            ref="declineReasonInput"
+                            maxlength="500"
+                            required
+                            placeholder="@lang('admin::app.eu_withdrawal.view.decline_reason_placeholder')"
+                            class="w-full rounded-lg border bg-white px-3 py-2 text-sm text-gray-700 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                        >
+
+                        <button
+                            type="button"
+                            class="secondary-button w-full !border-red-200 !text-red-700 hover:!bg-red-50 dark:!text-red-300 dark:hover:!bg-red-900/30"
+                            @click="
+                                if (! this.$refs['declineReasonInput'].value.trim()) {
+                                    this.$refs['declineReasonInput'].focus();
+                                    return;
+                                }
+                                $emitter.emit('open-confirm-modal', {
+                                    message: '@lang('admin::app.eu_withdrawal.view.decline_confirm_msg')',
+                                    agree: () => this.$refs['declineForm'].submit(),
+                                });
+                            "
+                        >
+                            @lang('admin::app.eu_withdrawal.view.decline')
+                        </button>
+                    </form>
                 @endif
             </div>
         </div>

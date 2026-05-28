@@ -5795,14 +5795,18 @@ return [
 
             'actions' => 'Actions',
             'actions_note' => 'Refunds are processed manually via Bagisto’s existing order / refund / RMA tools. Use these actions to record the outcome on the withdrawal evidence.',
-            'resend_confirmation' => 'Resend confirmation email',
-            'mark_refunded' => 'Mark as refunded',
+            'resend_confirmation' => 'Resend Confirmation Email',
+            'mark_refunded' => 'Mark as Refunded',
             'refund_note_label' => 'Refund reference (optional)',
             'refund_note_placeholder' => 'e.g. Refund #1234',
-            'decline' => 'Decline withdrawal',
+            'decline' => 'Decline Withdrawal',
             'decline_reason_label' => 'Reason for declining',
             'decline_reason_placeholder' => 'Explain why entitlement is contested',
-            'terminal_state_note' => 'This withdrawal is in a terminal state. No further actions are available; the evidence is preserved as-is.',
+            'mark_refunded_confirm_msg' => 'Mark this withdrawal as refunded? Any previous decline record will be cleared.',
+            'decline_confirm_msg' => 'Decline this withdrawal? The reason will be visible to the customer.',
+            'resend_confirmation_confirm_msg' => 'Resend the confirmation email to the customer?',
+            'send_final_confirmation' => 'Send Final Confirmation Email',
+            'send_final_confirmation_confirm_msg' => 'Send the final status email to the customer?',
         ],
 
         'status' => [

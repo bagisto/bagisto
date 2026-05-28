@@ -62,11 +62,17 @@ class EUWithdrawalController extends Controller
 
         $withdrawal = $this->withdrawals->findOrFail($id);
 
+        // Setting the row to declined clears any prior refund metadata so the
+        // record reflects a single terminal state. Admins can flip back via
+        // Mark Refunded if this was a misclick.
         $withdrawal->update([
             'status' => WithdrawalStatus::DECLINED,
             'declined_at' => now(),
             'declined_reason' => request('declined_reason'),
             'declined_by_user_id' => auth()->guard('admin')->id(),
+            'refunded_at' => null,
+            'refunded_by_user_id' => null,
+            'refund_note' => null,
         ]);
 
         session()->flash('success', trans('admin::app.eu_withdrawal.flash.declined'));
@@ -87,11 +93,17 @@ class EUWithdrawalController extends Controller
 
         $withdrawal = $this->withdrawals->findOrFail($id);
 
+        // Setting the row to refunded clears any prior decline metadata so the
+        // record reflects a single terminal state. Admins can flip back via
+        // Decline if this was a misclick.
         $withdrawal->update([
             'status' => WithdrawalStatus::REFUNDED,
             'refunded_at' => now(),
             'refund_note' => request('refund_note'),
             'refunded_by_user_id' => auth()->guard('admin')->id(),
+            'declined_at' => null,
+            'declined_reason' => null,
+            'declined_by_user_id' => null,
         ]);
 
         session()->flash('success', trans('admin::app.eu_withdrawal.flash.refunded'));
