@@ -1795,7 +1795,7 @@ return [
         ],
 
         'confirmation' => [
-            'page_title' => 'Withdrawal receipt',
+            'page_title' => 'Withdrawal Receipt',
             'heading' => 'Your withdrawal has been received',
             'heading_received' => 'Your withdrawal has been received',
             'heading_refunded' => 'Your refund has been issued',
@@ -1806,6 +1806,8 @@ return [
             'intro_declined' => 'The merchant has contested your entitlement to a refund under this declaration. See the details below for the reason given and your remaining options.',
             'received_at' => 'Received at',
             'reference' => 'Reference',
+            'copy_reference' => 'Copy reference',
+            'reference_copied' => 'Reference copied to clipboard.',
             'order' => 'Order',
             'email' => 'Email',
             'reason' => 'Reason',

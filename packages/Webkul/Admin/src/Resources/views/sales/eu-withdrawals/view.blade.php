@@ -6,6 +6,16 @@
         WithdrawalStatus::REFUNDED => 'bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200',
         WithdrawalStatus::DECLINED => 'bg-red-100 text-red-800 dark:bg-red-900/40 dark:text-red-200',
     ][$withdrawal->status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+
+    $timelineDot = [
+        'done'    => '<span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-emerald-500 text-white shadow-sm ring-4 ring-emerald-100 dark:bg-emerald-500 dark:ring-emerald-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 5.292a1 1 0 010 1.414l-7.999 8a1 1 0 01-1.413 0l-4-3.999a1 1 0 011.413-1.415L8 12.585l7.295-7.293a1 1 0 011.41 0z" clip-rule="evenodd"/></svg></span>',
+
+        'declined' => '<span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-red-500 text-white shadow-sm ring-4 ring-red-100 dark:bg-red-500 dark:ring-red-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>',
+
+        'warning' => '<span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-amber-500 text-white shadow-sm ring-4 ring-amber-100 dark:bg-amber-500 dark:ring-amber-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg></span>',
+
+        'pending' => '<span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border-2 border-dashed border-gray-300 bg-white ring-4 ring-gray-100 dark:border-gray-600 dark:bg-gray-900 dark:ring-gray-800"></span>',
+    ];
 @endphp
 
 <x-admin::layouts>
@@ -66,8 +76,7 @@
                         </p>
 
                         <p class="mt-1 text-sm font-medium text-gray-800 dark:text-white">
-                            {{ $withdrawal->received_at->format('d M Y, H:i') }}
-                            <span class="text-gray-500 dark:text-gray-400">UTC</span>
+                            {{ $withdrawal->received_at->format('d M Y, H:i T') }}
                         </p>
                     </div>
                     
@@ -76,9 +85,21 @@
                             @lang('admin::app.eu_withdrawal.view.uuid')
                         </p>
 
-                        <p class="mt-1 break-all font-mono text-sm text-gray-800 dark:text-white">
-                            {{ $withdrawal->uuid }}
-                        </p>
+                        <div class="mt-1 flex items-center gap-2 rounded-lg border border-slate-200 bg-gray-50 px-3 py-2 dark:border-gray-800 dark:bg-gray-950">
+                            <code class="flex-1 break-all font-mono text-sm text-gray-800 dark:text-gray-200">
+                                {{ $withdrawal->uuid }}
+                            </code>
+
+                            <button
+                                type="button"
+                                title="@lang('admin::app.eu_withdrawal.view.copy_reference')"
+                                data-eu-clipboard="{{ $withdrawal->uuid }}"
+                                data-eu-clipboard-message="@lang('admin::app.eu_withdrawal.view.reference_copied')"
+                                class="grid h-7 w-7 flex-shrink-0 place-items-center rounded-md text-gray-500 transition-all hover:bg-gray-200 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+                            >
+                                <span class="icon-copy text-lg"></span>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="px-4 py-4">
@@ -148,44 +169,56 @@
 
                 <ol class="grid gap-0">
                     <li class="flex gap-3 border-t border-slate-200 px-4 py-3 dark:border-gray-800">
-                        <span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box dark:bg-emerald-900/40 dark:text-emerald-200"></span>
-                        
+                        {!! $timelineDot['done'] !!}
+
                         <div class="flex-1">
                             <p class="text-sm font-medium text-gray-800 dark:text-white">
                                 @lang('admin::app.eu_withdrawal.view.timeline_received')
                             </p>
 
-                            <p class="text-xs text-gray-500 dark:text-gray-400">
-                                {{ $withdrawal->received_at->copy()->setTimezone('UTC')->format('d M Y, H:i') }} UTC
+                            <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                @lang('admin::app.eu_withdrawal.view.timeline_received_desc')
+                            </p>
+
+                            <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
+                                {{ $withdrawal->received_at->format('d M Y, H:i T') }}
                             </p>
                         </div>
                     </li>
 
                     <li class="flex gap-3 border-t border-slate-200 px-4 py-3 dark:border-gray-800">
                         @if ($withdrawal->confirmation_sent_at)
-                            <span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box dark:bg-emerald-900/40 dark:text-emerald-200"></span>
+                            {!! $timelineDot['done'] !!}
                         @elseif ($withdrawal->confirmation_error)
-                            <span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-amber-100 text-amber-700 icon-warning dark:bg-amber-900/40 dark:text-amber-200"></span>
+                            {!! $timelineDot['warning'] !!}
                         @else
-                            <span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border border-gray-300 text-gray-400 icon-radio-unselect dark:border-gray-700"></span>
+                            {!! $timelineDot['pending'] !!}
                         @endif
 
                         <div class="flex-1">
                             <p class="text-sm font-medium text-gray-800 dark:text-white">
-                                @lang('admin::app.eu_withdrawal.view.timeline_email')
+                                @lang('admin::app.eu_withdrawal.view.timeline_initial_email')
                             </p>
 
                             @if ($withdrawal->confirmation_sent_at)
-                                <p class="text-xs text-gray-500 dark:text-gray-400">
-                                    {{ $withdrawal->confirmation_sent_at->copy()->setTimezone('UTC')->format('d M Y, H:i') }} UTC
+                                <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                    @lang('admin::app.eu_withdrawal.view.timeline_initial_email_desc_sent')
+                                </p>
+
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
+                                    {{ $withdrawal->confirmation_sent_at->format('d M Y, H:i T') }}
                                 </p>
                             @elseif ($withdrawal->confirmation_error)
-                                <p class="text-xs text-amber-700 dark:text-amber-300">
+                                <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                    @lang('admin::app.eu_withdrawal.view.timeline_initial_email_desc_error')
+                                </p>
+
+                                <p class="mt-1 text-xs text-amber-700 dark:text-amber-300">
                                     {{ $withdrawal->confirmation_error }}
                                 </p>
                             @else
-                                <p class="text-xs text-gray-500 dark:text-gray-400">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_email_pending')
+                                <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                    @lang('admin::app.eu_withdrawal.view.timeline_initial_email_desc_pending')
                                 </p>
                             @endif
                         </div>
@@ -193,53 +226,109 @@
 
                     <li class="flex gap-3 border-t border-slate-200 px-4 py-3 dark:border-gray-800">
                         @if ($withdrawal->declined_at)
-                            <span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-red-100 text-red-700 icon-warning dark:bg-red-900/40 dark:text-red-200"></span>
-                            
+                            {!! $timelineDot['declined'] !!}
+
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800 dark:text-white">
                                     @lang('admin::app.eu_withdrawal.view.timeline_declined')
                                 </p>
 
-                                <p class="text-xs text-gray-500 dark:text-gray-400">
-                                    {{ $withdrawal->declined_at->copy()->setTimezone('UTC')->format('d M Y, H:i') }} UTC
-                                    @if ($withdrawal->declinedBy) — {{ $withdrawal->declinedBy->name }} @endif
+                                <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                    @if ($withdrawal->declinedBy)
+                                        @lang('admin::app.eu_withdrawal.view.timeline_declined_desc', ['name' => $withdrawal->declinedBy->name])
+                                    @else
+                                        @lang('admin::app.eu_withdrawal.view.timeline_declined_desc_system')
+                                    @endif
+                                </p>
+
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
+                                    {{ $withdrawal->declined_at->format('d M Y, H:i T') }}
                                 </p>
 
                                 @if ($withdrawal->declined_reason)
-                                    <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">{{ $withdrawal->declined_reason }}</p>
+                                    <div class="mt-2 rounded-md border border-red-100 bg-red-50 p-2.5 dark:border-red-900/40 dark:bg-red-900/20">
+                                        <p class="text-xs font-medium uppercase tracking-wide text-red-700 dark:text-red-300">
+                                            @lang('admin::app.eu_withdrawal.view.timeline_declined_reason_label')
+                                        </p>
+
+                                        <p class="mt-1 text-sm text-red-900 dark:text-red-200">{{ $withdrawal->declined_reason }}</p>
+                                    </div>
                                 @endif
                             </div>
                         @elseif ($withdrawal->refunded_at)
-                            <span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box dark:bg-emerald-900/40 dark:text-emerald-200"></span>
-                            
+                            {!! $timelineDot['done'] !!}
+
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800 dark:text-white">
                                     @lang('admin::app.eu_withdrawal.view.timeline_refunded')
                                 </p>
 
-                                <p class="text-xs text-gray-500 dark:text-gray-400">
-                                    {{ $withdrawal->refunded_at->copy()->setTimezone('UTC')->format('d M Y, H:i') }} UTC
-                                    @if ($withdrawal->refundedBy) — {{ $withdrawal->refundedBy->name }} @endif
+                                <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                    @if ($withdrawal->refundedBy)
+                                        @lang('admin::app.eu_withdrawal.view.timeline_refunded_desc', ['name' => $withdrawal->refundedBy->name])
+                                    @else
+                                        @lang('admin::app.eu_withdrawal.view.timeline_refunded_desc_system')
+                                    @endif
+                                </p>
+
+                                <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
+                                    {{ $withdrawal->refunded_at->format('d M Y, H:i T') }}
                                 </p>
 
                                 @if ($withdrawal->refund_note)
-                                    <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">{{ $withdrawal->refund_note }}</p>
+                                    <div class="mt-2 rounded-md border border-emerald-100 bg-emerald-50 p-2.5 dark:border-emerald-900/40 dark:bg-emerald-900/20">
+                                        <p class="text-xs font-medium uppercase tracking-wide text-emerald-700 dark:text-emerald-300">
+                                            @lang('admin::app.eu_withdrawal.view.timeline_refunded_note_label')
+                                        </p>
+
+                                        <p class="mt-1 text-sm text-emerald-900 dark:text-emerald-200">{{ $withdrawal->refund_note }}</p>
+                                    </div>
                                 @endif
                             </div>
                         @else
-                            <span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border border-gray-300 text-gray-400 icon-radio-unselect dark:border-gray-700"></span>
-                            
+                            {!! $timelineDot['pending'] !!}
+
                             <div class="flex-1">
                                 <p class="text-sm font-medium text-gray-800 dark:text-white">
                                     @lang('admin::app.eu_withdrawal.view.timeline_resolution')
                                 </p>
 
-                                <p class="text-xs text-gray-500 dark:text-gray-400">
-                                    @lang('admin::app.eu_withdrawal.view.timeline_resolution_pending')
+                                <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                    @lang('admin::app.eu_withdrawal.view.timeline_resolution_desc')
                                 </p>
                             </div>
                         @endif
                     </li>
+
+                    @if ($withdrawal->declined_at || $withdrawal->refunded_at)
+                        <li class="flex gap-3 border-t border-slate-200 px-4 py-3 dark:border-gray-800">
+                            @if ($withdrawal->final_confirmation_sent_at)
+                                {!! $timelineDot['done'] !!}
+                            @else
+                                {!! $timelineDot['pending'] !!}
+                            @endif
+
+                            <div class="flex-1">
+                                <p class="text-sm font-medium text-gray-800 dark:text-white">
+                                    @lang('admin::app.eu_withdrawal.view.timeline_final_email')
+                                </p>
+
+                                @if ($withdrawal->final_confirmation_sent_at)
+                                    <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                        @lang('admin::app.eu_withdrawal.view.timeline_final_email_desc_sent')
+                                    </p>
+
+                                    <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
+                                        {{ $withdrawal->final_confirmation_sent_at->format('d M Y, H:i T') }}
+                                    </p>
+                                @else
+                                    <p class="mt-0.5 text-xs text-gray-600 dark:text-gray-400">
+                                        @lang('admin::app.eu_withdrawal.view.timeline_final_email_desc_pending')
+                                    </p>
+                                @endif
+                            </div>
+                        </li>
+                    @endif
                 </ol>
             </div>
         </div>
@@ -375,4 +464,44 @@
             </div>
         </div>
     </div>
+
+    @pushOnce('scripts')
+        <script>
+            document.addEventListener('click', async function (event) {
+                const button = event.target.closest('[data-eu-clipboard]');
+
+                if (! button) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                const text = button.getAttribute('data-eu-clipboard');
+                const message = button.getAttribute('data-eu-clipboard-message') || 'Copied';
+
+                try {
+                    if (navigator.clipboard && window.isSecureContext) {
+                        await navigator.clipboard.writeText(text);
+                    } else {
+                        const ta = document.createElement('textarea');
+                        ta.value = text;
+                        ta.style.position = 'fixed';
+                        ta.style.opacity = '0';
+                        document.body.appendChild(ta);
+                        ta.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(ta);
+                    }
+
+                    const emitter = window?.app?.config?.globalProperties?.$emitter;
+
+                    if (emitter) {
+                        emitter.emit('add-flash', { type: 'success', message: message });
+                    }
+                } catch (err) {
+                    console.error('Copy failed:', err);
+                }
+            });
+        </script>
+    @endPushOnce
 </x-admin::layouts>

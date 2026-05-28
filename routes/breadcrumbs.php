@@ -125,9 +125,9 @@ Breadcrumbs::for('account.eu-withdrawal.create', function (BreadcrumbTrail $trai
     $trail->push(trans('shop::app.eu_withdrawal.form.heading'));
 });
 
-// Home > Orders > Withdrawal receipt
+// Home > Orders > Withdrawal Receipt
 Breadcrumbs::for('account.eu-withdrawal.show', function (BreadcrumbTrail $trail) {
     $trail->parent('orders');
 
-    $trail->push(trans('shop::app.eu_withdrawal.confirmation.heading'));
+    $trail->push(trans('shop::app.eu_withdrawal.confirmation.page_title'));
 });

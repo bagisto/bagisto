@@ -52,7 +52,7 @@ class Withdrawal extends Model implements WithdrawalContract
         'reason_text',
         'received_at',
         'confirmation_sent_at',
-        'confirmation_message_id',
+        'final_confirmation_sent_at',
         'confirmation_error',
         'status',
         'declined_at',
@@ -72,6 +72,7 @@ class Withdrawal extends Model implements WithdrawalContract
         'is_guest' => 'boolean',
         'received_at' => 'datetime',
         'confirmation_sent_at' => 'datetime',
+        'final_confirmation_sent_at' => 'datetime',
         'declined_at' => 'datetime',
         'refunded_at' => 'datetime',
     ];

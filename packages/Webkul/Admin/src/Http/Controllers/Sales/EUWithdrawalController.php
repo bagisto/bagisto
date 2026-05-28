@@ -123,13 +123,25 @@ class EUWithdrawalController extends Controller
         $previousLocale = app()->getLocale();
         app()->setLocale($withdrawal->locale);
 
+        $isTerminal = in_array($withdrawal->status, [WithdrawalStatus::REFUNDED, WithdrawalStatus::DECLINED], true);
+
         try {
             Mail::send(new WithdrawalConfirmation($withdrawal));
 
-            $withdrawal->update([
-                'confirmation_sent_at' => now(),
-                'confirmation_error' => null,
-            ]);
+            $updates = ['confirmation_error' => null];
+
+            if ($isTerminal) {
+                // Final status email recorded separately so the initial
+                // confirmation_sent_at — legal evidence of durable-medium
+                // delivery under Article 11a(3) — is preserved.
+                $updates['final_confirmation_sent_at'] = now();
+            } elseif ($withdrawal->confirmation_sent_at === null) {
+                // Recovery path: initial send failed earlier, this resend is
+                // the first successful durable-medium delivery.
+                $updates['confirmation_sent_at'] = now();
+            }
+
+            $withdrawal->update($updates);
 
             session()->flash('success', trans('admin::app.eu_withdrawal.flash.confirmation_resent'));
         } catch (\Throwable $e) {

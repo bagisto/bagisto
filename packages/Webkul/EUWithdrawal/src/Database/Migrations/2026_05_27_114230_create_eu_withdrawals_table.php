@@ -23,7 +23,7 @@ return new class extends Migration
             $table->text('reason_text')->nullable();
             $table->timestamp('received_at');
             $table->timestamp('confirmation_sent_at')->nullable();
-            $table->string('confirmation_message_id')->nullable();
+            $table->timestamp('final_confirmation_sent_at')->nullable();
             $table->string('confirmation_error', 500)->nullable();
             $table->string('status', 30)->default('received');
             $table->timestamp('declined_at')->nullable();
@@ -34,7 +34,7 @@ return new class extends Migration
             $table->string('refund_note', 500)->nullable();
             $table->timestamps();
 
-            $table->index('order_id');
+            $table->unique('order_id');
             $table->index('customer_id');
             $table->index(['channel_id', 'status']);
             $table->index('received_at');
