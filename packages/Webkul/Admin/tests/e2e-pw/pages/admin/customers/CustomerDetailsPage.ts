@@ -185,12 +185,14 @@ export class CustomerDetailsPage extends BasePage {
         await expect(this.page.getByText(note)).toBeVisible();
     }
 
-    async deleteAccount(): Promise<void> {
+    async deleteAccount(name: string): Promise<void> {
         await this.deleteAccountButton.click();
         await this.confirmAgreeButton.click();
+        await this.page.waitForLoadState("networkidle");
+        await this.visit("admin/customers");
         await expect(
-            this.page.getByText("Customer Deleted Successfully").first(),
-        ).toBeVisible();
+            this.page.getByText(name, { exact: true }),
+        ).not.toBeVisible();
     }
 
     async createOrder(): Promise<void> {
