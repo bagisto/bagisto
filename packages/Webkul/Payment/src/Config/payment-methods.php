@@ -11,7 +11,7 @@ return [
         'description' => 'Cash On Delivery',
         'active' => true,
         'generate_invoice' => false,
-        'sort' => 6,
+        'sort' => 7,
     ],
 
     'moneytransfer' => [
@@ -21,6 +21,6 @@ return [
         'description' => 'Money Transfer',
         'active' => true,
         'generate_invoice' => false,
-        'sort' => 7,
+        'sort' => 8,
     ],
 ];
