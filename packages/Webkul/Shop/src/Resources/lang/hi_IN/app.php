@@ -1758,17 +1758,17 @@ return [
 
     'eu_withdrawal' => [
         'button' => [
-            'withdraw' => 'Withdraw from contract',
+            'withdraw' => 'Withdraw from Contract',
             'view_existing' => 'View your withdrawal',
         ],
 
         'guest_dropdown' => [
-            'link' => 'Withdraw from a contract',
+            'link' => 'Withdraw from a Contract',
         ],
 
         'lookup' => [
-            'page_title' => 'Withdraw from a contract',
-            'heading' => 'Withdraw from your contract',
+            'page_title' => 'Withdraw from a Contract',
+            'heading' => 'Withdraw from Your Contract',
             'intro' => 'Enter the order number and the email address you used at checkout. We will send you a link to file your withdrawal.',
             'order_number' => 'Order number',
             'email' => 'Email address',
@@ -1779,7 +1779,7 @@ return [
 
         'form' => [
             'page_title' => 'Confirm your withdrawal',
-            'heading' => 'Confirm withdrawal from contract',
+            'heading' => 'Confirm Withdrawal from Contract',
             'legal_notice_title' => 'This is a legally binding declaration',
             'legal_effect' => 'By submitting this form you exercise your statutory right of withdrawal for order #:order_id. The declaration is legally effective the moment you submit it.',
             'order_summary' => 'Order',
