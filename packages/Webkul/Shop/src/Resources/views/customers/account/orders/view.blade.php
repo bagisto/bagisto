@@ -78,6 +78,8 @@
                 @endif
 
                 {!! view_render_event('bagisto.shop.customers.account.orders.cancel_button.after', ['order' => $order]) !!}
+
+                @include('shop::customers.account.eu-withdrawals.button', ['order' => $order])
             </div>
         </div>
 
@@ -528,6 +530,11 @@
                                         @lang('shop::app.customers.account.orders.view.cancel-btn-title')
                                     </a>
                                 @endif
+
+                                @include('shop::customers.account.eu-withdrawals.button', [
+                                    'order' => $order,
+                                    'variant' => 'mx-auto w-full py-3 text-sm font-medium text-navyBlue hover:bg-zinc-100 max-sm:py-2',
+                                ])
                             </div>
                         </div>
 

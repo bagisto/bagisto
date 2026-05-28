@@ -5724,4 +5724,109 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'EU Withdrawals',
+        ],
+
+        'acl' => [
+            'title' => 'EU Withdrawals',
+            'view' => 'View',
+            'decline' => 'Decline',
+            'mark_refunded' => 'Mark Refunded',
+            'resend_confirmation' => 'Resend Confirmation',
+        ],
+
+        'config' => [
+            'title' => 'EU Withdrawals',
+            'info' => 'Configuration for the EU withdrawal button (Directive (EU) 2023/2673, Article 11a CRD).',
+
+            'general' => [
+                'title' => 'General',
+                'info' => 'Master switch for the EU withdrawal button on this channel.',
+                'enabled' => 'Enable EU withdrawal button',
+                'enabled_info' => 'When enabled, customers on this channel see a "Withdraw from contract" button on order detail pages and a public /withdraw lookup form. Only enable on channels selling to EU consumers.',
+            ],
+
+            'notifications' => [
+                'title' => 'Notifications',
+                'info' => 'Email sender override for withdrawal confirmations.',
+                'sender_email' => 'Sender email',
+                'sender_email_info' => 'Optional. If empty, the global mail sender is used.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'EU Withdrawals',
+        ],
+
+        'view' => [
+            'title' => 'Withdrawal :uuid',
+            'heading' => 'Withdrawal',
+            'back' => 'Back to list',
+            'guest_badge' => 'Guest',
+
+            'evidence' => 'Evidence',
+            'evidence_note' => 'Immutable — captured at submission',
+            'status' => 'Status',
+            'received_at' => 'Received at',
+            'uuid' => 'Reference',
+            'order' => 'Order',
+            'customer_email' => 'Customer email',
+            'is_guest' => 'Guest',
+            'channel' => 'Channel',
+            'locale' => 'Locale',
+            'reason' => 'Customer’s reason',
+
+            'timeline' => 'Timeline',
+            'timeline_received' => 'Declaration received',
+            'timeline_email' => 'Confirmation email',
+            'timeline_email_pending' => 'Not yet sent',
+            'timeline_declined' => 'Declined by admin',
+            'timeline_refunded' => 'Marked refunded by admin',
+            'timeline_resolution' => 'Resolution',
+            'timeline_resolution_pending' => 'Awaiting admin action',
+
+            'confirmation_sent_at' => 'Confirmation sent at',
+            'confirmation_error' => 'Confirmation error',
+            'declined_at' => 'Declined at',
+            'refunded_at' => 'Refunded at',
+
+            'actions' => 'Actions',
+            'actions_note' => 'Refunds are processed manually via Bagisto’s existing order / refund / RMA tools. Use these actions to record the outcome on the withdrawal evidence.',
+            'resend_confirmation' => 'Resend confirmation email',
+            'mark_refunded' => 'Mark as refunded',
+            'refund_note_label' => 'Refund reference (optional)',
+            'refund_note_placeholder' => 'e.g. Refund #1234',
+            'decline' => 'Decline withdrawal',
+            'decline_reason_label' => 'Reason for declining',
+            'decline_reason_placeholder' => 'Explain why entitlement is contested',
+            'terminal_state_note' => 'This withdrawal is in a terminal state. No further actions are available; the evidence is preserved as-is.',
+        ],
+
+        'status' => [
+            'received' => 'Received',
+            'refunded' => 'Refunded',
+            'declined' => 'Declined',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'Received at',
+            'uuid' => 'Reference',
+            'order' => 'Order',
+            'customer_email' => 'Customer email',
+            'channel' => 'Channel',
+            'status' => 'Status',
+            'confirmation_sent_at' => 'Confirmation sent',
+            'view' => 'View',
+        ],
+
+        'flash' => [
+            'declined' => 'Withdrawal has been declined.',
+            'refunded' => 'Withdrawal has been marked as refunded.',
+            'confirmation_resent' => 'Confirmation email has been resent.',
+            'confirmation_failed' => 'Could not send the confirmation email. See the timeline for details.',
+        ],
+    ],
 ];
