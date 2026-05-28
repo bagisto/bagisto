@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'General',
                 'info' => 'Master switch for the EU withdrawal button on this channel.',
-                'enabled' => 'Enable EU withdrawal button',
+                'enabled' => 'Enable',
                 'enabled_info' => 'When enabled, customers on this channel see a "Withdraw from contract" button on order detail pages and a public /withdraw lookup form. Only enable on channels selling to EU consumers.',
             ],
         ],

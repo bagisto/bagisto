@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'Algemeen',
                 'info' => 'Hoofdschakelaar voor de EU-herroepingsknop in dit kanaal.',
-                'enabled' => 'EU-herroepingsknop inschakelen',
+                'enabled' => 'Inschakelen',
                 'enabled_info' => 'Wanneer ingeschakeld, zien klanten in dit kanaal een knop „Overeenkomst herroepen” op de orderdetailpagina’s en een openbaar zoekformulier op /withdraw. Schakel dit alleen in op kanalen die aan EU-consumenten verkopen.',
             ],
         ],

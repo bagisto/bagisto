@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'Général',
                 'info' => 'Interrupteur principal du bouton de rétractation UE pour ce canal.',
-                'enabled' => 'Activer le bouton de rétractation UE',
+                'enabled' => 'Activer',
                 'enabled_info' => 'Lorsqu’il est activé, les clients de ce canal voient un bouton « Se rétracter du contrat » sur les pages de détail de commande ainsi qu’un formulaire public de recherche /withdraw. Activez-le uniquement sur les canaux destinés aux consommateurs de l’UE.',
             ],
         ],

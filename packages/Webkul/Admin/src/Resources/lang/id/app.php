@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'Umum',
                 'info' => 'Sakelar utama untuk tombol penarikan diri UE di saluran ini.',
-                'enabled' => 'Aktifkan tombol penarikan diri UE',
+                'enabled' => 'Aktifkan',
                 'enabled_info' => 'Saat diaktifkan, pelanggan di saluran ini akan melihat tombol "Menarik Diri dari Kontrak" pada halaman detail pesanan dan formulir pencarian publik /withdraw. Aktifkan hanya pada saluran yang menjual kepada konsumen UE.',
             ],
         ],

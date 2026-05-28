@@ -27,10 +27,17 @@ class EUWithdrawalController extends Controller
     ) {}
 
     /**
-     * Render the public lookup form.
+     * Render the public lookup form. Returns 404 when the feature is
+     * disabled on the current channel — the page should not exist for
+     * channels that don't sell to EU consumers.
      */
     public function lookupForm(): View
     {
+        abort_unless(
+            (bool) core()->getConfigData('sales.eu_withdrawal.general.enabled', core()->getCurrentChannelCode()),
+            404
+        );
+
         return view('shop::eu-withdrawals.lookup');
     }
 
@@ -42,6 +49,11 @@ class EUWithdrawalController extends Controller
      */
     public function lookupSubmit(LookupGuestOrderRequest $request): RedirectResponse
     {
+        abort_unless(
+            (bool) core()->getConfigData('sales.eu_withdrawal.general.enabled', core()->getCurrentChannelCode()),
+            404
+        );
+
         $currentChannel = core()->getCurrentChannel();
 
         $order = $this->orders->getModel()

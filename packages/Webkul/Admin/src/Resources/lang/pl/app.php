@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'Ogólne',
                 'info' => 'Główny przełącznik przycisku odstąpienia od umowy w tym kanale.',
-                'enabled' => 'Włącz przycisk odstąpienia od umowy (UE)',
+                'enabled' => 'Włącz',
                 'enabled_info' => 'Po włączeniu klienci w tym kanale widzą przycisk „Odstąpić od umowy” na stronach szczegółów zamówienia oraz publiczny formularz wyszukiwania pod adresem /withdraw. Włączaj tylko w kanałach sprzedających konsumentom z UE.',
             ],
         ],

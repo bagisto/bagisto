@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'Allgemein',
                 'info' => 'Hauptschalter für die EU-Widerrufsschaltfläche in diesem Kanal.',
-                'enabled' => 'EU-Widerrufsschaltfläche aktivieren',
+                'enabled' => 'Aktivieren',
                 'enabled_info' => 'Wenn aktiviert, sehen Kunden in diesem Kanal eine Schaltfläche „Vom Vertrag zurücktreten“ auf den Bestelldetailseiten sowie ein öffentliches Suchformular unter /withdraw. Nur in Kanälen aktivieren, die an EU-Verbraucher verkaufen.',
             ],
         ],

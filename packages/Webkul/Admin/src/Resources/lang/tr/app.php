@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'Genel',
                 'info' => 'Bu kanaldaki AB cayma butonu için ana anahtar.',
-                'enabled' => 'AB cayma butonunu etkinleştir',
+                'enabled' => 'Etkinleştir',
                 'enabled_info' => 'Etkinleştirildiğinde, bu kanaldaki müşteriler sipariş detay sayfalarında "Sözleşmeden Cayma" butonunu ve herkese açık /withdraw arama formunu görür. Yalnızca AB tüketicilerine satış yapan kanallarda etkinleştirin.',
             ],
         ],

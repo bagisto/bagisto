@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'General',
                 'info' => 'Interruptor principal del botó de desistiment UE en aquest canal.',
-                'enabled' => 'Activar el botó de desistiment UE',
+                'enabled' => 'Activar',
                 'enabled_info' => 'Quan està activat, els clients d\'aquest canal veuen un botó «Desistir del contracte» a les pàgines de detall de la comanda i un formulari públic /withdraw. Activeu-lo només en canals que venguin a consumidors de la UE.',
             ],
         ],

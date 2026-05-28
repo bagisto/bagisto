@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'General',
                 'info' => 'Comutator principal pentru butonul de retragere UE pe acest canal.',
-                'enabled' => 'Activează butonul de retragere UE',
+                'enabled' => 'Activează',
                 'enabled_info' => 'Atunci când este activat, clienții de pe acest canal văd un buton „Retragere din contract” pe paginile de detaliu ale comenzii și un formular public /withdraw. Activați doar pe canalele care vând consumatorilor din UE.',
             ],
         ],

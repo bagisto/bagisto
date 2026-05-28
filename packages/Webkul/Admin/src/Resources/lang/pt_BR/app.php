@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'Geral',
                 'info' => 'Interruptor principal do botão de renúncia da UE neste canal.',
-                'enabled' => 'Ativar o botão de renúncia da UE',
+                'enabled' => 'Ativar',
                 'enabled_info' => 'Quando ativado, os clientes deste canal veem um botão «Renunciar ao contrato» nas páginas de detalhe do pedido e um formulário público de consulta em /withdraw. Ative-o apenas em canais que vendam a consumidores da UE.',
             ],
         ],

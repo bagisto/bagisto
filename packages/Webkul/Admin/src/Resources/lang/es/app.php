@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'General',
                 'info' => 'Interruptor principal del botón de desistimiento de la UE en este canal.',
-                'enabled' => 'Activar el botón de desistimiento de la UE',
+                'enabled' => 'Activar',
                 'enabled_info' => 'Cuando está activado, los clientes de este canal ven un botón «Desistir del contrato» en las páginas de detalle del pedido y un formulario público de búsqueda en /withdraw. Actívelo solo en canales que vendan a consumidores de la UE.',
             ],
         ],

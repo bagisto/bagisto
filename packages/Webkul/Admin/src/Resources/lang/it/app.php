@@ -5745,7 +5745,7 @@ return [
             'general' => [
                 'title' => 'Generale',
                 'info' => 'Interruttore principale del pulsante di recesso UE per questo canale.',
-                'enabled' => 'Abilita il pulsante di recesso UE',
+                'enabled' => 'Attiva',
                 'enabled_info' => 'Quando è abilitato, i clienti di questo canale vedono un pulsante «Recedere dal contratto» nelle pagine di dettaglio dell’ordine e un modulo pubblico di ricerca su /withdraw. Abilitare solo nei canali rivolti ai consumatori dell’UE.',
             ],
         ],
