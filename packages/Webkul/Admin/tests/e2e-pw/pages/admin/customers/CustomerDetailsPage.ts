@@ -188,8 +188,14 @@ export class CustomerDetailsPage extends BasePage {
     async deleteAccount(): Promise<void> {
         await this.deleteAccountButton.click();
         await this.confirmAgreeButton.click();
+        await this.page.waitForSelector("text=Customer Deleted Successfully", {
+            timeout: 3000,
+        });
+
         await expect(
-            this.page.getByText("Customer Deleted Successfully").first(),
+            this.page
+                .locator("#app")
+                .filter({ hasText: "Customer Deleted Successfully" }),
         ).toBeVisible();
     }
 
