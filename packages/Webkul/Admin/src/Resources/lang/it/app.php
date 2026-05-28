@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Abilita il pulsante di recesso UE',
                 'enabled_info' => 'Quando è abilitato, i clienti di questo canale vedono un pulsante «Recedere dal contratto» nelle pagine di dettaglio dell’ordine e un modulo pubblico di ricerca su /withdraw. Abilitare solo nei canali rivolti ai consumatori dell’UE.',
             ],
-
-            'notifications' => [
-                'title' => 'Notifiche',
-                'info' => 'Sostituzione del mittente e-mail per le conferme di recesso.',
-                'sender_email' => 'E-mail del mittente',
-                'sender_email_info' => 'Facoltativo. Se vuoto, viene utilizzato il mittente di posta globale.',
-            ],
         ],
 
         'index' => [

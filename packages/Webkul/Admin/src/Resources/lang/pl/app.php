@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Włącz przycisk odstąpienia od umowy (UE)',
                 'enabled_info' => 'Po włączeniu klienci w tym kanale widzą przycisk „Odstąpić od umowy” na stronach szczegółów zamówienia oraz publiczny formularz wyszukiwania pod adresem /withdraw. Włączaj tylko w kanałach sprzedających konsumentom z UE.',
             ],
-
-            'notifications' => [
-                'title' => 'Powiadomienia',
-                'info' => 'Nadpisanie nadawcy e-maili potwierdzających odstąpienie.',
-                'sender_email' => 'E-mail nadawcy',
-                'sender_email_info' => 'Opcjonalnie. Jeśli puste, używany jest globalny nadawca poczty.',
-            ],
         ],
 
         'index' => [

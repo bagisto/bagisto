@@ -3199,20 +3199,6 @@ return [
                 'default' => 0,
             ],
         ],
-    ], [
-        'key' => 'sales.eu_withdrawal.notifications',
-        'name' => 'admin::app.eu_withdrawal.config.notifications.title',
-        'info' => 'admin::app.eu_withdrawal.config.notifications.info',
-        'fields' => [
-            [
-                'name' => 'sender_email',
-                'title' => 'admin::app.eu_withdrawal.config.notifications.sender_email',
-                'info' => 'admin::app.eu_withdrawal.config.notifications.sender_email_info',
-                'type' => 'text',
-                'channel_based' => true,
-                'locale_based' => false,
-            ],
-        ],
     ],
 
     /**

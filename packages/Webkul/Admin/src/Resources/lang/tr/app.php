@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'AB cayma butonunu etkinleştir',
                 'enabled_info' => 'Etkinleştirildiğinde, bu kanaldaki müşteriler sipariş detay sayfalarında "Sözleşmeden Cayma" butonunu ve herkese açık /withdraw arama formunu görür. Yalnızca AB tüketicilerine satış yapan kanallarda etkinleştirin.',
             ],
-
-            'notifications' => [
-                'title' => 'Bildirimler',
-                'info' => 'Cayma onayları için e-posta gönderici geçersiz kılma.',
-                'sender_email' => 'Gönderici e-postası',
-                'sender_email_info' => 'İsteğe bağlı. Boş bırakılırsa, genel posta göndericisi kullanılır.',
-            ],
         ],
 
         'index' => [

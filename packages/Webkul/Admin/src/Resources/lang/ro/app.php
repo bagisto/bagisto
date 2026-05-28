@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Activează butonul de retragere UE',
                 'enabled_info' => 'Atunci când este activat, clienții de pe acest canal văd un buton „Retragere din contract” pe paginile de detaliu ale comenzii și un formular public /withdraw. Activați doar pe canalele care vând consumatorilor din UE.',
             ],
-
-            'notifications' => [
-                'title' => 'Notificări',
-                'info' => 'Suprascrierea expeditorului de e-mail pentru confirmările de retragere.',
-                'sender_email' => 'E-mailul expeditorului',
-                'sender_email_info' => 'Opțional. Dacă este gol, se folosește expeditorul global de e-mail.',
-            ],
         ],
 
         'index' => [

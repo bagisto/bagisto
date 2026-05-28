@@ -23,7 +23,7 @@ class WithdrawalConfirmation extends Mailable
      */
     public function envelope(): Envelope
     {
-        $sender = $this->resolveSender();
+        $sender = core()->getSenderEmailDetails();
 
         return new Envelope(
             from: new Address($sender['email'], $sender['name']),
@@ -43,27 +43,5 @@ class WithdrawalConfirmation extends Mailable
             view: 'shop::emails.customers.eu-withdrawal.confirmation',
             with: ['withdrawal' => $this->withdrawal],
         );
-    }
-
-    /**
-     * Resolve the sender address — channel override falling back to the
-     * global Bagisto sender configuration.
-     *
-     * @return array{email: string, name: string}
-     */
-    protected function resolveSender(): array
-    {
-        $channelCode = $this->withdrawal->channel->code ?? null;
-
-        $email = core()->getConfigData('sales.eu_withdrawal.notifications.sender_email', $channelCode);
-
-        if (empty($email)) {
-            return core()->getSenderEmailDetails();
-        }
-
-        return [
-            'email' => $email,
-            'name' => core()->getSenderEmailDetails()['name'],
-        ];
     }
 }

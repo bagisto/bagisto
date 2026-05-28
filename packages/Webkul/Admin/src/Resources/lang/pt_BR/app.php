@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Ativar o botão de renúncia da UE',
                 'enabled_info' => 'Quando ativado, os clientes deste canal veem um botão «Renunciar ao contrato» nas páginas de detalhe do pedido e um formulário público de consulta em /withdraw. Ative-o apenas em canais que vendam a consumidores da UE.',
             ],
-
-            'notifications' => [
-                'title' => 'Notificações',
-                'info' => 'Substituição do remetente de e-mail para as confirmações de renúncia.',
-                'sender_email' => 'E-mail do remetente',
-                'sender_email_info' => 'Opcional. Se deixado em branco, é utilizado o remetente global de e-mail.',
-            ],
         ],
 
         'index' => [

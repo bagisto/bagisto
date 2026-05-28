@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Activer le bouton de rétractation UE',
                 'enabled_info' => 'Lorsqu’il est activé, les clients de ce canal voient un bouton « Se rétracter du contrat » sur les pages de détail de commande ainsi qu’un formulaire public de recherche /withdraw. Activez-le uniquement sur les canaux destinés aux consommateurs de l’UE.',
             ],
-
-            'notifications' => [
-                'title' => 'Notifications',
-                'info' => 'Remplacement de l’expéditeur des e-mails de confirmation de rétractation.',
-                'sender_email' => 'E-mail de l’expéditeur',
-                'sender_email_info' => 'Facultatif. Si laissé vide, l’expéditeur global est utilisé.',
-            ],
         ],
 
         'index' => [

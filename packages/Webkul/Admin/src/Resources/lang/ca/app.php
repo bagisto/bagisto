@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Activar el botó de desistiment UE',
                 'enabled_info' => 'Quan està activat, els clients d\'aquest canal veuen un botó «Desistir del contracte» a les pàgines de detall de la comanda i un formulari públic /withdraw. Activeu-lo només en canals que venguin a consumidors de la UE.',
             ],
-
-            'notifications' => [
-                'title' => 'Notificacions',
-                'info' => 'Substitució del remitent del correu per a les confirmacions de desistiment.',
-                'sender_email' => 'Correu del remitent',
-                'sender_email_info' => 'Opcional. Si es deixa buit, s\'utilitza el remitent global de correu.',
-            ],
         ],
 
         'index' => [

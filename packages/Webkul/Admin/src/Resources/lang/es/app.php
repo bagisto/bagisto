@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Activar el botón de desistimiento de la UE',
                 'enabled_info' => 'Cuando está activado, los clientes de este canal ven un botón «Desistir del contrato» en las páginas de detalle del pedido y un formulario público de búsqueda en /withdraw. Actívelo solo en canales que vendan a consumidores de la UE.',
             ],
-
-            'notifications' => [
-                'title' => 'Notificaciones',
-                'info' => 'Sustitución del remitente del correo para las confirmaciones de desistimiento.',
-                'sender_email' => 'Correo del remitente',
-                'sender_email_info' => 'Opcional. Si se deja vacío, se utiliza el remitente global de correo.',
-            ],
         ],
 
         'index' => [

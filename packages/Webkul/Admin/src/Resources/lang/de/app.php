@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'EU-Widerrufsschaltfläche aktivieren',
                 'enabled_info' => 'Wenn aktiviert, sehen Kunden in diesem Kanal eine Schaltfläche „Vom Vertrag zurücktreten“ auf den Bestelldetailseiten sowie ein öffentliches Suchformular unter /withdraw. Nur in Kanälen aktivieren, die an EU-Verbraucher verkaufen.',
             ],
-
-            'notifications' => [
-                'title' => 'Benachrichtigungen',
-                'info' => 'Überschreiben des E-Mail-Absenders für Widerrufsbestätigungen.',
-                'sender_email' => 'Absender-E-Mail',
-                'sender_email_info' => 'Optional. Wenn leer, wird der globale E-Mail-Absender verwendet.',
-            ],
         ],
 
         'index' => [

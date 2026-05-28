@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Aktifkan tombol penarikan diri UE',
                 'enabled_info' => 'Saat diaktifkan, pelanggan di saluran ini akan melihat tombol "Menarik Diri dari Kontrak" pada halaman detail pesanan dan formulir pencarian publik /withdraw. Aktifkan hanya pada saluran yang menjual kepada konsumen UE.',
             ],
-
-            'notifications' => [
-                'title' => 'Notifikasi',
-                'info' => 'Penggantian pengirim email untuk konfirmasi penarikan diri.',
-                'sender_email' => 'Email pengirim',
-                'sender_email_info' => 'Opsional. Jika kosong, pengirim email global akan digunakan.',
-            ],
         ],
 
         'index' => [

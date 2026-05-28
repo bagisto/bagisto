@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'EU-herroepingsknop inschakelen',
                 'enabled_info' => 'Wanneer ingeschakeld, zien klanten in dit kanaal een knop „Overeenkomst herroepen” op de orderdetailpagina’s en een openbaar zoekformulier op /withdraw. Schakel dit alleen in op kanalen die aan EU-consumenten verkopen.',
             ],
-
-            'notifications' => [
-                'title' => 'Meldingen',
-                'info' => 'Overschrijven van de e-mailafzender voor herroepingsbevestigingen.',
-                'sender_email' => 'Afzender-e-mailadres',
-                'sender_email_info' => 'Optioneel. Indien leeg wordt de algemene mailafzender gebruikt.',
-            ],
         ],
 
         'index' => [

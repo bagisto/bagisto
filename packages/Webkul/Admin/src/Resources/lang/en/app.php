@@ -5748,13 +5748,6 @@ return [
                 'enabled' => 'Enable EU withdrawal button',
                 'enabled_info' => 'When enabled, customers on this channel see a "Withdraw from contract" button on order detail pages and a public /withdraw lookup form. Only enable on channels selling to EU consumers.',
             ],
-
-            'notifications' => [
-                'title' => 'Notifications',
-                'info' => 'Email sender override for withdrawal confirmations.',
-                'sender_email' => 'Sender email',
-                'sender_email_info' => 'Optional. If empty, the global mail sender is used.',
-            ],
         ],
 
         'index' => [
