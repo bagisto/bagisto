@@ -22,25 +22,32 @@
                 v-show="isOpen"
             >
                 <!-- Close -->
-                <span
-                    class="icon-cancel absolute top-3 z-[1000] cursor-pointer text-3xl ltr:right-3 rtl:left-3"
+                <button
+                    type="button"
+                    ref="closeButton"
+                    class="icon-cancel absolute top-3 z-[1000] cursor-pointer text-3xl ltr:right-3 rtl:left-3 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none rounded bg-transparent border-0"
+                    aria-label="Close gallery"
                     @click="toggle"
                 >
-                </span>
+                </button>
 
-                <span
-                    class="icon-arrow-left fixed left-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
+                <button
+                    type="button"
+                    class="icon-arrow-left fixed left-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none border-0"
                     v-if="attachments.length >= 2"
+                    aria-label="@lang('shop::app.components.carousel.previous')"
                     @click="navigate(currentIndex -= 1)"
                 >
-                </span>
+                </button>
 
-                <span
-                    class="icon-arrow-right fixed right-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
+                <button
+                    type="button"
+                    class="icon-arrow-right fixed right-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none border-0"
                     v-if="attachments.length >= 2"
+                    aria-label="@lang('shop::app.components.carousel.next')"
                     @click="navigate(currentIndex += 1)"
                 >
-                </span>
+                </button>
                     
                 <!-- Main Image -->
                 <div 
@@ -107,27 +114,39 @@
                 <!-- Thumbnails -->
                 <div class="mb-4 flex justify-center gap-x-2">
                     <template v-for="(attachment, index) in attachments">
-                        <img
-                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:!border-navyBlue"
+                        <button
+                            type="button"
+                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent overflow-hidden transition-transform hover:!border-navyBlue focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none bg-transparent p-0"
                             :class="{
                                 '!border-navyBlue': currentIndex === index + 1,
                             }"
-                            :src="attachment.url"
-                            :key="index"
+                            :key="'thumb-' + index"
                             v-if="attachment.type === 'image'"
+                            :aria-label="`View image ${index + 1}`"
                             @click="navigate(currentIndex = index + 1)"
-                        />
+                        >
+                            <img
+                                class="h-full w-full object-cover"
+                                :src="attachment.url"
+                            />
+                        </button>
 
-                        <video
-                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:!border-navyBlue"
+                        <button
+                            type="button"
+                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent overflow-hidden transition-transform hover:!border-navyBlue focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none bg-transparent p-0"
                             :class="{
                                 '!border-navyBlue': currentIndex === index + 1,
                             }"
-                            :src="attachment.url"
-                            :key="index"
+                            :key="'thumb-' + index"
                             v-if="attachment.type === 'video'"
+                            :aria-label="`View video ${index + 1}`"
                             @click="navigate(currentIndex = index + 1)"
-                        />
+                        >
+                            <video
+                                class="h-full w-full object-cover"
+                                :src="attachment.url"
+                            ></video>
+                        </button>
                     </template>
                 </div>
             </div>
@@ -168,6 +187,21 @@
 
                     this.toggle();
                 },
+
+                isOpen(newVal) {
+                    if (newVal) {
+                        window.addEventListener('keydown', this.handleKeyDown);
+                        this.lastActiveElement = document.activeElement;
+                        this.$nextTick(() => {
+                            this.$refs.closeButton?.focus();
+                        });
+                    } else {
+                        window.removeEventListener('keydown', this.handleKeyDown);
+                        if (this.lastActiveElement) {
+                            this.lastActiveElement.focus();
+                        }
+                    }
+                }
             },
         
             data() {
@@ -191,7 +225,13 @@
                     isMouseMoveTriggered: false,
 
                     isMouseDownTriggered: false,
+
+                    lastActiveElement: null,
                 };
+            },
+
+            beforeDestroy() {
+                window.removeEventListener('keydown', this.handleKeyDown);
             },
 
             methods: {
@@ -199,6 +239,12 @@
                     this.isOpen = ! this.isOpen;
 
                     document.body.style.overflow = this.isOpen ? 'hidden' : '';
+                },
+
+                handleKeyDown(e) {
+                    if (e.key === 'Escape' && this.isOpen) {
+                        this.toggle();
+                    }
                 },
 
                 open() {
