@@ -70,6 +70,7 @@
 
                 <input
                     type="text"
+                    id="organic-search"
                     name="query"
                     value="{{ request('query') }}"
                     class="block w-full py-3 text-xs font-medium text-gray-900 transition-all border border-transparent rounded-lg bg-zinc-100 px-11 hover:border-gray-400 focus:border-gray-400"
@@ -131,12 +132,11 @@
             <!-- user profile -->
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
-                    <span
+                    <button
+                        type="button"
                         class="inline-block text-2xl cursor-pointer icon-users"
-                        role="button"
                         aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.profile')"
-                        tabindex="0"
-                    ></span>
+                    ></button>
                 </x-slot>
 
                 <!-- Guest Dropdown -->
