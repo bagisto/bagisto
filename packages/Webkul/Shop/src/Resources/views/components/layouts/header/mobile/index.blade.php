@@ -66,8 +66,12 @@
                 <div class="max-md:hidden">
                     <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                         <x-slot:toggle>
-                            <span class="text-2xl cursor-pointer icon-users"></span>
-                            </x-slot>
+                            <button
+                                type="button"
+                                class="inline-block text-2xl cursor-pointer icon-users"
+                                aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
+                            ></button>
+                        </x-slot>
 
                             <!-- Guest Dropdown -->
                             @guest('customer')
