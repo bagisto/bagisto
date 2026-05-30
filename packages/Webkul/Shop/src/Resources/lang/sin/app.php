@@ -898,6 +898,7 @@ return [
                 'translate' => 'සිංහලයට පරිවර්තකයක්',
                 'translating' => 'පරිවර්තක කිරීමට...',
                 'write-a-review' => 'අදහස ලියන්න',
+                'stars' => 'තරු',
             ],
 
             'contact-us' => [

@@ -898,6 +898,7 @@ return [
                 'translate' => 'ترجمة',
                 'translating' => 'جار الترجمة...',
                 'write-a-review' => 'كتابة مراجعة',
+                'stars' => 'نجوم',
             ],
 
             'contact-us' => [

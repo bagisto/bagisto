@@ -898,6 +898,7 @@ return [
                 'translate' => '翻訳',
                 'translating' => '翻訳中...',
                 'write-a-review' => 'レビューを書く',
+                'stars' => '星',
             ],
 
             'contact-us' => [

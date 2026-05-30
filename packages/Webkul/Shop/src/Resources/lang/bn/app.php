@@ -898,6 +898,7 @@ return [
                 'translate' => 'অনুবাদ',
                 'translating' => 'অনুবাদ হচ্ছে...',
                 'write-a-review' => 'রিভিউ লিখুন',
+                'stars' => 'তারকা',
             ],
 
             'contact-us' => [
