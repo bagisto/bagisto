@@ -51,19 +51,19 @@
                                     name="payment[method]" 
                                     :value="payment.payment"
                                     :id="payment.method"
-                                    class="peer hidden"
+                                    class="peer sr-only"
                                     @change="store(payment)"
                                 >
     
                                 <label 
                                     :for="payment.method" 
-                                    class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5"
+                                    class="icon-radio-unselect peer-checked:icon-radio-select absolute top-5 cursor-pointer text-2xl text-navyBlue ltr:right-5 rtl:left-5 peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded"
                                 >
                                 </label>
 
                                 <label 
                                     :for="payment.method" 
-                                    class="block w-[190px] cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:w-full max-md:gap-5 max-md:rounded-lg max-sm:gap-4 max-sm:px-4 max-sm:py-2.5"
+                                    class="block w-[190px] cursor-pointer rounded-xl border border-zinc-200 p-5 max-md:flex max-md:w-full max-md:gap-5 max-md:rounded-lg max-sm:gap-4 max-sm:px-4 max-sm:py-2.5 peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:border-navyBlue"
                                 >
                                     {!! view_render_event('bagisto.shop.checkout.onepage.payment-method.image.before') !!}
 
