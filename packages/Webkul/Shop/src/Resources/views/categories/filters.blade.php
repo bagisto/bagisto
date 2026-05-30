@@ -216,30 +216,22 @@
                                 <div class="flex select-none items-center gap-x-4 rounded hover:bg-gray-100 max-sm:gap-x-1 max-sm:!p-0 ltr:pl-2 rtl:pr-2">
                                     <input
                                         type="checkbox"
-                                        :id="`filter_${filter.id}_option_ ${option.id}`"
-                                        class="peer hidden"
+                                        :id="`filter_${filter.id}_option_${option.id}`"
+                                        class="peer sr-only"
                                         :value="option.id"
                                         v-model="appliedValues"
                                         @change="applyValue"
                                     />
 
                                     <label
-                                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl"
-                                        role="checkbox"
-                                        aria-checked="false"
-                                        :aria-label="option.name"
-                                        :aria-labelledby="'label_option_' + option.id"
-                                        tabindex="0"
-                                        :for="`filter_${filter.id}_option_ ${option.id}`"
+                                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue max-sm:text-xl peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded"
+                                        :for="`filter_${filter.id}_option_${option.id}`"
                                     >
                                     </label>
 
                                     <label
                                         class="w-full cursor-pointer p-2 text-base text-gray-900 max-sm:p-1 max-sm:text-sm ltr:pl-0 rtl:pr-0"
-                                        :id="'label_option_' + option.id"
-                                        :for="`filter_${filter.id}_option_ ${option.id}`"
-                                        role="button"
-                                        tabindex="0"
+                                        :for="`filter_${filter.id}_option_${option.id}`"
                                     >
                                         @{{ option.name }}
                                     </label>
