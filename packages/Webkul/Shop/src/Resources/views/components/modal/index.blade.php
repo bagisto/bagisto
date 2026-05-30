@@ -17,11 +17,13 @@
             <div {{ $header->attributes->merge(['class' => 'flex items-center justify-between gap-5 border-b border-zinc-200 bg-white p-8 max-sm:px-4 max-sm:py-3']) }}>
                 {{ $header }}
 
-                <span
-                    class="icon-cancel cursor-pointer text-3xl max-sm:text-2xl"
+                <button
+                    type="button"
+                    class="icon-cancel cursor-pointer text-3xl max-sm:text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none rounded bg-transparent border-0"
+                    aria-label="Close modal"
                     @click="toggle"
                 >
-                </span>
+                </button>
             </div>
         </template>
     @endisset
