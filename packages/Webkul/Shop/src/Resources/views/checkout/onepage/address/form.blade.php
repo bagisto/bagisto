@@ -14,7 +14,7 @@
 
             <!-- Company Name -->
             <x-shop::form.control-group>
-                <x-shop::form.control-group.label>
+                <x-shop::form.control-group.label ::for="controlName + '_company_name'">
                     @lang('shop::app.checkout.onepage.address.company-name')
                 </x-shop::form.control-group.label>
 
@@ -23,6 +23,7 @@
                     ::name="controlName + '.company_name'"
                     ::value="address.company_name"
                     :placeholder="trans('shop::app.checkout.onepage.address.company-name')"
+                    ::id="controlName + '_company_name'"
                 />
             </x-shop::form.control-group>
 
@@ -31,7 +32,7 @@
             <!-- First Name -->
             <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="required !mt-0">
+                    <x-shop::form.control-group.label class="required !mt-0" ::for="controlName + '_first_name'">
                         @lang('shop::app.checkout.onepage.address.first-name')
                     </x-shop::form.control-group.label>
 
@@ -42,6 +43,7 @@
                         rules="required"
                         :label="trans('shop::app.checkout.onepage.address.first-name')"
                         :placeholder="trans('shop::app.checkout.onepage.address.first-name')"
+                        ::id="controlName + '_first_name'"
                     />
 
                     <x-shop::form.control-group.error ::name="controlName + '.first_name'" />
@@ -51,7 +53,7 @@
 
                 <!-- Last Name -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="required !mt-0">
+                    <x-shop::form.control-group.label class="required !mt-0" ::for="controlName + '_last_name'">
                         @lang('shop::app.checkout.onepage.address.last-name')
                     </x-shop::form.control-group.label>
 
@@ -62,6 +64,7 @@
                         rules="required"
                         :label="trans('shop::app.checkout.onepage.address.last-name')"
                         :placeholder="trans('shop::app.checkout.onepage.address.last-name')"
+                        ::id="controlName + '_last_name'"
                     />
 
                     <x-shop::form.control-group.error ::name="controlName + '.last_name'" />
@@ -72,7 +75,7 @@
 
             <!-- Email -->
             <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="required !mt-0">
+                <x-shop::form.control-group.label class="required !mt-0" ::for="controlName + '_email'">
                     @lang('shop::app.checkout.onepage.address.email')
                 </x-shop::form.control-group.label>
 
@@ -83,6 +86,7 @@
                     rules="required|email"
                     :label="trans('shop::app.checkout.onepage.address.email')"
                     placeholder="email@example.com"
+                    ::id="controlName + '_email'"
                 />
 
                 <x-shop::form.control-group.error ::name="controlName + '.email'" />
@@ -93,7 +97,7 @@
             <!-- Vat ID -->
             <template v-if="controlName=='billing'">
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label>
+                    <x-shop::form.control-group.label ::for="controlName + '_vat_id'">
                         @lang('shop::app.checkout.onepage.address.vat-id')
                     </x-shop::form.control-group.label>
 
@@ -103,6 +107,7 @@
                         ::value="address.vat_id"
                         :label="trans('shop::app.checkout.onepage.address.vat-id')"
                         :placeholder="trans('shop::app.checkout.onepage.address.vat-id')"
+                        ::id="controlName + '_vat_id'"
                     />
 
                     <x-shop::form.control-group.error ::name="controlName + '.vat_id'" />
@@ -113,7 +118,7 @@
 
             <!-- Street Address -->
             <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="required !mt-0">
+                <x-shop::form.control-group.label class="required !mt-0" ::for="controlName + '_address_0'">
                     @lang('shop::app.checkout.onepage.address.street-address')
                 </x-shop::form.control-group.label>
 
@@ -124,6 +129,7 @@
                     rules="required|address"
                     :label="trans('shop::app.checkout.onepage.address.street-address')"
                     :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
+                    ::id="controlName + '_address_0'"
                 />
 
                 <x-shop::form.control-group.error
@@ -139,6 +145,7 @@
                             rules="address"
                             :label="trans('shop::app.checkout.onepage.address.street-address')"
                             :placeholder="trans('shop::app.checkout.onepage.address.street-address')"
+                            ::id="controlName + '_address_{{ $i }}'"
                         />
 
                         <x-shop::form.control-group.error
@@ -154,7 +161,7 @@
             <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
                 <!-- Country -->
                 <x-shop::form.control-group class="!mb-4">
-                    <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0">
+                    <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }} !mt-0" ::for="controlName + '_country'">
                         @lang('shop::app.checkout.onepage.address.country')
                     </x-shop::form.control-group.label>
 
@@ -166,6 +173,7 @@
                         rules="{{ core()->isCountryRequired() ? 'required' : '' }}"
                         :label="trans('shop::app.checkout.onepage.address.country')"
                         :placeholder="trans('shop::app.checkout.onepage.address.country')"
+                        ::id="controlName + '_country'"
                     >
                         <option value="">
                             @lang('shop::app.checkout.onepage.address.select-country')
@@ -186,7 +194,7 @@
 
                 <!-- State -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0">
+                    <x-shop::form.control-group.label class="{{ core()->isStateRequired() ? 'required' : '' }} !mt-0" ::for="controlName + '_state'">
                         @lang('shop::app.checkout.onepage.address.state')
                     </x-shop::form.control-group.label>
 
@@ -199,6 +207,7 @@
                                 ::value="address.state"
                                 :label="trans('shop::app.checkout.onepage.address.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.address.state')"
+                                ::id="controlName + '_state'"
                             >
                                 <option value="">
                                     @lang('shop::app.checkout.onepage.address.select-state')
@@ -221,6 +230,7 @@
                                 rules="{{ core()->isStateRequired() ? 'required' : '' }}"
                                 :label="trans('shop::app.checkout.onepage.address.state')"
                                 :placeholder="trans('shop::app.checkout.onepage.address.state')"
+                                ::id="controlName + '_state'"
                             />
                         </template>
                     </template>
@@ -234,7 +244,7 @@
             <div class="grid grid-cols-2 gap-x-5 max-md:grid-cols-1">
                 <!-- City -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="required !mt-0">
+                    <x-shop::form.control-group.label class="required !mt-0" ::for="controlName + '_city'">
                         @lang('shop::app.checkout.onepage.address.city')
                     </x-shop::form.control-group.label>
 
@@ -245,6 +255,7 @@
                         rules="required"
                         :label="trans('shop::app.checkout.onepage.address.city')"
                         :placeholder="trans('shop::app.checkout.onepage.address.city')"
+                        ::id="controlName + '_city'"
                     />
 
                     <x-shop::form.control-group.error ::name="controlName + '.city'" />
@@ -254,7 +265,7 @@
 
                 <!-- Postcode -->
                 <x-shop::form.control-group>
-                    <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0">
+                    <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }} !mt-0" ::for="controlName + '_postcode'">
                         @lang('shop::app.checkout.onepage.address.postcode')
                     </x-shop::form.control-group.label>
 
@@ -265,6 +276,7 @@
                         rules="{{ core()->isPostCodeRequired() ? 'required' : '' }}|postcode"
                         :label="trans('shop::app.checkout.onepage.address.postcode')"
                         :placeholder="trans('shop::app.checkout.onepage.address.postcode')"
+                        ::id="controlName + '_postcode'"
                     />
 
                     <x-shop::form.control-group.error ::name="controlName + '.postcode'" />
@@ -275,7 +287,7 @@
 
             <!-- Phone Number -->
             <x-shop::form.control-group>
-                <x-shop::form.control-group.label class="required !mt-0">
+                <x-shop::form.control-group.label class="required !mt-0" ::for="controlName + '_phone'">
                     @lang('shop::app.checkout.onepage.address.telephone')
                 </x-shop::form.control-group.label>
 
@@ -286,6 +298,7 @@
                     rules="required|phone"
                     :label="trans('shop::app.checkout.onepage.address.telephone')"
                     :placeholder="trans('shop::app.checkout.onepage.address.telephone')"
+                    ::id="controlName + '_phone'"
                 />
 
                 <x-shop::form.control-group.error ::name="controlName + '.phone'" />
