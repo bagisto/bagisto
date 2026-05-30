@@ -62,10 +62,9 @@
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
-                    <div
+                    <button
+                        type="button"
                         class="flex cursor-pointer gap-2.5 py-3"
-                        role="button"
-                        tabindex="0"
                         @click="currencyToggler = ! currencyToggler"
                     >
                         <span v-pre>
@@ -78,7 +77,7 @@
                             role="presentation"
                         >
                         </span>
-                    </div>
+                    </button>
                 </x-slot>
 
                 <!-- Dropdown Content -->
@@ -110,10 +109,9 @@
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <!-- Dropdown Toggler -->
-                    <div
+                    <button
+                        type="button"
                         class="flex cursor-pointer items-center gap-2.5 py-3"
-                        role="button"
-                        tabindex="0"
                         @click="localeToggler = ! localeToggler"
                     >
                         <img
@@ -136,7 +134,7 @@
                             :class="{'icon-arrow-up': localeToggler, 'icon-arrow-down': ! localeToggler}"
                             role="presentation"
                         ></span>
-                    </div>
+                    </button>
                 </x-slot>
             
                 <!-- Dropdown Content -->

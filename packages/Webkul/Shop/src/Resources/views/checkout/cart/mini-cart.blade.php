@@ -1,10 +1,10 @@
 <!-- Mini Cart Vue Component -->
 <v-mini-cart>
-    <span
+    <button
+        type="button"
         class="icon-cart cursor-pointer text-2xl"
-        role="button"
         aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
-    ></span>
+    ></button>
 </v-mini-cart>
 
 @pushOnce('scripts')
@@ -21,13 +21,12 @@
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.before') !!}
 
                     <span class="relative">
-                        <span
+                        <button
+                            type="button"
                             class="icon-cart cursor-pointer text-2xl"
-                            role="button"
                             aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
-                            tabindex="0"
                             @click="getCart"
-                        ></span>
+                        ></button>
 
                         @if (core()->getConfigData('sales.checkout.my_cart.summary') == 'display_item_quantity')
                             <span
@@ -356,12 +355,11 @@
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.before') !!}
 
                     <span class="relative">
-                        <span
+                        <button
+                            type="button"
                             class="icon-cart cursor-pointer text-2xl"
-                            role="button"
                             aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
-                            tabindex="0"
-                        ></span>
+                        ></button>
 
                         <span
                             class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
