@@ -118,20 +118,16 @@
 
             <!-- Pagination -->
             <div class="absolute bottom-5 left-0 flex w-full justify-center max-md:bottom-3.5 max-sm:bottom-2.5">
-                <div
+                <button
+                    type="button"
                     v-for="(image, index) in images"
                     :key="index"
-                    class="sm:p-2.5 mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5
-                    p-2 focus:outline-none"
+                    class="sm:p-2.5 mx-1 h-3 w-3 cursor-pointer rounded-full max-md:h-2 max-md:w-2 max-sm:h-1.5 max-sm:w-1.5 p-2 transition-all duration-300 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none"
                     :class="{ 'bg-navyBlue': index === Math.abs(currentIndex), 'opacity-30 bg-gray-500': index !== Math.abs(currentIndex) }"
-                    role="button"
-                    tabindex="0"
                     :aria-label="'Go to slide ' + (index + 1)"
                     @click="navigateByPagination(index)"
-                    @keydown.enter="navigateByPagination(index)"
-                    @keydown.space.prevent="navigateByPagination(index)"
                 >
-                </div>
+                </button>
             </div>
         </div>
     </script>
