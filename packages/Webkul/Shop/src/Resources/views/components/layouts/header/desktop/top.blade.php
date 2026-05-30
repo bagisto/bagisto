@@ -95,9 +95,8 @@
                 {{ core()->getConfigData('general.content.header_offer.title') }}
                 
                 <a 
-                    href="{{ core()->getConfigData('general.content.header_offer.redirection_link') }}" 
+                    href="{{ core()->getConfigData('general.content.header_offer.redirection_link') ?: route('shop.home.index') }}" 
                     class="underline"
-                    role="button"
                 >
                     {{ core()->getConfigData('general.content.header_offer.redirection_title') }}
                 </a>
