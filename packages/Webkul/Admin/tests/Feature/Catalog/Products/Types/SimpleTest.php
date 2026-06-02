@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Customer\Models\CustomerGroup;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
@@ -108,6 +109,44 @@ it('should fail the validation with errors if certain data is not provided corre
         ->assertJsonValidationErrorFor('guest_checkout')
         ->assertJsonValidationErrorFor('new')
         ->assertJsonValidationErrorFor('featured')
+        ->assertUnprocessable();
+});
+
+it('should fail the validation when duplicate customer group prices are provided in simple product', function () {
+    // Arrange.
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    $customerGroup = CustomerGroup::factory()->create();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    putJson(route('admin.catalog.products.update', $product->id), [
+        'sku' => $product->sku,
+        'url_key' => $product->url_key,
+        'short_description' => fake()->sentence(),
+        'description' => fake()->paragraph(),
+        'name' => fake()->words(3, true),
+        'price' => fake()->randomFloat(2, 1, 1000),
+        'weight' => fake()->numberBetween(0, 100),
+        'channel' => core()->getCurrentChannelCode(),
+        'locale' => app()->getLocale(),
+        'customer_group_prices' => [
+            'price_0' => [
+                'customer_group_id' => $customerGroup->id,
+                'qty' => 1,
+                'value_type' => 'discount',
+                'value' => 10,
+            ],
+            'price_1' => [
+                'customer_group_id' => $customerGroup->id,
+                'qty' => 1,
+                'value_type' => 'discount',
+                'value' => 15,
+            ],
+        ],
+    ])
+        ->assertJsonValidationErrorFor('customer_group_prices.price_1.customer_group_id')
         ->assertUnprocessable();
 });
 

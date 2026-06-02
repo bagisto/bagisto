@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Requests;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Validator;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Rules\Decimal;
@@ -182,6 +183,60 @@ class ProductForm extends FormRequest
             'videos.files.*' => 'video',
             'variants.*.sku' => 'sku',
         ];
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @return void
+     */
+    public function withValidator(Validator $validator)
+    {
+        $validator->after(function (Validator $validator) {
+            $this->validateCustomerGroupPriceUniqueness($validator);
+        });
+    }
+
+    /**
+     * Validate unique customer group price rows.
+     *
+     * @return void
+     */
+    protected function validateCustomerGroupPriceUniqueness(Validator $validator)
+    {
+        $customerGroupPrices = $this->input('customer_group_prices', []);
+
+        if (! is_array($customerGroupPrices)) {
+            return;
+        }
+
+        $uniqueCustomerGroupPrices = [];
+
+        foreach ($customerGroupPrices as $key => $customerGroupPrice) {
+            if (! is_array($customerGroupPrice)) {
+                continue;
+            }
+
+            $customerGroupId = $customerGroupPrice['customer_group_id'] ?? null;
+            $customerGroupId = $customerGroupId == '' ? null : $customerGroupId;
+
+            $uniqueId = implode('|', array_filter([
+                $customerGroupPrice['qty'] ?? null,
+                $this->id,
+                $customerGroupId,
+            ]));
+
+            if (isset($uniqueCustomerGroupPrices[$uniqueId])) {
+                $validator->errors()->add(
+                    'customer_group_prices.'.$key.'.customer_group_id',
+                    trans('admin::app.catalog.products.edit.price.group.already-exists')
+                );
+
+                return;
+            }
+
+            $uniqueCustomerGroupPrices[$uniqueId] = true;
+        }
     }
 
     /**

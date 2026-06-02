@@ -824,6 +824,7 @@ return [
                 'price' => [
                     'group' => [
                         'add-group-price' => 'Add Group Price',
+                        'already-exists' => 'A customer group price for this group and quantity already exists.',
                         'all-groups' => 'All Groups',
                         'create-btn' => 'Add New',
                         'discount-group-price-info' => 'For :qty Qty at discount of :price',
