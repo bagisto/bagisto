@@ -44,12 +44,10 @@
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.compare.before') !!}
 
                 @if($showCompare)
-                    <a
-                        href="{{ route('shop.compare.index') }}"
-                        aria-label="@lang('shop::app.components.layouts.header.mobile.compare')"
-                    >
-                        <span class="text-2xl cursor-pointer icon-compare"></span>
-                    </a>
+                    <x-shop::compare.count
+                        :label="trans('shop::app.components.layouts.header.mobile.compare')"
+                        icon-class="cursor-pointer text-2xl icon-compare"
+                    />
                 @endif
 
                 {!! view_render_event('bagisto.shop.components.layouts.header.mobile.compare.after') !!}

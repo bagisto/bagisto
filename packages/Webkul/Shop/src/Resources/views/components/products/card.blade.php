@@ -379,6 +379,8 @@
                                 'product_id': productId
                             })
                             .then(response => {
+                                this.$emitter.emit('update-compare-items');
+
                                 this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                             })
                             .catch(error => {
@@ -405,12 +407,18 @@
 
                             localStorage.setItem('compare_items', JSON.stringify(items));
 
+                            this.$emitter.emit('update-compare-items', items);
+
                             this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare-success')" });
                         } else {
                             this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.components.products.card.already-in-compare')" });
                         }
                     } else {
-                        localStorage.setItem('compare_items', JSON.stringify([productId]));
+                        items = [productId];
+
+                        localStorage.setItem('compare_items', JSON.stringify(items));
+
+                        this.$emitter.emit('update-compare-items', items);
 
                         this.$emitter.emit('add-flash', { type: 'success', message: "@lang('shop::app.components.products.card.add-to-compare-success')" });
 

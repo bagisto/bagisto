@@ -104,15 +104,10 @@
 
             <!-- Compare -->
             @if(core()->getConfigData('catalog.products.settings.compare_option'))
-                <a
-                    href="{{ route('shop.compare.index') }}"
-                    aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.compare')"
-                >
-                    <span
-                        class="inline-block text-2xl cursor-pointer icon-compare"
-                        role="presentation"
-                    ></span>
-                </a>
+                <x-shop::compare.count
+                    :label="trans('shop::app.components.layouts.header.desktop.bottom.compare')"
+                    icon-class="inline-block cursor-pointer text-2xl icon-compare"
+                />
             @endif
 
             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.compare.after') !!}

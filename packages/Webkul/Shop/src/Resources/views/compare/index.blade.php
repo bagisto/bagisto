@@ -219,6 +219,8 @@
 
                                     localStorage.setItem('compare_items', JSON.stringify(items));
 
+                                    this.$emitter.emit('update-compare-items', items);
+
                                     return;
                                 }
 
@@ -228,6 +230,8 @@
                                     })
                                     .then(response => {
                                         this.items = response.data.data;
+
+                                        this.$emitter.emit('update-compare-items', this.items);
 
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
@@ -247,6 +251,8 @@
 
                                     this.items = [];
 
+                                    this.$emitter.emit('update-compare-items', this.items);
+
                                     this.$emitter.emit('add-flash', { type: 'success', message:  "@lang('shop::app.compare.remove-all-success')" });
 
                                     return;
@@ -257,6 +263,8 @@
                                     })
                                     .then(response => {
                                         this.items = [];
+
+                                        this.$emitter.emit('update-compare-items', this.items);
 
                                         this.$emitter.emit('add-flash', { type: 'success', message: response.data.data.message });
                                     })
