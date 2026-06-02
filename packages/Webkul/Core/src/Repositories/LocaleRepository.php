@@ -7,9 +7,12 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Contracts\Locale;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Core\Traits\Sanitizer;
 
 class LocaleRepository extends Repository
 {
+    use Sanitizer;
+
     /**
      * Specify model class name.
      */
@@ -96,10 +99,14 @@ class LocaleRepository extends Repository
 
         foreach ($localeImages['logo_path'] as $image) {
             if ($image instanceof UploadedFile) {
+                $mimeType = $image->getMimeType();
+
                 $locale->logo_path = $image->storeAs(
                     'locales',
                     $locale->code.'.'.$image->getClientOriginalExtension()
                 );
+
+                $this->sanitizeSVG($locale->logo_path, $mimeType);
 
                 $locale->save();
             }

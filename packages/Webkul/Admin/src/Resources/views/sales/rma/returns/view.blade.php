@@ -207,7 +207,7 @@
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">
-                                                    {!! wordwrap($rmaItem->reason->title, 50, "<br>\n") !!}
+                                                    {!! wordwrap(e($rmaItem->reason->title), 50, "<br>\n") !!}
                                                 </p>
                                             </div>
                                         </div>
@@ -384,8 +384,7 @@
                                                     <div
                                                         class="value dark:text-black-300 text-base font-medium mb-2"
                                                         style="margin-top:2px; word-break: break-all;"
-                                                        v-html="message.message"
-                                                    ></div>
+                                                    >@{{ message.message }}</div>
 
                                                     <div v-if="message.attachment" class="mt-2">
                                                         <hr class="mb-2"/>

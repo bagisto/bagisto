@@ -519,7 +519,7 @@
                                         <span class="text-xs text-gray-400">· @{{ dateFormat(message.created_at) }}</span>
                                     </div>
 
-                                    <div class="value text-sm max-sm:text-xs break-words" v-html="message.message"></div>
+                                    <div class="value text-sm max-sm:text-xs break-words">@{{ message.message }}</div>
 
                                     <div v-if="message.attachment" class="mt-2 flex items-center gap-2">
                                         <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l7.071-7.071a4 4 0 00-5.657-5.657l-7.071 7.07a6 6 0 108.485 8.486L20.485 13"/></svg>

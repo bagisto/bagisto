@@ -688,7 +688,7 @@
                     @foreach ($customAttributes as $attribute)
                         <x-shop::form.control-group>
                             <x-shop::form.control-group.label class="flex text-sm mt-4">
-                                {!! $attribute->label . ($attribute->is_required == '1' ? '<span class="required"></span>' : '') !!}
+                                {{ $attribute->label }} @if ($attribute->is_required == '1')<span class="required"></span>@endif
                             </x-shop::form.control-group.label>
 
                             @if ($attribute->is_required == '1')

@@ -8,8 +8,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\View\View;
+use Symfony\Component\Mime\MimeTypes;
 use Webkul\Admin\Mail\Admin\RMA\CustomerToAdminConversationNotification;
 use Webkul\RMA\Contracts\RMAReason;
 use Webkul\RMA\Enums\DefaultRMAResolution;
@@ -429,7 +431,12 @@ class RMAController extends Controller
             if (request()->hasFile('file')) {
                 $file = request()->file('file');
 
-                $path = $file->store('rma-conversation/'.$storedMessage->id);
+                $extension = MimeTypes::getDefault()->getExtensions($file->getMimeType())[0] ?? null;
+
+                $path = $file->storeAs(
+                    'rma-conversation/'.$storedMessage->id,
+                    Str::random(40).($extension ? '.'.$extension : '')
+                );
 
                 $this->rmaMessageRepository->update([
                     'attachment_path' => $path,
