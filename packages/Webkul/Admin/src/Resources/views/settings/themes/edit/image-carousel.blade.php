@@ -1,3 +1,26 @@
+@php
+    $sliderOptions = $theme->translate($currentLocale->code)['options'] ?? null;
+
+    if (! empty($sliderOptions['images'])) {
+        $sliderOptions['images'] = collect($sliderOptions['images'])->map(function ($image) {
+            $path = ltrim($image['image'] ?? '', '/');
+
+            if (! \Illuminate\Support\Str::startsWith($path, ['http://', 'https://', '//'])) {
+                $path = \Illuminate\Support\Str::startsWith($path, 'storage/')
+                    ? \Illuminate\Support\Str::after($path, 'storage/')
+                    : $path;
+
+                $image['image'] = $path;
+                $image['image_url'] = \Illuminate\Support\Facades\Storage::url($path);
+            } else {
+                $image['image_url'] = $path;
+            }
+
+            return $image;
+        })->values()->all();
+    }
+@endphp
+
 <v-image-carousel :errors="errors">
     <x-admin::shimmer.settings.themes.image-carousel />
 </v-image-carousel>
@@ -99,7 +122,7 @@
 
                                     <span class="text-gray-600 transition-all dark:text-gray-300">
                                         <a
-                                            :href="'{{ config('app.url') }}/' + image.image"
+                                            :href="image.image_url || image.image"
                                             :ref="'image_' + index"
                                             target="_blank"
                                             class="text-blue-600 transition-all hover:underline ltr:ml-2 rtl:mr-2"
@@ -238,7 +261,7 @@
 
             data() {
                 return {
-                    sliders: @json($theme->translate($currentLocale->code)['options'] ?? null),
+                    sliders: @json($sliderOptions),
 
                     deletedSliders: [],
                 };
@@ -314,4 +337,4 @@
             },
         });
     </script>
-@endPushOnce    
+@endPushOnce

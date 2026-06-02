@@ -1,6 +1,36 @@
 @props(['options'])
 
-<v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
+@php
+    $carouselImages = collect($options['images'] ?? [])->map(function ($image) {
+        $path = ltrim($image['image'] ?? '', '/');
+
+        if (\Illuminate\Support\Str::startsWith($path, ['http://', 'https://', '//'])) {
+            $image['image'] = $path;
+            $image['srcset'] = $path.' 1920w';
+
+            return $image;
+        }
+
+        $path = \Illuminate\Support\Str::startsWith($path, 'storage/')
+            ? \Illuminate\Support\Str::after($path, 'storage/')
+            : $path;
+
+        $image['image'] = \Illuminate\Support\Facades\Storage::url($path);
+
+        $image['srcset'] = config('filesystems.default') === 'public'
+            ? implode(', ', [
+                \Illuminate\Support\Facades\Storage::url($path).' 1920w',
+                asset('cache/large/'.$path).' 1280w',
+                asset('cache/medium/'.$path).' 1024w',
+                asset('cache/small/'.$path).' 525w',
+            ])
+            : $image['image'].' 1920w';
+
+        return $image;
+    })->values()->all();
+@endphp
+
+<v-carousel :images='@json($carouselImages)'>
     <div class="overflow-hidden">
         <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
     </div>
@@ -28,7 +58,7 @@
                         class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out will-change-transform"
                         ::lazy="index === 0 ? false : true"
                         ::src="image.image"
-                        ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
+                        ::srcset="image.srcset"
                         ::sizes="
                             '(max-width: 525px) 525px, ' +
                             '(max-width: 1024px) 1024px, ' +

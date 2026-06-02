@@ -80,7 +80,9 @@ class ThemeCustomizationRepository extends Repository
 
         if (isset($data[$locale]['deleted_sliders'])) {
             foreach ($data[$locale]['deleted_sliders'] as $slider) {
-                Storage::delete(str_replace('storage/', '', $slider['image']));
+                if ($path = $this->getStoragePath($slider['image'] ?? null)) {
+                    Storage::delete($path);
+                }
             }
         }
 
@@ -115,11 +117,13 @@ class ThemeCustomizationRepository extends Repository
                 }
 
                 $options['images'][] = [
-                    'image' => 'storage/'.$path,
+                    'image' => $path,
                     'link' => $image['link'],
                     'title' => $image['title'],
                 ];
             } else {
+                $image['image'] = $this->getStoragePath($image['image'] ?? null);
+
                 $options['images'][] = $image;
             }
         }
@@ -128,5 +132,29 @@ class ThemeCustomizationRepository extends Repository
         $translatedModel->options = $options ?? [];
         $translatedModel->theme_customization_id = $theme->id;
         $translatedModel->save();
+    }
+
+    /**
+     * Get the storage path from a stored image value.
+     */
+    protected function getStoragePath(?string $path): ?string
+    {
+        if (empty($path)) {
+            return $path;
+        }
+
+        $path = ltrim($path, '/');
+
+        $storageUrl = rtrim(Storage::url(''), '/').'/';
+
+        if (Str::startsWith($path, $storageUrl)) {
+            return Str::after($path, $storageUrl);
+        }
+
+        if (Str::startsWith($path, 'storage/')) {
+            return Str::after($path, 'storage/');
+        }
+
+        return $path;
     }
 }
