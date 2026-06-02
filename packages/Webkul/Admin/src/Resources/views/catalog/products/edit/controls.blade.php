@@ -104,13 +104,16 @@
         @break
     @case('multiselect')
         @php
-            $selectedOption = old($attribute->code) ?: explode(',', $product[$attribute->code]);
+            $selectedOption = old($attribute->code, explode(',', $product[$attribute->code] ?? ''));
+
+            $selectedOption = array_values(array_filter((array) $selectedOption, fn ($option) => $option !== null && $option !== ''));
         @endphp
 
         <x-admin::form.control-group.control
             type="multiselect"
             :id="$attribute->code . '[]'"
             :name="$attribute->code . '[]'"
+            ::value='@json($selectedOption)'
             ::rules="{{ $attribute->validations }}"
             :label="$attribute->admin_name"
         >
