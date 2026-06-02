@@ -1,6 +1,10 @@
-# CHANGELOG for master
+# CHANGELOG for v2.4
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
+
+## Unreleased
+
+- Soon.
 
 ## **v2.4.5 (2nd of June 2026)** - *Release*
 
