@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => '欧盟合同撤回',
+        ],
+
+        'acl' => [
+            'title' => '欧盟合同撤回',
+            'view' => '查看',
+            'decline' => '拒绝',
+            'mark_refunded' => '标记为已退款',
+            'resend_confirmation' => '重新发送确认邮件',
+        ],
+
+        'config' => [
+            'title' => '欧盟合同撤回',
+            'info' => '欧盟合同撤回按钮的配置（欧盟指令 2023/2673，消费者权利指令第 11a 条）。',
+
+            'general' => [
+                'title' => '常规',
+                'info' => '此渠道下欧盟合同撤回按钮的总开关。',
+                'enabled' => '启用',
+                'enabled_info' => '启用后，此渠道的客户将在订单详情页面看到“撤回合同”按钮，并可访问公开的 /withdraw 查找表单。请仅在面向欧盟消费者销售的渠道启用此功能。',
+            ],
+        ],
+
+        'index' => [
+            'title' => '欧盟合同撤回',
+        ],
+
+        'view' => [
+            'title' => '合同撤回 :uuid',
+            'heading' => '合同撤回',
+            'back' => '返回列表',
+            'guest_badge' => '访客',
+
+            'evidence' => '凭证',
+            'evidence_note' => '不可更改 — 在提交时记录',
+            'status' => '状态',
+            'received_at' => '接收时间',
+            'uuid' => '参考编号',
+            'copy_reference' => '复制参考编号',
+            'reference_copied' => '参考编号已复制到剪贴板。',
+            'order' => '订单',
+            'customer_email' => '客户邮箱',
+            'is_guest' => '访客',
+            'channel' => '渠道',
+            'locale' => '语言区域',
+            'reason' => '客户的理由',
+
+            'timeline' => '时间线',
+            'timeline_received' => '已收到声明',
+            'timeline_received_desc' => '客户已提交合同撤回请求。',
+            'timeline_email' => '确认邮件',
+            'timeline_email_pending' => '尚未发送',
+            'timeline_initial_email' => '初始确认邮件',
+            'timeline_initial_email_desc_sent' => '确认邮件已发送给客户。',
+            'timeline_initial_email_desc_error' => '初始确认邮件发送失败。',
+            'timeline_initial_email_desc_pending' => '初始确认邮件尚未发送。',
+            'timeline_final_email' => '最终确认邮件',
+            'timeline_final_email_pending' => '尚未发送',
+            'timeline_final_email_desc_sent' => '结果通知邮件已发送给客户。',
+            'timeline_final_email_desc_pending' => '最终确认邮件尚未发送。',
+            'timeline_declined' => '管理员已拒绝',
+            'timeline_declined_desc' => ':name 已拒绝该撤回请求。',
+            'timeline_declined_desc_system' => '撤回请求已被拒绝。',
+            'timeline_declined_reason_label' => '所给理由：',
+            'timeline_refunded' => '管理员已标记为已退款',
+            'timeline_refunded_desc' => ':name 已发放退款。',
+            'timeline_refunded_desc_system' => '已发放退款。',
+            'timeline_refunded_note_label' => '管理员备注：',
+            'timeline_resolution' => '处理',
+            'timeline_resolution_desc' => '等待管理员审核和决定。',
+            'timeline_resolution_pending' => '等待管理员处理',
+
+            'confirmation_sent_at' => '确认邮件发送时间',
+            'confirmation_error' => '确认邮件错误',
+            'declined_at' => '拒绝时间',
+            'refunded_at' => '退款时间',
+
+            'actions' => '操作',
+            'actions_note' => '退款通过 Bagisto 现有的订单 / 退款 / RMA 工具手动处理。请使用这些操作在撤回凭证上记录处理结果。',
+            'resend_confirmation' => '重新发送确认邮件',
+            'mark_refunded' => '标记为已退款',
+            'refund_note_label' => '退款参考编号（可选）',
+            'refund_note_placeholder' => '例如：退款 #1234',
+            'decline' => '拒绝撤回',
+            'decline_reason_label' => '拒绝理由',
+            'decline_reason_placeholder' => '请说明对客户权利提出异议的理由',
+            'mark_refunded_confirm_msg' => '将此撤回请求标记为已退款？此前的任何拒绝记录将被清除。',
+            'decline_confirm_msg' => '拒绝此撤回请求？该理由将对客户可见。',
+            'resend_confirmation_confirm_msg' => '向客户重新发送确认邮件？',
+            'send_final_confirmation' => '发送最终确认邮件',
+            'send_final_confirmation_confirm_msg' => '向客户发送最终状态邮件？',
+        ],
+
+        'status' => [
+            'received' => '已接收',
+            'refunded' => '已退款',
+            'declined' => '已拒绝',
+        ],
+
+        'datagrid' => [
+            'received_at' => '接收时间',
+            'uuid' => '参考编号',
+            'copy_reference' => '复制参考编号',
+            'reference_copied' => '参考编号已复制到剪贴板。',
+            'order' => '订单',
+            'customer_email' => '客户邮箱',
+            'channel' => '渠道',
+            'status' => '状态',
+            'confirmation_sent_at' => '确认邮件已发送',
+            'view' => '查看',
+        ],
+
+        'flash' => [
+            'declined' => '撤回请求已被拒绝。',
+            'refunded' => '撤回请求已标记为已退款。',
+            'confirmation_resent' => '确认邮件已重新发送。',
+            'confirmation_failed' => '无法发送确认邮件。详情请查看时间线。',
+        ],
+    ],
 ];

@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'AB Cayma Talepleri',
+        ],
+
+        'acl' => [
+            'title' => 'AB Cayma Talepleri',
+            'view' => 'Görüntüle',
+            'decline' => 'Reddet',
+            'mark_refunded' => 'İade Edildi Olarak İşaretle',
+            'resend_confirmation' => 'Onayı Yeniden Gönder',
+        ],
+
+        'config' => [
+            'title' => 'AB Cayma Talepleri',
+            'info' => 'AB cayma butonu için yapılandırma ((AB) 2023/2673 Sayılı Direktif, CRD 11a maddesi).',
+
+            'general' => [
+                'title' => 'Genel',
+                'info' => 'Bu kanaldaki AB cayma butonu için ana anahtar.',
+                'enabled' => 'Etkinleştir',
+                'enabled_info' => 'Etkinleştirildiğinde, bu kanaldaki müşteriler sipariş detay sayfalarında "Sözleşmeden Cayma" butonunu ve herkese açık /withdraw arama formunu görür. Yalnızca AB tüketicilerine satış yapan kanallarda etkinleştirin.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'AB Cayma Talepleri',
+        ],
+
+        'view' => [
+            'title' => 'Cayma :uuid',
+            'heading' => 'Cayma',
+            'back' => 'Listeye dön',
+            'guest_badge' => 'Misafir',
+
+            'evidence' => 'Kanıt',
+            'evidence_note' => 'Değiştirilemez — gönderim sırasında kaydedildi',
+            'status' => 'Durum',
+            'received_at' => 'Alındığı tarih',
+            'uuid' => 'Referans',
+            'copy_reference' => 'Referansı kopyala',
+            'reference_copied' => 'Referans panoya kopyalandı.',
+            'order' => 'Sipariş',
+            'customer_email' => 'Müşteri e-postası',
+            'is_guest' => 'Misafir',
+            'channel' => 'Kanal',
+            'locale' => 'Dil',
+            'reason' => 'Müşteri gerekçesi',
+
+            'timeline' => 'Zaman çizelgesi',
+            'timeline_received' => 'Beyan alındı',
+            'timeline_received_desc' => 'Müşteri, sözleşmeden cayma talebi gönderdi.',
+            'timeline_email' => 'Onay e-postası',
+            'timeline_email_pending' => 'Henüz gönderilmedi',
+            'timeline_initial_email' => 'İlk Onay E-postası',
+            'timeline_initial_email_desc_sent' => 'Onay e-postası müşteriye iletildi.',
+            'timeline_initial_email_desc_error' => 'İlk onay e-postası gönderilemedi.',
+            'timeline_initial_email_desc_pending' => 'İlk onay e-postası henüz gönderilmedi.',
+            'timeline_final_email' => 'Nihai Onay E-postası',
+            'timeline_final_email_pending' => 'Henüz gönderilmedi',
+            'timeline_final_email_desc_sent' => 'Sonuç e-postası müşteriye iletildi.',
+            'timeline_final_email_desc_pending' => 'Nihai onay e-postası henüz gönderilmedi.',
+            'timeline_declined' => 'Yönetici tarafından reddedildi',
+            'timeline_declined_desc' => 'Cayma talebi :name tarafından reddedildi.',
+            'timeline_declined_desc_system' => 'Cayma talebi reddedildi.',
+            'timeline_declined_reason_label' => 'Belirtilen gerekçe:',
+            'timeline_refunded' => 'Yönetici tarafından iade edildi olarak işaretlendi',
+            'timeline_refunded_desc' => 'İade :name tarafından gerçekleştirildi.',
+            'timeline_refunded_desc_system' => 'İade gerçekleştirildi.',
+            'timeline_refunded_note_label' => 'Yönetici notu:',
+            'timeline_resolution' => 'Sonuçlandırma',
+            'timeline_resolution_desc' => 'Yönetici incelemesi ve kararı bekleniyor.',
+            'timeline_resolution_pending' => 'Yönetici işlemi bekleniyor',
+
+            'confirmation_sent_at' => 'Onay gönderim tarihi',
+            'confirmation_error' => 'Onay hatası',
+            'declined_at' => 'Reddedilme tarihi',
+            'refunded_at' => 'İade tarihi',
+
+            'actions' => 'Eylemler',
+            'actions_note' => 'İadeler, Bagisto\'nun mevcut sipariş / iade / RMA araçlarıyla manuel olarak işlenir. Sonucu cayma kanıtına kaydetmek için bu eylemleri kullanın.',
+            'resend_confirmation' => 'Onay E-postasını Yeniden Gönder',
+            'mark_refunded' => 'İade Edildi Olarak İşaretle',
+            'refund_note_label' => 'İade referansı (isteğe bağlı)',
+            'refund_note_placeholder' => 'örn. İade #1234',
+            'decline' => 'Cayma Talebini Reddet',
+            'decline_reason_label' => 'Reddetme gerekçesi',
+            'decline_reason_placeholder' => 'Hakkın neden tartışıldığını açıklayın',
+            'mark_refunded_confirm_msg' => 'Bu cayma talebi iade edildi olarak işaretlensin mi? Daha önceki ret kaydı silinecektir.',
+            'decline_confirm_msg' => 'Bu cayma talebi reddedilsin mi? Gerekçe müşteri tarafından görülebilecektir.',
+            'resend_confirmation_confirm_msg' => 'Onay e-postası müşteriye yeniden gönderilsin mi?',
+            'send_final_confirmation' => 'Nihai Onay E-postasını Gönder',
+            'send_final_confirmation_confirm_msg' => 'Nihai durum e-postası müşteriye gönderilsin mi?',
+        ],
+
+        'status' => [
+            'received' => 'Alındı',
+            'refunded' => 'İade edildi',
+            'declined' => 'Reddedildi',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'Alındığı tarih',
+            'uuid' => 'Referans',
+            'copy_reference' => 'Referansı kopyala',
+            'reference_copied' => 'Referans panoya kopyalandı.',
+            'order' => 'Sipariş',
+            'customer_email' => 'Müşteri e-postası',
+            'channel' => 'Kanal',
+            'status' => 'Durum',
+            'confirmation_sent_at' => 'Onay gönderildi',
+            'view' => 'Görüntüle',
+        ],
+
+        'flash' => [
+            'declined' => 'Cayma talebi reddedildi.',
+            'refunded' => 'Cayma talebi iade edildi olarak işaretlendi.',
+            'confirmation_resent' => 'Onay e-postası yeniden gönderildi.',
+            'confirmation_failed' => 'Onay e-postası gönderilemedi. Ayrıntılar için zaman çizelgesine bakın.',
+        ],
+    ],
 ];

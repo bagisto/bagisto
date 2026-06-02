@@ -3258,6 +3258,27 @@ return [
                 'locale_based' => false,
             ],
         ],
+    ], [
+        'key' => 'sales.eu_withdrawal',
+        'name' => 'admin::app.eu_withdrawal.config.title',
+        'info' => 'admin::app.eu_withdrawal.config.info',
+        'icon' => 'settings/eu-withdrawal.svg',
+        'sort' => 12,
+    ], [
+        'key' => 'sales.eu_withdrawal.general',
+        'name' => 'admin::app.eu_withdrawal.config.general.title',
+        'info' => 'admin::app.eu_withdrawal.config.general.info',
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.eu_withdrawal.config.general.enabled',
+                'info' => 'admin::app.eu_withdrawal.config.general.enabled_info',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+                'default' => 0,
+            ],
+        ],
     ],
 
     /**

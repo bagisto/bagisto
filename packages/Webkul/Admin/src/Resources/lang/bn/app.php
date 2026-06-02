@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'EU প্রত্যাহার',
+        ],
+
+        'acl' => [
+            'title' => 'EU প্রত্যাহার',
+            'view' => 'দেখুন',
+            'decline' => 'প্রত্যাখ্যান',
+            'mark_refunded' => 'ফেরত হিসেবে চিহ্নিত করুন',
+            'resend_confirmation' => 'নিশ্চিতকরণ পুনরায় পাঠান',
+        ],
+
+        'config' => [
+            'title' => 'EU প্রত্যাহার',
+            'info' => 'EU প্রত্যাহার বোতামের কনফিগারেশন (Directive (EU) 2023/2673, Article 11a CRD)।',
+
+            'general' => [
+                'title' => 'সাধারণ',
+                'info' => 'এই চ্যানেলে EU প্রত্যাহার বোতামের প্রধান সুইচ।',
+                'enabled' => 'সক্রিয় করুন',
+                'enabled_info' => 'সক্রিয় হলে, এই চ্যানেলের গ্রাহকরা অর্ডার বিস্তারিত পৃষ্ঠায় একটি "চুক্তি থেকে প্রত্যাহার" বোতাম এবং একটি পাবলিক /withdraw অনুসন্ধান ফর্ম দেখতে পাবেন। শুধুমাত্র EU ভোক্তাদের কাছে বিক্রি করা চ্যানেলে সক্রিয় করুন।',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'EU প্রত্যাহার',
+        ],
+
+        'view' => [
+            'title' => 'প্রত্যাহার :uuid',
+            'heading' => 'প্রত্যাহার',
+            'back' => 'তালিকায় ফিরে যান',
+            'guest_badge' => 'অতিথি',
+
+            'evidence' => 'প্রমাণ',
+            'evidence_note' => 'অপরিবর্তনীয় — জমা দেওয়ার সময় ধারণ করা',
+            'status' => 'অবস্থা',
+            'received_at' => 'গ্রহণের সময়',
+            'uuid' => 'রেফারেন্স',
+            'copy_reference' => 'রেফারেন্স কপি করুন',
+            'reference_copied' => 'রেফারেন্স ক্লিপবোর্ডে কপি করা হয়েছে।',
+            'order' => 'অর্ডার',
+            'customer_email' => 'গ্রাহকের ইমেল',
+            'is_guest' => 'অতিথি',
+            'channel' => 'চ্যানেল',
+            'locale' => 'লোকেল',
+            'reason' => 'গ্রাহকের কারণ',
+
+            'timeline' => 'সময়রেখা',
+            'timeline_received' => 'ঘোষণা গৃহীত',
+            'timeline_received_desc' => 'গ্রাহক একটি চুক্তি-প্রত্যাহারের অনুরোধ জমা দিয়েছেন।',
+            'timeline_email' => 'নিশ্চিতকরণ ইমেল',
+            'timeline_email_pending' => 'এখনও পাঠানো হয়নি',
+            'timeline_initial_email' => 'প্রাথমিক নিশ্চিতকরণ ইমেল',
+            'timeline_initial_email_desc_sent' => 'গ্রাহককে নিশ্চিতকরণ ইমেল পাঠানো হয়েছে।',
+            'timeline_initial_email_desc_error' => 'প্রাথমিক নিশ্চিতকরণ ইমেল পাঠাতে ব্যর্থ।',
+            'timeline_initial_email_desc_pending' => 'প্রাথমিক নিশ্চিতকরণ ইমেল এখনও পাঠানো হয়নি।',
+            'timeline_final_email' => 'চূড়ান্ত নিশ্চিতকরণ ইমেল',
+            'timeline_final_email_pending' => 'এখনও পাঠানো হয়নি',
+            'timeline_final_email_desc_sent' => 'গ্রাহককে ফলাফল ইমেল পাঠানো হয়েছে।',
+            'timeline_final_email_desc_pending' => 'চূড়ান্ত নিশ্চিতকরণ ইমেল এখনও পাঠানো হয়নি।',
+            'timeline_declined' => 'অ্যাডমিন দ্বারা প্রত্যাখ্যাত',
+            'timeline_declined_desc' => ':name দ্বারা প্রত্যাহার প্রত্যাখ্যাত।',
+            'timeline_declined_desc_system' => 'প্রত্যাহার প্রত্যাখ্যাত।',
+            'timeline_declined_reason_label' => 'প্রদত্ত কারণ:',
+            'timeline_refunded' => 'অ্যাডমিন দ্বারা ফেরত চিহ্নিত',
+            'timeline_refunded_desc' => ':name দ্বারা ফেরত জারি করা হয়েছে।',
+            'timeline_refunded_desc_system' => 'ফেরত জারি করা হয়েছে।',
+            'timeline_refunded_note_label' => 'অ্যাডমিনের নোট:',
+            'timeline_resolution' => 'নিষ্পত্তি',
+            'timeline_resolution_desc' => 'অ্যাডমিন পর্যালোচনা ও সিদ্ধান্তের অপেক্ষায়।',
+            'timeline_resolution_pending' => 'অ্যাডমিন পদক্ষেপের অপেক্ষায়',
+
+            'confirmation_sent_at' => 'নিশ্চিতকরণ পাঠানোর সময়',
+            'confirmation_error' => 'নিশ্চিতকরণে ত্রুটি',
+            'declined_at' => 'প্রত্যাখ্যানের সময়',
+            'refunded_at' => 'ফেরতের সময়',
+
+            'actions' => 'কার্যক্রম',
+            'actions_note' => 'ফেরত Bagisto-এর বিদ্যমান অর্ডার / ফেরত / RMA টুলের মাধ্যমে ম্যানুয়ালি প্রক্রিয়া করা হয়। প্রত্যাহার প্রমাণে ফলাফল রেকর্ড করতে এই কার্যক্রমগুলি ব্যবহার করুন।',
+            'resend_confirmation' => 'নিশ্চিতকরণ ইমেল পুনরায় পাঠান',
+            'mark_refunded' => 'ফেরত হিসেবে চিহ্নিত করুন',
+            'refund_note_label' => 'ফেরত রেফারেন্স (ঐচ্ছিক)',
+            'refund_note_placeholder' => 'যেমন Refund #1234',
+            'decline' => 'প্রত্যাহার প্রত্যাখ্যান করুন',
+            'decline_reason_label' => 'প্রত্যাখ্যানের কারণ',
+            'decline_reason_placeholder' => 'কেন অধিকার বিতর্কিত তা ব্যাখ্যা করুন',
+            'mark_refunded_confirm_msg' => 'এই প্রত্যাহারটি ফেরত হিসেবে চিহ্নিত করবেন? পূর্ববর্তী যেকোনো প্রত্যাখ্যান রেকর্ড মুছে যাবে।',
+            'decline_confirm_msg' => 'এই প্রত্যাহারটি প্রত্যাখ্যান করবেন? কারণটি গ্রাহকের কাছে দৃশ্যমান হবে।',
+            'resend_confirmation_confirm_msg' => 'গ্রাহককে নিশ্চিতকরণ ইমেল পুনরায় পাঠাবেন?',
+            'send_final_confirmation' => 'চূড়ান্ত নিশ্চিতকরণ ইমেল পাঠান',
+            'send_final_confirmation_confirm_msg' => 'গ্রাহককে চূড়ান্ত অবস্থা ইমেল পাঠাবেন?',
+        ],
+
+        'status' => [
+            'received' => 'গৃহীত',
+            'refunded' => 'ফেরত',
+            'declined' => 'প্রত্যাখ্যাত',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'গ্রহণের সময়',
+            'uuid' => 'রেফারেন্স',
+            'copy_reference' => 'রেফারেন্স কপি করুন',
+            'reference_copied' => 'রেফারেন্স ক্লিপবোর্ডে কপি করা হয়েছে।',
+            'order' => 'অর্ডার',
+            'customer_email' => 'গ্রাহকের ইমেল',
+            'channel' => 'চ্যানেল',
+            'status' => 'অবস্থা',
+            'confirmation_sent_at' => 'নিশ্চিতকরণ পাঠানো হয়েছে',
+            'view' => 'দেখুন',
+        ],
+
+        'flash' => [
+            'declined' => 'প্রত্যাহার প্রত্যাখ্যাত হয়েছে।',
+            'refunded' => 'প্রত্যাহারকে ফেরত হিসেবে চিহ্নিত করা হয়েছে।',
+            'confirmation_resent' => 'নিশ্চিতকরণ ইমেল পুনরায় পাঠানো হয়েছে।',
+            'confirmation_failed' => 'নিশ্চিতকরণ ইমেল পাঠানো যায়নি। বিস্তারিত জানতে সময়রেখা দেখুন।',
+        ],
+    ],
 ];

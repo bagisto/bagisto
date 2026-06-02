@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'EU ඉවත් වීම්',
+        ],
+
+        'acl' => [
+            'title' => 'EU ඉවත් වීම්',
+            'view' => 'බලන්න',
+            'decline' => 'ප්‍රතික්ෂේප කරන්න',
+            'mark_refunded' => 'ආපසු ගෙවූ ලෙස සලකුණු කරන්න',
+            'resend_confirmation' => 'තහවුරුව නැවත යවන්න',
+        ],
+
+        'config' => [
+            'title' => 'EU ඉවත් වීම්',
+            'info' => 'EU ඉවත් වීමේ බොත්තම සඳහා වින්‍යාසය (Directive (EU) 2023/2673, Article 11a CRD).',
+
+            'general' => [
+                'title' => 'සාමාන්‍ය',
+                'info' => 'මෙම නාලිකාවේ EU ඉවත් වීමේ බොත්තම සඳහා ප්‍රධාන ස්විචය.',
+                'enabled' => 'සක්‍රීය කරන්න',
+                'enabled_info' => 'සක්‍රීය කළ විට, මෙම නාලිකාවේ පාරිභෝගිකයින්ට ඇණවුම් විස්තර පිටුවල "ගිවිසුමෙන් ඉවත් වන්න" බොත්තමක් සහ පොදු /withdraw සෙවුම් පෝරමයක් දැකගත හැකිය. EU පාරිභෝගිකයින්ට විකුණන නාලිකා සඳහා පමණක් සක්‍රීය කරන්න.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'EU ඉවත් වීම්',
+        ],
+
+        'view' => [
+            'title' => 'ඉවත් වීම :uuid',
+            'heading' => 'ඉවත් වීම',
+            'back' => 'ලැයිස්තුවට ආපසු',
+            'guest_badge' => 'අමුත්තා',
+
+            'evidence' => 'සාක්ෂි',
+            'evidence_note' => 'වෙනස් කළ නොහැකි — ඉදිරිපත් කරන අවස්ථාවේදී ලබා ගත්තා',
+            'status' => 'තත්ත්වය',
+            'received_at' => 'ලැබුණු වේලාව',
+            'uuid' => 'යොමුව',
+            'copy_reference' => 'යොමුව පිටපත් කරන්න',
+            'reference_copied' => 'යොමුව පසුරු පුවරුවට පිටපත් කරන ලදී.',
+            'order' => 'ඇණවුම',
+            'customer_email' => 'පාරිභෝගික ඊමේල්',
+            'is_guest' => 'අමුත්තා',
+            'channel' => 'නාලිකාව',
+            'locale' => 'ස්ථානීයකරණය',
+            'reason' => 'පාරිභෝගිකගේ හේතුව',
+
+            'timeline' => 'කාලරේඛාව',
+            'timeline_received' => 'ප්‍රකාශය ලැබුණා',
+            'timeline_received_desc' => 'පාරිභෝගිකයා ගිවිසුමෙන් ඉවත් වීමේ ඉල්ලීමක් ඉදිරිපත් කළේය.',
+            'timeline_email' => 'තහවුරු ඊමේල්',
+            'timeline_email_pending' => 'තවම යවා නැත',
+            'timeline_initial_email' => 'ආරම්භක තහවුරු ඊමේල්',
+            'timeline_initial_email_desc_sent' => 'පාරිභෝගිකයාට තහවුරු ඊමේල් භාර දෙන ලදී.',
+            'timeline_initial_email_desc_error' => 'ආරම්භක තහවුරු ඊමේල් යැවීම අසාර්ථක විය.',
+            'timeline_initial_email_desc_pending' => 'ආරම්භක තහවුරු ඊමේල් තවම යවා නැත.',
+            'timeline_final_email' => 'අවසන් තහවුරු ඊමේල්',
+            'timeline_final_email_pending' => 'තවම යවා නැත',
+            'timeline_final_email_desc_sent' => 'පාරිභෝගිකයාට ප්‍රතිඵල ඊමේල් භාර දෙන ලදී.',
+            'timeline_final_email_desc_pending' => 'අවසන් තහවුරු ඊමේල් තවම යවා නැත.',
+            'timeline_declined' => 'පරිපාලක විසින් ප්‍රතික්ෂේප කරන ලදී',
+            'timeline_declined_desc' => ':name විසින් ඉවත් වීම ප්‍රතික්ෂේප කරන ලදී.',
+            'timeline_declined_desc_system' => 'ඉවත් වීම ප්‍රතික්ෂේප කරන ලදී.',
+            'timeline_declined_reason_label' => 'දුන් හේතුව:',
+            'timeline_refunded' => 'පරිපාලක විසින් ආපසු ගෙවූ ලෙස සලකුණු කරන ලදී',
+            'timeline_refunded_desc' => ':name විසින් ආපසු ගෙවීම නිකුත් කරන ලදී.',
+            'timeline_refunded_desc_system' => 'ආපසු ගෙවීම නිකුත් කරන ලදී.',
+            'timeline_refunded_note_label' => 'පරිපාලක සටහන:',
+            'timeline_resolution' => 'විසඳුම',
+            'timeline_resolution_desc' => 'පරිපාලක සමාලෝචනය සහ තීරණය බලාපොරොත්තුවෙන්.',
+            'timeline_resolution_pending' => 'පරිපාලක ක්‍රියාමාර්ගය බලාපොරොත්තුවෙන්',
+
+            'confirmation_sent_at' => 'තහවුරුව යවූ වේලාව',
+            'confirmation_error' => 'තහවුරු දෝෂය',
+            'declined_at' => 'ප්‍රතික්ෂේප කළ වේලාව',
+            'refunded_at' => 'ආපසු ගෙවූ වේලාව',
+
+            'actions' => 'ක්‍රියා',
+            'actions_note' => 'ආපසු ගෙවීම් Bagisto හි පවතින ඇණවුම / ආපසු ගෙවීම / RMA මෙවලම් හරහා අතින් සකස් කරයි. ඉවත් වීමේ සාක්ෂි මත ප්‍රතිඵලය වාර්තා කිරීමට මෙම ක්‍රියා භාවිතා කරන්න.',
+            'resend_confirmation' => 'තහවුරු ඊමේල් නැවත යවන්න',
+            'mark_refunded' => 'ආපසු ගෙවූ ලෙස සලකුණු කරන්න',
+            'refund_note_label' => 'ආපසු ගෙවීමේ යොමුව (විකල්ප)',
+            'refund_note_placeholder' => 'උදා Refund #1234',
+            'decline' => 'ඉවත් වීම ප්‍රතික්ෂේප කරන්න',
+            'decline_reason_label' => 'ප්‍රතික්ෂේප කිරීමට හේතුව',
+            'decline_reason_placeholder' => 'හිමිකම ඇයි මතභේදයට තුඩු දී ඇත්දැයි පැහැදිලි කරන්න',
+            'mark_refunded_confirm_msg' => 'මෙම ඉවත් වීම ආපසු ගෙවූ ලෙස සලකුණු කරන්නද? පෙර කිසියම් ප්‍රතික්ෂේප කිරීමේ වාර්තාවක් මකා දැමෙනු ඇත.',
+            'decline_confirm_msg' => 'මෙම ඉවත් වීම ප්‍රතික්ෂේප කරන්නද? හේතුව පාරිභෝගිකයාට පෙනෙනු ඇත.',
+            'resend_confirmation_confirm_msg' => 'පාරිභෝගිකයාට තහවුරු ඊමේල් නැවත යවන්නද?',
+            'send_final_confirmation' => 'අවසන් තහවුරු ඊමේල් යවන්න',
+            'send_final_confirmation_confirm_msg' => 'පාරිභෝගිකයාට අවසන් තත්ත්ව ඊමේල් යවන්නද?',
+        ],
+
+        'status' => [
+            'received' => 'ලැබුණා',
+            'refunded' => 'ආපසු ගෙවා ඇත',
+            'declined' => 'ප්‍රතික්ෂේපිතයි',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'ලැබුණු වේලාව',
+            'uuid' => 'යොමුව',
+            'copy_reference' => 'යොමුව පිටපත් කරන්න',
+            'reference_copied' => 'යොමුව පසුරු පුවරුවට පිටපත් කරන ලදී.',
+            'order' => 'ඇණවුම',
+            'customer_email' => 'පාරිභෝගික ඊමේල්',
+            'channel' => 'නාලිකාව',
+            'status' => 'තත්ත්වය',
+            'confirmation_sent_at' => 'තහවුරුව යවන ලදී',
+            'view' => 'බලන්න',
+        ],
+
+        'flash' => [
+            'declined' => 'ඉවත් වීම ප්‍රතික්ෂේප කර ඇත.',
+            'refunded' => 'ඉවත් වීම ආපසු ගෙවූ ලෙස සලකුණු කර ඇත.',
+            'confirmation_resent' => 'තහවුරු ඊමේල් නැවත යවා ඇත.',
+            'confirmation_failed' => 'තහවුරු ඊමේල් යැවීමට නොහැකි විය. විස්තර සඳහා කාලරේඛාව බලන්න.',
+        ],
+    ],
 ];

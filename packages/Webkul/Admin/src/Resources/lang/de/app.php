@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'EU-Widerrufe',
+        ],
+
+        'acl' => [
+            'title' => 'EU-Widerrufe',
+            'view' => 'Anzeigen',
+            'decline' => 'Ablehnen',
+            'mark_refunded' => 'Als erstattet markieren',
+            'resend_confirmation' => 'Bestätigung erneut senden',
+        ],
+
+        'config' => [
+            'title' => 'EU-Widerrufe',
+            'info' => 'Konfiguration für die Schaltfläche zum EU-Widerruf (Richtlinie (EU) 2023/2673, Artikel 11a CRD).',
+
+            'general' => [
+                'title' => 'Allgemein',
+                'info' => 'Hauptschalter für die EU-Widerrufsschaltfläche in diesem Kanal.',
+                'enabled' => 'Aktivieren',
+                'enabled_info' => 'Wenn aktiviert, sehen Kunden in diesem Kanal eine Schaltfläche „Vom Vertrag zurücktreten“ auf den Bestelldetailseiten sowie ein öffentliches Suchformular unter /withdraw. Nur in Kanälen aktivieren, die an EU-Verbraucher verkaufen.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'EU-Widerrufe',
+        ],
+
+        'view' => [
+            'title' => 'Widerruf :uuid',
+            'heading' => 'Widerruf',
+            'back' => 'Zurück zur Liste',
+            'guest_badge' => 'Gast',
+
+            'evidence' => 'Nachweis',
+            'evidence_note' => 'Unveränderlich – bei Einreichung erfasst',
+            'status' => 'Status',
+            'received_at' => 'Eingegangen am',
+            'uuid' => 'Referenz',
+            'copy_reference' => 'Referenz kopieren',
+            'reference_copied' => 'Referenz in die Zwischenablage kopiert.',
+            'order' => 'Bestellung',
+            'customer_email' => 'Kunden-E-Mail',
+            'is_guest' => 'Gast',
+            'channel' => 'Kanal',
+            'locale' => 'Sprache',
+            'reason' => 'Begründung des Kunden',
+
+            'timeline' => 'Verlauf',
+            'timeline_received' => 'Erklärung eingegangen',
+            'timeline_received_desc' => 'Der Kunde hat eine Widerrufserklärung eingereicht.',
+            'timeline_email' => 'Bestätigungs-E-Mail',
+            'timeline_email_pending' => 'Noch nicht gesendet',
+            'timeline_initial_email' => 'Erste Bestätigungs-E-Mail',
+            'timeline_initial_email_desc_sent' => 'Bestätigungs-E-Mail an den Kunden zugestellt.',
+            'timeline_initial_email_desc_error' => 'Erste Bestätigungs-E-Mail konnte nicht gesendet werden.',
+            'timeline_initial_email_desc_pending' => 'Erste Bestätigungs-E-Mail wurde noch nicht gesendet.',
+            'timeline_final_email' => 'Abschließende Bestätigungs-E-Mail',
+            'timeline_final_email_pending' => 'Noch nicht gesendet',
+            'timeline_final_email_desc_sent' => 'Ergebnis-E-Mail an den Kunden zugestellt.',
+            'timeline_final_email_desc_pending' => 'Abschließende Bestätigungs-E-Mail wurde noch nicht gesendet.',
+            'timeline_declined' => 'Vom Administrator abgelehnt',
+            'timeline_declined_desc' => 'Widerruf abgelehnt von :name.',
+            'timeline_declined_desc_system' => 'Widerruf abgelehnt.',
+            'timeline_declined_reason_label' => 'Angegebener Grund:',
+            'timeline_refunded' => 'Vom Administrator als erstattet markiert',
+            'timeline_refunded_desc' => 'Erstattung ausgestellt von :name.',
+            'timeline_refunded_desc_system' => 'Erstattung ausgestellt.',
+            'timeline_refunded_note_label' => 'Anmerkung des Administrators:',
+            'timeline_resolution' => 'Bearbeitung',
+            'timeline_resolution_desc' => 'Wartet auf Prüfung und Entscheidung durch den Administrator.',
+            'timeline_resolution_pending' => 'Warten auf Aktion des Administrators',
+
+            'confirmation_sent_at' => 'Bestätigung gesendet am',
+            'confirmation_error' => 'Bestätigungsfehler',
+            'declined_at' => 'Abgelehnt am',
+            'refunded_at' => 'Erstattet am',
+
+            'actions' => 'Aktionen',
+            'actions_note' => 'Erstattungen werden manuell über die bestehenden Bestell-, Erstattungs- und RMA-Werkzeuge von Bagisto bearbeitet. Verwenden Sie diese Aktionen, um das Ergebnis im Widerrufsnachweis festzuhalten.',
+            'resend_confirmation' => 'Bestätigungs-E-Mail erneut senden',
+            'mark_refunded' => 'Als erstattet markieren',
+            'refund_note_label' => 'Erstattungsreferenz (optional)',
+            'refund_note_placeholder' => 'z. B. Erstattung Nr. 1234',
+            'decline' => 'Widerruf ablehnen',
+            'decline_reason_label' => 'Grund der Ablehnung',
+            'decline_reason_placeholder' => 'Erläutern Sie, warum der Anspruch bestritten wird',
+            'mark_refunded_confirm_msg' => 'Diesen Widerruf als erstattet markieren? Eine zuvor erfasste Ablehnung wird entfernt.',
+            'decline_confirm_msg' => 'Diesen Widerruf ablehnen? Der Grund wird für den Kunden sichtbar sein.',
+            'resend_confirmation_confirm_msg' => 'Bestätigungs-E-Mail erneut an den Kunden senden?',
+            'send_final_confirmation' => 'Abschließende Bestätigungs-E-Mail senden',
+            'send_final_confirmation_confirm_msg' => 'Die abschließende Status-E-Mail an den Kunden senden?',
+        ],
+
+        'status' => [
+            'received' => 'Eingegangen',
+            'refunded' => 'Erstattet',
+            'declined' => 'Abgelehnt',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'Eingegangen am',
+            'uuid' => 'Referenz',
+            'copy_reference' => 'Referenz kopieren',
+            'reference_copied' => 'Referenz in die Zwischenablage kopiert.',
+            'order' => 'Bestellung',
+            'customer_email' => 'Kunden-E-Mail',
+            'channel' => 'Kanal',
+            'status' => 'Status',
+            'confirmation_sent_at' => 'Bestätigung gesendet',
+            'view' => 'Anzeigen',
+        ],
+
+        'flash' => [
+            'declined' => 'Der Widerruf wurde abgelehnt.',
+            'refunded' => 'Der Widerruf wurde als erstattet markiert.',
+            'confirmation_resent' => 'Die Bestätigungs-E-Mail wurde erneut gesendet.',
+            'confirmation_failed' => 'Die Bestätigungs-E-Mail konnte nicht gesendet werden. Einzelheiten finden Sie im Verlauf.',
+        ],
+    ],
 ];

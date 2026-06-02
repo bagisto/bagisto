@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'Odstąpienia (UE)',
+        ],
+
+        'acl' => [
+            'title' => 'Odstąpienia (UE)',
+            'view' => 'Podgląd',
+            'decline' => 'Odrzuć',
+            'mark_refunded' => 'Oznacz jako zwrócone',
+            'resend_confirmation' => 'Wyślij potwierdzenie ponownie',
+        ],
+
+        'config' => [
+            'title' => 'Odstąpienia (UE)',
+            'info' => 'Konfiguracja przycisku odstąpienia od umowy (Dyrektywa (UE) 2023/2673, art. 11a CRD).',
+
+            'general' => [
+                'title' => 'Ogólne',
+                'info' => 'Główny przełącznik przycisku odstąpienia od umowy w tym kanale.',
+                'enabled' => 'Włącz',
+                'enabled_info' => 'Po włączeniu klienci w tym kanale widzą przycisk „Odstąpić od umowy” na stronach szczegółów zamówienia oraz publiczny formularz wyszukiwania pod adresem /withdraw. Włączaj tylko w kanałach sprzedających konsumentom z UE.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'Odstąpienia (UE)',
+        ],
+
+        'view' => [
+            'title' => 'Odstąpienie :uuid',
+            'heading' => 'Odstąpienie',
+            'back' => 'Powrót do listy',
+            'guest_badge' => 'Gość',
+
+            'evidence' => 'Dowód',
+            'evidence_note' => 'Niezmienny – zarejestrowany w chwili zgłoszenia',
+            'status' => 'Status',
+            'received_at' => 'Otrzymano',
+            'uuid' => 'Numer referencyjny',
+            'copy_reference' => 'Kopiuj numer referencyjny',
+            'reference_copied' => 'Numer referencyjny skopiowany do schowka.',
+            'order' => 'Zamówienie',
+            'customer_email' => 'E-mail klienta',
+            'is_guest' => 'Gość',
+            'channel' => 'Kanał',
+            'locale' => 'Język',
+            'reason' => 'Powód podany przez klienta',
+
+            'timeline' => 'Oś czasu',
+            'timeline_received' => 'Oświadczenie otrzymane',
+            'timeline_received_desc' => 'Klient złożył oświadczenie o odstąpieniu od umowy.',
+            'timeline_email' => 'E-mail potwierdzający',
+            'timeline_email_pending' => 'Jeszcze nie wysłano',
+            'timeline_initial_email' => 'Wstępny e-mail potwierdzający',
+            'timeline_initial_email_desc_sent' => 'E-mail potwierdzający dostarczony do klienta.',
+            'timeline_initial_email_desc_error' => 'Nie udało się wysłać wstępnego e-maila potwierdzającego.',
+            'timeline_initial_email_desc_pending' => 'Wstępny e-mail potwierdzający nie został jeszcze wysłany.',
+            'timeline_final_email' => 'Końcowy e-mail potwierdzający',
+            'timeline_final_email_pending' => 'Jeszcze nie wysłano',
+            'timeline_final_email_desc_sent' => 'E-mail z wynikiem dostarczony do klienta.',
+            'timeline_final_email_desc_pending' => 'Końcowy e-mail potwierdzający nie został jeszcze wysłany.',
+            'timeline_declined' => 'Odrzucone przez administratora',
+            'timeline_declined_desc' => 'Odstąpienie odrzucone przez :name.',
+            'timeline_declined_desc_system' => 'Odstąpienie odrzucone.',
+            'timeline_declined_reason_label' => 'Podany powód:',
+            'timeline_refunded' => 'Oznaczone jako zwrócone przez administratora',
+            'timeline_refunded_desc' => 'Zwrot wykonany przez :name.',
+            'timeline_refunded_desc_system' => 'Zwrot wykonany.',
+            'timeline_refunded_note_label' => 'Notatka administratora:',
+            'timeline_resolution' => 'Rozstrzygnięcie',
+            'timeline_resolution_desc' => 'Oczekuje na rozpatrzenie i decyzję administratora.',
+            'timeline_resolution_pending' => 'Oczekuje na działanie administratora',
+
+            'confirmation_sent_at' => 'Potwierdzenie wysłane',
+            'confirmation_error' => 'Błąd potwierdzenia',
+            'declined_at' => 'Odrzucono',
+            'refunded_at' => 'Zwrócono',
+
+            'actions' => 'Działania',
+            'actions_note' => 'Zwroty są przetwarzane ręcznie za pomocą istniejących narzędzi Bagisto: zamówień, zwrotów i RMA. Skorzystaj z poniższych działań, aby odnotować wynik w dowodzie odstąpienia.',
+            'resend_confirmation' => 'Wyślij ponownie e-mail potwierdzający',
+            'mark_refunded' => 'Oznacz jako zwrócone',
+            'refund_note_label' => 'Numer zwrotu (opcjonalnie)',
+            'refund_note_placeholder' => 'np. Zwrot nr 1234',
+            'decline' => 'Odrzuć odstąpienie',
+            'decline_reason_label' => 'Powód odrzucenia',
+            'decline_reason_placeholder' => 'Wyjaśnij, dlaczego uprawnienie jest kwestionowane',
+            'mark_refunded_confirm_msg' => 'Oznaczyć to odstąpienie jako zwrócone? Wcześniejszy wpis o odrzuceniu zostanie usunięty.',
+            'decline_confirm_msg' => 'Odrzucić to odstąpienie? Powód będzie widoczny dla klienta.',
+            'resend_confirmation_confirm_msg' => 'Wysłać klientowi e-mail potwierdzający ponownie?',
+            'send_final_confirmation' => 'Wyślij końcowy e-mail potwierdzający',
+            'send_final_confirmation_confirm_msg' => 'Wysłać klientowi końcowy e-mail z informacją o statusie?',
+        ],
+
+        'status' => [
+            'received' => 'Otrzymane',
+            'refunded' => 'Zwrócone',
+            'declined' => 'Odrzucone',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'Otrzymano',
+            'uuid' => 'Numer referencyjny',
+            'copy_reference' => 'Kopiuj numer referencyjny',
+            'reference_copied' => 'Numer referencyjny skopiowany do schowka.',
+            'order' => 'Zamówienie',
+            'customer_email' => 'E-mail klienta',
+            'channel' => 'Kanał',
+            'status' => 'Status',
+            'confirmation_sent_at' => 'Potwierdzenie wysłane',
+            'view' => 'Podgląd',
+        ],
+
+        'flash' => [
+            'declined' => 'Odstąpienie zostało odrzucone.',
+            'refunded' => 'Odstąpienie zostało oznaczone jako zwrócone.',
+            'confirmation_resent' => 'E-mail potwierdzający został wysłany ponownie.',
+            'confirmation_failed' => 'Nie udało się wysłać e-maila potwierdzającego. Szczegóły znajdują się na osi czasu.',
+        ],
+    ],
 ];

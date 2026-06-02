@@ -176,6 +176,15 @@
                             {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.sign_up_button.after') !!}
                         </div>
 
+                        @if (core()->getConfigData('sales.eu_withdrawal.general.enabled', core()->getCurrentChannelCode()))
+                            <a
+                                href="{{ route('shop.eu-withdrawal.guest.lookup') }}"
+                                class="mt-4 inline-flex items-center gap-1.5 text-xs font-medium text-navyBlue hover:underline"
+                            >
+                                @lang('shop::app.eu_withdrawal.guest_dropdown.link')
+                            </a>
+                        @endif
+
                         {!! view_render_event('bagisto.shop.components.layouts.header.desktop.bottom.customers_action.after') !!}
                     </x-slot>
                 @endguest

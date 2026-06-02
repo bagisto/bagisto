@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'انصراف از قرارداد (اتحادیه اروپا)',
+        ],
+
+        'acl' => [
+            'title' => 'انصراف از قرارداد (اتحادیه اروپا)',
+            'view' => 'مشاهده',
+            'decline' => 'رد کردن',
+            'mark_refunded' => 'علامت‌گذاری به‌عنوان بازپرداخت‌شده',
+            'resend_confirmation' => 'ارسال مجدد تأییدیه',
+        ],
+
+        'config' => [
+            'title' => 'انصراف از قرارداد (اتحادیه اروپا)',
+            'info' => 'پیکربندی دکمه انصراف از قرارداد بر اساس دستورالعمل اتحادیه اروپا (EU) 2023/2673، ماده 11a CRD.',
+
+            'general' => [
+                'title' => 'عمومی',
+                'info' => 'کلید اصلی فعال‌سازی دکمه انصراف از قرارداد در این کانال.',
+                'enabled' => 'فعال‌سازی',
+                'enabled_info' => 'هنگامی که فعال باشد، مشتریان این کانال در صفحه جزئیات سفارش دکمه «انصراف از قرارداد» و یک فرم عمومی جست‌وجوی ‎/withdraw را مشاهده می‌کنند. فقط در کانال‌هایی که به مصرف‌کنندگان اتحادیه اروپا فروش دارند فعال کنید.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'انصراف‌ از قرارداد',
+        ],
+
+        'view' => [
+            'title' => 'انصراف :uuid',
+            'heading' => 'انصراف از قرارداد',
+            'back' => 'بازگشت به فهرست',
+            'guest_badge' => 'مهمان',
+
+            'evidence' => 'مدارک',
+            'evidence_note' => 'تغییرناپذیر — در زمان ثبت ضبط شده است',
+            'status' => 'وضعیت',
+            'received_at' => 'زمان دریافت',
+            'uuid' => 'شناسه مرجع',
+            'copy_reference' => 'کپی شناسه مرجع',
+            'reference_copied' => 'شناسه مرجع در کلیپ‌بورد کپی شد.',
+            'order' => 'سفارش',
+            'customer_email' => 'ایمیل مشتری',
+            'is_guest' => 'مهمان',
+            'channel' => 'کانال',
+            'locale' => 'زبان',
+            'reason' => 'دلیل مشتری',
+
+            'timeline' => 'سیر زمانی',
+            'timeline_received' => 'اعلامیه دریافت شد',
+            'timeline_received_desc' => 'مشتری درخواست انصراف از قرارداد را ثبت کرده است.',
+            'timeline_email' => 'ایمیل تأییدیه',
+            'timeline_email_pending' => 'هنوز ارسال نشده است',
+            'timeline_initial_email' => 'ایمیل تأییدیه اولیه',
+            'timeline_initial_email_desc_sent' => 'ایمیل تأییدیه به مشتری تحویل شد.',
+            'timeline_initial_email_desc_error' => 'ارسال ایمیل تأییدیه اولیه با خطا مواجه شد.',
+            'timeline_initial_email_desc_pending' => 'ایمیل تأییدیه اولیه هنوز ارسال نشده است.',
+            'timeline_final_email' => 'ایمیل تأییدیه نهایی',
+            'timeline_final_email_pending' => 'هنوز ارسال نشده است',
+            'timeline_final_email_desc_sent' => 'ایمیل نتیجه نهایی به مشتری تحویل شد.',
+            'timeline_final_email_desc_pending' => 'ایمیل تأییدیه نهایی هنوز ارسال نشده است.',
+            'timeline_declined' => 'رد شده توسط مدیر',
+            'timeline_declined_desc' => 'انصراف توسط :name رد شد.',
+            'timeline_declined_desc_system' => 'درخواست انصراف رد شد.',
+            'timeline_declined_reason_label' => 'دلیل ارائه‌شده:',
+            'timeline_refunded' => 'علامت‌گذاری بازپرداخت توسط مدیر',
+            'timeline_refunded_desc' => 'بازپرداخت توسط :name صادر شد.',
+            'timeline_refunded_desc_system' => 'بازپرداخت صادر شد.',
+            'timeline_refunded_note_label' => 'یادداشت مدیر:',
+            'timeline_resolution' => 'تصمیم‌گیری',
+            'timeline_resolution_desc' => 'در انتظار بررسی و تصمیم مدیر.',
+            'timeline_resolution_pending' => 'در انتظار اقدام مدیر',
+
+            'confirmation_sent_at' => 'زمان ارسال تأییدیه',
+            'confirmation_error' => 'خطای تأییدیه',
+            'declined_at' => 'زمان رد',
+            'refunded_at' => 'زمان بازپرداخت',
+
+            'actions' => 'اقدامات',
+            'actions_note' => 'بازپرداخت‌ها به‌صورت دستی از طریق ابزارهای سفارش / بازپرداخت / RMA موجود در باگیستو پردازش می‌شوند. از این اقدامات برای ثبت نتیجه در مدارک انصراف استفاده کنید.',
+            'resend_confirmation' => 'ارسال مجدد ایمیل تأییدیه',
+            'mark_refunded' => 'علامت‌گذاری به‌عنوان بازپرداخت‌شده',
+            'refund_note_label' => 'شماره مرجع بازپرداخت (اختیاری)',
+            'refund_note_placeholder' => 'مثلاً: بازپرداخت شماره ۱۲۳۴',
+            'decline' => 'رد درخواست انصراف',
+            'decline_reason_label' => 'دلیل رد',
+            'decline_reason_placeholder' => 'دلیل رد استحقاق را توضیح دهید',
+            'mark_refunded_confirm_msg' => 'این درخواست انصراف به‌عنوان بازپرداخت‌شده علامت‌گذاری شود؟ هرگونه سابقه رد قبلی پاک خواهد شد.',
+            'decline_confirm_msg' => 'این درخواست انصراف رد شود؟ دلیل برای مشتری قابل مشاهده خواهد بود.',
+            'resend_confirmation_confirm_msg' => 'ایمیل تأییدیه دوباره به مشتری ارسال شود؟',
+            'send_final_confirmation' => 'ارسال ایمیل تأییدیه نهایی',
+            'send_final_confirmation_confirm_msg' => 'ایمیل وضعیت نهایی برای مشتری ارسال شود؟',
+        ],
+
+        'status' => [
+            'received' => 'دریافت شده',
+            'refunded' => 'بازپرداخت شده',
+            'declined' => 'رد شده',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'زمان دریافت',
+            'uuid' => 'شناسه مرجع',
+            'copy_reference' => 'کپی شناسه مرجع',
+            'reference_copied' => 'شناسه مرجع در کلیپ‌بورد کپی شد.',
+            'order' => 'سفارش',
+            'customer_email' => 'ایمیل مشتری',
+            'channel' => 'کانال',
+            'status' => 'وضعیت',
+            'confirmation_sent_at' => 'تأییدیه ارسال شد',
+            'view' => 'مشاهده',
+        ],
+
+        'flash' => [
+            'declined' => 'درخواست انصراف رد شد.',
+            'refunded' => 'درخواست انصراف به‌عنوان بازپرداخت‌شده علامت‌گذاری شد.',
+            'confirmation_resent' => 'ایمیل تأییدیه دوباره ارسال شد.',
+            'confirmation_failed' => 'ارسال ایمیل تأییدیه ممکن نشد. برای جزئیات به سیر زمانی مراجعه کنید.',
+        ],
+    ],
 ];

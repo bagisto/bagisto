@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'الانسحاب من العقد (الاتحاد الأوروبي)',
+        ],
+
+        'acl' => [
+            'title' => 'الانسحاب من العقد (الاتحاد الأوروبي)',
+            'view' => 'عرض',
+            'decline' => 'رفض',
+            'mark_refunded' => 'تعليم كمُستردّ',
+            'resend_confirmation' => 'إعادة إرسال التأكيد',
+        ],
+
+        'config' => [
+            'title' => 'الانسحاب من العقد (الاتحاد الأوروبي)',
+            'info' => 'إعدادات زر الانسحاب من العقد وفقاً للتوجيه الأوروبي (EU) 2023/2673، المادة 11أ من توجيه حقوق المستهلك.',
+
+            'general' => [
+                'title' => 'عام',
+                'info' => 'المفتاح الرئيسي لزر الانسحاب من العقد على هذه القناة.',
+                'enabled' => 'تفعيل',
+                'enabled_info' => 'عند التفعيل، يرى العملاء على هذه القناة زر «الانسحاب من العقد» في صفحات تفاصيل الطلب، إضافةً إلى نموذج بحث عام على المسار ‎/withdraw. يُنصح بالتفعيل فقط على القنوات التي تبيع للمستهلكين داخل الاتحاد الأوروبي.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'طلبات الانسحاب من العقد',
+        ],
+
+        'view' => [
+            'title' => 'طلب الانسحاب :uuid',
+            'heading' => 'طلب الانسحاب',
+            'back' => 'العودة إلى القائمة',
+            'guest_badge' => 'زائر',
+
+            'evidence' => 'الأدلة',
+            'evidence_note' => 'غير قابلة للتعديل — مُسجَّلة لحظة التقديم',
+            'status' => 'الحالة',
+            'received_at' => 'تاريخ الاستلام',
+            'uuid' => 'الرقم المرجعي',
+            'copy_reference' => 'نسخ الرقم المرجعي',
+            'reference_copied' => 'تم نسخ الرقم المرجعي إلى الحافظة.',
+            'order' => 'الطلب',
+            'customer_email' => 'بريد العميل',
+            'is_guest' => 'زائر',
+            'channel' => 'القناة',
+            'locale' => 'اللغة',
+            'reason' => 'سبب العميل',
+
+            'timeline' => 'المسار الزمني',
+            'timeline_received' => 'تم استلام الإقرار',
+            'timeline_received_desc' => 'قدّم العميل طلب الانسحاب من العقد.',
+            'timeline_email' => 'بريد التأكيد',
+            'timeline_email_pending' => 'لم يُرسل بعد',
+            'timeline_initial_email' => 'بريد التأكيد الأولي',
+            'timeline_initial_email_desc_sent' => 'تم تسليم بريد التأكيد إلى العميل.',
+            'timeline_initial_email_desc_error' => 'فشل إرسال بريد التأكيد الأولي.',
+            'timeline_initial_email_desc_pending' => 'لم يُرسَل بريد التأكيد الأولي بعد.',
+            'timeline_final_email' => 'بريد التأكيد النهائي',
+            'timeline_final_email_pending' => 'لم يُرسل بعد',
+            'timeline_final_email_desc_sent' => 'تم تسليم بريد القرار النهائي إلى العميل.',
+            'timeline_final_email_desc_pending' => 'لم يُرسَل بريد التأكيد النهائي بعد.',
+            'timeline_declined' => 'مرفوض من قِبَل المسؤول',
+            'timeline_declined_desc' => 'تم رفض الطلب بواسطة :name.',
+            'timeline_declined_desc_system' => 'تم رفض طلب الانسحاب.',
+            'timeline_declined_reason_label' => 'السبب المُقدَّم:',
+            'timeline_refunded' => 'مُعلَّم كمُستردّ من قِبَل المسؤول',
+            'timeline_refunded_desc' => 'تم إصدار الاسترداد بواسطة :name.',
+            'timeline_refunded_desc_system' => 'تم إصدار الاسترداد.',
+            'timeline_refunded_note_label' => 'ملاحظة المسؤول:',
+            'timeline_resolution' => 'القرار',
+            'timeline_resolution_desc' => 'في انتظار مراجعة المسؤول واتخاذ القرار.',
+            'timeline_resolution_pending' => 'في انتظار إجراء المسؤول',
+
+            'confirmation_sent_at' => 'تاريخ إرسال التأكيد',
+            'confirmation_error' => 'خطأ في التأكيد',
+            'declined_at' => 'تاريخ الرفض',
+            'refunded_at' => 'تاريخ الاسترداد',
+
+            'actions' => 'الإجراءات',
+            'actions_note' => 'تتم معالجة المبالغ المستردّة يدوياً عبر أدوات الطلبات / الاسترداد / RMA الموجودة في باجيستو. استخدم هذه الإجراءات لتسجيل النتيجة في أدلة الانسحاب.',
+            'resend_confirmation' => 'إعادة إرسال بريد التأكيد',
+            'mark_refunded' => 'تعليم كمُستردّ',
+            'refund_note_label' => 'مرجع الاسترداد (اختياري)',
+            'refund_note_placeholder' => 'مثلاً: استرداد رقم 1234',
+            'decline' => 'رفض الطلب',
+            'decline_reason_label' => 'سبب الرفض',
+            'decline_reason_placeholder' => 'وضّح سبب الاعتراض على الاستحقاق',
+            'mark_refunded_confirm_msg' => 'هل تريد تعليم هذا الطلب كمُستردّ؟ سيتم مسح أي سجل رفض سابق.',
+            'decline_confirm_msg' => 'هل تريد رفض هذا الطلب؟ سيكون السبب مرئياً للعميل.',
+            'resend_confirmation_confirm_msg' => 'هل تريد إعادة إرسال بريد التأكيد إلى العميل؟',
+            'send_final_confirmation' => 'إرسال بريد التأكيد النهائي',
+            'send_final_confirmation_confirm_msg' => 'هل تريد إرسال بريد الحالة النهائية إلى العميل؟',
+        ],
+
+        'status' => [
+            'received' => 'مُستلَم',
+            'refunded' => 'مُستردّ',
+            'declined' => 'مرفوض',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'تاريخ الاستلام',
+            'uuid' => 'الرقم المرجعي',
+            'copy_reference' => 'نسخ الرقم المرجعي',
+            'reference_copied' => 'تم نسخ الرقم المرجعي إلى الحافظة.',
+            'order' => 'الطلب',
+            'customer_email' => 'بريد العميل',
+            'channel' => 'القناة',
+            'status' => 'الحالة',
+            'confirmation_sent_at' => 'تم إرسال التأكيد',
+            'view' => 'عرض',
+        ],
+
+        'flash' => [
+            'declined' => 'تم رفض طلب الانسحاب.',
+            'refunded' => 'تم تعليم طلب الانسحاب كمُستردّ.',
+            'confirmation_resent' => 'تم إعادة إرسال بريد التأكيد.',
+            'confirmation_failed' => 'تعذّر إرسال بريد التأكيد. راجع المسار الزمني للاطلاع على التفاصيل.',
+        ],
+    ],
 ];

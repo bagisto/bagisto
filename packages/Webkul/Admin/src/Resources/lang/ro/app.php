@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'Retrageri UE',
+        ],
+
+        'acl' => [
+            'title' => 'Retrageri UE',
+            'view' => 'Vizualizare',
+            'decline' => 'Respingere',
+            'mark_refunded' => 'Marchează ca rambursat',
+            'resend_confirmation' => 'Retrimite confirmarea',
+        ],
+
+        'config' => [
+            'title' => 'Retrageri UE',
+            'info' => 'Configurarea butonului de retragere UE (Directiva (UE) 2023/2673, articolul 11a CRD).',
+
+            'general' => [
+                'title' => 'General',
+                'info' => 'Comutator principal pentru butonul de retragere UE pe acest canal.',
+                'enabled' => 'Activează',
+                'enabled_info' => 'Atunci când este activat, clienții de pe acest canal văd un buton „Retragere din contract” pe paginile de detaliu ale comenzii și un formular public /withdraw. Activați doar pe canalele care vând consumatorilor din UE.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'Retrageri UE',
+        ],
+
+        'view' => [
+            'title' => 'Retragere :uuid',
+            'heading' => 'Retragere',
+            'back' => 'Înapoi la listă',
+            'guest_badge' => 'Vizitator',
+
+            'evidence' => 'Dovadă',
+            'evidence_note' => 'Imutabilă — capturată la trimitere',
+            'status' => 'Stare',
+            'received_at' => 'Primită la',
+            'uuid' => 'Referință',
+            'copy_reference' => 'Copiază referința',
+            'reference_copied' => 'Referința a fost copiată în clipboard.',
+            'order' => 'Comandă',
+            'customer_email' => 'E-mailul clientului',
+            'is_guest' => 'Vizitator',
+            'channel' => 'Canal',
+            'locale' => 'Limbă',
+            'reason' => 'Motivul clientului',
+
+            'timeline' => 'Cronologie',
+            'timeline_received' => 'Declarație primită',
+            'timeline_received_desc' => 'Clientul a depus o cerere de retragere din contract.',
+            'timeline_email' => 'E-mail de confirmare',
+            'timeline_email_pending' => 'Încă netrimis',
+            'timeline_initial_email' => 'E-mail de confirmare inițial',
+            'timeline_initial_email_desc_sent' => 'E-mailul de confirmare a fost livrat clientului.',
+            'timeline_initial_email_desc_error' => 'Trimiterea e-mailului de confirmare inițial a eșuat.',
+            'timeline_initial_email_desc_pending' => 'E-mailul de confirmare inițial nu a fost încă trimis.',
+            'timeline_final_email' => 'E-mail de confirmare final',
+            'timeline_final_email_pending' => 'Încă netrimis',
+            'timeline_final_email_desc_sent' => 'E-mailul cu rezultatul a fost livrat clientului.',
+            'timeline_final_email_desc_pending' => 'E-mailul de confirmare final nu a fost încă trimis.',
+            'timeline_declined' => 'Respinsă de administrator',
+            'timeline_declined_desc' => 'Retragere respinsă de :name.',
+            'timeline_declined_desc_system' => 'Retragere respinsă.',
+            'timeline_declined_reason_label' => 'Motivul invocat:',
+            'timeline_refunded' => 'Marcată ca rambursată de administrator',
+            'timeline_refunded_desc' => 'Rambursare emisă de :name.',
+            'timeline_refunded_desc_system' => 'Rambursare emisă.',
+            'timeline_refunded_note_label' => 'Notă administrator:',
+            'timeline_resolution' => 'Soluționare',
+            'timeline_resolution_desc' => 'În așteptarea examinării și deciziei administratorului.',
+            'timeline_resolution_pending' => 'În așteptarea acțiunii administratorului',
+
+            'confirmation_sent_at' => 'Confirmare trimisă la',
+            'confirmation_error' => 'Eroare de confirmare',
+            'declined_at' => 'Respinsă la',
+            'refunded_at' => 'Rambursată la',
+
+            'actions' => 'Acțiuni',
+            'actions_note' => 'Rambursările sunt procesate manual prin instrumentele existente comandă / rambursare / RMA din Bagisto. Folosiți aceste acțiuni pentru a înregistra rezultatul pe dovada retragerii.',
+            'resend_confirmation' => 'Retrimite e-mailul de confirmare',
+            'mark_refunded' => 'Marchează ca rambursată',
+            'refund_note_label' => 'Referință rambursare (opțional)',
+            'refund_note_placeholder' => 'ex. Rambursare #1234',
+            'decline' => 'Respinge retragerea',
+            'decline_reason_label' => 'Motivul respingerii',
+            'decline_reason_placeholder' => 'Explicați de ce este contestat dreptul',
+            'mark_refunded_confirm_msg' => 'Marcați această retragere ca rambursată? Orice înregistrare anterioară de respingere va fi ștearsă.',
+            'decline_confirm_msg' => 'Respingeți această retragere? Motivul va fi vizibil pentru client.',
+            'resend_confirmation_confirm_msg' => 'Retrimiteți e-mailul de confirmare către client?',
+            'send_final_confirmation' => 'Trimite e-mailul de confirmare final',
+            'send_final_confirmation_confirm_msg' => 'Trimiteți e-mailul cu starea finală către client?',
+        ],
+
+        'status' => [
+            'received' => 'Primită',
+            'refunded' => 'Rambursată',
+            'declined' => 'Respinsă',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'Primită la',
+            'uuid' => 'Referință',
+            'copy_reference' => 'Copiază referința',
+            'reference_copied' => 'Referința a fost copiată în clipboard.',
+            'order' => 'Comandă',
+            'customer_email' => 'E-mailul clientului',
+            'channel' => 'Canal',
+            'status' => 'Stare',
+            'confirmation_sent_at' => 'Confirmare trimisă',
+            'view' => 'Vizualizare',
+        ],
+
+        'flash' => [
+            'declined' => 'Retragerea a fost respinsă.',
+            'refunded' => 'Retragerea a fost marcată ca rambursată.',
+            'confirmation_resent' => 'E-mailul de confirmare a fost retrimis.',
+            'confirmation_failed' => 'Nu s-a putut trimite e-mailul de confirmare. Consultați cronologia pentru detalii.',
+        ],
+    ],
 ];

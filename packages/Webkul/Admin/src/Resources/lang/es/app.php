@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'Desistimientos UE',
+        ],
+
+        'acl' => [
+            'title' => 'Desistimientos UE',
+            'view' => 'Ver',
+            'decline' => 'Rechazar',
+            'mark_refunded' => 'Marcar como reembolsado',
+            'resend_confirmation' => 'Reenviar confirmación',
+        ],
+
+        'config' => [
+            'title' => 'Desistimientos UE',
+            'info' => 'Configuración del botón de desistimiento de la UE (Directiva (UE) 2023/2673, artículo 11 bis DDC).',
+
+            'general' => [
+                'title' => 'General',
+                'info' => 'Interruptor principal del botón de desistimiento de la UE en este canal.',
+                'enabled' => 'Activar',
+                'enabled_info' => 'Cuando está activado, los clientes de este canal ven un botón «Desistir del contrato» en las páginas de detalle del pedido y un formulario público de búsqueda en /withdraw. Actívelo solo en canales que vendan a consumidores de la UE.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'Desistimientos UE',
+        ],
+
+        'view' => [
+            'title' => 'Desistimiento :uuid',
+            'heading' => 'Desistimiento',
+            'back' => 'Volver a la lista',
+            'guest_badge' => 'Invitado',
+
+            'evidence' => 'Prueba',
+            'evidence_note' => 'Inmutable — capturado en el envío',
+            'status' => 'Estado',
+            'received_at' => 'Recibido el',
+            'uuid' => 'Referencia',
+            'copy_reference' => 'Copiar referencia',
+            'reference_copied' => 'Referencia copiada al portapapeles.',
+            'order' => 'Pedido',
+            'customer_email' => 'Correo del cliente',
+            'is_guest' => 'Invitado',
+            'channel' => 'Canal',
+            'locale' => 'Idioma',
+            'reason' => 'Motivo del cliente',
+
+            'timeline' => 'Cronología',
+            'timeline_received' => 'Declaración recibida',
+            'timeline_received_desc' => 'El cliente envió una solicitud de desistimiento del contrato.',
+            'timeline_email' => 'Correo de confirmación',
+            'timeline_email_pending' => 'Aún no enviado',
+            'timeline_initial_email' => 'Correo de confirmación inicial',
+            'timeline_initial_email_desc_sent' => 'Correo de confirmación entregado al cliente.',
+            'timeline_initial_email_desc_error' => 'No se pudo enviar el correo de confirmación inicial.',
+            'timeline_initial_email_desc_pending' => 'El correo de confirmación inicial aún no se ha enviado.',
+            'timeline_final_email' => 'Correo de confirmación final',
+            'timeline_final_email_pending' => 'Aún no enviado',
+            'timeline_final_email_desc_sent' => 'Correo de resultado entregado al cliente.',
+            'timeline_final_email_desc_pending' => 'El correo de confirmación final aún no se ha enviado.',
+            'timeline_declined' => 'Desistimiento rechazado',
+            'timeline_declined_desc' => 'Desistimiento rechazado por :name.',
+            'timeline_declined_desc_system' => 'Desistimiento rechazado.',
+            'timeline_declined_reason_label' => 'Motivo indicado:',
+            'timeline_refunded' => 'Reembolso emitido',
+            'timeline_refunded_desc' => 'Reembolso emitido por :name.',
+            'timeline_refunded_desc_system' => 'Reembolso emitido.',
+            'timeline_refunded_note_label' => 'Nota del administrador:',
+            'timeline_resolution' => 'Resolución pendiente',
+            'timeline_resolution_desc' => 'A la espera de revisión y decisión del administrador.',
+            'timeline_resolution_pending' => 'A la espera de acción del administrador',
+
+            'confirmation_sent_at' => 'Confirmación enviada el',
+            'confirmation_error' => 'Error de confirmación',
+            'declined_at' => 'Rechazado el',
+            'refunded_at' => 'Reembolsado el',
+
+            'actions' => 'Acciones',
+            'actions_note' => 'Los reembolsos se procesan manualmente con las herramientas existentes de Bagisto de pedido / reembolso / RMA. Use estas acciones para registrar el resultado en la prueba del desistimiento.',
+            'resend_confirmation' => 'Reenviar correo de confirmación',
+            'mark_refunded' => 'Marcar como reembolsado',
+            'refund_note_label' => 'Referencia del reembolso (opcional)',
+            'refund_note_placeholder' => 'p. ej., Reembolso n.º 1234',
+            'decline' => 'Rechazar desistimiento',
+            'decline_reason_label' => 'Motivo del rechazo',
+            'decline_reason_placeholder' => 'Explique por qué se cuestiona el derecho',
+            'mark_refunded_confirm_msg' => '¿Marcar este desistimiento como reembolsado? Se borrará cualquier registro previo de rechazo.',
+            'decline_confirm_msg' => '¿Rechazar este desistimiento? El motivo será visible para el cliente.',
+            'resend_confirmation_confirm_msg' => '¿Reenviar el correo de confirmación al cliente?',
+            'send_final_confirmation' => 'Enviar correo de confirmación final',
+            'send_final_confirmation_confirm_msg' => '¿Enviar al cliente el correo con el estado final?',
+        ],
+
+        'status' => [
+            'received' => 'Recibido',
+            'refunded' => 'Reembolsado',
+            'declined' => 'Rechazado',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'Recibido el',
+            'uuid' => 'Referencia',
+            'copy_reference' => 'Copiar referencia',
+            'reference_copied' => 'Referencia copiada al portapapeles.',
+            'order' => 'Pedido',
+            'customer_email' => 'Correo del cliente',
+            'channel' => 'Canal',
+            'status' => 'Estado',
+            'confirmation_sent_at' => 'Confirmación enviada',
+            'view' => 'Ver',
+        ],
+
+        'flash' => [
+            'declined' => 'El desistimiento ha sido rechazado.',
+            'refunded' => 'El desistimiento se ha marcado como reembolsado.',
+            'confirmation_resent' => 'Se ha reenviado el correo de confirmación.',
+            'confirmation_failed' => 'No se pudo enviar el correo de confirmación. Consulte la cronología para más detalles.',
+        ],
+    ],
 ];

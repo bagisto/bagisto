@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'EU契約撤回',
+        ],
+
+        'acl' => [
+            'title' => 'EU契約撤回',
+            'view' => '表示',
+            'decline' => '却下',
+            'mark_refunded' => '返金済みにする',
+            'resend_confirmation' => '確認メールを再送',
+        ],
+
+        'config' => [
+            'title' => 'EU契約撤回',
+            'info' => 'EU契約撤回ボタンの設定（EU指令 2023/2673、消費者権利指令第11a条）。',
+
+            'general' => [
+                'title' => '一般',
+                'info' => 'このチャネルにおけるEU契約撤回ボタンのメインスイッチ。',
+                'enabled' => '有効化',
+                'enabled_info' => '有効にすると、このチャネルの顧客は注文詳細ページに「契約を撤回する」ボタンと、公開の /withdraw 検索フォームが表示されます。EU内の消費者に販売するチャネルでのみ有効にしてください。',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'EU契約撤回',
+        ],
+
+        'view' => [
+            'title' => '契約撤回 :uuid',
+            'heading' => '契約撤回',
+            'back' => '一覧に戻る',
+            'guest_badge' => 'ゲスト',
+
+            'evidence' => 'エビデンス',
+            'evidence_note' => '変更不可 — 申請時に記録',
+            'status' => 'ステータス',
+            'received_at' => '受領日時',
+            'uuid' => '参照番号',
+            'copy_reference' => '参照番号をコピー',
+            'reference_copied' => '参照番号をクリップボードにコピーしました。',
+            'order' => '注文',
+            'customer_email' => '顧客メールアドレス',
+            'is_guest' => 'ゲスト',
+            'channel' => 'チャネル',
+            'locale' => 'ロケール',
+            'reason' => 'お客様の理由',
+
+            'timeline' => 'タイムライン',
+            'timeline_received' => '宣言を受領',
+            'timeline_received_desc' => 'お客様が契約撤回の申請を送信しました。',
+            'timeline_email' => '確認メール',
+            'timeline_email_pending' => '未送信',
+            'timeline_initial_email' => '初回確認メール',
+            'timeline_initial_email_desc_sent' => '確認メールをお客様に送信しました。',
+            'timeline_initial_email_desc_error' => '初回確認メールの送信に失敗しました。',
+            'timeline_initial_email_desc_pending' => '初回確認メールはまだ送信されていません。',
+            'timeline_final_email' => '最終確認メール',
+            'timeline_final_email_pending' => '未送信',
+            'timeline_final_email_desc_sent' => '結果通知メールをお客様に送信しました。',
+            'timeline_final_email_desc_pending' => '最終確認メールはまだ送信されていません。',
+            'timeline_declined' => '管理者により却下',
+            'timeline_declined_desc' => ':name により契約撤回が却下されました。',
+            'timeline_declined_desc_system' => '契約撤回が却下されました。',
+            'timeline_declined_reason_label' => '理由：',
+            'timeline_refunded' => '管理者により返金済み',
+            'timeline_refunded_desc' => ':name により返金が行われました。',
+            'timeline_refunded_desc_system' => '返金が行われました。',
+            'timeline_refunded_note_label' => '管理者メモ：',
+            'timeline_resolution' => '対応',
+            'timeline_resolution_desc' => '管理者の確認と判断を待っています。',
+            'timeline_resolution_pending' => '管理者の対応待ち',
+
+            'confirmation_sent_at' => '確認送信日時',
+            'confirmation_error' => '確認メールエラー',
+            'declined_at' => '却下日時',
+            'refunded_at' => '返金日時',
+
+            'actions' => 'アクション',
+            'actions_note' => '返金処理は、Bagisto既存の注文／返金／RMA機能で手動で行います。これらのアクションは、契約撤回のエビデンスに結果を記録するために使用します。',
+            'resend_confirmation' => '確認メールを再送',
+            'mark_refunded' => '返金済みにする',
+            'refund_note_label' => '返金参照番号（任意）',
+            'refund_note_placeholder' => '例：返金 #1234',
+            'decline' => '契約撤回を却下',
+            'decline_reason_label' => '却下の理由',
+            'decline_reason_placeholder' => '請求権が争われる理由を説明してください',
+            'mark_refunded_confirm_msg' => 'この契約撤回を返金済みにしますか？以前の却下記録はクリアされます。',
+            'decline_confirm_msg' => 'この契約撤回を却下しますか？理由はお客様に表示されます。',
+            'resend_confirmation_confirm_msg' => 'お客様に確認メールを再送しますか？',
+            'send_final_confirmation' => '最終確認メールを送信',
+            'send_final_confirmation_confirm_msg' => '最終ステータスメールをお客様に送信しますか？',
+        ],
+
+        'status' => [
+            'received' => '受領済み',
+            'refunded' => '返金済み',
+            'declined' => '却下',
+        ],
+
+        'datagrid' => [
+            'received_at' => '受領日時',
+            'uuid' => '参照番号',
+            'copy_reference' => '参照番号をコピー',
+            'reference_copied' => '参照番号をクリップボードにコピーしました。',
+            'order' => '注文',
+            'customer_email' => '顧客メールアドレス',
+            'channel' => 'チャネル',
+            'status' => 'ステータス',
+            'confirmation_sent_at' => '確認送信済み',
+            'view' => '表示',
+        ],
+
+        'flash' => [
+            'declined' => '契約撤回を却下しました。',
+            'refunded' => '契約撤回を返金済みにしました。',
+            'confirmation_resent' => '確認メールを再送しました。',
+            'confirmation_failed' => '確認メールを送信できませんでした。詳細はタイムラインをご確認ください。',
+        ],
+    ],
 ];

@@ -15,6 +15,7 @@ use Webkul\Customer\Providers\CustomerServiceProvider;
 use Webkul\DataGrid\Providers\DataGridServiceProvider;
 use Webkul\DataTransfer\Providers\DataTransferServiceProvider;
 use Webkul\DebugBar\Providers\DebugBarServiceProvider;
+use Webkul\EUWithdrawal\Providers\EUWithdrawalServiceProvider;
 use Webkul\FPC\Providers\FPCServiceProvider;
 use Webkul\GDPR\Providers\GDPRServiceProvider;
 use Webkul\ImageCache\Providers\ImageCacheServiceProvider;
@@ -65,6 +66,7 @@ return [
     DataGridServiceProvider::class,
     DataTransferServiceProvider::class,
     DebugBarServiceProvider::class,
+    EUWithdrawalServiceProvider::class,
     FPCServiceProvider::class,
     GDPRServiceProvider::class,
     ImageCacheServiceProvider::class,

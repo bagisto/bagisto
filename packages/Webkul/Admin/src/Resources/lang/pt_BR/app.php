@@ -5730,4 +5730,126 @@ return [
             ],
         ],
     ],
+
+    'eu_withdrawal' => [
+        'menu' => [
+            'eu_withdrawals' => 'Renúncias UE',
+        ],
+
+        'acl' => [
+            'title' => 'Renúncias UE',
+            'view' => 'Visualizar',
+            'decline' => 'Recusar',
+            'mark_refunded' => 'Marcar como reembolsado',
+            'resend_confirmation' => 'Reenviar confirmação',
+        ],
+
+        'config' => [
+            'title' => 'Renúncias UE',
+            'info' => 'Configuração do botão de renúncia da UE (Diretiva (UE) 2023/2673, artigo 11.º-A da DDC).',
+
+            'general' => [
+                'title' => 'Geral',
+                'info' => 'Interruptor principal do botão de renúncia da UE neste canal.',
+                'enabled' => 'Ativar',
+                'enabled_info' => 'Quando ativado, os clientes deste canal veem um botão «Renunciar ao contrato» nas páginas de detalhe do pedido e um formulário público de consulta em /withdraw. Ative-o apenas em canais que vendam a consumidores da UE.',
+            ],
+        ],
+
+        'index' => [
+            'title' => 'Renúncias UE',
+        ],
+
+        'view' => [
+            'title' => 'Renúncia :uuid',
+            'heading' => 'Renúncia',
+            'back' => 'Voltar à lista',
+            'guest_badge' => 'Visitante',
+
+            'evidence' => 'Comprovação',
+            'evidence_note' => 'Imutável — capturada no envio',
+            'status' => 'Status',
+            'received_at' => 'Recebido em',
+            'uuid' => 'Referência',
+            'copy_reference' => 'Copiar referência',
+            'reference_copied' => 'Referência copiada para a área de transferência.',
+            'order' => 'Pedido',
+            'customer_email' => 'E-mail do cliente',
+            'is_guest' => 'Visitante',
+            'channel' => 'Canal',
+            'locale' => 'Idioma',
+            'reason' => 'Motivo do cliente',
+
+            'timeline' => 'Linha do tempo',
+            'timeline_received' => 'Declaração recebida',
+            'timeline_received_desc' => 'O cliente enviou uma solicitação de renúncia ao contrato.',
+            'timeline_email' => 'E-mail de confirmação',
+            'timeline_email_pending' => 'Ainda não enviado',
+            'timeline_initial_email' => 'E-mail de confirmação inicial',
+            'timeline_initial_email_desc_sent' => 'E-mail de confirmação entregue ao cliente.',
+            'timeline_initial_email_desc_error' => 'Falha ao enviar o e-mail de confirmação inicial.',
+            'timeline_initial_email_desc_pending' => 'O e-mail de confirmação inicial ainda não foi enviado.',
+            'timeline_final_email' => 'E-mail de confirmação final',
+            'timeline_final_email_pending' => 'Ainda não enviado',
+            'timeline_final_email_desc_sent' => 'E-mail com o resultado entregue ao cliente.',
+            'timeline_final_email_desc_pending' => 'O e-mail de confirmação final ainda não foi enviado.',
+            'timeline_declined' => 'Renúncia recusada',
+            'timeline_declined_desc' => 'Renúncia recusada por :name.',
+            'timeline_declined_desc_system' => 'Renúncia recusada.',
+            'timeline_declined_reason_label' => 'Motivo informado:',
+            'timeline_refunded' => 'Reembolso emitido',
+            'timeline_refunded_desc' => 'Reembolso emitido por :name.',
+            'timeline_refunded_desc_system' => 'Reembolso emitido.',
+            'timeline_refunded_note_label' => 'Observação do administrador:',
+            'timeline_resolution' => 'Resolução pendente',
+            'timeline_resolution_desc' => 'Aguardando análise e decisão do administrador.',
+            'timeline_resolution_pending' => 'Aguardando ação do administrador',
+
+            'confirmation_sent_at' => 'Confirmação enviada em',
+            'confirmation_error' => 'Erro de confirmação',
+            'declined_at' => 'Recusada em',
+            'refunded_at' => 'Reembolsada em',
+
+            'actions' => 'Ações',
+            'actions_note' => 'Os reembolsos são processados manualmente pelas ferramentas existentes do Bagisto (pedido / reembolso / RMA). Use essas ações para registrar o resultado na comprovação da renúncia.',
+            'resend_confirmation' => 'Reenviar e-mail de confirmação',
+            'mark_refunded' => 'Marcar como reembolsado',
+            'refund_note_label' => 'Referência do reembolso (opcional)',
+            'refund_note_placeholder' => 'ex.: Reembolso n.º 1234',
+            'decline' => 'Recusar renúncia',
+            'decline_reason_label' => 'Motivo da recusa',
+            'decline_reason_placeholder' => 'Explique por que o direito está sendo contestado',
+            'mark_refunded_confirm_msg' => 'Marcar esta renúncia como reembolsada? Qualquer registro anterior de recusa será apagado.',
+            'decline_confirm_msg' => 'Recusar esta renúncia? O motivo ficará visível para o cliente.',
+            'resend_confirmation_confirm_msg' => 'Reenviar o e-mail de confirmação ao cliente?',
+            'send_final_confirmation' => 'Enviar e-mail de confirmação final',
+            'send_final_confirmation_confirm_msg' => 'Enviar ao cliente o e-mail com o status final?',
+        ],
+
+        'status' => [
+            'received' => 'Recebida',
+            'refunded' => 'Reembolsada',
+            'declined' => 'Recusada',
+        ],
+
+        'datagrid' => [
+            'received_at' => 'Recebido em',
+            'uuid' => 'Referência',
+            'copy_reference' => 'Copiar referência',
+            'reference_copied' => 'Referência copiada para a área de transferência.',
+            'order' => 'Pedido',
+            'customer_email' => 'E-mail do cliente',
+            'channel' => 'Canal',
+            'status' => 'Status',
+            'confirmation_sent_at' => 'Confirmação enviada',
+            'view' => 'Visualizar',
+        ],
+
+        'flash' => [
+            'declined' => 'A renúncia foi recusada.',
+            'refunded' => 'A renúncia foi marcada como reembolsada.',
+            'confirmation_resent' => 'O e-mail de confirmação foi reenviado.',
+            'confirmation_failed' => 'Não foi possível enviar o e-mail de confirmação. Consulte a linha do tempo para mais detalhes.',
+        ],
+    ],
 ];

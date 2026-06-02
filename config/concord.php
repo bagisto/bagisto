@@ -29,6 +29,7 @@ return [
         Webkul\Customer\Providers\ModuleServiceProvider::class,
         Webkul\DataGrid\Providers\ModuleServiceProvider::class,
         Webkul\DataTransfer\Providers\ModuleServiceProvider::class,
+        Webkul\EUWithdrawal\Providers\ModuleServiceProvider::class,
         Webkul\GDPR\Providers\ModuleServiceProvider::class,
         Webkul\Inventory\Providers\ModuleServiceProvider::class,
         Webkul\Marketing\Providers\ModuleServiceProvider::class,
