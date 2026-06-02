@@ -93,6 +93,12 @@ return [
         'route' => 'admin.sales.rma.custom-fields.index',
         'sort' => 5,
         'icon' => '',
+    ], [
+        'key' => 'sales.eu_withdrawals',
+        'name' => 'admin::app.eu_withdrawal.menu.eu_withdrawals',
+        'route' => 'admin.sales.eu-withdrawals.index',
+        'sort' => 8,
+        'icon' => '',
     ],
 
     /**

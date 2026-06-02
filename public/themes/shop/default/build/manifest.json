@@ -15,7 +15,7 @@
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-DM-5LqUy.css",
+    "file": "assets/app-C10_huY1.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -74,6 +74,10 @@
   "src/Resources/assets/images/payu.png": {
     "file": "assets/payu-Lrh50Ekl.png",
     "src": "src/Resources/assets/images/payu.png"
+  },
+  "src/Resources/assets/images/phonepe.png": {
+    "file": "assets/phonepe-0x8o_RaK.png",
+    "src": "src/Resources/assets/images/phonepe.png"
   },
   "src/Resources/assets/images/razorpay.png": {
     "file": "assets/razorpay-Cbr80qFP.png",

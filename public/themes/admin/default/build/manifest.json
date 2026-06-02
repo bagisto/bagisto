@@ -264,7 +264,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-BLdm6waI.css",
+    "file": "assets/app-DXSP1Zm6.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -375,6 +375,10 @@
   "src/Resources/assets/images/settings/email.svg": {
     "file": "assets/email-5AJwT575.svg",
     "src": "src/Resources/assets/images/settings/email.svg"
+  },
+  "src/Resources/assets/images/settings/eu-withdrawal.svg": {
+    "file": "assets/eu-withdrawal-CqXbw0Nz.svg",
+    "src": "src/Resources/assets/images/settings/eu-withdrawal.svg"
   },
   "src/Resources/assets/images/settings/exchange-rate.svg": {
     "file": "assets/exchange-rate-nueYe-Ml.svg",

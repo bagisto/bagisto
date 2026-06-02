@@ -251,6 +251,31 @@ return [
             'admin.sales.rma.custom-fields.mass-delete',
         ],
         'sort' => 3,
+    ], [
+        'key' => 'sales.eu_withdrawals',
+        'name' => 'admin::app.eu_withdrawal.acl.title',
+        'route' => 'admin.sales.eu-withdrawals.index',
+        'sort' => 10,
+    ], [
+        'key' => 'sales.eu_withdrawals.view',
+        'name' => 'admin::app.eu_withdrawal.acl.view',
+        'route' => 'admin.sales.eu-withdrawals.view',
+        'sort' => 1,
+    ], [
+        'key' => 'sales.eu_withdrawals.decline',
+        'name' => 'admin::app.eu_withdrawal.acl.decline',
+        'route' => 'admin.sales.eu-withdrawals.decline',
+        'sort' => 2,
+    ], [
+        'key' => 'sales.eu_withdrawals.mark_refunded',
+        'name' => 'admin::app.eu_withdrawal.acl.mark_refunded',
+        'route' => 'admin.sales.eu-withdrawals.mark_refunded',
+        'sort' => 3,
+    ], [
+        'key' => 'sales.eu_withdrawals.resend_confirmation',
+        'name' => 'admin::app.eu_withdrawal.acl.resend_confirmation',
+        'route' => 'admin.sales.eu-withdrawals.resend_confirmation',
+        'sort' => 4,
     ],
 
     /*
