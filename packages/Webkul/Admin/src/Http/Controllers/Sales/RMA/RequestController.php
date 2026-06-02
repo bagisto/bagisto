@@ -9,7 +9,9 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
+use Symfony\Component\Mime\MimeTypes;
 use Webkul\Admin\DataGrids\Sales\RMA\OrderRMADataGrid;
 use Webkul\Admin\DataGrids\Sales\RMA\RMADataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -142,6 +144,10 @@ class RequestController extends Controller
      */
     public function sendMessage(): JsonResponse
     {
+        $this->validate(request(), [
+            'file' => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
+        ]);
+
         $requestData = request()->input();
 
         $storedMessage = $this->rmaMessageRepository->create($requestData);
@@ -154,13 +160,16 @@ class RequestController extends Controller
             if (! empty(request()->file('file'))) {
                 $file = request()->file('file');
 
-                $filename = $file->getClientOriginalName();
+                $extension = MimeTypes::getDefault()->getExtensions($file->getMimeType())[0] ?? null;
 
-                $path = $file->storeAs('rma-conversation/'.$storedMessage->id, $filename);
+                $path = $file->storeAs(
+                    'rma-conversation/'.$storedMessage->id,
+                    Str::random(40).($extension ? '.'.$extension : '')
+                );
 
                 $this->rmaMessageRepository->update([
                     'attachment_path' => $path,
-                    'attachment' => $filename,
+                    'attachment' => $file->getClientOriginalName(),
                 ], $storedMessage->id);
             }
 

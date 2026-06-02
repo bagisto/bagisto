@@ -114,10 +114,8 @@
 
                                 <!-- Image, Price, Id, Stock Columns -->
                                 <div class="flex gap-1.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-html="record.customer_name"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ record.customer_name }}
                                     </p>
                                 </div>
 
@@ -556,7 +554,7 @@
                     @foreach ($customAttributes as $attribute)
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="flex text-sm mt-4">
-                                {!! $attribute->label . ($attribute->is_required == '1' ? '<span class="required"></span>' : '') !!}
+                                {{ $attribute->label }} @if ($attribute->is_required == '1')<span class="required"></span>@endif
                             </x-admin::form.control-group.label>
 
                             @if ($attribute->is_required == '1')
