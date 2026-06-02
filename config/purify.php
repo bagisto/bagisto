@@ -43,9 +43,10 @@ return [
         'default' => [
             'Core.Encoding' => 'utf-8',
             'HTML.Doctype' => 'HTML 4.01 Transitional',
-            'HTML.Allowed' => 'h1,h2,h3,h4,h5,h6,b,u,strong,i,em,s,del,a[href|title],ul,ol,li,p[style],br,span[style],img[width|height|alt|src],blockquote',
-            'HTML.ForbiddenElements' => '',
-            'CSS.AllowedProperties' => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding-left,color,background-color,text-align',
+            'HTML.Allowed' => 'h1,h2,h3,h4,h5,h6,b,u,strong,i,em,s,del,a[href|title|target|rel],ul,ol,li,p[style|class],br,span[style|class],img[width|height|alt|src|class|loading],blockquote,table[style|class],thead,tbody,tfoot,tr[style|class],th[colspan|rowspan|style|class],td[colspan|rowspan|style|class],div[style|class|id],figure,figcaption,hr,pre,code,dl,dt,dd,sup,sub,mark',
+            'HTML.ForbiddenElements' => 'script,iframe,object,embed,form,input,textarea,select,button',
+            'CSS.AllowedProperties' => 'font,font-size,font-weight,font-style,font-family,text-decoration,padding,margin,color,background-color,text-align,line-height,border,border-collapse,width,height,max-width,min-height,vertical-align,white-space,word-break,overflow,display,float,clear,list-style-type,list-style-position',
+            'Attr.AllowedClasses' => null,
             'AutoFormat.AutoParagraph' => false,
             'AutoFormat.RemoveEmpty' => false,
         ],
