@@ -1893,6 +1893,7 @@ return [
                     'inactive' => 'Inactive',
                     'name' => 'Name',
                     'no-of-products' => 'Number of Products',
+                    'parent-category' => 'Parent Category',
                     'position' => 'Position',
                     'status' => 'Visible In Menu',
                     'update-status' => 'Update Status',
