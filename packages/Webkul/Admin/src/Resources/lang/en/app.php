@@ -3843,6 +3843,7 @@ return [
                 'add-filter-btn' => 'Add Filter',
                 'add-footer-link-btn' => 'Add Footer Link',
                 'add-image-btn' => 'Add Image',
+                'add-video-btn' => 'Add Video',
                 'add-link' => 'Add Link',
                 'asc' => 'Asc',
                 'back' => 'Back',
@@ -3900,6 +3901,7 @@ return [
                 'url' => 'URL',
                 'value' => 'Value: :value',
                 'value-input' => 'Value',
+                'video-upload-message' => 'Only videos (.mp4, .mov, .ogg, .webm) are allowed.',
 
                 'services-content' => [
                     'add-btn' => 'Add Services',

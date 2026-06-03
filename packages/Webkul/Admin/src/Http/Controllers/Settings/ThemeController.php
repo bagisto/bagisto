@@ -46,6 +46,11 @@ class ThemeController extends Controller
         if (request()->has('id')) {
             $this->validate(request(), [
                 core()->getRequestedLocaleCode().'.options.*.image' => 'image|extensions:jpeg,jpg,png,svg,webp',
+                core()->getRequestedLocaleCode().'.options.*.video' => [
+                    'file',
+                    'mimetypes:application/octet-stream,video/mp4,video/ogg,video/quicktime,video/webm',
+                    'extensions:mov,mp4,ogg,webm',
+                ],
             ]);
 
             $theme = $this->themeCustomizationRepository->find(request()->input('id'));

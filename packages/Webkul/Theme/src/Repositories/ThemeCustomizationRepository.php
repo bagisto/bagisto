@@ -69,7 +69,7 @@ class ThemeCustomizationRepository extends Repository
     }
 
     /**
-     * Upload images
+     * Upload media.
      *
      * @return void|string
      */
@@ -96,6 +96,23 @@ class ThemeCustomizationRepository extends Repository
                     'description' => $image['description'],
                     'title' => $image['title'],
                 ];
+            } elseif (
+                ($data['type'] ?? '') === 'static_content'
+                && isset($image['video'])
+                && $image['video'] instanceof UploadedFile
+            ) {
+                try {
+                    $path = 'theme/'.$theme->id.'/'.Str::random(40).'.'
+                        .$image['video']->getClientOriginalExtension();
+
+                    Storage::put($path, file_get_contents($image['video']->getRealPath()));
+                } catch (\Exception $e) {
+                    session()->flash('error', $e->getMessage());
+
+                    return redirect()->back();
+                }
+
+                return Storage::url($path);
             } elseif ($image['image'] instanceof UploadedFile) {
                 try {
                     $path = 'theme/'.$theme->id.'/'.Str::random(40).'.webp';
