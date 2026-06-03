@@ -351,22 +351,31 @@
 
             methods: {
                 store(params) {
+                    if (! this.isSpecialPriceDateRangeValid(params)) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'error',
+                            message: "@lang('admin::app.catalog.products.edit.types.booking.validations.special-price-date-range')",
+                        });
+
+                        return;
+                    }
+
                     if (! params.id) {
-                            this.optionRowCount++;
+                        this.optionRowCount++;
 
-                            params.id = 'option_' + this.optionRowCount;
-                        }
+                        params.id = 'option_' + this.optionRowCount;
+                    }
 
-                        let foundIndex = this.tickets.findIndex(item => item.id === params.id);
+                    let foundIndex = this.tickets.findIndex(item => item.id === params.id);
 
-                        if (foundIndex !== -1) {
-                            this.tickets[foundIndex] = { 
-                                ...this.tickets[foundIndex].params, 
-                                ...params
-                            };
-                        } else {
-                            this.tickets.push(params);
-                        }
+                    if (foundIndex !== -1) {
+                        this.tickets[foundIndex] = {
+                            ...this.tickets[foundIndex].params,
+                            ...params
+                        };
+                    } else {
+                        this.tickets.push(params);
+                    }
 
                     this.toggle();
                 },
@@ -395,6 +404,65 @@
 
                 toggle() {
                     this.$refs.drawerForm.toggle();
+                },
+
+                isSpecialPriceDateRangeValid(ticket) {
+                    const eventStartsAt = this.parseDateForComparison(this.getBookingDateInputValue('available_from'));
+                    const eventEndsAt = this.parseDateForComparison(this.getBookingDateInputValue('available_to'));
+
+                    if (! eventStartsAt || ! eventEndsAt) {
+                        return true;
+                    }
+
+                    const specialPriceStartsAt = this.parseDateForComparison(ticket.special_price_from);
+                    const specialPriceEndsAt = this.parseDateForComparison(ticket.special_price_to);
+
+                    if (
+                        specialPriceStartsAt === false
+                        || specialPriceEndsAt === false
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        specialPriceStartsAt
+                        && (
+                            specialPriceStartsAt < eventStartsAt
+                            || specialPriceStartsAt > eventEndsAt
+                        )
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        specialPriceEndsAt
+                        && (
+                            specialPriceEndsAt < eventStartsAt
+                            || specialPriceEndsAt > eventEndsAt
+                        )
+                    ) {
+                        return false;
+                    }
+
+                    return ! (
+                        specialPriceStartsAt
+                        && specialPriceEndsAt
+                        && specialPriceEndsAt < specialPriceStartsAt
+                    );
+                },
+
+                getBookingDateInputValue(field) {
+                    return document.querySelector(`[name="booking[${field}]"]`)?.value || '';
+                },
+
+                parseDateForComparison(value) {
+                    if (! value) {
+                        return null;
+                    }
+
+                    const timestamp = Date.parse(String(value).replace(' ', 'T'));
+
+                    return Number.isNaN(timestamp) ? false : timestamp;
                 },
             }
         });

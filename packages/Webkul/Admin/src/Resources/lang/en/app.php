@@ -1305,6 +1305,7 @@ return [
                             'overlap-validation' => 'Time slot overlaps with an existing slot.',
                             'slot-window-too-short' => 'One or more slot windows are shorter than the required :duration-minute duration. Each window must span at least :duration minutes.',
                             'slot-window-too-short-field' => 'This window must span at least :duration minutes.',
+                            'special-price-date-range' => 'Ticket special price dates must be within the event booking dates.',
                         ],
                     ],
 

@@ -592,6 +592,18 @@ class Booking extends AbstractType
                     $this->validateSlotWindowDurations($booking, $fail);
                 },
             ],
+
+            'booking.tickets' => [
+                function ($attribute, $value, $fail) {
+                    $booking = request('booking') ?? [];
+
+                    if (($booking['type'] ?? null) !== 'event') {
+                        return;
+                    }
+
+                    $this->validateEventTicketSpecialPriceDates($booking, $fail);
+                },
+            ],
         ];
     }
 
@@ -656,6 +668,79 @@ class Booking extends AbstractType
 
                 return;
             }
+        }
+    }
+
+    /**
+     * Ensures event ticket sale windows stay inside the event booking window.
+     */
+    protected function validateEventTicketSpecialPriceDates(array $booking, \Closure $fail): void
+    {
+        if (empty($booking['tickets'])) {
+            return;
+        }
+
+        $eventStartsAt = $this->parseBookingDate($booking['available_from'] ?? null);
+        $eventEndsAt = $this->parseBookingDate($booking['available_to'] ?? null);
+
+        if (! $eventStartsAt || ! $eventEndsAt) {
+            return;
+        }
+
+        foreach ($booking['tickets'] as $ticket) {
+            $specialPriceStartsAt = $this->parseBookingDate($ticket['special_price_from'] ?? null);
+            $specialPriceEndsAt = $this->parseBookingDate($ticket['special_price_to'] ?? null);
+
+            if (
+                $specialPriceStartsAt === false
+                || $specialPriceEndsAt === false
+                || (
+                    $specialPriceStartsAt
+                    && (
+                        $specialPriceStartsAt->lt($eventStartsAt)
+                        || $specialPriceStartsAt->gt($eventEndsAt)
+                    )
+                )
+                || (
+                    $specialPriceEndsAt
+                    && (
+                        $specialPriceEndsAt->lt($eventStartsAt)
+                        || $specialPriceEndsAt->gt($eventEndsAt)
+                    )
+                )
+                || (
+                    $specialPriceStartsAt
+                    && $specialPriceEndsAt
+                    && $specialPriceEndsAt->lt($specialPriceStartsAt)
+                )
+            ) {
+                $message = trans('admin::app.catalog.products.edit.types.booking.validations.special-price-date-range');
+
+                session()->flash('error', $message);
+
+                $fail($message);
+
+                return;
+            }
+        }
+    }
+
+    /**
+     * Returns null for empty optional dates, false for invalid non-empty values.
+     */
+    protected function parseBookingDate($value): Carbon|false|null
+    {
+        if (
+            empty($value)
+            || $value === '0000-00-00 00:00:00'
+        ) {
+            return null;
+        }
+
+        try {
+            return Carbon::parse($value);
+        } catch (\Throwable) {
+            return false;
         }
     }
 
