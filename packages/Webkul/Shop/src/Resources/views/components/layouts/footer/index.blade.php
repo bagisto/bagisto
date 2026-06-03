@@ -19,6 +19,26 @@
         'theme_code' => $channel->theme,
         'channel_id' => $channel->id,
     ]);
+
+    $resolveFooterUrl = function (?string $url): string {
+        $url = trim($url ?? '');
+
+        if (
+            $url === ''
+            || preg_match('/^(javascript|data|vbscript):/i', $url)
+        ) {
+            return '#';
+        }
+
+        if (preg_match('/^(https?:)?\/\//i', $url)
+            || preg_match('/^(mailto|tel):/i', $url)
+            || preg_match('/^[#?]/', $url)
+        ) {
+            return $url;
+        }
+
+        return url($url);
+    };
 @endphp
 
 <footer class="mt-9 bg-lightOrange max-sm:mt-10">
@@ -39,7 +59,7 @@
 
                         @foreach ($footerLinkSection as $link)
                             <li>
-                                <a href="{{ $link['url'] }}">
+                                <a href="{{ $resolveFooterUrl($link['url'] ?? '') }}">
                                     {{ $link['title'] }}
                                 </a>
                             </li>
@@ -74,7 +94,7 @@
                             @foreach ($footerLinkSection as $link)
                                 <li>
                                     <a
-                                        href="{{ $link['url'] }}"
+                                        href="{{ $resolveFooterUrl($link['url'] ?? '') }}"
                                         class="text-sm font-medium max-sm:text-xs"
                                     >
                                         {{ $link['title'] }}

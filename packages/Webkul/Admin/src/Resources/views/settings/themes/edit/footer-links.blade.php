@@ -82,7 +82,7 @@
                                         @lang('admin::app.settings.themes.edit.url'):
 
                                         <a
-                                            :href="link.url"
+                                            :href="resolveFooterLinkUrl(link.url)"
                                             target="_blank"
                                             class="text-blue-600 transition-all hover:underline"
                                         >
@@ -224,7 +224,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="url"
-                                    rules="required|url"
+                                    rules="required|footer_link_url"
                                     :label="trans('admin::app.settings.themes.edit.url')"
                                     :placeholder="trans('admin::app.settings.themes.edit.url')"
                                 />
@@ -266,6 +266,41 @@
     </script>
 
     <script type="module">
+        window.defineRule('footer_link_url', value => {
+            if (! value) {
+                return true;
+            }
+
+            const url = String(value).trim();
+
+            if (
+                /\s/.test(url)
+                || /^(javascript|data|vbscript):/i.test(url)
+            ) {
+                return "@lang('admin::app.settings.themes.edit.footer-link-url-error')";
+            }
+
+            if (/^(https?:)?\/\//i.test(url)) {
+                try {
+                    new URL(url, window.location.origin);
+
+                    return true;
+                } catch (error) {
+                    return "@lang('admin::app.settings.themes.edit.footer-link-url-error')";
+                }
+            }
+
+            if (
+                /^(mailto|tel):/i.test(url)
+                || /^[#?]/.test(url)
+                || ! /^[a-z][a-z\d+.-]*:/i.test(url)
+            ) {
+                return true;
+            }
+
+            return "@lang('admin::app.settings.themes.edit.footer-link-url-error')";
+        });
+
         app.component('v-footer-links', {
             template: '#v-footer-links-template',
 
@@ -329,13 +364,36 @@
                     this.isUpdating = true;
 
                     this.$refs.footerLinkUpdateOrCreateModal.setValues({
-                        ...footerLink, 
+                        ...footerLink,
                         key,
                     });
 
                     this.$refs.addLinksModal.toggle();
                 },
+
+                resolveFooterLinkUrl(url) {
+                    url = String(url || '').trim();
+
+                    if (
+                        ! url
+                        || /^(javascript|data|vbscript):/i.test(url)
+                    ) {
+                        return '#';
+                    }
+
+                    if (
+                        /^(https?:)?\/\//i.test(url)
+                        || /^(mailto|tel):/i.test(url)
+                        || /^[#?]/.test(url)
+                    ) {
+                        return url;
+                    }
+
+                    const baseUrl = document.querySelector('meta[name="base-url"]')?.content?.replace(/\/$/, '') || window.location.origin;
+
+                    return `${baseUrl}/${url.replace(/^\/+/, '')}`;
+                },
             },
         });
     </script>
-@endPushOnce    
+@endPushOnce

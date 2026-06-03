@@ -3862,6 +3862,7 @@ return [
                 'footer-link' => 'Footer Links',
                 'footer-link-description' => 'Navigate via footer links for seamless website exploration and information.',
                 'footer-link-form-title' => 'Footer Link',
+                'footer-link-url-error' => 'Enter a valid URL or relative path.',
                 'footer-title' => 'Title',
                 'general' => 'General',
                 'html' => 'HTML',
