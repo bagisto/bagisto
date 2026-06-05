@@ -118,6 +118,44 @@ return [
         ],
     ],
 
+    'help' => [
+        'index' => [
+            'title' => 'Yardım ve Kaynaklar',
+            'description' => 'Bagisto\'dan en iyi şekilde yararlanmak için ihtiyacınız olan her şey — barındırma, destek ve profesyonel hizmetler, ayrıca eklentiler ve geliştirici belgeleri.',
+
+            'services-title' => 'Hizmetler',
+            'resources-title' => 'Kaynaklar ve Belgeler',
+
+            'cloud-hosting' => 'Bulut Barındırma',
+            'cloud-hosting-info' => 'Uygun maliyetli, yönetilen bulut barındırma — Bagisto mağazanızı dakikalar içinde bulutta, tamamen optimize edilmiş ve ölçeklenebilir şekilde başlatın.',
+
+            'support' => 'Destek ve Bakım',
+            'support-info' => 'Mağazanızı güvenli, güncel ve sorunsuz tutmak için özel teknik destek ve sürekli bakım planları.',
+
+            'paid-services' => 'Ücretli Hizmetler',
+            'paid-services-info' => 'Modül entegrasyonu, özelleştirme, veri taşıma, sürüm yükseltmeleri ve özel geliştirme için uzman yardımı.',
+
+            'extensions' => 'Eklentiler',
+            'extensions-info' => 'Bagisto\'yu yeni bağlayıcılar, kanallar ve özelliklerle genişletmek için resmi ve topluluk eklentilerine göz atın.',
+
+            'docs' => 'Geliştirici Belgeleri ve Bloglar',
+            'docs-info' => 'Oluşturmanıza, yapılandırmanıza ve güncel kalmanıza yardımcı olacak geliştirici kılavuzları, öğreticiler ve en son makaleler.',
+
+            'api-docs' => 'API Belgeleri',
+            'api-docs-info' => 'Bagisto\'yu yığınınızla entegre etmek için uç noktalar, kimlik doğrulama ve örneklerle birlikte eksiksiz REST ve GraphQL API referansı.',
+
+            'community' => 'Topluluk Forumu',
+            'community-info' => 'Sorular sorun, fikirlerinizi paylaşın ve dünya çapında binlerce Bagisto geliştiricisi ve satıcısıyla bağlantı kurun.',
+
+            'video-tutorials' => 'Video Eğitimleri',
+            'video-tutorials-info' => 'Kurulum, yapılandırma ve günlük mağaza yönetimini kapsayan adım adım video kılavuzları.',
+
+            'cta-title' => 'Hâlâ yardıma mı ihtiyacınız var?',
+            'cta-description' => 'Barındırma, özel geliştirme veya başka herhangi bir konu hakkında Bagisto ekibiyle konuşun.',
+            'cta-btn' => 'Bize Ulaşın',
+        ],
+    ],
+
     'dashboard' => [
         'index' => [
             'add-customer' => 'Müşteri Ekle',
@@ -5244,6 +5282,7 @@ return [
                 'exchange-rates' => 'Döviz Kurları',
                 'gdpr-data-requests' => 'GDPR Veri Talepleri',
                 'groups' => 'Gruplar',
+                'help' => 'Yardım ve Kaynaklar',
                 'imports' => 'İthalat',
                 'inventory-sources' => 'Envanter Kaynakları',
                 'invoices' => 'Faturalar',
