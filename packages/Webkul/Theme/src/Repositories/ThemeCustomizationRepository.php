@@ -69,7 +69,7 @@ class ThemeCustomizationRepository extends Repository
     }
 
     /**
-     * Upload media.
+     * Upload images and static content videos.
      *
      * @return void|string
      */
@@ -102,8 +102,7 @@ class ThemeCustomizationRepository extends Repository
                 && $image['video'] instanceof UploadedFile
             ) {
                 try {
-                    $path = 'theme/'.$theme->id.'/'.Str::random(40).'.'
-                        .$image['video']->getClientOriginalExtension();
+                    $path = 'theme/'.$theme->id.'/'.Str::random(40).'.'.$image['video']->getClientOriginalExtension();
 
                     Storage::put($path, file_get_contents($image['video']->getRealPath()));
                 } catch (\Exception $e) {

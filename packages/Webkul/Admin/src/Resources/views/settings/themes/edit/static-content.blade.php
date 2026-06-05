@@ -57,7 +57,7 @@
                             name="static_video"
                             id="static_video"
                             class="hidden"
-                            accept="video/mp4,video/webm,video/ogg,video/quicktime"
+                            accept=".mov,.mp4,.ogg,.webm,video/mp4,video/ogg,video/quicktime,video/webm"
                             ref="static_video"
                             label="Video"
                             @change="storeVideo($event)"
@@ -200,42 +200,51 @@
                 },
 
                 storeImage($event) {
-                    this.storeMedia($event, 'image');
-                },
+                    let imageInput = this.$refs.static_image;
 
-                storeVideo($event) {
-                    this.storeMedia($event, 'video');
-                },
-
-                storeMedia($event, mediaType) {
-                    const mediaInput = mediaType === 'video'
-                        ? this.$refs.static_video
-                        : this.$refs.static_image;
-
-                    if (mediaInput.files == undefined) {
+                    if (imageInput.files == undefined) {
                         return;
                     }
 
-                    const allowedTypes = mediaType === 'video'
-                        ? ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime']
-                        : ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
-
-                    const validFiles = Array.from(mediaInput.files).every(file => allowedTypes.includes(file.type));
+                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
 
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
                             type: 'warning',
-                            message: mediaType === 'video'
-                                ? '@lang('admin::app.settings.themes.edit.video-upload-message')'
-                                : '@lang('admin::app.settings.themes.edit.image-upload-message')'
+                            message: '@lang('admin::app.settings.themes.edit.image-upload-message')'
                         });
 
-                        mediaInput.value = '';
+                        imageInput.value = '';
 
                         return;
                     }
 
-                    this.$refs.editor.storeMedia($event, mediaType);
+                    this.$refs.editor.storeImage($event);
+                },
+
+                storeVideo($event) {
+                    let videoInput = this.$refs.static_video;
+
+                    if (videoInput.files == undefined) {
+                        return;
+                    }
+
+                    const allowedVideoTypes = ['video/mp4', 'video/ogg', 'video/quicktime', 'video/webm'];
+
+                    const validFiles = Array.from(videoInput.files).every(file => allowedVideoTypes.includes(file.type));
+
+                    if (! validFiles) {
+                        this.$emitter.emit('add-flash', {
+                            type: 'warning',
+                            message: '@lang('admin::app.settings.themes.edit.video-upload-message')'
+                        });
+
+                        videoInput.value = '';
+
+                        return;
+                    }
+
+                    this.$refs.editor.storeVideo($event);
                 },
 
                 applydarkColor() {
@@ -297,24 +306,22 @@
                     });
                 },
 
-                storeMedia($event, mediaType = 'image') {
-                    let selectedMedia = $event.target.files[0];
+                storeImage($event) {
+                    let selectedImage = $event.target.files[0];
 
-                    if (! selectedMedia) {
+                    if (! selectedImage) {
                         return;
                     }
 
-                    const allowedTypes = mediaType === 'video'
-                        ? ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime']
-                        : ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
+                    const allowedImageTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/jpg'];
 
-                    if (! allowedTypes.includes(selectedMedia.type)) {
+                    if (! allowedImageTypes.includes(selectedImage.type)) {
                         return;
                     }
 
                     let formData = new FormData();
 
-                    formData.append(`{{ $currentLocale->code }}[options][][${mediaType}]`, selectedMedia);
+                    formData.append('{{ $currentLocale->code }}[options][][image]', selectedImage);
                     formData.append('id', '{{ $theme->id }}');
                     formData.append('type', 'static_content');
 
@@ -324,16 +331,54 @@
 
                             let cursorPointer = editor.getCursor();
 
-                            const html = mediaType === 'video'
-                                ? `<video controls src="${response.data}"></video>`
-                                : `<img class="lazy" src="" data-src="${response.data}">`;
-
-                            editor.replaceRange(html, {
+                            editor.replaceRange(`<img class="lazy" src="" data-src="${response.data}">`, {
                                 line: cursorPointer.line, ch: cursorPointer.ch
                             });
 
                             editor.setCursor({
-                                line: cursorPointer.line, ch: cursorPointer.ch + html.length
+                                line: cursorPointer.line, ch: cursorPointer.ch + response.data.length
+                            });
+                        })
+                        .catch((error) => {
+                            if (error.response.status == 422) {
+                                this.$emitter.emit('add-flash', { type: 'warning', message: error.response.data.message });
+                            }
+                        });
+                },
+
+                storeVideo($event) {
+                    let selectedVideo = $event.target.files[0];
+
+                    if (! selectedVideo) {
+                        return;
+                    }
+
+                    const allowedVideoTypes = ['video/mp4', 'video/ogg', 'video/quicktime', 'video/webm'];
+
+                    if (! allowedVideoTypes.includes(selectedVideo.type)) {
+                        return;
+                    }
+
+                    let formData = new FormData();
+
+                    formData.append('{{ $currentLocale->code }}[options][][video]', selectedVideo);
+                    formData.append('id', '{{ $theme->id }}');
+                    formData.append('type', 'static_content');
+
+                    this.$axios.post('{{ route('admin.settings.themes.store') }}', formData)
+                        .then((response) => {
+                            let editor = this._html.getDoc();
+
+                            let cursorPointer = editor.getCursor();
+
+                            let video = `<video controls src="${response.data}"></video>`;
+
+                            editor.replaceRange(video, {
+                                line: cursorPointer.line, ch: cursorPointer.ch
+                            });
+
+                            editor.setCursor({
+                                line: cursorPointer.line, ch: cursorPointer.ch + video.length
                             });
                         })
                         .catch((error) => {

@@ -48,7 +48,7 @@ class ThemeController extends Controller
                 core()->getRequestedLocaleCode().'.options.*.image' => 'image|extensions:jpeg,jpg,png,svg,webp',
                 core()->getRequestedLocaleCode().'.options.*.video' => [
                     'file',
-                    'mimetypes:application/octet-stream,video/mp4,video/ogg,video/quicktime,video/webm',
+                    'mimetypes:video/mp4,video/ogg,video/quicktime,video/webm',
                     'extensions:mov,mp4,ogg,webm',
                 ],
             ]);
