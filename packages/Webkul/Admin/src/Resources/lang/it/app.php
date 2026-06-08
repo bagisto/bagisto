@@ -118,6 +118,44 @@ return [
         ],
     ],
 
+    'help' => [
+        'index' => [
+            'title' => 'Aiuto e Risorse',
+            'description' => 'Tutto ciò di cui hai bisogno per sfruttare al meglio Bagisto — hosting, supporto e servizi professionali, oltre a estensioni e documentazione per sviluppatori.',
+
+            'services-title' => 'Servizi',
+            'resources-title' => 'Risorse e Documentazione',
+
+            'cloud-hosting' => 'Cloud Hosting',
+            'cloud-hosting-info' => 'Hosting cloud gestito ed economico — avvia il tuo negozio Bagisto sul cloud in pochi minuti, completamente ottimizzato e scalabile.',
+
+            'support' => 'Supporto e Manutenzione',
+            'support-info' => 'Supporto tecnico dedicato e piani di manutenzione continua per mantenere il tuo negozio sicuro, aggiornato e funzionante senza problemi.',
+
+            'paid-services' => 'Servizi a Pagamento',
+            'paid-services-info' => 'Aiuto esperto per l\'integrazione di moduli, personalizzazione, migrazione dei dati, aggiornamenti di versione e sviluppo su misura.',
+
+            'extensions' => 'Estensioni',
+            'extensions-info' => 'Esplora i componenti aggiuntivi ufficiali e della community per estendere Bagisto con nuovi connettori, canali e funzionalità.',
+
+            'docs' => 'Documentazione Dev e Blog',
+            'docs-info' => 'Guide per sviluppatori, tutorial e gli articoli più recenti per aiutarti a costruire, configurare e rimanere aggiornato.',
+
+            'api-docs' => 'Documentazione API',
+            'api-docs-info' => 'Riferimento completo delle API REST e GraphQL con endpoint, autenticazione ed esempi per integrare Bagisto con il tuo stack.',
+
+            'community' => 'Forum della Community',
+            'community-info' => 'Fai domande, condividi idee e connettiti con migliaia di sviluppatori e commercianti Bagisto in tutto il mondo.',
+
+            'video-tutorials' => 'Video Tutorial',
+            'video-tutorials-info' => 'Guide video passo passo che coprono installazione, configurazione e gestione quotidiana del negozio.',
+
+            'cta-title' => 'Hai ancora bisogno di aiuto?',
+            'cta-description' => 'Parla con il team Bagisto di hosting, sviluppo personalizzato o qualsiasi altra cosa.',
+            'cta-btn' => 'Contattaci',
+        ],
+    ],
+
     'dashboard' => [
         'index' => [
             'add-customer' => 'Aggiungi Cliente',
@@ -5250,6 +5288,7 @@ return [
                 'exchange-rates' => 'Tassi di Cambio',
                 'gdpr-data-requests' => 'Richieste di Dati GDPR',
                 'groups' => 'Gruppi',
+                'help' => 'Aiuto e Risorse',
                 'imports' => 'Importazioni',
                 'inventory-sources' => 'Fonti di Inventario',
                 'invoices' => 'Fatture',

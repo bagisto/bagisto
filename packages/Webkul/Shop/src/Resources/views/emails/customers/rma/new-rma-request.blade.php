@@ -57,7 +57,7 @@
             @lang('shop::app.rma.mail.customer-rma-create.additional-information')
         </h3>
         <div style="font-size: 15px; color: #5E5E5E; line-height: 26px; margin: 0;">
-            {!! $rma->information !!}
+            {{ $rma->information }}
         </div>
     </div>
 
@@ -84,19 +84,19 @@
                     @foreach ($rma->items as $key => $item)
                         <tr>
                             <td style="border-bottom: 1px solid #e2e8f0; padding: 12px 16px; color: #4a5568;">
-                                {!! $item->orderItem->name !!}
+                                {{ $item->orderItem->name }}
                             </td>
 
                             <td style="border-bottom: 1px solid #e2e8f0; padding: 12px 16px; color: #4a5568;">
-                                {!! $item->quantity !!}
+                                {{ $item->quantity }}
                             </td>
 
                             <td style="border-bottom: 1px solid #e2e8f0; padding: 12px 16px; color: #4a5568;">
-                                {!! $item->reason->title !!}
+                                {{ $item->reason->title }}
                             </td>
 
                             <td style="border-bottom: 1px solid #e2e8f0; padding: 12px 16px; color: #4a5568;">
-                                {!! $item->orderItem->sku !!}
+                                {{ $item->orderItem->sku }}
                             </td>
                         </tr>
                     @endforeach

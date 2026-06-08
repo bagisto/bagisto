@@ -118,6 +118,44 @@ return [
         ],
     ],
 
+    'help' => [
+        'index' => [
+            'title' => 'Ajutor și resurse',
+            'description' => 'Tot ce ai nevoie pentru a profita la maximum de Bagisto — găzduire, asistență și servicii profesionale, plus extensii și documentație pentru dezvoltatori.',
+
+            'services-title' => 'Servicii',
+            'resources-title' => 'Resurse și documentație',
+
+            'cloud-hosting' => 'Găzduire în cloud',
+            'cloud-hosting-info' => 'Găzduire în cloud gestionată și rentabilă — lansează-ți magazinul Bagisto în cloud în câteva minute, complet optimizat și scalabil.',
+
+            'support' => 'Asistență și mentenanță',
+            'support-info' => 'Asistență tehnică dedicată și planuri de mentenanță continuă pentru a-ți menține magazinul securizat, actualizat și funcțional.',
+
+            'paid-services' => 'Servicii plătite',
+            'paid-services-info' => 'Ajutor de la experți pentru integrarea modulelor, personalizare, migrarea datelor, actualizări de versiune și dezvoltare la comandă.',
+
+            'extensions' => 'Extensii',
+            'extensions-info' => 'Explorează suplimente oficiale și ale comunității pentru a extinde Bagisto cu noi conectori, canale și funcționalități.',
+
+            'docs' => 'Documentație dev și bloguri',
+            'docs-info' => 'Ghiduri pentru dezvoltatori, tutoriale și cele mai recente articole care te ajută să construiești, să configurezi și să rămâi la curent.',
+
+            'api-docs' => 'Documentație API',
+            'api-docs-info' => 'Referință completă pentru API-urile REST și GraphQL cu endpoint-uri, autentificare și exemple pentru a integra Bagisto cu sistemul tău.',
+
+            'community' => 'Forumul comunității',
+            'community-info' => 'Pune întrebări, împărtășește idei și conectează-te cu mii de dezvoltatori și comercianți Bagisto din întreaga lume.',
+
+            'video-tutorials' => 'Tutoriale video',
+            'video-tutorials-info' => 'Ghiduri video pas cu pas care acoperă instalarea, configurarea și gestionarea zilnică a magazinului.',
+
+            'cta-title' => 'Ai nevoie în continuare de ajutor?',
+            'cta-description' => 'Discută cu echipa Bagisto despre găzduire, dezvoltare personalizată sau orice altceva.',
+            'cta-btn' => 'Contactează-ne',
+        ],
+    ],
+
     'dashboard' => [
         'index' => [
             'add-customer' => 'Add Customer',
@@ -5250,6 +5288,7 @@ return [
                 'exchange-rates' => 'Exchange Rates',
                 'gdpr-data-requests' => 'GDPR Data Requests',
                 'groups' => 'Groups',
+                'help' => 'Ajutor și resurse',
                 'imports' => 'Imports',
                 'inventory-sources' => 'Inventory Sources',
                 'invoices' => 'Invoices',

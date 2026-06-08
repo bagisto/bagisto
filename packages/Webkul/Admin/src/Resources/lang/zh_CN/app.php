@@ -118,6 +118,44 @@ return [
         ],
     ],
 
+    'help' => [
+        'index' => [
+            'title' => '帮助与资源',
+            'description' => '充分使用 Bagisto 所需的一切——托管、支持和专业服务，以及扩展和开发者文档。',
+
+            'services-title' => '服务',
+            'resources-title' => '资源与文档',
+
+            'cloud-hosting' => '云托管',
+            'cloud-hosting-info' => '经济高效的托管式云托管——在几分钟内将您的 Bagisto 商店部署到云端，全面优化且可扩展。',
+
+            'support' => '支持与维护',
+            'support-info' => '专属技术支持和持续维护方案，让您的商店保持安全、更新并平稳运行。',
+
+            'paid-services' => '付费服务',
+            'paid-services-info' => '为模块集成、定制、数据迁移、版本升级和定制开发提供专家帮助。',
+
+            'extensions' => '扩展',
+            'extensions-info' => '浏览官方和社区插件，通过新的连接器、渠道和功能扩展 Bagisto。',
+
+            'docs' => '开发者文档与博客',
+            'docs-info' => '开发者指南、教程和最新文章，帮助您构建、配置并保持更新。',
+
+            'api-docs' => 'API 文档',
+            'api-docs-info' => '完整的 REST 和 GraphQL API 参考，包含端点、身份验证和示例，助您将 Bagisto 集成到您的技术栈中。',
+
+            'community' => '社区论坛',
+            'community-info' => '提出问题、分享想法，并与全球数千名 Bagisto 开发者和商家建立联系。',
+
+            'video-tutorials' => '视频教程',
+            'video-tutorials-info' => '涵盖安装、配置和日常商店管理的分步视频讲解。',
+
+            'cta-title' => '仍然需要帮助？',
+            'cta-description' => '就托管、定制开发或其他任何事宜与 Bagisto 团队交流。',
+            'cta-btn' => '联系我们',
+        ],
+    ],
+
     'dashboard' => [
         'index' => [
             'add-customer' => '添加客户',
@@ -5250,6 +5288,7 @@ return [
                 'exchange-rates' => '汇率',
                 'gdpr-data-requests' => 'GDPR 数据请求',
                 'groups' => '分组',
+                'help' => '帮助与资源',
                 'imports' => '导入',
                 'inventory-sources' => '库存来源',
                 'invoices' => '发票',

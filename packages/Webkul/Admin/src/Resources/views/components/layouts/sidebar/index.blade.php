@@ -32,6 +32,27 @@
                     @endif
                 </div>
             @endforeach
+
+            <!-- Help & Resources (Always Visible) -->
+            @php
+                $isHelpActive = request()->routeIs('admin.help.index');
+            @endphp
+
+            <!-- Divider -->
+            <div class="mx-4 my-1 border-t border-gray-200 dark:border-gray-800"></div>
+
+            <div class="px-4 group/item">
+                <a
+                    href="{{ route('admin.help.index') }}"
+                    class="flex gap-2.5 p-1.5 items-center cursor-pointer hover:rounded-lg {{ $isHelpActive ? 'bg-blue-600 rounded-lg' : 'hover:bg-gray-100 hover:dark:bg-gray-950' }}"
+                >
+                    <span class="icon-information text-2xl {{ $isHelpActive ? 'text-white' : '' }}"></span>
+
+                    <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap group-[.sidebar-collapsed]/container:hidden {{ $isHelpActive ? 'text-white' : '' }}">
+                        @lang('admin::app.components.layouts.sidebar.help')
+                    </p>
+                </a>
+            </div>
         </nav>
     </div>
 

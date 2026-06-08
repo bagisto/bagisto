@@ -28,7 +28,8 @@ class Installer extends Command
     protected $signature = 'bagisto:install
         { --skip-env-check : Skip env check. }
         { --skip-admin-creation : Skip admin creation. }
-        { --skip-github-star : Skip GitHub star prompt. }
+        { --skip-cloud-promotion : Skip Bagisto Cloud hosting prompt. }
+        { --skip-github-star : Skip Bagisto Cloud hosting prompt. (Deprecated: use --skip-cloud-promotion) }
     ';
 
     /**
@@ -230,8 +231,11 @@ class Installer extends Command
         $this->warn('Step: Clearing cached bootstrap files...');
         $this->call('optimize:clear');
 
-        if (! $this->option('skip-github-star')) {
-            $this->askForGithubStar();
+        if (
+            ! $this->option('skip-cloud-promotion')
+            && ! $this->option('skip-github-star')
+        ) {
+            $this->askToExploreCloudHosting();
         }
 
         ComposerEvents::postCreateProject();
@@ -614,26 +618,26 @@ class Installer extends Command
     }
 
     /**
-     * Ask user to star the GitHub repository.
+     * Ask user to explore Bagisto Cloud hosting.
      */
-    protected function askForGithubStar(): void
+    protected function askToExploreCloudHosting(): void
     {
-        if (! $this->confirm('Would you like to star our repo on GitHub?', true)) {
+        if (! $this->confirm('Would you like to explore managed Bagisto Cloud hosting?', true)) {
             return;
         }
 
-        $repoUrl = 'https://github.com/bagisto/bagisto';
+        $cloudUrl = 'https://bagisto.com/en/cloud/';
 
         if (PHP_OS_FAMILY == 'Darwin') {
-            exec("open {$repoUrl}");
+            exec("open {$cloudUrl}");
         }
 
         if (PHP_OS_FAMILY == 'Windows') {
-            exec("start {$repoUrl}");
+            exec("start {$cloudUrl}");
         }
 
         if (PHP_OS_FAMILY == 'Linux') {
-            exec("xdg-open {$repoUrl}");
+            exec("xdg-open {$cloudUrl}");
         }
     }
 }
