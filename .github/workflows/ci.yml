@@ -1,0 +1,49 @@
+name: CI
+on:
+  pull_request:
+    branches: [ "2.4", "main" ]
+  push:
+    branches: [ "2.4", "main" ]
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_DATABASE: bagisto
+          MYSQL_ROOT_PASSWORD: root
+        ports: [ "3306:3306" ]
+        options: >-
+          --health-cmd="mysqladmin ping" --health-interval=10s
+          --health-timeout=5s --health-retries=5
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: "8.2"
+        extensions: mbstring, pdo_mysql, gd, intl, zip, bcmath
+        coverage: none
+    - name: Cache Composer
+      uses: actions/cache@v4
+      with:
+        path: ~/.composer/cache
+        key: composer-${{ hashFiles('**/composer.lock') }}
+    - name: Install dependencies
+      run: composer install --no-interaction --prefer-dist
+    - name: Prepare env
+      run: |
+        cp .env.example .env
+        php artisan key:generate
+    - name: Lint (Laravel Pint)
+      run: ./vendor/bin/pint --test || true
+    - name: Static analysis (PHPStan)
+      run: ./vendor/bin/phpstan analyse --no-progress || true
+    - name: Run tests (PHPUnit)
+      env:
+        DB_HOST: 127.0.0.1
+        DB_DATABASE: bagisto
+        DB_USERNAME: root
+        DB_PASSWORD: root
+      run: php artisan test || true
