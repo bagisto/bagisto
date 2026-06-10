@@ -39,7 +39,7 @@ class PagoMovilController extends Controller
     /**
      * Store the order after payment report.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store()
     {
