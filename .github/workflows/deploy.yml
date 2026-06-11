@@ -1,0 +1,25 @@
+name: Deploy Bagisto to Azure
+
+on:
+  push:
+    branches: [ "2.4" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Deploy to Azure VM
+      uses: appleboy/ssh-action@master
+      with:
+        host: 68.211.73.21
+        username: azureuser
+        password: ${{ secrets.AZURE_VM_PASSWORD }}
+        script: |
+          cd /var/www/bagisto
+          sudo git pull origin 2.4
+          composer install --no-dev
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan view:clear
+          sudo chown -R www-data:www-data /var/www/bagisto
