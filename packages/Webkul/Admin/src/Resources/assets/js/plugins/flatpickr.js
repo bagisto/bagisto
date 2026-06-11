@@ -1,5 +1,6 @@
 import Flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.css";
+import darkThemeUrl from "flatpickr/dist/themes/dark.css?url";
 import { Spanish } from "flatpickr/dist/l10n/es.js";
 import { Catalan } from "flatpickr/dist/l10n/cat.js"
 import { Arabic } from "flatpickr/dist/l10n/ar.js";
@@ -74,7 +75,7 @@ export default {
             const linkElement = document.createElement("link");
             linkElement.rel = "stylesheet";
             linkElement.type = "text/css";
-            linkElement.href = `https://npmcdn.com/flatpickr/dist/themes/${theme}.css`;
+            linkElement.href = darkThemeUrl;
             linkElement.id = "flatpickr";
 
             document.head.appendChild(linkElement);
