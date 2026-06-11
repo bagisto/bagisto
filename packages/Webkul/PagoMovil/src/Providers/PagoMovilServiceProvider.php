@@ -24,6 +24,8 @@ class PagoMovilServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__ . '/../Routes/web.php');
 
         $this->loadViewsFrom(__DIR__ . '/../Resources/views', 'pagomovil');
+
+        $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'pagomovil');
     }
     
     /**
