@@ -33,7 +33,10 @@ class PagoMovilController extends Controller
         $phone = core()->getConfigData('sales.payment_methods.pagomovil.phone');
         $id_number = core()->getConfigData('sales.payment_methods.pagomovil.id_number');
 
-        return view('pagomovil::redirect', compact('cart', 'bank', 'phone', 'id_number'));
+        // Calculamos el monto en Bolívares (VES)
+        $amountInVES = core()->convertPrice($cart->base_grand_total, 'VES');
+
+        return view('pagomovil::redirect', compact('cart', 'bank', 'phone', 'id_number', 'amountInVES'));
     }
 
     /**
