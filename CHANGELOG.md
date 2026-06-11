@@ -4,7 +4,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+- Security fixes.
 
 ## **v2.4.6 (5th of June 2026)** - *Release*
 

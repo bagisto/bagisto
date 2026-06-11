@@ -211,7 +211,16 @@ class OrderItemRepository extends Repository
         $additional['formatted_customizable_options'] = collect($orderItem->additional['formatted_customizable_options'])
             ->map(function ($option) use ($orderItem) {
                 if ($option['type'] === 'file') {
-                    $oldPath = $option['prices'][0]['label'];
+                    $oldPath = $option['prices'][0]['label'] ?? '';
+
+                    /**
+                     * The label is populated from the request when adding the product to the cart, so it must be
+                     * treated as untrusted input. Only relocate files that were genuinely uploaded by the customer
+                     * (stored under the "carts/" directory) to prevent arbitrary files on the disk from being moved.
+                     */
+                    if (! $this->isCustomerUploadedFilePath($oldPath)) {
+                        return $option;
+                    }
 
                     $newPath = 'orders/'.$orderItem->order_id.'/'.File::basename($oldPath);
 
@@ -227,5 +236,34 @@ class OrderItemRepository extends Repository
         $orderItem->additional = $orderItem->product->getTypeInstance()->getAdditionalOptions($additional);
 
         $orderItem->save();
+    }
+
+    /**
+     * Determine whether the given path points to a file the customer uploaded for a customizable option.
+     *
+     * Customer uploads are always stored under the "carts/{cart_id}/" directory of the default disk. Any other
+     * path (including path traversal attempts) is rejected so it cannot be relocated.
+     */
+    protected function isCustomerUploadedFilePath(mixed $path): bool
+    {
+        if (
+            ! is_string($path)
+            || $path === ''
+        ) {
+            return false;
+        }
+
+        /**
+         * Reject path traversal segments outright.
+         */
+        if (preg_match('#(^|/)\.\.(/|$)#', $path)) {
+            return false;
+        }
+
+        if (! str_starts_with($path, 'carts/')) {
+            return false;
+        }
+
+        return Storage::exists($path);
     }
 }
