@@ -24,19 +24,6 @@ class PagoMovil extends Payment
     }
 
     /**
-     * Returns payment method additional information.
-     *
-     * @return array
-     */
-    public function getAdditionalDetails()
-    {
-        return [
-            'title' => $this->getConfigData('title'),
-            'value' => $this->getConfigData('description'),
-        ];
-    }
-
-    /**
      * Get payment method configuration data.
      *
      * @param  string  $field
