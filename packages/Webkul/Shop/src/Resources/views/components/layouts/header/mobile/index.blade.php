@@ -284,7 +284,7 @@
                                     class="flex flex-col justify-between gap-2.5 max-md:gap-0"
                                     v-pre
                                 >
-                                    <p class="text-2xl break-all font-mediums max-md:text-xl">Hello! {{ auth()->user()?->first_name }}</p>
+                                    <p class="text-2xl break-all font-mediums max-md:text-xl">¡Hola! {{ auth()->user()?->first_name }}</p>
 
                                     <p class="no-underline text-zinc-500 max-md:text-sm">{{ auth()->user()?->email }}</p>
                                 </div>
