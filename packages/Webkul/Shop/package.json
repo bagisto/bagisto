@@ -14,13 +14,13 @@
     "playwright": "^1.59.1",
     "postcss": "^8.4.23",
     "tailwindcss": "^3.3.2",
-    "vite": "^5.4.12",
+    "vite": "^6.4.2",
     "vue": "^3.5.13"
   },
   "dependencies": {
     "@vee-validate/i18n": "^4.9.1",
     "@vee-validate/rules": "^4.9.1",
-    "@vitejs/plugin-vue": "^4.2.3",
+    "@vitejs/plugin-vue": "^5.2.4",
     "dotenv": "^16.4.7",
     "mitt": "^3.0.0",
     "readline-sync": "^1.4.10",

@@ -46,7 +46,19 @@
                     href="{{ route('admin.help.index') }}"
                     class="flex gap-2.5 p-1.5 items-center cursor-pointer hover:rounded-lg {{ $isHelpActive ? 'bg-blue-600 rounded-lg' : 'hover:bg-gray-100 hover:dark:bg-gray-950' }}"
                 >
-                    <span class="icon-information text-2xl {{ $isHelpActive ? 'text-white' : '' }}"></span>
+                    <svg
+                        class="h-6 w-6 shrink-0 {{ $isHelpActive ? 'text-white' : 'text-gray-600 dark:text-gray-300' }}"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.8"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    >
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M9.4 9.3a2.6 2.6 0 0 1 5.05.85c0 1.7-2.45 2.05-2.45 3.6"></path>
+                        <path d="M12 17.2h.01"></path>
+                    </svg>
 
                     <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap group-[.sidebar-collapsed]/container:hidden {{ $isHelpActive ? 'text-white' : '' }}">
                         @lang('admin::app.components.layouts.sidebar.help')
