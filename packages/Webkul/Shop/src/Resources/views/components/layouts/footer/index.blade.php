@@ -144,7 +144,7 @@
             @if (core()->getConfigData('general.content.footer.copyright_content'))
                 {!! core()->getConfigData('general.content.footer.copyright_content') !!}
             @else
-                @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ])
+                @lang('shop::app.components.layouts.footer.footer-text', ['current_year'=> date('Y') ]) | Tienda UNSA
             @endif
         </p>
 
