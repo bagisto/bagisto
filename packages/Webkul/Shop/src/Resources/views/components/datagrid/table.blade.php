@@ -132,8 +132,14 @@
                                     <p
                                         class="break-words"
                                         v-html="record[column.index]"
-                                        v-if="column.visibility"
+                                        v-if="column.visibility && column.allow_html"
                                     >
+                                    </p>
+                                    <p
+                                        class="break-words"
+                                        v-if="column.visibility && !column.allow_html"
+                                    >
+                                        @{{ record[column.index] }}
                                     </p>
                                 </template>
                                 

@@ -84,10 +84,8 @@
                                     </div>
             
                                     <div class="text-xs font-normal">
-                                        <p
-                                            class="text-sm font-semibold text-blue-600"
-                                            v-html="record.product_name"
-                                        >
+                                        <p class="text-sm font-semibold text-blue-600">
+                                            @{{ record.product_name }}
                                         </p>
 
                                         <p><span class="text-neutral-500">@lang('Remaining Downloads'):</span> <span class="font-medium">@{{ record.remaining_downloads }}</span></p>

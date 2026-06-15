@@ -21,13 +21,6 @@ class RMAImageRepository extends Repository
      */
     public function manageImages($requestImages, $rma): void
     {
-        foreach ($requestImages as $itemImage) {
-            $this->create([
-                'rma_id' => $rma->id,
-                'path' => $itemImage->getClientOriginalName(),
-            ]);
-        }
-
         $this->uploadImages($requestImages, $rma);
     }
 
