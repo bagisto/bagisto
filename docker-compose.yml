@@ -1,116 +1,157 @@
+# Quick start:
+#   cp .env.example .env
+#   docker compose --env-file docker/.env.docker up -d --build
+#
+# Store:        http://localhost:8090
+# Admin:        http://localhost:8090/admin  (admin@example.com / admin123)
+# Mailpit:      http://localhost:8025
+# Neo4j Browser http://localhost:17474  (neo4j / password)
+
 services:
-    laravel.test:
+    app:
         build:
-            context: ./vendor/laravel/sail/runtimes/8.3
-            dockerfile: Dockerfile
-            args:
-                WWWGROUP: '${WWWGROUP}'
-        image: sail-8.3/app
-        extra_hosts:
-            - 'host.docker.internal:host-gateway'
+            context: .
+            dockerfile: docker/Dockerfile
+        image: bagisto-store-app
         ports:
-            - '${APP_PORT:-80}:80'
-            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+            - "${APP_PORT:-8090}:80"
         environment:
-            WWWUSER: '${WWWUSER}'
-            LARAVEL_SAIL: 1
-            XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
-            XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
-            IGNITION_LOCAL_SITES_PATH: '${PWD}'
+            APP_URL: "http://localhost:${APP_PORT:-8090}"
+            ASSET_URL: "http://localhost:${APP_PORT:-8090}"
+            APP_ENV: local
+            APP_DEBUG: "true"
+            DB_CONNECTION: mysql
+            DB_HOST: mysql
+            DB_PORT: "3306"
+            DB_DATABASE: bagisto
+            DB_USERNAME: bagisto
+            DB_PASSWORD: bagisto
+            REDIS_HOST: redis
+            REDIS_PORT: 6379
+            ELASTICSEARCH_HOST: http://elasticsearch:9200
+            MAIL_HOST: mailpit
+            MAIL_PORT: 1025
+            RESPONSE_CACHE_ENABLED: "false"
+            NEO4J_URI: bolt://neo4j:7687
+            NEO4J_USERNAME: neo4j
+            NEO4J_PASSWORD: password
+            NEO4J_MCP_TRANSPORT: stdio
         volumes:
-            - '.:/var/www/html'
-        networks:
-            - sail
+            - .:/var/www/html
+            - bagisto-vendor:/var/www/html/vendor
         depends_on:
-            - mysql
-            - redis
-            - elasticsearch
-            - kibana
-            - mailpit
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+            elasticsearch:
+                condition: service_healthy
+            neo4j:
+                condition: service_healthy
+        networks:
+            - bagisto
+        restart: unless-stopped
+
     mysql:
-        image: 'mysql/mysql-server:8.0'
+        image: mysql:8.0
         ports:
-            - '${FORWARD_DB_PORT:-3306}:3306'
+            - "${FORWARD_DB_PORT:-33066}:3306"
         environment:
-            MYSQL_ROOT_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ROOT_HOST: '%'
-            MYSQL_DATABASE: '${DB_DATABASE}'
-            MYSQL_USER: '${DB_USERNAME}'
-            MYSQL_PASSWORD: '${DB_PASSWORD}'
-            MYSQL_ALLOW_EMPTY_PASSWORD: 1
+            MYSQL_ROOT_PASSWORD: bagisto
+            MYSQL_DATABASE: bagisto
+            MYSQL_USER: bagisto
+            MYSQL_PASSWORD: bagisto
+        command: --default-authentication-plugin=mysql_native_password
         volumes:
-            - 'sail-mysql:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
-        networks:
-            - sail
+            - bagisto-mysql:/var/lib/mysql
         healthcheck:
-            test:
-                - CMD
-                - mysqladmin
-                - ping
-                - '-p${DB_PASSWORD}'
-            retries: 3
+            test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-ubagisto", "-pbagisto"]
+            interval: 5s
             timeout: 5s
+            retries: 30
+            start_period: 30s
+        networks:
+            - bagisto
+        restart: unless-stopped
+
     redis:
-        image: 'redis:alpine'
+        image: redis:7-alpine
         ports:
-            - '${FORWARD_REDIS_PORT:-6379}:6379'
+            - "${FORWARD_REDIS_PORT:-6380}:6379"
         volumes:
-            - 'sail-redis:/data'
-        networks:
-            - sail
+            - bagisto-redis:/data
         healthcheck:
-            test:
-                - CMD
-                - redis-cli
-                - ping
-            retries: 3
-            timeout: 5s
+            test: ["CMD", "redis-cli", "ping"]
+            interval: 5s
+            timeout: 3s
+            retries: 10
+        networks:
+            - bagisto
+        restart: unless-stopped
+
     elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:7.17.0
         ports:
-            - '9200:9200'
-            - '9300:9300'
+            - "${FORWARD_ELASTICSEARCH_PORT:-9201}:9200"
         environment:
-            - xpack.security.enabled=false
             - discovery.type=single-node
+            - xpack.security.enabled=false
             - bootstrap.memory_lock=true
             - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
         ulimits:
             memlock:
                 soft: -1
                 hard: -1
-            nofile:
-                soft: 65536
-                hard: 65536
         volumes:
-            - 'sail-elasticsearch:/var/lib/elasticsearch/data'
+            - bagisto-elasticsearch:/usr/share/elasticsearch/data
+        healthcheck:
+            test: ["CMD-SHELL", "curl -fs http://localhost:9200/_cluster/health | grep -qE '\"status\":\"(green|yellow)\"'"]
+            interval: 10s
+            timeout: 5s
+            retries: 30
+            start_period: 60s
         networks:
-            - sail
-    kibana:
-        image: docker.elastic.co/kibana/kibana:7.17.0
+            - bagisto
+        restart: unless-stopped
+
+    neo4j:
+        image: neo4j:5-community
         ports:
-            - 5601:5601
+            - "${FORWARD_NEO4J_HTTP_PORT:-17474}:7474"
+            - "${FORWARD_NEO4J_BOLT_PORT:-17687}:7687"
         environment:
-            ELASTICSEARCH_HOSTS: 'http://elasticsearch:9200'
+            NEO4J_AUTH: neo4j/password
+            NEO4J_PLUGINS: '["apoc"]'
+            NEO4J_dbms_security_procedures_unrestricted: apoc.*
+            NEO4J_dbms_security_procedures_allowlist: apoc.*
+        volumes:
+            - bagisto-neo4j:/data
+        healthcheck:
+            test: ["CMD-SHELL", "wget -qO- http://localhost:7474 >/dev/null 2>&1 || exit 1"]
+            interval: 10s
+            timeout: 5s
+            retries: 30
+            start_period: 40s
         networks:
-            - sail
-        depends_on:
-            - elasticsearch
+            - bagisto
+        restart: unless-stopped
+
     mailpit:
-        image: 'axllent/mailpit:latest'
+        image: axllent/mailpit:latest
         ports:
-            - '${FORWARD_MAILPIT_PORT:-1025}:1025'
-            - '${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025'
+            - "${FORWARD_MAILPIT_PORT:-1025}:1025"
+            - "${FORWARD_MAILPIT_DASHBOARD_PORT:-8025}:8025"
         networks:
-            - sail
+            - bagisto
+        restart: unless-stopped
+
 networks:
-    sail:
+    bagisto:
         driver: bridge
+
 volumes:
-    sail-mysql:
-        driver: local
-    sail-redis:
-        driver: local
-    sail-elasticsearch:
-        driver: local
+    bagisto-mysql:
+    bagisto-redis:
+    bagisto-elasticsearch:
+    bagisto-neo4j:
+    bagisto-vendor:

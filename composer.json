@@ -55,7 +55,9 @@
         "barryvdh/laravel-debugbar": "^3.8",
         "fakerphp/faker": "^1.23",
         "laravel/boost": "^2.1",
+        "laravel/mcp": "^0.5.1",
         "laravel/pint": "^1.19",
+        "neo4j/laravel-boost": "dev-feat-soft-43-facade-resolution-catalog",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^3.0",
@@ -143,13 +145,12 @@
             ]
         }
     },
-    "repositories": [{
-        "type": "path",
-        "url": "packages/*/*",
-        "options": {
-            "symlink": true
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/neo4j-php/neo4j-boost"
         }
-    }],
+    ],
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
