@@ -125,8 +125,9 @@
             class="flex flex-col gap-2 border-y py-2"
             v-else
         >
-            <div
-                class="flex cursor-pointer justify-between text-right"
+            <button
+                type="button"
+                class="flex cursor-pointer justify-between text-right w-full focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded"
                 @click="cart.show_discount_breakdown = ! cart.show_discount_breakdown"
             >
                 <p class="text-base text-red-600 max-sm:text-sm">
@@ -141,7 +142,7 @@
                         :class="{'icon-arrow-up': cart.show_discount_breakdown, 'icon-arrow-down': ! cart.show_discount_breakdown}"
                     ></span>
                 </p>
-            </div>
+            </button>
 
             <div
                 class="flex flex-col gap-1"
@@ -247,8 +248,9 @@
         class="flex flex-col gap-2 border-y py-2"
         v-else
     >
-        <div
-            class="flex cursor-pointer justify-between text-right"
+        <button
+            type="button"
+            class="flex cursor-pointer justify-between text-right w-full focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded"
             @click="cart.show_taxes = ! cart.show_taxes"
         >
             <p class="text-base max-md:font-normal max-sm:text-sm">
@@ -271,7 +273,7 @@
                     :class="{'icon-arrow-up': cart.show_taxes, 'icon-arrow-down': ! cart.show_taxes}"
                 ></span>
             </p>
-        </div>
+        </button>
 
         <div
             class="flex flex-col gap-1"

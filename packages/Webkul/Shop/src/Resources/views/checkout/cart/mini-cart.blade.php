@@ -1,10 +1,10 @@
 <!-- Mini Cart Vue Component -->
 <v-mini-cart>
-    <span
+    <button
+        type="button"
         class="icon-cart cursor-pointer text-2xl"
-        role="button"
         aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
-    ></span>
+    ></button>
 </v-mini-cart>
 
 @pushOnce('scripts')
@@ -21,13 +21,12 @@
                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.before') !!}
 
                     <span class="relative">
-                        <span
+                        <button
+                            type="button"
                             class="icon-cart cursor-pointer text-2xl"
-                            role="button"
                             aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
-                            tabindex="0"
                             @click="getCart"
-                        ></span>
+                        ></button>
 
                         @if (core()->getConfigData('sales.checkout.my_cart.summary') == 'display_item_quantity')
                             <span
@@ -149,8 +148,9 @@
 
                                     <!-- Details Toggler -->
                                     <div class="">
-                                        <p
-                                            class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-sm max-sm:text-xs"
+                                        <button
+                                            type="button"
+                                            class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-sm max-sm:text-xs text-left ltr:text-left rtl:text-right focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded"
                                             @click="item.option_show = ! item.option_show"
                                         >
                                             @lang('shop::app.checkout.cart.mini-cart.see-details')
@@ -159,7 +159,7 @@
                                                 class="text-2xl max-md:text-xl max-sm:text-lg"
                                                 :class="{'icon-arrow-up': item.option_show, 'icon-arrow-down': ! item.option_show}"
                                             ></span>
-                                        </p>
+                                        </button>
                                     </div>
 
                                     <!-- Option Details -->
@@ -356,12 +356,11 @@
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.before') !!}
 
                     <span class="relative">
-                        <span
+                        <button
+                            type="button"
                             class="icon-cart cursor-pointer text-2xl"
-                            role="button"
                             aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
-                            tabindex="0"
-                        ></span>
+                        ></button>
 
                         <span
                             class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"

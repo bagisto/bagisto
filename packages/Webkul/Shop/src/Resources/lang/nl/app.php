@@ -898,6 +898,7 @@ return [
                 'translate' => 'Vertalen',
                 'translating' => 'Vertalen...',
                 'write-a-review' => 'Schrijf een beoordeling',
+                'stars' => 'Sterren',
             ],
 
             'contact-us' => [

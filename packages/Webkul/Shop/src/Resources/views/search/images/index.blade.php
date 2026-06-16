@@ -14,7 +14,7 @@
     >
         <div>
             <label
-                class="icon-camera absolute top-3 flex items-center text-xl max-sm:top-2.5 ltr:right-3 ltr:pr-3 max-md:ltr:right-1.5 rtl:left-3 rtl:pl-3 max-md:rtl:left-1.5"
+                class="icon-camera absolute top-3 flex items-center text-xl max-sm:top-2.5 ltr:right-3 ltr:pr-3 max-md:ltr:right-1.5 rtl:left-3 rtl:pl-3 max-md:rtl:left-1.5 peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue focus-visible:outline-none rounded cursor-pointer"
                 aria-label="@lang('shop::app.search.images.index.search')"
                 :for="'v-image-search-' + $.uid"
                 v-if="! isSearching"
@@ -53,7 +53,7 @@
 
             <input
                 type="file"
-                class="hidden"
+                class="peer sr-only"
                 accept="image/*"
                 ref="imageSearchInput"
                 :id="'v-image-search-' + $.uid"

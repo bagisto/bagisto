@@ -898,6 +898,7 @@ return [
                 'translate' => 'Terjemahkan',
                 'translating' => 'Menerjemahkan...',
                 'write-a-review' => 'Tulis Ulasan',
+                'stars' => 'Bintang',
             ],
 
             'contact-us' => [

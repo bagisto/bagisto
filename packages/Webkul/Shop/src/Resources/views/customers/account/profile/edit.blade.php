@@ -251,12 +251,12 @@
                     type="checkbox"
                     name="subscribed_to_news_letter"
                     id="is-subscribed"
-                    class="peer hidden"
+                    class="peer sr-only"
                     @checked($customer->subscribed_to_news_letter)
                 />
 
                 <label
-                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue"
+                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 peer-focus-visible:outline-none rounded"
                     for="is-subscribed"
                 ></label>
 

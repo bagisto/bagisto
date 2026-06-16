@@ -898,6 +898,7 @@ return [
                 'translate' => 'Çevir',
                 'translating' => 'Çevriliyor...',
                 'write-a-review' => 'Yorum Yaz',
+                'stars' => 'Yıldızlar',
             ],
 
             'contact-us' => [

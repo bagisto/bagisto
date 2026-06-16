@@ -21,6 +21,10 @@
         <div
             v-if="isActive"
             class="animate-[on-fade_0.5s_ease-in-out]"
+            role="tabpanel"
+            :id="$attrs.id"
+            :aria-labelledby="$attrs.id + '-button'"
+            tabindex="0"
         >
             <slot></slot>
         </div>

@@ -898,6 +898,7 @@ return [
                 'translate' => 'Traduzir',
                 'translating' => 'Traduzindo...',
                 'write-a-review' => 'Escrever uma Avaliação',
+                'stars' => 'Estrelas',
             ],
 
             'contact-us' => [

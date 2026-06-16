@@ -66,8 +66,12 @@
                 <div class="max-md:hidden">
                     <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                         <x-slot:toggle>
-                            <span class="text-2xl cursor-pointer icon-users"></span>
-                            </x-slot>
+                            <button
+                                type="button"
+                                class="inline-block text-2xl cursor-pointer icon-users"
+                                aria-label="@lang('shop::app.components.layouts.header.mobile.account')"
+                            ></button>
+                        </x-slot>
 
                             <!-- Guest Dropdown -->
                             @guest('customer')
@@ -206,7 +210,7 @@
     <!-- Serach Catalog Form -->
     <form action="{{ route('shop.search.index') }}" class="flex items-center w-full">
         <label
-            for="organic-search"
+            for="mobile-organic-search"
             class="sr-only"
         >
             @lang('shop::app.components.layouts.header.mobile.search')
@@ -217,6 +221,7 @@
 
             <input
                 type="text"
+                id="mobile-organic-search"
                 class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
@@ -241,7 +246,11 @@
                 @close="onDrawerClose"
             >
                 <x-slot:toggle>
-                    <span class="text-2xl cursor-pointer icon-hamburger"></span>
+                    <button
+                        type="button"
+                        class="text-2xl cursor-pointer icon-hamburger"
+                        aria-label="Menu"
+                    ></button>
                 </x-slot>
 
                 <x-slot:header>
@@ -311,13 +320,13 @@
                                         >
                                             <!-- Drawer Toggler -->
                                             <x-slot:toggle>
-                                                <div
+                                                <button
+                                                    type="button"
                                                     class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
-                                                    role="button"
                                                     v-pre
                                                 >
                                                     {{ core()->getCurrentCurrency()->symbol . ' ' . core()->getCurrentCurrencyCode() }}
-                                                </div>
+                                                </button>
                                             </x-slot>
 
                                             <!-- Drawer Header -->
@@ -350,16 +359,16 @@
                                         >
                                             <!-- Drawer Toggler -->
                                             <x-slot:toggle>
-                                                <div
+                                                <button
+                                                    type="button"
                                                     class="flex cursor-pointer items-center gap-x-2.5 px-2.5 py-3.5 text-lg font-medium uppercase max-md:py-3 max-sm:text-base"
-                                                    role="button"
                                                     v-pre
                                                 >
                                                     <img
-                                        src="{{ ! empty(core()->getCurrentLocale()->logo_url)
-                        ? core()->getCurrentLocale()->logo_url
-                        : bagisto_asset('images/default-language.svg')
-                                                            }}"
+                                                        src="{{ ! empty(core()->getCurrentLocale()->logo_url)
+                                                            ? core()->getCurrentLocale()->logo_url
+                                                            : bagisto_asset('images/default-language.svg')
+                                                        }}"
                                                         class="h-full"
                                                         alt="Default locale"
                                                         width="24"
@@ -367,7 +376,7 @@
                                                     />
 
                                                     {{ core()->getCurrentChannel()->locales()->orderBy('name')->where('code', app()->getLocale())->value('name') }}
-                                                </div>
+                                                </button>
                                             </x-slot>
 
                                             <!-- Drawer Header -->

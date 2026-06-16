@@ -55,13 +55,14 @@
 
                         {!! view_render_event('bagisto.shop.customers.account.wishlist.delete_all.before') !!}
 
-                        <div
-                            class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm"
+                        <button
+                            type="button"
+                            class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded-2xl"
                             @click="removeAll"
                             v-if="wishlistItems.length"
                         >
                             @lang('shop::app.customers.account.wishlist.delete-all')
-                        </div>
+                        </button>
 
                         {!! view_render_event('bagisto.shop.customers.account.wishlist.delete_all.after') !!}
                     </div>
@@ -132,10 +133,12 @@
                                             @{{ wishlist.product.name }}
                                         </p>
 
-                                        <span
+                                        <button
+                                            type="button"
                                             @click="remove"
-                                            class="icon-bin hidden text-2xl max-md:block"
-                                        ></span>
+                                            class="icon-bin hidden text-2xl max-md:block cursor-pointer focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded bg-transparent border-0"
+                                            aria-label="@lang('shop::app.customers.account.wishlist.remove')"
+                                        ></button>
                                     </div>
 
                                     <!--Wishlist Item attributes -->
@@ -145,8 +148,9 @@
                                     >
                                         <div class="grid gap-2">
                                             <div>
-                                                <p
-                                                    class="flex cursor-pointer items-center gap-x-4 text-base"
+                                                <button
+                                                    type="button"
+                                                    class="flex cursor-pointer items-center gap-x-4 text-base focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded text-left ltr:text-left rtl:text-right w-full bg-transparent border-0"
                                                     @click="wishlist.option_show = ! wishlist.option_show"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.see-details')
@@ -158,7 +162,7 @@
                                                             'icon-arrow-down': ! wishlist.option_show
                                                         }"
                                                     ></span>
-                                                </p>
+                                                </button>
                                             </div>
 
                                             <div
@@ -200,12 +204,13 @@
                                         {!! view_render_event('bagisto.shop.customers.account.wishlist.remove_button.before') !!}
 
                                         <!--Wishlist Item removed button-->
-                                        <a
-                                            class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden"
+                                        <button
+                                            type="button"
+                                            class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none rounded bg-transparent border-0"
                                             @click="remove"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')
-                                        </a>
+                                        </button>
 
                                         {!! view_render_event('bagisto.shop.customers.account.wishlist.remove_button.after') !!}
                                     </div>
@@ -243,12 +248,13 @@
                                 >
                                 </p>
 
-                                <a
-                                    class="flex cursor-pointer justify-end text-base text-blue-700"
+                                <button
+                                    type="button"
+                                    class="flex cursor-pointer justify-end text-base text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none rounded bg-transparent border-0 ltr:ml-auto rtl:mr-auto"
                                     @click="remove"
                                 >
                                     @lang('shop::app.customers.account.wishlist.remove')
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>

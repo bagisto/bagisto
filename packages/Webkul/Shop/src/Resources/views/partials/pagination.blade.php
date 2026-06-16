@@ -39,10 +39,15 @@
 
                     @if (is_array($element)) 
                         @foreach ($element as $page => $url) 
+                            @php
+                                $isCurrent = $page == $paginator->currentPage();
+                            @endphp
                             <li>
                                 <a 
-                                    href="{{ $paginator->currentPage() ? $url : '#' }}"
-                                    class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 text-center font-medium leading-normal text-black hover:bg-gray-100 {{ $paginator->currentPage() ? 'bg-gray-100' : '' }}"
+                                    href="{{ $isCurrent ? '#' : $url }}"
+                                    class="flex h-[37px] w-[35px] items-center justify-center border border-zinc-200 text-center font-medium leading-normal text-black hover:bg-gray-100 {{ $isCurrent ? 'bg-zinc-200 pointer-events-none' : '' }}"
+                                    aria-label="{{ $page }}"
+                                    {!! $isCurrent ? 'aria-current="page"' : '' !!}
                                 >
                                     {{ $page }}
                                 </a>

@@ -18,27 +18,23 @@
         id="v-quantity-changer-template"
     >
         <div>
-            <span 
-                class="icon-minus cursor-pointer text-2xl"
-                role="button"
-                tabindex="0"
+            <button
+                type="button"
+                class="icon-minus cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none rounded bg-transparent border-0"
                 aria-label="@lang('shop::app.components.quantity-changer.decrease-quantity')"
                 @click="decrease"
-            >
-            </span>
+            ></button>
 
             <p class="w-2.5 select-none text-center max-sm:text-sm">
                 @{{ quantity }}
             </p>
             
-            <span 
-                class="icon-plus cursor-pointer text-2xl"
-                role="button"
-                tabindex="0"
+            <button
+                type="button"
+                class="icon-plus cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none rounded bg-transparent border-0"
                 aria-label="@lang('shop::app.components.quantity-changer.increase-quantity')"
                 @click="increase"
-            >
-            </span>
+            ></button>
 
             <v-field
                 type="hidden"

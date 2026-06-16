@@ -898,6 +898,7 @@ return [
                 'translate' => '翻译',
                 'translating' => '翻译中...',
                 'write-a-review' => '写评论',
+                'stars' => '星星',
             ],
 
             'contact-us' => [

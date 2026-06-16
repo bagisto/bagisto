@@ -898,6 +898,7 @@ return [
                 'translate' => 'ترجمه',
                 'translating' => 'در حال ترجمه...',
                 'write-a-review' => 'نوشتن یک نقد و بررسی',
+                'stars' => 'ستاره‌ها',
             ],
 
             'contact-us' => [

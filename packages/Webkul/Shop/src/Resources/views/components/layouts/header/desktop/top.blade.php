@@ -62,10 +62,9 @@
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'left' : 'right' }}">
                 <!-- Dropdown Toggler -->
                 <x-slot:toggle>
-                    <div
+                    <button
+                        type="button"
                         class="flex cursor-pointer gap-2.5 py-3"
-                        role="button"
-                        tabindex="0"
                         @click="currencyToggler = ! currencyToggler"
                     >
                         <span v-pre>
@@ -78,7 +77,7 @@
                             role="presentation"
                         >
                         </span>
-                    </div>
+                    </button>
                 </x-slot>
 
                 <!-- Dropdown Content -->
@@ -96,9 +95,8 @@
                 {{ core()->getConfigData('general.content.header_offer.title') }}
                 
                 <a 
-                    href="{{ core()->getConfigData('general.content.header_offer.redirection_link') }}" 
+                    href="{{ core()->getConfigData('general.content.header_offer.redirection_link') ?: route('shop.home.index') }}" 
                     class="underline"
-                    role="button"
                 >
                     {{ core()->getConfigData('general.content.header_offer.redirection_title') }}
                 </a>
@@ -110,10 +108,9 @@
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
                     <!-- Dropdown Toggler -->
-                    <div
+                    <button
+                        type="button"
                         class="flex cursor-pointer items-center gap-2.5 py-3"
-                        role="button"
-                        tabindex="0"
                         @click="localeToggler = ! localeToggler"
                     >
                         <img
@@ -136,7 +133,7 @@
                             :class="{'icon-arrow-up': localeToggler, 'icon-arrow-down': ! localeToggler}"
                             role="presentation"
                         ></span>
-                    </div>
+                    </button>
                 </x-slot>
             
                 <!-- Dropdown Content -->
@@ -154,14 +151,15 @@
         id="v-currency-switcher-template"
     >
         <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-[500px]">
-            <span
-                class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
+            <button
+                type="button"
+                class="w-full text-left ltr:text-left rtl:text-right cursor-pointer px-5 py-2 text-base hover:bg-gray-100 focus-visible:outline-none focus-visible:bg-gray-100"
                 v-for="currency in currencies"
                 :class="{'bg-gray-100': currency.code == '{{ core()->getCurrentCurrencyCode() }}'}"
                 @click="change(currency)"
             >
                 @{{ currency.symbol + ' ' + currency.code }}
-            </span>
+            </button>
         </div>
     </script>
 
@@ -170,8 +168,9 @@
         id="v-locale-switcher-template"
     >
         <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-[500px]">
-            <span
-                class="flex cursor-pointer items-center gap-2.5 px-5 py-2 text-base hover:bg-gray-100"
+            <button
+                type="button"
+                class="flex w-full items-center gap-2.5 px-5 py-2 text-base hover:bg-gray-100 text-left ltr:text-left rtl:text-right focus-visible:outline-none focus-visible:bg-gray-100"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
                 v-for="locale in locales"
                 @click="change(locale)"                  
@@ -183,7 +182,7 @@
                 />
 
                 @{{ locale.name }}
-            </span>
+            </button>
         </div>
     </script>
 

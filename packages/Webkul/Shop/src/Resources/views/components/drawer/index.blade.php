@@ -22,11 +22,13 @@
                 {{ $header }}
 
                 <div class="absolute top-5 max-sm:top-4 ltr:right-5 rtl:left-5">
-                    <span
-                        class="icon-cancel cursor-pointer text-3xl max-md:text-2xl"
+                    <button
+                        type="button"
+                        class="icon-cancel cursor-pointer text-3xl max-md:text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none rounded bg-transparent border-0"
+                        aria-label="Close drawer"
                         @click="close"
                     >
-                    </span>
+                    </button>
                 </div>
             </div>
         </template>

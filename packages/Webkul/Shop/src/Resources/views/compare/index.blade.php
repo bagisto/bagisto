@@ -53,15 +53,16 @@
 
                         {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.before') !!}
 
-                        <div
-                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:px-3 max-md:text-xs max-sm:py-1.5"
+                        <button
+                            type="button"
+                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:px-3 max-md:text-xs max-sm:py-1.5 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded-2xl"
                             v-if="items.length"
                             @click="removeAll"
                         >
                             <span class="icon-bin text-2xl max-md:hidden"></span>
 
                             @lang('shop::app.compare.delete-all')
-                        </div>
+                        </button>
 
                         {!! view_render_event('bagisto.shop.customers.account.compare.remove_all.after') !!}
                     </div>
@@ -91,10 +92,12 @@
                                         class="relative w-[311px] max-w-[311px] px-5 max-md:w-60 max-md:px-2.5 max-sm:w-[190px]"
                                         v-for="product in items"
                                     >
-                                        <span
-                                            class="icon-cancel absolute top-5 z-[1] flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-zinc-200 bg-white text-2xl max-md:top-10 max-md:h-6 max-md:w-6 max-md:rounded-full max-md:text-sm ltr:right-10 max-md:ltr:right-4 rtl:left-10 max-md:rtl:left-4"
+                                        <button
+                                            type="button"
+                                            class="icon-cancel absolute top-5 z-[1] flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-zinc-200 bg-white text-2xl max-md:top-10 max-md:h-6 max-md:w-6 max-md:rounded-full max-md:text-sm ltr:right-10 max-md:ltr:right-4 rtl:left-10 max-md:rtl:left-4 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none"
+                                            aria-label="@lang('shop::app.compare.remove')"
                                             @click="remove(product.id)"
-                                        ></span>
+                                        ></button>
 
                                         <x-shop::products.card class="[&_span.icon-compare]:hidden" />
                                     </div>

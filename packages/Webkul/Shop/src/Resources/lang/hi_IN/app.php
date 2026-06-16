@@ -898,6 +898,7 @@ return [
                 'translate' => 'अनुवाद करें',
                 'translating' => 'अनुवाद किया जा रहा है...',
                 'write-a-review' => 'समीक्षा लिखें',
+                'stars' => 'सितारे',
             ],
 
             'contact-us' => [

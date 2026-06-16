@@ -89,6 +89,7 @@
 
             created() {
                 window.addEventListener('click', this.handleFocusOut);
+                window.addEventListener('keydown', this.handleKeyDown);
             },
 
             mounted() {
@@ -99,6 +100,7 @@
 
             beforeDestroy() {
                 window.removeEventListener('click', this.handleFocusOut);
+                window.removeEventListener('keydown', this.handleKeyDown);
             },
 
             computed: {
@@ -164,6 +166,14 @@
                 handleFocusOut(e) {
                     if (! this.$el.contains(e.target) || (this.closeOnClick && this.$el.children[1].contains(e.target))) {
                         this.isActive = false;
+                    }
+                },
+
+                handleKeyDown(e) {
+                    if (e.key === 'Escape' && this.isActive) {
+                        this.isActive = false;
+                        
+                        this.$refs.toggleBlock.querySelector('button, a, [tabindex="0"]')?.focus();
                     }
                 },
             },
