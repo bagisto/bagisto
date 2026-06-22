@@ -37,6 +37,14 @@
     <img src="https://flagicons.lipis.dev/flags/4x3/it.svg" alt="Italian" width="24" style="display:block; margin:6px auto;">
     <img src="https://flagicons.lipis.dev/flags/4x3/jp.svg" alt="Japanese" width="24" style="display:block; margin:6px auto;">
     <img src="https://flagicons.lipis.dev/flags/4x3/nl.svg" alt="Dutch" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/be.svg" alt="Belgian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/ch.svg" alt="Swiss" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/at.svg" alt="Austrian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/se.svg" alt="Swedish" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/no.svg" alt="Norwegian" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/dk.svg" alt="Danish" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/fi.svg" alt="Finnish" width="24" style="display:block; margin:6px auto;">
+    <img src="https://flagicons.lipis.dev/flags/4x3/ie.svg" alt="Irish" width="24" style="display:block; margin:6px auto;">
     <img src="https://flagicons.lipis.dev/flags/4x3/br.svg" alt="Portuguese (Brazil)" width="24" style="display:block; margin:6px auto;">
     <img src="https://flagicons.lipis.dev/flags/4x3/tr.svg" alt="Turkish" width="24" style="display:block; margin:6px auto;">
     <img src="https://flagicons.lipis.dev/flags/4x3/cn.svg" alt="Chinese (Simplified)" width="24" style="display:block; margin:6px auto;">
@@ -64,6 +72,11 @@ Follow the [Getting Started with Bagisto](https://www.youtube.com/watch?v=s_DhQr
 
 You can browse through the Free [Live Demo](https://demo.bagisto.com/)
 
+## ☁️ Bagisto Cloud Hosting
+
+    Deploy and scale your Bagisto store effortlessly with [Bagisto Cloud Hosting](https://bagisto.com/en/cloud-hosting/) — a fully managed, optimized hosting solution built specifically for Bagisto. Enjoy automatic scaling, built-in security, one-click updates, and expert support so you can focus on growing your business.
+
+[![Deploy Bagisto on Cloud Hosting](https://github.com/bagisto/temp-media/blob/master/bagisto_cloud.webp)](https://bagisto.com/en/cloud-hosting/)
 ## ☁️ Cloud Installation via Amazon AMI
 
 You can also deploy Bagisto quickly using our pre-configured Amazon Machine Image (AMI) available on the AWS Marketplace:
@@ -94,7 +107,7 @@ The [B2B eCommerce Platform](https://bagisto.com/en/b2b-commerce-platform/) enha
 
 ![Multi Tenant eCommerce Image](https://github.com/bagisto/temp-media/blob/master/multi-tenant.webp)
 
-# POS 
+# POS
 
 [Point of Sale](https://bagisto.com/en/laravel-pos/) system manages retail operations efficiently, handling inventory management and fast customer checkout for your store.
 
@@ -112,7 +125,7 @@ Develop and deploy your next headless commerce storefronts with Next JS and Bagi
 
 # Open Source Mobile eCommerce
 
-Revolutionize Your Online Store with Bagisto's Open Source eCommerce Mobile 
+Revolutionize Your Online Store with Bagisto's Open Source eCommerce Mobile
 
 ![Mobile View Example Screens](https://raw.githubusercontent.com/bagisto/temp-media/master/open-source-ecommerce-mobile.png)
 
@@ -152,9 +165,11 @@ Get Bagisto support on [Facebook Group](https://www.facebook.com/groups/bagisto)
 Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](https://github.com/bagisto/bagisto/blob/master/.github/CONTRIBUTING.md)!
 
 # License
+
 Bagisto is a fully open-source Laravel eCommerce framework that will always remain free under the [MIT License](https://github.com/bagisto/bagisto/blob/2.4/LICENSE).
 
 # Security Vulnerabilities
+
 If you think that you have found a security issue in Bagisto, please do not use the issue tracker and do not post it publicly. Instead, all security issues must be sent to [mailto:support@bagisto.com](mailto:support@bagisto.com).
 
 # Contributors
