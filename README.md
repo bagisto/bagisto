@@ -74,7 +74,7 @@ You can browse through the Free [Live Demo](https://demo.bagisto.com/)
 
 ## ☁️ Bagisto Cloud Hosting
 
-    Deploy and scale your Bagisto store effortlessly with [Bagisto Cloud Hosting](https://bagisto.com/en/cloud-hosting/) — a fully managed, optimized hosting solution built specifically for Bagisto. Enjoy automatic scaling, built-in security, one-click updates, and expert support so you can focus on growing your business.
+Deploy and scale your Bagisto store effortlessly with [Bagisto Cloud Hosting](https://bagisto.com/en/cloud-hosting/)  a fully managed, optimized hosting solution built specifically for Bagisto. Enjoy automatic scaling, built-in security, one-click updates, and expert support so you can focus on growing your business.
 
 [**Deploy Bagisto on Cloud Hosting**](https://bagisto.com/en/cloud-hosting/)
 
