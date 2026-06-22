@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- #11331 [Fixed] Replaced deprecated Venezuelan Bolivar currency code `VEF` with `VES` in seeders and installer configurations, ensuring correct exchange rate synchronization with modern exchange rate APIs.
+
 ## **v2.4.6 (5th of June 2026)** - *Release*
 
 * Help and resources added.
