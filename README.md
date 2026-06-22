@@ -76,7 +76,12 @@ You can browse through the Free [Live Demo](https://demo.bagisto.com/)
 
     Deploy and scale your Bagisto store effortlessly with [Bagisto Cloud Hosting](https://bagisto.com/en/cloud-hosting/) — a fully managed, optimized hosting solution built specifically for Bagisto. Enjoy automatic scaling, built-in security, one-click updates, and expert support so you can focus on growing your business.
 
-[![Deploy Bagisto on Cloud Hosting](https://github.com/bagisto/temp-media/blob/master/bagisto_cloud.webp)](https://bagisto.com/en/cloud-hosting/)
+[**Deploy Bagisto on Cloud Hosting**](https://bagisto.com/en/cloud-hosting/)
+
+<a href="https://bagisto.com/en/cloud-hosting/">
+    <img src="https://github.com/bagisto/temp-media/blob/master/bagisto_cloud.webp" alt="Deploy Bagisto on Cloud Hosting">
+</a>
+
 ## ☁️ Cloud Installation via Amazon AMI
 
 You can also deploy Bagisto quickly using our pre-configured Amazon Machine Image (AMI) available on the AWS Marketplace:
@@ -87,7 +92,7 @@ This AMI allows you to get started with Bagisto on a cloud environment without m
 
 # Accelerate Your Online Store Launch with the Bagisto Starter Pack!
 
-Empower your e-commerce journey with the [Bagisto Starter Pack](https://store.webkul.com/bagisto-starter-pack.html), streamlining setup and integration for a seamless online store launch. Get ready to unlock success in the digital marketplace! 
+Empower your e-commerce journey with the [Bagisto Starter Pack](https://store.webkul.com/bagisto-starter-pack.html), streamlining setup and integration for a seamless online store launch. Get ready to unlock success in the digital marketplace!
 
 # Open Source B2B eCommerce Platform
 
