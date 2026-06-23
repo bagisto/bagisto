@@ -8,7 +8,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - "Apply Tax On" setting (Before/After Discount) under Sales → Taxes → Calculation Settings to control whether tax is calculated on the original product price or on the discounted price when a cart-rule/coupon discount is applied, plus an optional per-product tax breakdown in the cart and checkout summary.
 
-- #11331 [fixed] Replaced deprecated Venezuelan Bolivar currency code `VEF` with `VES` in seeders and installer configurations, ensuring correct exchange rate synchronization with modern exchange rate APIs.
+- #11344 [fixed] - Fixed incorrect payment amounts for currencies whose ISO 4217 minor units are not two decimals in the Stripe and PayPal gateways. Currencies are now seeded with a `decimal` value (e.g. `0` for JPY/KRW, `3` for KWD/BHD, `2` by default); Stripe converts amounts to the smallest currency unit using `10 ^ decimal` instead of a hardcoded `× 100`, and PayPal rounds to the currency's decimal places, preventing 100× overcharges on zero-decimal currencies and undercharges on three-decimal currencies.
+
+- #11331 [fixed] - Replaced deprecated Venezuelan Bolivar currency code `VEF` with `VES` in seeders and installer configurations, ensuring correct exchange rate synchronization with modern exchange rate APIs.
 
 ## **v2.4.6 (5th of June 2026)** - *Release*
 
