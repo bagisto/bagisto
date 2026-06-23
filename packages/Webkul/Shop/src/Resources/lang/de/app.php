@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Rabattbetrag',
                 'grand-total' => 'Gesamtsumme',
                 'included' => 'Enthalten',
+                'excl-tax' => 'Exkl. Steuer:',
                 'incl-tax' => 'Inkl. Steuer:',
                 'items-discount' => 'Artikelrabatt',
                 'shipping-discount' => 'Versandrabatt',

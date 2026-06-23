@@ -5063,16 +5063,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Impostazioni di Calcolo',
-                        'title-info' => 'Dettagli sul costo di beni o servizi, inclusi il prezzo base, gli sconti, le tasse e le spese aggiuntive.',
+                        'after-discount' => 'Dopo lo sconto',
+                        'apply-tax-on' => 'Applica imposta su',
+                        'apply-tax-on-info' => 'Scegli se l\'imposta viene calcolata sul prezzo originale del prodotto (Prima dello sconto) o sul prezzo dopo l\'applicazione degli sconti delle regole del carrello (Dopo lo sconto). Questa impostazione si applica solo ai prezzi al netto delle imposte.',
                         'based-on' => 'Calcolo Basato Su',
-                        'shipping-address' => 'Indirizzo di Spedizione',
+                        'before-discount' => 'Prima dello sconto',
                         'billing-address' => 'Indirizzo di Fatturazione',
-                        'shipping-origin' => 'Origine Spedizione',
-                        'product-prices' => 'Prezzi Prodotto',
-                        'shipping-prices' => 'Prezzi Spedizione',
                         'excluding-tax' => 'Esclusa Tassa',
                         'including-tax' => 'Inclusa Tassa',
+                        'product-prices' => 'Prezzi Prodotto',
+                        'shipping-address' => 'Indirizzo di Spedizione',
+                        'shipping-origin' => 'Origine Spedizione',
+                        'shipping-prices' => 'Prezzi Spedizione',
+                        'title' => 'Impostazioni di Calcolo',
+                        'title-info' => 'Dettagli sul costo di beni o servizi, inclusi il prezzo base, gli sconti, le tasse e le spese aggiuntive.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5084,6 +5088,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Mostra dettaglio imposte',
+                        'show-tax-breakdown-info' => 'Mostra un dettaglio delle imposte per prodotto e per aliquota nel riepilogo del carrello e del checkout. Pensato per il debug.',
                         'title' => 'Impostazioni Visualizzazione Carrello',
                         'title-info' => 'Imposta la visualizzazione delle tasse nel carrello',
                         'display-prices' => 'Visualizza Prezzi',

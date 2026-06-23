@@ -161,7 +161,7 @@ class Installer extends Command
         'UAH' => 'Ukrainian Hryvnia',
         'USD' => 'United States Dollar',
         'UZS' => 'Uzbekistani Som',
-        'VEF' => 'Venezuelan Bolívar',
+        'VES' => 'Venezuelan Bolívar',
         'VND' => 'Vietnamese Dong',
         'XAF' => 'CFA Franc BEAC',
         'XOF' => 'CFA Franc BCEAO',

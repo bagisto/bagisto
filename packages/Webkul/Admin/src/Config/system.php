@@ -2942,6 +2942,21 @@ return [
                         'value' => 'including_tax',
                     ],
                 ],
+            ], [
+                'name' => 'apply_tax_on',
+                'title' => 'admin::app.configuration.index.sales.taxes.calculation.apply-tax-on',
+                'info' => 'admin::app.configuration.index.sales.taxes.calculation.apply-tax-on-info',
+                'type' => 'select',
+                'default' => 'after_discount',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.before-discount',
+                        'value' => 'before_discount',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.after-discount',
+                        'value' => 'after_discount',
+                    ],
+                ],
             ],
         ],
     ], [
@@ -3024,6 +3039,12 @@ return [
                         'value' => 'both',
                     ],
                 ],
+            ], [
+                'name' => 'show_tax_breakdown',
+                'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.show-tax-breakdown',
+                'info' => 'admin::app.configuration.index.sales.taxes.shopping-cart.show-tax-breakdown-info',
+                'type' => 'boolean',
+                'default' => false,
             ],
         ],
     ], [

@@ -5063,16 +5063,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Configuración de cálculo',
-                        'title-info' => 'Detalles sobre el costo de bienes o servicios, incluyendo el precio base, descuentos, impuestos y cargos adicionales.',
+                        'after-discount' => 'Después del descuento',
+                        'apply-tax-on' => 'Aplicar impuesto en',
+                        'apply-tax-on-info' => 'Elige si el impuesto se calcula sobre el precio original del producto (Antes del descuento) o sobre el precio tras aplicar los descuentos de reglas del carrito (Después del descuento). Esta configuración solo se aplica a los precios sin impuestos.',
                         'based-on' => 'Cálculo basado en',
-                        'shipping-address' => 'Dirección de envío',
+                        'before-discount' => 'Antes del descuento',
                         'billing-address' => 'Dirección de facturación',
-                        'shipping-origin' => 'Origen del envío',
-                        'product-prices' => 'Precios de productos',
-                        'shipping-prices' => 'Precios de envío',
                         'excluding-tax' => 'Excluyendo impuestos',
                         'including-tax' => 'Incluyendo impuestos',
+                        'product-prices' => 'Precios de productos',
+                        'shipping-address' => 'Dirección de envío',
+                        'shipping-origin' => 'Origen del envío',
+                        'shipping-prices' => 'Precios de envío',
+                        'title' => 'Configuración de cálculo',
+                        'title-info' => 'Detalles sobre el costo de bienes o servicios, incluyendo el precio base, descuentos, impuestos y cargos adicionales.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5084,6 +5088,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Mostrar desglose de impuestos',
+                        'show-tax-breakdown-info' => 'Muestra un desglose detallado de impuestos por producto y por tasa en el resumen del carrito y la compra. Pensado para depuración.',
                         'title' => 'Configuración de visualización del carrito de compras',
                         'title-info' => 'Configurar la visualización de los impuestos en el carrito de compras',
                         'display-prices' => 'Mostrar precios',

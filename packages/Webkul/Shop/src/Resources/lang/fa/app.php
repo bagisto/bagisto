@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'مقدار تخفیف',
                 'grand-total' => 'مجموع کل',
                 'included' => 'شامل',
+                'excl-tax' => 'بدون مالیات:',
                 'incl-tax' => 'شامل مالیات:',
                 'items-discount' => 'تخفیف اقلام',
                 'shipping-discount' => 'تخفیف ارسال',

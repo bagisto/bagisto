@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Сума знижки',
                 'grand-total' => 'Загальна сума',
                 'included' => 'Включено',
+                'excl-tax' => 'Без податку:',
                 'incl-tax' => 'З податком:',
                 'items-discount' => 'Знижка на товари',
                 'shipping-discount' => 'Знижка на доставку',

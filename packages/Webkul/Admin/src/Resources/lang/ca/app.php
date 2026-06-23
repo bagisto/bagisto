@@ -5063,16 +5063,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Configuració de Càlcul',
-                        'title-info' => 'Detalls sobre el cost dels béns o serveis, incloent el preu base, descomptes, impostos i càrrecs addicionals.',
+                        'after-discount' => 'Després del descompte',
+                        'apply-tax-on' => 'Aplicar impost a',
+                        'apply-tax-on-info' => 'Tria si l\'impost es calcula sobre el preu original del producte (Abans del descompte) o sobre el preu després d\'aplicar els descomptes de regles del carretó (Després del descompte). Aquesta configuració només s\'aplica als preus sense impostos.',
                         'based-on' => 'Càlcul Basat en',
-                        'shipping-address' => 'Adreça d\'Enviament',
+                        'before-discount' => 'Abans del descompte',
                         'billing-address' => 'Adreça de Facturació',
-                        'shipping-origin' => 'Origen de l\'Enviament',
-                        'product-prices' => 'Preus dels Productes',
-                        'shipping-prices' => 'Preus d\'Enviament',
                         'excluding-tax' => 'Excloent Impost',
                         'including-tax' => 'Incloent Impost',
+                        'product-prices' => 'Preus dels Productes',
+                        'shipping-address' => 'Adreça d\'Enviament',
+                        'shipping-origin' => 'Origen de l\'Enviament',
+                        'shipping-prices' => 'Preus d\'Enviament',
+                        'title' => 'Configuració de Càlcul',
+                        'title-info' => 'Detalls sobre el cost dels béns o serveis, incloent el preu base, descomptes, impostos i càrrecs addicionals.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5084,6 +5088,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Mostra el desglossament d\'impostos',
+                        'show-tax-breakdown-info' => 'Mostra un desglossament detallat d\'impostos per producte i per tipus al resum de la cistella i la compra. Pensat per a depuració.',
                         'title' => 'Configuració de Visualització del Carret de la Compra',
                         'title-info' => 'Configura la visualització dels impostos al carret de la compra',
                         'display-prices' => 'Mostrar Preus',

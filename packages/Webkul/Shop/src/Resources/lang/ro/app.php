@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Sumă reducere',
                 'grand-total' => 'Total general',
                 'included' => 'Inclus',
+                'excl-tax' => 'Fără taxe:',
                 'incl-tax' => 'Cu TVA:',
                 'items-discount' => 'Reducere articole',
                 'shipping-discount' => 'Reducere livrare',

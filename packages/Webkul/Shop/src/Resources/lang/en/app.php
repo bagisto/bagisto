@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Discount Amount',
                 'grand-total' => 'Grand Total',
                 'included' => 'Included',
+                'excl-tax' => 'Excl. Tax:',
                 'incl-tax' => 'Incl. Tax:',
                 'items-discount' => 'Items Discount',
                 'shipping-discount' => 'Shipping Discount',

@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Import de Descompte',
                 'grand-total' => 'Total General',
                 'included' => 'Inclòs',
+                'excl-tax' => 'Sense impostos:',
                 'incl-tax' => 'IVA inclòs:',
                 'items-discount' => 'Descompte d\'articles',
                 'shipping-discount' => 'Descompte d\'enviament',

@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => '折扣金额',
                 'grand-total' => '总计',
                 'included' => '已含',
+                'excl-tax' => '不含税：',
                 'incl-tax' => '含税:',
                 'items-discount' => '商品折扣',
                 'shipping-discount' => '运费折扣',

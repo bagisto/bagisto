@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => '割引額',
                 'grand-total' => '合計金額',
                 'included' => '含む',
+                'excl-tax' => '税抜:',
                 'incl-tax' => '税込:',
                 'items-discount' => '商品割引',
                 'shipping-discount' => '送料割引',

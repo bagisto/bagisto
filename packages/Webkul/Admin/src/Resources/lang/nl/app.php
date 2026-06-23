@@ -5063,16 +5063,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Berekeningsinstellingen',
-                        'title-info' => 'Details over de kosten van goederen of diensten, inclusief basisprijs, kortingen, belastingen en extra kosten.',
+                        'after-discount' => 'Na korting',
+                        'apply-tax-on' => 'Belasting toepassen op',
+                        'apply-tax-on-info' => 'Kies of de belasting wordt berekend over de oorspronkelijke productprijs (Vóór korting) of over de prijs nadat winkelwagenregelkortingen zijn toegepast (Na korting). Deze instelling geldt alleen voor prijzen exclusief belasting.',
                         'based-on' => 'Berekening op basis van',
-                        'shipping-address' => 'Verzendadres',
+                        'before-discount' => 'Vóór korting',
                         'billing-address' => 'Factuuradres',
-                        'shipping-origin' => 'Verzendherkomst',
-                        'product-prices' => 'Productprijzen',
-                        'shipping-prices' => 'Verzendprijzen',
                         'excluding-tax' => 'Exclusief belasting',
                         'including-tax' => 'Inclusief belasting',
+                        'product-prices' => 'Productprijzen',
+                        'shipping-address' => 'Verzendadres',
+                        'shipping-origin' => 'Verzendherkomst',
+                        'shipping-prices' => 'Verzendprijzen',
+                        'title' => 'Berekeningsinstellingen',
+                        'title-info' => 'Details over de kosten van goederen of diensten, inclusief basisprijs, kortingen, belastingen en extra kosten.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5084,6 +5088,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Belastingspecificatie tonen',
+                        'show-tax-breakdown-info' => 'Toont een gedetailleerde belastingspecificatie per product en per tarief in het winkelwagen- en afrekenoverzicht. Bedoeld voor debugging.',
                         'title' => 'Instellingen winkelwagenweergave',
                         'title-info' => 'Stel de weergave van belastingen in de winkelwagen in',
                         'display-prices' => 'Prijzen weergeven',

@@ -76,7 +76,7 @@ class CurrencyTableSeeder extends Seeder
         'UAH' => '₴',
         'USD' => '$',
         'UZS' => 'сўм',
-        'VEF' => 'Bs.F',
+        'VES' => 'Bs.F',
         'VND' => '₫',
         'XAF' => 'FCFA',
         'XOF' => 'CFA',

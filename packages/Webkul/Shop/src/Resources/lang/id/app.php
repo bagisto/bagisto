@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Jumlah Diskon',
                 'grand-total' => 'Total Keseluruhan',
                 'included' => 'Termasuk',
+                'excl-tax' => 'Tanpa Pajak:',
                 'incl-tax' => 'Termasuk Pajak:',
                 'items-discount' => 'Diskon Barang',
                 'shipping-discount' => 'Diskon Pengiriman',

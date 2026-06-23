@@ -198,7 +198,7 @@ return [
                 'UAH' => 'Oekraïense hryvnia',
                 'USD' => 'Amerikaanse dollar',
                 'UZS' => 'Oezbeekse som',
-                'VEF' => 'Venezolaanse bolívar',
+                'VES' => 'Venezolaanse bolívar',
                 'VND' => 'Vietnamese dong',
                 'XAF' => 'CFA-frank BEAC',
                 'XOF' => 'CFA-frank BCEAO',

@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Сумма скидки',
                 'grand-total' => 'Общая сумма',
                 'included' => 'Включено',
+                'excl-tax' => 'Без налога:',
                 'incl-tax' => 'С налогом:',
                 'items-discount' => 'Скидка на товары',
                 'shipping-discount' => 'Скидка на доставку',

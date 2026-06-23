@@ -5063,16 +5063,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'הגדרות חישוב',
-                        'title-info' => 'פרטים על עלות הסחורות או השירותים, כולל מחיר בסיס, הנחות, מסים וחיובים נוספים.',
+                        'after-discount' => 'אחרי הנחה',
+                        'apply-tax-on' => 'החל מס על',
+                        'apply-tax-on-info' => 'בחר אם המס מחושב על מחיר המוצר המקורי (לפני הנחה) או על המחיר לאחר החלת הנחות כללי עגלה (אחרי הנחה). הגדרה זו חלה על מחירים ללא מס בלבד.',
                         'based-on' => 'חישוב בהתבסס על',
-                        'shipping-address' => 'כתובת למשלוח',
+                        'before-discount' => 'לפני הנחה',
                         'billing-address' => 'כתובת לחיוב',
-                        'shipping-origin' => 'מקור המשלוח',
-                        'product-prices' => 'מחירי המוצרים',
-                        'shipping-prices' => 'מחירי המשלוח',
                         'excluding-tax' => 'לא כולל מס',
                         'including-tax' => 'כולל מס',
+                        'product-prices' => 'מחירי המוצרים',
+                        'shipping-address' => 'כתובת למשלוח',
+                        'shipping-origin' => 'מקור המשלוח',
+                        'shipping-prices' => 'מחירי המשלוח',
+                        'title' => 'הגדרות חישוב',
+                        'title-info' => 'פרטים על עלות הסחורות או השירותים, כולל מחיר בסיס, הנחות, מסים וחיובים נוספים.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5084,6 +5088,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'הצג פירוט מס',
+                        'show-tax-breakdown-info' => 'הצגת פירוט מס מפורט לפי מוצר ולפי שיעור בסיכום העגלה והתשלום. מיועד לניפוי באגים.',
                         'title' => 'הגדרות תצוגה בעגלת קניות',
                         'title-info' => 'הגדר את תצוגת המסים בעגלת הקניות',
                         'display-prices' => 'תצוגת מחירים',

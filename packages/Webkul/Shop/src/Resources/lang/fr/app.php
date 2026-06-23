@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Montant de réduction',
                 'grand-total' => 'Total général',
                 'included' => 'Inclus',
+                'excl-tax' => 'Hors taxe :',
                 'incl-tax' => 'TTC :',
                 'items-discount' => 'Remise sur articles',
                 'shipping-discount' => 'Remise sur livraison',

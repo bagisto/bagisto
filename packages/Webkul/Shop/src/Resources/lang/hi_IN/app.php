@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'डिस्काउंट राशि',
                 'grand-total' => 'कुल योग',
                 'included' => 'शामिल',
+                'excl-tax' => 'कर रहित:',
                 'incl-tax' => 'कर सहित:',
                 'items-discount' => 'आइटम छूट',
                 'shipping-discount' => 'शिपिंग छूट',

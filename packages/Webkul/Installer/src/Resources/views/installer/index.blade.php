@@ -123,7 +123,7 @@
             'UAH' => 'ukrainian-hryvnia',
             'USD' => 'united-states-dollar',
             'UZS' => 'uzbekistani-som',
-            'VEF' => 'venezuelan-bolívar',
+            'VES' => 'venezuelan-bolívar',
             'VND' => 'vietnamese-dong',
             'XAF' => 'cfa-franc-beac',
             'XOF' => 'cfa-franc-bceao',
@@ -570,8 +570,8 @@
                                         type="text"
                                         name="db_prefix"
                                         ::value="envData.db_prefix"
-                                        ::rules="{ 
-                                            max: 4, 
+                                        ::rules="{
+                                            max: 4,
                                             regex: /^[a-zA-Z0-9_]*$/
                                         }"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-prefix')"

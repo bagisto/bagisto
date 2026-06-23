@@ -5063,16 +5063,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Ustawienia obliczeń',
-                        'title-info' => 'Szczegóły dotyczące kosztów towarów lub usług, w tym ceny podstawowej, rabatów, podatków i dodatkowych opłat.',
+                        'after-discount' => 'Po rabacie',
+                        'apply-tax-on' => 'Zastosuj podatek do',
+                        'apply-tax-on-info' => 'Wybierz, czy podatek jest obliczany od pierwotnej ceny produktu (Przed rabatem), czy od ceny po zastosowaniu rabatów reguł koszyka (Po rabacie). To ustawienie dotyczy tylko cen bez podatku.',
                         'based-on' => 'Obliczenia na podstawie',
-                        'shipping-address' => 'Adres wysyłki',
+                        'before-discount' => 'Przed rabatem',
                         'billing-address' => 'Adres rozliczeniowy',
-                        'shipping-origin' => 'Pochodzenie wysyłki',
-                        'product-prices' => 'Ceny produktów',
-                        'shipping-prices' => 'Ceny wysyłki',
                         'excluding-tax' => 'Bez podatku',
                         'including-tax' => 'Z podatkiem',
+                        'product-prices' => 'Ceny produktów',
+                        'shipping-address' => 'Adres wysyłki',
+                        'shipping-origin' => 'Pochodzenie wysyłki',
+                        'shipping-prices' => 'Ceny wysyłki',
+                        'title' => 'Ustawienia obliczeń',
+                        'title-info' => 'Szczegóły dotyczące kosztów towarów lub usług, w tym ceny podstawowej, rabatów, podatków i dodatkowych opłat.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5084,6 +5088,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Pokaż podział podatku',
+                        'show-tax-breakdown-info' => 'Wyświetla szczegółowy podział podatku na produkt i stawkę w podsumowaniu koszyka i zamówienia. Przeznaczone do debugowania.',
                         'title' => 'Ustawienia wyświetlania koszyka',
                         'title-info' => 'Ustaw wyświetlanie podatków w koszyku',
                         'display-prices' => 'Wyświetl ceny',

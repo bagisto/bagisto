@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'סכום ההנחה',
                 'grand-total' => 'סכום כולל',
                 'included' => 'כלול',
+                'excl-tax' => 'ללא מס:',
                 'incl-tax' => 'כולל מס:',
                 'items-discount' => 'הנחת פריטים',
                 'shipping-discount' => 'הנחת משלוח',

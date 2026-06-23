@@ -1113,6 +1113,7 @@ return [
                 'discount-amount' => 'Monto de Descuento',
                 'grand-total' => 'Total General',
                 'included' => 'Incluido',
+                'excl-tax' => 'Sin impuestos:',
                 'incl-tax' => 'Imp. Inc.:',
                 'items-discount' => 'Descuento de artículos',
                 'shipping-discount' => 'Descuento de envío',
