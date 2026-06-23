@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Geri',
+            'backup-codes-subtitle' => 'Bu kodları güvenli bir yerde saklayın – her biri yalnızca bir kez kullanılabilir.',
+            'backup-codes-title' => 'Yedek Kodlarınız',
+            'backup-codes-warning' => 'Bu kodları güvende tutun ve kimseyle paylaşmayın. Çevrimdışı güvenli bir yerde saklayın.',
             'code-label' => 'Doğrulama Kodu',
             'code-placeholder' => '6 haneli kodu girin',
             'enable' => 'Etkinleştir',

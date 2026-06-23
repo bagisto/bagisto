@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Terug',
+            'backup-codes-subtitle' => 'Bewaar deze codes op een veilige plek – elke code kan slechts één keer worden gebruikt.',
+            'backup-codes-title' => 'Jouw Back-upcodes',
+            'backup-codes-warning' => 'Houd deze codes veilig en deel ze niet met anderen. Bewaar ze offline op een veilige plaats.',
             'code-label' => 'Verificatiecode',
             'code-placeholder' => 'Voer 6-cijferige code in',
             'enable' => 'Inschakelen',

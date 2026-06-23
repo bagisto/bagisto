@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Atrás',
+            'backup-codes-subtitle' => 'Guarda estos códigos en un lugar seguro - cada uno solo puede usarse una vez.',
+            'backup-codes-title' => 'Tus códigos de respaldo',
+            'backup-codes-warning' => 'Mantén estos códigos seguros y no los compartas con nadie. Guárdalos fuera de línea en un lugar seguro.',
             'code-label' => 'Código de verificación',
             'code-placeholder' => 'Ingrese el código de 6 dígitos',
             'enable' => 'Habilitar',

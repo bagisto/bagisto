@@ -71,82 +71,69 @@
 
         @break
     @case('select')
-        <x-admin::form.control-group.control
-            type="select"
-            :id="$attribute->code"
-            :name="$attribute->code"
-            ::rules="{{ $attribute->validations }}"
-            :value="old($attribute->code) ?: $product[$attribute->code]"
-            :label="$attribute->admin_name"
-        >
-            @php
-                $selectedOption = old($attribute->code) ?: $product[$attribute->code];
+        @php
+            $selectedOption = old($attribute->code) ?: $product[$attribute->code];
 
-                if ($attribute->code === 'tax_category_id') {
-                    $options = app('Webkul\Tax\Repositories\TaxCategoryRepository')->all();
-                } else if ($attribute->code === 'rma_rule_id') {
-                    $rmaRuleRepository = app('Webkul\RMA\Repositories\RMARuleRepository');
+            if ($attribute->code === 'tax_category_id') {
+                $options = app('Webkul\Tax\Repositories\TaxCategoryRepository')->all();
+            } else if ($attribute->code === 'rma_rule_id') {
+                $rmaRuleRepository = app('Webkul\RMA\Repositories\RMARuleRepository');
 
-                    /**
-                     * Only active RMA rules should be assignable to a product.
-                     */
-                    $options = $rmaRuleRepository->getActiveRules();
+                /**
+                 * Only active RMA rules should be assignable to a product.
+                 */
+                $options = $rmaRuleRepository->getActiveRules();
 
-                    /**
-                     * Safety Net: if this product already has a rule that has since been
-                     * deactivated, append it to the options list so editing the product
-                     * does not silently drop the existing assignment. The admin can then
-                     * choose to switch to an active rule on save.
-                     */
-                    if (
-                        $selectedOption
-                        && ! $options->contains('id', $selectedOption)
-                    ) {
-                        $currentRule = $rmaRuleRepository->find($selectedOption);
+                /**
+                 * Safety Net: if this product already has a rule that has since been
+                 * deactivated, append it to the options list so editing the product
+                 * does not silently drop the existing assignment. The admin can then
+                 * choose to switch to an active rule on save.
+                 */
+                if (
+                    $selectedOption
+                    && ! $options->contains('id', $selectedOption)
+                ) {
+                    $currentRule = $rmaRuleRepository->find($selectedOption);
 
-                        if ($currentRule) {
-                            $options->push($currentRule);
-                        }
+                    if ($currentRule) {
+                        $options->push($currentRule);
                     }
-                } else {
-                    $options = $attribute->options()->orderBy('sort_order')->get();
                 }
-            @endphp
+            } else {
+                $options = $attribute->options()->orderBy('sort_order')->get();
+            }
 
-            @foreach ($options as $option)
-                <option
-                    value="{{ $option->id }}"
-                    {{ $selectedOption == $option->id ? 'selected' : '' }}
-                    v-pre
-                >
-                    {{ $option->admin_name ?? $option->name }}
-                </option>
-            @endforeach
-        </x-admin::form.control-group.control>
+            $selectOptions = collect($options)
+                ->map(fn ($option) => ['id' => (string) $option->id, 'label' => $option->admin_name ?? $option->name])
+                ->values();
+        @endphp
+
+        <x-admin::form.control-group.advance.select
+            :name="$attribute->code"
+            :options="$selectOptions"
+            :value="(string) $selectedOption"
+            :placeholder="$attribute->admin_name"
+            ::rules="{{ $attribute->validations }}"
+        />
 
         @break
     @case('multiselect')
         @php
-            $selectedOption = old($attribute->code) ?: explode(',', $product[$attribute->code]);
+            $selectedOption = old($attribute->code) ?: array_filter(explode(',', $product[$attribute->code] ?? ''), fn ($id) => $id !== '');
+
+            $multiselectOptions = $attribute->options()->orderBy('sort_order')->get()
+                ->map(fn ($option) => ['id' => (string) $option->id, 'label' => $option->admin_name])
+                ->values();
         @endphp
 
-        <x-admin::form.control-group.control
-            type="multiselect"
-            :id="$attribute->code . '[]'"
+        <x-admin::form.control-group.advance.multiselect
             :name="$attribute->code . '[]'"
+            :options="$multiselectOptions"
+            :value="array_values((array) $selectedOption)"
+            :placeholder="$attribute->admin_name"
             ::rules="{{ $attribute->validations }}"
-            :label="$attribute->admin_name"
-        >
-            @foreach ($attribute->options()->orderBy('sort_order')->get() as $option)
-                <option
-                    value="{{ $option->id }}"
-                    {{ in_array($option->id, $selectedOption) ? 'selected' : ''}}
-                    v-pre
-                >
-                    {{ $option->admin_name }}
-                </option>
-            @endforeach
-        </x-admin::form.control-group.control>
+        />
 
         @break
     @case('checkbox')

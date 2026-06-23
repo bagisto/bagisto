@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => '返回',
+            'backup-codes-subtitle' => '请将这些代码安全存放——每个代码仅能使用一次。',
+            'backup-codes-title' => '您的备份代码',
+            'backup-codes-warning' => '请妥善保管这些代码，不要与他人分享。请离线存放在安全位置。',
             'code-label' => '验证码',
             'code-placeholder' => '输入6位验证码',
             'enable' => '启用',

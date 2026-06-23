@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Back',
+            'backup-codes-subtitle' => 'Store these codes in a safe place - each can only be used once.',
+            'backup-codes-title' => 'Your Backup Codes',
+            'backup-codes-warning' => 'Keep these codes secure and do not share them with anyone. Store them offline in a safe location.',
             'code-label' => 'Verification Code',
             'code-placeholder' => 'Enter 6-digit code',
             'enable' => 'Enable',

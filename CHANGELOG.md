@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11331 [fixed] - Replaced deprecated Venezuelan Bolivar currency code `VEF` with `VES` in seeders and installer configurations, ensuring correct exchange rate synchronization with modern exchange rate APIs.
 
+- #10963 [fixed] - Fixed a required multiselect attribute on the product edit page failing validation on save until the field was manually re-interacted with, because the previously saved values were not registered with the form validator on page load.
+
 ## **v2.4.6 (5th of June 2026)** - *Release*
 
 * Help and resources added.

@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => '戻る',
+            'backup-codes-subtitle' => 'これらのコードは安全な場所に保管してください – 各コードは一度だけ使用可能です。',
+            'backup-codes-title' => 'バックアップコード',
+            'backup-codes-warning' => 'これらのコードを安全に保管し、他人と共有しないでください。オフラインで安全な場所に保管してください。',
             'code-label' => '確認コード',
             'code-placeholder' => '6桁のコードを入力',
             'enable' => '有効にする',

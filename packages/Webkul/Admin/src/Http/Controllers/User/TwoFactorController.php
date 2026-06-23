@@ -23,6 +23,16 @@ class TwoFactorController extends Controller
                 ], 401);
             }
 
+            if (
+                $admin->two_factor_enabled
+                && $admin->two_factor_secret
+                && ! session('two_factor_passed')
+            ) {
+                return response()->json([
+                    'message' => trans('admin::app.errors.401.title'),
+                ], 401);
+            }
+
             if (! $admin->two_factor_secret) {
                 $secret = two_factor_authentication()->generateSecretKey();
 
@@ -59,9 +69,11 @@ class TwoFactorController extends Controller
         $isValidCode = two_factor_authentication()->verifyQrCode($decryptedSecret, $request->code);
 
         if (! $isValidCode) {
-            session()->flash('error', trans('admin::app.account.messages.invalid-code'));
-
-            return redirect()->back();
+            return response()->json([
+                'errors' => [
+                    'code' => [trans('admin::app.account.messages.invalid-code')],
+                ],
+            ], 422);
         }
 
         $admin->forceFill([
@@ -71,25 +83,33 @@ class TwoFactorController extends Controller
 
         session()->put('two_factor_passed', true);
 
+        $backupCodes = two_factor_authentication()->generateBackupCodes();
+
+        /**
+         * Persist only the hashed backup codes - the plain codes are shown once
+         * on screen and emailed, but never stored in plain text.
+         */
+        $admin->update([
+            'two_factor_backup_codes' => two_factor_authentication()->hashBackupCodes($backupCodes),
+        ]);
+
+        /**
+         * The backup codes are shown on screen for the admin to download, so a
+         * failed email delivery must not prevent two-factor authentication from
+         * being enabled - it is only a secondary copy of the codes.
+         */
         try {
-            $backupCodes = two_factor_authentication()->generateBackupCodes();
-
-            $admin->update([
-                'two_factor_backup_codes' => $backupCodes,
-            ]);
-
             Mail::to($admin->email)->send(
                 new BackupCodesNotification($admin, $backupCodes)
             );
-
-            session()->flash('success', trans('admin::app.account.messages.enabled-success'));
-
-            return redirect()->back();
         } catch (\Exception $e) {
-            session()->flash('error', trans('admin::app.account.messages.email-failed'));
-
-            return redirect()->back();
+            report($e);
         }
+
+        return response()->json([
+            'message' => trans('admin::app.account.messages.enabled-success'),
+            'backup_codes' => $backupCodes,
+        ]);
     }
 
     /**
@@ -100,6 +120,21 @@ class TwoFactorController extends Controller
         $admin = auth('admin')->user();
 
         if (! $admin) {
+            return response()->json([
+                'message' => trans('admin::app.errors.401.title'),
+            ], 401);
+        }
+
+        /**
+         * A session that has two-factor authentication enabled but has not yet
+         * passed verification must not be able to disable it, otherwise 2FA
+         * could be bypassed by simply hitting this endpoint after logging in
+         * with the password only.
+         */
+        if (
+            $admin->two_factor_enabled
+            && ! session('two_factor_passed')
+        ) {
             return response()->json([
                 'message' => trans('admin::app.errors.401.title'),
             ], 401);
