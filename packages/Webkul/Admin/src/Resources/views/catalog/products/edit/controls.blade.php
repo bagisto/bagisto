@@ -127,7 +127,7 @@
         @break
     @case('multiselect')
         @php
-            $selectedOption = old($attribute->code) ?: explode(',', $product[$attribute->code]);
+            $selectedOption = old($attribute->code) ?: array_values(array_filter(explode(',', $product[$attribute->code])));
         @endphp
 
         <x-admin::form.control-group.control
@@ -135,6 +135,7 @@
             :id="$attribute->code . '[]'"
             :name="$attribute->code . '[]'"
             ::rules="{{ $attribute->validations }}"
+            ::value="{{ json_encode($selectedOption) }}"
             :label="$attribute->admin_name"
         >
             @foreach ($attribute->options()->orderBy('sort_order')->get() as $option)
