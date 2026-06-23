@@ -82,6 +82,34 @@ class CurrencyTableSeeder extends Seeder
     ];
 
     /**
+     * Currency decimal digits per ISO 4217 minor units.
+     *
+     * Only currencies that differ from the default of 2 are listed here; every
+     * other currency falls back to 2. These values drive amount formatting for
+     * payment gateways that charge in the currency's smallest unit (e.g. Stripe).
+     *
+     * @var array
+     */
+    protected $currencyDecimals = [
+        // Zero-decimal currencies.
+        'CLP' => 0,
+        'JPY' => 0,
+        'KRW' => 0,
+        'PYG' => 0,
+        'VND' => 0,
+        'XAF' => 0,
+        'XOF' => 0,
+
+        // Three-decimal currencies.
+        'BHD' => 3,
+        'JOD' => 3,
+        'KWD' => 3,
+        'LYD' => 3,
+        'OMR' => 3,
+        'TND' => 3,
+    ];
+
+    /**
      * Seed the application's database.
      *
      * @param  array  $parameters
@@ -106,6 +134,7 @@ class CurrencyTableSeeder extends Seeder
                     'code' => $currency,
                     'name' => trans('installer::app.seeders.core.currencies.'.$currency, [], $defaultLocale),
                     'symbol' => $this->currencySymbols[$currency] ?? '',
+                    'decimal' => $this->currencyDecimals[$currency] ?? 2,
                 ],
             ]);
         }
