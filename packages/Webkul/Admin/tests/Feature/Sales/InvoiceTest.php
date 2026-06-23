@@ -9,6 +9,8 @@ use Webkul\Sales\Models\OrderAddress;
 use Webkul\Sales\Models\OrderItem;
 use Webkul\Sales\Models\OrderPayment;
 use Webkul\Shop\Mail\Order\InvoicedNotification;
+use Webkul\User\Models\Admin;
+use Webkul\User\Models\Role;
 
 use function Pest\Laravel\get;
 use function Pest\Laravel\postJson;
@@ -180,4 +182,85 @@ it('should download the invoice PDF', function () {
 
     get(route('admin.sales.invoices.print', $invoice->id))
         ->assertOk();
+});
+
+it('should deny a low-privilege admin from mass updating invoice state', function () {
+    // Arrange.
+    $role = Role::factory()->create([
+        'permission_type' => 'custom',
+        'permissions' => ['dashboard'],
+    ]);
+
+    $admin = Admin::factory()->create([
+        'role_id' => $role->id,
+    ]);
+
+    $order = Order::factory()->create();
+
+    $invoice = Invoice::factory()->create([
+        'order_id' => $order->id,
+        'state' => Invoice::STATUS_PENDING,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin($admin);
+
+    postJson(route('admin.sales.invoices.mass_update.state'), [
+        'indices' => [$invoice->id],
+        'value' => Invoice::STATUS_PAID,
+    ])
+        ->assertUnauthorized();
+
+    $this->assertDatabaseHas('invoices', [
+        'id' => $invoice->id,
+        'state' => Invoice::STATUS_PENDING,
+    ]);
+});
+
+it('should allow an authorized admin to mass update invoice state', function () {
+    // Arrange.
+    $order = Order::factory()->create();
+
+    $invoice = Invoice::factory()->create([
+        'order_id' => $order->id,
+        'state' => Invoice::STATUS_PENDING,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.mass_update.state'), [
+        'indices' => [$invoice->id],
+        'value' => Invoice::STATUS_PAID,
+    ])
+        ->assertOk();
+
+    $this->assertDatabaseHas('invoices', [
+        'id' => $invoice->id,
+        'state' => Invoice::STATUS_PAID,
+    ]);
+});
+
+it('should fail validation when mass updating invoice state to an invalid value', function () {
+    // Arrange.
+    $order = Order::factory()->create();
+
+    $invoice = Invoice::factory()->create([
+        'order_id' => $order->id,
+        'state' => Invoice::STATUS_PENDING,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.sales.invoices.mass_update.state'), [
+        'indices' => [$invoice->id],
+        'value' => 'hacked',
+    ])
+        ->assertJsonValidationErrorFor('value');
+
+    $this->assertDatabaseHas('invoices', [
+        'id' => $invoice->id,
+        'state' => Invoice::STATUS_PENDING,
+    ]);
 });

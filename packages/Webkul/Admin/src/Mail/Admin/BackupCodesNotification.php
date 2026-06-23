@@ -12,8 +12,10 @@ class BackupCodesNotification extends Mailable
 {
     /**
      * Create a new mailable instance.
+     *
+     * @param  array  $backupCodes  The plain backup codes (only the hashed copies are stored).
      */
-    public function __construct(public Admin $admin) {}
+    public function __construct(public Admin $admin, public array $backupCodes = []) {}
 
     /**
      * Get the message envelope.

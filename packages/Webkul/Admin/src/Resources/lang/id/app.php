@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Kembali',
+            'backup-codes-subtitle' => 'Simpan kode ini di tempat yang aman – masing-masing hanya bisa digunakan sekali.',
+            'backup-codes-title' => 'Kode Cadangan Anda',
+            'backup-codes-warning' => 'Jaga kode ini tetap aman dan jangan dibagikan kepada siapa pun. Simpan secara offline di lokasi yang aman.',
             'code-label' => 'Kode Verifikasi',
             'code-placeholder' => 'Masukkan kode 6 digit',
             'enable' => 'Aktifkan',

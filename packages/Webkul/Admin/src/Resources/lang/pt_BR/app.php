@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Voltar',
+            'backup-codes-subtitle' => 'Armazene esses códigos em um local seguro – cada um só pode ser usado uma vez.',
+            'backup-codes-title' => 'Seus códigos de backup',
+            'backup-codes-warning' => 'Mantenha esses códigos seguros e não compartilhe com ninguém. Armazene offline em um local seguro.',
             'code-label' => 'Código de verificação',
             'code-placeholder' => 'Digite o código de 6 dígitos',
             'enable' => 'Ativar',

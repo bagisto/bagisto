@@ -3,7 +3,6 @@
 use Webkul\CartRule\Models\CartRule;
 use Webkul\CartRule\Models\CartRuleCoupon;
 use Webkul\Checkout\Models\Cart;
-use Webkul\Checkout\Models\CartAddress;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Core\Models\CoreConfig;
 use Webkul\Customer\Models\Customer;

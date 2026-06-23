@@ -77,6 +77,11 @@ return [
         'route' => 'admin.sales.invoices.store',
         'sort' => 2,
     ], [
+        'key' => 'sales.invoices.update',
+        'name' => 'admin::app.acl.edit',
+        'route' => 'admin.sales.invoices.mass_update.state',
+        'sort' => 3,
+    ], [
         'key' => 'sales.shipments',
         'name' => 'admin::app.acl.shipments',
         'route' => 'admin.sales.shipments.index',

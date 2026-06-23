@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Powrót',
+            'backup-codes-subtitle' => 'Przechowuj te kody w bezpiecznym miejscu – każdy można użyć tylko raz.',
+            'backup-codes-title' => 'Twoje kody zapasowe',
+            'backup-codes-warning' => 'Przechowuj te kody w bezpiecznym miejscu i nie udostępniaj ich nikomu. Przechowuj je offline w bezpiecznej lokalizacji.',
             'code-label' => 'Kod weryfikacyjny',
             'code-placeholder' => 'Wprowadź 6-cyfrowy kod',
             'enable' => 'Włącz',

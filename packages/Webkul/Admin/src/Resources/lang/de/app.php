@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Zurück',
+            'backup-codes-subtitle' => 'Bewahren Sie diese Codes an einem sicheren Ort auf – jeder Code kann nur einmal verwendet werden.',
+            'backup-codes-title' => 'Ihre Backup-Codes',
+            'backup-codes-warning' => 'Bewahren Sie diese Codes sicher auf und teilen Sie sie nicht mit anderen. Lagern Sie sie offline an einem sicheren Ort.',
             'code-label' => 'Verifizierungscode',
             'code-placeholder' => '6-stelligen Code eingeben',
             'enable' => 'Aktivieren',

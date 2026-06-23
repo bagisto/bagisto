@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Enrere',
+            'backup-codes-subtitle' => 'Guarda aquests codis en un lloc segur: cada un només es pot utilitzar una vegada.',
+            'backup-codes-title' => 'Els teus codis de reserva',
+            'backup-codes-warning' => 'Mantingues aquests codis segurs i no els comparteixis amb ningú. Desa’ls fora de línia en un lloc segur.',
             'code-label' => 'Codi de verificació',
             'code-placeholder' => 'Introdueix el codi de 6 dígits',
             'enable' => 'Habilitar',

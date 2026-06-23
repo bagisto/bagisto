@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Retour',
+            'backup-codes-subtitle' => 'Conservez ces codes en lieu sûr – chacun ne peut être utilisé qu’une seule fois.',
+            'backup-codes-title' => 'Vos codes de secours',
+            'backup-codes-warning' => 'Gardez ces codes en sécurité et ne les partagez avec personne. Conservez-les hors ligne dans un endroit sûr.',
             'code-label' => 'Code de vérification',
             'code-placeholder' => 'Entrez le code à 6 chiffres',
             'enable' => 'Activer',

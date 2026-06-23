@@ -83,7 +83,9 @@ abstract class Paypal extends Payment
      */
     public function formatCurrencyValue($number): float
     {
-        return round((float) $number, 2);
+        $decimal = core()->getCurrentCurrency()->decimal ?? 2;
+
+        return round((float) $number, $decimal);
     }
 
     /**

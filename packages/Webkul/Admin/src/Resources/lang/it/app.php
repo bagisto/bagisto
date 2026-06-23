@@ -109,6 +109,9 @@ return [
 
         'setup' => [
             'back' => 'Indietro',
+            'backup-codes-subtitle' => 'Conserva questi codici in un luogo sicuro – ciascuno può essere usato una sola volta.',
+            'backup-codes-title' => 'I tuoi codici di backup',
+            'backup-codes-warning' => 'Tieni questi codici al sicuro e non condividerli con nessuno. Conservali offline in un luogo sicuro.',
             'code-label' => 'Codice di Verifica',
             'code-placeholder' => 'Inserisci codice a 6 cifre',
             'enable' => 'Abilita',

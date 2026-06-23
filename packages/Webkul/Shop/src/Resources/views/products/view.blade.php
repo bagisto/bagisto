@@ -109,7 +109,7 @@
                                     @if (! empty($customAttributeValue['value']))
                                         <div class="grid">
                                             <p class="text-base text-black">
-                                                {!! $customAttributeValue['label'] !!}
+                                                {{ $customAttributeValue['label'] }}
                                             </p>
                                         </div>
 
@@ -133,7 +133,7 @@
                                         @else
                                             <div class="grid">
                                                 <p class="text-base text-zinc-500">
-                                                    {!! $customAttributeValue['value'] !!}
+                                                    {{ $customAttributeValue['value'] }}
                                                 </p>
                                             </div>
                                         @endif

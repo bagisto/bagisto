@@ -169,7 +169,7 @@
                                                 $attributeValue = '';
                                                 foreach ($attributes as $attribute) {
                                                     if (! empty($attribute)) {
-                                                        $attributeValue .= $attribute['attribute_name'] . ': ' . $attribute['option_label'] . ' </br> ';
+                                                        $attributeValue .= e($attribute['attribute_name']) . ': ' . e($attribute['option_label']) . ' </br> ';
                                                     }
                                                 }
                                             @endphp
@@ -240,7 +240,7 @@
                                     $attributeValue = '';
                                     foreach ($attributes as $attribute) {
                                         if (! empty($attribute)) {
-                                            $attributeValue .= $attribute['attribute_name'] . ': ' . $attribute['option_label'] . ' </br> ';
+                                            $attributeValue .= e($attribute['attribute_name']) . ': ' . e($attribute['option_label']) . ' </br> ';
                                         }
                                     }
                                 @endphp

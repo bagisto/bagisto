@@ -16,9 +16,19 @@ class Bouncer
      */
     public function handle($request, \Closure $next, $guard = 'admin')
     {
-        // Skip two-factor routes to prevent redirect loops
+        /**
+         * Only the routes required to set up or complete two-factor
+         * authentication may bypass the verification check below (otherwise
+         * the redirect to the verification/setup screen would loop). Every
+         * other two-factor action - in particular disabling 2FA - must stay
+         * behind the verification check, so that a session which has logged in
+         * with the password but has not passed two-factor verification cannot
+         * use it to switch two-factor authentication off and bypass it.
+         */
         if (
-            $request->routeIs('admin.two_factor.*')
+            $request->routeIs('admin.two_factor.setup')
+            || $request->routeIs('admin.two_factor.verify.form')
+            || $request->routeIs('admin.two_factor.verify.store')
             || $request->routeIs('admin.session.destroy')
         ) {
             return $next($request);

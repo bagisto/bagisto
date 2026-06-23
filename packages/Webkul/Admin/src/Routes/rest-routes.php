@@ -65,9 +65,9 @@ Route::controller(AccountController::class)->prefix('account')->group(function (
 Route::controller(TwoFactorController::class)->prefix('two-factor')->group(function () {
     Route::get('setup', 'setup')->name('admin.two_factor.setup');
 
-    Route::post('enable', 'enable')->name('admin.two_factor.enable');
+    Route::post('enable', 'enable')->middleware('throttle:5,1')->name('admin.two_factor.enable');
 
-    Route::get('disable', 'disable')->name('admin.two_factor.disable');
+    Route::post('disable', 'disable')->name('admin.two_factor.disable');
 });
 
 Route::delete('logout', [SessionController::class, 'destroy'])->name('admin.session.destroy');
