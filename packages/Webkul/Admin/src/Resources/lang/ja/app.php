@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'すべてのグループ',
                         'create-btn' => '新規追加',
                         'discount-group-price-info' => ':price の割引価格で :qty 個の数量に対して',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => '編集',
                         'empty-info' => '特定のグループに所属する顧客のための特別価格',
                         'fixed-group-price-info' => ':price の固定価格で :qty 個の数量に対して',

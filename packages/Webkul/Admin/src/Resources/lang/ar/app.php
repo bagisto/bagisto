@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'جميع المجموعات',
                         'create-btn' => 'إضافة جديدة',
                         'discount-group-price-info' => 'لـ :qty كمية بخصم قدره :price',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'تعديل',
                         'empty-info' => 'تسعير خاص للعملاء الذين ينتمون إلى مجموعة معينة.',
                         'fixed-group-price-info' => 'لـ :qty كمية بسعر ثابت قدره :price',

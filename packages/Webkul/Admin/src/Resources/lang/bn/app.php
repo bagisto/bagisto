@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'সমস্ত গোষ্ঠী',
                         'create-btn' => 'নতুন যোগ করুন',
                         'discount-group-price-info' => 'মূল্যে :price ছাড় প্রাপ্য :qty পরিমাণে',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'সম্পাদনা',
                         'empty-info' => 'নির্ধারিত গ্রুপে সদস্যদের জন্য বিশেষ মূল্য নির্ধারণ করুন।',
                         'fixed-group-price-info' => ':qty পরিমাণে নির্ধারিত মূল্যে :price সহ',

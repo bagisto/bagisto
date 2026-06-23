@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'Tous les groupes',
                         'create-btn' => 'Ajouter un nouveau',
                         'discount-group-price-info' => 'Pour :qty quantité à un rabais de :price',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'Modifier',
                         'empty-info' => 'Tarification spéciale pour les clients appartenant à un groupe spécifique.',
                         'fixed-group-price-info' => 'Pour :qty quantité à un prix fixe de :price',

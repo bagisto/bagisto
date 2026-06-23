@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'تمام گروه‌ها',
                         'create-btn' => 'افزودن جدید',
                         'discount-group-price-info' => 'برای :qty تعداد با تخفیف :price',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'ویرایش',
                         'empty-info' => 'قیمت‌گذاری ویژه برای مشتریان تعلق گرفته به گروه‌های خاص.',
                         'fixed-group-price-info' => 'برای تعداد :qty با قیمت ثابت :price',

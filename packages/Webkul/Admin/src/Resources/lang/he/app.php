@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'כל הקבוצות',
                         'create-btn' => 'הוסף חדש',
                         'discount-group-price-info' => 'עבור כמות :price בהנחה של :qty',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'ערוך',
                         'empty-info' => 'מחיר מיוחד ללקוחות שנמצאים בקבוצה ספציפית.',
                         'fixed-group-price-info' => 'עבור :qty יחידות במחיר קבוע של :price',

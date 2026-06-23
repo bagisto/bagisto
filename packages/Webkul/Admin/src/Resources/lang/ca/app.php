@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'Totes les categories',
                         'create-btn' => 'Afegir nou',
                         'discount-group-price-info' => 'Per a qty Quantitat amb un descompte de :price',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'Editar',
                         'empty-info' => 'Preus especials per a clients que pertanyen a un grup específic.',
                         'fixed-group-price-info' => 'Per a qty Quantitat a un preu fix de :price',

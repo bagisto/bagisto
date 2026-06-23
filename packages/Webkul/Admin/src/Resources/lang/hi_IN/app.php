@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'सभी समूह',
                         'create-btn' => 'नया जोड़ें',
                         'discount-group-price-info' => 'मूल्य पर :qty मात्र के लिए :price की छूट',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'संपादित करें',
                         'empty-info' => 'विशेष मूल्यवान ग्राहकों के लिए विशिष्ट मूल्यनिर्धारण।',
                         'fixed-group-price-info' => 'मूल्य :qty मात्र के लिए स्थिर मूल्य पर :price',

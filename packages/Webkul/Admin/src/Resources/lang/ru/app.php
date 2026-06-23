@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'Все группы',
                         'create-btn' => 'Добавить новое',
                         'discount-group-price-info' => 'Для :qty шт. со скидкой :price',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'Редактировать',
                         'empty-info' => 'Специальная цена для клиентов, принадлежащих к определенной группе.',
                         'fixed-group-price-info' => 'Для :qty шт. по фиксированной цене :price',

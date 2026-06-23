@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => '所有群组',
                         'create-btn' => '添加新的',
                         'discount-group-price-info' => '对于 :qty 个数量，折扣价格为 :price',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => '编辑',
                         'empty-info' => '针对属于特定组的客户的特殊定价。',
                         'fixed-group-price-info' => '对于 :qty 个数量，固定价格为 :price',

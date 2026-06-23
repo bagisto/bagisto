@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'සියලු සමූහ',
                         'create-btn' => 'නවකරන්න',
                         'discount-group-price-info' => ':qty ප්‍රමාණයට මිල :price වාරිකා කළ යුතුය',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'සංස්කරණය කරන්න',
                         'empty-info' => 'විශේෂ ප්‍රමාණයක් අනුගමනට හෝදන පමණක්.',
                         'fixed-group-price-info' => ':qty ප්‍රමාණයට වලංගු මිල :price වලට වාරිකා කළ යුතුය',

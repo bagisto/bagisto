@@ -1190,6 +1190,7 @@ return [
                         'all-groups' => 'Alle groepen',
                         'create-btn' => 'Nieuwe toevoegen',
                         'discount-group-price-info' => 'Voor :qty Hoeveelheid met een korting van :price',
+                        'duplicate-group-price-error' => 'A discount for the same customer group and quantity already exists.',
                         'edit-btn' => 'Bewerk',
                         'empty-info' => 'Speciale prijzen voor klanten die behoren tot een specifieke groep.',
                         'fixed-group-price-info' => 'Voor :qty Hoeveelheid tegen een vaste prijs van :price',

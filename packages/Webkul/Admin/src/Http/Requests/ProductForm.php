@@ -169,7 +169,35 @@ class ProductForm extends FormRequest
             $this->rules[$attribute->code] = $validations;
         }
 
+        $this->addCustomerGroupPriceRules();
+
         return $this->rules;
+    }
+
+    /**
+     * Add validation rules for customer group prices to prevent duplicate entries.
+     */
+    protected function addCustomerGroupPriceRules(): void
+    {
+        $this->rules['customer_group_prices'] = [
+            'nullable',
+            'array',
+            function ($attribute, $value, $fail) {
+                $seen = [];
+
+                foreach ($value as $row) {
+                    $key = ($row['qty'] ?? 0).'|'.($row['customer_group_id'] ?? '');
+
+                    if (isset($seen[$key])) {
+                        $fail(trans('admin::app.catalog.products.edit.price.group.duplicate-group-price-error'));
+
+                        return;
+                    }
+
+                    $seen[$key] = true;
+                }
+            },
+        ];
     }
 
     /**
