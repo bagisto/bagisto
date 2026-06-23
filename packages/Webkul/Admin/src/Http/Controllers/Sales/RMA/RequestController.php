@@ -100,10 +100,6 @@ class RequestController extends Controller
         }
 
         if (! empty($data['close_rma'])) {
-            $order = $this->orderRepository->find($rma->order_id);
-
-            $order->update(['status' => Order::STATUS_PENDING]);
-
             $rma->update(['rma_status_id' => DefaultRMAStatusEnum::PENDING->value]);
 
             $this->rmaMessageRepository->create([

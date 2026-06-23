@@ -325,10 +325,6 @@ class RMAController extends Controller
         }
 
         if (! empty($data['reopen_rma'])) {
-            $order = $this->orderRepository->findOrFail($rma->order_id);
-
-            $order->update(['status' => Order::STATUS_PENDING]);
-
             Event::dispatch('customer.rma.request.update.before', $id);
 
             $rma->update(['rma_status_id' => DefaultRMAStatusEnum::PENDING->value]);
