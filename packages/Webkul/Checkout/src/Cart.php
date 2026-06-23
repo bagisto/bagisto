@@ -1078,6 +1078,14 @@ class Cart
                 $item->tax_percent = $rate->tax_rate;
 
                 if (Tax::isInclusiveTaxProductPrices()) {
+                    /**
+                     * For tax-inclusive prices the customer always pays the (discounted)
+                     * gross amount, so the "apply tax on" setting only affects how tax is
+                     * broken out of that gross - it cannot change the grand total. Bagisto's
+                     * total pipeline (sub_total + tax - discount) cannot represent an
+                     * after-discount breakdown without changing what the customer pays, so
+                     * the discount is intentionally not subtracted from the taxable base here.
+                     */
                     $item->tax_amount = round(($item->total_incl_tax * $rate->tax_rate) / (100 + $rate->tax_rate), 4);
 
                     $item->base_tax_amount = round(($item->base_total_incl_tax * $rate->tax_rate) / (100 + $rate->tax_rate), 4);
@@ -1090,9 +1098,23 @@ class Cart
 
                     $item->base_price = $item->base_total / $item->quantity;
                 } else {
-                    $item->tax_amount = round(($item->total * $rate->tax_rate) / 100, 4);
+                    $taxableTotal = $item->total;
 
-                    $item->base_tax_amount = round(($item->base_total * $rate->tax_rate) / 100, 4);
+                    $baseTaxableTotal = $item->base_total;
+
+                    /**
+                     * Reduce the taxable base by the applied discount when the store is
+                     * configured to apply tax after the discount (e.g. VAT jurisdictions).
+                     */
+                    if (core()->getConfigData('sales.taxes.calculation.apply_tax_on') == 'after_discount') {
+                        $taxableTotal -= $item->discount_amount;
+
+                        $baseTaxableTotal -= $item->base_discount_amount;
+                    }
+
+                    $item->tax_amount = round(($taxableTotal * $rate->tax_rate) / 100, 4);
+
+                    $item->base_tax_amount = round(($baseTaxableTotal * $rate->tax_rate) / 100, 4);
 
                     $item->total_incl_tax = $item->total + $item->tax_amount;
 
@@ -1173,6 +1195,11 @@ class Cart
             $shippingRate->tax_percent = $rate->tax_rate;
 
             if (Tax::isInclusiveTaxShippingPrices()) {
+                /**
+                 * For tax-inclusive prices the "apply tax on" setting only affects how tax
+                 * is broken out of the gross amount, not the total the customer pays, so the
+                 * discount is intentionally not subtracted from the taxable base here.
+                 */
                 $shippingRate->tax_amount = round(($shippingRate->price_incl_tax * $rate->tax_rate) / (100 + $rate->tax_rate), 4);
 
                 $shippingRate->base_tax_amount = round(($shippingRate->base_price_incl_tax * $rate->tax_rate) / (100 + $rate->tax_rate), 4);
@@ -1181,9 +1208,23 @@ class Cart
 
                 $shippingRate->base_price = $shippingRate->base_price_incl_tax - $shippingRate->base_tax_amount;
             } else {
-                $shippingRate->tax_amount = round(($shippingRate->price * $rate->tax_rate) / 100, 4);
+                $taxablePrice = $shippingRate->price;
 
-                $shippingRate->base_tax_amount = round(($shippingRate->base_price * $rate->tax_rate) / 100, 4);
+                $baseTaxablePrice = $shippingRate->base_price;
+
+                /**
+                 * Reduce the taxable base by the applied discount when the store is
+                 * configured to apply tax after the discount (e.g. VAT jurisdictions).
+                 */
+                if (core()->getConfigData('sales.taxes.calculation.apply_tax_on') == 'after_discount') {
+                    $taxablePrice -= $shippingRate->discount_amount;
+
+                    $baseTaxablePrice -= $shippingRate->base_discount_amount;
+                }
+
+                $shippingRate->tax_amount = round(($taxablePrice * $rate->tax_rate) / 100, 4);
+
+                $shippingRate->base_tax_amount = round(($baseTaxablePrice * $rate->tax_rate) / 100, 4);
 
                 $shippingRate->price_incl_tax = $shippingRate->price + $shippingRate->tax_amount;
 

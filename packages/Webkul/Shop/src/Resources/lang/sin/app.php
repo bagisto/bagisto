@@ -1109,6 +1109,7 @@ return [
                 'discount-amount' => 'වටාන මුදල',
                 'grand-total' => 'සම්පූර්ණ එකතුව',
                 'included' => 'ඇතුළත්',
+                'excl-tax' => 'බදු රහිතව:',
                 'incl-tax' => 'බදු සමඟ:',
                 'items-discount' => 'භාණ්ඩ වට්ටම',
                 'shipping-discount' => 'ප්‍රවාහන වට්ටම',

@@ -5057,16 +5057,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Pengaturan Perhitungan',
-                        'title-info' => 'Detail tentang biaya barang atau jasa, termasuk harga dasar, diskon, pajak, dan biaya tambahan.',
+                        'after-discount' => 'Setelah Diskon',
+                        'apply-tax-on' => 'Terapkan Pajak Pada',
+                        'apply-tax-on-info' => 'Pilih apakah pajak dihitung berdasarkan harga produk asli (Sebelum Diskon) atau harga setelah diskon aturan keranjang diterapkan (Setelah Diskon). Pengaturan ini hanya berlaku untuk harga tanpa pajak.',
                         'based-on' => 'Perhitungan Berdasarkan',
-                        'shipping-address' => 'Alamat Pengiriman',
+                        'before-discount' => 'Sebelum Diskon',
                         'billing-address' => 'Alamat Penagihan',
-                        'shipping-origin' => 'Asal Pengiriman',
-                        'product-prices' => 'Harga Produk',
-                        'shipping-prices' => 'Harga Pengiriman',
                         'excluding-tax' => 'Tanpa Pajak',
                         'including-tax' => 'Termasuk Pajak',
+                        'product-prices' => 'Harga Produk',
+                        'shipping-address' => 'Alamat Pengiriman',
+                        'shipping-origin' => 'Asal Pengiriman',
+                        'shipping-prices' => 'Harga Pengiriman',
+                        'title' => 'Pengaturan Perhitungan',
+                        'title-info' => 'Detail tentang biaya barang atau jasa, termasuk harga dasar, diskon, pajak, dan biaya tambahan.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5078,6 +5082,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Tampilkan Rincian Pajak',
+                        'show-tax-breakdown-info' => 'Menampilkan rincian pajak per produk dan per tarif di ringkasan keranjang dan checkout. Untuk keperluan debugging.',
                         'title' => 'Pengaturan Tampilan Keranjang Belanja',
                         'title-info' => 'Atur tampilan pajak di dalam keranjang belanja',
                         'display-prices' => 'Tampilkan Harga',

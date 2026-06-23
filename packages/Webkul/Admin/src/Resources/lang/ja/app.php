@@ -5057,16 +5057,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => '計算設定',
-                        'title-info' => '基本価格、割引、税金、および追加料金など、商品やサービスの費用に関する詳細情報。',
+                        'after-discount' => '割引後',
+                        'apply-tax-on' => '税の適用',
+                        'apply-tax-on-info' => '税を元の商品価格（割引前）で計算するか、カートルールの割引適用後の価格（割引後）で計算するかを選択します。この設定は税抜価格にのみ適用されます。',
                         'based-on' => '計算基準',
-                        'shipping-address' => '配送先住所',
+                        'before-discount' => '割引前',
                         'billing-address' => '請求先住所',
-                        'shipping-origin' => '出荷元',
-                        'product-prices' => '商品価格',
-                        'shipping-prices' => '配送料',
                         'excluding-tax' => '税抜き',
                         'including-tax' => '税込み',
+                        'product-prices' => '商品価格',
+                        'shipping-address' => '配送先住所',
+                        'shipping-origin' => '出荷元',
+                        'shipping-prices' => '配送料',
+                        'title' => '計算設定',
+                        'title-info' => '基本価格、割引、税金、および追加料金など、商品やサービスの費用に関する詳細情報。',
                     ],
 
                     'default-destination-calculation' => [
@@ -5078,6 +5082,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => '税の内訳を表示',
+                        'show-tax-breakdown-info' => 'カートおよびチェックアウトの概要に、商品ごと・税率ごとの詳細な税内訳を表示します。デバッグ用です。',
                         'title' => 'ショッピングカートの表示設定',
                         'title-info' => 'ショッピングカートでの税金の表示を設定します',
                         'display-prices' => '価格の表示',

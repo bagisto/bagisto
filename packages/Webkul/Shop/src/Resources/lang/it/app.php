@@ -1109,6 +1109,7 @@ return [
                 'discount-amount' => 'Importo Sconto',
                 'grand-total' => 'Totale',
                 'included' => 'Incluso',
+                'excl-tax' => 'Imposte escluse:',
                 'incl-tax' => 'IVA inclusa:',
                 'items-discount' => 'Sconto articoli',
                 'shipping-discount' => 'Sconto spedizione',

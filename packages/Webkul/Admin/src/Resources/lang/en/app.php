@@ -5057,16 +5057,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Calculation Settings',
-                        'title-info' => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
+                        'after-discount' => 'After Discount',
+                        'apply-tax-on' => 'Apply Tax On',
+                        'apply-tax-on-info' => 'Choose whether tax is calculated on the original product price (Before Discount) or on the price after cart-rule discounts are applied (After Discount). This setting applies to tax-exclusive prices only.',
                         'based-on' => 'Calculation Based On',
-                        'shipping-address' => 'Shipping Address',
+                        'before-discount' => 'Before Discount',
                         'billing-address' => 'Billing Address',
-                        'shipping-origin' => 'Shipping Origin',
-                        'product-prices' => 'Product Prices',
-                        'shipping-prices' => 'Shipping Prices',
                         'excluding-tax' => 'Excluding Tax',
                         'including-tax' => 'Including Tax',
+                        'product-prices' => 'Product Prices',
+                        'shipping-address' => 'Shipping Address',
+                        'shipping-origin' => 'Shipping Origin',
+                        'shipping-prices' => 'Shipping Prices',
+                        'title' => 'Calculation Settings',
+                        'title-info' => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
                     ],
 
                     'default-destination-calculation' => [
@@ -5078,6 +5082,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Show Tax Breakdown',
+                        'show-tax-breakdown-info' => 'Display a detailed per-product, per-rate tax breakdown in the cart and checkout summary. Intended for debugging.',
                         'title' => 'Shopping Cart Display Settings',
                         'title-info' => 'Set the display of taxes in the shopping cart',
                         'display-prices' => 'Display Prices',

@@ -1109,6 +1109,7 @@ return [
                 'discount-amount' => 'Korting',
                 'grand-total' => 'Totaalbedrag',
                 'included' => 'Inbegrepen',
+                'excl-tax' => 'Excl. btw:',
                 'incl-tax' => 'Incl. btw:',
                 'items-discount' => 'Korting artikelen',
                 'shipping-discount' => 'Korting verzending',

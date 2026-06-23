@@ -5057,16 +5057,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Calculation Settings',
-                        'title-info' => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
+                        'after-discount' => 'După reducere',
+                        'apply-tax-on' => 'Aplică taxa pe',
+                        'apply-tax-on-info' => 'Alegeți dacă taxa este calculată pe prețul original al produsului (Înainte de reducere) sau pe prețul după aplicarea reducerilor regulilor de coș (După reducere). Această setare se aplică numai prețurilor fără taxe.',
                         'based-on' => 'Calculation Based On',
-                        'shipping-address' => 'Shipping Address',
+                        'before-discount' => 'Înainte de reducere',
                         'billing-address' => 'Billing Address',
-                        'shipping-origin' => 'Shipping Origin',
-                        'product-prices' => 'Product Prices',
-                        'shipping-prices' => 'Shipping Prices',
                         'excluding-tax' => 'Excluding Tax',
                         'including-tax' => 'Including Tax',
+                        'product-prices' => 'Product Prices',
+                        'shipping-address' => 'Shipping Address',
+                        'shipping-origin' => 'Shipping Origin',
+                        'shipping-prices' => 'Shipping Prices',
+                        'title' => 'Calculation Settings',
+                        'title-info' => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
                     ],
 
                     'default-destination-calculation' => [
@@ -5078,6 +5082,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Afișează detalierea taxelor',
+                        'show-tax-breakdown-info' => 'Afișează o detaliere a taxelor pe produs și pe cotă în rezumatul coșului și al comenzii. Destinat depanării.',
                         'title' => 'Shopping Cart Display Settings',
                         'title-info' => 'Set the display of taxes in the shopping cart',
                         'display-prices' => 'Display Prices',

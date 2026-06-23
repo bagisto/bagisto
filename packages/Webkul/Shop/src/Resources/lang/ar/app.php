@@ -1109,6 +1109,7 @@ return [
                 'discount-amount' => 'مبلغ الخصم',
                 'grand-total' => 'المجموع الكلي',
                 'included' => 'مشمول',
+                'excl-tax' => 'باستثناء الضريبة:',
                 'incl-tax' => 'شامل الضريبة:',
                 'items-discount' => 'خصم العناصر',
                 'shipping-discount' => 'خصم الشحن',

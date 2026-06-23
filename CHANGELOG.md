@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Security fixes.
 
+- "Apply Tax On" setting (Before/After Discount) under Sales → Taxes → Calculation Settings to control whether tax is calculated on the original product price or on the discounted price when a cart-rule/coupon discount is applied, plus an optional per-product tax breakdown in the cart and checkout summary.
+
 - #11331 [fixed] Replaced deprecated Venezuelan Bolivar currency code `VEF` with `VES` in seeders and installer configurations, ensuring correct exchange rate synchronization with modern exchange rate APIs.
 
 ## **v2.4.6 (5th of June 2026)** - *Release*

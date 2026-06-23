@@ -1109,6 +1109,7 @@ return [
                 'discount-amount' => 'İndirim',
                 'grand-total' => 'Genel Toplam',
                 'included' => 'Dahil',
+                'excl-tax' => 'Vergi Hariç:',
                 'incl-tax' => 'KDV Dahil:',
                 'items-discount' => 'Ürün İndirimi',
                 'shipping-discount' => 'Kargo İndirimi',

@@ -1109,6 +1109,7 @@ return [
                 'discount-amount' => 'ছাড়ের পরিমাণ',
                 'grand-total' => 'সর্বমোট',
                 'included' => 'অন্তর্ভুক্ত',
+                'excl-tax' => 'কর ব্যতীত:',
                 'incl-tax' => 'ট্যাক্স সহ:',
                 'items-discount' => 'আইটেম ছাড়',
                 'shipping-discount' => 'শিপিং ছাড়',

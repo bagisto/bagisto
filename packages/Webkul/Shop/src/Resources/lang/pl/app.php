@@ -1109,6 +1109,7 @@ return [
                 'discount-amount' => 'Kwota rabatu',
                 'grand-total' => 'Suma ogólna',
                 'included' => 'Wliczone',
+                'excl-tax' => 'Bez podatku:',
                 'incl-tax' => 'Z VAT:',
                 'items-discount' => 'Rabat na pozycje',
                 'shipping-discount' => 'Rabat na wysyłkę',

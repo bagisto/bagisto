@@ -5057,16 +5057,20 @@ return [
                     ],
 
                     'calculation' => [
-                        'title' => 'Configurações de Cálculo',
-                        'title-info' => 'Detalhes sobre o custo de bens ou serviços, incluindo preço base, descontos, impostos e cobranças adicionais.',
+                        'after-discount' => 'Após o desconto',
+                        'apply-tax-on' => 'Aplicar imposto em',
+                        'apply-tax-on-info' => 'Escolha se o imposto é calculado sobre o preço original do produto (Antes do desconto) ou sobre o preço após a aplicação dos descontos de regras do carrinho (Após o desconto). Esta configuração se aplica apenas a preços sem impostos.',
                         'based-on' => 'Cálculo Baseado Em',
-                        'shipping-address' => 'Endereço de Envio',
+                        'before-discount' => 'Antes do desconto',
                         'billing-address' => 'Endereço de Cobrança',
-                        'shipping-origin' => 'Origem do Envio',
-                        'product-prices' => 'Preços dos Produtos',
-                        'shipping-prices' => 'Preços de Envio',
                         'excluding-tax' => 'Excluindo Imposto',
                         'including-tax' => 'Incluindo Imposto',
+                        'product-prices' => 'Preços dos Produtos',
+                        'shipping-address' => 'Endereço de Envio',
+                        'shipping-origin' => 'Origem do Envio',
+                        'shipping-prices' => 'Preços de Envio',
+                        'title' => 'Configurações de Cálculo',
+                        'title-info' => 'Detalhes sobre o custo de bens ou serviços, incluindo preço base, descontos, impostos e cobranças adicionais.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5078,6 +5082,8 @@ return [
                     ],
 
                     'shopping-cart' => [
+                        'show-tax-breakdown' => 'Mostrar detalhamento de impostos',
+                        'show-tax-breakdown-info' => 'Exibe um detalhamento de impostos por produto e por alíquota no resumo do carrinho e do checkout. Destinado a depuração.',
                         'title' => 'Configurações de Exibição do Carrinho de Compras',
                         'title-info' => 'Definir a exibição de impostos no carrinho de compras',
                         'display-prices' => 'Exibir Preços',
