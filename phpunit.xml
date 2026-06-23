@@ -16,9 +16,19 @@
             <directory suffix="Test.php">packages/Webkul/Core/tests/Unit</directory>
         </testsuite>
 
+        <!-- Customer package testsuites. -->
+        <testsuite name="Customer Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Customer/tests/Unit</directory>
+        </testsuite>
+
         <!-- DataGrid package testsuites. -->
         <testsuite name="DataGrid Unit Test">
             <directory suffix="Test.php">packages/Webkul/DataGrid/tests/Unit</directory>
+        </testsuite>
+
+        <!-- EUWithdrawal package testsuites. -->
+        <testsuite name="EUWithdrawal Feature Test">
+            <directory suffix="Test.php">packages/Webkul/EUWithdrawal/tests/Feature</directory>
         </testsuite>
 
         <!-- Installer package testsuites. -->
@@ -26,9 +36,36 @@
             <directory suffix="Test.php">packages/Webkul/Installer/tests/Feature</directory>
         </testsuite>
 
+        <!-- PayU package testsuites. -->
+        <testsuite name="PayU Unit Test">
+            <directory suffix="Test.php">packages/Webkul/PayU/tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="PayU Feature Test">
+            <directory suffix="Test.php">packages/Webkul/PayU/tests/Feature</directory>
+        </testsuite>
+
+        <!-- Razorpay package testsuites. -->
+        <testsuite name="Razorpay Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Razorpay/tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Razorpay Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Razorpay/tests/Feature</directory>
+        </testsuite>
+
         <!-- Shop package testsuites. -->
         <testsuite name="Shop Feature Test">
             <directory suffix="Test.php">packages/Webkul/Shop/tests/Feature</directory>
+        </testsuite>
+
+        <!-- Stripe package testsuites. -->
+        <testsuite name="Stripe Unit Test">
+            <directory suffix="Test.php">packages/Webkul/Stripe/tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="Stripe Feature Test">
+            <directory suffix="Test.php">packages/Webkul/Stripe/tests/Feature</directory>
         </testsuite>
     </testsuites>
 

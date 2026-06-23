@@ -1,8 +1,59 @@
 @props(['options'])
 
-<v-carousel :images="{{ json_encode($options['images'] ?? []) }}">
+@php
+    $carouselImages = $options['images'] ?? [];
+
+    $firstImage = data_get($carouselImages, '0.image');
+
+    $firstImageTitle = data_get($carouselImages, '0.title');
+@endphp
+
+@if ($firstImage)
+    {{--
+        Preload the LCP image in <head> so the browser starts fetching it
+        before HTML parse reaches the <img> tag. Directly targets the LCP
+        "resource load delay" subpart Lighthouse reports as the biggest
+        contributor on this page.
+    --}}
+    @push('meta')
+        <link
+            rel="preload"
+            as="image"
+            href="{{ str_replace('storage', 'cache/small', $firstImage) }}"
+            imagesrcset="{{ $firstImage }} 1920w, {{ str_replace('storage', 'cache/large', $firstImage) }} 1280w, {{ str_replace('storage', 'cache/medium', $firstImage) }} 1024w, {{ str_replace('storage', 'cache/small', $firstImage) }} 768w"
+            imagesizes="100vw"
+            fetchpriority="high"
+        >
+    @endpush
+@endif
+
+<v-carousel :images="{{ json_encode($carouselImages) }}">
     <div class="overflow-hidden">
-        <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
+        @if ($firstImage)
+            {{--
+                Server-rendered first slide so the browser can discover and
+                fetch the LCP image immediately, before Vue mounts the
+                carousel. `sizes="100vw"` declares the actual rendered width
+                (the img has `w-screen`) so the browser picks the smallest
+                srcset variant that satisfies viewport_px × DPR — mobile
+                412 × 1.75 ≈ 721 → 768w small variant. The inline `style`
+                supplies width/aspect-ratio so the LCP element can paint
+                before the Tailwind CSS bundle finishes parsing on slow
+                mobile CPU.
+            --}}
+            <img
+                src="{{ $firstImage }}"
+                srcset="{{ $firstImage }} 1920w, {{ str_replace('storage', 'cache/large', $firstImage) }} 1280w, {{ str_replace('storage', 'cache/medium', $firstImage) }} 1024w, {{ str_replace('storage', 'cache/small', $firstImage) }} 768w"
+                sizes="100vw"
+                class="aspect-[2.743/1] max-h-screen w-screen select-none object-cover"
+                style="width:100vw;aspect-ratio:2.743/1;max-height:100vh;object-fit:cover;display:block"
+                alt="{{ $firstImageTitle ?? trans('shop::app.home.index.image-carousel') }}"
+                fetchpriority="high"
+                decoding="sync"
+            >
+        @else
+            <div class="shimmer aspect-[2.743/1] max-h-screen w-screen"></div>
+        @endif
     </div>
 </v-carousel>
 
@@ -28,13 +79,8 @@
                         class="aspect-[2.743/1] max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out will-change-transform"
                         ::lazy="index === 0 ? false : true"
                         ::src="image.image"
-                        ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 525w'"
-                        ::sizes="
-                            '(max-width: 525px) 525px, ' +
-                            '(max-width: 1024px) 1024px, ' +
-                            '(max-width: 1600px) 1280px, ' +
-                            '1920px'
-                        "
+                        ::srcset="image.image + ' 1920w, ' + image.image.replace('storage', 'cache/large') + ' 1280w,' + image.image.replace('storage', 'cache/medium') + ' 1024w, ' + image.image.replace('storage', 'cache/small') + ' 768w'"
+                        sizes="100vw"
                         ::alt="image?.title || 'Carousel Image ' + (index + 1)"
                         tabindex="0"
                         ::fetchpriority="index === 0 ? 'high' : 'low'"

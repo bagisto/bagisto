@@ -82,12 +82,20 @@ class AttributeGroupTableSeeder extends Seeder
                 'is_user_defined' => 0,
                 'position' => 4,
                 'attribute_family_id' => 1,
+            ], [
+                'id' => 8,
+                'code' => 'rma',
+                'name' => trans('installer::app.seeders.attribute.attribute-groups.rma', [], $defaultLocale),
+                'column' => 2,
+                'is_user_defined' => 0,
+                'position' => 5,
+                'attribute_family_id' => 1,
             ],
         ]);
 
         DB::table('attribute_group_mappings')->insert([
             /**
-             * General Group Attributes
+             * General group attributes.
              */
             [
                 'attribute_id' => 1,
@@ -124,7 +132,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Description Group Attributes
+             * Description group attributes.
              */
             [
                 'attribute_id' => 9,
@@ -137,7 +145,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Meta Description Group Attributes
+             * Meta description group attributes.
              */
             [
                 'attribute_id' => 11,
@@ -162,7 +170,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Price Group Attributes
+             * Price group attributes.
              */
             [
                 'attribute_id' => 16,
@@ -179,7 +187,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Shipping Group Attributes
+             * Shipping group attributes.
              */
             [
                 'attribute_id' => 19,
@@ -200,7 +208,7 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Settings Group Attributes
+             * Settings group attributes.
              */
             [
                 'attribute_id' => 5,
@@ -225,12 +233,25 @@ class AttributeGroupTableSeeder extends Seeder
             ],
 
             /**
-             * Inventories Group Attributes
+             * Inventories group attributes.
              */
             [
                 'attribute_id' => 28,
                 'attribute_group_id' => 7,
                 'position' => 1,
+            ],
+
+            /**
+             * RMA group attributes.
+             */
+            [
+                'attribute_id' => 29,
+                'attribute_group_id' => 8,
+                'position' => 1,
+            ], [
+                'attribute_id' => 30,
+                'attribute_group_id' => 8,
+                'position' => 2,
             ],
         ]);
 

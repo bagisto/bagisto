@@ -71,7 +71,7 @@ bagisto/
     └── README.md           # This file
 ```
 
-**Releases are automated.** Pushing a `v*` Git tag to the Bagisto repo (e.g. `v2.3.0`) triggers the GitHub Actions workflow, which builds the multi-arch image and pushes it to Docker Hub. See [§7 — Full Release Workflow](#7-full-release-workflow).
+**Releases are automated.** Pushing a `v*` Git tag to the Bagisto repo (e.g. `v2.4.0`) triggers the GitHub Actions workflow, which builds the multi-arch image and pushes it to Docker Hub. See [§7 — Full Release Workflow](#7-full-release-workflow).
 
 For local builds, run `docker build` from `docker/production/`.
 
@@ -121,27 +121,27 @@ cd docker/production
 docker build -t bagisto-prod .
 ```
 
-This uses the default `BAGISTO_VERSION` set in the Dockerfile (currently **`v2.3.0`**).
+This uses the default `BAGISTO_VERSION` set in the Dockerfile (currently **`v2.4.0`**).
 
 ### Build with a specific Bagisto version
 
 ```bash
-docker build -t bagisto-prod --build-arg BAGISTO_VERSION=v2.3.0 .
+docker build -t bagisto-prod --build-arg BAGISTO_VERSION=v2.4.0 .
 ```
 
-Replace `v2.3.0` with any valid Git tag from https://github.com/bagisto/bagisto/tags.
+Replace `v2.4.0` with any valid Git tag from https://github.com/bagisto/bagisto/tags.
 
 ### Build with a version already in the image tag
 
 ```bash
-docker build -t bagisto-prod:2.3.0 --build-arg BAGISTO_VERSION=v2.3.0 .
+docker build -t bagisto-prod:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
 ```
 
 ### Build arguments
 
 | Build arg | Default | Description |
 |---|---|---|
-| `BAGISTO_VERSION` | `v2.3.0` | Git tag to clone from the Bagisto repository. |
+| `BAGISTO_VERSION` | `v2.4.0` | Git tag to clone from the Bagisto repository. |
 | `PHP_VERSION` | `8.3` | PHP version to install. Only change if you know what you're doing. |
 
 > **Note**: Bagisto is fully installed *during the build* (migrations, seeding, indexing). Expect build times of 5–10 minutes depending on your machine.
@@ -158,8 +158,8 @@ The CI workflow applies this scheme automatically. The details below explain wha
 
 | Where | Format | Example |
 |---|---|---|
-| Bagisto Git tag (used in `--build-arg`) | **with** `v` prefix | `v2.3.0` |
-| Docker image tag | **without** `v` prefix | `2.3.0` |
+| Bagisto Git tag (used in `--build-arg`) | **with** `v` prefix | `v2.4.0` |
+| Docker image tag | **without** `v` prefix | `2.4.0` |
 
 The `v` prefix is a Git convention. Docker Hub tags are plain version numbers.
 
@@ -175,39 +175,39 @@ How the workflow decides:
 
 | Git tag pushed | Default branch is `2.4` → Docker Hub tags published |
 |---|---|
-| `v2.4.1` (commit on `2.4`, stable) | `:2.4.1`, `:latest` |
+| `v2.4.4` (commit on `2.4`, stable) | `:2.4.4`, `:latest` |
 | `v2.3.19` (commit on `2.3`, stable) | `:2.3.19` (does **not** touch `:latest`) |
-| `v2.3.20-rc1` (pre-release on `2.3`) | `:2.3.20-rc1` only |
+| `v2.4.5-rc1` (pre-release on `2.4`) | `:2.4.5-rc1` only |
 | Later: default branch switched to `2.5`, then `v2.5.0` released | `:2.5.0`, `:latest` |
-| Later: default branch is `2.5`, then a patch `v2.3.20` is released on `2.3` | `:2.3.20` (does **not** touch `:latest`) |
+| Later: default branch is `2.5`, then a patch `v2.4.5` is released on `2.4` | `:2.4.5` (does **not** touch `:latest`) |
 
 | Tag form | Mutability | Purpose |
 |---|---|---|
-| `:X.Y.Z` (e.g. `:2.3.19`) | Immutable | Pins to one exact build. Use this for reproducible deployments. |
+| `:X.Y.Z` (e.g. `:2.4.4`) | Immutable | Pins to one exact build. Use this for reproducible deployments. |
 | `:latest` | Floating | Latest stable release on the default branch line (controlled by GitHub's default-branch setting). |
 
 ### Manual tagging (local builds)
 
 ```bash
 # Tag an existing local image for Docker Hub
-docker tag bagisto-prod <your-dockerhub-username>/bagisto:2.3.0
+docker tag bagisto-prod <your-dockerhub-username>/bagisto:2.4.0
 docker tag bagisto-prod <your-dockerhub-username>/bagisto:latest
 ```
 
 Or build directly with the final name (skips the retag step):
 
 ```bash
-docker build -t <your-dockerhub-username>/bagisto:2.3.0 --build-arg BAGISTO_VERSION=v2.3.0 .
-docker tag   <your-dockerhub-username>/bagisto:2.3.0 <your-dockerhub-username>/bagisto:latest
+docker build -t <your-dockerhub-username>/bagisto:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
+docker tag   <your-dockerhub-username>/bagisto:2.4.0 <your-dockerhub-username>/bagisto:latest
 ```
 
 ### Avoid these tag formats
 
 | Bad | Why |
 |---|---|
-| `bagisto:v2.3.0` | Inconsistent with Docker Hub convention (no `v` prefix). |
-| `bagisto:bagisto-2.3.0` | Redundant — the repository name already says `bagisto`. |
-| `bagisto:prod-2.3.0` | Unnecessary prefix — all images in this repo are production. |
+| `bagisto:v2.4.0` | Inconsistent with Docker Hub convention (no `v` prefix). |
+| `bagisto:bagisto-2.4.0` | Redundant — the repository name already says `bagisto`. |
+| `bagisto:prod-2.4.0` | Unnecessary prefix — all images in this repo are production. |
 
 ---
 
@@ -251,28 +251,28 @@ Generate an access token at https://hub.docker.com/settings/security and paste i
 #### Step 2 — Build with the Docker Hub name
 
 ```bash
-docker build -t <your-dockerhub-username>/bagisto:2.3.0 \
-  --build-arg BAGISTO_VERSION=v2.3.0 .
+docker build -t <your-dockerhub-username>/bagisto:2.4.0 \
+  --build-arg BAGISTO_VERSION=v2.4.0 .
 ```
 
 #### Step 3 — Also tag as `latest`
 
 ```bash
-docker tag <your-dockerhub-username>/bagisto:2.3.0 \
+docker tag <your-dockerhub-username>/bagisto:2.4.0 \
            <your-dockerhub-username>/bagisto:latest
 ```
 
 #### Step 4 — Push both tags
 
 ```bash
-docker push <your-dockerhub-username>/bagisto:2.3.0
+docker push <your-dockerhub-username>/bagisto:2.4.0
 docker push <your-dockerhub-username>/bagisto:latest
 ```
 
 #### Step 5 — Verify
 
 ```bash
-docker manifest inspect <your-dockerhub-username>/bagisto:2.3.0
+docker manifest inspect <your-dockerhub-username>/bagisto:2.4.0
 ```
 
 Or visit `https://hub.docker.com/r/<your-dockerhub-username>/bagisto/tags` in your browser.
@@ -305,8 +305,8 @@ docker login -u <your-dockerhub-username>
 
 docker buildx build \
   --platform linux/amd64,linux/arm64 \
-  --build-arg BAGISTO_VERSION=v2.3.0 \
-  -t <your-dockerhub-username>/bagisto:2.3.0 \
+  --build-arg BAGISTO_VERSION=v2.4.0 \
+  -t <your-dockerhub-username>/bagisto:2.4.0 \
   -t <your-dockerhub-username>/bagisto:latest \
   --push .
 ```
@@ -316,7 +316,7 @@ docker buildx build \
 #### Verify the manifest
 
 ```bash
-docker buildx imagetools inspect <your-dockerhub-username>/bagisto:2.3.0
+docker buildx imagetools inspect <your-dockerhub-username>/bagisto:2.4.0
 ```
 
 You should see entries for both `linux/amd64` and `linux/arm64`.
@@ -333,12 +333,12 @@ You should see entries for both `linux/amd64` and `linux/arm64`.
 
 ### Automated flow (standard)
 
-Releasing a Bagisto version (e.g. `2.3.0` — the latest stable in this line is currently **`2.3.19`**) is a single tag push:
+Releasing a Bagisto version (e.g. `2.4.0` — the latest stable in this line is currently **`2.4.4`**) is a single tag push:
 
 ```bash
 # From the Bagisto repo root
-git tag v2.3.0
-git push origin v2.3.0
+git tag v2.4.0
+git push origin v2.4.0
 ```
 
 That's the entire release. The GitHub Actions workflow at `.github/workflows/docker_publish.yml` then:
@@ -346,26 +346,26 @@ That's the entire release. The GitHub Actions workflow at `.github/workflows/doc
 1. Validates the tag matches `vX.Y.Z` (or `vX.Y.Z-suffix` for pre-releases).
 2. Sets up QEMU + Buildx for cross-architecture builds.
 3. Logs in to Docker Hub using the `DOCKERHUB_USERNAME` / `DOCKERHUB_TOKEN` repo secrets.
-4. Builds `docker/production/Dockerfile` for `linux/amd64` and `linux/arm64` in parallel with `BAGISTO_VERSION=v2.3.0`.
-5. Pushes a single multi-arch manifest as `webkul/bagisto:2.3.0`. Since the `2.3` branch is **not** the GitHub default branch, `:latest` is **not** updated. (For stable tags on the default branch line, `:latest` is also pushed.)
+4. Builds `docker/production/Dockerfile` for `linux/amd64` and `linux/arm64` in parallel with `BAGISTO_VERSION=v2.4.0`.
+5. Pushes a single multi-arch manifest as `webkul/bagisto:2.4.0` and (since the `2.4` branch **is** the GitHub default branch) also updates `webkul/bagisto:latest`.
 6. Caches buildx layers in GitHub Actions cache for faster subsequent builds.
 
 Track progress in the repo's **Actions** tab. Build duration is typically **30–60 minutes** because the arm64 leg runs under QEMU emulation and Bagisto is fully installed (migrations, seeders, indexers) during the build.
 
 After the run finishes:
 
-- `webkul/bagisto:2.3.18` (and any older patches) still exist and still work (tags are immutable once pushed).
-- `webkul/bagisto:2.3.0` points to the new build (both archs).
-- `webkul/bagisto:latest` is **unchanged** — 2.3 releases never update `:latest` while the default branch is `2.4`.
+- `webkul/bagisto:2.4.3` (and any older patches) still exist and still work (tags are immutable once pushed).
+- `webkul/bagisto:2.4.0` points to the new build (both archs).
+- `webkul/bagisto:latest` now points to `2.4.0` (since `2.4` is the default branch line).
 
 ### Pre-release / RC tags
 
 Tags with a suffix do **not** update `latest`:
 
 ```bash
-git tag v2.3.0-rc1
-git push origin v2.3.0-rc1
-# → webkul/bagisto:2.3.0-rc1   (latest is untouched)
+git tag v2.4.0-rc1
+git push origin v2.4.0-rc1
+# → webkul/bagisto:2.4.0-rc1   (latest is untouched)
 ```
 
 ### Manual re-run via workflow_dispatch
@@ -374,7 +374,7 @@ Need to rebuild a previously-released version without retagging? Go to **Actions
 
 | Input | Value |
 |---|---|
-| `bagisto_version` | e.g. `v2.3.0` |
+| `bagisto_version` | e.g. `v2.4.0` |
 | `push_latest` | `true` / `false` |
 
 ### Manual fallback (local machine)
@@ -385,19 +385,19 @@ If CI is down or you're publishing to a private registry, fall back to the manua
 cd docker/production
 
 # 1. Build with Docker Hub name
-docker build -t <your-dockerhub-username>/bagisto:2.3.0 \
-  --build-arg BAGISTO_VERSION=v2.3.0 .
+docker build -t <your-dockerhub-username>/bagisto:2.4.0 \
+  --build-arg BAGISTO_VERSION=v2.4.0 .
 
 # 2. Re-tag as latest
-docker tag <your-dockerhub-username>/bagisto:2.3.0 \
+docker tag <your-dockerhub-username>/bagisto:2.4.0 \
            <your-dockerhub-username>/bagisto:latest
 
 # 3. Push both tags
-docker push <your-dockerhub-username>/bagisto:2.3.0
+docker push <your-dockerhub-username>/bagisto:2.4.0
 docker push <your-dockerhub-username>/bagisto:latest
 
 # 4. Verify
-docker manifest inspect <your-dockerhub-username>/bagisto:2.3.0
+docker manifest inspect <your-dockerhub-username>/bagisto:2.4.0
 ```
 
 #### Manual multi-arch release (amd64 + arm64)
@@ -409,12 +409,12 @@ cd docker/production
 
 docker buildx build \
   --platform linux/amd64,linux/arm64 \
-  --build-arg BAGISTO_VERSION=v2.3.0 \
-  -t <your-dockerhub-username>/bagisto:2.3.0 \
+  --build-arg BAGISTO_VERSION=v2.4.0 \
+  -t <your-dockerhub-username>/bagisto:2.4.0 \
   -t <your-dockerhub-username>/bagisto:latest \
   --push .
 
-docker buildx imagetools inspect <your-dockerhub-username>/bagisto:2.3.0
+docker buildx imagetools inspect <your-dockerhub-username>/bagisto:2.4.0
 ```
 
 ---
@@ -572,7 +572,7 @@ docker exec -it bagisto php /var/www/bagisto/artisan db:seed --force
 
 | Variable | Default | Description |
 |---|---|---|
-| `BAGISTO_VERSION` | `v2.3.0` | Git tag cloned from the Bagisto repository. |
+| `BAGISTO_VERSION` | `v2.4.0` | Git tag cloned from the Bagisto repository. |
 | `PHP_VERSION` | `8.3` | PHP version to install. |
 
 ### Runtime environment (`docker run -e`)
@@ -712,13 +712,13 @@ mysql -h 127.0.0.1 -P 3306 -u bagisto -pbagisto bagisto
 
 ## 15. Upgrading Bagisto Version
 
-The Bagisto source is baked into the image at build time. New official versions are published to Docker Hub automatically when the corresponding `v*` Git tag is pushed to `bagisto/bagisto` — just `docker pull webkul/bagisto:2.3.0` (or `:latest`) to get the new image.
+The Bagisto source is baked into the image at build time. New official versions are published to Docker Hub automatically when the corresponding `v*` Git tag is pushed to `bagisto/bagisto` — just `docker pull webkul/bagisto:2.4.0` (or `:latest`) to get the new image.
 
 For custom or local rebuilds:
 
 ```bash
 cd docker/production
-docker build -t bagisto-prod:2.3.0 --build-arg BAGISTO_VERSION=v2.3.0 .
+docker build -t bagisto-prod:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
 ```
 
 Then stop and replace the running container:
@@ -729,7 +729,7 @@ docker stop bagisto && docker rm bagisto
 docker run -d --name bagisto -p 80:80 \
   -v bagisto-mysql:/var/lib/mysql \
   -v bagisto-storage:/var/www/bagisto/storage \
-  bagisto-prod:2.3.0
+  bagisto-prod:2.4.0
 ```
 
 If the schema changed between versions, you may need to run Bagisto's migrations against the existing data:

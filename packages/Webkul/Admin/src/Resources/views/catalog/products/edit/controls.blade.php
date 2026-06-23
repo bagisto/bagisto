@@ -46,7 +46,6 @@
             value="{{ old($attribute->code) ?: $product[$attribute->code] }}"
             :label="$attribute->admin_name"
             :tinymce="(bool) $attribute->enable_wysiwyg"
-            :prompt="core()->getConfigData('general.magic_ai.content_generation.product_' . $attribute->code . '_prompt')"
         />
 
         @break
@@ -83,10 +82,34 @@
             @php
                 $selectedOption = old($attribute->code) ?: $product[$attribute->code];
 
-                if ($attribute->code != 'tax_category_id') {
-                    $options = $attribute->options()->orderBy('sort_order')->get();
-                } else {
+                if ($attribute->code === 'tax_category_id') {
                     $options = app('Webkul\Tax\Repositories\TaxCategoryRepository')->all();
+                } else if ($attribute->code === 'rma_rule_id') {
+                    $rmaRuleRepository = app('Webkul\RMA\Repositories\RMARuleRepository');
+
+                    /**
+                     * Only active RMA rules should be assignable to a product.
+                     */
+                    $options = $rmaRuleRepository->getActiveRules();
+
+                    /**
+                     * Safety Net: if this product already has a rule that has since been
+                     * deactivated, append it to the options list so editing the product
+                     * does not silently drop the existing assignment. The admin can then
+                     * choose to switch to an active rule on save.
+                     */
+                    if (
+                        $selectedOption
+                        && ! $options->contains('id', $selectedOption)
+                    ) {
+                        $currentRule = $rmaRuleRepository->find($selectedOption);
+
+                        if ($currentRule) {
+                            $options->push($currentRule);
+                        }
+                    }
+                } else {
+                    $options = $attribute->options()->orderBy('sort_order')->get();
                 }
             @endphp
 

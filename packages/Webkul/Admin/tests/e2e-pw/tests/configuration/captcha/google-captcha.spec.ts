@@ -1,233 +1,76 @@
 import { test, expect } from "../../../setup";
+import { generateDescription, generateSKU } from "../../../utils/faker";
+import { ConfigurationPage } from "../../../pages/admin/configuration/ConfigurationPage";
+import { CustomerCaptchaPage } from "../../../pages/admin/configuration/CustomerCaptchaPage";
+import { ProductCreatePage } from "../../../pages/admin/catalog/products/ProductCreatePage";
 
-test.describe("should verfiy google captcha verfication", () => {
-    test("should display google captcha on customer sigin page", async ({
+test.describe("should verify google captcha verification", () => {
+    test.beforeEach(async ({ adminPage }) => {
+        await new ConfigurationPage(adminPage).ensureGoogleCaptchaEnabled({
+            projectId: "123456",
+            apiKey: "test",
+            siteKey: "test",
+        });
+    });
+
+    test.afterEach(async ({ adminPage }) => {
+        await new ConfigurationPage(adminPage).disableGoogleCaptcha();
+    });
+
+    test("should display google captcha on customer sign in page", async ({
         adminPage,
     }) => {
-        await adminPage.goto("admin/configuration/customer/captcha");
-        const toggle = adminPage.locator(".peer.h-5");
+        const customerCaptchaPage = new CustomerCaptchaPage(adminPage);
 
-        if (!(await toggle.isChecked())) {
-            await toggle.click();
-        }
-        await adminPage.getByRole("textbox", { name: "Site Key" }).fill("test");
-        await adminPage
-            .getByRole("textbox", { name: "Secret Key" })
-            .fill("test");
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
-
-        /**
-         * Verify captcha
-         */
-        await adminPage.goto("");
-        await adminPage.getByLabel("Profile").click();
-        await adminPage.getByRole("link", { name: "Sign In" }).click();
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
-
-        /**
-         * off the captcha
-         */
-        await adminPage.goto("admin/configuration/customer/captcha");
-        await toggle.click();
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
+        await customerCaptchaPage.openSignIn();
+        await customerCaptchaPage.expectCaptchaVisible();
     });
 
     test("should display google captcha on customer sign up page", async ({
         adminPage,
     }) => {
-        await adminPage.goto("admin/configuration/customer/captcha");
-        const toggle = adminPage.locator(".peer.h-5");
+        const customerCaptchaPage = new CustomerCaptchaPage(adminPage);
 
-        if (!(await toggle.isChecked())) {
-            await toggle.click();
-        }
-        await adminPage.getByRole("textbox", { name: "Site Key" }).fill("test");
-        await adminPage
-            .getByRole("textbox", { name: "Secret Key" })
-            .fill("test");
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
-
-        /**
-         * Verify captcha
-         */
-        await adminPage.goto("");
-        await adminPage.getByLabel("Profile").click();
-        await adminPage.getByRole("link", { name: "Sign Up" }).click();
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
-
-        /**
-         * off the captcha
-         */
-        await adminPage.goto("admin/configuration/customer/captcha");
-        await toggle.click();
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
+        await customerCaptchaPage.openSignUp();
+        await customerCaptchaPage.expectCaptchaVisible();
     });
 
-    test("should display google captcha on forgot passowrd page", async ({
+    test("should display google captcha on forgot password page", async ({
         adminPage,
     }) => {
-        await adminPage.goto("admin/configuration/customer/captcha");
-        const toggle = adminPage.locator(".peer.h-5");
+        const customerCaptchaPage = new CustomerCaptchaPage(adminPage);
 
-        if (!(await toggle.isChecked())) {
-            await toggle.click();
-        }
-        await adminPage.getByRole("textbox", { name: "Site Key" }).fill("test");
-        await adminPage
-            .getByRole("textbox", { name: "Secret Key" })
-            .fill("test");
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
-
-        /**
-         * Verify captcha
-         */
-        await adminPage.goto("");
-        await adminPage.getByLabel("Profile").click();
-        await adminPage.getByRole("link", { name: "Sign In" }).click();
-        await adminPage.getByRole("link", { name: "Forgot Password?" }).click();
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
-
-        /**
-         * off the captcha
-         */
-        await adminPage.goto("admin/configuration/customer/captcha");
-        await toggle.click();
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
+        await customerCaptchaPage.openForgotPassword();
+        await customerCaptchaPage.expectCaptchaVisible();
     });
 
     test("should display google captcha on contact us page", async ({
         adminPage,
     }) => {
-        await adminPage.goto("admin/configuration/customer/captcha");
-        const toggle = adminPage.locator(".peer.h-5");
+        const customerCaptchaPage = new CustomerCaptchaPage(adminPage);
 
-        if (!(await toggle.isChecked())) {
-            await toggle.click();
-        }
-        await adminPage.getByRole("textbox", { name: "Site Key" }).fill("test");
-        await adminPage
-            .getByRole("textbox", { name: "Secret Key" })
-            .fill("test");
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
-
-        /**
-         * Verify captcha
-         */
-        await adminPage.goto("contact-us");
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
-
-        /**
-         * off the captcha
-         */
-        await adminPage.goto("admin/configuration/customer/captcha");
-        await toggle.click();
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
+        await customerCaptchaPage.openContactUs();
+        await customerCaptchaPage.expectCaptchaVisible();
     });
 
-    test("should display google captcha on product checkout sigin page", async ({
+    test("should display google captcha on product checkout sign in page", async ({
         adminPage,
     }) => {
-        await adminPage.goto("admin/configuration/customer/captcha");
-        const toggle = adminPage.locator(".peer.h-5");
+        const productCreatePage = new ProductCreatePage(adminPage);
+        const customerCaptchaPage = new CustomerCaptchaPage(adminPage);
 
-        if (!(await toggle.isChecked())) {
-            await toggle.click();
-        }
-        await adminPage.getByRole("textbox", { name: "Site Key" }).fill("test");
-        await adminPage
-            .getByRole("textbox", { name: "Secret Key" })
-            .fill("test");
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
-        await adminPage.goto("");
-        await adminPage
-            .getByRole("button", { name: "Add To Cart" })
-            .first()
-            .click();
-        await adminPage
-            .getByRole("paragraph")
-            .filter({ hasText: "Item Added Successfully" })
-            .click();
-        await adminPage
-            .locator(
-                "(//span[contains(@class, 'icon-cart') and @role='button' and @tabindex='0'])[1]"
-            )
-            .click();
-        await adminPage
-            .locator('(//a[contains(., " Continue to Checkout ")])[1]')
-            .click();
-        await adminPage.getByRole("button", { name: "Sign In" }).click();
+        await productCreatePage.createSimpleProduct({
+            name: `simple-${Date.now()}`,
+            sku: generateSKU(),
+            productNumber: generateSKU(),
+            shortDescription: generateDescription(),
+            description: generateDescription(),
+            price: "199",
+            weight: "25",
+            inventory: "5000",
+        });
 
-        /**
-         * Verify captcha
-         */
-        await adminPage.waitForTimeout(3000);
-        await expect(adminPage.locator(".g-recaptcha")).toBeVisible();
-        /**
-         * off the captcha
-         */
-        await adminPage.goto("admin/configuration/customer/captcha");
-        await toggle.click();
-        await adminPage.waitForTimeout(1000);
-        await adminPage
-            .getByRole("button", { name: "Save Configuration" })
-            .click();
-        await adminPage
-            .locator("#app")
-            .getByText("Configuration saved successfully")
-            .click();
+        await customerCaptchaPage.openCheckoutSignIn();
+        await customerCaptchaPage.expectCaptchaVisible();
     });
 });

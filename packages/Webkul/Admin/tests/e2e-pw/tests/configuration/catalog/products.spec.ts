@@ -3,14 +3,10 @@ import {
     generateDescription,
     generateRandomNumericString,
     getImageFile,
-    generateSKU,
 } from "../../../utils/faker";
 
 test.describe("product configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        /**
-         * Navigate to the configuration page.
-         */
         await adminPage.goto("admin/configuration/catalog/products");
     });
 
@@ -25,20 +21,13 @@ test.describe("product configuration", () => {
         );
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
             })
         ).toBeVisible();
     });
-    
-    /**
-     * Update the product view page configuration.
-     */
+
     test("should update the product view page configuration", async ({
         adminPage,
     }) => {
@@ -53,10 +42,6 @@ test.describe("product configuration", () => {
             )
             .fill(generateRandomNumericString(2));
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -73,10 +58,6 @@ test.describe("product configuration", () => {
             )
             .fill(generateRandomNumericString(2));
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -116,10 +97,6 @@ test.describe("product configuration", () => {
         );
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -148,10 +125,6 @@ test.describe("product configuration", () => {
 
         await fileChooser.setFiles(getImageFile());
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Delete the uploaded favicon.
-         */
         await adminPage
             .locator(
                 '[id="catalog\\[products\\]\\[cache_small_image\\]\\[url\\]\\[delete\\]"]'
@@ -159,10 +132,6 @@ test.describe("product configuration", () => {
             .nth(1)
             .click();
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -191,10 +160,6 @@ test.describe("product configuration", () => {
 
         await fileChooser.setFiles(getImageFile());
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Delete the uploaded favicon.
-         */
         await adminPage
             .locator(
                 '[id="catalog\\[products\\]\\[cache_medium_image\\]\\[url\\]\\[delete\\]"]'
@@ -202,10 +167,6 @@ test.describe("product configuration", () => {
             .nth(1)
             .click();
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -234,10 +195,6 @@ test.describe("product configuration", () => {
 
         await fileChooser.setFiles(getImageFile());
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Delete the uploaded favicon.
-         */
         await adminPage
             .locator(
                 '[id="catalog\\[products\\]\\[cache_large_image\\]\\[url\\]\\[delete\\]"]'
@@ -245,10 +202,6 @@ test.describe("product configuration", () => {
             .nth(1)
             .click();
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -275,10 +228,6 @@ test.describe("product configuration", () => {
         await expect(searchEngine).toHaveValue("star_counts");
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -300,10 +249,6 @@ test.describe("product configuration", () => {
             )
             .fill(generateRandomNumericString(3));
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",
@@ -347,10 +292,6 @@ test.describe("product configuration", () => {
             .fill(generateDescription());
 
         await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
         await expect(
             adminPage.locator("#app p", {
                 hasText: "Configuration saved successfully",

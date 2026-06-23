@@ -196,7 +196,7 @@
                                         {!! view_render_event('bagisto.shop.checkout.cart.item_image.before') !!}
 
                                         <!-- Cart Item Image -->
-                                        <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                        <a :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)">
                                             <x-shop::media.images.lazy
                                                 class="h-[110px] max-w-[110px] rounded-xl max-md:h-20 max-md:max-w-20"
                                                 ::src="item.base_image.small_image_url"
@@ -214,7 +214,7 @@
                                         <div class="grid place-content-start gap-y-2.5 max-md:gap-y-0">
                                             {!! view_render_event('bagisto.shop.checkout.cart.item_name.before') !!}
 
-                                            <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                            <a :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)">
                                                 <p class="text-base font-medium max-sm:text-sm">
                                                     @{{ item.name }}
                                                 </p>

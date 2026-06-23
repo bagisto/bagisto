@@ -1,1 +1,3 @@
-<div {!! $htmlAttributes !!}></div>
+<input 
+    {!! $htmlAttributes !!} 
+/>

@@ -12,7 +12,6 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\URL;
 use Laravel\Sanctum\HasApiTokens;
-use Shetabit\Visitor\Traits\Visitor;
 use Webkul\Checkout\Models\CartProxy;
 use Webkul\Core\Models\ChannelProxy;
 use Webkul\Core\Models\SubscribersListProxy;
@@ -25,7 +24,7 @@ use Webkul\Shop\Mail\Customer\ResetPasswordNotification;
 
 class Customer extends Authenticatable implements CustomerContract
 {
-    use HasApiTokens, HasFactory, Notifiable, Visitor;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The table associated with the model.

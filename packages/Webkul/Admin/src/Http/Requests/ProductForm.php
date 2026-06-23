@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Requests;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Rules\Decimal;
@@ -74,6 +75,8 @@ class ProductForm extends FormRequest
     {
         $this->product = $this->productRepository->find($this->id);
 
+        $currentRmaRuleId = $this->product->rma_rule_id;
+
         $this->rules = array_merge($this->product->getTypeInstance()->getTypeValidationRules(), [
             'sku' => ['required', 'unique:products,sku,'.$this->id, new Slug],
             'url_key' => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
@@ -89,6 +92,18 @@ class ProductForm extends FormRequest
             'guest_checkout' => ['sometimes', 'required', 'in:0,1'],
             'new' => ['sometimes', 'required', 'in:0,1'],
             'featured' => ['sometimes', 'required', 'in:0,1'],
+            'rma_rule_id' => [
+                'nullable',
+                Rule::exists('rma_rules', 'id')->where(function ($query) use ($currentRmaRuleId) {
+                    $query->where(function ($q) use ($currentRmaRuleId) {
+                        $q->where('status', 1);
+
+                        if ($currentRmaRuleId) {
+                            $q->orWhere('id', $currentRmaRuleId);
+                        }
+                    });
+                }),
+            ],
         ]);
 
         if (request()->images) {

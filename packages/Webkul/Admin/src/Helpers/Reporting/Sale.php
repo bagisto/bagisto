@@ -41,7 +41,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns previous orders over time
+     * Returns previous orders over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -52,7 +52,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns current orders over time
+     * Returns current orders over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -63,7 +63,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Retrieves total orders
+     * Retrieves total orders.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -78,7 +78,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns orders over time
+     * Returns orders over time.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -162,7 +162,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Retrieves total sales
+     * Retrieves total sales.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -177,7 +177,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Retrieves sub total sales
+     * Retrieves sub total sales.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -192,7 +192,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns previous sales over time
+     * Returns previous sales over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -203,7 +203,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns current sales over time
+     * Returns current sales over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -214,7 +214,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns sales over time
+     * Returns sales over time.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -245,7 +245,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Retrieves average sales
+     * Retrieves average sales.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -261,7 +261,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns previous average sales over time
+     * Returns previous average sales over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -272,7 +272,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns current average sales over time
+     * Returns current average sales over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -283,7 +283,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns average sales over time
+     * Returns average sales over time.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -314,7 +314,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Retrieves refunds
+     * Retrieves refunds.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -330,7 +330,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns previous refunds over time
+     * Returns previous refunds over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -341,7 +341,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns current refunds over time
+     * Returns current refunds over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -352,7 +352,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns refunds over time
+     * Returns refunds over time.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -383,7 +383,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Retrieves tax collected
+     * Retrieves tax collected.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -399,7 +399,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns previous tax collected over time
+     * Returns previous tax collected over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -410,7 +410,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns current tax collected over time
+     * Returns current tax collected over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -421,7 +421,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns tax collected over time
+     * Returns tax collected over time.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -439,7 +439,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns top tax categories
+     * Returns top tax categories.
      *
      * @param  int  $limit
      */
@@ -476,7 +476,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Retrieves shipping collected
+     * Retrieves shipping collected.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -491,7 +491,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns previous shipping collected over time
+     * Returns previous shipping collected over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -502,7 +502,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns current shipping collected over time
+     * Returns current shipping collected over time.
      *
      * @param  string  $period
      * @param  bool  $includeEmpty
@@ -513,7 +513,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns shipping collected over time
+     * Returns shipping collected over time.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate
@@ -531,7 +531,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns top shipping methods
+     * Returns top shipping methods.
      *
      * @param  int  $limit
      */
@@ -551,7 +551,92 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Returns top payment methods
+     * Retrieves coupon discount and its progress.
+     */
+    public function getCouponDiscountProgress(): array
+    {
+        return [
+            'previous' => $previous = $this->getCouponDiscount($this->lastStartDate, $this->lastEndDate),
+            'current' => $current = $this->getCouponDiscount($this->startDate, $this->endDate),
+            'formatted_total' => core()->formatBasePrice($current),
+            'progress' => $this->getPercentageChange($previous, $current),
+        ];
+    }
+
+    /**
+     * Retrieves coupon discount.
+     *
+     * @param  Carbon  $startDate
+     * @param  Carbon  $endDate
+     */
+    public function getCouponDiscount($startDate, $endDate): float
+    {
+        return $this->orderRepository
+            ->resetModel()
+            ->whereIn('channel_id', $this->channelIds)
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->whereNotNull('coupon_code')
+            ->sum(DB::raw('base_discount_invoiced - base_discount_refunded'));
+    }
+
+    /**
+     * Returns orders that used a coupon code.
+     */
+    public function getCouponOrders(): Collection
+    {
+        $tablePrefix = DB::getTablePrefix();
+
+        return $this->orderRepository
+            ->resetModel()
+            ->leftJoin('cart_rule_coupons', 'orders.coupon_code', '=', 'cart_rule_coupons.code')
+            ->select(
+                'orders.id',
+                'orders.increment_id',
+                'orders.coupon_code',
+                'orders.customer_email',
+                'orders.created_at',
+                DB::raw("MAX({$tablePrefix}cart_rule_coupons.cart_rule_id) as cart_rule_id"),
+                DB::raw("({$tablePrefix}orders.base_grand_total_invoiced - {$tablePrefix}orders.base_grand_total_refunded) as base_total"),
+                DB::raw("({$tablePrefix}orders.base_discount_invoiced - {$tablePrefix}orders.base_discount_refunded) as base_discount_total")
+            )
+            ->whereIn('orders.channel_id', $this->channelIds)
+            ->whereBetween('orders.created_at', [$this->startDate, $this->endDate])
+            ->whereNotNull('orders.coupon_code')
+            ->where('orders.coupon_code', '!=', '')
+            ->groupBy('orders.id')
+            ->orderByDesc('orders.created_at')
+            ->get();
+    }
+
+    /**
+     * Returns top coupons used.
+     *
+     * @param  int  $limit
+     */
+    public function getTopCoupons($limit = null): Collection
+    {
+        $tablePrefix = DB::getTablePrefix();
+
+        return $this->orderRepository
+            ->resetModel()
+            ->leftJoin('cart_rule_coupons', 'orders.coupon_code', '=', 'cart_rule_coupons.code')
+            ->select('orders.coupon_code')
+            ->addSelect(DB::raw("MAX({$tablePrefix}cart_rule_coupons.cart_rule_id) as cart_rule_id"))
+            ->addSelect(DB::raw('COUNT(*) as total'))
+            ->addSelect(DB::raw("SUM({$tablePrefix}orders.base_grand_total_invoiced - {$tablePrefix}orders.base_grand_total_refunded) as base_total"))
+            ->addSelect(DB::raw("SUM({$tablePrefix}orders.base_discount_invoiced - {$tablePrefix}orders.base_discount_refunded) as base_discount_total"))
+            ->whereIn('orders.channel_id', $this->channelIds)
+            ->whereBetween('orders.created_at', [$this->startDate, $this->endDate])
+            ->whereNotNull('orders.coupon_code')
+            ->where('orders.coupon_code', '!=', '')
+            ->groupBy('orders.coupon_code')
+            ->orderByDesc('total')
+            ->limit($limit)
+            ->get();
+    }
+
+    /**
+     * Returns top payment methods.
      *
      * @param  int  $limit
      */
@@ -580,7 +665,7 @@ class Sale extends AbstractReporting
     }
 
     /**
-     * Retrieves total unique cart users
+     * Retrieves total unique cart users.
      *
      * @param  Carbon  $startDate
      * @param  Carbon  $endDate

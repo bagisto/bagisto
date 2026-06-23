@@ -1,21 +1,21 @@
 {
-  "_veeValidate-BnSi22_q.js": {
-    "file": "assets/veeValidate-BnSi22_q.js",
+  "_veeValidate-C4U_pXt7.js": {
+    "file": "assets/veeValidate-C4U_pXt7.js",
     "name": "veeValidate",
     "imports": [
-      "_vue-DaFNcYaj.js"
+      "_vue-C3R1tuGv.js"
     ]
   },
   "_vendor-CW6uOYFM.js": {
     "file": "assets/vendor-CW6uOYFM.js",
     "name": "vendor"
   },
-  "_vue-DaFNcYaj.js": {
-    "file": "assets/vue-DaFNcYaj.js",
+  "_vue-C3R1tuGv.js": {
+    "file": "assets/vue-C3R1tuGv.js",
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-Ugh2x0ru.css",
+    "file": "assets/app--R31bvuT.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -71,6 +71,18 @@
     "file": "assets/paypal-CIu1GKlz.png",
     "src": "src/Resources/assets/images/paypal.png"
   },
+  "src/Resources/assets/images/payu.png": {
+    "file": "assets/payu-Lrh50Ekl.png",
+    "src": "src/Resources/assets/images/payu.png"
+  },
+  "src/Resources/assets/images/phonepe.png": {
+    "file": "assets/phonepe-0x8o_RaK.png",
+    "src": "src/Resources/assets/images/phonepe.png"
+  },
+  "src/Resources/assets/images/razorpay.png": {
+    "file": "assets/razorpay-Cbr80qFP.png",
+    "src": "src/Resources/assets/images/razorpay.png"
+  },
   "src/Resources/assets/images/review.png": {
     "file": "assets/review-ZWqERyaT.png",
     "src": "src/Resources/assets/images/review.png"
@@ -82,6 +94,10 @@
   "src/Resources/assets/images/spinner.svg": {
     "file": "assets/spinner-CWS6ej98.svg",
     "src": "src/Resources/assets/images/spinner.svg"
+  },
+  "src/Resources/assets/images/stripe.png": {
+    "file": "assets/stripe-WsnmAxt1.png",
+    "src": "src/Resources/assets/images/stripe.png"
   },
   "src/Resources/assets/images/thank-you.png": {
     "file": "assets/thank-you-mhMpuEVL.png",
@@ -96,14 +112,14 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-Pfk7cweg.js",
+    "file": "assets/app-BeQXD5ar.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vue-DaFNcYaj.js",
+      "_vue-C3R1tuGv.js",
       "_vendor-CW6uOYFM.js",
-      "_veeValidate-BnSi22_q.js"
+      "_veeValidate-C4U_pXt7.js"
     ],
     "css": [
       "assets/app-DsP8OK1c.css"

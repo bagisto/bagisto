@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\MagicAI\AiProvider;
 use Webkul\Sales\Models\Order;
 
 return [
@@ -51,19 +52,6 @@ return [
                 'title' => 'admin::app.configuration.index.general.general.breadcrumbs.shop',
                 'type' => 'boolean',
                 'default' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.general.visitor_options',
-        'name' => 'admin::app.configuration.index.general.general.visitor-options.title',
-        'info' => 'admin::app.configuration.index.general.general.visitor-options.title-info',
-        'sort' => 3,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.general.visitor-options.enable',
-                'type' => 'boolean',
-                'default' => false,
             ],
         ],
     ], [
@@ -272,265 +260,6 @@ return [
                 'title' => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
                 'type' => 'blade',
                 'path' => 'admin::configuration.custom-views.category-menu',
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai',
-        'name' => 'admin::app.configuration.index.general.magic-ai.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.info',
-        'icon' => 'settings/magic-ai.svg',
-        'sort' => 3,
-    ], [
-        'key' => 'general.magic_ai.settings',
-        'name' => 'admin::app.configuration.index.general.magic-ai.settings.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.settings.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ], [
-                'name' => 'api_key',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.api-key',
-                'type' => 'password',
-                'channel_based' => true,
-            ], [
-                'name' => 'organization',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.organization',
-                'type' => 'text',
-                'channel_based' => true,
-            ], [
-                'name' => 'api_domain',
-                'title' => 'admin::app.configuration.index.general.magic-ai.settings.llm-api-domain',
-                'type' => 'text',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.content_generation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.content-generation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.content-generation.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.enabled',
-                'type' => 'boolean',
-            ], [
-                'name' => 'product_short_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-short-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'product_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.product-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'category_description_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.category-description-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ], [
-                'name' => 'cms_page_content_prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.content-generation.cms-page-content-prompt',
-                'type' => 'textarea',
-                'locale_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.image_generation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.image-generation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.image-generation.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.image-generation.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.review_translation',
-        'name' => 'admin::app.configuration.index.general.magic-ai.review-translation.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.review-translation.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ], [
-                'name' => 'model',
-                'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.model',
-                'type' => 'select',
-                'channel_based' => true,
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4-turbo',
-                        'value' => 'gpt-4-turbo',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o',
-                        'value' => 'gpt-4o',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.gemini-2-0-flash',
-                        'value' => 'gemini-2.0-flash',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.deepseek-r1-8b',
-                        'value' => 'deepseek-r1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama-groq',
-                        'value' => 'llama3-8b-8192',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-3b',
-                        'value' => 'llama3.2:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-2-1b',
-                        'value' => 'llama3.2:1b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-1-8b',
-                        'value' => 'llama3.1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llama3-8b',
-                        'value' => 'llama3:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.llava-7b',
-                        'value' => 'llava:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-13b',
-                        'value' => 'vicuna:13b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.vicuna-7b',
-                        'value' => 'vicuna:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-14b',
-                        'value' => 'qwen2.5:14b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-7b',
-                        'value' => 'qwen2.5:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-3b',
-                        'value' => 'qwen2.5:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-1-5b',
-                        'value' => 'qwen2.5:1.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.qwen2-5-0-5b',
-                        'value' => 'qwen2.5:0.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.mistral-7b',
-                        'value' => 'mistral:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.starling-lm-7b',
-                        'value' => 'starling-lm:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.phi3-5',
-                        'value' => 'phi3.5',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.review-translation.orca-mini',
-                        'value' => 'orca-mini',
-                    ],
-                ],
-            ],
-        ],
-    ], [
-        'key' => 'general.magic_ai.checkout_message',
-        'name' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title',
-        'info' => 'admin::app.configuration.index.general.magic-ai.checkout-message.title-info',
-        'sort' => 1,
-        'fields' => [
-            [
-                'name' => 'enabled',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.enabled',
-                'type' => 'boolean',
-                'channel_based' => true,
-            ], [
-                'name' => 'model',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.model',
-                'type' => 'select',
-                'channel_based' => true,
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4-turbo',
-                        'value' => 'gpt-4-turbo',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o',
-                        'value' => 'gpt-4o',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gpt-4o-mini',
-                        'value' => 'gpt-4o-mini',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.gemini-2-0-flash',
-                        'value' => 'gemini-2.0-flash',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.deepseek-r1-8b',
-                        'value' => 'deepseek-r1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama-groq',
-                        'value' => 'llama3.3',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-3b',
-                        'value' => 'llama3.2:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-2-1b',
-                        'value' => 'llama3.2:1b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-1-8b',
-                        'value' => 'llama3.1:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llama3-8b',
-                        'value' => 'llama3:8b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.llava-7b',
-                        'value' => 'llava:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-13b',
-                        'value' => 'vicuna:13b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.vicuna-7b',
-                        'value' => 'vicuna:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-14b',
-                        'value' => 'qwen2.5:14b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-7b',
-                        'value' => 'qwen2.5:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-3b',
-                        'value' => 'qwen2.5:3b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-1-5b',
-                        'value' => 'qwen2.5:1.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.qwen2-5-0-5b',
-                        'value' => 'qwen2.5:0.5b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.mistral-7b',
-                        'value' => 'mistral:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.starling-lm-7b',
-                        'value' => 'starling-lm:7b',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.phi3-5',
-                        'value' => 'phi3.5',
-                    ], [
-                        'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.orca-mini',
-                        'value' => 'orca-mini',
-                    ],
-                ],
-            ], [
-                'name' => 'prompt',
-                'title' => 'admin::app.configuration.index.general.magic-ai.checkout-message.prompt',
-                'type' => 'textarea',
-                'channel_based' => true,
-                'locale_based' => true,
             ],
         ],
     ], [
@@ -812,13 +541,251 @@ return [
     ],
 
     /**
+     * Magic AI.
+     */
+    [
+        'key' => 'magic_ai',
+        'name' => 'admin::app.configuration.index.magic-ai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.info',
+        'sort' => 2,
+    ], [
+        'key' => 'magic_ai.general',
+        'name' => 'admin::app.configuration.index.magic-ai.general.title',
+        'info' => 'admin::app.configuration.index.magic-ai.general.info',
+        'icon' => 'settings/magic-ai.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'magic_ai.general.settings',
+        'name' => 'admin::app.configuration.index.magic-ai.general.settings.title',
+        'info' => 'admin::app.configuration.index.magic-ai.general.settings.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.general.settings.enabled',
+                'type' => 'boolean',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.info',
+        'icon' => 'settings/magic-ai-providers.svg',
+        'sort' => 2,
+    ], [
+        'key' => 'magic_ai.providers.openai',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.openai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.openai.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.anthropic',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.anthropic.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.anthropic.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.gemini',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.gemini.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.gemini.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.groq',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.groq.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.groq.title-info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.xai',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.xai.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.xai.title-info',
+        'sort' => 5,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.deepseek',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.deepseek.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.deepseek.title-info',
+        'sort' => 6,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.mistral',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.mistral.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.mistral.title-info',
+        'sort' => 7,
+        'fields' => [
+            [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.providers.ollama',
+        'name' => 'admin::app.configuration.index.magic-ai.providers.ollama.title',
+        'info' => 'admin::app.configuration.index.magic-ai.providers.ollama.title-info',
+        'sort' => 8,
+        'fields' => [
+            [
+                'name' => 'url',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.ollama.url',
+                'type' => 'text',
+                'default' => 'http://localhost:11434',
+            ], [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.magic-ai.providers.api-key',
+                'type' => 'password',
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.admin_features',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.info',
+        'icon' => 'settings/magic-ai-admin-features.svg',
+        'sort' => 3,
+    ], [
+        'key' => 'magic_ai.admin_features.text_generation',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.enabled',
+                'type' => 'boolean',
+            ], [
+                'name' => 'providers',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.text-generation.providers',
+                'type' => 'multiselect',
+                'options' => AiProvider::textProviderOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.admin_features.image_generation',
+        'name' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.enabled',
+                'type' => 'boolean',
+            ], [
+                'name' => 'providers',
+                'title' => 'admin::app.configuration.index.magic-ai.admin-features.image-generation.providers',
+                'type' => 'multiselect',
+                'options' => AiProvider::imageProviderOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.storefront_features',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.info',
+        'icon' => 'settings/magic-ai-storefront-features.svg',
+        'sort' => 4,
+    ], [
+        'key' => 'magic_ai.storefront_features.image_search',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.image-search.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.image-search.title-info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.image-search.enabled',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.image-search.model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.storefront_features.review_translation',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.enabled',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.review-translation.model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
+            ],
+        ],
+    ], [
+        'key' => 'magic_ai.storefront_features.checkout_message',
+        'name' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.title',
+        'info' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.title-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.enabled',
+                'type' => 'boolean',
+                'channel_based' => true,
+            ], [
+                'name' => 'model',
+                'title' => 'admin::app.configuration.index.magic-ai.storefront-features.checkout-message.model',
+                'type' => 'select',
+                'channel_based' => true,
+                'options' => AiProvider::textModelOptions(),
+            ],
+        ],
+    ],
+
+    /**
      * Catalog.
      */
     [
         'key' => 'catalog',
         'name' => 'admin::app.configuration.index.catalog.title',
         'info' => 'admin::app.configuration.index.catalog.info',
-        'sort' => 2,
+        'sort' => 3,
     ], [
         'key' => 'catalog.products',
         'name' => 'admin::app.configuration.index.catalog.products.title',
@@ -1241,19 +1208,7 @@ return [
                 'title' => 'admin::app.configuration.index.catalog.inventory.product-stock-options.allow-back-orders',
                 'type' => 'boolean',
                 'default',
-            ],
-            // [
-            //     'name'          => 'maximum_product',
-            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.max-qty-allowed-in-cart',
-            //     'type'          => 'text',
-            //     'default'       => '10',
-            // ], [
-            //     'name'          => 'minimum_product',
-            //     'title'         => 'admin::app.configuration.index.catalog.inventory.product-stock-options.min-qty-allowed-in-cart',
-            //     'type'          => 'number',
-            //     'default'       => '0',
-            // ],
-            [
+            ], [
                 'name' => 'out_of_stock_threshold',
                 'title' => 'admin::app.configuration.index.catalog.inventory.product-stock-options.out-of-stock-threshold',
                 'type' => 'number',
@@ -1269,7 +1224,7 @@ return [
         'key' => 'customer',
         'name' => 'admin::app.configuration.index.customer.title',
         'info' => 'admin::app.configuration.index.customer.info',
-        'sort' => 3,
+        'sort' => 4,
     ], [
         'key' => 'customer.address',
         'name' => 'admin::app.configuration.index.customer.address.title',
@@ -1314,7 +1269,7 @@ return [
                 'type' => 'text',
                 'validation' => 'between:1,4|integer',
                 'channel_based' => true,
-                'default_value' => 1,
+                'default' => 1,
             ],
         ],
     ], [
@@ -1334,23 +1289,39 @@ return [
                 'title' => 'admin::app.configuration.index.customer.captcha.credentials.status',
                 'type' => 'boolean',
                 'channel_based' => true,
-                'locale_based' => false,
+            ], [
+                'name' => 'project_id',
+                'title' => 'admin::app.configuration.index.customer.captcha.credentials.project-id',
+                'info' => 'admin::app.configuration.index.customer.captcha.credentials.project-id-info',
+                'type' => 'text',
+                'validation' => 'required_if:status,1',
+                'depends' => 'status:1',
+                'channel_based' => true,
+            ], [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.customer.captcha.credentials.api-key',
+                'info' => 'admin::app.configuration.index.customer.captcha.credentials.api-key-info',
+                'type' => 'text',
+                'validation' => 'required_if:status,1',
+                'depends' => 'status:1',
+                'channel_based' => true,
             ], [
                 'name' => 'site_key',
                 'title' => 'admin::app.configuration.index.customer.captcha.credentials.site-key',
+                'info' => 'admin::app.configuration.index.customer.captcha.credentials.site-key-info',
                 'type' => 'text',
-                'depends' => 'status:true',
                 'validation' => 'required_if:status,1',
+                'depends' => 'status:1',
                 'channel_based' => true,
-                'locale_based' => false,
             ], [
-                'name' => 'secret_key',
-                'title' => 'admin::app.configuration.index.customer.captcha.credentials.secret-key',
+                'name' => 'score_threshold',
+                'title' => 'admin::app.configuration.index.customer.captcha.credentials.score-threshold',
+                'info' => 'admin::app.configuration.index.customer.captcha.credentials.score-threshold-info',
                 'type' => 'text',
-                'depends' => 'status:true',
-                'validation' => 'required_if:status,1',
+                'validation' => 'required_if:status,1|decimal:1',
+                'default' => '0.5',
+                'depends' => 'status:1',
                 'channel_based' => true,
-                'locale_based' => false,
             ],
         ],
     ], [
@@ -1359,22 +1330,7 @@ return [
         'info' => 'admin::app.configuration.index.customer.settings.settings-info',
         'icon' => 'settings/settings.svg',
         'sort' => 3,
-    ],
-    // [
-    //     'key'    => 'customer.settings.login_as_customer',
-    //     'name'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title',
-    //     'info'   => 'admin::app.configuration.index.customer.settings.login-as-customer.title-info',
-    //     'sort'   => 1,
-    //     'fields' => [
-    //         [
-    //             'name'         => 'login',
-    //             'title'        => 'admin::app.configuration.index.customer.settings.login-as-customer.allow-option',
-    //             'type'         => 'boolean',
-    //             'default'      => 1,
-    //         ],
-    //     ],
-    // ],
-    [
+    ], [
         'key' => 'customer.settings.wishlist',
         'name' => 'admin::app.configuration.index.customer.settings.wishlist.title',
         'info' => 'admin::app.configuration.index.customer.settings.wishlist.title-info',
@@ -1614,7 +1570,7 @@ return [
         'key' => 'emails',
         'name' => 'admin::app.configuration.index.email.title',
         'info' => 'admin::app.configuration.index.email.info',
-        'sort' => 4,
+        'sort' => 5,
     ], [
         'key' => 'emails.configure',
         'name' => 'admin::app.configuration.index.email.email-settings.title',
@@ -1622,27 +1578,78 @@ return [
         'icon' => 'settings/email.svg',
         'sort' => 1,
     ], [
-        'key' => 'emails.configure.email_settings',
-        'name' => 'admin::app.configuration.index.email.email-settings.title',
-        'info' => 'admin::app.configuration.index.email.email-settings.info',
+        'key' => 'emails.configure.smtp',
+        'name' => 'admin::app.configuration.index.email.smtp.title',
+        'info' => 'admin::app.configuration.index.email.smtp.info',
         'sort' => 1,
         'fields' => [
             [
-                'name' => 'sender_name',
-                'title' => 'admin::app.configuration.index.email.email-settings.email-sender-name',
+                'name' => 'driver_notice',
+                'title' => 'admin::app.configuration.index.email.smtp.driver-notice',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.smtp-driver-notice',
+            ],
+            [
+                'name' => 'host',
+                'title' => 'admin::app.configuration.index.email.smtp.host',
                 'type' => 'text',
-                'info' => 'admin::app.configuration.index.email.email-settings.email-sender-name-tip',
+                'validation' => 'required',
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.host'),
+            ], [
+                'name' => 'port',
+                'title' => 'admin::app.configuration.index.email.smtp.port',
+                'type' => 'text',
+                'validation' => 'required|numeric',
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.port'),
+            ], [
+                'name' => 'encryption',
+                'title' => 'admin::app.configuration.index.email.smtp.encryption',
+                'type' => 'select',
+                'options' => [
+                    ['title' => 'TLS',  'value' => 'tls'],
+                    ['title' => 'SSL',  'value' => 'ssl'],
+                    ['title' => 'None', 'value' => 'none'],
+                ],
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.encryption', 'tls'),
+            ], [
+                'name' => 'username',
+                'title' => 'admin::app.configuration.index.email.smtp.username',
+                'type' => 'text',
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.username'),
+            ], [
+                'name' => 'password',
+                'title' => 'admin::app.configuration.index.email.smtp.password',
+                'type' => 'password',
+                'channel_based' => false,
+                'default' => config('mail.mailers.smtp.password'),
+            ],
+        ],
+    ], [
+        'key' => 'emails.configure.email_settings',
+        'name' => 'admin::app.configuration.index.email.email-settings.title',
+        'info' => 'admin::app.configuration.index.email.email-settings.info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'sender_name',
+                'title' => 'admin::app.configuration.index.email.email-settings.sender-name',
+                'type' => 'text',
+                'info' => 'admin::app.configuration.index.email.email-settings.sender-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.from.name'),
+                'default' => config('mail.from.name'),
             ], [
-                'name' => 'shop_email_from',
-                'title' => 'admin::app.configuration.index.email.email-settings.shop-email-from',
+                'name' => 'sender_email',
+                'title' => 'admin::app.configuration.index.email.email-settings.sender-email',
                 'type' => 'text',
-                'info' => 'admin::app.configuration.index.email.email-settings.shop-email-from-tip',
+                'info' => 'admin::app.configuration.index.email.email-settings.sender-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.from.address'),
+                'default' => config('mail.from.address'),
             ], [
                 'name' => 'admin_name',
                 'title' => 'admin::app.configuration.index.email.email-settings.admin-name',
@@ -1650,7 +1657,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.admin-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.admin.name'),
+                'default' => config('mail.admin.name'),
             ], [
                 'name' => 'admin_email',
                 'title' => 'admin::app.configuration.index.email.email-settings.admin-email',
@@ -1658,7 +1665,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.admin-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.admin.address'),
+                'default' => config('mail.admin.address'),
             ], [
                 'name' => 'contact_name',
                 'title' => 'admin::app.configuration.index.email.email-settings.contact-name',
@@ -1666,7 +1673,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.contact-name-tip',
                 'validation' => 'required|max:50',
                 'channel_based' => true,
-                'default_value' => config('mail.contact.name'),
+                'default' => config('mail.contact.name'),
             ], [
                 'name' => 'contact_email',
                 'title' => 'admin::app.configuration.index.email.email-settings.contact-email',
@@ -1674,7 +1681,7 @@ return [
                 'info' => 'admin::app.configuration.index.email.email-settings.contact-email-tip',
                 'validation' => 'required|email',
                 'channel_based' => true,
-                'default_value' => config('mail.contact.address'),
+                'default' => config('mail.contact.address'),
             ],
         ],
     ], [
@@ -1756,7 +1763,7 @@ return [
         'key' => 'sales',
         'name' => 'admin::app.configuration.index.sales.title',
         'info' => 'admin::app.configuration.index.sales.info',
-        'sort' => 5,
+        'sort' => 6,
     ], [
         'key' => 'sales.shipping',
         'name' => 'admin::app.configuration.index.sales.shipping-setting.title',
@@ -1921,12 +1928,18 @@ return [
         'icon' => 'settings/payment-method.svg',
         'sort' => 3,
     ], [
-        'key' => 'sales.payment_methods.cashondelivery',
-        'name' => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery',
-        'info' => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery-info',
+        'key' => 'sales.payment_methods.stripe',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.stripe',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.stripe-info',
         'sort' => 1,
         'fields' => [
             [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
                 'name' => 'title',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type' => 'text',
@@ -1938,6 +1951,7 @@ return [
                 'name' => 'description',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.description',
                 'type' => 'textarea',
+                'depends' => 'active:1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -1945,6 +1959,487 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
                 'type' => 'image',
                 'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.api-key',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.applicable-production',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'api_publishable_key',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.api-publishable-key',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.applicable-production',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'api_test_key',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.api-test-key',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.applicable-sandbox',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'api_test_publishable_key',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.api-test-publishable-key',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.applicable-sandbox',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.payment_methods.razorpay',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.razorpay',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.razorpay-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'validation' => 'required',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'validation' => 'max:200',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'merchant_name',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-name',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required',
+                'validation' => 'max:200',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'merchant_desc',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'validation' => 'max:200',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'client_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-id',
+                'type' => 'text',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.production-mode-info',
+                'depends' => 'active:1',
+                'validation' => 'max:200',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'client_secret',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'type' => 'password',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.production-mode-info',
+                'depends' => 'active:1',
+                'validation' => 'max:200',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'test_client_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.test-client-id',
+                'type' => 'text',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.test-mode-info',
+                'validation' => 'max:200',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'test_client_secret',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.test-client-secret',
+                'type' => 'password',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.test-mode-info',
+                'depends' => 'active:1',
+                'validation' => 'max:200',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.payment_methods.payu',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.payu',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.payu-info',
+        'sort' => 3,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'merchant_key',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-key',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.payu-merchant-key-info',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'merchant_salt',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-salt',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.payu-merchant-salt-info',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.payment_methods.phonepe',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.phonepe',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'client_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-id',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-client-id-info',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'client_secret',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-client-secret-info',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'merchant_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-id',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-merchant-info',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.payment_methods.paypal_smart_button',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
+        'sort' => 5,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'client_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-id',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'client_secret',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'accepted_currencies',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.payment_methods.paypal_standard',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.paypal-standard',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.paypal-standard-info',
+        'sort' => 6,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'business_account',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.business-account',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],  [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.payment_methods.cashondelivery',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery-info',
+        'sort' => 7,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'depends' => 'active:1',
                 'channel_based' => true,
                 'locale_based' => false,
                 'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
@@ -1952,20 +2447,20 @@ return [
                 'name' => 'instructions',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.instructions',
                 'type' => 'textarea',
+                'depends' => 'active:1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
                 'name' => 'generate_invoice',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.generate-invoice',
                 'type' => 'boolean',
-                'default_value' => false,
+                'depends' => 'active:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
                 'name' => 'invoice_status',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
-                'depends' => 'generate_invoice:1',
-                'validation' => 'required_if:generate_invoice,1',
+                'depends' => 'active:1',
                 'type' => 'select',
                 'options' => [
                     [
@@ -1983,6 +2478,7 @@ return [
                 'name' => 'order_status',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.set-order-status',
                 'type' => 'select',
+                'depends' => 'active:1',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
@@ -1999,39 +2495,28 @@ return [
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
-                'name' => 'active',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
-                'type' => 'boolean',
-                'channel_based' => true,
-                'locale_based' => false,
-            ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ],
-                ],
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
             ],
         ],
     ], [
         'key' => 'sales.payment_methods.moneytransfer',
         'name' => 'admin::app.configuration.index.sales.payment-methods.money-transfer',
         'info' => 'admin::app.configuration.index.sales.payment-methods.money-transfer-info',
-        'sort' => 2,
+        'sort' => 8,
         'fields' => [
             [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
                 'name' => 'title',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.title',
                 'type' => 'text',
@@ -2043,6 +2528,7 @@ return [
                 'name' => 'description',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.description',
                 'type' => 'textarea',
+                'depends' => 'active:1',
                 'channel_based' => true,
                 'locale_based' => true,
             ], [
@@ -2050,20 +2536,20 @@ return [
                 'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
                 'type' => 'image',
                 'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
-                'channel_based' => false,
+                'depends' => 'active:1',
+                'channel_based' => true,
                 'locale_based' => false,
                 'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
             ], [
                 'name' => 'generate_invoice',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.generate-invoice',
                 'type' => 'boolean',
-                'default_value' => false,
+                'depends' => 'active:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
                 'name' => 'invoice_status',
-                'depends' => 'generate_invoice:1',
-                'validation' => 'required_if:generate_invoice,1',
+                'depends' => 'active:1',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.set-invoice-status',
                 'type' => 'select',
                 'options' => [
@@ -2082,6 +2568,7 @@ return [
                 'name' => 'order_status',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.set-order-status',
                 'type' => 'select',
+                'depends' => 'active:1',
                 'options' => [
                     [
                         'title' => 'admin::app.configuration.index.sales.payment-methods.pending',
@@ -2101,192 +2588,17 @@ return [
                 'name' => 'mailing_address',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.mailing-address',
                 'type' => 'textarea',
-                'channel_based' => true,
-                'locale_based' => true,
-            ], [
-                'name' => 'active',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
-                'type' => 'boolean',
+                'depends' => 'active:1',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [
                 'name' => 'sort',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ],
-                ],
-            ],
-        ],
-    ], [
-        'key' => 'sales.payment_methods.paypal_standard',
-        'name' => 'admin::app.configuration.index.sales.payment-methods.paypal-standard',
-        'info' => 'admin::app.configuration.index.sales.payment-methods.paypal-standard-info',
-        'sort' => 3,
-        'fields' => [
-            [
-                'name' => 'title',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type' => 'text',
+                'type' => 'number',
                 'depends' => 'active:1',
-                'validation' => 'required_if:active,1',
-                'channel_based' => true,
-                'locale_based' => true,
-            ], [
-                'name' => 'description',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
-                'type' => 'textarea',
-                'channel_based' => true,
-                'locale_based' => true,
-            ], [
-                'name' => 'image',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
-                'type' => 'image',
-                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
-                'channel_based' => false,
-                'locale_based' => false,
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
-            ], [
-                'name' => 'business_account',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.business-account',
-                'type' => 'text',
-                'depends' => 'active:1',
-                'validation' => 'required_if:active,1',
+                'validation' => 'required_if:active,1|integer|min:1',
                 'channel_based' => true,
                 'locale_based' => false,
-            ],  [
-                'name' => 'active',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
-                'type' => 'boolean',
-                'channel_based' => true,
-                'locale_based' => false,
-            ], [
-                'name' => 'sandbox',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
-                'type' => 'boolean',
-                'channel_based' => true,
-                'locale_based' => false,
-            ], [
-                'name' => 'sort',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ],
-                ],
-            ],
-        ],
-    ], [
-        'key' => 'sales.payment_methods.paypal_smart_button',
-        'name' => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
-        'info' => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
-        'sort' => 4,
-        'fields' => [
-            [
-                'name' => 'title',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
-                'type' => 'text',
-                'depends' => 'active:1',
-                'validation' => 'required_if:active,1',
-                'channel_based' => true,
-                'locale_based' => true,
-            ], [
-                'name' => 'description',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
-                'type' => 'textarea',
-                'channel_based' => true,
-                'locale_based' => true,
-            ], [
-                'name' => 'image',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
-                'type' => 'image',
-                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
-                'channel_based' => false,
-                'locale_based' => false,
-                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
-            ], [
-                'name' => 'client_id',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.client-id',
-                'info' => 'admin::app.configuration.index.sales.payment-methods.client-id-info',
-                'type' => 'text',
-                'depends' => 'active:1',
-                'validation' => 'required_if:active,1',
-                'channel_based' => true,
-                'locale_based' => false,
-            ], [
-                'name' => 'client_secret',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.client-secret',
-                'info' => 'admin::app.configuration.index.sales.payment-methods.client-secret-info',
-                'type' => 'text',
-                'depends' => 'active:1',
-                'validation' => 'required_if:active,1',
-                'channel_based' => true,
-                'locale_based' => false,
-                'default' => 'CLIENT_SECRET',
-            ], [
-                'name' => 'accepted_currencies',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
-                'info' => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
-                'type' => 'text',
-                'depends' => 'active:1',
-                'validation' => 'required_if:active,1',
-                'channel_based' => true,
-                'locale_based' => false,
-                'default' => 'USD',
-            ], [
-                'name' => 'active',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
-                'type' => 'boolean',
-                'channel_based' => true,
-                'locale_based' => false,
-            ], [
-                'name' => 'sandbox',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
-                'type' => 'boolean',
-                'channel_based' => true,
-                'locale_based' => false,
-            ], [
-                'name' => 'sort',
-                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
-                'type' => 'select',
-                'options' => [
-                    [
-                        'title' => '1',
-                        'value' => 1,
-                    ], [
-                        'title' => '2',
-                        'value' => 2,
-                    ], [
-                        'title' => '3',
-                        'value' => 3,
-                    ], [
-                        'title' => '4',
-                        'value' => 4,
-                    ],
-                ],
             ],
         ],
     ], [
@@ -2835,6 +3147,165 @@ return [
                 'type' => 'text',
                 'default' => 'Get Up To 30% OFF on your 1st order',
                 'validation' => 'max:200',
+            ],
+        ],
+    ], [
+        'key' => 'sales.rma',
+        'name' => 'admin::app.configuration.index.sales.rma.title',
+        'info' => 'admin::app.configuration.index.sales.rma.info',
+        'icon' => 'settings/store-information.svg',
+        'sort' => 8,
+    ], [
+        'key' => 'sales.rma.setting',
+        'name' => 'admin::app.configuration.index.sales.rma.setting.title',
+        'info' => 'admin::app.configuration.index.sales.rma.setting.info',
+        'fields' => [
+            [
+                'name' => 'default_allow_days',
+                'title' => 'admin::app.configuration.index.sales.rma.default-allow-days',
+                'info' => 'admin::app.configuration.index.sales.rma.days-info',
+                'type' => 'text',
+                'validation' => 'required|numeric',
+                'default' => '7',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'return_policy',
+                'title' => 'admin::app.configuration.index.sales.rma.return-policy',
+                'type' => 'textarea',
+                'validation' => 'required',
+                'default' => '7 days return policy.',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'allowed_file_extension',
+                'title' => 'admin::app.configuration.index.sales.rma.allowed-file-extension',
+                'validation' => 'required',
+                'default' => 'image/jpg,image/jpeg,image/png,image/webp',
+                'type' => 'multiselect',
+                'options' => [
+                    [
+                        'title' => 'JPG',
+                        'value' => 'image/jpg',
+                    ], [
+                        'title' => 'JPEG',
+                        'value' => 'image/jpeg',
+                    ], [
+                        'title' => 'PNG',
+                        'value' => 'image/png',
+                    ], [
+                        'title' => 'WEBP',
+                        'value' => 'image/webp',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'allowed_new_rma_request_for_cancelled_request',
+                'title' => 'admin::app.configuration.index.sales.rma.allowed-request-cancelled-request',
+                'type' => 'select',
+                'validation' => 'required',
+                'default' => 'yes',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.rma.yes',
+                        'value' => 'yes',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.rma.no',
+                        'value' => 'no',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'allowed_new_rma_request_for_declined_request',
+                'title' => 'admin::app.configuration.index.sales.rma.allowed-request-declined-request',
+                'type' => 'select',
+                'validation' => 'required',
+                'default' => 'yes',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.rma.yes',
+                        'value' => 'yes',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.rma.no',
+                        'value' => 'no',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'select_allowed_product_type',
+                'title' => 'admin::app.configuration.index.sales.rma.allow-product-type-for-rma',
+                'type' => 'multiselect',
+                'default' => 'simple,configurable,bundle,grouped',
+                'options' => [
+                    [
+                        'title' => 'product::app.type.simple',
+                        'value' => 'simple',
+                    ], [
+                        'title' => 'product::app.type.configurable',
+                        'value' => 'configurable',
+                    ], [
+                        'title' => 'product::app.type.bundle',
+                        'value' => 'bundle',
+                    ], [
+                        'title' => 'product::app.type.grouped',
+                        'value' => 'grouped',
+                    ],
+                ],
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.eu_withdrawal',
+        'name' => 'admin::app.eu_withdrawal.config.title',
+        'info' => 'admin::app.eu_withdrawal.config.info',
+        'icon' => 'settings/eu-withdrawal.svg',
+        'sort' => 12,
+    ], [
+        'key' => 'sales.eu_withdrawal.general',
+        'name' => 'admin::app.eu_withdrawal.config.general.title',
+        'info' => 'admin::app.eu_withdrawal.config.general.info',
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.eu_withdrawal.config.general.enabled',
+                'info' => 'admin::app.eu_withdrawal.config.general.enabled_info',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+                'default' => 0,
+            ],
+        ],
+    ],
+
+    /**
+     * Cache Management.
+     */
+    [
+        'key' => 'cache_management',
+        'name' => 'admin::app.configuration.index.cache-management.title',
+        'info' => 'admin::app.configuration.index.cache-management.info',
+        'sort' => 7,
+    ], [
+        'key' => 'cache_management.general',
+        'name' => 'admin::app.configuration.index.cache-management.general.title',
+        'info' => 'admin::app.configuration.index.cache-management.general.info',
+        'icon' => 'settings/settings.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'cache_management.general.cache_actions',
+        'name' => 'admin::app.configuration.index.cache-management.general.cache-actions.title',
+        'info' => 'admin::app.configuration.index.cache-management.general.cache-actions.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'cache_management_ui',
+                'title' => 'admin::app.configuration.index.cache-management.general.cache-actions.title',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.cache-management',
             ],
         ],
     ],

@@ -1,19 +1,21 @@
 import { test, expect } from "../setup";
-import { loginAsCustomer, addAddress, addWishlist } from "../utils/customer";
+import { loginAsCustomer } from "../utils/customer";
 import {
     generateFirstName,
     generateLastName,
     generatePhoneNumber,
     generateEmail,
 } from "../utils/faker";
-import { downloadableOrder, generateOrder } from "../utils/order";
-import { ProductCreation } from "../pages/product";
+import { ProductCreation } from "../pages/admin/catalog/products/ProductCreatePage";
+import { CustomerPage } from "../pages/shop/CustomerPage";
+import { AddressPage } from "../pages/shop/AddressPage";
+import { OrderPage } from "../pages/shop/OrderPage";
+import { AuthPage } from "../pages/shop/AuthPage";
 import path from "path";
 import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 const imagePath = path.resolve(__dirname, "../data/images/images.jpeg");
 
 function generateRandomDate() {
@@ -38,11 +40,9 @@ function generateRandomDate() {
 }
 
 test("should display correct message when email verfication is off", async ({
-    page,
+    shopPage,
 }) => {
-    /**
-     * Customer registration
-     */
+    const authPage = new AuthPage(shopPage);
     const credentials = {
         firstName: generateFirstName(),
         lastName: generateLastName(),
@@ -50,66 +50,28 @@ test("should display correct message when email verfication is off", async ({
         password: "admin123",
     };
 
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Sign Up" }).click();
-    await page.waitForLoadState("networkidle");
-    await page.getByPlaceholder("First Name").fill(credentials.firstName);
-    await page.getByPlaceholder("Last Name").fill(credentials.lastName);
-    await page.getByPlaceholder("email@example.com").fill(credentials.email);
-    await page
-        .getByPlaceholder("Password", { exact: true })
-        .fill(credentials.password);
-    await page.getByPlaceholder("Confirm Password").fill(credentials.password);
-
-    const agreementLocator = page.locator("#agreement").nth(1);
-
-    const isVisible = await agreementLocator.isVisible();
-
-    if (isVisible) {
-        await page.getByText("I agree with this statement.").click();
-    }
-
-    await page
-        .locator("#main form div")
-        .filter({ hasText: "Subscribe to newsletter" })
-        .locator("label")
-        .first()
-        .click();
-    await page.waitForTimeout(1000);
-    await page.getByRole("button", { name: "Register" }).click();
-
-    await expect(
-        page.getByText("Account created successfully.").first(),
-    ).toBeVisible();
+    await authPage.register(credentials);
 });
 
 test("should display correct message when email verfication is on", async ({
-    page,
+    shopPage,
+    adminPage,
 }) => {
-    await page.goto("admin/configuration/customer/settings");
-    await page
-        .getByRole("textbox", { name: "Email Address" })
-        .fill("admin@example.com");
-    await page.getByRole("textbox", { name: "Password" }).fill("admin123");
-    await page.waitForTimeout(1000);
-    await page.getByRole("button", { name: "Sign In" }).click();
-    await page.waitForLoadState("networkidle");
-    const toggle = page.locator(
+    await adminPage.goto("admin/configuration/customer/settings");
+    const toggle = adminPage.locator(
         "div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5",
     );
 
     if (!(await toggle.isChecked())) {
         await toggle.click();
     }
-    await page.getByRole("button", { name: "Save Configuration" }).click();
+    await adminPage.getByRole("button", { name: "Save Configuration" }).click();
     await expect(
-        page.locator("#app").getByText("Configuration saved successfully"),
+        adminPage.locator("#app").getByText("Configuration saved successfully"),
     ).toBeVisible();
 
-    /**
-     * Customer registration
-     */
+    // Register new user
+    const authPage = new AuthPage(shopPage);
     const credentials = {
         firstName: generateFirstName(),
         lastName: generateLastName(),
@@ -117,336 +79,166 @@ test("should display correct message when email verfication is on", async ({
         password: "admin123",
     };
 
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Sign Up" }).click();
-    await page.waitForLoadState("networkidle");
-    await page.getByPlaceholder("First Name").fill(credentials.firstName);
-    await page.getByPlaceholder("Last Name").fill(credentials.lastName);
-    await page.getByPlaceholder("email@example.com").fill(credentials.email);
-    await page
-        .getByPlaceholder("Password", { exact: true })
-        .fill(credentials.password);
-    await page.getByPlaceholder("Confirm Password").fill(credentials.password);
-
-    const agreementLocator = page.locator("#agreement").nth(1);
-
-    const isVisible = await agreementLocator.isVisible();
-
-    if (isVisible) {
-        await page.getByText("I agree with this statement.").click();
-    }
-
-    await page
-        .locator("#main form div")
-        .filter({ hasText: "Subscribe to newsletter" })
-        .locator("label")
-        .first()
-        .click();
-    await page.waitForTimeout(2000);
-    await page.getByRole("button", { name: "Register" }).click();
-
+    await authPage.register(credentials);
     await expect(
-        page
+        shopPage
             .getByText(
                 "Account created successfully, an e-mail has been sent for verification.",
             )
             .first(),
     ).toBeVisible();
 
-    /**
-     * turn off again email verfication for further tests
-     */
-    await page.goto("admin/configuration/customer/settings");
-    await page.waitForLoadState("networkidle");
-    await page
+    // Disable email verification
+    await adminPage.goto("admin/configuration/customer/settings");
+    await adminPage.waitForLoadState("networkidle");
+    await adminPage
         .locator("div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5")
         .click();
-    await page.getByRole("button", { name: "Save Configuration" }).click();
+    await adminPage.getByRole("button", { name: "Save Configuration" }).click();
     await expect(
-        page.locator("#app").getByText("Configuration saved successfully"),
+        adminPage.locator("#app").getByText("Configuration saved successfully"),
     ).toBeVisible();
 });
 
-test("should edit a profile", async ({ page }) => {
-    const credentials = await loginAsCustomer(page);
+test("should edit a profile", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    const credentials = await loginAsCustomer(shopPage);
 
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Profile" }).click();
-    await page.getByRole("link", { name: "Edit" }).click();
-    await page.getByRole("textbox", { name: "First Name" }).click();
-    await page
-        .getByRole("textbox", { name: "First Name" })
-        .fill(credentials.firstName);
-    await page.getByRole("textbox", { name: "Last Name" }).click();
-    await page
-        .getByRole("textbox", { name: "Last Name" })
-        .fill(credentials.lastName);
-    await page.getByPlaceholder("Email", { exact: true }).click();
-    await page
-        .getByPlaceholder("Email", { exact: true })
-        .fill(credentials.email);
-    await page.getByPlaceholder("Phone").click();
-    await page.getByPlaceholder("Phone").fill(generatePhoneNumber());
-    await page.getByLabel("shop::app.customers.account.").selectOption("Male");
-    await page.getByRole("textbox", { name: "Date of Birth" }).click();
-    await page
-        .getByRole("textbox", { name: "Date of Birth" })
-        .fill(generateRandomDate());
-    /**
-     * Upload profile image
-     */
-    const profileImageInput = page.getByLabel("Add Image/Video");
-    await profileImageInput.setInputFiles(imagePath);
-    await page.getByRole("button", { name: "Save" }).click();
-
-    await expect(
-        page.getByText("Profile updated successfully").first(),
-    ).toBeVisible();
+    await customerPage.gotoProfilePage();
+    await customerPage.editProfile({
+        firstName: credentials.firstName,
+        lastName: credentials.lastName,
+        email: credentials.email,
+        phone: generatePhoneNumber(),
+        gender: "Male",
+        dob: generateRandomDate(),
+    });
 });
 
-test("Should display profile photo after saving profile again without any changes", async ({
-    page,
-}) => {
-    const credentials = await loginAsCustomer(page);
+test("should upload profile image", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    await loginAsCustomer(shopPage);
 
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Profile" }).click();
-    await page.getByRole("link", { name: "Edit" }).click();
-    await page.getByRole("textbox", { name: "First Name" }).click();
-    await page
-        .getByRole("textbox", { name: "First Name" })
-        .fill(credentials.firstName);
-    await page.getByRole("textbox", { name: "Last Name" }).click();
-    await page
-        .getByRole("textbox", { name: "Last Name" })
-        .fill(credentials.lastName);
-    await page.getByPlaceholder("Email", { exact: true }).click();
-    await page
-        .getByPlaceholder("Email", { exact: true })
-        .fill(credentials.email);
-    await page.getByPlaceholder("Phone").click();
-    await page.getByPlaceholder("Phone").fill(generatePhoneNumber());
-    await page.getByLabel("shop::app.customers.account.").selectOption("Male");
-    await page.getByRole("textbox", { name: "Date of Birth" }).click();
-    await page
-        .getByRole("textbox", { name: "Date of Birth" })
-        .fill(generateRandomDate());
-    /**
-     * Upload profile image
-     */
-    const profileImageInput = page.getByLabel("Add Image/Video");
-    await profileImageInput.setInputFiles(imagePath);
-
-    /**
-     * Save profile
-     */
-    await page.getByRole("button", { name: "Save" }).click();
-    await expect(
-        page.getByText("Profile updated successfully").first(),
-    ).toBeVisible();
-
-    /**
-     * Again save profile without any changes
-     */
-    await page.getByRole("link", { name: "Edit" }).click();
-    await page.getByRole("button", { name: "Save" }).click();
-    await expect(
-        page.getByText("Profile updated successfully").first(),
-    ).toBeVisible();
-
-    /**
-     * Verify profile photo should be visible
-     */
-    await page.getByRole("link", { name: "Edit" }).click();
-    const uploadedImage = page.locator('img[alt="Uploaded Image"]');
-
-    await expect(uploadedImage).toBeVisible();
+    await customerPage.gotoProfilePage();
+    await customerPage.uploadProfileImage(imagePath);
+    await customerPage.verifyImageUploaded();
 });
 
-test("should add an address", async ({ page }) => {
-    await loginAsCustomer(page);
+test("should add an address", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    const addressPage = new AddressPage(shopPage);
+    await loginAsCustomer(shopPage);
 
-    await addAddress(page);
+    await customerPage.gotoHome();
+    await customerPage.openProfile();
+    await customerPage.seeProfile();
+    await customerPage.clickProfileLink("Address");
+
+    await addressPage.addAddress({
+        companyName: "Webkul",
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        streetAddress: "123 Main St",
+        country: "US",
+        state: "AL",
+        city: "New York",
+        postCode: "10001",
+        phone: generatePhoneNumber(),
+    });
 });
 
-test("should edit an address", async ({ page }) => {
-    await loginAsCustomer(page);
+test("should edit an address", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    const addressPage = new AddressPage(shopPage);
+    await loginAsCustomer(shopPage);
 
-    await addAddress(page);
+    await customerPage.gotoHome();
+    await customerPage.openProfile();
+    await customerPage.seeProfile();
+    await customerPage.clickProfileLink("Address");
 
-    await page.getByLabel("More Options").first().click();
-    await page.getByRole("link", { name: "Edit" }).click();
-    await page.getByPlaceholder("Company Name").click();
-    await page.getByPlaceholder("Company Name").fill("webkul1");
-    await page.getByPlaceholder("First Name").click();
-    await page.getByPlaceholder("First Name").click();
-    await page.getByPlaceholder("First Name").fill("User1");
-    await page.getByPlaceholder("Last Name").click();
-    await page.getByPlaceholder("Last Name").fill("Demo1");
-    await page.getByPlaceholder("Email", { exact: true }).click();
-    await page.getByPlaceholder("Email", { exact: true }).fill(generateEmail());
-    await page.getByPlaceholder("Vat ID").click();
-    await page.getByPlaceholder("Street Address").click();
-    await page.getByPlaceholder("Street Address").fill("123ghds1");
-    await page.getByLabel("Country").selectOption("IN");
-    await page.locator("#state").selectOption("TR");
-    await page.getByPlaceholder("City").click();
-    await page.getByPlaceholder("City").fill("noida");
-    await page.getByPlaceholder("Post Code").click();
-    await page.getByPlaceholder("Post Code").fill("201301");
-    await page.getByPlaceholder("Phone").click();
-    await page.getByPlaceholder("Phone").fill("9876543219");
-    await page.getByRole("button", { name: "Update" }).click();
+    await addressPage.addAddress({
+        companyName: "Webkul",
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        streetAddress: "123 Main St",
+        country: "US",
+        state: "AL",
+        city: "New York",
+        postCode: "10001",
+        phone: generatePhoneNumber(),
+    });
 
-    await expect(
-        page.getByText("Address updated successfully.").first(),
-    ).toBeVisible();
+    await addressPage.editAddress({
+        companyName: "webkul1",
+        firstName: "User1",
+        lastName: "Demo1",
+        email: generateEmail(),
+        streetAddress: "123ghds1",
+        country: "IN",
+        state: "TR",
+        city: "noida",
+        postCode: "201301",
+        phone: "9876543219",
+    });
 });
 
-test("should set the default address", async ({ page }) => {
-    await loginAsCustomer(page);
+test("should set the default address", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    const addressPage = new AddressPage(shopPage);
+    await loginAsCustomer(shopPage);
 
-    await addAddress(page);
+    await customerPage.gotoHome();
+    await customerPage.openProfile();
+    await customerPage.seeProfile();
+    await customerPage.clickProfileLink("Address");
 
-    await page.getByLabel("More Options").first().click();
-    await page.getByRole("button", { name: "Set as Default" }).click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
+    await addressPage.addAddress({
+        companyName: "Webkul",
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        streetAddress: "123 Main St",
+        country: "US",
+        state: "AL",
+        city: "New York",
+        postCode: "10001",
+        phone: generatePhoneNumber(),
+    });
 
-    await expect(page.getByText("Default Address").first()).toBeVisible();
+    await addressPage.setDefaultAddress();
 });
 
-test("should delete the address", async ({ page }) => {
-    await loginAsCustomer(page);
+test("should delete the address", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    const addressPage = new AddressPage(shopPage);
+    await loginAsCustomer(shopPage);
 
-    await addAddress(page);
+    await customerPage.gotoHome();
+    await customerPage.openProfile();
+    await customerPage.seeProfile();
+    await customerPage.clickProfileLink("Address");
 
-    await page.getByLabel("More Options").first().click();
-    await page.getByRole("link", { name: "Delete" }).click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
+    await addressPage.addAddress({
+        companyName: "Webkul",
+        firstName: generateFirstName(),
+        lastName: generateLastName(),
+        email: generateEmail(),
+        streetAddress: "123 Main St",
+        country: "US",
+        state: "AL",
+        city: "New York",
+        postCode: "10001",
+        phone: generatePhoneNumber(),
+    });
 
-    await expect(
-        page.getByText("Address successfully deleted").first(),
-    ).toBeVisible();
+    await addressPage.deleteAddress();
 });
 
-test("should be able to reorder", async ({ page }) => {
-    await generateOrder(page);
-
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Orders", exact: true }).click();
-    await page.locator("div").locator("span.icon-eye").first().click();
-    await page.getByRole("link", { name: "Reorder" }).click();
-
-    await page.getByRole("button", { name: "Update Cart" }).click();
-
-    await expect(
-        page.getByText("Quantity updated successfully").first(),
-    ).toBeVisible();
-});
-
-test("should be able to cancel order", async ({ page }) => {
-    await generateOrder(page);
-
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Orders", exact: true }).click();
-    await page.locator("div").locator("span.icon-eye").first().click();
-    await page.getByRole("link", { name: "Cancel" }).click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
-
-    await page.waitForTimeout(5000);
-    await expect(page.locator('td[data-value="Item Status"]')).toContainText(
-        "Canceled",
-    );
-});
-
-test("should be able to print invoice", async ({ page }) => {
-    await generateOrder(page);
-
-    /**
-     * Login to admin panel.
-     */
-    const adminCredentials = {
-        email: "admin@example.com",
-        password: "admin123",
-    };
-    await page.goto("admin/login");
-    await page.getByPlaceholder("Email Address").click();
-    await page.getByPlaceholder("Email Address").fill(adminCredentials.email);
-    await page.getByPlaceholder("Password").click();
-    await page.getByPlaceholder("Password").fill(adminCredentials.password);
-    await page.getByRole("button", { name: "Sign In" }).click();
-
-    /**
-     * Create invoice
-     */
-    await page.goto("admin/sales/orders");
-    await page.locator(".row > div:nth-child(4) > a").first().click();
-    await page.getByText("Invoice", { exact: true }).click();
-    await page.locator("#can_create_transaction").nth(1).click();
-    await page.getByRole("button", { name: "Create Invoice" }).click();
-    await expect(
-        page.getByText("Invoice created successfully Close"),
-    ).toBeVisible();
-    await expect(
-        page.locator("span").filter({ hasText: "Processing" }),
-    ).toBeVisible();
-
-    /**
-     * check invoice to customer side.
-     */
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Orders", exact: true }).click();
-    await page.locator("div").locator("span.icon-eye").first().click();
-    await page.getByRole("button", { name: "Invoices" }).click();
-    const downloadPromise = page.waitForEvent("download");
-    await page.getByRole("link", { name: " Print" }).click();
-    await downloadPromise;
-});
-
-test("should able to download downloadable orders", async ({ shopPage }) => {
-    /**
-     * Login to admin panel.
-     */
-    const adminCredentials = {
-        email: "admin@example.com",
-        password: "admin123",
-    };
-
-    await shopPage.goto("admin/login");
-    await shopPage.getByPlaceholder("Email Address").click();
-    await shopPage
-        .getByPlaceholder("Email Address")
-        .fill(adminCredentials.email);
-    await shopPage.getByPlaceholder("Password").click();
-    await shopPage.getByPlaceholder("Password").fill(adminCredentials.password);
-    await shopPage.getByRole("button", { name: "Sign In" }).click();
-
-    /**
-     * Create downloadable product.
-     */
-    const productName = await downloadableOrder(shopPage);
-
-    /**
-     * Go to shop for download a product.
-     */
-    await shopPage.goto("");
-    await shopPage.getByLabel("Profile").click();
-    await shopPage.getByRole("link", { name: "Profile", exact: true }).click();
-    await shopPage
-        .getByRole("link", { name: " Downloadable Products " })
-        .click();
-    const popupPromise = shopPage.waitForEvent("popup").catch(() => null);
-    const downloadPromise = shopPage.waitForEvent("download").catch(() => null);
-    await shopPage.getByRole("link", { name: productName }).click();
-    const result = await Promise.race([popupPromise, downloadPromise]);
-});
-
-test.describe("add wishlist flow", () => {
-    test.beforeEach("should create simple product to add in wishlist", async ({ adminPage }) => {
+test.describe("customer actions", () => {
+    test("should create simple product", async ({ adminPage }) => {
         const productCreation = new ProductCreation(adminPage);
 
         await productCreation.createProduct({
@@ -461,73 +253,240 @@ test.describe("add wishlist flow", () => {
         });
     });
 
-    test("should add wishlist to cart", async ({ page }) => {
-        await loginAsCustomer(page);
+    test("should be able to reorder", async ({ shopPage }) => {
+        const customerPage = new CustomerPage(shopPage);
+        const orderPage = new OrderPage(shopPage);
+        const addressPage = new AddressPage(shopPage);
+        await loginAsCustomer(shopPage);
 
-        await addWishlist(page);
-        await page.goto("");
-        await page.getByLabel("Profile").click();
-        await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-        await page.getByRole("button", { name: "Move To Cart" }).first().click();
+        // Add address
+        await customerPage.gotoHome();
+        await customerPage.openProfile();
+        await customerPage.seeProfile();
+        await customerPage.clickProfileLink("Address");
+
+        await addressPage.addAddress({
+            companyName: "Webkul",
+            firstName: generateFirstName(),
+            lastName: generateLastName(),
+            email: generateEmail(),
+            streetAddress: "123 Main St",
+            country: "US",
+            state: "AL",
+            city: "New York",
+            postCode: "10001",
+            phone: generatePhoneNumber(),
+        });
+
+        // Create an order
+        await customerPage.gotoHome();
+        await customerPage.searchProduct("simple");
+        await customerPage.addFirstProductToCart();
+
+        await shopPage.getByRole("button", { name: "Shopping Cart" }).click();
+        await shopPage
+            .getByRole("link", { name: "Continue to Checkout" })
+            .click();
+
+        await shopPage
+            .locator(
+                'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]',
+            )
+            .nth(0)
+            .click();
+        await shopPage.getByRole("button", { name: "Proceed" }).click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.waitForSelector("text=Free Shipping");
+        await shopPage.getByText("Free Shipping").first().click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.waitForSelector("text=Cash On Delivery");
+        await shopPage.getByText("Cash On Delivery").first().click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.getByRole("button", { name: "Place Order" }).click();
+        await shopPage.waitForTimeout(2000);
+
+        // Now navigate to orders and reorder
+        await orderPage.gotoOrdersPage();
+        await orderPage.viewFirstOrder();
+        await orderPage.reorderFirstOrder();
+    });
+
+    test("should be able to cancel order", async ({ shopPage }) => {
+        const customerPage = new CustomerPage(shopPage);
+        const orderPage = new OrderPage(shopPage);
+        const addressPage = new AddressPage(shopPage);
+        await loginAsCustomer(shopPage);
+
+        await customerPage.gotoHome();
+        await customerPage.openProfile();
+        await customerPage.seeProfile();
+        await customerPage.clickProfileLink("Address");
+
+        await addressPage.addAddress({
+            companyName: "Webkul",
+            firstName: generateFirstName(),
+            lastName: generateLastName(),
+            email: generateEmail(),
+            streetAddress: "123 Main St",
+            country: "US",
+            state: "AL",
+            city: "New York",
+            postCode: "10001",
+            phone: generatePhoneNumber(),
+        });
+
+        // Create an order
+        await customerPage.gotoHome();
+        await customerPage.searchProduct("simple");
+        await customerPage.addFirstProductToCart();
+
+        await shopPage.getByRole("button", { name: "Shopping Cart" }).click();
+        await shopPage
+            .getByRole("link", { name: "Continue to Checkout" })
+            .click();
+
+        await shopPage
+            .locator(
+                'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]',
+            )
+            .nth(0)
+            .click();
+        await shopPage.getByRole("button", { name: "Proceed" }).click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.waitForSelector("text=Free Shipping");
+        await shopPage.getByText("Free Shipping").first().click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.waitForSelector("text=Cash On Delivery");
+        await shopPage.getByText("Cash On Delivery").first().click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.getByRole("button", { name: "Place Order" }).click();
+        await shopPage.waitForTimeout(2000);
+
+        // Cancel the order
+        await orderPage.gotoOrdersPage();
+        await orderPage.viewFirstOrder();
+        await orderPage.cancelFirstOrder();
+    });
+
+    test("should be able to print invoice", async ({ shopPage, adminPage }) => {
+        const customerPage = new CustomerPage(shopPage);
+        const orderPage = new OrderPage(shopPage);
+        const addressPage = new AddressPage(shopPage);
+        await loginAsCustomer(shopPage);
+
+        await customerPage.gotoHome();
+        await customerPage.openProfile();
+        await customerPage.seeProfile();
+        await customerPage.clickProfileLink("Address");
+
+        await addressPage.addAddress({
+            companyName: "Webkul",
+            firstName: generateFirstName(),
+            lastName: generateLastName(),
+            email: generateEmail(),
+            streetAddress: "123 Main St",
+            country: "US",
+            state: "AL",
+            city: "New York",
+            postCode: "10001",
+            phone: generatePhoneNumber(),
+        });
+
+        // Create an order
+        await customerPage.gotoHome();
+        await customerPage.searchProduct("simple");
+        await customerPage.addFirstProductToCart();
+
+        await shopPage.getByRole("button", { name: "Shopping Cart" }).click();
+        await shopPage
+            .getByRole("link", { name: "Continue to Checkout" })
+            .click();
+
+        await shopPage
+            .locator(
+                'span[class="icon-checkout-address text-6xl text-navyBlue max-sm:text-5xl"]',
+            )
+            .nth(0)
+            .click();
+        await shopPage.getByRole("button", { name: "Proceed" }).click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.waitForSelector("text=Free Shipping");
+        await shopPage.getByText("Free Shipping").first().click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.waitForSelector("text=Cash On Delivery");
+        await shopPage.getByText("Cash On Delivery").first().click();
+        await shopPage.waitForTimeout(2000);
+        await shopPage.getByRole("button", { name: "Place Order" }).click();
+        await shopPage.waitForTimeout(2000);
+
+        // Create invoice from admin
+        const adminCredentials = {
+            email: "admin@example.com",
+            password: "admin123",
+        };
+        await adminPage.goto("admin/sales/orders");
+        await adminPage.locator(".row > div:nth-child(4) > a").first().click();
+        await adminPage.getByText("Invoice", { exact: true }).click();
+        await adminPage.locator("#can_create_transaction").nth(1).click();
+        await adminPage.getByRole("button", { name: "Create Invoice" }).click();
 
         await expect(
-            page
-                .getByRole("paragraph")
-                .filter({ hasText: "Item Successfully Moved to Cart" }),
+            adminPage.getByText("Invoice created successfully Close"),
+        ).toBeVisible();
+
+        // Go back to shop and download invoice
+        await orderPage.gotoOrdersPage();
+        await orderPage.viewFirstOrder();
+        await orderPage.printInvoice();
+    });
+
+    test("should add wishlist to cart", async ({ shopPage }) => {
+        const customerPage = new CustomerPage(shopPage);
+        await loginAsCustomer(shopPage);
+
+        await customerPage.gotoHome();
+        await customerPage.searchProduct("simple");
+        await customerPage.addFirstProductToWishlist();
+
+        await shopPage.goto("customer/account/wishlist");
+        await customerPage.moveFirstWishlistItemToCart();
+        await expect(
+            shopPage.getByText("Item Successfully Moved To Cart").first(),
         ).toBeVisible();
     });
 });
 
-test("should remove product from wishlist", async ({ page }) => {
-    await loginAsCustomer(page);
+test("should remove product from wishlist", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    await loginAsCustomer(shopPage);
 
-    await addWishlist(page);
+    await customerPage.gotoHome();
+    await customerPage.searchProduct("simple");
+    await customerPage.addFirstProductToWishlist();
 
-    await page.goto("");
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Wishlist", exact: true }).click();
-    await page.locator(".max-md\\:hidden > .flex").first().click();
-    await page.getByRole("button", { name: "Agree", exact: true }).click();
-    await expect(
-        page.getByText("Item Successfully Removed From Wishlist").first(),
-    ).toBeVisible();
+    await shopPage.goto("");
+    await customerPage.openProfile();
+    await customerPage.clickProfileLink("Wishlist");
+
+    await customerPage.removeFirstWishlistItem();
 });
 
-test("should change password", async ({ page }) => {
-    const credentials = await loginAsCustomer(page);
+test("should change password", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    const credentials = await loginAsCustomer(shopPage);
 
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Profile" }).click();
-    await page.getByRole("link", { name: "Edit" }).click();
-    await page.getByPlaceholder("Phone").click();
-    await page.getByPlaceholder("Phone").fill(generatePhoneNumber());
-    await page.getByLabel("shop::app.customers.account.").selectOption("Male");
-    await page.getByPlaceholder("Current Password").click();
-    await page.getByPlaceholder("Current Password").fill(credentials.password);
-    await page.getByPlaceholder("New Password").click();
-    await page.getByPlaceholder("New Password").fill("testUser@1234");
-    await page.getByPlaceholder("Confirm Password").click();
-    await page.getByPlaceholder("Confirm Password").fill("testUser@1234");
-    await page.getByRole("button", { name: "Save" }).click();
-
-    await expect(
-        page.getByText("Profile updated successfully").first(),
-    ).toBeVisible();
+    await customerPage.gotoProfilePage();
+    await customerPage.changePassword({
+        currentPassword: credentials.password,
+        newPassword: "testUser@1234",
+        confirmPassword: "testUser@1234",
+    });
 });
 
-test("should delete a profile", async ({ page }) => {
-    const credentials = await loginAsCustomer(page);
+test("should delete a profile", async ({ shopPage }) => {
+    const customerPage = new CustomerPage(shopPage);
+    const credentials = await loginAsCustomer(shopPage);
 
-    await page.getByLabel("Profile").click();
-    await page.getByRole("link", { name: "Profile" }).click();
-    await page.getByText("Delete Profile").first().click();
-    await page.getByPlaceholder("Enter your password").click();
-    await page
-        .getByPlaceholder("Enter your password")
-        .fill(credentials.password);
-    await page.getByRole("button", { name: "Delete" }).click();
-
-    await expect(
-        page.getByText("Customer deleted successfully").first(),
-    ).toBeVisible();
+    await customerPage.gotoProfilePage();
+    await customerPage.deleteProfile(credentials.password);
 });

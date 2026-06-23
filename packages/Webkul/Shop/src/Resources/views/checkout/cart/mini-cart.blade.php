@@ -83,7 +83,7 @@
                             {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.image.before') !!}
 
                             <div class="">
-                                <a :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`">
+                                <a :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)">
                                     <img
                                         :src="item.base_image.small_image_url"
                                         class="max-w-28 max-h-28 rounded-xl max-md:max-h-20 max-md:max-w-[76px]"
@@ -101,7 +101,7 @@
 
                                     <a
                                     class="max-w-4/5 max-md:w-full"
-                                    :href="`{{ route('shop.product_or_category.index', '') }}/${item.product_url_key}`"
+                                    :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)"
                                 >
                                         <p class="text-base font-medium max-md:font-normal max-sm:text-sm">
                                             @{{ item.name }}
@@ -378,6 +378,16 @@
         {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.after') !!}
     </script>
 
+    @php
+        /**
+         * When the cart is empty there is nothing to fetch, so the mini-cart is
+         * seeded with an empty cart server-side. This avoids an `/api/checkout/cart`
+         * request (and a `Cart::collectTotals()` recalculation) on every page view
+         * for the common case of a guest with no cart.
+         */
+        $hasCartItems = (bool) \Webkul\Checkout\Facades\Cart::getCart()?->items->isNotEmpty();
+    @endphp
+
     <script type="module">
         app.component("v-mini-cart", {
             template: '#v-mini-cart-template',
@@ -386,7 +396,7 @@
                 return  {
                     refreshKey: 0,
 
-                    cart: null,
+                    cart: {!! $hasCartItems ? 'null' : json_encode(['items_qty' => 0, 'items' => []]) !!},
 
                     isLoading:false,
 

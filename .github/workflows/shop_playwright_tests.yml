@@ -18,8 +18,8 @@ jobs:
         operating-systems: [ubuntu-latest]
         php-versions: ['8.3']
         node-version: ['22.13.1']
-        shard-index: [1,2,3,4,5,6]
-        shard-total: [6]
+        shard-index: [1,2,3,4,5,6,7,8,9,10]
+        shard-total: [10]
 
     name: Shop | Playwright Tests | Shard ${{ matrix.shard-index }} Of ${{ matrix.shard-total }}
 
@@ -89,7 +89,7 @@ jobs:
 
       - name: Run All Playwright Tests
         env:
-          BASE_URL: 'http://127.0.0.1:8000'
+          BASE_URL: "http://127.0.0.1:8000"
         run: |
           npx playwright test --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
         working-directory: packages/Webkul/Shop

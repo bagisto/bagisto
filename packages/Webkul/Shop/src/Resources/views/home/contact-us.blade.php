@@ -16,7 +16,10 @@
                 @lang('shop::app.home.contact.about')
             </p>
 
-            <div class="mt-14 rounded max-sm:mt-8">
+            <div
+                id="contact-us-form"
+                class="mt-14 rounded max-sm:mt-8"
+            >
                 <!-- Contact Form -->
                 <x-shop::form :action="route('shop.home.contact_us.send_mail')">
                     <!-- Name -->
@@ -107,7 +110,7 @@
                         <x-shop::form.control-group class="mt-5">
                             {!! \Webkul\Customer\Facades\Captcha::render() !!}
 
-                            <x-shop::form.control-group.error control-name="g-recaptcha-response" />
+                            <x-shop::form.control-group.error control-name="recaptcha_token" />
                         </x-shop::form.control-group>
                     @endif
 

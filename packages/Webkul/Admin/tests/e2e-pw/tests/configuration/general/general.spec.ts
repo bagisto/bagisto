@@ -1,45 +1,22 @@
-import { test, expect } from "../../../setup";
+import { test } from "../../../setup";
+import { GeneralConfigurationPage } from "../../../pages/admin/configuration/general/GeneralConfigurationPage";
 
 test.describe("general configuration", () => {
     test.beforeEach(async ({ adminPage }) => {
-        /**
-         * Navigate to the configuration page.
-         */
-        await adminPage.goto("admin/configuration/general/general");
+        await new GeneralConfigurationPage(adminPage).open();
     });
 
     test("should update weight unit", async ({ adminPage }) => {
-        await adminPage.selectOption(
-            'select[name="general[general][locale_options][weight_unit]"]',
-            "lbs"
-        );
-        const weightUnitSelect = adminPage.locator(
-            'select[name="general[general][locale_options][weight_unit]"]'
-        );
-        await expect(weightUnitSelect).toHaveValue("lbs");
+        const page = new GeneralConfigurationPage(adminPage);
 
-        await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+        await page.updateWeightUnit("lbs");
+        await page.saveAndVerify();
     });
 
     test("should update breadcrumbs status", async ({ adminPage }) => {
-        await adminPage.click(
-            'label[for="general[general][breadcrumbs][shop]"]'
-        );
+        const page = new GeneralConfigurationPage(adminPage);
 
-        await adminPage.click('button[type="submit"].primary-button:visible');
-
-        /**
-         * Verify the change is saved.
-         */
-        await expect(
-            adminPage.getByText("Configuration saved successfully")
-        ).toBeVisible();
+        await page.toggleBreadcrumbs();
+        await page.saveAndVerify();
     });
 });

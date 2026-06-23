@@ -33,6 +33,8 @@ class Downloadable extends AbstractType
         'depth',
         'manage_stock',
         'guest_checkout',
+        'allow_rma',
+        'rma_rule_id',
     ];
 
     /**

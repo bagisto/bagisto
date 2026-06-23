@@ -98,7 +98,7 @@
 
                                                         <!-- If Allow Single Value -->
                                                         <span
-                                                            v-text="column.filterable_options.find((option => option.value === getAppliedColumnValues(column.index)))?.label ?? '@lang('admin::app.components.datagrid.filters.select')'"
+                                                            v-text="column.filterable_options.find((option => option.value === getAppliedColumnValues(column.index)))?.label ?? '@lang('shop::app.components.datagrid.filters.select')'"
                                                             v-else
                                                         >
                                                         </span>
@@ -460,7 +460,7 @@
 
                                                         <!-- If Allow Single Value -->
                                                         <span
-                                                            v-text="column.filterable_options.find((option => option.value === getAppliedColumnValues(column.index)))?.label ?? '@lang('admin::app.components.datagrid.filters.select')'"
+                                                            v-text="column.filterable_options.find((option => option.value === getAppliedColumnValues(column.index)))?.label ?? '@lang('shop::app.components.datagrid.toolbar.filter.dropdown.select')'"
                                                             v-else
                                                         >
                                                         </span>
@@ -578,7 +578,7 @@
                                 @click="applyFilters"
                                 :disabled="! isFilterDirty"
                             >
-                                @lang('admin::app.components.datagrid.toolbar.filter.apply-filters-btn')
+                                @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
                             </button>
                         </div>
                     </x-slot>

@@ -1,26 +1,22 @@
 # UPGRADE Guide
 
-- [Upgrading To v2.3 From v2.2](#upgrading-to-v23-from-v22)
+- [Upgrading To v2.4 From v2.3](#upgrading-to-v24-from-v23)
 
 ## High Impact Changes
 
-- [Updating Dependencies](#updating-dependencies)
+- [Laravel 12 Upgrade](#laravel-12-upgrade)
 
-- [Application Structure](#application-structure)
+- [Google reCAPTCHA Enterprise Integration](#google-recaptcha-enterprise-integration)
+
+- [PayPal SDK Upgrade](#paypal-sdk-upgrade)
+
+- [Visitor Tracking Removed](#visitor-tracking-removed)
 
 ## Medium Impact Changes
 
-- [Environment Keys Changes](#environment-keys-changes)
+- [Magic AI — Laravel AI SDK Migration](#magic-ai--laravel-ai-sdk-migration)
 
-## Low Impact Changes
-
-- [Removed Publishable Stuffs](#removed-publishable-stuffs)
-
-- [Removal of Aliases and Singleton Facade Registry](#removal-of-aliases-and-singleton-facade-registry)
-
-- [Schedule Commands Moved To Package](#schedule-commands-moved-to-package)
-
-## Upgrading To v2.3 From v2.2
+## Upgrading To v2.4 From v2.3
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
@@ -29,256 +25,480 @@
 
 **Impact Probability: High**
 
-#### PHP 8.2.0 Required
+#### PHP 8.3 Required
 
-We have upgraded to Laravel 11 and Laravel now requires PHP 8.2.0 or greater.
+Bagisto v2.4.x now requires PHP 8.3 or greater.
 
-#### Composer Dependencies
-
-We have handled most of the dependencies mentioned by Laravel, so there is no need for further action on your part. 
-
-#### NPM Depenencies
-
-We have upgraded the NPM dependencies to Vite 5 and the Laravel Vite Plugin to version 1.0. This update will not affect your work unless you are working directly on the package. In that case, you need to rename the file postcss.config.js to postcss.config.cjs. Below are the changes required in your package file:
-
-```diff
-- module.exports = {
--  plugins: {
--    tailwindcss: {},
--    autoprefixer: {},
--  },
-- }
-
-+ module.exports = ({ env }) => ({
-+     plugins: [require("tailwindcss")(), require("autoprefixer")()],
-+ });
-```
-
-### Application Structure
+### Laravel 12 Upgrade
 
 **Impact Probability: High**
 
-With Laravel 11, a new default application structure has been introduced, resulting in a leaner setup with fewer default files. This update reduces the number of service providers, middleware, and configuration files in the framework.
+Bagisto v2.4 has been upgraded to Laravel 12, which introduces stricter type checking and modernized date/time handling.
 
-Since Bagisto is built on top of Laravel, we have also updated Bagisto to Laravel 11 and adopted the same streamlined approach to maintain compatibility. For more detailed information, please refer to the [Laravel documentation](https://laravel.com/docs/11.x). 
+#### Carbon Type Strictness
 
-### Environment Keys Changes
+Laravel 12 enforces stricter type checking for Carbon date/time operations. If your custom code uses Carbon methods, ensure you're passing the correct parameter types:
+
+**Integer/Float Parameters Required**
+
+Carbon methods like `addDays()`, `subDays()`, etc., now require integer or float values, not strings:
+
+```diff
+- Carbon::now()->addDays('1')
++ Carbon::now()->addDays(1)
+
+- Carbon::now()->subDays('7')
++ Carbon::now()->subDays(7)
+```
+
+**Non-Null Timezones**
+
+Methods that accept timezone parameters no longer accept `null` values. Use a fallback:
+
+```diff
+- $date->setTimezone($channel->timezone)
++ $date->setTimezone($channel->timezone ?: config('app.timezone'))
+```
+
+#### Date Function Modernization
+
+If you're using legacy PHP date functions in your custom code, consider migrating to Carbon for better Laravel 12 compatibility:
+
+```diff
+- strtotime($date)
++ \Carbon\Carbon::parse($date)->timestamp
+
+- date('Y-m-d H:i:s')
++ \Carbon\Carbon::now()->format('Y-m-d H:i:s')
+
+- date('Y-m-d')
++ \Carbon\Carbon::now()->format('Y-m-d')
+
+- date_default_timezone_set($timezone)
++ \Carbon\Carbon::now($timezone) // Isolated to instance
+```
+
+#### PDF Response Headers
+
+Laravel 12 has updated the format for PDF response headers. If you're generating PDFs in your custom code, update the Content-Disposition header:
+
+```diff
+- 'Content-Disposition' => 'attachment; filename="'.$fileName.'"',
++ 'Content-Disposition' => 'attachment; filename='.$fileName,
+```
+
+#### Testing Updates
+
+If you have custom test cases, ensure all test data includes required fields that may have been added in migrations. For example, if new foreign keys have been introduced, make sure your test factories and test data include these fields.
+
+### Google reCAPTCHA Enterprise Integration
+
+**Impact Probability: High**
+
+Bagisto v2.4 has migrated from Google reCAPTCHA v2 to Google reCAPTCHA Enterprise, which introduces significant changes to the implementation and configuration.
+
+#### Configuration Changes
+
+The following configuration keys have changed:
+
+**v2.3 Configuration:**
+- `customer.captcha.credentials.site_key`
+- `customer.captcha.credentials.secret_key`
+
+**v2.4 Configuration:**
+- `customer.captcha.credentials.site_key`
+- `customer.captcha.credentials.project_id` (new)
+- `customer.captcha.credentials.api_key` (replaces secret_key)
+- `customer.captcha.credentials.score_threshold` (new)
+
+#### API Endpoint Changes
+
+**v2.3:**
+- Used standard reCAPTCHA v2 verification endpoint.
+
+**v2.4:**
+- Now uses Google reCAPTCHA Enterprise API: `https://recaptchaenterprise.googleapis.com/v1/projects/{project_id}/assessments`.
+- Requires a valid Google Cloud Project ID.
+
+#### Form Field Changes
+
+The captcha token field name has changed:
+
+**v2.3:**
+```php
+'g-recaptcha-response' => 'required|captcha'
+```
+
+**v2.4:**
+```php
+'recaptcha_token' => 'required|captcha'
+```
+
+#### Migration Steps
+
+1. **Update Configuration:**
+
+   Here are the details for updating the configuration to support Google reCAPTCHA Enterprise in Bagisto v2.4. You will need to update the configuration with the new keys and values as described below.
+
+   **Obtain Google Cloud Project ID:**
+   - Visit [Google Cloud Console](https://console.cloud.google.com/).
+   - Create a new project or select an existing one from the project dropdown.
+   - Note your Project ID from the project dashboard (not the project name).
+
+   **Generate API Key:**
+   - In Google Cloud Console, navigate to **APIs & Services → Credentials**.
+   - Click **Create Credentials → API Key**.
+   - Copy the generated API key.
+
+   **Create reCAPTCHA Site Key:**
+   - Navigate to **Security → reCAPTCHA** in Google Cloud Console.
+   - Click **Create Key**.
+   - Enter a display name for your key.
+   - Select **Website** as the platform type.
+   - Choose **Score-based (reCAPTCHA v3)** as the reCAPTCHA type.
+   - Add your domain(s) in the **Domains** section (e.g., `example.com`).
+   - Click **Create** and copy the generated site key.
+
+   **Configure in Bagisto Admin Panel:**
+   - Log in to your Bagisto admin panel.
+   - Navigate to **Configuration → Customer → Captcha**.
+   - Set **Status** to **Yes** to enable captcha.
+   - Enter your **Project ID** (from step 1).
+   - Enter your **API Key** (from step 2).
+   - Enter your **Site Key** (from step 3).
+   - Set **Score Threshold** (0.0 to 1.0, recommended: 0.5 for balanced security).
+   - Click **Save Configuration**.
+
+2. **Update Form Submissions:**
+   - Replace `g-recaptcha-response` field name with `recaptcha_token` in all forms using captcha.
+   - Update any custom validation rules referencing the old field name.
+
+3. **Update Frontend Implementation:**
+   - The captcha now renders as a hidden field instead of a visible checkbox.
+   - Update your frontend JavaScript to handle the new implementation.
+   - The captcha client endpoint remains similar but uses the Enterprise version: `https://www.google.com/recaptcha/enterprise.js`.
+
+4. **Review Validation Messages:**
+   - Translation keys remain the same (`customer::app.validations.captcha.required` and `customer::app.validations.captcha.captcha`).
+   - No changes required to translation files.
+
+#### Behavioral Changes
+
+**v2.3:**
+- Used checkbox-based reCAPTCHA v2.
+- Binary pass/fail validation.
+
+**v2.4:**
+- Uses invisible reCAPTCHA Enterprise.
+- Risk-based scoring system (0.0 to 1.0).
+- Validation passes only if score >= configured threshold.
+- Enhanced logging for debugging.
+
+#### Code Example
+
+If you have custom implementations using the Captcha class:
+
+**v2.3:**
+```php
+// Old implementation
+$captcha->getSecretKey();
+
+$rules = ['g-recaptcha-response' => 'required|captcha'];
+```
+
+**v2.4:**
+```php
+// New implementation
+$captcha->getProjectId();
+$captcha->getApiKey();
+$captcha->getScoreThreshold();
+$rules = ['recaptcha_token' => 'required|captcha'];
+```
+
+#### Troubleshooting
+
+The new implementation includes comprehensive logging. Check your logs for:
+- `reCAPTCHA: Validation failed.` - Configuration or token issues.
+- `reCAPTCHA: Assessment response received.` - Successful API communication.
+- `reCAPTCHA: Validation result.` - Score and threshold comparison.
+
+Ensure your Google Cloud Project has:
+- reCAPTCHA Enterprise API enabled.
+- Valid API key with proper permissions.
+- Site key configured for your domain.
+
+### PayPal SDK Upgrade
+
+**Impact Probability: High**
+
+Bagisto v2.4 has upgraded from the abandoned `paypal/paypal-checkout-sdk` v1.0.1 to the modern `paypal/paypal-server-sdk` v2.0, which introduces significant changes to the implementation and improves reliability and security.
+
+#### Dependency Changes
+
+The PayPal SDK dependency has changed:
+
+**v2.3 Dependency:**
+```json
+"paypal/paypal-checkout-sdk": "1.0.1"
+```
+
+**v2.4 Dependency:**
+```json
+"paypal/paypal-server-sdk": "^2.0"
+```
+
+#### Namespace Changes
+
+If you have custom PayPal implementations, the following namespace imports need to be updated:
+
+**v2.3 Imports:**
+```php
+use PayPalCheckoutSdk\Core\PayPalHttpClient;
+use PayPalCheckoutSdk\Core\ProductionEnvironment;
+use PayPalCheckoutSdk\Core\SandboxEnvironment;
+use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
+use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
+use PayPalCheckoutSdk\Orders\OrdersGetRequest;
+use PayPalCheckoutSdk\Payments\CapturesRefundRequest;
+```
+
+**v2.4 Imports:**
+```php
+use PaypalServerSdkLib\PaypalServerSdkClientBuilder;
+use PaypalServerSdkLib\Authentication\ClientCredentialsAuthCredentialsBuilder;
+use PaypalServerSdkLib\Environment;
+```
+
+#### Client Initialization Changes
+
+The client initialization method has changed significantly:
+
+**v2.3:**
+```php
+$environment = $isSandbox 
+    ? new SandboxEnvironment($clientId, $clientSecret)
+    : new ProductionEnvironment($clientId, $clientSecret);
+
+$client = new PayPalHttpClient($environment);
+```
+
+**v2.4:**
+```php
+$environment = $isSandbox 
+    ? Environment::SANDBOX 
+    : Environment::PRODUCTION;
+
+$client = PaypalServerSdkClientBuilder::init()
+    ->clientCredentialsAuthCredentials(
+        ClientCredentialsAuthCredentialsBuilder::init(
+            $clientId,
+            $clientSecret
+        )
+    )
+    ->environment($environment)
+    ->build();
+```
+
+#### API Method Changes
+
+The way API requests are made has changed:
+
+**v2.3:**
+```php
+// Create order
+$request = new OrdersCreateRequest();
+$request->headers["prefer"] = "return=representation";
+$request->body = $orderData;
+$response = $client->execute($request);
+
+// Capture order
+$request = new OrdersCaptureRequest($orderId);
+$response = $client->execute($request);
+```
+
+**v2.4:**
+```php
+// Create order
+$ordersController = $client->getOrdersController();
+$response = $ordersController->createOrder([
+    'body' => $orderData,
+    'prefer' => 'return=representation'
+]);
+
+// Capture order
+$response = $ordersController->captureOrder($orderId, [
+    'prefer' => 'return=representation'
+]);
+```
+
+#### Response Handling Changes
+
+Response object access has changed:
+
+**v2.3:**
+```php
+// Direct property access
+$orderId = $response->result->id;
+$status = $response->result->status;
+$captureId = $response->result->purchase_units[0]->payments->captures[0]->id;
+```
+
+**v2.4:**
+```php
+// Getter methods
+$result = $response->getResult();
+$orderId = $result->getId();
+$status = $result->getStatus();
+$captureId = $result->getPurchaseUnits()[0]->getPayments()->getCaptures()[0]->getId();
+```
+
+#### Transaction Handling Architecture Change
+
+**v2.3:**
+- Used event-driven listener pattern.
+- Transactions created via `sales.invoice.save.after` event.
+- Required separate `Transaction.php` listener class.
+
+**v2.4:**
+- Uses direct controller-based transaction creation.
+- Transactions created immediately after invoice/order creation.
+- No event listeners required.
+
+#### Migration Steps
+
+1. **Update Dependencies:**
+
+   ```bash
+   composer remove paypal/paypal-checkout-sdk
+   composer require paypal/paypal-server-sdk:^2.0
+   ```
+
+2. **Update Custom Implementations:**
+
+   If you have custom PayPal integrations:
+   
+   - Update namespace imports to use `PaypalServerSdkLib\*`.
+   - Replace client initialization with builder pattern.
+   - Update API calls to use controller methods.
+   - Replace direct property access with getter methods.
+   - Remove any event-driven transaction listeners.
+
+3. **Test PayPal Functionality:**
+
+   - Test order creation in sandbox environment.
+   - Verify order capture works correctly.
+   - Test refund functionality.
+   - Verify IPN/webhook notifications are processed.
+   - Test production environment configuration.
+
+4. **Review Configuration:**
+
+   No changes required to PayPal configuration in admin panel. All existing settings (Client ID, Client Secret, sandbox mode) work as before.
+
+#### Behavioral Changes
+
+**v2.3:**
+- Used older SDK with deprecated dependencies.
+- Event-driven transaction handling.
+
+**v2.4:**
+- Modern SDK with active support and updates.
+- Direct transaction handling for better reliability.
+- Improved error handling and logging.
+- OAuth 2.0 Client Credentials authentication.
+- Built-in retry logic for API calls.
+
+### Visitor Tracking Removed
+
+**Impact Probability: High**
+
+Bagisto v2.4 has completely removed the `shetabit/visitor` package and all visitor tracking functionality. This is a breaking change if your custom code relies on visitor data.
+
+#### What Was Removed
+
+- The `shetabit/visitor` Composer dependency
+- The `visitor()` helper function
+- The `visits` database table (no longer created or used)
+- The `Visitable` trait from Product and Category models
+- The `Visitor` trait from the Customer model
+- Dashboard "Total Visitors" widget
+- Reporting "Products With Most Visits" section
+- Reporting "Customers Traffic" section
+- Purchase funnel "Total Visits" and "Product Views" metrics
+- All visitor-related translation keys
+- `config/visitor.php` configuration file
+- `Webkul\Core\Visitor`, `Webkul\Core\Models\Visit`, `Webkul\Core\Repositories\VisitRepository`
+- `Webkul\Core\Jobs\UpdateCreateVisitIndex`, `Webkul\Core\Jobs\UpdateCreateVisitableIndex`
+- `Webkul\Core\Listeners\ResponseCacheHit`
+- `Webkul\Admin\Helpers\Reporting\Visitor`
+
+#### Migration Steps
+
+1. **Remove custom visitor code:**
+
+   If your custom code calls `visitor()->visit()` or uses the `Visitable`/`Visitor` traits, remove those references:
+
+   ```diff
+   - use Shetabit\Visitor\Traits\Visitable;
+
+   - class MyModel extends Model {
+   -     use Visitable;
+   - }
+
+   - visitor()->visit($model);
+   ```
+
+2. **Remove the Composer dependency (if separately required):**
+
+   ```bash
+   composer remove shetabit/visitor
+   ```
+
+3. **Drop the visits table (optional):**
+
+   If you want to clean up the database, create a migration:
+
+   ```php
+   Schema::dropIfExists('visits');
+   ```
+
+4. **Update custom dashboards/reports:**
+
+   If you built custom dashboards or reports using visitor data, replace them with an external analytics solution (e.g., Google Analytics, Plausible, Matomo).
+
+5. **Remove the visitor config check:**
+
+   If your code references `core()->getConfigData('general.general.visitor_options.enabled')`, remove it. The system configuration field no longer exists.
+
+### Magic AI — Laravel AI SDK Migration
 
 **Impact Probability: Medium**
 
-We have synchronized most of the new .env keys introduced in Laravel's latest release (version 11). Below, we have listed only the keys that have been newly added or had their names changed in this version.
+Bagisto v2.4 has migrated the Magic AI feature from direct OpenAI integration to the Laravel AI SDK (`laravel/ai`), introducing a unified multi-provider architecture.
 
-```diff
-- CACHE_DRIVER=file
-+ CACHE_STORE=file
+#### What Changed
 
-- BROADCAST_DRIVER=log
-+ BROADCAST_CONNECTION=log
+**v2.3:**
+- Direct OpenAI API integration only
+- Configuration via `config/openai.php`
 
-- QUEUE_DRIVER=sync
-+ QUEUE_CONNECTION=database
-```
+**v2.4:**
+- Unified `laravel/ai` SDK supporting 8 providers: Anthropic, DeepSeek, Gemini, Groq, Mistral, Ollama, OpenAI, xAI
+- Per-provider model enums in `Webkul\MagicAI\Enums\Models\`
+- Unified entry point via `Webkul\MagicAI\AiProvider`
+- Configuration via `config/ai.php`
 
-Additionally, the following keys have been removed to prevent the `.env` file from becoming unnecessarily large. These keys are not required unless the related services are being used. In a fresh installation of Bagisto, these keys will not be present by default; you will need to add them manually if you plan to use the corresponding services.
+#### Migration Steps
 
-```diff
-- FIXER_API_KEY=
-- EXCHANGE_RATES_API_KEY=
-- EXCHANGE_RATES_API_ENDPOINT=
+1. **Run Composer update** to install the `laravel/ai` dependency (handled automatically).
 
-- PUSHER_APP_ID=
-- PUSHER_APP_KEY=
-- PUSHER_APP_SECRET=
-- PUSHER_APP_CLUSTER=mt1
+2. **If you have custom Magic AI code:**
 
-- MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
-- MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+   Update any direct references to OpenAI-specific classes to use the new `AiProvider` unified interface:
 
-- FACEBOOK_CLIENT_ID=
-- FACEBOOK_CLIENT_SECRET=
-- FACEBOOK_CALLBACK_URL=https://yourhost.com/customer/social-login/facebook/callback
+   ```diff
+   - use OpenAI\Client;
+   + use Webkul\MagicAI\AiProvider;
+   ```
 
-- TWITTER_CLIENT_ID=
-- TWITTER_CLIENT_SECRET=
-- TWITTER_CALLBACK_URL=https://yourhost.com/customer/social-login/twitter/callback
-
-- GOOGLE_CLIENT_ID=
-- GOOGLE_CLIENT_SECRET=
-- GOOGLE_CALLBACK_URL=https://yourhost.com/customer/social-login/google/callback
-
-- LINKEDIN_CLIENT_ID=
-- LINKEDIN_CLIENT_SECRET=
-- LINKEDIN_CALLBACK_URL=https://yourhost.com/customer/social-login/linkedin-openid/callback
-
-- GITHUB_CLIENT_ID=
-- GITHUB_CLIENT_SECRET=
-- GITHUB_CALLBACK_URL=https://yourhost.com/customer/social-login/github/callback
-```
-
-### Removal of Aliases and Singleton Facade Registry
-
-**Impact Probability: Low**
-
-We have removed all aliases and the singleton facade registry. This change was made because facades are inherently singletons, making the additional registry unnecessary.
-
-#### Using Helper Methods Instead of Aliases
-
-We now strongly recommend using our helper methods instead of relying on aliases. This approach provides better IDE support, type hinting, and makes the code more explicit and easier to understand.
-
-Instead of:
-
-```diff
-- app('core')->getAllChannels()
-```
-
-Use:
-
-```diff
-+ core()->getAllChannels(); // Recommended
-```
-
-OR
-
-```diff
-+ use Webkul\Core\Facades\Core;
-
-+ Core::getAllChannels();
-```
-
-> [!NOTE]
-> Did you noticed, in the newer version of Bagisto, we have replaced all alias references with full namespaces.
-
-This change applies to all our helper methods, not just `core()`. Always prefer the helper method if one is available.
-
-### Removed Publishable Stuffs
-
-**Impact Probability: Low**
-
-We have removed all the publishable registries from the service provider, and we are no longer publishing any files. Previously, configuration files were often published manually. However, with this update, most of the configuration files have been moved directly into the default config folder, simplifying the structure and eliminating the need for manual publishing.
-
-For instance, if you look at the **Core** package, there were previously four configuration files located in the `Config` folder of the package:
-
-```diff
-- packages/Webkul/Core/src/Config/*.php
-```
-
-These configuration files have now been moved to the root `config` folder:
-
-```diff
-+ config/*.php
-```
-
-This change consolidates the configuration files into a central location, following Laravel 11's convention and eliminating the need for separate publishable registries.
-
-### Schedule Commands Moved To Package
-
-**Impact Probability: Low**
-
-All scheduled commands previously registered in the Kernel have now been moved to their respective packages. Since each command belongs to a specific package, it is more appropriate for the package itself to handle its own commands. Therefore, each individual package is now responsible for registering its respective commands.
-
-```diff
-- $schedule->command('invoice:cron')->dailyAt('3:00');
-- $schedule->command('indexer:index --type=price')->dailyAt('00:01');
-- $schedule->command('product:price-rule:index')->dailyAt('00:01');
-
-+ // Core Package
-+ $schedule->command('invoice:cron')->dailyAt('3:00');
-
-+ // Product Package
-+ $schedule->command('indexer:index --type=price')->dailyAt('00:01');
-
-+ // CatalogRule Package
-+ $schedule->command('product:price-rule:index')->dailyAt('00:01');
-```
-
-### Packages
-
-Below are the specific changes we have implemented in each package:
-
-#### Core
-
-##### Unwanted Files Removed
-
-The following files have been removed as they are no longer needed:
-
-**Impact Probability: Low**
-
-- Configs
-
-```diff
-- src/Config/concord.php
-- src/Config/elasticsearch.php
-- src/Config/repository.php
-- src/Config/visitor.php
-```
-
-- Commands
-
-```diff
-- src/Console/Commands/BagistoPublish.php
-- src/Console/Commands/DownChannelCommand.php
-- src/Console/Commands/UpChannelCommand.php
-```
-
-These files have been deemed unnecessary in the current structure, streamlining the codebase and reducing clutter
-
-##### Exception Handler
-
-**Impact Probability: Low**
-
-n Bagisto, we have overridden the default Laravel 11 exception handler. Since the Laravel 11 application skeleton is now empty, we need to override the core Laravel exception handler instead of using the handler within the app directory.
-
-Additionally, the access modifiers for some of our methods have been updated.
-
-```diff
-- private function handleAuthenticationException(): void
-+ protected function handleAuthenticationException(): void
-
-- private function handleHttpException(): void
-+ protected function handleHttpException(): void
-
-- private function handleValidationException(): void
-+ protected function handleValidationException(): void
-
-- private function handleServerException(): void
-+ protected function handleServerException(): void
-```
-
-##### Maintenance Mode Middleware
-
-**Impact Probability: Low**
-
-The `CheckForMaintenanceMode` class has been removed, and a new class, `PreventRequestsDuringMaintenance`, has been introduced. In Laravel, `PreventRequestsDuringMaintenance` middleware is applied at the global level. However, in Bagisto, we have removed the middleware from the global scope and applied it at the route level.
-
-The reason for this change is that we need to display customized pages based on the current theme, and if the middleware is applied globally, the theme may not be accessible, resulting an error.
-
-```diff
-- CheckForMaintenanceMode.php
-
-+ PreventRequestsDuringMaintenance.php
-```
-
-#### DataGrid
-
-##### The `Webkul\DataGrid\DataGrid` Class
-
-**Impact Probability: Medium**
-
-1. Moved the `DataGridExport` class to the DataGrid package and enhanced the new exporter class with the `WithQuery` interface instead of `WithView`. This change reduces the need for temporary file creation.
-
-2. We have removed the `exportFile` properties and all its associated method i.e. `setExportFile` and `getExportFile`,
-
-```diff
-- protected mixed $exportFile = null;
-- public function setExportFile($format = 'csv')
-- public function getExportFile()
-```
-
-3. We have removed two methods: `processPaginatedRequest` and `processExportRequest`.
-
-```diff
-- $this->processPaginatedRequest();
-- $this->processExportRequest();
-```
-
-4. Removed all the events from the setter methods to avoid duplicate dispatching.
+3. **Update AI configuration** in Admin > Configuration > Magic AI to select your preferred provider and model.

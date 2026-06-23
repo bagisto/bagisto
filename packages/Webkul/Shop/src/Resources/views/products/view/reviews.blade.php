@@ -330,7 +330,7 @@
                     @{{ review.comment }}
                 </p>
 
-                @if ((bool) core()->getConfigData('general.magic_ai.review_translation.enabled'))
+                @if ((bool) core()->getConfigData('magic_ai.storefront_features.review_translation.enabled'))
                     <button
                         class="secondary-button min-h-[34px] rounded-lg px-2 py-1 text-sm max-md:rounded-lg"
                         @click="translate"
@@ -407,7 +407,7 @@
                 <div class="flex items-center gap-2.5">
                     <img
                         v-if="review.profile"
-                        class="flex max-h-10 min-h-10 min-w-10 max-w-10 items-center justify-center rounded-full"
+                        class="min-h-10 min-w-10 max-w-10 flex max-h-10 items-center justify-center rounded-full"
                         :src="review.profile"
                         :alt="review.name"
                         :title="review.name"
@@ -415,7 +415,7 @@
 
                     <div
                         v-else
-                        class="flex max-h-10 min-h-10 min-w-10 max-w-10 items-center justify-center rounded-full bg-zinc-100"
+                        class="min-h-10 min-w-10 max-w-10 flex max-h-10 items-center justify-center rounded-full bg-zinc-100"
                         :title="review.name"
                     >
                         <span class="text-xs font-semibold text-zinc-500">
@@ -449,7 +449,7 @@
                         @{{ review.comment }}
                     </p>
 
-                    @if ((bool) core()->getConfigData('general.magic_ai.review_translation.enabled'))
+                    @if ((bool) core()->getConfigData('magic_ai.storefront_features.review_translation.enabled'))
                         <button
                             class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-4 py-2.5 text-base max-md:rounded-lg max-sm:px-3 max-sm:py-1 max-sm:text-xs"
                             @click="translate"
@@ -486,7 +486,7 @@
                             v-if="file.type == 'image'"
                         >
                             <img
-                                class="max-h-20 min-w-20 cursor-pointer rounded-xl"
+                                class="min-w-20 max-h-20 cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -500,7 +500,7 @@
                             v-else
                         >
                             <video
-                                class="max-h-20 min-w-20 cursor-pointer rounded-xl"
+                                class="min-w-20 max-h-20 cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"

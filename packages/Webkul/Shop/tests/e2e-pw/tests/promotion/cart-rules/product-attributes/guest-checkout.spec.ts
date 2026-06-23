@@ -1,64 +1,138 @@
-import { expect, test } from "../../../../setup";
-import { ProductCreation } from "../../../../pages/product";
-import { CreateRules } from "../../../../pages/rules";
-import { loginAsCustomer } from "../../../../utils/customer";
+import { test } from "../../../../setup";
+import { expect, Page } from "@playwright/test";
+import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
+import { loginAsAdmin } from "../../../../utils/admin";
 
-let generatedName: string;
-generatedName = `Simple-${Date.now()}`;
+type CouponType = "fixed" | "percentage";
 
-test.beforeEach("should create simple product", async ({ adminPage }) => {
+async function expectCouponAppliedWithGrandTotal(
+    page: Page,
+    ruleApplyPage: RuleApplyPage,
+    discountValue: number,
+    couponType: CouponType,
+) {
+    const discountedAmount = await ruleApplyPage.calculateDiscountedAmount(
+        discountValue,
+        couponType,
+    );
+
+    const formatted =
+        Math.abs(discountedAmount) < 0.01
+            ? "$0.00"
+            : `$${discountedAmount.toFixed(2)}`;
+
+    await ruleApplyPage.applyCouponAtCheckout();
+
+    await expect(
+        page.getByText("Coupon code applied successfully.").first(),
+    ).toBeVisible();
+
+    await expect(
+        page.getByText("Grand Total").locator("..").locator("p").last(),
+    ).toContainText(formatted);
+}
+
+async function createRuleAndVerifyCoupon({
+    page,
+    operator,
+    optionSelect,
+    couponType,
+}: {
+    page: Page;
+    operator: string;
+    optionSelect: string;
+    couponType: CouponType;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+
+    await ruleCreatePage.cartRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|guest_checkout",
+        operator,
+        optionSelect,
+        couponType,
+    });
+
+    if (discountValue === undefined) throw new Error("Discount not created");
+
+    await ruleCreatePage.saveCartRule();
+
+    await expectCouponAppliedWithGrandTotal(
+        page,
+        ruleApplyPage,
+        discountValue,
+        couponType,
+    );
+}
+
+test.beforeEach(async ({ adminPage }) => {
     const productCreation = new ProductCreation(adminPage);
 
     await productCreation.createProduct({
         type: "simple",
         sku: `SKU-${Date.now()}`,
-        name: generatedName,
+        name: `Simple-${Date.now()}`,
         shortDescription: "Short desc",
         description: "Full desc",
         price: 199,
         weight: 1,
-        inventory: 199,
+        inventory: 100,
     });
 });
 
-test.afterEach("should delete the created product and rule", async ({ adminPage }) => {
-    const createRules = new CreateRules(adminPage);
-    await createRules.deleteRuleAndProduct();
+test.afterEach(async ({ adminPage }) => {
+    const ruleDeletePage = new RuleDeletePage(adminPage);
+    await ruleDeletePage.deleteRuleAndProduct();
 });
 
+const cases = [
+    {
+        operator: "==",
+        optionSelect: "1",
+        type: "fixed",
+        label: "is equal to (fixed)",
+    },
+    {
+        operator: "==",
+        optionSelect: "1",
+        type: "percentage",
+        label: "is equal to (percentage)",
+    },
+
+    {
+        operator: "!=",
+        optionSelect: "0",
+        type: "fixed",
+        label: "is not equal to (fixed)",
+    },
+    {
+        operator: "!=",
+        optionSelect: "0",
+        type: "percentage",
+        label: "is not equal to (percentage)",
+    },
+];
 
 test.describe("cart rules", () => {
-    test.describe("product attribute conditions", () => {
-        test("should apply coupon when product guest checkout condition is -> is equal to", async ({
-            page,
-        }) => {
-            const createRules = new CreateRules(page);
-            await createRules.adminlogin();
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
-                attribute: "product|guest_checkout",
-                operator: "==",
-                optionSelect: "1",
+    test.describe("product attribute condtion", () => {
+        for (const { operator, optionSelect, type, label } of cases) {
+            test(`should apply coupon when guest checkout condition is->  ${label}`, async ({
+                page,
+            }) => {
+                await createRuleAndVerifyCoupon({
+                    page,
+                    operator,
+                    optionSelect,
+                    couponType: type as CouponType,
+                });
             });
-            await createRules.saveCartRule();
-            await loginAsCustomer(page);
-            await createRules.applyCoupon();
-        });
-
-        test("should apply coupon when product guest checkout condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const createRules = new CreateRules(page);
-            await createRules.adminlogin();
-            await createRules.cartRuleCreationFlow();
-            await createRules.addCondition({
-                attribute: "product|guest_checkout",
-                operator: "!=",
-                optionSelect: "0",
-            });
-            await createRules.saveCartRule();
-            await loginAsCustomer(page);
-            await createRules.applyCoupon();
-        });
+        }
     });
 });

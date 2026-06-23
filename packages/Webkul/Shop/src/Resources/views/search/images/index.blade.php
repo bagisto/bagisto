@@ -54,9 +54,10 @@
             <input
                 type="file"
                 class="hidden"
+                accept="image/*"
                 ref="imageSearchInput"
                 :id="'v-image-search-' + $.uid"
-                @change="loadLibrary()"
+                @change="analyzeImage()"
             />
 
             <img
@@ -83,109 +84,118 @@
             },
 
             methods: {
-                /**
-                 * This method will dynamically load the scripts. Because image search library
-                 * only used when someone clicks or interact with the image button. This will
-                 * reduce some data usage for mobile user.
-                 * 
-                 * @return {void}
-                 */
-                loadLibrary() {
+                analyzeImage() {
+                    let imageInput = this.$refs.imageSearchInput;
+
+                    if (! imageInput.files || ! imageInput.files[0]) {
+                        return;
+                    }
+
+                    if (! imageInput.files[0].type.includes('image/')) {
+                        imageInput.value = '';
+
+                        this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.only-images-allowed')'});
+
+                        return;
+                    }
+
+                    if (imageInput.files[0].size > 2000000) {
+                        imageInput.value = '';
+
+                        this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.size-limit-error')'});
+
+                        return;
+                    }
+
+                    this.isSearching = true;
+
+                    let formData = new FormData();
+
+                    formData.append('image', imageInput.files[0]);
+
+                    this.$axios.post('{{ route('shop.search.upload') }}', formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            },
+                        })
+                        .then(response => {
+                            let data = response.data;
+
+                            this.uploadedImageUrl = data.image_url;
+
+                            localStorage.searchedImageUrl = data.image_url;
+
+                            if (data.engine === 'ai' && data.keywords) {
+                                this.handleAiResult(data.keywords);
+                            } else {
+                                this.handleTensorflowResult();
+                            }
+                        })
+                        .catch(() => {
+                            this.$emitter.emit('add-flash', { type: 'error', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
+
+                            this.isSearching = false;
+                        });
+                },
+
+                handleAiResult(keywords) {
+                    let terms = keywords
+                        .split(',')
+                        .map(t => t.trim())
+                        .filter(t => t.length > 0);
+
+                    if (! terms.length) {
+                        this.$emitter.emit('add-flash', { type: 'warning', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
+
+                        this.isSearching = false;
+
+                        return;
+                    }
+
+                    localStorage.searchedTerms = terms.join('_');
+
+                    window.location.href = `{{ route('shop.search.index') }}?query=${encodeURIComponent(terms[0])}&image-search=1`;
+                },
+
+                handleTensorflowResult() {
                     this.$shop.loadDynamicScript(
                         'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js', () => {
                             this.$shop.loadDynamicScript(
                                 'https://cdn.jsdelivr.net/npm/tensorflow-models-mobilenet-patch@2.1.1/dist/mobilenet.min.js', () => {
-                                    this.analyzeImage();
+                                    this.classifyWithTensorflow();
                                 }
                             );
                         }
                     );
                 },
 
-                /**
-                 * This method will analyze the image and load the sets on the bases of trained model.
-                 * 
-                 * @return {void}
-                 */
-                analyzeImage() {
-                    this.isSearching = true;
+                async classifyWithTensorflow() {
+                    try {
+                        let analysedResult = [];
 
-                    let imageInput = this.$refs.imageSearchInput;
+                        let net = await mobilenet.load();
 
-                    if (imageInput.files && imageInput.files[0]) {
-                        if (imageInput.files[0].type.includes('image/')) {
-                            if (imageInput.files[0].size <= 2000000) {
-                                let formData = new FormData();
+                        const result = await net.classify(document.getElementById('uploaded-image-url'));
 
-                                formData.append('image', imageInput.files[0]);
+                        result.forEach(function(value) {
+                            let queryString = value.className.split(',');
 
-                                this.$axios.post('{{ route('shop.search.upload') }}', formData, {
-                                        headers: {
-                                            'Content-Type': 'multipart/form-data'
-                                        }
-                                    })
-                                    .then(response => {
-                                        let net;
-
-                                        let self = this;
-
-                                        this.uploadedImageUrl = response.data;
-
-                                        async function app() {
-                                            let analysedResult = [];
-
-                                            let queryString = '';
-
-                                            net = await mobilenet.load();
-
-                                            try {
-                                                const result = await net.classify(document.getElementById('uploaded-image-url'));
-
-                                                result.forEach(function(value) {
-                                                    queryString = value.className.split(',');
-
-                                                    if (queryString.length > 1) {
-                                                        analysedResult = analysedResult.concat(queryString);
-                                                    } else {
-                                                        analysedResult.push(queryString[0]);
-                                                    }
-                                                });
-                                            } catch (error) {
-                                                this.$emitter.emit('add-flash', { type: 'error', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
-                                            }
-
-                                            localStorage.searchedImageUrl = self.uploadedImageUrl;
-
-                                            queryString = localStorage.searchedTerms = analysedResult.join('_');
-
-                                            queryString = localStorage.searchedTerms.split('_').map(term => {
-                                                return term.split(' ').join('+');
-                                            });
-
-                                            window.location.href = `${'{{ route('shop.search.index') }}'}?query=${queryString[0]}&image-search=1`;
-                                        }
-
-                                        app();
-                                    })
-                                    .catch((error) => {
-                                        this.$emitter.emit('add-flash', { type: 'error', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
-
-                                        this.isSearching = false;
-                                    });
+                            if (queryString.length > 1) {
+                                analysedResult = analysedResult.concat(queryString);
                             } else {
-                                imageInput.value = '';
-
-                                this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.size-limit-error')'});
-
-                                this.isSearching = false;
+                                analysedResult.push(queryString[0]);
                             }
-                        } else {
-                            imageInput.value = '';
+                        });
 
-                            this.$emitter.emit('add-flash', { type: 'error', message: '@lang('shop::app.search.images.index.only-images-allowed')'});
+                        localStorage.searchedTerms = analysedResult.join('_');
 
-                            this.isSearching = false;
-                        }
+                        let query = analysedResult[0].split(' ').join('+');
+
+                        window.location.href = `{{ route('shop.search.index') }}?query=${query}&image-search=1`;
+                    } catch (error) {
+                        this.$emitter.emit('add-flash', { type: 'error', message: "@lang('shop::app.search.images.index.something-went-wrong')"});
+
+                        this.isSearching = false;
                     }
                 },
             },

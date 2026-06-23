@@ -123,7 +123,7 @@
             'UAH' => 'ukrainian-hryvnia',
             'USD' => 'united-states-dollar',
             'UZS' => 'uzbekistani-som',
-            'VEF' => 'venezuelan-bolívar',
+            'VES' => 'venezuelan-bolívar',
             'VND' => 'vietnamese-dong',
             'XAF' => 'cfa-franc-beac',
             'XOF' => 'cfa-franc-bceao',
@@ -342,10 +342,10 @@
                                     </div>
 
                                     <div class="flex h-72 flex-col justify-center gap-3 overflow-y-auto px-7 py-4">
-                                        <!-- Application Name -->
+                                        <!-- Installer Language -->
                                         <x-installer::form.control-group class="mb-2.5">
                                             <x-installer::form.control-group.label>
-                                                @lang('Installation Wizard language')
+                                                @lang('installer::app.installer.index.start.language')
                                             </x-installer::form.control-group.label>
 
                                             <x-installer::form.control-group.control
@@ -406,7 +406,7 @@
                             <span class="{{ $phpVersion['supported'] ? 'icon-tick text-xl text-green-500' : '' }}"></span>
 
                             <p class="text-sm font-semibold text-gray-600">
-                                @lang('installer::app.installer.index.server-requirements.php') <span class="font-normal">(@lang('installer::app.installer.index.server-requirements.php-version'))</span>
+                                @lang('installer::app.installer.index.server-requirements.php') <span class="font-normal">(@lang('installer::app.installer.index.server-requirements.php-version', ['version' => $phpVersion['minimum']]))</span>
                             </p>
                         </div>
 
@@ -466,7 +466,7 @@
                         ref="envDatabase"
                     >
                         <form
-                            @submit.prevent="handleSubmit($event, FormSubmit)"
+                            @submit.prevent="handleSubmit($event, formSubmit)"
                             enctype="multipart/form-data"
                         >
                             <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -565,8 +565,8 @@
                                         type="text"
                                         name="db_prefix"
                                         ::value="envData.db_prefix"
-                                        ::rules="{ 
-                                            max: 4, 
+                                        ::rules="{
+                                            max: 4,
                                             regex: /^[a-zA-Z0-9_]*$/
                                         }"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-prefix')"
@@ -650,7 +650,7 @@
                         ref="envDatabase"
                     >
                         <form
-                            @submit.prevent="handleSubmit($event, FormSubmit)"
+                            @submit.prevent="handleSubmit($event, formSubmit)"
                             enctype="multipart/form-data"
                         >
                             <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -674,13 +674,19 @@
                                             <div class="flex items-center gap-1 text-sm text-gray-600">
                                                 <span class="icon-right text-xl"></span>
 
-                                                <p>@lang('installer::app.installer.index.ready-for-installation.create-database-table')</p>
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.drop-existing-tables')</p>
                                             </div>
 
                                             <div class="flex items-center gap-1 text-sm text-gray-600">
                                                 <span class="icon-right text-xl"></span>
 
-                                                <p>@lang('installer::app.installer.index.ready-for-installation.populate-database-table')</p>
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.create-database-tables')</p>
+                                            </div>
+
+                                            <div class="flex items-center gap-1 text-sm text-gray-600">
+                                                <span class="icon-right text-xl"></span>
+
+                                                <p>@lang('installer::app.installer.index.ready-for-installation.populate-database-tables')</p>
                                             </div>
                                         </div>
                                     </div>
@@ -695,7 +701,7 @@
                                     tabindex="0"
                                     @click="back"
                                 >
-                                    Back
+                                    @lang('installer::app.installer.index.back')
                                 </div>
 
                                 <button
@@ -790,7 +796,7 @@
                                     <x-installer::form.control-group.control
                                         type="text"
                                         name="app_url"
-                                        ::value="envData.app_url ?? 'https://localhost'"
+                                        ::value="envData.app_url ?? '{{ url('/') }}'"
                                         rules="required"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-url')"
                                         :placeholder="trans('installer::app.installer.index.environment-configuration.default-url-link')"
@@ -806,17 +812,15 @@
                                     </x-installer::form.control-group.label>
 
                                     @php
-                                        date_default_timezone_set('UTC');
+                                        $timezones = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
 
-                                        $tzlist = DateTimeZone::listIdentifiers(DateTimeZone::ALL);
-
-                                        $current = date_default_timezone_get();
+                                        $currentTimezone = date_default_timezone_get();
                                     @endphp
 
                                     <x-installer::form.control-group.control
                                         type="select"
                                         name="app_timezone"
-                                        ::value="envData.app_timezone ?? $current"
+                                        ::value="envData.app_timezone ?? '{{ $currentTimezone }}'"
                                         rules="required"
                                         :aria-label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
                                         :label="trans('installer::app.installer.index.environment-configuration.default-timezone')"
@@ -828,12 +832,12 @@
                                             @lang('installer::app.installer.index.environment-configuration.select-timezone')
                                         </option>
 
-                                        @foreach($tzlist as $key => $value)
+                                        @foreach($timezones as $timezone)
                                             <option
-                                                value="{{ $value }}"
-                                                {{ $value === $current ? 'selected' : '' }}
+                                                value="{{ $timezone }}"
+                                                {{ $timezone === $currentTimezone ? 'selected' : '' }}
                                             >
-                                                {{ $value }}
+                                                {{ $timezone }}
                                             </option>
                                         @endforeach
                                     </x-installer::form.control-group.control>
@@ -1008,7 +1012,7 @@
                         ref="createSampleProducts"
                     >
                         <form
-                            @submit.prevent="handleSubmit($event, FormSubmit)"
+                            @submit.prevent="handleSubmit($event, formSubmit)"
                             enctype="multipart/form-data"
                         >
                             <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -1039,14 +1043,10 @@
                                     </option>
                                 </x-installer::form.control-group.control>
 
-                                <a
-                                    href="{{ Storage::disk('public')->url('data-transfer/samples/products.csv') }}"
-                                    download="products.csv"
-                                    id="source-sample-link"
-                                    class="mt-1 cursor-pointer text-right text-sm text-blue-600 transition-all hover:underline"
-                                >
-                                    @lang('installer::app.installer.index.sample-products.download-sample')
-                                </a>
+                                <!-- Indexing Note -->
+                                <p class="text-xs text-blue-600 mt-2">
+                                    @lang('installer::app.installer.index.sample-products.note')
+                                </p>
                             </div>
 
                             <div class="flex items-center justify-end px-4 py-2.5">
@@ -1074,7 +1074,7 @@
                         ref="createAdmin"
                     >
                         <form
-                            @submit.prevent="handleSubmit($event, FormSubmit)"
+                            @submit.prevent="handleSubmit($event, formSubmit)"
                             enctype="multipart/form-data"
                         >
                             <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -1092,14 +1092,14 @@
 
                                     <x-installer::form.control-group.control
                                         type="text"
-                                        name="admin"
+                                        name="name"
                                         rules="required"
                                         value="Admin"
                                         :label="trans('installer::app.installer.index.create-administrator.admin')"
                                         :placeholder="trans('installer::app.installer.index.create-administrator.bagisto')"
                                     />
 
-                                    <x-installer::form.control-group.error control-name="admin" />
+                                    <x-installer::form.control-group.error control-name="name" />
                                 </x-installer::form.control-group>
 
                                 <!-- Email -->
@@ -1145,13 +1145,13 @@
 
                                     <x-installer::form.control-group.control
                                         type="password"
-                                        name="confirm_password"
+                                        name="password_confirmation"
                                         rules="required|confirmed:@password"
-                                        :value="old('confirm_password')"
+                                        :value="old('password_confirmation')"
                                         :label="trans('installer::app.installer.index.create-administrator.confirm-password')"
                                     />
 
-                                    <x-installer::form.control-group.error control-name="confirm_password" />
+                                    <x-installer::form.control-group.error control-name="password_confirmation" />
                                 </x-installer::form.control-group>
                             </div>
 
@@ -1295,9 +1295,9 @@
                     },
 
                     methods: {
-                        FormSubmit(params, { setErrors }) {
+                        formSubmit(params, { setErrors }) {
                             const stepActions = {
-                                envDatabase: () => {
+                                envDatabase: (params, setErrors) => {
                                     if (params.db_connection === 'mysql') {
                                         this.completeStep('envDatabase', 'readyForInstallation', 'active', 'complete', setErrors);
 
@@ -1307,19 +1307,15 @@
                                     }
                                 },
 
-                                readyForInstallation: (setErrors) => {
-                                    this.currentStep = 'installProgress';
-
-                                    this.startMigration(setErrors);
+                                readyForInstallation: (params, setErrors) => {
+                                    this.startMigration(params, setErrors);
                                 },
 
-                                createSampleProducts: (setErrors) => {
+                                createSampleProducts: (params, setErrors) => {
                                     this.createSampleProducts(params, setErrors);
                                 },
 
-                                createAdmin: (setErrors) => {
-                                    this.isLoading = true;
-
+                                createAdmin: (params, setErrors) => {
                                     this.saveAdmin(params, setErrors);
                                 },
                             };
@@ -1327,7 +1323,7 @@
                             const index = this.steps.find(step => step === this.currentStep);
 
                             if (stepActions[index]) {
-                                stepActions[index]();
+                                stepActions[index](params, setErrors);
                             }
                         },
 
@@ -1346,14 +1342,11 @@
                                 envConfiguration: () => {
                                     this.envData = { ...params };
 
-                                    let data = {
+                                    this.startSeeding({
                                         allowed_locales: this.locales.allowed,
                                         allowed_currencies: this.currencies.allowed,
-                                    };
-
-                                    this.startSeeding(data, this.envData);
+                                    }, this.envData);
                                 },
-
                             };
 
                             const index = this.steps.find(step => step === this.currentStep);
@@ -1361,6 +1354,144 @@
                             if (stepActions[index]) {
                                 stepActions[index]();
                             }
+                        },
+
+                        completeStep(fromStep, toStep, toState, nextState, setErrors) {
+                            this.stepStates[fromStep] = nextState;
+
+                            this.currentStep = toStep;
+
+                            this.stepStates[toStep] = toState;
+                        },
+
+                        startMigration(params, setErrors) {
+                            this.currentStep = 'installProgress';
+
+                            this.$axios.post("{{ route('installer.run_migration') }}", this.envData)
+                                .then((response) => {
+                                    if (response.data.migrated) {
+                                        this.completeStep('readyForInstallation', 'envConfiguration', 'active', 'complete');
+
+                                        this.currentStep = 'envConfiguration';
+                                    }
+                                })
+                                .catch(error => {
+                                    this.currentStep = 'envDatabase';
+
+                                    if (error.response && error.response.data) {
+                                        if (error.response.data.errors) {
+                                            setErrors(error.response.data.errors);
+                                        } else if (error.response.data.message) {
+                                            alert(error.response.data.message);
+                                        } else {
+                                            alert('Migration failed. Please check your database connection.');
+                                        }
+                                    } else {
+                                        alert('Migration failed. Please check your database connection.');
+                                    }
+                                });
+                        },
+
+                        startSeeding(selectedParams, allParameters) {
+                            this.isLoading = true;
+
+                            this.$axios.post("{{ route('installer.run_seeder') }}", {
+                                'allParameters': allParameters,
+                                'selectedParameters': selectedParams
+                            })
+                                .then((response) => {
+                                    this.isLoading = false;
+
+                                    if (response.data.seeded) {
+                                        this.completeStep('readyForInstallation', 'createSampleProducts', 'active', 'complete');
+
+                                        this.currentStep = 'createSampleProducts';
+                                    }
+                                })
+                                .catch(error => {
+                                    this.isLoading = false;
+
+                                    this.currentStep = 'envConfiguration';
+
+                                    if (error.response && error.response.data) {
+                                        if (error.response.data.message) {
+                                            alert(error.response.data.message);
+                                        } else {
+                                            alert('Seeding failed. Please try again.');
+                                        }
+                                    } else {
+                                        alert('Seeding failed. Please try again.');
+                                    }
+                                });
+                        },
+
+                        createSampleProducts(params, setErrors) {
+                            if (params.sample_products == 1){
+                                this.isLoading = true;
+
+                                this.$axios.post("{{ route('installer.seed_sample_products') }}",{
+                                    'selectedLocales': this.locales.allowed,
+                                    'selectedCurrencies': this.currencies.allowed,
+                                })
+                                    .then((response) => {
+                                        this.isLoading = false;
+
+                                        if (response.data.sample_products_seeded) {
+                                            this.completeStep('createSampleProducts', 'createAdmin', 'active', 'complete');
+
+                                            this.currentStep = 'createAdmin';
+                                        }
+                                    })
+                                    .catch(error => {
+                                        this.isLoading = false;
+
+                                        if (error.response && error.response.data) {
+                                            if (error.response.data.errors) {
+                                                setErrors(error.response.data.errors);
+                                            } else if (error.response.data.message) {
+                                                alert(error.response.data.message);
+                                            } else {
+                                                alert('Seeding sample products failed.');
+                                            }
+                                        } else {
+                                            alert('Seeding sample products failed.');
+                                        }
+                                    });
+                            } else {
+                                this.completeStep('createSampleProducts', 'createAdmin', 'active', 'complete');
+
+                                this.currentStep = 'createAdmin';
+                            }
+                        },
+
+                        saveAdmin(params, setErrors) {
+                            this.isLoading = true;
+
+                            this.$axios.post("{{ route('installer.create_admin_user') }}", params)
+                                .then((response) => {
+                                    this.isLoading = false;
+
+                                    if (response.data.admin_user_created) {
+                                        this.currentStep = 'installationCompleted';
+
+                                        this.completeStep('createAdmin', 'installationCompleted', 'active', 'complete', setErrors);
+                                    }
+                                })
+                                .catch(error => {
+                                    this.isLoading = false;
+
+                                    if (error.response && error.response.data) {
+                                        if (error.response.data.errors) {
+                                            setErrors(error.response.data.errors);
+                                        } else if (error.response.data.message) {
+                                            alert(error.response.data.message);
+                                        } else {
+                                            alert('Failed to create admin user.');
+                                        }
+                                    } else {
+                                        alert('Failed to create admin user.');
+                                    }
+                                });
                         },
 
                         pushAllowedCurrency() {
@@ -1379,7 +1510,7 @@
                             const localeName = event.target.name;
 
                             if (! Array.isArray(this.locales.allowed)) {
-                            this.locales.allowed = [];
+                                this.locales.allowed = [];
                             }
 
                             const index = this.locales.allowed.indexOf(localeName);
@@ -1391,102 +1522,14 @@
                             }
                         },
 
-                        completeStep(fromStep, toStep, toState, nextState, setErrors) {
-                            this.stepStates[fromStep] = nextState;
-
-                            this.currentStep = toStep;
-
-                            this.stepStates[toStep] = toState;
-                        },
-
-                        startMigration(setErrors) {
-                            this.currentStep = 'installProgress';
-
-                            this.$axios.post("{{ route('installer.env_file_setup') }}", this.envData)
-                                .then((response) => {
-                                    this.runMigartion(setErrors);
-                            })
-                            .catch(error => {
-                                setErrors(error.response.data.errors);
-                            });
-                        },
-
-                        runMigartion(setErrors) {
-                            this.$axios.post("{{ route('installer.run_migration') }}")
-                                .then((response) => {
-                                    this.completeStep('readyForInstallation', 'envConfiguration', 'active', 'complete');
-
-                                    this.currentStep = 'envConfiguration';
-                                })
-                                .catch(error => {
-                                    alert(error.response.data.error);
-
-                                    this.currentStep = 'envDatabase';
-                                });
-                        },
-
-                        startSeeding(selectedParams, allParameters) {
-                            this.$axios.post("{{ route('installer.run_seeder') }}", {
-                                'allParameters': allParameters,
-                                'selectedParameters': selectedParams
-                            })
-                                .then((response) => {
-                                    this.completeStep('readyForInstallation', 'createSampleProducts', 'active', 'complete');
-
-                                    this.currentStep = 'createSampleProducts';
-                            })
-                                .catch(error => {
-                                    setErrors(error.response.data.errors);
-                                });
-                        },
-
-                        createSampleProducts(params, setErrors) {
-                            if (params.sample_products == 1){
-                                this.isLoading = true;
-
-                                this.$axios.post("{{ route('installer.sample_products_setup') }}",{
-                                    'selectedLocales': this.locales.allowed,
-                                    'selectedCurrencies': this.currencies.allowed,
-                                })
-                                    .then((response) => {
-                                        this.isLoading = false;
-
-                                        this.completeStep('createSampleProducts', 'createAdmin', 'active', 'complete');
-
-                                        this.currentStep = 'createAdmin';
-                                    })
-                                    .catch(error => {
-                                        setErrors(error.response.data.errors);
-                                    });
-                            } else {
-                                this.completeStep('createSampleProducts', 'createAdmin', 'active', 'complete');
-
-                                this.currentStep = 'createAdmin';
-                            }
-                        },
-
-                        saveAdmin(params, setErrors) {
-                            this.$axios.post("{{ route('installer.admin_config_setup') }}", params)
-                                .then((response) => {
-                                    this.isLoading = false;
-
-                                    this.currentStep = 'installationCompleted';
-
-                                    if (response.data) {
-                                        this.completeStep('createAdmin', 'installationCompleted', 'active', 'complete', setErrors);
-                                    }
-                                })
-                                .catch(error => {
-                                    setErrors(error.response.data.errors);
-                                });
-                        },
-
                         setLocale(params) {
                             const newLocale = params.locale;
+
                             const url = new URL(window.location.href);
 
                             if (! url.searchParams.has('locale')) {
                                 url.searchParams.set('locale', newLocale);
+
                                 window.location.href = url.toString();
                             }
                         },
@@ -1501,7 +1544,7 @@
                             if (index > 0) {
                                 this.currentStep = this.steps[index - 1];
                             }
-                        }
+                        },
                     },
                 });
             </script>

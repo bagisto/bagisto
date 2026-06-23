@@ -4,9 +4,15 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Sales\BookingController;
 use Webkul\Admin\Http\Controllers\Sales\BookingProductController;
 use Webkul\Admin\Http\Controllers\Sales\CartController;
+use Webkul\Admin\Http\Controllers\Sales\EUWithdrawalController;
 use Webkul\Admin\Http\Controllers\Sales\InvoiceController;
 use Webkul\Admin\Http\Controllers\Sales\OrderController;
 use Webkul\Admin\Http\Controllers\Sales\RefundController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\CustomFieldController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\ReasonController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\RequestController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\RulesController;
+use Webkul\Admin\Http\Controllers\Sales\RMA\StatusController;
 use Webkul\Admin\Http\Controllers\Sales\ShipmentController;
 use Webkul\Admin\Http\Controllers\Sales\TransactionController;
 
@@ -122,5 +128,128 @@ Route::prefix('sales')->group(function () {
         Route::get('', 'index')->name('admin.sales.bookings.index');
 
         Route::get('get', 'get')->name('admin.sales.bookings.get');
+    });
+
+    /**
+     * RMA routes.
+     */
+    Route::prefix('rma')->group(function () {
+        /**
+         * Request routes.
+         */
+        Route::controller(RequestController::class)->prefix('requests')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.requests.index');
+
+            Route::get('view/{id}', 'view')->name('admin.sales.rma.requests.view');
+
+            Route::get('create', 'create')->name('admin.sales.rma.requests.create');
+
+            Route::post('store', 'store')->name('admin.sales.rma.requests.store');
+
+            Route::get('get-order-items/{orderId}', 'getOrderItems')->name('admin.sales.rma.requests.get-order-items');
+
+            Route::get('get-resolution-reasons/{resolutionType}', 'getResolutionReasons')->name('admin.sales.rma.requests.get-resolution-reasons');
+
+            Route::post('update-status/{id}', 'updateStatus')->name('admin.sales.rma.requests.update-status');
+
+            Route::post('reopen/{id}', 'reOpenRequest')->name('admin.sales.rma.requests.re-open');
+
+            Route::get('get-messages', 'getMessages')->name('admin.sales.rma.requests.get-messages');
+
+            Route::post('send-message', 'sendMessage')->name('admin.sales.rma.requests.send-message');
+        });
+
+        /**
+         * Reason routes.
+         */
+        Route::controller(ReasonController::class)->prefix('reasons')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.reasons.index');
+
+            Route::post('store', 'store')->name('admin.sales.rma.reasons.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.reasons.edit');
+
+            Route::put('update/{id}', 'update')->name('admin.sales.rma.reasons.update');
+
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.reasons.delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.reasons.mass-update');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.reasons.mass-delete');
+        });
+
+        /**
+         * Status routes.
+         */
+        Route::controller(StatusController::class)->prefix('rma-status')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.statuses.index');
+
+            Route::post('store', 'store')->name('admin.sales.rma.statuses.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.statuses.edit');
+
+            Route::put('update/{id}', 'update')->name('admin.sales.rma.statuses.update');
+
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.statuses.delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.statuses.mass-update');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.statuses.mass-delete');
+        });
+
+        /**
+         * Rules routes.
+         */
+        Route::controller(RulesController::class)->prefix('rules')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.rules.index');
+
+            Route::post('store', 'store')->name('admin.sales.rma.rules.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.rules.edit');
+
+            Route::put('update/{id}', 'update')->name('admin.sales.rma.rules.update');
+
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.rules.delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.rules.mass-update');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.rules.mass-delete');
+        });
+
+        /**
+         * Custom field routes.
+         */
+        Route::controller(CustomFieldController::class)->prefix('custom-fields')->group(function () {
+            Route::get('', 'index')->name('admin.sales.rma.custom-fields.index');
+
+            Route::get('create', 'create')->name('admin.sales.rma.custom-fields.create');
+
+            Route::post('store', 'store')->name('admin.sales.rma.custom-fields.store');
+
+            Route::get('edit/{id}', 'edit')->name('admin.sales.rma.custom-fields.edit');
+
+            Route::post('update/{id}', 'update')->name('admin.sales.rma.custom-fields.update');
+
+            Route::delete('delete/{id}', 'destroy')->name('admin.sales.rma.custom-fields.delete');
+
+            Route::post('mass-update', 'massUpdate')->name('admin.sales.rma.custom-fields.mass-update');
+
+            Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.custom-fields.mass-delete');
+        });
+    });
+
+    /**
+     * EU Withdrawal routes (Directive (EU) 2023/2673, Art. 11a).
+     */
+    Route::controller(EUWithdrawalController::class)->prefix('eu-withdrawals')->group(function () {
+        Route::get('', 'index')->name('admin.sales.eu-withdrawals.index');
+
+        Route::get('{id}', 'view')->name('admin.sales.eu-withdrawals.view');
+
+        Route::post('{id}/decline', 'decline')->name('admin.sales.eu-withdrawals.decline');
+
+        Route::post('{id}/mark-refunded', 'markRefunded')->name('admin.sales.eu-withdrawals.mark_refunded');
+
+        Route::post('{id}/resend-confirmation', 'resendConfirmation')->name('admin.sales.eu-withdrawals.resend_confirmation');
     });
 });

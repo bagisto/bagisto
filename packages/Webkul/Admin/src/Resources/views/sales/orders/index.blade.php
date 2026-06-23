@@ -148,7 +148,7 @@
                         >
                         </div>
 
-                        <a :href=`{{ route('admin.sales.orders.view', '') }}/${record.id}`>
+                        <a :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', record.id)">
                             <span class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-xl sm:text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"></span>
                         </a>
                     </div>

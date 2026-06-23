@@ -1,0 +1,5 @@
+/**
+  * vue-cal v4.10.2
+  * (c) 2025 Antoni Andre <antoniandre.web@gmail.com>
+  * @license MIT
+  */const t=["Δευτέρα","Τρίτη","Τετάρτη","Πέμπτη","Παρασκευή","Σάββατο","Κυριακή"],n=["Ιανουάριος","Φεβρουάριος","Μάρτιος","Απρίλιος","Μάιος","Ιούνιος","Ιούλιος","Αύγουστος","Σεπτέμβριος","Οκτώβριος","Νοέμβριος","Δεκέμβριος"],o=["Ιανουαρίου","Φεβρουαρίου","Μαρτίου","Απριλίου","Μαΐου","Ιουνίου","Ιουλίου","Αυγούστου","Σεπτεμβρίου","Οκτωβρίου","Νοεμβρίου","Δεκεμβρίου"],h="Έτη",s="Έτος",e="Μήνα",c="Εβδομάδα",a="Ημέρα",d="Σήμερα",y="Κανένα συμβάν",m="Ημερήσιο συμβάν",r="Διαγραφή",l="Δημιουργία συμβάντος",v="dddd D MMMMG YYYY",M="π.μ.",Y="μ.μ.",D={weekDays:t,months:n,monthsGenitive:o,years:"Έτη",year:s,month:e,week:c,day:a,today:d,noEvent:y,allDay:m,deleteEvent:r,createEvent:l,dateFormat:v,am:M,pm:Y};export{m as allDay,M as am,l as createEvent,v as dateFormat,a as day,D as default,r as deleteEvent,e as month,n as months,o as monthsGenitive,y as noEvent,Y as pm,d as today,c as week,t as weekDays,s as year,h as years};

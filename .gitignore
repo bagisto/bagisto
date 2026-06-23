@@ -5,6 +5,7 @@
 .env
 .env.testing
 .idea
+.mcp.json
 .php_cs.cache
 .phpunit.result.cache
 .vscode

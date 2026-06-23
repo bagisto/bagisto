@@ -28,8 +28,7 @@ it('should return the index page of customers reporting', function () {
         ->assertSeeText(trans('admin::app.reporting.customers.index.customers-with-most-reviews'))
         ->assertSeeText(trans('admin::app.reporting.customers.index.customers-with-most-sales'))
         ->assertSeeText(trans('admin::app.reporting.customers.index.top-customer-groups'))
-        ->assertSeeText(trans('admin::app.reporting.customers.index.total-customers'))
-        ->assertSeeText(trans('admin::app.reporting.customers.index.customers-traffic'));
+        ->assertSeeText(trans('admin::app.reporting.customers.index.total-customers'));
 });
 
 it('should return the customers stats report', function () {

@@ -63,6 +63,11 @@
             <!-- Top Payment Methods Section -->
             @include('admin::reporting.sales.top-payment-methods')
         </div>
+
+        <!-- Sales By Coupon Section -->
+        <div class="flex flex-col justify-between gap-4 flex-1 [&>*]:flex-1 md:flex-row">
+            @include('admin::reporting.sales.sales-by-coupon')
+        </div>
     </div>
 
     @pushOnce('scripts')

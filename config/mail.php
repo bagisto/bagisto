@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'log'),
+    'default' => env('MAIL_MAILER', 'bagisto-dynamic-smtp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,6 +47,10 @@ return [
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'local_domain' => env('MAIL_EHLO_DOMAIN', parse_url(env('APP_URL', 'http://localhost'), PHP_URL_HOST)),
+        ],
+
+        'bagisto-dynamic-smtp' => [
+            'transport' => 'bagisto-dynamic-smtp',
         ],
 
         'ses' => [
@@ -136,7 +140,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | General contact address used in the footer of the email templates.
-
+    |
     | Here, you may specify a name and address that is used globally for
     | all e-mails that are sent by your application.
     |

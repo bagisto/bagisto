@@ -1,0 +1,42 @@
+{
+    "name": "webkul/imagecache",
+    "description": "Image caching extension for Intervention Image (Laravel 12 compatible, Intervention Image v3)",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Webkul Software",
+            "email": "support@bagisto.com"
+        }
+    ],
+    "homepage": "https://bagisto.com",
+    "keywords": [
+        "image",
+        "gd",
+        "imagick",
+        "laravel",
+        "cache",
+        "webkul"
+    ],
+    "require": {
+        "php": "^8.2",
+        "intervention/image": "^3.0",
+        "illuminate/cache": "^9|^10|^11|^12",
+        "illuminate/filesystem": "^9|^10|^11|^12",
+        "illuminate/routing": "^9|^10|^11|^12",
+        "illuminate/support": "^9|^10|^11|^12",
+        "nesbot/carbon": "^2.72.2|^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Webkul\\ImageCache\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\ImageCache\\Providers\\ImageCacheServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "stable"
+}

@@ -15,8 +15,10 @@ use Webkul\Customer\Providers\CustomerServiceProvider;
 use Webkul\DataGrid\Providers\DataGridServiceProvider;
 use Webkul\DataTransfer\Providers\DataTransferServiceProvider;
 use Webkul\DebugBar\Providers\DebugBarServiceProvider;
+use Webkul\EUWithdrawal\Providers\EUWithdrawalServiceProvider;
 use Webkul\FPC\Providers\FPCServiceProvider;
 use Webkul\GDPR\Providers\GDPRServiceProvider;
+use Webkul\ImageCache\Providers\ImageCacheServiceProvider;
 use Webkul\Installer\Providers\InstallerServiceProvider;
 use Webkul\Inventory\Providers\InventoryServiceProvider;
 use Webkul\MagicAI\Providers\MagicAIServiceProvider;
@@ -24,7 +26,11 @@ use Webkul\Marketing\Providers\MarketingServiceProvider;
 use Webkul\Notification\Providers\NotificationServiceProvider;
 use Webkul\Payment\Providers\PaymentServiceProvider;
 use Webkul\Paypal\Providers\PaypalServiceProvider;
+use Webkul\PayU\Providers\PayUServiceProvider;
+use Webkul\PhonePe\Providers\PhonePeServiceProvider;
 use Webkul\Product\Providers\ProductServiceProvider;
+use Webkul\Razorpay\Providers\RazorpayServiceProvider;
+use Webkul\RMA\Providers\RMAServiceProvider;
 use Webkul\Rule\Providers\RuleServiceProvider;
 use Webkul\Sales\Providers\SalesServiceProvider;
 use Webkul\Shipping\Providers\ShippingServiceProvider;
@@ -32,6 +38,7 @@ use Webkul\Shop\Providers\ShopServiceProvider;
 use Webkul\Sitemap\Providers\SitemapServiceProvider;
 use Webkul\SocialLogin\Providers\SocialLoginServiceProvider;
 use Webkul\SocialShare\Providers\SocialShareServiceProvider;
+use Webkul\Stripe\Providers\StripeServiceProvider;
 use Webkul\Tax\Providers\TaxServiceProvider;
 use Webkul\Theme\Providers\ThemeServiceProvider;
 use Webkul\User\Providers\UserServiceProvider;
@@ -59,16 +66,22 @@ return [
     DataGridServiceProvider::class,
     DataTransferServiceProvider::class,
     DebugBarServiceProvider::class,
+    EUWithdrawalServiceProvider::class,
     FPCServiceProvider::class,
     GDPRServiceProvider::class,
+    ImageCacheServiceProvider::class,
     InstallerServiceProvider::class,
     InventoryServiceProvider::class,
     MagicAIServiceProvider::class,
     MarketingServiceProvider::class,
     NotificationServiceProvider::class,
+    PayUServiceProvider::class,
     PaymentServiceProvider::class,
     PaypalServiceProvider::class,
+    PhonePeServiceProvider::class,
     ProductServiceProvider::class,
+    RMAServiceProvider::class,
+    RazorpayServiceProvider::class,
     RuleServiceProvider::class,
     SalesServiceProvider::class,
     ShippingServiceProvider::class,
@@ -76,6 +89,7 @@ return [
     SitemapServiceProvider::class,
     SocialLoginServiceProvider::class,
     SocialShareServiceProvider::class,
+    StripeServiceProvider::class,
     TaxServiceProvider::class,
     ThemeServiceProvider::class,
     UserServiceProvider::class,

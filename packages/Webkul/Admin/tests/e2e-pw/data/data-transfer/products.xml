@@ -39,6 +39,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="SP-002"
@@ -79,6 +80,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="SP-003"
@@ -119,6 +121,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="SP-004"
@@ -159,6 +162,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="GP-001"
@@ -199,6 +203,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus="SP-001=5,SP-003=5,SP-004=5"
+        rma_rule_id="1"
     />
     <product
         sku="BP-001"
@@ -239,6 +244,7 @@
         configurable_variants=""
         bundle_options="name=Bundle Option 1,type=radio,required=1,sku=SP-001,price=15.00,default=0,qty=1|name=Bundle Option 1,type=radio,required=1,sku=SP-002,price=10.0000,default=1,qty=2|name=Bundle Option 2,type=checkbox,required=1,sku=SP-003,price=15.0000,default=1,qty=1|name=Bundle Option 2,type=checkbox,required=1,sku=SP-004,price=10.0000,default=0,qty=2"
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="CP-001"
@@ -279,6 +285,7 @@
         configurable_variants="sku=SP-005,color=Yellow,size=M|sku=SP-006,color=Yellow,size=L|sku=SP-007,color=Green,size=M|sku=SP-008,color=Green,size=L"
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="SP-005"
@@ -319,6 +326,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="SP-006"
@@ -359,6 +367,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="SP-007"
@@ -399,6 +408,7 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
     <product
         sku="SP-008"
@@ -439,5 +449,6 @@
         configurable_variants=""
         bundle_options=""
         associated_skus=""
+        rma_rule_id="1"
     />
 </products>

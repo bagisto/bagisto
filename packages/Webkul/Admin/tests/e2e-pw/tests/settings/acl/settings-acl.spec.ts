@@ -1,5 +1,5 @@
 import { test } from "../../../setup";
-import { ACLManagement } from "../../../pages/acl";
+import { ACLManagement } from "../../../pages/admin/acl/index";
 
 test.describe("settings acl", () => {
     test("should create custom role with settings permission", async ({
@@ -304,9 +304,7 @@ test.describe("settings acl", () => {
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", [
-            "settings.users.create",
-        ]);
+        await aclManagement.createRole("custom", ["settings.users.create"]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["settings->users"]);
         await aclManagement.createUserVerify();
@@ -326,9 +324,7 @@ test.describe("settings acl", () => {
         adminPage,
     }) => {
         const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", [
-            "settings.users.delete",
-        ]);
+        await aclManagement.createRole("custom", ["settings.users.delete"]);
         await aclManagement.createUser();
         await aclManagement.verfiyAssignedRole(["settings->users"]);
         await aclManagement.deleteUserVerify();

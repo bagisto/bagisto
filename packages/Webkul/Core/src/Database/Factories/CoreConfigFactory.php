@@ -21,8 +21,6 @@ class CoreConfigFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'channel_code' => core()->getCurrentChannelCode(),
-        ];
+        return [];
     }
 }

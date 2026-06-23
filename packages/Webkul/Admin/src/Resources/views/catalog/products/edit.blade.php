@@ -150,7 +150,6 @@
             @endphp
 
             @foreach ($groupedColumns as $column => $groups)
-
                 {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.before", ['product' => $product]) !!}
 
                 <div class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-[360px] max-w-full max-sm:w-full' }}">
@@ -165,6 +164,18 @@
                             )
                         )
                             @continue
+                        @endif
+
+                        @if ($group->code === 'rma')
+                            @if (
+                                ! in_array($product->type, explode(',', core()->getConfigData('sales.rma.setting.select_allowed_product_type'))) 
+                                && (
+                                    $product->type != 'simple' 
+                                    && empty($product->parent_id)
+                                )
+                            )
+                                @continue
+                            @endif
                         @endif
 
                         @if ($customAttributes->isNotEmpty())
@@ -224,7 +235,7 @@
 
                                 @includeWhen($group->code == 'price', 'admin::catalog.products.edit.price.group')
 
-                                @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')
+                                @includeWhen($group->code === 'inventories', 'admin::catalog.products.edit.inventories')                                
                             </div>
 
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.after", ['product' => $product]) !!}
@@ -287,7 +298,6 @@
                 @endif
 
                 {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.after", ['product' => $product]) !!}
-
             @endforeach
         </div>
 

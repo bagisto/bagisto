@@ -573,7 +573,7 @@
 
             methods: {
                 getMaxPrice() {
-                    this.$axios.get('{{ route("shop.api.categories.max_price", $category->id ?? '') }}', {
+                    this.$axios.get('{{ route("shop.api.categories.max_price", isset($category) && $category->id ? $category->id : null) }}', {
                             params: {
                                 attribute_code: this.defaultAttributeCode || 'price',
                             }

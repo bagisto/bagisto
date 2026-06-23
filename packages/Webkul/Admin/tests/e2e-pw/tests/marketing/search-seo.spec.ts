@@ -1,5 +1,34 @@
 import { test, expect } from "../../setup";
+import type { Page } from "@playwright/test";
 import { generateHostname } from "../../utils/faker";
+
+const URL_REWRITES_URL = "admin/marketing/search-seo/url-rewrites";
+const SEARCH_TERMS_URL = "admin/marketing/search-seo/search-terms";
+const SEARCH_SYNONYMS_URL = "admin/marketing/search-seo/search-synonyms";
+const SITEMAPS_URL = "admin/marketing/search-seo/sitemaps";
+
+async function openSeoSection(adminPage: Page, url: string) {
+    await adminPage.goto(url);
+}
+
+async function openFirstRecordForEdit(adminPage: Page) {
+    await adminPage.locator(".row > .flex > a").first().click();
+}
+
+async function confirmAgreeDialog(adminPage: Page) {
+    await adminPage
+        .getByRole("button", { name: "Agree", exact: true })
+        .click();
+}
+
+async function massDeleteSelectedRows(adminPage: Page) {
+    await adminPage.locator(".icon-uncheckbox").first().click();
+    await adminPage
+        .getByRole("button", { name: "Select Action " })
+        .click();
+    await adminPage.getByRole("link", { name: "Delete" }).click();
+    await confirmAgreeDialog(adminPage);
+}
 
 
 test.describe("search-seo management", () => {
@@ -18,7 +47,7 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the url rewrite page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await openSeoSection(adminPage, URL_REWRITES_URL);
 
             /**
              * Opening create url rewrite form in modal.
@@ -71,7 +100,7 @@ test.describe("search-seo management", () => {
                 product: "product",
             };
 
-            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await openSeoSection(adminPage, URL_REWRITES_URL);
 
             /**
              * Opening create rewrite URL form in modal.
@@ -119,13 +148,13 @@ test.describe("search-seo management", () => {
             /**
              * Updating the url for requested path.
              */
-            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await openSeoSection(adminPage, URL_REWRITES_URL);
             await adminPage.getByRole("link", { name: "URL Rewrites" }).click();
 
             /**
              * Editing the requested path url.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage.getByRole("textbox", { name: "Request Path" });
             await adminPage
                 .getByRole("textbox", { name: "Request Path" })
@@ -156,13 +185,13 @@ test.describe("search-seo management", () => {
             /**
              * Updating the url for targeted path.
              */
-            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await openSeoSection(adminPage, URL_REWRITES_URL);
             await adminPage.getByRole("link", { name: "URL Rewrites" }).click();
 
             /**
              * Editing the targeted url rewrite.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage.getByRole("textbox", { name: "Target Path" });
             await adminPage
                 .getByRole("textbox", { name: "Target Path" })
@@ -186,13 +215,13 @@ test.describe("search-seo management", () => {
         test("should edit redirect type permanent to temporary", async ({
             adminPage,
         }) => {
-            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await openSeoSection(adminPage, URL_REWRITES_URL);
             await adminPage.getByRole("link", { name: "URL Rewrites" }).click();
 
             /**
              * Editing the redirect type permanent to temporary.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage
                 .locator('select[name="redirect_type"]')
                 .selectOption("302");
@@ -213,13 +242,13 @@ test.describe("search-seo management", () => {
         test("should edit redirect type temporary to permanent", async ({
             adminPage,
         }) => {
-            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await openSeoSection(adminPage, URL_REWRITES_URL);
             await adminPage.getByRole("link", { name: "URL Rewrites" }).click();
 
             /**
              * Editing the redirect type temporary to permanent.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage
                 .locator('select[name="redirect_type"]')
                 .selectOption("301");
@@ -243,7 +272,7 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the url rewrite page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await openSeoSection(adminPage, URL_REWRITES_URL);
 
             /**
              * Clicking delete icon for individual deleting the url rewrite.
@@ -252,9 +281,7 @@ test.describe("search-seo management", () => {
                 .locator(".row > .flex > a:nth-child(2)")
                 .first()
                 .click();
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
+            await confirmAgreeDialog(adminPage);
 
             await expect(
                 adminPage.getByText("URL Rewrite deleted")
@@ -267,27 +294,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the url rewrite page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/url-rewrites`);
+            await openSeoSection(adminPage, URL_REWRITES_URL);
 
             /**
              * Selecting all list with mass delete checkbox.
              */
-            await adminPage.locator(".icon-uncheckbox").first().click();
-
-            /**
-             * Select action to delete the selected url rewrite.
-             */
-            await adminPage
-                .getByRole("button", { name: "Select Action " })
-                .click();
-            await adminPage.getByRole("link", { name: "Delete" }).click();
-
-            /**
-             * Select warning message box for confirmation to delete selected url rewrite.
-             */
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
+            await massDeleteSelectedRows(adminPage);
 
             await expect(
                 adminPage.getByText("Selected URL Rewrites Deleted")
@@ -304,7 +316,7 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search term page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+            await openSeoSection(adminPage, SEARCH_TERMS_URL);
 
             /**
              * Opening create search term form in modal.
@@ -346,12 +358,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search term page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+            await openSeoSection(adminPage, SEARCH_TERMS_URL);
 
             /**
              * Updating the search query by editing the search term.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage
                 .getByRole("textbox", { name: "Search Query" })
                 .click();
@@ -380,12 +392,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search term page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+            await openSeoSection(adminPage, SEARCH_TERMS_URL);
 
             /**
              * Updating the results field by editing the search term.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage.getByRole("textbox", { name: "Results" }).click();
             await adminPage
                 .getByRole("textbox", { name: "Results" })
@@ -409,12 +421,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search term page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+            await openSeoSection(adminPage, SEARCH_TERMS_URL);
 
             /**
              * Updating the uses field by editing the search term.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage.getByRole("textbox", { name: "Uses" }).click();
             await adminPage.getByRole("textbox", { name: "Uses" }).fill("5");
 
@@ -440,12 +452,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search term page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+            await openSeoSection(adminPage, SEARCH_TERMS_URL);
 
             /**
              * Updating the redirect url field by editing the search term.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage
                 .getByRole("textbox", { name: "Redirect Url" })
                 .fill(seo.url);
@@ -467,12 +479,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search term page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+            await openSeoSection(adminPage, SEARCH_TERMS_URL);
 
             /**
              * Updating the channel by editing the search term.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage
                 .locator('select[name="channel_id"]')
                 .selectOption("1");
@@ -492,7 +504,7 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search term page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-terms`);
+            await openSeoSection(adminPage, SEARCH_TERMS_URL);
 
             /**
              * Selecting the search term for deleting.
@@ -512,9 +524,7 @@ test.describe("search-seo management", () => {
             /**
              * Select warning message box for confirmation to delete selected search terms.
              */
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
+            await confirmAgreeDialog(adminPage);
 
             /**
              * Saving the updated locale.
@@ -532,7 +542,7 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search synonym page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+            await openSeoSection(adminPage, SEARCH_SYNONYMS_URL);
 
             /**
              * Opening create search synonym form in modal.
@@ -568,12 +578,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search synonym page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+            await openSeoSection(adminPage, SEARCH_SYNONYMS_URL);
 
             /**
              * Updating the name by editing the search synonym.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage.getByRole("textbox", { name: "Name" }).click();
             await adminPage
                 .getByRole("textbox", { name: "Name" })
@@ -598,12 +608,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search synonym page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+            await openSeoSection(adminPage, SEARCH_SYNONYMS_URL);
 
             /**
              * Updating the terms by editing the search synonym.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage.getByRole("textbox", { name: "Terms" }).click();
             await adminPage
                 .getByRole("textbox", { name: "Terms" })
@@ -632,28 +642,13 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the search synonym page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/search-synonyms`);
+            await openSeoSection(adminPage, SEARCH_SYNONYMS_URL);
 
             /**
              * Selecting all list with mass delete checkbox.
              */
 
-            await adminPage.locator(".icon-uncheckbox").first().click();
-
-            /**
-             * Select action to delete the selected search synonyms.
-             */
-            await adminPage
-                .getByRole("button", { name: "Select Action " })
-                .click();
-            await adminPage.getByRole("link", { name: "Delete" }).click();
-
-            /**
-             * Select warning message box for confirmation to delete selected search synonyms.
-             */
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
+            await massDeleteSelectedRows(adminPage);
 
             await expect(
                 adminPage.getByText(
@@ -668,7 +663,7 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the sitemap page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/sitemaps`);
+            await openSeoSection(adminPage, SITEMAPS_URL);
 
             /**
              * Opening create sitemap form in modal.
@@ -698,12 +693,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the sitemap page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/sitemaps`);
+            await openSeoSection(adminPage, SITEMAPS_URL);
 
             /**
              * Updating the file name by editing the sitemaps.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage
                 .locator('input[name="file_name"]')
                 .fill("sitemap1.xml");
@@ -727,12 +722,12 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the sitemap page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/sitemaps`);
+            await openSeoSection(adminPage, SITEMAPS_URL);
 
             /**
              * Updating the file name by editing the sitemaps.
              */
-            await adminPage.locator(".row > .flex > a").first().click();
+            await openFirstRecordForEdit(adminPage);
             await adminPage.getByRole("textbox", { name: "Path" }).click();
             await adminPage
                 .getByRole("textbox", { name: "Path" })
@@ -758,7 +753,7 @@ test.describe("search-seo management", () => {
             /**
              * Reaching to the sitemap page.
              */
-            await adminPage.goto(`admin/marketing/search-seo/sitemaps`);
+            await openSeoSection(adminPage, SITEMAPS_URL);
 
             /**
              * Clicking on the delete button.
@@ -771,9 +766,7 @@ test.describe("search-seo management", () => {
             /**
              * Select warning message box for confirmation to delete selected sitemap.
              */
-            await adminPage
-                .getByRole("button", { name: "Agree", exact: true })
-                .click();
+            await confirmAgreeDialog(adminPage);
             await expect(
                 adminPage.getByText("Sitemap Deleted successfully")
             ).toBeVisible();

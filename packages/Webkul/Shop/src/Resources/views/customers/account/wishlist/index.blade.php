@@ -114,7 +114,7 @@
                                 <div>
                                     {!! view_render_event('bagisto.shop.customers.account.wishlist.image.before') !!}
 
-                                    <a :href="`{{ route('shop.product_or_category.index', '') }}/${wishlist.product.url_key}`">
+                                    <a :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', wishlist.product.url_key)">
                                         <!-- Wishlist Item Image -->
                                         <img
                                             class="h-28 max-h-28 w-28 max-w-28 rounded-xl max-md:h-20 max-md:max-h-20 max-md:w-20 max-md:max-w-20"
@@ -319,7 +319,7 @@
                         this.$emitter.emit('open-confirm-modal', {
                             agree: () => {
                                 this.$axios
-                                    .delete(`{{ route('shop.api.customers.account.wishlist.destroy', '') }}/${this.wishlist.id}`)
+                                    .delete('{{ route('shop.api.customers.account.wishlist.destroy', ':id') }}'.replace(':id', this.wishlist.id))
                                     .then(response => {
                                         this.$emit('wishlist-items', response.data.data);
 

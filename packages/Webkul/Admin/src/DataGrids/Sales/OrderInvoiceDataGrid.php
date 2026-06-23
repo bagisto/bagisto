@@ -86,7 +86,7 @@ class OrderInvoiceDataGrid extends DataGrid
 
                 $todayDate = Carbon::now();
 
-                $dueDate = Carbon::parse($row->created_at)->addDays($dueDuration);
+                $dueDate = Carbon::parse($row->created_at)->addDays((int) $dueDuration);
 
                 if ($row->state == Invoice::STATUS_PAID) {
                     return '<p class="label-active">'.trans('admin::app.sales.invoices.index.datagrid.paid').'</p>';
@@ -96,7 +96,7 @@ class OrderInvoiceDataGrid extends DataGrid
                     $row->state == Invoice::STATUS_PENDING
                     || $row->state == Invoice::STATUS_PENDING_PAYMENT
                 ) {
-                    $daysLeft = $todayDate->diffInDays($dueDate, false);
+                    $daysLeft = (int) $todayDate->diffInDays($dueDate, false);
 
                     if ($daysLeft >= 0) {
                         $extra = trans('admin::app.sales.invoices.index.datagrid.days-left', ['count' => $daysLeft]);
@@ -108,7 +108,7 @@ class OrderInvoiceDataGrid extends DataGrid
                 }
 
                 if ($row->state == Invoice::STATUS_OVERDUE) {
-                    $daysOverdue = $dueDate->diffInDays($todayDate, false);
+                    $daysOverdue = (int) $dueDate->diffInDays($todayDate, false);
 
                     if ($daysOverdue >= 0) {
                         $extra = trans('admin::app.sales.invoices.index.datagrid.days-overdue', ['count' => $daysOverdue]);

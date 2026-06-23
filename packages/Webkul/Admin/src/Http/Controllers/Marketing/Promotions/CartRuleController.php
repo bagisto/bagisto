@@ -125,15 +125,11 @@ class CartRuleController extends Controller
             $cartRule = $this->cartRuleRepository->findOrFail($id);
 
             if ($cartRule->coupon_type) {
-                if ($cartRule->cart_rule_coupon) {
-                    $this->validate(request(), [
-                        'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code,'.$cartRule->cart_rule_coupon->id,
-                    ]);
-                } else {
-                    $this->validate(request(), [
-                        'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code',
-                    ]);
-                }
+                $primaryCoupon = $cartRule->cart_rule_coupon()->where('is_primary', 1)->first();
+
+                $this->validate(request(), [
+                    'coupon_code' => 'required_if:use_auto_generation,==,0|unique:cart_rule_coupons,code,'.($primaryCoupon?->id ?? 'NULL'),
+                ]);
             }
 
             Event::dispatch('promotions.cart_rule.update.before', $id);

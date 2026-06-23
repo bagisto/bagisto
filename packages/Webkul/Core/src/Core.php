@@ -28,7 +28,7 @@ class Core
      *
      * @var string
      */
-    const BAGISTO_VERSION = '2.3.x-dev';
+    const BAGISTO_VERSION = '2.4.x-dev';
 
     /**
      * Current Channel.
@@ -168,7 +168,7 @@ class Core
     /**
      * Returns current channel code.
      */
-    public function getCurrentChannelCode(): string
+    public function getCurrentChannelCode(): ?string
     {
         return $this->getCurrentChannel()?->code;
     }
@@ -204,7 +204,7 @@ class Core
     /**
      * Returns the default channel code configured in `config/app.php`.
      */
-    public function getDefaultChannelCode(): string
+    public function getDefaultChannelCode(): ?string
     {
         return $this->getDefaultChannel()?->code;
     }
@@ -575,52 +575,40 @@ class Core
     {
         $channel = $this->getCurrentChannel();
 
-        $channelTimeStamp = $this->channelTimeStamp($channel);
+        $timezone = $channel->timezone ?: config('app.timezone', 'UTC');
 
-        $fromTimeStamp = strtotime($dateFrom);
+        $now = Carbon::now($timezone);
 
-        $toTimeStamp = strtotime($dateTo);
+        if (! $this->is_empty_date($dateFrom)) {
+            $from = Carbon::parse($dateFrom, $timezone)->startOfDay();
 
-        if ($dateTo) {
-            $toTimeStamp += 86400;
+            if ($now->lt($from)) {
+                return false;
+            }
         }
 
-        if (
-            ! $this->is_empty_date($dateFrom)
-            && $channelTimeStamp < $fromTimeStamp
-        ) {
-            $result = false;
-        } elseif (
-            ! $this->is_empty_date($dateTo)
-            && $channelTimeStamp > $toTimeStamp
-        ) {
-            $result = false;
-        } else {
-            $result = true;
+        if (! $this->is_empty_date($dateTo)) {
+            $to = Carbon::parse($dateTo, $timezone)->endOfDay();
+
+            if ($now->gt($to)) {
+                return false;
+            }
         }
 
-        return $result;
+        return true;
     }
 
     /**
-     * Get channel timestamp, timestamp will be builded with channel timezone settings.
+     * Get channel timestamp using channel timezone or Laravel default timezone.
      *
      * @param  Contracts\Channel  $channel
      * @return int
      */
     public function channelTimeStamp($channel)
     {
-        $timezone = $channel->timezone;
+        $timezone = $channel->timezone ?: config('app.timezone', 'UTC');
 
-        $currentTimezone = @date_default_timezone_get();
-
-        @date_default_timezone_set($timezone);
-
-        $date = date('Y-m-d H:i:s');
-
-        @date_default_timezone_set($currentTimezone);
-
-        return strtotime($date);
+        return Carbon::now($timezone)->timestamp;
     }
 
     /**
@@ -635,7 +623,7 @@ class Core
     }
 
     /**
-     * Format date using current channel.
+     * Format date using current channel timezone or Laravel default timezone.
      *
      * @param  \Illuminate\Support\Carbon|string|null  $date
      * @param  string  $format
@@ -653,7 +641,9 @@ class Core
             $date = Carbon::parse($date);
         }
 
-        $date->setTimezone($channel->timezone);
+        $timezone = $channel->timezone ?: config('app.timezone', 'UTC');
+
+        $date->setTimezone($timezone);
 
         return $date->translatedFormat($format);
     }
@@ -787,16 +777,16 @@ class Core
      */
     public function xWeekRange($date, $day)
     {
-        $ts = strtotime($date);
+        $carbonDate = Carbon::parse($date);
 
         if (! $day) {
-            $start = (date('D', $ts) == 'Sun') ? $ts : strtotime('last sunday', $ts);
+            $start = $carbonDate->isSunday() ? $carbonDate : $carbonDate->previous(Carbon::SUNDAY);
 
-            return date('Y-m-d', $start);
+            return $start->format('Y-m-d');
         } else {
-            $end = (date('D', $ts) == 'Sat') ? $ts : strtotime('next saturday', $ts);
+            $end = $carbonDate->isSaturday() ? $carbonDate : $carbonDate->next(Carbon::SATURDAY);
 
-            return date('Y-m-d', $end);
+            return $end->format('Y-m-d');
         }
     }
 
@@ -879,7 +869,7 @@ class Core
     {
         $senderName = $this->getConfigData('emails.configure.email_settings.sender_name') ?: config('mail.from.name');
 
-        $senderEmail = $this->getConfigData('emails.configure.email_settings.shop_email_from') ?: config('mail.from.address');
+        $senderEmail = $this->getConfigData('emails.configure.email_settings.sender_email') ?: config('mail.from.address');
 
         return [
             'name' => $senderName,
@@ -899,7 +889,8 @@ class Core
             ?: config('mail.from.name'));
 
         $adminEmail = $this->getConfigData('emails.configure.email_settings.admin_email')
-            ?: config('mail.admin.address');
+            ?: (config('mail.admin.address')
+            ?: config('mail.from.address'));
 
         return [
             'name' => $adminName,
@@ -919,7 +910,8 @@ class Core
             ?: config('mail.from.name'));
 
         $contactEmail = $this->getConfigData('emails.configure.email_settings.contact_email')
-            ?: config('mail.contact.address');
+            ?: (config('mail.contact.address')
+            ?: config('mail.from.address'));
 
         return [
             'name' => $contactName,

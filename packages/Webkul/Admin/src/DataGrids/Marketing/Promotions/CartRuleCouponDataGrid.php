@@ -53,6 +53,14 @@ class CartRuleCouponDataGrid extends DataGrid
         ]);
 
         $this->addColumn([
+            'index' => 'times_used',
+            'label' => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.times-used'),
+            'type' => 'integer',
+            'filterable' => true,
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
             'index' => 'created_at',
             'label' => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.created-date'),
             'type' => 'datetime',
@@ -69,15 +77,6 @@ class CartRuleCouponDataGrid extends DataGrid
             'filterable_type' => 'datetime_range',
             'sortable' => true,
         ]);
-
-        $this->addColumn([
-            'index' => 'times_used',
-            'label' => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.times-used'),
-            'type' => 'integer',
-            'searchable' => true,
-            'filterable' => true,
-            'sortable' => true,
-        ]);
     }
 
     /**
@@ -89,7 +88,7 @@ class CartRuleCouponDataGrid extends DataGrid
     {
         $this->addAction([
             'icon' => 'icon-delete',
-            'title' => trans('admin::app.marketing.promotions.catalog-rules.index.datagrid.delete'),
+            'title' => trans('admin::app.marketing.promotions.cart-rules-coupons.datagrid.delete'),
             'method' => 'DELETE',
             'url' => function ($row) {
                 return route('admin.marketing.promotions.cart_rules.coupons.delete', $row->id);

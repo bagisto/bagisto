@@ -1,467 +1,198 @@
-# CHANGELOG for v2.3.x
+# CHANGELOG for v2.4
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## **v2.3.19 (12th of May 2026)** - *Release*
+## Unreleased
 
-- #10422 [fixed] - Fixed channel Home Page SEO (and other translatable channel fields: name, description, maintenance mode text) only saving for the admin's UI locale. The channel edit page was missing the locale-switcher dropdown that every other translatable resource (categories, products, CMS pages) uses, so admins had no way to change the per-locale binding away from English. Added the standard locale-switcher dropdown listing every system locale; switching reloads with `?locale=<code>` and the form binds, validates, and saves only that locale's translation row. Admins can pre-fill SEO for any system locale, including locales not yet attached to the channel — translations are stored against the locale code regardless of channel-locale attachment.
+- Security fixes.
 
-- #10490 [fixed] - Fixed product images not being updated when re-importing a CSV with the same SKUs but new image filenames. The Product importer used to skip image processing entirely for already-existing SKUs, so updates were silently ignored. The importer now treats the CSV `images` column as the source of truth on every run: existing image rows and stored files for the affected products are removed before the new images from the CSV are inserted.
+- #11331 [fixed] Replaced deprecated Venezuelan Bolivar currency code `VEF` with `VES` in seeders and installer configurations, ensuring correct exchange rate synchronization with modern exchange rate APIs.
 
-- #11294 [fixed] - Fixed a refund-time crash ("Trying to access array offset on value of type null") on orders placed via the PayPal Smart Button. A race condition in the checkout UI left the regular Place Order button briefly visible while the cart's payment method was being switched to `paypal_smart_button`; clicking it created an order with the PayPal method but no captured PayPal `orderID`, so the later refund hit a null `additional` payload. The selected payment method is now tracked client-side immediately on radio change (via a new `payment-method-selected` event) so the Smart Button replaces the Place Order button without waiting for the cart round-trip, the standard `storeOrder` endpoint now rejects carts whose payment method is `paypal_smart_button`, and the refund listener no-ops the PayPal API call when the captured `orderID` is missing so the local refund record still succeeds.
+## **v2.4.6 (5th of June 2026)** - *Release*
 
-- #11242 [fixed] - Fixed an exception ("Attempt to read property `addresses` on null") when an admin attempted to reorder an order whose customer had since been deleted. The admin reorder action now checks for a missing customer and redirects back to the order view with a clear flash message instead of letting the null reach the create-order page.
+* Help and resources added.
 
-## **v2.3.18 (24th of April 2026)** - *Release*
+* Security fixes.
 
-- Added Booking product support to the DataTransfer (import) package. Booking products can now be imported via CSV/XLS/XLSX/XML using a new `booking_options` column that follows the existing pipe/key=value convention (same pattern as `bundle_options` / `configurable_variants`). The column encodes the product-level config, type-specific config, and slot or ticket records in pipe-separated sections. All five booking subtypes are supported: default (one/many), appointment, event (with tickets + translations), rental (daily/hourly), and table. Updated the sample product files in all four formats with one example per booking subtype.
+## **v2.4.5 (2nd of June 2026)** - *Release*
 
-- #11258 [security] - Fixed user enumeration vulnerability (CWE-204) in the customer resend-verification endpoint where a missing null-check leaked email existence via differential HTTP responses. Added rate limiting on the route.
+* Added EU Withdrawal feature (Directive (EU) 2023/2673, Article 11a CRD) — customers and guests can withdraw from a contract online via a "Withdraw from contract" button on order pages and a public lookup form, with durable-medium confirmation emails, an admin datagrid + timeline view for managing withdrawals, and a per-channel enable toggle.
 
-- #11273 [fixed] - Reworked the Sales → Booking → Calendar event detail modal to focus on booking information. Removed the ordered amount (Price), added the product name, and now reuses the same booking attributes (From/Till, Location, Ticket, Number of Bookings, etc.) that are shown in the cart and order views — rendered in the same logical order (When → Where → What → How many). The underlying booking query no longer pulls the grand total and now joins `order_items.additional` and the localized product name.
+* Added PhonePe payment gateway integration.
 
-- #10695 [fixed] - Booking product availability is now visually indicated on the date picker. Weekdays with no slots configured, dates outside the `available_from`/`available_to` window, and dates blocked by `prevent_scheduling_before` are now grayed out in the calendar, so customers no longer have to click each date to check availability. Applies to default, appointment, table, and rental booking types.
+* Refined Playwright testcases.
 
-- #11263 [fixed] - Fixed the Cancel Order option ignoring the booking `allow_cancellation` flag. The flag is now snapshotted on the `bookings` record at order placement time, so later product edits never affect placed orders. For mixed orders, cancelling now skips only the non-cancellable booking items and cancels the rest — the Cancel button remains available as long as the order has at least one cancellable item. Amber informational banners explain this behaviour on both admin and customer order views, and a separate banner on the product view warns customers before checkout.
+* Security fixes.
 
-- #11262 [fixed] - Fixed booking products allowing checkout beyond available quantity. The `compareOptions` comparator for booking products now matches on booking slot/date/renting-type so repeated additions of the same slot merge into a single cart item, correctly triggering the out-of-stock validation.
+## **v2.4.4 (5th of May 2026)** - *Release*
 
-- #11261 [fixed] - Fixed the Reorder button being visible in admin and customer order views for booking products that are out of stock. The `Booking` type now implements a proper `isSaleable()` check based on booking quantity, event ticket stock, and the product's availability window. Booking items are also skipped during reorder with an info message, since their original slot data is typically expired.
+* Fixed wrong "From" and "To" dates on the admin Bookings data grid and calendar view caused by the Carbon 3 timezone behavior change in the Laravel 12 upgrade. `Carbon::createFromTimestamp()` now returns UTC by default instead of the app timezone, so the booking timestamps are explicitly converted via `->timezone(config('app.timezone'))` in `BookingDataGrid` and `BookingController`.
 
-- #11260 [fixed] - Fixed event booking showing the "sold out" toast when the requested quantity exceeded the available stock. A dedicated `exceeds_available` message is now shown with the remaining ticket count when stock is still available.
+* Optimized cart rule evaluation to reduce repeated database lookups during cart total calculation, improving cart and checkout performance.
 
-- #11259 [fixed] - Fixed the "Start time must be less than end time" toast appearing for valid multi-day slots (e.g., Saturday to Sunday) on default booking products. Time comparison now runs only for same-day slots, and the frontend overlap check handles cross-week ranges correctly.
+* Refined the admin cart-rule create/edit pages with a clearer Coupon section, a context-aware Actions card, and a dedicated Generated Coupons datagrid with a modal-based bulk-code generator.
 
-- #11251 [fixed] - Fixed a system crash when viewing refund details after refunding a table booking product. The `Booking` product type was marked as composite, causing the refund view to look for child items that do not exist.
+* Refined the storefront cart and onepage checkout summaries with `+` / `−` indicators, a collapsed dual tax-mode display, an expandable Discount breakdown, and a modernized applied-coupon pill.
 
-- #11250 [fixed] - Fixed a system crash when viewing refund details after refunding an appointment booking product, caused by the same composite product misconfiguration.
+* #10832 [feature] - Added a "Sales By Coupon" report to the admin sales reporting dashboard, with a coupon-code badge linking to the corresponding cart rule edit page and a drill-down "View Details" listing showing each order that used a coupon (order ID linking to the order detail, coupon code linking to the cart rule).
 
-- #11240 [fixed] - Updated the event booking product page to display the combined ticket price (base product price + ticket type price) so customers can see the actual amount payable per ticket.
+* #8738 [fixed] - Added column sorting on every reporting list page (Sales / Customers / Products) with sort direction indicators in the column header, fixing the previously non-functional click target.
 
-- #11239 [fixed] - Fixed incorrect slot selection time and date displayed in the cart, customer orders, and admin section for default booking products. Timestamps are now converted using the configured application timezone to match the slot selected by the customer.
+## **v2.4.3 (24th of April 2026)** - *Release*
 
-- #11238 [fixed] - Fixed incorrect slot duration and time visibility in the cart, customer orders, and admin section by casting slot timestamps to integer and applying consistent timezone conversion across all booking attribute formatters.
+* Ported all booking product bug fixes from the 2.3 branch into 2.4. Key highlights:
+  - Added admin-side order creation support for booking products across appointment, event, rental, default, and table sub-types.
+  - Fixed booking slot overlap detection and corrected the calendar window generation for appointment bookings.
+  - Fixed display pricing for rental and event sub-types with a "starting from" price on listings and corrected strike-through pricing.
+  - Hardened cart handling for booking items (quantity updates, missing-ticket guards, inverted rental range checks).
+  - Fixed booking product import by updating the data-transfer sample files and correcting the importer for booking attributes.
 
-- #11236 [fixed] - Fixed an issue with incorrect slot visibility on the product page for table booking products when the selected weekday or date was out of range.
-
-- #11235 [fixed] - Fixed an issue causing incorrect slot visibility based on selected day and date in appointment booking.
-
-- #11234 [fixed] - Fixed product categories being silently cleared when saving the product while viewing a channel whose root category differs from another channel's. The edit form now preserves categories outside the current channel's tree via hidden inputs so `sync()` no longer drops them.
-
-- #11232 [fixed] - Fixed guest limit and booking slot details not being visible in the cart for table booking products. The cart attributes now include charged-per type (per table/per guest) and guest limit when applicable.
-
-- #11230 [fixed] - Fixed irrelevant slot time displayed in the cart for hourly rental bookings by casting timestamps to integer and applying timezone conversion consistently.
-
-- #10902 [fixed] - Updated appointment booking products to display only available time slots.
-
-- #10739 [fixed] - Fixed booking information not being displayed properly on the product view page when the booking information was edited on the product edit page. Null guards were added so storefront views do not fail when slot relations are missing.
-
-- #10738 [fixed] - Fixed the "Slots Time Duration" functionality not working correctly for the "One Booking for Many Days" default booking configuration. Overlapping multi-day slot ranges are now matched against the selected day of week and cross-day slots are no longer silently dropped by the backend overlap validator.
-
-- #10708 [fixed] - Fixed event booking cart allowing quantity to exceed the ticket limit. A `max-value` constraint was added to the quantity changer based on the ticket's available quantity.
-
-- #10697 [fixed] - Fixed incorrect alert message being shown when a rental product was unavailable. Type-specific error messages are now returned for rental, event, and other booking types.
-
-- #10696 [fixed] - Fixed the end date not being displayed for "One Booking for Many Days" booking products on the storefront. Multi-day slot labels now include the day and date along with the time.
-
-- #10683 [fixed] - Fixed duplicate slot timing being shown for the same day on booking products. The slot calculation helper now deduplicates slots by timestamp and performs sorting once after slot generation completes.
-
-## **v2.3.17 (13th of April 2026)** - *Release*
+## **v2.4.2 (13th of April 2026)** - *Release*
 
 * Added support for Romanian language.
 
 * Fixed product 404 when locale-specific URL keys differ across locales by adding cross-locale fallback in product slug resolution and locale-aware URL rewrite redirects.
 
-* Fixed tax categories being undeletable once any tax rate was assigned or any historical order referenced them. Removed the misleading guard against tax rate assignments (the pivot table already cascades) and changed the `cart_items.tax_category_id` and `order_items.tax_category_id` foreign keys to `nullOnDelete`, so live carts and historical orders no longer block deletion and their denormalized tax amounts remain intact.
+* Upgraded image search to support AI-powered analysis via Laravel AI SDK (MagicAI), with TensorFlow.js as the default fallback. Configurable under Magic AI > Storefront Features > AI Image Search.
 
-* Fixed an issue where `<img>` tags were stripped from theme static content on save after the recent HTML sanitization hardening. Images inserted from the static-content editor now include an empty `src=""` alongside `data-src`, so they satisfy HTMLPurifier's required-attribute check while still being lazy-loaded by lazysizes.
+* Added Base URL configuration field for Ollama provider in Magic AI settings.
 
-* Fixed the customer GDPR data request form on the storefront not returning a JSON response for AJAX submissions, causing the success state to fail in the frontend.
+* Fixed RMA rules issues where inactive rules were still selectable on the product create/edit form, and where the "Create" modal would update the last-edited rule after an edit modal had been opened.
 
-* Fixed customer datagrid export failing because the computed `revenue` column was being evaluated per-row during export. The column is now marked as non-exportable.
+* #11220 [fixed] - Fixed SQL injection in DataGrid sort column and unauthenticated path traversal via ImageCache.
 
-* Fixed the error message shown when deleting a customer with pending orders. The previous translation key showed an unhelpful "Orders is Pending"; replaced with a dedicated `delete-pending-order-error` key and a clearer message across all locales.
+* #11212 [fixed] - Fixed TypeError in Carbon when RESPONSE_CACHE_ENABLED is enabled.
 
-* #11225 [fixed] - Fixed incorrect translation key for coupon usage limit exceeded message.
+* #11013 [fixed] - Fixed an issue where the order date range filter accepted a single date input and returned no results.
 
-* #10967 [fixed] - Fixed shipment options not showing when adding VAT ID with unsupported country during checkout.
+## **v2.4.1 (23rd of March 2026)** - **Release**
 
-* #10846 [fixed] - Fixed wishlist quantity not updating when moving the same product from cart to wishlist.
+* Fixed an issue where the price slider was not displaying on the layered navigation.
 
-* #11223 [fixed] - Fixed `explode()` null deprecation in `AppServiceProvider` when `APP_DEBUG_ALLOWED_IPS` is unset.
+* Fixed an issue where static content was pointing to demo categories and giving 404 errors when installed without sample products.
 
-## **v2.3.16 (23rd of March 2026)** - *Release*
+* #11207 [fixed] - Performed a major update and cleanup of Polish translations across both Admin and Shop sections.
 
-* Fixed a critical race condition vulnerability in coupon usage during concurrent checkout, where two simultaneous orders could both redeem a single-use coupon. Coupon validation and usage consumption are now atomic using row-level locking inside the order creation transaction.
+* #10792 [feature] - Added Cache Management in Admin Configuration panel.
 
-* Fixed an issue with Elasticsearch search for grouped products.
+## **v2.4.0 (19th of March 2026)** - **Release**
 
-* #11204 [fixed] - Fixed a Chrome browser display issue caused by `v-pre` handling related to SSTI protection.
+### New Features
 
-* #11196 [fixed] - Fixed an issue where Vue.js `@click` directives were not working on mobile Chrome on the order detail page.
+* **[Laravel 12 Upgrade]** Upgraded framework to Laravel 12 with comprehensive modernization:
+  - Fixed Carbon date/time type strictness issues (int/float parameters, non-null timezones).
+  - Modernized all legacy PHP date functions (`strtotime()`, `date()`, `date_default_timezone_set()`) to Carbon equivalents.
+  - Implemented timezone fallback logic using `config('app.timezone')` for channel-based operations.
+  - Updated PDF response headers to match Laravel 12 format (Content-Disposition).
+  - Enhanced date handling methods in Core helper with proper Carbon integration.
 
-* #10378 [fixed] - Added Elasticsearch index prefix support to avoid index conflicts when multiple Bagisto instances share the same Elasticsearch cluster.
+* Implemented two-factor authentication (2FA) for admin users to enhance account security.
 
-## **v2.3.15 (11th of March 2026)** - *Release*
+* Migrated from Google reCAPTCHA v2 to Google reCAPTCHA Enterprise for enhanced bot protection.
 
-* Added Exchange Rates core configuration with scheduled auto-update, API key management (Fixer & ExchangeRate-API), and `date_format` vee-validate rules.
+* Added Stripe payment gateway integration with secure checkout session.
 
-* #11187 [fixed] - Fixed an issue causing an "Undefined array key 'resolver'" error.
+* Added Razorpay payment gateway integration with drop-in UI checkout experience.
 
-* #11176 [fixed] - Fixed an issue where the extra price for image/file customizable options was not applied in the cart and checkout for simple products.
+* Added PayU payment gateway integration with redirect-based checkout flow.
 
-* #11107 [fixed] - Fixed an issue with the SEO URL preview.
+* Upgraded PayPal SDK from abandoned v1 to modern v2 with improved reliability and security. Refactored PayPal integration to use controller-based transaction handling and modernized IPN processing with Laravel HTTP client.
 
-* #10964 [fixed] - Fixed an issue where the search query was not populated in the search box on the customer end.
+* Added comprehensive Return Merchandise Authorization (RMA) system with complete order return management.
 
-* #10250 [fixed] - Added support email configuration through the core configuration settings.
+* Integrated Laravel AI SDK for Magic AI, refactoring the provider and model layer into per-provider enums with a unified `AiProvider` entry point and updated AI model configurations.
 
-## **v2.3.14 (5th of March 2026)** - *Release*
+* Added fresh demo products during the installation process with updated translations.
 
-* Fixed an issue where wishlist items were being fetched for all customers when performing "Move to Cart" or deleting wishlist items.
+* Added Pest and Playwright test cases.
 
-## **v2.3.13 (2nd of March 2026)** - *Release*
+* #11126 [feature] - Added SMTP configuration support from the admin panel.
 
-* Fixed catalog rule and cart rule condition validation where boolean value `0` was being incorrectly treated as empty and causing the condition to fail.
+### Changes
 
-* #11034 [fixed] - Fixed an issue where the `createOrderIfNotThenRetry` method caused an infinite loop by adding a configurable max retry attempts limit.
+* Removed `shetabit/visitor` package and all visitor tracking functionality including dashboard visitors widget, products with most visits reporting, customers traffic reporting, and purchase funnel visitor metrics.
 
-* #10876 [fixed] - Fixed an issue where customers were unable to resubscribe to the newsletter after unsubscribing or after an admin changed their subscription status from True to False.
+### Bug Fixes
 
-* #10854 [fixed] - Fixed an issue where incomplete product data was exported in CSV, XLS, and XLSX formats.
+* Included all bug fix updates from version 2.3.
 
-* #10828 [fixed] - Fixed an issue in the customer order view where the parent SKU was being displayed instead of the variant SKU for configurable products.
+* Optimized RMA-related queries and introduced a return period column in the order items table.
 
-* #10827 [fixed] - Fixed an issue where customers from one channel could see orders from another channel. Now customers are bound to a specific channel at registration and login, ensuring orders are channel-specific.
+* Fixed issues with language switching in the installation wizard and corrected PHP configuration texts.
 
-## **v2.3.12 (20th of February 2026)** - *Release*
+* Fixed automatic application URL detection and automatic timezone selection during installation.
 
-* Fixed admin redirect logic after login to properly handle single-level permissions by redirecting to the first accessible child route.
+* Fixed backend validation and VeeValidate error handling to ensure proper integration with Laravel backend validation in the installer package.
 
-* #11030 [fixed] - Added management support for shop footer copyright content in the admin panel.
+* #11100 [fixed] - Fixed an issue where updating the return window rule affected previously placed orders.
 
-* #10960 [fixed] - Fixed an issue where, in certain scenarios, adding a bundle product with a quantity greater than 1 calculated the cart subtotal for only a single quantity, resulting in incorrect pricing.
+### Documentation
 
-* #10929 [fixed] - Added redirect URI configuration support for social authentication login.
+* Updated the upgrade guide (UPGRADE.md) with breaking changes from v2.3 including Laravel 12, reCAPTCHA Enterprise, PayPal SDK upgrade, visitor tracking removal, and Magic AI SDK migration.
 
-* #10831 [fixed] - Fixed COD appearing for downloadable products in mixed cart.
+## **v2.4.0-beta6 (18th of March 2026)** - **Release**
 
-* #9879 [fixed] - Fixed an issue where invoice email attachments were not being sent correctly.
+* Removed `shetabit/visitor` package and all visitor tracking functionality including dashboard visitors widget, products with most visits reporting, customers traffic reporting, and purchase funnel visitor metrics.
 
-## **v2.3.11 (22nd of January 2026)** - *Release*
+* Updated the upgrade guide (UPGRADE.md) with breaking changes from v2.3 including Laravel 12, reCAPTCHA Enterprise, PayPal SDK upgrade, visitor tracking removal, and Magic AI SDK migration.
 
-* Security updates.
+* Rewrote AGENTS.md with accurate codebase documentation covering architecture, conventions, commands, and development guidelines.
 
-* Enhanced form validation by implementing auto-scroll to the first error field, with support for regular inputs, array fields (categories, channels), nested fields, and TinyMCE editors. Added fallback flash messages when error fields cannot be located or scrolled to.
+## **v2.4.0-beta5 (18th of March 2026)** - **Release**
 
-* #11080 [fixed] - Fixed a currency display issue in invoices when the channel currency differed from the admin panel currency.
+* Included bug fix updates from version 2.3.
 
-* #10973 [fixed] - Fixed an unnecessary validation error triggered by VeeValidate on input fields containing spaces.
+## **v2.4.0-beta4 (5th of March 2026)** - **Release**
 
-## **v2.3.10 (2nd of January 2026)** - *Release*
+* Enhanced the Laravel AI SDK integration for Magic AI and improved the related configuration sections.
 
-* Fixed a security issue in the customer order reorder functionality.
+* Updated all outdated AI models and image model configurations.
 
-* Fixed a Server-Side Template Injection (SSTI) vulnerability in the first and last name fields that could be exploited by low-privileged users.
+## **v2.4.0-beta3 (3rd of March 2026)** - **Release**
 
-* Refined the Blade tracer to track only view files, ensuring accurate view-level tracing.
+* Integrated Laravel AI SDK for Magic AI, refactoring the provider and model layer into per-provider enums with a unified `AiProvider` entry point.
 
-* Fixed SSTI vulnerability in type parameter handling — user input is now properly sanitized/validated to prevent server-side template injection.
+* #11126 [feature] - Added SMTP configuration support from the admin panel.
 
-* Sanitized product review attachments to prevent stored XSS.
+* Merged all bug fixes and improvements from version 2.3.
 
-* Sanitized CMS `html_content` during create and update operations to prevent stored XSS vulnerabilities.
+* Added pest and playwright testcases.
 
-* Added validation for external URLs in downloadable product samples to block access to private and reserved IP ranges.
+## **v2.4.0-beta2 (17th of February 2026)** - **Release**
 
-* #11058 [fixed] - Fixed the speculation issue and resolved the revoke endpoint issue.
+* Updated the translations for all the dummy products.
 
-* #11053 [fixed] - Fixed an issue where the custom field price was not converted according to the exchange rate on the product view page.
+* Optimized RMA-related queries and introduced a return period column in the order items table.
 
-* #11051 [fixed] - Fixed a redirection issue that occurred when a product had insufficient quantity.
+* Fixed issues with language switching in the installation wizard and corrected PHP configuration texts.
 
-* #11028 [fixed] - Fixed an issue where horizontal scrolling caused misalignment of fixed-position elements (Cart/Profile buttons) on the search page.
+* Fixed automatic application URL detection and automatic timezone selection during installation.
 
-* #10975 [fixed] - Fixed validation to ensure the source and target currencies are different when creating exchange rates.
+* Fixed backend validation and VeeValidate error handling to ensure proper integration with Laravel backend validation in the installer package.
 
-## **v2.3.9 (8th of December 2025)** - *Release*
+* #11100 [fixed] - Fixed an issue where updating the return window rule affected previously placed orders.
 
-* Meta tag, comment and header added for Bagisto.
+## **v2.4.0-beta1 (9th of February 2026)** - **Release**
 
-* #11035 [fixed] - Fixed an issue where an exception occurred when saving a CMS page without selecting a channel.
+* **[Laravel 12 Upgrade]** Upgraded framework to Laravel 12 with comprehensive modernization:
+  - Fixed Carbon date/time type strictness issues (int/float parameters, non-null timezones).
+  - Modernized all legacy PHP date functions (`strtotime()`, `date()`, `date_default_timezone_set()`) to Carbon equivalents.
+  - Implemented timezone fallback logic using `config('app.timezone')` for channel-based operations.
+  - Updated PDF response headers to match Laravel 12 format (Content-Disposition).
+  - Enhanced date handling methods in Core helper with proper Carbon integration.
 
-* #11014 [fixed] - Fixed the wishlist icon issue on the product view page caused by Full Page Cache (FPC).
+* Implemented two-factor authentication (2FA) for admin users to enhance account security.
 
-* #11011 [fixed] - Added missing translation for the Customer Group delete response message.
+* Migrated from Google reCAPTCHA v2 to Google reCAPTCHA Enterprise for enhanced bot protection.
 
-* #11010 [fixed] - Fixed the CAPTCHA configuration issue that allowed saving settings without the site key or secret key.
+* Added Stripe payment gateway integration with secure checkout session.
 
-* #10985 [fixed] - Fixed an issue in CustomerGroupPrice where deleting any group discount incorrectly removed the last discount entry instead of the selected one.
+* Added Razorpay payment gateway integration with drop-in UI checkout experience.
 
-* #10899 [fixed] - Fixed a validation error that occurred while importing CSV files in Data Transfer.
+* Added PayU payment gateway integration with redirect-based checkout flow.
 
-* #10866 [fixed] - Fixed the issue where filterable options on the theme page were not appearing.
+* Upgraded PayPal SDK from abandoned v1 to modern v2 with improved reliability and security. Refactored PayPal integration to use controller-based transaction handling and modernized IPN processing with Laravel HTTP client.
 
-## **v2.3.8 (16th of October 2025)** - *Release*
+* Added comprehensive Return Merchandise Authorization (RMA) system with complete order return management.
 
-* Improved octane compatibility.
-
-* Added the missing captcha on the checkout login page.
-
-* Refined TinyMCE editor integration and applied related security fixes.
-
-* Applied security fixes to product attributes, including short description, long description, and other TinyMCE-enabled fields.
-
-* Fixed an issue where the description was not updating correctly during channel updates.
-
-* Implemented security fixes for the DataGrid export feature.
-
-* #10971 [fixed] - Fixed an issue where updating a field without changing the image caused the image to break or not display correctly.
-
-* #10898 [fixed] - Added an asterisk (*) to indicate all required fields in configurable product variants.
-
-## **v2.3.7 (24th of September 2025)** - *Release*
-
-* Improved full application perfomance and web vital score.
-
-* Implemented did you mean functionality.
-
-* Fixed the database prefix validation issue in both the GUI and CLI installers.
-
-* Resolved translation issues for the `ca` and `id` locales across the Admin, Shop, and Installer packages.
-
-* Added the capability to run the dev command from the customized theme package without needing to run the publishers repeatedly.
-
-* #10834 [enhancement] - Refined the admin pages and made approximately 95% of them responsive.
-
-* #10955 [fixed] - Fixed cancel order issue in mobile device.
-
-* #10953 [fixed] - Fixed bundle product issue when having one simple product in cart.
-
-* #10952 [fixed] - Fixed move to cart bundle product issue when having one simple product in cart.
-
-* #10937 [fixed] - Customer profile photo removed when saving profile without changes.
-
-* #10923 [fixed] - Admin -> URL Rewrite DataGrid does not match the ACL permission.
-
-* #10912 [fixed] - ACL for create invoice is not correct.
-
-* #10903 [fixed] - Fixed elasticsearch issue for Hindi, Chinese and Portugues locale.
-
-* #10897 [fixed] - Fixed missing success message when admin approving the review.
-
-* #10893 [fixed] - Fixed email verification issue.
-
-* #10883 [fixed] - Fixed broken artisan commands.
-
-* #10847 [fixed] - Fixed attribute family issue where new attribute group is not getting saved.
-
-* #10840 [fixed] - Fixed flash message issue which is caused due to FPC.
-
-* #10838 [fixed] - Fixed the cart issue.
-
-* #10836 [fixed] - Fixed the date of birth issue.
-
-* #10755 [fixed] - Fixed review api issue by setting generic message for customer facing end.
-
-* #10711 [fixed] - Show validation error in cart rule coupons when entering wrong input.
-
-* #10701 [fixed] - Fixed inventories group attribute condition error.
-
-* #10694 [fixed] - Closed time slot should show all the time slots except the mentioned one.
-
-* #10693 [fixed] - Fixed issue where multiple bookings created for back-to-back days showed all bookings starting on the first day, even if they started later.
-
-* #10692 [fixed] - Show all time slots in default booking type (one booking for many days).
-
-* #10686 [fixed] - Prevent customer from updating the quantity of appointment booking type.
-
-* #10684 [fixed] - Show validation error when entering wrong time slot.
-
-* #10682 [fixed] - Show correct alert message when entering wrong date in the "available to" column of booking product.
-
-## **v2.3.6 (27th of June 2025)** - *Release*
-
-* Added a method in the Installer class to prompt for a GitHub star once the installation is completed.
-
-* Fixed the blank search issue that was causing all products to be fetched.
-
-* Handled the storage URL directly within the DataGrid class instead of the view.
-
-* Optimized the anonymous file by removing unnecessary currency code, and cleaned up the Maintenance Mode class by removing the unused Database Manager code.
-
-* #10819 [fixed] - Fixed the issue related to maintenance mode.
-
-* #10782 [fixed] - Resolved an issue where the "Bundle Items" section was not visible while creating a Bundle Product in the French locale (APP_LOCALE=fr). This was caused by unescaped apostrophes in translatable strings breaking JavaScript during rendering.
-
-## **v2.3.5 (11th of June 2025)** - *Release*
-
-* Added support for the Indonesian language.
-
-* Fixed an issue in the installer where old values were being retained, causing the first attempt to fail. The installation now completes successfully on the first attempt.
-
-* Added missing event dispatches to ensure proper event flow and handling.
-
-* Added backend validation for image uploads in the image search feature.
-
-* #10802 [fixed] - Removed default address handling from the repository and moved it to the controllers to prevent side effects across customer addresses in the admin panel, shop front, and checkout pages.
-
-## **v2.3.4 (29th of May 2025)** - *Release*
-
-* Fixed the issue where the total amount was displaying incorrectly when customizable options were empty.
-
-* Resolved the sort order issue for paginated attribute options on the category page.
-
-* Fixed the Spanish translation issue on the sidebar, which was caused by the translation key itself being translated.
-
-* Fixed the GDPR translation issue for all locales, which was previously falling back to the English locale.
-
-* Resolved the filter issue for date and datetime types in the DataGrid.
-
-* Fixed the date translation issue that was coming from the Carbon instance.
-
-* Resolved the "break-all" issue on the product view page.
-
-* Fixed the issue where the transaction drawer was not opening as expected.
-
-* Fixed the product DataGrid search issue in Elasticsearch mode when no IDs are present.
-
-* Fixed the multiselect filter and also added support for checkbox filters in both Elasticsearch and database modes.
-
-* Fixed the filter issue for boolean-type attributes in Elasticsearch mode.
-
-* #10788 [fixed] - Added a slight delay of 300ms along with a debounce mechanism to ensure that the dash is removed only after the user stops typing.
-
-* #10735 [fixed] - Fixed the issue with the multiselect filter that was preventing products from being correctly filtered on the category page.
-
-* #10718 [fixed] - Fixed the issue that allowed an admin to delete their own account.
-
-## **v2.3.3 (22nd of May 2025)** - *Release*
-
-* Resolved an issue with the category filter functionality.
-
-* Fixed an issue with search attributes on the category page.
-
-* Addressed a problem with category listings.
-
-* Corrected issues on the search page and toolbar.
-
-* #10784 [fixed] - Fixed store search issue caused by Full Page Cache (FPC).
-
-## **v2.3.2 (21st of May 2025)** - *Release*
-
-* Response cache is enabled by default.
-
-* Fetch priority added for the slider image and product view image.
-
-* Separate configuration provided for speculation APIs for both prerender and prefetch.
-
-* Searchable attributes added on the category view page.
-
-## **v2.3.1 (14th of May 2025)** - *Release*
-
-### Features:
-
-* Side Bar Menu: Introduced a new sidebar menu that provides users with quick access to various sections of the application, improving navigation and user experience.
-
-* Default Menu Feature: Added the ability to set a default menu for users, allowing for a more personalized and streamlined interface.
-
-* #10679 [enhancement] - Some options in the products need to be enabled by default.
-
-* #10666 [enhancement] - Need to create the configuration in the admin panel for the removed keys from the .env
-
-* #10747 [fixed] - Update Locale Name from 'Canada' to 'Catalan'
-
-## **v2.3.0 (27th of March 2025)** - *Release*
-
-### Features:
-
-**Booking Product**
-
-* Integrated the Booking Product module into the core of Bagisto, allowing native support for booking-based products.
-
-**GDPR Compliance Features**
-
-* Integrated GDPR compliance functionalities into the core of Bagisto, enabling users to manage data protection requests and cookie consent preferences directly within the platform.
-
-**Canadian Locale Support**
-
-* Introduced support for the Canadian locale, enabling users to view the store interface in Canadian Locale.
-
-**AI Model Options Update**
-
-* Revised the available AI models for review translation, replacing older models with the latest versions to enhance performance and accuracy.
-
-**Sitemap Enhancement**
-
-* Introduced new settings to enable or disable the website's sitemap, aiming to improve search engine optimization and enhance user experience.
-
-* Implemented configurable file limit options for the sitemap, providing greater control over its structure and performance.
-
-**Laravel 11 Support**
-
-* Updated the project to be compatible with Laravel 11, ensuring alignment with the latest framework features and improvements.
-
-**Customizable Item Feature for Simple Products**
-
-* Introduced the ability to customize simple products, allowing for enhanced flexibility and personalization options.
-
-* Customer can add the customized content with the product.
-
-**Enhanced Playwright Test Cases**
-
-* Improved test stability and maintainability by implementing best practices,
-
-* #10596 [feature] - In Shop Front, we should have an option to revoke the request which is added.
-
-* #9953 [enhancement] - Need to have "Back Button" in each view all sections of Reporting Side Menu Options.
-
-* #10501 [enhancement] - Drop down menu showing on mobile screens or reducing the browser window when no drop down available.
-
-* #10591 [enhancement] - GDPR Feature should be multichannel and Multilocale Supported.
-
-* #10597 [enhancement] - GDPR Status in customer profile, First letter must be capital.
-
-* #10598 [enhancement] - Admin End GDPR Type Delete and Update must have first letter capital.
-
-* #10602 [enhancement] - In Shop Front GDPR datagrid, Declined Label Color is not appearing.
-
-* #10603 [enhancement] - Add New Filters in Admin End GDPR Section with Status and Type.
-
-* #10604 [enhancement] - Date filter in shop front for logged in customer is not working properly with System Dark Theme.
-
-* #10610 [enhancement] - Customize Error Page to Replace the Default Index Page
-
-* #10489 [fixed] - Product in Cart Appears for User Despite Being Out of Stock. If the Product is already added in the Cart by the user.
-
-* #10566 [fixed] - Wishlist Price Display Issue with Currency Exchange in Bagisto.
-
-* #10587 [fixed] - Add character Validation in GDPR Agreement Checkbox Label.
-
-* #10589 [fixed] - Add character Validation in GDPR Static Block Identifier and Description.
-
-* #10590 [fixed] - GDPR Cookie Box Must be Responsive.
-
-* #10592 [fixed] - In GDPR Your Cookie Consent Preference the content which is added should appear properly in Shop Front without Tags.
-
-* #10593 [fixed] - Text Overlapping the URL Rewrite Targeted and Requested Path in URL Rewrite Datagrid.
-
-* #10594 [fixed] - Text Overlapping in the Settings User Section when we add long email.
-
-* #10595 [fixed] - Shop Front -> Logged in user GDPR Request Datagrid in profile there we can see UI issue in Date.
-
-* #10599 [fixed] - Export All GDPR Requests in Admin Panel.
-
-* #10601 [fixed] - GDPR Feature is disabled and still we are able to access with URL.
-
-* #10605 [fixed] - When we click on Save and Continue for Your Cookie Consent Preferences in Shop Front it is not redirecting to Shop.
-
-* #10606 [fixed] - GDPR Agreement should not be a mandatory field to be selected while registration page.
-
-* #10618 [fixed] - Priority Detail Not Modify & Maximum no. of URLs per file In Sitemap Configuration.
-
-* #10633 [fixed] - GDPR Data Request Page is Not Responsive on All Devices.
-
-* #10645 [fixed] - ThemeDataGrid Query optimization.
-
-* #10641 [fixed] - Last Product's Quantity Becomes Blank After Deleting a Product from Grouped Productuser.
+* Added fresh demo products during the installation process.

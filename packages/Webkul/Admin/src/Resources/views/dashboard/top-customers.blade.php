@@ -32,7 +32,7 @@
                     v-if="report.statistics.length"
                     v-for="customer in report.statistics"
                 >
-                    <a :href="customer.id ? `{{ route('admin.customers.customers.view', '') }}/${customer.id}` : '#'">
+                    <a :href="customer.id ? '{{ route('admin.customers.customers.view', ':id') }}'.replace(':id', customer.id) : '#'">
                         <div class="flex justify-between gap-1.5">
                             <div class="flex flex-col">
                                 <p class="font-semibold text-gray-600 dark:text-gray-300">

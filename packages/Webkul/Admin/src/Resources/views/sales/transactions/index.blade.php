@@ -78,14 +78,14 @@
                             <!-- Invoice ID -->
                             <p
                                 class="break-words"
-                                v-text="record.invoice_id"
+                                v-html="record.invoice_id"
                             >
                             </p>
 
                             <!-- Order ID -->
                             <p
                                 class="break-words"
-                                v-text="record.order_id"
+                                v-html="record.order_id"
                             >
                             </p>
 

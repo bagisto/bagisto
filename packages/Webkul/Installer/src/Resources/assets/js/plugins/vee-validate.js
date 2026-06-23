@@ -176,6 +176,7 @@ export default {
                     ...pl,
                     messages: {
                         ...pl.messages,
+                        confirmed: "Pole {field} nie zgadza się z polem potwierdzającym",
                         phone: "To {field} musi być prawidłowym numerem telefonu",
                     },
                 },

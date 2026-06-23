@@ -8,7 +8,6 @@ use Illuminate\Support\Collection;
 use Webkul\Admin\Helpers\Reporting\Customer;
 use Webkul\Admin\Helpers\Reporting\Product;
 use Webkul\Admin\Helpers\Reporting\Sale;
-use Webkul\Admin\Helpers\Reporting\Visitor;
 
 class Dashboard
 {
@@ -20,8 +19,7 @@ class Dashboard
     public function __construct(
         protected Sale $saleReporting,
         protected Product $productReporting,
-        protected Customer $customerReporting,
-        protected Visitor $visitorReporting
+        protected Customer $customerReporting
     ) {}
 
     /**
@@ -111,18 +109,6 @@ class Dashboard
     }
 
     /**
-     * Returns visitors statistics.
-     */
-    public function getVisitorStats(): array
-    {
-        return [
-            'total' => $this->visitorReporting->getTotalVisitorsProgress(),
-            'unique' => $this->visitorReporting->getTotalUniqueVisitorsProgress(),
-            'over_time' => $this->visitorReporting->getCurrentTotalVisitorsOverTime(),
-        ];
-    }
-
-    /**
      * Returns top selling products statistics.
      */
     public function getTopSellingProducts(): Collection
@@ -169,6 +155,6 @@ class Dashboard
      */
     public function getDateRange(): string
     {
-        return $this->getStartDate()->format('d M').' - '.$this->getEndDate()->format('d M');
+        return $this->getStartDate()->translatedFormat('d M').' - '.$this->getEndDate()->translatedFormat('d M');
     }
 }

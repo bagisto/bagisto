@@ -93,7 +93,7 @@
                                 <x-shop::form.control-group class="mt-5">
                                     {!! \Webkul\Customer\Facades\Captcha::render() !!}
 
-                                    <x-shop::form.control-group.error control-name="g-recaptcha-response" />
+                                    <x-shop::form.control-group.error control-name="recaptcha_token" />
                                 </x-shop::form.control-group>
                             @endif
                         </x-slot>
@@ -136,10 +136,10 @@
                 }) {
                     this.isStoring = true;
 
-                    const captchaResponse = document.querySelector('[name="g-recaptcha-response"]')?.value
+                    const captchaResponse = document.querySelector('[name="recaptcha_token"]')?.value
 
-                    params['g-recaptcha-response'] = captchaResponse;
-                   
+                    params['recaptcha_token'] = captchaResponse;
+
                     this.$axios.post("{{ route('shop.api.customers.session.create') }}", params)
                         .then((response) => {
                             this.isStoring = false;

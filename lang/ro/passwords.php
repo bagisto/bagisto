@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'reset' => 'Parola dumneavoastră a fost resetată.',
-    'sent' => 'V-am trimis prin e-mail linkul de resetare a parolei.',
-    'throttled' => 'Vă rugăm să așteptați înainte de a reîncerca.',
-    'token' => 'Acest token de resetare a parolei este invalid.',
-    'user' => 'Nu putem găsi un utilizator cu această adresă de e-mail.',
+    'reset' => 'Your password has been reset.',
+    'sent' => 'We have emailed your password reset link.',
+    'throttled' => 'Please wait before retrying.',
+    'token' => 'This password reset token is invalid.',
+    'user' => "We can't find a user with that email address.",
 
 ];

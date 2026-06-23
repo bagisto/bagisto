@@ -1,23 +1,10 @@
-import { test } from "../../../../setup";
-import { expect } from "@playwright/test";
-import { ProductCreation } from "../../../../pages/product";
-import { CreateRules } from "../../../../pages/rules";
+import { test, expect } from "../../../../setup";
+import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
+import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
+import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
+import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
+import { loginAsAdmin } from "../../../../utils/admin";
 import { generateName, generateSlug } from "../../../../utils/faker";
-
-test.beforeEach("should create simple product", async ({ adminPage }) => {
-    const productCreation = new ProductCreation(adminPage);
-
-    await productCreation.createProduct({
-        type: "simple",
-        sku: `SKU-${Date.now()}`,
-        name: `Simple-${Date.now()}`,
-        shortDescription: "Short desc",
-        description: "Full desc",
-        price: 199,
-        weight: 1,
-        inventory: 100,
-    });
-});
 
 test("should create attribute family for creating rule", async ({
     adminPage,
@@ -67,44 +54,96 @@ test("should create attribute family for creating rule", async ({
     ).toBeVisible();
 });
 
+async function runCatalogRuleTest({
+    page,
+    operator,
+    optionSelect,
+    type,
+}: {
+    page: any;
+    operator: string;
+    optionSelect: string;
+    type: string;
+}) {
+    const ruleCreatePage = new RuleCreatePage(page);
+    const ruleApplyPage = new RuleApplyPage(page);
+
+    await loginAsAdmin(page);
+
+    await ruleCreatePage.catalogRuleCreationFlow();
+
+    const discountValue = await ruleCreatePage.addCondition({
+        attribute: "product|attribute_family_id",
+        operator,
+        optionSelect,
+        couponType: type,
+    });
+
+    await ruleCreatePage.saveCatalogRule();
+
+    await ruleApplyPage.verifyCatalogRule(discountValue ?? 0, type);
+}
+
+const testCases = [
+    {
+        operator: "==",
+        optionSelect: "1",
+        label: "is equal to",
+        type: "percentage",
+    },
+    {
+        operator: "==",
+        optionSelect: "1",
+        label: "is equal to",
+        type: "fixed",
+    },
+    {
+        operator: "!=",
+        optionSelect: "2",
+        label: "is not equal to",
+        type: "percentage",
+    },
+    {
+        operator: "!=",
+        optionSelect: "2",
+        label: "is not equal to",
+        type: "fixed",
+    },
+];
+
 test.describe("catalog rules", () => {
     test.describe("product attribute conditions", () => {
-        test.afterEach(
-            "should delete the created product and rule",
-            async ({ page }) => {
-                const createRules = new CreateRules(page);
-                await createRules.deleteCatalogRuleAndProduct();
-            },
-        );
+        test.beforeEach(async ({ adminPage }) => {
+            const productCreation = new ProductCreation(adminPage);
 
-        test("should apply coupon when attribute family of product condition is -> is equal to", async ({
-            page,
-        }) => {
-            const createRules = new CreateRules(page);
-            await createRules.adminlogin();
-            await createRules.catalogRuleCreationFlow();
-            await createRules.addCondition({
-                attribute: "product|attribute_family_id",
-                operator: "==",
-                optionSelect: "1",
+            await productCreation.createProduct({
+                type: "simple",
+                sku: `SKU-${Date.now()}`,
+                name: `Simple-${Date.now()}`,
+                shortDescription: "Short desc",
+                description: "Full desc",
+                price: 199,
+                weight: 1,
+                inventory: 100,
             });
-            await createRules.saveCatalogRule();
-            await createRules.verifyCatalogRule();
         });
 
-        test("should apply coupon when attribute family of product condition is -> is not equal to", async ({
-            page,
-        }) => {
-            const createRules = new CreateRules(page);
-            await createRules.adminlogin();
-            await createRules.catalogRuleCreationFlow();
-            await createRules.addCondition({
-                attribute: "product|attribute_family_id",
-                operator: "!=",
-                optionSelect: "2",
-            });
-            await createRules.saveCatalogRule();
-            await createRules.verifyCatalogRule();
+        test.afterEach(async ({ page }) => {
+            const ruleDeletePage = new RuleDeletePage(page);
+            await ruleDeletePage.deleteCatalogRuleAndProduct();
         });
+
+        for (const tc of testCases) {
+            test(`should apply coupon when attribute family condition is -> ${tc.label} (${tc.type})`, async ({
+                page,
+            }) => {
+                await runCatalogRuleTest({
+                    page,
+                    operator: tc.operator,
+                    optionSelect: tc.optionSelect,
+                    type: tc.type,
+                });
+            });
+        }
     });
 });

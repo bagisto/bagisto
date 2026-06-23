@@ -2,7 +2,9 @@
 
 namespace Webkul\Shop\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\View\View;
+use Webkul\MagicAI\Facades\MagicAI;
 use Webkul\Marketing\Repositories\SearchTermRepository;
 use Webkul\Product\Repositories\SearchRepository;
 
@@ -68,16 +70,37 @@ class SearchController extends Controller
     }
 
     /**
-     * Upload image for product search with machine learning.
-     *
-     * @return string
+     * Upload image and analyze it for product search keywords.
      */
-    public function upload()
+    public function upload(): JsonResponse
     {
         request()->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ]);
 
-        return $this->searchRepository->uploadSearchImage(request()->all());
+        $imageUrl = $this->searchRepository->uploadSearchImage(request()->all());
+
+        $keywords = '';
+
+        $useAi = core()->getConfigData('magic_ai.general.settings.enabled')
+            && core()->getConfigData('magic_ai.storefront_features.image_search.enabled');
+
+        if ($useAi) {
+            try {
+                $keywords = MagicAI::analyzeImage(
+                    request()->file('image')->getRealPath()
+                );
+            } catch (\Exception $e) {
+                report($e);
+
+                $useAi = false;
+            }
+        }
+
+        return response()->json([
+            'image_url' => $imageUrl,
+            'keywords' => $keywords,
+            'engine' => $useAi ? 'ai' : 'tensorflow',
+        ]);
     }
 }

@@ -9,7 +9,6 @@ use Webkul\Checkout\Contracts\Cart;
 use Webkul\Checkout\Contracts\CartItem;
 use Webkul\Checkout\Contracts\CartPayment;
 use Webkul\Checkout\Contracts\CartShippingRate;
-use Webkul\Sales\Contracts\Invoice;
 use Webkul\Sales\Contracts\InvoiceItem;
 use Webkul\Sales\Contracts\OrderItem;
 use Webkul\Sales\Contracts\OrderPayment;

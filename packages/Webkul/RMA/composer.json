@@ -1,0 +1,26 @@
+{
+    "name": "bagisto/bagisto-rma",
+    "license": "MIT",
+    "description" : "RMA package for return merchandise authorization.",
+    "authors": [
+        {
+            "name": "Bagisto",
+            "email": "support@bagisto.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Webkul\\RMA\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Webkul\\RMA\\Providers\\RMAServiceProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "minimum-stability": "dev"
+}

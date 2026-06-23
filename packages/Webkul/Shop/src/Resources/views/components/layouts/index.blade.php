@@ -150,14 +150,22 @@
         {!! view_render_event('bagisto.shop.layout.vue-app-mount.before') !!}
         <script>
             /**
-             * Load event, the purpose of using the event is to mount the application
-             * after all of our `Vue` components which is present in blade file have
-             * been registered in the app. No matter what `app.mount()` should be
-             * called in the last.
+             * Mount the application as soon as the DOM is ready instead of waiting
+             * for the `load` event. All `Vue` components are registered through
+             * deferred `type="module"` scripts, which always finish executing
+             * before `DOMContentLoaded` fires, so every component is available
+             * by the time `app.mount()` runs. Mounting on `DOMContentLoaded`
+             * avoids blocking the storefront behind every image/font download.
              */
-            window.addEventListener("load", function (event) {
+            function mountApp() {
                 app.mount("#app");
-            });
+            }
+
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", mountApp);
+            } else {
+                mountApp();
+            }
         </script>
 
         {!! view_render_event('bagisto.shop.layout.vue-app-mount.after') !!}

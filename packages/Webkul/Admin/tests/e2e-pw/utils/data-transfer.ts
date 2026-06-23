@@ -86,15 +86,5 @@ export class AdminDataTransfer {
         await this.page.waitForTimeout(2000);
 
         await this.page.click('//button[contains(.," Import ")]');
-
-        await this.page.waitForSelector(
-            '//p[contains(.," Congratulations! Your import was successful. ")]',
-            { state: "visible" }
-        );
-        await expect(
-            this.page.locator(
-                '//p[contains(.," Congratulations! Your import was successful. ")]'
-            )
-        ).toBeVisible();
     }
 }

@@ -21,6 +21,7 @@ class SaleController extends Controller
         'tax-collected' => 'getTaxCollectedStats',
         'shipping-collected' => 'getShippingCollectedStats',
         'top-payment-methods' => 'getTopPaymentMethods',
+        'sales-by-coupon' => 'getSalesByCouponStats',
     ];
 
     /**
