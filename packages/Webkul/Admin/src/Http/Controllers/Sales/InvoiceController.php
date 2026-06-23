@@ -6,11 +6,13 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\OrderInvoiceDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Admin\Http\Requests\MassUpdateRequest;
 use Webkul\Core\Traits\PDFHandler;
+use Webkul\Sales\Models\Invoice;
 use Webkul\Sales\Repositories\InvoiceRepository;
 use Webkul\Sales\Repositories\OrderRepository;
 
@@ -158,6 +160,14 @@ class InvoiceController extends Controller
      */
     public function massUpdateState(MassUpdateRequest $massUpdateRequest)
     {
+        $massUpdateRequest->validate([
+            'value' => [Rule::in([
+                Invoice::STATUS_PENDING,
+                Invoice::STATUS_PAID,
+                Invoice::STATUS_OVERDUE,
+            ])],
+        ]);
+
         $invoiceIds = $massUpdateRequest->input('indices');
 
         $invoices = $this->invoiceRepository->findWhereIn('id', $invoiceIds);

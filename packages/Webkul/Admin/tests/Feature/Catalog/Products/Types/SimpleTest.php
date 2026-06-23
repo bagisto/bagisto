@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Attribute\Models\Attribute;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 use Webkul\Product\Models\ProductFlat;
@@ -62,6 +63,32 @@ it('should return the edit page of simple product', function () {
         ->assertSeeText($product->name)
         ->assertSeeText($product->short_description)
         ->assertSeeText($product->description);
+});
+
+it('should escape the attribute admin_name on the product edit page to prevent stored xss', function () {
+    // Arrange.
+    $payload = '"><img src=x onerror=alert(1)>';
+
+    // The "name" attribute belongs to the default family and is rendered as a label on the edit
+    // page. The label is sourced from the attribute translation name for the current locale.
+    $attribute = Attribute::query()->where('code', 'name')->firstOrFail();
+
+    $attribute->translations()
+        ->where('locale', app()->getLocale())
+        ->update(['name' => $payload]);
+
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $content = $this->get(route('admin.catalog.products.edit', $product->id))
+        ->assertOk()
+        ->getContent();
+
+    expect($content)
+        ->not->toContain($payload)
+        ->toContain(e($payload));
 });
 
 it('should fail the validation with errors when certain inputs are not provided when update in simple product', function () {

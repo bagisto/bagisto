@@ -198,7 +198,7 @@
 
                                     <x-admin::form.control-group class="last:!mb-0">
                                         <x-admin::form.control-group.label>
-                                            {!! $attribute->admin_name . ($attribute->is_required ? '<span class="required"></span>' : '') !!}
+                                            {!! e($attribute->admin_name) . ($attribute->is_required ? '<span class="required"></span>' : '') !!}
 
                                             @if (
                                                 $attribute->value_per_channel
@@ -302,9 +302,7 @@
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.form.after', ['product' => $product]) !!}
-
     </x-admin::form>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
-
 </x-admin::layouts>
