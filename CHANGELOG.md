@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11331 [fixed] - Replaced deprecated Venezuelan Bolivar currency code `VEF` with `VES` in seeders and installer configurations, ensuring correct exchange rate synchronization with modern exchange rate APIs.
 
+- #11316 [fixed] - Fixed the rich-text (TinyMCE) sanitizer stripping tables and `class`/`style` attributes from product/category descriptions, CMS pages, and email templates on save, so tables and formatting inserted in the editor no longer disappear. The HTMLPurifier allowlist now permits table elements and `class`/`style` (with an expanded set of safe CSS properties) while still removing scripts, event handlers, `javascript:`/`data:` URLs, and unsafe CSS. Also fixed theme static-content custom CSS being corrupted by the HTML purifier — valid selectors such as the `>` child combinator were entity-encoded — by sanitizing it against `</style>` context breakout instead of running it through the HTML purifier.
+
 - #10963 [fixed] - Fixed a required multiselect attribute on the product edit page failing validation on save until the field was manually re-interacted with, because the previously saved values were not registered with the form validator on page load.
 
 ## **v2.4.6 (5th of June 2026)** - *Release*
