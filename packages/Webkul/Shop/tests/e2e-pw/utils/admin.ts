@@ -15,7 +15,9 @@ export async function loginAsAdmin(page) {
      */
     await page.goto("admin/login");
     await page.locator('input[name="email"]').fill(adminCredentials.email);
-    await page.locator('input[name="password"]').fill(adminCredentials.password);
+    await page
+        .locator('input[name="password"]')
+        .fill(adminCredentials.password);
     await page.press('input[name="password"]', "Enter");
 
     /**
@@ -25,7 +27,6 @@ export async function loginAsAdmin(page) {
 
     return adminCredentials;
 }
-
 
 export async function createTaxRate(adminPage) {
     const taxRate = {
@@ -90,6 +91,47 @@ export async function createTaxCategory(adminPage) {
         .click();
     await adminPage.locator('input[name="code"]').fill(generateSlug("_"));
     await adminPage.locator('input[name="name"]').fill(generateName());
+    await adminPage
+        .locator('textarea[name="description"]')
+        .fill(generateDescription());
+    await adminPage.locator('select[name="taxrates[]"]').selectOption([
+        {
+            label: taxRate.identifier,
+        },
+    ]);
+
+    /**
+     * Saving tax category and closing the modal.
+     */
+    await adminPage.getByRole("button", { name: "Save Tax Category" }).click();
+
+    /**
+     * Asserting.
+     */
+    await expect(
+        adminPage.getByText("Tax category created successfully."),
+    ).toBeVisible();
+}
+
+export async function createTaxCategoryReturnName(name: string, adminPage) {
+    /**
+     * Creating a tax rate.
+     */
+    const taxRate = await createTaxRate(adminPage);
+
+    /**
+     * Reaching to the tax category listing page.
+     */
+    await adminPage.goto("admin/settings/taxes/categories");
+
+    /**
+     * Opening create tax category form in modal.
+     */
+    await adminPage
+        .getByRole("button", { name: "Create Tax Category" })
+        .click();
+    await adminPage.locator('input[name="code"]').fill(generateSlug("_"));
+    await adminPage.locator('input[name="name"]').fill(name);
     await adminPage
         .locator('textarea[name="description"]')
         .fill(generateDescription());
