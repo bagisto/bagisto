@@ -36,9 +36,9 @@ class ThemeCustomizationRepository extends Repository
                 'CSS.AllowedProperties' => null,
             ];
 
-            $data[$locale]['options']['html'] = Purify::config($config)->clean($data[$locale]['options']['html']);
+            $data[$locale]['options']['html'] = Purify::config($config)->clean($data[$locale]['options']['html'] ?? '');
 
-            $data[$locale]['options']['css'] = Purify::config($config)->clean($data[$locale]['options']['css']);
+            $data[$locale]['options']['css'] = $this->sanitizeStaticCss($data[$locale]['options']['css'] ?? '');
         }
 
         if (in_array($data['type'], ['image_carousel', 'services_content'])) {
@@ -52,6 +52,22 @@ class ThemeCustomizationRepository extends Repository
         }
 
         return $theme;
+    }
+
+    /**
+     * Sanitize custom static-content CSS.
+     *
+     * CSS is not HTML, so it must not be passed through the HTML purifier - doing
+     * so entity-encodes valid characters (e.g. the ">" child combinator becomes
+     * "&gt;") and breaks the stylesheet. Because the value is rendered verbatim
+     * inside a <style> block, the only way to break out of that context is a
+     * literal "</style" sequence, so that (and null bytes) is all we neutralize.
+     */
+    protected function sanitizeStaticCss(?string $css): string
+    {
+        $css = str_replace("\0", '', (string) $css);
+
+        return str_ireplace('</style', '<\/style', $css);
     }
 
     /**

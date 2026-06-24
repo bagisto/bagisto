@@ -38,7 +38,7 @@
     @foreach ($customizations as $customization)
         @php ($data = $customization->options) @endphp
 
-        <!-- Static content -->
+        <!-- Static Content -->
         @switch ($customization->type)
             @case ($customization::IMAGE_CAROUSEL)
                 <!-- Image Carousel -->
@@ -49,16 +49,16 @@
 
                 @break
             @case ($customization::STATIC_CONTENT)
-                <!-- push style -->
+                <!-- Push Style -->
                 @if (! empty($data['css']))
                     @push ('styles')
                         <style>
-                            {{ $data['css'] }}
+                            {!! $data['css'] !!}
                         </style>
                     @endpush
                 @endif
 
-                <!-- render html -->
+                <!-- Render HTML -->
                 @if (! empty($data['html']))
                     {!! $data['html'] !!}
                 @endif
