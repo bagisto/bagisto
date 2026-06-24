@@ -44,6 +44,13 @@
                     </span>
 
                     <span
+                        class="icon-cross flex items-center text-lg text-gray-500 hover:text-red-600 dark:text-gray-400"
+                        role="button"
+                        v-if="clearable && selectedLabel"
+                        @click.stop="clear"
+                    ></span>
+
+                    <span
                         class="icon-arrow-down flex items-center text-2xl text-gray-500 transition-transform dark:text-gray-400"
                         :class="{ 'rotate-180': isOpen }"
                     ></span>
@@ -132,6 +139,11 @@
                     type: String,
                     default: '',
                 },
+
+                clearable: {
+                    type: Boolean,
+                    default: false,
+                },
             },
 
             data() {
@@ -177,6 +189,12 @@
             methods: {
                 isSelected(id) {
                     return String(id) === this.selectedId;
+                },
+
+                clear() {
+                    this.selectedId = '';
+
+                    this.closeDropdown();
                 },
 
                 select(id) {

@@ -114,6 +114,7 @@
             :options="$selectOptions"
             :value="(string) $selectedOption"
             :placeholder="$attribute->admin_name"
+            ::clearable="{{ $attribute->is_required ? 'false' : 'true' }}"
             ::rules="{{ $attribute->validations }}"
         />
 
