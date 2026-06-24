@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => '添付ファイルを追加',
                 'add-image' => '画像/ビデオを追加',
+                'invalid-file-type' => '選択されたファイル形式は許可されていません。',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => '承諾',
-                'awaiting' => '待機中',
-                'canceled' => 'キャンセルされました',
-                'declined' => '拒否されました',
-                'dispatched-package' => 'パッケージを発送しました',
+                'accept' => '承認済み',
+                'awaiting' => '返品待ち',
+                'canceled' => 'リクエストキャンセル済み',
+                'declined' => 'リクエスト却下',
+                'dispatched-package' => '返品輸送中',
                 'item-canceled' => 'アイテムがキャンセルされました',
                 'not-received-package-yet' => 'まだパッケージを受け取っていません',
-                'pending' => '保留中',
+                'pending' => '審査待ち',
                 'processing' => '処理中',
-                'received-package' => 'パッケージを受け取りました',
+                'received-package' => '返金済み',
                 'solved' => '解決済み',
             ],
 

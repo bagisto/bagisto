@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'সংযুক্তি যোগ করুন',
                 'add-image' => 'ছবি / ভিডিও যোগ করুন',
+                'invalid-file-type' => 'নির্বাচিত ফাইলের ধরন অনুমোদিত নয়।',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'গ্রহণ',
-                'awaiting' => 'অপেক্ষারত',
-                'canceled' => 'বাতিল হয়েছে',
-                'declined' => 'অস্বীকৃত',
-                'dispatched-package' => 'প্যাকেজ প্রেরিত',
+                'accept' => 'অনুমোদিত',
+                'awaiting' => 'ফেরতের অপেক্ষায়',
+                'canceled' => 'অনুরোধ বাতিল',
+                'declined' => 'অনুরোধ প্রত্যাখ্যাত',
+                'dispatched-package' => 'ফেরত পরিবহনে',
                 'item-canceled' => 'আইটেম বাতিল করা হয়েছে',
                 'not-received-package-yet' => 'এখনো প্যাকেজ পাওয়া যায়নি',
-                'pending' => 'অপেক্ষারত',
+                'pending' => 'পর্যালোচনার অপেক্ষায়',
                 'processing' => 'প্রসেসিং',
-                'received-package' => 'প্যাকেজ প্রাপ্ত',
+                'received-package' => 'ফেরত দেওয়া হয়েছে',
                 'solved' => 'সমাধান করা হয়েছে',
             ],
 

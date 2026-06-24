@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Dodaj załączniki',
                 'add-image' => 'Dodaj Obraz/Wideo',
+                'invalid-file-type' => 'Wybrany typ pliku jest niedozwolony.',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Akceptuj',
-                'awaiting' => 'Oczekujące',
-                'canceled' => 'Anulowano',
-                'declined' => 'Odrzucony',
-                'dispatched-package' => 'Wysłane paczka',
+                'accept' => 'Zatwierdzono',
+                'awaiting' => 'Oczekiwanie na zwrot',
+                'canceled' => 'Żądanie anulowane',
+                'declined' => 'Żądanie odrzucone',
+                'dispatched-package' => 'Zwrot w drodze',
                 'item-canceled' => 'Anulowany przedmiot',
                 'not-received-package-yet' => 'Jeszcze nie otrzymane paczki',
-                'pending' => 'Oczekujący',
+                'pending' => 'Oczekuje na przegląd',
                 'processing' => 'Przetwarzanie',
-                'received-package' => 'Otrzymane paczka',
+                'received-package' => 'Zwrócono',
                 'solved' => 'Rozwiązany',
             ],
 

@@ -36,22 +36,22 @@
                 @lang('shop::app.rma.view-customer-rma.heading')
             </h2>
 
-            <div class="rounded-xl border overflow-hidden">
+            <div class="rounded-xl border shadow-sm overflow-hidden">
                 <div class="p-6 space-y-4 max-md:p-4">
                     <!-- Request Date -->
                     <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                        <span class="font-medium">
+                        <span class="font-medium text-gray-500">
                             @lang('shop::app.rma.view-customer-rma-content.request-on')
                         </span>
                         
-                        <span class="text-gray-600">
+                        <span class="font-medium text-gray-800">
                             {{ \Carbon\Carbon::parse($rma->created_at)->format('F j, Y, h:i:s A') }}
                         </span>
                     </div>
 
                     <!-- Order ID -->
                     <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                        <span class="font-medium">@lang('shop::app.rma.view-customer-rma.order-id')</span>
+                        <span class="font-medium text-gray-500">@lang('shop::app.rma.view-customer-rma.order-id')</span>
 
                         <a 
                             href="{{ route('shop.customers.account.orders.view', $rma->order_id) }}" 
@@ -65,9 +65,9 @@
                     @if (! empty($rma->additionalFields))
                         @foreach ($rma->additionalFields as $field)
                             <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                                <span class="font-medium">{{ $field->customField->label }} :</span>
+                                <span class="font-medium text-gray-500">{{ $field->customField->label }} :</span>
 
-                                <span class="text-gray-600">{{ $field->value }}</span>
+                                <span class="font-medium text-gray-800">{{ $field->value }}</span>
                             </div>
                         @endforeach
                     @endif
@@ -75,22 +75,22 @@
                     <!-- Additional Information -->
                     @if (! empty($rma->information))
                         <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                            <span class="font-medium">@lang('shop::app.rma.view-customer-rma.additional-information')</span>
+                            <span class="font-medium text-gray-500">@lang('shop::app.rma.view-customer-rma.additional-information')</span>
 
-                            <span class="text-gray-600">{{ $rma->information }}</span>
+                            <span class="font-medium text-gray-800">{{ $rma->information }}</span>
                         </div>
                     @endif
 
                     <!-- Images -->
                     @if ($rma->images->isNotEmpty())
                         <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                            <span class="font-medium">@lang('shop::app.rma.view-customer-rma.images')</span>
+                            <span class="font-medium text-gray-500">@lang('shop::app.rma.view-customer-rma.images')</span>
 
                             <div class="flex gap-2 flex-wrap">
                                 @foreach ($rma->images as $image)
                                     <a href="{{ Storage::url($image['path']) }}" target="_blank">
-                                        <img 
-                                            src="{{ Storage::url($image['path']) }}" 
+                                        <img
+                                            src="{{ Storage::url($image['path']) }}"
                                             class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded border shadow-sm hover:shadow-md transition"
                                         />
                                     </a>
@@ -98,7 +98,62 @@
                             </div>
                         </div>
                     @endif
+
+                    <!-- RMA Status -->
+                    <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
+                        <span class="font-medium text-gray-500">
+                            @lang('shop::app.rma.view-customer-rma-content.rma-status')
+                        </span>
+
+                        <div>
+                            <span
+                                class="inline-block rounded-full px-3 py-1 text-xs font-medium"
+                                style="background: {{ $rmaStatus->color }}20; color: {{ $rmaStatus->color }}"
+                            >
+                                {{ $rmaStatus->title }}
+                            </span>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- Close / Re-open RMA -->
+                @if (! $isExpired && ($canCloseRma || $canReopenRma))
+                    <div class="border-t bg-gray-50 px-6 py-5 max-md:px-4">
+                        <x-shop::form
+                            enctype="multipart/form-data"
+                            :action="$canCloseRma
+                                ? route('shop.customers.account.rma.update-status', $rma->id)
+                                : route('shop.customers.account.rma.re-open', $rma->id)"
+                        >
+                            @php $checkboxName = $canCloseRma ? 'close_rma' : 'reopen_rma'; @endphp
+
+                            <div class="flex flex-wrap items-center justify-between gap-4">
+                                <x-shop::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
+                                    <x-shop::form.control-group.control
+                                        type="checkbox"
+                                        :id="$checkboxName"
+                                        :name="$checkboxName"
+                                        :for="$checkboxName"
+                                        value="1"
+                                        rules="required"
+                                    />
+
+                                    <label class="cursor-pointer text-sm font-medium text-gray-600" :for="$checkboxName">
+                                        {{ $canCloseRma
+                                            ? trans('shop::app.rma.view-customer-rma.status-quotes')
+                                            : trans('shop::app.rma.customer.create.reopen-request') }}
+                                    </label>
+                                </x-shop::form.control-group>
+
+                                <button type="submit" class="primary-button">
+                                    @lang('shop::app.rma.view-customer-rma.save-btn')
+                                </button>
+                            </div>
+
+                            <x-shop::form.control-group.error :control-name="$checkboxName" class="mt-1.5 flex" />
+                        </x-shop::form>
+                    </div>
+                @endif
             </div>
         </div>
 
@@ -109,31 +164,31 @@
             </h2>
 
             <!-- Desktop Table View -->
-            <div class="rounded-xl border overflow-x-auto hidden md:block">
-                <table class="w-full">
+            <div class="rounded-xl border shadow-sm overflow-hidden hidden md:block">
+                <table class="w-full table-fixed">
                     <thead class="bg-gray-50">
                         <tr>
-                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+                            <th class="w-[36%] px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.image') / @lang('shop::app.rma.table-heading.product-name')
                             </th>
-                            
-                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+
+                            <th class="w-[16%] px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.sku')
                             </th>
-                            
-                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+
+                            <th class="w-[11%] px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.price')
                             </th>
-                            
-                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+
+                            <th class="w-[10%] px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.rma-qty')
                             </th>
-                            
-                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+
+                            <th class="w-[13%] px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.resolution-type')
                             </th>
-                            
-                            <th class="px-4 py-3 text-left text-sm font-medium text-gray-600">
+
+                            <th class="w-[14%] px-4 py-3 text-left text-sm font-medium text-gray-600">
                                 @lang('shop::app.rma.table-heading.reason')
                             </th>
                         </tr>
@@ -142,58 +197,59 @@
                     <tbody class="divide-y">
                         @if($item = $rma->item)
                             <tr>
-                                <td class="px-4 py-4">
-                                    <div class="flex items-center gap-3">
+                                <td class="px-4 py-4 align-top">
+                                    <div class="flex items-start gap-3">
                                         @if ($item->orderItem->product?->images?->first())
-                                            <img 
-                                                src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}" 
-                                                class="w-16 h-16 object-cover rounded border"
+                                            <img
+                                                src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}"
+                                                class="h-16 w-16 shrink-0 rounded-lg border object-cover"
                                             />
                                         @else
-                                            <div class="w-16 h-16 border border-dashed rounded flex items-center justify-center text-gray-300">
+                                            <div class="flex h-16 w-16 shrink-0 items-center justify-center rounded-lg border border-dashed text-gray-300">
                                                 <span class="text-xs">No Image</span>
                                             </div>
                                         @endif
 
-                                        <div>
-                                            <a 
-                                                href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}" 
-                                                class="text-blue-600 hover:underline text-sm" 
+                                        <div class="min-w-0">
+                                            <a
+                                                href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}"
+                                                class="text-sm font-medium text-blue-600 hover:underline"
                                                 target="_blank"
                                             >
                                                 {{ $item->orderItem->name }}
                                             </a>
 
                                             @php
-                                                $attributes = $item->orderItem->additional['attributes'] ?? [];
-                                                $attributeValue = '';
-                                                foreach ($attributes as $attribute) {
-                                                    if (! empty($attribute)) {
-                                                        $attributeValue .= e($attribute['attribute_name']) . ': ' . e($attribute['option_label']) . ' </br> ';
-                                                    }
-                                                }
+                                                $attributes = array_filter($item->orderItem->additional['attributes'] ?? []);
                                             @endphp
 
-                                            @if ($attributeValue != '')
-                                                ( {!! $attributeValue !!} )
+                                            @if (! empty($attributes))
+                                                <div class="mt-1 space-y-0.5">
+                                                    @foreach ($attributes as $attribute)
+                                                        <p class="text-xs text-gray-500">
+                                                            {{ $attribute['attribute_name'] }}:
+                                                            <span class="font-medium text-gray-700">{{ $attribute['option_label'] }}</span>
+                                                        </p>
+                                                    @endforeach
+                                                </div>
                                             @endif
                                         </div>
                                     </div>
                                 </td>
 
-                                <td class="px-4 py-4 text-sm text-gray-600">
+                                <td class="px-4 py-4 align-top text-sm text-gray-600">
                                     {{ $item->orderItem->product->sku }}
                                 </td>
                                 
-                                <td class="px-4 py-4 text-sm text-gray-600">
-                                    {!! core()->formatPrice($item->orderItem->product->price, $item->orderItem->order->order_currency_code) !!}
+                                <td class="px-4 py-4 align-top text-sm text-gray-600">
+                                    {!! core()->formatPrice($item->orderItem->price, $item->orderItem->order->order_currency_code) !!}
                                 </td>
                                 
-                                <td class="px-4 py-4 text-sm text-gray-600">
+                                <td class="px-4 py-4 align-top text-sm text-gray-600">
                                     {{ $item->quantity }} / {{ $item->orderItem->qty_ordered }}
                                 </td>
                                 
-                                <td class="px-4 py-4 text-sm text-gray-600">
+                                <td class="px-4 py-4 align-top text-sm text-gray-600">
                                     @if ($item->resolution == DefaultRMAResolution::RETURN->value)
                                         @lang('shop::app.customers.account.rma.create.return')
                                     @else
@@ -201,7 +257,7 @@
                                     @endif
                                 </td>
                                 
-                                <td class="px-4 py-4 text-sm text-gray-600">
+                                <td class="px-4 py-4 align-top text-sm text-gray-600">
                                     {{ $item->reason->title }}
                                 </td>
                             </tr>
@@ -213,7 +269,7 @@
             <!-- Mobile Card View -->
             <div class="md:hidden space-y-4">
                 @if($item = $rma->item)
-                    <div class="rounded-xl border p-4 space-y-3">
+                    <div class="rounded-xl border shadow-sm p-4 space-y-3">
                         <div class="flex items-center gap-3">
                             @if ($item->orderItem->product?->images?->first())
                                 <img 
@@ -236,17 +292,18 @@
                                 </a>
 
                                 @php
-                                    $attributes = $item->orderItem->additional['attributes'] ?? [];
-                                    $attributeValue = '';
-                                    foreach ($attributes as $attribute) {
-                                        if (! empty($attribute)) {
-                                            $attributeValue .= e($attribute['attribute_name']) . ': ' . e($attribute['option_label']) . ' </br> ';
-                                        }
-                                    }
+                                    $attributes = array_filter($item->orderItem->additional['attributes'] ?? []);
                                 @endphp
 
-                                @if ($attributeValue != '')
-                                    ( {!! $attributeValue !!} )
+                                @if (! empty($attributes))
+                                    <div class="mt-1 space-y-0.5">
+                                        @foreach ($attributes as $attribute)
+                                            <p class="text-xs text-gray-500">
+                                                {{ $attribute['attribute_name'] }}:
+                                                <span class="font-medium text-gray-700">{{ $attribute['option_label'] }}</span>
+                                            </p>
+                                        @endforeach
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -259,7 +316,7 @@
 
                             <div>
                                 <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.price')</span>
-                                <p class="text-gray-600">{!! core()->formatPrice($item->orderItem->product->price, $item->orderItem->order->order_currency_code) !!}</p>
+                                <p class="text-gray-600">{!! core()->formatPrice($item->orderItem->price, $item->orderItem->order->order_currency_code) !!}</p>
                             </div>
 
                             <div>
@@ -283,131 +340,11 @@
             </div>
         </div>
 
-        <!-- Status Details -->
-        <div class="mt-8">
-            <h2 class="text-xl font-medium mb-5">
-                @lang('shop::app.rma.view-customer-rma.status-details')
-            </h2>
-
-            <div class="rounded-xl border p-6 max-md:p-4 space-y-4">
-                <!-- RMA Status -->
-                <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
-                    <span class="font-medium">
-                        @lang('shop::app.rma.view-customer-rma-content.rma-status')
-                    </span>
-
-                    <div>
-                        <span class="px-3 py-1 text-xs rounded-full" style="background: {{ $rmaStatus->color }}20; color: {{ $rmaStatus->color }}">
-                            {{ $rmaStatus->title }}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <rma-status-and-conversation></rma-status-and-conversation>
     </div>
 
     @push('scripts')
         <script type="text/x-template" id="rma-status-and-conversation-template">
-            @if (! $isExpired)
-                @if ($canCloseRma)
-                    <div class="relative mt-3 overflow-x-auto rounded-xl border p-6 max-md:p-4">
-                        <div class="mt-2">
-                            <p class="text-xl max-sm:text-lg font-medium">
-                                @lang('shop::app.rma.view-customer-rma.close-rma')
-                            </p>
-                        </div>
-
-                        <div class="grid w-full py-3">
-                            <x-shop::form
-                                @submit="validateForm"
-                                id="check-form"
-                                enctype="multipart/form-data"
-                                :action="route('shop.customers.account.rma.update-status', $rma->id)"
-                            >
-                                <div class="grid w-full gap-4">
-                                    <div>
-                                        <x-shop::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
-                                            <x-shop::form.control-group.control
-                                                type="checkbox"
-                                                id="close_rma"
-                                                name="close_rma"
-                                                @change="closeRmaChecked = !closeRmaChecked"
-                                                for="close_rma"
-                                                value="1"
-                                            />
-
-                                            <label class="cursor-pointer text-xs font-medium text-gray-600" for="close_rma">
-                                                @lang('shop::app.rma.view-customer-rma.status-quotes')
-                                            </label>
-                                        </x-shop::form.control-group>
-                                    </div>
-
-                                    <div>
-                                        <button
-                                            type="submit"
-                                            class="primary-button m-0 block w-max rounded-2xl px-11 max-sm:px-6 py-3 text-center text-base max-sm:text-sm"
-                                            v-if="closeRmaChecked"
-                                        >
-                                            @lang('shop::app.rma.view-customer-rma.save-btn')
-                                        </button>
-                                    </div>
-                                </div>
-                            </x-shop::form>
-                        </div>
-                    </div>
-                @else
-                    @if ($canReopenRma)
-                        <div class="relative mt-3 overflow-x-auto rounded-xl border p-6 max-md:p-4">
-                            <div class="mt-2">
-                                <p class="text-xl max-sm:text-lg font-medium">
-                                    @lang('shop::app.rma.view-customer-rma.status-reopen')
-                                </p>
-                            </div>
-
-                            <div class="grid w-full py-3">
-                                <x-shop::form
-                                    @submit="validateForm"
-                                    id="check-form"
-                                    enctype="multipart/form-data"
-                                    :action="route('shop.customers.account.rma.re-open', $rma->id)"
-                                >
-                                    <div class="flex flex-col max-md:flex-col w-full gap-4">
-                                        <div>
-                                            <input
-                                                type="checkbox"
-                                                id="reopen_rma"
-                                                name="reopen_rma"
-                                                v-model="closeRmaChecked"
-                                                v-validate="'required'"
-                                                data-vv-as="{{ trans('shop::app.rma.validation.close-rma') }}"
-                                            >
-
-                                            <label for="reopen_rma" class="required text-xs font-medium">
-                                                @lang('shop::app.rma.customer.create.reopen-request')
-                                            </label>
-
-                                            <p v-if="error" style="color:red;">
-                                                @lang('shop::app.rma.view-customer-rma.term')
-                                            </p>
-                                        </div>
-
-                                        <button
-                                            type="submit"
-                                            class="primary-button m-0 block w-max rounded-2xl px-11 max-sm:px-6 py-3 text-center text-base max-sm:text-sm"
-                                            v-if="closeRmaChecked"
-                                        >
-                                            @lang('shop::app.rma.view-customer-rma.save-btn')
-                                        </button>
-                                    </div>
-                                </x-shop::form>
-                            </div>
-                        </div>
-                    @endif
-                @endif
-            @endif
-
             <!-- Conversations -->
             <div class="mt-8">
                 <p class="required text-xl max-sm:text-lg font-medium">
@@ -415,9 +352,9 @@
                 </p>
             </div>
 
-            <div class="relative mt-3 overflow-x-auto rounded-xl border p-2 max-md:p-1">
-                <div class="border rounded-lg p-3 max-md:p-2">
-                    <x-shop::form 
+            <div class="relative mt-3 flex flex-col-reverse overflow-hidden rounded-xl border shadow-sm bg-white">
+                <div class="border-t border-zinc-200 bg-white p-4 max-md:p-3">
+                    <x-shop::form
                         v-slot="{ meta, errors, handleSubmit }" 
                         as="div"
                     >
@@ -488,12 +425,11 @@
                 </div>
 
                 <!-- View conversations -->
-                <div class="border rounded-lg mt-2 p-3 max-md:p-2">
-                    <div
-                        class="h-80 max-md:h-60 overflow-x-auto p-5 max-md:p-3 bg-gray-50"
-                        @wheel="getNewMessage()"
-                        :class="!messages.length ? 'flex justify-center items-center' : ''"
-                    >
+                <div
+                    class="flex h-80 max-md:h-60 flex-col-reverse overflow-y-auto p-5 max-md:p-3 bg-gray-50"
+                    @wheel="getNewMessage()"
+                    :class="!messages.length ? 'justify-center items-center' : ''"
+                >
                         <template v-if="messages.length">
                             <div
                                 v-for="message in messages"
@@ -502,8 +438,8 @@
                                 :class="message.is_admin == 1 ? 'justify-start' : 'justify-end'"
                             >
                                 <div
-                                    class="max-w-[70%] w-fit rounded-xl p-4 shadow-sm"
-                                    :class="message.is_admin == 1 ? 'bg-blue-100 text-left' : 'bg-green-100 text-right'"
+                                    class="max-w-[70%] w-fit rounded-xl p-3.5 text-left shadow-sm"
+                                    :class="message.is_admin == 1 ? 'bg-gray-100' : 'bg-blue-50'"
                                 >
                                     <div class="flex items-center gap-2 mb-1">
                                         <span class="font-semibold text-xs text-gray-700">
@@ -535,16 +471,18 @@
                         </template>
 
                         <template v-else>
-                            <div class="icon-listing" style="font-size:120px; color:#d7d7d7;"></div>
+                            <div class="m-auto flex flex-col items-center">
+                                <div class="icon-listing" style="font-size:120px; color:#d7d7d7;"></div>
 
-                            <p class="flex justify-center text-gray-300 mt-2">
-                                @lang('shop::app.rma.conversation-texts.no-record')
-                            </p>
+                                <p class="mt-2 text-gray-300">
+                                    @lang('shop::app.rma.conversation-texts.no-record')
+                                </p>
+                            </div>
                         </template>
-                    </div>
                 </div>
+            </div>
 
-                <x-shop::modal ref="attachmentModal">
+            <x-shop::modal ref="attachmentModal">
                     <x-slot:header>
                         <p class="text-lg max-md:text-base font-bold text-gray-800">
                             @lang('shop::app.customers.account.rma.view.attachment')
@@ -582,7 +520,6 @@
                         </div>
                     </x-slot>
                 </x-shop::modal>
-            </div>
         </script>
 
         <script type="module">
@@ -611,7 +548,7 @@
                     allowedFileTypesArray() {
                         return this.allowedFileTypes
                             .split(",")
-                            .map(mime => mime.split("/")[1]?.trim())
+                            .map(type => type.trim())
                             .filter(Boolean);
                     }
                 },
@@ -703,14 +640,8 @@
                         const fileNames = Array.from(files).map(file => file.name);
 
                         if (this.allowedFileTypesArray.length) {
-                            const fileExtensions = Array.from(files).map(file => {
-                                const fileName = file.name;
-                                const extension = fileName.slice(fileName.lastIndexOf('.') + 1);
-                                return extension;
-                            });
-
-                            const hasAllowedFileType = fileExtensions.some(extension =>
-                                this.allowedFileTypesArray.includes(extension)
+                            const hasAllowedFileType = Array.from(files).every(file =>
+                                this.allowedFileTypesArray.includes(file.type)
                             );
 
                             if (!hasAllowedFileType) {

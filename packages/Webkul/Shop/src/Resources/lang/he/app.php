@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'הוסף קבצים מצורפים',
                 'add-image' => 'הוסף תמונה/וידאו',
+                'invalid-file-type' => 'סוג הקובץ שנבחר אינו מותר.',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'קבל',
-                'awaiting' => 'ממתין',
-                'canceled' => 'בוטל',
-                'declined' => 'נדחה',
-                'dispatched-package' => 'חבילה שנשלחה',
+                'accept' => 'אושר',
+                'awaiting' => 'ממתין להחזרה',
+                'canceled' => 'הבקשה בוטלה',
+                'declined' => 'הבקשה נדחתה',
+                'dispatched-package' => 'ההחזרה בדרך',
                 'item-canceled' => 'פריט בוטל',
                 'not-received-package-yet' => 'טרם התקבלה החבילה',
-                'pending' => 'ממתין לטיפול',
+                'pending' => 'ממתין לבדיקה',
                 'processing' => 'מעבד',
-                'received-package' => 'החבילה התקבלה',
+                'received-package' => 'הוחזר כספית',
                 'solved' => 'פתרון נמצא',
             ],
 

@@ -336,9 +336,27 @@ class RequestController extends Controller
 
         $hasCancel = $rma->item->resolution === DefaultRMAResolution::CANCEL_ITEMS->value;
 
+        /**
+         * The order-linked actions (Refunded / Item Canceled) are intentionally excluded here -
+         * they are surfaced as contextual buttons on the item itself, not as neutral status steps.
+         */
         $excludedStatuses = $hasCancel
-            ? [DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value, DefaultRMAStatusEnum::RECEIVED_PACKAGE->value, DefaultRMAStatusEnum::SOLVED->value]
-            : [DefaultRMAStatusEnum::ITEM_CANCELED->value, DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::SOLVED->value];
+            ? [
+                DefaultRMAStatusEnum::ACCEPT->value,
+                DefaultRMAStatusEnum::DECLINED->value,
+                DefaultRMAStatusEnum::PENDING->value,
+                DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value,
+                DefaultRMAStatusEnum::RECEIVED_PACKAGE->value,
+                DefaultRMAStatusEnum::SOLVED->value,
+                DefaultRMAStatusEnum::ITEM_CANCELED->value]
+            : [
+                DefaultRMAStatusEnum::ITEM_CANCELED->value,
+                DefaultRMAStatusEnum::ACCEPT->value,
+                DefaultRMAStatusEnum::DECLINED->value,
+                DefaultRMAStatusEnum::PENDING->value,
+                DefaultRMAStatusEnum::SOLVED->value,
+                DefaultRMAStatusEnum::RECEIVED_PACKAGE->value,
+            ];
 
         return $this->rmaStatusRepository
             ->whereIn('id', $activeStatusIds->diff($excludedStatuses))
@@ -579,6 +597,12 @@ class RequestController extends Controller
             Mail::queue(new CustomerRMAStatusNotification($rma));
         } catch (\Exception $e) {
         }
+
+        /**
+         * Flashed to the session so the confirmation survives the page reload the
+         * front-end performs after a successful status update.
+         */
+        session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 
         return new JsonResponse([
             'messages' => trans('admin::app.sales.rma.all-rma.view.update-success'),

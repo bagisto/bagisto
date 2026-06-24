@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Bijlagen toevoegen',
                 'add-image' => 'Afbeelding/Video toevoegen',
+                'invalid-file-type' => 'Het geselecteerde bestandstype is niet toegestaan.',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Accepteren',
-                'awaiting' => 'In afwachting',
-                'canceled' => 'Geannuleerd',
-                'declined' => 'Afgewezen',
-                'dispatched-package' => 'Pakket verzonden',
+                'accept' => 'Goedgekeurd',
+                'awaiting' => 'Wachten op retour',
+                'canceled' => 'Verzoek geannuleerd',
+                'declined' => 'Verzoek afgewezen',
+                'dispatched-package' => 'Retour onderweg',
                 'item-canceled' => 'Item geannuleerd',
                 'not-received-package-yet' => 'Pakket nog niet ontvangen',
-                'pending' => 'In afwachting',
+                'pending' => 'In afwachting van beoordeling',
                 'processing' => 'Verwerking',
-                'received-package' => 'Pakket ontvangen',
+                'received-package' => 'Terugbetaald',
                 'solved' => 'Opgelost',
             ],
 

@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Додати вкладення',
                 'add-image' => 'Додати зображення/відео',
+                'invalid-file-type' => 'Вибраний тип файлу не дозволено.',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Прийняти',
-                'awaiting' => 'Очікується',
-                'canceled' => 'Скасовано',
-                'declined' => 'Відхилено',
-                'dispatched-package' => 'Відправлено пакет',
+                'accept' => 'Схвалено',
+                'awaiting' => 'Очікування повернення',
+                'canceled' => 'Запит скасовано',
+                'declined' => 'Запит відхилено',
+                'dispatched-package' => 'Повернення в дорозі',
                 'item-canceled' => 'Товар скасовано',
                 'not-received-package-yet' => 'Пакет ще не отримано',
-                'pending' => 'В очікуванні',
+                'pending' => 'Очікує розгляду',
                 'processing' => 'В обробці',
-                'received-package' => 'Отримано пакет',
+                'received-package' => 'Повернено',
                 'solved' => 'Вирішено',
             ],
 

@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'अटैचमेंट जोड़ें',
                 'add-image' => 'चित्र/वीडियो जोड़ें',
+                'invalid-file-type' => 'चयनित फ़ाइल प्रकार की अनुमति नहीं है।',
             ],
         ],
 
@@ -1722,15 +1723,15 @@ return [
         'status' => [
             'status-name' => [
                 'accept' => 'स्वीकृत',
-                'awaiting' => 'प्रतीक्षारत',
-                'canceled' => 'रद्द किया गया',
-                'declined' => 'अस्वीकृत',
-                'dispatched-package' => 'पैकेज भेजा गया',
+                'awaiting' => 'वापसी की प्रतीक्षा',
+                'canceled' => 'अनुरोध रद्द किया गया',
+                'declined' => 'अनुरोध अस्वीकृत',
+                'dispatched-package' => 'वापसी पारगमन में',
                 'item-canceled' => 'आइटम रद्द',
                 'not-received-package-yet' => 'अभी तक पैकेज प्राप्त नहीं हुआ',
-                'pending' => 'विचाराधीन',
+                'pending' => 'समीक्षा लंबित',
                 'processing' => 'प्रसंस्करण',
-                'received-package' => 'पैकेज प्राप्त हुआ',
+                'received-package' => 'धनवापसी की गई',
                 'solved' => 'समाधान हुआ',
             ],
 

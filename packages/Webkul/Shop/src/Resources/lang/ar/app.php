@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'إضافة المرفقات',
                 'add-image' => 'إضافة صورة / فيديو',
+                'invalid-file-type' => 'نوع الملف المحدد غير مسموح به.',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'قبول',
-                'awaiting' => 'في انتظار',
-                'canceled' => 'تم الإلغاء',
-                'declined' => 'تم رفضه',
-                'dispatched-package' => 'تم إرسال الطرد',
+                'accept' => 'تمت الموافقة',
+                'awaiting' => 'في انتظار الإرجاع',
+                'canceled' => 'تم إلغاء الطلب',
+                'declined' => 'تم رفض الطلب',
+                'dispatched-package' => 'الإرجاع قيد النقل',
                 'item-canceled' => 'تم إلغاء العنصر',
                 'not-received-package-yet' => 'لم يتم استلام الطرد بعد',
-                'pending' => 'قيد الانتظار',
+                'pending' => 'قيد المراجعة',
                 'processing' => 'قيد المعالجة',
-                'received-package' => 'تم استلام الطرد',
+                'received-package' => 'تم الاسترداد',
                 'solved' => 'تم حله',
             ],
 

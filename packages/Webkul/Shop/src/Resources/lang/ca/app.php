@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Afegir adjunts',
                 'add-image' => 'Afegir Imatge/Vídeo',
+                'invalid-file-type' => 'El tipus de fitxer seleccionat no està permès.',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Acceptat',
-                'awaiting' => 'Esperant',
-                'canceled' => 'Cancel·lat',
-                'declined' => 'Rebutjat',
-                'dispatched-package' => 'Paquet enviat',
+                'accept' => 'Aprovat',
+                'awaiting' => 'Esperant la devolució',
+                'canceled' => 'Sol·licitud cancel·lada',
+                'declined' => 'Sol·licitud rebutjada',
+                'dispatched-package' => 'Devolució en trànsit',
                 'item-canceled' => 'Article cancel·lat',
                 'not-received-package-yet' => 'Encara no s\'ha rebut el paquet',
-                'pending' => 'Pendent',
+                'pending' => 'Pendent de revisió',
                 'processing' => 'Processant',
-                'received-package' => 'Paquet rebut',
+                'received-package' => 'Reemborsat',
                 'solved' => 'Resolt',
             ],
 

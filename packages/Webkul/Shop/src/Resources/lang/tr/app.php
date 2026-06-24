@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Dosya Ekle',
                 'add-image' => 'Resim/Video Ekle',
+                'invalid-file-type' => 'Seçilen dosya türüne izin verilmiyor.',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Kabul Et',
-                'awaiting' => 'Beklemede',
-                'canceled' => 'İptal Edildi',
-                'declined' => 'Reddedildi',
-                'dispatched-package' => 'Paket Gönderildi',
+                'accept' => 'Onaylandı',
+                'awaiting' => 'İade bekleniyor',
+                'canceled' => 'Talep iptal edildi',
+                'declined' => 'Talep reddedildi',
+                'dispatched-package' => 'İade yolda',
                 'item-canceled' => 'Ürün İptal Edildi',
                 'not-received-package-yet' => 'Paket Henüz Alınmadı',
-                'pending' => 'Beklemede',
+                'pending' => 'İnceleme bekliyor',
                 'processing' => 'İşleniyor',
-                'received-package' => 'Paket Alındı',
+                'received-package' => 'İade edildi',
                 'solved' => 'Çözüldü',
             ],
 

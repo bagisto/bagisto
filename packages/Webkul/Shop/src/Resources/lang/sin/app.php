@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'ඇඩෙක්මෙන්ට් එකක් එක්කරන්න',
                 'add-image' => 'රූපයක්/වීඩියෝ එකතු කරන්න',
+                'invalid-file-type' => 'තෝරාගත් ගොනු වර්ගය අවසර නැත.',
             ],
         ],
 
@@ -1721,16 +1722,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'හුවමාරු කරන්න',
-                'awaiting' => 'මාරු කිරීමට',
-                'canceled' => 'අවලංගු කරන ලදි',
-                'declined' => 'ප්‍රතික්ෂේප කළ යුතුයි',
-                'dispatched-package' => 'පැකිලීම කිරීම',
+                'accept' => 'අනුමත කළා',
+                'awaiting' => 'ආපසු එවීම බලාපොරොත්තුවෙන්',
+                'canceled' => 'ඉල්ලීම අවලංගු කළා',
+                'declined' => 'ඉල්ලීම ප්‍රතික්ෂේප කළා',
+                'dispatched-package' => 'ආපසු එවීම ප්‍රවාහනයේ',
                 'item-canceled' => 'අයිතමය අවලංගු කළ යුතුයි',
                 'not-received-package-yet' => 'පැකේජය තවම ලබා දුන් නැත',
-                'pending' => 'අනුමත කිරීමේදී',
+                'pending' => 'සමාලෝචනය බලාපොරොත්තුවෙන්',
                 'processing' => 'ක්‍රියාත්මක කිරීමේදී',
-                'received-package' => 'සාර්ථකව පැකිලීම',
+                'received-package' => 'ආපසු ගෙවන ලදී',
                 'solved' => 'විශ්වාසය සාර්ථකව පිළිබද යුතුයි',
             ],
 
