@@ -110,22 +110,22 @@ type TestCase = {
 const testCases: TestCase[] = [
     {
         operator: "==",
-        optionSelect: "1",
+        optionSelect: "Default",
         couponType: "fixed",
     },
     {
         operator: "==",
-        optionSelect: "1",
+        optionSelect: "Default",
         couponType: "percentage",
     },
     {
         operator: "!=",
-        optionSelect: "2",
+        optionSelect: "Jacket",
         couponType: "fixed",
     },
     {
         operator: "!=",
-        optionSelect: "2",
+        optionSelect: "Jacket",
         couponType: "percentage",
     },
 ];

@@ -5,6 +5,7 @@ import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/Rule
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
+import { get } from "https";
 
 type CouponType = "fixed" | "percentage";
 
@@ -44,9 +45,8 @@ async function updateProductColor(page: Page, colorValue: string) {
 
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
     await page.waitForLoadState("networkidle");
-
-    await page.locator('select[name="color"]').first().selectOption(colorValue);
-
+    await page.locator('span:text-is("Color")').click();
+    await page.locator(`span:text-is("${colorValue}")`).click();
     await page.locator('button:has-text("Save Product")').first().click();
 
     await expect(
@@ -75,7 +75,7 @@ async function runCartRuleTest(
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "product|color",
         operator,
-        optionSelect: "1",
+        optionSelect: colorToSet,
         couponType,
     });
 
@@ -125,25 +125,25 @@ type TestCase = {
 const testCases: TestCase[] = [
     {
         operator: "==",
-        colorToSet: "1",
+        colorToSet: "Red",
         couponType: "fixed",
         label: "is equal to (fixed)",
     },
     {
         operator: "==",
-        colorToSet: "1",
+        colorToSet: "Red",
         couponType: "percentage",
         label: "is equal to (percentage)",
     },
     {
         operator: "!=",
-        colorToSet: "2",
+        colorToSet: "Green",
         couponType: "fixed",
         label: "is not equal to (fixed)",
     },
     {
         operator: "!=",
-        colorToSet: "2",
+        colorToSet: "Green",
         couponType: "percentage",
         label: "is not equal to (percentage)",
     },

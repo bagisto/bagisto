@@ -105,7 +105,7 @@ test.describe("cart rules", () => {
     const cases = [
         {
             operator: "==",
-            option: "IN",
+            option: "India",
             type: "fixed",
             allowShipping: "yes",
             label: "is equal to",
