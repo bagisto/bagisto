@@ -40,10 +40,8 @@ async function createRuleAndVerifyCoupon({
 
     await page.waitForLoadState("networkidle");
 
-    await page
-        .locator('select[name="color"]')
-        .first()
-        .selectOption(productValue);
+    await page.locator('span:text-is("Color")').click();
+    await page.locator(`span:text-is("${productValue}")`).click();
 
     await page.locator('button:has-text("Save Product")').first().click();
 
@@ -83,28 +81,28 @@ const testCases = [
         title: "is equal to",
         operator: "==",
         ruleValue: "1",
-        productValue: "1",
+        productValue: "Red",
         type: "percentage",
     },
     {
         title: "is equal to",
         operator: "==",
         ruleValue: "1",
-        productValue: "1",
+        productValue: "Red",
         type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
         ruleValue: "1",
-        productValue: "2",
+        productValue: "Green",
         type: "percentage",
     },
     {
         title: "is not equal to",
         operator: "!=",
         ruleValue: "1",
-        productValue: "2",
+        productValue: "Green",
         type: "fixed",
     },
 ];

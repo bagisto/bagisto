@@ -1,20 +1,29 @@
-import { createTaxRate, createTaxCategory } from "../../../../utils/admin";
+import {
+    createTaxRate,
+    createTaxCategoryReturnName,
+} from "../../../../utils/admin";
 import { expect, test } from "../../../../setup";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
+import { generateName } from "../../../../utils/faker";
 import { Page } from "@playwright/test";
 
 let generatedSku: string;
 generatedSku = `SKU-${Date.now()}`;
+const taxCategoryName = generateName();
+const taxCategoryName2 = generateName();
 
 test.beforeEach(
     "should create simple product and tax category",
     async ({ adminPage }) => {
         await createTaxRate(adminPage);
-        await createTaxCategory(adminPage);
+
+        await createTaxCategoryReturnName(taxCategoryName, adminPage);
+
+        await createTaxCategoryReturnName(taxCategoryName2, adminPage);
 
         const productCreation = new ProductCreation(adminPage);
 
@@ -29,7 +38,7 @@ test.beforeEach(
             inventory: 100,
         });
 
-        await assignTaxCategory(adminPage);
+        await assignTaxCategory(taxCategoryName, adminPage);
     },
 );
 
@@ -39,11 +48,12 @@ test.afterEach(async ({ adminPage }) => {
     await ruleDeletePage.deleteCatalogRuleAndProduct();
 });
 
-async function assignTaxCategory(page: Page) {
+async function assignTaxCategory(taxCategoryName: string, page: Page) {
     await page.goto("admin/catalog/products");
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
     await page.waitForLoadState("networkidle");
-    await page.locator('select[name="tax_category_id"]').selectOption("1");
+    await page.locator('span:text-is("Tax Category")').click();
+    await page.locator(`span:text-is("${taxCategoryName}")`).click();
     await page.locator('button:has-text("Save Product")').first().click();
 
     await expect(
@@ -54,12 +64,12 @@ async function assignTaxCategory(page: Page) {
 async function runCatalogRuleTest({
     page,
     operator,
-    value,
+    option,
     type,
 }: {
     page: Page;
     operator: string;
-    value: string;
+    option: string;
     type: string;
 }) {
     const ruleCreatePage = new RuleCreatePage(page);
@@ -70,9 +80,9 @@ async function runCatalogRuleTest({
     await ruleCreatePage.catalogRuleCreationFlow();
 
     const discountValue = await ruleCreatePage.addCondition({
-        attribute: "product|sku",
+        attribute: "product|tax_category_id",
         operator,
-        value,
+        optionSelect: option,
         couponType: type,
     });
 
@@ -84,50 +94,26 @@ async function runCatalogRuleTest({
 const testCases = [
     {
         operator: "==",
-        value: generatedSku,
+        option: taxCategoryName,
         label: "is equal to",
         type: "percentage",
     },
     {
         operator: "==",
-        value: generatedSku,
+        option: taxCategoryName,
         label: "is equal to",
         type: "fixed",
     },
     {
         operator: "!=",
-        value: "sku-123",
+        option: taxCategoryName2,
         label: "is not equal to",
         type: "percentage",
     },
     {
         operator: "!=",
-        value: "sku-123",
+        option: taxCategoryName2,
         label: "is not equal to",
-        type: "fixed",
-    },
-    {
-        operator: "{}",
-        value: generatedSku,
-        label: "contains",
-        type: "percentage",
-    },
-    {
-        operator: "{}",
-        value: generatedSku,
-        label: "contains",
-        type: "fixed",
-    },
-    {
-        operator: "!{}",
-        value: "example",
-        label: "does not contain",
-        type: "percentage",
-    },
-    {
-        operator: "!{}",
-        value: "example",
-        label: "does not contain",
         type: "fixed",
     },
 ];
@@ -141,7 +127,7 @@ test.describe("catalog rules", () => {
                 await runCatalogRuleTest({
                     page,
                     operator: tc.operator,
-                    value: tc.value,
+                    option: tc.option,
                     type: tc.type,
                 });
             });

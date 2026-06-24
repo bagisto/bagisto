@@ -1,11 +1,16 @@
 import { test } from "../../../../setup";
 import { expect, Page } from "@playwright/test";
-import { createTaxRate, createTaxCategory } from "../../../../utils/admin";
+import {
+    createTaxRate,
+    createTaxCategory,
+    createTaxCategoryReturnName,
+} from "../../../../utils/admin";
 import { ProductCreation } from "../../../../pages/admin/catalog/products/ProductCreatePage";
 import { RuleDeletePage } from "../../../../pages/admin/marketing/promotion/RuleDeletePage";
 import { RuleCreatePage } from "../../../../pages/admin/marketing/promotion/RuleCreatePage";
 import { RuleApplyPage } from "../../../../pages/shop/rules/RuleApplyPage";
 import { loginAsAdmin } from "../../../../utils/admin";
+import { generateName } from "../../../../utils/faker";
 
 type CouponType = "fixed" | "percentage";
 
@@ -72,10 +77,15 @@ async function createRuleAndVerifyTaxCategory({
     );
 }
 
+const taxCategoryName = generateName();
+const taxCategoryName2 = generateName();
+
 test.beforeEach(async ({ adminPage }) => {
     await createTaxRate(adminPage);
-    await createTaxCategory(adminPage);
-    await createTaxCategory(adminPage);
+
+    await createTaxCategoryReturnName(taxCategoryName, adminPage);
+
+    await createTaxCategoryReturnName(taxCategoryName2, adminPage);
 
     const productCreation = new ProductCreation(adminPage);
 
@@ -96,10 +106,8 @@ test.beforeEach(async ({ adminPage }) => {
         .nth(1)
         .click();
     await adminPage.waitForLoadState("networkidle");
-    await adminPage
-        .locator('select[name="tax_category_id"]')
-        .first()
-        .selectOption("1");
+    await adminPage.locator('span:text-is("Tax Category")').click();
+    await adminPage.locator(`span:text-is("${taxCategoryName}")`).click();
 
     await adminPage.locator('button:has-text("Save Product")').first().click();
 
@@ -114,10 +122,10 @@ test.afterEach(async ({ adminPage }) => {
 });
 
 const cases = [
-    { operator: "==", type: "fixed", option: "1" },
-    { operator: "==", type: "percentage", option: "1" },
-    { operator: "!=", type: "fixed", option: "2" },
-    { operator: "!=", type: "percentage", option: "2" },
+    { operator: "==", type: "fixed", option: taxCategoryName },
+    { operator: "==", type: "percentage", option: taxCategoryName },
+    { operator: "!=", type: "fixed", option: taxCategoryName2 },
+    { operator: "!=", type: "percentage", option: taxCategoryName2 },
 ];
 
 test.describe("cart rules", () => {
