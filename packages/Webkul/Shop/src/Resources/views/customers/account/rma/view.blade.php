@@ -211,13 +211,19 @@
                                         @endif
 
                                         <div class="min-w-0">
-                                            <a
-                                                href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}"
-                                                class="text-sm font-medium text-blue-600 hover:underline"
-                                                target="_blank"
-                                            >
-                                                {{ $item->orderItem->name }}
-                                            </a>
+                                            @if ($item->orderItem->product?->url_key && $item->orderItem->product?->visible_individually)
+                                                <a
+                                                    href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}"
+                                                    class="text-sm font-medium text-blue-600 hover:underline"
+                                                    target="_blank"
+                                                >
+                                                    {{ $item->orderItem->name }}
+                                                </a>
+                                            @else
+                                                <span class="text-sm font-medium text-gray-800">
+                                                    {{ $item->orderItem->name }}
+                                                </span>
+                                            @endif
 
                                             @php
                                                 $attributes = array_filter($item->orderItem->additional['attributes'] ?? []);
@@ -238,7 +244,7 @@
                                 </td>
 
                                 <td class="px-4 py-4 align-top text-sm text-gray-600">
-                                    {{ $item->orderItem->product->sku }}
+                                    {{ $item->orderItem->product->sku ?? $item->orderItem->sku }}
                                 </td>
                                 
                                 <td class="px-4 py-4 align-top text-sm text-gray-600">
@@ -283,13 +289,19 @@
                             @endif
 
                             <div class="flex-1">
-                                <a 
-                                    href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}" 
-                                    class="text-blue-600 hover:underline text-sm font-medium" 
-                                    target="_blank"
-                                >
-                                    {{ $item->orderItem->name }}
-                                </a>
+                                @if ($item->orderItem->product?->url_key && $item->orderItem->product?->visible_individually)
+                                    <a
+                                        href="{{ route('shop.product_or_category.index', $item->orderItem->product->url_key) }}"
+                                        class="text-blue-600 hover:underline text-sm font-medium"
+                                        target="_blank"
+                                    >
+                                        {{ $item->orderItem->name }}
+                                    </a>
+                                @else
+                                    <span class="text-sm font-medium text-gray-800">
+                                        {{ $item->orderItem->name }}
+                                    </span>
+                                @endif
 
                                 @php
                                     $attributes = array_filter($item->orderItem->additional['attributes'] ?? []);
@@ -311,7 +323,7 @@
                         <div class="grid grid-cols-2 gap-3 text-sm">
                             <div>
                                 <span class="font-medium text-gray-600">@lang('shop::app.rma.table-heading.sku')</span>
-                                <p class="text-gray-600">{{ $item->orderItem->product->sku }}</p>
+                                <p class="text-gray-600">{{ $item->orderItem->product->sku ?? $item->orderItem->sku }}</p>
                             </div>
 
                             <div>

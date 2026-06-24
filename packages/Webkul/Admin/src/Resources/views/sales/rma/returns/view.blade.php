@@ -161,7 +161,7 @@
                                 </div>
 
                                 <p class="py-4 break-words text-base font-semibold text-gray-800 dark:text-white">
-                                    {{ $rmaItem->product->name }}
+                                    {{ $rmaItem->product?->name ?? $rmaItem->orderItem?->name }}
                                 </p>
                             </div>
                             
