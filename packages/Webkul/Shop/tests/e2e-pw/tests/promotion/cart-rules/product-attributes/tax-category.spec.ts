@@ -107,7 +107,7 @@ test.beforeEach(async ({ adminPage }) => {
         .click();
     await adminPage.waitForLoadState("networkidle");
     await adminPage.locator('span:text-is("Tax Category")').click();
-    await adminPage.locator(`span:text-is("${taxCategoryName}")`).click();
+    await adminPage.locator(`span:text-is("${taxCategoryName}")`).first().click();
 
     await adminPage.locator('button:has-text("Save Product")').first().click();
 

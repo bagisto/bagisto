@@ -62,25 +62,25 @@ async function runCatalogRuleTest({
 const testCases = [
     {
         operator: "==",
-        optionSelect: "1",
+        optionSelect: "Yes",
         label: "is equal to (yes)",
         type: "percentage",
     },
     {
         operator: "==",
-        optionSelect: "1",
+        optionSelect: "Yes",
         label: "is equal to (yes)",
         type: "fixed",
     },
     {
         operator: "!=",
-        optionSelect: "0",
+        optionSelect: "No",
         label: "is not equal to (no)",
         type: "percentage",
     },
     {
         operator: "!=",
-        optionSelect: "0",
+        optionSelect: "No",
         label: "is not equal to (no)",
         type: "fixed",
     },

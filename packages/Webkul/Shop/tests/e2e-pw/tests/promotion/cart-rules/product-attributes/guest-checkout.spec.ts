@@ -95,26 +95,26 @@ test.afterEach(async ({ adminPage }) => {
 const cases = [
     {
         operator: "==",
-        optionSelect: "1",
+        optionSelect: "Yes",
         type: "fixed",
         label: "is equal to (fixed)",
     },
     {
         operator: "==",
-        optionSelect: "1",
+        optionSelect: "Yes",
         type: "percentage",
         label: "is equal to (percentage)",
     },
 
     {
         operator: "!=",
-        optionSelect: "0",
+        optionSelect: "No",
         type: "fixed",
         label: "is not equal to (fixed)",
     },
     {
         operator: "!=",
-        optionSelect: "0",
+        optionSelect: "No",
         type: "percentage",
         label: "is not equal to (percentage)",
     },

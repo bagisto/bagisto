@@ -53,7 +53,7 @@ async function assignTaxCategory(taxCategoryName: string, page: Page) {
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
     await page.waitForLoadState("networkidle");
     await page.locator('span:text-is("Tax Category")').click();
-    await page.locator(`span:text-is("${taxCategoryName}")`).click();
+    await page.locator(`span:text-is("${taxCategoryName}")`).first().click();
     await page.locator('button:has-text("Save Product")').first().click();
 
     await expect(
