@@ -75,7 +75,7 @@ async function runCartRuleTest(
     const discountValue = await ruleCreatePage.addCondition({
         attribute: "product|color",
         operator,
-        optionSelect: colorToSet,
+        optionSelect: "Red",
         couponType,
     });
 
