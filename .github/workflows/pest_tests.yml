@@ -57,3 +57,7 @@ jobs:
 
       - name: Running Pest Test
         run: vendor/bin/pest --colors=always
+
+      - name: Security Audit
+        run: composer audit
+        continue-on-error: true

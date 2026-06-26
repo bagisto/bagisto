@@ -1,2 +1,26 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# Block admin panel
+Disallow: /admin/
+Disallow: /admin
+
+# Block installer
+Disallow: /installer/
+Disallow: /installer
+
+# Block API (not intended for crawlers)
+Disallow: /api/
+
+# Block internal Laravel paths
+Disallow: /storage/
+Disallow: /vendor/
+
+# Block query-heavy pages that duplicate content
+Disallow: /*?sort=
+Disallow: /*?page=
+Disallow: /*?limit=
+Disallow: /*?currency=
+Disallow: /*?locale=
+
+Sitemap: /sitemap.xml
