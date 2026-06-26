@@ -1,0 +1,106 @@
+# =============================================================================
+# Render.com deployment configuration
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Quick Start:
+#   1. Push this repo to GitHub
+#   2. In Render Dashboard → New → Blueprint → select this repo
+#   3. After first deploy, get your URL (e.g. https://bagisto-xxx.onrender.com)
+#   4. Set APP_URL to that URL in the service's Environment tab
+#   5. Redeploy (or restart) to apply the URL
+#
+# Default mode: embedded MySQL (data resets on container restart)
+# For persistent data: set DB_HOST / DB_PORT / DB_DATABASE / DB_USERNAME /
+#   DB_PASSWORD to point to an external MySQL instance (e.g. PlanetScale).
+# =============================================================================
+
+services:
+  - type: web
+    name: bagisto-marketplace
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    healthCheckPath: /up
+    # Render free tier spins down after 15 min inactivity — first request is slow.
+    # Upgrade to starter plan to avoid spin-down.
+    numInstances: 1
+    envVars:
+      # -----------------------------------------------------------------------
+      # Required: set APP_URL to your Render URL after first deploy
+      # e.g. https://bagisto-marketplace.onrender.com
+      # -----------------------------------------------------------------------
+      - key: APP_URL
+        sync: false
+
+      # Auto-generated on first deploy; never changes on redeploy
+      - key: APP_KEY
+        generateValue: true
+
+      - key: APP_ENV
+        value: production
+
+      - key: APP_DEBUG
+        value: "false"
+
+      # -----------------------------------------------------------------------
+      # Internal MySQL defaults (data is ephemeral — lost on restart)
+      # Replace with external MySQL values for persistence.
+      # -----------------------------------------------------------------------
+      - key: DB_HOST
+        value: "127.0.0.1"
+
+      - key: DB_PORT
+        value: "3306"
+
+      - key: DB_DATABASE
+        value: bagisto
+
+      - key: DB_USERNAME
+        value: bagisto
+
+      - key: DB_PASSWORD
+        value: bagisto
+
+      # -----------------------------------------------------------------------
+      # Queue & cache
+      # -----------------------------------------------------------------------
+      - key: QUEUE_CONNECTION
+        value: database
+
+      - key: CACHE_STORE
+        value: file
+
+      - key: QUEUE_WORKER_NUMPROCS
+        value: "1"
+
+      # -----------------------------------------------------------------------
+      # Security
+      # -----------------------------------------------------------------------
+      - key: SESSION_ENCRYPT
+        value: "true"
+
+      - key: SESSION_SECURE_COOKIE
+        value: "true"
+
+      # -----------------------------------------------------------------------
+      # Logging
+      # -----------------------------------------------------------------------
+      - key: LOG_CHANNEL
+        value: stderr
+
+      - key: LOG_LEVEL
+        value: warning
+
+      # -----------------------------------------------------------------------
+      # Optional: mail (set these in the Render dashboard for real email)
+      # -----------------------------------------------------------------------
+      - key: MAIL_MAILER
+        value: log
+
+      # -----------------------------------------------------------------------
+      # Optional: uncomment and set for CORS / CSP if using a separate frontend
+      # -----------------------------------------------------------------------
+      # - key: CORS_ALLOWED_ORIGIN
+      #   sync: false
+      # - key: CONTENT_SECURITY_POLICY
+      #   sync: false
