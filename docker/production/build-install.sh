@@ -39,6 +39,10 @@ mysql -h 127.0.0.1 -u root < /docker-entrypoint-initdb.d/init.sql
 # Install Bagisto
 cd /var/www/bagisto
 
+# Force local env during build so Laravel's production guards (db:wipe,
+# migrate:fresh, db:seed) don't prompt for confirmation and cancel silently.
+export APP_ENV=local
+
 echo "[build-install] Generating application key..."
 php artisan key:generate --force --no-interaction
 
@@ -50,6 +54,9 @@ php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableS
 
 echo "[build-install] Running indexers..."
 php artisan index:index --mode=full
+
+# Restore production environment for the baked image
+export APP_ENV=production
 
 # Shut down MySQL cleanly
 echo "[build-install] Shutting down MySQL..."
