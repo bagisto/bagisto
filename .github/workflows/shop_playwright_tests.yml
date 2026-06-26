@@ -63,6 +63,7 @@ jobs:
       - name: Setting Environment
         run: |
           cp .env.example .env
+          sed -i "s|^\(APP_ENV=\s*\).*$|\1testing|" .env
           sed -i "s|^\(DB_HOST=\s*\).*$|\1127.0.0.1|" .env
           sed -i "s|^\(DB_PORT=\s*\).*$|\1${{ job.services.mysql.ports['3306'] }}|" .env
           sed -i "s|^\(DB_DATABASE=\s*\).*$|\1bagisto|" .env
