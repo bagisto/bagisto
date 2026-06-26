@@ -10,7 +10,8 @@ return new class extends Migration
     {
         Schema::create('marketplace_sellers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->constrained('customers')->cascadeOnDelete();
+            $table->unsignedInteger('customer_id');
+            $table->foreign('customer_id')->references('id')->on('customers')->cascadeOnDelete();
             $table->string('shop_name')->unique();
             $table->string('shop_url')->unique()->nullable();
             $table->string('logo')->nullable();

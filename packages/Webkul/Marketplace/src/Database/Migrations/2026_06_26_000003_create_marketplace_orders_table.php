@@ -11,7 +11,8 @@ return new class extends Migration
         // Links a Bagisto order to a seller and records commission split
         Schema::create('marketplace_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->unsignedInteger('order_id');
+            $table->foreign('order_id')->references('id')->on('orders')->cascadeOnDelete();
             $table->foreignId('seller_id')->constrained('marketplace_sellers')->cascadeOnDelete();
             $table->decimal('base_total', 12, 4)->default(0);       // order items belonging to this seller
             $table->decimal('commission_amount', 12, 4)->default(0); // admin's cut

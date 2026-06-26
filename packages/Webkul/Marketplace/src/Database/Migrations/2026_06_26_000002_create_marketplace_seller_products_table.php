@@ -11,7 +11,8 @@ return new class extends Migration
         Schema::create('marketplace_seller_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('seller_id')->constrained('marketplace_sellers')->cascadeOnDelete();
-            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->unsignedInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->cascadeOnDelete();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->boolean('is_owner')->default(true); // false = platform's own product
             $table->timestamps();
