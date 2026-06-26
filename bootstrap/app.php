@@ -48,7 +48,20 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->trustProxies(at: '*');
     })
     ->withSchedule(function (Schedule $schedule) {
-        //
+        // Prune stale personal access tokens (older than expiration)
+        $schedule->command('sanctum:prune-expired --hours=24')->daily();
+
+        // Remove failed jobs older than 30 days
+        $schedule->command('queue:flush')->monthly();
+
+        // Clear expired password reset tokens
+        $schedule->command('auth:clear-resets')->hourly();
+
+        // Generate sitemap (requires spatie/laravel-sitemap artisan command)
+        $schedule->command('sitemap:generate')->daily()->at('02:00');
+
+        // Prune telescope entries if Telescope is installed
+        // $schedule->command('telescope:prune --hours=48')->daily();
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
