@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Aggiungi allegati',
                 'add-image' => 'Aggiungi Immagine/Video',
+                'invalid-file-type' => 'Il tipo di file selezionato non è consentito.',
             ],
         ],
 
@@ -1725,16 +1726,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Accetta',
-                'awaiting' => 'In attesa',
-                'canceled' => 'Annullato',
-                'declined' => 'Declinato',
-                'dispatched-package' => 'Pacchetto Spedito',
+                'accept' => 'Approvato',
+                'awaiting' => 'In attesa del reso',
+                'canceled' => 'Richiesta annullata',
+                'declined' => 'Richiesta rifiutata',
+                'dispatched-package' => 'Reso in transito',
                 'item-canceled' => 'Articolo Annullato',
                 'not-received-package-yet' => 'Pacchetto non ancora ricevuto',
-                'pending' => 'In sospeso',
+                'pending' => 'In attesa di revisione',
                 'processing' => 'In lavorazione',
-                'received-package' => 'Pacchetto Ricevuto',
+                'received-package' => 'Rimborsato',
                 'solved' => 'Risolto',
             ],
 

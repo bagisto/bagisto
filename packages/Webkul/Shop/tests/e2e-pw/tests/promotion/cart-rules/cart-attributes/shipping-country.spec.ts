@@ -108,12 +108,12 @@ test.afterEach(async ({ adminPage }) => {
 const testCases = [
     {
         operator: "==",
-        optionSelect: "IN",
+        optionSelect: "India",
         label: "is equal to",
     },
     {
         operator: "!=",
-        optionSelect: "US",
+        optionSelect: "Syria",
         label: "is not equal to",
     },
 ];

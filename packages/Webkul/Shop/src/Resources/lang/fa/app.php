@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'افزودن پیوست',
                 'add-image' => 'افزودن تصویر/ویدئو',
+                'invalid-file-type' => 'نوع فایل انتخاب‌شده مجاز نیست.',
             ],
         ],
 
@@ -1725,16 +1726,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'پذیرفته شده',
-                'awaiting' => 'در انتظار',
-                'canceled' => 'لغو شد',
-                'declined' => 'رد شده',
-                'dispatched-package' => 'ارسال پکیج',
+                'accept' => 'تأیید شد',
+                'awaiting' => 'در انتظار بازگشت',
+                'canceled' => 'درخواست لغو شد',
+                'declined' => 'درخواست رد شد',
+                'dispatched-package' => 'بازگشت در حال ارسال',
                 'item-canceled' => 'لغو مورد',
                 'not-received-package-yet' => 'هنوز پکیج دریافت نشده',
-                'pending' => 'در انتظار',
+                'pending' => 'در انتظار بررسی',
                 'processing' => 'در حال پردازش',
-                'received-package' => 'دریافت پکیج',
+                'received-package' => 'بازپرداخت شد',
                 'solved' => 'حل شده',
             ],
 

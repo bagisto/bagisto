@@ -3,7 +3,7 @@
 @endphp
 
 <x-shop::layouts.account>
-    <!-- Title of the page -->
+    <!-- Title Of The Page -->
     <x-slot:title>
         @lang('shop::app.rma.customer.title')
     </x-slot>
@@ -301,17 +301,20 @@
                         @submit="handleSubmit($event, rmaSubmit)"
                         ref="rmaSubmit"
                     >
-                        <x-shop::modal ref="rmaModel">
+                        <x-shop::modal
+                            ref="rmaModel"
+                            panel-class="max-w-[768px]"
+                        >
                             <!-- Modal Header -->
                             <x-slot:header>
-                                <h2 class="text-base font-medium max-md:text-base">
+                                <h2 class="text-lg font-semibold text-gray-800 max-md:text-base">
                                     @lang('shop::app.rma.customer.create.heading')
                                 </h2>
                             </x-slot>
 
                             <!-- Modal Content -->
-                            <x-slot:content class="bg-white p-4 max-sm:p-3">
-                                <div class="overflow-auto" style="min-height: 400px; max-height: 400px;">
+                            <x-slot:content class="bg-gray-50 p-5 max-sm:p-3">
+                                <div class="journal-scroll flex flex-col gap-3 overflow-auto ltr:pr-1.5 rtl:pl-1.5" style="min-height: 420px; max-height: 60vh;">
                                     <v-order-items-list :key="refreshComponent" :order-id="isSelect"></v-order-items-list>
                                 </div>
                             </x-slot>
@@ -350,8 +353,8 @@
                 />
 
                 <div v-for="product in products">
-                    <div class="flex-row gap-2.5 border-b mt-2 mb-2">
-                        <div class="flex gap-2.5 mb-3">
+                    <div class="mb-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-sm transition-all hover:border-zinc-300">
+                        <div class="flex gap-4">
                             <!-- Checkbox -->
                             <p>
                                 <div v-if="product.currentQuantity > '0'">
@@ -359,7 +362,7 @@
                                         type="checkbox"
                                         :name="'isChecked[' + getProductId(product) + ']'"
                                         :id="'isChecked[' + getProductId(product) + ']'"
-                                        class="mt-6"
+                                        class="mt-1 h-4 w-4 cursor-pointer"
                                         :checked="isChecked[getProductId(product)] === true"
                                         @change="selectOnlyOne(getProductId(product))"
                                     >
@@ -382,7 +385,7 @@
                             <p>
                                 <template v-if="product.base_image">
                                     <img
-                                        class="min-h-[80px] max-h-[80px] min-w-[80px] max-w-[80px] rounded"
+                                        class="h-20 w-20 shrink-0 rounded-lg border border-zinc-200 object-cover"
                                         :src="`${baseImageUrl}${product.base_image}`"
                                         :alt="`${product.base_image}`"
                                     />
@@ -390,7 +393,7 @@
 
                                 <template v-else>
                                     <img
-                                        class="min-h-[80px] max-h-[80px] min-w-[80px] max-w-[80px] rounded"
+                                        class="h-20 w-20 shrink-0 rounded-lg border border-zinc-200 object-cover"
                                         src="{{ bagisto_asset('images/medium-product-placeholder.webp') }}"
                                         alt="medium-product-placeholder.webp"
                                     >
@@ -398,13 +401,13 @@
                             </p>
 
                             <!-- Sku, Price, Return Window -->
-                            <p class="w-full">
+                            <p class="w-full space-y-1">
                                 <p class="flex text-sm justify-between">
                                     <template v-if="product.url_key && product.visible_individually">
                                         <a
                                             :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', product.url_key)"
                                             target='_blank'
-                                            class="text-blue-500 text-lg hover:underline"
+                                            class="text-blue-600 text-base font-semibold hover:underline"
                                         >
                                             @{{ product.name }}
 
@@ -418,7 +421,7 @@
 
                                 <p
                                     v-for="(attribute) in product.attributes" v-if="product.attributes"
-                                    class="flex text-sm justify-between whitespace-nowrap"
+                                    class="flex gap-1.5 text-sm text-gray-500 [&>span:last-child]:font-medium [&>span:last-child]:text-gray-800"
                                     >
                                     <span>
                                         @{{ attribute.attribute_name }}:
@@ -427,7 +430,7 @@
                                     <span>@{{ attribute.option_label }}</span>
                                 </p>
 
-                                <p class="flex text-sm justify-between whitespace-nowrap">
+                                <p class="flex gap-1.5 text-sm text-gray-500 [&>span:last-child]:font-medium [&>span:last-child]:text-gray-800">
                                     <span>
                                         @lang('shop::app.customers.account.rma.create.sku'):
                                     </span>
@@ -435,7 +438,7 @@
                                     <span>@{{ product.sku }}</span>
                                 </p>
 
-                                <p class="flex text-sm justify-between whitespace-nowrap">
+                                <p class="flex gap-1.5 text-sm text-gray-500 [&>span:last-child]:font-medium [&>span:last-child]:text-gray-800">
                                     <span>
                                         @lang('shop::app.customers.account.rma.create.price'):
                                     </span>
@@ -443,7 +446,7 @@
                                     <span>@{{ formatPrice(product.price) }}</span>
                                 </p>
 
-                                <p class="flex text-sm justify-between whitespace-nowrap">
+                                <p class="flex gap-1.5 text-sm text-gray-500 [&>span:last-child]:font-medium [&>span:last-child]:text-gray-800">
                                     <span>
                                         @lang('shop::app.customers.account.rma.create.current-order-quantity'):
                                     </span>
@@ -455,7 +458,7 @@
 
                                 <p
                                     v-if="resolutionType[getProductId(product)] == 'return'"
-                                    class="flex text-sm justify-between whitespace-nowrap"
+                                    class="flex gap-1.5 text-sm text-gray-500 [&>span:last-child]:font-medium [&>span:last-child]:text-gray-800"
                                 >
                                     <span>
                                         @lang('shop::app.rma.customer.create.return-window'):
@@ -470,19 +473,19 @@
 
                         <!-- RMA QTY -->
                         <template v-if="! notAllowed">
-                            <p class="w-full">
-                                <div
-                                    v-if="product.currentQuantity <= '0'"
-                                    class="text-sm text-red-600 flex mb-2"
-                                >
-                                    @lang('shop::app.customers.account.rma.create.product-already-raw')
-                                </div>
-                            </p>
+                            <div
+                                v-if="product.currentQuantity <= '0'"
+                                class="mt-3 flex items-center gap-2 rounded-md border border-red-100 bg-red-50 px-3 py-2 text-sm text-red-600"
+                            >
+                                <span class="icon-cancel text-lg"></span>
+
+                                @lang('shop::app.customers.account.rma.create.product-already-raw')
+                            </div>
 
                             <div class="flex gap-3">
                                 <!-- Resolution Type for rules product -->
                                 <p class="w-full" v-if="product.rma_return_period">
-                                    <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
+                                    <div class="mt-4" v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                         <x-shop::form.control-group>
                                             <x-shop::form.control-group.label class="required text-sm flex">
                                                 @lang('shop::app.customers.account.rma.create.resolution-type') 
@@ -522,7 +525,7 @@
 
                                 <!-- Resolution Type -->
                                 <p class="w-full" v-else>
-                                    <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
+                                    <div class="mt-4" v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                         <x-shop::form.control-group>
                                             <x-shop::form.control-group.label class="required text-sm flex">
                                                 @lang('shop::app.customers.account.rma.create.resolution-type')
@@ -561,7 +564,7 @@
                                 </p>
 
                                 <!-- Reasons -->
-                                <p class="w-full"
+                                <p class="mt-4 w-full"
                                     v-if="isChecked[getProductId(product)]
                                         && product.currentQuantity > '0'
                                         && resolutionType[getProductId(product)]
@@ -1062,21 +1065,30 @@
                     },
 
                     selectOnlyOne(productId) {
+                        const wasChecked = this.isChecked[productId] === true;
+
+                        /**
+                         * Only one product can be selected at a time, so reset every
+                         * selection first.
+                         */
                         for (const key in this.isChecked) {
                             if (Object.prototype.hasOwnProperty.call(this.isChecked, key)) {
-                                
                                 this.isChecked[key] = false;
-                                if (key != productId) {
-                                    this.rma_qty[key] = null;
-                                    this.rma_reason_id[key] = null;
-                                    this.resolutionType[key] = null;
-                                    this.resolutionReason[key] = null;
-                                }
+                                this.rma_qty[key] = null;
+                                this.rma_reason_id[key] = null;
+                                this.resolutionType[key] = null;
+                                this.resolutionReason[key] = null;
                             }
                         }
 
-                        this.isChecked[productId] = true;
-                        this.resolutionType[productId] = null;
+                        /**
+                         * Toggle behaviour - re-select the product only if it was not
+                         * already checked, so un-checking the box hides its fields.
+                         */
+                        if (! wasChecked) {
+                            this.isChecked[productId] = true;
+                            this.resolutionType[productId] = null;
+                        }
                     },
 
                     getProductId(product) {

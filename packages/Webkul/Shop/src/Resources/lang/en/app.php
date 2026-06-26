@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Add attachments',
                 'add-image' => 'Add Image/Video',
+                'invalid-file-type' => 'The selected file type is not allowed.',
             ],
         ],
 
@@ -1725,16 +1726,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Accept',
-                'awaiting' => 'Awaiting',
-                'canceled' => 'Canceled',
-                'declined' => 'Declined',
-                'dispatched-package' => 'Dispatched Package',
+                'accept' => 'Approved',
+                'awaiting' => 'Awaiting Return',
+                'canceled' => 'Request Canceled',
+                'declined' => 'Request Declined',
+                'dispatched-package' => 'Return In Transit',
                 'item-canceled' => 'Item Canceled',
                 'not-received-package-yet' => 'Not received package yet',
-                'pending' => 'Pending',
+                'pending' => 'Pending Review',
                 'processing' => 'Processing',
-                'received-package' => 'Received Package',
+                'received-package' => 'Refunded',
                 'solved' => 'Solved',
             ],
 

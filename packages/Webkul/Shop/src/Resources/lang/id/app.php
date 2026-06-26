@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Tambahkan Lampiran',
                 'add-image' => 'Tambahkan Gambar/Video',
+                'invalid-file-type' => 'Tipe file yang dipilih tidak diizinkan.',
             ],
         ],
 
@@ -1725,16 +1726,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Diterima',
-                'awaiting' => 'Menunggu',
-                'canceled' => 'Dibatalkan',
-                'declined' => 'Ditolak',
-                'dispatched-package' => 'Paket Dikirim',
+                'accept' => 'Disetujui',
+                'awaiting' => 'Menunggu pengembalian',
+                'canceled' => 'Permintaan dibatalkan',
+                'declined' => 'Permintaan ditolak',
+                'dispatched-package' => 'Pengembalian dalam perjalanan',
                 'item-canceled' => 'Item Dibatalkan',
                 'not-received-package-yet' => 'Belum menerima paket',
-                'pending' => 'Menunggu',
+                'pending' => 'Menunggu peninjauan',
                 'processing' => 'Sedang Diproses',
-                'received-package' => 'Paket Diterima',
+                'received-package' => 'Dikembalikan',
                 'solved' => 'Selesai',
             ],
 

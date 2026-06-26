@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Adaugă atașamente',
                 'add-image' => 'Adaugă imagine/video',
+                'invalid-file-type' => 'Tipul de fișier selectat nu este permis.',
             ],
         ],
 
@@ -1725,16 +1726,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Acceptă',
-                'awaiting' => 'Awaiting',
-                'canceled' => 'Anulată',
-                'declined' => 'Refuzat',
-                'dispatched-package' => 'Dispatched Package',
+                'accept' => 'Aprobat',
+                'awaiting' => 'În așteptarea returului',
+                'canceled' => 'Cerere anulată',
+                'declined' => 'Cerere respinsă',
+                'dispatched-package' => 'Retur în tranzit',
                 'item-canceled' => 'Item Canceled',
                 'not-received-package-yet' => 'Not received package yet',
-                'pending' => 'În așteptare',
+                'pending' => 'În așteptarea examinării',
                 'processing' => 'În procesare',
-                'received-package' => 'Received Package',
+                'received-package' => 'Rambursat',
                 'solved' => 'Solved',
             ],
 

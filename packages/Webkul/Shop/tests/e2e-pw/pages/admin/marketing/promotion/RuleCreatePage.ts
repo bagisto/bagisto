@@ -187,7 +187,9 @@ export class RuleCreatePage extends BasePage {
 
         if (optionSelect) {
             await this.selectConditionOption.waitFor();
-            await this.selectConditionOption.selectOption(optionSelect);
+            await this.selectConditionOption.selectOption({
+                label: optionSelect,
+            });
         } else if (value) {
             await this.conditionValueInput.fill(value);
         } else if (checkboxSelect) {

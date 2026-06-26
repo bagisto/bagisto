@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => '添加附件',
                 'add-image' => '添加图片/视频',
+                'invalid-file-type' => '不允许所选的文件类型。',
             ],
         ],
 
@@ -1725,16 +1726,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => '接受',
-                'awaiting' => '等待中',
-                'canceled' => '已取消',
-                'declined' => '已拒绝',
-                'dispatched-package' => '包裹已发出',
+                'accept' => '已批准',
+                'awaiting' => '等待退货',
+                'canceled' => '请求已取消',
+                'declined' => '请求已拒绝',
+                'dispatched-package' => '退货运输中',
                 'item-canceled' => '商品已取消',
                 'not-received-package-yet' => '包裹尚未收到',
-                'pending' => '待处理',
+                'pending' => '待审核',
                 'processing' => '处理中',
-                'received-package' => '包裹已收到',
+                'received-package' => '已退款',
                 'solved' => '已解决',
             ],
 

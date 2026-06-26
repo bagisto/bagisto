@@ -115,7 +115,7 @@ test.describe("multiple types product combination checkout flow", () => {
         });
     });
 
-    test("should allow customer to complete checkout for simple, configurable and virtual product successfully", async ({
+    test("should allow customer to complete checkout for simple, configurable, grouped and virtual product successfully", async ({
         shopPage,
     }) => {
         await loginAsCustomer(shopPage);

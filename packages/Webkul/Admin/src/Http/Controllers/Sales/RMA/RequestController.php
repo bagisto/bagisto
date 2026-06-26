@@ -204,7 +204,7 @@ class RequestController extends Controller
         $this->validate(request(), [
             'order_id' => 'required|exists:orders,id',
             'order_item_id' => 'required',
-            'rma_qty' => 'required',
+            'rma_qty' => 'required|integer|min:1',
             'resolution_type' => 'required',
             'rma_reason_id' => 'required',
             'information' => 'nullable|string',
@@ -223,6 +223,22 @@ class RequestController extends Controller
             'images',
             'package_condition',
         ]);
+
+        /**
+         * Cap the requested quantity against the trusted order-item state so a crafted
+         * request cannot store a quantity larger than what is actually returnable/cancelable.
+         */
+        $orderItem = $this->orderItemRepository->find($data['order_item_id']);
+
+        if ($orderItem) {
+            $maxQty = $data['resolution_type'] === DefaultRMAResolution::CANCEL_ITEMS->value
+                ? (int) $orderItem->qty_ordered - (int) $orderItem->qty_invoiced - (int) $orderItem->qty_canceled
+                : (int) $orderItem->qty_invoiced - (int) $orderItem->qty_refunded;
+
+            $this->validate(request(), [
+                'rma_qty' => 'integer|min:1|max:'.max($maxQty, 0),
+            ]);
+        }
 
         Event::dispatch('sales.rma.request.create.before', $data);
 
@@ -336,9 +352,27 @@ class RequestController extends Controller
 
         $hasCancel = $rma->item->resolution === DefaultRMAResolution::CANCEL_ITEMS->value;
 
+        /**
+         * The order-linked actions (Refunded / Item Canceled) are intentionally excluded here -
+         * they are surfaced as contextual buttons on the item itself, not as neutral status steps.
+         */
         $excludedStatuses = $hasCancel
-            ? [DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value, DefaultRMAStatusEnum::RECEIVED_PACKAGE->value, DefaultRMAStatusEnum::SOLVED->value]
-            : [DefaultRMAStatusEnum::ITEM_CANCELED->value, DefaultRMAStatusEnum::ACCEPT->value, DefaultRMAStatusEnum::DECLINED->value, DefaultRMAStatusEnum::PENDING->value, DefaultRMAStatusEnum::SOLVED->value];
+            ? [
+                DefaultRMAStatusEnum::ACCEPT->value,
+                DefaultRMAStatusEnum::DECLINED->value,
+                DefaultRMAStatusEnum::PENDING->value,
+                DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value,
+                DefaultRMAStatusEnum::RECEIVED_PACKAGE->value,
+                DefaultRMAStatusEnum::SOLVED->value,
+                DefaultRMAStatusEnum::ITEM_CANCELED->value]
+            : [
+                DefaultRMAStatusEnum::ITEM_CANCELED->value,
+                DefaultRMAStatusEnum::ACCEPT->value,
+                DefaultRMAStatusEnum::DECLINED->value,
+                DefaultRMAStatusEnum::PENDING->value,
+                DefaultRMAStatusEnum::SOLVED->value,
+                DefaultRMAStatusEnum::RECEIVED_PACKAGE->value,
+            ];
 
         return $this->rmaStatusRepository
             ->whereIn('id', $activeStatusIds->diff($excludedStatuses))
@@ -451,8 +485,15 @@ class RequestController extends Controller
     {
         $this->orderItemRepository->returnQtyToProductInventory($orderItem);
 
+        $cancelableQty = max(
+            0,
+            (int) $orderItem->qty_ordered - (int) $orderItem->qty_invoiced - (int) $orderItem->qty_canceled
+        );
+
+        $quantity = min((int) $rmaItem->quantity, $cancelableQty);
+
         if ($orderItem->qty_ordered) {
-            $orderItem->qty_canceled += $rmaItem->quantity;
+            $orderItem->qty_canceled += $quantity;
             $orderItem->save();
 
             if (
@@ -579,6 +620,12 @@ class RequestController extends Controller
             Mail::queue(new CustomerRMAStatusNotification($rma));
         } catch (\Exception $e) {
         }
+
+        /**
+         * Flashed to the session so the confirmation survives the page reload the
+         * front-end performs after a successful status update.
+         */
+        session()->flash('success', trans('admin::app.sales.rma.all-rma.view.update-success'));
 
         return new JsonResponse([
             'messages' => trans('admin::app.sales.rma.all-rma.view.update-success'),

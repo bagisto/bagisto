@@ -140,17 +140,18 @@ export class RmaManagePage extends BasePage {
             this.page.getByText("RMA Status updated").first(),
         ).toBeVisible();
         await expect(
-            this.page.getByText("Accept", { exact: true }),
+            this.page.getByText("Approved", { exact: true }),
         ).toBeVisible();
+
         await this.page
-            .locator('select[name="rma_status_id"]')
-            .selectOption("5");
-        await this.page.locator('button:has-text("Save")').click();
+            .getByRole("button", { name: "Refund Item", exact: true })
+            .first()
+            .click();
         await this.page
-            .getByRole("button", { name: "Agree", exact: true })
+            .locator('button[type="submit"]:has-text("Refund Item")')
             .click();
         await expect(
-            this.page.getByText("Received Package", { exact: true }),
+            this.page.getByText("Refunded", { exact: true }),
         ).toBeVisible();
     }
 
@@ -168,7 +169,7 @@ export class RmaManagePage extends BasePage {
             this.page.getByText("RMA Status updated").first(),
         ).toBeVisible();
         await expect(
-            this.page.getByText("Declined", { exact: true }),
+            this.page.getByText("Request Declined", { exact: true }),
         ).toBeVisible();
     }
 
