@@ -46,8 +46,12 @@ return [
                 'title'   => 'Subscription Plans',
                 'add-btn' => 'Add Plan',
             ],
-            'create'         => ['title' => 'Create Subscription Plan'],
-            'edit'           => ['title' => 'Edit Subscription Plan'],
+            'create' => [
+                'title' => 'Create Subscription Plan',
+            ],
+            'edit' => [
+                'title' => 'Edit Subscription Plan',
+            ],
             'create-success' => 'Subscription plan created successfully.',
             'update-success' => 'Subscription plan updated successfully.',
             'delete-success' => 'Subscription plan deleted.',
@@ -55,14 +59,14 @@ return [
     ],
     'seller' => [
         'auth' => [
-            'register'          => 'Become a Seller',
-            'login-required'    => 'You need to log in before registering as a seller.',
+            'register'           => 'Become a Seller',
+            'login-required'     => 'You need to log in before registering as a seller.',
             'already-registered' => 'You already have a seller account.',
-            'register-success'  => 'Your seller account has been submitted for review.',
+            'register-success'   => 'Your seller account has been submitted for review.',
         ],
         'dashboard' => [
-            'title'           => 'Seller Dashboard',
-            'register-first'  => 'Please complete your seller registration first.',
+            'title'            => 'Seller Dashboard',
+            'register-first'   => 'Please complete your seller registration first.',
             'pending-earnings' => 'Pending Earnings',
             'total-earnings'   => 'Total Earnings',
             'recent-orders'    => 'Recent Orders',
@@ -77,10 +81,10 @@ return [
             'title' => 'My Orders',
         ],
         'payouts' => [
-            'title'           => 'Payouts',
-            'request-btn'     => 'Request Payout',
+            'title'             => 'Payouts',
+            'request-btn'       => 'Request Payout',
             'available-balance' => 'Available Balance',
-            'request-success' => 'Payout request submitted successfully.',
+            'request-success'   => 'Payout request submitted successfully.',
         ],
     ],
 ];
