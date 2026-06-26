@@ -22,6 +22,7 @@ use Webkul\ImageCache\Providers\ImageCacheServiceProvider;
 use Webkul\Installer\Providers\InstallerServiceProvider;
 use Webkul\Inventory\Providers\InventoryServiceProvider;
 use Webkul\MagicAI\Providers\MagicAIServiceProvider;
+use Webkul\Marketplace\Providers\MarketplaceServiceProvider;
 use Webkul\Marketing\Providers\MarketingServiceProvider;
 use Webkul\Notification\Providers\NotificationServiceProvider;
 use Webkul\Payment\Providers\PaymentServiceProvider;
@@ -73,6 +74,7 @@ return [
     InstallerServiceProvider::class,
     InventoryServiceProvider::class,
     MagicAIServiceProvider::class,
+    MarketplaceServiceProvider::class,
     MarketingServiceProvider::class,
     NotificationServiceProvider::class,
     PayUServiceProvider::class,
