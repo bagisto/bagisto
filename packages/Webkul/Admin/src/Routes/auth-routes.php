@@ -25,7 +25,9 @@ Route::group(['prefix' => config('app.admin_url')], function () {
         /**
          * Login post route to admin auth controller.
          */
-        Route::post('', 'store')->name('admin.session.store');
+        Route::post('', 'store')
+            ->middleware('throttle:10,1')
+            ->name('admin.session.store');
     });
 
     /**
@@ -45,7 +47,9 @@ Route::group(['prefix' => config('app.admin_url')], function () {
     Route::controller(ForgetPasswordController::class)->prefix('forget-password')->group(function () {
         Route::get('', 'create')->name('admin.forget_password.create');
 
-        Route::post('', 'store')->name('admin.forget_password.store');
+        Route::post('', 'store')
+            ->middleware('throttle:5,1')
+            ->name('admin.forget_password.store');
     });
 
     /**
