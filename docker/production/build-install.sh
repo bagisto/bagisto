@@ -46,7 +46,7 @@ echo "[build-install] Running Bagisto installation..."
 php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star --no-interaction
 
 echo "[build-install] Running database seeders..."
-php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
+php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder" --force --no-interaction
 
 echo "[build-install] Running indexers..."
 php artisan index:index --mode=full
