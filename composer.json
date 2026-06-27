@@ -56,6 +56,7 @@
         "fakerphp/faker": "^1.23",
         "laravel/boost": "^2.1",
         "laravel/pint": "^1.19",
+        "laravel/sail": "^1.63",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
         "pestphp/pest": "^3.0",
