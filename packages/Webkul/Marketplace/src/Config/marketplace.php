@@ -49,4 +49,18 @@ return [
     |--------------------------------------------------------------------------
     */
     'auto_approve_products' => env('MARKETPLACE_AUTO_APPROVE_PRODUCTS', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Stripe Connect
+    |--------------------------------------------------------------------------
+    | stripe_secret: platform secret key used for Connect (accounts/transfers) and
+    | seller subscription billing. Falls back to the Bagisto Stripe gateway key
+    | (Admin → Configure → Stripe) when STRIPE_CONNECT_SECRET is not set.
+    |
+    | connect_enabled: when true, payouts can be sent automatically to a seller's
+    | connected Stripe account instead of (or alongside) the manual PIX/bank flow.
+    */
+    'stripe_secret'   => env('STRIPE_CONNECT_SECRET'),
+    'connect_enabled' => env('MARKETPLACE_STRIPE_CONNECT', false),
 ];

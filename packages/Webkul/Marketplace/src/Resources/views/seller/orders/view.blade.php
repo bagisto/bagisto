@@ -1,10 +1,8 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    <x-slot:title>
+        Order #{{ $order->order?->increment_id }}
+    </x-slot>
 
-@section('page_title')
-    Order #{{ $order->order?->increment_id }}
-@stop
-
-@section('content-wrapper')
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-6">Order #{{ $order->order?->increment_id }}</h1>
 
@@ -24,4 +22,4 @@
 
         <a href="{{ route('marketplace.orders.index') }}" class="mt-4 inline-block text-blue-600">← Back to Orders</a>
     </div>
-@stop
+</x-shop::layouts>

@@ -46,5 +46,10 @@ class MarketplaceServiceProvider extends ServiceProvider
             ->prefix('marketplace')
             ->name('marketplace.')
             ->group(__DIR__.'/../Routes/seller-routes.php');
+
+        // Public seller storefront at /loja/{shop_url}
+        Route::middleware(['web'])
+            ->name('marketplace.')
+            ->group(__DIR__.'/../Routes/shop-routes.php');
     }
 }

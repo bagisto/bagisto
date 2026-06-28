@@ -33,12 +33,20 @@ class Seller extends Model implements SellerContract
         'commission_rate',
         'status',
         'is_featured',
+        'stripe_account_id',
+        'stripe_charges_enabled',
+        'stripe_payouts_enabled',
+        'stripe_customer_id',
+        'payout_mode',
     ];
 
     protected $casts = [
-        'status'       => SellerStatus::class,
-        'is_featured'  => 'boolean',
-        'commission_rate' => 'decimal:2',
+        'status'                 => SellerStatus::class,
+        'is_featured'            => 'boolean',
+        'commission_rate'        => 'decimal:2',
+        'stripe_charges_enabled' => 'boolean',
+        'stripe_payouts_enabled' => 'boolean',
+        'payout_mode'            => \Webkul\Marketplace\Enums\PayoutMode::class,
     ];
 
     public function customer(): BelongsTo

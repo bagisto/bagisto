@@ -1,10 +1,8 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    <x-slot:title>
+        {{ trans('marketplace::app.seller.products.title') }}
+    </x-slot>
 
-@section('page_title')
-    {{ trans('marketplace::app.seller.products.title') }}
-@stop
-
-@section('content-wrapper')
     <div class="container mx-auto py-8">
         <div class="flex justify-between items-center mb-6">
             <h1 class="text-2xl font-bold">{{ trans('marketplace::app.seller.products.title') }}</h1>
@@ -40,4 +38,4 @@
 
         {{ $products->links() }}
     </div>
-@stop
+</x-shop::layouts>

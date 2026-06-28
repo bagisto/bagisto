@@ -42,4 +42,22 @@ class SellerController extends Controller
 
         return redirect()->route('admin.marketplace.sellers.view', $id);
     }
+
+    /**
+     * Per-seller money routing: 'platform' (all money to the owner, manual payout)
+     * or 'stripe' (settled to the seller's connected Stripe account).
+     */
+    public function updatePayoutMode(int $id): RedirectResponse
+    {
+        request()->validate([
+            'payout_mode' => 'required|in:platform,stripe',
+        ]);
+
+        $seller = $this->sellerRepository->findOrFail($id);
+        $seller->update(['payout_mode' => request('payout_mode')]);
+
+        session()->flash('success', 'Roteamento de pagamento atualizado para este vendedor.');
+
+        return redirect()->route('admin.marketplace.sellers.view', $id);
+    }
 }

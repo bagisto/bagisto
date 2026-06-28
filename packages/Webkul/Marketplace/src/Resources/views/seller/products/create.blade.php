@@ -1,10 +1,8 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    <x-slot:title>
+        List a Product
+    </x-slot>
 
-@section('page_title')
-    List a Product
-@stop
-
-@section('content-wrapper')
     <div class="container mx-auto max-w-lg py-8">
         <h1 class="text-2xl font-bold mb-6">List a Product</h1>
 
@@ -24,4 +22,4 @@
             <a href="{{ route('marketplace.products.index') }}" class="ml-3 text-gray-600">Cancel</a>
         </form>
     </div>
-@stop
+</x-shop::layouts>

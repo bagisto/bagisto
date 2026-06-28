@@ -38,9 +38,22 @@ class MarketplaceOrderRepository extends Repository
             ->get();
     }
 
+    /**
+     * Lifetime earnings (seller's share across ALL commissions, any status).
+     */
     public function totalEarningsBySeller(int $sellerId): float
     {
-        return $this->model
+        return (float) $this->model
+            ->where('seller_id', $sellerId)
+            ->sum('seller_total');
+    }
+
+    /**
+     * Earnings already settled to the seller (paid commissions only).
+     */
+    public function paidEarningsBySeller(int $sellerId): float
+    {
+        return (float) $this->model
             ->where('seller_id', $sellerId)
             ->where('commission_status', CommissionStatus::Paid)
             ->sum('seller_total');

@@ -1,10 +1,8 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    <x-slot:title>
+        {{ trans('marketplace::app.seller.dashboard.title') }}
+    </x-slot>
 
-@section('page_title')
-    {{ trans('marketplace::app.seller.dashboard.title') }}
-@stop
-
-@section('content-wrapper')
     <div class="container mx-auto py-8">
         <h1 class="text-2xl font-bold mb-6">{{ trans('marketplace::app.seller.dashboard.title') }}</h1>
 
@@ -59,10 +57,22 @@
             </table>
         </div>
 
-        <div class="mt-6 flex gap-4">
+        <div class="mt-6 rounded-lg border border-indigo-200 bg-indigo-50 p-4 flex items-center justify-between flex-wrap gap-3">
+            <div>
+                <p class="text-sm text-indigo-700 font-semibold">Sua loja pública</p>
+                <a href="{{ route('marketplace.store', $seller->shop_url) }}" target="_blank"
+                   class="text-indigo-600 underline break-all">{{ route('marketplace.store', $seller->shop_url) }}</a>
+            </div>
+            <a href="{{ route('marketplace.store', $seller->shop_url) }}" target="_blank"
+               class="bg-indigo-600 text-white px-4 py-2 rounded shrink-0">Ver minha loja</a>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-4">
             <a href="{{ route('marketplace.products.index') }}" class="bg-blue-600 text-white px-4 py-2 rounded">My Products</a>
             <a href="{{ route('marketplace.orders.index') }}" class="bg-gray-600 text-white px-4 py-2 rounded">My Orders</a>
             <a href="{{ route('marketplace.payouts.index') }}" class="bg-green-600 text-white px-4 py-2 rounded">Payouts</a>
+            <a href="{{ route('marketplace.subscriptions.index') }}" class="bg-indigo-600 text-white px-4 py-2 rounded">Subscription Plans</a>
+            <a href="{{ route('marketplace.connect.index') }}" class="bg-[#635bff] text-white px-4 py-2 rounded">Stripe Connect</a>
         </div>
     </div>
-@stop
+</x-shop::layouts>

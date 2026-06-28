@@ -10,6 +10,7 @@ Route::get('sellers', [SellerController::class, 'index'])->name('sellers.index')
 Route::get('sellers/{id}', [SellerController::class, 'view'])->name('sellers.view');
 Route::post('sellers/{id}/approve', [SellerController::class, 'approve'])->name('sellers.approve');
 Route::post('sellers/{id}/suspend', [SellerController::class, 'suspend'])->name('sellers.suspend');
+Route::post('sellers/{id}/payout-mode', [SellerController::class, 'updatePayoutMode'])->name('sellers.payout-mode');
 
 Route::get('commissions', [CommissionController::class, 'index'])->name('commissions.index');
 Route::post('commissions/{id}/pay', [CommissionController::class, 'markPaid'])->name('commissions.pay');

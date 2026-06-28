@@ -46,15 +46,15 @@ class PayoutController extends Controller
 
         request()->validate([
             'amount'         => "required|numeric|min:{$minPayout}",
-            'payment_method' => 'required|in:pix,bank_transfer,paypal',
-            'payment_details' => 'required|array',
+            'payment_method' => 'required|in:pix,bank_transfer,paypal,stripe',
+            'payment_details' => 'nullable|array',
         ]);
 
         $this->payoutRepository->requestPayout(
             $seller->id,
             request('amount'),
             request('payment_method'),
-            request('payment_details')
+            request('payment_details', [])
         );
 
         return redirect()->route('marketplace.payouts.index')

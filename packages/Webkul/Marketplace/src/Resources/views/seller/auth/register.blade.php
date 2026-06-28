@@ -1,10 +1,8 @@
-@extends('shop::layouts.master')
+<x-shop::layouts>
+    <x-slot:title>
+        {{ trans('marketplace::app.seller.auth.register') }}
+    </x-slot>
 
-@section('page_title')
-    {{ trans('marketplace::app.seller.auth.register') }}
-@stop
-
-@section('content-wrapper')
     <div class="container mx-auto max-w-lg py-8">
         <h1 class="text-2xl font-bold mb-6">{{ trans('marketplace::app.seller.auth.register') }}</h1>
 
@@ -46,4 +44,4 @@
             </button>
         </form>
     </div>
-@stop
+</x-shop::layouts>

@@ -1,10 +1,8 @@
-@extends('admin::layouts.master')
+<x-admin::layouts>
+    <x-slot:title>
+        {{ trans('marketplace::app.admin.sellers.index.title') }}
+    </x-slot>
 
-@section('page_title')
-    {{ trans('marketplace::app.admin.sellers.index.title') }}
-@stop
-
-@section('content-wrapper')
     <div class="content full-page">
         <div class="page-header">
             <div class="page-title">
@@ -52,4 +50,4 @@
             {{ $sellers->links() }}
         </div>
     </div>
-@stop
+</x-admin::layouts>
