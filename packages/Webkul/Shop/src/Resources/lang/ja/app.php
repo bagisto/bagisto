@@ -612,8 +612,6 @@ return [
                 'subscribe-newsletter' => 'メールアドレスをストアのニュースレターに登録します。',
                 'subscribe-newsletter-email' => 'ニュースレターに登録するメールアドレス。',
                 'view-cart' => '顧客が追加した商品を確認できるよう、ショッピングカートのページを開きます。',
-                'view-category' => 'カテゴリ名でそのカテゴリの商品を閲覧するためにカテゴリページを開きます。',
-                'view-category-query' => '開くカテゴリの名前またはスラッグ。',
                 'view-product' => '商品名で商品の詳細ページを開きます。',
                 'view-product-query' => '開く商品名またはURLキー。',
                 'view-wishlist' => '顧客が保存した商品を確認するためにお気に入りリストのページを開きます。',

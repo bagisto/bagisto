@@ -5,7 +5,6 @@ namespace Webkul\Shop\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Str;
-use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Customer\Repositories\WishlistRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
@@ -18,7 +17,6 @@ class WebMcpController extends Controller
      */
     public function __construct(
         protected ProductRepository $productRepository,
-        protected CategoryRepository $categoryRepository,
         protected WishlistRepository $wishlistRepository
     ) {}
 
@@ -31,28 +29,6 @@ class WebMcpController extends Controller
 
         if ($query !== '' && $product = $this->resolveProduct($query)) {
             return redirect()->route('shop.product_or_category.index', $product->url_key);
-        }
-
-        return redirect()->route('shop.search.index', ['query' => $query]);
-    }
-
-    /**
-     * Resolve a category by name/slug and open its listing page.
-     */
-    public function category(): RedirectResponse
-    {
-        $query = trim((string) request('query'));
-
-        if ($query !== '') {
-            $category = $this->categoryRepository->findBySlug($query)
-                ?? $this->categoryRepository->findBySlug(Str::slug($query))
-                ?? $this->categoryRepository
-                    ->scopeQuery(fn ($queryBuilder) => $queryBuilder->whereTranslationLike('name', '%'.$query.'%'))
-                    ->first();
-
-            if ($category) {
-                return redirect()->route('shop.product_or_category.index', $category->slug);
-            }
         }
 
         return redirect()->route('shop.search.index', ['query' => $query]);

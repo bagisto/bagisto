@@ -612,8 +612,6 @@ return [
                 'subscribe-newsletter' => 'Subscribe an email address to the store newsletter.',
                 'subscribe-newsletter-email' => 'The email address to subscribe to the newsletter.',
                 'view-cart' => 'Open the shopping cart page so the customer can review the products they have added.',
-                'view-category' => 'Open a category page to browse its products by category name.',
-                'view-category-query' => 'The category name or slug to open.',
                 'view-product' => 'Open a product\'s detail page by product name.',
                 'view-product-query' => 'The product name or URL key to open.',
                 'view-wishlist' => 'Open the wishlist page to review the customer\'s saved products.',

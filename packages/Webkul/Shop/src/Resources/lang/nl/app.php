@@ -612,8 +612,6 @@ return [
                 'subscribe-newsletter' => 'Schrijf een e-mailadres in voor de nieuwsbrief van de winkel.',
                 'subscribe-newsletter-email' => 'Het e-mailadres om in te schrijven voor de nieuwsbrief.',
                 'view-cart' => 'Open de winkelwagenpagina zodat de klant de toegevoegde producten kan bekijken.',
-                'view-category' => 'Open een categoriepagina om de producten op categorienaam te bekijken.',
-                'view-category-query' => 'De naam of slug van de te openen categorie.',
                 'view-product' => 'Open de detailpagina van een product op productnaam.',
                 'view-product-query' => 'De productnaam of URL-sleutel om te openen.',
                 'view-wishlist' => 'Open de verlanglijstpagina om de opgeslagen producten van de klant te bekijken.',

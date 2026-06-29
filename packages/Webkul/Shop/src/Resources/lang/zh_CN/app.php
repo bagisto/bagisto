@@ -612,8 +612,6 @@ return [
                 'subscribe-newsletter' => '将电子邮件地址订阅到商店的电子报。',
                 'subscribe-newsletter-email' => '用于订阅电子报的电子邮件地址。',
                 'view-cart' => '打开购物车页面，以便客户查看已添加的产品。',
-                'view-category' => '按分类名称打开分类页面以浏览其产品。',
-                'view-category-query' => '要打开的分类名称或别名。',
                 'view-product' => '按产品名称打开产品详情页面。',
                 'view-product-query' => '要打开的产品名称或 URL 键。',
                 'view-wishlist' => '打开心愿单页面以查看客户保存的产品。',

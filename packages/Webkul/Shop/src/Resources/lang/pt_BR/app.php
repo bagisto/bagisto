@@ -612,8 +612,6 @@ return [
                 'subscribe-newsletter' => 'Inscreva um endereço de e-mail na newsletter da loja.',
                 'subscribe-newsletter-email' => 'O endereço de e-mail para se inscrever na newsletter.',
                 'view-cart' => 'Abra a página do carrinho para que o cliente possa revisar os produtos que adicionou.',
-                'view-category' => 'Abra uma página de categoria para navegar pelos seus produtos pelo nome da categoria.',
-                'view-category-query' => 'O nome ou o slug da categoria a abrir.',
                 'view-product' => 'Abra a página de detalhes de um produto pelo nome do produto.',
                 'view-product-query' => 'O nome do produto ou a chave de URL a abrir.',
                 'view-wishlist' => 'Abra a página da lista de desejos para revisar os produtos salvos do cliente.',

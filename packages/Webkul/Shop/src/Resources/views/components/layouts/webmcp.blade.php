@@ -1,20 +1,6 @@
 {!! view_render_event('bagisto.shop.layout.webmcp.before') !!}
 
 <form
-    action="{{ route('shop.webmcp.category') }}"
-    method="GET"
-    toolname="view_category"
-    tooldescription="{{ trans('shop::app.components.layouts.webmcp.view-category') }}"
-    toolautosubmit
->
-    <input
-        type="text"
-        name="query"
-        toolparamdescription="{{ trans('shop::app.components.layouts.webmcp.view-category-query') }}"
-    >
-</form>
-
-<form
     action="{{ route('shop.webmcp.product') }}"
     method="GET"
     toolname="view_product"
@@ -24,8 +10,11 @@
     <input
         type="text"
         name="query"
+        aria-label="{{ trans('shop::app.components.layouts.webmcp.view-product-query') }}"
         toolparamdescription="{{ trans('shop::app.components.layouts.webmcp.view-product-query') }}"
     >
+
+    <button type="submit" class="hidden" aria-hidden="true"></button>
 </form>
 
 <form
@@ -38,8 +27,11 @@
     <input
         type="text"
         name="query"
+        aria-label="{{ trans('shop::app.components.layouts.webmcp.add-to-wishlist-query') }}"
         toolparamdescription="{{ trans('shop::app.components.layouts.webmcp.add-to-wishlist-query') }}"
     >
+
+    <button type="submit" class="hidden" aria-hidden="true"></button>
 </form>
 
 <form
@@ -49,6 +41,7 @@
     tooldescription="{{ trans('shop::app.components.layouts.webmcp.view-wishlist') }}"
     toolautosubmit
 >
+    <button type="submit" class="hidden" aria-hidden="true"></button>
 </form>
 
 <form
@@ -58,6 +51,7 @@
     tooldescription="{{ trans('shop::app.components.layouts.webmcp.view-cart') }}"
     toolautosubmit
 >
+    <button type="submit" class="hidden" aria-hidden="true"></button>
 </form>
 
 <form
@@ -67,6 +61,7 @@
     tooldescription="{{ trans('shop::app.components.layouts.webmcp.proceed-to-checkout') }}"
     toolautosubmit
 >
+    <button type="submit" class="hidden" aria-hidden="true"></button>
 </form>
 
 {!! view_render_event('bagisto.shop.layout.webmcp.after') !!}

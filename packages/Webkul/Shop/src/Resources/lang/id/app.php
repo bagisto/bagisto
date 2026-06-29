@@ -612,8 +612,6 @@ return [
                 'subscribe-newsletter' => 'Langganan alamat email ke buletin toko.',
                 'subscribe-newsletter-email' => 'Alamat email untuk berlangganan buletin.',
                 'view-cart' => 'Buka halaman keranjang belanja agar pelanggan dapat meninjau produk yang telah ditambahkan.',
-                'view-category' => 'Buka halaman kategori untuk menelusuri produknya berdasarkan nama kategori.',
-                'view-category-query' => 'Nama atau slug kategori yang akan dibuka.',
                 'view-product' => 'Buka halaman detail produk berdasarkan nama produk.',
                 'view-product-query' => 'Nama produk atau kunci URL yang akan dibuka.',
                 'view-wishlist' => 'Buka halaman daftar keinginan untuk meninjau produk tersimpan pelanggan.',

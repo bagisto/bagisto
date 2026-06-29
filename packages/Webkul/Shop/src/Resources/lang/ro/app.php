@@ -612,8 +612,6 @@ return [
                 'subscribe-newsletter' => 'Abonează o adresă de e-mail la buletinul informativ al magazinului.',
                 'subscribe-newsletter-email' => 'Adresa de e-mail pentru abonarea la buletinul informativ.',
                 'view-cart' => 'Deschide pagina coșului de cumpărături pentru ca clientul să poată revizui produsele adăugate.',
-                'view-category' => 'Deschide o pagină de categorie pentru a-i răsfoi produsele după numele categoriei.',
-                'view-category-query' => 'Numele sau slug-ul categoriei de deschis.',
                 'view-product' => 'Deschide pagina de detalii a unui produs după numele produsului.',
                 'view-product-query' => 'Numele produsului sau cheia URL de deschis.',
                 'view-wishlist' => 'Deschide pagina listei de dorințe pentru a revizui produsele salvate ale clientului.',
