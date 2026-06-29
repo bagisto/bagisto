@@ -603,6 +603,22 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => 'Tambahkan produk ke daftar keinginan pelanggan berdasarkan nama.',
+                'add-to-wishlist-query' => 'Nama produk atau kunci URL untuk ditambahkan ke daftar keinginan.',
+                'proceed-to-checkout' => 'Buka halaman checkout untuk mulai memesan barang yang ada di keranjang.',
+                'search-products' => 'Cari produk di katalog toko berdasarkan kata kunci dan buka hasil yang cocok.',
+                'search-products-query' => 'Kata kunci atau nama produk yang akan dicari di katalog.',
+                'subscribe-newsletter' => 'Langganan alamat email ke buletin toko.',
+                'subscribe-newsletter-email' => 'Alamat email untuk berlangganan buletin.',
+                'view-cart' => 'Buka halaman keranjang belanja agar pelanggan dapat meninjau produk yang telah ditambahkan.',
+                'view-category' => 'Buka halaman kategori untuk menelusuri produknya berdasarkan nama kategori.',
+                'view-category-query' => 'Nama atau slug kategori yang akan dibuka.',
+                'view-product' => 'Buka halaman detail produk berdasarkan nama produk.',
+                'view-product-query' => 'Nama produk atau kunci URL yang akan dibuka.',
+                'view-wishlist' => 'Buka halaman daftar keinginan untuk meninjau produk tersimpan pelanggan.',
+            ],
+
             'footer' => [
                 'about-us' => 'Tentang Kami',
                 'contact-us' => 'Hubungi Kami',

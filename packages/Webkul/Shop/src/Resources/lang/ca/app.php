@@ -603,6 +603,22 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => 'Afegeix un producte a la llista de desitjos del client pel nom.',
+                'add-to-wishlist-query' => 'El nom del producte o la clau URL per afegir a la llista de desitjos.',
+                'proceed-to-checkout' => 'Obre la pàgina de pagament per començar a fer una comanda dels articles del carretó.',
+                'search-products' => 'Cerca productes al catàleg de la botiga per paraula clau i obre els resultats coincidents.',
+                'search-products-query' => 'Les paraules clau o el nom del producte que vols cercar al catàleg.',
+                'subscribe-newsletter' => 'Subscriu una adreça de correu electrònic al butlletí de la botiga.',
+                'subscribe-newsletter-email' => 'L\'adreça de correu electrònic per subscriure\'s al butlletí.',
+                'view-cart' => 'Obre la pàgina del carretó perquè el client pugui revisar els productes que ha afegit.',
+                'view-category' => 'Obre una pàgina de categoria per explorar els seus productes pel nom de la categoria.',
+                'view-category-query' => 'El nom o l\'identificador de la categoria a obrir.',
+                'view-product' => 'Obre la pàgina de detalls d\'un producte pel nom del producte.',
+                'view-product-query' => 'El nom del producte o la clau URL a obrir.',
+                'view-wishlist' => 'Obre la pàgina de la llista de desitjos per revisar els productes desats del client.',
+            ],
+
             'footer' => [
                 'about-us' => 'Sobre nosaltres',
                 'contact-us' => 'Contacte',

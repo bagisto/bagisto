@@ -603,6 +603,22 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => 'Bir ürünü adıyla müşterinin istek listesine ekleyin.',
+                'add-to-wishlist-query' => 'İstek listesine eklenecek ürün adı veya URL anahtarı.',
+                'proceed-to-checkout' => 'Sepetteki ürünler için sipariş vermeye başlamak üzere ödeme sayfasını açın.',
+                'search-products' => 'Mağaza kataloğunda anahtar kelimeye göre ürün arayın ve eşleşen sonuçları açın.',
+                'search-products-query' => 'Katalogda aranacak anahtar kelimeler veya ürün adı.',
+                'subscribe-newsletter' => 'Bir e-posta adresini mağaza bültenine abone yapın.',
+                'subscribe-newsletter-email' => 'Bültene abone olunacak e-posta adresi.',
+                'view-cart' => 'Müşterinin eklediği ürünleri inceleyebilmesi için alışveriş sepeti sayfasını açın.',
+                'view-category' => 'Ürünlerini kategori adına göre incelemek için bir kategori sayfası açın.',
+                'view-category-query' => 'Açılacak kategorinin adı veya kısa adı.',
+                'view-product' => 'Bir ürünün ayrıntı sayfasını ürün adına göre açın.',
+                'view-product-query' => 'Açılacak ürün adı veya URL anahtarı.',
+                'view-wishlist' => 'Müşterinin kaydettiği ürünleri incelemek için istek listesi sayfasını açın.',
+            ],
+
             'footer' => [
                 'about-us' => 'Hakkımızda',
                 'contact-us' => 'İletişim',

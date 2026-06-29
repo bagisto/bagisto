@@ -603,6 +603,22 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => 'Add a product to the customer\'s wishlist by name.',
+                'add-to-wishlist-query' => 'The product name or URL key to add to the wishlist.',
+                'proceed-to-checkout' => 'Open the checkout page to start placing an order for the items currently in the cart.',
+                'search-products' => 'Search the store catalog for products by keyword and open the matching results.',
+                'search-products-query' => 'The keywords or product name to search the catalog for.',
+                'subscribe-newsletter' => 'Subscribe an email address to the store newsletter.',
+                'subscribe-newsletter-email' => 'The email address to subscribe to the newsletter.',
+                'view-cart' => 'Open the shopping cart page so the customer can review the products they have added.',
+                'view-category' => 'Open a category page to browse its products by category name.',
+                'view-category-query' => 'The category name or slug to open.',
+                'view-product' => 'Open a product\'s detail page by product name.',
+                'view-product-query' => 'The product name or URL key to open.',
+                'view-wishlist' => 'Open the wishlist page to review the customer\'s saved products.',
+            ],
+
             'footer' => [
                 'about-us' => 'About Us',
                 'contact-us' => 'Contact Us',
