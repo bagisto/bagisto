@@ -603,6 +603,20 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => 'Añade un producto a la lista de deseos del cliente por su nombre.',
+                'add-to-wishlist-query' => 'El nombre del producto o la clave URL para añadir a la lista de deseos.',
+                'proceed-to-checkout' => 'Abre la página de pago para empezar a realizar un pedido de los artículos del carrito.',
+                'search-products' => 'Busca productos en el catálogo de la tienda por palabra clave y abre los resultados coincidentes.',
+                'search-products-query' => 'Las palabras clave o el nombre del producto que se buscarán en el catálogo.',
+                'subscribe-newsletter' => 'Suscribe una dirección de correo electrónico al boletín de la tienda.',
+                'subscribe-newsletter-email' => 'La dirección de correo electrónico para suscribirse al boletín.',
+                'view-cart' => 'Abre la página del carrito para que el cliente pueda revisar los productos que ha añadido.',
+                'view-product' => 'Abre la página de detalles de un producto por el nombre del producto.',
+                'view-product-query' => 'El nombre del producto o la clave URL a abrir.',
+                'view-wishlist' => 'Abre la página de la lista de deseos para revisar los productos guardados del cliente.',
+            ],
+
             'footer' => [
                 'about-us' => 'Acerca de nosotros',
                 'contact-us' => 'Contacto',

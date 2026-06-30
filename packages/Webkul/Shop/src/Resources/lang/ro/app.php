@@ -603,6 +603,20 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => 'Adaugă un produs în lista de dorințe a clientului după nume.',
+                'add-to-wishlist-query' => 'Numele produsului sau cheia URL de adăugat în lista de dorințe.',
+                'proceed-to-checkout' => 'Deschide pagina de finalizare a comenzii pentru a plasa o comandă pentru articolele din coș.',
+                'search-products' => 'Caută produse în catalogul magazinului după cuvânt cheie și deschide rezultatele potrivite.',
+                'search-products-query' => 'Cuvintele cheie sau numele produsului de căutat în catalog.',
+                'subscribe-newsletter' => 'Abonează o adresă de e-mail la buletinul informativ al magazinului.',
+                'subscribe-newsletter-email' => 'Adresa de e-mail pentru abonarea la buletinul informativ.',
+                'view-cart' => 'Deschide pagina coșului de cumpărături pentru ca clientul să poată revizui produsele adăugate.',
+                'view-product' => 'Deschide pagina de detalii a unui produs după numele produsului.',
+                'view-product-query' => 'Numele produsului sau cheia URL de deschis.',
+                'view-wishlist' => 'Deschide pagina listei de dorințe pentru a revizui produsele salvate ale clientului.',
+            ],
+
             'footer' => [
                 'about-us' => 'Despre noi',
                 'contact-us' => 'Contactați-ne',

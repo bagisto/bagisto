@@ -603,6 +603,20 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => 'Dodaj produkt do listy życzeń klienta według nazwy.',
+                'add-to-wishlist-query' => 'Nazwa produktu lub klucz URL do dodania do listy życzeń.',
+                'proceed-to-checkout' => 'Otwórz stronę kasy, aby rozpocząć składanie zamówienia na produkty z koszyka.',
+                'search-products' => 'Wyszukaj produkty w katalogu sklepu według słowa kluczowego i otwórz pasujące wyniki.',
+                'search-products-query' => 'Słowa kluczowe lub nazwa produktu do wyszukania w katalogu.',
+                'subscribe-newsletter' => 'Zapisz adres e-mail do newslettera sklepu.',
+                'subscribe-newsletter-email' => 'Adres e-mail do zapisania się do newslettera.',
+                'view-cart' => 'Otwórz stronę koszyka, aby klient mógł przejrzeć dodane produkty.',
+                'view-product' => 'Otwórz stronę szczegółów produktu według nazwy produktu.',
+                'view-product-query' => 'Nazwa produktu lub klucz URL do otwarcia.',
+                'view-wishlist' => 'Otwórz stronę listy życzeń, aby przejrzeć zapisane produkty klienta.',
+            ],
+
             'footer' => [
                 'about-us' => 'O nas',
                 'contact-us' => 'Kontakt',

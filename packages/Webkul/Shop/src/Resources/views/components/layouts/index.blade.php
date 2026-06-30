@@ -145,6 +145,9 @@
 
         {!! view_render_event('bagisto.shop.layout.body.after') !!}
 
+        <!-- WebMCP Tool Registration For AI Agents -->
+        <x-shop::layouts.webmcp />
+
         @stack('scripts')
 
         {!! view_render_event('bagisto.shop.layout.vue-app-mount.before') !!}
