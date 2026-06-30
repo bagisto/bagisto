@@ -603,6 +603,20 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => '按名称将产品添加到客户的心愿单。',
+                'add-to-wishlist-query' => '要添加到心愿单的产品名称或 URL 键。',
+                'proceed-to-checkout' => '打开结账页面，开始为购物车中的商品下单。',
+                'search-products' => '按关键词在商店目录中搜索产品并打开匹配的结果。',
+                'search-products-query' => '用于在目录中搜索的关键词或产品名称。',
+                'subscribe-newsletter' => '将电子邮件地址订阅到商店的电子报。',
+                'subscribe-newsletter-email' => '用于订阅电子报的电子邮件地址。',
+                'view-cart' => '打开购物车页面，以便客户查看已添加的产品。',
+                'view-product' => '按产品名称打开产品详情页面。',
+                'view-product-query' => '要打开的产品名称或 URL 键。',
+                'view-wishlist' => '打开心愿单页面以查看客户保存的产品。',
+            ],
+
             'footer' => [
                 'about-us' => '关于我们',
                 'contact-us' => '联系我们',

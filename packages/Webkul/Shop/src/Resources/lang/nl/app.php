@@ -603,6 +603,20 @@ return [
                 ],
             ],
 
+            'webmcp' => [
+                'add-to-wishlist' => 'Voeg een product op naam toe aan de verlanglijst van de klant.',
+                'add-to-wishlist-query' => 'De productnaam of URL-sleutel om aan de verlanglijst toe te voegen.',
+                'proceed-to-checkout' => 'Open de afrekenpagina om een bestelling te plaatsen voor de artikelen in de winkelwagen.',
+                'search-products' => 'Zoek producten in de winkelcatalogus op trefwoord en open de overeenkomende resultaten.',
+                'search-products-query' => 'De trefwoorden of productnaam om in de catalogus te zoeken.',
+                'subscribe-newsletter' => 'Schrijf een e-mailadres in voor de nieuwsbrief van de winkel.',
+                'subscribe-newsletter-email' => 'Het e-mailadres om in te schrijven voor de nieuwsbrief.',
+                'view-cart' => 'Open de winkelwagenpagina zodat de klant de toegevoegde producten kan bekijken.',
+                'view-product' => 'Open de detailpagina van een product op productnaam.',
+                'view-product-query' => 'De productnaam of URL-sleutel om te openen.',
+                'view-wishlist' => 'Open de verlanglijstpagina om de opgeslagen producten van de klant te bekijken.',
+            ],
+
             'footer' => [
                 'about-us' => 'Over ons',
                 'contact-us' => 'Neem contact met ons op',
