@@ -47,8 +47,11 @@
                     <a
                         href="{{ route('shop.compare.index') }}"
                         aria-label="@lang('shop::app.components.layouts.header.mobile.compare')"
+                        class="relative"
                     >
                         <span class="text-2xl cursor-pointer icon-compare"></span>
+
+                        @include('shop::components.layouts.header.compare-count')
                     </a>
                 @endif
 
