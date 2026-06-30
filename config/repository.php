@@ -1,7 +1,5 @@
 <?php
 
-use League\Fractal\Serializer\DataArraySerializer;
-
 /*
 |--------------------------------------------------------------------------
 | Prettus Repository Config
@@ -37,7 +35,7 @@ return [
         'params' => [
             'include' => 'include',
         ],
-        'serializer' => DataArraySerializer::class,
+        'serializer' => 'League\Fractal\Serializer\DataArraySerializer',
     ],
 
     /*

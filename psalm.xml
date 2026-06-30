@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<psalm
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    errorLevel="3"
+    findUnusedCode="false"
+    ensureOverrideAttribute="false"
+    runTaintAnalysis="true"
+>
+    <projectFiles>
+        <directory name="app"/>
+        <directory name="bootstrap"/>
+        <directory name="config"/>
+        <directory name="database"/>
+        <directory name="lang"/>
+        <directory name="routes"/>
+
+        <file name="public/index.php"/>
+        <file name="artisan"/>
+
+        <ignoreFiles allowMissingFiles="true">
+            <directory name="bootstrap/cache"/>
+            <directory name="storage"/>
+            <directory name="vendor"/>
+            <directory name="packages"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <plugins>
+        <!-- All Psalm Laravel options: https://github.com/psalm/psalm-plugin-laravel/blob/master/docs/config.md -->
+        <pluginClass class="Psalm\LaravelPlugin\Plugin">
+            <resolveDynamicWhereClauses value="true" />
+            <findMissingTranslations value="true" />
+            <findMissingViews value="true" />
+        </pluginClass>
+    </plugins>
+
+    <issueHandlers>
+        <ClassMustBeFinal errorLevel="info"/>
+        <ImplicitToStringCast errorLevel="info"/>
+        <MissingAbstractPureAnnotation errorLevel="info"/>
+        <MissingClosureReturnType errorLevel="info"/>
+        <MissingImmutableAnnotation errorLevel="info"/>
+        <MissingInterfaceImmutableAnnotation errorLevel="info"/>
+        <MissingOverrideAttribute errorLevel="info"/>
+        <MissingPureAnnotation errorLevel="info"/>
+        <RedundantCast errorLevel="info"/>
+        <RedundantCondition errorLevel="info"/>
+        <UnnecessaryVarAnnotation errorLevel="suppress"/>
+    </issueHandlers>
+
+    <forbiddenFunctions>
+        <function name="var_dump" />
+        <function name="dd" />
+    </forbiddenFunctions>
+</psalm>
