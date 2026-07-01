@@ -114,6 +114,7 @@
             :options="$selectOptions"
             :value="(string) $selectedOption"
             :placeholder="$attribute->admin_name"
+            :label="$attribute->admin_name"
             ::clearable="{{ $attribute->is_required ? 'false' : 'true' }}"
             ::rules="{{ $attribute->validations }}"
         />
@@ -133,6 +134,7 @@
             :options="$multiselectOptions"
             :value="array_values((array) $selectedOption)"
             :placeholder="$attribute->admin_name"
+            :label="$attribute->admin_name"
             ::rules="{{ $attribute->validations }}"
         />
 

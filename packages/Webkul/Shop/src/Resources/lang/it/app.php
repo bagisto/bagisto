@@ -756,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Diminuisci quantità',
             'increase-quantity' => 'Aumenta quantità',
+            'remove-item' => 'Rimuovi articolo',
         ],
     ],
 

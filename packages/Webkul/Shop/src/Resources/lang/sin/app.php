@@ -756,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'ප්‍රමුඛතාව හොඳින්න',
             'increase-quantity' => 'ප්‍රමුඛතාව වැඩියෙන්න',
+            'remove-item' => 'අයිතමය ඉවත් කරන්න',
         ],
     ],
 

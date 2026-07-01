@@ -756,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => '数量を減らす',
             'increase-quantity' => '数量を増やす',
+            'remove-item' => 'アイテムを削除',
         ],
     ],
 
