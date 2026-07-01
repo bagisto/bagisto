@@ -756,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'کاهش تعداد',
             'increase-quantity' => 'افزایش تعداد',
+            'remove-item' => 'حذف مورد',
         ],
     ],
 

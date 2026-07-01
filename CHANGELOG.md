@@ -2,6 +2,12 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Security fixes.
+
+- Added a "remove item" affordance to the storefront quantity selector: on the cart and mini-cart, when a line item's quantity reaches the minimum (1) the minus icon is replaced with a trash icon that removes the item. Enabled via an opt-in `removable` prop on the `quantity-changer` component (default off), so add-to-cart quantity selectors on product, bundle, grouped, booking, and wishlist pages keep their existing behavior.
+
 ## **v2.4.7 (24th of June 2026)** - *Release*
 
 - Security fixes.

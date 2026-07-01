@@ -756,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'পরিমাণ হ্রাস',
             'increase-quantity' => 'পরিমাণ বৃদ্ধি',
+            'remove-item' => 'আইটেম সরান',
         ],
     ],
 
