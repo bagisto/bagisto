@@ -3212,7 +3212,7 @@ it('should place a virtual product order for a guest user', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3349,7 +3349,7 @@ it('should place a virtual product order for a guest user and send email to the 
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3496,7 +3496,7 @@ it('should place a virtual product order for a customer', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3641,7 +3641,7 @@ it('should place a virtual product order for a customer and send email to the us
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3793,7 +3793,7 @@ it('should place a downloadable product order for a customer', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3934,7 +3934,7 @@ it('should place a downloadable product order for a customer and send email to t
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -5028,7 +5028,7 @@ it('should place order with two products with simple and downloadable product ty
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
