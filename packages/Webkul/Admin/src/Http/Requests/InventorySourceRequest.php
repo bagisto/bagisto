@@ -12,7 +12,7 @@ use Webkul\Core\Rules\PostCode;
 class InventorySourceRequest extends FormRequest
 {
     /**
-     * Determine if the Configuraion is authorized to make this request.
+     * Determine if the user is authorized to make this request.
      *
      * @return bool
      */

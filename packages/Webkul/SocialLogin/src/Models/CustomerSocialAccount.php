@@ -15,7 +15,7 @@ class CustomerSocialAccount extends Model implements CustomerSocialAccountContra
     ];
 
     /**
-     * Get the customer that belongs to the social aoount.
+     * Get the customer that belongs to the social account.
      */
     public function customer()
     {
