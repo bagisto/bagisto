@@ -100,11 +100,8 @@ class URLRewriteController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         try {
             Event::dispatch('marketing.search_seo.url_rewrites.delete.before', $id);

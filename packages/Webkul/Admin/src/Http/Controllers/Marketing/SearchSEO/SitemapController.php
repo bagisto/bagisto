@@ -91,11 +91,8 @@ class SitemapController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return void
      */
-    public function destroy($id)
+    public function destroy(int $id): JsonResponse
     {
         $sitemap = $this->sitemapRepository->findOrFail($id);
 
