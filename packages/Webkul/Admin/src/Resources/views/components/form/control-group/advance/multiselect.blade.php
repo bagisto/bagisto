@@ -13,7 +13,7 @@
     placeholder="{{ $placeholder ?: trans('admin::app.components.datagrid.toolbar.search.title') }}"
     {{ $attributes }}
 >
-    <div class="shimmer h-[42px] w-full rounded-md"></div>
+    <div class="shimmer h-10.5 w-full rounded-md"></div>
 </v-multiselect>
 
 @pushOnce('scripts')
@@ -29,15 +29,15 @@
                 v-slot="{ errors }"
             >
                 <div
-                    class="flex min-h-[42px] w-full cursor-pointer flex-wrap items-center gap-1.5 rounded-md border bg-white px-2 py-1.5 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                    class="flex min-h-10.5 w-full cursor-pointer flex-wrap items-center gap-1.5 rounded-md border bg-white px-2 py-1.5 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                     :class="[
-                        errors.length ? 'border !border-red-600 hover:!border-red-600' : '',
+                        errors.length ? 'border border-red-600! hover:border-red-600!' : '',
                         isOpen ? 'border-gray-400 dark:border-gray-400' : '',
                     ]"
                     @click="toggleDropdown"
                 >
                     <span
-                        class="inline-flex max-w-full items-center gap-1 rounded bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300"
+                        class="inline-flex max-w-full items-center gap-1 rounded-sm bg-gray-100 px-2 py-1 text-xs font-semibold text-gray-600 dark:bg-gray-800 dark:text-gray-300"
                         v-for="option in selectedOptions"
                         :key="option.id"
                     >

@@ -5,13 +5,13 @@
         <div class="row grid grid-cols-6 gap-2.5 border-b border-gray-300 px-4 py-4 text-gray-600">
             <div class="shimmer mb-0.5 h-6 w-6"></div>
 
-            <div class="shimmer h-6 w-[100px]"></div>
+            <div class="shimmer h-6 w-25"></div>
 
-            <div class="shimmer h-6 w-[100px]"></div>
+            <div class="shimmer h-6 w-25"></div>
 
-            <div class="shimmer h-6 w-[100px]"></div>
+            <div class="shimmer h-6 w-25"></div>
 
-            <div class="shimmer h-6 w-[100px]"></div>
+            <div class="shimmer h-6 w-25"></div>
 
             <div class="flex gap-2.5 place-self-end">
                 <div class="shimmer h-6 w-6 p-1.5"></div>
@@ -25,28 +25,28 @@
                 <div class="shimmer h-6 w-6"></div>
 
                 <div class="flex flex-col gap-1.5">
-                    <div class="shimmer h-6 w-[250px]"></div>
+                    <div class="shimmer h-6 w-62.5"></div>
 
-                    <div class="shimmer h-6 w-[150px]"></div>
+                    <div class="shimmer h-6 w-37.5"></div>
 
-                    <div class="shimmer h-6 w-[150px]"></div>
+                    <div class="shimmer h-6 w-37.5"></div>
                 </div>
             </div>
 
             <div class="flex flex-col gap-1.5">
-                <div class="shimmer h-[19px] w-[250px]"></div>
+                <div class="shimmer h-4.75 w-62.5"></div>
 
-                <div class="shimmer h-6 w-[150px]"></div>
+                <div class="shimmer h-6 w-37.5"></div>
 
-                <div class="shimmer h-6 w-[150px]"></div>
+                <div class="shimmer h-6 w-37.5"></div>
             </div>
 
             <div class="flex flex-col gap-1.5">
-                <div class="shimmer h-[19px] w-[250px]"></div>
+                <div class="shimmer h-4.75 w-62.5"></div>
 
-                <div class="shimmer h-6 w-[150px]"></div>
+                <div class="shimmer h-6 w-37.5"></div>
 
-                <div class="shimmer h-6 w-[150px]"></div>
+                <div class="shimmer h-6 w-37.5"></div>
             </div>
         </div>
     @endif

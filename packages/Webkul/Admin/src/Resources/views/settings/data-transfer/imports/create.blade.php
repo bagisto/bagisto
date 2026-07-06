@@ -44,7 +44,7 @@
                 {!! view_render_event('bagisto.admin.settings.data_transfer.imports.create.card.general.before') !!}
 
                 <!-- Setup Import Panel -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.data-transfer.imports.create.general')
                     </p>
@@ -117,7 +117,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Images Directory Path -->
-                    <x-admin::form.control-group class="!mb-0">
+                    <x-admin::form.control-group class="mb-0!">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.data-transfer.imports.create.images-directory')
                         </x-admin::form.control-group.label>
@@ -143,7 +143,7 @@
             </div>
 
             <!-- Right Container -->
-            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+            <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
                 {!! view_render_event('bagisto.admin.settings.data_transfer.imports.create.card.accordion.settings.before') !!}
 
                 <!-- Settings Panel -->
@@ -236,7 +236,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Process In Queue -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.data-transfer.imports.create.process-in-queue')
                             </x-admin::form.control-group.label>

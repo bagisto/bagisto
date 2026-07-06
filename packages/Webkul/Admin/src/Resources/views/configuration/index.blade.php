@@ -12,7 +12,7 @@
 
         <!-- Configuration Search Bar Vue Component -->
         <v-configuration-search>
-            <div class="relative flex w-[525px] max-w-[525px] items-center max-lg:w-[400px] ltr:ml-2.5 rtl:mr-2.5">
+            <div class="relative flex w-131.25 max-w-131.25 items-center max-lg:w-100 ltr:ml-2.5 rtl:mr-2.5">
                 <i class="icon-search absolute top-1.5 flex items-center text-2xl ltr:left-3 rtl:right-3"></i>
 
                 <input
@@ -40,16 +40,16 @@
                     </p>
                 </div>
 
-                <div class="box-shadow max-1580:grid-cols-3 mt-2 grid grid-cols-4 flex-wrap justify-between gap-12 rounded bg-white p-4 dark:bg-gray-900 max-xl:grid-cols-2 max-sm:grid-cols-1">
+                <div class="box-shadow max-1580:grid-cols-3 mt-2 grid grid-cols-4 flex-wrap justify-between gap-12 rounded-sm bg-white p-4 dark:bg-gray-900 max-xl:grid-cols-2 max-sm:grid-cols-1">
                     <!-- Menus cards -->
                     @foreach ($item->getChildren() as $key => $child)
                         <a
-                            class="flex max-w-[360px] items-center gap-2 rounded-lg p-2 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
+                            class="flex max-w-90 items-center gap-2 rounded-lg p-2 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                             href="{{ route('admin.configuration.index', ($item->getKey() . '/' . $key)) }}"
                         >
                             @if ($icon = $child->getIcon())
                                 <img
-                                    class="h-[60px] w-[60px] dark:mix-blend-exclusion dark:invert"
+                                    class="h-15 w-15 dark:mix-blend-exclusion dark:invert"
                                     src="{{ bagisto_asset('images/' . $icon) }}"
                                 >
                             @endif
@@ -76,7 +76,7 @@
 
     @pushOnce('scripts')
         <script type="text/x-template" id="v-configuration-search-template">
-            <div class="relative flex w-[525px] max-w-[525px] items-center max-lg:w-[400px] ltr:ml-2.5 rtl:mr-2.5">
+            <div class="relative flex w-131.25 max-w-131.25 items-center max-lg:w-100 ltr:ml-2.5 rtl:mr-2.5">
                 <i class="icon-search absolute top-1.5 flex items-center text-2xl ltr:left-3 rtl:right-3"></i>
 
                 <input
@@ -98,7 +98,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[400px] overflow-y-auto">
+                        <div class="grid max-h-100 overflow-y-auto">
                             <a
                                 :href="category.url"
                                 class="cursor-pointer border-b p-4 text-sm font-semibold text-gray-600 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"

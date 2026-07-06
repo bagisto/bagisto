@@ -27,9 +27,9 @@
 
     <!-- Hero Image -->
     @if ($category->banner_path)
-        <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
+        <div class="container mt-8 px-15 max-lg:px-8 max-md:mt-4 max-md:px-4">
             <x-shop::media.images.lazy
-                class="aspect-[4/1] max-h-full max-w-full rounded-xl"
+                class="aspect-4/1 max-h-full max-w-full rounded-xl"
                 src="{{ $category->banner_url }}"
                 alt="{{ $category->name }}"
                 width="1320"
@@ -44,7 +44,7 @@
 
     @if (in_array($category->display_mode, [null, 'description_only', 'products_and_description']))
         @if ($category->description)
-            <div class="container mt-[34px] px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4 max-md:text-sm max-sm:text-xs">
+            <div class="container mt-8.5 px-15 max-lg:px-8 max-md:mt-4 max-md:px-4 max-md:text-sm max-sm:text-xs">
                 {!! $category->description !!}
             </div>
         @endif
@@ -65,7 +65,7 @@
             type="text/x-template"
             id="v-category-template"
         >
-            <div class="container px-[60px] max-lg:px-8 max-md:px-4">
+            <div class="container px-15 max-lg:px-8 max-md:px-4">
                 <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
                     <!-- Product Listing Filters -->
                     @include('shop::categories.filters')
@@ -102,7 +102,7 @@
                                 <template v-else>
                                     <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                                         <img
-                                            class="max-md:h-[100px] max-md:w-[100px]"
+                                            class="max-md:h-25 max-md:w-25"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                             loading="lazy"
@@ -148,7 +148,7 @@
                                 <template v-else>
                                     <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                                         <img
-                                            class="max-md:h-[100px] max-md:w-[100px]"
+                                            class="max-md:h-25 max-md:w-25"
                                             src="{{ bagisto_asset('images/thank-you.png') }}"
                                             alt="@lang('shop::app.categories.view.empty')"
                                             loading="lazy"
@@ -181,7 +181,7 @@
 
                         <button
                             v-else-if="links.next"
-                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-[74.5px] py-3.5 text-center text-base max-md:rounded-lg max-md:py-3 max-sm:mt-6 max-sm:px-[50.8px] max-sm:py-1.5"
+                            class="secondary-button mx-auto mt-14 block w-max rounded-2xl px-18.625 py-3.5 text-center text-base max-md:rounded-lg max-md:py-3 max-sm:mt-6 max-sm:px-12.7 max-sm:py-1.5"
                         >
                             <!-- Spinner -->
                             <img

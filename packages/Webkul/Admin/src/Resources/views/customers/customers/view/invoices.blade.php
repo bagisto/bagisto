@@ -1,4 +1,4 @@
-<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+<div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
     <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
         @lang('admin::app.customers.customers.view.invoices.count', ['count' => count($customer->invoices)])
     </p>

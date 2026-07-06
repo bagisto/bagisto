@@ -1,7 +1,7 @@
 <!-- For large screens greater than 1180px. -->
 <div class="sticky top-20 flex h-max gap-8 max-1180:hidden">
     <!-- Product Image and Videos Slider -->
-    <div class="flex-24 h-509 flex min-w-[100px] max-w-[100px] flex-wrap place-content-start justify-center gap-2.5 overflow-y-auto overflow-x-hidden">
+    <div class="flex-24 h-509 flex min-w-25 max-w-25 flex-wrap place-content-start justify-center gap-2.5 overflow-y-auto overflow-x-hidden">
         <!-- Arrow Up -->
         <span
             class="icon-arrow-up cursor-pointer text-2xl"
@@ -16,7 +16,7 @@
         <!-- Swiper Container -->
         <div
             ref="swiperContainer"
-            class="flex flex-col max-h-[540px] gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
+            class="flex flex-col max-h-135 gap-2.5 [&>*]:flex-[0] overflow-auto scroll-smooth scrollbar-hide"
         >
             <template v-for="(media, index) in [...media.images, ...media.videos]">
                 <video
@@ -59,18 +59,18 @@
 
     <!-- Product Base Image and Video with Shimmer-->
     <div
-        class="max-h-[610px] max-w-[560px]"
+        class="max-h-152.5 max-w-140"
         v-show="isMediaLoading"
     >
-        <div class="shimmer min-h-[607px] min-w-[560px] rounded-xl bg-zinc-200"></div>
+        <div class="shimmer min-h-151.75 min-w-140 rounded-xl bg-zinc-200"></div>
     </div>
 
     <div
-        class="max-h-[610px] max-w-[560px]"
+        class="max-h-152.5 max-w-140"
         v-show="! isMediaLoading"
     >
         <img
-            class="min-w-[450px] cursor-pointer rounded-xl"
+            class="min-w-112.5 cursor-pointer rounded-xl"
             :src="baseFile.path"
             v-if="baseFile.type == 'image'"
             alt="{{ $product->name }}"
@@ -83,7 +83,7 @@
         />
 
         <div
-            class="min-w-[450px] cursor-pointer rounded-xl"
+            class="min-w-112.5 cursor-pointer rounded-xl"
             tabindex="0"
             v-if="baseFile.type == 'video'"
         >

@@ -57,11 +57,11 @@
 
     <!-- Page Header -->
     <div class="grid gap-1.5 mb-8 max-w-3xl">
-        <p class="text-2xl font-bold !leading-snug text-gray-800 dark:text-white">
+        <p class="text-2xl font-bold leading-snug! text-gray-800 dark:text-white">
             @lang('admin::app.help.index.title')
         </p>
 
-        <p class="!leading-relaxed text-gray-600 dark:text-gray-300">
+        <p class="leading-relaxed! text-gray-600 dark:text-gray-300">
             @lang('admin::app.help.index.description')
         </p>
     </div>
@@ -93,7 +93,7 @@
     </div>
 
     <!-- Contact CTA -->
-    <div class="flex flex-wrap items-center justify-between gap-5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-800 px-7 py-6 shadow-lg">
+    <div class="flex flex-wrap items-center justify-between gap-5 rounded-xl bg-linear-to-r from-blue-600 to-blue-800 px-7 py-6 shadow-lg">
         <div class="flex items-center gap-4">
             <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white/20 text-white">
                 <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -102,11 +102,11 @@
             </span>
 
             <div class="grid gap-0.5">
-                <p class="text-lg font-bold !leading-snug text-white">
+                <p class="text-lg font-bold leading-snug! text-white">
                     @lang('admin::app.help.index.cta-title')
                 </p>
 
-                <p class="!leading-snug text-white/80">
+                <p class="leading-snug! text-white/80">
                     @lang('admin::app.help.index.cta-description')
                 </p>
             </div>

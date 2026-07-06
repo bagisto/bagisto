@@ -143,7 +143,7 @@
         @endphp
 
         @foreach ($attribute->options as $option)
-            <div class="mb-2 flex items-center gap-2.5 last:!mb-0">
+            <div class="mb-2 flex items-center gap-2.5 last:mb-0!">
                 <x-admin::form.control-group.control
                     type="checkbox"
                     :id="$attribute->code . '_' . $option->id"
@@ -191,11 +191,11 @@
                         @if (Storage::exists($product[$attribute->code]))
                             <img
                                 src="{{ Storage::url($product[$attribute->code]) }}"
-                                class="h-[45px] w-[45px] overflow-hidden rounded border hover:border-gray-400 dark:border-gray-800"
+                                class="h-11.25 w-11.25 overflow-hidden rounded-sm border hover:border-gray-400 dark:border-gray-800"
                             />
                         @endif
                     @else
-                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
+                        <div class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
                             <i class="icon-down-stat text-2xl"></i>
                         </div>
                     @endif

@@ -43,7 +43,7 @@
                         required
                         autocomplete="off"
                         value="{{ old('order_increment_id') }}"
-                        class="block w-full rounded-lg border border-zinc-200 px-4 py-3 text-sm focus:border-navyBlue focus:outline-none focus:ring-1 focus:ring-navyBlue"
+                        class="block w-full rounded-lg border border-zinc-200 px-4 py-3 text-sm focus:border-navyBlue focus:outline-hidden focus:ring-1 focus:ring-navyBlue"
                     >
 
                     @error('order_increment_id')
@@ -66,7 +66,7 @@
                         required
                         autocomplete="email"
                         value="{{ old('email') }}"
-                        class="block w-full rounded-lg border border-zinc-200 px-4 py-3 text-sm focus:border-navyBlue focus:outline-none focus:ring-1 focus:ring-navyBlue"
+                        class="block w-full rounded-lg border border-zinc-200 px-4 py-3 text-sm focus:border-navyBlue focus:outline-hidden focus:ring-1 focus:ring-navyBlue"
                     >
                     
                     @error('email')

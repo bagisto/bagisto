@@ -56,7 +56,7 @@
                     </x-slot>
 
                     <!-- Drawer Content -->
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         <div class="grid p-4 pt-2">
                             <div class="grid grid-cols-2 gap-x-5">
                                 <!-- Carrier Name -->
@@ -138,11 +138,11 @@
                                             <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
-                                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                                        class="relative h-15 max-h-15 w-full max-w-15 rounded-sm"
                                                         src="{{ $item->product?->base_image_url }}"
                                                     >
                                                 @else
-                                                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                                    <div class="relative h-15 max-h-15 w-full max-w-15 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
 
                                                         <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -249,14 +249,14 @@
                                                     @endphp
 
                                                     <!-- Quantity To Ship -->
-                                                    <x-admin::form.control-group class="!mb-0">
-                                                        <x-admin::form.control-group.label class="required !block">
+                                                    <x-admin::form.control-group class="mb-0!">
+                                                        <x-admin::form.control-group.label class="required block!">
                                                             @lang('admin::app.sales.shipments.create.qty-to-ship')
                                                         </x-admin::form.control-group.label>
 
                                                         <x-admin::form.control-group.control
                                                             type="text"
-                                                            class="!w-[100px]"
+                                                            class="w-25!"
                                                             :id="$inputName"
                                                             :name="$inputName"
                                                             :rules="'required|numeric|min_value:0|max_value:' . $canShipQty['qty']"

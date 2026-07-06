@@ -17,7 +17,7 @@
         id="v-cart-addresses-template"
     >
         <div
-            class="box-shadow rounded bg-white dark:bg-gray-900"
+            class="box-shadow rounded-sm bg-white dark:bg-gray-900"
             id="address-step-container"
         >
             <div class="flex items-center border-b p-4 dark:border-gray-800">
@@ -55,7 +55,7 @@
                                 class="flex gap-2"
                                 v-for="address in customerSavedAddresses.billing"
                             >
-                                <x-admin::form.control-group class="!mb-0 flex items-center gap-2.5 self-start">
+                                <x-admin::form.control-group class="mb-0! flex items-center gap-2.5 self-start">
                                     <x-admin::form.control-group.control
                                         type="radio"
                                         name="billing.id"
@@ -119,7 +119,7 @@
                         <!-- Shipping Address Block if have stockable items -->
                         <template v-if="cart.have_stockable_items">
                             <!-- Use for Shipping Checkbox -->
-                            <x-admin::form.control-group class="!mb-0 mt-5 flex items-center gap-2.5">
+                            <x-admin::form.control-group class="mb-0! mt-5 flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="billing.use_for_shipping"
@@ -170,7 +170,7 @@
                                         class="flex gap-2"
                                         v-for="address in customerSavedAddresses.shipping"
                                     >
-                                        <x-admin::form.control-group class="!mb-0 flex items-center gap-2.5 self-start">
+                                        <x-admin::form.control-group class="mb-0! flex items-center gap-2.5 self-start">
                                             <x-admin::form.control-group.control
                                                 type="radio"
                                                 name="shipping.id"

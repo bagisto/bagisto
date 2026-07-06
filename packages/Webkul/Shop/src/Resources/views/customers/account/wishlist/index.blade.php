@@ -82,7 +82,7 @@
                     <template v-else>
                         <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                             <img
-                                class="max-md:h-[100px] max-md:w-[100px]"
+                                class="max-md:h-25 max-md:w-25"
                                 src="{{ bagisto_asset('images/wishlist.png') }}"
                                 alt="Empty wishlist"
                             >

@@ -70,7 +70,7 @@
 <div id="eu-withdrawal-print-area">
     <div class="flex items-center justify-between max-sm:flex-col max-sm:items-start max-sm:gap-3">
         <div class="flex items-center gap-3">
-            <span class="grid h-10 w-10 flex-shrink-0 place-items-center rounded-full {{ $statusContext['hero_bg'] }}">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full {{ $statusContext['hero_bg'] }}">
                 @if ($isDeclined)
                     <span class="text-2xl font-bold leading-none">&times;</span>
                 @else
@@ -132,7 +132,7 @@
                         title="@lang('shop::app.eu_withdrawal.confirmation.copy_reference')"
                         data-eu-clipboard="{{ $withdrawal->uuid }}"
                         data-eu-clipboard-message="@lang('shop::app.eu_withdrawal.confirmation.reference_copied')"
-                        class="grid h-7 w-7 flex-shrink-0 place-items-center rounded-md text-zinc-500 transition-all hover:bg-zinc-200 hover:text-zinc-900"
+                        class="grid h-7 w-7 shrink-0 place-items-center rounded-md text-zinc-500 transition-all hover:bg-zinc-200 hover:text-zinc-900"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -203,7 +203,7 @@
 
         <ol class="mt-4 space-y-3 text-sm">
             <li class="flex gap-3">
-                <span class="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box"></span>
+                <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box"></span>
 
                 <div>
                     <p class="font-medium text-zinc-900">
@@ -218,9 +218,9 @@
 
             <li class="flex gap-3">
                 @if ($withdrawal->confirmation_sent_at)
-                    <span class="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box"></span>
+                    <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box"></span>
                 @else
-                    <span class="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full border border-zinc-300 text-zinc-400 icon-radio-unselect"></span>
+                    <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-zinc-300 text-zinc-400 icon-radio-unselect"></span>
                 @endif
 
                 <div>
@@ -242,7 +242,7 @@
             
             <li class="flex gap-3">
                 @if ($withdrawal->refunded_at)
-                    <span class="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box"></span>
+                    <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-emerald-100 text-emerald-700 icon-check-box"></span>
 
                     <div>
                         <p class="font-medium text-zinc-900">
@@ -254,7 +254,7 @@
                         </p>
                     </div>
                 @elseif ($withdrawal->declined_at)
-                    <span class="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full bg-red-100 text-red-700">
+                    <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-red-100 text-red-700">
                         <span class="text-base font-bold leading-none">&times;</span>
                     </span>
 
@@ -278,7 +278,7 @@
                         </p>
                     </div>
                 @else
-                    <span class="grid h-6 w-6 flex-shrink-0 place-items-center rounded-full border border-zinc-300 text-zinc-400 icon-radio-unselect"></span>
+                    <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full border border-zinc-300 text-zinc-400 icon-radio-unselect"></span>
 
                     <div>
                         <p class="font-medium text-zinc-900">

@@ -18,7 +18,7 @@
             {!! view_render_event('bagisto.shop.settings.gdpr.consent.form.before') !!}
 
             <div class="container mt-8 max-1180:px-5 max-md:mt-6 max-md:px-4">
-                <div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
+                <div class="m-auto w-full max-w-217.5 rounded-xl border border-zinc-200 p-16 px-22.5 max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
                     <!-- Header -->
                     <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
                         <p class="text-xl font-bold">
@@ -34,7 +34,7 @@
                         </button>
                     </div>
                     
-                    <div class="mt-14 rounded max-sm:mt-8">
+                    <div class="mt-14 rounded-sm max-sm:mt-8">
                         <!-- Cookie Categories -->
                         @php
                             $cookieConsentKeys = [

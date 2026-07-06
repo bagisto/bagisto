@@ -1,6 +1,49 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source("../../");
+
+@theme {
+    --breakpoint-sm: 525px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1240px;
+    --breakpoint-2xl: 1440px;
+    --breakpoint-1180: 1180px;
+    --breakpoint-1060: 1060px;
+    --breakpoint-991: 991px;
+    --breakpoint-868: 868px;
+
+    --color-navyBlue: #060C3B;
+    --color-lightOrange: #F6F2EB;
+    --color-darkGreen: #40994A;
+    --color-darkBlue: #0044F2;
+    --color-darkPink: #F85156;
+
+    --font-poppins: "Poppins", sans-serif;
+    --font-dmserif: "DM Serif Display", serif;
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 90px;
+
+    @variant 2xl {
+        max-width: 1440px;
+    }
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}
 
 @font-face {
     font-family: "bagisto-shop";

@@ -69,7 +69,7 @@
                     </x-slot>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         @foreach ($currentChannel->locales->sortBy('name') as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
@@ -107,7 +107,7 @@
 
             <!-- General -->
             <div>
-                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
                     <x-admin::accordion>
                         <x-slot:header>
                             <p class="p-2.5 text-base font-semibold text-gray-800 dark:text-white">
@@ -132,7 +132,7 @@
                                     type="text"
                                     name="name"
                                     value="{{ $theme->name }}"
-                                    class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                    class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                     :class="[errors['name'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required"
                                     label="@lang('admin::app.settings.themes.edit.name')"
@@ -153,7 +153,7 @@
                                     type="text"
                                     name="sort_order"
                                     value="{{ $theme->sort_order }}"
-                                    class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                    class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                     :class="[errors['sort_order'] ? 'border border-red-600 hover:border-red-600' : '']"
                                     rules="required|min_value:1"
                                     label="@lang('admin::app.settings.themes.edit.sort-order')"
@@ -214,7 +214,7 @@
                             </x-admin::form.control-group>
         
                             <!-- Status -->
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group class="mb-0!">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.settings.themes.edit.status')
                                 </x-admin::form.control-group.label>
@@ -238,7 +238,7 @@
                                     </v-field>
                         
                                     <label
-                                        class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
+                                        class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-hidden peer-focus:ring-blue-300 dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full"
                                         for="status"
                                     ></label>
                                 </label>

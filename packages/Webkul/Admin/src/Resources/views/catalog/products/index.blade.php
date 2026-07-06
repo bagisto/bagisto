@@ -153,10 +153,10 @@
                                     ></label>
                                 @endif
 
-                                <div class="relative flex-shrink-0">
+                                <div class="relative shrink-0">
                                     <template v-if="record.base_image">
                                         <img
-                                            class="h-12 w-12 rounded object-cover sm:h-16 sm:w-16"
+                                            class="h-12 w-12 rounded-sm object-cover sm:h-16 sm:w-16"
                                             :src='record.base_image'
                                         />
 
@@ -166,7 +166,7 @@
                                     </template>
 
                                     <template v-else>
-                                        <div class="relative h-12 w-12 rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert sm:h-16 sm:w-16">
+                                        <div class="relative h-12 w-12 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert sm:h-16 sm:w-16">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}" class="h-full w-full object-cover">
 
                                             <p class="absolute bottom-0 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -292,7 +292,7 @@
                             <div class="relative">
                                 <template v-if="record.base_image">
                                     <img
-                                        class="max-h-[65px] min-h-[65px] min-w-[65px] max-w-[65px] rounded"
+                                        class="max-h-16.25 min-h-16.25 min-w-16.25 max-w-16.25 rounded-sm"
                                         :src='record.base_image'
                                     />
 
@@ -302,7 +302,7 @@
                                 </template>
 
                                 <template v-else>
-                                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                    <div class="relative h-15 max-h-15 w-full max-w-15 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                         <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -513,9 +513,9 @@
                                         >
                                         </label>
 
-                                        <div class="flex min-h-[38px] flex-wrap gap-1 rounded-md border p-1.5 dark:border-gray-800">
+                                        <div class="flex min-h-9.5 flex-wrap gap-1 rounded-md border p-1.5 dark:border-gray-800">
                                             <p
-                                                class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                 v-for="option in attribute.options"
                                             >
                                                 @{{ option.name }}

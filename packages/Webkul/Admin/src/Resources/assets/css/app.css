@@ -1,6 +1,45 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source("../../");
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --breakpoint-sm: 525px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    --breakpoint-xl: 1240px;
+    --breakpoint-2xl: 1920px;
+
+    --color-darkGreen: #40994A;
+    --color-darkBlue: #0044F2;
+    --color-darkPink: #F85156;
+
+    --font-inter: Inter;
+    --font-icon: icomoon;
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 16px;
+
+    @variant 2xl {
+        max-width: 1920px;
+    }
+}
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+}
 
 @font-face {
     font-family: "bagisto-admin";
@@ -388,7 +427,7 @@
     }
       
     p {
-        @apply text-[14px] !leading-[17px];
+        @apply text-[14px] leading-[17px]!;
     }
 
     input,
@@ -526,11 +565,11 @@
 
     @keyframes skeleton {
         0% {
-            @apply bg-[-1250px_0];
+            background-position: -1250px 0;
         }
 
         100% {
-            @apply bg-[1250px_0];
+            background-position: 1250px 0;
         }
     }
 
@@ -539,7 +578,7 @@
     }
 
     .CodeMirror {
-        @apply !h-[calc(100vh-367px)]
+        @apply h-[calc(100vh-367px)]!
     }
 }
 

@@ -19,13 +19,13 @@
 
     <!-- Page Header -->
     <div class="flex flex-wrap">
-        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-md:px-4">
+        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-15 py-4 max-lg:px-8 max-md:px-4">
             <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 {!! view_render_event('bagisto.shop.checkout.cart.logo.before') !!}
 
                 <a
                     href="{{ route('shop.home.index') }}"
-                    class="flex min-h-[30px]"
+                    class="flex min-h-7.5"
                     aria-label="@lang('shop::app.checkout.cart.index.bagisto')"
                 >
                     <img
@@ -48,7 +48,7 @@
     {!! view_render_event('bagisto.shop.checkout.cart.header.after') !!}
 
     <div class="flex-auto">
-        <div class="container px-[60px] max-lg:px-8 max-md:px-4">
+        <div class="container px-15 max-lg:px-8 max-md:px-4">
 
             {!! view_render_event('bagisto.shop.checkout.cart.breadcrumbs.before') !!}
 
@@ -103,7 +103,7 @@
                 <!-- Cart Information -->
                 <template v-else>
                     <div
-                        class="mt-8 flex flex-wrap gap-20 pb-8 max-1060:flex-col max-md:mt-0 max-md:gap-[30px] max-md:pb-0"
+                        class="mt-8 flex flex-wrap gap-20 pb-8 max-1060:flex-col max-md:mt-0 max-md:gap-7.5 max-md:pb-0"
                         v-if="cart?.items?.length"
                     >
                         <div class="flex flex-1 flex-col gap-6 max-md:gap-5">
@@ -198,7 +198,7 @@
                                         <!-- Cart Item Image -->
                                         <a :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)">
                                             <x-shop::media.images.lazy
-                                                class="h-[110px] max-w-[110px] rounded-xl max-md:h-20 max-md:max-w-20"
+                                                class="h-27.5 max-w-27.5 rounded-xl max-md:h-20 max-md:max-w-20"
                                                 ::src="item.base_image.small_image_url"
                                                 ::alt="item.name"
                                                 width="110"
@@ -433,7 +433,7 @@
                         v-else
                     >
                         <img
-                            class="max-md:h-[100px] max-md:w-[100px]"
+                            class="max-md:h-25 max-md:w-25"
                             src="{{ bagisto_asset('images/thank-you.png') }}"
                             alt="@lang('shop::app.checkout.cart.index.empty-product')"
                             loading="lazy"

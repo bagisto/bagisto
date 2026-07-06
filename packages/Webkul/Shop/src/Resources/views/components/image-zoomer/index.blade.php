@@ -23,7 +23,7 @@
             >
                 <!-- Close -->
                 <span
-                    class="icon-cancel absolute top-3 z-[1000] cursor-pointer text-3xl ltr:right-3 rtl:left-3"
+                    class="icon-cancel absolute top-3 z-1000 cursor-pointer text-3xl ltr:right-3 rtl:left-3"
                     @click="toggle"
                 >
                 </span>
@@ -108,9 +108,9 @@
                 <div class="mb-4 flex justify-center gap-x-2">
                     <template v-for="(attachment, index) in attachments">
                         <img
-                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:!border-navyBlue"
+                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:border-navyBlue!"
                             :class="{
-                                '!border-navyBlue': currentIndex === index + 1,
+                                'border-navyBlue!': currentIndex === index + 1,
                             }"
                             :src="attachment.url"
                             :key="index"
@@ -119,9 +119,9 @@
                         />
 
                         <video
-                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:!border-navyBlue"
+                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:border-navyBlue!"
                             :class="{
-                                '!border-navyBlue': currentIndex === index + 1,
+                                'border-navyBlue!': currentIndex === index + 1,
                             }"
                             :src="attachment.url"
                             :key="index"

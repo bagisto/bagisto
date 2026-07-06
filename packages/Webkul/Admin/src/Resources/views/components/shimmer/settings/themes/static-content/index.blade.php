@@ -1,16 +1,16 @@
 <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
-    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+    <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
         <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
             <!-- Heading -->
             <div class="flex flex-col gap-1">
                 <div class="shimmer h-4 w-16"></div>
                 
-                <div class="shimmer h-4 w-[434px]"></div>
+                <div class="shimmer h-4 w-108.5"></div>
             </div>
 
             <!-- Button -->
             <div class="flex gap-2.5">
-                <div class="shimmer h-10 w-[109px] rounded-md"></div>
+                <div class="shimmer h-10 w-27.25 rounded-md"></div>
             </div>
         </div>
 
@@ -26,6 +26,6 @@
         </div>
 
         <!-- Editor -->
-        <div class="shimmer h-[214px] w-full"></div>
+        <div class="shimmer h-53.5 w-full"></div>
     </div>
 </div>

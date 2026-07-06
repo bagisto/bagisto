@@ -3,19 +3,19 @@
         <!-- Left Information -->
         <div class="flex gap-2.5">
             <!-- Image -->
-            <div class="shimmer h-[46px] w-[46px] rounded">
+            <div class="shimmer h-11.5 w-11.5 rounded-sm">
             </div>
             <!-- Details -->
 
             <div class="grid place-content-start gap-1.5">
-                <p class="shimmer h-[17px] w-[350px]"></p>
-                <p class="shimmer h-[17px] w-[150px]"></p>
+                <p class="shimmer h-4.25 w-87.5"></p>
+                <p class="shimmer h-4.25 w-37.5"></p>
             </div>
         </div>
 
         <!-- Right Information -->
         <div class="grid place-content-center gap-1 text-right">
-                <p class="shimmer h-[17px] w-[50px]"></p>
+                <p class="shimmer h-4.25 w-12.5"></p>
         </div>
     </div>
 @endfor

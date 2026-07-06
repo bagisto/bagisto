@@ -45,7 +45,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="row grid grid-cols-1 md:grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] grid-rows-1 gap-1 items-center border-b px-4 py-2.5 dark:border-gray-800 min-w-full">
+                        <div class="row grid grid-cols-1 md:grid-cols-[2fr_1fr_minmax(150px,4fr)_0.5fr] grid-rows-1 gap-1 items-center border-b px-4 py-2.5 dark:border-gray-800 min-w-full">
                             <div
                                 class="flex items-center gap-2.5"
                                 v-for="(columnGroup, index) in [['customer_full_name', 'product_name', 'product_review_status'], ['rating', 'created_at', 'product_review_id'], ['title', 'comment']]"
@@ -79,7 +79,7 @@
 
                                 <!-- Product Name, Review Status -->
                                 <p class="text-gray-600 dark:text-gray-300">
-                                    <span class="[&>*]:after:content-['_/_']">
+                                    <span class="*:after:content-['_/_']">
                                         <template v-for="column in columnGroup">
                                             <span
                                                 class="after:content-['/'] last:after:content-['']"
@@ -121,7 +121,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid grid-cols-1 gap-2 md:grid-cols-[2fr_1fr_minmax(150px,_4fr)_0.5fr] md:gap-0 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950 min-w-full"
+                            class="row grid grid-cols-1 gap-2 md:grid-cols-[2fr_1fr_minmax(150px,4fr)_0.5fr] md:gap-0 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950 min-w-full"
                             v-for="record in available.records"
                         >
                             <!-- Name, Product, Description -->
@@ -363,14 +363,14 @@
                                             <div v-for="image in review.images" :key="image.id">
                                                 <img
                                                     :src="image.url"
-                                                    class="h-[60px] w-[60px] rounded"
+                                                    class="h-15 w-15 rounded-sm"
                                                     v-if="image.type === 'image'"
                                                     alt="Image"
                                                 />
 
                                                 <video
                                                     v-else
-                                                    class="h-[60px] w-[60px] rounded"
+                                                    class="h-15 w-15 rounded-sm"
                                                     controls
                                                     autoplay
                                                 >
