@@ -61,6 +61,11 @@ class ProcessSitemap implements ShouldQueue
         $this->sitemap->deleteFromStorage();
 
         /**
+         * Fetch the associated channel IDs for the sitemap.
+         */
+        $channelIds = $this->sitemap->channels->pluck('id')->toArray();
+
+        /**
          * Process the store URL.
          */
         $this->processItems([Url::create('/')]);
@@ -68,17 +73,42 @@ class ProcessSitemap implements ShouldQueue
         /**
          * Process the categories.
          */
-        Category::query()->chunk(100, fn ($items) => $this->processItems($items));
+        Category::query()
+            ->when(! empty($channelIds), function ($query) use ($channelIds) {
+                $channels = core()->getAllChannels()->whereIn('id', $channelIds);
+
+                $query->where(function ($q) use ($channels) {
+                    foreach ($channels as $channel) {
+                        $rootCategory = Category::query()->find($channel->root_category_id);
+
+                        if ($rootCategory) {
+                            $q->orWhere(function ($subQ) use ($rootCategory) {
+                                $subQ->where('_lft', '>', $rootCategory->_lft)
+                                    ->where('_rgt', '<', $rootCategory->_rgt);
+                            });
+                        }
+                    }
+                });
+            })
+            ->chunk(100, fn ($items) => $this->processItems($items));
 
         /**
          * Process the products.
          */
-        Product::query()->chunk(100, fn ($items) => $this->processItems($items));
+        Product::query()
+            ->when(! empty($channelIds), function ($query) use ($channelIds) {
+                $query->whereHas('channels', fn ($q) => $q->whereIn('channel_id', $channelIds));
+            })
+            ->chunk(100, fn ($items) => $this->processItems($items));
 
         /**
          * Process the CMS pages.
          */
-        Page::query()->chunk(100, fn ($items) => $this->processItems($items));
+        Page::query()
+            ->when(! empty($channelIds), function ($query) use ($channelIds) {
+                $query->whereHas('channels', fn ($q) => $q->whereIn('channel_id', $channelIds));
+            })
+            ->chunk(100, fn ($items) => $this->processItems($items));
 
         /**
          * If there are any items left to be processed then generate the sitemap.

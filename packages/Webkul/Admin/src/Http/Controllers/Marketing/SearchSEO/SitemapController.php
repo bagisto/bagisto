@@ -39,6 +39,7 @@ class SitemapController extends Controller
     public function store(): JsonResponse
     {
         $this->validate(request(), [
+            'channels' => 'required|array|min:1',
             'file_name' => 'required|regex:/^[\w\-\.]+$/|ends_with:.xml',
             'path' => 'required|starts_with:/|regex:/^(?!.*\/\/)[\w\-\.\/]+$/|ends_with:/',
         ]);
@@ -46,6 +47,7 @@ class SitemapController extends Controller
         Event::dispatch('marketing.search_seo.sitemap.create.before');
 
         $sitemap = $this->sitemapRepository->create(request()->only([
+            'channels',
             'file_name',
             'path',
         ]));
@@ -69,6 +71,7 @@ class SitemapController extends Controller
         $id = request()->id;
 
         $this->validate(request(), [
+            'channels' => 'required|array|min:1',
             'file_name' => 'required|regex:/^[\w\-\.]+$/|ends_with:.xml',
             'path' => 'required|starts_with:/|regex:/^(?!.*\/\/)[\w\-\.\/]+$/|ends_with:/',
         ]);
@@ -76,6 +79,7 @@ class SitemapController extends Controller
         Event::dispatch('marketing.search_seo.sitemap.update.before', $id);
 
         $sitemap = $this->sitemapRepository->update(request()->only([
+            'channels',
             'file_name',
             'path',
         ]), $id);

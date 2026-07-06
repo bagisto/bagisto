@@ -3085,6 +3085,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'Actions',
+                        'channel' => 'चैनल',
                         'delete' => 'Delete',
                         'edit' => 'Edit',
                         'file-name' => 'File Name',
@@ -3094,6 +3095,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'चैनल',
                         'delete-warning' => 'Are you sure, you want to perform this action?',
                         'file-name' => 'File Name',
                         'file-name-info' => 'Example: sitemap.xml',

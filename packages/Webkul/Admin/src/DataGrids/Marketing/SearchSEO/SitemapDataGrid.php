@@ -16,13 +16,22 @@ class SitemapDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        return DB::table('sitemaps')
+        $queryBuilder = DB::table('sitemaps')
             ->addSelect(
-                'id',
-                'file_name',
-                'path',
-                'path as url'
-            );
+                'sitemaps.id',
+                'sitemaps.file_name',
+                'sitemaps.path',
+                'sitemaps.path as url'
+            )
+            ->addSelect(DB::raw('GROUP_CONCAT(DISTINCT channels.code) as channel'))
+            ->addSelect(DB::raw('GROUP_CONCAT(DISTINCT channels.id) as channel_ids'))
+            ->leftJoin('sitemap_channels', 'sitemaps.id', '=', 'sitemap_channels.sitemap_id')
+            ->leftJoin('channels', 'sitemap_channels.channel_id', '=', 'channels.id')
+            ->groupBy('sitemaps.id');
+
+        $this->addFilter('channel', 'sitemap_channels.channel_id');
+
+        return $queryBuilder;
     }
 
     /**
@@ -37,6 +46,19 @@ class SitemapDataGrid extends DataGrid
             'label' => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.id'),
             'type' => 'integer',
             'filterable' => true,
+            'sortable' => true,
+        ]);
+
+        $this->addColumn([
+            'index' => 'channel',
+            'label' => trans('admin::app.marketing.search-seo.sitemaps.index.datagrid.channel'),
+            'type' => 'string',
+            'filterable' => true,
+            'filterable_type' => 'dropdown',
+            'filterable_options' => collect(core()->getAllChannels())
+                ->map(fn ($channel) => ['label' => $channel->name, 'value' => $channel->id])
+                ->values()
+                ->toArray(),
             'sortable' => true,
         ]);
 
@@ -63,6 +85,20 @@ class SitemapDataGrid extends DataGrid
             'type' => 'string',
             'closure' => function ($row) {
                 return Storage::disk('public')->url(clean_path($row->path.'/'.$row->file_name));
+            },
+        ]);
+
+        $this->addColumn([
+            'index' => 'channel_ids',
+            'label' => 'Channel IDs',
+            'type' => 'string',
+            'visibility' => false,
+            'closure' => function ($row) {
+                if (empty($row->channel_ids)) {
+                    return [];
+                }
+
+                return array_map('intval', explode(',', $row->channel_ids));
             },
         ]);
     }

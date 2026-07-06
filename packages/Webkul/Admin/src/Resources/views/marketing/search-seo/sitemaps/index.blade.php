@@ -40,7 +40,7 @@
                 @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.create'))
                     <div
                         class="primary-button"
-                        @click="selectedSitemap=0; $refs.sitemap.toggle()"
+                        @click="selectedSitemap=0; selectedChannels=[]; $refs.sitemap.toggle()"
                     >
                         @lang('admin::app.marketing.search-seo.sitemaps.index.create-btn')
                     </div>
@@ -72,16 +72,27 @@
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(0, 1fr))`"
                         >
                             <!-- ID -->
-                            <p>@{{ record.id }}</p>
+                            <p v-if="available.columns.find(column => column.index === 'id')?.visibility">
+                                @{{ record.id }}
+                            </p>
+
+                            <!-- Channel -->
+                            <p v-if="available.columns.find(column => column.index === 'channel')?.visibility">
+                                @{{ record.channel }}
+                            </p>
 
                             <!-- File Name -->
-                            <p>@{{ record.file_name }}</p>
+                            <p v-if="available.columns.find(column => column.index === 'file_name')?.visibility">
+                                @{{ record.file_name }}
+                            </p>
 
                             <!-- Path -->
-                            <p>@{{ record.path }}</p>
+                            <p v-if="available.columns.find(column => column.index === 'path')?.visibility">
+                                @{{ record.path }}
+                            </p>
 
                             <!-- URL -->
-                            <p>
+                            <p v-if="available.columns.find(column => column.index === 'url')?.visibility">
                                 <a :href="record.url" target="_blank">
                                     @{{ record.url}}
                                 </a>
@@ -199,6 +210,36 @@
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.path-info')
                                 </p>
                             </x-admin::form.control-group>
+
+                            <!-- Select Channels -->
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.marketing.search-seo.sitemaps.index.create.channels')
+                            </x-admin::form.control-group.label>
+
+                            @foreach(core()->getAllChannels() as $channel)
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 last:!mb-0">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        :id="'channels_' . $channel->id"
+                                        name="channels[]"
+                                        rules="required"
+                                        :value="$channel->id"
+                                        :for="'channels_' . $channel->id"
+                                        :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.channels')"
+                                        ::checked="selectedChannels.includes({{ $channel->id }})"
+                                    />
+
+                                    <label
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
+                                        for="channels_{{ $channel->id }}"
+                                        v-pre
+                                    >
+                                        {{ core()->getChannelName($channel) }}
+                                    </label>
+                                </x-admin::form.control-group>
+                            @endforeach
+
+                            <x-admin::form.control-group.error control-name="channels[]" />
                         </x-slot>
 
                         <!-- Modal Footer -->
@@ -225,13 +266,15 @@
                     return {
                         selectedSitemap: 0,
 
+                        selectedChannels: [],
+
                         isLoading: false,
                     }
                 },
 
                 computed: {
                     gridsCount() {
-                        let count = this.$refs.datagrid.available.columns.length;
+                        let count = this.$refs.datagrid.available.columns.filter((column) => column.visibility).length;
 
                         if (this.$refs.datagrid.available.actions.length) {
                             ++count;
@@ -277,6 +320,8 @@
                     },
 
                     editModal(values) {
+                        this.selectedChannels = values.channel_ids ?? [];
+
                         this.$refs.sitemap.toggle();
 
                         this.$refs.modalForm.setValues(values);

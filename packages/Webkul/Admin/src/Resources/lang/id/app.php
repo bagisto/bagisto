@@ -3085,6 +3085,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'Aksi',
+                        'channel' => 'Saluran',
                         'delete' => 'Hapus',
                         'edit' => 'Edit',
                         'file-name' => 'Nama File',
@@ -3094,6 +3095,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'Saluran',
                         'delete-warning' => 'Apakah Anda yakin ingin melakukan tindakan ini?',
                         'file-name' => 'Nama File',
                         'file-name-info' => 'Contoh: sitemap.xml',
@@ -4049,7 +4051,7 @@ return [
         'products' => [
             'index' => [
                 'all-channels' => 'Semua Channel',
-                'channel' => 'Channel',
+                'channel' => 'Saluran',
                 'end-date' => 'Tanggal Akhir',
                 'id' => 'ID',
                 'interval' => 'Interval',

@@ -3085,6 +3085,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'İşlemler',
+                        'channel' => 'Kanal',
                         'delete' => 'Sil',
                         'edit' => 'Düzenle',
                         'file-name' => 'Dosya Adı',
@@ -3094,6 +3095,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'Kanallar',
                         'delete-warning' => 'Emin misiniz, bu işlemi gerçekleştirmek istediğinize?',
                         'file-name' => 'Dosya Adı',
                         'file-name-info' => 'Örnek: sitemap.xml',

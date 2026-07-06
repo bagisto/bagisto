@@ -3085,6 +3085,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'ක්‍රියා',
+                        'channel' => 'චැනලය',
                         'delete' => 'මකාදමන්',
                         'edit' => 'සංස්කරණය',
                         'file-name' => 'ගොනුවේ නම',
@@ -3094,6 +3095,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'නිලධාරීන්',
                         'delete-warning' => 'ඔබට මෙම ක්‍රියාන්විය කලමනාකර, මම නිවැරදියියේයයිද?',
                         'file-name' => 'ගොනුවේ නම',
                         'file-name-info' => 'උදා: sitemap.xml',
