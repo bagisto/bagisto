@@ -40,7 +40,7 @@ return [
         'private' => [
             'driver' => 'local',
             'root' => storage_path('app/private'),
-            'serve' => true,
+            // 'serve' => true,
             'throw' => false,
         ],
 

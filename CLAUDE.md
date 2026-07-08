@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Bagisto 2.4.x - open-source Laravel 12 e-commerce platform. PHP 8.3+, Vue.js 3, Tailwind CSS 3, Vite 5.
+Bagisto 2.4.x - open-source Laravel 13 e-commerce platform. PHP 8.4+, Vue.js 3, Tailwind CSS 4, Vite 5.
 
 ## Common Commands
 
