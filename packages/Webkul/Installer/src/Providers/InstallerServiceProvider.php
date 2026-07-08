@@ -42,10 +42,12 @@ class InstallerServiceProvider extends ServiceProvider
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'installer');
 
         Event::listen('bagisto.installed', 'Webkul\Installer\Listeners\Installer@installed');
+
+        Event::listen('bagisto.module.installed', 'Webkul\Installer\Listeners\Installer@moduleInstalled');
     }
 
     /**
-     * Register the Installer Commands of this package.
+     * Register the commands for this package.
      */
     protected function registerCommands(): void
     {

@@ -756,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Kurangi Jumlah',
             'increase-quantity' => 'Tambah Jumlah',
+            'remove-item' => 'Hapus Item',
         ],
     ],
 

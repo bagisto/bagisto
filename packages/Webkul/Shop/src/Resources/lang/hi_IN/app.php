@@ -756,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'मात्रा को कम करें',
             'increase-quantity' => 'मात्रा बढ़ाएँ',
+            'remove-item' => 'आइटम हटाएं',
         ],
     ],
 

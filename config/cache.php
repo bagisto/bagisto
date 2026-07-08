@@ -110,12 +110,17 @@ return [
     | Serializable Classes
     |--------------------------------------------------------------------------
     |
-    | This value determines the classes that can be unserialized from cache
-    | storage. By default, no PHP classes will be unserialized from your
-    | cache to prevent gadget chain attacks if your APP_KEY is leaked.
+    | Controls which PHP classes may be restored when cached values are
+    | unserialized. Laravel 13 ships this as `false` (block all objects),
+    | but Prettus L5 Repository's CacheableRepository trait — mixed into
+    | Webkul\Core\Eloquent\Repository and used by ~100 repositories —
+    | caches Eloquent Collections and Models. Restricting classes here
+    | would surface them as __PHP_Incomplete_Class on read. Set to `true`
+    | to allow all classes; replace with an explicit allow-list if the
+    | repository layer is ever moved off object caching.
     |
     */
 
-    'serializable_classes' => false,
+    'serializable_classes' => true,
 
 ];

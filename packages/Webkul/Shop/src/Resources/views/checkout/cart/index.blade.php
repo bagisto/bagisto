@@ -322,7 +322,9 @@
                                                     class="flex max-w-max items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-md:gap-x-1.5 max-md:px-1 max-md:py-0.5"
                                                     name="quantity"
                                                     ::value="item?.quantity"
+                                                    :removable="true"
                                                     @change="setItemQuantity(item.id, $event)"
+                                                    @remove="removeItem(item.id)"
                                                 />
 
                                                 <!-- For Mobile view Remove Button -->

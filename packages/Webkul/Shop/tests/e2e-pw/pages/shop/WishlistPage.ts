@@ -16,6 +16,17 @@ export class WishlistPage extends BasePage {
         await this.page.locator(".action-items > span").first().click();
     }
 
+    async increaseQuantityFromWishlishtView(): Promise<void> {
+        await this.page.getByLabel("Increase Quantity").first().click();
+    }
+
+    async clickBinIcon(): Promise<void> {
+        await this.page.locator(".icon-bin").nth(1).click();
+        await this.page
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
+    }
+
     async expectWishlistAdded(): Promise<void> {
         await expect(
             this.page.getByText("Item Successfully Added To Wishlist").first(),
