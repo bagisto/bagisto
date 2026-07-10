@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Afegir adjunts',
                 'add-image' => 'Afegir Imatge/Vídeo',
+                'invalid-file-type' => 'El tipus de fitxer seleccionat no està permès.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Benvingut convidat',
                     'wishlist' => 'Llista de desitjos',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Afegeix un producte a la llista de desitjos del client pel nom.',
+                'add-to-wishlist-query' => 'El nom del producte o la clau URL per afegir a la llista de desitjos.',
+                'proceed-to-checkout' => 'Obre la pàgina de pagament per començar a fer una comanda dels articles del carretó.',
+                'search-products' => 'Cerca productes al catàleg de la botiga per paraula clau i obre els resultats coincidents.',
+                'search-products-query' => 'Les paraules clau o el nom del producte que vols cercar al catàleg.',
+                'subscribe-newsletter' => 'Subscriu una adreça de correu electrònic al butlletí de la botiga.',
+                'subscribe-newsletter-email' => 'L\'adreça de correu electrònic per subscriure\'s al butlletí.',
+                'view-cart' => 'Obre la pàgina del carretó perquè el client pugui revisar els productes que ha afegit.',
+                'view-product' => 'Obre la pàgina de detalls d\'un producte pel nom del producte.',
+                'view-product-query' => 'El nom del producte o la clau URL a obrir.',
+                'view-wishlist' => 'Obre la pàgina de la llista de desitjos per revisar els productes desats del client.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Disminuir quantitat',
             'increase-quantity' => 'Augmentar quantitat',
+            'remove-item' => 'Elimina l\'article',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Acceptat',
-                'awaiting' => 'Esperant',
-                'canceled' => 'Cancel·lat',
-                'declined' => 'Rebutjat',
-                'dispatched-package' => 'Paquet enviat',
+                'accept' => 'Aprovat',
+                'awaiting' => 'Esperant la devolució',
+                'canceled' => 'Sol·licitud cancel·lada',
+                'declined' => 'Sol·licitud rebutjada',
+                'dispatched-package' => 'Devolució en trànsit',
                 'item-canceled' => 'Article cancel·lat',
                 'not-received-package-yet' => 'Encara no s\'ha rebut el paquet',
-                'pending' => 'Pendent',
+                'pending' => 'Pendent de revisió',
                 'processing' => 'Processant',
-                'received-package' => 'Paquet rebut',
+                'received-package' => 'Reemborsat',
                 'solved' => 'Resolt',
             ],
 

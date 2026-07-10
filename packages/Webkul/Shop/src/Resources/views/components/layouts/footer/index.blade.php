@@ -108,6 +108,9 @@
                     <x-shop::form
                         :action="route('shop.subscription.store')"
                         class="mt-2.5 rounded max-sm:mt-0"
+                        toolname="subscribe_to_newsletter"
+                        tooldescription="{{ trans('shop::app.components.layouts.webmcp.subscribe-newsletter') }}"
+                        toolautosubmit
                     >
                         <div class="relative w-full">
                             <x-shop::form.control-group.control
@@ -118,6 +121,7 @@
                                 label="Email"
                                 :aria-label="trans('shop::app.components.layouts.footer.email')"
                                 placeholder="email@example.com"
+                                toolparamdescription="{{ trans('shop::app.components.layouts.webmcp.subscribe-newsletter-email') }}"
                             />
     
                             <x-shop::form.control-group.error control-name="email" />

@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Tambahkan Lampiran',
                 'add-image' => 'Tambahkan Gambar/Video',
+                'invalid-file-type' => 'Tipe file yang dipilih tidak diizinkan.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Selamat Datang, Tamu',
                     'wishlist' => 'Daftar Keinginan',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Tambahkan produk ke daftar keinginan pelanggan berdasarkan nama.',
+                'add-to-wishlist-query' => 'Nama produk atau kunci URL untuk ditambahkan ke daftar keinginan.',
+                'proceed-to-checkout' => 'Buka halaman checkout untuk mulai memesan barang yang ada di keranjang.',
+                'search-products' => 'Cari produk di katalog toko berdasarkan kata kunci dan buka hasil yang cocok.',
+                'search-products-query' => 'Kata kunci atau nama produk yang akan dicari di katalog.',
+                'subscribe-newsletter' => 'Langganan alamat email ke buletin toko.',
+                'subscribe-newsletter-email' => 'Alamat email untuk berlangganan buletin.',
+                'view-cart' => 'Buka halaman keranjang belanja agar pelanggan dapat meninjau produk yang telah ditambahkan.',
+                'view-product' => 'Buka halaman detail produk berdasarkan nama produk.',
+                'view-product-query' => 'Nama produk atau kunci URL yang akan dibuka.',
+                'view-wishlist' => 'Buka halaman daftar keinginan untuk meninjau produk tersimpan pelanggan.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Kurangi Jumlah',
             'increase-quantity' => 'Tambah Jumlah',
+            'remove-item' => 'Hapus Item',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Diterima',
-                'awaiting' => 'Menunggu',
-                'canceled' => 'Dibatalkan',
-                'declined' => 'Ditolak',
-                'dispatched-package' => 'Paket Dikirim',
+                'accept' => 'Disetujui',
+                'awaiting' => 'Menunggu pengembalian',
+                'canceled' => 'Permintaan dibatalkan',
+                'declined' => 'Permintaan ditolak',
+                'dispatched-package' => 'Pengembalian dalam perjalanan',
                 'item-canceled' => 'Item Dibatalkan',
                 'not-received-package-yet' => 'Belum menerima paket',
-                'pending' => 'Menunggu',
+                'pending' => 'Menunggu peninjauan',
                 'processing' => 'Sedang Diproses',
-                'received-package' => 'Paket Diterima',
+                'received-package' => 'Dikembalikan',
                 'solved' => 'Selesai',
             ],
 

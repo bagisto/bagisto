@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => '添加附件',
                 'add-image' => '添加图片/视频',
+                'invalid-file-type' => '不允许所选的文件类型。',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => '欢迎访问者',
                     'wishlist' => '愿望清单',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => '按名称将产品添加到客户的心愿单。',
+                'add-to-wishlist-query' => '要添加到心愿单的产品名称或 URL 键。',
+                'proceed-to-checkout' => '打开结账页面，开始为购物车中的商品下单。',
+                'search-products' => '按关键词在商店目录中搜索产品并打开匹配的结果。',
+                'search-products-query' => '用于在目录中搜索的关键词或产品名称。',
+                'subscribe-newsletter' => '将电子邮件地址订阅到商店的电子报。',
+                'subscribe-newsletter-email' => '用于订阅电子报的电子邮件地址。',
+                'view-cart' => '打开购物车页面，以便客户查看已添加的产品。',
+                'view-product' => '按产品名称打开产品详情页面。',
+                'view-product-query' => '要打开的产品名称或 URL 键。',
+                'view-wishlist' => '打开心愿单页面以查看客户保存的产品。',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => '减少数量',
             'increase-quantity' => '增加数量',
+            'remove-item' => '移除商品',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => '接受',
-                'awaiting' => '等待中',
-                'canceled' => '已取消',
-                'declined' => '已拒绝',
-                'dispatched-package' => '包裹已发出',
+                'accept' => '已批准',
+                'awaiting' => '等待退货',
+                'canceled' => '请求已取消',
+                'declined' => '请求已拒绝',
+                'dispatched-package' => '退货运输中',
                 'item-canceled' => '商品已取消',
                 'not-received-package-yet' => '包裹尚未收到',
-                'pending' => '待处理',
+                'pending' => '待审核',
                 'processing' => '处理中',
-                'received-package' => '包裹已收到',
+                'received-package' => '已退款',
                 'solved' => '已解决',
             ],
 

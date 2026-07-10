@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Dosya Ekle',
                 'add-image' => 'Resim/Video Ekle',
+                'invalid-file-type' => 'Seçilen dosya türüne izin verilmiyor.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Hoş Geldiniz, Misafir',
                     'wishlist' => 'Dilek Listesi',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Bir ürünü adıyla müşterinin istek listesine ekleyin.',
+                'add-to-wishlist-query' => 'İstek listesine eklenecek ürün adı veya URL anahtarı.',
+                'proceed-to-checkout' => 'Sepetteki ürünler için sipariş vermeye başlamak üzere ödeme sayfasını açın.',
+                'search-products' => 'Mağaza kataloğunda anahtar kelimeye göre ürün arayın ve eşleşen sonuçları açın.',
+                'search-products-query' => 'Katalogda aranacak anahtar kelimeler veya ürün adı.',
+                'subscribe-newsletter' => 'Bir e-posta adresini mağaza bültenine abone yapın.',
+                'subscribe-newsletter-email' => 'Bültene abone olunacak e-posta adresi.',
+                'view-cart' => 'Müşterinin eklediği ürünleri inceleyebilmesi için alışveriş sepeti sayfasını açın.',
+                'view-product' => 'Bir ürünün ayrıntı sayfasını ürün adına göre açın.',
+                'view-product-query' => 'Açılacak ürün adı veya URL anahtarı.',
+                'view-wishlist' => 'Müşterinin kaydettiği ürünleri incelemek için istek listesi sayfasını açın.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Miktarı Azalt',
             'increase-quantity' => 'Miktarı Artır',
+            'remove-item' => 'Öğeyi Kaldır',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Kabul Et',
-                'awaiting' => 'Beklemede',
-                'canceled' => 'İptal Edildi',
-                'declined' => 'Reddedildi',
-                'dispatched-package' => 'Paket Gönderildi',
+                'accept' => 'Onaylandı',
+                'awaiting' => 'İade bekleniyor',
+                'canceled' => 'Talep iptal edildi',
+                'declined' => 'Talep reddedildi',
+                'dispatched-package' => 'İade yolda',
                 'item-canceled' => 'Ürün İptal Edildi',
                 'not-received-package-yet' => 'Paket Henüz Alınmadı',
-                'pending' => 'Beklemede',
+                'pending' => 'İnceleme bekliyor',
                 'processing' => 'İşleniyor',
-                'received-package' => 'Paket Alındı',
+                'received-package' => 'İade edildi',
                 'solved' => 'Çözüldü',
             ],
 

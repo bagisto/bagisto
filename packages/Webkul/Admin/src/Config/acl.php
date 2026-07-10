@@ -45,6 +45,7 @@ return [
             'admin.sales.cart.items.store',
             'admin.sales.cart.items.update',
             'admin.sales.cart.items.destroy',
+            'admin.sales.cart.remove_coupon',
             'admin.sales.cart.addresses.store',
             'admin.sales.cart.shipping_methods.store',
             'admin.sales.cart.payment_methods.store',
@@ -445,6 +446,9 @@ return [
         'route' => [
             'admin.customers.customers.update',
             'admin.customers.customers.mass_update',
+            'admin.customers.customers.cart.items.delete',
+            'admin.customers.customers.compare.items.delete',
+            'admin.customers.customers.wishlist.items.delete',
         ],
         'sort' => 2,
     ], [
@@ -591,6 +595,7 @@ return [
             'admin.marketing.promotions.cart_rules.edit',
             'admin.marketing.promotions.cart_rules.update',
             'admin.marketing.promotions.cart_rules.coupons.store',
+            'admin.marketing.promotions.cart_rules.coupons.delete',
             'admin.marketing.promotions.cart_rules.coupons.mass_delete',
         ],
         'sort' => 2,
@@ -835,17 +840,35 @@ return [
     ], [
         'key' => 'reporting.sales',
         'name' => 'admin::app.acl.sales',
-        'route' => 'admin.reporting.sales.index',
+        'route' => [
+            'admin.reporting.sales.index',
+            'admin.reporting.sales.stats',
+            'admin.reporting.sales.view',
+            'admin.reporting.sales.view.stats',
+            'admin.reporting.sales.export',
+        ],
         'sort' => 1,
     ], [
         'key' => 'reporting.customers',
         'name' => 'admin::app.acl.customers',
-        'route' => 'admin.reporting.customers.index',
+        'route' => [
+            'admin.reporting.customers.index',
+            'admin.reporting.customers.stats',
+            'admin.reporting.customers.view',
+            'admin.reporting.customers.view.stats',
+            'admin.reporting.customers.export',
+        ],
         'sort' => 2,
     ], [
         'key' => 'reporting.products',
         'name' => 'admin::app.acl.products',
-        'route' => 'admin.reporting.products.index',
+        'route' => [
+            'admin.reporting.products.index',
+            'admin.reporting.products.stats',
+            'admin.reporting.products.view',
+            'admin.reporting.products.view.stats',
+            'admin.reporting.products.export',
+        ],
         'sort' => 3,
     ],
 
@@ -1152,6 +1175,11 @@ return [
         ],
         'sort' => 2,
     ], [
+        'key' => 'settings.taxes.tax_rates.delete',
+        'name' => 'admin::app.acl.delete',
+        'route' => 'admin.settings.taxes.rates.delete',
+        'sort' => 3,
+    ], [
         'key' => 'settings.data_transfer',
         'name' => 'admin::app.acl.data-transfer',
         'route' => 'admin.settings.data_transfer.imports.index',
@@ -1185,7 +1213,17 @@ return [
     ], [
         'key' => 'settings.data_transfer.imports.import',
         'name' => 'admin::app.acl.import',
-        'route' => 'admin.settings.data_transfer.imports.import',
+        'route' => [
+            'admin.settings.data_transfer.imports.import',
+            'admin.settings.data_transfer.imports.validate',
+            'admin.settings.data_transfer.imports.start',
+            'admin.settings.data_transfer.imports.link',
+            'admin.settings.data_transfer.imports.index_data',
+            'admin.settings.data_transfer.imports.stats',
+            'admin.settings.data_transfer.imports.download',
+            'admin.settings.data_transfer.imports.download_error_report',
+            'admin.settings.data_transfer.imports.download_sample',
+        ],
         'sort' => 4,
     ],
 

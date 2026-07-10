@@ -1,11 +1,14 @@
 name: Build & Publish Docker Image
 
 # ============================================================================
-# Triggers a multi-arch (amd64 + arm64) build of the production Bagisto image
+# Triggers a multi-arch (amd64 + arm64) build of the production Bagisto images
 # whenever a `v*` tag is pushed (the same tag convention used for Bagisto
 # releases), and also supports manual dispatch for ad-hoc rebuilds.
 #
-# Build context: docker/production/ (Dockerfile + all support scripts).
+# Three web-server variants are built from docker/production/:
+#   - nginx     → :<version>-nginx     (also the unsuffixed :<version> / :latest)
+#   - apache    → :<version>-apache
+#   - litespeed → :<version>-litespeed
 #
 # Required repository secrets:
 #   DOCKERHUB_USERNAME  Docker Hub user / org with push access to webkul/bagisto
@@ -19,7 +22,7 @@ on:
   workflow_dispatch:
     inputs:
       bagisto_version:
-        description: 'Bagisto git tag to build (e.g. v2.4.0). Defaults to the workflow ref tag.'
+        description: 'Bagisto git tag to build (e.g. v2.4.7). Defaults to the workflow ref tag.'
         required: false
         type: string
 
@@ -28,12 +31,20 @@ env:
   BUILD_CONTEXT: docker/production
 
 jobs:
-  build_and_push:
-    name: Build & Push (amd64 + arm64)
+  # --------------------------------------------------------------------------
+  # Resolve the version + tagging decisions once, then fan out to the variants.
+  # --------------------------------------------------------------------------
+  resolve:
+    name: Resolve Version & Tags
     runs-on: ubuntu-latest
     permissions:
       contents: read
-
+    outputs:
+      bagisto_version: ${{ steps.version.outputs.bagisto_version }}
+      docker_tag: ${{ steps.version.outputs.docker_tag }}
+      push_latest: ${{ steps.version.outputs.push_latest }}
+      default_branch: ${{ steps.version.outputs.default_branch }}
+      on_default_branch: ${{ steps.version.outputs.on_default_branch }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -99,6 +110,23 @@ jobs:
           echo "On default branch line: $ON_DEFAULT_BRANCH"
           echo "Docker tag: $DOCKER_TAG (latest=$PUSH_LATEST, prerelease=$IS_PRERELEASE)"
 
+  # --------------------------------------------------------------------------
+  # Build & push each web-server variant in parallel.
+  # --------------------------------------------------------------------------
+  build_and_push:
+    name: Build & Push ${{ matrix.variant }} (amd64 + arm64)
+    needs: resolve
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      fail-fast: false
+      matrix:
+        variant: [nginx, apache, litespeed]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
       - name: Set Up QEMU
         uses: docker/setup-qemu-action@v3
         with:
@@ -115,11 +143,29 @@ jobs:
 
       - name: Compute Image Tags
         id: tags
+        env:
+          IMAGE: ${{ env.IMAGE_NAME }}
+          DOCKER_TAG: ${{ needs.resolve.outputs.docker_tag }}
+          PUSH_LATEST: ${{ needs.resolve.outputs.push_latest }}
+          VARIANT: ${{ matrix.variant }}
         run: |
-          TAGS="${{ env.IMAGE_NAME }}:${{ steps.version.outputs.docker_tag }}"
-          if [ "${{ steps.version.outputs.push_latest }}" = "true" ]; then
-            TAGS="$TAGS,${{ env.IMAGE_NAME }}:latest"
+          # Always: version + server suffix, e.g. 2.4.7-nginx
+          TAGS="${IMAGE}:${DOCKER_TAG}-${VARIANT}"
+
+          # Floating per-server tag on stable default-branch releases, e.g. latest-nginx
+          if [ "$PUSH_LATEST" = "true" ]; then
+            TAGS="$TAGS,${IMAGE}:latest-${VARIANT}"
           fi
+
+          # nginx is the default variant → also publish the unsuffixed tags
+          # (:<version> and :latest) for backward compatibility.
+          if [ "$VARIANT" = "nginx" ]; then
+            TAGS="$TAGS,${IMAGE}:${DOCKER_TAG}"
+            if [ "$PUSH_LATEST" = "true" ]; then
+              TAGS="$TAGS,${IMAGE}:latest"
+            fi
+          fi
+
           echo "tags=$TAGS" >> "$GITHUB_OUTPUT"
           echo "Will push: $TAGS"
 
@@ -127,33 +173,40 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ${{ env.BUILD_CONTEXT }}
-          file: ${{ env.BUILD_CONTEXT }}/Dockerfile
+          file: ${{ env.BUILD_CONTEXT }}/${{ matrix.variant }}/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.tags.outputs.tags }}
           build-args: |
-            BAGISTO_VERSION=${{ steps.version.outputs.bagisto_version }}
+            BAGISTO_VERSION=${{ needs.resolve.outputs.bagisto_version }}
           provenance: false
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ matrix.variant }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.variant }}
           labels: |
-            org.opencontainers.image.title=Bagisto
-            org.opencontainers.image.description=Bagisto production image (Nginx + PHP-FPM 8.3 + MySQL 8.0, fully installed)
-            org.opencontainers.image.version=${{ steps.version.outputs.docker_tag }}
+            org.opencontainers.image.title=Bagisto (${{ matrix.variant }})
+            org.opencontainers.image.description=Bagisto production image (${{ matrix.variant }} + PHP 8.3 + MySQL 8.0, fully installed)
+            org.opencontainers.image.version=${{ needs.resolve.outputs.docker_tag }}
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=MIT
 
       - name: Summary
+        env:
+          IMAGE: ${{ env.IMAGE_NAME }}
+          DOCKER_TAG: ${{ needs.resolve.outputs.docker_tag }}
+          PUSH_LATEST: ${{ needs.resolve.outputs.push_latest }}
+          VARIANT: ${{ matrix.variant }}
         run: |
           {
-            echo "### Published"
+            echo "### Published \`${VARIANT}\`"
             echo ""
-            echo "- Bagisto version: \`${{ steps.version.outputs.bagisto_version }}\`"
-            echo "- Image: \`${{ env.IMAGE_NAME }}:${{ steps.version.outputs.docker_tag }}\`"
-            if [ "${{ steps.version.outputs.push_latest }}" = "true" ]; then
-              echo "- Also tagged: \`${{ env.IMAGE_NAME }}:latest\`"
+            echo "- Bagisto version: \`${{ needs.resolve.outputs.bagisto_version }}\`"
+            echo "- Image: \`${IMAGE}:${DOCKER_TAG}-${VARIANT}\`"
+            if [ "$PUSH_LATEST" = "true" ]; then
+              echo "- Also tagged: \`${IMAGE}:latest-${VARIANT}\`"
+              if [ "$VARIANT" = "nginx" ]; then
+                echo "- Backward-compat tags: \`${IMAGE}:${DOCKER_TAG}\`, \`${IMAGE}:latest\`"
+              fi
             fi
-            echo "- Default branch: \`${{ steps.version.outputs.default_branch }}\` (release on default line: \`${{ steps.version.outputs.on_default_branch }}\`)"
             echo "- Platforms: \`linux/amd64\`, \`linux/arm64\`"
           } >> "$GITHUB_STEP_SUMMARY"

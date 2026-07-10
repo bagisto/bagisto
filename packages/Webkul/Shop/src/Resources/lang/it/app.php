@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Aggiungi allegati',
                 'add-image' => 'Aggiungi Immagine/Video',
+                'invalid-file-type' => 'Il tipo di file selezionato non è consentito.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Benvenuto ospite',
                     'wishlist' => 'Lista dei desideri',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Aggiungi un prodotto alla lista dei desideri del cliente per nome.',
+                'add-to-wishlist-query' => 'Il nome del prodotto o la chiave URL da aggiungere alla lista dei desideri.',
+                'proceed-to-checkout' => 'Apri la pagina di pagamento per iniziare a effettuare un ordine degli articoli nel carrello.',
+                'search-products' => 'Cerca prodotti nel catalogo del negozio per parola chiave e apri i risultati corrispondenti.',
+                'search-products-query' => 'Le parole chiave o il nome del prodotto da cercare nel catalogo.',
+                'subscribe-newsletter' => 'Iscrivi un indirizzo email alla newsletter del negozio.',
+                'subscribe-newsletter-email' => 'L\'indirizzo email da iscrivere alla newsletter.',
+                'view-cart' => 'Apri la pagina del carrello affinché il cliente possa rivedere i prodotti aggiunti.',
+                'view-product' => 'Apri la pagina di dettaglio di un prodotto per nome del prodotto.',
+                'view-product-query' => 'Il nome del prodotto o la chiave URL da aprire.',
+                'view-wishlist' => 'Apri la pagina della lista dei desideri per rivedere i prodotti salvati del cliente.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Diminuisci quantità',
             'increase-quantity' => 'Aumenta quantità',
+            'remove-item' => 'Rimuovi articolo',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Accetta',
-                'awaiting' => 'In attesa',
-                'canceled' => 'Annullato',
-                'declined' => 'Declinato',
-                'dispatched-package' => 'Pacchetto Spedito',
+                'accept' => 'Approvato',
+                'awaiting' => 'In attesa del reso',
+                'canceled' => 'Richiesta annullata',
+                'declined' => 'Richiesta rifiutata',
+                'dispatched-package' => 'Reso in transito',
                 'item-canceled' => 'Articolo Annullato',
                 'not-received-package-yet' => 'Pacchetto non ancora ricevuto',
-                'pending' => 'In sospeso',
+                'pending' => 'In attesa di revisione',
                 'processing' => 'In lavorazione',
-                'received-package' => 'Pacchetto Ricevuto',
+                'received-package' => 'Rimborsato',
                 'solved' => 'Risolto',
             ],
 

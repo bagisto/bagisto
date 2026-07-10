@@ -24,6 +24,7 @@ it('should fail the validation with errors when certain field not provided when 
     postJson(route('admin.marketing.search_seo.sitemaps.store'))
         ->assertJsonValidationErrorFor('file_name')
         ->assertJsonValidationErrorFor('path')
+        ->assertJsonValidationErrorFor('channels')
         ->assertUnprocessable();
 });
 
@@ -34,6 +35,7 @@ it('should store the newly created sitemap', function () {
     postJson(route('admin.marketing.search_seo.sitemaps.store'), [
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
         'path' => $filePath = '/',
+        'channels' => [core()->getCurrentChannel()->id],
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.create.success'));
@@ -58,6 +60,7 @@ it('should fail the validation with errors when certain field not provided when 
     putJson(route('admin.marketing.search_seo.sitemaps.update', $sitemap->id))
         ->assertJsonValidationErrorFor('file_name')
         ->assertJsonValidationErrorFor('path')
+        ->assertJsonValidationErrorFor('channels')
         ->assertUnprocessable();
 });
 
@@ -72,6 +75,7 @@ it('should update the sitemap', function () {
         'id' => $sitemap->id,
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
         'path' => $sitemap->path,
+        'channels' => [core()->getCurrentChannel()->id],
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.edit.success'));

@@ -85,7 +85,10 @@
                     v-if="isOpen"
                 >
                     <div class="flex min-h-screen items-end justify-center p-4 sm:items-center sm:p-0">
-                        <div class="box-shadow relative z-[999] w-screen max-w-[568px] rounded-lg bg-white dark:bg-gray-900 max-lg:mb-4 max-lg:mt-4 max-md:w-[90%]">
+                        <div
+                            class="box-shadow relative z-[999] w-screen rounded-lg bg-white dark:bg-gray-900 max-lg:mb-4 max-lg:mt-4 max-md:w-[90%]"
+                            :class="panelClass || 'max-w-[568px]'"
+                        >
                             <!-- Header Slot -->
                             <slot
                                 name="header"
@@ -110,7 +113,7 @@
         app.component('v-modal', {
             template: '#v-modal-template',
 
-            props: ['isActive'],
+            props: ['isActive', 'panelClass'],
 
             data() {
                 return {

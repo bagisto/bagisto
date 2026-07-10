@@ -109,23 +109,29 @@ export class CheckoutHelper extends BasePage {
     }
 
     get clickLink() {
-        return this.page.locator('label.icon-uncheck');
+        return this.page.locator("label.icon-uncheck");
     }
 
     get eventTicket() {
-        return this.page.locator('div.place-items-end>div.flex>span.icon-plus[aria-label="Increase Quantity"]')
+        return this.page.locator(
+            'div.place-items-end>div.flex>span.icon-plus[aria-label="Increase Quantity"]',
+        );
     }
 
     get hourlyRadio() {
-        return this.page.locator('span.flex>label[for="booking[hourly]"].icon-radio-unselect')
+        return this.page.locator(
+            'span.flex>label[for="booking[hourly]"].icon-radio-unselect',
+        );
     }
 
     get dailyRadio() {
-        return this.page.locator('span.flex>label[for="booking[daily]"].icon-radio-unselect')
+        return this.page.locator(
+            'span.flex>label[for="booking[daily]"].icon-radio-unselect',
+        );
     }
 
     getMinimizebtn() {
-        return this.page.locator('a.phpdebugbar-minimize-btn')
+        return this.page.locator("a.phpdebugbar-minimize-btn");
     }
 
     get bookingDateInput() {
@@ -157,7 +163,9 @@ export class CheckoutHelper extends BasePage {
     }
 
     get flatpickrEnabledDates() {
-        return this.page.locator(".flatpickr-day:not(.disabled):not(.prevMonthDay):not(.nextMonthDay)");
+        return this.page.locator(
+            ".flatpickr-day:not(.disabled):not(.prevMonthDay):not(.nextMonthDay)",
+        );
     }
 
     get flatpickrOpenEnabledDates() {
@@ -167,11 +175,13 @@ export class CheckoutHelper extends BasePage {
     }
 
     get flatpickrNextMonthButton() {
-        return this.page.locator(".flatpickr-next-month");
+        return this.page.locator(
+            ".flatpickr-calendar.open .flatpickr-next-month",
+        );
     }
 
     get orderIdHeading() {
-        return this.page.locator('p.text-xl:has(.text-blue-700)').first();
+        return this.page.locator("p.text-xl:has(.text-blue-700)").first();
     }
 
     get cartSummaryToggle() {
@@ -195,7 +205,9 @@ export class CheckoutHelper extends BasePage {
     }
 
     get bookingItemsWillNotBeCanceledText() {
-        return this.page.getByText(" Booking Items Will Not Be Canceled ").first();
+        return this.page
+            .getByText(" Booking Items Will Not Be Canceled ")
+            .first();
     }
 
     get cancellationNotAllowedText() {
@@ -207,19 +219,27 @@ export class CheckoutHelper extends BasePage {
     }
 
     get canCreateTransactionToggle() {
-        return this.page.locator('div.mb-4:has(label[for="can_create_transaction"])');
+        return this.page.locator(
+            'div.mb-4:has(label[for="can_create_transaction"])',
+        );
     }
 
     get createInvoiceButton() {
-        return this.page.getByRole("button", { name: " Create Invoice " }).first();
+        return this.page
+            .getByRole("button", { name: " Create Invoice " })
+            .first();
     }
 
     get invoiceCreatedSuccessText() {
-        return this.page.getByText("Invoice created successfully", { exact: false }).first();
+        return this.page
+            .getByText("Invoice created successfully", { exact: false })
+            .first();
     }
 
     get slotGraphEvent() {
-        return this.page.locator("div.vuecal__event:has(div.slot.border-emerald-500)").first();
+        return this.page
+            .locator("div.vuecal__event:has(div.slot.border-emerald-500)")
+            .first();
     }
 
     slotGraphTimeText(slotGraph: Locator) {
@@ -256,11 +276,15 @@ export class CheckoutHelper extends BasePage {
     }
 
     get cancelOrderAction() {
-        return this.page.locator("div.transparent-button:has(span.icon-cancel)");
+        return this.page.locator(
+            "div.transparent-button:has(span.icon-cancel)",
+        );
     }
 
     get refundButton() {
-        return this.page.getByRole("button", { name: " Refund ", exact: true }).first();
+        return this.page
+            .getByRole("button", { name: " Refund ", exact: true })
+            .first();
     }
 
     get refundCreatedSuccessText() {
@@ -272,7 +296,9 @@ export class CheckoutHelper extends BasePage {
     }
 
     customerSlotByName(customerName: string) {
-        return this.page.locator(`div.slot:has-text('${customerName}')`).first();
+        return this.page
+            .locator(`div.slot:has-text('${customerName}')`)
+            .first();
     }
 
     /**

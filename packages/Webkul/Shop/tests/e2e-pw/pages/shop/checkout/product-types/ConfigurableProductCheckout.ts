@@ -15,8 +15,8 @@ export class ConfigurableProductCheckout extends CheckoutHelper {
      * Select product options
      */
     private async selectProductOptions() {
-        await this.page.getByLabel("Color").selectOption("4");
-        await this.page.getByLabel("Size").selectOption("8");
+        await this.page.getByLabel("Color").selectOption({label: "Red"});
+        await this.page.getByLabel("Size").selectOption({label: "S"});
         await this.addToCartButton.click();
     }
 

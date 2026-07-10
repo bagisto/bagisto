@@ -80,12 +80,29 @@ class ImageCacheController extends Controller
     protected function getLogo(): Response
     {
         try {
-            $content = $this->fetchFromUrl(self::BAGISTO_LOGO);
+            $content = $this->fetchFromUrl($this->getLogoUrl());
 
             return $this->buildResponse($content);
         } catch (Exception) {
             abort(404, 'Unable to fetch logo.');
         }
+    }
+
+    /**
+     * Build the logo URL, appending any tracked modules so the tracker can record which
+     * modules this installation is running against its live instance.
+     */
+    protected function getLogoUrl(): string
+    {
+        $url = self::BAGISTO_LOGO;
+
+        $modules = array_values(config('bagisto.tracked_modules', []));
+
+        if (! empty($modules)) {
+            $url .= (str_contains($url, '?') ? '&' : '?').http_build_query(['modules' => $modules]);
+        }
+
+        return $url;
     }
 
     /**

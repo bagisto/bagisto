@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Adicionar Anexos',
                 'add-image' => 'Adicionar Imagem/Vídeo',
+                'invalid-file-type' => 'O tipo de arquivo selecionado não é permitido.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Bem-vindo convidado',
                     'wishlist' => 'Lista de desejos',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Adicione um produto à lista de desejos do cliente pelo nome.',
+                'add-to-wishlist-query' => 'O nome do produto ou a chave de URL para adicionar à lista de desejos.',
+                'proceed-to-checkout' => 'Abra a página de checkout para começar a fazer um pedido dos itens no carrinho.',
+                'search-products' => 'Pesquise produtos no catálogo da loja por palavra-chave e abra os resultados correspondentes.',
+                'search-products-query' => 'As palavras-chave ou o nome do produto a pesquisar no catálogo.',
+                'subscribe-newsletter' => 'Inscreva um endereço de e-mail na newsletter da loja.',
+                'subscribe-newsletter-email' => 'O endereço de e-mail para se inscrever na newsletter.',
+                'view-cart' => 'Abra a página do carrinho para que o cliente possa revisar os produtos que adicionou.',
+                'view-product' => 'Abra a página de detalhes de um produto pelo nome do produto.',
+                'view-product-query' => 'O nome do produto ou a chave de URL a abrir.',
+                'view-wishlist' => 'Abra a página da lista de desejos para revisar os produtos salvos do cliente.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Diminuir Quantidade',
             'increase-quantity' => 'Aumentar Quantidade',
+            'remove-item' => 'Remover item',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Aceitar',
-                'awaiting' => 'Aguardando',
-                'canceled' => 'Cancelado',
-                'declined' => 'Recusado',
-                'dispatched-package' => 'Pacote Enviado',
+                'accept' => 'Aprovado',
+                'awaiting' => 'Aguardando devolução',
+                'canceled' => 'Solicitação cancelada',
+                'declined' => 'Solicitação recusada',
+                'dispatched-package' => 'Devolução em trânsito',
                 'item-canceled' => 'Item Cancelado',
                 'not-received-package-yet' => 'Ainda não recebido o pacote',
-                'pending' => 'Pendente',
+                'pending' => 'Revisão pendente',
                 'processing' => 'Processando',
-                'received-package' => 'Pacote Recebido',
+                'received-package' => 'Reembolsado',
                 'solved' => 'Resolvido',
             ],
 

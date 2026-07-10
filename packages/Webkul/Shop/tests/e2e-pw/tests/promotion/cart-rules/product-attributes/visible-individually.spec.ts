@@ -96,10 +96,10 @@ test.afterEach(async ({ adminPage }) => {
 });
 
 const cases = [
-    { operator: "==", type: "fixed", option: "1" },
-    { operator: "==", type: "percentage", option: "1" },
-    { operator: "!=", type: "fixed", option: "0" },
-    { operator: "!=", type: "percentage", option: "0" },
+    { operator: "==", type: "fixed", option: "Yes" },
+    { operator: "==", type: "percentage", option: "Yes" },
+    { operator: "!=", type: "fixed", option: "No" },
+    { operator: "!=", type: "percentage", option: "No" },
 ];
 
 test.describe("cart rules", () => {

@@ -108,12 +108,12 @@ test.afterEach(async ({ adminPage }) => {
 const testCases = [
     {
         operator: "==",
-        optionSelect: "moneytransfer",
+        optionSelect: "Money Transfer",
         label: "is equal to",
     },
     {
         operator: "!=",
-        optionSelect: "cashondelivery",
+        optionSelect: "Cash On Delivery",
         label: "is not equal to",
     },
 ];

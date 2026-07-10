@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => '添付ファイルを追加',
                 'add-image' => '画像/ビデオを追加',
+                'invalid-file-type' => '選択されたファイル形式は許可されていません。',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'ゲストようこそ',
                     'wishlist' => 'ウィッシュリスト',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => '名前で商品を顧客のお気に入りリストに追加します。',
+                'add-to-wishlist-query' => 'お気に入りリストに追加する商品名またはURLキー。',
+                'proceed-to-checkout' => 'カート内の商品の注文を開始するために、チェックアウトページを開きます。',
+                'search-products' => 'キーワードでストアのカタログから商品を検索し、一致する結果を開きます。',
+                'search-products-query' => 'カタログを検索するキーワードまたは商品名。',
+                'subscribe-newsletter' => 'メールアドレスをストアのニュースレターに登録します。',
+                'subscribe-newsletter-email' => 'ニュースレターに登録するメールアドレス。',
+                'view-cart' => '顧客が追加した商品を確認できるよう、ショッピングカートのページを開きます。',
+                'view-product' => '商品名で商品の詳細ページを開きます。',
+                'view-product-query' => '開く商品名またはURLキー。',
+                'view-wishlist' => '顧客が保存した商品を確認するためにお気に入りリストのページを開きます。',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => '数量を減らす',
             'increase-quantity' => '数量を増やす',
+            'remove-item' => 'アイテムを削除',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => '承諾',
-                'awaiting' => '待機中',
-                'canceled' => 'キャンセルされました',
-                'declined' => '拒否されました',
-                'dispatched-package' => 'パッケージを発送しました',
+                'accept' => '承認済み',
+                'awaiting' => '返品待ち',
+                'canceled' => 'リクエストキャンセル済み',
+                'declined' => 'リクエスト却下',
+                'dispatched-package' => '返品輸送中',
                 'item-canceled' => 'アイテムがキャンセルされました',
                 'not-received-package-yet' => 'まだパッケージを受け取っていません',
-                'pending' => '保留中',
+                'pending' => '審査待ち',
                 'processing' => '処理中',
-                'received-package' => 'パッケージを受け取りました',
+                'received-package' => '返金済み',
                 'solved' => '解決済み',
             ],
 

@@ -186,7 +186,7 @@ class Importer extends AbstractImporter
             'customer_group_code' => 'required',
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'gender' => 'required:in,Male,Female,Other',
+            'gender' => 'required|in:Male,Female,Other',
             'email' => 'required|email',
             'date_of_birth' => [
                 'required',

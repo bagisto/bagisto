@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Add attachments',
                 'add-image' => 'Add Image/Video',
+                'invalid-file-type' => 'The selected file type is not allowed.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Welcome Guest',
                     'wishlist' => 'Wishlist',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Add a product to the customer\'s wishlist by name.',
+                'add-to-wishlist-query' => 'The product name or URL key to add to the wishlist.',
+                'proceed-to-checkout' => 'Open the checkout page to start placing an order for the items currently in the cart.',
+                'search-products' => 'Search the store catalog for products by keyword and open the matching results.',
+                'search-products-query' => 'The keywords or product name to search the catalog for.',
+                'subscribe-newsletter' => 'Subscribe an email address to the store newsletter.',
+                'subscribe-newsletter-email' => 'The email address to subscribe to the newsletter.',
+                'view-cart' => 'Open the shopping cart page so the customer can review the products they have added.',
+                'view-product' => 'Open a product\'s detail page by product name.',
+                'view-product-query' => 'The product name or URL key to open.',
+                'view-wishlist' => 'Open the wishlist page to review the customer\'s saved products.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Decrease Quantity',
             'increase-quantity' => 'Increase Quantity',
+            'remove-item' => 'Remove Item',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Accept',
-                'awaiting' => 'Awaiting',
-                'canceled' => 'Canceled',
-                'declined' => 'Declined',
-                'dispatched-package' => 'Dispatched Package',
+                'accept' => 'Approved',
+                'awaiting' => 'Awaiting Return',
+                'canceled' => 'Request Canceled',
+                'declined' => 'Request Declined',
+                'dispatched-package' => 'Return In Transit',
                 'item-canceled' => 'Item Canceled',
                 'not-received-package-yet' => 'Not received package yet',
-                'pending' => 'Pending',
+                'pending' => 'Pending Review',
                 'processing' => 'Processing',
-                'received-package' => 'Received Package',
+                'received-package' => 'Refunded',
                 'solved' => 'Solved',
             ],
 

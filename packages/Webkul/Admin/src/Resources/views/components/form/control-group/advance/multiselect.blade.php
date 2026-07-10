@@ -3,6 +3,7 @@
     'options'     => [],
     'value'       => [],
     'placeholder' => '',
+    'label'       => '',
 ])
 
 <v-multiselect
@@ -11,6 +12,7 @@
     :options="{{ json_encode($options) }}"
     :value="{{ json_encode(array_values((array) $value)) }}"
     placeholder="{{ $placeholder ?: trans('admin::app.components.datagrid.toolbar.search.title') }}"
+    label="{{ $label }}"
     {{ $attributes }}
 >
     <div class="shimmer h-[42px] w-full rounded-md"></div>
@@ -25,6 +27,7 @@
             <v-field
                 :name="name"
                 :rules="rules"
+                :label="label"
                 v-model="selectedIds"
                 v-slot="{ errors }"
             >
@@ -34,6 +37,7 @@
                         errors.length ? 'border !border-red-600 hover:!border-red-600' : '',
                         isOpen ? 'border-gray-400 dark:border-gray-400' : '',
                     ]"
+                    :name="name"
                     @click="toggleDropdown"
                 >
                     <span
@@ -146,6 +150,11 @@
                 },
 
                 placeholder: {
+                    type: String,
+                    default: '',
+                },
+
+                label: {
                     type: String,
                     default: '',
                 },

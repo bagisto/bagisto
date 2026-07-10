@@ -215,9 +215,16 @@
             methods: {
                 onFileChange(event) {
                     let files = event.target.files;
+                    let hasInvalid = false;
 
                     for (let i = 0; i < files.length; i++) {
                         let file = files[i];
+
+                        if (! this.isAcceptedType(file)) {
+                            hasInvalid = true;
+
+                            continue;
+                        }
 
                         let reader = new FileReader();
 
@@ -241,14 +248,28 @@
 
                         reader.readAsDataURL(file);
                     }
+
+                    if (hasInvalid) {
+                        this.notifyInvalidType();
+
+                        event.target.value = '';
+                    }
                 },
 
                 handleDroppedFiles(files) {
+                    let hasInvalid = false;
+
                     for (let i = 0; i < files.length; i++) {
                         let file = files[i];
 
+                        if (! this.isAcceptedType(file)) {
+                            hasInvalid = true;
+
+                            continue;
+                        }
+
                         let reader = new FileReader();
-                        
+
                         reader.onload = () => {
                             if (! this.isMultiple) {
                                 this.uploadedFiles = {
@@ -268,6 +289,34 @@
 
                         reader.readAsDataURL(file);
                     }
+
+                    if (hasInvalid) {
+                        this.notifyInvalidType();
+                    }
+                },
+
+                isAcceptedType(file) {
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim())
+                        .filter(Boolean);
+
+                    if (! types.length || types.includes('*') || types.includes('*/*')) {
+                        return true;
+                    }
+
+                    return types.some(type =>
+                        type.endsWith('/*')
+                            ? file.type.startsWith(type.slice(0, -1))
+                            : file.type === type
+                    );
+                },
+
+                notifyInvalidType() {
+                    this.$emitter.emit('add-flash', {
+                        type: 'warning',
+                        message: "@lang('shop::app.components.media.index.invalid-file-type')",
+                    });
                 },
 
                 isImage(file) {

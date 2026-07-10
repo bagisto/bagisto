@@ -1686,6 +1686,89 @@ it('should store the payment method for customer', function () {
     $this->assertPrice($product->price, $response['cart']['sub_total']);
 });
 
+it('should not store cash on delivery as the payment method for a downloadable only cart', function () {
+    // Arrange.
+    $product = (new ProductFaker([
+        'attributes' => [
+            5 => 'new',
+        ],
+
+        'attribute_value' => [
+            'new' => [
+                'boolean_value' => true,
+            ],
+        ],
+    ]))
+        ->getDownloadableProductFactory()
+        ->create();
+
+    $customer = Customer::factory()->create();
+
+    $cart = Cart::factory()->create([
+        'customer_id' => $customer->id,
+        'customer_first_name' => $customer->first_name,
+        'customer_last_name' => $customer->last_name,
+        'customer_email' => $customer->email,
+        'is_guest' => 0,
+    ]);
+
+    $additional = [
+        'product_id' => $product->id,
+        'rating' => '0',
+        'is_buy_now' => '0',
+        'quantity' => '1',
+    ];
+
+    CartItem::factory()->create([
+        'cart_id' => $cart->id,
+        'product_id' => $product->id,
+        'sku' => $product->sku,
+        'quantity' => 1,
+        'name' => $product->name,
+        'price' => $convertedPrice = core()->convertPrice($price = $product->price),
+        'price_incl_tax' => $convertedPrice,
+        'base_price' => $price,
+        'base_price_incl_tax' => $price,
+        'total' => $convertedPrice,
+        'total_incl_tax' => $convertedPrice,
+        'base_total' => $price,
+        'weight' => 0,
+        'total_weight' => 0,
+        'base_total_weight' => 0,
+        'type' => $product->type,
+        'additional' => $additional,
+    ]);
+
+    CartAddress::factory()->create([
+        'cart_id' => $cart->id,
+        'address_type' => CartAddress::ADDRESS_TYPE_BILLING,
+    ]);
+
+    cart()->setCart($cart);
+
+    // Act and Assert.
+    $this->loginAsCustomer($customer);
+
+    /**
+     * Cash On Delivery is not available for a cart that has non-stockable
+     * (downloadable) items, so the crafted request must be rejected server-side
+     * even though the front-end already hides the option.
+     */
+    postJson(route('shop.checkout.onepage.payment_methods.store'), [
+        'payment' => [
+            'method' => 'cashondelivery',
+            'method_title' => 'Cash On Delivery',
+        ],
+    ])
+        ->assertForbidden()
+        ->assertJsonPath('redirect_url', route('shop.checkout.cart.index'));
+
+    $this->assertDatabaseMissing('cart_payment', [
+        'cart_id' => $cart->id,
+        'method' => 'cashondelivery',
+    ]);
+});
+
 it('should place a simple product order for a guest user', function () {
     // Arrange.
     $product = (new ProductFaker([
@@ -3129,7 +3212,7 @@ it('should place a virtual product order for a guest user', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3266,7 +3349,7 @@ it('should place a virtual product order for a guest user and send email to the 
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3413,7 +3496,7 @@ it('should place a virtual product order for a customer', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3558,7 +3641,7 @@ it('should place a virtual product order for a customer and send email to the us
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3710,7 +3793,7 @@ it('should place a downloadable product order for a customer', function () {
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -3851,7 +3934,7 @@ it('should place a downloadable product order for a customer and send email to t
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 
@@ -4945,7 +5028,7 @@ it('should place order with two products with simple and downloadable product ty
 
     $cartPayment = CartPayment::factory()->create([
         'cart_id' => $cart->id,
-        'method' => $paymentMethod = 'cashondelivery',
+        'method' => $paymentMethod = 'moneytransfer',
         'method_title' => core()->getConfigData('sales.payment_methods.'.$paymentMethod.'.title'),
     ]);
 

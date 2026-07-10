@@ -35,17 +35,46 @@ class EnvironmentManager
      */
     public function getEnvVariable(string $key, $default = null): string|bool
     {
-        if ($data = file(base_path('.env'))) {
-            foreach ($data as $line) {
-                $line = preg_replace('/\s+/', '', $line);
+        $lines = file(base_path('.env'));
 
-                $rowValues = explode('=', $line);
+        if ($lines === false) {
+            return $default;
+        }
 
-                if (strlen($line) !== 0) {
-                    if (strpos($key, $rowValues[0]) !== false) {
-                        return trim($rowValues[1], '"');
-                    }
-                }
+        return $this->resolveEnvVariable($lines, $key, $default);
+    }
+
+    /**
+     * Resolve an environment variable value from the given `.env` file lines.
+     *
+     * @param  array<int, string>  $lines
+     * @param  mixed  $default
+     */
+    protected function resolveEnvVariable(array $lines, string $key, $default = null): string|bool
+    {
+        foreach ($lines as $line) {
+            $line = trim($line);
+
+            /**
+             * Skip blank lines and comments.
+             */
+            if ($line === '' || str_starts_with($line, '#')) {
+                continue;
+            }
+
+            /**
+             * Split on the first `=` only, so values that themselves contain
+             * `=` (e.g. passwords or tokens) are preserved intact instead of
+             * being truncated at the first `=`.
+             */
+            $rowValues = explode('=', $line, 2);
+
+            if (count($rowValues) !== 2) {
+                continue;
+            }
+
+            if (trim($rowValues[0]) === $key) {
+                return trim(trim($rowValues[1]), '"');
             }
         }
 

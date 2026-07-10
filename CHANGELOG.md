@@ -2,7 +2,17 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.4.8 (8th of July 2026)** - *Release*
+
+- Security fixes.
+
+- Added a "remove item" affordance to the storefront quantity selector: on the cart and mini-cart, when a line item's quantity reaches the minimum (1) the minus icon is replaced with a trash icon that removes the item. Enabled via an opt-in `removable` prop on the `quantity-changer` component (default off), so add-to-cart quantity selectors on product, bundle, grouped, booking, and wishlist pages keep their existing behavior.
+
+- Fixed the installer's `.env` parser (`EnvironmentManager::getEnvVariable()`) truncating environment values that contain an `=` (e.g. `DB_PASSWORD="examplePassword="`), which caused database authentication failures during `php artisan bagisto:install` even though the same `.env` worked with standard Laravel commands. Values are now split on the first `=` only; the parser also preserves spaces inside quoted values and matches keys exactly instead of by substring.
+
+- Made sitemaps channel-wise: a sitemap can now be assigned to one or more channels (via a new `sitemap_channels` pivot table), and the sitemap files are generated per channel — each using that channel's hostname, root-category subtree, and channel-scoped products and CMS pages, written under `sitemaps/<channel-code>/`. The admin sitemap listing shows the associated channels and a per-channel "Link for Google" for each entry.
+
+## **v2.4.7 (24th of June 2026)** - *Release*
 
 - Security fixes.
 
@@ -11,6 +21,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - #11344 [fixed] - Fixed incorrect payment amounts for currencies whose ISO 4217 minor units are not two decimals in the Stripe and PayPal gateways. Currencies are now seeded with a `decimal` value (e.g. `0` for JPY/KRW, `3` for KWD/BHD, `2` by default); Stripe converts amounts to the smallest currency unit using `10 ^ decimal` instead of a hardcoded `× 100`, and PayPal rounds to the currency's decimal places, preventing 100× overcharges on zero-decimal currencies and undercharges on three-decimal currencies.
 
 - #11331 [fixed] - Replaced deprecated Venezuelan Bolivar currency code `VEF` with `VES` in seeders and installer configurations, ensuring correct exchange rate synchronization with modern exchange rate APIs.
+
+- #11316 [fixed] - Fixed the rich-text (TinyMCE) sanitizer stripping tables and `class`/`style` attributes from product/category descriptions, CMS pages, and email templates on save, so tables and formatting inserted in the editor no longer disappear. The HTMLPurifier allowlist now permits table elements and `class`/`style` (with an expanded set of safe CSS properties) while still removing scripts, event handlers, `javascript:`/`data:` URLs, and unsafe CSS. Also fixed theme static-content custom CSS being corrupted by the HTML purifier — valid selectors such as the `>` child combinator were entity-encoded — by sanitizing it against `</style>` context breakout instead of running it through the HTML purifier.
 
 - #10963 [fixed] - Fixed a required multiselect attribute on the product edit page failing validation on save until the field was manually re-interacted with, because the previously saved values were not registered with the form validator on page load.
 

@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'הוסף קבצים מצורפים',
                 'add-image' => 'הוסף תמונה/וידאו',
+                'invalid-file-type' => 'סוג הקובץ שנבחר אינו מותר.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'ברוך הבא אורח',
                     'wishlist' => 'רשימת משאלות',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'הוסף מוצר לרשימת המשאלות של הלקוח לפי שם.',
+                'add-to-wishlist-query' => 'שם המוצר או מפתח ה-URL להוספה לרשימת המשאלות.',
+                'proceed-to-checkout' => 'פתח את עמוד התשלום כדי להתחיל בביצוע הזמנה של הפריטים בעגלה.',
+                'search-products' => 'חפש מוצרים בקטלוג החנות לפי מילת מפתח ופתח את התוצאות התואמות.',
+                'search-products-query' => 'מילות המפתח או שם המוצר לחיפוש בקטלוג.',
+                'subscribe-newsletter' => 'רשום כתובת אימייל לניוזלטר של החנות.',
+                'subscribe-newsletter-email' => 'כתובת האימייל להרשמה לניוזלטר.',
+                'view-cart' => 'פתח את עמוד עגלת הקניות כדי שהלקוח יוכל לעיין במוצרים שהוסיף.',
+                'view-product' => 'פתח את עמוד הפרטים של מוצר לפי שם המוצר.',
+                'view-product-query' => 'שם המוצר או מפתח ה-URL לפתיחה.',
+                'view-wishlist' => 'פתח את עמוד רשימת המשאלות כדי לעיין במוצרים השמורים של הלקוח.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'הפחת כמות',
             'increase-quantity' => 'הגדל כמות',
+            'remove-item' => 'הסר פריט',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'קבל',
-                'awaiting' => 'ממתין',
-                'canceled' => 'בוטל',
-                'declined' => 'נדחה',
-                'dispatched-package' => 'חבילה שנשלחה',
+                'accept' => 'אושר',
+                'awaiting' => 'ממתין להחזרה',
+                'canceled' => 'הבקשה בוטלה',
+                'declined' => 'הבקשה נדחתה',
+                'dispatched-package' => 'ההחזרה בדרך',
                 'item-canceled' => 'פריט בוטל',
                 'not-received-package-yet' => 'טרם התקבלה החבילה',
-                'pending' => 'ממתין לטיפול',
+                'pending' => 'ממתין לבדיקה',
                 'processing' => 'מעבד',
-                'received-package' => 'החבילה התקבלה',
+                'received-package' => 'הוחזר כספית',
                 'solved' => 'פתרון נמצא',
             ],
 

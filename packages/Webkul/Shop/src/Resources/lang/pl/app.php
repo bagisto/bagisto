@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Dodaj załączniki',
                 'add-image' => 'Dodaj Obraz/Wideo',
+                'invalid-file-type' => 'Wybrany typ pliku jest niedozwolony.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Witamy gościa',
                     'wishlist' => 'Lista życzeń',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Dodaj produkt do listy życzeń klienta według nazwy.',
+                'add-to-wishlist-query' => 'Nazwa produktu lub klucz URL do dodania do listy życzeń.',
+                'proceed-to-checkout' => 'Otwórz stronę kasy, aby rozpocząć składanie zamówienia na produkty z koszyka.',
+                'search-products' => 'Wyszukaj produkty w katalogu sklepu według słowa kluczowego i otwórz pasujące wyniki.',
+                'search-products-query' => 'Słowa kluczowe lub nazwa produktu do wyszukania w katalogu.',
+                'subscribe-newsletter' => 'Zapisz adres e-mail do newslettera sklepu.',
+                'subscribe-newsletter-email' => 'Adres e-mail do zapisania się do newslettera.',
+                'view-cart' => 'Otwórz stronę koszyka, aby klient mógł przejrzeć dodane produkty.',
+                'view-product' => 'Otwórz stronę szczegółów produktu według nazwy produktu.',
+                'view-product-query' => 'Nazwa produktu lub klucz URL do otwarcia.',
+                'view-wishlist' => 'Otwórz stronę listy życzeń, aby przejrzeć zapisane produkty klienta.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Zmniejsz Ilość',
             'increase-quantity' => 'Zwiększ Ilość',
+            'remove-item' => 'Usuń przedmiot',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Akceptuj',
-                'awaiting' => 'Oczekujące',
-                'canceled' => 'Anulowano',
-                'declined' => 'Odrzucony',
-                'dispatched-package' => 'Wysłane paczka',
+                'accept' => 'Zatwierdzono',
+                'awaiting' => 'Oczekiwanie na zwrot',
+                'canceled' => 'Żądanie anulowane',
+                'declined' => 'Żądanie odrzucone',
+                'dispatched-package' => 'Zwrot w drodze',
                 'item-canceled' => 'Anulowany przedmiot',
                 'not-received-package-yet' => 'Jeszcze nie otrzymane paczki',
-                'pending' => 'Oczekujący',
+                'pending' => 'Oczekuje na przegląd',
                 'processing' => 'Przetwarzanie',
-                'received-package' => 'Otrzymane paczka',
+                'received-package' => 'Zwrócono',
                 'solved' => 'Rozwiązany',
             ],
 

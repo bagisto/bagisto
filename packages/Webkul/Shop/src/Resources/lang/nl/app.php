@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Bijlagen toevoegen',
                 'add-image' => 'Afbeelding/Video toevoegen',
+                'invalid-file-type' => 'Het geselecteerde bestandstype is niet toegestaan.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Welkom gast',
                     'wishlist' => 'Verlanglijst',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Voeg een product op naam toe aan de verlanglijst van de klant.',
+                'add-to-wishlist-query' => 'De productnaam of URL-sleutel om aan de verlanglijst toe te voegen.',
+                'proceed-to-checkout' => 'Open de afrekenpagina om een bestelling te plaatsen voor de artikelen in de winkelwagen.',
+                'search-products' => 'Zoek producten in de winkelcatalogus op trefwoord en open de overeenkomende resultaten.',
+                'search-products-query' => 'De trefwoorden of productnaam om in de catalogus te zoeken.',
+                'subscribe-newsletter' => 'Schrijf een e-mailadres in voor de nieuwsbrief van de winkel.',
+                'subscribe-newsletter-email' => 'Het e-mailadres om in te schrijven voor de nieuwsbrief.',
+                'view-cart' => 'Open de winkelwagenpagina zodat de klant de toegevoegde producten kan bekijken.',
+                'view-product' => 'Open de detailpagina van een product op productnaam.',
+                'view-product-query' => 'De productnaam of URL-sleutel om te openen.',
+                'view-wishlist' => 'Open de verlanglijstpagina om de opgeslagen producten van de klant te bekijken.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Hoeveelheid verminderen',
             'increase-quantity' => 'Hoeveelheid verhogen',
+            'remove-item' => 'Item verwijderen',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Accepteren',
-                'awaiting' => 'In afwachting',
-                'canceled' => 'Geannuleerd',
-                'declined' => 'Afgewezen',
-                'dispatched-package' => 'Pakket verzonden',
+                'accept' => 'Goedgekeurd',
+                'awaiting' => 'Wachten op retour',
+                'canceled' => 'Verzoek geannuleerd',
+                'declined' => 'Verzoek afgewezen',
+                'dispatched-package' => 'Retour onderweg',
                 'item-canceled' => 'Item geannuleerd',
                 'not-received-package-yet' => 'Pakket nog niet ontvangen',
-                'pending' => 'In afwachting',
+                'pending' => 'In afwachting van beoordeling',
                 'processing' => 'Verwerking',
-                'received-package' => 'Pakket ontvangen',
+                'received-package' => 'Terugbetaald',
                 'solved' => 'Opgelost',
             ],
 

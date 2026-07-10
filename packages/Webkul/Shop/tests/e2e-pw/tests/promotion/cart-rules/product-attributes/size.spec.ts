@@ -66,7 +66,9 @@ async function createRuleAndVerifySize({
     await ruleCreatePage.saveCartRule();
     await page.goto("admin/catalog/products");
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
-    await page.locator('select[name="size"]').first().selectOption(productSize);
+    await page.waitForLoadState("networkidle");
+    await page.locator('span:text-is("Size")').click();
+    await page.locator(`span:text-is("${productSize}")`).click();
     await page.locator('button:has-text("Save Product")').first().click();
 
     await expect(page.getByText("Product updated successfully")).toBeVisible();
@@ -103,26 +105,26 @@ const cases = [
     {
         operator: "==",
         type: "fixed",
-        ruleSize: "6",
-        productSize: "6",
+        ruleSize: "S",
+        productSize: "S",
     },
     {
         operator: "==",
         type: "percentage",
-        ruleSize: "6",
-        productSize: "6",
+        ruleSize: "S",
+        productSize: "S",
     },
     {
         operator: "!=",
         type: "fixed",
-        ruleSize: "6",
-        productSize: "7",
+        ruleSize: "L",
+        productSize: "S",
     },
     {
         operator: "!=",
         type: "percentage",
-        ruleSize: "6",
-        productSize: "7",
+        ruleSize: "L",
+        productSize: "S",
     },
 ];
 

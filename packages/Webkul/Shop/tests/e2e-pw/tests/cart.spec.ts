@@ -44,6 +44,141 @@ test.describe("cart management", () => {
         await shopPage.waitForTimeout(CART_WAITING_TIME);
     });
 
+    test("should display bin icon in mini cart drawer", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.openMiniCart();
+        await expect(shopPage.locator(".icon-bin")).toBeVisible();
+    });
+
+    test("should not display bin icon in mini cart drawer when quantity is greater then one", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
+        await cartPage.openMiniCart();
+
+        await cartPage.increaseQuantityFromMiniCart();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
+
+        await cartPage.increaseQuantityFromMiniCart();
+        await shopPage.waitForTimeout(CART_WAITING_TIME);
+
+        await expect(shopPage.locator(".icon-bin")).not.toBeVisible();
+    });
+
+    test("Should delete the cart item when clicking the bin icon", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.openMiniCart();
+        await cartPage.clickBinIcon();
+
+        await expect(
+            shopPage
+                .getByText("Item is successfully removed from the cart.")
+                .first(),
+        ).toBeVisible();
+    });
+
+    test("should display bin icon in cart view page when quantity is one", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
+
+        await cartPage.goToCartView();
+
+        await expect(shopPage.locator(".icon-bin").first()).toBeVisible();
+    });
+
+    test("should not display bin icon in cart view page when quantity is greater than one", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
+
+        await cartPage.goToCartView();
+        await cartPage.increaseQuantityFromCartView();
+
+        await expect(shopPage.locator(".icon-bin")).not.toBeVisible();
+    });
+
+    test("Should delete the cart item when clicking the bin icon in cart view page", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.addFirstProductToCart();
+        await cartPage.expectItemAdded();
+
+        await cartPage.goToCartView();
+        await cartPage.clickBinIconFromCartView();
+
+        await expect(
+            shopPage
+                .getByText("Item is successfully removed from the cart.")
+                .first(),
+        ).toBeVisible();
+    });
+
+    test("should disable the minus icon and not render a bin icon on the product page at minimum quantity", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.openFirstProductFromSearch();
+
+        // The product-page quantity-changer is not removable, so the trash
+        // icon must never render — only a disabled minus at the minimum.
+        await expect(shopPage.locator(".icon-bin")).toHaveCount(0);
+        await expect(shopPage.getByLabel("Decrease Quantity")).toHaveClass(
+            /opacity-40/,
+        );
+    });
+
+    test("should enable the minus icon on the product page when quantity is greater than one", async ({
+        shopPage,
+    }) => {
+        const cartPage = new CartPage(shopPage);
+
+        await cartPage.gotoHome();
+        await cartPage.searchProduct("simple");
+        await cartPage.openFirstProductFromSearch();
+
+        await shopPage.getByLabel("Increase Quantity").first().click();
+
+        await expect(shopPage.getByLabel("Decrease Quantity")).not.toHaveClass(
+            /opacity-40/,
+        );
+        await expect(shopPage.locator(".icon-bin")).toHaveCount(0);
+    });
+
     test("should decrease the quantity from the mini cart drawer", async ({
         shopPage,
     }) => {

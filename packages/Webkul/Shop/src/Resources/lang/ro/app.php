@@ -549,6 +549,7 @@ return [
             'index' => [
                 'add-attachments' => 'Adaugă atașamente',
                 'add-image' => 'Adaugă imagine/video',
+                'invalid-file-type' => 'Tipul de fișier selectat nu este permis.',
             ],
         ],
 
@@ -600,6 +601,20 @@ return [
                     'welcome-guest' => 'Bun venit, vizitator',
                     'wishlist' => 'Lista de dorințe',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Adaugă un produs în lista de dorințe a clientului după nume.',
+                'add-to-wishlist-query' => 'Numele produsului sau cheia URL de adăugat în lista de dorințe.',
+                'proceed-to-checkout' => 'Deschide pagina de finalizare a comenzii pentru a plasa o comandă pentru articolele din coș.',
+                'search-products' => 'Caută produse în catalogul magazinului după cuvânt cheie și deschide rezultatele potrivite.',
+                'search-products-query' => 'Cuvintele cheie sau numele produsului de căutat în catalog.',
+                'subscribe-newsletter' => 'Abonează o adresă de e-mail la buletinul informativ al magazinului.',
+                'subscribe-newsletter-email' => 'Adresa de e-mail pentru abonarea la buletinul informativ.',
+                'view-cart' => 'Deschide pagina coșului de cumpărături pentru ca clientul să poată revizui produsele adăugate.',
+                'view-product' => 'Deschide pagina de detalii a unui produs după numele produsului.',
+                'view-product-query' => 'Numele produsului sau cheia URL de deschis.',
+                'view-wishlist' => 'Deschide pagina listei de dorințe pentru a revizui produsele salvate ale clientului.',
             ],
 
             'footer' => [
@@ -741,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Scade cantitatea',
             'increase-quantity' => 'Crește cantitatea',
+            'remove-item' => 'Eliminați articolul',
         ],
     ],
 
@@ -1721,16 +1737,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Acceptă',
-                'awaiting' => 'Awaiting',
-                'canceled' => 'Anulată',
-                'declined' => 'Refuzat',
-                'dispatched-package' => 'Dispatched Package',
+                'accept' => 'Aprobat',
+                'awaiting' => 'În așteptarea returului',
+                'canceled' => 'Cerere anulată',
+                'declined' => 'Cerere respinsă',
+                'dispatched-package' => 'Retur în tranzit',
                 'item-canceled' => 'Item Canceled',
                 'not-received-package-yet' => 'Not received package yet',
-                'pending' => 'În așteptare',
+                'pending' => 'În așteptarea examinării',
                 'processing' => 'În procesare',
-                'received-package' => 'Received Package',
+                'received-package' => 'Rambursat',
                 'solved' => 'Solved',
             ],
 
