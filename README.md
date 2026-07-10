@@ -72,6 +72,10 @@ Follow the [Getting Started with Bagisto](https://www.youtube.com/watch?v=s_DhQr
 
 You can browse through the Free [Live Demo](https://demo.bagisto.com/)
 
+Prefer not to run a server? Spin up a fully managed Bagisto instance in one click:
+
+[![Deploy with Zenith](https://cdn.zenith.hosting/buttons/deploy-with-zenith.svg)](https://zenith.hosting/host/bagisto)
+
 ## ☁️ Bagisto Cloud Hosting
 
 Deploy and scale your Bagisto store effortlessly with [Bagisto Cloud Hosting](https://bagisto.com/en/cloud-hosting/)  a fully managed, optimized hosting solution built specifically for Bagisto. Enjoy automatic scaling, built-in security, one-click updates, and expert support so you can focus on growing your business.
