@@ -76,7 +76,7 @@ jobs:
           sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1${{ matrix.db-password }}|" .env
 
       - name: Running Bagisto Installer
-        run: php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
+        run: php artisan bagisto:install --no-interaction
 
       - name: Running Pest Test
         run: vendor/bin/pest --parallel --colors=always

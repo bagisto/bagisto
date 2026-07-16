@@ -756,6 +756,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Miktarı Azalt',
             'increase-quantity' => 'Miktarı Artır',
+            'remove-item' => 'Öğeyi Kaldır',
         ],
     ],
 

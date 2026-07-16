@@ -1,7 +1,8 @@
 @props([
-    'name'     => '',
-    'value'    => 1,
-    'minValue' => 1,
+    'name'      => '',
+    'value'     => 1,
+    'minValue'  => 1,
+    'removable' => false,
 ])
 
 <v-quantity-changer
@@ -9,6 +10,7 @@
     name="{{ $name }}"
     value="{{ $value }}"
     min-value="{{ $minValue }}"
+    is-removable="{{ $removable ? '1' : '0' }}"
 >
 </v-quantity-changer>
 
@@ -18,10 +20,23 @@
         id="v-quantity-changer-template"
     >
         <div>
-            <span 
-                class="icon-minus cursor-pointer text-2xl"
+            <span
+                v-if="isAtMinValue"
+                class="icon-bin cursor-pointer text-2xl"
                 role="button"
                 tabindex="0"
+                aria-label="@lang('shop::app.components.quantity-changer.remove-item')"
+                @click="remove"
+            >
+            </span>
+
+            <span
+                v-else
+                class="icon-minus text-2xl"
+                :class="atMinValue ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'"
+                role="button"
+                tabindex="0"
+                :aria-disabled="atMinValue"
                 aria-label="@lang('shop::app.components.quantity-changer.decrease-quantity')"
                 @click="decrease"
             >
@@ -30,8 +45,8 @@
             <p class="w-2.5 select-none text-center max-sm:text-sm">
                 @{{ quantity }}
             </p>
-            
-            <span 
+
+            <span
                 class="icon-plus cursor-pointer text-2xl"
                 role="button"
                 tabindex="0"
@@ -52,12 +67,30 @@
         app.component("v-quantity-changer", {
             template: '#v-quantity-changer-template',
 
-            props:['name', 'value', 'minValue'],
+            props:['name', 'value', 'minValue', 'isRemovable'],
 
             data() {
                 return  {
                     quantity: this.value,
                 }
+            },
+
+            computed: {
+                /**
+                 * Whether the quantity is at (or below) the minimum and cannot be
+                 * decreased further. Used to dim/disable the minus icon.
+                 */
+                atMinValue() {
+                    return Number(this.quantity) <= Number(this.minValue);
+                },
+
+                /**
+                 * Whether the trash icon should replace the minus icon. Only when
+                 * removal is enabled and the quantity cannot be decreased further.
+                 */
+                isAtMinValue() {
+                    return this.isRemovable == '1' && this.atMinValue;
+                },
             },
 
             watch: {
@@ -77,6 +110,10 @@
 
                         this.$emit('change', this.quantity);
                     }
+                },
+
+                remove() {
+                    this.$emit('remove');
                 },
             }
         });
