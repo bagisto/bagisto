@@ -9,9 +9,9 @@
     </x-slot>
 
     <!-- Error page Information -->
-	<div class="container absolute left-1/2 top-0 -translate-x-1/2 px-[60px] max-lg:px-8 max-sm:px-4">
+	<div class="container absolute left-1/2 top-0 -translate-x-1/2 px-15 max-lg:px-8 max-sm:px-4">
 		<div class="grid h-[100vh] w-full">
-			<div class="wrapper-404 max-868:!text-[294px] max-md:!text-[140px]">
+			<div class="wrapper-404 max-868:text-[294px]! max-md:text-[140px]!">
 				<div class="glow-404">
                     {{ $errorCode }}
                 </div>

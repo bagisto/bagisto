@@ -16,7 +16,7 @@
 
         <!-- Sales By Coupon Section -->
         <template v-else>
-            <div class="box-shadow relative flex-1 rounded bg-white p-4 dark:bg-gray-900">
+            <div class="box-shadow relative flex-1 rounded-sm bg-white p-4 dark:bg-gray-900">
                 <!-- Header -->
                 <div class="mb-4 flex items-center justify-between">
                     <p class="text-base font-semibold text-gray-600 dark:text-white">
@@ -45,14 +45,14 @@
                                     <a
                                         v-if="coupon.link"
                                         :href="coupon.link"
-                                        class="rounded bg-emerald-100 px-2 py-0.5 font-mono text-xs font-semibold text-emerald-700 transition-all hover:bg-emerald-200 dark:bg-emerald-900/40 dark:text-emerald-300 dark:hover:bg-emerald-900/60"
+                                        class="rounded-sm bg-emerald-100 px-2 py-0.5 font-mono text-xs font-semibold text-emerald-700 transition-all hover:bg-emerald-200 dark:bg-emerald-900/40 dark:text-emerald-300 dark:hover:bg-emerald-900/60"
                                     >
                                         @{{ coupon.coupon_code }}
                                     </a>
 
                                     <span
                                         v-else
-                                        class="rounded bg-gray-100 px-2 py-0.5 font-mono text-xs font-semibold text-gray-700 dark:bg-gray-800 dark:text-gray-300"
+                                        class="rounded-sm bg-gray-100 px-2 py-0.5 font-mono text-xs font-semibold text-gray-700 dark:bg-gray-800 dark:text-gray-300"
                                     >
                                         @{{ coupon.coupon_code }}
                                     </span>

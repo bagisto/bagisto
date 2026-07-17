@@ -1,6 +1,161 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source("../../");
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Breakpoints */
+    --breakpoint-sm:  525px;
+    --breakpoint-md:  768px;
+    --breakpoint-lg:  1024px;
+    --breakpoint-xl:  1240px;
+    --breakpoint-2xl: 1920px;
+
+    /* Custom colors */
+    --color-darkGreen: #40994A;
+    --color-darkBlue:  #0044F2;
+    --color-darkPink:  #F85156;
+
+    /* Fonts */
+    --font-inter: Inter;
+    --font-icon:  icomoon;
+
+    /* Semantic text tokens — font-size paired with a default line-height; utilities can still override. */
+    --text-body:               14px;
+    --text-body--line-height:  calc(17 / 14);
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 16px;
+
+    @variant 2xl {
+        max-width: 1920px;
+    }
+}
+
+/* 
+* Icons must be safelisted — many are referenced only from PHP configs or dynamic Vue bindings the Tailwind scanner can't detect. 
+*/
+@source inline("{icon-uncheckbox,icon-checked,icon-checkbox-partial,icon-radio-normal,icon-radio-selected,icon-phone,icon-list,icon-admin-export,icon-magic,icon-zoom,icon-ar,icon-report,icon-refund,icon-light,icon-dark,icon-add-customer,icon-arrow-down,icon-arrow-left,icon-arrow-right,icon-arrow-up,icon-attribute-block,icon-attribute,icon-calendar,icon-cancel-1,icon-cancel,icon-cart,icon-cms,icon-configuration,icon-cross,icon-customer-2,icon-customer,icon-dashboard,icon-delete,icon-done,icon-dot,icon-dots,icon-down-stat,icon-drag,icon-edit-save,icon-edit,icon-filter,icon-folder-block,icon-folder,icon-image,icon-information,icon-language,icon-location,icon-mail,icon-menu,icon-notification,icon-order-back,icon-printer,icon-processing,icon-product-1,icon-product,icon-promotion,icon-repeat,icon-sales,icon-search,icon-setting,icon-settings,icon-ship,icon-sort-down,icon-sort-left,icon-sort-right,icon-sort-up-down,icon-sort-up,icon-star,icon-store,icon-tick,icon-up-stat,icon-view,icon-view-close,icon-copy,icon-exit,icon-clip,icon-collapse,icon-login,icon-pause,icon-play,icon-star-fill}");
+@utility icon-uncheckbox       { &::before { content: "\e901"; } }
+@utility icon-checked          { &::before { content: "\e90d"; } }
+@utility icon-checkbox-partial { &::before { content: "\e900"; } }
+@utility icon-radio-normal     { &::before { content: "\e92c"; } }
+@utility icon-radio-selected   { &::before { content: "\e92d"; } }
+@utility icon-phone            { &::before { content: "\e94f"; } }
+@utility icon-list             { &::before { content: "\e950"; } }
+@utility icon-admin-export     { &::before { content: "\e95d"; } }
+@utility icon-magic            { &::before { content: "\e94b"; } }
+@utility icon-zoom             { &::before { content: "\e94c"; } }
+@utility icon-ar               { &::before { content: "\e94a"; } }
+@utility icon-report           { &::before { content: "\e942"; } }
+@utility icon-refund           { &::before { content: "\e948"; } }
+@utility icon-light            { &::before { content: "\e947"; } }
+@utility icon-dark             { &::before { content: "\e949"; } }
+@utility icon-add-customer     { &::before { content: "\e902"; } }
+@utility icon-arrow-down       { &::before { content: "\e903"; } }
+@utility icon-arrow-left       { &::before { content: "\e904"; } }
+@utility icon-arrow-right      { &::before { content: "\e905"; } }
+@utility icon-arrow-up         { &::before { content: "\e906"; } }
+@utility icon-attribute-block  { &::before { content: "\e907"; } }
+@utility icon-attribute        { &::before { content: "\e908"; } }
+@utility icon-calendar         { &::before { content: "\e909"; } }
+@utility icon-cancel-1         { &::before { content: "\e90a"; } }
+@utility icon-cancel           { &::before { content: "\e90b"; } }
+@utility icon-cart             { &::before { content: "\e90c"; } }
+@utility icon-cms              { &::before { content: "\e90e"; } }
+@utility icon-configuration    { &::before { content: "\e90f"; } }
+@utility icon-cross            { &::before { content: "\e910"; } }
+@utility icon-customer-2       { &::before { content: "\e911"; } }
+@utility icon-customer         { &::before { content: "\e912"; } }
+@utility icon-dashboard        { &::before { content: "\e913"; } }
+@utility icon-delete           { &::before { content: "\e914"; } }
+@utility icon-done             { &::before { content: "\e915"; } }
+@utility icon-dot              { &::before { content: "\e916"; } }
+@utility icon-dots             { &::before { content: "\e917"; } }
+@utility icon-down-stat        { &::before { content: "\e918"; } }
+@utility icon-drag             { &::before { content: "\e919"; } }
+@utility icon-edit-save        { &::before { content: "\e91a"; } }
+@utility icon-edit             { &::before { content: "\e91b"; } }
+@utility icon-filter           { &::before { content: "\e91c"; } }
+@utility icon-folder-block     { &::before { content: "\e91d"; } }
+@utility icon-folder           { &::before { content: "\e91e"; } }
+@utility icon-image            { &::before { content: "\e91f"; } }
+@utility icon-information      { &::before { content: "\e920"; } }
+@utility icon-language         { &::before { content: "\e921"; } }
+@utility icon-location         { &::before { content: "\e922"; } }
+@utility icon-mail             { &::before { content: "\e923"; } }
+@utility icon-menu             { &::before { content: "\e924"; } }
+@utility icon-notification     { &::before { content: "\e925"; } }
+@utility icon-order-back       { &::before { content: "\e926"; } }
+@utility icon-printer          { &::before { content: "\e927"; } }
+@utility icon-processing       { &::before { content: "\e928"; } }
+@utility icon-product-1        { &::before { content: "\e929"; } }
+@utility icon-product          { &::before { content: "\e92a"; } }
+@utility icon-promotion        { &::before { content: "\e92b"; } }
+@utility icon-repeat           { &::before { content: "\e92e"; } }
+@utility icon-sales            { &::before { content: "\e92f"; } }
+@utility icon-search           { &::before { content: "\e930"; } }
+@utility icon-setting          { &::before { content: "\e931"; } }
+@utility icon-settings         { &::before { content: "\e932"; } }
+@utility icon-ship             { &::before { content: "\e933"; } }
+@utility icon-sort-down        { &::before { content: "\e934"; } }
+@utility icon-sort-left        { &::before { content: "\e935"; } }
+@utility icon-sort-right       { &::before { content: "\e936"; } }
+@utility icon-sort-up-down     { &::before { content: "\e937"; } }
+@utility icon-sort-up          { &::before { content: "\e938"; } }
+@utility icon-star             { &::before { content: "\e939"; } }
+@utility icon-store            { &::before { content: "\e93a"; } }
+@utility icon-tick             { &::before { content: "\e93b"; } }
+@utility icon-up-stat          { &::before { content: "\e93c"; } }
+@utility icon-view             { &::before { content: "\e93d"; } }
+@utility icon-view-close       { &::before { content: "\e946"; } }
+@utility icon-copy             { &::before { content: "\e93e"; } }
+@utility icon-exit             { &::before { content: "\e93f"; } }
+@utility icon-clip             { &::before { content: "\e940"; } }
+@utility icon-collapse         { &::before { content: "\e941"; } }
+@utility icon-login            { &::before { content: "\e943"; } }
+@utility icon-pause            { &::before { content: "\e944"; } }
+@utility icon-play             { &::before { content: "\e945"; } }
+@utility icon-star-fill        { &::before { content: "\e938"; color: #ffb600; } }
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    body {
+        @apply bg-gray-50;
+    }
+
+    button:disabled,
+    button:disabled:hover {
+        @apply cursor-not-allowed opacity-50;
+    }
+
+    input,
+    textarea,
+    select {
+        @apply outline-none;
+    }
+
+    p {
+        @apply text-body;
+    }
+
+    ::selection {
+        background-color: rgba(0, 68, 242, .2);
+    }
+}
 
 @font-face {
     font-family: "bagisto-admin";
@@ -11,22 +166,6 @@
 }
 
 @layer components {
-    ::selection {
-        background-color: rgba(0, 68, 242, .2);
-    }
-
-    body {
-        @apply bg-gray-50;
-    }
-
-    button:disabled {
-        @apply cursor-not-allowed opacity-50;
-    }
-
-    button:disabled:hover {
-        @apply cursor-not-allowed opacity-50;
-    }
-
     .direction-ltr {
         direction: ltr;
     }
@@ -49,352 +188,21 @@
         font-weight: normal;
         font-variant: normal;
         text-transform: none;
-        line-height: 1;
         color: #6b7280;
-        
-        /* Better Font Rendering =========== */
+        line-height: 1 !important;
+
+        /* Better Font Rendering */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-        line-height: 1 !important;
     }
 
     html.dark [class^="icon-"],
-    html.dark [class*=" icon-"]{
+    html.dark [class*=" icon-"] {
         color: #d1d5db;
     }
-    
+
     .box-shadow {
         @apply border-[1px] dark:border-gray-800 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)];
-    }
-
-    .icon-phone:before {
-        content: "\e94f";
-    }
-
-    .icon-list:before {
-        content: "\e950";
-    }
-
-    .icon-admin-export:before {
-        content: "\e95d";
-    }
-
-    .icon-magic:before {
-        content: "\e94b";
-    }
-
-    .icon-zoom:before {
-        content: "\e94c";
-    }
-
-    .icon-ar:before {
-        content: "\e94a";
-    }
-
-    .icon-report:before {
-        content: "\e942";
-    }
-
-    .icon-refund:before {
-        content: "\e948";
-    }
-
-    .icon-light:before {
-        content: "\e947";
-    }
-
-    .icon-dark:before {
-        content: "\e949";
-    }
-
-    .icon-checkbox-partical:before {
-        content: "\e900";
-    }
-
-    .icon-uncheckbox:before {
-        content: "\e901";
-    }
-
-    .icon-add-customer:before {
-        content: "\e902";
-    }
-
-    .icon-arrow-down:before {
-        content: "\e903";
-    }
-
-    .icon-arrow-left:before {
-        content: "\e904";
-    }
-
-    .icon-arrow-right:before {
-        content: "\e905";
-    }
-
-    .icon-arrow-up:before {
-        content: "\e906";
-    }
-
-    .icon-attribute-block:before {
-        content: "\e907";
-    }
-
-    .icon-attribute:before {
-        content: "\e908";
-    }
-
-    .icon-calendar:before {
-        content: "\e909";
-    }
-
-    .icon-cancel-1:before {
-        content: "\e90a";
-    }
-
-    .icon-cancel:before {
-        content: "\e90b";
-    }
-
-    .icon-cart:before {
-        content: "\e90c";
-    }
-
-    .icon-checked:before {
-        content: "\e90d";
-    }
-
-    .icon-cms:before {
-        content: "\e90e";
-    }
-
-    .icon-configuration:before {
-        content: "\e90f";
-    }
-
-    .icon-cross:before {
-        content: "\e910";
-    }
-
-    .icon-customer-2:before {
-        content: "\e911";
-    }
-
-    .icon-customer:before {
-        content: "\e912";
-    }
-
-    .icon-dashboard:before {
-        content: "\e913";
-    }
-
-    .icon-delete:before {
-        content: "\e914";
-    }
-
-    .icon-done:before {
-        content: "\e915";
-    }
-
-    .icon-dot:before {
-        content: "\e916";
-    }
-
-    .icon-dots:before {
-        content: "\e917";
-    }
-
-    .icon-down-stat:before {
-        content: "\e918";
-    }
-
-    .icon-drag:before {
-        content: "\e919";
-    }
-
-    .icon-edit-save:before {
-        content: "\e91a";
-    }
-
-    .icon-edit:before {
-        content: "\e91b";
-    }
-
-    .icon-filter:before {
-        content: "\e91c";
-    }
-
-    .icon-folder-block:before {
-        content: "\e91d";
-    }
-
-    .icon-folder:before {
-        content: "\e91e";
-    }
-
-    .icon-image:before {
-        content: "\e91f";
-    }
-
-    .icon-information:before {
-        content: "\e920";
-    }
-
-    .icon-language:before {
-        content: "\e921";
-    }
-
-    .icon-location:before {
-        content: "\e922";
-    }
-
-    .icon-mail:before {
-        content: "\e923";
-    }
-
-    .icon-menu:before {
-        content: "\e924";
-    }
-
-    .icon-notification:before {
-        content: "\e925";
-    }
-
-    .icon-order-back:before {
-        content: "\e926";
-    }
-
-    .icon-printer:before {
-        content: "\e927";
-    }
-
-    .icon-processing:before {
-        content: "\e928";
-    }
-
-    .icon-product-1:before {
-        content: "\e929";
-    }
-
-    .icon-product:before {
-        content: "\e92a";
-    }
-
-    .icon-promotion:before {
-        content: "\e92b";
-    }
-
-    .icon-radio-normal:before {
-        content: "\e92c";
-    }
-
-    .icon-radio-selected:before {
-        content: "\e92d";
-    }
-
-    .icon-repeat:before {
-        content: "\e92e";
-    }
-
-    .icon-sales:before {
-        content: "\e92f";
-    }
-
-    .icon-search:before {
-        content: "\e930";
-    }
-
-    .icon-setting:before {
-        content: "\e931";
-    }
-
-    .icon-settings:before {
-        content: "\e932";
-    }
-
-    .icon-ship:before {
-        content: "\e933";
-    }
-
-    .icon-sort-down:before {
-        content: "\e934";
-    }
-
-    .icon-sort-left:before {
-        content: "\e935";
-    }
-
-    .icon-sort-right:before {
-        content: "\e936";
-    }
-
-    .icon-sort-up-down:before {
-        content: "\e937";
-    }
-
-    .icon-sort-up:before {
-        content: "\e938";
-    }
-
-    .icon-star:before {
-        content: "\e939";
-    }
-
-    .icon-store:before {
-        content: "\e93a";
-    }
-
-    .icon-tick:before {
-        content: "\e93b";
-    }
-
-    .icon-up-stat:before {
-        content: "\e93c";
-    }
-
-    .icon-view:before {
-        content: "\e93d";
-    }
-
-    .icon-view-close:before {
-        content: "\e946";
-    }
-
-    .icon-copy:before {
-        content: "\e93e";
-    }
-
-    .icon-exit:before {
-        content: "\e93f";
-    }
-
-    .icon-clip:before {
-        content: "\e940";
-    }
-
-    .icon-collapse:before {
-        content: "\e941";
-    }
-
-    .icon-login:before {
-        content: "\e943";
-    }
-
-    .icon-pause:before {
-        content: "\e944";
-    }
-
-    .icon-play:before {
-        content: "\e945";
-    }
-      
-    p {
-        @apply text-[14px] !leading-[17px];
-    }
-
-    input,
-    textarea,
-    select {
-        @apply outline-none;
     }
 
     .primary-button {
@@ -439,7 +247,8 @@
         background-position-x: calc(100% - 10px);
         background-position-y: 50%;
     }
-    .dark .custom-select{
+
+    .dark .custom-select {
         background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
     }
 
@@ -459,23 +268,23 @@
         @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
     }
 
-	.label-pending,
+    .label-pending,
     .label-pending_payment {
-		@apply bg-yellow-500;
-	}
-
-	.label-processing{
-		@apply bg-cyan-600;
+        @apply bg-yellow-500;
     }
 
-	.label-completed,
-    .label-active {
-		@apply bg-green-600;
-	}
+    .label-processing {
+        @apply bg-cyan-600;
+    }
 
-	.label-closed {
-		@apply bg-indigo-600;
-	}
+    .label-completed,
+    .label-active {
+        @apply bg-green-600;
+    }
+
+    .label-closed {
+        @apply bg-indigo-600;
+    }
 
     .label-canceled,
     .label-fraud {
@@ -486,18 +295,12 @@
         @apply bg-slate-400;
     }
 
-    /* status */
     .status-enable {
         @apply text-green-600;
     }
 
     .status-disable {
         @apply text-red-600;
-    }
-
-	.icon-star-fill:before {
-        content: "\e938";
-        color: #ffb600;
     }
 
     .shimmer {
@@ -525,22 +328,18 @@
     }
 
     @keyframes skeleton {
-        0% {
-            @apply bg-[-1250px_0];
-        }
-
-        100% {
-            @apply bg-[1250px_0];
-        }
+        0%   { background-position: -1250px 0; }
+        100% { background-position:  1250px 0; }
     }
 
-    .required:after {
+    .required::after {
         @apply content-['*'];
     }
+}
 
-    .CodeMirror {
-        @apply !h-[calc(100vh-367px)]
-    }
+/* Third-party overrides — outside layers so they aren't beaten by utility classes. */
+.CodeMirror {
+    @apply h-[calc(100vh-367px)]!;
 }
 
 .tox .tox-toolbar__group:last-child button {
@@ -552,7 +351,6 @@
 .tox .tox-toolbar__group:last-child button:hover {
     background: #dbeafe;
 }
-
 
 .tox .tox-toolbar__group:last-child button[aria-disabled="true"] {
     @apply cursor-not-allowed opacity-50;

@@ -19,12 +19,12 @@
     </span>
 
     <!-- Title -->
-    <p class="mb-2 text-lg font-bold !leading-snug text-gray-800 dark:text-white">
+    <p class="mb-2 text-lg font-bold leading-snug text-gray-800 dark:text-white">
         {{ $card['title'] }}
     </p>
 
     <!-- Description -->
-    <p class="!leading-relaxed text-gray-600 dark:text-gray-300">
+    <p class="leading-relaxed text-gray-600 dark:text-gray-300">
         {{ $card['info'] }}
     </p>
 

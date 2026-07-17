@@ -214,7 +214,7 @@
                             </x-shop::form.control-group>
 
                             <!-- Message -->
-                            <x-shop::form.control-group class="!mb-0">
+                            <x-shop::form.control-group class="mb-0!">
                                 <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.customers.account.gdpr.index.modal.message')
                                 </x-shop::form.control-group.label>

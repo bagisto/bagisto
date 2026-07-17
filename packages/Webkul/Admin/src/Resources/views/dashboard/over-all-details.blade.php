@@ -16,11 +16,11 @@
 
         <!-- Total Sales Section -->
         <template v-else>
-            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+            <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                 <div class="flex flex-wrap gap-4">
                     <!-- Total Sales -->
-                    <div class="flex min-w-[200px] flex-1 gap-2.5">
-                        <div class="h-[60px] max-h-[60px] w-full max-w-[60px] dark:mix-blend-exclusion dark:invert">
+                    <div class="flex min-w-50 flex-1 gap-2.5">
+                        <div class="h-15 max-h-15 w-full max-w-15 dark:mix-blend-exclusion dark:invert">
                             <img
                                 src="{{ bagisto_asset('images/total-sales.svg')}}"
                                 title="@lang('admin::app.dashboard.index.total-sales')"
@@ -41,7 +41,7 @@
                             <div class="flex items-center gap-0.5">
                                 <span
                                     class="text-base text-emerald-500"
-                                    :class="[report.statistics.total_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
+                                    :class="[report.statistics.total_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:text-red-500!' : 'icon-up-stat text-emerald-500 dark:text-emerald-500!']"
                                 ></span>
 
                                 <p
@@ -55,8 +55,8 @@
                     </div>
 
                     <!-- Total Orders -->
-                    <div class="flex min-w-[200px] flex-1 gap-2.5">
-                        <div class="h-[60px] max-h-[60px] w-full max-w-[60px] dark:mix-blend-exclusion dark:invert">
+                    <div class="flex min-w-50 flex-1 gap-2.5">
+                        <div class="h-15 max-h-15 w-full max-w-15 dark:mix-blend-exclusion dark:invert">
                             <img
                                 src="{{ bagisto_asset('images/total-orders.svg')}}"
                                 title="@lang('admin::app.dashboard.index.total-orders')"
@@ -77,7 +77,7 @@
                             <div class="flex items-center gap-0.5">
                                 <span
                                     class="text-base text-emerald-500"
-                                    :class="[report.statistics.total_orders.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
+                                    :class="[report.statistics.total_orders.progress < 0 ? 'icon-down-stat text-red-500 dark:text-red-500!' : 'icon-up-stat text-emerald-500 dark:text-emerald-500!']"
                                 ></span>
 
                                 <p
@@ -91,8 +91,8 @@
                     </div>
 
                     <!-- Total Customers -->
-                    <div class="flex min-w-[200px] flex-1 gap-2.5">
-                        <div class="h-[60px] max-h-[60px] w-full max-w-[60px] dark:mix-blend-exclusion dark:invert">
+                    <div class="flex min-w-50 flex-1 gap-2.5">
+                        <div class="h-15 max-h-15 w-full max-w-15 dark:mix-blend-exclusion dark:invert">
                             <img
                                 src="{{ bagisto_asset('images/customers.svg')}}"
                                 title="@lang('admin::app.dashboard.index.total-customers')"
@@ -113,7 +113,7 @@
                             <div class="flex items-center gap-0.5">
                                 <span
                                     class="text-base text-emerald-500"
-                                    :class="[report.statistics.total_customers.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
+                                    :class="[report.statistics.total_customers.progress < 0 ? 'icon-down-stat text-red-500 dark:text-red-500!' : 'icon-up-stat text-emerald-500 dark:text-emerald-500!']"
                                 ></span>
 
                                 <p
@@ -127,8 +127,8 @@
                     </div>
 
                     <!-- Average sales -->
-                    <div class="flex min-w-[200px] flex-1 gap-2.5">
-                        <div class="h-[60px] max-h-[60px] w-full max-w-[60px] dark:mix-blend-exclusion dark:invert">
+                    <div class="flex min-w-50 flex-1 gap-2.5">
+                        <div class="h-15 max-h-15 w-full max-w-15 dark:mix-blend-exclusion dark:invert">
                             <img
                                 src="{{ bagisto_asset('images/average-orders.svg')}}"
                                 title="@lang('admin::app.dashboard.index.average-sale')"
@@ -149,7 +149,7 @@
                             <div class="flex items-center gap-0.5">
                                 <span
                                     class="text-base text-emerald-500"
-                                    :class="[report.statistics.avg_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
+                                    :class="[report.statistics.avg_sales.progress < 0 ? 'icon-down-stat text-red-500 dark:text-red-500!' : 'icon-up-stat text-emerald-500 dark:text-emerald-500!']"
                                 ></span>
 
                                 <p
@@ -164,8 +164,8 @@
                     </div>
 
                     <!-- Unpaid Invoices -->
-                    <div class="flex min-w-[200px] flex-1 gap-2.5">
-                        <div class="h-[60px] max-h-[60px] w-full max-w-[60px] dark:mix-blend-exclusion dark:invert">
+                    <div class="flex min-w-50 flex-1 gap-2.5">
+                        <div class="h-15 max-h-15 w-full max-w-15 dark:mix-blend-exclusion dark:invert">
                             <img
                                 src="{{ bagisto_asset('images/unpaid-invoices.svg')}}"
                                 title="@lang('admin::app.dashboard.index.total-unpaid-invoices')"

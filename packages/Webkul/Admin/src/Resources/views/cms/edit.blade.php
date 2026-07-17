@@ -80,7 +80,7 @@
                     </x-slot>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
@@ -103,12 +103,12 @@
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.content.before', ['page' => $page]) !!}
 
                 <!--Content -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.cms.edit.description')
                     </p>
 
-                    <x-admin::form.control-group class="!mb-0">
+                    <x-admin::form.control-group class="mb-0!">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.cms.edit.content')
                         </x-admin::form.control-group.label>
@@ -133,7 +133,7 @@
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.seo.before', ['page' => $page]) !!}
 
                 <!-- SEO Input Fields -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.cms.edit.seo')
                     </p>
@@ -199,7 +199,7 @@
                         <x-admin::form.control-group.error control-name="{{ $currentLocale->code }}[meta_keywords]" />
                     </x-admin::form.control-group>
 
-                    <x-admin::form.control-group class="!mb-0">
+                    <x-admin::form.control-group class="mb-0!">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.cms.edit.meta-description')
                         </x-admin::form.control-group.label>
@@ -223,7 +223,7 @@
             </div>
 
             <!-- Right sub-component -->
-            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+            <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
                 <!-- General -->
 
                 {!! view_render_event('bagisto.admin.cms.pages.edit.card.accordion.seo.before', ['page' => $page]) !!}
@@ -262,7 +262,7 @@
                         </x-admin::form.control-group.label>
 
                         @foreach(core()->getAllChannels() as $channel)
-                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 last:!mb-0">
+                            <x-admin::form.control-group class="mb-2! flex select-none items-center gap-2.5 last:mb-0!">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     :id="'channels_' . $channel->id"

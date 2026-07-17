@@ -167,7 +167,7 @@
                 </div>
 
                 <!-- Right Component -->
-                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.before') !!}
 
@@ -175,7 +175,7 @@
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
 
                     <template v-if="! customer">
-                        <x-admin::shimmer.accordion class="h-[271px] w-[360px]"/>
+                        <x-admin::shimmer.accordion class="h-67.75 w-90"/>
                     </template>
 
                     <template v-else>
@@ -226,7 +226,7 @@
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.before') !!}
 
                     <template v-if="! customer">
-                        <x-admin::shimmer.accordion class="h-[271px] w-[360px]"/>
+                        <x-admin::shimmer.accordion class="h-67.75 w-90"/>
                     </template>
 
                     <template v-else>

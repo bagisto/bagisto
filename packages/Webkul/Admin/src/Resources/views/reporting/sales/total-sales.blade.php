@@ -16,7 +16,7 @@
 
         <!-- Total Sales Section -->
         <template v-else>
-            <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
+            <div class="box-shadow relative rounded-sm bg-white p-4 dark:bg-gray-900">
                 <!-- Header -->
                 <div class="mb-4 flex items-center justify-between">
                     <p class="text-base font-semibold text-gray-600 dark:text-white">
@@ -48,7 +48,7 @@
 
                             <span
                                 class="text-base text-emerald-500"
-                                :class="[report.statistics.sales.progress < 0 ? 'icon-down-stat text-red-500 dark:!text-red-500' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
+                                :class="[report.statistics.sales.progress < 0 ? 'icon-down-stat text-red-500 dark:text-red-500!' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
                             ></span>
                         </div>
                     </div>

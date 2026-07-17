@@ -18,7 +18,7 @@
         <template v-else>
             <!-- Stock Threshold Products Details -->
             <div
-                class="box-shadow rounded"
+                class="box-shadow rounded-sm"
                 v-if="report.statistics.length"
             >
                 <!-- Single Product -->
@@ -31,14 +31,14 @@
                             <template v-if="product.image">
                                 <div class="">
                                     <img
-                                        class="max-h-[65px] min-h-[65px] min-w-[65px] max-w-[65px] rounded"
+                                        class="max-h-16.25 min-h-16.25 min-w-16.25 max-w-16.25 rounded-sm"
                                         :src="product.image"
                                     >
                                 </div>
                             </template>
 
                             <template v-else>
-                                <div class="relative h-[65px] max-h-[65px] w-full max-w-[65px] overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                <div class="relative h-16.25 max-h-16.25 w-full max-w-16.25 overflow-hidden rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg')}}">
 
                                     <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -84,7 +84,7 @@
 
             <!-- Empty Product Design -->
             <div
-                class="box-shadow rounded"
+                class="box-shadow rounded-sm"
                 v-else
             >
                 <div class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10">

@@ -17,7 +17,7 @@
         id="v-datagrid-table-template"
     >
         <div class="w-full">
-            <div class="table-responsive box-shadow grid w-full overflow-x-auto rounded bg-white dark:bg-gray-900">
+            <div class="table-responsive box-shadow grid w-full overflow-x-auto rounded-sm bg-white dark:bg-gray-900">
                 <slot
                     name="header"
                     :is-loading="isLoading"
@@ -33,7 +33,7 @@
 
                     <template v-else>
                         <div
-                            class="row grid min-h-[47px] items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                            class="row grid min-h-11.75 items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                             :style="`grid-template-columns: repeat(${gridsCount}, minmax(150px, 1fr))`"
                         >
                             <!-- Mass Actions -->
@@ -63,7 +63,7 @@
                             <!-- Columns -->
                             <template v-for="column in available.columns">
                                 <p
-                                    class="flex items-center gap-1.5 break-words"
+                                    class="flex items-center gap-1.5 wrap-break-word"
                                     :class="{'cursor-pointer select-none hover:text-gray-800 dark:hover:text-white': column.sortable}"
                                     @click="sort(column)"
                                     v-if="column.visibility"
@@ -129,7 +129,7 @@
                                 <!-- Columns -->
                                 <template v-for="column in available.columns">
                                     <p
-                                        class="break-words"
+                                        class="wrap-break-word"
                                         v-html="record[column.index]"
                                         v-if="column.visibility"
                                     >
@@ -154,9 +154,9 @@
                         </template>
 
                         <template v-else>
-                            <div class="row grid min-h-[260px] place-content-center justify-items-center gap-3 border-b px-4 py-8 text-center text-gray-600 dark:border-gray-800 dark:text-gray-300">
+                            <div class="row grid min-h-65 place-content-center justify-items-center gap-3 border-b px-4 py-8 text-center text-gray-600 dark:border-gray-800 dark:text-gray-300">
                                 <img
-                                    class="h-[120px] w-[120px] select-none p-2 dark:mix-blend-exclusion dark:invert"
+                                    class="h-30 w-30 select-none p-2 dark:mix-blend-exclusion dark:invert"
                                     src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                                     alt=""
                                     aria-hidden="true"

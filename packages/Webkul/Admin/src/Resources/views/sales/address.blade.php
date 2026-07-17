@@ -20,7 +20,7 @@
     @endif
 
     <p 
-        class="!leading-6 text-gray-600 dark:text-gray-300"
+        class="leading-6! text-gray-600 dark:text-gray-300"
         v-pre
     >
         {{ $address->address }}<br>

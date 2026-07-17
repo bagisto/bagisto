@@ -2,7 +2,7 @@
 <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
     <!-- Left Component -->
     <div class="flex flex-1 flex-col gap-2 overflow-auto max-xl:flex-auto">
-        <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+        <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
             <div class="shimmer mb-4 h-4 w-16"></div>
 
             @for ($i = 1; $i < 10; $i++)
@@ -16,9 +16,9 @@
     </div>
 
     <!-- Right Component -->
-    <div class="flex w-[360px] max-w-full flex-col gap-2">
+    <div class="flex w-90 max-w-full flex-col gap-2">
         <!-- General -->
-        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
             <div class="flex items-center justify-between gap-x-5 p-4">
                 <p class="shimmer w-20 p-2.5"></p>
                 
@@ -37,7 +37,7 @@
         </div>
 
         <!-- Validation Section -->
-        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
             <div class="flex items-center justify-between gap-x-5 p-4">
                 <p class="shimmer w-24 p-2.5"></p>
                 

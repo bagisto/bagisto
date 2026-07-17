@@ -68,7 +68,7 @@
                             </x-shop::form.control-group>
 
                             <!-- Password -->
-                            <x-shop::form.control-group class="!mb-0">
+                            <x-shop::form.control-group class="mb-0!">
                                 <x-shop::form.control-group.label class="required">
                                     @lang('shop::app.checkout.login.password')
                                 </x-shop::form.control-group.label>
@@ -102,7 +102,7 @@
                         <x-slot:footer>
                             <div class="flex flex-wrap items-center gap-4">
                                 <x-shop::button
-                                    class="primary-button max-w-none flex-auto rounded-sm px-11 py-3 max-md:rounded-lg max-md:py-1.5"
+                                    class="primary-button max-w-none flex-auto rounded-xs px-11 py-3 max-md:rounded-lg max-md:py-1.5"
                                     :title="trans('shop::app.checkout.login.title')"
                                     ::loading="isStoring"
                                     ::disabled="isStoring"

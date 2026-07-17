@@ -5,10 +5,10 @@
 
     @foreach ($order->items->take(3) as $item)
         <div class="relative">
-            <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded">
+            <div class="relative h-15 max-h-15 w-full max-w-15 rounded-sm">
                 @if ($item->product?->images->count() > 0)
                     <img 
-                        class="h-full w-full rounded" 
+                        class="h-full w-full rounded-sm" 
                         src="{{ $item->product->base_image_url }}"
                     >
 
@@ -16,7 +16,7 @@
                         {{ $item->qty_ordered }}
                     </span>
                 @else
-                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                    <div class="relative h-15 max-h-15 w-full max-w-15 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
                         
                         <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400"> 
@@ -30,7 +30,7 @@
 
     @if ($restCount >= 1)
         <a href="{{ route('admin.sales.orders.view', $order->id) }}">
-            <div class="flex h-[65px] w-[65px] items-center rounded bg-gray-50 dark:bg-gray-800">
+            <div class="flex h-16.25 w-16.25 items-center rounded-sm bg-gray-50 dark:bg-gray-800">
                 <p class="px-1.5 py-1.5 text-center text-xs font-bold text-gray-600 dark:text-gray-300">
                     @lang('admin::app.sales.orders.index.datagrid.product-count', ['count' => $restCount])
                 </p>

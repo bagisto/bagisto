@@ -1,4 +1,4 @@
-<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+<div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
     <div class="flex justify-between">
         <!-- Total Reviews Count -->
         <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
@@ -31,7 +31,7 @@
                         v-for="(columnGroup, index) in [['product_name', 'status', 'title', 'comment'], ['rating', 'created_at', 'product_review_id']]"
                     >
                         <p class="text-gray-600 dark:text-gray-300">
-                            <span class="[&>*]:after:content-['_/_']">
+                            <span class="*:after:content-['_/_']">
                                 <template v-for="column in columnGroup">
                                     <span
                                         class="after:content-['/'] last:after:content-['']"

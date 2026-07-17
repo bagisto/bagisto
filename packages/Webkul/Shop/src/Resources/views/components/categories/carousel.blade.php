@@ -15,7 +15,7 @@
         id="v-categories-carousel-template"
     >
         <div
-            class="container mt-14 max-lg:px-8 max-md:mt-7 max-md:!px-0 max-sm:mt-5"
+            class="container mt-14 max-lg:px-8 max-md:mt-7 max-md:px-0! max-sm:mt-5"
             v-if="! isLoading && categories?.length"
         >
             <div class="relative">
@@ -24,12 +24,12 @@
                     class="scrollbar-hide flex gap-10 overflow-auto scroll-smooth max-lg:gap-4"
                 >
                     <div
-                        class="grid min-w-[120px] max-w-[120px] grid-cols-1 justify-items-center gap-4 font-medium max-md:min-w-20 max-md:max-w-20 max-md:gap-2.5 max-md:first:ml-4 max-sm:min-w-[60px] max-sm:max-w-[60px] max-sm:gap-1.5"
+                        class="grid min-w-30 max-w-30 grid-cols-1 justify-items-center gap-4 font-medium max-md:min-w-20 max-md:max-w-20 max-md:gap-2.5 max-md:first:ml-4 max-sm:min-w-15 max-sm:max-w-15 max-sm:gap-1.5"
                         v-for="category in categories"
                     >
                         <a
                             :href="category.slug"
-                            class="h-[110px] w-[110px] rounded-full bg-zinc-100 max-md:h-20 max-md:w-20 max-sm:h-[60px] max-sm:w-[60px]"
+                            class="h-27.5 w-27.5 rounded-full bg-zinc-100 max-md:h-20 max-md:w-20 max-sm:h-15 max-sm:w-15"
                             :aria-label="category.name"
                         >
                             <x-shop::media.images.lazy
@@ -42,7 +42,7 @@
                                 sizes="(max-width: 640px) 60px, 110px"
                                 width="110"
                                 height="110"
-                                class="w-full rounded-full max-sm:h-[60px] max-sm:w-[60px]"
+                                class="w-full rounded-full max-sm:h-15 max-sm:w-15"
                                 ::alt="category.name"
                             />
                         </a>
@@ -61,7 +61,7 @@
                 </div>
 
                 <span
-                    class="icon-arrow-left-stylish absolute -left-10 top-9 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-left-7 max-md:hidden"
+                    class="icon-arrow-left-stylish absolute -left-10 top-9 flex h-12.5 w-12.5 cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-left-7 max-md:hidden"
                     role="button"
                     aria-label="@lang('shop::components.carousel.previous')"
                     tabindex="0"
@@ -70,7 +70,7 @@
                 </span>
 
                 <span
-                    class="icon-arrow-right-stylish absolute -right-6 top-9 flex h-[50px] w-[50px] cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-right-7 max-md:hidden"
+                    class="icon-arrow-right-stylish absolute -right-6 top-9 flex h-12.5 w-12.5 cursor-pointer items-center justify-center rounded-full border border-black bg-white text-2xl transition hover:bg-black hover:text-white max-lg:-right-7 max-md:hidden"
                     role="button"
                     aria-label="@lang('shop::components.carousel.next')"
                     tabindex="0"

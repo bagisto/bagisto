@@ -1,6 +1,6 @@
 <div class="grid justify-center justify-items-center gap-3.5 px-2.5 py-10">
     <img
-        class="h-[120px] w-[120px] p-2 dark:mix-blend-exclusion dark:invert"
+        class="h-30 w-30 p-2 dark:mix-blend-exclusion dark:invert"
         src="{{ bagisto_asset('images/empty-placeholders/report-empty.svg') }}"
     >
 

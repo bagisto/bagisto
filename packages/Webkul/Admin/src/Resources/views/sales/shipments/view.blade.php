@@ -28,7 +28,7 @@
         <!-- Left sub-component -->
         <div class="flex flex-col flex-1 gap-2 max-xl:flex-auto">
             <!-- General -->
-            <div class="bg-white rounded box-shadow dark:bg-gray-900">
+            <div class="bg-white rounded-sm box-shadow dark:bg-gray-900">
                 <p class="p-4 mb-4 text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.sales.shipments.view.ordered-items') ({{count($shipment->items)}})
                 </p>
@@ -41,11 +41,11 @@
                                 <!-- Image -->
                                 @if ($item->product?->base_image_url)
                                     <img
-                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                        class="relative h-15 max-h-15 w-full max-w-15 rounded-sm"
                                         src="{{ $item->product->base_image_url }}"
                                     >
                                 @else
-                                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                    <div class="relative h-15 max-h-15 w-full max-w-15 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
 
                                         <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -110,7 +110,7 @@
         </div>
 
         <!-- Right sub-component -->
-        <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+        <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
             <!-- component 1 -->
             <x-admin::accordion>
                 <x-slot:header>

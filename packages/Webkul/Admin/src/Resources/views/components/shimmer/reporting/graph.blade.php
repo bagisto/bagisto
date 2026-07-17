@@ -3,7 +3,7 @@
 <div class="flex gap-1.5">
     <div class="grid">
         @foreach (range(1, 10) as $i)
-            <div class="shimmer h-[15px] w-[39px]"></div>
+            <div class="shimmer h-3.75 w-9.75"></div>
         @endforeach
     </div>
 
@@ -21,7 +21,7 @@
 
         <div class="flex justify-between gap-5 pl-2.5 max-lg:gap-4 max-sm:gap-2.5">
             @foreach (range(1, $count) as $i)
-                <div class="shimmer flex h-[15px] w-full"></div>
+                <div class="shimmer flex h-3.75 w-full"></div>
             @endforeach
         </div>
     </div>

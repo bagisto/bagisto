@@ -57,7 +57,7 @@
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.label.before', ['attribute' => $attribute]) !!}
 
                     <!-- Label -->
-                    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                         <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.catalog.attributes.edit.label')
                         </p>
@@ -82,7 +82,7 @@
 
                         <!-- Locales Inputs -->
                         @foreach ($locales as $locale)
-                            <x-admin::form.control-group class="last:!mb-0">
+                            <x-admin::form.control-group class="last:mb-0!">
                                 <x-admin::form.control-group.label v-pre>
                                     {{ $locale->name . ' (' . strtoupper($locale->code) . ')' }}
                                 </x-admin::form.control-group.label>
@@ -103,7 +103,7 @@
 
                     <!-- Options -->
                     <div
-                        class="box-shadow rounded bg-white p-4 dark:bg-gray-900 {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
+                        class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900 {{ in_array($attribute->type, ['select', 'multiselect', 'checkbox']) ?: 'hidden' }}"
                         v-if="showSwatch"
                     >
                         <div class="mb-3 flex items-center justify-between">
@@ -153,7 +153,7 @@
 
                             <!-- Checkbox -->
                             <div class="w-full">
-                                <div class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5">
+                                <div class="mb-0! flex w-max cursor-pointer select-none items-center gap-2.5">
                                     <input
                                         type="checkbox"
                                         name="empty_option"
@@ -193,7 +193,7 @@
                                         <x-admin::table.thead class="text-sm font-medium dark:bg-gray-800">
                                             <x-admin::table.thead.tr>
                                                 <!-- Draggable Icon -->
-                                                <x-admin::table.th class="!p-0"></x-admin::table.th>
+                                                <x-admin::table.th class="p-0!"></x-admin::table.th>
 
                                                 <!-- Swatch Select -->
                                                 <x-admin::table.th v-if="showSwatch && (swatchType == 'color' || swatchType == 'image')">
@@ -246,7 +246,7 @@
                                                     >
 
                                                     <!-- Draggable Icon -->
-                                                    <x-admin::table.td class="!px-0 text-center">
+                                                    <x-admin::table.td class="px-0! text-center">
                                                         <i class="icon-drag cursor-grab text-xl transition-all group-hover:text-gray-700"></i>
 
                                                         <input
@@ -263,7 +263,7 @@
                                                             <img
                                                                 :src="element.swatch_value_url || '{{ bagisto_asset('images/product-placeholders/front.svg') }}'"
                                                                 :ref="'image_' + element.id"
-                                                                class="h-[50px] w-[50px]"
+                                                                class="h-12.5 w-12.5"
                                                             >
 
                                                             <input
@@ -277,7 +277,7 @@
                                                         <!-- Swatch Color -->
                                                         <div v-if="swatchType == 'color'">
                                                             <div
-                                                                class="h-[25px] w-[25px] rounded-md border border-gray-200 dark:border-gray-800"
+                                                                class="h-6.25 w-6.25 rounded-md border border-gray-200 dark:border-gray-800"
                                                                 :style="{ background: element.swatch_value }"
                                                             >
                                                             </div>
@@ -317,7 +317,7 @@
                                                     </x-admin::table.td>
 
                                                     <!-- Actions Button -->
-                                                    <x-admin::table.td class="!px-0">
+                                                    <x-admin::table.td class="px-0!">
                                                         <span
                                                             class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-200 dark:hover:bg-gray-800 max-sm:place-self-center"
                                                             @click="editOptions(element)"
@@ -342,7 +342,7 @@
                                 <div class="grid justify-items-center gap-3.5 px-2.5 py-10">
                                     <!-- Attribute Option Image -->
                                     <img
-                                        class="h-[120px] w-[120px] dark:mix-blend-exclusion dark:invert"
+                                        class="h-30 w-30 dark:mix-blend-exclusion dark:invert"
                                         src="{{ bagisto_asset('images/icon-add-product.svg') }}"
                                         alt="{{ trans('admin::app.catalog.attributes.edit.add-attribute-options') }}"
                                     >
@@ -372,7 +372,7 @@
                 </div>
 
                 <!-- Right Sub Component -->
-                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
                     {!! view_render_event('bagisto.admin.catalog.attributes.edit.card.accordion.general.before', ['attribute' => $attribute]) !!}
 
                     <!-- General -->
@@ -470,7 +470,7 @@
 
                             <!-- Default Value -->
                             <x-admin::form.control-group
-                                class="!mb-0"
+                                class="mb-0!"
                                 v-if="canHaveDefaultValue"
                             >
                                 <x-admin::form.control-group.label>
@@ -546,7 +546,7 @@
                                                 v-bind="field"
                                                 :value="{{ json_encode($attribute->regex) }}"
                                                 :class="[errors['{{ $attribute->regex }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                                class="flex min-h-[39px] w-full cursor-not-allowed rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                                class="flex min-h-9.75 w-full cursor-not-allowed rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                                 placeholder="{{ trans('admin::app.catalog.attributes.create.regex') }}"
                                                 disabled
                                             >
@@ -560,7 +560,7 @@
                                 @endif
 
                             <!-- Is Required -->
-                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
+                            <x-admin::form.control-group class="mb-2! flex select-none items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="is_required"
@@ -579,7 +579,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Is Unique -->
-                            <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
+                            <x-admin::form.control-group class="mb-0! flex select-none items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     id="is_unique"
@@ -614,7 +614,7 @@
 
                         <x-slot:content>
                             <!-- Value Per Locale -->
-                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 opacity-70">
+                            <x-admin::form.control-group class="mb-2! flex select-none items-center gap-2.5 opacity-70">
                                 @php
                                     $valuePerLocale = old('value_per_locale') ?? $attribute->value_per_locale;
                                 @endphp
@@ -640,7 +640,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Value Per Channel -->
-                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 opacity-70">
+                            <x-admin::form.control-group class="mb-2! flex select-none items-center gap-2.5 opacity-70">
                                 @php
                                     $valuePerChannel = old('value_per_channel') ?? $attribute->value_per_channel;
                                 @endphp
@@ -665,7 +665,7 @@
 
                             <!-- Use In Layered -->
                             <x-admin::form.control-group
-                                class="!mb-2 flex select-none items-center gap-2.5"
+                                class="mb-2! flex select-none items-center gap-2.5"
                                 ::class="{ 'opacity-70' : ! isFilterable }"
                             >
                                 @php
@@ -696,7 +696,7 @@
 
                             <!-- Use To Create Configurable Product -->
                             <x-admin::form.control-group
-                                class="!mb-2 flex select-none items-center gap-2.5"
+                                class="mb-2! flex select-none items-center gap-2.5"
                                 ::class="{ 'opacity-70' : ! isConfigurable }"
                             >
                                 @php
@@ -726,7 +726,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Visible On Product View Page On Front End -->
-                            <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5">
+                            <x-admin::form.control-group class="mb-2! flex select-none items-center gap-2.5">
                                 @php
                                     $isVisibleOnFront = old('is_visible_on_front') ?? $attribute->is_visible_on_front;
                                 @endphp
@@ -753,7 +753,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Attribute Is Comparable -->
-                            <x-admin::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
+                            <x-admin::form.control-group class="mb-0! flex select-none items-center gap-2.5">
                                 @php
                                     $isComparable = old('is_comparable') ?? $attribute->is_comparable
                                 @endphp

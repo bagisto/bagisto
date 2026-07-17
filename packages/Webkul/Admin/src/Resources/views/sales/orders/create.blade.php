@@ -90,7 +90,7 @@
                                 </x-slot>
 
                                 <!-- Drawer Content -->
-                                <x-slot:content class="!p-0">
+                                <x-slot:content class="p-0!">
                                     {!! view_render_event('bagisto.admin.sales.order.create.product_options.before') !!}
 
                                     <!-- Included Simple Product Configuration Blade File -->
@@ -140,7 +140,7 @@
                 <!-- Right Component -->
                 {!! view_render_event('bagisto.admin.sales.order.right_component.before') !!}
 
-                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
                     <!-- Cart Items Component -->
                     @include('admin::sales.orders.create.cart-items')
 

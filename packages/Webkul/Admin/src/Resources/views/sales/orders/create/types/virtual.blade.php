@@ -44,7 +44,7 @@
                 <!-- Text Options -->
                 <template v-if="option.type == 'text'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -67,7 +67,7 @@
                 <!-- Textarea Options -->
                 <template v-else-if="option.type == 'textarea'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -90,7 +90,7 @@
                 <!-- Checkbox Options -->
                 <template v-else-if="option.type == 'checkbox'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -130,7 +130,7 @@
                 <!-- Radio Options -->
                 <template v-else-if="option.type == 'radio'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -195,7 +195,7 @@
                 <!-- Select Options -->
                 <template v-else-if="option.type == 'select'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -228,7 +228,7 @@
                 <!-- Multiselect Options -->
                 <template v-else-if="option.type == 'multiselect'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -254,7 +254,7 @@
                 <!-- Date Field -->
                 <template v-else-if="option.type == 'date'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -277,7 +277,7 @@
                 <!-- Datetime Field -->
                 <template v-else-if="option.type == 'datetime'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -300,7 +300,7 @@
                 <!-- Time Field -->
                 <template v-else-if="option.type == 'time'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -323,7 +323,7 @@
                 <!-- File -->
                 <template v-else-if="option.type == 'file'">
                     <x-admin::form.control-group.label
-                        class="!mt-0"
+                        class="mt-0!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}

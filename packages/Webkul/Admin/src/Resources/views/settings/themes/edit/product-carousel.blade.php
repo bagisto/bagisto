@@ -22,7 +22,7 @@
         id="v-product-carousel-template"
     >
         <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
-            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+            <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                 <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
                     <div class="flex flex-col gap-1">
                         <p class="text-base font-semibold text-gray-800 dark:text-white">
@@ -45,7 +45,7 @@
                         type="text"
                         name="{{ $currentLocale->code }}[options][title]"
                         value="{{ $theme->translate($currentLocale->code)->options['title'] ?? '' }}"
-                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                        class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                         :class="[errors['{{ $currentLocale->code }}[options][title]'] ? 'border border-red-600 hover:border-red-600' : '']"
                         rules="required"
                         label="@lang('admin::app.settings.themes.edit.filter-title')"
@@ -72,7 +72,7 @@
                         <select
                             name="{{ $currentLocale->code }}[options][filters][sort]"
                             v-bind="field"
-                            class="custom-select flex min-h-[39px] w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                            class="custom-select flex min-h-9.75 w-full rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                             :class="[errors['{{ $currentLocale->code }}[options][filters][sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                         >
                             <option value="" selected disabled>
@@ -108,7 +108,7 @@
                         <select
                             name="options[filters][limit]"
                             v-bind="field"
-                            class="custom-select flex min-h-[39px] w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                            class="custom-select flex min-h-9.75 w-full rounded-md border border-gray-300 bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                             :class="[errors['options[filters][limit]'] ? 'border border-red-600 hover:border-red-600' : '']"
                         >
                             <option value="" selected disabled>@lang('admin::app.settings.themes.edit.select')</option>
@@ -189,7 +189,7 @@
                     v-else
                 >
                     <img
-                        class="h-[120px] w-[120px] p-2 dark:mix-blend-exclusion dark:invert"
+                        class="h-30 w-30 p-2 dark:mix-blend-exclusion dark:invert"
                         src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                         alt="@lang('admin::app.settings.themes.edit.product-carousel')"
                     >

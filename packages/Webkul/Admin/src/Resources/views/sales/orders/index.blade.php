@@ -201,9 +201,9 @@
                     </x-slot>
 
                     <!-- Drawer Content -->
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         <div
-                            class="grid max-h-[400px] overflow-y-auto"
+                            class="grid max-h-100 overflow-y-auto"
                             v-if="searchedCustomers.length"
                         >
                             <div

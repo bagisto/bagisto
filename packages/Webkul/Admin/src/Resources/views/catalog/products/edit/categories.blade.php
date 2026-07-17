@@ -17,7 +17,7 @@
 @endphp
 
 <!-- Panel -->
-<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+<div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
     <!-- Panel Header -->
     <p class="mb-4 flex justify-between text-base font-semibold text-gray-800 dark:text-white">
         @lang('admin::app.catalog.products.edit.categories.title')

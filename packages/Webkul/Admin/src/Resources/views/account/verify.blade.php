@@ -3,12 +3,12 @@
         @lang('admin::app.users.verify.title')
     </x-slot>
 
-    <div class="flex h-[100vh] items-center justify-center px-4">
-        <div class="flex w-full max-w-[420px] flex-col items-center gap-6">
+    <div class="flex h-screen items-center justify-center px-4">
+        <div class="flex w-full max-w-105 flex-col items-center gap-6">
             <!-- Logo -->
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
-                    class="h-10 w-[110px]"
+                    class="h-10 w-27.5"
                     src="{{ Storage::url($logo) }}"
                     alt="{{ config('app.name') }}"
                 />
@@ -59,13 +59,13 @@
                 >
                     <div class="px-8 py-6">
                         <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="required !text-xs !font-semibold !uppercase !tracking-wide !text-gray-500 dark:!text-gray-300">
+                            <x-admin::form.control-group.label class="required text-xs! font-semibold! uppercase! tracking-wide! text-gray-500! dark:text-gray-300!">
                                 @lang('admin::app.users.verify.code-label')
                             </x-admin::form.control-group.label>
 
                             <x-admin::form.control-group.control
                                 type="text"
-                                class="text-center font-semibold !py-3 !text-xl !tracking-[0.35em] placeholder:!tracking-normal placeholder:text-base placeholder:font-normal"
+                                class="text-center font-semibold py-3! text-xl! tracking-[0.35em]! placeholder:tracking-normal! placeholder:text-base placeholder:font-normal"
                                 id="code"
                                 name="code"
                                 rules="required|numeric|digits:6"
@@ -83,7 +83,7 @@
                         <!-- Verify Button -->
                         <button
                             type="submit"
-                            class="primary-button mt-2 w-full !justify-center !py-2.5 text-base"
+                            class="primary-button mt-2 w-full justify-center! py-2.5! text-base"
                             aria-label="@lang('admin::app.users.verify.verify-code')"
                         >
                             @lang('admin::app.users.verify.verify-code')

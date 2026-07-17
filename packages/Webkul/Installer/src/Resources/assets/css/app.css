@@ -1,79 +1,70 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss" source("../../");
+
+@theme {
+    /* Fonts */
+    --font-inter: Inter;
+}
+
+/* Icons must be safelisted — many are referenced only from PHP configs or dynamic Vue bindings the Tailwind scanner can't detect. */
+@source inline("{icon-limited,icon-cross,icon-arrow-down,icon-right,icon-checkbox-active,icon-checkbox-normal,icon-tick,icon-view}");
+@utility icon-limited          { &::before { content: "\e900"; } }
+@utility icon-cross            { &::before { content: "\e901"; } }
+@utility icon-arrow-down       { &::before { content: "\e902"; } }
+@utility icon-right            { &::before { content: "\e903"; } }
+@utility icon-checkbox-active  { &::before { content: "\e904"; } }
+@utility icon-checkbox-normal  { &::before { content: "\e905"; } }
+@utility icon-tick             { &::before { content: "\e906"; } }
+@utility icon-view             { &::before { content: "\e907"; } }
+
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    * {
+        @apply box-border font-inter;
+    }
+
+    body {
+        @apply bg-gray-50;
+    }
+}
+
+@font-face {
+    font-family: 'bagisto-installer';
+    src: url('../fonts/bagisto-installer.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
 
 @layer components {
+    [class^="icon-"],
+    [class*=" icon-"] {
+        /* use !important to prevent issues with browser extensions that change fonts */
+        font-family: 'bagisto-installer' !important;
+        speak: never;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        color: #6B7280;
 
-	* {
-		@apply box-border font-inter;
-	}
+        /* Better Font Rendering */
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-	body {
-		@apply bg-gray-50;
-	}
-
-	@font-face {
-		font-family: 'bagisto-installer';
-		src: url('../fonts/bagisto-installer.woff') format('woff');
-		font-weight: normal;
-		font-style: normal;
-		font-display: block;
-	}
-
-	[class^="icon-"],
-	[class*=" icon-"] {
-		/* use !important to prevent issues with browser extensions that change fonts */
-		font-family: 'bagisto-installer' !important;
-		speak: never;
-		font-style: normal;
-		font-weight: normal;
-		font-variant: normal;
-		text-transform: none;
-		line-height: 1;
-		color: #6B7280;
-
-		/* Better Font Rendering =========== */
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-
-	.icon-limited:before {
-		content: "\e900";
-	}
-
-	.icon-cross:before {
-		content: "\e901";
-	}
-
-	.icon-arrow-down:before {
-		content: "\e902";
-	}
-
-	.icon-right:before {
-		content: "\e903";
-	}
-
-	.icon-checkbox-active:before {
-		content: "\e904";
-	}
-
-	.icon-checkbox-normal:before {
-		content: "\e905";
-	}
-
-	.icon-tick:before {
-		content: "\e906";
-	}
-
-	.icon-view:before {
-		content: "\e907";
-	}
-
-	.required:after {
+    .required::after {
         @apply content-['*'];
-	}
+    }
 
-	.custom-select {
+    .custom-select {
         -webkit-appearance: none;
         -moz-appearance: none;
         background: transparent;
@@ -83,11 +74,11 @@
         background-position-y: 50%;
     }
 
-	.primary-button {
-        @apply bg-blue-600 border border-blue-700 cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
+    [dir="rtl"] .custom-select {
+        background-position-x: calc(100% - (100% - 10px));
     }
 
-	[dir="rtl"] .custom-select {
-        background-position-x: calc(100% - (100% - 10px));
+    .primary-button {
+        @apply bg-blue-600 border border-blue-700 cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
     }
 }

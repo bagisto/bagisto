@@ -6,13 +6,13 @@
         <!-- Currencies -->
         <div class="flex w-20 items-center justify-between gap-2.5 py-3">
             <div
-                class="shimmer h-6 w-12 rounded"
+                class="shimmer h-6 w-12 rounded-sm"
                 role="presentation"
             >
             </div>
 
             <div
-                class="shimmer h-6 w-6 rounded"
+                class="shimmer h-6 w-6 rounded-sm"
                 role="presentation"
             >
             </div>
@@ -20,7 +20,7 @@
 
         <!-- Offers -->
         <div
-            class="shimmer h-6 w-72 rounded py-3"
+            class="shimmer h-6 w-72 rounded-sm py-3"
             role="presentation"
         >
         </div>
@@ -34,7 +34,7 @@
             </div>
 
             <div
-                class="shimmer h-6 w-14 rounded"
+                class="shimmer h-6 w-14 rounded-sm"
                 role="presentation"
             >
             </div>
@@ -82,7 +82,7 @@
                 </x-slot>
 
                 <!-- Dropdown Content -->
-                <x-slot:content class="journal-scroll max-h-[500px] !p-0">
+                <x-slot:content class="journal-scroll max-h-125 p-0!">
                     <v-currency-switcher></v-currency-switcher>
                 </x-slot>
             </x-shop::dropdown>
@@ -140,7 +140,7 @@
                 </x-slot>
             
                 <!-- Dropdown Content -->
-                <x-slot:content class="journal-scroll max-h-[500px] !p-0">
+                <x-slot:content class="journal-scroll max-h-125 p-0!">
                     <v-locale-switcher></v-locale-switcher>
                 </x-slot>
             </x-shop::dropdown>
@@ -153,7 +153,7 @@
         type="text/x-template"
         id="v-currency-switcher-template"
     >
-        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-[500px]">
+        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-125">
             <span
                 class="cursor-pointer px-5 py-2 text-base hover:bg-gray-100"
                 v-for="currency in currencies"
@@ -169,7 +169,7 @@
         type="text/x-template"
         id="v-locale-switcher-template"
     >
-        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-[500px]">
+        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-125">
             <span
                 class="flex cursor-pointer items-center gap-2.5 px-5 py-2 text-base hover:bg-gray-100"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"

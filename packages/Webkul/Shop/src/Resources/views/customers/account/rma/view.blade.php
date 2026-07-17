@@ -36,7 +36,7 @@
                 @lang('shop::app.rma.view-customer-rma.heading')
             </h2>
 
-            <div class="rounded-xl border shadow-sm overflow-hidden">
+            <div class="rounded-xl border shadow-xs overflow-hidden">
                 <div class="p-6 space-y-4 max-md:p-4">
                     <!-- Request Date -->
                     <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
@@ -91,7 +91,7 @@
                                     <a href="{{ Storage::url($image['path']) }}" target="_blank">
                                         <img
                                             src="{{ Storage::url($image['path']) }}"
-                                            class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded border shadow-sm hover:shadow-md transition"
+                                            class="w-24 h-24 max-sm:w-20 max-sm:h-20 object-cover rounded-sm border shadow-xs hover:shadow-md transition"
                                         />
                                     </a>
                                 @endforeach
@@ -128,7 +128,7 @@
                             @php $checkboxName = $canCloseRma ? 'close_rma' : 'reopen_rma'; @endphp
 
                             <div class="flex flex-wrap items-center justify-between gap-4">
-                                <x-shop::form.control-group class="!mb-0 flex select-none items-center gap-2.5">
+                                <x-shop::form.control-group class="mb-0! flex select-none items-center gap-2.5">
                                     <x-shop::form.control-group.control
                                         type="checkbox"
                                         :id="$checkboxName"
@@ -164,7 +164,7 @@
             </h2>
 
             <!-- Desktop Table View -->
-            <div class="rounded-xl border shadow-sm overflow-hidden hidden md:block">
+            <div class="rounded-xl border shadow-xs overflow-hidden hidden md:block">
                 <table class="w-full table-fixed">
                     <thead class="bg-gray-50">
                         <tr>
@@ -275,15 +275,15 @@
             <!-- Mobile Card View -->
             <div class="md:hidden space-y-4">
                 @if($item = $rma->item)
-                    <div class="rounded-xl border shadow-sm p-4 space-y-3">
+                    <div class="rounded-xl border shadow-xs p-4 space-y-3">
                         <div class="flex items-center gap-3">
                             @if ($item->orderItem->product?->images?->first())
                                 <img 
                                     src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}" 
-                                    class="w-16 h-16 object-cover rounded border"
+                                    class="w-16 h-16 object-cover rounded-sm border"
                                 />
                             @else
-                                <div class="w-16 h-16 border border-dashed rounded flex items-center justify-center text-gray-300">
+                                <div class="w-16 h-16 border border-dashed rounded-sm flex items-center justify-center text-gray-300">
                                     <span class="text-xs">No Image</span>
                                 </div>
                             @endif
@@ -364,7 +364,7 @@
                 </p>
             </div>
 
-            <div class="relative mt-3 flex flex-col-reverse overflow-hidden rounded-xl border shadow-sm bg-white">
+            <div class="relative mt-3 flex flex-col-reverse overflow-hidden rounded-xl border shadow-xs bg-white">
                 <div class="border-t border-zinc-200 bg-white p-4 max-md:p-3">
                     <x-shop::form
                         v-slot="{ meta, errors, handleSubmit }" 
@@ -387,11 +387,11 @@
                             />
 
                             <x-shop::form.control-group>
-                                <div class="bg-white !pl-0 !pt-2">
+                                <div class="bg-white pl-0! pt-2!">
                                     <x-shop::form.control-group.control
                                         type="textarea"
                                         name="message"
-                                        class="!mb-1 px-5 max-md:px-3 py-5 max-md:py-3"
+                                        class="mb-1! px-5 max-md:px-3 py-5 max-md:py-3"
                                         rules="required"
                                         maxlength="250"
                                         :placeholder="trans('shop::app.customers.account.rma.view.enter-message')"
@@ -450,7 +450,7 @@
                                 :class="message.is_admin == 1 ? 'justify-start' : 'justify-end'"
                             >
                                 <div
-                                    class="max-w-[70%] w-fit rounded-xl p-3.5 text-left shadow-sm"
+                                    class="max-w-[70%] w-fit rounded-xl p-3.5 text-left shadow-xs"
                                     :class="message.is_admin == 1 ? 'bg-gray-100' : 'bg-blue-50'"
                                 >
                                     <div class="flex items-center gap-2 mb-1">
@@ -505,7 +505,7 @@
                         <img
                             v-if="messagePath && (getAttachmentExtension === 'jpg' || getAttachmentExtension === 'jpeg' || getAttachmentExtension === 'png' || getAttachmentExtension === 'gif')"
                             :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
-                            class="min-h-[500px] min-w-[500px] max-h-[500px] max-w-[500px] max-md:min-h-[300px] max-md:min-w-[300px] max-md:max-h-[300px] max-md:max-w-[300px] rounded m-auto"
+                            class="min-h-125 min-w-125 max-h-125 max-w-125 max-md:min-h-75 max-md:min-w-75 max-md:max-h-75 max-md:max-w-75 rounded-sm m-auto"
                         />
 
                         <embed
@@ -518,7 +518,7 @@
                         <video
                             v-if="messagePath && (getAttachmentExtension === 'mp4' || getAttachmentExtension === 'webm' || getAttachmentExtension === 'ogg')"
                             controls
-                            class="w-full h-auto max-h-[500px] max-md:max-h-[300px] rounded m-auto"
+                            class="w-full h-auto max-h-125 max-md:max-h-75 rounded-sm m-auto"
                         >
                             <source :src="'{{ config('app.url') }}' + '/storage/' + messagePath" />
                         </video>

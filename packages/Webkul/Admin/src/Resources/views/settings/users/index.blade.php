@@ -160,7 +160,7 @@
                             <p>@{{ record.status }}</p>
 
                             <!-- Email -->
-                            <p class="break-words">@{{ record.email }}</p>
+                            <p class="wrap-break-word">@{{ record.email }}</p>
 
                             <!-- Role -->
                             <p>@{{ record.role_name }}</p>
@@ -320,7 +320,7 @@
                                     >
                                         <select
                                             name="role_id"
-                                            class="flex min-h-[39px] w-full rounded-md border bg-white px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                            class="flex min-h-9.75 w-full rounded-md border bg-white px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                             :class="[errors['options[sort]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                             v-model="data.user.role_id"
                                         >
@@ -339,7 +339,7 @@
                                 </x-admin::form.control-group>
 
                                 <template v-if="currentUserId != data.user.id">
-                                    <x-admin::form.control-group class="!mb-0 w-full flex-1">
+                                    <x-admin::form.control-group class="mb-0! w-full flex-1">
                                         <x-admin::form.control-group.label>
                                             @lang('admin::app.settings.users.index.create.status')
                                         </x-admin::form.control-group.label>

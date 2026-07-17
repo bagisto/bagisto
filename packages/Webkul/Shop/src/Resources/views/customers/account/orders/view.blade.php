@@ -111,7 +111,7 @@
         <div class="mt-8 max-md:mt-5 max-md:grid max-md:gap-4">
             <x-shop::tabs>
                 <x-shop::tabs.item
-                    class="!px-0 max-md:pb-0 max-md:pt-2"
+                    class="px-0! max-md:pb-0 max-md:pt-2"
                     :title="trans('shop::app.customers.account.orders.view.information.info')"
                     :is-selected="true"
                 >
@@ -541,13 +541,13 @@
                         <!-- Item Ordered -->
                         <x-shop::accordion
                             :is-active="true"
-                            class="overflow-hidden rounded-lg !border-none !bg-gray-100"
+                            class="overflow-hidden rounded-lg border-none! bg-gray-100!"
                         >
-                            <x-slot:header class="bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
+                            <x-slot:header class="bg-gray-100 px-4! py-3 text-sm font-medium max-sm:py-2">
                                @lang('shop::app.customers.account.orders.view.item-ordered')
                             </x-slot>
 
-                            <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
+                            <x-slot:content class="grid gap-2.5 bg-gray-100! p-0!">
                                 @foreach ($order->items as $item)
                                     <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                         <p class="pb-2 text-sm font-medium">
@@ -556,7 +556,7 @@
                                             @if (isset($item->additional['attributes']))
                                                 <div>
                                                     @foreach ($item->additional['attributes'] as $attribute)
-                                                        <b  class="max-sm:!font-semibold">{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
+                                                        <b  class="max-sm:font-semibold!">{{ $attribute['attribute_name'] }} : </b>{{ $attribute['option_label'] }}<br>
                                                     @endforeach
                                                 </div>
                                             @endif
@@ -711,7 +711,7 @@
                             class="w-full rounded-md bg-gray-100"
                             v-pre
                         >
-                            <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
+                            <div class="rounded-t-md border-none px-4! py-3 text-sm font-medium max-sm:py-2">
                                 @lang('shop::app.customers.account.orders.view.information.order-summary')
                             </div>
 
@@ -929,7 +929,7 @@
                 <!-- Invoices tab -->
                 @if ($order->invoices->count())
                     <x-shop::tabs.item
-                        class="max-md:!px-0 max-md:pb-0 max-md:pt-2"
+                        class="max-md:px-0! max-md:pb-0 max-md:pt-2"
                         :title="trans('shop::app.customers.account.orders.view.invoices.invoices')"
                     >
                         <div class="flex flex-col gap-10 max-md:gap-8">
@@ -958,13 +958,13 @@
                                     <!-- Item  Invoiced -->
                                     <x-shop::accordion
                                         :is-active="true"
-                                        class="overflow-hidden rounded-lg !border-none !bg-gray-100"
+                                        class="overflow-hidden rounded-lg border-none! bg-gray-100!"
                                     >
-                                        <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
+                                        <x-slot:header class="mb-0! rounded-t-md bg-gray-100 px-4! py-3 text-sm font-medium max-sm:py-2">
                                             @lang('shop::app.customers.account.orders.view.item-invoiced')
                                         </x-slot>
 
-                                        <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
+                                        <x-slot:content class="grid gap-2.5 bg-gray-100! p-0!">
                                             @foreach ($invoice->items as $item)
                                                 <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                     <p class="pb-2 text-sm font-medium">
@@ -1066,7 +1066,7 @@
                                         class="w-full rounded-md bg-gray-100"
                                         v-pre
                                     >
-                                        <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
+                                        <div class="rounded-t-md border-none px-4! py-3 text-sm font-medium max-sm:py-2">
                                             @lang('Order Summary')
                                         </div>
 
@@ -1455,7 +1455,7 @@
                 <!-- Shipment tab -->
                 @if ($order->shipments->count())
                     <x-shop::tabs.item
-                        class="max-md:!px-0 max-md:py-1.5"
+                        class="max-md:px-0! max-md:py-1.5"
                         title="{{ trans('shop::app.customers.account.orders.view.shipments.shipments') }}"
                     >
                         <div class="flex flex-col gap-10 max-md:gap-8">
@@ -1550,13 +1550,13 @@
 
                                     <x-shop::accordion
                                         :is-active="true"
-                                        class="overflow-hidden rounded-lg !border-none !bg-gray-100"
+                                        class="overflow-hidden rounded-lg border-none! bg-gray-100!"
                                     >
-                                        <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
+                                        <x-slot:header class="mb-0! rounded-t-md bg-gray-100 px-4! py-3 text-sm font-medium max-sm:py-2">
                                             @lang('shop::app.customers.account.orders.view.item-shipped')
                                         </x-slot>
 
-                                        <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
+                                        <x-slot:content class="grid gap-2.5 bg-gray-100! p-0!">
                                             @foreach ($shipment->items as $item)
                                                 <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                     <p class="pb-2 text-sm font-medium">
@@ -1597,7 +1597,7 @@
                 <!-- Refund Tab -->
                 @if ($order->refunds->count())
                     <x-shop::tabs.item
-                        class="max-md:!px-0 max-md:py-1.5"
+                        class="max-md:px-0! max-md:py-1.5"
                         :title="trans('shop::app.customers.account.orders.view.refunds.refunds')"
                     >
                         @foreach ($order->refunds as $refund)
@@ -1729,13 +1729,13 @@
 
                                 <x-shop::accordion
                                     :is-active="true"
-                                    class="overflow-hidden rounded-lg !border-none !bg-gray-100"
+                                    class="overflow-hidden rounded-lg border-none! bg-gray-100!"
                                 >
-                                    <x-slot:header class="!mb-0 rounded-t-md bg-gray-100 !px-4 py-3 text-sm font-medium max-sm:py-2">
+                                    <x-slot:header class="mb-0! rounded-t-md bg-gray-100 px-4! py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.item-refunded')
                                     </x-slot>
 
-                                    <x-slot:content class="grid gap-2.5 !bg-gray-100 !p-0">
+                                    <x-slot:content class="grid gap-2.5 bg-gray-100! p-0!">
                                         @foreach ($invoice->items as $item)
                                             <div class="rounded-md rounded-t-none border border-t-0 bg-white px-4 py-2">
                                                 <p class="pb-2 text-sm font-medium">
@@ -1829,7 +1829,7 @@
                                     class="w-full rounded-md bg-gray-100"
                                     v-pre
                                 >
-                                    <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
+                                    <div class="rounded-t-md border-none px-4! py-3 text-sm font-medium max-sm:py-2">
                                         @lang('shop::app.customers.account.orders.view.refunds.order-summary')
                                     </div>
 
@@ -2177,7 +2177,7 @@
                 class="w-full rounded-md bg-gray-100 md:hidden"
                 v-pre
             >
-                <div class="rounded-t-md border-none !px-4 py-3 text-sm font-medium max-sm:py-2">
+                <div class="rounded-t-md border-none px-4! py-3 text-sm font-medium max-sm:py-2">
                     @lang('shop::app.customers.account.orders.view.shipping-and-payment')
                 </div>
 
@@ -2264,7 +2264,7 @@
             >
                 <!-- Billing Address -->
                 @if ($order->billing_address)
-                    <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
+                    <div class="grid max-w-50 gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
                         <p class="text-base text-zinc-500 max-md:text-lg max-md:text-black">
                             @lang('shop::app.customers.account.orders.view.billing-address')
                         </p>
@@ -2284,7 +2284,7 @@
 
                 <!-- Shipping Address -->
                 @if ($order->shipping_address)
-                    <div class="grid max-w-[200px] gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
+                    <div class="grid max-w-50 gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
                         <p class="text-base text-zinc-500 max-md:text-lg max-md:text-black">
                             @lang('shop::app.customers.account.orders.view.shipping-address')
                         </p>
@@ -2301,7 +2301,7 @@
                     {!! view_render_event('bagisto.shop.customers.account.orders.view.shipping_address.after', ['order' => $order]) !!}
 
                     <!-- Shipping Method -->
-                    <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
+                    <div class="grid max-w-50 place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
                         <p class="text-base text-zinc-500 max-md:text-lg max-md:text-black">
                             @lang('shop::app.customers.account.orders.view.shipping-method')
                         </p>
@@ -2318,7 +2318,7 @@
                 @endif
 
                 <!-- Payment Method -->
-                <div class="grid max-w-[200px] place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
+                <div class="grid max-w-50 place-content-baseline gap-4 max-868:w-full max-868:max-w-full max-md:max-w-full max-md:gap-2">
                     <p class="text-base text-zinc-500 max-md:text-lg max-md:text-black">
                         @lang('shop::app.customers.account.orders.view.payment-method')
                     </p>

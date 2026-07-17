@@ -18,7 +18,7 @@
         id="v-datagrid-table-template"
     >
         <div class="w-full overflow-x-auto rounded-xl border max-md:rounded-none max-md:border-0">
-            <div class="table-responsive box-shadow grid w-full overflow-hidden rounded bg-white">
+            <div class="table-responsive box-shadow grid w-full overflow-hidden rounded-sm bg-white">
                 <slot
                     name="header"
                     :is-loading="isLoading"
@@ -130,7 +130,7 @@
                                 <!-- Columns -->
                                 <template v-for="column in available.columns">
                                     <p
-                                        class="break-words"
+                                        class="wrap-break-word"
                                         v-html="record[column.index]"
                                         v-if="column.visibility"
                                     >
@@ -183,14 +183,14 @@
                             <!-- Pagination -->
                             <div class="flex items-center gap-1">
                                 <div
-                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 focus:outline-hidden focus:ring-2 focus:ring-black active:border-gray-300"
                                     @click="changePage('previous')"
                                 >
                                     <span class="icon-sort-left text-2xl"></span>
                                 </div>
 
                                 <div
-                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-black active:border-gray-300"
+                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 focus:outline-hidden focus:ring-2 focus:ring-black active:border-gray-300"
                                     @click="changePage('next')"
                                 >
                                     <span class="icon-sort-right text-2xl"></span>
@@ -213,7 +213,7 @@
                                         <input
                                             type="text"
                                             :value="$parent.available.meta.current_page"
-                                            class="max-w-[42px] items-center border-l border-r px-4 py-2 font-medium leading-normal text-black hover:bg-gray-100 max-md:max-w-9 max-md:justify-normal max-md:px-0 max-md:py-1 max-md:text-center"
+                                            class="max-w-10.5 items-center border-l border-r px-4 py-2 font-medium leading-normal text-black hover:bg-gray-100 max-md:max-w-9 max-md:justify-normal max-md:px-0 max-md:py-1 max-md:text-center"
                                             @change="changePage(parseInt($event.target.value))"
                                             aria-label="@lang('shop::app.components.datagrid.table.page-number')"
                                         >
