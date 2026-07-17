@@ -18,6 +18,10 @@
     /* Fonts */
     --font-inter: Inter;
     --font-icon:  icomoon;
+
+    /* Semantic text tokens — font-size paired with a default line-height; utilities can still override. */
+    --text-body:               14px;
+    --text-body--line-height:  calc(17 / 14);
 }
 
 @utility container {
@@ -145,7 +149,7 @@
     }
 
     p {
-        @apply text-[14px] leading-[17px]!;
+        @apply text-body;
     }
 
     ::selection {
