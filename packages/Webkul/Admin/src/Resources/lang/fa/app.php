@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'دسته‌بندی‌ها',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'عملیات',
+                        'channel' => 'کانال',
                         'delete' => 'حذف',
                         'edit' => 'ویرایش',
                         'file-name' => 'نام فایل',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'کانال‌ها',
                         'delete-warning' => 'آیا از انجام این عملیات مطمئن هستید؟',
                         'file-name' => 'نام فایل',
                         'file-name-info' => 'مثال: sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => 'نام',
                 'permissions' => 'مجوزها',
                 'save-btn' => 'ذخیره نقش',
+                'search-permissions' => 'جستجوی مجوزها',
                 'title' => 'ایجاد نقش',
             ],
 

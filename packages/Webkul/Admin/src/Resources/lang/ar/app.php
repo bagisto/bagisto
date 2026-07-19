@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'الفئات',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'إجراءات',
+                        'channel' => 'القناة',
                         'delete' => 'حذف',
                         'edit' => 'تعديل',
                         'file-name' => 'اسم الملف',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'القنوات',
                         'delete-warning' => 'هل أنت متأكد أنك تريد القيام بهذا الإجراء؟',
                         'file-name' => 'اسم الملف',
                         'file-name-info' => 'مثال: sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => 'الاسم',
                 'permissions' => 'الصلاحيات',
                 'save-btn' => 'حفظ الدور',
+                'search-permissions' => 'البحث في الصلاحيات',
                 'title' => 'إنشاء الدور',
             ],
 

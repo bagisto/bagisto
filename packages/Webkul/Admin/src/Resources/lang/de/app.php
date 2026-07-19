@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'Kategorien',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'Aktionen',
+                        'channel' => 'Kanal',
                         'delete' => 'Löschen',
                         'edit' => 'Bearbeiten',
                         'file-name' => 'Dateiname',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'Kanäle',
                         'delete-warning' => 'Sind Sie sicher, dass Sie diese Aktion ausführen möchten?',
                         'file-name' => 'Dateiname',
                         'file-name-info' => 'Beispiel: sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => 'Name',
                 'permissions' => 'Berechtigungen',
                 'save-btn' => 'Rolle speichern',
+                'search-permissions' => 'Berechtigungen suchen',
                 'title' => 'Rolle erstellen',
             ],
 

@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'Kategori',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'Aksi',
+                        'channel' => 'Saluran',
                         'delete' => 'Hapus',
                         'edit' => 'Edit',
                         'file-name' => 'Nama File',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'Saluran',
                         'delete-warning' => 'Apakah Anda yakin ingin melakukan tindakan ini?',
                         'file-name' => 'Nama File',
                         'file-name-info' => 'Contoh: sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => 'Nama',
                 'permissions' => 'Izin',
                 'save-btn' => 'Simpan Peran',
+                'search-permissions' => 'Cari izin',
                 'title' => 'Buat Peran',
             ],
 
@@ -4049,7 +4053,7 @@ return [
         'products' => [
             'index' => [
                 'all-channels' => 'Semua Channel',
-                'channel' => 'Channel',
+                'channel' => 'Saluran',
                 'end-date' => 'Tanggal Akhir',
                 'id' => 'ID',
                 'interval' => 'Interval',

@@ -64,6 +64,8 @@
                     name-field="categories"
                     id-field="id"
                     value-field="id"
+                    searchable="true"
+                    search-placeholder="{{ trans('admin::app.catalog.products.edit.categories.search') }}"
                     ::items="categories"
                     :value="json_encode($product->categories->pluck('id'))"
                     :fallback-locale="config('app.fallback_locale')"

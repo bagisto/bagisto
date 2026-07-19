@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => '分类',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => '操作',
+                        'channel' => '渠道',
                         'delete' => '删除',
                         'edit' => '编辑',
                         'file-name' => '文件名',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => '渠道',
                         'delete-warning' => '您确定要执行此操作吗？',
                         'file-name' => '文件名',
                         'file-name-info' => '示例：sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => '名称',
                 'permissions' => '权限',
                 'save-btn' => '保存角色',
+                'search-permissions' => '搜索权限',
                 'title' => '创建角色',
             ],
 

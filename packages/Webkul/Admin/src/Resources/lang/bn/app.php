@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'বিভাগসমূহ',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'ক্রিয়া',
+                        'channel' => 'চ্যানেল',
                         'delete' => 'মুছে ফেলুন',
                         'edit' => 'সম্পাদনা করুন',
                         'file-name' => 'ফাইল নাম',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'চ্যানেলস',
                         'delete-warning' => 'আপনি কি এই ক্রিয়াটি সম্পাদন করতে চান তা নিশ্চিত?',
                         'file-name' => 'ফাইল নাম',
                         'file-name-info' => 'উদাহরণ: sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => 'নাম',
                 'permissions' => 'অনুমতিসমূহ',
                 'save-btn' => 'ভূমিকা সংরক্ষণ করুন',
+                'search-permissions' => 'অনুমতি খুঁজুন',
                 'title' => 'ভূমিকা তৈরি করুন',
             ],
 

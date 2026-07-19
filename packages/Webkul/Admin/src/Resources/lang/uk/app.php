@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'Категорії',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'Дії',
+                        'channel' => 'Канал',
                         'delete' => 'Видалити',
                         'edit' => 'Редагувати',
                         'file-name' => 'Ім я файлу',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'Канали',
                         'delete-warning' => 'Ви впевнені, що хочете виконати цю дію?',
                         'file-name' => 'Ім я файлу',
                         'file-name-info' => 'Приклад: sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => 'Назва',
                 'permissions' => 'Дозволи',
                 'save-btn' => 'Зберегти роль',
+                'search-permissions' => 'Пошук дозволів',
                 'title' => 'Створити роль',
             ],
 

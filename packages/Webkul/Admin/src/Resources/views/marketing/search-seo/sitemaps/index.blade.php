@@ -40,7 +40,7 @@
                 @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.create'))
                     <div
                         class="primary-button"
-                        @click="selectedSitemap=0; $refs.sitemap.toggle()"
+                        @click="selectedSitemap=0; resetForm(); $refs.sitemapUpdateOrCreateModal.toggle()"
                     >
                         @lang('admin::app.marketing.search-seo.sitemaps.index.create-btn')
                     </div>
@@ -74,6 +74,9 @@
                             <!-- ID -->
                             <p>@{{ record.id }}</p>
 
+                            <!-- Channel -->
+                            <p>@{{ record.channel }}</p>
+
                             <!-- File Name -->
                             <p>@{{ record.file_name }}</p>
 
@@ -81,16 +84,22 @@
                             <p>@{{ record.path }}</p>
 
                             <!-- URL -->
-                            <p>
-                                <a :href="record.url" target="_blank">
-                                    @{{ record.url}}
+                            <div class="flex flex-col gap-1">
+                                <a
+                                    v-for="url in (Array.isArray(record.url) ? record.url : [record.url])"
+                                    :key="url"
+                                    :href="url"
+                                    target="_blank"
+                                    class="text-blue-600 hover:underline dark:text-blue-300"
+                                >
+                                    @{{ url }}
                                 </a>
-                            </p>
+                            </div>
 
                             <!-- Actions -->
                             <div class="flex justify-end">
                                 @if (bouncer()->hasPermission('marketing.search_seo.sitemaps.edit'))
-                                    <a @click="selectedSitemap=1; editModal(record)">
+                                    <a @click="selectedSitemap=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
                                         <span
                                             :class="record.actions.find(action => action.index === 'edit')?.icon"
                                             class="cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 max-sm:place-self-center"
@@ -127,10 +136,10 @@
                     @submit="handleSubmit($event, updateOrCreate)"
                     ref="sitemapCreateForm"
                 >
-                    <x-admin::modal ref="sitemap">
+                    <x-admin::modal ref="sitemapUpdateOrCreateModal">
                         <!-- Modal Header -->
                         <x-slot:header>
-                            <!-- Create Modal title -->
+                            <!-- Edit Modal title -->
                             <p
                                 class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-if="selectedSitemap"
@@ -138,7 +147,7 @@
                                 @lang('admin::app.marketing.search-seo.sitemaps.index.edit.title')
                             </p>
 
-                            <!-- Edit Modal title -->
+                            <!-- Create Modal title -->
                             <p
                                 class="text-lg font-bold text-gray-800 dark:text-white"
                                 v-else
@@ -153,6 +162,7 @@
                             <x-admin::form.control-group.control
                                 type="hidden"
                                 name="id"
+                                v-model="sitemap.id"
                             />
 
                             <!-- File Name -->
@@ -165,14 +175,14 @@
                                     type="text"
                                     name="file_name"
                                     rules="required"
-                                    :value="old('file_name')"
+                                    v-model="sitemap.file_name"
                                     :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
                                     :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.file-name')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="file_name" />
 
-                                <p class="mt-2 text-xs font-medium text-gray-600 dark:text-gray-300 ltr:ml-1 rtl:mr-1">
+                                <p class="mt-2 text-xs font-medium text-gray-600 ltr:ml-1 rtl:mr-1 dark:text-gray-300">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.file-name-info')
                                 </p>
 
@@ -188,17 +198,47 @@
                                     type="text"
                                     name="path"
                                     rules="required"
-                                    :value="old('path')"
+                                    v-model="sitemap.path"
                                     :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
                                     :placeholder="trans('admin::app.marketing.search-seo.sitemaps.index.create.path')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="path" />
 
-                                <p class="mt-2 text-xs font-medium text-gray-600 dark:text-gray-300 ltr:ml-1 rtl:mr-1">
+                                <p class="mt-2 text-xs font-medium text-gray-600 ltr:ml-1 rtl:mr-1 dark:text-gray-300">
                                     @lang('admin::app.marketing.search-seo.sitemaps.index.create.path-info')
                                 </p>
                             </x-admin::form.control-group>
+
+                            <!-- Select Channels -->
+                            <x-admin::form.control-group.label class="required">
+                                @lang('admin::app.marketing.search-seo.sitemaps.index.create.channels')
+                            </x-admin::form.control-group.label>
+
+                            @foreach (core()->getAllChannels() as $channel)
+                                <x-admin::form.control-group class="!mb-2 flex select-none items-center gap-2.5 last:!mb-0">
+                                    <x-admin::form.control-group.control
+                                        type="checkbox"
+                                        :id="'channels_' . $channel->id"
+                                        name="channels[]"
+                                        rules="required"
+                                        :value="(string) $channel->id"
+                                        v-model="sitemap.channels"
+                                        :for="'channels_' . $channel->id"
+                                        :label="trans('admin::app.marketing.search-seo.sitemaps.index.create.channels')"
+                                    />
+
+                                    <label
+                                        class="cursor-pointer text-xs font-medium text-gray-600 dark:text-gray-300"
+                                        for="channels_{{ $channel->id }}"
+                                        v-pre
+                                    >
+                                        {{ core()->getChannelName($channel) }}
+                                    </label>
+                                </x-admin::form.control-group>
+                            @endforeach
+
+                            <x-admin::form.control-group.error control-name="channels[]" />
                         </x-slot>
 
                         <!-- Modal Footer -->
@@ -223,6 +263,10 @@
 
                 data() {
                     return {
+                        sitemap: {
+                            channels: [],
+                        },
+
                         selectedSitemap: 0,
 
                         isLoading: false,
@@ -231,7 +275,7 @@
 
                 computed: {
                     gridsCount() {
-                        let count = this.$refs.datagrid.available.columns.length;
+                        let count = this.$refs.datagrid.available.columns.filter((column) => column.visibility).length;
 
                         if (this.$refs.datagrid.available.actions.length) {
                             ++count;
@@ -255,13 +299,13 @@
                             formData.append('_method', 'put');
                         }
 
-                        this.$axios.post(params.id ? "{{ route('admin.marketing.search_seo.sitemaps.update') }}" : "{{ route('admin.marketing.search_seo.sitemaps.store') }}", formData )
+                        this.$axios.post(params.id ? "{{ route('admin.marketing.search_seo.sitemaps.update') }}" : "{{ route('admin.marketing.search_seo.sitemaps.store') }}", formData)
                             .then((response) => {
                                 this.isLoading = false;
 
-                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
+                                this.$refs.sitemapUpdateOrCreateModal.close();
 
-                                this.$refs.sitemap.toggle();
+                                this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
 
                                 this.$refs.datagrid.get();
 
@@ -276,10 +320,25 @@
                             });
                     },
 
-                    editModal(values) {
-                        this.$refs.sitemap.toggle();
+                    editModal(url) {
+                        this.$axios.get(url)
+                            .then((response) => {
+                                this.sitemap = {
+                                    ...response.data.data,
+                                    channels: (response.data.data.channels ?? []).map(String),
+                                };
 
-                        this.$refs.modalForm.setValues(values);
+                                this.$refs.sitemapUpdateOrCreateModal.toggle();
+                            })
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    },
+
+                    resetForm() {
+                        this.sitemap = {
+                            channels: [],
+                        };
                     },
                 },
             })

@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'カテゴリー',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'アクション',
+                        'channel' => 'チャネル',
                         'delete' => '削除',
                         'edit' => '編集',
                         'file-name' => 'ファイル名',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'チャンネル',
                         'delete-warning' => '本当にこのアクションを実行しますか？',
                         'file-name' => 'ファイル名',
                         'file-name-info' => '例: sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => '名前',
                 'permissions' => '権限',
                 'save-btn' => '役割を保存',
+                'search-permissions' => '権限を検索',
                 'title' => '役割を作成',
             ],
 

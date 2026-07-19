@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'Categories',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'Actions',
+                        'channel' => 'Channel',
                         'delete' => 'Delete',
                         'edit' => 'Edit',
                         'file-name' => 'File Name',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'Channels',
                         'delete-warning' => 'Are you sure, you want to perform this action?',
                         'file-name' => 'File Name',
                         'file-name-info' => 'Example: sitemap.xml',
@@ -3789,7 +3792,7 @@ return [
             'delete-success' => 'User deleted successfully.',
             'delete-warning' => 'Are you sure, you want to perform this action?',
             'incorrect-password' => 'Incorrect password',
-            'last-delete-error' => 'Atleast one admin is required.',
+            'last-delete-error' => 'At least one admin is required.',
             'login-error' => 'Please check your credentials and try again.',
             'update-success' => 'User updated successfully.',
         ],
@@ -3820,6 +3823,7 @@ return [
                 'name' => 'Name',
                 'permissions' => 'Permissions',
                 'save-btn' => 'Save Role',
+                'search-permissions' => 'Search permissions',
                 'title' => 'Create Role',
             ],
 
@@ -5399,7 +5403,7 @@ return [
 
                 'dropdown' => [
                     'searchable' => [
-                        'atleast-two-chars' => 'Type atleast 2 characters...',
+                        'atleast-two-chars' => 'Type at least 2 characters...',
                         'no-results' => 'No result found...',
                     ],
                 ],

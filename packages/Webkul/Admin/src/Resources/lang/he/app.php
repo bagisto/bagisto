@@ -1222,6 +1222,7 @@ return [
                 ],
 
                 'categories' => [
+                    'search' => 'Search categories',
                     'title' => 'קטגוריות',
                 ],
 
@@ -3085,6 +3086,7 @@ return [
 
                     'datagrid' => [
                         'actions' => 'פעולות',
+                        'channel' => 'ערוץ',
                         'delete' => 'מחיקה',
                         'edit' => 'עריכה',
                         'file-name' => 'שם קובץ',
@@ -3094,6 +3096,7 @@ return [
                     ],
 
                     'create' => [
+                        'channels' => 'ערוצים',
                         'delete-warning' => 'האם אתה בטוח שברצונך לבצע פעולה זו?',
                         'file-name' => 'שם קובץ',
                         'file-name-info' => 'דוגמה: sitemap.xml',
@@ -3820,6 +3823,7 @@ return [
                 'name' => 'שם',
                 'permissions' => 'הרשאות',
                 'save-btn' => 'שמור תפקיד',
+                'search-permissions' => 'חיפוש הרשאות',
                 'title' => 'יצירת תפקיד',
             ],
 
