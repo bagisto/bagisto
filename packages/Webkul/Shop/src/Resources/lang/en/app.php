@@ -536,6 +536,9 @@ return [
     ],
 
     'components' => [
+        'accessibility' => [
+            'skip-to-main-content' => 'Skip to main content',
+        ],
         'accordion' => [
             'default-content' => 'Default Content',
             'default-header' => 'Default Header',
@@ -710,7 +713,9 @@ return [
                 'add-to-compare-success' => 'Item added successfully to compare list.',
                 'add-to-wishlist' => 'Add To Wishlist',
                 'already-in-compare' => 'Item is already added to compare list.',
+                'discount-aria' => 'Product :product with :percentage percent discount',
                 'new' => 'New',
+                'off' => 'OFF',
                 'review-description' => 'Be the first to review this product',
                 'sale' => 'Sale',
             ],
@@ -974,9 +979,11 @@ return [
 
     'categories' => [
         'filters' => [
+            'applied' => 'Applied filters',
             'clear-all' => 'Clear All',
             'filter' => 'Filter',
             'filters' => 'Filters:',
+            'remove-filter' => 'Remove filter :filter',
 
             'search' => [
                 'load-more' => 'Load More',

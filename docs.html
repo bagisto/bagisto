@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Documentación Técnica · Bagisto IPS-2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg-deep:      #EAE8E3;
+  --bg-clay:      #F4F2EC;
+  --line:         rgba(0, 0, 0, 0.05);
+  --line-strong:  rgba(0, 0, 0, 0.1);
+  --text-core:    #2D3436;
+  --text-soft:    #636E72;
+  --text-fade:    #A0AAB2;
+  --accent-green: #52796F;
+  --accent-ind:   #E07A5F;
+  --accent-purp:  #D4A373;
+  --r-clay:       22px;
+  --r-inner:      12px;
+  --sh-clay-out:  8px 8px 16px rgba(0, 0, 0, 0.06), -8px -8px 16px rgba(255, 255, 255, 0.7);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-deep); color: var(--text-core);
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: 'Fira Code', monospace; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+nav {
+  position: fixed; top: 12px; left: 12px; right: 12px; z-index: 200;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px; border-radius: var(--r-inner);
+  background: rgba(244, 242, 236, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+.nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; color: var(--text-core); text-decoration: none; }
+.nav-logo::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-ind); }
+.nav-link { color: var(--text-soft); text-decoration: none; font-size: 13px; font-weight: 600; margin-left: 16px; }
+.nav-link:hover { color: var(--accent-ind); }
+
+header.page-head { padding: 120px 0 24px; }
+.eyebrow { font-family: 'Fira Code', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-ind); margin-bottom: 10px; }
+h1 { font-size: clamp(28px, 5vw, 42px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+.head-desc { color: var(--text-soft); max-width: 700px; margin-top: 12px; }
+
+.layout { display: grid; grid-template-columns: 230px 1fr; gap: 32px; margin-top: 30px; }
+.toc { position: sticky; top: 90px; align-self: start; font-size: 13px; }
+.toc-title { font-family: 'Fira Code', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-fade); margin-bottom: 10px; }
+.toc a { display: block; color: var(--text-soft); text-decoration: none; padding: 5px 0; border-left: 2px solid transparent; padding-left: 10px; }
+.toc a:hover { color: var(--accent-ind); border-left-color: var(--accent-ind); }
+
+.doc-card {
+  background: var(--bg-clay); border-radius: var(--r-clay);
+  box-shadow: var(--sh-clay-out); border: 1px solid rgba(255,255,255,0.5);
+  padding: 28px; margin-bottom: 26px;
+}
+h2 { font-size: 22px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.02em; }
+h3 { font-size: 16px; font-weight: 700; margin: 20px 0 8px; }
+.hu-tag { display: inline-block; font-family: 'Fira Code', monospace; font-size: 10.5px; font-weight: 600; background: rgba(82,121,111,0.14); color: var(--accent-green); padding: 3px 10px; border-radius: 20px; margin-bottom: 10px; }
+p, li { color: var(--text-soft); font-size: 14px; }
+ul, ol { padding-left: 22px; margin: 8px 0; }
+li { margin: 4px 0; }
+strong { color: var(--text-core); }
+code {
+  font-family: 'Fira Code', monospace; font-size: 12.5px;
+  background: rgba(0,0,0,0.05); padding: 1.5px 6px; border-radius: 5px; color: #9a4632;
+}
+pre {
+  background: #2D3436; color: #EAE8E3; border-radius: 12px;
+  padding: 16px 18px; overflow-x: auto; margin: 12px 0;
+  font-family: 'Fira Code', monospace; font-size: 12.5px; line-height: 1.7;
+}
+pre code { background: none; color: inherit; padding: 0; }
+.file-path {
+  font-family: 'Fira Code', monospace; font-size: 12px; color: var(--accent-green);
+  background: rgba(82,121,111,0.1); padding: 3px 10px; border-radius: 6px; display: inline-block; margin: 4px 0;
+}
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 10px 0; }
+th { text-align: left; font-family: 'Fira Code', monospace; font-size: 10.5px; text-transform: uppercase; color: var(--text-fade); padding: 8px 10px; border-bottom: 1px solid var(--line-strong); }
+td { padding: 8px 10px; border-bottom: 1px solid var(--line); color: var(--text-soft); }
+.callout {
+  border-left: 3px solid var(--accent-purp); background: rgba(212,163,115,0.1);
+  padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 12px 0; font-size: 13.5px; color: var(--text-soft);
+}
+
+footer { margin-top: 50px; padding: 24px 0; border-top: 1px solid var(--line-strong); text-align: center; font-size: 12px; color: var(--text-fade); }
+footer a { color: var(--text-soft); }
+
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; } .toc { position: static; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">bagisto · IPS</a>
+  <div>
+    <a href="index.html" class="nav-link">Inicio</a>
+    <a href="dora.html" class="nav-link">DORA</a>
+    <a href="https://github.com/NaginCarferC/bagisto" target="_blank" class="nav-link">Repo</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <div class="eyebrow">HU-10 · Documentación consolidada</div>
+    <h1>Documentación <span style="color:var(--accent-ind);">Técnica</span></h1>
+    <p class="head-desc">
+      Guía técnica del proyecto IPS-2026: arquitectura, entorno de desarrollo, pipeline CI/CD
+      y las funcionalidades implementadas sobre Bagisto durante los Sprints 1 y 2.
+    </p>
+  </div>
+</header>
+
+<main class="container" id="main">
+  <div class="layout">
+    <aside class="toc" aria-label="Tabla de contenidos">
+      <div class="toc-title">Contenido</div>
+      <a href="#arquitectura">1. Arquitectura</a>
+      <a href="#entorno">2. Entorno Docker (HU-02)</a>
+      <a href="#cicd">3. Pipeline CI/CD (HU-06/08)</a>
+      <a href="#hu04">4. Export CSV (HU-04)</a>
+      <a href="#hu05">5. Filtros multi-atributo (HU-05)</a>
+      <a href="#hu11">6. Badge "-X% OFF" (HU-11)</a>
+      <a href="#hu09">7. Accesibilidad (HU-09)</a>
+      <a href="#dora">8. Métricas DORA (HU-07)</a>
+      <a href="#qa">9. Pruebas de regresión</a>
+    </aside>
+
+    <div>
+      <section id="arquitectura" class="doc-card">
+        <h2>1. Arquitectura del proyecto</h2>
+        <p>
+          El proyecto se construye sobre <strong>Bagisto 2.x</strong>, una plataforma e-commerce
+          open-source basada en <strong>Laravel 12 + Vue 3 + Tailwind</strong> con arquitectura modular
+          orientada a paquetes. Cada módulo (Catalog, Customer, Checkout &amp; Sales, Shop, Admin)
+          vive en <code>packages/Webkul/*</code> como un paquete Laravel autónomo.
+        </p>
+        <h3>Módulos tocados por el equipo</h3>
+        <table>
+          <thead><tr><th>Paquete</th><th>Responsabilidad</th><th>HU</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">Webkul/Product</td><td>Helper de descuento + tests</td><td>HU-11</td></tr>
+            <tr><td class="mono">Webkul/Shop</td><td>Storefront: cards, filtros, accesibilidad, API resources</td><td>HU-05, HU-09, HU-11</td></tr>
+            <tr><td class="mono">Webkul/Admin</td><td>Backoffice: exportación CSV del catálogo</td><td>HU-04</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="entorno" class="doc-card">
+        <span class="hu-tag">HU-02</span>
+        <h2>2. Entorno de desarrollo (Docker Compose)</h2>
+        <p>
+          El archivo <span class="file-path">docker-compose.yml</span> orquesta los servicios:
+          aplicación Laravel, MySQL, Redis, Elasticsearch, Kibana y Mailpit.
+        </p>
+        <pre><code># Levantar el entorno completo
+docker compose up -d
+
+# Instalar dependencias e inicializar Bagisto (primera vez)
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan bagisto:install</code></pre>
+        <p>La tienda queda disponible en <code>http://localhost</code> y el backoffice en <code>http://localhost/admin</code>.</p>
+      </section>
+
+      <section id="cicd" class="doc-card">
+        <span class="hu-tag">HU-06 · HU-08</span>
+        <h2>3. Pipeline CI/CD</h2>
+        <h3>Integración Continua (GitHub Actions)</h3>
+        <p>
+          El workflow <span class="file-path">.github/workflows/ci.yml</span> se dispara en cada
+          <code>push</code> y <code>pull_request</code> a las ramas <code>2.4</code> y <code>main</code>, y ejecuta:
+        </p>
+        <ol>
+          <li><strong>Laravel Pint</strong> — análisis de estilo del código del equipo (falla el pipeline si hay violaciones).</li>
+          <li><strong>PHPStan (larastan)</strong> — análisis estático nivel 5 configurado en <span class="file-path">phpstan.neon</span>.</li>
+          <li><strong>Pest</strong> — suite de regresión <code>Product Unit Test</code> definida en <span class="file-path">phpunit.xml</span>.</li>
+        </ol>
+        <pre><code># Ejecutar los mismos checks localmente
+./vendor/bin/pint --test packages/Webkul/Product/src/Helpers packages/Webkul/Product/tests
+./vendor/bin/phpstan analyse --no-progress
+./vendor/bin/pest --testsuite="Product Unit Test"</code></pre>
+        <h3>Despliegue Continuo a Azure</h3>
+        <p>
+          El workflow <span class="file-path">.github/workflows/deploy.yml</span> despliega automáticamente
+          a la VM de Azure al integrar cambios en la rama <code>2.4</code>: hace <code>git pull</code>,
+          instala dependencias, limpia cachés y ajusta permisos.
+        </p>
+      </section>
+
+      <section id="hu04" class="doc-card">
+        <span class="hu-tag">HU-04 · Backoffice</span>
+        <h2>4. Exportación del catálogo a CSV</h2>
+        <p>
+          Permite a los administradores descargar el <strong>catálogo completo</strong> de productos
+          en CSV con un clic, usando <strong>streaming por bloques de 500 filas</strong> para soportar
+          catálogos grandes sin agotar memoria.
+        </p>
+        <h3>Archivos involucrados</h3>
+        <ul>
+          <li><span class="file-path">packages/Webkul/Admin/src/Http/Controllers/Catalog/ProductCatalogExportController.php</span> (nuevo)</li>
+          <li><span class="file-path">packages/Webkul/Admin/src/Routes/catalog-routes.php</span> — ruta <code>admin.catalog.products.export_catalog</code></li>
+          <li><span class="file-path">packages/Webkul/Admin/src/Resources/views/catalog/products/index.blade.php</span> — botón "Exportar catálogo (CSV)"</li>
+        </ul>
+        <h3>Columnas exportadas</h3>
+        <p class="mono" style="font-size:12px;">ID · SKU · Nombre · Tipo · Estado · Precio · Stock · Familia de atributos · Categorías · URL Key · Canal · Creado</p>
+        <h3>Cómo probar</h3>
+        <ol>
+          <li>Ingresar al backoffice <code>/admin</code> y navegar a <strong>Catálogo → Productos</strong>.</li>
+          <li>Hacer clic en <strong>"Exportar catálogo (CSV)"</strong>.</li>
+          <li>Se descarga <code>catalogo-productos-AAAA-MM-DD-HHMMSS.csv</code> con BOM UTF-8 (compatible con Excel).</li>
+        </ol>
+      </section>
+
+      <section id="hu05" class="doc-card">
+        <span class="hu-tag">HU-05 · Storefront</span>
+        <h2>5. Filtrado por múltiples atributos con chips</h2>
+        <p>
+          El storefront permite combinar filtros de varios atributos (color, talla, marca, precio…)
+          simultáneamente. La mejora del equipo agrega una <strong>barra de filtros activos</strong>
+          con chips removibles individualmente y botón "Borrar todo", sincronizada con los
+          query params de la URL.
+        </p>
+        <h3>Archivos involucrados</h3>
+        <ul>
+          <li><span class="file-path">packages/Webkul/Shop/src/Resources/views/categories/filters.blade.php</span> — chips + lógica Vue (<code>appliedChips</code>, <code>removeChip</code>, <code>registerOptions</code>)</li>
+        </ul>
+        <h3>Configuración previa</h3>
+        <div class="callout">
+          Para que un atributo aparezca como filtro: en el admin ir a
+          <strong>Catálogo → Atributos → (editar atributo)</strong> y activar
+          <strong>"Usar en navegación por capas" (filterable)</strong>. Luego asignar el atributo
+          a la familia de atributos y reindexar si se usa Elasticsearch.
+        </div>
+        <h3>Cómo probar</h3>
+        <ol>
+          <li>Abrir una categoría en la tienda.</li>
+          <li>Marcar opciones de 2 o más atributos (p.ej. Color: Red + Size: M) y un rango de precio.</li>
+          <li>Verificar que aparecen chips como <code>Color: Red ×</code> y que al quitar un chip la lista se actualiza sin recargar.</li>
+        </ol>
+      </section>
+
+      <section id="hu11" class="doc-card">
+        <span class="hu-tag">HU-11 · Storefront</span>
+        <h2>6. Badge dinámico "-X% OFF"</h2>
+        <p>
+          Las tarjetas de producto (vista grid y lista) muestran un badge con el porcentaje de
+          descuento calculado dinámicamente a partir del <strong>precio regular vs. precio final</strong>
+          que resuelve el motor de precios de Bagisto (special price, reglas de catálogo, etc.).
+        </p>
+        <h3>Reglas de negocio</h3>
+        <ul>
+          <li>Umbral mínimo del <strong>5%</strong>: descuentos menores no muestran badge (se conserva el badge "Sale").</li>
+          <li>Redondeo al entero más cercano, con tope de 100%.</li>
+          <li>Precios inválidos (0, negativos o invertidos) no generan badge.</li>
+          <li>Accesibilidad WCAG 2.1 AA: fondo <code>#B91C1C</code> sobre texto blanco (contraste 5.9:1) y <code>aria-label</code> descriptivo.</li>
+        </ul>
+        <h3>Archivos involucrados</h3>
+        <ul>
+          <li><span class="file-path">packages/Webkul/Product/src/Helpers/DiscountBadge.php</span> (nuevo, lógica pura y testeable)</li>
+          <li><span class="file-path">packages/Webkul/Shop/src/Http/Resources/ProductResource.php</span> — expone <code>discount_percentage</code> en la API</li>
+          <li><span class="file-path">packages/Webkul/Shop/src/Resources/views/components/products/card.blade.php</span> — render del badge en grid y lista</li>
+        </ul>
+        <h3>Cómo probar</h3>
+        <ol>
+          <li>En el admin, editar un producto y asignar un <strong>Special Price</strong> (p.ej. precio 100 → special 75).</li>
+          <li>Limpiar caché: <code>php artisan cache:clear</code>.</li>
+          <li>Abrir la categoría del producto en la tienda: la tarjeta muestra <strong>-25% OFF</strong>.</li>
+          <li>Probar el umbral: special price 97 (3%) → no aparece badge.</li>
+        </ol>
+      </section>
+
+      <section id="hu09" class="doc-card">
+        <span class="hu-tag">HU-09 · Storefront</span>
+        <h2>7. Accesibilidad WCAG 2.1 AA</h2>
+        <ul>
+          <li><strong>Skip link</strong> traducible ("Saltar al contenido principal") hacia <code>#main</code>.</li>
+          <li><strong>Foco visible</strong>: outline de 2px en enlaces, botones, inputs y elementos con <code>tabindex</code> (<code>:focus-visible</code>).</li>
+          <li><strong>Etiquetas ARIA</strong>: <code>aria-label</code> en badges de descuento, chips de filtros y botones de acción.</li>
+          <li><strong>Contraste AA</strong> en el badge de descuento (5.9:1).</li>
+        </ul>
+        <h3>Archivos involucrados</h3>
+        <ul>
+          <li><span class="file-path">packages/Webkul/Shop/src/Resources/views/components/layouts/index.blade.php</span></li>
+          <li><span class="file-path">packages/Webkul/Shop/src/Resources/assets/css/app.css</span></li>
+        </ul>
+        <div class="callout">
+          Tras modificar CSS/Blade del tema, recompilar los assets:
+          <code>cd packages/Webkul/Shop && npm install && npm run build</code>
+        </div>
+      </section>
+
+      <section id="dora" class="doc-card">
+        <span class="hu-tag">HU-07</span>
+        <h2>8. Dashboard de métricas DORA</h2>
+        <p>
+          La página <a href="dora.html"><strong>dora.html</strong></a> consume la API pública de
+          GitHub Actions (<code>/repos/NaginCarferC/bagisto/actions/runs</code>) y calcula en el navegador:
+        </p>
+        <table>
+          <thead><tr><th>Métrica</th><th>Cálculo</th></tr></thead>
+          <tbody>
+            <tr><td>Deployment Frequency</td><td>Despliegues exitosos por semana (ventana 30 días)</td></tr>
+            <tr><td>Lead Time for Changes</td><td>Promedio commit → fin del despliegue exitoso</td></tr>
+            <tr><td>Change Failure Rate</td><td>Despliegues fallidos ÷ total de despliegues</td></tr>
+            <tr><td>MTTR</td><td>Promedio entre un despliegue fallido y el siguiente exitoso</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="qa" class="doc-card">
+        <h2>9. Aseguramiento de la calidad</h2>
+        <p>
+          La suite de regresión valida que el cálculo del badge de descuento y la exportación
+          del catálogo no afecten la lógica de precios ni la persistencia.
+        </p>
+        <ul>
+          <li><span class="file-path">packages/Webkul/Product/tests/Unit/DiscountBadgeTest.php</span> — 8 pruebas Pest / 21 aserciones (casos borde: umbral, redondeo, precios inválidos, arreglo de precios de Bagisto).</li>
+          <li>Testsuite <code>Product Unit Test</code> registrada en <span class="file-path">phpunit.xml</span> y ejecutada en CI.</li>
+        </ul>
+        <pre><code>./vendor/bin/pest --testsuite="Product Unit Test"
+
+  PASS  packages/Webkul/Product/tests/Unit/DiscountBadgeTest.php (8 tests)</code></pre>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    IPS 2026 · UNSA · Arequipa, Perú · <a href="index.html">Inicio</a> · <a href="dora.html">DORA</a> ·
+    <a href="https://github.com/NaginCarferC/bagisto" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+</body>
+</html>

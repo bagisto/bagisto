@@ -1,0 +1,9 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 5
+
+    paths:
+        - packages/Webkul/Product/src/Helpers/DiscountBadge.php
+        - packages/Webkul/Admin/src/Http/Controllers/Catalog/ProductCatalogExportController.php

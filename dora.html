@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard Métricas DORA · Bagisto IPS-2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg-deep:      #EAE8E3;
+  --bg-clay:      #F4F2EC;
+  --line:         rgba(0, 0, 0, 0.05);
+  --line-strong:  rgba(0, 0, 0, 0.1);
+  --text-core:    #2D3436;
+  --text-soft:    #636E72;
+  --text-fade:    #A0AAB2;
+  --accent-green: #52796F;
+  --accent-ind:   #E07A5F;
+  --accent-purp:  #D4A373;
+  --status-ok:    #52796F;
+  --status-warn:  #D4A373;
+  --status-err:   #C0492E;
+  --r-clay:       22px;
+  --r-inner:      12px;
+  --sh-clay-out:  8px 8px 16px rgba(0, 0, 0, 0.06), -8px -8px 16px rgba(255, 255, 255, 0.7);
+  --sh-clay-in:   inset 4px 4px 8px rgba(0, 0, 0, 0.03), inset -4px -4px 8px rgba(255, 255, 255, 0.8);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg-deep);
+  color: var(--text-core);
+  font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.mono { font-family: 'Fira Code', monospace; }
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+nav {
+  position: fixed; top: 12px; left: 12px; right: 12px; z-index: 200;
+  height: 52px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 16px; border-radius: var(--r-inner);
+  background: rgba(244, 242, 236, 0.85);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--line-strong);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+}
+.nav-logo { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; color: var(--text-core); text-decoration: none; }
+.nav-logo::before { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-ind); }
+.nav-link { color: var(--text-soft); text-decoration: none; font-size: 13px; font-weight: 600; margin-left: 16px; }
+.nav-link:hover { color: var(--accent-ind); }
+
+header.page-head { padding: 120px 0 30px; text-align: center; }
+.eyebrow { font-family: 'Fira Code', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-ind); margin-bottom: 10px; }
+h1 { font-size: clamp(28px, 5vw, 44px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+.head-desc { color: var(--text-soft); max-width: 620px; margin: 14px auto 0; font-size: 15px; }
+
+.clay-card {
+  background: var(--bg-clay); border-radius: var(--r-clay);
+  box-shadow: var(--sh-clay-out); border: 1px solid rgba(255,255,255,0.5);
+  padding: 24px;
+}
+.metrics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin: 30px 0; }
+.metric-label { font-family: 'Fira Code', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-fade); }
+.metric-val { font-size: 30px; font-weight: 800; margin: 8px 0 4px; letter-spacing: -0.02em; }
+.metric-val.ok { color: var(--status-ok); }
+.metric-val.warn { color: var(--status-warn); }
+.metric-val.err { color: var(--status-err); }
+.metric-desc { font-size: 12.5px; color: var(--text-soft); }
+.metric-sub { font-family: 'Fira Code', monospace; font-size: 11px; color: var(--text-fade); margin-top: 8px; }
+
+.section-title { font-size: 20px; font-weight: 800; margin: 40px 0 16px; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; font-family: 'Fira Code', monospace; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-fade); padding: 10px 12px; border-bottom: 1px solid var(--line-strong); }
+td { padding: 10px 12px; border-bottom: 1px solid var(--line); color: var(--text-soft); }
+td:first-child { color: var(--text-core); font-weight: 600; }
+.pill { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
+.pill.ok { background: rgba(82,121,111,0.15); color: var(--status-ok); }
+.pill.err { background: rgba(192,73,46,0.13); color: var(--status-err); }
+.pill.warn { background: rgba(212,163,115,0.2); color: #8a6532; }
+
+.state-box { text-align: center; padding: 60px 20px; color: var(--text-soft); }
+.spinner { width: 34px; height: 34px; border: 3px solid var(--line-strong); border-top-color: var(--accent-ind); border-radius: 50%; margin: 0 auto 16px; animation: spin 0.9s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+footer { margin-top: 60px; padding: 24px 0; border-top: 1px solid var(--line-strong); text-align: center; font-size: 12px; color: var(--text-fade); }
+footer a { color: var(--text-soft); }
+
+@media (max-width: 900px) { .metrics-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .metrics-grid { grid-template-columns: 1fr; } .nav-link { margin-left: 10px; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">bagisto · IPS</a>
+  <div>
+    <a href="index.html" class="nav-link">Inicio</a>
+    <a href="docs.html" class="nav-link">Docs</a>
+    <a href="https://github.com/NaginCarferC/bagisto/actions" target="_blank" class="nav-link">Actions</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="container">
+    <div class="eyebrow">HU-07 · Medición del flujo de entrega</div>
+    <h1>Dashboard Métricas <span style="color:var(--accent-ind);">DORA</span></h1>
+    <p class="head-desc">
+      Métricas calculadas en tiempo real a partir de los workflows de GitHub Actions del repositorio
+      <span class="mono">NaginCarferC/bagisto</span> (pipeline CI y despliegue continuo a Azure).
+    </p>
+  </div>
+</header>
+
+<main class="container" id="main">
+  <div id="loading" class="state-box">
+    <div class="spinner" role="status" aria-label="Cargando métricas"></div>
+    Consultando la API de GitHub Actions…
+  </div>
+
+  <div id="error" class="state-box" style="display:none;">
+    <p style="font-size:34px;">⚠</p>
+    <p id="error-msg" style="margin-top:8px;">No fue posible obtener los datos.</p>
+    <p class="mono" style="font-size:11px;margin-top:8px;color:var(--text-fade);">
+      La API pública de GitHub permite 60 solicitudes/hora por IP. Intenta nuevamente en unos minutos.
+    </p>
+  </div>
+
+  <div id="dashboard" style="display:none;">
+    <div class="metrics-grid">
+      <div class="clay-card">
+        <div class="metric-label">Deployment Frequency</div>
+        <div class="metric-val ok" id="m-df">—</div>
+        <div class="metric-desc">Despliegues exitosos por semana (últimos 30 días).</div>
+        <div class="metric-sub" id="m-df-sub"></div>
+      </div>
+      <div class="clay-card">
+        <div class="metric-label">Lead Time for Changes</div>
+        <div class="metric-val" id="m-lt">—</div>
+        <div class="metric-desc">Tiempo promedio desde el commit hasta el despliegue exitoso.</div>
+        <div class="metric-sub" id="m-lt-sub"></div>
+      </div>
+      <div class="clay-card">
+        <div class="metric-label">Change Failure Rate</div>
+        <div class="metric-val warn" id="m-cfr">—</div>
+        <div class="metric-desc">Porcentaje de despliegues que fallaron.</div>
+        <div class="metric-sub" id="m-cfr-sub"></div>
+      </div>
+      <div class="clay-card">
+        <div class="metric-label">MTTR</div>
+        <div class="metric-val" id="m-mttr">—</div>
+        <div class="metric-desc">Tiempo medio de restauración tras un despliegue fallido.</div>
+        <div class="metric-sub" id="m-mttr-sub"></div>
+      </div>
+    </div>
+
+    <h2 class="section-title">Ejecuciones recientes del pipeline</h2>
+    <div class="clay-card" style="padding:8px 4px; overflow-x:auto;">
+      <table aria-label="Ejecuciones recientes de GitHub Actions">
+        <thead>
+          <tr>
+            <th>Workflow</th>
+            <th>Rama</th>
+            <th>Commit</th>
+            <th>Estado</th>
+            <th>Duración</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody id="runs-body"></tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    IPS 2026 · UNSA · Datos vía <a href="https://docs.github.com/en/rest/actions/workflow-runs" target="_blank">GitHub REST API</a> ·
+    <a href="index.html">Volver al inicio</a>
+  </div>
+</footer>
+
+<script>
+const REPO = 'NaginCarferC/bagisto';
+const DEPLOY_NAME_HINTS = ['deploy'];
+const DAYS_WINDOW = 30;
+
+function fmtDuration(ms) {
+  if (ms == null || isNaN(ms) || ms < 0) return '—';
+  const mins = ms / 60000;
+  if (mins < 1) return Math.round(ms / 1000) + ' s';
+  if (mins < 60) return mins.toFixed(1) + ' min';
+  const hours = mins / 60;
+  if (hours < 48) return hours.toFixed(1) + ' h';
+  return (hours / 24).toFixed(1) + ' días';
+}
+
+function fmtDate(iso) {
+  return new Date(iso).toLocaleString('es-PE', { dateStyle: 'medium', timeStyle: 'short' });
+}
+
+async function loadDora() {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/actions/runs?per_page=100`, {
+      headers: { 'Accept': 'application/vnd.github+json' }
+    });
+
+    if (!res.ok) {
+      throw new Error(`GitHub API respondió ${res.status}`);
+    }
+
+    const data = await res.json();
+    const runs = (data.workflow_runs || []).filter(r => r.status === 'completed');
+
+    if (!runs.length) {
+      throw new Error('No hay ejecuciones completadas registradas todavía.');
+    }
+
+    const cutoff = Date.now() - DAYS_WINDOW * 24 * 3600 * 1000;
+    const isDeploy = r => DEPLOY_NAME_HINTS.some(h => (r.name || '').toLowerCase().includes(h));
+
+    const deploys = runs.filter(isDeploy);
+    const recentDeploys = deploys.filter(r => new Date(r.created_at).getTime() >= cutoff);
+    // Si no hay despliegues en la ventana, usa el histórico disponible
+    const windowDeploys = recentDeploys.length ? recentDeploys : deploys;
+    const windowDays = recentDeploys.length ? DAYS_WINDOW : Math.max(1,
+      (Date.now() - new Date(deploys[deploys.length - 1]?.created_at || Date.now()).getTime()) / 86400000);
+
+    // 1) Deployment Frequency (éxitos / semana)
+    const okDeploys = windowDeploys.filter(r => r.conclusion === 'success');
+    const perWeek = okDeploys.length / (windowDays / 7);
+    document.getElementById('m-df').textContent = deploys.length ? perWeek.toFixed(1) + '/sem' : 'N/D';
+    document.getElementById('m-df-sub').textContent = `${okDeploys.length} despliegues OK · ventana ${Math.round(windowDays)}d`;
+
+    // 2) Lead Time (commit -> fin del deploy exitoso)
+    const leadTimes = okDeploys
+      .map(r => {
+        const commitTs = r.head_commit && r.head_commit.timestamp ? new Date(r.head_commit.timestamp).getTime() : null;
+        const doneTs = new Date(r.updated_at).getTime();
+        return commitTs ? doneTs - commitTs : null;
+      })
+      .filter(v => v != null && v >= 0);
+    const avgLead = leadTimes.length ? leadTimes.reduce((a, b) => a + b, 0) / leadTimes.length : null;
+    document.getElementById('m-lt').textContent = fmtDuration(avgLead);
+    document.getElementById('m-lt-sub').textContent = leadTimes.length ? `promedio de ${leadTimes.length} despliegues` : 'sin datos suficientes';
+
+    // 3) Change Failure Rate
+    const failed = windowDeploys.filter(r => r.conclusion === 'failure').length;
+    const cfr = windowDeploys.length ? (failed / windowDeploys.length) * 100 : null;
+    const cfrEl = document.getElementById('m-cfr');
+    cfrEl.textContent = cfr == null ? 'N/D' : cfr.toFixed(0) + '%';
+    cfrEl.className = 'metric-val ' + (cfr == null ? '' : cfr <= 15 ? 'ok' : cfr <= 30 ? 'warn' : 'err');
+    document.getElementById('m-cfr-sub').textContent = `${failed} fallidos de ${windowDeploys.length} despliegues`;
+
+    // 4) MTTR: fallo -> siguiente éxito
+    const chrono = [...deploys].sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+    const restores = [];
+    for (let i = 0; i < chrono.length; i++) {
+      if (chrono[i].conclusion === 'failure') {
+        const next = chrono.slice(i + 1).find(r => r.conclusion === 'success');
+        if (next) restores.push(new Date(next.updated_at) - new Date(chrono[i].updated_at));
+      }
+    }
+    const mttr = restores.length ? restores.reduce((a, b) => a + b, 0) / restores.length : null;
+    document.getElementById('m-mttr').textContent = restores.length ? fmtDuration(mttr) : 'Sin fallos';
+    document.getElementById('m-mttr').className = 'metric-val ' + (restores.length ? '' : 'ok');
+    document.getElementById('m-mttr-sub').textContent = restores.length ? `${restores.length} restauraciones medidas` : 'no hubo incidentes que restaurar';
+
+    // Tabla de ejecuciones
+    const tbody = document.getElementById('runs-body');
+    tbody.innerHTML = '';
+    runs.slice(0, 15).forEach(r => {
+      const dur = new Date(r.updated_at) - new Date(r.run_started_at || r.created_at);
+      const pillClass = r.conclusion === 'success' ? 'ok' : r.conclusion === 'failure' ? 'err' : 'warn';
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${r.name || '—'}</td>
+        <td class="mono">${r.head_branch || '—'}</td>
+        <td class="mono">${(r.head_sha || '').slice(0, 7)}</td>
+        <td><span class="pill ${pillClass}">${r.conclusion || r.status}</span></td>
+        <td>${fmtDuration(dur)}</td>
+        <td>${fmtDate(r.created_at)}</td>`;
+      tbody.appendChild(tr);
+    });
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+  } catch (err) {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('error').style.display = 'block';
+    document.getElementById('error-msg').textContent = err.message;
+  }
+}
+
+loadDora();
+</script>
+</body>
+</html>

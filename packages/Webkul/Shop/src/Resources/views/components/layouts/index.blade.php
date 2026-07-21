@@ -95,11 +95,12 @@
     <body>
         {!! view_render_event('bagisto.shop.layout.body.before') !!}
 
+        <!-- HU-09: Enlace "saltar al contenido" traducible y accesible por teclado -->
         <a
             href="#main"
             class="skip-to-main-content-link"
         >
-            Skip to main content
+            @lang('shop::app.components.accessibility.skip-to-main-content')
         </a>
 
         <!-- Built With Bagisto -->

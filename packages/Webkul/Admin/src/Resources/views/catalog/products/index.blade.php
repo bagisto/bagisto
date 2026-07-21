@@ -12,6 +12,15 @@
             <!-- Export Modal -->
             <x-admin::datagrid.export :src="route('admin.catalog.products.index')" />
 
+            <!-- Export Full Catalog CSV (HU-04) -->
+            <a
+                href="{{ route('admin.catalog.products.export_catalog') }}"
+                class="secondary-button"
+                aria-label="@lang('admin::app.catalog.products.index.export-catalog-btn')"
+            >
+                @lang('admin::app.catalog.products.index.export-catalog-btn')
+            </a>
+
             {!! view_render_event('bagisto.admin.catalog.products.create.before') !!}
 
             @if (bouncer()->hasPermission('catalog.products.create'))

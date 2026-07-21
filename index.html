@@ -446,12 +446,14 @@ footer { background: var(--bg-clay); padding: 24px 0; border-top: 1px solid var(
 
 <nav>
   <a href="#hero" class="nav-logo">bagisto · IPS</a>
-  <span class="nav-meta mono">Sprint 0 · Hito 1</span>
+  <span class="nav-meta mono">Sprint 2 · Hito Final</span>
   <div class="nav-right">
     <a href="#about" class="nav-link">Proyecto</a>
+    <a href="#funcionalidades" class="nav-link">Funcionalidades</a>
     <a href="#kanban" class="nav-link">Tablero</a>
     <a href="#devops" class="nav-link">Pipeline</a>
-    <a href="#timeline" class="nav-link">Plan</a>
+    <a href="docs.html" class="nav-link">Docs</a>
+    <a href="dora.html" class="nav-link">DORA</a>
     <a href="https://github.com/NaginCarferC/bagisto" target="_blank" class="nav-btn">
       Repo
     </a>
@@ -673,23 +675,26 @@ footer { background: var(--bg-clay); padding: 24px 0; border-top: 1px solid var(
           <div class="kb-item"><div class="kb-item-code">bagisto#7</div><div class="kb-item-title">Cronograma Sprints IEEE</div></div>
         </div>
       </div>
-      <div class="kb-col active-col">
+      <div class="kb-col">
         <div class="kb-col-header"><span style="color:var(--status-warn);">▶</span> In Progress</div>
         <div class="kb-items">
-          <div class="kb-item"><div class="kb-item-code">bagisto#12</div><div class="kb-item-title">Setup Pipeline Actions</div></div>
-          <div class="kb-item"><div class="kb-item-code">bagisto#11</div><div class="kb-item-title">Docker Setup with Sail</div></div>
+          <div class="kb-item"><div class="kb-item-code">HU-07</div><div class="kb-item-title">Dashboard Métricas DORA</div></div>
         </div>
       </div>
       <div class="kb-col">
         <div class="kb-col-header"><span style="color:var(--accent-purp);">✓</span> Review</div>
         <div class="kb-items">
-          <div class="kb-item"><div class="kb-item-code">bagisto#13</div><div class="kb-item-title">Modelo DB Modular Docs</div></div>
+          <div class="kb-item"><div class="kb-item-code">HU-09</div><div class="kb-item-title">Accesibilidad WCAG 2.1 AA</div></div>
         </div>
       </div>
-      <div class="kb-col">
+      <div class="kb-col active-col">
         <div class="kb-col-header"><span style="color:var(--accent-green);">✓✓</span> Done</div>
         <div class="kb-items">
-          <div class="kb-item"><div class="kb-item-code">bagisto#15</div><div class="kb-item-title">Selección Framework MIT</div></div>
+          <div class="kb-item"><div class="kb-item-code">HU-04</div><div class="kb-item-title">Export catálogo CSV (Backoffice)</div></div>
+          <div class="kb-item"><div class="kb-item-code">HU-05</div><div class="kb-item-title">Filtrado multi-atributo + chips</div></div>
+          <div class="kb-item"><div class="kb-item-code">HU-11</div><div class="kb-item-title">Badge dinámico "-X% OFF"</div></div>
+          <div class="kb-item"><div class="kb-item-code">HU-06</div><div class="kb-item-title">PHPStan + Pest en CI</div></div>
+          <div class="kb-item"><div class="kb-item-code">HU-08</div><div class="kb-item-title">Deploy automático a Azure</div></div>
         </div>
       </div>
     </div>
@@ -700,38 +705,38 @@ footer { background: var(--bg-clay); padding: 24px 0; border-top: 1px solid var(
   <div class="container">
     <div class="metrics-row">
       <div class="clay-card metric-card reveal">
-        <span class="metric-label mono">Código LOC</span>
-        <div class="metric-val mono accent">~150K</div>
-        <div class="metric-desc">Clonación base operativa del repo Bagisto.</div>
+        <span class="metric-label mono">HU Completadas</span>
+        <div class="metric-val mono accent">8+</div>
+        <div class="metric-desc">Historias de usuario implementadas en Sprints 1 y 2.</div>
       </div>
       <div class="clay-card metric-card reveal rd1">
-        <span class="metric-label mono">Stories S0</span>
-        <div class="metric-val mono">9</div>
-        <div class="metric-desc">Historias técnicas y de planeación en curso.</div>
+        <span class="metric-label mono">Tests Regresión</span>
+        <div class="metric-val mono ok">8✓</div>
+        <div class="metric-desc">Pruebas Pest del badge de descuento (21 aserciones, 100% éxito).</div>
       </div>
       <div class="clay-card metric-card reveal rd2">
         <span class="metric-label mono">Pipeline CI</span>
-        <div class="metric-val ok mono">Pint✓</div>
-        <div class="metric-desc">Workflow de análisis estático activo.</div>
+        <div class="metric-val ok mono">Pint+Stan✓</div>
+        <div class="metric-desc">Estilo, análisis estático PHPStan y Pest en cada push/PR.</div>
       </div>
       <div class="clay-card metric-card reveal rd3">
-        <span class="metric-label mono">Sail✓</span>
-        <div class="metric-val mono ok">Docker</div>
-        <div class="metric-desc">Entorno de desarrollo contenerizado operativo.</div>
+        <span class="metric-label mono">Deploy CD</span>
+        <div class="metric-val mono ok">Azure</div>
+        <div class="metric-desc">Despliegue automático a Azure VM al integrar en 2.4.</div>
       </div>
     </div>
     
     <div class="clay-card reveal rd1" style="border-radius:16px;">
       <div class="diag-header" style="padding:12px;border-bottom:1px solid var(--line-strong);">
         <div class="term-dot td1"></div><div class="term-dot td2"></div><div class="term-dot td3"></div>
-        <span class="diag-title" style="font-size:11px;">bagisto.storie #12</span>
+        <span class="diag-title" style="font-size:11px;">bagisto.storie HU-11</span>
       </div>
       <div class="hu-viz mono" style="padding:16px; font-size:12px; line-height:1.7;color:var(--text-core);">
-        HU06 Setup Pipeline Actions Laravel Pint<br/>
+        HU11 Badge dinámico "-X% OFF" en tarjetas de producto<br/>
         -------------------------------------------<br/>
-        COMO Desarrollador <br/>
-        QUIERO implementar una Acción de GitHub<br/>
-        PARA validar automáticamente el linter de PHP (Pint) en cada push.
+        COMO Comprador <br/>
+        QUIERO ver el porcentaje de descuento en las tarjetas de producto<br/>
+        PARA identificar ofertas de un vistazo, con contraste AA y aria-label accesible.
       </div>
     </div>
   </div>
@@ -764,16 +769,17 @@ footer { background: var(--bg-clay); padding: 24px 0; border-top: 1px solid var(
       </div>
       
       <div class="clay-card pipeline-view reveal rd1">
-        <h3 style="font-size:16px;margin-bottom:16px;">Workflow Sprint 0</h3>
+        <h3 style="font-size:16px;margin-bottom:16px;">Workflow CI · Sprint 2</h3>
         <div style="font-family:'Fira Code',monospace;font-size:12px;line-height:1.9;">
-          <div style="color:var(--text-soft); border-bottom:1px solid var(--line-strong); padding-bottom:4px;margin-bottom:6px;"># ips-workflow.yml</div>
-          <div>trigger: push on feature/*</div>
+          <div style="color:var(--text-soft); border-bottom:1px solid var(--line-strong); padding-bottom:4px;margin-bottom:6px;"># .github/workflows/ci.yml</div>
+          <div>trigger: push / pull_request → 2.4, main</div>
           <div>steps:</div>
-          <div style="padding-left:12px;color:var(--status-ok);">✓ Setup PHP</div>
+          <div style="padding-left:12px;color:var(--status-ok);">✓ Setup PHP 8.3</div>
           <div style="padding-left:12px;color:var(--status-ok);">✓ Composer Install</div>
-          <div style="padding-left:12px;color:var(--accent-ind);">▶ Run Pint (Linter) — en curso</div>
-          <div style="padding-left:12px;color:var(--text-fade);">○ PHPUnit Tests</div>
-          <div style="padding-left:12px;color:var(--text-fade);">○ Build Assets</div>
+          <div style="padding-left:12px;color:var(--status-ok);">✓ Laravel Pint (estilo)</div>
+          <div style="padding-left:12px;color:var(--status-ok);">✓ PHPStan · larastan (estático)</div>
+          <div style="padding-left:12px;color:var(--status-ok);">✓ Pest — Product Unit Test</div>
+          <div style="padding-left:12px;color:var(--accent-ind);">▶ Deploy Azure (rama 2.4)</div>
         </div>
       </div>
     </div>
@@ -811,12 +817,12 @@ footer { background: var(--bg-clay); padding: 24px 0; border-top: 1px solid var(
       </div>
       
       <div class="tl-item">
-        <div class="tl-node-col"><div class="tl-dot"></div></div>
+        <div class="tl-node-col"><div class="tl-dot done"></div></div>
         <div class="tl-card-col">
           <div class="clay-card tl-card">
-            <div class="tl-item-meta"><span>Junio 2026</span><span class="tl-tag">Sprint 2</span></div>
-            <div class="tl-item-title">E-Commerce Flow & Checkout</div>
-            <p style="font-size:13.5px;color:var(--text-soft);">Activación del ciclo de compra completo (Carrito & Checkout) y generación de artefactos IEEE.</p>
+            <div class="tl-item-meta"><span>Junio 2026</span><span class="tl-tag done">Sprint 2</span></div>
+            <div class="tl-item-title">Funcionalidades E-Commerce & Calidad</div>
+            <p style="font-size:13.5px;color:var(--text-soft);">Badge "-X% OFF", export CSV del catálogo, filtros multi-atributo con chips, PHPStan+Pest en CI, accesibilidad WCAG AA, dashboard DORA y documentación técnica.</p>
           </div>
         </div>
       </div>
@@ -842,6 +848,49 @@ footer { background: var(--bg-clay); padding: 24px 0; border-top: 1px solid var(
   </div>
 </section>
     
+<section id="funcionalidades">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-eyebrow">Sprint 2 · Entregables</div>
+      <h2>Funcionalidades Implementadas</h2>
+      <p>Nuevas capacidades desarrolladas por el equipo sobre los módulos Catalog, Shop y Admin de Bagisto.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="clay-card why-card reveal">
+        <div class="why-icon" style="color:var(--accent-ind);">-25%</div>
+        <div class="why-title">Badge dinámico "-X% OFF" <span class="mono" style="font-size:10px;color:var(--text-fade);">HU-11</span></div>
+        <div class="why-desc">Las tarjetas de producto muestran el porcentaje de descuento calculado desde el motor de precios (special price / reglas de catálogo), con umbral mínimo del 5%, contraste WCAG AA y aria-label descriptivo.</div>
+      </div>
+      <div class="clay-card why-card reveal rd1">
+        <div class="why-icon" style="color:var(--accent-green);">CSV</div>
+        <div class="why-title">Export catálogo a CSV <span class="mono" style="font-size:10px;color:var(--text-fade);">HU-04</span></div>
+        <div class="why-desc">Botón "Exportar catálogo (CSV)" en el backoffice que descarga el catálogo completo con streaming por bloques: SKU, precios, stock, categorías y más. Compatible con Excel (BOM UTF-8).</div>
+      </div>
+      <div class="clay-card why-card reveal rd2">
+        <div class="why-icon" style="color:var(--accent-purp);">⧉</div>
+        <div class="why-title">Filtros multi-atributo <span class="mono" style="font-size:10px;color:var(--text-fade);">HU-05</span></div>
+        <div class="why-desc">Navegación por capas combinando varios atributos con barra de filtros activos: chips removibles individualmente, "Borrar todo" y sincronización con la URL.</div>
+      </div>
+      <div class="clay-card why-card reveal">
+        <div class="why-icon" style="color:var(--accent-green);">✓</div>
+        <div class="why-title">PHPStan + Pest en CI <span class="mono" style="font-size:10px;color:var(--text-fade);">HU-06</span></div>
+        <div class="why-desc">Análisis estático real con larastan (nivel 5) y suite de regresión Pest ejecutados en cada push/PR. El pipeline falla si el código no cumple.</div>
+      </div>
+      <div class="clay-card why-card reveal rd1">
+        <div class="why-icon" style="color:var(--accent-ind);">A11y</div>
+        <div class="why-title">Accesibilidad WCAG 2.1 AA <span class="mono" style="font-size:10px;color:var(--text-fade);">HU-09</span></div>
+        <div class="why-desc">Skip-link traducible, foco visible en elementos interactivos, etiquetas ARIA en badges y filtros, y contraste AA verificado.</div>
+      </div>
+      <div class="clay-card why-card reveal rd2">
+        <div class="why-icon" style="color:var(--accent-purp);">📈</div>
+        <div class="why-title">Dashboard DORA <span class="mono" style="font-size:10px;color:var(--text-fade);">HU-07</span></div>
+        <div class="why-desc">Frecuencia de despliegue, lead time, tasa de fallos y MTTR calculados en vivo desde GitHub Actions. <a href="dora.html" style="color:var(--accent-ind);font-weight:600;">Ver dashboard →</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="enlaces">
   <div class="containerlinks">
     <div class="links-grid container">
@@ -854,6 +903,16 @@ footer { background: var(--bg-clay); padding: 24px 0; border-top: 1px solid var(
         <div class="link-icon">P</div>
         <div class="link-tile-title" style="font-size:14px;font-weight:700;color:var(--text-core);">GitHub Projects</div>
         <div class="link-tile-desc mono" style="font-size:11px;color:var(--text-fade);">Tablero Scrum &rarr;</div>
+      </a>
+      <a href="docs.html" class="clay-card link-tile reveal rd2">
+        <div class="link-icon">T</div>
+        <div class="link-tile-title" style="font-size:14px;font-weight:700;color:var(--text-core);">Docs Técnica</div>
+        <div class="link-tile-desc mono" style="font-size:11px;color:var(--text-fade);">docs.html &rarr;</div>
+      </a>
+      <a href="dora.html" class="clay-card link-tile reveal rd2">
+        <div class="link-icon">M</div>
+        <div class="link-tile-title" style="font-size:14px;font-weight:700;color:var(--text-core);">Métricas DORA</div>
+        <div class="link-tile-desc mono" style="font-size:11px;color:var(--text-fade);">dora.html &rarr;</div>
       </a>
       <a href="https://devdocs.bagisto.com/" target="_blank" class="clay-card link-tile reveal rd2">
         <div class="link-icon">D</div>

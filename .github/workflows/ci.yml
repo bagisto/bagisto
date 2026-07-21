@@ -1,49 +1,52 @@
 name: CI
+
 on:
   pull_request:
     branches: [ "2.4", "main" ]
   push:
     branches: [ "2.4", "main" ]
+
 jobs:
   build-test:
     runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        env:
-          MYSQL_DATABASE: bagisto
-          MYSQL_ROOT_PASSWORD: root
-        ports: [ "3306:3306" ]
-        options: >-
-          --health-cmd="mysqladmin ping" --health-interval=10s
-          --health-timeout=5s --health-retries=5
+
     steps:
     - uses: actions/checkout@v4
+
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: "8.4"
+        php-version: "8.3"
         extensions: mbstring, pdo_mysql, gd, intl, zip, bcmath
         coverage: none
+
     - name: Cache Composer
       uses: actions/cache@v4
       with:
         path: ~/.composer/cache
         key: composer-${{ hashFiles('**/composer.lock') }}
+
     - name: Install dependencies
       run: composer install --no-interaction --prefer-dist
+
     - name: Prepare env
       run: |
         cp .env.example .env
         php artisan key:generate
+
+    # HU-06: Analisis de estilo (Laravel Pint) sobre el codigo del equipo.
+    # Sin "|| true": si el estilo falla, el pipeline falla.
     - name: Lint (Laravel Pint)
-      run: ./vendor/bin/pint --test || true
+      run: |
+        ./vendor/bin/pint --test \
+          packages/Webkul/Product/src/Helpers \
+          packages/Webkul/Product/tests \
+          packages/Webkul/Admin/src/Http/Controllers/Catalog/ProductCatalogExportController.php
+
+    # HU-06: Analisis estatico real con PHPStan (larastan) usando phpstan.neon.
     - name: Static analysis (PHPStan)
-      run: ./vendor/bin/phpstan analyse --no-progress || true
-    - name: Run tests (PHPUnit)
-      env:
-        DB_HOST: 127.0.0.1
-        DB_DATABASE: bagisto
-        DB_USERNAME: root
-        DB_PASSWORD: root
-      run: php artisan test || true
+      run: ./vendor/bin/phpstan analyse --no-progress --memory-limit=1G
+
+    # Pruebas de regresion (Pest) de los modulos del equipo.
+    - name: Regression tests (Pest)
+      run: ./vendor/bin/pest --testsuite="Product Unit Test"

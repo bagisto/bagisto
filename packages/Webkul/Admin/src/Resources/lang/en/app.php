@@ -1091,6 +1091,7 @@ return [
             'index' => [
                 'already-taken' => 'The :name has already been taken.',
                 'create-btn' => 'Create Product',
+                'export-catalog-btn' => 'Export Catalog (CSV)',
                 'title' => 'Products',
 
                 'create' => [

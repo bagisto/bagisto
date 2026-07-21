@@ -132,6 +132,40 @@
                     </p>
                 </div>
 
+                <!-- Active Filters Chips (HU-05) -->
+                <div
+                    class="flex flex-wrap items-center gap-2 border-b border-zinc-200 py-3"
+                    role="region"
+                    aria-label="@lang('shop::app.categories.filters.applied')"
+                    v-if="appliedChips.length"
+                >
+                    <button
+                        type="button"
+                        class="flex items-center gap-1.5 rounded-full border border-zinc-300 bg-white px-3 py-1.5 text-sm text-zinc-800 transition hover:border-zinc-500 hover:bg-zinc-100"
+                        :key="`${chip.code}_${chip.value}`"
+                        :aria-label="`@lang('shop::app.categories.filters.remove-filter')`.replace(':filter', chip.label)"
+                        v-for="chip in appliedChips"
+                        @click="removeChip(chip)"
+                    >
+                        @{{ chip.label }}
+
+                        <span
+                            class="text-base font-semibold"
+                            aria-hidden="true"
+                        >
+                            &times;
+                        </span>
+                    </button>
+
+                    <button
+                        type="button"
+                        class="cursor-pointer text-xs font-medium underline"
+                        @click="clear()"
+                    >
+                        @lang('shop::app.categories.filters.clear-all')
+                    </button>
+                </div>
+
                 <!-- Filters Items Vue Component -->
                 <v-filter-item
                     ref="filterItemComponent"
@@ -139,6 +173,7 @@
                     :filter="filter"
                     v-for='(filter, filterIndex) in filters.available'
                     @values-applied="applyFilter(filter, $event)"
+                    @options-loaded="registerOptions($event)"
                 >
                 </v-filter-item>
             </div>
@@ -350,7 +385,58 @@
 
                         applied: {},
                     },
+
+                    optionLabels: {},
                 };
+            },
+
+            computed: {
+                /**
+                 * Chips de filtros activos (HU-05).
+                 */
+                appliedChips() {
+                    let chips = [];
+
+                    for (let code in this.filters.applied) {
+                        /**
+                         * El término de búsqueda no se gestiona como chip
+                         * para no romper la página de resultados.
+                         */
+                        if (['query', 'search'].includes(code)) {
+                            continue;
+                        }
+
+                        let values = this.filters.applied[code] ?? [];
+
+                        let filterDef = Object.values(this.filters.available).find(
+                            (filter) => filter.code === code
+                        );
+
+                        let name = filterDef ? filterDef.name : code;
+
+                        if (filterDef && filterDef.type === 'price') {
+                            chips.push({
+                                code: code,
+                                type: 'price',
+                                value: values.join(','),
+                                label: `${name}: ${values.join(' - ')}`,
+                            });
+                        } else {
+                            values.forEach((value) => {
+                                let optionLabel = this.optionLabels[code]?.[value] ?? value;
+
+                                chips.push({
+                                    code: code,
+                                    type: 'option',
+                                    value: value,
+                                    label: `${name}: ${optionLabel}`,
+                                });
+                            });
+                        }
+                    }
+
+                    return chips;
+                },
             },
 
             mounted() {
@@ -415,6 +501,54 @@
                             filterItem.$data.appliedValues = null;
                         } else {
                             filterItem.$data.appliedValues = [];
+                        }
+                    });
+
+                    this.$emit('filter-applied', this.filters.applied);
+                },
+
+                /**
+                 * Registra los nombres de las opciones cargadas para
+                 * mostrar chips legibles (HU-05).
+                 */
+                registerOptions(event) {
+                    if (! this.optionLabels[event.filter.code]) {
+                        this.optionLabels[event.filter.code] = {};
+                    }
+
+                    event.options.forEach((option) => {
+                        this.optionLabels[event.filter.code][option.id] = option.name;
+                    });
+                },
+
+                /**
+                 * Quita un filtro individual desde su chip (HU-05).
+                 */
+                removeChip(chip) {
+                    if (chip.type === 'price') {
+                        delete this.filters.applied[chip.code];
+                    } else {
+                        this.filters.applied[chip.code] = (this.filters.applied[chip.code] ?? []).filter(
+                            (value) => String(value) !== String(chip.value)
+                        );
+
+                        if (! this.filters.applied[chip.code].length) {
+                            delete this.filters.applied[chip.code];
+                        }
+                    }
+
+                    /**
+                     * Sincroniza el estado de los componentes hijos.
+                     */
+                    this.$refs.filterItemComponent.forEach((filterItem) => {
+                        if (filterItem.filter.code !== chip.code) {
+                            return;
+                        }
+
+                        if (filterItem.filter.type === 'price') {
+                            filterItem.$data.appliedValues = null;
+                        } else {
+                            filterItem.$data.appliedValues = [...(this.filters.applied[chip.code] ?? [])];
                         }
                     });
 
@@ -524,6 +658,15 @@
                             : [...this.options, ...response.data.data];
 
                         this.meta = response.data.meta;
+
+                        /**
+                         * Notifica al padre las opciones cargadas para
+                         * los chips de filtros activos (HU-05).
+                         */
+                        this.$emit('options-loaded', {
+                            filter: this.filter,
+                            options: response.data.data,
+                        });
                     })
                     .catch(error => {
                         this.isLoadingMore = false;

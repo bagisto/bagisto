@@ -536,6 +536,9 @@ return [
     ],
 
     'components' => [
+        'accessibility' => [
+            'skip-to-main-content' => 'Saltar al contenido principal',
+        ],
         'accordion' => [
             'default-content' => 'Contenido predeterminado',
             'default-header' => 'Encabezado predeterminado',
@@ -710,7 +713,9 @@ return [
                 'add-to-compare-success' => 'Elemento añadido correctamente a la lista de comparación.',
                 'add-to-wishlist' => 'Agregar a la lista de deseos',
                 'already-in-compare' => 'El elemento ya está agregado a la lista de comparación.',
+                'discount-aria' => 'Producto :product con :percentage por ciento de descuento',
                 'new' => 'Nuevo',
+                'off' => 'OFF',
                 'review-description' => 'Sé el primero en revisar este producto',
                 'sale' => 'Venta',
             ],
@@ -974,9 +979,11 @@ return [
 
     'categories' => [
         'filters' => [
+            'applied' => 'Filtros aplicados',
             'clear-all' => 'Borrar todo',
             'filter' => 'Filtrar',
             'filters' => 'Filtros:',
+            'remove-filter' => 'Quitar filtro :filter',
 
             'search' => [
                 'load-more' => 'Cargar más',

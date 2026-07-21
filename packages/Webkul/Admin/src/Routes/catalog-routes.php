@@ -10,6 +10,7 @@ use Webkul\Admin\Http\Controllers\Catalog\Product\DownloadableController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\GroupedController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\SimpleController;
 use Webkul\Admin\Http\Controllers\Catalog\Product\VirtualController;
+use Webkul\Admin\Http\Controllers\Catalog\ProductCatalogExportController;
 use Webkul\Admin\Http\Controllers\Catalog\ProductController;
 
 /**
@@ -87,6 +88,11 @@ Route::prefix('catalog')->group(function () {
     /**
      * Products routes.
      */
+    /**
+     * Products catalog full CSV export route (HU-04).
+     */
+    Route::get('products/export-catalog', [ProductCatalogExportController::class, 'export'])->name('admin.catalog.products.export_catalog');
+
     Route::controller(ProductController::class)->prefix('products')->group(function () {
         Route::get('', 'index')->name('admin.catalog.products.index');
 

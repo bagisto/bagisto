@@ -4,6 +4,7 @@ namespace Webkul\Shop\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Webkul\Product\Helpers\DiscountBadge;
 use Webkul\Product\Helpers\Review;
 
 class ProductResource extends JsonResource
@@ -42,6 +43,7 @@ class ProductResource extends JsonResource
             'is_new' => (bool) $this->new,
             'is_featured' => (bool) $this->featured,
             'on_sale' => (bool) $productTypeInstance->haveDiscount(),
+            'discount_percentage' => DiscountBadge::fromPrices($productTypeInstance->getProductPrices()),
             'is_saleable' => (bool) $productTypeInstance->isSaleable(),
             'is_wishlist' => (bool) auth()->guard()->user()?->wishlist_items
                 ->where('channel_id', core()->getCurrentChannel()->id)
