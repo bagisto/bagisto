@@ -67,6 +67,10 @@
     "file": "assets/no-address-BHTy4apn.png",
     "src": "src/Resources/assets/images/no-address.png"
   },
+  "src/Resources/assets/images/payglocal.png": {
+    "file": "assets/payglocal-CSDEoMi_.png",
+    "src": "src/Resources/assets/images/payglocal.png"
+  },
   "src/Resources/assets/images/paypal.png": {
     "file": "assets/paypal-CIu1GKlz.png",
     "src": "src/Resources/assets/images/paypal.png"
