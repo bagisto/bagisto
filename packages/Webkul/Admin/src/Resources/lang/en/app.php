@@ -5460,6 +5460,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
 
+                'drag-drop-hint' => 'or drag and drop image here',
+
+                'crop' => [
+                    'title' => 'Crop Image',
+                    'aspect-free' => 'Free',
+                    'aspect-square' => 'Square (1:1)',
+                    'aspect-4-3' => 'Standard (4:3)',
+                    'aspect-16-9' => 'Widescreen (16:9)',
+                    'apply-btn' => 'Apply Crop',
+                    'skip-btn' => 'Skip',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Apply',
                     'generate' => 'Generate',

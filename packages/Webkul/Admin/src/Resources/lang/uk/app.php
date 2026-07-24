@@ -5460,6 +5460,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
 
+                'drag-drop-hint' => 'або перетягніть зображення сюди',
+
+                'crop' => [
+                    'title' => 'Обрізати зображення',
+                    'aspect-free' => 'Вільно',
+                    'aspect-square' => 'Квадрат (1:1)',
+                    'aspect-4-3' => 'Стандарт (4:3)',
+                    'aspect-16-9' => 'Широкоформатний (16:9)',
+                    'apply-btn' => 'Застосувати обрізку',
+                    'skip-btn' => 'Пропустити',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Застосувати',
                     'generate' => 'Створити',

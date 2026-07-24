@@ -5460,6 +5460,18 @@ return [
                 'allowed-types' => 'png، jpeg، jpg',
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
 
+                'drag-drop-hint' => 'أو اسحب الصورة وأفلتها هنا',
+
+                'crop' => [
+                    'title' => 'قص الصورة',
+                    'aspect-free' => 'حر',
+                    'aspect-square' => 'مربع (1:1)',
+                    'aspect-4-3' => 'قياسي (4:3)',
+                    'aspect-16-9' => 'عريض (16:9)',
+                    'apply-btn' => 'تطبيق القص',
+                    'skip-btn' => 'تخطي',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'تطبيق',
                     'generate' => 'إنشاء',

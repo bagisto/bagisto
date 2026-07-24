@@ -5460,6 +5460,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Seuls les fichiers d\'images (.jpeg, .jpg, .png, ..) sont autorisés.',
 
+                'drag-drop-hint' => 'ou glissez-déposez l\'image ici',
+
+                'crop' => [
+                    'title' => 'Recadrer l\'image',
+                    'aspect-free' => 'Libre',
+                    'aspect-square' => 'Carré (1:1)',
+                    'aspect-4-3' => 'Standard (4:3)',
+                    'aspect-16-9' => 'Panoramique (16:9)',
+                    'apply-btn' => 'Appliquer le recadrage',
+                    'skip-btn' => 'Ignorer',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Appliquer',
                     'generate' => 'Générer',

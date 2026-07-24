@@ -5460,6 +5460,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
 
+                'drag-drop-hint' => 'या छवि को यहां खींचें और छोड़ें',
+
+                'crop' => [
+                    'title' => 'छवि क्रॉप करें',
+                    'aspect-free' => 'मुक्त',
+                    'aspect-square' => 'वर्ग (1:1)',
+                    'aspect-4-3' => 'मानक (4:3)',
+                    'aspect-16-9' => 'वाइडस्क्रीन (16:9)',
+                    'apply-btn' => 'क्रॉप लागू करें',
+                    'skip-btn' => 'छोड़ें',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'लागू करें',
                     'generate' => 'उत्पन्न करें',

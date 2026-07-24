@@ -5460,6 +5460,18 @@ return [
                 'allowed-types' => 'png、jpeg、jpg',
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
 
+                'drag-drop-hint' => 'またはここに画像をドラッグ＆ドロップ',
+
+                'crop' => [
+                    'title' => '画像を切り抜く',
+                    'aspect-free' => '自由',
+                    'aspect-square' => '正方形 (1:1)',
+                    'aspect-4-3' => '標準 (4:3)',
+                    'aspect-16-9' => 'ワイド (16:9)',
+                    'apply-btn' => '切り抜きを適用',
+                    'skip-btn' => 'スキップ',
+                ],
+
                 'ai-generation' => [
                     'apply' => '適用',
                     'generate' => '生成',

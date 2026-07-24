@@ -5460,6 +5460,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
 
+                'drag-drop-hint' => 'lub przeciągnij i upuść obraz tutaj',
+
+                'crop' => [
+                    'title' => 'Przytnij obraz',
+                    'aspect-free' => 'Dowolny',
+                    'aspect-square' => 'Kwadrat (1:1)',
+                    'aspect-4-3' => 'Standardowy (4:3)',
+                    'aspect-16-9' => 'Panoramiczny (16:9)',
+                    'apply-btn' => 'Zastosuj przycięcie',
+                    'skip-btn' => 'Pomiń',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Zastosuj',
                     'generate' => 'Generuj',

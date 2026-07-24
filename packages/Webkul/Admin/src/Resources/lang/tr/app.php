@@ -5460,6 +5460,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
 
+                'drag-drop-hint' => 'veya resmi buraya sürükleyip bırakın',
+
+                'crop' => [
+                    'title' => 'Görseli Kırp',
+                    'aspect-free' => 'Serbest',
+                    'aspect-square' => 'Kare (1:1)',
+                    'aspect-4-3' => 'Standart (4:3)',
+                    'aspect-16-9' => 'Geniş Ekran (16:9)',
+                    'apply-btn' => 'Kırpmayı Uygula',
+                    'skip-btn' => 'Atla',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Uygula',
                     'generate' => 'Oluştur',
