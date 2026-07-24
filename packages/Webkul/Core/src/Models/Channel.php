@@ -147,6 +147,26 @@ class Channel extends TranslatableModel implements ChannelContract
     }
 
     /**
+     * Get mobile logo image url.
+     */
+    public function mobile_logo_url()
+    {
+        if (! $this->mobile_logo) {
+            return;
+        }
+
+        return Storage::url($this->mobile_logo);
+    }
+
+    /**
+     * Get mobile logo image url.
+     */
+    public function getMobileLogoUrlAttribute()
+    {
+        return $this->mobile_logo_url();
+    }
+
+    /**
      * Create a new factory instance for the model
      */
     protected static function newFactory(): Factory
