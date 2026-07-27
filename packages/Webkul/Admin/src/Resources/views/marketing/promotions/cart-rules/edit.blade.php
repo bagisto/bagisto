@@ -1244,8 +1244,6 @@
                             matchedAttribute['type'] == 'multiselect'
                             || matchedAttribute['type'] == 'checkbox'
                         ) {
-                            this.condition.operator = '{}';
-
                             if (
                                 ! this.condition.value 
                                 || ! Array.isArray(this.condition.value)
