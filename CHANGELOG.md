@@ -2,6 +2,16 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Enhanced Data Transfer imports. Saving an import now runs it through to the end on its own — validate, fetch images, create, link, index — with a stepper and live progress for each phase, instead of a separate click per phase. Validation runs in windows, either browser-driven or dispatched across the queue workers, so a large file no longer has to be validated in one request. Product images can now come from links in the sheet, a ZIP uploaded with the import, or a directory on the server, saved on the import so reopening it restores the choice; links are fetched once each in a phase of their own before any row is written. The chosen image source is validated against the file, so a mismatch is reported during validation rather than silently importing every product without images. Also fixed a queued import re-dispatching its whole job chain on every poll, which ran the same rows two or three times over — booking the repeats as updates and deadlocking against itself — and fixed the runs that could stall for good in the image or create phase, which now complete what they can and report the batches that did not.
+
+- Made the admin datagrid header consistent between the default grid and customized ones, and gave customized grids a proper card layout on small screens — the column header is dropped there, since filter and sort are reachable from the bar fixed to the foot of the screen. Loading placeholders were rebuilt to match the grid they stand in for, on both desktop and mobile, so the layout no longer shifts when the rows arrive.
+
+- Fixed the admin product datagrid and storefront search failing when an Elasticsearch index is missing, by passing `ignore_unavailable` on the searches that address an index by name.
+
+- Fixed `top-left`, `top-right` and the fallback position of the admin dropdown throwing at runtime — two adjacent template literals with no comma between them parse as a tagged template — and made the `fit-toggle` option apply to every position rather than only `bottom-left`.
+
 ## **v2.4.8 (8th of July 2026)** - *Release*
 
 - Security fixes.

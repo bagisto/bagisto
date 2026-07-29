@@ -168,7 +168,7 @@
                                                     </div>
 
                                                     <div class="mb-2 mt-1.5">
-                                                        <x-admin::dropdown>
+                                                        <x-admin::dropdown :fit-toggle="true">
                                                             <x-slot:toggle>
                                                                 <button
                                                                     type="button"
@@ -194,13 +194,38 @@
                                                                 </button>
                                                             </x-slot>
 
-                                                            <x-slot:menu class="max-h-[200px] overflow-auto">
-                                                                <x-admin::dropdown.menu.item
-                                                                    v-for="option in column.filterable_options"
-                                                                    v-text="option.label"
-                                                                    @click="addFilter(option.value, column)"
+                                                            <x-slot:menu class="!py-0">
+                                                                <!-- Search Box (Fixed header, shown once the option list is long enough to warrant it.) -->
+                                                                <li
+                                                                    v-if="isFilterSearchable(column)"
+                                                                    class="border-b bg-white p-2 dark:border-gray-800 dark:bg-gray-900"
+                                                                    @click.stop
                                                                 >
-                                                                </x-admin::dropdown.menu.item>
+                                                                    <input
+                                                                        type="text"
+                                                                        v-model="filterSearch[column.index]"
+                                                                        placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
+                                                                        class="w-full rounded-md border bg-white px-2.5 py-1.5 text-sm text-gray-600 transition-all focus:border-gray-400 focus:outline-none dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                                    >
+                                                                </li>
+
+                                                                <!-- Only the options scroll, so they never slip above the fixed search header. -->
+                                                                <div class="max-h-[240px] overflow-auto py-4">
+                                                                    <x-admin::dropdown.menu.item
+                                                                        v-for="option in filterOptions(column)"
+                                                                        class="truncate"
+                                                                        v-text="option.label"
+                                                                        @click="addFilter(option.value, column)"
+                                                                    >
+                                                                    </x-admin::dropdown.menu.item>
+
+                                                                    <li
+                                                                        v-if="! filterOptions(column).length"
+                                                                        class="px-5 py-2 text-sm text-gray-400 dark:text-gray-500"
+                                                                    >
+                                                                        @lang('admin::app.components.datagrid.filters.dropdown.searchable.no-results')
+                                                                    </li>
+                                                                </div>
                                                             </x-slot>
                                                         </x-admin::dropdown>
                                                     </div>
@@ -540,7 +565,7 @@
                                                     </div>
 
                                                     <div class="mb-2 mt-1.5">
-                                                        <x-admin::dropdown>
+                                                        <x-admin::dropdown :fit-toggle="true">
                                                             <x-slot:toggle>
                                                                 <button
                                                                     type="button"
@@ -566,13 +591,38 @@
                                                                 </button>
                                                             </x-slot>
 
-                                                            <x-slot:menu class="max-h-[200px] overflow-auto">
-                                                                <x-admin::dropdown.menu.item
-                                                                    v-for="option in column.filterable_options"
-                                                                    v-text="option.label"
-                                                                    @click="addFilter(option.value, column)"
+                                                            <x-slot:menu class="!py-0">
+                                                                <!-- Search box (fixed header, shown once the option list is long enough to warrant it) -->
+                                                                <li
+                                                                    v-if="isFilterSearchable(column)"
+                                                                    class="border-b bg-white p-2 dark:border-gray-800 dark:bg-gray-900"
+                                                                    @click.stop
                                                                 >
-                                                                </x-admin::dropdown.menu.item>
+                                                                    <input
+                                                                        type="text"
+                                                                        v-model="filterSearch[column.index]"
+                                                                        placeholder="@lang('admin::app.components.datagrid.toolbar.search.title')"
+                                                                        class="w-full rounded-md border bg-white px-2.5 py-1.5 text-sm text-gray-600 transition-all focus:border-gray-400 focus:outline-none dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                                    >
+                                                                </li>
+
+                                                                <!-- Only the options scroll, so they never slip above the fixed search header -->
+                                                                <div class="max-h-[240px] overflow-auto py-4">
+                                                                    <x-admin::dropdown.menu.item
+                                                                        v-for="option in filterOptions(column)"
+                                                                        class="truncate"
+                                                                        v-text="option.label"
+                                                                        @click="addFilter(option.value, column)"
+                                                                    >
+                                                                    </x-admin::dropdown.menu.item>
+
+                                                                    <li
+                                                                        v-if="! filterOptions(column).length"
+                                                                        class="px-5 py-2 text-sm text-gray-400 dark:text-gray-500"
+                                                                    >
+                                                                        @lang('admin::app.components.datagrid.filters.dropdown.searchable.no-results')
+                                                                    </li>
+                                                                </div>
                                                             </x-slot>
                                                         </x-admin::dropdown>
                                                     </div>
@@ -886,6 +936,10 @@
                     isShowSavedFilters: false,
 
                     isFilterDirty: false,
+
+                    filterSearch: {},
+
+                    searchableFilterThreshold: 6,
                 };
             },
 
@@ -904,6 +958,36 @@
             },
 
             methods: {
+                /**
+                 * Whether a dropdown filter should offer a search box: true once its option count
+                 * passes the threshold, so long lists become searchable while short ones stay plain.
+                 *
+                 * @param {object} column
+                 * @returns {boolean}
+                 */
+                isFilterSearchable(column) {
+                    return (column.filterable_options?.length ?? 0) > this.searchableFilterThreshold;
+                },
+
+                /**
+                 * A dropdown filter's options narrowed by the term typed into its search box, matched
+                 * on the option label.
+                 *
+                 * @param {object} column
+                 * @returns {array}
+                 */
+                filterOptions(column) {
+                    const options = column.filterable_options ?? [];
+
+                    const term = (this.filterSearch[column.index] ?? '').trim().toLowerCase();
+
+                    if (! term) {
+                        return options;
+                    }
+
+                    return options.filter((option) => String(option.label).toLowerCase().includes(term));
+                },
+
                 /**
                  * Has any column.
                  *

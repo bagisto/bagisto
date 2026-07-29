@@ -12,7 +12,7 @@
 
 @layer components {
     ::selection {
-        background-color: rgba(0, 68, 242, .2);
+        @apply bg-darkBlue/20;
     }
 
     body {
@@ -36,33 +36,32 @@
     }
 
     .draggable-ghost {
-        opacity: 0.5;
-        background: #e0e7ff;
+        @apply bg-indigo-100 opacity-50;
     }
 
+    /*
+     * The font-family is forced so a browser extension that overrides page fonts
+     * cannot replace the icons with letterforms, and the line-height with it, since
+     * an inherited one would knock the glyphs off their baseline.
+     */
     [class^="icon-"],
     [class*=" icon-"] {
-        /* use !important to prevent issues with browser extensions that change fonts */
+        @apply text-gray-500 antialiased;
+
         font-family: "bagisto-admin" !important;
-        speak: never;
         font-style: normal;
         font-weight: normal;
         font-variant: normal;
-        text-transform: none;
-        line-height: 1;
-        color: #6b7280;
-        
-        /* Better Font Rendering =========== */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
         line-height: 1 !important;
+        text-transform: none;
+        speak: never;
     }
 
-    html.dark [class^="icon-"],
-    html.dark [class*=" icon-"]{
-        color: #d1d5db;
+    .dark [class^="icon-"],
+    .dark [class*=" icon-"] {
+        @apply text-gray-300;
     }
-    
+
     .box-shadow {
         @apply border-[1px] dark:border-gray-800 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)];
     }
@@ -386,7 +385,7 @@
     .icon-play:before {
         content: "\e945";
     }
-      
+
     p {
         @apply text-[14px] !leading-[17px];
     }
@@ -402,7 +401,7 @@
     }
 
     .secondary-button {
-        @apply flex cursor-pointer place-content-center items-center gap-x-1 whitespace-nowrap rounded-md border-2 border-blue-600 bg-white px-3 py-1.5 font-semibold text-blue-600 transition-all hover:bg-[#eff6ff61] focus:bg-[#eff6ff61] dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
+        @apply flex cursor-pointer place-content-center items-center gap-x-1 whitespace-nowrap rounded-md border-2 border-blue-600 bg-white px-3 py-1.5 font-semibold text-blue-600 transition-all hover:bg-blue-50/[0.38] focus:bg-blue-50/[0.38] dark:border-gray-400 dark:bg-gray-800 dark:text-white dark:hover:opacity-80;
     }
 
     .transparent-button {
@@ -415,19 +414,15 @@
         display: none;
     }
 
+    /*
+     * #e9e9e9 is not on the palette — it is the scrollbar's own grey.
+     */
     .journal-scroll::-webkit-scrollbar-track {
-        background-color: #fff;
-        cursor: pointer;
-        border-radius: 12px;
-        border: 1px solid #e9e9e9;
+        @apply cursor-pointer rounded-xl border border-[#e9e9e9] bg-white;
     }
 
     .journal-scroll::-webkit-scrollbar-thumb {
-        cursor: pointer;
-        background-color: #e9e9e9;
-        border-radius: 12px;
-        border: 3px solid transparent;
-        background-clip: content-box;
+        @apply cursor-pointer rounded-xl border-[3px] border-transparent bg-[#e9e9e9] bg-clip-content;
     }
 
     .custom-select {
@@ -439,7 +434,8 @@
         background-position-x: calc(100% - 10px);
         background-position-y: 50%;
     }
-    .dark .custom-select{
+
+    .dark .custom-select {
         background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
     }
 
@@ -459,23 +455,23 @@
         @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
     }
 
-	.label-pending,
+    .label-pending,
     .label-pending_payment {
-		@apply bg-yellow-500;
-	}
-
-	.label-processing{
-		@apply bg-cyan-600;
+        @apply bg-yellow-500;
     }
 
-	.label-completed,
-    .label-active {
-		@apply bg-green-600;
-	}
+    .label-processing {
+        @apply bg-cyan-600;
+    }
 
-	.label-closed {
-		@apply bg-indigo-600;
-	}
+    .label-completed,
+    .label-active {
+        @apply bg-green-600;
+    }
+
+    .label-closed {
+        @apply bg-indigo-600;
+    }
 
     .label-canceled,
     .label-fraud {
@@ -486,7 +482,9 @@
         @apply bg-slate-400;
     }
 
-    /* status */
+    /*
+     * Status text colours.
+     */
     .status-enable {
         @apply text-green-600;
     }
@@ -495,9 +493,13 @@
         @apply text-red-600;
     }
 
-	.icon-star-fill:before {
+    /*
+     * #ffb600 is the rating gold — not a palette colour.
+     */
+    .icon-star-fill:before {
+        @apply text-[#ffb600];
+
         content: "\e938";
-        color: #ffb600;
     }
 
     .shimmer {
@@ -539,21 +541,171 @@
     }
 
     .CodeMirror {
-        @apply !h-[calc(100vh-367px)]
+        @apply !h-[calc(100vh-367px)];
     }
 }
 
 .tox .tox-toolbar__group:last-child button {
-    padding: 6px 8px;
-    background: #eff6ff;
-    color: #2563EB;
+    @apply bg-blue-50 px-2 py-1.5 text-blue-600;
 }
 
 .tox .tox-toolbar__group:last-child button:hover {
-    background: #dbeafe;
+    @apply bg-blue-100;
 }
-
 
 .tox .tox-toolbar__group:last-child button[aria-disabled="true"] {
     @apply cursor-not-allowed opacity-50;
+}
+
+/*
+ * Datagrid mobile Filter | Sort bar.
+ *
+ * The datagrid toolbar's `.dg-fsbar` row is lifted into a bar fixed to the foot of the screen on
+ * mobile — a FILTER | SORT strip — so the toolbar above keeps just two rows. `.dg-fsbar` lives only
+ * in the datagrid toolbar, so nothing else on the page is affected, and it reverts to an inline row
+ * above md.
+ */
+@media (max-width: 767px) {
+    /*
+     * The z-index matches the sticky header's, so a drawer opened from the bar paints
+     * above it rather than behind.
+     */
+    .dg-fsbar {
+        @apply fixed bottom-0 start-0 end-0 z-[10001] flex w-full items-center gap-0 border-t border-gray-200 bg-white;
+    }
+
+    .dark .dg-fsbar {
+        @apply border-gray-800 bg-gray-900;
+    }
+
+    .dg-fsbar-filter {
+        @apply flex flex-1 justify-center;
+    }
+
+    /*
+     * Recasts the filter button — the div holding the funnel icon — as a borderless
+     * full-width tab.
+     *
+     * Written as a selector rather than utilities because that div belongs to the
+     * filter component's own markup, which this file does not own: styling it with
+     * utilities would mean editing that component and threading a prop down to it.
+     * The `!important`s are for the same reason — they override the utilities the
+     * component sets on itself.
+     */
+    .dg-fsbar-filter div:has(> .icon-filter) {
+        @apply !w-full !max-w-none !justify-center !border-0 !bg-transparent !py-3.5 uppercase;
+    }
+
+    .dg-fsbar-sep {
+        @apply block h-5 w-px bg-gray-200;
+    }
+
+    .dark .dg-fsbar-sep {
+        @apply bg-gray-700;
+    }
+
+    .dg-fsbar-sort {
+        @apply flex flex-1 justify-center;
+    }
+
+    /*
+     * Lifts the page so the fixed bar never covers the last rows.
+     *
+     * Has to be a selector: it styles an ancestor, and a utility only ever styles the
+     * element that carries it.
+     */
+    body:has(.dg-fsbar) {
+        @apply pb-16;
+    }
+}
+
+/*
+ * Datagrid header row.
+ *
+ * The look every datagrid header shares. A datagrid that renders its own header —
+ * to group columns into cards, say — reuses this instead of restating the utilities,
+ * so a customized grid cannot drift away from the default one. Only the grid
+ * template stays with each grid, since that is the part which legitimately differs.
+ */
+@layer components {
+    .datagrid-head {
+        @apply min-h-[47px] items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 text-sm font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300;
+    }
+}
+
+/*
+ * A header belonging to a grid that becomes cards on small screens. There it is
+ * dropped entirely: the labels describe columns that no longer exist once the row
+ * has collapsed into a card, and sorting is reachable from the bottom Filter | Sort
+ * bar instead.
+ *
+ * It has to live in the utilities layer, not components: the header also carries
+ * `grid`, and utilities are emitted after components — so a `display: none` set in
+ * the components layer loses to `display: grid` at equal specificity.
+ */
+@layer utilities {
+    .datagrid-head-cards {
+        @apply max-md:hidden;
+    }
+}
+
+/*
+ * Datagrid rows as cards on small screens.
+ *
+ * A grid whose columns are fixed reads fine on a desktop and terribly on a phone,
+ * where it can only be reached by scrolling sideways. Adding `datagrid-card` to the
+ * row collapses it to a single column below md and labels each cell from its own
+ * `data-label`, so the row becomes a self-describing card — which is what lets the
+ * header above it be dropped entirely.
+ *
+ * The label comes from an attribute rather than extra markup so the desktop layout
+ * is untouched: above md none of this applies and the row is still the same grid.
+ */
+@media (max-width: 767px) {
+    .datagrid-card {
+        @apply gap-2.5 py-4;
+
+        /*
+         * `!important` because several grids set their column template as an inline
+         * style, which no class can otherwise beat.
+         */
+        grid-template-columns: minmax(0, 1fr) !important;
+    }
+
+    /*
+     * A selector rather than utilities: it targets cells by the `data-label` they
+     * carry, which is what keeps the label out of the markup entirely.
+     */
+    .datagrid-card > [data-label] {
+        @apply grid min-w-0 grid-cols-[6.5rem_minmax(0,1fr)] items-start gap-3;
+    }
+
+    .datagrid-card > [data-label]::before {
+        @apply text-xs font-medium uppercase leading-5 tracking-wide text-gray-400;
+
+        /*
+         * Tailwind has no utility for a generated attribute value.
+         */
+        content: attr(data-label);
+    }
+
+    .dark .datagrid-card > [data-label]::before {
+        @apply text-gray-500;
+    }
+
+    /*
+     * Actions sit on their own line, aligned to the row's trailing edge. Kept as a
+     * flex row rather than the labelled grid above, so the buttons stay side by side
+     * instead of stacking, and with no label — the icons speak for themselves.
+     */
+    .datagrid-card > [data-label="actions"] {
+        @apply flex items-center justify-end;
+    }
+
+    .datagrid-card > [data-label="actions"]::before {
+        /*
+         * Suppresses the generated label above — again, no utility for content.
+         */
+        content: none;
+    }
 }

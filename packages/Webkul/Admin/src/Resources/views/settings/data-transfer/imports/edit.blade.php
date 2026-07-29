@@ -29,12 +29,24 @@
                 </a>
 
                 <!-- Save Button -->
+                <!-- Import Button. Saving now runs the import through to the end on its own, so it is confirmed first. The hidden submit is what is actually pressed, so the form still validates before anything is sent. -->
                 <button
-                    type="submit"
+                    type="button"
                     class="primary-button"
+                    @click="$emitter.emit('open-confirm-modal', {
+                        message: '@lang('admin::app.settings.data-transfer.imports.create.import-confirmation')',
+
+                        agree: () => $refs['importSubmit'].click()
+                    })"
                 >
                     @lang('admin::app.settings.data-transfer.imports.edit.save-btn')
                 </button>
+
+                <button
+                    type="submit"
+                    class="hidden"
+                    ref="importSubmit"
+                ></button>
             </div>
         </div>
 
@@ -135,29 +147,10 @@
 
                         <x-admin::form.control-group.error control-name="file" />
                     </x-admin::form.control-group>
-
-                    <!-- Images Directory Path -->
-                    <x-admin::form.control-group class="!mb-0">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.settings.data-transfer.imports.edit.images-directory')
-                        </x-admin::form.control-group.label>
-
-                        <x-admin::form.control-group.control
-                            type="text"
-                            name="images_directory_path"
-                            :value="old('images_directory_path') ?? $import->images_directory_path"
-                            :placeholder="trans('admin::app.settings.data-transfer.imports.edit.images-directory')"
-                        />
-
-                        <p class="mt-2 text-xs text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.settings.data-transfer.imports.edit.file-info')
-                        </p>
-
-                        <p class="mt-2 text-xs text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.settings.data-transfer.imports.edit.file-info-example')
-                        </p>
-                    </x-admin::form.control-group>
                 </div>
+
+                <!-- Product Images -->
+                @include('admin::settings.data-transfer.imports.images')
 
                 {!! view_render_event('bagisto.admin.settings.data_transfer.imports.create.card.general.after', ['import' => $import]) !!}
             </div>

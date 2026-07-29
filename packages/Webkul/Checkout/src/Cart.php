@@ -77,7 +77,7 @@ class Cart
             ]);
         } elseif (session()->has('cart')) {
             $cart = $this->cartRepository->find(session()->get('cart')->id);
-            
+
             if (
                 $cart
                 && $cart->is_active
