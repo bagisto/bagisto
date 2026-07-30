@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'Metode Pembayaran',
                     'paid' => 'Telah Dibayar',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'Terima pembayaran lintas negara melalui PayGlocal.',
+                    'payglocal-info' => 'Terima pembayaran lintas negara melalui PayGlocal. <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">Daftar di sini untuk mendapatkan kredensial Anda.</a>',
                     'payglocal-merchant-id-info' => 'Tersedia di dasbor PayGlocal pada bagian My Account.',
                     'payglocal-private-key-id-info' => 'ID kunci privat Anda, ditampilkan di dasbor PayGlocal.',
                     'payglocal-public-key' => 'Kunci Publik PayGlocal',

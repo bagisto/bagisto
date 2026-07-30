@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'Metodi di Pagamento',
                     'paid' => 'Pagato',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'Accetta pagamenti transfrontalieri tramite PayGlocal.',
+                    'payglocal-info' => 'Accetta pagamenti transfrontalieri tramite PayGlocal. <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">Registrati qui per ottenere le tue credenziali.</a>',
                     'payglocal-merchant-id-info' => 'Disponibile nella dashboard di PayGlocal in My Account.',
                     'payglocal-private-key-id-info' => 'L\'ID della tua chiave privata, mostrato nella dashboard di PayGlocal.',
                     'payglocal-public-key' => 'Chiave pubblica di PayGlocal',

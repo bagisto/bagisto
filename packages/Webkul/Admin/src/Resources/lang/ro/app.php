@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'Payment Methods',
                     'paid' => 'Paid',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'Acceptați plăți transfrontaliere prin PayGlocal.',
+                    'payglocal-info' => 'Acceptați plăți transfrontaliere prin PayGlocal. <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">Înregistrează-te aici pentru a obține datele tale de acces.</a>',
                     'payglocal-merchant-id-info' => 'Disponibil în panoul PayGlocal, la secțiunea My Account.',
                     'payglocal-private-key-id-info' => 'ID-ul cheii dumneavoastră private, afișat în panoul PayGlocal.',
                     'payglocal-public-key' => 'Cheia publică PayGlocal',

@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'روش های پرداخت',
                     'paid' => 'پرداخت شده',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'پرداخت‌های برون‌مرزی را از طریق PayGlocal بپذیرید.',
+                    'payglocal-info' => 'پرداخت‌های برون‌مرزی را از طریق PayGlocal بپذیرید. <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">برای دریافت اعتبارنامه‌های خود اینجا ثبت‌نام کنید.</a>',
                     'payglocal-merchant-id-info' => 'در داشبورد PayGlocal در بخش My Account موجود است.',
                     'payglocal-private-key-id-info' => 'شناسه کلید خصوصی شما که در داشبورد PayGlocal نمایش داده می‌شود.',
                     'payglocal-public-key' => 'کلید عمومی PayGlocal',

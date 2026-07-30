@@ -4971,7 +4971,7 @@ return [
                     'page-title' => '支払い方法',
                     'paid' => '支払済み',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'PayGlocal を通じて国際決済を受け付けます。',
+                    'payglocal-info' => 'PayGlocal を通じて国際決済を受け付けます。 <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">認証情報を取得するには、こちらからサインアップしてください。</a>',
                     'payglocal-merchant-id-info' => 'PayGlocal ダッシュボードの My Account で確認できます。',
                     'payglocal-private-key-id-info' => 'PayGlocal ダッシュボードに表示される秘密鍵の ID です。',
                     'payglocal-public-key' => 'PayGlocal 公開鍵',

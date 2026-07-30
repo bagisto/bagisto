@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'Payment Methods',
                     'paid' => 'Paid',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'Accept cross border payments through PayGlocal.',
+                    'payglocal-info' => 'Accept cross border payments through PayGlocal. <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">Sign up here to get your credentials.</a>',
                     'payglocal-merchant-id-info' => 'Available in the PayGlocal dashboard under My Account.',
                     'payglocal-private-key-id-info' => 'The key ID of your private key, shown in the PayGlocal dashboard.',
                     'payglocal-public-key' => 'PayGlocal Public Key',

@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'طرق الدفع',
                     'paid' => 'مدفوع',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'اقبل المدفوعات العابرة للحدود من خلال PayGlocal.',
+                    'payglocal-info' => 'اقبل المدفوعات العابرة للحدود من خلال PayGlocal. <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">سجّل هنا للحصول على بيانات الاعتماد الخاصة بك.</a>',
                     'payglocal-merchant-id-info' => 'متوفر في لوحة تحكم PayGlocal ضمن حسابي.',
                     'payglocal-private-key-id-info' => 'معرف المفتاح الخاص بك، كما هو معروض في لوحة تحكم PayGlocal.',
                     'payglocal-public-key' => 'المفتاح العام لـ PayGlocal',

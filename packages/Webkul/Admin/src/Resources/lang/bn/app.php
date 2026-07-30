@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'পেমেন্ট পদ্ধতিসমূহ',
                     'paid' => 'পরিশোধিত',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'PayGlocal-এর মাধ্যমে আন্তঃসীমান্ত পেমেন্ট গ্রহণ করুন।',
+                    'payglocal-info' => 'PayGlocal-এর মাধ্যমে আন্তঃসীমান্ত পেমেন্ট গ্রহণ করুন। <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">আপনার ক্রেডেনশিয়াল পেতে এখানে সাইন আপ করুন।</a>',
                     'payglocal-merchant-id-info' => 'PayGlocal ড্যাশবোর্ডের My Account-এ পাওয়া যাবে।',
                     'payglocal-private-key-id-info' => 'আপনার প্রাইভেট কী-এর আইডি, PayGlocal ড্যাশবোর্ডে দেখানো হয়েছে।',
                     'payglocal-public-key' => 'PayGlocal পাবলিক কী',

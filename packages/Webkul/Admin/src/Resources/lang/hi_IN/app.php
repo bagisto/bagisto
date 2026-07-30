@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'भुगतान पद्धतियाँ',
                     'paid' => 'भुगतान किया हुआ',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'PayGlocal के माध्यम से सीमा पार भुगतान स्वीकार करें।',
+                    'payglocal-info' => 'PayGlocal के माध्यम से सीमा पार भुगतान स्वीकार करें। <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">अपनी क्रेडेंशियल प्राप्त करने के लिए यहाँ साइन अप करें।</a>',
                     'payglocal-merchant-id-info' => 'PayGlocal डैशबोर्ड में My Account के अंतर्गत उपलब्ध है।',
                     'payglocal-private-key-id-info' => 'आपकी प्राइवेट की की आईडी, जो PayGlocal डैशबोर्ड में दिखाई जाती है।',
                     'payglocal-public-key' => 'PayGlocal पब्लिक की',

@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'Betaalmethoden',
                     'paid' => 'Betaald',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'Accepteer grensoverschrijdende betalingen via PayGlocal.',
+                    'payglocal-info' => 'Accepteer grensoverschrijdende betalingen via PayGlocal. <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">Meld je hier aan om je inloggegevens te ontvangen.</a>',
                     'payglocal-merchant-id-info' => 'Beschikbaar in het PayGlocal-dashboard onder My Account.',
                     'payglocal-private-key-id-info' => 'De ID van uw privésleutel, zoals weergegeven in het PayGlocal-dashboard.',
                     'payglocal-public-key' => 'Openbare sleutel van PayGlocal',

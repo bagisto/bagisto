@@ -4971,7 +4971,7 @@ return [
                     'page-title' => 'שיטות תשלום',
                     'paid' => 'שולם',
                     'payglocal' => 'PayGlocal',
-                    'payglocal-info' => 'קבלו תשלומים בין-לאומיים באמצעות PayGlocal.',
+                    'payglocal-info' => 'קבלו תשלומים בין-לאומיים באמצעות PayGlocal. <a href="https://dashboard.payglocal.in/app/mca/h8271x" target="_blank" rel="noopener noreferrer" class="text-blue-600 underline hover:text-blue-700">הירשמו כאן כדי לקבל את פרטי ההזדהות שלכם.</a>',
                     'payglocal-merchant-id-info' => 'זמין בלוח הבקרה של PayGlocal תחת My Account.',
                     'payglocal-private-key-id-info' => 'מזהה המפתח הפרטי שלכם, כפי שמוצג בלוח הבקרה של PayGlocal.',
                     'payglocal-public-key' => 'מפתח ציבורי של PayGlocal',
