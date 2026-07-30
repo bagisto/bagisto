@@ -28,6 +28,8 @@ class Import extends Model implements ImportContract
         'field_separator',
         'file_path',
         'images_directory_path',
+        'image_source',
+        'images_archive_name',
         'error_file_path',
         'summary',
         'started_at',

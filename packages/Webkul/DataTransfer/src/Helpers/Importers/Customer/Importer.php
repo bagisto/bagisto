@@ -98,6 +98,11 @@ class Importer extends AbstractImporter
     protected array $phones = [];
 
     /**
+     * Customers can be validated in windows — see ValidatesInChunks.
+     */
+    protected bool $chunkedValidationSupported = true;
+
+    /**
      * Create a new helper instance.
      *
      * @return void
@@ -134,13 +139,61 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Validate data.
+     * Load the existing customers, which every row is checked against.
      */
-    public function validateData(): void
+    protected function prepareForValidation(): void
     {
         $this->customerStorage->init();
+    }
 
-        parent::validateData();
+    /*
+    |--------------------------------------------------------------------------
+    | Chunked / queued validation
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function captureValidationState(): array
+    {
+        return [
+            'emails' => $this->emails,
+            'phones' => $this->phones,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function restoreValidationState(array $state): void
+    {
+        $this->emails = $state['emails'] ?? [];
+
+        $this->phones = $state['phones'] ?? [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function fileUniqueColumns(): array
+    {
+        return [
+            'email' => self::ERROR_DUPLICATE_EMAIL,
+            'phone' => self::ERROR_DUPLICATE_PHONE,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function duplicateValueMessage(string $column, string $value, array $context): ?string
+    {
+        $code = $column === 'email'
+            ? self::ERROR_DUPLICATE_EMAIL
+            : self::ERROR_DUPLICATE_PHONE;
+
+        return sprintf(trans($this->messages[$code]), $value);
     }
 
     /**

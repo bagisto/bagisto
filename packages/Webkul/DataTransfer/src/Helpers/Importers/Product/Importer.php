@@ -24,6 +24,7 @@ use Webkul\Customer\Repositories\CustomerGroupRepository;
 use Webkul\DataTransfer\Contracts\ImportBatch as ImportBatchContract;
 use Webkul\DataTransfer\Helpers\Import;
 use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
+use Webkul\DataTransfer\Helpers\Importers\Concerns\DownloadsImages;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
 use Webkul\Product\Jobs\ElasticSearch\DeleteIndex as DeleteIndexJob;
@@ -43,6 +44,8 @@ use Webkul\Product\Repositories\ProductRepository;
 
 class Importer extends AbstractImporter
 {
+    use DownloadsImages;
+
     /**
      * Product type simple
      */
@@ -104,6 +107,21 @@ class Importer extends AbstractImporter
     const ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND = 'attribute_family_code_not_found';
 
     /**
+     * Error code for an image named as a file while the import expects links
+     */
+    const ERROR_IMAGE_NOT_URL = 'image_not_url';
+
+    /**
+     * Error code for an image named as a link while the import expects files
+     */
+    const ERROR_IMAGE_NOT_FILE = 'image_not_file';
+
+    /**
+     * Error code for an image that is not where the import expects to find it
+     */
+    const ERROR_IMAGE_NOT_FOUND = 'image_not_found';
+
+    /**
      * Error message templates
      */
     protected array $messages = [
@@ -112,6 +130,9 @@ class Importer extends AbstractImporter
         self::ERROR_DUPLICATE_URL_KEY => 'data_transfer::app.importers.products.validation.errors.duplicate-url-key',
         self::ERROR_INVALID_ATTRIBUTE_FAMILY_CODE => 'data_transfer::app.importers.products.validation.errors.invalid-attribute-family',
         self::ERROR_SUPER_ATTRIBUTE_CODE_NOT_FOUND => 'data_transfer::app.importers.products.validation.errors.super-attribute-not-found',
+        self::ERROR_IMAGE_NOT_URL => 'data_transfer::app.importers.products.validation.errors.image-not-url',
+        self::ERROR_IMAGE_NOT_FILE => 'data_transfer::app.importers.products.validation.errors.image-not-file',
+        self::ERROR_IMAGE_NOT_FOUND => 'data_transfer::app.importers.products.validation.errors.image-not-found',
     ];
 
     /**
@@ -163,6 +184,18 @@ class Importer extends AbstractImporter
      * Urls keys storage
      */
     protected array $urlKeys = [];
+
+    /**
+     * How many of the accumulated url keys have already been cross-checked
+     * against the database. Url keys are recorded in row order, so this doubles
+     * as the offset of the first key a window still has to check.
+     */
+    protected int $checkedUrlKeys = 0;
+
+    /**
+     * Products can be validated in windows — see ValidatesInChunks.
+     */
+    protected bool $chunkedValidationSupported = true;
 
     /**
      * Urls keys storage
@@ -259,6 +292,14 @@ class Importer extends AbstractImporter
     }
 
     /**
+     * Load the existing catalogue's SKUs, which every row is checked against.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->skuStorage->init();
+    }
+
+    /**
      * Save validated batches
      */
     protected function saveValidatedBatches(): self
@@ -266,8 +307,6 @@ class Importer extends AbstractImporter
         $source = $this->getSource();
 
         $source->rewind();
-
-        $this->skuStorage->init();
 
         while ($source->valid()) {
             try {
@@ -371,7 +410,7 @@ class Importer extends AbstractImporter
         } else {
             $message = sprintf(
                 trans($this->messages[self::ERROR_DUPLICATE_URL_KEY]),
-                'url_key',
+                $rowData['url_key'],
                 $this->urlKeys[$rowData['url_key']]['sku']
             );
 
@@ -504,6 +543,8 @@ class Importer extends AbstractImporter
             }
         }
 
+        $this->validateImages($rowData, $rowNumber);
+
         return ! $this->errorHelper->isRowInvalid($rowNumber);
     }
 
@@ -609,6 +650,115 @@ class Importer extends AbstractImporter
                 )
             );
         }
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | Chunked / queued validation
+    |--------------------------------------------------------------------------
+    |
+    | Url keys are the one thing product validation carries across rows: the
+    | first row to claim a key keeps it, and any later row using it for a
+    | different sku is rejected. That is invisible from inside a single window,
+    | so it is snapshotted between windows on the chunked path and cross-checked
+    | in the merge on the queued one.
+    |
+    */
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function captureValidationState(): array
+    {
+        return [
+            'url_keys' => $this->urlKeys,
+            'checked_url_keys' => $this->checkedUrlKeys,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function restoreValidationState(array $state): void
+    {
+        $this->urlKeys = $state['url_keys'] ?? [];
+
+        $this->checkedUrlKeys = (int) ($state['checked_url_keys'] ?? 0);
+    }
+
+    /**
+     * Cross-check this window's url keys against the ones already in the
+     * catalogue, in one query rather than one per row.
+     *
+     * Only the keys this window added are checked — the earlier ones were
+     * checked by the window that introduced them, and existing products do not
+     * change while an import is being validated.
+     */
+    protected function afterChunkValidated(): void
+    {
+        $pending = array_slice($this->urlKeys, $this->checkedUrlKeys, null, true);
+
+        if (empty($pending)) {
+            return;
+        }
+
+        $accumulated = $this->urlKeys;
+
+        $this->urlKeys = $pending;
+
+        $this->checkForDuplicateUrlKeys();
+
+        $this->urlKeys = $accumulated;
+
+        $this->checkedUrlKeys = count($accumulated);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function fileUniqueColumns(): array
+    {
+        return [
+            'url_key' => self::ERROR_DUPLICATE_URL_KEY,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function uniqueRowContext(array $rowData): array
+    {
+        return [
+            'sku' => $rowData['sku'] ?? null,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function duplicateValueMessage(string $column, string $value, array $context): ?string
+    {
+        return sprintf(
+            trans($this->messages[self::ERROR_DUPLICATE_URL_KEY]),
+            $value,
+            $context['sku'] ?? ''
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function releaseBatchMemory(): void
+    {
+        parent::releaseBatchMemory();
+
+        $this->urlKeys = [];
+
+        $this->checkedUrlKeys = 0;
+
+        $this->typeFamilyValidationRules = [];
+
+        gc_collect_cycles();
     }
 
     /**
@@ -1389,18 +1539,148 @@ class Importer extends AbstractImporter
 
         $imageNames = array_map('trim', explode(',', $rowData['images']));
 
-        foreach ($imageNames as $key => $image) {
-            $path = 'import/'.$this->import->images_directory_path.'/'.$image;
+        /**
+         * Links were fetched in their own phase, before any row was written, so
+         * they are resolved from that manifest rather than over the network here
+         * — a queued batch must never wait on someone else's server.
+         */
+        $manifest = $this->import->image_source == Import::IMAGE_SOURCE_URL
+            ? ($this->readImageManifest() ?? [])
+            : [];
 
-            if (! Storage::disk('local')->has($path)) {
+        foreach ($imageNames as $image) {
+            $resolved = $this->resolveImage($image, $manifest);
+
+            if (is_null($resolved)) {
                 continue;
             }
 
-            $imagesData[$rowData['sku']][] = [
-                'name' => $image,
-                'path' => Storage::disk('local')->path($path),
-            ];
+            $imagesData[$rowData['sku']][] = $resolved;
         }
+    }
+
+    /**
+     * Check a row's images against the source the import was set up with.
+     *
+     * The three sources name their images in two incompatible ways — a link for
+     * the URL source, a file name for the archive and directory ones — and
+     * nothing downstream can tell a wrong choice from a genuinely missing
+     * picture: it just resolves to nothing and the product imports without it.
+     * Catching the mismatch here means the operator is told which value is wrong
+     * and which setting disagrees with it, rather than finding an empty gallery
+     * on ten thousand products afterwards.
+     */
+    protected function validateImages(array $rowData, int $rowNumber): void
+    {
+        if (empty($rowData['images'])) {
+            return;
+        }
+
+        $expectsUrls = $this->import->image_source === Import::IMAGE_SOURCE_URL;
+
+        foreach (array_filter(array_map('trim', explode(',', $rowData['images']))) as $image) {
+            if ($this->isRemoteImage($image) !== $expectsUrls) {
+                $code = $expectsUrls
+                    ? self::ERROR_IMAGE_NOT_URL
+                    : self::ERROR_IMAGE_NOT_FILE;
+
+                $this->skipRow(
+                    $rowNumber,
+                    $code,
+                    'images',
+                    sprintf(trans($this->messages[$code]), $image)
+                );
+
+                continue;
+            }
+
+            /**
+             * A link is only checked for shape here; whether the host answers is
+             * settled in the download phase, which records a failure per image
+             * rather than failing the row.
+             */
+            if (
+                ! $expectsUrls
+                && ! $this->resolveImage($image, [])
+            ) {
+                $this->skipRow(
+                    $rowNumber,
+                    self::ERROR_IMAGE_NOT_FOUND,
+                    'images',
+                    sprintf(trans($this->messages[self::ERROR_IMAGE_NOT_FOUND]), $image)
+                );
+            }
+        }
+    }
+
+    /**
+     * Locate one image, according to where this import said its images live.
+     *
+     * A reference that cannot be found is skipped rather than failing the row:
+     * one missing picture should not cost the product its import.
+     */
+    protected function resolveImage(string $image, array $manifest): ?array
+    {
+        return match ($this->import->image_source) {
+            Import::IMAGE_SOURCE_URL => $this->resolveDownloadedImage($manifest, $image),
+            Import::IMAGE_SOURCE_UPLOAD => $this->resolveUploadedImage($image),
+            default => $this->resolveDirectoryImage($image),
+        };
+    }
+
+    /**
+     * An image unpacked from the archive uploaded with this import. It lives
+     * under the import's own folder on the private disk.
+     */
+    protected function resolveUploadedImage(string $image): ?array
+    {
+        $path = 'imports/'.$this->import->id.'/images/'.$image;
+
+        return $this->resolveDiskImage('private', $path, $image);
+    }
+
+    /**
+     * An image placed on the server by hand, under `storage/app/import`.
+     */
+    protected function resolveDirectoryImage(string $image): ?array
+    {
+        $path = 'import/'.$this->import->images_directory_path.'/'.$image;
+
+        return $this->resolveDiskImage('local', $path, $image);
+    }
+
+    /**
+     * An image fetched during the download phase. One that failed to download is
+     * skipped, so the product still imports without it.
+     */
+    protected function resolveDownloadedImage(array $manifest, string $url): ?array
+    {
+        $entry = $manifest[$url] ?? null;
+
+        if (
+            ! $entry
+            || ($entry['status'] ?? null) !== 'downloaded'
+        ) {
+            return null;
+        }
+
+        return $this->resolveDiskImage('private', $entry['path'], $entry['name']);
+    }
+
+    /**
+     * Turn a path on a disk into what saveImages() needs — an absolute
+     * filesystem path plus a name — or null when the file is not there.
+     */
+    protected function resolveDiskImage(string $disk, string $path, string $name): ?array
+    {
+        if (! Storage::disk($disk)->has($path)) {
+            return null;
+        }
+
+        return [
+            'name' => $name,
+            'path' => Storage::disk($disk)->path($path),
+        ];
     }
 
     /**

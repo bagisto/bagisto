@@ -50,6 +50,7 @@ class ElasticSearchRepository
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'from' => $options['from'],
                 'size' => $options['limit'],
@@ -78,6 +79,7 @@ class ElasticSearchRepository
 
         $results = ElasticSearch::search([
             'index' => $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'suggest' => [
                     'name_suggest' => [
@@ -253,6 +255,7 @@ class ElasticSearchRepository
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,
                 'query' => [
@@ -290,6 +293,7 @@ class ElasticSearchRepository
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,
                 'query' => [

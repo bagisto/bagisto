@@ -6,18 +6,19 @@ use Closure;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Webkul\Core\Helpers\InstalledPackages;
 
 class ImageCacheController extends Controller
 {
     /**
-     * The current cache template name.
-     */
-    protected string $template = '';
-
-    /**
      * The Bagisto logo URL.
      */
     protected const BAGISTO_LOGO = 'https://updates.bagisto.com/bagisto.png';
+
+    /**
+     * The current cache template name.
+     */
+    protected string $template = '';
 
     /**
      * Get the HTTP response for the requested image.
@@ -89,17 +90,17 @@ class ImageCacheController extends Controller
     }
 
     /**
-     * Build the logo URL, appending any tracked modules so the tracker can record which
-     * modules this installation is running against its live instance.
+     * Build the logo URL, appending the packages this installation is running so
+     * the tracker can record what its live instances are made up of.
      */
     protected function getLogoUrl(): string
     {
         $url = self::BAGISTO_LOGO;
 
-        $modules = array_values(config('bagisto.tracked_modules', []));
+        $packages = app(InstalledPackages::class)->all();
 
-        if (! empty($modules)) {
-            $url .= (str_contains($url, '?') ? '&' : '?').http_build_query(['modules' => $modules]);
+        if (! empty($packages)) {
+            $url .= (str_contains($url, '?') ? '&' : '?').http_build_query(['modules' => $packages]);
         }
 
         return $url;

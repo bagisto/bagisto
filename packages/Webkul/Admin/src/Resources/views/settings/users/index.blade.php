@@ -22,7 +22,10 @@
             </div>
         </div>
 
-        <x-admin::shimmer.datagrid />
+        <x-admin::shimmer.datagrid
+            :card="true"
+            :columns="bouncer()->hasPermission('settings.users.edit') || bouncer()->hasPermission('settings.users.delete') ? 6 : 5"
+        />
     </v-users>
 
     @pushOnce('scripts')
@@ -64,8 +67,8 @@
                     sort,
                     performAction
                 }">
-                    <div 
-                        class="row grid grid-rows-1 gap-2.5 items-center px-4 py-2.5 border-b dark:border-gray-800 text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-gray-900 font-semibold"
+                    <div
+                        class="row datagrid-head datagrid-head-cards grid grid-rows-1"
                         style="grid-template-columns: repeat({{ $hasPermission ? '6' : '5' }}, minmax(150px, 1fr));"
                     >
                         <div
@@ -115,20 +118,24 @@
                     performAction
                 }">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.body />
+                        <!-- Columns stay tabular on a desktop, but the rows card on a phone. -->
+                        <x-admin::shimmer.datagrid.table.body
+                            :card="true"
+                            :columns="$hasPermission ? 6 : 5"
+                        />
                     </template>
 
                     <template v-else>
                         <div
                             v-for="record in available.records"
-                            class="row grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
+                            class="row datagrid-card grid items-center gap-2.5 border-b px-4 py-4 text-gray-600 transition-all hover:bg-gray-50 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950"
                             style="grid-template-columns: repeat({{ $hasPermission ? '6' : '5' }}, minmax(150px, 1fr));"
                         >
                             <!-- ID -->
-                            <p>@{{ record.user_id }}</p>
+                            <p data-label="@lang('admin::app.settings.users.index.datagrid.id')">@{{ record.user_id }}</p>
 
                             <!-- User Profile -->
-                            <p>
+                            <p data-label="@lang('admin::app.settings.users.index.datagrid.name')">
                                 <div class="flex items-center gap-2.5">
                                     <div
                                         class="border-3 mr-2 inline-block h-9 w-9 overflow-hidden rounded-full border-gray-800 text-center align-middle"
@@ -157,16 +164,22 @@
                             </p>
 
                             <!-- Status -->
-                            <p>@{{ record.status }}</p>
+                            <p data-label="@lang('admin::app.settings.users.index.datagrid.status')">@{{ record.status }}</p>
 
                             <!-- Email -->
-                            <p class="break-words">@{{ record.email }}</p>
+                            <p
+                                class="break-words"
+                                data-label="@lang('admin::app.settings.users.index.datagrid.email')"
+                            >@{{ record.email }}</p>
 
                             <!-- Role -->
-                            <p>@{{ record.role_name }}</p>
+                            <p data-label="@lang('admin::app.settings.users.index.datagrid.role')">@{{ record.role_name }}</p>
 
                             <!-- Actions -->
-                            <div class="flex justify-end">
+                            <div
+                                class="flex justify-end"
+                                data-label="actions"
+                            >
                                 <a @click="id=1; editModal(record.actions.find(action => action.index === 'edit')?.url)">
                                     <span
                                         :class="record.actions.find(action => action.index === 'edit')?.icon"

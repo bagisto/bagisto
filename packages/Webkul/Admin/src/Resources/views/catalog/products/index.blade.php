@@ -50,11 +50,16 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.head
+                    :isMultiRow="true"
+                    template="minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)"
+                    :groups="[3, 3, 3]"
+                    :imageGroup="1"
+                />
             </template>
 
             <template v-else>
-                <div class="row grid gap-2 md:grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
+                <div class="row datagrid-head datagrid-head-cards grid grid-cols-[2fr_1fr_1fr] grid-rows-1">
                     <div
                         class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['name', 'sku', 'attribute_family'], ['base_image', 'price', 'quantity', 'product_id'], ['status', 'category_name', 'type']]"
@@ -124,7 +129,14 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.body
+                    :isMultiRow="true"
+                    template="minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)"
+                    :groups="[3, 3, 3]"
+                    :imageGroup="1"
+                    :mobileLines="9"
+                    :mobileImage="true"
+                />
             </template>
 
             <template v-else>

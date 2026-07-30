@@ -57,11 +57,15 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.head
+                    :isMultiRow="true"
+                    template="minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)"
+                    :groups="[3, 5, 3]"
+                />
             </template>
 
             <template v-else>
-                <div class="row grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] grid-rows-1 gap-1 items-center border-b px-4 py-2.5 dark:border-gray-800 min-w-full">
+                <div class="row datagrid-head datagrid-head-cards grid grid-cols-[2fr_1fr_1fr] grid-rows-1 min-w-full">
                     <div
                         class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['full_name', 'email', 'phone'], ['status', 'gender', 'group', 'customer_id', 'channel_id'], ['revenue', 'order_count', 'address_count']]"
@@ -131,7 +135,11 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.body
+                    :isMultiRow="true"
+                    template="minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)"
+                    :groups="[3, 5, 3]"
+                />
             </template>
 
             <template v-else>
