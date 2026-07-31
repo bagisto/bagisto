@@ -74,17 +74,14 @@ class ImportController extends Controller
 
         $supportedFormats = implode(',', $this->supportedFormats);
 
-        $this->validate(request(), [
+        $this->validate(request(), array_merge([
             'type' => 'required|in:'.$importers,
             'action' => 'required|in:append,delete',
             'validation_strategy' => 'required|in:stop-on-errors,skip-errors',
             'allowed_errors' => 'required|integer|min:0',
             'field_separator' => 'required',
             'file' => 'required|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
-            'image_source' => 'nullable|in:url,upload,directory',
-            'upload_images' => 'required_if:image_source,'.Import::IMAGE_SOURCE_UPLOAD.'|nullable|file|mimes:zip|max:'.$this->maxUploadSize(),
-            'images_directory_path' => 'required_if:image_source,'.Import::IMAGE_SOURCE_DIRECTORY.'|nullable|string',
-        ]);
+        ], $this->imageRules(request()->input('type'))));
 
         Event::dispatch('data_transfer.imports.create.before');
 
@@ -96,12 +93,11 @@ class ImportController extends Controller
             'validation_strategy',
             'allowed_errors',
             'field_separator',
-            'images_directory_path',
         ]);
 
         $data['process_in_queue'] = request()->boolean('process_in_queue');
 
-        $data['image_source'] = request()->input('image_source', Import::IMAGE_SOURCE_DIRECTORY);
+        $data = array_merge($data, $this->imageSourceData(request()->input('type')));
 
         /**
          * The record is created first so every file it owns can live under a
@@ -159,23 +155,14 @@ class ImportController extends Controller
 
         $import = $this->importRepository->findOrFail($id);
 
-        $this->validate(request(), [
+        $this->validate(request(), array_merge([
             'type' => 'required|in:'.$importers,
             'action' => 'required|in:append,delete',
             'validation_strategy' => 'required|in:stop-on-errors,skip-errors',
             'allowed_errors' => 'required|integer|min:0',
             'field_separator' => 'required',
             'file' => 'nullable|file|extensions:'.$supportedFormats.'|mimetypes:text/csv,text/plain,application/csv,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,text/xml,application/xml',
-            'image_source' => 'nullable|in:url,upload,directory',
-
-            /**
-             * An archive already unpacked for this import counts, so editing
-             * anything else on the form does not mean uploading it a second time.
-             */
-            'upload_images' => ($this->countUploadedImages($id) ? '' : 'required_if:image_source,'.Import::IMAGE_SOURCE_UPLOAD.'|')
-                .'nullable|file|mimes:zip|max:'.$this->maxUploadSize(),
-            'images_directory_path' => 'required_if:image_source,'.Import::IMAGE_SOURCE_DIRECTORY.'|nullable|string',
-        ]);
+        ], $this->imageRules(request()->input('type'), $id)));
 
         Event::dispatch('data_transfer.imports.update.before');
 
@@ -188,8 +175,8 @@ class ImportController extends Controller
                 'validation_strategy',
                 'allowed_errors',
                 'field_separator',
-                'images_directory_path',
             ]),
+            $this->imageSourceData(request()->input('type')),
             [
                 'state' => 'pending',
                 'processed_rows_count' => 0,
@@ -205,14 +192,10 @@ class ImportController extends Controller
 
         $data['process_in_queue'] = request()->boolean('process_in_queue');
 
-        $data['image_source'] = request()->input('image_source', Import::IMAGE_SOURCE_DIRECTORY);
-
         /**
-         * Editing an import resets it back to pending, and the file itself may
-         * have been replaced — so everything generated from the old one (the
-         * resumable validation state, the fragments, the image manifest and the
-         * error report) describes a file that no longer exists. Left behind, a
-         * re-validation would resume mid-way through the previous file.
+         * Editing resets the import to pending and the file may have been
+         * replaced, so anything generated from the old one describes a file that
+         * is gone — a re-validation would resume part-way through it.
          */
         $this->purgeProcessedFiles($import->id);
 
@@ -328,10 +311,8 @@ class ImportController extends Controller
     /**
      * Validate the next window of the source file and return progress.
      *
-     * A large file takes longer to validate than a request may stay open, so the
-     * browser drives validation in short windows — showing a live "x of N" count
-     * — instead of one long request that would time out. Each call validates a
-     * bounded number of rows and resumes where the previous one left off.
+     * A file large enough to outlast a request is validated in windows instead,
+     * each resuming where the last left off.
      */
     public function validateChunk(int $id): JsonResponse
     {
@@ -454,11 +435,8 @@ class ImportController extends Controller
         }
 
         /**
-         * A queued import dispatches every one of its batches from this single
-         * request, so the dispatch is claimed rather than repeated: whoever
-         * moves the record out of `validated` owns it, and any later caller
-         * just gets the progress back. Without the claim a reload or a second
-         * click dispatches the whole chain again over the same rows.
+         * The dispatch is claimed, not repeated: this one request sends every
+         * batch, so a reload or second click would run the chain again.
          */
         if ($import->process_in_queue) {
             try {
@@ -712,6 +690,55 @@ class ImportController extends Controller
     }
 
     /**
+     * Validation rules for the image fields, or none for an import that has no
+     * images — `image_source` defaults to the directory option, which would
+     * otherwise demand a directory from a customer or tax-rate import.
+     *
+     * @return array<string, string>
+     */
+    protected function imageRules(?string $type, ?int $importId = null): array
+    {
+        if (! Import::typeSupportsImages($type)) {
+            return [];
+        }
+
+        /**
+         * An archive already unpacked for this import counts, so editing anything
+         * else on the form does not mean uploading it a second time.
+         */
+        $archiveRequired = $importId && $this->countUploadedImages($importId)
+            ? ''
+            : 'required_if:image_source,'.Import::IMAGE_SOURCE_UPLOAD.'|';
+
+        return [
+            'image_source' => 'nullable|in:url,upload,directory',
+            'upload_images' => $archiveRequired.'nullable|file|mimes:zip|max:'.$this->maxUploadSize(),
+            'images_directory_path' => 'required_if:image_source,'.Import::IMAGE_SOURCE_DIRECTORY.'|nullable|string',
+        ];
+    }
+
+    /**
+     * The image columns to save, or none at all for an import that has no images.
+     *
+     * Left out rather than nulled: `image_source` is not nullable, so a customer
+     * import takes the column's own default on the way in and keeps whatever it
+     * already had on the way out. Either way it is never read.
+     *
+     * @return array<string, mixed>
+     */
+    protected function imageSourceData(?string $type): array
+    {
+        if (! Import::typeSupportsImages($type)) {
+            return [];
+        }
+
+        return [
+            'image_source' => request()->input('image_source', Import::IMAGE_SOURCE_DIRECTORY),
+            'images_directory_path' => request()->input('images_directory_path'),
+        ];
+    }
+
+    /**
      * Store the files that arrived with an import and return the columns they
      * set. Everything lands under the import's own "imports/{id}" folder.
      */
@@ -724,14 +751,9 @@ class ImportController extends Controller
         }
 
         /**
-         * An archive only matters when the operator chose to upload one. Picking
-         * a different method leaves any previously unpacked images behind
-         * untouched, so switching back does not mean uploading again.
-         *
-         * Note this never touches `images_directory_path`: that column belongs to
-         * the server-directory method alone. Writing the unpack location into it
-         * would overwrite the path the operator typed, and hand it back to them
-         * as their own directory the next time they opened the form.
+         * Only when that method was chosen; another leaves already-unpacked images
+         * alone. `images_directory_path` is deliberately untouched — it holds the
+         * path the operator typed, not where an archive was unpacked.
          */
         if (
             $request->input('image_source') == Import::IMAGE_SOURCE_UPLOAD
@@ -809,11 +831,8 @@ class ImportController extends Controller
     /**
      * The largest images archive that may be uploaded, in KB.
      *
-     * PHP's own `upload_max_filesize` and `post_max_size` still apply and are
-     * usually the lower of the two; this is the application's own ceiling so a
-     * mistaken upload is rejected by validation rather than by the web server.
-     * A catalogue too large for one archive is what the images-directory option
-     * is for.
+     * PHP's own limits still apply and are usually lower; this one exists so an
+     * oversized upload is refused by validation rather than by the web server.
      */
     protected function maxUploadSize(): int
     {

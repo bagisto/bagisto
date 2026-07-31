@@ -634,7 +634,7 @@ class Importer extends AbstractImporter
             ->leftJoin('product_attribute_values', 'products.id', 'product_attribute_values.product_id')
             ->leftJoin('attributes', 'product_attribute_values.attribute_id', 'attributes.id')
             ->where('attributes.code', 'url_key')
-            ->where('product_attribute_values.text_value', array_keys($this->urlKeys))
+            ->whereIn('product_attribute_values.text_value', array_keys($this->urlKeys))
             ->whereNotIn('products.sku', Arr::pluck($this->urlKeys, 'sku'))
             ->get();
 
@@ -687,12 +687,10 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Cross-check this window's url keys against the ones already in the
-     * catalogue, in one query rather than one per row.
+     * Cross-check this window's url keys against the catalogue in one query.
      *
-     * Only the keys this window added are checked — the earlier ones were
-     * checked by the window that introduced them, and existing products do not
-     * change while an import is being validated.
+     * Only the keys this window added: earlier ones were checked by the window
+     * that introduced them.
      */
     protected function afterChunkValidated(): void
     {
@@ -1562,13 +1560,9 @@ class Importer extends AbstractImporter
     /**
      * Check a row's images against the source the import was set up with.
      *
-     * The three sources name their images in two incompatible ways — a link for
-     * the URL source, a file name for the archive and directory ones — and
-     * nothing downstream can tell a wrong choice from a genuinely missing
-     * picture: it just resolves to nothing and the product imports without it.
-     * Catching the mismatch here means the operator is told which value is wrong
-     * and which setting disagrees with it, rather than finding an empty gallery
-     * on ten thousand products afterwards.
+     * The sources name images in two incompatible ways — a link, or a file name —
+     * and nothing downstream can tell a wrong choice from a missing picture: both
+     * resolve to nothing and the product imports without it.
      */
     protected function validateImages(array $rowData, int $rowNumber): void
     {

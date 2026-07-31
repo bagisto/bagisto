@@ -5,13 +5,9 @@ namespace Webkul\DataTransfer\Jobs\Concerns;
 /**
  * Keeps a job's timeout under the queue connection's `retry_after`.
  *
- * A worker holds its job for `retry_after` seconds; past that the queue treats it
- * as abandoned and hands the same payload to another worker while the first is
- * still running it. A job allowed to outlast that window therefore executes
- * twice, concurrently, duplicating its work and decrementing its batch twice.
- *
- * Deriving the timeout rather than hard-coding it means the two can never be
- * configured into conflict.
+ * Past `retry_after` the queue treats a job as abandoned and hands the payload to
+ * a second worker while the first still runs it, so anything outlasting that
+ * window executes twice. Deriving the timeout keeps the two in step.
  */
 trait BoundedByRetryAfter
 {

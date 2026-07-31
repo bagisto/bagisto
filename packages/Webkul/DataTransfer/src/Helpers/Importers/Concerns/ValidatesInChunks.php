@@ -10,15 +10,13 @@ use Webkul\DataTransfer\Jobs\Import\ValidateChunk;
 use Webkul\DataTransfer\Repositories\ImportRepository;
 
 /**
- * Validates an importer's source in windows, opt-in per importer through
- * `$chunkedValidationSupported`. Either the browser drives short resumable
- * windows and reports "x of N" as it goes, or the windows are dispatched as one
- * batch of jobs and validated across the worker fleet at once.
+ * Validates an importer's source in windows, opt in through
+ * `$chunkedValidationSupported`: either the browser drives short resumable ones,
+ * or they are dispatched as a batch across the worker fleet.
  *
- * A window is validated in isolation, so it cannot enforce a rule that spans the
- * whole file. Anything cross-row — uniqueness, most obviously — is recorded per
- * window through the hooks below and cross-checked once, when the fragments are
- * merged. Per-row rules stay in validateRow() untouched.
+ * A window is validated in isolation, so anything spanning the file — uniqueness
+ * above all — is recorded per window through the hooks below and cross-checked
+ * once the fragments are merged.
  */
 trait ValidatesInChunks
 {
@@ -167,15 +165,11 @@ trait ValidatesInChunks
     */
 
     /**
-     * Kick validation off as a background, parallel queue batch. The file's rows
-     * are split into windows and one ValidateChunk job per window runs across the
-     * worker fleet at once, each validating in isolation and writing a fragment.
-     * The batch's finally-callback then merges the fragments, cross-checks the
-     * file-wide rules, builds the import batches and finalises the record.
+     * Kick validation off as a parallel queue batch, one job per window, each
+     * writing a fragment that the batch's finally-callback merges and finalises.
      *
      * Returns the row count, or zero when there is nothing to validate in
-     * parallel (a bad header or an empty file) and the caller should finalise
-     * inline instead.
+     * parallel and the caller should finalise inline instead.
      */
     public function queueValidation(): int
     {

@@ -388,13 +388,27 @@ class Importer extends AbstractImporter
 
         $attributes = Arr::except($rowData, ['customer_group_code']);
 
+        /**
+         * An email is only unique within a channel, and the table's unique index
+         * spans the pair. Left null it matches nothing, since MySQL counts nulls in
+         * a unique index as distinct.
+         */
+        $channelId = core()->getCurrentChannel()->id;
+
         if ($this->isEmailExist($rowData['email'])) {
-            $customers['update'][$rowData['email']] = array_merge($attributes, [
+            /**
+             * Keyed by the id the email already belongs to, not the email: the email
+             * alone is not what the table is keyed on.
+             */
+            $customers['update'][$this->customerStorage->get($rowData['email'])] = array_merge($attributes, [
                 'customer_group_id' => $customerGroupId,
+                'channel_id' => $channelId,
+                'updated_at' => now(),
             ]);
         } else {
             $customers['insert'][$rowData['email']] = array_merge($attributes, [
                 'customer_group_id' => $customerGroupId,
+                'channel_id' => $channelId,
                 'created_at' => $rowData['created_at'] ?? now(),
                 'updated_at' => $rowData['updated_at'] ?? now(),
             ]);
@@ -409,10 +423,13 @@ class Importer extends AbstractImporter
         if (! empty($customers['update'])) {
             $this->updatedItemsCount += count($customers['update']);
 
-            $this->customerRepository->upsert(
-                $customers['update'],
-                $this->masterAttributeCode
-            );
+            /**
+             * By id rather than upserted: an upsert has to recognise the existing
+             * row from the values given it, and writes a new one when it cannot.
+             */
+            foreach ($customers['update'] as $id => $attributes) {
+                $this->customerRepository->update($attributes, $id);
+            }
         }
 
         if (! empty($customers['insert'])) {

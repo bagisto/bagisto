@@ -286,13 +286,11 @@ class Import
     }
 
     /**
-     * Validate one window of the source file, persisting resumable state between
-     * calls, and return progress for the screen.
+     * Validate one window of the source file and return progress, keeping
+     * resumable state between calls.
      *
-     * A large file takes longer to validate than a single request may stay open,
-     * so the browser drives validation in short windows — watching a live "x of
-     * N" count — instead of one long request that would time out. The final
-     * window finalises the import record exactly as validate() would.
+     * A file large enough to outlast a request is validated in windows instead.
+     * The last one finalises the record exactly as validate() would.
      */
     public function validateChunk(?int $limit = null): array
     {
@@ -367,13 +365,9 @@ class Import
         }
 
         /**
-         * Flag the running phase *before* the batch goes out, so reopening the
-         * page resumes it.
-         *
-         * The order matters: on a synchronous queue the jobs — and the callback
-         * that finalises the record — all run inside the dispatch below, so
-         * setting this afterwards would stamp "validating" back over the
-         * "validated" they just wrote, and the screen would poll forever.
+         * Flagged before the batch goes out, not after: on a synchronous queue the
+         * jobs run inside the dispatch, and this would land on top of the state
+         * they left.
          */
         $import = $this->importRepository->update([
             'state' => self::STATE_VALIDATING,
@@ -462,6 +456,20 @@ class Import
     */
 
     /**
+     * Does this kind of import deal with images at all?
+     *
+     * Read from the importer rather than from a list of types kept beside it, so
+     * an importer that gains or loses images says so itself.
+     */
+    public static function typeSupportsImages(?string $type): bool
+    {
+        $importer = config('importers.'.$type.'.importer');
+
+        return is_string($importer)
+            && method_exists($importer, 'downloadImagesBatch');
+    }
+
+    /**
      * Does this import have an image-download phase at all?
      *
      * Only images given as links have to be fetched. An uploaded archive is
@@ -511,11 +519,8 @@ class Import
         $total = $this->getTypeImporter()->queueImageDownload();
 
         /**
-         * An import can be set to fetch its images from URLs and then carry no
-         * URLs at all — the column is empty, or every image is already in the
-         * manifest. Nothing was dispatched in that case, so nothing will ever
-         * move the record on again; it is handed straight back to the state the
-         * import step expects to find it in.
+         * URL mode with no URLs to fetch dispatches nothing, and nothing would
+         * then move the record on — so it is handed straight back.
          */
         if (! $total) {
             $this->setImport($this->importRepository->update([
@@ -686,16 +691,10 @@ class Import
     }
 
     /**
-     * Take ownership of a validated import so its work can be dispatched, and
-     * report whether this caller is the one that got it.
+     * Take ownership of a validated import, reporting whether this caller got it.
      *
-     * The queued path dispatches every batch of the import from a single
-     * request, so that request must happen exactly once. A reload, a double
-     * click or a second poll would otherwise dispatch the whole chain again
-     * over the same rows: the second pass finds the rows the first already
-     * wrote and books them as updates, and the two passes deadlock against
-     * each other on the way. The claim is one conditional update, so only the
-     * first caller sees `true` and everyone after it just watches the progress.
+     * One request dispatches every batch, so it must happen once: a second one
+     * would run the whole chain over the same rows, and the two would deadlock.
      */
     public function claimForProcessing(): bool
     {
@@ -825,12 +824,10 @@ class Import
     }
 
     /**
-     * Return all errors grouped by error code, summarised for the screen.
+     * All errors grouped by code, summarised for the screen.
      *
-     * Every affected row number on every message turns a file where thousands of
-     * rows share one problem into an unreadable wall of numbers. Each message
-     * keeps only the first few rows, and only the first few messages are listed —
-     * the complete, row-by-row detail is always in the downloadable error report.
+     * Only the first few rows of each message and the first few messages are
+     * kept; the row-by-row detail is in the downloadable report.
      */
     public function getFormattedErrors(): array
     {
@@ -990,13 +987,10 @@ class Import
     }
 
     /**
-     * Swap in a clean error helper before a finalise re-populates it from the
-     * accumulated (or merged) error list.
+     * Swap in a clean error helper before a finalise repopulates it.
      *
-     * The final window validates and finalises inside the same request, so the
-     * helper already holds that window's errors — re-adding the full list on top
-     * would count those rows twice. Starting from an empty helper, shared with
-     * the type importer that writes into it, keeps the totals exact.
+     * The last window validates and finalises in one request, so the helper still
+     * holds that window's errors and would count them twice.
      */
     protected function resetErrorHelper(): void
     {
@@ -1103,10 +1097,8 @@ class Import
     /**
      * Move the generated error report in beside its import.
      *
-     * The source writes it to a flat, timestamped path; keeping it under
-     * "imports/{id}/processed" instead means an import's source file and
-     * everything generated from it stay together, and removing the import
-     * removes the report with it.
+     * The source writes it to a flat, timestamped path. Under "imports/{id}"
+     * instead, deleting the import takes the report with it.
      */
     protected function relocateErrorReport(?string $path): ?string
     {

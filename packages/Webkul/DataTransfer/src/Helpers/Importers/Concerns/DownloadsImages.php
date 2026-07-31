@@ -10,15 +10,12 @@ use Webkul\DataTransfer\Jobs\Import\DownloadImages;
 use Webkul\DataTransfer\Repositories\ImportRepository;
 
 /**
- * Fetches the URLs in an import's `images` column as a phase of its own, before
- * any row is written, and records what it fetched in a manifest keyed by URL
- * that prepareImages() reads instead of going to the network.
+ * Fetches the URLs in an import's `images` column before any row is written, and
+ * records them in a manifest keyed by URL that prepareImages() reads instead of
+ * going to the network.
  *
- * A URL is fetched once however many rows name it, and one that cannot be
- * fetched is recorded as a failure rather than raised, so the rest of the import
- * proceeds without that image. Row-writing therefore only ever reads local
- * files, and never blocks on a network call inside a job whose clock is bounded
- * by `retry_after`.
+ * Each URL is fetched once however many rows name it, and one that fails is
+ * recorded rather than raised, so the rest of the import proceeds without it.
  */
 trait DownloadsImages
 {

@@ -21,10 +21,24 @@
     $hasSampleImagesZip = collect(config('importers'))->contains(
         fn ($importer) => ! empty($importer['sample_images_zip_path'])
     );
+
+    /**
+     * Only some kinds of import have images at all — customers and tax rates have
+     * none — and the type is chosen on this same form, so the panel is shown or
+     * hidden against the field rather than against the import being edited.
+     */
+    $imageTypes = collect(config('importers'))
+        ->keys()
+        ->filter(fn ($type) => \Webkul\DataTransfer\Helpers\Import::typeSupportsImages($type))
+        ->values();
 @endphp
 
 <!-- Product Images Panel -->
-<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+<div
+    class="box-shadow rounded bg-white p-4 dark:bg-gray-900"
+    id="import-images-panel"
+    data-image-types="{{ $imageTypes->toJson() }}"
+>
     <p class="text-base font-semibold text-gray-800 dark:text-white">
         @lang('admin::app.settings.data-transfer.imports.images.title')
     </p>
@@ -171,3 +185,36 @@
         </label>
     </div>
 </div>
+
+@pushOnce('scripts')
+    <script>
+        (function () {
+            /**
+             * Both elements are looked up on every call, and the listener sits on
+             * the document rather than the select. This script is parsed before the
+             * root Vue app mounts, and mounting replaces these nodes — anything
+             * held on to beforehand is detached by the time the field is touched.
+             */
+            function sync () {
+                var panel = document.getElementById('import-images-panel');
+                var type = document.getElementById('import-type');
+
+                if (! panel || ! type) {
+                    return;
+                }
+
+                var withImages = JSON.parse(panel.dataset.imageTypes || '[]');
+
+                panel.classList.toggle('hidden', withImages.indexOf(type.value) === -1);
+            }
+
+            document.addEventListener('change', function (event) {
+                if (event.target && event.target.id === 'import-type') {
+                    sync();
+                }
+            });
+
+            window.addEventListener('load', sync);
+        })();
+    </script>
+@endPushOnce
