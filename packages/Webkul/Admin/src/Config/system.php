@@ -108,12 +108,12 @@ return [
                 'name' => 'enabled',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.enable-speculation',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => false,
             ], [
                 'name' => 'prerender_enabled',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.enabled',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => false,
             ], [
                 'name' => 'prerender_ignore_urls',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls',
