@@ -12,7 +12,7 @@
                         class="flex gap-2.5 p-1.5 items-center cursor-pointer hover:rounded-lg {{ $menuItem->isActive() == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer"
                     >
                         <span class="{{ $menuItem->getIcon() }} text-2xl {{ $menuItem->isActive() ? 'text-white' : ''}}"></span>
-                        
+
                         <p class="text-gray-600 dark:text-gray-300 font-semibold whitespace-nowrap group-[.sidebar-collapsed]/container:hidden {{ $menuItem->isActive() ? 'text-white' : ''}}">
                             {{ $menuItem->getName() }}
                         </p>
@@ -23,10 +23,23 @@
                             @foreach ($menuItem->getChildren() as $subMenuItem)
                                 <a
                                     href="{{ $subMenuItem->getUrl() }}"
-                                    class="text-sm text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 group-[.sidebar-collapsed]/container:px-5 group-[.sidebar-collapsed]/container:py-2.5 group-[.inactive]/item:px-5 group-[.inactive]/item:py-2.5 hover:text-blue-600 dark:hover:bg-gray-950"
+                                    class="{{ $subMenuItem->haveChildren() ? 'font-medium' : '' }} text-sm text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 group-[.sidebar-collapsed]/container:px-5 group-[.sidebar-collapsed]/container:py-2.5 group-[.inactive]/item:px-5 group-[.inactive]/item:py-2.5 hover:text-blue-600 dark:hover:bg-gray-950"
                                 >
                                     {{ $subMenuItem->getName() }}
                                 </a>
+
+                                @if ($subMenuItem->haveChildren())
+                                    <div class="grid ltr:pl-4 rtl:pr-4 group-[.inactive]/item:hidden group-[.sidebar-collapsed]/container:hidden">
+                                        @foreach ($subMenuItem->getChildren() as $subSubMenuItem)
+                                            <a
+                                                href="{{ $subSubMenuItem->getUrl() }}"
+                                                class="text-sm text-{{ $subSubMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subSubMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 group-[.sidebar-collapsed]/container:px-5 group-[.sidebar-collapsed]/container:py-2.5 group-[.inactive]/item:px-5 group-[.inactive]/item:py-2.5 hover:text-blue-600 dark:hover:bg-gray-950"
+                                            >
+                                                {{ $subSubMenuItem->getName() }}
+                                            </a>
+                                        @endforeach
+                                    </div>
+                                @endif
                             @endforeach
                         </div>
                     @endif
@@ -124,7 +137,7 @@
                             return value;
                         }
                     }
-                    
+
                     return 0;
                 },
             },
