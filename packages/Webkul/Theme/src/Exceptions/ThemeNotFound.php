@@ -7,7 +7,7 @@ class ThemeNotFound extends \Exception
     /**
      * Create an instance.
      *
-     * @param  string  $theme
+     * @param  string  $themeName
      * @return void
      */
     public function __construct($themeName)

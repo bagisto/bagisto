@@ -29,8 +29,8 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
+     * @param  array  $data
      * @param  int  $id
-     * @param  string  $attribute
      * @return AttributeOption
      */
     public function update(array $data, $id)

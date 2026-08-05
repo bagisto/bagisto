@@ -79,7 +79,7 @@ class Customer extends Base
     /**
      * Send mail on creating Note
      *
-     * @param  \Webkul\Customer\Models\Customer  $customer
+     * @param  \Webkul\Customer\Models\CustomerNote  $note
      * @return void
      */
     public function afterNoteCreated($note)
