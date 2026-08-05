@@ -258,7 +258,10 @@ class ProductTableSeeder extends Seeder
                         continue;
                     }
 
-                    if ($locale !== 'en' && ! in_array($code, self::LOCALE_SPECIFIC_ATTRIBUTES)) {
+                    if (
+                        $locale !== $this->defaultLocale
+                        && ! in_array($code, self::LOCALE_SPECIFIC_ATTRIBUTES)
+                    ) {
                         continue;
                     }
 
