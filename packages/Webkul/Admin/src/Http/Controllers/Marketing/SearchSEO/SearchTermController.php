@@ -65,7 +65,6 @@ class SearchTermController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  int  $id
      */
     public function update(): JsonResponse
     {

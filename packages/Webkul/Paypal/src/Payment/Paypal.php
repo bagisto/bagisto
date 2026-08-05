@@ -79,7 +79,7 @@ abstract class Paypal extends Payment
     /**
      * Format a currency value according to paypal's api constraints
      *
-     * @param  float|int  $long
+     * @param  float|int  $number
      */
     public function formatCurrencyValue($number): float
     {

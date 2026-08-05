@@ -171,7 +171,7 @@ abstract class AbstractImporter
     /**
      * Import instance.
      *
-     * @param  Source  $errorHelper
+     * @param  Source  $source
      */
     public function setSource($source)
     {
