@@ -79,7 +79,7 @@ class LocaleRepository extends Repository
     /**
      * Upload image.
      *
-     * @param  array  $attributes
+     * @param  array  $localeImages
      * @param  \Webkul\Core\Models\Locale  $locale
      * @return void
      */
