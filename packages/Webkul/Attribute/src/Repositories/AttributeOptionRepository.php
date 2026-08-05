@@ -29,7 +29,6 @@ class AttributeOptionRepository extends Repository
     }
 
     /**
-     * @param  array  $data
      * @param  int  $id
      * @return AttributeOption
      */

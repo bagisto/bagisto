@@ -104,7 +104,6 @@ class CategoryRepository extends Repository
     /**
      * Update category.
      *
-     * @param  array  $data
      * @param  int  $id
      * @return Category
      */

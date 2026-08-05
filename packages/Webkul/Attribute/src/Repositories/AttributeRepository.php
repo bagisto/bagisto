@@ -71,7 +71,6 @@ class AttributeRepository extends Repository
     /**
      * Update attribute.
      *
-     * @param  array  $data
      * @param  int  $id
      * @return Attribute
      */

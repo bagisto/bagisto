@@ -2,7 +2,6 @@
 
 namespace Webkul\Customer\Providers;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Webkul\Customer\Facades\Captcha;
 
@@ -10,7 +9,6 @@ class CustomerServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap application services.
-     *
      */
     public function boot(): void
     {
