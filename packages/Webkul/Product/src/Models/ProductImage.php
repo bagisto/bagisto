@@ -68,7 +68,7 @@ class ProductImage extends Model implements ProductImageContract
     /**
      * Is custom attribute.
      *
-     * @param  string  $key
+     * @param  string  $attribute
      * @return bool
      */
     public function isCustomAttribute($attribute)

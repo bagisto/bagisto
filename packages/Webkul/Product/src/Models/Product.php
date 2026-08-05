@@ -294,8 +294,6 @@ class Product extends Model implements ProductContract
     /**
      * Is saleable.
      *
-     * @param  string  $key
-     *
      * @throws Exception
      */
     public function isSaleable(): bool

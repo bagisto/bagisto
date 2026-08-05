@@ -604,7 +604,6 @@ abstract class AbstractType
     /**
      * Get product minimal price.
      *
-     * @param  int  $qty
      * @return float
      */
     public function getMinimalPrice()
