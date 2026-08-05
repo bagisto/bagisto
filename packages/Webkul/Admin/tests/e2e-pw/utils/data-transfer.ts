@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from "@playwright/test";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -6,85 +6,72 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-export class AdminDataTransfer {
-    readonly page: Page;
+export type ImportType = "products" | "customers" | "tax_rates";
 
-    constructor(page: Page) {
-        this.page = page;
-    }
+export type ImportAction = "append" | "delete";
 
-    async AdminDataTransferSectionGoto() {
-        await this.page.goto("admin/settings/data-transfer/imports");
-    }
+export type ValidationStrategy = "skip-errors" | "stop-on-errors";
 
-    async DataTransfer(
-        type: string,
-        action: string,
-        validation_strategy: string,
-        allowed_errors: string,
-        field_separator: string,
-        file_name: string
-        // image_file_name: string,
-    ) {
-        await this.AdminDataTransferSectionGoto();
-        await this.page.waitForTimeout(2000);
+export type ImageSource = "url" | "upload" | "directory";
 
-        await this.page.click("a.primary-button");
-        await this.page.waitForTimeout(2000);
+export interface ImportOptions {
+    type: ImportType;
 
-        await this.page.selectOption('select[name="type"]', type);
+    file?: string;
 
-        /*
-         * Here you can change the Product file path as per your requirement
-         */
-        const filePath = path.resolve(
-            __dirname,
-            `../data/data-transfer/${file_name}`
-        );
+    action?: ImportAction;
 
-        const [fileChooser] = await Promise.all([
-            this.page.waitForEvent("filechooser"),
-            this.page.click('input[name="file"]'),
-        ]);
+    validationStrategy?: ValidationStrategy;
 
-        // Upload CSV
-        await fileChooser.setFiles(filePath);
+    allowedErrors?: string | number;
 
-        /*
-        // * Here you can change the Product image zip path as per your requirement
-        // */
-        // const imageFilePath = path.resolve(__dirname, `../data/data-transfer/${image_file_name}`);
+    fieldSeparator?: string;
 
-        // const [imageFileChooser] = await Promise.all([
-        //     this.page.waitForEvent("filechooser"),
-        //     this.page.click('input[name="upload_images"]'),
-        // ]);
+    processInQueue?: boolean;
 
-        // // Upload CSV
-        // await imageFileChooser.setFiles(imageFilePath);
+    imageSource?: ImageSource;
 
-        // console.log("Image File selected:", imageFilePath);
+    imagesZip?: string;
 
-        await this.page.waitForTimeout(2000);
-
-        await this.page.selectOption('select[name="action"]', action);
-
-        await this.page.selectOption(
-            'select[name="validation_strategy"]',
-            validation_strategy
-        );
-        await this.page.fill('input[name="allowed_errors"]', allowed_errors);
-        await this.page.fill('input[name="field_separator"]', field_separator);
-        await this.page.click('label[for="process_in_queue"]');
-
-        await this.page.click('//button[contains(.," Save Import ")]');
-        await this.page.waitForTimeout(2000);
-        await expect(
-            this.page.locator("#app").getByText("Import created successfully.")
-        ).toBeVisible;
-        await this.page.click('//button[contains(.," Validate ")]');
-        await this.page.waitForTimeout(2000);
-
-        await this.page.click('//button[contains(.," Import ")]');
-    }
+    imagesDirectory?: string;
 }
+
+export const IMPORT_TIMEOUT = 180 * 1000;
+
+/**
+ * A shipped fixture, by name. A generated sheet passes its own absolute path
+ * through untouched.
+ */
+export const dataFilePath = (fileName: string) =>
+    path.isAbsolute(fileName)
+        ? fileName
+        : path.resolve(__dirname, `../data/data-transfer/${fileName}`);
+
+export const SERVER_IMPORT_PATH = path.resolve(
+    __dirname,
+    "../../../../../../storage/app/import",
+);
+
+export const canStageServerImages = () =>
+    fs.existsSync(path.dirname(SERVER_IMPORT_PATH));
+
+const PIXEL_PNG = Buffer.from(
+    "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",
+    "base64",
+);
+
+export const stageServerImages = (directory: string, fileNames: string[]) => {
+    const target = path.join(SERVER_IMPORT_PATH, directory);
+
+    fs.mkdirSync(target, { recursive: true });
+
+    for (const fileName of fileNames) {
+        fs.writeFileSync(path.join(target, fileName), PIXEL_PNG);
+    }
+};
+
+export const removeServerImages = (directory: string) =>
+    fs.rmSync(path.join(SERVER_IMPORT_PATH, directory), {
+        recursive: true,
+        force: true,
+    });
