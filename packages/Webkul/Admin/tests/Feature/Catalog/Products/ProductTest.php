@@ -115,16 +115,16 @@ it('should copy the existing product with customizable options', function () {
 
     // Create a customizable option for the product
     $customizableOption = $product->customizable_options()->create([
-        'type'        => 'select',
+        'type' => 'select',
         'is_required' => 1,
-        'sort_order'  => 1,
-        'label'       => 'Test Option Label',
+        'sort_order' => 1,
+        'label' => 'Test Option Label',
     ]);
 
     // Create a price/value for the customizable option
     $customizableOption->customizable_option_prices()->create([
-        'label'      => 'Test Value Label',
-        'price'      => 10.00,
+        'label' => 'Test Value Label',
+        'price' => 10.00,
         'sort_order' => 1,
     ]);
 
@@ -140,7 +140,7 @@ it('should copy the existing product with customizable options', function () {
 
     // Assert the copied product has customizable options cloned
     expect($copiedProduct->customizable_options)->toHaveCount(1);
-    
+
     $copiedCustomizableOption = $copiedProduct->customizable_options->first();
     expect($copiedCustomizableOption->type)->toBe('select');
     expect($copiedCustomizableOption->is_required)->toBe(1);
@@ -148,9 +148,8 @@ it('should copy the existing product with customizable options', function () {
 
     // Assert the customizable option price/value is cloned
     expect($copiedCustomizableOption->customizable_option_prices)->toHaveCount(1);
-    
+
     $copiedPrice = $copiedCustomizableOption->customizable_option_prices->first();
     expect($copiedPrice->label)->toBe('Test Value Label');
     expect($copiedPrice->price)->toEqual(10.00);
 });
-

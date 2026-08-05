@@ -38,7 +38,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11387 [fixed] - Fixed the demo products being absent from the storefront when the install locale did not include English, while still listed in the admin. The seeder wrote each product's non-translatable attributes — status, visibility, price, sku and the variant options — only on the English pass, so choosing any other locale on its own left those values unwritten and every product failed the storefront's status and visibility checks.
 
-- #11380 [fixed] - Fixed product duplication not carrying the customizable options and their prices over to the copy.
+- #11380 [fixed] - Fixed product duplication not carrying the customizable options, their labels, or their prices over to the copy. The label is a translated value held in its own table, so it needs replicating alongside the option rather than travelling with it — every locale's label is now copied.
 
 ## **v2.4.8 (8th of July 2026)** - *Release*
 
