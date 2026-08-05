@@ -521,7 +521,7 @@ class Core
     /**
      * Format and convert price with currency symbol.
      *
-     * @param  float  $price
+     * @param  float  $amount
      * @return string
      */
     public function currency($amount = 0)
@@ -566,7 +566,6 @@ class Core
     /**
      * Checks if current date of the given channel (in the channel timezone) is within the range.
      *
-     * @param  int|string|Contracts\Channel  $channel
      * @param  string|null  $dateFrom
      * @param  string|null  $dateTo
      * @return bool
@@ -804,7 +803,7 @@ class Core
     /**
      * Convert empty strings to null.
      *
-     * @param  array  $array1
+     * @param  array  $array
      * @return array
      */
     public function convertEmptyStringsToNull($array)
@@ -842,9 +841,9 @@ class Core
     }
 
     /**
-     * Create singleton object through single facade.
+     * Get the tax category of the given id.
      *
-     * @param  string  $className
+     * @param  int  $id
      * @return object
      */
     public function getTaxCategoryById($id)
