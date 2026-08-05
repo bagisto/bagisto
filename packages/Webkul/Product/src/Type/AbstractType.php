@@ -353,6 +353,16 @@ abstract class AbstractType
                 'child_id' => $product->id,
             ]);
         }
+
+        if (! in_array('customizable_options', $attributesToSkip)) {
+            foreach ($this->product->customizable_options as $customizableOption) {
+                $copiedCustomizableOption = $product->customizable_options()->save($customizableOption->replicate());
+
+                foreach ($customizableOption->customizable_option_prices as $price) {
+                    $copiedCustomizableOption->customizable_option_prices()->save($price->replicate());
+                }
+            }
+        }
     }
 
     /**
