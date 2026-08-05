@@ -234,12 +234,14 @@
                         </div>
 
                         <div class="flex items-center">
-                            <a
-                                class="icon-login cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
-                                :href="'{{ route('admin.customers.customers.login_as_customer', ':id') }}'.replace(':id', record.customer_id)"
-                                target="_blank"
-                            >
-                            </a>
+                            @if (bouncer()->hasPermission('customers.customers.login_as_customer'))
+                                <a
+                                    class="icon-login cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"
+                                    :href="'{{ route('admin.customers.customers.login_as_customer', ':id') }}'.replace(':id', record.customer_id)"
+                                    target="_blank"
+                                >
+                                </a>
+                            @endif
 
                             <a
                                 class="icon-sort-right rtl:icon-sort-left cursor-pointer p-1.5 text-2xl hover:rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 ltr:ml-1 rtl:mr-1"

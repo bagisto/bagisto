@@ -8,6 +8,34 @@ use Illuminate\Support\Facades\Route;
 class Bouncer
 {
     /**
+     * Routes every signed-in admin may reach whatever their role grants. They either
+     * act on the admin's own record, or back shared UI - notifications, the datagrid
+     * chrome, the editor's uploader - that no single permission owns. Anything not
+     * listed here and not mapped in `acl.php` is refused, so a route added without an
+     * ACL entry fails closed instead of being silently open to every role.
+     */
+    const UNRESTRICTED_ROUTES = [
+        'admin.account.edit',
+        'admin.account.update',
+        'admin.two_factor.enable',
+        'admin.two_factor.disable',
+        'admin.settings.users.destroy',
+        'admin.help.index',
+        'admin.notification.index',
+        'admin.notification.get_notification',
+        'admin.notification.read_all',
+        'admin.notification.viewed_notification',
+        'admin.datagrid.look_up',
+        'admin.datagrid.saved_filters.index',
+        'admin.datagrid.saved_filters.store',
+        'admin.datagrid.saved_filters.update',
+        'admin.datagrid.saved_filters.destroy',
+        'admin.magic_ai.content',
+        'admin.magic_ai.image',
+        'admin.tinymce.upload',
+    ];
+
+    /**
      * Handle an incoming request.
      *
      * @param  Request  $request
@@ -105,11 +133,19 @@ class Bouncer
      */
     public function checkIfAuthorized()
     {
+        $routeName = Route::currentRouteName();
+
+        if (in_array($routeName, self::UNRESTRICTED_ROUTES)) {
+            return;
+        }
+
         $roles = acl()->getRoles();
 
-        if (isset($roles[Route::currentRouteName()])) {
-            bouncer()->allow($roles[Route::currentRouteName()]);
+        if (! isset($roles[$routeName])) {
+            abort(401, 'This action is unauthorized.');
         }
+
+        bouncer()->allow($roles[$routeName]);
     }
 
     /**
