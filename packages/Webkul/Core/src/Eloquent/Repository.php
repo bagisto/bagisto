@@ -109,7 +109,6 @@ abstract class Repository extends BaseRepository implements CacheableInterface
     /**
      * Find data by field and value.
      *
-     * @param  array  $where
      * @param  array  $columns
      * @return mixed
      */

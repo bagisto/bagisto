@@ -2,7 +2,7 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
-## Unreleased
+## **v2.4.9 (5th of August 2026)** - *Release*
 
 - Enhanced Data Transfer imports. Saving an import now runs it through to the end on its own — validate, fetch images, create, link, index — with a stepper and live progress for each phase, instead of a separate click per phase. Validation runs in windows, either browser-driven or dispatched across the queue workers, so a large file no longer has to be validated in one request. Product images can now come from links in the sheet, a ZIP uploaded with the import, or a directory on the server, saved on the import so reopening it restores the choice; links are fetched once each in a phase of their own before any row is written. The chosen image source is validated against the file, so a mismatch is reported during validation rather than silently importing every product without images. Also fixed a queued import re-dispatching its whole job chain on every poll, which ran the same rows two or three times over — booking the repeats as updates and deadlocking against itself — and fixed the runs that could stall for good in the image or create phase, which now complete what they can and report the batches that did not.
 
@@ -11,6 +11,28 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed the admin product datagrid and storefront search failing when an Elasticsearch index is missing, by passing `ignore_unavailable` on the searches that address an index by name.
 
 - Fixed `top-left`, `top-right` and the fallback position of the admin dropdown throwing at runtime — two adjacent template literals with no comma between them parse as a tagged template — and made the `fit-toggle` option apply to every position rather than only `bottom-left`.
+
+- Fixed the WebMCP tool declarations rendering at the foot of every storefront page. The forms are read by agents rather than drawn, and only their submit buttons were hidden, so the two carrying a text input showed it; the whole block is hidden now, and the tools are still discovered exactly as before.
+
+- Fixed the social-login icons sitting flush against the Sign In button on the customer login page. The partial is injected through an event, so it carries its own spacing rather than relying on whatever it lands under.
+
+- Fixed the demo product descriptions showing `\r` and `\n` as text. The escapes had been written into the seed data as literal characters rather than line breaks; the paragraphs they were meant to mark are now real ones.
+
+- Replaced the GDPR icon in the admin configuration listing, which was drawn as a leaf rather than a shield.
+
+- Turned the speculation rules off by default. They have the browser fetch pages nobody has opened yet, which costs bandwidth and shows up as traffic on pages that were never visited, so a store now opts in.
+
+- Sanitized the product description in the JSON-LD rich-snippet output, which previously emitted it unescaped.
+
+- Fixed an inactive cart still being assigned from the session.
+
+- Reworked the admin menu to support three levels, and tidied the category and role trees.
+
+- Fixed assorted storefront UI issues on the product view and sub-category pages, back navigation on the RMA pages on mobile, and the position of the rule buttons on the cart-rule create page.
+
+- Removed the operator selector from multiselect and checkbox conditions on cart rules, where it had no meaning.
+
+- Refined Playwright testcases.
 
 ## **v2.4.8 (8th of July 2026)** - *Release*
 
