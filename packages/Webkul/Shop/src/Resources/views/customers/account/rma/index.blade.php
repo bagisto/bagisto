@@ -15,9 +15,19 @@
 
     <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
         <div class="flex items-center justify-between">
-            <h2 class="text-2xl font-medium">
-                @lang('shop::app.rma.customer-rma-index.heading')
-            </h2>
+            <div class="flex items-center">
+                <!-- Back Button -->
+                <a
+                    class="grid md:hidden"
+                    href="{{ route('shop.customers.account.index') }}"
+                >
+                    <span class="text-2xl icon-arrow-left rtl:icon-arrow-right"></span>
+                </a>
+
+                <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
+                    @lang('shop::app.rma.customer-rma-index.heading')
+                </h2>
+            </div>
 
             <a
                 href="{{ route('shop.customers.account.rma.create') }}"
@@ -59,7 +69,7 @@
                     <template v-if="isLoading">
                         <x-shop::shimmer.datagrid.table.body />
                     </template>
-    
+
                     <template v-else>
                         <template v-for="record in available.records">
                             <div class="mb-4 w-full rounded-lg border p-4 transition-all last:mb-0 hover:bg-gray-50">
@@ -70,7 +80,7 @@
                                             <span class="text-xs text-gray-500">
                                                 @lang('shop::app.customers.account.rma.index.datagrid.id')
                                             </span>
-                                            
+
                                             <span class="text-sm font-semibold text-gray-900">
                                                 #@{{ record.id }}
                                             </span>
@@ -80,7 +90,7 @@
                                             <span class="text-xs text-gray-500">
                                                 @lang('shop::app.customers.account.rma.index.datagrid.order-ref')
                                             </span>
-                                            
+
                                             <span class="text-sm font-semibold text-gray-900"
                                                 v-html="record.order_id">
                                             </span>
@@ -93,7 +103,7 @@
                                             <span class="text-xs text-gray-500">
                                                 @lang('shop::app.customers.account.rma.index.datagrid.rma-status')
                                             </span>
-                                            
+
                                             <span class="text-sm font-semibold text-gray-900"
                                                 v-html="record.title">
                                             </span>
@@ -116,7 +126,7 @@
                                             <span class="text-xs text-gray-500">
                                                 @lang('shop::app.customers.account.rma.index.datagrid.create')
                                             </span>
-                                            
+
                                             <p class="text-sm text-gray-900">
                                                 @{{ record.created_at }}
                                             </p>
