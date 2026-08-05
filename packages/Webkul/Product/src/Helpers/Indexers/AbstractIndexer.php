@@ -70,7 +70,7 @@ abstract class AbstractIndexer
     /**
      * Reindex single product
      *
-     * @param  array  $products
+     * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
     public function reindexRow($product)
