@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
 
+                'drag-drop-hint' => 'atau seret dan lepas gambar di sini',
+
+                'crop' => [
+                    'title' => 'Pangkas Gambar',
+                    'aspect-free' => 'Bebas',
+                    'aspect-square' => 'Persegi (1:1)',
+                    'aspect-4-3' => 'Standar (4:3)',
+                    'aspect-16-9' => 'Layar Lebar (16:9)',
+                    'apply-btn' => 'Terapkan Pangkas',
+                    'skip-btn' => 'Lewati',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Terapkan',
                     'generate' => 'Hasilkan',

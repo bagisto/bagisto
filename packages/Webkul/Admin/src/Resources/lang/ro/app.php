@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
 
+                'drag-drop-hint' => 'sau trage și plasează imaginea aici',
+
+                'crop' => [
+                    'title' => 'Decupează imaginea',
+                    'aspect-free' => 'Liber',
+                    'aspect-square' => 'Pătrat (1:1)',
+                    'aspect-4-3' => 'Standard (4:3)',
+                    'aspect-16-9' => 'Ecran lat (16:9)',
+                    'apply-btn' => 'Aplică decuparea',
+                    'skip-btn' => 'Omite',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Apply',
                     'generate' => 'Generate',

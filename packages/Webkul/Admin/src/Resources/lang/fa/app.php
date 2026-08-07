@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png، jpeg، jpg',
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
 
+                'drag-drop-hint' => 'یا تصویر را اینجا بکشید و رها کنید',
+
+                'crop' => [
+                    'title' => 'برش تصویر',
+                    'aspect-free' => 'آزاد',
+                    'aspect-square' => 'مربع (1:1)',
+                    'aspect-4-3' => 'استاندارد (4:3)',
+                    'aspect-16-9' => 'پهن‌صفحه (16:9)',
+                    'apply-btn' => 'اعمال برش',
+                    'skip-btn' => 'رد کردن',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'اعمال',
                     'generate' => 'تولید',

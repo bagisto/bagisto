@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
 
+                'drag-drop-hint' => 'හෝ රූපය මෙහි ඇද දමන්න',
+
+                'crop' => [
+                    'title' => 'රූපය කප්පාදු කරන්න',
+                    'aspect-free' => 'නිදහස්',
+                    'aspect-square' => 'චතුරස්‍රය (1:1)',
+                    'aspect-4-3' => 'සම්මත (4:3)',
+                    'aspect-16-9' => 'විශාල තිරය (16:9)',
+                    'apply-btn' => 'කප්පාදුව යොදන්න',
+                    'skip-btn' => 'මඟහරින්න',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'අයැදීම',
                     'generate' => 'උදාහරින්න',

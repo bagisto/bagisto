@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
 
+                'drag-drop-hint' => 'o arrastra y suelta la imagen aquí',
+
+                'crop' => [
+                    'title' => 'Recortar imagen',
+                    'aspect-free' => 'Libre',
+                    'aspect-square' => 'Cuadrado (1:1)',
+                    'aspect-4-3' => 'Estándar (4:3)',
+                    'aspect-16-9' => 'Panorámico (16:9)',
+                    'apply-btn' => 'Aplicar recorte',
+                    'skip-btn' => 'Omitir',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Aplicar',
                     'generate' => 'Generar',

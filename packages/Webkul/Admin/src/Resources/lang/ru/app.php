@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
 
+                'drag-drop-hint' => 'или перетащите изображение сюда',
+
+                'crop' => [
+                    'title' => 'Обрезать изображение',
+                    'aspect-free' => 'Свободно',
+                    'aspect-square' => 'Квадрат (1:1)',
+                    'aspect-4-3' => 'Стандарт (4:3)',
+                    'aspect-16-9' => 'Широкоформатный (16:9)',
+                    'apply-btn' => 'Применить обрезку',
+                    'skip-btn' => 'Пропустить',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Применить',
                     'generate' => 'Создать',

@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
 
+                'drag-drop-hint' => '或将图片拖放到此处',
+
+                'crop' => [
+                    'title' => '裁剪图片',
+                    'aspect-free' => '自由',
+                    'aspect-square' => '正方形 (1:1)',
+                    'aspect-4-3' => '标准 (4:3)',
+                    'aspect-16-9' => '宽屏 (16:9)',
+                    'apply-btn' => '应用裁剪',
+                    'skip-btn' => '跳过',
+                ],
+
                 'ai-generation' => [
                     'apply' => '应用',
                     'generate' => '生成',

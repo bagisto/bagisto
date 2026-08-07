@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
 
+                'drag-drop-hint' => 'או גרור ושחרר את התמונה כאן',
+
+                'crop' => [
+                    'title' => 'חיתוך תמונה',
+                    'aspect-free' => 'חופשי',
+                    'aspect-square' => 'ריבוע (1:1)',
+                    'aspect-4-3' => 'סטנדרטי (4:3)',
+                    'aspect-16-9' => 'רחב (16:9)',
+                    'apply-btn' => 'החל חיתוך',
+                    'skip-btn' => 'דלג',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'החל',
                     'generate' => 'יצירה',

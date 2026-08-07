@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
 
+                'drag-drop-hint' => 'of sleep de afbeelding hierheen',
+
+                'crop' => [
+                    'title' => 'Afbeelding bijsnijden',
+                    'aspect-free' => 'Vrij',
+                    'aspect-square' => 'Vierkant (1:1)',
+                    'aspect-4-3' => 'Standaard (4:3)',
+                    'aspect-16-9' => 'Breedbeeld (16:9)',
+                    'apply-btn' => 'Bijsnijden toepassen',
+                    'skip-btn' => 'Overslaan',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Toepassen',
                     'generate' => 'Genereren',

@@ -5506,6 +5506,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
 
+                'drag-drop-hint' => 'অথবা ছবিটি এখানে টেনে আনুন',
+
+                'crop' => [
+                    'title' => 'ছবি ক্রপ করুন',
+                    'aspect-free' => 'মুক্ত',
+                    'aspect-square' => 'স্কয়ার (1:1)',
+                    'aspect-4-3' => 'স্ট্যান্ডার্ড (4:3)',
+                    'aspect-16-9' => 'ওয়াইডস্ক্রিন (16:9)',
+                    'apply-btn' => 'ক্রপ প্রয়োগ করুন',
+                    'skip-btn' => 'এড়িয়ে যান',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'প্রয়োগ করুন',
                     'generate' => 'তৈরি করুন',
