@@ -271,7 +271,7 @@ class PayGlocal extends Payment
             'merchantTxnId' => $merchantTxnId,
 
             'paymentData' => [
-                'totalAmount' => $this->formatAmount($cart->grand_total, $currency),
+                'totalAmount' => $this->formatAmount($cart->base_grand_total, $currency),
                 'txnCurrency' => $currency,
                 'billingData' => $this->prepareBillingData($cart),
             ],
@@ -301,8 +301,6 @@ class PayGlocal extends Payment
             $response = Http::acceptJson()->get($statusUrl);
 
             if ($response->failed()) {
-                logger()->error('PayGlocal status check failed.', ['response' => $response->body()]);
-
                 return null;
             }
 
@@ -332,11 +330,6 @@ class PayGlocal extends Payment
                 ->send($method, $this->getBaseUrl().$endpoint);
 
             if ($response->failed()) {
-                logger()->error('PayGlocal request failed.', [
-                    'endpoint' => $endpoint,
-                    'response' => $response->body(),
-                ]);
-
                 return null;
             }
 
@@ -373,15 +366,15 @@ class PayGlocal extends Payment
             }
         }
 
-        return core()->getCurrentCurrency()?->decimal ?? 2;
+        return core()->getBaseCurrency()?->decimal ?? 2;
     }
 
     /**
      * Get the currency the payment is charged in.
      */
-    public function getCurrency($cart = null): string
+    public function getCurrency($cart): string
     {
-        return strtoupper($cart?->cart_currency_code ?: core()->getCurrentCurrencyCode());
+        return strtoupper($cart->base_currency_code ?: core()->getBaseCurrencyCode());
     }
 
     /**

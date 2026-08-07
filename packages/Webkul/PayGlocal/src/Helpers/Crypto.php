@@ -96,7 +96,7 @@ class Crypto
 
     /**
      * Verify a JWS issued by PayGlocal and return its claims.
-     * 
+     *
      * Returns null when the token is malformed or the signature does not match.
      */
     public function verify(string $token): ?array

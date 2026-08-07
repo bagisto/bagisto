@@ -250,14 +250,6 @@ class PayGlocalController extends Controller
             Cart::collectTotals();
 
             if (! $this->amountMatches($cart, $response)) {
-                logger()->error('PayGlocal amount mismatch. The cart changed while the payment was in progress.', [
-                    'gid' => $gid,
-                    'captured_amount' => $this->payGlocal->getCapturedAmount($response),
-                    'captured_currency' => $this->payGlocal->getCapturedCurrency($response),
-                    'cart_amount' => $cart->grand_total,
-                    'cart_currency' => $cart->cart_currency_code,
-                ]);
-
                 return null;
             }
 
@@ -296,6 +288,9 @@ class PayGlocalController extends Controller
 
     /**
      * Check that the cart still totals what PayGlocal reports having taken.
+     *
+     * Measured against the base total, because that is the figure the payment was started for
+     * and the one the transaction is recorded against.
      */
     protected function amountMatches($cart, ?array $response): bool
     {
@@ -303,7 +298,7 @@ class PayGlocalController extends Controller
 
         if (
             $currency
-            && strtoupper((string) $cart->cart_currency_code) !== $currency
+            && $this->payGlocal->getCurrency($cart) !== $currency
         ) {
             return false;
         }
@@ -314,9 +309,9 @@ class PayGlocalController extends Controller
             return true;
         }
 
-        $decimal = $this->payGlocal->getCurrencyDecimal($currency ?? $cart->cart_currency_code);
+        $decimal = $this->payGlocal->getCurrencyDecimal($this->payGlocal->getCurrency($cart));
 
-        return round($amount, $decimal) === round((float) $cart->grand_total, $decimal);
+        return round($amount, $decimal) === round((float) $cart->base_grand_total, $decimal);
     }
 
     /**

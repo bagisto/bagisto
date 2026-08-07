@@ -313,7 +313,7 @@ it('refuses to place the order when the cart no longer totals what was captured'
     mockCallbackToken(callbackClaims($cart));
 
     mockConfirmedStatus($this->payGlocalMock, $cart, [
-        'Amount' => (string) ($cart->grand_total + 100),
+        'Amount' => (string) ($cart->base_grand_total + 100),
     ]);
 
     // Act
@@ -356,7 +356,7 @@ function callbackClaims($cart): array
     return [
         'gid' => 'gl_o-test_gid',
         'statusUrl' => 'https://api.uat.pygcl.com/gl/v1/payments/gl_o-test_gid/status?x-gl-token=token',
-        'Amount' => (string) $cart->grand_total,
+        'Amount' => (string) $cart->base_grand_total,
         'merchantTxnId' => 'PGL'.$cart->id.'TTEST',
         'paymentMethod' => 'CARD',
         'status' => PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value,
@@ -378,8 +378,8 @@ function statusResponse($cart, string $status, array $dataOverrides = []): array
         'data' => array_merge([
             'gid' => 'gl_o-test_gid',
             'payment-method' => 'CARD',
-            'Amount' => (string) $cart->grand_total,
-            'txnCurrency' => $cart->cart_currency_code,
+            'Amount' => (string) $cart->base_grand_total,
+            'txnCurrency' => $cart->base_currency_code,
             'merchantTxnId' => 'PGL'.$cart->id.'TTEST',
             'status' => $status,
         ], $dataOverrides),

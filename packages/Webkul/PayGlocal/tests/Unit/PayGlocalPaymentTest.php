@@ -453,7 +453,11 @@ function cartStub(): object
 
         public $grand_total = 338.95;
 
+        public $base_grand_total = 338.95;
+
         public $cart_currency_code = 'INR';
+
+        public $base_currency_code = 'INR';
 
         public $billing_address = null;
     };
@@ -501,4 +505,20 @@ it('reads the captured amount and currency out of what payglocal reports', funct
 
     expect($this->payGlocal->getCapturedAmount($claims))->toBe(42.99)
         ->and($this->payGlocal->getReportedMerchantTxnId($claims))->toBe('PGL28TPQWIXAHJ3F');
+});
+
+it('charges in the store currency rather than the one the customer is browsing in', function () {
+    // A cart shown as $1 against an INR store is charged as the base total, in INR.
+    $cart = new class
+    {
+        public $grand_total = 1.00;
+
+        public $base_grand_total = 80.00;
+
+        public $cart_currency_code = 'USD';
+
+        public $base_currency_code = 'INR';
+    };
+
+    expect($this->payGlocal->getCurrency($cart))->toBe('INR');
 });
