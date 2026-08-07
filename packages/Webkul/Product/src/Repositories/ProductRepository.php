@@ -595,7 +595,7 @@ class ProductRepository extends Repository
     /**
      * Return category product maximum price.
      *
-     * @param  int  $categoryId
+     * @param  array  $params
      * @return float
      */
     public function getMaxPrice($params = [])

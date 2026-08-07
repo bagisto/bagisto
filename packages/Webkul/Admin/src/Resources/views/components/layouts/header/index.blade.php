@@ -34,10 +34,10 @@
             <div class="relative flex w-[200px] items-center sm:w-[300px] md:w-[400px] lg:w-[525px] xl:max-w-[525px] ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
                 <i class="icon-search absolute top-1.5 flex items-center text-xl ltr:left-2 rtl:right-2 sm:text-2xl sm:ltr:left-3 sm:rtl:right-3"></i>
 
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     class="block w-full rounded-lg border bg-white px-8 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 sm:px-10 sm:text-base"
-                    placeholder="@lang('admin::app.components.layouts.header.mega-search.title')" 
+                    placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 >
             </div>
         </v-mega-search>
@@ -54,12 +54,12 @@
         </v-dark>
 
         <!-- Visit Shop Link -->
-        <a 
-            href="{{ route('shop.home.index') }}" 
+        <a
+            href="{{ route('shop.home.index') }}"
             target="_blank"
             class="hidden sm:flex"
         >
-            <span 
+            <span
                 class="icon-store cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
                 title="@lang('admin::app.components.layouts.header.visit-shop')"
             >
@@ -69,8 +69,8 @@
        <!-- Notification Component -->
         <v-notifications {{ $attributes }}>
             <span class="relative flex">
-                <span 
-                    class="icon-notification cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl" 
+                <span
+                    class="icon-notification cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
                     title="@lang('admin::app.components.layouts.header.notifications')"
                 >
                 </span>
@@ -177,7 +177,7 @@
                             class="flex items-center gap-2 p-1.5 cursor-pointer hover:rounded-lg {{ $menuItem->isActive() == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer sm:gap-2.5"
                         >
                             <span class="{{ $menuItem->getIcon() }} text-xl {{ $menuItem->isActive() ? 'text-white' : ''}} sm:text-2xl"></span>
-                            
+
                             <p class="font-semibold text-gray-600 dark:text-gray-300 whitespace-nowrap text-sm group-[.sidebar-collapsed]/container:hidden {{ $menuItem->isActive() ? 'text-white' : ''}} sm:text-base">
                                 {{ $menuItem->getName() }}
                             </p>
@@ -188,10 +188,23 @@
                                 @foreach ($menuItem->getChildren() as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem->getUrl() }}"
-                                        class="text-xs text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 group-[.sidebar-collapsed]/container:px-4 group-[.sidebar-collapsed]/container:py-2 group-[.inactive]/item:px-4 group-[.inactive]/item:py-2 hover:text-blue-600 dark:hover:bg-gray-950 sm:text-sm sm:group-[.sidebar-collapsed]/container:px-5 sm:group-[.sidebar-collapsed]/container:py-2.5 sm:group-[.inactive]/item:px-5 sm:group-[.inactive]/item:py-2.5"
+                                        class="{{ $subMenuItem->haveChildren() ? 'font-medium' : '' }} text-xs text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 group-[.sidebar-collapsed]/container:px-4 group-[.sidebar-collapsed]/container:py-2 group-[.inactive]/item:px-4 group-[.inactive]/item:py-2 hover:text-blue-600 dark:hover:bg-gray-950 sm:text-sm sm:group-[.sidebar-collapsed]/container:px-5 sm:group-[.sidebar-collapsed]/container:py-2.5 sm:group-[.inactive]/item:px-5 sm:group-[.inactive]/item:py-2.5"
                                     >
                                         {{ $subMenuItem->getName() }}
                                     </a>
+
+                                    @if ($subMenuItem->haveChildren())
+                                        <div class="grid ltr:pl-4 rtl:pr-4">
+                                            @foreach ($subMenuItem->getChildren() as $subSubMenuItem)
+                                                <a
+                                                    href="{{ $subSubMenuItem->getUrl() }}"
+                                                    class="text-xs text-{{ $subSubMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subSubMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 hover:text-blue-600 dark:hover:bg-gray-950 sm:text-sm"
+                                                >
+                                                    {{ $subSubMenuItem->getName() }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         @endif
@@ -210,7 +223,7 @@
         <div class="relative flex w-[200px] items-center sm:w-[300px] md:w-[400px] lg:w-[525px] xl:max-w-[525px] ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
             <i class="icon-search absolute top-1.5 flex items-center text-xl ltr:left-2 rtl:right-2 sm:text-2xl sm:ltr:left-3 sm:rtl:right-3"></i>
 
-            <input 
+            <input
                 type="text"
                 class="peer block w-full rounded-lg border bg-white px-8 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400 sm:px-10 sm:text-base"
                 :class="{'border-gray-400': isDropdownOpen}"
@@ -258,7 +271,7 @@
                                     >
                                         <template v-if="! product.images.length">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}" class="h-full w-full object-cover">
-                                        
+
                                             <p class="absolute bottom-0.5 w-full text-center text-[4px] font-semibold text-gray-400 sm:bottom-1.5 sm:text-[6px]">
                                                 @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
                                             </p>
@@ -450,19 +463,19 @@
                             is_active: true,
                             endpoint: "{{ route('admin.catalog.products.search') }}"
                         },
-                        
+
                         orders: {
                             key: 'orders',
                             title: "@lang('admin::app.components.layouts.header.mega-search.orders')",
                             endpoint: "{{ route('admin.sales.orders.search') }}"
                         },
-                        
+
                         categories: {
                             key: 'categories',
                             title: "@lang('admin::app.components.layouts.header.mega-search.categories')",
                             endpoint: "{{ route('admin.catalog.categories.search') }}"
                         },
-                        
+
                         customers: {
                             key: 'customers',
                             title: "@lang('admin::app.components.layouts.header.mega-search.customers')",
@@ -512,7 +525,7 @@
                     let self = this;
 
                     this.isLoading = true;
-                    
+
                     this.$axios.get(this.tabs[this.activeTab].endpoint, {
                             params: {query: this.searchTerm}
                         })
@@ -543,11 +556,11 @@
             <x-slot:toggle>
                 <span class="relative flex">
                     <span
-                        class="icon-notification text-red cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
+                        class="icon-notification text-red cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                         title="@lang('admin::app.components.layouts.header.notifications')"
                     >
                     </span>
-                
+
                     <span
                         class="absolute -top-2 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 p-1.5 text-[10px] font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5"
                         v-if="totalUnRead"

@@ -3,6 +3,7 @@
 namespace Webkul\Installer\Listeners;
 
 use GuzzleHttp\Client;
+use Webkul\Core\Helpers\InstalledPackages;
 use Webkul\User\Repositories\AdminRepository;
 
 class Installer
@@ -19,7 +20,10 @@ class Installer
      *
      * @return void
      */
-    public function __construct(protected AdminRepository $adminRepository) {}
+    public function __construct(
+        protected AdminRepository $adminRepository,
+        protected InstalledPackages $installedPackages
+    ) {}
 
     /**
      * After Bagisto is successfully installed.
@@ -32,41 +36,36 @@ class Installer
     }
 
     /**
-     * After a module is installed on top of Bagisto, report it to the tracker so the
-     * installation is recorded with the installed module(s).
+     * Send the installation payload to the tracker, along with the packages this
+     * installation is running.
      *
-     * @param  string|array  $modules
-     * @return void
-     */
-    public function moduleInstalled($modules)
-    {
-        $this->track([
-            'modules' => (array) $modules,
-        ]);
-    }
-
-    /**
-     * Send the installation payload to the tracker, merging any extra fields (e.g. modules).
+     * The field keeps the `modules` name the tracker has always read, so an
+     * installation on an older release goes on reporting into the same place. The
+     * tracker is what decides which of the packages are core and which were
+     * installed on top.
      *
      * @return void
      */
-    protected function track(array $extra = [])
+    protected function track()
     {
         $admin = $this->adminRepository->first();
 
         $httpClient = new Client;
+
+        $packages = $this->installedPackages->all();
 
         try {
             $httpClient->request('POST', self::API_ENDPOINT, [
                 'headers' => [
                     'Accept' => 'application/json',
                 ],
-                'json' => array_merge([
+                'json' => [
                     'domain' => config('app.url'),
                     'email' => $admin?->email,
                     'name' => $admin?->name,
                     'country_code' => config('app.default_country') ?? 'IN',
-                ], $extra),
+                    'modules' => $packages ?: null,
+                ],
             ]);
         } catch (\Exception $e) {
         }

@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
+use Webkul\Product\Contracts\Product;
+
 abstract class AbstractIndexer
 {
     /**
@@ -70,7 +72,7 @@ abstract class AbstractIndexer
     /**
      * Reindex single product
      *
-     * @param  array  $products
+     * @param  Product  $product
      * @return void
      */
     public function reindexRow($product)

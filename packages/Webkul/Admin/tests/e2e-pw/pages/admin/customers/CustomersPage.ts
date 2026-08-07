@@ -38,6 +38,13 @@ export class CustomersPage extends BasePage {
         return this.page.getByRole("link", { name: "Inactive" });
     }
 
+    /**
+     * The grid's own search box, not the one in the admin header.
+     */
+    private get searchInput() {
+        return this.page.locator('input[name="search"]');
+    }
+
     async open(): Promise<void> {
         await this.visit("admin/customers");
         await this.waitForLoad();
@@ -47,6 +54,27 @@ export class CustomersPage extends BasePage {
         await this.page.waitForSelector("button.primary-button:visible", {
             state: "visible",
         });
+    }
+
+    async searchFor(term: string): Promise<number> {
+        await this.open();
+
+        await this.searchInput.fill(term);
+
+        const [response] = await Promise.all([
+            this.page.waitForResponse((response) =>
+                response.url().includes("filters%5Ball%5D"),
+            ),
+            this.searchInput.press("Enter"),
+        ]);
+
+        const body = await response.json();
+
+        return body.meta?.total ?? 0;
+    }
+
+    async expectRowVisible(text: string): Promise<void> {
+        await expect(this.page.getByText(text).first()).toBeVisible();
     }
 
     async openFirstCustomerDetails(): Promise<void> {

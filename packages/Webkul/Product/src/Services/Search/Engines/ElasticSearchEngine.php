@@ -37,6 +37,7 @@ class ElasticSearchEngine implements SearchEngine
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'from' => $options['from'],
                 'size' => $options['limit'],
@@ -65,6 +66,7 @@ class ElasticSearchEngine implements SearchEngine
 
         $results = ElasticSearch::search([
             'index' => $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'suggest' => [
                     'name_suggest' => [
@@ -105,6 +107,7 @@ class ElasticSearchEngine implements SearchEngine
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,
                 'query' => [
@@ -318,6 +321,7 @@ class ElasticSearchEngine implements SearchEngine
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,
                 'query' => [

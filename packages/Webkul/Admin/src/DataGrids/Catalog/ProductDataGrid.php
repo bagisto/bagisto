@@ -335,6 +335,7 @@ class ProductDataGrid extends DataGrid
 
         $results = ElasticSearch::search([
             'index' => $indexNames,
+            'ignore_unavailable' => true,
             'body' => [
                 'from' => ($pagination['page'] * $pagination['per_page']) - $pagination['per_page'],
                 'size' => $pagination['per_page'],

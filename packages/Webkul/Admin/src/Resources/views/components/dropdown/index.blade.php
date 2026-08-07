@@ -1,6 +1,10 @@
-@props(['position' => 'bottom-left'])
+@props(['position' => 'bottom-left', 'fitToggle' => false])
 
-<v-dropdown position="{{ $position }}" {{ $attributes->merge(['class' => 'relative']) }}>
+<v-dropdown
+    position="{{ $position }}"
+    :fit-toggle="{{ $fitToggle ? 'true' : 'false' }}"
+    {{ $attributes->merge(['class' => 'relative']) }}
+>
     @isset($toggle)
         {{ $toggle }}
 
@@ -70,6 +74,12 @@
             props: {
                 position: String,
 
+                fitToggle: {
+                    type: Boolean,
+                    required: false,
+                    default: false,
+                },
+
                 closeOnClick: {
                     type: Boolean,
                     required: false,
@@ -103,38 +113,40 @@
 
             computed: {
                 positionStyles() {
-                    switch (this.position) {
-                        case 'bottom-left':
-                            return [
-                                `min-width: ${this.toggleBlockWidth}px`,
-                                `top: ${this.toggleBlockHeight}px`,
-                                'left: 0',
-                            ];
+                    /**
+                     * Sizing is the same wherever the panel hangs, so it is shared and the switch
+                     * below only decides which corner it is anchored to.
+                     */
+                    const sizeStyles = [
+                        `min-width: ${this.toggleBlockWidth}px`,
+                        this.fitToggle ? `max-width: ${this.toggleBlockWidth}px` : '',
+                    ];
 
+                    switch (this.position) {
                         case 'bottom-right':
                             return [
-                                `min-width: ${this.toggleBlockWidth}px`,
+                                ...sizeStyles,
                                 `top: ${this.toggleBlockHeight}px`,
                                 'right: 0',
                             ];
 
                         case 'top-left':
                             return [
-                                `min-width: ${this.toggleBlockWidth}px`
-                                `bottom: ${this.toggleBlockHeight*2}px`,
+                                ...sizeStyles,
+                                `bottom: ${this.toggleBlockHeight * 2}px`,
                                 'left: 0',
                             ];
 
                         case 'top-right':
                             return [
-                                `min-width: ${this.toggleBlockWidth}px`
-                                `bottom: ${this.toggleBlockHeight*2}px`,
+                                ...sizeStyles,
+                                `bottom: ${this.toggleBlockHeight * 2}px`,
                                 'right: 0',
                             ];
 
                         default:
                             return [
-                                `min-width: ${this.toggleBlockWidth}px`
+                                ...sizeStyles,
                                 `top: ${this.toggleBlockHeight}px`,
                                 'left: 0',
                             ];
@@ -145,6 +157,16 @@
             methods: {
                 toggle() {
                     this.isActive = ! this.isActive;
+
+                    /**
+                     * Re-measure on open so the width is correct even when the dropdown mounted while
+                     * hidden (e.g. inside a closed filter drawer), which `fitToggle` relies on.
+                     */
+                    if (this.isActive) {
+                        this.toggleBlockWidth = this.$refs.toggleBlock.clientWidth;
+
+                        this.toggleBlockHeight = this.$refs.toggleBlock.clientHeight;
+                    }
                 },
 
                 handleFocusOut(e) {
