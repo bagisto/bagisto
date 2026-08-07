@@ -67,10 +67,6 @@ class PayGlocalController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
-        /**
-         * The cart is carried inside the reference PayGlocal echoes back, so the payment can
-         * be traced to it later without keeping a record of the attempt on this side.
-         */
         $response = $this->payGlocal->initiatePayment(
             $cart,
             $this->payGlocal->generateMerchantTxnId($cart->id)
@@ -86,22 +82,28 @@ class PayGlocalController extends Controller
     }
 
     /**
-     * Receive the customer coming back from PayGlocal's hosted checkout.
+     * Receive the customer coming back from PayGlocal's hosted checkout, and settle the payment.
      *
-     * PayGlocal posts back a single `x-gl-token` field, which is a JWS it signed. The payment is
-     * deliberately not settled here. This route runs without the session middleware, because a
-     * browser does not send the session cookie on a cross site POST under the `lax` policy
-     * Laravel defaults to: starting a session here would hand the browser a new empty one and
-     * sign the customer out of the storefront and the admin alike. The reference is handed to a
-     * redirect instead, which the browser follows as an ordinary navigation and which does carry
-     * the original session. This is the shape core Stripe gets for free by being sent back with a
-     * GET and its reference in the query string.
+     * PayGlocal posts back a single `x-gl-token` field, a JWS it signed, carrying the reference,
+     * the outcome and the status URL to confirm it against. The order is placed here rather than
+     * after the redirect because this is the last point at which any of that is still covered by
+     * PayGlocal's signature - past the redirect there is only a query string a customer can type.
+     *
+     * This route runs without the session middleware, because a browser does not send the session
+     * cookie on a cross site POST under the `lax` policy Laravel defaults to: starting a session
+     * here would hand the browser a new empty one and sign the customer out of the storefront and
+     * the admin alike. Order creation does not need one, and the session writes the cart makes on
+     * the way through land in a request-lifetime store that is never sent back.
      */
     public function callback(): RedirectResponse
     {
-        $token = (string) request()->input('x-gl-token');
+        $claims = $this->verifiedClaims();
 
-        $claims = $token ? $this->crypto->verify($token) : null;
+        try {
+            $this->settle($claims);
+        } catch (\Throwable $e) {
+            report($e);
+        }
 
         return redirect()->route('payglocal.success', array_filter([
             'gid' => $claims['gid'] ?? null,
@@ -110,98 +112,30 @@ class PayGlocalController extends Controller
     }
 
     /**
-     * Settle the payment the customer has returned from.
+     * Show the customer what became of the payment settled in the callback.
      *
-     * Reached by redirect from the callback, so the session is intact and the customer is still
-     * signed in. Nothing in the query string is trusted: it says only which payment to ask about,
-     * and the outcome is read back from PayGlocal before an order is placed, exactly as the
-     * webhook does with the reference it is handed.
+     * Nothing here is trusted: the query string only says which cart to look at, and the answer
+     * is whether an order exists for it. A customer typing a reference of their own can therefore
+     * never cause an order, only ever look for one.
      */
     public function success(): RedirectResponse
     {
-        try {
-            $gid = request()->query('gid');
+        $cartId = $this->payGlocal->parseCartId(request()->query('merchantTxnId'))
+            ?? Cart::getCart()?->id;
 
-            if (! $gid) {
-                session()->flash('error', trans('payglocal::app.response.verification-failed'));
+        $order = $cartId ? $this->findOrder($cartId) : null;
 
-                return redirect()->route('shop.checkout.cart.index');
-            }
-
-            $cartId = $this->payGlocal->parseCartId(request()->query('merchantTxnId'));
-
-            if (
-                $cartId
-                && $order = $this->findOrder($cartId)
-            ) {
-                session()->flash('order_id', $order->id);
-
-                return redirect()->route('shop.checkout.onepage.success');
-            }
-
-            $response = $this->payGlocal->getTransactionStatus($gid);
-
-            $cartId = $cartId ?: $this->resolveCartId($response);
-
-            if (! $cartId) {
-                session()->flash('error', trans('payglocal::app.response.transaction-not-found'));
-
-                return redirect()->route('shop.checkout.cart.index');
-            }
-
-            if ($order = $this->findOrder($cartId)) {
-                session()->flash('order_id', $order->id);
-
-                return redirect()->route('shop.checkout.onepage.success');
-            }
-
-            $status = $this->resolveStatus($response);
-
-            if (! $status?->isSuccessful()) {
-                return $this->redirectUnsuccessful($status);
-            }
-
-            $order = $this->placeOrder($cartId, $gid, $response);
-
-            if (! $order) {
-                session()->flash('error', trans('payglocal::app.response.order-creation-failed'));
-
-                return redirect()->route('shop.checkout.cart.index');
-            }
-
-            session()->flash('order_id', $order->id);
-
-            session()->flash('success', trans('payglocal::app.response.payment-success'));
-
-            return redirect()->route('shop.checkout.onepage.success');
-        } catch (\Throwable $e) {
-            report($e);
-
-            session()->flash('error', trans('payglocal::app.response.order-creation-failed'));
-
-            return redirect()->route('shop.checkout.cart.index');
-        }
-    }
-
-    /**
-     * Send the customer back to the cart, telling them what actually became of their payment.
-     */
-    protected function redirectUnsuccessful(?PayGlocalPaymentStatus $status): RedirectResponse
-    {
-        if (
-            ! $status
-            || $status->isPending()
-        ) {
-            session()->flash('warning', trans('payglocal::app.response.payment-pending'));
+        if (! $order) {
+            session()->flash('error', trans('payglocal::app.response.payment-failed'));
 
             return redirect()->route('shop.checkout.cart.index');
         }
 
-        session()->flash('error', $status->isCancelled()
-            ? trans('payglocal::app.response.payment-cancelled')
-            : trans('payglocal::app.response.payment-failed'));
+        session()->flash('order_id', $order->id);
 
-        return redirect()->route('shop.checkout.cart.index');
+        session()->flash('success', trans('payglocal::app.response.payment-success'));
+
+        return redirect()->route('shop.checkout.onepage.success');
     }
 
     /**
@@ -210,11 +144,13 @@ class PayGlocalController extends Controller
     public function webhook(): JsonResponse
     {
         try {
-            $reference = $this->resolveWebhookReference();
+            $claims = $this->verifiedClaims();
 
-            $gid = $reference['gid'] ?? null;
+            if (! $claims) {
+                return response()->json(['status' => 'transaction_not_found'], 200);
+            }
 
-            $cartId = $this->payGlocal->parseCartId($reference['merchantTxnId'] ?? null);
+            $cartId = $this->payGlocal->parseCartId($claims['merchantTxnId'] ?? null);
 
             if (
                 $cartId
@@ -226,35 +162,10 @@ class PayGlocalController extends Controller
                 ], 200);
             }
 
-            $response = $this->payGlocal->getTransactionStatus($gid);
-
-            $cartId = $cartId ?: $this->resolveCartId($response);
-
-            if (! $cartId) {
-                logger()->warning('PayGlocal webhook could not be matched to a payment.', [
-                    'reference' => $reference,
-                ]);
-
-                return response()->json(['status' => 'transaction_not_found'], 200);
-            }
-
-            if ($order = $this->findOrder($cartId)) {
-                return response()->json([
-                    'status' => 'order_already_exists',
-                    'order_id' => $order->id,
-                ], 200);
-            }
-
-            $status = $this->resolveStatus($response);
-
-            if (! $status?->isSuccessful()) {
-                return response()->json(['status' => 'payment_not_confirmed'], 200);
-            }
-
-            $order = $this->placeOrder($cartId, $gid, $response);
+            $order = $this->settle($claims);
 
             if (! $order) {
-                return response()->json(['status' => 'order_creation_failed'], 200);
+                return response()->json(['status' => 'payment_not_confirmed'], 200);
             }
 
             return response()->json([
@@ -269,14 +180,11 @@ class PayGlocalController extends Controller
     }
 
     /**
-     * Read the reference identifying which payment a webhook concerns.
-     *
-     * Only a token PayGlocal signed is accepted, so an unauthenticated caller cannot drive
-     * the settlement path with a reference of their own choosing.
+     * Read the claims of the token PayGlocal signed, or nothing if it did not sign it.
      */
-    protected function resolveWebhookReference(): array
+    protected function verifiedClaims(): array
     {
-        $token = request()->input('x-gl-token') ?: trim(request()->getContent());
+        $token = (string) (request()->input('x-gl-token') ?: trim(request()->getContent()));
 
         if (! $token) {
             return [];
@@ -286,13 +194,29 @@ class PayGlocalController extends Controller
     }
 
     /**
-     * Work out which cart a payment belongs to from what PayGlocal reports about it.
+     * Confirm a payment with PayGlocal and turn it into an order.
+     *
+     * The signed claims say which payment this is and where to confirm it; the confirmation
+     * itself is read back from PayGlocal rather than taken from the token, so a replayed or
+     * stale token cannot settle anything the gateway would not settle.
      */
-    protected function resolveCartId(?array $response): ?int
+    protected function settle(array $claims): ?OrderContract
     {
-        return $this->payGlocal->parseCartId(
-            $this->payGlocal->getReportedMerchantTxnId($response)
-        );
+        $cartId = $this->payGlocal->parseCartId($claims['merchantTxnId'] ?? null);
+
+        if (! $cartId) {
+            return null;
+        }
+
+        $response = $this->payGlocal->getTransactionStatus($claims['statusUrl'] ?? null) ?? $claims;
+
+        $status = PayGlocalPaymentStatus::tryFrom(strtoupper($response['status'] ?? ''));
+
+        if (! $status?->isSuccessful()) {
+            return null;
+        }
+
+        return $this->placeOrder($cartId, $claims['gid'] ?? null, $response);
     }
 
     /**
@@ -301,14 +225,6 @@ class PayGlocalController extends Controller
     protected function findOrder(int $cartId): ?OrderContract
     {
         return $this->orderRepository->findOneWhere(['cart_id' => $cartId]);
-    }
-
-    /**
-     * Map PayGlocal's reported status onto a known outcome.
-     */
-    protected function resolveStatus(?array $response): ?PayGlocalPaymentStatus
-    {
-        return PayGlocalPaymentStatus::tryFrom(strtoupper($response['status'] ?? ''));
     }
 
     /**
@@ -329,6 +245,8 @@ class PayGlocalController extends Controller
 
             Cart::setCart($cart);
 
+            core()->setCurrentCurrency($cart->cart_currency_code);
+
             Cart::collectTotals();
 
             if (! $this->amountMatches($cart, $response)) {
@@ -347,6 +265,7 @@ class PayGlocalController extends Controller
 
             $data['payment']['additional'] = [
                 'payglocal_gid' => $gid,
+                'payglocal_merchant_txn_id' => $this->payGlocal->getReportedMerchantTxnId($response),
                 'payglocal_status' => PayGlocalPaymentStatus::SENT_FOR_CAPTURE->value,
             ];
 
@@ -377,10 +296,6 @@ class PayGlocalController extends Controller
 
     /**
      * Check that the cart still totals what PayGlocal reports having taken.
-     *
-     * PayGlocal is the only side holding the captured figure now, so the check applies when
-     * it reports one and is skipped when it does not, which leaves the flow no weaker than
-     * the other gateways, none of which compare amounts at all.
      */
     protected function amountMatches($cart, ?array $response): bool
     {

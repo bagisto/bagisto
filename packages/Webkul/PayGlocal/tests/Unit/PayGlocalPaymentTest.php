@@ -6,52 +6,31 @@ use Webkul\PayGlocal\Enums\PayGlocalPaymentStatus;
 use Webkul\PayGlocal\Payment\PayGlocal;
 
 /**
- * Real RSA keys, just not PayGlocal's. The payment method parses whatever is configured and
- * refuses to report itself available if the keys cannot be loaded, so a dummy string would not
- * exercise the credential checks.
+ * A real RSA keypair, generated per run rather than written into the file. The payment method
+ * parses whatever is configured and refuses to report itself available when the keys cannot be
+ * loaded, so a dummy string would not exercise the credential checks - but a private key checked
+ * into the repository is a private key checked into the repository, whatever it unlocks.
  */
-const TEST_PUBLIC_KEY = <<<'PEM'
------BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwjdww8ih6ntAYIyTAJuw
-xzPMk1M2Ca7jIX/F3c0ozcwHy2k1SgA4fFZ7wTgj1JnFANQvVDD2UBydXHbeigoT
-6xuPEBefxi3Vt/qStkwQ4dpp6DbOI0tzQ9GlOb06kugAc0knQTauA661nDmHiqHq
-UVefDhQ7X4r+kU9PYh49UJJsnZzV+8lTLeM8/tpiHlJS9KeyY4+Z6MfF9Ww/OEbl
-5jS3C+u52DiWBOGPFNdwTWwJ3zGgWim8XqD0GK++GM3ljKLLA60owptiRru6b9f/
-1bhEeyZ9D3OQwecR9u+Lp1IsoCHI313gGJ8QCUdtWkgzvd2yYZIpcqcFFXF7nNzd
-xQIDAQAB
------END PUBLIC KEY-----
-PEM;
+function testKeyPair(): array
+{
+    static $keys;
 
-const TEST_PRIVATE_KEY = <<<'PEM'
------BEGIN PRIVATE KEY-----
-MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDCN3DDyKHqe0Bg
-jJMAm7DHM8yTUzYJruMhf8XdzSjNzAfLaTVKADh8VnvBOCPUmcUA1C9UMPZQHJ1c
-dt6KChPrG48QF5/GLdW3+pK2TBDh2mnoNs4jS3ND0aU5vTqS6ABzSSdBNq4DrrWc
-OYeKoepRV58OFDtfiv6RT09iHj1QkmydnNX7yVMt4zz+2mIeUlL0p7Jjj5nox8X1
-bD84RuXmNLcL67nYOJYE4Y8U13BNbAnfMaBaKbxeoPQYr74YzeWMossDrSjCm2JG
-u7pv1//VuER7Jn0Pc5DB5xH274unUiygIcjfXeAYnxAJR21aSDO93bJhkilypwUV
-cXuc3N3FAgMBAAECggEAGBZohHJo7obXHwJgUGDUOyiSqf+rLJFFt0e8bSa+9aM6
-oOuirH5m2GOg2VUn+ya6dxYElrRfNY65pO2olRtB3tTIrg4YBqwe8mtVRd8c8D4M
-COe/MkPEfyKhvjhYwD6eS64aJxhBMHtl0oM/ax4WIdI0YQ/OUKpm/0kEXJ7JK6mo
-eaBUp4oMrvZa0+1h7fjyc0ZU1z9arToTReW0BCc2sE4tZuEAbR+QqNRE5DgWlWcu
-0yXg62uMPdFKkROLgOag+9pqq9jneF/yz7kZxshYmpilxxe0CSKgOTONiZS7cgvk
-wAk0kY6iBkzgsPyvkWswg+NxfklPH6nJPpOHzCSkIwKBgQDJeGAtUUFWxY4iP/6o
-ZSPjNc1P+Rr8P5f1NIwYsqz1Y5axALfYCqSn9dzxv2FjI5guNxSnemzl781Q28uE
-FK1IDI5AyFk1VrqB2daPHPZdbXn7GhiyQQUAs7C127Ubd6KKX/k6yWYM1YO401Be
-ty9qM2cDZRkmXXEj0ICX10cTjwKBgQD2yHfTHD0tZfa9hU3mn+kDNehJOObfhT9x
-QpsgMMmUz4s23XlvcHI4jczBeaZnMX0B6x+vE3hLEz9cYfE+AdsGRTfrRszmJdXO
-LyKsrzIikFmc5bvyhEVVnFerTtCEr67qchHOicU2++YTsbLc1DzAem2yAKbuENc3
-2BLbNHC/awKBgQCPCKc/hTCeKiN+rXBenW+dH9Vjsbc23u9DZssPvcqNbObPQ3NC
-Lkw38pWqC/VYLS0don1HaeNmW5mojmMuon9jZ4aW96Zd9/Txu3ZYpHdEXTT80Mo3
-w3GJzgjnE9TAa286TmjjE5kgA3ZBAcVNeUBwZY39Gwl/81cf1id1paEQgQKBgQCF
-ochA6Om3y57wwV6No8npkydVfxqFrwHLsuWNaN2/VyNrckJvtdQkC6T0n4scFhA7
-GbbudvyMqr+EpwSbLyYLHzBIlu4dMh+0ppGAMN5VGRVtgHlluXpSAXb3rJX9Q6TU
-DzDVRoUkYQMVZwQT0FmVYLZFzVSXVUc1Vivfx2XGQQKBgD/rnhOVxDhyp159gPdt
-nwI8qMfyG6f0cMwtNKqHRc1DGirSl7JbMNMR2cQGNbR5S00GKz0jEdsDyl8xew8M
-GYIy6CAUGfqz2uAwdJns3z61GIUfDnhZMPC8YjdziQ5O+wZAbPkrO3WRxWzI4uMo
-VFjL8elyuuif9hBG6TzNorUy
------END PRIVATE KEY-----
-PEM;
+    if ($keys) {
+        return $keys;
+    }
+
+    $resource = openssl_pkey_new([
+        'private_key_bits' => 2048,
+        'private_key_type' => OPENSSL_KEYTYPE_RSA,
+    ]);
+
+    openssl_pkey_export($resource, $privateKey);
+
+    return $keys = [
+        'public' => openssl_pkey_get_details($resource)['key'],
+        'private' => $privateKey,
+    ];
+}
 
 beforeEach(function () {
     $this->payGlocal = app(PayGlocal::class);
@@ -364,7 +343,8 @@ it('reads the redirect and status urls out of an initiated payment', function ()
 
 it('refuses an initiated payment that carries nowhere to send the customer', function () {
     // Arrange
-    // Without a redirect url there is no hosted checkout to reach, so it must not be started.
+    // The status url arrives later, with the token PayGlocal signs, so only somewhere to send
+    // the customer is needed to start. Without that there is no hosted checkout to reach.
     configureCredentials();
 
     Http::fake([
@@ -404,8 +384,6 @@ it('returns null when payglocal rejects the initiate request', function () {
 
 it('reads the payment status out of the status api', function () {
     // Arrange
-    configureCredentials();
-
     Http::fake([
         '*/status*' => Http::response([
             'gid' => 'gl_a1c7fa4ddc487f1cf25uut0lTX2',
@@ -424,7 +402,7 @@ it('reads the payment status out of the status api', function () {
     ]);
 
     // Act
-    $response = $this->payGlocal->getTransactionStatus('gl_o-test');
+    $response = $this->payGlocal->getTransactionStatus('https://api.uat.pygcl.com/gl/v1/payments/gl_o-test/status?x-gl-token=token');
 
     // Assert
     expect($response['status'])->toBe('SENT_FOR_CAPTURE')
@@ -491,8 +469,8 @@ function configureCredentials(array $overrides = []): void
         'merchant_id' => 'test_merchant',
         'public_key_id' => 'test_public_kid',
         'private_key_id' => 'test_private_kid',
-        'payglocal_public_key' => TEST_PUBLIC_KEY,
-        'merchant_private_key' => TEST_PRIVATE_KEY,
+        'payglocal_public_key' => testKeyPair()['public'],
+        'merchant_private_key' => testKeyPair()['private'],
         'accepted_currencies' => 'USD,INR',
     ], $overrides);
 
@@ -504,3 +482,23 @@ function configureCredentials(array $overrides = []): void
         ]);
     }
 }
+
+it('reads the cart out of a merchant transaction id', function () {
+    expect($this->payGlocal->parseCartId('PGL28TPQWIXAHJ3F'))->toBe(28)
+        ->and($this->payGlocal->parseCartId('nonsense'))->toBeNull()
+        ->and($this->payGlocal->parseCartId(null))->toBeNull();
+});
+
+it('reads the captured amount and currency out of what payglocal reports', function () {
+    // The shape PayGlocal really answers the status call with.
+    $statusBody = ['data' => ['Amount' => '42.99', 'txnCurrency' => 'inr']];
+
+    expect($this->payGlocal->getCapturedAmount($statusBody))->toBe(42.99)
+        ->and($this->payGlocal->getCapturedCurrency($statusBody))->toBe('INR');
+
+    // The shape of the claims PayGlocal signs into the callback token.
+    $claims = ['Amount' => '42.99', 'merchantTxnId' => 'PGL28TPQWIXAHJ3F'];
+
+    expect($this->payGlocal->getCapturedAmount($claims))->toBe(42.99)
+        ->and($this->payGlocal->getReportedMerchantTxnId($claims))->toBe('PGL28TPQWIXAHJ3F');
+});
