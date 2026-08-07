@@ -111,11 +111,14 @@
                 <a
                     href="{{ route('shop.compare.index') }}"
                     aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.compare')"
+                    class="relative"
                 >
                     <span
                         class="inline-block text-2xl cursor-pointer icon-compare"
                         role="presentation"
                     ></span>
+
+                    @include('shop::components.layouts.header.compare-count')
                 </a>
             @endif
 

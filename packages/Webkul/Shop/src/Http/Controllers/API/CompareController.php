@@ -56,8 +56,10 @@ class CompareController extends APIController
             'product_id' => 'required|integer|exists:products,id',
         ]);
 
+        $customer = auth()->guard('customer')->user();
+
         $compareProduct = $this->compareItemRepository->findOneByField([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $customer->id,
             'product_id' => request()->input('product_id'),
         ]);
 
@@ -70,13 +72,23 @@ class CompareController extends APIController
         Event::dispatch('customer.compare.create.before');
 
         $compareProduct = $this->compareItemRepository->create([
-            'customer_id' => auth()->guard('customer')->user()->id,
+            'customer_id' => $customer->id,
             'product_id' => request()->input('product_id'),
         ]);
 
         Event::dispatch('customer.compare.create.after', $compareProduct);
 
+        $productIds = $this->compareItemRepository
+            ->findByField('customer_id', $customer->id)
+            ->pluck('product_id')
+            ->toArray();
+
+        $products = $this->productRepository
+            ->whereIn('id', $productIds)
+            ->get();
+
         return new JsonResource([
+            'data' => CompareItemResource::collection($products),
             'message' => trans('shop::app.compare.item-add-success'),
         ]);
     }
