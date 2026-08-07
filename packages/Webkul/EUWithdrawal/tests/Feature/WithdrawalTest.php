@@ -10,6 +10,7 @@ use Webkul\EUWithdrawal\Models\Withdrawal;
 use Webkul\Sales\Models\Order;
 use Webkul\Shop\Mail\Customer\EUWithdrawal\GuestWithdrawalLink;
 use Webkul\Shop\Mail\Customer\EUWithdrawal\WithdrawalConfirmation;
+use Webkul\User\Models\Admin;
 
 use function Pest\Laravel\post;
 
@@ -258,4 +259,41 @@ it('rejects the guest store endpoint without a valid signature', function () {
 
     $this->post(route('shop.eu-withdrawal.guest.store', $order->id), [])
         ->assertForbidden();
+});
+
+it('tells the admin the confirmation was resent in the admin\'s own language', function () {
+    // Arrange
+    Mail::fake();
+
+    $customer = Customer::factory()->create();
+
+    $order = makeOrderForCustomer($customer);
+
+    // Filed in Arabic, so the email must go out in Arabic - but the admin reading the
+    // result is working in English.
+    $withdrawal = Withdrawal::create([
+        'uuid' => (string) Str::uuid(),
+        'order_id' => $order->id,
+        'customer_id' => $customer->id,
+        'is_guest' => false,
+        'customer_email' => $customer->email,
+        'channel_id' => $order->channel_id,
+        'locale' => 'ar',
+        'received_at' => now(),
+        'status' => WithdrawalStatus::RECEIVED,
+    ]);
+
+    app()->setLocale('en');
+
+    $this->actingAs(Admin::factory()->create(), 'admin');
+
+    // Act
+    post(route('admin.sales.eu-withdrawals.resend_confirmation', $withdrawal->id));
+
+    // Assert
+    expect(app()->getLocale())->toBe('en')
+        ->and(session('success'))->toBe(trans('admin::app.eu_withdrawal.flash.confirmation_resent', [], 'en'))
+        ->and(session('success'))->not->toBe(trans('admin::app.eu_withdrawal.flash.confirmation_resent', [], 'ar'));
+
+    Mail::assertSent(WithdrawalConfirmation::class);
 });
