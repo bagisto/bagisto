@@ -98,6 +98,43 @@ class Crypto
     }
 
     /**
+     * Sign a request that carries no body, producing the `x-gl-token-external` header value.
+     *
+     * A read has nothing to digest, so the path being asked about is signed instead. The
+     * `is-digested` header is dropped accordingly.
+     */
+    public function signPath(string $path): string
+    {
+        $merchantId = $this->getConfigData('merchant_id');
+
+        $privateKeyId = $this->getConfigData('private_key_id');
+
+        $jwk = JWKFactory::createFromKey($this->getConfigData('merchant_private_key'), null, [
+            'kid' => $privateKeyId,
+            'use' => 'sig',
+        ]);
+
+        $jwsBuilder = new JWSBuilder(new AlgorithmManager([new RS256]));
+
+        $jws = $jwsBuilder
+            ->create()
+            ->withPayload(json_encode([
+                'path' => $path,
+                'iat' => $this->timestamp(),
+                'exp' => self::TOKEN_EXPIRY,
+            ]))
+            ->addSignature($jwk, [
+                'alg' => 'RS256',
+                'kid' => $privateKeyId,
+                'x-gl-merchantId' => $merchantId,
+                'issued-by' => $merchantId,
+            ])
+            ->build();
+
+        return (new JWSSerializer)->serialize($jws, 0);
+    }
+
+    /**
      * Verify a JWS issued by PayGlocal and return its claims.
      * Returns null when the token is malformed or the signature does not match.
      */

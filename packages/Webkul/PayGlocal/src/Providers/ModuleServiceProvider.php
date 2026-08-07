@@ -2,17 +2,14 @@
 
 namespace Webkul\PayGlocal\Providers;
 
-use Konekt\Concord\BaseModuleServiceProvider;
-use Webkul\PayGlocal\Models\PayGlocalTransaction;
+use Webkul\Core\Providers\CoreModuleServiceProvider;
 
-class ModuleServiceProvider extends BaseModuleServiceProvider
+class ModuleServiceProvider extends CoreModuleServiceProvider
 {
     /**
      * Models.
      *
      * @var array
      */
-    protected $models = [
-        PayGlocalTransaction::class,
-    ];
+    protected $models = [];
 }

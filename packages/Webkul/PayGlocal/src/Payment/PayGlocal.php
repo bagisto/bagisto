@@ -206,6 +206,21 @@ class PayGlocal extends Payment
     }
 
     /**
+     * Read the cart back out of a merchant transaction id.
+     *
+     * The cart is carried in the reference PayGlocal echoes back rather than kept in a
+     * table of our own, which is how the other gateways find their way back to a cart.
+     */
+    public function parseCartId(?string $merchantTxnId): ?int
+    {
+        if (! preg_match('/^PGL(\d+)T/', (string) $merchantTxnId, $matches)) {
+            return null;
+        }
+
+        return (int) $matches[1];
+    }
+
+    /**
      * Initiate a hosted checkout payment.
      */
     public function initiatePayment($cart, string $merchantTxnId): ?array
@@ -224,10 +239,7 @@ class PayGlocal extends Payment
             'merchantCallbackURL' => route('payglocal.callback'),
         ]);
 
-        if (
-            empty($response['data']['redirectUrl'])
-            || empty($response['data']['statusUrl'])
-        ) {
+        if (empty($response['data']['redirectUrl'])) {
             return null;
         }
 
@@ -237,47 +249,87 @@ class PayGlocal extends Payment
     }
 
     /**
-     * Fetch the authoritative status of a transaction from PayGlocal.
+     * Fetch the authoritative status of a payment from PayGlocal.
+     *
+     * Addressed by the identifier PayGlocal issues rather than the one-off status URL it
+     * hands back, so nothing has to be held between sending the customer away and hearing
+     * back about them.
      */
-    public function getTransactionStatus(?string $statusUrl): ?array
+    public function getTransactionStatus(?string $gid): ?array
     {
-        if (empty($statusUrl)) {
+        if (empty($gid)) {
             return null;
         }
 
-        try {
-            $response = Http::acceptJson()->get($statusUrl);
+        return $this->request('GET', '/gl/v1/payments/'.$gid.'/status');
+    }
 
-            if ($response->failed()) {
-                logger()->error('PayGlocal status check failed.', ['response' => $response->body()]);
+    /**
+     * Read the merchant transaction id back out of a status response.
+     */
+    public function getReportedMerchantTxnId(?array $response): ?string
+    {
+        return $response['data']['merchantTxnId'] ?? $response['merchantTxnId'] ?? null;
+    }
 
-                return null;
+    /**
+     * Read the amount PayGlocal reports having taken, when it reports one.
+     */
+    public function getCapturedAmount(?array $response): ?float
+    {
+        foreach (['Amount', 'amount', 'totalAmount'] as $key) {
+            $amount = $response['data'][$key] ?? $response[$key] ?? null;
+
+            if (is_numeric($amount)) {
+                return (float) $amount;
             }
-
-            return $response->json();
-        } catch (\Exception $e) {
-            report($e);
-
-            return null;
         }
+
+        return null;
+    }
+
+    /**
+     * Read the currency PayGlocal reports having charged in, when it reports one.
+     */
+    public function getCapturedCurrency(?array $response): ?string
+    {
+        foreach (['txnCurrency', 'currency'] as $key) {
+            $currency = $response['data'][$key] ?? $response[$key] ?? null;
+
+            if (! empty($currency)) {
+                return strtoupper((string) $currency);
+            }
+        }
+
+        return null;
     }
 
     /**
      * Send a signed and encrypted request to PayGlocal.
      */
-    protected function request(string $method, string $endpoint, array $payload): ?array
+    protected function request(string $method, string $endpoint, ?array $payload = null): ?array
     {
         try {
-            $jwe = $this->crypto->encrypt($payload);
+            /**
+             * A read carries no body, so there is nothing to encrypt and nothing for the
+             * signature to digest - the endpoint is authenticated by the signed header alone.
+             */
+            $jwe = $payload === null ? null : $this->crypto->encrypt($payload);
 
-            $jws = $this->crypto->sign($jwe);
+            $jws = $jwe === null
+                ? $this->crypto->signPath($endpoint)
+                : $this->crypto->sign($jwe);
 
-            $response = Http::withHeaders([
+            $request = Http::withHeaders(array_filter([
                 'x-gl-token-external' => $jws,
-                'Content-Type' => 'text/plain',
-            ])
-                ->withBody($jwe, 'text/plain')
-                ->send($method, $this->getBaseUrl().$endpoint);
+                'Content-Type' => $jwe === null ? null : 'text/plain',
+            ]));
+
+            if ($jwe !== null) {
+                $request = $request->withBody($jwe, 'text/plain');
+            }
+
+            $response = $request->send($method, $this->getBaseUrl().$endpoint);
 
             if ($response->failed()) {
                 logger()->error('PayGlocal request failed.', [

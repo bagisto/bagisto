@@ -362,16 +362,16 @@ it('reads the redirect and status urls out of an initiated payment', function ()
         ->and($response['statusUrl'])->toContain('/status?x-gl-token=token');
 });
 
-it('refuses an initiated payment that carries no status url', function () {
+it('refuses an initiated payment that carries nowhere to send the customer', function () {
     // Arrange
-    // Without a status url the payment could never be verified again, so it must not be started.
+    // Without a redirect url there is no hosted checkout to reach, so it must not be started.
     configureCredentials();
 
     Http::fake([
         '*/gl/v1/payments/initiate/paycollect' => Http::response([
             'gid' => 'gl_o-test',
             'data' => [
-                'redirectUrl' => 'https://api.uat.pygcl.com/gl/payflow-ui/?x-gl-token=token',
+                'statusUrl' => 'https://api.uat.pygcl.com/gl/v1/payments/gl_o-test/status?x-gl-token=token',
             ],
         ], 200),
     ]);
@@ -404,6 +404,8 @@ it('returns null when payglocal rejects the initiate request', function () {
 
 it('reads the payment status out of the status api', function () {
     // Arrange
+    configureCredentials();
+
     Http::fake([
         '*/status*' => Http::response([
             'gid' => 'gl_a1c7fa4ddc487f1cf25uut0lTX2',
@@ -422,7 +424,7 @@ it('reads the payment status out of the status api', function () {
     ]);
 
     // Act
-    $response = $this->payGlocal->getTransactionStatus('https://api.uat.pygcl.com/gl/v1/payments/gl_o-test/status?x-gl-token=token');
+    $response = $this->payGlocal->getTransactionStatus('gl_o-test');
 
     // Assert
     expect($response['status'])->toBe('SENT_FOR_CAPTURE')
