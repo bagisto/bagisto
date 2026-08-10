@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'পেমেন্ট ব্যর্থ হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।',
         'payment-success' => 'পেমেন্ট সফলভাবে সম্পন্ন হয়েছে!',
         'provide-credentials' => 'অনুগ্রহ করে অ্যাডমিন প্যানেলে PayU মার্চেন্ট কী এবং Salt কনফিগার করুন।',
+        'supported-currency-error' => 'মুদ্রা :currency সমর্থিত নয়। সমর্থিত মুদ্রাসমূহ: :supportedCurrencies.',
     ],
 ];

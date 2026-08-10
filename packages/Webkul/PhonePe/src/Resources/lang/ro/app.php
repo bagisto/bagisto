@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Tranzacție invalidă. Vă rugăm să încercați din nou.',
         'payment-success' => 'Plata a fost efectuată cu succes. Comanda dumneavoastră a fost plasată.',
         'order-creation-failed' => 'A apărut o problemă la crearea comenzii după plată. Vă rugăm să contactați asistența.',
+        'supported-currency-error' => 'Valuta :currency nu este acceptată. Valute acceptate: :supportedCurrencies.',
     ],
 ];

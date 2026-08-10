@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
     lang="{{ app()->getLocale() }}"
-    dir="{{ in_array(app()->getLocale(), ['ar', 'fa', 'he']) ? 'rtl' : 'ltr' }}"
+    dir="{{ \Webkul\Core\Helpers\SupportedLocales::direction(app()->getLocale()) }}"
 >
     <head>
         <title>

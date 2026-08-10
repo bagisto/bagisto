@@ -14,6 +14,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed the Bahraini Dinar being seeded with the text "BHD" in place of its symbol, which a repeated entry in the currency list had been overwriting.
 
+- Fixed PayU and PhonePe starting a payment in any currency, when both settle only in Indian Rupees — a store on a currency without two decimal places was charged a hundred times over. Either now refuses a cart it cannot settle, so a store on another currency will find them declining at checkout rather than taking the wrong amount.
+
 - Added the missing Romanian translations for PhonePe.
 
 ## **v2.4.9 (5th of August 2026)** - *Release*

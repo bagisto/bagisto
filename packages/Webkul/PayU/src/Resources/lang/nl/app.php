@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'Betaling mislukt. Probeer het opnieuw.',
         'payment-success' => 'Betaling succesvol voltooid!',
         'provide-credentials' => 'Configureer de PayU Merchant Key en Salt in het beheerpaneel.',
+        'supported-currency-error' => 'Valuta :currency wordt niet ondersteund. Ondersteunde valuta\'s: :supportedCurrencies.',
     ],
 ];
