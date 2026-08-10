@@ -10,6 +10,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed resending an EU withdrawal confirmation answering the admin in the customer's language, because the locale switched for the email was still in place when the message was built.
 
+- Locales and currencies are now listed in one place, shared by the console and web installers, the seeders and the translation checker, so adding either takes one entry rather than five.
+
+- Fixed the Bahraini Dinar being seeded with the text "BHD" in place of its symbol, which a repeated entry in the currency list had been overwriting.
+
+- Added the missing Romanian translations for PhonePe.
+
 ## **v2.4.9 (5th of August 2026)** - *Release*
 
 - Security fixes.
