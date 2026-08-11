@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'Pembayaran gagal. Silakan coba lagi.',
         'payment-success' => 'Pembayaran berhasil diselesaikan!',
         'provide-credentials' => 'Harap konfigurasikan Kunci Merchant dan Salt PayU di panel admin.',
+        'supported-currency-error' => 'Mata uang :currency tidak didukung. Mata uang yang didukung: :supportedCurrencies.',
     ],
 ];

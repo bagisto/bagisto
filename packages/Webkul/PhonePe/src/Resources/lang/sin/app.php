@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'අවලංගු ගනුදෙනුව. කරුණාකර නැවත උත්සාහ කරන්න.',
         'payment-success' => 'ඔබේ ගිණුම් ගෙවීම සාර්ථක විය. ඔබේ ඇණවුම සිටුවා ඇත.',
         'order-creation-failed' => 'ගිණුම් ගෙවීමෙන් පසු ඔබේ ඇණවුම සිටුවීමේ අසාර්ථකතාවි. කරුණාකර සහය සම්බන්ධ කරන්න.',
+        'supported-currency-error' => 'මුදල් :currency සහාය නොදක්වයි. සහාය දක්වන මුදල්: :supportedCurrencies.',
     ],
 ];

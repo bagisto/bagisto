@@ -38,6 +38,7 @@
 │   ├── Stripe/                 # Stripe integration
 │   ├── Razorpay/               # Razorpay integration
 │   ├── PayU/                   # PayU integration
+│   ├── PayGlocal/              # PayGlocal integration
 │   ├── Shipping/               # Base shipping carriers
 │   ├── Inventory/              # Stock management
 │   ├── CartRule/               # Cart promotion rules

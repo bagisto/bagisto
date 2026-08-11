@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'התשלום נכשל. אנא נסה שוב.',
         'payment-success' => 'התשלום הושלם בהצלחה!',
         'provide-credentials' => 'אנא הגדר את מפתח הסוחר ו-Salt של PayU בפאנל הניהול.',
+        'supported-currency-error' => 'המטבע :currency אינו נתמך. מטבעות נתמכים: :supportedCurrencies.',
     ],
 ];

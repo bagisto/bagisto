@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'Payment failed. Please try again.',
         'payment-success' => 'Payment completed successfully!',
         'provide-credentials' => 'Please configure PayU Merchant Key and Salt in the admin panel.',
+        'supported-currency-error' => 'The currency :currency is not supported. Supported Currencies: :supportedCurrencies.',
     ],
 ];

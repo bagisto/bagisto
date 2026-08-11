@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => '无效的交易。 请重试。',
         'payment-success' => '您的付款成功。 您的订单已下达。',
         'order-creation-failed' => '付款后创建您的订单时出现问题。 请联系支持。',
+        'supported-currency-error' => '货币 :currency 不受支持。支持的货币有: :supportedCurrencies.',
     ],
 ];

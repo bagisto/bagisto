@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Ungültige Transaktion. Bitte versuchen Sie es erneut.',
         'payment-success' => 'Ihre Zahlung war erfolgreich. Ihre Bestellung wurde aufgegeben.',
         'order-creation-failed' => 'Es gab ein Problem beim Erstellen Ihrer Bestellung nach der Zahlung. Bitte kontaktieren Sie den Support.',
+        'supported-currency-error' => 'Die Währung :currency wird nicht unterstützt. Unterstützte Währungen: :supportedCurrencies.',
     ],
 ];

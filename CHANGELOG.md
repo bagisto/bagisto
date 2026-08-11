@@ -2,7 +2,25 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Added the PayGlocal payment gateway. Customers pay on PayGlocal's hosted checkout and return through a signed token, the outcome is confirmed with PayGlocal before an order is placed, and a webhook settles the payment if the customer never comes back.
+
+- Fixed customer and cart reporting counting all guests as a single shopper, which understated unique customers and piled every guest's spend onto one row of the "most sales" and "most orders" listings.
+
+- Fixed resending an EU withdrawal confirmation answering the admin in the customer's language, because the locale switched for the email was still in place when the message was built.
+
+- Locales and currencies are now listed in one place, shared by the console and web installers, the seeders and the translation checker, so adding either takes one entry rather than five.
+
+- Fixed the Bahraini Dinar being seeded with the text "BHD" in place of its symbol, which a repeated entry in the currency list had been overwriting.
+
+- Fixed PayU and PhonePe starting a payment in any currency, when both settle only in Indian Rupees — a store on a currency without two decimal places was charged a hundred times over. Either now refuses a cart it cannot settle, so a store on another currency will find them declining at checkout rather than taking the wrong amount.
+
+- Added the missing Romanian translations for PhonePe.
+
 ## **v2.4.9 (5th of August 2026)** - *Release*
+
+- Security fixes.
 
 - Enhanced Data Transfer imports. Saving an import now runs it through to the end on its own — validate, fetch images, create, link, index — with a stepper and live progress for each phase, instead of a separate click per phase. Validation runs in windows, either browser-driven or dispatched across the queue workers, so a large file no longer has to be validated in one request. Product images can now come from links in the sheet, a ZIP uploaded with the import, or a directory on the server, saved on the import so reopening it restores the choice; links are fetched once each in a phase of their own before any row is written. The chosen image source is validated against the file, so a mismatch is reported during validation rather than silently importing every product without images. Also fixed a queued import re-dispatching its whole job chain on every poll, which ran the same rows two or three times over — booking the repeats as updates and deadlocking against itself — and fixed the runs that could stall for good in the image or create phase, which now complete what they can and report the batches that did not.
 
@@ -22,8 +40,6 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Turned the speculation rules off by default. They have the browser fetch pages nobody has opened yet, which costs bandwidth and shows up as traffic on pages that were never visited, so a store now opts in.
 
-- Sanitized the product description in the JSON-LD rich-snippet output, which previously emitted it unescaped.
-
 - Fixed an inactive cart still being assigned from the session.
 
 - Reworked the admin menu to support three levels, and tidied the category and role trees.
@@ -33,6 +49,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Removed the operator selector from multiselect and checkbox conditions on cart rules, where it had no meaning.
 
 - Refined Playwright testcases.
+
+- #11400 [fixed] - Sanitized the product description in the JSON-LD rich-snippet output, which previously emitted it unescaped.
+
+- #11387 [fixed] - Fixed the demo products being absent from the storefront when the install locale did not include English, while still listed in the admin. The seeder wrote each product's non-translatable attributes — status, visibility, price, sku and the variant options — only on the English pass, so choosing any other locale on its own left those values unwritten and every product failed the storefront's status and visibility checks.
+
+- #11380 [fixed] - Fixed product duplication not carrying the customizable options, their labels, or their prices over to the copy. The label is a translated value held in its own table, so it needs replicating alongside the option rather than travelling with it — every locale's label is now copied.
 
 ## **v2.4.8 (8th of July 2026)** - *Release*
 

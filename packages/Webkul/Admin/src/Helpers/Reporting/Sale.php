@@ -677,7 +677,7 @@ class Sale extends AbstractReporting
             ->resetModel()
             ->whereIn('channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
-            ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
+            ->groupBy(['customer_email', 'customer_id'])
             ->get()
             ->count();
     }

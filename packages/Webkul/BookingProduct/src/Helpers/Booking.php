@@ -510,7 +510,7 @@ class Booking
     /**
      * Returns true if the cart item is inactive.
      *
-     * @param  \Webkul\Checkout\Contracts\CartItem|array  $cartItem
+     * @param  \Webkul\Checkout\Contracts\CartItem|array  $item
      */
     public function isCartItemInactive($item): bool
     {

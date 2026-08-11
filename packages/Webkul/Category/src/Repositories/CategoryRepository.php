@@ -105,7 +105,6 @@ class CategoryRepository extends Repository
      * Update category.
      *
      * @param  int  $id
-     * @param  string  $attribute
      * @return Category
      */
     public function update(array $data, $id)
