@@ -109,6 +109,9 @@ class PayUController extends Controller
 
             Cart::collectTotals();
 
+            // Re-fetch: collectTotals() ends with an internal refresh; reusing the pre-refresh reference here would serialize stale cart state.
+            $cart = Cart::getCart();
+
             $data = (new OrderResource($cart))->jsonSerialize();
 
             $data['payment']['additional'] = [
