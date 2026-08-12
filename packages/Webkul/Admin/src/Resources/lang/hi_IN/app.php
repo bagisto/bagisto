@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty उपलब्ध',
                     'sku' => 'स्टॉक यूनिट कोड (SKU)',
                     'sku-value' => 'स्टॉक यूनिट कोड (SKU) - :sku',
+                    'stock-disabled' => 'स्टॉक अक्षम',
                     'status' => 'स्थिति',
                     'type' => 'प्रकार',
                     'update-status' => 'स्थिति अपडेट करें',

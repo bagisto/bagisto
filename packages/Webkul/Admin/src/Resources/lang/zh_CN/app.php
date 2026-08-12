@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty 可用',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => '库存管理已禁用',
                     'status' => '状态',
                     'type' => '类型',
                     'update-status' => '更新状态',

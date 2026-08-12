@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty در دسترس است',
                     'sku' => 'شناسه SKU',
                     'sku-value' => 'شناسه SKU - :sku',
+                    'stock-disabled' => 'موجودی غیرفعال است',
                     'status' => 'وضعیت',
                     'type' => 'نوع',
                     'update-status' => 'به‌روزرسانی وضعیت',

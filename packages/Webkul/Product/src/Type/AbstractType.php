@@ -457,6 +457,16 @@ abstract class AbstractType
     }
 
     /**
+     * Return true if a stock of this product can be kept and counted.
+     *
+     * Not `isStockable()`, which answers whether an order has anything to ship.
+     */
+    public function isInventoryManageable(): bool
+    {
+        return ! in_array('manage_stock', $this->skipAttributes);
+    }
+
+    /**
      * Return true if this product can be composite.
      *
      * @return bool

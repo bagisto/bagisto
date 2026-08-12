@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty в наявності',
                     'sku' => 'Артикул',
                     'sku-value' => 'Артикул - :sku',
+                    'stock-disabled' => 'Облік залишків вимкнено',
                     'status' => 'Статус',
                     'type' => 'Тип',
                     'update-status' => 'Оновити статус',

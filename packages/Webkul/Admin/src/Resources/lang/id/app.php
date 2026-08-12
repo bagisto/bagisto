@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty Tersedia',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'Stok Dinonaktifkan',
                     'status' => 'Status',
                     'type' => 'Tipe',
                     'update-status' => 'Perbarui Status',

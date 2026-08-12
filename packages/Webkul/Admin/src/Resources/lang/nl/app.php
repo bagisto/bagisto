@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty Beschikbaar',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'Voorraad uitgeschakeld',
                     'status' => 'Status',
                     'type' => 'Type',
                     'update-status' => 'Status bijwerken',

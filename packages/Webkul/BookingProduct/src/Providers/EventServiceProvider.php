@@ -3,6 +3,8 @@
 namespace Webkul\BookingProduct\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\BookingProduct\Listeners\Order;
+use Webkul\BookingProduct\Listeners\PriceNote;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,11 +15,11 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'checkout.order.save.after' => [
-            'Webkul\BookingProduct\Listeners\Order@afterPlaceOrder',
+            [Order::class, 'afterPlaceOrder'],
         ],
 
         'bagisto.shop.products.price.after' => [
-            'Webkul\BookingProduct\Listeners\PriceNote@addNote',
+            [PriceNote::class, 'addNote'],
         ],
     ];
 }

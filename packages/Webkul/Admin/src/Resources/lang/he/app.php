@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty זמינים',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'מלאי מושבת',
                     'status' => 'מצב',
                     'type' => 'סוג',
                     'update-status' => 'עדכן מצב',

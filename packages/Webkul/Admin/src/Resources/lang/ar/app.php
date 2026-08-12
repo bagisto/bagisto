@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty متوفرة',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'المخزون معطّل',
                     'status' => 'الحالة',
                     'type' => 'النوع',
                     'update-status' => 'تحديث الحالة',

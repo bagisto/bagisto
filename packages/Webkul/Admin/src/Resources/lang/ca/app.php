@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty Disponible',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'Estoc desactivat',
                     'status' => 'Estat',
                     'type' => 'Tipus',
                     'update-status' => 'Actualitzar estat',

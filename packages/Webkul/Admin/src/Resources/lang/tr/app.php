@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty Mevcut',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'Stok devre dışı',
                     'status' => 'Durum',
                     'type' => 'Tür',
                     'update-status' => 'Durumu Güncelle',

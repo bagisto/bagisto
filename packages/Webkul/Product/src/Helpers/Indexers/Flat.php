@@ -2,6 +2,8 @@
 
 namespace Webkul\Product\Helpers\Indexers;
 
+use Closure;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Helpers\ProductType;
@@ -11,6 +13,8 @@ use Webkul\Product\Repositories\ProductRepository;
 class Flat extends AbstractIndexer
 {
     /**
+     * Batch size.
+     *
      * @var int
      */
     private $batchSize;
@@ -29,19 +33,21 @@ class Flat extends AbstractIndexer
     ];
 
     /**
+     * Flat columns.
+     *
      * @var array
      */
     protected $flatColumns = [];
 
     /**
-     * Channels
+     * Channels.
      *
      * @var array
      */
     protected $channels = [];
 
     /**
-     * Family Attributes
+     * Family attributes.
      *
      * @var array
      */
@@ -62,7 +68,7 @@ class Flat extends AbstractIndexer
     }
 
     /**
-     * Reindex all products
+     * Reindex all products.
      *
      * @return void
      */
@@ -92,7 +98,7 @@ class Flat extends AbstractIndexer
     }
 
     /**
-     * Reindex products by batch size
+     * Reindex products by batch size.
      *
      * @return void
      */
@@ -104,7 +110,7 @@ class Flat extends AbstractIndexer
     }
 
     /**
-     * Refresh product flat indices
+     * Refresh product flat indices.
      *
      * @param  Product  $product
      * @return void
@@ -113,13 +119,17 @@ class Flat extends AbstractIndexer
     {
         $this->updateOrCreate($product);
 
-        if (! ProductType::hasVariants($product->type)) {
-            return;
+        $productIds = [$product->id];
+
+        if (ProductType::hasVariants($product->type)) {
+            foreach ($product->variants()->get() as $variant) {
+                $this->updateOrCreate($variant);
+
+                $productIds[] = $variant->id;
+            }
         }
 
-        foreach ($product->variants()->get() as $variant) {
-            $this->updateOrCreate($variant);
-        }
+        $this->refreshDerivedColumns($productIds);
     }
 
     /**
@@ -179,7 +189,11 @@ class Flat extends AbstractIndexer
 
                         $productAttributeValue = $productAttributeValues->first();
 
-                        $productFlat->{$attribute->code} = $productAttributeValue[$attribute->column_name] ?? null;
+                        /**
+                         * Same fallback as `Product::getCustomAttributeValue()`, so an attribute a
+                         * product never saved reads the same off the flat table as off the model.
+                         */
+                        $productFlat->{$attribute->code} = $productAttributeValue[$attribute->column_name] ?? $attribute->default_value;
                     }
 
                     $productFlat->save();
@@ -193,6 +207,63 @@ class Flat extends AbstractIndexer
                 }
             }
         }
+    }
+
+    /**
+     * Refresh the flat columns derived from other tables rather than from an attribute.
+     *
+     * @param  array|Closure|null  $productIds  Every product when null, none when an empty array,
+     *                                          so a caller that found nothing cannot rewrite the
+     *                                          table. A closure scopes a large set without listing
+     *                                          its ids.
+     */
+    public function refreshDerivedColumns(array|Closure|null $productIds = null): void
+    {
+        if (
+            is_array($productIds)
+            && empty($productIds)
+        ) {
+            return;
+        }
+
+        $tablePrefix = DB::getTablePrefix();
+
+        $query = DB::table('product_flat');
+
+        if (! is_null($productIds)) {
+            $query->whereIn('product_id', $productIds);
+        }
+
+        $query->update([
+            'quantity' => DB::raw(
+                '(SELECT SUM(qty) FROM '.$tablePrefix.'product_inventories'
+                .' WHERE product_id = '.$tablePrefix.'product_flat.product_id)'
+            ),
+
+            'images_count' => DB::raw(
+                '(SELECT COUNT(*) FROM '.$tablePrefix.'product_images'
+                .' WHERE product_id = '.$tablePrefix.'product_flat.product_id)'
+            ),
+
+            'base_image' => DB::raw(
+                '(SELECT path FROM '.$tablePrefix.'product_images'
+                .' WHERE product_id = '.$tablePrefix.'product_flat.product_id'
+                .' ORDER BY id LIMIT 1)'
+            ),
+
+            'attribute_family_name' => DB::raw(
+                '(SELECT name FROM '.$tablePrefix.'attribute_families'
+                .' WHERE id = '.$tablePrefix.'product_flat.attribute_family_id)'
+            ),
+
+            'category_name' => DB::raw(
+                '(SELECT GROUP_CONCAT(ct.name ORDER BY ct.category_id SEPARATOR \', \')'
+                .' FROM '.$tablePrefix.'product_categories pc'
+                .' INNER JOIN '.$tablePrefix.'category_translations ct'
+                .' ON ct.category_id = pc.category_id AND ct.locale = '.$tablePrefix.'product_flat.locale'
+                .' WHERE pc.product_id = '.$tablePrefix.'product_flat.product_id)'
+            ),
+        ]);
     }
 
     /**

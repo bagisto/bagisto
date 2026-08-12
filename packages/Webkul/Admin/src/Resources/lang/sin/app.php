@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty ලබා ගත හැක',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'තොග කළමනාකරණය අක්‍රියයි',
                     'status' => 'තත්ත්වය',
                     'type' => 'වර්ගය',
                     'update-status' => 'ස්ථාන තත්ත්වය වෙනස් කරන්න',

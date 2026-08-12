@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty প্রাপ্য',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'স্টক নিষ্ক্রিয়',
                     'status' => 'স্থিতি',
                     'type' => 'প্রকার',
                     'update-status' => 'স্থিতি আপডেট করুন',

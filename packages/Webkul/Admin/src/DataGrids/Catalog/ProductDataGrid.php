@@ -10,6 +10,7 @@ use Webkul\Admin\Exports\ProductDataGridExport;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\DataGrid\DataGrid;
+use Webkul\Marketing\Repositories\SearchSynonymRepository;
 use Webkul\Product\Helpers\Product;
 
 class ProductDataGrid extends DataGrid
@@ -22,11 +23,14 @@ class ProductDataGrid extends DataGrid
     protected $primaryColumn = 'product_id';
 
     /**
-     * Constructor for the class.
+     * Create a new datagrid instance.
      *
      * @return void
      */
-    public function __construct(protected AttributeFamilyRepository $attributeFamilyRepository) {}
+    public function __construct(
+        protected AttributeFamilyRepository $attributeFamilyRepository,
+        protected SearchSynonymRepository $searchSynonymRepository
+    ) {}
 
     /**
      * Prepare query builder.
@@ -35,27 +39,10 @@ class ProductDataGrid extends DataGrid
      */
     public function prepareQueryBuilder()
     {
-        $tablePrefix = DB::getTablePrefix();
-
-        /**
-         * Query Builder to fetch records from `product_flat` table
-         */
         $queryBuilder = DB::table('product_flat')
-            ->distinct()
-            ->leftJoin('attribute_families as af', 'product_flat.attribute_family_id', '=', 'af.id')
-            ->leftJoin('product_inventories', 'product_flat.product_id', '=', 'product_inventories.product_id')
-            ->leftJoin('product_images', 'product_flat.product_id', '=', 'product_images.product_id')
-            ->leftJoin('product_categories as pc', 'product_flat.product_id', '=', 'pc.product_id')
-            ->leftJoin('category_translations as ct', function ($leftJoin) {
-                $leftJoin->on('pc.category_id', '=', 'ct.category_id')
-                    ->where('ct.locale', app()->getLocale());
-            })
             ->select(
                 'product_flat.locale',
                 'product_flat.channel',
-                'product_images.path as base_image',
-                'pc.category_id',
-                'ct.name as category_name',
                 'product_flat.product_id',
                 'product_flat.sku',
                 'product_flat.name',
@@ -64,20 +51,16 @@ class ProductDataGrid extends DataGrid
                 'product_flat.price',
                 'product_flat.url_key',
                 'product_flat.visible_individually',
-                'af.name as attribute_family',
+                'product_flat.quantity',
+                'product_flat.images_count',
+                'product_flat.base_image',
+                'product_flat.manage_stock',
+                'product_flat.category_name',
+                'product_flat.attribute_family_name as attribute_family',
             )
-            ->addSelect(DB::raw('SUM(DISTINCT '.$tablePrefix.'product_inventories.qty) as quantity'))
-            ->addSelect(DB::raw('COUNT(DISTINCT '.$tablePrefix.'product_images.id) as images_count'))
-            ->where('product_flat.locale', app()->getLocale())
-            ->groupBy('product_flat.product_id');
+            ->where('product_flat.locale', app()->getLocale());
 
-        $this->addFilter('product_id', 'product_flat.product_id');
-        $this->addFilter('channel', 'product_flat.channel');
-        $this->addFilter('locale', 'product_flat.locale');
-        $this->addFilter('name', 'product_flat.name');
-        $this->addFilter('type', 'product_flat.type');
-        $this->addFilter('status', 'product_flat.status');
-        $this->addFilter('attribute_family', 'af.id');
+        $this->addFilter('attribute_family', 'attribute_family_id');
 
         return $queryBuilder;
     }
@@ -286,7 +269,56 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Process request.
+     * Return the Elasticsearch clause matching one requested filter.
+     */
+    public function getFilterValue(mixed $attribute, mixed $values): array
+    {
+        switch ($attribute) {
+            case 'product_id':
+                return [
+                    'terms' => [
+                        'id' => $values,
+                    ],
+                ];
+
+            case 'attribute_family':
+                return [
+                    'terms' => [
+                        'attribute_family_id' => $values,
+                    ],
+                ];
+
+            case 'sku':
+            case 'name':
+                $filters = [];
+
+                foreach ($values as $value) {
+                    $terms = $attribute === 'name'
+                        ? $this->searchSynonymRepository->getSynonymsByQuery($value)
+                        : [$value];
+
+                    foreach ($terms as $term) {
+                        $filters['bool']['should'][] = [
+                            'match_phrase_prefix' => [
+                                $attribute => $term,
+                            ],
+                        ];
+                    }
+                }
+
+                return $filters;
+
+            default:
+                return [
+                    'terms' => [
+                        $attribute => $values,
+                    ],
+                ];
+        }
+    }
+
+    /**
+     * Process the request through Elasticsearch when the admin grid is set to search with it.
      */
     protected function processRequest(): void
     {
@@ -362,7 +394,7 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Process request.
+     * Return the Elasticsearch filters for every requested datagrid filter.
      */
     protected function getElasticFilters($params): array
     {
@@ -384,60 +416,16 @@ class ProductDataGrid extends DataGrid
     }
 
     /**
-     * Return applied filters
-     */
-    public function getFilterValue(mixed $attribute, mixed $values): array
-    {
-        switch ($attribute) {
-            case 'product_id':
-                return [
-                    'terms' => [
-                        'id' => $values,
-                    ],
-                ];
-
-            case 'attribute_family':
-                return [
-                    'terms' => [
-                        'attribute_family_id' => $values,
-                    ],
-                ];
-
-            case 'sku':
-            case 'name':
-                $filters = [];
-
-                foreach ($values as $value) {
-                    $filters['bool']['should'][] = [
-                        'match_phrase_prefix' => [
-                            $attribute => $value,
-                        ],
-                    ];
-                }
-
-                return $filters;
-
-            default:
-                return [
-                    'terms' => [
-                        $attribute => $values,
-                    ],
-                ];
-        }
-    }
-
-    /**
-     * Process request.
+     * Return the Elasticsearch sort for the requested column.
+     *
+     * Analyzed text is sorted on the untouched copy beside it, and a column the index has never
+     * held leaves the results unordered rather than failing the request.
      */
     protected function getElasticSort($params): array
     {
         $sort = $params['column'] ?? $this->primaryColumn;
 
-        if ($sort == 'type') {
-            $sort .= '.keyword';
-        }
-
-        if ($sort == 'name') {
+        if (in_array($sort, ['name', 'sku', 'type'])) {
             $sort .= '.keyword';
         }
 
@@ -452,6 +440,7 @@ class ProductDataGrid extends DataGrid
         return [
             $sort => [
                 'order' => $params['order'] ?? $this->sortOrder,
+                'unmapped_type' => 'keyword',
             ],
         ];
     }

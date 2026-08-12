@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty 個の利用可能',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => '在庫管理なし',
                     'status' => 'ステータス',
                     'type' => 'タイプ',
                     'update-status' => 'ステータスを更新',

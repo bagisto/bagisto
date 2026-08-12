@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty Disponible',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'Stock desactivado',
                     'status' => 'Estado',
                     'type' => 'Tipo',
                     'update-status' => 'Actualizar estado',

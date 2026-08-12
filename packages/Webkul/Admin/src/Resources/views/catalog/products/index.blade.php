@@ -1,3 +1,22 @@
+@php
+    $types = collect(config('product_types'))->map(fn ($type) => app($type['class']));
+
+    // A composite keeps its stock on its children, so it has no count of its own to show.
+    $stockOnChildrenTypes = $types->filter->isComposite()->keys()->all();
+
+    // A type that keeps stock at all is left to the per-record `manage_stock` instead.
+    $stockDisabledTypes = $types
+        ->reject->isComposite()
+        ->reject->isInventoryManageable()
+        ->keys()
+        ->all();
+
+    /**
+     * Render type keys as a JavaScript array literal.
+     */
+    $asJsArray = fn (array $types) => "['".implode("', '", $types)."']";
+@endphp
+
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.catalog.products.index.title')
@@ -218,9 +237,17 @@
                                     </p>
 
                                     <div>
-                                        <div v-if="['configurable', 'bundle', 'grouped' , 'booking'].includes(record.type)">
+                                        <div v-if="{!! $asJsArray($stockOnChildrenTypes) !!}.includes(record.type)">
                                             <p class="text-xs text-gray-600 dark:text-gray-300 sm:text-sm">
                                                 <span class="text-red-600">N/A</span>
+                                            </p>
+                                        </div>
+
+                                        <div v-else-if="{!! $asJsArray($stockDisabledTypes) !!}.includes(record.type) || ! Number(record.manage_stock)">
+                                            <p class="text-xs text-gray-600 dark:text-gray-300 sm:text-sm">
+                                                <span class="text-gray-500 dark:text-gray-400">
+                                                    @lang('admin::app.catalog.products.index.datagrid.stock-disabled')
+                                                </span>
                                             </p>
                                         </div>
 
@@ -330,9 +357,17 @@
                                 </p>
 
                                 <!-- Parent Product Quantity -->
-                                <div v-if="['configurable', 'bundle', 'grouped' , 'booking'].includes(record.type)">
+                                <div v-if="{!! $asJsArray($stockOnChildrenTypes) !!}.includes(record.type)">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span class="text-red-600">N/A</span>
+                                    </p>
+                                </div>
+
+                                <div v-else-if="{!! $asJsArray($stockDisabledTypes) !!}.includes(record.type) || ! Number(record.manage_stock)">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        <span class="text-gray-500 dark:text-gray-400">
+                                            @lang('admin::app.catalog.products.index.datagrid.stock-disabled')
+                                        </span>
                                     </p>
                                 </div>
 

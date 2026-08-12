@@ -1172,6 +1172,7 @@ return [
                     'qty-value' => ':qty Disponibili',
                     'sku' => 'SKU',
                     'sku-value' => 'SKU - :sku',
+                    'stock-disabled' => 'Giacenza disattivata',
                     'status' => 'Stato',
                     'type' => 'Tipo',
                     'update-status' => 'Aggiorna Stato',

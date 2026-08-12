@@ -136,8 +136,6 @@ class ElasticSearchRepository
             case AttributeTypeEnum::BOOLEAN->value:
                 $values = array_map('intval', explode(',', $params[$attribute->code]));
 
-                $values = array_map('intval', explode(',', $params[$attribute->code]));
-
                 return [
                     'terms' => [
                         $attribute->code => $values,
@@ -161,18 +159,17 @@ class ElasticSearchRepository
                 ];
 
             case AttributeTypeEnum::TEXT->value:
-                $synonyms = $this->searchSynonymRepository->getSynonymsByQuery($params[$attribute->code]);
+                $filter = [];
 
-                $synonyms = array_map(function ($synonym) {
-                    return '"'.$synonym.'"';
-                }, $synonyms);
+                foreach ($this->searchSynonymRepository->getSynonymsByQuery($params[$attribute->code]) as $synonym) {
+                    $filter['bool']['should'][] = [
+                        'match_phrase_prefix' => [
+                            $attribute->code => $synonym,
+                        ],
+                    ];
+                }
 
-                return [
-                    'query_string' => [
-                        'query' => implode(' OR ', $synonyms),
-                        'default_field' => $attribute->code,
-                    ],
-                ];
+                return $filter;
 
             case AttributeTypeEnum::SELECT->value:
                 $filter[]['terms'][$attribute->code] = explode(',', $params[$attribute->code]);

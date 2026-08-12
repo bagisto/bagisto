@@ -18,6 +18,20 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added the missing Romanian translations for PhonePe.
 
+- Fixed the admin product datagrid ignoring search synonyms while the mega search honoured them, so the same word found different products in the two places.
+
+- Fixed the mega search leaving you on an empty tab when another tab had results, which read as nothing being found. It now opens the first tab that matched.
+
+- Products that keep no stock are now listed as "Stock Disabled" rather than "Out of Stock", read from the product's own manage-inventory setting rather than assumed from its type.
+
+- The admin product datagrid no longer joins and groups over five tables to draw a page. Quantity, image count, base image, category names, family name and the manage-inventory flag are kept on the flat table and refreshed as their sources change — including on refunds, order cancellations, imports, category and family renames, and inventory-source deletion, which previously left the grid showing figures no longer true.
+
+- Fixed the Category column showing one arbitrary category for a product filed under several; it now lists them all.
+
+- Fixed a full Elasticsearch reindex leaving behind documents whose product had been deleted. The admin grid pages on the count Elasticsearch reports, so those documents claimed a total the grid could not fill and scattered blank pages through the listing.
+
+- Fixed sorting the admin product datagrid by SKU or quantity failing outright in Elasticsearch mode, and sorting on a column an older index has never held now leaves the order alone instead of erroring.
+
 ## **v2.4.9 (5th of August 2026)** - *Release*
 
 - Security fixes.
