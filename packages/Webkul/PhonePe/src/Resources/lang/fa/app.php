@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'تراکنش نامعتبر. لطفا دوباره تلاش کنید.',
         'payment-success' => 'پرداخت شما موفقیت آمیز بود. سفارش شما ثبت شده است.',
         'order-creation-failed' => 'مشکلی در ایجاد سفارش شما پس از پرداخت وجود داشت. لطفا با پشتیبانی تماس بگیرید.',
+        'supported-currency-error' => 'ارز :currency پشتیبانی نمی‌شود. ارزهای پشتیبانی شده: :supportedCurrencies.',
     ],
 ];

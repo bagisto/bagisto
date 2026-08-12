@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'සිංහල බාගතු කිරීම්',
                 'status' => 'තත්ත්වය',
                 'title' => 'බාගත කිරීම්',
+                'unlimited' => 'අසීමිත',
             ],
 
             'wishlist' => [

@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Transakcja jest nieprawidłowa. Proszę spróbuj ponownie.',
         'payment-success' => 'Twoja płatność była pomyślna. Twoje zamówienie zostało złożone.',
         'order-creation-failed' => 'Podczas tworzenia zamówienia po płatności pojawił się problem. Prosimy skontaktować się z pomocą techniczną.',
+        'supported-currency-error' => 'Waluta :currency nie jest obsługiwana. Obsługiwane waluty: :supportedCurrencies.',
     ],
 ];

@@ -3,6 +3,8 @@
 namespace Webkul\CatalogRule\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\CatalogRule\Listeners\CatalogRule;
+use Webkul\CatalogRule\Listeners\Product;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -12,24 +14,30 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        /**
+         * Catalog rule events.
+         */
         'promotions.catalog_rule.create.after' => [
-            'Webkul\CatalogRule\Listeners\CatalogRule@afterUpdateCreate',
+            [CatalogRule::class, 'afterUpdateCreate'],
         ],
 
         'promotions.catalog_rule.update.after' => [
-            'Webkul\CatalogRule\Listeners\CatalogRule@afterUpdateCreate',
+            [CatalogRule::class, 'afterUpdateCreate'],
         ],
 
         'promotions.catalog_rule.update.before' => [
-            'Webkul\CatalogRule\Listeners\CatalogRule@beforeUpdate',
+            [CatalogRule::class, 'beforeUpdate'],
         ],
 
         'promotions.catalog_rule.delete.before' => [
-            'Webkul\CatalogRule\Listeners\CatalogRule@beforeDelete',
+            [CatalogRule::class, 'beforeDelete'],
         ],
 
+        /**
+         * Product events.
+         */
         'catalog.product.update.after' => [
-            'Webkul\CatalogRule\Listeners\Product@afterUpdate',
+            [Product::class, 'afterUpdate'],
         ],
     ];
 }

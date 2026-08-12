@@ -55,6 +55,17 @@ class PhonePeController extends Controller
             return redirect()->route('shop.checkout.cart.index');
         }
 
+        $currency = strtoupper($cart->base_currency_code ?? core()->getBaseCurrencyCode());
+
+        if (! $this->phonePe->isCurrencySupported($currency)) {
+            session()->flash('error', trans('phonepe::app.response.supported-currency-error', [
+                'currency' => $currency,
+                'supportedCurrencies' => implode(', ', $this->phonePe->getSupportedCurrencies()),
+            ]));
+
+            return redirect()->route('shop.checkout.cart.index');
+        }
+
         $paymentUrl = $this->phonePe->initiatePayment($cart);
 
         if (! $paymentUrl) {

@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Transaction invalide. Veuillez réessayer.',
         'payment-success' => 'Votre paiement a été effectué avec succès. Votre commande a été passée.',
         'order-creation-failed' => 'Un problème est survenu lors de la création de votre commande après le paiement. Veuillez contacter le support.',
+        'supported-currency-error' => 'La devise :currency n\'est pas prise en charge. Devises prises en charge : :supportedCurrencies.',
     ],
 ];

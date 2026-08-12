@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'Płatność nie powiodła się. Spróbuj ponownie.',
         'payment-success' => 'Płatność zakończona pomyślnie!',
         'provide-credentials' => 'Skonfiguruj klucz handlowca PayU i Salt w panelu administracyjnym.',
+        'supported-currency-error' => 'Waluta :currency nie jest obsługiwana. Obsługiwane waluty: :supportedCurrencies.',
     ],
 ];

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
     lang="{{ app()->getLocale() }}"
-    dir="{{ in_array(app()->getLocale(), ['ar', 'fa', 'he']) ? 'rtl' : 'ltr' }}"
+    dir="{{ \Webkul\Core\Helpers\SupportedLocales::direction(app()->getLocale()) }}"
 >
     <head>
         <title>
@@ -38,98 +38,12 @@
     </head>
 
     @php
-        $locales = [
-            'ar'    => 'arabic',
-            'bn'    => 'bengali',
-            'ca'    => 'catalan',
-            'de'    => 'german',
-            'en'    => 'english',
-            'es'    => 'spanish',
-            'fa'    => 'persian',
-            'fr'    => 'french',
-            'he'    => 'hebrew',
-            'hi_IN' => 'hindi',
-            'id'    => 'indonesian',
-            'it'    => 'italian',
-            'ja'    => 'japanese',
-            'nl'    => 'dutch',
-            'pl'    => 'polish',
-            'pt_BR' => 'portuguese',
-            'ro'    => 'romanian',
-            'ru'    => 'russian',
-            'sin'   => 'sinhala',
-            'tr'    => 'turkish',
-            'uk'    => 'ukrainian',
-            'zh_CN' => 'chinese',
-        ];
+        use Webkul\Core\Helpers\SupportedCurrencies;
+        use Webkul\Core\Helpers\SupportedLocales;
 
-        $currencies = [
-            'AED' => 'united-arab-emirates-dirham',
-            'ARS' => 'argentine-peso',
-            'AUD' => 'australian-dollar',
-            'BDT' => 'bangladeshi-taka',
-            'BHD' => 'bahraini-dinar',
-            'BRL' => 'brazilian-real',
-            'CAD' => 'canadian-dollar',
-            'CHF' => 'swiss-franc',
-            'CLP' => 'chilean-peso',
-            'CNY' => 'chinese-yuan',
-            'COP' => 'colombian-peso',
-            'CZK' => 'czech-koruna',
-            'DKK' => 'danish-krone',
-            'DZD' => 'algerian-dinar',
-            'EGP' => 'egyptian-pound',
-            'EUR' => 'euro',
-            'FJD' => 'fijian-dollar',
-            'GBP' => 'british-pound-sterling',
-            'HKD' => 'hong-kong-dollar',
-            'HUF' => 'hungarian-forint',
-            'IDR' => 'indonesian-rupiah',
-            'ILS' => 'israeli-new-shekel',
-            'INR' => 'indian-rupee',
-            'JOD' => 'jordanian-dinar',
-            'JPY' => 'japanese-yen',
-            'KRW' => 'south-korean-won',
-            'KWD' => 'kuwaiti-dinar',
-            'KZT' => 'kazakhstani-tenge',
-            'LBP' => 'lebanese-pound',
-            'LKR' => 'sri-lankan-rupee',
-            'LYD' => 'libyan-dinar',
-            'MAD' => 'moroccan-dirham',
-            'MUR' => 'mauritian-rupee',
-            'MXN' => 'mexican-peso',
-            'MYR' => 'malaysian-ringgit',
-            'NGN' => 'nigerian-naira',
-            'NOK' => 'norwegian-krone',
-            'NPR' => 'nepalese-rupee',
-            'NZD' => 'new-zealand-dollar',
-            'OMR' => 'omani-rial',
-            'PAB' => 'panamanian-balboa',
-            'PEN' => 'peruvian-nuevo-sol',
-            'PHP' => 'philippine-peso',
-            'PKR' => 'pakistani-rupee',
-            'PLN' => 'polish-zloty',
-            'PYG' => 'paraguayan-guarani',
-            'QAR' => 'qatari-rial',
-            'RON' => 'romanian-leu',
-            'RUB' => 'russian-ruble',
-            'SAR' => 'saudi-riyal',
-            'SEK' => 'swedish-krona',
-            'SGD' => 'singapore-dollar',
-            'THB' => 'thai-baht',
-            'TND' => 'tunisian-dinar',
-            'TRY' => 'turkish-lira',
-            'TWD' => 'new-taiwan-dollar',
-            'UAH' => 'ukrainian-hryvnia',
-            'USD' => 'united-states-dollar',
-            'UZS' => 'uzbekistani-som',
-            'VES' => 'venezuelan-bolívar',
-            'VND' => 'vietnamese-dong',
-            'XAF' => 'cfa-franc-beac',
-            'XOF' => 'cfa-franc-bceao',
-            'ZAR' => 'south-african-rand',
-            'ZMW' => 'zambian-kwacha'
-        ];
+        $locales = array_map(fn ($locale) => $locale['name'], SupportedLocales::ALL);
+
+        $currencies = array_map(fn ($currency) => $currency['name'], SupportedCurrencies::ALL);
     @endphp
 
     <body>

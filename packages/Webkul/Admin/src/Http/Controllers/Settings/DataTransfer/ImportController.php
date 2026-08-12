@@ -298,14 +298,16 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
-        $isValid = $this->importHelper
-            ->setImport($import)
-            ->validate();
+        return $this->attempt(function () use ($import) {
+            $isValid = $this->importHelper
+                ->setImport($import)
+                ->validate();
 
-        return new JsonResponse([
-            'is_valid' => $isValid,
-            'import' => $this->importHelper->getImport()->unsetRelations(),
-        ]);
+            return new JsonResponse([
+                'is_valid' => $isValid,
+                'import' => $this->importHelper->getImport()->unsetRelations(),
+            ]);
+        });
     }
 
     /**
@@ -318,11 +320,9 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
-        $progress = $this->importHelper
-            ->setImport($import)
-            ->validateChunk();
-
-        return new JsonResponse($progress);
+        return $this->attempt(fn () => new JsonResponse(
+            $this->importHelper->setImport($import)->validateChunk()
+        ));
     }
 
     /**
@@ -335,11 +335,9 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
-        $total = $this->importHelper
-            ->setImport($import)
-            ->queueValidation();
-
-        return new JsonResponse(['total' => $total]);
+        return $this->attempt(fn () => new JsonResponse([
+            'total' => $this->importHelper->setImport($import)->queueValidation(),
+        ]));
     }
 
     /**
@@ -350,17 +348,19 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
-        $this->importHelper->setImport($import);
+        return $this->attempt(function () use ($import) {
+            $this->importHelper->setImport($import);
 
-        $progress = $this->importHelper->queuedValidationProgress();
+            $progress = $this->importHelper->queuedValidationProgress();
 
-        if ($progress['done']) {
-            $progress['is_valid'] = $this->importHelper->isValid();
+            if ($progress['done']) {
+                $progress['is_valid'] = $this->importHelper->isValid();
 
-            $progress['import'] = $this->importHelper->getImport()->unsetRelations();
-        }
+                $progress['import'] = $this->importHelper->getImport()->unsetRelations();
+            }
 
-        return new JsonResponse($progress);
+            return new JsonResponse($progress);
+        });
     }
 
     /**
@@ -371,9 +371,9 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
-        return new JsonResponse(
+        return $this->attempt(fn () => new JsonResponse(
             $this->importHelper->setImport($import)->downloadImages()
-        );
+        ));
     }
 
     /**
@@ -385,11 +385,9 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
-        $total = $this->importHelper
-            ->setImport($import)
-            ->queueImageDownload();
-
-        return new JsonResponse(['total' => $total]);
+        return $this->attempt(fn () => new JsonResponse([
+            'total' => $this->importHelper->setImport($import)->queueImageDownload(),
+        ]));
     }
 
     /**
@@ -399,9 +397,9 @@ class ImportController extends Controller
     {
         $import = $this->importRepository->findOrFail($id);
 
-        return new JsonResponse(
+        return $this->attempt(fn () => new JsonResponse(
             $this->importHelper->setImport($import)->queuedImageProgress()
-        );
+        ));
     }
 
     /**
@@ -443,9 +441,11 @@ class ImportController extends Controller
                 if ($this->importHelper->claimForProcessing()) {
                     $this->importHelper->start();
                 }
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                report($e);
+
                 return new JsonResponse([
-                    'message' => $e->getMessage(),
+                    'message' => trans('admin::app.settings.data-transfer.imports.processing-failed'),
                 ], 400);
             }
 
@@ -473,9 +473,11 @@ class ImportController extends Controller
              */
             try {
                 $this->importHelper->start($importBatch);
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                report($e);
+
                 return new JsonResponse([
-                    'message' => $e->getMessage(),
+                    'message' => trans('admin::app.settings.data-transfer.imports.processing-failed'),
                 ], 400);
             }
         } else {
@@ -536,9 +538,11 @@ class ImportController extends Controller
              */
             try {
                 $this->importHelper->link($importBatch);
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                report($e);
+
                 return new JsonResponse([
-                    'message' => $e->getMessage(),
+                    'message' => trans('admin::app.settings.data-transfer.imports.processing-failed'),
                 ], 400);
             }
         } else {
@@ -597,9 +601,11 @@ class ImportController extends Controller
              */
             try {
                 $this->importHelper->index($importBatch);
-            } catch (\Exception $e) {
+            } catch (\Throwable $e) {
+                report($e);
+
                 return new JsonResponse([
-                    'message' => $e->getMessage(),
+                    'message' => trans('admin::app.settings.data-transfer.imports.processing-failed'),
                 ], 400);
             }
         } else {
@@ -687,6 +693,26 @@ class ImportController extends Controller
         }
 
         return Storage::disk('private')->download($import->error_file_path);
+    }
+
+    /**
+     * Run a step of an import, answering with something the merchant can act on if it fails.
+     *
+     * The step reads a file they supplied, so it fails in ways that carry internal detail — a
+     * storage path, a type error from a file that is empty or is not of the shape claimed. That
+     * belongs in the log rather than in a notification on their screen.
+     */
+    protected function attempt(callable $step): JsonResponse
+    {
+        try {
+            return $step();
+        } catch (\Throwable $e) {
+            report($e);
+
+            return new JsonResponse([
+                'message' => trans('admin::app.settings.data-transfer.imports.processing-failed'),
+            ], 400);
+        }
     }
 
     /**

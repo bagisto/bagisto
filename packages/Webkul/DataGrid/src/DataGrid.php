@@ -2,6 +2,7 @@
 
 namespace Webkul\DataGrid;
 
+use Closure;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -657,8 +658,8 @@ abstract class DataGrid
 
                 $record->actions[] = [
                     'index' => ! empty($action->index) ? $action->index : 'action_'.$index + 1,
-                    'icon' => $action->icon,
-                    'title' => $action->title,
+                    'icon' => $action->icon instanceof Closure ? ($action->icon)($record) : $action->icon,
+                    'title' => $action->title instanceof Closure ? ($action->title)($record) : $action->title,
                     'method' => $action->method,
                     'url' => $getUrl($record),
                 ];

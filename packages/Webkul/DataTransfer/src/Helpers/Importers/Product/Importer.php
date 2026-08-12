@@ -27,6 +27,7 @@ use Webkul\DataTransfer\Helpers\Importers\AbstractImporter;
 use Webkul\DataTransfer\Helpers\Importers\Concerns\DownloadsImages;
 use Webkul\DataTransfer\Repositories\ImportBatchRepository;
 use Webkul\Inventory\Repositories\InventorySourceRepository;
+use Webkul\Product\Helpers\Indexers\Flat as FlatIndexer;
 use Webkul\Product\Jobs\Search\DeleteProducts as DeleteSearchIndexJob;
 use Webkul\Product\Jobs\Search\IndexProducts as IndexSearchJob;
 use Webkul\Product\Jobs\UpdateCreateInventoryIndex as UpdateCreateInventoryIndexJob;
@@ -203,6 +204,11 @@ class Importer extends AbstractImporter
     protected array $productFlatColumns = [];
 
     /**
+     * Default value of every attribute that is also a flat column, keyed by column
+     */
+    protected ?array $flatColumnDefaults = null;
+
+    /**
      * Is linking required
      */
     protected bool $linkingRequired = true;
@@ -258,7 +264,8 @@ class Importer extends AbstractImporter
         protected ProductCustomerGroupPriceRepository $productCustomerGroupPriceRepository,
         protected ProductGroupedProductRepository $productGroupedProductRepository,
         protected BookingProductRepository $bookingProductRepository,
-        protected SKUStorage $skuStorage
+        protected SKUStorage $skuStorage,
+        protected FlatIndexer $flatIndexer
     ) {
         parent::__construct($importBatchRepository);
 
@@ -1764,7 +1771,11 @@ class Importer extends AbstractImporter
                 continue;
             }
 
-            $data[$column] = $rowData[$column] ?? null;
+            /**
+             * Same fallback as the flat indexer, so a column the file left out reads off the
+             * flat table as the default rather than as an empty value.
+             */
+            $data[$column] = $rowData[$column] ?? $this->getFlatColumnDefaults()[$column] ?? null;
         }
 
         $data = array_merge($data, [
@@ -1773,6 +1784,22 @@ class Importer extends AbstractImporter
         ]);
 
         $flatData[] = $data;
+    }
+
+    /**
+     * Return the default value of every attribute that is also a flat column, keyed by column.
+     */
+    public function getFlatColumnDefaults(): array
+    {
+        if (! is_null($this->flatColumnDefaults)) {
+            return $this->flatColumnDefaults;
+        }
+
+        return $this->flatColumnDefaults = $this->attributes
+            ->whereNotNull('default_value')
+            ->whereIn('code', $this->getProductFlatColumns())
+            ->pluck('default_value', 'code')
+            ->toArray();
     }
 
     /**
@@ -1798,6 +1825,14 @@ class Importer extends AbstractImporter
                 'channel',
                 'locale',
             ],
+        );
+
+        /**
+         * The batch has written its inventories and images by now, so the columns derived from
+         * them can be filled. The file itself never carries them.
+         */
+        $this->flatIndexer->refreshDerivedColumns(
+            array_values(array_unique(array_column($products, 'product_id')))
         );
     }
 

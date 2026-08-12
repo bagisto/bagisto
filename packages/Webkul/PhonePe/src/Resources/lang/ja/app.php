@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => '無効なトランザクション。 もう一度やり直してください。',
         'payment-success' => 'お支払いが正常に完了しました。 ご注文が確定しました。',
         'order-creation-failed' => 'お支払い後のご注文作成に問題が発生しました。 サポートにお問い合わせください。',
+        'supported-currency-error' => '通貨 :currency はサポートされていません。サポートされている通貨: :supportedCurrencies.',
     ],
 ];
