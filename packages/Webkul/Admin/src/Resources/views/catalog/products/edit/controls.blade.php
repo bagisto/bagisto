@@ -183,6 +183,12 @@
         @break
     @case('image')
     @case('file')
+        @php
+            $fileRules = $product[$attribute->code]
+                ? preg_replace('/required:\s*true\s*,?\s*/', '', $attribute->validations)
+                : $attribute->validations;
+        @endphp
+
         <div class="flex gap-2.5">
             @if ($product[$attribute->code])
                 <a
@@ -214,7 +220,7 @@
                 type="file"
                 class="w-full"
                 name="{{ $attribute->code }}"
-                :rules="{{ $attribute->validations }}"
+                :rules="{{ $fileRules }}"
                 v-slot="{ handleChange, handleBlur }"
                 label="{{ $attribute->admin_name }}"
             >
@@ -230,7 +236,7 @@
             </v-field>
         </div>
 
-        @if ($product[$attribute->code])
+        @if ($product[$attribute->code] && ! $attribute->is_required)
             <div class="mt-2.5 flex items-center gap-2.5">
                 <x-admin::form.control-group.control
                     type="checkbox"
