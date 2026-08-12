@@ -701,6 +701,7 @@ return [
                     'pending' => '待支付',
                     'status' => '状态',
                     'update-status' => '更新状态',
+                    'view' => '查看',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => '属性家族 - :attribute_family',
                     'category' => '类别',
                     'channel' => '渠道',
+                    'copy' => '复制z',
                     'copy-of' => '复制 :value',
                     'copy-of-slug' => '复制-:value',
                     'delete' => '删除',
                     'disable' => '禁用',
+                    'edit' => '编辑',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => '图像',
@@ -2122,6 +2125,7 @@ return [
                     'id' => '客户 ID',
                     'id-value' => 'ID - :id',
                     'inactive' => '不活跃',
+                    'login-as-customer' => '以客户身份登录',
                     'method-error' => '错误！检测到错误的方法，请检查大规模操作配置',
                     'name' => '客户姓名',
                     'no-resource' => '提供的资源不足以执行操作',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => '已暂停',
                     'update-status' => '更新状态',
                     'update-success' => '成功更新所选客户',
+                    'view' => '查看',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => '评分',
                         'status' => '状态',
                         'title' => '标题',
+                        'view' => '查看',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => '激活',
+                        'delete' => '删除',
                         'draft' => '草稿',
+                        'edit' => '编辑',
                         'id' => 'ID',
                         'inactive' => '未激活',
                         'name' => '名称',

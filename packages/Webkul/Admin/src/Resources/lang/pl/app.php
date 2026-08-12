@@ -701,6 +701,7 @@ return [
                     'pending' => 'Oczekujące',
                     'status' => 'Status',
                     'update-status' => 'Zaktualizuj status',
+                    'view' => 'Podgląd',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Rodzina atrybutów - :attribute_family',
                     'category' => 'Kategoria',
                     'channel' => 'Kanał',
+                    'copy' => 'Kopiuj',
                     'copy-of' => 'Kopia :value',
                     'copy-of-slug' => 'kopia-:value',
                     'delete' => 'Usuń',
                     'disable' => 'Wyłącz',
+                    'edit' => 'Edytuj',
                     'id' => 'Identyfikator',
                     'id-value' => 'Identyfikator - :id',
                     'image' => 'Obraz',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'ID klienta',
                     'id-value' => 'Identyfikator - :id',
                     'inactive' => 'Nieaktywny',
+                    'login-as-customer' => 'Zaloguj się jako klient',
                     'method-error' => 'Błąd! Wykryto błędną metodę, sprawdź konfigurację masowej akcji',
                     'name' => 'Nazwa klienta',
                     'no-resource' => 'Dostarczone zasoby są niewystarczające dla tej akcji',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Zawieszony',
                     'update-status' => 'Aktualizuj status',
                     'update-success' => 'Wybrane dane klientów zostały pomyślnie zaktualizowane',
+                    'view' => 'Podgląd',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Ocena',
                         'status' => 'Status',
                         'title' => 'Tytuł',
+                        'view' => 'Podgląd',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Aktywny',
+                        'delete' => 'Usuń',
                         'draft' => 'Wersja robocza',
+                        'edit' => 'Edytuj',
                         'id' => 'ID',
                         'inactive' => 'Nieaktywny',
                         'name' => 'Nazwa',

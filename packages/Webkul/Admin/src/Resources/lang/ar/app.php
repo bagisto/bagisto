@@ -701,6 +701,7 @@ return [
                     'pending' => 'معلقة',
                     'status' => 'الحالة',
                     'update-status' => 'تحديث الحالة',
+                    'view' => 'عرض',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'عائلة السمة - :attribute_family',
                     'category' => 'الفئة',
                     'channel' => 'القناة',
+                    'copy' => 'نسخ',
                     'copy-of' => 'نسخة من :value',
                     'copy-of-slug' => 'نسخة-من-:value',
                     'delete' => 'حذف',
                     'disable' => 'تعطيل',
+                    'edit' => 'تعديل',
                     'id' => 'المعرف',
                     'id-value' => 'المعرف - :id',
                     'image' => 'صورة',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'رقم العميل',
                     'id-value' => 'المعرف - :id',
                     'inactive' => 'غير نشط',
+                    'login-as-customer' => 'تسجيل الدخول كعميل',
                     'method-error' => 'خطأ! تم اكتشاف طريقة خاطئة، يرجى التحقق من إعدادات العمليات الجماعية',
                     'name' => 'اسم العميل',
                     'no-resource' => 'المورد الذي قدم غير كافٍ للإجراء',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'معلق',
                     'update-status' => 'تحديث الحالة',
                     'update-success' => 'تم تحديث العملاء المحددين بنجاح',
+                    'view' => 'عرض',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'التقييم',
                         'status' => 'الحالة',
                         'title' => 'العنوان',
+                        'view' => 'عرض',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'نشط',
+                        'delete' => 'حذف',
                         'draft' => 'مسودة',
+                        'edit' => 'تعديل',
                         'id' => 'المعرف',
                         'inactive' => 'غير نشط',
                         'name' => 'الاسم',

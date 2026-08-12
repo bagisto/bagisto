@@ -701,6 +701,7 @@ return [
                     'pending' => 'Beklemede',
                     'status' => 'Durum',
                     'update-status' => 'Durumu güncelle',
+                    'view' => 'Görüntüle',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Özellik Ailesi - :attribute_family',
                     'category' => 'Kategori',
                     'channel' => 'Kanal',
+                    'copy' => 'Kopyala',
                     'copy-of' => 'Kopyası :value',
                     'copy-of-slug' => 'kopyası-:value',
                     'delete' => 'Sil',
                     'disable' => 'Devre Dışı',
+                    'edit' => 'Düzenle',
                     'id' => 'Kimlik',
                     'id-value' => 'Kimlik - :id',
                     'image' => 'Resim',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'Müşteri ID',
                     'id-value' => 'Kimlik - :id',
                     'inactive' => 'Pasif',
+                    'login-as-customer' => 'Müşteri olarak giriş yap',
                     'method-error' => 'Hata! Yanlış yöntem algılandı, lütfen kitlesel eylem yapılandırmasını kontrol edin',
                     'name' => 'Müşteri Adı',
                     'no-resource' => 'Eylem için sağlanan kaynak yetersiz',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Askıya Alındı',
                     'update-status' => 'Durumu Güncelle',
                     'update-success' => 'Seçilen Müşteriler başarıyla güncellendi',
+                    'view' => 'Görüntüle',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Puan',
                         'status' => 'Durum',
                         'title' => 'Başlık',
+                        'view' => 'Görüntüle',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Aktif',
+                        'delete' => 'Sil',
                         'draft' => 'Taslak',
+                        'edit' => 'Düzenle',
                         'id' => 'Kimlik',
                         'inactive' => 'Pasif',
                         'name' => 'Adı',

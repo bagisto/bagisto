@@ -701,6 +701,7 @@ return [
                     'pending' => 'Pending',
                     'status' => 'Status',
                     'update-status' => 'Update Status',
+                    'view' => 'View',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Attribute Family - :attribute_family',
                     'category' => 'Category',
                     'channel' => 'Channel',
+                    'copy' => 'Copy',
                     'copy-of' => 'Copy Of :value',
                     'copy-of-slug' => 'copy-of-:value',
                     'delete' => 'Delete',
                     'disable' => 'Disable',
+                    'edit' => 'Edit',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => 'Image',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'Customer ID',
                     'id-value' => 'ID - :id',
                     'inactive' => 'Inactive',
+                    'login-as-customer' => 'Login as customer',
                     'method-error' => 'Error! Wrong method detected, please check mass action configuration',
                     'name' => 'Customer Name',
                     'no-resource' => 'The resource provided for insufficient for the action',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Suspended',
                     'update-status' => 'Update Status',
                     'update-success' => 'Selected Customers successfully updated',
+                    'view' => 'View',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Rating',
                         'status' => 'Status',
                         'title' => 'Title',
+                        'view' => 'View',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Active',
+                        'delete' => 'Delete',
                         'draft' => 'Draft',
+                        'edit' => 'Edit',
                         'id' => 'ID',
                         'inactive' => 'Inactive',
                         'name' => 'Name',

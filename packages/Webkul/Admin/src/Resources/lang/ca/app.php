@@ -701,6 +701,7 @@ return [
                     'pending' => 'Pendent',
                     'status' => 'Estat',
                     'update-status' => 'Actualitzar Estat',
+                    'view' => 'Veure',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Família d\'atributs - :attribute_family',
                     'category' => 'Categoria',
                     'channel' => 'Canal',
+                    'copy' => 'Copiar',
                     'copy-of' => 'Còpia de :value',
                     'copy-of-slug' => 'copia-de-:value',
                     'delete' => 'Eliminar',
                     'disable' => 'Desactivar',
+                    'edit' => 'Editar',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => 'Imatge',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'ID de Client',
                     'id-value' => 'ID - :id',
                     'inactive' => 'Inactiu',
+                    'login-as-customer' => 'Iniciar sessió com a client',
                     'method-error' => 'Error! Mètode incorrecte detectat, si us plau revisa la configuració de l\'acció massiva',
                     'name' => 'Nom del Client',
                     'no-resource' => 'El recurs proporcionat no és suficient per a l\'acció',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Suspés',
                     'update-status' => 'Actualizar l\'Estat',
                     'update-success' => 'Clients seleccionats actualitzats correctament',
+                    'view' => 'Veure',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Valoració',
                         'status' => 'Estat',
                         'title' => 'Títol',
+                        'view' => 'Veure',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Actiu',
+                        'delete' => 'Eliminar',
                         'draft' => 'Borrador',
+                        'edit' => 'Editar',
                         'id' => 'ID',
                         'inactive' => 'Inactiu',
                         'name' => 'Nom',

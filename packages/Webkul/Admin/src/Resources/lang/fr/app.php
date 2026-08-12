@@ -701,6 +701,7 @@ return [
                     'pending' => 'En attente',
                     'status' => 'Statut',
                     'update-status' => 'Mettre à jour le statut',
+                    'view' => 'Voir',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Famille d\'attributs - :attribute_family',
                     'category' => 'Catégorie',
                     'channel' => 'Chaîne',
+                    'copy' => 'Copier',
                     'copy-of' => 'Copie de :value',
                     'copy-of-slug' => 'copie-de-:value',
                     'delete' => 'Supprimer',
                     'disable' => 'Désactiver',
+                    'edit' => 'Modifier',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => 'Image',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'Identifiant du client',
                     'id-value' => 'ID - :id',
                     'inactive' => 'Inactif',
+                    'login-as-customer' => 'Se connecter en tant que client',
                     'method-error' => 'Erreur ! Méthode incorrecte détectée, veuillez vérifier la configuration de l\'action de masse',
                     'name' => 'Nom du client',
                     'no-resource' => 'La ressource fournie est insuffisante pour l\'action',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Suspendu',
                     'update-status' => 'Mettre à jour le statut',
                     'update-success' => 'Clients sélectionnés mis à jour avec succès',
+                    'view' => 'Voir',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Note',
                         'status' => 'Statut',
                         'title' => 'Titre',
+                        'view' => 'Voir',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Actif',
+                        'delete' => 'Supprimer',
                         'draft' => 'Brouillon',
+                        'edit' => 'Modifier',
                         'id' => 'ID',
                         'inactive' => 'Inactif',
                         'name' => 'Nom',

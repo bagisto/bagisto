@@ -701,6 +701,7 @@ return [
                     'pending' => 'ממתין',
                     'status' => 'סטטוס',
                     'update-status' => 'עדכן סטטוס',
+                    'view' => 'צפה',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'משפחת מאפיינים - :attribute_family',
                     'category' => 'קטגוריה',
                     'channel' => 'ערוץ',
+                    'copy' => 'העתק',
                     'copy-of' => 'העתק של :value',
                     'copy-of-slug' => 'העתק-של-:value',
                     'delete' => 'מחק',
                     'disable' => 'השבת',
+                    'edit' => 'ערוך',
                     'id' => 'מזהה',
                     'id-value' => 'מזהה - :id',
                     'image' => 'תמונה',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'מזהה לקוח',
                     'id-value' => 'מזהה - :id',
                     'inactive' => 'לא פעיל',
+                    'login-as-customer' => 'התחבר כלקוח',
                     'method-error' => 'שגיאה! אותרה שיטת לא נכונה, נא לבדוק את הגדרות פעולה מראש',
                     'name' => 'שם הלקוח',
                     'no-resource' => 'המשאב אינו מספיק לביצוע הפעולה',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'מושהה',
                     'update-status' => 'עדכן סטטוס',
                     'update-success' => 'הלקוחות שנבחרו עודכנו בהצלחה',
+                    'view' => 'צפה',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'דירוג',
                         'status' => 'סטטוס',
                         'title' => 'כותרת',
+                        'view' => 'צפה',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'פעיל',
+                        'delete' => 'מחק',
                         'draft' => 'טיוטה',
+                        'edit' => 'ערוך',
                         'id' => 'מזהה',
                         'inactive' => 'לא פעיל',
                         'name' => 'שם',

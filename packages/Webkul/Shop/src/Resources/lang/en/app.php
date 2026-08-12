@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Remaining Downloads',
                 'status' => 'Status',
                 'title' => 'Title',
+                'unlimited' => 'Unlimited',
             ],
 
             'wishlist' => [

@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => '剩余下载次数',
                 'status' => '状态',
                 'title' => '名称',
+                'unlimited' => '无限制',
             ],
 
             'wishlist' => [

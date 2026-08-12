@@ -701,6 +701,7 @@ return [
                     'pending' => 'In afwachting',
                     'status' => 'Status',
                     'update-status' => 'Status bijwerken',
+                    'view' => 'Bekijken',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Attribuutfamilie - :attribute_family',
                     'category' => 'Categorie',
                     'channel' => 'Kanaal',
+                    'copy' => 'Kopiëren',
                     'copy-of' => 'Kopie van :value',
                     'copy-of-slug' => 'kopie-van-:value',
                     'delete' => 'Verwijderen',
                     'disable' => 'Uitschakelen',
+                    'edit' => 'Bewerken',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => 'Afbeelding',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'Klant ID',
                     'id-value' => 'ID - :id',
                     'inactive' => 'Inactief',
+                    'login-as-customer' => 'Inloggen als klant',
                     'method-error' => 'Fout! Verkeerde methode gedetecteerd, controleer alstublieft de mass action-configuratie',
                     'name' => 'Klantnaam',
                     'no-resource' => 'De verstrekte bron is onvoldoende voor de actie',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Opgeschort',
                     'update-status' => 'Status bijwerken',
                     'update-success' => 'Geselecteerde klanten succesvol bijgewerkt',
+                    'view' => 'Bekijken',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Beoordeling',
                         'status' => 'Status',
                         'title' => 'Titel',
+                        'view' => 'Bekijken',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Actief',
+                        'delete' => 'Verwijderen',
                         'draft' => 'Concept',
+                        'edit' => 'Bewerken',
                         'id' => 'ID',
                         'inactive' => 'Inactief',
                         'name' => 'Naam',

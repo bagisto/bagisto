@@ -701,6 +701,7 @@ return [
                     'pending' => '保留中',
                     'status' => 'ステータス',
                     'update-status' => 'ステータスを更新',
+                    'view' => '表示',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => '属性ファミリー - :attribute_family',
                     'category' => 'カテゴリー',
                     'channel' => 'チャンネル',
+                    'copy' => 'コピー',
                     'copy-of' => 'コピー :value',
                     'copy-of-slug' => 'コピー-:value',
                     'delete' => '削除',
                     'disable' => '無効',
+                    'edit' => '編集',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => '画像',
@@ -2122,6 +2125,7 @@ return [
                     'id' => '顧客ID',
                     'id-value' => 'ID - :id',
                     'inactive' => '非アクティブ',
+                    'login-as-customer' => '顧客としてログイン',
                     'method-error' => 'エラー！誤ったメソッドが検出されました。マスアクションの構成を確認してください',
                     'name' => '顧客名',
                     'no-resource' => '提供されたリソースは、アクションには不十分です',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => '停止中',
                     'update-status' => 'ステータスの更新',
                     'update-success' => '選択した顧客が正常に更新されました',
+                    'view' => '表示',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => '評価',
                         'status' => 'ステータス',
                         'title' => 'タイトル',
+                        'view' => '表示',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'アクティブ',
+                        'delete' => '削除',
                         'draft' => '下書き',
+                        'edit' => '編集',
                         'id' => 'ID',
                         'inactive' => '非アクティブ',
                         'name' => '名前',

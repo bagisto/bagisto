@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'دانلودهای باقیمانده',
                 'status' => 'وضعیت',
                 'title' => 'عنوان',
+                'unlimited' => 'نامحدود',
             ],
 
             'wishlist' => [

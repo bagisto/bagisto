@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'शेष डाउनलोड',
                 'status' => 'स्थिति',
                 'title' => 'शीर्षक',
+                'unlimited' => 'असीमित',
             ],
 
             'wishlist' => [

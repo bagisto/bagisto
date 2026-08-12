@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'הורדות נותרו',
                 'status' => 'סטטוס',
                 'title' => 'כותרת',
+                'unlimited' => 'ללא הגבלה',
             ],
 
             'wishlist' => [

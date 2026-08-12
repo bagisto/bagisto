@@ -701,6 +701,7 @@ return [
                     'pending' => 'Ausstehend',
                     'status' => 'Status',
                     'update-status' => 'Status aktualisieren',
+                    'view' => 'Ansehen',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Attributfamilie - :attribute_family',
                     'category' => 'Kategorie',
                     'channel' => 'Kanal',
+                    'copy' => 'Kopieren',
                     'copy-of' => 'Kopie von :value',
                     'copy-of-slug' => 'kopie-von-:value',
                     'delete' => 'Löschen',
                     'disable' => 'Deaktivieren',
+                    'edit' => 'Bearbeiten',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => 'Bild',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'Kunden-ID',
                     'id-value' => 'ID - :id',
                     'inactive' => 'Inaktiv',
+                    'login-as-customer' => 'Als Kunde einloggen',
                     'method-error' => 'Fehler! Falsche Methode erkannt, bitte überprüfen Sie die Massenaktionskonfiguration',
                     'name' => 'Kundenname',
                     'no-resource' => 'Die bereitgestellten Ressourcen sind für die Aktion unzureichend',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Gesperrt',
                     'update-status' => 'Status aktualisieren',
                     'update-success' => 'Ausgewählte Kunden erfolgreich aktualisiert',
+                    'view' => 'Ansehen',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Bewertung',
                         'status' => 'Status',
                         'title' => 'Titel',
+                        'view' => 'Ansehen',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Aktiv',
+                        'delete' => 'Löschen',
                         'draft' => 'Entwurf',
+                        'edit' => 'Bearbeiten',
                         'id' => 'ID',
                         'inactive' => 'Inaktiv',
                         'name' => 'Name',

@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => '残りのダウンロード回数',
                 'status' => 'ステータス',
                 'title' => 'タイトル',
+                'unlimited' => '無制限',
             ],
 
             'wishlist' => [

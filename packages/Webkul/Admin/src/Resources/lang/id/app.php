@@ -701,6 +701,7 @@ return [
                     'pending' => 'Menunggu Pembayaran',
                     'status' => 'Status',
                     'update-status' => 'Perbarui Status',
+                    'view' => 'Lihat',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Keluarga Atribut - :attribute_family',
                     'category' => 'Kategori',
                     'channel' => 'Saluran',
+                    'copy' => 'Salin',
                     'copy-of' => 'Salinan Dari :value',
                     'copy-of-slug' => 'salinan-dari-:value',
                     'delete' => 'Hapus',
                     'disable' => 'Nonaktifkan',
+                    'edit' => 'Edit',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => 'Gambar',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'ID Pelanggan',
                     'id-value' => 'ID - :id',
                     'inactive' => 'Tidak Aktif',
+                    'login-as-customer' => 'Masuk sebagai pelanggan',
                     'method-error' => 'Kesalahan! Metode yang salah terdeteksi, silakan periksa konfigurasi aksi massal',
                     'name' => 'Nama Pelanggan',
                     'no-resource' => 'Sumber daya yang diberikan tidak mencukupi untuk tindakan ini',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Ditangguhkan',
                     'update-status' => 'Perbarui Status',
                     'update-success' => 'Pelanggan yang dipilih berhasil diperbarui',
+                    'view' => 'Lihat',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Penilaian',
                         'status' => 'Status',
                         'title' => 'Judul',
+                        'view' => 'Lihat',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Aktif',
+                        'delete' => 'Hapus',
                         'draft' => 'Draf',
+                        'edit' => 'Edit',
                         'id' => 'ID',
                         'inactive' => 'Tidak Aktif',
                         'name' => 'Nama',

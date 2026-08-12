@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Sisa Unduhan',
                 'status' => 'Status',
                 'title' => 'Judul',
+                'unlimited' => 'Tidak terbatas',
             ],
 
             'wishlist' => [

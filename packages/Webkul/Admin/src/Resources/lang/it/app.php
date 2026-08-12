@@ -701,6 +701,7 @@ return [
                     'pending' => 'In Sospeso',
                     'status' => 'Stato',
                     'update-status' => 'Aggiorna stato',
+                    'view' => 'Visualizza',
                 ],
             ],
 
@@ -1155,10 +1156,12 @@ return [
                     'attribute-family-value' => 'Famiglia di Attributi - :attribute_family',
                     'category' => 'Categoria',
                     'channel' => 'Canale',
+                    'copy' => 'Copia',
                     'copy-of' => 'Copia di :value',
                     'copy-of-slug' => 'copia-di-:value',
                     'delete' => 'Elimina',
                     'disable' => 'Disabilita',
+                    'edit' => 'Modifica',
                     'id' => 'ID',
                     'id-value' => 'ID - :id',
                     'image' => 'Immagine',
@@ -2122,6 +2125,7 @@ return [
                     'id' => 'ID Cliente',
                     'id-value' => 'ID - :id',
                     'inactive' => 'Inattivo',
+                    'login-as-customer' => 'Accedi come cliente',
                     'method-error' => 'Errore! Rilevato un metodo errato, controllare la configurazione dell\'azione di massa',
                     'name' => 'Nome Cliente',
                     'no-resource' => 'La risorsa fornita è insufficiente per l\'azione',
@@ -2135,6 +2139,7 @@ return [
                     'suspended' => 'Sospeso',
                     'update-status' => 'Aggiorna Stato',
                     'update-success' => 'Clienti selezionati aggiornati con successo',
+                    'view' => 'Visualizza',
                 ],
 
                 'create' => [
@@ -2277,6 +2282,7 @@ return [
                         'rating' => 'Valutazione',
                         'status' => 'Stato',
                         'title' => 'Titolo',
+                        'view' => 'Visualizza',
                     ],
                 ],
 
@@ -2481,7 +2487,9 @@ return [
 
                     'datagrid' => [
                         'active' => 'Attivo',
+                        'delete' => 'Elimina',
                         'draft' => 'Bozza',
+                        'edit' => 'Modifica',
                         'id' => 'ID',
                         'inactive' => 'Inattivo',
                         'name' => 'Nome',
