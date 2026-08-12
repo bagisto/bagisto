@@ -42,9 +42,9 @@ class Flat extends AbstractIndexer
     /**
      * Channels.
      *
-     * @var array
+     * @var mixed
      */
-    protected $channels = [];
+    protected $channels;
 
     /**
      * Family attributes.
@@ -77,7 +77,9 @@ class Flat extends AbstractIndexer
         while (true) {
             $paginator = $this->productRepository
                 ->with([
+                    'channels',
                     'variants',
+                    'variants.channels',
                     'attribute_family',
                     'attribute_values',
                     'variants.attribute_family',
@@ -104,9 +106,17 @@ class Flat extends AbstractIndexer
      */
     public function reindexBatch($products)
     {
+        $productIds = [];
+
         foreach ($products as $product) {
-            $this->refresh($product);
+            $productIds = array_merge($productIds, $this->writeFlatRows($product));
         }
+
+        /**
+         * Derived once for the whole batch rather than once per product: every statement a
+         * long-running command issues costs memory it never gets back.
+         */
+        $this->refreshDerivedColumns($productIds);
     }
 
     /**
@@ -117,23 +127,11 @@ class Flat extends AbstractIndexer
      */
     public function refresh($product)
     {
-        $this->updateOrCreate($product);
-
-        $productIds = [$product->id];
-
-        if (ProductType::hasVariants($product->type)) {
-            foreach ($product->variants()->get() as $variant) {
-                $this->updateOrCreate($variant);
-
-                $productIds[] = $variant->id;
-            }
-        }
-
-        $this->refreshDerivedColumns($productIds);
+        $this->refreshDerivedColumns($this->writeFlatRows($product));
     }
 
     /**
-     * Creates product flat
+     * Creates product flat.
      *
      * @param  Product  $product
      * @return void
@@ -148,9 +146,9 @@ class Flat extends AbstractIndexer
             $channelIds[] = core()->getDefaultChannel()->id;
         }
 
-        $attributeValues = $product->attribute_values()->get();
+        $attributeValues = $product->attribute_values;
 
-        foreach (core()->getAllChannels() as $channel) {
+        foreach ($this->getChannels() as $channel) {
             if (in_array($channel->id, $channelIds)) {
                 foreach ($channel->locales as $locale) {
                     $productFlat = $this->productFlatRepository->updateOrCreate([
@@ -267,6 +265,8 @@ class Flat extends AbstractIndexer
     }
 
     /**
+     * Get cached family attributes for a product, so we don't have to query the same family multiple times in a reindex.
+     *
      * @param  Product  $product
      * @return mixed
      */
@@ -277,5 +277,49 @@ class Flat extends AbstractIndexer
         }
 
         return $this->familyAttributes[$product->attribute_family_id] = $product->attribute_family->custom_attributes;
+    }
+
+    /**
+     * Returns all channels, with their locales, resolved once for the run.
+     *
+     * `core()->getAllChannels()` queries afresh on every call and hands back new models each
+     * time, which a reindex would otherwise pay for once per product.
+     *
+     * @return mixed
+     */
+    public function getChannels()
+    {
+        if ($this->channels) {
+            return $this->channels;
+        }
+
+        $this->channels = core()->getAllChannels();
+
+        $this->channels->each->locales;
+
+        return $this->channels;
+    }
+
+    /**
+     * Write the flat rows for a product and its variants, and return every id written.
+     *
+     * @param  Product  $product
+     * @return array
+     */
+    protected function writeFlatRows($product)
+    {
+        $this->updateOrCreate($product);
+
+        $productIds = [$product->id];
+
+        if (ProductType::hasVariants($product->type)) {
+            foreach ($product->variants as $variant) {
+                $this->updateOrCreate($variant);
+
+                $productIds[] = $variant->id;
+            }
+        }
+
+        return $productIds;
     }
 }

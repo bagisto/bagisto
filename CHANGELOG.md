@@ -32,6 +32,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed sorting the admin product datagrid by SKU or quantity failing outright in Elasticsearch mode, and sorting on a column an older index has never held now leaves the order alone instead of erroring.
 
+- Fixed the debug bar's collector keeping every query it saw, complete with its bindings, for as long as the process lived — and attaching itself even on the console, where there is no bar to draw. Any long-running process paid for it: an indexer or a queue worker grew by roughly half a megabyte for every thousand statements until it was killed. It is now attached only to a web request that will actually render the bar.
+
+- Reduced what a full reindex asks of the database. The flat indexer was re-reading the channel list, the attribute values and the variants once per product, discarding the copies it had already eager-loaded, and refreshing its derived columns a product at a time — some ten thousand statements on a ten thousand product catalogue that are now a hundred.
+
 ## **v2.4.9 (5th of August 2026)** - *Release*
 
 - Security fixes.
