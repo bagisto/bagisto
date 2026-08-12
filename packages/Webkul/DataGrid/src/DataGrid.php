@@ -657,8 +657,8 @@ abstract class DataGrid
 
                 $record->actions[] = [
                     'index' => ! empty($action->index) ? $action->index : 'action_'.$index + 1,
-                    'icon' => $action->icon,
-                    'title' => $action->title,
+                    'icon' => is_callable($action->icon) ? ($action->icon)($record) : $action->icon,
+                    'title' => is_callable($action->title) ? ($action->title)($record) : $action->title,
                     'method' => $action->method,
                     'url' => $getUrl($record),
                 ];

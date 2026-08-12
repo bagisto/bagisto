@@ -36,6 +36,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Reduced what a full reindex asks of the database. The flat indexer was re-reading the channel list, the attribute values and the variants once per product, discarding the copies it had already eager-loaded, and refreshing its derived columns a product at a time — some ten thousand statements on a ten thousand product catalogue that are now a hundred.
 
+- Fixed an import of an unreadable file answering with the raw PHP error, which named an internal class and property, and a failure elsewhere in the run answering with the storage path of the uploaded file. Both now say that the import could not be processed and ask for the file to be checked, with the detail kept to the log. A file with no header row was the one that told on itself the loudest, as it failed on a type error the reader was not catching.
+
+- Added a way back into an import that is still running. The action that opens an import was drawn with an icon the admin theme does not carry, so nothing was rendered for it and the screen showing progress could not be reached again once left; it now reads "View Progress" against a running import and opens where it left off.
+
 ## **v2.4.9 (5th of August 2026)** - *Release*
 
 - Security fixes.
