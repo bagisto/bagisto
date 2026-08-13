@@ -2,6 +2,7 @@
 
 namespace Webkul\DataGrid;
 
+use Closure;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -469,7 +470,7 @@ abstract class DataGrid
         foreach ($requestedFilters as $requestedColumn => $requestedValues) {
             if ($requestedColumn === 'all') {
                 $this->queryBuilder->where(function ($scopeQueryBuilder) use ($requestedValues) {
-                    foreach ($requestedValues as $value) {
+                    foreach ((array) $requestedValues as $value) {
                         collect($this->columns)
                             ->filter(fn ($column) => $column->getSearchable() && ! in_array($column->getType(), [
                                 ColumnTypeEnum::BOOLEAN->value,
@@ -478,11 +479,18 @@ abstract class DataGrid
                             ->each(fn ($column) => $scopeQueryBuilder->orWhere($column->getColumnName(), $column->likeOperator(), '%'.$value.'%'));
                     }
                 });
-            } else {
-                collect($this->columns)
-                    ->first(fn ($column) => $column->getIndex() === $requestedColumn)
-                    ->processFilter($this->queryBuilder, $requestedValues);
+
+                continue;
             }
+
+            $column = collect($this->columns)
+                ->first(fn ($column) => $column->getIndex() === $requestedColumn);
+
+            if (! $column) {
+                continue;
+            }
+
+            $column->processFilter($this->queryBuilder, $requestedValues);
         }
 
         $this->dispatchEvent('process_request.filters.after', $this);
@@ -657,8 +665,8 @@ abstract class DataGrid
 
                 $record->actions[] = [
                     'index' => ! empty($action->index) ? $action->index : 'action_'.$index + 1,
-                    'icon' => $action->icon,
-                    'title' => $action->title,
+                    'icon' => $action->icon instanceof Closure ? ($action->icon)($record) : $action->icon,
+                    'title' => $action->title instanceof Closure ? ($action->title)($record) : $action->title,
                     'method' => $action->method,
                     'url' => $getUrl($record),
                 ];

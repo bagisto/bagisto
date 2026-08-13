@@ -1,21 +1,21 @@
 {
-  "_veeValidate-4DgCwdoP.js": {
-    "file": "assets/veeValidate-4DgCwdoP.js",
+  "_veeValidate-b62SX0Gj.js": {
+    "file": "assets/veeValidate-b62SX0Gj.js",
     "name": "veeValidate",
     "imports": [
-      "_vue-BcHa-z4R.js"
+      "_vue-DO4HzPOv.js"
     ]
   },
-  "_vendor-DW-cpHrJ.js": {
-    "file": "assets/vendor-DW-cpHrJ.js",
+  "_vendor-0jrwA_y2.js": {
+    "file": "assets/vendor-0jrwA_y2.js",
     "name": "vendor"
   },
-  "_vue-BcHa-z4R.js": {
-    "file": "assets/vue-BcHa-z4R.js",
+  "_vue-DO4HzPOv.js": {
+    "file": "assets/vue-DO4HzPOv.js",
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-BQ64eQAK.css",
+    "file": "assets/app-BnhbVZx8.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -67,6 +67,10 @@
     "file": "assets/no-address-BHTy4apn.png",
     "src": "src/Resources/assets/images/no-address.png"
   },
+  "src/Resources/assets/images/payglocal.png": {
+    "file": "assets/payglocal-CSDEoMi_.png",
+    "src": "src/Resources/assets/images/payglocal.png"
+  },
   "src/Resources/assets/images/paypal.png": {
     "file": "assets/paypal-CIu1GKlz.png",
     "src": "src/Resources/assets/images/paypal.png"
@@ -112,14 +116,14 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-BVn34ryH.js",
+    "file": "assets/app-BdyzoL0j.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vue-BcHa-z4R.js",
-      "_vendor-DW-cpHrJ.js",
-      "_veeValidate-4DgCwdoP.js"
+      "_vue-DO4HzPOv.js",
+      "_vendor-0jrwA_y2.js",
+      "_veeValidate-b62SX0Gj.js"
     ],
     "css": [
       "assets/app-DPIY9Iht.css"

@@ -3,6 +3,9 @@
 namespace Webkul\Marketing\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\Marketing\Listeners\Category;
+use Webkul\Marketing\Listeners\Page;
+use Webkul\Marketing\Listeners\Product;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -13,44 +16,44 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         /**
-         * Product Events
+         * Product events.
          */
         'catalog.product.update.before' => [
-            'Webkul\Marketing\Listeners\Product@beforeUpdate',
+            [Product::class, 'beforeUpdate'],
         ],
 
         'catalog.product.delete.before' => [
-            'Webkul\Marketing\Listeners\Product@beforeDelete',
+            [Product::class, 'beforeDelete'],
         ],
 
         /**
-         * Category Events
+         * Category events.
          */
         'catalog.category.create.after' => [
-            'Webkul\Marketing\Listeners\Category@afterCreate',
+            [Category::class, 'afterCreate'],
         ],
 
         'catalog.category.update.before' => [
-            'Webkul\Marketing\Listeners\Category@beforeUpdate',
+            [Category::class, 'beforeUpdate'],
         ],
 
         'catalog.category.delete.before' => [
-            'Webkul\Marketing\Listeners\Category@beforeDelete',
+            [Category::class, 'beforeDelete'],
         ],
 
         /**
-         * CMS Page Events
+         * CMS page events.
          */
         'cms.page.create.after' => [
-            'Webkul\Marketing\Listeners\Page@afterCreate',
+            [Page::class, 'afterCreate'],
         ],
 
         'cms.page.update.before' => [
-            'Webkul\Marketing\Listeners\Page@beforeUpdate',
+            [Page::class, 'beforeUpdate'],
         ],
 
         'cms.page.delete.before' => [
-            'Webkul\Marketing\Listeners\Page@beforeDelete',
+            [Page::class, 'beforeDelete'],
         ],
     ];
 }

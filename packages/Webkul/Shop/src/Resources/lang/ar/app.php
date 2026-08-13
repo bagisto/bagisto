@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'التنزيلات المتبقية',
                 'status' => 'الحالة',
                 'title' => 'العنوان',
+                'unlimited' => 'غير محدود',
             ],
 
             'wishlist' => [

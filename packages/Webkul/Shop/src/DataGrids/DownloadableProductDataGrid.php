@@ -131,7 +131,7 @@ class DownloadableProductDataGrid extends DataGrid
             'sortable' => true,
             'closure' => function ($row) {
                 if (! $row->download_bought) {
-                    return trans('shop::app.customer.account.downloadable_products.unlimited');
+                    return trans('shop::app.customers.account.downloadable-products.unlimited');
                 }
 
                 return $row->remaining_downloads;

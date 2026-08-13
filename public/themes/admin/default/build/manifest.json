@@ -264,7 +264,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-CqEc8LuC.css",
+    "file": "assets/app-Ef_seDXE.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -385,7 +385,7 @@
     "src": "src/Resources/assets/images/settings/exchange-rate.svg"
   },
   "src/Resources/assets/images/settings/gdpr.svg": {
-    "file": "assets/gdpr-C6B4e0VA.svg",
+    "file": "assets/gdpr-DrhhDXQJ.svg",
     "src": "src/Resources/assets/images/settings/gdpr.svg"
   },
   "src/Resources/assets/images/settings/inventory.svg": {
@@ -473,7 +473,7 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-B-qzaQY8.js",
+    "file": "assets/app-CHNWAGnZ.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,

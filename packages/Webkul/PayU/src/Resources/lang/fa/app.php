@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'پرداخت ناموفق بود. لطفاً دوباره تلاش کنید.',
         'payment-success' => 'پرداخت با موفقیت انجام شد!',
         'provide-credentials' => 'لطفاً کلید فروشنده و Salt PayU را در پنل مدیریت پیکربندی کنید.',
+        'supported-currency-error' => 'ارز :currency پشتیبانی نمی‌شود. ارزهای پشتیبانی شده: :supportedCurrencies.',
     ],
 ];

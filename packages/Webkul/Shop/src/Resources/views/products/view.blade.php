@@ -387,7 +387,7 @@
                                 @include('shop::products.view.types.booking')
 
                                 <!-- Product Actions and Quantity Box -->
-                                <div class="mt-8 flex max-w-117.5 gap-4 max-sm:mt-4">
+                                <div class="mt-8 flex max-w-117.5 gap-4 max-sm:mt-4 max-sm:flex-wrap">
 
                                     {!! view_render_event('bagisto.shop.products.view.quantity.before', ['product' => $product]) !!}
 
@@ -407,7 +407,7 @@
 
                                         <x-shop::button
                                             type="submit"
-                                            class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            class="secondary-button w-full max-w-full max-sm:max-w-none! max-sm:w-auto! max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
                                             button-type="secondary-button"
                                             :loading="false"
                                             :title="trans('shop::app.products.view.add-to-cart')"
@@ -421,7 +421,7 @@
                                     @else
                                         <button
                                             type="button"
-                                            class="secondary-button w-full max-w-full max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
+                                            class="secondary-button w-full max-w-full max-sm:max-w-none! max-sm:w-auto! max-md:py-3 max-sm:rounded-lg max-sm:py-1.5"
                                             @click="$refs.contactUsModal.open()"
                                         >
                                             @lang('shop::app.components.layouts.footer.contact-us')

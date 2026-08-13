@@ -125,11 +125,17 @@ class InstallerController extends Controller
     {
         $defaultLocale = config('app.locale');
 
-        $allowedLocales = array_merge([$defaultLocale], request()->input('selectedLocales'));
+        $allowedLocales = array_values(array_unique(array_merge(
+            [$defaultLocale],
+            (array) request()->input('selectedLocales', [])
+        )));
 
         $defaultCurrency = config('app.currency');
 
-        $allowedCurrencies = array_merge([$defaultCurrency], request()->input('selectedCurrencies'));
+        $allowedCurrencies = array_values(array_unique(array_merge(
+            [$defaultCurrency],
+            (array) request()->input('selectedCurrencies', [])
+        )));
 
         $isSeeded = $this->databaseManager->seedSampleProducts([
             'default_locale' => $defaultLocale,

@@ -27,9 +27,9 @@
             </template>
 
             <template v-else>
-                <div class="flex w-full items-center gap-x-1">
+                <div class="flex w-full items-center gap-x-1 max-md:justify-center">
                     <!-- Search Panel -->
-                    <div class="flex max-w-111.25 items-center max-sm:w-full max-sm:max-w-full">
+                    <div class="flex max-w-111.25 items-center max-md:w-47.5">
                         <div class="relative w-full">
                             <input
                                 type="text"

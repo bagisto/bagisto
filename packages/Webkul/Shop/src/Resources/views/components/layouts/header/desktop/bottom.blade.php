@@ -309,6 +309,7 @@
 
                 <div
                     class="pointer-events-none absolute top-19.5 z-1 max-h-145 w-max max-w-315 translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] bg-white p-9 opacity-0 shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9"
+                    data-mega-menu-dropdown
                     v-if="category.children && category.children.length"
                 >
                     <div class="flex justify-between gap-x-17.5">
@@ -375,36 +376,35 @@
 
                     <!-- Dropdown for each category -->
                     <div
-                        class="pointer-events-none absolute top-19.5 z-1 max-h-145 w-max max-w-315 translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] bg-white p-9 opacity-0 shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9"
+                        class="pointer-events-none absolute top-19.5 z-1 max-h-145 w-max max-w-315 translate-y-1 overflow-auto overflow-x-auto border border-b-0 border-l-0 border-r-0 border-t border-[#F3F3F3] bg-white p-9 opacity-0 shadow-[0_6px_6px_1px_rgba(0,0,0,.3)] transition duration-300 ease-out group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-hover:duration-200 group-hover:ease-in ltr:-left-9 rtl:-right-9 flex justify-between gap-x-17.5"
+                        data-mega-menu-dropdown
                         v-if="category.children && category.children.length"
                     >
-                        <div class="flex justify-between gap-x-17.5">
-                            <div
-                                class="grid w-full min-w-max max-w-37.5 flex-auto grid-cols-[1fr] content-start gap-5"
-                                v-for="pairCategoryChildren in pairCategoryChildren(category)"
-                            >
-                                <template v-for="secondLevelCategory in pairCategoryChildren">
-                                    <p class="font-medium text-navyBlue">
-                                        <a :href="secondLevelCategory.url">
-                                            @{{ secondLevelCategory.name }}
-                                        </a>
-                                    </p>
+                        <div
+                            class="grid w-full min-w-max max-w-37.5 flex-auto grid-cols-[1fr] content-start gap-5"
+                            v-for="pairCategoryChildren in pairCategoryChildren(category)"
+                        >
+                            <template v-for="secondLevelCategory in pairCategoryChildren">
+                                <p class="font-medium text-navyBlue">
+                                    <a :href="secondLevelCategory.url">
+                                        @{{ secondLevelCategory.name }}
+                                    </a>
+                                </p>
 
-                                    <ul
-                                        class="grid grid-cols-[1fr] gap-3"
-                                        v-if="secondLevelCategory.children && secondLevelCategory.children.length"
+                                <ul
+                                    class="grid grid-cols-[1fr] gap-3"
+                                    v-if="secondLevelCategory.children && secondLevelCategory.children.length"
+                                >
+                                    <li
+                                        class="text-sm font-medium text-zinc-500"
+                                        v-for="thirdLevelCategory in secondLevelCategory.children"
                                     >
-                                        <li
-                                            class="text-sm font-medium text-zinc-500"
-                                            v-for="thirdLevelCategory in secondLevelCategory.children"
-                                        >
-                                            <a :href="thirdLevelCategory.url">
-                                                @{{ thirdLevelCategory.name }}
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </template>
-                            </div>
+                                        <a :href="thirdLevelCategory.url">
+                                            @{{ thirdLevelCategory.name }}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </template>
                         </div>
                     </div>
                 </div>
@@ -543,6 +543,12 @@
 
             mounted() {
                 this.initCategories();
+
+                window.addEventListener('resize', this.positionMegaMenus);
+            },
+
+            beforeUnmount() {
+                window.removeEventListener('resize', this.positionMegaMenus);
             },
 
             methods: {
@@ -553,6 +559,8 @@
                         if (stored) {
                             this.categories = JSON.parse(stored);
                             this.isLoading = false;
+
+                            this.$nextTick(this.positionMegaMenus);
 
                             return;
                         }
@@ -568,6 +576,8 @@
                             this.isLoading = false;
                             this.categories = response.data.data;
                             localStorage.setItem('categories', JSON.stringify(this.categories));
+
+                            this.$nextTick(this.positionMegaMenus);
                         })
                         .catch(error => {
                             console.log(error);
@@ -615,6 +625,29 @@
 
                 goBackToMainView() {
                     this.currentViewLevel = 'main';
+                },
+
+                positionMegaMenus() {
+                    const MARGIN = 12;
+                    const viewport = document.documentElement.clientWidth;
+
+                    (this.$el.querySelectorAll?.('[data-mega-menu-dropdown]') ?? []).forEach(dropdown => {
+                        const edge = getComputedStyle(dropdown).direction === 'rtl' ? 'right' : 'left';
+
+                        dropdown.style.left = dropdown.style.right = '';
+                        dropdown.style.maxWidth = Math.min(1260, viewport - 2 * MARGIN) + 'px';
+
+                        const rect = dropdown.getBoundingClientRect();
+
+                        // Positive when it spills off the right edge, negative off the left, 0 when it fits.
+                        const overflow = Math.max(0, rect.right - (viewport - MARGIN)) - Math.max(0, MARGIN - rect.left);
+
+                        if (overflow) {
+                            const base = parseFloat(getComputedStyle(dropdown)[edge]) || 0;
+
+                            dropdown.style[edge] = base + (edge === 'left' ? -overflow : overflow) + 'px';
+                        }
+                    });
                 }
             },
         });

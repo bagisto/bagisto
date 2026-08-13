@@ -74,7 +74,7 @@ it('redirects back when cart is not found', function () {
 
 it('creates payu payment data and returns redirect view', function () {
     // Arrange
-    $cart = $this->createCartWithItems('payu');
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
 
     // Act
     $response = $this->get(route('payu.redirect'));
@@ -97,7 +97,7 @@ it('creates payu payment data and returns redirect view', function () {
 
 it('successfully processes payu payment and creates order with invoice', function () {
     // Arrange
-    $cart = $this->createCartWithItems('payu');
+    $cart = $this->createCartWithItems('payu', ['base_currency_code' => 'INR']);
 
     $txnid = 'PAYU_TEST123';
 
@@ -240,4 +240,19 @@ it('handles payment cancellation', function () {
     $order = Order::where('cart_id', $cart->id)->first();
 
     expect($order)->toBeNull();
+});
+
+it('refuses a cart in a currency payu does not settle', function () {
+    // Arrange
+    // The amount is sent rounded to two decimal places, so a currency with a different number
+    // of them would be charged wrongly rather than refused.
+    $this->createCartWithItems('payu', ['base_currency_code' => 'JPY']);
+
+    // Act
+    $response = $this->get(route('payu.redirect'));
+
+    // Assert
+    $response->assertRedirect(route('shop.checkout.cart.index'));
+
+    $response->assertSessionHas('error');
 });

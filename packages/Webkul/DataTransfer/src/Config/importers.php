@@ -11,6 +11,8 @@ return [
             'xlsx' => 'data-transfer/samples/xlsx/products.xlsx',
             'xml' => 'data-transfer/samples/xml/products.xml',
         ],
+
+        'sample_images_zip_path' => 'data-transfer/samples/images/product-images.zip',
     ],
 
     'customers' => [

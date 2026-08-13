@@ -21,6 +21,9 @@ return [
             'validation' => [
                 'errors' => [
                     'duplicate-url-key' => 'La clave de URL: \'%s\' ya fue generada para un artículo con el SKU: \'%s\'.',
+                    'image-not-file' => 'Imagen: \'%s\' es una dirección web, pero esta importación está configurada para tomar imágenes de archivos. Elija \'Enlaces de imagen en el archivo\' como origen, o sustituya el valor por un nombre de archivo.',
+                    'image-not-found' => 'Imagen: \'%s\' no se encontró donde esta importación espera sus imágenes.',
+                    'image-not-url' => 'Imagen: \'%s\' no es una dirección web, pero esta importación está configurada para obtener imágenes de enlaces del archivo. Elija otra fuente de imágenes o sustituya el valor por una dirección https:// completa.',
                     'invalid-attribute-family' => 'Valor no válido para la columna de familia de atributos (¿la familia de atributos no existe?)',
                     'invalid-type' => 'El tipo de producto es inválido o no es compatible',
                     'sku-not-found' => 'No se encontró el producto con el SKU especificado',
@@ -48,6 +51,8 @@ return [
             'column-not-found' => 'No se encontraron las columnas requeridas: %s.',
             'column-numbers' => 'El número de columnas no corresponde al número de filas en el encabezado.',
             'invalid-attribute' => 'El encabezado contiene atributo(s) no válido(s): "%s".',
+            'more-issues' => 'y :count problema(s) más — descargue el informe completo para ver la lista íntegra.',
+            'more-rows' => '(+:count filas más)',
             'system' => 'Se ha producido un error del sistema inesperado.',
             'wrong-quotes' => 'Se usaron comillas curvas en lugar de comillas rectas.',
         ],

@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use RuntimeException;
 use Throwable;
+use Webkul\Core\Helpers\SupportedLocales;
 
 class TranslationsChecker extends Command
 {
@@ -57,33 +58,6 @@ class TranslationsChecker extends Command
     ];
 
     /**
-     * Supported locales that must exist in all packages.
-     */
-    protected const SUPPORTED_LOCALES = [
-        'ar',
-        'bn',
-        'ca',
-        'de',
-        'en',
-        'es',
-        'fa',
-        'fr',
-        'he',
-        'hi_IN',
-        'id',
-        'it',
-        'ja',
-        'nl',
-        'pl',
-        'pt_BR',
-        'ru',
-        'sin',
-        'tr',
-        'uk',
-        'zh_CN',
-    ];
-
-    /**
      * Track if errors occurred.
      */
     protected bool $hasError = false;
@@ -123,12 +97,10 @@ class TranslationsChecker extends Command
 
         $this->displayHeader($targetLocale, $targetPackage);
 
-        // Check root lang folder first (unless a specific package is requested)
         if (! $targetPackage) {
             $this->processLangFolder('Root', base_path(self::ROOT_LANG_DIRECTORY), $targetLocale);
         }
 
-        // Check package lang folders
         $this->processPackages($targetPackage, $targetLocale);
 
         $this->displayResults($showDetails);
@@ -202,14 +174,12 @@ class TranslationsChecker extends Command
 
         $enFilesRel = $enFiles->map(fn ($f) => Str::after($f, $enPath.'/'));
 
-        // Get existing locales in this lang folder
         $existingLocales = collect(File::directories($langRoot))
             ->map(fn ($d) => basename($d))
             ->sort()
             ->values();
 
-        // Check for missing supported locales
-        $supportedLocales = collect(self::SUPPORTED_LOCALES);
+        $supportedLocales = collect(SupportedLocales::codes());
 
         $missingLocales = $supportedLocales
             ->reject(fn ($locale) => $existingLocales->contains($locale))
@@ -219,7 +189,6 @@ class TranslationsChecker extends Command
             ->sort()
             ->values();
 
-        // Report missing locales as failures
         $missingLocales->each(function ($locale) use ($name) {
             $this->results->push([
                 'package' => $name,
@@ -238,7 +207,6 @@ class TranslationsChecker extends Command
             $this->hasError = true;
         });
 
-        // Get other locales to check (excluding base locale and filtered by target)
         $locales = $existingLocales
             ->reject(fn ($d) => $d === self::BASE_LOCALE)
             ->when($targetLocale, fn ($collection) => $collection->filter(
@@ -275,7 +243,6 @@ class TranslationsChecker extends Command
 
         $issues = [];
 
-        // Check for missing files
         $missingFiles = $enFilesRel->filter(
             fn ($relFile) => ! File::exists("{$localePath}/{$relFile}")
         )->values();
@@ -291,7 +258,6 @@ class TranslationsChecker extends Command
             ]);
         }
 
-        // Check for extra files
         $localeFiles = $this->getPhpFiles($localePath);
 
         $localeFilesRel = $localeFiles->map(fn ($f) => Str::after($f, $localePath.'/'));
@@ -309,7 +275,6 @@ class TranslationsChecker extends Command
             ]);
         }
 
-        // Check keys and structure
         $missingKeys = [];
         $extraKeys = [];
         $structureIssues = [];
@@ -354,7 +319,6 @@ class TranslationsChecker extends Command
                     $extraKeys[$relFile] = $extraWithLines;
                 }
 
-                // Always check structure (line-by-line comparison)
                 $structureMismatches = $this->getStructureMismatches($enFile, $localeFile);
 
                 if (! empty($structureMismatches)) {
@@ -457,7 +421,6 @@ class TranslationsChecker extends Command
             return;
         }
 
-        // Group results by package
         $grouped = $this->results->groupBy('package');
 
         $passCount = 0;
@@ -484,7 +447,6 @@ class TranslationsChecker extends Command
             $this->newLine();
         });
 
-        // Summary
         $this->displaySummary($passCount, $failCount, $showDetails);
     }
 
@@ -537,7 +499,6 @@ class TranslationsChecker extends Command
 
         $this->newLine();
 
-        // Group errors by package and locale
         $grouped = $this->errors->groupBy(fn ($error) => "{$error['package']}:{$error['locale']}");
 
         $grouped->each(function ($errors, $key) {
@@ -719,7 +680,6 @@ class TranslationsChecker extends Command
 
         $locLineCount = $locLines->count();
 
-        // Different number of lines means structure mismatch
         if ($enLineCount !== $locLineCount) {
             $mismatches[] = [
                 'type' => 'line_count',
@@ -727,7 +687,6 @@ class TranslationsChecker extends Command
             ];
         }
 
-        // Check line-by-line for structure differences
         $maxLines = max($enLineCount, $locLineCount);
 
         $detailedMismatches = collect();
@@ -797,7 +756,6 @@ class TranslationsChecker extends Command
      */
     protected function describeStructureDifference(string $enStruct, string $locStruct, string $enLine, string $locLine): string
     {
-        // Check for key difference
         $enKey = $this->extractKey($enLine);
 
         $locKey = $this->extractKey($locLine);
@@ -806,7 +764,6 @@ class TranslationsChecker extends Command
             return "Key mismatch: EN has '{$enKey}', locale has '{$locKey}'";
         }
 
-        // Check for indentation difference
         $enIndent = Str::length($enLine) - Str::length(ltrim($enLine));
 
         $locIndent = Str::length($locLine) - Str::length(ltrim($locLine));
@@ -815,7 +772,6 @@ class TranslationsChecker extends Command
             return "Indentation mismatch: EN has {$enIndent} spaces, locale has {$locIndent} spaces";
         }
 
-        // Check for different line types
         $enTrimmed = trim($enLine);
 
         $locTrimmed = trim($locLine);
@@ -862,27 +818,22 @@ class TranslationsChecker extends Command
     {
         $trimmed = trim($line);
 
-        // Preserve blank lines and comments as-is
         if ($trimmed === '' || Str::startsWith($trimmed, ['//', '/*', '*'])) {
             return $line;
         }
 
-        // For lines with => (key-value pairs), extract just the key part and indentation
         if (preg_match('/^(\s*)([\'"][^\'"]+[\'"])\s*=>\s*/', $line, $matches)) {
             return $matches[1].$matches[2].' =>';
         }
 
-        // For array opening/closing brackets and other structural elements, return as-is
         if (preg_match('/^(\s*)([\[\],\];]+)/', $line, $matches)) {
             return $line;
         }
 
-        // For 'return [' or similar
         if (Str::contains($line, 'return')) {
             return $line;
         }
 
-        // For <?php tag
         if (Str::contains($line, '<?php')) {
             return $line;
         }
@@ -918,7 +869,6 @@ class TranslationsChecker extends Command
         $lines->each(function ($line, $lineNum) use (&$result, &$keyStack) {
             $displayLine = $lineNum + 1;
 
-            // Match array key definitions like 'key' => or "key" =>
             if (preg_match('/^(\s*)[\'"]([^\'"]+)[\'"]\s*=>/', $line, $matches)) {
                 $indent = Str::length($matches[1]);
 
@@ -926,14 +876,12 @@ class TranslationsChecker extends Command
 
                 $indentLevel = (int) ($indent / 4);
 
-                // Adjust key stack based on indent level
                 while (count($keyStack) > $indentLevel) {
                     array_pop($keyStack);
                 }
 
                 $keyStack[$indentLevel] = $key;
 
-                // Check if this is a leaf node (has a value, not an array)
                 if (! preg_match('/=>\s*\[/', $line)) {
                     $fullKey = implode('.', array_slice($keyStack, 0, $indentLevel + 1));
 

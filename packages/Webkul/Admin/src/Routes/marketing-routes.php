@@ -195,6 +195,8 @@ Route::prefix('marketing')->group(function () {
 
             Route::post('create', 'store')->name('admin.marketing.search_seo.sitemaps.store');
 
+            Route::get('edit/{id}', 'edit')->name('admin.marketing.search_seo.sitemaps.edit');
+
             Route::put('edit', 'update')->name('admin.marketing.search_seo.sitemaps.update');
 
             Route::delete('edit/{id}', 'destroy')->name('admin.marketing.search_seo.sitemaps.delete');

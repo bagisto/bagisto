@@ -56,7 +56,7 @@
 
                     <input
                         type="text"
-                        class="inline-flex min-h-9.5 max-w-10 appearance-none items-center justify-center gap-x-1 rounded-md border bg-white px-3 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow-sm hover:border-gray-400 focus:border-gray-400 focus:outline-hidden dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400 max-sm:hidden"
+                        class="inline-flex min-h-9.5 max-w-10 appearance-none items-center justify-center gap-x-1 rounded-md border bg-white px-3 py-1.5 text-center leading-6 text-gray-600 transition-all marker:shadow-sm hover:border-gray-400 focus:border-gray-400 focus:outline-hidden dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                         :value="available.meta.current_page"
                         @change="changePage(parseInt($event.target.value))"
                     >

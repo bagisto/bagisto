@@ -3,6 +3,7 @@
 namespace Webkul\Shop\Listeners;
 
 use Illuminate\Support\Facades\Mail;
+use Webkul\Customer\Models\CustomerNote;
 use Webkul\Shop\Mail\Customer\EmailVerificationNotification;
 use Webkul\Shop\Mail\Customer\NoteNotification;
 use Webkul\Shop\Mail\Customer\RegistrationNotification;
@@ -79,7 +80,7 @@ class Customer extends Base
     /**
      * Send mail on creating Note
      *
-     * @param  \Webkul\Customer\Models\Customer  $customer
+     * @param  CustomerNote  $note
      * @return void
      */
     public function afterNoteCreated($note)

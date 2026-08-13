@@ -33,8 +33,8 @@
         name="currency"
         content="{{ core()->getBaseCurrency()->toJson() }}"
     >
-    <meta 
-        name="generator" 
+    <meta
+        name="generator"
         content="Bagisto"
     >
 
@@ -114,13 +114,6 @@
             <div class="flex min-h-[calc(100vh-62px)] max-w-full flex-1 flex-col bg-white transition-all duration-300 dark:bg-gray-950 pt-3 px-2 sm:px-4 lg:pt-3 lg:px-4 lg:ltr:pl-71.5 lg:group-[.sidebar-collapsed]/container:ltr:pl-21.25 lg:rtl:pr-71.5 lg:group-[.sidebar-collapsed]/container:rtl:pr-21.25">
                 <!-- Added dynamic tabs for third level menus  -->
                 <div class="pb-4 lg:pb-6">
-                    <!-- Todo @suraj-webkul need to optimize below statement. -->
-                    @if (! request()->routeIs('admin.configuration.index'))
-                        <div class="overflow-x-auto">
-                            <x-admin::layouts.tabs />
-                        </div>
-                    @endif
-
                     <!-- Page Content Blade Component -->
                     <div class="w-full overflow-x-hidden">
                         {{ $slot }}

@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Kalan İndirme Hakkı',
                 'status' => 'Durum',
                 'title' => 'Başlık',
+                'unlimited' => 'Sınırsız',
             ],
 
             'wishlist' => [

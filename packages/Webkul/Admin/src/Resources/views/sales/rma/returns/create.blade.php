@@ -46,7 +46,7 @@
                         performAction
                     }">
                         <template v-if="! isLoading">
-                            <div class="row grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 min-h-11.75 items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                            <div class="row datagrid-head datagrid-head-cards grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1">
                                 <div
                                     class="flex gap-2.5 items-center select-none"
                                     v-for="(columnGroup, index) in [['increment_id'], ['customer_name'], ['status'], ['grand_total'], ['method_title'], ['created_at']]"
@@ -85,7 +85,12 @@
 
                         <!-- Datagrid Head Shimmer -->
                         <template v-else>
-                            <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+                            <x-admin::shimmer.datagrid.table.head
+                                :isMultiRow="true"
+                                template="0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.1fr"
+                                :groups="[1, 1, 1, 1, 1, 1, 1]"
+                                :massAction="false"
+                            />
                         </template>
                     </template>
 
@@ -100,7 +105,7 @@
                     }">
                         <template v-if="! isLoading">
                             <div
-                                class="row grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                class="row datagrid-card grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 v-for="record in available.records"
                             >
                                 <!-- Name, SKU, Attribute Family Columns -->
@@ -159,7 +164,12 @@
 
                         <!-- Datagrid Body Shimmer -->
                         <template v-else>
-                            <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+                            <x-admin::shimmer.datagrid.table.body
+                                :isMultiRow="true"
+                                template="0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.1fr"
+                                :groups="[1, 1, 1, 1, 1, 1, 1]"
+                                :massAction="false"
+                            />
                         </template>
                     </template>
                 </x-admin::datagrid>

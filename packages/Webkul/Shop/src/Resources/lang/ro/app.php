@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Descărcări rămase',
                 'status' => 'Stare',
                 'title' => 'Titlu',
+                'unlimited' => 'Nelimitat',
             ],
 
             'wishlist' => [
