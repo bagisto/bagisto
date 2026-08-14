@@ -4,19 +4,124 @@
 
 ## High Impact Changes
 
+- [Laravel 13 and PHP 8.4](#laravel-13-and-php-84)
 - [Search Architecture Refactored to Engine-Agnostic Design](#search-architecture-refactored-to-engine-agnostic-design)
 - [Tailwind CSS Upgraded from v3 to v4](#tailwind-css-upgraded-from-v3-to-v4)
+
+## Medium Impact Changes
+
+- [PostgreSQL Support](#postgresql-support)
 
 ## Upgrading To v2.5 From v2.4
 
 > [!NOTE]
 > We strive to document every potential breaking change. However, as some of these alterations occur in lesser-known sections of Bagisto, only a fraction of them may impact your application.
 
+### Laravel 13 and PHP 8.4
+
+**Impact Probability: High**
+
+Bagisto v2.5 runs on Laravel 13 and requires **PHP 8.4 or newer**. This is the first thing to deal with, because nothing else installs until the runtime is right.
+
+```diff
+- "php": ">=8.3 <8.5",
+- "laravel/framework": "^12.0",
++ "php": "^8.4",
++ "laravel/framework": "^13.0",
+```
+
+Upgrade PHP before running `composer install`; on 8.3 the install aborts rather than degrading, because part of the dependency tree now requires 8.4.
+
+#### Dependencies that moved with it
+
+| Package | v2.4 | v2.5 |
+|---------|------|------|
+| `laravel/framework` | `^12.0` | `^13.0` |
+| `laravel/tinker` | `^2.10` | `^3.0` |
+| `kalnoy/nestedset` | `^6.0` | `^7.0` |
+| `prettus/l5-repository` | `^2.6` | `^4.0` |
+| `konekt/concord` | `^1.16` | `^1.18` |
+| `spatie/laravel-responsecache` | `^7.4` | `^8.4` |
+| `spatie/laravel-sitemap` | `^7.3` | `^8.0` |
+| `pestphp/pest` | `^3.0` | `^4.0` |
+| `phpunit/phpunit` | `^11.0` | `^12.0` |
+| `barryvdh/laravel-debugbar` | `^3.8` | `^4.3` |
+
+If you depend on any of these directly, check their own upgrade notes — the majors here are not drop-in.
+
+#### PHP 8.4: implicitly nullable parameters
+
+PHP 8.4 deprecates an implicitly nullable parameter — a typed parameter defaulting to `null` without the type being nullable. Bagisto's own code is clean, but custom packages often are not:
+
+```diff
+- public function handle(Product $product, string $locale = null)
++ public function handle(Product $product, ?string $locale = null)
+```
+
+#### Entry-point stubs
+
+`artisan` and `public/index.php` had stayed on the pre-Laravel-11 shape and are now the current ones. If you have not customised them, copy the versions from this release. If you have, the change is that the HTTP and console kernels are no longer resolved by hand:
+
+```diff
+- $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
+- $status = $kernel->handle($input = new ArgvInput, new ConsoleOutput);
+- $kernel->terminate($input, $status);
++ $status = $app->handleCommand(new ArgvInput);
+```
+
+#### Configuration
+
+The shipped config files were brought up to the Laravel 13 shape. Four keys Laravel renamed are now spelled the current way — the old names still work through fallbacks, so this is tidying rather than a break:
+
+| Old key | New key |
+|---------|---------|
+| `logging.channels.daily.days` | `max_files` |
+| `logging.channels.stderr.with` | `handler_with` |
+| `mail.mailers.smtp.encryption` | `scheme` |
+| `services.postmark.token` | `key` |
+
+Options Laravel 13 added are now present rather than implied: the `deferred`, `background` and `failover` queue connections, the `storage` and `failover` cache stores, redis retry backoff, a `monthly` log channel, and `session.serialization`.
+
+> [!IMPORTANT]
+> `session.serialization` is set to `php`, not the `json` that a fresh Laravel 13 application defaults to. `json` is the safer choice — it closes off gadget-chain attacks if `APP_KEY` leaks — but it cannot read sessions written the old way. Switch it once you can accept every session being invalidated.
+
+If you maintain your own copies of these files, mirror the same changes.
+
+---
+
+### PostgreSQL Support
+
+**Impact Probability: Medium**
+
+Bagisto now runs on PostgreSQL 16 as well as MySQL 8.0, and CI covers both. Existing MySQL installations are unaffected and need no action.
+
+Custom code, however, has to survive on either engine. Two rules cover most of it:
+
+```diff
+// LIKE is case-insensitive on MySQL and case-sensitive on PostgreSQL
+- ->where('name', 'like', "%{$term}%")
++ ->where('name', db_grammar()->caseInsensitiveLike(), "%{$term}%")
+```
+
+```diff
+// MySQL coerces "" to 0/NULL; PostgreSQL rejects it outright
++ public function setSpecialPriceAttribute($value)
++ {
++     $this->attributes['special_price'] = $value === '' ? null : $value;
++ }
+```
+
+Beyond those: every non-aggregated column in a `SELECT` must appear in `GROUP BY`, `CAST(... AS CHAR)` truncates to one character so use `VARCHAR(255)`, and `DB::raw()` inside `updateOrCreate()` fails on insert. Boolean columns need a `'boolean'` cast to come back consistently from both drivers.
+
+The production Docker images ship in both flavours — see [`docker/production/README.md`](docker/production/README.md).
+
+---
+
 ### Search Architecture Refactored to Engine-Agnostic Design
 
 **Impact Probability: High**
 
-Bagisto v2.4 replaces the tightly-coupled Elasticsearch search infrastructure in the `Product` package with an engine-agnostic design using the Strategy and Manager patterns. This enables swapping search engines (e.g., Algolia, Pinecone) without modifying core code.
+Bagisto v2.5 replaces the tightly-coupled Elasticsearch search infrastructure in the `Product` package with an engine-agnostic design using the Strategy and Manager patterns. This enables swapping search engines (e.g., Algolia, Pinecone) without modifying core code.
 
 #### Removed Classes
 
@@ -391,6 +496,54 @@ In v3, `content: ["./src/Resources/**/*.blade.php"]` explicitly listed every glo
 - `@source inline("icon-a icon-b icon-c");` — the v4 replacement for v3's `safelist` regex, since regex patterns are no longer supported. Enumerate literal class names.
 
 **Breaking behavior:** v3's `safelist` accepted regex patterns like `{ pattern: /icon-/ }`. v4's `@source inline(...)` does **not** support regex. If your custom package relied on a regex safelist, you must either enumerate every class explicitly, or move the class definitions out of `@layer components` so they are not tree-shaken.
+
+#### Icon Classes Renamed and Restructured
+
+The icon fonts moved from plain classes inside `@layer components` to Tailwind utilities. Each glyph is declared once in `@theme` and emitted by a single functional utility:
+
+```diff
+- @layer components {
+-     .icon-cart:before { content: "\e90c"; }
+- }
++ @theme {
++     --icon-cart: "\e90c";
++ }
++
++ @utility icon-* {
++     &::before { content: --value(--icon-*); }
++ }
+```
+
+They remain utilities rather than plain classes on purpose — the admin sets icons through variants such as `peer-checked:icon-checked` and `rtl:icon-sort-left`, which a plain class cannot carry.
+
+**Renamed icons.** Icons named after a number rather than what they depict were renamed. If your theme or extension uses the old names, update them:
+
+| Package | Old | New | Glyph |
+|---------|-----|-----|-------|
+| Admin | `icon-cancel-1` | `icon-close` | plain ✕ (`icon-cancel` remains the circled ✕) |
+| Admin | `icon-customer-2` | `icon-customer` | person |
+| Admin | `icon-checkbox-partical` | `icon-checkbox-partial` | spelling fix |
+| Shop | `icon-filter-1` | `icon-funnel` | funnel (`icon-filter` remains the sliders) |
+| Shop | `icon-compare-1` | `icon-swap` | curved crossing arrows |
+| Shop | `icon-sort-1` | `icon-sort` | descending lines |
+
+**Removed icons.** Glyphs that no core view referenced were dropped from the stylesheets so they no longer ship as dead CSS — 11 from Admin, 15 from Shop, 2 from Installer:
+
+| Package | Removed |
+|---------|---------|
+| Admin | `icon-add-customer`, `icon-ar`, `icon-clip`, `icon-dots`, `icon-edit-save`, `icon-order-back`, `icon-product-1`, `icon-refund`, `icon-setting`, `icon-tick`, `icon-zoom` |
+| Shop | `icon-Free-Shipping`, `icon-add-new`, `icon-astreisk`, `icon-box-fill`, `icon-camera-fill`, `icon-dislike`, `icon-email`, `icon-filter-fill`, `icon-heart-1`, `icon-heart-2`, `icon-left-arrow`, `icon-like`, `icon-right-arrow`, `icon-sort-by`, `icon-tick` |
+| Installer | `icon-arrow-down`, `icon-view` |
+
+The glyphs are still in the font files; if your package uses one, declare it in your own CSS:
+
+```css
+@theme {
+    --icon-refund: "\e948";
+}
+```
+
+**Safelisting.** The scan root now covers `src/` rather than `src/Resources/`, so class names written in `Config` and `DataGrids` files — menu and datagrid icons — are detected without help. Only names that no file in the package mentions still need `@source inline(...)`; in the storefront that is the five icons named by the SocialShare view and by the theme content the installer seeds.
 
 #### Plugin Registration Changed
 
