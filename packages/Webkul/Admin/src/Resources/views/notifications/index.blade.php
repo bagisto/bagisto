@@ -170,7 +170,7 @@
                             },
 
                             canceled : {
-                                icon: 'icon-cancel-1 bg-red-100 text-red-600 dark:!text-red-600',
+                                icon: 'icon-close bg-red-100 text-red-600 dark:!text-red-600',
                                 message: '@lang('admin::app.notifications.order-status-messages.canceled')',
                                 status: 'canceled'
                             },

@@ -10,7 +10,7 @@
 
         {{-- Statutory Effect Notice --}}
         <div class="mt-4 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-            <span class="icon-warning mt-0.5 text-xl leading-none"></span>
+            <span class="icon-error mt-0.5 text-xl leading-none"></span>
 
             <div>
                 <p class="font-medium">

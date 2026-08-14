@@ -166,7 +166,7 @@
                                     @endif
                                 </div>
 
-                                <p class="py-4 break-words text-base font-semibold text-gray-800 dark:text-white">
+                                <p class="py-4 wrap-break-word text-base font-semibold text-gray-800 dark:text-white">
                                     {{ $rmaItem->product?->name ?? $rmaItem->orderItem?->name }}
                                 </p>
                             </div>

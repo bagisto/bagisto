@@ -737,7 +737,7 @@
                             },
 
                             canceled: {
-                                icon: 'icon-cancel-1',
+                                icon: 'icon-close',
                                 message: "@lang('admin::app.notifications.order-status-messages.canceled')"
                             },
 
@@ -747,7 +747,7 @@
                             },
 
                             closed: {
-                                icon: 'icon-cancel-1',
+                                icon: 'icon-close',
                                 message: "@lang('admin::app.notifications.order-status-messages.closed')"
                             },
 
@@ -776,7 +776,7 @@
                             pending: 'icon-information rounded-full bg-amber-100 text-2xl text-amber-600 dark:!text-amber-600',
                             closed: 'icon-repeat rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
                             completed: 'icon-done rounded-full bg-blue-100 text-2xl text-blue-600 dark:!text-blue-600',
-                            canceled: 'icon-cancel-1 rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
+                            canceled: 'icon-close rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
                             processing: 'icon-sort-right rounded-full bg-green-100 text-2xl text-green-600 dark:!text-green-600',
                         };
                     },

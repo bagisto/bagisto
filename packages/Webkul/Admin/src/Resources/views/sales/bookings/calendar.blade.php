@@ -203,7 +203,7 @@
 
                             <!-- Customer Name -->
                             <div class="flex items-center gap-2.5">
-                                <span class="icon-customer-2 text-xl text-gray-400 dark:text-gray-500"></span>
+                                <span class="icon-customer text-xl text-gray-400 dark:text-gray-500"></span>
 
                                 <span class="font-medium" v-text="event.full_name"></span>
                             </div>

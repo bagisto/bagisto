@@ -53,7 +53,7 @@
                                         class="icon-uncheck cursor-pointer rounded-md text-2xl"
                                         :class="[
                                             applied.massActions.meta.mode === 'all' ? 'peer-checked:icon-check-box' : (
-                                                applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-checkbox-partial' : ''
+                                                applied.massActions.meta.mode === 'partial' ? 'peer-checked:icon-check-box' : ''
                                             ),
                                         ]"
                                     >
@@ -186,14 +186,14 @@
                                     class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 focus:outline-hidden focus:ring-2 focus:ring-black active:border-gray-300"
                                     @click="changePage('previous')"
                                 >
-                                    <span class="icon-sort-left text-2xl"></span>
+                                    <span class="icon-arrow-left text-2xl"></span>
                                 </div>
 
                                 <div
                                     class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 focus:outline-hidden focus:ring-2 focus:ring-black active:border-gray-300"
                                     @click="changePage('next')"
                                 >
-                                    <span class="icon-sort-right text-2xl"></span>
+                                    <span class="icon-arrow-right text-2xl"></span>
                                 </div>
                             </div>
 

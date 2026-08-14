@@ -100,7 +100,7 @@
 
                                             <i
                                                 class="align-text-bottom text-base text-gray-800 ltr:ml-1.5 rtl:mr-1.5"
-                                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                                :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
                                                 v-if="columnGroup.includes(applied.sort.column)"
                                             ></i>
                                         </p>
@@ -217,7 +217,7 @@
 
                                             <i
                                                 class="align-text-bottom text-base text-gray-800 ltr:ml-1.5 rtl:mr-1.5"
-                                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                                :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
                                                 v-if="columnGroup.includes(applied.sort.column)"
                                             ></i>
                                         </p>

@@ -58,47 +58,47 @@
                         >
                             <!-- ID -->
                             <p
-                                class="break-words"
+                                class="wrap-break-word"
                                 v-text="record.id"
                             >
                             </p>
 
                             <!-- Transaction ID -->
                             <p
-                                class="break-words"
+                                class="wrap-break-word"
                                 v-text="record.transaction_id"
                             >
                             </p>
 
                             <!-- Amount -->
-                            <p class="break-words">
+                            <p class="wrap-break-word">
                                 @{{ $admin.formatPrice(record.amount) }}
                             </p>
 
                             <!-- Invoice ID -->
                             <p
-                                class="break-words"
+                                class="wrap-break-word"
                                 v-html="record.invoice_id"
                             >
                             </p>
 
                             <!-- Order ID -->
                             <p
-                                class="break-words"
+                                class="wrap-break-word"
                                 v-html="record.order_id"
                             >
                             </p>
 
                             <!-- Status -->
                             <p
-                                class="break-words"
+                                class="wrap-break-word"
                                 v-html="record.status"
                             >
                             </p>
 
                             <!-- Date -->
                             <p
-                                class="break-words"
+                                class="wrap-break-word"
                                 v-text="record.created_at"
                             >
                             </p>

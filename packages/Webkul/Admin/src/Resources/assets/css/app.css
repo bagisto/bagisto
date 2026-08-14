@@ -1,25 +1,49 @@
-@import "tailwindcss" source("../../");
+/**
+ * Scanned from `src/` rather than `src/Resources/`, so classes named in `src/Config` —
+ * the menu and ACL icons — are seen too.
+ */
+@import "tailwindcss" source("../../../");
 
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    /* Breakpoints */
+    /**
+     * Breakpoints — the widths at which the layout changes.
+     */
     --breakpoint-sm:  525px;
     --breakpoint-md:  768px;
     --breakpoint-lg:  1024px;
     --breakpoint-xl:  1240px;
     --breakpoint-2xl: 1920px;
 
-    /* Custom colors */
+    /**
+     * Colours — the palette of named colours used in the admin.
+     */
     --color-darkGreen: #40994A;
     --color-darkBlue:  #0044F2;
     --color-darkPink:  #F85156;
 
-    /* Fonts */
+    /**
+     * Fonts — the named families the admin can ask for by utility.
+     */
     --font-inter: Inter;
     --font-icon:  icomoon;
 
-    /* Semantic text tokens — font-size paired with a default line-height; utilities can still override. */
+    /**
+     * The body font, pinned to the stack Tailwind 3 shipped.
+     *
+     * v4 dropped `system-ui` from the front of its default, which on Linux and Windows
+     * falls through to a different face entirely — the admin would render in Roboto or
+     * Arial rather than the desktop UI font it used before.
+     */
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    /**
+     * Text — a font size paired with a default line height.
+     *
+     * Named rather than numbered so the pairing travels together; a utility set on the
+     * element still overrides either half.
+     */
     --text-body:               14px;
     --text-body--line-height:  calc(17 / 14);
 }
@@ -33,95 +57,100 @@
     }
 }
 
-/* 
-* Icons must be safelisted — many are referenced only from PHP configs or dynamic Vue bindings the Tailwind scanner can't detect. 
-*/
-@source inline("{icon-uncheckbox,icon-checked,icon-checkbox-partial,icon-radio-normal,icon-radio-selected,icon-phone,icon-list,icon-admin-export,icon-magic,icon-zoom,icon-ar,icon-report,icon-refund,icon-light,icon-dark,icon-add-customer,icon-arrow-down,icon-arrow-left,icon-arrow-right,icon-arrow-up,icon-attribute-block,icon-attribute,icon-calendar,icon-cancel-1,icon-cancel,icon-cart,icon-cms,icon-configuration,icon-cross,icon-customer-2,icon-customer,icon-dashboard,icon-delete,icon-done,icon-dot,icon-dots,icon-down-stat,icon-drag,icon-edit-save,icon-edit,icon-filter,icon-folder-block,icon-folder,icon-image,icon-information,icon-language,icon-location,icon-mail,icon-menu,icon-notification,icon-order-back,icon-printer,icon-processing,icon-product-1,icon-product,icon-promotion,icon-repeat,icon-sales,icon-search,icon-setting,icon-settings,icon-ship,icon-sort-down,icon-sort-left,icon-sort-right,icon-sort-up-down,icon-sort-up,icon-star,icon-store,icon-tick,icon-up-stat,icon-view,icon-view-close,icon-copy,icon-exit,icon-clip,icon-collapse,icon-login,icon-pause,icon-play,icon-star-fill}");
-@utility icon-uncheckbox       { &::before { content: "\e901"; } }
-@utility icon-checked          { &::before { content: "\e90d"; } }
-@utility icon-checkbox-partial { &::before { content: "\e900"; } }
-@utility icon-radio-normal     { &::before { content: "\e92c"; } }
-@utility icon-radio-selected   { &::before { content: "\e92d"; } }
-@utility icon-phone            { &::before { content: "\e94f"; } }
-@utility icon-list             { &::before { content: "\e950"; } }
-@utility icon-admin-export     { &::before { content: "\e95d"; } }
-@utility icon-magic            { &::before { content: "\e94b"; } }
-@utility icon-zoom             { &::before { content: "\e94c"; } }
-@utility icon-ar               { &::before { content: "\e94a"; } }
-@utility icon-report           { &::before { content: "\e942"; } }
-@utility icon-refund           { &::before { content: "\e948"; } }
-@utility icon-light            { &::before { content: "\e947"; } }
-@utility icon-dark             { &::before { content: "\e949"; } }
-@utility icon-add-customer     { &::before { content: "\e902"; } }
-@utility icon-arrow-down       { &::before { content: "\e903"; } }
-@utility icon-arrow-left       { &::before { content: "\e904"; } }
-@utility icon-arrow-right      { &::before { content: "\e905"; } }
-@utility icon-arrow-up         { &::before { content: "\e906"; } }
-@utility icon-attribute-block  { &::before { content: "\e907"; } }
-@utility icon-attribute        { &::before { content: "\e908"; } }
-@utility icon-calendar         { &::before { content: "\e909"; } }
-@utility icon-cancel-1         { &::before { content: "\e90a"; } }
-@utility icon-cancel           { &::before { content: "\e90b"; } }
-@utility icon-cart             { &::before { content: "\e90c"; } }
-@utility icon-cms              { &::before { content: "\e90e"; } }
-@utility icon-configuration    { &::before { content: "\e90f"; } }
-@utility icon-cross            { &::before { content: "\e910"; } }
-@utility icon-customer-2       { &::before { content: "\e911"; } }
-@utility icon-customer         { &::before { content: "\e912"; } }
-@utility icon-dashboard        { &::before { content: "\e913"; } }
-@utility icon-delete           { &::before { content: "\e914"; } }
-@utility icon-done             { &::before { content: "\e915"; } }
-@utility icon-dot              { &::before { content: "\e916"; } }
-@utility icon-dots             { &::before { content: "\e917"; } }
-@utility icon-down-stat        { &::before { content: "\e918"; } }
-@utility icon-drag             { &::before { content: "\e919"; } }
-@utility icon-edit-save        { &::before { content: "\e91a"; } }
-@utility icon-edit             { &::before { content: "\e91b"; } }
-@utility icon-filter           { &::before { content: "\e91c"; } }
-@utility icon-folder-block     { &::before { content: "\e91d"; } }
-@utility icon-folder           { &::before { content: "\e91e"; } }
-@utility icon-image            { &::before { content: "\e91f"; } }
-@utility icon-information      { &::before { content: "\e920"; } }
-@utility icon-language         { &::before { content: "\e921"; } }
-@utility icon-location         { &::before { content: "\e922"; } }
-@utility icon-mail             { &::before { content: "\e923"; } }
-@utility icon-menu             { &::before { content: "\e924"; } }
-@utility icon-notification     { &::before { content: "\e925"; } }
-@utility icon-order-back       { &::before { content: "\e926"; } }
-@utility icon-printer          { &::before { content: "\e927"; } }
-@utility icon-processing       { &::before { content: "\e928"; } }
-@utility icon-product-1        { &::before { content: "\e929"; } }
-@utility icon-product          { &::before { content: "\e92a"; } }
-@utility icon-promotion        { &::before { content: "\e92b"; } }
-@utility icon-repeat           { &::before { content: "\e92e"; } }
-@utility icon-sales            { &::before { content: "\e92f"; } }
-@utility icon-search           { &::before { content: "\e930"; } }
-@utility icon-setting          { &::before { content: "\e931"; } }
-@utility icon-settings         { &::before { content: "\e932"; } }
-@utility icon-ship             { &::before { content: "\e933"; } }
-@utility icon-sort-down        { &::before { content: "\e934"; } }
-@utility icon-sort-left        { &::before { content: "\e935"; } }
-@utility icon-sort-right       { &::before { content: "\e936"; } }
-@utility icon-sort-up-down     { &::before { content: "\e937"; } }
-@utility icon-sort-up          { &::before { content: "\e938"; } }
-@utility icon-star             { &::before { content: "\e939"; } }
-@utility icon-store            { &::before { content: "\e93a"; } }
-@utility icon-tick             { &::before { content: "\e93b"; } }
-@utility icon-up-stat          { &::before { content: "\e93c"; } }
-@utility icon-view             { &::before { content: "\e93d"; } }
-@utility icon-view-close       { &::before { content: "\e946"; } }
-@utility icon-copy             { &::before { content: "\e93e"; } }
-@utility icon-exit             { &::before { content: "\e93f"; } }
-@utility icon-clip             { &::before { content: "\e940"; } }
-@utility icon-collapse         { &::before { content: "\e941"; } }
-@utility icon-login            { &::before { content: "\e943"; } }
-@utility icon-pause            { &::before { content: "\e944"; } }
-@utility icon-play             { &::before { content: "\e945"; } }
-/*
- * #ffb600 is the rating gold — not a palette colour.
+/**
+ * Icons.
+ *
+ * Each icon is a utility rather than a plain class so it can carry variants — the
+ * checkbox and sort glyphs are set with `peer-checked:` and `rtl:`.
+ *
+ * Only the glyphs the admin actually uses are declared. A utility is emitted once the
+ * scanner has seen it, and the scan covers `src/`, so every one below is picked up from
+ * the view or config that names it — an icon declared here but used nowhere would ship
+ * as dead CSS. Adding a glyph from the font means adding it here too.
  */
+@theme {
+    --icon-uncheckbox:       "\e901";
+    --icon-checked:          "\e90d";
+    --icon-checkbox-partial: "\e900";
+    --icon-radio-normal:     "\e92c";
+    --icon-radio-selected:   "\e92d";
+    --icon-phone:            "\e94f";
+    --icon-list:             "\e950";
+    --icon-admin-export:     "\e95d";
+    --icon-magic:            "\e94b";
+    --icon-report:           "\e942";
+    --icon-light:            "\e947";
+    --icon-dark:             "\e949";
+    --icon-arrow-down:       "\e903";
+    --icon-arrow-left:       "\e904";
+    --icon-arrow-right:      "\e905";
+    --icon-arrow-up:         "\e906";
+    --icon-attribute-block:  "\e907";
+    --icon-attribute:        "\e908";
+    --icon-calendar:         "\e909";
+    --icon-close:            "\e90a";
+    --icon-cancel:           "\e90b";
+    --icon-cart:             "\e90c";
+    --icon-cms:              "\e90e";
+    --icon-configuration:    "\e90f";
+    --icon-cross:            "\e910";
+    --icon-customer:         "\e911";
+    --icon-dashboard:        "\e913";
+    --icon-delete:           "\e914";
+    --icon-done:             "\e915";
+    --icon-dot:              "\e916";
+    --icon-down-stat:        "\e918";
+    --icon-drag:             "\e919";
+    --icon-edit:             "\e91b";
+    --icon-filter:           "\e91c";
+    --icon-folder-block:     "\e91d";
+    --icon-folder:           "\e91e";
+    --icon-image:            "\e91f";
+    --icon-information:      "\e920";
+    --icon-language:         "\e921";
+    --icon-location:         "\e922";
+    --icon-mail:             "\e923";
+    --icon-menu:             "\e924";
+    --icon-notification:     "\e925";
+    --icon-printer:          "\e927";
+    --icon-processing:       "\e928";
+    --icon-product:          "\e92a";
+    --icon-promotion:        "\e92b";
+    --icon-repeat:           "\e92e";
+    --icon-sales:            "\e92f";
+    --icon-search:           "\e930";
+    --icon-settings:         "\e932";
+    --icon-ship:             "\e933";
+    --icon-sort-down:        "\e934";
+    --icon-sort-left:        "\e935";
+    --icon-sort-right:       "\e936";
+    --icon-sort-up-down:     "\e937";
+    --icon-sort-up:          "\e938";
+    --icon-star:             "\e939";
+    --icon-store:            "\e93a";
+    --icon-up-stat:          "\e93c";
+    --icon-view:             "\e93d";
+    --icon-view-close:       "\e946";
+    --icon-copy:             "\e93e";
+    --icon-exit:             "\e93f";
+    --icon-collapse:         "\e941";
+    --icon-login:            "\e943";
+    --icon-pause:            "\e944";
+    --icon-play:             "\e945";
+}
+
+@utility icon-* {
+    &::before { content: --value(--icon-*); }
+}
+
 @utility icon-star-fill        { &::before { content: "\e938"; @apply text-[#ffb600]; } }
 
+/**
+ * Base.
+ *
+ * Element defaults, and the handful of v3 behaviours v4 dropped that the admin still
+ * relies on — the grey border, the pointer on buttons, the grey placeholder.
+ */
 @layer base {
     *,
     ::after,
@@ -158,6 +187,11 @@
     ::selection {
         @apply bg-darkBlue/20;
     }
+
+    input::placeholder,
+    textarea::placeholder {
+        @apply text-gray-400;
+    }
 }
 
 @font-face {
@@ -168,6 +202,12 @@
     font-display: block;
 }
 
+/**
+ * Components.
+ *
+ * The repeated pieces of the admin — buttons, labels, the icon font, the scrollbar —
+ * named once here so a view spells out only what is particular to it.
+ */
 @layer components {
     .direction-ltr {
         direction: ltr;
@@ -181,11 +221,6 @@
         @apply bg-indigo-100 opacity-50;
     }
 
-    /*
-     * The font-family is forced so a browser extension that overrides page fonts
-     * cannot replace the icons with letterforms, and the line-height with it, since
-     * an inherited one would knock the glyphs off their baseline.
-     */
     [class^="icon-"],
     [class*=" icon-"] {
         @apply text-gray-500 antialiased;
@@ -226,9 +261,6 @@
         display: none;
     }
 
-    /*
-     * #e9e9e9 is not on the palette — it is the scrollbar's own grey.
-     */
     .journal-scroll::-webkit-scrollbar-track {
         @apply cursor-pointer rounded-xl border border-[#e9e9e9] bg-white;
     }
@@ -293,10 +325,7 @@
     .label-info {
         @apply bg-slate-400;
     }
-
-    /*
-     * Status text colours.
-     */
+    
     .status-enable {
         @apply text-green-600;
     }
@@ -339,7 +368,28 @@
     }
 }
 
-/* Third-party overrides — outside layers so they aren't beaten by utility classes. */
+/**
+ * The paragraph leading, forced so every paragraph keeps the same rhythm.
+ *
+ * Without it a font-size utility brings its own paired line-height — `text-sm` alone
+ * takes a paragraph from 17px to 20px — which is most of the admin, since the size is
+ * nearly always set on the element.
+ *
+ * Unlayered on purpose. For `!important` the cascade reverses the layer order, so this
+ * rule inside `base` would beat `leading-*!` set on the element; unlayered is the
+ * weakest `!important` an author can write, which is exactly the standing wanted — it
+ * overrides a plain utility but yields to one that asked to win.
+ */
+p {
+    line-height: 17px !important;
+}
+
+/**
+ * Third-party overrides.
+ *
+ * Deliberately outside any layer: unlayered CSS wins over layered, so these are not
+ * beaten by the utilities the vendor markup already carries.
+ */
 .CodeMirror {
     @apply h-[calc(100vh-367px)]!;
 }
@@ -356,7 +406,7 @@
     @apply cursor-not-allowed opacity-50;
 }
 
-/*
+/**
  * Datagrid mobile Filter | Sort bar.
  *
  * The datagrid toolbar's `.dg-fsbar` row is lifted into a bar fixed to the foot of the screen on
@@ -365,7 +415,7 @@
  * above md.
  */
 @media (max-width: 767px) {
-    /*
+    /**
      * The z-index matches the sticky header's, so a drawer opened from the bar paints
      * above it rather than behind.
      */
@@ -381,7 +431,7 @@
         @apply flex flex-1 justify-center;
     }
 
-    /*
+    /**
      * Recasts the filter button — the div holding the funnel icon — as a borderless
      * full-width tab.
      *
@@ -407,7 +457,7 @@
         @apply flex flex-1 justify-center;
     }
 
-    /*
+    /**
      * Lifts the page so the fixed bar never covers the last rows.
      *
      * Has to be a selector: it styles an ancestor, and a utility only ever styles the
@@ -418,7 +468,7 @@
     }
 }
 
-/*
+/**
  * Datagrid header row.
  *
  * The look every datagrid header shares. A datagrid that renders its own header —
@@ -432,11 +482,12 @@
     }
 }
 
-/*
- * A header belonging to a grid that becomes cards on small screens. There it is
- * dropped entirely: the labels describe columns that no longer exist once the row
- * has collapsed into a card, and sorting is reachable from the bottom Filter | Sort
- * bar instead.
+/**
+ * Datagrid header on a grid that becomes cards.
+ *
+ * Below md the header is dropped entirely: the labels describe columns that no longer
+ * exist once the row has collapsed into a card, and sorting is reachable from the
+ * bottom Filter | Sort bar instead.
  *
  * It has to live in the utilities layer, not components: the header also carries
  * `grid`, and utilities are emitted after components — so a `display: none` set in
@@ -448,7 +499,7 @@
     }
 }
 
-/*
+/**
  * Datagrid rows as cards on small screens.
  *
  * A grid whose columns are fixed reads fine on a desktop and terribly on a phone,
@@ -464,14 +515,14 @@
     .datagrid-card {
         @apply gap-2.5 py-4;
 
-        /*
+        /**
          * `!important` because several grids set their column template as an inline
          * style, which no class can otherwise beat.
          */
         grid-template-columns: minmax(0, 1fr) !important;
     }
 
-    /*
+    /**
      * A selector rather than utilities: it targets cells by the `data-label` they
      * carry, which is what keeps the label out of the markup entirely.
      */
@@ -482,7 +533,7 @@
     .datagrid-card > [data-label]::before {
         @apply text-xs font-medium uppercase leading-5 tracking-wide text-gray-400;
 
-        /*
+        /**
          * Tailwind has no utility for a generated attribute value.
          */
         content: attr(data-label);
@@ -492,7 +543,7 @@
         @apply text-gray-500;
     }
 
-    /*
+    /**
      * Actions sit on their own line, aligned to the row's trailing edge. Kept as a
      * flex row rather than the labelled grid above, so the buttons stay side by side
      * instead of stacking, and with no label — the icons speak for themselves.
@@ -502,7 +553,7 @@
     }
 
     .datagrid-card > [data-label="actions"]::before {
-        /*
+        /**
          * Suppresses the generated label above — again, no utility for content.
          */
         content: none;

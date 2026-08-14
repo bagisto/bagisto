@@ -249,7 +249,7 @@
                             <p class="flex items-center gap-2 dark:text-white">
                                 <i
                                     class="icon-information rounded-full text-2xl"
-                                    :class="isValid ? 'bg-green-200 text-green-600 dark:!text-green-600' : 'bg-red-200 text-red-600 dark:!text-red-600'"
+                                    :class="isValid ? 'bg-green-200 text-green-600 dark:text-green-600!' : 'bg-red-200 text-red-600 dark:text-red-600!'"
                                 ></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
@@ -262,7 +262,7 @@
                             <p class="flex items-center gap-2 dark:text-white">
                                 <i
                                     class="icon-information rounded-full text-2xl"
-                                    :class="isValid ? 'bg-green-200 text-green-600 dark:!text-green-600' : 'bg-red-200 text-red-600 dark:!text-red-600'"
+                                    :class="isValid ? 'bg-green-200 text-green-600 dark:text-green-600!' : 'bg-red-200 text-red-600 dark:text-red-600!'"
                                 ></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
@@ -275,7 +275,7 @@
                             <p class="flex items-center gap-2 dark:text-white">
                                 <i
                                     class="icon-information rounded-full text-2xl"
-                                    :class="isValid ? 'bg-green-200 text-green-600 dark:!text-green-600' : 'bg-red-200 text-red-600 dark:!text-red-600'"
+                                    :class="isValid ? 'bg-green-200 text-green-600 dark:text-green-600!' : 'bg-red-200 text-red-600 dark:text-red-600!'"
                                 ></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
@@ -460,7 +460,7 @@
                                 class="mb-2 flex items-center gap-2 text-base text-orange-700 dark:text-orange-400"
                                 v-if="stats.batches?.failed"
                             >
-                                <i class="icon-error h-fit rounded-full bg-orange-200 text-2xl text-orange-600 dark:text-orange-600!"></i>
+                                <i class="icon-close h-fit rounded-full bg-orange-200 text-2xl text-orange-600 dark:text-orange-600!"></i>
 
                                 @{{ "@lang('admin::app.settings.data-transfer.imports.import.failed-batches')".replace(':count', stats.batches.failed) }}
                             </p>

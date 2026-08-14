@@ -117,7 +117,7 @@
 
         @if ($hasCustomerRestrictedItem)
             <div class="mt-4 flex items-start gap-3 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900 dark:border-amber-700 dark:bg-amber-900/20 dark:text-amber-200">
-                <span class="icon-warning mt-0.5 text-lg"></span>
+                <span class="icon-information mt-0.5 text-lg"></span>
 
                 <div>
                     <p class="font-semibold">
@@ -577,7 +577,7 @@
 
                                     @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @else
-                                    <span class="icon-cancel-1 h-fit rounded-full bg-red-100 text-2xl text-red-600"></span>
+                                    <span class="icon-close h-fit rounded-full bg-red-100 text-2xl text-red-600"></span>
 
                                     @lang('admin::app.sales.orders.view.customer-not-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
                                 @endif

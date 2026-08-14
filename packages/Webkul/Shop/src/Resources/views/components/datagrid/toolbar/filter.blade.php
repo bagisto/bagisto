@@ -103,7 +103,7 @@
                                                         >
                                                         </span>
 
-                                                        <span class="icon-sort-down text-2xl"></span>
+                                                        <span class="icon-arrow-down text-2xl"></span>
                                                     </button>
                                                 </x-slot>
 
@@ -129,7 +129,7 @@
                                                     <span v-text="column.filterable_options.find((option => option.value == appliedColumnValue)).label"></span>
 
                                                     <span
-                                                        class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                        class="icon-cancel cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                                                     >
                                                     </span>

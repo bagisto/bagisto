@@ -1,21 +1,44 @@
+/**
+ * Scanned from `src/Resources/`, which is where every class in the installer is written —
+ * it has no menu or datagrid config naming classes of its own.
+ */
 @import "tailwindcss" source("../../");
 
 @theme {
-    /* Fonts */
+    /**
+     * Fonts — the named families the installer can ask for by utility.
+     */
     --font-inter: Inter;
 }
 
-/* Icons must be safelisted — many are referenced only from PHP configs or dynamic Vue bindings the Tailwind scanner can't detect. */
-@source inline("{icon-limited,icon-cross,icon-arrow-down,icon-right,icon-checkbox-active,icon-checkbox-normal,icon-tick,icon-view}");
-@utility icon-limited          { &::before { content: "\e900"; } }
-@utility icon-cross            { &::before { content: "\e901"; } }
-@utility icon-arrow-down       { &::before { content: "\e902"; } }
-@utility icon-right            { &::before { content: "\e903"; } }
-@utility icon-checkbox-active  { &::before { content: "\e904"; } }
-@utility icon-checkbox-normal  { &::before { content: "\e905"; } }
-@utility icon-tick             { &::before { content: "\e906"; } }
-@utility icon-view             { &::before { content: "\e907"; } }
+/**
+ * Icons.
+ *
+ * Each icon is a utility rather than a plain class so it can carry variants.
+ *
+ * Only the glyphs the installer actually uses are declared, and every one is named by a
+ * view the scan covers, so no safelist is needed — an icon declared here but used
+ * nowhere would ship as dead CSS.
+ */
+@theme {
+    --icon-limited:         "\e900";
+    --icon-cross:           "\e901";
+    --icon-right:           "\e903";
+    --icon-checkbox-active: "\e904";
+    --icon-checkbox-normal: "\e905";
+    --icon-tick:            "\e906";
+}
 
+@utility icon-* {
+    &::before { content: --value(--icon-*); }
+}
+
+/**
+ * Base.
+ *
+ * Element defaults, and the handful of v3 behaviours v4 dropped that the installer
+ * still relies on — the grey border, the pointer on buttons, the grey placeholder.
+ */
 @layer base {
     *,
     ::after,
@@ -23,6 +46,27 @@
     ::backdrop,
     ::file-selector-button {
         border-color: var(--color-gray-200, currentColor);
+    }
+
+    /**
+     * The pointer on buttons, which v4 dropped from preflight.
+     *
+     * Left alone every button in the installer reverts to the default arrow.
+     */
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    /**
+     * The placeholder colour, restored to the fixed grey v3 painted.
+     *
+     * v4 derives it from the input's own text colour — 50% of currentColor — which
+     * makes the placeholder track the field's text rather than staying grey.
+     */
+    input::placeholder,
+    textarea::placeholder {
+        @apply text-gray-400;
     }
 
     * {
@@ -42,10 +86,19 @@
     font-display: block;
 }
 
+/**
+ * Components.
+ *
+ * The repeated pieces of the installer — the icon font, the select, the button —
+ * named once here so a view spells out only what is particular to it.
+ */
 @layer components {
+    /**
+     * The font-family is forced so a browser extension that overrides page fonts
+     * cannot replace the icons with letterforms.
+     */
     [class^="icon-"],
     [class*=" icon-"] {
-        /* use !important to prevent issues with browser extensions that change fonts */
         font-family: 'bagisto-installer' !important;
         speak: never;
         font-style: normal;
@@ -54,8 +107,6 @@
         text-transform: none;
         line-height: 1;
         color: #6B7280;
-
-        /* Better Font Rendering */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
     }

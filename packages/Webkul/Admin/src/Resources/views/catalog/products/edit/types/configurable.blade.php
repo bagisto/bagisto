@@ -169,8 +169,8 @@
             <span
                 class="icon-uncheckbox flex cursor-pointer select-none text-2xl"
                 :class="{
-                    '!icon-checked text-blue-600': variants.length == selectedVariants.length,
-                    '!icon-checkbox-partial text-blue-600': selectedVariants.length && variants.length != selectedVariants.length
+                    'icon-checked! text-blue-600': variants.length == selectedVariants.length,
+                    'icon-checkbox-partial! text-blue-600': selectedVariants.length && variants.length != selectedVariants.length
                 }"
                 for="select-all-variants"
                 @click="selectAll"

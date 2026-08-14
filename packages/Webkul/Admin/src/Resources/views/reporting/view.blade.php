@@ -50,7 +50,7 @@
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
                                 <div class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-                                    <span class="icon-export text-xl text-gray-600"></span>
+                                    <span class="icon-admin-export text-xl text-gray-600"></span>
             
                                     @lang('admin::app.export.export')
                                 </div>

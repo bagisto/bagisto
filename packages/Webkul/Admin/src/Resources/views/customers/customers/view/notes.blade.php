@@ -69,7 +69,7 @@
 
                     @lang('admin::app.customers.customers.view.notes.customer-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @else
-                    <span class="icon-cancel-1 h-fit rounded-full bg-red-100 text-2xl text-red-600 dark:text-red-600!"></span>
+                    <span class="icon-close h-fit rounded-full bg-red-100 text-2xl text-red-600 dark:text-red-600!"></span>
 
                     @lang('admin::app.customers.customers.view.notes.customer-not-notified', ['date' => core()->formatDate($note->created_at, 'Y-m-d H:i:s a')])
                 @endif

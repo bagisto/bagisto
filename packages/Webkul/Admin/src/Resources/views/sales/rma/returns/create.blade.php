@@ -790,7 +790,7 @@
                                     class="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
                                     @click="removeImage(index)"
                                 >
-                                    <i class="icon-cancel-1 cursor-pointer rounded-full text-2xl text-white bg-gray-950"></i>
+                                    <i class="icon-close cursor-pointer rounded-full text-2xl text-white bg-gray-950"></i>
                                 </button>
                             </div>
                         </div>

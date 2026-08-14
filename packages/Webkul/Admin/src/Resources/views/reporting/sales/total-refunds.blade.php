@@ -40,7 +40,7 @@
                         <div class="flex items-center gap-0.5">
                             <span
                                 class="text-base text-emerald-500"
-                                :class="[report.statistics.refunds.progress < 0 ? 'icon-down-stat text-red-500 dark:text-red-500!' : 'icon-up-stat text-emerald-500 dark:!text-emerald-500']"
+                                :class="[report.statistics.refunds.progress < 0 ? 'icon-down-stat text-red-500 dark:text-red-500!' : 'icon-up-stat text-emerald-500 dark:text-emerald-500!']"
                             ></span>
 
                             <p
