@@ -1,9 +1,13 @@
 # =============================================================================
 # Bagisto Production Image — OpenLiteSpeed (Single-stage)
-# Single container: OpenLiteSpeed + lsphp 8.3 (LSAPI) + MySQL 8.0 + Supervisor
+# Single container: OpenLiteSpeed + lsphp 8.4 (LSAPI) + the bundled database + Supervisor
 #
-# Default mode  : Internal MySQL (ready-to-boot, Docker Hub style)
-# Override mode : Set DB_HOST to an external address to skip internal MySQL
+# Default mode  : the bundled database (ready to boot, Docker Hub style)
+# Override mode : set DB_HOST to an external address to use that instead
+#
+# Which database is bundled is chosen with --build-arg DB_ENGINE=mysql|postgres.
+# Everything database-specific lives in shared/db/<engine>/, so this file is
+# the same for either one.
 #
 # Bagisto is FULLY INSTALLED at build time — migrations, seeding, and all.
 # The image boots instantly with no first-run setup needed.
@@ -15,7 +19,8 @@
 FROM ubuntu:24.04
 
 ARG BAGISTO_VERSION=v2.4.7
-ARG LSPHP_VERSION=83
+ARG DB_ENGINE=mysql
+ARG LSPHP_VERSION=84
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
@@ -32,7 +37,6 @@ RUN apt-get update && apt-get install -y \
         gnupg \
         gosu \
         imagemagick \
-        mysql-server \
         nano \
         supervisor \
         unzip \
@@ -53,6 +57,7 @@ RUN wget -qO - https://repo.litespeed.sh | bash \
         lsphp${LSPHP_VERSION}-imagick \
         lsphp${LSPHP_VERSION}-intl \
         lsphp${LSPHP_VERSION}-mysql \
+        lsphp${LSPHP_VERSION}-pgsql \
         lsphp${LSPHP_VERSION}-opcache \
     && rm -rf /var/lib/apt/lists/*
 
@@ -60,6 +65,21 @@ ENV PATH=/usr/local/lsws/lsphp${LSPHP_VERSION}/bin:$PATH
 
 # Expose lsphp's CLI as `php` so artisan / build-install.sh can run it.
 RUN ln -sf /usr/local/lsws/lsphp${LSPHP_VERSION}/bin/php /usr/local/bin/php
+
+
+# ---------------------------------------------------------------------------
+# The bundled database server
+#
+# Only the chosen engine's server is installed. Both PHP drivers are present
+# regardless, so an image can still be pointed at an external server of the
+# other kind without rebuilding.
+# ---------------------------------------------------------------------------
+RUN apt-get update && if [ "$DB_ENGINE" = "postgres" ]; then \
+        apt-get install -y postgresql postgresql-client; \
+    else \
+        apt-get install -y mysql-server mysql-client; \
+    fi \
+    && rm -rf /var/lib/apt/lists/*
 
 
 # ---------------------------------------------------------------------------
@@ -85,12 +105,14 @@ RUN git clone --depth 1 --branch ${BAGISTO_VERSION} \
 
 
 # ---------------------------------------------------------------------------
-# Prepare .env with internal-MySQL defaults
+# Prepare .env with the bundled-database defaults
+#
+# DB_CONNECTION and DB_PORT are engine-specific and are set further down,
+# next to the install that actually uses them.
 # ---------------------------------------------------------------------------
 RUN cp .env.example .env \
     && sed -i 's/^APP_DEBUG=.*/APP_DEBUG=false/' .env \
     && sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/' .env \
-    && sed -i 's/^DB_PORT=.*/DB_PORT=3306/' .env \
     && sed -i 's/^DB_DATABASE=.*/DB_DATABASE=bagisto/' .env \
     && sed -i 's/^DB_USERNAME=.*/DB_USERNAME=bagisto/' .env \
     && sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=bagisto/' .env \
@@ -100,15 +122,23 @@ RUN cp .env.example .env \
 # ---------------------------------------------------------------------------
 # Install Bagisto at BUILD TIME (starts MySQL, migrates + seeds, bakes data in)
 # ---------------------------------------------------------------------------
-COPY shared/mysql-init.sql /docker-entrypoint-initdb.d/init.sql
+COPY shared/db/${DB_ENGINE}/ /usr/local/share/bagisto/db/
 COPY shared/build-install.sh /tmp/build-install.sh
-RUN chmod +x /tmp/build-install.sh && bash /tmp/build-install.sh && rm /tmp/build-install.sh
+RUN cp /usr/local/share/bagisto/db/init.sql /docker-entrypoint-initdb.d/init.sql \
+    && if [ -f /usr/local/share/bagisto/db/postgres-server.sh ]; then \
+           install -m 0755 /usr/local/share/bagisto/db/postgres-server.sh /usr/local/bin/postgres-server.sh; \
+       fi \
+    && sed -i "s/^DB_CONNECTION=.*/DB_CONNECTION=$(if [ \"$DB_ENGINE\" = postgres ]; then echo pgsql; else echo mysql; fi)/" /var/www/bagisto/.env \
+    && sed -i "s/^DB_PORT=.*/DB_PORT=$(if [ \"$DB_ENGINE\" = postgres ]; then echo 5432; else echo 3306; fi)/" /var/www/bagisto/.env \
+    && chmod +x /tmp/build-install.sh \
+    && DB_ENGINE=${DB_ENGINE} bash /tmp/build-install.sh \
+    && rm /tmp/build-install.sh
 
 
 # ---------------------------------------------------------------------------
 # PHP configuration (lsphp — LSAPI + CLI share the same binary)
 # ---------------------------------------------------------------------------
-COPY shared/php.ini /usr/local/lsws/lsphp${LSPHP_VERSION}/etc/php/8.3/litespeed/php.ini
+COPY shared/php.ini /usr/local/lsws/lsphp${LSPHP_VERSION}/etc/php/8.4/litespeed/php.ini
 
 
 # ---------------------------------------------------------------------------
@@ -123,6 +153,8 @@ RUN chown -R www-data:www-data /usr/local/lsws/conf /usr/local/lsws/logs
 # Supervisor configuration
 # ---------------------------------------------------------------------------
 COPY litespeed/config/supervisord.conf /etc/supervisor/conf.d/bagisto.conf
+RUN sed -i "s/__LSPHP_VERSION__/${LSPHP_VERSION}/g" /etc/supervisor/conf.d/bagisto.conf
+COPY shared/db/${DB_ENGINE}/supervisord.conf /etc/supervisor/conf.d/database.conf
 
 
 # ---------------------------------------------------------------------------

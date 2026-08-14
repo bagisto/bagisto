@@ -214,4 +214,21 @@ return [
 
     'partitioned' => env('SESSION_PARTITIONED_COOKIE', false),
 
+    /*
+    |--------------------------------------------------------------------------
+    | Session Serialization
+    |--------------------------------------------------------------------------
+    |
+    | This value controls the serialization strategy for session data. A fresh
+    | Laravel application defaults to "json", which cannot carry PHP objects
+    | but is not open to "gadget chain" attacks should the APP_KEY leak. It
+    | is left as "php" here because an upgraded store already holds data
+    | written that way, and switching strategy would not read it back.
+    |
+    | Supported: "json", "php"
+    |
+    */
+
+    'serialization' => env('SESSION_SERIALIZATION', 'php'),
+
 ];

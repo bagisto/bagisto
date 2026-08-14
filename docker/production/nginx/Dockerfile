@@ -1,9 +1,13 @@
 # =============================================================================
 # Bagisto Production Image (Single-stage)
-# Single container: Nginx + PHP 8.3 FPM + MySQL 8.0 + Supervisor
+# Single container: Nginx + PHP 8.4 FPM + the bundled database + Supervisor
 #
-# Default mode  : Internal MySQL (ready-to-boot, Docker Hub style)
-# Override mode : Set DB_HOST to an external address to skip internal MySQL
+# Default mode  : the bundled database (ready to boot, Docker Hub style)
+# Override mode : set DB_HOST to an external address to use that instead
+#
+# Which database is bundled is chosen with --build-arg DB_ENGINE=mysql|postgres.
+# Everything database-specific lives in shared/db/<engine>/, so this file is
+# the same for either one.
 #
 # Bagisto is FULLY INSTALLED at build time — migrations, seeding, and all.
 # The image boots instantly with no first-run setup needed.
@@ -12,7 +16,8 @@
 FROM ubuntu:24.04
 
 ARG BAGISTO_VERSION=v2.4.7
-ARG PHP_VERSION=8.3
+ARG DB_ENGINE=mysql
+ARG PHP_VERSION=8.4
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
@@ -33,14 +38,13 @@ RUN apt-get update && apt-get install -y \
     && add-apt-repository ppa:ondrej/php -y \
     && apt-get update && apt-get install -y \
         imagemagick \
-        mysql-server \
         nginx \
         supervisor \
     && rm -rf /var/lib/apt/lists/*
 
 
 # ---------------------------------------------------------------------------
-# PHP 8.3 + extensions
+# PHP 8.4 + extensions
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
         php${PHP_VERSION}-bcmath \
@@ -55,11 +59,27 @@ RUN apt-get update && apt-get install -y \
         php${PHP_VERSION}-intl \
         php${PHP_VERSION}-mbstring \
         php${PHP_VERSION}-mysql \
+        php${PHP_VERSION}-pgsql \
         php${PHP_VERSION}-pdo \
         php${PHP_VERSION}-soap \
         php${PHP_VERSION}-sockets \
         php${PHP_VERSION}-xml \
         php${PHP_VERSION}-zip \
+    && rm -rf /var/lib/apt/lists/*
+
+
+# ---------------------------------------------------------------------------
+# The bundled database server
+#
+# Only the chosen engine's server is installed. Both PHP drivers are present
+# regardless, so an image can still be pointed at an external server of the
+# other kind without rebuilding.
+# ---------------------------------------------------------------------------
+RUN apt-get update && if [ "$DB_ENGINE" = "postgres" ]; then \
+        apt-get install -y postgresql postgresql-client; \
+    else \
+        apt-get install -y mysql-server mysql-client; \
+    fi \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -86,12 +106,14 @@ RUN git clone --depth 1 --branch ${BAGISTO_VERSION} \
 
 
 # ---------------------------------------------------------------------------
-# Prepare .env with internal-MySQL defaults
+# Prepare .env with the bundled-database defaults
+#
+# DB_CONNECTION and DB_PORT are engine-specific and are set further down,
+# next to the install that actually uses them.
 # ---------------------------------------------------------------------------
 RUN cp .env.example .env \
     && sed -i 's/^APP_DEBUG=.*/APP_DEBUG=false/' .env \
     && sed -i 's/^DB_HOST=.*/DB_HOST=127.0.0.1/' .env \
-    && sed -i 's/^DB_PORT=.*/DB_PORT=3306/' .env \
     && sed -i 's/^DB_DATABASE=.*/DB_DATABASE=bagisto/' .env \
     && sed -i 's/^DB_USERNAME=.*/DB_USERNAME=bagisto/' .env \
     && sed -i 's/^DB_PASSWORD=.*/DB_PASSWORD=bagisto/' .env \
@@ -112,9 +134,17 @@ RUN cp .env.example .env \
 #
 # The MySQL data directory (/var/lib/mysql) is baked into this layer.
 # ---------------------------------------------------------------------------
-COPY shared/mysql-init.sql /docker-entrypoint-initdb.d/init.sql
+COPY shared/db/${DB_ENGINE}/ /usr/local/share/bagisto/db/
 COPY shared/build-install.sh /tmp/build-install.sh
-RUN chmod +x /tmp/build-install.sh && bash /tmp/build-install.sh && rm /tmp/build-install.sh
+RUN cp /usr/local/share/bagisto/db/init.sql /docker-entrypoint-initdb.d/init.sql \
+    && if [ -f /usr/local/share/bagisto/db/postgres-server.sh ]; then \
+           install -m 0755 /usr/local/share/bagisto/db/postgres-server.sh /usr/local/bin/postgres-server.sh; \
+       fi \
+    && sed -i "s/^DB_CONNECTION=.*/DB_CONNECTION=$(if [ \"$DB_ENGINE\" = postgres ]; then echo pgsql; else echo mysql; fi)/" /var/www/bagisto/.env \
+    && sed -i "s/^DB_PORT=.*/DB_PORT=$(if [ \"$DB_ENGINE\" = postgres ]; then echo 5432; else echo 3306; fi)/" /var/www/bagisto/.env \
+    && chmod +x /tmp/build-install.sh \
+    && DB_ENGINE=${DB_ENGINE} bash /tmp/build-install.sh \
+    && rm /tmp/build-install.sh
 
 
 # ---------------------------------------------------------------------------
@@ -135,6 +165,8 @@ COPY nginx/config/nginx.conf /etc/nginx/conf.d/bagisto.conf
 # Supervisor configuration
 # ---------------------------------------------------------------------------
 COPY nginx/config/supervisord.conf /etc/supervisor/conf.d/bagisto.conf
+RUN sed -i "s/__PHP_VERSION__/${PHP_VERSION}/g" /etc/supervisor/conf.d/bagisto.conf
+COPY shared/db/${DB_ENGINE}/supervisord.conf /etc/supervisor/conf.d/database.conf
 
 
 # ---------------------------------------------------------------------------

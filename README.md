@@ -72,6 +72,24 @@ Follow the [Getting Started with Bagisto](https://www.youtube.com/watch?v=s_DhQr
 
 You can browse through the Free [Live Demo](https://demo.bagisto.com/)
 
+## 🐳 Run with Docker
+
+A single command gives you a fully installed store — migrations, seed data and search indexes are all baked into the image, so there is no first-run setup.
+
+```bash
+docker run -d --name bagisto -p 80:80 webkul/bagisto:latest
+```
+
+Images are published for each web server and each database, so you can match whatever you already run:
+
+| | MySQL 8.0 | PostgreSQL 16 |
+|---|---|---|
+| **Nginx** | `:latest` · `:latest-nginx` · `:latest-nginx-mysql` | `:latest-nginx-postgres` |
+| **Apache** | `:latest-apache` · `:latest-apache-mysql` | `:latest-apache-postgres` |
+| **OpenLiteSpeed** | `:latest-litespeed` · `:latest-litespeed-mysql` | `:latest-litespeed-postgres` |
+
+Pin a release by swapping `latest` for the version, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Setting `DB_HOST` to an external server skips the bundled database entirely. Full details in [`docker/production/README.md`](docker/production/README.md).
+
 ## ☁️ Bagisto Cloud Hosting
 
 Deploy and scale your Bagisto store effortlessly with [Bagisto Cloud Hosting](https://bagisto.com/en/cloud-hosting/)  a fully managed, optimized hosting solution built specifically for Bagisto. Enjoy automatic scaling, built-in security, one-click updates, and expert support so you can focus on growing your business.
