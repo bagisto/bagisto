@@ -167,24 +167,33 @@ class ReasonController extends Controller
      */
     public function massDestroy(MassDestroyRequest $request): JsonResponse
     {
-        try {
-            $rmaReasonIds = request()->input('indices');
+        $requestedIds = $request->input('indices');
 
-            foreach ($rmaReasonIds as $rmaReasonId) {
+        $existingIds = $this->rmaReasonRepository->findWhereIn('id', $requestedIds)->pluck('id');
+
+        try {
+            foreach ($existingIds as $rmaReasonId) {
                 Event::dispatch('sales.rma.reason.delete.before', $rmaReasonId);
 
                 $this->rmaReasonRepository->delete($rmaReasonId);
 
                 Event::dispatch('sales.rma.reason.delete.after', $rmaReasonId);
             }
-
-            return new JsonResponse([
-                'message' => trans('admin::app.sales.rma.reasons.index.datagrid.mass-delete-success'),
-            ]);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.reasons.index.datagrid.reason-error'),
             ], 500);
         }
+
+        $skipped = count($requestedIds) - $existingIds->count();
+
+        return new JsonResponse([
+            'message' => $skipped
+                ? trans('admin::app.sales.rma.reasons.index.datagrid.mass-delete-partial', [
+                    'deleted' => $existingIds->count(),
+                    'skipped' => $skipped,
+                ])
+                : trans('admin::app.sales.rma.reasons.index.datagrid.mass-delete-success'),
+        ]);
     }
 }

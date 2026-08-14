@@ -147,24 +147,33 @@ class RulesController extends Controller
      */
     public function massDestroy(MassDestroyRequest $request): JsonResponse
     {
-        try {
-            $rmaRuleIds = request()->input('indices');
+        $requestedIds = $request->input('indices');
 
-            foreach ($rmaRuleIds as $rmaRuleId) {
+        $existingIds = $this->rmaRulesRepository->findWhereIn('id', $requestedIds)->pluck('id');
+
+        try {
+            foreach ($existingIds as $rmaRuleId) {
                 Event::dispatch('sales.rma.rules.delete.before', $rmaRuleId);
 
                 $this->rmaRulesRepository->delete($rmaRuleId);
 
                 Event::dispatch('sales.rma.rules.delete.after', $rmaRuleId);
             }
-
-            return new JsonResponse([
-                'message' => trans('admin::app.sales.rma.rules.index.datagrid.mass-delete-success'),
-            ]);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => trans('admin::app.sales.rma.rules.index.datagrid.reason-error'),
             ], 500);
         }
+
+        $skipped = count($requestedIds) - $existingIds->count();
+
+        return new JsonResponse([
+            'message' => $skipped
+                ? trans('admin::app.sales.rma.rules.index.datagrid.mass-delete-partial', [
+                    'deleted' => $existingIds->count(),
+                    'skipped' => $skipped,
+                ])
+                : trans('admin::app.sales.rma.rules.index.datagrid.mass-delete-success'),
+        ]);
     }
 }
