@@ -30,7 +30,7 @@
         "laravel/ai": "^0.2.2",
         "laravel/cashier": "^16.0",
         "laravel/framework": "^12.0",
-        "laravel/octane": "^2.3",
+        "laravel/octane": "^2.19",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.0",
         "laravel/tinker": "^2.10",

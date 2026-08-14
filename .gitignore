@@ -42,3 +42,7 @@ skills-lock.json
 /vendor
 yarn.lock
 yarn-error.log
+
+**/caddy
+frankenphp
+frankenphp-worker.php
