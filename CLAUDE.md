@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Bagisto 2.4.x - open-source Laravel 12 e-commerce platform. PHP 8.3+, Vue.js 3, Tailwind CSS 3, Vite 5.
+Bagisto 2.5.x - open-source Laravel 13 e-commerce platform. PHP 8.4+, Vue.js 3, Tailwind CSS 4, Vite 6.
+
+Runs on MySQL 8.0 or PostgreSQL 16; both are first-class and CI covers each.
 
 ## Common Commands
 
@@ -25,9 +27,9 @@ vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directo
 vendor/bin/pest --filter="test name"                    # Run a single test by name
 ```
 
-Test suites defined in `phpunit.xml`: Admin Feature, Core Unit, Customer Unit, DataGrid Unit, Installer Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
+Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Core Unit, Customer Unit, DataGrid Unit, Installer Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
 
-Tests use **Pest 3** with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
+Tests use **Pest 4** (PHPUnit 12) with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
 
 ### Fresh Database Setup for Testing
 Parallel testing creates databases named `{DB_DATABASE}_test_1`, `{DB_DATABASE}_test_2`, etc. based on the number of CPU cores. For example, with `DB_DATABASE=bagisto` on a 6-core machine, it creates `bagisto_test_1` through `bagisto_test_6`. This applies to both MySQL and PostgreSQL.
@@ -191,10 +193,23 @@ Or use: `php artisan package:make Webkul/<Name>` (requires `bagisto/bagisto-pack
 
 ## CI Pipeline
 
-- **pest_tests.yml**: Pest tests on PHP 8.3 + MySQL 8.0 & PostgreSQL 16
+- **pest_tests.yml**: Pest tests on PHP 8.4 + MySQL 8.0 & PostgreSQL 16
 - **pint_tests.yml**: Code style checks with Laravel Pint
 - **admin_playwright_tests.yml / shop_playwright_tests.yml**: E2E tests (6 shards × 2 databases)
 - **translation_tests.yml**: Translation file validation
+
+## Production Docker Images
+
+Images are built from `docker/production/` across two dimensions — web server (`nginx`, `apache`, `litespeed`) and bundled database (`mysql`, `postgres`) — and published as `webkul/bagisto:<version>-<server>-<database>`. MySQL images also answer to the shorter `-<server>` name, and nginx + MySQL to the bare `:<version>` and `:latest`.
+
+Everything engine-specific lives in `docker/production/shared/db/<engine>/` behind a fixed contract (`engine.sh` exposing init/start/provision/stop/ping). `build-install.sh` and `entrypoint.sh` never name a database, so adding an engine means adding a directory, not editing the shared scripts.
+
+```bash
+cd docker/production
+
+docker build -f nginx/Dockerfile -t bagisto:nginx-mysql .
+docker build -f nginx/Dockerfile -t bagisto:nginx-postgres --build-arg DB_ENGINE=postgres .
+```
 
 ## PostgreSQL Compatibility
 

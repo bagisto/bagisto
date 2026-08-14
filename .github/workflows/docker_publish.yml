@@ -5,10 +5,20 @@ name: Build & Publish Docker Image
 # whenever a `v*` tag is pushed (the same tag convention used for Bagisto
 # releases), and also supports manual dispatch for ad-hoc rebuilds.
 #
-# Three web-server variants are built from docker/production/:
-#   - nginx     → :<version>-nginx     (also the unsuffixed :<version> / :latest)
-#   - apache    → :<version>-apache
-#   - litespeed → :<version>-litespeed
+# Images are built from docker/production/ across two dimensions — the web
+# server and the bundled database — giving :<version>-<server>-<database>:
+#
+#   servers   : nginx, apache, litespeed
+#   databases : mysql, postgres
+#
+# e.g. 2.5.0-nginx-mysql, 2.5.0-nginx-postgres, 2.5.0-apache-postgres
+#
+# Shorter aliases point at the conventional choice, so existing pulls keep
+# working:
+#
+#   :<version>-<server>  → that server on MySQL
+#   :<version>           → nginx on MySQL
+#   :latest              → the newest stable :<version>
 #
 # Required repository secrets:
 #   DOCKERHUB_USERNAME  Docker Hub user / org with push access to webkul/bagisto
@@ -114,7 +124,7 @@ jobs:
   # Build & push each web-server variant in parallel.
   # --------------------------------------------------------------------------
   build_and_push:
-    name: Build & Push ${{ matrix.variant }} (amd64 + arm64)
+    name: Build & Push ${{ matrix.variant }}-${{ matrix.database }} (amd64 + arm64)
     needs: resolve
     runs-on: ubuntu-latest
     permissions:
@@ -123,6 +133,7 @@ jobs:
       fail-fast: false
       matrix:
         variant: [nginx, apache, litespeed]
+        database: [mysql, postgres]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -148,21 +159,33 @@ jobs:
           DOCKER_TAG: ${{ needs.resolve.outputs.docker_tag }}
           PUSH_LATEST: ${{ needs.resolve.outputs.push_latest }}
           VARIANT: ${{ matrix.variant }}
+          DATABASE: ${{ matrix.database }}
         run: |
-          # Always: version + server suffix, e.g. 2.4.7-nginx
-          TAGS="${IMAGE}:${DOCKER_TAG}-${VARIANT}"
+          # The full name always carries both dimensions, e.g. 2.5.0-nginx-postgres
+          TAGS="${IMAGE}:${DOCKER_TAG}-${VARIANT}-${DATABASE}"
 
-          # Floating per-server tag on stable default-branch releases, e.g. latest-nginx
           if [ "$PUSH_LATEST" = "true" ]; then
-            TAGS="$TAGS,${IMAGE}:latest-${VARIANT}"
+            TAGS="$TAGS,${IMAGE}:latest-${VARIANT}-${DATABASE}"
           fi
 
-          # nginx is the default variant → also publish the unsuffixed tags
-          # (:<version> and :latest) for backward compatibility.
-          if [ "$VARIANT" = "nginx" ]; then
-            TAGS="$TAGS,${IMAGE}:${DOCKER_TAG}"
+          # MySQL is the conventional database, so it also answers to the
+          # shorter server-only name that was published before PostgreSQL
+          # images existed.
+          if [ "$DATABASE" = "mysql" ]; then
+            TAGS="$TAGS,${IMAGE}:${DOCKER_TAG}-${VARIANT}"
+
             if [ "$PUSH_LATEST" = "true" ]; then
-              TAGS="$TAGS,${IMAGE}:latest"
+              TAGS="$TAGS,${IMAGE}:latest-${VARIANT}"
+            fi
+
+            # nginx is the default server, so nginx + MySQL is what an
+            # unqualified pull gets.
+            if [ "$VARIANT" = "nginx" ]; then
+              TAGS="$TAGS,${IMAGE}:${DOCKER_TAG}"
+
+              if [ "$PUSH_LATEST" = "true" ]; then
+                TAGS="$TAGS,${IMAGE}:latest"
+              fi
             fi
           fi
 
@@ -179,12 +202,13 @@ jobs:
           tags: ${{ steps.tags.outputs.tags }}
           build-args: |
             BAGISTO_VERSION=${{ needs.resolve.outputs.bagisto_version }}
+            DB_ENGINE=${{ matrix.database }}
           provenance: false
-          cache-from: type=gha,scope=${{ matrix.variant }}
-          cache-to: type=gha,mode=max,scope=${{ matrix.variant }}
+          cache-from: type=gha,scope=${{ matrix.variant }}-${{ matrix.database }}
+          cache-to: type=gha,mode=max,scope=${{ matrix.variant }}-${{ matrix.database }}
           labels: |
-            org.opencontainers.image.title=Bagisto (${{ matrix.variant }})
-            org.opencontainers.image.description=Bagisto production image (${{ matrix.variant }} + PHP 8.3 + MySQL 8.0, fully installed)
+            org.opencontainers.image.title=Bagisto (${{ matrix.variant }} + ${{ matrix.database }})
+            org.opencontainers.image.description=Bagisto production image (${{ matrix.variant }} + PHP 8.4 + ${{ matrix.database }}, fully installed)
             org.opencontainers.image.version=${{ needs.resolve.outputs.docker_tag }}
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}
@@ -196,17 +220,25 @@ jobs:
           DOCKER_TAG: ${{ needs.resolve.outputs.docker_tag }}
           PUSH_LATEST: ${{ needs.resolve.outputs.push_latest }}
           VARIANT: ${{ matrix.variant }}
+          DATABASE: ${{ matrix.database }}
         run: |
           {
-            echo "### Published \`${VARIANT}\`"
+            echo "### Published \`${VARIANT}-${DATABASE}\`"
             echo ""
             echo "- Bagisto version: \`${{ needs.resolve.outputs.bagisto_version }}\`"
-            echo "- Image: \`${IMAGE}:${DOCKER_TAG}-${VARIANT}\`"
+            echo "- Image: \`${IMAGE}:${DOCKER_TAG}-${VARIANT}-${DATABASE}\`"
+
             if [ "$PUSH_LATEST" = "true" ]; then
-              echo "- Also tagged: \`${IMAGE}:latest-${VARIANT}\`"
+              echo "- Also tagged: \`${IMAGE}:latest-${VARIANT}-${DATABASE}\`"
+            fi
+
+            if [ "$DATABASE" = "mysql" ]; then
+              echo "- Alias: \`${IMAGE}:${DOCKER_TAG}-${VARIANT}\`"
+
               if [ "$VARIANT" = "nginx" ]; then
-                echo "- Backward-compat tags: \`${IMAGE}:${DOCKER_TAG}\`, \`${IMAGE}:latest\`"
+                echo "- Default-pull aliases: \`${IMAGE}:${DOCKER_TAG}\`, \`${IMAGE}:latest\`"
               fi
             fi
+
             echo "- Platforms: \`linux/amd64\`, \`linux/arm64\`"
           } >> "$GITHUB_STEP_SUMMARY"

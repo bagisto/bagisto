@@ -1,4 +1,4 @@
-# AGENTS.md — Cross-Agent Instructions for Bagisto 2.4.x
+# AGENTS.md — Cross-Agent Instructions for Bagisto 2.5.x
 
 ## Do Not Edit
 
@@ -74,6 +74,7 @@
 ├── pint.json                   # Pint config (preset: laravel)
 ├── vite.config.js              # Root Vite config
 └── docker-compose.yml          # Sail: MySQL 8, Redis, Elasticsearch 7.17, Kibana, Mailpit
+└── docker/production/          # Production images: {nginx,apache,litespeed} x {mysql,postgres}
 ```
 
 ## Package Internal Structure
@@ -128,6 +129,7 @@ vendor/bin/pest                                          # Run all tests
 vendor/bin/pest --parallel                               # Run all tests in parallel
 vendor/bin/pest --filter=testName                        # Run specific test
 vendor/bin/pest packages/Webkul/Admin/tests/Feature      # Run package tests
+vendor/bin/pest --testsuite="Unit Test"                  # Cross-package checks; needs no database
 
 # Playwright (E2E) — Admin (run from packages/Webkul/Admin)
 cd packages/Webkul/Admin && npm install && npx playwright install --with-deps chromium
@@ -231,6 +233,9 @@ php artisan db:seed              # Seed database
 | `admin_playwright_tests.yml` | push, PR | Admin E2E tests (6 shards × MySQL + PostgreSQL) |
 | `shop_playwright_tests.yml` | push, PR | Shop E2E tests (6 shards × MySQL + PostgreSQL) |
 | `translation_tests.yml` | push, PR | Translation key consistency |
+| `docker_publish.yml` | `v*` tag, manual | Builds and pushes the production images — {nginx, apache, litespeed} x {mysql, postgres}, multi-arch |
+
+All workflows run on **PHP 8.4**, which is the minimum the project requires.
 
 ## PostgreSQL Compatibility
 

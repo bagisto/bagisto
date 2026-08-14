@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Support\Facades\Route;
 use Webkul\Installer\Http\Controllers\InstallerController;
 
@@ -15,7 +15,7 @@ Route::middleware([
 
             Route::prefix('install/api')
                 ->withoutMiddleware([
-                    VerifyCsrfToken::class,
+                    PreventRequestForgery::class,
                 ])
                 ->group(function () {
                     Route::post('run-migration', 'runMigration')->name('installer.run_migration');

@@ -38,6 +38,12 @@ return [
             'serialize' => false,
         ],
 
+        'storage' => [
+            'driver' => 'storage',
+            'disk' => env('CACHE_STORAGE_DISK'),
+            'path' => env('CACHE_STORAGE_PATH', 'framework/cache/data'),
+        ],
+
         'database' => [
             'driver' => 'database',
             'connection' => env('DB_CACHE_CONNECTION'),
@@ -90,6 +96,14 @@ return [
             'driver' => 'octane',
         ],
 
+        'failover' => [
+            'driver' => 'failover',
+            'stores' => [
+                'database',
+                'array',
+            ],
+        ],
+
     ],
 
     /*
@@ -104,5 +118,23 @@ return [
     */
 
     'prefix' => env('CACHE_PREFIX', Str::slug(env('APP_NAME', 'laravel'), '_').'_cache_'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Serializable Classes
+    |--------------------------------------------------------------------------
+    |
+    | Controls which PHP classes may be restored when cached values are
+    | unserialized. Laravel 13 ships this as `false` (block all objects),
+    | but Prettus L5 Repository's CacheableRepository trait — mixed into
+    | Webkul\Core\Eloquent\Repository and used by ~100 repositories —
+    | caches Eloquent Collections and Models. Restricting classes here
+    | would surface them as __PHP_Incomplete_Class on read. Set to `true`
+    | to allow all classes; replace with an explicit allow-list if the
+    | repository layer is ever moved off object caching.
+    |
+    */
+
+    'serializable_classes' => true,
 
 ];

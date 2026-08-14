@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Support\Facades\Route;
 use Webkul\Paypal\Http\Controllers\SmartButtonController;
 use Webkul\Paypal\Http\Controllers\StandardController;
@@ -22,5 +22,5 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 Route::post('paypal/standard/ipn', [StandardController::class, 'ipn'])
-    ->withoutMiddleware(VerifyCsrfToken::class)
+    ->withoutMiddleware(PreventRequestForgery::class)
     ->name('paypal.standard.ipn');
