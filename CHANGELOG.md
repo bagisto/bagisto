@@ -40,6 +40,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added a way back into an import that is still running. The action that opens an import was drawn with an icon the admin theme does not carry, so nothing was rendered for it and the screen showing progress could not be reached again once left; it now reads "View Progress" against a running import and opens where it left off.
 
+- Fixed a product import failing to create anything once the catalog listing began keeping an image count, which an import writes for itself and never has to hand.
+
+- #11412 [fixed] - Fixed the EU withdrawals listing breaking when filtered by customer email or status, or when searched, leaving a list that only a reload recovered. Both columns are named the same on the order the withdrawal is joined to, so the database could not tell which was meant and refused the query.
+
 ## **v2.4.9 (5th of August 2026)** - *Release*
 
 - Security fixes.

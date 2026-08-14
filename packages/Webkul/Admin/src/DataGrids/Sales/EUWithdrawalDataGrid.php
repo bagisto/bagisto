@@ -31,6 +31,11 @@ class EUWithdrawalDataGrid extends DataGrid
                 'c.code as channel_code',
             );
 
+        $this->addFilter('uuid', 'w.uuid');
+        $this->addFilter('customer_email', 'w.customer_email');
+        $this->addFilter('status', 'w.status');
+        $this->addFilter('received_at', 'w.received_at');
+        $this->addFilter('confirmation_sent_at', 'w.confirmation_sent_at');
         $this->addFilter('order_increment_id', 'o.increment_id');
         $this->addFilter('channel_code', 'c.code');
 
