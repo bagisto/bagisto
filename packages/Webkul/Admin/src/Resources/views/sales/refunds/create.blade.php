@@ -78,8 +78,8 @@
                     </x-slot>
 
                     <!-- Drawer Content -->
-                    <x-slot:content class="!p-0">
-                        <div class="grid p-4 !pt-0">
+                    <x-slot:content class="p-0!">
+                        <div class="grid p-4 pt-0!">
                             <div class="grid">
                                 <!-- Item Listing -->
                                 @foreach ($order->items as $item)
@@ -88,11 +88,11 @@
                                             <div class="flex gap-2.5">
                                                 @if ($item->product?->base_image_url)
                                                     <img
-                                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                                        class="relative h-15 max-h-15 w-full max-w-15 rounded-sm"
                                                         src="{{ $item->product->base_image_url }}"
                                                     >
                                                 @else
-                                                    <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                                    <div class="relative h-15 max-h-15 w-full max-w-15 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                                         <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
 
                                                         <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -176,7 +176,7 @@
                                                         @lang('admin::app.sales.refunds.create.qty-to-refund')
                                                     </x-admin::form.control-group.label>
 
-                                                    <x-admin::form.control-group class="!mb-0">
+                                                    <x-admin::form.control-group class="mb-0!">
                                                         <x-admin::form.control-group.control
                                                             type="text"
                                                             id="refund[items][{{ $item->id }}]"

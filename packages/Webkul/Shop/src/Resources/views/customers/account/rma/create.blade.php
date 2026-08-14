@@ -100,7 +100,7 @@
 
                                             <i
                                                 class="align-text-bottom text-base text-gray-800 ltr:ml-1.5 rtl:mr-1.5"
-                                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                                :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
                                                 v-if="columnGroup.includes(applied.sort.column)"
                                             ></i>
                                         </p>
@@ -217,7 +217,7 @@
 
                                             <i
                                                 class="align-text-bottom text-base text-gray-800 ltr:ml-1.5 rtl:mr-1.5"
-                                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                                :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
                                                 v-if="columnGroup.includes(applied.sort.column)"
                                             ></i>
                                         </p>
@@ -303,7 +303,7 @@
                     >
                         <x-shop::modal
                             ref="rmaModel"
-                            panel-class="max-w-[768px]"
+                            panel-class="max-w-192"
                         >
                             <!-- Modal Header -->
                             <x-slot:header>
@@ -353,7 +353,7 @@
                 />
 
                 <div v-for="product in products">
-                    <div class="mb-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-sm transition-all hover:border-zinc-300">
+                    <div class="mb-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-xs transition-all hover:border-zinc-300">
                         <div class="flex gap-4">
                             <!-- Checkbox -->
                             <p>
@@ -920,7 +920,7 @@
 
                         <x-shop::form.control-group.control
                             type="image"
-                            class="!p-0 rounded-xl text-gray-700 mb-0"
+                            class="p-0! rounded-xl text-gray-700 mb-0"
                             name="images[]"
                             :label="trans('shop::app.customers.account.rma.create.images')"
                             :is-multiple="true"
@@ -938,7 +938,7 @@
                 <!-- Loading Shimmer -->
                 <div>
                     <div class="flex gap-5 mt-2">
-                        <x-shop::media.images.lazy class="h-[95px] max-h-[95px] w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
+                        <x-shop::media.images.lazy class="h-23.75 max-h-23.75 w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
 
                         <div>
                             <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
@@ -951,7 +951,7 @@
 
                 <div>
                     <div class="flex gap-5 mt-2">
-                        <x-shop::media.images.lazy class="h-[95px] max-h-[95px] w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
+                        <x-shop::media.images.lazy class="h-23.75 max-h-23.75 w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
 
                         <div>
                             <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>

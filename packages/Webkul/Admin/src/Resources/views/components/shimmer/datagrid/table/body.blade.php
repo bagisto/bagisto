@@ -78,7 +78,7 @@
                         <div class="shimmer h-6 w-6 p-1.5"></div>
                     </div>
                 @else
-                    <div class="shimmer h-[17px] w-full max-w-[100px]"></div>
+                    <div class="shimmer h-4.25 w-full max-w-25"></div>
                 @endif
             @endfor
         </div>
@@ -105,15 +105,15 @@
                             @endif
 
                             @if ($mobileImage)
-                                <div class="shimmer h-12 w-12 shrink-0 rounded"></div>
+                                <div class="shimmer h-12 w-12 shrink-0 rounded-sm"></div>
                             @endif
 
                             <div class="flex w-full flex-col gap-1.5">
                                 @for ($line = 0; $line < (int) $mobileLines; $line++)
                                     <div @class([
                                         'shimmer w-full',
-                                        'h-[19px] max-w-[200px]' => ! $line,
-                                        'h-[17px] max-w-[150px]' => $line,
+                                        'h-4.75 max-w-50' => ! $line,
+                                        'h-4.25 max-w-37.5' => $line,
                                     ])></div>
                                 @endfor
                             </div>
@@ -139,15 +139,15 @@
                         @endif
 
                         @if ($index === $imageGroup)
-                            <div class="shimmer h-[60px] w-[60px] shrink-0 rounded"></div>
+                            <div class="shimmer h-15 w-15 shrink-0 rounded-sm"></div>
                         @endif
 
                         <div class="flex w-full flex-col gap-1.5">
                             @for ($line = 0; $line < $lines; $line++)
                                 <div @class([
                                     'shimmer w-full',
-                                    'h-[19px] max-w-[250px]' => ! $line,
-                                    'h-[17px] max-w-[150px]' => $line,
+                                    'h-4.75 max-w-62.5' => ! $line,
+                                    'h-4.25 max-w-37.5' => $line,
                                 ])></div>
                             @endfor
                         </div>

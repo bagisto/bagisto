@@ -144,7 +144,7 @@ return [
         'name' => 'admin::app.components.layouts.sidebar.customers',
         'route' => 'admin.customers.customers.index',
         'sort' => 4,
-        'icon' => 'icon-customer-2',
+        'icon' => 'icon-customer',
     ], [
         'key' => 'customers.customers',
         'name' => 'admin::app.components.layouts.sidebar.customers',

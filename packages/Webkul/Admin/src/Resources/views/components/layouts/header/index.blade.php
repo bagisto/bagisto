@@ -2,7 +2,7 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="sticky top-0 z-[10001] flex items-center justify-between border-b bg-white px-2 py-2 dark:border-gray-800 dark:bg-gray-900 sm:px-4 sm:py-2.5">
+<header class="sticky top-0 z-10001 flex items-center justify-between border-b bg-white px-2 py-2 dark:border-gray-800 dark:bg-gray-900 sm:px-4 sm:py-2.5">
     <div class="flex items-center gap-1 sm:gap-1.5">
         <!-- Hamburger Menu -->
         <i
@@ -12,7 +12,7 @@
         </i>
 
         <!-- Logo -->
-        <a href="{{ route('admin.dashboard.index') }}" class="flex-shrink-0">
+        <a href="{{ route('admin.dashboard.index') }}" class="shrink-0">
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
                     class="h-8 w-auto sm:h-10"
@@ -31,7 +31,7 @@
 
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search class="hidden sm:block">
-            <div class="relative flex w-[200px] items-center sm:w-[300px] md:w-[400px] lg:w-[525px] xl:max-w-[525px] ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
+            <div class="relative flex w-50 items-center sm:w-75 md:w-100 lg:w-131.25 xl:max-w-131.25 ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
                 <i class="icon-search absolute top-1.5 flex items-center text-xl ltr:left-2 rtl:right-2 sm:text-2xl sm:ltr:left-3 sm:rtl:right-3"></i>
 
                 <input
@@ -95,7 +95,7 @@
             </x-slot>
 
             <!-- Admin Dropdown -->
-            <x-slot:content class="!p-0">
+            <x-slot:content class="p-0!">
                 <div class="flex items-center gap-1.5 border border-b-gray-300 px-4 py-2 dark:border-gray-800 sm:px-5 sm:py-2.5">
                     <img
                         src="{{ url('cache/logo/bagisto.png') }}"
@@ -184,7 +184,7 @@
                         </a>
 
                         @if ($menuItem->haveChildren())
-                            <div class="{{ $menuItem->isActive() ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-8 rtl:pr-8 pb-2 rounded-b-lg z-[100] sm:ltr:pl-10 sm:rtl:pr-10">
+                            <div class="{{ $menuItem->isActive() ? ' grid! bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-45 ltr:pl-8 rtl:pr-8 pb-2 rounded-b-lg z-[100] sm:ltr:pl-10 sm:rtl:pr-10">
                                 @foreach ($menuItem->getChildren() as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem->getUrl() }}"
@@ -220,7 +220,7 @@
         type="text/x-template"
         id="v-mega-search-template"
     >
-        <div class="relative flex w-[200px] items-center sm:w-[300px] md:w-[400px] lg:w-[525px] xl:max-w-[525px] ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
+        <div class="relative flex w-50 items-center sm:w-75 md:w-100 lg:w-131.25 xl:max-w-131.25 ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
             <i class="icon-search absolute top-1.5 flex items-center text-xl ltr:left-2 rtl:right-2 sm:text-2xl sm:ltr:left-3 sm:rtl:right-3"></i>
 
             <input
@@ -256,7 +256,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[300px] overflow-y-auto sm:max-h-[400px]">
+                        <div class="grid max-h-75 overflow-y-auto sm:max-h-100">
                             <a
                                 :href="'{{ route('admin.catalog.products.edit', ':id') }}'.replace(':id', product.id)"
                                 class="flex cursor-pointer justify-between gap-2 border-b border-slate-300 p-3 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950 sm:gap-2.5 sm:p-4"
@@ -266,7 +266,7 @@
                                 <div class="flex gap-2 sm:gap-2.5">
                                     <!-- Image -->
                                     <div
-                                        class="relative h-10 max-h-10 w-full max-w-10 overflow-hidden rounded sm:h-[60px] sm:max-h-[60px] sm:max-w-[60px]"
+                                        class="relative h-10 max-h-10 w-full max-w-10 overflow-hidden rounded-sm sm:h-15 sm:max-h-15 sm:max-w-15"
                                         :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
@@ -329,7 +329,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[300px] overflow-y-auto sm:max-h-[400px]">
+                        <div class="grid max-h-75 overflow-y-auto sm:max-h-100">
                             <a
                                 :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', order.id)"
                                 class="grid cursor-pointer place-content-start gap-1 border-b border-slate-300 p-3 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950 sm:gap-1.5 sm:p-4"
@@ -371,7 +371,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[300px] overflow-y-auto sm:max-h-[400px]">
+                        <div class="grid max-h-75 overflow-y-auto sm:max-h-100">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
                                 class="cursor-pointer border-b p-3 text-xs font-semibold text-gray-600 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950 sm:p-4 sm:text-sm"
@@ -407,7 +407,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[300px] overflow-y-auto sm:max-h-[400px]">
+                        <div class="grid max-h-75 overflow-y-auto sm:max-h-100">
                             <a
                                 :href="'{{ route('admin.customers.customers.view', ':id') }}'.replace(':id', customer.id)"
                                 class="grid cursor-pointer place-content-start gap-1 border-b border-slate-300 p-3 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950 sm:gap-1.5 sm:p-4"
@@ -646,7 +646,7 @@
                     </span>
 
                     <span
-                        class="absolute -top-2 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 p-1.5 text-[10px] font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5"
+                        class="absolute -top-2 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 p-1.5 text-[10px] font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5"
                         v-if="totalUnRead"
                     >
                         @{{ totalUnRead }}
@@ -655,7 +655,7 @@
             </x-slot>
 
             <!-- Notification Content -->
-            <x-slot:content class="min-w-[250px] max-w-[250px] !p-0">
+            <x-slot:content class="min-w-62.5 max-w-62.5 p-0!">
                 <!-- Header -->
                 <div class="border-b p-3 text-base font-semibold text-gray-600 dark:border-gray-800 dark:text-gray-300">
                     @lang('admin::app.notifications.title', ['read' => 0])
@@ -692,7 +692,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="flex h-[47px] justify-between gap-1.5 border-t px-6 py-4 dark:border-gray-800">
+                <div class="flex h-11.75 justify-between gap-1.5 border-t px-6 py-4 dark:border-gray-800">
                     <a
                         href="{{ route('admin.notification.index') }}"
                         class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
@@ -737,7 +737,7 @@
                             },
 
                             canceled: {
-                                icon: 'icon-cancel-1',
+                                icon: 'icon-close',
                                 message: "@lang('admin::app.notifications.order-status-messages.canceled')"
                             },
 
@@ -747,7 +747,7 @@
                             },
 
                             closed: {
-                                icon: 'icon-cancel-1',
+                                icon: 'icon-close',
                                 message: "@lang('admin::app.notifications.order-status-messages.closed')"
                             },
 
@@ -776,7 +776,7 @@
                             pending: 'icon-information rounded-full bg-amber-100 text-2xl text-amber-600 dark:!text-amber-600',
                             closed: 'icon-repeat rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
                             completed: 'icon-done rounded-full bg-blue-100 text-2xl text-blue-600 dark:!text-blue-600',
-                            canceled: 'icon-cancel-1 rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
+                            canceled: 'icon-close rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
                             processing: 'icon-sort-right rounded-full bg-green-100 text-2xl text-green-600 dark:!text-green-600',
                         };
                     },

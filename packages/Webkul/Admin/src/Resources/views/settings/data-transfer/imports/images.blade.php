@@ -35,7 +35,7 @@
 
 <!-- Product Images Panel -->
 <div
-    class="box-shadow rounded bg-white p-4 dark:bg-gray-900"
+    class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900"
     id="import-images-panel"
     data-image-types="{{ $imageTypes->toJson() }}"
 >
@@ -51,7 +51,7 @@
         <!-- Each method is one label holding a screen-reader-only radio, so the whole card is clickable while the control stays keyboard reachable. The radio's siblings react to it with `peer-checked:` and the card itself with `has-[:checked]:` — which is why the dot, the text and the revealed field are all direct children of the label rather than nested: `peer-checked:` only reaches siblings. -->
 
         <!-- Method: links in the file -->
-        <label class="relative grid cursor-pointer gap-1 rounded border border-gray-300 p-4 transition-all ltr:pl-12 rtl:pr-12 hover:border-gray-400 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 dark:border-gray-700 dark:hover:border-gray-600 dark:has-[:checked]:border-blue-400 dark:has-[:checked]:bg-gray-800">
+        <label class="relative grid cursor-pointer gap-1 rounded-sm border border-gray-300 p-4 transition-all ltr:pl-12 rtl:pr-12 hover:border-gray-400 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 dark:border-gray-700 dark:hover:border-gray-600 dark:has-[:checked]:border-blue-400 dark:has-[:checked]:bg-gray-800">
             <input
                 type="radio"
                 name="image_source"
@@ -78,7 +78,7 @@
         </label>
 
         <!-- Method: upload an archive -->
-        <label class="relative grid cursor-pointer gap-1 rounded border border-gray-300 p-4 transition-all ltr:pl-12 rtl:pr-12 hover:border-gray-400 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 dark:border-gray-700 dark:hover:border-gray-600 dark:has-[:checked]:border-blue-400 dark:has-[:checked]:bg-gray-800">
+        <label class="relative grid cursor-pointer gap-1 rounded-sm border border-gray-300 p-4 transition-all ltr:pl-12 rtl:pr-12 hover:border-gray-400 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 dark:border-gray-700 dark:hover:border-gray-600 dark:has-[:checked]:border-blue-400 dark:has-[:checked]:bg-gray-800">
             <input
                 type="radio"
                 name="image_source"
@@ -98,7 +98,7 @@
             </span>
 
             <span class="mt-2 hidden peer-checked:block">
-                <x-admin::form.control-group class="!mb-0">
+                <x-admin::form.control-group class="mb-0!">
                     <x-admin::form.control-group.control
                         type="file"
                         name="upload_images"
@@ -143,7 +143,7 @@
         </label>
 
         <!-- Method: a directory placed on the server -->
-        <label class="relative grid cursor-pointer gap-1 rounded border border-gray-300 p-4 transition-all ltr:pl-12 rtl:pr-12 hover:border-gray-400 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 dark:border-gray-700 dark:hover:border-gray-600 dark:has-[:checked]:border-blue-400 dark:has-[:checked]:bg-gray-800">
+        <label class="relative grid cursor-pointer gap-1 rounded-sm border border-gray-300 p-4 transition-all ltr:pl-12 rtl:pr-12 hover:border-gray-400 has-[:checked]:border-blue-600 has-[:checked]:bg-blue-50 dark:border-gray-700 dark:hover:border-gray-600 dark:has-[:checked]:border-blue-400 dark:has-[:checked]:bg-gray-800">
             <input
                 type="radio"
                 name="image_source"
@@ -163,7 +163,7 @@
             </span>
 
             <span class="mt-2 hidden peer-checked:block">
-                <x-admin::form.control-group class="!mb-0">
+                <x-admin::form.control-group class="mb-0!">
                     <x-admin::form.control-group.control
                         type="text"
                         name="images_directory_path"

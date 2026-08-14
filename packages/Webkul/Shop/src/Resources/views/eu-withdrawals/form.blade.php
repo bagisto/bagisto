@@ -10,7 +10,7 @@
 
         {{-- Statutory Effect Notice --}}
         <div class="mt-4 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900">
-            <span class="icon-warning mt-0.5 text-xl leading-none"></span>
+            <span class="icon-error mt-0.5 text-xl leading-none"></span>
 
             <div>
                 <p class="font-medium">
@@ -85,7 +85,7 @@
                         name="reason_text"
                         rows="6"
                         maxlength="5000"
-                        class="mt-3 block w-full rounded-lg border border-zinc-200 px-4 py-3 text-sm focus:border-navyBlue focus:outline-none focus:ring-1 focus:ring-navyBlue"
+                        class="mt-3 block w-full rounded-lg border border-zinc-200 px-4 py-3 text-sm focus:border-navyBlue focus:outline-hidden focus:ring-1 focus:ring-navyBlue"
                         placeholder="@lang('shop::app.eu_withdrawal.form.reason_placeholder')"
                     >{{ old('reason_text') }}</textarea>
 

@@ -45,7 +45,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.general.before') !!}
 
                 <!-- General Information -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.create.general')
                     </p>
@@ -113,7 +113,7 @@
                         </x-admin::form.control-group.label>
 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                            <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                            <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     :id="'inventory_sources_' . $inventorySource->id"
@@ -172,7 +172,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Host Name -->
-                    <x-admin::form.control-group class="!mb-0">
+                    <x-admin::form.control-group class="mb-0!">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.create.hostname')
                         </x-admin::form.control-group.label>
@@ -195,7 +195,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.design.before') !!}
 
                 <!-- Logo and Design -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.create.design')
                     </p>
@@ -274,7 +274,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.seo.before') !!}
 
                 <!-- Home Page SEO -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.create.seo')
                     </p>
@@ -326,7 +326,7 @@
                     </x-admin::form.control-group>
 
                     <!-- SEO Description -->
-                    <x-admin::form.control-group class="!mb-0">
+                    <x-admin::form.control-group class="mb-0!">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.create.seo-description')
                         </x-admin::form.control-group.label>
@@ -350,7 +350,7 @@
             </div>
 
             <!-- Right sub-component -->
-            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+            <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
 
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.accordion.currencies_and_locales.before') !!}
 
@@ -370,7 +370,7 @@
                             </x-admin::form.control-group.label>
 
                             @foreach (core()->getAllLocales() as $locale)
-                                <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                                <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         :id="'locales_' . $locale->id"
@@ -434,7 +434,7 @@
                             </x-admin::form.control-group.label>
 
                             @foreach (core()->getAllCurrencies() as $currency)
-                                <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                                <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         :id="'currencies_' . $currency->id"
@@ -459,7 +459,7 @@
                         </div>
 
                         <!-- Default Currency Selector -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.create.default-currency')
                             </x-admin::form.control-group.label>
@@ -528,7 +528,7 @@
 
                         <!-- Allowed API's  -->
                         <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
+                            <x-admin::form.control-group.label class="text-gray-800! dark:text-white!">
                                 @lang('admin::app.settings.channels.create.allowed-ips')
                             </x-admin::form.control-group.label>
 
@@ -545,7 +545,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Maintenance Mode Switcher -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.channels.create.status')
                             </x-admin::form.control-group.label>

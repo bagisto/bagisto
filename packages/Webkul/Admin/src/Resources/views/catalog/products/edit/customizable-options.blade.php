@@ -17,7 +17,7 @@
             type="text/x-template"
             id="v-customizable-options-template"
         >
-            <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
+            <div class="box-shadow relative rounded-sm bg-white dark:bg-gray-900">
                 <!-- Option Panel Header -->
                 <div class="p-4 flex flex-col mb-2.5">
                     <div class="flex justify-between gap-5">
@@ -198,7 +198,7 @@
                     <!-- Placeholder Image -->
                     <img
                         src="{{ bagisto_asset('images/icon-options.svg') }}"
-                        class="h-20 w-20 rounded border border-dashed dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                        class="h-20 w-20 rounded-sm border border-dashed dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                     />
 
                     <!-- Add Information -->

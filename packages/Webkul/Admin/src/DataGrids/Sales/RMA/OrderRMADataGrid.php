@@ -226,7 +226,7 @@ class OrderRMADataGrid extends DataGrid
     public function prepareActions(): void
     {
         $this->addAction([
-            'icon' => 'icon-eye',
+            'icon' => 'icon-view',
             'title' => trans('admin::app.sales.rma.all-rma.index.datagrid.action-view'),
             'method' => 'GET',
             'url' => function ($row) {

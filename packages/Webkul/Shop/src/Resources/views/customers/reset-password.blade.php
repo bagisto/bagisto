@@ -43,14 +43,14 @@
         {!! view_render_event('bagisto.shop.customers.reset_password.logo.after') !!}
 
         <!-- Form Container -->
-        <div class="m-auto w-full max-w-[870px] rounded-xl border border-zinc-200 p-16 px-[90px] max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
+        <div class="m-auto w-full max-w-217.5 rounded-xl border border-zinc-200 p-16 px-22.5 max-md:px-8 max-md:py-8 max-sm:border-none max-sm:p-0">
             <h1 class="font-dmserif text-4xl max-md:text-3xl max-sm:text-xl">
                 @lang('shop::app.customers.reset-password.title')
             </h1>
 
             {!! view_render_event('bagisto.shop.customers.reset_password.before') !!}
 
-            <div class="mt-14 rounded max-sm:mt-8">
+            <div class="mt-14 rounded-sm max-sm:mt-8">
                 <!-- Form Container-->
                 <x-shop::form :action="route('shop.customers.reset_password.store')" >
                     <x-shop::form.control-group.control
@@ -133,7 +133,7 @@
                     <!-- Submit Button -->
                     <div class="mt-8 flex flex-wrap items-center gap-9 max-sm:justify-center max-sm:text-center">
                         <button
-                            class="primary-button m-0 mx-auto block w-full max-w-[374px] rounded-2xl px-11 py-4 text-center text-base max-md:rounded-lg max-md:py-3 max-sm:py-1.5 ltr:ml-0 rtl:mr-0"
+                            class="primary-button m-0 mx-auto block w-full max-w-93.5 rounded-2xl px-11 py-4 text-center text-base max-md:rounded-lg max-md:py-3 max-sm:py-1.5 ltr:ml-0 rtl:mr-0"
                             type="submit"
                         >
                             @lang('shop::app.customers.reset-password.submit-btn-title')

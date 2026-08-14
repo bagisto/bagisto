@@ -58,7 +58,7 @@
                 <x-shop::form.control-group>
                     <!-- Dropdown Options Container -->
                     <x-shop::form.control-group.label
-                        class="!mt-0 max-sm:!mb-2.5"
+                        class="mt-0! max-sm:mb-2.5!"
                         ::class="{ 'required': Boolean(option.is_required) }"
                     >
                         @{{ option.label }}
@@ -280,7 +280,7 @@
                     <x-shop::quantity-changer
                         ::name="'bundle_option_qty[' + option?.id + ']'"
                         ::value="productQty"
-                        class="mt-5 w-max gap-x-4 rounded-xl !border-zinc-200 px-4 py-1.5 max-sm:my-4"
+                        class="mt-5 w-max gap-x-4 rounded-xl border-zinc-200! px-4 py-1.5 max-sm:my-4"
                         @change="qtyUpdated($event)"
                     />
                 </template>

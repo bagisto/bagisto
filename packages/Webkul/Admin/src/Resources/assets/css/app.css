@@ -1,6 +1,198 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/**
+ * Scanned from `src/` rather than `src/Resources/`, so classes named in `src/Config` —
+ * the menu and ACL icons — are seen too.
+ */
+@import "tailwindcss" source("../../../");
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /**
+     * Breakpoints — the widths at which the layout changes.
+     */
+    --breakpoint-sm:  525px;
+    --breakpoint-md:  768px;
+    --breakpoint-lg:  1024px;
+    --breakpoint-xl:  1240px;
+    --breakpoint-2xl: 1920px;
+
+    /**
+     * Colours — the palette of named colours used in the admin.
+     */
+    --color-darkGreen: #40994A;
+    --color-darkBlue:  #0044F2;
+    --color-darkPink:  #F85156;
+
+    /**
+     * Fonts — the named families the admin can ask for by utility.
+     */
+    --font-inter: Inter;
+    --font-icon:  icomoon;
+
+    /**
+     * The body font, pinned to the stack Tailwind 3 shipped.
+     *
+     * v4 dropped `system-ui` from the front of its default, which on Linux and Windows
+     * falls through to a different face entirely — the admin would render in Roboto or
+     * Arial rather than the desktop UI font it used before.
+     */
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    /**
+     * Text — a font size paired with a default line height.
+     *
+     * Named rather than numbered so the pairing travels together; a utility set on the
+     * element still overrides either half.
+     */
+    --text-body:               14px;
+    --text-body--line-height:  calc(17 / 14);
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 16px;
+
+    @variant 2xl {
+        max-width: 1920px;
+    }
+}
+
+/**
+ * Icons.
+ *
+ * Each icon is a utility rather than a plain class so it can carry variants — the
+ * checkbox and sort glyphs are set with `peer-checked:` and `rtl:`.
+ *
+ * Only the glyphs the admin actually uses are declared. A utility is emitted once the
+ * scanner has seen it, and the scan covers `src/`, so every one below is picked up from
+ * the view or config that names it — an icon declared here but used nowhere would ship
+ * as dead CSS. Adding a glyph from the font means adding it here too.
+ */
+@theme {
+    --icon-uncheckbox:       "\e901";
+    --icon-checked:          "\e90d";
+    --icon-checkbox-partial: "\e900";
+    --icon-radio-normal:     "\e92c";
+    --icon-radio-selected:   "\e92d";
+    --icon-phone:            "\e94f";
+    --icon-list:             "\e950";
+    --icon-admin-export:     "\e95d";
+    --icon-magic:            "\e94b";
+    --icon-report:           "\e942";
+    --icon-light:            "\e947";
+    --icon-dark:             "\e949";
+    --icon-arrow-down:       "\e903";
+    --icon-arrow-left:       "\e904";
+    --icon-arrow-right:      "\e905";
+    --icon-arrow-up:         "\e906";
+    --icon-attribute-block:  "\e907";
+    --icon-attribute:        "\e908";
+    --icon-calendar:         "\e909";
+    --icon-close:            "\e90a";
+    --icon-cancel:           "\e90b";
+    --icon-cart:             "\e90c";
+    --icon-cms:              "\e90e";
+    --icon-configuration:    "\e90f";
+    --icon-cross:            "\e910";
+    --icon-customer:         "\e911";
+    --icon-dashboard:        "\e913";
+    --icon-delete:           "\e914";
+    --icon-done:             "\e915";
+    --icon-dot:              "\e916";
+    --icon-down-stat:        "\e918";
+    --icon-drag:             "\e919";
+    --icon-edit:             "\e91b";
+    --icon-filter:           "\e91c";
+    --icon-folder-block:     "\e91d";
+    --icon-folder:           "\e91e";
+    --icon-image:            "\e91f";
+    --icon-information:      "\e920";
+    --icon-language:         "\e921";
+    --icon-location:         "\e922";
+    --icon-mail:             "\e923";
+    --icon-menu:             "\e924";
+    --icon-notification:     "\e925";
+    --icon-printer:          "\e927";
+    --icon-processing:       "\e928";
+    --icon-product:          "\e92a";
+    --icon-promotion:        "\e92b";
+    --icon-repeat:           "\e92e";
+    --icon-sales:            "\e92f";
+    --icon-search:           "\e930";
+    --icon-settings:         "\e932";
+    --icon-ship:             "\e933";
+    --icon-sort-down:        "\e934";
+    --icon-sort-left:        "\e935";
+    --icon-sort-right:       "\e936";
+    --icon-sort-up-down:     "\e937";
+    --icon-sort-up:          "\e938";
+    --icon-star:             "\e939";
+    --icon-store:            "\e93a";
+    --icon-up-stat:          "\e93c";
+    --icon-view:             "\e93d";
+    --icon-view-close:       "\e946";
+    --icon-copy:             "\e93e";
+    --icon-exit:             "\e93f";
+    --icon-collapse:         "\e941";
+    --icon-login:            "\e943";
+    --icon-pause:            "\e944";
+    --icon-play:             "\e945";
+}
+
+@utility icon-* {
+    &::before { content: --value(--icon-*); }
+}
+
+@utility icon-star-fill        { &::before { content: "\e938"; @apply text-[#ffb600]; } }
+
+/**
+ * Base.
+ *
+ * Element defaults, and the handful of v3 behaviours v4 dropped that the admin still
+ * relies on — the grey border, the pointer on buttons, the grey placeholder.
+ */
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    body {
+        @apply bg-gray-50;
+    }
+
+    button:disabled,
+    button:disabled:hover {
+        @apply cursor-not-allowed opacity-50;
+    }
+
+    input,
+    textarea,
+    select {
+        @apply outline-none;
+    }
+
+    p {
+        @apply text-body;
+    }
+
+    ::selection {
+        @apply bg-darkBlue/20;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        @apply text-gray-400;
+    }
+}
 
 @font-face {
     font-family: "bagisto-admin";
@@ -10,23 +202,13 @@
     font-display: block;
 }
 
+/**
+ * Components.
+ *
+ * The repeated pieces of the admin — buttons, labels, the icon font, the scrollbar —
+ * named once here so a view spells out only what is particular to it.
+ */
 @layer components {
-    ::selection {
-        @apply bg-darkBlue/20;
-    }
-
-    body {
-        @apply bg-gray-50;
-    }
-
-    button:disabled {
-        @apply cursor-not-allowed opacity-50;
-    }
-
-    button:disabled:hover {
-        @apply cursor-not-allowed opacity-50;
-    }
-
     .direction-ltr {
         direction: ltr;
     }
@@ -39,11 +221,6 @@
         @apply bg-indigo-100 opacity-50;
     }
 
-    /*
-     * The font-family is forced so a browser extension that overrides page fonts
-     * cannot replace the icons with letterforms, and the line-height with it, since
-     * an inherited one would knock the glyphs off their baseline.
-     */
     [class^="icon-"],
     [class*=" icon-"] {
         @apply text-gray-500 antialiased;
@@ -66,336 +243,6 @@
         @apply border-[1px] dark:border-gray-800 shadow-[0px_0px_0px_0px_rgba(0,0,0,0.03),0px_1px_1px_0px_rgba(0,0,0,0.03),0px_3px_3px_0px_rgba(0,0,0,0.03),0px_6px_4px_0px_rgba(0,0,0,0.02),0px_11px_4px_0px_rgba(0,0,0,0.00),0px_17px_5px_0px_rgba(0,0,0,0.00)];
     }
 
-    .icon-phone:before {
-        content: "\e94f";
-    }
-
-    .icon-list:before {
-        content: "\e950";
-    }
-
-    .icon-admin-export:before {
-        content: "\e95d";
-    }
-
-    .icon-magic:before {
-        content: "\e94b";
-    }
-
-    .icon-zoom:before {
-        content: "\e94c";
-    }
-
-    .icon-ar:before {
-        content: "\e94a";
-    }
-
-    .icon-report:before {
-        content: "\e942";
-    }
-
-    .icon-refund:before {
-        content: "\e948";
-    }
-
-    .icon-light:before {
-        content: "\e947";
-    }
-
-    .icon-dark:before {
-        content: "\e949";
-    }
-
-    .icon-checkbox-partical:before {
-        content: "\e900";
-    }
-
-    .icon-uncheckbox:before {
-        content: "\e901";
-    }
-
-    .icon-add-customer:before {
-        content: "\e902";
-    }
-
-    .icon-arrow-down:before {
-        content: "\e903";
-    }
-
-    .icon-arrow-left:before {
-        content: "\e904";
-    }
-
-    .icon-arrow-right:before {
-        content: "\e905";
-    }
-
-    .icon-arrow-up:before {
-        content: "\e906";
-    }
-
-    .icon-attribute-block:before {
-        content: "\e907";
-    }
-
-    .icon-attribute:before {
-        content: "\e908";
-    }
-
-    .icon-calendar:before {
-        content: "\e909";
-    }
-
-    .icon-cancel-1:before {
-        content: "\e90a";
-    }
-
-    .icon-cancel:before {
-        content: "\e90b";
-    }
-
-    .icon-cart:before {
-        content: "\e90c";
-    }
-
-    .icon-checked:before {
-        content: "\e90d";
-    }
-
-    .icon-cms:before {
-        content: "\e90e";
-    }
-
-    .icon-configuration:before {
-        content: "\e90f";
-    }
-
-    .icon-cross:before {
-        content: "\e910";
-    }
-
-    .icon-customer-2:before {
-        content: "\e911";
-    }
-
-    .icon-customer:before {
-        content: "\e912";
-    }
-
-    .icon-dashboard:before {
-        content: "\e913";
-    }
-
-    .icon-delete:before {
-        content: "\e914";
-    }
-
-    .icon-done:before {
-        content: "\e915";
-    }
-
-    .icon-dot:before {
-        content: "\e916";
-    }
-
-    .icon-dots:before {
-        content: "\e917";
-    }
-
-    .icon-down-stat:before {
-        content: "\e918";
-    }
-
-    .icon-drag:before {
-        content: "\e919";
-    }
-
-    .icon-edit-save:before {
-        content: "\e91a";
-    }
-
-    .icon-edit:before {
-        content: "\e91b";
-    }
-
-    .icon-filter:before {
-        content: "\e91c";
-    }
-
-    .icon-folder-block:before {
-        content: "\e91d";
-    }
-
-    .icon-folder:before {
-        content: "\e91e";
-    }
-
-    .icon-image:before {
-        content: "\e91f";
-    }
-
-    .icon-information:before {
-        content: "\e920";
-    }
-
-    .icon-language:before {
-        content: "\e921";
-    }
-
-    .icon-location:before {
-        content: "\e922";
-    }
-
-    .icon-mail:before {
-        content: "\e923";
-    }
-
-    .icon-menu:before {
-        content: "\e924";
-    }
-
-    .icon-notification:before {
-        content: "\e925";
-    }
-
-    .icon-order-back:before {
-        content: "\e926";
-    }
-
-    .icon-printer:before {
-        content: "\e927";
-    }
-
-    .icon-processing:before {
-        content: "\e928";
-    }
-
-    .icon-product-1:before {
-        content: "\e929";
-    }
-
-    .icon-product:before {
-        content: "\e92a";
-    }
-
-    .icon-promotion:before {
-        content: "\e92b";
-    }
-
-    .icon-radio-normal:before {
-        content: "\e92c";
-    }
-
-    .icon-radio-selected:before {
-        content: "\e92d";
-    }
-
-    .icon-repeat:before {
-        content: "\e92e";
-    }
-
-    .icon-sales:before {
-        content: "\e92f";
-    }
-
-    .icon-search:before {
-        content: "\e930";
-    }
-
-    .icon-setting:before {
-        content: "\e931";
-    }
-
-    .icon-settings:before {
-        content: "\e932";
-    }
-
-    .icon-ship:before {
-        content: "\e933";
-    }
-
-    .icon-sort-down:before {
-        content: "\e934";
-    }
-
-    .icon-sort-left:before {
-        content: "\e935";
-    }
-
-    .icon-sort-right:before {
-        content: "\e936";
-    }
-
-    .icon-sort-up-down:before {
-        content: "\e937";
-    }
-
-    .icon-sort-up:before {
-        content: "\e938";
-    }
-
-    .icon-star:before {
-        content: "\e939";
-    }
-
-    .icon-store:before {
-        content: "\e93a";
-    }
-
-    .icon-tick:before {
-        content: "\e93b";
-    }
-
-    .icon-up-stat:before {
-        content: "\e93c";
-    }
-
-    .icon-view:before {
-        content: "\e93d";
-    }
-
-    .icon-view-close:before {
-        content: "\e946";
-    }
-
-    .icon-copy:before {
-        content: "\e93e";
-    }
-
-    .icon-exit:before {
-        content: "\e93f";
-    }
-
-    .icon-clip:before {
-        content: "\e940";
-    }
-
-    .icon-collapse:before {
-        content: "\e941";
-    }
-
-    .icon-login:before {
-        content: "\e943";
-    }
-
-    .icon-pause:before {
-        content: "\e944";
-    }
-
-    .icon-play:before {
-        content: "\e945";
-    }
-
-    p {
-        @apply text-[14px] !leading-[17px];
-    }
-
-    input,
-    textarea,
-    select {
-        @apply outline-none;
-    }
-
     .primary-button {
         @apply bg-blue-600 border border-blue-700 cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
     }
@@ -414,9 +261,6 @@
         display: none;
     }
 
-    /*
-     * #e9e9e9 is not on the palette — it is the scrollbar's own grey.
-     */
     .journal-scroll::-webkit-scrollbar-track {
         @apply cursor-pointer rounded-xl border border-[#e9e9e9] bg-white;
     }
@@ -481,25 +325,13 @@
     .label-info {
         @apply bg-slate-400;
     }
-
-    /*
-     * Status text colours.
-     */
+    
     .status-enable {
         @apply text-green-600;
     }
 
     .status-disable {
         @apply text-red-600;
-    }
-
-    /*
-     * #ffb600 is the rating gold — not a palette colour.
-     */
-    .icon-star-fill:before {
-        @apply text-[#ffb600];
-
-        content: "\e938";
     }
 
     .shimmer {
@@ -527,22 +359,39 @@
     }
 
     @keyframes skeleton {
-        0% {
-            @apply bg-[-1250px_0];
-        }
-
-        100% {
-            @apply bg-[1250px_0];
-        }
+        0%   { background-position: -1250px 0; }
+        100% { background-position:  1250px 0; }
     }
 
-    .required:after {
+    .required::after {
         @apply content-['*'];
     }
+}
 
-    .CodeMirror {
-        @apply !h-[calc(100vh-367px)];
-    }
+/**
+ * The paragraph leading, forced so every paragraph keeps the same rhythm.
+ *
+ * Without it a font-size utility brings its own paired line-height — `text-sm` alone
+ * takes a paragraph from 17px to 20px — which is most of the admin, since the size is
+ * nearly always set on the element.
+ *
+ * Unlayered on purpose. For `!important` the cascade reverses the layer order, so this
+ * rule inside `base` would beat `leading-*!` set on the element; unlayered is the
+ * weakest `!important` an author can write, which is exactly the standing wanted — it
+ * overrides a plain utility but yields to one that asked to win.
+ */
+p {
+    line-height: 17px !important;
+}
+
+/**
+ * Third-party overrides.
+ *
+ * Deliberately outside any layer: unlayered CSS wins over layered, so these are not
+ * beaten by the utilities the vendor markup already carries.
+ */
+.CodeMirror {
+    @apply h-[calc(100vh-367px)]!;
 }
 
 .tox .tox-toolbar__group:last-child button {
@@ -557,7 +406,7 @@
     @apply cursor-not-allowed opacity-50;
 }
 
-/*
+/**
  * Datagrid mobile Filter | Sort bar.
  *
  * The datagrid toolbar's `.dg-fsbar` row is lifted into a bar fixed to the foot of the screen on
@@ -566,12 +415,12 @@
  * above md.
  */
 @media (max-width: 767px) {
-    /*
+    /**
      * The z-index matches the sticky header's, so a drawer opened from the bar paints
      * above it rather than behind.
      */
     .dg-fsbar {
-        @apply fixed bottom-0 start-0 end-0 z-[10001] flex w-full items-center gap-0 border-t border-gray-200 bg-white;
+        @apply fixed bottom-0 start-0 end-0 z-10001 flex w-full items-center gap-0 border-t border-gray-200 bg-white;
     }
 
     .dark .dg-fsbar {
@@ -582,7 +431,7 @@
         @apply flex flex-1 justify-center;
     }
 
-    /*
+    /**
      * Recasts the filter button — the div holding the funnel icon — as a borderless
      * full-width tab.
      *
@@ -593,7 +442,7 @@
      * component sets on itself.
      */
     .dg-fsbar-filter div:has(> .icon-filter) {
-        @apply !w-full !max-w-none !justify-center !border-0 !bg-transparent !py-3.5 uppercase;
+        @apply w-full! max-w-none! justify-center! border-0! bg-transparent! py-3.5! uppercase;
     }
 
     .dg-fsbar-sep {
@@ -608,7 +457,7 @@
         @apply flex flex-1 justify-center;
     }
 
-    /*
+    /**
      * Lifts the page so the fixed bar never covers the last rows.
      *
      * Has to be a selector: it styles an ancestor, and a utility only ever styles the
@@ -619,7 +468,7 @@
     }
 }
 
-/*
+/**
  * Datagrid header row.
  *
  * The look every datagrid header shares. A datagrid that renders its own header —
@@ -629,15 +478,16 @@
  */
 @layer components {
     .datagrid-head {
-        @apply min-h-[47px] items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 text-sm font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300;
+        @apply min-h-11.75 items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 text-sm font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300;
     }
 }
 
-/*
- * A header belonging to a grid that becomes cards on small screens. There it is
- * dropped entirely: the labels describe columns that no longer exist once the row
- * has collapsed into a card, and sorting is reachable from the bottom Filter | Sort
- * bar instead.
+/**
+ * Datagrid header on a grid that becomes cards.
+ *
+ * Below md the header is dropped entirely: the labels describe columns that no longer
+ * exist once the row has collapsed into a card, and sorting is reachable from the
+ * bottom Filter | Sort bar instead.
  *
  * It has to live in the utilities layer, not components: the header also carries
  * `grid`, and utilities are emitted after components — so a `display: none` set in
@@ -649,7 +499,7 @@
     }
 }
 
-/*
+/**
  * Datagrid rows as cards on small screens.
  *
  * A grid whose columns are fixed reads fine on a desktop and terribly on a phone,
@@ -665,14 +515,14 @@
     .datagrid-card {
         @apply gap-2.5 py-4;
 
-        /*
+        /**
          * `!important` because several grids set their column template as an inline
          * style, which no class can otherwise beat.
          */
         grid-template-columns: minmax(0, 1fr) !important;
     }
 
-    /*
+    /**
      * A selector rather than utilities: it targets cells by the `data-label` they
      * carry, which is what keeps the label out of the markup entirely.
      */
@@ -683,7 +533,7 @@
     .datagrid-card > [data-label]::before {
         @apply text-xs font-medium uppercase leading-5 tracking-wide text-gray-400;
 
-        /*
+        /**
          * Tailwind has no utility for a generated attribute value.
          */
         content: attr(data-label);
@@ -693,7 +543,7 @@
         @apply text-gray-500;
     }
 
-    /*
+    /**
      * Actions sit on their own line, aligned to the row's trailing edge. Kept as a
      * flex row rather than the labelled grid above, so the buttons stay side by side
      * instead of stacking, and with no label — the icons speak for themselves.
@@ -703,7 +553,7 @@
     }
 
     .datagrid-card > [data-label="actions"]::before {
-        /*
+        /**
          * Suppresses the generated label above — again, no utility for content.
          */
         content: none;

@@ -86,7 +86,7 @@
         >
             <div class="mt-3.5 flex flex-col gap-2.5">
                 <!-- Stepper -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <ol class="flex items-start pb-7">
                         <template v-for="(step, index) in steps">
                             <!-- Step Node -->
@@ -159,14 +159,14 @@
                 </div>
 
                 <!-- Phase Panel -->
-                <div class="box-shadow grid gap-2.5 rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow grid gap-2.5 rounded-sm bg-white p-4 dark:bg-gray-900">
                     <!-- Ready To Validate -->
                     <div
-                        class="flex w-full place-content-between items-center rounded-sm border border-orange-200 bg-orange-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
+                        class="flex w-full place-content-between items-center rounded-xs border border-orange-200 bg-orange-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
                         v-if="importResource.state == 'pending'"
                     >
                         <p class="flex items-center gap-2">
-                            <i class="icon-information rounded-full bg-orange-200 text-2xl text-orange-600 dark:!text-orange-600"></i>
+                            <i class="icon-information rounded-full bg-orange-200 text-2xl text-orange-600 dark:text-orange-600!"></i>
 
                             @lang('admin::app.settings.data-transfer.imports.import.validate-info')
                         </p>
@@ -181,18 +181,18 @@
 
                     <!-- Validating -->
                     <div
-                        class="grid w-full gap-2 rounded-sm border border-blue-200 bg-blue-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
+                        class="grid w-full gap-2 rounded-xs border border-blue-200 bg-blue-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
                         v-else-if="importResource.state == 'validating'"
                     >
                         <p class="flex items-center gap-2">
-                            <i class="icon-information rounded-full bg-blue-200 text-2xl text-blue-600 dark:!text-blue-600"></i>
+                            <i class="icon-information rounded-full bg-blue-200 text-2xl text-blue-600 dark:text-blue-600!"></i>
 
                             @lang('admin::app.settings.data-transfer.imports.import.validating-info')
                         </p>
 
-                        <div class="h-5 w-full rounded-sm bg-blue-200 dark:bg-blue-700">
+                        <div class="h-5 w-full rounded-xs bg-blue-200 dark:bg-blue-700">
                             <div
-                                class="h-5 rounded-sm bg-blue-600 transition-all duration-300"
+                                class="h-5 rounded-xs bg-blue-600 transition-all duration-300"
                                 :style="{ 'width': validationPercent + '%' }"
                             ></div>
                         </div>
@@ -213,7 +213,7 @@
 
                     <!-- Validation Results -->
                     <div
-                        class="flex w-full place-content-between rounded-sm border p-3"
+                        class="flex w-full place-content-between rounded-xs border p-3"
                         :class="isValid ? 'border-green-200 bg-green-50 dark:bg-gray-900 dark:border-gray-800' : 'border-red-200 bg-red-50 dark:bg-gray-900 dark:border-gray-800'"
                         v-else-if="importResource.state == 'validated'"
                     >
@@ -223,7 +223,7 @@
                                 class="mb-2 flex items-center gap-2 dark:text-white"
                                 v-if="isValid && ! importResource.errors_count"
                             >
-                                <i class="icon-done h-fit rounded-full bg-green-200 text-2xl text-green-600 dark:!text-green-600"></i>
+                                <i class="icon-done h-fit rounded-full bg-green-200 text-2xl text-green-600 dark:text-green-600!"></i>
 
                                 @lang('admin::app.settings.data-transfer.imports.import.validation-success-info')
                             </p>
@@ -232,7 +232,7 @@
                                 class="mb-2 flex items-center gap-2 dark:text-white"
                                 v-else-if="isValid"
                             >
-                                <i class="icon-information h-fit rounded-full bg-orange-200 text-2xl text-orange-600 dark:!text-orange-600"></i>
+                                <i class="icon-information h-fit rounded-full bg-orange-200 text-2xl text-orange-600 dark:text-orange-600!"></i>
 
                                 @lang('admin::app.settings.data-transfer.imports.import.validation-partial-info')
                             </p>
@@ -241,7 +241,7 @@
                                 class="flex items-center gap-2 dark:text-white"
                                 v-else
                             >
-                                <i class="icon-cross h-fit rounded-full bg-red-200 text-2xl text-red-600 dark:!text-red-600"></i>
+                                <i class="icon-cross h-fit rounded-full bg-red-200 text-2xl text-red-600 dark:text-red-600!"></i>
 
                                 @lang('admin::app.settings.data-transfer.imports.import.validation-failed-info')
                             </p>
@@ -249,7 +249,7 @@
                             <p class="flex items-center gap-2 dark:text-white">
                                 <i
                                     class="icon-information rounded-full text-2xl"
-                                    :class="isValid ? 'bg-green-200 text-green-600 dark:!text-green-600' : 'bg-red-200 text-red-600 dark:!text-red-600'"
+                                    :class="isValid ? 'bg-green-200 text-green-600 dark:text-green-600!' : 'bg-red-200 text-red-600 dark:text-red-600!'"
                                 ></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
@@ -262,7 +262,7 @@
                             <p class="flex items-center gap-2 dark:text-white">
                                 <i
                                     class="icon-information rounded-full text-2xl"
-                                    :class="isValid ? 'bg-green-200 text-green-600 dark:!text-green-600' : 'bg-red-200 text-red-600 dark:!text-red-600'"
+                                    :class="isValid ? 'bg-green-200 text-green-600 dark:text-green-600!' : 'bg-red-200 text-red-600 dark:text-red-600!'"
                                 ></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
@@ -275,7 +275,7 @@
                             <p class="flex items-center gap-2 dark:text-white">
                                 <i
                                     class="icon-information rounded-full text-2xl"
-                                    :class="isValid ? 'bg-green-200 text-green-600 dark:!text-green-600' : 'bg-red-200 text-red-600 dark:!text-red-600'"
+                                    :class="isValid ? 'bg-green-200 text-green-600 dark:text-green-600!' : 'bg-red-200 text-red-600 dark:text-red-600!'"
                                 ></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
@@ -289,7 +289,7 @@
                                 class="flex place-items-start items-center gap-2 dark:text-white"
                                 v-if="importResource.errors.length"
                             >
-                                <i class="icon-information rounded-full bg-red-200 text-2xl text-red-600 dark:!text-red-600"></i>
+                                <i class="icon-information rounded-full bg-red-200 text-2xl text-red-600 dark:text-red-600!"></i>
 
                                 <div class="grid gap-2">
                                     <p
@@ -325,18 +325,18 @@
 
                     <!-- Downloading Images -->
                     <div
-                        class="grid w-full gap-2 rounded-sm border border-blue-200 bg-blue-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
+                        class="grid w-full gap-2 rounded-xs border border-blue-200 bg-blue-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
                         v-else-if="importResource.state == 'downloading'"
                     >
                         <p class="flex items-center gap-2">
-                            <i class="icon-information rounded-full bg-blue-200 text-2xl text-blue-600 dark:!text-blue-600"></i>
+                            <i class="icon-information rounded-full bg-blue-200 text-2xl text-blue-600 dark:text-blue-600!"></i>
 
                             @lang('admin::app.settings.data-transfer.imports.import.downloading-info')
                         </p>
 
-                        <div class="h-5 w-full rounded-sm bg-blue-200 dark:bg-blue-700">
+                        <div class="h-5 w-full rounded-xs bg-blue-200 dark:bg-blue-700">
                             <div
-                                class="h-5 rounded-sm bg-blue-600 transition-all duration-300"
+                                class="h-5 rounded-xs bg-blue-600 transition-all duration-300"
                                 :style="{ 'width': imageProgress.progress + '%' }"
                             ></div>
                         </div>
@@ -354,11 +354,11 @@
 
                     <!-- Import / Linking / Indexing In Process -->
                     <div
-                        class="grid w-full gap-2 rounded-sm border border-green-200 bg-green-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
+                        class="grid w-full gap-2 rounded-xs border border-green-200 bg-green-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
                         v-else-if="['processing', 'linking', 'indexing'].includes(importResource.state)"
                     >
                         <p class="flex items-center gap-2">
-                            <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:!text-green-600"></i>
+                            <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:text-green-600!"></i>
 
                             <span v-if="importResource.state == 'processing' && isDelete">
                                 @lang('admin::app.settings.data-transfer.imports.import.deleting-info')
@@ -377,9 +377,9 @@
                             </span>
                         </p>
 
-                        <div class="h-5 w-full rounded-sm bg-green-200 dark:bg-green-700">
+                        <div class="h-5 w-full rounded-xs bg-green-200 dark:bg-green-700">
                             <div
-                                class="h-5 rounded-sm bg-green-600 transition-all duration-300"
+                                class="h-5 rounded-xs bg-green-600 transition-all duration-300"
                                 :style="{ 'width': stats.progress + '%' }"
                             ></div>
                         </div>
@@ -444,13 +444,13 @@
 
                     <!-- Import Completed -->
                     <div
-                        class="flex w-full place-content-between rounded-sm border border-green-200 bg-green-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
+                        class="flex w-full place-content-between rounded-xs border border-green-200 bg-green-50 p-3 dark:border-gray-800 dark:bg-gray-900 dark:text-white"
                         v-else-if="importResource.state == 'completed'"
                     >
                         <!-- Stats -->
                         <div class="grid gap-2">
                             <p class="mb-2 flex items-center gap-2 text-base">
-                                <i class="icon-done h-fit rounded-full bg-green-200 text-2xl text-green-600 dark:!text-green-600"></i>
+                                <i class="icon-done h-fit rounded-full bg-green-200 text-2xl text-green-600 dark:text-green-600!"></i>
 
                                 @lang('admin::app.settings.data-transfer.imports.import.imported-info')
                             </p>
@@ -460,13 +460,13 @@
                                 class="mb-2 flex items-center gap-2 text-base text-orange-700 dark:text-orange-400"
                                 v-if="stats.batches?.failed"
                             >
-                                <i class="icon-error h-fit rounded-full bg-orange-200 text-2xl text-orange-600 dark:!text-orange-600"></i>
+                                <i class="icon-close h-fit rounded-full bg-orange-200 text-2xl text-orange-600 dark:text-orange-600!"></i>
 
                                 @{{ "@lang('admin::app.settings.data-transfer.imports.import.failed-batches')".replace(':count', stats.batches.failed) }}
                             </p>
 
                             <p class="flex items-center gap-2">
-                                <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:!text-green-600"></i>
+                                <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:text-green-600!"></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.data-transfer.imports.import.total-created')
@@ -476,7 +476,7 @@
                             </p>
 
                             <p class="flex items-center gap-2">
-                                <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:!text-green-600"></i>
+                                <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:text-green-600!"></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.data-transfer.imports.import.total-updated')
@@ -486,7 +486,7 @@
                             </p>
 
                             <p class="flex items-center gap-2">
-                                <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:!text-green-600"></i>
+                                <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:text-green-600!"></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.data-transfer.imports.import.total-deleted')
@@ -499,7 +499,7 @@
                                 class="flex items-center gap-2"
                                 v-if="imageProgress.total"
                             >
-                                <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:!text-green-600"></i>
+                                <i class="icon-information rounded-full bg-green-200 text-2xl text-green-600 dark:text-green-600!"></i>
 
                                 <span class="font-medium text-gray-800 dark:text-white">
                                     @lang('admin::app.settings.data-transfer.imports.import.images-downloaded')

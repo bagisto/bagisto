@@ -127,7 +127,7 @@
                 <template v-if="slots.one?.length">
                     <div class="flex flex-wrap gap-x-2.5">
                         <div
-                            class="flex min-h-[38px] flex-wrap items-center gap-1 dark:border-gray-800"
+                            class="flex min-h-9.5 flex-wrap items-center gap-1 dark:border-gray-800"
                             v-for="(slot, index) in slots.one"
                         >
                             <!-- Hidden Inputs -->
@@ -162,7 +162,7 @@
                             />
 
                             <!-- Panel details -->
-                            <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
+                            <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded-sm">
                                 @{{ convertIndexToDay(slot.from_day) }} @{{ slot.from }} - @{{ convertIndexToDay(slot.to_day) }} @{{ slot.to }}
 
                                 <span
@@ -206,7 +206,7 @@
                     </div>
 
                     <div class="flex items-center justify-between grid-cols-2">
-                        <div class="flex min-h-[38px] flex-wrap items-center gap-1 dark:border-gray-800">
+                        <div class="flex min-h-9.5 flex-wrap items-center gap-1 dark:border-gray-800">
                             <template v-if="slots['many'][dayIndex]?.length">
                                 <template v-for="(slot, slotIndex) in slots['many'][dayIndex]">
                                     <!-- Hidden Inputs -->
@@ -234,7 +234,7 @@
                                         :value="slot.status"
                                     />
 
-                                    <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
+                                    <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded-sm">
                                         @{{ slot.from }} - @{{ slot.to }}
         
                                         <span
@@ -429,7 +429,7 @@
                                 />
 
                                 <!-- Slots From -->
-                                <x-admin::form.control-group class="w-full !mb-0">
+                                <x-admin::form.control-group class="w-full mb-0!">
                                     <x-admin::form.control-group.label class="hidden">
                                         @lang('admin::app.catalog.products.edit.types.booking.default.modal.slot.from')
                                     </x-admin::form.control-group.label>
@@ -447,7 +447,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Slots To -->
-                                <x-admin::form.control-group class="w-full !mb-0">
+                                <x-admin::form.control-group class="w-full mb-0!">
                                     <x-admin::form.control-group.label class="hidden">
                                         @lang('admin::app.catalog.products.edit.types.booking.default.modal.slot.to')
                                     </x-admin::form.control-group.label>
@@ -465,7 +465,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Status -->
-                                <x-admin::form.control-group class="w-full !mb-0">
+                                <x-admin::form.control-group class="w-full mb-0!">
                                     <x-admin::form.control-group.label class="hidden">
                                         @lang('admin::app.catalog.products.edit.types.booking.default.modal.slot.status')
                                     </x-admin::form.control-group.label>

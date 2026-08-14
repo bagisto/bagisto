@@ -50,10 +50,10 @@
     >
         @for ($column = 0; $column < (int) $columns; $column++)
             @if ($massAction && ! $column)
-                <div class="shimmer h-[26px] w-6"></div>
+                <div class="shimmer h-6.5 w-6"></div>
             @else
                 <div @class([
-                    'shimmer h-[17px] w-full max-w-[100px]',
+                    'shimmer h-4.25 w-full max-w-25',
                     'place-self-end' => $column === (int) $columns - 1,
                 ])></div>
             @endif
@@ -73,7 +73,7 @@
                     <div class="shimmer h-6 w-6 shrink-0"></div>
                 @endif
 
-                <div class="shimmer h-[17px] w-full max-w-[200px]"></div>
+                <div class="shimmer h-4.25 w-full max-w-50"></div>
             </div>
         @endfor
     </div>

@@ -107,11 +107,11 @@
             ref="appLayout"
         >
             <!-- Page Sidebar Blade Component -->
-            <div class="lg:fixed lg:top-[62px] lg:left-0 rtl:lg:right-0 rtl:lg:left-auto lg:z-10 w-full lg:w-auto">
+            <div class="lg:fixed lg:top-15.5 lg:left-0 rtl:lg:right-0 rtl:lg:left-auto lg:z-10 w-full lg:w-auto">
                 <x-admin::layouts.sidebar />
             </div>
 
-            <div class="flex min-h-[calc(100vh-62px)] max-w-full flex-1 flex-col bg-white transition-all duration-300 dark:bg-gray-950 pt-3 px-2 sm:px-4 lg:pt-3 lg:px-4 lg:ltr:pl-[286px] lg:group-[.sidebar-collapsed]/container:ltr:pl-[85px] lg:rtl:pr-[286px] lg:group-[.sidebar-collapsed]/container:rtl:pr-[85px]">
+            <div class="flex min-h-[calc(100vh-62px)] max-w-full flex-1 flex-col bg-white transition-all duration-300 dark:bg-gray-950 pt-3 px-2 sm:px-4 lg:pt-3 lg:px-4 lg:ltr:pl-71.5 lg:group-[.sidebar-collapsed]/container:ltr:pl-21.25 lg:rtl:pr-71.5 lg:group-[.sidebar-collapsed]/container:rtl:pr-21.25">
                 <!-- Added dynamic tabs for third level menus  -->
                 <div class="pb-4 lg:pb-6">
                     <!-- Page Content Blade Component -->

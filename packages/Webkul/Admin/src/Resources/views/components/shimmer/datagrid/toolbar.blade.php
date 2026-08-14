@@ -12,33 +12,33 @@
     <!-- Search + Results (first row on mobile, centered) -->
     <div class="flex gap-x-1 md:me-auto max-md:w-full">
         <div class="flex w-full items-center gap-x-1 max-md:justify-center">
-            <div class="shimmer h-[38px] w-[190px] rounded-lg md:w-[302px]"></div>
+            <div class="shimmer h-9.5 w-47.5 rounded-lg md:w-75.5"></div>
 
             <div class="ltr:pl-2.5 rtl:pr-2.5">
-                <p class="shimmer h-[17px] w-[75px]"></p>
+                <p class="shimmer h-4.25 w-18.75"></p>
             </div>
         </div>
     </div>
 
     <!-- Filter (desktop only — on mobile it lives in the fixed bottom bar) -->
     <div class="flex items-center gap-x-4 max-md:hidden">
-        <div class="shimmer h-[38px] w-[94px] rounded-md"></div>
+        <div class="shimmer h-9.5 w-23.5 rounded-md"></div>
     </div>
 
     <!-- Pagination (second row on mobile, centered) -->
     <div class="flex items-center gap-x-2 max-md:w-full max-md:justify-center">
-        <div class="shimmer h-[38px] w-[72px] rounded-md"></div>
+        <div class="shimmer h-9.5 w-18 rounded-md"></div>
 
         <p class="shimmer h-6 w-14"></p>
 
-        <div class="shimmer h-[38px] w-10 rounded-md"></div>
+        <div class="shimmer h-9.5 w-10 rounded-md"></div>
 
-        <div class="shimmer h-6 w-[37px]"></div>
+        <div class="shimmer h-6 w-9.25"></div>
 
         <div class="flex items-center gap-1">
-            <div class="shimmer h-[38px] w-[38px] rounded-md"></div>
+            <div class="shimmer h-9.5 w-9.5 rounded-md"></div>
 
-            <div class="shimmer h-[38px] w-[38px] rounded-md"></div>
+            <div class="shimmer h-9.5 w-9.5 rounded-md"></div>
         </div>
     </div>
 </div>

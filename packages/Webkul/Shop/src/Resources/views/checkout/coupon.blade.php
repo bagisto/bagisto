@@ -50,11 +50,11 @@
                             </x-slot>
 
                             <!-- Modal Content -->
-                            <x-slot:content class="!px-4">
-                                <x-shop::form.control-group class="!mb-0">
+                            <x-slot:content class="px-4!">
+                                <x-shop::form.control-group class="mb-0!">
                                     <x-shop::form.control-group.control
                                         type="text"
-                                        class="px-6 py-4 max-md:!mb-0 max-md:!p-3 max-sm:!p-2"
+                                        class="px-6 py-4 max-md:mb-0! max-md:p-3! max-sm:p-2!"
                                         name="code"
                                         rules="required"
                                         :placeholder="trans('shop::app.checkout.coupon.enter-your-code')"
@@ -82,7 +82,7 @@
                                     </div>
 
                                     <x-shop::button
-                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:max-w-[153px] max-md:rounded-lg max-md:py-2"
+                                        class="primary-button max-w-none flex-auto rounded-2xl px-11 py-3 max-md:max-w-38.25 max-md:rounded-lg max-md:py-2"
                                         :title="trans('shop::app.checkout.coupon.button-title')"
                                         ::loading="isStoring"
                                         ::disabled="isStoring"

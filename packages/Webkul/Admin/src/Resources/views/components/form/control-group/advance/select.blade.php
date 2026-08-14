@@ -15,7 +15,7 @@
     label="{{ $label }}"
     {{ $attributes }}
 >
-    <div class="shimmer h-[42px] w-full rounded-md"></div>
+    <div class="shimmer h-10.5 w-full rounded-md"></div>
 </v-select>
 
 @pushOnce('scripts')
@@ -32,9 +32,9 @@
                 v-slot="{ errors }"
             >
                 <div
-                    class="flex min-h-[42px] w-full cursor-pointer items-center gap-1.5 rounded-md border bg-white px-3 py-1.5 text-sm transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-400"
+                    class="flex min-h-10.5 w-full cursor-pointer items-center gap-1.5 rounded-md border bg-white px-3 py-1.5 text-sm transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:hover:border-gray-400"
                     :class="[
-                        errors.length ? 'border !border-red-600 hover:!border-red-600' : '',
+                        errors.length ? 'border border-red-600! hover:border-red-600!' : '',
                         isOpen ? 'border-gray-400 dark:border-gray-400' : '',
                     ]"
                     :name="name"

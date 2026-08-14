@@ -36,7 +36,7 @@
                 >
                     <x-slot:toggle>
                         <div
-                            class="flex w-full max-w-[200px] cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-fit ltr:pl-3 ltr:pr-4 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-4 rtl:pr-3 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
+                            class="flex w-full max-w-50 cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-fit ltr:pl-3 ltr:pr-4 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-4 rtl:pr-3 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
                             :class="{'[&>*]:text-blue-600': filters.columns.length > 0}"
                         >
                             <span class="flex items-center justify-between gap-1.5">
@@ -49,13 +49,13 @@
                         </div>
                     </x-slot>
 
-                    <x-slot:header class="border-b border-zinc-200 !px-4">
+                    <x-slot:header class="border-b border-zinc-200 px-4!">
                         <p class="text-lg font-semibold">
                             @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
                         </p>
                     </x-slot>
 
-                    <x-slot:content class="!p-4 max-md:!pt-2.5">
+                    <x-slot:content class="p-4! max-md:pt-2.5!">
                         <div v-for="column in available.columns">
                             <template v-if="column.filterable">
                                 <!-- Boolean -->
@@ -87,7 +87,7 @@
                                                 <x-slot:toggle>
                                                     <button
                                                         type="button"
-                                                        class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-full max-md:!py-1.5 ltr:pl-4 ltr:pr-3 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-3 rtl:pr-4 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
+                                                        class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm transition-all hover:border-gray-400 focus:border-gray-400 max-md:w-full max-md:py-1.5! ltr:pl-4 ltr:pr-3 max-md:ltr:pl-2.5 max-md:ltr:pr-2.5 rtl:pl-3 rtl:pr-4 max-md:rtl:pl-2.5 max-md:rtl:pr-2.5"
                                                     >
                                                         <!-- If Allow Multiple Values -->
                                                         <span
@@ -103,7 +103,7 @@
                                                         >
                                                         </span>
 
-                                                        <span class="icon-sort-down text-2xl"></span>
+                                                        <span class="icon-arrow-down text-2xl"></span>
                                                     </button>
                                                 </x-slot>
 
@@ -122,14 +122,14 @@
                                             <!-- If Allow Multiple Values -->
                                             <template v-if="column.allow_multiple_values">
                                                 <p
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                 >
                                                     <!-- Retrieving the label from the options based on the applied column value. -->
                                                     <span v-text="column.filterable_options.find((option => option.value == appliedColumnValue)).label"></span>
 
                                                     <span
-                                                        class="icon-cross cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                        class="icon-cancel cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
                                                         @click="removeAppliedColumnValue(column.index, appliedColumnValue)"
                                                     >
                                                     </span>
@@ -213,7 +213,7 @@
 
                                             <div class="mb-4 flex flex-wrap gap-2">
                                                 <p
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     v-if="findAppliedColumn(column.index)"
                                                 >
                                                     @{{ getFormattedDates(findAppliedColumn(column.index)) }}
@@ -265,7 +265,7 @@
 
                                             <div class="mb-4 flex flex-wrap gap-2">
                                                 <p
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     v-if="findAppliedColumn(column.index)"
                                                 >
                                                     @{{ getFormattedDates(findAppliedColumn(column.index)) }}
@@ -352,7 +352,7 @@
 
                                             <div class="mb-4 flex flex-wrap gap-2">
                                                 <p
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     v-if="findAppliedColumn(column.index)"
                                                 >
                                                     @{{ getFormattedDates(findAppliedColumn(column.index)) }}
@@ -404,7 +404,7 @@
 
                                             <div class="mb-4 flex flex-wrap gap-2">
                                                 <p
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     v-if="findAppliedColumn(column.index)"
                                                 >
                                                     @{{ getFormattedDates(findAppliedColumn(column.index)) }}
@@ -469,7 +469,7 @@
                                                     </button>
                                                 </x-slot>
 
-                                                <x-slot:menu class="max-sm:!py-0">
+                                                <x-slot:menu class="max-sm:py-0!">
                                                     <x-shop::dropdown.menu.item
                                                         v-for="option in column.filterable_options"
                                                         v-text="option.label"
@@ -484,7 +484,7 @@
                                             <!-- If Allow Multiple Values -->
                                             <template v-if="column.allow_multiple_values">
                                                 <p
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                 >
                                                     <!-- Retrieving the label from the options based on the applied column value. -->
@@ -536,7 +536,7 @@
                                             <!-- If Allow Multiple Values -->
                                             <template v-if="column.allow_multiple_values">
                                                 <p
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     v-for="appliedColumnValue in getAppliedColumnValues(column.index)"
                                                 >
                                                     <span v-text="appliedColumnValue"></span>
@@ -552,7 +552,7 @@
                                             <!-- If Allow Single Value -->
                                             <template v-else>
                                                 <p
-                                                    class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                                    class="flex items-center rounded-sm bg-gray-600 px-2 py-1 font-semibold text-white"
                                                     v-if="getAppliedColumnValues(column.index) !== ''"
                                                 >
                                                     <span v-text="getAppliedColumnValues(column.index)"></span>

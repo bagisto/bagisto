@@ -4,7 +4,7 @@
         <div class="mb-7 mt-8">
             <!-- Header -->
             <div class="flex items-center justify-between">
-                <h2 class="shimmer h-8 w-[180px]"></h2>
+                <h2 class="shimmer h-8 w-45"></h2>
                 
                 <span class="shimmer h-6 w-6"></span>
             </div>
@@ -25,7 +25,7 @@
     <div class="sm:hidden">
         <!-- Header -->
         <div class="flex items-center justify-between">
-            <h2 class="shimmer h-8 w-[180px]"></h2>
+            <h2 class="shimmer h-8 w-45"></h2>
             
             <span class="shimmer h-6 w-6"></span>
         </div>

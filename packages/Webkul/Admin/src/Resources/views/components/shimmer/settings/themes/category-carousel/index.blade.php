@@ -1,10 +1,10 @@
 <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
-    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+    <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
         <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
             <div class="flex flex-col gap-1">
-                <div class="shimmer h-[17px] w-40"></div>
+                <div class="shimmer h-4.25 w-40"></div>
 
-                <div class="shimmer h-[17px] w-[434px]"></div>
+                <div class="shimmer h-4.25 w-108.5"></div>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
             <div class="shimmer h-6 w-16"></div>
 
             <div class="flex gap-2.5">
-                <div class="shimmer h-10 w-[105px] rounded-md"></div>
+                <div class="shimmer h-10 w-26.25 rounded-md"></div>
             </div>
         </div>
 

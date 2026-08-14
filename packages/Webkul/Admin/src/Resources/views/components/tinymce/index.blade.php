@@ -51,7 +51,7 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                class="h-[180px]"
+                                class="h-45"
                                 name="prompt"
                                 rules="required"
                                 v-model="ai.prompt"
@@ -114,7 +114,7 @@
 
                             <x-admin::form.control-group.control
                                 type="textarea"
-                                class="h-[180px]"
+                                class="h-45"
                                 name="content"
                                 v-model="ai.content"
                             />

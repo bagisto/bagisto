@@ -40,12 +40,12 @@
                         <!-- Saved Customer Addresses Cards -->
                         <div class="mb-2 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-md:mt-2 max-md:grid-cols-1">
                             <div
-                                class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap max-md:rounded-lg"
+                                class="relative max-w-103.5 cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap max-md:rounded-lg"
                                 v-for="address in customerSavedAddresses.billing"
                             >
                                 <!-- Actions -->
                                 <div class="absolute top-5 flex gap-2 ltr:right-5 rtl:left-5">
-                                    <x-shop::form.control-group class="!mb-0 flex items-center gap-2.5">
+                                    <x-shop::form.control-group class="mb-0! flex items-center gap-2.5">
                                         <x-shop::form.control-group.control
                                             type="radio"
                                             name="billing.id"
@@ -100,7 +100,7 @@
 
                             <!-- New Address Card -->
                             <div
-                                class="flex max-w-[414px] cursor-pointer items-center justify-center rounded-xl border border-zinc-200 p-5 max-md:flex-wrap max-md:rounded-lg"
+                                class="flex max-w-103.5 cursor-pointer items-center justify-center rounded-xl border border-zinc-200 p-5 max-md:flex-wrap max-md:rounded-lg"
                                 @click="activeAddressForm = 'billing'"
                                 v-if="! cart.billing_address"
                             >
@@ -125,7 +125,7 @@
                         <!-- Shipping Address Block if have stockable items -->
                         <template v-if="cart.have_stockable_items">
                             <!-- Use for Shipping Checkbox -->
-                            <x-shop::form.control-group class="!mb-0 mt-5 flex items-center gap-2.5">
+                            <x-shop::form.control-group class="mb-0! mt-5 flex items-center gap-2.5">
                                 <x-shop::form.control-group.control
                                     type="checkbox"
                                     name="billing.use_for_shipping"
@@ -160,12 +160,12 @@
                                 <!-- Saved Customer Addresses Cards -->
                                 <div class="mb-2 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-lg:grid-cols-2 max-md:mt-4 max-md:grid-cols-1">
                                     <div
-                                        class="relative max-w-[414px] cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap max-md:rounded-lg"
+                                        class="relative max-w-103.5 cursor-pointer select-none rounded-xl border border-zinc-200 p-0 max-md:flex-wrap max-md:rounded-lg"
                                         v-for="address in customerSavedAddresses.shipping"
                                     >
                                         <!-- Actions -->
                                         <div class="absolute top-5 flex gap-5 ltr:right-5 rtl:left-5">
-                                            <x-shop::form.control-group class="!mb-0 flex items-center gap-2.5">
+                                            <x-shop::form.control-group class="mb-0! flex items-center gap-2.5">
                                                 <x-shop::form.control-group.control
                                                     type="radio"
                                                     name="shipping.id"
@@ -220,7 +220,7 @@
 
                                     <!-- New Address Card -->
                                     <div
-                                        class="flex max-w-[414px] cursor-pointer items-center justify-center rounded-xl border border-zinc-200 p-5 max-md:flex-wrap max-md:rounded-lg"
+                                        class="flex max-w-103.5 cursor-pointer items-center justify-center rounded-xl border border-zinc-200 p-5 max-md:flex-wrap max-md:rounded-lg"
                                         @click="selectedAddressForEdit = null; activeAddressForm = 'shipping'"
                                         v-if="! cart.shipping_address"
                                     >
@@ -293,7 +293,7 @@
                         ></v-checkout-address-form>
 
                         <!-- Save Address to Address Book Checkbox -->
-                        <x-shop::form.control-group class="!mb-0 flex items-center gap-2.5">
+                        <x-shop::form.control-group class="mb-0! flex items-center gap-2.5">
                             <x-shop::form.control-group.control
                                 type="checkbox"
                                 ::name="activeAddressForm + '.save_address'"

@@ -14,7 +14,7 @@
         type="text/x-template"
         id="v-booking-information-template"
     >
-        <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
+        <div class="box-shadow relative rounded-sm bg-white p-4 dark:bg-gray-900">
             <!-- Booking Type -->
             <x-admin::form.control-group class="w-full">
                 <x-admin::form.control-group.label class="required">

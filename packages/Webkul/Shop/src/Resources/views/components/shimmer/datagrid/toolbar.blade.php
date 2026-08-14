@@ -3,16 +3,16 @@
     <div class="flex gap-x-1">
         <!-- Search Panel -->
         <div class="flex w-full items-center gap-x-1">
-            <div class="shimmer h-[42px] w-[356px] rounded-lg max-md:w-[250px]"></div>
+            <div class="shimmer h-10.5 w-89 rounded-lg max-md:w-62.5"></div>
         </div>
     </div>
 
     <!-- Right Toolbar -->
     <div class="flex gap-x-4 max-md:my-4 max-md:items-center max-md:justify-between">
         <!-- Items Per Page Dropdown -->
-        <div class="shimmer h-10 w-[88px] rounded-lg max-md:w-[75px]"></div>
+        <div class="shimmer h-10 w-22 rounded-lg max-md:w-18.75"></div>
 
         <!-- Filters Activation Button -->
-        <div class="shimmer h-10 w-24 rounded-lg max-md:w-[110px]"></div>
+        <div class="shimmer h-10 w-24 rounded-lg max-md:w-27.5"></div>
     </div>
 </div>

@@ -108,7 +108,7 @@
                         </div>
                     </x-slot>
 
-                    <x-slot:header class="!px-5">
+                    <x-slot:header class="px-5!">
                         <div class="flex min-h-9 items-center">
                             <p class="text-lg font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.components.datagrid.toolbar.sort-by')
@@ -116,7 +116,7 @@
                         </div>
                     </x-slot>
 
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         <div class="py-1.5">
                             <template v-for="column in available.columns.filter(col => col.sortable)" :key="column.index">
                                 <div

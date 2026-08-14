@@ -17,7 +17,7 @@
         id="v-cart-payment-methods-template"
     >
         <div
-            class="box-shadow rounded bg-white dark:bg-gray-900"
+            class="box-shadow rounded-sm bg-white dark:bg-gray-900"
             id="payment-step-container"
         >
             <div class="flex items-center border-b p-4 dark:border-gray-800">
