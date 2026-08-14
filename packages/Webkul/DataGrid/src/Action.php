@@ -12,8 +12,8 @@ class Action
      */
     public function __construct(
         public string $index,
-        public string $icon,
-        public string $title,
+        public mixed $icon,
+        public mixed $title,
         public string $method,
         public mixed $url,
     ) {}

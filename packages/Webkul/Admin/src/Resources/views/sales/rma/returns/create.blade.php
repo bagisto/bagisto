@@ -46,7 +46,7 @@
                         performAction
                     }">
                         <template v-if="! isLoading">
-                            <div class="row grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 min-h-[47px] items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                            <div class="row datagrid-head datagrid-head-cards grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1">
                                 <div
                                     class="flex gap-2.5 items-center select-none"
                                     v-for="(columnGroup, index) in [['increment_id'], ['customer_name'], ['status'], ['grand_total'], ['method_title'], ['created_at']]"
@@ -85,7 +85,12 @@
 
                         <!-- Datagrid Head Shimmer -->
                         <template v-else>
-                            <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+                            <x-admin::shimmer.datagrid.table.head
+                                :isMultiRow="true"
+                                template="0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.1fr"
+                                :groups="[1, 1, 1, 1, 1, 1, 1]"
+                                :massAction="false"
+                            />
                         </template>
                     </template>
 
@@ -100,7 +105,7 @@
                     }">
                         <template v-if="! isLoading">
                             <div
-                                class="row grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                class="row datagrid-card grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 v-for="record in available.records"
                             >
                                 <!-- Name, SKU, Attribute Family Columns -->
@@ -159,7 +164,12 @@
 
                         <!-- Datagrid Body Shimmer -->
                         <template v-else>
-                            <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+                            <x-admin::shimmer.datagrid.table.body
+                                :isMultiRow="true"
+                                template="0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.1fr"
+                                :groups="[1, 1, 1, 1, 1, 1, 1]"
+                                :massAction="false"
+                            />
                         </template>
                     </template>
                 </x-admin::datagrid>
@@ -173,7 +183,7 @@
                         enctype="multipart/form-data"
                         ref="rmaSubmit"
                     >
-                        <x-admin::modal ref="rmaModel" panel-class="max-w-[768px]">
+                        <x-admin::modal ref="rmaModel" panel-class="max-w-192">
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <h2 class="text-base font-medium max-md:text-base dark:text-gray-300">
@@ -225,7 +235,7 @@
                 />
 
                 <div v-for="product in products">
-                    <div class="mb-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-sm transition-all hover:border-zinc-300 dark:border-gray-800 dark:bg-gray-900">
+                    <div class="mb-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-xs transition-all hover:border-zinc-300 dark:border-gray-800 dark:bg-gray-900">
                         <div class="flex gap-4">
                             <!-- Checkbox -->
                             <p>
@@ -678,7 +688,7 @@
 
                                 @case('checkbox')
                                     @foreach($attribute->options ?? [] as $option)
-                                        <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                        <x-admin::form.control-group class="flex gap-2.5 items-center mb-2! select-none">
                                             <x-admin::form.control-group.control
                                                 type="checkbox"
                                                 id="{{ $attribute->id }}"
@@ -706,7 +716,7 @@
                                 @case('radio')
                                     @foreach($attribute->options ?? [] as $key => $option)
                                         <div class="flex items-center gap-2.5">
-                                            <x-admin::form.control-group class="!mb-0">
+                                            <x-admin::form.control-group class="mb-0!">
                                                 <x-admin::form.control-group.control
                                                     type="radio"
                                                     name="customAttributes[{{ $attribute->id }}]"
@@ -771,7 +781,7 @@
                                 <!-- Image -->
                                 <img
                                     :src="image"
-                                    class="w-full h-full object-cover rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm"
+                                    class="w-full h-full object-cover rounded-lg border border-gray-200 dark:border-gray-700 shadow-xs"
                                 />
 
                                 <!-- Remove button -->
@@ -780,7 +790,7 @@
                                     class="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
                                     @click="removeImage(index)"
                                 >
-                                    <i class="icon-cancel-1 cursor-pointer rounded-full text-2xl text-white bg-gray-950"></i>
+                                    <i class="icon-close cursor-pointer rounded-full text-2xl text-white bg-gray-950"></i>
                                 </button>
                             </div>
                         </div>

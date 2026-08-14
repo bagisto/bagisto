@@ -34,9 +34,34 @@ export class ProductListPage extends BasePage {
         return this.page.locator('button.primary-button:has-text("Agree")');
     }
 
+    private get searchInput() {
+        return this.page.locator('input[name="search"]');
+    }
+
     async visit() {
         await super.visit("admin/catalog/products");
         await expect(this.createProductButton).toBeVisible();
+    }
+
+    async searchByName(name: string): Promise<number> {
+        await this.visit();
+
+        await this.searchInput.fill(name);
+
+        const [response] = await Promise.all([
+            this.page.waitForResponse((response) =>
+                response.url().includes("filters%5Ball%5D"),
+            ),
+            this.searchInput.press("Enter"),
+        ]);
+
+        const body = await response.json();
+
+        return body.meta?.total ?? 0;
+    }
+
+    async isListedByName(name: string): Promise<boolean> {
+        return (await this.searchByName(name)) > 0;
     }
 
     async openProductForEdit() {

@@ -30,11 +30,11 @@
                         @submit="handleSubmit($event, store)"
                         enctype="multipart/form-data"
                     >
-                        <div class="max-w-[286px]">
+                        <div class="max-w-71.5">
                             <x-shop::form.control-group>
                                 <x-shop::form.control-group.control
                                     type="image"
-                                    class="!mb-0 !p-0 max-md:gap-1.5"
+                                    class="mb-0! p-0! max-md:gap-1.5"
                                     name="attachments"
                                     :label="trans('shop::app.products.view.reviews.attachments')"
                                     :is-multiple="true"
@@ -129,7 +129,7 @@
 
                             <div class="mt-4 flex justify-start gap-4 max-xl:mb-5 max-sm:mb-5 max-sm:flex-wrap max-sm:justify-normal max-sm:gap-x-0">
                                 <button
-                                    class="primary-button w-full max-w-[374px] rounded-2xl px-11 py-4 text-center max-md:max-w-full max-md:rounded-lg max-md:py-3 max-sm:py-1.5"
+                                    class="primary-button w-full max-w-93.5 rounded-2xl px-11 py-4 text-center max-md:max-w-full max-md:rounded-lg max-md:py-3 max-sm:py-1.5"
                                     type='submit'
                                 >
                                     @lang('shop::app.products.view.reviews.submit-review')
@@ -187,14 +187,14 @@
                                 </div>
 
                                 <!-- Ratings By Individual Stars -->
-                                <div class="grid max-w-[365px] flex-wrap gap-y-3 max-md:max-w-full">
+                                <div class="grid max-w-91.25 flex-wrap gap-y-3 max-md:max-w-full">
                                     @for ($i = 5; $i >= 1; $i--)
                                         <div class="row grid grid-cols-[1fr_2fr] items-center gap-4 max-md:grid-cols-[0.5fr_2fr] max-sm:flex-wrap max-sm:gap-0">
                                             <div class="whitespace-nowrap text-base font-medium max-sm:text-sm">{{ $i }} Stars</div>
 
-                                            <div class="h-4 w-[275px] max-w-full rounded-sm bg-neutral-200 max-sm:h-3.5 max-sm:w-full">
+                                            <div class="h-4 w-68.75 max-w-full rounded-xs bg-neutral-200 max-sm:h-3.5 max-sm:w-full">
                                                 <div
-                                                    class="h-4 rounded-sm bg-amber-500 max-sm:h-3.5"
+                                                    class="h-4 rounded-xs bg-amber-500 max-sm:h-3.5"
                                                     style="width: {{ $percentageRatings[$i] }}%"
                                                 ></div>
                                             </div>
@@ -241,9 +241,9 @@
 
                     <!-- Empty Review Section -->
                     <template v-else>
-                        <div class="m-auto grid h-[476px] w-full place-content-center items-center justify-items-center text-center max-md:h-60">
+                        <div class="m-auto grid h-119 w-full place-content-center items-center justify-items-center text-center max-md:h-60">
                             <img
-                                class="max-md:h-32 max-md:w-32 max-sm:h-[100px] max-sm:w-[100px]"
+                                class="max-md:h-32 max-md:w-32 max-sm:h-25 max-sm:w-25"
                                 src="{{ bagisto_asset('images/review.png') }}"
                                 alt=""
                                 title=""
@@ -284,7 +284,7 @@
             <div class="flex gap-5">
                 <template v-if="review.profile">
                     <img
-                        class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl"
+                        class="flex max-h-25 min-h-25 min-w-25 max-w-25 items-center justify-center rounded-xl"
                         :src="review.profile"
                         :alt="review.name"
                         :title="review.name"
@@ -293,7 +293,7 @@
 
                 <template v-else>
                     <div
-                        class="flex max-h-[100px] min-h-[100px] min-w-[100px] max-w-[100px] items-center justify-center rounded-xl bg-zinc-100"
+                        class="flex max-h-25 min-h-25 min-w-25 max-w-25 items-center justify-center rounded-xl bg-zinc-100"
                         :title="review.name"
                     >
                         <span class="text-2xl font-semibold text-zinc-500">
@@ -332,7 +332,7 @@
 
                 @if ((bool) core()->getConfigData('magic_ai.storefront_features.review_translation.enabled'))
                     <button
-                        class="secondary-button min-h-[34px] rounded-lg px-2 py-1 text-sm max-md:rounded-lg"
+                        class="secondary-button min-h-8.5 rounded-lg px-2 py-1 text-sm max-md:rounded-lg"
                         @click="translate"
                     >
                         <!-- Spinner -->
@@ -366,7 +366,7 @@
                             v-if="file.type == 'image'"
                         >
                             <img
-                                class="max-h-[50px] min-w-[50px] cursor-pointer rounded-xl"
+                                class="max-h-12.5 min-w-12.5 cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -381,7 +381,7 @@
                             v-else
                         >
                             <video
-                                class="max-h-[50px] min-w-[50px] cursor-pointer rounded-xl"
+                                class="max-h-12.5 min-w-12.5 cursor-pointer rounded-xl"
                                 :src="file.url"
                                 :alt="review.name"
                                 :title="review.name"
@@ -451,7 +451,7 @@
 
                     @if ((bool) core()->getConfigData('magic_ai.storefront_features.review_translation.enabled'))
                         <button
-                            class="secondary-button mt-2.5 min-h-[34px] rounded-lg px-4 py-2.5 text-base max-md:rounded-lg max-sm:px-3 max-sm:py-1 max-sm:text-xs"
+                            class="secondary-button mt-2.5 min-h-8.5 rounded-lg px-4 py-2.5 text-base max-md:rounded-lg max-sm:px-3 max-sm:py-1 max-sm:text-xs"
                             @click="translate"
                         >
                             <!-- Spinner -->

@@ -62,8 +62,13 @@ abstract class AbstractSource
     ) {
         try {
             $this->initialize();
-        } catch (\Exception $e) {
-            throw new \LogicException("Unable to open file: '{$filePath}'");
+        } catch (\Throwable $e) {
+            /**
+             * Caught as a `Throwable` rather than an `Exception`: a file that is empty or is not
+             * of the shape the reader expects fails on a type error, which is not an `Exception`
+             * and would otherwise escape as-is.
+             */
+            throw new \LogicException("Unable to open file: '{$filePath}'", 0, $e);
         }
     }
 

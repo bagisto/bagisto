@@ -16,18 +16,18 @@
     <div class="max-md:hidden">
         <x-shop::layouts.account.navigation />
     </div>
-    
+
     <!--Customers logout-->
     <div class="mx-4 flex-auto max-md:mx-6 max-sm:mx-4">
         <!-- Heading of the page -->
         <div class="flex items-center justify-between">
-            <div class="mb-8 flex items-center max-md:mb-5">
+            <div class="flex items-center">
                 <!-- Back Button -->
                 <a
                     class="grid md:hidden"
-                    href="{{ route('shop.customers.account.index') }}"
+                    href="{{ route('shop.customers.account.rma.index') }}"
                 >
-                    <span class="icon-arrow-left rtl:icon-arrow-right text-2xl"></span>
+                    <span class="text-2xl icon-arrow-left rtl:icon-arrow-right"></span>
                 </a>
 
                 <h2 class="text-2xl font-medium max-md:text-xl max-sm:text-base ltr:ml-2.5 md:ltr:ml-0 rtl:mr-2.5 md:rtl:mr-0">
@@ -37,7 +37,7 @@
 
             <a
                 href="{{ route('shop.customers.account.rma.index') }}"
-                class="secondary-button flex items-center gap-x-2 border-[#E9E9E9] px-5 max-lg:px-3 max-lg:text-xs py-3 font-normal"
+                class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm"
             >
                 @lang('shop::app.checkout.onepage.address.back')
             </a>
@@ -100,7 +100,7 @@
 
                                             <i
                                                 class="align-text-bottom text-base text-gray-800 ltr:ml-1.5 rtl:mr-1.5"
-                                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                                :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
                                                 v-if="columnGroup.includes(applied.sort.column)"
                                             ></i>
                                         </p>
@@ -217,7 +217,7 @@
 
                                             <i
                                                 class="align-text-bottom text-base text-gray-800 ltr:ml-1.5 rtl:mr-1.5"
-                                                :class="[applied.sort.order === 'asc' ? 'icon-down-stat': 'icon-up-stat']"
+                                                :class="[applied.sort.order === 'asc' ? 'icon-arrow-down': 'icon-arrow-up']"
                                                 v-if="columnGroup.includes(applied.sort.column)"
                                             ></i>
                                         </p>
@@ -303,7 +303,7 @@
                     >
                         <x-shop::modal
                             ref="rmaModel"
-                            panel-class="max-w-[768px]"
+                            panel-class="max-w-192"
                         >
                             <!-- Modal Header -->
                             <x-slot:header>
@@ -353,7 +353,7 @@
                 />
 
                 <div v-for="product in products">
-                    <div class="mb-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-sm transition-all hover:border-zinc-300">
+                    <div class="mb-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-xs transition-all hover:border-zinc-300">
                         <div class="flex gap-4">
                             <!-- Checkbox -->
                             <p>
@@ -488,7 +488,7 @@
                                     <div class="mt-4" v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                         <x-shop::form.control-group>
                                             <x-shop::form.control-group.label class="required text-sm flex">
-                                                @lang('shop::app.customers.account.rma.create.resolution-type') 
+                                                @lang('shop::app.customers.account.rma.create.resolution-type')
                                             </x-shop::form.control-group.label>
 
                                             <x-shop::form.control-group.control
@@ -596,7 +596,7 @@
                                     </x-shop::form.control-group>
                                 </p>
                             </div>
-        
+
                             <template
                                 v-if="isChecked[getProductId(product)]
                                     && product.currentQuantity > '0'
@@ -633,7 +633,7 @@
                                                 <x-shop::form.control-group.label class="text-sm flex">
                                                     @lang('shop::app.customers.account.rma.create.package-condition')
                                                 </x-shop::form.control-group.label>
-                    
+
                                                 <x-shop::form.control-group.control
                                                     type="select"
                                                     name="package_condition"
@@ -643,22 +643,22 @@
                                                     <option value="">
                                                         @lang('shop::app.customers.account.rma.create.select')
                                                     </option>
-                    
+
                                                     <option value="open">
                                                         @lang('shop::app.customers.account.rma.create.open')
                                                     </option>
-                    
+
                                                     <option value="packed">
                                                         @lang('shop::app.customers.account.rma.create.packed')
                                                     </option>
                                                 </x-shop::form.control-group.control>
-                    
+
                                                 <x-shop::form.control-group.error name="package_condition" class="flex" />
                                             </x-shop::form.control-group>
                                         </p>
                                     </div>
                                 </template>
-            
+
                                 <template v-else>
                                     <!-- RMA Quantity -->
                                     <x-shop::form.control-group>
@@ -920,7 +920,7 @@
 
                         <x-shop::form.control-group.control
                             type="image"
-                            class="!p-0 rounded-xl text-gray-700 mb-0"
+                            class="p-0! rounded-xl text-gray-700 mb-0"
                             name="images[]"
                             :label="trans('shop::app.customers.account.rma.create.images')"
                             :is-multiple="true"
@@ -938,8 +938,8 @@
                 <!-- Loading Shimmer -->
                 <div>
                     <div class="flex gap-5 mt-2">
-                        <x-shop::media.images.lazy class="h-[95px] max-h-[95px] w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
-                        
+                        <x-shop::media.images.lazy class="h-23.75 max-h-23.75 w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
+
                         <div>
                             <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
                             <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
@@ -951,8 +951,8 @@
 
                 <div>
                     <div class="flex gap-5 mt-2">
-                        <x-shop::media.images.lazy class="h-[95px] max-h-[95px] w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
-                        
+                        <x-shop::media.images.lazy class="h-23.75 max-h-23.75 w-28 min-w-32 max-w-24 rounded-xl max-md:w-18 max-md:min-w-18" />
+
                         <div>
                             <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
                             <div class="shimmer w-32 min-w-32 h-4 mt-1"></div>
@@ -962,7 +962,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div
                 v-else
                 class="text-center text-red-600 font-semibold mt-4"

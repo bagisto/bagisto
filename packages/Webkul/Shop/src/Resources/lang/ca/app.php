@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Descàrregues Restants',
                 'status' => 'Estat',
                 'title' => 'Títol',
+                'unlimited' => 'Il·limitat',
             ],
 
             'wishlist' => [

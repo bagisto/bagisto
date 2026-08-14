@@ -1,4 +1,4 @@
-<div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+<div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
     <div class="flex justify-between">
         <!-- Total Order Count -->
         <p class="text-base font-semibold leading-none text-gray-800 dark:text-white">
@@ -27,17 +27,23 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.head
+                    :isMultiRow="true"
+                    template="repeat(4, minmax(0, 1fr))"
+                    :groups="[3, 3, 3]"
+                    :imageGroup="2"
+                    :massAction="false"
+                />
             </template>
 
             <template v-else>
-                <div class="row grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1 items-center border-b border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                <div class="row datagrid-head datagrid-head-cards grid grid-cols-[0.5fr_0.5fr_1fr] grid-rows-1">
                     <div
                         class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['increment_id', 'created_at', 'status'], ['base_grand_total', 'method', 'channel_name'], ['full_name', 'customer_email', 'location', 'image']]"
                     >
                         <p class="text-gray-600 dark:text-gray-300">
-                            <span class="[&>*]:after:content-['_/_']">
+                            <span class="*:after:content-['_/_']">
                                 <template v-for="column in columnGroup">
                                     <span
                                         class="after:content-['/'] last:after:content-['']"
@@ -74,13 +80,19 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.body
+                    :isMultiRow="true"
+                    template="repeat(4, minmax(0, 1fr))"
+                    :groups="[3, 3, 3]"
+                    :imageGroup="2"
+                    :massAction="false"
+                />
             </template>
 
             <template v-else>
                 <div
                     v-if="available.meta.total"
-                    class="row grid grid-cols-4 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
+                    class="row datagrid-card grid grid-cols-4 gap-y-4 border-b px-4 py-2.5 transition-all hover:bg-gray-50 dark:border-gray-800 dark:hover:bg-gray-950"
                     v-for="record in available.records"
                 >
                     <!-- Order Id, Created, Status Section -->

@@ -19,7 +19,7 @@
         type="text/x-template"
         id="v-cart-items-template"
     >
-        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
             <div class="flex justify-between p-4">
                 <p class="text-base font-semibold text-gray-800 dark:text-white">
                     @lang('admin::app.sales.orders.create.cart.items.title')
@@ -78,12 +78,12 @@
                         <div class="flex gap-2.5">
                             <!-- Image -->
                             <div
-                                class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                class="relative h-15 max-h-15 w-full max-w-15 overflow-hidden rounded-sm"
                                 :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! item.product.images.length}"
                             >
                                 <template v-if="! item.product.images.length">
                                     <img
-                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded" 
+                                        class="relative h-15 max-h-15 w-full max-w-15 rounded-sm" 
                                         src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                     >
 
@@ -94,7 +94,7 @@
 
                                 <template v-else>
                                     <img
-                                        class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded" 
+                                        class="relative h-15 max-h-15 w-full max-w-15 rounded-sm" 
                                         :src="item.product.images[0].url"
                                     >
                                 </template>
@@ -249,7 +249,7 @@
                 </x-slot>
 
                 <!-- Drawer Content -->
-                <x-slot:content class="!p-0">
+                <x-slot:content class="p-0!">
                     <div
                         class="grid"
                         v-if="searchedProducts.length"
@@ -262,12 +262,12 @@
                             <div class="flex gap-2.5">
                                 <!-- Image -->
                                 <div
-                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                    class="relative h-15 max-h-15 w-full max-w-15 overflow-hidden rounded-sm"
                                     :class="{'border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                                 >
                                     <template v-if="! product.images.length">
                                         <img
-                                            class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded" 
+                                            class="relative h-15 max-h-15 w-full max-w-15 rounded-sm" 
                                             src="{{ bagisto_asset('images/product-placeholders/front.svg') }}"
                                         >
                                     
@@ -278,7 +278,7 @@
 
                                     <template v-else>
                                         <img
-                                            class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                            class="relative h-15 max-h-15 w-full max-w-15 rounded-sm"
                                             :src="product.images[0].url"
                                         >
                                     </template>
@@ -314,7 +314,7 @@
                                             @{{ product.formatted_price }}
                                         </p>
 
-                                        <x-admin::form.control-group class="!mb-0">
+                                        <x-admin::form.control-group class="mb-0!">
                                             <x-admin::form.control-group.label class="required justify-end">
                                                 @lang('admin::app.sales.orders.create.cart.items.search.qty')
                                             </x-admin::form.control-group.label>
@@ -328,7 +328,7 @@
                                             <x-admin::form.control-group.control
                                                 type="text"
                                                 name="qty"
-                                                class="!w-20 !px-2 !py-1.5"
+                                                class="w-20! px-2! py-1.5!"
                                                 value="1"
                                                 rules="required|numeric|min_value:1"
                                                 :label="trans('admin::app.sales.orders.create.cart.items.search.qty')"

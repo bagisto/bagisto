@@ -6,7 +6,7 @@
     </div>
 
     <!-- Right Container -->
-    <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+    <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
         <!-- Cart Items Shimmer Effect -->
         <x-admin::shimmer.sales.orders.create.items />
 

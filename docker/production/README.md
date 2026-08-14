@@ -4,6 +4,14 @@ A **single-container**, ready-to-boot production Docker image for [Bagisto](http
 
 One `docker run` gives you a fully installed, migrated, and seeded Bagisto store. No docker-compose, no external database, no first-run setup.
 
+The image ships in **three interchangeable web-server variants** — pick the one you prefer; they are otherwise identical (same PHP, same MySQL, same build-time install):
+
+| Variant | Web server | PHP SAPI | Docker tag suffix |
+|---|---|---|---|
+| **nginx** (default) | Nginx | PHP 8.3 FPM | `-nginx` (also the unsuffixed `:<version>` / `:latest`) |
+| **apache** | Apache 2 | PHP 8.3 `mod_php` | `-apache` |
+| **litespeed** | OpenLiteSpeed | lsphp 8.3 (LSAPI) | `-litespeed` |
+
 ---
 
 ## Table of Contents
@@ -35,10 +43,10 @@ One `docker run` gives you a fully installed, migrated, and seeded Bagisto store
 | Component | Details |
 |---|---|
 | **Base OS** | Ubuntu 24.04 |
-| **Web Server** | Nginx (listening on port 80) |
-| **PHP** | 8.3 FPM with bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pdo, soap, sockets, xml, zip, imagick |
+| **Web Server** | One of **Nginx** (default), **Apache 2**, or **OpenLiteSpeed** — listening on port 80 (see the variant table above) |
+| **PHP** | 8.3 with bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pdo, soap, sockets, xml, zip, imagick. Served via PHP-FPM (nginx), `mod_php` (apache), or lsphp/LSAPI (litespeed). |
 | **Database** | MySQL 8.0 (internal, pre-installed with Bagisto migrations + seed data already applied) |
-| **Process Manager** | Supervisor (manages `mysql`, `php-fpm`, and `nginx`) |
+| **Process Manager** | Supervisor (manages `mysql`, the PHP runner where applicable, and the web server) |
 | **Application** | Bagisto — fully installed at build time |
 
 ### Two database modes
@@ -54,26 +62,43 @@ One `docker run` gives you a fully installed, migrated, and seeded Bagisto store
 
 All files live under **`docker/production/`** inside the Bagisto repository:
 
+The layout follows a **shared assets + per-runtime** structure. The build context for every variant is `docker/production/`; each variant's `Dockerfile` pulls the common pieces from `shared/` and its own web-server config from `<variant>/config/`.
+
 ```
 bagisto/
 ├── .github/workflows/
-│   └── docker_publish.yml  # Auto-builds & pushes the image on every `v*` tag
+│   └── docker_publish.yml       # Matrix-builds & pushes all 3 variants on every `v*` tag
 └── docker/production/
-    ├── Dockerfile          # Single-stage production image definition
-    ├── build-install.sh    # Runs at build time: installs Bagisto, seeds DB, bakes MySQL data into the image layer
-    ├── entrypoint.sh       # Runs at container start: applies env overrides and hands off to Supervisor
-    ├── mysql-init.sql      # SQL to create the `bagisto` database + user on first MySQL init
-    ├── nginx.conf          # Nginx server block (port 80 → /var/www/bagisto/public)
-    ├── php.ini             # Production PHP settings (opcache, limits, error handling)
-    ├── php-fpm.conf        # PHP-FPM pool config (www, unix socket, dynamic PM)
-    ├── supervisord.conf    # Supervisor config for mysql + php-fpm + nginx
-    ├── .dockerignore       # Excludes unneeded files from the build context
-    └── README.md           # This file
+    ├── shared/                  # Assets common to every variant
+    │   ├── build-install.sh     # Build time: installs Bagisto, seeds DB, bakes MySQL data into the layer
+    │   ├── entrypoint.sh         # Container start: applies env overrides, waits for external DB, hands off to Supervisor
+    │   ├── mysql-init.sql        # Creates the `bagisto` database + user on first MySQL init
+    │   └── php.ini               # Production PHP settings (opcache, limits, error handling)
+    ├── nginx/
+    │   ├── Dockerfile            # Nginx + PHP 8.3 FPM
+    │   └── config/
+    │       ├── nginx.conf        # Nginx server block (port 80 → /var/www/bagisto/public)
+    │       ├── php-fpm.conf      # PHP-FPM pool (www, unix socket, dynamic PM)
+    │       └── supervisord.conf  # Supervisor: mysql + php-fpm + nginx
+    ├── apache/
+    │   ├── Dockerfile            # Apache 2 + PHP 8.3 mod_php
+    │   └── config/
+    │       ├── vhost.conf        # Apache virtual host (rewrite + security headers)
+    │       └── supervisord.conf  # Supervisor: mysql + apache2
+    ├── litespeed/
+    │   ├── Dockerfile            # OpenLiteSpeed + lsphp 8.3 (LSAPI)
+    │   └── config/
+    │       ├── httpd_config.conf # OLS server config (listener :80, lsphp external app)
+    │       ├── vhosts/
+    │       │   └── bagisto.conf  # OLS vhost (docRoot public/, Laravel rewrite)
+    │       └── supervisord.conf  # Supervisor: mysql + lsphp + openlitespeed
+    ├── .dockerignore             # Excludes unneeded files from the build context
+    └── README.md                 # This file
 ```
 
-**Releases are automated.** Pushing a `v*` Git tag to the Bagisto repo (e.g. `v2.4.0`) triggers the GitHub Actions workflow, which builds the multi-arch image and pushes it to Docker Hub. See [§7 — Full Release Workflow](#7-full-release-workflow).
+**Releases are automated.** Pushing a `v*` Git tag to the Bagisto repo (e.g. `v2.4.7`) triggers the GitHub Actions workflow, which matrix-builds the multi-arch image for all three variants and pushes them to Docker Hub. See [§7 — Full Release Workflow](#7-full-release-workflow).
 
-For local builds, run `docker build` from `docker/production/`.
+For local builds, run `docker build` from `docker/production/`, selecting a variant's Dockerfile with `-f` (see [§4](#4-building-the-image)).
 
 ---
 
@@ -82,7 +107,12 @@ For local builds, run `docker build` from `docker/production/`.
 ### Pull from Docker Hub
 
 ```bash
-docker pull webkul/bagisto:latest
+docker pull webkul/bagisto:latest              # nginx (default)
+# or a specific web-server variant:
+docker pull webkul/bagisto:latest-apache       # Apache
+docker pull webkul/bagisto:latest-litespeed    # OpenLiteSpeed
+# or pin an exact version + variant:
+docker pull webkul/bagisto:2.4.7-nginx
 ```
 
 ### Run on port 80
@@ -109,40 +139,44 @@ Then visit `http://localhost:8080`.
 >
 > The instructions below cover **local development builds** — testing Dockerfile changes, debugging the install flow, or producing a single-arch image for a private registry.
 
-All commands below assume you are inside `docker/production/`:
+All commands below assume you are inside `docker/production/` (the shared build context for every variant):
 
 ```bash
 cd docker/production
 ```
 
-### Build with the default Bagisto version
+Select the variant with `-f <variant>/Dockerfile`. The trailing `.` is the build context and must stay `docker/production/`.
+
+### Build a specific variant (default Bagisto version)
 
 ```bash
-docker build -t bagisto-prod .
+# nginx (default)
+docker build -f nginx/Dockerfile     -t bagisto:2.4.7-nginx     .
+
+# apache
+docker build -f apache/Dockerfile    -t bagisto:2.4.7-apache    .
+
+# litespeed
+docker build -f litespeed/Dockerfile -t bagisto:2.4.7-litespeed .
 ```
 
-This uses the default `BAGISTO_VERSION` set in the Dockerfile (currently **`v2.4.0`**).
+This uses the default `BAGISTO_VERSION` set in each Dockerfile (currently **`v2.4.7`**).
 
 ### Build with a specific Bagisto version
 
 ```bash
-docker build -t bagisto-prod --build-arg BAGISTO_VERSION=v2.4.0 .
+docker build -f nginx/Dockerfile -t bagisto:2.4.7-nginx --build-arg BAGISTO_VERSION=v2.4.7 .
 ```
 
-Replace `v2.4.0` with any valid Git tag from https://github.com/bagisto/bagisto/tags.
-
-### Build with a version already in the image tag
-
-```bash
-docker build -t bagisto-prod:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
-```
+Replace `v2.4.7` with any valid Git tag from https://github.com/bagisto/bagisto/tags.
 
 ### Build arguments
 
-| Build arg | Default | Description |
-|---|---|---|
-| `BAGISTO_VERSION` | `v2.4.0` | Git tag to clone from the Bagisto repository. |
-| `PHP_VERSION` | `8.3` | PHP version to install. Only change if you know what you're doing. |
+| Build arg | Applies to | Default | Description |
+|---|---|---|---|
+| `BAGISTO_VERSION` | all variants | `v2.4.7` | Git tag to clone from the Bagisto repository. |
+| `PHP_VERSION` | nginx, apache | `8.3` | PHP version to install. Only change if you know what you're doing. |
+| `LSPHP_VERSION` | litespeed | `83` | lsphp major version (e.g. `83` for PHP 8.3). |
 
 > **Note**: Bagisto is fully installed *during the build* (migrations, seeding, indexing). Expect build times of 5–10 minutes depending on your machine.
 
@@ -153,6 +187,26 @@ docker build -t bagisto-prod:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
 ## 5. Tagging Strategy
 
 The CI workflow applies this scheme automatically. The details below explain what it produces and why, plus how to match it for any manual builds.
+
+### Per-variant tags
+
+Every release publishes all three web-server variants. Each variant is tagged with a `-<server>` suffix, and **nginx** (the default) additionally publishes the unsuffixed tags for backward compatibility:
+
+| Variant | Version tag | Floating tag (stable, default branch) |
+|---|---|---|
+| nginx | `:<version>-nginx` **and** `:<version>` | `:latest-nginx` **and** `:latest` |
+| apache | `:<version>-apache` | `:latest-apache` |
+| litespeed | `:<version>-litespeed` | `:latest-litespeed` |
+
+So a stable `v2.4.7` release on the default branch produces:
+
+```
+webkul/bagisto:2.4.7-nginx      webkul/bagisto:latest-nginx      webkul/bagisto:2.4.7   webkul/bagisto:latest
+webkul/bagisto:2.4.7-apache     webkul/bagisto:latest-apache
+webkul/bagisto:2.4.7-litespeed  webkul/bagisto:latest-litespeed
+```
+
+`docker pull webkul/bagisto:latest` (or `:2.4.7`) gives you the **nginx** variant.
 
 ### `v`-prefix convention
 
@@ -173,13 +227,15 @@ How the workflow decides:
 - If the compare status is `identical` or `behind`, the build commit is on the default branch line → `:latest` is updated (for stable tags).
 - If the status is `diverged` (the commit is on a side branch like `2.3` while the default is `2.4`), `:latest` is **not** touched.
 
-| Git tag pushed | Default branch is `2.4` → Docker Hub tags published |
+Each row below is published **for all three variants** (with the `-nginx` / `-apache` / `-litespeed` suffix); the unsuffixed tags shown are the nginx backward-compat aliases.
+
+| Git tag pushed | Default branch is `2.4` → Docker Hub tags published (per variant) |
 |---|---|
-| `v2.4.4` (commit on `2.4`, stable) | `:2.4.4`, `:latest` |
-| `v2.3.19` (commit on `2.3`, stable) | `:2.3.19` (does **not** touch `:latest`) |
-| `v2.4.5-rc1` (pre-release on `2.4`) | `:2.4.5-rc1` only |
-| Later: default branch switched to `2.5`, then `v2.5.0` released | `:2.5.0`, `:latest` |
-| Later: default branch is `2.5`, then a patch `v2.4.5` is released on `2.4` | `:2.4.5` (does **not** touch `:latest`) |
+| `v2.4.7` (commit on `2.4`, stable) | `:2.4.7-<variant>`, `:latest-<variant>` (+ nginx: `:2.4.7`, `:latest`) |
+| `v2.3.19` (commit on `2.3`, stable) | `:2.3.19-<variant>` only (does **not** touch any `:latest*`) |
+| `v2.4.7-rc1` (pre-release on `2.4`) | `:2.4.7-rc1-<variant>` only |
+| Later: default branch switched to `2.5`, then `v2.5.0` released | `:2.5.0-<variant>`, `:latest-<variant>` (+ nginx: `:2.5.0`, `:latest`) |
+| Later: default branch is `2.5`, then a patch `v2.4.7` is released on `2.4` | `:2.4.7-<variant>` only (does **not** touch any `:latest*`) |
 
 | Tag form | Mutability | Purpose |
 |---|---|---|

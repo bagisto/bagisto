@@ -97,15 +97,17 @@
                     </div>
                 @endif
 
-                <a
-                    class="inline-flex w-full max-w-max cursor-pointer items-center justify-between gap-x-2 px-1 py-1.5 text-center font-semibold text-gray-600 transition-all hover:rounded-md hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
-                    href="{{ route('admin.customers.customers.login_as_customer', $customer->id) }}"
-                    target="_blank"
-                >
-                    <span class="icon-exit text-2xl"></span>
+                @if (bouncer()->hasPermission('customers.customers.login_as_customer'))
+                    <a
+                        class="inline-flex w-full max-w-max cursor-pointer items-center justify-between gap-x-2 px-1 py-1.5 text-center font-semibold text-gray-600 transition-all hover:rounded-md hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
+                        href="{{ route('admin.customers.customers.login_as_customer', $customer->id) }}"
+                        target="_blank"
+                    >
+                        <span class="icon-exit text-2xl"></span>
 
-                    @lang('admin::app.customers.customers.view.login-as-customer')
-                </a>
+                        @lang('admin::app.customers.customers.view.login-as-customer')
+                    </a>
+                @endif
                 
                 <!-- Account Delete button -->
                 @if (bouncer()->hasPermission('customers.customers.delete'))
@@ -167,7 +169,7 @@
                 </div>
 
                 <!-- Right Component -->
-                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
 
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.before') !!}
 
@@ -175,7 +177,7 @@
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.customer.after') !!}
 
                     <template v-if="! customer">
-                        <x-admin::shimmer.accordion class="h-[271px] w-[360px]"/>
+                        <x-admin::shimmer.accordion class="h-67.75 w-90"/>
                     </template>
 
                     <template v-else>
@@ -226,7 +228,7 @@
                     {!! view_render_event('bagisto.admin.customers.customers.view.card.accordion.address.before') !!}
 
                     <template v-if="! customer">
-                        <x-admin::shimmer.accordion class="h-[271px] w-[360px]"/>
+                        <x-admin::shimmer.accordion class="h-67.75 w-90"/>
                     </template>
 
                     <template v-else>

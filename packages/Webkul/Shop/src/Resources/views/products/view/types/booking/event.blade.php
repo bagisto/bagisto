@@ -71,7 +71,7 @@
 
                 <div class="place-items-end">
                     <x-shop::quantity-changer
-                        class="mt-5 w-max gap-x-4 rounded-xl !border-[#E9E9E9] px-4 py-2.5 max-sm:p-1.5"
+                        class="mt-5 w-max gap-x-4 rounded-xl border-[#E9E9E9]! px-4 py-2.5 max-sm:p-1.5"
                         ::name="'booking[qty][' + ticket.id + ']'"
                         rules="required|numeric|min_value:0"
                         ::value="tickets.length > 1 ? 1 : 0"

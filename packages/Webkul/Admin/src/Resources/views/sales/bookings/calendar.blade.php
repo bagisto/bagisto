@@ -6,7 +6,7 @@
         id="v-calendar-template"
     >
         <div class="mt-6">
-            <div class="calendar-container rounded-xl border border-gray-200 bg-white p-4 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+            <div class="calendar-container rounded-xl border border-gray-200 bg-white p-4 shadow-xs dark:border-gray-700 dark:bg-gray-900">
                 <vue-cal
                     hide-view-selector
                     :watchRealTime="true"
@@ -36,7 +36,7 @@
                     <!-- Content -->
                     <template #event="{ event, view }">
                         <div
-                            class="slot group relative h-full cursor-pointer overflow-hidden rounded-md border-l-[3px] text-left text-xs shadow-sm backdrop-blur-sm transition-all duration-200 hover:-translate-y-px hover:shadow-md"
+                            class="slot group relative h-full cursor-pointer overflow-hidden rounded-md border-l-[3px] text-left text-xs shadow-xs backdrop-blur-xs transition-all duration-200 hover:-translate-y-px hover:shadow-md"
                             :class="[
                                 event.status === 'pending' ? 'border-amber-500 bg-amber-50/90 hover:bg-amber-100 dark:border-amber-400 dark:bg-amber-500/15 dark:hover:bg-amber-500/25' :
                                 event.status === 'completed' ? 'border-emerald-500 bg-emerald-50/90 hover:bg-emerald-100 dark:border-emerald-400 dark:bg-emerald-500/15 dark:hover:bg-emerald-500/25' :
@@ -203,7 +203,7 @@
 
                             <!-- Customer Name -->
                             <div class="flex items-center gap-2.5">
-                                <span class="icon-customer-2 text-xl text-gray-400 dark:text-gray-500"></span>
+                                <span class="icon-customer text-xl text-gray-400 dark:text-gray-500"></span>
 
                                 <span class="font-medium" v-text="event.full_name"></span>
                             </div>

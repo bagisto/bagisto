@@ -9,7 +9,7 @@
         type="text/x-template"
         id="v-group-products-template"
     >
-        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow relative rounded-sm bg-white dark:bg-gray-900">
             <!-- Panel Header -->
             <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
@@ -55,7 +55,7 @@
 
                                 <!-- Image -->
                                 <div
-                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                    class="relative h-15 max-h-15 w-full max-w-15 overflow-hidden rounded-sm"
                                     :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! element.associated_product.images.length}"
                                 >
                                     <template v-if="! element.associated_product.images.length">
@@ -102,8 +102,8 @@
                                     :value="index"
                                 />
 
-                                <x-admin::form.control-group class="!mb-0">
-                                    <x-admin::form.control-group.label class="required !block">
+                                <x-admin::form.control-group class="mb-0!">
+                                    <x-admin::form.control-group.label class="required block!">
                                         @lang('admin::app.catalog.products.edit.types.grouped.default-qty')
                                     </x-admin::form.control-group.label>
 
@@ -111,7 +111,7 @@
                                         type="text"
                                         :name="'links[' + (element.id ? element.id : 'link_' + element.associated_product.id) + '][qty]'"
                                         v-model="element.qty"
-                                        class="min-h-[39px] w-[86px] rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                        class="min-h-9.75 w-21.5 rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                         :class="[errors['links[' + (element.id ? element.id : 'link_' + element.associated_product.id) + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                         label="@lang('admin::app.catalog.products.edit.types.grouped.default-qty')"

@@ -28,7 +28,7 @@
                 <!-- Upload Video Button -->
 
                 <label
-                    class="grid h-[120px] max-h-[120px] w-full max-w-[210px] cursor-pointer items-center justify-items-center rounded border border-dashed transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                    class="grid h-30 max-h-30 w-full max-w-52.5 cursor-pointer items-center justify-items-center rounded-sm border border-dashed transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                     :class="[errors['videos.files[0]'] ? 'border border-red-500' : 'border-gray-300']"
                     :for="$.uid + '_videoInput'"
                     v-if="allowMultiple || videos.length == 0"
@@ -84,10 +84,10 @@
         type="text/x-template"
         id="v-media-video-item-template"
     >
-        <div class="group relative grid h-[120px] max-h-[120px] min-w-[210px] max-w-[210px] justify-items-center overflow-hidden rounded border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800">
+        <div class="group relative grid h-30 max-h-30 min-w-52.5 max-w-52.5 justify-items-center overflow-hidden rounded-sm border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800">
             <!-- Video Preview -->
             <video
-                class="h-[120px] w-[210px] object-cover"
+                class="h-30 w-52.5 object-cover"
                 ref="videoPreview"
                 v-if="video.url.length > 0"
             >

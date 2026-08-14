@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Transaksi tidak valid. Silakan coba lagi.',
         'payment-success' => 'Pembayaran Anda berhasil. Pesanan Anda telah ditempatkan.',
         'order-creation-failed' => 'Ada masalah saat membuat pesanan Anda setelah pembayaran. Silakan hubungi dukungan.',
+        'supported-currency-error' => 'Mata uang :currency tidak didukung. Mata uang yang didukung: :supportedCurrencies.',
     ],
 ];

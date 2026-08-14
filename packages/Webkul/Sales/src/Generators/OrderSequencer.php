@@ -19,7 +19,6 @@ class OrderSequencer extends Sequencer
     /**
      * Set all configs.
      *
-     * @param  string  $configKey
      * @return void
      */
     public function setAllConfigs()

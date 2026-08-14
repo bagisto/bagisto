@@ -11,7 +11,7 @@
         type="text/x-template"
         id="v-downloadable-links-template"
     >
-        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow relative rounded-sm bg-white dark:bg-gray-900">
             <!-- Panel Header -->
             <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
@@ -290,7 +290,7 @@
                         </x-slot>
 
                         <!-- Drawer Content -->
-                        <x-slot:content class="!p-0">
+                        <x-slot:content class="p-0!">
                             <!-- Modal Content -->
                             <div class="px-4 py-2.5">
                                 <x-admin::form.control-group>
@@ -397,7 +397,7 @@
 
                                             <input
                                                 type="file"
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
+                                                class="flex min-h-9.75 w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 name="file"
                                                 ref="file"
@@ -486,7 +486,7 @@
                                             <input
                                                 type="file"
                                                 name="sample_file"
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
+                                                class="flex min-h-9.75 w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                                                 ref="sample_file"
                                                 @change="uploadFile('sample_file')"
                                             />
@@ -533,7 +533,7 @@
         type="text/x-template"
         id="v-downloadable-samples-template"
     >
-        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow relative rounded-sm bg-white dark:bg-gray-900">
             <!-- Panel Header -->
             <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
@@ -734,7 +734,7 @@
                         </x-slot>
 
                         <!-- Drawer Content -->
-                        <x-slot:content class="!p-0">
+                        <x-slot:content class="p-0!">
                             <!-- Modal Content -->
                             <div class="px-4 py-2.5">
                                 <x-admin::form.control-group>
@@ -808,7 +808,7 @@
                                             <input
                                                 type="file"
                                                 name="file"
-                                                class="flex min-h-[39px] w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
+                                                class="flex min-h-9.75 w-full rounded-md border px-3 py-1 text-sm text-gray-600 transition-all hover:border-gray-400 dark:text-gray-300"
                                                 :class="[errors['file'] ? 'border border-red-600 hover:border-red-600' : '']"
                                                 ref="file"
                                                 @change="uploadFile('file')"

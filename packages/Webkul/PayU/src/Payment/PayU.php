@@ -16,6 +16,37 @@ class PayU extends Payment
     protected $code = 'payu';
 
     /**
+     * Currencies PayU settles in.
+     *
+     * The amount is sent rounded to two places, which is only the right thing to do for a
+     * currency that has two, so the payment is refused rather than sent for anything else.
+     *
+     * @var string[]
+     */
+    protected $supportedCurrencies = ['INR'];
+
+    /**
+     * Get the currencies PayU settles in.
+     *
+     * @return string[]
+     */
+    public function getSupportedCurrencies()
+    {
+        return $this->supportedCurrencies;
+    }
+
+    /**
+     * Check whether PayU settles in the given currency.
+     *
+     * @param  string  $currency
+     * @return bool
+     */
+    public function isCurrencySupported($currency)
+    {
+        return in_array(strtoupper($currency), $this->supportedCurrencies);
+    }
+
+    /**
      * Get redirect URL for PayU payment.
      *
      * @return string

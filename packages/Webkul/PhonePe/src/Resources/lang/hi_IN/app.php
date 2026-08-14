@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'अमान्य लेनदेन। कृपया पुनः प्रयास करें।',
         'payment-success' => 'आपका भुगतान सफल रहा है। आपका ऑर्डर प्लेस किया गया है।',
         'order-creation-failed' => 'भुगतान के बाद आपका ऑर्डर बनाने में समस्या हुई। कृपया सहायता से संपर्क करें।',
+        'supported-currency-error' => 'मुद्रा :currency समर्थित नहीं है। समर्थित मुद्राएँ: :supportedCurrencies.',
     ],
 ];

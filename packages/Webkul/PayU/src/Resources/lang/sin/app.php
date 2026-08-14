@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'ගෙවීම අසාර්ථක විය. කරුණාකර නැවත උත්සාහ කරන්න.',
         'payment-success' => 'ගෙවීම සාර්ථකව සම්පූර්ණ විය!',
         'provide-credentials' => 'කරුණාකර පරිපාලක පැනලයේ PayU වෙළඳ යතුර සහ Salt වින්‍යාස කරන්න.',
+        'supported-currency-error' => 'මුදල් :currency සහාය නොදක්වයි. සහාය දක්වන මුදල්: :supportedCurrencies.',
     ],
 ];

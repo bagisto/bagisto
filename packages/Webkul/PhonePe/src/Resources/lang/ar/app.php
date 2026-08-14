@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'معاملة غير صالحة. يرجى محاولة مرة أخرى.',
         'payment-success' => 'كان دفعك ناجحًا. تم وضع طلبك.',
         'order-creation-failed' => 'حدثت مشكلة في إنشاء طلبك بعد الدفع. يرجى الاتصال بالدعم.',
+        'supported-currency-error' => 'العملة :currency غير مدعومة. العملات المدعومة هي: :supportedCurrencies.',
     ],
 ];

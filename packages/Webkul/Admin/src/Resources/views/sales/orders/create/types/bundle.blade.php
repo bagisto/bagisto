@@ -62,7 +62,7 @@
             <x-admin::form.control-group>
                 <!-- Dropdown Options Container -->
                 <x-admin::form.control-group.label
-                    class="!mt-0"
+                    class="mt-0!"
                     ::class="{ 'required': option.is_required }"
                 >
                     @{{ option.label }}

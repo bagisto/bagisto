@@ -222,7 +222,7 @@
                                 <p class="text-sm text-gray-500 dark:text-gray-300" v-text="ticket.formatted_price_text"></p>
                             </div>
 
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group class="mb-0!">
                                 <x-admin::form.control-group.control
                                     type="text"
                                     ::name="'booking[qty][' + ticket.id + ']'"

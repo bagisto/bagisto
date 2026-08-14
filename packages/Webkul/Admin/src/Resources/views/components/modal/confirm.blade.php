@@ -17,7 +17,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 z-[10002] bg-gray-500 bg-opacity-50 transition-opacity"
+                    class="fixed inset-0 z-10002 bg-gray-500/50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -33,11 +33,11 @@
                 leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-[10002] transform overflow-y-auto transition"
+                    class="fixed inset-0 z-10002 transform overflow-y-auto transition"
                     v-if="isOpen"
                 >
                     <div class="flex min-h-full items-end justify-center p-5 sm:items-center sm:p-0">
-                        <div class="box-shadow absolute left-1/2 top-1/2 z-[999] w-full max-w-[400px] -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white dark:bg-gray-900 max-md:w-[90%]">
+                        <div class="box-shadow absolute left-1/2 top-1/2 z-999 w-full max-w-100 -translate-x-1/2 -translate-y-1/2 rounded-lg bg-white dark:bg-gray-900 max-md:w-[90%]">
                             <div class="flex items-center justify-between gap-2.5 border-b px-4 py-3 text-lg font-bold text-gray-800 dark:border-gray-800 dark:text-white">
                                 @{{ title }}
                             </div>

@@ -61,7 +61,7 @@
                     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.general.before', ['catalogRule' => $catalogRule]) !!}
 
                     <!-- General Form -->
-                    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                         <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                             @lang('admin::app.marketing.promotions.catalog-rules.edit.general')
                         </p>
@@ -86,7 +86,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Description -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.marketing.promotions.catalog-rules.edit.description')
                             </x-admin::form.control-group.label>
@@ -110,14 +110,14 @@
                     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.conditions.before', ['catalogRule' => $catalogRule]) !!}
 
                     <!-- Conditions -->
-                    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                         <div class="flex items-center justify-between gap-4">
                             <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.marketing.promotions.catalog-rules.edit.conditions')
                             </p>
 
                             <!-- Condition Type -->
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group class="mb-0!">
                                 <x-admin::form.control-group.control
                                     type="select"
                                     class="text-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800"
@@ -163,7 +163,7 @@
                     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.actions.before', ['catalogRule' => $catalogRule]) !!}
 
                     <!-- Actions -->
-                    <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                    <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                         <div class="grid gap-1.5">
                             <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.marketing.promotions.catalog-rules.edit.actions')
@@ -181,7 +181,7 @@
 
                                         <x-admin::form.control-group.control
                                             type="select"
-                                            class="h-[39px]"
+                                            class="h-9.75"
                                             id="action_type"
                                             name="action_type"
                                             rules="required"
@@ -236,7 +236,7 @@
 
                                     <x-admin::form.control-group.control
                                         type="select"
-                                        class="h-[39px]"
+                                        class="h-9.75"
                                         id="end_other_rules"
                                         name="end_other_rules"
                                         :value="(int) (old('end_other_rules') ?? $selectedOption)"
@@ -268,7 +268,7 @@
                 </div>
 
                 <!-- Right sub components -->
-                <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+                <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
 
                     {!! view_render_event('bagisto.admin.marketing.promotions.catalog_rules.edit.card.accordion.settings.before', ['catalogRule' => $catalogRule]) !!}
 
@@ -310,7 +310,7 @@
                                 @php($selectedOptionIds = old('channels') ?: $catalogRule->channels->pluck('id')->toArray())
 
                                 @foreach(core()->getAllChannels() as $channel)
-                                    <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                                    <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
                                             :id="'channel_' . '_' . $channel->id"
@@ -344,7 +344,7 @@
                                 @php($selectedOptionIds = old('customer_groups') ?: $catalogRule->customer_groups->pluck('id')->toArray())
 
                                 @foreach(app('Webkul\Customer\Repositories\CustomerGroupRepository')->all() as $customerGroup)
-                                    <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                                    <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                         <x-admin::form.control-group.control
                                             type="checkbox"
                                             :id="'customer_group_' . '_' . $customerGroup->id"
@@ -370,7 +370,7 @@
                             </div>
 
                             <!-- Status -->
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group class="mb-0!">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.marketing.promotions.catalog-rules.edit.status')
                                 </x-admin::form.control-group.label>
@@ -411,7 +411,7 @@
                         <x-slot:content>
                             <div class="flex gap-4">
                                 <!-- Start From -->
-                                <x-admin::form.control-group class="!mb-0">
+                                <x-admin::form.control-group class="mb-0!">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.catalog-rules.edit.from')
                                     </x-admin::form.control-group.label>
@@ -429,7 +429,7 @@
                                 </x-admin::form.control-group>
 
                                 <!-- Ends Till -->
-                                <x-admin::form.control-group class="!mb-0">
+                                <x-admin::form.control-group class="mb-0!">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.catalog-rules.edit.to')
                                     </x-admin::form.control-group.label>
@@ -577,7 +577,7 @@
                                     <input
                                         type="text"
                                         :class="{ 'border border-red-500': errorMessage }"
-                                        class="min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                        class="min:w-1/3 flex h-10 w-72.25 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                         v-bind="field"
                                     />
                                 </v-field>
@@ -592,12 +592,12 @@
 
                             <div v-if="matchedAttribute.type == 'date'">
                                 <x-admin::flat-picker.date
-                                    class="!w-[140px]"
+                                    class="w-35!"
                                     ::allow-input="false"
                                 >
                                     <input
                                         type="date"
-                                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                        class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                         :name="['conditions[' + index + '][value]']"
                                         v-model="condition.value"
                                     />
@@ -606,12 +606,12 @@
 
                             <div v-if="matchedAttribute.type == 'datetime'">
                                 <x-admin::flat-picker.date
-                                    class="!w-[140px]"
+                                    class="w-35!"
                                     ::allow-input="false"
                                 >
                                     <input
                                         type="datetime"
-                                        class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                        class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                         :name="['conditions[' + index + '][value]']"
                                         v-model="condition.value"
                                     />
@@ -621,7 +621,7 @@
                             <div v-if="matchedAttribute.type == 'boolean'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select inline-flex max-h-10 w-full max-w-[196px] cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all marker:shadow hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-black ltr:pl-3 rtl:pr-3 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                    class="custom-select inline-flex max-h-10 w-full max-w-49 cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all marker:shadow-sm hover:border-gray-400 focus:outline-hidden focus:ring-2 focus:ring-black ltr:pl-3 rtl:pr-3 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     v-model="condition.value"
                                 >
                                     <option value="1">
@@ -637,7 +637,7 @@
                             <div v-if="matchedAttribute.type == 'select' || matchedAttribute.type == 'radio'">
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                    class="custom-select min:w-1/3 flex h-10 w-72.25 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     v-if="matchedAttribute.key != 'catalog|state'"
                                     v-model="condition.value"
                                 >
@@ -651,7 +651,7 @@
 
                                 <select
                                     :name="['conditions[' + index + '][value]']"
-                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                    class="custom-select min:w-1/3 flex h-10 w-72.25 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     v-model="condition.value"
                                     v-else
                                 >
@@ -672,7 +672,7 @@
                             <div v-if="matchedAttribute.type == 'multiselect' || matchedAttribute.type == 'checkbox'">
                                 <select
                                     :name="['conditions[' + index + '][value][]']"
-                                    class="custom-select min:w-1/3 flex h-10 w-[289px] rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                    class="custom-select min:w-1/3 flex h-10 w-72.25 rounded-md border bg-white px-3 py-1.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-10 rtl:pl-10 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                     v-model="condition.value"
                                     multiple
                                 >

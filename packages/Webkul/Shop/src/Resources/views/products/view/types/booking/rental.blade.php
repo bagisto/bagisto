@@ -81,7 +81,7 @@
 
                     <div class="flex gap-2.5">
                         <!-- Select Slot Date -->
-                        <x-shop::form.control-group class="!mb-0 w-full">
+                        <x-shop::form.control-group class="mb-0! w-full">
                             <x-shop::form.control-group.label class="hidden">
                                 @lang('shop::app.products.view.type.booking.rental.select-date')
                             </x-shop::form.control-group.label>
@@ -103,14 +103,14 @@
                         </x-shop::form.control-group>
 
                         <!-- Select Slot -->
-                        <x-shop::form.control-group class="!mb-0 w-full">
+                        <x-shop::form.control-group class="mb-0! w-full">
                             <x-shop::form.control-group.label class="hidden">
                                 @lang('shop::app.products.view.type.booking.rental.select-slot')
                             </x-shop::form.control-group.label>
 
                             <x-shop::form.control-group.control
                                 type="select"
-                                class="!mb-1"
+                                class="mb-1!"
                                 name="booking[slot]"
                                 rules="required"
                                 v-model="selected_slot"
@@ -148,7 +148,7 @@
 
                     <div class="flex gap-2.5">
                         <!-- Select Time Slot From -->
-                        <x-shop::form.control-group class="!mb-0 w-full">
+                        <x-shop::form.control-group class="mb-0! w-full">
                             <x-shop::form.control-group.label class="hidden">
                                 @lang('shop::app.products.view.type.booking.rental.select-date')
                             </x-shop::form.control-group.label>
@@ -177,7 +177,7 @@
                         </x-shop::form.control-group>
 
                         <!-- Select Time Slot To -->
-                        <x-shop::form.control-group class="!mb-0 w-full">
+                        <x-shop::form.control-group class="mb-0! w-full">
                             <x-shop::form.control-group.label class="hidden">
                                 @lang('shop::app.products.view.type.booking.rental.slot')
                             </x-shop::form.control-group.label>
@@ -215,7 +215,7 @@
 
                 <div class="flex gap-2.5">
                     <!-- Select Date From -->
-                    <x-shop::form.control-group class="!mb-0 w-full">
+                    <x-shop::form.control-group class="mb-0! w-full">
                         <x-shop::form.control-group.label class="hidden">
                             @lang('shop::app.products.view.type.booking.rental.from')
                         </x-shop::form.control-group.label>
@@ -237,7 +237,7 @@
                     </x-shop::form.control-group>
 
                     <!-- Select Date To -->
-                    <x-shop::form.control-group class="!mb-0 w-full">
+                    <x-shop::form.control-group class="mb-0! w-full">
                         <x-shop::form.control-group.label class="hidden">
                             @lang('shop::app.products.view.type.booking.rental.to')
                         </x-shop::form.control-group.label>

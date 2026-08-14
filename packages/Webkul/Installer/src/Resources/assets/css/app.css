@@ -1,79 +1,121 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/**
+ * Scanned from `src/Resources/`, which is where every class in the installer is written —
+ * it has no menu or datagrid config naming classes of its own.
+ */
+@import "tailwindcss" source("../../");
 
+@theme {
+    /**
+     * Fonts — the named families the installer can ask for by utility.
+     */
+    --font-inter: Inter;
+}
+
+/**
+ * Icons.
+ *
+ * Each icon is a utility rather than a plain class so it can carry variants.
+ *
+ * Only the glyphs the installer actually uses are declared, and every one is named by a
+ * view the scan covers, so no safelist is needed — an icon declared here but used
+ * nowhere would ship as dead CSS.
+ */
+@theme {
+    --icon-limited:         "\e900";
+    --icon-cross:           "\e901";
+    --icon-right:           "\e903";
+    --icon-checkbox-active: "\e904";
+    --icon-checkbox-normal: "\e905";
+    --icon-tick:            "\e906";
+}
+
+@utility icon-* {
+    &::before { content: --value(--icon-*); }
+}
+
+/**
+ * Base.
+ *
+ * Element defaults, and the handful of v3 behaviours v4 dropped that the installer
+ * still relies on — the grey border, the pointer on buttons, the grey placeholder.
+ */
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    /**
+     * The pointer on buttons, which v4 dropped from preflight.
+     *
+     * Left alone every button in the installer reverts to the default arrow.
+     */
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    /**
+     * The placeholder colour, restored to the fixed grey v3 painted.
+     *
+     * v4 derives it from the input's own text colour — 50% of currentColor — which
+     * makes the placeholder track the field's text rather than staying grey.
+     */
+    input::placeholder,
+    textarea::placeholder {
+        @apply text-gray-400;
+    }
+
+    * {
+        @apply box-border font-inter;
+    }
+
+    body {
+        @apply bg-gray-50;
+    }
+}
+
+@font-face {
+    font-family: 'bagisto-installer';
+    src: url('../fonts/bagisto-installer.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+/**
+ * Components.
+ *
+ * The repeated pieces of the installer — the icon font, the select, the button —
+ * named once here so a view spells out only what is particular to it.
+ */
 @layer components {
+    /**
+     * The font-family is forced so a browser extension that overrides page fonts
+     * cannot replace the icons with letterforms.
+     */
+    [class^="icon-"],
+    [class*=" icon-"] {
+        font-family: 'bagisto-installer' !important;
+        speak: never;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        color: #6B7280;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 
-	* {
-		@apply box-border font-inter;
-	}
-
-	body {
-		@apply bg-gray-50;
-	}
-
-	@font-face {
-		font-family: 'bagisto-installer';
-		src: url('../fonts/bagisto-installer.woff') format('woff');
-		font-weight: normal;
-		font-style: normal;
-		font-display: block;
-	}
-
-	[class^="icon-"],
-	[class*=" icon-"] {
-		/* use !important to prevent issues with browser extensions that change fonts */
-		font-family: 'bagisto-installer' !important;
-		speak: never;
-		font-style: normal;
-		font-weight: normal;
-		font-variant: normal;
-		text-transform: none;
-		line-height: 1;
-		color: #6B7280;
-
-		/* Better Font Rendering =========== */
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
-
-	.icon-limited:before {
-		content: "\e900";
-	}
-
-	.icon-cross:before {
-		content: "\e901";
-	}
-
-	.icon-arrow-down:before {
-		content: "\e902";
-	}
-
-	.icon-right:before {
-		content: "\e903";
-	}
-
-	.icon-checkbox-active:before {
-		content: "\e904";
-	}
-
-	.icon-checkbox-normal:before {
-		content: "\e905";
-	}
-
-	.icon-tick:before {
-		content: "\e906";
-	}
-
-	.icon-view:before {
-		content: "\e907";
-	}
-
-	.required:after {
+    .required::after {
         @apply content-['*'];
-	}
+    }
 
-	.custom-select {
+    .custom-select {
         -webkit-appearance: none;
         -moz-appearance: none;
         background: transparent;
@@ -83,11 +125,11 @@
         background-position-y: 50%;
     }
 
-	.primary-button {
-        @apply bg-blue-600 border border-blue-700 cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
+    [dir="rtl"] .custom-select {
+        background-position-x: calc(100% - (100% - 10px));
     }
 
-	[dir="rtl"] .custom-select {
-        background-position-x: calc(100% - (100% - 10px));
+    .primary-button {
+        @apply bg-blue-600 border border-blue-700 cursor-pointer flex focus:opacity-[0.9] font-semibold gap-x-1 hover:opacity-[0.9] items-center place-content-center px-3 py-1.5 rounded-md text-gray-50 transition-all;
     }
 }

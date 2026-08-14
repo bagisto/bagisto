@@ -6,6 +6,11 @@
     colors="true"
 >
     <testsuites>
+        <!-- Testsuites that span the packages rather than belonging to one. -->
+        <testsuite name="Unit Test">
+            <directory suffix="Test.php">tests/Unit</directory>
+        </testsuite>
+
         <!-- Admin package testsuites. -->
         <testsuite name="Admin Feature Test">
             <directory suffix="Test.php">packages/Webkul/Admin/tests/Feature</directory>
@@ -39,6 +44,15 @@
         <!-- Omnibus package testsuites. -->
         <testsuite name="Omnibus Feature Test">
             <directory suffix="Test.php">packages/Webkul/Omnibus/tests/Feature</directory>
+        </testsuite>
+
+        <!-- PayGlocal package testsuites. -->
+        <testsuite name="PayGlocal Unit Test">
+            <directory suffix="Test.php">packages/Webkul/PayGlocal/tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="PayGlocal Feature Test">
+            <directory suffix="Test.php">packages/Webkul/PayGlocal/tests/Feature</directory>
         </testsuite>
 
         <!-- PayU package testsuites. -->

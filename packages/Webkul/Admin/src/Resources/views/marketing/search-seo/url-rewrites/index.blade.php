@@ -89,32 +89,32 @@
                             </p>
 
                             <!-- Id -->
-                            <p class="break-words">
+                            <p class="wrap-break-word">
                                 @{{ record.id }}
                             </p>
 
                             <!-- For -->
-                            <p class="break-words">
+                            <p class="wrap-break-word">
                                 @{{ record.entity_type }}
                             </p>
 
                             <!-- Request Path -->
-                            <p class="break-words">
+                            <p class="wrap-break-word">
                                 @{{ record.request_path }}
                             </p>
 
                             <!-- Target Path -->
-                            <p class="break-words">
+                            <p class="wrap-break-word">
                                 @{{ record.target_path }}
                             </p>
 
                             <!-- Redirect Type -->
-                            <p class="break-words">
+                            <p class="wrap-break-word">
                                 @{{ record.redirect_type }}
                             </p>
 
                             <!-- Locale -->
-                            <p class="break-words">
+                            <p class="wrap-break-word">
                                 @{{ record.locale }}
                             </p>
 

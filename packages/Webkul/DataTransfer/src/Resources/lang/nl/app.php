@@ -21,6 +21,9 @@ return [
             'validation' => [
                 'errors' => [
                     'duplicate-url-key' => 'URL-sleutel: \'%s\' is al gegenereerd voor een item met de SKU: \'%s\'.',
+                    'image-not-file' => 'Afbeelding: \'%s\' is een webadres, terwijl deze import is ingesteld om afbeeldingen uit bestanden te halen. Kies \'Afbeeldingslinks in het bestand\' als bron, of vervang de waarde door een bestandsnaam.',
+                    'image-not-found' => 'Afbeelding: \'%s\' is niet gevonden op de plek waar deze import zijn afbeeldingen verwacht.',
+                    'image-not-url' => 'Afbeelding: \'%s\' is geen webadres, terwijl deze import is ingesteld om afbeeldingen op te halen via links in het bestand. Kies een andere afbeeldingsbron of vervang de waarde door een volledig https://-adres.',
                     'invalid-attribute-family' => 'Ongeldige waarde voor kolom attribuutfamilie (attribuutfamilie bestaat niet?)',
                     'invalid-type' => 'Producttype is ongeldig of wordt niet ondersteund',
                     'sku-not-found' => 'Product met de opgegeven SKU niet gevonden',
@@ -48,6 +51,8 @@ return [
             'column-not-found' => 'Vereiste kolommen niet gevonden: %s.',
             'column-numbers' => 'Aantal kolommen komt niet overeen met het aantal rijen in de koptekst.',
             'invalid-attribute' => 'Koptekst bevat ongeldige attribuut(en): "%s".',
+            'more-issues' => 'en :count ander(e) probleem/problemen — download het volledige rapport voor de complete lijst.',
+            'more-rows' => '(+:count meer rijen)',
             'system' => 'Er is een onverwachte systeemfout opgetreden.',
             'wrong-quotes' => 'Golvende aanhalingstekens gebruikt in plaats van rechte aanhalingstekens.',
         ],

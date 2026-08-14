@@ -8,7 +8,7 @@
     value="{{ json_encode($child) }}"
 />
 
-<div class="mb-4 last:!mb-0">
+<div class="mb-4 last:mb-0!">
     <v-configurable
         name="{{ $field->getNameField() }}"
         value="{{ $value }}"
@@ -26,7 +26,7 @@
     >
         <div class="shimmer mb-1.5 h-4 w-24"></div>
 
-        <div class="shimmer flex h-[42px] w-full rounded-md"></div>
+        <div class="shimmer flex h-10.5 w-full rounded-md"></div>
     </v-configurable>
 </div>
 
@@ -35,7 +35,7 @@
         type="text/x-template"
         id="v-configurable-template"
     >
-        <x-admin::form.control-group class="last:!mb-0">
+        <x-admin::form.control-group class="last:mb-0!">
             <!-- Title of the input field -->
             <div    
                 v-if="field.is_visible"
@@ -46,14 +46,14 @@
 
                     <span
                         v-if="field['channel_based'] && channelCount"
-                        class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                        class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                         v-text="JSON.parse(currentChannel).name"
                     >
                     </span>
         
                     <span
                         v-if="field['locale_based']"
-                        class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                        class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                         v-text="JSON.parse(currentLocale).name"
                     >
                     </span>
@@ -144,7 +144,7 @@
                         :id="name.replaceAll('[', '_').replaceAll(']', '_').replaceAll('[]', '_')"
                         :value="value"
                         v-bind="{field, errors}"
-                        :class="[errors.length ? 'border !border-red-600 hover:border-red-600' : '']"
+                        :class="[errors.length ? 'border border-red-600! hover:border-red-600' : '']"
                         class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                     ></textarea>
 
@@ -228,7 +228,7 @@
                         :checked="parseInt(value || 0)"
                     >
 
-                    <div class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-none peer-focus:ring-blue-300 after:ltr:left-0.5 peer-checked:after:ltr:translate-x-full after:rtl:right-0.5 peer-checked:after:rtl:-translate-x-full dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950"></div>
+                    <div class="peer h-5 w-9 cursor-pointer rounded-full bg-gray-200 after:absolute after:top-0.5 after:h-4 after:w-4 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:border-white peer-focus:outline-hidden peer-focus:ring-blue-300 ltr:after:left-0.5 ltr:peer-checked:after:translate-x-full rtl:after:right-0.5 rtl:peer-checked:after:-translate-x-full dark:bg-gray-800 dark:after:border-white dark:after:bg-white dark:peer-checked:bg-gray-950"></div>
                 </label>
             </template>
         
@@ -242,7 +242,7 @@
                         <img
                             :src="src"
                             :alt="name"
-                            class="top-15 rounded-3 border-3 relative h-[33px] w-[33px] border-gray-500 ltr:mr-5 rtl:ml-5"
+                            class="top-15 rounded-3 border-3 relative h-8.25 w-8.25 border-gray-500 ltr:mr-5 rtl:ml-5"
                         />
                     </a>
                     
@@ -267,7 +267,7 @@
         
                         <label
                             :for="`${name}[delete]`"
-                            class="cursor-pointer !text-sm !font-semibold !text-gray-600 dark:!text-gray-300"
+                            class="cursor-pointer text-sm! font-semibold! text-gray-600! dark:text-gray-300!"
                         >
                             @lang('admin::app.configuration.index.delete')
                         </label>
@@ -280,7 +280,7 @@
                     v-if="value"
                     :href="'{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), ':path']) }}'.replace(':path', value.split('/')[1])"
                 >
-                    <div class="mb-1 inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
+                    <div class="mb-1 inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
                         <i class="icon-down-stat text-2xl"></i>
                     </div>
                 </a>

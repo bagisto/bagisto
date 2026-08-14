@@ -8,13 +8,13 @@
     ][$withdrawal->status] ?? 'bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
 
     $timelineDot = [
-        'done'    => '<span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-emerald-500 text-white shadow-sm ring-4 ring-emerald-100 dark:bg-emerald-500 dark:ring-emerald-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 5.292a1 1 0 010 1.414l-7.999 8a1 1 0 01-1.413 0l-4-3.999a1 1 0 011.413-1.415L8 12.585l7.295-7.293a1 1 0 011.41 0z" clip-rule="evenodd"/></svg></span>',
+        'done'    => '<span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-emerald-500 text-white shadow-xs ring-4 ring-emerald-100 dark:bg-emerald-500 dark:ring-emerald-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M16.704 5.292a1 1 0 010 1.414l-7.999 8a1 1 0 01-1.413 0l-4-3.999a1 1 0 011.413-1.415L8 12.585l7.295-7.293a1 1 0 011.41 0z" clip-rule="evenodd"/></svg></span>',
 
-        'declined' => '<span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-red-500 text-white shadow-sm ring-4 ring-red-100 dark:bg-red-500 dark:ring-red-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>',
+        'declined' => '<span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-red-500 text-white shadow-xs ring-4 ring-red-100 dark:bg-red-500 dark:ring-red-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>',
 
-        'warning' => '<span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full bg-amber-500 text-white shadow-sm ring-4 ring-amber-100 dark:bg-amber-500 dark:ring-amber-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg></span>',
+        'warning' => '<span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-amber-500 text-white shadow-xs ring-4 ring-amber-100 dark:bg-amber-500 dark:ring-amber-900/40"><svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg></span>',
 
-        'pending' => '<span class="mt-0.5 grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border-2 border-dashed border-gray-300 bg-white ring-4 ring-gray-100 dark:border-gray-600 dark:bg-gray-900 dark:ring-gray-800"></span>',
+        'pending' => '<span class="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-dashed border-gray-300 bg-white ring-4 ring-gray-100 dark:border-gray-600 dark:bg-gray-900 dark:ring-gray-800"></span>',
     ];
 @endphp
 
@@ -58,7 +58,7 @@
         {{-- Left column --}}
         <div class="flex flex-1 flex-col gap-2.5 max-xl:flex-auto">
             {{-- Evidence card --}}
-            <div class="box-shadow rounded bg-white dark:bg-gray-900">
+            <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                 <div class="flex items-center justify-between border-b border-slate-300 p-4 dark:border-gray-800">
                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.eu_withdrawal.view.evidence')
@@ -95,7 +95,7 @@
                                 title="@lang('admin::app.eu_withdrawal.view.copy_reference')"
                                 data-eu-clipboard="{{ $withdrawal->uuid }}"
                                 data-eu-clipboard-message="@lang('admin::app.eu_withdrawal.view.reference_copied')"
-                                class="grid h-7 w-7 flex-shrink-0 place-items-center rounded-md text-gray-500 transition-all hover:bg-gray-200 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
+                                class="grid h-7 w-7 shrink-0 place-items-center rounded-md text-gray-500 transition-all hover:bg-gray-200 hover:text-gray-800 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-100"
                             >
                                 <span class="icon-copy text-lg"></span>
                             </button>
@@ -160,7 +160,7 @@
             </div>
 
             {{-- Timeline card --}}
-            <div class="box-shadow rounded bg-white dark:bg-gray-900">
+            <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                 <div class="flex justify-between p-4">
                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.eu_withdrawal.view.timeline')
@@ -334,8 +334,8 @@
         </div>
 
         {{-- Right column: actions --}}
-        <div class="flex w-full max-w-[360px] flex-col gap-2.5 max-xl:max-w-full">
-            <div class="box-shadow rounded bg-white dark:bg-gray-900">
+        <div class="flex w-full max-w-90 flex-col gap-2.5 max-xl:max-w-full">
+            <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                 <div class="flex justify-between p-4">
                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.eu_withdrawal.view.actions')
@@ -445,7 +445,7 @@
 
                         <button
                             type="button"
-                            class="secondary-button w-full !border-red-200 !text-red-700 hover:!bg-red-50 dark:!text-red-300 dark:hover:!bg-red-900/30"
+                            class="secondary-button w-full border-red-200! text-red-700! hover:bg-red-50! dark:text-red-300! dark:hover:bg-red-900/30!"
                             @click="
                                 if (! this.$refs['declineReasonInput'].value.trim()) {
                                     this.$refs['declineReasonInput'].focus();

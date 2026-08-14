@@ -9,7 +9,7 @@
         id="v-static-content-template"
     >
         <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
-            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+            <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                 <div class="mb-2.5 flex items-center justify-between gap-x-2.5">
                     <div class="flex flex-col gap-1">
                         <p class="text-base font-semibold text-gray-800 dark:text-white">
@@ -94,7 +94,7 @@
                     v-model="options.css"
                 />
 
-                <KeepAlive class="[&>*]:dark:bg-gray-900 [&>*]:dark:!text-white">
+                <KeepAlive class="[&>*]:dark:bg-gray-900 [&>*]:dark:text-white!">
                     <component 
                         :is="inittialEditor"
                         ref="editor"

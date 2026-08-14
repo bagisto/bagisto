@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Geçersiz işlem. Lütfen tekrar deneyin.',
         'payment-success' => 'Ödemeniz başarılı olmuştur. Siparişiniz verilmiştir.',
         'order-creation-failed' => 'Ödeme sonrasında siparişiniz oluşturulurken bir sorun oluştu. Lütfen destek ile iletişime geçin.',
+        'supported-currency-error' => 'Para birimi :currency desteklenmiyor. Desteklenen para birimleri: :supportedCurrencies.',
     ],
 ];

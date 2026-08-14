@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Ongeldige transactie. Probeer alstublieft opnieuw.',
         'payment-success' => 'Uw betaling is succesvol geweest. Uw bestelling is geplaatst.',
         'order-creation-failed' => 'Er is een probleem opgetreden bij het maken van uw bestelling na betaling. Neem alstublieft contact op met de ondersteuning.',
+        'supported-currency-error' => 'Valuta :currency wordt niet ondersteund. Ondersteunde valuta\'s: :supportedCurrencies.',
     ],
 ];

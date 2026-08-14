@@ -5,6 +5,7 @@ namespace Webkul\Admin\DataGrids\Settings\DataTransfer;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\DataTransfer\Helpers\Import;
 
 class ImportDataGrid extends DataGrid
 {
@@ -122,8 +123,14 @@ class ImportDataGrid extends DataGrid
         if (bouncer()->hasPermission('settings.data_transfer.imports.import')) {
             $this->addAction([
                 'index' => 'import',
-                'icon' => 'icon-import',
-                'title' => trans('admin::app.settings.data-transfer.imports.index.datagrid.import'),
+                'icon' => function ($row) {
+                    return Import::isInProgress($row->state) ? 'icon-repeat' : 'icon-view';
+                },
+                'title' => function ($row) {
+                    return Import::isInProgress($row->state)
+                        ? trans('admin::app.settings.data-transfer.imports.index.datagrid.view-progress')
+                        : trans('admin::app.settings.data-transfer.imports.index.datagrid.import');
+                },
                 'method' => 'GET',
                 'url' => function ($row) {
                     return route('admin.settings.data_transfer.imports.import', $row->id);

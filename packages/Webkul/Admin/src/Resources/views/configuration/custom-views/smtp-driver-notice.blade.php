@@ -1,6 +1,6 @@
 @if (config('mail.default') !== 'bagisto-dynamic-smtp')
-    <div class="mb-4 flex gap-3 rounded border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
-        <span class="icon-warning mt-0.5 text-xl text-amber-600 dark:text-amber-400"></span>
+    <div class="mb-4 flex gap-3 rounded-sm border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950">
+        <span class="icon-information mt-0.5 text-xl text-amber-600 dark:text-amber-400"></span>
 
         <div>
             <p class="font-semibold text-amber-800 dark:text-amber-400">

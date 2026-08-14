@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use Webkul\Core\Enums\SupportedDatabaseEnum;
+use Webkul\Core\Helpers\SupportedCurrencies;
+use Webkul\Core\Helpers\SupportedLocales;
 use Webkul\Installer\Events\ComposerEvents;
 use Webkul\Installer\Helpers\DatabaseManager;
 use Webkul\Installer\Helpers\EnvironmentManager;
@@ -77,109 +79,6 @@ class Installer extends Command
         'DB_PREFIX',
         'DB_USERNAME',
         'DB_PASSWORD',
-    ];
-
-    /**
-     * Locales list.
-     *
-     * @var array
-     */
-    protected $locales = [
-        'ar' => 'Arabic',
-        'bn' => 'Bengali',
-        'ca' => 'Catalan',
-        'de' => 'German',
-        'en' => 'English',
-        'es' => 'Spanish',
-        'fa' => 'Persian',
-        'fr' => 'French',
-        'he' => 'Hebrew',
-        'hi_IN' => 'Hindi',
-        'id' => 'Indonesian',
-        'it' => 'Italian',
-        'ja' => 'Japanese',
-        'nl' => 'Dutch',
-        'pl' => 'Polish',
-        'pt_BR' => 'Brazilian Portuguese',
-        'ro' => 'Romanian',
-        'ru' => 'Russian',
-        'sin' => 'Sinhala',
-        'tr' => 'Turkish',
-        'uk' => 'Ukrainian',
-        'zh_CN' => 'Chinese',
-    ];
-
-    /**
-     * Currencies list.
-     *
-     * @var array
-     */
-    protected $currencies = [
-        'AED' => 'United Arab Emirates Dirham',
-        'ARS' => 'Argentine Peso',
-        'AUD' => 'Australian Dollar',
-        'BDT' => 'Bangladeshi Taka',
-        'BHD' => 'Bahraini Dinar',
-        'BRL' => 'Brazilian Real',
-        'CAD' => 'Canadian Dollar',
-        'CHF' => 'Swiss Franc',
-        'CLP' => 'Chilean Peso',
-        'CNY' => 'Chinese Yuan',
-        'COP' => 'Colombian Peso',
-        'CZK' => 'Czech Koruna',
-        'DKK' => 'Danish Krone',
-        'DZD' => 'Algerian Dinar',
-        'EGP' => 'Egyptian Pound',
-        'EUR' => 'Euro',
-        'FJD' => 'Fijian Dollar',
-        'GBP' => 'British Pound Sterling',
-        'HKD' => 'Hong Kong Dollar',
-        'HUF' => 'Hungarian Forint',
-        'IDR' => 'Indonesian Rupiah',
-        'ILS' => 'Israeli New Shekel',
-        'INR' => 'Indian Rupee',
-        'JOD' => 'Jordanian Dinar',
-        'JPY' => 'Japanese Yen',
-        'KRW' => 'South Korean Won',
-        'KWD' => 'Kuwaiti Dinar',
-        'KZT' => 'Kazakhstani Tenge',
-        'LBP' => 'Lebanese Pound',
-        'LKR' => 'Sri Lankan Rupee',
-        'LYD' => 'Libyan Dinar',
-        'MAD' => 'Moroccan Dirham',
-        'MUR' => 'Mauritian Rupee',
-        'MXN' => 'Mexican Peso',
-        'MYR' => 'Malaysian Ringgit',
-        'NGN' => 'Nigerian Naira',
-        'NOK' => 'Norwegian Krone',
-        'NPR' => 'Nepalese Rupee',
-        'NZD' => 'New Zealand Dollar',
-        'OMR' => 'Omani Rial',
-        'PAB' => 'Panamanian Balboa',
-        'PEN' => 'Peruvian Nuevo Sol',
-        'PHP' => 'Philippine Peso',
-        'PKR' => 'Pakistani Rupee',
-        'PLN' => 'Polish Zloty',
-        'PYG' => 'Paraguayan Guarani',
-        'QAR' => 'Qatari Rial',
-        'RON' => 'Romanian Leu',
-        'RUB' => 'Russian Ruble',
-        'SAR' => 'Saudi Riyal',
-        'SEK' => 'Swedish Krona',
-        'SGD' => 'Singapore Dollar',
-        'THB' => 'Thai Baht',
-        'TND' => 'Tunisian Dinar',
-        'TRY' => 'Turkish Lira',
-        'TWD' => 'New Taiwan Dollar',
-        'UAH' => 'Ukrainian Hryvnia',
-        'USD' => 'United States Dollar',
-        'UZS' => 'Uzbekistani Som',
-        'VES' => 'Venezuelan Bolívar',
-        'VND' => 'Vietnamese Dong',
-        'XAF' => 'CFA Franc BEAC',
-        'XOF' => 'CFA Franc BCEAO',
-        'ZAR' => 'South African Rand',
-        'ZMW' => 'Zambian Kwacha',
     ];
 
     /**
@@ -334,26 +233,26 @@ class Installer extends Command
         $this->updateChoiceTypeEnv(
             'APP_LOCALE',
             'Please select the default application locale',
-            $this->locales
+            SupportedLocales::options()
         );
 
         $this->updateChoiceTypeEnv(
             'APP_CURRENCY',
             'Please select the default currency',
-            $this->currencies
+            SupportedCurrencies::options()
         );
 
         $this->updateMultiSelectTypeEnv(
             'APP_ALLOWED_LOCALES',
             'Please choose the allowed locales for your channels',
-            $this->locales,
+            SupportedLocales::options(),
             $this->envDetails['APP_LOCALE']
         );
 
         $this->updateMultiSelectTypeEnv(
             'APP_ALLOWED_CURRENCIES',
             'Please choose the allowed currencies for your channels',
-            $this->currencies,
+            SupportedCurrencies::options(),
             $this->envDetails['APP_CURRENCY']
         );
     }

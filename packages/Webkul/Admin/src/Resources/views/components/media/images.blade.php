@@ -26,7 +26,7 @@
     height="{{ $height }}"
     :errors="errors"
 >
-    <x-admin::shimmer.image class="h-[110px] w-[110px] rounded" />
+    <x-admin::shimmer.image class="h-27.5 w-27.5 rounded-sm" />
 </v-media-images>
 
 @pushOnce('scripts')
@@ -41,7 +41,7 @@
                 <template v-if="allowMultiple || images.length == 0">
                     <!-- AI Image Generation Button -->
                     <label
-                        class="grid h-[120px] max-h-[120px] min-h-[110px] w-full min-w-[110px] max-w-[120px] cursor-pointer items-center justify-items-center rounded border border-dashed border-blue-300 transition-all hover:border-blue-600 dark:mix-blend-exclusion dark:invert"
+                        class="grid h-30 max-h-30 min-h-27.5 w-full min-w-27.5 max-w-30 cursor-pointer items-center justify-items-center rounded-sm border border-dashed border-blue-300 transition-all hover:border-blue-600 dark:mix-blend-exclusion dark:invert"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         v-if="ai.enabled"
                         @click="resetAIModal(); $refs.magicAIImageModal.open()"
@@ -61,7 +61,7 @@
 
                     <!-- Upload Image Button -->
                     <label
-                        class="grid h-[120px] max-h-[120px] min-h-[110px] w-full min-w-[110px] max-w-[120px] cursor-pointer items-center justify-items-center rounded border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                        class="grid h-30 max-h-30 min-h-27.5 w-full min-w-27.5 max-w-30 cursor-pointer items-center justify-items-center rounded-sm border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                         :class="[(errors?.['images.files[0]'] ?? false) ? 'border border-red-500' : 'border-gray-300']"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
@@ -115,7 +115,7 @@
                 <template v-if="showPlaceholders && ! images.length">
                     <!-- Front Placeholder -->
                     <div
-                        class="relative h-[120px] max-h-[120px] w-full min-w-[120px] max-w-[120px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                        class="relative h-30 max-h-30 w-full min-w-30 max-w-30 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                         v-for="placeholder in placeholders"
                     >
                         <img :src="placeholder.image">
@@ -136,7 +136,7 @@
                             <!-- AI Content Generation Modal -->
                             <x-admin::modal
                                 ref="magicAIImageModal"
-                                class="[&>*]:z-[10007]"
+                                class="*:z-10007"
                             >
                                 <!-- Modal Header -->
                                 <x-slot:header>
@@ -281,14 +281,14 @@
                                     <div v-show="ai.images.length">
                                         <div class="grid grid-cols-4 gap-5">
                                             <div
-                                                class="relative grid max-h-[120px] min-w-[120px] cursor-pointer justify-items-center overflow-hidden rounded border-[3px] border-transparent transition-all hover:opacity-80"
-                                                :class="{'!border-blue-600': image.selected}"
+                                                class="relative grid max-h-30 min-w-30 cursor-pointer justify-items-center overflow-hidden rounded-sm border-[3px] border-transparent transition-all hover:opacity-80"
+                                                :class="{'border-blue-600!': image.selected}"
                                                 v-for="image in ai.images"
                                                 @click="image.selected = ! image.selected"
                                             >
                                                 <!-- Image Preview -->
                                                 <img
-                                                    class="h-[120px] w-[120px]"
+                                                    class="h-30 w-30"
                                                     :src="image.url"
                                                 />
                                             </div>
@@ -357,7 +357,7 @@
     </script>
 
     <script type="text/x-template" id="v-media-image-item-template">
-        <div class="group relative grid max-h-[120px] min-w-[120px] justify-items-center overflow-hidden rounded transition-all hover:border-gray-400">
+        <div class="group relative grid max-h-30 min-w-30 justify-items-center overflow-hidden rounded-sm transition-all hover:border-gray-400">
             <!-- Image Preview -->
             <img
                 :src="image.url"

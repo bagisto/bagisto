@@ -53,19 +53,19 @@
                     </x-slot>
 
                     <!-- Drawer Content -->
-                    <x-slot:content class="!p-0">
-                        <div class="grid p-4 !pt-0">
+                    <x-slot:content class="p-0!">
+                        <div class="grid p-4 pt-0!">
                             @foreach ($order->items as $item)
                                 @if ($item->qty_to_invoice)
                                     <div class="flex justify-between gap-2.5 border-b border-slate-300 py-4 dark:border-gray-800">
                                         <div class="flex gap-2.5">
                                             @if ($item->product?->base_image_url)
                                                 <img
-                                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                                    class="relative h-15 max-h-15 w-full max-w-15 rounded-sm"
                                                     src="{{ $item->product?->base_image_url }}"
                                                 />
                                             @else
-                                                <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                                <div class="relative h-15 max-h-15 w-full max-w-15 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                                     <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
 
                                                     <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -126,13 +126,13 @@
                                         <div class="grid ltr:text-right rtl:text-left">
                                             <!-- Quantity Details -->
                                             <x-admin::form.control-group>
-                                                <x-admin::form.control-group.label class="required !block">
+                                                <x-admin::form.control-group.label class="required block!">
                                                     @lang('admin::app.sales.invoices.create.qty-to-invoiced')
                                                 </x-admin::form.control-group.label>
 
                                                 <x-admin::form.control-group.control
                                                     type="text"
-                                                    class="!w-[100px]"
+                                                    class="w-25!"
                                                     :id="'invoice[items][' . $item->id . ']'"
                                                     :name="'invoice[items][' . $item->id . ']'"
                                                     rules="required|numeric|min:0"
@@ -149,7 +149,7 @@
                             @endforeach
 
                             <!-- Create Transaction Button -->
-                            <x-admin::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5">
+                            <x-admin::form.control-group class="mb-0! flex w-max cursor-pointer select-none items-center gap-2.5 p-1.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     name="can_create_transaction"
@@ -160,7 +160,7 @@
 
                                 <label
                                     for="can_create_transaction"
-                                    class="cursor-pointer !text-sm !font-semibold !text-gray-600 dark:!text-gray-300"
+                                    class="cursor-pointer text-sm! font-semibold! text-gray-600! dark:text-gray-300!"
                                 >
                                     @lang('admin::app.sales.invoices.create.create-transaction')
                                 </label>

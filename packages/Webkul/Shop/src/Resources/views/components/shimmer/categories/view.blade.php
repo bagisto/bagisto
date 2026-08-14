@@ -1,4 +1,4 @@
-<div class="container px-[60px] max-lg:px-8 max-sm:px-4">
+<div class="container px-15 max-lg:px-8 max-sm:px-4">
     <div class="flex items-start gap-10 max-lg:gap-5 md:mt-10">
         <!-- Desktop Filter Shimmer Effect -->
         <div class="max-md:hidden">
@@ -23,7 +23,7 @@
                 </div> 
             @endif
 
-            <button class="shimmer mx-auto mt-14 block h-12 w-[171.516px] rounded-2xl py-3"></button>
+            <button class="shimmer mx-auto mt-14 block h-12 w-42.879 rounded-2xl py-3"></button>
         </div>
     </div>
 </div>

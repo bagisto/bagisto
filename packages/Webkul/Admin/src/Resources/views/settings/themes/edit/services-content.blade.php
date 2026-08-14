@@ -9,7 +9,7 @@
         id="v-services-content-template"
     >
         <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
-            <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+            <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                 <div class="flex items-center justify-between gap-x-2.5">
                     <div class="flex flex-col gap-1">
                         <p class="text-base font-semibold text-gray-800 dark:text-white">
@@ -137,7 +137,7 @@
                     v-else
                 >
                     <img
-                        class="h-[120px] w-[120px] p-2 dark:mix-blend-exclusion dark:invert"
+                        class="h-30 w-30 p-2 dark:mix-blend-exclusion dark:invert"
                         src="{{ bagisto_asset('images/empty-placeholders/default.svg') }}"
                         alt="@lang('admin::app.settings.themes.edit.services-content.services')"
                     >

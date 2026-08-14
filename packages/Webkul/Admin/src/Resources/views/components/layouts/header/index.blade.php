@@ -2,7 +2,7 @@
     $admin = auth()->guard('admin')->user();
 @endphp
 
-<header class="sticky top-0 z-[10001] flex items-center justify-between border-b bg-white px-2 py-2 dark:border-gray-800 dark:bg-gray-900 sm:px-4 sm:py-2.5">
+<header class="sticky top-0 z-10001 flex items-center justify-between border-b bg-white px-2 py-2 dark:border-gray-800 dark:bg-gray-900 sm:px-4 sm:py-2.5">
     <div class="flex items-center gap-1 sm:gap-1.5">
         <!-- Hamburger Menu -->
         <i
@@ -12,7 +12,7 @@
         </i>
 
         <!-- Logo -->
-        <a href="{{ route('admin.dashboard.index') }}" class="flex-shrink-0">
+        <a href="{{ route('admin.dashboard.index') }}" class="shrink-0">
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
                     class="h-8 w-auto sm:h-10"
@@ -31,20 +31,20 @@
 
         <!-- Mega Search Bar Vue Component -->
         <v-mega-search class="hidden sm:block">
-            <div class="relative flex w-[200px] items-center sm:w-[300px] md:w-[400px] lg:w-[525px] xl:max-w-[525px] ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
+            <div class="relative flex w-50 items-center sm:w-75 md:w-100 lg:w-131.25 xl:max-w-131.25 ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
                 <i class="icon-search absolute top-1.5 flex items-center text-xl ltr:left-2 rtl:right-2 sm:text-2xl sm:ltr:left-3 sm:rtl:right-3"></i>
 
-                <input 
-                    type="text" 
+                <input
+                    type="text"
                     class="block w-full rounded-lg border bg-white px-8 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 sm:px-10 sm:text-base"
-                    placeholder="@lang('admin::app.components.layouts.header.mega-search.title')" 
+                    placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 >
             </div>
         </v-mega-search>
     </div>
 
     <div class="flex items-center gap-1 sm:gap-2.5">
-        <!-- Dark mode Switcher -->
+        <!-- Dark Mode Switcher -->
         <v-dark>
             <div class="flex">
                 <span
@@ -54,12 +54,12 @@
         </v-dark>
 
         <!-- Visit Shop Link -->
-        <a 
-            href="{{ route('shop.home.index') }}" 
+        <a
+            href="{{ route('shop.home.index') }}"
             target="_blank"
             class="hidden sm:flex"
         >
-            <span 
+            <span
                 class="icon-store cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
                 title="@lang('admin::app.components.layouts.header.visit-shop')"
             >
@@ -69,15 +69,15 @@
        <!-- Notification Component -->
         <v-notifications {{ $attributes }}>
             <span class="relative flex">
-                <span 
-                    class="icon-notification cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl" 
+                <span
+                    class="icon-notification cursor-pointer rounded-md p-1.5 text-xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950 sm:text-2xl"
                     title="@lang('admin::app.components.layouts.header.notifications')"
                 >
                 </span>
             </span>
         </v-notifications>
 
-        <!-- Admin profile -->
+        <!-- Admin Profile -->
         <x-admin::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
             <x-slot:toggle>
                 @if ($admin->image)
@@ -95,7 +95,7 @@
             </x-slot>
 
             <!-- Admin Dropdown -->
-            <x-slot:content class="!p-0">
+            <x-slot:content class="p-0!">
                 <div class="flex items-center gap-1.5 border border-b-gray-300 px-4 py-2 dark:border-gray-800 sm:px-5 sm:py-2.5">
                     <img
                         src="{{ url('cache/logo/bagisto.png') }}"
@@ -118,7 +118,7 @@
                         @lang('admin::app.components.layouts.header.my-account')
                     </a>
 
-                    <!--Admin logout-->
+                    <!-- Admin Logout -->
                     <x-admin::form
                         method="DELETE"
                         action="{{ route('admin.session.destroy') }}"
@@ -177,21 +177,34 @@
                             class="flex items-center gap-2 p-1.5 cursor-pointer hover:rounded-lg {{ $menuItem->isActive() == 'active' ? 'bg-blue-600 rounded-lg' : ' hover:bg-gray-100 hover:dark:bg-gray-950' }} peer sm:gap-2.5"
                         >
                             <span class="{{ $menuItem->getIcon() }} text-xl {{ $menuItem->isActive() ? 'text-white' : ''}} sm:text-2xl"></span>
-                            
+
                             <p class="font-semibold text-gray-600 dark:text-gray-300 whitespace-nowrap text-sm group-[.sidebar-collapsed]/container:hidden {{ $menuItem->isActive() ? 'text-white' : ''}} sm:text-base">
                                 {{ $menuItem->getName() }}
                             </p>
                         </a>
 
                         @if ($menuItem->haveChildren())
-                            <div class="{{ $menuItem->isActive() ? ' !grid bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-[180px] ltr:pl-8 rtl:pr-8 pb-2 rounded-b-lg z-[100] sm:ltr:pl-10 sm:rtl:pr-10">
+                            <div class="{{ $menuItem->isActive() ? ' grid! bg-gray-100 dark:bg-gray-950' : '' }} hidden min-w-45 ltr:pl-8 rtl:pr-8 pb-2 rounded-b-lg z-[100] sm:ltr:pl-10 sm:rtl:pr-10">
                                 @foreach ($menuItem->getChildren() as $subMenuItem)
                                     <a
                                         href="{{ $subMenuItem->getUrl() }}"
-                                        class="text-xs text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 group-[.sidebar-collapsed]/container:px-4 group-[.sidebar-collapsed]/container:py-2 group-[.inactive]/item:px-4 group-[.inactive]/item:py-2 hover:text-blue-600 dark:hover:bg-gray-950 sm:text-sm sm:group-[.sidebar-collapsed]/container:px-5 sm:group-[.sidebar-collapsed]/container:py-2.5 sm:group-[.inactive]/item:px-5 sm:group-[.inactive]/item:py-2.5"
+                                        class="{{ $subMenuItem->haveChildren() ? 'font-medium' : '' }} text-xs text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 group-[.sidebar-collapsed]/container:px-4 group-[.sidebar-collapsed]/container:py-2 group-[.inactive]/item:px-4 group-[.inactive]/item:py-2 hover:text-blue-600 dark:hover:bg-gray-950 sm:text-sm sm:group-[.sidebar-collapsed]/container:px-5 sm:group-[.sidebar-collapsed]/container:py-2.5 sm:group-[.inactive]/item:px-5 sm:group-[.inactive]/item:py-2.5"
                                     >
                                         {{ $subMenuItem->getName() }}
                                     </a>
+
+                                    @if ($subMenuItem->haveChildren())
+                                        <div class="grid ltr:pl-4 rtl:pr-4">
+                                            @foreach ($subMenuItem->getChildren() as $subSubMenuItem)
+                                                <a
+                                                    href="{{ $subSubMenuItem->getUrl() }}"
+                                                    class="text-xs text-{{ $subSubMenuItem->isActive() ? 'blue':'gray' }}-600 dark:text-{{ $subSubMenuItem->isActive() ? 'blue':'gray' }}-300 whitespace-nowrap py-1 hover:text-blue-600 dark:hover:bg-gray-950 sm:text-sm"
+                                                >
+                                                    {{ $subSubMenuItem->getName() }}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 @endforeach
                             </div>
                         @endif
@@ -207,10 +220,10 @@
         type="text/x-template"
         id="v-mega-search-template"
     >
-        <div class="relative flex w-[200px] items-center sm:w-[300px] md:w-[400px] lg:w-[525px] xl:max-w-[525px] ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
+        <div class="relative flex w-50 items-center sm:w-75 md:w-100 lg:w-131.25 xl:max-w-131.25 ltr:ml-2 rtl:mr-2 sm:ltr:ml-2.5 sm:rtl:mr-2.5">
             <i class="icon-search absolute top-1.5 flex items-center text-xl ltr:left-2 rtl:right-2 sm:text-2xl sm:ltr:left-3 sm:rtl:right-3"></i>
 
-            <input 
+            <input
                 type="text"
                 class="peer block w-full rounded-lg border bg-white px-8 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400 sm:px-10 sm:text-base"
                 :class="{'border-gray-400': isDropdownOpen}"
@@ -230,7 +243,7 @@
                         class="cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-950 sm:p-4"
                         :class="{ 'border-b-2 border-blue-600': activeTab == tab.key }"
                         v-for="tab in tabs"
-                        @click="activeTab = tab.key; search();"
+                        @click="chooseTab(tab.key)"
                     >
                         @{{ tab.title }}
                     </div>
@@ -243,7 +256,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[300px] overflow-y-auto sm:max-h-[400px]">
+                        <div class="grid max-h-75 overflow-y-auto sm:max-h-100">
                             <a
                                 :href="'{{ route('admin.catalog.products.edit', ':id') }}'.replace(':id', product.id)"
                                 class="flex cursor-pointer justify-between gap-2 border-b border-slate-300 p-3 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950 sm:gap-2.5 sm:p-4"
@@ -253,12 +266,12 @@
                                 <div class="flex gap-2 sm:gap-2.5">
                                     <!-- Image -->
                                     <div
-                                        class="relative h-10 max-h-10 w-full max-w-10 overflow-hidden rounded sm:h-[60px] sm:max-h-[60px] sm:max-w-[60px]"
+                                        class="relative h-10 max-h-10 w-full max-w-10 overflow-hidden rounded-sm sm:h-15 sm:max-h-15 sm:max-w-15"
                                         :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! product.images.length}"
                                     >
                                         <template v-if="! product.images.length">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}" class="h-full w-full object-cover">
-                                        
+
                                             <p class="absolute bottom-0.5 w-full text-center text-[4px] font-semibold text-gray-400 sm:bottom-1.5 sm:text-[6px]">
                                                 @lang('admin::app.catalog.products.edit.types.grouped.image-placeholder')
                                             </p>
@@ -316,7 +329,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[300px] overflow-y-auto sm:max-h-[400px]">
+                        <div class="grid max-h-75 overflow-y-auto sm:max-h-100">
                             <a
                                 :href="'{{ route('admin.sales.orders.view', ':id') }}'.replace(':id', order.id)"
                                 class="grid cursor-pointer place-content-start gap-1 border-b border-slate-300 p-3 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950 sm:gap-1.5 sm:p-4"
@@ -358,7 +371,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[300px] overflow-y-auto sm:max-h-[400px]">
+                        <div class="grid max-h-75 overflow-y-auto sm:max-h-100">
                             <a
                                 :href="'{{ route('admin.catalog.categories.edit', ':id') }}'.replace(':id', category.id)"
                                 class="cursor-pointer border-b p-3 text-xs font-semibold text-gray-600 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:text-gray-300 dark:hover:bg-gray-950 sm:p-4 sm:text-sm"
@@ -394,7 +407,7 @@
                     </template>
 
                     <template v-else>
-                        <div class="grid max-h-[300px] overflow-y-auto sm:max-h-[400px]">
+                        <div class="grid max-h-75 overflow-y-auto sm:max-h-100">
                             <a
                                 :href="'{{ route('admin.customers.customers.view', ':id') }}'.replace(':id', customer.id)"
                                 class="grid cursor-pointer place-content-start gap-1 border-b border-slate-300 p-3 last:border-b-0 hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-950 sm:gap-1.5 sm:p-4"
@@ -450,19 +463,19 @@
                             is_active: true,
                             endpoint: "{{ route('admin.catalog.products.search') }}"
                         },
-                        
+
                         orders: {
                             key: 'orders',
                             title: "@lang('admin::app.components.layouts.header.mega-search.orders')",
                             endpoint: "{{ route('admin.sales.orders.search') }}"
                         },
-                        
+
                         categories: {
                             key: 'categories',
                             title: "@lang('admin::app.components.layouts.header.mega-search.categories')",
                             endpoint: "{{ route('admin.catalog.categories.search') }}"
                         },
-                        
+
                         customers: {
                             key: 'customers',
                             title: "@lang('admin::app.components.layouts.header.mega-search.customers')",
@@ -474,18 +487,24 @@
 
                     searchTerm: '',
 
+                    hasChosenTab: false,
+
+                    searchId: 0,
+
                     searchedResults: {
-                        products: [],
-                        orders: [],
-                        categories: [],
-                        customers: []
+                        products: { data: [] },
+                        orders: { data: [] },
+                        categories: { data: [] },
+                        customers: { data: [] }
                     },
                 }
             },
 
             watch: {
                 searchTerm: function(newVal, oldVal) {
-                    this.search()
+                    this.hasChosenTab = false;
+
+                    this.search();
                 }
             },
 
@@ -498,9 +517,19 @@
             },
 
             methods: {
-                search() {
-                    if (this.searchTerm.length <= 1) {
-                        this.searchedResults[this.activeTab] = [];
+                /**
+                 * Search the tab on screen, and move to one that has something when it does not.
+                 */
+                async search() {
+                    /**
+                     * Written as a greater-than test rather than a less-than one: a less-than
+                     * sign in a script inside a Blade view opens a tag to anything stripping them,
+                     * which swallows the page from here to the next angle bracket.
+                     */
+                    const isLongEnough = this.searchTerm.length > 1;
+
+                    if (! isLongEnough) {
+                        this.resetResults();
 
                         this.isDropdownOpen = false;
 
@@ -509,20 +538,88 @@
 
                     this.isDropdownOpen = true;
 
-                    let self = this;
-
                     this.isLoading = true;
-                    
-                    this.$axios.get(this.tabs[this.activeTab].endpoint, {
+
+                    const searchId = ++this.searchId;
+
+                    const results = await this.fetchResults(this.activeTab);
+
+                    if (searchId !== this.searchId) {
+                        return;
+                    }
+
+                    this.searchedResults[this.activeTab] = results;
+
+                    if (
+                        ! this.hasChosenTab
+                        && ! results.data.length
+                    ) {
+                        await this.showFirstTabWithResults(searchId);
+                    }
+
+                    if (searchId === this.searchId) {
+                        this.isLoading = false;
+                    }
+                },
+
+                /**
+                 * Move to the first tab that has something to show for the term.
+                 */
+                async showFirstTabWithResults(searchId) {
+                    for (const key of Object.keys(this.tabs)) {
+                        if (key === this.activeTab) {
+                            continue;
+                        }
+
+                        const results = await this.fetchResults(key);
+
+                        if (searchId !== this.searchId) {
+                            return;
+                        }
+
+                        this.searchedResults[key] = results;
+
+                        if (results.data.length) {
+                            this.activeTab = key;
+
+                            return;
+                        }
+                    }
+
+                    /**
+                     * Nothing anywhere, so back to the tab a search starts on rather than
+                     * leaving the reader on whichever one the term before happened to open.
+                     */
+                    this.activeTab = Object.keys(this.tabs)[0];
+                },
+
+                /**
+                 * Show a tab because the user asked for it, and keep them on it.
+                 */
+                chooseTab(key) {
+                    this.activeTab = key;
+
+                    this.hasChosenTab = true;
+
+                    this.search();
+                },
+
+                /**
+                 * Ask one tab's endpoint what it has for the term.
+                 */
+                fetchResults(tab) {
+                    return this.$axios.get(this.tabs[tab].endpoint, {
                             params: {query: this.searchTerm}
                         })
-                        .then(function(response) {
-                            self.searchedResults[self.activeTab] = response.data;
+                        .then(response => ({...response.data, data: response.data?.data ?? []}))
+                        .catch(() => ({data: []}));
+                },
 
-                            self.isLoading = false;
-                        })
-                        .catch(function (error) {
-                        })
+                /**
+                 * Forget what every tab was showing.
+                 */
+                resetResults() {
+                    Object.keys(this.tabs).forEach(key => this.searchedResults[key] = {data: []});
                 },
 
                 handleFocusOut(e) {
@@ -543,13 +640,13 @@
             <x-slot:toggle>
                 <span class="relative flex">
                     <span
-                        class="icon-notification text-red cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950" 
+                        class="icon-notification text-red cursor-pointer rounded-md p-1.5 text-2xl transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                         title="@lang('admin::app.components.layouts.header.notifications')"
                     >
                     </span>
-                
+
                     <span
-                        class="absolute -top-2 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 p-1.5 text-[10px] font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5"
+                        class="absolute -top-2 flex h-5 min-w-5 cursor-pointer items-center justify-center rounded-full bg-blue-600 p-1.5 text-[10px] font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5"
                         v-if="totalUnRead"
                     >
                         @{{ totalUnRead }}
@@ -558,7 +655,7 @@
             </x-slot>
 
             <!-- Notification Content -->
-            <x-slot:content class="min-w-[250px] max-w-[250px] !p-0">
+            <x-slot:content class="min-w-62.5 max-w-62.5 p-0!">
                 <!-- Header -->
                 <div class="border-b p-3 text-base font-semibold text-gray-600 dark:border-gray-800 dark:text-gray-300">
                     @lang('admin::app.notifications.title', ['read' => 0])
@@ -595,7 +692,7 @@
                 </div>
 
                 <!-- Footer -->
-                <div class="flex h-[47px] justify-between gap-1.5 border-t px-6 py-4 dark:border-gray-800">
+                <div class="flex h-11.75 justify-between gap-1.5 border-t px-6 py-4 dark:border-gray-800">
                     <a
                         href="{{ route('admin.notification.index') }}"
                         class="cursor-pointer text-xs font-semibold text-blue-600 transition-all hover:underline"
@@ -640,7 +737,7 @@
                             },
 
                             canceled: {
-                                icon: 'icon-cancel-1',
+                                icon: 'icon-close',
                                 message: "@lang('admin::app.notifications.order-status-messages.canceled')"
                             },
 
@@ -650,7 +747,7 @@
                             },
 
                             closed: {
-                                icon: 'icon-cancel-1',
+                                icon: 'icon-close',
                                 message: "@lang('admin::app.notifications.order-status-messages.closed')"
                             },
 
@@ -679,7 +776,7 @@
                             pending: 'icon-information rounded-full bg-amber-100 text-2xl text-amber-600 dark:!text-amber-600',
                             closed: 'icon-repeat rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
                             completed: 'icon-done rounded-full bg-blue-100 text-2xl text-blue-600 dark:!text-blue-600',
-                            canceled: 'icon-cancel-1 rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
+                            canceled: 'icon-close rounded-full bg-red-100 text-2xl text-red-600 dark:!text-red-600',
                             processing: 'icon-sort-right rounded-full bg-green-100 text-2xl text-green-600 dark:!text-green-600',
                         };
                     },

@@ -12,7 +12,7 @@
         type="text/x-template"
         id="v-product-configurable-options-template"
     >
-        <div class="w-[455px] max-w-full p-4">
+        <div class="w-113.75 max-w-full p-4">
             <x-admin::form.control-group.control
                 type="hidden"
                 name="selected_configurable_option"
@@ -22,7 +22,7 @@
             <template v-for='(attribute, index) in childAttributes'>
                 <x-admin::form.control-group>
                     <!-- Dropdown Options Container -->
-                    <x-admin::form.control-group.label class="required !mt-0">
+                    <x-admin::form.control-group.label class="required mt-0!">
                         @{{ attribute.label }}
                     </x-admin::form.control-group.label>
                     

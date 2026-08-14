@@ -85,18 +85,19 @@ class MenuItem
      */
     public function isActive(): bool
     {
-        if (request()->fullUrlIs($this->getUrl().'*')) {
-            return true;
+        $currentKey = menu()->getCurrentKey();
+
+        if (! $currentKey) {
+            return false;
         }
 
-        if ($this->haveChildren()) {
-            foreach ($this->getChildren() as $child) {
-                if ($child->isActive()) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
+        /**
+         * Matched on the key rather than the URL, so only the page actually open
+         * is marked — and the sections above it. Testing the URL as a prefix marks
+         * every item the current one sits beneath as well, which is why the
+         * section's own listing lit up alongside whichever child was chosen.
+         */
+        return $currentKey === $this->key
+            || str_starts_with($currentKey, $this->key.'.');
     }
 }

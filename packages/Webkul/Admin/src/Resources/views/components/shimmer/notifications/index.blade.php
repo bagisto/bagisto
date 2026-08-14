@@ -13,13 +13,13 @@
         <div>
             <!-- Multiple Tabs -->
             <div class="flex border-b dark:border-gray-800">
-                <div class="flex w-[83px] gap-1 border-b-2 px-4 py-4 dark:border-gray-800">
-                    <div class="shimmer h-[18px] w-28"></div>
+                <div class="flex w-20.75 gap-1 border-b-2 px-4 py-4 dark:border-gray-800">
+                    <div class="shimmer h-4.5 w-28"></div>
                 </div>
     
                 @for ($i = 1; $i < 6; $i++)
-                    <div class="flex w-[152px] gap-1 border-b-2 px-4 py-4 dark:border-gray-800">
-                        <div class="shimmer h-[18px] w-28"></div>
+                    <div class="flex w-38 gap-1 border-b-2 px-4 py-4 dark:border-gray-800">
+                        <div class="shimmer h-4.5 w-28"></div>
                     </div>    
                 @endfor
             </div>
@@ -42,15 +42,15 @@
 
         <!-- Pagination Section -->
         <div class="flex items-center gap-x-2 border-t p-4 dark:border-gray-800">
-            <div class="shimmer h-9 w-9 rounded ltr:ml-2 rtl:mr-2"></div>
+            <div class="shimmer h-9 w-9 rounded-sm ltr:ml-2 rtl:mr-2"></div>
 
             <div class="shimmer h-6 w-16"></div>
 
             <div class="shimmer h-6 w-14"></div>
 
-            <div class="shimmer h-9 w-9 rounded"></div>
+            <div class="shimmer h-9 w-9 rounded-sm"></div>
 
-            <div class="shimmer h-9 w-9 rounded"></div>
+            <div class="shimmer h-9 w-9 rounded-sm"></div>
         </div>
     </div>
 </div>
