@@ -42,6 +42,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed a product import failing to create anything once the catalog listing began keeping an image count, which an import writes for itself and never has to hand.
 
+- #11413 [fixed] - Fixed deleting several RMA reasons, rules or custom fields at once reporting a failure when one of them had already been deleted elsewhere — while quietly deleting the ones listed before it. Whatever is still there is now deleted and the rest passed over, and the reply says how many of each. Custom fields also went without any check on what was submitted, which they now have in common with the rest.
+
 - #11412 [fixed] - Fixed the EU withdrawals listing breaking when filtered by customer email or status, or when searched, leaving a list that only a reload recovered. Both columns are named the same on the order the withdrawal is joined to, so the database could not tell which was meant and refused the query.
 
 ## **v2.4.9 (5th of August 2026)** - *Release*

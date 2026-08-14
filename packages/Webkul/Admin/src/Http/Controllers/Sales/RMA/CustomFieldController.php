@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Sales\RMA\CustomFieldDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Admin\Http\Requests\MassDestroyRequest;
 use Webkul\RMA\Repositories\RMACustomFieldOptionRepository;
 use Webkul\RMA\Repositories\RMACustomFieldRepository;
 
@@ -195,26 +196,35 @@ class CustomFieldController extends Controller
     /**
      * Remove multiple resource from storage at a time.
      */
-    public function massDestroy(): JsonResponse
+    public function massDestroy(MassDestroyRequest $request): JsonResponse
     {
-        try {
-            $rmaCustomFieldIds = request()->input('indices');
+        $requestedIds = $request->input('indices');
 
-            foreach ($rmaCustomFieldIds as $rmaCustomFieldId) {
+        $existingIds = $this->rmaCustomFieldRepository->findWhereIn('id', $requestedIds)->pluck('id');
+
+        try {
+            foreach ($existingIds as $rmaCustomFieldId) {
                 Event::dispatch('sales.rma.custom-field.delete.before', $rmaCustomFieldId);
 
                 $this->rmaCustomFieldRepository->delete($rmaCustomFieldId);
 
                 Event::dispatch('sales.rma.custom-field.delete.after', $rmaCustomFieldId);
             }
-
-            return new JsonResponse([
-                'message' => trans('admin::app.sales.rma.custom-field.index.datagrid.delete-success'),
-            ]);
         } catch (\Exception $e) {
             return new JsonResponse([
                 'message' => trans('admin::app.catalog.attributes.delete-failed'),
             ], 500);
         }
+
+        $skipped = count($requestedIds) - $existingIds->count();
+
+        return new JsonResponse([
+            'message' => $skipped
+                ? trans('admin::app.sales.rma.custom-field.index.datagrid.mass-delete-partial', [
+                    'deleted' => $existingIds->count(),
+                    'skipped' => $skipped,
+                ])
+                : trans('admin::app.sales.rma.custom-field.index.datagrid.delete-success'),
+        ]);
     }
 }
