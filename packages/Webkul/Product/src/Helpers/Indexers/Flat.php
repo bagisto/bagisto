@@ -246,7 +246,7 @@ class Flat extends AbstractIndexer
             'base_image' => DB::raw(
                 '(SELECT path FROM '.$tablePrefix.'product_images'
                 .' WHERE product_id = '.$tablePrefix.'product_flat.product_id'
-                .' ORDER BY id LIMIT 1)'
+                .' ORDER BY position, id LIMIT 1)'
             ),
 
             'attribute_family_name' => DB::raw(
