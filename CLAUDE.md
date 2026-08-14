@@ -191,7 +191,7 @@ Or use: `php artisan package:make Webkul/<Name>` (requires `bagisto/bagisto-pack
 
 ## CI Pipeline
 
-- **pest_tests.yml**: Pest tests on PHP 8.3 + MySQL 8.0 & PostgreSQL 16
+- **pest_tests.yml**: Pest tests on PHP 8.4 + MySQL 8.0 & PostgreSQL 16
 - **pint_tests.yml**: Code style checks with Laravel Pint
 - **admin_playwright_tests.yml / shop_playwright_tests.yml**: E2E tests (6 shards × 2 databases)
 - **translation_tests.yml**: Translation file validation

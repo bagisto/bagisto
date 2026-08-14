@@ -8,9 +8,9 @@ The image ships in **three interchangeable web-server variants** — pick the on
 
 | Variant | Web server | PHP SAPI | Docker tag suffix |
 |---|---|---|---|
-| **nginx** (default) | Nginx | PHP 8.3 FPM | `-nginx` (also the unsuffixed `:<version>` / `:latest`) |
-| **apache** | Apache 2 | PHP 8.3 `mod_php` | `-apache` |
-| **litespeed** | OpenLiteSpeed | lsphp 8.3 (LSAPI) | `-litespeed` |
+| **nginx** (default) | Nginx | PHP 8.4 FPM | `-nginx` (also the unsuffixed `:<version>` / `:latest`) |
+| **apache** | Apache 2 | PHP 8.4 `mod_php` | `-apache` |
+| **litespeed** | OpenLiteSpeed | lsphp 8.4 (LSAPI) | `-litespeed` |
 
 ---
 
@@ -44,7 +44,7 @@ The image ships in **three interchangeable web-server variants** — pick the on
 |---|---|
 | **Base OS** | Ubuntu 24.04 |
 | **Web Server** | One of **Nginx** (default), **Apache 2**, or **OpenLiteSpeed** — listening on port 80 (see the variant table above) |
-| **PHP** | 8.3 with bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pdo, soap, sockets, xml, zip, imagick. Served via PHP-FPM (nginx), `mod_php` (apache), or lsphp/LSAPI (litespeed). |
+| **PHP** | 8.4 with bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pdo, soap, sockets, xml, zip, imagick. Served via PHP-FPM (nginx), `mod_php` (apache), or lsphp/LSAPI (litespeed). |
 | **Database** | MySQL 8.0 (internal, pre-installed with Bagisto migrations + seed data already applied) |
 | **Process Manager** | Supervisor (manages `mysql`, the PHP runner where applicable, and the web server) |
 | **Application** | Bagisto — fully installed at build time |
@@ -75,18 +75,18 @@ bagisto/
     │   ├── mysql-init.sql        # Creates the `bagisto` database + user on first MySQL init
     │   └── php.ini               # Production PHP settings (opcache, limits, error handling)
     ├── nginx/
-    │   ├── Dockerfile            # Nginx + PHP 8.3 FPM
+    │   ├── Dockerfile            # Nginx + PHP 8.4 FPM
     │   └── config/
     │       ├── nginx.conf        # Nginx server block (port 80 → /var/www/bagisto/public)
     │       ├── php-fpm.conf      # PHP-FPM pool (www, unix socket, dynamic PM)
     │       └── supervisord.conf  # Supervisor: mysql + php-fpm + nginx
     ├── apache/
-    │   ├── Dockerfile            # Apache 2 + PHP 8.3 mod_php
+    │   ├── Dockerfile            # Apache 2 + PHP 8.4 mod_php
     │   └── config/
     │       ├── vhost.conf        # Apache virtual host (rewrite + security headers)
     │       └── supervisord.conf  # Supervisor: mysql + apache2
     ├── litespeed/
-    │   ├── Dockerfile            # OpenLiteSpeed + lsphp 8.3 (LSAPI)
+    │   ├── Dockerfile            # OpenLiteSpeed + lsphp 8.4 (LSAPI)
     │   └── config/
     │       ├── httpd_config.conf # OLS server config (listener :80, lsphp external app)
     │       ├── vhosts/
@@ -175,8 +175,8 @@ Replace `v2.4.7` with any valid Git tag from https://github.com/bagisto/bagisto/
 | Build arg | Applies to | Default | Description |
 |---|---|---|---|
 | `BAGISTO_VERSION` | all variants | `v2.4.7` | Git tag to clone from the Bagisto repository. |
-| `PHP_VERSION` | nginx, apache | `8.3` | PHP version to install. Only change if you know what you're doing. |
-| `LSPHP_VERSION` | litespeed | `83` | lsphp major version (e.g. `83` for PHP 8.3). |
+| `PHP_VERSION` | nginx, apache | `8.4` | PHP version to install. Only change if you know what you're doing. |
+| `LSPHP_VERSION` | litespeed | `83` | lsphp major version (e.g. `83` for PHP 8.4). |
 
 > **Note**: Bagisto is fully installed *during the build* (migrations, seeding, indexing). Expect build times of 5–10 minutes depending on your machine.
 
@@ -629,7 +629,7 @@ docker exec -it bagisto php /var/www/bagisto/artisan db:seed --force
 | Variable | Default | Description |
 |---|---|---|
 | `BAGISTO_VERSION` | `v2.4.0` | Git tag cloned from the Bagisto repository. |
-| `PHP_VERSION` | `8.3` | PHP version to install. |
+| `PHP_VERSION` | `8.4` | PHP version to install. |
 
 ### Runtime environment (`docker run -e`)
 
@@ -926,7 +926,7 @@ Because it contains a fully installed, ready-to-boot Bagiso application with MyS
 | Component | Size |
 |---|---|
 | MySQL 8.0 server + pre-seeded Bagisto database | ~400–500 MB |
-| PHP 8.3 + all required extensions | ~150–200 MB |
+| PHP 8.4 + all required extensions | ~150–200 MB |
 | Bagisto source + Composer vendor | ~250–300 MB |
 | System libraries (ImageMagick, ICU, libpng, libwebp, libzip, etc.) | ~100–150 MB |
 | Ubuntu 24.04 base | ~77 MB |
@@ -1015,7 +1015,7 @@ No. Bagisto works without it (falling back to MySQL full-text search). If you ne
 
 - Bagisto version (via `--build-arg BAGISTO_VERSION`)
 - PHP version (via `--build-arg PHP_VERSION`)
-- Nginx / PHP / Supervisor config files (bake into the image; override by mounting replacements over `/etc/nginx/conf.d/bagisto.conf`, `/etc/php/8.3/fpm/conf.d/99-production.ini`, `/etc/supervisor/conf.d/bagisto.conf`)
+- Nginx / PHP / Supervisor config files (bake into the image; override by mounting replacements over `/etc/nginx/conf.d/bagisto.conf`, `/etc/php/8.4/fpm/conf.d/99-production.ini`, `/etc/supervisor/conf.d/bagisto.conf`)
 
 ### Logging
 

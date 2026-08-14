@@ -184,7 +184,7 @@ jobs:
           cache-to: type=gha,mode=max,scope=${{ matrix.variant }}
           labels: |
             org.opencontainers.image.title=Bagisto (${{ matrix.variant }})
-            org.opencontainers.image.description=Bagisto production image (${{ matrix.variant }} + PHP 8.3 + MySQL 8.0, fully installed)
+            org.opencontainers.image.description=Bagisto production image (${{ matrix.variant }} + PHP 8.4 + MySQL 8.0, fully installed)
             org.opencontainers.image.version=${{ needs.resolve.outputs.docker_tag }}
             org.opencontainers.image.source=https://github.com/${{ github.repository }}
             org.opencontainers.image.revision=${{ github.sha }}

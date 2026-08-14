@@ -1,6 +1,6 @@
 # =============================================================================
 # Bagisto Production Image — Apache (Single-stage)
-# Single container: Apache 2 (mod_php) + PHP 8.3 + MySQL 8.0 + Supervisor
+# Single container: Apache 2 (mod_php) + PHP 8.4 + MySQL 8.0 + Supervisor
 #
 # Default mode  : Internal MySQL (ready-to-boot, Docker Hub style)
 # Override mode : Set DB_HOST to an external address to skip internal MySQL
@@ -15,7 +15,7 @@
 FROM ubuntu:24.04
 
 ARG BAGISTO_VERSION=v2.4.7
-ARG PHP_VERSION=8.3
+ARG PHP_VERSION=8.4
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
@@ -43,7 +43,7 @@ RUN apt-get update && apt-get install -y \
 
 
 # ---------------------------------------------------------------------------
-# PHP 8.3 (CLI for artisan/build + Apache mod_php for serving) + extensions
+# PHP 8.4 (CLI for artisan/build + Apache mod_php for serving) + extensions
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
         libapache2-mod-php${PHP_VERSION} \

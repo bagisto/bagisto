@@ -1,6 +1,6 @@
 # =============================================================================
 # Bagisto Production Image — OpenLiteSpeed (Single-stage)
-# Single container: OpenLiteSpeed + lsphp 8.3 (LSAPI) + MySQL 8.0 + Supervisor
+# Single container: OpenLiteSpeed + lsphp 8.4 (LSAPI) + MySQL 8.0 + Supervisor
 #
 # Default mode  : Internal MySQL (ready-to-boot, Docker Hub style)
 # Override mode : Set DB_HOST to an external address to skip internal MySQL
@@ -15,7 +15,7 @@
 FROM ubuntu:24.04
 
 ARG BAGISTO_VERSION=v2.4.7
-ARG LSPHP_VERSION=83
+ARG LSPHP_VERSION=84
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
@@ -108,7 +108,7 @@ RUN chmod +x /tmp/build-install.sh && bash /tmp/build-install.sh && rm /tmp/buil
 # ---------------------------------------------------------------------------
 # PHP configuration (lsphp — LSAPI + CLI share the same binary)
 # ---------------------------------------------------------------------------
-COPY shared/php.ini /usr/local/lsws/lsphp${LSPHP_VERSION}/etc/php/8.3/litespeed/php.ini
+COPY shared/php.ini /usr/local/lsws/lsphp${LSPHP_VERSION}/etc/php/8.4/litespeed/php.ini
 
 
 # ---------------------------------------------------------------------------

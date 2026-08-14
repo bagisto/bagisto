@@ -1,6 +1,6 @@
 # =============================================================================
 # Bagisto Production Image (Single-stage)
-# Single container: Nginx + PHP 8.3 FPM + MySQL 8.0 + Supervisor
+# Single container: Nginx + PHP 8.4 FPM + MySQL 8.0 + Supervisor
 #
 # Default mode  : Internal MySQL (ready-to-boot, Docker Hub style)
 # Override mode : Set DB_HOST to an external address to skip internal MySQL
@@ -12,7 +12,7 @@
 FROM ubuntu:24.04
 
 ARG BAGISTO_VERSION=v2.4.7
-ARG PHP_VERSION=8.3
+ARG PHP_VERSION=8.4
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
@@ -40,7 +40,7 @@ RUN apt-get update && apt-get install -y \
 
 
 # ---------------------------------------------------------------------------
-# PHP 8.3 + extensions
+# PHP 8.4 + extensions
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
         php${PHP_VERSION}-bcmath \
