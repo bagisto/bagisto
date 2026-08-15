@@ -91,8 +91,8 @@
         id="v-sidebar-collapse-template"
     >
         <div
-            class="fixed bottom-0 w-full max-w-67.5 cursor-pointer border-t border-gray-200 bg-white px-4 transition-all duration-300 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-950"
-            :class="{'max-w-17.5': isCollapsed}"
+            class="fixed bottom-0 w-full cursor-pointer border-t border-gray-200 bg-white px-4 transition-all duration-300 hover:bg-gray-100 dark:border-gray-800 dark:bg-gray-900 dark:hover:bg-gray-950"
+            :class="isCollapsed ? 'max-w-17.5' : 'max-w-67.5'"
             @click="toggle"
         >
             <div class="flex items-center gap-2.5 p-1.5">
