@@ -277,7 +277,7 @@
                                 </b>
 
                                 <span>
-                                    {{ core()->formatDate($invoice->created_at, 'd-m-Y') }}
+                                    {{ core()->formatDate($invoice->created_at, core()->getDateFormat()) }}
                                 </span>
                             </td>
 
@@ -287,7 +287,7 @@
                                 </b>
 
                                 <span>
-                                    {{ core()->formatDate($invoice->order->created_at, 'd-m-Y') }}
+                                    {{ core()->formatDate($invoice->order->created_at, core()->getDateFormat()) }}
                                 </span>
                             </td>
                         </tr>

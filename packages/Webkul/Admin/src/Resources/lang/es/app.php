@@ -4179,6 +4179,13 @@ return [
                         'weight-unit' => 'Unidad de Peso',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Formato de Fecha',
+                        'info' => 'Establecer opciones de formato de fecha.',
+                        'title' => 'Opciones de Fecha',
+                        'title-info' => 'Configura el formato de fecha utilizado en el panel de administración, la tienda y las facturas.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Migas de pan de la tienda',
                         'title' => 'Migas de pan',

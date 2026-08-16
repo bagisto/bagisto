@@ -4179,6 +4179,13 @@ return [
                         'weight-unit' => 'Weight Unit',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Date Format',
+                        'info' => 'Set date format options.',
+                        'title' => 'Date Options',
+                        'title-info' => 'Configure the date format used across the admin panel, storefront, and invoices.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Shop Breadcrumbs',
                         'title' => 'Breadcrumbs',

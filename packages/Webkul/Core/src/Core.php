@@ -625,10 +625,10 @@ class Core
      * Format date using current channel timezone or Laravel default timezone.
      *
      * @param  \Illuminate\Support\Carbon|string|null  $date
-     * @param  string  $format
+     * @param  string|null  $format
      * @return string
      */
-    public function formatDate($date = null, $format = 'd-m-Y H:i:s')
+    public function formatDate($date = null, $format = null)
     {
         $channel = $this->getCurrentChannel();
 
@@ -644,7 +644,21 @@ class Core
 
         $date->setTimezone($timezone);
 
+        if (is_null($format)) {
+            $format = $this->getDateFormat().' H:i:s';
+        }
+
         return $date->translatedFormat($format);
+    }
+
+    /**
+     * Get the admin configured date format, falling back to the default `d-m-Y`.
+     *
+     * @return string
+     */
+    public function getDateFormat()
+    {
+        return $this->getConfigData('general.general.date_options.date_format') ?: 'd-m-Y';
     }
 
     /**
