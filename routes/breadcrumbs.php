@@ -117,3 +117,17 @@ Breadcrumbs::for('rma.view', function (BreadcrumbTrail $trail, $id) {
 
     $trail->push(trans('shop::app.rma.customer.create.view'), route('shop.customers.account.rma.index'));
 });
+
+// Home > Orders > Withdraw from contract
+Breadcrumbs::for('account.eu-withdrawal.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('orders');
+
+    $trail->push(trans('shop::app.eu_withdrawal.form.heading'));
+});
+
+// Home > Orders > Withdrawal Receipt
+Breadcrumbs::for('account.eu-withdrawal.show', function (BreadcrumbTrail $trail) {
+    $trail->parent('orders');
+
+    $trail->push(trans('shop::app.eu_withdrawal.confirmation.page_title'));
+});

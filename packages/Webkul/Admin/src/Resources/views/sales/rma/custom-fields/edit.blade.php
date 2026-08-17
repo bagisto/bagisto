@@ -80,7 +80,7 @@
                                     </x-slot>
 
                                     <!-- Dropdown Content -->
-                                    <x-slot:content class="!p-0">
+                                    <x-slot:content class="p-0!">
                                         @foreach ($channels as $channel)
                                             <a
                                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $currentLocale->code]) }}"
@@ -115,7 +115,7 @@
                                     </x-slot>
 
                                     <!-- Dropdown Content -->
-                                    <x-slot:content class="!p-0">
+                                    <x-slot:content class="p-0!">
                                         @foreach ($currentChannel->locales->sortBy('name') as $locale)
                                             <a
                                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
@@ -130,7 +130,7 @@
                         </div>
 
                         <!-- General -->
-                        <div class="bg-white dark:bg-gray-900 box-shadow rounded">
+                        <div class="bg-white dark:bg-gray-900 box-shadow rounded-sm">
                             <div class="flex justify-between items-center p-1.5">
                                 <p class="p-2.5 text-gray-800 dark:text-white text-base font-semibold">
                                     @lang('admin::app.catalog.attributes.create.general')
@@ -141,7 +141,7 @@
                                 @php $selectedValue = old('status') ?: $rmaData->status @endphp
 
                                 <!-- Status -->
-                                <x-admin::form.control-group class="!mb-0">
+                                <x-admin::form.control-group class="mb-0!">
                                     <x-admin::form.control-group.label>
                                         @lang('admin::app.marketing.promotions.cart-rules.create.status')
                                     </x-admin::form.control-group.label>
@@ -192,7 +192,7 @@
                                         <input
                                             type="text"
                                             id="code"
-                                            class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:focus:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                            class="flex w-full min-h-9.75 py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 dark:focus:border-gray-400 focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                             name="slug"
                                             v-bind="field"
                                             placeholder="{{ trans('admin::app.catalog.attributes.index.datagrid.code') }}"
@@ -287,7 +287,7 @@
                                                     type="text"
                                                     :id="'options[' + index + ']'"
                                                     :class="[errors['{{ 'name' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                                    class="flex w-full min-h-9.75 py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                                     :name="'options[' + index + ']'"
                                                     v-bind="field"
                                                     placeholder="{{ trans('admin::app.catalog.attributes.create.options') }}"
@@ -325,7 +325,7 @@
                                                     type="text"
                                                     :id="'value[' + index + ']'"
                                                     :class="[errors['{{ 'name' }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                                    class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
+                                                    class="flex w-full min-h-9.75 py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                                     :name="'value[' + index + ']'"
                                                     v-bind="field"
                                                     placeholder="{{ trans('admin::app.settings.themes.edit.value-input') }}"
@@ -404,7 +404,7 @@
                                 @php $isRequired = old('is_required') ?? $rmaData->is_required; @endphp
 
                                 <!-- Is Required -->
-                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2">
+                                <x-admin::form.control-group class="flex gap-2.5 items-center mb-2!">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         id="is_required"

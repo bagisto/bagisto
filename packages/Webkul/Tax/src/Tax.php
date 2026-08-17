@@ -75,6 +75,80 @@ class Tax
     }
 
     /**
+     * Returns a detailed tax breakdown grouped per tax rate. Each rate carries its
+     * total tax amount and the list of contributing products (with the taxable base
+     * each tax was calculated on), so the storefront can show exactly which product
+     * was taxed on which amount. Rate labels match getTaxRatesWithAmount().
+     */
+    public function getTaxBreakdown(object $that, bool $asBase = false): array
+    {
+        $applyTaxAfterDiscount = core()->getConfigData('sales.taxes.calculation.apply_tax_on') !== 'before_discount';
+
+        $isInclusiveProducts = $this->isInclusiveTaxProductPrices();
+
+        $breakdown = [];
+
+        foreach ($that->items as $item) {
+            if (empty($item->tax_percent)) {
+                continue;
+            }
+
+            $taxRate = $item->applied_tax_rate.' ('.(string) round((float) $item->tax_percent, self::TAX_RATE_PRECISION).'%)';
+
+            if (! isset($breakdown[$taxRate])) {
+                $breakdown[$taxRate] = ['tax_amount' => 0, 'items' => []];
+            }
+
+            $base = $asBase ? $item->base_total : $item->total;
+
+            if (! $isInclusiveProducts && $applyTaxAfterDiscount) {
+                $base -= $asBase ? $item->base_discount_amount : $item->discount_amount;
+            }
+
+            $breakdown[$taxRate]['tax_amount'] += $asBase ? $item->base_tax_amount : $item->tax_amount;
+
+            $breakdown[$taxRate]['items'][] = [
+                'name' => $item->name,
+                'tax_amount' => round($asBase ? $item->base_tax_amount : $item->tax_amount, self::TAX_AMOUNT_PRECISION),
+                'taxable_amount' => round($base, self::TAX_AMOUNT_PRECISION),
+            ];
+        }
+
+        if (
+            $that->selected_shipping_rate
+            && $that->selected_shipping_rate->tax_amount > 0
+        ) {
+            $shippingRate = $that->selected_shipping_rate;
+
+            $taxRate = $shippingRate->applied_tax_rate.' ('.(string) round((float) $shippingRate->tax_percent, self::TAX_RATE_PRECISION).'%)';
+
+            if (! isset($breakdown[$taxRate])) {
+                $breakdown[$taxRate] = ['tax_amount' => 0, 'items' => []];
+            }
+
+            $base = $asBase ? $shippingRate->base_price : $shippingRate->price;
+
+            if (! $this->isInclusiveTaxShippingPrices() && $applyTaxAfterDiscount) {
+                $base -= $asBase ? $shippingRate->base_discount_amount : $shippingRate->discount_amount;
+            }
+
+            $breakdown[$taxRate]['tax_amount'] += $asBase ? $shippingRate->base_tax_amount : $shippingRate->tax_amount;
+
+            $breakdown[$taxRate]['items'][] = [
+                'name' => null,
+                'tax_amount' => round($asBase ? $shippingRate->base_tax_amount : $shippingRate->tax_amount, self::TAX_AMOUNT_PRECISION),
+                'taxable_amount' => round($base, self::TAX_AMOUNT_PRECISION),
+            ];
+        }
+
+        foreach ($breakdown as &$data) {
+            $data['tax_amount'] = round($data['tax_amount'], self::TAX_AMOUNT_PRECISION);
+        }
+
+        return $breakdown;
+    }
+
+    /**
      * Get shipping origin from core config.
      */
     public function getShippingOriginAddress(): object
@@ -148,7 +222,6 @@ class Tax
             return;
         }
 
-        // dump($address);
         foreach ($taxRates as $rate) {
             if (
                 ! in_array(trim($rate->state), ['*', ''])

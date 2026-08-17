@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Descàrregues Restants',
                 'status' => 'Estat',
                 'title' => 'Títol',
+                'unlimited' => 'Il·limitat',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Capçalera per defecte',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Tanca la galeria',
+            'view-image' => 'Mostra la imatge',
+            'view-video' => 'Mostra el vídeo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Alternar per defecte',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Afegir adjunts',
                 'add-image' => 'Afegir Imatge/Vídeo',
+                'invalid-file-type' => 'El tipus de fitxer seleccionat no està permès.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Benvingut convidat',
                     'wishlist' => 'Llista de desitjos',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Afegeix un producte a la llista de desitjos del client pel nom.',
+                'add-to-wishlist-query' => 'El nom del producte o la clau URL per afegir a la llista de desitjos.',
+                'proceed-to-checkout' => 'Obre la pàgina de pagament per començar a fer una comanda dels articles del carretó.',
+                'search-products' => 'Cerca productes al catàleg de la botiga per paraula clau i obre els resultats coincidents.',
+                'search-products-query' => 'Les paraules clau o el nom del producte que vols cercar al catàleg.',
+                'subscribe-newsletter' => 'Subscriu una adreça de correu electrònic al butlletí de la botiga.',
+                'subscribe-newsletter-email' => 'L\'adreça de correu electrònic per subscriure\'s al butlletí.',
+                'view-cart' => 'Obre la pàgina del carretó perquè el client pugui revisar els productes que ha afegit.',
+                'view-product' => 'Obre la pàgina de detalls d\'un producte pel nom del producte.',
+                'view-product-query' => 'El nom del producte o la clau URL a obrir.',
+                'view-wishlist' => 'Obre la pàgina de la llista de desitjos per revisar els productes desats del client.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Disminuir quantitat',
             'increase-quantity' => 'Augmentar quantitat',
+            'remove-item' => 'Elimina l\'article',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Import de Descompte',
                 'grand-total' => 'Total General',
                 'included' => 'Inclòs',
+                'excl-tax' => 'Sense impostos:',
                 'incl-tax' => 'IVA inclòs:',
                 'items-discount' => 'Descompte d\'articles',
                 'shipping-discount' => 'Descompte d\'enviament',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Acceptat',
-                'awaiting' => 'Esperant',
-                'canceled' => 'Cancel·lat',
-                'declined' => 'Rebutjat',
-                'dispatched-package' => 'Paquet enviat',
+                'accept' => 'Aprovat',
+                'awaiting' => 'Esperant la devolució',
+                'canceled' => 'Sol·licitud cancel·lada',
+                'declined' => 'Sol·licitud rebutjada',
+                'dispatched-package' => 'Devolució en trànsit',
                 'item-canceled' => 'Article cancel·lat',
                 'not-received-package-yet' => 'Encara no s\'ha rebut el paquet',
-                'pending' => 'Pendent',
+                'pending' => 'Pendent de revisió',
                 'processing' => 'Processant',
-                'received-package' => 'Paquet rebut',
+                'received-package' => 'Reemborsat',
                 'solved' => 'Resolt',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'L\'estat de la RMA ja està cancel·lat.',
+            'cancel-not-allowed' => 'No es permet cancel·lar aquesta sol·licitud RMA.',
             'cancel-success' => 'L\'estat de la RMA s\'ha cancel·lat correctament.',
+            'close-not-allowed' => 'No es permet tancar aquesta sol·licitud RMA.',
             'create-success' => 'Sol·licitud creada correctament.',
             'creation-error' => 'No es pot actualitzar l\'estat de la RMA perquè la factura d\'aquesta comanda no s\'ha creat.',
             'invalid-item' => 'L\'article seleccionat de la comanda no és vàlid.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'No es permet reobrir aquesta sol·licitud RMA.',
             'send-message' => ':name enviat correctament.',
             'update-success' => ':name actualitzat correctament.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Desistir del Contracte',
+            'view_existing' => 'Veure el vostre desistiment',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Desistir d\'un contracte',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Desistir d\'un contracte',
+            'heading' => 'Desistir del vostre contracte',
+            'intro' => 'Introduïu el número de comanda i l\'adreça electrònica que heu utilitzat en finalitzar la compra. Us enviarem un enllaç per presentar el vostre desistiment.',
+            'order_number' => 'Número de comanda',
+            'email' => 'Adreça electrònica',
+            'submit' => 'Envia\'m l\'enllaç de desistiment',
+            'sent_notice' => 'Si existeix una comanda coincident, acabem d\'enviar per correu un enllaç de desistiment a aquesta adreça. Serà vàlid durant 24 hores.',
+            'legal_note' => 'Teniu el dret legal, segons la Directiva UE 2011/83/UE (modificada), a desistir del vostre contracte en un termini de 14 dies. Altres mitjans de desistiment — inclosa una declaració escrita enviada al nostre servei d\'atenció al client — segueixen sent vàlids.',
+        ],
+
+        'form' => [
+            'page_title' => 'Confirmeu el vostre desistiment',
+            'heading' => 'Confirmar desistiment del contracte',
+            'legal_notice_title' => 'Es tracta d\'una declaració jurídicament vinculant',
+            'legal_effect' => 'En enviar aquest formulari, exerciu el vostre dret legal de desistiment per a la comanda #:order_id. La declaració té efectes legals en el moment d\'enviar-la.',
+            'order_summary' => 'Comanda',
+            'order_total' => 'Total',
+            'order_items' => 'Articles',
+            'placed_on' => 'Feta el :date',
+            'reason_label' => 'Motiu',
+            'reason_optional' => '(opcional)',
+            'reason_help' => 'No esteu obligat a indicar un motiu. Qualsevol cosa que escriviu aquí quedarà registrada a l\'evidència del desistiment i s\'enviarà al venedor.',
+            'reason_placeholder' => 'Per exemple: «He canviat d\'opinió», «L\'article no s\'ajusta a la descripció», o deixeu-ho en blanc.',
+            'submit' => 'Enviar desistiment',
+            'cancel' => 'Cancel·lar i tornar enrere',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Comprovant de desistiment',
+            'heading' => 'Hem rebut el vostre desistiment',
+            'heading_received' => 'Hem rebut el vostre desistiment',
+            'heading_refunded' => 'S\'ha emès el vostre reemborsament',
+            'heading_declined' => 'El vostre desistiment ha estat rebutjat',
+            'intro' => 'Hem registrat la vostra declaració. Aquesta pàgina i el correu que us acabem d\'enviar serveixen com a confirmació en un suport durador.',
+            'intro_received' => 'Hem registrat la vostra declaració. Aquesta pàgina i el correu que us acabem d\'enviar serveixen com a confirmació en un suport durador.',
+            'intro_refunded' => 'El venedor ha processat el vostre reemborsament. L\'import hauria d\'arribar en breu al mètode de pagament original.',
+            'intro_declined' => 'El venedor ha contestat el vostre dret a un reemborsament segons aquesta declaració. Vegeu els detalls a continuació per al motiu indicat i les vostres opcions restants.',
+            'received_at' => 'Rebut el',
+            'reference' => 'Referència',
+            'copy_reference' => 'Copiar referència',
+            'reference_copied' => 'Referència copiada al porta-retalls.',
+            'order' => 'Comanda',
+            'email' => 'Correu electrònic',
+            'reason' => 'Motiu',
+            'status' => 'Estat',
+            'status_received' => 'Rebut',
+            'status_refunded' => 'Reemborsat',
+            'status_declined' => 'Rebutjat',
+            'print' => 'Imprimir',
+            'next_steps_title' => 'Què passarà a continuació',
+            'step_received' => 'La vostra declaració ha estat rebuda i registrada.',
+            'step_email' => 'S\'ha enviat el correu de confirmació a la vostra bústia.',
+            'step_refund' => 'Reemborsament emès en un termini de 14 dies.',
+            'step_refund_done' => 'S\'ha emès el reemborsament.',
+            'step_declined' => 'Desistiment rebutjat pel venedor.',
+            'declined_reason_label' => 'Motiu indicat pel venedor',
+            'declined_notice' => 'Conserveu tots els altres recursos legals previstos per la legislació UE de consum. Si no esteu d\'acord amb aquesta decisió, poseu-vos en contacte directament amb el venedor.',
+            'refund_notice' => 'Reemborsem utilitzant el mateix mitjà de pagament que vau emprar per a la transacció original, llevat que hàgiu acordat expressament una altra cosa.',
+            'email_sent' => 'S\'ha enviat el correu de confirmació.',
+            'email_pending' => 'No hem pogut enviar el correu de confirmació immediatament; el nostre equip hi farà el seguiment. Si us plau, deseu aquesta pàgina com a comprovant.',
+            'durable_medium_notice' => 'Aquesta pàgina és el vostre comprovant. La podeu desar o imprimir.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Confirmació del vostre desistiment — Comanda :order_id',
+                'title' => 'Desistiment rebut',
+                'title_received' => 'Desistiment rebut',
+                'title_refunded' => 'Reemborsament emès',
+                'title_declined' => 'Desistiment rebutjat',
+                'greeting' => 'Hola,',
+                'intro' => 'Hem rebut la vostra declaració de desistiment del contracte per a la comanda #:order_id. La marca de temps de recepció amb efectes legals queda registrada a continuació.',
+                'intro_received' => 'Hem rebut la vostra declaració de desistiment del contracte per a la comanda #:order_id. La marca de temps de recepció amb efectes legals queda registrada a continuació.',
+                'intro_refunded' => 'S\'ha emès el vostre reemborsament per a la comanda #:order_id. L\'import hauria d\'arribar en breu al mètode de pagament original.',
+                'intro_declined' => 'El venedor ha contestat el vostre dret a un reemborsament per a la comanda #:order_id segons aquesta declaració. El motiu indicat figura a continuació.',
+                'summary' => 'Resum del desistiment',
+                'received_at' => 'Rebut el',
+                'reference' => 'Referència',
+                'order' => 'Comanda',
+                'email' => 'Correu electrònic',
+                'reason' => 'Motiu indicat',
+                'declined_reason' => 'Motiu del rebuig',
+                'refund_notice' => 'Quan correspongui un reemborsament, el fem efectiu pel mateix mitjà de pagament que vau utilitzar per a la transacció original, en un termini de 14 dies des de la data anterior, llevat que hàgiu acordat expressament una altra cosa.',
+                'footer' => 'Aquest missatge és la confirmació en un suport durador exigida per l\'article 11 bis de la Directiva 2011/83/UE (modificada per la Directiva (UE) 2023/2673). Conserveu-lo per als vostres registres.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'El vostre enllaç de desistiment',
+                'title' => 'El vostre enllaç de desistiment',
+                'intro' => 'Utilitzeu l\'enllaç següent per presentar el desistiment de la comanda :order_id. L\'enllaç té una validesa de 24 hores.',
+                'button' => 'Obre el formulari de desistiment',
+                'expiry' => 'L\'enllaç caducarà d\'aquí a 24 hores. Si no heu sol·licitat aquest correu, podeu ignorar-lo amb tota seguretat.',
+            ],
         ],
     ],
 ];

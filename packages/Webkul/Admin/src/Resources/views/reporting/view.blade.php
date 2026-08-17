@@ -50,13 +50,13 @@
                         <x-admin::dropdown position="bottom-right">
                             <x-slot:toggle>
                                 <div class="transparent-button hover:bg-gray-200 dark:text-white dark:hover:bg-gray-800">
-                                    <span class="icon-export text-xl text-gray-600"></span>
+                                    <span class="icon-admin-export text-xl text-gray-600"></span>
             
                                     @lang('admin::app.export.export')
                                 </div>
                             </x-slot>
 
-                            <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
+                            <x-slot:menu class="p-0! shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
                                 <x-admin::dropdown.menu.item>
                                     <span @click="exportReporting('csv')">
                                         @lang('admin::app.reporting.view.export-csv')
@@ -91,7 +91,7 @@
                                     </button>
                                 </x-slot>
 
-                                <x-slot:menu class="!p-0 shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
+                                <x-slot:menu class="p-0! shadow-[0_5px_20px_rgba(0,0,0,0.15)] dark:border-gray-800">
                                     <x-admin::dropdown.menu.item
                                         v-for="channel in channels"
                                         ::class="{'bg-gray-100 dark:bg-gray-950': channel.code == filters.channel}"
@@ -140,17 +140,17 @@
 
                     <!-- Actions -->
                     <div class="flex items-center gap-1.5">
-                        <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                        <x-admin::flat-picker.date class="w-35!" ::allow-input="false">
                             <input
-                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                 v-model="filters.start"
                                 placeholder="@lang('admin::app.reporting.view.start-date')"
                             />
                         </x-admin::flat-picker.date>
 
-                        <x-admin::flat-picker.date class="!w-[140px]" ::allow-input="false">
+                        <x-admin::flat-picker.date class="w-35!" ::allow-input="false">
                             <input
-                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                                class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
                                 v-model="filters.end"
                                 placeholder="@lang('admin::app.reporting.view.end-date')"
                             />
@@ -158,7 +158,7 @@
                     </div>
                 </div>
 
-                <div class="table-responsive box-shadow grid w-full overflow-hidden rounded bg-white dark:bg-gray-900">
+                <div class="table-responsive box-shadow grid w-full overflow-hidden rounded-sm bg-white dark:bg-gray-900">
                     <template v-if="isLoading">
                         <x-admin::shimmer.datagrid.table.head />
 

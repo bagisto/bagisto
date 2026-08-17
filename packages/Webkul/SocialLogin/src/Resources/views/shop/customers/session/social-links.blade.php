@@ -1,4 +1,5 @@
-<div class="flex gap-3">
+<!-- Spaced here rather than by the form: this is injected through an event, so it cannot rely on whatever it lands under leaving room for it. -->
+<div class="mt-6 flex gap-3">
     @foreach(['enable_facebook', 'enable_twitter', 'enable_google', 'enable_linkedin-openid', 'enable_github'] as $social)
         @if (! core()->getConfigData('customer.settings.social_login.' . $social))
             @continue

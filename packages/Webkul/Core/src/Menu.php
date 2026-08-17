@@ -84,14 +84,36 @@ class Menu
     }
 
     /**
+     * Key of the menu item the current request belongs to, deepest one first.
+     */
+    public function getCurrentKey(): string
+    {
+        return $this->currentKey;
+    }
+
+    /**
      * Prepare menu items.
      */
     private function prepareMenuItems(): void
     {
         $menuWithDotNotation = [];
 
+        $currentUrl = rtrim(request()->url(), '/');
+
+        $matchedLength = -1;
+
         foreach ($this->configMenu as $item) {
-            if (strpos(request()->url(), route($item['route'])) !== false) {
+            $itemUrl = rtrim(route($item['route']), '/');
+
+            $matches = $currentUrl === $itemUrl
+                || str_starts_with($currentUrl, $itemUrl.'/');
+
+            if (
+                $matches
+                && strlen($itemUrl) >= $matchedLength
+            ) {
+                $matchedLength = strlen($itemUrl);
+
                 $this->currentKey = $item['key'];
             }
 

@@ -7,7 +7,7 @@
         {{ $address->name }}
     </p>
     
-    <p class="!leading-6 text-gray-600">
+    <p class="leading-6! text-gray-600">
         {{ $address->address }}<br>
 
         {{ $address->city }}<br>

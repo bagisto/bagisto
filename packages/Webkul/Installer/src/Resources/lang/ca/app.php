@@ -198,7 +198,7 @@ return [
                 'UAH' => 'Hryvnia Ucraïnesa',
                 'USD' => 'Dòlar Estatunidenc',
                 'UZS' => 'Som Uzbequès',
-                'VEF' => 'Bolívar Veneçolà',
+                'VES' => 'Bolívar Veneçolà',
                 'VND' => 'Dong Vietnamita',
                 'XAF' => 'Franc CFA BEAC',
                 'XOF' => 'Franc CFA BCEAO',

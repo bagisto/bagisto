@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Descargas Restantes',
                 'status' => 'Estado',
                 'title' => 'Título',
+                'unlimited' => 'Ilimitado',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Encabezado predeterminado',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Cerrar galería',
+            'view-image' => 'Ver imagen',
+            'view-video' => 'Ver vídeo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Alternar predeterminado',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Agregar adjuntos',
                 'add-image' => 'Agregar Imagen/Video',
+                'invalid-file-type' => 'El tipo de archivo seleccionado no está permitido.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Bienvenido Invitado',
                     'wishlist' => 'Lista de deseos',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Añade un producto a la lista de deseos del cliente por su nombre.',
+                'add-to-wishlist-query' => 'El nombre del producto o la clave URL para añadir a la lista de deseos.',
+                'proceed-to-checkout' => 'Abre la página de pago para empezar a realizar un pedido de los artículos del carrito.',
+                'search-products' => 'Busca productos en el catálogo de la tienda por palabra clave y abre los resultados coincidentes.',
+                'search-products-query' => 'Las palabras clave o el nombre del producto que se buscarán en el catálogo.',
+                'subscribe-newsletter' => 'Suscribe una dirección de correo electrónico al boletín de la tienda.',
+                'subscribe-newsletter-email' => 'La dirección de correo electrónico para suscribirse al boletín.',
+                'view-cart' => 'Abre la página del carrito para que el cliente pueda revisar los productos que ha añadido.',
+                'view-product' => 'Abre la página de detalles de un producto por el nombre del producto.',
+                'view-product-query' => 'El nombre del producto o la clave URL a abrir.',
+                'view-wishlist' => 'Abre la página de la lista de deseos para revisar los productos guardados del cliente.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Disminuir cantidad',
             'increase-quantity' => 'Aumentar cantidad',
+            'remove-item' => 'Eliminar artículo',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Monto de Descuento',
                 'grand-total' => 'Total General',
                 'included' => 'Incluido',
+                'excl-tax' => 'Sin impuestos:',
                 'incl-tax' => 'Imp. Inc.:',
                 'items-discount' => 'Descuento de artículos',
                 'shipping-discount' => 'Descuento de envío',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Aceptar',
-                'awaiting' => 'En espera',
-                'canceled' => 'Cancelado',
-                'declined' => 'Declinado',
-                'dispatched-package' => 'Paquete Enviado',
+                'accept' => 'Aprobado',
+                'awaiting' => 'Esperando devolución',
+                'canceled' => 'Solicitud cancelada',
+                'declined' => 'Solicitud rechazada',
+                'dispatched-package' => 'Devolución en tránsito',
                 'item-canceled' => 'Artículo Cancelado',
                 'not-received-package-yet' => 'Aún no recibido el paquete',
-                'pending' => 'Pendiente',
+                'pending' => 'Revisión pendiente',
                 'processing' => 'Procesando',
-                'received-package' => 'Paquete Recibido',
+                'received-package' => 'Reembolsado',
                 'solved' => 'Resuelto',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'El estado de RMA ya ha sido cancelado.',
+            'cancel-not-allowed' => 'No se permite cancelar esta solicitud de RMA.',
             'cancel-success' => 'El estado de RMA ha sido cancelado con éxito.',
+            'close-not-allowed' => 'No se permite cerrar esta solicitud de RMA.',
             'create-success' => 'Solicitud creada con éxito.',
             'creation-error' => 'El estado de RMA no se puede actualizar porque no se ha creado la factura para este pedido.',
             'invalid-item' => 'El artículo de pedido seleccionado no es válido.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'No se permite reabrir esta solicitud de RMA.',
             'send-message' => ':name enviado/a exitosamente.',
             'update-success' => ':name actualizado/a exitosamente.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Desistir del contrato',
+            'view_existing' => 'Ver su desistimiento',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Desistir de un contrato',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Desistir de un contrato',
+            'heading' => 'Desistir de su contrato',
+            'intro' => 'Introduzca el número de pedido y la dirección de correo electrónico que utilizó al finalizar la compra. Le enviaremos un enlace para presentar su desistimiento.',
+            'order_number' => 'Número de pedido',
+            'email' => 'Dirección de correo electrónico',
+            'submit' => 'Enviarme el enlace de desistimiento',
+            'sent_notice' => 'Si existe un pedido coincidente, acabamos de enviar por correo un enlace de desistimiento a esa dirección. Será válido durante 24 horas.',
+            'legal_note' => 'Usted tiene el derecho legal, en virtud de la Directiva (UE) 2011/83 (en su versión modificada), a desistir del contrato en un plazo de 14 días. Otros medios de desistimiento, incluida una declaración escrita enviada a nuestro servicio de atención al cliente, siguen siendo válidos.',
+        ],
+
+        'form' => [
+            'page_title' => 'Confirme su desistimiento',
+            'heading' => 'Confirmar desistimiento del contrato',
+            'legal_notice_title' => 'Esta es una declaración jurídicamente vinculante',
+            'legal_effect' => 'Al enviar este formulario, usted ejerce su derecho legal de desistimiento respecto al pedido n.º :order_id. La declaración produce efectos jurídicos en el momento de su envío.',
+            'order_summary' => 'Pedido',
+            'order_total' => 'Total',
+            'order_items' => 'Artículos',
+            'placed_on' => 'Realizado el :date',
+            'reason_label' => 'Motivo',
+            'reason_optional' => '(opcional)',
+            'reason_help' => 'No está obligado a indicar un motivo. Cualquier información que escriba aquí se registrará en la prueba del desistimiento y se enviará al comerciante.',
+            'reason_placeholder' => 'Por ejemplo: «He cambiado de opinión», «El artículo no coincide con la descripción», o deje el campo vacío.',
+            'submit' => 'Enviar desistimiento',
+            'cancel' => 'Cancelar y volver',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Justificante de desistimiento',
+            'heading' => 'Hemos recibido su desistimiento',
+            'heading_received' => 'Hemos recibido su desistimiento',
+            'heading_refunded' => 'Se ha emitido su reembolso',
+            'heading_declined' => 'Su desistimiento fue rechazado',
+            'intro' => 'Hemos registrado su declaración. Esta página y el correo electrónico que acabamos de enviarle sirven como confirmación en un soporte duradero.',
+            'intro_received' => 'Hemos registrado su declaración. Esta página y el correo electrónico que acabamos de enviarle sirven como confirmación en un soporte duradero.',
+            'intro_refunded' => 'El comerciante ha tramitado su reembolso. El importe debería llegar en breve a su método de pago original.',
+            'intro_declined' => 'El comerciante ha cuestionado su derecho a un reembolso en virtud de esta declaración. Consulte los detalles a continuación para conocer el motivo indicado y sus opciones restantes.',
+            'received_at' => 'Recibido el',
+            'reference' => 'Referencia',
+            'copy_reference' => 'Copiar referencia',
+            'reference_copied' => 'Referencia copiada al portapapeles.',
+            'order' => 'Pedido',
+            'email' => 'Correo electrónico',
+            'reason' => 'Motivo',
+            'status' => 'Estado',
+            'status_received' => 'Recibido',
+            'status_refunded' => 'Reembolsado',
+            'status_declined' => 'Rechazado',
+            'print' => 'Imprimir',
+            'next_steps_title' => 'Qué sucede a continuación',
+            'step_received' => 'Su declaración ha sido recibida y registrada.',
+            'step_email' => 'Se ha enviado un correo de confirmación a su bandeja de entrada.',
+            'step_refund' => 'Reembolso emitido en un plazo de 14 días.',
+            'step_refund_done' => 'Se ha emitido el reembolso.',
+            'step_declined' => 'Desistimiento rechazado por el comerciante.',
+            'declined_reason_label' => 'Motivo indicado por el comerciante',
+            'declined_notice' => 'Conserva todos los demás recursos legales conforme al derecho de consumo de la UE. Si no está de acuerdo con esta decisión, póngase en contacto directamente con el comerciante.',
+            'refund_notice' => 'Reembolsamos utilizando el mismo medio de pago que utilizó para la transacción original, salvo que haya acordado expresamente lo contrario.',
+            'email_sent' => 'Se ha enviado el correo de confirmación.',
+            'email_pending' => 'No hemos podido enviar el correo de confirmación de inmediato; nuestro equipo dará seguimiento. Guarde esta página como justificante.',
+            'durable_medium_notice' => 'Esta página es su justificante. Puede guardarla o imprimirla.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Confirmación de su desistimiento — Pedido :order_id',
+                'title' => 'Desistimiento recibido',
+                'title_received' => 'Desistimiento recibido',
+                'title_refunded' => 'Reembolso emitido',
+                'title_declined' => 'Desistimiento rechazado',
+                'greeting' => 'Hola:',
+                'intro' => 'Hemos recibido su declaración de desistimiento del contrato correspondiente al pedido n.º :order_id. A continuación se registra la marca temporal de recepción con efectos jurídicos.',
+                'intro_received' => 'Hemos recibido su declaración de desistimiento del contrato correspondiente al pedido n.º :order_id. A continuación se registra la marca temporal de recepción con efectos jurídicos.',
+                'intro_refunded' => 'Se ha emitido su reembolso del pedido n.º :order_id. El importe debería llegar en breve a su método de pago original.',
+                'intro_declined' => 'El comerciante ha cuestionado su derecho a un reembolso del pedido n.º :order_id en virtud de esta declaración. El motivo indicado figura a continuación.',
+                'summary' => 'Resumen del desistimiento',
+                'received_at' => 'Recibido el',
+                'reference' => 'Referencia',
+                'order' => 'Pedido',
+                'email' => 'Correo electrónico',
+                'reason' => 'Motivo indicado',
+                'declined_reason' => 'Motivo del rechazo',
+                'refund_notice' => 'Cuando corresponda un reembolso, lo efectuamos utilizando el mismo medio de pago que usted utilizó para la transacción original, en un plazo de 14 días a partir de la fecha indicada, salvo que haya acordado expresamente lo contrario.',
+                'footer' => 'Este mensaje constituye la confirmación en un soporte duradero exigida por el artículo 11 bis de la Directiva 2011/83/UE (modificada por la Directiva (UE) 2023/2673). Consérvelo en sus registros.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Su enlace de desistimiento',
+                'title' => 'Su enlace de desistimiento',
+                'intro' => 'Utilice el enlace siguiente para presentar su desistimiento del pedido :order_id. El enlace es válido durante 24 horas.',
+                'button' => 'Abrir el formulario de desistimiento',
+                'expiry' => 'El enlace caducará en 24 horas. Si no solicitó este correo, puede ignorarlo sin problemas.',
+            ],
         ],
     ],
 ];

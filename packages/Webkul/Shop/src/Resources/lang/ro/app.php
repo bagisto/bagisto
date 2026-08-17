@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Descărcări rămase',
                 'status' => 'Stare',
                 'title' => 'Titlu',
+                'unlimited' => 'Nelimitat',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Antet implicit',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Închide galeria',
+            'view-image' => 'Vezi imaginea',
+            'view-video' => 'Vezi videoclipul',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Comutare implicită',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Adaugă atașamente',
                 'add-image' => 'Adaugă imagine/video',
+                'invalid-file-type' => 'Tipul de fișier selectat nu este permis.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Bun venit, vizitator',
                     'wishlist' => 'Lista de dorințe',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Adaugă un produs în lista de dorințe a clientului după nume.',
+                'add-to-wishlist-query' => 'Numele produsului sau cheia URL de adăugat în lista de dorințe.',
+                'proceed-to-checkout' => 'Deschide pagina de finalizare a comenzii pentru a plasa o comandă pentru articolele din coș.',
+                'search-products' => 'Caută produse în catalogul magazinului după cuvânt cheie și deschide rezultatele potrivite.',
+                'search-products-query' => 'Cuvintele cheie sau numele produsului de căutat în catalog.',
+                'subscribe-newsletter' => 'Abonează o adresă de e-mail la buletinul informativ al magazinului.',
+                'subscribe-newsletter-email' => 'Adresa de e-mail pentru abonarea la buletinul informativ.',
+                'view-cart' => 'Deschide pagina coșului de cumpărături pentru ca clientul să poată revizui produsele adăugate.',
+                'view-product' => 'Deschide pagina de detalii a unui produs după numele produsului.',
+                'view-product-query' => 'Numele produsului sau cheia URL de deschis.',
+                'view-wishlist' => 'Deschide pagina listei de dorințe pentru a revizui produsele salvate ale clientului.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Scade cantitatea',
             'increase-quantity' => 'Crește cantitatea',
+            'remove-item' => 'Eliminați articolul',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Sumă reducere',
                 'grand-total' => 'Total general',
                 'included' => 'Inclus',
+                'excl-tax' => 'Fără taxe:',
                 'incl-tax' => 'Cu TVA:',
                 'items-discount' => 'Reducere articole',
                 'shipping-discount' => 'Reducere livrare',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Acceptă',
-                'awaiting' => 'Awaiting',
-                'canceled' => 'Anulată',
-                'declined' => 'Refuzat',
-                'dispatched-package' => 'Dispatched Package',
+                'accept' => 'Aprobat',
+                'awaiting' => 'În așteptarea returului',
+                'canceled' => 'Cerere anulată',
+                'declined' => 'Cerere respinsă',
+                'dispatched-package' => 'Retur în tranzit',
                 'item-canceled' => 'Item Canceled',
                 'not-received-package-yet' => 'Not received package yet',
-                'pending' => 'În așteptare',
+                'pending' => 'În așteptarea examinării',
                 'processing' => 'În procesare',
-                'received-package' => 'Received Package',
+                'received-package' => 'Rambursat',
                 'solved' => 'Solved',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA status already canceled.',
+            'cancel-not-allowed' => 'Anularea acestei solicitări RMA nu este permisă.',
             'cancel-success' => 'RMA status canceled successfully.',
+            'close-not-allowed' => 'Închiderea acestei solicitări RMA nu este permisă.',
             'create-success' => 'Request created successfully.',
             'creation-error' => 'RMA status cannot be updated as the invoice for this order has not been created.',
             'invalid-item' => 'Articolul de comandă selectat nu este valid.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'Reopening this RMA request is not allowed.',
             'send-message' => ':name sent successfully.',
             'update-success' => 'Status updated successfully.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Retragere din Contract',
+            'view_existing' => 'Vizualizați retragerea dumneavoastră',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Retragere dintr-un contract',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Retragere dintr-un contract',
+            'heading' => 'Retragere din contractul dumneavoastră',
+            'intro' => 'Introduceți numărul comenzii și adresa de e-mail folosită la finalizarea comenzii. Vă vom trimite un link pentru a depune retragerea.',
+            'order_number' => 'Numărul comenzii',
+            'email' => 'Adresă de e-mail',
+            'submit' => 'Trimiteți-mi linkul de retragere',
+            'sent_notice' => 'Dacă există o comandă corespunzătoare, tocmai am trimis prin e-mail un link de retragere la acea adresă. Va fi valabil 24 de ore.',
+            'legal_note' => 'Aveți dreptul legal, conform Directivei UE 2011/83/UE (cu modificările ulterioare), de a vă retrage din contract în termen de 14 zile. Alte modalități de retragere — inclusiv o declarație scrisă trimisă serviciului nostru de relații cu clienții — rămân valabile.',
+        ],
+
+        'form' => [
+            'page_title' => 'Confirmați retragerea dumneavoastră',
+            'heading' => 'Confirmați retragerea din contract',
+            'legal_notice_title' => 'Aceasta este o declarație cu efecte juridice obligatorii',
+            'legal_effect' => 'Prin trimiterea acestui formular, vă exercitați dreptul legal de retragere pentru comanda #:order_id. Declarația produce efecte juridice din momentul transmiterii sale.',
+            'order_summary' => 'Comandă',
+            'order_total' => 'Total',
+            'order_items' => 'Articole',
+            'placed_on' => 'Plasată pe :date',
+            'reason_label' => 'Motiv',
+            'reason_optional' => '(opțional)',
+            'reason_help' => 'Nu sunteți obligat să indicați un motiv. Orice scrieți aici va fi consemnat pe dovada retragerii și transmis comerciantului.',
+            'reason_placeholder' => 'De exemplu: „M-am răzgândit”, „Produsul nu corespunde descrierii”, sau lăsați gol.',
+            'submit' => 'Trimite retragerea',
+            'cancel' => 'Anulează și înapoi',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Confirmare de retragere',
+            'heading' => 'Retragerea dumneavoastră a fost primită',
+            'heading_received' => 'Retragerea dumneavoastră a fost primită',
+            'heading_refunded' => 'Rambursarea dumneavoastră a fost emisă',
+            'heading_declined' => 'Retragerea dumneavoastră a fost respinsă',
+            'intro' => 'Am înregistrat declarația dumneavoastră. Această pagină și e-mailul pe care tocmai vi l-am trimis constituie confirmare pe un suport durabil.',
+            'intro_received' => 'Am înregistrat declarația dumneavoastră. Această pagină și e-mailul pe care tocmai vi l-am trimis constituie confirmare pe un suport durabil.',
+            'intro_refunded' => 'Comerciantul a procesat rambursarea dumneavoastră. Suma ar trebui să ajungă în scurt timp prin metoda de plată inițială.',
+            'intro_declined' => 'Comerciantul v-a contestat dreptul la rambursare pe baza acestei declarații. Consultați detaliile de mai jos pentru motivul indicat și opțiunile rămase.',
+            'received_at' => 'Primită la',
+            'reference' => 'Referință',
+            'copy_reference' => 'Copiază referința',
+            'reference_copied' => 'Referința a fost copiată în clipboard.',
+            'order' => 'Comandă',
+            'email' => 'E-mail',
+            'reason' => 'Motiv',
+            'status' => 'Stare',
+            'status_received' => 'Primită',
+            'status_refunded' => 'Rambursată',
+            'status_declined' => 'Respinsă',
+            'print' => 'Tipărește',
+            'next_steps_title' => 'Ce urmează',
+            'step_received' => 'Declarația dumneavoastră a fost primită și înregistrată.',
+            'step_email' => 'E-mailul de confirmare a fost trimis în căsuța dumneavoastră poștală.',
+            'step_refund' => 'Rambursare emisă în termen de 14 zile.',
+            'step_refund_done' => 'Rambursarea a fost emisă.',
+            'step_declined' => 'Retragere respinsă de comerciant.',
+            'declined_reason_label' => 'Motivul indicat de comerciant',
+            'declined_notice' => 'Vă păstrați toate celelalte căi de atac prevăzute de legislația UE privind protecția consumatorilor. Dacă nu sunteți de acord cu această decizie, contactați comerciantul direct.',
+            'refund_notice' => 'Rambursăm folosind aceeași metodă de plată pe care ați utilizat-o pentru tranzacția inițială, cu excepția cazului în care ați convenit expres altfel.',
+            'email_sent' => 'E-mailul de confirmare a fost trimis.',
+            'email_pending' => 'Nu am putut trimite imediat e-mailul de confirmare; echipa noastră va reveni. Vă rugăm să salvați această pagină ca dovadă.',
+            'durable_medium_notice' => 'Această pagină este dovada dumneavoastră. O puteți salva sau tipări.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Confirmarea retragerii dumneavoastră — Comanda :order_id',
+                'title' => 'Retragere primită',
+                'title_received' => 'Retragere primită',
+                'title_refunded' => 'Rambursare emisă',
+                'title_declined' => 'Retragere respinsă',
+                'greeting' => 'Bună ziua,',
+                'intro' => 'Am primit declarația dumneavoastră de retragere din contract pentru comanda #:order_id. Marca temporală de primire cu efecte juridice este înregistrată mai jos.',
+                'intro_received' => 'Am primit declarația dumneavoastră de retragere din contract pentru comanda #:order_id. Marca temporală de primire cu efecte juridice este înregistrată mai jos.',
+                'intro_refunded' => 'Rambursarea pentru comanda #:order_id a fost emisă. Suma ar trebui să ajungă în scurt timp prin metoda de plată inițială.',
+                'intro_declined' => 'Comerciantul v-a contestat dreptul la rambursare pentru comanda #:order_id pe baza acestei declarații. Motivul indicat este de mai jos.',
+                'summary' => 'Sumarul retragerii',
+                'received_at' => 'Primită la',
+                'reference' => 'Referință',
+                'order' => 'Comandă',
+                'email' => 'E-mail',
+                'reason' => 'Motivul indicat',
+                'declined_reason' => 'Motivul respingerii',
+                'refund_notice' => 'Atunci când se cuvine o rambursare, aceasta se face prin aceeași metodă de plată folosită pentru tranzacția inițială, în termen de 14 zile de la data de mai sus, cu excepția cazului în care ați convenit expres altfel.',
+                'footer' => 'Acest mesaj reprezintă confirmarea pe un suport durabil cerută de articolul 11a din Directiva 2011/83/UE (modificată prin Directiva (UE) 2023/2673). Vă rugăm să-l păstrați pentru evidențele dumneavoastră.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Linkul dumneavoastră de retragere',
+                'title' => 'Linkul dumneavoastră de retragere',
+                'intro' => 'Folosiți linkul de mai jos pentru a depune retragerea pentru comanda :order_id. Linkul este valabil 24 de ore.',
+                'button' => 'Deschideți formularul de retragere',
+                'expiry' => 'Linkul va expira în 24 de ore. Dacă nu ați solicitat acest e-mail, îl puteți ignora în siguranță.',
+            ],
         ],
     ],
 ];

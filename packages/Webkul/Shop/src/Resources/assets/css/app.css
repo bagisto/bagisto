@@ -1,6 +1,184 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/**
+ * Scanned from `src/` rather than `src/Resources/`, so classes named in `src/Config` and
+ * `src/DataGrids` — the menu and datagrid icons — are seen too.
+ */
+@import "tailwindcss" source("../../../");
+
+@theme {
+    /**
+     * Breakpoints — the widths at which the layout changes.
+     *
+     * Ordered largest to smallest so the `max-*` utilities read in the same direction
+     * as the screens they apply to.
+     */
+    --breakpoint-2xl:  1440px;
+    --breakpoint-xl:   1240px;
+    --breakpoint-1180: 1180px;
+    --breakpoint-1060: 1060px;
+    --breakpoint-lg:   1024px;
+    --breakpoint-991:  991px;
+    --breakpoint-868:  868px;
+    --breakpoint-md:   768px;
+    --breakpoint-sm:   525px;
+
+    /**
+     * Colours — the palette of named colours used in the storefront.
+     */
+    --color-navyBlue:    #060C3B;
+    --color-lightOrange: #F6F2EB;
+    --color-darkGreen:   #40994A;
+    --color-darkBlue:    #0044F2;
+    --color-darkPink:    #F85156;
+
+    /**
+     * Fonts — the named families the storefront can ask for by utility.
+     */
+    --font-poppins: "Poppins", sans-serif;
+    --font-dmserif: "DM Serif Display", serif;
+
+    /**
+     * The fallback font, pinned to the stack Tailwind 3 shipped.
+     *
+     * v4 dropped `system-ui` from the front of its default, which lands on a different
+     * face on Linux and Windows. Poppins covers the storefront itself, but the
+     * cookie-consent banner asks for `font-sans` by name.
+     */
+    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@utility container {
+    margin-inline: auto;
+    padding-inline: 90px;
+
+    @variant 2xl {
+        max-width: 1440px;
+    }
+}
+
+/**
+ * Icons.
+ *
+ * Each icon is a utility rather than a plain class so it can carry variants.
+ *
+ * Only the glyphs the storefront actually uses are declared, and the scan of `src/`
+ * finds all but five of them on its own. Those five are named outside this package —
+ * `icon-share` by the SocialShare view, and the four service icons by the theme content
+ * the installer seeds — so nothing here mentions them and the scanner never sees them.
+ * They are safelisted for that reason alone; anything else added below is picked up
+ * automatically.
+ */
+@source inline("{icon-dollar-sign,icon-product,icon-share,icon-support,icon-truck}");
+@theme {
+    --icon-uncheck:                "\e941";
+    --icon-check-box:              "\e90f";
+    --icon-radio-unselect:         "\e931";
+    --icon-radio-select:           "\e930";
+    --icon-gdpr-safe:              "\e84f";
+    --icon-checkout-address:       "\e944";
+    --icon-edit:                   "\e943";
+    --icon-arrow-down:             "\e901";
+    --icon-arrow-left-stylish:     "\e902";
+    --icon-arrow-left:             "\e903";
+    --icon-arrow-right-stylish:    "\e904";
+    --icon-arrow-right:            "\e905";
+    --icon-arrow-up:               "\e906";
+    --icon-bin:                    "\e908";
+    --icon-calendar:               "\e90a";
+    --icon-camera:                 "\e90c";
+    --icon-cancel:                 "\e90d";
+    --icon-cart:                   "\e90e";
+    --icon-swap:                   "\e910";
+    --icon-compare:                "\e911";
+    --icon-dollar-sign:            "\e913";
+    --icon-double-arrow:           "\e914";
+    --icon-download:               "\e915";
+    --icon-error:                  "\e917";
+    --icon-eye:                    "\e918";
+    --icon-funnel:                 "\e919";
+    --icon-filter:                 "\e91b";
+    --icon-flate-rate:             "\e91c";
+    --icon-grid-view-fill:         "\e91e";
+    --icon-grid-view:              "\e91f";
+    --icon-hamburger:              "\e920";
+    --icon-heart-fill:             "\e923";
+    --icon-heart:                  "\e924";
+    --icon-listing-fill:           "\e927";
+    --icon-listing:                "\e928";
+    --icon-location:               "\e929";
+    --icon-minus:                  "\e92a";
+    --icon-more:                   "\e92b";
+    --icon-orders:                 "\e92c";
+    --icon-pen:                    "\e92d";
+    --icon-plus:                   "\e92e";
+    --icon-product:                "\e92f";
+    --icon-search:                 "\e933";
+    --icon-share:                  "\e934";
+    --icon-sort:                   "\e935";
+    --icon-star-fill:              "\e938";
+    --icon-star:                   "\e939";
+    --icon-support:                "\e93a";
+    --icon-toast-done:             "\e93c";
+    --icon-toast-error:            "\e93d";
+    --icon-toast-exclamation-mark: "\e93e";
+    --icon-toast-info:             "\e93f";
+    --icon-truck:                  "\e940";
+    --icon-users:                  "\e942";
+}
+
+@utility icon-* {
+    &::before { content: --value(--icon-*); }
+}
+
+/**
+ * Base.
+ *
+ * Element defaults, and the handful of v3 behaviours v4 dropped that the storefront
+ * still relies on — the grey border, the pointer on buttons, the grey placeholder.
+ */
+@layer base {
+    *,
+    ::after,
+    ::before,
+    ::backdrop,
+    ::file-selector-button {
+        border-color: var(--color-gray-200, currentColor);
+    }
+
+    button:not(:disabled),
+    [role="button"]:not(:disabled) {
+        cursor: pointer;
+    }
+
+    * {
+        @apply box-border font-poppins;
+    }
+
+    html {
+        margin-top: 0 !important;
+    }
+
+    input {
+        @apply outline-none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        @apply text-gray-400;
+    }
+
+    button:disabled,
+    button:disabled:hover {
+        @apply cursor-not-allowed opacity-50;
+    }
+
+    img.lazy {
+        visibility: hidden;
+    }
+
+    ::selection {
+        background-color: rgba(6, 12, 59, .2);
+    }
+}
 
 @font-face {
     font-family: "bagisto-shop";
@@ -10,30 +188,23 @@
     font-display: swap;
 }
 
-img.lazy {
-  visibility: hidden;
-}
-
+/**
+ * Components.
+ *
+ * The repeated pieces of the storefront — the icon font, the scrollbar, the shared
+ * blocks — named once here so a view spells out only what is particular to it.
+ */
 @layer components {
-    ::selection {
-        background-color: rgba(6, 12, 59, .2);
+    .direction-ltr {
+        direction: ltr;
     }
 
-    input {
-        @apply outline-none;
-    }
-
-    button:disabled {
-        @apply cursor-not-allowed opacity-50;
-    }
-
-    button:disabled:hover {
-        @apply cursor-not-allowed opacity-50;
+    .direction-rtl {
+        direction: rtl;
     }
 
     [class^="icon-"],
     [class*=" icon-"] {
-        /* use !important to prevent issues with browser extensions that change fonts */
         font-family: "bagisto-shop" !important;
         speak: never;
         font-style: normal;
@@ -41,291 +212,8 @@ img.lazy {
         font-variant: normal;
         text-transform: none;
         line-height: 1 !important;
-
-        /* Better Font Rendering =========== */
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
-    }
-
-    .icon-gdpr-safe:before {
-        content: "\e84f";
-    }
-
-    .icon-checkout-address:before {
-        content: "\e944";
-    }
-
-    .icon-edit:before {
-        content: "\e943";
-    }
-
-    .icon-add-new:before {
-        content: "\e900";
-    }
-
-    .icon-arrow-down:before {
-        content: "\e901";
-    }
-
-    .icon-arrow-left-stylish:before {
-        content: "\e902";
-    }
-
-    .icon-arrow-left:before {
-        content: "\e903";
-    }
-
-    .icon-arrow-right-stylish:before {
-        content: "\e904";
-    }
-
-    .icon-arrow-right:before {
-        content: "\e905";
-    }
-
-    .icon-arrow-up:before {
-        content: "\e906";
-    }
-
-    .icon-astreisk:before {
-        content: "\e907";
-    }
-
-    .icon-bin:before {
-        content: "\e908";
-    }
-
-    .icon-box-fill:before {
-        content: "\e909";
-    }
-
-    .icon-calendar:before {
-        content: "\e90a";
-    }
-
-    .icon-camera-fill:before {
-        content: "\e90b";
-    }
-
-    .icon-camera:before {
-        content: "\e90c";
-    }
-
-    .icon-cancel:before {
-        content: "\e90d";
-    }
-
-    .icon-cart:before {
-        content: "\e90e";
-    }
-
-    .icon-check-box:before {
-        content: "\e90f";
-    }
-
-    .icon-compare-1:before {
-        content: "\e910";
-    }
-
-    .icon-compare:before {
-        content: "\e911";
-    }
-
-    .icon-dislike:before {
-        content: "\e912";
-    }
-
-    .icon-dollar-sign:before {
-        content: "\e913";
-    }
-
-    .icon-double-arrow:before {
-        content: "\e914";
-    }
-
-    .icon-download:before {
-        content: "\e915";
-    }
-
-    .icon-email:before {
-        content: "\e916";
-    }
-
-    .icon-error:before {
-        content: "\e917";
-    }
-
-    .icon-eye:before {
-        content: "\e918";
-    }
-
-    .icon-filter-1:before {
-        content: "\e919";
-    }
-
-    .icon-filter-fill:before {
-        content: "\e91a";
-    }
-
-    .icon-filter:before {
-        content: "\e91b";
-    }
-
-    .icon-flate-rate:before {
-        content: "\e91c";
-    }
-
-    .icon-Free-Shipping:before {
-        content: "\e91d";
-    }
-
-    .icon-grid-view-fill:before {
-        content: "\e91e";
-    }
-
-    .icon-grid-view:before {
-        content: "\e91f";
-    }
-
-    .icon-hamburger:before {
-        content: "\e920";
-    }
-
-    .icon-heart-1:before {
-        content: "\e921";
-    }
-
-    .icon-heart-2:before {
-        content: "\e922";
-    }
-
-    .icon-heart-fill:before {
-        content: "\e923";
-    }
-
-    .icon-heart:before {
-        content: "\e924";
-    }
-
-    .icon-left-arrow:before {
-        content: "\e925";
-    }
-
-    .icon-like:before {
-        content: "\e926";
-    }
-
-    .icon-listing-fill:before {
-        content: "\e927";
-    }
-
-    .icon-listing:before {
-        content: "\e928";
-    }
-
-    .icon-location:before {
-        content: "\e929";
-    }
-
-    .icon-minus:before {
-        content: "\e92a";
-    }
-
-    .icon-more:before {
-        content: "\e92b";
-    }
-
-    .icon-orders:before {
-        content: "\e92c";
-    }
-
-    .icon-pen:before {
-        content: "\e92d";
-    }
-
-    .icon-plus:before {
-        content: "\e92e";
-    }
-
-    .icon-product:before {
-        content: "\e92f";
-    }
-
-    .icon-radio-select:before {
-        content: "\e930";
-    }
-
-    .icon-radio-unselect:before {
-        content: "\e931";
-    }
-
-    .icon-right-arrow:before {
-        content: "\e932";
-    }
-
-    .icon-search:before {
-        content: "\e933";
-    }
-
-    .icon-share:before {
-        content: "\e934";
-    }
-
-    .icon-sort-1:before {
-        content: "\e935";
-    }
-
-    .icon-sort-by:before {
-        content: "\e936";
-    }
-
-    .icon-sort:before {
-        content: "\e937";
-        color: #7d7d7d;
-    }
-
-    .icon-star-fill:before {
-        content: "\e938";
-    }
-
-    .icon-star:before {
-        content: "\e939";
-    }
-
-    .icon-support:before {
-        content: "\e93a";
-    }
-
-    .icon-tick:before {
-        content: "\e93b";
-    }
-
-    .icon-toast-done:before {
-        content: "\e93c";
-    }
-
-    .icon-toast-error:before {
-        content: "\e93d";
-    }
-
-    .icon-toast-exclamation-mark:before {
-        content: "\e93e";
-    }
-
-    .icon-toast-info:before {
-        content: "\e93f";
-    }
-
-    .icon-truck:before {
-        content: "\e940";
-    }
-
-    .icon-uncheck:before {
-        content: "\e941";
-    }
-
-    .icon-users:before {
-        content: "\e942";
     }
 
     .journal-scroll::-webkit-scrollbar {
@@ -357,9 +245,19 @@ img.lazy {
         display: none;
     }
 
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
     .custom-select {
         -webkit-appearance: none;
         -moz-appearance: none;
+        appearance: none;
         background: transparent;
         background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
         background-repeat: no-repeat;
@@ -369,30 +267,6 @@ img.lazy {
 
     [dir="rtl"] .custom-select {
         background-position-x: calc(100% - (100% - 10px));
-    }
-
-    * {
-        @apply box-border font-poppins;
-    }
-
-    .scrollbar-hide::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* For IE, Edge and Firefox */
-    .scrollbar-hide {
-        -ms-overflow-style: none;
-        /* IE and Edge */
-        scrollbar-width: none;
-        /* Firefox */
-    }
-
-    .direction-ltr {
-        direction: ltr;
-    }
-
-    .direction-rtl {
-        direction: rtl;
     }
 
     .label-pending,
@@ -405,22 +279,22 @@ img.lazy {
         @apply text-[12px] text-white font-semibold py-px px-1.5 max-w-max rounded-[35px];
     }
 
-	.label-pending {
-		@apply bg-yellow-500;
-	}
-
-	.label-processing{
-		@apply bg-cyan-600;
+    .label-pending {
+        @apply bg-yellow-500;
     }
 
-	.label-completed,
-    .label-active {
-		@apply bg-green-600;
-	}
+    .label-processing {
+        @apply bg-cyan-600;
+    }
 
-	.label-closed {
-		@apply bg-indigo-600;
-	}
+    .label-completed,
+    .label-active {
+        @apply bg-green-600;
+    }
+
+    .label-closed {
+        @apply bg-indigo-600;
+    }
 
     .label-canceled {
         @apply bg-rose-600;
@@ -449,23 +323,13 @@ img.lazy {
     }
 
     @keyframes skeleton {
-        0% {
-            background-position: -1250px 0;
-        }
-
-        100% {
-            background-position: 1250px 0;
-        }
+        0%   { background-position: -1250px 0; }
+        100% { background-position:  1250px 0; }
     }
 
     @keyframes on-fade {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
+        0%   { opacity: 0; }
+        100% { opacity: 1; }
     }
 
     .wrapper-404 {
@@ -506,15 +370,11 @@ img.lazy {
         height: 100vh;
     }
 
-    html {
-        margin-top: 0px !important;
-    }
-
     .break-word-custom {
         word-break: break-word;
     }
 
-    .required:after {
+    .required::after {
         content: "*";
     }
 

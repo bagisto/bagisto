@@ -29,12 +29,24 @@
                 </a>
 
                 <!-- Save Button -->
+                <!-- Import Button. Saving now runs the import through to the end on its own, so it is confirmed first. The hidden submit is what is actually pressed, so the form still validates before anything is sent. -->
                 <button
-                    type="submit"
+                    type="button"
                     class="primary-button"
+                    @click="$emitter.emit('open-confirm-modal', {
+                        message: '@lang('admin::app.settings.data-transfer.imports.create.import-confirmation')',
+
+                        agree: () => $refs['importSubmit'].click()
+                    })"
                 >
                     @lang('admin::app.settings.data-transfer.imports.edit.save-btn')
                 </button>
+
+                <button
+                    type="submit"
+                    class="hidden"
+                    ref="importSubmit"
+                ></button>
             </div>
         </div>
 
@@ -45,7 +57,7 @@
                 {!! view_render_event('bagisto.admin.settings.data_transfer.imports.create.card.general.before', ['import' => $import]) !!}
 
                 <!-- Setup Import Panel -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.data-transfer.imports.edit.general')
                     </p>
@@ -135,35 +147,16 @@
 
                         <x-admin::form.control-group.error control-name="file" />
                     </x-admin::form.control-group>
-
-                    <!-- Images Directory Path -->
-                    <x-admin::form.control-group class="!mb-0">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.settings.data-transfer.imports.edit.images-directory')
-                        </x-admin::form.control-group.label>
-
-                        <x-admin::form.control-group.control
-                            type="text"
-                            name="images_directory_path"
-                            :value="old('images_directory_path') ?? $import->images_directory_path"
-                            :placeholder="trans('admin::app.settings.data-transfer.imports.edit.images-directory')"
-                        />
-
-                        <p class="mt-2 text-xs text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.settings.data-transfer.imports.edit.file-info')
-                        </p>
-
-                        <p class="mt-2 text-xs text-gray-600 dark:text-gray-300">
-                            @lang('admin::app.settings.data-transfer.imports.edit.file-info-example')
-                        </p>
-                    </x-admin::form.control-group>
                 </div>
+
+                <!-- Product Images -->
+                @include('admin::settings.data-transfer.imports.images')
 
                 {!! view_render_event('bagisto.admin.settings.data_transfer.imports.create.card.general.after', ['import' => $import]) !!}
             </div>
 
             <!-- Right Container -->
-            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+            <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
                 {!! view_render_event('bagisto.admin.settings.data_transfer.imports.create.card.accordion.settings.before', ['import' => $import]) !!}
 
                 <!-- Settings Panel -->
@@ -256,7 +249,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Process In Queue -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.data-transfer.imports.edit.process-in-queue')
                             </x-admin::form.control-group.label>

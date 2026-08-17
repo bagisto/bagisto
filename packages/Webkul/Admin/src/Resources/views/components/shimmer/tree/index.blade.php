@@ -7,11 +7,11 @@
 
             <!-- Group Name -->
             <div class="group_node flex max-w-max gap-1.5 py-1.5 ltr:pr-1.5 rtl:pl-1.5">
-                <div class="shimmer h-[21px] w-5"></div>
+                <div class="shimmer h-5.25 w-5"></div>
 
-                <div class="shimmer h-[21px] w-5"></div>
+                <div class="shimmer h-5.25 w-5"></div>
                 
-                <div class="shimmer h-[21px] w-[105px]"></div>
+                <div class="shimmer h-5.25 w-26.25"></div>
             </div>
         </div>
 
@@ -19,11 +19,11 @@
         <div class="ltr:ml-11 rtl:mr-11">
             @for ($k = 0; $k < 5; $k++)
                 <div class="flex max-w-max gap-1.5 py-1.5 ltr:pr-1.5 rtl:pl-1.5">
-                    <div class="shimmer h-[21px] w-5"></div>
+                    <div class="shimmer h-5.25 w-5"></div>
 
-                    <div class="shimmer h-[21px] w-5"></div>
+                    <div class="shimmer h-5.25 w-5"></div>
                     
-                    <div class="shimmer h-[21px] w-[105px]"></div>
+                    <div class="shimmer h-5.25 w-26.25"></div>
                 </div>
             @endfor
         </div>

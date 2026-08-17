@@ -35,6 +35,7 @@ it('should store a newly created sitemap', function () {
     postJson(route('admin.marketing.search_seo.sitemaps.store'), [
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
         'path' => '/',
+        'channels' => [core()->getCurrentChannel()->id],
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.create.success'));
@@ -51,7 +52,8 @@ it('should fail validation when required fields are missing on store', function 
     postJson(route('admin.marketing.search_seo.sitemaps.store'))
         ->assertUnprocessable()
         ->assertJsonValidationErrorFor('file_name')
-        ->assertJsonValidationErrorFor('path');
+        ->assertJsonValidationErrorFor('path')
+        ->assertJsonValidationErrorFor('channels');
 });
 
 // ============================================================================
@@ -67,6 +69,7 @@ it('should update an existing sitemap', function () {
         'id' => $sitemap->id,
         'file_name' => $fileName = strtolower(fake()->word()).'.xml',
         'path' => $sitemap->path,
+        'channels' => [core()->getCurrentChannel()->id],
     ])
         ->assertOk()
         ->assertSeeText(trans('admin::app.marketing.search-seo.sitemaps.index.edit.success'));

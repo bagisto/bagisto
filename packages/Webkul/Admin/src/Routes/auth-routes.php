@@ -34,7 +34,9 @@ Route::group(['prefix' => config('app.admin_url')], function () {
     Route::controller(TwoFactorController::class)->prefix('two-factor')->group(function () {
         Route::get('verify', 'showVerifyForm')->name('admin.two_factor.verify.form');
 
-        Route::post('verify', 'verifyTwoFactorCode')->name('admin.two_factor.verifyTwoFactorCode');
+        Route::post('verify', 'verifyTwoFactorCode')
+            ->middleware('throttle:5,1')
+            ->name('admin.two_factor.verify.store');
     });
 
     /**

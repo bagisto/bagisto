@@ -10,7 +10,7 @@
             type="text/x-template"
             id="v-product-configurable-options-template"
         >
-            <div class="w-[455px] max-w-full max-sm:w-full">
+            <div class="w-113.75 max-w-full max-sm:w-full">
                 <input
                     type="hidden"
                     name="selected_configurable_option"
@@ -66,7 +66,7 @@
                                 <template v-if="option.id">
                                     <!-- Color Swatch Options -->
                                     <label
-                                        class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none"
+                                        class="relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-hidden"
                                         :class="{'ring-2 ring-gray-900' : option.id == attribute.selectedValue}"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'color'"
@@ -93,14 +93,15 @@
                                         </v-field>
 
                                         <span
-                                            class="h-8 w-8 rounded-full border border-gray-200 max-sm:h-[25px] max-sm:w-[25px] peer-focus-visible:ring-2 peer-focus-visible:ring-gray-900 peer-focus-visible:ring-offset-2"
+                                            class="h-8 w-8 rounded-full border border-gray-200 max-sm:h-6.25 max-sm:w-6.25 peer-focus-visible:ring-2 peer-focus-visible:ring-gray-900 peer-focus-visible:ring-offset-2"
+                                            tabindex="0"
                                             :style="{ 'background-color': option.swatch_value }"
                                         ></span>
                                     </label>
 
                                     <!-- Image Swatch Options -->
                                     <label 
-                                        class="group relative flex h-[60px] w-[60px] cursor-pointer items-center justify-center overflow-hidden rounded-md border bg-white font-medium uppercase text-gray-900 hover:bg-gray-50 sm:py-6"
+                                        class="group relative flex h-15 w-15 cursor-pointer items-center justify-center overflow-hidden rounded-md border bg-white font-medium uppercase text-gray-900 hover:bg-gray-50 sm:py-6"
                                         :class="{'border-navyBlue' : option.id == attribute.selectedValue }"
                                         :title="option.label"
                                         v-if="attribute.swatch_type == 'image'"
@@ -130,7 +131,8 @@
                                         <img
                                             :src="option.swatch_value"
                                             :title="option.label"
-                                            class="peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded-md"
+                                            :alt="option.swatch_alt || option.label"
+                                            class="rounded-md peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2"
                                         />
                                     </label>
 

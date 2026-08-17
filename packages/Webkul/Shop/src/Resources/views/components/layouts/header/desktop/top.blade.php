@@ -6,13 +6,13 @@
         <!-- Currencies -->
         <div class="flex w-20 items-center justify-between gap-2.5 py-3">
             <div
-                class="shimmer h-6 w-12 rounded"
+                class="shimmer h-6 w-12 rounded-sm"
                 role="presentation"
             >
             </div>
 
             <div
-                class="shimmer h-6 w-6 rounded"
+                class="shimmer h-6 w-6 rounded-sm"
                 role="presentation"
             >
             </div>
@@ -20,7 +20,7 @@
 
         <!-- Offers -->
         <div
-            class="shimmer h-6 w-72 rounded py-3"
+            class="shimmer h-6 w-72 rounded-sm py-3"
             role="presentation"
         >
         </div>
@@ -34,7 +34,7 @@
             </div>
 
             <div
-                class="shimmer h-6 w-14 rounded"
+                class="shimmer h-6 w-14 rounded-sm"
                 role="presentation"
             >
             </div>
@@ -81,7 +81,7 @@
                 </x-slot>
 
                 <!-- Dropdown Content -->
-                <x-slot:content class="journal-scroll max-h-[500px] !p-0">
+                <x-slot:content class="journal-scroll max-h-125 p-0!">
                     <v-currency-switcher></v-currency-switcher>
                 </x-slot>
             </x-shop::dropdown>
@@ -137,7 +137,7 @@
                 </x-slot>
             
                 <!-- Dropdown Content -->
-                <x-slot:content class="journal-scroll max-h-[500px] !p-0">
+                <x-slot:content class="journal-scroll max-h-125 p-0!">
                     <v-locale-switcher></v-locale-switcher>
                 </x-slot>
             </x-shop::dropdown>
@@ -150,10 +150,10 @@
         type="text/x-template"
         id="v-currency-switcher-template"
     >
-        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-[500px]">
+        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-125">
             <button
                 type="button"
-                class="w-full text-left ltr:text-left rtl:text-right cursor-pointer px-5 py-2 text-base hover:bg-gray-100 focus-visible:outline-none focus-visible:bg-gray-100"
+                class="w-full cursor-pointer px-5 py-2 text-base hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-hidden ltr:text-left rtl:text-right"
                 v-for="currency in currencies"
                 :class="{'bg-gray-100': currency.code == '{{ core()->getCurrentCurrencyCode() }}'}"
                 @click="change(currency)"
@@ -167,10 +167,10 @@
         type="text/x-template"
         id="v-locale-switcher-template"
     >
-        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-[500px]">
+        <div class="my-2.5 grid gap-1 overflow-auto max-md:my-0 sm:max-h-125">
             <button
                 type="button"
-                class="flex w-full items-center gap-2.5 px-5 py-2 text-base hover:bg-gray-100 text-left ltr:text-left rtl:text-right focus-visible:outline-none focus-visible:bg-gray-100"
+                class="flex w-full cursor-pointer items-center gap-2.5 px-5 py-2 text-base hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-hidden ltr:text-left rtl:text-right"
                 :class="{'bg-gray-100': locale.code == '{{ app()->getLocale() }}'}"
                 v-for="locale in locales"
                 @click="change(locale)"                  

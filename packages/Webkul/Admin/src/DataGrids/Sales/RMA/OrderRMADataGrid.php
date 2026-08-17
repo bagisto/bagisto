@@ -107,7 +107,7 @@ class OrderRMADataGrid extends DataGrid
             'filterable' => true,
             'closure' => function ($row) {
                 if (! empty($row->is_guest)) {
-                    return '<span>'.$row->customer_name.' ('.trans('admin::app.sales.rma.all-rma.index.datagrid.guest').')'.'</span>';
+                    return $row->customer_name.' ('.trans('admin::app.sales.rma.all-rma.index.datagrid.guest').')';
                 }
 
                 return $row->customer_name;
@@ -226,7 +226,7 @@ class OrderRMADataGrid extends DataGrid
     public function prepareActions(): void
     {
         $this->addAction([
-            'icon' => 'icon-eye',
+            'icon' => 'icon-view',
             'title' => trans('admin::app.sales.rma.all-rma.index.datagrid.action-view'),
             'method' => 'GET',
             'url' => function ($row) {

@@ -71,7 +71,7 @@
                     </x-slot>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
@@ -94,7 +94,7 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.general.before', ['category' => $category]) !!}
 
                 <!-- General -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.edit.general')
                     </p>
@@ -119,7 +119,7 @@
                                 id="{{ $currentLocale->code }}[name]"
                                 v-bind="field"
                                 :class="[errors['{{ $currentLocale->code }}[name]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                 placeholder="{{ trans('admin::app.catalog.categories.edit.name') }}"
                                 v-slugify-target:{{$currentLocale->code.'[slug]'}}="setValues"
                             />
@@ -156,7 +156,7 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.description_images.before', ['category' => $category]) !!}
 
                 <!-- Description and images -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.edit.description-and-images')
                     </p>
@@ -196,7 +196,14 @@
 
                             <x-admin::media.images
                                 name="logo_path"
-                                :uploaded-images="$category->logo_path ? [['id' => 'logo_path', 'url' => $category->logo_url]] : []"
+                                meta-name="logo_meta"
+                                enable-seo="true"
+                                :uploaded-images="$category->logo_path ? [[
+                                    'id'        => 'logo_path',
+                                    'url'       => $category->logo_url,
+                                    'file_name' => $category->logo_file_name,
+                                    'alt_text'  => $category->logo_alt,
+                                ]] : []"
                             />
                         </div>
 
@@ -212,7 +219,14 @@
 
                             <x-admin::media.images
                                 name="banner_path"
-                                :uploaded-images="$category->banner_path ? [['id' => 'banner_path', 'url' => $category->banner_url]] : []"
+                                meta-name="banner_meta"
+                                enable-seo="true"
+                                :uploaded-images="$category->banner_path ? [[
+                                    'id'        => 'banner_path',
+                                    'url'       => $category->banner_url,
+                                    'file_name' => $category->banner_file_name,
+                                    'alt_text'  => $category->banner_alt,
+                                ]] : []"
                                 width="220px"
                             />
                         </div>
@@ -224,7 +238,7 @@
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.seo.before', ['category' => $category]) !!}
 
                 <!-- SEO Details -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.catalog.categories.edit.seo-details')
                     </p>
@@ -273,7 +287,7 @@
                                     id="{{$currentLocale->code}}[slug]"
                                     name="{{$currentLocale->code}}[slug]"
                                     :class="[errors['{{$currentLocale->code}}[slug]'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                    class="flex min-h-[39px] w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                    class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                     v-bind="field"
                                     placeholder="{{ trans('admin::app.catalog.categories.edit.slug') }}"
                                     v-slugify-target:{{$currentLocale->code.'[slug]'}}
@@ -301,7 +315,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Meta Description -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.meta-description')
                             </x-admin::form.control-group.label>
@@ -322,7 +336,7 @@
             </div>
 
             <!-- Right Section -->
-            <div class="flex w-[360px] max-w-full flex-col gap-2">
+            <div class="flex w-90 max-w-full flex-col gap-2">
                 <!-- Settings -->
 
                 {!! view_render_event('bagisto.admin.catalog.categories.edit.card.accordion.settings.before', ['category' => $category]) !!}
@@ -387,7 +401,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Visible In Menu -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.catalog.categories.edit.visible-in-menu')
                             </x-admin::form.control-group.label>
@@ -422,7 +436,7 @@
 
                     <x-slot:content>
                         @foreach ($attributes as $attribute)
-                            <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5 last:!mb-0">
+                            <x-admin::form.control-group class="mb-2! flex items-center gap-2.5 last:mb-0!">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     :id="$attribute->name ?? $attribute->admin_name"

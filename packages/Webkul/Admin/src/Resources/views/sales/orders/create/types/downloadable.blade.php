@@ -13,7 +13,7 @@
         id="v-product-downloadable-options-template"
     >
         <x-admin::form.control-group class="p-4">
-            <x-admin::form.control-group.label class="!mt-0 dark:text-white">
+            <x-admin::form.control-group.label class="mt-0! dark:text-white">
                 @lang('admin::app.sales.orders.create.types.downloadable.title')
             </x-admin::form.control-group.label>
 

@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Verbleibende Downloads',
                 'status' => 'Status',
                 'title' => 'Titel',
+                'unlimited' => 'Unbegrenzt',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Standardüberschrift',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Galerie schließen',
+            'view-image' => 'Bild ansehen',
+            'view-video' => 'Video ansehen',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Standardumschaltung',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Anhänge hinzufügen',
                 'add-image' => 'Bild/Video hinzufügen',
+                'invalid-file-type' => 'Der ausgewählte Dateityp ist nicht zulässig.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Willkommen Gast',
                     'wishlist' => 'Wunschliste',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Ein Produkt anhand des Namens zur Wunschliste des Kunden hinzufügen.',
+                'add-to-wishlist-query' => 'Der Produktname oder URL-Schlüssel, der zur Wunschliste hinzugefügt werden soll.',
+                'proceed-to-checkout' => 'Öffnen Sie die Kassenseite, um eine Bestellung der Artikel im Warenkorb aufzugeben.',
+                'search-products' => 'Durchsuchen Sie den Shop-Katalog per Stichwort nach Produkten und öffnen Sie die passenden Ergebnisse.',
+                'search-products-query' => 'Die Stichwörter oder der Produktname, nach denen im Katalog gesucht werden soll.',
+                'subscribe-newsletter' => 'Eine E-Mail-Adresse für den Shop-Newsletter abonnieren.',
+                'subscribe-newsletter-email' => 'Die E-Mail-Adresse, die für den Newsletter abonniert werden soll.',
+                'view-cart' => 'Öffnen Sie die Warenkorbseite, damit der Kunde die hinzugefügten Produkte überprüfen kann.',
+                'view-product' => 'Die Detailseite eines Produkts anhand des Produktnamens öffnen.',
+                'view-product-query' => 'Der Produktname oder URL-Schlüssel, der geöffnet werden soll.',
+                'view-wishlist' => 'Die Wunschlistenseite öffnen, um die gespeicherten Produkte des Kunden zu überprüfen.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Menge verringern',
             'increase-quantity' => 'Menge erhöhen',
+            'remove-item' => 'Artikel entfernen',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Rabattbetrag',
                 'grand-total' => 'Gesamtsumme',
                 'included' => 'Enthalten',
+                'excl-tax' => 'Exkl. Steuer:',
                 'incl-tax' => 'Inkl. Steuer:',
                 'items-discount' => 'Artikelrabatt',
                 'shipping-discount' => 'Versandrabatt',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Akzeptieren',
-                'awaiting' => 'Wartend',
-                'canceled' => 'Storniert',
-                'declined' => 'Abgelehnt',
-                'dispatched-package' => 'Paket versandt',
+                'accept' => 'Genehmigt',
+                'awaiting' => 'Warten auf Rücksendung',
+                'canceled' => 'Anfrage storniert',
+                'declined' => 'Anfrage abgelehnt',
+                'dispatched-package' => 'Rücksendung unterwegs',
                 'item-canceled' => 'Artikel storniert',
                 'not-received-package-yet' => 'Paket noch nicht erhalten',
-                'pending' => 'Ausstehend',
+                'pending' => 'Prüfung ausstehend',
                 'processing' => 'Verarbeitung',
-                'received-package' => 'Paket erhalten',
+                'received-package' => 'Erstattet',
                 'solved' => 'Gelöst',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'Der RMA-Status wurde bereits storniert.',
+            'cancel-not-allowed' => 'Das Stornieren dieser RMA-Anfrage ist nicht zulässig.',
             'cancel-success' => 'RMA-Status wurde erfolgreich storniert.',
+            'close-not-allowed' => 'Das Schließen dieser RMA-Anfrage ist nicht zulässig.',
             'create-success' => 'Anfrage erfolgreich erstellt.',
             'creation-error' => 'Der RMA-Status kann nicht aktualisiert werden, da die Rechnung für diese Bestellung nicht erstellt wurde.',
             'invalid-item' => 'Der ausgewählte Bestellartikel ist ungültig.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'Das Wiedereröffnen dieser RMA-Anfrage ist nicht zulässig.',
             'send-message' => ':name erfolgreich gesendet.',
             'update-success' => ':name erfolgreich aktualisiert.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Vom Vertrag zurücktreten',
+            'view_existing' => 'Ihren Widerruf anzeigen',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Vom Vertrag zurücktreten',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Vom Vertrag zurücktreten',
+            'heading' => 'Vom Vertrag Zurücktreten',
+            'intro' => 'Geben Sie die Bestellnummer und die beim Bezahlvorgang verwendete E-Mail-Adresse ein. Wir senden Ihnen einen Link zur Einreichung Ihres Widerrufs.',
+            'order_number' => 'Bestellnummer',
+            'email' => 'E-Mail-Adresse',
+            'submit' => 'Widerrufslink senden',
+            'sent_notice' => 'Sofern eine passende Bestellung existiert, haben wir soeben einen Widerrufslink an diese Adresse gesendet. Er ist 24 Stunden gültig.',
+            'legal_note' => 'Sie haben gemäß der EU-Richtlinie 2011/83/EU (in der jeweils geänderten Fassung) das gesetzliche Recht, innerhalb von 14 Tagen vom Vertrag zurückzutreten. Andere Formen des Widerrufs – etwa eine schriftliche Erklärung an unseren Kundenservice – bleiben unberührt.',
+        ],
+
+        'form' => [
+            'page_title' => 'Widerruf bestätigen',
+            'heading' => 'Widerruf vom Vertrag bestätigen',
+            'legal_notice_title' => 'Dies ist eine rechtsverbindliche Erklärung',
+            'legal_effect' => 'Mit dem Absenden dieses Formulars üben Sie Ihr gesetzliches Widerrufsrecht für die Bestellung Nr. :order_id aus. Die Erklärung wird mit dem Absenden rechtswirksam.',
+            'order_summary' => 'Bestellung',
+            'order_total' => 'Gesamtbetrag',
+            'order_items' => 'Artikel',
+            'placed_on' => 'Bestellt am :date',
+            'reason_label' => 'Grund',
+            'reason_optional' => '(optional)',
+            'reason_help' => 'Sie sind nicht verpflichtet, einen Grund anzugeben. Alles, was Sie hier eintragen, wird auf dem Widerrufsnachweis erfasst und an den Händler übermittelt.',
+            'reason_placeholder' => 'Zum Beispiel: „Habe es mir anders überlegt“, „Artikel entspricht nicht der Beschreibung“ oder leer lassen.',
+            'submit' => 'Widerruf absenden',
+            'cancel' => 'Abbrechen und zurück',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Widerrufsbestätigung',
+            'heading' => 'Ihr Widerruf ist bei uns eingegangen',
+            'heading_received' => 'Ihr Widerruf ist bei uns eingegangen',
+            'heading_refunded' => 'Ihre Erstattung wurde ausgestellt',
+            'heading_declined' => 'Ihr Widerruf wurde abgelehnt',
+            'intro' => 'Wir haben Ihre Erklärung erfasst. Diese Seite und die soeben versandte E-Mail dienen Ihnen beide als Bestätigung auf einem dauerhaften Datenträger.',
+            'intro_received' => 'Wir haben Ihre Erklärung erfasst. Diese Seite und die soeben versandte E-Mail dienen Ihnen beide als Bestätigung auf einem dauerhaften Datenträger.',
+            'intro_refunded' => 'Der Händler hat Ihre Erstattung bearbeitet. Die Rückzahlung sollte in Kürze auf Ihrem ursprünglichen Zahlungsmittel eingehen.',
+            'intro_declined' => 'Der Händler bestreitet Ihren Anspruch auf eine Erstattung aufgrund dieser Erklärung. Bitte beachten Sie die untenstehenden Angaben zum Grund und zu Ihren verbleibenden Optionen.',
+            'received_at' => 'Eingegangen am',
+            'reference' => 'Referenz',
+            'copy_reference' => 'Referenz kopieren',
+            'reference_copied' => 'Referenz in die Zwischenablage kopiert.',
+            'order' => 'Bestellung',
+            'email' => 'E-Mail',
+            'reason' => 'Grund',
+            'status' => 'Status',
+            'status_received' => 'Eingegangen',
+            'status_refunded' => 'Erstattet',
+            'status_declined' => 'Abgelehnt',
+            'print' => 'Drucken',
+            'next_steps_title' => 'Wie es weitergeht',
+            'step_received' => 'Ihre Erklärung ist eingegangen und wurde erfasst.',
+            'step_email' => 'Bestätigungs-E-Mail an Ihren Posteingang gesendet.',
+            'step_refund' => 'Erstattung innerhalb von 14 Tagen.',
+            'step_refund_done' => 'Die Erstattung wurde ausgestellt.',
+            'step_declined' => 'Widerruf vom Händler abgelehnt.',
+            'declined_reason_label' => 'Vom Händler angegebener Grund',
+            'declined_notice' => 'Alle übrigen Rechtsbehelfe nach EU-Verbraucherrecht bleiben Ihnen erhalten. Sollten Sie mit dieser Entscheidung nicht einverstanden sein, wenden Sie sich bitte direkt an den Händler.',
+            'refund_notice' => 'Wir erstatten mit demselben Zahlungsmittel, das Sie bei der ursprünglichen Transaktion verwendet haben, sofern nicht ausdrücklich etwas anderes vereinbart wurde.',
+            'email_sent' => 'Die Bestätigungs-E-Mail wurde gesendet.',
+            'email_pending' => 'Die Bestätigungs-E-Mail konnte nicht sofort gesendet werden; unser Team wird sich darum kümmern. Bitte speichern Sie diese Seite als Beleg.',
+            'durable_medium_notice' => 'Diese Seite ist Ihr Beleg. Sie können sie speichern oder ausdrucken.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Bestätigung Ihres Widerrufs – Bestellung :order_id',
+                'title' => 'Widerruf eingegangen',
+                'title_received' => 'Widerruf eingegangen',
+                'title_refunded' => 'Erstattung ausgestellt',
+                'title_declined' => 'Widerruf abgelehnt',
+                'greeting' => 'Guten Tag,',
+                'intro' => 'Wir haben Ihre Erklärung des Widerrufs vom Vertrag für die Bestellung Nr. :order_id erhalten. Der rechtswirksame Eingangszeitpunkt ist unten festgehalten.',
+                'intro_received' => 'Wir haben Ihre Erklärung des Widerrufs vom Vertrag für die Bestellung Nr. :order_id erhalten. Der rechtswirksame Eingangszeitpunkt ist unten festgehalten.',
+                'intro_refunded' => 'Ihre Erstattung für die Bestellung Nr. :order_id wurde ausgestellt. Die Rückzahlung sollte in Kürze auf Ihrem ursprünglichen Zahlungsmittel eingehen.',
+                'intro_declined' => 'Der Händler bestreitet Ihren Anspruch auf eine Erstattung für die Bestellung Nr. :order_id aufgrund dieser Erklärung. Der angegebene Grund ist nachstehend aufgeführt.',
+                'summary' => 'Widerrufsübersicht',
+                'received_at' => 'Eingegangen am',
+                'reference' => 'Referenz',
+                'order' => 'Bestellung',
+                'email' => 'E-Mail',
+                'reason' => 'Angegebener Grund',
+                'declined_reason' => 'Grund der Ablehnung',
+                'refund_notice' => 'Sofern eine Erstattung geschuldet ist, erstatten wir mit demselben Zahlungsmittel, das Sie bei der ursprünglichen Transaktion verwendet haben, innerhalb von 14 Tagen ab dem oben genannten Datum, sofern nicht ausdrücklich etwas anderes vereinbart wurde.',
+                'footer' => 'Diese Nachricht ist die nach Artikel 11a der Richtlinie 2011/83/EU (geändert durch die Richtlinie (EU) 2023/2673) erforderliche Bestätigung auf einem dauerhaften Datenträger. Bitte bewahren Sie sie für Ihre Unterlagen auf.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Ihr Widerrufslink',
+                'title' => 'Ihr Widerrufslink',
+                'intro' => 'Verwenden Sie den unten stehenden Link, um Ihren Widerruf für die Bestellung :order_id einzureichen. Der Link ist 24 Stunden gültig.',
+                'button' => 'Widerrufsformular öffnen',
+                'expiry' => 'Der Link läuft in 24 Stunden ab. Wenn Sie diese E-Mail nicht angefordert haben, können Sie sie ignorieren.',
+            ],
         ],
     ],
 ];

@@ -15,7 +15,7 @@
             type="text/x-template"
             id="v-booking-information-template"
         >
-            <div class="mt-6 grid w-full max-w-[470px] grid-cols-1 gap-6">
+            <div class="mt-6 grid w-full max-w-117.5 grid-cols-1 gap-6">
                 @if ($bookingProduct->location)
                     <div class="flex gap-4">
                         <span class="icon-location text-2xl"></span>
@@ -45,13 +45,13 @@
                     </div>
                 @endif
 
-                <div class="w-full max-w-[470px]">
+                <div class="w-full max-w-117.5">
                     @include ('shop::products.view.types.booking.' . $bookingProduct->type, ['bookingProduct' => $bookingProduct])
                 </div>
 
                 @if (! $bookingProduct->allow_cancellation)
                     <div class="flex items-start gap-3 rounded-md border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
-                        <span class="icon-warning mt-0.5 text-lg"></span>
+                        <span class="icon-error mt-0.5 text-lg"></span>
 
                         <div>
                             <p class="font-semibold">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html
     lang="{{ app()->getLocale() }}"
-    dir="{{ in_array(app()->getLocale(), ['ar', 'fa', 'he']) ? 'rtl' : 'ltr' }}"
+    dir="{{ \Webkul\Core\Helpers\SupportedLocales::direction(app()->getLocale()) }}"
 >
     <head>
         <title>
@@ -38,98 +38,12 @@
     </head>
 
     @php
-        $locales = [
-            'ar'    => 'arabic',
-            'bn'    => 'bengali',
-            'ca'    => 'catalan',
-            'de'    => 'german',
-            'en'    => 'english',
-            'es'    => 'spanish',
-            'fa'    => 'persian',
-            'fr'    => 'french',
-            'he'    => 'hebrew',
-            'hi_IN' => 'hindi',
-            'id'    => 'indonesian',
-            'it'    => 'italian',
-            'ja'    => 'japanese',
-            'nl'    => 'dutch',
-            'pl'    => 'polish',
-            'pt_BR' => 'portuguese',
-            'ro'    => 'romanian',
-            'ru'    => 'russian',
-            'sin'   => 'sinhala',
-            'tr'    => 'turkish',
-            'uk'    => 'ukrainian',
-            'zh_CN' => 'chinese',
-        ];
+        use Webkul\Core\Helpers\SupportedCurrencies;
+        use Webkul\Core\Helpers\SupportedLocales;
 
-        $currencies = [
-            'AED' => 'united-arab-emirates-dirham',
-            'ARS' => 'argentine-peso',
-            'AUD' => 'australian-dollar',
-            'BDT' => 'bangladeshi-taka',
-            'BHD' => 'bahraini-dinar',
-            'BRL' => 'brazilian-real',
-            'CAD' => 'canadian-dollar',
-            'CHF' => 'swiss-franc',
-            'CLP' => 'chilean-peso',
-            'CNY' => 'chinese-yuan',
-            'COP' => 'colombian-peso',
-            'CZK' => 'czech-koruna',
-            'DKK' => 'danish-krone',
-            'DZD' => 'algerian-dinar',
-            'EGP' => 'egyptian-pound',
-            'EUR' => 'euro',
-            'FJD' => 'fijian-dollar',
-            'GBP' => 'british-pound-sterling',
-            'HKD' => 'hong-kong-dollar',
-            'HUF' => 'hungarian-forint',
-            'IDR' => 'indonesian-rupiah',
-            'ILS' => 'israeli-new-shekel',
-            'INR' => 'indian-rupee',
-            'JOD' => 'jordanian-dinar',
-            'JPY' => 'japanese-yen',
-            'KRW' => 'south-korean-won',
-            'KWD' => 'kuwaiti-dinar',
-            'KZT' => 'kazakhstani-tenge',
-            'LBP' => 'lebanese-pound',
-            'LKR' => 'sri-lankan-rupee',
-            'LYD' => 'libyan-dinar',
-            'MAD' => 'moroccan-dirham',
-            'MUR' => 'mauritian-rupee',
-            'MXN' => 'mexican-peso',
-            'MYR' => 'malaysian-ringgit',
-            'NGN' => 'nigerian-naira',
-            'NOK' => 'norwegian-krone',
-            'NPR' => 'nepalese-rupee',
-            'NZD' => 'new-zealand-dollar',
-            'OMR' => 'omani-rial',
-            'PAB' => 'panamanian-balboa',
-            'PEN' => 'peruvian-nuevo-sol',
-            'PHP' => 'philippine-peso',
-            'PKR' => 'pakistani-rupee',
-            'PLN' => 'polish-zloty',
-            'PYG' => 'paraguayan-guarani',
-            'QAR' => 'qatari-rial',
-            'RON' => 'romanian-leu',
-            'RUB' => 'russian-ruble',
-            'SAR' => 'saudi-riyal',
-            'SEK' => 'swedish-krona',
-            'SGD' => 'singapore-dollar',
-            'THB' => 'thai-baht',
-            'TND' => 'tunisian-dinar',
-            'TRY' => 'turkish-lira',
-            'TWD' => 'new-taiwan-dollar',
-            'UAH' => 'ukrainian-hryvnia',
-            'USD' => 'united-states-dollar',
-            'UZS' => 'uzbekistani-som',
-            'VEF' => 'venezuelan-bolívar',
-            'VND' => 'vietnamese-dong',
-            'XAF' => 'cfa-franc-beac',
-            'XOF' => 'cfa-franc-bceao',
-            'ZAR' => 'south-african-rand',
-            'ZMW' => 'zambian-kwacha'
-        ];
+        $locales = array_map(fn ($locale) => $locale['name'], SupportedLocales::ALL);
+
+        $currencies = array_map(fn ($currency) => $currency['name'], SupportedCurrencies::ALL);
     @endphp
 
     <body>
@@ -150,7 +64,7 @@
             >
                 <!-- Left Side Welcome to Installation -->
                 <div class="flex flex-col justify-center">
-                    <div class="m-auto grid h-[100vh] max-w-[362px] items-end">
+                    <div class="m-auto grid h-[100vh] max-w-90.5 items-end">
                         <div class="grid gap-4">
                             <img
                                 src="{{ bagisto_asset('images/installer/bagisto-logo.svg', 'installer') }}"
@@ -314,7 +228,7 @@
                 <!-- Right Side Components -->
                 <!-- Start -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'start'"
                 >
                     <x-installer::form
@@ -333,9 +247,9 @@
                                 </p>
                             </div>
 
-                            <div class="flex h-[388px] flex-col items-center gap-3 overflow-y-auto px-7 py-4">
+                            <div class="flex h-97 flex-col items-center gap-3 overflow-y-auto px-7 py-4">
                                 <div class="container overflow-hidden">
-                                    <div class="flex h-[100px] flex-col justify-end gap-3">
+                                    <div class="flex h-25 flex-col justify-end gap-3">
                                         <p class="text-center text-sm text-gray-600">
                                             @lang('installer::app.installer.index.installation-description')
                                         </p>
@@ -392,7 +306,7 @@
 
                 <!-- System Requirements -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'systemRequirements'"
                 >
                     <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -401,7 +315,7 @@
                         </p>
                     </div>
 
-                    <div class="flex h-[486px] flex-col gap-4 overflow-y-auto border-b border-gray-300 px-7 py-4">
+                    <div class="flex h-121.5 flex-col gap-4 overflow-y-auto border-b border-gray-300 px-7 py-4">
                         <div class="flex items-center gap-1">
                             <span class="{{ $phpVersion['supported'] ? 'icon-tick text-xl text-green-500' : '' }}"></span>
 
@@ -457,7 +371,7 @@
 
                 <!-- Environment Configuration Database -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'envDatabase'"
                 >
                     <x-installer::form
@@ -475,7 +389,7 @@
                                 </p>
                             </div>
 
-                            <div class="flex h-[484px] flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
+                            <div class="flex h-121 flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
                                 <!-- Database Connection-->
                                 <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
@@ -570,8 +484,8 @@
                                         type="text"
                                         name="db_prefix"
                                         ::value="envData.db_prefix"
-                                        ::rules="{ 
-                                            max: 4, 
+                                        ::rules="{
+                                            max: 4,
                                             regex: /^[a-zA-Z0-9_]*$/
                                         }"
                                         :label="trans('installer::app.installer.index.environment-configuration.database-prefix')"
@@ -646,7 +560,7 @@
 
                 <!-- Ready For Installation -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'readyForInstallation'"
                 >
                     <x-installer::form
@@ -664,7 +578,7 @@
                                 </p>
                             </div>
 
-                            <div class="flex h-[484px] flex-col justify-center gap-4 overflow-y-auto border-b border-gray-300 px-7 py-4">
+                            <div class="flex h-121 flex-col justify-center gap-4 overflow-y-auto border-b border-gray-300 px-7 py-4">
                                 <div class="grid gap-1">
                                     <p class="text-lg font-semibold text-gray-800">
                                         @lang('installer::app.installer.index.ready-for-installation.install-info')
@@ -722,7 +636,7 @@
 
                 <!-- Installation Processing -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'installProgress'"
                 >
                     <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -731,7 +645,7 @@
                         </p>
                     </div>
 
-                    <div class="flex h-[484px] flex-col justify-center gap-4 overflow-y-auto px-7 py-4">
+                    <div class="flex h-121 flex-col justify-center gap-4 overflow-y-auto px-7 py-4">
                         <div class="flex flex-col gap-4">
                             <p class="text-lg font-bold text-gray-800">
                                 @lang('installer::app.installer.index.installation-processing.bagisto')
@@ -755,7 +669,7 @@
 
                 <!-- Environment Configuration .ENV -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border-[1px] border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'envConfiguration'"
                 >
                     <x-installer::form
@@ -773,7 +687,7 @@
                                 </p>
                             </div>
 
-                            <div class="flex h-[484px] flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
+                            <div class="flex h-121 flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
                                 <!-- Application Name -->
                                 <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
@@ -854,7 +768,7 @@
                                     class="p-1.5"
                                     :style="warning['container'], warning['message']"
                                 >
-                                    <i class="icon-limited !text-black"></i>
+                                    <i class="icon-limited text-black!"></i>
 
                                     @lang('installer::app.installer.index.environment-configuration.warning-message')
                                 </div>
@@ -919,7 +833,7 @@
                                         </x-installer::form.control-group.label>
 
                                         @foreach ($locales as $key => $locale)
-                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-1">
+                                            <x-installer::form.control-group class="mb-0! flex w-max cursor-pointer select-none items-center gap-1">
                                                 @php
                                                     $selectedOption = ($key == config('app.locale'));
                                                 @endphp
@@ -943,7 +857,7 @@
 
                                                 <x-installer::form.control-group.label
                                                     for="allowed_locale[{{ $key }}]"
-                                                    class="cursor-pointer !text-sm !font-semibold"
+                                                    class="cursor-pointer text-sm! font-semibold!"
                                                 >
                                                     @lang("installer::app.installer.index.$locale")
                                                 </x-installer::form.control-group.label>
@@ -958,7 +872,7 @@
                                         </x-installer::form.control-group.label>
 
                                         @foreach ($currencies as $key => $currency)
-                                            <x-installer::form.control-group class="!mb-0 flex w-max cursor-pointer select-none items-center gap-1">
+                                            <x-installer::form.control-group class="mb-0! flex w-max cursor-pointer select-none items-center gap-1">
                                                 @php
                                                     $selectedOption = $key == config('app.currency');
                                                 @endphp
@@ -982,7 +896,7 @@
 
                                                 <x-installer::form.control-group.label
                                                     for="currency[{{ $key }}]"
-                                                    class="cursor-pointer !text-sm !font-semibold"
+                                                    class="cursor-pointer text-sm! font-semibold!"
                                                 >
                                                     @lang("installer::app.installer.index.environment-configuration.$currency")
                                                 </x-installer::form.control-group.label>
@@ -1008,7 +922,7 @@
 
                 <!-- Create Sample Products -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'createSampleProducts'"
                 >
                     <x-installer::form
@@ -1026,7 +940,7 @@
                                 </p>
                             </div>
 
-                            <div class="flex h-[484px] flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
+                            <div class="flex h-121 flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
                                 <!-- Sample Products -->
                                 <x-admin::form.control-group.label>
                                     @lang("installer::app.installer.index.sample-products.sample-products")
@@ -1070,7 +984,7 @@
 
                 <!-- Create Administrator -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'createAdmin'"
                 >
                     <x-installer::form
@@ -1088,7 +1002,7 @@
                                 </p>
                             </div>
 
-                            <div class="flex h-[484px] flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
+                            <div class="flex h-121 flex-col gap-3 overflow-y-auto border-b border-gray-300 px-7 py-4">
                                 <!-- Admin -->
                                 <x-installer::form.control-group class="mb-2.5">
                                     <x-installer::form.control-group.label class="required">
@@ -1176,7 +1090,7 @@
 
                 <!-- Installation Completed -->
                 <div
-                    class="w-full max-w-[568px] rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
+                    class="w-full max-w-142 rounded-lg border border-gray-300 bg-white shadow-[0px_8px_10px_0px_rgba(0,0,0,0.05)]"
                     v-if="currentStep == 'installationCompleted'"
                 >
                     <div class="flex items-center justify-between gap-2.5 border-b border-gray-300 px-4 py-3">
@@ -1185,7 +1099,7 @@
                         </p>
                     </div>
 
-                    <div class="flex h-[484px] flex-col justify-center gap-4 overflow-y-auto border-b border-gray-300 px-7 py-4">
+                    <div class="flex h-121 flex-col justify-center gap-4 overflow-y-auto border-b border-gray-300 px-7 py-4">
                         <div class="flex flex-col gap-4">
                             <div class="flex h-8 w-8 items-center justify-center rounded-full border border-green-500">
                                 <span class="icon-tick text-xl font-semibold text-green-500"></span>

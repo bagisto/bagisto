@@ -2,6 +2,7 @@
 
 namespace Webkul\User;
 
+use Illuminate\Support\Facades\Hash;
 use PragmaRX\Google2FA\Google2FA;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -57,15 +58,24 @@ class TwoFactorAuthentication
     }
 
     /**
-     * Verify backup code and return remaining codes.
+     * Hash backup codes for storage so they are never persisted in plain text.
+     */
+    public function hashBackupCodes(array $backupCodes): array
+    {
+        return array_map(fn ($code) => Hash::make($code), $backupCodes);
+    }
+
+    /**
+     * Verify a backup code against the stored hashes and return the remaining
+     * hashed codes (with the used one removed), or null when no code matches.
      */
     public function verifyBackupCode(array $backupCodes, string $code): ?array
     {
         foreach ($backupCodes as $index => $storedCode) {
-            if (hash_equals($storedCode, $code)) {
+            if (Hash::check($code, $storedCode)) {
                 unset($backupCodes[$index]);
 
-                return array_values($backupCodes); // return updated codes
+                return array_values($backupCodes); // return remaining hashed codes
             }
         }
 

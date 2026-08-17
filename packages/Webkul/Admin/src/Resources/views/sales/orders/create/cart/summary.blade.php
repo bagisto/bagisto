@@ -14,7 +14,7 @@
         id="v-cart-summary-template"
     >
         <div
-            class="box-shadow rounded bg-white dark:bg-gray-900"
+            class="box-shadow rounded-sm bg-white dark:bg-gray-900"
             id="review-step-container"
         >
             <div class="flex items-center border-b p-4 dark:border-gray-800">
@@ -251,7 +251,7 @@
 
                         <!-- Modal Content -->
                         <x-slot:content>
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group class="mb-0!">
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="code"

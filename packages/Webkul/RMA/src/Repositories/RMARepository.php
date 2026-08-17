@@ -2,6 +2,7 @@
 
 namespace Webkul\RMA\Repositories;
 
+use Carbon\Carbon;
 use Webkul\Core\Eloquent\Repository;
 use Webkul\RMA\Contracts\RMA;
 use Webkul\RMA\Enums\DefaultRMAStatusEnum;
@@ -34,7 +35,7 @@ class RMARepository extends Repository
             DefaultRMAStatusEnum::CANCELED->value,
         ];
 
-        if (in_array($rma->rma_status_id, $nonCloseableStatuses, true)) {
+        if (in_array((int) $rma->rma_status_id, $nonCloseableStatuses, true)) {
             return false;
         }
 
@@ -49,14 +50,14 @@ class RMARepository extends Repository
     public function canReopenRma($rma): bool
     {
         if (
-            $rma->rma_status_id === DefaultRMAStatusEnum::CANCELED->value
+            (int) $rma->rma_status_id === DefaultRMAStatusEnum::CANCELED->value
             && core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') === 'yes'
         ) {
             return true;
         }
 
         if (
-            $rma->rma_status_id === DefaultRMAStatusEnum::DECLINED->value
+            (int) $rma->rma_status_id === DefaultRMAStatusEnum::DECLINED->value
             && core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_declined_request') === 'yes'
         ) {
             return true;
@@ -66,14 +67,47 @@ class RMARepository extends Repository
     }
 
     /**
-     * Check if RMA is expired.
+     * Check if RMA can be canceled by the customer.
+     */
+    public function canCancelRma($rma): bool
+    {
+        if (empty($rma->rma_status_id)) {
+            return false;
+        }
+
+        $nonCancelableStatuses = [
+            DefaultRMAStatusEnum::RECEIVED_PACKAGE->value,
+            DefaultRMAStatusEnum::SOLVED->value,
+            DefaultRMAStatusEnum::ITEM_CANCELED->value,
+            DefaultRMAStatusEnum::DECLINED->value,
+            DefaultRMAStatusEnum::CANCELED->value,
+        ];
+
+        return ! in_array((int) $rma->rma_status_id, $nonCancelableStatuses, true);
+    }
+
+    /**
+     * Check if the RMA is past its return window.
+     *
+     * The window is the same one that governs whether an item is returnable in
+     * the first place - the order item's snapshotted return period from its
+     * order date. This keeps "can I still act on this RMA" consistent with "was
+     * this item returnable", instead of an unrelated countdown. When the
+     * originating order item / snapshot is unavailable it falls back to the
+     * configured default window measured from the RMA's own creation date.
      */
     public function isRmaExpired($rma): bool
     {
-        $expireDays = (int) core()->getConfigData('sales.rma.setting.default_allow_days');
+        $orderItem = $rma->item?->orderItem;
 
-        $daysSinceCreation = (int) abs(now()->diffInDays($rma->created_at));
+        if (! $orderItem || is_null($orderItem->rma_return_period)) {
+            $expireDays = (int) core()->getConfigData('sales.rma.setting.default_allow_days');
 
-        return $daysSinceCreation > $expireDays && $daysSinceCreation !== 0;
+            return Carbon::parse($rma->created_at)->addDays($expireDays)->isPast();
+        }
+
+        return Carbon::parse($orderItem->created_at)
+            ->addDays((int) $orderItem->rma_return_period)
+            ->isPast();
     }
 }

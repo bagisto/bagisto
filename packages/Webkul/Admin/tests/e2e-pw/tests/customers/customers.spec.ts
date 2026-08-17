@@ -108,9 +108,9 @@ test.describe("customer management", () => {
     test("should delete account", async ({ adminPage }) => {
         const customersPage = new CustomersPage(adminPage);
         const detailsPage = new CustomerDetailsPage(adminPage);
-
+        const name = generateFirstName();
         await customersPage.createCustomer(
-            generateFirstName(),
+            name,
             generateLastName(),
             generateEmail(),
             randomElement(["Male", "Female", "Other"]),
@@ -118,7 +118,7 @@ test.describe("customer management", () => {
         );
 
         await detailsPage.openFirstCustomerDetails();
-        await detailsPage.deleteAccount();
+        await detailsPage.deleteAccount(name);
     });
 
     test("should create order", async ({ adminPage }) => {

@@ -24,7 +24,7 @@
                 <div class="absolute top-5 max-sm:top-4 ltr:right-5 rtl:left-5">
                     <button
                         type="button"
-                        class="icon-cancel cursor-pointer text-3xl max-md:text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none rounded bg-transparent border-0"
+                        class="icon-cancel cursor-pointer text-3xl max-md:text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded bg-transparent border-0"
                         aria-label="Close drawer"
                         @click="close"
                     >
@@ -74,7 +74,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 z-20 bg-gray-500 bg-opacity-50 transition-opacity"
+                    class="fixed inset-0 z-20 bg-gray-500/50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -91,7 +91,7 @@
                 :leave-to-class="enterFromLeaveToClasses"
             >
                 <div
-                    class="fixed z-[1000] overflow-hidden bg-white max-md:!w-full"
+                    class="fixed z-1000 overflow-hidden bg-white max-md:w-full!"
                     :class="{
                         'inset-x-0 top-0': position == 'top',
                         'inset-x-0 bottom-0 max-sm:max-h-full': position == 'bottom',

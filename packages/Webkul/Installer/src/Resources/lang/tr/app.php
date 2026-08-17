@@ -198,7 +198,7 @@ return [
                 'UAH' => 'Ukrayna Grivnası',
                 'USD' => 'Amerikan Doları',
                 'UZS' => 'Özbek Somu',
-                'VEF' => 'Venezuela Bolivarı',
+                'VES' => 'Venezuela Bolivarı',
                 'VND' => 'Vietnam Dongu',
                 'XAF' => 'CFA Frangı BEAC',
                 'XOF' => 'CFA Frangı BCEAO',

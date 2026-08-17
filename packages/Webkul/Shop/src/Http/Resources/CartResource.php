@@ -20,6 +20,22 @@ class CartResource extends JsonResource
             return core()->currency($rate ?? 0);
         });
 
+        $taxBreakdown = core()->getConfigData('sales.taxes.shopping_cart.show_tax_breakdown')
+            ? collect(Tax::getTaxBreakdown($this, true))->map(function ($data, $rateLabel) {
+                return [
+                    'rate' => $rateLabel,
+                    'tax_amount' => core()->currency($data['tax_amount']),
+                    'items' => collect($data['items'])->map(function ($item) {
+                        return [
+                            'name' => $item['name'] ?: trans('shop::app.checkout.cart.summary.delivery-charges'),
+                            'tax_amount' => core()->currency($item['tax_amount']),
+                            'taxable_amount' => core()->currency($item['taxable_amount']),
+                        ];
+                    })->values(),
+                ];
+            })->values()
+            : [];
+
         return [
             'id' => $this->id,
             'is_guest' => $this->is_guest,
@@ -27,6 +43,7 @@ class CartResource extends JsonResource
             'items_count' => $this->items_count,
             'items_qty' => $this->items_qty,
             'applied_taxes' => $taxes,
+            'applied_taxes_breakdown' => $taxBreakdown,
             'tax_total' => $this->tax_total,
             'formatted_tax_total' => core()->formatPrice($this->tax_total),
             'sub_total_incl_tax' => $this->sub_total_incl_tax,

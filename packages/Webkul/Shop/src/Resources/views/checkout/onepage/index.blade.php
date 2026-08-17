@@ -19,16 +19,16 @@
 
     <!-- Page Header -->
     <div class="flex-wrap">
-        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-[60px] py-4 max-lg:px-8 max-sm:px-4">
+        <div class="flex w-full justify-between border border-b border-l-0 border-r-0 border-t-0 px-15 py-4 max-lg:px-8 max-sm:px-4">
             <div class="flex items-center gap-x-14 max-[1180px]:gap-x-9">
                 <a
                     href="{{ route('shop.home.index') }}"
-                    class="flex min-h-[30px]"
+                    class="flex min-h-7.5"
                     aria-label="@lang('shop::checkout.onepage.index.bagisto')"
                 >
                     <img
                         src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-                        alt="{{ config('app.name') }}"
+                        alt="{{ core()->getCurrentChannel()->logo_alt ?: config('app.name') }}"
                         width="131"
                         height="29"
                     >
@@ -44,7 +44,7 @@
     {!! view_render_event('bagisto.shop.checkout.onepage.header.after') !!}
 
     <!-- Page Content -->
-    <div class="container px-[60px] max-lg:px-8 max-sm:px-4">
+    <div class="container px-15 max-lg:px-8 max-sm:px-4">
 
         {!! view_render_event('bagisto.shop.checkout.onepage.breadcrumbs.before') !!}
 
@@ -100,7 +100,7 @@
                     </div>
 
                     <!-- Included Checkout Summary Blade File For Desktop view -->
-                    <div class="sticky top-8 block h-max w-[442px] max-w-full max-lg:w-auto max-lg:max-w-[442px] ltr:pl-8 max-lg:ltr:pl-0 rtl:pr-8 max-lg:rtl:pr-0">
+                    <div class="sticky top-8 block h-max w-110.5 max-w-full max-lg:w-auto max-lg:max-w-110.5 ltr:pl-8 max-lg:ltr:pl-0 rtl:pr-8 max-lg:rtl:pr-0">
                         <div class="block max-md:hidden">
                             @include('shop::checkout.onepage.summary')
                         </div>

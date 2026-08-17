@@ -3,6 +3,7 @@ import { expect, Page } from "@playwright/test";
 import { BasePage } from "../../BasePage";
 import { addAddress, loginAsCustomer } from "../../../utils/customer";
 import { loginAsAdmin } from "../../../utils/admin";
+import { datagridRowAction } from "../../../utils/datagrid";
 
 function getGeneratedProductName(): string {
     const data = JSON.parse(
@@ -43,6 +44,7 @@ export class RmaManagePage extends BasePage {
         await this.page
             .getByRole("textbox", { name: "Search products here" })
             .press("Enter");
+        await expect(this.page.getByText(productName).first()).toBeVisible();
         await this.page
             .locator("(//button[contains(@class,'secondary-button')])[2]")
             .click();
@@ -66,7 +68,13 @@ export class RmaManagePage extends BasePage {
 
     private async createInvoiceFromLatestOrder() {
         await this.visit("admin/sales/orders");
-        await this.page.locator(".row > div:nth-child(4) > a").first().click();
+
+        const latestOrder = await datagridRowAction(
+            this.page,
+            ".row > div:nth-child(4) > a",
+        );
+
+        await latestOrder.click();
         await this.page.getByText("Invoice", { exact: true }).click();
         await this.page.getByRole("button", { name: "Create Invoice" }).click();
         await expect(
@@ -77,11 +85,25 @@ export class RmaManagePage extends BasePage {
     private async createCustomerRma() {
         await loginAsAdmin(this.page);
         await this.visit("admin/customers");
-        await this.page.locator(".icon-login").first().click();
-        await this.page.waitForLoadState("networkidle");
+
+        const loginAsCustomerAction = await datagridRowAction(
+            this.page,
+            "a.icon-login",
+        );
+
+        const [popup] = await Promise.all([
+            this.page.context().waitForEvent("page"),
+            loginAsCustomerAction.click(),
+        ]);
+
+        await popup.waitForURL(/customer\/account\/profile/);
+        await popup.close();
+
         await this.visit("customer/account/rma");
+        await expect(this.page).toHaveURL(/customer\/account\/rma/);
         await this.page.locator('text=" New RMA Request "').click();
         await this.page.waitForLoadState("networkidle");
+        await expect(this.page.locator("a.icon-edit").first()).toBeVisible();
         await this.page.locator("a.icon-edit").first().click();
         await this.page.locator('input[name^="isChecked["]').click();
         await this.page.waitForTimeout(1000);
@@ -128,7 +150,7 @@ export class RmaManagePage extends BasePage {
 
     async adminAcceptRma() {
         await this.visit("admin/sales/rma/requests");
-        await this.page.locator("span.icon-view").first().click();
+        await (await datagridRowAction(this.page, "span.icon-view")).click();
         await this.page
             .locator('select[name="rma_status_id"]')
             .selectOption("2");
@@ -140,23 +162,24 @@ export class RmaManagePage extends BasePage {
             this.page.getByText("RMA Status updated").first(),
         ).toBeVisible();
         await expect(
-            this.page.getByText("Accept", { exact: true }),
+            this.page.getByText("Approved", { exact: true }),
         ).toBeVisible();
+
         await this.page
-            .locator('select[name="rma_status_id"]')
-            .selectOption("5");
-        await this.page.locator('button:has-text("Save")').click();
+            .getByRole("button", { name: "Refund Item", exact: true })
+            .first()
+            .click();
         await this.page
-            .getByRole("button", { name: "Agree", exact: true })
+            .locator('button[type="submit"]:has-text("Refund Item")')
             .click();
         await expect(
-            this.page.getByText("Received Package", { exact: true }),
+            this.page.getByText("Refunded", { exact: true }),
         ).toBeVisible();
     }
 
     async adminDeclineRma() {
         await this.visit("admin/sales/rma/requests");
-        await this.page.locator("span.icon-view").first().click();
+        await (await datagridRowAction(this.page, "span.icon-view")).click();
         await this.page
             .locator('select[name="rma_status_id"]')
             .selectOption("7");
@@ -168,7 +191,7 @@ export class RmaManagePage extends BasePage {
             this.page.getByText("RMA Status updated").first(),
         ).toBeVisible();
         await expect(
-            this.page.getByText("Declined", { exact: true }),
+            this.page.getByText("Request Declined", { exact: true }),
         ).toBeVisible();
     }
 

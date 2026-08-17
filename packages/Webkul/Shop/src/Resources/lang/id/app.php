@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Sisa Unduhan',
                 'status' => 'Status',
                 'title' => 'Judul',
+                'unlimited' => 'Tidak terbatas',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Header Default',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Tutup galeri',
+            'view-image' => 'Lihat gambar',
+            'view-video' => 'Lihat video',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Toggel Default',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Tambahkan Lampiran',
                 'add-image' => 'Tambahkan Gambar/Video',
+                'invalid-file-type' => 'Tipe file yang dipilih tidak diizinkan.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Selamat Datang, Tamu',
                     'wishlist' => 'Daftar Keinginan',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Tambahkan produk ke daftar keinginan pelanggan berdasarkan nama.',
+                'add-to-wishlist-query' => 'Nama produk atau kunci URL untuk ditambahkan ke daftar keinginan.',
+                'proceed-to-checkout' => 'Buka halaman checkout untuk mulai memesan barang yang ada di keranjang.',
+                'search-products' => 'Cari produk di katalog toko berdasarkan kata kunci dan buka hasil yang cocok.',
+                'search-products-query' => 'Kata kunci atau nama produk yang akan dicari di katalog.',
+                'subscribe-newsletter' => 'Langganan alamat email ke buletin toko.',
+                'subscribe-newsletter-email' => 'Alamat email untuk berlangganan buletin.',
+                'view-cart' => 'Buka halaman keranjang belanja agar pelanggan dapat meninjau produk yang telah ditambahkan.',
+                'view-product' => 'Buka halaman detail produk berdasarkan nama produk.',
+                'view-product-query' => 'Nama produk atau kunci URL yang akan dibuka.',
+                'view-wishlist' => 'Buka halaman daftar keinginan untuk meninjau produk tersimpan pelanggan.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Kurangi Jumlah',
             'increase-quantity' => 'Tambah Jumlah',
+            'remove-item' => 'Hapus Item',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Jumlah Diskon',
                 'grand-total' => 'Total Keseluruhan',
                 'included' => 'Termasuk',
+                'excl-tax' => 'Tanpa Pajak:',
                 'incl-tax' => 'Termasuk Pajak:',
                 'items-discount' => 'Diskon Barang',
                 'shipping-discount' => 'Diskon Pengiriman',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Diterima',
-                'awaiting' => 'Menunggu',
-                'canceled' => 'Dibatalkan',
-                'declined' => 'Ditolak',
-                'dispatched-package' => 'Paket Dikirim',
+                'accept' => 'Disetujui',
+                'awaiting' => 'Menunggu pengembalian',
+                'canceled' => 'Permintaan dibatalkan',
+                'declined' => 'Permintaan ditolak',
+                'dispatched-package' => 'Pengembalian dalam perjalanan',
                 'item-canceled' => 'Item Dibatalkan',
                 'not-received-package-yet' => 'Belum menerima paket',
-                'pending' => 'Menunggu',
+                'pending' => 'Menunggu peninjauan',
                 'processing' => 'Sedang Diproses',
-                'received-package' => 'Paket Diterima',
+                'received-package' => 'Dikembalikan',
                 'solved' => 'Selesai',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'Status RMA sudah dibatalkan.',
+            'cancel-not-allowed' => 'Membatalkan permintaan RMA ini tidak diizinkan.',
             'cancel-success' => 'Status RMA berhasil dibatalkan.',
+            'close-not-allowed' => 'Menutup permintaan RMA ini tidak diizinkan.',
             'create-success' => 'Permintaan berhasil dibuat.',
             'creation-error' => 'Status RMA tidak dapat diperbarui karena faktur untuk pesanan ini belum dibuat.',
             'invalid-item' => 'Item pesanan yang dipilih tidak valid.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'Membuka kembali permintaan RMA ini tidak diizinkan.',
             'send-message' => ':name berhasil dikirim.',
             'update-success' => ':name berhasil diperbarui.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Menarik Diri dari Kontrak',
+            'view_existing' => 'Lihat penarikan diri Anda',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Menarik Diri dari Kontrak',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Menarik Diri dari Kontrak',
+            'heading' => 'Menarik Diri dari Kontrak Anda',
+            'intro' => 'Masukkan nomor pesanan dan alamat email yang Anda gunakan saat checkout. Kami akan mengirimkan tautan untuk mengajukan penarikan diri Anda.',
+            'order_number' => 'Nomor pesanan',
+            'email' => 'Alamat email',
+            'submit' => 'Kirimkan saya tautan penarikan diri',
+            'sent_notice' => 'Jika ada pesanan yang cocok, kami baru saja mengirimkan email berisi tautan penarikan diri ke alamat tersebut. Tautan ini berlaku selama 24 jam.',
+            'legal_note' => 'Anda memiliki hak hukum berdasarkan Direktif UE 2011/83/UE (sebagaimana telah diubah) untuk menarik diri dari kontrak Anda dalam waktu 14 hari. Cara penarikan diri lainnya — termasuk pernyataan tertulis yang dikirim ke layanan pelanggan kami — tetap berlaku.',
+        ],
+
+        'form' => [
+            'page_title' => 'Konfirmasikan penarikan diri Anda',
+            'heading' => 'Konfirmasi Penarikan Diri dari Kontrak',
+            'legal_notice_title' => 'Ini adalah pernyataan yang mengikat secara hukum',
+            'legal_effect' => 'Dengan mengirimkan formulir ini, Anda menggunakan hak hukum untuk menarik diri dari pesanan #:order_id. Pernyataan ini berlaku secara hukum sejak Anda mengirimkannya.',
+            'order_summary' => 'Pesanan',
+            'order_total' => 'Total',
+            'order_items' => 'Item',
+            'placed_on' => 'Dipesan pada :date',
+            'reason_label' => 'Alasan',
+            'reason_optional' => '(opsional)',
+            'reason_help' => 'Anda tidak diwajibkan memberikan alasan. Apa pun yang Anda tulis di sini akan dicatat pada bukti penarikan diri dan dikirim ke penjual.',
+            'reason_placeholder' => 'Sebagai contoh: "Berubah pikiran", "Barang tidak sesuai deskripsi", atau biarkan kosong.',
+            'submit' => 'Kirim penarikan diri',
+            'cancel' => 'Batal dan kembali',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Bukti Penarikan Diri',
+            'heading' => 'Penarikan diri Anda telah diterima',
+            'heading_received' => 'Penarikan diri Anda telah diterima',
+            'heading_refunded' => 'Pengembalian dana Anda telah dikeluarkan',
+            'heading_declined' => 'Penarikan diri Anda ditolak',
+            'intro' => 'Kami telah mencatat pernyataan Anda. Halaman ini dan email yang baru saja kami kirimkan keduanya berfungsi sebagai konfirmasi pada media yang tahan lama.',
+            'intro_received' => 'Kami telah mencatat pernyataan Anda. Halaman ini dan email yang baru saja kami kirimkan keduanya berfungsi sebagai konfirmasi pada media yang tahan lama.',
+            'intro_refunded' => 'Penjual telah memproses pengembalian dana Anda. Dana seharusnya segera tiba melalui metode pembayaran asli Anda.',
+            'intro_declined' => 'Penjual menolak hak Anda atas pengembalian dana berdasarkan pernyataan ini. Lihat detail di bawah untuk alasan yang diberikan dan opsi yang tersisa bagi Anda.',
+            'received_at' => 'Diterima pada',
+            'reference' => 'Referensi',
+            'copy_reference' => 'Salin referensi',
+            'reference_copied' => 'Referensi disalin ke papan klip.',
+            'order' => 'Pesanan',
+            'email' => 'Email',
+            'reason' => 'Alasan',
+            'status' => 'Status',
+            'status_received' => 'Diterima',
+            'status_refunded' => 'Dikembalikan',
+            'status_declined' => 'Ditolak',
+            'print' => 'Cetak',
+            'next_steps_title' => 'Langkah berikutnya',
+            'step_received' => 'Pernyataan Anda telah diterima dan dicatat.',
+            'step_email' => 'Email konfirmasi terkirim ke kotak masuk Anda.',
+            'step_refund' => 'Pengembalian dana dikeluarkan dalam 14 hari.',
+            'step_refund_done' => 'Pengembalian dana telah dikeluarkan.',
+            'step_declined' => 'Penarikan diri ditolak oleh penjual.',
+            'declined_reason_label' => 'Alasan yang diberikan oleh penjual',
+            'declined_notice' => 'Anda tetap memiliki semua upaya hukum lain berdasarkan hukum perlindungan konsumen UE. Jika Anda tidak setuju dengan keputusan ini, hubungi penjual secara langsung.',
+            'refund_notice' => 'Kami melakukan pengembalian dana menggunakan metode pembayaran yang sama dengan yang Anda gunakan untuk transaksi awal, kecuali Anda secara tegas menyetujui hal lain.',
+            'email_sent' => 'Email konfirmasi telah dikirim.',
+            'email_pending' => 'Kami tidak dapat segera mengirim email konfirmasi; tim kami akan menindaklanjutinya. Mohon simpan halaman ini sebagai bukti Anda.',
+            'durable_medium_notice' => 'Halaman ini adalah bukti Anda. Anda dapat menyimpan atau mencetaknya.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Konfirmasi penarikan diri Anda — Pesanan :order_id',
+                'title' => 'Penarikan diri diterima',
+                'title_received' => 'Penarikan diri diterima',
+                'title_refunded' => 'Pengembalian dana dikeluarkan',
+                'title_declined' => 'Penarikan diri ditolak',
+                'greeting' => 'Halo,',
+                'intro' => 'Kami telah menerima pernyataan penarikan diri dari kontrak untuk pesanan #:order_id. Stempel waktu penerimaan yang berlaku secara hukum dicatat di bawah ini.',
+                'intro_received' => 'Kami telah menerima pernyataan penarikan diri dari kontrak untuk pesanan #:order_id. Stempel waktu penerimaan yang berlaku secara hukum dicatat di bawah ini.',
+                'intro_refunded' => 'Pengembalian dana Anda untuk pesanan #:order_id telah dikeluarkan. Dana seharusnya segera tiba melalui metode pembayaran asli Anda.',
+                'intro_declined' => 'Penjual menolak hak Anda atas pengembalian dana untuk pesanan #:order_id berdasarkan pernyataan ini. Alasan yang diberikan ada di bawah.',
+                'summary' => 'Ringkasan penarikan diri',
+                'received_at' => 'Diterima pada',
+                'reference' => 'Referensi',
+                'order' => 'Pesanan',
+                'email' => 'Email',
+                'reason' => 'Alasan yang diberikan',
+                'declined_reason' => 'Alasan penolakan',
+                'refund_notice' => 'Apabila pengembalian dana wajib dilakukan, kami melakukan pengembalian melalui metode pembayaran yang sama dengan yang Anda gunakan untuk transaksi awal, dalam waktu 14 hari sejak tanggal di atas, kecuali Anda secara tegas menyetujui hal lain.',
+                'footer' => 'Pesan ini merupakan konfirmasi pada media yang tahan lama yang diwajibkan oleh Pasal 11a Direktif 2011/83/UE (sebagaimana diubah oleh Direktif (UE) 2023/2673). Mohon simpan untuk arsip Anda.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Tautan penarikan diri Anda',
+                'title' => 'Tautan penarikan diri Anda',
+                'intro' => 'Gunakan tautan di bawah ini untuk mengajukan penarikan diri untuk pesanan :order_id. Tautan ini berlaku selama 24 jam.',
+                'button' => 'Buka formulir penarikan diri',
+                'expiry' => 'Tautan akan kedaluwarsa dalam 24 jam. Jika Anda tidak meminta email ini, Anda dapat mengabaikannya dengan aman.',
+            ],
         ],
     ],
 ];

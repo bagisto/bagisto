@@ -108,12 +108,12 @@ test.afterEach(async ({ adminPage }) => {
 const testCases = [
     {
         operator: "==",
-        optionSelect: "free",
+        optionSelect: "Free Shipping",
         label: "is equal to",
     },
     {
         operator: "!=",
-        optionSelect: "flatrate",
+        optionSelect: "Flat Rate",
         label: "is not equal to",
     },
 ];

@@ -254,6 +254,8 @@ export class MarketingAclPage extends CmsAclPage {
         return {
             createBtn: this.page.locator(".primary-button"),
             iconEdit: this.page.locator(".icon-edit"),
+            channelLabel: this.page.locator('label[for="channels_1"]'),
+            channelInput: this.page.locator("input#channels_1"),
             deleteIcon: this.page.locator(".icon-delete"),
             agreeBtn: this.page.getByRole("button", {
                 name: "Agree",
@@ -625,6 +627,8 @@ export class MarketingAclPage extends CmsAclPage {
         ).not.toBeVisible();
         await this.siteMapActionPage.fileName.fill("sitemap.xml");
         await this.siteMapActionPage.path.fill("/sitemapxml/test/example/");
+        await this.siteMapActionPage.channelLabel.first().click();
+        await expect(this.siteMapActionPage.channelInput.first()).toBeChecked();
         await this.siteMapActionPage.createBtn.nth(1).click();
         await expect(
             this.siteMapActionPage.sitemapCreateSuccess.first(),

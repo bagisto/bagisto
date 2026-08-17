@@ -30,14 +30,14 @@
 
                         @if (core()->getConfigData('sales.checkout.my_cart.summary') == 'display_item_quantity')
                             <span
-                                class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5 max-md:ltr:left-4 max-md:rtl:right-4"
+                                class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:ltr:left-4 max-md:rtl:right-4"
                                 v-if="cart?.items_qty"
                             >
                                 @{{ cart.items_qty }}
                             </span>
                         @else
                             <span
-                                class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
+                                class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
                                 v-if="cart?.items_count"
                             >
                                 @{{ cart.items_count }}
@@ -85,7 +85,8 @@
                                 <a :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)">
                                     <img
                                         :src="item.base_image.small_image_url"
-                                        class="max-w-28 max-h-28 rounded-xl max-md:max-h-20 max-md:max-w-[76px]"
+                                        :alt="item.base_image.alt"
+                                        class="max-w-28 max-h-28 rounded-xl max-md:max-h-20 max-md:max-w-19"
                                     />
                                 </a>
                             </div>
@@ -150,7 +151,7 @@
                                     <div class="">
                                         <button
                                             type="button"
-                                            class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-sm max-sm:text-xs text-left ltr:text-left rtl:text-right focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded"
+                                            class="flex cursor-pointer items-center gap-x-4 text-base max-md:gap-x-1.5 max-md:text-sm max-sm:text-xs text-left ltr:text-left rtl:text-right focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded"
                                             @click="item.option_show = ! item.option_show"
                                         >
                                             @lang('shop::app.checkout.cart.mini-cart.see-details')
@@ -203,10 +204,12 @@
                                 <x-shop::quantity-changer
                                     v-if="item.can_change_qty"
                                     ::key="'qty-' + item.id + '-' + refreshKey"
-                                    class="max-h-9 max-w-[150px] gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
+                                    class="max-h-9 max-w-37.5 gap-x-2.5 rounded-[54px] px-3.5 py-1.5 max-md:gap-x-2 max-md:px-1 max-md:py-0.5"
                                     name="quantity"
                                     ::value="item?.quantity"
+                                    :removable="true"
                                     @change="updateItem($event, item)"
+                                    @remove="removeItem(item.id)"
                                 />
 
                                     {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.content.quantity_changer.after') !!}
@@ -235,7 +238,7 @@
                     >
                         <div class="b-0 grid place-items-center gap-y-5 max-md:gap-y-0">
                             <img
-                                class="max-md:h-[100px] max-md:w-[100px]"
+                                class="max-md:h-25 max-md:w-25"
                                 src="{{ bagisto_asset('images/thank-you.png') }}"
                                 loading="lazy"
                                 decoding="async"
@@ -261,7 +264,7 @@
                 >
                     <div
                         class="my-8 flex items-center justify-between border-b border-zinc-200 px-6 pb-2 max-md:my-0 max-md:border-t max-md:px-5 max-md:py-2"
-                        :class="{'!justify-end': isLoading}"
+                        :class="{'justify-end!': isLoading}"
                     >
                         {!! view_render_event('bagisto.shop.checkout.mini-cart.subtotal.before') !!}
 
@@ -352,18 +355,20 @@
             </x-shop::drawer>
 
         @else
-            <a href="{{ route('shop.checkout.onepage.index') }}">
+            <a
+                href="{{ route('shop.checkout.onepage.index') }}"
+                aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
+            >
                 {!! view_render_event('bagisto.shop.checkout.mini-cart.drawer.toggle.before') !!}
 
                     <span class="relative">
-                        <button
-                            type="button"
+                        <span
                             class="icon-cart cursor-pointer text-2xl"
-                            aria-label="@lang('shop::app.checkout.cart.mini-cart.shopping-cart')"
-                        ></button>
+                            aria-hidden="true"
+                        ></span>
 
                         <span
-                            class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-[9px] text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
+                            class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:px-2 max-md:py-1.5 max-md:ltr:left-4 max-md:rtl:right-4"
                             v-if="cart?.items_qty"
                         >
                             @{{ cart.items_qty }}

@@ -160,6 +160,10 @@ class OrderInvoiceDataGrid extends DataGrid
      */
     public function prepareMassActions()
     {
+        if (! bouncer()->hasPermission('sales.invoices.update')) {
+            return;
+        }
+
         $this->addMassAction([
             'title' => trans('admin::app.sales.invoices.index.datagrid.update-status'),
             'url' => route('admin.sales.invoices.mass_update.state'),

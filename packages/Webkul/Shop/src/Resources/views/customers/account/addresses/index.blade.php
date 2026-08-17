@@ -44,7 +44,7 @@
 
             {!! view_render_event('bagisto.shop.customers.account.addresses.list.before', ['addresses' => $addresses]) !!}
 
-            <div class="mt-[60px] grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-md:mt-5">
+            <div class="mt-15 grid grid-cols-2 gap-5 max-1060:grid-cols-[1fr] max-md:mt-5">
                 @foreach ($addresses as $address)
                     <div class="p-5 border rounded-xl border-zinc-200 max-md:flex-wrap">
                         <div class="flex justify-between">
@@ -73,7 +73,7 @@
                                         </button>
                                     </x-slot>
 
-                                    <x-slot:menu class="!py-1 max-sm:!py-0">
+                                    <x-slot:menu class="py-1! max-sm:py-0!">
                                         <x-shop::dropdown.menu.item>
                                             <a href="{{ route('shop.customers.account.addresses.edit', $address->id) }}">
                                                 <p class="w-full">
@@ -152,7 +152,7 @@
             <!-- Address Empty Page -->
             <div class="grid items-center w-full py-32 m-auto text-center place-content-center justify-items-center">
                 <img 
-                    class="max-md:h-[100px] max-md:w-[100px]"
+                    class="max-md:h-25 max-md:w-25"
                     src="{{ bagisto_asset('images/no-address.png') }}" 
                     alt="Empty Address" 
                     title=""

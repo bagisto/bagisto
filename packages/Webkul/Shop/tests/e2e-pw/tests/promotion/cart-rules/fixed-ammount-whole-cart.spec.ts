@@ -98,8 +98,8 @@ test.afterEach(async ({ adminPage }) => {
 });
 
 const cases = [
-    { operator: "==", option: "moneytransfer" },
-    { operator: "!=", option: "cashondelivery" },
+    { operator: "==", option: "Money Transfer" },
+    { operator: "!=", option: "Cash On Delivery" },
 ];
 
 test.describe("cart rules", () => {

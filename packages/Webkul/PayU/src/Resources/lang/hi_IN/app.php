@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'भुगतान विफल रहा। कृपया पुनः प्रयास करें।',
         'payment-success' => 'भुगतान सफलतापूर्वक पूर्ण हुआ!',
         'provide-credentials' => 'कृपया व्यवस्थापक पैनल में PayU मर्चेंट की और Salt कॉन्फ़िगर करें।',
+        'supported-currency-error' => 'मुद्रा :currency समर्थित नहीं है। समर्थित मुद्राएँ: :supportedCurrencies.',
     ],
 ];

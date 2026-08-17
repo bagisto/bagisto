@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => '剩余下载次数',
                 'status' => '状态',
                 'title' => '名称',
+                'unlimited' => '无限制',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => '默认标题',
         ],
 
+        'image-zoomer' => [
+            'close' => '关闭图库',
+            'view-image' => '查看图片',
+            'view-video' => '查看视频',
+        ],
+
         'drawer' => [
             'default-toggle' => '默认切换',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => '添加附件',
                 'add-image' => '添加图片/视频',
+                'invalid-file-type' => '不允许所选的文件类型。',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => '欢迎访问者',
                     'wishlist' => '愿望清单',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => '按名称将产品添加到客户的心愿单。',
+                'add-to-wishlist-query' => '要添加到心愿单的产品名称或 URL 键。',
+                'proceed-to-checkout' => '打开结账页面，开始为购物车中的商品下单。',
+                'search-products' => '按关键词在商店目录中搜索产品并打开匹配的结果。',
+                'search-products-query' => '用于在目录中搜索的关键词或产品名称。',
+                'subscribe-newsletter' => '将电子邮件地址订阅到商店的电子报。',
+                'subscribe-newsletter-email' => '用于订阅电子报的电子邮件地址。',
+                'view-cart' => '打开购物车页面，以便客户查看已添加的产品。',
+                'view-product' => '按产品名称打开产品详情页面。',
+                'view-product-query' => '要打开的产品名称或 URL 键。',
+                'view-wishlist' => '打开心愿单页面以查看客户保存的产品。',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => '减少数量',
             'increase-quantity' => '增加数量',
+            'remove-item' => '移除商品',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => '折扣金额',
                 'grand-total' => '总计',
                 'included' => '已含',
+                'excl-tax' => '不含税：',
                 'incl-tax' => '含税:',
                 'items-discount' => '商品折扣',
                 'shipping-discount' => '运费折扣',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => '接受',
-                'awaiting' => '等待中',
-                'canceled' => '已取消',
-                'declined' => '已拒绝',
-                'dispatched-package' => '包裹已发出',
+                'accept' => '已批准',
+                'awaiting' => '等待退货',
+                'canceled' => '请求已取消',
+                'declined' => '请求已拒绝',
+                'dispatched-package' => '退货运输中',
                 'item-canceled' => '商品已取消',
                 'not-received-package-yet' => '包裹尚未收到',
-                'pending' => '待处理',
+                'pending' => '待审核',
                 'processing' => '处理中',
-                'received-package' => '包裹已收到',
+                'received-package' => '已退款',
                 'solved' => '已解决',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA 状态已被取消。',
+            'cancel-not-allowed' => '不允许取消此RMA请求。',
             'cancel-success' => 'RMA状态已成功取消。',
+            'close-not-allowed' => '不允许关闭此RMA请求。',
             'create-success' => '请求已成功创建。',
             'creation-error' => '无法更新 RMA 状态，因为尚未为此订单创建发票。',
             'invalid-item' => '所选订单项无效。',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => '不允许重新打开此RMA请求。',
             'send-message' => ':name 发送成功。',
             'update-success' => ':name 更新成功。',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => '撤回合同',
+            'view_existing' => '查看您的撤回请求',
+        ],
+
+        'guest_dropdown' => [
+            'link' => '撤回合同',
+        ],
+
+        'lookup' => [
+            'page_title' => '撤回合同',
+            'heading' => '撤回您的合同',
+            'intro' => '请输入订单编号以及您在结账时使用的电子邮件地址。我们将向您发送一个用于提交撤回请求的链接。',
+            'order_number' => '订单编号',
+            'email' => '电子邮件地址',
+            'submit' => '发送撤回链接',
+            'sent_notice' => '如果存在匹配的订单，我们已将撤回链接发送至该邮箱地址。链接将在24小时内有效。',
+            'legal_note' => '根据欧盟指令 2011/83/EU（经修订），您拥有在14天内撤回合同的法定权利。其他撤回方式 — 包括以书面形式发送至我们客户服务的声明 — 仍然有效。',
+        ],
+
+        'form' => [
+            'page_title' => '确认您的撤回请求',
+            'heading' => '确认撤回合同',
+            'legal_notice_title' => '这是一份具有法律约束力的声明',
+            'legal_effect' => '提交此表单即表示您行使对订单 #:order_id 的法定撤回权。该声明在您提交之时即具有法律效力。',
+            'order_summary' => '订单',
+            'order_total' => '总计',
+            'order_items' => '商品',
+            'placed_on' => '下单日期：:date',
+            'reason_label' => '理由',
+            'reason_optional' => '（可选）',
+            'reason_help' => '您无需提供理由。您在此填写的任何内容都将记录在撤回凭证上并发送给商家。',
+            'reason_placeholder' => '例如：“改变主意”、“商品与描述不符”，或留空。',
+            'submit' => '提交撤回请求',
+            'cancel' => '取消并返回',
+        ],
+
+        'confirmation' => [
+            'page_title' => '撤回收据',
+            'heading' => '您的撤回请求已收到',
+            'heading_received' => '您的撤回请求已收到',
+            'heading_refunded' => '您的退款已发放',
+            'heading_declined' => '您的撤回请求已被拒绝',
+            'intro' => '我们已记录您的声明。本页面以及我们刚刚发送给您的邮件均可作为持久性介质上的确认凭证。',
+            'intro_received' => '我们已记录您的声明。本页面以及我们刚刚发送给您的邮件均可作为持久性介质上的确认凭证。',
+            'intro_refunded' => '商家已处理您的退款。退款将很快返回到您的原支付方式。',
+            'intro_declined' => '商家对本声明项下的退款请求权提出异议。请参阅下方详细信息了解所给理由以及您可选择的其他途径。',
+            'received_at' => '接收时间',
+            'reference' => '参考编号',
+            'copy_reference' => '复制参考编号',
+            'reference_copied' => '参考编号已复制到剪贴板。',
+            'order' => '订单',
+            'email' => '电子邮件',
+            'reason' => '理由',
+            'status' => '状态',
+            'status_received' => '已接收',
+            'status_refunded' => '已退款',
+            'status_declined' => '已拒绝',
+            'print' => '打印',
+            'next_steps_title' => '后续步骤',
+            'step_received' => '您的声明已被接收并记录。',
+            'step_email' => '确认邮件已发送至您的收件箱。',
+            'step_refund' => '将在14天内发放退款。',
+            'step_refund_done' => '退款已发放。',
+            'step_declined' => '商家已拒绝该撤回请求。',
+            'declined_reason_label' => '商家给出的理由',
+            'declined_notice' => '您仍然保留欧盟消费者法律下的所有其他法律救济权利。如果您不同意此决定，请直接联系商家。',
+            'refund_notice' => '除非您另有明确同意，我们将使用您在原交易中使用的相同支付方式进行退款。',
+            'email_sent' => '确认邮件已发送。',
+            'email_pending' => '我们暂时无法立即发送确认邮件；我们的团队将跟进处理。请保存本页面作为您的收据。',
+            'durable_medium_notice' => '本页面即为您的收据。您可以保存或打印。',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => '撤回确认 — 订单 :order_id',
+                'title' => '撤回请求已接收',
+                'title_received' => '撤回请求已接收',
+                'title_refunded' => '退款已发放',
+                'title_declined' => '撤回请求已被拒绝',
+                'greeting' => '您好，',
+                'intro' => '我们已收到您关于订单 #:order_id 的合同撤回声明。具有法律效力的接收时间记录如下。',
+                'intro_received' => '我们已收到您关于订单 #:order_id 的合同撤回声明。具有法律效力的接收时间记录如下。',
+                'intro_refunded' => '您订单 #:order_id 的退款已发放。退款将很快返回到您的原支付方式。',
+                'intro_declined' => '商家对您本声明项下订单 #:order_id 的退款请求权提出异议。所给理由如下。',
+                'summary' => '撤回请求概要',
+                'received_at' => '接收时间',
+                'reference' => '参考编号',
+                'order' => '订单',
+                'email' => '电子邮件',
+                'reason' => '所给理由',
+                'declined_reason' => '拒绝理由',
+                'refund_notice' => '如需退款，除非您另有明确同意，我们将在上述日期起14天内，使用您在原交易中使用的相同支付方式进行退款。',
+                'footer' => '本邮件是欧盟指令 2011/83/EU（经欧盟指令 2023/2673 修订）第 11a 条所要求的持久性介质上的确认凭证。请妥善保存以备查阅。',
+            ],
+
+            'guest_link' => [
+                'subject' => '您的撤回链接',
+                'title' => '您的撤回链接',
+                'intro' => '请使用以下链接提交订单 :order_id 的撤回请求。链接将在24小时内有效。',
+                'button' => '打开撤回表单',
+                'expiry' => '链接将在24小时后失效。如果您未请求此邮件，可以放心忽略。',
+            ],
         ],
     ],
 ];

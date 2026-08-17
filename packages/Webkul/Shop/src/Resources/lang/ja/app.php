@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => '残りのダウンロード回数',
                 'status' => 'ステータス',
                 'title' => 'タイトル',
+                'unlimited' => '無制限',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'デフォルトヘッダー',
         ],
 
+        'image-zoomer' => [
+            'close' => 'ギャラリーを閉じる',
+            'view-image' => '画像を表示',
+            'view-video' => '動画を表示',
+        ],
+
         'drawer' => [
             'default-toggle' => 'デフォルトトグル',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => '添付ファイルを追加',
                 'add-image' => '画像/ビデオを追加',
+                'invalid-file-type' => '選択されたファイル形式は許可されていません。',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'ゲストようこそ',
                     'wishlist' => 'ウィッシュリスト',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => '名前で商品を顧客のお気に入りリストに追加します。',
+                'add-to-wishlist-query' => 'お気に入りリストに追加する商品名またはURLキー。',
+                'proceed-to-checkout' => 'カート内の商品の注文を開始するために、チェックアウトページを開きます。',
+                'search-products' => 'キーワードでストアのカタログから商品を検索し、一致する結果を開きます。',
+                'search-products-query' => 'カタログを検索するキーワードまたは商品名。',
+                'subscribe-newsletter' => 'メールアドレスをストアのニュースレターに登録します。',
+                'subscribe-newsletter-email' => 'ニュースレターに登録するメールアドレス。',
+                'view-cart' => '顧客が追加した商品を確認できるよう、ショッピングカートのページを開きます。',
+                'view-product' => '商品名で商品の詳細ページを開きます。',
+                'view-product-query' => '開く商品名またはURLキー。',
+                'view-wishlist' => '顧客が保存した商品を確認するためにお気に入りリストのページを開きます。',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => '数量を減らす',
             'increase-quantity' => '数量を増やす',
+            'remove-item' => 'アイテムを削除',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => '割引額',
                 'grand-total' => '合計金額',
                 'included' => '含む',
+                'excl-tax' => '税抜:',
                 'incl-tax' => '税込:',
                 'items-discount' => '商品割引',
                 'shipping-discount' => '送料割引',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => '承諾',
-                'awaiting' => '待機中',
-                'canceled' => 'キャンセルされました',
-                'declined' => '拒否されました',
-                'dispatched-package' => 'パッケージを発送しました',
+                'accept' => '承認済み',
+                'awaiting' => '返品待ち',
+                'canceled' => 'リクエストキャンセル済み',
+                'declined' => 'リクエスト却下',
+                'dispatched-package' => '返品輸送中',
                 'item-canceled' => 'アイテムがキャンセルされました',
                 'not-received-package-yet' => 'まだパッケージを受け取っていません',
-                'pending' => '保留中',
+                'pending' => '審査待ち',
                 'processing' => '処理中',
-                'received-package' => 'パッケージを受け取りました',
+                'received-package' => '返金済み',
                 'solved' => '解決済み',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMAステータスはすでにキャンセルされています。',
+            'cancel-not-allowed' => 'このRMAリクエストをキャンセルすることは許可されていません。',
             'cancel-success' => 'RMAステータスが正常にキャンセルされました。',
+            'close-not-allowed' => 'このRMAリクエストを終了することは許可されていません。',
             'create-success' => 'リクエストが正常に作成されました。',
             'creation-error' => 'この注文の請求書が作成されていないため、RMA ステータスを更新できません。',
             'invalid-item' => '選択された注文アイテムは無効です。',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'このRMAリクエストを再開することは許可されていません。',
             'send-message' => ':name が正常に送信されました。',
             'update-success' => ':name が正常に更新されました。',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => '契約を撤回する',
+            'view_existing' => '契約撤回の状況を表示',
+        ],
+
+        'guest_dropdown' => [
+            'link' => '契約を撤回する',
+        ],
+
+        'lookup' => [
+            'page_title' => '契約を撤回する',
+            'heading' => '契約を撤回する',
+            'intro' => '注文番号と、ご購入時にご利用のメールアドレスをご入力ください。契約撤回手続きのリンクをメールでお送りします。',
+            'order_number' => '注文番号',
+            'email' => 'メールアドレス',
+            'submit' => '契約撤回のリンクを送信',
+            'sent_notice' => '該当する注文が存在する場合、契約撤回手続きのリンクをそのメールアドレスにお送りしました。リンクは24時間有効です。',
+            'legal_note' => 'お客様は、EU指令 2011/83/EU（改正後）に基づき、14日以内に契約を撤回する法定の権利を有します。当社カスタマーサービスへの書面による申し出を含む、その他の方法による撤回も引き続き有効です。',
+        ],
+
+        'form' => [
+            'page_title' => '契約撤回の確定',
+            'heading' => '契約撤回の確定',
+            'legal_notice_title' => 'これは法的拘束力のある宣言です',
+            'legal_effect' => 'このフォームを送信することにより、注文 #:order_id の法定撤回権を行使することになります。本宣言は送信した時点で法的に発効します。',
+            'order_summary' => '注文',
+            'order_total' => '合計',
+            'order_items' => '商品',
+            'placed_on' => '注文日：:date',
+            'reason_label' => '理由',
+            'reason_optional' => '（任意）',
+            'reason_help' => '理由のご記入は必須ではありません。ここに記入された内容は契約撤回のエビデンスに記録され、販売者に送信されます。',
+            'reason_placeholder' => '例：「気が変わった」「商品が説明と違う」、または空欄のままでも構いません。',
+            'submit' => '契約撤回を送信',
+            'cancel' => 'キャンセルして戻る',
+        ],
+
+        'confirmation' => [
+            'page_title' => '契約撤回の受領証',
+            'heading' => '契約撤回を受け付けました',
+            'heading_received' => '契約撤回を受け付けました',
+            'heading_refunded' => '返金を実施しました',
+            'heading_declined' => '契約撤回は却下されました',
+            'intro' => 'お客様の宣言を記録しました。本ページおよびただいま送信した確認メールが、永続的媒体での確認として機能します。',
+            'intro_received' => 'お客様の宣言を記録しました。本ページおよびただいま送信した確認メールが、永続的媒体での確認として機能します。',
+            'intro_refunded' => '販売者が返金を処理しました。返金額は、まもなく元のお支払い方法に反映されます。',
+            'intro_declined' => '販売者は本宣言に基づく返金請求権について異議を申し立てました。提示された理由および残された選択肢については、以下の詳細をご覧ください。',
+            'received_at' => '受領日時',
+            'reference' => '参照番号',
+            'copy_reference' => '参照番号をコピー',
+            'reference_copied' => '参照番号をクリップボードにコピーしました。',
+            'order' => '注文',
+            'email' => 'メールアドレス',
+            'reason' => '理由',
+            'status' => 'ステータス',
+            'status_received' => '受領済み',
+            'status_refunded' => '返金済み',
+            'status_declined' => '却下',
+            'print' => '印刷',
+            'next_steps_title' => '今後の流れ',
+            'step_received' => 'お客様の宣言は受領され、記録されました。',
+            'step_email' => '確認メールをお客様の受信箱にお送りしました。',
+            'step_refund' => '14日以内に返金を実施します。',
+            'step_refund_done' => '返金が実施されました。',
+            'step_declined' => '販売者により契約撤回が却下されました。',
+            'declined_reason_label' => '販売者から提示された理由',
+            'declined_notice' => 'EU消費者法に基づく他のすべての救済手段は引き続き有効です。本決定に同意されない場合は、販売者に直接ご連絡ください。',
+            'refund_notice' => '別途明示的に合意した場合を除き、当初の取引でお客様が使用されたものと同じ支払い方法で返金いたします。',
+            'email_sent' => '確認メールを送信しました。',
+            'email_pending' => '確認メールを直ちに送信することができませんでした。担当者が対応いたします。本ページを受領証として保存してください。',
+            'durable_medium_notice' => '本ページは受領証です。保存または印刷していただけます。',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => '契約撤回の確認 — 注文 :order_id',
+                'title' => '契約撤回を受領しました',
+                'title_received' => '契約撤回を受領しました',
+                'title_refunded' => '返金を実施しました',
+                'title_declined' => '契約撤回は却下されました',
+                'greeting' => 'こんにちは。',
+                'intro' => '注文 #:order_id の契約撤回宣言を受領しました。法的に有効な受領日時を以下に記録しています。',
+                'intro_received' => '注文 #:order_id の契約撤回宣言を受領しました。法的に有効な受領日時を以下に記録しています。',
+                'intro_refunded' => '注文 #:order_id の返金を実施しました。返金額は、まもなく元のお支払い方法に反映されます。',
+                'intro_declined' => '販売者は、本宣言に基づく注文 #:order_id の返金請求権について異議を申し立てました。提示された理由は以下の通りです。',
+                'summary' => '契約撤回の概要',
+                'received_at' => '受領日時',
+                'reference' => '参照番号',
+                'order' => '注文',
+                'email' => 'メールアドレス',
+                'reason' => 'お客様の理由',
+                'declined_reason' => '却下の理由',
+                'refund_notice' => '返金が発生する場合、別途明示的に合意した場合を除き、上記日付から14日以内に、当初の取引でお客様が使用されたものと同じ支払い方法で返金いたします。',
+                'footer' => '本メッセージは、EU指令 2011/83/EU（EU指令 2023/2673による改正後）の第11a条で要求される永続的媒体での確認です。記録として保管してください。',
+            ],
+
+            'guest_link' => [
+                'subject' => '契約撤回のリンク',
+                'title' => '契約撤回のリンク',
+                'intro' => '注文 :order_id の契約撤回手続きを行うには、以下のリンクをご利用ください。リンクは24時間有効です。',
+                'button' => '契約撤回フォームを開く',
+                'expiry' => 'リンクは24時間後に失効します。このメールにお心当たりのない場合は、無視していただいて結構です。',
+            ],
         ],
     ],
 ];

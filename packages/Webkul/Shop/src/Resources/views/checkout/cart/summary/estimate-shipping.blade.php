@@ -2,7 +2,7 @@
 {!! view_render_event('bagisto.shop.checkout.cart.summary.estimate_shipping.before') !!}
 
 <x-shop::accordion
-    class="overflow-hidden rounded-xl border max-md:rounded-lg max-md:!border-none max-md:!bg-gray-100"
+    class="overflow-hidden rounded-xl border max-md:rounded-lg max-md:border-none! max-md:bg-gray-100!"
     :is-active="false"
 >
     <x-slot:header class="font-semibold max-md:py-3 max-md:font-medium max-sm:p-2 max-sm:text-sm">
@@ -32,7 +32,7 @@
                 </p>
                 
                 <!-- Country -->
-                <x-shop::form.control-group class="!mb-2.5">
+                <x-shop::form.control-group class="mb-2.5!">
                     <x-shop::form.control-group.label class="{{ core()->isCountryRequired() ? 'required' : '' }}">
                         @lang('shop::app.checkout.cart.summary.estimate-shipping.country')
                     </x-shop::form.control-group.label>
@@ -105,7 +105,7 @@
                 </x-shop::form.control-group>
 
                 <!-- Postcode -->
-                <x-shop::form.control-group class="!mb-0">
+                <x-shop::form.control-group class="mb-0!">
                     <x-shop::form.control-group.label class="{{ core()->isPostCodeRequired() ? 'required' : '' }}">
                         @lang('shop::app.checkout.cart.summary.estimate-shipping.postcode')
                     </x-shop::form.control-group.label>

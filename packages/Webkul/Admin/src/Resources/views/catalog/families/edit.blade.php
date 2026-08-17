@@ -40,7 +40,7 @@
 
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.attributes-panel.before', ['attributeFamily' => $attributeFamily]) !!}
 
-            <div class="box-shadow flex flex-1 flex-col gap-2 rounded bg-white dark:bg-gray-900 max-xl:flex-auto">
+            <div class="box-shadow flex flex-1 flex-col gap-2 rounded-sm bg-white dark:bg-gray-900 max-xl:flex-auto">
                 <v-family-attributes>
                     <x-admin::shimmer.catalog.families.attributes-panel />
                 </v-family-attributes>
@@ -51,7 +51,7 @@
             {!! view_render_event('bagisto.admin.catalog.families.edit.card.accordion.general.before', ['attributeFamily' => $attributeFamily]) !!}
     
             <!-- Right Container -->
-            <div class="flex w-[360px] max-w-full select-none flex-col gap-2">
+            <div class="flex w-90 max-w-full select-none flex-col gap-2">
                 <!-- General Panel -->
                 <x-admin::accordion>
                     <!-- Panel Header -->
@@ -64,7 +64,7 @@
                     <!-- Panel Content -->
                     <x-slot:content>
                         <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
+                            <x-admin::form.control-group.label class="text-gray-800! dark:text-white!">
                                 @lang('admin::app.catalog.families.edit.code')
                             </x-admin::form.control-group.label>
 
@@ -88,8 +88,8 @@
                         </x-admin::form.control-group>
 
                         <!-- Name -->
-                        <x-admin::form.control-group class="!mb-0">
-                            <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
+                        <x-admin::form.control-group class="mb-0!">
+                            <x-admin::form.control-group.label class="text-gray-800! dark:text-white!">
                                 @lang('admin::app.catalog.families.edit.name')
                             </x-admin::form.control-group.label>
 
@@ -195,7 +195,7 @@
 
                                         <!-- Group Name -->
                                         <div
-                                            class="group_node group flex max-w-max gap-1.5 rounded py-1.5 text-gray-600 transition-all dark:text-gray-300 ltr:pr-1.5 rtl:pl-1.5"
+                                            class="group_node group flex max-w-max gap-1.5 rounded-sm py-1.5 text-gray-600 transition-all dark:text-gray-300 ltr:pr-1.5 rtl:pl-1.5"
                                             :class="{'bg-blue-600 text-white group-hover:[&>*]:text-white': selectedGroup.id == element.id}"
                                             @click.stop="groupSelected(element)"
                                         >
@@ -222,7 +222,7 @@
                                             <input
                                                 type="text"
                                                 :name="'attribute_groups[' + element.id + '][name]'"
-                                                class="group_node text-sm !text-gray-600 dark:text-gray-300"
+                                                class="group_node text-sm text-gray-600! dark:text-gray-300"
                                                 v-model="element.name"
                                                 v-show="editableGroup.id == element.id"
                                             />
@@ -255,7 +255,7 @@
                                         v-show="! element.hide"
                                     >
                                         <template #item="{ element, index }">
-                                            <div class="group flex max-w-max gap-1.5 rounded py-1.5 text-gray-600 dark:text-gray-300 ltr:pr-1.5 rtl:pl-1.5">
+                                            <div class="group flex max-w-max gap-1.5 rounded-sm py-1.5 text-gray-600 dark:text-gray-300 ltr:pr-1.5 rtl:pl-1.5">
                                                 <i class="icon-drag cursor-grab text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
                                                 <i
@@ -313,7 +313,7 @@
                             group="attributes"
                         >
                             <template #item="{ element }">
-                                <div class="group flex max-w-max gap-1.5 rounded py-1.5 text-gray-600 dark:text-gray-300 ltr:pr-1.5 rtl:pl-1.5">
+                                <div class="group flex max-w-max gap-1.5 rounded-sm py-1.5 text-gray-600 dark:text-gray-300 ltr:pr-1.5 rtl:pl-1.5">
                                     <i class="icon-drag cursor-grab text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>
 
                                     <i class="icon-attribute text-xl transition-all group-hover:text-gray-800 dark:group-hover:text-white"></i>

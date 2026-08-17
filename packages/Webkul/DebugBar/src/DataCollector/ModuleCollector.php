@@ -5,8 +5,8 @@ namespace Webkul\DebugBar\DataCollector;
 use DebugBar\DataCollector\AssetProvider;
 use DebugBar\DataCollector\DataCollector;
 use DebugBar\DataCollector\DataCollectorInterface;
-use DebugBar\DataCollector\PDO\PDOCollector;
 use DebugBar\DataCollector\Renderable;
+use DebugBar\DataFormatter\DataFormatter;
 use Illuminate\Contracts\Events\Dispatcher;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Support\Str;
@@ -30,7 +30,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
      */
     public function __construct(
         Dispatcher $events,
-        PDOCollector $pdoCollector
+        DataFormatter $formatter
     ) {
         $events->listen('eloquent.*', function ($event, $models) {
             if (Str::contains($event, 'eloquent.retrieved')) {
@@ -49,11 +49,11 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
         });
 
         app()['db']->listen(
-            function ($query, $bindings = null, $time = null, $connectionName = null) use ($pdoCollector) {
+            function ($query, $bindings = null, $time = null, $connectionName = null) use ($formatter) {
                 $this->queries[] = [
                     'sql' => $this->addQueryBindings($query),
                     'duration' => $query->time,
-                    'duration_str' => $pdoCollector->formatDuration($query->time),
+                    'duration_str' => $formatter->formatDuration($query->time),
                     'connection' => $query->connection->getDatabaseName(),
                 ];
             }
@@ -127,7 +127,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
     /**
      * {@inheritdoc}
      */
-    public function collect()
+    public function collect(): array
     {
         $modules = [];
 
@@ -247,7 +247,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
     /**
      * {@inheritDoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'modules';
     }
@@ -255,7 +255,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
     /**
      * {@inheritDoc}
      */
-    public function getWidgets()
+    public function getWidgets(): array
     {
         return [
             'modules' => [
@@ -272,10 +272,7 @@ class ModuleCollector extends DataCollector implements AssetProvider, DataCollec
         ];
     }
 
-    /**
-     * @return array
-     */
-    public function getAssets()
+    public function getAssets(): array
     {
         return [
             'base_path' => __DIR__.'/../Resources/',

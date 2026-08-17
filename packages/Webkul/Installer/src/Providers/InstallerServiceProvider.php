@@ -45,7 +45,7 @@ class InstallerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the Installer Commands of this package.
+     * Register the commands for this package.
      */
     protected function registerCommands(): void
     {

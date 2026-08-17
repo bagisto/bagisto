@@ -5,14 +5,14 @@
             <div class="flex items-center gap-2">
                 <div class="shimmer h-6 w-6"></div>
 
-                <div class="shimmer h-[17px] w-[70px]"></div>
+                <div class="shimmer h-4.25 w-17.5"></div>
             </div>
 
             <!-- Total -->
-            <div class="shimmer h-6 w-[49px]"></div>
+            <div class="shimmer h-6 w-12.25"></div>
         </div>
 
         <!-- Description -->
-        <div class="shimmer h-[17px] w-[150px]"></div>
+        <div class="shimmer h-4.25 w-37.5"></div>
     </div>
 @endfor

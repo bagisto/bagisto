@@ -23,7 +23,7 @@
         </template>
 
         <template v-else>
-            <div class="box-shadow rounded bg-white dark:bg-gray-900">
+            <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                 <div class="flex items-center justify-between p-4">
                     <p class="text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.sales.orders.create.compare-items.title')
@@ -41,7 +41,7 @@
                     >
                         <!-- Image -->
                         <div
-                            class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                            class="relative h-15 max-h-15 w-full max-w-15 overflow-hidden rounded-sm"
                             :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! item.product.images.length}"
                         >
                             <template v-if="! item.product.images.length">

@@ -25,29 +25,24 @@
                 <button
                     type="button"
                     ref="closeButton"
-                    class="icon-cancel absolute top-3 z-[1000] cursor-pointer text-3xl ltr:right-3 rtl:left-3 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none rounded bg-transparent border-0"
-                    aria-label="Close gallery"
+                    class="icon-cancel absolute top-3 z-1000 cursor-pointer border-0 bg-transparent text-3xl ltr:right-3 rtl:left-3 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden"
+                    aria-label="@lang('shop::app.components.image-zoomer.close')"
                     @click="toggle"
-                >
-                </button>
+                ></button>
 
-                <button
-                    type="button"
-                    class="icon-arrow-left fixed left-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none border-0"
+                <span
+                    class="icon-arrow-left fixed left-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
                     v-if="attachments.length >= 2"
-                    aria-label="@lang('shop::app.components.carousel.previous')"
                     @click="navigate(currentIndex -= 1)"
                 >
-                </button>
+                </span>
 
-                <button
-                    type="button"
-                    class="icon-arrow-right fixed right-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:outline-none border-0"
+                <span
+                    class="icon-arrow-right fixed right-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
                     v-if="attachments.length >= 2"
-                    aria-label="@lang('shop::app.components.carousel.next')"
                     @click="navigate(currentIndex += 1)"
                 >
-                </button>
+                </span>
                     
                 <!-- Main Image -->
                 <div 
@@ -80,6 +75,7 @@
                                 <!-- For Desktop -->
                                 <img
                                     :src="attachment.url"
+                                    :alt="attachment.alt"
                                     class="max-h-full max-w-full transition-transform duration-300 ease-out max-md:hidden"
                                     :class="{
                                         'cursor-zoom-in': ! isZooming,
@@ -98,6 +94,7 @@
                                 <!-- For Mobile -->
                                 <img
                                     :src="attachment.url"
+                                    :alt="attachment.alt"
                                     class="max-h-full max-w-full transition-transform duration-300 ease-out md:hidden"
                                     :class="{
                                         'cursor-zoom-in': ! isZooming,
@@ -116,30 +113,31 @@
                     <template v-for="(attachment, index) in attachments">
                         <button
                             type="button"
-                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent overflow-hidden transition-transform hover:!border-navyBlue focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none bg-transparent p-0"
+                            class="h-16 w-16 transform cursor-pointer overflow-hidden rounded-md border border-navyBlue border-transparent bg-transparent p-0 transition-transform hover:border-navyBlue! focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden"
                             :class="{
-                                '!border-navyBlue': currentIndex === index + 1,
+                                'border-navyBlue!': currentIndex === index + 1,
                             }"
                             :key="'thumb-' + index"
                             v-if="attachment.type === 'image'"
-                            :aria-label="`View image ${index + 1}`"
+                            :aria-label="`@lang('shop::app.components.image-zoomer.view-image') ${index + 1}`"
                             @click="navigate(currentIndex = index + 1)"
                         >
                             <img
                                 class="h-full w-full object-cover"
                                 :src="attachment.url"
+                                :alt="attachment.alt"
                             />
                         </button>
 
                         <button
                             type="button"
-                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent overflow-hidden transition-transform hover:!border-navyBlue focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none bg-transparent p-0"
+                            class="h-16 w-16 transform cursor-pointer overflow-hidden rounded-md border border-navyBlue border-transparent bg-transparent p-0 transition-transform hover:border-navyBlue! focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden"
                             :class="{
-                                '!border-navyBlue': currentIndex === index + 1,
+                                'border-navyBlue!': currentIndex === index + 1,
                             }"
                             :key="'thumb-' + index"
                             v-if="attachment.type === 'video'"
-                            :aria-label="`View video ${index + 1}`"
+                            :aria-label="`@lang('shop::app.components.image-zoomer.view-video') ${index + 1}`"
                             @click="navigate(currentIndex = index + 1)"
                         >
                             <video
@@ -187,21 +185,6 @@
 
                     this.toggle();
                 },
-
-                isOpen(newVal) {
-                    if (newVal) {
-                        window.addEventListener('keydown', this.handleKeyDown);
-                        this.lastActiveElement = document.activeElement;
-                        this.$nextTick(() => {
-                            this.$refs.closeButton?.focus();
-                        });
-                    } else {
-                        window.removeEventListener('keydown', this.handleKeyDown);
-                        if (this.lastActiveElement) {
-                            this.lastActiveElement.focus();
-                        }
-                    }
-                }
             },
         
             data() {
@@ -225,13 +208,7 @@
                     isMouseMoveTriggered: false,
 
                     isMouseDownTriggered: false,
-
-                    lastActiveElement: null,
                 };
-            },
-
-            beforeDestroy() {
-                window.removeEventListener('keydown', this.handleKeyDown);
             },
 
             methods: {
@@ -239,12 +216,6 @@
                     this.isOpen = ! this.isOpen;
 
                     document.body.style.overflow = this.isOpen ? 'hidden' : '';
-                },
-
-                handleKeyDown(e) {
-                    if (e.key === 'Escape' && this.isOpen) {
-                        this.toggle();
-                    }
                 },
 
                 open() {

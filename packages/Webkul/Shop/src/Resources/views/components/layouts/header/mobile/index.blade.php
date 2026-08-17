@@ -8,7 +8,7 @@
     $showWishlist = (bool) core()->getConfigData('customer.settings.wishlist.wishlist_option');
 @endphp
 
-<div class="flex flex-wrap gap-4 px-4 pt-6 pb-4 shadow-sm lg:hidden">
+<div class="flex flex-wrap gap-4 px-4 pt-6 pb-4 shadow-xs lg:hidden">
     <div class="flex items-center justify-between w-full">
         <!-- Left Navigation -->
         <div class="flex items-center gap-x-1.5">
@@ -23,13 +23,13 @@
 
             <a
                 href="{{ route('shop.home.index') }}"
-                class="flex max-h-[30px] items-center"
+                class="flex max-h-7.5 items-center"
                 aria-label="@lang('shop::app.components.layouts.header.mobile.bagisto')"
             >
                 <img
                     class="block"
                     src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-                    alt="{{ config('app.name') }}"
+                    alt="{{ core()->getCurrentChannel()->logo_alt ?: config('app.name') }}"
                     width="131"
                     height="29"
                 >
@@ -116,7 +116,7 @@
 
                                 <!-- Customers Dropdown -->
                                 @auth('customer')
-                                    <x-slot:content class="!p-0">
+                                    <x-slot:content class="p-0!">
                                         <div class="grid gap-2.5 p-5 pb-0">
                                             <p class="text-xl font-dmserif" v-pre>
                                         @lang('shop::app.components.layouts.header.mobile.welcome')’
@@ -258,7 +258,7 @@
                         <a href="{{ route('shop.home.index') }}">
                             <img
                                 src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-                                alt="{{ config('app.name') }}"
+                                alt="{{ core()->getCurrentChannel()->logo_alt ?: config('app.name') }}"
                                 width="131"
                                 height="29"
                             >
@@ -266,14 +266,14 @@
                     </div>
                 </x-slot>
 
-                <x-slot:content class="!p-0">
+                <x-slot:content class="p-0!">
                     <!-- Account Profile Hero Section -->
                     <div class="p-4 border-b border-zinc-200">
                         <div class="grid grid-cols-[auto_1fr] items-center gap-4 rounded-xl border border-zinc-200 p-2.5">
                             <div>
                                 <img
                                 src="{{ auth()->user()?->image_url ??  bagisto_asset('images/user-placeholder.png') }}"
-                                    class="h-[60px] w-[60px] rounded-full max-md:rounded-full"
+                                    class="h-15 w-15 rounded-full max-md:rounded-full"
                                 >
                             </div>
 
@@ -339,7 +339,7 @@
                                             </x-slot>
 
                                             <!-- Drawer Content -->
-                                            <x-slot:content class="!px-0">
+                                            <x-slot:content class="px-0!">
                                                 <div
                                                     class="overflow-auto"
                                                     :style="{ height: getCurrentScreenHeight }"
@@ -389,7 +389,7 @@
                                             </x-slot>
 
                                             <!-- Drawer Content -->
-                                            <x-slot:content class="!px-0">
+                                            <x-slot:content class="px-0!">
                                                 <div
                                                     class="overflow-auto"
                                                     :style="{ height: getCurrentScreenHeight }"
@@ -419,7 +419,7 @@
                 }"
             >
             <!-- First level view -->
-            <div class="flex-shrink-0 w-full h-full px-6 overflow-auto">
+            <div class="shrink-0 w-full h-full px-6 overflow-auto">
                 <div class="py-4">
                         <div
                             v-for="category in categories"
@@ -459,13 +459,13 @@
 
             <!-- Third level view -->
                 <div
-                    class="flex-shrink-0 w-full h-full"
+                    class="shrink-0 w-full h-full"
                     v-if="currentViewLevel === 'third'"
                 >
                 <div class="px-6 py-4 border-b border-gray-200">
                         <button
                             @click="goBackToMainView"
-                            class="flex items-center justify-center gap-2 focus:outline-none"
+                            class="flex items-center justify-center gap-2 focus:outline-hidden"
                             aria-label="Go back"
                         >
                         <span class="text-lg icon-arrow-left rtl:icon-arrow-right"></span>

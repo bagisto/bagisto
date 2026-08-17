@@ -66,7 +66,7 @@
                                         {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
 
                                         <x-shop::media.images.lazy
-                                            class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl"
+                                            class="h-36.5 max-h-36.5 w-32 min-w-32 max-w-32 rounded-xl"
                                             src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                             alt="Review Image"                   
                                         />
@@ -128,7 +128,7 @@
                                             {!! view_render_event('bagisto.shop.customers.account.reviews.image.before', ['reviews' => $reviews]) !!}
     
                                             <x-shop::media.images.lazy
-                                                class="h-[146px] max-h-[146px] w-32 min-w-32 max-w-32 rounded-xl max-md:h-20 max-md:w-20 max-md:min-w-20 max-md:rounded-lg"
+                                                class="h-36.5 max-h-36.5 w-32 min-w-32 max-w-32 rounded-xl max-md:h-20 max-md:w-20 max-md:min-w-20 max-md:rounded-lg"
                                                 src="{{ $review->product->base_image_url ?? bagisto_asset('images/small-product-placeholder.webp') }}"
                                                 alt="Review Image"                   
                                             />
@@ -194,7 +194,7 @@
                         <!-- Review Empty Page -->
                         <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                             <img
-                                class="max-md:h-[100px] max-md:w-[100px]"
+                                class="max-md:h-25 max-md:w-25"
                                 src="{{ bagisto_asset('images/review.png') }}"
                                 alt="Empty Review"
                                 title=""

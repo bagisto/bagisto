@@ -14,19 +14,23 @@
     'showPlaceholders' => false,
     'uploadedImages'   => [],
     'width'            => '120px',
-    'height'           => '120px'
+    'height'           => '120px',
+    'enableSeo'        => false,
+    'metaName'         => '',
 ])
 
 <v-media-images
     name="{{ $name }}"
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
+    v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
+    meta-name="{{ $metaName }}"
     :uploaded-images='{{ json_encode($uploadedImages) }}'
     width="{{ $width }}"
     height="{{ $height }}"
     :errors="errors"
 >
-    <x-admin::shimmer.image class="h-[110px] w-[110px] rounded" />
+    <x-admin::shimmer.image class="h-27.5 w-27.5 rounded-sm" />
 </v-media-images>
 
 @pushOnce('scripts')
@@ -41,7 +45,7 @@
                 <template v-if="allowMultiple || images.length == 0">
                     <!-- AI Image Generation Button -->
                     <label
-                        class="grid h-[120px] max-h-[120px] min-h-[110px] w-full min-w-[110px] max-w-[120px] cursor-pointer items-center justify-items-center rounded border border-dashed border-blue-300 transition-all hover:border-blue-600 dark:mix-blend-exclusion dark:invert"
+                        class="grid h-30 max-h-30 min-h-27.5 w-full min-w-27.5 max-w-30 cursor-pointer items-center justify-items-center rounded-sm border border-dashed border-blue-300 transition-all hover:border-blue-600 dark:mix-blend-exclusion dark:invert"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         v-if="ai.enabled"
                         @click="resetAIModal(); $refs.magicAIImageModal.open()"
@@ -61,7 +65,7 @@
 
                     <!-- Upload Image Button -->
                     <label
-                        class="grid h-[120px] max-h-[120px] min-h-[110px] w-full min-w-[110px] max-w-[120px] cursor-pointer items-center justify-items-center rounded border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                        class="grid h-30 max-h-30 min-h-27.5 w-full min-w-27.5 max-w-30 cursor-pointer items-center justify-items-center rounded-sm border border-dashed border-gray-300 transition-all hover:border-gray-400 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                         :class="[(errors?.['images.files[0]'] ?? false) ? 'border border-red-500' : 'border-gray-300']"
                         :style="{'max-width': this.width, 'max-height': this.height}"
                         :for="$.uid + '_imageInput'"
@@ -105,6 +109,8 @@
                             :image="element"
                             :width="width"
                             :height="height"
+                            :enable-seo="enableSeo"
+                            :meta-name="metaName"
                             @onRemove="remove($event)"
                         >
                         </v-media-image-item>
@@ -115,7 +121,7 @@
                 <template v-if="showPlaceholders && ! images.length">
                     <!-- Front Placeholder -->
                     <div
-                        class="relative h-[120px] max-h-[120px] w-full min-w-[120px] max-w-[120px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                        class="relative h-30 max-h-30 w-full min-w-30 max-w-30 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                         v-for="placeholder in placeholders"
                     >
                         <img :src="placeholder.image">
@@ -136,7 +142,7 @@
                             <!-- AI Content Generation Modal -->
                             <x-admin::modal
                                 ref="magicAIImageModal"
-                                class="[&>*]:z-[10007]"
+                                class="*:z-10007"
                             >
                                 <!-- Modal Header -->
                                 <x-slot:header>
@@ -281,14 +287,14 @@
                                     <div v-show="ai.images.length">
                                         <div class="grid grid-cols-4 gap-5">
                                             <div
-                                                class="relative grid max-h-[120px] min-w-[120px] cursor-pointer justify-items-center overflow-hidden rounded border-[3px] border-transparent transition-all hover:opacity-80"
-                                                :class="{'!border-blue-600': image.selected}"
+                                                class="relative grid max-h-30 min-w-30 cursor-pointer justify-items-center overflow-hidden rounded-sm border-[3px] border-transparent transition-all hover:opacity-80"
+                                                :class="{'border-blue-600!': image.selected}"
                                                 v-for="image in ai.images"
                                                 @click="image.selected = ! image.selected"
                                             >
                                                 <!-- Image Preview -->
                                                 <img
-                                                    class="h-[120px] w-[120px]"
+                                                    class="h-30 w-30"
                                                     :src="image.url"
                                                 />
                                             </div>
@@ -357,7 +363,7 @@
     </script>
 
     <script type="text/x-template" id="v-media-image-item-template">
-        <div class="group relative grid max-h-[120px] min-w-[120px] justify-items-center overflow-hidden rounded transition-all hover:border-gray-400">
+        <div class="group relative grid max-h-30 min-w-30 justify-items-center overflow-hidden rounded-sm transition-all hover:border-gray-400">
             <!-- Image Preview -->
             <img
                 :src="image.url"
@@ -366,7 +372,9 @@
 
             <div class="invisible absolute bottom-0 top-0 flex w-full flex-col justify-between bg-white p-3 opacity-80 transition-all group-hover:visible dark:bg-gray-900">
                 <!-- Image Name -->
-                <p class="break-all text-xs font-semibold text-gray-600 dark:text-gray-300"></p>
+                <p class="break-all text-xs font-semibold text-gray-600 dark:text-gray-300">
+                    @{{ image.file_name }}
+                </p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
@@ -375,8 +383,16 @@
                         @click="remove"
                     ></span>
 
+                    <!-- Opens the seo drawer, where replacing the file is one of the options -->
+                    <span
+                        class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
+                        v-if="enableSeo"
+                        @click="openSeoDrawer"
+                    ></span>
+
                     <label
                         class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
+                        v-else
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 
@@ -388,7 +404,7 @@
 
                     <input
                         type="file"
-                        :name="name + '[]'"
+                        :name="enableSeo ? name + '[' + image.id + ']' : name + '[]'"
                         class="hidden"
                         accept="image/*"
                         :id="$.uid + '_imageInput_' + index"
@@ -397,6 +413,116 @@
                     />
                 </div>
             </div>
+
+            <!--
+                Kept outside of the drawer, which is only rendered while open, so that the
+                metadata is submitted with the form whether the drawer was opened or not.
+            -->
+            <template v-if="enableSeo && metaName">
+                <input
+                    type="hidden"
+                    :name="metaName + '[' + image.id + '][alt_text]'"
+                    :value="image.alt_text ?? ''"
+                />
+
+                <input
+                    type="hidden"
+                    :name="metaName + '[' + image.id + '][file_name]'"
+                    :value="image.file_name ?? ''"
+                />
+            </template>
+
+            <!-- Image SEO Drawer -->
+            <x-admin::drawer
+                ref="seoDrawer"
+                v-if="enableSeo"
+            >
+                <x-slot:header>
+                    <p class="text-lg font-bold text-gray-800 dark:text-white">
+                        @lang('admin::app.components.media.images.seo.title')
+                    </p>
+
+                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
+                        @lang('admin::app.components.media.images.seo.info')
+                    </p>
+                </x-slot>
+
+                <x-slot:content>
+                    <!-- Preview -->
+                    <div class="mb-4 flex justify-center rounded border border-gray-200 p-4 dark:border-gray-800">
+                        <img
+                            class="max-h-45 max-w-full rounded"
+                            :src="image.url"
+                        />
+                    </div>
+
+                    <!-- Alt Text -->
+                    <div class="mb-4">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.components.media.images.seo.alt-text')
+                        </x-admin::form.control-group.label>
+
+                        <input
+                            type="text"
+                            class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                            :placeholder="'@lang('admin::app.components.media.images.seo.alt-text-placeholder')'"
+                            v-model="image.alt_text"
+                        />
+
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">
+                            @lang('admin::app.components.media.images.seo.alt-text-info')
+                        </p>
+                    </div>
+
+                    <!-- File Name -->
+                    <div class="mb-4">
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.components.media.images.seo.file-name')
+                        </x-admin::form.control-group.label>
+
+                        <input
+                            type="text"
+                            class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                            :placeholder="'@lang('admin::app.components.media.images.seo.file-name-placeholder')'"
+                            v-model="image.file_name"
+                        />
+
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">
+                            @lang('admin::app.components.media.images.seo.file-name-info')
+                        </p>
+                    </div>
+
+                    <!-- Replace Image -->
+                    <div>
+                        <x-admin::form.control-group.label>
+                            @lang('admin::app.components.media.images.seo.replace')
+                        </x-admin::form.control-group.label>
+
+                        <label
+                            class="secondary-button inline-flex cursor-pointer"
+                            :for="$.uid + '_imageInput_' + index"
+                        >
+                            @lang('admin::app.components.media.images.seo.replace-btn')
+                        </label>
+
+                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">
+                            @lang('admin::app.components.media.images.seo.replace-info')
+                        </p>
+                    </div>
+                </x-slot>
+
+                <x-slot:footer>
+                    <div class="flex justify-end px-3">
+                        <button
+                            type="button"
+                            class="primary-button"
+                            @click="$refs.seoDrawer.close()"
+                        >
+                            @lang('admin::app.components.media.images.seo.done-btn')
+                        </button>
+                    </div>
+                </x-slot>
+            </x-admin::drawer>
         </div>
     </script>
 
@@ -435,6 +561,16 @@
                     default: '120px'
                 },
 
+                enableSeo: {
+                    type: Boolean,
+                    default: false,
+                },
+
+                metaName: {
+                    type: String,
+                    default: '',
+                },
+
                 errors: {
                     type: Object,
                     default: () => {}
@@ -444,6 +580,8 @@
             data() {
                 return {
                     images: [],
+
+                    newImageIndex: 0,
 
                     placeholders: [
                         {
@@ -519,12 +657,18 @@
                     }
 
                     imageInput.files.forEach((file, index) => {
-                        this.images.push({
-                            id: 'image_' + this.images.length,
-                            url: '',
-                            file: file
-                        });
+                        this.images.push(this.newImage(file, file.name.replace(/\.[^/.]+$/, '')));
                     });
+                },
+
+                newImage(file, fileName) {
+                    return {
+                        id: 'image_' + this.newImageIndex++,
+                        url: '',
+                        alt_text: '',
+                        file_name: fileName,
+                        file: file,
+                    };
                 },
 
                 remove(image) {
@@ -557,11 +701,7 @@
 
                 apply() {
                     this.selectedAIImages.forEach((image, index) => {
-                        this.images.push({
-                            id: 'image_' + this.images.length,
-                            url: '',
-                            file: this.getBase64ToFile(image.url, 'temp.png')
-                        });
+                        this.images.push(this.newImage(this.getBase64ToFile(image.url, 'temp.png'), ''));
                     });
 
                     this.$refs.magicAIImageModal.close();
@@ -606,7 +746,7 @@
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'width', 'height'],
+            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName'],
 
             mounted() {
                 if (this.image.file instanceof File) {
@@ -617,6 +757,10 @@
             },
 
             methods: {
+                openSeoDrawer() {
+                    this.$refs.seoDrawer.open();
+                },
+
                 edit() {
                     let imageInput = this.$refs[this.$.uid + '_imageInput_' + this.index];
 
@@ -633,6 +777,10 @@
                         });
 
                         return;
+                    }
+
+                    if (! this.image.file_name) {
+                        this.image.file_name = imageInput.files[0].name.replace(/\.[^/.]+$/, '');
                     }
 
                     this.setFile(imageInput.files[0]);

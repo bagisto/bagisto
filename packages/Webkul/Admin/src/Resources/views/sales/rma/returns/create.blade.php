@@ -46,7 +46,7 @@
                         performAction
                     }">
                         <template v-if="! isLoading">
-                            <div class="row grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 min-h-[47px] items-center gap-2.5 border-b bg-gray-50 px-4 py-2.5 font-semibold text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                            <div class="row datagrid-head datagrid-head-cards grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1">
                                 <div
                                     class="flex gap-2.5 items-center select-none"
                                     v-for="(columnGroup, index) in [['increment_id'], ['customer_name'], ['status'], ['grand_total'], ['method_title'], ['created_at']]"
@@ -85,7 +85,12 @@
 
                         <!-- Datagrid Head Shimmer -->
                         <template v-else>
-                            <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+                            <x-admin::shimmer.datagrid.table.head
+                                :isMultiRow="true"
+                                template="0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.1fr"
+                                :groups="[1, 1, 1, 1, 1, 1, 1]"
+                                :massAction="false"
+                            />
                         </template>
                     </template>
 
@@ -100,7 +105,7 @@
                     }">
                         <template v-if="! isLoading">
                             <div
-                                class="row grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
+                                class="row datagrid-card grid grid-cols-[0.5fr_1fr_1fr_0.5fr_1fr_1fr_0.1fr] grid-rows-1 px-4 py-2.5 border-b dark:border-gray-800 transition-all hover:bg-gray-50 dark:hover:bg-gray-950"
                                 v-for="record in available.records"
                             >
                                 <!-- Name, SKU, Attribute Family Columns -->
@@ -114,10 +119,8 @@
 
                                 <!-- Image, Price, Id, Stock Columns -->
                                 <div class="flex gap-1.5">
-                                    <p
-                                        class="text-gray-600 dark:text-gray-300"
-                                        v-html="record.customer_name"
-                                    >
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        @{{ record.customer_name }}
                                     </p>
                                 </div>
 
@@ -161,7 +164,12 @@
 
                         <!-- Datagrid Body Shimmer -->
                         <template v-else>
-                            <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+                            <x-admin::shimmer.datagrid.table.body
+                                :isMultiRow="true"
+                                template="0.5fr 1fr 1fr 0.5fr 1fr 1fr 0.1fr"
+                                :groups="[1, 1, 1, 1, 1, 1, 1]"
+                                :massAction="false"
+                            />
                         </template>
                     </template>
                 </x-admin::datagrid>
@@ -175,7 +183,7 @@
                         enctype="multipart/form-data"
                         ref="rmaSubmit"
                     >
-                        <x-admin::modal ref="rmaModel">
+                        <x-admin::modal ref="rmaModel" panel-class="max-w-192">
                             <!-- Modal Header -->
                             <x-slot:header>
                                 <h2 class="text-base font-medium max-md:text-base dark:text-gray-300">
@@ -184,8 +192,11 @@
                             </x-slot>
 
                             <!-- Modal Content -->
-                            <x-slot:content class="p-4 max-sm:p-3">
-                                <div class="overflow-auto dark:text-gray-300" style="min-height: 400px; max-height: 400px;">
+                            <x-slot:content class="bg-gray-50 dark:bg-gray-950">
+                                <div
+                                    class="journal-scroll flex flex-col gap-3 overflow-auto ltr:pr-1.5 rtl:pl-1.5 dark:text-gray-300"
+                                    style="min-height: 420px; max-height: 60vh;"
+                                >
                                     <v-order-items-list :key="refreshComponent" :order-id="isSelect"></v-order-items-list>
                                 </div>
                             </x-slot>
@@ -224,8 +235,8 @@
                 />
 
                 <div v-for="product in products">
-                    <div class="flex-row gap-2.5 border-b mt-2 mb-2">
-                        <div class="flex gap-2.5 mb-3">
+                    <div class="mb-3 rounded-lg border border-zinc-200 bg-white p-4 shadow-xs transition-all hover:border-zinc-300 dark:border-gray-800 dark:bg-gray-900">
+                        <div class="flex gap-4">
                             <!-- Checkbox -->
                             <p>
                                 <div v-if="product.currentQuantity > '0'">
@@ -233,7 +244,7 @@
                                         type="checkbox"
                                         :name="'isChecked[' + getProductId(product) + ']'"
                                         :id="'isChecked[' + getProductId(product) + ']'"
-                                        class="mt-6"
+                                        class="mt-1 h-4 w-4 cursor-pointer"
                                         :checked="isChecked[getProductId(product)] === true"
                                         @change="selectOnlyOne(getProductId(product))"
                                     />
@@ -260,7 +271,7 @@
                             <p>
                                 <template v-if="product.base_image">
                                     <img
-                                        class="min-h-[80px] max-h-[80px] min-w-[80px] max-w-[80px] rounded"
+                                        class="h-20 w-20 shrink-0 rounded-lg border border-zinc-200 object-cover dark:border-gray-800"
                                         :src="`${baseImageUrl}${product.base_image}`"
                                         :alt="`${product.base_image}`"
                                     />
@@ -268,7 +279,7 @@
 
                                 <template v-else>
                                     <img
-                                        class="min-h-[80px] max-h-[80px] min-w-[80px] max-w-[80px] rounded"
+                                        class="h-20 w-20 shrink-0 rounded-lg border border-zinc-200 object-cover dark:border-gray-800"
                                         src="{{ bagisto_asset('images/medium-product-placeholder.webp', 'shop') }}"
                                         alt="medium-product-placeholder.webp"
                                     >
@@ -282,7 +293,7 @@
                                         <a
                                             :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', product.url_key)"
                                             target='_blank'
-                                            class="text-blue-500 text-lg"
+                                            class="text-base font-semibold text-blue-600 hover:underline dark:text-blue-400"
                                         >
                                             @{{ product.name }}
 
@@ -293,7 +304,7 @@
                                     </template>
                                 </p>
 
-                                <p class="flex text-sm justify-between whitespace-nowrap">
+                                <p class="flex gap-1.5 text-sm">
                                     <span>
                                         @lang('admin::app.catalog.products.index.create.sku'):
                                     </span>
@@ -301,7 +312,7 @@
                                     <span>@{{ product.sku }}</span>
                                 </p>
 
-                                <p class="flex text-sm justify-between whitespace-nowrap">
+                                <p class="flex gap-1.5 text-sm">
                                     <span>
                                         @lang('admin::app.catalog.attributes.create.price'):
                                     </span>
@@ -309,7 +320,7 @@
                                     <span>@{{ formatPrice(product.price) }}</span>
                                 </p>
 
-                                <p class="flex text-sm justify-between whitespace-nowrap">
+                                <p class="flex gap-1.5 text-sm">
                                     <span>
                                         @lang('admin::app.configuration.index.sales.rma.current-order-quantity'):
                                     </span>
@@ -321,7 +332,7 @@
 
                                 <p
                                     v-if="resolutionType[getProductId(product)] == 'return' && products['0'].order_status != 'pending'"
-                                    class="flex text-sm justify-between gap-3 whitespace-nowrap"
+                                    class="flex gap-1.5 text-sm"
                                 >
                                     <span>
                                         @lang('admin::app.sales.rma.all-rma.index.datagrid.return-window'):
@@ -335,19 +346,19 @@
                         </div>
 
                         <template v-if="! notAllowed">
-                            <p class="w-full">
-                                <div
-                                    v-if="product.currentQuantity <= '0'"
-                                    class="text-sm text-red-600 flex mb-2"
-                                >
-                                    @lang('admin::app.configuration.index.sales.rma.product-already-raw')
-                                </div>
-                            </p>
+                            <div
+                                v-if="product.currentQuantity <= '0'"
+                                class="mt-3 flex items-center gap-2 rounded-md border border-red-100 bg-red-50 px-3 py-2 text-sm text-red-600 dark:border-red-900/40 dark:bg-red-900/20"
+                            >
+                                <span class="icon-cancel text-lg"></span>
+
+                                @lang('admin::app.configuration.index.sales.rma.product-already-raw')
+                            </div>
 
                             <div class="flex gap-3">
                                 <!-- Resolution Type for rules product -->
                                 <p class="w-full" v-if="product.rma_return_period">
-                                    <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
+                                    <div class="mt-4" v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required text-sm flex">
                                                 @lang('admin::app.configuration.index.sales.rma.resolution-type')
@@ -387,7 +398,7 @@
 
                                 <!-- Resolution Type -->
                                 <p class="w-full" v-else>
-                                    <div v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
+                                    <div class="mt-4" v-if="isChecked[getProductId(product)] && product.currentQuantity > '0'">
                                         <x-admin::form.control-group>
                                             <x-admin::form.control-group.label class="required text-sm flex">
                                                 @lang('admin::app.configuration.index.sales.rma.resolution-type')
@@ -426,7 +437,7 @@
                                 </p>
 
                                 <!-- Reasons -->
-                                <p class="w-full">
+                                <p class="mt-4 w-full">
                                     <div
                                         v-if="isChecked[getProductId(product)]
                                             && product.currentQuantity > '0'
@@ -495,7 +506,7 @@
                                         <!-- Package Condition -->
                                         <p class="w-full">
                                             <x-admin::form.control-group>
-                                                <x-admin::form.control-group.label class="text-sm mt-4 flex">
+                                                <x-admin::form.control-group.label class="text-sm flex">
                                                     @lang('admin::app.configuration.index.sales.rma.package-condition')
                                                 </x-admin::form.control-group.label>
 
@@ -556,7 +567,7 @@
                     @foreach ($customAttributes as $attribute)
                         <x-admin::form.control-group>
                             <x-admin::form.control-group.label class="flex text-sm mt-4">
-                                {!! $attribute->label . ($attribute->is_required == '1' ? '<span class="required"></span>' : '') !!}
+                                {{ $attribute->label }} @if ($attribute->is_required == '1')<span class="required"></span>@endif
                             </x-admin::form.control-group.label>
 
                             @if ($attribute->is_required == '1')
@@ -677,7 +688,7 @@
 
                                 @case('checkbox')
                                     @foreach($attribute->options ?? [] as $option)
-                                        <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2 select-none">
+                                        <x-admin::form.control-group class="flex gap-2.5 items-center mb-2! select-none">
                                             <x-admin::form.control-group.control
                                                 type="checkbox"
                                                 id="{{ $attribute->id }}"
@@ -705,7 +716,7 @@
                                 @case('radio')
                                     @foreach($attribute->options ?? [] as $key => $option)
                                         <div class="flex items-center gap-2.5">
-                                            <x-admin::form.control-group class="!mb-0">
+                                            <x-admin::form.control-group class="mb-0!">
                                                 <x-admin::form.control-group.control
                                                     type="radio"
                                                     name="customAttributes[{{ $attribute->id }}]"
@@ -760,17 +771,17 @@
                         <!-- Preview -->
                         <div
                             v-if="imagePreviews.length"
-                            class="my-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3"
+                            class="my-4 flex flex-wrap gap-3"
                         >
                             <div
                                 v-for="(image, index) in imagePreviews"
                                 :key="index"
-                                class="relative group w-24 h-24"
+                                class="relative group h-24 w-24 shrink-0"
                             >
                                 <!-- Image -->
                                 <img
                                     :src="image"
-                                    class="w-full h-full object-cover rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm"
+                                    class="w-full h-full object-cover rounded-lg border border-gray-200 dark:border-gray-700 shadow-xs"
                                 />
 
                                 <!-- Remove button -->
@@ -779,7 +790,7 @@
                                     class="absolute -top-2 -right-2 w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition"
                                     @click="removeImage(index)"
                                 >
-                                    <i class="icon-cancel-1 cursor-pointer rounded-full text-2xl text-white bg-gray-950"></i>
+                                    <i class="icon-close cursor-pointer rounded-full text-2xl text-white bg-gray-950"></i>
                                 </button>
                             </div>
                         </div>
@@ -903,6 +914,8 @@
                         imageFiles: [],
 
                         imagePreviews: [],
+
+                        allowedFileTypes: @json(core()->getConfigData('sales.rma.setting.allowed_file_extension')),
                     }
                 },
 
@@ -924,20 +937,22 @@
                     },
 
                     selectOnlyOne(productId) {
+                        const wasChecked = this.isChecked[productId] === true;
+
                         for (const key in this.isChecked) {
                             if (Object.prototype.hasOwnProperty.call(this.isChecked, key)) {
                                 this.isChecked[key] = false;
-                                if (key != productId) {
-                                    this.rma_qty[key] = null;
-                                    this.rma_reason_id[key] = null;
-                                    this.resolutionType[key] = null;
-                                    this.resolutionReason[key] = null;
-                                }
+                                this.rma_qty[key] = null;
+                                this.rma_reason_id[key] = null;
+                                this.resolutionType[key] = null;
+                                this.resolutionReason[key] = null;
                             }
                         }
 
-                        this.isChecked[productId] = true;
-                        this.resolutionType[productId] = null;
+                        if (! wasChecked) {
+                            this.isChecked[productId] = true;
+                            this.resolutionType[productId] = null;
+                        }
                     },
 
                     getProductId(product) {
@@ -1015,14 +1030,28 @@
                     },
 
                     previewImages(event) {
+                        const allowed = this.allowedFileTypes
+                            .split(',')
+                            .map(type => type.trim())
+                            .filter(Boolean);
+
                         const files = Array.from(event.target.files);
+
+                        if (allowed.length && ! files.every(file => allowed.includes(file.type))) {
+                            this.$emitter.emit('add-flash', {
+                                type: 'warning',
+                                message: "@lang('admin::app.configuration.index.sales.rma.allowed-file-types', ['allowed_types' => strtoupper(str_replace(['image/', ','], ['', ', '], core()->getConfigData('sales.rma.setting.allowed_file_extension')))])"
+                            });
+
+                            event.target.value = '';
+
+                            return;
+                        }
 
                         this.imageFiles = files;
                         this.imagePreviews = [];
 
                         files.forEach(file => {
-                            if (!file.type.startsWith('image/')) return;
-
                             const reader = new FileReader();
 
                             reader.onload = e => {

@@ -4,12 +4,12 @@
         @lang('admin::app.users.sessions.title')
     </x-slot>
 
-    <div class="flex h-[100vh] items-center justify-center">
+    <div class="flex h-screen items-center justify-center">
         <div class="flex flex-col items-center gap-5">
             <!-- Logo -->            
             @if ($logo = core()->getConfigData('general.design.admin_logo.logo_image'))
                 <img
-                    class="h-10 w-[110px]"
+                    class="h-10 w-27.5"
                     src="{{ Storage::url($logo) }}"
                     alt="{{ config('app.name') }}"
                 />
@@ -21,7 +21,7 @@
                 />
             @endif
 
-            <div class="box-shadow flex min-w-[300px] flex-col rounded-md bg-white dark:bg-gray-900">
+            <div class="box-shadow flex min-w-75 flex-col rounded-md bg-white dark:bg-gray-900">
                 <!-- Login Form -->
                 <x-admin::form :action="route('admin.session.store')">
                     <p class="p-4 text-xl font-bold text-gray-800 dark:text-white">
@@ -37,7 +37,7 @@
 
                             <x-admin::form.control-group.control 
                                 type="email" 
-                                class="w-[254px] max-w-full" 
+                                class="w-63.5 max-w-full" 
                                 id="email"
                                 name="email" 
                                 rules="required|email" 
@@ -56,7 +56,7 @@
                     
                             <x-admin::form.control-group.control 
                                 type="password" 
-                                class="w-[254px] max-w-full ltr:pr-10 rtl:pl-10" 
+                                class="w-63.5 max-w-full ltr:pr-10 rtl:pl-10" 
                                 id="password"
                                 name="password" 
                                 rules="required|min:6" 
@@ -65,7 +65,7 @@
                             />
                     
                             <span 
-                                class="icon-view absolute top-[42px] -translate-y-2/4 cursor-pointer text-2xl ltr:right-2 rtl:left-2"
+                                class="icon-view absolute top-10.5 -translate-y-2/4 cursor-pointer text-2xl ltr:right-2 rtl:left-2"
                                 onclick="switchVisibility()"
                                 id="visibilityIcon"
                                 role="presentation"

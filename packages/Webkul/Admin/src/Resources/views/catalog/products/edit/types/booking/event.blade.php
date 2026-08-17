@@ -312,7 +312,7 @@
                         </div>
 
                         <!-- Description -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.catalog.products.edit.types.booking.event.description')
                             </x-admin::form.control-group.label>

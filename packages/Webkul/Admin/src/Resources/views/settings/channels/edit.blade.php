@@ -66,7 +66,7 @@
                     </x-slot>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         @foreach (core()->getAllLocales() as $locale)
                             <a
                                 href="?{{ Arr::query(['locale' => $locale->code]) }}"
@@ -88,7 +88,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.general.before', ['channel' => $channel]) !!}
 
                 <!-- General Information -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.edit.general')
                     </p>
@@ -125,7 +125,7 @@
                             @lang('admin::app.settings.channels.edit.name')
 
                             <span
-                                class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                 v-pre
                             >
                                 {{ $currentLocale->name }}
@@ -151,7 +151,7 @@
                             @lang('admin::app.settings.channels.edit.description')
 
                             <span
-                                class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                 v-pre
                             >
                                 {{ $currentLocale->name }}
@@ -177,7 +177,7 @@
                         </x-admin::form.control-group.label>
 
                         @foreach (app('Webkul\Inventory\Repositories\InventorySourceRepository')->findWhere(['status' => 1]) as $inventorySource)
-                            <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                            <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                 <x-admin::form.control-group.control
                                     type="checkbox"
                                     :id="'inventory_sources_' . $inventorySource->id"
@@ -231,7 +231,7 @@
                     </x-admin::form.control-group>
 
                     <!-- Host Name -->
-                    <x-admin::form.control-group class="!mb-0">
+                    <x-admin::form.control-group class="mb-0!">
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.edit.hostname')
                         </x-admin::form.control-group.label>
@@ -254,7 +254,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.design.before', ['channel' => $channel]) !!}
 
                 <!-- Logo and Design -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.edit.design')
                     </p>
@@ -296,9 +296,16 @@
 
                                 <x-admin::media.images
                                     name="logo"
+                                    meta-name="logo_meta"
+                                    enable-seo="true"
                                     width="110px"
                                     height="110px"
-                                    :uploaded-images="$channel->logo ? [['id' => 'logo_path', 'url' => $channel->logo_url]] : []"
+                                    :uploaded-images="$channel->logo ? [[
+                                        'id'        => 'logo',
+                                        'url'       => $channel->logo_url,
+                                        'file_name' => $channel->logo_file_name,
+                                        'alt_text'  => $channel->logo_alt,
+                                    ]] : []"
                                 />
                             </x-admin::form.control-group>
 
@@ -316,9 +323,15 @@
 
                                 <x-admin::media.images
                                     name="favicon"
+                                    meta-name="favicon_meta"
+                                    enable-seo="true"
                                     width="110px"
                                     height="110px"
-                                    :uploaded-images="$channel->favicon ? [['id' => 'logo_path', 'url' => $channel->favicon_url]] : []"
+                                    :uploaded-images="$channel->favicon ? [[
+                                        'id'        => 'favicon',
+                                        'url'       => $channel->favicon_url,
+                                        'file_name' => $channel->favicon_file_name,
+                                    ]] : []"
                                 />
                             </x-admin::form.control-group>
 
@@ -334,7 +347,7 @@
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.seo.before', ['channel' => $channel]) !!}
 
                 <!-- Home Page SEO -->
-                <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+                <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                         @lang('admin::app.settings.channels.edit.seo')
                     </p>
@@ -353,7 +366,7 @@
                             @lang('admin::app.settings.channels.edit.seo-title')
 
                             <span
-                                class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                 v-pre
                             >
                                 {{ $currentLocale->name }}
@@ -379,7 +392,7 @@
                             @lang('admin::app.settings.channels.edit.seo-keywords')
 
                             <span
-                                class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                 v-pre
                             >
                                 {{ $currentLocale->name }}
@@ -399,12 +412,12 @@
                     </x-admin::form.control-group>
 
                     <!-- Meta Description -->
-                    <x-admin::form.control-group class="!mb-0">
+                    <x-admin::form.control-group class="mb-0!">
                         <x-admin::form.control-group.label class="required">
                             @lang('admin::app.settings.channels.edit.seo-description')
 
                             <span
-                                class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                 v-pre
                             >
                                 {{ $currentLocale->name }}
@@ -430,7 +443,7 @@
             </div>
 
             <!-- Right Component -->
-            <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
+            <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
 
                 {!! view_render_event('bagisto.admin.settings.channels.edit.card.accordion.currencies_and_locales.before', ['channel' => $channel]) !!}
 
@@ -454,7 +467,7 @@
                             @php $selectedLocalesId = old('locales') ?? $channel->locales->pluck('id')->toArray(); @endphp
 
                             @foreach (core()->getAllLocales() as $locale)
-                                <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                                <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         :id="'locales_' . $locale->id"
@@ -515,7 +528,7 @@
                             @php $selectedCurrenciesId = old('currencies') ?: $channel->currencies->pluck('id')->toArray(); @endphp
 
                             @foreach (core()->getAllCurrencies() as $currency)
-                                <x-admin::form.control-group class="!mb-2 flex items-center gap-2.5">
+                                <x-admin::form.control-group class="mb-2! flex items-center gap-2.5">
                                     <x-admin::form.control-group.control
                                         type="checkbox"
                                         :id="'currencies_' . $currency->id"
@@ -541,7 +554,7 @@
                         </div>
 
                         <!-- Default Currency Selector -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label class="required">
                                 @lang('admin::app.settings.channels.edit.default-currency')
                             </x-admin::form.control-group.label>
@@ -590,7 +603,7 @@
                                 @lang('admin::app.settings.channels.edit.maintenance-mode-text')
 
                                 <span
-                                    class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                    class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                     v-pre
                                 >
                                     {{ $currentLocale->name }}
@@ -611,7 +624,7 @@
 
                         <!-- Allowed API's -->
                         <x-admin::form.control-group>
-                            <x-admin::form.control-group.label class="!text-gray-800 dark:!text-white">
+                            <x-admin::form.control-group.label class="text-gray-800! dark:text-white!">
                                 @lang('admin::app.settings.channels.edit.allowed-ips')
                             </x-admin::form.control-group.label>
 
@@ -628,7 +641,7 @@
                         </x-admin::form.control-group>
 
                         <!-- Maintenance Mode Switcher -->
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.label>
                                 @lang('admin::app.settings.channels.edit.status')
                             </x-admin::form.control-group.label>

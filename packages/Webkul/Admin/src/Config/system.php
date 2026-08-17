@@ -108,12 +108,12 @@ return [
                 'name' => 'enabled',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.enable-speculation',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => false,
             ], [
                 'name' => 'prerender_enabled',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.enabled',
                 'type' => 'boolean',
-                'default' => true,
+                'default' => false,
             ], [
                 'name' => 'prerender_ignore_urls',
                 'title' => 'admin::app.configuration.index.general.content.speculation-rules.prerender.ignore-urls',
@@ -2205,10 +2205,90 @@ return [
             ],
         ],
     ], [
+        'key' => 'sales.payment_methods.phonepe',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.phonepe',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-info',
+        'sort' => 4,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'type' => 'image',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'client_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-id',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-client-id-info',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'client_secret',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.client-secret',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-client-secret-info',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'merchant_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-id',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.phonepe-merchant-info',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'type' => 'boolean',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
         'key' => 'sales.payment_methods.paypal_smart_button',
         'name' => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button',
         'info' => 'admin::app.configuration.index.sales.payment-methods.paypal-smart-button-info',
-        'sort' => 4,
+        'sort' => 5,
         'fields' => [
             [
                 'name' => 'active',
@@ -2285,7 +2365,7 @@ return [
         'key' => 'sales.payment_methods.paypal_standard',
         'name' => 'admin::app.configuration.index.sales.payment-methods.paypal-standard',
         'info' => 'admin::app.configuration.index.sales.payment-methods.paypal-standard-info',
-        'sort' => 5,
+        'sort' => 6,
         'fields' => [
             [
                 'name' => 'active',
@@ -2346,7 +2426,7 @@ return [
         'key' => 'sales.payment_methods.cashondelivery',
         'name' => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery',
         'info' => 'admin::app.configuration.index.sales.payment-methods.cash-on-delivery-info',
-        'sort' => 6,
+        'sort' => 7,
         'fields' => [
             [
                 'name' => 'active',
@@ -2443,7 +2523,7 @@ return [
         'key' => 'sales.payment_methods.moneytransfer',
         'name' => 'admin::app.configuration.index.sales.payment-methods.money-transfer',
         'info' => 'admin::app.configuration.index.sales.payment-methods.money-transfer-info',
-        'sort' => 7,
+        'sort' => 8,
         'fields' => [
             [
                 'name' => 'active',
@@ -2523,6 +2603,109 @@ return [
                 'name' => 'mailing_address',
                 'title' => 'admin::app.configuration.index.sales.payment-methods.mailing-address',
                 'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sort',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sort-order',
+                'type' => 'number',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1|integer|min:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.payment_methods.payglocal',
+        'name' => 'admin::app.configuration.index.sales.payment-methods.payglocal',
+        'info' => 'admin::app.configuration.index.sales.payment-methods.payglocal-info',
+        'sort' => 9,
+        'fields' => [
+            [
+                'name' => 'active',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.status',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'title',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.title',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:active,1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'description',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.description',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => true,
+            ], [
+                'name' => 'image',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.logo',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.logo-information',
+                'type' => 'image',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+                'validation' => 'mimes:bmp,jpeg,jpg,png,webp',
+            ], [
+                'name' => 'merchant_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-id',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.payglocal-merchant-id-info',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'public_key_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.public-key-id',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.payglocal-public-key-id-info',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'private_key_id',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.private-key-id',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.payglocal-private-key-id-info',
+                'type' => 'password',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'payglocal_public_key',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.payglocal-public-key',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.payglocal-public-key-info',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'merchant_private_key',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.merchant-private-key',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.merchant-private-key-info',
+                'type' => 'textarea',
+                'depends' => 'active:1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'accepted_currencies',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.accepted-currencies-info',
+                'type' => 'text',
+                'depends' => 'active:1',
+                'validation' => 'required_if:sales.payment_methods.payglocal.active,1',
+                'channel_based' => true,
+                'locale_based' => false,
+            ], [
+                'name' => 'sandbox',
+                'title' => 'admin::app.configuration.index.sales.payment-methods.sandbox',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.payglocal-sandbox-info',
+                'type' => 'boolean',
                 'depends' => 'active:1',
                 'channel_based' => true,
                 'locale_based' => false,
@@ -2862,6 +3045,21 @@ return [
                         'value' => 'including_tax',
                     ],
                 ],
+            ], [
+                'name' => 'apply_tax_on',
+                'title' => 'admin::app.configuration.index.sales.taxes.calculation.apply-tax-on',
+                'info' => 'admin::app.configuration.index.sales.taxes.calculation.apply-tax-on-info',
+                'type' => 'select',
+                'default' => 'after_discount',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.before-discount',
+                        'value' => 'before_discount',
+                    ], [
+                        'title' => 'admin::app.configuration.index.sales.taxes.calculation.after-discount',
+                        'value' => 'after_discount',
+                    ],
+                ],
             ],
         ],
     ], [
@@ -2944,6 +3142,12 @@ return [
                         'value' => 'both',
                     ],
                 ],
+            ], [
+                'name' => 'show_tax_breakdown',
+                'title' => 'admin::app.configuration.index.sales.taxes.shopping-cart.show-tax-breakdown',
+                'info' => 'admin::app.configuration.index.sales.taxes.shopping-cart.show-tax-breakdown-info',
+                'type' => 'boolean',
+                'default' => false,
             ],
         ],
     ], [
@@ -3107,6 +3311,7 @@ return [
             ], [
                 'name' => 'return_policy',
                 'title' => 'admin::app.configuration.index.sales.rma.return-policy',
+                'info' => 'admin::app.configuration.index.sales.rma.return-policy-info',
                 'type' => 'textarea',
                 'validation' => 'required',
                 'default' => '7 days return policy.',
@@ -3115,15 +3320,13 @@ return [
             ], [
                 'name' => 'allowed_file_extension',
                 'title' => 'admin::app.configuration.index.sales.rma.allowed-file-extension',
+                'info' => 'admin::app.configuration.index.sales.rma.file-extension-info',
                 'validation' => 'required',
-                'default' => 'image/jpg,image/jpeg,image/png,image/webp',
+                'default' => 'image/jpeg,image/png,image/webp',
                 'type' => 'multiselect',
                 'options' => [
                     [
-                        'title' => 'JPG',
-                        'value' => 'image/jpg',
-                    ], [
-                        'title' => 'JPEG',
+                        'title' => 'JPG / JPEG',
                         'value' => 'image/jpeg',
                     ], [
                         'title' => 'PNG',
@@ -3138,6 +3341,7 @@ return [
             ], [
                 'name' => 'allowed_new_rma_request_for_cancelled_request',
                 'title' => 'admin::app.configuration.index.sales.rma.allowed-request-cancelled-request',
+                'info' => 'admin::app.configuration.index.sales.rma.cancelled-request-info',
                 'type' => 'select',
                 'validation' => 'required',
                 'default' => 'yes',
@@ -3155,6 +3359,7 @@ return [
             ], [
                 'name' => 'allowed_new_rma_request_for_declined_request',
                 'title' => 'admin::app.configuration.index.sales.rma.allowed-request-declined-request',
+                'info' => 'admin::app.configuration.index.sales.rma.declined-request-info',
                 'type' => 'select',
                 'validation' => 'required',
                 'default' => 'yes',
@@ -3172,6 +3377,7 @@ return [
             ], [
                 'name' => 'select_allowed_product_type',
                 'title' => 'admin::app.configuration.index.sales.rma.allow-product-type-for-rma',
+                'info' => 'admin::app.configuration.index.sales.rma.product-type-info',
                 'type' => 'multiselect',
                 'default' => 'simple,configurable,bundle,grouped',
                 'options' => [
@@ -3191,6 +3397,27 @@ return [
                 ],
                 'channel_based' => true,
                 'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'sales.eu_withdrawal',
+        'name' => 'admin::app.eu_withdrawal.config.title',
+        'info' => 'admin::app.eu_withdrawal.config.info',
+        'icon' => 'settings/eu-withdrawal.svg',
+        'sort' => 12,
+    ], [
+        'key' => 'sales.eu_withdrawal.general',
+        'name' => 'admin::app.eu_withdrawal.config.general.title',
+        'info' => 'admin::app.eu_withdrawal.config.general.info',
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.eu_withdrawal.config.general.enabled',
+                'info' => 'admin::app.eu_withdrawal.config.general.enabled_info',
+                'type' => 'boolean',
+                'channel_based' => true,
+                'locale_based' => false,
+                'default' => 0,
             ],
         ],
     ],

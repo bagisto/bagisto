@@ -17,22 +17,22 @@
                 v-slot="{ field, errors }" 
                 value="1"
             >
-                <label class="relative inline-flex cursor-pointer items-center">
-                    <input 
-                        type="checkbox" 
-                        class="peer sr-only" 
-                        id="agreement" 
-                        name="agreement" 
+                <label class="relative inline-flex cursor-pointer items-start gap-2">
+                    <input
+                        type="checkbox"
+                        class="peer sr-only"
+                        id="agreement"
+                        name="agreement"
                         value="1"
-                        v-bind="field" 
+                        v-bind="field"
                     />
 
-                    <span 
-                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl peer-checked:text-navyBlue"
+                    <span
+                        class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl leading-tight peer-checked:text-navyBlue"
                     >
                     </span>
 
-                    <span class="ml-2 mt-4 block">
+                    <span class="block">
                         <span class="text-zinc-500 max-md:text-xs">
                             @lang('shop::app.customers.account.rma.terms.terms')
                         </span>
@@ -68,7 +68,7 @@
             <!-- Modal Content -->
             <x-slot:content>
                 <div 
-                    class="overflow-y-auto rounded border border-gray-200 bg-gray-50 p-4" 
+                    class="overflow-y-auto rounded-sm border border-gray-200 bg-gray-50 p-4" 
                     style="min-height: 400px; max-height: 500px;"
                 >
                     <div class="prose prose-sm max-w-none text-gray-700">

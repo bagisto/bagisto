@@ -43,7 +43,7 @@
             <x-shop::form.control-group class="mt-4">
                 <x-shop::form.control-group.control
                     type="image"
-                    class="max-md:[&>*]:[&>*]:rounded-full mb-0 rounded-xl !p-0 text-gray-700 max-md:grid max-md:justify-center"
+                    class="max-md:[&>*]:[&>*]:rounded-full mb-0 rounded-xl p-0! text-gray-700 max-md:grid max-md:justify-center"
                     name="image[]"
                     :label="trans('Image')"
                     :is-multiple="false"
@@ -256,7 +256,7 @@
                 />
 
                 <label
-                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 peer-focus-visible:outline-none rounded"
+                    class="icon-uncheck peer-checked:icon-check-box cursor-pointer text-2xl text-navyBlue peer-checked:text-navyBlue peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 peer-focus-visible:outline-hidden rounded"
                     for="is-subscribed"
                 ></label>
 

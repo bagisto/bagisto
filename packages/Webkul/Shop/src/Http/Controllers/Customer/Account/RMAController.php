@@ -8,8 +8,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rules\Enum;
 use Illuminate\View\View;
+use Symfony\Component\Mime\MimeTypes;
 use Webkul\Admin\Mail\Admin\RMA\CustomerToAdminConversationNotification;
 use Webkul\RMA\Contracts\RMAReason;
 use Webkul\RMA\Enums\DefaultRMAResolution;
@@ -126,7 +128,7 @@ class RMAController extends Controller
         $this->validate(request(), [
             'order_id' => 'required|exists:orders,id',
             'order_item_id' => 'required',
-            'rma_qty' => 'required',
+            'rma_qty' => 'required|integer|min:1',
             'resolution_type' => ['required', new Enum(DefaultRMAResolution::class)],
             'rma_reason_id' => 'required',
             'information' => 'nullable|string',
@@ -159,17 +161,38 @@ class RMAController extends Controller
             ]);
         }
 
-        $orderItem = $this->orderItemRepository->findOneWhere([
-            'id' => $data['order_item_id'],
-            'order_id' => $order->id,
-        ]);
+        /**
+         * Resolve the requested item from the RMA-eligible set for this order. getOrderItems()
+         * applies the same rules as the create form - the product is RMA enabled, of an allowed
+         * type, and still within its return window - which the raw API previously skipped. An
+         * item that is ineligible or whose return window has passed will not be present here.
+         */
+        $eligibleItem = $this->rmaHelper->getOrderItems($order->id)
+            ->firstWhere('order_item_id', (int) $data['order_item_id']);
 
-        if (! $orderItem) {
+        if (! $eligibleItem) {
             return new JsonResponse([
                 'messages' => trans('shop::app.rma.response.invalid-item'),
                 'redirect' => route('shop.customers.account.rma.create'),
             ]);
         }
+
+        /**
+         * Cap the requested quantity against the trusted, server-computed limit for the chosen
+         * resolution, bounded by the quantity not already covered by other RMA requests. The
+         * client form applies this, but the API did not - so a crafted request could otherwise
+         * store a quantity far larger than what is returnable/cancelable, corrupting the order
+         * (e.g. qty_canceled greatly exceeding qty_ordered) when an admin processes it.
+         */
+        $resolutionMax = $data['resolution_type'] === DefaultRMAResolution::CANCEL_ITEMS->value
+            ? (int) $eligibleItem->forCancelQuantity
+            : (int) $eligibleItem->forReturnQuantity;
+
+        $maxQty = max(0, min($resolutionMax, (int) $eligibleItem->currentQuantity));
+
+        $this->validate(request(), [
+            'rma_qty' => 'integer|min:1|max:'.$maxQty,
+        ]);
 
         Event::dispatch('customer.rma.request.create.before', $data);
 
@@ -284,6 +307,15 @@ class RMAController extends Controller
             abort(404);
         }
 
+        if (
+            $this->rmaRepository->isRmaExpired($rma)
+            || ! $this->rmaRepository->canCloseRma($rma)
+        ) {
+            session()->flash('error', trans('shop::app.rma.response.close-not-allowed'));
+
+            return back();
+        }
+
         if (! empty($data['close_rma'])) {
             Event::dispatch('customer.rma.request.update.before', $id);
 
@@ -316,17 +348,16 @@ class RMAController extends Controller
             abort(404);
         }
 
-        if (! $this->rmaRepository->canReopenRma($rma)) {
+        if (
+            $this->rmaRepository->isRmaExpired($rma)
+            || ! $this->rmaRepository->canReopenRma($rma)
+        ) {
             session()->flash('error', trans('shop::app.rma.response.reopen-not-allowed'));
 
             return back();
         }
 
         if (! empty($data['reopen_rma'])) {
-            $order = $this->orderRepository->findOrFail($rma->order_id);
-
-            $order->update(['status' => Order::STATUS_PENDING]);
-
             Event::dispatch('customer.rma.request.update.before', $id);
 
             $rma->update(['rma_status_id' => DefaultRMAStatusEnum::PENDING->value]);
@@ -363,6 +394,12 @@ class RMAController extends Controller
         if ($rma->rma_status_id == DefaultRMAStatusEnum::CANCELED->value) {
             return response()->json([
                 'message' => trans('shop::app.rma.response.already-cancel'),
+            ]);
+        }
+
+        if (! $this->rmaRepository->canCancelRma($rma)) {
+            return response()->json([
+                'message' => trans('shop::app.rma.response.cancel-not-allowed'),
             ]);
         }
 
@@ -429,7 +466,12 @@ class RMAController extends Controller
             if (request()->hasFile('file')) {
                 $file = request()->file('file');
 
-                $path = $file->store('rma-conversation/'.$storedMessage->id);
+                $extension = MimeTypes::getDefault()->getExtensions($file->getMimeType())[0] ?? null;
+
+                $path = $file->storeAs(
+                    'rma-conversation/'.$storedMessage->id,
+                    Str::random(40).($extension ? '.'.$extension : '')
+                );
 
                 $this->rmaMessageRepository->update([
                     'attachment_path' => $path,

@@ -35,10 +35,10 @@ trait Sanitizer
     }
 
     /**
-     * Sanitize SVG file.
+     * Check whether the mime type is allowed.
      *
-     * @param  string  $path
-     * @return void
+     * @param  string  $mimeType
+     * @return bool
      */
     public function checkMimeType($mimeType)
     {

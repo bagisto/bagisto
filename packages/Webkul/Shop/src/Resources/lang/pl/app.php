@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Pozostałe pobrania',
                 'status' => 'Status',
                 'title' => 'Tytuł',
+                'unlimited' => 'Bez ograniczeń',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Domyślny nagłówek',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Zamknij galerię',
+            'view-image' => 'Zobacz obraz',
+            'view-video' => 'Zobacz wideo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Domyślna zmiana',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Dodaj załączniki',
                 'add-image' => 'Dodaj Obraz/Wideo',
+                'invalid-file-type' => 'Wybrany typ pliku jest niedozwolony.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Witamy gościa',
                     'wishlist' => 'Lista życzeń',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Dodaj produkt do listy życzeń klienta według nazwy.',
+                'add-to-wishlist-query' => 'Nazwa produktu lub klucz URL do dodania do listy życzeń.',
+                'proceed-to-checkout' => 'Otwórz stronę kasy, aby rozpocząć składanie zamówienia na produkty z koszyka.',
+                'search-products' => 'Wyszukaj produkty w katalogu sklepu według słowa kluczowego i otwórz pasujące wyniki.',
+                'search-products-query' => 'Słowa kluczowe lub nazwa produktu do wyszukania w katalogu.',
+                'subscribe-newsletter' => 'Zapisz adres e-mail do newslettera sklepu.',
+                'subscribe-newsletter-email' => 'Adres e-mail do zapisania się do newslettera.',
+                'view-cart' => 'Otwórz stronę koszyka, aby klient mógł przejrzeć dodane produkty.',
+                'view-product' => 'Otwórz stronę szczegółów produktu według nazwy produktu.',
+                'view-product-query' => 'Nazwa produktu lub klucz URL do otwarcia.',
+                'view-wishlist' => 'Otwórz stronę listy życzeń, aby przejrzeć zapisane produkty klienta.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Zmniejsz Ilość',
             'increase-quantity' => 'Zwiększ Ilość',
+            'remove-item' => 'Usuń przedmiot',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Kwota rabatu',
                 'grand-total' => 'Suma ogólna',
                 'included' => 'Wliczone',
+                'excl-tax' => 'Bez podatku:',
                 'incl-tax' => 'Z VAT:',
                 'items-discount' => 'Rabat na pozycje',
                 'shipping-discount' => 'Rabat na wysyłkę',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Akceptuj',
-                'awaiting' => 'Oczekujące',
-                'canceled' => 'Anulowano',
-                'declined' => 'Odrzucony',
-                'dispatched-package' => 'Wysłane paczka',
+                'accept' => 'Zatwierdzono',
+                'awaiting' => 'Oczekiwanie na zwrot',
+                'canceled' => 'Żądanie anulowane',
+                'declined' => 'Żądanie odrzucone',
+                'dispatched-package' => 'Zwrot w drodze',
                 'item-canceled' => 'Anulowany przedmiot',
                 'not-received-package-yet' => 'Jeszcze nie otrzymane paczki',
-                'pending' => 'Oczekujący',
+                'pending' => 'Oczekuje na przegląd',
                 'processing' => 'Przetwarzanie',
-                'received-package' => 'Otrzymane paczka',
+                'received-package' => 'Zwrócono',
                 'solved' => 'Rozwiązany',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'Status RMA został już anulowany.',
+            'cancel-not-allowed' => 'Anulowanie tego żądania RMA nie jest dozwolone.',
             'cancel-success' => 'Status RMA został pomyślnie anulowany.',
+            'close-not-allowed' => 'Zamknięcie tego żądania RMA nie jest dozwolone.',
             'create-success' => 'Żądanie zostało pomyślnie utworzone.',
             'creation-error' => 'Status RMA nie może zostać zaktualizowany, ponieważ faktura za to zamówienie nie została wystawiona.',
             'invalid-item' => 'Wybrana pozycja zamówienia jest nieprawidłowa.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'Ponowne otwarcie tego żądania RMA nie jest dozwolone.',
             'send-message' => ':name zostało pomyślnie wysłane.',
             'update-success' => ':name zostało pomyślnie zaktualizowane.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Odstąpić od umowy',
+            'view_existing' => 'Zobacz swoje odstąpienie',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Odstąpić od umowy',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Odstąpienie od umowy',
+            'heading' => 'Odstąpienie od Umowy',
+            'intro' => 'Podaj numer zamówienia oraz adres e-mail użyty przy składaniu zamówienia. Wyślemy Państwu link do złożenia oświadczenia o odstąpieniu.',
+            'order_number' => 'Numer zamówienia',
+            'email' => 'Adres e-mail',
+            'submit' => 'Wyślij link do odstąpienia',
+            'sent_notice' => 'Jeśli pasujące zamówienie istnieje, właśnie wysłaliśmy link do odstąpienia na podany adres. Link jest ważny przez 24 godziny.',
+            'legal_note' => 'Przysługuje Państwu ustawowe prawo, na podstawie dyrektywy UE 2011/83/UE (ze zmianami), do odstąpienia od umowy w terminie 14 dni. Inne formy odstąpienia – w tym pisemne oświadczenie skierowane do naszego działu obsługi klienta – pozostają w mocy.',
+        ],
+
+        'form' => [
+            'page_title' => 'Potwierdź odstąpienie',
+            'heading' => 'Potwierdź odstąpienie od umowy',
+            'legal_notice_title' => 'To jest prawnie wiążące oświadczenie',
+            'legal_effect' => 'Przesyłając ten formularz, korzystają Państwo z ustawowego prawa odstąpienia w odniesieniu do zamówienia nr :order_id. Oświadczenie wywołuje skutek prawny z chwilą jego wysłania.',
+            'order_summary' => 'Zamówienie',
+            'order_total' => 'Razem',
+            'order_items' => 'Produkty',
+            'placed_on' => 'Złożone :date',
+            'reason_label' => 'Powód',
+            'reason_optional' => '(opcjonalnie)',
+            'reason_help' => 'Nie mają Państwo obowiązku podawania powodu. Wszelkie informacje wpisane tutaj zostaną zapisane w dowodzie odstąpienia i przekazane sprzedawcy.',
+            'reason_placeholder' => 'Na przykład: „Zmieniłem zdanie”, „Produkt niezgodny z opisem” lub pozostaw puste.',
+            'submit' => 'Wyślij odstąpienie',
+            'cancel' => 'Anuluj i wróć',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Potwierdzenie odstąpienia',
+            'heading' => 'Twoje odstąpienie zostało przyjęte',
+            'heading_received' => 'Twoje odstąpienie zostało przyjęte',
+            'heading_refunded' => 'Zwrot środków został zrealizowany',
+            'heading_declined' => 'Twoje odstąpienie zostało odrzucone',
+            'intro' => 'Zarejestrowaliśmy Państwa oświadczenie. Niniejsza strona i e-mail, który właśnie do Państwa wysłaliśmy, stanowią potwierdzenie na trwałym nośniku.',
+            'intro_received' => 'Zarejestrowaliśmy Państwa oświadczenie. Niniejsza strona i e-mail, który właśnie do Państwa wysłaliśmy, stanowią potwierdzenie na trwałym nośniku.',
+            'intro_refunded' => 'Sprzedawca zrealizował zwrot środków. Kwota powinna wkrótce wpłynąć na pierwotnie użytą metodę płatności.',
+            'intro_declined' => 'Sprzedawca kwestionuje Państwa prawo do zwrotu na podstawie niniejszego oświadczenia. Poniżej znajdują się podany powód oraz informacje o pozostałych możliwościach.',
+            'received_at' => 'Otrzymano',
+            'reference' => 'Numer referencyjny',
+            'copy_reference' => 'Kopiuj numer referencyjny',
+            'reference_copied' => 'Numer referencyjny skopiowany do schowka.',
+            'order' => 'Zamówienie',
+            'email' => 'E-mail',
+            'reason' => 'Powód',
+            'status' => 'Status',
+            'status_received' => 'Otrzymane',
+            'status_refunded' => 'Zwrócone',
+            'status_declined' => 'Odrzucone',
+            'print' => 'Drukuj',
+            'next_steps_title' => 'Co dalej',
+            'step_received' => 'Państwa oświadczenie zostało odebrane i zarejestrowane.',
+            'step_email' => 'E-mail potwierdzający został wysłany do Państwa skrzynki.',
+            'step_refund' => 'Zwrot środków w ciągu 14 dni.',
+            'step_refund_done' => 'Zwrot środków został zrealizowany.',
+            'step_declined' => 'Odstąpienie odrzucone przez sprzedawcę.',
+            'declined_reason_label' => 'Powód podany przez sprzedawcę',
+            'declined_notice' => 'Zachowują Państwo wszystkie pozostałe środki ochrony prawnej przewidziane w unijnym prawie konsumenckim. W przypadku niezgody z tą decyzją prosimy o kontakt bezpośrednio ze sprzedawcą.',
+            'refund_notice' => 'Zwracamy środki tym samym sposobem płatności, którego użyli Państwo przy pierwotnej transakcji, chyba że wyraźnie uzgodniono inaczej.',
+            'email_sent' => 'E-mail potwierdzający został wysłany.',
+            'email_pending' => 'Nie udało się wysłać e-maila potwierdzającego natychmiast; nasz zespół zajmie się tym dalej. Prosimy o zapisanie tej strony jako potwierdzenia.',
+            'durable_medium_notice' => 'Ta strona stanowi Państwa potwierdzenie. Można ją zapisać lub wydrukować.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Potwierdzenie odstąpienia od umowy – zamówienie :order_id',
+                'title' => 'Odstąpienie odebrane',
+                'title_received' => 'Odstąpienie odebrane',
+                'title_refunded' => 'Zwrot środków zrealizowany',
+                'title_declined' => 'Odstąpienie odrzucone',
+                'greeting' => 'Dzień dobry,',
+                'intro' => 'Otrzymaliśmy Państwa oświadczenie o odstąpieniu od umowy dotyczącej zamówienia nr :order_id. Prawnie wiążący moment otrzymania jest odnotowany poniżej.',
+                'intro_received' => 'Otrzymaliśmy Państwa oświadczenie o odstąpieniu od umowy dotyczącej zamówienia nr :order_id. Prawnie wiążący moment otrzymania jest odnotowany poniżej.',
+                'intro_refunded' => 'Zwrot środków za zamówienie nr :order_id został zrealizowany. Kwota powinna wkrótce wpłynąć na pierwotnie użytą metodę płatności.',
+                'intro_declined' => 'Sprzedawca kwestionuje Państwa prawo do zwrotu za zamówienie nr :order_id na podstawie niniejszego oświadczenia. Podany powód znajduje się poniżej.',
+                'summary' => 'Podsumowanie odstąpienia',
+                'received_at' => 'Otrzymano',
+                'reference' => 'Numer referencyjny',
+                'order' => 'Zamówienie',
+                'email' => 'E-mail',
+                'reason' => 'Podany powód',
+                'declined_reason' => 'Powód odrzucenia',
+                'refund_notice' => 'Jeżeli należny jest zwrot, dokonujemy go tym samym sposobem płatności, którego użyli Państwo przy pierwotnej transakcji, w ciągu 14 dni od daty wskazanej powyżej, chyba że wyraźnie uzgodniono inaczej.',
+                'footer' => 'Niniejsza wiadomość stanowi potwierdzenie na trwałym nośniku wymagane przez art. 11a dyrektywy 2011/83/UE (zmienionej dyrektywą (UE) 2023/2673). Prosimy o zachowanie jej w swojej dokumentacji.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Twój link do odstąpienia',
+                'title' => 'Twój link do odstąpienia',
+                'intro' => 'Skorzystaj z poniższego linku, aby złożyć oświadczenie o odstąpieniu dla zamówienia :order_id. Link jest ważny przez 24 godziny.',
+                'button' => 'Otwórz formularz odstąpienia',
+                'expiry' => 'Link wygaśnie za 24 godziny. Jeśli nie prosili Państwo o tę wiadomość, można ją zignorować.',
+            ],
         ],
     ],
 ];

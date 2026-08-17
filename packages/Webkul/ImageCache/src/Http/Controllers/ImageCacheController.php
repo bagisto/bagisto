@@ -2,22 +2,22 @@
 
 namespace Webkul\ImageCache\Http\Controllers;
 
-use Closure;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Webkul\Core\Helpers\InstalledPackages;
 
 class ImageCacheController extends Controller
 {
     /**
-     * The current cache template name.
-     */
-    protected string $template = '';
-
-    /**
      * The Bagisto logo URL.
      */
     protected const BAGISTO_LOGO = 'https://updates.bagisto.com/bagisto.png';
+
+    /**
+     * The current cache template name.
+     */
+    protected string $template = '';
 
     /**
      * Get the HTTP response for the requested image.
@@ -52,7 +52,7 @@ class ImageCacheController extends Controller
         }
 
         try {
-            $image = image_manager()->read($path);
+            $image = image_manager()->fromPath($path);
 
             if (is_object($templateConfig) && method_exists($templateConfig, 'applyFilter')) {
                 $image = $templateConfig->applyFilter($image);
@@ -62,11 +62,9 @@ class ImageCacheController extends Controller
                 if (method_exists($filter, 'applyFilter')) {
                     $image = $filter->applyFilter($image);
                 }
-            } elseif ($templateConfig instanceof Closure) {
-                $image = $templateConfig($image);
             }
 
-            $content = (string) $image->encodeByMediaType();
+            $content = $image->toBytes();
 
             return $this->buildResponse($content);
         } catch (Exception) {
@@ -80,12 +78,29 @@ class ImageCacheController extends Controller
     protected function getLogo(): Response
     {
         try {
-            $content = $this->fetchFromUrl(self::BAGISTO_LOGO);
+            $content = $this->fetchFromUrl($this->getLogoUrl());
 
             return $this->buildResponse($content);
         } catch (Exception) {
             abort(404, 'Unable to fetch logo.');
         }
+    }
+
+    /**
+     * Build the logo URL, appending the packages this installation is running so
+     * the tracker can record what its live instances are made up of.
+     */
+    protected function getLogoUrl(): string
+    {
+        $url = self::BAGISTO_LOGO;
+
+        $packages = app(InstalledPackages::class)->all();
+
+        if (! empty($packages)) {
+            $url .= (str_contains($url, '?') ? '&' : '?').http_build_query(['modules' => $packages]);
+        }
+
+        return $url;
     }
 
     /**

@@ -161,6 +161,23 @@ class Stripe extends Payment
     }
 
     /**
+     * Convert an amount to the smallest currency unit expected by Stripe.
+     *
+     * Stripe expects amounts in the currency's smallest unit, which is derived
+     * from the number of decimal digits configured for the base currency. For
+     * zero-decimal currencies (such as JPY) the amount is charged as-is.
+     *
+     * @param  float  $amount
+     * @return int
+     */
+    private function formatAmount($amount)
+    {
+        $decimal = core()->getBaseCurrency()->decimal ?? 2;
+
+        return (int) round($amount * (10 ** $decimal));
+    }
+
+    /**
      * Prepare line items for Stripe Checkout.
      *
      * @return array
@@ -178,7 +195,7 @@ class Stripe extends Payment
                         'name' => $item->product->name,
                     ],
 
-                    'unit_amount' => (int) round($item->base_price * 100),
+                    'unit_amount' => $this->formatAmount($item->base_price),
                 ],
 
                 'quantity' => $item->quantity,
@@ -194,7 +211,7 @@ class Stripe extends Payment
                         'name' => 'Shipping',
                     ],
 
-                    'unit_amount' => (int) round($cart->base_shipping_amount * 100),
+                    'unit_amount' => $this->formatAmount($cart->base_shipping_amount),
                 ],
 
                 'quantity' => 1,
@@ -210,7 +227,7 @@ class Stripe extends Payment
                         'name' => 'Tax',
                     ],
 
-                    'unit_amount' => (int) round($cart->base_tax_total * 100),
+                    'unit_amount' => $this->formatAmount($cart->base_tax_total),
                 ],
 
                 'quantity' => 1,

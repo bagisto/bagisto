@@ -18,7 +18,7 @@
         type="text/x-template"
         id="v-bundle-options-template"
     >
-        <div class="box-shadow relative rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow relative rounded-sm bg-white dark:bg-gray-900">
             <!-- Panel Header -->
             <div class="mb-2.5 flex justify-between gap-5 p-4">
                 <div class="flex flex-col gap-2">
@@ -68,7 +68,7 @@
                 <!-- Placeholder Image -->
                 <img
                     src="{{ bagisto_asset('images/icon-options.svg') }}"
-                    class="h-20 w-20 rounded border border-dashed dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
+                    class="h-20 w-20 rounded-sm border border-dashed dark:border-gray-800 dark:mix-blend-exclusion dark:invert"
                 />
 
                 <!-- Add Variants Information -->
@@ -314,7 +314,7 @@
 
                                 <!-- Image -->
                                 <div
-                                    class="relative h-[60px] max-h-[60px] w-full max-w-[60px] overflow-hidden rounded"
+                                    class="relative h-15 max-h-15 w-full max-w-15 overflow-hidden rounded-sm"
                                     :class="{'overflow-hidden rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert': ! element.product.images.length}"
                                 >
                                     <template v-if="! element.product.images.length">
@@ -361,8 +361,8 @@
                                     :value="index"
                                 />
 
-                                <x-admin::form.control-group class="!mb-0">
-                                    <x-admin::form.control-group.label class="required !block">
+                                <x-admin::form.control-group class="mb-0!">
+                                    <x-admin::form.control-group.label class="required block!">
                                         @lang('admin::app.catalog.products.edit.types.bundle.option.default-qty')
                                     </x-admin::form.control-group.label>
 
@@ -370,7 +370,7 @@
                                         type="text"
                                         :name="'bundle_options[' + option.id + '][products][' + element.id + '][qty]'"
                                         v-model="element.qty"
-                                        class="min-h-[39px] w-[86px] rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                        class="min-h-9.75 w-21.5 rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                         :class="[errors['bundle_options[' + option.id + '][products][' + element.id + '][qty]'] ? 'border border-red-600 hover:border-red-600' : '']"
                                         rules="required|numeric|min_value:1"
                                         label="@lang('admin::app.catalog.products.edit.types.bundle.option.default-qty')"

@@ -30,7 +30,7 @@
                     />
 
                     <!-- View Switcher -->
-                    <div class="inline-flex rounded-lg border border-gray-200 bg-white p-1 shadow-sm dark:border-gray-700 dark:bg-gray-900">
+                    <div class="inline-flex rounded-lg border border-gray-200 bg-white p-1 shadow-xs dark:border-gray-700 dark:bg-gray-900">
                         <!-- Calendar Icon -->
                         <button
                             class="icon-calendar flex h-8 w-9 items-center justify-center rounded-md text-xl transition-all duration-200"

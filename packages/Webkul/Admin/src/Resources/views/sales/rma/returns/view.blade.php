@@ -46,7 +46,7 @@
                 <!-- Left Component -->
                 <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
                     <!-- RMA Details -->
-                    <div class="box-shadow rounded bg-white dark:bg-gray-900">
+                    <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                         <div class="flex justify-between p-4">
                             <p class="text-base font-semibold text-gray-800 dark:text-white">
                                 @lang('admin::app.sales.rma.all-rma.view.title')
@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="grid">
-                            <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800 !pt-0">
+                            <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800 pt-0!">
                                 <div class="flex gap-2.5 w-full">
                                     <div class="flex w-full justify-start gap-5">
                                         <div class="flex flex-col gap-y-1.5">
@@ -104,20 +104,26 @@
 
                                             @if (! empty($rma->additionalFields))
                                                 @foreach ($rma->additionalFields as $key => $additionalField)
-                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                    <p
+                                                        class="text-gray-600 dark:text-gray-300"
+                                                        v-pre
+                                                    >
                                                         {{ $additionalField?->value }}
                                                     </p>
                                                 @endforeach
                                             @endif
 
                                             @if ($rma?->information)
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p
+                                                    class="text-gray-600 dark:text-gray-300"
+                                                    v-pre
+                                                >
                                                     {{ $rma?->information }}
                                                 </p>
                                             @endif
 
                                             @if ($rma->images->isNotEmpty())
-                                                <div class="flex justify-start flex-wrap gap-2 min-w-[180px]">
+                                                <div class="flex justify-start flex-wrap gap-2 min-w-45">
                                                     @foreach($rma->images as $image)
                                                         <img
                                                             class="w-24 max-w-20 relative h-20 max-h-20 rounded-md"
@@ -134,8 +140,8 @@
                     </div>
 
                     <!-- RMA items -->
-                    <div class="box-shadow rounded bg-white dark:bg-gray-900">
-                        <div class="flex justify-between p-4 !pb-0">
+                    <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
+                        <div class="flex justify-between p-4 pb-0!">
                             <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                @lang('admin::app.sales.rma.all-rma.view.order-details')
                             </p>
@@ -146,11 +152,11 @@
                                 <div class="p-4">
                                     @if ($rmaItem?->product?->base_image_url)
                                         <img
-                                            class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded"
+                                            class="relative h-15 max-h-15 w-full max-w-15 rounded-sm"
                                             src="{{ $rmaItem?->product->base_image_url }}"
                                         />
                                     @else
-                                        <div class="relative h-[60px] max-h-[60px] w-full max-w-[60px] rounded border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
+                                        <div class="relative h-15 max-h-15 w-full max-w-15 rounded-sm border border-dashed border-gray-300 dark:border-gray-800 dark:mix-blend-exclusion dark:invert">
                                             <img src="{{ bagisto_asset('images/product-placeholders/front.svg') }}">
 
                                             <p class="absolute bottom-1.5 w-full text-center text-[6px] font-semibold text-gray-400">
@@ -160,13 +166,13 @@
                                     @endif
                                 </div>
 
-                                <p class="py-4 break-all text-base font-semibold text-gray-800 dark:text-white">
-                                    {{ $rmaItem->product->name }}
+                                <p class="py-4 wrap-break-word text-base font-semibold text-gray-800 dark:text-white">
+                                    {{ $rmaItem->product?->name ?? $rmaItem->orderItem?->name }}
                                 </p>
                             </div>
                             
                             <div class="grid">
-                                <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800 !pt-0">
+                                <div class="flex justify-between gap-2.5 border-b border-slate-300 px-4 py-6 dark:border-gray-800 pt-0!">
                                     <div class="flex gap-2.5 w-full">
                                         <div class="flex w-full justify-start gap-5">
                                             <div class="flex flex-col gap-y-1.5">
@@ -191,7 +197,7 @@
                                         <div class="flex w-full justify-start gap-5">
                                             <div class="flex flex-col gap-y-1.5">
                                                 <p class="text-gray-600 dark:text-gray-300">
-                                                    {{ core()->formatBasePrice($rmaItem->product->price) }}
+                                                    {{ core()->formatBasePrice($rmaItem->orderItem->base_price) }}
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">
@@ -207,26 +213,111 @@
                                                 </p>
 
                                                 <p class="text-gray-600 dark:text-gray-300">
-                                                    {!! wordwrap($rmaItem->reason->title, 50, "<br>\n") !!}
+                                                    {!! wordwrap(e($rmaItem->reason->title), 50, "<br>\n") !!}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                            @php
+                                $canTakeOrderAction = in_array($rma->rma_status_id, [
+                                    DefaultRMAStatusEnum::ACCEPT->value,
+                                    DefaultRMAStatusEnum::AWAITING->value,
+                                    DefaultRMAStatusEnum::DISPATCHED_PACKAGE->value,
+                                ]);
+
+                                $isCancelResolution = $rmaItem->resolution === \Webkul\RMA\Enums\DefaultRMAResolution::CANCEL_ITEMS->value;
+                            @endphp
+
+                            @if ($canTakeOrderAction)
+                                <!-- Order Actions (order-linked) -->
+                                <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-300 px-4 py-4 dark:border-gray-800">
+                                    <div class="flex flex-col gap-0.5">
+                                        <p class="text-sm font-semibold text-gray-800 dark:text-white">
+                                            @lang('admin::app.sales.rma.all-rma.view.order-actions')
+                                        </p>
+
+                                        <p class="text-xs text-gray-500 dark:text-gray-400">
+                                            @lang('admin::app.sales.rma.all-rma.view.item-action-note')
+                                        </p>
+                                    </div>
+
+                                    @if ($isCancelResolution)
+                                        <button
+                                            type="button"
+                                            class="primary-button bg-red-600 hover:bg-red-700"
+                                            @click="cancelItem"
+                                        >
+                                            @lang('admin::app.sales.rma.all-rma.view.cancel-item')
+                                        </button>
+                                    @else
+                                        <button
+                                            type="button"
+                                            class="primary-button"
+                                            @click="$refs.refundItemModal.open()"
+                                        >
+                                            @lang('admin::app.sales.rma.all-rma.view.refund-item')
+                                        </button>
+                                    @endif
+                                </div>
+
+                                @unless ($isCancelResolution)
+                                    <!-- Refund Item Modal -->
+                                    <x-admin::modal ref="refundItemModal">
+                                        <x-slot:header>
+                                            <p class="text-lg font-bold text-gray-800 dark:text-white">
+                                                @lang('admin::app.sales.rma.all-rma.view.refund-item')
+                                            </p>
+                                        </x-slot>
+
+                                        <x-slot:content>
+                                            <x-admin::form
+                                                v-slot="{ meta, errors, handleSubmit }"
+                                                as="div"
+                                            >
+                                                <form @submit="handleSubmit($event, refundItem)">
+                                                    <x-admin::form.control-group>
+                                                        <x-admin::form.control-group.label class="required">
+                                                            @lang('admin::app.sales.refunds.create.refund-shipping')
+                                                        </x-admin::form.control-group.label>
+
+                                                        <x-admin::form.control-group.control
+                                                            type="text"
+                                                            name="shipping"
+                                                            :rules="'required|min_value:0|max_value:' . ($rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded)"
+                                                            :value="$rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
+                                                            :label="trans('admin::app.sales.refunds.create.refund-shipping')"
+                                                        />
+
+                                                        <x-admin::form.control-group.error control-name="shipping" />
+                                                    </x-admin::form.control-group>
+
+                                                    <div class="mt-4 flex justify-end">
+                                                        <button type="submit" class="primary-button">
+                                                            @lang('admin::app.sales.rma.all-rma.view.refund-item')
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </x-admin::form>
+                                        </x-slot>
+                                    </x-admin::modal>
+                                @endunless
+                            @endif
                         @endif
                     </div>
 
                     <!-- Conversation -->
-                    <div class="box-shadow rounded bg-white dark:bg-gray-900">
+                    <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
                         <div class="flex justify-between p-4">
                             <p class="mb-4 text-base font-semibold text-gray-800 dark:text-white">
                                @lang('admin::app.sales.rma.all-rma.view.conversations')
                             </p>
                         </div>
 
-                        <div class="grid gap-2.5 p-4">
-                            <div class="mb-3 border rounded-lg p-3">
+                        <div class="flex flex-col-reverse">
+                            <div class="border-t border-gray-200 p-4 dark:border-gray-800">
                                 <x-admin::form
                                     v-slot="{ meta, errors, handleSubmit }"
                                     as="div"
@@ -323,13 +414,12 @@
                             </div>
 
                             <!-- Messages List -->
-                            <div class="border rounded-lg p-3">
-                                <div
-                                    class="mb-3 overflow-x-auto p-5 bg-gray-50 dark:bg-gray-900"
-                                    style="height: 300px;"
-                                    @wheel="getNewMessage()"
-                                    :class="!messages.length ? 'flex justify-center items-center' : ''"
-                                >
+                            <div
+                                class="flex flex-col-reverse overflow-y-auto p-5 bg-gray-50 dark:bg-gray-950"
+                                style="height: 320px;"
+                                @wheel="getNewMessage()"
+                                :class="!messages.length ? 'justify-center items-center' : ''"
+                            >
                                     <template v-if="messages.length">
                                         <div
                                             v-for="message in messages"
@@ -345,7 +435,7 @@
                                                 ]"
                                             >
                                                 <!-- Avatar -->
-                                                <div class="flex-shrink-0">
+                                                <div class="shrink-0">
                                                     <div v-if="message.is_admin == 1" class="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold">
                                                         <svg xmlns='http://www.w3.org/2000/svg' class='w-5 h-5' fill='none' viewBox='0 0 24 24' stroke='currentColor'><path stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M12 11c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm0 2c-2.21 0-6 1.119-6 3.333V19h12v-2.667C18 14.119 14.21 13 12 13z'/></svg>
                                                     </div>
@@ -358,10 +448,10 @@
                                                 <!-- Message Bubble -->
                                                 <div
                                                     :class="[
-                                                        'rounded-lg p-4 shadow',
-                                                        message.is_admin == 1 ? 'bg-blue-100 dark:bg-blue-900 text-right' : 'bg-white dark:bg-gray-800 text-left'
+                                                        'rounded-xl p-3.5 text-left shadow-sm',
+                                                        message.is_admin == 1 ? 'bg-blue-50 dark:bg-blue-900/40' : 'bg-white dark:bg-gray-800'
                                                     ]"
-                                                    style="word-break: break-all; min-width: 180px;"
+                                                    style="word-break: break-word; min-width: 160px;"
                                                 >
                                                     <div class="flex items-center gap-2 mb-1">
                                                         <span class="text-xs font-semibold text-gray-500 dark:text-gray-400">
@@ -372,7 +462,9 @@
                                                             </span>
 
                                                             <span v-else>
-                                                                {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
+                                                                <span v-pre>
+                                                                    {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
+                                                                </span>
                                                             </span>
 
                                                             @lang('admin::app.sales.rma.all-rma.view.on')
@@ -382,10 +474,9 @@
                                                     </div>
 
                                                     <div
-                                                        class="value dark:text-black-300 text-base font-medium mb-2"
-                                                        style="margin-top:2px; word-break: break-all;"
-                                                        v-html="message.message"
-                                                    ></div>
+                                                        class="value text-sm font-medium text-gray-800 dark:text-gray-200"
+                                                        style="margin-top:2px; word-break: break-word;"
+                                                    >@{{ message.message }}</div>
 
                                                     <div v-if="message.attachment" class="mt-2">
                                                         <hr class="mb-2"/>
@@ -411,15 +502,13 @@
                                             <p class="flex justify-center text-gray-300 mt-4">@lang('admin::app.sales.rma.all-rma.view.no-record')</p>
                                         </div>
                                     </template>
-                                    <br>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Right Component -->
-                <div class="flex w-[400px] max-w-full flex-col gap-2 max-sm:w-full">
+                <div class="flex w-100 max-w-full flex-col gap-2 max-sm:w-full">
                     <!-- Statuses -->
                     <x-admin::accordion>
                         <x-slot:header>
@@ -512,28 +601,6 @@
                                                                 <x-admin::form.control-group.error control-name="rma_status_id" />
                                                             </x-admin::form.control-group>
 
-                                                            <!-- Refund Shipping -->
-                                                            <x-admin::form.control-group
-                                                                v-if="rmaStatus == 5"
-                                                                class="mb-2 w-full"
-                                                            >
-                                                                <x-admin::form.control-group.label class="required">
-                                                                    @lang('admin::app.sales.refunds.create.refund-shipping')
-                                                                </x-admin::form.control-group.label>
-
-                                                                <x-admin::form.control-group.control
-                                                                    type="text"
-                                                                    name="shipping"
-                                                                    :rules="'required|min_value:0|max_value:' . $rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
-                                                                    :value="$rma->order->base_shipping_invoiced - $rma->order->base_shipping_refunded"
-                                                                    :label="trans('admin::app.sales.refunds.create.refund-shipping')"
-                                                                    id="shipping"
-                                                                >
-                                                                </x-admin::form.control-group.control>
-
-                                                                <x-admin::form.control-group.error control-name="shipping" />
-                                                            </x-admin::form.control-group>
-
                                                             <div class="account-action">
                                                                 <button
                                                                     type="submit"
@@ -572,7 +639,7 @@
                                     >
                                         <div class="w-full gap-4">
                                             <div class="flex flex-col gap-2.5 mb-4">
-                                                <x-admin::form.control-group class="flex gap-2.5 items-center !mb-2">
+                                                <x-admin::form.control-group class="flex gap-2.5 items-center mb-2!">
                                                     <x-admin::form.control-group.control
                                                         type="checkbox"
                                                         id="close_rma"
@@ -690,12 +757,18 @@
                                     <!-- Customer Info -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @if (empty($rma->order->customer_id))
-                                            <div class="text-sm dark:text-gray-300">
+                                            <div
+                                                class="text-sm dark:text-gray-300"
+                                                v-pre
+                                            >
                                                 {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}  (@lang('admin::app.sales.rma.all-rma.index.datagrid.guest'))
                                             </div>
                                         @else
                                             <a href="{{ route('admin.customers.customers.view', $rma->order->customer_id) }}">
-                                                <div class="text-sm dark:text-gray-300 hover:underline">
+                                                <div
+                                                    class="text-sm dark:text-gray-300 hover:underline"
+                                                    v-pre
+                                                >
                                                     {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
                                                 </div>
                                             </a>
@@ -703,7 +776,10 @@
                                     </p>
 
                                     <!-- Customer Email -->
-                                    <p class="text-gray-600 dark:text-gray-300">
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-pre
+                                    >
                                          {{ $rma->order->customer_email }}
                                     </p>
                                 </div>
@@ -737,7 +813,7 @@
                                 || this.getAttachmentExtension === 'gif'
                         )"
                         :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
-                        class="min-h-[500px] min-w-[500px] max-h-[500px] max-w-[500px] rounded m-auto"
+                        class="min-h-125 min-w-125 max-h-125 max-w-125 rounded-sm m-auto"
                     />
 
                     <!-- Display PDF -->
@@ -761,7 +837,7 @@
                                 || this.getAttachmentExtension === 'ogg'
                             )"
                         controls
-                        class="w-full h-auto max-h-[500px] rounded m-auto"
+                        class="w-full h-auto max-h-125 rounded-sm m-auto"
                     >
                         <source :src="'{{ config('app.url') }}' + '/storage/' + messagePath" />
                     </video>
@@ -798,7 +874,7 @@
                         rma: @json($rma),
                         limit: 5,
                         allowedFileTypes: @json(core()->getConfigData('sales.rma.setting.allowed_file_extension')),
-                        rmaStatus: '',
+                        rmaStatus: "{{ in_array($rma->rma_status_id, array_keys($statusArray)) ? $rma->rma_status_id : (array_key_first($statusArray) ?? '') }}",
                     };
                 },
 
@@ -810,7 +886,7 @@
                     allowedFileTypesArray() {
                        return this.allowedFileTypes
                             .split(",")
-                            .map(mime => mime.split("/")[1]?.trim())
+                            .map(type => type.trim())
                             .filter(Boolean);
                     }
                 },
@@ -833,14 +909,14 @@
                                     rma_status_id: this.rmaStatus,
                                     shipping: params.shipping,
                                 })
-                                .then((response) => {                                    
-                                    this.$emitter.emit('add-flash', { type: 'success', message: response.data.messages });
+                                .then((response) => {
+                                    if (response.data.error) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.error });
 
-                                    resetForm();
+                                        return;
+                                    }
 
-                                    setTimeout(() => {
-                                        window.location.reload();
-                                    }, 1000);
+                                    window.location.reload();
                                 })
                                 .catch (error => {
                                     if (error.response.status === 422) {
@@ -848,6 +924,53 @@
                                     }
                                 });
                             },
+                        });
+                    },
+
+                    cancelItem() {
+                        this.$emitter.emit('open-confirm-modal', {
+                            message: "@lang('admin::app.sales.rma.all-rma.view.confirm-item-canceled')",
+
+                            agree: () => {
+                                this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
+                                    rma_status_id: {{ DefaultRMAStatusEnum::ITEM_CANCELED->value }},
+                                })
+                                .then((response) => {
+                                    if (response.data.error) {
+                                        this.$emitter.emit('add-flash', { type: 'error', message: response.data.error });
+
+                                        return;
+                                    }
+
+                                    window.location.reload();
+                                })
+                                .catch((error) => {
+                                    this.$emitter.emit('add-flash', { type: 'error', message: error.response?.data?.error ?? "@lang('admin::app.sales.rma.all-rma.view.failed')" });
+                                });
+                            },
+                        });
+                    },
+
+                    refundItem(params, { setErrors }) {
+                        this.$axios.post(`{{ route('admin.sales.rma.requests.update-status', $rma->id) }}`, {
+                            rma_status_id: {{ DefaultRMAStatusEnum::RECEIVED_PACKAGE->value }},
+                            shipping: params.shipping,
+                        })
+                        .then((response) => {
+                            if (response.data.error) {
+                                this.$emitter.emit('add-flash', { type: 'error', message: response.data.error });
+
+                                return;
+                            }
+
+                            window.location.reload();
+                        })
+                        .catch((error) => {
+                            if (error.response?.status === 422) {
+                                setErrors(error.response.data.errors);
+                            } else {
+                                this.$emitter.emit('add-flash', { type: 'error', message: error.response?.data?.error ?? "@lang('admin::app.sales.rma.all-rma.view.failed')" });
+                            }
                         });
                     },
 
@@ -959,21 +1082,14 @@
                         const fileNames = Array.from(files).map(file => file.name);
 
                         if (this.allowedFileTypesArray.length) {
-                            const fileExtensions = Array.from(files).map(file => {
-                                const fileName = file.name;
-                                const extension = fileName.slice(fileName.lastIndexOf('.') + 1);
-
-                                return extension;
-                            });
-
-                            const hasAllowedFileType = fileExtensions.some(extension =>
-                                this.allowedFileTypesArray.includes(extension.trim())
+                            const hasAllowedFileType = Array.from(files).every(file =>
+                                this.allowedFileTypesArray.includes(file.type)
                             );
 
                             if (! hasAllowedFileType) {
                                 this.$emitter.emit('add-flash', {
                                     type: 'warning',
-                                    message: "@lang('admin::app.configuration.index.sales.rma.allowed-file-types', ['allowed_types' => core()->getConfigData('sales.rma.setting.allowed_file_extension')])"
+                                    message: "@lang('admin::app.configuration.index.sales.rma.allowed-file-types', ['allowed_types' => strtoupper(str_replace(['image/', ','], ['', ', '], core()->getConfigData('sales.rma.setting.allowed_file_extension')))])"
                                 });
 
                                 event.target.value = '';

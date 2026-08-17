@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 use Webkul\Shop\Http\Controllers\Customer\Account\AddressController;
 use Webkul\Shop\Http\Controllers\Customer\Account\DownloadableProductController;
+use Webkul\Shop\Http\Controllers\Customer\Account\EUWithdrawalController as CustomerEUWithdrawalController;
 use Webkul\Shop\Http\Controllers\Customer\Account\OrderController;
 use Webkul\Shop\Http\Controllers\Customer\Account\RMAController;
 use Webkul\Shop\Http\Controllers\Customer\Account\WishlistController;
@@ -169,6 +170,20 @@ Route::prefix('customer')->group(function () {
                 Route::get('', 'index')->name('shop.customers.account.downloadable_products.index');
 
                 Route::get('download/{id}', 'download')->name('shop.customers.account.downloadable_products.download');
+            });
+
+            /**
+             * Customer EU Withdrawal Routes (Directive (EU) 2023/2673, Art. 11a).
+             */
+            Route::controller(CustomerEUWithdrawalController::class)->group(function () {
+                Route::get('orders/{orderId}/withdraw', 'create')
+                    ->name('shop.customers.account.eu-withdrawal.create');
+
+                Route::post('orders/{orderId}/withdraw', 'store')
+                    ->name('shop.customers.account.eu-withdrawal.store');
+
+                Route::get('withdrawals/{uuid}', 'show')
+                    ->name('shop.customers.account.eu-withdrawal.show');
             });
 
             /**

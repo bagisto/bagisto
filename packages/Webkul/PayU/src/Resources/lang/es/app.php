@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'El pago falló. Por favor, inténtalo de nuevo.',
         'payment-success' => '¡Pago completado exitosamente!',
         'provide-credentials' => 'Por favor, configura la clave de comerciante y Salt de PayU en el panel de administración.',
+        'supported-currency-error' => 'La moneda :currency no es compatible. Monedas compatibles: :supportedCurrencies.',
     ],
 ];

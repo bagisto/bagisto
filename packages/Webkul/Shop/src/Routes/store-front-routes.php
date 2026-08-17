@@ -1,14 +1,46 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Core\Http\Middleware\NoCacheMiddleware;
 use Webkul\Shop\Http\Controllers\BookingProductController;
 use Webkul\Shop\Http\Controllers\CompareController;
+use Webkul\Shop\Http\Controllers\EUWithdrawalController;
 use Webkul\Shop\Http\Controllers\HomeController;
 use Webkul\Shop\Http\Controllers\PageController;
 use Webkul\Shop\Http\Controllers\ProductController;
 use Webkul\Shop\Http\Controllers\ProductsCategoriesProxyController;
 use Webkul\Shop\Http\Controllers\SearchController;
+use Webkul\Shop\Http\Controllers\SitemapController;
 use Webkul\Shop\Http\Controllers\SubscriptionController;
+
+/**
+ * EU Withdrawal — public guest flow (Directive (EU) 2023/2673, Art. 11a).
+ *
+ * Declared before the catch-all fallback so its URLs match first.
+ */
+Route::prefix('withdraw')->middleware([NoCacheMiddleware::class])->group(function () {
+    Route::controller(EUWithdrawalController::class)->group(function () {
+        Route::get('/', 'lookupForm')
+            ->middleware('throttle:eu-withdraw-lookup')
+            ->name('shop.eu-withdrawal.guest.lookup');
+
+        Route::post('lookup', 'lookupSubmit')
+            ->middleware('throttle:eu-withdraw-lookup')
+            ->name('shop.eu-withdrawal.guest.lookup.submit');
+
+        Route::get('{orderId}/create', 'guestCreate')
+            ->middleware(['signed', 'throttle:eu-withdraw-submit'])
+            ->name('shop.eu-withdrawal.guest.create');
+
+        Route::post('{orderId}/store', 'guestStore')
+            ->middleware(['signed', 'throttle:eu-withdraw-submit'])
+            ->name('shop.eu-withdrawal.guest.store');
+
+        Route::get('confirmation/{uuid}', 'guestConfirmation')
+            ->middleware('signed')
+            ->name('shop.eu-withdrawal.guest.confirmation');
+    });
+});
 
 /**
  * CMS pages.
@@ -23,6 +55,16 @@ Route::get('page/{slug}', [PageController::class, 'view'])
 Route::fallback(ProductsCategoriesProxyController::class.'@index')
     ->name('shop.product_or_category.index')
     ->middleware('cache.response');
+
+/**
+ * Search-engine / agent discovery. Declared before the catch-all fallback so
+ * `sitemap.xml` and `robots.txt` are not swallowed by the slug route.
+ */
+Route::get('sitemap.xml', [SitemapController::class, 'index'])
+    ->name('shop.sitemap.index');
+
+Route::get('robots.txt', [SitemapController::class, 'robots'])
+    ->name('shop.robots');
 
 /**
  * Store front home.

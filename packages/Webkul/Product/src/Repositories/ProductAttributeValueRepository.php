@@ -55,6 +55,17 @@ class ProductAttributeValueRepository extends Repository
                 $data[$attribute->code] = null;
             }
 
+            /**
+             * A cleared select stores its (integer) value, so an empty string must
+             * be normalized to null - otherwise "" is written to the integer column.
+             */
+            if (
+                $attribute->type === 'select'
+                && empty($data[$attribute->code])
+            ) {
+                $data[$attribute->code] = null;
+            }
+
             if (in_array($attribute->type, ['image', 'file'])) {
                 $data[$attribute->code] = gettype($data[$attribute->code]) === 'object'
                     ? request()->file($attribute->code)->store('product/'.$product->id)

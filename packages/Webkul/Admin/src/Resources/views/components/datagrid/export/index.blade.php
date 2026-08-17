@@ -32,7 +32,7 @@
                 <!-- Modal Content -->
                 <x-slot:content>
                     <x-admin::form action="">
-                        <x-admin::form.control-group class="!mb-0">
+                        <x-admin::form.control-group class="mb-0!">
                             <x-admin::form.control-group.control
                                 type="select"
                                 name="format"

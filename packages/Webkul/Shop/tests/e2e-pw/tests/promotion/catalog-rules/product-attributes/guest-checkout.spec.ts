@@ -68,25 +68,25 @@ const testCases = [
     {
         title: "is equal to",
         operator: "==",
-        optionSelect: "1",
+        optionSelect: "Yes",
         type: "percentage",
     },
     {
         title: "is equal to",
         operator: "==",
-        optionSelect: "1",
+        optionSelect: "Yes",
         type: "fixed",
     },
     {
         title: "is not equal to",
         operator: "!=",
-        optionSelect: "0",
+        optionSelect: "No",
         type: "percentage",
     },
     {
         title: "is not equal to",
         operator: "!=",
-        optionSelect: "0",
+        optionSelect: "No",
         type: "fixed",
     },
 ];

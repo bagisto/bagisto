@@ -15,6 +15,7 @@ use Webkul\Customer\Providers\CustomerServiceProvider;
 use Webkul\DataGrid\Providers\DataGridServiceProvider;
 use Webkul\DataTransfer\Providers\DataTransferServiceProvider;
 use Webkul\DebugBar\Providers\DebugBarServiceProvider;
+use Webkul\EUWithdrawal\Providers\EUWithdrawalServiceProvider;
 use Webkul\FPC\Providers\FPCServiceProvider;
 use Webkul\GDPR\Providers\GDPRServiceProvider;
 use Webkul\ImageCache\Providers\ImageCacheServiceProvider;
@@ -24,9 +25,11 @@ use Webkul\MagicAI\Providers\MagicAIServiceProvider;
 use Webkul\Marketing\Providers\MarketingServiceProvider;
 use Webkul\Notification\Providers\NotificationServiceProvider;
 use Webkul\Omnibus\Providers\OmnibusServiceProvider;
+use Webkul\PayGlocal\Providers\PayGlocalServiceProvider;
 use Webkul\Payment\Providers\PaymentServiceProvider;
 use Webkul\Paypal\Providers\PaypalServiceProvider;
 use Webkul\PayU\Providers\PayUServiceProvider;
+use Webkul\PhonePe\Providers\PhonePeServiceProvider;
 use Webkul\Product\Providers\ProductServiceProvider;
 use Webkul\Razorpay\Providers\RazorpayServiceProvider;
 use Webkul\RMA\Providers\RMAServiceProvider;
@@ -66,6 +69,7 @@ return [
     DataGridServiceProvider::class,
     DataTransferServiceProvider::class,
     DebugBarServiceProvider::class,
+    EUWithdrawalServiceProvider::class,
     FPCServiceProvider::class,
     GDPRServiceProvider::class,
     ImageCacheServiceProvider::class,
@@ -74,9 +78,11 @@ return [
     MagicAIServiceProvider::class,
     MarketingServiceProvider::class,
     NotificationServiceProvider::class,
+    PayGlocalServiceProvider::class,
     PayUServiceProvider::class,
     PaymentServiceProvider::class,
     PaypalServiceProvider::class,
+    PhonePeServiceProvider::class,
     ProductServiceProvider::class,
     RMAServiceProvider::class,
     RazorpayServiceProvider::class,

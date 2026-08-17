@@ -2,7 +2,7 @@
 
 namespace Webkul\ImageCache\Templates;
 
-use Intervention\Image\Interfaces\ImageInterface;
+use Illuminate\Image\Image;
 
 /**
  * Large image template filter.
@@ -24,7 +24,7 @@ class Large
     /**
      * Apply the filter to the image.
      */
-    public function applyFilter(ImageInterface $image): ImageInterface
+    public function applyFilter(Image $image): Image
     {
         return $image->cover($this->width, $this->height);
     }

@@ -37,6 +37,7 @@ class ElasticSearchEngine implements SearchEngine
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'from' => $options['from'],
                 'size' => $options['limit'],
@@ -65,6 +66,7 @@ class ElasticSearchEngine implements SearchEngine
 
         $results = ElasticSearch::search([
             'index' => $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'suggest' => [
                     'name_suggest' => [
@@ -105,6 +107,7 @@ class ElasticSearchEngine implements SearchEngine
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,
                 'query' => [
@@ -228,18 +231,17 @@ class ElasticSearchEngine implements SearchEngine
                 ];
 
             case AttributeTypeEnum::TEXT->value:
-                $synonyms = $this->searchSynonymRepository->getSynonymsByQuery($params[$attribute->code]);
+                $filter = [];
 
-                $synonyms = array_map(function ($synonym) {
-                    return '"'.$synonym.'"';
-                }, $synonyms);
+                foreach ($this->searchSynonymRepository->getSynonymsByQuery($params[$attribute->code]) as $synonym) {
+                    $filter['bool']['should'][] = [
+                        'match_phrase_prefix' => [
+                            $attribute->code => $synonym,
+                        ],
+                    ];
+                }
 
-                return [
-                    'query_string' => [
-                        'query' => implode(' OR ', $synonyms),
-                        'default_field' => $attribute->code,
-                    ],
-                ];
+                return $filter;
 
             case AttributeTypeEnum::SELECT->value:
                 $filter[]['terms'][$attribute->code] = explode(',', $params[$attribute->code]);
@@ -318,6 +320,7 @@ class ElasticSearchEngine implements SearchEngine
 
         $results = ElasticSearch::search([
             'index' => $params['index'] ?? $this->getIndexName(),
+            'ignore_unavailable' => true,
             'body' => [
                 'size' => 0,
                 'query' => [

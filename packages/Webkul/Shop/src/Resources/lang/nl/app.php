@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Resterende Downloads',
                 'status' => 'Status',
                 'title' => 'Titel',
+                'unlimited' => 'Onbeperkt',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Standaard kop',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Galerij sluiten',
+            'view-image' => 'Afbeelding bekijken',
+            'view-video' => 'Video bekijken',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Standaard Schakelen',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Bijlagen toevoegen',
                 'add-image' => 'Afbeelding/Video toevoegen',
+                'invalid-file-type' => 'Het geselecteerde bestandstype is niet toegestaan.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Welkom gast',
                     'wishlist' => 'Verlanglijst',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Voeg een product op naam toe aan de verlanglijst van de klant.',
+                'add-to-wishlist-query' => 'De productnaam of URL-sleutel om aan de verlanglijst toe te voegen.',
+                'proceed-to-checkout' => 'Open de afrekenpagina om een bestelling te plaatsen voor de artikelen in de winkelwagen.',
+                'search-products' => 'Zoek producten in de winkelcatalogus op trefwoord en open de overeenkomende resultaten.',
+                'search-products-query' => 'De trefwoorden of productnaam om in de catalogus te zoeken.',
+                'subscribe-newsletter' => 'Schrijf een e-mailadres in voor de nieuwsbrief van de winkel.',
+                'subscribe-newsletter-email' => 'Het e-mailadres om in te schrijven voor de nieuwsbrief.',
+                'view-cart' => 'Open de winkelwagenpagina zodat de klant de toegevoegde producten kan bekijken.',
+                'view-product' => 'Open de detailpagina van een product op productnaam.',
+                'view-product-query' => 'De productnaam of URL-sleutel om te openen.',
+                'view-wishlist' => 'Open de verlanglijstpagina om de opgeslagen producten van de klant te bekijken.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Hoeveelheid verminderen',
             'increase-quantity' => 'Hoeveelheid verhogen',
+            'remove-item' => 'Item verwijderen',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Korting',
                 'grand-total' => 'Totaalbedrag',
                 'included' => 'Inbegrepen',
+                'excl-tax' => 'Excl. btw:',
                 'incl-tax' => 'Incl. btw:',
                 'items-discount' => 'Korting artikelen',
                 'shipping-discount' => 'Korting verzending',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Accepteren',
-                'awaiting' => 'In afwachting',
-                'canceled' => 'Geannuleerd',
-                'declined' => 'Afgewezen',
-                'dispatched-package' => 'Pakket verzonden',
+                'accept' => 'Goedgekeurd',
+                'awaiting' => 'Wachten op retour',
+                'canceled' => 'Verzoek geannuleerd',
+                'declined' => 'Verzoek afgewezen',
+                'dispatched-package' => 'Retour onderweg',
                 'item-canceled' => 'Item geannuleerd',
                 'not-received-package-yet' => 'Pakket nog niet ontvangen',
-                'pending' => 'In afwachting',
+                'pending' => 'In afwachting van beoordeling',
                 'processing' => 'Verwerking',
-                'received-package' => 'Pakket ontvangen',
+                'received-package' => 'Terugbetaald',
                 'solved' => 'Opgelost',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA-status is al geannuleerd.',
+            'cancel-not-allowed' => 'Het annuleren van dit RMA-verzoek is niet toegestaan.',
             'cancel-success' => 'RMA-status is succesvol geannuleerd.',
+            'close-not-allowed' => 'Het sluiten van dit RMA-verzoek is niet toegestaan.',
             'create-success' => 'Verzoek succesvol aangemaakt.',
             'creation-error' => 'De RMA-status kan niet worden bijgewerkt omdat de factuur voor deze bestelling niet is aangemaakt.',
             'invalid-item' => 'Het geselecteerde bestelitem is ongeldig.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'Het heropenen van dit RMA-verzoek is niet toegestaan.',
             'send-message' => ':name succesvol verzonden.',
             'update-success' => ':name succesvol bijgewerkt.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Overeenkomst herroepen',
+            'view_existing' => 'Bekijk uw herroeping',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Overeenkomst herroepen',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Overeenkomst herroepen',
+            'heading' => 'Overeenkomst Herroepen',
+            'intro' => 'Voer het bestelnummer in en het e-mailadres dat u bij het afrekenen heeft gebruikt. Wij sturen u een link om uw herroeping in te dienen.',
+            'order_number' => 'Bestelnummer',
+            'email' => 'E-mailadres',
+            'submit' => 'Stuur mij de herroepingslink',
+            'sent_notice' => 'Als er een overeenkomende bestelling bestaat, hebben wij zojuist een herroepingslink naar dat adres gemaild. De link is 24 uur geldig.',
+            'legal_note' => 'U heeft op grond van EU-richtlijn 2011/83/EU (zoals gewijzigd) het wettelijke recht om de overeenkomst binnen 14 dagen te herroepen. Andere wijzen van herroeping – waaronder een schriftelijke verklaring aan onze klantenservice – blijven geldig.',
+        ],
+
+        'form' => [
+            'page_title' => 'Bevestig uw herroeping',
+            'heading' => 'Bevestig herroeping van overeenkomst',
+            'legal_notice_title' => 'Dit is een juridisch bindende verklaring',
+            'legal_effect' => 'Door dit formulier in te dienen oefent u uw wettelijke herroepingsrecht uit voor bestelling #:order_id. De verklaring is rechtsgeldig vanaf het moment van indiening.',
+            'order_summary' => 'Bestelling',
+            'order_total' => 'Totaal',
+            'order_items' => 'Artikelen',
+            'placed_on' => 'Geplaatst op :date',
+            'reason_label' => 'Reden',
+            'reason_optional' => '(optioneel)',
+            'reason_help' => 'U bent niet verplicht een reden op te geven. Alles wat u hier invult, wordt vastgelegd in het herroepingsbewijs en doorgestuurd naar de verkoper.',
+            'reason_placeholder' => 'Bijvoorbeeld: „Bedacht me”, „Artikel komt niet overeen met de beschrijving”, of laat leeg.',
+            'submit' => 'Herroeping indienen',
+            'cancel' => 'Annuleren en terug',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Herroepingsbewijs',
+            'heading' => 'Uw herroeping is ontvangen',
+            'heading_received' => 'Uw herroeping is ontvangen',
+            'heading_refunded' => 'Uw terugbetaling is uitgevoerd',
+            'heading_declined' => 'Uw herroeping is afgewezen',
+            'intro' => 'Wij hebben uw verklaring vastgelegd. Deze pagina en de e-mail die wij u zojuist hebben gestuurd, dienen beide als bevestiging op een duurzame gegevensdrager.',
+            'intro_received' => 'Wij hebben uw verklaring vastgelegd. Deze pagina en de e-mail die wij u zojuist hebben gestuurd, dienen beide als bevestiging op een duurzame gegevensdrager.',
+            'intro_refunded' => 'De verkoper heeft uw terugbetaling verwerkt. Het bedrag zou binnenkort op uw oorspronkelijke betaalmethode moeten binnenkomen.',
+            'intro_declined' => 'De verkoper betwist uw recht op terugbetaling op grond van deze verklaring. Zie hieronder voor de opgegeven reden en uw resterende opties.',
+            'received_at' => 'Ontvangen op',
+            'reference' => 'Referentie',
+            'copy_reference' => 'Referentie kopiëren',
+            'reference_copied' => 'Referentie naar het klembord gekopieerd.',
+            'order' => 'Bestelling',
+            'email' => 'E-mail',
+            'reason' => 'Reden',
+            'status' => 'Status',
+            'status_received' => 'Ontvangen',
+            'status_refunded' => 'Terugbetaald',
+            'status_declined' => 'Afgewezen',
+            'print' => 'Afdrukken',
+            'next_steps_title' => 'Wat gebeurt er nu',
+            'step_received' => 'Uw verklaring is ontvangen en vastgelegd.',
+            'step_email' => 'Bevestigingsmail naar uw postvak verzonden.',
+            'step_refund' => 'Terugbetaling binnen 14 dagen.',
+            'step_refund_done' => 'De terugbetaling is uitgevoerd.',
+            'step_declined' => 'Herroeping afgewezen door de verkoper.',
+            'declined_reason_label' => 'Door de verkoper opgegeven reden',
+            'declined_notice' => 'Al uw overige wettelijke rechtsmiddelen onder het EU-consumentenrecht blijven u behouden. Bent u het niet eens met deze beslissing, neem dan rechtstreeks contact op met de verkoper.',
+            'refund_notice' => 'Wij betalen terug met hetzelfde betaalmiddel dat u voor de oorspronkelijke transactie heeft gebruikt, tenzij uitdrukkelijk anders overeengekomen.',
+            'email_sent' => 'De bevestigingsmail is verzonden.',
+            'email_pending' => 'Wij konden de bevestigingsmail niet direct verzenden; ons team neemt nog actie. Bewaar deze pagina als uw bewijsstuk.',
+            'durable_medium_notice' => 'Deze pagina is uw bewijsstuk. U kunt deze opslaan of afdrukken.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Bevestiging van uw herroeping – Bestelling :order_id',
+                'title' => 'Herroeping ontvangen',
+                'title_received' => 'Herroeping ontvangen',
+                'title_refunded' => 'Terugbetaling uitgevoerd',
+                'title_declined' => 'Herroeping afgewezen',
+                'greeting' => 'Geachte heer/mevrouw,',
+                'intro' => 'Wij hebben uw verklaring van herroeping van de overeenkomst voor bestelling #:order_id ontvangen. Het rechtsgeldige tijdstip van ontvangst is hieronder vastgelegd.',
+                'intro_received' => 'Wij hebben uw verklaring van herroeping van de overeenkomst voor bestelling #:order_id ontvangen. Het rechtsgeldige tijdstip van ontvangst is hieronder vastgelegd.',
+                'intro_refunded' => 'Uw terugbetaling voor bestelling #:order_id is uitgevoerd. Het bedrag zou binnenkort op uw oorspronkelijke betaalmethode moeten binnenkomen.',
+                'intro_declined' => 'De verkoper betwist uw recht op terugbetaling voor bestelling #:order_id op grond van deze verklaring. De opgegeven reden vindt u hieronder.',
+                'summary' => 'Overzicht herroeping',
+                'received_at' => 'Ontvangen op',
+                'reference' => 'Referentie',
+                'order' => 'Bestelling',
+                'email' => 'E-mail',
+                'reason' => 'Opgegeven reden',
+                'declined_reason' => 'Reden van afwijzing',
+                'refund_notice' => 'Indien een terugbetaling verschuldigd is, betalen wij terug met hetzelfde betaalmiddel dat u voor de oorspronkelijke transactie heeft gebruikt, binnen 14 dagen na bovenstaande datum, tenzij uitdrukkelijk anders overeengekomen.',
+                'footer' => 'Dit bericht is de bevestiging op een duurzame gegevensdrager zoals vereist door artikel 11 bis van Richtlijn 2011/83/EU (gewijzigd bij Richtlijn (EU) 2023/2673). Bewaar dit bericht voor uw administratie.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Uw herroepingslink',
+                'title' => 'Uw herroepingslink',
+                'intro' => 'Gebruik onderstaande link om uw herroeping voor bestelling :order_id in te dienen. De link is 24 uur geldig.',
+                'button' => 'Open het herroepingsformulier',
+                'expiry' => 'De link verloopt over 24 uur. Heeft u deze e-mail niet aangevraagd, dan kunt u deze negeren.',
+            ],
         ],
     ],
 ];

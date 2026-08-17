@@ -126,6 +126,7 @@ class OnepageController extends APIController
         if (
             Cart::hasError()
             || ! $validatedData['payment']
+            || ! $this->isPaymentMethodAvailable($validatedData['payment']['method'] ?? null)
             || ! Cart::savePaymentMethod($validatedData['payment'])
         ) {
             return response()->json([
@@ -249,5 +250,26 @@ class OnepageController extends APIController
         if ($cart->payment->method === 'paypal_smart_button') {
             throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
         }
+
+        if (! $this->isPaymentMethodAvailable($cart->payment->method)) {
+            throw new \Exception(trans('shop::app.checkout.cart.specify-payment-method'));
+        }
+    }
+
+    /**
+     * Checks whether the given payment method is available for the current cart.
+     *
+     * Availability is evaluated server-side against the cart contents (e.g. Cash
+     * On Delivery is not available for non-stockable/downloadable carts). This
+     * prevents crafted requests from bypassing the front-end method filtering.
+     */
+    protected function isPaymentMethodAvailable(?string $method): bool
+    {
+        if (! $method) {
+            return false;
+        }
+
+        return collect(Payment::getSupportedPaymentMethods()['payment_methods'] ?? [])
+            ->contains('method', $method);
     }
 }

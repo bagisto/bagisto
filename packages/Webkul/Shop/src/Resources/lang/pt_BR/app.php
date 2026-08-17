@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Downloads Restantes',
                 'status' => 'Status',
                 'title' => 'Título',
+                'unlimited' => 'Ilimitado',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Cabeçalho Padrão',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Fechar galeria',
+            'view-image' => 'Ver imagem',
+            'view-video' => 'Ver vídeo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Alternar Padrão',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Adicionar Anexos',
                 'add-image' => 'Adicionar Imagem/Vídeo',
+                'invalid-file-type' => 'O tipo de arquivo selecionado não é permitido.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Bem-vindo convidado',
                     'wishlist' => 'Lista de desejos',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Adicione um produto à lista de desejos do cliente pelo nome.',
+                'add-to-wishlist-query' => 'O nome do produto ou a chave de URL para adicionar à lista de desejos.',
+                'proceed-to-checkout' => 'Abra a página de checkout para começar a fazer um pedido dos itens no carrinho.',
+                'search-products' => 'Pesquise produtos no catálogo da loja por palavra-chave e abra os resultados correspondentes.',
+                'search-products-query' => 'As palavras-chave ou o nome do produto a pesquisar no catálogo.',
+                'subscribe-newsletter' => 'Inscreva um endereço de e-mail na newsletter da loja.',
+                'subscribe-newsletter-email' => 'O endereço de e-mail para se inscrever na newsletter.',
+                'view-cart' => 'Abra a página do carrinho para que o cliente possa revisar os produtos que adicionou.',
+                'view-product' => 'Abra a página de detalhes de um produto pelo nome do produto.',
+                'view-product-query' => 'O nome do produto ou a chave de URL a abrir.',
+                'view-wishlist' => 'Abra a página da lista de desejos para revisar os produtos salvos do cliente.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Diminuir Quantidade',
             'increase-quantity' => 'Aumentar Quantidade',
+            'remove-item' => 'Remover item',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Valor do Desconto',
                 'grand-total' => 'Total Geral',
                 'included' => 'Incluído',
+                'excl-tax' => 'Sem impostos:',
                 'incl-tax' => 'Imp. Inc.:',
                 'items-discount' => 'Desconto em itens',
                 'shipping-discount' => 'Desconto no frete',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Aceitar',
-                'awaiting' => 'Aguardando',
-                'canceled' => 'Cancelado',
-                'declined' => 'Recusado',
-                'dispatched-package' => 'Pacote Enviado',
+                'accept' => 'Aprovado',
+                'awaiting' => 'Aguardando devolução',
+                'canceled' => 'Solicitação cancelada',
+                'declined' => 'Solicitação recusada',
+                'dispatched-package' => 'Devolução em trânsito',
                 'item-canceled' => 'Item Cancelado',
                 'not-received-package-yet' => 'Ainda não recebido o pacote',
-                'pending' => 'Pendente',
+                'pending' => 'Revisão pendente',
                 'processing' => 'Processando',
-                'received-package' => 'Pacote Recebido',
+                'received-package' => 'Reembolsado',
                 'solved' => 'Resolvido',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'O status do RMA já foi cancelado.',
+            'cancel-not-allowed' => 'Não é permitido cancelar esta solicitação de RMA.',
             'cancel-success' => 'Status de RMA cancelado com sucesso.',
+            'close-not-allowed' => 'Não é permitido fechar esta solicitação de RMA.',
             'create-success' => 'Solicitação criada com sucesso.',
             'creation-error' => 'O status do RMA não pode ser atualizado, pois a fatura para este pedido não foi criada.',
             'invalid-item' => 'O item do pedido selecionado é inválido.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'Não é permitido reabrir esta solicitação de RMA.',
             'send-message' => ':name enviado com sucesso.',
             'update-success' => ':name atualizado com sucesso.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Renunciar ao contrato',
+            'view_existing' => 'Ver sua renúncia',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Renunciar a um contrato',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Renunciar a um contrato',
+            'heading' => 'Renunciar ao seu contrato',
+            'intro' => 'Informe o número do pedido e o endereço de e-mail utilizado na finalização da compra. Enviaremos um link para você apresentar sua renúncia.',
+            'order_number' => 'Número do pedido',
+            'email' => 'Endereço de e-mail',
+            'submit' => 'Enviar o link de renúncia',
+            'sent_notice' => 'Se houver um pedido correspondente, acabamos de enviar por e-mail um link de renúncia para esse endereço. Ele será válido por 24 horas.',
+            'legal_note' => 'Você tem o direito legal, nos termos da Diretiva (UE) 2011/83 (conforme alterada), de renunciar ao seu contrato no prazo de 14 dias. Outras formas de renúncia — incluindo uma declaração escrita enviada ao nosso atendimento ao cliente — permanecem válidas.',
+        ],
+
+        'form' => [
+            'page_title' => 'Confirme sua renúncia',
+            'heading' => 'Confirmar renúncia ao contrato',
+            'legal_notice_title' => 'Esta é uma declaração juridicamente vinculante',
+            'legal_effect' => 'Ao enviar este formulário, você exerce seu direito legal de renúncia ao pedido n.º :order_id. A declaração produz efeitos jurídicos no momento do envio.',
+            'order_summary' => 'Pedido',
+            'order_total' => 'Total',
+            'order_items' => 'Itens',
+            'placed_on' => 'Realizado em :date',
+            'reason_label' => 'Motivo',
+            'reason_optional' => '(opcional)',
+            'reason_help' => 'Você não é obrigado a informar um motivo. O que você escrever aqui será registrado na comprovação da renúncia e enviado ao comerciante.',
+            'reason_placeholder' => 'Por exemplo: «Mudei de ideia», «Item não corresponde à descrição», ou deixe em branco.',
+            'submit' => 'Enviar renúncia',
+            'cancel' => 'Cancelar e voltar',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Comprovante de renúncia',
+            'heading' => 'Sua renúncia foi recebida',
+            'heading_received' => 'Sua renúncia foi recebida',
+            'heading_refunded' => 'Seu reembolso foi emitido',
+            'heading_declined' => 'Sua renúncia foi recusada',
+            'intro' => 'Registramos sua declaração. Esta página e o e-mail que acabamos de lhe enviar servem como confirmação em suporte duradouro.',
+            'intro_received' => 'Registramos sua declaração. Esta página e o e-mail que acabamos de lhe enviar servem como confirmação em suporte duradouro.',
+            'intro_refunded' => 'O comerciante processou seu reembolso. O valor deve chegar em breve no seu meio de pagamento original.',
+            'intro_declined' => 'O comerciante contestou seu direito a reembolso com base nesta declaração. Veja os detalhes abaixo para o motivo informado e as opções que você ainda possui.',
+            'received_at' => 'Recebido em',
+            'reference' => 'Referência',
+            'copy_reference' => 'Copiar referência',
+            'reference_copied' => 'Referência copiada para a área de transferência.',
+            'order' => 'Pedido',
+            'email' => 'E-mail',
+            'reason' => 'Motivo',
+            'status' => 'Status',
+            'status_received' => 'Recebida',
+            'status_refunded' => 'Reembolsada',
+            'status_declined' => 'Recusada',
+            'print' => 'Imprimir',
+            'next_steps_title' => 'O que acontece a seguir',
+            'step_received' => 'Sua declaração foi recebida e registrada.',
+            'step_email' => 'E-mail de confirmação enviado para sua caixa de entrada.',
+            'step_refund' => 'Reembolso emitido no prazo de 14 dias.',
+            'step_refund_done' => 'O reembolso foi emitido.',
+            'step_declined' => 'Renúncia recusada pelo comerciante.',
+            'declined_reason_label' => 'Motivo informado pelo comerciante',
+            'declined_notice' => 'Você mantém todos os demais recursos legais previstos no direito do consumidor da UE. Se não concordar com esta decisão, entre em contato diretamente com o comerciante.',
+            'refund_notice' => 'Reembolsamos utilizando o mesmo meio de pagamento que você usou na transação original, salvo se você tiver concordado expressamente em contrário.',
+            'email_sent' => 'O e-mail de confirmação foi enviado.',
+            'email_pending' => 'Não conseguimos enviar o e-mail de confirmação imediatamente; nossa equipe dará continuidade. Guarde esta página como comprovante.',
+            'durable_medium_notice' => 'Esta página é o seu comprovante. Você pode salvá-la ou imprimi-la.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Confirmação da sua renúncia — Pedido :order_id',
+                'title' => 'Renúncia recebida',
+                'title_received' => 'Renúncia recebida',
+                'title_refunded' => 'Reembolso emitido',
+                'title_declined' => 'Renúncia recusada',
+                'greeting' => 'Olá,',
+                'intro' => 'Recebemos sua declaração de renúncia ao contrato referente ao pedido n.º :order_id. O carimbo de data e hora de recebimento, com efeitos jurídicos, está registrado abaixo.',
+                'intro_received' => 'Recebemos sua declaração de renúncia ao contrato referente ao pedido n.º :order_id. O carimbo de data e hora de recebimento, com efeitos jurídicos, está registrado abaixo.',
+                'intro_refunded' => 'Seu reembolso referente ao pedido n.º :order_id foi emitido. O valor deve chegar em breve no seu meio de pagamento original.',
+                'intro_declined' => 'O comerciante contestou seu direito a reembolso para o pedido n.º :order_id com base nesta declaração. O motivo informado está abaixo.',
+                'summary' => 'Resumo da renúncia',
+                'received_at' => 'Recebido em',
+                'reference' => 'Referência',
+                'order' => 'Pedido',
+                'email' => 'E-mail',
+                'reason' => 'Motivo informado',
+                'declined_reason' => 'Motivo da recusa',
+                'refund_notice' => 'Quando houver reembolso devido, ele será efetuado utilizando o mesmo meio de pagamento que você usou na transação original, no prazo de 14 dias a contar da data acima, salvo se você tiver concordado expressamente em contrário.',
+                'footer' => 'Esta mensagem constitui a confirmação em suporte duradouro exigida pelo artigo 11.º-A da Diretiva 2011/83/UE (conforme alterada pela Diretiva (UE) 2023/2673). Guarde-a para seus registros.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Seu link de renúncia',
+                'title' => 'Seu link de renúncia',
+                'intro' => 'Use o link abaixo para apresentar a renúncia referente ao pedido :order_id. O link é válido por 24 horas.',
+                'button' => 'Abrir o formulário de renúncia',
+                'expiry' => 'O link expirará em 24 horas. Se você não solicitou este e-mail, pode ignorá-lo com segurança.',
+            ],
         ],
     ],
 ];

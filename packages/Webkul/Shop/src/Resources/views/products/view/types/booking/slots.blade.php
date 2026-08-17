@@ -19,7 +19,7 @@
 
             <div class="grid grid-cols-2 gap-x-4">
                 <!-- Select Date -->
-                <x-shop::form.control-group class="!mb-0">
+                <x-shop::form.control-group class="mb-0!">
                     <x-shop::form.control-group.label class="hidden">
                         @lang('shop::app.products.view.type.booking.slots.date')
                     </x-shop::form.control-group.label>
@@ -41,7 +41,7 @@
                 </x-shop::form.control-group>
 
                 <!-- Select Slots -->
-                <x-shop::form.control-group class="!mb-0">
+                <x-shop::form.control-group class="mb-0!">
                     <x-shop::form.control-group.label class="hidden">
                         @lang('shop::app.products.view.type.booking.slots.title')
                     </x-shop::form.control-group.label>

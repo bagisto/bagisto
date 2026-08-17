@@ -3,8 +3,10 @@
 namespace Webkul\Shop\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Webkul\EUWithdrawal\Events\WithdrawalReceived;
 use Webkul\Shop\Listeners\CatalogCache;
 use Webkul\Shop\Listeners\Customer;
+use Webkul\Shop\Listeners\EUWithdrawal\SendConfirmation as EUWithdrawalSendConfirmation;
 use Webkul\Shop\Listeners\GDPR;
 use Webkul\Shop\Listeners\Invoice;
 use Webkul\Shop\Listeners\Order;
@@ -19,6 +21,15 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
+        /**
+         * EU Withdrawal — durable-medium confirmation email
+         * (Directive (EU) 2023/2673, Art. 11a(3)). Sent synchronously by the
+         * listener so a queue failure cannot leave a withdrawal unconfirmed.
+         */
+        WithdrawalReceived::class => [
+            [EUWithdrawalSendConfirmation::class, 'handle'],
+        ],
+
         /**
          * Catalog cache invalidation. Any change that can alter a cached
          * storefront API response bumps the catalog version so listings are

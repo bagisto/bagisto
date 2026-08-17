@@ -15,6 +15,13 @@ export class CartPage extends BasePage {
         await this.page.getByPlaceholder("Search products here").press("Enter");
     }
 
+    async openFirstProductFromSearch(): Promise<void> {
+        await this.page
+            .getByRole("link", { name: /^Simple-/ })
+            .first()
+            .click();
+    }
+
     async addFirstProductToCart(): Promise<void> {
         await this.page
             .getByRole("button", { name: "Add To Cart" })
@@ -47,7 +54,14 @@ export class CartPage extends BasePage {
     }
 
     async removeProductFromMiniCart(): Promise<void> {
-        await this.page.getByRole("button", { name: "Remove" }).click();
+        await this.page.getByRole("button", { name: "Remove" }).first().click();
+        await this.page
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
+    }
+
+    async clickBinIcon(): Promise<void> {
+        await this.page.locator(".icon-bin").click();
         await this.page
             .getByRole("button", { name: "Agree", exact: true })
             .click();
@@ -71,6 +85,13 @@ export class CartPage extends BasePage {
 
     async removeProductFromCartView(): Promise<void> {
         await this.page.getByRole("button", { name: "Remove" }).first().click();
+        await this.page
+            .getByRole("button", { name: "Agree", exact: true })
+            .click();
+    }
+
+    async clickBinIconFromCartView(): Promise<void> {
+        await this.page.locator(".icon-bin").first().click();
         await this.page
             .getByRole("button", { name: "Agree", exact: true })
             .click();

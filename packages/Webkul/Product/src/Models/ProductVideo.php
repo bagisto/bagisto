@@ -33,7 +33,7 @@ class ProductVideo extends Model implements ProductVideoContract
      *
      * @var array
      */
-    protected $appends = ['url'];
+    protected $appends = ['url', 'file_name'];
 
     /**
      * Get the product that owns the image.
@@ -63,6 +63,16 @@ class ProductVideo extends Model implements ProductVideoContract
     public function getUrlAttribute()
     {
         return $this->url();
+    }
+
+    /**
+     * Get the file name, without the directory and the extension, for the product video.
+     *
+     * @return string
+     */
+    public function getFileNameAttribute()
+    {
+        return pathinfo((string) $this->path, PATHINFO_FILENAME);
     }
 
     /**

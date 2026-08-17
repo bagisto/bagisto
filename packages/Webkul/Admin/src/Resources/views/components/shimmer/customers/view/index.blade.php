@@ -11,27 +11,27 @@
 </div>
 
 <div class="mt-8 flex flex-wrap items-center gap-x-1 gap-y-2">
-    <div class="shimmer mx-1 h-8 w-[141px]"></div>
+    <div class="shimmer mx-1 h-8 w-35.25"></div>
 
-    <div class="shimmer mx-1 h-8 w-[178px]"></div>
+    <div class="shimmer mx-1 h-8 w-44.5"></div>
 
-    <div class="shimmer mx-1 h-8 w-[166px]"></div>
+    <div class="shimmer mx-1 h-8 w-41.5"></div>
 </div>
 
 <div class="mt-3.5 flex gap-2.5 max-xl:flex-wrap">
     <!-- Left Section -->
     <div class="flex flex-1 flex-col gap-2 max-xl:flex-auto">
-        <div class="box-shadow rounded bg-white p-4 dark:bg-gray-900">
+        <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
             <div class="flex justify-between">
-                <div class="shimmer h-[18px] w-[77px]"></div>
+                <div class="shimmer h-4.5 w-19.25"></div>
 
-                <div class="shimmer h-[18px] w-40"></div>
+                <div class="shimmer h-4.5 w-40"></div>
             </div>
 
             <div>
                 <x-admin::shimmer.datagrid.toolbar />
 
-                <div class="table-responsive box-shadow mt-4 grid w-full overflow-hidden rounded bg-white dark:bg-gray-900">
+                <div class="table-responsive box-shadow mt-4 grid w-full overflow-hidden rounded-sm bg-white dark:bg-gray-900">
 
                     <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
 
@@ -42,12 +42,12 @@
     </div>
 
     <!--Right Section -->
-    <div class="flex w-[360px] max-w-full flex-col gap-2 max-sm:w-full">
-        <div class="box-shadow rounded bg-white dark:bg-gray-900">
-            <x-admin::shimmer.accordion class="!h-[200px]" />
+    <div class="flex w-90 max-w-full flex-col gap-2 max-sm:w-full">
+        <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
+            <x-admin::shimmer.accordion class="h-50!" />
         </div>
 
-        <div class="box-shadow rounded bg-white dark:bg-gray-900">
+        <div class="box-shadow rounded-sm bg-white dark:bg-gray-900">
             <x-admin::shimmer.accordion />
         </div>
     </div>

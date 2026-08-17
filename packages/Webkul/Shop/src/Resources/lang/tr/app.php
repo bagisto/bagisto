@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Kalan İndirme Hakkı',
                 'status' => 'Durum',
                 'title' => 'Başlık',
+                'unlimited' => 'Sınırsız',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'Varsayılan Başlık',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Galeriyi kapat',
+            'view-image' => 'Görseli görüntüle',
+            'view-video' => 'Videoyu görüntüle',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Aç/Kapat',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Dosya Ekle',
                 'add-image' => 'Resim/Video Ekle',
+                'invalid-file-type' => 'Seçilen dosya türüne izin verilmiyor.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Hoş Geldiniz, Misafir',
                     'wishlist' => 'Dilek Listesi',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Bir ürünü adıyla müşterinin istek listesine ekleyin.',
+                'add-to-wishlist-query' => 'İstek listesine eklenecek ürün adı veya URL anahtarı.',
+                'proceed-to-checkout' => 'Sepetteki ürünler için sipariş vermeye başlamak üzere ödeme sayfasını açın.',
+                'search-products' => 'Mağaza kataloğunda anahtar kelimeye göre ürün arayın ve eşleşen sonuçları açın.',
+                'search-products-query' => 'Katalogda aranacak anahtar kelimeler veya ürün adı.',
+                'subscribe-newsletter' => 'Bir e-posta adresini mağaza bültenine abone yapın.',
+                'subscribe-newsletter-email' => 'Bültene abone olunacak e-posta adresi.',
+                'view-cart' => 'Müşterinin eklediği ürünleri inceleyebilmesi için alışveriş sepeti sayfasını açın.',
+                'view-product' => 'Bir ürünün ayrıntı sayfasını ürün adına göre açın.',
+                'view-product-query' => 'Açılacak ürün adı veya URL anahtarı.',
+                'view-wishlist' => 'Müşterinin kaydettiği ürünleri incelemek için istek listesi sayfasını açın.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Miktarı Azalt',
             'increase-quantity' => 'Miktarı Artır',
+            'remove-item' => 'Öğeyi Kaldır',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'İndirim',
                 'grand-total' => 'Genel Toplam',
                 'included' => 'Dahil',
+                'excl-tax' => 'Vergi Hariç:',
                 'incl-tax' => 'KDV Dahil:',
                 'items-discount' => 'Ürün İndirimi',
                 'shipping-discount' => 'Kargo İndirimi',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Kabul Et',
-                'awaiting' => 'Beklemede',
-                'canceled' => 'İptal Edildi',
-                'declined' => 'Reddedildi',
-                'dispatched-package' => 'Paket Gönderildi',
+                'accept' => 'Onaylandı',
+                'awaiting' => 'İade bekleniyor',
+                'canceled' => 'Talep iptal edildi',
+                'declined' => 'Talep reddedildi',
+                'dispatched-package' => 'İade yolda',
                 'item-canceled' => 'Ürün İptal Edildi',
                 'not-received-package-yet' => 'Paket Henüz Alınmadı',
-                'pending' => 'Beklemede',
+                'pending' => 'İnceleme bekliyor',
                 'processing' => 'İşleniyor',
-                'received-package' => 'Paket Alındı',
+                'received-package' => 'İade edildi',
                 'solved' => 'Çözüldü',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA durumu zaten iptal edilmiştir.',
+            'cancel-not-allowed' => 'Bu RMA talebini iptal etmeye izin verilmiyor.',
             'cancel-success' => 'RMA durumu başarıyla iptal edildi.',
+            'close-not-allowed' => 'Bu RMA talebini kapatmaya izin verilmiyor.',
             'create-success' => 'İstek başarıyla oluşturuldu.',
             'creation-error' => 'RMA durumu güncellenemiyor çünkü bu sipariş için fatura oluşturulmamış.',
             'invalid-item' => 'Seçilen sipariş ürünü geçersiz.',
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'Bu RMA talebini yeniden açmaya izin verilmiyor.',
             'send-message' => ':name başarıyla gönderildi.',
             'update-success' => ':name başarıyla güncellendi.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Sözleşmeden Cayma',
+            'view_existing' => 'Cayma talebinizi görüntüleyin',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Sözleşmeden Cayma',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Sözleşmeden Cayma',
+            'heading' => 'Sözleşmenizden Cayın',
+            'intro' => 'Sipariş numaranızı ve ödeme sırasında kullandığınız e-posta adresini girin. Cayma talebinizi göndermeniz için size bir bağlantı ileteceğiz.',
+            'order_number' => 'Sipariş numarası',
+            'email' => 'E-posta adresi',
+            'submit' => 'Cayma bağlantısını bana gönder',
+            'sent_notice' => 'Eşleşen bir sipariş varsa, biraz önce bu adrese bir cayma bağlantısı gönderdik. Bağlantı 24 saat boyunca geçerli olacaktır.',
+            'legal_note' => 'Değişiklikleriyle birlikte 2011/83/AB sayılı AB Direktifi uyarınca, sözleşmenizden 14 gün içinde cayma yasal hakkına sahipsiniz. Müşteri hizmetlerimize gönderilen yazılı bir bildirim dahil olmak üzere diğer cayma yolları da geçerliliğini korur.',
+        ],
+
+        'form' => [
+            'page_title' => 'Cayma talebinizi onaylayın',
+            'heading' => 'Sözleşmeden Cayma Onayı',
+            'legal_notice_title' => 'Bu, hukuken bağlayıcı bir beyandır',
+            'legal_effect' => 'Bu formu göndererek, #:order_id numaralı sipariş için yasal cayma hakkınızı kullanmış olursunuz. Beyan, gönderildiği anda hukuken geçerli hale gelir.',
+            'order_summary' => 'Sipariş',
+            'order_total' => 'Toplam',
+            'order_items' => 'Ürünler',
+            'placed_on' => ':date tarihinde verildi',
+            'reason_label' => 'Gerekçe',
+            'reason_optional' => '(isteğe bağlı)',
+            'reason_help' => 'Gerekçe belirtmek zorunda değilsiniz. Buraya yazacaklarınız cayma kanıtına kaydedilecek ve satıcıya iletilecektir.',
+            'reason_placeholder' => 'Örneğin: "Fikrimi değiştirdim", "Ürün açıklamayla uyuşmuyor" veya boş bırakın.',
+            'submit' => 'Cayma talebini gönder',
+            'cancel' => 'İptal et ve geri dön',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Cayma Belgesi',
+            'heading' => 'Cayma talebiniz alındı',
+            'heading_received' => 'Cayma talebiniz alındı',
+            'heading_refunded' => 'İadeniz gerçekleştirildi',
+            'heading_declined' => 'Cayma talebiniz reddedildi',
+            'intro' => 'Beyanınızı kaydettik. Bu sayfa ve biraz önce size gönderdiğimiz e-posta, kalıcı veri taşıyıcı üzerinde onay niteliği taşır.',
+            'intro_received' => 'Beyanınızı kaydettik. Bu sayfa ve biraz önce size gönderdiğimiz e-posta, kalıcı veri taşıyıcı üzerinde onay niteliği taşır.',
+            'intro_refunded' => 'Satıcı, iadenizi işleme almıştır. İade tutarı kısa süre içinde orijinal ödeme yönteminize ulaşacaktır.',
+            'intro_declined' => 'Satıcı, bu beyana dayanan iade hakkınıza itiraz etmiştir. Belirtilen gerekçe ve mevcut diğer seçenekleriniz için aşağıdaki ayrıntılara bakın.',
+            'received_at' => 'Alındığı tarih',
+            'reference' => 'Referans',
+            'copy_reference' => 'Referansı kopyala',
+            'reference_copied' => 'Referans panoya kopyalandı.',
+            'order' => 'Sipariş',
+            'email' => 'E-posta',
+            'reason' => 'Gerekçe',
+            'status' => 'Durum',
+            'status_received' => 'Alındı',
+            'status_refunded' => 'İade edildi',
+            'status_declined' => 'Reddedildi',
+            'print' => 'Yazdır',
+            'next_steps_title' => 'Sonraki adımlar',
+            'step_received' => 'Beyanınız alındı ve kaydedildi.',
+            'step_email' => 'Onay e-postası gelen kutunuza gönderildi.',
+            'step_refund' => 'İade 14 gün içinde gerçekleştirilir.',
+            'step_refund_done' => 'İade gerçekleştirildi.',
+            'step_declined' => 'Cayma talebi satıcı tarafından reddedildi.',
+            'declined_reason_label' => 'Satıcının belirttiği gerekçe',
+            'declined_notice' => 'AB tüketici hukuku kapsamındaki diğer tüm yasal başvuru yollarınız saklıdır. Bu karara katılmıyorsanız, lütfen doğrudan satıcıyla iletişime geçin.',
+            'refund_notice' => 'Açıkça aksini kabul etmediğiniz sürece, iadeyi orijinal işlemde kullandığınız ödeme yöntemiyle gerçekleştiriyoruz.',
+            'email_sent' => 'Onay e-postası gönderildi.',
+            'email_pending' => 'Onay e-postasını hemen gönderemedik; ekibimiz konuyu takip edecektir. Lütfen bu sayfayı belgeniz olarak saklayın.',
+            'durable_medium_notice' => 'Bu sayfa sizin belgenizdir. Kaydedebilir veya yazdırabilirsiniz.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Cayma onayınız — Sipariş :order_id',
+                'title' => 'Cayma alındı',
+                'title_received' => 'Cayma alındı',
+                'title_refunded' => 'İade gerçekleştirildi',
+                'title_declined' => 'Cayma reddedildi',
+                'greeting' => 'Merhaba,',
+                'intro' => '#:order_id numaralı sipariş için sözleşmeden cayma beyanınızı aldık. Hukuken geçerli alındı zaman damgası aşağıda kaydedilmiştir.',
+                'intro_received' => '#:order_id numaralı sipariş için sözleşmeden cayma beyanınızı aldık. Hukuken geçerli alındı zaman damgası aşağıda kaydedilmiştir.',
+                'intro_refunded' => '#:order_id numaralı sipariş için iadeniz gerçekleştirildi. İade tutarı kısa süre içinde orijinal ödeme yönteminize ulaşacaktır.',
+                'intro_declined' => 'Satıcı, bu beyana dayanan, #:order_id numaralı sipariş için iade hakkınıza itiraz etmiştir. Belirtilen gerekçe aşağıdadır.',
+                'summary' => 'Cayma özeti',
+                'received_at' => 'Alındığı tarih',
+                'reference' => 'Referans',
+                'order' => 'Sipariş',
+                'email' => 'E-posta',
+                'reason' => 'Belirtilen gerekçe',
+                'declined_reason' => 'Ret gerekçesi',
+                'refund_notice' => 'İade gerektiği durumlarda, açıkça aksini kabul etmediğiniz sürece, iadeyi orijinal işlemde kullandığınız ödeme yöntemiyle, yukarıdaki tarihten itibaren 14 gün içinde gerçekleştiriyoruz.',
+                'footer' => 'Bu mesaj, 2011/83/AB sayılı Direktifin (Direktif (AB) 2023/2673 ile değiştirilen şekliyle) 11a maddesi uyarınca gerekli olan, kalıcı veri taşıyıcı üzerindeki onaydır. Lütfen kayıtlarınız için saklayın.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Cayma bağlantınız',
+                'title' => 'Cayma bağlantınız',
+                'intro' => ':order_id numaralı sipariş için cayma talebinizi göndermek için aşağıdaki bağlantıyı kullanın. Bağlantı 24 saat süreyle geçerlidir.',
+                'button' => 'Cayma formunu aç',
+                'expiry' => 'Bağlantı 24 saat içinde sona erecektir. Bu e-postayı talep etmediyseniz, güvenle yok sayabilirsiniz.',
+            ],
         ],
     ],
 ];

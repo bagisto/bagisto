@@ -1,0 +1,17 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Contract document body -->
+    <path d="M40 30C40 25.5817 43.5817 22 48 22H102L140 60V146C140 150.418 136.418 154 132 154H48C43.5817 154 40 150.418 40 146V30Z" fill="white" stroke="#6B7280" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- Folded top-right corner -->
+    <path d="M102 22V50C102 55.5228 106.477 60 112 60H140L102 22Z" fill="#E5E7EB" stroke="#6B7280" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- Document text lines -->
+    <path d="M55 84H108" stroke="#6B7280" stroke-width="6" stroke-linecap="round"/>
+    <path d="M55 102H123" stroke="#6B7280" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Counter-clockwise undo / withdraw arc (¾ circle) -->
+    <path d="M118 138 A 28 28 0 1 0 62 138" stroke="#6B7280" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+    <!-- Arrowhead at the left endpoint -->
+    <path d="M53 130L62 138L71 130" stroke="#6B7280" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

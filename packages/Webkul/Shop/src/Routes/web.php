@@ -1,6 +1,12 @@
 <?php
 
 /**
+ * WebMCP navigation routes. Declared before the store-front fallback so the
+ * concrete `webmcp/*` paths are matched ahead of the slug catch-all.
+ */
+require 'webmcp-routes.php';
+
+/**
  * Store front routes.
  */
 require 'store-front-routes.php';

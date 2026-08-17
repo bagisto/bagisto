@@ -22,31 +22,31 @@ class RMAStatusSeeder extends Seeder
         $defaultStatuses = [
             [
                 'id' => 1,
-                'title' => 'Pending',
+                'title' => 'Pending Review',
                 'status' => 1,
                 'color' => '#efb308',
                 'default' => 1,
             ], [
                 'id' => 2,
-                'title' => 'Accept',
+                'title' => 'Approved',
                 'status' => 1,
                 'color' => '#12af56',
                 'default' => 1,
             ], [
                 'id' => 3,
-                'title' => 'Awaiting',
+                'title' => 'Awaiting Return',
                 'status' => 1,
                 'color' => '#f59e0b',
                 'default' => 1,
             ], [
                 'id' => 4,
-                'title' => 'Dispatched Package',
+                'title' => 'Return In Transit',
                 'status' => 1,
                 'color' => '#3b82f6',
                 'default' => 1,
             ], [
                 'id' => 5,
-                'title' => 'Received Package',
+                'title' => 'Refunded',
                 'status' => 1,
                 'color' => '#10b981',
                 'default' => 1,
@@ -58,7 +58,7 @@ class RMAStatusSeeder extends Seeder
                 'default' => 1,
             ], [
                 'id' => 7,
-                'title' => 'Declined',
+                'title' => 'Request Declined',
                 'status' => 1,
                 'color' => '#e11d48',
                 'default' => 1,
@@ -70,7 +70,7 @@ class RMAStatusSeeder extends Seeder
                 'default' => 1,
             ], [
                 'id' => 9,
-                'title' => 'Canceled',
+                'title' => 'Request Canceled',
                 'status' => 1,
                 'color' => '#991b1b',
                 'default' => 1,

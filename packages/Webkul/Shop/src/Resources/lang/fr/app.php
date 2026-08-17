@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Téléchargements restants',
                 'status' => 'Statut',
                 'title' => 'Titre',
+                'unlimited' => 'Illimité',
             ],
 
             'wishlist' => [
@@ -541,6 +542,12 @@ return [
             'default-header' => 'En-tête par défaut',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Fermer la galerie',
+            'view-image' => "Voir l'image",
+            'view-video' => 'Voir la vidéo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Basculer par défaut',
         ],
@@ -549,6 +556,7 @@ return [
             'index' => [
                 'add-attachments' => 'Ajouter des pièces jointes',
                 'add-image' => 'Ajouter une image/vidéo',
+                'invalid-file-type' => 'Le type de fichier sélectionné n\'est pas autorisé.',
             ],
         ],
 
@@ -600,6 +608,20 @@ return [
                     'welcome-guest' => 'Bienvenue invité',
                     'wishlist' => 'Liste de souhaits',
                 ],
+            ],
+
+            'webmcp' => [
+                'add-to-wishlist' => 'Ajouter un produit à la liste de souhaits du client par son nom.',
+                'add-to-wishlist-query' => 'Le nom du produit ou la clé URL à ajouter à la liste de souhaits.',
+                'proceed-to-checkout' => 'Ouvrez la page de paiement pour commencer à passer une commande des articles du panier.',
+                'search-products' => 'Recherchez des produits dans le catalogue de la boutique par mot-clé et ouvrez les résultats correspondants.',
+                'search-products-query' => 'Les mots-clés ou le nom du produit à rechercher dans le catalogue.',
+                'subscribe-newsletter' => 'Abonnez une adresse e-mail à la newsletter de la boutique.',
+                'subscribe-newsletter-email' => 'L\'adresse e-mail à abonner à la newsletter.',
+                'view-cart' => 'Ouvrez la page du panier pour que le client puisse vérifier les produits qu\'il a ajoutés.',
+                'view-product' => 'Ouvrir la page de détail d\'un produit par son nom.',
+                'view-product-query' => 'Le nom du produit ou la clé URL à ouvrir.',
+                'view-wishlist' => 'Ouvrir la page de la liste de souhaits pour consulter les produits enregistrés du client.',
             ],
 
             'footer' => [
@@ -741,6 +763,7 @@ return [
         'quantity-changer' => [
             'decrease-quantity' => 'Diminuer la quantité',
             'increase-quantity' => 'Augmenter la quantité',
+            'remove-item' => 'Supprimer l\'article',
         ],
     ],
 
@@ -1114,6 +1137,7 @@ return [
                 'discount-amount' => 'Montant de réduction',
                 'grand-total' => 'Total général',
                 'included' => 'Inclus',
+                'excl-tax' => 'Hors taxe :',
                 'incl-tax' => 'TTC :',
                 'items-discount' => 'Remise sur articles',
                 'shipping-discount' => 'Remise sur livraison',
@@ -1725,16 +1749,16 @@ return [
 
         'status' => [
             'status-name' => [
-                'accept' => 'Accepté',
-                'awaiting' => 'En attente',
-                'canceled' => 'Annulé',
-                'declined' => 'Refusé',
-                'dispatched-package' => 'Colis expédié',
+                'accept' => 'Approuvé',
+                'awaiting' => 'En attente de retour',
+                'canceled' => 'Demande annulée',
+                'declined' => 'Demande refusée',
+                'dispatched-package' => 'Retour en transit',
                 'item-canceled' => 'Article annulé',
                 'not-received-package-yet' => 'Colis non encore reçu',
-                'pending' => 'En attente',
+                'pending' => 'En attente d\'examen',
                 'processing' => 'En cours de traitement',
-                'received-package' => 'Colis reçu',
+                'received-package' => 'Remboursé',
                 'solved' => 'Résolu',
             ],
 
@@ -1748,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'Le statut RMA a déjà été annulé.',
+            'cancel-not-allowed' => 'L\'annulation de cette demande RMA n\'est pas autorisée.',
             'cancel-success' => 'Le statut RMA a été annulé avec succès.',
+            'close-not-allowed' => 'La fermeture de cette demande RMA n\'est pas autorisée.',
             'create-success' => 'Demande créée avec succès.',
             'creation-error' => "Le statut RMA ne peut pas être mis à jour car la facture pour cette commande n'a pas été créée.",
             'invalid-item' => "L'article de commande sélectionné n'est pas valide.",
@@ -1758,6 +1784,113 @@ return [
             'reopen-not-allowed' => 'La réouverture de cette demande RMA n\'est pas autorisée.',
             'send-message' => ':name envoyé avec succès.',
             'update-success' => ':name mis à jour avec succès.',
+        ],
+    ],
+
+    'eu_withdrawal' => [
+        'button' => [
+            'withdraw' => 'Se rétracter du contrat',
+            'view_existing' => 'Voir votre rétractation',
+        ],
+
+        'guest_dropdown' => [
+            'link' => 'Se rétracter d’un contrat',
+        ],
+
+        'lookup' => [
+            'page_title' => 'Se rétracter d’un contrat',
+            'heading' => 'Se rétracter de votre contrat',
+            'intro' => 'Saisissez le numéro de commande et l’adresse e-mail utilisée lors du paiement. Nous vous enverrons un lien pour déposer votre rétractation.',
+            'order_number' => 'Numéro de commande',
+            'email' => 'Adresse e-mail',
+            'submit' => 'M’envoyer le lien de rétractation',
+            'sent_notice' => 'Si une commande correspondante existe, nous venons d’envoyer par e-mail un lien de rétractation à cette adresse. Il sera valable pendant 24 heures.',
+            'legal_note' => 'Vous disposez du droit légal, en vertu de la directive 2011/83/UE (telle que modifiée), de vous rétracter de votre contrat dans un délai de 14 jours. D’autres moyens de rétractation — y compris une déclaration écrite adressée à notre service client — restent valables.',
+        ],
+
+        'form' => [
+            'page_title' => 'Confirmez votre rétractation',
+            'heading' => 'Confirmer la rétractation du contrat',
+            'legal_notice_title' => 'Il s’agit d’une déclaration juridiquement contraignante',
+            'legal_effect' => 'En soumettant ce formulaire, vous exercez votre droit légal de rétractation pour la commande n° :order_id. La déclaration produit ses effets juridiques au moment de son envoi.',
+            'order_summary' => 'Commande',
+            'order_total' => 'Total',
+            'order_items' => 'Articles',
+            'placed_on' => 'Passée le :date',
+            'reason_label' => 'Motif',
+            'reason_optional' => '(facultatif)',
+            'reason_help' => 'Vous n’êtes pas tenu d’indiquer un motif. Tout ce que vous écrirez ici sera consigné dans la preuve de rétractation et transmis au commerçant.',
+            'reason_placeholder' => 'Par exemple : « J’ai changé d’avis », « Article non conforme à la description », ou laissez vide.',
+            'submit' => 'Envoyer la rétractation',
+            'cancel' => 'Annuler et revenir',
+        ],
+
+        'confirmation' => [
+            'page_title' => 'Justificatif de rétractation',
+            'heading' => 'Votre rétractation a été reçue',
+            'heading_received' => 'Votre rétractation a été reçue',
+            'heading_refunded' => 'Votre remboursement a été effectué',
+            'heading_declined' => 'Votre rétractation a été refusée',
+            'intro' => 'Nous avons enregistré votre déclaration. Cette page et l’e-mail que nous venons de vous envoyer servent tous deux de confirmation sur un support durable.',
+            'intro_received' => 'Nous avons enregistré votre déclaration. Cette page et l’e-mail que nous venons de vous envoyer servent tous deux de confirmation sur un support durable.',
+            'intro_refunded' => 'Le commerçant a traité votre remboursement. Le montant devrait arriver prochainement sur votre moyen de paiement initial.',
+            'intro_declined' => 'Le commerçant a contesté votre droit à un remboursement au titre de cette déclaration. Consultez ci-dessous le motif indiqué et vos recours possibles.',
+            'received_at' => 'Reçue le',
+            'reference' => 'Référence',
+            'copy_reference' => 'Copier la référence',
+            'reference_copied' => 'Référence copiée dans le presse-papiers.',
+            'order' => 'Commande',
+            'email' => 'E-mail',
+            'reason' => 'Motif',
+            'status' => 'Statut',
+            'status_received' => 'Reçue',
+            'status_refunded' => 'Remboursée',
+            'status_declined' => 'Refusée',
+            'print' => 'Imprimer',
+            'next_steps_title' => 'Et maintenant ?',
+            'step_received' => 'Votre déclaration a été reçue et enregistrée.',
+            'step_email' => 'E-mail de confirmation envoyé dans votre boîte de réception.',
+            'step_refund' => 'Remboursement effectué dans un délai de 14 jours.',
+            'step_refund_done' => 'Le remboursement a été effectué.',
+            'step_declined' => 'Rétractation refusée par le commerçant.',
+            'declined_reason_label' => 'Motif indiqué par le commerçant',
+            'declined_notice' => 'Vous conservez tous les autres recours légaux prévus par le droit de la consommation de l’UE. Si vous n’êtes pas d’accord avec cette décision, contactez directement le commerçant.',
+            'refund_notice' => 'Nous procédons au remboursement en utilisant le même moyen de paiement que celui utilisé pour la transaction initiale, sauf accord exprès contraire de votre part.',
+            'email_sent' => 'L’e-mail de confirmation a été envoyé.',
+            'email_pending' => 'Nous n’avons pas pu envoyer l’e-mail de confirmation immédiatement ; notre équipe assurera le suivi. Veuillez conserver cette page comme justificatif.',
+            'durable_medium_notice' => 'Cette page constitue votre justificatif. Vous pouvez la sauvegarder ou l’imprimer.',
+        ],
+
+        'emails' => [
+            'confirmation' => [
+                'subject' => 'Confirmation de votre rétractation — Commande :order_id',
+                'title' => 'Rétractation reçue',
+                'title_received' => 'Rétractation reçue',
+                'title_refunded' => 'Remboursement effectué',
+                'title_declined' => 'Rétractation refusée',
+                'greeting' => 'Bonjour,',
+                'intro' => 'Nous avons reçu votre déclaration de rétractation du contrat pour la commande n° :order_id. L’horodatage de réception, juridiquement opposable, est consigné ci-dessous.',
+                'intro_received' => 'Nous avons reçu votre déclaration de rétractation du contrat pour la commande n° :order_id. L’horodatage de réception, juridiquement opposable, est consigné ci-dessous.',
+                'intro_refunded' => 'Votre remboursement pour la commande n° :order_id a été effectué. Le montant devrait arriver prochainement sur votre moyen de paiement initial.',
+                'intro_declined' => 'Le commerçant a contesté votre droit à un remboursement pour la commande n° :order_id au titre de cette déclaration. Le motif indiqué figure ci-dessous.',
+                'summary' => 'Résumé de la rétractation',
+                'received_at' => 'Reçue le',
+                'reference' => 'Référence',
+                'order' => 'Commande',
+                'email' => 'E-mail',
+                'reason' => 'Motif indiqué',
+                'declined_reason' => 'Motif du refus',
+                'refund_notice' => 'Lorsqu’un remboursement est dû, nous l’effectuons en utilisant le même moyen de paiement que celui utilisé pour la transaction initiale, dans un délai de 14 jours à compter de la date ci-dessus, sauf accord exprès contraire de votre part.',
+                'footer' => 'Ce message constitue la confirmation sur un support durable exigée par l’article 11 bis de la directive 2011/83/UE (telle que modifiée par la directive (UE) 2023/2673). Veuillez le conserver pour vos archives.',
+            ],
+
+            'guest_link' => [
+                'subject' => 'Votre lien de rétractation',
+                'title' => 'Votre lien de rétractation',
+                'intro' => 'Utilisez le lien ci-dessous pour déposer votre rétractation pour la commande :order_id. Le lien est valable pendant 24 heures.',
+                'button' => 'Ouvrir le formulaire de rétractation',
+                'expiry' => 'Le lien expirera dans 24 heures. Si vous n’avez pas demandé cet e-mail, vous pouvez l’ignorer en toute sécurité.',
+            ],
         ],
     ],
 ];

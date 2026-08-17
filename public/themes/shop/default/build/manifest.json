@@ -1,21 +1,21 @@
 {
-  "_veeValidate-BnSi22_q.js": {
-    "file": "assets/veeValidate-BnSi22_q.js",
+  "_veeValidate-b62SX0Gj.js": {
+    "file": "assets/veeValidate-b62SX0Gj.js",
     "name": "veeValidate",
     "imports": [
-      "_vue-DaFNcYaj.js"
+      "_vue-DO4HzPOv.js"
     ]
   },
-  "_vendor-CW6uOYFM.js": {
-    "file": "assets/vendor-CW6uOYFM.js",
+  "_vendor-0jrwA_y2.js": {
+    "file": "assets/vendor-0jrwA_y2.js",
     "name": "vendor"
   },
-  "_vue-DaFNcYaj.js": {
-    "file": "assets/vue-DaFNcYaj.js",
+  "_vue-DO4HzPOv.js": {
+    "file": "assets/vue-DO4HzPOv.js",
     "name": "vue"
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-DM-5LqUy.css",
+    "file": "assets/app-Bw7TCHHQ.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -67,6 +67,10 @@
     "file": "assets/no-address-BHTy4apn.png",
     "src": "src/Resources/assets/images/no-address.png"
   },
+  "src/Resources/assets/images/payglocal.png": {
+    "file": "assets/payglocal-CSDEoMi_.png",
+    "src": "src/Resources/assets/images/payglocal.png"
+  },
   "src/Resources/assets/images/paypal.png": {
     "file": "assets/paypal-CIu1GKlz.png",
     "src": "src/Resources/assets/images/paypal.png"
@@ -74,6 +78,10 @@
   "src/Resources/assets/images/payu.png": {
     "file": "assets/payu-Lrh50Ekl.png",
     "src": "src/Resources/assets/images/payu.png"
+  },
+  "src/Resources/assets/images/phonepe.png": {
+    "file": "assets/phonepe-0x8o_RaK.png",
+    "src": "src/Resources/assets/images/phonepe.png"
   },
   "src/Resources/assets/images/razorpay.png": {
     "file": "assets/razorpay-Cbr80qFP.png",
@@ -108,17 +116,17 @@
     "src": "src/Resources/assets/images/wishlist.png"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-BdNp4TDg.js",
+    "file": "assets/app-BdyzoL0j.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,
     "imports": [
-      "_vue-DaFNcYaj.js",
-      "_vendor-CW6uOYFM.js",
-      "_veeValidate-BnSi22_q.js"
+      "_vue-DO4HzPOv.js",
+      "_vendor-0jrwA_y2.js",
+      "_veeValidate-b62SX0Gj.js"
     ],
     "css": [
-      "assets/app-DsP8OK1c.css"
+      "assets/app-DPIY9Iht.css"
     ]
   }
 }

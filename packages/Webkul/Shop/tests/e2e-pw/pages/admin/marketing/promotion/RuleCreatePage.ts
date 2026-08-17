@@ -1,4 +1,4 @@
-import { expect, Page } from "@playwright/test";
+import { expect, Locator, Page } from "@playwright/test";
 import { generateName } from "../../../../utils/faker";
 import { BasePage } from "../../../BasePage";
 
@@ -187,7 +187,9 @@ export class RuleCreatePage extends BasePage {
 
         if (optionSelect) {
             await this.selectConditionOption.waitFor();
-            await this.selectConditionOption.selectOption(optionSelect);
+            await this.selectConditionOption.selectOption({
+                label: optionSelect,
+            });
         } else if (value) {
             await this.conditionValueInput.fill(value);
         } else if (checkboxSelect) {
@@ -254,7 +256,14 @@ export class RuleCreatePage extends BasePage {
         await this.statusToggle.first().click();
     }
 
+    private async centerInViewport(locator: Locator) {
+        await locator.evaluate((element) =>
+            element.scrollIntoView({ block: "center" }),
+        );
+    }
+
     public async saveCartRule() {
+        await this.centerInViewport(this.saveCartRuleButton);
         await this.saveCartRuleButton.click();
         await expect(this.successMessage).toContainText(
             "Cart rule created successfully",
@@ -262,7 +271,9 @@ export class RuleCreatePage extends BasePage {
     }
 
     public async saveCatalogRule() {
-        await this.catalogRuleButton.click();
+        await this.centerInViewport(this.catalogRuleButton);
+        await this.catalogRuleButton.click({ timeout: 60000 });
+
         await expect(this.successMessage).toContainText(
             "Catalog rule created successfully",
         );

@@ -57,7 +57,7 @@
 
                         <button
                             type="button"
-                            class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded-2xl"
+                            class="secondary-button border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:py-2 max-sm:py-1.5 max-sm:text-sm focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded-2xl"
                             @click="removeAll"
                             v-if="wishlistItems.length"
                         >
@@ -83,7 +83,7 @@
                     <template v-else>
                         <div class="m-auto grid w-full place-content-center items-center justify-items-center py-32 text-center">
                             <img
-                                class="max-md:h-[100px] max-md:w-[100px]"
+                                class="max-md:h-25 max-md:w-25"
                                 src="{{ bagisto_asset('images/wishlist.png') }}"
                                 alt="Empty wishlist"
                             >
@@ -120,7 +120,7 @@
                                         <img
                                             class="h-28 max-h-28 w-28 max-w-28 rounded-xl max-md:h-20 max-md:max-h-20 max-md:w-20 max-md:max-w-20"
                                             :src="wishlist.product.base_image.small_image_url"
-                                            alt="Product Image"
+                                            :alt="wishlist.product.base_image.alt"
                                         />
                                     </a>
 
@@ -136,7 +136,7 @@
                                         <button
                                             type="button"
                                             @click="remove"
-                                            class="icon-bin hidden text-2xl max-md:block cursor-pointer focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded bg-transparent border-0"
+                                            class="icon-bin hidden text-2xl max-md:block cursor-pointer focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded bg-transparent border-0"
                                             aria-label="@lang('shop::app.customers.account.wishlist.remove')"
                                         ></button>
                                     </div>
@@ -150,7 +150,7 @@
                                             <div>
                                                 <button
                                                     type="button"
-                                                    class="flex cursor-pointer items-center gap-x-4 text-base focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded text-left ltr:text-left rtl:text-right w-full bg-transparent border-0"
+                                                    class="flex cursor-pointer items-center gap-x-4 text-base focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded text-left ltr:text-left rtl:text-right w-full bg-transparent border-0"
                                                     @click="wishlist.option_show = ! wishlist.option_show"
                                                 >
                                                     @lang('shop::app.customers.account.wishlist.see-details')
@@ -206,7 +206,7 @@
                                         <!--Wishlist Item removed button-->
                                         <button
                                             type="button"
-                                            class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none rounded bg-transparent border-0"
+                                            class="flex cursor-pointer justify-end text-base text-blue-700 max-md:hidden focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-hidden rounded bg-transparent border-0"
                                             @click="remove"
                                         >
                                             @lang('shop::app.customers.account.wishlist.remove')
@@ -222,7 +222,9 @@
                                             name="quantity"
                                             ::value="wishlist.options.quantity ?? 1"
                                             class="flex max-h-10 items-center gap-x-2.5 rounded-[54px] border border-navyBlue px-3.5 py-1.5 max-md:gap-x-1 max-md:px-1.5 max-md:py-1"
+                                            :removable="true"
                                             @change="(qty) => wishlist.quantity = qty"
+                                            @remove="remove"
                                         />
 
                                         @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
@@ -250,7 +252,7 @@
 
                                 <button
                                     type="button"
-                                    class="flex cursor-pointer justify-end text-base text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-none rounded bg-transparent border-0 ltr:ml-auto rtl:mr-auto"
+                                    class="flex cursor-pointer justify-end text-base text-blue-700 focus-visible:ring-2 focus-visible:ring-blue-700 focus-visible:outline-hidden rounded bg-transparent border-0 ltr:ml-auto rtl:mr-auto"
                                     @click="remove"
                                 >
                                     @lang('shop::app.customers.account.wishlist.remove')

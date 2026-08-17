@@ -197,7 +197,7 @@
             
                         <div class="flex gap-60 max-sm:flex-wrap">
                             <!-- Customer Status -->
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group class="mb-0!">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.marketing.promotions.cart-rules.edit.status')
                                 </x-admin::form.control-group.label>
@@ -218,7 +218,7 @@
                             </x-admin::form.control-group>
 
                             <!-- Customer Suspended Status -->
-                            <x-admin::form.control-group class="!mb-0">
+                            <x-admin::form.control-group class="mb-0!">
                                 <x-admin::form.control-group.label>
                                     @lang('admin::app.customers.customers.view.edit.suspended')
                                 </x-admin::form.control-group.label>

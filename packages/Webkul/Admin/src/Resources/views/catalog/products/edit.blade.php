@@ -86,7 +86,7 @@
                     </x-slot>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         @foreach ($channels as $channel)
                             <a
                                 href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $channel->default_locale?->code ?? $currentLocale->code ]) }}"
@@ -122,7 +122,7 @@
                     </x-slot>
 
                     <!-- Dropdown Content -->
-                    <x-slot:content class="!p-0">
+                    <x-slot:content class="p-0!">
                         @foreach ($currentChannel->locales->sortBy('name') as $locale)
                             <a
                                 href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
@@ -152,7 +152,7 @@
             @foreach ($groupedColumns as $column => $groups)
                 {!! view_render_event("bagisto.admin.catalog.product.edit.form.column_{$column}.before", ['product' => $product]) !!}
 
-                <div class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-[360px] max-w-full max-sm:w-full' }}">
+                <div class="flex flex-col gap-2 {{ $column == 1 ? 'flex-1 max-xl:flex-auto' : 'w-90 max-w-full max-sm:w-full' }}">
                     @foreach ($groups as $group)
                         @php $customAttributes = $product->getEditableAttributes($group); @endphp
 
@@ -181,7 +181,7 @@
                         @if ($customAttributes->isNotEmpty())
                             {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.before", ['product' => $product]) !!}
 
-                            <div class="box-shadow relative rounded bg-white p-4 dark:bg-gray-900">
+                            <div class="box-shadow relative rounded-sm bg-white p-4 dark:bg-gray-900">
                                 <p 
                                     class="mb-4 text-base font-semibold text-gray-800 dark:text-white"
                                     v-pre
@@ -196,16 +196,16 @@
                                 @foreach ($customAttributes as $attribute)
                                     {!! view_render_event("bagisto.admin.catalog.product.edit.form.{$group->code}.controls.before", ['product' => $product]) !!}
 
-                                    <x-admin::form.control-group class="last:!mb-0">
+                                    <x-admin::form.control-group class="last:mb-0!">
                                         <x-admin::form.control-group.label>
-                                            {!! $attribute->admin_name . ($attribute->is_required ? '<span class="required"></span>' : '') !!}
+                                            {!! e($attribute->admin_name) . ($attribute->is_required ? '<span class="required"></span>' : '') !!}
 
                                             @if (
                                                 $attribute->value_per_channel
                                                 && $channels->count() > 1
                                             )
                                                 <span 
-                                                    class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                                    class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                                     v-pre
                                                 >
                                                     {{ $currentChannel->name }}
@@ -214,7 +214,7 @@
 
                                             @if ($attribute->value_per_locale)
                                                 <span
-                                                    class="rounded border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
+                                                    class="rounded-sm border border-gray-200 bg-gray-100 px-1 py-0.5 text-[10px] font-semibold leading-normal text-gray-600"
                                                     v-pre
                                                 >
                                                     {{ $currentLocale->name }}
@@ -269,7 +269,7 @@
                 </div>
 
                 @if ($isSingleColumn && ($column == 1 || $column == 2))
-                    <div class="w-[360px] max-w-full max-sm:w-full">
+                    <div class="w-90 max-w-full max-sm:w-full">
                         @if ($column == 2) 
                             <!-- Images View Blade File -->
                             @include('admin::catalog.products.edit.images')
@@ -302,9 +302,7 @@
         </div>
 
         {!! view_render_event('bagisto.admin.catalog.product.edit.form.after', ['product' => $product]) !!}
-
     </x-admin::form>
 
     {!! view_render_event('bagisto.admin.catalog.product.edit.after', ['product' => $product]) !!}
-
 </x-admin::layouts>

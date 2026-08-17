@@ -23,5 +23,6 @@ return [
         'payment-failed' => '支付失败。请重试。',
         'payment-success' => '支付成功完成！',
         'provide-credentials' => '请在管理面板中配置PayU商户密钥和Salt。',
+        'supported-currency-error' => '货币 :currency 不受支持。支持的货币有: :supportedCurrencies.',
     ],
 ];

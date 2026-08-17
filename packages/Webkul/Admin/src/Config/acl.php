@@ -13,7 +13,10 @@ return [
     [
         'key' => 'dashboard',
         'name' => 'admin::app.acl.dashboard',
-        'route' => 'admin.dashboard.index',
+        'route' => [
+            'admin.dashboard.index',
+            'admin.dashboard.stats',
+        ],
         'sort' => 1,
     ],
 
@@ -33,7 +36,10 @@ return [
     ], [
         'key' => 'sales.orders',
         'name' => 'admin::app.acl.orders',
-        'route' => 'admin.sales.orders.index',
+        'route' => [
+            'admin.sales.orders.index',
+            'admin.sales.orders.search',
+        ],
         'sort' => 1,
     ], [
         'key' => 'sales.orders.create',
@@ -41,10 +47,14 @@ return [
         'route' => [
             'admin.sales.orders.create',
             'admin.sales.orders.store',
+            'admin.sales.orders.reorder',
+            'admin.sales.cart.index',
             'admin.sales.cart.store',
+            'admin.sales.cart.store_coupon',
             'admin.sales.cart.items.store',
             'admin.sales.cart.items.update',
             'admin.sales.cart.items.destroy',
+            'admin.sales.cart.remove_coupon',
             'admin.sales.cart.addresses.store',
             'admin.sales.cart.shipping_methods.store',
             'admin.sales.cart.payment_methods.store',
@@ -54,7 +64,10 @@ return [
     ], [
         'key' => 'sales.orders.view',
         'name' => 'admin::app.acl.view',
-        'route' => 'admin.sales.orders.view',
+        'route' => [
+            'admin.sales.orders.view',
+            'admin.sales.orders.comment',
+        ],
         'sort' => 2,
     ], [
         'key' => 'sales.orders.cancel',
@@ -69,13 +82,22 @@ return [
     ], [
         'key' => 'sales.invoices.view',
         'name' => 'admin::app.acl.view',
-        'route' => 'admin.sales.invoices.view',
+        'route' => [
+            'admin.sales.invoices.view',
+            'admin.sales.invoices.print',
+            'admin.sales.invoices.send_duplicate_email',
+        ],
         'sort' => 1,
     ], [
         'key' => 'sales.invoices.create',
         'name' => 'admin::app.acl.create',
         'route' => 'admin.sales.invoices.store',
         'sort' => 2,
+    ], [
+        'key' => 'sales.invoices.update',
+        'name' => 'admin::app.acl.edit',
+        'route' => 'admin.sales.invoices.mass_update.state',
+        'sort' => 3,
     ], [
         'key' => 'sales.shipments',
         'name' => 'admin::app.acl.shipments',
@@ -130,7 +152,16 @@ return [
     ], [
         'key' => 'sales.rma.requests',
         'name' => 'admin::app.acl.rma.requests.title',
-        'route' => 'admin.sales.rma.requests.index',
+        'route' => [
+            'admin.sales.rma.requests.index',
+            'admin.sales.rma.requests.view',
+            'admin.sales.rma.requests.get-messages',
+            'admin.sales.rma.requests.get-order-items',
+            'admin.sales.rma.requests.get-resolution-reasons',
+            'admin.sales.rma.requests.send-message',
+            'admin.sales.rma.requests.update-status',
+            'admin.sales.rma.requests.re-open',
+        ],
         'sort' => 1,
     ], [
         'key' => 'sales.rma.requests.create',
@@ -251,6 +282,39 @@ return [
             'admin.sales.rma.custom-fields.mass-delete',
         ],
         'sort' => 3,
+    ], [
+        'key' => 'sales.eu_withdrawals',
+        'name' => 'admin::app.eu_withdrawal.acl.title',
+        'route' => 'admin.sales.eu-withdrawals.index',
+        'sort' => 10,
+    ], [
+        'key' => 'sales.eu_withdrawals.view',
+        'name' => 'admin::app.eu_withdrawal.acl.view',
+        'route' => 'admin.sales.eu-withdrawals.view',
+        'sort' => 1,
+    ], [
+        'key' => 'sales.eu_withdrawals.decline',
+        'name' => 'admin::app.eu_withdrawal.acl.decline',
+        'route' => 'admin.sales.eu-withdrawals.decline',
+        'sort' => 2,
+    ], [
+        'key' => 'sales.eu_withdrawals.mark_refunded',
+        'name' => 'admin::app.eu_withdrawal.acl.mark_refunded',
+        'route' => 'admin.sales.eu-withdrawals.mark_refunded',
+        'sort' => 3,
+    ], [
+        'key' => 'sales.eu_withdrawals.resend_confirmation',
+        'name' => 'admin::app.eu_withdrawal.acl.resend_confirmation',
+        'route' => 'admin.sales.eu-withdrawals.resend_confirmation',
+        'sort' => 4,
+    ], [
+        'key' => 'sales.bookings',
+        'name' => 'admin::app.components.layouts.sidebar.booking-product',
+        'route' => [
+            'admin.sales.bookings.index',
+            'admin.sales.bookings.get',
+        ],
+        'sort' => 11,
     ],
 
     /*
@@ -269,7 +333,19 @@ return [
     ], [
         'key' => 'catalog.products',
         'name' => 'admin::app.acl.products',
-        'route' => 'admin.catalog.products.index',
+        'route' => [
+            'admin.catalog.products.index',
+            'admin.catalog.products.search',
+            'admin.catalog.products.file.download',
+            'admin.catalog.products.bundle.options',
+            'admin.catalog.products.configurable.options',
+            'admin.catalog.products.downloadable.options',
+            'admin.catalog.products.grouped.options',
+            'admin.catalog.products.simple.customizable-options',
+            'admin.catalog.products.virtual.customizable-options',
+            'admin.sales.booking-product.config',
+            'admin.sales.booking-product.slots',
+        ],
         'sort' => 1,
     ], [
         'key' => 'catalog.products.create',
@@ -289,6 +365,8 @@ return [
             'admin.catalog.products.update',
             'admin.catalog.products.update_inventories',
             'admin.catalog.products.mass_update',
+            'admin.catalog.products.upload_link',
+            'admin.catalog.products.upload_sample',
         ],
         'sort' => 3,
     ], [
@@ -302,7 +380,11 @@ return [
     ], [
         'key' => 'catalog.categories',
         'name' => 'admin::app.acl.categories',
-        'route' => 'admin.catalog.categories.index',
+        'route' => [
+            'admin.catalog.categories.index',
+            'admin.catalog.categories.search',
+            'admin.catalog.categories.tree',
+        ],
         'sort' => 2,
     ], [
         'key' => 'catalog.categories.create',
@@ -332,7 +414,10 @@ return [
     ], [
         'key' => 'catalog.attributes',
         'name' => 'admin::app.acl.attributes',
-        'route' => 'admin.catalog.attributes.index',
+        'route' => [
+            'admin.catalog.attributes.index',
+            'admin.catalog.attributes.options',
+        ],
         'sort' => 3,
     ], [
         'key' => 'catalog.attributes.create',
@@ -402,7 +487,15 @@ return [
     ], [
         'key' => 'customers.customers',
         'name' => 'admin::app.acl.customers',
-        'route' => 'admin.customers.customers.index',
+        'route' => [
+            'admin.customers.customers.index',
+            'admin.customers.customers.view',
+            'admin.customers.customers.search',
+            'admin.customers.customers.cart.items',
+            'admin.customers.customers.compare.items',
+            'admin.customers.customers.wishlist.items',
+            'admin.customers.customers.orders.recent_items',
+        ],
         'sort' => 1,
     ], [
         'key' => 'customers.customers.create',
@@ -415,6 +508,9 @@ return [
         'route' => [
             'admin.customers.customers.update',
             'admin.customers.customers.mass_update',
+            'admin.customers.customers.cart.items.delete',
+            'admin.customers.customers.compare.items.delete',
+            'admin.customers.customers.wishlist.items.delete',
         ],
         'sort' => 2,
     ], [
@@ -425,6 +521,11 @@ return [
             'admin.customers.customers.mass_delete',
         ],
         'sort' => 3,
+    ], [
+        'key' => 'customers.customers.login_as_customer',
+        'name' => 'admin::app.configuration.index.customer.settings.login-as-customer.title',
+        'route' => 'admin.customers.customers.login_as_customer',
+        'sort' => 4,
     ], [
         'key' => 'customers.addresses',
         'name' => 'admin::app.acl.addresses',
@@ -444,6 +545,7 @@ return [
         'route' => [
             'admin.customers.customers.addresses.edit',
             'admin.customers.customers.addresses.update',
+            'admin.customers.customers.addresses.set_default',
         ],
         'sort' => 2,
     ], [
@@ -539,7 +641,10 @@ return [
     ], [
         'key' => 'marketing.promotions.cart_rules',
         'name' => 'admin::app.acl.cart-rules',
-        'route' => 'admin.marketing.promotions.cart_rules.index',
+        'route' => [
+            'admin.marketing.promotions.cart_rules.index',
+            'admin.marketing.promotions.cart_rules.coupons.index',
+        ],
         'sort' => 1,
     ], [
         'key' => 'marketing.promotions.cart_rules.create',
@@ -561,6 +666,7 @@ return [
             'admin.marketing.promotions.cart_rules.edit',
             'admin.marketing.promotions.cart_rules.update',
             'admin.marketing.promotions.cart_rules.coupons.store',
+            'admin.marketing.promotions.cart_rules.coupons.delete',
             'admin.marketing.promotions.cart_rules.coupons.mass_delete',
         ],
         'sort' => 2,
@@ -780,7 +886,10 @@ return [
     ], [
         'key' => 'marketing.search_seo.sitemaps.edit',
         'name' => 'admin::app.acl.edit',
-        'route' => 'admin.marketing.search_seo.sitemaps.update',
+        'route' => [
+            'admin.marketing.search_seo.sitemaps.edit',
+            'admin.marketing.search_seo.sitemaps.update',
+        ],
         'sort' => 2,
     ], [
         'key' => 'marketing.search_seo.sitemaps.delete',
@@ -805,17 +914,35 @@ return [
     ], [
         'key' => 'reporting.sales',
         'name' => 'admin::app.acl.sales',
-        'route' => 'admin.reporting.sales.index',
+        'route' => [
+            'admin.reporting.sales.index',
+            'admin.reporting.sales.stats',
+            'admin.reporting.sales.view',
+            'admin.reporting.sales.view.stats',
+            'admin.reporting.sales.export',
+        ],
         'sort' => 1,
     ], [
         'key' => 'reporting.customers',
         'name' => 'admin::app.acl.customers',
-        'route' => 'admin.reporting.customers.index',
+        'route' => [
+            'admin.reporting.customers.index',
+            'admin.reporting.customers.stats',
+            'admin.reporting.customers.view',
+            'admin.reporting.customers.view.stats',
+            'admin.reporting.customers.export',
+        ],
         'sort' => 2,
     ], [
         'key' => 'reporting.products',
         'name' => 'admin::app.acl.products',
-        'route' => 'admin.reporting.products.index',
+        'route' => [
+            'admin.reporting.products.index',
+            'admin.reporting.products.stats',
+            'admin.reporting.products.view',
+            'admin.reporting.products.view.stats',
+            'admin.reporting.products.export',
+        ],
         'sort' => 3,
     ],
 
@@ -1122,6 +1249,11 @@ return [
         ],
         'sort' => 2,
     ], [
+        'key' => 'settings.taxes.tax_rates.delete',
+        'name' => 'admin::app.acl.delete',
+        'route' => 'admin.settings.taxes.rates.delete',
+        'sort' => 3,
+    ], [
         'key' => 'settings.data_transfer',
         'name' => 'admin::app.acl.data-transfer',
         'route' => 'admin.settings.data_transfer.imports.index',
@@ -1155,7 +1287,24 @@ return [
     ], [
         'key' => 'settings.data_transfer.imports.import',
         'name' => 'admin::app.acl.import',
-        'route' => 'admin.settings.data_transfer.imports.import',
+        'route' => [
+            'admin.settings.data_transfer.imports.import',
+            'admin.settings.data_transfer.imports.validate',
+            'admin.settings.data_transfer.imports.validate_chunk',
+            'admin.settings.data_transfer.imports.validate_queued',
+            'admin.settings.data_transfer.imports.validate_status',
+            'admin.settings.data_transfer.imports.download_images',
+            'admin.settings.data_transfer.imports.download_images_queued',
+            'admin.settings.data_transfer.imports.download_images_status',
+            'admin.settings.data_transfer.imports.start',
+            'admin.settings.data_transfer.imports.link',
+            'admin.settings.data_transfer.imports.index_data',
+            'admin.settings.data_transfer.imports.stats',
+            'admin.settings.data_transfer.imports.download',
+            'admin.settings.data_transfer.imports.download_error_report',
+            'admin.settings.data_transfer.imports.download_sample',
+            'admin.settings.data_transfer.imports.download_sample_zip',
+        ],
         'sort' => 4,
     ],
 
@@ -1173,6 +1322,9 @@ return [
         'route' => [
             'admin.configuration.index',
             'admin.configuration.store',
+            'admin.configuration.search',
+            'admin.configuration.download',
+            'admin.configuration.cache-management.execute',
         ],
         'sort' => 9,
     ],

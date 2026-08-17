@@ -1,5 +1,6 @@
 import Flatpickr from "flatpickr";
 import "flatpickr/dist/flatpickr.css";
+import darkThemeCss from "flatpickr/dist/themes/dark.css?inline";
 import { Spanish } from "flatpickr/dist/l10n/es.js";
 import { Catalan } from "flatpickr/dist/l10n/cat.js"
 import { Arabic } from "flatpickr/dist/l10n/ar.js";
@@ -71,13 +72,11 @@ export default {
                 return;
             }
 
-            const linkElement = document.createElement("link");
-            linkElement.rel = "stylesheet";
-            linkElement.type = "text/css";
-            linkElement.href = `https://npmcdn.com/flatpickr/dist/themes/${theme}.css`;
-            linkElement.id = "flatpickr";
+            const styleElement = document.createElement("style");
+            styleElement.id = "flatpickr";
+            styleElement.textContent = darkThemeCss;
 
-            document.head.appendChild(linkElement);
+            document.head.appendChild(styleElement);
         };
 
         const currentTheme = document.documentElement.classList.contains("dark")

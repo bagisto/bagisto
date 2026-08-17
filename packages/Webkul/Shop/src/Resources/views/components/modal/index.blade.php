@@ -19,7 +19,7 @@
 
                 <button
                     type="button"
-                    class="icon-cancel cursor-pointer text-3xl max-sm:text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-none rounded bg-transparent border-0"
+                    class="icon-cancel cursor-pointer text-3xl max-sm:text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded bg-transparent border-0"
                     aria-label="Close modal"
                     @click="toggle"
                 >
@@ -67,7 +67,7 @@
                 leave-to-class="opacity-0"
             >
                 <div
-                    class="fixed inset-0 z-10 bg-gray-500 bg-opacity-50 transition-opacity"
+                    class="fixed inset-0 z-10 bg-gray-500/50 transition-opacity"
                     v-show="isOpen"
                 ></div>
             </transition>
@@ -83,7 +83,7 @@
                 leave-to-class="translate-y-4 opacity-0 md:translate-y-0 md:scale-95"
             >
                 <div
-                    class="fixed inset-0 z-10 transform overflow-y-auto transition focus-visible:outline-none" 
+                    class="fixed inset-0 z-10 transform overflow-y-auto transition focus-visible:outline-hidden" 
                     v-show="isOpen"
                     role="dialog"
                     aria-modal="true"
@@ -91,7 +91,10 @@
                     tabindex="-1"
                 >
                     <div class="flex min-h-full items-end justify-center p-4 sm:items-center sm:p-0">
-                        <div class="absolute left-1/2 top-1/2 z-[999] w-full max-w-[595px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-zinc-100 max-md:w-[90%]">
+                        <div
+                            class="absolute left-1/2 top-1/2 z-999 w-full -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-lg bg-zinc-100 max-md:w-[90%]"
+                            :class="panelClass || 'max-w-[595px]'"
+                        >
                             <!-- Header Slot-->
                             <slot
                                 name="header"
@@ -116,7 +119,7 @@
         app.component('v-modal', {
             template: '#v-modal-template',
 
-            props: ['isActive'],
+            props: ['isActive', 'panelClass'],
 
             data() {
                 return {

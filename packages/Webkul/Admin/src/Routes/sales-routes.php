@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Webkul\Admin\Http\Controllers\Sales\BookingController;
 use Webkul\Admin\Http\Controllers\Sales\BookingProductController;
 use Webkul\Admin\Http\Controllers\Sales\CartController;
+use Webkul\Admin\Http\Controllers\Sales\EUWithdrawalController;
 use Webkul\Admin\Http\Controllers\Sales\InvoiceController;
 use Webkul\Admin\Http\Controllers\Sales\OrderController;
 use Webkul\Admin\Http\Controllers\Sales\RefundController;
@@ -235,5 +236,20 @@ Route::prefix('sales')->group(function () {
 
             Route::post('mass-delete', 'massDestroy')->name('admin.sales.rma.custom-fields.mass-delete');
         });
+    });
+
+    /**
+     * EU Withdrawal routes (Directive (EU) 2023/2673, Art. 11a).
+     */
+    Route::controller(EUWithdrawalController::class)->prefix('eu-withdrawals')->group(function () {
+        Route::get('', 'index')->name('admin.sales.eu-withdrawals.index');
+
+        Route::get('{id}', 'view')->name('admin.sales.eu-withdrawals.view');
+
+        Route::post('{id}/decline', 'decline')->name('admin.sales.eu-withdrawals.decline');
+
+        Route::post('{id}/mark-refunded', 'markRefunded')->name('admin.sales.eu-withdrawals.mark_refunded');
+
+        Route::post('{id}/resend-confirmation', 'resendConfirmation')->name('admin.sales.eu-withdrawals.resend_confirmation');
     });
 });

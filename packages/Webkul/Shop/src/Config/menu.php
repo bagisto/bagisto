@@ -53,7 +53,7 @@ return [
         'key' => 'account.rma',
         'name' => 'shop::app.layouts.rma',
         'route' => 'shop.customers.account.rma.index',
-        'icon' => 'icon-compare-1',
+        'icon' => 'icon-swap',
         'sort' => 8,
     ],
 ];

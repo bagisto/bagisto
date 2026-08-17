@@ -35,7 +35,7 @@
                 <template v-if="slots['same_for_week'].length || Object.keys(slots['same_for_week']).length">
                     <div class="flex flex-wrap gap-x-2.5">
                         <div
-                            class="flex min-h-[38px] flex-wrap items-center gap-1 dark:border-gray-800"
+                            class="flex min-h-9.5 flex-wrap items-center gap-1 dark:border-gray-800"
                             v-for="(data, index) in slots['same_for_week']"
                         >
                             <!-- Hidden Inputs -->
@@ -52,7 +52,7 @@
                             />
 
                             <!-- Panel Details -->
-                            <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
+                            <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded-sm">
                                 @{{ data.from }} - @{{ data.to }}
 
                                 <span
@@ -83,7 +83,7 @@
                     </p>
 
                     <div class="flex items-center justify-between grid-cols-2">
-                        <div class="flex min-h-[38px] flex-wrap items-center gap-1 dark:border-gray-800">
+                        <div class="flex min-h-9.5 flex-wrap items-center gap-1 dark:border-gray-800">
                             <template
                                 v-if="slots['different_for_week'][dayIndex]?.length"
                                 v-for="(item, itemIndex) in slots['different_for_week'][dayIndex]"
@@ -102,7 +102,7 @@
                                 />
 
                                 <!-- Panel Details -->
-                                <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded">
+                                <p class="flex items-center px-2 py-1 font-semibold text-white bg-gray-600 rounded-sm">
                                     @{{ item.from }} - @{{ item.to }}
 
                                     <span
@@ -237,7 +237,7 @@
                 />
 
                 <!-- From -->
-                <x-admin::form.control-group class="w-full !mb-0">
+                <x-admin::form.control-group class="w-full mb-0!">
                     <x-admin::form.control-group.label class="hidden">
                         @lang('admin::app.catalog.products.edit.types.booking.slots.modal.slot.from')
                     </x-admin::form.control-group.label>
@@ -256,7 +256,7 @@
                 </x-admin::form.control-group>
 
                 <!-- To -->
-                <x-admin::form.control-group class="w-full !mb-0">
+                <x-admin::form.control-group class="w-full mb-0!">
                     <x-admin::form.control-group.label class="hidden">
                         @lang('admin::app.catalog.products.edit.types.booking.slots.modal.slot.to')
                     </x-admin::form.control-group.label>

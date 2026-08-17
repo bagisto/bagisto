@@ -5,8 +5,8 @@
     </x-slot>
 
     <!-- Error page Information -->
-	<div class="flex h-[100vh] items-center justify-center bg-white dark:bg-gray-900">
-        <div class="flex max-w-[745px] items-center gap-5">
+	<div class="flex h-screen items-center justify-center bg-white dark:bg-gray-900">
+        <div class="flex max-w-186.25 items-center gap-5">
             <div class="w-full">
                 @php
                     $logoUrl = core()->getConfigData('general.design.admin_logo.logo_image') 

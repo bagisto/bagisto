@@ -20,7 +20,7 @@
                 :style="typeStyles[flash.type]['message']"
             >
                 <span
-                    class="icon-toast-done rounded-full bg-white text-2xl dark:bg-gray-900 ltr:mr-2.5 rtl:ml-2.5"
+                    class="rounded-full bg-white text-2xl dark:bg-gray-900 ltr:mr-2.5 rtl:ml-2.5"
                     :class="iconClasses[flash.type]"
                     :style="typeStyles[flash.type]['icon']"
                 ></span>
@@ -49,7 +49,7 @@
                     iconClasses: {
                         success: 'icon-done',
 
-                        error: 'icon-cancel-1',
+                        error: 'icon-close',
 
                         warning: 'icon-information',
 
@@ -92,7 +92,7 @@
                 };
             },
 
-            created() {
+            mounted() {
                 var self = this;
 
                 setTimeout(function() {

@@ -85,10 +85,10 @@ class RMADataGrid extends DataGrid
             'filterable' => true,
             'closure' => function ($row) {
                 if (! empty($row->is_guest)) {
-                    return '<span>'.$row->customer_name.' ('.trans('admin::app.sales.rma.all-rma.index.datagrid.guest').')'.'</span>';
+                    return '<span>'.e($row->customer_name).' ('.trans('admin::app.sales.rma.all-rma.index.datagrid.guest').')'.'</span>';
                 }
 
-                return $row->customer_name;
+                return e($row->customer_name);
             },
         ]);
 

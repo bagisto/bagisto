@@ -9,7 +9,7 @@
     height="{{ $height }}"
 >
     <x-shop::media.images.lazy
-        class="mb-4 h-[200px] w-[200px] rounded-xl max-sm:h-[100px] max-sm:w-[100px]"
+        class="mb-4 h-50 w-50 rounded-xl max-sm:h-25 max-sm:w-25"
     />
 </v-media>
 
@@ -21,11 +21,11 @@
         <div class="mb-4 flex cursor-pointer flex-col rounded-lg">
             <div :class="{'border border-dashed border-gray-300 rounded-2xl': isDragOver }">
                 <div
-                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px]"
+                    class="flex h-50 w-50 cursor-pointer flex-col items-center justify-center rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-25 max-sm:w-25"
                     v-if="uploadedFiles.isPicked"
                 >
                     <div 
-                        class="group relative flex h-[200px] w-[200px] max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px]"
+                        class="group relative flex h-50 w-50 max-md:h-36 max-md:w-36 max-sm:h-25 max-sm:w-25"
                         @mouseenter="uploadedFiles.showDeleteButton = true"
                         @mouseleave="uploadedFiles.showDeleteButton = false"
                     >
@@ -48,7 +48,7 @@
 
                 <label 
                     :for="`${$.uid}_fileInput`"
-                    class="flex h-[200px] w-[200px] cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-[100px] max-sm:w-[100px] max-sm:gap-1"
+                    class="flex h-50 w-50 cursor-pointer flex-col items-center justify-center gap-2 rounded-xl bg-zinc-100 hover:bg-gray-100 max-md:h-36 max-md:w-36 max-sm:h-25 max-sm:w-25 max-sm:gap-1"
                     :style="{'max-width': this.width, 'max-height': this.height}"
                     v-show="! uploadedFiles.isPicked"
                     @dragover="onDragOver"
@@ -96,14 +96,14 @@
                     >
                         <template v-if="isImage(file)">
                             <div
-                                class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
+                                class="group relative flex h-12 w-12 justify-center max-sm:h-15 max-sm:w-15"
                                 @mouseenter="file.showDeleteButton = true"
                                 @mouseleave="file.showDeleteButton = false"
                             >
                                 <img
                                     :src="file.url"
                                     :alt="file.name"
-                                    class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
+                                    class="max-h-12 min-w-12 rounded-xl max-sm:max-h-15 max-sm:min-w-15"
                                     :class="{ 'opacity-25' : file.showDeleteButton }"
                                 >
                                 <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform opacity-0 transition-opacity group-hover:opacity-100">
@@ -118,14 +118,14 @@
 
                         <template v-else>
                             <div
-                                class="group relative flex h-12 w-12 justify-center max-sm:h-[60px] max-sm:w-[60px]"
+                                class="group relative flex h-12 w-12 justify-center max-sm:h-15 max-sm:w-15"
                                 @mouseenter="file.showDeleteButton = true"
                                 @mouseleave="file.showDeleteButton = false"
                             >
                                 <video
                                     :src="file.url"
                                     :alt="file.name"
-                                    class="max-h-12 min-w-12 rounded-xl max-sm:max-h-[60px] max-sm:min-w-[60px]"
+                                    class="max-h-12 min-w-12 rounded-xl max-sm:max-h-15 max-sm:min-w-15"
                                     :class="{'opacity-25' : file.showDeleteButton}"
                                 >
                                 </video>
@@ -215,9 +215,16 @@
             methods: {
                 onFileChange(event) {
                     let files = event.target.files;
+                    let hasInvalid = false;
 
                     for (let i = 0; i < files.length; i++) {
                         let file = files[i];
+
+                        if (! this.isAcceptedType(file)) {
+                            hasInvalid = true;
+
+                            continue;
+                        }
 
                         let reader = new FileReader();
 
@@ -241,14 +248,28 @@
 
                         reader.readAsDataURL(file);
                     }
+
+                    if (hasInvalid) {
+                        this.notifyInvalidType();
+
+                        event.target.value = '';
+                    }
                 },
 
                 handleDroppedFiles(files) {
+                    let hasInvalid = false;
+
                     for (let i = 0; i < files.length; i++) {
                         let file = files[i];
 
+                        if (! this.isAcceptedType(file)) {
+                            hasInvalid = true;
+
+                            continue;
+                        }
+
                         let reader = new FileReader();
-                        
+
                         reader.onload = () => {
                             if (! this.isMultiple) {
                                 this.uploadedFiles = {
@@ -268,6 +289,34 @@
 
                         reader.readAsDataURL(file);
                     }
+
+                    if (hasInvalid) {
+                        this.notifyInvalidType();
+                    }
+                },
+
+                isAcceptedType(file) {
+                    const types = (this.acceptedTypes || '')
+                        .split(',')
+                        .map(type => type.trim())
+                        .filter(Boolean);
+
+                    if (! types.length || types.includes('*') || types.includes('*/*')) {
+                        return true;
+                    }
+
+                    return types.some(type =>
+                        type.endsWith('/*')
+                            ? file.type.startsWith(type.slice(0, -1))
+                            : file.type === type
+                    );
+                },
+
+                notifyInvalidType() {
+                    this.$emitter.emit('add-flash', {
+                        type: 'warning',
+                        message: "@lang('shop::app.components.media.index.invalid-file-type')",
+                    });
                 },
 
                 isImage(file) {

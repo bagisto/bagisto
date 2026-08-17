@@ -25,7 +25,7 @@
     @endif
 
     <!-- Compare Component -->
-    <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-7 max-md:px-0">
+    <div class="container mt-8 px-15 max-lg:px-8 max-md:mt-7 max-md:px-0">
         <v-compare>
             <!-- Shimmer Effect -->
             <x-shop::shimmer.compare :attributeCount="count($comparableAttributes)" />
@@ -55,7 +55,7 @@
 
                         <button
                             type="button"
-                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:px-3 max-md:text-xs max-sm:py-1.5 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none rounded-2xl"
+                            class="secondary-button flex items-center gap-x-2.5 whitespace-nowrap border-zinc-200 px-5 py-3 font-normal max-md:rounded-lg max-md:px-3 max-md:text-xs max-sm:py-1.5 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden rounded-2xl"
                             v-if="items.length"
                             @click="removeAll"
                         >
@@ -79,7 +79,7 @@
                             >
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.before') !!}
 
-                                <div class="min-w-[304px] max-w-full max-md:grid max-md:h-full max-md:min-w-40 max-md:items-center max-md:bg-gray-200 max-sm:min-w-[110px]">
+                                <div class="min-w-76 max-w-full max-md:grid max-md:h-full max-md:min-w-40 max-md:items-center max-md:bg-gray-200 max-sm:min-w-27.5">
                                     <p class="text-sm font-medium max-md:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
@@ -87,14 +87,14 @@
 
                                 {!! view_render_event('bagisto.shop.customers.account.compare.attribute_name.after') !!}
 
-                                <div class="flex gap-3 border-zinc-200 max-md:gap-0 max-md:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
+                                <div class="flex gap-3 border-zinc-200 max-md:gap-0 max-md:border-0 ltr:border-l rtl:border-r">
                                     <div
-                                        class="relative w-[311px] max-w-[311px] px-5 max-md:w-60 max-md:px-2.5 max-sm:w-[190px]"
+                                        class="relative w-77.75 max-w-77.75 px-5 max-md:w-60 max-md:px-2.5 max-sm:w-47.5"
                                         v-for="product in items"
                                     >
                                         <button
                                             type="button"
-                                            class="icon-cancel absolute top-5 z-[1] flex h-[30px] w-[30px] cursor-pointer items-center justify-center rounded-md border border-zinc-200 bg-white text-2xl max-md:top-10 max-md:h-6 max-md:w-6 max-md:rounded-full max-md:text-sm ltr:right-10 max-md:ltr:right-4 rtl:left-10 max-md:rtl:left-4 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-none"
+                                            class="icon-cancel absolute top-5 z-1 flex h-7.5 w-7.5 cursor-pointer items-center justify-center rounded-md border border-zinc-200 bg-white text-2xl max-md:top-10 max-md:h-6 max-md:w-6 max-md:rounded-full max-md:text-sm ltr:right-10 max-md:ltr:right-4 rtl:left-10 max-md:rtl:left-4 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden"
                                             aria-label="@lang('shop::app.compare.remove')"
                                             @click="remove(product.id)"
                                         ></button>
@@ -111,15 +111,15 @@
                                 class="flex max-w-full items-center border-b border-zinc-200"
                                 v-else
                             >
-                                <div class="min-w-[304px] max-w-full max-md:grid max-md:h-full max-md:min-w-40 max-md:items-center max-md:bg-gray-200 max-sm:min-w-[110px]">
+                                <div class="min-w-76 max-w-full max-md:grid max-md:h-full max-md:min-w-40 max-md:items-center max-md:bg-gray-200 max-sm:min-w-27.5">
                                     <p class="text-sm font-medium max-md:pl-4">
                                         @{{ attribute.name ?? attribute.admin_name }}
                                     </p>
                                 </div>
 
-                                <div class="flex gap-3 border-zinc-200 max-md:gap-0 max-md:border-0 ltr:border-l-[1px] rtl:border-r-[1px]">
+                                <div class="flex gap-3 border-zinc-200 max-md:gap-0 max-md:border-0 ltr:border-l rtl:border-r">
                                     <div
-                                        class="w-[311px] max-w-[311px] p-5 max-md:w-60 max-md:px-2.5 max-sm:w-[190px]"
+                                        class="w-77.75 max-w-77.75 p-5 max-md:w-60 max-md:px-2.5 max-sm:w-47.5"
                                         v-for="(product, index) in items"
                                     >
                                         <p
@@ -140,7 +140,7 @@
                         v-else
                     >
                         <img
-                            class="max-sm:h-[100px] max-sm:w-[100px]"
+                            class="max-sm:h-25 max-sm:w-25"
                             src="{{ bagisto_asset('images/thank-you.png') }}"
                             alt="@lang('shop::app.compare.empty-text')"
                             loading="lazy"
