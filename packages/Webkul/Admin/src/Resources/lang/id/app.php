@@ -5555,12 +5555,32 @@ return [
                     'use-cases' => 'Kasus Penggunaan',
                     'zoom' => 'Perbesar',
                 ],
+
+                'seo' => [
+                    'alt-text' => 'Teks Alternatif',
+                    'alt-text-info' => 'Disimpan untuk lokal yang sedang dipilih. Nama produk digunakan jika dibiarkan kosong.',
+                    'alt-text-placeholder' => 'Jelaskan apa yang ditampilkan pada gambar',
+                    'done-btn' => 'Selesai',
+                    'file-name' => 'Nama Berkas',
+                    'file-name-info' => 'Mengganti nama akan mengubah URL gambar. URL lama berhenti berfungsi, yang dapat memengaruhi peringkat pencarian gambar.',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => 'Tingkatkan cara mesin pencari dan pembaca layar memahami gambar ini.',
+                    'replace' => 'Ganti Gambar',
+                    'replace-btn' => 'Pilih Berkas',
+                    'replace-info' => 'Teks alternatif dan nama berkas di atas dipertahankan untuk gambar baru.',
+                    'title' => 'SEO Gambar',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => 'Tambah Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Hanya file video (.mp4, .mov, .ogg, dll) yang diperbolehkan.',
+
+                'seo' => [
+                    'info' => 'Beri nama yang deskriptif pada berkas video.',
+                    'title' => 'SEO Video',
+                ],
             ],
         ],
 

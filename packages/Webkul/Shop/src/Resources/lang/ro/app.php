@@ -1765,7 +1765,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA status already canceled.',
+            'cancel-not-allowed' => 'Anularea acestei solicitări RMA nu este permisă.',
             'cancel-success' => 'RMA status canceled successfully.',
+            'close-not-allowed' => 'Închiderea acestei solicitări RMA nu este permisă.',
             'create-success' => 'Request created successfully.',
             'creation-error' => 'RMA status cannot be updated as the invoice for this order has not been created.',
             'invalid-item' => 'Articolul de comandă selectat nu este valid.',

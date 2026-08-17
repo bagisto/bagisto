@@ -1765,7 +1765,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA 状态已被取消。',
+            'cancel-not-allowed' => '不允许取消此RMA请求。',
             'cancel-success' => 'RMA状态已成功取消。',
+            'close-not-allowed' => '不允许关闭此RMA请求。',
             'create-success' => '请求已成功创建。',
             'creation-error' => '无法更新 RMA 状态，因为尚未为此订单创建发票。',
             'invalid-item' => '所选订单项无效。',

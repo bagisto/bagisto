@@ -53,7 +53,13 @@
                             <x-admin::form.control-group>
                                 <x-admin::media.images
                                     name="image"
-                                    :uploaded-images="$user->image ? [['id' => 'image', 'url' => $user->image_url]] : []"
+                                    meta-name="image_meta"
+                                    enable-seo="true"
+                                    :uploaded-images="$user->image ? [[
+                                        'id'        => 'image',
+                                        'url'       => $user->image_url,
+                                        'file_name' => pathinfo($user->image, PATHINFO_FILENAME),
+                                    ]] : []"
                                 />
                             </x-admin::form.control-group>
 

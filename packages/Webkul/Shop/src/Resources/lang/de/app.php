@@ -1765,7 +1765,9 @@ return [
 
         'response' => [
             'already-cancel' => 'Der RMA-Status wurde bereits storniert.',
+            'cancel-not-allowed' => 'Das Stornieren dieser RMA-Anfrage ist nicht zulässig.',
             'cancel-success' => 'RMA-Status wurde erfolgreich storniert.',
+            'close-not-allowed' => 'Das Schließen dieser RMA-Anfrage ist nicht zulässig.',
             'create-success' => 'Anfrage erfolgreich erstellt.',
             'creation-error' => 'Der RMA-Status kann nicht aktualisiert werden, da die Rechnung für diese Bestellung nicht erstellt wurde.',
             'invalid-item' => 'Der ausgewählte Bestellartikel ist ungültig.',

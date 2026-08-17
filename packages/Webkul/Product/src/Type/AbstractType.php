@@ -333,7 +333,7 @@ abstract class AbstractType
 
         if (! in_array('images', $attributesToSkip)) {
             foreach ($this->product->images as $image) {
-                $copiedImage = $product->images()->save($image->replicate());
+                $copiedImage = $product->images()->save($image->replicateWithTranslations());
 
                 $this->copyMedia($product, $image, $copiedImage);
             }

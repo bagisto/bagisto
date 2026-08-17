@@ -262,6 +262,7 @@
                                                         <div v-if="swatchType == 'image'">
                                                             <img
                                                                 :src="element.swatch_value_url || '{{ bagisto_asset('images/product-placeholders/front.svg') }}'"
+                                                                :alt="element.swatch_alt"
                                                                 :ref="'image_' + element.id"
                                                                 class="h-12.5 w-12.5"
                                                             >
@@ -272,6 +273,25 @@
                                                                 class="hidden"
                                                                 :ref="'imageInput_' + element.id"
                                                             />
+
+                                                            <!-- Swatch Image SEO -->
+                                                            <div class="mt-2 grid gap-1">
+                                                                <input
+                                                                    type="text"
+                                                                    class="w-40 rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                                    :name="'options[' + element.id + '][swatch_alt]'"
+                                                                    :placeholder="'@lang('admin::app.components.media.images.seo.alt-text')'"
+                                                                    v-model="element.swatch_alt"
+                                                                />
+
+                                                                <input
+                                                                    type="text"
+                                                                    class="w-40 rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                                    :name="'options[' + element.id + '][swatch_file_name]'"
+                                                                    :placeholder="'@lang('admin::app.components.media.images.seo.file-name')'"
+                                                                    v-model="element.swatch_file_name"
+                                                                />
+                                                            </div>
                                                         </div>
 
                                                         <!-- Swatch Color -->
@@ -1074,6 +1094,8 @@
                                         'sort_order': option.sort_order,
                                         'swatch_value': option.swatch_value,
                                         'swatch_value_url': option.swatch_value_url,
+                                        'swatch_alt': option.swatch_alt,
+                                        'swatch_file_name': option.swatch_file_name,
                                         'notRequired': '',
                                         'locales': {},
                                         'isNew': false,

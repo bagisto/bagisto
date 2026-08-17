@@ -14,7 +14,7 @@
         <img
             class="h-22.5 max-h-22.5 w-22.5 max-w-22.5 rounded-xl max-md:h-20 max-md:max-h-20 max-md:max-w-20 max-md:rounded-lg"
             :src="item.base_image.small_image_url"
-            :alt="item.name"
+            :alt="item.base_image.alt"
             width="110"
             height="110"
         />

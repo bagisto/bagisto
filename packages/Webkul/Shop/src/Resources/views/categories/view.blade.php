@@ -31,7 +31,7 @@
             <x-shop::media.images.lazy
                 class="aspect-4/1 max-h-full max-w-full rounded-xl"
                 src="{{ $category->banner_url }}"
-                alt="{{ $category->name }}"
+                alt="{{ $category->banner_alt ?: $category->name }}"
                 width="1320"
                 height="300"
             />

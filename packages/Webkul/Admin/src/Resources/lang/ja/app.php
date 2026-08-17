@@ -5555,12 +5555,32 @@ return [
                     'use-cases' => '用途',
                     'zoom' => 'ズーム',
                 ],
+
+                'seo' => [
+                    'alt-text' => '代替テキスト',
+                    'alt-text-info' => '現在選択中のロケールに保存されます。空欄の場合は商品名が使用されます。',
+                    'alt-text-placeholder' => '画像に写っている内容を説明してください',
+                    'done-btn' => '完了',
+                    'file-name' => 'ファイル名',
+                    'file-name-info' => '名前を変更すると画像の URL が変わります。以前の URL は無効になり、画像検索の順位に影響する場合があります。',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => '検索エンジンとスクリーンリーダーがこの画像を理解しやすくします。',
+                    'replace' => '画像を差し替える',
+                    'replace-btn' => 'ファイルを選択',
+                    'replace-info' => '上記の代替テキストとファイル名は新しい画像にも引き継がれます。',
+                    'title' => '画像 SEO',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => 'ビデオを追加',
                 'allowed-types' => 'mp4、webm、mkv',
                 'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
+
+                'seo' => [
+                    'info' => '動画ファイルに内容が分かる名前を付けます。',
+                    'title' => '動画 SEO',
+                ],
             ],
         ],
 

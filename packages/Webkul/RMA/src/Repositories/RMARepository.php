@@ -35,7 +35,7 @@ class RMARepository extends Repository
             DefaultRMAStatusEnum::CANCELED->value,
         ];
 
-        if (in_array($rma->rma_status_id, $nonCloseableStatuses, true)) {
+        if (in_array((int) $rma->rma_status_id, $nonCloseableStatuses, true)) {
             return false;
         }
 
@@ -50,20 +50,40 @@ class RMARepository extends Repository
     public function canReopenRma($rma): bool
     {
         if (
-            $rma->rma_status_id === DefaultRMAStatusEnum::CANCELED->value
+            (int) $rma->rma_status_id === DefaultRMAStatusEnum::CANCELED->value
             && core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_cancelled_request') === 'yes'
         ) {
             return true;
         }
 
         if (
-            $rma->rma_status_id === DefaultRMAStatusEnum::DECLINED->value
+            (int) $rma->rma_status_id === DefaultRMAStatusEnum::DECLINED->value
             && core()->getConfigData('sales.rma.setting.allowed_new_rma_request_for_declined_request') === 'yes'
         ) {
             return true;
         }
 
         return false;
+    }
+
+    /**
+     * Check if RMA can be canceled by the customer.
+     */
+    public function canCancelRma($rma): bool
+    {
+        if (empty($rma->rma_status_id)) {
+            return false;
+        }
+
+        $nonCancelableStatuses = [
+            DefaultRMAStatusEnum::RECEIVED_PACKAGE->value,
+            DefaultRMAStatusEnum::SOLVED->value,
+            DefaultRMAStatusEnum::ITEM_CANCELED->value,
+            DefaultRMAStatusEnum::DECLINED->value,
+            DefaultRMAStatusEnum::CANCELED->value,
+        ];
+
+        return ! in_array((int) $rma->rma_status_id, $nonCancelableStatuses, true);
     }
 
     /**
