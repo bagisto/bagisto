@@ -3,14 +3,28 @@
 namespace Webkul\Product\Repositories;
 
 use Exception;
+use Illuminate\Container\Container;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Webkul\Core\Eloquent\Repository;
+use Webkul\Core\Helpers\MediaFileName;
 use Webkul\Product\Contracts\Product;
 
 class ProductMediaRepository extends Repository
 {
+    /**
+     * Create a new repository instance.
+     *
+     * @return void
+     */
+    public function __construct(
+        protected MediaFileName $mediaFileName,
+        Container $container
+    ) {
+        parent::__construct($container);
+    }
+
     /**
      * Specify model class name.
      *
@@ -49,22 +63,21 @@ class ProductMediaRepository extends Repository
          */
         $previousIds = $this->resolveFileTypeQueryBuilder($product, $uploadFileType)->pluck('id');
 
+        /**
+         * Per file seo metadata, keyed the same way as the uploaded files.
+         */
+        $metaData = $data[$uploadFileType]['meta'] ?? [];
+
         $position = 0;
 
         if (! empty($data[$uploadFileType]['files'])) {
             foreach ($data[$uploadFileType]['files'] as $indexOrModelId => $file) {
+                $meta = $metaData[$indexOrModelId] ?? [];
+
                 if ($file instanceof UploadedFile) {
-                    if (Str::contains($file->getMimeType(), 'image')) {
-                        $encoded = image_manager()->read($file)->encodeByExtension('webp');
+                    $path = $this->storeUploadedFile($file, $product, $meta);
 
-                        $path = $this->getProductDirectory($product).'/'.Str::random(40).'.webp';
-
-                        Storage::put($path, (string) $encoded);
-                    } else {
-                        $path = $file->store($this->getProductDirectory($product));
-                    }
-
-                    $this->create([
+                    $model = $this->create([
                         'type' => $uploadFileType,
                         'path' => $path,
                         'product_id' => $product->id,
@@ -75,10 +88,17 @@ class ProductMediaRepository extends Repository
                         $previousIds->forget($index);
                     }
 
-                    $this->update([
+                    if (! $model = $this->find($indexOrModelId)) {
+                        continue;
+                    }
+
+                    $model = $this->update([
+                        'path' => $this->mediaFileName->rename($model->path, $meta['file_name'] ?? null),
                         'position' => ++$position,
                     ], $indexOrModelId);
                 }
+
+                $this->saveAltText($model, $meta);
             }
         }
 
@@ -91,6 +111,64 @@ class ProductMediaRepository extends Repository
 
             $this->delete($indexOrModelId);
         }
+    }
+
+    /**
+     * Store a newly uploaded file and return the path it was stored at.
+     *
+     * Images are always re-encoded to webp, so the requested name only ever dictates the
+     * base name and never the resulting file type.
+     *
+     * @param  Product  $product
+     */
+    protected function storeUploadedFile(UploadedFile $file, $product, array $meta): string
+    {
+        $directory = $this->getProductDirectory($product);
+
+        $requestedName = $meta['file_name'] ?? null;
+
+        if (Str::contains($file->getMimeType(), 'image')) {
+            $encoded = image_manager()->fromUpload($file)->toWebp()->toBytes();
+
+            $path = $this->mediaFileName->resolve($directory, $requestedName, 'webp');
+
+            Storage::put($path, (string) $encoded);
+
+            return $path;
+        }
+
+        if (filled($requestedName)) {
+            $path = $this->mediaFileName->resolve($directory, $requestedName, $file->getClientOriginalExtension());
+
+            Storage::put($path, $file->get());
+
+            return $path;
+        }
+
+        return $file->store($directory);
+    }
+
+    /**
+     * Save the alt text of the media, for the requested locale.
+     *
+     * Silently skipped for media that does not carry translations, such as videos.
+     *
+     * @param  mixed  $model
+     */
+    protected function saveAltText($model, array $meta): void
+    {
+        if (
+            ! $model
+            || ! array_key_exists('alt_text', $meta)
+            || ! property_exists($model, 'translatedAttributes')
+            || ! in_array('alt_text', $model->translatedAttributes)
+        ) {
+            return;
+        }
+
+        $model->translateOrNew(core()->getRequestedLocaleCode())->alt_text = $meta['alt_text'];
+
+        $model->save();
     }
 
     /**

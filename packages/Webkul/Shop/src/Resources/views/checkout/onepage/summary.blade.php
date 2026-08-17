@@ -14,7 +14,7 @@
         <img
             class="h-22.5 max-h-22.5 w-22.5 max-w-22.5 rounded-xl max-md:h-20 max-md:max-h-20 max-md:max-w-20 max-md:rounded-lg"
             :src="item.base_image.small_image_url"
-            :alt="item.name"
+            :alt="item.base_image.alt"
             width="110"
             height="110"
         />
@@ -252,8 +252,9 @@
             class="flex flex-col gap-2 border-y py-2"
             v-else
         >
-            <div
-                class="flex cursor-pointer items-center justify-between gap-2 text-right"
+            <button
+                type="button"
+                class="flex w-full cursor-pointer items-center justify-between gap-2 rounded text-right focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:outline-hidden"
                 @click="cart.show_taxes = ! cart.show_taxes"
             >
                 <p class="text-base max-md:font-normal max-sm:text-sm">
@@ -276,7 +277,7 @@
                         :class="{'icon-arrow-up': cart.show_taxes, 'icon-arrow-down': ! cart.show_taxes}"
                     ></span>
                 </p>
-            </div>
+            </button>
 
             <div
                 class="flex flex-col gap-2"

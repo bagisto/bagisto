@@ -237,6 +237,8 @@
 
                                 <x-admin::media.images
                                     name="logo"
+                                    meta-name="logo_meta"
+                                    enable-seo="true"
                                     width="110px"
                                     height="110px"
                                 />
@@ -257,6 +259,8 @@
 
                                 <x-admin::media.images
                                     name="favicon"
+                                    meta-name="favicon_meta"
+                                    enable-seo="true"
                                     width="110px"
                                     height="110px"
                                 />

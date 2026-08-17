@@ -542,6 +542,12 @@ return [
             'default-header' => 'Default Header',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Close gallery',
+            'view-image' => 'View image',
+            'view-video' => 'View video',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Default Toggle',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Translate',
                 'translating' => 'Translating...',
                 'write-a-review' => 'Write a Review',
+                'stars' => 'Stars',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA status already canceled.',
+            'cancel-not-allowed' => 'Canceling this RMA request is not allowed.',
             'cancel-success' => 'RMA status canceled successfully.',
+            'close-not-allowed' => 'Closing this RMA request is not allowed.',
             'create-success' => 'Request created successfully.',
             'creation-error' => 'RMA status cannot be updated as the invoice for this order has not been created.',
             'invalid-item' => 'The selected order item is invalid.',

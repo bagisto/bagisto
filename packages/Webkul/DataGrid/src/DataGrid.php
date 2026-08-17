@@ -248,6 +248,7 @@ abstract class DataGrid
             title: $action['title'],
             method: $action['method'],
             url: $action['url'],
+            condition: $action['condition'] ?? null,
         );
 
         $this->dispatchEvent('actions.add.after', [$this, $this->actions[count($this->actions) - 1]]);
@@ -661,6 +662,10 @@ abstract class DataGrid
             $record->actions = [];
 
             foreach ($this->actions as $index => $action) {
+                if (! $action->isVisible($record)) {
+                    continue;
+                }
+
                 $getUrl = $action->url;
 
                 $record->actions[] = [

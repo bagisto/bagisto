@@ -49,7 +49,6 @@ dataset('non_option_types', [
 dataset('non_filterable_types', [
     'text' => ['text'],
     'textarea' => ['textarea'],
-    'price' => ['price'],
     'date' => ['date'],
     'datetime' => ['datetime'],
     'image' => ['image'],
@@ -57,6 +56,7 @@ dataset('non_filterable_types', [
 ]);
 
 dataset('filterable_types', [
+    'price' => ['price'],
     'select' => ['select'],
     'multiselect' => ['multiselect'],
     'boolean' => ['boolean'],

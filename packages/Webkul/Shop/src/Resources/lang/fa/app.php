@@ -542,6 +542,12 @@ return [
             'default-header' => 'سربرگ پیش‌فرض',
         ],
 
+        'image-zoomer' => [
+            'close' => 'بستن گالری',
+            'view-image' => 'مشاهده تصویر',
+            'view-video' => 'مشاهده ویدیو',
+        ],
+
         'drawer' => [
             'default-toggle' => 'کلیک کردن پیش‌فرض',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'ترجمه',
                 'translating' => 'در حال ترجمه...',
                 'write-a-review' => 'نوشتن یک نقد و بررسی',
+                'stars' => 'ستاره‌ها',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'وضعیت RMA قبلاً لغو شده است.',
+            'cancel-not-allowed' => 'لغو این درخواست RMA مجاز نیست.',
             'cancel-success' => 'وضعیت RMA با موفقیت لغو شد.',
+            'close-not-allowed' => 'بستن این درخواست RMA مجاز نیست.',
             'create-success' => 'درخواست با موفقیت ایجاد شد.',
             'creation-error' => 'وضعیت RMA نمی‌تواند به‌روزرسانی شود زیرا فاکتور برای این سفارش ایجاد نشده است.',
             'invalid-item' => 'مورد سفارش انتخاب‌شده نامعتبر است.',

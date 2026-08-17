@@ -542,6 +542,12 @@ return [
             'default-header' => 'Intestazione predefinita',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Chiudi galleria',
+            'view-image' => 'Visualizza immagine',
+            'view-video' => 'Visualizza video',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Attivazione predefinita',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Traduci',
                 'translating' => 'Traduzione in corso...',
                 'write-a-review' => 'Scrivi una recensione',
+                'stars' => 'Stelle',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'Lo stato RMA è già stato annullato.',
+            'cancel-not-allowed' => 'Non è consentito annullare questa richiesta RMA.',
             'cancel-success' => 'Lo stato RMA è stato annullato con successo.',
+            'close-not-allowed' => 'Non è consentito chiudere questa richiesta RMA.',
             'create-success' => 'Richiesta creata con successo.',
             'creation-error' => 'Lo stato RMA non può essere aggiornato perché la fattura per questo ordine non è stata creata.',
             'invalid-item' => "L'articolo dell'ordine selezionato non è valido.",

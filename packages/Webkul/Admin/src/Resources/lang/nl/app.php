@@ -5555,12 +5555,32 @@ return [
                     'use-cases' => 'Gebruiksscenario\'s',
                     'zoom' => 'Inzoomen',
                 ],
+
+                'seo' => [
+                    'alt-text' => 'Alt-tekst',
+                    'alt-text-info' => 'Wordt opgeslagen voor de geselecteerde taal. Bij een leeg veld wordt de productnaam gebruikt.',
+                    'alt-text-placeholder' => 'Beschrijf wat er op de afbeelding te zien is',
+                    'done-btn' => 'Klaar',
+                    'file-name' => 'Bestandsnaam',
+                    'file-name-info' => 'Hernoemen wijzigt de URL van de afbeelding. De oude URL werkt niet meer, wat de positie in afbeeldingszoekresultaten kan beïnvloeden.',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => 'Verbeter hoe zoekmachines en schermlezers deze afbeelding begrijpen.',
+                    'replace' => 'Afbeelding vervangen',
+                    'replace-btn' => 'Bestand kiezen',
+                    'replace-info' => 'De alt-tekst en bestandsnaam hierboven blijven behouden voor de nieuwe afbeelding.',
+                    'title' => 'Afbeelding-SEO',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => 'Video Toevoegen',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
+
+                'seo' => [
+                    'info' => 'Geef het videobestand een beschrijvende naam.',
+                    'title' => 'Video-SEO',
+                ],
             ],
         ],
 

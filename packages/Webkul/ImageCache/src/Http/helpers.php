@@ -1,6 +1,6 @@
 <?php
 
-use Intervention\Image\ImageManager;
+use Illuminate\Image\ImageManager;
 
 if (! function_exists('image_manager')) {
     /**
@@ -8,6 +8,6 @@ if (! function_exists('image_manager')) {
      */
     function image_manager(): ImageManager
     {
-        return app('image_manager');
+        return app('image');
     }
 }

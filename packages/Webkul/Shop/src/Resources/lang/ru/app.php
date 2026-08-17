@@ -542,6 +542,12 @@ return [
             'default-header' => 'Заголовок по умолчанию',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Закрыть галерею',
+            'view-image' => 'Посмотреть изображение',
+            'view-video' => 'Посмотреть видео',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Переключатель по умолчанию',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Перевести',
                 'translating' => 'Перевод...',
                 'write-a-review' => 'Написать отзыв',
+                'stars' => 'Звезды',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'Статус RMA уже отменен.',
+            'cancel-not-allowed' => 'Отмена этого запроса RMA не разрешена.',
             'cancel-success' => 'Статус RMA успешно отменен.',
+            'close-not-allowed' => 'Закрытие этого запроса RMA не разрешено.',
             'create-success' => 'Запрос успешно создан.',
             'creation-error' => 'Статус RMA не может быть обновлен, так как счет для этого заказа не был создан.',
             'invalid-item' => 'Выбранный элемент заказа недействителен.',

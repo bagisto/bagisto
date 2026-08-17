@@ -20,40 +20,34 @@
         id="v-quantity-changer-template"
     >
         <div>
-            <span
+            <button
                 v-if="isAtMinValue"
-                class="icon-bin cursor-pointer text-2xl"
-                role="button"
-                tabindex="0"
+                type="button"
+                class="icon-bin cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded border-0 bg-transparent"
                 aria-label="@lang('shop::app.components.quantity-changer.remove-item')"
                 @click="remove"
-            >
-            </span>
+            ></button>
 
-            <span
+            <button
                 v-else
-                class="icon-minus text-2xl"
+                type="button"
+                class="icon-minus text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded border-0 bg-transparent"
                 :class="atMinValue ? 'cursor-not-allowed opacity-40' : 'cursor-pointer'"
-                role="button"
-                tabindex="0"
                 :aria-disabled="atMinValue"
                 aria-label="@lang('shop::app.components.quantity-changer.decrease-quantity')"
                 @click="decrease"
-            >
-            </span>
+            ></button>
 
             <p class="w-2.5 select-none text-center max-sm:text-sm">
                 @{{ quantity }}
             </p>
 
-            <span
-                class="icon-plus cursor-pointer text-2xl"
-                role="button"
-                tabindex="0"
+            <button
+                type="button"
+                class="icon-plus cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden rounded border-0 bg-transparent"
                 aria-label="@lang('shop::app.components.quantity-changer.increase-quantity')"
                 @click="increase"
-            >
-            </span>
+            ></button>
 
             <v-field
                 type="hidden"

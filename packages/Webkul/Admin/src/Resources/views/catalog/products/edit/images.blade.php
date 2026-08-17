@@ -17,8 +17,10 @@
     <!-- Image Blade Component -->
     <x-admin::media.images
         name="images[files]"
+        meta-name="images[meta]"
         allow-multiple="true"
         show-placeholders="true"
+        enable-seo="true"
         :uploaded-images="$product->images"
     />
 

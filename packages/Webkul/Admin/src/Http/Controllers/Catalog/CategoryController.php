@@ -81,7 +81,9 @@ class CategoryController extends Controller
             'display_mode',
             'attributes',
             'logo_path',
+            'logo_meta',
             'banner_path',
+            'banner_meta',
         ]);
 
         $data['status'] = $categoryRequest->boolean('status');
@@ -136,7 +138,9 @@ class CategoryController extends Controller
             'locale',
             'parent_id',
             'logo_path',
+            'logo_meta',
             'banner_path',
+            'banner_meta',
             'position',
             'display_mode',
             'attributes'

@@ -542,6 +542,12 @@ return [
             'default-header' => 'Capçalera per defecte',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Tanca la galeria',
+            'view-image' => 'Mostra la imatge',
+            'view-video' => 'Mostra el vídeo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Alternar per defecte',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Traduir',
                 'translating' => 'Traduint...',
                 'write-a-review' => 'Escriure una ressenya',
+                'stars' => 'Estrelles',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'L\'estat de la RMA ja està cancel·lat.',
+            'cancel-not-allowed' => 'No es permet cancel·lar aquesta sol·licitud RMA.',
             'cancel-success' => 'L\'estat de la RMA s\'ha cancel·lat correctament.',
+            'close-not-allowed' => 'No es permet tancar aquesta sol·licitud RMA.',
             'create-success' => 'Sol·licitud creada correctament.',
             'creation-error' => 'No es pot actualitzar l\'estat de la RMA perquè la factura d\'aquesta comanda no s\'ha creat.',
             'invalid-item' => 'L\'article seleccionat de la comanda no és vàlid.',

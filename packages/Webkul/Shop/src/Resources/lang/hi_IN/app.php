@@ -542,6 +542,12 @@ return [
             'default-header' => 'डिफ़ॉल्ट हैडर',
         ],
 
+        'image-zoomer' => [
+            'close' => 'गैलरी बंद करें',
+            'view-image' => 'छवि देखें',
+            'view-video' => 'वीडियो देखें',
+        ],
+
         'drawer' => [
             'default-toggle' => 'डिफ़ॉल्ट टॉगल',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'अनुवाद करें',
                 'translating' => 'अनुवाद किया जा रहा है...',
                 'write-a-review' => 'समीक्षा लिखें',
+                'stars' => 'सितारे',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA स्थिति पहले ही रद्द की जा चुकी है।',
+            'cancel-not-allowed' => 'इस RMA अनुरोध को रद्द करने की अनुमति नहीं है।',
             'cancel-success' => 'RMA स्थिति सफलतापूर्वक रद्द कर दी गई।',
+            'close-not-allowed' => 'इस RMA अनुरोध को बंद करने की अनुमति नहीं है।',
             'create-success' => 'अनुरोध सफलतापूर्वक बनाया गया।',
             'creation-error' => 'RMA स्थिति को अपडेट नहीं किया जा सकता क्योंकि इस ऑर्डर के लिए चालान नहीं बनाया गया है।',
             'invalid-item' => 'चयनित ऑर्डर आइटम अमान्य है।',

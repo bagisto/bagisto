@@ -307,6 +307,15 @@ class RMAController extends Controller
             abort(404);
         }
 
+        if (
+            $this->rmaRepository->isRmaExpired($rma)
+            || ! $this->rmaRepository->canCloseRma($rma)
+        ) {
+            session()->flash('error', trans('shop::app.rma.response.close-not-allowed'));
+
+            return back();
+        }
+
         if (! empty($data['close_rma'])) {
             Event::dispatch('customer.rma.request.update.before', $id);
 
@@ -339,7 +348,10 @@ class RMAController extends Controller
             abort(404);
         }
 
-        if (! $this->rmaRepository->canReopenRma($rma)) {
+        if (
+            $this->rmaRepository->isRmaExpired($rma)
+            || ! $this->rmaRepository->canReopenRma($rma)
+        ) {
             session()->flash('error', trans('shop::app.rma.response.reopen-not-allowed'));
 
             return back();
@@ -382,6 +394,12 @@ class RMAController extends Controller
         if ($rma->rma_status_id == DefaultRMAStatusEnum::CANCELED->value) {
             return response()->json([
                 'message' => trans('shop::app.rma.response.already-cancel'),
+            ]);
+        }
+
+        if (! $this->rmaRepository->canCancelRma($rma)) {
+            return response()->json([
+                'message' => trans('shop::app.rma.response.cancel-not-allowed'),
             ]);
         }
 

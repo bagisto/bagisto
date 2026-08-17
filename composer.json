@@ -23,7 +23,7 @@
         "elasticsearch/elasticsearch": "^8.10",
         "enshrined/svg-sanitize": "^0.22.0",
         "guzzlehttp/guzzle": "^7.0.1",
-        "intervention/image": "^2.4|^3.0",
+        "intervention/image": "^4.2",
         "kalnoy/nestedset": "^7.0",
         "khaled.alshamaa/ar-php": "^6.0.0",
         "konekt/concord": "^1.18",
@@ -59,9 +59,9 @@
         "laravel/pint": "^1.19",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.0",
-        "pestphp/pest": "^4.0",
-        "pestphp/pest-plugin-laravel": "^4.0",
-        "phpunit/phpunit": "^12.0"
+        "pestphp/pest": "^5.0",
+        "pestphp/pest-plugin-laravel": "^5.0",
+        "phpunit/phpunit": "^13.0"
     },
     "autoload": {
         "psr-4": {
@@ -143,7 +143,6 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "intervention/image",
                 "laravel/socialite"
             ]
         }

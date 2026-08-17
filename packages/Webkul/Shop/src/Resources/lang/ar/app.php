@@ -542,6 +542,12 @@ return [
             'default-header' => 'العنوان الافتراضي',
         ],
 
+        'image-zoomer' => [
+            'close' => 'إغلاق المعرض',
+            'view-image' => 'عرض الصورة',
+            'view-video' => 'عرض الفيديو',
+        ],
+
         'drawer' => [
             'default-toggle' => 'التبديل الافتراضي',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'ترجمة',
                 'translating' => 'جار الترجمة...',
                 'write-a-review' => 'كتابة مراجعة',
+                'stars' => 'نجوم',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'حالة RMA تم إلغاؤها بالفعل.',
+            'cancel-not-allowed' => 'إلغاء طلب RMA هذا غير مسموح به.',
             'cancel-success' => 'تم إلغاء حالة RMA بنجاح.',
+            'close-not-allowed' => 'إغلاق طلب RMA هذا غير مسموح به.',
             'create-success' => 'تم إنشاء الطلب بنجاح.',
             'creation-error' => 'لا يمكن تحديث حالة RMA لأن الفاتورة الخاصة بهذا الطلب لم يتم إنشاؤها.',
             'invalid-item' => 'عنصر الطلب المحدد غير صالح.',

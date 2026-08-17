@@ -5555,12 +5555,32 @@ return [
                     'use-cases' => '用途',
                     'zoom' => '缩放',
                 ],
+
+                'seo' => [
+                    'alt-text' => '替代文本',
+                    'alt-text-info' => '保存到当前所选语言。留空时使用商品名称。',
+                    'alt-text-placeholder' => '描述图片中显示的内容',
+                    'done-btn' => '完成',
+                    'file-name' => '文件名',
+                    'file-name-info' => '重命名会改变图片的 URL。旧的 URL 将失效，可能影响图片搜索排名。',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => '改善搜索引擎和屏幕阅读器对这张图片的理解。',
+                    'replace' => '替换图片',
+                    'replace-btn' => '选择文件',
+                    'replace-info' => '上方的替代文本和文件名将保留给新图片。',
+                    'title' => '图片 SEO',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => '添加视频',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
+
+                'seo' => [
+                    'info' => '为视频文件取一个描述性的名称。',
+                    'title' => '视频 SEO',
+                ],
             ],
         ],
 

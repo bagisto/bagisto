@@ -2,17 +2,16 @@
 
 namespace Webkul\Shop\CacheFilters;
 
+use Illuminate\Image\Image;
 use Illuminate\Support\Str;
-use Intervention\Image\CachedImage;
-use Intervention\Image\Interfaces\ImageInterface;
 
 class Large
 {
     /**
      * Apply filter.
      *
-     * @param  ImageInterface|CachedImage  $image
-     * @return ImageInterface|CachedImage
+     * @param  Image  $image
+     * @return Image
      */
     public function applyFilter($image)
     {

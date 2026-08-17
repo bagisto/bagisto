@@ -196,7 +196,14 @@
 
                             <x-admin::media.images
                                 name="logo_path"
-                                :uploaded-images="$category->logo_path ? [['id' => 'logo_path', 'url' => $category->logo_url]] : []"
+                                meta-name="logo_meta"
+                                enable-seo="true"
+                                :uploaded-images="$category->logo_path ? [[
+                                    'id'        => 'logo_path',
+                                    'url'       => $category->logo_url,
+                                    'file_name' => $category->logo_file_name,
+                                    'alt_text'  => $category->logo_alt,
+                                ]] : []"
                             />
                         </div>
 
@@ -212,7 +219,14 @@
 
                             <x-admin::media.images
                                 name="banner_path"
-                                :uploaded-images="$category->banner_path ? [['id' => 'banner_path', 'url' => $category->banner_url]] : []"
+                                meta-name="banner_meta"
+                                enable-seo="true"
+                                :uploaded-images="$category->banner_path ? [[
+                                    'id'        => 'banner_path',
+                                    'url'       => $category->banner_url,
+                                    'file_name' => $category->banner_file_name,
+                                    'alt_text'  => $category->banner_alt,
+                                ]] : []"
                                 width="220px"
                             />
                         </div>

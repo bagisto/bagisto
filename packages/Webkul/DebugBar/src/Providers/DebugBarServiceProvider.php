@@ -2,7 +2,7 @@
 
 namespace Webkul\DebugBar\Providers;
 
-use Barryvdh\Debugbar\Facades\Debugbar;
+use Fruitcake\LaravelDebugbar\Facades\Debugbar;
 use Illuminate\Support\ServiceProvider;
 use Webkul\DebugBar\DataCollector\ModuleCollector;
 

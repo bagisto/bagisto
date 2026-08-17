@@ -542,6 +542,12 @@ return [
             'default-header' => 'ডিফল্ট হেডার',
         ],
 
+        'image-zoomer' => [
+            'close' => 'গ্যালারি বন্ধ করুন',
+            'view-image' => 'ছবি দেখুন',
+            'view-video' => 'ভিডিও দেখুন',
+        ],
+
         'drawer' => [
             'default-toggle' => 'ডিফল্ট টগল',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'অনুবাদ',
                 'translating' => 'অনুবাদ হচ্ছে...',
                 'write-a-review' => 'রিভিউ লিখুন',
+                'stars' => 'তারকা',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA স্ট্যাটাস ইতিমধ্যেই বাতিল করা হয়েছে।',
+            'cancel-not-allowed' => 'এই RMA অনুরোধ বাতিল করার অনুমতি নেই।',
             'cancel-success' => 'RMA স্থিতি সফলভাবে বাতিল করা হয়েছে।',
+            'close-not-allowed' => 'এই RMA অনুরোধ বন্ধ করার অনুমতি নেই।',
             'create-success' => 'অনুরোধ সফলভাবে তৈরি করা হয়েছে।',
             'creation-error' => 'RMA স্ট্যাটাস আপডেট করা সম্ভব নয় কারণ এই অর্ডারের জন্য চালান তৈরি করা হয়নি।',
             'invalid-item' => 'নির্বাচিত অর্ডার আইটেমটি অবৈধ।',

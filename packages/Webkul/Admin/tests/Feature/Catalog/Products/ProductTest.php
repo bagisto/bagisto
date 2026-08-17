@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Event;
+use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 
 use function Pest\Laravel\deleteJson;
@@ -161,7 +162,7 @@ it('should render column 1 attribute groups before column 2 on the edit page', f
         ->assertOk()
         ->assertSeeInOrder([
             'flex-1 max-xl:flex-auto',
-            'w-[360px]',
+            'w-90 max-w-full',
         ]);
 });
 
@@ -364,7 +365,7 @@ it('should copy the existing product with customizable options', function () {
 
     $copiedCustomizableOption = $copiedProduct->customizable_options->first();
     expect($copiedCustomizableOption->type)->toBe('select');
-    expect($copiedCustomizableOption->is_required)->toBe(1);
+    expect($copiedCustomizableOption->is_required)->toBeTrue();
     expect($copiedCustomizableOption->label)->toBe('Test Option Label');
 
     // Assert the customizable option price/value is cloned

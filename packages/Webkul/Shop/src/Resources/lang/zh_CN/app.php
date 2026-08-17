@@ -542,6 +542,12 @@ return [
             'default-header' => '默认标题',
         ],
 
+        'image-zoomer' => [
+            'close' => '关闭图库',
+            'view-image' => '查看图片',
+            'view-video' => '查看视频',
+        ],
+
         'drawer' => [
             'default-toggle' => '默认切换',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => '翻译',
                 'translating' => '翻译中...',
                 'write-a-review' => '写评论',
+                'stars' => '星星',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA 状态已被取消。',
+            'cancel-not-allowed' => '不允许取消此RMA请求。',
             'cancel-success' => 'RMA状态已成功取消。',
+            'close-not-allowed' => '不允许关闭此RMA请求。',
             'create-success' => '请求已成功创建。',
             'creation-error' => '无法更新 RMA 状态，因为尚未为此订单创建发票。',
             'invalid-item' => '所选订单项无效。',

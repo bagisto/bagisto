@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Route;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
@@ -16,13 +16,13 @@ Route::controller(PayGlocalController::class)
             ->withoutMiddleware([
                 StartSession::class,
                 ShareErrorsFromSession::class,
-                VerifyCsrfToken::class,
+                PreventRequestForgery::class,
             ])
             ->name('payglocal.callback');
 
         Route::get('success', 'success')->name('payglocal.success');
 
         Route::post('webhook', 'webhook')
-            ->withoutMiddleware(VerifyCsrfToken::class)
+            ->withoutMiddleware(PreventRequestForgery::class)
             ->name('payglocal.webhook');
     });

@@ -542,6 +542,12 @@ return [
             'default-header' => 'Header Default',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Tutup galeri',
+            'view-image' => 'Lihat gambar',
+            'view-video' => 'Lihat video',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Toggel Default',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Terjemahkan',
                 'translating' => 'Menerjemahkan...',
                 'write-a-review' => 'Tulis Ulasan',
+                'stars' => 'Bintang',
             ],
 
             'contact-us' => [
@@ -1765,7 +1772,9 @@ return [
 
         'response' => [
             'already-cancel' => 'Status RMA sudah dibatalkan.',
+            'cancel-not-allowed' => 'Membatalkan permintaan RMA ini tidak diizinkan.',
             'cancel-success' => 'Status RMA berhasil dibatalkan.',
+            'close-not-allowed' => 'Menutup permintaan RMA ini tidak diizinkan.',
             'create-success' => 'Permintaan berhasil dibuat.',
             'creation-error' => 'Status RMA tidak dapat diperbarui karena faktur untuk pesanan ini belum dibuat.',
             'invalid-item' => 'Item pesanan yang dipilih tidak valid.',
