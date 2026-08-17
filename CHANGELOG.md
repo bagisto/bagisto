@@ -6,7 +6,7 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added PostgreSQL support with database grammar abstraction layer, model boolean casts, and cross-database query compatibility.
 
-- Upgraded to Laravel 13 on PHP 8.4 with Pest 4 / PHPUnit 12, refreshed config and skeleton files, and major bumps across `nestedset`, `l5-repository`, `concord`, `tinker` and `debugbar`.
+- Upgraded to Laravel 13 on PHP 8.4 with Pest 5 / PHPUnit 13, refreshed config and skeleton files, and major bumps across `nestedset`, `l5-repository`, `concord`, `tinker` and `debugbar`.
 
 - Upgraded the Admin, Shop and Installer frontends to Tailwind CSS 4, moving configuration into each `app.css` under `@theme` and replacing the JavaScript config and PostCSS pipeline.
 

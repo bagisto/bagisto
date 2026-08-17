@@ -300,7 +300,7 @@ it('should place a virtual product order for a guest user', function () {
     ]);
 
     postJson(route('shop.checkout.onepage.payment_methods.store'), [
-        'payment' => ['method' => 'cashondelivery'],
+        'payment' => ['method' => 'moneytransfer'],
     ]);
 
     $response = postJson(route('shop.checkout.onepage.orders.store'));
@@ -323,7 +323,7 @@ it('should place a virtual product order for a customer', function () {
     ]);
 
     postJson(route('shop.checkout.onepage.payment_methods.store'), [
-        'payment' => ['method' => 'cashondelivery'],
+        'payment' => ['method' => 'moneytransfer'],
     ]);
 
     $response = postJson(route('shop.checkout.onepage.orders.store'));

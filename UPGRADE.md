@@ -44,8 +44,9 @@ Upgrade PHP before running `composer install`; on 8.3 the install aborts rather 
 | `konekt/concord` | `^1.16` | `^1.18` |
 | `spatie/laravel-responsecache` | `^7.4` | `^8.4` |
 | `spatie/laravel-sitemap` | `^7.3` | `^8.0` |
-| `pestphp/pest` | `^3.0` | `^4.0` |
-| `phpunit/phpunit` | `^11.0` | `^12.0` |
+| `pestphp/pest` | `^3.0` | `^5.0` |
+| `pestphp/pest-plugin-laravel` | `^3.0` | `^5.0` |
+| `phpunit/phpunit` | `^11.0` | `^13.0` |
 | `barryvdh/laravel-debugbar` | `^3.8` | `^4.3` |
 
 If you depend on any of these directly, check their own upgrade notes — the majors here are not drop-in.

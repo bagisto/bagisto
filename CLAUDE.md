@@ -29,7 +29,7 @@ vendor/bin/pest --filter="test name"                    # Run a single test by n
 
 Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Core Unit, Customer Unit, DataGrid Unit, Installer Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
 
-Tests use **Pest 4** (PHPUnit 12) with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
+Tests use **Pest 5** (PHPUnit 13) with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
 
 ### Fresh Database Setup for Testing
 Parallel testing creates databases named `{DB_DATABASE}_test_1`, `{DB_DATABASE}_test_2`, etc. based on the number of CPU cores. For example, with `DB_DATABASE=bagisto` on a 6-core machine, it creates `bagisto_test_1` through `bagisto_test_6`. This applies to both MySQL and PostgreSQL.

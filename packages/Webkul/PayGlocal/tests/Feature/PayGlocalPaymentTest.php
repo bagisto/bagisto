@@ -155,7 +155,7 @@ it('settles the payment and creates the order with an invoice from the callback'
 
     $cart->refresh();
 
-    expect($cart->is_active)->toBe(0);
+    expect($cart->is_active)->toBeFalse();
 });
 
 it('does not start a session when receiving the callback', function () {
