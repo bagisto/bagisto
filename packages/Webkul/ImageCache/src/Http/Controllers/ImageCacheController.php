@@ -2,7 +2,6 @@
 
 namespace Webkul\ImageCache\Http\Controllers;
 
-use Closure;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
@@ -53,7 +52,7 @@ class ImageCacheController extends Controller
         }
 
         try {
-            $image = image_manager()->read($path);
+            $image = image_manager()->fromPath($path);
 
             if (is_object($templateConfig) && method_exists($templateConfig, 'applyFilter')) {
                 $image = $templateConfig->applyFilter($image);
@@ -63,11 +62,9 @@ class ImageCacheController extends Controller
                 if (method_exists($filter, 'applyFilter')) {
                     $image = $filter->applyFilter($image);
                 }
-            } elseif ($templateConfig instanceof Closure) {
-                $image = $templateConfig($image);
             }
 
-            $content = (string) $image->encodeByMediaType();
+            $content = $image->toBytes();
 
             return $this->buildResponse($content);
         } catch (Exception) {

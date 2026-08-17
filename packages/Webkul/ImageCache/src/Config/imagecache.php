@@ -71,16 +71,4 @@ return [
     */
 
     'lifetime' => 43200,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Cache Driver
-    |--------------------------------------------------------------------------
-    |
-    | Optionally specify a custom cache driver to use for image caching.
-    | Set to null to use the default Laravel cache driver.
-    |
-    */
-
-    'cache_driver' => null,
 ];

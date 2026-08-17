@@ -7,14 +7,14 @@ return [
     | Image Driver
     |--------------------------------------------------------------------------
     |
-    | Intervention Image supports "GD Library" and "Imagick" to process images
-    | internally. You may choose one of them according to your PHP
-    | configuration. By default PHP's "GD Library" implementation is used.
+    | Laravel processes images through either PHP's "GD Library" or "Imagick".
+    | Pick the one your PHP build provides; GD is the more commonly compiled
+    | of the two and is used by default.
     |
     | Supported: "gd", "imagick"
     |
     */
 
-    'driver' => 'gd',
+    'default' => env('IMAGE_DRIVER', 'gd'),
 
 ];

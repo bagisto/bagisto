@@ -286,7 +286,7 @@ class CategoryRepository extends Repository
                         Storage::delete($category->{$type});
                     }
 
-                    $encoded = image_manager()->read(request()->file($file))->encodeByExtension('webp');
+                    $encoded = image_manager()->fromUpload(request()->file($file))->toWebp()->toBytes();
 
                     $category->{$type} = 'category/'.$category->id.'/'.Str::random(40).'.webp';
 

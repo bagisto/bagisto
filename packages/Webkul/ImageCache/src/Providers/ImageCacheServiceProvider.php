@@ -3,9 +3,6 @@
 namespace Webkul\ImageCache\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Intervention\Image\Drivers\Gd\Driver as GdDriver;
-use Intervention\Image\Drivers\Imagick\Driver as ImagickDriver;
-use Intervention\Image\ImageManager;
 
 class ImageCacheServiceProvider extends ServiceProvider
 {
@@ -17,17 +14,6 @@ class ImageCacheServiceProvider extends ServiceProvider
         include __DIR__.'/../Http/helpers.php';
 
         $this->mergeConfigFrom(__DIR__.'/../Config/imagecache.php', 'imagecache');
-
-        $this->app->singleton('image_manager', function ($app) {
-            $driver = $app['config']->get('image.driver', 'gd');
-
-            return match ($driver) {
-                'imagick' => new ImageManager(new ImagickDriver),
-                default => new ImageManager(new GdDriver),
-            };
-        });
-
-        $this->app->alias('image_manager', ImageManager::class);
     }
 
     /**

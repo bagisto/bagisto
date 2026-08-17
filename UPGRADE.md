@@ -10,6 +10,7 @@
 
 ## Medium Impact Changes
 
+- [Image Processing Moved to Laravel's Image Component](#image-processing-moved-to-laravels-image-component)
 - [PostgreSQL Support](#postgresql-support)
 
 ## Upgrading To v2.5 From v2.4
@@ -86,6 +87,78 @@ Options Laravel 13 added are now present rather than implied: the `deferred`, `b
 > `session.serialization` is set to `php`, not the `json` that a fresh Laravel 13 application defaults to. `json` is the safer choice — it closes off gadget-chain attacks if `APP_KEY` leaks — but it cannot read sessions written the old way. Switch it once you can accept every session being invalidated.
 
 If you maintain your own copies of these files, mirror the same changes.
+
+---
+
+### Image Processing Moved to Laravel's Image Component
+
+**Impact Probability: Medium**
+
+Laravel 13 ships its own image component, so Bagisto no longer maintains a wrapper around Intervention Image. Code that resizes or re-encodes images now uses `Illuminate\Image`.
+
+> [!NOTE]
+> Intervention Image has **not** gone away — Laravel's `gd` and `imagick` drivers are built on it, so it remains a dependency and is now required at `^4.0`. What changed is that Bagisto no longer writes against its API.
+
+#### Removed Classes
+
+These were part of `webkul/imagecache` and were unreachable from the application — nothing resolved or instantiated them. They modelled Intervention's API (`brightness()`, `gamma()`, `colorize()`, `pixelate()`, `pad()`), which Laravel's component does not provide, so they were removed rather than rewritten:
+
+| Removed | Replacement |
+|---------|-------------|
+| `Webkul\ImageCache\ImageCache` | None. Use `Illuminate\Image\ImageManager` (`image_manager()` or the `Image` facade). |
+| `Webkul\ImageCache\CachedImage` | `Illuminate\Image\Image` |
+| `Webkul\ImageCache\HashableClosure` | None. |
+
+If your package referenced any of them, move to Laravel's component.
+
+#### API Changes
+
+`image_manager()` still exists, but now returns `Illuminate\Image\ImageManager` rather than Intervention's:
+
+```diff
+- image_manager()->read($uploadedFile)->encodeByExtension('webp');
++ image_manager()->fromUpload($uploadedFile)->toWebp()->toBytes();
+
+- image_manager()->read($path)->encodeByMediaType();
++ image_manager()->fromPath($path)->toBytes();
+```
+
+Reading is now explicit about its source — `fromPath()`, `fromUpload()`, `fromBytes()`, `fromUrl()`, `fromStorage()` — instead of one `read()` that guessed. Encoding is `toWebp()`, `toJpeg()`, `toPng()` and so on, followed by `toBytes()`.
+
+Cache filters and templates type-hint the new image class:
+
+```diff
+- use Intervention\Image\Interfaces\ImageInterface;
++ use Illuminate\Image\Image;
+
+- public function applyFilter(ImageInterface $image): ImageInterface
++ public function applyFilter(Image $image): Image
+```
+
+`cover()`, `contain()`, `crop()`, `resize()`, `scale()`, `rotate()`, `blur()`, `sharpen()`, `grayscale()` and the flips carry the same names, so filter bodies usually need no change.
+
+#### Configuration
+
+The driver setting moved to the file the framework reads, and the key changed:
+
+```diff
+- // config/image.php
+- 'driver' => 'gd',
+
++ // config/images.php
++ 'default' => env('IMAGE_DRIVER', 'gd'),
+```
+
+Delete `config/image.php` and add `config/images.php`. Supported drivers are still `gd` and `imagick`.
+
+#### Composer
+
+```diff
+- "intervention/image": "^2.4|^3.0",
++ "intervention/image": "^4.2",
+```
+
+The `dont-discover` entry for `intervention/image` can go — v4 ships no Laravel service provider to discover.
 
 ---
 
