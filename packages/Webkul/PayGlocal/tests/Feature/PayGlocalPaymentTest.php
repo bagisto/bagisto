@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Webkul\Checkout\Facades\Cart;
 use Webkul\Core\Models\CoreConfig;
@@ -326,6 +327,39 @@ it('refuses to place the order when the cart no longer totals what was captured'
     $response->assertJsonPath('status', 'payment_not_confirmed');
 
     expect(Order::where('cart_id', $cart->id)->first())->toBeNull();
+});
+
+it('settles against the totals collect totals recalculated, not the stale ones it was handed', function () {
+    // Arrange
+    $cart = $this->createCartWithItems('payglocal');
+
+    /**
+     * Drift the stored totals away from what the items add up to. collectTotals() recomputes
+     * them from the items, so the figures on the cart instance read back before it runs are
+     * the drifted ones, and the figures it leaves behind are the true ones.
+     */
+    DB::table('cart')->where('id', $cart->id)->update([
+        'grand_total' => $cart->grand_total + 500,
+        'base_grand_total' => $cart->base_grand_total + 500,
+        'sub_total' => $cart->sub_total + 500,
+        'base_sub_total' => $cart->base_sub_total + 500,
+    ]);
+
+    mockCallbackToken(callbackClaims($cart));
+
+    mockConfirmedStatus($this->payGlocalMock, $cart);
+
+    // Act
+    $response = $this->postJson(route('payglocal.webhook'), ['x-gl-token' => 'token']);
+
+    // Assert
+    $response->assertOk();
+
+    $order = Order::where('cart_id', $cart->id)->first();
+
+    expect($order)->not->toBeNull();
+
+    expect((float) $order->base_grand_total)->toBe((float) $cart->base_grand_total);
 });
 
 it('refuses to place the order when the cart currency no longer matches what was captured', function () {

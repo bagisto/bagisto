@@ -143,8 +143,13 @@ class PhonePeController extends Controller
 
                 Cart::collectTotals();
 
-                // Re-fetch: collectTotals() ends with an internal refresh; reusing the pre-refresh reference here would serialize stale cart state.
                 $cart = Cart::getCart();
+
+                if (! $cart) {
+                    session()->flash('info', trans('phonepe::app.response.cart-not-found'));
+
+                    return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
+                }
 
                 $data = (new OrderResource($cart))->jsonSerialize();
 
@@ -274,8 +279,16 @@ class PhonePeController extends Controller
 
             Cart::collectTotals();
 
-            // Re-fetch: collectTotals() ends with an internal refresh; reusing the pre-refresh reference here would serialize stale cart state.
+            /**
+             * Cart::collectTotals() ends with an internal refresh that swaps the cart instance,
+             * so the totals it calculated live on the refreshed one. Serializing the reference
+             * captured above would persist the order with pre-calculation totals.
+             */
             $cart = Cart::getCart();
+
+            if (! $cart) {
+                return response()->json(['status' => 'cart_inactive'], 200);
+            }
 
             $data = (new OrderResource($cart))->jsonSerialize();
 

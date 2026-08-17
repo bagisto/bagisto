@@ -109,8 +109,13 @@ class PayUController extends Controller
 
             Cart::collectTotals();
 
-            // Re-fetch: collectTotals() ends with an internal refresh; reusing the pre-refresh reference here would serialize stale cart state.
             $cart = Cart::getCart();
+
+            if (! $cart) {
+                session()->flash('error', trans('payu::app.response.cart-not-found'));
+
+                return redirect()->route('shop.checkout.cart.index');
+            }
 
             $data = (new OrderResource($cart))->jsonSerialize();
 
