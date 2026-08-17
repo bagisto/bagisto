@@ -5549,12 +5549,32 @@ return [
                     'use-cases' => 'Casos d\'Ús',
                     'zoom' => 'Zoom',
                 ],
+
+                'seo' => [
+                    'alt-text' => 'Text alternatiu',
+                    'alt-text-info' => 'Es desa per a la configuració regional seleccionada. Si es deixa buit, s\'utilitza el nom del producte.',
+                    'alt-text-placeholder' => 'Descriviu què es mostra a la imatge',
+                    'done-btn' => 'Fet',
+                    'file-name' => 'Nom del fitxer',
+                    'file-name-info' => 'Canviar el nom canvia l\'URL de la imatge. L\'URL antic deixa de funcionar, cosa que pot afectar el posicionament a la cerca d\'imatges.',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => 'Millora com els cercadors i els lectors de pantalla entenen aquesta imatge.',
+                    'replace' => 'Substitueix la imatge',
+                    'replace-btn' => 'Tria un fitxer',
+                    'replace-info' => 'El text alternatiu i el nom del fitxer anteriors es conserven per a la imatge nova.',
+                    'title' => 'SEO de la imatge',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => 'Afegir Vídeo',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .ogg ..).',
+
+                'seo' => [
+                    'info' => 'Doneu un nom descriptiu al fitxer de vídeo.',
+                    'title' => 'SEO del vídeo',
+                ],
             ],
         ],
 

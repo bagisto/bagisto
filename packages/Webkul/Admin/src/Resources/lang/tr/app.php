@@ -5549,12 +5549,32 @@ return [
                     'use-cases' => 'Kullanım Alanları',
                     'zoom' => 'Yakınlaştırma',
                 ],
+
+                'seo' => [
+                    'alt-text' => 'Alternatif Metin',
+                    'alt-text-info' => 'Seçili dil için kaydedilir. Boş bırakıldığında ürün adı kullanılır.',
+                    'alt-text-placeholder' => 'Görselde ne gösterildiğini açıklayın',
+                    'done-btn' => 'Tamam',
+                    'file-name' => 'Dosya Adı',
+                    'file-name-info' => 'Yeniden adlandırma görselin URL adresini değiştirir. Eski URL çalışmayı durdurur ve bu görsel arama sıralamasını etkileyebilir.',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => 'Arama motorlarının ve ekran okuyucuların bu görseli nasıl anladığını iyileştirin.',
+                    'replace' => 'Görseli Değiştir',
+                    'replace-btn' => 'Dosya Seç',
+                    'replace-info' => 'Yukarıdaki alternatif metin ve dosya adı yeni görsel için korunur.',
+                    'title' => 'Görsel SEO',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => 'Video Ekle',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
+
+                'seo' => [
+                    'info' => 'Video dosyasına açıklayıcı bir ad verin.',
+                    'title' => 'Video SEO',
+                ],
             ],
         ],
 

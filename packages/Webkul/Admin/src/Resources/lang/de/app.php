@@ -5549,12 +5549,32 @@ return [
                     'use-cases' => 'Verwendungszwecke',
                     'zoom' => 'Vergrößern',
                 ],
+
+                'seo' => [
+                    'alt-text' => 'Alt-Text',
+                    'alt-text-info' => 'Wird für die aktuell ausgewählte Sprache gespeichert. Bei leerem Feld wird der Produktname verwendet.',
+                    'alt-text-placeholder' => 'Beschreiben Sie, was auf dem Bild zu sehen ist',
+                    'done-btn' => 'Fertig',
+                    'file-name' => 'Dateiname',
+                    'file-name-info' => 'Eine Umbenennung ändert die Bild-URL. Die alte URL funktioniert nicht mehr, was sich auf das Ranking in der Bildersuche auswirken kann.',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => 'Verbessern Sie, wie Suchmaschinen und Screenreader dieses Bild verstehen.',
+                    'replace' => 'Bild ersetzen',
+                    'replace-btn' => 'Datei auswählen',
+                    'replace-info' => 'Alt-Text und Dateiname oben werden für das neue Bild beibehalten.',
+                    'title' => 'Bild-SEO',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => 'Video hinzufügen',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Nur Videodateien (.mp4, .mov, .ogg ..) sind erlaubt.',
+
+                'seo' => [
+                    'info' => 'Geben Sie der Videodatei einen aussagekräftigen Namen.',
+                    'title' => 'Video-SEO',
+                ],
             ],
         ],
 

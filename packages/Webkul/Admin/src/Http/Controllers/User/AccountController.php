@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Helpers\MediaFileName;
 
 class AccountController extends Controller
 {
@@ -38,6 +39,7 @@ class AccountController extends Controller
             'password' => 'nullable|min:6|confirmed',
             'current_password' => 'required|min:6',
             'image.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'image_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
         ]);
 
         $data = request()->only([
@@ -47,6 +49,7 @@ class AccountController extends Controller
             'password_confirmation',
             'current_password',
             'image',
+            'image_meta',
         ]);
 
         if (! Hash::check($data['current_password'], $user->password)) {
@@ -65,18 +68,34 @@ class AccountController extends Controller
             $data['password'] = bcrypt($data['password']);
         }
 
-        if (request()->hasFile('image')) {
-            $data['image'] = current(request()->file('image'))->store('admins/'.$user->id);
-        } else {
-            if (! isset($data['image'])) {
-                if (! empty($data['image'])) {
-                    Storage::delete($user->image);
-                }
+        $mediaFileName = app(MediaFileName::class);
 
-                $data['image'] = null;
-            } else {
-                $data['image'] = $user->image;
+        $requestedFileName = collect($data['image_meta'] ?? [])->first()['file_name'] ?? null;
+
+        unset($data['image_meta']);
+
+        if (request()->hasFile('image')) {
+            if ($user->image) {
+                Storage::delete($user->image);
             }
+
+            $file = current(request()->file('image'));
+
+            $data['image'] = $mediaFileName->resolve(
+                'admins/'.$user->id,
+                $requestedFileName,
+                $file->getClientOriginalExtension()
+            );
+
+            Storage::put($data['image'], $file->get());
+        } elseif (! isset($data['image'])) {
+            if ($user->image) {
+                Storage::delete($user->image);
+            }
+
+            $data['image'] = null;
+        } else {
+            $data['image'] = $mediaFileName->rename($user->image, $requestedFileName);
         }
 
         $user->update($data);

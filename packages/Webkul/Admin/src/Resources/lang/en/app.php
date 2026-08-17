@@ -5549,12 +5549,32 @@ return [
                     'use-cases' => 'Use Cases',
                     'zoom' => 'Zoom',
                 ],
+
+                'seo' => [
+                    'alt-text' => 'Alt Text',
+                    'alt-text-info' => 'Saved for the currently selected locale. Falls back to the product name when left empty.',
+                    'alt-text-placeholder' => 'Describe what is shown in the image',
+                    'done-btn' => 'Done',
+                    'file-name' => 'File Name',
+                    'file-name-info' => 'Renaming changes the image URL. The old URL stops working, which can affect image search rankings.',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => 'Improve how search engines and screen readers understand this image.',
+                    'replace' => 'Replace Image',
+                    'replace-btn' => 'Choose File',
+                    'replace-info' => 'The alt text and file name above are kept for the new image.',
+                    'title' => 'Image SEO',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => 'Add Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
+
+                'seo' => [
+                    'info' => 'Give the video file a descriptive name.',
+                    'title' => 'Video SEO',
+                ],
             ],
         ],
 

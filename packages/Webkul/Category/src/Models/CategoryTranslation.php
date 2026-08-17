@@ -31,6 +31,8 @@ class CategoryTranslation extends Model implements CategoryTranslationContract
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'logo_alt',
+        'banner_alt',
         'locale_id',
     ];
 

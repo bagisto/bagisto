@@ -1761,7 +1761,9 @@ return [
 
         'response' => [
             'already-cancel' => 'סטטוס RMA כבר בוטל.',
+            'cancel-not-allowed' => 'ביטול בקשת RMA זו אינו מותר.',
             'cancel-success' => 'סטטוס RMA בוטל בהצלחה.',
+            'close-not-allowed' => 'סגירת בקשת RMA זו אינה מותרת.',
             'create-success' => 'הבקשה נוצרה בהצלחה.',
             'creation-error' => 'לא ניתן לעדכן את סטטוס ה-RMA מכיוון שהחשבונית להזמנה זו לא נוצרה.',
             'invalid-item' => 'פריט ההזמנה שנבחר אינו תקין.',

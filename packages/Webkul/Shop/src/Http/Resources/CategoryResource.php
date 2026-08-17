@@ -29,12 +29,14 @@ class CategoryResource extends JsonResource
                 'medium_image_url' => url('cache/medium/'.$this->logo_path),
                 'large_image_url' => url('cache/large/'.$this->logo_path),
                 'original_image_url' => url('cache/original/'.$this->logo_path),
+                'alt' => $this->logo_alt ?: $this->name,
             ]),
             'banner' => $this->when($this->banner_path, [
                 'small_image_url' => url('cache/small/'.$this->banner_path),
                 'medium_image_url' => url('cache/medium/'.$this->banner_path),
                 'large_image_url' => url('cache/large/'.$this->banner_path),
                 'original_image_url' => url('cache/original/'.$this->banner_path),
+                'alt' => $this->banner_alt ?: $this->name,
             ]),
             'meta' => [
                 'title' => $this->meta_title,

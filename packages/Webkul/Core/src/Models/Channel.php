@@ -56,6 +56,7 @@ class Channel extends TranslatableModel implements ChannelContract
         'description',
         'maintenance_mode_text',
         'home_seo',
+        'logo_alt',
     ];
 
     /**
@@ -144,6 +145,26 @@ class Channel extends TranslatableModel implements ChannelContract
     public function getFaviconUrlAttribute()
     {
         return $this->favicon_url();
+    }
+
+    /**
+     * Get the logo file name, without the directory and the extension.
+     *
+     * @return string
+     */
+    public function getLogoFileNameAttribute()
+    {
+        return pathinfo((string) $this->logo, PATHINFO_FILENAME);
+    }
+
+    /**
+     * Get the favicon file name, without the directory and the extension.
+     *
+     * @return string
+     */
+    public function getFaviconFileNameAttribute()
+    {
+        return pathinfo((string) $this->favicon, PATHINFO_FILENAME);
     }
 
     /**

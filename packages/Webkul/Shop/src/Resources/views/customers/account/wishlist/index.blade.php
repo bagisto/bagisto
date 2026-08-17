@@ -119,7 +119,7 @@
                                         <img
                                             class="h-28 max-h-28 w-28 max-w-28 rounded-xl max-md:h-20 max-md:max-h-20 max-md:w-20 max-md:max-w-20"
                                             :src="wishlist.product.base_image.small_image_url"
-                                            alt="Product Image"
+                                            :alt="wishlist.product.base_image.alt"
                                         />
                                     </a>
 

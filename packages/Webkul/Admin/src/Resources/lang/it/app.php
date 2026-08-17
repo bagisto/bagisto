@@ -5549,12 +5549,32 @@ return [
                     'use-cases' => 'Casi d\'Uso',
                     'zoom' => 'Zoom',
                 ],
+
+                'seo' => [
+                    'alt-text' => 'Testo alternativo',
+                    'alt-text-info' => 'Salvato per la lingua attualmente selezionata. Se lasciato vuoto viene usato il nome del prodotto.',
+                    'alt-text-placeholder' => 'Descrivi ciò che è mostrato nell\'immagine',
+                    'done-btn' => 'Fatto',
+                    'file-name' => 'Nome del file',
+                    'file-name-info' => 'La rinomina modifica l\'URL dell\'immagine. Il vecchio URL smette di funzionare e questo può influire sul posizionamento nella ricerca immagini.',
+                    'file-name-placeholder' => 'blue-running-shoe-side',
+                    'info' => 'Migliora il modo in cui i motori di ricerca e i lettori di schermo interpretano questa immagine.',
+                    'replace' => 'Sostituisci immagine',
+                    'replace-btn' => 'Scegli file',
+                    'replace-info' => 'Il testo alternativo e il nome del file sopra vengono mantenuti per la nuova immagine.',
+                    'title' => 'SEO immagine',
+                ],
             ],
 
             'videos' => [
                 'add-video-btn' => 'Aggiungi Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
+
+                'seo' => [
+                    'info' => 'Assegna un nome descrittivo al file video.',
+                    'title' => 'SEO video',
+                ],
             ],
         ],
 

@@ -17,7 +17,9 @@
     <!-- Video Blade Component -->
     <x-admin::media.videos
         name="videos[files]"
+        meta-name="videos[meta]"
         :allow-multiple="true"
+        :enable-seo="true"
         :uploaded-videos="$product->videos"
     />
 

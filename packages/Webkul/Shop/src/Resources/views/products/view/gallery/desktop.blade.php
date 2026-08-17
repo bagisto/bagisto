@@ -36,7 +36,7 @@
                     v-else
                     :class="`transparent max-h-[100px] min-w-[100px] cursor-pointer rounded-xl border ${isActiveMedia(index) ? 'pointer-events-none border border-navyBlue' : 'border-white'}`"
                     :src="media.small_image_url"
-                    alt="{{ $product->name }}"
+                    :alt="media.alt"
                     width="100"
                     height="100"
                     tabindex="0"
@@ -73,7 +73,7 @@
             class="min-w-[450px] cursor-pointer rounded-xl"
             :src="baseFile.path"
             v-if="baseFile.type == 'image'"
-            alt="{{ $product->name }}"
+            :alt="baseFile.alt"
             width="560"
             height="610"
             tabindex="0"

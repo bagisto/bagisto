@@ -1761,7 +1761,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA-status is al geannuleerd.',
+            'cancel-not-allowed' => 'Het annuleren van dit RMA-verzoek is niet toegestaan.',
             'cancel-success' => 'RMA-status is succesvol geannuleerd.',
+            'close-not-allowed' => 'Het sluiten van dit RMA-verzoek is niet toegestaan.',
             'create-success' => 'Verzoek succesvol aangemaakt.',
             'creation-error' => 'De RMA-status kan niet worden bijgewerkt omdat de factuur voor deze bestelling niet is aangemaakt.',
             'invalid-item' => 'Het geselecteerde bestelitem is ongeldig.',

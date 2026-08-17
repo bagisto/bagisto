@@ -1761,7 +1761,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA durumu zaten iptal edilmiştir.',
+            'cancel-not-allowed' => 'Bu RMA talebini iptal etmeye izin verilmiyor.',
             'cancel-success' => 'RMA durumu başarıyla iptal edildi.',
+            'close-not-allowed' => 'Bu RMA talebini kapatmaya izin verilmiyor.',
             'create-success' => 'İstek başarıyla oluşturuldu.',
             'creation-error' => 'RMA durumu güncellenemiyor çünkü bu sipariş için fatura oluşturulmamış.',
             'invalid-item' => 'Seçilen sipariş ürünü geçersiz.',
