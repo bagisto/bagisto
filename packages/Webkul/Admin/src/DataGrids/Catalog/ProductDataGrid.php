@@ -62,7 +62,24 @@ class ProductDataGrid extends DataGrid
                 'product_flat.attribute_family_name as attribute_family',
             )
             ->where('product_flat.locale', app()->getLocale())
-            ->groupBy('product_flat.product_id');
+            ->groupBy(
+                'product_flat.locale',
+                'product_flat.channel',
+                'product_flat.product_id',
+                'product_flat.sku',
+                'product_flat.name',
+                'product_flat.type',
+                'product_flat.status',
+                'product_flat.price',
+                'product_flat.url_key',
+                'product_flat.visible_individually',
+                'product_flat.quantity',
+                'product_flat.images_count',
+                'product_flat.base_image',
+                'product_flat.manage_stock',
+                'product_flat.category_name',
+                'product_flat.attribute_family_name',
+            );
 
         $this->addFilter('attribute_family', 'attribute_family_id');
 

@@ -210,6 +210,39 @@
                         @endif
                     </div>
                 @endforeach
+
+                <!-- Help & Resources -->
+                @php
+                    $isHelpActive = request()->routeIs('admin.help.index');
+                @endphp
+
+                <!-- Divider -->
+                <div class="my-1 border-t border-gray-200 dark:border-gray-800"></div>
+
+                <div class="group/item relative">
+                    <a
+                        href="{{ route('admin.help.index') }}"
+                        class="flex items-center gap-2 p-1.5 cursor-pointer hover:rounded-lg {{ $isHelpActive ? 'bg-blue-600 rounded-lg' : 'hover:bg-gray-100 hover:dark:bg-gray-950' }} sm:gap-2.5"
+                    >
+                        <svg
+                            class="h-5 w-5 shrink-0 {{ $isHelpActive ? 'text-white' : 'text-gray-600 dark:text-gray-300' }} sm:h-6 sm:w-6"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="1.8"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M9.4 9.3a2.6 2.6 0 0 1 5.05.85c0 1.7-2.45 2.05-2.45 3.6"></path>
+                            <path d="M12 17.2h.01"></path>
+                        </svg>
+
+                        <p class="font-semibold text-gray-600 dark:text-gray-300 whitespace-nowrap text-sm {{ $isHelpActive ? 'text-white' : '' }} sm:text-base">
+                            @lang('admin::app.components.layouts.sidebar.help')
+                        </p>
+                    </a>
+                </div>
             </nav>
         </div>
     </x-slot>

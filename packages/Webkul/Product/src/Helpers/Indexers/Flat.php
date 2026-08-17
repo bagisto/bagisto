@@ -246,7 +246,7 @@ class Flat extends AbstractIndexer
             'base_image' => DB::raw(
                 '(SELECT path FROM '.$tablePrefix.'product_images'
                 .' WHERE product_id = '.$tablePrefix.'product_flat.product_id'
-                .' ORDER BY id LIMIT 1)'
+                .' ORDER BY position, id LIMIT 1)'
             ),
 
             'attribute_family_name' => DB::raw(
@@ -255,7 +255,7 @@ class Flat extends AbstractIndexer
             ),
 
             'category_name' => DB::raw(
-                '(SELECT GROUP_CONCAT(ct.name ORDER BY ct.category_id SEPARATOR \', \')'
+                '(SELECT '.db_grammar()->groupConcat('ct.name', ', ', false, 'ct.category_id')
                 .' FROM '.$tablePrefix.'product_categories pc'
                 .' INNER JOIN '.$tablePrefix.'category_translations ct'
                 .' ON ct.category_id = pc.category_id AND ct.locale = '.$tablePrefix.'product_flat.locale'
