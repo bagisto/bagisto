@@ -542,6 +542,12 @@ return [
             'default-header' => 'Заголовок за замовчуванням',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Закрити галерею',
+            'view-image' => 'Переглянути зображення',
+            'view-video' => 'Переглянути відео',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Перемикач за замовчуванням',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Переклад',
                 'translating' => 'Переклад...',
                 'write-a-review' => 'Написати відгук',
+                'stars' => 'Зірки',
             ],
 
             'contact-us' => [

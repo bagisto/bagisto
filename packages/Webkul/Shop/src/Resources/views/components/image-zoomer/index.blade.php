@@ -22,11 +22,13 @@
                 v-show="isOpen"
             >
                 <!-- Close -->
-                <span
-                    class="icon-cancel absolute top-3 z-1000 cursor-pointer text-3xl ltr:right-3 rtl:left-3"
+                <button
+                    type="button"
+                    ref="closeButton"
+                    class="icon-cancel absolute top-3 z-1000 cursor-pointer border-0 bg-transparent text-3xl ltr:right-3 rtl:left-3 focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden"
+                    aria-label="@lang('shop::app.components.image-zoomer.close')"
                     @click="toggle"
-                >
-                </span>
+                ></button>
 
                 <span
                     class="icon-arrow-left fixed left-2.5 top-1/2 z-10 -mt-12 w-auto cursor-pointer rounded-full bg-[rgba(0,0,0,0.8)] p-3 text-2xl font-bold text-white opacity-30 transition-all hover:opacity-100"
@@ -109,28 +111,40 @@
                 <!-- Thumbnails -->
                 <div class="mb-4 flex justify-center gap-x-2">
                     <template v-for="(attachment, index) in attachments">
-                        <img
-                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:border-navyBlue!"
+                        <button
+                            type="button"
+                            class="h-16 w-16 transform cursor-pointer overflow-hidden rounded-md border border-navyBlue border-transparent bg-transparent p-0 transition-transform hover:border-navyBlue! focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden"
                             :class="{
                                 'border-navyBlue!': currentIndex === index + 1,
                             }"
-                            :src="attachment.url"
-                            :alt="attachment.alt"
-                            :key="index"
+                            :key="'thumb-' + index"
                             v-if="attachment.type === 'image'"
+                            :aria-label="`@lang('shop::app.components.image-zoomer.view-image') ${index + 1}`"
                             @click="navigate(currentIndex = index + 1)"
-                        />
+                        >
+                            <img
+                                class="h-full w-full object-cover"
+                                :src="attachment.url"
+                                :alt="attachment.alt"
+                            />
+                        </button>
 
-                        <video
-                            class="h-16 w-16 transform cursor-pointer rounded-md border border-navyBlue border-transparent object-cover transition-transform hover:border-navyBlue!"
+                        <button
+                            type="button"
+                            class="h-16 w-16 transform cursor-pointer overflow-hidden rounded-md border border-navyBlue border-transparent bg-transparent p-0 transition-transform hover:border-navyBlue! focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 focus-visible:outline-hidden"
                             :class="{
                                 'border-navyBlue!': currentIndex === index + 1,
                             }"
-                            :src="attachment.url"
-                            :key="index"
+                            :key="'thumb-' + index"
                             v-if="attachment.type === 'video'"
+                            :aria-label="`@lang('shop::app.components.image-zoomer.view-video') ${index + 1}`"
                             @click="navigate(currentIndex = index + 1)"
-                        />
+                        >
+                            <video
+                                class="h-full w-full object-cover"
+                                :src="attachment.url"
+                            ></video>
+                        </button>
                     </template>
                 </div>
             </div>

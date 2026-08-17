@@ -542,6 +542,12 @@ return [
             'default-header' => 'Header Default',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Tutup galeri',
+            'view-image' => 'Lihat gambar',
+            'view-video' => 'Lihat video',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Toggel Default',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Terjemahkan',
                 'translating' => 'Menerjemahkan...',
                 'write-a-review' => 'Tulis Ulasan',
+                'stars' => 'Bintang',
             ],
 
             'contact-us' => [

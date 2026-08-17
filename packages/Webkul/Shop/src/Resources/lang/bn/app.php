@@ -542,6 +542,12 @@ return [
             'default-header' => 'ডিফল্ট হেডার',
         ],
 
+        'image-zoomer' => [
+            'close' => 'গ্যালারি বন্ধ করুন',
+            'view-image' => 'ছবি দেখুন',
+            'view-video' => 'ভিডিও দেখুন',
+        ],
+
         'drawer' => [
             'default-toggle' => 'ডিফল্ট টগল',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'অনুবাদ',
                 'translating' => 'অনুবাদ হচ্ছে...',
                 'write-a-review' => 'রিভিউ লিখুন',
+                'stars' => 'তারকা',
             ],
 
             'contact-us' => [

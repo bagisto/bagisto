@@ -542,6 +542,12 @@ return [
             'default-header' => 'डिफ़ॉल्ट हैडर',
         ],
 
+        'image-zoomer' => [
+            'close' => 'गैलरी बंद करें',
+            'view-image' => 'छवि देखें',
+            'view-video' => 'वीडियो देखें',
+        ],
+
         'drawer' => [
             'default-toggle' => 'डिफ़ॉल्ट टॉगल',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'अनुवाद करें',
                 'translating' => 'अनुवाद किया जा रहा है...',
                 'write-a-review' => 'समीक्षा लिखें',
+                'stars' => 'सितारे',
             ],
 
             'contact-us' => [

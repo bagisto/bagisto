@@ -542,6 +542,12 @@ return [
             'default-header' => 'Antet implicit',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Închide galeria',
+            'view-image' => 'Vezi imaginea',
+            'view-video' => 'Vezi videoclipul',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Comutare implicită',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Traduce',
                 'translating' => 'Se traduce...',
                 'write-a-review' => 'Scrie o recenzie',
+                'stars' => 'Stele',
             ],
 
             'contact-us' => [

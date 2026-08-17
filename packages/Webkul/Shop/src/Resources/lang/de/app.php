@@ -542,6 +542,12 @@ return [
             'default-header' => 'Standardüberschrift',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Galerie schließen',
+            'view-image' => 'Bild ansehen',
+            'view-video' => 'Video ansehen',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Standardumschaltung',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Übersetzen',
                 'translating' => 'Übersetzung läuft...',
                 'write-a-review' => 'Eine Bewertung schreiben',
+                'stars' => 'Sterne',
             ],
 
             'contact-us' => [

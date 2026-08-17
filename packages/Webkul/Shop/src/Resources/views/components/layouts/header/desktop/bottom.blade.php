@@ -73,6 +73,7 @@
 
                 <input
                     type="text"
+                    id="organic-search"
                     name="query"
                     value="{{ request('query') }}"
                     toolparamdescription="{{ trans('shop::app.components.layouts.webmcp.search-products-query') }}"
@@ -135,12 +136,11 @@
             <!-- user profile -->
             <x-shop::dropdown position="bottom-{{ core()->getCurrentLocale()->direction === 'ltr' ? 'right' : 'left' }}">
                 <x-slot:toggle>
-                    <span
+                    <button
+                        type="button"
                         class="inline-block text-2xl cursor-pointer icon-users"
-                        role="button"
                         aria-label="@lang('shop::app.components.layouts.header.desktop.bottom.profile')"
-                        tabindex="0"
-                    ></span>
+                    ></button>
                 </x-slot>
 
                 <!-- Guest Dropdown -->

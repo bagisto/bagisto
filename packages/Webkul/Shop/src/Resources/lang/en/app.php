@@ -542,6 +542,12 @@ return [
             'default-header' => 'Default Header',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Close gallery',
+            'view-image' => 'View image',
+            'view-video' => 'View video',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Default Toggle',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Translate',
                 'translating' => 'Translating...',
                 'write-a-review' => 'Write a Review',
+                'stars' => 'Stars',
             ],
 
             'contact-us' => [

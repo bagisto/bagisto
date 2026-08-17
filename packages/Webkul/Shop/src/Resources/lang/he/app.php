@@ -542,6 +542,12 @@ return [
             'default-header' => 'כותרת ברירת מחדל',
         ],
 
+        'image-zoomer' => [
+            'close' => 'סגור את הגלריה',
+            'view-image' => 'הצג תמונה',
+            'view-video' => 'הצג סרטון',
+        ],
+
         'drawer' => [
             'default-toggle' => 'מתג ברירת מחדל',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'תרגום',
                 'translating' => 'מתרגם...',
                 'write-a-review' => 'כתוב ביקורת',
+                'stars' => 'כוכבים',
             ],
 
             'contact-us' => [

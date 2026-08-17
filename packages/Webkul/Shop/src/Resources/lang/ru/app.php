@@ -542,6 +542,12 @@ return [
             'default-header' => 'Заголовок по умолчанию',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Закрыть галерею',
+            'view-image' => 'Посмотреть изображение',
+            'view-video' => 'Посмотреть видео',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Переключатель по умолчанию',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Перевести',
                 'translating' => 'Перевод...',
                 'write-a-review' => 'Написать отзыв',
+                'stars' => 'Звезды',
             ],
 
             'contact-us' => [

@@ -542,6 +542,12 @@ return [
             'default-header' => 'Domyślny nagłówek',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Zamknij galerię',
+            'view-image' => 'Zobacz obraz',
+            'view-video' => 'Zobacz wideo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Domyślna zmiana',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Tłumaczyć',
                 'translating' => 'Tłumaczenie...',
                 'write-a-review' => 'Napisz recenzję',
+                'stars' => 'Gwiazdki',
             ],
 
             'contact-us' => [

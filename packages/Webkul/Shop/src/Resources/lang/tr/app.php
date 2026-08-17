@@ -542,6 +542,12 @@ return [
             'default-header' => 'Varsayılan Başlık',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Galeriyi kapat',
+            'view-image' => 'Görseli görüntüle',
+            'view-video' => 'Videoyu görüntüle',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Aç/Kapat',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Çevir',
                 'translating' => 'Çevriliyor...',
                 'write-a-review' => 'Yorum Yaz',
+                'stars' => 'Yıldızlar',
             ],
 
             'contact-us' => [

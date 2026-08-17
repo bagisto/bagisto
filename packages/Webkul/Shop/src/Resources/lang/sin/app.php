@@ -542,6 +542,12 @@ return [
             'default-header' => 'පෙරනි ශීර්ෂය',
         ],
 
+        'image-zoomer' => [
+            'close' => 'ගැලරිය වසන්න',
+            'view-image' => 'රූපය බලන්න',
+            'view-video' => 'වීඩියෝව බලන්න',
+        ],
+
         'drawer' => [
             'default-toggle' => 'පෙරනි එකක් සැකසෙමින්',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'සිංහලයට පරිවර්තකයක්',
                 'translating' => 'පරිවර්තක කිරීමට...',
                 'write-a-review' => 'අදහස ලියන්න',
+                'stars' => 'තරු',
             ],
 
             'contact-us' => [

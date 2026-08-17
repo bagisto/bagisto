@@ -93,7 +93,7 @@
                                         </v-field>
 
                                         <span
-                                            class="h-8 w-8 rounded-full border border-gray-200 max-sm:h-6.25 max-sm:w-6.25"
+                                            class="h-8 w-8 rounded-full border border-gray-200 max-sm:h-6.25 max-sm:w-6.25 peer-focus-visible:ring-2 peer-focus-visible:ring-gray-900 peer-focus-visible:ring-offset-2"
                                             tabindex="0"
                                             :style="{ 'background-color': option.swatch_value }"
                                         ></span>
@@ -132,6 +132,7 @@
                                             :src="option.swatch_value"
                                             :title="option.label"
                                             :alt="option.swatch_alt || option.label"
+                                            class="rounded-md peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2"
                                         />
                                     </label>
 
@@ -164,7 +165,7 @@
                                             />
                                         </v-field>
 
-                                        <span class="text-lg max-sm:text-sm">
+                                        <span class="text-lg max-sm:text-sm peer-focus-visible:ring-2 peer-focus-visible:ring-navyBlue peer-focus-visible:ring-offset-2 rounded px-2">
                                             @{{ option.label }}
                                         </span>
 

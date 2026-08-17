@@ -542,6 +542,12 @@ return [
             'default-header' => 'デフォルトヘッダー',
         ],
 
+        'image-zoomer' => [
+            'close' => 'ギャラリーを閉じる',
+            'view-image' => '画像を表示',
+            'view-video' => '動画を表示',
+        ],
+
         'drawer' => [
             'default-toggle' => 'デフォルトトグル',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => '翻訳',
                 'translating' => '翻訳中...',
                 'write-a-review' => 'レビューを書く',
+                'stars' => '星',
             ],
 
             'contact-us' => [

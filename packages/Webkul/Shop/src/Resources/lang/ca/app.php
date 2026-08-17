@@ -542,6 +542,12 @@ return [
             'default-header' => 'Capçalera per defecte',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Tanca la galeria',
+            'view-image' => 'Mostra la imatge',
+            'view-video' => 'Mostra el vídeo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Alternar per defecte',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Traduir',
                 'translating' => 'Traduint...',
                 'write-a-review' => 'Escriure una ressenya',
+                'stars' => 'Estrelles',
             ],
 
             'contact-us' => [

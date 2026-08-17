@@ -542,6 +542,12 @@ return [
             'default-header' => 'Intestazione predefinita',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Chiudi galleria',
+            'view-image' => 'Visualizza immagine',
+            'view-video' => 'Visualizza video',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Attivazione predefinita',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Traduci',
                 'translating' => 'Traduzione in corso...',
                 'write-a-review' => 'Scrivi una recensione',
+                'stars' => 'Stelle',
             ],
 
             'contact-us' => [

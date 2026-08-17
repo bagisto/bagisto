@@ -542,6 +542,12 @@ return [
             'default-header' => 'سربرگ پیش‌فرض',
         ],
 
+        'image-zoomer' => [
+            'close' => 'بستن گالری',
+            'view-image' => 'مشاهده تصویر',
+            'view-video' => 'مشاهده ویدیو',
+        ],
+
         'drawer' => [
             'default-toggle' => 'کلیک کردن پیش‌فرض',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'ترجمه',
                 'translating' => 'در حال ترجمه...',
                 'write-a-review' => 'نوشتن یک نقد و بررسی',
+                'stars' => 'ستاره‌ها',
             ],
 
             'contact-us' => [

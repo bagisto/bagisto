@@ -92,18 +92,17 @@
                                                 @csrf
                                             </form>
 
-                                            <a 
-                                                href="javascript:void(0);"                                                
+                                            <button 
+                                                type="button"
+                                                class="w-full text-left"
                                                 @click="$emitter.emit('open-confirm-modal', {
                                                     agree: () => {
                                                         $refs['addressDelete'].submit()
                                                     }
                                                 })"
                                             >
-                                                <p class="w-full">
-                                                    @lang('shop::app.customers.account.addresses.index.delete')
-                                                </p>
-                                            </a>
+                                                @lang('shop::app.customers.account.addresses.index.delete')
+                                            </button>
                                         </x-shop::dropdown.menu.item>
 
                                         @if (! $address->default_address)
@@ -118,18 +117,17 @@
 
                                                 </form>
 
-                                                <a 
-                                                    href="javascript:void(0);"                                                
+                                                <button 
+                                                    type="button"
+                                                    class="w-full text-left"
                                                     @click="$emitter.emit('open-confirm-modal', {
                                                         agree: () => {
                                                             $refs['setAsDefault'].submit()
                                                         }
                                                     })"
                                                 >
-                                                    <button>
-                                                        @lang('shop::app.customers.account.addresses.index.set-as-default')
-                                                    </button>
-                                                </a>
+                                                    @lang('shop::app.customers.account.addresses.index.set-as-default')
+                                                </button>
                                             </x-shop::dropdown.menu.item>
                                         @endif
                                     </x-slot>

@@ -542,6 +542,12 @@ return [
             'default-header' => 'Standaard kop',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Galerij sluiten',
+            'view-image' => 'Afbeelding bekijken',
+            'view-video' => 'Video bekijken',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Standaard Schakelen',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Vertalen',
                 'translating' => 'Vertalen...',
                 'write-a-review' => 'Schrijf een beoordeling',
+                'stars' => 'Sterren',
             ],
 
             'contact-us' => [

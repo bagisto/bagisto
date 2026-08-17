@@ -542,6 +542,12 @@ return [
             'default-header' => '默认标题',
         ],
 
+        'image-zoomer' => [
+            'close' => '关闭图库',
+            'view-image' => '查看图片',
+            'view-video' => '查看视频',
+        ],
+
         'drawer' => [
             'default-toggle' => '默认切换',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => '翻译',
                 'translating' => '翻译中...',
                 'write-a-review' => '写评论',
+                'stars' => '星星',
             ],
 
             'contact-us' => [

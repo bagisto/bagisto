@@ -542,6 +542,12 @@ return [
             'default-header' => 'Cabeçalho Padrão',
         ],
 
+        'image-zoomer' => [
+            'close' => 'Fechar galeria',
+            'view-image' => 'Ver imagem',
+            'view-video' => 'Ver vídeo',
+        ],
+
         'drawer' => [
             'default-toggle' => 'Alternar Padrão',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'Traduzir',
                 'translating' => 'Traduzindo...',
                 'write-a-review' => 'Escrever uma Avaliação',
+                'stars' => 'Estrelas',
             ],
 
             'contact-us' => [

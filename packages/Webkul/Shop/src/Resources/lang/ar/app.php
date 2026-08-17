@@ -542,6 +542,12 @@ return [
             'default-header' => 'العنوان الافتراضي',
         ],
 
+        'image-zoomer' => [
+            'close' => 'إغلاق المعرض',
+            'view-image' => 'عرض الصورة',
+            'view-video' => 'عرض الفيديو',
+        ],
+
         'drawer' => [
             'default-toggle' => 'التبديل الافتراضي',
         ],
@@ -915,6 +921,7 @@ return [
                 'translate' => 'ترجمة',
                 'translating' => 'جار الترجمة...',
                 'write-a-review' => 'كتابة مراجعة',
+                'stars' => 'نجوم',
             ],
 
             'contact-us' => [
