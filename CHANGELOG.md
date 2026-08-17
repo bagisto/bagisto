@@ -19,3 +19,5 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Refactored core search architecture to engine-agnostic design using Strategy + Manager patterns.
 
 - #11209 [feature] - Added Omnibus package for EU Omnibus Directive compliance, recording per-channel lowest-price snapshots and showing the 30-day historical low for discounted products.
+
+- #11317 [fixed] - Fixed storefront controls unusable by keyboard, replacing `role="button"` spans with real buttons, adding visible focus rings, and exposing hidden inputs to screen readers.
