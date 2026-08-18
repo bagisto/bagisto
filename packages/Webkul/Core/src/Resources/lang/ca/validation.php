@@ -8,5 +8,6 @@ return [
     'decimal' => 'O :attribute ha de ser vàlid.',
     'phone-number' => 'L\'atribut :attribute ha de ser un número de telèfon vàlid.',
     'postcode' => 'O :attribute ha de ser un codi postal vàlid.',
+    'regex' => 'El camp :attribute ha de ser una expressió regular vàlida, amb delimitadors inclosos.',
     'slug' => 'O :attribute ha de tenir un slug vàlid.',
 ];

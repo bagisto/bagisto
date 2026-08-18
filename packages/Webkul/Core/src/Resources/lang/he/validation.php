@@ -8,5 +8,6 @@ return [
     'decimal' => 'השדה :attribute חייב להיות חוקי.',
     'phone-number' => 'השדה :attribute חייב להיות מספר טלפון חוקי.',
     'postcode' => ':attribute חייב להיות מיקוד חוקי.',
+    'regex' => 'השדה :attribute חייב להיות ביטוי רגולרי תקין, כולל תוחמים.',
     'slug' => 'השדה :attribute חייב להיות slug חוקי.',
 ];

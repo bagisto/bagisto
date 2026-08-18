@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Attribute Family',
             'attribute-product-error' => 'family is used in products.',
             'create-success' => 'Family created successfully.',
+            'default-delete-error' => 'Familia de atribute implicită nu poate fi ștearsă.',
             'delete-failed' => 'Error encountered while deleting Family.',
             'delete-success' => 'Family deleted successfully.',
             'family' => 'Family',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'Updated successfully',
                 ],
 
+                'campaign-associate' => 'Acest șablon este utilizat în una sau mai multe campanii.',
                 'delete-failed' => ':name Deleted Failed',
                 'delete-success' => 'Template Deleted successfully',
                 'email-template' => 'Email Template',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Acest eveniment este utilizat în una sau mai multe campanii.',
                 'delete-failed' => ':name Delete Failed',
                 'delete-success' => 'Events Deleted Successfully',
                 'edit-error' => 'Event can not be Edit',

@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'משפחת מאפיינים',
             'attribute-product-error' => 'משפחה בשימוש במוצרים.',
             'create-success' => 'משפחה נוצרה בהצלחה.',
+            'default-delete-error' => 'לא ניתן למחוק את משפחת המאפיינים המוגדרת כברירת מחדל.',
             'delete-failed' => 'אירעה שגיאה במהלך מחיקת המשפחה.',
             'delete-success' => 'משפחה נמחקה בהצלחה.',
             'family' => 'משפחה',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'עודכן בהצלחה',
                 ],
 
+                'campaign-associate' => 'תבנית זו נמצאת בשימוש בקמפיין אחד או יותר.',
                 'delete-failed' => ':name נמחקה בהצלחה',
                 'delete-success' => 'תבנית נמחקה בהצלחה',
                 'email-template' => 'תבנית דוא"ל',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'אירוע זה נמצא בשימוש בקמפיין אחד או יותר.',
                 'delete-failed' => 'מחיקת :name נכשלה',
                 'delete-success' => 'האירועים נמחקו בהצלחה',
                 'edit-error' => 'לא ניתן לערוך את האירוע',

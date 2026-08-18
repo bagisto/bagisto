@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Webkul\Core\Models\Channel;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Product\Models\ProductReview;
@@ -325,4 +326,50 @@ it('should not send reset email for non-existent email', function () {
 it('should fail validation when email is missing on forgot password', function () {
     postJson(route('shop.customers.forgot_password.store'))
         ->assertJsonValidationErrorFor('email');
+});
+
+it('should update the profile when the same email exists on another channel', function () {
+    // Arrange.
+    $channel = Channel::factory()->create();
+
+    $customer = Customer::factory()->create();
+
+    Customer::factory()->create([
+        'email' => $customer->email,
+        'channel_id' => $channel->id,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.customers.account.profile.update'), [
+        'first_name' => $firstName = fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'gender' => 'Other',
+        'email' => $customer->email,
+        'phone' => fake()->e164PhoneNumber(),
+    ])
+        ->assertRedirect(route('shop.customers.account.profile.index'));
+
+    expect($customer->refresh()->first_name)->toBe($firstName);
+});
+
+it('should still refuse an email another customer holds on the same channel', function () {
+    // Arrange.
+    $customer = Customer::factory()->create();
+
+    $rival = Customer::factory()->create(['channel_id' => $customer->channel_id]);
+
+    // Act and Assert.
+    $this->loginAsCustomer($customer);
+
+    postJson(route('shop.customers.account.profile.update'), [
+        'first_name' => fake()->firstName(),
+        'last_name' => fake()->lastName(),
+        'gender' => 'Other',
+        'email' => $rival->email,
+        'phone' => fake()->e164PhoneNumber(),
+    ])
+        ->assertJsonValidationErrorFor('email')
+        ->assertUnprocessable();
 });

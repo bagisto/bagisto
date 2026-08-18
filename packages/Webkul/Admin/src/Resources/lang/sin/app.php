@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'අභියෝජිත පවා',
             'attribute-product-error' => 'පවා නිෂ්පාදන්හි භාණ්ඩ වෙත භාවිතා කරන ලදි.',
             'create-success' => 'පවා සාර්ථකව සාදන ලදි.',
+            'default-delete-error' => 'පෙරනිමි ගුණාංග පවුල මකා දැමිය නොහැක.',
             'delete-failed' => 'පවා මකා දමන්නේ සාර්ථකව කියා දමනු ලදි.',
             'delete-success' => 'පවා සාර්ථකව මකා දමන ලදි.',
             'family' => 'පවා',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'සාර්ථකව වෙනස් කරන ලදි',
                 ],
 
+                'campaign-associate' => 'මෙම අච්චුව එක් හෝ වැඩි ප්‍රචාරණවල භාවිතා වේ.',
                 'delete-failed' => ':name ඉවත් කළ නොහැක',
                 'delete-success' => 'ආකෘතිය සාර්ථකව ඉවත් කරන ලදි',
                 'email-template' => 'ලිපින ආකෘතිය',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'මෙම සිදුවීම එක් හෝ වැඩි ප්‍රචාරණවල භාවිතා වේ.',
                 'delete-failed' => ':name මකා දැමීම අසාර්ථක විය.',
                 'delete-success' => 'සළායකයන් සාර්ථකව ඉවත් කරන ලදි',
                 'edit-error' => 'සළායකයන් සංස්කරණය කළ නොහැක',

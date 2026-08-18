@@ -249,6 +249,12 @@ class PayGlocalController extends Controller
 
             Cart::collectTotals();
 
+            $cart = Cart::getCart();
+
+            if (! $cart) {
+                return null;
+            }
+
             if (! $this->amountMatches($cart, $response)) {
                 return null;
             }

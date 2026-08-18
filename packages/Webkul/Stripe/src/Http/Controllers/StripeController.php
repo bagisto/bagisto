@@ -103,6 +103,14 @@ class StripeController extends Controller
 
             Cart::collectTotals();
 
+            $cart = Cart::getCart();
+
+            if (! $cart) {
+                session()->flash('error', trans('stripe::app.response.cart-processed'));
+
+                return redirect()->route('shop.checkout.cart.index');
+            }
+
             $data = (new OrderResource($cart))->jsonSerialize();
 
             $data['payment']['additional'] = [

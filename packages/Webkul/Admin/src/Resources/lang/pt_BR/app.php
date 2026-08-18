@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Família de Atributos',
             'attribute-product-error' => 'A família é usada em produtos.',
             'create-success' => 'Família criada com sucesso.',
+            'default-delete-error' => 'A família de atributos padrão não pode ser excluída.',
             'delete-failed' => 'Erro ao excluir a Família.',
             'delete-success' => 'Família excluída com sucesso.',
             'family' => 'Família',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'Atualizado com sucesso',
                 ],
 
+                'campaign-associate' => 'Este modelo é usado em uma ou mais campanhas.',
                 'delete-failed' => 'Falha ao excluir :name',
                 'delete-success' => 'Modelo excluído com sucesso',
                 'email-template' => 'Modelo de Email',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Este evento é usado em uma ou mais campanhas.',
                 'delete-failed' => 'Falha ao excluir :name',
                 'delete-success' => 'Eventos excluídos com sucesso',
                 'edit-error' => 'Não é possível editar o evento',

@@ -8,5 +8,6 @@ return [
     'decimal' => ':attribute मान्य होनी चाहिए।',
     'phone-number' => ':attribute मान्य फ़ोन नंबर होना चाहिए।',
     'postcode' => ':attribute एक मान्य पिन कोड होना चाहिए।',
+    'regex' => ':attribute एक मान्य रेगुलर एक्सप्रेशन होना चाहिए, डिलिमिटर सहित।',
     'slug' => ':attribute मान्य स्लग होनी चाहिए।.',
 ];

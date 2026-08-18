@@ -10,6 +10,7 @@ use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Helpers\MediaFileName;
 use Webkul\Core\Rules\Decimal;
+use Webkul\Core\Rules\Regex;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -145,7 +146,9 @@ class ProductForm extends FormRequest
                 if ($attribute->validation === 'decimal') {
                     $validations[] = new Decimal;
                 } elseif ($attribute->validation === 'regex') {
-                    $validations[] = 'regex:'.$attribute->regex;
+                    if (Regex::isUsable($attribute->regex)) {
+                        $validations[] = 'regex:'.$attribute->regex;
+                    }
                 } else {
                     $validations[] = $attribute->validation;
                 }

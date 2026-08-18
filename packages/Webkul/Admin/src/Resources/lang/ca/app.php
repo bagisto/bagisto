@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Família d\'Atributs',
             'attribute-product-error' => 'La família s\'utilitza en productes.',
             'create-success' => 'Família creada amb éxit.',
+            'default-delete-error' => 'La família d\'atributs per defecte no es pot suprimir.',
             'delete-failed' => 'S\'ha produït un error en eliminar la família.',
             'delete-success' => 'Família eliminada amb éxit.',
             'family' => 'Família',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'Actualizat exitosament',
                 ],
 
+                'campaign-associate' => 'Aquesta plantilla s\'utilitza en una o més campanyes.',
                 'delete-failed' => ':name Eliminació Fallida',
                 'delete-success' => 'Plantilla eliminada exitosament',
                 'email-template' => 'Plantilla de Correu Electrònic',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Aquest esdeveniment s\'utilitza en una o més campanyes.',
                 'delete-failed' => 'Eliminació de :name fallida',
                 'delete-success' => 'Esdeveniments eliminats amb éxit',
                 'edit-error' => 'No es pot editar l\'esdeveniment',

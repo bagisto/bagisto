@@ -8,5 +8,6 @@ return [
     'decimal' => ':attribute geçerli olmalı.',
     'phone-number' => ':attribute geçerli bir telefon numarası olmalıdır.',
     'postcode' => ':attribute geçerli bir posta kodu olmalıdır',
+    'regex' => ':attribute, sınırlayıcılar dâhil geçerli bir düzenli ifade olmalıdır.',
     'slug' => ':attribute değeri geçerli bir url olmalı.',
 ];

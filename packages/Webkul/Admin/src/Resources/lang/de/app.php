@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Attributfamilie',
             'attribute-product-error' => 'Die Familie wird in Produkten verwendet.',
             'create-success' => 'Familie erfolgreich erstellt.',
+            'default-delete-error' => 'Die Standard-Attributfamilie kann nicht gelöscht werden.',
             'delete-failed' => 'Fehler beim Löschen der Familie aufgetreten.',
             'delete-success' => 'Familie erfolgreich gelöscht.',
             'family' => 'Familie',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'Erfolgreich aktualisiert',
                 ],
 
+                'campaign-associate' => 'Diese Vorlage wird in einer oder mehreren Kampagnen verwendet.',
                 'delete-failed' => ':name konnte nicht gelöscht werden',
                 'delete-success' => 'Vorlage erfolgreich gelöscht',
                 'email-template' => 'E-Mail-Vorlage',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Dieses Ereignis wird in einer oder mehreren Kampagnen verwendet.',
                 'delete-failed' => ':name Löschen fehlgeschlagen',
                 'delete-success' => 'Veranstaltungen erfolgreich gelöscht',
                 'edit-error' => 'Veranstaltung kann nicht bearbeitet werden',

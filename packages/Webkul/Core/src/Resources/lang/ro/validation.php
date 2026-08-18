@@ -8,5 +8,6 @@ return [
     'decimal' => ':attribute trebuie să fie valid.',
     'phone-number' => ':attribute trebuie să fie un număr de telefon valid.',
     'postcode' => ':attribute trebuie să fie un cod poștal valid.',
+    'regex' => 'Câmpul :attribute trebuie să fie o expresie regulată validă, inclusiv delimitatorii.',
     'slug' => ':attribute trebuie să fie un slug valid.',
 ];

@@ -3,6 +3,7 @@
 namespace Webkul\Admin\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Webkul\Core\Rules\CommaSeparatedInteger;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\PhoneNumber;
 use Webkul\Core\Rules\PostCode;
@@ -54,9 +55,10 @@ class ConfigurationForm extends FormRequest
 
         return array_map(function ($rule) {
             return match ($rule) {
+                'comma_separated_integer' => new CommaSeparatedInteger,
+                'decimal' => new Decimal,
                 'phone' => new PhoneNumber,
                 'postcode' => new PostCode,
-                'decimal' => new Decimal,
                 default => $rule,
             };
         }, $validations);

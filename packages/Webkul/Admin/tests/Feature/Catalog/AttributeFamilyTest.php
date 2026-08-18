@@ -536,3 +536,31 @@ it('should dispatch events when deleting a family', function () {
     Event::assertDispatched('catalog.attribute_family.delete.before');
     Event::assertDispatched('catalog.attribute_family.delete.after');
 });
+
+it('should refuse to delete the default attribute family', function () {
+    // Arrange.
+    $attributeFamily = AttributeFamily::query()
+        ->where('code', AttributeFamily::DEFAULT_CODE)
+        ->firstOrFail();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.catalog.families.delete', $attributeFamily->id))
+        ->assertStatus(400)
+        ->assertJsonPath('message', trans('admin::app.catalog.families.default-delete-error'));
+
+    $this->assertDatabaseHas('attribute_families', ['id' => $attributeFamily->id]);
+});
+
+it('should still open the create family screen when the default family is missing', function () {
+    // Arrange.
+    AttributeFamily::query()->where('code', AttributeFamily::DEFAULT_CODE)->delete();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    get(route('admin.catalog.families.create'))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.catalog.families.create.title'));
+});

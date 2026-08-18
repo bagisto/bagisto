@@ -8,5 +8,6 @@ return [
     'decimal' => ':attribute harus berupa angka desimal yang valid.',
     'phone-number' => ':attribute harus berupa nomor telepon yang valid.',
     'postcode' => ':attribute harus berupa kode pos yang valid.',
+    'regex' => ':attribute harus berupa ekspresi reguler yang valid, termasuk pembatasnya.',
     'slug' => ':attribute harus berupa slug yang valid.',
 ];

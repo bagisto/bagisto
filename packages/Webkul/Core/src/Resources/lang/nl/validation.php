@@ -8,5 +8,6 @@ return [
     'decimal' => 'Het veld :attribute moet geldig zijn.',
     'phone-number' => 'Het veld :attribute moet een geldig telefoonnummer zijn.',
     'postcode' => 'Het veld :attribute moet een geldig  postcode zijn.',
+    'regex' => ':attribute moet een geldige reguliere expressie zijn, inclusief scheidingstekens.',
     'slug' => 'Het veld :attribute moet een geldige slug zijn.',
 ];

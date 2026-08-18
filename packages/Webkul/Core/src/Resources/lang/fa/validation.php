@@ -8,5 +8,6 @@ return [
     'decimal' => 'attribute : باید معتبر باشد.',
     'phone-number' => 'attribute : باید شماره تلفن معتبر باشد.',
     'postcode' => ':attribute باید یک کد پستی معتبر باشد.',
+    'regex' => ':attribute باید یک عبارت باقاعده معتبر باشد، به همراه جداکننده‌ها.',
     'slug' => 'attribute : باید اسلاگ معتبر باشد.',
 ];

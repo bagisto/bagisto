@@ -264,7 +264,7 @@ class Configurable extends AbstractType
     {
         parent::copyRelationships($product);
 
-        $attributesToSkip = config('products.skipAttributesOnCopy') ?? [];
+        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
 
         if (
             in_array('super_attributes', $attributesToSkip)

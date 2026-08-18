@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => '属性ファミリー',
             'attribute-product-error' => 'ファミリーは製品で使用されています。',
             'create-success' => 'ファミリーが正常に作成されました。',
+            'default-delete-error' => '既定の属性ファミリーは削除できません。',
             'delete-failed' => 'ファミリーの削除中にエラーが発生しました。',
             'delete-success' => 'ファミリーが正常に削除されました。',
             'family' => 'ファミリー',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => '正常に更新されました',
                 ],
 
+                'campaign-associate' => 'このテンプレートは 1 つ以上のキャンペーンで使用されています。',
                 'delete-failed' => ':name 削除に失敗しました',
                 'delete-success' => 'テンプレートが正常に削除されました',
                 'email-template' => 'メールテンプレート',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'このイベントは 1 つ以上のキャンペーンで使用されています。',
                 'delete-failed' => ':name の削除に失敗しました',
                 'delete-success' => 'イベントが正常に削除されました',
                 'edit-error' => 'イベントは編集できません',

@@ -124,6 +124,14 @@ class TemplateController extends Controller
      */
     public function destroy(int $id): JsonResponse
     {
+        $template = $this->templateRepository->findOrFail($id);
+
+        if ($template->campaigns()->count()) {
+            return new JsonResponse([
+                'message' => trans('admin::app.marketing.communications.templates.campaign-associate'),
+            ], 400);
+        }
+
         try {
             Event::dispatch('marketing.templates.delete.before', $id);
 

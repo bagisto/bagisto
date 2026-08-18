@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Familia de Atributos',
             'attribute-product-error' => 'La familia se utiliza en productos.',
             'create-success' => 'Familia creada con éxito.',
+            'default-delete-error' => 'La familia de atributos predeterminada no se puede eliminar.',
             'delete-failed' => 'Se produjo un error al eliminar la familia.',
             'delete-success' => 'Familia eliminada con éxito.',
             'family' => 'Familia',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'Actualizado exitosamente',
                 ],
 
+                'campaign-associate' => 'Esta plantilla se utiliza en una o más campañas.',
                 'delete-failed' => ':name Eliminación Fallida',
                 'delete-success' => 'Plantilla eliminada exitosamente',
                 'email-template' => 'Plantilla de Correo Electrónico',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Este evento se utiliza en una o más campañas.',
                 'delete-failed' => 'Eliminación de :name Fallida',
                 'delete-success' => 'Eventos Eliminados Exitosamente',
                 'edit-error' => 'No se puede editar el Evento',

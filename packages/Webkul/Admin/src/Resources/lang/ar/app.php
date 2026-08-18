@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'عائلة السمات',
             'attribute-product-error' => 'العائلة مستخدمة في المنتجات.',
             'create-success' => 'تم إنشاء العائلة بنجاح.',
+            'default-delete-error' => 'لا يمكن حذف عائلة السمات الافتراضية.',
             'delete-failed' => 'حدث خطأ أثناء حذف العائلة.',
             'delete-success' => 'تم حذف العائلة بنجاح.',
             'family' => 'العائلة',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'تم التحديث بنجاح',
                 ],
 
+                'campaign-associate' => 'يُستخدم هذا القالب في حملة واحدة أو أكثر.',
                 'delete-failed' => 'فشل حذف :name',
                 'delete-success' => 'تم حذف القالب بنجاح',
                 'email-template' => 'قالب البريد الإلكتروني',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'يُستخدم هذا الحدث في حملة واحدة أو أكثر.',
                 'delete-failed' => 'فشل حذف :name',
                 'delete-success' => 'تم حذف الأحداث بنجاح',
                 'edit-error' => 'لا يمكن تعديل الحدث',

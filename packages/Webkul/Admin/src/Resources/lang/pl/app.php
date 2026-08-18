@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Zestaw atrybutów',
             'attribute-product-error' => 'Operacja niedozwolona. Ten zestaw atrybutów jest przypisany do istniejących produktów.',
             'create-success' => 'Pomyślnie utworzono zestaw atrybutów.',
+            'default-delete-error' => 'Domyślnej rodziny atrybutów nie można usunąć.',
             'delete-failed' => 'Wystąpił błąd podczas usuwania zestawu atrybutów.',
             'delete-success' => 'Pomyślnie usunięto zestaw atrybutów.',
             'family' => 'Zestaw atrybutów',
@@ -2529,6 +2530,7 @@ return [
                     'update-success' => 'Zaktualizowano pomyślnie',
                 ],
 
+                'campaign-associate' => 'Ten szablon jest używany w co najmniej jednej kampanii.',
                 'delete-failed' => ':name Usunięcie nie powiodło się',
                 'delete-success' => 'Szablon usunięty pomyślnie',
                 'email-template' => 'Szablon emaila',
@@ -2632,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'To wydarzenie jest używane w co najmniej jednej kampanii.',
                 'delete-failed' => 'Usuwanie :name nie powiodło się',
                 'delete-success' => 'Wydarzenia usunięte pomyślnie',
                 'edit-error' => 'Nie można edytować wydarzenia',
