@@ -49,7 +49,7 @@ export class CheckoutHelper extends BasePage {
     }
 
     get shippingEmail() {
-        return this.page.getByRole("textbox", { name: "email@example.com" });
+        return this.page.locator('input[name="billing\\.email"]');
     }
 
     get streetAddress() {
@@ -245,7 +245,9 @@ export class CheckoutHelper extends BasePage {
 
     get bookingDialogOrderIdText() {
         return this.page
-            .locator("div:has(> div.text-lg.font-semibold) > div.text-xs.text-gray-500")
+            .locator(
+                "div:has(> div.text-lg.font-semibold) > div.text-xs.text-gray-500",
+            )
             .first();
     }
 
