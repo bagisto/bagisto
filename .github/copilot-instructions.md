@@ -156,6 +156,7 @@ Or manually create:
 - Follow Laravel conventions
 - Use type hints where possible
 - Write meaningful variable/method names
+- **No comments inside method bodies.** Keep docblocks above classes, methods, and properties — nothing else. Do not narrate what a statement does or why it changed; that belongs in the commit message. Applies to `//` and `/** */` alike, in PHP, Blade, JS, and Vue. A line that needs prose to be understood should become a named method instead.
 
 ## Testing
 
@@ -182,7 +183,7 @@ cd packages/Webkul/Shop && npx playwright test --config=tests/e2e-pw/playwright.
 Tests require a running Laravel server (`php artisan serve`) and seeded database.
 
 ### Translations
-When adding new translation keys, provide translations for **all 21 locales** in the package's `Resources/lang/` directory. Verify with:
+When adding new translation keys, provide translations for **all 22 locales** in the package's `Resources/lang/` directory. Verify with:
 ```bash
 php artisan bagisto:translations:check
 ```
