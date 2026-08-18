@@ -4,6 +4,7 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;
+use Webkul\Core\Models\Channel;
 use Webkul\Customer\Models\Customer;
 use Webkul\Customer\Models\CustomerAddress;
 use Webkul\Faker\Helpers\Product as ProductFaker;
@@ -477,4 +478,72 @@ it('should fails the validation errors certain inputs not provided', function ()
     // Arrange.
     postJson(route('shop.customers.forgot_password.store'))
         ->assertJsonValidationErrorFor('email');
+});
+
+it('should update the customer profile when the same email exists in a different channel', function () {
+    // Arrange.
+    $otherChannel = Channel::factory()->create();
+
+    $sharedEmail = fake()->safeEmail();
+
+    Customer::factory()->create([
+        'email' => $sharedEmail,
+        'channel_id' => $otherChannel->id,
+    ]);
+
+    $customer = Customer::factory()->create([
+        'email' => $sharedEmail,
+        'channel_id' => 1,
+    ]);
+
+    $this->loginAsCustomer($customer);
+
+    // Act and Assert.
+    postJson(route('shop.customers.account.profile.update'), [
+        'first_name' => $customer->first_name,
+        'last_name' => $customer->last_name,
+        'gender' => $customer->gender,
+        'email' => $sharedEmail,
+        'phone' => fake()->e164PhoneNumber(),
+        'date_of_birth' => now()->subYear(20)->toDateString(),
+    ])
+        ->assertRedirect(route('shop.customers.account.profile.index'));
+
+    $this->assertModelWise([
+        Customer::class => [
+            [
+                'id' => $customer->id,
+                'email' => $sharedEmail,
+                'channel_id' => 1,
+            ],
+        ],
+    ]);
+});
+
+it('should fail the validation when the email is already taken within the same channel', function () {
+    // Arrange.
+    $sharedEmail = fake()->safeEmail();
+
+    Customer::factory()->create([
+        'email' => $sharedEmail,
+        'channel_id' => 1,
+    ]);
+
+    $customer = Customer::factory()->create([
+        'channel_id' => 1,
+    ]);
+
+    $this->loginAsCustomer($customer);
+
+    // Act and Assert.
+    postJson(route('shop.customers.account.profile.update'), [
+        'first_name' => $customer->first_name,
+        'last_name' => $customer->last_name,
+        'gender' => $customer->gender,
+        'email' => $sharedEmail,
+        'phone' => fake()->e164PhoneNumber(),
+        'date_of_birth' => now()->subYear(20)->toDateString(),
+    ])
+        ->assertJsonValidationErrorFor('email')
+        ->assertUnprocessable();
 });
