@@ -63,6 +63,11 @@ class Importer extends AbstractImporter
     protected array $identifiers = [];
 
     /**
+     * Tax rates can be validated in windows — see ValidatesInChunks.
+     */
+    protected bool $chunkedValidationSupported = true;
+
+    /**
      * Create a new helper instance.
      *
      * @return void
@@ -88,13 +93,56 @@ class Importer extends AbstractImporter
     }
 
     /**
-     * Validate data.
+     * Load the existing tax rates, which every row is checked against.
      */
-    public function validateData(): void
+    protected function prepareForValidation(): void
     {
         $this->taxRateStorage->init();
+    }
 
-        parent::validateData();
+    /*
+    |--------------------------------------------------------------------------
+    | Chunked / queued validation
+    |--------------------------------------------------------------------------
+    */
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function captureValidationState(): array
+    {
+        return [
+            'identifiers' => $this->identifiers,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function restoreValidationState(array $state): void
+    {
+        $this->identifiers = $state['identifiers'] ?? [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function fileUniqueColumns(): array
+    {
+        return [
+            'identifier' => self::ERROR_DUPLICATE_IDENTIFIER,
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function duplicateValueMessage(string $column, string $value, array $context): ?string
+    {
+        return sprintf(
+            trans($this->messages[self::ERROR_DUPLICATE_IDENTIFIER]),
+            $value
+        );
     }
 
     /**

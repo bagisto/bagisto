@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Transacció no vàlida. Si us plau, intenteu-ho de nou.',
         'payment-success' => 'El vostre pagament va ser exitós. La vostra comanda ha estat col·locada.',
         'order-creation-failed' => 'Hi va haver un problema en crear la vostra comanda després del pagament. Si us plau, poseu-vos en contacte amb l\'equip d\'assistència.',
+        'supported-currency-error' => 'La moneda :currency no és compatible. Monedes compatibles: :supportedCurrencies.',
     ],
 ];

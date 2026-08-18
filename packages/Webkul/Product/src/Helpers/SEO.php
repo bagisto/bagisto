@@ -20,7 +20,7 @@ class SEO
             '@context' => 'https://schema.org/',
             '@type' => 'Product',
             'name' => $product->name,
-            'description' => $product->description,
+            'description' => htmlspecialchars(trim(strip_tags($product->description))),
             'url' => route('shop.product_or_category.index', $product->url_key),
         ];
 

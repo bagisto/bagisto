@@ -86,6 +86,7 @@
                                 <a :href="'{{ route('shop.product_or_category.index', ':slug') }}'.replace(':slug', item.product_url_key)">
                                     <img
                                         :src="item.base_image.small_image_url"
+                                        :alt="item.base_image.alt"
                                         class="max-w-28 max-h-28 rounded-xl max-md:max-h-20 max-md:max-w-[76px]"
                                     />
                                 </a>

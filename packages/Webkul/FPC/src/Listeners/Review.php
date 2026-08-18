@@ -28,7 +28,7 @@ class Review
     /**
      * Before review is deleted
      *
-     * @param  \Webkul\Product\Contracts\Review  $review
+     * @param  int  $reviewId
      * @return void
      */
     public function beforeDelete($reviewId)

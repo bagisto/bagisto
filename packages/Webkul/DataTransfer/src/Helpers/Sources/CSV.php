@@ -16,7 +16,20 @@ class CSV extends AbstractSource
     {
         $this->reader = fopen(Storage::disk('private')->path($this->filePath), 'r');
 
-        $this->columnNames = fgetcsv($this->reader, 4096, $this->delimiter);
+        if ($this->reader === false) {
+            throw new \RuntimeException("Unable to read the file: '{$this->filePath}'");
+        }
+
+        $columnNames = fgetcsv($this->reader, 4096, $this->delimiter);
+
+        /**
+         * An empty file has no header row to read, which `fgetcsv` reports by returning false.
+         */
+        if ($columnNames === false) {
+            throw new \RuntimeException("The file carries no header row: '{$this->filePath}'");
+        }
+
+        $this->columnNames = $columnNames;
 
         $this->totalColumns = count($this->columnNames);
     }

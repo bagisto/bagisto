@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'অবৈধ লেনদেন। আবার চেষ্টা করুন।',
         'payment-success' => 'আপনার পেমেন্ট সফল হয়েছে। আপনার অর্ডার স্থাপন করা হয়েছে।',
         'order-creation-failed' => 'পেমেন্টের পরে আপনার অর্ডার তৈরি করতে সমস্যা ছিল। অনুগ্রহ করে সহায়তার সাথে যোগাযোগ করুন।',
+        'supported-currency-error' => 'মুদ্রা :currency সমর্থিত নয়। সমর্থিত মুদ্রাসমূহ: :supportedCurrencies.',
     ],
 ];

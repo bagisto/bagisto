@@ -2,6 +2,94 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Added the PayGlocal payment gateway. Customers pay on PayGlocal's hosted checkout and return through a signed token, the outcome is confirmed with PayGlocal before an order is placed, and a webhook settles the payment if the customer never comes back.
+
+- Fixed customer and cart reporting counting all guests as a single shopper, which understated unique customers and piled every guest's spend onto one row of the "most sales" and "most orders" listings.
+
+- Fixed resending an EU withdrawal confirmation answering the admin in the customer's language, because the locale switched for the email was still in place when the message was built.
+
+- Locales and currencies are now listed in one place, shared by the console and web installers, the seeders and the translation checker, so adding either takes one entry rather than five.
+
+- Fixed the Bahraini Dinar being seeded with the text "BHD" in place of its symbol, which a repeated entry in the currency list had been overwriting.
+
+- Fixed PayU and PhonePe starting a payment in any currency, when both settle only in Indian Rupees — a store on a currency without two decimal places was charged a hundred times over. Either now refuses a cart it cannot settle, so a store on another currency will find them declining at checkout rather than taking the wrong amount.
+
+- Added the missing Romanian translations for PhonePe.
+
+- Fixed the admin product datagrid ignoring search synonyms while the mega search honoured them, so the same word found different products in the two places.
+
+- Fixed the mega search leaving you on an empty tab when another tab had results, which read as nothing being found. It now opens the first tab that matched.
+
+- Products that keep no stock are now listed as "Stock Disabled" rather than "Out of Stock", read from the product's own manage-inventory setting rather than assumed from its type.
+
+- The admin product datagrid no longer joins and groups over five tables to draw a page. Quantity, image count, base image, category names, family name and the manage-inventory flag are kept on the flat table and refreshed as their sources change — including on refunds, order cancellations, imports, category and family renames, and inventory-source deletion, which previously left the grid showing figures no longer true.
+
+- Fixed the Category column showing one arbitrary category for a product filed under several; it now lists them all.
+
+- Fixed a full Elasticsearch reindex leaving behind documents whose product had been deleted. The admin grid pages on the count Elasticsearch reports, so those documents claimed a total the grid could not fill and scattered blank pages through the listing.
+
+- Fixed sorting the admin product datagrid by SKU or quantity failing outright in Elasticsearch mode, and sorting on a column an older index has never held now leaves the order alone instead of erroring.
+
+- Fixed the debug bar's collector keeping every query it saw, complete with its bindings, for as long as the process lived — and attaching itself even on the console, where there is no bar to draw. Any long-running process paid for it: an indexer or a queue worker grew by roughly half a megabyte for every thousand statements until it was killed. It is now attached only to a web request that will actually render the bar.
+
+- Reduced what a full reindex asks of the database. The flat indexer was re-reading the channel list, the attribute values and the variants once per product, discarding the copies it had already eager-loaded, and refreshing its derived columns a product at a time — some ten thousand statements on a ten thousand product catalogue that are now a hundred.
+
+- Fixed an import of an unreadable file answering with the raw PHP error, which named an internal class and property, and a failure elsewhere in the run answering with the storage path of the uploaded file. Both now say that the import could not be processed and ask for the file to be checked, with the detail kept to the log. A file with no header row was the one that told on itself the loudest, as it failed on a type error the reader was not catching.
+
+- Added a way back into an import that is still running. The action that opens an import was drawn with an icon the admin theme does not carry, so nothing was rendered for it and the screen showing progress could not be reached again once left; it now reads "View Progress" against a running import and opens where it left off.
+
+- Fixed a product import failing to create anything once the catalog listing began keeping an image count, which an import writes for itself and never has to hand.
+
+- Fixed the third level of the admin menu never being reachable from a hover menu. Collapsing the sidebar, or hovering any section other than the one you are in, opens the section beside it — and that panel was drawing the group headings alone, so Tax Rates, Cart Rules, Imports and the rest of the pages filed under a heading could only be reached by first navigating into their section. The panel now goes the whole way down, and scrolls within the window rather than running off the bottom of it when a section is long.
+
+- Fixed Help & Resources missing from the admin menu on a phone or tablet. It sat in the sidebar, which is hidden below large screens, and was never added to the drawer that replaces it.
+
+- #11414 [fixed] - Fixed the product listing keeping the image that was uploaded first after the images had been reordered on the product, rather than the one now sitting at the front. The listing went by the order the images were added instead of the order they were arranged in.
+
+- #11413 [fixed] - Fixed deleting several RMA reasons, rules or custom fields at once reporting a failure when one of them had already been deleted elsewhere — while quietly deleting the ones listed before it. Whatever is still there is now deleted and the rest passed over, and the reply says how many of each. Custom fields also went without any check on what was submitted, which they now have in common with the rest.
+
+- #11412 [fixed] - Fixed the EU withdrawals listing breaking when filtered by customer email or status, or when searched, leaving a list that only a reload recovered. Both columns are named the same on the order the withdrawal is joined to, so the database could not tell which was meant and refused the query.
+
+## **v2.4.9 (5th of August 2026)** - *Release*
+
+- Security fixes.
+
+- Enhanced Data Transfer imports. Saving an import now runs it through to the end on its own — validate, fetch images, create, link, index — with a stepper and live progress for each phase, instead of a separate click per phase. Validation runs in windows, either browser-driven or dispatched across the queue workers, so a large file no longer has to be validated in one request. Product images can now come from links in the sheet, a ZIP uploaded with the import, or a directory on the server, saved on the import so reopening it restores the choice; links are fetched once each in a phase of their own before any row is written. The chosen image source is validated against the file, so a mismatch is reported during validation rather than silently importing every product without images. Also fixed a queued import re-dispatching its whole job chain on every poll, which ran the same rows two or three times over — booking the repeats as updates and deadlocking against itself — and fixed the runs that could stall for good in the image or create phase, which now complete what they can and report the batches that did not.
+
+- Made the admin datagrid header consistent between the default grid and customized ones, and gave customized grids a proper card layout on small screens — the column header is dropped there, since filter and sort are reachable from the bar fixed to the foot of the screen. Loading placeholders were rebuilt to match the grid they stand in for, on both desktop and mobile, so the layout no longer shifts when the rows arrive.
+
+- Fixed the admin product datagrid and storefront search failing when an Elasticsearch index is missing, by passing `ignore_unavailable` on the searches that address an index by name.
+
+- Fixed `top-left`, `top-right` and the fallback position of the admin dropdown throwing at runtime — two adjacent template literals with no comma between them parse as a tagged template — and made the `fit-toggle` option apply to every position rather than only `bottom-left`.
+
+- Fixed the WebMCP tool declarations rendering at the foot of every storefront page. The forms are read by agents rather than drawn, and only their submit buttons were hidden, so the two carrying a text input showed it; the whole block is hidden now, and the tools are still discovered exactly as before.
+
+- Fixed the social-login icons sitting flush against the Sign In button on the customer login page. The partial is injected through an event, so it carries its own spacing rather than relying on whatever it lands under.
+
+- Fixed the demo product descriptions showing `\r` and `\n` as text. The escapes had been written into the seed data as literal characters rather than line breaks; the paragraphs they were meant to mark are now real ones.
+
+- Replaced the GDPR icon in the admin configuration listing, which was drawn as a leaf rather than a shield.
+
+- Turned the speculation rules off by default. They have the browser fetch pages nobody has opened yet, which costs bandwidth and shows up as traffic on pages that were never visited, so a store now opts in.
+
+- Fixed an inactive cart still being assigned from the session.
+
+- Reworked the admin menu to support three levels, and tidied the category and role trees.
+
+- Fixed assorted storefront UI issues on the product view and sub-category pages, back navigation on the RMA pages on mobile, and the position of the rule buttons on the cart-rule create page.
+
+- Removed the operator selector from multiselect and checkbox conditions on cart rules, where it had no meaning.
+
+- Refined Playwright testcases.
+
+- #11400 [fixed] - Sanitized the product description in the JSON-LD rich-snippet output, which previously emitted it unescaped.
+
+- #11387 [fixed] - Fixed the demo products being absent from the storefront when the install locale did not include English, while still listed in the admin. The seeder wrote each product's non-translatable attributes — status, visibility, price, sku and the variant options — only on the English pass, so choosing any other locale on its own left those values unwritten and every product failed the storefront's status and visibility checks.
+
+- #11380 [fixed] - Fixed product duplication not carrying the customizable options, their labels, or their prices over to the copy. The label is a translated value held in its own table, so it needs replicating alongside the option rather than travelling with it — every locale's label is now copied.
+
 ## **v2.4.8 (8th of July 2026)** - *Release*
 
 - Security fixes.

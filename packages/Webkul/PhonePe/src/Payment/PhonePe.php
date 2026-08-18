@@ -18,6 +18,35 @@ class PhonePe extends Payment
     protected $code = 'phonepe';
 
     /**
+     * Currencies PhonePe settles in.
+     *
+     * The amount is sent multiplied by a hundred, into paise, which is only the right thing
+     * to do for a currency with two decimal places. A zero decimal currency sent that way is
+     * charged a hundred times over, so the payment is refused rather than sent.
+     *
+     * @var string[]
+     */
+    protected $supportedCurrencies = ['INR'];
+
+    /**
+     * Get the currencies PhonePe settles in.
+     *
+     * @return string[]
+     */
+    public function getSupportedCurrencies(): array
+    {
+        return $this->supportedCurrencies;
+    }
+
+    /**
+     * Check whether PhonePe settles in the given currency.
+     */
+    public function isCurrencySupported(string $currency): bool
+    {
+        return in_array(strtoupper($currency), $this->supportedCurrencies);
+    }
+
+    /**
      * Get redirect URL for PhonePe payment.
      */
     public function getRedirectUrl(): string

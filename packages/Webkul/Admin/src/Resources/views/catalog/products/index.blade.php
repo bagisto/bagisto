@@ -1,3 +1,22 @@
+@php
+    $types = collect(config('product_types'))->map(fn ($type) => app($type['class']));
+
+    // A composite keeps its stock on its children, so it has no count of its own to show.
+    $stockOnChildrenTypes = $types->filter->isComposite()->keys()->all();
+
+    // A type that keeps stock at all is left to the per-record `manage_stock` instead.
+    $stockDisabledTypes = $types
+        ->reject->isComposite()
+        ->reject->isInventoryManageable()
+        ->keys()
+        ->all();
+
+    /**
+     * Render type keys as a JavaScript array literal.
+     */
+    $asJsArray = fn (array $types) => "['".implode("', '", $types)."']";
+@endphp
+
 <x-admin::layouts>
     <x-slot:title>
         @lang('admin::app.catalog.products.index.title')
@@ -50,11 +69,16 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.head
+                    :isMultiRow="true"
+                    template="minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)"
+                    :groups="[3, 3, 3]"
+                    :imageGroup="1"
+                />
             </template>
 
             <template v-else>
-                <div class="row grid gap-2 md:grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b px-4 py-2.5 dark:border-gray-800">
+                <div class="row datagrid-head datagrid-head-cards grid grid-cols-[2fr_1fr_1fr] grid-rows-1">
                     <div
                         class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['name', 'sku', 'attribute_family'], ['base_image', 'price', 'quantity', 'product_id'], ['status', 'category_name', 'type']]"
@@ -124,7 +148,14 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.body
+                    :isMultiRow="true"
+                    template="minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)"
+                    :groups="[3, 3, 3]"
+                    :imageGroup="1"
+                    :mobileLines="9"
+                    :mobileImage="true"
+                />
             </template>
 
             <template v-else>
@@ -206,9 +237,17 @@
                                     </p>
 
                                     <div>
-                                        <div v-if="['configurable', 'bundle', 'grouped' , 'booking'].includes(record.type)">
+                                        <div v-if="{!! $asJsArray($stockOnChildrenTypes) !!}.includes(record.type)">
                                             <p class="text-xs text-gray-600 dark:text-gray-300 sm:text-sm">
                                                 <span class="text-red-600">N/A</span>
+                                            </p>
+                                        </div>
+
+                                        <div v-else-if="{!! $asJsArray($stockDisabledTypes) !!}.includes(record.type) || ! Number(record.manage_stock)">
+                                            <p class="text-xs text-gray-600 dark:text-gray-300 sm:text-sm">
+                                                <span class="text-gray-500 dark:text-gray-400">
+                                                    @lang('admin::app.catalog.products.index.datagrid.stock-disabled')
+                                                </span>
                                             </p>
                                         </div>
 
@@ -318,9 +357,17 @@
                                 </p>
 
                                 <!-- Parent Product Quantity -->
-                                <div v-if="['configurable', 'bundle', 'grouped' , 'booking'].includes(record.type)">
+                                <div v-if="{!! $asJsArray($stockOnChildrenTypes) !!}.includes(record.type)">
                                     <p class="text-gray-600 dark:text-gray-300">
                                         <span class="text-red-600">N/A</span>
+                                    </p>
+                                </div>
+
+                                <div v-else-if="{!! $asJsArray($stockDisabledTypes) !!}.includes(record.type) || ! Number(record.manage_stock)">
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        <span class="text-gray-500 dark:text-gray-400">
+                                            @lang('admin::app.catalog.products.index.datagrid.stock-disabled')
+                                        </span>
                                     </p>
                                 </div>
 

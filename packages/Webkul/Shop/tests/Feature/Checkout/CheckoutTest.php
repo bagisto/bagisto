@@ -4108,7 +4108,7 @@ it('should not return the cash on delivery payment method if product is download
     ])
         ->assertOk()
         ->assertJsonPath('redirect', false)
-        ->assertJsonCount(7, 'data.payment_methods')
+        ->assertJsonCount(8, 'data.payment_methods')
         ->assertDontSeeText('cashondelivery');
 });
 
@@ -4311,7 +4311,7 @@ it('should not return the cash on delivery payment method if product is virtual'
     ])
         ->assertOk()
         ->assertJsonPath('redirect', false)
-        ->assertJsonCount(7, 'data.payment_methods')
+        ->assertJsonCount(8, 'data.payment_methods')
         ->assertDontSeeText('cashondelivery');
 });
 

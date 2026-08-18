@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'Платеж не прошел. Пожалуйста, попробуйте еще раз.',
         'payment-success' => 'Платеж успешно завершен!',
         'provide-credentials' => 'Пожалуйста, настройте ключ продавца PayU и Salt в панели администратора.',
+        'supported-currency-error' => 'Валюта :currency не поддерживается. Поддерживаемые валюты: :supportedCurrencies.',
     ],
 ];

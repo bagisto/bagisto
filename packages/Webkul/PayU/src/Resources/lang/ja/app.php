@@ -23,5 +23,6 @@ return [
         'payment-failed' => '支払いに失敗しました。もう一度お試しください。',
         'payment-success' => '支払いが正常に完了しました！',
         'provide-credentials' => '管理パネルでPayUマーチャントキーとSaltを設定してください。',
+        'supported-currency-error' => '通貨 :currency はサポートされていません。サポートされている通貨: :supportedCurrencies.',
     ],
 ];

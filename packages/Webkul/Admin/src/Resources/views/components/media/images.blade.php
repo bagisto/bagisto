@@ -14,13 +14,17 @@
     'showPlaceholders' => false,
     'uploadedImages'   => [],
     'width'            => '120px',
-    'height'           => '120px'
+    'height'           => '120px',
+    'enableSeo'        => false,
+    'metaName'         => '',
 ])
 
 <v-media-images
     name="{{ $name }}"
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
+    v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
+    meta-name="{{ $metaName }}"
     :uploaded-images='{{ json_encode($uploadedImages) }}'
     width="{{ $width }}"
     height="{{ $height }}"
@@ -116,6 +120,8 @@
                             :image="element"
                             :width="width"
                             :height="height"
+                            :enable-seo="enableSeo"
+                            :meta-name="metaName"
                             @onRemove="remove($event)"
                         >
                         </v-media-image-item>
@@ -465,7 +471,9 @@
 
             <div class="invisible absolute bottom-0 top-0 flex w-full flex-col justify-between bg-white p-3 opacity-80 transition-all group-hover:visible dark:bg-gray-900">
                 <!-- Image Name -->
-                <p class="break-all text-xs font-semibold text-gray-600 dark:text-gray-300"></p>
+                <p class="break-all text-xs font-semibold text-gray-600 dark:text-gray-300">
+                    @{{ image.file_name }}
+                </p>
 
                 <!-- Actions -->
                 <div class="flex justify-between">
@@ -474,8 +482,16 @@
                         @click="remove"
                     ></span>
 
+                    <!-- Opens the seo drawer, where replacing the file is one of the options -->
+                    <span
+                        class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
+                        v-if="enableSeo"
+                        @click="openSeoDrawer"
+                    ></span>
+
                     <label
                         class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl hover:bg-gray-200 dark:hover:bg-gray-800"
+                        v-else
                         :for="$.uid + '_imageInput_' + index"
                     ></label>
 
@@ -487,7 +503,7 @@
 
                     <input
                         type="file"
-                        :name="name + '[]'"
+                        :name="enableSeo ? name + '[' + image.id + ']' : name + '[]'"
                         class="hidden"
                         accept="image/*"
                         :id="$.uid + '_imageInput_' + index"
@@ -622,6 +638,16 @@
                     default: '120px'
                 },
 
+                enableSeo: {
+                    type: Boolean,
+                    default: false,
+                },
+
+                metaName: {
+                    type: String,
+                    default: '',
+                },
+
                 errors: {
                     type: Object,
                     default: () => {}
@@ -631,6 +657,8 @@
             data() {
                 return {
                     images: [],
+
+                    newImageIndex: 0,
 
                     placeholders: [
                         {
@@ -831,6 +859,16 @@
                     this.$nextTick(() => this.processCropQueue());
                 },
 
+                newImage(file, fileName) {
+                    return {
+                        id: 'image_' + this.newImageIndex++,
+                        url: '',
+                        alt_text: '',
+                        file_name: fileName,
+                        file: file,
+                    };
+                },
+
                 remove(image) {
                     let index = this.images.indexOf(image);
 
@@ -861,11 +899,7 @@
 
                 apply() {
                     this.selectedAIImages.forEach((image, index) => {
-                        this.images.push({
-                            id: 'image_' + this.images.length,
-                            url: '',
-                            file: this.getBase64ToFile(image.url, 'temp.png')
-                        });
+                        this.images.push(this.newImage(this.getBase64ToFile(image.url, 'temp.png'), ''));
                     });
 
                     this.$refs.magicAIImageModal.close();
@@ -910,7 +944,7 @@
         app.component('v-media-image-item', {
             template: '#v-media-image-item-template',
 
-            props: ['index', 'image', 'name', 'width', 'height'],
+            props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName'],
 
             data() {
                 return {
@@ -932,6 +966,10 @@
             },
 
             methods: {
+                openSeoDrawer() {
+                    this.$refs.seoDrawer.open();
+                },
+
                 edit() {
                     let imageInput = this.$refs[this.$.uid + '_imageInput_' + this.index];
 

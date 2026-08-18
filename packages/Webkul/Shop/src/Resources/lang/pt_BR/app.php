@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'Downloads Restantes',
                 'status' => 'Status',
                 'title' => 'Título',
+                'unlimited' => 'Ilimitado',
             ],
 
             'wishlist' => [
@@ -1760,7 +1761,9 @@ return [
 
         'response' => [
             'already-cancel' => 'O status do RMA já foi cancelado.',
+            'cancel-not-allowed' => 'Não é permitido cancelar esta solicitação de RMA.',
             'cancel-success' => 'Status de RMA cancelado com sucesso.',
+            'close-not-allowed' => 'Não é permitido fechar esta solicitação de RMA.',
             'create-success' => 'Solicitação criada com sucesso.',
             'creation-error' => 'O status do RMA não pode ser atualizado, pois a fatura para este pedido não foi criada.',
             'invalid-item' => 'O item do pedido selecionado é inválido.',

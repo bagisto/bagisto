@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'עסקה לא חוקית. אנא נסו שוב.',
         'payment-success' => 'התשלום שלך היה מוצלח. הזמנתך הוצבה.',
         'order-creation-failed' => 'הייתה בעיה ביצירת הזמנתך לאחר התשלום. אנא צור קשר עם התמיכה.',
+        'supported-currency-error' => 'המטבע :currency אינו נתמך. מטבעות נתמכים: :supportedCurrencies.',
     ],
 ];

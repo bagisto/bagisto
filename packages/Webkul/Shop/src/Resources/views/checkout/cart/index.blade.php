@@ -30,7 +30,7 @@
                 >
                     <img
                         src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-                        alt="{{ config('app.name') }}"
+                        alt="{{ core()->getCurrentChannel()->logo_alt ?: config('app.name') }}"
                         width="131"
                         height="29"
                     >
@@ -200,7 +200,7 @@
                                             <x-shop::media.images.lazy
                                                 class="h-[110px] max-w-[110px] rounded-xl max-md:h-20 max-md:max-w-20"
                                                 ::src="item.base_image.small_image_url"
-                                                ::alt="item.name"
+                                                ::alt="item.base_image.alt"
                                                 width="110"
                                                 height="110"
                                                 ::key="item.id"

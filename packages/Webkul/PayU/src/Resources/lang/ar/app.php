@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'فشل الدفع. يرجى المحاولة مرة أخرى.',
         'payment-success' => 'تم الدفع بنجاح!',
         'provide-credentials' => 'يرجى تكوين مفتاح التاجر وSalt في لوحة الإدارة.',
+        'supported-currency-error' => 'العملة :currency غير مدعومة. العملات المدعومة هي: :supportedCurrencies.',
     ],
 ];

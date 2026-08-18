@@ -5,6 +5,7 @@ namespace Webkul\Shop\DataGrids\RMA;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\DB;
 use Webkul\DataGrid\DataGrid;
+use Webkul\RMA\Repositories\RMARepository;
 use Webkul\RMA\Repositories\RMAStatusRepository;
 
 class RMADataGrid extends DataGrid
@@ -15,6 +16,7 @@ class RMADataGrid extends DataGrid
      * @return void
      */
     public function __construct(
+        protected RMARepository $rmaRepository,
         protected RMAStatusRepository $rmaStatusRepository,
     ) {}
 
@@ -132,6 +134,9 @@ class RMADataGrid extends DataGrid
             'title' => trans('shop::app.rma.customer-rma-index.cancel'),
             'icon' => 'icon-cancel',
             'method' => 'POST',
+            'condition' => function ($row) {
+                return $this->rmaRepository->canCancelRma($row);
+            },
             'url' => function ($row) {
                 return route('shop.customers.account.rma.cancel', $row->id);
             },

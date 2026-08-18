@@ -15,7 +15,7 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
 
     public $timestamps = false;
 
-    public $translatedAttributes = ['label'];
+    public $translatedAttributes = ['label', 'swatch_alt'];
 
     protected $fillable = [
         'admin_name',
@@ -31,6 +31,7 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
      */
     protected $appends = [
         'swatch_value_url',
+        'swatch_file_name',
     ];
 
     /**
@@ -62,6 +63,19 @@ class AttributeOption extends TranslatableModel implements AttributeOptionContra
     public function getSwatchValueUrlAttribute()
     {
         return $this->swatch_value_url();
+    }
+
+    /**
+     * Get the swatch file name, without the directory and the extension. Empty for
+     * color and text swatches, which hold a plain value rather than a path.
+     */
+    public function getSwatchFileNameAttribute(): string
+    {
+        if ($this->attribute?->swatch_type !== 'image') {
+            return '';
+        }
+
+        return pathinfo((string) $this->swatch_value, PATHINFO_FILENAME);
     }
 
     /**

@@ -52,13 +52,16 @@ class GDPRController extends Controller
     {
         $customer = auth()->guard('customer')->user();
 
-        $params = request()->all() + [
+        $data = $this->validate(request(), [
+            'type' => 'required|in:update,delete',
+            'message' => 'required|string|max:500',
+        ]);
+
+        $params = array_merge($data, [
             'status' => 'pending',
             'customer_id' => $customer->id,
-            'customer_name' => $customer->first_name.' '.$customer->last_name,
             'email' => $customer->email,
-            'message' => request()->get(request()->message),
-        ];
+        ]);
 
         Event::dispatch('customer.account.gdpr-request.create.before');
 
