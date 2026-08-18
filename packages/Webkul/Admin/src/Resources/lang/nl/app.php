@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Attribuutfamilie',
             'attribute-product-error' => 'Familie wordt gebruikt in producten.',
             'create-success' => 'Familie succesvol aangemaakt.',
+            'default-delete-error' => 'De standaard attributenfamilie kan niet worden verwijderd.',
             'delete-failed' => 'Fout opgetreden bij het verwijderen van de familie.',
             'delete-success' => 'Familie succesvol verwijderd.',
             'family' => 'Familie',

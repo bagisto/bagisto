@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'අභියෝජිත පවා',
             'attribute-product-error' => 'පවා නිෂ්පාදන්හි භාණ්ඩ වෙත භාවිතා කරන ලදි.',
             'create-success' => 'පවා සාර්ථකව සාදන ලදි.',
+            'default-delete-error' => 'පෙරනිමි ගුණාංග පවුල මකා දැමිය නොහැක.',
             'delete-failed' => 'පවා මකා දමන්නේ සාර්ථකව කියා දමනු ලදි.',
             'delete-success' => 'පවා සාර්ථකව මකා දමන ලදි.',
             'family' => 'පවා',

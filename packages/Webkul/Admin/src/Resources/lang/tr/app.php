@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Özellik Ailesi',
             'attribute-product-error' => 'Aile ürünlerde kullanılıyor.',
             'create-success' => 'Aile başarıyla oluşturuldu.',
+            'default-delete-error' => 'Varsayılan öznitelik ailesi silinemez.',
             'delete-failed' => 'Aile silme işlemi sırasında bir hata oluştu.',
             'delete-success' => 'Aile başarıyla silindi.',
             'family' => 'Aile',

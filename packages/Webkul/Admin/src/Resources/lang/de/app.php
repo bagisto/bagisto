@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Attributfamilie',
             'attribute-product-error' => 'Die Familie wird in Produkten verwendet.',
             'create-success' => 'Familie erfolgreich erstellt.',
+            'default-delete-error' => 'Die Standard-Attributfamilie kann nicht gelöscht werden.',
             'delete-failed' => 'Fehler beim Löschen der Familie aufgetreten.',
             'delete-success' => 'Familie erfolgreich gelöscht.',
             'family' => 'Familie',

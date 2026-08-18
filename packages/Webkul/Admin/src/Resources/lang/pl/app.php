@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Zestaw atrybutów',
             'attribute-product-error' => 'Operacja niedozwolona. Ten zestaw atrybutów jest przypisany do istniejących produktów.',
             'create-success' => 'Pomyślnie utworzono zestaw atrybutów.',
+            'default-delete-error' => 'Domyślnej rodziny atrybutów nie można usunąć.',
             'delete-failed' => 'Wystąpił błąd podczas usuwania zestawu atrybutów.',
             'delete-success' => 'Pomyślnie usunięto zestaw atrybutów.',
             'family' => 'Zestaw atrybutów',

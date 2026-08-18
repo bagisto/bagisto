@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'خانواده ویژگی',
             'attribute-product-error' => 'این خانواده در محصولات استفاده شده است.',
             'create-success' => 'خانواده با موفقیت ایجاد شد.',
+            'default-delete-error' => 'خانواده ویژگی پیش‌فرض قابل حذف نیست.',
             'delete-failed' => 'خطا در حذف خانواده.',
             'delete-success' => 'خانواده با موفقیت حذف شد.',
             'family' => 'خانواده',

@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'משפחת מאפיינים',
             'attribute-product-error' => 'משפחה בשימוש במוצרים.',
             'create-success' => 'משפחה נוצרה בהצלחה.',
+            'default-delete-error' => 'לא ניתן למחוק את משפחת המאפיינים המוגדרת כברירת מחדל.',
             'delete-failed' => 'אירעה שגיאה במהלך מחיקת המשפחה.',
             'delete-success' => 'משפחה נמחקה בהצלחה.',
             'family' => 'משפחה',

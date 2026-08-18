@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Catalog\AttributeFamilyDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Rules\Code;
@@ -45,7 +46,20 @@ class AttributeFamilyController extends Controller
      */
     public function create()
     {
-        $attributeFamily = $this->attributeFamilyRepository->with(['attribute_groups.custom_attributes'])->findOneByField('code', 'default');
+        $attributeFamily = $this->attributeFamilyRepository
+            ->with([
+                'attribute_groups.custom_attributes',
+            ])
+            ->findOneByField(
+                'code',
+                AttributeFamily::DEFAULT_CODE
+            );
+
+        $attributeFamily ??= $this->attributeFamilyRepository
+            ->with([
+                'attribute_groups.custom_attributes',
+            ])
+            ->first();
 
         $customAttributes = $this->attributeRepository->all(['id', 'code', 'admin_name', 'type', 'is_user_defined']);
 
@@ -136,6 +150,12 @@ class AttributeFamilyController extends Controller
         if ($this->attributeFamilyRepository->count() == 1) {
             return new JsonResponse([
                 'message' => trans('admin::app.catalog.families.last-delete-error'),
+            ], 400);
+        }
+
+        if ($attributeFamily->code === AttributeFamily::DEFAULT_CODE) {
+            return new JsonResponse([
+                'message' => trans('admin::app.catalog.families.default-delete-error'),
             ], 400);
         }
 

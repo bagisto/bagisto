@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => '属性ファミリー',
             'attribute-product-error' => 'ファミリーは製品で使用されています。',
             'create-success' => 'ファミリーが正常に作成されました。',
+            'default-delete-error' => '既定の属性ファミリーは削除できません。',
             'delete-failed' => 'ファミリーの削除中にエラーが発生しました。',
             'delete-success' => 'ファミリーが正常に削除されました。',
             'family' => 'ファミリー',

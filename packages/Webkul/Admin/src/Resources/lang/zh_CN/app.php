@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => '属性家族',
             'attribute-product-error' => '家族在产品中使用。',
             'create-success' => '成功创建家族。',
+            'default-delete-error' => '无法删除默认属性族。',
             'delete-failed' => '删除家族时遇到错误。',
             'delete-success' => '成功删除家族。',
             'family' => '属性家族',

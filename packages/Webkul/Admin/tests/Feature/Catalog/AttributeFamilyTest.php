@@ -161,3 +161,31 @@ it('should not be able to delete the attribute family if the attribute family is
         ],
     ]);
 });
+
+it('should refuse to delete the default attribute family', function () {
+    // Arrange.
+    $attributeFamily = AttributeFamilyModel::query()
+        ->where('code', AttributeFamilyModel::DEFAULT_CODE)
+        ->firstOrFail();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.catalog.families.delete', $attributeFamily->id))
+        ->assertStatus(400)
+        ->assertJsonPath('message', trans('admin::app.catalog.families.default-delete-error'));
+
+    $this->assertDatabaseHas('attribute_families', ['id' => $attributeFamily->id]);
+});
+
+it('should still open the create family screen when the default family is missing', function () {
+    // Arrange.
+    AttributeFamilyModel::query()->where('code', AttributeFamilyModel::DEFAULT_CODE)->delete();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    get(route('admin.catalog.families.create'))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.catalog.families.create.title'));
+});

@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Famiglia di Attributi',
             'attribute-product-error' => 'La famiglia è utilizzata nei prodotti.',
             'create-success' => 'Famiglia creata con successo.',
+            'default-delete-error' => 'La famiglia di attributi predefinita non può essere eliminata.',
             'delete-failed' => 'Errore durante l\'eliminazione della famiglia.',
             'delete-success' => 'Famiglia eliminata con successo.',
             'family' => 'Famiglia',

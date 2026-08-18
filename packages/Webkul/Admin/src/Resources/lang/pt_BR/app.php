@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Família de Atributos',
             'attribute-product-error' => 'A família é usada em produtos.',
             'create-success' => 'Família criada com sucesso.',
+            'default-delete-error' => 'A família de atributos padrão não pode ser excluída.',
             'delete-failed' => 'Erro ao excluir a Família.',
             'delete-success' => 'Família excluída com sucesso.',
             'family' => 'Família',

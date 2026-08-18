@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Keluarga Atribut',
             'attribute-product-error' => 'Keluarga ini digunakan dalam produk.',
             'create-success' => 'Keluarga atribut berhasil dibuat.',
+            'default-delete-error' => 'Famili atribut bawaan tidak dapat dihapus.',
             'delete-failed' => 'Terjadi kesalahan saat menghapus keluarga atribut.',
             'delete-success' => 'Keluarga atribut berhasil dihapus.',
             'family' => 'Keluarga',

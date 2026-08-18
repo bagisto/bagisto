@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Attribute Family',
             'attribute-product-error' => 'family is used in products.',
             'create-success' => 'Family created successfully.',
+            'default-delete-error' => 'The default attribute family can not be deleted.',
             'delete-failed' => 'Error encountered while deleting Family.',
             'delete-success' => 'Family deleted successfully.',
             'family' => 'Family',

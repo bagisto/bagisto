@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Attribute Family',
             'attribute-product-error' => 'family is used in products.',
             'create-success' => 'Family created successfully.',
+            'default-delete-error' => 'Familia de atribute implicită nu poate fi ștearsă.',
             'delete-failed' => 'Error encountered while deleting Family.',
             'delete-success' => 'Family deleted successfully.',
             'family' => 'Family',

@@ -46,6 +46,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed Help & Resources missing from the admin menu on a phone or tablet. It sat in the sidebar, which is hidden below large screens, and was never added to the drawer that replaces it.
 
+- #11419 [fixed] - Fixed the default attribute family being deletable, which then broke the create family screen for good because it is built from that family. Deleting it is now refused, and the screen falls back to another family rather than erroring if it is already gone.
+
 - #11418 [fixed] - Fixed a customer being unable to save their profile when the same email address exists on another channel. Registration already scoped the check by channel while the profile and admin edits did not, so an address in use elsewhere blocked an unrelated account.
 
 - #11417 [fixed] - Fixed an attribute accepting a regular expression that is not one, which left the product create and edit screens blank because the pattern is written into the form's rules. The pattern is now checked when the attribute is saved, and one already stored is left out of the rules rather than breaking the page.

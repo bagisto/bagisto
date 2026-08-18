@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'عائلة السمات',
             'attribute-product-error' => 'العائلة مستخدمة في المنتجات.',
             'create-success' => 'تم إنشاء العائلة بنجاح.',
+            'default-delete-error' => 'لا يمكن حذف عائلة السمات الافتراضية.',
             'delete-failed' => 'حدث خطأ أثناء حذف العائلة.',
             'delete-success' => 'تم حذف العائلة بنجاح.',
             'family' => 'العائلة',

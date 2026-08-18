@@ -2100,6 +2100,7 @@ return [
             'attribute-family' => 'Família d\'Atributs',
             'attribute-product-error' => 'La família s\'utilitza en productes.',
             'create-success' => 'Família creada amb éxit.',
+            'default-delete-error' => 'La família d\'atributs per defecte no es pot suprimir.',
             'delete-failed' => 'S\'ha produït un error en eliminar la família.',
             'delete-success' => 'Família eliminada amb éxit.',
             'family' => 'Família',
