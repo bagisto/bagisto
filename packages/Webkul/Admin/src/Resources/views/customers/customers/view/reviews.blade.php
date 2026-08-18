@@ -21,11 +21,16 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.head :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.head
+                    :isMultiRow="true"
+                    template="minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)"
+                    :groups="[4, 3]"
+                    :massAction="false"
+                />
             </template>
 
             <template v-else>
-                <div class="row grid grid-cols-[2fr_1fr_1fr] grid-rows-1 items-center border-b border-gray-200 bg-gray-50 px-4 py-2.5 text-sm text-gray-600 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300">
+                <div class="row datagrid-head datagrid-head-cards grid grid-cols-[2fr_1fr_1fr] grid-rows-1">
                     <div
                         class="flex select-none items-center gap-2.5"
                         v-for="(columnGroup, index) in [['product_name', 'status', 'title', 'comment'], ['rating', 'created_at', 'product_review_id']]"
@@ -68,7 +73,12 @@
             performAction
         }">
             <template v-if="isLoading">
-                <x-admin::shimmer.datagrid.table.body :isMultiRow="true" />
+                <x-admin::shimmer.datagrid.table.body
+                    :isMultiRow="true"
+                    template="minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr)"
+                    :groups="[4, 3]"
+                    :massAction="false"
+                />
             </template>
 
             <template v-else>

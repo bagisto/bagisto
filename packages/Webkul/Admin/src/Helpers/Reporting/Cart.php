@@ -202,7 +202,7 @@ class Cart extends AbstractReporting
     {
         return $this->cartRepository
             ->resetModel()
-            ->groupBy(DB::raw('CONCAT(customer_email, "-", customer_id)'))
+            ->groupBy(['customer_email', 'customer_id'])
             ->whereIn('cart.channel_id', $this->channelIds)
             ->whereBetween('created_at', [$startDate, $endDate])
             ->get()

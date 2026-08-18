@@ -21,6 +21,9 @@ return [
             'validation' => [
                 'errors' => [
                     'duplicate-url-key' => 'La clau de l\'URL: \'%s\' ja ha estat generada per a un article amb l\'SKU: \'%s\'.',
+                    'image-not-file' => 'Imatge: \'%s\' és una adreça web, però aquesta importació està configurada per prendre imatges de fitxers. Trieu \'Enllaços d\'imatge al fitxer\' com a font, o substituïu el valor per un nom de fitxer.',
+                    'image-not-found' => 'Imatge: \'%s\' no s\'ha trobat on aquesta importació espera les seves imatges.',
+                    'image-not-url' => 'Imatge: \'%s\' no és una adreça web, però aquesta importació està configurada per obtenir imatges d\'enllaços del fitxer. Trieu una altra font d\'imatges o substituïu el valor per una adreça https:// completa.',
                     'invalid-attribute-family' => 'Valor no vàlid per a la columna de família d\'atributs (¿la familia d\'atributs no existeix?)',
                     'invalid-type' => 'El tipus de producte es invàlid o no es compatible',
                     'sku-not-found' => 'No s\'ha trobat el producte amb l\'SKU especificat',
@@ -48,6 +51,8 @@ return [
             'column-not-found' => 'No s\'han trobat les columnes requerides: %s.',
             'column-numbers' => 'El número de columnes no corresponen al número de files en l\'encapçalament.',
             'invalid-attribute' => 'L\'encapçalament conté atribut(s) no vàido(s): "%s".',
+            'more-issues' => 'i :count problema/es més — descarregueu l\'informe complet per veure la llista sencera.',
+            'more-rows' => '(+:count files més)',
             'system' => 'S\'ha produït un error del sistema inesperat.',
             'wrong-quotes' => 'S\'han fet servir cometes curves en comptes de cometes rectes.',
         ],

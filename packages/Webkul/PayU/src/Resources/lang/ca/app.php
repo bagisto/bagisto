@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'El pagament ha fallat. Si us plau, torna-ho a provar.',
         'payment-success' => 'Pagament completat amb èxit!',
         'provide-credentials' => 'Si us plau, configura la clau de comerciant i Salt de PayU al panell d\'administració.',
+        'supported-currency-error' => 'La moneda :currency no és compatible. Monedes compatibles: :supportedCurrencies.',
     ],
 ];

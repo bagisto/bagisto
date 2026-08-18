@@ -333,7 +333,7 @@ abstract class AbstractType
 
         if (! in_array('images', $attributesToSkip)) {
             foreach ($this->product->images as $image) {
-                $copiedImage = $product->images()->save($image->replicate());
+                $copiedImage = $product->images()->save($image->replicateWithTranslations());
 
                 $this->copyMedia($product, $image, $copiedImage);
             }
@@ -352,6 +352,20 @@ abstract class AbstractType
                 'parent_id' => $this->product->id,
                 'child_id' => $product->id,
             ]);
+        }
+
+        if (! in_array('customizable_options', $attributesToSkip)) {
+            foreach ($this->product->customizable_options as $customizableOption) {
+                $copiedCustomizableOption = $product->customizable_options()->save($customizableOption->replicate());
+
+                foreach ($customizableOption->translations as $translation) {
+                    $copiedCustomizableOption->translations()->save($translation->replicate());
+                }
+
+                foreach ($customizableOption->customizable_option_prices as $price) {
+                    $copiedCustomizableOption->customizable_option_prices()->save($price->replicate());
+                }
+            }
         }
     }
 
@@ -440,6 +454,16 @@ abstract class AbstractType
     public function isStockable()
     {
         return $this->isStockable;
+    }
+
+    /**
+     * Return true if a stock of this product can be kept and counted.
+     *
+     * Not `isStockable()`, which answers whether an order has anything to ship.
+     */
+    public function isInventoryManageable(): bool
+    {
+        return ! in_array('manage_stock', $this->skipAttributes);
     }
 
     /**
@@ -604,7 +628,6 @@ abstract class AbstractType
     /**
      * Get product minimal price.
      *
-     * @param  int  $qty
      * @return float
      */
     public function getMinimalPrice()

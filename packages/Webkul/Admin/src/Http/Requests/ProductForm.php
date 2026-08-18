@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
+use Webkul\Core\Helpers\MediaFileName;
 use Webkul\Core\Rules\Decimal;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Contracts\Product;
@@ -82,8 +83,11 @@ class ProductForm extends FormRequest
             'url_key' => ['required', new ProductCategoryUniqueSlug('products', $this->id)],
             'images.files.*' => ['nullable', 'mimes:bmp,jpeg,jpg,png,webp'],
             'images.positions.*' => ['nullable', 'integer'],
+            'images.meta.*.alt_text' => ['nullable', 'string', 'max:255'],
+            'images.meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'videos.files.*' => ['nullable', 'mimetypes:application/octet-stream,video/mp4,video/webm,video/quicktime', 'max:'.$this->maxVideoFileSize],
             'videos.positions.*' => ['nullable', 'integer'],
+            'videos.meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'special_price_from' => ['nullable', 'date'],
             'special_price_to' => ['nullable', 'date', 'after_or_equal:special_price_from'],
             'special_price' => ['nullable', new Decimal, 'lt:price'],

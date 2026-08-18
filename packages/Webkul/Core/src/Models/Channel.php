@@ -56,6 +56,7 @@ class Channel extends TranslatableModel implements ChannelContract
         'description',
         'maintenance_mode_text',
         'home_seo',
+        'logo_alt',
     ];
 
     /**

@@ -17,6 +17,7 @@ use Webkul\Product\Models\ProductDownloadableSample;
 use Webkul\Product\Models\ProductFlat;
 use Webkul\Product\Models\ProductGroupedProduct;
 use Webkul\Product\Models\ProductImage;
+use Webkul\Product\Models\ProductImageTranslation;
 use Webkul\Product\Models\ProductInventory;
 use Webkul\Product\Models\ProductInventoryIndex;
 use Webkul\Product\Models\ProductOrderedInventory;
@@ -48,6 +49,7 @@ class ModuleServiceProvider extends CoreModuleServiceProvider
         ProductFlat::class,
         ProductGroupedProduct::class,
         ProductImage::class,
+        ProductImageTranslation::class,
         ProductInventory::class,
         ProductInventoryIndex::class,
         ProductOrderedInventory::class,

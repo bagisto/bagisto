@@ -7,7 +7,7 @@ class ViterNotFound extends \Exception
     /**
      * Create an instance.
      *
-     * @param  string  $theme
+     * @param  string  $namespace
      * @return void
      */
     public function __construct($namespace)

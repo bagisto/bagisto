@@ -104,14 +104,20 @@
 
                                             @if (! empty($rma->additionalFields))
                                                 @foreach ($rma->additionalFields as $key => $additionalField)
-                                                    <p class="text-gray-600 dark:text-gray-300">
+                                                    <p
+                                                        class="text-gray-600 dark:text-gray-300"
+                                                        v-pre
+                                                    >
                                                         {{ $additionalField?->value }}
                                                     </p>
                                                 @endforeach
                                             @endif
 
                                             @if ($rma?->information)
-                                                <p class="text-gray-600 dark:text-gray-300">
+                                                <p
+                                                    class="text-gray-600 dark:text-gray-300"
+                                                    v-pre
+                                                >
                                                     {{ $rma?->information }}
                                                 </p>
                                             @endif
@@ -456,7 +462,9 @@
                                                             </span>
 
                                                             <span v-else>
-                                                                {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
+                                                                <span v-pre>
+                                                                    {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
+                                                                </span>
                                                             </span>
 
                                                             @lang('admin::app.sales.rma.all-rma.view.on')
@@ -749,12 +757,18 @@
                                     <!-- Customer Info -->
                                     <p class="text-gray-600 dark:text-gray-300">
                                         @if (empty($rma->order->customer_id))
-                                            <div class="text-sm dark:text-gray-300">
+                                            <div
+                                                class="text-sm dark:text-gray-300"
+                                                v-pre
+                                            >
                                                 {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}  (@lang('admin::app.sales.rma.all-rma.index.datagrid.guest'))
                                             </div>
                                         @else
                                             <a href="{{ route('admin.customers.customers.view', $rma->order->customer_id) }}">
-                                                <div class="text-sm dark:text-gray-300 hover:underline">
+                                                <div
+                                                    class="text-sm dark:text-gray-300 hover:underline"
+                                                    v-pre
+                                                >
                                                     {{ $rma->order->customer_first_name }} {{ $rma->order->customer_last_name }}
                                                 </div>
                                             </a>
@@ -762,7 +776,10 @@
                                     </p>
 
                                     <!-- Customer Email -->
-                                    <p class="text-gray-600 dark:text-gray-300">
+                                    <p
+                                        class="text-gray-600 dark:text-gray-300"
+                                        v-pre
+                                    >
                                          {{ $rma->order->customer_email }}
                                     </p>
                                 </div>

@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'शेष डाउनलोड',
                 'status' => 'स्थिति',
                 'title' => 'शीर्षक',
+                'unlimited' => 'असीमित',
             ],
 
             'wishlist' => [
@@ -1760,7 +1761,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA स्थिति पहले ही रद्द की जा चुकी है।',
+            'cancel-not-allowed' => 'इस RMA अनुरोध को रद्द करने की अनुमति नहीं है।',
             'cancel-success' => 'RMA स्थिति सफलतापूर्वक रद्द कर दी गई।',
+            'close-not-allowed' => 'इस RMA अनुरोध को बंद करने की अनुमति नहीं है।',
             'create-success' => 'अनुरोध सफलतापूर्वक बनाया गया।',
             'creation-error' => 'RMA स्थिति को अपडेट नहीं किया जा सकता क्योंकि इस ऑर्डर के लिए चालान नहीं बनाया गया है।',
             'invalid-item' => 'चयनित ऑर्डर आइटम अमान्य है।',

@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => 'සිංහල බාගතු කිරීම්',
                 'status' => 'තත්ත්වය',
                 'title' => 'බාගත කිරීම්',
+                'unlimited' => 'අසීමිත',
             ],
 
             'wishlist' => [
@@ -1760,7 +1761,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMA තත්ත්වය දැනටමත් අවලංගු වී ඇත.',
+            'cancel-not-allowed' => 'මෙම RMA ඉල්ලීම අවලංගු කිරීමට අවසර නැත.',
             'cancel-success' => 'RMA තත්ත්වය සාර්ථකව අවලංගු කෙරිණි.',
+            'close-not-allowed' => 'මෙම RMA ඉල්ලීම වැසීමට අවසර නැත.',
             'create-success' => 'ඉල්ලීම සාර්ථකව සාදන ලදී.',
             'creation-error' => 'RMA තත්ත්වය යාවත්කාලීන කළ නොහැක क्योंकि මෙම ඇණවුම සඳහා අයපත්‍රය තාපයට සකසා නැත.',
             'invalid-item' => 'තෝරාගත් ඇණවුම් අයිතමය වලංගු නොවේ.',

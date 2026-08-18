@@ -29,6 +29,8 @@ class Category extends TranslatableModel implements CategoryContract
         'meta_title',
         'meta_description',
         'meta_keywords',
+        'logo_alt',
+        'banner_alt',
     ];
 
     /**

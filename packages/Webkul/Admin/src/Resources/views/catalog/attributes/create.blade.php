@@ -258,6 +258,23 @@
                                                             :name="'options[' + element.id + '][swatch_value]'"
                                                             :ref="'imageInput_' + element.id"
                                                         />
+
+                                                        <!-- Swatch Image SEO -->
+                                                        <div class="mt-2 grid gap-1">
+                                                            <input
+                                                                type="text"
+                                                                class="w-[160px] rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                                :name="'options[' + element.id + '][swatch_alt]'"
+                                                                :placeholder="'@lang('admin::app.components.media.images.seo.alt-text')'"
+                                                            />
+
+                                                            <input
+                                                                type="text"
+                                                                class="w-[160px] rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
+                                                                :name="'options[' + element.id + '][swatch_file_name]'"
+                                                                :placeholder="'@lang('admin::app.components.media.images.seo.file-name')'"
+                                                            />
+                                                        </div>
                                                     </div>
 
                                                     <!-- Swatch Color -->

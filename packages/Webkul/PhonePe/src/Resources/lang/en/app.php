@@ -10,5 +10,6 @@ return [
         'invalid-transaction' => 'Invalid transaction. Please try again.',
         'payment-success' => 'Your payment was successful. Your order has been placed.',
         'order-creation-failed' => 'There was an issue creating your order after payment. Please contact support.',
+        'supported-currency-error' => 'The currency :currency is not supported. Supported Currencies: :supportedCurrencies.',
     ],
 ];

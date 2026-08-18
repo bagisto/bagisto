@@ -21,6 +21,9 @@ return [
             'validation' => [
                 'errors' => [
                     'duplicate-url-key' => 'URL anahtarı: \'%s\' zaten SKU: \'%s\' olan bir öğe için oluşturuldu.',
+                    'image-not-file' => 'Görsel: \'%s\' bir web adresi, ancak bu içe aktarma görselleri dosyalardan alacak şekilde ayarlanmış. Görsel kaynağı olarak \'Dosyadaki görsel bağlantıları\' seçin veya değeri bir dosya adıyla değiştirin.',
+                    'image-not-found' => 'Görsel: \'%s\' bu içe aktarmanın görsellerini beklediği yerde bulunamadı.',
+                    'image-not-url' => 'Görsel: \'%s\' bir web adresi değil, ancak bu içe aktarma görselleri dosyadaki bağlantılardan almak üzere ayarlanmış. Başka bir görsel kaynağı seçin veya değeri tam bir https:// adresiyle değiştirin.',
                     'invalid-attribute-family' => 'Öznitelik ailesi sütunu için geçersiz değer (öznitelik ailesi mevcut değil mi?)',
                     'invalid-type' => 'Ürün türü geçersiz veya desteklenmiyor',
                     'sku-not-found' => 'Belirtilen SKU ile ürün bulunamadı',
@@ -48,6 +51,8 @@ return [
             'column-not-found' => 'Gerekli sütunlar bulunamadı: %s.',
             'column-numbers' => 'Sütun sayısı başlık satırındaki satır sayısıyla eşleşmiyor.',
             'invalid-attribute' => 'Başlık öznitelik(ler) içerir: "%s".',
+            'more-issues' => 've :count sorun daha — tam liste için raporun tamamını indirin.',
+            'more-rows' => '(+:count satır daha)',
             'system' => 'Beklenmeyen bir sistem hatası oluştu.',
             'wrong-quotes' => 'Tırnak içinde doğru tırnaklar yerine eğik tırnaklar kullanıldı.',
         ],

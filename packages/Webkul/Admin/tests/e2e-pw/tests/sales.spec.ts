@@ -3,19 +3,14 @@ import { RmaManagePage } from "../pages/admin/sales/RmaManagePage";
 import { SalesCreatePage } from "../pages/admin/sales/SalesCreatePage";
 import { SalesManagePage } from "../pages/admin/sales/SalesManagePage";
 
-test.describe("rma management", () => {
+test.describe.serial("rma management", () => {
     test.setTimeout(240000);
 
-    test.beforeEach(
-        "should create simple product for checkout to create rma",
-        async ({ adminPage }) => {
-            await new SalesCreatePage(adminPage).createRmaEnabledSimpleProduct();
-        },
-    );
-
     test("should allow customer checkout for rma creation so the admin can accept it", async ({
+        adminPage,
         shopPage,
     }) => {
+        await new SalesCreatePage(adminPage).createRmaEnabledSimpleProduct();
         await new RmaManagePage(shopPage).customerCheckoutForRMA();
     });
 
@@ -36,8 +31,10 @@ test.describe("rma management", () => {
     });
 
     test("should allow customer checkout for rma so the admin can decline it", async ({
+        adminPage,
         shopPage,
     }) => {
+        await new SalesCreatePage(adminPage).createRmaEnabledSimpleProduct();
         await new RmaManagePage(shopPage).customerCheckoutForRMA();
     });
 

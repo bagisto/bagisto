@@ -373,6 +373,7 @@ return [
                 'remaining-downloads' => '残りのダウンロード回数',
                 'status' => 'ステータス',
                 'title' => 'タイトル',
+                'unlimited' => '無制限',
             ],
 
             'wishlist' => [
@@ -1760,7 +1761,9 @@ return [
 
         'response' => [
             'already-cancel' => 'RMAステータスはすでにキャンセルされています。',
+            'cancel-not-allowed' => 'このRMAリクエストをキャンセルすることは許可されていません。',
             'cancel-success' => 'RMAステータスが正常にキャンセルされました。',
+            'close-not-allowed' => 'このRMAリクエストを終了することは許可されていません。',
             'create-success' => 'リクエストが正常に作成されました。',
             'creation-error' => 'この注文の請求書が作成されていないため、RMA ステータスを更新できません。',
             'invalid-item' => '選択された注文アイテムは無効です。',

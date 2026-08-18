@@ -82,6 +82,7 @@ class CategoryController extends Controller
             'display_mode',
             'attributes',
             'logo_path',
+            'logo_meta',
             'banner_path',
             'mobile_banner_path',
         ]);
@@ -136,6 +137,7 @@ class CategoryController extends Controller
             'locale',
             'parent_id',
             'logo_path',
+            'logo_meta',
             'banner_path',
             'mobile_banner_path',
             'position',

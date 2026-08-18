@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'Ödeme başarısız oldu. Lütfen tekrar deneyin.',
         'payment-success' => 'Ödeme başarıyla tamamlandı!',
         'provide-credentials' => 'Lütfen yönetici panelinde PayU Satıcı Anahtarını ve Salt\'ı yapılandırın.',
+        'supported-currency-error' => 'Para birimi :currency desteklenmiyor. Desteklenen para birimleri: :supportedCurrencies.',
     ],
 ];

@@ -23,5 +23,6 @@ return [
         'payment-failed' => 'Le paiement a échoué. Veuillez réessayer.',
         'payment-success' => 'Paiement effectué avec succès !',
         'provide-credentials' => 'Veuillez configurer la clé marchande et le Salt PayU dans le panneau d\'administration.',
+        'supported-currency-error' => 'La devise :currency n\'est pas prise en charge. Devises prises en charge : :supportedCurrencies.',
     ],
 ];

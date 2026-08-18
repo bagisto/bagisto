@@ -296,9 +296,16 @@
 
                                 <x-admin::media.images
                                     name="logo"
+                                    meta-name="logo_meta"
+                                    enable-seo="true"
                                     width="110px"
                                     height="110px"
-                                    :uploaded-images="$channel->logo ? [['id' => 'logo_path', 'url' => $channel->logo_url]] : []"
+                                    :uploaded-images="$channel->logo ? [[
+                                        'id'        => 'logo',
+                                        'url'       => $channel->logo_url,
+                                        'file_name' => $channel->logo_file_name,
+                                        'alt_text'  => $channel->logo_alt,
+                                    ]] : []"
                                 />
                             </x-admin::form.control-group>
 
@@ -316,9 +323,15 @@
 
                                 <x-admin::media.images
                                     name="favicon"
+                                    meta-name="favicon_meta"
+                                    enable-seo="true"
                                     width="110px"
                                     height="110px"
-                                    :uploaded-images="$channel->favicon ? [['id' => 'logo_path', 'url' => $channel->favicon_url]] : []"
+                                    :uploaded-images="$channel->favicon ? [[
+                                        'id'        => 'favicon',
+                                        'url'       => $channel->favicon_url,
+                                        'file_name' => $channel->favicon_file_name,
+                                    ]] : []"
                                 />
                             </x-admin::form.control-group>
 

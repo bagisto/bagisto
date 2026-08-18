@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\View\View;
 use Webkul\Admin\DataGrids\Settings\ChannelDataGrid;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Helpers\MediaFileName;
 use Webkul\Core\Repositories\ChannelRepository;
 use Webkul\Core\Rules\Code;
 
@@ -69,6 +70,8 @@ class ChannelController extends Controller
             /* design */
             'theme' => 'nullable',
             'logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'logo_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
+            'logo_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'favicon.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
             'mobile_logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
 
@@ -141,6 +144,8 @@ class ChannelController extends Controller
             /* design */
             'theme' => 'nullable',
             'logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
+            'logo_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
+            'logo_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'favicon.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
             'mobile_logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
 

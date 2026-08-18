@@ -67,7 +67,12 @@
                             <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
                                 <span class="font-medium text-gray-500">{{ $field->customField->label }} :</span>
 
-                                <span class="font-medium text-gray-800">{{ $field->value }}</span>
+                                <span
+                                    class="font-medium text-gray-800"
+                                    v-pre
+                                >
+                                    {{ $field->value }}
+                                </span>
                             </div>
                         @endforeach
                     @endif
@@ -77,7 +82,12 @@
                         <div class="grid grid-cols-1 md:grid-cols-[200px_1fr] gap-4">
                             <span class="font-medium text-gray-500">@lang('shop::app.rma.view-customer-rma.additional-information')</span>
 
-                            <span class="font-medium text-gray-800">{{ $rma->information }}</span>
+                            <span
+                                class="font-medium text-gray-800"
+                                v-pre
+                            >
+                                {{ $rma->information }}
+                            </span>
                         </div>
                     @endif
 
