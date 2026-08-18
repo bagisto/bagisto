@@ -46,6 +46,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed Help & Resources missing from the admin menu on a phone or tablet. It sat in the sidebar, which is hidden below large screens, and was never added to the drawer that replaces it.
 
+- #11416 [fixed] - Fixed copying a downloadable or booking product losing everything that makes it that type. Download links and samples now come across with their titles, as do the booking settings and the slots or tickets they are sold by.
+
 - #11414 [fixed] - Fixed the product listing keeping the image that was uploaded first after the images had been reordered on the product, rather than the one now sitting at the front. The listing went by the order the images were added instead of the order they were arranged in.
 
 - #11413 [fixed] - Fixed deleting several RMA reasons, rules or custom fields at once reporting a failure when one of them had already been deleted elsewhere — while quietly deleting the ones listed before it. Whatever is still there is now deleted and the rest passed over, and the reply says how many of each. Custom fields also went without any check on what was submitted, which they now have in common with the rest.

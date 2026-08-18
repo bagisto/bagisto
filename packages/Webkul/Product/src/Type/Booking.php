@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\BookingProduct\Helpers\Booking as BookingHelper;
+use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\BookingProduct\Repositories\BookingProductRepository;
 use Webkul\Checkout\Models\CartItem;
 use Webkul\Customer\Repositories\CustomerRepository;
@@ -708,5 +709,50 @@ class Booking extends AbstractType
         }
 
         return ($to - $from) >= $minMinutes;
+    }
+
+    /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
+
+        if (in_array('booking_products', $attributesToSkip)) {
+            return;
+        }
+
+        foreach ($this->product->booking_products as $bookingProduct) {
+            $this->copyBookingSlots(
+                $bookingProduct,
+                $product->booking_products()->save($bookingProduct->replicate())
+            );
+        }
+    }
+
+    /**
+     * Copy the slots, or the tickets, a booking is sold by.
+     *
+     * @param  BookingProduct  $bookingProduct
+     * @param  BookingProduct  $copiedBookingProduct
+     */
+    protected function copyBookingSlots($bookingProduct, $copiedBookingProduct): void
+    {
+        foreach (['default_slot', 'appointment_slot', 'rental_slot', 'table_slot'] as $relation) {
+            $slot = $bookingProduct->{$relation};
+
+            if ($slot) {
+                $copiedBookingProduct->{$relation}()->save($slot->replicate());
+            }
+        }
+
+        foreach ($bookingProduct->event_tickets as $eventTicket) {
+            $copiedBookingProduct->event_tickets()->save($eventTicket->replicate());
+        }
     }
 }
