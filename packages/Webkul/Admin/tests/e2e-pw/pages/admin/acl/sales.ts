@@ -100,9 +100,7 @@ export class SalesAclPage extends SettingsAclPage {
             addToCartButton: this.page.locator(
                 "(//button[contains(@class,'secondary-button')])[2]",
             ),
-            shoppingCartIcon: this.page.locator(
-                "(//span[contains(@class,'icon-cart')])[1]",
-            ),
+            shoppingCartIcon: this.page.locator('[class*="icon-cart"]').first(),
             addCartSuccess: this.page.getByText("Item Added Successfully"),
             continueButton: this.page.locator(
                 '(//a[contains(.," Continue to Checkout ")])[1]',

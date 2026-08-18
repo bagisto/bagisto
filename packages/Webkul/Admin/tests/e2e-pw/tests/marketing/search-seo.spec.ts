@@ -740,7 +740,7 @@ test.describe("search-seo management", () => {
             await expect(
                 adminPage.locator('input[name="file_name"]'),
             ).toHaveValue(existingFile);
-            await adminPage.locator(".icon-cancel-1").first().click();
+            await adminPage.locator("span.icon-close").first().click();
 
             await adminPage.getByText("Create Sitemap").click();
 

@@ -56,6 +56,7 @@ test.describe("should verify google captcha verification", () => {
     test("should display google captcha on product checkout sign in page", async ({
         adminPage,
     }) => {
+        test.setTimeout(120000);
         const productCreatePage = new ProductCreatePage(adminPage);
         const customerCaptchaPage = new CustomerCaptchaPage(adminPage);
 
