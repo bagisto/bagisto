@@ -6,7 +6,7 @@
         type="text/x-template"
         id="v-section-fields-template"
     >
-        <div class="grid gap-4">
+        <div class="grid min-w-0 gap-4">
             <template v-for="field in schema" :key="field.key">
                 <!-- Repeating Rows -->
                 <div v-if="field.type === 'repeater'">
@@ -72,38 +72,39 @@
                             :key="index"
                         >
                             <div class="flex items-center gap-2">
-                                <select
-                                    class="w-1/2 custom-select rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                    v-model="pair.key"
-                                    @change="syncFilters(field)"
-                                >
-                                    <option
-                                        v-for="option in keyOptionsFor(field, index)"
-                                        :key="option.value"
-                                        :value="option.value"
-                                        v-text="option.label"
-                                    ></option>
-                                </select>
+                                <v-select
+                                    class="min-w-0 flex-1"
+                                    :name="'filter-key-' + index"
+                                    :options="keyOptionsFor(field, index).map(option => ({ id: option.value, label: option.label }))"
+                                    :value="pair.key"
+                                    @update:model-value="key => changeKey(field, pair, key)"
+                                ></v-select>
 
-                                <!-- A known set of values picks from a list, anything else is free text. -->
-                                <select
-                                    class="w-1/2 custom-select rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                    v-model="pair.value"
-                                    v-if="optionsFor(field, pair.key).length"
-                                    @change="syncFilters(field)"
-                                >
-                                    <option
-                                        v-for="option in valueOptionsFor(field, pair)"
-                                        :key="option.value"
-                                        :value="option.value"
-                                        v-text="option.label"
-                                    ></option>
-                                </select>
+                                <!-- Several categories, stored as the comma separated list the api reads. -->
+                                <v-multiselect
+                                    class="min-w-0 flex-1"
+                                    :name="'filter-' + pair.key"
+                                    :options="pickerOptionsFor(field, pair)"
+                                    :value="listValue(pair)"
+                                    :placeholder="labelFor(field, pair.key)"
+                                    v-if="isMultiple(field, pair.key)"
+                                    @update:model-value="ids => { pair.value = ids.join(','); syncFilters(field); }"
+                                ></v-multiselect>
+
+                                <!-- A fixed set of values is picked, anything else is free text. -->
+                                <v-select
+                                    class="min-w-0 flex-1"
+                                    :name="'filter-' + pair.key"
+                                    :options="pickerOptionsFor(field, pair)"
+                                    :value="pair.value"
+                                    :placeholder="labelFor(field, pair.key)"
+                                    v-else-if="optionsFor(field, pair.key).length"
+                                    @update:model-value="value => { pair.value = value; syncFilters(field); }"
+                                ></v-select>
 
                                 <input
-                                    :type="inputTypeFor(field, pair.key)"
-                                    min="1"
-                                    class="w-1/2 rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
+                                    type="text"
+                                    class="min-w-0 flex-1 rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
                                     v-model="pair.value"
                                     v-else
                                     @input="syncFilters(field)"
@@ -111,16 +112,10 @@
 
                                 <button
                                     type="button"
-                                    class="icon-delete cursor-pointer text-xl text-gray-400 hover:text-red-600"
+                                    class="icon-delete shrink-0 cursor-pointer text-xl text-gray-400 hover:text-red-600"
                                     @click="removeFilter(field, index)"
                                 ></button>
                             </div>
-
-                            <p
-                                class="text-xs text-gray-500 dark:text-gray-300"
-                                v-if="hintFor(field, pair.key)"
-                                v-text="hintFor(field, pair.key)"
-                            ></p>
                         </div>
                     </div>
 
@@ -302,13 +297,6 @@
                 },
 
                 /**
-                 * The control a filter value needs, so a count cannot be typed as words.
-                 */
-                inputTypeFor(field, key) {
-                    return (field.keys ?? []).find(option => option.value === key)?.input ?? 'text';
-                },
-
-                /**
                  * The choices a value select shows, including whatever is already stored so
                  * a value the list no longer offers still displays instead of reading blank.
                  */
@@ -327,10 +315,48 @@
                 },
 
                 /**
-                 * Guidance for a filter that needs it.
+                 * Whether a filter holds several values at once.
                  */
-                hintFor(field, key) {
-                    return (field.keys ?? []).find(option => option.value === key)?.hint ?? '';
+                isMultiple(field, key) {
+                    return (field.keys ?? []).find(option => option.value === key)?.multiple === true;
+                },
+
+                /**
+                 * The stored comma separated value as the list the picker expects.
+                 */
+                listValue(pair) {
+                    return String(pair.value ?? '')
+                        .split(',')
+                        .map(id => id.trim())
+                        .filter(Boolean);
+                },
+
+                /**
+                 * Point a filter at a different key, starting it on a value that key accepts.
+                 */
+                changeKey(field, pair, key) {
+                    pair.key = key;
+
+                    pair.value = this.optionsFor(field, key)[0]?.value ?? '';
+
+                    this.syncFilters(field);
+                },
+
+                /**
+                 * The same choices keyed the way the shared picker reads them.
+                 */
+                pickerOptionsFor(field, pair) {
+                    return this.valueOptionsFor(field, pair).map(option => ({
+                        id: option.value,
+                        label: option.label,
+                    }));
+                },
+
+                /**
+                 * A filter's own label, used where the control needs a placeholder.
+                 */
+                labelFor(field, key) {
+                    return (field.keys ?? []).find(option => option.value === key)?.label ?? '';
                 },
 
                 /**
@@ -388,13 +414,22 @@
                         }
                     });
 
-                    this.syncFilters(field);
+                    this.model[field.key] = this.filtersMap();
                 },
 
                 /**
                  * Write the editable pairs back as the map the storefront reads.
                  */
                 syncFilters(field) {
+                    this.model[field.key] = this.filtersMap();
+
+                    this.bubble();
+                },
+
+                /**
+                 * The editable pairs as the map the storefront reads.
+                 */
+                filtersMap() {
                     const map = {};
 
                     this.filterPairs.forEach(pair => {
@@ -403,9 +438,7 @@
                         }
                     });
 
-                    this.model[field.key] = map;
-
-                    this.bubble();
+                    return map;
                 },
 
                 /**

@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Duplizieren',
                 'empty' => 'Noch keine Abschnitte.',
                 'mobile' => 'Mobil',
+                'pinned' => 'Am Seitenende fixiert.',
                 'preview-btn' => 'Vorschau',
                 'publish-btn' => 'Veröffentlichen',
                 'scoped-to' => 'Abschnitte des Themes :theme im Kanal :channel werden angezeigt.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'Dieser Kanal zeigt nur einen Fußzeilen-Link-Abschnitt an.',
                 'name' => 'Name',
                 'save-btn' => 'Abschnitt speichern',
                 'title' => 'Abschnitt erstellen',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'Neu',
                 'no' => 'Nein',
                 'parent-id' => 'Eltern-ID',
-                'parent-id-hint' => 'Sie können mehrere Eltern-IDs als durch Kommas getrennte Werte eingeben (z.B.: 12,15,34)',
                 'preview' => 'Vorschau',
                 'product-carousel' => 'Produkt Karussell',
                 'product-carousel-description' => 'Produkte mit einem dynamischen und responsiven Produkt Karussell elegant präsentieren.',

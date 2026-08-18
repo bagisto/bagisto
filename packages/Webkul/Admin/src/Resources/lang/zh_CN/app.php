@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => '复制',
                 'empty' => '暂无版块。',
                 'mobile' => '手机',
+                'pinned' => '已固定在页面底部。',
                 'preview-btn' => '预览',
                 'publish-btn' => '发布',
                 'scoped-to' => '正在显示 :channel 渠道中 :theme 主题的板块。',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => '此渠道仅显示一个页脚链接板块。',
                 'name' => '名称',
                 'save-btn' => '保存版块',
                 'title' => '创建版块',
@@ -3356,7 +3358,6 @@ return [
                 'new' => '新',
                 'no' => '不',
                 'parent-id' => '父ID',
-                'parent-id-hint' => '您可以输入多个父ID作为逗号分隔的值（例如：12,15,34）',
                 'preview' => '预览',
                 'product-carousel' => '产品轮播',
                 'product-carousel-description' => '使用动态和响应式产品轮播优雅地展示产品。',

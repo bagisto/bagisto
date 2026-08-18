@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\UploadedFile;
+use Webkul\Category\Models\Category;
+use Webkul\Core\Models\Channel;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\SectionSchema;
 
@@ -52,7 +54,6 @@ it('should store the newly created theme', function () {
             'product_carousel',
             'category_carousel',
             'image_carousel',
-            'footer_links',
             'services_content',
         ]),
         'name' => $name = fake()->name(),
@@ -633,14 +634,187 @@ it('should offer each filter only once so a stored filter cannot be overwritten'
     }
 });
 
-it('should ask for a number where only a number works', function () {
+it('should offer the same limits to both carousels', function () {
     $schema = app(SectionSchema::class)->all();
 
-    $sortOrder = collect($schema['footer_links'][0]['fields'])->firstWhere('key', 'sort_order');
+    $product = collect($schema['product_carousel'][1]['keys'])->firstWhere('value', 'limit');
 
-    expect($sortOrder['type'])->toBe(SectionSchema::NUMBER);
+    $category = collect($schema['category_carousel'][0]['keys'])->firstWhere('value', 'limit');
 
-    $limit = collect($schema['category_carousel'][0]['keys'])->firstWhere('value', 'limit');
+    expect($category['options'])->toBe($product['options'])
+        ->and($category['options'])->not->toBeEmpty();
+});
 
-    expect($limit['input'])->toBe(SectionSchema::NUMBER);
+it('should decide a filter control by its options alone', function () {
+    foreach (app(SectionSchema::class)->all() as $type => $fields) {
+        foreach ($fields as $field) {
+            foreach ($field['keys'] ?? [] as $key) {
+                expect($key)->not->toHaveKeys(['searchable', 'input'], "{$type} still flags a control");
+            }
+        }
+    }
+});
+
+it('should not ask for a sort order where the rows are dragged instead', function () {
+    foreach (app(SectionSchema::class)->all() as $type => $fields) {
+        foreach ($fields as $field) {
+            $keys = collect($field['fields'] ?? [])->pluck('key');
+
+            expect($keys)->not->toContain('sort_order', "{$type} still asks for a sort order");
+        }
+    }
+});
+
+it('should hand the editor a store url carrying the channel being edited', function () {
+    // Arrange.
+    $other = Channel::factory()->create(['theme' => core()->getCurrentChannel()->theme]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    get(route('admin.appearance.sections.index', ['code' => $other->theme, 'channel' => $other->id]))
+        ->assertOk()
+        ->assertSee(route('admin.appearance.sections.store', [
+            'code' => $other->theme,
+            'channel' => $other->id,
+        ]), false);
+});
+
+it('should create a section against the channel the editor is scoped to', function () {
+    // Arrange.
+    $other = Channel::factory()->create(['theme' => core()->getCurrentChannel()->theme]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.appearance.sections.store', [
+        'code' => $other->theme,
+        'channel' => $other->id,
+    ]), [
+        'name' => 'Belongs To The Other Channel',
+        'type' => 'footer_links',
+    ])->assertOk();
+
+    $section = Section::query()->find($response->json('section.id'));
+
+    expect($section->channel_id)->toBe($other->id);
+});
+
+it('should refuse a second footer links section on the same channel', function () {
+    // Arrange.
+    $channel = core()->getCurrentChannel();
+
+    Section::factory()->create([
+        'type' => 'footer_links',
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.store', [
+        'code' => $channel->theme,
+        'channel' => $channel->id,
+    ]), [
+        'name' => 'A Second Footer',
+        'type' => 'footer_links',
+    ])->assertJsonValidationErrorFor('type');
+});
+
+it('should still allow a footer links section on a channel that has none', function () {
+    // Arrange.
+    $channel = core()->getCurrentChannel();
+
+    Section::factory()->create([
+        'type' => 'footer_links',
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $other = Channel::factory()->create(['theme' => $channel->theme]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.store', [
+        'code' => $other->theme,
+        'channel' => $other->id,
+    ]), [
+        'name' => 'Footer For The Other Channel',
+        'type' => 'footer_links',
+    ])->assertOk();
+});
+
+it('should place a new section above the pinned footer', function () {
+    // Arrange.
+    $channel = core()->getCurrentChannel();
+
+    $footer = Section::factory()->create([
+        'type' => 'footer_links',
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.appearance.sections.store', [
+        'code' => $channel->theme,
+        'channel' => $channel->id,
+    ]), [
+        'name' => 'Added After The Footer Existed',
+        'type' => 'product_carousel',
+    ])->assertOk();
+
+    $created = Section::query()->find($response->json('section.id'));
+
+    expect($created->sort_order)->toBeLessThan($footer->refresh()->sort_order);
+});
+
+it('should offer categories to search rather than an id to type', function () {
+    $schema = app(SectionSchema::class)->all();
+
+    $categoryId = collect($schema['product_carousel'][1]['keys'])->firstWhere('value', 'category_id');
+
+    expect($categoryId['options'])->not->toBeEmpty();
+
+    $labels = collect($categoryId['options'])->pluck('label');
+
+    expect($labels->filter(fn ($label) => $label === ''))->toBeEmpty()
+        ->and($labels->duplicates())->toBeEmpty();
+
+});
+
+it('should label every category a filter can hold, so none falls back to a bare id', function () {
+    $schema = app(SectionSchema::class)->all();
+
+    $options = collect($schema['category_carousel'][0]['keys'])
+        ->firstWhere('value', 'parent_id')['options'];
+
+    $offered = collect($options)->pluck('value')->sort()->values();
+
+    $all = Category::query()->pluck('id')->map(fn ($id) => (string) $id)->sort()->values();
+
+    expect($offered)->toEqual($all);
+});
+
+it('should let several categories be picked for the category carousel parent', function () {
+    $schema = app(SectionSchema::class)->all();
+
+    $parentId = collect($schema['category_carousel'][0]['keys'])->firstWhere('value', 'parent_id');
+
+    expect($parentId['multiple'])->toBeTrue()
+        ->and($parentId['options'])->not->toBeEmpty();
+});
+
+it('should offer the same categories to both carousels', function () {
+    $schema = app(SectionSchema::class)->all();
+
+    $product = collect($schema['product_carousel'][1]['keys'])->firstWhere('value', 'category_id');
+
+    $category = collect($schema['category_carousel'][0]['keys'])->firstWhere('value', 'parent_id');
+
+    expect($product['options'])->toBe($category['options']);
 });

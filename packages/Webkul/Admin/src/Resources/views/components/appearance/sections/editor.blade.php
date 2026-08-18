@@ -26,6 +26,13 @@
 
 <x-admin::appearance.sections.fields />
 
+{{-- Wrapped, because the component's own class attribute wins over one passed in. --}}
+<div class="hidden">
+    <x-admin::form.control-group.advance.select name="section-filter-picker" />
+
+    <x-admin::form.control-group.advance.multiselect name="section-filter-multi-picker" />
+</div>
+
 @pushOnce('scripts')
     <script
         type="text/x-template"
@@ -134,6 +141,7 @@
                                 :list="items"
                                 item-key="id"
                                 handle=".section-handle"
+                                :move="canMove"
                                 @end="persistOrder"
                             >
                                 <template #item="{ element }">
@@ -141,7 +149,16 @@
                                         class="flex items-center gap-2 border-b px-3 py-2.5 transition-all dark:border-gray-800"
                                         :class="element.id === activeId ? 'bg-blue-50 dark:bg-gray-950' : 'hover:bg-gray-50 dark:hover:bg-gray-950'"
                                     >
-                                        <span class="section-handle icon-drag cursor-grab text-xl text-gray-400"></span>
+                                        <span
+                                            class="section-handle icon-drag cursor-grab text-xl text-gray-400"
+                                            v-if="! element.is_pinned"
+                                        ></span>
+
+                                        <span
+                                            class="w-5 shrink-0 text-center text-xs text-gray-300"
+                                            :title="'@lang('admin::app.appearance.sections.index.pinned')'"
+                                            v-else
+                                        >&mdash;</span>
 
                                         <button
                                             type="button"
@@ -198,7 +215,10 @@
 
                                             <x-slot:menu>
                                                 @if (bouncer()->hasPermission('appearance.sections.create'))
-                                                    <x-admin::dropdown.menu.item @click="duplicate(element)">
+                                                    <x-admin::dropdown.menu.item
+                                                        v-if="! element.is_pinned"
+                                                        @click="duplicate(element)"
+                                                    >
                                                         @lang('admin::app.appearance.sections.index.duplicate-btn')
                                                     </x-admin::dropdown.menu.item>
                                                 @endif
@@ -228,7 +248,7 @@
                         class="box-shadow flex min-w-0 flex-1 flex-col overflow-hidden rounded bg-white dark:bg-gray-900"
                         ref="previewPane"
                     >
-                        <div class="flex shrink-0 items-center justify-between gap-2 border-b p-3 dark:border-gray-800">
+                        <div class="flex shrink-0 items-center justify-between gap-2 border-b p-4 dark:border-gray-800">
                             <p class="text-sm font-medium text-gray-600 dark:text-gray-300">
                                 @lang('admin::app.appearance.sections.index.preview-btn')
                             </p>
@@ -249,7 +269,7 @@
 
                                 <button
                                     type="button"
-                                    class="icon-repeat rounded p-1.5 text-xl text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-950"
+                                    class="icon-repeat flex h-6 w-6 items-center justify-center rounded text-base text-gray-500 transition-all hover:bg-gray-100 dark:hover:bg-gray-950"
                                     :title="'@lang('admin::app.appearance.sections.edit.preview')'"
                                     @click="reloadPreview"
                                 ></button>
@@ -276,7 +296,7 @@
                 @open="onDrawerOpen"
                 @close="onDrawerClose"
             >
-                <x-slot:header>
+                <x-slot:header class="p-4">
                     <p class="text-lg font-bold text-gray-800 dark:text-white">
                         @{{ active?.name }}
                     </p>
@@ -286,7 +306,7 @@
                     </p>
                 </x-slot>
 
-                <x-slot:content>
+                <x-slot:content class="p-4">
                     <v-section-fields
                         :schema="fields"
                         :model="options"
@@ -305,8 +325,8 @@
                     </p>
                 </x-slot>
 
-                <x-slot:footer>
-                    <div class="flex items-center justify-end gap-2 px-3">
+                <x-slot:footer class="px-4 pb-8">
+                    <div class="flex items-center justify-end gap-2">
                         <button
                             type="button"
                             class="secondary-button"
@@ -333,13 +353,13 @@
                 ref="createDrawer"
                 width="480px"
             >
-                <x-slot:header>
+                <x-slot:header class="p-4">
                     <p class="text-lg font-bold text-gray-800 dark:text-white">
                         @lang('admin::app.appearance.sections.create.title')
                     </p>
                 </x-slot>
 
-                <x-slot:content>
+                <x-slot:content class="p-4">
                     <x-admin::form
                         v-slot="{ meta, errors, handleSubmit }"
                         as="div"
@@ -361,7 +381,7 @@
                                         :class="newType === option.key
                                             ? 'border-blue-600 bg-blue-50 text-blue-700 dark:border-blue-600 dark:bg-gray-950 dark:text-blue-400'
                                             : 'border-gray-200 text-gray-600 hover:border-gray-400 dark:border-gray-800 dark:text-gray-300'"
-                                        v-for="option in sectionTypes"
+                                        v-for="option in creatableTypes"
                                         :key="option.key"
                                         @click="newType = option.key"
                                     >
@@ -408,8 +428,8 @@
                     </x-admin::form>
                 </x-slot>
 
-                <x-slot:footer>
-                    <div class="flex items-center justify-end px-3">
+                <x-slot:footer class="px-4 pb-8">
+                    <div class="flex items-center justify-end">
                         <button
                             type="submit"
                             form="section-create-form"
@@ -545,6 +565,16 @@
                 },
 
                 /**
+                 * Types a new section may take. A channel renders one footer at the bottom
+                 * of the page, so a second one has nowhere to go.
+                 */
+                creatableTypes() {
+                    const taken = this.items.some(section => section.is_pinned);
+
+                    return this.sectionTypes.filter(option => ! taken || option.key !== 'footer_links');
+                },
+
+                /**
                  * Width the preview frame is pinned to for the chosen device.
                  */
                 deviceWidth() {
@@ -615,7 +645,7 @@
                  * Start a new section.
                  */
                 openCreate() {
-                    this.newType = 'product_carousel';
+                    this.newType = this.creatableTypes[0]?.key ?? 'product_carousel';
 
                     this.$refs.createDrawer.open();
                 },
@@ -629,7 +659,7 @@
 
                     this.$axios.post(this.storeUrl, params)
                         .then(response => {
-                            this.items.push(response.data.section);
+                            this.insertSection(response.data.section);
 
                             this.$refs.createDrawer.close();
 
@@ -794,6 +824,16 @@
                 },
 
                 /**
+                 * Add a section to the list above the pinned ones, matching the order the
+                 * server just wrote.
+                 */
+                insertSection(section) {
+                    const pinned = this.items.findIndex(item => item.is_pinned);
+
+                    this.items.splice(pinned === -1 ? this.items.length : pinned, 0, section);
+                },
+
+                /**
                  * Ask the preview to highlight a section and scroll it into view. A null
                  * id clears the highlight, so the preview is not left dimmed once editing
                  * stops.
@@ -850,6 +890,15 @@
                             this.reloadPreview();
                         })
                         .catch(error => this.flashError(error));
+                },
+
+                /**
+                 * Whether a drag may complete. A pinned section renders at a fixed place on
+                 * the page, so neither it nor the slot it occupies can take part.
+                 */
+                canMove(event) {
+                    return ! event.draggedContext.element?.is_pinned
+                        && ! event.relatedContext.element?.is_pinned;
                 },
 
                 /**

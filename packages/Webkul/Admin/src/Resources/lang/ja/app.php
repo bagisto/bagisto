@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => '複製',
                 'empty' => 'セクションはまだありません。',
                 'mobile' => 'モバイル',
+                'pinned' => 'ページ下部に固定されています。',
                 'preview-btn' => 'プレビュー',
                 'publish-btn' => '公開',
                 'scoped-to' => ':channel チャネルの :theme テーマのセクションを表示しています。',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'このチャネルではフッターリンクのセクションは 1 つだけ表示されます。',
                 'name' => '名前',
                 'save-btn' => 'セクションを保存',
                 'title' => 'セクションを作成',
@@ -3356,7 +3358,6 @@ return [
                 'new' => '新しい',
                 'no' => 'いいえ',
                 'parent-id' => '親ID',
-                'parent-id-hint' => '複数の親IDをカンマ区切りの値として入力できます（例：12,15,34）',
                 'preview' => 'プレビュー',
                 'product-carousel' => '商品カルーセル',
                 'product-carousel-description' => '動的でレスポンシブな商品カルーセルを使用して、製品をエレガントにショーケースします。',

@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Dupliquer',
                 'empty' => 'Aucune section pour le moment.',
                 'mobile' => 'Mobile',
+                'pinned' => 'Épinglé au bas de la page.',
                 'preview-btn' => 'Aperçu',
                 'publish-btn' => 'Publier',
                 'scoped-to' => 'Affichage des sections du thème :theme sur le canal :channel.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'Ce canal n\'affiche qu\'une seule section de liens de pied de page.',
                 'name' => 'Nom',
                 'save-btn' => 'Enregistrer la section',
                 'title' => 'Créer une section',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'Nouveau',
                 'no' => 'Non',
                 'parent-id' => 'ID Parent',
-                'parent-id-hint' => 'Vous pouvez entrer plusieurs ID parents en tant que valeurs séparées par des virgules (par exemple: 12,15,34)',
                 'preview' => 'Aperçu',
                 'product-carousel' => 'Carrousel de produits',
                 'product-carousel-description' => 'Présentez élégamment des produits avec un carrousel de produits dynamique et réactif.',

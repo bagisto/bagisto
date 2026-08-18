@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Duplicar',
                 'empty' => 'Ainda não há seções.',
                 'mobile' => 'Celular',
+                'pinned' => 'Fixado na parte inferior da página.',
                 'preview-btn' => 'Pré-visualizar',
                 'publish-btn' => 'Publicar',
                 'scoped-to' => 'Mostrando as seções do tema :theme no canal :channel.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'Este canal exibe apenas uma seção de links de rodapé.',
                 'name' => 'Nome',
                 'save-btn' => 'Salvar seção',
                 'title' => 'Criar seção',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'Novo',
                 'no' => 'Não',
                 'parent-id' => 'ID do Pai',
-                'parent-id-hint' => 'Você pode inserir vários IDs pai como valores separados por vírgula (ex.: 12,15,34)',
                 'preview' => 'Visualização',
                 'product-carousel' => 'Carrossel de Produtos',
                 'product-carousel-description' => 'Apresente produtos de forma elegante com um carrossel de produtos dinâmico e responsivo.',

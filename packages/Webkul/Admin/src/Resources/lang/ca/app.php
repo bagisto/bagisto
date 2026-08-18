@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Duplica',
                 'empty' => 'Encara no hi ha seccions.',
                 'mobile' => 'Mòbil',
+                'pinned' => 'Fixat a la part inferior de la pàgina.',
                 'preview-btn' => 'Vista prèvia',
                 'publish-btn' => 'Publica',
                 'scoped-to' => 'Es mostren les seccions del tema :theme al canal :channel.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'Aquest canal només mostra una secció d\'enllaços de peu de pàgina.',
                 'name' => 'Nom',
                 'save-btn' => 'Desa la secció',
                 'title' => 'Crea una secció',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'Nou',
                 'no' => 'No',
                 'parent-id' => 'ID del Pare',
-                'parent-id-hint' => 'Pots introduir múltiples ID de pare separats per comes (p. ex., 12,15,34)',
                 'preview' => 'Vista prèvia',
                 'product-carousel' => 'Carrousel de Productes',
                 'product-carousel-description' => 'Mostra productes de forma elegant amb un carrousel de productes dinàmic i adaptable.',

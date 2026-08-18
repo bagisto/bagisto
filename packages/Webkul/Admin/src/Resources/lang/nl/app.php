@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Dupliceren',
                 'empty' => 'Nog geen secties.',
                 'mobile' => 'Mobiel',
+                'pinned' => 'Vastgezet onderaan de pagina.',
                 'preview-btn' => 'Voorbeeld',
                 'publish-btn' => 'Publiceren',
                 'scoped-to' => 'Secties van het thema :theme op kanaal :channel worden weergegeven.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'Dit kanaal toont slechts één sectie met voettekstlinks.',
                 'name' => 'Naam',
                 'save-btn' => 'Sectie opslaan',
                 'title' => 'Sectie aanmaken',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'Nieuw',
                 'no' => 'Nee',
                 'parent-id' => 'Ouder-ID',
-                'parent-id-hint' => 'U kunt meerdere ouder-IDs als gescheiden waarden invoeren (bijvoorbeeld: 12,15,34)',
                 'preview' => 'Voorbeeld',
                 'product-carousel' => 'Product Carrousel',
                 'product-carousel-description' => 'Toon producten elegant met een dynamische en responsieve productcarrousel.',

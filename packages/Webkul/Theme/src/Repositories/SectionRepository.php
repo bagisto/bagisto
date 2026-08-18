@@ -29,7 +29,7 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Update the specified theme
+     * Update the specified section.
      *
      * @param  array  $data
      * @param  int  $id
@@ -210,6 +210,21 @@ class SectionRepository extends Repository
     }
 
     /**
+     * Every section of a type a channel shows, in render order and drafted when previewing.
+     */
+    public function findAllOfType(string $type, int $channelId, string $themeCode, string $locale)
+    {
+        return $this->orderBy('sort_order')
+            ->findWhere([
+                'type' => $type,
+                'status' => 1,
+                'theme_code' => $themeCode,
+                'channel_id' => $channelId,
+            ])
+            ->each(fn ($section) => $this->applyDraft($section, $locale));
+    }
+
+    /**
      * The single section of a type a channel shows, drafted when previewing.
      *
      * Footer links and service promises are rendered by the layout rather than the home
@@ -217,28 +232,7 @@ class SectionRepository extends Repository
      */
     public function findOneOfType(string $type, int $channelId, string $themeCode, string $locale)
     {
-        $section = $this->findOneWhere([
-            'type' => $type,
-            'status' => 1,
-            'theme_code' => $themeCode,
-            'channel_id' => $channelId,
-        ]);
-
-        if (
-            ! $section
-            || ! $this->isPreviewing()
-        ) {
-            return $section;
-        }
-
-        $translation = $section->translate($locale);
-
-        if (
-            $translation
-            && ! is_null($translation->draft_options)
-        ) {
-            $translation->options = $translation->draft_options;
-        }
+        $section = $this->findAllOfType($type, $channelId, $themeCode, $locale)->first();
 
         return $section;
     }
@@ -286,8 +280,6 @@ class SectionRepository extends Repository
         $copy = $section->replicateWithTranslations();
 
         $copy->name = $section->name.' '.trans('admin::app.appearance.sections.index.copy-suffix');
-
-        $copy->status = 0;
 
         $copy->sort_order = $section->sort_order + 1;
 
@@ -369,6 +361,27 @@ class SectionRepository extends Repository
         $css = str_replace("\0", '', (string) $css);
 
         return str_ireplace('</style', '<\/style', $css);
+    }
+
+    /**
+     * Swap a section's options for its draft, while previewing.
+     *
+     * @param  Section  $section
+     */
+    protected function applyDraft($section, string $locale): void
+    {
+        if (! $this->isPreviewing()) {
+            return;
+        }
+
+        $translation = $section->translate($locale);
+
+        if (
+            $translation
+            && ! is_null($translation->draft_options)
+        ) {
+            $translation->options = $translation->draft_options;
+        }
     }
 
     /**

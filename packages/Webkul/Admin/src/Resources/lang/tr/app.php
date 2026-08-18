@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Çoğalt',
                 'empty' => 'Henüz bölüm yok.',
                 'mobile' => 'Mobil',
+                'pinned' => 'Sayfanın altına sabitlendi.',
                 'preview-btn' => 'Önizleme',
                 'publish-btn' => 'Yayınla',
                 'scoped-to' => ':channel kanalındaki :theme temasının bölümleri gösteriliyor.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'Bu kanal yalnızca bir alt bilgi bağlantıları bölümü gösterir.',
                 'name' => 'Ad',
                 'save-btn' => 'Bölümü Kaydet',
                 'title' => 'Bölüm Oluştur',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'Yeni',
                 'no' => 'Hayır',
                 'parent-id' => 'Üst Kimlik',
-                'parent-id-hint' => 'Birden fazla üst kimlik girmek için virgülle ayırarak (örneğin: 12,15,34) değerlerini girin.',
                 'preview' => 'Önizleme',
                 'product-carousel' => 'Ürün Karuseli',
                 'product-carousel-description' => 'Dinamik ve duyarlı bir ürün karuseli ile ürünleri zarif bir şekilde sergileyin.',

@@ -147,7 +147,7 @@ it('should render the preview for a signed in admin', function () {
 });
 
 it('should copy a section including its translated options', function () {
-    $section = makeSection(['name' => 'Hero']);
+    $section = makeSection(['name' => 'Hero', 'status' => 1]);
 
     $this->loginAsAdmin();
 
@@ -157,7 +157,7 @@ it('should copy a section including its translated options', function () {
 
     expect($copy->name)->toContain('Hero');
 
-    expect($copy->status)->toBe(0);
+    expect((int) $copy->status)->toBe((int) $section->status);
 
     expect($copy->translate(app()->getLocale())->options)
         ->toBe($section->translate(app()->getLocale())->options);
@@ -406,4 +406,64 @@ it('should preview a channel with its own sections, not another channel ones', f
 
     expect($marksIn($other->id))->toBeEmpty()
         ->and($marksIn($current->id))->not->toBeEmpty();
+});
+
+it('should render every services section, so a duplicate of one shows up too', function () {
+    $channel = core()->getCurrentChannel();
+
+    $names = ['Promises One', 'Promises Two'];
+
+    foreach ($names as $name) {
+        $section = Section::factory()->create([
+            'type' => 'services_content',
+            'name' => $name,
+            'status' => 1,
+            'channel_id' => $channel->id,
+            'theme_code' => $channel->theme,
+        ]);
+
+        $section->translateOrNew(app()->getLocale())->options = [
+            'services' => [[
+                'service_icon' => 'icon-cart',
+                'title' => $name.' Title',
+                'description' => 'Description',
+            ]],
+        ];
+
+        $section->save();
+    }
+
+    $this->loginAsAdmin();
+
+    $html = get(route('shop.appearance.preview'))->assertOk()->getContent();
+
+    foreach ($names as $name) {
+        expect($html)->toContain($name.' Title');
+    }
+});
+
+it('should keep a pinned footer at the end whatever order is sent', function () {
+    $channel = core()->getCurrentChannel();
+
+    $footer = Section::factory()->create([
+        'type' => 'footer_links',
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $other = Section::factory()->create([
+        'type' => 'product_carousel',
+        'status' => 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.reorder'), [
+        'sections' => [$footer->id, $other->id],
+    ])->assertOk();
+
+    expect($footer->refresh()->sort_order)->toBeGreaterThan($other->refresh()->sort_order);
 });

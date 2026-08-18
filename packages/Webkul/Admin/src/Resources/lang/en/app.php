@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Duplicate',
                 'empty' => 'No sections yet.',
                 'mobile' => 'Mobile',
+                'pinned' => 'Pinned to the bottom of the page.',
                 'preview-btn' => 'Preview',
                 'publish-btn' => 'Publish',
                 'scoped-to' => 'Showing sections for the :theme theme on the :channel channel.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'This channel shows only one footer links section.',
                 'name' => 'Name',
                 'save-btn' => 'Save Section',
                 'title' => 'Create Section',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'New',
                 'no' => 'No',
                 'parent-id' => 'Parent ID',
-                'parent-id-hint' => 'You can enter multiple parent IDs as comma-separated values (e.g., 12,15,34)',
                 'preview' => 'Preview',
                 'product-carousel' => 'Product Carousel',
                 'product-carousel-description' => 'Showcase products elegantly with a dynamic and responsive product carousel.',

@@ -1,15 +1,7 @@
 {!! view_render_event('bagisto.shop.layout.footer.before') !!}
 
-<!--
-    The category repository is injected directly here because there is no way
-    to retrieve it from the view composer, as this is an anonymous component.
--->
 @inject('sectionRepository', 'Webkul\Theme\Repositories\SectionRepository')
 
-<!--
-    This code needs to be refactored to reduce the amount of PHP in the Blade
-    template as much as possible.
--->
 @php
     $channel = core()->getCurrentChannel();
 
@@ -37,12 +29,6 @@
             @if ($section?->options)
                 @foreach ($section->options as $footerLinkSection)
                     <ul class="grid gap-5 text-sm">
-                        @php
-                            usort($footerLinkSection, function ($a, $b) {
-                                return $a['sort_order'] - $b['sort_order'];
-                            });
-                        @endphp
-
                         @foreach ($footerLinkSection as $link)
                             <li>
                                 <a href="{{ $link['url'] }}">
@@ -71,12 +57,6 @@
                             class="grid gap-5 text-sm"
                             v-pre
                         >
-                            @php
-                                usort($footerLinkSection, function ($a, $b) {
-                                    return $a['sort_order'] - $b['sort_order'];
-                                });
-                            @endphp
-
                             @foreach ($footerLinkSection as $link)
                                 <li>
                                     <a

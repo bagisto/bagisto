@@ -2,6 +2,7 @@
 
 namespace Webkul\Theme;
 
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Theme\Models\Section;
 
 class SectionSchema
@@ -40,6 +41,11 @@ class SectionSchema
      * A free key and value map, used by the carousel filters.
      */
     public const FILTERS = 'filters';
+
+    /**
+     * Create a new schema instance.
+     */
+    public function __construct(protected CategoryRepository $categoryRepository) {}
 
     /**
      * Field schema for every section type, keyed by the stored type.
@@ -113,14 +119,12 @@ class SectionSchema
                             ->values()
                             ->all(),
                     ],
+                    ['value' => 'limit', 'label' => $this->label('limit'), 'options' => $this->limitOptions()],
                     [
-                        'value' => 'limit',
-                        'label' => $this->label('limit'),
-                        'options' => collect(product_toolbar()->getAvailableLimits())
-                            ->map(fn ($limit) => ['value' => (string) $limit, 'label' => (string) $limit])
-                            ->all(),
+                        'value' => 'category_id',
+                        'label' => $this->label('category-id'),
+                        'options' => $this->categoryOptions(),
                     ],
-                    ['value' => 'category_id', 'label' => $this->label('category-id')],
                     ['value' => 'featured', 'label' => $this->label('featured'), 'options' => $this->yesNo()],
                     ['value' => 'new', 'label' => $this->label('new'), 'options' => $this->yesNo()],
                 ],
@@ -148,11 +152,12 @@ class SectionSchema
                             ['value' => 'desc', 'label' => $this->label('desc')],
                         ],
                     ],
-                    ['value' => 'limit', 'label' => $this->label('limit'), 'input' => self::NUMBER],
+                    ['value' => 'limit', 'label' => $this->label('limit'), 'options' => $this->limitOptions()],
                     [
                         'value' => 'parent_id',
                         'label' => $this->label('parent-id'),
-                        'hint' => $this->label('parent-id-hint'),
+                        'options' => $this->categoryOptions(),
+                        'multiple' => true,
                     ],
                 ],
             ],
@@ -173,7 +178,6 @@ class SectionSchema
                 'fields' => [
                     ['key' => 'title', 'type' => self::TEXT, 'label' => $this->label('footer-title')],
                     ['key' => 'url', 'type' => self::TEXT, 'label' => $this->label('url')],
-                    ['key' => 'sort_order', 'type' => self::NUMBER, 'label' => $this->label('sort-order')],
                 ],
             ])
             ->all();
@@ -208,6 +212,51 @@ class SectionSchema
                 ],
             ],
         ];
+    }
+
+    /**
+     * Every category a filter can point at, labelled with its path so that two categories
+     * sharing a name can be told apart. Roots are included, because a carousel of the
+     * top level categories points at one.
+     *
+     * @return list<array{value: string, label: string}>
+     */
+    protected function categoryOptions(): array
+    {
+        $categories = $this->categoryRepository->all();
+
+        $names = $categories->pluck('name', 'id');
+
+        $parents = $categories->pluck('parent_id', 'id');
+
+        return $categories
+            ->map(function ($category) use ($names, $parents) {
+                $path = [];
+
+                for ($id = $category->id; $id && isset($names[$id]); $id = $parents[$id] ?? null) {
+                    array_unshift($path, $names[$id]);
+                }
+
+                return [
+                    'value' => (string) $category->id,
+                    'label' => count($path) > 1 ? implode(' / ', array_slice($path, 1)) : reset($path),
+                ];
+            })
+            ->sortBy('label')
+            ->values()
+            ->all();
+    }
+
+    /**
+     * How many items a carousel shows.
+     *
+     * @return list<array{value: string, label: string}>
+     */
+    protected function limitOptions(): array
+    {
+        return collect(product_toolbar()->getAvailableLimits())
+            ->map(fn ($limit) => ['value' => (string) $limit, 'label' => (string) $limit])
+            ->all();
     }
 
     /**

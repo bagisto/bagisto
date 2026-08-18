@@ -1,15 +1,11 @@
 {!! view_render_event('bagisto.shop.layout.features.before') !!}
 
-<!--
-    The SectionRepository repository is injected directly here because there is no way
-    to retrieve it from the view composer, as this is an anonymous component.
--->
 @inject('sectionRepository', 'Webkul\Theme\Repositories\SectionRepository')
 
 @php
     $channel = core()->getCurrentChannel();
 
-    $section = $sectionRepository->findOneOfType(
+    $sections = $sectionRepository->findAllOfType(
         'services_content',
         $channel->id,
         $channel->theme,
@@ -18,7 +14,7 @@
 @endphp
 
 <!-- Features -->
-@if ($section)
+@foreach ($sections as $section)
     <div
         class="container mt-20 max-lg:px-8 max-md:mt-10 max-md:px-4"
         v-pre
@@ -51,6 +47,6 @@
             @endforeach
         </div>
     </div>
-@endif
+@endforeach
 
 {!! view_render_event('bagisto.shop.layout.features.after') !!}

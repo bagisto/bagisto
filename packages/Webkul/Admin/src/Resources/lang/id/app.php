@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Duplikat',
                 'empty' => 'Belum ada bagian.',
                 'mobile' => 'Ponsel',
+                'pinned' => 'Disematkan di bagian bawah halaman.',
                 'preview-btn' => 'Pratinjau',
                 'publish-btn' => 'Terbitkan',
                 'scoped-to' => 'Menampilkan bagian untuk tema :theme pada saluran :channel.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'Saluran ini hanya menampilkan satu bagian tautan footer.',
                 'name' => 'Nama',
                 'save-btn' => 'Simpan Bagian',
                 'title' => 'Buat Bagian',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'Baru',
                 'no' => 'Tidak',
                 'parent-id' => 'ID Induk',
-                'parent-id-hint' => 'Anda dapat memasukkan beberapa ID induk dengan koma sebagai pemisah (misal: 12,15,34)',
                 'preview' => 'Pratinjau',
                 'product-carousel' => 'Carousel Produk',
                 'product-carousel-description' => 'Pamerkan produk dengan elegan menggunakan carousel produk yang dinamis dan responsif.',

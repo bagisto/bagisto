@@ -3276,6 +3276,7 @@ return [
                 'duplicate-btn' => 'Duplikuj',
                 'empty' => 'Brak sekcji.',
                 'mobile' => 'Telefon',
+                'pinned' => 'Przypięte do dołu strony.',
                 'preview-btn' => 'Podgląd',
                 'publish-btn' => 'Opublikuj',
                 'scoped-to' => 'Wyświetlanie sekcji motywu :theme w kanale :channel.',
@@ -3300,6 +3301,7 @@ return [
             ],
 
             'create' => [
+                'footer-links-exists' => 'Ten kanał wyświetla tylko jedną sekcję linków w stopce.',
                 'name' => 'Nazwa',
                 'save-btn' => 'Zapisz sekcję',
                 'title' => 'Utwórz sekcję',
@@ -3356,7 +3358,6 @@ return [
                 'new' => 'Nowy',
                 'no' => 'Nie',
                 'parent-id' => 'Identyfikator nadrzędny',
-                'parent-id-hint' => 'Możesz wprowadzić wiele identyfikatorów nadrzędnych jako wartości oddzielone przecinkami (np. 12,15,34)',
                 'preview' => 'Podgląd',
                 'product-carousel' => 'Karuzela produktów',
                 'product-carousel-description' => 'Elegancko prezentuj produkty za pomocą dynamicznej i responsywnej karuzeli produktów.',

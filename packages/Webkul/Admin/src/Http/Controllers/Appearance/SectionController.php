@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
 use Webkul\Theme\Contracts\Section;
@@ -62,6 +63,15 @@ class SectionController extends Controller
 
         $channel = $this->requestedChannel();
 
+        if (
+            $validated['type'] === SectionModel::FOOTER_LINKS
+            && $this->footerLinksOf($code, $channel->id)->isNotEmpty()
+        ) {
+            throw ValidationException::withMessages([
+                'type' => trans('admin::app.appearance.sections.create.footer-links-exists'),
+            ]);
+        }
+
         Event::dispatch('section.create.before');
 
         $section = $this->sectionRepository->create($validated + [
@@ -73,8 +83,12 @@ class SectionController extends Controller
 
         Event::dispatch('section.create.after', $section);
 
+        $sections = $this->editableSections($code, $channel->id);
+
+        $this->sectionRepository->reorder(array_column($sections, 'id'));
+
         return new JsonResponse([
-            'section' => $this->sectionRow($section),
+            'section' => $this->sectionRow($section->refresh()),
             'message' => trans('admin::app.appearance.sections.create-success'),
         ]);
     }
@@ -267,7 +281,9 @@ class SectionController extends Controller
             'sections.*' => 'required|integer',
         ]);
 
-        $this->sectionRepository->reorder(request()->input('sections'));
+        $this->sectionRepository->reorder(
+            $this->withPinnedLast(request()->input('sections'))
+        );
 
         return new JsonResponse([
             'message' => trans('admin::app.appearance.sections.update-success'),
@@ -342,9 +358,39 @@ class SectionController extends Controller
                 'channel_id' => $channelId,
                 'theme_code' => $themeCode,
             ])
+            ->sortBy(fn ($section) => $section->type === SectionModel::FOOTER_LINKS ? 1 : 0)
             ->map(fn ($section) => $this->sectionRow($section))
             ->values()
             ->toArray();
+    }
+
+    /**
+     * The given order with the pinned sections moved to the end, so a reorder cannot
+     * lift the footer out of the bottom of the page.
+     */
+    protected function withPinnedLast(array $sectionIds): array
+    {
+        $pinned = $this->sectionRepository
+            ->findWhereIn('id', $sectionIds)
+            ->where('type', SectionModel::FOOTER_LINKS)
+            ->pluck('id')
+            ->all();
+
+        $free = array_values(array_diff($sectionIds, $pinned));
+
+        return array_merge($free, array_values(array_intersect($sectionIds, $pinned)));
+    }
+
+    /**
+     * The footer link sections a channel holds for a theme.
+     */
+    protected function footerLinksOf(?string $themeCode, int $channelId)
+    {
+        return $this->sectionRepository->findWhere([
+            'type' => SectionModel::FOOTER_LINKS,
+            'theme_code' => $themeCode,
+            'channel_id' => $channelId,
+        ]);
     }
 
     /**
@@ -360,6 +406,7 @@ class SectionController extends Controller
             'type' => $section->type,
             'status' => (bool) $section->status,
             'has_draft' => $this->hasDraft($section),
+            'is_pinned' => $section->type === SectionModel::FOOTER_LINKS,
         ];
     }
 

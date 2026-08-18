@@ -7,7 +7,7 @@
         type="text/x-template"
         id="v-code-editor-template"
     >
-        <div class="overflow-hidden rounded-md border dark:border-gray-800">
+        <div class="min-w-0 max-w-full overflow-hidden rounded-md border dark:border-gray-800">
             <!-- Toolbar -->
             <div class="flex items-center justify-between gap-2 border-b bg-gray-50 px-3 py-1.5 dark:border-gray-800 dark:bg-gray-950">
                 <span class="font-mono text-[11px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-300">
@@ -118,6 +118,12 @@
                     });
 
                     this.editor.on('change', () => this.$emit('update:modelValue', this.editor.getValue()));
+
+                    /**
+                     * The drawer animates open, so the editor is measured again once it has
+                     * its final width.
+                     */
+                    this.$nextTick(() => this.editor.refresh());
                 },
 
                 /**
@@ -202,7 +208,26 @@
          */
         .CodeMirror {
             height: 320px;
+            width: 100%;
+            max-width: 100%;
             font-size: 12px;
+        }
+
+        /**
+         * Line wrapping breaks at spaces, which a generated file name or a minified rule
+         * does not have, so those are broken anywhere rather than scrolled to.
+         */
+        .CodeMirror pre.CodeMirror-line,
+        .CodeMirror pre.CodeMirror-line-like {
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        /**
+         * With wrapping on there is nothing left to scroll to sideways.
+         */
+        .CodeMirror-hscrollbar {
+            display: none !important;
         }
     </style>
 @endPushOnce

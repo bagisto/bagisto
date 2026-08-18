@@ -20,7 +20,10 @@
         :channel-id="$scopedChannel->id"
         :preview-url="$previewUrl"
         :reorder-url="route('admin.appearance.sections.reorder')"
-        :store-url="route('admin.appearance.sections.store', ['code' => $scopedTheme])"
+        :store-url="route('admin.appearance.sections.store', [
+            'code' => $scopedTheme,
+            'channel' => $scopedChannel->id,
+        ])"
         :urls="$urls"
     />
 
