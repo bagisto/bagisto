@@ -69,7 +69,7 @@ export class RuleApplyPage extends BasePage {
     }
 
     get shippingEmail() {
-        return this.page.getByRole("textbox", { name: "email@example.com" });
+        return this.page.locator('input[name="billing\\.email"]');
     }
 
     get streetAddress() {
