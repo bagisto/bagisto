@@ -34,13 +34,13 @@
         {{  $channel->home_seo['meta_title'] ?? '' }}
     </x-slot>
 
-    <!-- Loop over the theme customization -->
-    @foreach ($customizations as $customization)
-        @php ($data = $customization->options) @endphp
+    <!-- Loop over the storefront sections -->
+    @foreach ($sections as $section)
+        @php ($data = $section->options) @endphp
 
         <!-- Static Content -->
-        @switch ($customization->type)
-            @case ($customization::IMAGE_CAROUSEL)
+        @switch ($section->type)
+            @case ($section::IMAGE_CAROUSEL)
                 <!-- Image Carousel -->
                 <x-shop::carousel
                     :options="$data"
@@ -48,7 +48,7 @@
                 />
 
                 @break
-            @case ($customization::STATIC_CONTENT)
+            @case ($section::STATIC_CONTENT)
                 <!-- Push Style -->
                 @if (! empty($data['css']))
                     @push ('styles')
@@ -64,7 +64,7 @@
                 @endif
 
                 @break
-            @case ($customization::CATEGORY_CAROUSEL)
+            @case ($section::CATEGORY_CAROUSEL)
                 <!-- Categories carousel -->
                 <x-shop::categories.carousel
                     :title="$data['title'] ?? ''"
@@ -74,7 +74,7 @@
                 />
 
                 @break
-            @case ($customization::PRODUCT_CAROUSEL)
+            @case ($section::PRODUCT_CAROUSEL)
                 <!-- Product Carousel -->
                 <x-shop::products.carousel
                     :title="$data['title'] ?? ''"

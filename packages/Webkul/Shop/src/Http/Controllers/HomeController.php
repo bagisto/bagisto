@@ -9,7 +9,7 @@ use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Shop\Http\Requests\ContactRequest;
 use Webkul\Shop\Http\Resources\CategoryTreeResource;
 use Webkul\Shop\Mail\ContactUs;
-use Webkul\Theme\Repositories\ThemeCustomizationRepository;
+use Webkul\Theme\Repositories\SectionRepository;
 
 class HomeController extends Controller
 {
@@ -23,7 +23,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(protected ThemeCustomizationRepository $themeCustomizationRepository, protected CategoryRepository $categoryRepository) {}
+    public function __construct(protected SectionRepository $sectionRepository, protected CategoryRepository $categoryRepository) {}
 
     /**
      * Loads the home page for the storefront.
@@ -32,7 +32,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
+        $sections = $this->sectionRepository->orderBy('sort_order')->findWhere([
             'status' => self::STATUS,
             'channel_id' => core()->getCurrentChannel()->id,
             'theme_code' => core()->getCurrentChannel()->theme,
@@ -42,7 +42,7 @@ class HomeController extends Controller
 
         $categories = CategoryTreeResource::collection($categories);
 
-        return view('shop::home.index', compact('customizations', 'categories'));
+        return view('shop::home.index', compact('sections', 'categories'));
     }
 
     /**

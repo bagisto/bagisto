@@ -14,6 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run($parameters = [])
     {
-        $this->call(ThemeCustomizationTableSeeder::class, false, ['parameters' => $parameters]);
+        $this->call(SectionTableSeeder::class, false, ['parameters' => $parameters]);
     }
 }

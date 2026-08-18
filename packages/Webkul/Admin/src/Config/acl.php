@@ -1173,33 +1173,6 @@ return [
         'route' => 'admin.settings.roles.delete',
         'sort' => 3,
     ], [
-        'key' => 'settings.themes',
-        'name' => 'admin::app.acl.themes',
-        'route' => 'admin.settings.themes.index',
-        'sort' => 8,
-    ], [
-        'key' => 'settings.themes.create',
-        'name' => 'admin::app.acl.create',
-        'route' => 'admin.settings.themes.store',
-        'sort' => 1,
-    ], [
-        'key' => 'settings.themes.edit',
-        'name' => 'admin::app.acl.edit',
-        'route' => [
-            'admin.settings.themes.edit',
-            'admin.settings.themes.update',
-            'admin.settings.themes.mass_update',
-        ],
-        'sort' => 2,
-    ], [
-        'key' => 'settings.themes.delete',
-        'name' => 'admin::app.acl.delete',
-        'route' => [
-            'admin.settings.themes.delete',
-            'admin.settings.themes.mass_delete',
-        ],
-        'sort' => 3,
-    ], [
         'key' => 'settings.taxes',
         'name' => 'admin::app.acl.taxes',
         'route' => 'admin.settings.taxes.categories.index',
@@ -1327,5 +1300,66 @@ return [
             'admin.configuration.cache-management.execute',
         ],
         'sort' => 9,
+    ],
+
+    /**
+     * Appearance.
+     */
+    [
+        'key' => 'appearance',
+        'name' => 'admin::app.acl.appearance',
+        'route' => 'admin.appearance.themes.index',
+        'sort' => 9,
+    ], [
+        'key' => 'appearance.themes',
+        'name' => 'admin::app.acl.themes',
+        'route' => 'admin.appearance.themes.index',
+        'sort' => 1,
+    ], [
+        'key' => 'appearance.themes.activate',
+        'name' => 'admin::app.acl.activate',
+        'route' => [
+            'admin.appearance.themes.impact',
+            'admin.appearance.themes.activate',
+        ],
+        'sort' => 1,
+    ], [
+        'key' => 'appearance.sections',
+        'name' => 'admin::app.acl.customize',
+        'route' => [
+            'admin.appearance.sections.index',
+            'admin.settings.themes.index',
+        ],
+        'sort' => 2,
+    ], [
+        'key' => 'appearance.sections.create',
+        'name' => 'admin::app.acl.create',
+        'route' => [
+            'admin.appearance.sections.store',
+            'admin.settings.themes.store',
+        ],
+        'sort' => 1,
+    ], [
+        'key' => 'appearance.sections.edit',
+        'name' => 'admin::app.acl.edit',
+        'route' => [
+            'admin.appearance.sections.edit',
+            'admin.appearance.sections.update',
+            'admin.appearance.sections.mass_update',
+            'admin.settings.themes.edit',
+            'admin.settings.themes.update',
+            'admin.settings.themes.mass_update',
+        ],
+        'sort' => 2,
+    ], [
+        'key' => 'appearance.sections.delete',
+        'name' => 'admin::app.acl.delete',
+        'route' => [
+            'admin.appearance.sections.delete',
+            'admin.appearance.sections.mass_delete',
+            'admin.settings.themes.delete',
+            'admin.settings.themes.mass_delete',
+        ],
+        'sort' => 3,
     ],
 ];

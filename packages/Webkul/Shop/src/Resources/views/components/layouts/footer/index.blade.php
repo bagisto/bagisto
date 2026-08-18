@@ -4,7 +4,7 @@
     The category repository is injected directly here because there is no way
     to retrieve it from the view composer, as this is an anonymous component.
 -->
-@inject('themeCustomizationRepository', 'Webkul\Theme\Repositories\ThemeCustomizationRepository')
+@inject('sectionRepository', 'Webkul\Theme\Repositories\SectionRepository')
 
 <!--
     This code needs to be refactored to reduce the amount of PHP in the Blade
@@ -13,7 +13,7 @@
 @php
     $channel = core()->getCurrentChannel();
 
-    $customization = $themeCustomizationRepository->findOneWhere([
+    $section = $sectionRepository->findOneWhere([
         'type'       => 'footer_links',
         'status'     => 1,
         'theme_code' => $channel->theme,
@@ -28,8 +28,8 @@
             class="flex flex-wrap items-start gap-24 max-1180:gap-6 max-1060:hidden"
             v-pre
         >
-            @if ($customization?->options)
-                @foreach ($customization->options as $footerLinkSection)
+            @if ($section?->options)
+                @foreach ($section->options as $footerLinkSection)
                     <ul class="grid gap-5 text-sm">
                         @php
                             usort($footerLinkSection, function ($a, $b) {
@@ -59,8 +59,8 @@
             </x-slot>
 
             <x-slot:content class="flex justify-between !bg-transparent !p-4">
-                @if ($customization?->options)
-                    @foreach ($customization->options as $footerLinkSection)
+                @if ($section?->options)
+                    @foreach ($section->options as $footerLinkSection)
                         <ul
                             class="grid gap-5 text-sm"
                             v-pre

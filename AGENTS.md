@@ -1,5 +1,28 @@
 # AGENTS.md — Cross-Agent Instructions for Bagisto 2.4.x
 
+## Skills — load these before writing code
+
+This repository ships its conventions as skills under `.claude/skills/<name>/SKILL.md`. If your
+harness has no skill loader, read those files directly — they are plain markdown.
+
+**Load the relevant ones before writing or reviewing code, not after.** They carry rules that
+`vendor/bin/pint` does not enforce and that a reviewer will otherwise send back.
+
+| Skill | Load it when | It settles |
+|---|---|---|
+| `package-development` | Any PHP: controllers, repositories, models, DataGrids, migrations, listeners, jobs, enums | Docblocks on every method/property, class member order, multi-clause conditions, comment discipline, repository-over-query-builder, package/menu/ACL/system-config structure |
+| `blade-conventions` | Any `.blade.php`, in any package | `:` vs `::` binding, anonymous vs Vue-backed components, attribute layout, `@props` alignment, comment syntax per layer, translations and `view_render_event` placement |
+| `pest-testing` | Writing or changing tests | Suite layout, test-case bindings, assertion style, datasets, registering a new package's tests |
+
+One rule that catches people out:
+
+- **A pre-existing violation in a file you touch is yours.** `package-development` is explicit:
+  when you edit a class, scan its whole member order and docblocks and fix what is already wrong.
+  Leaving it is treated the same as introducing it.
+
+Where a skill and the surrounding code genuinely disagree, match the surrounding code and say so in
+your summary rather than silently churning the codebase either way.
+
 ## Do Not Edit
 
 - `vendor/`, `node_modules/`, `composer.lock`, `package-lock.json`
@@ -102,7 +125,7 @@ Every package in `packages/Webkul/{Name}/src/` follows:
 ├── Repositories/               # Prettus L5 repositories
 ├── Resources/
 │   ├── assets/                 # JS, CSS, images (Vite-compiled)
-│   ├── lang/{locale}/          # 21 locales
+│   ├── lang/{locale}/          # 22 locales
 │   └── views/
 ├── Routes/
 │   ├── admin-routes.php
@@ -171,7 +194,7 @@ php artisan db:seed              # Seed database
 ## Safety Rails
 
 - **Never modify `bootstrap/providers.php` or `config/concord.php`** without understanding the full provider chain — removing a provider breaks the entire module.
-- **Translations are 21 files per key.** Missing a locale will fail CI. When adding/removing translation keys, hit all 21 files.
+- **Translations are 22 files per key.** Missing a locale will fail CI. When adding/removing translation keys, hit all 22 files.
 - **Pint must pass.** Run `vendor/bin/pint --dirty` before finalizing any PHP change.
 - **Tests must pass.** Run affected package tests after changes. Do not delete tests without approval.
 - **Do not add/remove composer dependencies without approval.**
@@ -181,7 +204,10 @@ php artisan db:seed              # Seed database
 
 1. `vendor/bin/pint --dirty` — no style violations
 2. `php artisan test --compact` — affected tests pass
-3. `php artisan bagisto:translations:check` — translation keys exist in all 21 locale files (if changed)
+3. `php artisan bagisto:translations:check` — translation keys exist in all 22 locale files (if changed)
 4. No `env()` calls outside `config/` files
 5. New models have Contract + Model + Proxy + Repository
 6. New packages registered in `bootstrap/providers.php` and `config/concord.php`
+7. Conventions from the skills above hold for every file touched — docblocks on each method and
+   property, class members ordered constants → properties → constructor → public → protected →
+   private, multi-clause conditions split across lines, `:` vs `::` correct in Blade
