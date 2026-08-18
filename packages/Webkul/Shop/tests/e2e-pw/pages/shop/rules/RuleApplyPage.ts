@@ -47,7 +47,7 @@ export class RuleApplyPage extends BasePage {
     }
 
     get shoppingCartIcon() {
-        return this.page.locator("(//span[contains(@class, 'icon-cart')])[1]");
+        return this.page.locator('[class*="icon-cart"]').first();
     }
 
     get continueButton() {

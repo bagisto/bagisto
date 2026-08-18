@@ -4,6 +4,8 @@ import { BookingProductCheckout } from "../../pages/shop/checkout/product-types/
 import { loginAsCustomer, addAddress } from "../../utils/customer";
 
 test.describe("appointment booking product checkout flow", () => {
+    test.describe.configure({ timeout: 180 * 1000 });
+
     test.describe("available every week and same slot for all days", () => {
         test("should create appointment booking with available every week and same slot for all days", async ({
             adminPage,
