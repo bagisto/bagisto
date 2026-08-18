@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'Başarıyla güncellendi',
                 ],
 
+                'campaign-associate' => 'Bu şablon bir veya daha fazla kampanyada kullanılıyor.',
                 'delete-failed' => ':name Silme Başarısız',
                 'delete-success' => 'Şablon başarıyla silindi',
                 'email-template' => 'E-posta Şablonu',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Bu etkinlik bir veya daha fazla kampanyada kullanılıyor.',
                 'delete-failed' => ':name Silme Başarısız',
                 'delete-success' => 'Etkinlikler Başarıyla Silindi',
                 'edit-error' => 'Etkinlik Düzenlenemiyor',

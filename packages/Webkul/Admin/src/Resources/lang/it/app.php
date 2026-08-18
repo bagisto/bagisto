@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'Aggiornato con successo',
                 ],
 
+                'campaign-associate' => 'Questo modello è utilizzato in una o più campagne.',
                 'delete-failed' => ':name Eliminazione non riuscita',
                 'delete-success' => 'Modello eliminato con successo',
                 'email-template' => 'Modello di Email',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Questo evento è utilizzato in una o più campagne.',
                 'delete-failed' => ':name Eliminazione non riuscita',
                 'delete-success' => 'Eventi Eliminati con Successo',
                 'edit-error' => 'L\'evento non può essere modificato',

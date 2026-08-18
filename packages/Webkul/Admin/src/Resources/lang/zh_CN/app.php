@@ -2530,6 +2530,7 @@ return [
                     'update-success' => '更新成功',
                 ],
 
+                'campaign-associate' => '该模板正在一个或多个营销活动中使用。',
                 'delete-failed' => ':name 删除失败',
                 'delete-success' => '模板删除成功',
                 'email-template' => '电子邮件模板',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => '该事件正在一个或多个营销活动中使用。',
                 'delete-failed' => ':name 删除失败',
                 'delete-success' => '事件删除成功',
                 'edit-error' => '事件无法编辑',

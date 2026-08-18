@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'تم التحديث بنجاح',
                 ],
 
+                'campaign-associate' => 'يُستخدم هذا القالب في حملة واحدة أو أكثر.',
                 'delete-failed' => 'فشل حذف :name',
                 'delete-success' => 'تم حذف القالب بنجاح',
                 'email-template' => 'قالب البريد الإلكتروني',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'يُستخدم هذا الحدث في حملة واحدة أو أكثر.',
                 'delete-failed' => 'فشل حذف :name',
                 'delete-success' => 'تم حذف الأحداث بنجاح',
                 'edit-error' => 'لا يمكن تعديل الحدث',

@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'עודכן בהצלחה',
                 ],
 
+                'campaign-associate' => 'תבנית זו נמצאת בשימוש בקמפיין אחד או יותר.',
                 'delete-failed' => ':name נמחקה בהצלחה',
                 'delete-success' => 'תבנית נמחקה בהצלחה',
                 'email-template' => 'תבנית דוא"ל',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'אירוע זה נמצא בשימוש בקמפיין אחד או יותר.',
                 'delete-failed' => 'מחיקת :name נכשלה',
                 'delete-success' => 'האירועים נמחקו בהצלחה',
                 'edit-error' => 'לא ניתן לערוך את האירוע',

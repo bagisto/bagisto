@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'Atualizado com sucesso',
                 ],
 
+                'campaign-associate' => 'Este modelo é usado em uma ou mais campanhas.',
                 'delete-failed' => 'Falha ao excluir :name',
                 'delete-success' => 'Modelo excluído com sucesso',
                 'email-template' => 'Modelo de Email',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Este evento é usado em uma ou mais campanhas.',
                 'delete-failed' => 'Falha ao excluir :name',
                 'delete-success' => 'Eventos excluídos com sucesso',
                 'edit-error' => 'Não é possível editar o evento',

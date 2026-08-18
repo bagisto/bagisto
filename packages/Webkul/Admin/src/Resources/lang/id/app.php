@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'Berhasil diperbarui.',
                 ],
 
+                'campaign-associate' => 'Templat ini digunakan dalam satu atau beberapa kampanye.',
                 'delete-failed' => 'Gagal menghapus :name',
                 'delete-success' => 'Template berhasil dihapus',
                 'email-template' => 'Template Email',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Acara ini digunakan dalam satu atau beberapa kampanye.',
                 'delete-failed' => 'Gagal menghapus :name',
                 'delete-success' => 'Acara berhasil dihapus',
                 'edit-error' => 'Acara tidak dapat diedit',

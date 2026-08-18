@@ -113,7 +113,13 @@ class EventController extends Controller
      */
     public function destroy(int $id)
     {
-        $this->eventRepository->findOrFail($id);
+        $event = $this->eventRepository->findOrFail($id);
+
+        if ($event->campaigns()->count()) {
+            return response()->json([
+                'message' => trans('admin::app.marketing.communications.events.campaign-associate'),
+            ], 400);
+        }
 
         try {
             Event::dispatch('marketing.events.delete.before', $id);

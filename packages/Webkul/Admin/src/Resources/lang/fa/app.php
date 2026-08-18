@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'با موفقیت به‌روزرسانی شد',
                 ],
 
+                'campaign-associate' => 'این قالب در یک یا چند کمپین استفاده می‌شود.',
                 'delete-failed' => ':name حذف نشد',
                 'delete-success' => 'قالب با موفقیت حذف شد',
                 'email-template' => 'قالب ایمیل',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'این رویداد در یک یا چند کمپین استفاده می‌شود.',
                 'delete-failed' => ':name حذف نشد',
                 'delete-success' => 'رویدادها با موفقیت حذف شدند',
                 'edit-error' => 'رویداد قابل ویرایش نمی‌باشد',

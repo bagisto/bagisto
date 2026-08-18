@@ -46,6 +46,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed Help & Resources missing from the admin menu on a phone or tablet. It sat in the sidebar, which is hidden below large screens, and was never added to the drawer that replaces it.
 
+- #11420 [fixed] - Fixed deleting an email template or a marketing event a campaign uses, which succeeded and left the campaign behind with nothing to send. Either is now refused while a campaign still points at it, the way a customer group with customers is.
+
 - #11419 [fixed] - Fixed the default attribute family being deletable, which then broke the create family screen for good because it is built from that family. Deleting it is now refused, and the screen falls back to another family rather than erroring if it is already gone.
 
 - #11418 [fixed] - Fixed a customer being unable to save their profile when the same email address exists on another channel. Registration already scoped the check by channel while the profile and admin edits did not, so an address in use elsewhere blocked an unrelated account.

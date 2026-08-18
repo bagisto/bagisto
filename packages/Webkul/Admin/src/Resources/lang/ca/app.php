@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'Actualizat exitosament',
                 ],
 
+                'campaign-associate' => 'Aquesta plantilla s\'utilitza en una o més campanyes.',
                 'delete-failed' => ':name Eliminació Fallida',
                 'delete-success' => 'Plantilla eliminada exitosament',
                 'email-template' => 'Plantilla de Correu Electrònic',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Aquest esdeveniment s\'utilitza en una o més campanyes.',
                 'delete-failed' => 'Eliminació de :name fallida',
                 'delete-success' => 'Esdeveniments eliminats amb éxit',
                 'edit-error' => 'No es pot editar l\'esdeveniment',

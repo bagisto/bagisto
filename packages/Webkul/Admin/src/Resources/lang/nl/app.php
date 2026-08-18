@@ -2530,6 +2530,7 @@ return [
                     'update-success' => 'Succesvol bijgewerkt',
                 ],
 
+                'campaign-associate' => 'Deze sjabloon wordt in een of meer campagnes gebruikt.',
                 'delete-failed' => ':name Verwijderen Mislukt',
                 'delete-success' => 'Sjabloon succesvol verwijderd',
                 'email-template' => 'E-mail sjabloon',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Deze gebeurtenis wordt in een of meer campagnes gebruikt.',
                 'delete-failed' => ':name Verwijderen mislukt',
                 'delete-success' => 'Evenementen succesvol verwijderd',
                 'edit-error' => 'Evenement kan niet worden bewerkt',

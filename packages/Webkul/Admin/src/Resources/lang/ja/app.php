@@ -2530,6 +2530,7 @@ return [
                     'update-success' => '正常に更新されました',
                 ],
 
+                'campaign-associate' => 'このテンプレートは 1 つ以上のキャンペーンで使用されています。',
                 'delete-failed' => ':name 削除に失敗しました',
                 'delete-success' => 'テンプレートが正常に削除されました',
                 'email-template' => 'メールテンプレート',
@@ -2633,6 +2634,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'このイベントは 1 つ以上のキャンペーンで使用されています。',
                 'delete-failed' => ':name の削除に失敗しました',
                 'delete-success' => 'イベントが正常に削除されました',
                 'edit-error' => 'イベントは編集できません',
