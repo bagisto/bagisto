@@ -47,7 +47,9 @@ vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directo
 vendor/bin/pest --filter="test name"                    # Run a single test by name
 ```
 
-Test suites defined in `phpunit.xml`: Admin Feature, Core Unit, Customer Unit, DataGrid Unit, Installer Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
+Test suites defined in `phpunit.xml`: Admin Feature, Core Unit, Customer Unit, DataGrid Unit, EUWithdrawal Feature, Installer Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
+
+Every package that has tests is registered above. Packages without a `tests/` directory (PhonePe, Checkout, Product, Sales, RMA, and others) have no suite — adding a `<testsuite>` for a path that does not exist makes PHPUnit error, so write the tests first.
 
 Tests use **Pest 3** with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
 
@@ -78,6 +80,28 @@ vendor/bin/pint             # Fix PHP code style (Laravel Pint)
 vendor/bin/pint --test      # Check style without fixing
 ```
 
+**Do not write comments inside method bodies.** Keep only the docblock above a class, method, or property — that is the only comment this codebase wants. Do not narrate what a statement does, why a line was added, or what a fix changed; the code and the commit message carry that. This applies to `//` line comments and `/** */` blocks alike, and to PHP, Blade, JavaScript, and Vue.
+
+```php
+// Bad - explains a statement inside the body
+public function updateStatus(int $id): RedirectResponse
+{
+    // Re-fetch the cart because collectTotals swapped the instance
+    $cart = Cart::getCart();
+}
+
+// Good - docblock only, body speaks for itself
+/**
+ * Update RMA status.
+ */
+public function updateStatus(int $id): RedirectResponse
+{
+    $cart = Cart::getCart();
+}
+```
+
+If a line genuinely cannot be understood without prose, that is a signal to extract a well-named method instead of annotating it.
+
 ### Translations
 When adding new translation keys, always provide translations for **all locales** in the package's `Resources/lang/` directory. Verify with:
 ```bash
@@ -88,7 +112,7 @@ php artisan bagisto:translations:check
 
 ### Modular Package System
 
-All core functionality lives in **`packages/Webkul/`** (~42 packages). Each package is a self-contained Laravel package with its own models, controllers, routes, views, migrations, and service providers.
+All core functionality lives in **`packages/Webkul/`** (41 packages). Each package is a self-contained Laravel package with its own models, controllers, routes, views, migrations, and service providers.
 
 **Dual registration**: Each package registers in two places:
 1. **`bootstrap/providers.php`** - Main ServiceProvider (routes, views, events, config)

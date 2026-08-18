@@ -143,6 +143,14 @@ class PhonePeController extends Controller
 
                 Cart::collectTotals();
 
+                $cart = Cart::getCart();
+
+                if (! $cart) {
+                    session()->flash('info', trans('phonepe::app.response.cart-not-found'));
+
+                    return redirect()->route('phonepe.cancel', ['merchantOrderId' => $merchantOrderId]);
+                }
+
                 $data = (new OrderResource($cart))->jsonSerialize();
 
                 /**
@@ -270,6 +278,12 @@ class PhonePeController extends Controller
             Cart::setCart($cart);
 
             Cart::collectTotals();
+
+            $cart = Cart::getCart();
+
+            if (! $cart) {
+                return response()->json(['status' => 'cart_inactive'], 200);
+            }
 
             $data = (new OrderResource($cart))->jsonSerialize();
 
