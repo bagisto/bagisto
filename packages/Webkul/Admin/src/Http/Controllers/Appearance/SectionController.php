@@ -47,6 +47,10 @@ class SectionController extends Controller
         ]);
     }
 
+    /**
+     * Create a section against the theme and channel the editor is already scoped to,
+     * active so that it shows in its own preview straight away.
+     */
     public function store(string $code)
     {
         $validated = $this->validate(request(), [
@@ -54,10 +58,6 @@ class SectionController extends Controller
             'type' => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
         ]);
 
-        /**
-         * The editor is already scoped to one channel and theme, so a new section joins
-         * the one being edited rather than asking again.
-         */
         $this->themeOrFail($code);
 
         $channel = $this->requestedChannel();
@@ -68,11 +68,6 @@ class SectionController extends Controller
             'channel_id' => $channel->id,
             'theme_code' => $code,
             'sort_order' => count($this->editableSections($code, $channel->id)) + 1,
-
-            /**
-             * The table defaults this off, which would leave a section the operator just
-             * created missing from its own preview.
-             */
             'status' => 1,
         ]);
 

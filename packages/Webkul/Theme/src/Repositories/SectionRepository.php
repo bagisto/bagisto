@@ -13,6 +13,14 @@ use Webkul\Theme\Contracts\Section;
 class SectionRepository extends Repository
 {
     /**
+     * Set on the request while the appearance preview is rendering.
+     *
+     * Kept in the internal attribute bag rather than the query, so a visitor cannot ask a
+     * storefront page to render unpublished drafts.
+     */
+    public const PREVIEWING = 'appearance_previewing';
+
+    /**
      * Specify model class name.
      */
     public function model(): string
@@ -56,7 +64,7 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Mass update the status of themes in the repository.
+     * Mass update the status of sections in the repository.
      *
      * This method updates multiple records in the database based on the provided
      * section ids.
@@ -147,10 +155,8 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Promote every pending draft of a section to what the storefront renders.
-     *
-     * Drafts are held per locale, so all of them are published together. Publishing only
-     * the locale being viewed would leave the rest pending with nothing to reveal it.
+     * Promote every pending draft of a section, in every locale, to what the storefront
+     * renders.
      *
      * @param  int  $id
      */
@@ -194,14 +200,6 @@ class SectionRepository extends Repository
 
         return $section->refresh();
     }
-
-    /**
-     * Set on the request while the appearance preview is rendering.
-     *
-     * Kept in the internal attribute bag rather than the query, so a visitor cannot ask a
-     * storefront page to render unpublished drafts.
-     */
-    public const PREVIEWING = 'appearance_previewing';
 
     /**
      * Whether the page being rendered is the appearance preview.
@@ -283,16 +281,7 @@ class SectionRepository extends Repository
     {
         $section = $this->findOrFail($id);
 
-        /**
-         * Everything below the original shifts down first. Without it the copy shares a
-         * sort order with the next section and the tie is broken arbitrarily, which is
-         * what sent copies to the bottom of the list.
-         */
-        $this->model
-            ->where('channel_id', $section->channel_id)
-            ->where('theme_code', $section->theme_code)
-            ->where('sort_order', '>', $section->sort_order)
-            ->increment('sort_order');
+        $this->makeRoomBelow($section);
 
         $copy = $section->replicateWithTranslations();
 
@@ -309,13 +298,12 @@ class SectionRepository extends Repository
 
     /**
      * Apply a new order to a set of sections.
+     *
+     * The sort order is written through the parent, because this repository's `update()`
+     * expects a whole section payload.
      */
     public function reorder(array $sectionIds): void
     {
-        /**
-         * `update()` is overridden to expect a whole section payload, so the parent is
-         * used here to write the single column.
-         */
         foreach (array_values($sectionIds) as $position => $sectionId) {
             parent::update(['sort_order' => $position + 1], $sectionId);
         }
@@ -339,11 +327,8 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Store an uploaded image or video against a section.
-     *
-     * Images go through the same webp conversion as everywhere else. A video is streamed
-     * to disk as uploaded, both because re-encoding one does not belong in a request and
-     * because the image library cannot read it.
+     * Store an uploaded image or video against a section, converting an image to webp and
+     * streaming a video to disk as uploaded.
      *
      * @return array{path: string, type: string}
      */
@@ -384,5 +369,19 @@ class SectionRepository extends Repository
         $css = str_replace("\0", '', (string) $css);
 
         return str_ireplace('</style', '<\/style', $css);
+    }
+
+    /**
+     * Push every section below this one down a place, freeing the slot underneath it.
+     *
+     * @param  Section  $section
+     */
+    protected function makeRoomBelow($section): void
+    {
+        $this->model
+            ->where('channel_id', $section->channel_id)
+            ->where('theme_code', $section->theme_code)
+            ->where('sort_order', '>', $section->sort_order)
+            ->increment('sort_order');
     }
 }

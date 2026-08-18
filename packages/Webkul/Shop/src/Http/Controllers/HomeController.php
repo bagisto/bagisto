@@ -49,10 +49,6 @@ class HomeController extends Controller
     /**
      * Render the home page from unpublished section edits, for the appearance editor.
      *
-     * The storefront view is reused untouched: each section's options are swapped for its
-     * draft before rendering, so the preview is the real page in the real theme rather
-     * than an approximation that can drift.
-     *
      * @return View
      */
     public function preview()
@@ -66,11 +62,6 @@ class HomeController extends Controller
         $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'))
             ?? core()->getCurrentChannel();
 
-        /**
-         * The layout resolves its own sections, its header and its categories from the
-         * current channel. Without switching it, previewing one channel would draw that
-         * channel's home sections inside another channel's footer and services.
-         */
         core()->setCurrentChannel($channel);
 
         $sections = $this->sectionRepository->getDraftedForPreview(

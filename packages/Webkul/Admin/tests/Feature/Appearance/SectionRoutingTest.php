@@ -21,22 +21,16 @@ it('should say which theme the listing is scoped to', function () {
         ->assertSee(config('themes.shop.default.name'));
 });
 
-it('should redirect the legacy themes url to customize', function () {
-    $this->loginAsAdmin();
+it('should no longer answer on the settings theme urls', function () {
+    $routes = app('router')->getRoutes();
 
-    get(route('admin.settings.themes.index'))
-        ->assertStatus(301)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]));
-});
-
-it('should redirect the legacy theme edit url to customize', function () {
-    $section = Section::factory()->create();
+    foreach (['index', 'store', 'edit', 'update', 'delete'] as $action) {
+        expect($routes->getByName('admin.settings.themes.'.$action))->toBeNull();
+    }
 
     $this->loginAsAdmin();
 
-    get(route('admin.settings.themes.edit', $section->id))
-        ->assertStatus(301)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme] + ['section' => $section->id]));
+    get('/'.config('app.admin_url').'/themes')->assertNotFound();
 });
 
 it('should no longer offer a section picker on the channel form', function () {

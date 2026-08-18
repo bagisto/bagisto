@@ -42,7 +42,7 @@ it('should list catalog themes that are not installed as available', function ()
 
     expect($theme['is_installed'])->toBeFalse();
 
-    expect($theme['is_paid'])->toBeTrue();
+    expect($theme['url'])->not->toBeNull();
 });
 
 it('should sort active themes ahead of purchasable ones', function () {
@@ -93,10 +93,6 @@ it('should announce a channel update so the channel and page caches are dropped'
         'channel_ids' => [$channel->id],
     ])->assertOk();
 
-    /**
-     * The full page cache and the cached channel both hang off these events. Without
-     * them the storefront keeps serving the previous theme.
-     */
     Event::assertDispatched('core.channel.update.before');
 
     Event::assertDispatched('core.channel.update.after');
@@ -105,9 +101,6 @@ it('should announce a channel update so the channel and page caches are dropped'
 it('should read back the newly activated theme rather than a cached one', function () {
     $channel = Channel::factory()->create(['theme' => 'something-else']);
 
-    /**
-     * Warm the repository cache the way a storefront request would.
-     */
     app(ChannelRepository::class)->find($channel->id);
 
     $this->loginAsAdmin();
@@ -173,23 +166,23 @@ it('should leave a channel already on the theme out of the impact report', funct
 
     $this->loginAsAdmin();
 
-    /**
-     * Re-applying the theme a channel already runs strands nothing, so there is
-     * nothing to warn about.
-     */
     getJson(route('admin.appearance.themes.impact', 'default').'?channel_ids[]='.$channel->id)
         ->assertOk()
         ->assertJsonCount(0, 'impact');
 });
 
-it('should not offer a buy button for a theme with no published price', function () {
+it('should not offer a buy button for a theme with no store page', function () {
     $theme = app(ThemeCatalog::class)->find('elvix');
-
-    expect($theme['is_paid'])->toBeFalse();
 
     expect($theme['url'])->toBeNull();
 
     expect($theme['demo_url'])->not->toBeNull();
+});
+
+it('should not carry a price, which the store page is the source of', function () {
+    foreach (app(ThemeCatalog::class)->all() as $theme) {
+        expect($theme)->not->toHaveKeys(['price', 'currency', 'is_paid']);
+    }
 });
 
 it('should carry the catalog details onto every marketplace theme', function () {
@@ -213,10 +206,6 @@ it('should carry the catalog details onto every marketplace theme', function () 
 it('should serve the bundled screenshot of an installed theme from the admin build', function () {
     $theme = app(ThemeCatalog::class)->find('default');
 
-    /**
-     * A relative catalog screenshot is resolved through the admin asset pipeline, so a
-     * theme shipped with Bagisto does not depend on a remote image.
-     */
     expect($theme['screenshot'])->toContain('themes/admin/default/build/');
 
     expect($theme['screenshot'])->toEndWith('.jpg');

@@ -5,20 +5,10 @@
 | Shop Theme Catalog
 |--------------------------------------------------------------------------
 |
-| Themes offered for the storefront that are not shipped with the core, mirroring
-| https://bagisto.com/en/bagisto-themes/. The catalog is deliberately static so that
-| the Appearance screen never depends on a network call to render.
+| Themes offered for the storefront, mirroring https://bagisto.com/en/bagisto-themes/.
 |
-| Entries whose `code` matches a theme registered in `config/themes.php` are treated
-| as installed, and the catalog only supplies the presentation details for them.
-|
-| `screenshot` is either a remote url, or a path relative to the admin asset
-| directory for themes that ship their image with Bagisto. The gallery falls back to
-| a placeholder whenever the image cannot be loaded, so an unreachable screenshot
-| never breaks the page.
-|
-| `price` of null means no price is published for that theme yet, and no price badge
-| or buy button is rendered for it.
+| An entry whose `code` matches a theme in `config/themes.php` is treated as installed.
+| `screenshot` is a remote url, or a path relative to the admin asset directory.
 |
 */
 
@@ -30,8 +20,6 @@ return [
         'name' => 'Default',
         'author' => 'Webkul',
         'version' => '2.4',
-        'price' => 0,
-        'currency' => 'USD',
         'url' => null,
         'demo_url' => 'https://commerce.bagisto.com/',
         'screenshot' => 'images/themes/default.jpg',
@@ -43,8 +31,6 @@ return [
         'name' => 'Ethereal Fashion',
         'author' => null,
         'version' => null,
-        'price' => 99,
-        'currency' => 'USD',
         'url' => 'https://store.webkul.com/bagisto-fashion-commerce.html',
         'demo_url' => 'https://demo.bagisto.com/ethereal-fashion/',
         'screenshot' => $screenshots.'/fashion-theme.png',
@@ -56,8 +42,6 @@ return [
         'name' => 'Vape Commerce',
         'author' => null,
         'version' => null,
-        'price' => 99,
-        'currency' => 'USD',
         'url' => 'https://store.webkul.com/vape-commerce.html',
         'demo_url' => 'https://demo.bagisto.com/breeze-vape/',
         'screenshot' => $screenshots.'/vape-commerce-theme.png',
@@ -69,8 +53,6 @@ return [
         'name' => 'Quick Commerce',
         'author' => null,
         'version' => null,
-        'price' => 99,
-        'currency' => 'USD',
         'url' => 'https://store.webkul.com/bagisto-quick-commerce.html',
         'demo_url' => 'https://demo.bagisto.com/commercia-retail/',
         'screenshot' => $screenshots.'/quick-commerce-theme.png',
@@ -82,8 +64,6 @@ return [
         'name' => 'Jewellery Commerce',
         'author' => null,
         'version' => null,
-        'price' => 99,
-        'currency' => 'USD',
         'url' => 'https://store.webkul.com/jewellery-commerce.html',
         'demo_url' => 'https://demo.bagisto.com/adornments-jewellery/',
         'screenshot' => $screenshots.'/dornments-theme.png',
@@ -95,8 +75,6 @@ return [
         'name' => 'Velora Perfume',
         'author' => null,
         'version' => null,
-        'price' => 99,
-        'currency' => 'USD',
         'url' => 'https://store.webkul.com/bagisto-perfume-theme.html',
         'demo_url' => 'https://demo.bagisto.com/perfume-theme/',
         'screenshot' => $screenshots.'/perfume-commerce-theme.png',
@@ -108,8 +86,6 @@ return [
         'name' => 'Electronic Theme',
         'author' => null,
         'version' => null,
-        'price' => 99,
-        'currency' => 'USD',
         'url' => 'https://store.webkul.com/bagisto-laravel-electronic-theme.html',
         'demo_url' => 'https://demo.bagisto.com/electronic-theme/',
         'screenshot' => $screenshots.'/electronic-commerce-theme.png',
@@ -121,8 +97,6 @@ return [
         'name' => 'Bagisto Elvix',
         'author' => null,
         'version' => null,
-        'price' => null,
-        'currency' => 'USD',
         'url' => null,
         'demo_url' => 'https://demo.bagisto.com/elvix-theme/',
         'screenshot' => $screenshots.'/elvix-theme.png',
@@ -134,8 +108,6 @@ return [
         'name' => 'Autrivo Automobile',
         'author' => null,
         'version' => null,
-        'price' => null,
-        'currency' => 'USD',
         'url' => null,
         'demo_url' => 'https://demo.bagisto.com/automobile-theme/',
         'screenshot' => $screenshots.'/autrivo-theme.png',

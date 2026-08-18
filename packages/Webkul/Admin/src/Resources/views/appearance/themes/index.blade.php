@@ -62,14 +62,6 @@
                         >
                             @lang('admin::app.appearance.themes.index.active')
                         </span>
-
-                        <!-- Price Badge -->
-                        <span
-                            class="absolute top-3 rounded-full bg-gray-800 px-2.5 py-1 text-xs font-semibold text-white ltr:right-3 rtl:left-3"
-                            v-if="theme.is_paid"
-                        >
-                            @{{ theme.currency }} @{{ theme.price }}
-                        </span>
                     </div>
 
                     <!-- Body -->

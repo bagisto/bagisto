@@ -31,10 +31,6 @@
         type="text/x-template"
         id="v-section-editor-template"
     >
-        {{--
-            Pinned to the viewport so the page itself never scrolls: the section list and
-            the preview each scroll inside their own pane instead.
-        --}}
         <div class="flex h-[calc(100vh-140px)] min-h-[480px] flex-col">
             <!-- Page Header -->
             <div class="flex shrink-0 items-center justify-between gap-4 max-sm:flex-wrap">
@@ -91,11 +87,6 @@
                 </div>
             </div>
 
-            {{--
-                While the drawer is open this row is lifted above its overlay and inset by
-                the drawer's width, so the preview fills the space the overlay would have
-                dimmed instead of sitting behind it.
-            --}}
             <div class="mt-4 flex min-h-0 flex-1">
                 <div class="flex min-h-0 flex-1 gap-4 max-lg:flex-col">
                     <!-- Section List -->
@@ -680,11 +671,8 @@
 
                 /**
                  * Lift the preview out of the page flow and fill the screen beside the
-                 * drawer.
-                 *
-                 * The pane is pinned at its current box first and only then transitioned
-                 * to the full one, because a straight switch to fixed positioning would
-                 * jump rather than grow.
+                 * drawer, transitioning from its current box so that it grows rather than
+                 * jumps.
                  */
                 expandPreview() {
                     const pane = this.$refs.previewPane;
@@ -717,11 +705,7 @@
                         height: `${box.height}px`,
                     });
 
-                    /**
-                     * Read a layout property so the starting box is committed; without it
-                     * the browser collapses both writes into one and nothing animates.
-                     */
-                    void pane.offsetWidth;
+                    this.commitStartingBox(pane);
 
                     const rtl = document.documentElement.dir === 'rtl';
 
@@ -732,6 +716,14 @@
                         width: `${window.innerWidth - this.drawerWidth}px`,
                         height: `${window.innerHeight}px`,
                     });
+                },
+
+                /**
+                 * Commit the box just written by reading a layout property, so the browser
+                 * does not collapse both style writes into one and skip the transition.
+                 */
+                commitStartingBox(element) {
+                    void element.offsetWidth;
                 },
 
                 /**
@@ -760,10 +752,6 @@
 
                     pane.addEventListener('transitionend', restore);
 
-                    /**
-                     * A transition that never starts would strand the pane out of flow, so
-                     * the cleanup also runs on a timer.
-                     */
                     setTimeout(restore, 400);
 
                     Object.assign(pane.style, {
@@ -786,10 +774,6 @@
                     try {
                         path = frame.contentWindow.location.pathname;
                     } catch (error) {
-                        /**
-                         * Reading across to a page the storefront refused to frame throws,
-                         * which is itself the signal that the frame has left the preview.
-                         */
                         path = null;
                     }
 
@@ -822,11 +806,8 @@
                 },
 
                 /**
-                 * Switch the drawer to the section a user clicked inside the preview.
-                 *
-                 * Only while the drawer is already open. With it closed the preview is
-                 * there to be looked at, and having a drawer spring out of a stray click
-                 * takes that away; the section list is how editing starts.
+                 * Switch the drawer to the section a user clicked inside the preview, only
+                 * while it is already open. Editing starts from the section list.
                  */
                 onPreviewMessage(event) {
                     if (
@@ -983,10 +964,6 @@
 
                     this.runOn(this.items.filter(section => section.has_draft), 'discard')
                         .then(() => {
-                            /**
-                             * Reloading the fields is only wanted when the drawer is on
-                             * screen; otherwise discarding would pull it open.
-                             */
                             if (
                                 this.isPanelOpen
                                 && active
@@ -1033,10 +1010,6 @@
                     try {
                         this.$refs.preview?.contentWindow?.location.reload();
                     } catch (error) {
-                        /**
-                         * Unreachable means the frame has left the preview; pointing it
-                         * back at the source both reloads and recovers it.
-                         */
                         this.$refs.preview.src = this.previewUrl;
                     }
                 },

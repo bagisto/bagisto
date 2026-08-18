@@ -1,7 +1,4 @@
-{{--
-    Talks to the appearance editor that frames this page. Loaded only when previewing,
-    so nothing here reaches a customer.
---}}
+{{-- Talks to the appearance editor that frames this page. Preview only. --}}
 @pushOnce('styles')
     <style>
         /**
@@ -106,19 +103,11 @@
         });
 
         /**
-         * Cancel every navigation the page tries to make.
-         *
-         * This route is the only page the storefront allows to be framed, so going
-         * anywhere lands the frame on a page that refuses to load. Storefront components
-         * do not only use links for this — the carousel assigns `window.location.href`
-         * directly — so the navigation itself is intercepted rather than the clicks that
-         * cause it.
+         * Cancel navigation away from this page, which is the only one the storefront
+         * allows to be framed. The navigation is intercepted rather than the click,
+         * because components such as the carousel assign `window.location.href` directly.
          */
         window.navigation?.addEventListener('navigate', event => {
-            /**
-             * Reloading this same page is how the editor shows a draft, so only a move to
-             * a different page is cancelled.
-             */
             if (
                 ! event.cancelable
                 || new URL(event.destination.url).pathname === window.location.pathname
@@ -130,8 +119,7 @@
         });
 
         /**
-         * The same for browsers without the navigation api, which covers links and form
-         * submissions but cannot reach a scripted assignment. Bound on the way down so a
+         * The same for browsers without the navigation api, bound on the way down so a
          * component that stops propagation cannot slip past it.
          */
         document.addEventListener('click', event => {

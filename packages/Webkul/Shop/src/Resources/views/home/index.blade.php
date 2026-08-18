@@ -38,11 +38,7 @@
     @foreach ($sections as $section)
         @php ($data = $section->options) @endphp
 
-        {{--
-            Only the types this page actually renders are marked here. Footer links and
-            service promises are drawn by the layout, and wrapping them here as well would
-            leave an empty duplicate that the editor highlights instead of the real one.
-        --}}
+        {{-- Only the types this page renders; the layout marks the ones it draws. --}}
         @php ($marks = ($preview ?? false) && in_array($section->type, [
             $section::IMAGE_CAROUSEL,
             $section::STATIC_CONTENT,

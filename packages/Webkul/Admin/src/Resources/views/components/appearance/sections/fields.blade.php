@@ -1,8 +1,4 @@
-{{--
-    Renders a section's options from its field schema. One component covers every
-    section type, so it can live inside the editor drawer where a per-type view could
-    not: those register their own Vue components through the layout's script stack.
---}}
+{{-- Renders a section's options from its field schema, for every section type. --}}
 <x-admin::appearance.sections.code-editor />
 
 @pushOnce('scripts')
@@ -262,10 +258,8 @@
 
                 /**
                  * A stable identity for a repeater row, so dragging reorders the rows
-                 * rather than shuffling what the inputs are bound to.
-                 *
-                 * Defined as non enumerable, which keeps it out of the JSON posted as the
-                 * draft; the row is stored exactly as the storefront expects it.
+                 * rather than what the inputs are bound to. Non enumerable, so it stays out
+                 * of the JSON posted as the draft.
                  */
                 rowKey(row) {
                     if (! row.__key) {
@@ -362,11 +356,8 @@
                 },
 
                 /**
-                 * Turn the stored filter map into editable pairs.
-                 *
-                 * Values are read back as strings because they are compared against option
-                 * values, and a number stored as 12 would not match the option "12" — the
-                 * select would then sit blank on a value that is actually set.
+                 * Turn the stored filter map into editable pairs, reading values back as
+                 * strings so they match the option values they are compared against.
                  */
                 hydrateFilters() {
                     const field = (this.schema ?? []).find(item => item.type === 'filters');
@@ -392,13 +383,9 @@
                             return;
                         }
 
-                        /**
-                         * Nothing offered matches what is stored. An empty value falls back
-                         * to the first choice; anything else is kept and offered alongside
-                         * them, so a value set before the list changed is not thrown away
-                         * without the operator seeing it.
-                         */
-                        pair.value = pair.value === '' ? options[0].value : pair.value;
+                        if (pair.value === '') {
+                            pair.value = options[0].value;
+                        }
                     });
 
                     this.syncFilters(field);

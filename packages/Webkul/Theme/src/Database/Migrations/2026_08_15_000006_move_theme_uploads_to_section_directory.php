@@ -10,10 +10,8 @@ use Illuminate\Support\Facades\Storage;
 | Section uploads move out of the theme directory
 |--------------------------------------------------------------------------
 |
-| Moves section uploads from `theme/{id}` to `section/{id}`.
-|
-| The paths are also recorded inside the translated options, so those are rewritten
-| in step with the files or already uploaded images stop resolving.
+| Moves section uploads from `theme/{id}` to `section/{id}`, rewriting the paths recorded
+| in the translated options in step with the files.
 |
 */
 return new class extends Migration

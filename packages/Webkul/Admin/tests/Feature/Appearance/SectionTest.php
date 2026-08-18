@@ -497,7 +497,7 @@ it('should turn a section off and back on again', function () {
 });
 
 it('should take the channel and theme of the editor rather than the request when creating', function () {
-    // Arrange. A channel the editor is not scoped to, which must not be written.
+    // Arrange.
     $channel = core()->getCurrentChannel();
 
     // Act and Assert.
@@ -554,7 +554,7 @@ it('should no longer expose the mass action endpoints', function () {
 });
 
 it('should place a duplicate directly below its original', function () {
-    // Arrange. Three sections in a known order, duplicating the middle one.
+    // Arrange.
     $channel = core()->getCurrentChannel();
 
     $made = collect(['First', 'Second', 'Third'])->map(fn ($name, $index) => Section::factory()->create([
@@ -598,10 +598,6 @@ it('should label every schema field with something other than the page heading',
             }
 
             foreach ($labels as $label) {
-                /**
-                 * `sections.edit.title` is the page heading, so a field reaching for a
-                 * generic `title` key ends up labelled "Edit Section".
-                 */
                 if (
                     $label === ''
                     || $label === trans('admin::app.appearance.sections.edit.title')
@@ -623,11 +619,6 @@ it('should label every schema field with something other than the page heading',
 });
 
 it('should offer each filter only once so a stored filter cannot be overwritten', function () {
-    /**
-     * Filters are stored as a map keyed by filter name, so a duplicate key would collapse
-     * two rows into one. The editor caps the list at the number of distinct keys, which
-     * only holds while the schema itself lists each key once.
-     */
     foreach (app(SectionSchema::class)->all() as $type => $fields) {
         foreach ($fields as $field) {
             if (($field['type'] ?? null) !== SectionSchema::FILTERS) {

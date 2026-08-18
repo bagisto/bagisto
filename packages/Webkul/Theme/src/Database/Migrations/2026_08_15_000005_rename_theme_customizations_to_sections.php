@@ -9,10 +9,8 @@ use Illuminate\Support\Facades\Schema;
 | Theme customizations are sections
 |--------------------------------------------------------------------------
 |
-| Renames the theme customization tables and their foreign key to sections.
-|
-| Guarded on both sides so that it is safe on a fresh database, where the earlier
-| migrations have just created the old names, and on an installed one.
+| Renames the theme customization tables and their foreign key to sections. Guarded on
+| both sides, so it is safe on a fresh database and on an installed one.
 |
 */
 return new class extends Migration

@@ -74,12 +74,10 @@ Route::get('/', [HomeController::class, 'index'])
     ->middleware('cache.response');
 
 /**
- * Appearance editor preview. Served from the storefront so that the locale, theme and
- * currency middleware resolve the same way they do for a customer, and never cached.
+ * Appearance editor preview, never cached.
  *
- * The path is deliberately one segment deep. Storefront markup emits relative asset urls
- * such as `cache/small/...`, which a browser resolves against the current directory, so a
- * nested path would send every image to the catch-all slug route instead of the file.
+ * The path must stay one segment deep: storefront markup emits relative asset urls such
+ * as `cache/small/...`, which a nested path would resolve to the catch-all slug route.
  */
 Route::get('appearance-preview', [HomeController::class, 'preview'])
     ->name('shop.appearance.preview');

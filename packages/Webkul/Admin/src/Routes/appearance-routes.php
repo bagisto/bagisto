@@ -48,28 +48,3 @@ Route::prefix('appearance')->group(function () {
         });
     });
 });
-
-/**
- * Legacy theme routes. The screen moved from Settings to Appearance and its rows are
- * now called sections, these are kept so that bookmarks, documentation and existing
- * integrations keep working.
- */
-Route::prefix('themes')->group(function () {
-    Route::get('', fn () => redirect()->route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme] + request()->query(), 301))
-        ->name('admin.settings.themes.index');
-
-    Route::get('edit/{id}', fn ($id) => redirect()->route('admin.appearance.sections.index', [
-        'code' => core()->getCurrentChannel()->theme,
-        'section' => $id,
-    ] + request()->query(), 301))
-        ->name('admin.settings.themes.edit');
-
-    Route::post('store', fn () => redirect()->route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme], 308))
-        ->name('admin.settings.themes.store');
-
-    Route::post('edit/{id}', fn ($id) => redirect()->route('admin.appearance.sections.update', ['id' => $id], 308))
-        ->name('admin.settings.themes.update');
-
-    Route::delete('edit/{id}', fn ($id) => redirect()->route('admin.appearance.sections.delete', ['id' => $id], 308))
-        ->name('admin.settings.themes.delete');
-});

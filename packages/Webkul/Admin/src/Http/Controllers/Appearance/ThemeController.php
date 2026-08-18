@@ -114,15 +114,6 @@ class ThemeController extends Controller
 
         $channel->save();
 
-        /**
-         * The channel repository is cached, and the full page cache holds markup rendered
-         * with the outgoing theme. Both have to be dropped or the storefront keeps serving
-         * the previous theme.
-         *
-         * `ChannelRepository::update()` is not used for the write because it also syncs
-         * locales, currencies and inventory sources, and clears the logo and favicon when
-         * they are absent from the payload.
-         */
         Event::dispatch(new RepositoryEntityUpdated($this->channelRepository, $channel));
 
         Event::dispatch('core.channel.update.after', $channel);

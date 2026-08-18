@@ -203,10 +203,6 @@ it('should render the split editor when scoped to a theme', function () {
 it('should still render the editor when no theme is asked for', function () {
     $this->loginAsAdmin();
 
-    /**
-     * Sections belong to a theme, so with none requested the editor falls back to the
-     * theme the current channel runs rather than showing a themeless listing.
-     */
     get(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->assertOk()
         ->assertSee('v-section-editor', false);
@@ -279,10 +275,6 @@ it('should store an uploaded video as it was given rather than as an image', fun
 
     $this->loginAsAdmin();
 
-    /**
-     * A video cannot go through the image conversion the other uploads use, so it is
-     * kept in its own format.
-     */
     $response = postJson(route('admin.appearance.sections.media', $section->id), [
         'file' => UploadedFile::fake()->create('clip.mp4', 128, 'video/mp4'),
     ])->assertOk();
@@ -322,10 +314,6 @@ it('should let the preview be framed by the admin', function () {
 
     $response = get(route('shop.appearance.preview'))->assertOk();
 
-    /**
-     * Two contradicting X-Frame-Options headers are what made the frame refuse to
-     * connect, so the blanket one is dropped and frame-ancestors carries the rule.
-     */
     expect($response->headers->get('X-Frame-Options'))->toBeNull();
 
     expect($response->headers->get('Content-Security-Policy'))->toContain("frame-ancestors 'self'");
@@ -340,12 +328,6 @@ it('should keep every other page unframable', function () {
 });
 
 it('should not let a visitor turn framing on from outside the application', function () {
-    /**
-     * `framable` lives in the request attribute bag, which is internal to the framework
-     * and never populated from the HTTP message. Reading it with `$request->get()` or
-     * `input()` instead would fall through to the query string and hand any visitor a
-     * clickjacking switch, so the vectors are asserted rather than assumed.
-     */
     $vectors = [
         ['GET', '/?framable=1', []],
         ['GET', '/?framable=true', []],
@@ -368,10 +350,6 @@ it('should not let a visitor turn framing on from outside the application', func
 it('should only mark the preview framable, never a sibling storefront page', function () {
     $this->loginAsAdmin();
 
-    /**
-     * The attribute is set per request, so a framable preview must not leave the next
-     * page framable for the same session.
-     */
     get(route('shop.appearance.preview'))->assertOk();
 
     expect(get(route('shop.home.index'))->headers->get('X-Frame-Options'))->toBe('DENY');
@@ -380,10 +358,6 @@ it('should only mark the preview framable, never a sibling storefront page', fun
 it('should stop the preview navigating itself onto a page that cannot be framed', function () {
     $this->loginAsAdmin();
 
-    /**
-     * Only the preview route is framable, so a link followed inside the frame lands on a
-     * refusal. The bridge therefore has to swallow clicks on links and form submits.
-     */
     expect(get(route('shop.home.index'))->headers->get('X-Frame-Options'))->toBe('DENY');
 
     get(route('shop.appearance.preview'))
@@ -402,11 +376,6 @@ it('should mark each section in the preview exactly once', function () {
 
     $ids = $matches[1];
 
-    /**
-     * The home page loops every section but only draws four of the types; footer links
-     * and service promises are drawn by the layout. Marking a section in both places
-     * leaves an empty duplicate, and the editor highlights whichever comes first.
-     */
     expect($ids)->not->toBeEmpty()
         ->and(array_diff_assoc($ids, array_unique($ids)))->toBeEmpty();
 });
@@ -435,11 +404,6 @@ it('should preview a channel with its own sections, not another channel ones', f
         return array_unique($matches[1]);
     };
 
-    /**
-     * The layout draws the footer and the services from the current channel, so previewing
-     * another one has to switch it; otherwise a channel with nothing of its own borrows
-     * whatever the hostname happens to resolve to.
-     */
     expect($marksIn($other->id))->toBeEmpty()
         ->and($marksIn($current->id))->not->toBeEmpty();
 });

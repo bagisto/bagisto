@@ -5,10 +5,6 @@
 
     {!! view_render_event('bagisto.admin.appearance.sections.index.before') !!}
 
-    {{--
-        The header lives inside the editor rather than here, because the channel switcher
-        and the publish controls read the same state as the section list.
-    --}}
     <x-admin::appearance.sections.editor
         :sections="$sections"
         :type-labels="$typeLabels"

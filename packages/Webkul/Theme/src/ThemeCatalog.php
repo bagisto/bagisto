@@ -88,8 +88,6 @@ class ThemeCatalog
             'name' => $entry['name'] ?? $config['name'] ?? $code,
             'author' => $entry['author'] ?? null,
             'version' => $entry['version'] ?? null,
-            'price' => $entry['price'] ?? 0,
-            'currency' => $entry['currency'] ?? 'USD',
             'url' => $entry['url'] ?? null,
             'demo_url' => $entry['demo_url'] ?? null,
             'screenshot' => $this->screenshotUrl($entry['screenshot'] ?? null),
@@ -97,7 +95,6 @@ class ThemeCatalog
             'tags' => $entry['tags'] ?? [],
             'description' => $entry['description'] ?? null,
             'is_installed' => $isInstalled,
-            'is_paid' => ($entry['price'] ?? 0) > 0,
             'active_on' => $activeOn->map(fn ($channel) => [
                 'id' => $channel->id,
                 'name' => $channel->name,

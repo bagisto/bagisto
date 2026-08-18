@@ -1,8 +1,6 @@
 {{--
     A syntax highlighted editor for the html and css a static content section holds.
-
-    CodeMirror is fetched from a cdn, as it was on the page this replaced. If that fetch
-    fails the plain textarea underneath stays live, so the field still edits offline.
+    CodeMirror comes from a cdn; if it does not load, the textarea underneath stays live.
 --}}
 @pushOnce('scripts')
     <script
