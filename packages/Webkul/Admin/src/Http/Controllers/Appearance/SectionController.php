@@ -6,6 +6,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
@@ -56,7 +57,7 @@ class SectionController extends Controller
     {
         $validated = $this->validate(request(), [
             'name' => 'required',
-            'type' => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
+            'type' => ['required', Rule::in(SectionModel::TYPES)],
         ]);
 
         $this->themeOrFail($code);
@@ -103,7 +104,7 @@ class SectionController extends Controller
         $this->validate(request(), [
             'name' => 'required',
             'sort_order' => 'required|numeric',
-            'type' => 'required|in:product_carousel,category_carousel,static_content,image_carousel,footer_links,services_content',
+            'type' => ['required', Rule::in(SectionModel::TYPES)],
             'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
             'theme_code' => 'required',
         ]);
@@ -141,11 +142,13 @@ class SectionController extends Controller
      */
     public function destroy(int $id)
     {
+        $section = $this->sectionRepository->findOrFail($id);
+
         Event::dispatch('section.delete.before', $id);
 
         $this->sectionRepository->delete($id);
 
-        Storage::deleteDirectory('section/'.$id);
+        Storage::deleteDirectory('themes/'.$section->theme_code.'/sections/'.$section->id);
 
         Event::dispatch('section.delete.after', $id);
 

@@ -6,6 +6,7 @@ use Webkul\Core\Models\Channel;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\Repositories\SectionRepository;
 
+use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
 use function Pest\Laravel\getJson;
 use function Pest\Laravel\postJson;
@@ -261,7 +262,7 @@ it('should store an uploaded image and return its path', function () {
 
     $path = $response->json('path');
 
-    expect($path)->toStartWith('storage/section/'.$section->id.'/')
+    expect($path)->toStartWith('storage/themes/'.$section->theme_code.'/sections/'.$section->id.'/')
         ->and($path)->toEndWith('.webp')
         ->and($response->json('type'))->toBe('image');
 
@@ -466,4 +467,37 @@ it('should keep a pinned footer at the end whatever order is sent', function () 
     ])->assertOk();
 
     expect($footer->refresh()->sort_order)->toBeGreaterThan($other->refresh()->sort_order);
+});
+
+it('should file an upload under the theme the section belongs to', function () {
+    Storage::fake();
+
+    $section = makeSection();
+
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.appearance.sections.media', $section->id), [
+        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
+    ])->assertOk();
+
+    expect($response->json('path'))
+        ->toStartWith('storage/themes/'.$section->theme_code.'/sections/'.$section->id.'/');
+});
+
+it('should clear a section media directory when the section is deleted', function () {
+    Storage::fake();
+
+    $section = makeSection();
+
+    $this->loginAsAdmin();
+
+    $path = postJson(route('admin.appearance.sections.media', $section->id), [
+        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
+    ])->json('path');
+
+    Storage::assertExists(str_replace('storage/', '', $path));
+
+    deleteJson(route('admin.appearance.sections.delete', $section->id))->assertOk();
+
+    Storage::assertMissing(str_replace('storage/', '', $path));
 });

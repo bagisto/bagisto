@@ -5,15 +5,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 
-/*
-|--------------------------------------------------------------------------
-| Section uploads move out of the theme directory
-|--------------------------------------------------------------------------
-|
-| Moves section uploads from `theme/{id}` to `section/{id}`, rewriting the paths recorded
-| in the translated options in step with the files.
-|
-*/
 return new class extends Migration
 {
     /**
@@ -21,9 +12,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $this->moveDirectory('theme', 'section');
+        $this->rewrite(
+            '#storage/(?:theme|section)/(\d+)/#',
+            fn ($row) => 'storage/themes/'.$row->theme_code.'/sections/'.$row->section_id.'/'
+        );
 
-        $this->rewritePaths('storage/theme/', 'storage/section/');
+        $this->forget('theme');
+
+        $this->forget('section');
     }
 
     /**
@@ -31,23 +27,70 @@ return new class extends Migration
      */
     public function down(): void
     {
-        $this->moveDirectory('section', 'theme');
+        $this->rewrite(
+            '#storage/themes/[^/]+/sections/(\d+)/#',
+            fn ($row) => 'storage/theme/'.$row->section_id.'/'
+        );
 
-        $this->rewritePaths('storage/section/', 'storage/theme/');
+        $this->forget('themes');
     }
 
     /**
-     * Move every child directory across, leaving anything already at the destination
-     * untouched so that a re-run cannot clobber newer uploads.
+     * Point every recorded upload at the directory the callback names, moving the files
+     * that sit behind those paths along with them.
      */
-    protected function moveDirectory(string $from, string $to): void
+    protected function rewrite(string $pattern, callable $target): void
     {
-        if (! Storage::exists($from)) {
+        if (
+            ! Schema::hasTable('theme_section_translations')
+            || ! Schema::hasTable('theme_sections')
+        ) {
             return;
         }
 
-        foreach (Storage::allFiles($from) as $file) {
-            $target = $to.substr($file, strlen($from));
+        DB::table('theme_section_translations as translations')
+            ->join('theme_sections', 'theme_sections.id', '=', 'translations.section_id')
+            ->select('translations.id', 'translations.options', 'theme_sections.id as section_id', 'theme_sections.theme_code')
+            ->orderBy('translations.id')
+            ->each(function ($row) use ($pattern, $target) {
+                $options = (string) $row->options;
+
+                if (! preg_match($pattern, $options)) {
+                    return;
+                }
+
+                $destination = $target($row);
+
+                preg_match_all($pattern, $options, $matches, PREG_SET_ORDER);
+
+                foreach ($matches as $match) {
+                    $this->moveDirectory(
+                        trim(substr($match[0], strlen('storage/')), '/'),
+                        trim(substr($destination, strlen('storage/')), '/')
+                    );
+                }
+
+                DB::table('theme_section_translations')
+                    ->where('id', $row->id)
+                    ->update(['options' => preg_replace($pattern, $destination, $options)]);
+            });
+    }
+
+    /**
+     * Move every file across, leaving anything already at the destination untouched so
+     * that a re-run cannot clobber a newer upload.
+     */
+    protected function moveDirectory(string $from, string $to): void
+    {
+        if (
+            $from === $to
+            || ! Storage::exists($from)
+        ) {
+            return;
+        }
+
+        foreach (Storage::files($from) as $file) {
+            $target = $to.'/'.basename($file);
 
             if (Storage::exists($target)) {
                 continue;
@@ -60,21 +103,15 @@ return new class extends Migration
     }
 
     /**
-     * Rewrite the upload paths recorded in the translated section options.
+     * Drop a directory once nothing points at it any more.
      */
-    protected function rewritePaths(string $from, string $to): void
+    protected function forget(string $directory): void
     {
-        if (! Schema::hasTable('section_translations')) {
-            return;
+        if (
+            Storage::exists($directory)
+            && empty(Storage::allFiles($directory))
+        ) {
+            Storage::deleteDirectory($directory);
         }
-
-        DB::table('section_translations')
-            ->where('options', 'like', '%'.$from.'%')
-            ->orderBy('id')
-            ->each(function ($row) use ($from, $to) {
-                DB::table('section_translations')
-                    ->where('id', $row->id)
-                    ->update(['options' => str_replace($from, $to, $row->options)]);
-            });
     }
 };

@@ -468,11 +468,11 @@ it('should delete the section', function () {
         ->assertOk()
         ->assertJsonPath('message', trans('admin::app.appearance.sections.delete-success'));
 
-    $this->assertDatabaseMissing('sections', [
+    $this->assertDatabaseMissing('theme_sections', [
         'id' => $section->id,
     ]);
 
-    $this->assertDatabaseMissing('section_translations', [
+    $this->assertDatabaseMissing('theme_section_translations', [
         'section_id' => $section->id,
     ]);
 });

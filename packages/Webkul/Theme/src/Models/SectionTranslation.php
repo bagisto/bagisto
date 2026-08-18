@@ -11,46 +11,11 @@ class SectionTranslation extends Model implements SectionTranslationContract
     use HasFactory;
 
     /**
-     * Image carousel precision.
+     * The table associated with the model.
      *
      * @var string
      */
-    public const IMAGE_CAROUSEL = 'image_carousel';
-
-    /**
-     * Product carousel precision.
-     *
-     * @var string
-     */
-    public const PRODUCT_CAROUSEL = 'product_carousel';
-
-    /**
-     * Category carousel precision.
-     *
-     * @var string
-     */
-    public const CATEGORY_CAROUSEL = 'category_carousel';
-
-    /**
-     * Footer links precision.
-     *
-     * @var string
-     */
-    public const FOOTER_LINKS = 'footer_links';
-
-    /**
-     * Static precision.
-     *
-     * @var string
-     */
-    public const STATIC_CONTENT = 'static_content';
-
-    /**
-     * Services Content.
-     *
-     * @var string
-     */
-    public const SERVICES_CONTENT = 'services_content';
+    protected $table = 'theme_section_translations';
 
     /**
      * Timestamp false of the model

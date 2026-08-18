@@ -55,6 +55,27 @@ class Section extends TranslatableModel implements SectionContract
     public const SERVICES_CONTENT = 'services_content';
 
     /**
+     * Every type a section may take.
+     *
+     * @var array
+     */
+    public const TYPES = [
+        self::IMAGE_CAROUSEL,
+        self::PRODUCT_CAROUSEL,
+        self::CATEGORY_CAROUSEL,
+        self::FOOTER_LINKS,
+        self::STATIC_CONTENT,
+        self::SERVICES_CONTENT,
+    ];
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'theme_sections';
+
+    /**
      * The attributes that are translatable.
      *
      * @var array

@@ -107,7 +107,7 @@ class SectionRepository extends Repository
                 ];
             } elseif ($image['image'] instanceof UploadedFile) {
                 try {
-                    $path = 'section/'.$section->id.'/'.Str::random(40).'.webp';
+                    $path = $this->mediaDirectory($section).'/'.Str::random(40).'.webp';
 
                     $encoded = image_manager()->read($image['image'])->encodeByExtension('webp');
 
@@ -311,7 +311,7 @@ class SectionRepository extends Repository
     {
         $section = $this->findOrFail($id);
 
-        $path = 'section/'.$section->id.'/'.Str::random(40).'.webp';
+        $path = $this->mediaDirectory($section).'/'.Str::random(40).'.webp';
 
         Storage::put($path, (string) image_manager()->read($file)->encodeByExtension('webp'));
 
@@ -336,7 +336,7 @@ class SectionRepository extends Repository
         }
 
         $path = Storage::putFileAs(
-            'section/'.$section->id,
+            $this->mediaDirectory($section),
             $file,
             Str::random(40).'.'.$file->extension()
         );
@@ -382,6 +382,16 @@ class SectionRepository extends Repository
         ) {
             $translation->options = $translation->draft_options;
         }
+    }
+
+    /**
+     * Where a section's uploads are kept, filed under the theme they belong to.
+     *
+     * @param  Section  $section
+     */
+    protected function mediaDirectory($section): string
+    {
+        return 'themes/'.$section->theme_code.'/sections/'.$section->id;
     }
 
     /**

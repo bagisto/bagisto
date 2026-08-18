@@ -3,6 +3,8 @@
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\SectionSchema;
 
+use function Pest\Laravel\postJson;
+
 it('should describe every section type', function () {
     $schema = app(SectionSchema::class);
 
@@ -60,4 +62,23 @@ it('should cover every key the stored sections actually use', function () {
 
 it('should return an empty schema for an unknown type', function () {
     expect(app(SectionSchema::class)->for('not-a-type'))->toBe([]);
+});
+
+it('should describe every type a section may take', function () {
+    expect(array_keys(app(SectionSchema::class)->all()))
+        ->toEqualCanonicalizing(Section::TYPES);
+});
+
+it('should accept exactly the types the model declares', function () {
+    $this->loginAsAdmin();
+
+    $channel = core()->getCurrentChannel();
+
+    postJson(route('admin.appearance.sections.store', [
+        'code' => $channel->theme,
+        'channel' => $channel->id,
+    ]), [
+        'name' => 'Not A Real Type',
+        'type' => 'carousel_of_carousels',
+    ])->assertJsonValidationErrorFor('type');
 });
