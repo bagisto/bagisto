@@ -5521,6 +5521,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Només es permeten arxius d\'imatge (.jpeg, .jpg, .png, ..)',
 
+                'drag-drop-hint' => 'o arrossega i deixa anar la imatge aquí',
+
+                'crop' => [
+                    'title' => 'Retalla la imatge',
+                    'aspect-free' => 'Lliure',
+                    'aspect-square' => 'Quadrat (1:1)',
+                    'aspect-4-3' => 'Estàndard (4:3)',
+                    'aspect-16-9' => 'Panoràmic (16:9)',
+                    'apply-btn' => 'Aplica el retall',
+                    'skip-btn' => 'Omet',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Aplicar',
                     'generate' => 'Generar',

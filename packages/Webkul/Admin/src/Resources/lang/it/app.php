@@ -5521,6 +5521,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
 
+                'drag-drop-hint' => 'oppure trascina e rilascia l\'immagine qui',
+
+                'crop' => [
+                    'title' => 'Ritaglia immagine',
+                    'aspect-free' => 'Libero',
+                    'aspect-square' => 'Quadrato (1:1)',
+                    'aspect-4-3' => 'Standard (4:3)',
+                    'aspect-16-9' => 'Widescreen (16:9)',
+                    'apply-btn' => 'Applica ritaglio',
+                    'skip-btn' => 'Salta',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Applica',
                     'generate' => 'Genera',

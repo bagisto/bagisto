@@ -40,7 +40,14 @@
     >
         <!-- Panel Content -->
         <div class="grid">
-            <div class="flex flex-wrap gap-1">
+            <div
+                class="flex flex-wrap gap-1 rounded transition-all"
+                :class="{'outline-dashed outline-2 outline-offset-4 outline-blue-400': isDragging}"
+                @dragover.prevent="onDragOver"
+                @dragenter.prevent="onDragOver"
+                @dragleave.prevent="onDragLeave"
+                @drop.prevent="onDrop"
+            >
                 <!-- Upload Image Button -->
                 <template v-if="allowMultiple || images.length == 0">
                     <!-- AI Image Generation Button -->
@@ -78,6 +85,10 @@
                                 
                                 <span class="text-xs">
                                     @lang('admin::app.components.media.images.allowed-types')
+                                </span>
+
+                                <span class="text-xs font-normal text-gray-400">
+                                    @lang('admin::app.components.media.images.drag-drop-hint')
                                 </span>
                             </p>
 
@@ -358,8 +369,96 @@
                         </form>
                     </x-admin::form>
                 </Teleport>
+
+                <!-- Use Teleport to move the crop modal to the body. -->
+                <Teleport to="body">
+                    <x-admin::modal
+                        ref="cropModalRef"
+                        @toggle="onCropModalToggle"
+                    >
+                        <x-slot:header>
+                            <p class="text-lg font-bold text-gray-800 dark:text-white">
+                                @lang('admin::app.components.media.images.crop.title')
+                            </p>
+                        </x-slot>
+
+                        <x-slot:content>
+                            <div
+                                class="grid gap-2.5"
+                                v-if="cropModal.src"
+                            >
+                                <div class="h-[360px] w-full overflow-hidden rounded bg-gray-100 dark:bg-gray-950">
+                                    <image-cropper
+                                        ref="cropperRef"
+                                        class="h-full w-full"
+                                        :src="cropModal.src"
+                                        :stencil-props="{aspectRatio: cropModal.aspectRatio}"
+                                    />
+                                </div>
+
+                                <div class="flex flex-wrap gap-2">
+                                    <button
+                                        type="button"
+                                        class="rounded px-2.5 py-1.5 text-xs font-semibold transition-all"
+                                        :class="cropModal.aspectRatio === undefined ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-800' : 'bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-300'"
+                                        @click="cropModal.aspectRatio = undefined"
+                                    >
+                                        @lang('admin::app.components.media.images.crop.aspect-free')
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="rounded px-2.5 py-1.5 text-xs font-semibold transition-all"
+                                        :class="cropModal.aspectRatio === 1 ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-800' : 'bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-300'"
+                                        @click="cropModal.aspectRatio = 1"
+                                    >
+                                        @lang('admin::app.components.media.images.crop.aspect-square')
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="rounded px-2.5 py-1.5 text-xs font-semibold transition-all"
+                                        :class="cropModal.aspectRatio === (4/3) ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-800' : 'bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-300'"
+                                        @click="cropModal.aspectRatio = 4/3"
+                                    >
+                                        @lang('admin::app.components.media.images.crop.aspect-4-3')
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        class="rounded px-2.5 py-1.5 text-xs font-semibold transition-all"
+                                        :class="cropModal.aspectRatio === (16/9) ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-800' : 'bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-300'"
+                                        @click="cropModal.aspectRatio = 16/9"
+                                    >
+                                        @lang('admin::app.components.media.images.crop.aspect-16-9')
+                                    </button>
+                                </div>
+                            </div>
+                        </x-slot>
+
+                        <x-slot:footer>
+                            <div class="flex items-center gap-x-2.5">
+                                <button
+                                    type="button"
+                                    class="secondary-button"
+                                    @click="skipCrop"
+                                >
+                                    @lang('admin::app.components.media.images.crop.skip-btn')
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="primary-button"
+                                    @click="applyCrop"
+                                >
+                                    @lang('admin::app.components.media.images.crop.apply-btn')
+                                </button>
+                            </div>
+                        </x-slot>
+                    </x-admin::modal>
+                </Teleport>
             </div>
-        </div>  
+        </div>
     </script>
 
     <script type="text/x-template" id="v-media-image-item-template">
@@ -414,115 +513,93 @@
                 </div>
             </div>
 
-            <!--
-                Kept outside of the drawer, which is only rendered while open, so that the
-                metadata is submitted with the form whether the drawer was opened or not.
-            -->
-            <template v-if="enableSeo && metaName">
-                <input
-                    type="hidden"
-                    :name="metaName + '[' + image.id + '][alt_text]'"
-                    :value="image.alt_text ?? ''"
-                />
-
-                <input
-                    type="hidden"
-                    :name="metaName + '[' + image.id + '][file_name]'"
-                    :value="image.file_name ?? ''"
-                />
-            </template>
-
-            <!-- Image SEO Drawer -->
-            <x-admin::drawer
-                ref="seoDrawer"
-                v-if="enableSeo"
-            >
-                <x-slot:header>
-                    <p class="text-lg font-bold text-gray-800 dark:text-white">
-                        @lang('admin::app.components.media.images.seo.title')
-                    </p>
-
-                    <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
-                        @lang('admin::app.components.media.images.seo.info')
-                    </p>
-                </x-slot>
-
-                <x-slot:content>
-                    <!-- Preview -->
-                    <div class="mb-4 flex justify-center rounded border border-gray-200 p-4 dark:border-gray-800">
-                        <img
-                            class="max-h-[180px] max-w-full rounded"
-                            :src="image.url"
-                        />
-                    </div>
-
-                    <!-- Alt Text -->
-                    <div class="mb-4">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.components.media.images.seo.alt-text')
-                        </x-admin::form.control-group.label>
-
-                        <input
-                            type="text"
-                            class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                            :placeholder="'@lang('admin::app.components.media.images.seo.alt-text-placeholder')'"
-                            v-model="image.alt_text"
-                        />
-
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">
-                            @lang('admin::app.components.media.images.seo.alt-text-info')
+            <!-- Use Teleport to move the crop modal to the body. -->
+            <Teleport to="body">
+                <x-admin::modal
+                    ref="cropModalRef"
+                    @toggle="onCropModalToggle"
+                >
+                    <x-slot:header>
+                        <p class="text-lg font-bold text-gray-800 dark:text-white">
+                            @lang('admin::app.components.media.images.crop.title')
                         </p>
-                    </div>
+                    </x-slot>
 
-                    <!-- File Name -->
-                    <div class="mb-4">
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.components.media.images.seo.file-name')
-                        </x-admin::form.control-group.label>
-
-                        <input
-                            type="text"
-                            class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                            :placeholder="'@lang('admin::app.components.media.images.seo.file-name-placeholder')'"
-                            v-model="image.file_name"
-                        />
-
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">
-                            @lang('admin::app.components.media.images.seo.file-name-info')
-                        </p>
-                    </div>
-
-                    <!-- Replace Image -->
-                    <div>
-                        <x-admin::form.control-group.label>
-                            @lang('admin::app.components.media.images.seo.replace')
-                        </x-admin::form.control-group.label>
-
-                        <label
-                            class="secondary-button inline-flex cursor-pointer"
-                            :for="$.uid + '_imageInput_' + index"
+                    <x-slot:content>
+                        <div
+                            class="grid gap-2.5"
+                            v-if="cropModal.src"
                         >
-                            @lang('admin::app.components.media.images.seo.replace-btn')
-                        </label>
+                            <div class="h-[360px] w-full overflow-hidden rounded bg-gray-100 dark:bg-gray-950">
+                                <image-cropper
+                                    ref="cropperRef"
+                                    class="h-full w-full"
+                                    :src="cropModal.src"
+                                    :stencil-props="{aspectRatio: cropModal.aspectRatio}"
+                                />
+                            </div>
 
-                        <p class="mt-1 text-xs text-gray-500 dark:text-gray-300">
-                            @lang('admin::app.components.media.images.seo.replace-info')
-                        </p>
-                    </div>
-                </x-slot>
+                            <div class="flex flex-wrap gap-2">
+                                <button
+                                    type="button"
+                                    class="rounded px-2.5 py-1.5 text-xs font-semibold transition-all"
+                                    :class="cropModal.aspectRatio === undefined ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-800' : 'bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-300'"
+                                    @click="cropModal.aspectRatio = undefined"
+                                >
+                                    @lang('admin::app.components.media.images.crop.aspect-free')
+                                </button>
 
-                <x-slot:footer>
-                    <div class="flex justify-end px-3">
-                        <button
-                            type="button"
-                            class="primary-button"
-                            @click="$refs.seoDrawer.close()"
-                        >
-                            @lang('admin::app.components.media.images.seo.done-btn')
-                        </button>
-                    </div>
-                </x-slot>
-            </x-admin::drawer>
+                                <button
+                                    type="button"
+                                    class="rounded px-2.5 py-1.5 text-xs font-semibold transition-all"
+                                    :class="cropModal.aspectRatio === 1 ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-800' : 'bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-300'"
+                                    @click="cropModal.aspectRatio = 1"
+                                >
+                                    @lang('admin::app.components.media.images.crop.aspect-square')
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="rounded px-2.5 py-1.5 text-xs font-semibold transition-all"
+                                    :class="cropModal.aspectRatio === (4/3) ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-800' : 'bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-300'"
+                                    @click="cropModal.aspectRatio = 4/3"
+                                >
+                                    @lang('admin::app.components.media.images.crop.aspect-4-3')
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="rounded px-2.5 py-1.5 text-xs font-semibold transition-all"
+                                    :class="cropModal.aspectRatio === (16/9) ? 'bg-gray-800 text-white dark:bg-white dark:text-gray-800' : 'bg-gray-100 text-gray-600 dark:bg-gray-950 dark:text-gray-300'"
+                                    @click="cropModal.aspectRatio = 16/9"
+                                >
+                                    @lang('admin::app.components.media.images.crop.aspect-16-9')
+                                </button>
+                            </div>
+                        </div>
+                    </x-slot>
+
+                    <x-slot:footer>
+                        <div class="flex items-center gap-x-2.5">
+                            <button
+                                type="button"
+                                class="secondary-button"
+                                @click="skipCrop"
+                            >
+                                @lang('admin::app.components.media.images.crop.skip-btn')
+                            </button>
+
+                            <button
+                                type="button"
+                                class="primary-button"
+                                @click="applyCrop"
+                            >
+                                @lang('admin::app.components.media.images.crop.apply-btn')
+                            </button>
+                        </div>
+                    </x-slot>
+                </x-admin::modal>
+            </Teleport>
         </div>
     </script>
 
@@ -607,6 +684,15 @@
 
                     isLoading: false,
 
+                    isDragging: false,
+
+                    cropQueue: [],
+
+                    cropModal: {
+                        src: null,
+                        aspectRatio: undefined,
+                    },
+
                     ai: {
                         enabled: Boolean("{{ core()->getConfigData('magic_ai.general.settings.enabled') && core()->getConfigData('magic_ai.admin_features.image_generation.enabled') }}"),
 
@@ -645,7 +731,37 @@
                         return;
                     }
 
-                    const validFiles = Array.from(imageInput.files).every(file => file.type.includes('image/'));
+                    this.handleFiles(imageInput.files);
+
+                    imageInput.value = '';
+                },
+
+                onDragOver() {
+                    this.isDragging = true;
+                },
+
+                onDragLeave() {
+                    this.isDragging = false;
+                },
+
+                onDrop(e) {
+                    this.isDragging = false;
+
+                    const files = e.dataTransfer?.files;
+
+                    if (! files || ! files.length) {
+                        return;
+                    }
+
+                    if (! this.allowMultiple && this.images.length) {
+                        return;
+                    }
+
+                    this.handleFiles(this.allowMultiple ? files : [files[0]]);
+                },
+
+                handleFiles(files) {
+                    const validFiles = Array.from(files).every(file => file.type.includes('image/'));
 
                     if (! validFiles) {
                         this.$emitter.emit('add-flash', {
@@ -656,9 +772,91 @@
                         return;
                     }
 
-                    imageInput.files.forEach((file, index) => {
-                        this.images.push(this.newImage(file, file.name.replace(/\.[^/.]+$/, '')));
-                    });
+                    this.cropQueue.push(...Array.from(files));
+
+                    this.processCropQueue();
+                },
+
+                processCropQueue() {
+                    if (this.cropModal.src || ! this.cropQueue.length) {
+                        return;
+                    }
+
+                    const file = this.cropQueue[0];
+
+                    const reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        this.cropModal.src = e.target.result;
+
+                        this.$refs.cropModalRef.open();
+                    };
+
+                    reader.readAsDataURL(file);
+                },
+
+                applyCrop() {
+                    const file = this.cropQueue[0];
+
+                    const { canvas } = this.$refs.cropperRef.getResult();
+
+                    if (! canvas) {
+                        this.skipCrop();
+
+                        return;
+                    }
+
+                    canvas.toBlob((blob) => {
+                        this.images.push({
+                            id: 'image_' + this.images.length,
+                            url: '',
+                            file: new File([blob], file.name, { type: file.type }),
+                        });
+
+                        this.closeCropModal();
+                    }, file.type || 'image/png');
+                },
+
+                skipCrop() {
+                    const file = this.cropQueue[0];
+
+                    if (file) {
+                        this.images.push({
+                            id: 'image_' + this.images.length,
+                            url: '',
+                            file: file,
+                        });
+                    }
+
+                    this.closeCropModal();
+                },
+
+                closeCropModal() {
+                    this.cropQueue.shift();
+
+                    this.cropModal.src = null;
+
+                    this.cropModal.aspectRatio = undefined;
+
+                    this.$refs.cropModalRef.close();
+
+                    this.$nextTick(() => this.processCropQueue());
+                },
+
+                onCropModalToggle({ isActive }) {
+                    if (isActive || ! this.cropModal.src) {
+                        return;
+                    }
+
+                    // Modal was dismissed via the header close icon rather than
+                    // the Apply/Skip buttons — drop the current file from the queue.
+                    this.cropQueue.shift();
+
+                    this.cropModal.src = null;
+
+                    this.cropModal.aspectRatio = undefined;
+
+                    this.$nextTick(() => this.processCropQueue());
                 },
 
                 newImage(file, fileName) {
@@ -748,6 +946,17 @@
 
             props: ['index', 'image', 'name', 'width', 'height', 'enableSeo', 'metaName'],
 
+            data() {
+                return {
+                    pendingFile: null,
+
+                    cropModal: {
+                        src: null,
+                        aspectRatio: undefined,
+                    },
+                };
+            },
+
             mounted() {
                 if (this.image.file instanceof File) {
                     this.setFile(this.image.file);
@@ -779,13 +988,73 @@
                         return;
                     }
 
-                    if (! this.image.file_name) {
-                        this.image.file_name = imageInput.files[0].name.replace(/\.[^/.]+$/, '');
+                    this.pendingFile = imageInput.files[0];
+
+                    const reader = new FileReader();
+
+                    reader.onload = (e) => {
+                        this.cropModal.src = e.target.result;
+
+                        this.$refs.cropModalRef.open();
+                    };
+
+                    reader.readAsDataURL(this.pendingFile);
+
+                    imageInput.value = '';
+                },
+
+                applyCrop() {
+                    const file = this.pendingFile;
+
+                    const { canvas } = this.$refs.cropperRef.getResult();
+
+                    if (! canvas) {
+                        this.skipCrop();
+
+                        return;
                     }
 
-                    this.setFile(imageInput.files[0]);
+                    canvas.toBlob((blob) => {
+                        const croppedFile = new File([blob], file.name, { type: file.type });
 
-                    this.readFile(imageInput.files[0]);
+                        this.setFile(croppedFile);
+
+                        this.readFile(croppedFile);
+
+                        this.closeCropModal();
+                    }, file.type || 'image/png');
+                },
+
+                skipCrop() {
+                    if (this.pendingFile) {
+                        this.setFile(this.pendingFile);
+
+                        this.readFile(this.pendingFile);
+                    }
+
+                    this.closeCropModal();
+                },
+
+                closeCropModal() {
+                    this.pendingFile = null;
+
+                    this.cropModal.src = null;
+
+                    this.cropModal.aspectRatio = undefined;
+
+                    this.$refs.cropModalRef.close();
+                },
+
+                onCropModalToggle({ isActive }) {
+                    if (isActive || ! this.cropModal.src) {
+                        return;
+                    }
+
+                    this.pendingFile = null;
+
+                    this.cropModal.src = null;
+
+                    this.cropModal.aspectRatio = undefined;
                 },
 
                 remove() {

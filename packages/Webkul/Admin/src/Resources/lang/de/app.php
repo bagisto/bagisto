@@ -5521,6 +5521,18 @@ return [
                 'allowed-types' => 'png, jpeg, jpg',
                 'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
 
+                'drag-drop-hint' => 'oder Bild hierher ziehen',
+
+                'crop' => [
+                    'title' => 'Bild zuschneiden',
+                    'aspect-free' => 'Frei',
+                    'aspect-square' => 'Quadrat (1:1)',
+                    'aspect-4-3' => 'Standard (4:3)',
+                    'aspect-16-9' => 'Breitbild (16:9)',
+                    'apply-btn' => 'Zuschnitt anwenden',
+                    'skip-btn' => 'Überspringen',
+                ],
+
                 'ai-generation' => [
                     'apply' => 'Anwenden',
                     'generate' => 'Generieren',
