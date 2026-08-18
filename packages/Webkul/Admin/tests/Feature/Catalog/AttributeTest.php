@@ -191,3 +191,46 @@ it('should mass delete attributes', function () {
         ]);
     }
 });
+
+it('should refuse an attribute whose regex is not a usable pattern', function (string $pattern) {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'), [
+        'code' => 'regex_'.substr(md5($pattern), 0, 8),
+        'admin_name' => 'Regex Probe',
+        'type' => 'text',
+        'validation' => 'regex',
+        'regex' => $pattern,
+    ])
+        ->assertJsonValidationErrorFor('regex')
+        ->assertUnprocessable();
+})->with(['^[A-Za-z0-9]+$', '/[unclosed/', 'not a pattern']);
+
+it('should accept an attribute whose regex is a usable pattern', function () {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'), [
+        'code' => 'regex_usable',
+        'admin_name' => 'Regex Probe',
+        'type' => 'text',
+        'validation' => 'regex',
+        'regex' => '/^[A-Za-z0-9]+$/',
+    ])->assertRedirectToRoute('admin.catalog.attributes.index');
+
+    $this->assertDatabaseHas('attributes', ['code' => 'regex_usable', 'regex' => '/^[A-Za-z0-9]+$/']);
+});
+
+it('should keep an unusable regex out of the rules the product form is given', function () {
+    // Arrange.
+    $attribute = Attribute::factory()->create([
+        'type' => 'text',
+        'validation' => 'regex',
+        'regex' => '^[A-Za-z0-9]+$',
+    ]);
+
+    // Act and Assert. An undelimited pattern would otherwise be written into the form's
+    // rules, where the browser cannot compile it.
+    expect($attribute->validations)->not->toContain('regex');
+});

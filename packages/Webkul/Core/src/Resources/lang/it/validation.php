@@ -8,5 +8,6 @@ return [
     'decimal' => ':attribute deve essere valido.',
     'phone-number' => 'The :attribute must be valid phone number.',
     'postcode' => ':attribute deve essere un codice postale valido.',
+    'regex' => 'Il campo :attribute deve essere un\'espressione regolare valida, delimitatori inclusi.',
     'slug' => ':attribute deve essere uno slug valido.',
 ];
