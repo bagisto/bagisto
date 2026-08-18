@@ -90,9 +90,14 @@ class Toolbar
     public function getAvailableLimits(): Collection
     {
         if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
-            $pages = explode(',', $productsPerPage);
+            $pages = collect(explode(',', $productsPerPage))
+                ->map(fn ($page) => (int) trim($page))
+                ->filter(fn ($page) => $page > 0)
+                ->values();
 
-            return collect($pages);
+            if ($pages->isNotEmpty()) {
+                return $pages;
+            }
         }
 
         return collect([12, 24, 36, 48]);

@@ -932,6 +932,7 @@ return [
                 'title' => 'admin::app.configuration.index.catalog.products.storefront.products-per-page',
                 'type' => 'text',
                 'info' => 'admin::app.configuration.index.catalog.products.storefront.comma-separated',
+                'validation' => 'nullable|regex:/^\d+(,\d+)*$/',
                 'channel_based' => true,
             ], [
                 'name' => 'sort_by',
