@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => '利用可能なフィルターはすべて追加済みです。',
+                'channel' => 'チャネル',
+                'copy-suffix' => 'コピー',
                 'create-btn' => 'セクションを作成',
-                'scoped-to' => ':theme のセクションを表示しています。',
-                'show-all' => 'すべて表示',
+                'delete-confirm' => 'このセクションを削除してもよろしいですか？',
+                'desktop' => 'デスクトップ',
+                'discard-btn' => '破棄',
+                'discarded' => '下書きの変更を破棄しました。',
+                'duplicate-btn' => '複製',
+                'empty' => 'セクションはまだありません。',
+                'mobile' => 'モバイル',
+                'preview-btn' => 'プレビュー',
+                'publish-btn' => '公開',
+                'scoped-to' => ':channel チャネルの :theme テーマのセクションを表示しています。',
+                'tablet' => 'タブレット',
                 'title' => 'セクション',
+                'unsaved' => '未保存の変更',
 
                 'datagrid' => [
                     'active' => 'アクティブ',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => '名前',
                 'save-btn' => 'セクションを保存',
-                'sort-order' => '並び替え順',
-                'themes' => 'テーマ',
                 'title' => 'セクションを作成',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'フッターリンクを追加',
                 'add-image-btn' => '画像を追加',
                 'add-link' => 'リンクを追加',
+                'add-media' => 'メディアを追加',
                 'asc' => '昇順',
                 'back' => '戻る',
                 'category-carousel' => 'カテゴリーカルーセル',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'テーマ',
                 'title' => 'セクションを編集',
                 'update-slider' => 'スライダーを更新',
+                'uploading' => 'アップロード中…',
                 'url' => 'URL',
                 'value' => '値：:value',
                 'value-input' => '値',

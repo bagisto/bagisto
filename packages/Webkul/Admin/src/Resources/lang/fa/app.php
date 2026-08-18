@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'همه فیلترهای موجود قبلاً اضافه شده‌اند.',
+                'channel' => 'کانال',
+                'copy-suffix' => 'کپی',
                 'create-btn' => 'ایجاد بخش',
-                'scoped-to' => 'نمایش بخش‌های :theme.',
-                'show-all' => 'نمایش همه',
+                'delete-confirm' => 'آیا مطمئن هستید که می‌خواهید این بخش را حذف کنید؟',
+                'desktop' => 'دسکتاپ',
+                'discard-btn' => 'نادیده گرفتن',
+                'discarded' => 'تغییرات پیش‌نویس نادیده گرفته شد.',
+                'duplicate-btn' => 'تکثیر',
+                'empty' => 'هنوز بخشی وجود ندارد.',
+                'mobile' => 'موبایل',
+                'preview-btn' => 'پیش‌نمایش',
+                'publish-btn' => 'انتشار',
+                'scoped-to' => 'نمایش بخش‌های قالب :theme در کانال :channel.',
+                'tablet' => 'تبلت',
                 'title' => 'بخش‌ها',
+                'unsaved' => 'تغییرات ذخیره‌نشده',
 
                 'datagrid' => [
                     'active' => 'فعال',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'نام',
                 'save-btn' => 'ذخیره بخش',
-                'sort-order' => 'ترتیب مرتب‌سازی',
-                'themes' => 'موضوعات',
                 'title' => 'ایجاد بخش',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'افزودن لینک پاورقی',
                 'add-image-btn' => 'افزودن تصویر',
                 'add-link' => 'افزودن لینک',
+                'add-media' => 'افزودن رسانه',
                 'asc' => 'صعودی',
                 'back' => 'بازگشت',
                 'category-carousel' => 'کاروسل دسته‌بندی',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'موضوعات',
                 'title' => 'ویرایش بخش',
                 'update-slider' => 'به‌روزرسانی اسلایدر',
+                'uploading' => 'در حال بارگذاری…',
                 'url' => 'آدرس اینترنتی',
                 'value' => 'مقدار: :value',
                 'value-input' => 'مقدار',

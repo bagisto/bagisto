@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => '所有可用的筛选条件均已添加。',
+                'channel' => '渠道',
+                'copy-suffix' => '副本',
                 'create-btn' => '创建版块',
-                'scoped-to' => '正在显示 :theme 的版块。',
-                'show-all' => '显示全部',
+                'delete-confirm' => '确定要删除此板块吗？',
+                'desktop' => '桌面',
+                'discard-btn' => '放弃',
+                'discarded' => '已放弃草稿更改。',
+                'duplicate-btn' => '复制',
+                'empty' => '暂无版块。',
+                'mobile' => '手机',
+                'preview-btn' => '预览',
+                'publish-btn' => '发布',
+                'scoped-to' => '正在显示 :channel 渠道中 :theme 主题的板块。',
+                'tablet' => '平板',
                 'title' => '版块',
+                'unsaved' => '未保存的更改',
 
                 'datagrid' => [
                     'active' => '活动',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => '名称',
                 'save-btn' => '保存版块',
-                'sort-order' => '排序顺序',
-                'themes' => '主题',
                 'title' => '创建版块',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => '添加页脚链接',
                 'add-image-btn' => '添加图片',
                 'add-link' => '添加链接',
+                'add-media' => '添加媒体',
                 'asc' => '升序',
                 'back' => '返回',
                 'category-carousel' => '类别轮播',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => '主题',
                 'title' => '编辑版块',
                 'update-slider' => '更新滑块',
+                'uploading' => '正在上传…',
                 'url' => '网址',
                 'value' => '值：:value',
                 'value-input' => '值',

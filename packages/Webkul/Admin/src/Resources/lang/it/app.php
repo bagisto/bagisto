@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Tutti i filtri disponibili sono già stati aggiunti.',
+                'channel' => 'Canale',
+                'copy-suffix' => 'Copia',
                 'create-btn' => 'Crea sezione',
-                'scoped-to' => 'Sezioni di :theme.',
-                'show-all' => 'Mostra tutto',
+                'delete-confirm' => 'Sei sicuro di voler eliminare questa sezione?',
+                'desktop' => 'Desktop',
+                'discard-btn' => 'Scarta',
+                'discarded' => 'Modifiche della bozza scartate.',
+                'duplicate-btn' => 'Duplica',
+                'empty' => 'Nessuna sezione per ora.',
+                'mobile' => 'Mobile',
+                'preview-btn' => 'Anteprima',
+                'publish-btn' => 'Pubblica',
+                'scoped-to' => 'Visualizzazione delle sezioni del tema :theme sul canale :channel.',
+                'tablet' => 'Tablet',
                 'title' => 'Sezioni',
+                'unsaved' => 'Modifiche non salvate',
 
                 'datagrid' => [
                     'active' => 'Attivo',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Nome',
                 'save-btn' => 'Salva sezione',
-                'sort-order' => 'Ordinamento',
-                'themes' => 'Temi',
                 'title' => 'Crea sezione',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Aggiungi Link Piè di Pagina',
                 'add-image-btn' => 'Aggiungi Immagine',
                 'add-link' => 'Aggiungi Link',
+                'add-media' => 'Aggiungi media',
                 'asc' => 'Asc',
                 'back' => 'Indietro',
                 'category-carousel' => 'Carosello Categoria',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Temi',
                 'title' => 'Modifica sezione',
                 'update-slider' => 'Aggiorna Slider',
+                'uploading' => 'Caricamento…',
                 'url' => 'URL',
                 'value' => 'Valore: :value',
                 'value-input' => 'Valore',

@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'सभी उपलब्ध फ़िल्टर पहले ही जोड़े जा चुके हैं।',
+                'channel' => 'चैनल',
+                'copy-suffix' => 'प्रतिलिपि',
                 'create-btn' => 'सेक्शन बनाएँ',
-                'scoped-to' => ':theme के सेक्शन दिखाए जा रहे हैं।',
-                'show-all' => 'सभी दिखाएँ',
+                'delete-confirm' => 'क्या आप वाकई इस अनुभाग को हटाना चाहते हैं?',
+                'desktop' => 'डेस्कटॉप',
+                'discard-btn' => 'हटाएँ',
+                'discarded' => 'ड्राफ़्ट परिवर्तन हटा दिए गए।',
+                'duplicate-btn' => 'डुप्लिकेट',
+                'empty' => 'अभी कोई सेक्शन नहीं है।',
+                'mobile' => 'मोबाइल',
+                'preview-btn' => 'पूर्वावलोकन',
+                'publish-btn' => 'प्रकाशित करें',
+                'scoped-to' => ':channel चैनल पर :theme थीम के अनुभाग दिखाए जा रहे हैं।',
+                'tablet' => 'टैबलेट',
                 'title' => 'सेक्शन',
+                'unsaved' => 'सहेजे नहीं गए परिवर्तन',
 
                 'datagrid' => [
                     'active' => 'सक्रिय',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'नाम',
                 'save-btn' => 'सेक्शन सहेजें',
-                'sort-order' => 'क्रमबद्ध करें',
-                'themes' => 'थीम',
                 'title' => 'सेक्शन बनाएँ',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'फ़ुटर लिंक जोड़ें',
                 'add-image-btn' => 'छवि जोड़ें',
                 'add-link' => 'लिंक जोड़ें',
+                'add-media' => 'मीडिया जोड़ें',
                 'asc' => 'उन्नति',
                 'back' => 'वापस',
                 'category-carousel' => 'श्रेणी कैरोसल',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'थीम',
                 'title' => 'सेक्शन संपादित करें',
                 'update-slider' => 'स्लाइडर अपडेट करें',
+                'uploading' => 'अपलोड हो रहा है…',
                 'url' => 'यूआरएल',
                 'value' => 'मूल्य: :value',
                 'value-input' => 'मूल्य',

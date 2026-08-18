@@ -13,15 +13,21 @@
 @php
     $channel = core()->getCurrentChannel();
 
-    $section = $sectionRepository->findOneWhere([
-        'type'       => 'footer_links',
-        'status'     => 1,
-        'theme_code' => $channel->theme,
-        'channel_id' => $channel->id,
-    ]);
+    $section = $sectionRepository->findOneOfType(
+        'footer_links',
+        $channel->id,
+        $channel->theme,
+        app()->getLocale()
+    );
 @endphp
 
-<footer class="mt-9 bg-lightOrange max-sm:mt-10">
+<footer
+    class="mt-9 bg-lightOrange max-sm:mt-10"
+    @if ($section && $sectionRepository->isPreviewing())
+        data-section-id="{{ $section->id }}"
+        data-section-name="{{ $section->name }}"
+    @endif
+>
     <div class="flex justify-between gap-x-6 gap-y-8 p-[60px] max-1060:flex-col-reverse max-md:gap-5 max-md:p-8 max-sm:px-4 max-sm:py-5">
         <!-- For Desktop View -->
         <div

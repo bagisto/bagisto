@@ -9,12 +9,12 @@
 @php
     $channel = core()->getCurrentChannel();
 
-    $section = $sectionRepository->findOneWhere([
-        'type'       => 'services_content',
-        'status'     => 1,
-        'theme_code' => $channel->theme,
-        'channel_id' => $channel->id,
-    ]); 
+    $section = $sectionRepository->findOneOfType(
+        'services_content',
+        $channel->id,
+        $channel->theme,
+        app()->getLocale()
+    );
 @endphp
 
 <!-- Features -->
@@ -22,6 +22,10 @@
     <div
         class="container mt-20 max-lg:px-8 max-md:mt-10 max-md:px-4"
         v-pre
+        @if ($sectionRepository->isPreviewing())
+            data-section-id="{{ $section->id }}"
+            data-section-name="{{ $section->name }}"
+        @endif
     >
         <div class="max-md:max-y-6 flex justify-center gap-6 max-lg:flex-wrap max-md:grid max-md:grid-cols-2 max-md:gap-x-2.5 max-md:text-center">
             @foreach ($section->options['services'] as $service)

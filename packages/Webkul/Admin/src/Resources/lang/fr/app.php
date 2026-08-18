@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Tous les filtres disponibles ont déjà été ajoutés.',
+                'channel' => 'Canal',
+                'copy-suffix' => 'Copie',
                 'create-btn' => 'Créer une section',
-                'scoped-to' => 'Affichage des sections de :theme.',
-                'show-all' => 'Tout afficher',
+                'delete-confirm' => 'Êtes-vous sûr de vouloir supprimer cette section ?',
+                'desktop' => 'Ordinateur',
+                'discard-btn' => 'Abandonner',
+                'discarded' => 'Modifications du brouillon abandonnées.',
+                'duplicate-btn' => 'Dupliquer',
+                'empty' => 'Aucune section pour le moment.',
+                'mobile' => 'Mobile',
+                'preview-btn' => 'Aperçu',
+                'publish-btn' => 'Publier',
+                'scoped-to' => 'Affichage des sections du thème :theme sur le canal :channel.',
+                'tablet' => 'Tablette',
                 'title' => 'Sections',
+                'unsaved' => 'Modifications non enregistrées',
 
                 'datagrid' => [
                     'active' => 'Actif',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Nom',
                 'save-btn' => 'Enregistrer la section',
-                'sort-order' => 'Ordre de tri',
-                'themes' => 'Thèmes',
                 'title' => 'Créer une section',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Ajouter un lien de pied de page',
                 'add-image-btn' => 'Ajouter une image',
                 'add-link' => 'Ajouter un lien',
+                'add-media' => 'Ajouter un média',
                 'asc' => 'Asc',
                 'back' => 'Retour',
                 'category-carousel' => 'Carrousel de catégorie',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Thèmes',
                 'title' => 'Modifier la section',
                 'update-slider' => 'Mettre à jour le curseur',
+                'uploading' => 'Envoi en cours…',
                 'url' => 'URL',
                 'value' => 'Valeur : :value',
                 'value-input' => 'Valeur',

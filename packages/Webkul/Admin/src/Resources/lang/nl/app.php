@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Alle beschikbare filters zijn al toegevoegd.',
+                'channel' => 'Kanaal',
+                'copy-suffix' => 'Kopie',
                 'create-btn' => 'Sectie aanmaken',
-                'scoped-to' => 'Secties van :theme worden getoond.',
-                'show-all' => 'Alles tonen',
+                'delete-confirm' => 'Weet u zeker dat u deze sectie wilt verwijderen?',
+                'desktop' => 'Desktop',
+                'discard-btn' => 'Verwerpen',
+                'discarded' => 'Conceptwijzigingen verworpen.',
+                'duplicate-btn' => 'Dupliceren',
+                'empty' => 'Nog geen secties.',
+                'mobile' => 'Mobiel',
+                'preview-btn' => 'Voorbeeld',
+                'publish-btn' => 'Publiceren',
+                'scoped-to' => 'Secties van het thema :theme op kanaal :channel worden weergegeven.',
+                'tablet' => 'Tablet',
                 'title' => 'Secties',
+                'unsaved' => 'Niet-opgeslagen wijzigingen',
 
                 'datagrid' => [
                     'active' => 'Actief',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Naam',
                 'save-btn' => 'Sectie opslaan',
-                'sort-order' => 'Sorteervolgorde',
-                'themes' => 'Thema\'s',
                 'title' => 'Sectie aanmaken',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Voettekstlink toevoegen',
                 'add-image-btn' => 'Afbeelding toevoegen',
                 'add-link' => 'Link toevoegen',
+                'add-media' => 'Media toevoegen',
                 'asc' => 'oplopend',
                 'back' => 'Terug',
                 'category-carousel' => 'Categorie Carrousel',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Thema\'s',
                 'title' => 'Sectie bewerken',
                 'update-slider' => 'Schuifregelaar bijwerken',
+                'uploading' => 'Uploaden…',
                 'url' => 'URL',
                 'value' => 'Waarde: :value',
                 'value-input' => 'Waarde',

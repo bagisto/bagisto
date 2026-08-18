@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'تمت إضافة جميع عوامل التصفية المتاحة.',
+                'channel' => 'القناة',
+                'copy-suffix' => 'نسخة',
                 'create-btn' => 'إنشاء قسم',
-                'scoped-to' => 'عرض أقسام :theme.',
-                'show-all' => 'عرض الكل',
+                'delete-confirm' => 'هل أنت متأكد أنك تريد حذف هذا القسم؟',
+                'desktop' => 'سطح المكتب',
+                'discard-btn' => 'تجاهل',
+                'discarded' => 'تم تجاهل التغييرات غير المنشورة.',
+                'duplicate-btn' => 'تكرار',
+                'empty' => 'لا توجد أقسام بعد.',
+                'mobile' => 'جوال',
+                'preview-btn' => 'معاينة',
+                'publish-btn' => 'نشر',
+                'scoped-to' => 'عرض الأقسام الخاصة بسمة :theme على قناة :channel.',
+                'tablet' => 'لوحي',
                 'title' => 'الأقسام',
+                'unsaved' => 'تغييرات غير محفوظة',
 
                 'datagrid' => [
                     'active' => 'نشيط',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'الاسم',
                 'save-btn' => 'حفظ القسم',
-                'sort-order' => 'ترتيب الفرز',
-                'themes' => 'موضوعات',
                 'title' => 'إنشاء قسم',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'إضافة رابط التذييل',
                 'add-image-btn' => 'إضافة صورة',
                 'add-link' => 'إضافة رابط',
+                'add-media' => 'إضافة وسائط',
                 'asc' => 'تصاعدي',
                 'back' => 'رجوع',
                 'category-carousel' => 'شريط الفئات',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'موضوعات',
                 'title' => 'تعديل القسم',
                 'update-slider' => 'تحديث الشريط',
+                'uploading' => 'جارٍ الرفع…',
                 'url' => 'رابط الإنترنت',
                 'value' => 'القيمة: :value',
                 'value-input' => 'القيمة',

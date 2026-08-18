@@ -17,22 +17,35 @@ Route::prefix('appearance')->group(function () {
     });
 
     /**
-     * Section routes.
+     * Section routes. A section belongs to a theme, so the listing and the create
+     * endpoint hang off the theme; everything else is addressed by section id.
      */
-    Route::controller(SectionController::class)->prefix('sections')->group(function () {
-        Route::get('', 'index')->name('admin.appearance.sections.index');
+    Route::controller(SectionController::class)->group(function () {
+        Route::get('themes/{code}/sections', 'index')->name('admin.appearance.sections.index');
 
-        Route::get('edit/{id}', 'edit')->name('admin.appearance.sections.edit');
+        Route::post('themes/{code}/sections', 'store')->name('admin.appearance.sections.store');
 
-        Route::post('store', 'store')->name('admin.appearance.sections.store');
+        Route::prefix('sections')->group(function () {
+            Route::post('edit/{id}', 'update')->name('admin.appearance.sections.update');
 
-        Route::post('edit/{id}', 'update')->name('admin.appearance.sections.update');
+            Route::delete('edit/{id}', 'destroy')->name('admin.appearance.sections.delete');
 
-        Route::delete('edit/{id}', 'destroy')->name('admin.appearance.sections.delete');
+            Route::post('reorder', 'reorder')->name('admin.appearance.sections.reorder');
 
-        Route::post('mass-update', 'massUpdate')->name('admin.appearance.sections.mass_update');
+            Route::get('{id}/fields', 'fields')->name('admin.appearance.sections.fields');
 
-        Route::post('mass-delete', 'massDestroy')->name('admin.appearance.sections.mass_delete');
+            Route::post('{id}/draft', 'saveDraft')->name('admin.appearance.sections.draft');
+
+            Route::post('{id}/publish', 'publish')->name('admin.appearance.sections.publish');
+
+            Route::post('{id}/discard', 'discard')->name('admin.appearance.sections.discard');
+
+            Route::post('{id}/duplicate', 'duplicate')->name('admin.appearance.sections.duplicate');
+
+            Route::post('{id}/media', 'uploadMedia')->name('admin.appearance.sections.media');
+
+            Route::post('{id}/status', 'status')->name('admin.appearance.sections.status');
+        });
     });
 });
 
@@ -42,13 +55,16 @@ Route::prefix('appearance')->group(function () {
  * integrations keep working.
  */
 Route::prefix('themes')->group(function () {
-    Route::get('', fn () => redirect()->route('admin.appearance.sections.index', request()->query(), 301))
+    Route::get('', fn () => redirect()->route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme] + request()->query(), 301))
         ->name('admin.settings.themes.index');
 
-    Route::get('edit/{id}', fn ($id) => redirect()->route('admin.appearance.sections.edit', ['id' => $id] + request()->query(), 301))
+    Route::get('edit/{id}', fn ($id) => redirect()->route('admin.appearance.sections.index', [
+        'code' => core()->getCurrentChannel()->theme,
+        'section' => $id,
+    ] + request()->query(), 301))
         ->name('admin.settings.themes.edit');
 
-    Route::post('store', fn () => redirect()->route('admin.appearance.sections.store', [], 308))
+    Route::post('store', fn () => redirect()->route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme], 308))
         ->name('admin.settings.themes.store');
 
     Route::post('edit/{id}', fn ($id) => redirect()->route('admin.appearance.sections.update', ['id' => $id], 308))
@@ -56,10 +72,4 @@ Route::prefix('themes')->group(function () {
 
     Route::delete('edit/{id}', fn ($id) => redirect()->route('admin.appearance.sections.delete', ['id' => $id], 308))
         ->name('admin.settings.themes.delete');
-
-    Route::post('mass-update', fn () => redirect()->route('admin.appearance.sections.mass_update', [], 308))
-        ->name('admin.settings.themes.mass_update');
-
-    Route::post('mass-delete', fn () => redirect()->route('admin.appearance.sections.mass_delete', [], 308))
-        ->name('admin.settings.themes.mass_delete');
 });

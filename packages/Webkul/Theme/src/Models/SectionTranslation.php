@@ -66,6 +66,7 @@ class SectionTranslation extends Model implements SectionTranslationContract
      */
     protected $casts = [
         'options' => 'array',
+        'draft_options' => 'array',
     ];
 
     /**
@@ -76,5 +77,6 @@ class SectionTranslation extends Model implements SectionTranslationContract
     protected $fillable = [
         'name',
         'options',
+        'draft_options',
     ];
 }

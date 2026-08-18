@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Mevcut tüm filtreler zaten eklendi.',
+                'channel' => 'Kanal',
+                'copy-suffix' => 'Kopya',
                 'create-btn' => 'Bölüm Oluştur',
-                'scoped-to' => ':theme temasının bölümleri gösteriliyor.',
-                'show-all' => 'Tümünü göster',
+                'delete-confirm' => 'Bu bölümü silmek istediğinizden emin misiniz?',
+                'desktop' => 'Masaüstü',
+                'discard-btn' => 'At',
+                'discarded' => 'Taslak değişiklikleri atıldı.',
+                'duplicate-btn' => 'Çoğalt',
+                'empty' => 'Henüz bölüm yok.',
+                'mobile' => 'Mobil',
+                'preview-btn' => 'Önizleme',
+                'publish-btn' => 'Yayınla',
+                'scoped-to' => ':channel kanalındaki :theme temasının bölümleri gösteriliyor.',
+                'tablet' => 'Tablet',
                 'title' => 'Bölümler',
+                'unsaved' => 'Kaydedilmemiş değişiklikler',
 
                 'datagrid' => [
                     'active' => 'Aktif',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Ad',
                 'save-btn' => 'Bölümü Kaydet',
-                'sort-order' => 'Sıralama Sırası',
-                'themes' => 'Temalar',
                 'title' => 'Bölüm Oluştur',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Alt Bağlantı Ekle',
                 'add-image-btn' => 'Resim Ekle',
                 'add-link' => 'Bağlantı Ekle',
+                'add-media' => 'Medya Ekle',
                 'asc' => 'artarak',
                 'back' => 'Geri',
                 'category-carousel' => 'Kategori Karuseli',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Temalar',
                 'title' => 'Bölümü Düzenle',
                 'update-slider' => 'Slider\'ı Güncelle',
+                'uploading' => 'Yükleniyor…',
                 'url' => 'URL',
                 'value' => 'Değer: :value',
                 'value-input' => 'Değer',

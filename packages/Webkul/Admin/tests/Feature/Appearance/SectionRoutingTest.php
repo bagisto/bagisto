@@ -8,7 +8,7 @@ use function Pest\Laravel\getJson;
 it('should render the customize screen at its new location', function () {
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index'))
+    get(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->assertOk()
         ->assertSee(trans('admin::app.components.layouts.sidebar.sections'));
 });
@@ -16,18 +16,9 @@ it('should render the customize screen at its new location', function () {
 it('should say which theme the listing is scoped to', function () {
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index', ['theme' => 'default']))
+    get(route('admin.appearance.sections.index', ['code' => 'default']))
         ->assertOk()
-        ->assertSee(trans('admin::app.appearance.sections.index.show-all'))
         ->assertSee(config('themes.shop.default.name'));
-});
-
-it('should not claim a scope when every section is listed', function () {
-    $this->loginAsAdmin();
-
-    get(route('admin.appearance.sections.index'))
-        ->assertOk()
-        ->assertDontSee(trans('admin::app.appearance.sections.index.show-all'));
 });
 
 it('should redirect the legacy themes url to customize', function () {
@@ -35,7 +26,7 @@ it('should redirect the legacy themes url to customize', function () {
 
     get(route('admin.settings.themes.index'))
         ->assertStatus(301)
-        ->assertRedirect(route('admin.appearance.sections.index'));
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]));
 });
 
 it('should redirect the legacy theme edit url to customize', function () {
@@ -45,7 +36,7 @@ it('should redirect the legacy theme edit url to customize', function () {
 
     get(route('admin.settings.themes.edit', $section->id))
         ->assertStatus(301)
-        ->assertRedirect(route('admin.appearance.sections.edit', $section->id));
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme] + ['section' => $section->id]));
 });
 
 it('should no longer offer a section picker on the channel form', function () {
@@ -76,42 +67,38 @@ it('should scope the section listing to a theme when one is requested', function
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.appearance.sections.index', ['theme' => 'default']), ['X-Requested-With' => 'XMLHttpRequest'])
+    getJson(route('admin.appearance.sections.index', ['code' => 'default']), ['X-Requested-With' => 'XMLHttpRequest'])
         ->assertOk()
         ->assertSee('Belongs To Default')
         ->assertDontSee('Belongs To Another');
 });
 
-it('should list every section when no theme is requested', function () {
+it('should list the sections of the channel current theme', function () {
     $channel = core()->getCurrentChannel();
 
     Section::factory()->create([
         'channel_id' => $channel->id,
-        'theme_code' => 'some-other-theme',
-        'name' => 'Belongs To Another',
+        'theme_code' => $channel->theme,
+        'name' => 'Belongs To Current Theme',
     ]);
 
     $this->loginAsAdmin();
 
-    getJson(route('admin.appearance.sections.index'), ['X-Requested-With' => 'XMLHttpRequest'])
+    get(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->assertOk()
-        ->assertSee('Belongs To Another');
+        ->assertSee('Belongs To Current Theme');
 });
 
-it('should ignore an unknown theme rather than hiding everything', function () {
-    $channel = core()->getCurrentChannel();
-
-    Section::factory()->create([
-        'channel_id' => $channel->id,
-        'theme_code' => 'default',
-        'name' => 'Belongs To Default',
-    ]);
-
+it('should not found a theme this installation does not have', function () {
     $this->loginAsAdmin();
 
-    getJson(route('admin.appearance.sections.index', ['theme' => 'not-a-theme']), ['X-Requested-With' => 'XMLHttpRequest'])
-        ->assertOk()
-        ->assertSee('Belongs To Default');
+    get(route('admin.appearance.sections.index', ['code' => 'not-a-theme']))
+        ->assertNotFound();
+});
+
+it('should nest the section listing under its theme', function () {
+    expect(route('admin.appearance.sections.index', ['code' => 'default'], false))
+        ->toBe('/admin/appearance/themes/default/sections');
 });
 
 it('should not offer sections in the sidebar', function () {

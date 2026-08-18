@@ -3,6 +3,7 @@
 namespace Webkul\Theme\Repositories;
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Stevebauman\Purify\Facades\Purify;
@@ -127,6 +128,246 @@ class SectionRepository extends Repository
         $translatedModel->options = $options ?? [];
         $translatedModel->section_id = $section->id;
         $translatedModel->save();
+    }
+
+    /**
+     * Store unpublished edits for a section, in the given locale.
+     *
+     * @param  int  $id
+     */
+    public function saveDraft($id, string $locale, array $options): Section
+    {
+        $section = $this->findOrFail($id);
+
+        $section->translateOrNew($locale)->draft_options = $options;
+
+        $section->save();
+
+        return $section;
+    }
+
+    /**
+     * Promote every pending draft of a section to what the storefront renders.
+     *
+     * Drafts are held per locale, so all of them are published together. Publishing only
+     * the locale being viewed would leave the rest pending with nothing to reveal it.
+     *
+     * @param  int  $id
+     */
+    public function publishDraft($id): Section
+    {
+        $section = $this->findOrFail($id);
+
+        foreach ($section->translations as $translation) {
+            if (is_null($translation->draft_options)) {
+                continue;
+            }
+
+            $translation->options = $translation->draft_options;
+
+            $translation->draft_options = null;
+
+            $translation->save();
+        }
+
+        return $section->refresh();
+    }
+
+    /**
+     * Throw away every pending draft of a section.
+     *
+     * @param  int  $id
+     */
+    public function discardDraft($id): Section
+    {
+        $section = $this->findOrFail($id);
+
+        foreach ($section->translations as $translation) {
+            if (is_null($translation->draft_options)) {
+                continue;
+            }
+
+            $translation->draft_options = null;
+
+            $translation->save();
+        }
+
+        return $section->refresh();
+    }
+
+    /**
+     * Set on the request while the appearance preview is rendering.
+     *
+     * Kept in the internal attribute bag rather than the query, so a visitor cannot ask a
+     * storefront page to render unpublished drafts.
+     */
+    public const PREVIEWING = 'appearance_previewing';
+
+    /**
+     * Whether the page being rendered is the appearance preview.
+     */
+    public function isPreviewing(): bool
+    {
+        return (bool) request()->attributes->get(self::PREVIEWING, false);
+    }
+
+    /**
+     * The single section of a type a channel shows, drafted when previewing.
+     *
+     * Footer links and service promises are rendered by the layout rather than the home
+     * page, so they need their own lookup rather than riding along with the section loop.
+     */
+    public function findOneOfType(string $type, int $channelId, string $themeCode, string $locale)
+    {
+        $section = $this->findOneWhere([
+            'type' => $type,
+            'status' => 1,
+            'theme_code' => $themeCode,
+            'channel_id' => $channelId,
+        ]);
+
+        if (
+            ! $section
+            || ! $this->isPreviewing()
+        ) {
+            return $section;
+        }
+
+        $translation = $section->translate($locale);
+
+        if (
+            $translation
+            && ! is_null($translation->draft_options)
+        ) {
+            $translation->options = $translation->draft_options;
+        }
+
+        return $section;
+    }
+
+    /**
+     * Sections a channel renders, with each one's options resolved to its draft where a
+     * draft exists, so that the editor preview shows unpublished work.
+     *
+     * @return Collection
+     */
+    public function getDraftedForPreview(int $channelId, string $themeCode, string $locale)
+    {
+        return $this->orderBy('sort_order')
+            ->findWhere([
+                'status' => 1,
+                'channel_id' => $channelId,
+                'theme_code' => $themeCode,
+            ])
+            ->each(function ($section) use ($locale) {
+                $translation = $section->translate($locale);
+
+                if (
+                    ! $translation
+                    || is_null($translation->draft_options)
+                ) {
+                    return;
+                }
+
+                $translation->options = $translation->draft_options;
+            });
+    }
+
+    /**
+     * Copy a section, including its translated options, so a similar one does not have to
+     * be rebuilt by hand.
+     *
+     * @param  int  $id
+     */
+    public function duplicate($id): Section
+    {
+        $section = $this->findOrFail($id);
+
+        /**
+         * Everything below the original shifts down first. Without it the copy shares a
+         * sort order with the next section and the tie is broken arbitrarily, which is
+         * what sent copies to the bottom of the list.
+         */
+        $this->model
+            ->where('channel_id', $section->channel_id)
+            ->where('theme_code', $section->theme_code)
+            ->where('sort_order', '>', $section->sort_order)
+            ->increment('sort_order');
+
+        $copy = $section->replicateWithTranslations();
+
+        $copy->name = $section->name.' '.trans('admin::app.appearance.sections.index.copy-suffix');
+
+        $copy->status = 0;
+
+        $copy->sort_order = $section->sort_order + 1;
+
+        $copy->save();
+
+        return $copy;
+    }
+
+    /**
+     * Apply a new order to a set of sections.
+     */
+    public function reorder(array $sectionIds): void
+    {
+        /**
+         * `update()` is overridden to expect a whole section payload, so the parent is
+         * used here to write the single column.
+         */
+        foreach (array_values($sectionIds) as $position => $sectionId) {
+            parent::update(['sort_order' => $position + 1], $sectionId);
+        }
+    }
+
+    /**
+     * Store a single uploaded image against a section, returning the path as the
+     * storefront records it.
+     *
+     * @param  int  $id
+     */
+    public function storeImage($id, UploadedFile $file): string
+    {
+        $section = $this->findOrFail($id);
+
+        $path = 'section/'.$section->id.'/'.Str::random(40).'.webp';
+
+        Storage::put($path, (string) image_manager()->read($file)->encodeByExtension('webp'));
+
+        return 'storage/'.$path;
+    }
+
+    /**
+     * Store an uploaded image or video against a section.
+     *
+     * Images go through the same webp conversion as everywhere else. A video is streamed
+     * to disk as uploaded, both because re-encoding one does not belong in a request and
+     * because the image library cannot read it.
+     *
+     * @return array{path: string, type: string}
+     */
+    public function storeMedia($id, UploadedFile $file): array
+    {
+        $section = $this->findOrFail($id);
+
+        if (! Str::startsWith((string) $file->getMimeType(), 'video/')) {
+            return [
+                'path' => $this->storeImage($section->id, $file),
+                'type' => 'image',
+            ];
+        }
+
+        $path = Storage::putFileAs(
+            'section/'.$section->id,
+            $file,
+            Str::random(40).'.'.$file->extension()
+        );
+
+        return [
+            'path' => 'storage/'.$path,
+            'type' => 'video',
+        ];
     }
 
     /**

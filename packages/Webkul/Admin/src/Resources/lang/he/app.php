@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'כל המסננים הזמינים כבר נוספו.',
+                'channel' => 'ערוץ',
+                'copy-suffix' => 'עותק',
                 'create-btn' => 'יצירת מקטע',
-                'scoped-to' => 'מוצגים המקטעים של :theme.',
-                'show-all' => 'הצג הכול',
+                'delete-confirm' => 'האם אתה בטוח שברצונך למחוק את המקטע הזה?',
+                'desktop' => 'שולחן עבודה',
+                'discard-btn' => 'בטל',
+                'discarded' => 'שינויי הטיוטה בוטלו.',
+                'duplicate-btn' => 'שכפל',
+                'empty' => 'אין עדיין מקטעים.',
+                'mobile' => 'נייד',
+                'preview-btn' => 'תצוגה מקדימה',
+                'publish-btn' => 'פרסם',
+                'scoped-to' => 'מוצגים המקטעים של ערכת הנושא :theme בערוץ :channel.',
+                'tablet' => 'טאבלט',
                 'title' => 'מקטעים',
+                'unsaved' => 'שינויים שלא נשמרו',
 
                 'datagrid' => [
                     'active' => 'פעיל',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'שם',
                 'save-btn' => 'שמירת מקטע',
-                'sort-order' => 'סדר מיון',
-                'themes' => 'נושאים',
                 'title' => 'יצירת מקטע',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'הוסף קישור לתחתית',
                 'add-image-btn' => 'הוסף תמונה',
                 'add-link' => 'הוסף קישור',
+                'add-media' => 'הוספת מדיה',
                 'asc' => 'עולה',
                 'back' => 'חזור',
                 'category-carousel' => 'קרוסלת קטגוריות',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'נושאים',
                 'title' => 'עריכת מקטע',
                 'update-slider' => 'עדכן מחוון',
+                'uploading' => 'מעלה…',
                 'url' => 'קישור',
                 'value' => 'ערך: :value',
                 'value-input' => 'ערך',

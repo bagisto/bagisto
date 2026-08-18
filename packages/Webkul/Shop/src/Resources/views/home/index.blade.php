@@ -38,6 +38,25 @@
     @foreach ($sections as $section)
         @php ($data = $section->options) @endphp
 
+        {{--
+            Only the types this page actually renders are marked here. Footer links and
+            service promises are drawn by the layout, and wrapping them here as well would
+            leave an empty duplicate that the editor highlights instead of the real one.
+        --}}
+        @php ($marks = ($preview ?? false) && in_array($section->type, [
+            $section::IMAGE_CAROUSEL,
+            $section::STATIC_CONTENT,
+            $section::CATEGORY_CAROUSEL,
+            $section::PRODUCT_CAROUSEL,
+        ]))
+
+        @if ($marks)
+            <div
+                data-section-id="{{ $section->id }}"
+                data-section-name="{{ $section->name }}"
+            >
+        @endif
+
         <!-- Static Content -->
         @switch ($section->type)
             @case ($section::IMAGE_CAROUSEL)
@@ -85,5 +104,13 @@
 
                 @break
         @endswitch
+
+        @if ($marks)
+            </div>
+        @endif
     @endforeach
+
+    @if ($preview ?? false)
+        @include('shop::home.preview-bridge')
+    @endif
 </x-shop::layouts>

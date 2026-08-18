@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Ya se han añadido todos los filtros disponibles.',
+                'channel' => 'Canal',
+                'copy-suffix' => 'Copia',
                 'create-btn' => 'Crear sección',
-                'scoped-to' => 'Mostrando las secciones de :theme.',
-                'show-all' => 'Mostrar todo',
+                'delete-confirm' => '¿Está seguro de que desea eliminar esta sección?',
+                'desktop' => 'Escritorio',
+                'discard-btn' => 'Descartar',
+                'discarded' => 'Se descartaron los cambios del borrador.',
+                'duplicate-btn' => 'Duplicar',
+                'empty' => 'Aún no hay secciones.',
+                'mobile' => 'Móvil',
+                'preview-btn' => 'Vista previa',
+                'publish-btn' => 'Publicar',
+                'scoped-to' => 'Mostrando las secciones del tema :theme en el canal :channel.',
+                'tablet' => 'Tableta',
                 'title' => 'Secciones',
+                'unsaved' => 'Cambios sin guardar',
 
                 'datagrid' => [
                     'active' => 'Activo',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Nombre',
                 'save-btn' => 'Guardar sección',
-                'sort-order' => 'Orden de Clasificación',
-                'themes' => 'Temas',
                 'title' => 'Crear sección',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Agregar Enlace del Pie de Página',
                 'add-image-btn' => 'Agregar Imagen',
                 'add-link' => 'Agregar Enlace',
+                'add-media' => 'Añadir multimedia',
                 'asc' => 'Asc',
                 'back' => 'Volver',
                 'category-carousel' => 'Carrusel de Categoría',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Temas',
                 'title' => 'Editar sección',
                 'update-slider' => 'Actualizar Deslizador',
+                'uploading' => 'Subiendo…',
                 'url' => 'URL',
                 'value' => 'Valor: :value',
                 'value-input' => 'Valor',

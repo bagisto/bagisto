@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'সমস্ত উপলব্ধ ফিল্টার ইতিমধ্যে যোগ করা হয়েছে।',
+                'channel' => 'চ্যানেল',
+                'copy-suffix' => 'কপি',
                 'create-btn' => 'সেকশন তৈরি করুন',
-                'scoped-to' => ':theme-এর সেকশন দেখানো হচ্ছে।',
-                'show-all' => 'সব দেখুন',
+                'delete-confirm' => 'আপনি কি নিশ্চিত যে আপনি এই বিভাগটি মুছে ফেলতে চান?',
+                'desktop' => 'ডেস্কটপ',
+                'discard-btn' => 'বাতিল',
+                'discarded' => 'খসড়া পরিবর্তন বাতিল করা হয়েছে।',
+                'duplicate-btn' => 'অনুলিপি',
+                'empty' => 'এখনও কোনো সেকশন নেই।',
+                'mobile' => 'মোবাইল',
+                'preview-btn' => 'প্রিভিউ',
+                'publish-btn' => 'প্রকাশ করুন',
+                'scoped-to' => ':channel চ্যানেলে :theme থিমের বিভাগগুলি দেখানো হচ্ছে।',
+                'tablet' => 'ট্যাবলেট',
                 'title' => 'সেকশন',
+                'unsaved' => 'অসংরক্ষিত পরিবর্তন',
 
                 'datagrid' => [
                     'active' => 'সক্রিয়',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'নাম',
                 'save-btn' => 'সেকশন সংরক্ষণ করুন',
-                'sort-order' => 'ক্রম',
-                'themes' => 'থিমগুলি',
                 'title' => 'সেকশন তৈরি করুন',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'ফুটার লিংক যোগ করুন',
                 'add-image-btn' => 'ছবি যোগ করুন',
                 'add-link' => 'লিংক যোগ করুন',
+                'add-media' => 'মিডিয়া যোগ করুন',
                 'asc' => 'উচ্চারণ',
                 'back' => 'পেছনে',
                 'category-carousel' => 'বিভাগ ক্যারোসেল',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'থিমগুলি',
                 'title' => 'সেকশন সম্পাদনা করুন',
                 'update-slider' => 'স্লাইডার আপডেট করুন',
+                'uploading' => 'আপলোড হচ্ছে…',
                 'url' => 'ইউআরএল',
                 'value' => 'মান: :value',
                 'value-input' => 'মান',

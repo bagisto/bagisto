@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'පවතින සියලුම පෙරහන් දැනටමත් එකතු කර ඇත.',
+                'channel' => 'නාලිකාව',
+                'copy-suffix' => 'පිටපත',
                 'create-btn' => 'කොටසක් සාදන්න',
-                'scoped-to' => ':theme සඳහා කොටස් පෙන්වයි.',
-                'show-all' => 'සියල්ල පෙන්වන්න',
+                'delete-confirm' => 'ඔබට මෙම කොටස මකා දැමීමට අවශ්‍ය බව විශ්වාසද?',
+                'desktop' => 'ඩෙස්ක්ටොප්',
+                'discard-btn' => 'ඉවත් කරන්න',
+                'discarded' => 'කෙටුම්පත් වෙනස්කම් ඉවත් කරන ලදී.',
+                'duplicate-btn' => 'අනුපිටපත',
+                'empty' => 'තවම කොටස් නැත.',
+                'mobile' => 'ජංගම',
+                'preview-btn' => 'පෙරදසුන',
+                'publish-btn' => 'ප්‍රකාශනය',
+                'scoped-to' => ':channel නාලිකාවේ :theme තේමාවේ කොටස් පෙන්වයි.',
+                'tablet' => 'ටැබ්ලට්',
                 'title' => 'කොටස්',
+                'unsaved' => 'සුරකින ලද නොවන වෙනස්කම්',
 
                 'datagrid' => [
                     'active' => 'ක්‍රියාකාරී',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'නම',
                 'save-btn' => 'කොටස සුරකින්න',
-                'sort-order' => 'සුප්‍රතා අනුකුරු',
-                'themes' => 'තේමා',
                 'title' => 'කොටසක් සාදන්න',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'පිටු සල්ලිකරන්න',
                 'add-image-btn' => 'පින්තූරයක් එක්කරන්න',
                 'add-link' => 'සබැඳිය එක්කරන්න',
+                'add-media' => 'මාධ්‍ය එක් කරන්න',
                 'asc' => 'ආස්',
                 'back' => 'ආපසු',
                 'category-carousel' => 'ප්‍රවේශ කැරූසල්',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'තේමා',
                 'title' => 'කොටස සංස්කරණය කරන්න',
                 'update-slider' => 'ස්ලයිඩරය යාවත්කාලීන කරන්න',
+                'uploading' => 'උඩුගත වෙමින්…',
                 'url' => 'URL',
                 'value' => 'අගය: :value',
                 'value-input' => 'අගය',

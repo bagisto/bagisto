@@ -6,6 +6,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
 use Webkul\Category\Repositories\CategoryRepository;
+use Webkul\Core\Http\Middleware\SecureHeaders;
 use Webkul\Shop\Http\Requests\ContactRequest;
 use Webkul\Shop\Http\Resources\CategoryTreeResource;
 use Webkul\Shop\Mail\ContactUs;
@@ -43,6 +44,46 @@ class HomeController extends Controller
         $categories = CategoryTreeResource::collection($categories);
 
         return view('shop::home.index', compact('sections', 'categories'));
+    }
+
+    /**
+     * Render the home page from unpublished section edits, for the appearance editor.
+     *
+     * The storefront view is reused untouched: each section's options are swapped for its
+     * draft before rendering, so the preview is the real page in the real theme rather
+     * than an approximation that can drift.
+     *
+     * @return View
+     */
+    public function preview()
+    {
+        abort_unless(auth()->guard('admin')->check(), 403);
+
+        request()->attributes->set(SecureHeaders::FRAMABLE, true);
+
+        request()->attributes->set(SectionRepository::PREVIEWING, true);
+
+        $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'))
+            ?? core()->getCurrentChannel();
+
+        /**
+         * The layout resolves its own sections, its header and its categories from the
+         * current channel. Without switching it, previewing one channel would draw that
+         * channel's home sections inside another channel's footer and services.
+         */
+        core()->setCurrentChannel($channel);
+
+        $sections = $this->sectionRepository->getDraftedForPreview(
+            $channel->id,
+            $channel->theme,
+            app()->getLocale()
+        );
+
+        $categories = CategoryTreeResource::collection(
+            $this->categoryRepository->getVisibleCategoryTree($channel->root_category_id)
+        );
+
+        return view('shop::home.index', compact('sections', 'categories') + ['preview' => true]);
     }
 
     /**

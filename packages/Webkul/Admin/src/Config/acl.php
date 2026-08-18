@@ -1336,6 +1336,7 @@ return [
         'name' => 'admin::app.acl.create',
         'route' => [
             'admin.appearance.sections.store',
+            'admin.appearance.sections.duplicate',
             'admin.settings.themes.store',
         ],
         'sort' => 1,
@@ -1343,12 +1344,16 @@ return [
         'key' => 'appearance.sections.edit',
         'name' => 'admin::app.acl.edit',
         'route' => [
-            'admin.appearance.sections.edit',
             'admin.appearance.sections.update',
-            'admin.appearance.sections.mass_update',
+            'admin.appearance.sections.status',
+            'admin.appearance.sections.draft',
+            'admin.appearance.sections.publish',
+            'admin.appearance.sections.discard',
+            'admin.appearance.sections.reorder',
+            'admin.appearance.sections.media',
+            'admin.appearance.sections.fields',
             'admin.settings.themes.edit',
             'admin.settings.themes.update',
-            'admin.settings.themes.mass_update',
         ],
         'sort' => 2,
     ], [
@@ -1356,9 +1361,7 @@ return [
         'name' => 'admin::app.acl.delete',
         'route' => [
             'admin.appearance.sections.delete',
-            'admin.appearance.sections.mass_delete',
             'admin.settings.themes.delete',
-            'admin.settings.themes.mass_delete',
         ],
         'sort' => 3,
     ],

@@ -310,7 +310,7 @@ return [
         'name' => 'admin::app.components.layouts.sidebar.appearance',
         'route' => 'admin.appearance.themes.index',
         'sort' => 8,
-        'icon' => 'icon-settings',
+        'icon' => 'icon-store',
         'icon-class' => 'appearance-icon',
     ], [
         'key' => 'appearance.themes',

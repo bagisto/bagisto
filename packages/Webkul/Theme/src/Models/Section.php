@@ -61,6 +61,7 @@ class Section extends TranslatableModel implements SectionContract
      */
     public $translatedAttributes = [
         'options',
+        'draft_options',
     ];
 
     /**
@@ -77,6 +78,7 @@ class Section extends TranslatableModel implements SectionContract
      */
     protected $casts = [
         'options' => 'array',
+        'draft_options' => 'array',
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 use Illuminate\Http\UploadedFile;
 use Webkul\Theme\Models\Section;
+use Webkul\Theme\SectionSchema;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -11,7 +12,7 @@ it('should returns the section index page', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index'))
+    get(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->assertOk()
         ->assertSeeText(trans('admin::app.components.layouts.sidebar.sections'))
         ->assertSeeText(trans('admin::app.appearance.sections.index.create-btn'));
@@ -21,12 +22,9 @@ it('should fail the validation with errors when certain field not provided when 
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store'))
+    postJson(route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme]))
         ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('sort_order')
         ->assertJsonValidationErrorFor('type')
-        ->assertJsonValidationErrorFor('channel_id')
-        ->assertJsonValidationErrorFor('theme_code')
         ->assertUnprocessable();
 });
 
@@ -34,14 +32,11 @@ it('should fail the validation with errors when correct type not provided when s
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store'), [
+    postJson(route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme]), [
         'type' => 'INVALID_TYPE',
     ])
         ->assertJsonValidationErrorFor('name')
-        ->assertJsonValidationErrorFor('sort_order')
         ->assertJsonValidationErrorFor('type')
-        ->assertJsonValidationErrorFor('channel_id')
-        ->assertJsonValidationErrorFor('theme_code')
         ->assertUnprocessable();
 });
 
@@ -52,7 +47,7 @@ it('should store the newly created theme', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store'), [
+    postJson(route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme]), [
         'type' => $type = fake()->randomElement([
             'product_carousel',
             'category_carousel',
@@ -61,12 +56,15 @@ it('should store the newly created theme', function () {
             'services_content',
         ]),
         'name' => $name = fake()->name(),
-        'sort_order' => $lastSectionId,
-        'channel_id' => $channelId = core()->getCurrentChannel()->id,
-        'theme_code' => $themeCode = core()->getCurrentChannel()->theme,
     ])
         ->assertOk()
-        ->assertJsonPath('redirect_url', route('admin.appearance.sections.edit', $lastSectionId));
+        ->assertJsonPath('section.id', $lastSectionId)
+        ->assertJsonPath('section.name', $name)
+        ->assertJsonPath('section.type', $type);
+
+    $channelId = core()->getCurrentChannel()->id;
+
+    $themeCode = core()->getCurrentChannel()->theme;
 
     $this->assertModelWise([
         Section::class => [
@@ -185,7 +183,7 @@ it('should update the sections', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index'))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->isRedirection();
 
     $this->assertModelWise([
@@ -229,7 +227,7 @@ it('should sanitize malicious script tags from static content HTML when updating
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index'))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -270,7 +268,7 @@ it('should sanitize iframe tags from static content HTML when updating theme', f
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index'))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -311,7 +309,7 @@ it('should sanitize form tags from static content HTML when updating theme', fun
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index'))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -354,7 +352,7 @@ it('should preserve safe HTML content in static content when updating theme', fu
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index'))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -398,7 +396,7 @@ it('should sanitize malicious event handlers from static content HTML when updat
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index'))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -441,7 +439,7 @@ it('should not sanitize HTML for non-static content theme types', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index'))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -476,4 +474,182 @@ it('should delete the section', function () {
     $this->assertDatabaseMissing('section_translations', [
         'section_id' => $section->id,
     ]);
+});
+
+it('should turn a section off and back on again', function () {
+    // Arrange.
+    $section = Section::factory()->create(['status' => 1]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.status', $section->id), ['status' => false])
+        ->assertOk()
+        ->assertJsonPath('status', false);
+
+    expect($section->refresh()->status)->toBeFalsy();
+
+    postJson(route('admin.appearance.sections.status', $section->id), ['status' => true])
+        ->assertOk()
+        ->assertJsonPath('status', true);
+
+    expect($section->refresh()->status)->toBeTruthy();
+});
+
+it('should take the channel and theme of the editor rather than the request when creating', function () {
+    // Arrange. A channel the editor is not scoped to, which must not be written.
+    $channel = core()->getCurrentChannel();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    $response = postJson(route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme]), [
+        'name' => $name = 'Scoped Section',
+        'type' => 'product_carousel',
+        'channel_id' => 999999,
+        'theme_code' => 'not-a-theme',
+    ])->assertOk();
+
+    $section = Section::query()->find($response->json('section.id'));
+
+    expect($section->name)->toBe($name)
+        ->and($section->channel_id)->toBe($channel->id)
+        ->and($section->theme_code)->toBe($channel->theme);
+});
+
+it('should scope the listing to the requested channel', function () {
+    // Arrange.
+    $channel = core()->getCurrentChannel();
+
+    $section = Section::factory()->create(['name' => 'Only On This Channel']);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => $channel->id]))
+        ->assertOk()
+        ->assertSee($section->name);
+
+    get(route('admin.appearance.sections.index', ['code' => $channel->theme, 'channel' => 999999]))
+        ->assertOk();
+});
+
+it('should delete a section', function () {
+    // Arrange.
+    $section = Section::factory()->create();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.appearance.sections.delete', $section->id))
+        ->assertOk();
+
+    expect(Section::query()->find($section->id))->toBeNull();
+});
+
+it('should no longer expose the mass action endpoints', function () {
+    expect(app('router')->getRoutes()->getByName('admin.appearance.sections.mass_update'))->toBeNull()
+        ->and(app('router')->getRoutes()->getByName('admin.appearance.sections.mass_delete'))->toBeNull()
+        ->and(app('router')->getRoutes()->getByName('admin.appearance.sections.edit'))->toBeNull();
+});
+
+it('should place a duplicate directly below its original', function () {
+    // Arrange. Three sections in a known order, duplicating the middle one.
+    $channel = core()->getCurrentChannel();
+
+    $made = collect(['First', 'Second', 'Third'])->map(fn ($name, $index) => Section::factory()->create([
+        'name' => $name,
+        'sort_order' => $index + 1,
+        'channel_id' => $channel->id,
+        'theme_code' => $channel->theme,
+    ]));
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.duplicate', $made[1]->id))->assertOk();
+
+    $order = Section::query()
+        ->where('channel_id', $channel->id)
+        ->where('theme_code', $channel->theme)
+        ->whereIn('id', $made->pluck('id')->push(Section::query()->max('id')))
+        ->orderBy('sort_order')
+        ->pluck('name')
+        ->values()
+        ->all();
+
+    expect($order)->toBe([
+        'First',
+        'Second',
+        'Second '.trans('admin::app.appearance.sections.index.copy-suffix'),
+        'Third',
+    ]);
+});
+
+it('should label every schema field with something other than the page heading', function () {
+    $suspect = [];
+
+    $walk = function (array $fields) use (&$walk, &$suspect) {
+        foreach ($fields as $field) {
+            $labels = [$field['label'] ?? ''];
+
+            foreach ($field['keys'] ?? [] as $key) {
+                $labels[] = $key['label'] ?? '';
+            }
+
+            foreach ($labels as $label) {
+                /**
+                 * `sections.edit.title` is the page heading, so a field reaching for a
+                 * generic `title` key ends up labelled "Edit Section".
+                 */
+                if (
+                    $label === ''
+                    || $label === trans('admin::app.appearance.sections.edit.title')
+                    || str_contains($label, 'admin::app')
+                ) {
+                    $suspect[] = ($field['key'] ?? '?').' => '.$label;
+                }
+            }
+
+            $walk($field['fields'] ?? []);
+        }
+    };
+
+    foreach (app(SectionSchema::class)->all() as $fields) {
+        $walk($fields);
+    }
+
+    expect($suspect)->toBe([]);
+});
+
+it('should offer each filter only once so a stored filter cannot be overwritten', function () {
+    /**
+     * Filters are stored as a map keyed by filter name, so a duplicate key would collapse
+     * two rows into one. The editor caps the list at the number of distinct keys, which
+     * only holds while the schema itself lists each key once.
+     */
+    foreach (app(SectionSchema::class)->all() as $type => $fields) {
+        foreach ($fields as $field) {
+            if (($field['type'] ?? null) !== SectionSchema::FILTERS) {
+                continue;
+            }
+
+            $keys = collect($field['keys'])->pluck('value');
+
+            expect($keys->duplicates())->toBeEmpty("{$type} lists a filter key twice")
+                ->and($keys)->not->toBeEmpty();
+        }
+    }
+});
+
+it('should ask for a number where only a number works', function () {
+    $schema = app(SectionSchema::class)->all();
+
+    $sortOrder = collect($schema['footer_links'][0]['fields'])->firstWhere('key', 'sort_order');
+
+    expect($sortOrder['type'])->toBe(SectionSchema::NUMBER);
+
+    $limit = collect($schema['category_carousel'][0]['keys'])->firstWhere('value', 'limit');
+
+    expect($limit['input'])->toBe(SectionSchema::NUMBER);
 });

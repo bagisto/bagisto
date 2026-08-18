@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Semua filter yang tersedia sudah ditambahkan.',
+                'channel' => 'Saluran',
+                'copy-suffix' => 'Salinan',
                 'create-btn' => 'Buat Bagian',
-                'scoped-to' => 'Menampilkan bagian untuk :theme.',
-                'show-all' => 'Tampilkan semua',
+                'delete-confirm' => 'Apakah Anda yakin ingin menghapus bagian ini?',
+                'desktop' => 'Desktop',
+                'discard-btn' => 'Buang',
+                'discarded' => 'Perubahan draf dibuang.',
+                'duplicate-btn' => 'Duplikat',
+                'empty' => 'Belum ada bagian.',
+                'mobile' => 'Ponsel',
+                'preview-btn' => 'Pratinjau',
+                'publish-btn' => 'Terbitkan',
+                'scoped-to' => 'Menampilkan bagian untuk tema :theme pada saluran :channel.',
+                'tablet' => 'Tablet',
                 'title' => 'Bagian',
+                'unsaved' => 'Perubahan belum disimpan',
 
                 'datagrid' => [
                     'active' => 'Aktif',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Nama',
                 'save-btn' => 'Simpan Bagian',
-                'sort-order' => 'Urutan Penyortiran',
-                'themes' => 'Tema',
                 'title' => 'Buat Bagian',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Tambah Tautan Footer',
                 'add-image-btn' => 'Tambah Gambar',
                 'add-link' => 'Tambah Tautan',
+                'add-media' => 'Tambah Media',
                 'asc' => 'Naik',
                 'back' => 'Kembali',
                 'category-carousel' => 'Carousel Kategori',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Tema',
                 'title' => 'Ubah Bagian',
                 'update-slider' => 'Perbarui Slider',
+                'uploading' => 'Mengunggah…',
                 'url' => 'URL',
                 'value' => 'Nilai: :value',
                 'value-input' => 'Nilai',

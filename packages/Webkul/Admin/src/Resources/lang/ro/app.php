@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Toate filtrele disponibile au fost deja adăugate.',
+                'channel' => 'Canal',
+                'copy-suffix' => 'Copy',
                 'create-btn' => 'Create Section',
-                'scoped-to' => 'Showing sections for :theme.',
-                'show-all' => 'Show all',
+                'delete-confirm' => 'Sigur doriți să ștergeți această secțiune?',
+                'desktop' => 'Desktop',
+                'discard-btn' => 'Discard',
+                'discarded' => 'Draft changes discarded.',
+                'duplicate-btn' => 'Duplicate',
+                'empty' => 'No sections yet.',
+                'mobile' => 'Mobile',
+                'preview-btn' => 'Preview',
+                'publish-btn' => 'Publish',
+                'scoped-to' => 'Se afișează secțiunile temei :theme pe canalul :channel.',
+                'tablet' => 'Tablet',
                 'title' => 'Sections',
+                'unsaved' => 'Unsaved changes',
 
                 'datagrid' => [
                     'active' => 'Active',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Name',
                 'save-btn' => 'Save Section',
-                'sort-order' => 'Sort Order',
-                'themes' => 'Themes',
                 'title' => 'Create Section',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Add Footer Link',
                 'add-image-btn' => 'Add Image',
                 'add-link' => 'Add Link',
+                'add-media' => 'Adaugă media',
                 'asc' => 'Asc',
                 'back' => 'Back',
                 'category-carousel' => 'Category Carousel',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Themes',
                 'title' => 'Edit Section',
                 'update-slider' => 'Update Slider',
+                'uploading' => 'Se încarcă…',
                 'url' => 'URL',
                 'value' => 'Value: :value',
                 'value-input' => 'Value',

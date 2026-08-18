@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Alle verfügbaren Filter wurden bereits hinzugefügt.',
+                'channel' => 'Kanal',
+                'copy-suffix' => 'Kopie',
                 'create-btn' => 'Abschnitt erstellen',
-                'scoped-to' => 'Abschnitte von :theme werden angezeigt.',
-                'show-all' => 'Alle anzeigen',
+                'delete-confirm' => 'Sind Sie sicher, dass Sie diesen Abschnitt löschen möchten?',
+                'desktop' => 'Desktop',
+                'discard-btn' => 'Verwerfen',
+                'discarded' => 'Entwurfsänderungen verworfen.',
+                'duplicate-btn' => 'Duplizieren',
+                'empty' => 'Noch keine Abschnitte.',
+                'mobile' => 'Mobil',
+                'preview-btn' => 'Vorschau',
+                'publish-btn' => 'Veröffentlichen',
+                'scoped-to' => 'Abschnitte des Themes :theme im Kanal :channel werden angezeigt.',
+                'tablet' => 'Tablet',
                 'title' => 'Abschnitte',
+                'unsaved' => 'Nicht gespeicherte Änderungen',
 
                 'datagrid' => [
                     'active' => 'Aktiv',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Name',
                 'save-btn' => 'Abschnitt speichern',
-                'sort-order' => 'Sortierreihenfolge',
-                'themes' => 'Themen',
                 'title' => 'Abschnitt erstellen',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Fußzeilen-Link hinzufügen',
                 'add-image-btn' => 'Bild hinzufügen',
                 'add-link' => 'Link hinzufügen',
+                'add-media' => 'Medien hinzufügen',
                 'asc' => 'aufsteigend',
                 'back' => 'Zurück',
                 'category-carousel' => 'Kategorie Karussell',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Themen',
                 'title' => 'Abschnitt bearbeiten',
                 'update-slider' => 'Slider aktualisieren',
+                'uploading' => 'Wird hochgeladen…',
                 'url' => 'URL',
                 'value' => 'Wert: :value',
                 'value-input' => 'Wert',

@@ -6,23 +6,14 @@
     {!! view_render_event('bagisto.admin.appearance.themes.index.before') !!}
 
     <!-- Page Header -->
-    <div class="flex items-center justify-between gap-4 max-sm:flex-wrap">
-        <div class="grid gap-1.5">
-            <p class="text-xl font-bold text-gray-800 dark:text-white">
-                @lang('admin::app.appearance.themes.index.title')
-            </p>
+    <div class="grid gap-1.5">
+        <p class="text-xl font-bold text-gray-800 dark:text-white">
+            @lang('admin::app.appearance.themes.index.title')
+        </p>
 
-            <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
-                @lang('admin::app.appearance.themes.index.info')
-            </p>
-        </div>
-
-        <a
-            href="{{ route('admin.appearance.sections.index') }}"
-            class="secondary-button"
-        >
-            @lang('admin::app.appearance.themes.index.customize-btn')
-        </a>
+        <p class="text-xs font-medium text-gray-500 dark:text-gray-300">
+            @lang('admin::app.appearance.themes.index.info')
+        </p>
     </div>
 
     {!! view_render_event('bagisto.admin.appearance.themes.list.before') !!}
@@ -173,7 +164,7 @@
 
                             <a
                                 class="secondary-button"
-                                :href="'{{ route('admin.appearance.sections.index') }}?theme=' + theme.code"
+                                :href="'{{ route('admin.appearance.sections.index', ['code' => '__CODE__']) }}'.replace('__CODE__', theme.code)"
                                 v-if="theme.is_installed"
                             >
                                 @lang('admin::app.appearance.themes.index.customize-btn')

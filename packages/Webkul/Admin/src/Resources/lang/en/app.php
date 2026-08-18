@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Every available filter has already been added.',
+                'channel' => 'Channel',
+                'copy-suffix' => 'Copy',
                 'create-btn' => 'Create Section',
-                'scoped-to' => 'Showing sections for :theme.',
-                'show-all' => 'Show all',
+                'delete-confirm' => 'Are you sure you want to delete this section?',
+                'desktop' => 'Desktop',
+                'discard-btn' => 'Discard',
+                'discarded' => 'Draft changes discarded.',
+                'duplicate-btn' => 'Duplicate',
+                'empty' => 'No sections yet.',
+                'mobile' => 'Mobile',
+                'preview-btn' => 'Preview',
+                'publish-btn' => 'Publish',
+                'scoped-to' => 'Showing sections for the :theme theme on the :channel channel.',
+                'tablet' => 'Tablet',
                 'title' => 'Sections',
+                'unsaved' => 'Unsaved changes',
 
                 'datagrid' => [
                     'active' => 'Active',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Name',
                 'save-btn' => 'Save Section',
-                'sort-order' => 'Sort Order',
-                'themes' => 'Themes',
                 'title' => 'Create Section',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Add Footer Link',
                 'add-image-btn' => 'Add Image',
                 'add-link' => 'Add Link',
+                'add-media' => 'Add Media',
                 'asc' => 'Asc',
                 'back' => 'Back',
                 'category-carousel' => 'Category Carousel',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Themes',
                 'title' => 'Edit Section',
                 'update-slider' => 'Update Slider',
+                'uploading' => 'Uploading…',
                 'url' => 'URL',
                 'value' => 'Value: :value',
                 'value-input' => 'Value',

@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Wszystkie dostępne filtry zostały już dodane.',
+                'channel' => 'Kanał',
+                'copy-suffix' => 'Kopia',
                 'create-btn' => 'Utwórz sekcję',
-                'scoped-to' => 'Wyświetlane sekcje motywu :theme.',
-                'show-all' => 'Pokaż wszystkie',
+                'delete-confirm' => 'Czy na pewno chcesz usunąć tę sekcję?',
+                'desktop' => 'Komputer',
+                'discard-btn' => 'Odrzuć',
+                'discarded' => 'Odrzucono zmiany w wersji roboczej.',
+                'duplicate-btn' => 'Duplikuj',
+                'empty' => 'Brak sekcji.',
+                'mobile' => 'Telefon',
+                'preview-btn' => 'Podgląd',
+                'publish-btn' => 'Opublikuj',
+                'scoped-to' => 'Wyświetlanie sekcji motywu :theme w kanale :channel.',
+                'tablet' => 'Tablet',
                 'title' => 'Sekcje',
+                'unsaved' => 'Niezapisane zmiany',
 
                 'datagrid' => [
                     'active' => 'Aktywny',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Nazwa',
                 'save-btn' => 'Zapisz sekcję',
-                'sort-order' => 'Kolejność sortowania',
-                'themes' => 'Motywy',
                 'title' => 'Utwórz sekcję',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Dodaj link stopki',
                 'add-image-btn' => 'Dodaj obraz',
                 'add-link' => 'Dodaj link',
+                'add-media' => 'Dodaj multimedia',
                 'asc' => 'rosnąco',
                 'back' => 'Powrót',
                 'category-carousel' => 'Karuzela kategorii',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Motywy',
                 'title' => 'Edytuj sekcję',
                 'update-slider' => 'Aktualizuj suwak',
+                'uploading' => 'Przesyłanie…',
                 'url' => 'URL',
                 'value' => 'Wartość: :value',
                 'value-input' => 'Wartość',

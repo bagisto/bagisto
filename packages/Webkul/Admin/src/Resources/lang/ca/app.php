@@ -3265,10 +3265,23 @@ return [
         ],
         'sections' => [
             'index' => [
+                'all-filters-used' => 'Ja s\'han afegit tots els filtres disponibles.',
+                'channel' => 'Canal',
+                'copy-suffix' => 'Còpia',
                 'create-btn' => 'Crea una secció',
-                'scoped-to' => 'Mostrant les seccions de :theme.',
-                'show-all' => 'Mostra-ho tot',
+                'delete-confirm' => 'Segur que voleu suprimir aquesta secció?',
+                'desktop' => 'Escriptori',
+                'discard-btn' => 'Descarta',
+                'discarded' => 'S\'han descartat els canvis de l\'esborrany.',
+                'duplicate-btn' => 'Duplica',
+                'empty' => 'Encara no hi ha seccions.',
+                'mobile' => 'Mòbil',
+                'preview-btn' => 'Vista prèvia',
+                'publish-btn' => 'Publica',
+                'scoped-to' => 'Es mostren les seccions del tema :theme al canal :channel.',
+                'tablet' => 'Tauleta',
                 'title' => 'Seccions',
+                'unsaved' => 'Canvis sense desar',
 
                 'datagrid' => [
                     'active' => 'Actiu',
@@ -3289,8 +3302,6 @@ return [
             'create' => [
                 'name' => 'Nom',
                 'save-btn' => 'Desa la secció',
-                'sort-order' => 'Ordre de classificació',
-                'themes' => 'Temes',
                 'title' => 'Crea una secció',
 
                 'type' => [
@@ -3310,6 +3321,7 @@ return [
                 'add-footer-link-btn' => 'Afegir Enllaç al Peu de Pàgina',
                 'add-image-btn' => 'Afegir Imatge',
                 'add-link' => 'Afegir Enllaç',
+                'add-media' => 'Afegeix contingut multimèdia',
                 'asc' => 'Asc',
                 'back' => 'Enrere',
                 'category-carousel' => 'Carrousel de Categoria',
@@ -3363,6 +3375,7 @@ return [
                 'themes' => 'Temes',
                 'title' => 'Edita la secció',
                 'update-slider' => 'Actualitzar Deslizador',
+                'uploading' => 'S\'està pujant…',
                 'url' => 'URL',
                 'value' => 'Valor: :value',
                 'value-input' => 'Valor',
