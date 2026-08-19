@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Fehler beim Löschen der Familie aufgetreten.',
             'delete-success' => 'Familie erfolgreich gelöscht.',
             'family' => 'Familie',
-            'last-delete-error' => 'Mindestens eine Familie ist erforderlich.',
             'update-success' => 'Familie erfolgreich aktualisiert.',
             'user-define-error' => 'Systemattributfamilie kann nicht gelöscht werden.',
         ],

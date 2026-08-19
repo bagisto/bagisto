@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Terjadi kesalahan saat menghapus keluarga atribut.',
             'delete-success' => 'Keluarga atribut berhasil dihapus.',
             'family' => 'Keluarga',
-            'last-delete-error' => 'Setidaknya satu keluarga atribut harus ada.',
             'update-success' => 'Keluarga atribut berhasil diperbarui.',
             'user-define-error' => 'Tidak dapat menghapus keluarga atribut sistem.',
         ],

@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Errore durante l\'eliminazione della famiglia.',
             'delete-success' => 'Famiglia eliminata con successo.',
             'family' => 'Famiglia',
-            'last-delete-error' => 'Almeno una famiglia è richiesta.',
             'update-success' => 'Famiglia aggiornata con successo.',
             'user-define-error' => 'Impossibile eliminare la famiglia di attributi di sistema',
         ],

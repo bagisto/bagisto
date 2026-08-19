@@ -278,7 +278,7 @@ class PhonePeController extends Controller
             Cart::setCart($cart);
 
             Cart::collectTotals();
-            
+
             $cart = Cart::getCart();
 
             if (! $cart) {

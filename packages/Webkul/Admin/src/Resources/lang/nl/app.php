@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Fout opgetreden bij het verwijderen van de familie.',
             'delete-success' => 'Familie succesvol verwijderd.',
             'family' => 'Familie',
-            'last-delete-error' => 'Minstens één familie is vereist.',
             'update-success' => 'Familie succesvol bijgewerkt.',
             'user-define-error' => 'Kan systeemattribuutfamilie niet verwijderen.',
         ],

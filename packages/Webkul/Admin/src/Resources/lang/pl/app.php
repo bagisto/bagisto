@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Wystąpił błąd podczas usuwania zestawu atrybutów.',
             'delete-success' => 'Pomyślnie usunięto zestaw atrybutów.',
             'family' => 'Zestaw atrybutów',
-            'last-delete-error' => 'Operacja niedozwolona. Sklep musi posiadać co najmniej jeden aktywny zestaw atrybutów.',
             'update-success' => 'Pomyślnie zaktualizowano zestaw atrybutów.',
             'user-define-error' => 'Operacja niedozwolona. Nie można usunąć systemowego zestawu atrybutów.',
         ],

@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Aile silme işlemi sırasında bir hata oluştu.',
             'delete-success' => 'Aile başarıyla silindi.',
             'family' => 'Aile',
-            'last-delete-error' => 'En az bir aile gereklidir.',
             'update-success' => 'Aile başarıyla güncellendi.',
             'user-define-error' => 'Sistem Özellik Ailesi silinemez',
         ],

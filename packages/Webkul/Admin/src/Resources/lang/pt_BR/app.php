@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Erro ao excluir a Família.',
             'delete-success' => 'Família excluída com sucesso.',
             'family' => 'Família',
-            'last-delete-error' => 'Pelo menos uma família é necessária.',
             'update-success' => 'Família atualizada com sucesso.',
             'user-define-error' => 'Não é possível excluir a família de atributos do sistema.',
         ],

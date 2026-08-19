@@ -115,16 +115,20 @@ it('should update the existing attribute families', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    putJson(route('admin.catalog.families.update', $attributeFamily->id), $data = [
-        'code' => fake()->numerify('code#######'),
-        'name' => $attributeFamily->name,
+    putJson(route('admin.catalog.families.update', $attributeFamily->id), [
+        'code' => $attributeFamily->code,
+        'name' => $name = fake()->name(),
     ])
         ->assertRedirectToRoute('admin.catalog.families.index')
         ->isRedirection();
 
     $this->assertModelWise([
         AttributeFamilyModel::class => [
-            $data,
+            [
+                'id' => $attributeFamily->id,
+                'code' => $attributeFamily->code,
+                'name' => $name,
+            ],
         ],
     ]);
 });
@@ -145,21 +149,30 @@ it('should delete the existing attribute family', function () {
     ]);
 });
 
-it('should not be able to delete the attribute family if the attribute family is the only one present', function () {
+it('should keep the code of an attribute family unchanged on update', function () {
+    // Arrange.
+    $attributeFamily = AttributeFamilyModel::factory()->create();
+
+    $defaultFamily = AttributeFamilyModel::query()
+        ->where('code', AttributeFamilyModel::DEFAULT_CODE)
+        ->firstOrFail();
+
     // Act and Assert.
     $this->loginAsAdmin();
 
-    deleteJson(route('admin.catalog.families.delete', $attributeFamilyId = 1))
-        ->assertBadRequest()
-        ->assertSeeText(trans('admin::app.catalog.families.last-delete-error'));
+    foreach ([$attributeFamily, $defaultFamily] as $family) {
+        putJson(route('admin.catalog.families.update', $family->id), [
+            'code' => 'submitted_code_'.$family->id,
+            'name' => $family->name,
+        ])
+            ->assertRedirectToRoute('admin.catalog.families.index')
+            ->isRedirection();
 
-    $this->assertModelWise([
-        AttributeFamilyModel::class => [
-            [
-                'id' => $attributeFamilyId,
-            ],
-        ],
-    ]);
+        $this->assertDatabaseHas('attribute_families', [
+            'id' => $family->id,
+            'code' => $family->code,
+        ]);
+    }
 });
 
 it('should refuse to delete the default attribute family', function () {
@@ -180,6 +193,8 @@ it('should refuse to delete the default attribute family', function () {
 
 it('should still open the create family screen when the default family is missing', function () {
     // Arrange.
+    AttributeFamilyModel::factory()->create();
+
     AttributeFamilyModel::query()->where('code', AttributeFamilyModel::DEFAULT_CODE)->delete();
 
     // Act and Assert.

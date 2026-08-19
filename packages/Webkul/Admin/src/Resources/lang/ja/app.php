@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'ファミリーの削除中にエラーが発生しました。',
             'delete-success' => 'ファミリーが正常に削除されました。',
             'family' => 'ファミリー',
-            'last-delete-error' => '少なくとも1つのファミリーが必要です。',
             'update-success' => 'ファミリーが正常に更新されました。',
             'user-define-error' => 'システム属性ファミリーを削除できません',
         ],
