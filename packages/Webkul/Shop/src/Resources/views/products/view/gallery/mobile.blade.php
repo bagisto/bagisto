@@ -55,6 +55,7 @@
                             class="aspect-square max-h-full w-full max-w-full select-none transition-transform duration-300 ease-in-out"
                             :src="media.large_image_url"
                             :alt="media.alt"
+                            v-on:error="onMediaError($event)"
                         />
                     </template>
                 </div>

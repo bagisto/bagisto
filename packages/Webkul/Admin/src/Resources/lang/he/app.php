@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'בינה מלאכותית',
                 'ai-btn-info' => 'יצירת תמונה',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'תמונה',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'הוסף וידאו',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
+                'video' => 'וידאו',
 
                 'seo' => [
                     'info' => 'תנו לקובץ הווידאו שם תיאורי.',

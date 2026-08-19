@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'Магія ШІ',
                 'ai-btn-info' => 'Створити Зображення',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Зображення',
                 'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'Додати відео',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
+                'video' => 'Відео',
 
                 'seo' => [
                     'info' => 'Дайте відеофайлу описову назву.',

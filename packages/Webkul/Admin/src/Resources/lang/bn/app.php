@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'ম্যাজিক এআই',
                 'ai-btn-info' => 'ছবি তৈরি করুন',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'ছবি',
                 'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'ভিডিও যোগ করুন',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
+                'video' => 'ভিডিও',
 
                 'seo' => [
                     'info' => 'ভিডিও ফাইলটিকে একটি বর্ণনামূলক নাম দিন।',

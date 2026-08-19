@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'Intelligenza Artificiale',
                 'ai-btn-info' => 'Genera Immagine',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Immagine',
                 'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'Aggiungi Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Assegna un nome descrittivo al file video.',

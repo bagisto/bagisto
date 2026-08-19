@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'Магия ИИ',
                 'ai-btn-info' => 'Создать изображение',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Изображение',
                 'not-allowed-error' => 'Разрешены только файлы изображений (.jpeg, .jpg, .png и др.)',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'Добавить видео',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Разрешены только файлы видео (.mp4, .mov, .ogg и др.)',
+                'video' => 'Видео',
 
                 'seo' => [
                     'info' => 'Дайте видеофайлу описательное имя.',

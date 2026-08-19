@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => '魔法 AI',
                 'ai-btn-info' => '生成图像',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => '图片',
                 'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => '添加视频',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
+                'video' => '视频',
 
                 'seo' => [
                     'info' => '为视频文件取一个描述性的名称。',

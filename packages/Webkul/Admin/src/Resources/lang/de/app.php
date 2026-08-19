@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'Magie KI',
                 'ai-btn-info' => 'Bild generieren',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Bild',
                 'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'Video hinzufügen',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Nur Videodateien (.mp4, .mov, .ogg ..) sind erlaubt.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Geben Sie der Videodatei einen aussagekräftigen Namen.',

@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'Magia IA',
                 'ai-btn-info' => 'Gerar Imagem',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Imagem',
                 'not-allowed-error' => 'Apenas arquivos de imagem (.jpeg, .jpg, .png, ..) são permitidos.',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'Adicionar Vídeo',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Apenas arquivos de vídeo (.mp4, .mov, .ogg ..) são permitidos.',
+                'video' => 'Vídeo',
 
                 'seo' => [
                     'info' => 'Dê um nome descritivo ao arquivo de vídeo.',

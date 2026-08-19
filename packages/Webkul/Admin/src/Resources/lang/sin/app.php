@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'මැජික් ඒ.ඉ.',
                 'ai-btn-info' => 'පින්තුර සහිතව කියවන්න',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'රූපය',
                 'not-allowed-error' => 'එක්සත් ගොනුවේ පමණ (.jpeg, .jpg, .png, ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'වීඩියෝ එකතු කරන්න',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'වීඩියෝ ගොනුවේ පමණ (.mp4, .mov, .ogg ..) වල ගොනුවක් සඳහා සමීක්ෂා කළ යුතුය.',
+                'video' => 'වීඩියෝව',
 
                 'seo' => [
                     'info' => 'වීඩියෝ ගොනුවට විස්තරාත්මක නමක් දෙන්න.',

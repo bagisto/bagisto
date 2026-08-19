@@ -46,6 +46,18 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed Help & Resources missing from the admin menu on a phone or tablet. It sat in the sidebar, which is hidden below large screens, and was never added to the drawer that replaces it.
 
+- #11432 [fixed] - Fixed an alt text over 255 characters rejecting the whole product save with nothing shown on screen; the limit is now reported against the Alt Text field.
+
+- #11431 [fixed] - Fixed Replace Image discarding the alt text of every other locale. Replacing a file now updates the existing image instead of creating a new one and deleting the original.
+
+- #11430 [fixed] - Fixed the product image panel not rendering on French and Italian installs, where an apostrophe in the translated placeholder ended the JavaScript string the template was built from.
+
+- #11429 [fixed] - Fixed saving a product on a translated locale overwriting that locale's alt text with the default locale's, because the field was populated from the wrong locale.
+
+- #11428 [fixed] - Fixed alt text saved on a non-default locale never being shown again. The drawer read the alt text of the application locale rather than the one chosen in the switcher.
+
+- #11427 [fixed] - Fixed an image whose file is missing leaving the loading shimmer running forever. A failed load now clears the shimmer and falls back to the product placeholder.
+
 - #11421 [fixed] - Fixed a non-numeric "products per page" being saved and taking every catalogue page down with it. The field now accepts only a comma separated list of whole numbers, and the storefront falls back to its default page sizes rather than failing on a value it cannot use.
 
 - #11420 [fixed] - Fixed deleting an email template or a marketing event a campaign uses, which succeeded and left the campaign behind with nothing to send. Either is now refused while a campaign still points at it, the way a customer group with customers is.

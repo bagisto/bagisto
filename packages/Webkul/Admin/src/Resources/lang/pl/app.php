@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'Magia AI',
                 'ai-btn-info' => 'Generuj obraz',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Obraz',
                 'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'Dodaj film',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
+                'video' => 'Wideo',
 
                 'seo' => [
                     'info' => 'Nadaj plikowi wideo opisową nazwę.',

@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'AI Magic',
                 'ai-btn-info' => 'Hasilkan Gambar',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Gambar',
                 'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'Tambah Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Hanya file video (.mp4, .mov, .ogg, dll) yang diperbolehkan.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Beri nama yang deskriptif pada berkas video.',

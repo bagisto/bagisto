@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'Màgia IA',
                 'ai-btn-info' => 'Generar Imatge',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Imatge',
                 'not-allowed-error' => 'Només es permeten arxius d\'imatge (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'Afegir Vídeo',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .ogg ..).',
+                'video' => 'Vídeo',
 
                 'seo' => [
                     'info' => 'Doneu un nom descriptiu al fitxer de vídeo.',

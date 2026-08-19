@@ -5522,6 +5522,7 @@ return [
                 'ai-add-image-btn' => 'الذكاء الاصطناعي',
                 'ai-btn-info' => 'إنشاء صورة',
                 'allowed-types' => 'png، jpeg، jpg',
+                'image' => 'صورة',
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
 
                 'ai-generation' => [
@@ -5573,6 +5574,7 @@ return [
                 'add-video-btn' => 'إضافة فيديو',
                 'allowed-types' => 'mp4، webm، mkv',
                 'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
+                'video' => 'فيديو',
 
                 'seo' => [
                     'info' => 'امنح ملف الفيديو اسمًا وصفيًا.',
