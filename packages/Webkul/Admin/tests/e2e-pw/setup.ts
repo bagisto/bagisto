@@ -63,9 +63,11 @@ export const test = base.extend<Fixtures>({
             const editorBody = iframe.locator("body");
 
             await expect(editorBody).toBeVisible();
-            await editorBody.focus();
+            await editorBody.click();
             await editorBody.press("Control+a");
             await editorBody.press("Backspace");
+
+            await expect(editorBody).toHaveText("");
 
             await editorBody.pressSequentially(content);
             await expect(editorBody).toHaveText(content);
