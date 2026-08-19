@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Alterações do rascunho descartadas.',
                 'duplicate-btn' => 'Duplicar',
                 'empty' => 'Ainda não há seções.',
+                'gone' => 'Esta seção não existe mais.',
                 'locale' => 'Idioma',
                 'mobile' => 'Celular',
                 'pinned' => 'Fixado na parte inferior da página.',

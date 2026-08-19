@@ -150,7 +150,7 @@ class SectionController extends Controller
      */
     public function destroy(int $id)
     {
-        $section = $this->sectionRepository->findOrFail($id);
+        $section = $this->sectionOrFail($id);
 
         Event::dispatch('section.delete.before', $id);
 
@@ -171,7 +171,7 @@ class SectionController extends Controller
      */
     public function fields(int $id): JsonResponse
     {
-        $section = $this->sectionRepository->findOrFail($id);
+        $section = $this->sectionOrFail($id);
 
         $translation = $section->translate(core()->getRequestedLocaleCode());
 
@@ -189,6 +189,8 @@ class SectionController extends Controller
         $this->validate(request(), [
             'options' => 'required|array',
         ]);
+
+        $this->sectionOrFail($id);
 
         $section = $this->sectionRepository->saveDraft(
             $id,
@@ -211,6 +213,8 @@ class SectionController extends Controller
             'file' => 'required|mimes:bmp,jpeg,jpg,png,webp,mp4,webm,ogg|max:51200',
         ]);
 
+        $this->sectionOrFail($id);
+
         return new JsonResponse(
             $this->sectionRepository->storeMedia($id, request()->file('file'))
         );
@@ -221,6 +225,8 @@ class SectionController extends Controller
      */
     public function publish(int $id): JsonResponse
     {
+        $this->sectionOrFail($id);
+
         Event::dispatch('section.update.before', $id);
 
         $section = $this->sectionRepository->publishDraft($id);
@@ -238,6 +244,8 @@ class SectionController extends Controller
      */
     public function discard(int $id): JsonResponse
     {
+        $this->sectionOrFail($id);
+
         $section = $this->sectionRepository->discardDraft($id);
 
         return new JsonResponse([
@@ -252,7 +260,7 @@ class SectionController extends Controller
      */
     public function status(int $id): JsonResponse
     {
-        $section = $this->sectionRepository->find($id);
+        $section = $this->sectionOrFail($id);
 
         $this->sectionRepository->massUpdateStatus(
             ['status' => request()->boolean('status')],
@@ -270,6 +278,8 @@ class SectionController extends Controller
      */
     public function duplicate(int $id): JsonResponse
     {
+        $this->sectionOrFail($id);
+
         Event::dispatch('section.create.before');
 
         $section = $this->sectionRepository->duplicate($id);
@@ -362,6 +372,23 @@ class SectionController extends Controller
             ?? $locales->firstWhere('code', app()->getLocale())
             ?? $locales->first()
             ?? core()->getCurrentLocale();
+    }
+
+    /**
+     * The section being acted on, or a 404 once it is gone.
+     *
+     * A section may already have been deleted by the time an action reaches it, which is
+     * answered here rather than left to surface as a query error.
+     */
+    protected function sectionOrFail(int $id): Section
+    {
+        $section = $this->sectionRepository->find($id);
+
+        abort_unless($section, new JsonResponse([
+            'message' => trans('admin::app.appearance.sections.index.gone'),
+        ], 404));
+
+        return $section;
     }
 
     /**

@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Taslak değişiklikleri atıldı.',
                 'duplicate-btn' => 'Çoğalt',
                 'empty' => 'Henüz bölüm yok.',
+                'gone' => 'Bu bölüm artık mevcut değil.',
                 'locale' => 'Yerel Ayar',
                 'mobile' => 'Mobil',
                 'pinned' => 'Sayfanın altına sabitlendi.',

@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Modifications du brouillon abandonnées.',
                 'duplicate-btn' => 'Dupliquer',
                 'empty' => 'Aucune section pour le moment.',
+                'gone' => 'Cette section n\'existe plus.',
                 'locale' => 'Langue',
                 'mobile' => 'Mobile',
                 'pinned' => 'Épinglé au bas de la page.',

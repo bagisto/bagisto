@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Perubahan draf dibuang.',
                 'duplicate-btn' => 'Duplikat',
                 'empty' => 'Belum ada bagian.',
+                'gone' => 'Bagian ini sudah tidak ada.',
                 'locale' => 'Bahasa',
                 'mobile' => 'Ponsel',
                 'pinned' => 'Disematkan di bagian bawah halaman.',

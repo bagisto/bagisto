@@ -661,7 +661,7 @@
 
                             this.focusInPreview(section.id);
                         })
-                        .catch(error => this.flashError(error));
+                        .catch(error => this.sectionError(error, section));
                 },
 
                 /**
@@ -925,7 +925,7 @@
 
                             this.reloadPreview();
                         })
-                        .catch(error => this.flashError(error));
+                        .catch(error => this.sectionError(error, this.active));
                 },
 
                 /**
@@ -968,7 +968,7 @@
 
                             this.reloadPreview();
                         })
-                        .catch(error => this.flashError(error));
+                        .catch(error => this.sectionError(error, section));
                 },
 
                 /**
@@ -983,7 +983,7 @@
 
                             this.select(response.data.section);
                         })
-                        .catch(error => this.flashError(error));
+                        .catch(error => this.sectionError(error, section));
                 },
 
                 /**
@@ -1013,7 +1013,7 @@
 
                                     this.reloadPreview();
                                 })
-                                .catch(error => this.flashError(error));
+                                .catch(error => this.sectionError(error, section));
                         },
                     });
                 },
@@ -1076,7 +1076,7 @@
 
                             this.reloadPreview();
                         })
-                        .catch(error => this.flashError(error))
+                        .catch(error => this.sectionError(error, sections))
                         .finally(() => this.isBusy = false);
                 },
 
@@ -1088,6 +1088,31 @@
                         type: 'error',
                         message: error.response?.data?.message ?? error.message,
                     });
+                },
+
+                /**
+                 * Report a failed section action, dropping a section the server no longer
+                 * has so that the list stops offering one that cannot be acted on.
+                 */
+                sectionError(error, sections) {
+                    if (error.response?.status === 404) {
+                        [sections].flat().filter(Boolean).forEach(section => this.forget(section));
+
+                        this.reloadPreview();
+                    }
+
+                    this.flashError(error);
+                },
+
+                /**
+                 * Drop a section from the list, closing its panel when it was the open one.
+                 */
+                forget(section) {
+                    this.items = this.items.filter(item => item.id !== section.id);
+
+                    if (this.activeId === section.id) {
+                        this.activeId = null;
+                    }
                 },
 
                 /**

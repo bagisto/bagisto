@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Modifiche della bozza scartate.',
                 'duplicate-btn' => 'Duplica',
                 'empty' => 'Nessuna sezione per ora.',
+                'gone' => 'Questa sezione non esiste più.',
                 'locale' => 'Lingua',
                 'mobile' => 'Mobile',
                 'pinned' => 'Fissato in fondo alla pagina.',

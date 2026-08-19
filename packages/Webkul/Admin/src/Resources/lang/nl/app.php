@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Conceptwijzigingen verworpen.',
                 'duplicate-btn' => 'Dupliceren',
                 'empty' => 'Nog geen secties.',
+                'gone' => 'Deze sectie bestaat niet meer.',
                 'locale' => 'Taal',
                 'mobile' => 'Mobiel',
                 'pinned' => 'Vastgezet onderaan de pagina.',

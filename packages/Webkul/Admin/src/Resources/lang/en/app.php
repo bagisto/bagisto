@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Draft changes discarded.',
                 'duplicate-btn' => 'Duplicate',
                 'empty' => 'No sections yet.',
+                'gone' => 'This section no longer exists.',
                 'locale' => 'Locale',
                 'mobile' => 'Mobile',
                 'pinned' => 'Pinned to the bottom of the page.',

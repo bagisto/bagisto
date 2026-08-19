@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Entwurfsänderungen verworfen.',
                 'duplicate-btn' => 'Duplizieren',
                 'empty' => 'Noch keine Abschnitte.',
+                'gone' => 'Dieser Abschnitt existiert nicht mehr.',
                 'locale' => 'Sprache',
                 'mobile' => 'Mobil',
                 'pinned' => 'Am Seitenende fixiert.',

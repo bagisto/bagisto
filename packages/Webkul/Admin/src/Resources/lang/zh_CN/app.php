@@ -3277,6 +3277,7 @@ return [
                 'discarded' => '已放弃草稿更改。',
                 'duplicate-btn' => '复制',
                 'empty' => '暂无版块。',
+                'gone' => '该区块已不存在。',
                 'locale' => '语言',
                 'mobile' => '手机',
                 'pinned' => '已固定在页面底部。',

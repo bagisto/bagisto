@@ -39,15 +39,10 @@ class SectionRepository extends Repository
         $locale = core()->getRequestedLocaleCode();
 
         if ($data['type'] == 'static_content') {
-            $config = [
-                'HTML.Allowed' => null,
-                'HTML.ForbiddenElements' => 'script,iframe,form',
-                'CSS.AllowedProperties' => null,
-            ];
-
-            $data[$locale]['options']['html'] = Purify::config($config)->clean($data[$locale]['options']['html'] ?? '');
-
-            $data[$locale]['options']['css'] = $this->sanitizeStaticCss($data[$locale]['options']['css'] ?? '');
+            $data[$locale]['options'] = $this->sanitizeOptions(
+                $data['type'],
+                $data[$locale]['options'] ?? []
+            );
         }
 
         if (in_array($data['type'], ['image_carousel', 'services_content'])) {
@@ -147,7 +142,7 @@ class SectionRepository extends Repository
     {
         $section = $this->findOrFail($id);
 
-        $section->translateOrNew($locale)->draft_options = $options;
+        $section->translateOrNew($locale)->draft_options = $this->sanitizeOptions($section->type, $options);
 
         $section->save();
 
@@ -169,7 +164,7 @@ class SectionRepository extends Repository
                 continue;
             }
 
-            $translation->options = $translation->draft_options;
+            $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options);
 
             $translation->draft_options = null;
 
@@ -261,7 +256,7 @@ class SectionRepository extends Repository
                     return;
                 }
 
-                $translation->options = $translation->draft_options;
+                $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options);
             });
     }
 
@@ -356,6 +351,34 @@ class SectionRepository extends Repository
      * inside a <style> block, the only way to break out of that context is a
      * literal "</style" sequence, so that (and null bytes) is all we neutralize.
      */
+    /**
+     * Clean the options a section is given.
+     *
+     * Static content is written into the page as markup and styles rather than escaped,
+     * so it is cleaned wherever it is stored, not only on the form that first took it.
+     */
+    protected function sanitizeOptions(?string $type, array $options): array
+    {
+        if ($type !== 'static_content') {
+            return $options;
+        }
+
+        $config = [
+            'HTML.Allowed' => null,
+            'HTML.ForbiddenElements' => 'script,iframe,form',
+            'CSS.AllowedProperties' => null,
+        ];
+
+        $options['html'] = Purify::config($config)->clean($options['html'] ?? '');
+
+        $options['css'] = $this->sanitizeStaticCss($options['css'] ?? '');
+
+        return $options;
+    }
+
+    /**
+     * Strip what would let custom css break out of the style block it is written into.
+     */
     protected function sanitizeStaticCss(?string $css): string
     {
         $css = str_replace("\0", '', (string) $css);
@@ -380,7 +403,7 @@ class SectionRepository extends Repository
             $translation
             && ! is_null($translation->draft_options)
         ) {
-            $translation->options = $translation->draft_options;
+            $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options);
         }
     }
 

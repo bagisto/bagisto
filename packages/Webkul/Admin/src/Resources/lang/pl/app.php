@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Odrzucono zmiany w wersji roboczej.',
                 'duplicate-btn' => 'Duplikuj',
                 'empty' => 'Brak sekcji.',
+                'gone' => 'Ta sekcja już nie istnieje.',
                 'locale' => 'Język',
                 'mobile' => 'Telefon',
                 'pinned' => 'Przypięte do dołu strony.',
