@@ -139,10 +139,10 @@ export async function addReview(page) {
         .filter({ hasText: "New Products View All New" })
         .getByLabel("Arctic Touchscreen Winter")
         .click();
-    await page.getByRole("button", { name: "Reviews" }).click();
+    await page.getByRole("tab", { name: "Reviews" }).click();
     await page.locator("#review-tab").getByText("Write a Review").click();
-    await page.locator("#review-tab span").nth(3).click();
-    await page.locator("#review-tab span").nth(4).click();
+    await page.locator("#review-tab button[aria-pressed]").nth(3).click();
+    await page.locator("#review-tab button[aria-pressed]").nth(4).click();
     await page.getByPlaceholder("Title").fill(review.title);
     await page.getByPlaceholder("Comment").fill(review.comment);
     await page.getByRole("button", { name: "Submit Review" }).click();

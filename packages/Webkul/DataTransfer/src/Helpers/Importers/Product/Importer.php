@@ -635,19 +635,31 @@ class Importer extends AbstractImporter
             return;
         }
 
+        $urlKeysByLowerCase = [];
+
+        foreach (array_keys($this->urlKeys) as $urlKey) {
+            $urlKeysByLowerCase[mb_strtolower((string) $urlKey)] = $urlKey;
+        }
+
         $products = $this->productRepository
             ->resetScope()
             ->select('products.id', 'product_attribute_values.text_value as url_key', 'products.sku')
             ->leftJoin('product_attribute_values', 'products.id', 'product_attribute_values.product_id')
             ->leftJoin('attributes', 'product_attribute_values.attribute_id', 'attributes.id')
             ->where('attributes.code', 'url_key')
-            ->whereIn('product_attribute_values.text_value', array_keys($this->urlKeys))
+            ->whereIn(DB::raw('LOWER('.DB::getTablePrefix().'product_attribute_values.text_value)'), array_keys($urlKeysByLowerCase))
             ->whereNotIn('products.sku', Arr::pluck($this->urlKeys, 'sku'))
             ->get();
 
         foreach ($products as $product) {
+            $urlKey = $urlKeysByLowerCase[mb_strtolower((string) $product->url_key)] ?? null;
+
+            if ($urlKey === null) {
+                continue;
+            }
+
             $this->skipRow(
-                $this->urlKeys[$product->url_key]['row_number'],
+                $this->urlKeys[$urlKey]['row_number'],
                 self::ERROR_DUPLICATE_URL_KEY,
                 'url_key',
                 sprintf(
