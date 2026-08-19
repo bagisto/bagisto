@@ -21,7 +21,11 @@ class SectionFactory extends Factory
     {
         $lastSection = SectionModel::query()->orderBy('id', 'desc')->limit(1)->first();
 
-        $types = ['product_carousel', 'category_carousel', 'image_carousel', 'footer_links', 'services_content'];
+        /**
+         * A channel draws one footer, so it is not a type to hand out at random; a test
+         * that wants one asks for it.
+         */
+        $types = ['product_carousel', 'category_carousel', 'image_carousel', 'services_content'];
 
         return [
             'type' => $this->faker->randomElement($types),

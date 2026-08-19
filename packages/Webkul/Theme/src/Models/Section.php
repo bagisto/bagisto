@@ -98,12 +98,13 @@ class Section extends TranslatableModel implements SectionContract
      * @var array
      */
     protected $casts = [
+        'draft_status' => 'boolean',
         'options' => 'array',
         'draft_options' => 'array',
     ];
 
     /**
-     * Add fillable properties
+     * Add fillable properties.
      *
      * @var array
      */
@@ -113,6 +114,8 @@ class Section extends TranslatableModel implements SectionContract
         'options',
         'sort_order',
         'status',
+        'draft_status',
+        'draft_sort_order',
         'channel_id',
         'theme_code',
     ];

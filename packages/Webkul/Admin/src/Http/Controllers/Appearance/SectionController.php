@@ -5,7 +5,6 @@ namespace Webkul\Admin\Http\Controllers\Appearance;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
@@ -58,8 +57,10 @@ class SectionController extends Controller
     }
 
     /**
-     * Create a section against the theme and channel the editor is already scoped to,
-     * active so that it shows in its own preview straight away.
+     * Create a section against the theme and channel the editor is already scoped to.
+     *
+     * Switching it on is held as a pending change, so an empty one is not put in front of
+     * shoppers before it has been built, while the editor and its preview draw it.
      */
     public function store(string $code)
     {
@@ -80,7 +81,8 @@ class SectionController extends Controller
             'channel_id' => $channel->id,
             'theme_code' => $code,
             'sort_order' => count($this->editableSections($code, $channel->id)) + 1,
-            'status' => 1,
+            'status' => 0,
+            'draft_status' => true,
         ]);
 
         Event::dispatch('section.create.after', $section);
@@ -150,13 +152,11 @@ class SectionController extends Controller
      */
     public function destroy(int $id)
     {
-        $section = $this->sectionOrFail($id);
+        $this->sectionOrFail($id);
 
         Event::dispatch('section.delete.before', $id);
 
         $this->sectionRepository->delete($id);
-
-        Storage::deleteDirectory('themes/'.$section->theme_code.'/sections/'.$section->id);
 
         Event::dispatch('section.delete.after', $id);
 
@@ -203,7 +203,7 @@ class SectionController extends Controller
         Event::dispatch('section.draft.save.after', $section);
 
         return new JsonResponse([
-            'has_draft' => $this->hasDraft($section),
+            'has_draft' => $this->sectionRepository->hasDraft($section),
         ]);
     }
 
@@ -262,6 +262,7 @@ class SectionController extends Controller
 
         return new JsonResponse([
             'has_draft' => false,
+            'status' => (bool) $section->status,
             'options' => $section->translate(core()->getRequestedLocaleCode())?->options,
             'message' => trans('admin::app.appearance.sections.index.discarded'),
         ]);
@@ -272,20 +273,17 @@ class SectionController extends Controller
      */
     public function status(int $id): JsonResponse
     {
-        $section = $this->sectionOrFail($id);
+        $this->sectionOrFail($id);
 
-        Event::dispatch('section.update.before', $id);
+        Event::dispatch('section.draft.save.before', $id);
 
-        $this->sectionRepository->massUpdateStatus(
-            ['status' => request()->boolean('status')],
-            [$section->id]
-        );
+        $section = $this->sectionRepository->saveStatusDraft($id, request()->boolean('status'));
 
-        Event::dispatch('section.update.after', $section->refresh());
+        Event::dispatch('section.draft.save.after', $section);
 
         return new JsonResponse([
             'status' => request()->boolean('status'),
-            'message' => trans('admin::app.appearance.sections.update-success'),
+            'has_draft' => $this->sectionRepository->hasDraft($section),
         ]);
     }
 
@@ -324,12 +322,16 @@ class SectionController extends Controller
 
         Event::dispatch('section.reorder.before', $sectionIds);
 
-        $this->sectionRepository->reorder($sectionIds);
+        $this->sectionRepository->saveOrderDraft($sectionIds);
 
-        Event::dispatch('section.reorder.after', $this->sectionRepository->findWhereIn('id', $sectionIds));
+        $sections = $this->sectionRepository->findWhereIn('id', $sectionIds);
+
+        Event::dispatch('section.reorder.after', $sections);
 
         return new JsonResponse([
-            'message' => trans('admin::app.appearance.sections.update-success'),
+            'pending' => $sections->mapWithKeys(fn ($section) => [
+                $section->id => $this->sectionRepository->hasDraft($section),
+            ]),
         ]);
     }
 
@@ -506,19 +508,9 @@ class SectionController extends Controller
             'id' => $section->id,
             'name' => $section->name,
             'type' => $section->type,
-            'status' => (bool) $section->status,
-            'has_draft' => $this->hasDraft($section),
+            'status' => (bool) ($section->draft_status ?? $section->status),
+            'has_draft' => $this->sectionRepository->hasDraft($section),
             'is_pinned' => $section->type === SectionModel::FOOTER_LINKS,
         ];
-    }
-
-    /**
-     * Whether a section holds edits that are not published yet, in any locale.
-     *
-     * @param  Section  $section
-     */
-    protected function hasDraft($section): bool
-    {
-        return $section->translations->contains(fn ($translation) => ! is_null($translation->draft_options));
     }
 }

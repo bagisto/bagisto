@@ -1000,7 +1000,15 @@
                  */
                 persistOrder() {
                     this.$axios.post(this.reorderUrl, { sections: this.items.map(section => section.id) })
-                        .then(() => this.reloadPreview())
+                        .then(response => {
+                            this.items.forEach(section => {
+                                if (section.id in response.data.pending) {
+                                    section.has_draft = response.data.pending[section.id];
+                                }
+                            });
+
+                            this.reloadPreview();
+                        })
                         .catch(error => this.flashError(error));
                 },
 
@@ -1020,8 +1028,10 @@
                     const status = ! section.status;
 
                     this.$axios.post(this.actionFor(section.id, 'status'), { status })
-                        .then(() => {
+                        .then(response => {
                             section.status = status;
+
+                            section.has_draft = response.data.has_draft;
 
                             this.reloadPreview();
                         })
@@ -1128,8 +1138,16 @@
                     this.isBusy = true;
 
                     return Promise.all(sections.map(section => this.$axios.post(this.actionFor(section.id, action))))
-                        .then(() => {
-                            sections.forEach(section => section.has_draft = false);
+                        .then(responses => {
+                            sections.forEach((section, index) => {
+                                section.has_draft = false;
+
+                                const status = responses[index]?.data?.status;
+
+                                if (typeof status === 'boolean') {
+                                    section.status = status;
+                                }
+                            });
 
                             this.reloadPreview();
                         })

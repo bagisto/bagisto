@@ -93,10 +93,6 @@ class EventServiceProvider extends ServiceProvider
             [Section::class, 'beforeDelete'],
         ],
 
-        'section.reorder.after' => [
-            [Section::class, 'afterReorder'],
-        ],
-
         /**
          * Core events.
          */

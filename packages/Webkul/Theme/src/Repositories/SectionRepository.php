@@ -55,6 +55,8 @@ class SectionRepository extends Repository
             $this->uploadImage(request()->all(), $section);
         }
 
+        $this->purgeUnreferencedMedia($section);
+
         return $section;
     }
 
@@ -146,7 +148,57 @@ class SectionRepository extends Repository
 
         $section->save();
 
+        $this->purgeUnreferencedMedia($section);
+
         return $section;
+    }
+
+    /**
+     * Hold a section's new on or off state, until it is published.
+     *
+     * @param  int  $id
+     */
+    public function saveStatusDraft($id, bool $status): Section
+    {
+        $section = $this->findOrFail($id);
+
+        $section->draft_status = $status === (bool) $section->status ? null : $status;
+
+        $section->save();
+
+        return $section->refresh();
+    }
+
+    /**
+     * Hold a new order for the given sections, until it is published.
+     */
+    public function saveOrderDraft(array $sectionIds): void
+    {
+        foreach (array_values($sectionIds) as $position => $id) {
+            $section = $this->find($id);
+
+            if (! $section) {
+                continue;
+            }
+
+            $order = $position + 1;
+
+            $section->draft_sort_order = $order === (int) $section->sort_order ? null : $order;
+
+            $section->save();
+        }
+    }
+
+    /**
+     * Whether a section is holding any change the storefront has not been given yet.
+     *
+     * @param  Section  $section
+     */
+    public function hasDraft($section): bool
+    {
+        return ! is_null($section->draft_status)
+            || ! is_null($section->draft_sort_order)
+            || $section->translations->contains(fn ($translation) => ! is_null($translation->draft_options));
     }
 
     /**
@@ -171,6 +223,22 @@ class SectionRepository extends Repository
             $translation->save();
         }
 
+        if (! is_null($section->draft_status)) {
+            $section->status = $section->draft_status;
+        }
+
+        if (! is_null($section->draft_sort_order)) {
+            $section->sort_order = $section->draft_sort_order;
+        }
+
+        $section->draft_status = null;
+
+        $section->draft_sort_order = null;
+
+        $section->save();
+
+        $this->purgeUnreferencedMedia($section);
+
         return $section->refresh();
     }
 
@@ -193,7 +261,39 @@ class SectionRepository extends Repository
             $translation->save();
         }
 
+        $section->draft_status = null;
+
+        $section->draft_sort_order = null;
+
+        $section->save();
+
+        $this->purgeUnreferencedMedia($section);
+
         return $section->refresh();
+    }
+
+    /**
+     * The sections matching the criteria that are live on the storefront.
+     */
+    protected function live(array $criteria)
+    {
+        return $this->orderBy('sort_order')->findWhere($criteria + ['status' => 1]);
+    }
+
+    /**
+     * The sections matching the criteria as the editor is holding them.
+     *
+     * A staged change lives beside the column it will replace, so it is resolved once the
+     * rows are in hand rather than in the query.
+     */
+    protected function drafted(array $criteria, string $locale)
+    {
+        return $this->orderBy('sort_order')
+            ->findWhere($criteria)
+            ->each(fn ($section) => $this->applyDraft($section, $locale))
+            ->filter(fn ($section) => (bool) $section->status)
+            ->sortBy('sort_order')
+            ->values();
     }
 
     /**
@@ -205,18 +305,30 @@ class SectionRepository extends Repository
     }
 
     /**
+     * Every section a channel shows on its home page, in render order.
+     */
+    public function getRenderable(int $channelId, string $themeCode)
+    {
+        return $this->live([
+            'channel_id' => $channelId,
+            'theme_code' => $themeCode,
+        ]);
+    }
+
+    /**
      * Every section of a type a channel shows, in render order and drafted when previewing.
      */
     public function findAllOfType(string $type, int $channelId, string $themeCode, string $locale)
     {
-        return $this->orderBy('sort_order')
-            ->findWhere([
-                'type' => $type,
-                'status' => 1,
-                'theme_code' => $themeCode,
-                'channel_id' => $channelId,
-            ])
-            ->each(fn ($section) => $this->applyDraft($section, $locale));
+        $criteria = [
+            'type' => $type,
+            'theme_code' => $themeCode,
+            'channel_id' => $channelId,
+        ];
+
+        return $this->isPreviewing()
+            ? $this->drafted($criteria, $locale)
+            : $this->live($criteria);
     }
 
     /**
@@ -240,24 +352,10 @@ class SectionRepository extends Repository
      */
     public function getDraftedForPreview(int $channelId, string $themeCode, string $locale)
     {
-        return $this->orderBy('sort_order')
-            ->findWhere([
-                'status' => 1,
-                'channel_id' => $channelId,
-                'theme_code' => $themeCode,
-            ])
-            ->each(function ($section) use ($locale) {
-                $translation = $section->translate($locale);
-
-                if (
-                    ! $translation
-                    || is_null($translation->draft_options)
-                ) {
-                    return;
-                }
-
-                $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options);
-            });
+        return $this->drafted([
+            'channel_id' => $channelId,
+            'theme_code' => $themeCode,
+        ], $locale);
     }
 
     /**
@@ -277,6 +375,12 @@ class SectionRepository extends Repository
         $copy->name = $section->name.' '.trans('admin::app.appearance.sections.index.copy-suffix');
 
         $copy->sort_order = $section->sort_order + 1;
+
+        $copy->status = 0;
+
+        $copy->draft_status = true;
+
+        $copy->draft_sort_order = null;
 
         $copy->save();
 
@@ -397,10 +501,6 @@ class SectionRepository extends Repository
      */
     protected function applyDraft($section, string $locale): void
     {
-        if (! $this->isPreviewing()) {
-            return;
-        }
-
         $translation = $section->translate($locale);
 
         if (
@@ -408,6 +508,43 @@ class SectionRepository extends Repository
             && ! is_null($translation->draft_options)
         ) {
             $translation->options = $this->sanitizeOptions($section->type, $translation->draft_options);
+        }
+
+        if (! is_null($section->draft_status)) {
+            $section->status = $section->draft_status;
+        }
+
+        if (! is_null($section->draft_sort_order)) {
+            $section->sort_order = $section->draft_sort_order;
+        }
+    }
+
+    /**
+     * Delete the uploads a section no longer points at.
+     *
+     * An upload is reachable from the options the storefront renders and from the draft
+     * waiting to replace them, in any locale, so a file is only spare once neither
+     * mentions it. Matching on the stored name covers a path recorded on its own as well
+     * as one written into custom html.
+     *
+     * @param  Section  $section
+     */
+    protected function purgeUnreferencedMedia($section): void
+    {
+        $directory = $this->mediaDirectory($section);
+
+        if (! Storage::exists($directory)) {
+            return;
+        }
+
+        $referenced = $section->refresh()->translations
+            ->map(fn ($translation) => json_encode([$translation->options, $translation->draft_options]))
+            ->implode(' ');
+
+        foreach (Storage::files($directory) as $file) {
+            if (! str_contains($referenced, basename($file))) {
+                Storage::delete($file);
+            }
         }
     }
 

@@ -2,7 +2,6 @@
 
 namespace Webkul\FPC\Listeners;
 
-use Illuminate\Support\Collection;
 use Spatie\ResponseCache\Facades\ResponseCache;
 use Webkul\Theme\Repositories\SectionRepository;
 
@@ -55,17 +54,6 @@ class Section
         $section = $this->sectionRepository->find($sectionId);
 
         $this->forget([$section?->type]);
-    }
-
-    /**
-     * After the sections have been put in a new order.
-     *
-     * @param  Collection  $sections
-     * @return void
-     */
-    public function afterReorder($sections)
-    {
-        $this->forget(collect($sections)->pluck('type')->all());
     }
 
     /**

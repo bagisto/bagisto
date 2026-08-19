@@ -33,11 +33,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $sections = $this->sectionRepository->orderBy('sort_order')->findWhere([
-            'status' => self::STATUS,
-            'channel_id' => core()->getCurrentChannel()->id,
-            'theme_code' => core()->getCurrentChannel()->theme,
-        ]);
+        $sections = $this->sectionRepository->getRenderable(
+            core()->getCurrentChannel()->id,
+            core()->getCurrentChannel()->theme
+        );
 
         $categories = $this->categoryRepository->getVisibleCategoryTree(core()->getCurrentChannel()->root_category_id);
 

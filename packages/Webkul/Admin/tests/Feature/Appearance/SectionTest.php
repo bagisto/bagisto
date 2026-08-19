@@ -478,23 +478,26 @@ it('should delete the section', function () {
 });
 
 it('should turn a section off and back on again', function () {
-    // Arrange.
     $section = Section::factory()->create(['status' => 1]);
 
-    // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.status', $section->id), ['status' => false])
         ->assertOk()
-        ->assertJsonPath('status', false);
+        ->assertJsonPath('status', false)
+        ->assertJsonPath('has_draft', true);
 
-    expect($section->refresh()->status)->toBeFalsy();
+    postJson(route('admin.appearance.sections.publish', $section->id))->assertOk();
+
+    expect((bool) $section->refresh()->status)->toBeFalse();
 
     postJson(route('admin.appearance.sections.status', $section->id), ['status' => true])
         ->assertOk()
         ->assertJsonPath('status', true);
 
-    expect($section->refresh()->status)->toBeTruthy();
+    postJson(route('admin.appearance.sections.publish', $section->id))->assertOk();
+
+    expect((bool) $section->refresh()->status)->toBeTrue();
 });
 
 it('should take the channel and theme of the editor rather than the request when creating', function () {
