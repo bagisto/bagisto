@@ -77,12 +77,27 @@ class ProductMediaRepository extends Repository
                 if ($file instanceof UploadedFile) {
                     $path = $this->storeUploadedFile($file, $product, $meta);
 
-                    $model = $this->create([
-                        'type' => $uploadFileType,
-                        'path' => $path,
-                        'product_id' => $product->id,
-                        'position' => ++$position,
-                    ]);
+                    $existing = is_numeric($index = $previousIds->search($indexOrModelId))
+                        ? $this->find($indexOrModelId)
+                        : null;
+
+                    if ($existing) {
+                        $previousIds->forget($index);
+
+                        Storage::delete($existing->path);
+
+                        $model = $this->update([
+                            'path' => $path,
+                            'position' => ++$position,
+                        ], $indexOrModelId);
+                    } else {
+                        $model = $this->create([
+                            'type' => $uploadFileType,
+                            'path' => $path,
+                            'product_id' => $product->id,
+                            'position' => ++$position,
+                        ]);
+                    }
                 } else {
                     if (is_numeric($index = $previousIds->search($indexOrModelId))) {
                         $previousIds->forget($index);

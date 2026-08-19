@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'পরিবার মুছে ফেলার সময় ত্রুটি দেখা দিয়েছে।',
             'delete-success' => 'পরিবার সফলভাবে মুছে ফেলা হয়েছে।',
             'family' => 'পরিবার',
-            'last-delete-error' => 'অন্তত একটি পরিবার প্রয়োজন।',
             'update-success' => 'পরিবার সফলভাবে আপডেট করা হয়েছে।',
             'user-define-error' => 'সিস্টেম অ্যাসেট ফ্যামিলি মুছে ফেলা যাবে না',
         ],
@@ -5528,6 +5527,7 @@ return [
                 'ai-add-image-btn' => 'ম্যাজিক এআই',
                 'ai-btn-info' => 'ছবি তৈরি করুন',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'ছবি',
                 'not-allowed-error' => 'কেবল চিত্র ফাইল (.jpeg, .jpg, .png, ..) অনুমোদিত।',
 
                 'ai-generation' => [
@@ -5579,6 +5579,7 @@ return [
                 'add-video-btn' => 'ভিডিও যোগ করুন',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'কেবল ভিডিও ফাইল (.mp4, .mov, .ogg ..) অনুমোদিত।',
+                'video' => 'ভিডিও',
 
                 'seo' => [
                     'info' => 'ভিডিও ফাইলটিকে একটি বর্ণনামূলক নাম দিন।',

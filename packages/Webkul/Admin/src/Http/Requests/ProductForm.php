@@ -200,9 +200,12 @@ class ProductForm extends FormRequest
     public function attributes()
     {
         return [
-            'images.files.*' => 'image',
-            'videos.files.*' => 'video',
-            'variants.*.sku' => 'sku',
+            'images.files.*' => trans('admin::app.components.media.images.image'),
+            'images.meta.*.alt_text' => trans('admin::app.components.media.images.seo.alt-text'),
+            'images.meta.*.file_name' => trans('admin::app.components.media.images.seo.file-name'),
+            'videos.files.*' => trans('admin::app.components.media.videos.video'),
+            'videos.meta.*.file_name' => trans('admin::app.components.media.images.seo.file-name'),
+            'variants.*.sku' => trans('admin::app.catalog.products.index.datagrid.sku'),
         ];
     }
 

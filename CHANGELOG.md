@@ -20,50 +20,9 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11209 [feature] - Added Omnibus package for EU Omnibus Directive compliance, recording per-channel lowest-price snapshots and showing the 30-day historical low for discounted products.
 
-- #11317 [fixed] - Fixed storefront controls unusable by keyboard, replacing `role="button"` spans with real buttons, adding visible focus rings, and exposing hidden inputs to screen readers.
-- Fixed the mega search leaving you on an empty tab when another tab had results, which read as nothing being found. It now opens the first tab that matched.
+- #11423 [fixed] - Fixed the storefront order details tabs staying on the loading shimmer, the same discarded slot that left the product page tabs empty.
 
-- Products that keep no stock are now listed as "Stock Disabled" rather than "Out of Stock", read from the product's own manage-inventory setting rather than assumed from its type.
-
-- The admin product datagrid no longer joins and groups over five tables to draw a page. Quantity, image count, base image, category names, family name and the manage-inventory flag are kept on the flat table and refreshed as their sources change — including on refunds, order cancellations, imports, category and family renames, and inventory-source deletion, which previously left the grid showing figures no longer true.
-
-- Fixed the Category column showing one arbitrary category for a product filed under several; it now lists them all.
-
-- Fixed a full Elasticsearch reindex leaving behind documents whose product had been deleted. The admin grid pages on the count Elasticsearch reports, so those documents claimed a total the grid could not fill and scattered blank pages through the listing.
-
-- Fixed sorting the admin product datagrid by SKU or quantity failing outright in Elasticsearch mode, and sorting on a column an older index has never held now leaves the order alone instead of erroring.
-
-- Fixed the debug bar's collector keeping every query it saw, complete with its bindings, for as long as the process lived — and attaching itself even on the console, where there is no bar to draw. Any long-running process paid for it: an indexer or a queue worker grew by roughly half a megabyte for every thousand statements until it was killed. It is now attached only to a web request that will actually render the bar.
-
-- Reduced what a full reindex asks of the database. The flat indexer was re-reading the channel list, the attribute values and the variants once per product, discarding the copies it had already eager-loaded, and refreshing its derived columns a product at a time — some ten thousand statements on a ten thousand product catalogue that are now a hundred.
-
-- Fixed an import of an unreadable file answering with the raw PHP error, which named an internal class and property, and a failure elsewhere in the run answering with the storage path of the uploaded file. Both now say that the import could not be processed and ask for the file to be checked, with the detail kept to the log. A file with no header row was the one that told on itself the loudest, as it failed on a type error the reader was not catching.
-
-- Added a way back into an import that is still running. The action that opens an import was drawn with an icon the admin theme does not carry, so nothing was rendered for it and the screen showing progress could not be reached again once left; it now reads "View Progress" against a running import and opens where it left off.
-
-- Fixed a product import failing to create anything once the catalog listing began keeping an image count, which an import writes for itself and never has to hand.
-
-- Fixed the third level of the admin menu never being reachable from a hover menu. Collapsing the sidebar, or hovering any section other than the one you are in, opens the section beside it — and that panel was drawing the group headings alone, so Tax Rates, Cart Rules, Imports and the rest of the pages filed under a heading could only be reached by first navigating into their section. The panel now goes the whole way down, and scrolls within the window rather than running off the bottom of it when a section is long.
-
-- Fixed Help & Resources missing from the admin menu on a phone or tablet. It sat in the sidebar, which is hidden below large screens, and was never added to the drawer that replaces it.
-
-- #11421 [fixed] - Fixed a non-numeric "products per page" being saved and taking every catalogue page down with it. The field now accepts only a comma separated list of whole numbers, and the storefront falls back to its default page sizes rather than failing on a value it cannot use.
-
-- #11420 [fixed] - Fixed deleting an email template or a marketing event a campaign uses, which succeeded and left the campaign behind with nothing to send. Either is now refused while a campaign still points at it, the way a customer group with customers is.
-
-- #11419 [fixed] - Fixed the default attribute family being deletable, which then broke the create family screen for good because it is built from that family. Deleting it is now refused, and the screen falls back to another family rather than erroring if it is already gone.
-
-- #11418 [fixed] - Fixed a customer being unable to save their profile when the same email address exists on another channel. Registration already scoped the check by channel while the profile and admin edits did not, so an address in use elsewhere blocked an unrelated account.
-
-- #11417 [fixed] - Fixed an attribute accepting a regular expression that is not one, which left the product create and edit screens blank because the pattern is written into the form's rules. The pattern is now checked when the attribute is saved, and one already stored is left out of the rules rather than breaking the page.
-
-- #11416 [fixed] - Fixed copying a downloadable or booking product losing everything that makes it that type. Download links and samples now come across with their titles, as do the booking settings and the slots or tickets they are sold by.
-
-- #11414 [fixed] - Fixed the product listing keeping the image that was uploaded first after the images had been reordered on the product, rather than the one now sitting at the front. The listing went by the order the images were added instead of the order they were arranged in.
-
-- #11413 [fixed] - Fixed deleting several RMA reasons, rules or custom fields at once reporting a failure when one of them had already been deleted elsewhere — while quietly deleting the ones listed before it. Whatever is still there is now deleted and the rest passed over, and the reply says how many of each. Custom fields also went without any check on what was submitted, which they now have in common with the rest.
-
-- #11412 [fixed] - Fixed the EU withdrawals listing breaking when filtered by customer email or status, or when searched, leaving a list that only a reload recovered. Both columns are named the same on the order the withdrawal is joined to, so the database could not tell which was meant and refused the query.
+- #11422 [fixed] - Fixed the product page tabs staying on the loading shimmer. The component emitted a Vue slot in place of the Blade slot holding them, so every tab item was dropped.
 
 ## **v2.4.9 (5th of August 2026)** - *Release*
 

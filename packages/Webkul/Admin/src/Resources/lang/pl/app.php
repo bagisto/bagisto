@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Wystąpił błąd podczas usuwania zestawu atrybutów.',
             'delete-success' => 'Pomyślnie usunięto zestaw atrybutów.',
             'family' => 'Zestaw atrybutów',
-            'last-delete-error' => 'Operacja niedozwolona. Sklep musi posiadać co najmniej jeden aktywny zestaw atrybutów.',
             'update-success' => 'Pomyślnie zaktualizowano zestaw atrybutów.',
             'user-define-error' => 'Operacja niedozwolona. Nie można usunąć systemowego zestawu atrybutów.',
         ],
@@ -5528,6 +5527,7 @@ return [
                 'ai-add-image-btn' => 'Magia AI',
                 'ai-btn-info' => 'Generuj obraz',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Obraz',
                 'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5579,6 +5579,7 @@ return [
                 'add-video-btn' => 'Dodaj film',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
+                'video' => 'Wideo',
 
                 'seo' => [
                     'info' => 'Nadaj plikowi wideo opisową nazwę.',

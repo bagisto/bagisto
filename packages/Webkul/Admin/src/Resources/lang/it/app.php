@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Errore durante l\'eliminazione della famiglia.',
             'delete-success' => 'Famiglia eliminata con successo.',
             'family' => 'Famiglia',
-            'last-delete-error' => 'Almeno una famiglia è richiesta.',
             'update-success' => 'Famiglia aggiornata con successo.',
             'user-define-error' => 'Impossibile eliminare la famiglia di attributi di sistema',
         ],
@@ -5528,6 +5527,7 @@ return [
                 'ai-add-image-btn' => 'Intelligenza Artificiale',
                 'ai-btn-info' => 'Genera Immagine',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Immagine',
                 'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5579,6 +5579,7 @@ return [
                 'add-video-btn' => 'Aggiungi Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Assegna un nome descrittivo al file video.',

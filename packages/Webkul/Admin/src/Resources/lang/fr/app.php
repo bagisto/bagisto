@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Erreur rencontrée lors de la suppression de la famille.',
             'delete-success' => 'Famille supprimée avec succès.',
             'family' => 'Famille',
-            'last-delete-error' => 'Au moins une famille est requise.',
             'update-success' => 'Famille mise à jour avec succès.',
             'user-define-error' => 'Impossible de supprimer la famille d\'attributs système',
         ],
@@ -5528,6 +5527,7 @@ return [
                 'ai-add-image-btn' => 'IA Magique',
                 'ai-btn-info' => 'Générer une Image',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Image',
                 'not-allowed-error' => 'Seuls les fichiers d\'images (.jpeg, .jpg, .png, ..) sont autorisés.',
 
                 'ai-generation' => [
@@ -5579,6 +5579,7 @@ return [
                 'add-video-btn' => 'Ajouter une vidéo',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Seuls les fichiers vidéo (.mp4, .mov, .ogg ..) sont autorisés.',
+                'video' => 'Vidéo',
 
                 'seo' => [
                     'info' => 'Donnez un nom descriptif au fichier vidéo.',

@@ -129,7 +129,6 @@ class AttributeFamilyController extends Controller
 
         $attributeFamily = $this->attributeFamilyRepository->update([
             'attribute_groups' => request('attribute_groups'),
-            'code' => request('code'),
             'name' => request('name'),
         ], $id);
 
@@ -146,12 +145,6 @@ class AttributeFamilyController extends Controller
     public function destroy(int $id): JsonResponse
     {
         $attributeFamily = $this->attributeFamilyRepository->findOrFail($id);
-
-        if ($this->attributeFamilyRepository->count() == 1) {
-            return new JsonResponse([
-                'message' => trans('admin::app.catalog.families.last-delete-error'),
-            ], 400);
-        }
 
         if ($attributeFamily->code === AttributeFamily::DEFAULT_CODE) {
             return new JsonResponse([

@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'परिवार को हटाने के दौरान त्रुटि आई।',
             'delete-success' => 'परिवार सफलतापूर्वक हटा दिया गया है।',
             'family' => 'परिवार',
-            'last-delete-error' => 'कम से कम एक परिवार की आवश्यकता है।',
             'update-success' => 'परिवार सफलतापूर्वक अपडेट किया गया।',
             'user-define-error' => 'सिस्टम विशेषता परिवार को हटा नहीं सकता',
         ],
@@ -5528,6 +5527,7 @@ return [
                 'ai-add-image-btn' => 'मैजिक ए.आई.',
                 'ai-btn-info' => 'इमेज उत्पन्न करें',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'छवि',
                 'not-allowed-error' => 'केवल छवि फ़ाइलें (.jpeg, .jpg, .png, ..) अनुमत हैं।',
 
                 'ai-generation' => [
@@ -5579,6 +5579,7 @@ return [
                 'add-video-btn' => 'वीडियो जोड़ें',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'केवल वीडियो फ़ाइलें (.mp4, .mov, .ogg ..) अनुमत हैं।',
+                'video' => 'वीडियो',
 
                 'seo' => [
                     'info' => 'वीडियो फ़ाइल को एक वर्णनात्मक नाम दें।',

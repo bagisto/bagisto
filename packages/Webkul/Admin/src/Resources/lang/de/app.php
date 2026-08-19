@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Fehler beim Löschen der Familie aufgetreten.',
             'delete-success' => 'Familie erfolgreich gelöscht.',
             'family' => 'Familie',
-            'last-delete-error' => 'Mindestens eine Familie ist erforderlich.',
             'update-success' => 'Familie erfolgreich aktualisiert.',
             'user-define-error' => 'Systemattributfamilie kann nicht gelöscht werden.',
         ],
@@ -5528,6 +5527,7 @@ return [
                 'ai-add-image-btn' => 'Magie KI',
                 'ai-btn-info' => 'Bild generieren',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Bild',
                 'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
 
                 'ai-generation' => [
@@ -5579,6 +5579,7 @@ return [
                 'add-video-btn' => 'Video hinzufügen',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Nur Videodateien (.mp4, .mov, .ogg ..) sind erlaubt.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Geben Sie der Videodatei einen aussagekräftigen Namen.',
