@@ -5016,14 +5016,21 @@ return [
                 'title' => 'Email',
 
                 'smtp' => [
+                    'brevo-api-key' => 'Cheie API Brevo',
+                    'brevo-api-key-info' => 'Creați o cheie API v3 în contul dvs. Brevo la SMTP & API.',
+                    'driver' => 'Driver',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'Alegeți modul în care magazinul dvs. trimite e-mailuri.',
                     'driver-mismatch-info' => 'Your mail driver is set to ":driver" instead of "bagisto-dynamic-smtp". Any changes made here will have no effect. Please update MAIL_MAILER=bagisto-dynamic-smtp in your .env file to activate these settings.',
                     'driver-mismatch-title' => 'These settings are currently inactive.',
+                    'driver-notice' => 'Notificare driver',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => 'Encryption',
                     'host' => 'Host',
-                    'info' => 'Configure SMTP server settings for sending emails from your store.',
+                    'info' => 'Alegeți modul în care magazinul dvs. trimite e-mailuri și configurați driverul selectat.',
                     'password' => 'Password',
                     'port' => 'Port',
-                    'title' => 'SMTP',
+                    'title' => 'Driver de e-mail',
                     'username' => 'Username',
                 ],
 

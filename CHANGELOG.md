@@ -10,23 +10,25 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added the PayGlocal payment gateway. Customers pay on PayGlocal's hosted checkout and return through a signed token, the outcome is confirmed with PayGlocal before an order is placed, and a webhook settles the payment if the customer never comes back.
 
-- The admin product datagrid no longer joins and groups over five tables to draw a page. Quantity, image count, base image, category names, family name and the manage-inventory flag are kept on the flat table and refreshed as their sources change — including on refunds, order cancellations, imports, category and family renames, and inventory-source deletion, which previously left the grid showing figures no longer true.
+- Added Brevo as a mail driver, sent over Brevo's HTTP API through Symfony's own bridge. The driver is chosen in Admin → Configuration → Emails, which now shows either the SMTP fields or the Brevo API key rather than both.
 
-- Reduced what a full reindex asks of the database. The flat indexer was re-reading the channel list, the attribute values and the variants once per product, discarding the copies it had already eager-loaded, and refreshing its derived columns a product at a time — some ten thousand statements on a ten thousand product catalogue that are now a hundred.
+- The admin product datagrid no longer joins and groups over five tables to draw a page. Quantity, image count, base image, category and family names and the manage-inventory flag now live on the flat table and are refreshed as their sources change, so the grid no longer shows figures that are out of date.
+
+- Reduced what a full reindex asks of the database. The flat indexer was re-reading channels, attribute values and variants once per product and refreshing its derived columns one at a time — some ten thousand statements on a ten thousand product catalogue that are now a hundred.
 
 - Fixed PayU and PhonePe starting a payment in any currency, when both settle only in Indian Rupees — a store on a currency without two decimal places was charged a hundred times over. Either now refuses a cart it cannot settle, so a store on another currency will find them declining at checkout rather than taking the wrong amount.
 
-- Fixed the debug bar's collector keeping every query it saw, complete with its bindings, for as long as the process lived — and attaching itself even on the console, where there is no bar to draw. Any long-running process paid for it: an indexer or a queue worker grew by roughly half a megabyte for every thousand statements until it was killed. It is now attached only to a web request that will actually render the bar.
+- Fixed the debug bar's collector keeping every query it saw for as long as the process lived, and attaching itself even on the console where there is no bar to draw — an indexer or queue worker grew by roughly half a megabyte per thousand statements. It is now attached only to a web request that will render the bar.
 
 - Locales and currencies are now listed in one place, shared by the console and web installers, the seeders and the translation checker, so adding either takes one entry rather than five.
 
 - Fixed customer and cart reporting counting all guests as a single shopper, which understated unique customers and piled every guest's spend onto one row of the "most sales" and "most orders" listings.
 
-- Fixed the third level of the admin menu never being reachable from a hover menu. Collapsing the sidebar, or hovering any section other than the one you are in, opens the section beside it — and that panel was drawing the group headings alone, so Tax Rates, Cart Rules, Imports and the rest of the pages filed under a heading could only be reached by first navigating into their section. The panel now goes the whole way down, and scrolls within the window rather than running off the bottom of it when a section is long.
+- Fixed the third level of the admin menu never being reachable from a hover menu, which drew the group headings alone — so Tax Rates, Cart Rules, Imports and anything else filed under a heading could only be reached by navigating into its section first. The panel now goes the whole way down and scrolls within the window when a section is long.
 
 - Fixed a full Elasticsearch reindex leaving behind documents whose product had been deleted. The admin grid pages on the count Elasticsearch reports, so those documents claimed a total the grid could not fill and scattered blank pages through the listing.
 
-- Fixed an import of an unreadable file answering with the raw PHP error, which named an internal class and property, and a failure elsewhere in the run answering with the storage path of the uploaded file. Both now say that the import could not be processed and ask for the file to be checked, with the detail kept to the log. A file with no header row was the one that told on itself the loudest, as it failed on a type error the reader was not catching.
+- Fixed an import of an unreadable file answering with the raw PHP error, which named an internal class and property, and a failure elsewhere in the run answering with the storage path of the uploaded file. Both now say the import could not be processed and ask for the file to be checked, with the detail kept to the log.
 
 - Added a way back into an import that is still running. The action that opens an import was drawn with an icon the admin theme does not carry, so nothing was rendered for it and the screen showing progress could not be reached again once left; it now reads "View Progress" against a running import and opens where it left off.
 

@@ -5016,14 +5016,21 @@ return [
                 'title' => 'Correu electrònic',
 
                 'smtp' => [
+                    'brevo-api-key' => 'Clau API de Brevo',
+                    'brevo-api-key-info' => 'Creeu una clau API v3 al vostre compte de Brevo a SMTP & API.',
+                    'driver' => 'Controlador',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'Trieu com envia els correus la vostra botiga.',
                     'driver-mismatch-info' => 'El vostre controlador de correu està establert a ":driver" en lloc de "bagisto-dynamic-smtp". Qualsevol canvi fet aquí no tindrà efecte. Si us plau, actualitzeu MAIL_MAILER=bagisto-dynamic-smtp al vostre fitxer .env per activar aquesta configuració.',
                     'driver-mismatch-title' => 'Aquesta configuració està actualment inactiva.',
+                    'driver-notice' => 'Avís del controlador',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => 'Xifratge',
                     'host' => 'Amfitrió',
-                    'info' => 'Configureu la configuració del servidor SMTP per enviar correus electrònics des de la vostra botiga.',
+                    'info' => 'Trieu com envia els correus la vostra botiga i configureu el controlador seleccionat.',
                     'password' => 'Contrasenya',
                     'port' => 'Port',
-                    'title' => 'SMTP',
+                    'title' => 'Controlador de correu',
                     'username' => 'Nom d\'usuari',
                 ],
 

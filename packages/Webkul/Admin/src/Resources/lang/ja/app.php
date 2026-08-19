@@ -5016,14 +5016,21 @@ return [
                 'title' => 'メール',
 
                 'smtp' => [
+                    'brevo-api-key' => 'Brevo APIキー',
+                    'brevo-api-key-info' => 'Brevoアカウントの SMTP & API で v3 APIキーを作成してください。',
+                    'driver' => 'ドライバー',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'ストアがメールを送信する方法を選択します。',
                     'driver-mismatch-info' => 'メールドライバーは "bagisto-dynamic-smtp" ではなく ":driver" に設定されていますここで行った変更は有効になりません。.envファイルでMAIL_MAILER=bagisto-dynamic-smtpを更新して、これらの設定をアクティブにしてください。',
                     'driver-mismatch-title' => 'これらの設定は現在無効です。',
+                    'driver-notice' => 'ドライバーに関する通知',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => '暗号化',
                     'host' => 'ホスト',
-                    'info' => 'ストアからメールを送信するためのSMTPサーバー設定を構成します。',
+                    'info' => 'ストアがメールを送信する方法を選択し、選んだドライバーを設定します。',
                     'password' => 'パスワード',
                     'port' => 'ポート',
-                    'title' => 'SMTP',
+                    'title' => 'メールドライバー',
                     'username' => 'ユーザー名',
                 ],
 

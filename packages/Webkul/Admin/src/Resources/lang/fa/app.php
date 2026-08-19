@@ -5016,14 +5016,21 @@ return [
                 'title' => 'ایمیل',
 
                 'smtp' => [
+                    'brevo-api-key' => 'کلید API برِوو',
+                    'brevo-api-key-info' => 'یک کلید API نسخه ۳ در حساب Brevo خود در بخش SMTP & API بسازید.',
+                    'driver' => 'درایور',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'انتخاب کنید فروشگاه شما چگونه ایمیل ارسال کند.',
                     'driver-mismatch-info' => 'درایور ایمیل شما به جای "bagisto-dynamic-smtp" روی ":driver" تنظیم شده است. هرگونه تغییری که در اینجا ایجاد شود بی‌اثر خواهد بود. لطفاً MAIL_MAILER=bagisto-dynamic-smtp را در فایل .env خود به‌روزرسانی کنید تا این تنظیمات فعال شوند.',
                     'driver-mismatch-title' => 'این تنظیمات در حال حاضر غیرفعال هستند.',
+                    'driver-notice' => 'اعلان درایور',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => 'رمزگذاری',
                     'host' => 'میزبان',
-                    'info' => 'تنظیمات سرور SMTP را برای ارسال ایمیل از فروشگاه خود پیکربندی کنید.',
+                    'info' => 'انتخاب کنید فروشگاه شما چگونه ایمیل ارسال کند و درایور انتخاب‌شده را پیکربندی کنید.',
                     'password' => 'رمز عبور',
                     'port' => 'پورت',
-                    'title' => 'SMTP',
+                    'title' => 'درایور ایمیل',
                     'username' => 'نام کاربری',
                 ],
 

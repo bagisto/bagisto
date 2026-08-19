@@ -5016,14 +5016,21 @@ return [
                 'title' => 'E-posta',
 
                 'smtp' => [
+                    'brevo-api-key' => 'Brevo API Anahtarı',
+                    'brevo-api-key-info' => 'Brevo hesabınızda SMTP & API bölümünden bir v3 API anahtarı oluşturun.',
+                    'driver' => 'Sürücü',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'Mağazanızın e-postaları nasıl göndereceğini seçin.',
                     'driver-mismatch-info' => 'Posta sürücünüz "bagisto-dynamic-smtp" yerine ":driver" olarak ayarlanmış. Burada yapılan herhangi bir değişiklik etkili olmayacaktır. Bu ayarları etkinleştirmek için lütfen .env dosyanızda MAIL_MAILER=bagisto-dynamic-smtp güncelleyin.',
                     'driver-mismatch-title' => 'Bu ayarlar şu anda etkin değil.',
+                    'driver-notice' => 'Sürücü Bildirimi',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => 'Şifreleme',
                     'host' => 'Ana Bilgisayar',
-                    'info' => 'Mağazanızdan e-posta göndermek için SMTP sunucu ayarlarını yapılandırın.',
+                    'info' => 'Mağazanızın e-postaları nasıl göndereceğini seçin ve seçtiğiniz sürücüyü yapılandırın.',
                     'password' => 'Şifre',
                     'port' => 'Port',
-                    'title' => 'SMTP',
+                    'title' => 'Posta Sürücüsü',
                     'username' => 'Kullanıcı Adı',
                 ],
 

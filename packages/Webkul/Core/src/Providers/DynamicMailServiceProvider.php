@@ -3,9 +3,9 @@
 namespace Webkul\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Webkul\Core\Mail\Transport\DynamicSmtpTransport;
+use Webkul\Core\Mail\Transport\DynamicMailTransport;
 
-class DynamicSmtpServiceProvider extends ServiceProvider
+class DynamicMailServiceProvider extends ServiceProvider
 {
     /**
      * Boot the service provider.
@@ -13,7 +13,7 @@ class DynamicSmtpServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app['mail.manager']->extend('bagisto-dynamic-smtp', function () {
-            return new DynamicSmtpTransport;
+            return new DynamicMailTransport;
         });
     }
 }
