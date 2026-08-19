@@ -205,7 +205,15 @@ it('should refuse an attribute whose regex is not a usable pattern', function (s
     ])
         ->assertJsonValidationErrorFor('regex')
         ->assertUnprocessable();
-})->with(['^[A-Za-z0-9]+$', '/[unclosed/', 'not a pattern']);
+})->with([
+    '^[A-Za-z0-9]+$',
+    '/[unclosed/',
+    'not a pattern',
+    '#^[A-Za-z0-9]+$#',
+    '~^[A-Za-z0-9]+$~',
+    '/^[A-Za-z0-9]+$/x',
+    '//',
+]);
 
 it('should accept an attribute whose regex is a usable pattern', function () {
     // Act and Assert.
@@ -222,15 +230,26 @@ it('should accept an attribute whose regex is a usable pattern', function () {
     $this->assertDatabaseHas('attributes', ['code' => 'regex_usable', 'regex' => '/^[A-Za-z0-9]+$/']);
 });
 
-it('should keep an unusable regex out of the rules the product form is given', function () {
+it('should keep an unusable regex out of the rules the product form is given', function (string $pattern) {
     // Arrange.
     $attribute = Attribute::factory()->create([
         'type' => 'text',
         'validation' => 'regex',
-        'regex' => '^[A-Za-z0-9]+$',
+        'regex' => $pattern,
     ]);
 
-    // Act and Assert. An undelimited pattern would otherwise be written into the form's
-    // rules, where the browser cannot compile it.
+    // Act and Assert.
     expect($attribute->validations)->not->toContain('regex');
+})->with(['^[A-Za-z0-9]+$', '#^[A-Za-z0-9]+$#', '~^[A-Za-z0-9]+$~', '/^[A-Za-z0-9]+$/x', '//']);
+
+it('should write a usable regex into the rules the product form is given', function () {
+    // Arrange.
+    $attribute = Attribute::factory()->create([
+        'type' => 'text',
+        'validation' => 'regex',
+        'regex' => '/^[A-Za-z0-9]+$/',
+    ]);
+
+    // Act and Assert.
+    expect($attribute->validations)->toContain('regex: /^[A-Za-z0-9]+$/');
 });

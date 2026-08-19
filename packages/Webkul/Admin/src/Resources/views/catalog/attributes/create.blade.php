@@ -495,7 +495,6 @@
                                     v-model="validationType"
                                     :label="trans('admin::app.catalog.attributes.create.input-validation')"
                                     refs="validation"
-                                    @change="inputValidation=true"
                                 >
                                     @foreach($validations as $validation)
                                         <option value="{{ $validation }}">
@@ -508,19 +507,26 @@
                             </x-admin::form.control-group>
 
                             <!-- REGEX -->
-                            <x-admin::form.control-group v-show="inputValidation && (validationType == 'regex')">
-                                <x-admin::form.control-group.label>
+                            <x-admin::form.control-group v-show="validationType == 'regex'">
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.attributes.create.regex')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="regex"
+                                    ::rules="validationType == 'regex' ? 'required|regex_pattern' : ''"
                                     :value="old('regex')"
+                                    :label="trans('admin::app.catalog.attributes.create.regex')"
                                     :placeholder="trans('admin::app.catalog.attributes.create.regex')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="regex" />
+
+                                <!-- Regex Info -->
+                                <p class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-300">
+                                    @lang('admin::app.catalog.attributes.create.regex-info')
+                                </p>
                             </x-admin::form.control-group>
 
                             <!-- Is Required -->
@@ -861,13 +867,11 @@
 
                         attributeType: '{{ old('type') }}',
 
-                        validationType: '',
-
-                        inputValidation: false,
+                        validationType: '{{ old('validation') }}',
 
                         swatchType: 'dropdown',
 
-                        swatchAttribute: false,
+                        swatchAttribute: {{ old('type') ? 'true' : 'false' }},
 
                         showSwatch: false,
 

@@ -555,32 +555,22 @@
                                 @if($attribute->validation == "regex")
                                     <x-admin::form.control-group>
                                         <x-admin::form.control-group.label>
-                                            @lang('admin::app.catalog.attributes.create.regex')
+                                            @lang('admin::app.catalog.attributes.edit.regex')
                                         </x-admin::form.control-group.label>
 
-                                        <v-field
+                                        <x-admin::form.control-group.control
                                             type="text"
+                                            class="cursor-not-allowed"
+                                            id="regex"
                                             name="regex"
-                                            :value="{{ json_encode($attribute->regex) }}"
-                                            label="{{ trans('admin::app.catalog.attributes.create.regex') }}"
-                                            v-slot="{ field }"
-                                        >
-                                            <input
-                                                type="text"
-                                                name="regex"
-                                                id="regex"
-                                                v-bind="field"
-                                                :value="{{ json_encode($attribute->regex) }}"
-                                                :class="[errors['{{ $attribute->regex }}'] ? 'border border-red-600 hover:border-red-600' : '']"
-                                                class="flex min-h-[39px] w-full cursor-not-allowed rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                                                placeholder="{{ trans('admin::app.catalog.attributes.create.regex') }}"
-                                                disabled
-                                            >
-                                        </v-field>
+                                            :value="$attribute->regex"
+                                            :label="trans('admin::app.catalog.attributes.edit.regex')"
+                                            disabled="disabled"
+                                        />
 
                                         <!-- Regex Info -->
                                         <p class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-300">
-                                            @lang('admin::app.catalog.attributes.create.regex-info')
+                                            @lang('admin::app.catalog.attributes.edit.regex-info')
                                         </p>
                                     </x-admin::form.control-group>
                                 @endif
