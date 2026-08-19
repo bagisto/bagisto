@@ -72,14 +72,7 @@ class SectionController extends Controller
 
         $channel = $this->requestedChannel();
 
-        if (
-            $validated['type'] === SectionModel::FOOTER_LINKS
-            && $this->footerLinksOf($code, $channel->id)->isNotEmpty()
-        ) {
-            throw ValidationException::withMessages([
-                'type' => trans('admin::app.appearance.sections.create.footer-links-exists'),
-            ]);
-        }
+        $this->guardSingleFooter($validated['type'], $code, $channel->id);
 
         Event::dispatch('section.create.before');
 
@@ -116,6 +109,13 @@ class SectionController extends Controller
             'channel_id' => 'required|in:'.implode(',', (core()->getAllChannels()->pluck('id')->toArray())),
             'theme_code' => 'required',
         ]);
+
+        $this->guardSingleFooter(
+            request('type'),
+            request('theme_code'),
+            (int) request('channel_id'),
+            $id
+        );
 
         $locale = request('locale');
 
@@ -294,7 +294,9 @@ class SectionController extends Controller
      */
     public function duplicate(int $id): JsonResponse
     {
-        $this->sectionOrFail($id);
+        $section = $this->sectionOrFail($id);
+
+        $this->guardSingleFooter($section->type, $section->theme_code, $section->channel_id);
 
         Event::dispatch('section.create.before');
 
@@ -458,7 +460,31 @@ class SectionController extends Controller
     }
 
     /**
-     * The footer link sections a channel holds for a theme.
+     * Refuse a second footer for a channel, which the storefront has nowhere to draw.
+     *
+     * A section reaches the footer type by being created as one, copied from one, or
+     * switched to one, so the rule belongs here rather than on the form alone.
+     */
+    protected function guardSingleFooter(?string $type, ?string $themeCode, int $channelId, ?int $ignoreId = null): void
+    {
+        if ($type !== SectionModel::FOOTER_LINKS) {
+            return;
+        }
+
+        $existing = $this->footerLinksOf($themeCode, $channelId)
+            ->filter(fn ($section) => $section->id !== $ignoreId);
+
+        if ($existing->isEmpty()) {
+            return;
+        }
+
+        throw ValidationException::withMessages([
+            'type' => trans('admin::app.appearance.sections.create.footer-links-exists'),
+        ]);
+    }
+
+    /**
+     * Every footer links section a channel has of a theme.
      */
     protected function footerLinksOf(?string $themeCode, int $channelId)
     {

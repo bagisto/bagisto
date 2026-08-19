@@ -818,3 +818,93 @@ it('should offer the same categories to both carousels', function () {
 
     expect($product['options'])->toBe($category['options']);
 });
+
+/**
+ * A channel with no footer yet, so the single footer rule can be exercised from a known
+ * starting point rather than whatever the seeder left behind.
+ */
+function channelWithoutFooter(): Channel
+{
+    $channel = core()->getCurrentChannel();
+
+    Section::where('type', Section::FOOTER_LINKS)->get()->each->delete();
+
+    return $channel;
+}
+
+it('should refuse a second footer however it is reached', function (string $path) {
+    $channel = channelWithoutFooter();
+
+    $theme = $channel->theme ?: 'default';
+
+    $footer = Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => Section::FOOTER_LINKS,
+    ]);
+
+    $other = Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => Section::STATIC_CONTENT,
+    ]);
+
+    $this->loginAsAdmin();
+
+    match ($path) {
+        'created' => postJson(route('admin.appearance.sections.store', ['code' => $theme, 'channel' => $channel->id]), [
+            'name' => 'Second Footer',
+            'type' => Section::FOOTER_LINKS,
+        ])->assertJsonValidationErrorFor('type'),
+
+        'copied' => postJson(route('admin.appearance.sections.duplicate', $footer->id))
+            ->assertJsonValidationErrorFor('type'),
+
+        'switched' => postJson(route('admin.appearance.sections.update', $other->id), [
+            'name' => 'Hijacked',
+            'type' => Section::FOOTER_LINKS,
+            'sort_order' => 1,
+            'channel_id' => $channel->id,
+            'theme_code' => $theme,
+        ])->assertJsonValidationErrorFor('type'),
+    };
+
+    expect(Section::where('type', Section::FOOTER_LINKS)->count())->toBe(1);
+})->with(['created', 'copied', 'switched']);
+
+it('should still allow the footer a channel is entitled to', function () {
+    $channel = channelWithoutFooter();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.store', ['code' => $channel->theme ?: 'default', 'channel' => $channel->id]), [
+        'name' => 'The Footer',
+        'type' => Section::FOOTER_LINKS,
+    ])->assertOk();
+
+    expect(Section::where('type', Section::FOOTER_LINKS)->count())->toBe(1);
+});
+
+it('should let the footer it already has be edited', function () {
+    $channel = channelWithoutFooter();
+
+    $theme = $channel->theme ?: 'default';
+
+    $footer = Section::factory()->create([
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+        'type' => Section::FOOTER_LINKS,
+    ]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.update', $footer->id), [
+        'name' => 'Renamed Footer',
+        'type' => Section::FOOTER_LINKS,
+        'sort_order' => 9,
+        'channel_id' => $channel->id,
+        'theme_code' => $theme,
+    ])->assertRedirect();
+
+    $this->assertDatabaseHas('theme_sections', ['id' => $footer->id, 'name' => 'Renamed Footer']);
+});
