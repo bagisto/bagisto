@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Position',
                 'price' => 'Prix',
                 'regex' => 'Regex',
-                'regex-info' => 'L\'expression doit être entre guillemets doubles.',
+                'regex-info' => 'L\'expression doit être délimitée par des barres obliques, par exemple /^[0-9]+$/.',
                 'save-btn' => 'Enregistrer l\'attribut',
                 'select' => 'Sélectionner',
                 'select-type' => 'Sélectionner le type d\'attribut',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Position',
                 'price' => 'Prix',
                 'regex' => 'Regex',
-                'regex-info' => 'L\'expression doit être entre guillemets doubles.',
+                'regex-info' => 'L\'expression doit être délimitée par des barres obliques, par exemple /^[0-9]+$/.',
                 'save-btn' => 'Enregistrer l\'attribut',
                 'select' => 'Sélectionner',
                 'select-type' => 'Sélectionner le type d\'attribut',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Famille d\'attributs',
             'attribute-product-error' => 'La famille est utilisée dans des produits.',
             'create-success' => 'Famille créée avec succès.',
+            'default-delete-error' => 'La famille d\'attributs par défaut ne peut pas être supprimée.',
             'delete-failed' => 'Erreur rencontrée lors de la suppression de la famille.',
             'delete-success' => 'Famille supprimée avec succès.',
             'family' => 'Famille',
-            'last-delete-error' => 'Au moins une famille est requise.',
             'update-success' => 'Famille mise à jour avec succès.',
             'user-define-error' => 'Impossible de supprimer la famille d\'attributs système',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Mise à jour réussie',
                 ],
 
+                'campaign-associate' => 'Ce modèle est utilisé dans une ou plusieurs campagnes.',
                 'delete-failed' => ':name Échec de la suppression',
                 'delete-success' => 'Modèle supprimé avec succès',
                 'email-template' => 'Modèle d\'e-mail',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Cet événement est utilisé dans une ou plusieurs campagnes.',
                 'delete-failed' => ':name Échec de la suppression',
                 'delete-success' => 'Événements supprimés avec succès',
                 'edit-error' => 'Impossible de modifier l\'événement',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'IA Magique',
                 'ai-btn-info' => 'Générer une Image',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Image',
                 'not-allowed-error' => 'Seuls les fichiers d\'images (.jpeg, .jpg, .png, ..) sont autorisés.',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Ajouter une vidéo',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Seuls les fichiers vidéo (.mp4, .mov, .ogg ..) sont autorisés.',
+                'video' => 'Vidéo',
 
                 'seo' => [
                     'info' => 'Donnez un nom descriptif au fichier vidéo.',

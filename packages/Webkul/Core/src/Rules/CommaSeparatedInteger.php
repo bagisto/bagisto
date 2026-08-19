@@ -26,10 +26,10 @@ class CommaSeparatedInteger implements ValidationRule
      */
     public function isCommaSeparatedInteger($attribute, $value)
     {
-        $integerValues = explode(',', $value);
+        $integerValues = explode(',', (string) $value);
 
         foreach ($integerValues as $integerValue) {
-            if (! preg_match('/^[0-9]+$/', $integerValue)) {
+            if (! preg_match('/^[0-9]+$/', trim($integerValue))) {
                 return false;
             }
         }

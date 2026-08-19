@@ -20,6 +20,7 @@
             :data-src="src"
             :id="'image-' + $.uid"
             @load="onLoad"
+            v-on:error="onError"
             v-show="! isLoading"
             v-if="lazy"
         >
@@ -29,6 +30,7 @@
             :data-src="src"
             :id="'image-' + $.uid"
             @load="onLoad"
+            v-on:error="onError"
             v-else
             v-show="! isLoading"
         >
@@ -48,11 +50,17 @@
                     type: String,
                     default: '',
                 },
+
+                fallback: {
+                    type: String,
+                    default: '',
+                },
             },
 
             data() {
                 return {
                     isLoading: true,
+                    hasFallenBack: false,
                 };
             },
 
@@ -80,6 +88,18 @@
 
             methods: {
                 onLoad() {
+                    this.isLoading = false;
+                },
+
+                onError(event) {
+                    if (this.fallback && ! this.hasFallenBack) {
+                        this.hasFallenBack = true;
+
+                        event.target.src = this.fallback;
+
+                        return;
+                    }
+
                     this.isLoading = false;
                 },
             },

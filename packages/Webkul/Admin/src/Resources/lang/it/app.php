@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Posizione',
                 'price' => 'Prezzo',
                 'regex' => 'Espressione Regolare',
-                'regex-info' => 'L\'espressione deve essere tra virgolette doppie.',
+                'regex-info' => 'L\'espressione deve essere delimitata da barre, ad esempio /^[0-9]+$/.',
                 'save-btn' => 'Salva Attributo',
                 'select' => 'Seleziona',
                 'select-type' => 'Seleziona Tipo di Attributo',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Posizione',
                 'price' => 'Prezzo',
                 'regex' => 'Espressione Regolare',
-                'regex-info' => 'L\'espressione deve essere tra virgolette doppie.',
+                'regex-info' => 'L\'espressione deve essere delimitata da barre, ad esempio /^[0-9]+$/.',
                 'save-btn' => 'Salva Attributo',
                 'select' => 'Seleziona',
                 'select-type' => 'Seleziona Tipo di Attributo',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Famiglia di Attributi',
             'attribute-product-error' => 'La famiglia è utilizzata nei prodotti.',
             'create-success' => 'Famiglia creata con successo.',
+            'default-delete-error' => 'La famiglia di attributi predefinita non può essere eliminata.',
             'delete-failed' => 'Errore durante l\'eliminazione della famiglia.',
             'delete-success' => 'Famiglia eliminata con successo.',
             'family' => 'Famiglia',
-            'last-delete-error' => 'Almeno una famiglia è richiesta.',
             'update-success' => 'Famiglia aggiornata con successo.',
             'user-define-error' => 'Impossibile eliminare la famiglia di attributi di sistema',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Aggiornato con successo',
                 ],
 
+                'campaign-associate' => 'Questo modello è utilizzato in una o più campagne.',
                 'delete-failed' => ':name Eliminazione non riuscita',
                 'delete-success' => 'Modello eliminato con successo',
                 'email-template' => 'Modello di Email',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Questo evento è utilizzato in una o più campagne.',
                 'delete-failed' => ':name Eliminazione non riuscita',
                 'delete-success' => 'Eventi Eliminati con Successo',
                 'edit-error' => 'L\'evento non può essere modificato',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Intelligenza Artificiale',
                 'ai-btn-info' => 'Genera Immagine',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Immagine',
                 'not-allowed-error' => 'Sono consentiti solo file immagine (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Aggiungi Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Sono consentiti solo file video (.mp4, .mov, .ogg ..).',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Assegna un nome descrittivo al file video.',

@@ -158,7 +158,7 @@
                 let queryParams = new URLSearchParams(window.location.search);
 
                 queryParams.forEach((value, filter) => {
-                    if (['sort', 'limit', 'mode'].includes(filter)) {
+                    if (this.isAvailable(filter, value)) {
                         this.filters.applied[filter] = value;
                     }
                 });
@@ -175,6 +175,18 @@
             },
 
             methods: {
+                isAvailable(filter, value) {
+                    if (! ['sort', 'limit', 'mode'].includes(filter)) {
+                        return false;
+                    }
+
+                    if (filter === 'sort') {
+                        return this.filters.available.sort.some((sort) => sort.value === value);
+                    }
+
+                    return this.filters.available[filter].some((available) => String(available) === value);
+                },
+
                 apply(type, value) {
                     this.filters.applied[type] = value;
 

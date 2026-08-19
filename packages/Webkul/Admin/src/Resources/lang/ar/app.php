@@ -1817,7 +1817,7 @@ return [
                 'position' => 'الموقع',
                 'price' => 'السعر',
                 'regex' => 'تعبير عادي',
-                'regex-info' => 'يجب أن تكون التعبيرات بين علامات اقتباس مزدوجة.',
+                'regex-info' => 'يجب أن يكون التعبير محاطًا بشرطتين مائلتين، مثل /^[0-9]+$/.',
                 'save-btn' => 'حفظ السمة',
                 'select' => 'اختيار',
                 'select-type' => 'نوع السمة المختارة',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'الموقع',
                 'price' => 'السعر',
                 'regex' => 'تعبير عادي',
-                'regex-info' => 'يجب أن تكون التعبيرات بين علامات اقتباس مزدوجة.',
+                'regex-info' => 'يجب أن يكون التعبير محاطًا بشرطتين مائلتين، مثل /^[0-9]+$/.',
                 'save-btn' => 'حفظ السمة',
                 'select' => 'اختيار',
                 'select-type' => 'نوع السمة المختارة',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'عائلة السمات',
             'attribute-product-error' => 'العائلة مستخدمة في المنتجات.',
             'create-success' => 'تم إنشاء العائلة بنجاح.',
+            'default-delete-error' => 'لا يمكن حذف عائلة السمات الافتراضية.',
             'delete-failed' => 'حدث خطأ أثناء حذف العائلة.',
             'delete-success' => 'تم حذف العائلة بنجاح.',
             'family' => 'العائلة',
-            'last-delete-error' => 'يجب وجود عائلة واحدة على الأقل.',
             'update-success' => 'تم تحديث العائلة بنجاح.',
             'user-define-error' => 'لا يمكن حذف عائلة السمات النظامية',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'تم التحديث بنجاح',
                 ],
 
+                'campaign-associate' => 'يُستخدم هذا القالب في حملة واحدة أو أكثر.',
                 'delete-failed' => 'فشل حذف :name',
                 'delete-success' => 'تم حذف القالب بنجاح',
                 'email-template' => 'قالب البريد الإلكتروني',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'يُستخدم هذا الحدث في حملة واحدة أو أكثر.',
                 'delete-failed' => 'فشل حذف :name',
                 'delete-success' => 'تم حذف الأحداث بنجاح',
                 'edit-error' => 'لا يمكن تعديل الحدث',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'الذكاء الاصطناعي',
                 'ai-btn-info' => 'إنشاء صورة',
                 'allowed-types' => 'png، jpeg، jpg',
+                'image' => 'صورة',
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'إضافة فيديو',
                 'allowed-types' => 'mp4، webm، mkv',
                 'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
+                'video' => 'فيديو',
 
                 'seo' => [
                     'info' => 'امنح ملف الفيديو اسمًا وصفيًا.',

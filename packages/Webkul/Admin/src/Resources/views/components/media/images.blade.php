@@ -1,4 +1,5 @@
 @php
+    use Illuminate\Database\Eloquent\Model;
     use Webkul\MagicAI\AiProvider;
 
     $enabledProviders = array_filter(explode(',', core()->getConfigData('magic_ai.admin_features.image_generation.providers') ?? ''));
@@ -19,13 +20,29 @@
     'metaName'         => '',
 ])
 
+@php
+    $uploadedImages = collect($uploadedImages)->map(function ($image) {
+        if (! $image instanceof Model) {
+            return $image;
+        }
+
+        $data = $image->toArray();
+
+        if (in_array('alt_text', $image->translatedAttributes ?? [])) {
+            $data['alt_text'] = $image->translate(core()->getRequestedLocaleCode())?->alt_text;
+        }
+
+        return $data;
+    })->values()->all();
+@endphp
+
 <v-media-images
     name="{{ $name }}"
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:show-placeholders="{{ $showPlaceholders ? 'true' : 'false' }}"
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
-    :uploaded-images='{{ json_encode($uploadedImages) }}'
+    :uploaded-images="@js($uploadedImages)"
     width="{{ $width }}"
     height="{{ $height }}"
     :errors="errors"
@@ -465,7 +482,7 @@
                         <input
                             type="text"
                             class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                            :placeholder="'@lang('admin::app.components.media.images.seo.alt-text-placeholder')'"
+                            :placeholder="@js(trans('admin::app.components.media.images.seo.alt-text-placeholder'))"
                             v-model="image.alt_text"
                         />
 
@@ -483,7 +500,7 @@
                         <input
                             type="text"
                             class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                            :placeholder="'@lang('admin::app.components.media.images.seo.file-name-placeholder')'"
+                            :placeholder="@js(trans('admin::app.components.media.images.seo.file-name-placeholder'))"
                             v-model="image.file_name"
                         />
 

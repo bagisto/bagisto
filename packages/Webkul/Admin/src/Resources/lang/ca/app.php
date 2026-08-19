@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Posició',
                 'price' => 'Preu',
                 'regex' => 'Expressió Regular',
-                'regex-info' => 'L\'expressió ha d\'estar entre cometes dobles.',
+                'regex-info' => 'L\'expressió ha d\'anar delimitada per barres, per exemple /^[0-9]+$/.',
                 'save-btn' => 'Guardar Atribut',
                 'select' => 'Seleccionar',
                 'select-type' => 'Tipus d\'Atribut de Selecció',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Posició',
                 'price' => 'Preu',
                 'regex' => 'Expressió Regular',
-                'regex-info' => 'L\'expressió ha d\'estar entre cometes dobles.',
+                'regex-info' => 'L\'expressió ha d\'anar delimitada per barres, per exemple /^[0-9]+$/.',
                 'save-btn' => 'Desar Atribut',
                 'select' => 'Seleccionar',
                 'select-type' => 'Tipus d\'Atribut de Selecció',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Família d\'Atributs',
             'attribute-product-error' => 'La família s\'utilitza en productes.',
             'create-success' => 'Família creada amb éxit.',
+            'default-delete-error' => 'La família d\'atributs per defecte no es pot suprimir.',
             'delete-failed' => 'S\'ha produït un error en eliminar la família.',
             'delete-success' => 'Família eliminada amb éxit.',
             'family' => 'Família',
-            'last-delete-error' => 'Es requereix almenys una família.',
             'update-success' => 'Família actualitzada amb éxit.',
             'user-define-error' => 'No es pot eliminar la família d\'atributs del sistema',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Actualizat exitosament',
                 ],
 
+                'campaign-associate' => 'Aquesta plantilla s\'utilitza en una o més campanyes.',
                 'delete-failed' => ':name Eliminació Fallida',
                 'delete-success' => 'Plantilla eliminada exitosament',
                 'email-template' => 'Plantilla de Correu Electrònic',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Aquest esdeveniment s\'utilitza en una o més campanyes.',
                 'delete-failed' => 'Eliminació de :name fallida',
                 'delete-success' => 'Esdeveniments eliminats amb éxit',
                 'edit-error' => 'No es pot editar l\'esdeveniment',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Màgia IA',
                 'ai-btn-info' => 'Generar Imatge',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Imatge',
                 'not-allowed-error' => 'Només es permeten arxius d\'imatge (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Afegir Vídeo',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Només es permeten arxius de vídeo (.mp4, .mov, .ogg ..).',
+                'video' => 'Vídeo',
 
                 'seo' => [
                     'info' => 'Doneu un nom descriptiu al fitxer de vídeo.',

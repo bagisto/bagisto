@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Position',
                 'price' => 'Price',
                 'regex' => 'Regex',
-                'regex-info' => 'Expression should be in double quotes.',
+                'regex-info' => 'Expression must be delimited by slashes, for example /^[0-9]+$/.',
                 'save-btn' => 'Save Attribute',
                 'select' => 'Select',
                 'select-type' => 'Select Attribute Type',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Position',
                 'price' => 'Price',
                 'regex' => 'Regex',
-                'regex-info' => 'Expression should be in double quotes.',
+                'regex-info' => 'Expression must be delimited by slashes, for example /^[0-9]+$/.',
                 'save-btn' => 'Save Attribute',
                 'select' => 'Select',
                 'select-type' => 'Select Attribute Type',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Attribute Family',
             'attribute-product-error' => 'family is used in products.',
             'create-success' => 'Family created successfully.',
+            'default-delete-error' => 'The default attribute family can not be deleted.',
             'delete-failed' => 'Error encountered while deleting Family.',
             'delete-success' => 'Family deleted successfully.',
             'family' => 'Family',
-            'last-delete-error' => 'At least one family is required.',
             'update-success' => 'Family updated successfully.',
             'user-define-error' => 'Can not delete system Attribute family',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Updated successfully',
                 ],
 
+                'campaign-associate' => 'This template is used in one or more campaigns.',
                 'delete-failed' => ':name Deleted Failed',
                 'delete-success' => 'Template Deleted successfully',
                 'email-template' => 'Email Template',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'This event is used in one or more campaigns.',
                 'delete-failed' => ':name Delete Failed',
                 'delete-success' => 'Events Deleted Successfully',
                 'edit-error' => 'Event can not be Edit',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Magic AI',
                 'ai-btn-info' => 'Generate Image',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Image',
                 'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Add Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Give the video file a descriptive name.',

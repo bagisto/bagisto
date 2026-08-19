@@ -293,4 +293,29 @@ class Downloadable extends AbstractType
     {
         return app(DownloadableIndexer::class);
     }
+
+    /**
+     * Copy relationships.
+     *
+     * @param  \Webkul\Product\Models\Product  $product
+     * @return void
+     */
+    protected function copyRelationships($product)
+    {
+        parent::copyRelationships($product);
+
+        $attributesToSkip = config('products.copy.skip_attributes') ?? [];
+
+        if (! in_array('downloadable_links', $attributesToSkip)) {
+            foreach ($this->product->downloadable_links as $downloadableLink) {
+                $product->downloadable_links()->save($downloadableLink->replicateWithTranslations());
+            }
+        }
+
+        if (! in_array('downloadable_samples', $attributesToSkip)) {
+            foreach ($this->product->downloadable_samples as $downloadableSample) {
+                $product->downloadable_samples()->save($downloadableSample->replicateWithTranslations());
+            }
+        }
+    }
 }

@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Konum',
                 'price' => 'Fiyat',
                 'regex' => 'Regex',
-                'regex-info' => 'İfade çift tırnak içinde olmalıdır.',
+                'regex-info' => 'İfade eğik çizgilerle sınırlandırılmalıdır, örneğin /^[0-9]+$/.',
                 'save-btn' => 'Özelliği Kaydet',
                 'select' => 'Seçenek',
                 'select-type' => 'Seçenek Özellik Türü',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Konum',
                 'price' => 'Fiyat',
                 'regex' => 'Regex',
-                'regex-info' => 'İfade çift tırnak içinde olmalıdır.',
+                'regex-info' => 'İfade eğik çizgilerle sınırlandırılmalıdır, örneğin /^[0-9]+$/.',
                 'save-btn' => 'Özelliği Kaydet',
                 'select' => 'Seçenek',
                 'select-type' => 'Seçenek Özellik Türü',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Özellik Ailesi',
             'attribute-product-error' => 'Aile ürünlerde kullanılıyor.',
             'create-success' => 'Aile başarıyla oluşturuldu.',
+            'default-delete-error' => 'Varsayılan öznitelik ailesi silinemez.',
             'delete-failed' => 'Aile silme işlemi sırasında bir hata oluştu.',
             'delete-success' => 'Aile başarıyla silindi.',
             'family' => 'Aile',
-            'last-delete-error' => 'En az bir aile gereklidir.',
             'update-success' => 'Aile başarıyla güncellendi.',
             'user-define-error' => 'Sistem Özellik Ailesi silinemez',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Başarıyla güncellendi',
                 ],
 
+                'campaign-associate' => 'Bu şablon bir veya daha fazla kampanyada kullanılıyor.',
                 'delete-failed' => ':name Silme Başarısız',
                 'delete-success' => 'Şablon başarıyla silindi',
                 'email-template' => 'E-posta Şablonu',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Bu etkinlik bir veya daha fazla kampanyada kullanılıyor.',
                 'delete-failed' => ':name Silme Başarısız',
                 'delete-success' => 'Etkinlikler Başarıyla Silindi',
                 'edit-error' => 'Etkinlik Düzenlenemiyor',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Sihirli AI',
                 'ai-btn-info' => 'Resim Oluştur',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Görsel',
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Video Ekle',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Video dosyasına açıklayıcı bir ad verin.',

@@ -1817,7 +1817,7 @@ return [
                 'position' => '位置',
                 'price' => '价格',
                 'regex' => '正则表达式',
-                'regex-info' => '表达式应该用双引号括起来。',
+                'regex-info' => '表达式必须用斜杠括起来，例如 /^[0-9]+$/。',
                 'save-btn' => '保存属性',
                 'select' => '选择',
                 'select-type' => '选择属性类型',
@@ -1891,7 +1891,7 @@ return [
                 'position' => '位置',
                 'price' => '价格',
                 'regex' => '正则表达式',
-                'regex-info' => '表达式应该用双引号括起来。',
+                'regex-info' => '表达式必须用斜杠括起来，例如 /^[0-9]+$/。',
                 'save-btn' => '保存属性',
                 'select' => '选择',
                 'select-type' => '选择属性类型',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => '属性家族',
             'attribute-product-error' => '家族在产品中使用。',
             'create-success' => '成功创建家族。',
+            'default-delete-error' => '无法删除默认属性族。',
             'delete-failed' => '删除家族时遇到错误。',
             'delete-success' => '成功删除家族。',
             'family' => '属性家族',
-            'last-delete-error' => '至少需要一个家族。',
             'update-success' => '成功更新家族。',
             'user-define-error' => '无法删除系统属性家族。',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => '更新成功',
                 ],
 
+                'campaign-associate' => '该模板正在一个或多个营销活动中使用。',
                 'delete-failed' => ':name 删除失败',
                 'delete-success' => '模板删除成功',
                 'email-template' => '电子邮件模板',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => '该事件正在一个或多个营销活动中使用。',
                 'delete-failed' => ':name 删除失败',
                 'delete-success' => '事件删除成功',
                 'edit-error' => '事件无法编辑',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => '魔法 AI',
                 'ai-btn-info' => '生成图像',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => '图片',
                 'not-allowed-error' => '仅允许图像文件（.jpeg、.jpg、.png 等）。',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => '添加视频',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => '仅允许视频文件（.mp4、.mov、.ogg 等）。',
+                'video' => '视频',
 
                 'seo' => [
                     'info' => '为视频文件取一个描述性的名称。',

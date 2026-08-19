@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Positie',
                 'price' => 'Prijs',
                 'regex' => 'Regex',
-                'regex-info' => 'Expressie moet tussen dubbele aanhalingstekens staan.',
+                'regex-info' => 'Expressie moet tussen schuine strepen staan, bijvoorbeeld /^[0-9]+$/.',
                 'save-btn' => 'Attribuut Opslaan',
                 'select' => 'Selecteren',
                 'select-type' => 'Selecteer Attribuuttype',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Positie',
                 'price' => 'Prijs',
                 'regex' => 'Regex',
-                'regex-info' => 'Expressie moet tussen dubbele aanhalingstekens staan.',
+                'regex-info' => 'Expressie moet tussen schuine strepen staan, bijvoorbeeld /^[0-9]+$/.',
                 'save-btn' => 'Attribuut Opslaan',
                 'select' => 'Selecteren',
                 'select-type' => 'Selecteer Attribuuttype',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Attribuutfamilie',
             'attribute-product-error' => 'Familie wordt gebruikt in producten.',
             'create-success' => 'Familie succesvol aangemaakt.',
+            'default-delete-error' => 'De standaard attributenfamilie kan niet worden verwijderd.',
             'delete-failed' => 'Fout opgetreden bij het verwijderen van de familie.',
             'delete-success' => 'Familie succesvol verwijderd.',
             'family' => 'Familie',
-            'last-delete-error' => 'Minstens één familie is vereist.',
             'update-success' => 'Familie succesvol bijgewerkt.',
             'user-define-error' => 'Kan systeemattribuutfamilie niet verwijderen.',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Succesvol bijgewerkt',
                 ],
 
+                'campaign-associate' => 'Deze sjabloon wordt in een of meer campagnes gebruikt.',
                 'delete-failed' => ':name Verwijderen Mislukt',
                 'delete-success' => 'Sjabloon succesvol verwijderd',
                 'email-template' => 'E-mail sjabloon',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Deze gebeurtenis wordt in een of meer campagnes gebruikt.',
                 'delete-failed' => ':name Verwijderen mislukt',
                 'delete-success' => 'Evenementen succesvol verwijderd',
                 'edit-error' => 'Evenement kan niet worden bewerkt',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Magische AI',
                 'ai-btn-info' => 'Afbeelding genereren',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Afbeelding',
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Video Toevoegen',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Geef het videobestand een beschrijvende naam.',

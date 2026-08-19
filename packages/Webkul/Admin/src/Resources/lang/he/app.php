@@ -1817,7 +1817,7 @@ return [
                 'position' => 'מיקום',
                 'price' => 'מחיר',
                 'regex' => 'Regex',
-                'regex-info' => 'הביטוי צריך להיות בציטוטיים כפולים.',
+                'regex-info' => 'הביטוי חייב להיות תחום בלוכסנים, לדוגמה /^[0-9]+$/.',
                 'save-btn' => 'שמור תכונה',
                 'select' => 'בחירה',
                 'select-type' => 'סוג תכונה',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'מיקום',
                 'price' => 'מחיר',
                 'regex' => 'Regex',
-                'regex-info' => 'הביטוי צריך להיות בציטוטיים כפולים.',
+                'regex-info' => 'הביטוי חייב להיות תחום בלוכסנים, לדוגמה /^[0-9]+$/.',
                 'save-btn' => 'שמור מאפיין',
                 'select' => 'בחירה',
                 'select-type' => 'סוג מאפיין בחירה',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'משפחת מאפיינים',
             'attribute-product-error' => 'משפחה בשימוש במוצרים.',
             'create-success' => 'משפחה נוצרה בהצלחה.',
+            'default-delete-error' => 'לא ניתן למחוק את משפחת המאפיינים המוגדרת כברירת מחדל.',
             'delete-failed' => 'אירעה שגיאה במהלך מחיקת המשפחה.',
             'delete-success' => 'משפחה נמחקה בהצלחה.',
             'family' => 'משפחה',
-            'last-delete-error' => 'נדרשת לפחות משפחה אחת.',
             'update-success' => 'משפחה עודכנה בהצלחה.',
             'user-define-error' => 'אין אפשרות למחוק משפחת מאפיינים מערכתית',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'עודכן בהצלחה',
                 ],
 
+                'campaign-associate' => 'תבנית זו נמצאת בשימוש בקמפיין אחד או יותר.',
                 'delete-failed' => ':name נמחקה בהצלחה',
                 'delete-success' => 'תבנית נמחקה בהצלחה',
                 'email-template' => 'תבנית דוא"ל',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'אירוע זה נמצא בשימוש בקמפיין אחד או יותר.',
                 'delete-failed' => 'מחיקת :name נכשלה',
                 'delete-success' => 'האירועים נמחקו בהצלחה',
                 'edit-error' => 'לא ניתן לערוך את האירוע',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'בינה מלאכותית',
                 'ai-btn-info' => 'יצירת תמונה',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'תמונה',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'הוסף וידאו',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
+                'video' => 'וידאו',
 
                 'seo' => [
                     'info' => 'תנו לקובץ הווידאו שם תיאורי.',

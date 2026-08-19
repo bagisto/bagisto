@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Posisi',
                 'price' => 'Harga',
                 'regex' => 'Regex',
-                'regex-info' => 'Ekspresi harus berada dalam tanda kutip ganda.',
+                'regex-info' => 'Ekspresi harus diapit oleh garis miring, misalnya /^[0-9]+$/.',
                 'save-btn' => 'Simpan Atribut',
                 'select' => 'Pilih',
                 'select-type' => 'Pilih Tipe Atribut',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Posisi',
                 'price' => 'Harga',
                 'regex' => 'Regex',
-                'regex-info' => 'Ekspresi harus berada dalam tanda kutip ganda.',
+                'regex-info' => 'Ekspresi harus diapit oleh garis miring, misalnya /^[0-9]+$/.',
                 'save-btn' => 'Simpan Atribut',
                 'select' => 'Pilih',
                 'select-type' => 'Pilih Tipe Atribut',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Keluarga Atribut',
             'attribute-product-error' => 'Keluarga ini digunakan dalam produk.',
             'create-success' => 'Keluarga atribut berhasil dibuat.',
+            'default-delete-error' => 'Famili atribut bawaan tidak dapat dihapus.',
             'delete-failed' => 'Terjadi kesalahan saat menghapus keluarga atribut.',
             'delete-success' => 'Keluarga atribut berhasil dihapus.',
             'family' => 'Keluarga',
-            'last-delete-error' => 'Setidaknya satu keluarga atribut harus ada.',
             'update-success' => 'Keluarga atribut berhasil diperbarui.',
             'user-define-error' => 'Tidak dapat menghapus keluarga atribut sistem.',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Berhasil diperbarui.',
                 ],
 
+                'campaign-associate' => 'Templat ini digunakan dalam satu atau beberapa kampanye.',
                 'delete-failed' => 'Gagal menghapus :name',
                 'delete-success' => 'Template berhasil dihapus',
                 'email-template' => 'Template Email',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Acara ini digunakan dalam satu atau beberapa kampanye.',
                 'delete-failed' => 'Gagal menghapus :name',
                 'delete-success' => 'Acara berhasil dihapus',
                 'edit-error' => 'Acara tidak dapat diedit',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'AI Magic',
                 'ai-btn-info' => 'Hasilkan Gambar',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Gambar',
                 'not-allowed-error' => 'Hanya file gambar (.jpeg, .jpg, .png, dll) yang diperbolehkan.',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Tambah Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Hanya file video (.mp4, .mov, .ogg, dll) yang diperbolehkan.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Beri nama yang deskriptif pada berkas video.',

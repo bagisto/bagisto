@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Position',
                 'price' => 'Preis',
                 'regex' => 'Regex',
-                'regex-info' => 'Der Ausdruck sollte in doppelten Anführungszeichen stehen.',
+                'regex-info' => 'Der Ausdruck muss von Schrägstrichen eingeschlossen sein, zum Beispiel /^[0-9]+$/.',
                 'save-btn' => 'Attribut speichern',
                 'select' => 'Auswählen',
                 'select-type' => 'Attributtyp auswählen',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Position',
                 'price' => 'Preis',
                 'regex' => 'Regex',
-                'regex-info' => 'Der Ausdruck sollte in doppelten Anführungszeichen stehen.',
+                'regex-info' => 'Der Ausdruck muss von Schrägstrichen eingeschlossen sein, zum Beispiel /^[0-9]+$/.',
                 'save-btn' => 'Attribut speichern',
                 'select' => 'Auswählen',
                 'select-type' => 'Attributtyp auswählen',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Attributfamilie',
             'attribute-product-error' => 'Die Familie wird in Produkten verwendet.',
             'create-success' => 'Familie erfolgreich erstellt.',
+            'default-delete-error' => 'Die Standard-Attributfamilie kann nicht gelöscht werden.',
             'delete-failed' => 'Fehler beim Löschen der Familie aufgetreten.',
             'delete-success' => 'Familie erfolgreich gelöscht.',
             'family' => 'Familie',
-            'last-delete-error' => 'Mindestens eine Familie ist erforderlich.',
             'update-success' => 'Familie erfolgreich aktualisiert.',
             'user-define-error' => 'Systemattributfamilie kann nicht gelöscht werden.',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Erfolgreich aktualisiert',
                 ],
 
+                'campaign-associate' => 'Diese Vorlage wird in einer oder mehreren Kampagnen verwendet.',
                 'delete-failed' => ':name konnte nicht gelöscht werden',
                 'delete-success' => 'Vorlage erfolgreich gelöscht',
                 'email-template' => 'E-Mail-Vorlage',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Dieses Ereignis wird in einer oder mehreren Kampagnen verwendet.',
                 'delete-failed' => ':name Löschen fehlgeschlagen',
                 'delete-success' => 'Veranstaltungen erfolgreich gelöscht',
                 'edit-error' => 'Veranstaltung kann nicht bearbeitet werden',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Magie KI',
                 'ai-btn-info' => 'Bild generieren',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Bild',
                 'not-allowed-error' => 'Nur Bilddateien (.jpeg, .jpg, .png, ..) sind erlaubt.',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Video hinzufügen',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Nur Videodateien (.mp4, .mov, .ogg ..) sind erlaubt.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Geben Sie der Videodatei einen aussagekräftigen Namen.',

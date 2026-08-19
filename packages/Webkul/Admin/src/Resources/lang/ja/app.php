@@ -1817,7 +1817,7 @@ return [
                 'position' => '位置',
                 'price' => '価格',
                 'regex' => '正規表現',
-                'regex-info' => '式はダブルクォートで囲む必要があります。',
+                'regex-info' => '式はスラッシュで囲む必要があります。例: /^[0-9]+$/',
                 'save-btn' => '属性を保存',
                 'select' => '選択',
                 'select-type' => '属性タイプを選択',
@@ -1891,7 +1891,7 @@ return [
                 'position' => '位置',
                 'price' => '価格',
                 'regex' => '正規表現',
-                'regex-info' => '式はダブルクォートで囲む必要があります。',
+                'regex-info' => '式はスラッシュで囲む必要があります。例: /^[0-9]+$/',
                 'save-btn' => '属性を保存',
                 'select' => '選択',
                 'select-type' => '属性タイプを選択',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => '属性ファミリー',
             'attribute-product-error' => 'ファミリーは製品で使用されています。',
             'create-success' => 'ファミリーが正常に作成されました。',
+            'default-delete-error' => '既定の属性ファミリーは削除できません。',
             'delete-failed' => 'ファミリーの削除中にエラーが発生しました。',
             'delete-success' => 'ファミリーが正常に削除されました。',
             'family' => 'ファミリー',
-            'last-delete-error' => '少なくとも1つのファミリーが必要です。',
             'update-success' => 'ファミリーが正常に更新されました。',
             'user-define-error' => 'システム属性ファミリーを削除できません',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => '正常に更新されました',
                 ],
 
+                'campaign-associate' => 'このテンプレートは 1 つ以上のキャンペーンで使用されています。',
                 'delete-failed' => ':name 削除に失敗しました',
                 'delete-success' => 'テンプレートが正常に削除されました',
                 'email-template' => 'メールテンプレート',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'このイベントは 1 つ以上のキャンペーンで使用されています。',
                 'delete-failed' => ':name の削除に失敗しました',
                 'delete-success' => 'イベントが正常に削除されました',
                 'edit-error' => 'イベントは編集できません',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'マジックAI',
                 'ai-btn-info' => '画像生成',
                 'allowed-types' => 'png、jpeg、jpg',
+                'image' => '画像',
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'ビデオを追加',
                 'allowed-types' => 'mp4、webm、mkv',
                 'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
+                'video' => '動画',
 
                 'seo' => [
                     'info' => '動画ファイルに内容が分かる名前を付けます。',

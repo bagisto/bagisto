@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Pozycja',
                 'price' => 'Cena',
                 'regex' => 'Wyrażenie regularne (Regex)',
-                'regex-info' => 'Wprowadź poprawne wyrażenie regularne, aby zwalidować to pole.',
+                'regex-info' => 'Wyrażenie musi być ujęte w ukośniki, na przykład /^[0-9]+$/.',
                 'save-btn' => 'Zapisz atrybut',
                 'select' => 'Lista rozwijana',
                 'select-type' => 'Wybierz typ pola',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Pozycja',
                 'price' => 'Cena',
                 'regex' => 'Wyrażenie regularne (Regex)',
-                'regex-info' => 'Wprowadź poprawne wyrażenie regularne, aby zwalidować to pole.',
+                'regex-info' => 'Wyrażenie musi być ujęte w ukośniki, na przykład /^[0-9]+$/.',
                 'save-btn' => 'Zapisz atrybut',
                 'select' => 'Lista rozwijana',
                 'select-type' => 'Wybierz typ pola',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Zestaw atrybutów',
             'attribute-product-error' => 'Operacja niedozwolona. Ten zestaw atrybutów jest przypisany do istniejących produktów.',
             'create-success' => 'Pomyślnie utworzono zestaw atrybutów.',
+            'default-delete-error' => 'Domyślnej rodziny atrybutów nie można usunąć.',
             'delete-failed' => 'Wystąpił błąd podczas usuwania zestawu atrybutów.',
             'delete-success' => 'Pomyślnie usunięto zestaw atrybutów.',
             'family' => 'Zestaw atrybutów',
-            'last-delete-error' => 'Operacja niedozwolona. Sklep musi posiadać co najmniej jeden aktywny zestaw atrybutów.',
             'update-success' => 'Pomyślnie zaktualizowano zestaw atrybutów.',
             'user-define-error' => 'Operacja niedozwolona. Nie można usunąć systemowego zestawu atrybutów.',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Zaktualizowano pomyślnie',
                 ],
 
+                'campaign-associate' => 'Ten szablon jest używany w co najmniej jednej kampanii.',
                 'delete-failed' => ':name Usunięcie nie powiodło się',
                 'delete-success' => 'Szablon usunięty pomyślnie',
                 'email-template' => 'Szablon emaila',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'To wydarzenie jest używane w co najmniej jednej kampanii.',
                 'delete-failed' => 'Usuwanie :name nie powiodło się',
                 'delete-success' => 'Wydarzenia usunięte pomyślnie',
                 'edit-error' => 'Nie można edytować wydarzenia',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Magia AI',
                 'ai-btn-info' => 'Generuj obraz',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Obraz',
                 'not-allowed-error' => 'Dozwolone są tylko pliki graficzne (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Dodaj film',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Dozwolone są tylko pliki wideo (.mp4, .mov, .ogg ..).',
+                'video' => 'Wideo',
 
                 'seo' => [
                     'info' => 'Nadaj plikowi wideo opisową nazwę.',

@@ -8,5 +8,6 @@ return [
     'decimal' => ':attribute muss gültig sein.',
     'phone-number' => 'Das :Attribut muss eine gültige Telefonnummer sein.',
     'postcode' => ':attribute muss eine gültige Postleitzahl sein.',
+    'regex' => ':attribute muss ein gültiger regulärer Ausdruck sein, einschließlich der Begrenzer.',
     'slug' => 'Der :attribute-Wert muss eine gültige URL sein.',
 ];

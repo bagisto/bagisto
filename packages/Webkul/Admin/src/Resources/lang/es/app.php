@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Posición',
                 'price' => 'Precio',
                 'regex' => 'Expresión Regular',
-                'regex-info' => 'La expresión debe estar entre comillas dobles.',
+                'regex-info' => 'La expresión debe estar delimitada por barras, por ejemplo /^[0-9]+$/.',
                 'save-btn' => 'Guardar Atributo',
                 'select' => 'Seleccionar',
                 'select-type' => 'Tipo de Atributo de Selección',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Posición',
                 'price' => 'Precio',
                 'regex' => 'Expresión Regular',
-                'regex-info' => 'La expresión debe estar entre comillas dobles.',
+                'regex-info' => 'La expresión debe estar delimitada por barras, por ejemplo /^[0-9]+$/.',
                 'save-btn' => 'Guardar Atributo',
                 'select' => 'Seleccionar',
                 'select-type' => 'Tipo de Atributo de Selección',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Familia de Atributos',
             'attribute-product-error' => 'La familia se utiliza en productos.',
             'create-success' => 'Familia creada con éxito.',
+            'default-delete-error' => 'La familia de atributos predeterminada no se puede eliminar.',
             'delete-failed' => 'Se produjo un error al eliminar la familia.',
             'delete-success' => 'Familia eliminada con éxito.',
             'family' => 'Familia',
-            'last-delete-error' => 'Se requiere al menos una familia.',
             'update-success' => 'Familia actualizada con éxito.',
             'user-define-error' => 'No se puede eliminar la familia de atributos del sistema',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Actualizado exitosamente',
                 ],
 
+                'campaign-associate' => 'Esta plantilla se utiliza en una o más campañas.',
                 'delete-failed' => ':name Eliminación Fallida',
                 'delete-success' => 'Plantilla eliminada exitosamente',
                 'email-template' => 'Plantilla de Correo Electrónico',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Este evento se utiliza en una o más campañas.',
                 'delete-failed' => 'Eliminación de :name Fallida',
                 'delete-success' => 'Eventos Eliminados Exitosamente',
                 'edit-error' => 'No se puede editar el Evento',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Magia IA',
                 'ai-btn-info' => 'Generar Imagen',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Imagen',
                 'not-allowed-error' => 'Solo se permiten archivos de imagen (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Agregar Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Solo se permiten archivos de video (.mp4, .mov, .ogg ..).',
+                'video' => 'Vídeo',
 
                 'seo' => [
                     'info' => 'Dale un nombre descriptivo al archivo de vídeo.',

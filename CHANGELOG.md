@@ -50,9 +50,33 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added the missing Romanian translations for PhonePe.
 
+- #11432 [fixed] - Fixed an alt text over 255 characters rejecting the whole product save with nothing shown on screen; the limit is now reported against the Alt Text field.
+
+- #11431 [fixed] - Fixed Replace Image discarding the alt text of every other locale. Replacing a file now updates the existing image instead of creating a new one and deleting the original.
+
+- #11430 [fixed] - Fixed the product image panel not rendering on French and Italian installs, where an apostrophe in the translated placeholder ended the JavaScript string the template was built from.
+
+- #11429 [fixed] - Fixed saving a product on a translated locale overwriting that locale's alt text with the default locale's, because the field was populated from the wrong locale.
+
+- #11428 [fixed] - Fixed alt text saved on a non-default locale never being shown again. The drawer read the alt text of the application locale rather than the one chosen in the switcher.
+
+- #11427 [fixed] - Fixed an image whose file is missing leaving the loading shimmer running forever. A failed load now clears the shimmer and falls back to the product placeholder.
+
+- #11421 [fixed] - Fixed a non-numeric "products per page" taking every catalogue page down with it. The field now accepts only a comma separated list of whole numbers, and the toolbar ignores a page size it does not offer, including one arriving in the address bar.
+
+- #11420 [fixed] - Fixed deleting an email template or a marketing event a campaign uses, which succeeded and left the campaign behind with nothing to send. Either is now refused while a campaign still points at it, the way a customer group with customers is.
+
+- #11419 [fixed] - Fixed the default attribute family being deletable, which then broke the create family screen for good because it is built from that family. Deleting it is now refused, its code is no longer taken from the request on update, and the screen falls back to another family on a store that had already lost it.
+
+- #11418 [fixed] - Fixed a customer being unable to save their profile when the same email address exists on another channel. Registration already scoped the check by channel while the profile and admin edits did not, so an address in use elsewhere blocked an unrelated account.
+
+- #11417 [fixed] - Fixed an attribute accepting a regular expression that is not one, which left the product create and edit screens blank because the pattern is written into the form's rules. It is now checked as it is typed and again when saved, the create screen keeps it after a rejection, and the edit screen shows the one stored.
+
+- #11416 [fixed] - Fixed copying a downloadable or booking product losing everything that makes it that type. Download links and samples now come across with their titles, as do the booking settings and the slots or tickets they are sold by.
+
 - #11414 [fixed] - Fixed the product listing keeping the image that was uploaded first after the images had been reordered on the product, rather than the one now sitting at the front. The listing went by the order the images were added instead of the order they were arranged in.
 
-- #11413 [fixed] - Fixed deleting several RMA reasons, rules or custom fields at once reporting a failure when one of them had already been deleted elsewhere — while quietly deleting the ones listed before it. Whatever is still there is now deleted and the rest passed over, and the reply says how many of each. Custom fields also went without any check on what was submitted, which they now have in common with the rest.
+- #11413 [fixed] - Fixed deleting several RMA reasons, rules or custom fields at once reporting a failure when one had already been deleted elsewhere, while quietly deleting the ones listed before it. Whatever is still there is now deleted and the rest passed over, and custom fields validate what was submitted like the others.
 
 - #11412 [fixed] - Fixed the EU withdrawals listing breaking when filtered by customer email or status, or when searched, leaving a list that only a reload recovered. Both columns are named the same on the order the withdrawal is joined to, so the database could not tell which was meant and refused the query.
 

@@ -13,7 +13,7 @@
     v-bind:allow-multiple="{{ $allowMultiple ? 'true' : 'false' }}"
     v-bind:enable-seo="{{ $enableSeo ? 'true' : 'false' }}"
     meta-name="{{ $metaName }}"
-    :uploaded-videos='{{ json_encode($uploadedVideos) }}'
+    :uploaded-videos="@js($uploadedVideos)"
     width="{{ $width }}"
     height="{{ $height }}"
     :errors="errors"
@@ -188,7 +188,7 @@
                         <input
                             type="text"
                             class="w-full rounded-md border px-3 py-2.5 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400"
-                            :placeholder="'@lang('admin::app.components.media.images.seo.file-name-placeholder')'"
+                            :placeholder="@js(trans('admin::app.components.media.images.seo.file-name-placeholder'))"
                             v-model="video.file_name"
                         />
 

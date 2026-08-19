@@ -1817,7 +1817,7 @@ return [
                 'position' => 'موقعیت',
                 'price' => 'قیمت',
                 'regex' => 'عبارت باقاعده (Regex)',
-                'regex-info' => 'عبارت باید در دو نقطه‌گذاری دوتایی باشد.',
+                'regex-info' => 'عبارت باید با اسلش محصور شود، برای مثال /^[0-9]+$/.',
                 'save-btn' => 'ذخیره ویژگی',
                 'select' => 'انتخابی',
                 'select-type' => 'نوع ویژگی انتخابی',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'موقعیت',
                 'price' => 'قیمت',
                 'regex' => 'عبارت باقاعده (Regex)',
-                'regex-info' => 'عبارت باید در دو نقطه‌گذاری دوتایی باشد.',
+                'regex-info' => 'عبارت باید با اسلش محصور شود، برای مثال /^[0-9]+$/.',
                 'save-btn' => 'ذخیره ویژگی',
                 'select' => 'انتخابی',
                 'select-type' => 'نوع ویژگی انتخابی',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'خانواده ویژگی',
             'attribute-product-error' => 'این خانواده در محصولات استفاده شده است.',
             'create-success' => 'خانواده با موفقیت ایجاد شد.',
+            'default-delete-error' => 'خانواده ویژگی پیش‌فرض قابل حذف نیست.',
             'delete-failed' => 'خطا در حذف خانواده.',
             'delete-success' => 'خانواده با موفقیت حذف شد.',
             'family' => 'خانواده',
-            'last-delete-error' => 'حداقل یک خانواده لازم است.',
             'update-success' => 'خانواده با موفقیت به‌روزرسانی شد.',
             'user-define-error' => 'نمی‌توان خانواده ویژگی سیستمی را حذف کرد',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'با موفقیت به‌روزرسانی شد',
                 ],
 
+                'campaign-associate' => 'این قالب در یک یا چند کمپین استفاده می‌شود.',
                 'delete-failed' => ':name حذف نشد',
                 'delete-success' => 'قالب با موفقیت حذف شد',
                 'email-template' => 'قالب ایمیل',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'این رویداد در یک یا چند کمپین استفاده می‌شود.',
                 'delete-failed' => ':name حذف نشد',
                 'delete-success' => 'رویدادها با موفقیت حذف شدند',
                 'edit-error' => 'رویداد قابل ویرایش نمی‌باشد',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'هوش مصنوعی',
                 'ai-btn-info' => 'تولید تصویر',
                 'allowed-types' => 'png، jpeg، jpg',
+                'image' => 'تصویر',
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'افزودن ویدیو',
                 'allowed-types' => 'mp4، webm، mkv',
                 'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .ogg ..) مجاز هستند.',
+                'video' => 'ویدیو',
 
                 'seo' => [
                     'info' => 'به فایل ویدیویی یک نام توصیفی بدهید.',

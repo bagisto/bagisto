@@ -1817,7 +1817,7 @@ return [
                 'position' => 'Posição',
                 'price' => 'Preço',
                 'regex' => 'Expressão Regular (Regex)',
-                'regex-info' => 'A expressão deve estar entre aspas duplas.',
+                'regex-info' => 'A expressão deve estar delimitada por barras, por exemplo /^[0-9]+$/.',
                 'save-btn' => 'Salvar Atributo',
                 'select' => 'Seleção',
                 'select-type' => 'Selecionar Tipo de Atributo',
@@ -1891,7 +1891,7 @@ return [
                 'position' => 'Posição',
                 'price' => 'Preço',
                 'regex' => 'Expressão Regular (Regex)',
-                'regex-info' => 'A expressão deve estar entre aspas duplas.',
+                'regex-info' => 'A expressão deve estar delimitada por barras, por exemplo /^[0-9]+$/.',
                 'save-btn' => 'Salvar Atributo',
                 'select' => 'Seleção',
                 'select-type' => 'Selecionar Tipo de Atributo',
@@ -2100,10 +2100,10 @@ return [
             'attribute-family' => 'Família de Atributos',
             'attribute-product-error' => 'A família é usada em produtos.',
             'create-success' => 'Família criada com sucesso.',
+            'default-delete-error' => 'A família de atributos padrão não pode ser excluída.',
             'delete-failed' => 'Erro ao excluir a Família.',
             'delete-success' => 'Família excluída com sucesso.',
             'family' => 'Família',
-            'last-delete-error' => 'Pelo menos uma família é necessária.',
             'update-success' => 'Família atualizada com sucesso.',
             'user-define-error' => 'Não é possível excluir a família de atributos do sistema.',
         ],
@@ -2529,6 +2529,7 @@ return [
                     'update-success' => 'Atualizado com sucesso',
                 ],
 
+                'campaign-associate' => 'Este modelo é usado em uma ou mais campanhas.',
                 'delete-failed' => 'Falha ao excluir :name',
                 'delete-success' => 'Modelo excluído com sucesso',
                 'email-template' => 'Modelo de Email',
@@ -2632,6 +2633,7 @@ return [
                     ],
                 ],
 
+                'campaign-associate' => 'Este evento é usado em uma ou mais campanhas.',
                 'delete-failed' => 'Falha ao excluir :name',
                 'delete-success' => 'Eventos excluídos com sucesso',
                 'edit-error' => 'Não é possível editar o evento',
@@ -5690,6 +5692,7 @@ return [
                 'ai-add-image-btn' => 'Magia IA',
                 'ai-btn-info' => 'Gerar Imagem',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Imagem',
                 'not-allowed-error' => 'Apenas arquivos de imagem (.jpeg, .jpg, .png, ..) são permitidos.',
 
                 'ai-generation' => [
@@ -5741,6 +5744,7 @@ return [
                 'add-video-btn' => 'Adicionar Vídeo',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Apenas arquivos de vídeo (.mp4, .mov, .ogg ..) são permitidos.',
+                'video' => 'Vídeo',
 
                 'seo' => [
                     'info' => 'Dê um nome descritivo ao arquivo de vídeo.',
