@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'אירעה שגיאה במהלך מחיקת המשפחה.',
             'delete-success' => 'משפחה נמחקה בהצלחה.',
             'family' => 'משפחה',
-            'last-delete-error' => 'נדרשת לפחות משפחה אחת.',
             'update-success' => 'משפחה עודכנה בהצלחה.',
             'user-define-error' => 'אין אפשרות למחוק משפחת מאפיינים מערכתית',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'בינה מלאכותית',
                 'ai-btn-info' => 'יצירת תמונה',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'תמונה',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי תמונה (.jpeg, .jpg, .png, ..)',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'הוסף וידאו',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'ניתן להעלות רק קבצי וידאו (.mp4, .mov, .ogg ..)',
+                'video' => 'וידאו',
 
                 'seo' => [
                     'info' => 'תנו לקובץ הווידאו שם תיאורי.',

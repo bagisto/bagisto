@@ -79,6 +79,7 @@
             tabindex="0"
             @click="isImageZooming = !isImageZooming"
             @load="onMediaLoad()"
+            v-on:error="onMediaError($event)"
             fetchpriority="high"
         />
 

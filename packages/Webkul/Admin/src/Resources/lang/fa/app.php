@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'خطا در حذف خانواده.',
             'delete-success' => 'خانواده با موفقیت حذف شد.',
             'family' => 'خانواده',
-            'last-delete-error' => 'حداقل یک خانواده لازم است.',
             'update-success' => 'خانواده با موفقیت به‌روزرسانی شد.',
             'user-define-error' => 'نمی‌توان خانواده ویژگی سیستمی را حذف کرد',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'هوش مصنوعی',
                 'ai-btn-info' => 'تولید تصویر',
                 'allowed-types' => 'png، jpeg، jpg',
+                'image' => 'تصویر',
                 'not-allowed-error' => 'فقط فایل‌های تصویری (.jpeg، .jpg، .png، ..) مجاز هستند.',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'افزودن ویدیو',
                 'allowed-types' => 'mp4، webm، mkv',
                 'not-allowed-error' => 'فقط فایل‌های ویدیویی (.mp4، .mov، .ogg ..) مجاز هستند.',
+                'video' => 'ویدیو',
 
                 'seo' => [
                     'info' => 'به فایل ویدیویی یک نام توصیفی بدهید.',

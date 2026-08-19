@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Erro ao excluir a Família.',
             'delete-success' => 'Família excluída com sucesso.',
             'family' => 'Família',
-            'last-delete-error' => 'Pelo menos uma família é necessária.',
             'update-success' => 'Família atualizada com sucesso.',
             'user-define-error' => 'Não é possível excluir a família de atributos do sistema.',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'Magia IA',
                 'ai-btn-info' => 'Gerar Imagem',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Imagem',
                 'not-allowed-error' => 'Apenas arquivos de imagem (.jpeg, .jpg, .png, ..) são permitidos.',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'Adicionar Vídeo',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Apenas arquivos de vídeo (.mp4, .mov, .ogg ..) são permitidos.',
+                'video' => 'Vídeo',
 
                 'seo' => [
                     'info' => 'Dê um nome descritivo ao arquivo de vídeo.',

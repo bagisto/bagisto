@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'ファミリーの削除中にエラーが発生しました。',
             'delete-success' => 'ファミリーが正常に削除されました。',
             'family' => 'ファミリー',
-            'last-delete-error' => '少なくとも1つのファミリーが必要です。',
             'update-success' => 'ファミリーが正常に更新されました。',
             'user-define-error' => 'システム属性ファミリーを削除できません',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'マジックAI',
                 'ai-btn-info' => '画像生成',
                 'allowed-types' => 'png、jpeg、jpg',
+                'image' => '画像',
                 'not-allowed-error' => '画像ファイル（.jpeg、.jpg、.png、..）のみ許可されています。',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'ビデオを追加',
                 'allowed-types' => 'mp4、webm、mkv',
                 'not-allowed-error' => 'ビデオファイルのみ許可されています（.mp4、.mov、.ogg ..）。',
+                'video' => '動画',
 
                 'seo' => [
                     'info' => '動画ファイルに内容が分かる名前を付けます。',

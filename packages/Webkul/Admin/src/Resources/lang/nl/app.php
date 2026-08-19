@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Fout opgetreden bij het verwijderen van de familie.',
             'delete-success' => 'Familie succesvol verwijderd.',
             'family' => 'Familie',
-            'last-delete-error' => 'Minstens één familie is vereist.',
             'update-success' => 'Familie succesvol bijgewerkt.',
             'user-define-error' => 'Kan systeemattribuutfamilie niet verwijderen.',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'Magische AI',
                 'ai-btn-info' => 'Afbeelding genereren',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Afbeelding',
                 'not-allowed-error' => 'Alleen afbeeldingsbestanden (.jpeg, .jpg, .png, ..) zijn toegestaan.',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'Video Toevoegen',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Alleen videobestanden (.mp4, .mov, .ogg ..) zijn toegestaan.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Geef het videobestand een beschrijvende naam.',

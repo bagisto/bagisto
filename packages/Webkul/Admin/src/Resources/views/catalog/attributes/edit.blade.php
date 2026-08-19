@@ -280,7 +280,7 @@
                                                                     type="text"
                                                                     class="w-[160px] rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                                     :name="'options[' + element.id + '][swatch_alt]'"
-                                                                    :placeholder="'@lang('admin::app.components.media.images.seo.alt-text')'"
+                                                                    :placeholder="@js(trans('admin::app.components.media.images.seo.alt-text'))"
                                                                     v-model="element.swatch_alt"
                                                                 />
 
@@ -288,7 +288,7 @@
                                                                     type="text"
                                                                     class="w-[160px] rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                                     :name="'options[' + element.id + '][swatch_file_name]'"
-                                                                    :placeholder="'@lang('admin::app.components.media.images.seo.file-name')'"
+                                                                    :placeholder="@js(trans('admin::app.components.media.images.seo.file-name'))"
                                                                     v-model="element.swatch_file_name"
                                                                 />
                                                             </div>

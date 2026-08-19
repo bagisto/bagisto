@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'حدث خطأ أثناء حذف العائلة.',
             'delete-success' => 'تم حذف العائلة بنجاح.',
             'family' => 'العائلة',
-            'last-delete-error' => 'يجب وجود عائلة واحدة على الأقل.',
             'update-success' => 'تم تحديث العائلة بنجاح.',
             'user-define-error' => 'لا يمكن حذف عائلة السمات النظامية',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'الذكاء الاصطناعي',
                 'ai-btn-info' => 'إنشاء صورة',
                 'allowed-types' => 'png، jpeg، jpg',
+                'image' => 'صورة',
                 'not-allowed-error' => 'تُسمح فقط بملفات الصور (.jpeg، .jpg، .png، ...).',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'إضافة فيديو',
                 'allowed-types' => 'mp4، webm، mkv',
                 'not-allowed-error' => 'يُسمح فقط بملفات الفيديو (.mp4، .mov، .ogg ..).',
+                'video' => 'فيديو',
 
                 'seo' => [
                     'info' => 'امنح ملف الفيديو اسمًا وصفيًا.',

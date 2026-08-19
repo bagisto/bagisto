@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Під час видалення Сімейства сталася помилка.',
             'delete-success' => 'Сімейство видалено успішно.',
             'family' => 'Сімейство',
-            'last-delete-error' => 'Потрібно щонайменше одне сімейство.',
             'update-success' => 'Сімейство оновлено успішно.',
             'user-define-error' => 'Неможливо видалити системне Сімейство Атрибутів',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'Магія ШІ',
                 'ai-btn-info' => 'Створити Зображення',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Зображення',
                 'not-allowed-error' => 'Дозволені тільки файли зображень (.jpeg, .jpg, .png, ..).',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'Додати відео',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Дозволені лише файли відео (.mp4, .mov, .ogg ..).',
+                'video' => 'Відео',
 
                 'seo' => [
                     'info' => 'Дайте відеофайлу описову назву.',

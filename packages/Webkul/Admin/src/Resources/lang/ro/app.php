@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Error encountered while deleting Family.',
             'delete-success' => 'Family deleted successfully.',
             'family' => 'Family',
-            'last-delete-error' => 'At least one family is required.',
             'update-success' => 'Family updated successfully.',
             'user-define-error' => 'Can not delete system Attribute family',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'Magic AI',
                 'ai-btn-info' => 'Generate Image',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Imagine',
                 'not-allowed-error' => 'Only images files (.jpeg, .jpg, .png, ..) are allowed.',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'Add Video',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Only videos files (.mp4, .mov, .ogg ..) are allowed.',
+                'video' => 'Videoclip',
 
                 'seo' => [
                     'info' => 'Give the video file a descriptive name.',

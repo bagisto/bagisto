@@ -2104,7 +2104,6 @@ return [
             'delete-failed' => 'Aile silme işlemi sırasında bir hata oluştu.',
             'delete-success' => 'Aile başarıyla silindi.',
             'family' => 'Aile',
-            'last-delete-error' => 'En az bir aile gereklidir.',
             'update-success' => 'Aile başarıyla güncellendi.',
             'user-define-error' => 'Sistem Özellik Ailesi silinemez',
         ],
@@ -5522,6 +5521,7 @@ return [
                 'ai-add-image-btn' => 'Sihirli AI',
                 'ai-btn-info' => 'Resim Oluştur',
                 'allowed-types' => 'png, jpeg, jpg',
+                'image' => 'Görsel',
                 'not-allowed-error' => 'Yalnızca resim dosyaları (.jpeg, .jpg, .png, ..) izin verilir.',
 
                 'ai-generation' => [
@@ -5573,6 +5573,7 @@ return [
                 'add-video-btn' => 'Video Ekle',
                 'allowed-types' => 'mp4, webm, mkv',
                 'not-allowed-error' => 'Yalnızca video dosyaları (.mp4, .mov, .ogg ..) izin verilir.',
+                'video' => 'Video',
 
                 'seo' => [
                     'info' => 'Video dosyasına açıklayıcı bir ad verin.',
