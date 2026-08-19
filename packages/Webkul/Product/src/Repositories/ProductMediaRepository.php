@@ -181,7 +181,9 @@ class ProductMediaRepository extends Repository
             return;
         }
 
-        $model->translateOrNew(core()->getRequestedLocaleCode())->alt_text = $meta['alt_text'];
+        foreach (core()->getRequestedLocaleCodes() as $localeCode) {
+            $model->translateOrNew($localeCode)->alt_text = $meta['alt_text'];
+        }
 
         $model->save();
     }
