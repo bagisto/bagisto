@@ -114,8 +114,8 @@
                 </div>
             </div>
 
-            <div class="mt-4 flex min-h-0 flex-1">
-                <div class="flex min-h-0 flex-1 gap-4 max-lg:flex-col">
+            <div class="mt-4 flex min-h-0 min-w-0 flex-1">
+                <div class="flex min-h-0 min-w-0 flex-1 gap-4 max-lg:flex-col">
                     <!-- Section List -->
                     <div class="box-shadow flex w-[340px] shrink-0 flex-col overflow-hidden rounded bg-white dark:bg-gray-900 max-lg:w-full">
                         <div class="flex shrink-0 items-center gap-2 border-b p-4 dark:border-gray-800">
@@ -296,14 +296,22 @@
                             </div>
                         </div>
 
-                        <div class="flex min-h-0 flex-1 justify-center overflow-auto bg-gray-100 p-4 dark:bg-gray-950">
-                            <iframe
-                                class="h-full rounded border-0 bg-white transition-all duration-300 ease-in-out"
-                                ref="preview"
-                                :src="previewUrl"
-                                :style="{ width: deviceWidth }"
-                                @load="onPreviewLoad"
-                            ></iframe>
+                        <div
+                            class="relative min-h-0 flex-1 overflow-hidden bg-gray-100 p-4 dark:bg-gray-950"
+                            ref="previewStage"
+                        >
+                            <div
+                                class="absolute overflow-hidden rounded bg-white transition-all duration-300 ease-in-out"
+                                :style="frameBoxStyle"
+                            >
+                                <iframe
+                                    class="border-0 bg-white"
+                                    ref="preview"
+                                    :src="previewUrl"
+                                    :style="frameStyle"
+                                    @load="onPreviewLoad"
+                                ></iframe>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -486,11 +494,15 @@
             mounted() {
                 window.addEventListener('message', this.onPreviewMessage);
 
+                this.watchStage();
+
                 this.openRequestedSection();
             },
 
             beforeUnmount() {
                 window.removeEventListener('message', this.onPreviewMessage);
+
+                this.stageObserver?.disconnect();
             },
 
             data() {
@@ -504,6 +516,10 @@
                     activeId: null,
 
                     device: 'desktop',
+
+                    stage: { width: 0, height: 0 },
+
+                    stagePadding: 16,
 
                     isBusy: false,
 
@@ -599,10 +615,51 @@
                 },
 
                 /**
-                 * Width the preview frame is pinned to for the chosen device.
+                 * Viewport width the chosen device stands for. The frame is rendered at this
+                 * width whatever room the editor has, so the storefront lays itself out the
+                 * way it would on the device rather than the way it fits the panel.
                  */
-                deviceWidth() {
-                    return { desktop: '100%', tablet: '768px', mobile: '390px' }[this.device];
+                frameWidth() {
+                    return { desktop: 1440, tablet: 768, mobile: 390 }[this.device];
+                },
+
+                /**
+                 * How far the frame has to shrink to fit the room it is given, never past
+                 * its own size so a narrow device is not blown up.
+                 */
+                frameScale() {
+                    if (! this.stage.width) {
+                        return 1;
+                    }
+
+                    return Math.min(1, this.stage.width / this.frameWidth);
+                },
+
+                /**
+                 * The space the scaled frame takes up in the editor.
+                 */
+                frameBoxStyle() {
+                    const width = Math.round(this.frameWidth * this.frameScale);
+
+                    return {
+                        width: `${width}px`,
+                        top: `${this.stagePadding}px`,
+                        bottom: `${this.stagePadding}px`,
+                        insetInlineStart: '50%',
+                        marginInlineStart: `-${Math.round(width / 2)}px`,
+                    };
+                },
+
+                /**
+                 * The frame itself, drawn at device size and scaled down into its box.
+                 */
+                frameStyle() {
+                    return {
+                        width: `${this.frameWidth}px`,
+                        height: `${this.stage.height / this.frameScale}px`,
+                        transform: `scale(${this.frameScale})`,
+                        transformOrigin: 'top left',
+                    };
                 },
             },
 
@@ -1113,6 +1170,27 @@
                     if (this.activeId === section.id) {
                         this.activeId = null;
                     }
+                },
+
+                /**
+                 * Follow the room the preview is given, so the frame keeps its device
+                 * proportions as the window resizes and as the drawer opens over it.
+                 */
+                watchStage() {
+                    const stage = this.$refs.previewStage;
+
+                    if (! stage) {
+                        return;
+                    }
+
+                    this.stageObserver = new ResizeObserver(([entry]) => {
+                        this.stage = {
+                            width: entry.contentRect.width,
+                            height: entry.contentRect.height,
+                        };
+                    });
+
+                    this.stageObserver.observe(stage);
                 },
 
                 /**

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Models\Channel;
 use Webkul\Theme\Models\Section;
@@ -500,4 +501,58 @@ it('should clear a section media directory when the section is deleted', functio
     deleteJson(route('admin.appearance.sections.delete', $section->id))->assertOk();
 
     Storage::assertMissing(str_replace('storage/', '', $path));
+});
+
+it('should announce every write it makes, before and after', function (string $route, string $event, array $payload) {
+    $section = makeSection();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route($route, $section->id), $payload)->assertOk();
+
+    Event::assertDispatched($event.'.before');
+
+    Event::assertDispatched($event.'.after');
+})->with([
+    'draft saved' => ['admin.appearance.sections.draft', 'section.draft.save', ['options' => ['html' => '<p>d</p>']]],
+    'draft published' => ['admin.appearance.sections.publish', 'section.update', []],
+    'draft discarded' => ['admin.appearance.sections.discard', 'section.draft.discard', []],
+    'status changed' => ['admin.appearance.sections.status', 'section.update', ['status' => false]],
+    'section duplicated' => ['admin.appearance.sections.duplicate', 'section.create', []],
+]);
+
+it('should announce a media upload, before and after', function () {
+    $section = makeSection();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.media', $section->id), [
+        'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
+    ])->assertOk();
+
+    Event::assertDispatched('section.media.upload.before');
+
+    Event::assertDispatched('section.media.upload.after');
+});
+
+it('should announce a reorder, before and after', function () {
+    $first = makeSection();
+
+    $second = makeSection();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.reorder'), [
+        'sections' => [$second->id, $first->id],
+    ])->assertOk();
+
+    Event::assertDispatched('section.reorder.before');
+
+    Event::assertDispatched('section.reorder.after');
 });

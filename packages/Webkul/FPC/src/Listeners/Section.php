@@ -2,11 +2,19 @@
 
 namespace Webkul\FPC\Listeners;
 
+use Illuminate\Support\Collection;
 use Spatie\ResponseCache\Facades\ResponseCache;
 use Webkul\Theme\Repositories\SectionRepository;
 
 class Section
 {
+    /**
+     * Types the layout draws on every page rather than the home page alone.
+     *
+     * @var array
+     */
+    public const LAYOUT_TYPES = ['footer_links', 'services_content'];
+
     /**
      * Create a new listener instance.
      *
@@ -15,41 +23,29 @@ class Section
     public function __construct(protected SectionRepository $sectionRepository) {}
 
     /**
-     * After section create
+     * After section create.
      *
      * @param  \Webkul\Shop\Contracts\Section  $section
      * @return void
      */
     public function afterCreate($section)
     {
-        if (in_array($section->type, ['footer_links', 'services_content'])) {
-            ResponseCache::clear();
-        } else {
-            ResponseCache::selectCachedItems()
-                ->forUrls(config('app.url').'/')
-                ->forget();
-        }
+        $this->forget([$section->type]);
     }
 
     /**
-     * After section update
+     * After section update.
      *
      * @param  \Webkul\Shop\Contracts\Section  $section
      * @return void
      */
     public function afterUpdate($section)
     {
-        if (in_array($section->type, ['footer_links', 'services_content'])) {
-            ResponseCache::clear();
-        } else {
-            ResponseCache::selectCachedItems()
-                ->forUrls(config('app.url').'/')
-                ->forget();
-        }
+        $this->forget([$section->type]);
     }
 
     /**
-     * Before section delete
+     * Before section delete.
      *
      * @param  int  $sectionId
      * @return void
@@ -58,12 +54,36 @@ class Section
     {
         $section = $this->sectionRepository->find($sectionId);
 
-        if (in_array($section->type, ['footer_links', 'services_content'])) {
+        $this->forget([$section?->type]);
+    }
+
+    /**
+     * After the sections have been put in a new order.
+     *
+     * @param  Collection  $sections
+     * @return void
+     */
+    public function afterReorder($sections)
+    {
+        $this->forget(collect($sections)->pluck('type')->all());
+    }
+
+    /**
+     * Drop the pages the given section types are rendered on.
+     *
+     * The home page carries the sections it is built from, while the footer and the service
+     * promises are drawn by the layout and so reach every page.
+     */
+    protected function forget(array $types): void
+    {
+        if (array_intersect($types, self::LAYOUT_TYPES)) {
             ResponseCache::clear();
-        } else {
-            ResponseCache::selectCachedItems()
-                ->forUrls(config('app.url').'/')
-                ->forget();
+
+            return;
         }
+
+        ResponseCache::selectCachedItems()
+            ->forUrls(config('app.url').'/')
+            ->forget();
     }
 }

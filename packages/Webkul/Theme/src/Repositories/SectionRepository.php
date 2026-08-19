@@ -369,9 +369,13 @@ class SectionRepository extends Repository
             'CSS.AllowedProperties' => null,
         ];
 
-        $options['html'] = Purify::config($config)->clean($options['html'] ?? '');
+        if (array_key_exists('html', $options)) {
+            $options['html'] = Purify::config($config)->clean((string) $options['html']);
+        }
 
-        $options['css'] = $this->sanitizeStaticCss($options['css'] ?? '');
+        if (array_key_exists('css', $options)) {
+            $options['css'] = $this->sanitizeStaticCss($options['css']);
+        }
 
         return $options;
     }

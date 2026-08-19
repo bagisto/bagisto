@@ -192,11 +192,15 @@ class SectionController extends Controller
 
         $this->sectionOrFail($id);
 
+        Event::dispatch('section.draft.save.before', $id);
+
         $section = $this->sectionRepository->saveDraft(
             $id,
             core()->getRequestedLocaleCode(),
             request()->input('options')
         );
+
+        Event::dispatch('section.draft.save.after', $section);
 
         return new JsonResponse([
             'has_draft' => $this->hasDraft($section),
@@ -215,9 +219,13 @@ class SectionController extends Controller
 
         $this->sectionOrFail($id);
 
-        return new JsonResponse(
-            $this->sectionRepository->storeMedia($id, request()->file('file'))
-        );
+        Event::dispatch('section.media.upload.before', $id);
+
+        $media = $this->sectionRepository->storeMedia($id, request()->file('file'));
+
+        Event::dispatch('section.media.upload.after', $media);
+
+        return new JsonResponse($media);
     }
 
     /**
@@ -246,7 +254,11 @@ class SectionController extends Controller
     {
         $this->sectionOrFail($id);
 
+        Event::dispatch('section.draft.discard.before', $id);
+
         $section = $this->sectionRepository->discardDraft($id);
+
+        Event::dispatch('section.draft.discard.after', $section);
 
         return new JsonResponse([
             'has_draft' => false,
@@ -262,10 +274,14 @@ class SectionController extends Controller
     {
         $section = $this->sectionOrFail($id);
 
+        Event::dispatch('section.update.before', $id);
+
         $this->sectionRepository->massUpdateStatus(
             ['status' => request()->boolean('status')],
             [$section->id]
         );
+
+        Event::dispatch('section.update.after', $section->refresh());
 
         return new JsonResponse([
             'status' => request()->boolean('status'),
@@ -302,9 +318,13 @@ class SectionController extends Controller
             'sections.*' => 'required|integer',
         ]);
 
-        $this->sectionRepository->reorder(
-            $this->withPinnedLast(request()->input('sections'))
-        );
+        $sectionIds = $this->withPinnedLast(request()->input('sections'));
+
+        Event::dispatch('section.reorder.before', $sectionIds);
+
+        $this->sectionRepository->reorder($sectionIds);
+
+        Event::dispatch('section.reorder.after', $this->sectionRepository->findWhereIn('id', $sectionIds));
 
         return new JsonResponse([
             'message' => trans('admin::app.appearance.sections.update-success'),
