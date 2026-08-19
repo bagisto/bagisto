@@ -53,7 +53,7 @@ class HomeController extends Controller
      */
     public function preview()
     {
-        abort_unless(auth()->guard('admin')->check(), 403);
+        abort_unless(bouncer()->hasPermission('appearance.sections'), 403);
 
         request()->attributes->set(SecureHeaders::FRAMABLE, true);
 

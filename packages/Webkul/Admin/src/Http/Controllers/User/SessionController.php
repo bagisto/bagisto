@@ -5,6 +5,7 @@ namespace Webkul\Admin\Http\Controllers\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
 
@@ -98,18 +99,54 @@ class SessionController extends Controller
 
             $permissionDetails = $allPermissions->firstWhere('key', $permission);
 
-            if (str_contains($permission, '.')) {
-                return redirect()->route($permissionDetails['route']);
+            if (! $permissionDetails) {
+                continue;
+            }
+
+            if ($route = $this->navigableRoute($permissionDetails)) {
+                return redirect()->route($route);
             }
 
             $childPermission = $this->findFirstAccessibleChildPermission($allPermissions, $permission);
 
-            if ($childPermission) {
-                return redirect()->route($childPermission['route']);
+            if (
+                $childPermission
+                && $route = $this->navigableRoute($childPermission)
+            ) {
+                return redirect()->route($route);
             }
         }
 
         return redirect()->intended(route('admin.dashboard.index'));
+    }
+
+    /**
+     * The route a permission can land an admin on, or null when it has none.
+     *
+     * A permission commonly guards several routes, and most of them are nowhere to send a
+     * browser: the ones that write answer no GET, and others want an id that signing in
+     * has no way of knowing.
+     */
+    private function navigableRoute($permission): ?string
+    {
+        foreach ((array) ($permission['route'] ?? []) as $name) {
+            $route = Route::getRoutes()->getByName($name);
+
+            if (
+                ! $route
+                || ! in_array('GET', $route->methods())
+            ) {
+                continue;
+            }
+
+            if (preg_match('/\{[^}?]+\}/', $route->uri())) {
+                continue;
+            }
+
+            return $name;
+        }
+
+        return null;
     }
 
     /**

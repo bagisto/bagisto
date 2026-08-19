@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Models\Channel;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\Repositories\SectionRepository;
+use Webkul\User\Models\Admin;
+use Webkul\User\Models\Role;
 
 use function Pest\Laravel\deleteJson;
 use function Pest\Laravel\get;
@@ -138,6 +140,30 @@ it('should resolve a section to its draft for the preview', function () {
 
 it('should keep the preview off limits to guests', function () {
     get(route('shop.appearance.preview'))->assertForbidden();
+});
+
+it('should keep the preview off limits to an admin who cannot edit sections', function () {
+    $role = Role::factory()->create([
+        'permission_type' => 'custom',
+        'permissions' => ['sales', 'sales.orders'],
+    ]);
+
+    $this->loginAsAdmin(Admin::factory()->create(['role_id' => $role->id]));
+
+    get(route('shop.appearance.preview'))->assertForbidden();
+});
+
+it('should open the preview to an admin who may edit sections', function () {
+    makeSection();
+
+    $role = Role::factory()->create([
+        'permission_type' => 'custom',
+        'permissions' => ['appearance', 'appearance.sections'],
+    ]);
+
+    $this->loginAsAdmin(Admin::factory()->create(['role_id' => $role->id]));
+
+    get(route('shop.appearance.preview'))->assertOk();
 });
 
 it('should render the preview for a signed in admin', function () {

@@ -1325,7 +1325,7 @@ return [
         'sort' => 1,
     ], [
         'key' => 'appearance.sections',
-        'name' => 'admin::app.acl.customize',
+        'name' => 'admin::app.acl.sections',
         'route' => [
             'admin.appearance.sections.index',
         ],
