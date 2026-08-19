@@ -341,12 +341,18 @@ it('should store a text attribute with [validation] validation', function (strin
 
     $code = fake()->unique()->lexify('attr_??????????');
 
-    postJson(route('admin.catalog.attributes.store'), [
+    $payload = [
         'code' => $code,
         'admin_name' => "Validation {$validation}",
         'type' => 'text',
         'validation' => $validation,
-    ])
+    ];
+
+    if ($validation === 'regex') {
+        $payload['regex'] = '/^[A-Za-z0-9]+$/';
+    }
+
+    postJson(route('admin.catalog.attributes.store'), $payload)
         ->assertRedirectToRoute('admin.catalog.attributes.index');
 
     $this->assertDatabaseHas('attributes', [
