@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use Webkul\Admin\Http\Controllers\Controller;
+use Webkul\Core\Models\Channel;
 use Webkul\Theme\Contracts\Section;
 use Webkul\Theme\Models\Section as SectionModel;
 use Webkul\Theme\Repositories\SectionRepository;
@@ -35,16 +36,23 @@ class SectionController extends Controller
 
         $channel = $this->requestedChannel();
 
+        $locale = $this->requestedLocale($channel);
+
         $sections = $this->editableSections($code, $channel->id);
 
         return view('admin::appearance.sections.index', [
             'scopedTheme' => $code,
             'scopedThemeName' => $theme['name'] ?? $code,
             'scopedChannel' => $channel,
+            'scopedLocale' => $locale,
             'channels' => core()->getAllChannels(),
+            'locales' => $channel->locales,
             'sections' => $sections,
             'typeLabels' => $this->typeLabels(),
-            'previewUrl' => route('shop.appearance.preview', ['channel' => $channel->id]),
+            'previewUrl' => route('shop.appearance.preview', [
+                'channel' => $channel->id,
+                'locale' => $locale->code,
+            ]),
             'urls' => $this->editorUrls(),
         ]);
     }
@@ -336,6 +344,24 @@ class SectionController extends Controller
         $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'));
 
         return $channel ?? core()->getCurrentChannel();
+    }
+
+    /**
+     * The locale being edited, which has to be one the channel actually runs.
+     *
+     * A section's content is per locale, so an unknown one would edit a translation the
+     * storefront never renders.
+     *
+     * @param  Channel  $channel
+     */
+    protected function requestedLocale($channel)
+    {
+        $locales = $channel->locales;
+
+        return $locales->firstWhere('code', request('locale'))
+            ?? $locales->firstWhere('code', app()->getLocale())
+            ?? $locales->first()
+            ?? core()->getCurrentLocale();
     }
 
     /**

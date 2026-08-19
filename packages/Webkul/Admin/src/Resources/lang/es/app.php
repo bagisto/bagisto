@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Se descartaron los cambios del borrador.',
                 'duplicate-btn' => 'Duplicar',
                 'empty' => 'Aún no hay secciones.',
+                'locale' => 'Idioma',
                 'mobile' => 'Móvil',
                 'pinned' => 'Fijado en la parte inferior de la página.',
                 'preview-btn' => 'Vista previa',

@@ -15,6 +15,8 @@
 
 <!-- Features -->
 @foreach ($sections as $section)
+    @continue (empty($section->options['services']))
+
     <div
         class="container mt-20 max-lg:px-8 max-md:mt-10 max-md:px-4"
         v-pre

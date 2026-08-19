@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Draft changes discarded.',
                 'duplicate-btn' => 'Duplicate',
                 'empty' => 'No sections yet.',
+                'locale' => 'Limbă',
                 'mobile' => 'Mobile',
                 'pinned' => 'Fixat în partea de jos a paginii.',
                 'preview-btn' => 'Preview',

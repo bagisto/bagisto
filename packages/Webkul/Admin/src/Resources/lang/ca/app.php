@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'S\'han descartat els canvis de l\'esborrany.',
                 'duplicate-btn' => 'Duplica',
                 'empty' => 'Encara no hi ha seccions.',
+                'locale' => 'Idioma',
                 'mobile' => 'Mòbil',
                 'pinned' => 'Fixat a la part inferior de la pàgina.',
                 'preview-btn' => 'Vista prèvia',

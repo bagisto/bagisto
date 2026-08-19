@@ -18,6 +18,16 @@
             ]),
         ])->values()"
         :channel-id="$scopedChannel->id"
+        :locales="$locales->sortBy('name')->map(fn ($locale) => [
+            'code' => $locale->code,
+            'name' => $locale->name,
+            'url' => route('admin.appearance.sections.index', [
+                'code' => $scopedTheme,
+                'channel' => $scopedChannel->id,
+                'locale' => $locale->code,
+            ]),
+        ])->values()"
+        :locale-code="$scopedLocale->code"
         :preview-url="$previewUrl"
         :reorder-url="route('admin.appearance.sections.reorder')"
         :store-url="route('admin.appearance.sections.store', [

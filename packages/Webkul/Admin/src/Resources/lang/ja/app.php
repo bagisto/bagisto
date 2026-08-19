@@ -3277,6 +3277,7 @@ return [
                 'discarded' => '下書きの変更を破棄しました。',
                 'duplicate-btn' => '複製',
                 'empty' => 'セクションはまだありません。',
+                'locale' => 'ロケール',
                 'mobile' => 'モバイル',
                 'pinned' => 'ページ下部に固定されています。',
                 'preview-btn' => 'プレビュー',

@@ -4,6 +4,8 @@
     'themeName'   => null,
     'channels'    => [],
     'channelId'   => null,
+    'locales'     => [],
+    'localeCode'  => null,
     'previewUrl'  => '',
     'reorderUrl'  => '',
     'storeUrl'    => '',
@@ -14,8 +16,10 @@
     :sections='@json($sections)'
     :type-labels='@json($typeLabels)'
     :channels='@json($channels)'
+    :locales='@json($locales)'
     :urls='@json($urls)'
     channel-id="{{ $channelId }}"
+    locale-code="{{ $localeCode }}"
     preview-url="{{ $previewUrl }}"
     reorder-url="{{ $reorderUrl }}"
     store-url="{{ $storeUrl }}"
@@ -55,6 +59,22 @@
                 </div>
 
                 <div class="flex items-center gap-2.5 max-sm:w-full max-sm:flex-wrap">
+                    <!-- Locale Switcher -->
+                    <select
+                        class="custom-select cursor-pointer rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-8 rtl:pl-8 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
+                        :title="'@lang('admin::app.appearance.sections.index.locale')'"
+                        v-model="locale"
+                        @change="switchLocale"
+                        v-if="locales.length > 1"
+                    >
+                        <option
+                            v-for="option in locales"
+                            :key="option.code"
+                            :value="option.code"
+                            v-text="option.name"
+                        ></option>
+                    </select>
+
                     <!-- Channel Switcher -->
                     <select
                         class="custom-select cursor-pointer rounded-md border bg-white px-3 py-2.5 text-sm font-normal text-gray-600 transition-all hover:border-gray-400 ltr:pr-8 rtl:pl-8 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
@@ -454,6 +474,8 @@
                 'typeLabels',
                 'channels',
                 'channelId',
+                'locales',
+                'localeCode',
                 'previewUrl',
                 'reorderUrl',
                 'storeUrl',
@@ -476,6 +498,8 @@
                     items: this.sections ?? [],
 
                     channel: Number(this.channelId),
+
+                    locale: this.localeCode,
 
                     activeId: null,
 
@@ -597,6 +621,18 @@
                  */
                 switchChannel() {
                     const target = this.channels.find(option => option.id === this.channel);
+
+                    if (target) {
+                        window.location.href = target.url;
+                    }
+                },
+
+                /**
+                 * Reload the editor against another locale. A section's content is stored
+                 * per locale, so the whole editor and its preview move together.
+                 */
+                switchLocale() {
+                    const target = this.locales.find(option => option.code === this.locale);
 
                     if (target) {
                         window.location.href = target.url;
@@ -915,7 +951,9 @@
                  * Endpoint for a section scoped action.
                  */
                 actionFor(id, action) {
-                    return this.urls[action].replace('__ID__', id);
+                    const url = this.urls[action].replace('__ID__', id);
+
+                    return url + (url.includes('?') ? '&' : '?') + 'locale=' + encodeURIComponent(this.locale);
                 },
 
                 /**

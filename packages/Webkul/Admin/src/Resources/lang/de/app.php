@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Entwurfsänderungen verworfen.',
                 'duplicate-btn' => 'Duplizieren',
                 'empty' => 'Noch keine Abschnitte.',
+                'locale' => 'Sprache',
                 'mobile' => 'Mobil',
                 'pinned' => 'Am Seitenende fixiert.',
                 'preview-btn' => 'Vorschau',

@@ -3277,6 +3277,7 @@ return [
                 'discarded' => 'Modifiche della bozza scartate.',
                 'duplicate-btn' => 'Duplica',
                 'empty' => 'Nessuna sezione per ora.',
+                'locale' => 'Lingua',
                 'mobile' => 'Mobile',
                 'pinned' => 'Fissato in fondo alla pagina.',
                 'preview-btn' => 'Anteprima',
