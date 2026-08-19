@@ -4849,14 +4849,21 @@ return [
                 'title' => 'ඊමේල්',
 
                 'smtp' => [
+                    'brevo-api-key' => 'Brevo API යතුර',
+                    'brevo-api-key-info' => 'ඔබේ Brevo ගිණුමේ SMTP & API යටතේ v3 API යතුරක් සාදන්න.',
+                    'driver' => 'ධාවකය',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'ඔබේ වෙළඳසැල ඊමේල් යවන ආකාරය තෝරන්න.',
                     'driver-mismatch-info' => 'ඔබේ තැපෑලේ ධාවකය ":driver" වෙනුවට "bagisto-dynamic-smtp" ලෙස සකසා ඇත. මෙහි සිදු කරන ඕනෑම වෙනසක් ක්‍රියා නොකරයි. මෙම සැකසුම් ක්‍රියාත්මක කිරීමට කරුණාකර .env ගොනුවේ MAIL_MAILER=bagisto-dynamic-smtp යාවත්කාලීන කරන්න.',
                     'driver-mismatch-title' => 'මෙම සැකසුම් මේ වන විට ක්‍රියා නොකරයි.',
+                    'driver-notice' => 'ධාවක දැනුම්දීම',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => 'සංකේතනය',
                     'host' => 'සත්කාරක',
-                    'info' => 'ඔබේ ගබඩාවෙන් විද්‍යුත් තැපෑල යැවීමට SMTP සේවාදායක සැකසුම් වින්‍යාස කරන්න.',
+                    'info' => 'ඔබේ වෙළඳසැල ඊමේල් යවන ආකාරය තෝරා, තෝරාගත් ධාවකය වින්‍යාස කරන්න.',
                     'password' => 'මුරපදය',
                     'port' => 'තොට',
-                    'title' => 'SMTP',
+                    'title' => 'තැපැල් ධාවකය',
                     'username' => 'පරිශීලක නාමය',
                 ],
 

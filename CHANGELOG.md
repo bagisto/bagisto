@@ -6,6 +6,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added the PayGlocal payment gateway. Customers pay on PayGlocal's hosted checkout and return through a signed token, the outcome is confirmed with PayGlocal before an order is placed, and a webhook settles the payment if the customer never comes back.
 
+- Added Brevo as a mail driver, sent over Brevo's HTTP API through Symfony's own bridge. The driver is chosen in Admin → Configuration → Emails, which now shows either the SMTP fields or the Brevo API key rather than both.
+
 - Fixed customer and cart reporting counting all guests as a single shopper, which understated unique customers and piled every guest's spend onto one row of the "most sales" and "most orders" listings.
 
 - Fixed resending an EU withdrawal confirmation answering the admin in the customer's language, because the locale switched for the email was still in place when the message was built.

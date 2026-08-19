@@ -17,6 +17,7 @@
         validations="{{ $field->getValidations() }}"
         is-require="{{ $field->isRequired() }}"
         depend-name="{{ $field->getDependFieldName() }}"
+        depend-value="{{ $field->getDependFieldValue() }}"
         placeholder="{{ $field->getPlaceholder() }}"
         src="{{ Storage::url($value) }}"
         field-data="{{ json_encode($field) }}"
@@ -444,6 +445,7 @@
                 'currentChannel',
                 'currentLocale',
                 'dependName',
+                'dependValue',
                 'fieldData',
                 'info',
                 'isRequire',
@@ -479,10 +481,10 @@
                 }
 
                 dependElement.addEventListener('change', (event) => {
-                    this.field['is_visible'] = 
-                        event.target.type === 'checkbox' 
+                    this.field['is_visible'] =
+                        event.target.type === 'checkbox'
                         ? event.target.checked
-                        : this.validations.split(',').slice(1).includes(event.target.value);
+                        : (this.dependValue ?? '').split(',').includes(event.target.value);
                 });
 
                 dependElement.dispatchEvent(new Event('change'));

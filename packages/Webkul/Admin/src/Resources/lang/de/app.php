@@ -4849,14 +4849,21 @@ return [
                 'title' => 'E-Mail',
 
                 'smtp' => [
+                    'brevo-api-key' => 'Brevo-API-Schlüssel',
+                    'brevo-api-key-info' => 'Erstellen Sie in Ihrem Brevo-Konto unter SMTP & API einen v3-API-Schlüssel.',
+                    'driver' => 'Treiber',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'Wählen Sie, wie Ihr Shop E-Mails versendet.',
                     'driver-mismatch-info' => 'Ihr Mail-Treiber ist auf ":driver" statt auf "bagisto-dynamic-smtp" eingestellt. Alle hier vorgenommenen Änderungen haben keine Auswirkung. Bitte aktualisieren Sie MAIL_MAILER=bagisto-dynamic-smtp in Ihrer .env-Datei, um diese Einstellungen zu aktivieren.',
                     'driver-mismatch-title' => 'Diese Einstellungen sind derzeit inaktiv.',
+                    'driver-notice' => 'Treiber-Hinweis',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => 'Verschlüsselung',
                     'host' => 'Host',
-                    'info' => 'Konfigurieren Sie die SMTP-Servereinstellungen zum Versenden von E-Mails aus Ihrem Shop.',
+                    'info' => 'Wählen Sie, wie Ihr Shop E-Mails versendet, und konfigurieren Sie den gewählten Treiber.',
                     'password' => 'Passwort',
                     'port' => 'Port',
-                    'title' => 'SMTP',
+                    'title' => 'Mail-Treiber',
                     'username' => 'Benutzername',
                 ],
 

@@ -4849,14 +4849,21 @@ return [
                 'title' => 'אימייל',
 
                 'smtp' => [
+                    'brevo-api-key' => 'מפתח API של Brevo',
+                    'brevo-api-key-info' => 'צור מפתח API בגרסה 3 בחשבון Brevo שלך תחת SMTP & API.',
+                    'driver' => 'מנהל התקן',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'בחר כיצד החנות שלך שולחת דואר אלקטרוני.',
                     'driver-mismatch-info' => 'מנהל הדואר שלך מוגדר כ-":driver" במקום "bagisto-dynamic-smtp". כל שינוי שייעשה כאן לא יהיה לו כל אפקט. אנא עדכן את MAIL_MAILER=bagisto-dynamic-smtp בקובץ .env שלך כדי להפעיל את ההגדרות האלה.',
                     'driver-mismatch-title' => 'הגדרות אלו כרגע לא פעילות.',
+                    'driver-notice' => 'הודעת מנהל ההתקן',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => 'הצפנה',
                     'host' => 'מארח',
-                    'info' => 'הגדר את הגדרות שרת SMTP לשליחת דוא"ל מהחנות שלך.',
+                    'info' => 'בחר כיצד החנות שלך שולחת דואר אלקטרוני והגדר את מנהל ההתקן שנבחר.',
                     'password' => 'סיסמה',
                     'port' => 'פורט',
-                    'title' => 'SMTP',
+                    'title' => 'מנהל התקן דואר',
                     'username' => 'שם משתמש',
                 ],
 

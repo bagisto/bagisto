@@ -4849,14 +4849,21 @@ return [
                 'title' => 'Email',
 
                 'smtp' => [
+                    'brevo-api-key' => 'Kunci API Brevo',
+                    'brevo-api-key-info' => 'Buat kunci API v3 di akun Brevo Anda pada bagian SMTP & API.',
+                    'driver' => 'Driver',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => 'Pilih cara toko Anda mengirim email.',
                     'driver-mismatch-info' => 'Driver email Anda diatur ke ":driver" alih-alih "bagisto-dynamic-smtp". Setiap perubahan yang dilakukan di sini tidak akan berpengaruh. Harap perbarui MAIL_MAILER=bagisto-dynamic-smtp di file .env Anda untuk mengaktifkan pengaturan ini.',
                     'driver-mismatch-title' => 'Pengaturan ini saat ini tidak aktif.',
+                    'driver-notice' => 'Pemberitahuan Driver',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => 'Enkripsi',
                     'host' => 'Host',
-                    'info' => 'Konfigurasikan pengaturan server SMTP untuk mengirim email dari toko Anda.',
+                    'info' => 'Pilih cara toko Anda mengirim email dan konfigurasikan driver yang dipilih.',
                     'password' => 'Kata Sandi',
                     'port' => 'Port',
-                    'title' => 'SMTP',
+                    'title' => 'Driver Email',
                     'username' => 'Nama Pengguna',
                 ],
 

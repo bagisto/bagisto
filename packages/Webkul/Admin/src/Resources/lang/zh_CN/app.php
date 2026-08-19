@@ -4849,14 +4849,21 @@ return [
                 'title' => '电子邮件',
 
                 'smtp' => [
+                    'brevo-api-key' => 'Brevo API 密钥',
+                    'brevo-api-key-info' => '在您的 Brevo 账户的 SMTP & API 中创建 v3 API 密钥。',
+                    'driver' => '驱动',
+                    'driver-brevo-api' => 'Brevo (API)',
+                    'driver-info' => '选择您的商店发送电子邮件的方式。',
                     'driver-mismatch-info' => '您的邮件驱动已设置为 ":driver" 而不是 "bagisto-dynamic-smtp"。此处所做的任何更改都不会生效。请在 .env 文件中更新 MAIL_MAILER=bagisto-dynamic-smtp 以激活这些设置。',
                     'driver-mismatch-title' => '这些设置目前处于非活动状态。',
+                    'driver-notice' => '驱动提示',
+                    'driver-smtp' => 'SMTP',
                     'encryption' => '加密',
                     'host' => '主机',
-                    'info' => '配置SMTP服务器设置以从您的商店发送电子邮件。',
+                    'info' => '选择您的商店发送电子邮件的方式，并配置所选驱动。',
                     'password' => '密码',
                     'port' => '端口',
-                    'title' => 'SMTP',
+                    'title' => '邮件驱动',
                     'username' => '用户名',
                 ],
 
