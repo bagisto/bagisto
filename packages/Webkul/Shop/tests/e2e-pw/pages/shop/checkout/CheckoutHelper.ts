@@ -23,7 +23,7 @@ export class CheckoutHelper extends BasePage {
     }
 
     get shoppingCartIcon() {
-        return this.page.locator("(//span[contains(@class,'icon-cart')])[1]");
+        return this.page.locator('[class*="icon-cart"]').first();
     }
 
     get addCartSuccess() {
@@ -49,7 +49,7 @@ export class CheckoutHelper extends BasePage {
     }
 
     get shippingEmail() {
-        return this.page.getByRole("textbox", { name: "email@example.com" });
+        return this.page.locator('input[name="billing\\.email"]');
     }
 
     get streetAddress() {
@@ -114,7 +114,7 @@ export class CheckoutHelper extends BasePage {
 
     get eventTicket() {
         return this.page.locator(
-            'div.place-items-end>div.flex>span.icon-plus[aria-label="Increase Quantity"]',
+            'div.place-items-end>div.flex>button.icon-plus[aria-label="Increase Quantity"]',
         );
     }
 
@@ -185,7 +185,10 @@ export class CheckoutHelper extends BasePage {
     }
 
     get cartSummaryToggle() {
-        return this.page.locator("p.flex > span.icon-arrow-down").first();
+        return this.page
+            .locator("div.flex-1.overflow-auto")
+            .getByRole("button", { name: "See Details" })
+            .first();
     }
 
     cartSummaryText(index: number) {
@@ -193,11 +196,11 @@ export class CheckoutHelper extends BasePage {
     }
 
     get cartDismissButton() {
-        return this.page.locator("span.icon-cancel").nth(1);
+        return this.page.getByRole("button", { name: "Close drawer" }).first();
     }
 
     get cartOverlayDismissButton() {
-        return this.page.locator("div.absolute>span.icon-cancel").nth(1);
+        return this.page.getByRole("button", { name: "Close drawer" }).first();
     }
 
     get pageBody() {
@@ -236,9 +239,15 @@ export class CheckoutHelper extends BasePage {
             .first();
     }
 
-    get slotGraphEvent() {
+    get slotGraphEvents() {
+        return this.page.locator("div.vuecal__event:has(div.slot)");
+    }
+
+    get bookingDialogOrderIdText() {
         return this.page
-            .locator("div.vuecal__event:has(div.slot.border-emerald-500)")
+            .locator(
+                "div:has(> div.text-lg.font-semibold) > div.text-xs.text-gray-500",
+            )
             .first();
     }
 
@@ -255,7 +264,7 @@ export class CheckoutHelper extends BasePage {
     }
 
     get bookingDialogCloseButton() {
-        return this.page.locator("span.icon-cancel-1").first();
+        return this.page.locator("span.icon-close").first();
     }
 
     get bookingListToggleButton() {

@@ -72,7 +72,7 @@ export class AddressPage extends BasePage {
     }
 
     private get deleteLink() {
-        return this.page.getByRole("link", { name: "Delete" });
+        return this.page.getByRole("button", { name: "Delete" });
     }
 
     private get setDefaultButton() {

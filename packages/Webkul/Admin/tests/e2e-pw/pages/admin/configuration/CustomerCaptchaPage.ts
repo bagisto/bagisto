@@ -41,9 +41,7 @@ export class CustomerCaptchaPage extends BasePage {
     }
 
     private get cartToggle() {
-        return this.page.locator(
-            "(//span[contains(@class, 'icon-cart') and @role='button' and @tabindex='0'])[1]",
-        );
+        return this.page.locator('[class*="icon-cart"]').first();
     }
 
     private get continueToCheckoutButton() {

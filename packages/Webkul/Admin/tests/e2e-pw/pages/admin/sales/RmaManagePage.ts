@@ -51,9 +51,7 @@ export class RmaManagePage extends BasePage {
         await expect(
             this.page.getByText("Item Added Successfully").first(),
         ).toBeVisible();
-        await this.page
-            .locator("(//span[contains(@class,'icon-cart')])[1]")
-            .click();
+        await this.page.locator('[class*="icon-cart"]').first().click();
         await this.page
             .locator('(//a[contains(.," Continue to Checkout ")])[1]')
             .click();
