@@ -37,13 +37,6 @@ The active branches are **`2.4`** (the current release line) and **`master`**
 Branch from the line you are targeting and open the pull request against that
 same branch.
 
-## Projects you can contribute to
-
-- [Bagisto](https://github.com/bagisto/bagisto)
-- [Bagisto documentation](https://github.com/bagisto/bagisto-docs)
-- [Laravel AliExpress Dropship](https://github.com/bagisto/laravel-aliexpress-dropship)
-- [AliExpress Dropship Chrome Extension](https://github.com/bagisto/laravel-aliexpress-dropship-chrome-extension)
-
 ## Core development ideas and discussion
 
 If you propose a new feature, implement at least enough of it to show the shape
