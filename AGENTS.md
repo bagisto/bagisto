@@ -1,214 +1,121 @@
 # AGENTS.md — Cross-Agent Instructions for Bagisto 2.4.x
 
-## Skills — load these before writing code
+Bagisto 2.4.x — an open-source Laravel 12 e-commerce platform. PHP 8.3+, Vue 3, Tailwind 3, Vite 5.
 
-This repository ships its conventions as skills under `.claude/skills/<name>/SKILL.md`. If your
-harness has no skill loader, read those files directly — they are plain markdown.
+All functionality lives in **41 self-contained packages** under `packages/Webkul/`. The Laravel app
+itself is a thin shell.
 
-**Load the relevant ones before writing or reviewing code, not after.** They carry rules that
-`vendor/bin/pint` does not enforce and that a reviewer will otherwise send back.
+## Skills — load the relevant one before writing code, not after
 
-| Skill | Load it when | It settles |
-|---|---|---|
-| `package-development` | Any PHP: controllers, repositories, models, DataGrids, migrations, listeners, jobs, enums | Docblocks on every method/property, class member order, multi-clause conditions, comment discipline, repository-over-query-builder, package/menu/ACL/system-config structure |
-| `blade-conventions` | Any `.blade.php`, in any package | `:` vs `::` binding, anonymous vs Vue-backed components, attribute layout, `@props` alignment, comment syntax per layer, translations and `view_render_event` placement |
-| `pest-testing` | Writing or changing tests | Suite layout, test-case bindings, assertion style, datasets, registering a new package's tests |
+The conventions live as skills under `.agents/skills/<name>/SKILL.md`. **If your harness has no
+skill loader, read those files directly — they are plain markdown.** Each `SKILL.md` is a short
+router that links reference files beside it; open only the reference the task needs.
 
-One rule that catches people out:
+**`bagisto-coding-standards` applies to nearly every change** — it owns code style, comments and
+docblocks, Laravel idiom, data access, Blade, security and localization.
 
-- **A pre-existing violation in a file you touch is yours.** `package-development` is explicit:
-  when you edit a class, scan its whole member order and docblocks and fix what is already wrong.
-  Leaving it is treated the same as introducing it.
+| Working on | Load |
+|---|---|
+| Any PHP or Blade | `bagisto-coding-standards` |
+| A package: providers, models, repositories, routes, controllers, ACL, menus, config | `bagisto-package-development` |
+| An admin listing page | `bagisto-datagrid-development` |
+| Attributes, families, EAV values | `bagisto-attribute-development` |
+| The Appearance area — theme sections, the editor, its preview | `bagisto-theme-sections` |
+| Imports — Importer classes, the queued pipeline | `bagisto-data-transfer` |
+| A payment gateway | `bagisto-payment-method-development` |
+| A shipping carrier | `bagisto-shipping-method-development` |
+| A product type | `bagisto-product-type-development` |
+| A storefront or admin theme | `bagisto-shop-theme-development` / `bagisto-admin-theme-development` |
+| Pest tests | `bagisto-pest-testing` |
+| Playwright end-to-end tests | `bagisto-playwright-testing` |
+| Reviewing a change | `bagisto-code-review` |
+| Branching, commits, CHANGELOG, PRs | `bagisto-git-workflow` |
+| The REST/GraphQL API | `bagisto-api-develop` / `bagisto-api-shop` / `bagisto-api-admin` |
 
-Where a skill and the surrounding code genuinely disagree, match the surrounding code and say so in
-your summary rather than silently churning the codebase either way.
+**`bagisto-change-verification` before calling any change done** — it owns the four gates (Pint,
+Pest, Playwright, translations), the rule that a gate you did not run is a gate that failed, and how
+to tell a real regression from this suite's drifting failure counts.
 
-## Do Not Edit
+Two rules worth stating here because they are so often missed:
+
+- **A pre-existing violation in a file you touch is yours.** When you edit a class, scan its whole
+  member order and docblocks and fix what is already wrong.
+- **Where a skill and the surrounding code genuinely disagree, match the code** and say so in your
+  summary, rather than churning the codebase either way.
+
+## Do not edit
 
 - `vendor/`, `node_modules/`, `composer.lock`, `package-lock.json`
-- `public/themes/*/build/` — Vite build output
+- `public/themes/*/build/` — Vite output
 - `storage/` — runtime caches, logs, compiled views
-- `*.hot` files — Vite HMR markers
-- `packages/Webkul/*/src/Resources/assets/` — only edit if working on frontend; always run `npm run build` from the respective package directory after
+- `*.hot` — Vite HMR markers
+- `packages/Webkul/*/src/Resources/assets/` — only when working on the frontend, and always run the
+  package's `npm run build` afterwards
 
-## Repository Map
+## Repository map
 
 ```
-├── app/                        # Thin Laravel app shell (middleware, providers)
+├── app/                    # thin Laravel shell (middleware, providers)
 ├── bootstrap/
-│   ├── app.php                 # Middleware, exceptions, routing
-│   └── providers.php           # All service provider registrations
+│   ├── app.php             # middleware, exceptions, routing
+│   └── providers.php       # every service provider
 ├── config/
-│   ├── concord.php             # Concord module (model proxy) registrations
-│   ├── themes.php              # Shop + Admin theme config (Vite paths)
-│   ├── elasticsearch.php       # Elasticsearch connection
-│   └── ...                     # Standard Laravel configs
-├── database/
-│   ├── migrations/             # App-level migrations
-│   └── seeders/
-├── packages/Webkul/            # ★ All Bagisto packages live here (41 packages)
-│   ├── Admin/                  # Admin panel (controllers, views, DataGrids, reporting, e2e-pw tests)
-│   ├── Shop/                   # Customer storefront (controllers, views, e2e-pw tests)
-│   ├── Core/                   # Helpers, models, jobs, listeners, exchange rates
-│   ├── Product/                # Product models, types, indexers, repositories
-│   ├── Sales/                  # Orders, invoices, shipments, refunds
-│   ├── Checkout/               # Cart, checkout flow
-│   ├── Customer/               # Customer models, auth
-│   ├── Category/               # Category tree (nested set)
-│   ├── Attribute/              # EAV attribute system
-│   ├── Payment/                # Base payment classes (CashOnDelivery, MoneyTransfer)
-│   ├── Paypal/                 # PayPal integration
-│   ├── Stripe/                 # Stripe integration
-│   ├── Razorpay/               # Razorpay integration
-│   ├── PayU/                   # PayU integration
-│   ├── PayGlocal/              # PayGlocal integration
-│   ├── Shipping/               # Base shipping carriers
-│   ├── Inventory/              # Stock management
-│   ├── CartRule/               # Cart promotion rules
-│   ├── CatalogRule/            # Catalog price rules
-│   ├── Tax/                    # Tax calculation
-│   ├── DataGrid/               # Admin data table component
-│   ├── DataTransfer/           # Import/export
-│   ├── CMS/                    # CMS pages
-│   ├── Marketing/              # SEO, URL rewrites, search terms, campaigns
-│   ├── Theme/                  # Theme management
-│   ├── MagicAI/                # AI features (Laravel AI SDK)
-│   ├── Notification/           # Notifications
-│   ├── BookingProduct/         # Booking product type
-│   ├── Rule/                   # Shared rule engine base
-│   ├── User/                   # Admin user management
-│   ├── Installer/              # Installation wizard
-│   ├── SocialLogin/            # OAuth social login
-│   ├── SocialShare/            # Social sharing
-│   ├── Sitemap/                # XML sitemap generation
-│   ├── GDPR/                   # GDPR compliance
-│   ├── RMA/                    # Return merchandise authorization
-│   ├── FPC/                    # Full page cache
-│   ├── ImageCache/             # Image caching/resizing
-│   ├── DebugBar/               # Debug toolbar
-│   ├── BreezeFront/            # Breeze frontend theme
-│   └── NewTheme/               # New theme scaffold
-├── routes/
-│   ├── web.php                 # Minimal — packages define their own routes
-│   └── console.php
-├── tests/
-│   └── Pest.php                # Pest configuration binding test cases to packages
-├── phpunit.xml                 # Test suites per package
-├── pint.json                   # Pint config (preset: laravel)
-├── vite.config.js              # Root Vite config
-└── docker-compose.yml          # Sail: MySQL 8, Redis, Elasticsearch 7.17, Kibana, Mailpit
+│   ├── concord.php         # Concord module (model proxy) registration
+│   ├── themes.php          # shop + admin theme config
+│   └── …                   # standard Laravel config
+├── database/               # app-level migrations and seeders
+├── packages/Webkul/        # ★ all 41 Bagisto packages
+├── routes/web.php          # minimal — packages define their own routes
+├── tests/Pest.php          # binds test cases to packages
+├── phpunit.xml             # one suite per package that has tests
+├── pint.json               # Pint config (preset: laravel)
+└── docker-compose.yml      # MySQL 8, Redis, Elasticsearch 7.17, Kibana, Mailpit
 ```
 
-## Package Internal Structure
-
-Every package in `packages/Webkul/{Name}/src/` follows:
+The 41 packages:
 
 ```
-├── Config/                     # admin-menu.php, system.php, acl.php, carriers.php, etc.
-├── Contracts/                  # Interfaces for each model
-├── Database/
-│   ├── Migrations/
-│   ├── Factories/
-│   └── Seeders/
-├── DataGrids/                  # DataGrid classes (extends Webkul\DataGrid\DataGrid)
-├── Http/
-│   ├── Controllers/
-│   ├── Middleware/
-│   └── Requests/               # Form Request validation classes
-├── Jobs/
-├── Listeners/
-├── Models/                     # Eloquent models + Proxy classes
-├── Observers/
-├── Providers/
-│   ├── {Name}ServiceProvider.php
-│   └── ModuleServiceProvider.php  # Concord model registration
-├── Repositories/               # Prettus L5 repositories
-├── Resources/
-│   ├── assets/                 # JS, CSS, images (Vite-compiled)
-│   ├── lang/{locale}/          # 22 locales
-│   └── views/
-├── Routes/
-│   ├── admin-routes.php
-│   └── shop-routes.php
-└── Type/                       # (Product package) Product type classes
+Admin Attribute BookingProduct CartRule CatalogRule Category Checkout CMS Core Customer
+DataGrid DataTransfer DebugBar EUWithdrawal FPC GDPR ImageCache Installer Inventory MagicAI
+Marketing Notification PayGlocal Payment Paypal PayU PhonePe Product Razorpay RMA Rule Sales
+Shipping Shop Sitemap SocialLogin SocialShare Stripe Tax Theme User
 ```
 
-## Key Architecture Patterns
+Each registers **twice** — its main ServiceProvider in `bootstrap/providers.php`, and its
+`ModuleServiceProvider` in `config/concord.php`. Missing either half-loads the package in a way that
+is hard to diagnose.
 
-- **Concord Module System**: Models registered in each package's `ModuleServiceProvider`, wired via `config/concord.php`. Every data entity has a Contract (interface), Model, and Proxy (three-component system).
-- **Repository Pattern**: All DB access through repositories extending `Webkul\Core\Eloquent\Repository` (Prettus L5). Repository `model()` returns the Contract class, not the Model.
-- **Path Repositories**: `composer.json` uses `"type": "path"` for `packages/*/*`, packages are symlinked — no `composer update` needed for package code changes. Run `composer dump-autoload` after adding new packages.
-- **Service Providers**: Each package has a main ServiceProvider (routes, views, translations, migrations, config) registered in `bootstrap/providers.php`.
-- **Dual Route Files**: Admin routes (`['web', 'admin']` middleware, `config('app.admin_url')` prefix) and Shop routes (`['web', 'locale', 'theme', 'currency']` middleware).
-- **22 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ro, ru, sin, tr, uk, zh_CN. Translation changes must be applied to ALL locale files. Verify with `php artisan bagisto:translations:check`.
+Package layout, the Contract/Model/Proxy trio, repositories, routes, ACL and menus are all covered by
+`bagisto-package-development`.
 
-## Commands
+## Getting it running
 
-### Testing
 ```bash
-# Pest (PHP)
-php artisan test --compact                              # Run all tests
-php artisan test --compact --filter=testName             # Run specific test
-php artisan test --compact packages/Webkul/Admin/tests   # Run package tests
-
-# Playwright (E2E) — Admin (run from packages/Webkul/Admin)
-cd packages/Webkul/Admin && npm install && npx playwright install --with-deps chromium
-cd packages/Webkul/Admin && npx playwright test --config=tests/e2e-pw/playwright.config.ts
-
-# Playwright (E2E) — Shop (run from packages/Webkul/Shop)
-cd packages/Webkul/Shop && npm install && npx playwright install --with-deps chromium
-cd packages/Webkul/Shop && npx playwright test --config=tests/e2e-pw/playwright.config.ts
+composer install
+php artisan bagisto:install     # migrations, seeders, assets
+php artisan serve
+php artisan optimize:clear      # after any config or code change
 ```
 
-### Code Style
+Frontend assets build from within each package, not the root:
+
 ```bash
-vendor/bin/pint --dirty          # Fix changed files only
-vendor/bin/pint                  # Fix all files
-vendor/bin/pint --test           # Check only (CI uses this)
+cd packages/Webkul/Admin && npm install && npm run build   # or Shop, or Installer
 ```
 
-### Frontend (run from within each package: Admin, Shop, or Installer)
-```bash
-cd packages/Webkul/Admin && npm install && npm run build    # Admin production build
-cd packages/Webkul/Shop && npm install && npm run build     # Shop production build
-cd packages/Webkul/Admin && npm run dev                     # Admin dev server with HMR
-cd packages/Webkul/Shop && npm run dev                      # Shop dev server with HMR
-```
+Run the build after **any** frontend change, then re-run the end-to-end gate — a stale bundle makes
+a passing change look broken.
 
-### Database
-```bash
-php artisan migrate              # Run migrations
-php artisan db:seed              # Seed database
-```
+## Non-negotiable
 
-## CI Workflows (.github/workflows/)
-
-| Workflow | Trigger | What it does |
-|----------|---------|--------------|
-| `pest_tests.yml` | push, PR | Installs Bagisto, runs `vendor/bin/pest` |
-| `pint_tests.yml` | push, PR | Runs `pint --test` (style check) |
-| `admin_playwright_tests.yml` | push, PR | Admin E2E tests |
-| `shop_playwright_tests.yml` | push, PR | Shop E2E tests |
-| `translation_tests.yml` | push, PR | Translation key consistency |
-
-## Safety Rails
-
-- **Never modify `bootstrap/providers.php` or `config/concord.php`** without understanding the full provider chain — removing a provider breaks the entire module.
-- **Translations are 22 files per key.** Missing a locale will fail CI. When adding/removing translation keys, hit all 22 files.
-- **No comments inside method bodies.** Docblocks above classes, methods, and properties only. Never annotate a statement with what it does or why it changed — that belongs in the commit message. Applies to `//` and `/** */` alike, in PHP, Blade, JS, and Vue. If a line needs prose to be understood, extract a named method instead.
-- **Pint must pass.** Run `vendor/bin/pint --dirty` before finalizing any PHP change.
-- **Tests must pass.** Run affected package tests after changes. Do not delete tests without approval.
-- **Do not add/remove composer dependencies without approval.**
-- **Do not create documentation files unless explicitly requested.**
-
-## Validation Checklist (Before Marking Complete)
-
-1. `vendor/bin/pint --dirty` — no style violations
-2. `php artisan test --compact` — affected tests pass
-3. `php artisan bagisto:translations:check` — translation keys exist in all 22 locale files (if changed)
-4. No `env()` calls outside `config/` files
-5. New models have Contract + Model + Proxy + Repository
-6. New packages registered in `bootstrap/providers.php` and `config/concord.php`
-7. Conventions from the skills above hold for every file touched — docblocks on each method and
-   property, class members ordered constants → properties → constructor → public → protected →
-   private, multi-clause conditions split across lines, `:` vs `::` correct in Blade
+- **All database access goes through a repository.** The one sanctioned exception is a DataGrid's
+  `prepareQueryBuilder()`.
+- **No comments inside method bodies**, in PHP, Blade, JS or Vue. A docblock above the class, method
+  or property is the only comment this codebase wants.
+- **Every user-facing string goes through `trans()`**, with the key added to all **22** locales;
+  verify with `php artisan bagisto:translations:check`.
+- **Never modify `bootstrap/providers.php` or `config/concord.php`** without understanding the
+  provider chain — removing a provider breaks the module.
+- **No `env()` outside `config/`** — it returns null once the config is cached.
+- **Do not add or remove a Composer or npm dependency without approval.**
+- **Do not create documentation files unless asked.**

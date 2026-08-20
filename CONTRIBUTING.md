@@ -1,62 +1,134 @@
 # Bagisto Contribution Guide
 
-**BUGS:**
+## Before you start working
 
-To encourage active collaboration, Bagisto encourages pull requests, not just bug reports. "Bug reports" may also be sent in the form of a pull request containing a negative test.
+**Comment on the issue and wait to be assigned before you write any code.**
 
-However, when filing a bug report, your issue should contain a title and a clear description of the issue. You should also include as much relevant information as possible and a code sample that demonstrates the issue. The goal of a bug report is to make it easy for yourself - and others - to replicate the bug and develop a fix.
+Several people often pick up the same issue, and the duplicated work is only
+discovered when the second pull request arrives. A short comment — "I'd like to
+take this" — is enough, and it saves someone else an evening.
 
-Remember, bug reports are created in the hope that others with the same problem will collaborate with you on solving it. Creating a bug report serves to help yourself and others start on the path of fixing the problem.
+Check the issue first for an assignee, or for someone who has already said they
+are on it. If it is claimed but has gone quiet, ask in the thread rather than
+opening a competing pull request.
 
-**Projects that you can contribute in:**
+For a feature, agree the approach in the issue **before** building it. A feature
+that arrives as a surprise pull request is far more likely to be turned down on
+direction than on code.
 
-1. Bagisto
+## Bugs
 
-2. Bagisto docs
+Bagisto encourages pull requests, not just bug reports — a bug report may itself
+take the form of a pull request containing a failing test.
 
-3. Laravel-aliexpress-dropship
+A bug report needs a title, a clear description, the version you are on, and
+enough detail to reproduce it, including a code sample where one helps. The goal
+is to let someone else replicate the bug and build a fix.
 
-4. Laravel-aliexpress-dropship-chrome-extension
+## Which branch should you target?
 
-5. Bagisto-custom-style-extension
+The active branches are **`2.4`** (the current release line) and **`master`**
+(the next major). Older lines — `1.x`, `2.1`, `2.2`, `2.3` — receive no new work.
 
-**Core development ideas or discussion:**
+- **Bug fixes** go to the release line the bug affects, usually `2.4`.
+- **Minor, backwards-compatible improvements** go to the same release line.
+- **Major features and breaking changes** go to `master`.
 
-If you propose a new feature, please implement at least some of the code needed to complete the quality.
+Branch from the line you are targeting and open the pull request against that
+same branch.
 
-Informal discussion regarding bugs, new features, and implementation of existing features occurs in the comments of the issues filed using feature template.
+## Projects you can contribute to
 
-**Which branch you should target?**
+- [Bagisto](https://github.com/bagisto/bagisto)
+- [Bagisto documentation](https://github.com/bagisto/bagisto-docs)
+- [Laravel AliExpress Dropship](https://github.com/bagisto/laravel-aliexpress-dropship)
+- [AliExpress Dropship Chrome Extension](https://github.com/bagisto/laravel-aliexpress-dropship-chrome-extension)
 
-All bug fixes should be sent to the latest staging branch, i.e. development branch. Bug fixes should never be sent to the master branch unless they fix features that exist only in the upcoming release.
+## Core development ideas and discussion
 
-Minor features fully backwards compatible with the current Laravel release may be sent to the latest stable branch.
+If you propose a new feature, implement at least enough of it to show the shape
+of the solution. Informal discussion of bugs, new features and the implementation
+of existing ones happens in the comments of the issue.
 
-Major new features should always be sent to the master branch, which contains the upcoming Bagisto release.
+## Compiled assets
 
-**Compiling assets:**
+Do not commit compiled files. Frontend sources live in
+`packages/Webkul/<Package>/src/Resources/assets/`, and the build output goes to
+`public/themes/*/build/`.
 
-If you are submitting a change that will affect a compiled file, such as most of the files in admin/resources/assets/sass or admin/resources/assets/js of the Bagisto repository, do not commit the compiled files. Due to their large size, they cannot realistically be reviewed by a maintainer. This could be exploited as a way to inject malicious code into Bagisto. To defensively prevent this, all compiled files will be generated and committed by Bagisto maintainers.
+Compiled bundles are large, cannot realistically be reviewed, and would be an
+easy way to slip malicious code into Bagisto. Maintainers generate and commit
+them.
 
-**Code style:**
+Build from within the package you changed, never from the repository root:
 
-Bagisto follows PSR-2 for coding standards and PSR-4 as of Laravel for autoloading standards.
+```bash
+cd packages/Webkul/Admin && npm install && npm run build   # or Shop, or Installer
+```
 
-**PHPDoc:**
+## Code style
 
-Below is an example of a valid Bagisto doc block. Note that the @param attribute is followed by two spaces, the argument type, two more spaces, and finally, the variable name:
-  ``` php
-    /**
-    * Register a service with CoreServiceProvider.
-    *
-    * @param  string|array  $loader
-    * @param  \Closure|string|null  $concrete
-    * @param  bool  $shared
-    * @return void
-    * @throws \Exception
-    */
-    protected function registerFacades($loader, $concrete = null, $shared = false)
-    {
-        //
-    }
-  ```
+Bagisto uses **[Laravel Pint](https://laravel.com/docs/pint)** with the `laravel`
+preset, configured in `pint.json`. Run it before opening a pull request — CI runs
+the same check:
+
+```bash
+vendor/bin/pint          # fix
+vendor/bin/pint --test   # confirm; this is the form CI uses
+```
+
+Pint does not format `.blade.php`. Blade style is applied by hand.
+
+Some rules Pint cannot enforce, and a reviewer will ask for:
+
+- Every method and property carries a docblock, whatever its visibility.
+- Class members run constants → properties → constructor → public → protected →
+  private.
+- **No comments inside method bodies**, in PHP, Blade, JS or Vue. If a line needs
+  prose to be understood, extract a named method instead.
+- All database access goes through a repository; the one exception is a
+  DataGrid's `prepareQueryBuilder()`.
+- Every user-facing string goes through `trans()`, with the key added to all
+  **22** locales.
+
+## PHPDoc
+
+A valid Bagisto doc block. Note that `@param` is followed by two spaces, the
+type, two more spaces, then the variable name:
+
+```php
+/**
+ * Register a service with CoreServiceProvider.
+ *
+ * @param  string|array  $loader
+ * @param  \Closure|string|null  $concrete
+ * @param  bool  $shared
+ * @return void
+ *
+ * @throws \Exception
+ */
+protected function registerFacades($loader, $concrete = null, $shared = false)
+{
+    //
+}
+```
+
+Type information belongs in the signature where the language can express it —
+add `@param` and `@return` for what a native type cannot say, such as the shape
+of an array.
+
+## Before you open the pull request
+
+```bash
+vendor/bin/pint --test                       # code style
+vendor/bin/pest                              # tests
+php artisan bagisto:translations:check       # all 22 locales, if you touched any
+```
+
+End-to-end tests run per package, from that package's directory:
+
+```bash
+cd packages/Webkul/Admin && npx playwright test --config=tests/e2e-pw/playwright.config.ts
+```
+
+Say in the description which of these you ran, and which you skipped and why.

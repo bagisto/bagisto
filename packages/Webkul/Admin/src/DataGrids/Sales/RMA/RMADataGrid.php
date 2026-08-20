@@ -111,7 +111,7 @@ class RMADataGrid extends DataGrid
 
                 $color = $row->rma_status_color ?? '';
 
-                return '<p class="label-active" style="background:'.$color.';">'.$row->title.'</p>';
+                return '<p class="label-active" style="background:'.e($color).';">'.e($row->title).'</p>';
             },
         ]);
 

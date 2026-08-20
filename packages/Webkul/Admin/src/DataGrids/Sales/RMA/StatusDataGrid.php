@@ -69,7 +69,7 @@ class StatusDataGrid extends DataGrid
             'filterable_options' => $this->rmaStatusRepository->all(['color as label', 'color as value'])->toArray(),
             'closure' => function ($row) {
                 if ($row->color) {
-                    return '<p class="label-active" style="background: '.$row->color.';">'.$row->color.'</p>';
+                    return '<p class="label-active" style="background: '.e($row->color).';">'.e($row->color).'</p>';
                 }
             },
         ]);

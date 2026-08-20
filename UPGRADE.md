@@ -6,6 +6,8 @@
 
 - [Laravel 12 Upgrade](#laravel-12-upgrade)
 
+- [Theme Customizations Are Now Appearance Sections](#theme-customizations-are-now-appearance-sections)
+
 - [Google reCAPTCHA Enterprise Integration](#google-recaptcha-enterprise-integration)
 
 - [PayPal SDK Upgrade](#paypal-sdk-upgrade)
@@ -90,6 +92,87 @@ Laravel 12 has updated the format for PDF response headers. If you're generating
 #### Testing Updates
 
 If you have custom test cases, ensure all test data includes required fields that may have been added in migrations. For example, if new foreign keys have been introduced, make sure your test factories and test data include these fields.
+
+### Theme Customizations Are Now Appearance Sections
+
+**Impact Probability: High**
+
+Theme customizations have been renamed to **sections** and moved out of Settings
+into their own **Appearance** area. The tables, models, repositories, routes and
+ACL keys all changed, so custom code that touched any of them needs updating.
+
+#### Database
+
+Two tables and one column are renamed by migration. Existing data is preserved —
+the migration renames rather than recreates:
+
+| v2.3 | v2.4 |
+|---|---|
+| `theme_customizations` | `theme_sections` |
+| `theme_customization_translations` | `theme_section_translations` |
+| `theme_section_translations.theme_customization_id` | `theme_section_translations.section_id` |
+
+Update any raw queries, custom migrations or reports that name the old tables or
+that column.
+
+#### Classes
+
+| v2.3 | v2.4 |
+|---|---|
+| `Webkul\Theme\Contracts\ThemeCustomization` | `Webkul\Theme\Contracts\Section` |
+| `Webkul\Theme\Models\ThemeCustomization` | `Webkul\Theme\Models\Section` |
+| `Webkul\Theme\Models\ThemeCustomizationProxy` | `Webkul\Theme\Models\SectionProxy` |
+| `Webkul\Theme\Models\ThemeCustomizationTranslation` | `Webkul\Theme\Models\SectionTranslation` |
+| `Webkul\Theme\Models\ThemeCustomizationTranslationProxy` | `Webkul\Theme\Models\SectionTranslationProxy` |
+| `Webkul\Theme\Repositories\ThemeCustomizationRepository` | `Webkul\Theme\Repositories\SectionRepository` |
+
+If you registered a replacement model through Concord, update the contract you
+bind against.
+
+#### Routes
+
+**Every `admin/settings/themes` route has been removed.** A link or redirect to
+one now 404s.
+
+| v2.3 | v2.4 |
+|---|---|
+| `admin/settings/themes` | `admin/appearance/themes` |
+| `admin/settings/themes/edit/{id}` | `admin/appearance/themes/{code}/sections` |
+
+Route names moved from `admin.settings.themes.*` to `admin.appearance.themes.*`
+and `admin.appearance.sections.*`.
+
+#### ACL
+
+The `settings.themes.*` permission keys no longer exist. Roles are rebuilt around:
+
+- `appearance` · `appearance.themes` · `appearance.themes.activate`
+- `appearance.sections` · `appearance.sections.create` · `appearance.sections.edit` · `appearance.sections.delete`
+
+**A custom role that held `settings.themes` loses access.** Re-grant the
+appearance permissions after upgrading, and update any code calling
+`bouncer()->hasPermission('settings.themes…')`.
+
+#### Behavioural changes
+
+- **Sections are edited beside a live storefront preview**, not on a form of their
+  own. The six per-type pages are replaced by one panel built from the section's
+  type.
+- **Edits are staged, not live.** Content, on/off state and ordering are all held
+  as drafts and reach the storefront only when published. New sections are created
+  switched off with a pending change.
+- **Each channel is previewed and edited on its own**, so a theme customised on
+  two channels is two independent sets of sections.
+- **Only one footer links section per channel** is allowed; the type is withdrawn
+  once a channel has one.
+
+#### Migration steps
+
+1. **Run the migrations** — the renames are automatic and preserve data.
+2. **Update custom code** that names the old tables, column, classes or routes.
+3. **Re-grant appearance permissions** to any custom role that had
+   `settings.themes`.
+4. **Update bookmarks and links** pointing at `admin/settings/themes`.
 
 ### Google reCAPTCHA Enterprise Integration
 

@@ -56,7 +56,7 @@ class ImportDataGrid extends DataGrid
             'label' => trans('admin::app.settings.data-transfer.imports.index.datagrid.uploaded-file'),
             'type' => 'string',
             'closure' => function ($row) {
-                return '<a href="'.route('admin.settings.data_transfer.imports.download', $row->id).'" class="cursor-pointer text-blue-600 hover:underline">'.$row->file_path.'<a>';
+                return '<a href="'.route('admin.settings.data_transfer.imports.download', $row->id).'" class="cursor-pointer text-blue-600 hover:underline">'.e($row->file_path).'</a>';
             },
         ]);
 
@@ -69,7 +69,7 @@ class ImportDataGrid extends DataGrid
                     return '';
                 }
 
-                return '<a href="'.route('admin.settings.data_transfer.imports.download_error_report', $row->id).'" class="cursor-pointer text-blue-600 hover:underline">'.$row->error_file_path.'<a>';
+                return '<a href="'.route('admin.settings.data_transfer.imports.download_error_report', $row->id).'" class="cursor-pointer text-blue-600 hover:underline">'.e($row->error_file_path).'</a>';
             },
         ]);
 
