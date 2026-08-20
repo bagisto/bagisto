@@ -184,8 +184,12 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator("p.text-xl:has(.text-blue-700)").first();
     }
 
+    get miniCart() {
+        return this.page.locator("header").first();
+    }
+
     get cartSummaryToggle() {
-        return this.page.locator("p.flex > span.icon-arrow-down").first();
+        return this.miniCart.locator("p.flex > span.icon-arrow-down:visible").first();
     }
 
     cartSummaryText(index: number) {

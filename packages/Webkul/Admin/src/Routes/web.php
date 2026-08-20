@@ -40,6 +40,11 @@ Route::group(['middleware' => ['admin', NoCacheMiddleware::class], 'prefix' => c
     require 'reporting-routes.php';
 
     /**
+     * Appearance routes.
+     */
+    require 'appearance-routes.php';
+
+    /**
      * Settings routes.
      */
     require 'settings-routes.php';

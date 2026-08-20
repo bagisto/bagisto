@@ -309,7 +309,7 @@
                                         <!-- Value Input -->
                                         <x-admin::form.control-group class="w-full">
                                             <x-admin::form.control-group.label class="required">
-                                                @lang('admin::app.settings.themes.edit.value-input')
+                                                @lang('admin::app.appearance.sections.edit.value-input')
                                             </x-admin::form.control-group.label>
 
                                             <v-field
@@ -319,7 +319,7 @@
                                                 v-model="option.value"
                                                 :value="option.value"
                                                 v-slot="{ field }"
-                                                label="{{ trans('admin::app.settings.themes.edit.value-input') }}"
+                                                label="{{ trans('admin::app.appearance.sections.edit.value-input') }}"
                                             >
                                                 <input
                                                     type="text"
@@ -328,7 +328,7 @@
                                                     class="flex w-full min-h-[39px] py-2 px-3 border rounded-md text-sm text-gray-600 dark:text-gray-300 transition-all hover:border-gray-400 dark:hover:border-gray-400 focus:border-gray-400 dark:focus:border-gray-400 dark:bg-gray-900 dark:border-gray-800"
                                                     :name="'value[' + index + ']'"
                                                     v-bind="field"
-                                                    placeholder="{{ trans('admin::app.settings.themes.edit.value-input') }}"
+                                                    placeholder="{{ trans('admin::app.appearance.sections.edit.value-input') }}"
                                                 >
                                             </v-field>
 

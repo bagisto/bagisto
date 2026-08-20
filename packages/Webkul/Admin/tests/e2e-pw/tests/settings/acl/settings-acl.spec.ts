@@ -19,7 +19,6 @@ test.describe("settings acl", () => {
         await aclManagement.editRolePermission([
             "settings.data_transfer",
             "settings.taxes",
-            "settings.themes",
             "settings.roles",
             "settings.users",
             "settings.channels",
@@ -69,7 +68,6 @@ test.describe("settings acl", () => {
         await aclManagement.editRolePermission([
             "settings.data_transfer",
             "settings.taxes",
-            "settings.themes",
             "settings.roles",
             "settings.users",
             "settings.channels",
@@ -123,7 +121,6 @@ test.describe("settings acl", () => {
         await aclManagement.editRolePermission([
             "settings.data_transfer",
             "settings.taxes",
-            "settings.themes",
             "settings.roles",
             "settings.users",
             "settings.channels",
@@ -181,7 +178,6 @@ test.describe("settings acl", () => {
         await aclManagement.editRolePermission([
             "settings.data_transfer",
             "settings.taxes",
-            "settings.themes",
             "settings.roles",
             "settings.users",
             "settings.channels",
@@ -237,7 +233,6 @@ test.describe("settings acl", () => {
         await aclManagement.editRolePermission([
             "settings.data_transfer",
             "settings.taxes",
-            "settings.themes",
             "settings.roles",
             "settings.users",
             "settings.inventory_sources",
@@ -288,7 +283,6 @@ test.describe("settings acl", () => {
         await aclManagement.editRolePermission([
             "settings.data_transfer",
             "settings.taxes",
-            "settings.themes",
             "settings.roles",
             "settings.channels",
             "settings.inventory_sources",
@@ -338,7 +332,6 @@ test.describe("settings acl", () => {
         await aclManagement.editRolePermission([
             "settings.data_transfer",
             "settings.taxes",
-            "settings.themes",
             "settings.users",
             "settings.channels",
             "settings.inventory_sources",
@@ -380,56 +373,6 @@ test.describe("settings acl", () => {
         await aclManagement.roleDeleteVerify();
     });
 
-    test("should create custom role with settings (themes) permission", async ({
-        adminPage,
-    }) => {
-        const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["settings"]);
-        await aclManagement.editRolePermission([
-            "settings.data_transfer",
-            "settings.taxes",
-            "settings.roles",
-            "settings.users",
-            "settings.channels",
-            "settings.inventory_sources",
-            "settings.exchange_rates",
-            "settings.currencies",
-            "settings.locales",
-        ]);
-        await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["settings->themes"]);
-    });
-
-    test("should create custom role with settings (themes->create) permission", async ({
-        adminPage,
-    }) => {
-        const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["settings.themes.create"]);
-        await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["settings->themes"]);
-        await aclManagement.themeCreateVerify();
-    });
-
-    test("should create custom role with settings (themes->edit) permission", async ({
-        adminPage,
-    }) => {
-        const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["settings.themes.edit"]);
-        await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["settings->themes"]);
-        await aclManagement.themeEditVerify();
-    });
-
-    test("should create custom role with settings (themes->delete) permission", async ({
-        adminPage,
-    }) => {
-        const aclManagement = new ACLManagement(adminPage);
-        await aclManagement.createRole("custom", ["settings.themes.delete"]);
-        await aclManagement.createUser();
-        await aclManagement.verfiyAssignedRole(["settings->themes"]);
-        await aclManagement.themeDeleteVerify();
-    });
-
     test("should create custom role with settings (taxes) permission", async ({
         adminPage,
     }) => {
@@ -437,7 +380,6 @@ test.describe("settings acl", () => {
         await aclManagement.createRole("custom", ["settings"]);
         await aclManagement.editRolePermission([
             "settings.data_transfer",
-            "settings.themes",
             "settings.roles",
             "settings.users",
             "settings.channels",
@@ -518,7 +460,6 @@ test.describe("settings acl", () => {
         await aclManagement.createRole("custom", ["settings"]);
         await aclManagement.editRolePermission([
             "settings.taxes",
-            "settings.themes",
             "settings.roles",
             "settings.users",
             "settings.channels",

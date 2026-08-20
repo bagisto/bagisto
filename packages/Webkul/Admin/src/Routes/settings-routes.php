@@ -10,7 +10,6 @@ use Webkul\Admin\Http\Controllers\Settings\LocaleController;
 use Webkul\Admin\Http\Controllers\Settings\RoleController;
 use Webkul\Admin\Http\Controllers\Settings\Tax\TaxCategoryController;
 use Webkul\Admin\Http\Controllers\Settings\Tax\TaxRateController;
-use Webkul\Admin\Http\Controllers\Settings\ThemeController;
 use Webkul\Admin\Http\Controllers\Settings\UserController;
 
 /**
@@ -166,22 +165,6 @@ Route::prefix('settings')->group(function () {
         Route::delete('edit/{id}', 'destroy')->name('admin.settings.users.delete');
 
         Route::put('confirm', 'destroySelf')->name('admin.settings.users.destroy');
-    });
-
-    Route::controller(ThemeController::class)->prefix('themes')->group(function () {
-        Route::get('', 'index')->name('admin.settings.themes.index');
-
-        Route::get('edit/{id}', 'edit')->name('admin.settings.themes.edit');
-
-        Route::post('store', 'store')->name('admin.settings.themes.store');
-
-        Route::post('edit/{id}', 'update')->name('admin.settings.themes.update');
-
-        Route::delete('edit/{id}', 'destroy')->name('admin.settings.themes.delete');
-
-        Route::post('mass-update', 'massUpdate')->name('admin.settings.themes.mass_update');
-
-        Route::post('mass-delete', 'massDestroy')->name('admin.settings.themes.mass_delete');
     });
 
     /**

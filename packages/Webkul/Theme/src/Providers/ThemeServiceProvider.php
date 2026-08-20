@@ -4,6 +4,8 @@ namespace Webkul\Theme\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Webkul\Theme\Models\SectionProxy;
+use Webkul\Theme\Observers\SectionObserver;
 use Webkul\Theme\ThemeViewFinder;
 use Webkul\Theme\ViewRenderEventManager;
 
@@ -37,6 +39,8 @@ class ThemeServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
+
+        SectionProxy::observe(SectionObserver::class);
 
         Blade::directive('bagistoVite', function ($expression) {
             return "<?php echo themes()->setBagistoVite({$expression})->toHtml(); ?>";
