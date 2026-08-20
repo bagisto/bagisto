@@ -351,7 +351,13 @@ class CategoryRepository extends Repository
      */
     protected function saveMediaAltText($category, string $attribute, ?string $altText): void
     {
-        $category->translateOrNew(core()->getRequestedLocaleCode())->{$attribute} = $altText;
+        foreach (core()->getRequestedLocaleCodes() as $localeCode) {
+            if (! $translation = $category->translate($localeCode)) {
+                continue;
+            }
+
+            $translation->{$attribute} = $altText;
+        }
 
         $category->save();
     }

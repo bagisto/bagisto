@@ -138,7 +138,9 @@ class AttributeOptionRepository extends Repository
             return;
         }
 
-        $option->translateOrNew(core()->getRequestedLocaleCode())->swatch_alt = $data['swatch_alt'];
+        foreach (core()->getRequestedLocaleCodes() as $localeCode) {
+            $option->translateOrNew($localeCode)->swatch_alt = $data['swatch_alt'];
+        }
 
         $option->save();
     }

@@ -140,7 +140,13 @@ class ChannelRepository extends Repository
             array_key_exists('alt_text', $meta)
             && in_array($type.'_alt', $channel->translatedAttributes)
         ) {
-            $channel->translateOrNew(core()->getRequestedLocaleCode())->{$type.'_alt'} = $meta['alt_text'];
+            foreach (core()->getRequestedLocaleCodes() as $localeCode) {
+                if (! $translation = $channel->translate($localeCode)) {
+                    continue;
+                }
+
+                $translation->{$type.'_alt'} = $meta['alt_text'];
+            }
 
             $channel->save();
         }
