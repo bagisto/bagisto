@@ -651,6 +651,26 @@ it('should hold a reorder until it is published', function () {
         ->and($second->draft_sort_order)->toBeNull();
 });
 
+it('should stage only the sections a reorder actually moved', function () {
+    $first = makeSection(['sort_order' => 5]);
+
+    $second = makeSection(['sort_order' => 6]);
+
+    $third = makeSection(['sort_order' => 9]);
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.reorder'), [
+        'sections' => [$first->id, $third->id, $second->id],
+    ])
+        ->assertOk()
+        ->assertJsonPath('pending.'.$first->id, false)
+        ->assertJsonPath('pending.'.$third->id, true)
+        ->assertJsonPath('pending.'.$second->id, true);
+
+    expect($first->refresh()->draft_sort_order)->toBeNull();
+});
+
 it('should put a staged change back where it was when it is discarded', function () {
     $section = makeSection(['status' => 1]);
 

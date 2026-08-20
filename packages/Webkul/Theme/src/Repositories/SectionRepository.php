@@ -174,8 +174,12 @@ class SectionRepository extends Repository
      */
     public function saveOrderDraft(array $sectionIds): void
     {
+        $sections = $this->findWhereIn('id', $sectionIds)->keyBy('id');
+
+        $this->closeOrderGaps($sections);
+
         foreach (array_values($sectionIds) as $position => $id) {
-            $section = $this->find($id);
+            $section = $sections->get($id);
 
             if (! $section) {
                 continue;
@@ -184,6 +188,30 @@ class SectionRepository extends Repository
             $order = $position + 1;
 
             $section->draft_sort_order = $order === (int) $section->sort_order ? null : $order;
+
+            $section->save();
+        }
+    }
+
+    /**
+     * Number the sections from one, without changing the order they are already in.
+     *
+     * Copying and deleting leave gaps in the stored numbers, and a dragged list is read
+     * back as positions. Comparing the two would report every section as moved the moment
+     * any one of them was, so the gaps are closed before the new positions are held.
+     */
+    protected function closeOrderGaps(Collection $sections): void
+    {
+        $position = 0;
+
+        foreach ($sections->sortBy('sort_order') as $section) {
+            $position++;
+
+            if ((int) $section->sort_order === $position) {
+                continue;
+            }
+
+            $section->sort_order = $position;
 
             $section->save();
         }
