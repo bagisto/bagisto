@@ -34,133 +34,151 @@
             type="text/x-template"
             id="v-appearance-themes-template"
         >
-            <div class="mt-8 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
+            <div class="mt-8 flex flex-col gap-8">
                 <div
-                    class="box-shadow flex flex-col overflow-hidden rounded bg-white dark:bg-gray-900"
-                    v-for="theme in themes"
-                    :key="theme.code"
+                    v-for="group in groups"
+                    :key="group.key"
                 >
-                    <!-- Screenshot -->
-                    <div class="relative flex h-[190px] items-center justify-center bg-gray-100 dark:bg-gray-950">
-                        <img
-                            class="h-full w-full object-cover"
-                            :src="theme.screenshot"
-                            :alt="theme.name"
-                            v-if="theme.screenshot && ! failed[theme.code]"
-                            v-on:error="failed[theme.code] = true"
-                        />
+                    <!-- Group Heading -->
+                    <div class="flex items-center gap-2">
+                        <p class="text-base font-semibold text-gray-800 dark:text-white">
+                            @{{ group.label }}
+                        </p>
 
-                        <span
-                            class="icon-image text-5xl text-gray-400"
-                            v-else
-                        ></span>
-
-                        <!-- Active Badge -->
-                        <span
-                            class="label-active absolute top-3 ltr:left-3 rtl:right-3"
-                            v-if="theme.status === 'active'"
-                        >
-                            @lang('admin::app.appearance.themes.index.active')
+                        <span class="rounded-full bg-gray-100 px-2 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-950 dark:text-gray-300">
+                            @{{ group.themes.length }}
                         </span>
                     </div>
 
-                    <!-- Body -->
-                    <div class="flex flex-1 flex-col gap-2 p-4">
-                        <div class="flex items-start justify-between gap-2">
-                            <p class="text-base font-semibold text-gray-800 dark:text-white">
-                                @{{ theme.name }}
-                            </p>
-
-                            <p
-                                class="flex shrink-0 items-center gap-1 text-xs text-gray-500 dark:text-gray-300"
-                                v-if="theme.rating"
-                            >
-                                <span class="icon-star-fill text-sm text-yellow-500"></span>
-
-                                @{{ theme.rating }}
-                            </p>
-                        </div>
-
-                        <p class="text-xs text-gray-500 dark:text-gray-300">
-                            <template v-if="theme.author">
-                                @lang('admin::app.appearance.themes.index.by') @{{ theme.author }}
-                            </template>
-
-                            <template v-if="theme.version">
-                                · v@{{ theme.version }}
-                            </template>
-                        </p>
-
-                        <p
-                            class="line-clamp-3 text-xs text-gray-600 dark:text-gray-300"
-                            v-if="theme.description"
+                    <div class="mt-4 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
+                        <div
+                            class="box-shadow flex flex-col overflow-hidden rounded bg-white dark:bg-gray-900"
+                            v-for="theme in group.themes"
+                            :key="theme.code"
                         >
-                            @{{ theme.description }}
-                        </p>
+                            <!-- Screenshot -->
+                            <div class="relative flex h-[190px] items-center justify-center bg-gray-100 dark:bg-gray-950">
+                                <img
+                                    class="h-full w-full object-cover"
+                                    :src="theme.screenshot"
+                                    :alt="theme.name"
+                                    v-if="theme.screenshot && ! failed[theme.code]"
+                                    v-on:error="failed[theme.code] = true"
+                                />
 
-                        <!-- Channels this theme is live on -->
-                        <p
-                            class="mt-1 text-xs font-medium text-green-600"
-                            v-if="isEverywhere(theme)"
-                        >
-                            @lang('admin::app.appearance.themes.index.active-on-all')
-                        </p>
+                                <span
+                                    class="icon-image text-5xl text-gray-400"
+                                    v-else
+                                ></span>
 
-                        <p
-                            class="mt-1 text-xs font-medium text-green-600"
-                            v-else-if="theme.active_on.length"
-                        >
-                            @lang('admin::app.appearance.themes.index.active-on')
-                            @{{ theme.active_on.map(channel => channel.name).join(', ') }}
-                        </p>
-
-                        <p
-                            class="mt-1 text-xs text-gray-400"
-                            v-else-if="theme.is_installed"
-                        >
-                            @lang('admin::app.appearance.themes.index.not-in-use')
-                        </p>
-
-                        <!-- Actions, always on their own row -->
-                        <div class="mt-auto flex w-full flex-wrap items-center gap-2 pt-3">
-                            @if (bouncer()->hasPermission('appearance.themes.activate'))
-                                <button
-                                    type="button"
-                                    class="primary-button"
-                                    v-if="theme.is_installed && availableChannels(theme).length"
-                                    @click="openActivate(theme)"
+                                <!-- Active Badge -->
+                                <span
+                                    class="label-active absolute top-3 ltr:left-3 rtl:right-3"
+                                    v-if="theme.status === 'active'"
                                 >
-                                    @lang('admin::app.appearance.themes.index.activate-btn')
-                                </button>
-                            @endif
+                                    @lang('admin::app.appearance.themes.index.active')
+                                </span>
+                            </div>
 
-                            <a
-                                class="primary-button"
-                                :href="theme.url"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                v-if="! theme.is_installed && theme.url"
-                            >
-                                @lang('admin::app.appearance.themes.index.buy-btn')
-                            </a>
+                            <!-- Body -->
+                            <div class="flex flex-1 flex-col gap-2 p-4">
+                                <div class="flex items-start justify-between gap-2">
+                                    <p class="text-base font-semibold text-gray-800 dark:text-white">
+                                        @{{ theme.name }}
+                                    </p>
 
-                            <a
-                                class="secondary-button"
-                                :href="theme.demo_url"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                v-if="! theme.is_installed && theme.demo_url"
-                            >
-                                @lang('admin::app.appearance.themes.index.preview-btn')
-                            </a>
+                                    <p
+                                        class="flex shrink-0 items-center gap-1 text-xs text-gray-500 dark:text-gray-300"
+                                        v-if="theme.rating"
+                                    >
+                                        <span class="icon-star-fill text-sm text-yellow-500"></span>
 
-                            <a
-                                class="secondary-button"
-                                :href="'{{ route('admin.appearance.sections.index', ['code' => '__CODE__']) }}'.replace('__CODE__', theme.code)"
-                                v-if="theme.is_installed"
-                            >
-                                @lang('admin::app.appearance.themes.index.customize-btn')
-                            </a>
+                                        @{{ theme.rating }}
+                                    </p>
+                                </div>
+
+                                <p class="text-xs text-gray-500 dark:text-gray-300">
+                                    <template v-if="theme.author">
+                                        @lang('admin::app.appearance.themes.index.by') @{{ theme.author }}
+                                    </template>
+
+                                    <template v-if="theme.version">
+                                        · v@{{ theme.version }}
+                                    </template>
+                                </p>
+
+                                <p
+                                    class="line-clamp-3 text-xs text-gray-600 dark:text-gray-300"
+                                    v-if="theme.description"
+                                >
+                                    @{{ theme.description }}
+                                </p>
+
+                                <!-- Channels this theme is live on -->
+                                <p
+                                    class="mt-1 text-xs font-medium text-green-600"
+                                    v-if="isEverywhere(theme)"
+                                >
+                                    @lang('admin::app.appearance.themes.index.active-on-all')
+                                </p>
+
+                                <p
+                                    class="mt-1 text-xs font-medium text-green-600"
+                                    v-else-if="theme.active_on.length"
+                                >
+                                    @lang('admin::app.appearance.themes.index.active-on')
+                                    @{{ theme.active_on.map(channel => channel.name).join(', ') }}
+                                </p>
+
+                                <p
+                                    class="mt-1 text-xs text-gray-400"
+                                    v-else-if="theme.is_installed"
+                                >
+                                    @lang('admin::app.appearance.themes.index.not-in-use')
+                                </p>
+
+                                <!-- Actions, always on their own row -->
+                                <div class="mt-auto flex w-full flex-wrap items-center gap-2 pt-3">
+                                    @if (bouncer()->hasPermission('appearance.themes.activate'))
+                                        <button
+                                            type="button"
+                                            class="primary-button"
+                                            v-if="theme.is_installed && availableChannels(theme).length"
+                                            @click="openActivate(theme)"
+                                        >
+                                            @lang('admin::app.appearance.themes.index.activate-btn')
+                                        </button>
+                                    @endif
+
+                                    <a
+                                        class="primary-button"
+                                        :href="theme.url"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        v-if="! theme.is_installed && theme.url"
+                                    >
+                                        @lang('admin::app.appearance.themes.index.buy-btn')
+                                    </a>
+
+                                    <a
+                                        class="secondary-button"
+                                        :href="theme.demo_url"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        v-if="! theme.is_installed && theme.demo_url"
+                                    >
+                                        @lang('admin::app.appearance.themes.index.preview-btn')
+                                    </a>
+
+                                    <a
+                                        class="secondary-button"
+                                        :href="'{{ route('admin.appearance.sections.index', ['code' => '__CODE__']) }}'.replace('__CODE__', theme.code)"
+                                        v-if="theme.is_installed"
+                                    >
+                                        @lang('admin::app.appearance.themes.index.customize-btn')
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -269,6 +287,27 @@
 
                         isLoading: false,
                     };
+                },
+
+                computed: {
+                    /**
+                     * The themes under the heading each belongs to, so the ones this store
+                     * already has are told apart from the ones it would have to buy. A
+                     * heading with nothing under it is left out.
+                     */
+                    groups() {
+                        return [
+                            {
+                                key: 'installed',
+                                label: "@lang('admin::app.appearance.themes.index.my-themes')",
+                                themes: this.themes.filter(theme => theme.is_installed),
+                            }, {
+                                key: 'available',
+                                label: "@lang('admin::app.appearance.themes.index.buy-themes')",
+                                themes: this.themes.filter(theme => ! theme.is_installed),
+                            },
+                        ].filter(group => group.themes.length);
+                    },
                 },
 
                 methods: {
