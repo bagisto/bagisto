@@ -73,6 +73,15 @@ Route::get('/', [HomeController::class, 'index'])
     ->name('shop.home.index')
     ->middleware('cache.response');
 
+/**
+ * Appearance editor preview, never cached.
+ *
+ * The path must stay one segment deep: storefront markup emits relative asset urls such
+ * as `cache/small/...`, which a nested path would resolve to the catch-all slug route.
+ */
+Route::get('appearance-preview', [HomeController::class, 'preview'])
+    ->name('shop.appearance.preview');
+
 Route::get('contact-us', [HomeController::class, 'contactUs'])
     ->name('shop.home.contact_us')
     ->middleware('cache.response');

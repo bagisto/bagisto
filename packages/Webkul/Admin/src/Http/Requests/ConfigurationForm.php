@@ -34,13 +34,38 @@ class ConfigurationForm extends FormRequest
                 $key = "{$data['key']}.{$field['name']}";
 
                 // Check delete key exist in the request
-                if (! $this->has("{$key}.delete")) {
-                    return [$key => $this->getValidationRules($field['validation'] ?? 'nullable')];
+                if ($this->has("{$key}.delete")) {
+                    return [];
                 }
 
-                return [];
+                if (! $this->dependencyIsMet($data['key'], $field)) {
+                    return [];
+                }
+
+                return [$key => $this->getValidationRules($field['validation'] ?? 'nullable')];
             })->toArray();
         })->toArray();
+    }
+
+    /**
+     * Determine whether a field's depend condition is met by the submitted values.
+     *
+     * A field the depend hides is never submitted, so validating it would reject a form the
+     * admin cannot fill.
+     */
+    protected function dependencyIsMet(string $itemKey, array $field): bool
+    {
+        if (empty($field['depends'])) {
+            return true;
+        }
+
+        [$name, $values] = array_pad(explode(':', $field['depends'], 2), 2, '');
+
+        return in_array(
+            (string) $this->input("{$itemKey}.{$name}"),
+            explode(',', $values),
+            true
+        );
     }
 
     /**

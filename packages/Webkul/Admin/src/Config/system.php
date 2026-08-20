@@ -1,5 +1,6 @@
 <?php
 
+use Webkul\Core\Mail\Transport\DynamicMailTransport;
 use Webkul\MagicAI\AiProvider;
 use Webkul\Sales\Models\Order;
 
@@ -1606,12 +1607,37 @@ return [
                 'path' => 'admin::configuration.custom-views.smtp-driver-notice',
             ],
             [
+                'name' => 'driver',
+                'title' => 'admin::app.configuration.index.email.smtp.driver',
+                'info' => 'admin::app.configuration.index.email.smtp.driver-info',
+                'type' => 'select',
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.email.smtp.driver-smtp',
+                        'value' => DynamicMailTransport::DRIVER_SMTP,
+                    ],
+                    [
+                        'title' => 'admin::app.configuration.index.email.smtp.driver-brevo-api',
+                        'value' => DynamicMailTransport::DRIVER_BREVO_API,
+                    ],
+                ],
+                'channel_based' => false,
+                'default' => DynamicMailTransport::DRIVER_SMTP,
+            ], [
+                'name' => 'brevo_api_key',
+                'title' => 'admin::app.configuration.index.email.smtp.brevo-api-key',
+                'info' => 'admin::app.configuration.index.email.smtp.brevo-api-key-info',
+                'type' => 'password',
+                'channel_based' => false,
+                'depends' => 'driver:'.DynamicMailTransport::DRIVER_BREVO_API,
+            ], [
                 'name' => 'host',
                 'title' => 'admin::app.configuration.index.email.smtp.host',
                 'type' => 'text',
                 'validation' => 'required',
                 'channel_based' => false,
                 'default' => config('mail.mailers.smtp.host'),
+                'depends' => 'driver:'.DynamicMailTransport::DRIVER_SMTP,
             ], [
                 'name' => 'port',
                 'title' => 'admin::app.configuration.index.email.smtp.port',
@@ -1619,6 +1645,7 @@ return [
                 'validation' => 'required|numeric',
                 'channel_based' => false,
                 'default' => config('mail.mailers.smtp.port'),
+                'depends' => 'driver:'.DynamicMailTransport::DRIVER_SMTP,
             ], [
                 'name' => 'encryption',
                 'title' => 'admin::app.configuration.index.email.smtp.encryption',
@@ -1630,18 +1657,21 @@ return [
                 ],
                 'channel_based' => false,
                 'default' => config('mail.mailers.smtp.encryption', 'tls'),
+                'depends' => 'driver:'.DynamicMailTransport::DRIVER_SMTP,
             ], [
                 'name' => 'username',
                 'title' => 'admin::app.configuration.index.email.smtp.username',
                 'type' => 'text',
                 'channel_based' => false,
                 'default' => config('mail.mailers.smtp.username'),
+                'depends' => 'driver:'.DynamicMailTransport::DRIVER_SMTP,
             ], [
                 'name' => 'password',
                 'title' => 'admin::app.configuration.index.email.smtp.password',
                 'type' => 'password',
                 'channel_based' => false,
                 'default' => config('mail.mailers.smtp.password'),
+                'depends' => 'driver:'.DynamicMailTransport::DRIVER_SMTP,
             ],
         ],
     ], [

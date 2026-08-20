@@ -245,6 +245,18 @@ class ItemField
     }
 
     /**
+     * Get the values of the depend field that make this one visible.
+     */
+    public function getDependFieldValue(): string
+    {
+        if (empty($depends = $this->getDepends())) {
+            return '';
+        }
+
+        return (string) collect(explode(':', $depends))->last();
+    }
+
+    /**
      * Returns the select options for the field.
      */
     protected function getFieldOptions(string $options): array

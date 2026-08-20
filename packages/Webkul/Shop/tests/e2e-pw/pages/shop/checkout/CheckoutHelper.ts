@@ -184,6 +184,10 @@ export class CheckoutHelper extends BasePage {
         return this.page.locator("p.text-xl:has(.text-blue-700)").first();
     }
 
+    get miniCart() {
+        return this.page.locator("header").first();
+    }
+
     get cartSummaryToggle() {
         return this.page
             .locator("div.flex-1.overflow-auto")

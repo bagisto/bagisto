@@ -8,6 +8,29 @@ Bagisto 2.5.x - open-source Laravel 13 e-commerce platform. PHP 8.4+, Vue.js 3, 
 
 Runs on MySQL 8.0 or PostgreSQL 16; both are first-class and CI covers each.
 
+## Skills — load these before writing code
+
+This repository ships its conventions as skills under `.claude/skills/`. Invoke them with the Skill
+tool — `package-development`, `blade-conventions`, `pest-testing`.
+
+**Load the relevant ones before writing or reviewing code, not after.** They carry rules that
+`vendor/bin/pint` does not enforce and that a reviewer will otherwise send back.
+
+| Skill | Load it when | It settles |
+|---|---|---|
+| `package-development` | Any PHP: controllers, repositories, models, DataGrids, migrations, listeners, jobs, enums | Docblocks on every method/property, class member order, multi-clause conditions, comment discipline, repository-over-query-builder, package/menu/ACL/system-config structure |
+| `blade-conventions` | Any `.blade.php`, in any package | `:` vs `::` binding, anonymous vs Vue-backed components, attribute layout, `@props` alignment, comment syntax per layer, translations and `view_render_event` placement |
+| `pest-testing` | Writing or changing tests | Suite layout, test-case bindings, assertion style, datasets, registering a new package's tests |
+
+One rule that catches people out:
+
+- **A pre-existing violation in a file you touch is yours.** `package-development` is explicit:
+  when you edit a class, scan its whole member order and docblocks and fix what is already wrong.
+  Leaving it is treated the same as introducing it.
+
+Where a skill and the surrounding code genuinely disagree, match the surrounding code and say so in
+your summary rather than silently churning the codebase either way.
+
 ## Common Commands
 
 ### Development

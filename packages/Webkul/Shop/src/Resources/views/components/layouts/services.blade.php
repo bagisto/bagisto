@@ -1,30 +1,32 @@
 {!! view_render_event('bagisto.shop.layout.features.before') !!}
 
-<!--
-    The ThemeCustomizationRepository repository is injected directly here because there is no way
-    to retrieve it from the view composer, as this is an anonymous component.
--->
-@inject('themeCustomizationRepository', 'Webkul\Theme\Repositories\ThemeCustomizationRepository')
+@inject('sectionRepository', 'Webkul\Theme\Repositories\SectionRepository')
 
 @php
     $channel = core()->getCurrentChannel();
 
-    $customization = $themeCustomizationRepository->findOneWhere([
-        'type'       => 'services_content',
-        'status'     => 1,
-        'theme_code' => $channel->theme,
-        'channel_id' => $channel->id,
-    ]); 
+    $sections = $sectionRepository->findAllOfType(
+        'services_content',
+        $channel->id,
+        $channel->theme,
+        app()->getLocale()
+    );
 @endphp
 
 <!-- Features -->
-@if ($customization)
+@foreach ($sections as $section)
+    @continue (empty($section->options['services']))
+
     <div
         class="container mt-20 max-lg:px-8 max-md:mt-10 max-md:px-4"
         v-pre
+        @if ($sectionRepository->isPreviewing())
+            data-section-id="{{ $section->id }}"
+            data-section-name="{{ $section->name }}"
+        @endif
     >
         <div class="max-md:max-y-6 flex justify-center gap-6 max-lg:flex-wrap max-md:grid max-md:grid-cols-2 max-md:gap-x-2.5 max-md:text-center">
-            @foreach ($customization->options['services'] as $service)
+            @foreach ($section->options['services'] as $service)
                 <div class="flex items-center gap-5 bg-white max-md:grid max-md:gap-2.5 max-sm:gap-1 max-sm:px-2">
                     <span
                         class="{{ $service['service_icon'] }} flex items-center justify-center w-15 h-15 bg-white border border-black rounded-full text-4xl text-navyBlue p-2.5 max-md:m-auto max-md:w-16 max-md:h-16 max-sm:w-10 max-sm:h-10 max-sm:text-2xl"
@@ -47,6 +49,6 @@
             @endforeach
         </div>
     </div>
-@endif
+@endforeach
 
 {!! view_render_event('bagisto.shop.layout.features.after') !!}

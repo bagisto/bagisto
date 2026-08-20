@@ -422,7 +422,7 @@
                                     :value="old('type')"
                                     v-model="attributeType"
                                     :label="trans('admin::app.catalog.attributes.create.type')"
-                                    @change="swatchAttribute=true"
+                                    @change="onTypeChange"
                                 >
                                     @foreach($attributeTypes as $attributeType)
                                         <option
@@ -507,7 +507,7 @@
                             </x-admin::form.control-group>
 
                             <!-- REGEX -->
-                            <x-admin::form.control-group v-show="validationType == 'regex'">
+                            <x-admin::form.control-group v-show="attributeType == 'text' && validationType == 'regex'">
                                 <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.attributes.create.regex')
                                 </x-admin::form.control-group.label>
@@ -515,7 +515,7 @@
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="regex"
-                                    ::rules="validationType == 'regex' ? 'required|regex_pattern' : ''"
+                                    ::rules="attributeType == 'text' && validationType == 'regex' ? 'required|regex_pattern' : ''"
                                     :value="old('regex')"
                                     :label="trans('admin::app.catalog.attributes.create.regex')"
                                     :placeholder="trans('admin::app.catalog.attributes.create.regex')"
@@ -908,6 +908,14 @@
                 },
 
                 methods: {
+                    onTypeChange() {
+                        this.swatchAttribute = true;
+
+                        if (this.attributeType !== 'text') {
+                            this.validationType = '';
+                        }
+                    },
+
                     storeOptions(params, { resetForm }) {
                         const sortedLocales = Object.values(this.locales).sort((a, b) => a.name.localeCompare(b.name));
 

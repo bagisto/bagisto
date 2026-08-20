@@ -303,13 +303,31 @@ return [
     ],
 
     /**
+     * Appearance.
+     */
+    [
+        'key' => 'appearance',
+        'name' => 'admin::app.components.layouts.sidebar.appearance',
+        'route' => 'admin.appearance.themes.index',
+        'sort' => 8,
+        'icon' => 'icon-store',
+        'icon-class' => 'appearance-icon',
+    ], [
+        'key' => 'appearance.themes',
+        'name' => 'admin::app.components.layouts.sidebar.themes',
+        'route' => 'admin.appearance.themes.index',
+        'sort' => 1,
+        'icon' => '',
+    ],
+
+    /**
      * Settings.
      */
     [
         'key' => 'settings',
         'name' => 'admin::app.components.layouts.sidebar.settings',
         'route' => 'admin.settings.locales.index',
-        'sort' => 8,
+        'sort' => 9,
         'icon' => 'icon-settings',
         'icon-class' => 'settings-icon',
     ], [
@@ -355,12 +373,6 @@ return [
         'sort' => 7,
         'icon' => '',
     ], [
-        'key' => 'settings.themes',
-        'name' => 'admin::app.components.layouts.sidebar.themes',
-        'route' => 'admin.settings.themes.index',
-        'sort' => 8,
-        'icon' => '',
-    ], [
         'key' => 'settings.taxes',
         'name' => 'admin::app.components.layouts.sidebar.taxes',
         'route' => 'admin.settings.taxes.categories.index',
@@ -399,7 +411,7 @@ return [
         'key' => 'configuration',
         'name' => 'admin::app.components.layouts.sidebar.configure',
         'route' => 'admin.configuration.index',
-        'sort' => 9,
+        'sort' => 10,
         'icon' => 'icon-configuration',
     ],
 ];

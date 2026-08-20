@@ -1,6 +1,6 @@
 export type ACLRouteConfig = {
     allowed: string;
-    sidebar: string;
+    sidebar?: string;
     notAllowed?: string[];
 };
 
@@ -831,23 +831,6 @@ export const ACL_ROUTES: Record<string, ACLRouteConfig> = {
         ],
     },
 
-    "settings->themes": {
-        allowed: "admin/settings/themes",
-        sidebar: "/admin/settings/themes",
-        notAllowed: [
-            "admin/dashboard",
-            "admin/catalog/products",
-            "admin/customers",
-            "admin/cms",
-            "admin/marketing/promotions/catalog-rules",
-            "admin/reporting/sales",
-            "admin/configuration",
-            "admin/sales/orders",
-            "admin/settings/locales",
-            "admin/settings/currencies",
-        ],
-    },
-
     "settings->taxes": {
         allowed: "admin/settings/taxes/categories",
         sidebar: "/admin/settings/taxes/categories",
@@ -929,6 +912,55 @@ export const ACL_ROUTES: Record<string, ACLRouteConfig> = {
             "admin/marketing/promotions/catalog-rules",
             "admin/reporting/sales",
             "admin/settings/locales",
+            "admin/sales/orders",
+        ],
+    },
+
+    appearance: {
+        allowed: "admin/appearance/themes",
+        sidebar: "/admin/appearance/themes",
+        notAllowed: [
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+        ],
+    },
+
+    "appearance->themes": {
+        allowed: "admin/appearance/themes",
+        sidebar: "/admin/appearance/themes",
+        notAllowed: [
+            "admin/appearance/themes/default/sections",
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
+            "admin/sales/orders",
+        ],
+    },
+
+    "appearance->sections": {
+        allowed: "admin/appearance/themes/default/sections",
+        notAllowed: [
+            "admin/appearance/themes",
+            "admin/dashboard",
+            "admin/catalog/products",
+            "admin/customers",
+            "admin/cms",
+            "admin/marketing/promotions/catalog-rules",
+            "admin/reporting/sales",
+            "admin/settings/locales",
+            "admin/configuration",
             "admin/sales/orders",
         ],
     },

@@ -213,7 +213,10 @@ export class ACLSharedPage extends BasePage {
                 }
 
                 await this.expectAuthorizedFor(config.allowed);
-                sidebarLinks.push(config.sidebar);
+
+                if (config.sidebar) {
+                    sidebarLinks.push(config.sidebar);
+                }
             }
         }
 
