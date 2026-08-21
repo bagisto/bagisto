@@ -59,7 +59,7 @@ log "Seeding demo products..."
 php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
 
 log "Building the search indexes..."
-php artisan index:index --mode=full
+php artisan indexer:index --mode=full
 
 log "Shutting ${DB_ENGINE_NAME} down..."
 db_build_stop

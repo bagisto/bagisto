@@ -123,7 +123,8 @@ RUN cp .env.example .env \
 # ---------------------------------------------------------------------------
 COPY shared/db/${DB_ENGINE}/ /usr/local/share/bagisto/db/
 COPY shared/build-install.sh /tmp/build-install.sh
-RUN cp /usr/local/share/bagisto/db/init.sql /docker-entrypoint-initdb.d/init.sql \
+RUN mkdir -p /docker-entrypoint-initdb.d \
+    && cp /usr/local/share/bagisto/db/init.sql /docker-entrypoint-initdb.d/init.sql \
     && sed -i "s/^DB_CONNECTION=.*/DB_CONNECTION=$(if [ \"$DB_ENGINE\" = mariadb ]; then echo mariadb; else echo mysql; fi)/" /var/www/bagisto/.env \
     && sed -i "s/^DB_PORT=.*/DB_PORT=3306/" /var/www/bagisto/.env \
     && chmod +x /tmp/build-install.sh \
