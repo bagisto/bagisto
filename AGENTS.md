@@ -31,6 +31,7 @@ docblocks, Laravel idiom, data access, Blade, security and localization.
 | Reviewing a change | `bagisto-code-review` |
 | Branching, commits, CHANGELOG, PRs | `bagisto-git-workflow` |
 | The REST/GraphQL API | `bagisto-api-develop` / `bagisto-api-shop` / `bagisto-api-admin` |
+| Any documentation site — developer docs, user guide, screenshots | `bagisto-documentation` |
 
 **`bagisto-change-verification` before calling any change done** — it owns the four gates (Pint,
 Pest, Playwright, translations), the rule that a gate you did not run is a gate that failed, and how
