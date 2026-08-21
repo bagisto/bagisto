@@ -19,10 +19,6 @@ export class SectionsPage extends BasePage {
         return this.page.getByRole("button", { name: "Save Section" });
     }
 
-    private get publishActiveButton() {
-        return this.page.getByRole("button", { name: "Publish", exact: true });
-    }
-
     private get closeDrawerButton() {
         return this.page.locator("span.icon-cross").last();
     }
@@ -131,7 +127,7 @@ export class SectionsPage extends BasePage {
     private async closeOpenSection(): Promise<void> {
         await this.closeDrawerButton.click();
 
-        await expect(this.publishActiveButton).toBeHidden();
+        await expect(this.page.locator("span.icon-cross")).toHaveCount(0);
     }
 
     async open(): Promise<void> {
@@ -177,7 +173,9 @@ export class SectionsPage extends BasePage {
 
         await expect(this.unsavedMarker(name)).toBeVisible();
 
-        await this.publishActiveButton.click();
+        await this.closeOpenSection();
+
+        await this.publishAllButton.click();
 
         await expect(this.unsavedMarker(name)).toHaveCount(0);
     }
@@ -213,7 +211,9 @@ export class SectionsPage extends BasePage {
 
         await expect(this.unsavedMarker(name)).toBeVisible();
 
-        await this.publishActiveButton.click();
+        await this.closeOpenSection();
+
+        await this.publishAllButton.click();
 
         await expect(this.unsavedMarker(name)).toHaveCount(0);
 

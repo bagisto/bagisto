@@ -3,6 +3,7 @@
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Testing\TestResponse;
 use Webkul\Core\Models\Channel;
 use Webkul\Theme\Models\Section;
 use Webkul\Theme\Repositories\SectionRepository;
@@ -36,6 +37,34 @@ function makeSection(array $attributes = []): Section
     return $section->refresh();
 }
 
+/**
+ * The theme a section belongs to, which is what publishing and discarding are addressed to.
+ */
+function themeCode(?Section $section = null): string
+{
+    return $section?->theme_code ?: (core()->getCurrentChannel()->theme ?: 'default');
+}
+
+/**
+ * Publish every pending edit of a section's theme.
+ *
+ * Publishing is a whole-theme action, so a test that staged one section's edit asks for it by
+ * naming the theme. There is deliberately no way to publish a single section: a reorder stages a
+ * new position on several of them at once, and releasing only one leaves the list half sorted.
+ */
+function publishDrafts(?Section $section = null): TestResponse
+{
+    return postJson(route('admin.appearance.sections.publish', themeCode($section)));
+}
+
+/**
+ * Throw away every pending edit of a section's theme.
+ */
+function discardDrafts(?Section $section = null): TestResponse
+{
+    return postJson(route('admin.appearance.sections.discard', themeCode($section)));
+}
+
 it('should hold an edit as a draft without touching what the storefront renders', function () {
     $section = makeSection();
 
@@ -65,9 +94,9 @@ it('should promote a draft to the published options', function () {
         'options' => ['html' => '<p>ready</p>'],
     ])->assertOk();
 
-    postJson(route('admin.appearance.sections.publish', $section->id))
+    publishDrafts($section)
         ->assertOk()
-        ->assertJsonPath('has_draft', false);
+        ->assertJsonPath('published', 1);
 
     $translation = $section->fresh()->translate(app()->getLocale());
 
@@ -87,9 +116,9 @@ it('should throw a draft away on discard, leaving the published options alone', 
         'options' => ['html' => '<p>regret</p>'],
     ])->assertOk();
 
-    postJson(route('admin.appearance.sections.discard', $section->id))
+    discardDrafts($section)
         ->assertOk()
-        ->assertJsonPath('has_draft', false);
+        ->assertJsonPath('discarded', 1);
 
     $translation = $section->fresh()->translate(app()->getLocale());
 
@@ -204,9 +233,7 @@ it('should renumber sections when the list is reordered', function () {
 
     expect($first->fresh()->draft_sort_order)->toBe(2);
 
-    postJson(route('admin.appearance.sections.publish', $second->id))->assertOk();
-
-    postJson(route('admin.appearance.sections.publish', $first->id))->assertOk();
+    publishDrafts($second)->assertOk();
 
     expect($second->fresh()->sort_order)->toBe(1);
 
@@ -549,11 +576,80 @@ it('should announce every write it makes, before and after', function (string $r
     Event::assertDispatched($event.'.after');
 })->with([
     'draft saved' => ['admin.appearance.sections.draft', 'section.draft.save', ['options' => ['html' => '<p>d</p>']]],
-    'draft published' => ['admin.appearance.sections.publish', 'section.update', []],
-    'draft discarded' => ['admin.appearance.sections.discard', 'section.draft.discard', []],
     'status changed' => ['admin.appearance.sections.status', 'section.draft.save', ['status' => false]],
     'section duplicated' => ['admin.appearance.sections.duplicate', 'section.create', []],
 ]);
+
+it('should announce a publish for each section it releases, before and after', function () {
+    $section = makeSection();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.draft', $section->id), [
+        'options' => ['html' => '<p>ready</p>'],
+    ])->assertOk();
+
+    Event::fake();
+
+    publishDrafts($section)->assertOk();
+
+    Event::assertDispatched('section.update.before');
+
+    Event::assertDispatched('section.update.after');
+});
+
+it('should announce a discard for each section it reverts, before and after', function () {
+    $section = makeSection();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.draft', $section->id), [
+        'options' => ['html' => '<p>regret</p>'],
+    ])->assertOk();
+
+    Event::fake();
+
+    discardDrafts($section)->assertOk();
+
+    Event::assertDispatched('section.draft.discard.before');
+
+    Event::assertDispatched('section.draft.discard.after');
+});
+
+it('should offer no endpoint that releases a single section', function (string $action) {
+    $section = makeSection();
+
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.draft', $section->id), [
+        'options' => ['html' => '<p>staged</p>'],
+    ])->assertOk();
+
+    $response = postJson("admin/appearance/sections/{$section->id}/{$action}");
+
+    expect($response->getStatusCode())->toBeGreaterThanOrEqual(400);
+
+    expect($section->fresh()->translate(app()->getLocale())->draft_options)
+        ->toBe(['html' => '<p>staged</p>']);
+})->with(['publish', 'discard']);
+
+it('should refuse to publish a theme that does not exist', function () {
+    $this->loginAsAdmin();
+
+    postJson(route('admin.appearance.sections.publish', 'no-such-theme'))->assertNotFound();
+});
+
+it('should announce nothing when there is no pending edit to publish', function () {
+    makeSection();
+
+    Event::fake();
+
+    $this->loginAsAdmin();
+
+    publishDrafts()->assertOk()->assertJsonPath('published', 0);
+
+    Event::assertNotDispatched('section.update.after');
+});
 
 it('should announce a media upload, before and after', function () {
     $section = makeSection();
@@ -608,7 +704,7 @@ it('should hold a new section back from the storefront until it is published', f
         ->and($section->draft_status)->toBeTrue()
         ->and(app(SectionRepository::class)->hasDraft($section))->toBeTrue();
 
-    postJson(route('admin.appearance.sections.publish', $id))->assertOk();
+    publishDrafts($section)->assertOk();
 
     expect((bool) $section->refresh()->status)->toBeTrue()
         ->and($section->draft_status)->toBeNull();
@@ -626,7 +722,7 @@ it('should hold a status change until it is published', function () {
     expect((bool) $section->refresh()->status)->toBeTrue()
         ->and($section->draft_status)->toBeFalse();
 
-    postJson(route('admin.appearance.sections.publish', $section->id))->assertOk();
+    publishDrafts($section)->assertOk();
 
     expect((bool) $section->refresh()->status)->toBeFalse();
 });
@@ -645,7 +741,7 @@ it('should hold a reorder until it is published', function () {
     expect($second->refresh()->draft_sort_order)->toBe(1)
         ->and($second->sort_order)->not->toBe(1);
 
-    postJson(route('admin.appearance.sections.publish', $second->id))->assertOk();
+    publishDrafts($second)->assertOk();
 
     expect($second->refresh()->sort_order)->toBe(1)
         ->and($second->draft_sort_order)->toBeNull();
@@ -678,9 +774,9 @@ it('should put a staged change back where it was when it is discarded', function
 
     postJson(route('admin.appearance.sections.status', $section->id), ['status' => false])->assertOk();
 
-    postJson(route('admin.appearance.sections.discard', $section->id))
+    discardDrafts($section)
         ->assertOk()
-        ->assertJsonPath('status', true);
+        ->assertJsonPath('discarded', 1);
 
     expect($section->refresh()->draft_status)->toBeNull()
         ->and((bool) $section->status)->toBeTrue();
@@ -701,7 +797,7 @@ it('should delete the uploads a discarded draft brought with it', function () {
         'options' => ['images' => [['image' => $published, 'link' => '', 'title' => 'kept']]],
     ])->assertOk();
 
-    postJson(route('admin.appearance.sections.publish', $section->id))->assertOk();
+    publishDrafts($section)->assertOk();
 
     $drafted = postJson(route('admin.appearance.sections.media', $section->id), [
         'file' => UploadedFile::fake()->image('thrown-away.jpg', 40, 40),
@@ -711,7 +807,7 @@ it('should delete the uploads a discarded draft brought with it', function () {
         'options' => ['images' => [['image' => $drafted, 'link' => '', 'title' => 'draft']]],
     ])->assertOk();
 
-    postJson(route('admin.appearance.sections.discard', $section->id))->assertOk();
+    discardDrafts($section)->assertOk();
 
     Storage::assertMissing(str_replace('storage/', '', $drafted));
 
@@ -734,7 +830,7 @@ it('should delete the upload a published draft replaced', function () {
             'options' => ['images' => [['image' => $path, 'link' => '', 'title' => $name]]],
         ])->assertOk();
 
-        postJson(route('admin.appearance.sections.publish', $section->id))->assertOk();
+        publishDrafts($section)->assertOk();
 
         return $path;
     };
@@ -763,7 +859,7 @@ it('should keep an upload that only custom html points at', function () {
         'options' => ['html' => '<img src="/'.$path.'" alt="in html">', 'css' => ''],
     ])->assertOk();
 
-    postJson(route('admin.appearance.sections.publish', $section->id))->assertOk();
+    publishDrafts($section)->assertOk();
 
     Storage::assertExists(str_replace('storage/', '', $path));
 });
@@ -807,7 +903,7 @@ it('should copy a section as a pending change rather than straight onto the stor
     expect(app(SectionRepository::class)->getRenderable($copy->channel_id, $copy->theme_code)->pluck('id'))
         ->not->toContain($copy->id);
 
-    postJson(route('admin.appearance.sections.publish', $copyId))->assertOk();
+    publishDrafts($copy)->assertOk();
 
     expect((bool) $copy->refresh()->status)->toBeTrue()
         ->and(app(SectionRepository::class)->getRenderable($copy->channel_id, $copy->theme_code)->pluck('id'))

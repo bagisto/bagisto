@@ -83,17 +83,26 @@ class EnvironmentManager
 
     /**
      * Update a single environment variable in `.env` file.
+     *
+     * A carriage return or newline in the value would let it write further `.env` lines of its own,
+     * so they are stripped before the value is placed. The key is quoted into the pattern and the
+     * value is substituted through a callback, so neither can be read as a regular expression.
      */
     public function updateEnvVariable(string $key, string $value, bool $addQuotes = false): void
     {
         $data = file_get_contents(base_path('.env'));
 
-        // Check if $value contains spaces, and if so, add double quotes, or if $addQuotes is true.
+        $value = str_replace(["\r", "\n"], '', $value);
+
         if ($addQuotes || preg_match('/\s/', $value)) {
             $value = '"'.$value.'"';
         }
 
-        $data = preg_replace("/$key=(.*)/", "$key=$value", $data);
+        $data = preg_replace_callback(
+            '/^'.preg_quote($key, '/').'=.*/m',
+            fn () => $key.'='.$value,
+            $data
+        );
 
         file_put_contents(base_path('.env'), $data);
     }
