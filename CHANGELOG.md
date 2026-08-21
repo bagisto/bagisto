@@ -40,6 +40,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Products that keep no stock are now listed as "Stock Disabled" rather than "Out of Stock", read from the product's own manage-inventory setting rather than assumed from its type.
 
+- Full Page Cache can now be switched on or off and tuned from the admin. Configuration → Cache Management gains a Full Page Cache section with an enable toggle and a cache lifetime, so the storefront page cache is controlled from one place rather than by editing the environment file and redeploying.
+
 - Fixed the Category column showing one arbitrary category for a product filed under several; it now lists them all.
 
 - Fixed the mega search leaving you on an empty tab when another tab had results, which read as nothing being found. It now opens the first tab that matched.
@@ -51,6 +53,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 - Fixed the Bahraini Dinar being seeded with the text "BHD" in place of its symbol, which a repeated entry in the currency list had been overwriting.
 
 - Added the missing Romanian translations for PhonePe.
+
+- Fixed the full page cache holding on to a storefront page after the catalog behind it changed, so a category or product edit could keep showing the old page until the cache was cleared by hand. A change now clears the pages it affects — the home page and category listings included — across every channel, locale and currency they were cached under.
 
 - Security fixes.
 
