@@ -4,6 +4,7 @@ namespace Webkul\Theme\Repositories;
 
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Stevebauman\Purify\Facades\Purify;
@@ -298,6 +299,52 @@ class SectionRepository extends Repository
         $this->purgeUnreferencedMedia($section);
 
         return $section->refresh();
+    }
+
+    /**
+     * The sections of a theme's channel that are holding a change.
+     */
+    public function draftedSections(int $channelId, string $themeCode): Collection
+    {
+        return $this->findWhere([
+            'channel_id' => $channelId,
+            'theme_code' => $themeCode,
+        ])->filter(fn ($section) => $this->hasDraft($section))->values();
+    }
+
+    /**
+     * Promote the given sections' pending drafts in one transaction.
+     *
+     * Ordering is relative across the whole set, so a draft is never published on its own —
+     * publishing one section of a reorder would leave the rest holding the old positions.
+     *
+     * @return Collection The sections as they now stand.
+     */
+    public function publishDrafts(Collection $sections): Collection
+    {
+        return $this->runOnDrafted($sections, fn ($section) => $this->publishDraft($section->id));
+    }
+
+    /**
+     * Throw away the given sections' pending drafts in one transaction.
+     *
+     * @return Collection The sections as they now stand.
+     */
+    public function discardDrafts(Collection $sections): Collection
+    {
+        return $this->runOnDrafted($sections, fn ($section) => $this->discardDraft($section->id));
+    }
+
+    /**
+     * Apply the callback to each given section, settling them together.
+     */
+    protected function runOnDrafted(Collection $sections, callable $callback): Collection
+    {
+        if ($sections->isEmpty()) {
+            return $sections;
+        }
+
+        return DB::transaction(fn () => $sections->map($callback));
     }
 
     /**

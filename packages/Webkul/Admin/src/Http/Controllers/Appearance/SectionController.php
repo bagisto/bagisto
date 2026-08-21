@@ -52,6 +52,8 @@ class SectionController extends Controller
                 'channel' => $channel->id,
                 'locale' => $locale->code,
             ]),
+            'publishUrl' => route('admin.appearance.sections.publish', ['code' => $code]),
+            'discardUrl' => route('admin.appearance.sections.discard', ['code' => $code]),
             'urls' => $this->editorUrls(),
         ]);
     }
@@ -229,41 +231,52 @@ class SectionController extends Controller
     }
 
     /**
-     * Publish a section's pending edits to the storefront.
+     * Publish every pending edit of a theme's channel to the storefront.
+     *
+     * Publishing is a whole-set operation: ordering is relative across the sections, so
+     * releasing one on its own would leave the rest holding the positions it moved away from.
      */
-    public function publish(int $id): JsonResponse
+    public function publish(string $code): JsonResponse
     {
-        $this->sectionOrFail($id);
+        $this->themeOrFail($code);
 
-        Event::dispatch('section.update.before', $id);
+        $channel = $this->requestedChannel();
 
-        $section = $this->sectionRepository->publishDraft($id);
+        $drafted = $this->sectionRepository->draftedSections($channel->id, $code);
 
-        Event::dispatch('section.update.after', $section);
+        $drafted->each(fn ($section) => Event::dispatch('section.update.before', $section->id));
+
+        $published = $this->sectionRepository->publishDrafts($drafted);
+
+        $published->each(fn ($section) => Event::dispatch('section.update.after', $section));
 
         return new JsonResponse([
-            'has_draft' => false,
+            'published' => $published->count(),
+            'sections' => $this->editableSections($code, $channel->id),
             'message' => trans('admin::app.appearance.sections.update-success'),
         ]);
     }
 
     /**
-     * Throw away a section's pending edits.
+     * Throw away every pending edit of a theme's channel.
      */
-    public function discard(int $id): JsonResponse
+    public function discard(string $code): JsonResponse
     {
-        $this->sectionOrFail($id);
+        $this->themeOrFail($code);
 
-        Event::dispatch('section.draft.discard.before', $id);
+        $channel = $this->requestedChannel();
 
-        $section = $this->sectionRepository->discardDraft($id);
+        $drafted = $this->sectionRepository->draftedSections($channel->id, $code);
 
-        Event::dispatch('section.draft.discard.after', $section);
+        $drafted->each(fn ($section) => Event::dispatch('section.draft.discard.before', $section->id));
+
+        $discarded = $this->sectionRepository->discardDrafts($drafted);
+
+        $discarded->each(fn ($section) => Event::dispatch('section.draft.discard.after', $section));
 
         return new JsonResponse([
-            'has_draft' => false,
-            'status' => (bool) $section->status,
-            'options' => $section->translate(core()->getRequestedLocaleCode())?->options,
+            'discarded' => $discarded->count(),
+            'sections' => $this->editableSections($code, $channel->id),
             'message' => trans('admin::app.appearance.sections.index.discarded'),
         ]);
     }
@@ -341,8 +354,6 @@ class SectionController extends Controller
     protected function editorUrls(): array
     {
         return [
-            'publish' => route('admin.appearance.sections.publish', ['id' => '__ID__']),
-            'discard' => route('admin.appearance.sections.discard', ['id' => '__ID__']),
             'duplicate' => route('admin.appearance.sections.duplicate', ['id' => '__ID__']),
             'status' => route('admin.appearance.sections.status', ['id' => '__ID__']),
             'fields' => route('admin.appearance.sections.fields', ['id' => '__ID__']),

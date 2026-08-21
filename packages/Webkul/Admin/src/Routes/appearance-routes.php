@@ -25,6 +25,10 @@ Route::prefix('appearance')->group(function () {
 
         Route::post('themes/{code}/sections', 'store')->name('admin.appearance.sections.store');
 
+        Route::post('themes/{code}/sections/publish', 'publish')->name('admin.appearance.sections.publish');
+
+        Route::post('themes/{code}/sections/discard', 'discard')->name('admin.appearance.sections.discard');
+
         Route::prefix('sections')->group(function () {
             Route::post('edit/{id}', 'update')->name('admin.appearance.sections.update');
 
@@ -35,10 +39,6 @@ Route::prefix('appearance')->group(function () {
             Route::get('{id}/fields', 'fields')->name('admin.appearance.sections.fields');
 
             Route::post('{id}/draft', 'saveDraft')->name('admin.appearance.sections.draft');
-
-            Route::post('{id}/publish', 'publish')->name('admin.appearance.sections.publish');
-
-            Route::post('{id}/discard', 'discard')->name('admin.appearance.sections.discard');
 
             Route::post('{id}/duplicate', 'duplicate')->name('admin.appearance.sections.duplicate');
 

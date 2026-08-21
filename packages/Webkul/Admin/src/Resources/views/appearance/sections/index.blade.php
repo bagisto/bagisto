@@ -34,6 +34,8 @@
             'code' => $scopedTheme,
             'channel' => $scopedChannel->id,
         ])"
+        :publish-url="$publishUrl"
+        :discard-url="$discardUrl"
         :urls="$urls"
     />
 
