@@ -122,6 +122,21 @@ it('should returns the search page of the products', function () {
         ->assertSeeText(trans('shop::app.search.title', ['query' => $query]));
 });
 
+it('rejects an array search query instead of running it as a raw sql condition', function () {
+    // Arrange.
+    config(['responsecache.enabled' => true]);
+
+    // Act.
+    $response = get('/search?'.http_build_query([
+        'query' => ['a', 'RAW', '1=0 UNION SELECT 1'],
+    ]));
+
+    // Assert.
+    $response->assertRedirect();
+
+    expect($response->baseResponse->getStatusCode())->not->toBe(500);
+});
+
 it('should fails the validation error when provided wrong email address when subscribe to the shop', function () {
     // Act and Assert.
     postJson(route('shop.subscription.store'))

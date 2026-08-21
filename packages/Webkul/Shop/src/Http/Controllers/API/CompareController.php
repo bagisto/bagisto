@@ -86,6 +86,10 @@ class CompareController extends APIController
      */
     public function destroy(): JsonResource
     {
+        $this->validate(request(), [
+            'product_id' => 'required|integer',
+        ]);
+
         $productId = request()->input('product_id');
 
         Event::dispatch('customer.compare.delete.before', $productId);

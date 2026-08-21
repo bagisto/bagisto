@@ -52,6 +52,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added the missing Romanian translations for PhonePe.
 
+- Security fixes.
+
 - #11437 [fixed] - Fixed a category whose picture has been removed from storage showing a broken image on the storefront. The strip now falls back to the placeholder, as it already does when no picture is set.
 
 - #11436 [fixed] - Fixed the dashboard statistics and configuration search endpoints answering with a 500 when their type or query value is missing, unknown, or given as an array. Both now return 404.

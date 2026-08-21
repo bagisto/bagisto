@@ -28,20 +28,22 @@ class SearchController extends Controller
     public function index()
     {
         $this->validate(request(), [
-            'query' => ['sometimes', 'required', 'string', 'regex:/^[^\\\\]+$/u'],
+            'query' => ['sometimes', 'bail', 'required', 'string', 'regex:/^[^\\\\]+$/u'],
         ]);
-
-        $searchTerm = $this->searchTermRepository->findOneWhere([
-            'term' => request()->query('query'),
-            'channel_id' => core()->getCurrentChannel()->id,
-            'locale' => app()->getLocale(),
-        ]);
-
-        if ($searchTerm?->redirect_url) {
-            return redirect()->to($searchTerm->redirect_url);
-        }
 
         $query = request()->query('query');
+
+        if (is_string($query)) {
+            $searchTerm = $this->searchTermRepository->findOneWhere([
+                'term' => $query,
+                'channel_id' => core()->getCurrentChannel()->id,
+                'locale' => app()->getLocale(),
+            ]);
+
+            if ($searchTerm?->redirect_url) {
+                return redirect()->to($searchTerm->redirect_url);
+            }
+        }
 
         $suggestion = null;
 
