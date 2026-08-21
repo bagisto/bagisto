@@ -52,6 +52,10 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Added the missing Romanian translations for PhonePe.
 
+- #11437 [fixed] - Fixed a category whose picture has been removed from storage showing a broken image on the storefront. The strip now falls back to the placeholder, as it already does when no picture is set.
+
+- #11436 [fixed] - Fixed the dashboard statistics and configuration search endpoints answering with a 500 when their type or query value is missing, unknown, or given as an array. Both now return 404.
+
 - #11432 [fixed] - Fixed an alt text over 255 characters rejecting the whole product save with nothing shown on screen; the limit is now reported against the Alt Text field.
 
 - #11431 [fixed] - Fixed Replace Image discarding the alt text of every other locale. Replacing a file now updates the existing image instead of creating a new one and deleting the original.

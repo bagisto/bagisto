@@ -37,9 +37,18 @@ class ConfigurationController extends Controller
      */
     public function search(): JsonResponse
     {
+        $searchTerm = request()->query('query');
+
+        if (
+            ! is_string($searchTerm)
+            || $searchTerm === ''
+        ) {
+            abort(404);
+        }
+
         $results = $this->coreConfigRepository->search(
             system_config()->getItems(),
-            request()->query('query')
+            $searchTerm
         );
 
         return new JsonResponse([
