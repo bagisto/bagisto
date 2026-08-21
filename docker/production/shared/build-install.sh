@@ -1,62 +1,67 @@
 #!/bin/bash
 # ==========================================================================
-# build-install.sh — Runs during docker build to fully install Bagisto.
+# build-install.sh — Fully installs Bagisto while the image is being built.
 #
-# Starts MySQL temporarily, runs migrations + seeding, then shuts MySQL
-# down cleanly. The populated /var/lib/mysql is baked into the image layer.
+# Brings the bundled database up, runs migrations and seeding against it,
+# then shuts it down cleanly so the populated data directory is baked into
+# the image layer. The container that results boots straight into a working
+# store with no first-run setup.
+#
+# The database itself is handled by an engine driver — see shared/db/ — so
+# this script is the same whether the image bundles MySQL or MariaDB.
 # ==========================================================================
 set -e
 
-echo "[build-install] Initializing MySQL data directory..."
-mkdir -p /run/mysqld
-rm -rf /var/lib/mysql
-mkdir -p /var/lib/mysql
-chown -R mysql:mysql /run/mysqld /var/lib/mysql
-mysqld --initialize-insecure --user=mysql --datadir=/var/lib/mysql
+DB_ENGINE="${DB_ENGINE:-mysql}"
 
-echo "[build-install] Starting MySQL..."
-mysqld --user=mysql --datadir=/var/lib/mysql &
-MYSQL_PID=$!
+# shellcheck source=/dev/null
+source "/usr/local/share/bagisto/db/engine.sh"
 
-# Wait for MySQL to accept connections
-echo "[build-install] Waiting for MySQL to be ready..."
+log() {
+    echo "[build-install] $*"
+}
+
+log "Database engine: ${DB_ENGINE_NAME}"
+
+log "Initialising the data directory..."
+db_build_init
+
+log "Starting ${DB_ENGINE_NAME}..."
+db_build_start
+
+log "Waiting for ${DB_ENGINE_NAME} to accept connections..."
 for i in $(seq 1 60); do
-    if mysqladmin ping -h 127.0.0.1 --silent 2>/dev/null; then
-        echo "[build-install] MySQL is ready."
+    if db_build_wait; then
+        log "${DB_ENGINE_NAME} is ready."
         break
     fi
+
     if [ "$i" -eq 60 ]; then
-        echo "[build-install] ERROR: MySQL did not start within 60 seconds."
+        log "ERROR: ${DB_ENGINE_NAME} did not start within 60 seconds."
         exit 1
     fi
+
     sleep 1
 done
 
-# Create database and user
-echo "[build-install] Creating database and user..."
-mysql -h 127.0.0.1 -u root < /docker-entrypoint-initdb.d/init.sql
+log "Creating the database and its user..."
+db_build_provision
 
-# Install Bagisto
 cd /var/www/bagisto
 
-echo "[build-install] Generating application key..."
+log "Generating the application key..."
 php artisan key:generate --force --no-interaction
 
-echo "[build-install] Running Bagisto installation..."
+log "Running the Bagisto installer..."
 php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
 
-echo "[build-install] Running database seeders..."
+log "Seeding demo products..."
 php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
 
-echo "[build-install] Running indexers..."
+log "Building the search indexes..."
 php artisan index:index --mode=full
 
-# Shut down MySQL cleanly
-echo "[build-install] Shutting down MySQL..."
-mysqladmin -h 127.0.0.1 -u root shutdown
-wait $MYSQL_PID
+log "Shutting ${DB_ENGINE_NAME} down..."
+db_build_stop
 
-# Fix ownership after shutdown
-chown -R mysql:mysql /var/lib/mysql
-
-echo "[build-install] Bagisto installation complete."
+log "Bagisto installation complete."

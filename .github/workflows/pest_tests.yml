@@ -27,7 +27,7 @@ jobs:
 
           - db: mariadb
             db-label: MariaDB
-            db-image: mariadb:11.4
+            db-image: mariadb:10.11
             db-port: 3306
             db-user: root
             db-password: root
