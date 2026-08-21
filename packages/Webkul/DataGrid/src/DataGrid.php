@@ -656,6 +656,13 @@ abstract class DataGrid
             foreach ($this->columns as $column) {
                 if ($closure = $column->getClosure()) {
                     $record->{$column->getIndex()} = $closure($record);
+                } elseif (
+                    in_array($column->getType(), ['date', 'datetime'])
+                    && ! empty($record->{$column->getIndex()})
+                ) {
+                    $record->{$column->getIndex()} = $column->getType() === 'date'
+                        ? core()->formatDate($record->{$column->getIndex()}, core()->getDateFormat())
+                        : core()->formatDate($record->{$column->getIndex()});
                 }
             }
 

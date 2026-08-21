@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Jednostka wagi',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Format Daty',
+                        'info' => 'Ustaw opcje formatu daty.',
+                        'title' => 'Opcje Daty',
+                        'title-info' => 'Skonfiguruj format daty używany w panelu administracyjnym, sklepie i fakturach.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Menu okruszkowe sklepu',
                         'title' => 'Menu okruszkowe (Breadcrumbs)',

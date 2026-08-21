@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Ağırlık Birimi',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Tarih Biçimi',
+                        'info' => 'Tarih biçimi seçeneklerini ayarlayın.',
+                        'title' => 'Tarih Seçenekleri',
+                        'title-info' => 'Yönetim paneli, mağaza ve faturalarda kullanılan tarih biçimini yapılandırın.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Mağaza Breadcrumbs',
                         'title' => 'Breadcrumbs',

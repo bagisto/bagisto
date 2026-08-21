@@ -12,7 +12,7 @@
             @lang('shop::app.emails.orders.shipped.greeting', [
                 'invoice_id' => $shipment->increment_id,
                 'order_id'   => '<a href="' . route('shop.customers.account.orders.view', $shipment->order_id) . '" style="color: #2969FF;">#' . $shipment->order->increment_id . '</a>',
-                'created_at' => core()->formatDate($shipment->order->created_at, 'Y-m-d H:i:s')
+                'created_at' => core()->formatDate($shipment->order->created_at)
             ])
         </p>
     </div>

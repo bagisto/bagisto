@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Satuan Berat',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Format Tanggal',
+                        'info' => 'Atur opsi format tanggal.',
+                        'title' => 'Opsi Tanggal',
+                        'title-info' => 'Konfigurasi format tanggal yang digunakan di panel admin, toko, dan faktur.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Breadcrumbs Toko',
                         'title' => 'Breadcrumbs',

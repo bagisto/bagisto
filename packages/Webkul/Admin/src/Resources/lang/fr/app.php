@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Unité de poids',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Format de Date',
+                        'info' => 'Définir les options de format de date.',
+                        'title' => 'Options de Date',
+                        'title-info' => 'Configurez le format de date utilisé dans le panneau d\'administration, la boutique et les factures.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Fil d\'Ariane de la boutique',
                         'title' => 'Fil d\'Ariane',

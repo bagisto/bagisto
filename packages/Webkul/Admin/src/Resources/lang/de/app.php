@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Gewichtseinheit',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Datumsformat',
+                        'info' => 'Datumsformatoptionen festlegen.',
+                        'title' => 'Datumsoptionen',
+                        'title-info' => 'Konfigurieren Sie das im Admin-Panel, im Shop und auf Rechnungen verwendete Datumsformat.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Shop-Breadcrumbs',
                         'title' => 'Breadcrumbs',

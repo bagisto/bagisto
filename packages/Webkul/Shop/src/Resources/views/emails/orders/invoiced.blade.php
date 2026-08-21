@@ -12,7 +12,7 @@
             @lang('shop::app.emails.orders.invoiced.greeting', [
                 'invoice_id' => $invoice->increment_id,
                 'order_id'   => '<a href="' . route('shop.customers.account.orders.view', $invoice->order_id) . '" style="color: #2969FF;">#' . $invoice->order->increment_id . '</a>',
-                'created_at' => core()->formatDate($invoice->order->created_at, 'Y-m-d H:i:s')
+                'created_at' => core()->formatDate($invoice->order->created_at)
             ])
         </p>
     </div>

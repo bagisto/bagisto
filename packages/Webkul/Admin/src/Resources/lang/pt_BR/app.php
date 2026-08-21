@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Unidade de Peso',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Formato de Data',
+                        'info' => 'Definir opções de formato de data.',
+                        'title' => 'Opções de Data',
+                        'title-info' => 'Configure o formato de data usado no painel administrativo, na loja e nas faturas.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Migalhas de Pão da Loja',
                         'title' => 'Migalhas de Pão',

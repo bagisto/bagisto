@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Gewichtseenheid',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Datumnotatie',
+                        'info' => 'Stel datumnotatie-opties in.',
+                        'title' => 'Datumopties',
+                        'title-info' => 'Configureer de datumnotatie die wordt gebruikt in het beheerpaneel, de winkel en facturen.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Shop broodkruimels',
                         'title' => 'Broodkruimels',

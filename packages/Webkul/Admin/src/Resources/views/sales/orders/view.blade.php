@@ -575,11 +575,11 @@
                                 @if ($comment->customer_notified)
                                     <span class="icon-done h-fit rounded-full bg-blue-100 text-2xl text-blue-600"></span>
 
-                                    @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
+                                    @lang('admin::app.sales.orders.view.customer-notified', ['date' => core()->formatDate($comment->created_at, core()->getDateFormat().' H:i:s a')])
                                 @else
                                     <span class="icon-cancel-1 h-fit rounded-full bg-red-100 text-2xl text-red-600"></span>
 
-                                    @lang('admin::app.sales.orders.view.customer-not-notified', ['date' => core()->formatDate($comment->created_at, 'Y-m-d H:i:s a')])
+                                    @lang('admin::app.sales.orders.view.customer-not-notified', ['date' => core()->formatDate($comment->created_at, core()->getDateFormat().' H:i:s a')])
                                 @endif
                             </p>
                         </div>
@@ -822,7 +822,7 @@
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        {{ core()->formatDate($invoice->created_at, 'd M, Y H:i:s a') }}
+                                        {{ core()->formatDate($invoice->created_at, core()->getDateFormat().' H:i:s a') }}
                                     </p>
                                 </div>
 
@@ -873,7 +873,7 @@
 
                                     <!-- Shipment Created -->
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        {{ core()->formatDate($shipment->created_at, 'd M, Y H:i:s a') }}
+                                        {{ core()->formatDate($shipment->created_at, core()->getDateFormat().' H:i:s a') }}
                                     </p>
                                 </div>
 
@@ -911,7 +911,7 @@
                                     </p>
 
                                     <p class="text-gray-600 dark:text-gray-300">
-                                        {{ core()->formatDate($refund->created_at, 'd M, Y H:i:s a') }}
+                                        {{ core()->formatDate($refund->created_at, core()->getDateFormat().' H:i:s a') }}
                                     </p>
 
                                     <p class="mt-4 font-semibold text-gray-800 dark:text-white">

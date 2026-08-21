@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Unitat de Pes',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Format de Data',
+                        'info' => 'Estableix opcions de format de data.',
+                        'title' => 'Opcions de Data',
+                        'title-info' => 'Configura el format de data utilitzat al panell d\'administració, la botiga i les factures.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Molles de pa de la botiga',
                         'title' => 'Molles de pa',

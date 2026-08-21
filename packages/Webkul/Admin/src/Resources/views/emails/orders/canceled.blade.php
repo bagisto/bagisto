@@ -11,7 +11,7 @@
         <p style="font-size: 16px;color: #5E5E5E;line-height: 24px;">
             {!! trans('admin::app.emails.orders.canceled.greeting', [
                 'order_id' => '<a href="' . route('admin.sales.orders.view', $order->id) . '" style="color: #2969FF;">#' . $order->increment_id . '</a>',
-                'created_at' => core()->formatDate($order->created_at, 'Y-m-d H:i:s')
+                'created_at' => core()->formatDate($order->created_at)
                 ])
             !!}
         </p>

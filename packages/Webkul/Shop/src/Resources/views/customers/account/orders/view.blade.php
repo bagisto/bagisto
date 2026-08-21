@@ -123,7 +123,7 @@
                         <div class="text-base font-medium">
                             @lang('shop::app.customers.account.orders.view.information.placed-on')
 
-                            {{ core()->formatDate($order->created_at, 'd M Y') }}
+                            {{ core()->formatDate($order->created_at, core()->getDateFormat()) }}
                         </div>
 
                         <!-- Order Details -->
@@ -460,7 +460,7 @@
                                 <div>
                                     @lang('shop::app.customers.account.orders.view.information.placed-on'):
 
-                                    <p class="text-black">{{ core()->formatDate($order->created_at, 'd M Y') }}</p>
+                                    <p class="text-black">{{ core()->formatDate($order->created_at, core()->getDateFormat()) }}</p>
                                 </div>
 
                                 <div class="items-center">

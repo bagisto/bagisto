@@ -43,10 +43,39 @@ return [
             ],
         ],
     ], [
+        'key' => 'general.general.date_options',
+        'name' => 'admin::app.configuration.index.general.general.date-options.title',
+        'info' => 'admin::app.configuration.index.general.general.date-options.title-info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'date_format',
+                'title' => 'admin::app.configuration.index.general.general.date-options.date-format',
+                'type' => 'select',
+                'default' => 'd-m-Y',
+                'options' => [
+                    [
+                        'title' => 'YYYY-MM-DD',
+                        'value' => 'Y-m-d',
+                    ], [
+                        'title' => 'DD/MM/YYYY',
+                        'value' => 'd/m/Y',
+                    ], [
+                        'title' => 'MM-DD-YYYY',
+                        'value' => 'm-d-Y',
+                    ], [
+                        'title' => 'Month DD, YYYY',
+                        'value' => 'F j, Y',
+                    ],
+                ],
+                'channel_based' => true,
+            ],
+        ],
+    ], [
         'key' => 'general.general.breadcrumbs',
         'name' => 'admin::app.configuration.index.general.general.breadcrumbs.title',
         'info' => 'admin::app.configuration.index.general.general.breadcrumbs.title-info',
-        'sort' => 2,
+        'sort' => 3,
         'fields' => [
             [
                 'name' => 'shop',

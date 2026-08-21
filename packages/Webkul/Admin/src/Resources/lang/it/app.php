@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => 'Unità di Peso',
                     ],
 
+                    'date-options' => [
+                        'date-format' => 'Formato Data',
+                        'info' => 'Imposta le opzioni del formato data.',
+                        'title' => 'Opzioni Data',
+                        'title-info' => 'Configura il formato della data utilizzato nel pannello di amministrazione, nel negozio e nelle fatture.',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => 'Breadcrumbs Negozio',
                         'title' => 'Breadcrumbs',

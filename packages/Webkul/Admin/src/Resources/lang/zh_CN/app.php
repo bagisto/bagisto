@@ -4352,6 +4352,13 @@ return [
                         'weight-unit' => '重量单位',
                     ],
 
+                    'date-options' => [
+                        'date-format' => '日期格式',
+                        'info' => '设置日期格式选项。',
+                        'title' => '日期选项',
+                        'title-info' => '配置在管理面板、店铺前台和发票中使用的日期格式。',
+                    ],
+
                     'breadcrumbs' => [
                         'shop' => '商店面包屑',
                         'title' => '面包屑',
