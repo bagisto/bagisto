@@ -29,12 +29,22 @@
     @if ($category->banner_path)
         <div class="container mt-8 px-[60px] max-lg:px-8 max-md:mt-4 max-md:px-4">
             <x-shop::media.images.lazy
-                class="aspect-[4/1] max-h-full max-w-full rounded-xl"
+                class="aspect-[4/1] max-h-full max-w-full rounded-xl {{ $category->mobile_banner_path ? 'max-md:hidden' : '' }}"
                 src="{{ $category->banner_url }}"
                 alt="{{ $category->banner_alt ?: $category->name }}"
                 width="1320"
                 height="300"
             />
+
+            @if ($category->mobile_banner_path)
+                <x-shop::media.images.lazy
+                    class="aspect-[4/1] max-h-full max-w-full rounded-xl md:hidden"
+                    src="{{ $category->mobile_banner_url }}"
+                    alt="{{ $category->name }}"
+                    width="750"
+                    height="300"
+                />
+            @endif
         </div>
     @endif
 

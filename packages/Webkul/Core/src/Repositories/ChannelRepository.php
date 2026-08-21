@@ -60,6 +60,8 @@ class ChannelRepository extends Repository
 
         $this->uploadImages($data, $channel, 'favicon');
 
+        $this->uploadImages($data, $channel, 'mobile_logo');
+
         return $channel;
     }
 
@@ -82,6 +84,8 @@ class ChannelRepository extends Repository
         $this->uploadImages($data, $channel);
 
         $this->uploadImages($data, $channel, 'favicon');
+
+        $this->uploadImages($data, $channel, 'mobile_logo');
 
         return $channel;
     }

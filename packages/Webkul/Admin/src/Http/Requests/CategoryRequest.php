@@ -36,8 +36,8 @@ class CategoryRequest extends FormRequest
             'logo_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'banner_path' => 'array',
             'banner_path.*' => 'mimes:bmp,jpeg,jpg,png,webp',
-            'banner_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
-            'banner_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
+            'mobile_banner_path' => 'array',
+            'mobile_banner_path.*' => 'mimes:bmp,jpeg,jpg,png,webp',
             'attributes' => 'required|array',
             'attributes.*' => 'required',
         ];

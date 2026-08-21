@@ -28,8 +28,8 @@
             >
                 <img
                     class="block"
-                    src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-                    alt="{{ core()->getCurrentChannel()->logo_alt ?: config('app.name') }}"
+                    src="{{ core()->getCurrentChannel()->mobile_logo_url ?? core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                    alt="{{ config('app.name') }}"
                     width="131"
                     height="29"
                 >
@@ -248,8 +248,8 @@
                     <div class="flex items-center justify-between">
                         <a href="{{ route('shop.home.index') }}">
                             <img
-                                src="{{ core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
-                                alt="{{ core()->getCurrentChannel()->logo_alt ?: config('app.name') }}"
+                                src="{{ core()->getCurrentChannel()->mobile_logo_url ?? core()->getCurrentChannel()->logo_url ?? bagisto_asset('images/logo.svg') }}"
+                                alt="{{ config('app.name') }}"
                                 width="131"
                                 height="29"
                             >

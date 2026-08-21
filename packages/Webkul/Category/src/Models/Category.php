@@ -58,7 +58,7 @@ class Category extends TranslatableModel implements CategoryContract
      *
      * @var array
      */
-    protected $appends = ['logo_url', 'banner_url', 'url'];
+    protected $appends = ['logo_url', 'banner_url', 'mobile_banner_url', 'url'];
 
     /**
      * The products that belong to the category.
@@ -126,23 +126,17 @@ class Category extends TranslatableModel implements CategoryContract
     }
 
     /**
-     * Get the logo file name, without the directory and the extension.
+     * Get mobile banner url attribute.
      *
      * @return string
      */
-    public function getLogoFileNameAttribute()
+    public function getMobileBannerUrlAttribute()
     {
-        return pathinfo((string) $this->logo_path, PATHINFO_FILENAME);
-    }
+        if (! $this->mobile_banner_path) {
+            return;
+        }
 
-    /**
-     * Get the banner file name, without the directory and the extension.
-     *
-     * @return string
-     */
-    public function getBannerFileNameAttribute()
-    {
-        return pathinfo((string) $this->banner_path, PATHINFO_FILENAME);
+        return Storage::url($this->mobile_banner_path);
     }
 
     /**

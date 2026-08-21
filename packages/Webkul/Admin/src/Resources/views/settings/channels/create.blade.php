@@ -271,6 +271,27 @@
                             </p>
                         </div>
                     </div>
+
+                    <div class="flex justify-between">
+                        <!-- Mobile Logo -->
+                        <div class="flex w-2/5 flex-col">
+                            <x-admin::form.control-group>
+                                <x-admin::form.control-group.label>
+                                    @lang('admin::app.settings.channels.create.mobile-logo')
+                                </x-admin::form.control-group.label>
+
+                                <x-admin::media.images
+                                    name="mobile_logo"
+                                    width="110px"
+                                    height="110px"
+                                />
+                            </x-admin::form.control-group>
+
+                            <p class="text-xs text-gray-600 dark:text-gray-300">
+                                @lang('admin::app.settings.channels.create.mobile-logo-size')
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 {!! view_render_event('bagisto.admin.settings.channels.create.card.design.after') !!}

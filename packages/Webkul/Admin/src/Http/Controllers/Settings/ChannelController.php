@@ -73,7 +73,7 @@ class ChannelController extends Controller
             'logo_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
             'logo_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'favicon.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
-            'favicon_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
+            'mobile_logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
 
             /* seo */
             'seo_title' => 'required|string',
@@ -147,7 +147,7 @@ class ChannelController extends Controller
             'logo_meta.*.alt_text' => ['nullable', 'string', 'max:255'],
             'logo_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
             'favicon.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp,ico',
-            'favicon_meta.*.file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
+            'mobile_logo.*' => 'nullable|mimes:bmp,jpeg,jpg,png,webp',
 
             /* seo */
             $locale.'.seo_title' => 'required|string',

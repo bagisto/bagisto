@@ -108,6 +108,8 @@ class CategoryRepository extends Repository
 
         $this->uploadImages($data, $category, 'banner_path');
 
+        $this->uploadImages($data, $category, 'mobile_banner_path');
+
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);
         }
@@ -132,6 +134,8 @@ class CategoryRepository extends Repository
         $this->uploadImages($data, $category);
 
         $this->uploadImages($data, $category, 'banner_path');
+
+        $this->uploadImages($data, $category, 'mobile_banner_path');
 
         if (isset($data['attributes'])) {
             $category->filterableAttributes()->sync($data['attributes']);

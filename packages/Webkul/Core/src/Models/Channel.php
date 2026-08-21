@@ -148,23 +148,23 @@ class Channel extends TranslatableModel implements ChannelContract
     }
 
     /**
-     * Get the logo file name, without the directory and the extension.
-     *
-     * @return string
+     * Get mobile logo image url.
      */
-    public function getLogoFileNameAttribute()
+    public function mobile_logo_url()
     {
-        return pathinfo((string) $this->logo, PATHINFO_FILENAME);
+        if (! $this->mobile_logo) {
+            return;
+        }
+
+        return Storage::url($this->mobile_logo);
     }
 
     /**
-     * Get the favicon file name, without the directory and the extension.
-     *
-     * @return string
+     * Get mobile logo image url.
      */
-    public function getFaviconFileNameAttribute()
+    public function getMobileLogoUrlAttribute()
     {
-        return pathinfo((string) $this->favicon, PATHINFO_FILENAME);
+        return $this->mobile_logo_url();
     }
 
     /**
