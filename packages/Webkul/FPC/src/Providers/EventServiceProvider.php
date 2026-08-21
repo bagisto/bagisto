@@ -25,12 +25,20 @@ class EventServiceProvider extends ServiceProvider
         /**
          * Catalog events.
          */
+        'catalog.product.create.after' => [
+            [Product::class, 'afterCreate'],
+        ],
+
         'catalog.product.update.after' => [
             [Product::class, 'afterUpdate'],
         ],
 
         'catalog.product.delete.before' => [
             [Product::class, 'beforeDelete'],
+        ],
+
+        'catalog.category.create.after' => [
+            [Category::class, 'afterCreate'],
         ],
 
         'catalog.category.update.after' => [

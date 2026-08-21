@@ -384,6 +384,10 @@
     "file": "assets/exchange-rate-nueYe-Ml.svg",
     "src": "src/Resources/assets/images/settings/exchange-rate.svg"
   },
+  "src/Resources/assets/images/settings/full-page-cache.svg": {
+    "file": "assets/full-page-cache-DOxvZ_cy.svg",
+    "src": "src/Resources/assets/images/settings/full-page-cache.svg"
+  },
   "src/Resources/assets/images/settings/gdpr.svg": {
     "file": "assets/gdpr-DrhhDXQJ.svg",
     "src": "src/Resources/assets/images/settings/gdpr.svg"
