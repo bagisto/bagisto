@@ -15,9 +15,10 @@ The image is published across two independent choices — the **web server** and
 | Database | Version | Tag fragment |
 |---|---|---|
 | **mysql** (default) | MySQL 8.0 | `-mysql` |
+| **mariadb** | MariaDB 10.11 | `-mariadb` |
 | **postgres** | PostgreSQL 16 | `-postgres` |
 
-The full name carries both, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Because MySQL on nginx is the conventional pick, it also answers to the shorter names that existed before PostgreSQL images did — `:2.5.0-nginx`, `:2.5.0` and `:latest` all resolve to it, so nothing that already pulls Bagisto has to change.
+The full name carries both, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Because MySQL on nginx is the conventional pick, it also answers to the shorter names that existed before the multi-database images did — `:2.5.0-nginx`, `:2.5.0` and `:latest` all resolve to it, so nothing that already pulls Bagisto has to change.
 
 ---
 
@@ -52,7 +53,7 @@ The full name carries both, e.g. `webkul/bagisto:2.5.0-nginx-postgres`. Because 
 | **Base OS** | Ubuntu 24.04 |
 | **Web Server** | One of **Nginx** (default), **Apache 2**, or **OpenLiteSpeed** — listening on port 80 (see the variant table above) |
 | **PHP** | 8.4 with bcmath, calendar, curl, exif, gd, gmp, intl, mbstring, mysql, pdo, soap, sockets, xml, zip, imagick. Served via PHP-FPM (nginx), `mod_php` (apache), or lsphp/LSAPI (litespeed). |
-| **Database** | MySQL 8.0 or PostgreSQL 16, bundled and pre-installed with Bagisto migrations + seed data already applied |
+| **Database** | MySQL 8.0, MariaDB 10.11 or PostgreSQL 16, bundled and pre-installed with Bagisto migrations + seed data already applied |
 | **Process Manager** | Supervisor (manages the database, the PHP runner where applicable, and the web server) |
 | **Application** | Bagisto — fully installed at build time |
 
@@ -89,6 +90,10 @@ bagisto/
     │       │   ├── engine.sh     # Driver: init, start, provision, stop, reachability
     │       │   ├── init.sql      # Creates the `bagisto` database + user
     │       │   └── supervisord.conf  # Supervisor program for mysqld
+    │       ├── mariadb/
+    │       │   ├── engine.sh     # Same contract, MariaDB implementation
+    │       │   ├── init.sql      # Creates the `bagisto` database + user
+    │       │   └── supervisord.conf  # Supervisor program for mariadbd
     │       └── postgres/
     │           ├── engine.sh     # Same contract, PostgreSQL implementation
     │           ├── init.sql      # Creates the `bagisto` role + database + schema grants
@@ -133,7 +138,8 @@ docker pull webkul/bagisto:latest                       # nginx + MySQL
 # a different web server, still MySQL:
 docker pull webkul/bagisto:latest-apache
 docker pull webkul/bagisto:latest-litespeed
-# PostgreSQL instead of MySQL:
+# MariaDB or PostgreSQL instead of MySQL:
+docker pull webkul/bagisto:latest-nginx-mariadb
 docker pull webkul/bagisto:latest-nginx-postgres
 docker pull webkul/bagisto:latest-apache-postgres
 # or pin an exact version, server and database:
@@ -188,6 +194,10 @@ docker build -f litespeed/Dockerfile -t bagisto:2.5.0-litespeed-mysql .
 The database is chosen with `DB_ENGINE`, which defaults to `mysql`:
 
 ```bash
+# nginx + MariaDB
+docker build -f nginx/Dockerfile -t bagisto:2.5.0-nginx-mariadb \
+    --build-arg DB_ENGINE=mariadb .
+
 # nginx + PostgreSQL
 docker build -f nginx/Dockerfile -t bagisto:2.5.0-nginx-postgres \
     --build-arg DB_ENGINE=postgres .
@@ -208,7 +218,7 @@ Replace `v2.4.7` with any valid Git tag from https://github.com/bagisto/bagisto/
 | Build arg | Applies to | Default | Description |
 |---|---|---|---|
 | `BAGISTO_VERSION` | all images | `v2.4.7` | Git tag to clone from the Bagisto repository. |
-| `DB_ENGINE` | all images | `mysql` | Database to bundle: `mysql` or `postgres`. Selects everything under `shared/db/<engine>/`. |
+| `DB_ENGINE` | all images | `mysql` | Database to bundle: `mysql`, `mariadb` or `postgres`. Selects everything under `shared/db/<engine>/`. |
 | `PHP_VERSION` | nginx, apache | `8.4` | PHP version to install. Only change if you know what you're doing. |
 | `LSPHP_VERSION` | litespeed | `84` | lsphp major version (`84` for PHP 8.4). |
 
@@ -229,13 +239,16 @@ Every release publishes all six combinations. The canonical name carries both di
 | Server | Database | Version tag | Floating tag (stable, default branch) |
 |---|---|---|---|
 | nginx | mysql | `:<version>-nginx-mysql`, `:<version>-nginx`, `:<version>` | `:latest-nginx-mysql`, `:latest-nginx`, `:latest` |
+| nginx | mariadb | `:<version>-nginx-mariadb` | `:latest-nginx-mariadb` |
 | nginx | postgres | `:<version>-nginx-postgres` | `:latest-nginx-postgres` |
 | apache | mysql | `:<version>-apache-mysql`, `:<version>-apache` | `:latest-apache-mysql`, `:latest-apache` |
+| apache | mariadb | `:<version>-apache-mariadb` | `:latest-apache-mariadb` |
 | apache | postgres | `:<version>-apache-postgres` | `:latest-apache-postgres` |
 | litespeed | mysql | `:<version>-litespeed-mysql`, `:<version>-litespeed` | `:latest-litespeed-mysql`, `:latest-litespeed` |
+| litespeed | mariadb | `:<version>-litespeed-mariadb` | `:latest-litespeed-mariadb` |
 | litespeed | postgres | `:<version>-litespeed-postgres` | `:latest-litespeed-postgres` |
 
-The rule behind the aliases: a `-mysql` image also answers to the server-only name, and nginx + MySQL additionally answers to the bare version and `:latest`. PostgreSQL images are always named in full — there is no unqualified alias that silently means PostgreSQL.
+The rule behind the aliases: a `-mysql` image also answers to the server-only name, and nginx + MySQL additionally answers to the bare version and `:latest`. MariaDB and PostgreSQL images are always named in full — there is no unqualified alias that silently means either one.
 
 So a stable `v2.4.7` release on the default branch produces:
 
@@ -668,16 +681,16 @@ docker exec -it bagisto php /var/www/bagisto/artisan db:seed --force
 | Variable | Default | Description |
 |---|---|---|
 | `BAGISTO_VERSION` | `v2.4.7` | Git tag cloned from the Bagisto repository. |
-| `DB_ENGINE` | `mysql` | Database to bundle: `mysql` or `postgres`. |
+| `DB_ENGINE` | `mysql` | Database to bundle: `mysql`, `mariadb` or `postgres`. |
 | `PHP_VERSION` | `8.4` | PHP version to install. |
 
 ### Runtime environment (`docker run -e`)
 
 | Variable | Default | Description |
 |---|---|---|
-| `DB_CONNECTION` | matches the bundled engine | Laravel driver: `mysql` or `pgsql`. Set it when pointing at an external server of the other kind. |
+| `DB_CONNECTION` | matches the bundled engine | Laravel driver: `mysql`, `mariadb` or `pgsql`. Set it when pointing at an external server of another kind. |
 | `DB_HOST` | `127.0.0.1` | Database host. Anything other than `127.0.0.1` / `localhost` switches to external-DB mode. |
-| `DB_PORT` | `3306` (mysql) / `5432` (postgres) | Database port. Defaults to the bundled engine's port. |
+| `DB_PORT` | `3306` (mysql, mariadb) / `5432` (postgres) | Database port. Defaults to the bundled engine's port. |
 | `DB_DATABASE` | `bagisto` | Database name. |
 | `DB_USERNAME` | `bagisto` | Database user. |
 | `DB_PASSWORD` | `bagisto` | Database password. |

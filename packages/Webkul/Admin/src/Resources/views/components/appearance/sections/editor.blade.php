@@ -9,6 +9,8 @@
     'previewUrl'  => '',
     'reorderUrl'  => '',
     'storeUrl'    => '',
+    'publishUrl'  => '',
+    'discardUrl'  => '',
     'urls'        => [],
 ])
 
@@ -17,6 +19,8 @@
     :type-labels='@json($typeLabels)'
     :channels='@json($channels)'
     :locales='@json($locales)'
+    publish-url="{{ $publishUrl }}"
+    discard-url="{{ $discardUrl }}"
     :urls='@json($urls)'
     channel-id="{{ $channelId }}"
     locale-code="{{ $localeCode }}"
@@ -353,27 +357,6 @@
                     </p>
                 </x-slot>
 
-                <x-slot:footer class="px-4 pb-8">
-                    <div class="flex items-center justify-end gap-2">
-                        <button
-                            type="button"
-                            class="secondary-button"
-                            v-if="active?.has_draft"
-                            @click="discardActive"
-                        >
-                            @lang('admin::app.appearance.sections.index.discard-btn')
-                        </button>
-
-                        <button
-                            type="button"
-                            class="primary-button"
-                            :disabled="! active?.has_draft"
-                            @click="publishActive"
-                        >
-                            @lang('admin::app.appearance.sections.index.publish-btn')
-                        </button>
-                    </div>
-                </x-slot>
             </x-admin::drawer>
 
             <!-- Create Drawer -->
@@ -487,6 +470,8 @@
                 'previewUrl',
                 'reorderUrl',
                 'storeUrl',
+                'publishUrl',
+                'discardUrl',
                 'urls',
                 'themeName',
             ],
@@ -1086,28 +1071,10 @@
                 },
 
                 /**
-                 * Publish the section open in the drawer.
-                 */
-                publishActive() {
-                    this.runOn([this.active].filter(Boolean), 'publish');
-                },
-
-                /**
-                 * Throw away the open section's unpublished edits and reload its fields, so
-                 * the drawer shows what is actually live again.
-                 */
-                discardActive() {
-                    const section = this.active;
-
-                    this.runOn([section].filter(Boolean), 'discard')
-                        .then(() => section && this.select(section));
-                },
-
-                /**
                  * Publish every section that holds unpublished edits.
                  */
                 publishAll() {
-                    this.runOn(this.items.filter(section => section.has_draft), 'publish');
+                    this.runOnAll(this.publishUrl);
                 },
 
                 /**
@@ -1116,7 +1083,7 @@
                 discardAll() {
                     const active = this.active;
 
-                    this.runOn(this.items.filter(section => section.has_draft), 'discard')
+                    this.runOnAll(this.discardUrl)
                         .then(() => {
                             if (
                                 this.isPanelOpen
@@ -1128,30 +1095,28 @@
                 },
 
                 /**
-                 * Run an action over each given section, then refresh the list state.
+                 * Publish or discard the whole set in one request.
+                 *
+                 * Ordering is relative across the sections, so the server settles them together
+                 * and answers with the list as it now stands — the client cannot work out what a
+                 * discarded section reverts to on its own.
                  */
-                runOn(sections, action) {
-                    if (! sections.length) {
+                runOnAll(url) {
+                    if (! this.pendingCount) {
                         return Promise.resolve();
                     }
 
                     this.isBusy = true;
 
-                    return Promise.all(sections.map(section => this.$axios.post(this.actionFor(section.id, action))))
-                        .then(responses => {
-                            sections.forEach((section, index) => {
-                                section.has_draft = false;
-
-                                const status = responses[index]?.data?.status;
-
-                                if (typeof status === 'boolean') {
-                                    section.status = status;
-                                }
-                            });
+                    return this.$axios.post(url + '?locale=' + encodeURIComponent(this.locale))
+                        .then(response => {
+                            if (Array.isArray(response.data.sections)) {
+                                this.items = response.data.sections;
+                            }
 
                             this.reloadPreview();
                         })
-                        .catch(error => this.sectionError(error, sections))
+                        .catch(error => this.flashError(error))
                         .finally(() => this.isBusy = false);
                 },
 

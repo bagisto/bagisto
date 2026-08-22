@@ -1,8 +1,8 @@
 <?php
 
-use Spatie\ResponseCache\CacheProfiles\CacheAllSuccessfulGetRequests;
 use Spatie\ResponseCache\Replacers\CsrfTokenReplacer;
 use Spatie\ResponseCache\Serializers\JsonSerializer;
+use Webkul\FPC\CacheProfiles\FullPageCacheProfile;
 use Webkul\FPC\Hasher\DefaultHasher;
 use Webkul\FPC\Replacers\FlashMessagesReplacer;
 
@@ -101,8 +101,12 @@ return [
      * The given class determines if a request should be cached.
      * By default all successful GET-requests will be cached.
      * You can provide your own by using the CacheProfile.
+     *
+     * Bagisto's profile keeps this behaviour and additionally honours the
+     * Full Page Cache settings in Configure -> Cache Management, so the
+     * cache can be turned off and its lifetime adjusted without a deploy.
      */
-    'cache_profile' => CacheAllSuccessfulGetRequests::class,
+    'cache_profile' => FullPageCacheProfile::class,
 
     /*
      * This class is responsible for generating a hash for

@@ -23,6 +23,8 @@ db_default_port() { echo "5432"; }
 
 db_connection() { echo "pgsql"; }
 
+db_server_packages() { echo "postgresql postgresql-client"; }
+
 db_build_init() {
     local version data
 

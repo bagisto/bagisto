@@ -123,7 +123,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: admin-results-${{ matrix.db }}-shard-${{ matrix.shard-index }}-${{ github.run_id }}
+          name: admin-results-${{ matrix.db }}-shard-${{ matrix.shard-index }}-${{ github.run_id }}-${{ github.run_number }}
           path: |
             packages/Webkul/Admin/tests/e2e-pw/playwright-report
             packages/Webkul/Admin/tests/e2e-pw/test-results

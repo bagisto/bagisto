@@ -2,13 +2,15 @@
 
 namespace Webkul\FPC\Listeners;
 
-use Spatie\ResponseCache\Facades\ResponseCache;
+use Webkul\FPC\Concerns\ForgetsPages;
 use Webkul\Product\Repositories\ProductBundleOptionProductRepository;
 use Webkul\Product\Repositories\ProductGroupedProductRepository;
 use Webkul\Product\Repositories\ProductRepository;
 
 class Product
 {
+    use ForgetsPages;
+
     /**
      * Create a new listener instance.
      *
@@ -26,11 +28,20 @@ class Product
      * @param  \Webkul\Product\Contracts\Product  $product
      * @return void
      */
+    public function afterCreate($product)
+    {
+        $this->forgetPages($this->getForgettableUrls($product));
+    }
+
+    /**
+     * Update or create product page cache
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     * @return void
+     */
     public function afterUpdate($product)
     {
-        $urls = $this->getForgettableUrls($product);
-
-        ResponseCache::forget($urls);
+        $this->forgetPages($this->getForgettableUrls($product));
     }
 
     /**
@@ -43,9 +54,11 @@ class Product
     {
         $product = $this->productRepository->find($productId);
 
-        $urls = $this->getForgettableUrls($product);
+        if (! $product) {
+            return;
+        }
 
-        ResponseCache::forget($urls);
+        $this->forgetPages($this->getForgettableUrls($product));
     }
 
     /**
@@ -56,12 +69,40 @@ class Product
      */
     public function getForgettableUrls($product)
     {
-        $urls = [];
+        $urls = [$this->homePath()];
 
         $products = $this->getAllRelatedProducts($product);
 
-        foreach ($products as $product) {
-            $urls[] = '/'.$product->url_key;
+        foreach ($products as $related) {
+            if ($related?->url_key) {
+                $urls[] = '/'.$related->url_key;
+            }
+
+            $urls = array_merge($urls, $this->getCategoryUrls($related));
+        }
+
+        return $urls;
+    }
+
+    /**
+     * The listing pages a product is shown on.
+     *
+     * A product is drawn on its category pages and in the home page carousels as well as at its
+     * own address, so dropping only its own page leaves the price, image and name it had before
+     * on every listing that carries it.
+     *
+     * @param  \Webkul\Product\Contracts\Product  $product
+     */
+    protected function getCategoryUrls($product): array
+    {
+        $urls = [];
+
+        foreach ($product?->categories ?? [] as $category) {
+            foreach (core()->getAllLocales() as $locale) {
+                if ($translation = $category->translate($locale->code)) {
+                    $urls[] = '/'.$translation->slug;
+                }
+            }
         }
 
         return $urls;

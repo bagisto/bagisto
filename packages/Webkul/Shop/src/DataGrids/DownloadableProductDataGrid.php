@@ -72,10 +72,10 @@ class DownloadableProductDataGrid extends DataGrid
                     || $row->status == 'expired'
                     || $row->invoice_state !== 'paid'
                 ) {
-                    return $row->product_name;
+                    return e($row->product_name);
                 }
 
-                return '<a class="text-blue-600" href="'.route('shop.customers.account.downloadable_products.download', $row->id).'" target="_blank">'.$row->product_name.'</a>';
+                return '<a class="text-blue-600" href="'.route('shop.customers.account.downloadable_products.download', $row->id).'" target="_blank">'.e($row->product_name).'</a>';
             },
         ]);
 

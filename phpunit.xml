@@ -36,6 +36,15 @@
             <directory suffix="Test.php">packages/Webkul/EUWithdrawal/tests/Feature</directory>
         </testsuite>
 
+        <!-- FPC package testsuites. -->
+        <testsuite name="FPC Unit Test">
+            <directory suffix="Test.php">packages/Webkul/FPC/tests/Unit</directory>
+        </testsuite>
+
+        <testsuite name="FPC Feature Test">
+            <directory suffix="Test.php">packages/Webkul/FPC/tests/Feature</directory>
+        </testsuite>
+
         <!-- Installer package testsuites. -->
         <testsuite name="Installer Feature Test">
             <directory suffix="Test.php">packages/Webkul/Installer/tests/Feature</directory>

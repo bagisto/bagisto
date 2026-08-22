@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-    ➡️ <a href="https://bagisto.com/en/">Website</a> | <a href="https://devdocs.bagisto.com/">Documentation</a> | <a href="https://devdocs.bagisto.com/2.3/introduction/installation.html#installation">Installation Guide</a> | <a href="https://devdocs.bagisto.com/2.3/introduction/docker.html">Docker Installation</a>  | <a href="https://forums.bagisto.com/">Forums</a> | <a href="https://www.facebook.com/groups/bagisto/">Community</a> ⬅️
+    ➡️ <a href="https://bagisto.com/en/">Website</a> | <a href="https://devdocs.bagisto.com/">Documentation</a> | <a href="https://devdocs.bagisto.com/getting-started/installation.html">Installation Guide</a> | <a href="https://devdocs.bagisto.com/getting-started/installation.html#%F0%9F%90%B3-docker-installation">Docker Installation</a>  | <a href="https://forums.bagisto.com/">Forums</a> | <a href="https://www.facebook.com/groups/bagisto/">Community</a> ⬅️
 </p>
 
 <p align="center">
@@ -66,7 +66,7 @@ Bagisto can help you cut down your time, cost, and workforce for building online
 
 ![Getting Started](https://raw.githubusercontent.com/bagisto/temp-media/master/geting-starded.png)
 
-[Install Bagisto](https://devdocs.bagisto.com/2.3/introduction/installation.html#install-using-gui-installer) with or without Composer (Check [Requirement Details](https://bagisto.com/en/download/))
+[Install Bagisto](https://devdocs.bagisto.com/getting-started/installation.html) with or without Composer (Check [Requirement Details](https://bagisto.com/en/download/))
 
 Follow the [Getting Started with Bagisto](https://www.youtube.com/watch?v=s_DhQrjK8Tw&list=PLe30vg_FG4OS3BU8rHUKQZ2mnX45xwSMc) Tutorial
 
@@ -178,14 +178,14 @@ With Bagisto, you can easily create use cases for various commerce needs like Ma
 
 ![200+ Prebuilt Extensions](https://raw.githubusercontent.com/bagisto/temp-media/master/built_in_extension.png)
 
-Make use of 100+ Bagisto pre-built extensions from [Bagisto Extension Markeptlace](https://bagisto.com/en/extensions/)
+Make use of 200+ Bagisto pre-built extensions from [Bagisto Extension Marketplace](https://bagisto.com/en/extensions/)
 
 # Community
 
 ![Forum and Facebook Communities](https://raw.githubusercontent.com/bagisto/temp-media/master/community.png)
 
 Get Bagisto support on [Facebook Group](https://www.facebook.com/groups/bagisto) and [Forum](https://forums.bagisto.com/)
-Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](https://github.com/bagisto/bagisto/blob/master/.github/CONTRIBUTING.md)!
+Would like to help us build the most developer-friendly E-Commerce platform? Start by reading our [Contributing Guide](https://github.com/bagisto/bagisto/blob/2.4/.github/CONTRIBUTING.md)!
 
 # License
 

@@ -487,7 +487,7 @@ it('should turn a section off and back on again', function () {
         ->assertJsonPath('status', false)
         ->assertJsonPath('has_draft', true);
 
-    postJson(route('admin.appearance.sections.publish', $section->id))->assertOk();
+    postJson(route('admin.appearance.sections.publish', $section->theme_code))->assertOk();
 
     expect((bool) $section->refresh()->status)->toBeFalse();
 
@@ -495,7 +495,7 @@ it('should turn a section off and back on again', function () {
         ->assertOk()
         ->assertJsonPath('status', true);
 
-    postJson(route('admin.appearance.sections.publish', $section->id))->assertOk();
+    postJson(route('admin.appearance.sections.publish', $section->theme_code))->assertOk();
 
     expect((bool) $section->refresh()->status)->toBeTrue();
 });

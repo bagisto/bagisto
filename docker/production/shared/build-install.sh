@@ -8,7 +8,8 @@
 # store with no first-run setup.
 #
 # The database itself is handled by an engine driver — see shared/db/ — so
-# this script is the same whether the image bundles MySQL or PostgreSQL.
+# this script is the same whether the image bundles MySQL, MariaDB or
+# PostgreSQL.
 # ==========================================================================
 set -e
 
@@ -59,7 +60,7 @@ log "Seeding demo products..."
 php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"
 
 log "Building the search indexes..."
-php artisan index:index --mode=full
+php artisan indexer:index --mode=full
 
 log "Shutting ${DB_ENGINE_NAME} down..."
 db_build_stop

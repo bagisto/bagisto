@@ -18,7 +18,7 @@ jobs:
         operating-systems: [ubuntu-latest]
         php-versions: ['8.4']
         node-version: ['22.13.1']
-        shard-index: [1,2,3,4,5,6,7,8,9,10]
+        shard-index: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         shard-total: [10]
         db: [mysql, pgsql]
         include:
@@ -123,7 +123,7 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: shop-results-${{ matrix.db }}-shard-${{ matrix.shard-index }}-${{ github.run_id }}
+          name: shop-results-${{ matrix.db }}-shard-${{ matrix.shard-index }}-${{ github.run_id }}-${{ github.run_number }}
           path: |
             packages/Webkul/Shop/tests/e2e-pw/playwright-report
             packages/Webkul/Shop/tests/Feature/e2e-pw/test-results

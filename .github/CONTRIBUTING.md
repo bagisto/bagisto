@@ -1,25 +1,72 @@
 ## How to contribute to Bagisto
 
+### **Before you start working**
 
-### **Bug Reporting**
+**Comment on the issue and wait to be assigned before you write any code.**
 
-1. Verify that the bug was not already reported by searching on GitHub in the [Issues section](https://github.com/bagisto/bagisto/issues)
-If you're unable to find an open issue, [open a new one](https://github.com/bagisto/bagisto/issues/new?assignees=&labels=&template=1_Bug_report.md).
+Several people often pick up the same issue, and the duplicated work is only
+discovered when the second pull request arrives. A short comment — "I'd like to
+take this" — is enough, and it saves someone else an evening.
 
-2. Verify that the bug you are reporting is a general issue and not specific to your individual setup.  
-For individual issues please use the [Community Forum](https://forums.bagisto.com/).
+Check the issue first for an assignee or for someone who has already said they
+are on it. If it is already claimed and there has been no progress for a while,
+ask in the thread rather than opening a competing pull request.
 
-#### **Did you fix a bug?**
+The same applies to a feature: agree the approach in the issue before building
+it. A feature that arrives as a surprise pull request is far more likely to be
+rejected on direction rather than on code.
 
-1. To provide a code contribution for an issue you will need to set up your own fork of the [Bagisto repository](https://github.com/bagisto/bagisto).  
-Make your code changes, commit the changes and make a [Pull Request](https://help.github.com/articles/about-pull-requests/) to the [Bagisto repository](https://github.com/bagisto/bagisto).  
-2. Separate each fix into a new branch in your repository and name it with the issue ID e.g. issue-1234.
-3. When committing to your individual branch, please try and use the following as your commit message  
-```Fixed #1234 - <the subject of the issue>```  
-4. Please follow the pull request [template](https://github.com/bagisto/bagisto/blob/master/.github/PULL_REQUEST_TEMPLATE.md) as much as possible.
+### **Bug reporting**
+
+1. Verify that the bug was not already reported by searching the
+   [Issues section](https://github.com/bagisto/bagisto/issues).
+   If you cannot find an open issue,
+   [open a new one](https://github.com/bagisto/bagisto/issues/new/choose).
+
+2. Verify that the bug is a general issue and not specific to your own setup.
+   For individual issues please use the [Community Forum](https://forums.bagisto.com/).
+
+3. Include a title, a clear description, the version you are on, and the steps
+   to reproduce. A bug report is only as useful as it is reproducible.
+
+### **Did you fix a bug?**
+
+1. Fork the [Bagisto repository](https://github.com/bagisto/bagisto), make your
+   changes, and open a
+   [pull request](https://help.github.com/articles/about-pull-requests/).
+
+2. Branch from the release line you are targeting, and open the pull request
+   against that same branch. The active lines are `2.4` and `master`; there is
+   no `development` branch.
+
+3. Keep each fix on its own branch, named for the issue — for example
+   `issue-1234`.
+
+4. Write the commit message as `fix: <what changed>`, following
+   [Conventional Commits](https://www.conventionalcommits.org/), which is what
+   the repository history uses.
+
+5. Follow the pull request
+   [template](https://github.com/bagisto/bagisto/blob/2.4/.github/PULL_REQUEST_TEMPLATE.md).
 
 ### **Did you create a new feature or enhancement?**
-1. To provide a code contribution for a new feature or enhancement a [feature request](https://github.com/bagisto/bagisto/issues/new?assignees=&labels=&template=2_Feature_request.md) report should be created in case it doesn't exist.
-2. To contribute a feature to Bagisto, you must create a forked repository and set up your git and development environment.
-3. Make sure your commit messages are relevant and descriptive.
-4. Please follow the pull request [template](https://github.com/bagisto/bagisto/blob/master/.github/PULL_REQUEST_TEMPLATE.md) as much as possible.
+
+1. Open a [feature request](https://github.com/bagisto/bagisto/issues/new/choose)
+   first if one does not already exist, and agree the approach there.
+
+2. Fork the repository and set up your development environment.
+
+3. Use `feat:` for the commit subject, and keep the message descriptive.
+
+4. Follow the pull request
+   [template](https://github.com/bagisto/bagisto/blob/2.4/.github/PULL_REQUEST_TEMPLATE.md).
+
+### **Before you open the pull request**
+
+```bash
+vendor/bin/pint --test                       # code style
+vendor/bin/pest                              # tests
+php artisan bagisto:translations:check       # all 22 locales, if you touched any
+```
+
+Say in the description which of these you ran, and which you skipped and why.

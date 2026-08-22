@@ -50,7 +50,7 @@ vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directo
 vendor/bin/pest --filter="test name"                    # Run a single test by name
 ```
 
-Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Core Unit, Customer Unit, DataGrid Unit, EUWithdrawal Feature, Installer Feature, Omnibus Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
+Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Core Unit, Customer Unit, DataGrid Unit, EUWithdrawal Feature, FPC Unit/Feature, Installer Feature, Omnibus Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
 
 Every package that has tests is registered above. Packages without a `tests/` directory (PhonePe, Checkout, Product, Sales, RMA, and others) have no suite — adding a `<testsuite>` for a path that does not exist makes PHPUnit error, so write the tests first.
 

@@ -9,9 +9,9 @@ name: Build & Publish Docker Image
 # server and the bundled database — giving :<version>-<server>-<database>:
 #
 #   servers   : nginx, apache, litespeed
-#   databases : mysql, postgres
+#   databases : mysql, mariadb, postgres
 #
-# e.g. 2.5.0-nginx-mysql, 2.5.0-nginx-postgres, 2.5.0-apache-postgres
+# e.g. 2.5.0-nginx-mysql, 2.5.0-nginx-mariadb, 2.5.0-apache-postgres
 #
 # Shorter aliases point at the conventional choice, so existing pulls keep
 # working:
@@ -133,7 +133,7 @@ jobs:
       fail-fast: false
       matrix:
         variant: [nginx, apache, litespeed]
-        database: [mysql, postgres]
+        database: [mysql, mariadb, postgres]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -169,8 +169,8 @@ jobs:
           fi
 
           # MySQL is the conventional database, so it also answers to the
-          # shorter server-only name that was published before PostgreSQL
-          # images existed.
+          # shorter server-only name that was published before the
+          # multi-database images existed.
           if [ "$DATABASE" = "mysql" ]; then
             TAGS="$TAGS,${IMAGE}:${DOCKER_TAG}-${VARIANT}"
 

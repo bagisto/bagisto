@@ -866,6 +866,8 @@ return [
                 'mexican-peso' => 'Мексиканське песо (MXN)',
                 'moroccan-dirham' => 'Марокканський дирхам (MAD)',
                 'mysql' => 'MySQL',
+                'mariadb' => 'MariaDB',
+                'postgresql' => 'PostgreSQL',
                 'nepalese-rupee' => 'Непальська рупія (NPR)',
                 'new-taiwan-dollar' => 'Новий тайванський долар (TWD)',
                 'new-zealand-dollar' => 'Новозеландський долар (NZD)',

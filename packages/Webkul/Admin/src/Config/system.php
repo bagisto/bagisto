@@ -3480,5 +3480,35 @@ return [
                 'path' => 'admin::configuration.custom-views.cache-management',
             ],
         ],
+    ], [
+        'key' => 'cache_management.full_page_cache',
+        'name' => 'admin::app.configuration.index.cache-management.full-page-cache.title',
+        'info' => 'admin::app.configuration.index.cache-management.full-page-cache.info',
+        'icon' => 'settings/full-page-cache.svg',
+        'sort' => 2,
+    ], [
+        'key' => 'cache_management.full_page_cache.settings',
+        'name' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.title',
+        'info' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.enabled',
+                'info' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.enabled-info',
+                'type' => 'boolean',
+                'default' => true,
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'lifetime',
+                'title' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.lifetime',
+                'info' => 'admin::app.configuration.index.cache-management.full-page-cache.settings.lifetime-info',
+                'type' => 'text',
+                'validation' => 'nullable|numeric|min:1',
+                'channel_based' => false,
+                'locale_based' => false,
+            ],
+        ],
     ],
 ];
