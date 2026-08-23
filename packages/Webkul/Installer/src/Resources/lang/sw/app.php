@@ -9,7 +9,7 @@ return [
 
             'attribute-groups' => [
                 'description' => 'Maelezo',
-                'general' => 'Jumla',
+                'general' => 'Kuu',
                 'inventories' => 'Inventori',
                 'meta-description' => 'Maelezo ya Meta',
                 'price' => 'Bei',
@@ -235,7 +235,7 @@ return [
 
         'customer' => [
             'customer-groups' => [
-                'general' => 'Jumla',
+                'general' => 'Kuu',
                 'guest' => 'Mgeni',
                 'wholesale' => 'Lelemama',
             ],
@@ -956,7 +956,7 @@ return [
                 'curl' => 'cURL',
                 'dom' => 'dom',
                 'fileinfo' => 'fileInfo',
-                'filter' => 'Filter',
+                'filter' => 'Chuja',
                 'gd' => 'GD',
                 'hash' => 'Hash',
                 'intl' => 'intl',
