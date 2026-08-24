@@ -79,7 +79,7 @@ The layout follows a **shared assets + per-runtime** structure. The build contex
 ```
 bagisto/
 ├── .github/workflows/
-│   └── docker_publish.yml       # Matrix-builds & pushes every server x database combination on a `v*` tag
+│   └── docker-publish.yml       # Matrix-builds & pushes every server x database combination on a `v*` tag
 └── docker/production/
     ├── shared/                  # Assets common to every image
     │   ├── build-install.sh     # Build time: installs Bagisto, seeds the DB, bakes its data into the layer
@@ -166,7 +166,7 @@ Then visit `http://localhost:8080`.
 
 ## 4. Building the Image
 
-> **For releases, you do not need to build manually.** A GitHub Actions workflow (`.github/workflows/docker_publish.yml`) builds and pushes the multi-arch image to Docker Hub automatically when a `v*` tag is pushed. See [§7 — Full Release Workflow](#7-full-release-workflow).
+> **For releases, you do not need to build manually.** A GitHub Actions workflow (`.github/workflows/docker-publish.yml`) builds and pushes the multi-arch image to Docker Hub automatically when a `v*` tag is pushed. See [§7 — Full Release Workflow](#7-full-release-workflow).
 >
 > The instructions below cover **local development builds** — testing Dockerfile changes, debugging the install flow, or producing a single-arch image for a private registry.
 
@@ -305,7 +305,7 @@ docker tag bagisto-prod <your-dockerhub-username>/bagisto:latest
 Or build directly with the final name (skips the retag step):
 
 ```bash
-docker build -t <your-dockerhub-username>/bagisto:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
+docker build -f nginx/Dockerfile -t <your-dockerhub-username>/bagisto:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
 docker tag   <your-dockerhub-username>/bagisto:2.4.0 <your-dockerhub-username>/bagisto:latest
 ```
 
@@ -359,7 +359,7 @@ Generate an access token at https://hub.docker.com/settings/security and paste i
 #### Step 2 — Build with the Docker Hub name
 
 ```bash
-docker build -t <your-dockerhub-username>/bagisto:2.4.0 \
+docker build -f nginx/Dockerfile -t <your-dockerhub-username>/bagisto:2.4.0 \
   --build-arg BAGISTO_VERSION=v2.4.0 .
 ```
 
@@ -412,6 +412,7 @@ docker buildx ls
 docker login -u <your-dockerhub-username>
 
 docker buildx build \
+  -f nginx/Dockerfile \
   --platform linux/amd64,linux/arm64 \
   --build-arg BAGISTO_VERSION=v2.4.0 \
   -t <your-dockerhub-username>/bagisto:2.4.0 \
@@ -441,7 +442,7 @@ You should see entries for both `linux/amd64` and `linux/arm64`.
 
 ### Automated flow (standard)
 
-Releasing a Bagisto version (e.g. `2.4.0` — the latest stable in this line is currently **`2.4.4`**) is a single tag push:
+Releasing a Bagisto version (e.g. `2.4.0`) is a single tag push:
 
 ```bash
 # From the Bagisto repo root
@@ -449,13 +450,13 @@ git tag v2.4.0
 git push origin v2.4.0
 ```
 
-That's the entire release. The GitHub Actions workflow at `.github/workflows/docker_publish.yml` then:
+That's the entire release. The GitHub Actions workflow at `.github/workflows/docker-publish.yml` then:
 
 1. Validates the tag matches `vX.Y.Z` (or `vX.Y.Z-suffix` for pre-releases).
 2. Sets up QEMU + Buildx for cross-architecture builds.
 3. Logs in to Docker Hub using the `DOCKERHUB_USERNAME` / `DOCKERHUB_TOKEN` repo secrets.
-4. Builds `docker/production/Dockerfile` for `linux/amd64` and `linux/arm64` in parallel with `BAGISTO_VERSION=v2.4.0`.
-5. Pushes a single multi-arch manifest as `webkul/bagisto:2.4.0` and (since the `2.4` branch **is** the GitHub default branch) also updates `webkul/bagisto:latest`.
+4. Matrix-builds every server × database combination — each from its own `docker/production/<server>/Dockerfile` (`nginx`, `apache`, `litespeed`) with `DB_ENGINE` set to `mysql`, `mariadb` or `postgres` — for `linux/amd64` and `linux/arm64` in parallel with `BAGISTO_VERSION=v2.4.0`.
+5. Pushes a multi-arch manifest for each combination (e.g. `webkul/bagisto:2.4.0-nginx-mariadb`) and, since the `2.4` branch **is** the GitHub default branch, also updates the `:latest` aliases — including the bare `webkul/bagisto:2.4.0` and `webkul/bagisto:latest`, which resolve to nginx + MySQL.
 6. Caches buildx layers in GitHub Actions cache for faster subsequent builds.
 
 Track progress in the repo's **Actions** tab. Build duration is typically **30–60 minutes** because the arm64 leg runs under QEMU emulation and Bagisto is fully installed (migrations, seeders, indexers) during the build.
@@ -493,7 +494,7 @@ If CI is down or you're publishing to a private registry, fall back to the manua
 cd docker/production
 
 # 1. Build with Docker Hub name
-docker build -t <your-dockerhub-username>/bagisto:2.4.0 \
+docker build -f nginx/Dockerfile -t <your-dockerhub-username>/bagisto:2.4.0 \
   --build-arg BAGISTO_VERSION=v2.4.0 .
 
 # 2. Re-tag as latest
@@ -516,6 +517,7 @@ To publish both architectures under one tag without CI (one-time `buildx` setup 
 cd docker/production
 
 docker buildx build \
+  -f nginx/Dockerfile \
   --platform linux/amd64,linux/arm64 \
   --build-arg BAGISTO_VERSION=v2.4.0 \
   -t <your-dockerhub-username>/bagisto:2.4.0 \
@@ -728,7 +730,7 @@ When the container starts, `entrypoint.sh` does this:
 4. Runs `php artisan key:generate`.
 5. Runs `php artisan bagisto:install` (migrations + core seeding).
 6. Runs the Bagisto product seeder for sample data.
-7. Runs `php artisan index:index --mode=full` for search indexing.
+7. Runs `php artisan indexer:index --mode=full` for search indexing.
 8. Shuts MySQL down cleanly.
 
 The populated `/var/lib/mysql` directory is saved as part of the Docker image layer. So when you `docker run`, the database already has tables, admin user, products, and indexes.
@@ -828,7 +830,7 @@ For custom or local rebuilds:
 
 ```bash
 cd docker/production
-docker build -t bagisto-prod:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
+docker build -f nginx/Dockerfile -t bagisto-prod:2.4.0 --build-arg BAGISTO_VERSION=v2.4.0 .
 ```
 
 Then stop and replace the running container:
@@ -973,13 +975,13 @@ Alternative (Docker Desktop only): Settings → General → check **"Use contain
 
 ## 17. FAQ
 
-### Why is the image ~1.5 GB?
+### Why is the image ~2 GB?
 
-Because it contains a fully installed, ready-to-boot Bagiso application with MySQL, PHP, Nginx, and all runtime dependencies bundled in one container. Approximate size distribution:
+Because it contains a fully installed, ready-to-boot Bagisto application with MySQL, PHP, Nginx, and all runtime dependencies bundled in one container. Approximate size distribution (nginx + MySQL variant; other variants vary slightly):
 
 | Component | Size |
 |---|---|
-| Database server + pre-seeded Bagisto database | ~400–500 MB |
+| Database server + pre-seeded Bagisto database | ~700–1000 MB |
 | PHP 8.4 + all required extensions | ~150–200 MB |
 | Bagisto source + Composer vendor | ~250–300 MB |
 | System libraries (ImageMagick, ICU, libpng, libwebp, libzip, etc.) | ~100–150 MB |
