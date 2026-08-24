@@ -2,6 +2,10 @@
 
 This changelog consists of the bug & security fixes and new features being included in the releases listed below.
 
+## Unreleased
+
+- Soon.
+
 ## **v2.4.10 (21st of August 2026)** - *Release*
 
 - Themes now have their own Appearance area in the admin, listing the installed and available themes and activating one across chosen channels. Theme customisations are called sections throughout, and have moved out of Settings to the theme they belong to.

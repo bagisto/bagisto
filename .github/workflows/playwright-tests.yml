@@ -105,7 +105,12 @@ jobs:
 
       - name: Start Laravel server
         run: |
-          php artisan serve --host=0.0.0.0 --port=8000 > server.log 2>&1 &
+          # The guided installer rewrites .env mid-request (EnvironmentManager::generateEnv),
+          # and `php artisan serve` watches .env and restarts on change — which kills the
+          # in-flight migration. Run the raw built-in server (same router, no .env watcher),
+          # with multiple workers so the progress-screen asset request cannot starve migration.
+          (cd public && PHP_CLI_SERVER_WORKERS=4 php -S 0.0.0.0:8000 \
+            ../vendor/laravel/framework/src/Illuminate/Foundation/resources/server.php > ../server.log 2>&1) &
           echo "Waiting for the installer to be reachable..."
           timeout 30 bash -c 'until curl -s http://127.0.0.1:8000/install > /dev/null; do sleep 1; done'
 
@@ -131,7 +136,7 @@ jobs:
             storage/logs/laravel.log
           retention-days: 1
 
-  playwright_test:
+  playwright_tests:
     runs-on: ${{ matrix.operating-systems }}
 
     needs: installer_gate
