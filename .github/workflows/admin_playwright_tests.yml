@@ -20,7 +20,7 @@ jobs:
         node-version: ['22.13.1']
         shard-index: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         shard-total: [10]
-        db: [mysql, pgsql]
+        db: [mysql, mariadb, pgsql]
         include:
           - db: mysql
             db-label: MySQL
@@ -29,6 +29,15 @@ jobs:
             db-user: root
             db-password: root
             db-health: mysqladmin ping
+            php-db-ext: pdo_mysql
+
+          - db: mariadb
+            db-label: MariaDB
+            db-image: mariadb:10.11
+            db-port: 3306
+            db-user: root
+            db-password: root
+            db-health: healthcheck.sh --connect --innodb_initialized
             php-db-ext: pdo_mysql
 
           - db: pgsql
