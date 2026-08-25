@@ -417,7 +417,7 @@ test.describe("customer actions", () => {
         await shopPage.getByText("Cash On Delivery").first().click();
         await shopPage.waitForTimeout(2000);
         await shopPage.getByRole("button", { name: "Place Order" }).click();
-        await shopPage.waitForTimeout(2000);
+        await shopPage.waitForTimeout(6000);
 
         // Create invoice from admin
         const adminCredentials = {

@@ -30,7 +30,7 @@ export class ProductCheckoutPage extends BasePage {
     }
 
     private get shoppingCartIcon() {
-        return this.page.locator("(//span[contains(@class,'icon-cart')])[1]");
+        return this.page.locator('[class*="icon-cart"]').first();
     }
 
     private get addCartSuccess() {

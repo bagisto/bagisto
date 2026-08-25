@@ -260,15 +260,24 @@ export class BookingProductCheckout extends CheckoutHelper {
             await expect(this.invoiceCreatedSuccessText).toBeVisible();
             await this.visit('admin/sales/bookings');
             await this.page.waitForLoadState('networkidle');
-            const slotgraph = this.slotGraphEvent;
+            const customerName = `${customer.firstName} ${customer.lastName}`;
+            const slots = this.slotGraphEvents;
             for (let i = 0; i < 7; i++) {
-                const isVisible = await slotgraph.isVisible().catch(() => false);
-                if (isVisible) {
-                    await expect(this.slotGraphTimeText(slotgraph)).toHaveText("10:35 AM - 11:20 AM");
+                // The calendar tile only renders the time range, so every event in the
+                // week is opened until the dialog reports this order's id.
+                const total = await slots.count();
+                for (let j = 0; j < total; j++) {
+                    const slotgraph = slots.nth(j);
                     await slotgraph.click();
+                    const isSameOrder = (await this.bookingDialogOrderIdText.textContent())?.trim() === `#${orderId}`;
+                    if (! isSameOrder) {
+                        await this.bookingDialogCloseButton.click();
+                        continue;
+                    }
+                    await expect(this.slotGraphTimeText(slotgraph)).toHaveText("10:35 AM - 11:20 AM");
                     await expect(this.bookingDetailText(2)).toContainText("10:35 AM");
                     await expect(this.bookingDetailText(3)).toContainText("11:20 AM");
-                    await expect(this.bookingCustomerNameText).toContainText(`${customer.firstName} ${customer.lastName}`);
+                    await expect(this.bookingCustomerNameText).toContainText(customerName);
                     await this.bookingDialogCloseButton.click();
                     await this.bookingListToggleButton.click();
                     const row = this.bookingRowByOrderId(orderId);
@@ -284,7 +293,7 @@ export class BookingProductCheckout extends CheckoutHelper {
                 await this.page.waitForLoadState('networkidle');
                 await this.page.waitForTimeout(1000);
             }
-            await expect(slotgraph).toBeVisible();
+            throw new Error(`No booking found for order #${orderId}`);
         } else {
             await this.visit('admin/sales/bookings');
             await this.page.waitForLoadState('networkidle');

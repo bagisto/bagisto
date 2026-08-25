@@ -67,7 +67,7 @@ export class DesignConfigurationPage extends BasePage {
     }
 
     private closePreviewButton() {
-        return this.page.locator(".icon-cancel-1");
+        return this.page.locator("span.icon-close").first();
     }
 
     async open(): Promise<void> {
