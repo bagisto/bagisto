@@ -101,7 +101,7 @@
                 >
                     <span
                         class="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-3 py-0.5 text-sm font-semibold text-emerald-700 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-300 max-sm:text-xs"
-                        :title="'@lang('shop::app.checkout.coupon.applied')'"
+                        :title="@js(trans('shop::app.checkout.coupon.applied'))"
                     >
                         @{{ cart.coupon_code }}
                     </span>

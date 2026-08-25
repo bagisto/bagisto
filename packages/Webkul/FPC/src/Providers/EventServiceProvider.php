@@ -11,7 +11,7 @@ use Webkul\FPC\Listeners\Page;
 use Webkul\FPC\Listeners\Product;
 use Webkul\FPC\Listeners\Refund;
 use Webkul\FPC\Listeners\Review;
-use Webkul\FPC\Listeners\ThemeCustomization;
+use Webkul\FPC\Listeners\Section;
 use Webkul\FPC\Listeners\URLRewrite;
 
 class EventServiceProvider extends ServiceProvider
@@ -25,12 +25,20 @@ class EventServiceProvider extends ServiceProvider
         /**
          * Catalog events.
          */
+        'catalog.product.create.after' => [
+            [Product::class, 'afterCreate'],
+        ],
+
         'catalog.product.update.after' => [
             [Product::class, 'afterUpdate'],
         ],
 
         'catalog.product.delete.before' => [
             [Product::class, 'beforeDelete'],
+        ],
+
+        'catalog.category.create.after' => [
+            [Category::class, 'afterCreate'],
         ],
 
         'catalog.category.update.after' => [
@@ -81,16 +89,16 @@ class EventServiceProvider extends ServiceProvider
         /**
          * Theme events.
          */
-        'theme_customization.create.after' => [
-            [ThemeCustomization::class, 'afterCreate'],
+        'section.create.after' => [
+            [Section::class, 'afterCreate'],
         ],
 
-        'theme_customization.update.after' => [
-            [ThemeCustomization::class, 'afterUpdate'],
+        'section.update.after' => [
+            [Section::class, 'afterUpdate'],
         ],
 
-        'theme_customization.delete.before' => [
-            [ThemeCustomization::class, 'beforeDelete'],
+        'section.delete.before' => [
+            [Section::class, 'beforeDelete'],
         ],
 
         /**

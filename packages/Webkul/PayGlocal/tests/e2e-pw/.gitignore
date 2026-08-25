@@ -1,9 +1,0 @@
-node_modules/
-.auth/
-test-results/
-playwright-report/
-blob-report/
-playwright/.cache/
-
-# Holds real UAT credentials, including a merchant private key.
-.env

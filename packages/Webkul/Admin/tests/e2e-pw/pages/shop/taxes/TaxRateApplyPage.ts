@@ -58,7 +58,7 @@ export class TaxRateApplyPage extends BasePage {
     }
 
     private get email() {
-        return this.page.locator('input[name="billing\\.email"]');
+        return this.page.getByRole("textbox", { name: "Email" });
     }
 
     private get streetAddress() {

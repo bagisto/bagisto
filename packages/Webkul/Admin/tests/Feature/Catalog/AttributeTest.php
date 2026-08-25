@@ -341,12 +341,18 @@ it('should store a text attribute with [validation] validation', function (strin
 
     $code = fake()->unique()->lexify('attr_??????????');
 
-    postJson(route('admin.catalog.attributes.store'), [
+    $payload = [
         'code' => $code,
         'admin_name' => "Validation {$validation}",
         'type' => 'text',
         'validation' => $validation,
-    ])
+    ];
+
+    if ($validation === 'regex') {
+        $payload['regex'] = '/^[A-Za-z0-9]+$/';
+    }
+
+    postJson(route('admin.catalog.attributes.store'), $payload)
         ->assertRedirectToRoute('admin.catalog.attributes.index');
 
     $this->assertDatabaseHas('attributes', [
@@ -744,4 +750,66 @@ it('should return product super attributes', function () {
 
     getJson(route('admin.catalog.products.configurable.options', $product->id))
         ->assertOk();
+});
+
+it('should refuse an attribute whose regex is not a usable pattern', function (string $pattern) {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'), [
+        'code' => 'regex_'.substr(md5($pattern), 0, 8),
+        'admin_name' => 'Regex Probe',
+        'type' => 'text',
+        'validation' => 'regex',
+        'regex' => $pattern,
+    ])
+        ->assertJsonValidationErrorFor('regex')
+        ->assertUnprocessable();
+})->with([
+    '^[A-Za-z0-9]+$',
+    '/[unclosed/',
+    'not a pattern',
+    '#^[A-Za-z0-9]+$#',
+    '~^[A-Za-z0-9]+$~',
+    '/^[A-Za-z0-9]+$/x',
+    '//',
+]);
+
+it('should accept an attribute whose regex is a usable pattern', function () {
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.attributes.store'), [
+        'code' => 'regex_usable',
+        'admin_name' => 'Regex Probe',
+        'type' => 'text',
+        'validation' => 'regex',
+        'regex' => '/^[A-Za-z0-9]+$/',
+    ])->assertRedirectToRoute('admin.catalog.attributes.index');
+
+    $this->assertDatabaseHas('attributes', ['code' => 'regex_usable', 'regex' => '/^[A-Za-z0-9]+$/']);
+});
+
+it('should keep an unusable regex out of the rules the product form is given', function (string $pattern) {
+    // Arrange.
+    $attribute = Attribute::factory()->create([
+        'type' => 'text',
+        'validation' => 'regex',
+        'regex' => $pattern,
+    ]);
+
+    // Act and Assert.
+    expect($attribute->validations)->not->toContain('regex');
+})->with(['^[A-Za-z0-9]+$', '#^[A-Za-z0-9]+$#', '~^[A-Za-z0-9]+$~', '/^[A-Za-z0-9]+$/x', '//']);
+
+it('should write a usable regex into the rules the product form is given', function () {
+    // Arrange.
+    $attribute = Attribute::factory()->create([
+        'type' => 'text',
+        'validation' => 'regex',
+        'regex' => '/^[A-Za-z0-9]+$/',
+    ]);
+
+    // Act and Assert.
+    expect($attribute->validations)->toContain('regex: /^[A-Za-z0-9]+$/');
 });

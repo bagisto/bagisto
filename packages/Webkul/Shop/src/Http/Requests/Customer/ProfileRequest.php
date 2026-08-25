@@ -24,14 +24,16 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
-        $id = auth()->guard('customer')->user()->id;
+        $customer = auth()->guard('customer')->user();
+
+        $id = $customer->id;
 
         return [
             'first_name' => ['required'],
             'last_name' => ['required'],
             'gender' => 'required|in:Other,Male,Female',
             'date_of_birth' => 'date|before:today',
-            'email' => 'email|unique:customers,email,'.$id,
+            'email' => 'email|unique:customers,email,'.$id.',id,channel_id,'.$customer->channel_id,
             'new_password' => 'confirmed|min:6|required_with:current_password',
             'new_password_confirmation' => 'required_with:new_password',
             'current_password' => 'required_with:new_password',

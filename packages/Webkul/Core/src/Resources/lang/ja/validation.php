@@ -8,5 +8,6 @@ return [
     'decimal' => ':attribute は有効である必要があります。',
     'phone-number' => ':attribute は有効な電話番号である必要があります。',
     'postcode' => ':attribute は有効な郵便番号である必要があります。',
+    'regex' => ':attribute は区切り文字を含む有効な正規表現である必要があります。',
     'slug' => ':attribute は有効なスラッグである必要があります。',
 ];

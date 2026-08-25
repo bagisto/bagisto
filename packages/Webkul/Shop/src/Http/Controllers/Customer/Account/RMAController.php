@@ -132,6 +132,7 @@ class RMAController extends Controller
             'resolution_type' => ['required', new Enum(DefaultRMAResolution::class)],
             'rma_reason_id' => 'required',
             'information' => 'nullable|string',
+            'package_condition' => 'nullable|in:open,packed',
             'images' => 'nullable|array|min:1',
             'images.*' => 'nullable|file|mimetypes:'.core()->getConfigData('sales.rma.setting.allowed_file_extension'),
             'agreement' => 'accepted',

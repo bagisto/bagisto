@@ -108,7 +108,7 @@ test.describe("communication management", () => {
         await openCommunicationsPage(adminPage, "admin/marketing/communications/events");
         await clickCreate(adminPage);
 
-        adminPage.hover('input[name="name"]');
+        await adminPage.hover('input[name="name"]');
 
         await fillVisibleTextInputs(adminPage, generateName());
 
@@ -153,7 +153,7 @@ test.describe("communication management", () => {
             throw new Error(message);
         }
 
-        adminPage.hover('input[name="name"]');
+        await adminPage.hover('input[name="name"]');
 
         await fillVisibleTextInputs(adminPage, generateDescription(200));
 
@@ -190,7 +190,7 @@ test.describe("communication management", () => {
         await openCommunicationsPage(adminPage, "admin/marketing/communications/events");
         await clickCreate(adminPage);
 
-        adminPage.hover('input[name="name"]');
+        await adminPage.hover('input[name="name"]');
 
         await fillVisibleTextInputs(adminPage, generateDescription(200));
 

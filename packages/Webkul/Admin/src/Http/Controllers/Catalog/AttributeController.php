@@ -15,6 +15,7 @@ use Webkul\Attribute\Enums\ValidationEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
 use Webkul\Core\Helpers\MediaFileName;
 use Webkul\Core\Rules\Code;
+use Webkul\Core\Rules\Regex;
 use Webkul\Product\Repositories\ProductRepository;
 
 class AttributeController extends Controller
@@ -90,6 +91,7 @@ class AttributeController extends Controller
             'type' => 'required',
             'options.*.swatch_alt' => ['nullable', 'string', 'max:255'],
             'options.*.swatch_file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
+            'regex' => ['nullable', 'required_if:validation,regex', new Regex],
         ];
 
         if (request('type') === 'boolean') {
@@ -162,6 +164,7 @@ class AttributeController extends Controller
             'type' => 'required',
             'options.*.swatch_alt' => ['nullable', 'string', 'max:255'],
             'options.*.swatch_file_name' => ['nullable', 'string', 'max:'.MediaFileName::MAX_LENGTH],
+            'regex' => ['nullable', 'required_if:validation,regex', new Regex],
         ];
 
         if (request('type') === 'boolean') {

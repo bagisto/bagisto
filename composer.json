@@ -49,6 +49,8 @@
         "spatie/laravel-sitemap": "^8.0",
         "stevebauman/purify": "^6.3",
         "stripe/stripe-php": "^17.3",
+        "symfony/brevo-mailer": "^7.4",
+        "symfony/http-client": "^7.4",
         "web-token/jwt-framework": "^4.1"
     },
     "require-dev": {
@@ -120,6 +122,7 @@
             "Webkul\\Customer\\Tests\\": "packages/Webkul/Customer/tests",
             "Webkul\\DataGrid\\Tests\\": "packages/Webkul/DataGrid/tests",
             "Webkul\\EUWithdrawal\\Tests\\": "packages/Webkul/EUWithdrawal/tests",
+            "Webkul\\FPC\\Tests\\": "packages/Webkul/FPC/tests",
             "Webkul\\Installer\\Tests\\": "packages/Webkul/Installer/tests",
             "Webkul\\Omnibus\\Tests\\": "packages/Webkul/Omnibus/tests",
             "Webkul\\PayGlocal\\Tests\\": "packages/Webkul/PayGlocal/tests",

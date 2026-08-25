@@ -8,5 +8,6 @@ return [
     'decimal' => 'Pole :attribute musi być ważne.',
     'phone-number' => 'Pole :attribute musi być ważnym numerem telefonu.',
     'postcode' => 'Pole :attribute musi być prawidłowym kodem pocztowym.',
+    'regex' => 'Pole :attribute musi być prawidłowym wyrażeniem regularnym, wraz z ogranicznikami.',
     'slug' => 'Pole :attribute musi być ważnym slugiem.',
 ];

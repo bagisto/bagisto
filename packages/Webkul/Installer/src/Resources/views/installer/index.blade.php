@@ -412,8 +412,12 @@
                                             @lang('installer::app.installer.index.environment-configuration.mysql')
                                         </option>
 
+                                        <option value="mariadb">
+                                            @lang('installer::app.installer.index.environment-configuration.mariadb')
+                                        </option>
+
                                         <option value="pgsql">
-                                            PostgreSQL
+                                            @lang('installer::app.installer.index.environment-configuration.postgresql')
                                         </option>
                                     </x-installer::form.control-group.control>
 

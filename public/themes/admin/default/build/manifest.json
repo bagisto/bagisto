@@ -264,7 +264,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-Ch5xPumB.css",
+    "file": "assets/app-wF9Eedv6.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -384,6 +384,10 @@
     "file": "assets/exchange-rate-nueYe-Ml.svg",
     "src": "src/Resources/assets/images/settings/exchange-rate.svg"
   },
+  "src/Resources/assets/images/settings/full-page-cache.svg": {
+    "file": "assets/full-page-cache-DOxvZ_cy.svg",
+    "src": "src/Resources/assets/images/settings/full-page-cache.svg"
+  },
   "src/Resources/assets/images/settings/gdpr.svg": {
     "file": "assets/gdpr-DrhhDXQJ.svg",
     "src": "src/Resources/assets/images/settings/gdpr.svg"
@@ -460,6 +464,10 @@
     "file": "assets/spinner-CkjnFMgn.svg",
     "src": "src/Resources/assets/images/spinner.svg"
   },
+  "src/Resources/assets/images/themes/default.jpg": {
+    "file": "assets/default-Bq1iZ-nk.jpg",
+    "src": "src/Resources/assets/images/themes/default.jpg"
+  },
   "src/Resources/assets/images/total-orders.svg": {
     "file": "assets/total-orders-wduYhIFA.svg",
     "src": "src/Resources/assets/images/total-orders.svg"
@@ -473,7 +481,7 @@
     "src": "src/Resources/assets/images/unpaid-invoices.svg"
   },
   "src/Resources/assets/js/app.js": {
-    "file": "assets/app-CHNWAGnZ.js",
+    "file": "assets/app-DR0_V2q7.js",
     "name": "app",
     "src": "src/Resources/assets/js/app.js",
     "isEntry": true,

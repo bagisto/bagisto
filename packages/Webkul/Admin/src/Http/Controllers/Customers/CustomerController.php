@@ -134,11 +134,13 @@ class CustomerController extends Controller
      */
     public function update(int $id)
     {
+        $customer = $this->customerRepository->findOrFail($id);
+
         $this->validate(request(), [
             'first_name' => 'string|required',
             'last_name' => 'string|required',
             'gender' => 'required',
-            'email' => 'required|unique:customers,email,'.$id,
+            'email' => 'required|unique:customers,email,'.$id.',id,channel_id,'.$customer->channel_id,
             'date_of_birth' => 'date|before:today',
             'phone' => ['unique:customers,phone,'.$id, new PhoneNumber],
         ]);

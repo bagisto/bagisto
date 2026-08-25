@@ -259,29 +259,34 @@
                         @lang('admin::app.settings.channels.edit.design')
                     </p>
 
-                    <!-- Theme Selector -->
+                    <!--
+                        Themes are switched from Appearance, so that the gallery can warn
+                        about the customizations a switch leaves behind. Shown read only
+                        here, with the value carried through the form untouched.
+                    -->
                     <x-admin::form.control-group>
                         <x-admin::form.control-group.label>
                             @lang('admin::app.settings.channels.edit.theme')
                         </x-admin::form.control-group.label>
 
-                        <x-admin::form.control-group.control
-                            type="select"
-                            id="theme"
+                        <div class="flex items-center gap-2.5">
+                            <p class="text-sm text-gray-800 dark:text-white">
+                                {{ config('themes.shop.'.$channel->theme.'.name') ?? $channel->theme ?? '—' }}
+                            </p>
+
+                            <a
+                                href="{{ route('admin.appearance.themes.index') }}"
+                                class="text-sm font-semibold text-blue-600 hover:underline"
+                            >
+                                @lang('admin::app.appearance.themes.index.title')
+                            </a>
+                        </div>
+
+                        <input
+                            type="hidden"
                             name="theme"
-                            :value="old('theme') ?? $channel->theme"
-                            :label="trans('admin::app.settings.channels.edit.theme')"
-                        >
-                            @foreach (config('themes.shop') as $themeCode => $theme)
-                                <option
-                                    value="{{ $themeCode }}"
-                                    {{ old('theme') == $themeCode ? 'selected' : '' }}
-                                    v-pre
-                                >
-                                    {{ $theme['name'] }}
-                                </option>
-                            @endforeach
-                        </x-admin::form.control-group.control>
+                            value="{{ old('theme') ?? $channel->theme }}"
+                        />
 
                         <x-admin::form.control-group.error control-name="theme" />
                     </x-admin::form.control-group>

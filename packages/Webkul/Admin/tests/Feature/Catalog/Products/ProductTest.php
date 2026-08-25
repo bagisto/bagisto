@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Event;
+use Webkul\BookingProduct\Models\BookingProduct;
 use Webkul\Faker\Helpers\Product as ProductFaker;
 use Webkul\Product\Models\Product;
 
@@ -374,4 +375,66 @@ it('should copy the existing product with customizable options', function () {
     $copiedPrice = $copiedCustomizableOption->customizable_option_prices->first();
     expect($copiedPrice->label)->toBe('Test Value Label');
     expect($copiedPrice->price)->toEqual(10.00);
+});
+
+it('should copy the download links and samples of a downloadable product', function () {
+    // Arrange.
+    $product = (new ProductFaker)->getDownloadableProductFactory()->create();
+
+    $product->downloadable_samples()->create([
+        'type' => 'url',
+        'url' => 'https://example.com/sample.pdf',
+        'sort_order' => 1,
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.copy', $product->id))->assertOk();
+
+    $copiedProduct = Product::latest('id')->first();
+
+    expect($copiedProduct->downloadable_links()->count())->toBe($product->downloadable_links()->count())
+        ->and($copiedProduct->downloadable_samples()->count())->toBe($product->downloadable_samples()->count());
+
+    expect($copiedProduct->downloadable_links->pluck('title')->all())
+        ->toBe($product->downloadable_links->pluck('title')->all());
+});
+
+it('should copy the booking settings of a booking product', function () {
+    // Arrange.
+    $product = (new ProductFaker)->getSimpleProductFactory()->create();
+
+    Product::query()->where('id', $product->id)->update(['type' => 'booking']);
+
+    $product->refresh();
+
+    $bookingProduct = BookingProduct::query()->create([
+        'type' => 'default',
+        'qty' => 5,
+        'location' => 'Studio One',
+        'show_location' => 1,
+        'product_id' => $product->id,
+    ]);
+
+    $bookingProduct->default_slot()->create([
+        'booking_type' => 'many',
+        'duration' => 60,
+        'break_time' => 15,
+        'slots' => [['day' => 0, 'from' => '09:00', 'to' => '17:00']],
+    ]);
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    postJson(route('admin.catalog.products.copy', $product->id))->assertOk();
+
+    $copiedBooking = Product::latest('id')->first()->booking_products()->first();
+
+    expect($copiedBooking)->not->toBeNull()
+        ->and($copiedBooking->type)->toBe('default')
+        ->and($copiedBooking->location)->toBe('Studio One')
+        ->and($copiedBooking->default_slot)->not->toBeNull()
+        ->and($copiedBooking->default_slot->duration)->toBe(60)
+        ->and($copiedBooking->default_slot->slots)->toBe($bookingProduct->default_slot->slots);
 });

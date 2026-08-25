@@ -118,6 +118,8 @@
         app.component('v-select', {
             template: '#v-select-template',
 
+            emits: ['update:modelValue'],
+
             props: {
                 name: {
                     type: String,
@@ -169,6 +171,12 @@
                 };
             },
 
+            watch: {
+                value(value) {
+                    this.selectedId = value === null || value === undefined ? '' : String(value);
+                },
+            },
+
             computed: {
                 selectedLabel() {
                     let option = this.options.find((option) => String(option.id) === this.selectedId);
@@ -203,11 +211,15 @@
                 clear() {
                     this.selectedId = '';
 
+                    this.$emit('update:modelValue', '');
+
                     this.closeDropdown();
                 },
 
                 select(id) {
                     this.selectedId = String(id);
+
+                    this.$emit('update:modelValue', this.selectedId);
 
                     this.closeDropdown();
                 },

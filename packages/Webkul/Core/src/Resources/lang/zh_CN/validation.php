@@ -8,5 +8,6 @@ return [
     'decimal' => '这个 :attribute 必须有效.',
     'phone-number' => '这个 :attribute 必须是有效的电话号码.',
     'postcode' => '这个 :attribute 必须是有效的邮政编码。',
+    'regex' => ':attribute 必须是有效的正则表达式，并包含定界符。',
     'slug' => '这个 :attribute 必须有效Slug.',
 ];

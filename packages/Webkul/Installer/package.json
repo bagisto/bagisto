@@ -6,8 +6,11 @@
     "build": "vite build"
   },
   "devDependencies": {
+    "@playwright/test": "^1.58.1",
     "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.7.8",
     "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
     "laravel-vite-plugin": "^1.0",
     "tailwindcss": "^4.0.0",
     "vite": "^6.4.2",

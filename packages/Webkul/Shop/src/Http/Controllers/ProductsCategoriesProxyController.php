@@ -8,7 +8,7 @@ use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Marketing\Repositories\URLRewriteRepository;
 use Webkul\Product\Enums\SearchContextEnum;
 use Webkul\Product\Repositories\ProductRepository;
-use Webkul\Theme\Repositories\ThemeCustomizationRepository;
+use Webkul\Theme\Repositories\SectionRepository;
 
 class ProductsCategoriesProxyController extends Controller
 {
@@ -27,7 +27,7 @@ class ProductsCategoriesProxyController extends Controller
     public function __construct(
         protected CategoryRepository $categoryRepository,
         protected ProductRepository $productRepository,
-        protected ThemeCustomizationRepository $themeCustomizationRepository,
+        protected SectionRepository $sectionRepository,
         protected URLRewriteRepository $urlRewriteRepository
     ) {}
 
@@ -44,12 +44,12 @@ class ProductsCategoriesProxyController extends Controller
          * Support url for chinese, japanese, arabic and english with numbers.
          */
         if (! preg_match('/^([\p{L}\p{N}\p{M}\x{0900}-\x{097F}\x{0590}-\x{05FF}\x{0600}-\x{06FF}\x{0400}-\x{04FF}_-]+\/?)+$/u', $slugOrURLKey)) {
-            $customizations = $this->themeCustomizationRepository->orderBy('sort_order')->findWhere([
-                'status' => self::STATUS,
-                'channel_id' => core()->getCurrentChannel()->id,
-            ]);
+            $sections = $this->sectionRepository->getRenderable(
+                core()->getCurrentChannel()->id,
+                core()->getCurrentChannel()->theme
+            );
 
-            return view('shop::home.index', compact('customizations'));
+            return view('shop::home.index', compact('sections'));
         }
 
         $category = $this->categoryRepository->findBySlug($slugOrURLKey);

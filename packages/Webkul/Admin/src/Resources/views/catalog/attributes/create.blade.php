@@ -265,14 +265,14 @@
                                                                 type="text"
                                                                 class="w-40 rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                                 :name="'options[' + element.id + '][swatch_alt]'"
-                                                                :placeholder="'@lang('admin::app.components.media.images.seo.alt-text')'"
+                                                                :placeholder="@js(trans('admin::app.components.media.images.seo.alt-text'))"
                                                             />
 
                                                             <input
                                                                 type="text"
                                                                 class="w-40 rounded-md border px-2 py-1.5 text-xs text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300"
                                                                 :name="'options[' + element.id + '][swatch_file_name]'"
-                                                                :placeholder="'@lang('admin::app.components.media.images.seo.file-name')'"
+                                                                :placeholder="@js(trans('admin::app.components.media.images.seo.file-name'))"
                                                             />
                                                         </div>
                                                     </div>
@@ -422,7 +422,7 @@
                                     :value="old('type')"
                                     v-model="attributeType"
                                     :label="trans('admin::app.catalog.attributes.create.type')"
-                                    @change="swatchAttribute=true"
+                                    @change="onTypeChange"
                                 >
                                     @foreach($attributeTypes as $attributeType)
                                         <option
@@ -495,7 +495,6 @@
                                     v-model="validationType"
                                     :label="trans('admin::app.catalog.attributes.create.input-validation')"
                                     refs="validation"
-                                    @change="inputValidation=true"
                                 >
                                     @foreach($validations as $validation)
                                         <option value="{{ $validation }}">
@@ -508,19 +507,26 @@
                             </x-admin::form.control-group>
 
                             <!-- REGEX -->
-                            <x-admin::form.control-group v-show="inputValidation && (validationType == 'regex')">
-                                <x-admin::form.control-group.label>
+                            <x-admin::form.control-group v-show="attributeType == 'text' && validationType == 'regex'">
+                                <x-admin::form.control-group.label class="required">
                                     @lang('admin::app.catalog.attributes.create.regex')
                                 </x-admin::form.control-group.label>
 
                                 <x-admin::form.control-group.control
                                     type="text"
                                     name="regex"
+                                    ::rules="attributeType == 'text' && validationType == 'regex' ? 'required|regex_pattern' : ''"
                                     :value="old('regex')"
+                                    :label="trans('admin::app.catalog.attributes.create.regex')"
                                     :placeholder="trans('admin::app.catalog.attributes.create.regex')"
                                 />
 
                                 <x-admin::form.control-group.error control-name="regex" />
+
+                                <!-- Regex Info -->
+                                <p class="mt-2 text-xs font-medium text-gray-500 dark:text-gray-300">
+                                    @lang('admin::app.catalog.attributes.create.regex-info')
+                                </p>
                             </x-admin::form.control-group>
 
                             <!-- Is Required -->
@@ -861,13 +867,11 @@
 
                         attributeType: '{{ old('type') }}',
 
-                        validationType: '',
-
-                        inputValidation: false,
+                        validationType: '{{ old('validation') }}',
 
                         swatchType: 'dropdown',
 
-                        swatchAttribute: false,
+                        swatchAttribute: {{ old('type') ? 'true' : 'false' }},
 
                         showSwatch: false,
 
@@ -904,6 +908,14 @@
                 },
 
                 methods: {
+                    onTypeChange() {
+                        this.swatchAttribute = true;
+
+                        if (this.attributeType !== 'text') {
+                            this.validationType = '';
+                        }
+                    },
+
                     storeOptions(params, { resetForm }) {
                         const sortedLocales = Object.values(this.locales).sort((a, b) => a.name.localeCompare(b.name));
 

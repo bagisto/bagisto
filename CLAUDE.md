@@ -8,6 +8,29 @@ Bagisto 2.5.x - open-source Laravel 13 e-commerce platform. PHP 8.4+, Vue.js 3, 
 
 Runs on MySQL 8.0 or PostgreSQL 16; both are first-class and CI covers each.
 
+## Skills — load these before writing code
+
+This repository ships its conventions as skills under `.claude/skills/`. Invoke them with the Skill
+tool — `package-development`, `blade-conventions`, `pest-testing`.
+
+**Load the relevant ones before writing or reviewing code, not after.** They carry rules that
+`vendor/bin/pint` does not enforce and that a reviewer will otherwise send back.
+
+| Skill | Load it when | It settles |
+|---|---|---|
+| `package-development` | Any PHP: controllers, repositories, models, DataGrids, migrations, listeners, jobs, enums | Docblocks on every method/property, class member order, multi-clause conditions, comment discipline, repository-over-query-builder, package/menu/ACL/system-config structure |
+| `blade-conventions` | Any `.blade.php`, in any package | `:` vs `::` binding, anonymous vs Vue-backed components, attribute layout, `@props` alignment, comment syntax per layer, translations and `view_render_event` placement |
+| `pest-testing` | Writing or changing tests | Suite layout, test-case bindings, assertion style, datasets, registering a new package's tests |
+
+One rule that catches people out:
+
+- **A pre-existing violation in a file you touch is yours.** `package-development` is explicit:
+  when you edit a class, scan its whole member order and docblocks and fix what is already wrong.
+  Leaving it is treated the same as introducing it.
+
+Where a skill and the surrounding code genuinely disagree, match the surrounding code and say so in
+your summary rather than silently churning the codebase either way.
+
 ## Common Commands
 
 ### Development
@@ -27,7 +50,9 @@ vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directo
 vendor/bin/pest --filter="test name"                    # Run a single test by name
 ```
 
-Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Core Unit, Customer Unit, DataGrid Unit, Installer Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
+Test suites defined in `phpunit.xml`: Unit (cross-package, needs no database), Admin Feature, Core Unit, Customer Unit, DataGrid Unit, EUWithdrawal Feature, FPC Unit/Feature, Installer Feature, Omnibus Feature, PayGlocal Unit/Feature, PayU Unit/Feature, Razorpay Unit/Feature, Shop Feature, Stripe Unit/Feature.
+
+Every package that has tests is registered above. Packages without a `tests/` directory (PhonePe, Checkout, Product, Sales, RMA, and others) have no suite — adding a `<testsuite>` for a path that does not exist makes PHPUnit error, so write the tests first.
 
 Tests use **Pest 5** (PHPUnit 13) with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
 
@@ -97,29 +122,27 @@ if ($user->isActive() && $user->hasRole('admin')) {
 
 Single-condition statements stay on one line. Pint/PHP-CS-Fixer has no rule that enforces this automatically — it is a manual convention, so apply it when writing or reviewing code.
 
-### Commenting Conventions
+**Do not write comments inside method bodies.** Keep only the docblock above a class, method, or property — that is the only comment this codebase wants. Do not narrate what a statement does, why a line was added, or what a fix changed; the code and the commit message carry that. This applies to `//` line comments and `/** */` blocks alike, and to PHP, Blade, JavaScript, and Vue.
 
-- **Section headers / titles**: Title Case, no trailing period.
-  ```php
-  // Store
-  // Product Attribute Values
-  // Store — All Product Types
-  ```
-- **Inline labels** (grouping assertions inside a test): Title Case, no trailing period.
-  ```php
-  // Core fields
-  // Text fields indexed from attribute values
-  // Numeric fields
-  // Boolean fields
-  // Locale and channel
-  ```
-- **Sentence comments** (explanations, steps, notes): Start with a capital letter and end with a period.
-  ```php
-  // Step 1: Store the product skeleton via the controller.
-  // Virtual products do not require weight, length, width, or height.
-  // Verify product_flat reflects the changed values.
-  ```
-- **PHPDoc**: Every method should have a single-line description ending with a period.
+```php
+// Bad - explains a statement inside the body
+public function updateStatus(int $id): RedirectResponse
+{
+    // Re-fetch the cart because collectTotals swapped the instance
+    $cart = Cart::getCart();
+}
+
+// Good - docblock only, body speaks for itself
+/**
+ * Update RMA status.
+ */
+public function updateStatus(int $id): RedirectResponse
+{
+    $cart = Cart::getCart();
+}
+```
+
+If a line genuinely cannot be understood without prose, that is a signal to extract a well-named method instead of annotating it.
 
 ### Translations
 When adding new translation keys, always provide translations for **all locales** in the package's `Resources/lang/` directory. Verify with:
@@ -131,7 +154,7 @@ php artisan bagisto:translations:check
 
 ### Modular Package System
 
-All core functionality lives in **`packages/Webkul/`** (~42 packages). Each package is a self-contained Laravel package with its own models, controllers, routes, views, migrations, and service providers.
+All core functionality lives in **`packages/Webkul/`** (41 packages). Each package is a self-contained Laravel package with its own models, controllers, routes, views, migrations, and service providers.
 
 **Dual registration**: Each package registers in two places:
 1. **`bootstrap/providers.php`** - Main ServiceProvider (routes, views, events, config)

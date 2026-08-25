@@ -55,6 +55,18 @@ it('should return search results for a product', function () {
         ->assertSeeText(trans('shop::app.search.title', ['query' => $product->name]));
 });
 
+it('should reject an array search query instead of running it as a raw sql condition', function () {
+    config(['responsecache.enabled' => true]);
+
+    $response = get('/search?'.http_build_query([
+        'query' => ['a', 'RAW', '1=0 UNION SELECT 1'],
+    ]));
+
+    $response->assertRedirect();
+
+    expect($response->baseResponse->getStatusCode())->not->toBe(500);
+});
+
 // ============================================================================
 // Newsletter Subscription
 // ============================================================================

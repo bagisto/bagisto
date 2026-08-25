@@ -141,6 +141,54 @@ class CartRule extends Model implements CartRuleContract
     }
 
     /**
+     * Set uses per coupon with empty string to zero conversion.
+     */
+    public function setUsesPerCouponAttribute($value): void
+    {
+        $this->attributes['uses_per_coupon'] = $value !== '' && $value !== null ? (int) $value : 0;
+    }
+
+    /**
+     * Set times used with empty string to zero conversion.
+     */
+    public function setTimesUsedAttribute($value): void
+    {
+        $this->attributes['times_used'] = $value !== '' && $value !== null ? (int) $value : 0;
+    }
+
+    /**
+     * Set discount amount with empty string to zero conversion.
+     */
+    public function setDiscountAmountAttribute($value): void
+    {
+        $this->attributes['discount_amount'] = $value !== '' && $value !== null ? $value : 0;
+    }
+
+    /**
+     * Set discount quantity with empty string to the column default conversion.
+     */
+    public function setDiscountQuantityAttribute($value): void
+    {
+        $this->attributes['discount_quantity'] = $value !== '' && $value !== null ? (int) $value : 1;
+    }
+
+    /**
+     * Set discount step with empty string to the column default conversion.
+     */
+    public function setDiscountStepAttribute($value): void
+    {
+        $this->attributes['discount_step'] = $value !== '' && $value !== null ? $value : 1;
+    }
+
+    /**
+     * Set sort order with empty string to zero conversion.
+     */
+    public function setSortOrderAttribute($value): void
+    {
+        $this->attributes['sort_order'] = $value !== '' && $value !== null ? (int) $value : 0;
+    }
+
+    /**
      * Get the channels that owns the cart rule.
      */
     public function cart_rule_channels(): BelongsToMany

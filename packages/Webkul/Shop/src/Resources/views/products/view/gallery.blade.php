@@ -33,6 +33,8 @@
 
                     isMediaLoading: true,
 
+                    placeholderUrl: @js(bagisto_asset('images/large-product-placeholder.webp', 'shop')),
+
                     media: {
                         images: @json(product_image()->getGalleryImages($product)),
 
@@ -110,6 +112,14 @@
                 
                 onMediaLoad() {
                     this.isMediaLoading = false;
+                },
+
+                onMediaError(event) {
+                    this.isMediaLoading = false;
+
+                    if (event?.target && event.target.src !== this.placeholderUrl) {
+                        event.target.src = this.placeholderUrl;
+                    }
                 },
 
                 change(media, index) {

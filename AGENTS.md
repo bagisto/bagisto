@@ -1,5 +1,28 @@
 # AGENTS.md — Cross-Agent Instructions for Bagisto 2.5.x
 
+## Skills — load these before writing code
+
+This repository ships its conventions as skills under `.claude/skills/<name>/SKILL.md`. If your
+harness has no skill loader, read those files directly — they are plain markdown.
+
+**Load the relevant ones before writing or reviewing code, not after.** They carry rules that
+`vendor/bin/pint` does not enforce and that a reviewer will otherwise send back.
+
+| Skill | Load it when | It settles |
+|---|---|---|
+| `package-development` | Any PHP: controllers, repositories, models, DataGrids, migrations, listeners, jobs, enums | Docblocks on every method/property, class member order, multi-clause conditions, comment discipline, repository-over-query-builder, package/menu/ACL/system-config structure |
+| `blade-conventions` | Any `.blade.php`, in any package | `:` vs `::` binding, anonymous vs Vue-backed components, attribute layout, `@props` alignment, comment syntax per layer, translations and `view_render_event` placement |
+| `pest-testing` | Writing or changing tests | Suite layout, test-case bindings, assertion style, datasets, registering a new package's tests |
+
+One rule that catches people out:
+
+- **A pre-existing violation in a file you touch is yours.** `package-development` is explicit:
+  when you edit a class, scan its whole member order and docblocks and fix what is already wrong.
+  Leaving it is treated the same as introducing it.
+
+Where a skill and the surrounding code genuinely disagree, match the surrounding code and say so in
+your summary rather than silently churning the codebase either way.
+
 ## Do Not Edit
 
 - `vendor/`, `node_modules/`, `composer.lock`, `package-lock.json`
@@ -23,7 +46,7 @@
 ├── database/
 │   ├── migrations/             # App-level migrations
 │   └── seeders/
-├── packages/Webkul/            # ★ All Bagisto packages live here (40 packages)
+├── packages/Webkul/            # ★ All Bagisto packages live here (41 packages)
 │   ├── Admin/                  # Admin panel (controllers, views, DataGrids, reporting, e2e-pw tests)
 │   ├── Shop/                   # Customer storefront (controllers, views, e2e-pw tests)
 │   ├── Core/                   # Helpers, models, jobs, listeners, exchange rates
@@ -103,7 +126,7 @@ Every package in `packages/Webkul/{Name}/src/` follows:
 ├── Repositories/               # Prettus L5 repositories
 ├── Resources/
 │   ├── assets/                 # JS, CSS, images (Vite-compiled)
-│   ├── lang/{locale}/          # 21 locales
+│   ├── lang/{locale}/          # 22 locales
 │   └── views/
 ├── Routes/
 │   ├── admin-routes.php
@@ -118,7 +141,7 @@ Every package in `packages/Webkul/{Name}/src/` follows:
 - **Path Repositories**: `composer.json` uses `"type": "path"` for `packages/*/*`, packages are symlinked — no `composer update` needed for package code changes. Run `composer dump-autoload` after adding new packages.
 - **Service Providers**: Each package has a main ServiceProvider (routes, views, translations, migrations, config) registered in `bootstrap/providers.php`.
 - **Dual Route Files**: Admin routes (`['web', 'admin']` middleware, `config('app.admin_url')` prefix) and Shop routes (`['web', 'locale', 'theme', 'currency']` middleware).
-- **21 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ru, sin, tr, uk, zh_CN. Translation changes must be applied to ALL locale files. Verify with `php artisan bagisto:translations:check`.
+- **22 Locales**: ar, bn, ca, de, en, es, fa, fr, he, hi_IN, id, it, ja, nl, pl, pt_BR, ro, ru, sin, tr, uk, zh_CN. Translation changes must be applied to ALL locale files. Verify with `php artisan bagisto:translations:check`.
 
 ## Commands
 
@@ -271,7 +294,8 @@ Always pair with `$casts` for read-side consistency. Never sanitize in controlle
 ## Safety Rails
 
 - **Never modify `bootstrap/providers.php` or `config/concord.php`** without understanding the full provider chain — removing a provider breaks the entire module.
-- **Translations are 21 files per key.** Missing a locale will fail CI. When adding/removing translation keys, hit all 21 files.
+- **Translations are 22 files per key.** Missing a locale will fail CI. When adding/removing translation keys, hit all 22 files.
+- **No comments inside method bodies.** Docblocks above classes, methods, and properties only. Never annotate a statement with what it does or why it changed — that belongs in the commit message. Applies to `//` and `/** */` alike, in PHP, Blade, JS, and Vue. If a line needs prose to be understood, extract a named method instead.
 - **Pint must pass.** Run `vendor/bin/pint --dirty` before finalizing any PHP change.
 - **Tests must pass.** Run affected package tests after changes. Do not delete tests without approval.
 - **PostgreSQL compatibility is required.** Never hardcode `'like'` for text searches — use `db_grammar()->caseInsensitiveLike()`. Never rely on MySQL-specific implicit coercions. Handle type normalization in models via `$casts` and set mutators.
@@ -282,7 +306,10 @@ Always pair with `$casts` for read-side consistency. Never sanitize in controlle
 
 1. `vendor/bin/pint --dirty` — no style violations
 2. `php artisan test --compact` — affected tests pass
-3. `php artisan bagisto:translations:check` — translation keys exist in all 21 locale files (if changed)
+3. `php artisan bagisto:translations:check` — translation keys exist in all 22 locale files (if changed)
 4. No `env()` calls outside `config/` files
 5. New models have Contract + Model + Proxy + Repository
 6. New packages registered in `bootstrap/providers.php` and `config/concord.php`
+7. Conventions from the skills above hold for every file touched — docblocks on each method and
+   property, class members ordered constants → properties → constructor → public → protected →
+   private, multi-clause conditions split across lines, `:` vs `::` correct in Blade

@@ -10,6 +10,7 @@ use Webkul\Admin\Validations\ProductCategoryUniqueSlug;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Core\Helpers\MediaFileName;
 use Webkul\Core\Rules\Decimal;
+use Webkul\Core\Rules\Regex;
 use Webkul\Core\Rules\Slug;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Repositories\ProductAttributeValueRepository;
@@ -145,7 +146,9 @@ class ProductForm extends FormRequest
                 if ($attribute->validation === 'decimal') {
                     $validations[] = new Decimal;
                 } elseif ($attribute->validation === 'regex') {
-                    $validations[] = 'regex:'.$attribute->regex;
+                    if (Regex::isUsable($attribute->regex)) {
+                        $validations[] = 'regex:'.$attribute->regex;
+                    }
                 } else {
                     $validations[] = $attribute->validation;
                 }
@@ -197,9 +200,12 @@ class ProductForm extends FormRequest
     public function attributes()
     {
         return [
-            'images.files.*' => 'image',
-            'videos.files.*' => 'video',
-            'variants.*.sku' => 'sku',
+            'images.files.*' => trans('admin::app.components.media.images.image'),
+            'images.meta.*.alt_text' => trans('admin::app.components.media.images.seo.alt-text'),
+            'images.meta.*.file_name' => trans('admin::app.components.media.images.seo.file-name'),
+            'videos.files.*' => trans('admin::app.components.media.videos.video'),
+            'videos.meta.*.file_name' => trans('admin::app.components.media.images.seo.file-name'),
+            'variants.*.sku' => trans('admin::app.catalog.products.index.datagrid.sku'),
         ];
     }
 

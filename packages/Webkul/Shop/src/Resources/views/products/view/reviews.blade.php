@@ -59,7 +59,7 @@
                                     v-for="rating in [1,2,3,4,5]"
                                     class="icon-star-fill cursor-pointer text-2xl focus-visible:ring-2 focus-visible:ring-navyBlue focus-visible:ring-offset-2 rounded"
                                     :class="appliedRatings >= rating ? 'text-amber-500' : 'text-zinc-500'"
-                                    :aria-label="'@lang('shop::app.products.view.reviews.rating') ' + rating + ' @lang('shop::app.products.view.reviews.stars')'"
+                                    :aria-label="@js(trans('shop::app.products.view.reviews.rating')) + ' ' + rating + ' ' + @js(trans('shop::app.products.view.reviews.stars'))"
                                     :aria-pressed="appliedRatings >= rating ? 'true' : 'false'"
                                     @click="appliedRatings = rating"
                                 >

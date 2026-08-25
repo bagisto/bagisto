@@ -16,14 +16,14 @@ export class ReviewPage extends BasePage {
     }
 
     async writeReview(title: string, comment: string): Promise<void> {
-        await this.page.getByRole("button", { name: "Reviews" }).click();
+        await this.page.getByRole("tab", { name: "Reviews" }).click();
         await this.page.waitForSelector("#review-tab");
         await this.page
             .locator("#review-tab")
             .getByText("Write a Review")
             .click();
-        await this.page.locator("#review-tab span").nth(3).click();
-        await this.page.locator("#review-tab span").nth(4).click();
+        await this.page.locator("#review-tab button[aria-pressed]").nth(3).click();
+        await this.page.locator("#review-tab button[aria-pressed]").nth(4).click();
         await this.page.getByPlaceholder("Title").click();
         await this.page.getByPlaceholder("Title").fill(title);
         await this.page.getByPlaceholder("Comment").click();

@@ -61,6 +61,7 @@ enum SupportedDatabaseEnum: string
     {
         return [
             self::MYSQL->value,
+            self::MARIADB->value,
             self::PGSQL->value,
         ];
     }

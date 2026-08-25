@@ -81,6 +81,22 @@ class CatalogRule extends Model implements CatalogRuleContract
     }
 
     /**
+     * Set discount amount with empty string to zero conversion.
+     */
+    public function setDiscountAmountAttribute($value): void
+    {
+        $this->attributes['discount_amount'] = $value !== '' && $value !== null ? $value : 0;
+    }
+
+    /**
+     * Set sort order with empty string to zero conversion.
+     */
+    public function setSortOrderAttribute($value): void
+    {
+        $this->attributes['sort_order'] = $value !== '' && $value !== null ? (int) $value : 0;
+    }
+
+    /**
      * Get the channels that owns the catalog rule.
      */
     public function channels(): BelongsToMany

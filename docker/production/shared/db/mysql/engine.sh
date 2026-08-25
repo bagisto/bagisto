@@ -8,6 +8,7 @@
 #
 #   db_default_port        the port to assume when DB_PORT is unset
 #   db_connection          the Laravel DB_CONNECTION value
+#   db_server_packages     the apt packages that provide the server
 #   db_build_init          create a fresh data directory
 #   db_build_start         start the server in the background
 #   db_build_wait          block until it accepts connections
@@ -21,6 +22,8 @@ DB_ENGINE_NAME="MySQL"
 db_default_port() { echo "3306"; }
 
 db_connection() { echo "mysql"; }
+
+db_server_packages() { echo "mysql-server mysql-client"; }
 
 db_build_init() {
     mkdir -p /run/mysqld

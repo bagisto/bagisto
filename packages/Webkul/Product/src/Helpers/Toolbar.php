@@ -7,6 +7,13 @@ use Illuminate\Support\Collection;
 class Toolbar
 {
     /**
+     * Page sizes the storefront falls back to when none are configured.
+     *
+     * @var array
+     */
+    public const DEFAULT_LIMITS = [12, 24, 36, 48];
+
+    /**
      * Returns available sort orders.
      */
     public function getAvailableOrders(): Collection
@@ -89,13 +96,16 @@ class Toolbar
      */
     public function getAvailableLimits(): Collection
     {
-        if ($productsPerPage = core()->getConfigData('catalog.products.storefront.products_per_page')) {
-            $pages = explode(',', $productsPerPage);
+        $limits = collect(explode(',', (string) core()->getConfigData('catalog.products.storefront.products_per_page')))
+            ->map(fn ($limit) => trim($limit))
+            ->filter(fn ($limit) => ctype_digit($limit) && (int) $limit > 0)
+            ->map(fn ($limit) => (int) $limit)
+            ->unique()
+            ->values();
 
-            return collect($pages);
-        }
-
-        return collect([12, 24, 36, 48]);
+        return $limits->isNotEmpty()
+            ? $limits
+            : collect(self::DEFAULT_LIMITS);
     }
 
     /**

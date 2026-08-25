@@ -32,7 +32,7 @@ export class OrderPage extends BasePage {
     }
 
     private get invoicesButton() {
-        return this.page.getByRole("button", { name: "Invoices" });
+        return this.page.getByRole("tab", { name: "Invoices" });
     }
 
     private get printLink() {

@@ -324,6 +324,25 @@ class Core
     }
 
     /**
+     * Locale codes the request applies to. The locale switcher offers an "all"
+     * option, which is a sentinel rather than a locale of its own, so it is
+     * expanded to every locale instead of being used as one.
+     *
+     * @param  string  $localeKey  optional
+     * @return array<int, string>
+     */
+    public function getRequestedLocaleCodes($localeKey = 'locale'): array
+    {
+        $localeCode = request()->get($localeKey);
+
+        if ($localeCode === 'all') {
+            return $this->getAllLocales()->pluck('code')->all();
+        }
+
+        return [$localeCode ?: app()->getLocale()];
+    }
+
+    /**
      * Check requested locale code in requested channel. If not found,
      * then set channel default locale code.
      *

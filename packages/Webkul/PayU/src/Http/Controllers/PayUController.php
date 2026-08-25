@@ -109,6 +109,14 @@ class PayUController extends Controller
 
             Cart::collectTotals();
 
+            $cart = Cart::getCart();
+
+            if (! $cart) {
+                session()->flash('error', trans('payu::app.response.cart-not-found'));
+
+                return redirect()->route('shop.checkout.cart.index');
+            }
+
             $data = (new OrderResource($cart))->jsonSerialize();
 
             $data['payment']['additional'] = [

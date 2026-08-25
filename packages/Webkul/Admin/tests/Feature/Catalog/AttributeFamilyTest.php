@@ -430,6 +430,28 @@ it('should allow updating a family with its own code', function () {
         ->assertRedirectToRoute('admin.catalog.families.index');
 });
 
+it('should keep the code of an attribute family unchanged on update', function () {
+    $family = AttributeFamily::factory()->create();
+
+    $defaultFamily = AttributeFamily::where('code', AttributeFamily::DEFAULT_CODE)->firstOrFail();
+
+    $this->loginAsAdmin();
+
+    foreach ([$family, $defaultFamily] as $attributeFamily) {
+        putJson(route('admin.catalog.families.update', $attributeFamily->id), [
+            'code' => 'submitted_code_'.$attributeFamily->id,
+            'name' => $attributeFamily->name,
+            'attribute_groups' => buildGroupsPayloadFromFamily($attributeFamily),
+        ])
+            ->assertRedirectToRoute('admin.catalog.families.index');
+
+        $this->assertDatabaseHas('attribute_families', [
+            'id' => $attributeFamily->id,
+            'code' => $attributeFamily->code,
+        ]);
+    }
+});
+
 it('should fail validation when code conflicts with another family on update', function () {
     $familyA = AttributeFamily::factory()->create();
     $familyB = AttributeFamily::factory()->create();
@@ -487,17 +509,6 @@ it('should delete an attribute family', function () {
     ]);
 });
 
-it('should not delete the last remaining attribute family', function () {
-    $this->loginAsAdmin();
-
-    // The seeded database has exactly one attribute family (default).
-    deleteJson(route('admin.catalog.families.delete', 1))
-        ->assertBadRequest()
-        ->assertSeeText(trans('admin::app.catalog.families.last-delete-error'));
-
-    $this->assertDatabaseHas('attribute_families', ['id' => 1]);
-});
-
 it('should not delete a family that has associated products', function () {
     $family = AttributeFamily::factory()->create();
 
@@ -535,4 +546,34 @@ it('should dispatch events when deleting a family', function () {
 
     Event::assertDispatched('catalog.attribute_family.delete.before');
     Event::assertDispatched('catalog.attribute_family.delete.after');
+});
+
+it('should refuse to delete the default attribute family', function () {
+    // Arrange.
+    $attributeFamily = AttributeFamily::query()
+        ->where('code', AttributeFamily::DEFAULT_CODE)
+        ->firstOrFail();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    deleteJson(route('admin.catalog.families.delete', $attributeFamily->id))
+        ->assertStatus(400)
+        ->assertJsonPath('message', trans('admin::app.catalog.families.default-delete-error'));
+
+    $this->assertDatabaseHas('attribute_families', ['id' => $attributeFamily->id]);
+});
+
+it('should still open the create family screen when the default family is missing', function () {
+    // Arrange.
+    AttributeFamily::factory()->create();
+
+    AttributeFamily::query()->where('code', AttributeFamily::DEFAULT_CODE)->delete();
+
+    // Act and Assert.
+    $this->loginAsAdmin();
+
+    get(route('admin.catalog.families.create'))
+        ->assertOk()
+        ->assertSeeText(trans('admin::app.catalog.families.create.title'));
 });

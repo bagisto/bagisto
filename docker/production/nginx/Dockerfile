@@ -5,9 +5,9 @@
 # Default mode  : the bundled database (ready to boot, Docker Hub style)
 # Override mode : set DB_HOST to an external address to use that instead
 #
-# Which database is bundled is chosen with --build-arg DB_ENGINE=mysql|postgres.
+# Which database is bundled is chosen with --build-arg DB_ENGINE=mysql|mariadb|postgres.
 # Everything database-specific lives in shared/db/<engine>/, so this file is
-# the same for either one.
+# the same for all of them.
 #
 # Bagisto is FULLY INSTALLED at build time — migrations, seeding, and all.
 # The image boots instantly with no first-run setup needed.
@@ -24,7 +24,7 @@ ENV TZ=UTC
 
 
 # ---------------------------------------------------------------------------
-# System packages + PHP PPA + MySQL 8.0
+# System packages + PHP PPA
 # ---------------------------------------------------------------------------
 RUN apt-get update && apt-get install -y \
         apt-transport-https \
@@ -75,11 +75,10 @@ RUN apt-get update && apt-get install -y \
 # regardless, so an image can still be pointed at an external server of the
 # other kind without rebuilding.
 # ---------------------------------------------------------------------------
-RUN apt-get update && if [ "$DB_ENGINE" = "postgres" ]; then \
-        apt-get install -y postgresql postgresql-client; \
-    else \
-        apt-get install -y mysql-server mysql-client; \
-    fi \
+COPY shared/db/${DB_ENGINE}/ /usr/local/share/bagisto/db/
+RUN . /usr/local/share/bagisto/db/engine.sh \
+    && apt-get update \
+    && apt-get install -y $(db_server_packages) \
     && rm -rf /var/lib/apt/lists/*
 
 
@@ -123,25 +122,24 @@ RUN cp .env.example .env \
 # ---------------------------------------------------------------------------
 # Install Bagisto at BUILD TIME
 #
-# 1. Initialize MySQL data directory
-# 2. Start MySQL temporarily
+# 1. Initialise the database data directory
+# 2. Start the database temporarily
 # 3. Create database + user
 # 4. Generate APP_KEY
 # 5. Run migrations + seeding
 # 6. Create storage symlink
 # 7. Cache config/routes/views
-# 8. Shut down MySQL cleanly
+# 8. Shut the database down cleanly
 #
-# The MySQL data directory (/var/lib/mysql) is baked into this layer.
+# The populated data directory is baked into this layer.
 # ---------------------------------------------------------------------------
-COPY shared/db/${DB_ENGINE}/ /usr/local/share/bagisto/db/
 COPY shared/build-install.sh /tmp/build-install.sh
-RUN cp /usr/local/share/bagisto/db/init.sql /docker-entrypoint-initdb.d/init.sql \
-    && if [ -f /usr/local/share/bagisto/db/postgres-server.sh ]; then \
-           install -m 0755 /usr/local/share/bagisto/db/postgres-server.sh /usr/local/bin/postgres-server.sh; \
-       fi \
-    && sed -i "s/^DB_CONNECTION=.*/DB_CONNECTION=$(if [ \"$DB_ENGINE\" = postgres ]; then echo pgsql; else echo mysql; fi)/" /var/www/bagisto/.env \
-    && sed -i "s/^DB_PORT=.*/DB_PORT=$(if [ \"$DB_ENGINE\" = postgres ]; then echo 5432; else echo 3306; fi)/" /var/www/bagisto/.env \
+RUN mkdir -p /docker-entrypoint-initdb.d \
+    && cp /usr/local/share/bagisto/db/init.sql /docker-entrypoint-initdb.d/init.sql \
+    && chmod +x /usr/local/share/bagisto/db/*.sh \
+    && . /usr/local/share/bagisto/db/engine.sh \
+    && sed -i "s/^DB_CONNECTION=.*/DB_CONNECTION=$(db_connection)/" /var/www/bagisto/.env \
+    && sed -i "s/^DB_PORT=.*/DB_PORT=$(db_default_port)/" /var/www/bagisto/.env \
     && chmod +x /tmp/build-install.sh \
     && DB_ENGINE=${DB_ENGINE} bash /tmp/build-install.sh \
     && rm /tmp/build-install.sh

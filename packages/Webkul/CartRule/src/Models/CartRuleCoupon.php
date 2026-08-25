@@ -51,6 +51,30 @@ class CartRuleCoupon extends Model implements CartRuleCouponContract
     }
 
     /**
+     * Set usage limit with empty string to zero conversion.
+     */
+    public function setUsageLimitAttribute($value): void
+    {
+        $this->attributes['usage_limit'] = $value !== '' && $value !== null ? (int) $value : 0;
+    }
+
+    /**
+     * Set usage per customer with empty string to zero conversion.
+     */
+    public function setUsagePerCustomerAttribute($value): void
+    {
+        $this->attributes['usage_per_customer'] = $value !== '' && $value !== null ? (int) $value : 0;
+    }
+
+    /**
+     * Set times used with empty string to zero conversion.
+     */
+    public function setTimesUsedAttribute($value): void
+    {
+        $this->attributes['times_used'] = $value !== '' && $value !== null ? (int) $value : 0;
+    }
+
+    /**
      * Get the cart rule that owns the cart rule coupon.
      */
     public function cart_rule(): BelongsTo

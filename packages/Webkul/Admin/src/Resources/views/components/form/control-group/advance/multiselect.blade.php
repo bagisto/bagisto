@@ -128,6 +128,8 @@
         app.component('v-multiselect', {
             template: '#v-multiselect-template',
 
+            emits: ['update:modelValue'],
+
             props: {
                 name: {
                     type: String,
@@ -170,6 +172,20 @@
 
                     searchPlaceholder: "@lang('admin::app.components.datagrid.toolbar.search.title')",
                 };
+            },
+
+            watch: {
+                value(value) {
+                    const incoming = (value ?? []).map((id) => String(id));
+
+                    if (incoming.join(',') !== this.selectedIds.join(',')) {
+                        this.selectedIds = incoming;
+                    }
+                },
+
+                selectedIds(ids) {
+                    this.$emit('update:modelValue', ids);
+                },
             },
 
             computed: {
