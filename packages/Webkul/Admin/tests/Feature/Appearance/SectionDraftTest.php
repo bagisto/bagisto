@@ -322,11 +322,11 @@ it('should store an uploaded image and return its path', function () {
 
     $path = $response->json('path');
 
-    expect($path)->toStartWith('storage/themes/'.$section->theme_code.'/sections/'.$section->id.'/')
+    expect($path)->toStartWith('themes/'.$section->theme_code.'/sections/'.$section->id.'/')
         ->and($path)->toEndWith('.webp')
         ->and($response->json('type'))->toBe('image');
 
-    Storage::assertExists(str_replace('storage/', '', $path));
+    Storage::assertExists($path);
 });
 
 it('should store an uploaded video as it was given rather than as an image', function () {
@@ -345,7 +345,7 @@ it('should store an uploaded video as it was given rather than as an image', fun
     expect($path)->toEndWith('.mp4')
         ->and($response->json('type'))->toBe('video');
 
-    Storage::assertExists(str_replace('storage/', '', $path));
+    Storage::assertExists($path);
 });
 
 it('should refuse a file that is neither an image nor a video', function () {
@@ -541,7 +541,7 @@ it('should file an upload under the theme the section belongs to', function () {
     ])->assertOk();
 
     expect($response->json('path'))
-        ->toStartWith('storage/themes/'.$section->theme_code.'/sections/'.$section->id.'/');
+        ->toStartWith('themes/'.$section->theme_code.'/sections/'.$section->id.'/');
 });
 
 it('should clear a section media directory when the section is deleted', function () {
@@ -555,11 +555,11 @@ it('should clear a section media directory when the section is deleted', functio
         'file' => UploadedFile::fake()->image('slide.jpg', 40, 40),
     ])->json('path');
 
-    Storage::assertExists(str_replace('storage/', '', $path));
+    Storage::assertExists($path);
 
     deleteJson(route('admin.appearance.sections.delete', $section->id))->assertOk();
 
-    Storage::assertMissing(str_replace('storage/', '', $path));
+    Storage::assertMissing($path);
 });
 
 it('should announce every write it makes, before and after', function (string $route, string $event, array $payload) {
@@ -809,9 +809,9 @@ it('should delete the uploads a discarded draft brought with it', function () {
 
     discardDrafts($section)->assertOk();
 
-    Storage::assertMissing(str_replace('storage/', '', $drafted));
+    Storage::assertMissing($drafted);
 
-    Storage::assertExists(str_replace('storage/', '', $published));
+    Storage::assertExists($published);
 });
 
 it('should delete the upload a published draft replaced', function () {
@@ -839,9 +839,9 @@ it('should delete the upload a published draft replaced', function () {
 
     $new = $stage('new.jpg');
 
-    Storage::assertMissing(str_replace('storage/', '', $old));
+    Storage::assertMissing($old);
 
-    Storage::assertExists(str_replace('storage/', '', $new));
+    Storage::assertExists($new);
 });
 
 it('should keep an upload that only custom html points at', function () {
@@ -861,7 +861,7 @@ it('should keep an upload that only custom html points at', function () {
 
     publishDrafts($section)->assertOk();
 
-    Storage::assertExists(str_replace('storage/', '', $path));
+    Storage::assertExists($path);
 });
 
 it('should clear a section media directory however the section is deleted', function (string $how) {

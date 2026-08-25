@@ -344,6 +344,7 @@
                         :model="options"
                         :section-id="active?.id"
                         :media-url="urls.media"
+                        :media-base="urls.media_base"
                         :key="active?.id"
                         @change="queueDraft"
                         v-if="fields.length"

@@ -31,7 +31,7 @@
                     <ul class="grid gap-5 text-sm">
                         @foreach ($footerLinkSection as $link)
                             <li>
-                                <a href="{{ $link['url'] }}">
+                                <a href="{{ url($link['url']) }}">
                                     {{ $link['title'] }}
                                 </a>
                             </li>
@@ -60,7 +60,7 @@
                             @foreach ($footerLinkSection as $link)
                                 <li>
                                     <a
-                                        href="{{ $link['url'] }}"
+                                        href="{{ url($link['url']) }}"
                                         class="text-sm font-medium max-sm:text-xs"
                                     >
                                         {{ $link['title'] }}

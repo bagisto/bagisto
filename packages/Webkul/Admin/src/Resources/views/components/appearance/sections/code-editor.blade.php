@@ -158,8 +158,8 @@
                 /**
                  * The tag that renders an uploaded file on the storefront.
                  */
-                markupFor({ path, type }) {
-                    const src = '/' + path;
+                markupFor({ url, type }) {
+                    const src = url;
 
                     return type === 'video'
                         ? `<video src="${src}" controls playsinline class="w-full"></video>`

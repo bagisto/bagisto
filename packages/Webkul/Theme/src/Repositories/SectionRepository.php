@@ -86,7 +86,7 @@ class SectionRepository extends Repository
 
         if (isset($data[$locale]['deleted_sliders'])) {
             foreach ($data[$locale]['deleted_sliders'] as $slider) {
-                Storage::delete(str_replace('storage/', '', $slider['image']));
+                Storage::delete(bagisto_theme_storage()->normalize($slider['image']));
             }
         }
 
@@ -116,12 +116,8 @@ class SectionRepository extends Repository
                     return redirect()->back();
                 }
 
-                if (($data['type'] ?? '') == 'static_content') {
-                    return Storage::url($path);
-                }
-
                 $options['images'][] = [
-                    'image' => 'storage/'.$path,
+                    'image' => $path,
                     'link' => $image['link'],
                     'title' => $image['title'],
                 ];
@@ -476,8 +472,10 @@ class SectionRepository extends Repository
     }
 
     /**
-     * Store a single uploaded image against a section, returning the path as the
-     * storefront records it.
+     * Store a single uploaded image against a section, returning the path on the disk.
+     *
+     * The path is what a section records; the url it is served from is resolved when
+     * the storefront renders it, so the row survives a change of disk or domain.
      *
      * @param  int  $id
      */
@@ -489,7 +487,7 @@ class SectionRepository extends Repository
 
         Storage::put($path, image_manager()->fromUpload($file)->toWebp()->toBytes());
 
-        return 'storage/'.$path;
+        return $path;
     }
 
     /**
@@ -516,7 +514,7 @@ class SectionRepository extends Repository
         );
 
         return [
-            'path' => 'storage/'.$path,
+            'path' => $path,
             'type' => 'video',
         ];
     }

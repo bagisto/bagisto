@@ -1,24 +1,43 @@
 # AGENTS.md — Cross-Agent Instructions for Bagisto 2.5.x
 
-## Skills — load these before writing code
+## Skills — load the relevant one before writing code, not after
 
 This repository ships its conventions as skills under `.claude/skills/<name>/SKILL.md`. If your
-harness has no skill loader, read those files directly — they are plain markdown.
+harness has no skill loader, read those files directly — they are plain markdown. They carry rules
+that `vendor/bin/pint` does not enforce and that a reviewer will otherwise send back.
 
-**Load the relevant ones before writing or reviewing code, not after.** They carry rules that
-`vendor/bin/pint` does not enforce and that a reviewer will otherwise send back.
+**`bagisto-coding-standards` applies to nearly every change** — it owns code style, comments and
+docblocks, Laravel idiom, Blade, database access, security and localization. Load it alongside
+whichever of the below fits the task.
 
-| Skill | Load it when | It settles |
-|---|---|---|
-| `package-development` | Any PHP: controllers, repositories, models, DataGrids, migrations, listeners, jobs, enums | Docblocks on every method/property, class member order, multi-clause conditions, comment discipline, repository-over-query-builder, package/menu/ACL/system-config structure |
-| `blade-conventions` | Any `.blade.php`, in any package | `:` vs `::` binding, anonymous vs Vue-backed components, attribute layout, `@props` alignment, comment syntax per layer, translations and `view_render_event` placement |
-| `pest-testing` | Writing or changing tests | Suite layout, test-case bindings, assertion style, datasets, registering a new package's tests |
+| Working on | Load |
+|---|---|
+| Any PHP or Blade | `bagisto-coding-standards` |
+| A package: providers, models, repositories, routes, controllers, ACL, menus, config | `bagisto-package-development` |
+| An admin listing page | `bagisto-datagrid-development` |
+| Attributes, families, EAV values | `bagisto-attribute-development` |
+| The Appearance area — theme sections, the editor, its preview | `bagisto-theme-sections` |
+| Imports — Importer classes, the queued pipeline | `bagisto-data-transfer` |
+| A payment gateway | `bagisto-payment-method-development` |
+| A shipping carrier | `bagisto-shipping-method-development` |
+| A product type | `bagisto-product-type-development` |
+| A storefront or admin theme | `bagisto-shop-theme-development` / `bagisto-admin-theme-development` |
+| A storefront feature on the advanced theme workflow | `bagisto-shop-advance-theme-development` |
+| Pest tests | `bagisto-pest-testing` |
+| Playwright end-to-end tests | `bagisto-playwright-testing` |
+| Reviewing a change | `bagisto-code-review` |
+| Branching, commits, CHANGELOG, PRs | `bagisto-git-workflow` |
+| The REST/GraphQL API | `bagisto-api-develop` / `bagisto-api-shop` / `bagisto-api-admin` |
+| Any documentation site — developer docs, user guide, screenshots | `bagisto-documentation` |
+
+**Load `bagisto-change-verification` before calling any change done** — it owns the gates (Pint,
+Pest, Playwright, translation completeness).
 
 One rule that catches people out:
 
-- **A pre-existing violation in a file you touch is yours.** `package-development` is explicit:
-  when you edit a class, scan its whole member order and docblocks and fix what is already wrong.
-  Leaving it is treated the same as introducing it.
+- **A pre-existing violation in a file you touch is yours.** `bagisto-coding-standards` is
+  explicit: when you edit a class, scan its whole member order and docblocks and fix what is
+  already wrong. Leaving it is treated the same as introducing it.
 
 Where a skill and the surrounding code genuinely disagree, match the surrounding code and say so in
 your summary rather than silently churning the codebase either way.
@@ -46,7 +65,7 @@ your summary rather than silently churning the codebase either way.
 ├── database/
 │   ├── migrations/             # App-level migrations
 │   └── seeders/
-├── packages/Webkul/            # ★ All Bagisto packages live here (41 packages)
+├── packages/Webkul/            # ★ All Bagisto packages live here (42 packages)
 │   ├── Admin/                  # Admin panel (controllers, views, DataGrids, reporting, e2e-pw tests)
 │   ├── Shop/                   # Customer storefront (controllers, views, e2e-pw tests)
 │   ├── Core/                   # Helpers, models, jobs, listeners, exchange rates
@@ -251,12 +270,11 @@ php artisan db:seed              # Seed database
 
 | Workflow | Trigger | What it does |
 |----------|---------|--------------|
-| `pest_tests.yml` | push, PR | Installs Bagisto, runs `vendor/bin/pest` (MySQL + PostgreSQL) |
-| `pint_tests.yml` | push, PR | Runs `pint --test` (style check) |
-| `admin_playwright_tests.yml` | push, PR | Admin E2E tests (6 shards × MySQL + PostgreSQL) |
-| `shop_playwright_tests.yml` | push, PR | Shop E2E tests (6 shards × MySQL + PostgreSQL) |
-| `translation_tests.yml` | push, PR | Translation key consistency |
-| `docker_publish.yml` | `v*` tag, manual | Builds and pushes the production images — {nginx, apache, litespeed} x {mysql, postgres}, multi-arch |
+| `pest-tests.yml` | push, PR | Installs Bagisto, runs `vendor/bin/pest --parallel` (MySQL, MariaDB, PostgreSQL) |
+| `pint-tests.yml` | push, PR | Runs `pint --test` (style check) |
+| `playwright-tests.yml` | push, PR | `installer_gate` runs the guided installer (en + ar × each database) and gates `playwright_tests`, which runs the Admin and Shop projects (10 shards × each database) |
+| `translation-tests.yml` | push, PR | Translation key consistency |
+| `docker-publish.yml` | `v*` tag, manual | Builds and pushes the production images — {nginx, apache, litespeed} x {mysql, mariadb, postgres}, multi-arch |
 
 All workflows run on **PHP 8.4**, which is the minimum the project requires.
 

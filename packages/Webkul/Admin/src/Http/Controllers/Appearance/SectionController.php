@@ -212,6 +212,9 @@ class SectionController extends Controller
     /**
      * Store one uploaded image for a section and hand back the path to record in its
      * options, so a schema driven field can upload without knowing the form shape.
+     *
+     * The url to write into custom html is returned beside it. Only the path is
+     * recorded against a section; the url is for markup that keeps what it is given.
      */
     public function uploadMedia(int $id): JsonResponse
     {
@@ -227,7 +230,9 @@ class SectionController extends Controller
 
         Event::dispatch('section.media.upload.after', $media);
 
-        return new JsonResponse($media);
+        return new JsonResponse(array_merge($media, [
+            'url' => bagisto_theme_storage()->embedUrl($media['path']),
+        ]));
     }
 
     /**
@@ -359,6 +364,7 @@ class SectionController extends Controller
             'fields' => route('admin.appearance.sections.fields', ['id' => '__ID__']),
             'draft' => route('admin.appearance.sections.draft', ['id' => '__ID__']),
             'media' => route('admin.appearance.sections.media', ['id' => '__ID__']),
+            'media_base' => bagisto_theme_storage()->base(),
             'delete' => route('admin.appearance.sections.delete', ['id' => '__ID__']),
         ];
     }

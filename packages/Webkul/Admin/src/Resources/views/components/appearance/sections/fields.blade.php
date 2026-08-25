@@ -44,6 +44,7 @@
                                     :model="row"
                                     :section-id="sectionId"
                                     :media-url="mediaUrl"
+                                    :media-base="mediaBase"
                                     @change="bubble"
                                 ></v-section-fields>
                             </div>
@@ -169,6 +170,7 @@
                         :model-value="model[field.key]"
                         :section-id="sectionId"
                         :media-url="mediaUrl"
+                        :media-base="mediaBase"
                         @update:model-value="value => { model[field.key] = value; bubble(); }"
                     ></v-code-editor>
                 </div>
@@ -223,7 +225,7 @@
         app.component('v-section-fields', {
             template: '#v-section-fields-template',
 
-            props: ['schema', 'model', 'sectionId', 'mediaUrl'],
+            props: ['schema', 'model', 'sectionId', 'mediaUrl', 'mediaBase'],
 
             emits: ['change'],
 
@@ -476,7 +478,15 @@
                 imageSrc(field) {
                     const path = this.model[field.key];
 
-                    return path?.startsWith('http') ? path : '/' + path;
+                    if (! path) {
+                        return null;
+                    }
+
+                    if (/^(https?:)?\/\//.test(path)) {
+                        return path;
+                    }
+
+                    return this.mediaBase + path.replace(/^\/+/, '');
                 },
 
                 /**
