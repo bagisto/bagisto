@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'Dosya Yönetimi',
+                'info' => 'Yüklenen dosyaların nerede saklanacağını seçin ve depolama hizmetini yapılandırın.',
+
+                'general' => [
+                    'title' => 'Genel',
+                    'info' => 'Tüm mağazanın yüklenen dosyalar için kullandığı depolama.',
+
+                    'settings' => [
+                        'title' => 'Ayarlar',
+                        'info' => 'Dosyaların kaydedileceği ve sunulacağı depolamayı seçin.',
+                        'default-driver' => 'Varsayılan Depolama Sürücüsü',
+                        'default-driver-info' => 'Bundan sonra yüklenen dosyalar buraya kaydedilir. Daha önce yüklenen dosyalar eski depolamada kalır; geçiş yapmadan önce kopyalayın, aksi halde bulunamazlar.',
+
+                        'drivers' => [
+                            'local' => 'Dosya (Yerel Depolama)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Amazon S3 veya onun API\'sini destekleyen herhangi bir hizmet için kimlik bilgileri.',
+
+                    'settings' => [
+                        'title' => 'Ayarlar',
+                        'info' => 'Varsayılan depolama sürücüsü Amazon S3 olarak ayarlandığında kullanılır.',
+                        'key' => 'Erişim Anahtarı Kimliği',
+                        'key-info' => 'Klasörün ait olduğu hesabın erişim anahtarı kimliği.',
+                        'secret' => 'Gizli Erişim Anahtarı',
+                        'secret-info' => 'Erişim anahtarı kimliğiyle eşleşen gizli anahtar.',
+                        'region' => 'Bölge',
+                        'region-info' => 'Klasörün oluşturulduğu bölge, örneğin us-east-1.',
+                        'bucket' => 'Klasör',
+                        'bucket-info' => 'Dosyaların saklandığı klasörün adı.',
+                        'url' => 'URL',
+                        'url-info' => 'Dosyaların sunulduğu adres. Hizmetin sağladığı adresi kullanmak için boş bırakın.',
+                        'endpoint' => 'Uç Nokta',
+                        'endpoint-info' => 'Yalnızca Amazon S3 dışındaki bir hizmet için, örneğin kendi sunucunuzda barındırılan bir hizmet için gereklidir. Amazon S3 için boş bırakın.',
+                        'use-path-style-endpoint' => 'Yol Tabanlı Uç Nokta Kullan',
+                        'use-path-style-endpoint-info' => 'Klasörleri alt alan adı yerine yol olarak adresleyen, kendi sunucunuzda barındırılan bir hizmet için etkinleştirin.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Cloudflare R2 nesne depolama için kimlik bilgileri.',
+
+                    'settings' => [
+                        'title' => 'Ayarlar',
+                        'info' => 'Varsayılan depolama sürücüsü Cloudflare R2 olarak ayarlandığında kullanılır.',
+                        'account-id' => 'Hesap Kimliği',
+                        'account-id-info' => 'Klasörün ait olduğu Cloudflare hesabı. R2 adresi bundan oluşturulur, bu nedenle uç nokta gerekmez.',
+                        'key' => 'Erişim Anahtarı Kimliği',
+                        'key-info' => 'Bir R2 API belirtecinin erişim anahtarı kimliği.',
+                        'secret' => 'Gizli Erişim Anahtarı',
+                        'secret-info' => 'Erişim anahtarı kimliğiyle eşleşen gizli anahtar.',
+                        'bucket' => 'Klasör',
+                        'bucket-info' => 'Dosyaların saklandığı R2 klasörünün adı.',
+                        'url' => 'Genel URL',
+                        'url-info' => 'Dosyaların sunulduğu adres; klasörün genel adresi ya da kendi alan adınız olabilir. Bir R2 klasörü bir adres belirlenene kadar özeldir, adres olmadan dosyalara erişilemez.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Önbellek Yönetimi',
                 'info' => 'Uygulama önbelleğini yönetin, yapılandırma, rotalar, görünümler ve daha fazlası için önbellek verilerini temizleyin veya yeniden oluşturun.',

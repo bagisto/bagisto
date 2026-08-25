@@ -5,6 +5,7 @@ namespace Webkul\ImageCache\Http\Controllers;
 use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Storage;
 use Webkul\Core\Helpers\InstalledPackages;
 
 class ImageCacheController extends Controller
@@ -45,16 +46,19 @@ class ImageCacheController extends Controller
             abort(404, 'Template not found.');
         }
 
-        $path = $this->getImagePath($filename);
+        $contents = $this->getImageContents($filename);
 
-        if (! file_exists($path)) {
+        if (is_null($contents)) {
             abort(404, 'Image not found.');
         }
 
         try {
-            $image = image_manager()->fromPath($path);
+            $image = image_manager()->fromBytes($contents);
 
-            if (is_object($templateConfig) && method_exists($templateConfig, 'applyFilter')) {
+            if (
+                is_object($templateConfig)
+                && method_exists($templateConfig, 'applyFilter')
+            ) {
                 $image = $templateConfig->applyFilter($image);
             } elseif (class_exists($templateConfig)) {
                 $filter = new $templateConfig;
@@ -138,13 +142,11 @@ class ImageCacheController extends Controller
      */
     protected function getOriginal(string $filename): Response
     {
-        $path = $this->getImagePath($filename);
+        $content = $this->getImageContents($filename);
 
-        if (! file_exists($path)) {
+        if (is_null($content)) {
             abort(404, 'Image not found.');
         }
-
-        $content = file_get_contents($path);
 
         return $this->buildResponse($content);
     }
@@ -154,19 +156,42 @@ class ImageCacheController extends Controller
      */
     protected function getDownload(string $filename): Response
     {
-        $path = $this->getImagePath($filename);
+        $content = $this->getImageContents($filename);
 
-        if (! file_exists($path)) {
+        if (is_null($content)) {
             abort(404, 'Image not found.');
         }
-
-        $content = file_get_contents($path);
 
         $response = $this->buildResponse($content);
 
         $response->header('Content-Disposition', 'attachment; filename="'.basename($filename).'"');
 
         return $response;
+    }
+
+    /**
+     * Read an image, wherever the application keeps its files.
+     *
+     * The configured disk is asked first; the configured paths then cover a file
+     * published beside the application rather than held on a disk.
+     */
+    protected function getImageContents(string $filename): ?string
+    {
+        $contents = Storage::get($this->sanitizeFilename($filename));
+
+        if (! is_null($contents)) {
+            return $contents;
+        }
+
+        $path = $this->getImagePath($filename);
+
+        if (! file_exists($path)) {
+            return null;
+        }
+
+        $contents = file_get_contents($path);
+
+        return $contents === false ? null : $contents;
     }
 
     /**

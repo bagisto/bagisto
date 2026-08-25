@@ -485,7 +485,7 @@
                                                         <hr class="mb-2"/>
 
                                                         <a
-                                                            @click="viewAttachmentModal(message.attachment_path)"
+                                                            @click="viewAttachmentModal(message.attachment_url)"
                                                             class="icon-attribute dark:text-black-300 text-base font-normal cursor-pointer hover:underline"
                                                         >
                                                             <span class="text-base ml-2">
@@ -815,7 +815,7 @@
                                 || this.getAttachmentExtension === 'png'
                                 || this.getAttachmentExtension === 'gif'
                         )"
-                        :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
+                        :src="messagePath"
                         class="min-h-125 min-w-125 max-h-125 max-w-125 rounded-sm m-auto"
                     />
 
@@ -825,7 +825,7 @@
                             messagePath
                             && this.getAttachmentExtension === 'pdf'
                             "
-                        :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
+                        :src="messagePath"
                         width="100%" height="500px"
                         type="application/pdf"
                     />
@@ -842,7 +842,7 @@
                         controls
                         class="w-full h-auto max-h-125 rounded-sm m-auto"
                     >
-                        <source :src="'{{ config('app.url') }}' + '/storage/' + messagePath" />
+                        <source :src="messagePath" />
                     </video>
 
                     {!! view_render_event('bagisto.admin.sales.rma.requests.view.message.attachment.modal.content.after') !!}
@@ -1037,13 +1037,11 @@
                     },
 
                     downloadAttachment(messagePath) {
-                        const imageUrl = `{{ config('app.url') }}/storage/${messagePath}`;
-
                         const link = document.createElement('a');
 
-                        link.href = imageUrl;
+                        link.href = messagePath;
 
-                        link.download = imageUrl.split('/').pop();
+                        link.download = messagePath.split('/').pop();
 
                         document.body.appendChild(link);
                         link.click();

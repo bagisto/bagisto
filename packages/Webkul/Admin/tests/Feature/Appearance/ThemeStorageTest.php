@@ -97,15 +97,9 @@ it('writes the full disk url into markup when the disk is not local', function (
         ->toBe('https://bucket.s3.amazonaws.com/themes/default/sections/1/clip.mp4');
 });
 
-it('serves the original from the disk when it is not local, because the cache route reads local files', function () {
+it('still offers a resized copy when the disk is not local, which the cache route reads through', function () {
     Storage::shouldReceive('getAdapter')->andReturn(new stdClass);
 
-    Storage::shouldReceive('url')
-        ->with('themes/default/sections/1/a.webp')
-        ->andReturn('https://bucket.s3.amazonaws.com/themes/default/sections/1/a.webp');
-
-    $resolved = app(ThemeStorage::class)->resizedUrl('themes/default/sections/1/a.webp', 'large');
-
-    expect($resolved)->toBe('https://bucket.s3.amazonaws.com/themes/default/sections/1/a.webp')
-        ->and($resolved)->not->toContain('cache/large');
+    expect(app(ThemeStorage::class)->resizedUrl('themes/default/sections/1/a.webp', 'large'))
+        ->toBe(url('cache/large/themes/default/sections/1/a.webp'));
 });

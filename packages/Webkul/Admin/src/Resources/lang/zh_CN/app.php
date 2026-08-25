@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => '文件管理',
+                'info' => '选择上传文件的存储位置并配置存储服务。',
+
+                'general' => [
+                    'title' => '常规',
+                    'info' => '整个商店用于存放上传文件的存储。',
+
+                    'settings' => [
+                        'title' => '设置',
+                        'info' => '选择文件保存和对外提供的存储。',
+                        'default-driver' => '默认存储驱动',
+                        'default-driver-info' => '从现在起上传的文件将保存到这里。此前上传的文件仍留在原来的存储中，请在切换前先复制过去，否则将无法找到。',
+
+                        'drivers' => [
+                            'local' => '文件（本地存储）',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Amazon S3 或任何兼容其 API 的服务的凭据。',
+
+                    'settings' => [
+                        'title' => '设置',
+                        'info' => '当默认存储驱动设置为 Amazon S3 时使用。',
+                        'key' => '访问密钥 ID',
+                        'key-info' => '存储桶所属账户的访问密钥 ID。',
+                        'secret' => '私有访问密钥',
+                        'secret-info' => '与访问密钥 ID 配对的密钥。',
+                        'region' => '区域',
+                        'region-info' => '创建存储桶所在的区域，例如 us-east-1。',
+                        'bucket' => '存储桶',
+                        'bucket-info' => '存放文件的存储桶名称。',
+                        'url' => 'URL',
+                        'url-info' => '对外提供文件的地址。留空则使用该服务提供的地址。',
+                        'endpoint' => '端点',
+                        'endpoint-info' => '仅在使用 Amazon S3 以外的服务（例如自建服务）时才需要。使用 Amazon S3 时请留空。',
+                        'use-path-style-endpoint' => '使用路径样式端点',
+                        'use-path-style-endpoint-info' => '如果自建服务以路径而非子域名方式访问存储桶，请启用此项。',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Cloudflare R2 对象存储的凭据。',
+
+                    'settings' => [
+                        'title' => '设置',
+                        'info' => '当默认存储驱动设置为 Cloudflare R2 时使用。',
+                        'account-id' => '账户 ID',
+                        'account-id-info' => '存储桶所属的 Cloudflare 账户。R2 的地址由它生成，因此无需填写端点。',
+                        'key' => '访问密钥 ID',
+                        'key-info' => 'R2 API 令牌的访问密钥 ID。',
+                        'secret' => '私有访问密钥',
+                        'secret-info' => '与访问密钥 ID 配对的密钥。',
+                        'bucket' => '存储桶',
+                        'bucket-info' => '存放文件的 R2 存储桶名称。',
+                        'url' => '公开 URL',
+                        'url-info' => '对外提供文件的地址，可以是存储桶的公开地址或自定义域名。R2 存储桶在设置之前是私有的，未设置时文件将无法访问。',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => '缓存管理',
                 'info' => '管理应用程序缓存，清除或重建配置、路由、视图等的缓存数据。',

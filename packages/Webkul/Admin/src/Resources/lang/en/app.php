@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'File Management',
+                'info' => 'Choose where uploaded files are stored and configure the storage service.',
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'The storage the whole store uses for uploaded files.',
+
+                    'settings' => [
+                        'title' => 'Settings',
+                        'info' => 'Pick the storage files are saved to and served from.',
+                        'default-driver' => 'Default Storage Driver',
+                        'default-driver-info' => 'Files uploaded from now on are saved here. Files already uploaded stay on the storage they were saved to, so copy them across before switching or they will not be found.',
+
+                        'drivers' => [
+                            'local' => 'File (Local Storage)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Credentials for Amazon S3, or any service that speaks its API.',
+
+                    'settings' => [
+                        'title' => 'Settings',
+                        'info' => 'Used when the default storage driver is set to Amazon S3.',
+                        'key' => 'Access Key ID',
+                        'key-info' => 'The access key ID of the account the bucket belongs to.',
+                        'secret' => 'Secret Access Key',
+                        'secret-info' => 'The secret paired with the access key ID.',
+                        'region' => 'Region',
+                        'region-info' => 'The region the bucket was created in, such as us-east-1.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'The name of the bucket files are stored in.',
+                        'url' => 'URL',
+                        'url-info' => 'The address files are served from. Leave empty to use the address the service provides.',
+                        'endpoint' => 'Endpoint',
+                        'endpoint-info' => 'Only needed for a service other than Amazon S3, such as a self hosted one. Leave empty for Amazon S3.',
+                        'use-path-style-endpoint' => 'Use Path Style Endpoint',
+                        'use-path-style-endpoint-info' => 'Turn on for a self hosted service that addresses buckets as a path rather than a subdomain.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Credentials for Cloudflare R2 object storage.',
+
+                    'settings' => [
+                        'title' => 'Settings',
+                        'info' => 'Used when the default storage driver is set to Cloudflare R2.',
+                        'account-id' => 'Account ID',
+                        'account-id-info' => 'The Cloudflare account the bucket belongs to. The address R2 is reached at is built from it, so no endpoint is needed.',
+                        'key' => 'Access Key ID',
+                        'key-info' => 'The access key ID of an R2 API token.',
+                        'secret' => 'Secret Access Key',
+                        'secret-info' => 'The secret paired with the access key ID.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'The name of the R2 bucket files are stored in.',
+                        'url' => 'Public URL',
+                        'url-info' => 'The address files are served from, either the bucket public address or a custom domain. An R2 bucket is private until one is set, so files will not be reachable without it.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Cache Management',
                 'info' => 'Manage application cache, clear or rebuild cached data for configuration, routes, views, and more.',

@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'Gestion des fichiers',
+                'info' => 'Choisissez où les fichiers téléversés sont stockés et configurez le service de stockage.',
+
+                'general' => [
+                    'title' => 'Général',
+                    'info' => 'Le stockage utilisé par toute la boutique pour les fichiers téléversés.',
+
+                    'settings' => [
+                        'title' => 'Paramètres',
+                        'info' => 'Choisissez le stockage dans lequel les fichiers sont enregistrés et depuis lequel ils sont servis.',
+                        'default-driver' => 'Pilote de stockage par défaut',
+                        'default-driver-info' => 'Les fichiers téléversés à partir de maintenant seront enregistrés ici. Les fichiers déjà téléversés restent sur le stockage précédent : copiez-les avant de changer, sinon ils seront introuvables.',
+
+                        'drivers' => [
+                            'local' => 'Fichier (stockage local)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Identifiants pour Amazon S3, ou tout service compatible avec son API.',
+
+                    'settings' => [
+                        'title' => 'Paramètres',
+                        'info' => 'Utilisé lorsque le pilote de stockage par défaut est Amazon S3.',
+                        'key' => 'Identifiant de clé d\'accès',
+                        'key-info' => 'L\'identifiant de clé d\'accès du compte auquel appartient le bucket.',
+                        'secret' => 'Clé d\'accès secrète',
+                        'secret-info' => 'Le secret associé à l\'identifiant de clé d\'accès.',
+                        'region' => 'Région',
+                        'region-info' => 'La région dans laquelle le bucket a été créé, par exemple us-east-1.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'Le nom du bucket dans lequel les fichiers sont stockés.',
+                        'url' => 'URL',
+                        'url-info' => 'L\'adresse depuis laquelle les fichiers sont servis. Laissez vide pour utiliser l\'adresse fournie par le service.',
+                        'endpoint' => 'Point de terminaison',
+                        'endpoint-info' => 'Nécessaire uniquement pour un service autre qu\'Amazon S3, par exemple auto-hébergé. Laissez vide pour Amazon S3.',
+                        'use-path-style-endpoint' => 'Utiliser un point de terminaison par chemin',
+                        'use-path-style-endpoint-info' => 'Activez cette option pour un service auto-hébergé qui adresse les buckets par un chemin plutôt que par un sous-domaine.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Identifiants pour le stockage d\'objets Cloudflare R2.',
+
+                    'settings' => [
+                        'title' => 'Paramètres',
+                        'info' => 'Utilisé lorsque le pilote de stockage par défaut est Cloudflare R2.',
+                        'account-id' => 'Identifiant de compte',
+                        'account-id-info' => 'Le compte Cloudflare auquel appartient le bucket. L\'adresse de R2 en est déduite, aucun point de terminaison n\'est donc nécessaire.',
+                        'key' => 'Identifiant de clé d\'accès',
+                        'key-info' => 'L\'identifiant de clé d\'accès d\'un jeton d\'API R2.',
+                        'secret' => 'Clé d\'accès secrète',
+                        'secret-info' => 'Le secret associé à l\'identifiant de clé d\'accès.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'Le nom du bucket R2 dans lequel les fichiers sont stockés.',
+                        'url' => 'URL publique',
+                        'url-info' => 'L\'adresse depuis laquelle les fichiers sont servis, soit l\'adresse publique du bucket, soit un domaine personnalisé. Un bucket R2 reste privé tant qu\'aucune adresse n\'est définie, sans elle les fichiers seront inaccessibles.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Gestion du cache',
                 'info' => 'Gérez le cache de l\'application, effacez ou reconstruisez les données en cache pour la configuration, les routes, les vues et plus encore.',

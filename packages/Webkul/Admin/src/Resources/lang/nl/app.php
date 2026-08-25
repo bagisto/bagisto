@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'Bestandsbeheer',
+                'info' => 'Kies waar geüploade bestanden worden opgeslagen en configureer de opslagdienst.',
+
+                'general' => [
+                    'title' => 'Algemeen',
+                    'info' => 'De opslag die de hele winkel gebruikt voor geüploade bestanden.',
+
+                    'settings' => [
+                        'title' => 'Instellingen',
+                        'info' => 'Kies de opslag waarin bestanden worden bewaard en van waaruit ze worden geleverd.',
+                        'default-driver' => 'Standaard opslagstuurprogramma',
+                        'default-driver-info' => 'Bestanden die vanaf nu worden geüpload, worden hier opgeslagen. Reeds geüploade bestanden blijven op de vorige opslag staan: kopieer ze vóór het wisselen, anders worden ze niet gevonden.',
+
+                        'drivers' => [
+                            'local' => 'Bestand (lokale opslag)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Inloggegevens voor Amazon S3 of een dienst die dezelfde API ondersteunt.',
+
+                    'settings' => [
+                        'title' => 'Instellingen',
+                        'info' => 'Wordt gebruikt wanneer het standaard opslagstuurprogramma op Amazon S3 staat.',
+                        'key' => 'Toegangssleutel-ID',
+                        'key-info' => 'De toegangssleutel-ID van het account waartoe de bucket behoort.',
+                        'secret' => 'Geheime toegangssleutel',
+                        'secret-info' => 'Het geheim dat bij de toegangssleutel-ID hoort.',
+                        'region' => 'Regio',
+                        'region-info' => 'De regio waarin de bucket is aangemaakt, bijvoorbeeld us-east-1.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'De naam van de bucket waarin de bestanden worden opgeslagen.',
+                        'url' => 'URL',
+                        'url-info' => 'Het adres van waaruit de bestanden worden geleverd. Laat leeg om het adres van de dienst zelf te gebruiken.',
+                        'endpoint' => 'Endpoint',
+                        'endpoint-info' => 'Alleen nodig voor een andere dienst dan Amazon S3, bijvoorbeeld een zelf gehoste. Laat leeg voor Amazon S3.',
+                        'use-path-style-endpoint' => 'Endpoint met pad gebruiken',
+                        'use-path-style-endpoint-info' => 'Schakel dit in voor een zelf gehoste dienst die buckets als pad in plaats van als subdomein adresseert.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Inloggegevens voor de objectopslag Cloudflare R2.',
+
+                    'settings' => [
+                        'title' => 'Instellingen',
+                        'info' => 'Wordt gebruikt wanneer het standaard opslagstuurprogramma op Cloudflare R2 staat.',
+                        'account-id' => 'Account-ID',
+                        'account-id-info' => 'Het Cloudflare-account waartoe de bucket behoort. Het adres van R2 wordt hieruit opgebouwd, dus een endpoint is niet nodig.',
+                        'key' => 'Toegangssleutel-ID',
+                        'key-info' => 'De toegangssleutel-ID van een R2-API-token.',
+                        'secret' => 'Geheime toegangssleutel',
+                        'secret-info' => 'Het geheim dat bij de toegangssleutel-ID hoort.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'De naam van de R2-bucket waarin de bestanden worden opgeslagen.',
+                        'url' => 'Openbare URL',
+                        'url-info' => 'Het adres van waaruit de bestanden worden geleverd, ofwel het openbare adres van de bucket ofwel een eigen domein. Een R2-bucket is privé totdat er een is ingesteld, zonder dit adres zijn de bestanden niet bereikbaar.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Cachebeheer',
                 'info' => 'Beheer de applicatiecache, wis of herbouw gecachte gegevens voor configuratie, routes, weergaven en meer.',

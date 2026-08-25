@@ -210,8 +210,11 @@
                                 <td class="px-4 py-4 align-top">
                                     <div class="flex items-start gap-3">
                                         @if ($item->orderItem->product?->images?->first())
+                                            @php ($baseImage = product_image()->getProductBaseImage($item->orderItem->product))
+
                                             <img
-                                                src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}"
+                                                src="{{ $baseImage['small_image_url'] }}"
+                                                alt="{{ $baseImage['alt'] }}"
                                                 class="h-16 w-16 shrink-0 rounded-lg border object-cover"
                                             />
                                         @else
@@ -288,8 +291,11 @@
                     <div class="rounded-xl border shadow-xs p-4 space-y-3">
                         <div class="flex items-center gap-3">
                             @if ($item->orderItem->product?->images?->first())
-                                <img 
-                                    src="{{ asset('storage/' . $item->orderItem->product->images->first()->path) }}" 
+                                @php ($baseImage = product_image()->getProductBaseImage($item->orderItem->product))
+
+                                <img
+                                    src="{{ $baseImage['small_image_url'] }}"
+                                    alt="{{ $baseImage['alt'] }}"
                                     class="w-16 h-16 object-cover rounded-sm border"
                                 />
                             @else
@@ -482,7 +488,7 @@
                                     <div v-if="message.attachment" class="mt-2 flex items-center gap-2">
                                         <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l7.071-7.071a4 4 0 00-5.657-5.657l-7.071 7.07a6 6 0 108.485 8.486L20.485 13"/></svg>
                                         <a
-                                            @click="viewAttachmentModal(message.attachment_path)"
+                                            @click="viewAttachmentModal(message.attachment_url)"
                                             class="text-xs max-sm:text-xs hover:underline cursor-pointer text-blue-700"
                                         >
                                             @{{ message.attachment }}
@@ -514,13 +520,13 @@
                     <x-slot:content>
                         <img
                             v-if="messagePath && (getAttachmentExtension === 'jpg' || getAttachmentExtension === 'jpeg' || getAttachmentExtension === 'png' || getAttachmentExtension === 'gif')"
-                            :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
+                            :src="messagePath"
                             class="min-h-125 min-w-125 max-h-125 max-w-125 max-md:min-h-75 max-md:min-w-75 max-md:max-h-75 max-md:max-w-75 rounded-sm m-auto"
                         />
 
                         <embed
                             v-if="messagePath && getAttachmentExtension === 'pdf'"
-                            :src="'{{ config('app.url') }}' + '/storage/' + messagePath"
+                            :src="messagePath"
                             width="100%" height="500px"
                             type="application/pdf"
                         />
@@ -530,7 +536,7 @@
                             controls
                             class="w-full h-auto max-h-125 max-md:max-h-75 rounded-sm m-auto"
                         >
-                            <source :src="'{{ config('app.url') }}' + '/storage/' + messagePath" />
+                            <source :src="messagePath" />
                         </video>
                     </x-slot>
 
@@ -615,10 +621,9 @@
                     },
 
                     downloadAttachment(messagePath) {
-                        const imageUrl = `{{ config('app.url') }}/storage/${messagePath}`;
                         const link = document.createElement('a');
-                        link.href = imageUrl;
-                        link.download = imageUrl.split('/').pop();
+                        link.href = messagePath;
+                        link.download = messagePath.split('/').pop();
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);

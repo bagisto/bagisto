@@ -9,9 +9,7 @@ return new class extends Migration
     /**
      * The option keys that hold an authored document rather than a stored path.
      *
-     * Static content records markup, and that markup carries `/storage/` urls of its
-     * own. They are addresses inside a document, not the path of an upload, so they
-     * are left exactly as the operator wrote them.
+     * Their `/storage/` urls are addresses inside a document, not upload paths.
      */
     protected const DOCUMENT_KEYS = ['html', 'css'];
 
@@ -103,9 +101,8 @@ return new class extends Migration
     /**
      * Drop the `storage/` prefix a section upload was recorded with.
      *
-     * Only the directories sections have ever stored uploads in are rewritten. A
-     * field holding a link the operator typed is left alone, even where it happens
-     * to address something else under `storage/`.
+     * Only the directories sections keep uploads in are rewritten, so a link the
+     * operator typed is left alone.
      */
     protected function withoutPrefix(string $value): string
     {

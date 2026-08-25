@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'Dateiverwaltung',
+                'info' => 'Legen Sie fest, wo hochgeladene Dateien gespeichert werden, und konfigurieren Sie den Speicherdienst.',
+
+                'general' => [
+                    'title' => 'Allgemein',
+                    'info' => 'Der Speicher, den der gesamte Shop für hochgeladene Dateien verwendet.',
+
+                    'settings' => [
+                        'title' => 'Einstellungen',
+                        'info' => 'Wählen Sie den Speicher, in dem Dateien abgelegt und von dem sie ausgeliefert werden.',
+                        'default-driver' => 'Standard-Speichertreiber',
+                        'default-driver-info' => 'Ab sofort hochgeladene Dateien werden hier gespeichert. Bereits hochgeladene Dateien verbleiben auf dem bisherigen Speicher. Kopieren Sie diese vor dem Wechsel, sonst werden sie nicht gefunden.',
+
+                        'drivers' => [
+                            'local' => 'Datei (Lokaler Speicher)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Zugangsdaten für Amazon S3 oder einen beliebigen Dienst, der dessen API unterstützt.',
+
+                    'settings' => [
+                        'title' => 'Einstellungen',
+                        'info' => 'Wird verwendet, wenn als Standard-Speichertreiber Amazon S3 eingestellt ist.',
+                        'key' => 'Zugriffsschlüssel-ID',
+                        'key-info' => 'Die Zugriffsschlüssel-ID des Kontos, zu dem der Bucket gehört.',
+                        'secret' => 'Geheimer Zugriffsschlüssel',
+                        'secret-info' => 'Das Geheimnis, das zur Zugriffsschlüssel-ID gehört.',
+                        'region' => 'Region',
+                        'region-info' => 'Die Region, in der der Bucket erstellt wurde, zum Beispiel us-east-1.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'Der Name des Buckets, in dem die Dateien gespeichert werden.',
+                        'url' => 'URL',
+                        'url-info' => 'Die Adresse, von der die Dateien ausgeliefert werden. Leer lassen, um die vom Dienst bereitgestellte Adresse zu verwenden.',
+                        'endpoint' => 'Endpunkt',
+                        'endpoint-info' => 'Nur für einen anderen Dienst als Amazon S3 erforderlich, etwa einen selbst gehosteten. Für Amazon S3 leer lassen.',
+                        'use-path-style-endpoint' => 'Pfadbasierten Endpunkt verwenden',
+                        'use-path-style-endpoint-info' => 'Aktivieren Sie dies für einen selbst gehosteten Dienst, der Buckets als Pfad statt als Subdomain adressiert.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Zugangsdaten für den Objektspeicher Cloudflare R2.',
+
+                    'settings' => [
+                        'title' => 'Einstellungen',
+                        'info' => 'Wird verwendet, wenn als Standard-Speichertreiber Cloudflare R2 eingestellt ist.',
+                        'account-id' => 'Konto-ID',
+                        'account-id-info' => 'Das Cloudflare-Konto, zu dem der Bucket gehört. Die Adresse von R2 wird daraus gebildet, ein Endpunkt ist daher nicht erforderlich.',
+                        'key' => 'Zugriffsschlüssel-ID',
+                        'key-info' => 'Die Zugriffsschlüssel-ID eines R2-API-Tokens.',
+                        'secret' => 'Geheimer Zugriffsschlüssel',
+                        'secret-info' => 'Das Geheimnis, das zur Zugriffsschlüssel-ID gehört.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'Der Name des R2-Buckets, in dem die Dateien gespeichert werden.',
+                        'url' => 'Öffentliche URL',
+                        'url-info' => 'Die Adresse, von der die Dateien ausgeliefert werden, entweder die öffentliche Adresse des Buckets oder eine eigene Domain. Ein R2-Bucket ist privat, bis eine Adresse gesetzt ist, ohne sie sind die Dateien nicht erreichbar.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Cache-Verwaltung',
                 'info' => 'Anwendungscache verwalten, zwischengespeicherte Daten für Konfiguration, Routen, Ansichten und mehr löschen oder neu aufbauen.',

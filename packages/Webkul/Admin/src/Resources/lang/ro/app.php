@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'Gestionarea fișierelor',
+                'info' => 'Alegeți unde sunt stocate fișierele încărcate și configurați serviciul de stocare.',
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'Stocarea folosită de întregul magazin pentru fișierele încărcate.',
+
+                    'settings' => [
+                        'title' => 'Setări',
+                        'info' => 'Alegeți stocarea în care fișierele sunt salvate și din care sunt servite.',
+                        'default-driver' => 'Driver de stocare implicit',
+                        'default-driver-info' => 'Fișierele încărcate de acum înainte vor fi salvate aici. Fișierele deja încărcate rămân pe stocarea anterioară, așa că le copiați înainte de comutare, altfel nu vor fi găsite.',
+
+                        'drivers' => [
+                            'local' => 'Fișier (stocare locală)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Credențiale pentru Amazon S3 sau pentru orice serviciu compatibil cu API-ul său.',
+
+                    'settings' => [
+                        'title' => 'Setări',
+                        'info' => 'Se folosesc când driverul de stocare implicit este Amazon S3.',
+                        'key' => 'ID cheie de acces',
+                        'key-info' => 'ID-ul cheii de acces al contului căruia îi aparține bucket-ul.',
+                        'secret' => 'Cheie de acces secretă',
+                        'secret-info' => 'Secretul asociat ID-ului cheii de acces.',
+                        'region' => 'Regiune',
+                        'region-info' => 'Regiunea în care a fost creat bucket-ul, de exemplu us-east-1.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'Numele bucket-ului în care sunt stocate fișierele.',
+                        'url' => 'URL',
+                        'url-info' => 'Adresa de la care sunt servite fișierele. Lăsați gol pentru a folosi adresa oferită de serviciu.',
+                        'endpoint' => 'Endpoint',
+                        'endpoint-info' => 'Necesar doar pentru un serviciu diferit de Amazon S3, de exemplu unul găzduit propriu. Lăsați gol pentru Amazon S3.',
+                        'use-path-style-endpoint' => 'Folosește endpoint cu cale',
+                        'use-path-style-endpoint-info' => 'Activați pentru un serviciu găzduit propriu care adresează bucket-urile ca o cale, nu ca un subdomeniu.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Credențiale pentru stocarea de obiecte Cloudflare R2.',
+
+                    'settings' => [
+                        'title' => 'Setări',
+                        'info' => 'Se folosesc când driverul de stocare implicit este Cloudflare R2.',
+                        'account-id' => 'ID cont',
+                        'account-id-info' => 'Contul Cloudflare căruia îi aparține bucket-ul. Adresa R2 este construită din el, așa că nu este nevoie de niciun endpoint.',
+                        'key' => 'ID cheie de acces',
+                        'key-info' => 'ID-ul cheii de acces al unui token API R2.',
+                        'secret' => 'Cheie de acces secretă',
+                        'secret-info' => 'Secretul asociat ID-ului cheii de acces.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'Numele bucket-ului R2 în care sunt stocate fișierele.',
+                        'url' => 'URL public',
+                        'url-info' => 'Adresa de la care sunt servite fișierele, fie adresa publică a bucket-ului, fie un domeniu propriu. Un bucket R2 este privat până când este setată una, fără ea fișierele nu vor fi accesibile.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Cache Management',
                 'info' => 'Manage application cache, clear or rebuild cached data for configuration, routes, views, and more.',

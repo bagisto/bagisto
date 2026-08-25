@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'Zarządzanie plikami',
+                'info' => 'Wybierz, gdzie przechowywane są przesłane pliki, i skonfiguruj usługę magazynu.',
+
+                'general' => [
+                    'title' => 'Ogólne',
+                    'info' => 'Magazyn używany przez cały sklep do przesłanych plików.',
+
+                    'settings' => [
+                        'title' => 'Ustawienia',
+                        'info' => 'Wybierz magazyn, w którym pliki są zapisywane i z którego są udostępniane.',
+                        'default-driver' => 'Domyślny sterownik magazynu',
+                        'default-driver-info' => 'Pliki przesłane od teraz będą zapisywane tutaj. Pliki przesłane wcześniej pozostają w poprzednim magazynie, więc skopiuj je przed zmianą, w przeciwnym razie nie zostaną odnalezione.',
+
+                        'drivers' => [
+                            'local' => 'Plik (magazyn lokalny)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Dane uwierzytelniające do Amazon S3 lub dowolnej usługi zgodnej z jego API.',
+
+                    'settings' => [
+                        'title' => 'Ustawienia',
+                        'info' => 'Używane, gdy domyślnym sterownikiem magazynu jest Amazon S3.',
+                        'key' => 'Identyfikator klucza dostępu',
+                        'key-info' => 'Identyfikator klucza dostępu konta, do którego należy zasobnik.',
+                        'secret' => 'Tajny klucz dostępu',
+                        'secret-info' => 'Tajny klucz powiązany z identyfikatorem klucza dostępu.',
+                        'region' => 'Region',
+                        'region-info' => 'Region, w którym utworzono zasobnik, na przykład us-east-1.',
+                        'bucket' => 'Zasobnik',
+                        'bucket-info' => 'Nazwa zasobnika, w którym przechowywane są pliki.',
+                        'url' => 'URL',
+                        'url-info' => 'Adres, spod którego udostępniane są pliki. Pozostaw puste, aby użyć adresu udostępnianego przez usługę.',
+                        'endpoint' => 'Punkt końcowy',
+                        'endpoint-info' => 'Wymagany tylko dla usługi innej niż Amazon S3, na przykład hostowanej samodzielnie. Dla Amazon S3 pozostaw puste.',
+                        'use-path-style-endpoint' => 'Użyj punktu końcowego ze ścieżką',
+                        'use-path-style-endpoint-info' => 'Włącz dla samodzielnie hostowanej usługi, która adresuje zasobniki jako ścieżkę, a nie subdomenę.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Dane uwierzytelniające do magazynu obiektów Cloudflare R2.',
+
+                    'settings' => [
+                        'title' => 'Ustawienia',
+                        'info' => 'Używane, gdy domyślnym sterownikiem magazynu jest Cloudflare R2.',
+                        'account-id' => 'Identyfikator konta',
+                        'account-id-info' => 'Konto Cloudflare, do którego należy zasobnik. Adres R2 jest z niego tworzony, więc punkt końcowy nie jest potrzebny.',
+                        'key' => 'Identyfikator klucza dostępu',
+                        'key-info' => 'Identyfikator klucza dostępu tokenu API R2.',
+                        'secret' => 'Tajny klucz dostępu',
+                        'secret-info' => 'Tajny klucz powiązany z identyfikatorem klucza dostępu.',
+                        'bucket' => 'Zasobnik',
+                        'bucket-info' => 'Nazwa zasobnika R2, w którym przechowywane są pliki.',
+                        'url' => 'Publiczny adres URL',
+                        'url-info' => 'Adres, spod którego udostępniane są pliki: publiczny adres zasobnika albo własna domena. Zasobnik R2 jest prywatny, dopóki adres nie zostanie ustawiony, bez niego pliki będą niedostępne.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Pamięć podręczna (Cache)',
                 'info' => 'Zarządzaj pamięcią podręczną sklepu. Czyść lub generuj na nowo cache konfiguracji, widoków, tras i innych elementów.',

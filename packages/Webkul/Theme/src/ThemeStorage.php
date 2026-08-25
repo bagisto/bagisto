@@ -13,12 +13,10 @@ class ThemeStorage
     public const SIZES = ['large', 'medium', 'small'];
 
     /**
-     * Resolve a stored path to the url the storefront requests it from.
+     * Resolve a stored path to the url it is served from.
      *
-     * A theme records the path an upload was stored at, never a url, so the same
-     * row resolves against whichever disk is configured rather than freezing the
-     * domain that was live when the operator uploaded the file. Videos are served
-     * from the disk the same way images are.
+     * A local disk is addressed through the site, so an image and its resized
+     * copies come from the one origin the page was asked for.
      */
     public function url(?string $path): ?string
     {
@@ -41,10 +39,6 @@ class ThemeStorage
 
     /**
      * Resolve a stored image to the url for a resized copy.
-     *
-     * Only images are resized — the image cache route reads local files and
-     * decodes what it is given — so a remote disk, and any file it cannot
-     * resize, is handed the original instead of a url that would fail.
      */
     public function resizedUrl(?string $path, string $size): ?string
     {
@@ -54,11 +48,8 @@ class ThemeStorage
             return null;
         }
 
-        if (
-            $this->isAbsolute($path)
-            || ! $this->isDriverLocal()
-        ) {
-            return $this->url($path);
+        if ($this->isAbsolute($path)) {
+            return $path;
         }
 
         return url('cache/'.$size.'/'.$path);
@@ -92,46 +83,47 @@ class ThemeStorage
     /**
      * Resolve a stored path to the url to write into authored markup.
      *
-     * Custom html keeps whatever url it was written with, so the url must not carry
-     * a domain that can later change. A local disk is addressed from the site root,
-     * which survives the app moving domain; a remote disk is addressed in full,
-     * because its host is the bucket's rather than the application's.
+     * Markup keeps whatever url it is given, so a local disk is addressed from the
+     * site root rather than with a domain that can later change.
      */
     public function embedUrl(?string $path): ?string
     {
-        $normalized = $this->normalize($path);
+        $path = $this->normalize($path);
 
-        if (is_null($normalized)) {
+        if (is_null($path)) {
             return null;
         }
 
         if (
-            $this->isAbsolute($normalized)
+            $this->isAbsolute($path)
             || ! $this->isDriverLocal()
         ) {
-            return $this->url($normalized);
+            return $this->url($path);
         }
 
-        return $this->pathOnSite($normalized);
+        return $this->pathOnSite($path);
     }
 
     /**
      * The url a stored path is resolved against.
      *
-     * The admin editor previews a path it has only just recorded, so it needs the
-     * same base the storefront resolves against rather than assuming `/storage/`.
+     * Read off a resolved path because a remote disk rejects an empty key.
      */
     public function base(): string
     {
-        return Storage::url('');
+        $sentinel = '__base__';
+
+        $url = (string) $this->url($sentinel);
+
+        return str_ends_with($url, $sentinel)
+            ? substr($url, 0, -strlen($sentinel))
+            : $url;
     }
 
     /**
      * Reduce a stored value to the path it names on the disk.
      *
-     * A `storage/` prefixed path was stored before the path and the url were
-     * separated, and custom themes may still hand one over, so the prefix is
-     * tolerated on read rather than assumed to be gone.
+     * The `storage/` prefix used before paths and urls were separated is tolerated.
      */
     public function normalize(?string $path): ?string
     {
@@ -156,22 +148,25 @@ class ThemeStorage
 
     /**
      * Where a stored path is served from, as a path on this site.
-     *
-     * A local disk is published under the site itself, so everything it serves is
-     * addressed from the root. That keeps an image on the host the page was asked
-     * for, alongside the resized copies the image cache route answers.
      */
-    private function pathOnSite(string $path): string
+    protected function pathOnSite(string $path): string
     {
         $published = parse_url((string) Storage::url($path), PHP_URL_PATH);
 
-        return is_string($published) && $published !== '' ? $published : '/storage/'.$path;
+        if (
+            ! is_string($published)
+            || $published === ''
+        ) {
+            return '/storage/'.$path;
+        }
+
+        return $published;
     }
 
     /**
      * Whether the value is already a url rather than a path on the disk.
      */
-    private function isAbsolute(string $path): bool
+    protected function isAbsolute(string $path): bool
     {
         return str_starts_with($path, 'http://')
             || str_starts_with($path, 'https://')
@@ -181,7 +176,7 @@ class ThemeStorage
     /**
      * Whether the configured disk is served from the local filesystem.
      */
-    private function isDriverLocal(): bool
+    protected function isDriverLocal(): bool
     {
         return Storage::getAdapter() instanceof LocalFilesystemAdapter;
     }

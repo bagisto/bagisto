@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'Manajemen Berkas',
+                'info' => 'Pilih tempat penyimpanan berkas yang diunggah dan atur layanan penyimpanannya.',
+
+                'general' => [
+                    'title' => 'Umum',
+                    'info' => 'Penyimpanan yang digunakan seluruh toko untuk berkas yang diunggah.',
+
+                    'settings' => [
+                        'title' => 'Pengaturan',
+                        'info' => 'Pilih penyimpanan tempat berkas disimpan dan disajikan.',
+                        'default-driver' => 'Driver Penyimpanan Bawaan',
+                        'default-driver-info' => 'Berkas yang diunggah mulai sekarang akan disimpan di sini. Berkas yang sudah diunggah tetap berada di penyimpanan sebelumnya, jadi salin dulu sebelum berpindah atau berkas tidak akan ditemukan.',
+
+                        'drivers' => [
+                            'local' => 'Berkas (Penyimpanan Lokal)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Kredensial untuk Amazon S3 atau layanan apa pun yang mendukung API-nya.',
+
+                    'settings' => [
+                        'title' => 'Pengaturan',
+                        'info' => 'Digunakan saat driver penyimpanan bawaan diatur ke Amazon S3.',
+                        'key' => 'ID Kunci Akses',
+                        'key-info' => 'ID kunci akses dari akun pemilik bucket.',
+                        'secret' => 'Kunci Akses Rahasia',
+                        'secret-info' => 'Rahasia yang berpasangan dengan ID kunci akses.',
+                        'region' => 'Wilayah',
+                        'region-info' => 'Wilayah tempat bucket dibuat, misalnya us-east-1.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'Nama bucket tempat berkas disimpan.',
+                        'url' => 'URL',
+                        'url-info' => 'Alamat tempat berkas disajikan. Biarkan kosong untuk memakai alamat yang disediakan layanan.',
+                        'endpoint' => 'Endpoint',
+                        'endpoint-info' => 'Hanya diperlukan untuk layanan selain Amazon S3, misalnya yang dihosting sendiri. Biarkan kosong untuk Amazon S3.',
+                        'use-path-style-endpoint' => 'Gunakan Endpoint Bergaya Jalur',
+                        'use-path-style-endpoint-info' => 'Aktifkan untuk layanan yang dihosting sendiri yang mengalamatkan bucket sebagai jalur, bukan subdomain.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Kredensial untuk penyimpanan objek Cloudflare R2.',
+
+                    'settings' => [
+                        'title' => 'Pengaturan',
+                        'info' => 'Digunakan saat driver penyimpanan bawaan diatur ke Cloudflare R2.',
+                        'account-id' => 'ID Akun',
+                        'account-id-info' => 'Akun Cloudflare pemilik bucket. Alamat R2 dibentuk dari akun ini, sehingga endpoint tidak diperlukan.',
+                        'key' => 'ID Kunci Akses',
+                        'key-info' => 'ID kunci akses dari token API R2.',
+                        'secret' => 'Kunci Akses Rahasia',
+                        'secret-info' => 'Rahasia yang berpasangan dengan ID kunci akses.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'Nama bucket R2 tempat berkas disimpan.',
+                        'url' => 'URL Publik',
+                        'url-info' => 'Alamat tempat berkas disajikan, bisa alamat publik bucket atau domain sendiri. Bucket R2 bersifat privat sampai alamat ini diisi, tanpa itu berkas tidak dapat diakses.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Manajemen Cache',
                 'info' => 'Kelola cache aplikasi, hapus atau bangun ulang data cache untuk konfigurasi, rute, tampilan, dan lainnya.',

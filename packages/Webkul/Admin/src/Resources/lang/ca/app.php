@@ -5450,6 +5450,73 @@ return [
                 ],
             ],
 
+            'file-management' => [
+                'title' => 'Gestió de fitxers',
+                'info' => 'Trieu on s\'emmagatzemen els fitxers pujats i configureu el servei d\'emmagatzematge.',
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'L\'emmagatzematge que tota la botiga utilitza per als fitxers pujats.',
+
+                    'settings' => [
+                        'title' => 'Configuració',
+                        'info' => 'Trieu l\'emmagatzematge on es desen els fitxers i des d\'on se serveixen.',
+                        'default-driver' => 'Controlador d\'emmagatzematge per defecte',
+                        'default-driver-info' => 'Els fitxers pujats a partir d\'ara es desaran aquí. Els fitxers ja pujats es queden a l\'emmagatzematge anterior: copieu-los abans de canviar o no es trobaran.',
+
+                        'drivers' => [
+                            'local' => 'Fitxer (emmagatzematge local)',
+                            's3' => 'Amazon S3',
+                            'r2' => 'Cloudflare R2',
+                        ],
+                    ],
+                ],
+
+                'amazon-s3' => [
+                    'title' => 'Amazon S3',
+                    'info' => 'Credencials per a Amazon S3 o qualsevol servei compatible amb la seva API.',
+
+                    'settings' => [
+                        'title' => 'Configuració',
+                        'info' => 'S\'utilitza quan el controlador d\'emmagatzematge per defecte és Amazon S3.',
+                        'key' => 'ID de clau d\'accés',
+                        'key-info' => 'L\'ID de clau d\'accés del compte al qual pertany el bucket.',
+                        'secret' => 'Clau d\'accés secreta',
+                        'secret-info' => 'El secret associat a l\'ID de clau d\'accés.',
+                        'region' => 'Regió',
+                        'region-info' => 'La regió on s\'ha creat el bucket, per exemple us-east-1.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'El nom del bucket on s\'emmagatzemen els fitxers.',
+                        'url' => 'URL',
+                        'url-info' => 'L\'adreça des d\'on se serveixen els fitxers. Deixeu-ho buit per fer servir l\'adreça que proporciona el servei.',
+                        'endpoint' => 'Endpoint',
+                        'endpoint-info' => 'Només cal per a un servei diferent d\'Amazon S3, com ara un d\'autoallotjat. Deixeu-ho buit per a Amazon S3.',
+                        'use-path-style-endpoint' => 'Utilitza un endpoint per camí',
+                        'use-path-style-endpoint-info' => 'Activeu-ho per a un servei autoallotjat que adreça els buckets com a camí en lloc de subdomini.',
+                    ],
+                ],
+
+                'cloudflare-r2' => [
+                    'title' => 'Cloudflare R2',
+                    'info' => 'Credencials per a l\'emmagatzematge d\'objectes Cloudflare R2.',
+
+                    'settings' => [
+                        'title' => 'Configuració',
+                        'info' => 'S\'utilitza quan el controlador d\'emmagatzematge per defecte és Cloudflare R2.',
+                        'account-id' => 'ID del compte',
+                        'account-id-info' => 'El compte de Cloudflare al qual pertany el bucket. L\'adreça de R2 es construeix a partir d\'ell, de manera que no cal cap endpoint.',
+                        'key' => 'ID de clau d\'accés',
+                        'key-info' => 'L\'ID de clau d\'accés d\'un testimoni d\'API de R2.',
+                        'secret' => 'Clau d\'accés secreta',
+                        'secret-info' => 'El secret associat a l\'ID de clau d\'accés.',
+                        'bucket' => 'Bucket',
+                        'bucket-info' => 'El nom del bucket de R2 on s\'emmagatzemen els fitxers.',
+                        'url' => 'URL pública',
+                        'url-info' => 'L\'adreça des d\'on se serveixen els fitxers, ja sigui l\'adreça pública del bucket o un domini propi. Un bucket de R2 és privat fins que se\'n defineix una; sense ella els fitxers no seran accessibles.',
+                    ],
+                ],
+            ],
+
             'cache-management' => [
                 'title' => 'Gestió de memòria cau',
                 'info' => 'Gestioneu la memòria cau de l\'aplicació, esborreu o reconstruïu les dades en memòria cau per a la configuració, rutes, vistes i molt més.',

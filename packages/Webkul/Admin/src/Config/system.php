@@ -3511,4 +3511,164 @@ return [
             ],
         ],
     ],
+
+    /**
+     * File Management.
+     */
+    [
+        'key' => 'file_management',
+        'name' => 'admin::app.configuration.index.file-management.title',
+        'info' => 'admin::app.configuration.index.file-management.info',
+        'sort' => 8,
+    ], [
+        'key' => 'file_management.general',
+        'name' => 'admin::app.configuration.index.file-management.general.title',
+        'info' => 'admin::app.configuration.index.file-management.general.info',
+        'icon' => 'settings/settings.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'file_management.general.settings',
+        'name' => 'admin::app.configuration.index.file-management.general.settings.title',
+        'info' => 'admin::app.configuration.index.file-management.general.settings.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'default_driver',
+                'title' => 'admin::app.configuration.index.file-management.general.settings.default-driver',
+                'info' => 'admin::app.configuration.index.file-management.general.settings.default-driver-info',
+                'type' => 'select',
+                'default' => 'public',
+                'channel_based' => false,
+                'locale_based' => false,
+                'options' => [
+                    [
+                        'title' => 'admin::app.configuration.index.file-management.general.settings.drivers.local',
+                        'value' => 'public',
+                    ], [
+                        'title' => 'admin::app.configuration.index.file-management.general.settings.drivers.s3',
+                        'value' => 's3',
+                    ], [
+                        'title' => 'admin::app.configuration.index.file-management.general.settings.drivers.r2',
+                        'value' => 'r2',
+                    ],
+                ],
+            ],
+        ],
+    ], [
+        'key' => 'file_management.amazon_s3',
+        'name' => 'admin::app.configuration.index.file-management.amazon-s3.title',
+        'info' => 'admin::app.configuration.index.file-management.amazon-s3.info',
+        'icon' => 'settings/settings.svg',
+        'sort' => 2,
+    ], [
+        'key' => 'file_management.amazon_s3.settings',
+        'name' => 'admin::app.configuration.index.file-management.amazon-s3.settings.title',
+        'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'key',
+                'title' => 'admin::app.configuration.index.file-management.amazon-s3.settings.key',
+                'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.key-info',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'secret',
+                'title' => 'admin::app.configuration.index.file-management.amazon-s3.settings.secret',
+                'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.secret-info',
+                'type' => 'password',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'region',
+                'title' => 'admin::app.configuration.index.file-management.amazon-s3.settings.region',
+                'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.region-info',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'bucket',
+                'title' => 'admin::app.configuration.index.file-management.amazon-s3.settings.bucket',
+                'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.bucket-info',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'url',
+                'title' => 'admin::app.configuration.index.file-management.amazon-s3.settings.url',
+                'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.url-info',
+                'type' => 'text',
+                'validation' => 'nullable|url',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'endpoint',
+                'title' => 'admin::app.configuration.index.file-management.amazon-s3.settings.endpoint',
+                'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.endpoint-info',
+                'type' => 'text',
+                'validation' => 'nullable|url',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'use_path_style_endpoint',
+                'title' => 'admin::app.configuration.index.file-management.amazon-s3.settings.use-path-style-endpoint',
+                'info' => 'admin::app.configuration.index.file-management.amazon-s3.settings.use-path-style-endpoint-info',
+                'type' => 'boolean',
+                'default' => false,
+                'channel_based' => false,
+                'locale_based' => false,
+            ],
+        ],
+    ], [
+        'key' => 'file_management.cloudflare_r2',
+        'name' => 'admin::app.configuration.index.file-management.cloudflare-r2.title',
+        'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.info',
+        'icon' => 'settings/settings.svg',
+        'sort' => 3,
+    ], [
+        'key' => 'file_management.cloudflare_r2.settings',
+        'name' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.title',
+        'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'account_id',
+                'title' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.account-id',
+                'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.account-id-info',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'key',
+                'title' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.key',
+                'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.key-info',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'secret',
+                'title' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.secret',
+                'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.secret-info',
+                'type' => 'password',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'bucket',
+                'title' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.bucket',
+                'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.bucket-info',
+                'type' => 'text',
+                'channel_based' => false,
+                'locale_based' => false,
+            ], [
+                'name' => 'url',
+                'title' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.url',
+                'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.settings.url-info',
+                'type' => 'text',
+                'validation' => 'nullable|url',
+                'channel_based' => false,
+                'locale_based' => false,
+            ],
+        ],
+    ],
 ];

@@ -19,10 +19,8 @@ return new class extends Migration
     /**
      * Run the migrations.
      *
-     * Two things a section recorded outgrew the site they were recorded on. A link
-     * was stored as a whole url, so moving domain left it pointing at the old one;
-     * and an upload written into custom html was addressed relative to the page,
-     * so it resolved differently on a nested url than on the home page.
+     * A link stored as a whole url does not survive a change of domain, and an
+     * upload addressed relative to the page does not survive a nested url.
      */
     public function up(): void
     {
@@ -147,6 +145,9 @@ return new class extends Migration
 
     /**
      * Put a path back as a url on the current domain.
+     *
+     * An upload reads the same as a relative link, so the directories a section
+     * keeps its uploads in are how the two are told apart.
      */
     protected function asUrl(string $value): string
     {
@@ -155,6 +156,7 @@ return new class extends Migration
             || parse_url($value, PHP_URL_SCHEME)
             || str_starts_with($value, '#')
             || str_starts_with($value, '//')
+            || preg_match('#^/?('.self::MEDIA_DIRECTORIES.')/#', $value)
         ) {
             return $value;
         }

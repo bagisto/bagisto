@@ -210,11 +210,8 @@ class SectionController extends Controller
     }
 
     /**
-     * Store one uploaded image for a section and hand back the path to record in its
-     * options, so a schema driven field can upload without knowing the form shape.
-     *
-     * The url to write into custom html is returned beside it. Only the path is
-     * recorded against a section; the url is for markup that keeps what it is given.
+     * Store one uploaded file for a section, returning the path to record and the url
+     * to write into markup.
      */
     public function uploadMedia(int $id): JsonResponse
     {

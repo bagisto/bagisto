@@ -32,9 +32,7 @@ if (! function_exists('bagisto_theme_storage')) {
     /**
      * Bagisto theme storage.
      *
-     * Resolves what a theme has stored — an upload an operator made against it — to
-     * the url it is served from. `bagisto_asset()` is the counterpart for what a
-     * theme ships: the assets its build produces.
+     * Resolves what a theme has stored, where `bagisto_asset()` resolves what it ships.
      *
      * @return ThemeStorage
      */
