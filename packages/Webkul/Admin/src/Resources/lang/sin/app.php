@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'මෙනු, සැකසුම්, පිටු සහ ක්‍රියා සොයන්න...',
+        'esc' => 'ESC',
+        'loading' => 'පූරණය වෙමින්...',
+        'no-results' => 'ප්‍රතිඵල හමු නොවීය',
+        'no-results-hint' => 'මෙනුවක්, පිටුවක්, වින්‍යාසයක් හෝ ක්‍රියාවක් සොයා බලන්න.',
+        'navigate' => 'සංචලනය',
+        'select' => 'විවෘත කරන්න',
+        'close' => 'වසන්න',
+
+        'records' => [
+            'products' => 'නිෂ්පාදන',
+            'orders' => 'ඇණවුම්',
+            'categories' => 'ප්‍රවර්ග',
+            'customers' => 'පාරිභෝගිකයින්',
+        ],
+
+        'categories' => [
+            'pages' => 'පිටු',
+            'configuration' => 'වින්‍යාසය',
+            'actions' => 'ක්‍රියා',
+            'quick-access' => 'ඉක්මන් ප්‍රවේශය',
+        ],
+
+        'actions' => [
+            'create-product' => 'නිෂ්පාදනයක් සාදන්න',
+            'create-category' => 'ප්‍රවර්ගයක් සාදන්න',
+            'create-attribute' => 'ගුණාංගයක් සාදන්න',
+            'create-order' => 'ඇණවුමක් සාදන්න',
+            'create-customer' => 'පාරිභෝගිකයෙකු සාදන්න',
+            'create-page' => 'CMS පිටුවක් සාදන්න',
+            'create-user' => 'පරිශීලකයෙකු සාදන්න',
+            'import-products' => 'නිෂ්පාදන ආයාත කරන්න',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'ආපසු',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'සියල්ල නිෂ්පාදනයන් සඳහා ගවේෂය සහිතය',
                     'orders' => 'ඇණවුම්',
                     'products' => 'නිෂ්පාදන',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'මෙගා සෙවී',
+                    'title' => 'සොයන්න හෝ Ctrl + K ඔබන්න',
                 ],
             ],
 

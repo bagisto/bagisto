@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'Cerca menús, configuració, pàgines i accions...',
+        'esc' => 'ESC',
+        'loading' => 'Carregant...',
+        'no-results' => 'Cap resultat',
+        'no-results-hint' => 'Proveu amb un menú, una pàgina, una configuració o una acció.',
+        'navigate' => 'Navega',
+        'select' => 'Obre',
+        'close' => 'Tanca',
+
+        'records' => [
+            'products' => 'Productes',
+            'orders' => 'Comandes',
+            'categories' => 'Categories',
+            'customers' => 'Clients',
+        ],
+
+        'categories' => [
+            'pages' => 'Pàgines',
+            'configuration' => 'Configuració',
+            'actions' => 'Accions',
+            'quick-access' => 'Accés ràpid',
+        ],
+
+        'actions' => [
+            'create-product' => 'Crea un producte',
+            'create-category' => 'Crea una categoria',
+            'create-attribute' => 'Crea un atribut',
+            'create-order' => 'Crea una comanda',
+            'create-customer' => 'Crea un client',
+            'create-page' => 'Crea una pàgina CMS',
+            'create-user' => 'Crea un usuari',
+            'import-products' => 'Importa productes',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'Enrere',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'Explorar tots els productes',
                     'orders' => 'Comandes',
                     'products' => 'Productes',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'Cerca avançada',
+                    'title' => 'Cerca o premeu Ctrl + K',
                 ],
             ],
 

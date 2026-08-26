@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => '搜索菜单、设置、页面和操作...',
+        'esc' => 'ESC',
+        'loading' => '加载中...',
+        'no-results' => '未找到结果',
+        'no-results-hint' => '试试搜索菜单、页面、配置或操作。',
+        'navigate' => '导航',
+        'select' => '打开',
+        'close' => '关闭',
+
+        'records' => [
+            'products' => '商品',
+            'orders' => '订单',
+            'categories' => '分类',
+            'customers' => '客户',
+        ],
+
+        'categories' => [
+            'pages' => '页面',
+            'configuration' => '配置',
+            'actions' => '操作',
+            'quick-access' => '快速访问',
+        ],
+
+        'actions' => [
+            'create-product' => '创建商品',
+            'create-category' => '创建分类',
+            'create-attribute' => '创建属性',
+            'create-order' => '创建订单',
+            'create-customer' => '创建客户',
+            'create-page' => '创建 CMS 页面',
+            'create-user' => '创建用户',
+            'import-products' => '导入商品',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => '返回',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => '浏览所有产品',
                     'orders' => '订单',
                     'products' => '产品',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU：:sku',
-                    'title' => '超级搜索',
+                    'title' => '搜索或按 Ctrl + K',
                 ],
             ],
 

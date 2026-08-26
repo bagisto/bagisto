@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'Пошук меню, налаштувань, сторінок і дій...',
+        'esc' => 'ESC',
+        'loading' => 'Завантаження...',
+        'no-results' => 'Нічого не знайдено',
+        'no-results-hint' => 'Спробуйте знайти меню, сторінку, налаштування або дію.',
+        'navigate' => 'Навігація',
+        'select' => 'Відкрити',
+        'close' => 'Закрити',
+
+        'records' => [
+            'products' => 'Товари',
+            'orders' => 'Замовлення',
+            'categories' => 'Категорії',
+            'customers' => 'Клієнти',
+        ],
+
+        'categories' => [
+            'pages' => 'Сторінки',
+            'configuration' => 'Конфігурація',
+            'actions' => 'Дії',
+            'quick-access' => 'Швидкий доступ',
+        ],
+
+        'actions' => [
+            'create-product' => 'Створити товар',
+            'create-category' => 'Створити категорію',
+            'create-attribute' => 'Створити атрибут',
+            'create-order' => 'Створити замовлення',
+            'create-customer' => 'Створити клієнта',
+            'create-page' => 'Створити CMS-сторінку',
+            'create-user' => 'Створити користувача',
+            'import-products' => 'Імпортувати товари',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'Назад',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'Досліджуйте всі товари',
                     'orders' => 'Замовлення',
                     'products' => 'Товари',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'Артикул: :sku',
-                    'title' => 'Мега Пошук',
+                    'title' => 'Пошук або натисніть Ctrl + K',
                 ],
             ],
 

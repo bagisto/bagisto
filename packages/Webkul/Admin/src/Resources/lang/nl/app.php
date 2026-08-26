@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'Zoek menus, instellingen, paginas en acties...',
+        'esc' => 'ESC',
+        'loading' => 'Laden...',
+        'no-results' => 'Geen resultaten gevonden',
+        'no-results-hint' => 'Probeer een menu, pagina, instelling of actie.',
+        'navigate' => 'Navigeren',
+        'select' => 'Openen',
+        'close' => 'Sluiten',
+
+        'records' => [
+            'products' => 'Producten',
+            'orders' => 'Bestellingen',
+            'categories' => 'Categorieën',
+            'customers' => 'Klanten',
+        ],
+
+        'categories' => [
+            'pages' => 'Paginas',
+            'configuration' => 'Configuratie',
+            'actions' => 'Acties',
+            'quick-access' => 'Snelle toegang',
+        ],
+
+        'actions' => [
+            'create-product' => 'Product aanmaken',
+            'create-category' => 'Categorie aanmaken',
+            'create-attribute' => 'Attribuut aanmaken',
+            'create-order' => 'Bestelling aanmaken',
+            'create-customer' => 'Klant aanmaken',
+            'create-page' => 'CMS-pagina aanmaken',
+            'create-user' => 'Gebruiker aanmaken',
+            'import-products' => 'Producten importeren',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'Terug',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'Verken alle producten',
                     'orders' => 'Bestellingen',
                     'products' => 'Producten',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'Mega Zoeken',
+                    'title' => 'Zoeken of druk op Ctrl + K',
                 ],
             ],
 

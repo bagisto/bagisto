@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'Menü, ayar, sayfa ve eylemlerde ara...',
+        'esc' => 'ESC',
+        'loading' => 'Yükleniyor...',
+        'no-results' => 'Sonuç bulunamadı',
+        'no-results-hint' => 'Bir menü, sayfa, ayar veya eylem aramayı deneyin.',
+        'navigate' => 'Gezin',
+        'select' => 'Aç',
+        'close' => 'Kapat',
+
+        'records' => [
+            'products' => 'Ürünler',
+            'orders' => 'Siparişler',
+            'categories' => 'Kategoriler',
+            'customers' => 'Müşteriler',
+        ],
+
+        'categories' => [
+            'pages' => 'Sayfalar',
+            'configuration' => 'Yapılandırma',
+            'actions' => 'Eylemler',
+            'quick-access' => 'Hızlı Erişim',
+        ],
+
+        'actions' => [
+            'create-product' => 'Ürün Oluştur',
+            'create-category' => 'Kategori Oluştur',
+            'create-attribute' => 'Öznitelik Oluştur',
+            'create-order' => 'Sipariş Oluştur',
+            'create-customer' => 'Müşteri Oluştur',
+            'create-page' => 'CMS Sayfası Oluştur',
+            'create-user' => 'Kullanıcı Oluştur',
+            'import-products' => 'Ürünleri İçe Aktar',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'Geri',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'Tüm ürünleri keşfet',
                     'orders' => 'Siparişler',
                     'products' => 'Ürünler',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'Stok Kodu: :sku',
-                    'title' => 'Mega Arama',
+                    'title' => 'Ara veya Ctrl + K tuşlarına bas',
                 ],
             ],
 

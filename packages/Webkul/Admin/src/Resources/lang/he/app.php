@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'חיפוש תפריטים, הגדרות, דפים ופעולות...',
+        'esc' => 'ESC',
+        'loading' => 'טוען...',
+        'no-results' => 'לא נמצאו תוצאות',
+        'no-results-hint' => 'נסו לחפש תפריט, דף, הגדרה או פעולה.',
+        'navigate' => 'ניווט',
+        'select' => 'פתיחה',
+        'close' => 'סגירה',
+
+        'records' => [
+            'products' => 'מוצרים',
+            'orders' => 'הזמנות',
+            'categories' => 'קטגוריות',
+            'customers' => 'לקוחות',
+        ],
+
+        'categories' => [
+            'pages' => 'דפים',
+            'configuration' => 'הגדרות',
+            'actions' => 'פעולות',
+            'quick-access' => 'גישה מהירה',
+        ],
+
+        'actions' => [
+            'create-product' => 'יצירת מוצר',
+            'create-category' => 'יצירת קטגוריה',
+            'create-attribute' => 'יצירת מאפיין',
+            'create-order' => 'יצירת הזמנה',
+            'create-customer' => 'יצירת לקוח',
+            'create-page' => 'יצירת דף CMS',
+            'create-user' => 'יצירת משתמש',
+            'import-products' => 'ייבוא מוצרים',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'חזור',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'גלה את כל המוצרים',
                     'orders' => 'הזמנות',
                     'products' => 'מוצרים',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'חיפוש ממוצע',
+                    'title' => 'חיפוש או Ctrl + K',
                 ],
             ],
 

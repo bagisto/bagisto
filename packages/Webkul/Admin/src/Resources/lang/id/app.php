@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'Cari menu, pengaturan, halaman, dan tindakan...',
+        'esc' => 'ESC',
+        'loading' => 'Memuat...',
+        'no-results' => 'Tidak ada hasil',
+        'no-results-hint' => 'Coba cari menu, halaman, pengaturan, atau tindakan.',
+        'navigate' => 'Navigasi',
+        'select' => 'Buka',
+        'close' => 'Tutup',
+
+        'records' => [
+            'products' => 'Produk',
+            'orders' => 'Pesanan',
+            'categories' => 'Kategori',
+            'customers' => 'Pelanggan',
+        ],
+
+        'categories' => [
+            'pages' => 'Halaman',
+            'configuration' => 'Konfigurasi',
+            'actions' => 'Tindakan',
+            'quick-access' => 'Akses Cepat',
+        ],
+
+        'actions' => [
+            'create-product' => 'Buat Produk',
+            'create-category' => 'Buat Kategori',
+            'create-attribute' => 'Buat Atribut',
+            'create-order' => 'Buat Pesanan',
+            'create-customer' => 'Buat Pelanggan',
+            'create-page' => 'Buat Halaman CMS',
+            'create-user' => 'Buat Pengguna',
+            'import-products' => 'Impor Produk',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'Kembali',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'Jelajahi semua produk',
                     'orders' => 'Pesanan',
                     'products' => 'Produk',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'Pencarian Mega',
+                    'title' => 'Cari atau tekan Ctrl + K',
                 ],
             ],
 

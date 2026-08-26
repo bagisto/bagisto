@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'جست‌وجوی منوها، تنظیمات، صفحه‌ها و کنش‌ها...',
+        'esc' => 'ESC',
+        'loading' => 'در حال بارگذاری...',
+        'no-results' => 'نتیجه‌ای یافت نشد',
+        'no-results-hint' => 'جست‌وجوی یک منو، صفحه، تنظیم یا کنش را بیازمایید.',
+        'navigate' => 'پیمایش',
+        'select' => 'گشودن',
+        'close' => 'بستن',
+
+        'records' => [
+            'products' => 'محصولات',
+            'orders' => 'سفارش‌ها',
+            'categories' => 'دسته‌بندی‌ها',
+            'customers' => 'مشتریان',
+        ],
+
+        'categories' => [
+            'pages' => 'صفحه‌ها',
+            'configuration' => 'پیکربندی',
+            'actions' => 'کنش‌ها',
+            'quick-access' => 'دسترسی سریع',
+        ],
+
+        'actions' => [
+            'create-product' => 'ساخت محصول',
+            'create-category' => 'ساخت دسته‌بندی',
+            'create-attribute' => 'ساخت ویژگی',
+            'create-order' => 'ساخت سفارش',
+            'create-customer' => 'ساخت مشتری',
+            'create-page' => 'ساخت صفحهٔ CMS',
+            'create-user' => 'ساخت کاربر',
+            'import-products' => 'درون‌ریزی محصولات',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'بازگشت',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'مشاهده تمام محصولات',
                     'orders' => 'سفارش‌ها',
                     'products' => 'محصولات',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'جستجوی فراگیر',
+                    'title' => 'جست‌وجو یا Ctrl + K',
                 ],
             ],
 

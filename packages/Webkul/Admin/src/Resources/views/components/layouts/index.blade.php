@@ -97,6 +97,9 @@
         <!-- Confirm Modal Blade Component -->
         <x-admin::modal.confirm />
 
+        <!-- Command Palette Blade Component -->
+        <x-admin::command-palette />
+
         {!! view_render_event('bagisto.admin.layout.content.before') !!}
 
         <!-- Page Header Blade Component -->

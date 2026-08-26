@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'メニュー、設定、ページ、操作を検索...',
+        'esc' => 'ESC',
+        'loading' => '読み込み中...',
+        'no-results' => '該当する結果はありません',
+        'no-results-hint' => 'メニュー、ページ、設定、操作で検索してみてください。',
+        'navigate' => '移動',
+        'select' => '開く',
+        'close' => '閉じる',
+
+        'records' => [
+            'products' => '商品',
+            'orders' => '注文',
+            'categories' => 'カテゴリ',
+            'customers' => '顧客',
+        ],
+
+        'categories' => [
+            'pages' => 'ページ',
+            'configuration' => '設定',
+            'actions' => '操作',
+            'quick-access' => 'クイックアクセス',
+        ],
+
+        'actions' => [
+            'create-product' => '商品を作成',
+            'create-category' => 'カテゴリを作成',
+            'create-attribute' => '属性を作成',
+            'create-order' => '注文を作成',
+            'create-customer' => '顧客を作成',
+            'create-page' => 'CMSページを作成',
+            'create-user' => 'ユーザーを作成',
+            'import-products' => '商品をインポート',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => '戻る',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'すべての製品を探索',
                     'orders' => '注文',
                     'products' => '製品',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'メガ検索',
+                    'title' => '検索、または Ctrl + K',
                 ],
             ],
 

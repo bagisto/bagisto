@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'Buscar menús, ajustes, páginas y acciones...',
+        'esc' => 'ESC',
+        'loading' => 'Cargando...',
+        'no-results' => 'Sin resultados',
+        'no-results-hint' => 'Pruebe con un menú, una página, un ajuste o una acción.',
+        'navigate' => 'Navegar',
+        'select' => 'Abrir',
+        'close' => 'Cerrar',
+
+        'records' => [
+            'products' => 'Productos',
+            'orders' => 'Pedidos',
+            'categories' => 'Categorías',
+            'customers' => 'Clientes',
+        ],
+
+        'categories' => [
+            'pages' => 'Páginas',
+            'configuration' => 'Configuración',
+            'actions' => 'Acciones',
+            'quick-access' => 'Acceso rápido',
+        ],
+
+        'actions' => [
+            'create-product' => 'Crear producto',
+            'create-category' => 'Crear categoría',
+            'create-attribute' => 'Crear atributo',
+            'create-order' => 'Crear pedido',
+            'create-customer' => 'Crear cliente',
+            'create-page' => 'Crear página CMS',
+            'create-user' => 'Crear usuario',
+            'import-products' => 'Importar productos',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'Volver',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'Explorar todos los productos',
                     'orders' => 'Pedidos',
                     'products' => 'Productos',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'Búsqueda Avanzada',
+                    'title' => 'Buscar o pulse Ctrl + K',
                 ],
             ],
 

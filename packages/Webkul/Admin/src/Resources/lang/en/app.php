@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'Search menus, settings, pages and actions...',
+        'esc' => 'ESC',
+        'loading' => 'Loading...',
+        'no-results' => 'No results found',
+        'no-results-hint' => 'Try searching for a menu, page, configuration, or action.',
+        'navigate' => 'Navigate',
+        'select' => 'Open',
+        'close' => 'Close',
+
+        'records' => [
+            'products' => 'Products',
+            'orders' => 'Orders',
+            'categories' => 'Categories',
+            'customers' => 'Customers',
+        ],
+
+        'categories' => [
+            'pages' => 'Pages',
+            'configuration' => 'Configuration',
+            'actions' => 'Actions',
+            'quick-access' => 'Quick Access',
+        ],
+
+        'actions' => [
+            'create-product' => 'Create Product',
+            'create-category' => 'Create Category',
+            'create-attribute' => 'Create Attribute',
+            'create-order' => 'Create Order',
+            'create-customer' => 'Create Customer',
+            'create-page' => 'Create CMS Page',
+            'create-user' => 'Create User',
+            'import-products' => 'Import Products',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'Back',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'Explore all products',
                     'orders' => 'Orders',
                     'products' => 'Products',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'Mega Search',
+                    'title' => 'Search or press Ctrl + K',
                 ],
             ],
 

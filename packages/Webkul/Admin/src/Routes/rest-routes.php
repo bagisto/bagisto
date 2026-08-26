@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Webkul\Admin\Http\Controllers\CommandPaletteController;
 use Webkul\Admin\Http\Controllers\DashboardController;
 use Webkul\Admin\Http\Controllers\DataGrid\DataGridController;
 use Webkul\Admin\Http\Controllers\DataGrid\SavedFilterController;
@@ -35,6 +36,11 @@ Route::controller(DataGridController::class)->prefix('datagrid')->group(function
         Route::delete('{id}', 'destroy')->name('admin.datagrid.saved_filters.destroy');
     });
 });
+
+/**
+ * Command palette routes.
+ */
+Route::get('command-palette', [CommandPaletteController::class, 'index'])->name('admin.command_palette.index');
 
 /**
  * Tinymce file upload handler.

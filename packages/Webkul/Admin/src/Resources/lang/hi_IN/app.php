@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'मेन्यू, सेटिंग्स, पृष्ठ और क्रियाएँ खोजें...',
+        'esc' => 'ESC',
+        'loading' => 'लोड हो रहा है...',
+        'no-results' => 'कोई परिणाम नहीं मिला',
+        'no-results-hint' => 'कोई मेन्यू, पृष्ठ, कॉन्फ़िगरेशन या क्रिया खोजकर देखें।',
+        'navigate' => 'नेविगेट करें',
+        'select' => 'खोलें',
+        'close' => 'बंद करें',
+
+        'records' => [
+            'products' => 'उत्पाद',
+            'orders' => 'ऑर्डर',
+            'categories' => 'श्रेणियाँ',
+            'customers' => 'ग्राहक',
+        ],
+
+        'categories' => [
+            'pages' => 'पृष्ठ',
+            'configuration' => 'कॉन्फ़िगरेशन',
+            'actions' => 'क्रियाएँ',
+            'quick-access' => 'त्वरित पहुँच',
+        ],
+
+        'actions' => [
+            'create-product' => 'उत्पाद बनाएँ',
+            'create-category' => 'श्रेणी बनाएँ',
+            'create-attribute' => 'विशेषता बनाएँ',
+            'create-order' => 'ऑर्डर बनाएँ',
+            'create-customer' => 'ग्राहक बनाएँ',
+            'create-page' => 'CMS पृष्ठ बनाएँ',
+            'create-user' => 'उपयोगकर्ता बनाएँ',
+            'import-products' => 'उत्पाद आयात करें',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'वापस जाएं',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'सभी उत्पादों का अन्वेषण करें',
                     'orders' => 'आदेश',
                     'products' => 'उत्पाद',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'मेगा सर्च',
+                    'title' => 'खोजें या Ctrl + K दबाएँ',
                 ],
             ],
 

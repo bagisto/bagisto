@@ -4323,6 +4323,42 @@ return [
         ],
     ],
 
+    'command-palette' => [
+        'placeholder' => 'Caută meniuri, setări, pagini și acțiuni...',
+        'esc' => 'ESC',
+        'loading' => 'Se încarcă...',
+        'no-results' => 'Niciun rezultat',
+        'no-results-hint' => 'Încercați un meniu, o pagină, o setare sau o acțiune.',
+        'navigate' => 'Navighează',
+        'select' => 'Deschide',
+        'close' => 'Închide',
+
+        'records' => [
+            'products' => 'Produse',
+            'orders' => 'Comenzi',
+            'categories' => 'Categorii',
+            'customers' => 'Clienți',
+        ],
+
+        'categories' => [
+            'pages' => 'Pagini',
+            'configuration' => 'Configurare',
+            'actions' => 'Acțiuni',
+            'quick-access' => 'Acces rapid',
+        ],
+
+        'actions' => [
+            'create-product' => 'Creează produs',
+            'create-category' => 'Creează categorie',
+            'create-attribute' => 'Creează atribut',
+            'create-order' => 'Creează comandă',
+            'create-customer' => 'Creează client',
+            'create-page' => 'Creează pagină CMS',
+            'create-user' => 'Creează utilizator',
+            'import-products' => 'Importă produse',
+        ],
+    ],
+
     'configuration' => [
         'index' => [
             'back-btn' => 'Back',
@@ -5659,8 +5695,9 @@ return [
                     'explore-all-products' => 'Explore all products',
                     'orders' => 'Orders',
                     'products' => 'Products',
+                    'shortcut' => 'Ctrl K',
                     'sku' => 'SKU: :sku',
-                    'title' => 'Mega Search',
+                    'title' => 'Caută sau apasă Ctrl + K',
                 ],
             ],
 

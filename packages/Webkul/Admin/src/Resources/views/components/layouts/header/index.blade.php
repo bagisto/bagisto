@@ -36,9 +36,13 @@
 
                 <input
                     type="text"
-                    class="block w-full rounded-lg border bg-white px-8 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 sm:px-10 sm:text-base"
+                    class="block w-full rounded-lg border bg-white px-8 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 sm:px-10 sm:text-base ltr:pr-16 rtl:pl-16 sm:ltr:pr-20 sm:rtl:pl-20"
                     placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 >
+
+                <kbd class="pointer-events-none absolute top-1/2 flex -translate-y-1/2 animate-pulse items-center gap-0.5 rounded border border-violet-300 bg-violet-50 px-2 py-1 font-sans text-[11px] font-semibold leading-none text-violet-700 dark:border-violet-500/40 dark:bg-violet-500/10 dark:text-violet-300 ltr:right-2 rtl:left-2 sm:ltr:right-3 sm:rtl:left-3">
+                    @lang('admin::app.components.layouts.header.mega-search.shortcut')
+                </kbd>
             </div>
         </v-mega-search>
     </div>
@@ -258,13 +262,20 @@
 
             <input
                 type="text"
-                class="peer block w-full rounded-lg border bg-white px-8 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400 sm:px-10 sm:text-base"
+                class="peer block w-full rounded-lg border bg-white px-8 py-1.5 text-sm leading-6 text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400 dark:focus:border-gray-400 sm:px-10 sm:text-base ltr:pr-16 rtl:pl-16 sm:ltr:pr-20 sm:rtl:pl-20"
                 :class="{'border-gray-400': isDropdownOpen}"
                 placeholder="@lang('admin::app.components.layouts.header.mega-search.title')"
                 v-model.lazy="searchTerm"
                 @click="searchTerm.length >= 2 ? isDropdownOpen = true : {}"
                 v-debounce="500"
             >
+
+            <kbd
+                v-show="! isDropdownOpen"
+                class="pointer-events-none absolute top-1/2 flex -translate-y-1/2 animate-pulse items-center gap-0.5 rounded border border-violet-300 bg-violet-50 px-2 py-1 font-sans text-[11px] font-semibold leading-none text-violet-700 dark:border-violet-500/40 dark:bg-violet-500/10 dark:text-violet-300 ltr:right-2 rtl:left-2 sm:ltr:right-3 sm:rtl:left-3"
+            >
+                @lang('admin::app.components.layouts.header.mega-search.shortcut')
+            </kbd>
 
             <div
                 class="absolute top-8 z-10 w-full rounded-lg border bg-white shadow-[0px_0px_0px_0px_rgba(0,0,0,0.10),0px_1px_3px_0px_rgba(0,0,0,0.10),0px_5px_5px_0px_rgba(0,0,0,0.09),0px_12px_7px_0px_rgba(0,0,0,0.05),0px_22px_9px_0px_rgba(0,0,0,0.01),0px_34px_9px_0px_rgba(0,0,0,0.00)] dark:border-gray-800 dark:bg-gray-900 sm:top-10"
