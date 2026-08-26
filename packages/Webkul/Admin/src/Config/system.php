@@ -1510,7 +1510,7 @@ return [
                 'default' => config('app.url').'/customer/social-login/google/callback',
                 'placeholder' => config('app.url').'/customer/social-login/google/callback',
             ], [
-                'name' => 'enable_linkedin-openid',
+                'name' => 'enable_linkedin',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.enable-linkedin',
                 'type' => 'boolean',
                 'channel_based' => true,
@@ -1519,20 +1519,20 @@ return [
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-id.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-id.title-info',
                 'type' => 'text',
-                'depends' => 'enable_linkedin-openid:1',
+                'depends' => 'enable_linkedin:1',
             ], [
                 'name' => 'linkedin_client_secret',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-secret.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.client-secret.title-info',
                 'type' => 'text',
-                'depends' => 'enable_linkedin-openid:1',
+                'depends' => 'enable_linkedin:1',
             ], [
                 'name' => 'linkedin_callback_url',
                 'title' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title',
                 'info' => 'admin::app.configuration.index.customer.settings.social-login.linkedin.redirect.title-info',
                 'type' => 'text',
                 'validation' => 'url',
-                'depends' => 'enable_linkedin-openid:1',
+                'depends' => 'enable_linkedin:1',
                 'placeholder' => config('app.url').'/customer/social-login/linkedin-openid/callback',
                 'default' => config('app.url').'/customer/social-login/linkedin-openid/callback',
             ], [
