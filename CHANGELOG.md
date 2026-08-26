@@ -4,7 +4,11 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
-- Soon.
+- Corrected the titles and descriptions in Admin → Configuration that named settings which no longer exist or defined the concept rather than the setting, in all 22 locales.
+
+- #11441 [fixed] - Fixed numeric datagrid filters ignoring a value's decimal part, so an order-total filter of 50.20 matched on 50. Integer and decimal columns now compare the value exactly and can be filtered by operator — equals, greater than, less than, or a range.
+
+- #11440 [fixed] - Fixed the checkout payment-method radio button overlapping the method's logo and name on a mobile viewport; the card now reserves space for the radio so its content stays clear.
 
 ## **v2.4.10 (21st of August 2026)** - *Release*
 

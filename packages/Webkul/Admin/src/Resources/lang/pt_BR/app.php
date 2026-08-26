@@ -4338,11 +4338,11 @@ return [
             'title' => 'Configuração',
 
             'general' => [
-                'info' => 'Geral',
+                'info' => 'Configurações gerais de unidades, conteúdo, design, taxas de câmbio, sitemap e GDPR.',
                 'title' => 'Geral',
 
                 'general' => [
-                    'info' => 'Defina as opções de unidade e ative ou desative as migalhas de pão.',
+                    'info' => 'Configurações de unidades e trilha de navegação da loja.',
                     'title' => 'Geral',
 
                     'unit-options' => [
@@ -4360,7 +4360,7 @@ return [
                 ],
 
                 'content' => [
-                    'info' => 'Defina o título da oferta do cabeçalho e scripts personalizados.',
+                    'info' => 'Faixa de oferta, linha de direitos autorais, regras de especulação e scripts personalizados.',
                     'title' => 'Conteúdo',
 
                     'header-offer' => [
@@ -4373,7 +4373,7 @@ return [
 
                     'copyright-content' => [
                         'title' => 'Conteúdo de direitos autorais',
-                        'info' => 'Configure o conteúdo de direitos autorais exibido no rodapé do seu site para proteger sua propriedade intelectual e aumentar o reconhecimento da marca.',
+                        'info' => 'A linha de direitos autorais exibida no rodapé da loja.',
                     ],
 
                     'speculation-rules' => [
@@ -4414,24 +4414,25 @@ return [
                         'custom-css' => 'CSS Personalizado',
                         'custom-javascript' => 'Javascript Personalizado',
                         'title' => 'Scripts Personalizados',
-                        'title-info' => 'Scripts personalizados são pedaços de código personalizados criados para adicionar funções ou recursos específicos ao software, melhorando suas capacidades de forma única.',
+                        'title-info' => 'CSS e JavaScript adicionados a todas as páginas da loja.',
                     ],
                 ],
 
                 'design' => [
-                    'info' => 'Defina o logotipo e o ícone favicon para o painel de administração.',
+                    'info' => 'Logotipo e favicon do painel administrativo, e como as categorias do menu da loja são exibidas.',
                     'title' => 'Design',
 
                     'admin-logo' => [
                         'favicon' => 'Favicon',
                         'logo-image' => 'Imagem do Logotipo',
                         'title' => 'Logotipo do Admin',
-                        'title-info' => 'Configure imagens de logotipo e favicon para a interface do seu site para melhorar a marca e o reconhecimento.',
+                        'title-info' => 'O logotipo e o favicon exibidos no painel administrativo e nos e-mails enviados ao administrador.',
                     ],
 
                     'menu-category' => [
                         'default' => 'Menu padrão',
                         'info' => 'Esta configuração controla a visibilidade das categorias no menu do cabeçalho. Você pode escolher exibir apenas as categorias principais ou todas as categorias aninhadas.',
+                        'preview' => 'Pré-visualizar',
                         'preview-default' => 'Visualizar menu padrão',
                         'preview-sidebar' => 'Visualizar menu lateral',
                         'sidebar' => 'Menu lateral',
@@ -4441,11 +4442,11 @@ return [
 
                 'gdpr' => [
                     'title' => 'GDPR',
-                    'info' => 'Configurações de conformidade com GDPR',
+                    'info' => 'Aviso de cookies, categorias de consentimento e o acordo de privacidade exibido aos clientes.',
 
                     'settings' => [
                         'title' => 'Configurações de conformidade com GDPR',
-                        'info' => 'Gerencie as configurações de conformidade com GDPR, incluindo a política de privacidade. Ative ou desative os recursos do GDPR conforme necessário.',
+                        'info' => 'Ativar ou desativar os recursos de GDPR para este canal.',
                         'enabled' => 'Ativar GDPR',
                     ],
 
@@ -4519,7 +4520,7 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info' => 'Definir opções do sitemap.',
+                    'info' => 'Geração de sitemap e limites de arquivo.',
                     'title' => 'Sitemap',
 
                     'settings' => [
@@ -4529,7 +4530,7 @@ return [
                     ],
 
                     'file-limits' => [
-                        'info' => 'Definir opções de limites de arquivos.',
+                        'info' => 'O número máximo de URLs gravadas em um arquivo de sitemap antes de iniciar outro.',
                         'max-file-size' => 'Tamanho máximo do arquivo',
                         'max-url-per-file' => 'Número máximo de URLs por arquivo',
                         'title' => 'Limites de Arquivo',
@@ -4646,18 +4647,18 @@ return [
             ],
 
             'catalog' => [
-                'info' => 'Catálogo',
+                'info' => 'Configurações de produtos, rich snippets e estoque.',
                 'title' => 'Catálogo',
 
                 'products' => [
-                    'info' => 'Página de visualização do produto, página de visualização do carrinho, vitrine, avaliação e compartilhamento social de atributos.',
+                    'info' => 'Páginas de produto e carrinho, busca, tamanhos de imagem, avaliações, atributos e compartilhamento.',
                     'title' => 'Produtos',
 
                     'settings' => [
                         'compare-options' => 'Opções de Comparação',
                         'image-search-option' => 'Opção de Busca por Imagem',
                         'title' => 'Configurações',
-                        'title-info' => 'As configurações se referem a escolhas configuráveis que controlam o comportamento de um sistema, aplicativo ou dispositivo, adaptadas às preferências e requisitos do usuário.',
+                        'title-info' => 'Ativar ou desativar a comparação de produtos e a busca por imagem.',
                         'wishlist-options' => 'Opções de Lista de Desejos',
                     ],
 
@@ -4688,13 +4689,13 @@ return [
                         'allow-no-of-related-products' => 'Número Permitido de Produtos Relacionados',
                         'allow-no-of-up-sells-products' => 'Número Permitido de Produtos de Up-Sell',
                         'title' => 'Configuração da Página de Visualização do Produto',
-                        'title-info' => 'A configuração da página de visualização do produto envolve ajustar o layout e os elementos na página de exibição de um produto, aprimorando a experiência do usuário e a apresentação de informações.',
+                        'title-info' => 'Quantos produtos relacionados e de venda superior são exibidos na página do produto.',
                     ],
 
                     'cart-view-page' => [
                         'allow-no-of-cross-sells-products' => 'Número Permitido de Produtos de Cross-Sell',
                         'title' => 'Configuração da Página de Visualização do Carrinho',
-                        'title-info' => 'A configuração da página de visualização do carrinho envolve a organização de itens, detalhes e opções na página do carrinho de compras, melhorando a interação do usuário e o fluxo de compra.',
+                        'title-info' => 'Quantos produtos de venda cruzada são exibidos na página do carrinho.',
                     ],
 
                     'storefront' => [
@@ -4712,14 +4713,14 @@ return [
                         'products-per-page' => 'Produtos por Página',
                         'sort-by' => 'Ordenar Por',
                         'title' => 'Frente da Loja',
-                        'title-info' => 'A frente da loja é a interface voltada para o cliente de uma loja online, mostrando produtos, categorias e navegação para uma experiência de compra perfeita.',
+                        'title-info' => 'Como os produtos são listados nas páginas de categoria e de busca.',
                     ],
 
                     'small-image' => [
                         'height' => 'Altura',
                         'placeholder' => 'Espaço Reservado para Imagem Pequena',
                         'title' => 'Imagem Pequena',
-                        'title-info' => 'A imagem pequena é a interface voltada para o cliente de uma loja online, mostrando produtos, categorias e navegação para uma experiência de compra perfeita.',
+                        'title-info' => 'O tamanho para o qual as imagens pequenas de produto são redimensionadas, e a imagem padrão quando o produto não tem imagem.',
                         'width' => 'Largura',
                     ],
 
@@ -4727,7 +4728,7 @@ return [
                         'height' => 'Altura',
                         'placeholder' => 'Espaço Reservado para Imagem Média',
                         'title' => 'Imagem Média',
-                        'title-info' => 'A imagem média se refere a uma imagem de tamanho moderado que oferece um equilíbrio entre detalhes e espaço na tela, comumente usada para fins visuais.',
+                        'title-info' => 'O tamanho para o qual as imagens médias de produto são redimensionadas, e a imagem padrão quando o produto não tem imagem.',
                         'width' => 'Largura',
                     ],
 
@@ -4735,7 +4736,7 @@ return [
                         'height' => 'Altura',
                         'placeholder' => 'Espaço Reservado para Imagem Grande',
                         'title' => 'Imagem Grande',
-                        'title-info' => 'A imagem grande representa uma imagem de alta resolução que fornece detalhes aprimorados e impacto visual, frequentemente usada para exibir produtos ou gráficos.',
+                        'title-info' => 'O tamanho para o qual as imagens grandes de produto são redimensionadas, e a imagem padrão quando o produto não tem imagem.',
                         'width' => 'Largura',
                     ],
 
@@ -4747,25 +4748,25 @@ return [
                         'display-star-count' => 'Exiba a contagem de estrelas nas avaliações.',
                         'summary' => 'Resumo',
                         'title' => 'Avaliação',
-                        'title-info' => 'Avaliação ou avaliação de algo, envolvendo frequentemente opiniões e feedback.',
+                        'title-info' => 'Quem pode avaliar um produto e como as avaliações aparecem na página do produto.',
                     ],
 
                     'attribute' => [
                         'file-upload-size' => 'Tamanho Máximo de Upload de Arquivo (em Kb)',
                         'image-upload-size' => 'Tamanho Máximo de Upload de Imagem (em Kb)',
                         'title' => 'Atributo',
-                        'title-info' => 'Característica ou propriedade que define um objeto, influenciando seu comportamento, aparência ou função.',
+                        'title-info' => 'O tamanho máximo de imagem e arquivo que pode ser enviado para um valor de atributo.',
                     ],
 
                     'social-share' => [
-                        'title-info' => 'Configure as configurações de compartilhamento social para permitir o compartilhamento de produtos no Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn e por e-mail.',
+                        'title-info' => 'Escolha quais botões de compartilhamento aparecem na página do produto e a mensagem que eles levam.',
                         'title' => 'Compartilhamento Social',
                         'share-message' => 'Mensagem de Compartilhamento',
                         'share' => 'Compartilhar',
                         'enable-social-share' => 'Ativar Compartilhamento Social?',
-                        'enable-share-whatsapp-info' => 'O link de compartilhamento do WhatsApp aparecerá apenas em dispositivos móveis.',
-                        'enable-share-whatsapp' => 'Ativar Compartilhamento no WhatsApp?',
-                        'enable-share-twitter' => 'Ativar Compartilhamento no Twitter?',
+                        'enable-share-whatsapp-info' => 'O link de compartilhamento do WhatsApp aparece apenas em dispositivos móveis.',
+                        'enable-share-whatsapp' => 'Ativar compartilhamento no WhatsApp?',
+                        'enable-share-twitter' => 'Ativar compartilhamento no X (Twitter)?',
                         'enable-share-pinterest' => 'Ativar Compartilhamento no Pinterest?',
                         'enable-share-linkedin' => 'Ativar Compartilhamento no Linkedin?',
                         'enable-share-facebook' => 'Ativar Compartilhamento no Facebook?',
@@ -4774,7 +4775,7 @@ return [
                 ],
 
                 'rich-snippets' => [
-                    'info' => 'Defina produtos e categorias.',
+                    'info' => 'Dados estruturados adicionados às páginas da loja para os buscadores.',
                     'title' => 'Rich Snippets',
 
                     'products' => [
@@ -4787,14 +4788,14 @@ return [
                         'show-sku' => 'Mostrar SKU',
                         'show-weight' => 'Mostrar Peso',
                         'title' => 'Produtos',
-                        'title-info' => 'Configurar configurações do produto incluindo SKU, peso, categorias, imagens, avaliações, classificações, ofertas e etc.',
+                        'title-info' => 'Escolha quais detalhes do produto são incluídos nos dados estruturados.',
                     ],
 
                     'categories' => [
                         'enable' => 'Ativar',
                         'show-search-input-field' => 'Mostrar Campo de Entrada de Pesquisa',
                         'title' => 'Categorias',
-                        'title-info' => '"Categorias" se referem a grupos ou classificações que ajudam a organizar e agrupar produtos ou itens semelhantes para facilitar a navegação e a pesquisa.',
+                        'title-info' => 'Adicionar dados estruturados de categoria às páginas da loja para que os buscadores possam lê-los.',
                     ],
                 ],
 
@@ -4808,13 +4809,13 @@ return [
                         'min-qty-allowed-in-cart' => 'Quantidade Mínima Permitida no Carrinho de Compras',
                         'out-of-stock-threshold' => 'Limite de Estoque Esgotado',
                         'title' => 'Opção de Estoque do Produto',
-                        'info' => 'Configure opções de estoque do produto para permitir pedidos pendentes, definir quantidades mínimas e máximas no carrinho e definir limites de falta de estoque.',
+                        'info' => 'Permitir pedidos sem estoque e definir a quantidade a partir da qual o produto é considerado esgotado.',
                     ],
                 ],
             ],
 
             'customer' => [
-                'info' => 'Cliente',
+                'info' => 'Configurações de endereços, captcha e contas de cliente.',
                 'title' => 'Cliente',
 
                 'address' => [
@@ -4826,19 +4827,19 @@ return [
                         'country' => 'País',
                         'state' => 'Estado',
                         'title' => 'Requisitos',
-                        'title-info' => 'Requisitos são as condições, características ou especificações necessárias para que algo seja cumprido, alcançado ou atendido com sucesso.',
+                        'title-info' => 'Quais campos de endereço o cliente deve preencher.',
                         'zip' => 'CEP',
                     ],
 
                     'information' => [
                         'street-lines' => 'Linhas em um Endereço de Rua',
                         'title' => 'Informação',
-                        'title-info' => '"Linhas em um endereço de rua" se referem a segmentos individuais de um endereço, frequentemente separados por vírgulas, fornecendo informações de localização como número da casa, rua, cidade e mais.',
+                        'title-info' => 'Quantas linhas de endereço o formulário exibe.',
                     ],
                 ],
 
                 'captcha' => [
-                    'info' => 'Definir chave do site, chave secreta e status.',
+                    'info' => 'Chaves e status do Google reCAPTCHA Enterprise.',
                     'title' => 'Google Captcha',
 
                     'credentials' => [
@@ -4853,7 +4854,7 @@ return [
                         'site-key-info' => 'Depois de criar o projeto e a chave da API, procure o serviço "reCAPTCHA" na biblioteca e gere as chaves do "reCAPTCHA".',
                         'status' => 'Status',
                         'title' => 'Credenciais',
-                        'title-info' => 'Defina as credenciais do Google reCAPTCHA, incluindo chave da API, ID do projeto, chave do site, chave secreta e habilite ou desabilite o status.',
+                        'title-info' => 'Credenciais do Google reCAPTCHA Enterprise e a pontuação que uma requisição precisa atingir para ser aceita.',
                     ],
 
                     'validations' => [
@@ -4863,7 +4864,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Defina lista de desejos, redirecionamento de login, assinaturas de newsletter, opção de grupo padrão, verificações de e-mail e login social.',
+                    'settings-info' => 'Defina lista de desejos, redirecionamento após login, opções de nova conta, newsletter, verificação de e-mail e login social.',
                     'title' => 'Configurações',
 
                     'login-as-customer' => [
@@ -4903,19 +4904,20 @@ return [
 
                     'newsletter' => [
                         'subscription' => 'Permitir Assinatura de Newsletter',
+                        'subscription-info' => 'Exibir um formulário de inscrição no rodapé da loja.',
                         'title' => 'Assinatura de Newsletter',
-                        'title-info' => '"Informações de newsletter" contêm atualizações, ofertas ou conteúdo compartilhado regularmente por e-mail para assinantes, mantendo-os informados e engajados.',
+                        'title-info' => 'Inscrição na newsletter na loja.',
                     ],
 
                     'email' => [
                         'email-verification' => 'Permitir Verificação de E-mail',
                         'title' => 'Verificação de E-mail',
-                        'title-info' => '"Verificação de e-mail" confirma a autenticidade de um endereço de e-mail, geralmente enviando um link de confirmação, melhorando a segurança da conta e a confiabilidade da comunicação.',
+                        'title-info' => 'Pedir que um novo cliente confirme seu e-mail antes de poder entrar.',
                     ],
 
                     'social-login' => [
                         'title' => 'Login Social',
-                        'info' => '"Login social" permite que os usuários acessem um site usando suas contas de mídia social, simplificando os processos de registro e login.',
+                        'info' => 'Permitir que clientes entrem com uma conta externa. Cada provedor precisa do próprio ID e segredo de cliente.',
 
                         'google' => [
                             'enable-google' => 'Habilitar Google',
@@ -4994,21 +4996,21 @@ return [
                         ],
 
                         'twitter' => [
-                            'enable-twitter' => 'Habilitar Twitter',
+                            'enable-twitter' => 'Ativar X (Twitter)',
 
                             'client-id' => [
                                 'title' => 'ID do Cliente',
-                                'title-info' => 'Identificador único fornecido pelo Twitter ao criar seu aplicativo OAuth.',
+                                'title-info' => 'Identificador único fornecido pelo X ao criar sua aplicação OAuth.',
                             ],
 
                             'client-secret' => [
                                 'title' => 'Segredo do Cliente',
-                                'title-info' => 'Chave secreta associada ao seu cliente OAuth do Twitter. Mantenha-a confidencial.',
+                                'title-info' => 'Chave secreta associada ao seu cliente OAuth do X. Mantenha-a confidencial.',
                             ],
 
                             'redirect' => [
                                 'title' => 'URL de Redirecionamento',
-                                'title-info' => 'URL de callback para onde os usuários são redirecionados após a autenticação com o Twitter. Use o formato de URL de espaço reservado mostrado (altere apenas seu domínio). Deve coincidir com a URL configurada no seu console do Twitter.',
+                                'title-info' => 'URL de retorno para onde os usuários são redirecionados após autenticar no X. Use o formato de URL exibido (altere apenas seu domínio). Ela deve corresponder à URL configurada no portal de desenvolvedores do X.',
                             ],
                         ],
                     ],
@@ -5016,7 +5018,7 @@ return [
             ],
 
             'email' => [
-                'info' => 'E-mail',
+                'info' => 'Driver de e-mail, dados do remetente e as notificações que sua loja envia.',
                 'title' => 'E-mail',
 
                 'smtp' => [
@@ -5048,12 +5050,13 @@ return [
                     'contact-email-tip' => 'Este endereço de e-mail aparecerá no rodapé dos seus e-mails.',
                     'contact-name' => 'Nome de Contato',
                     'contact-name-tip' => 'Este nome aparecerá no rodapé dos seus e-mails.',
-                    'info' => 'Configure o nome do remetente, o endereço de e-mail da loja, os detalhes do administrador e contato usados em todos os e-mails.',
+                    'info' => 'Escolha como os e-mails são enviados e de quais endereços.',
                     'sender-email' => 'Endereço de E-mail do Remetente',
                     'sender-email-tip' => 'Os e-mails para seus clientes serão enviados deste endereço.',
                     'sender-name' => 'Nome do Remetente',
                     'sender-name-tip' => 'Este nome aparecerá na caixa de entrada dos seus clientes como remetente do e-mail.',
                     'title' => 'Configurações de E-mail',
+                    'title-info' => 'Os nomes e endereços dos quais sua loja envia e-mails e que aparecem no rodapé.',
                 ],
 
                 'notifications' => [
@@ -5061,7 +5064,7 @@ return [
                     'cancel-order-mail-to-admin' => 'Envie um e-mail de notificação ao administrador após cancelar um pedido',
                     'customer' => 'Envie as credenciais da conta do cliente após o registro',
                     'customer-registration-confirmation-mail-to-admin' => 'Envie um e-mail de confirmação ao administrador após o registro do cliente',
-                    'info' => 'Configure para receber e-mails de verificação de conta, confirmações de pedidos, atualizações sobre faturas, reembolsos, remessas e cancelamentos de pedidos.',
+                    'info' => 'Escolha quais e-mails são enviados aos clientes e ao administrador.',
                     'new-inventory-source' => 'Envie um e-mail de notificação para a fonte de inventário após criar um envio',
                     'new-invoice' => 'Envie um e-mail de notificação ao cliente após criar uma nova fatura',
                     'new-invoice-mail-to-admin' => 'Envie um e-mail de notificação ao administrador após criar uma nova fatura',
@@ -5073,16 +5076,17 @@ return [
                     'new-shipment-mail-to-admin' => 'Envie um e-mail de notificação ao administrador após criar uma nova remessa',
                     'registration' => 'Envie um e-mail de confirmação após o registro do cliente',
                     'title' => 'Notificações',
+                    'title-info' => 'Ativar ou desativar cada e-mail de notificação.',
                     'verification' => 'Envie um e-mail de verificação após o registro do cliente',
                 ],
             ],
 
             'sales' => [
-                'info' => 'Vendas',
+                'info' => 'Configurações de envio, pagamentos, pedidos, faturas, impostos, checkout e devoluções.',
                 'title' => 'Vendas',
 
                 'shipping-setting' => [
-                    'info' => 'Configurar as configurações de envio, incluindo País, Estado, Cidade, Endereço, Código Postal, Nome da Loja, Número de IVA e Detalhes Bancários.',
+                    'info' => 'O endereço de onde os pedidos são enviados.',
                     'title' => 'Configurações de Envio',
 
                     'origin' => [
@@ -5094,14 +5098,14 @@ return [
                         'store-name' => 'Nome da Loja',
                         'street-address' => 'Endereço',
                         'title' => 'Origem',
-                        'title-info' => 'A origem do envio refere-se ao local onde os produtos são originados antes de serem transportados para o destino.',
+                        'title-info' => 'O endereço de onde os pedidos são enviados e os dados da loja exibidos nas faturas.',
                         'vat-number' => 'Número de IVA',
                         'zip' => 'Código Postal',
                     ],
                 ],
 
                 'shipping-methods' => [
-                    'info' => 'Configurar os métodos de envio, incluindo Frete Grátis, Frete Fixo e outras opções conforme necessário.',
+                    'info' => 'Os métodos de envio oferecidos no checkout.',
                     'title' => 'Métodos de Envio',
 
                     'free-shipping' => [
@@ -5109,7 +5113,7 @@ return [
                         'page-title' => 'Frete Grátis',
                         'status' => 'Status',
                         'title' => 'Título',
-                        'title-info' => '"Frete grátis" refere-se a um método de envio em que o custo do frete é isento, e o vendedor cobre as despesas de envio para entregar os produtos ao comprador.',
+                        'title-info' => 'Um método de envio sem custo.',
                     ],
 
                     'flat-rate-shipping' => [
@@ -5118,7 +5122,7 @@ return [
                         'rate' => 'Taxa',
                         'status' => 'Status',
                         'title' => 'Título',
-                        'title-info' => 'Frete fixo é um método de envio em que uma taxa fixa é cobrada pelo envio, independentemente do peso, tamanho ou distância do pacote. Isso simplifica os custos de envio e pode ser vantajoso tanto para compradores quanto para vendedores.',
+                        'title-info' => 'Um método de envio com taxa fixa, por pedido ou por item.',
                         'type' => [
                             'per-order' => 'Por Pedido',
                             'per-unit' => 'Por Unidade',
@@ -5139,20 +5143,20 @@ return [
                     'application-fee' => 'Pagador da Taxa de Aplicação',
                     'business-account' => 'Conta Empresarial',
                     'cash-on-delivery' => 'Pagamento na Entrega',
-                    'cash-on-delivery-info' => 'Método de pagamento em que os clientes pagam em dinheiro ao receber os produtos ou serviços em sua porta.',
+                    'cash-on-delivery-info' => 'Permitir que clientes paguem em dinheiro na entrega.',
                     'client-id' => 'ID do Cliente',
-                    'client-id-info' => 'Use "sb" para testes.',
+                    'client-id-info' => 'O ID de cliente do seu aplicativo PayPal. Use o do aplicativo sandbox enquanto o Sandbox estiver ativo.',
                     'client-secret' => 'Chave Secreta do Cliente',
-                    'client-secret-info' => 'Adicione sua chave secreta aqui',
+                    'client-secret-info' => 'O segredo de cliente do seu aplicativo PayPal.',
                     'create-success-refund' => 'Reembolso criado com sucesso.',
                     'description' => 'Descrição',
                     'enable' => 'Ativar',
                     'generate-invoice' => 'Gerar automaticamente a fatura após fazer um pedido',
                     'generate-invoice-applicable' => 'Aplicável se a geração automática de faturas estiver ativada',
-                    'info' => 'Definir informações dos métodos de pagamento',
+                    'info' => 'Configure as formas de pagamento oferecidas no checkout.',
                     'instructions' => 'Instruções',
                     'logo' => 'Logotipo',
-                    'logo-information' => 'A resolução da imagem deve ser de 55px X 45px',
+                    'logo-information' => 'Tamanho recomendado: 55 x 45 pixels.',
                     'mailing-address' => 'Enviar Cheque para',
                     'merchant-description' => 'Descrição do comerciante',
                     'merchant-id' => 'ID do Comerciante',
@@ -5162,7 +5166,7 @@ return [
                     'merchant-private-key-info' => 'Cole o conteúdo do arquivo PEM da chave privada gerada no painel do PayGlocal. Ela é usada para assinar as requisições.',
                     'merchant-salt' => 'Salt do Comerciante',
                     'money-transfer' => 'Transferência Bancária',
-                    'money-transfer-info' => 'Transferência de fundos de uma pessoa ou conta para outra, muitas vezes eletronicamente, para diversos fins, como transações ou remessas.',
+                    'money-transfer-info' => 'Permitir que clientes paguem por transferência bancária ou cheque.',
                     'page-title' => 'Métodos de Pagamento',
                     'paid' => 'Pago',
                     'payglocal' => 'PayGlocal',
@@ -5174,11 +5178,11 @@ return [
                     'payglocal-public-key-info' => 'Cole o conteúdo do arquivo PEM da chave pública do PayGlocal. Ela é usada para criptografar as requisições e verificar as respostas.',
                     'payglocal-sandbox-info' => 'Enviar os pagamentos para o ambiente de testes do PayGlocal.',
                     'paypal-smart-button' => 'PayPal',
-                    'paypal-smart-button-info' => 'Botão Inteligente do PayPal: Simplifica os pagamentos online com botões personalizáveis para transações seguras e multi-métodos em sites e aplicativos.',
+                    'paypal-smart-button-info' => 'Exibir os botões do PayPal no checkout para que os clientes paguem com PayPal ou cartão.',
                     'paypal-standard' => 'PayPal Padrão',
-                    'paypal-standard-info' => 'O PayPal Padrão é uma opção básica de pagamento do PayPal para empresas online, permitindo que os clientes paguem usando suas contas do PayPal ou cartões de crédito/débito.',
+                    'paypal-standard-info' => 'Enviar os clientes ao PayPal para pagar com a conta PayPal ou com cartão.',
                     'payu' => 'PayU',
-                    'payu-info' => 'Configurar as definições do gateway de pagamento PayU',
+                    'payu-info' => 'Aceitar pagamentos pelo PayU.',
                     'payu-merchant-key-info' => 'Insira sua chave de comerciante PayU obtida do painel PayU',
                     'payu-merchant-salt-info' => 'Insira seu salt de comerciante PayU obtido do painel PayU',
                     'pending' => 'Pendente',
@@ -5193,7 +5197,7 @@ return [
                     'production-mode-info' => 'Somente para modo de produção.',
                     'public-key-id' => 'ID da chave pública',
                     'razorpay' => 'Razorpay',
-                    'razorpay-info' => 'Razorpay é uma plataforma de tecnologia financeira que ajuda empresas a aceitar, processar e desembolsar pagamentos.',
+                    'razorpay-info' => 'Aceitar pagamentos pelo Razorpay.',
                     'sandbox' => 'Ambiente de Teste',
                     'set-invoice-status' => 'Definir o status da fatura após criar a fatura para',
                     'set-order-status' => 'Definir o status do pedido após criar a fatura para',
@@ -5201,7 +5205,7 @@ return [
                     'statement-descriptor' => 'Descritor de Extrato',
                     'status' => 'Status',
                     'stripe' => 'Stripe',
-                    'stripe-info' => 'Configure as configurações do gateway de pagamento Stripe para transações online seguras',
+                    'stripe-info' => 'Aceitar pagamentos com cartão pelo Stripe.',
                     'test-client-id' => 'ID do Cliente Modo de Teste',
                     'test-client-secret' => 'Chave Secreta do Cliente Modo de Teste',
                     'test-mode-info' => 'Somente para modo de teste/sandbox.',
@@ -5209,7 +5213,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info' => 'Definir números de pedidos, pedidos mínimos e pedidos em atraso.',
+                    'info' => 'Novas tentativas de criação de pedido, números de pedido, valor mínimo e repetição de pedidos.',
                     'title' => 'Configurações de Pedido',
 
                     'order-creation' => [
@@ -5220,7 +5224,7 @@ return [
 
                     'order-number' => [
                         'generator' => 'Gerador de Número de Pedido',
-                        'info' => 'Identificador único atribuído a um pedido específico do cliente, auxiliando no rastreamento, comunicação e referência durante o processo de compra.',
+                        'info' => 'Como os números de pedido gerados são compostos.',
                         'length' => 'Comprimento do Número de Pedido',
                         'prefix' => 'Prefixo do Número de Pedido',
                         'suffix' => 'Sufixo do Número de Pedido',
@@ -5232,17 +5236,17 @@ return [
                         'enable' => 'Ativar',
                         'include-discount-amount' => 'Incluir Valor do Desconto',
                         'include-tax-amount' => 'Incluir Valor do Imposto',
-                        'info' => 'Critérios configurados especificando a quantidade ou valor mínimo necessários para que um pedido seja processado ou se qualifique para benefícios.',
+                        'info' => 'O menor valor de pedido com que um cliente pode finalizar a compra.',
                         'minimum-order-amount' => 'Valor Mínimo do Pedido',
                         'title' => 'Configurações de Pedido Mínimo',
                     ],
 
                     'reorder' => [
                         'admin-reorder' => 'Reordenar pelo Admin',
-                        'admin-reorder-info' => 'Ativar ou desativar a funcionalidade de reordenar para usuários administradores.',
-                        'info' => 'Ativar ou desativar a funcionalidade de reordenar para usuários administradores.',
+                        'admin-reorder-info' => 'Permitir que um administrador refaça um pedido pelo painel administrativo.',
+                        'info' => 'Permitir refazer um pedido pelo painel administrativo ou pela loja.',
                         'shop-reorder' => 'Reordenar pela Loja',
-                        'shop-reorder-info' => 'Ativar ou desativar a funcionalidade de reordenar para usuários da loja.',
+                        'shop-reorder-info' => 'Permitir que um cliente refaça um pedido pela loja.',
                         'title' => 'Permitir Reordenar',
                     ],
 
@@ -5254,12 +5258,12 @@ return [
                 ],
 
                 'invoice-settings' => [
-                    'info' => 'Definir número de fatura, prazos de pagamento, design do recibo de fatura e lembretes de fatura.',
+                    'info' => 'Números de fatura, condições de pagamento, impressões em PDF e lembretes.',
                     'title' => 'Configurações de Fatura',
 
                     'invoice-number' => [
                         'generator' => 'Gerador de Número de Fatura',
-                        'info' => 'Configuração de regras ou parâmetros para gerar e atribuir números de identificação únicos às faturas para fins organizacionais e de rastreamento.',
+                        'info' => 'Como os números de fatura gerados são compostos.',
                         'length' => 'Comprimento do Número de Fatura',
                         'prefix' => 'Prefixo do Número de Fatura',
                         'suffix' => 'Sufixo do Número de Fatura',
@@ -5270,7 +5274,7 @@ return [
                         'due-duration' => 'Duração do Vencimento',
                         'due-duration-day' => ':due-duration Dia',
                         'due-duration-days' => ':due-duration Dias',
-                        'info' => 'Condições acordadas que ditam quando e como o pagamento de bens ou serviços deve ser feito pelo comprador ao vendedor.',
+                        'info' => 'Em quanto tempo após a emissão uma fatura vence.',
                         'title' => 'Termos de Pagamento',
                     ],
 
@@ -5288,7 +5292,7 @@ return [
                     ],
 
                     'invoice-reminders' => [
-                        'info' => 'Notificações ou comunicações automatizadas enviadas aos clientes para lembrá-los de pagamentos futuros ou atrasados de faturas.',
+                        'info' => 'Quantos lembretes de pagamento são enviados para uma fatura em aberto, e com que intervalo.',
                         'interval-between-reminders' => 'Intervalo entre lembretes',
                         'maximum-limit-of-reminders' => 'Limite máximo de lembretes',
                         'title' => 'Lembretes de Fatura',
@@ -5297,11 +5301,11 @@ return [
 
                 'taxes' => [
                     'title' => 'Impostos',
-                    'title-info' => 'Impostos são taxas obrigatórias impostas pelos governos sobre bens, serviços ou transações, coletadas pelos vendedores e repassadas às autoridades.',
+                    'title-info' => 'Categorias de imposto, como o imposto é calculado e como é exibido.',
 
                     'categories' => [
                         'title' => 'Categorias de Impostos',
-                        'title-info' => 'Categorias de impostos são classificações para diferentes tipos de impostos, como imposto sobre vendas, imposto sobre valor agregado ou imposto sobre produtos, usadas para categorizar e aplicar alíquotas de imposto a produtos ou serviços.',
+                        'title-info' => 'A categoria de imposto aplicada ao frete e a padrão para novos produtos.',
                         'product' => 'Categoria de Imposto Padrão do Produto',
                         'shipping' => 'Categoria de Imposto do Envio',
                         'none' => 'Nenhum',
@@ -5321,7 +5325,7 @@ return [
                         'shipping-origin' => 'Origem do Envio',
                         'shipping-prices' => 'Preços de Envio',
                         'title' => 'Configurações de Cálculo',
-                        'title-info' => 'Detalhes sobre o custo de bens ou serviços, incluindo preço base, descontos, impostos e cobranças adicionais.',
+                        'title-info' => 'Sobre o que o imposto é calculado e se os preços informados já o incluem.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5329,14 +5333,14 @@ return [
                         'default-post-code' => 'Código Postal Padrão',
                         'default-state' => 'Estado Padrão',
                         'title' => 'Cálculo de Destino Padrão',
-                        'title-info' => 'Determinação automatizada de um destino padrão ou inicial com base em fatores ou configurações predefinidos.',
+                        'title-info' => 'O endereço usado para calcular o imposto antes de o cliente informar o seu.',
                     ],
 
                     'shopping-cart' => [
                         'show-tax-breakdown' => 'Mostrar detalhamento de impostos',
                         'show-tax-breakdown-info' => 'Exibe um detalhamento de impostos por produto e por alíquota no resumo do carrinho e do checkout. Destinado a depuração.',
                         'title' => 'Configurações de Exibição do Carrinho de Compras',
-                        'title-info' => 'Definir a exibição de impostos no carrinho de compras',
+                        'title-info' => 'Como o imposto é exibido no carrinho e no checkout.',
                         'display-prices' => 'Exibir Preços',
                         'display-subtotal' => 'Exibir Subtotal',
                         'display-shipping-amount' => 'Exibir Valor do Envio',
@@ -5347,7 +5351,7 @@ return [
 
                     'sales' => [
                         'title' => 'Configurações de Exibição de Pedidos, Faturas e Reembolsos',
-                        'title-info' => 'Definir a exibição de impostos nos pedidos, faturas e reembolsos',
+                        'title-info' => 'Como o imposto é exibido em pedidos, faturas e reembolsos.',
                         'display-prices' => 'Exibir Preços',
                         'display-subtotal' => 'Exibir Subtotal',
                         'display-shipping-amount' => 'Exibir Valor do Envio',
@@ -5359,7 +5363,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Finalizar Compra',
-                    'info' => 'Definir checkout de convidado, habilitar ou desabilitar Mini Carrinho, resumo do carrinho.',
+                    'info' => 'Compra como visitante, página do carrinho, minicarrinho e resumo do carrinho.',
 
                     'shopping-cart' => [
                         'cart-page' => 'Página do Carrinho',
@@ -5370,21 +5374,21 @@ return [
                         'estimate-shipping-info' => 'Ativar envio estimado para fornecer os custos de envio antecipadamente.',
                         'guest-checkout' => 'Permitir compra como convidado',
                         'guest-checkout-info' => 'Ativar compra como convidado para um processo de compra mais rápido e sem complicações.',
-                        'info' => 'Ativar compra como convidado, página do carrinho, produtos de venda cruzada e envio estimado para melhorar a conveniência do usuário e otimizar o processo de compra para aumentar as vendas.',
+                        'info' => 'Compra como visitante, página do carrinho, produtos de venda cruzada e frete estimado.',
                         'title' => 'Carrinho de Compras',
                     ],
 
                     'my-cart' => [
                         'display-item-quantities' => 'Exibir quantidades dos itens',
                         'display-number-in-cart' => 'Exibir número de itens no carrinho',
-                        'info' => 'Ativar configurações para Meu Carrinho para mostrar um resumo das quantidades dos itens e exibir o número total de itens no carrinho para facilitar o acompanhamento.',
+                        'info' => 'Se o contador do carrinho mostra a quantidade total ou o número de itens.',
                         'summary' => 'Resumo',
                         'title' => 'Meu Carrinho',
                     ],
 
                     'mini-cart' => [
                         'display-mini-cart' => 'Exibir Mini Carrinho',
-                        'info' => 'Ativar configurações do Mini Carrinho para exibir o mini carrinho e mostrar informações de oferta do Mini Carrinho para acesso rápido aos detalhes do carrinho e promoções.',
+                        'info' => 'Exibir o minicarrinho e o texto de oferta mostrado nele.',
                         'mini-cart-offer-info' => 'Informações de Oferta do Mini Carrinho',
                         'title' => 'Mini Carrinho',
                     ],
@@ -5414,7 +5418,7 @@ return [
                     'evening' => 'Noite',
                     'exchange' => 'Troca',
                     'file-extension-info' => 'Os tipos de arquivo que clientes e administradores podem anexar a uma solicitação de devolução, como fotos do produto ou documentos de apoio.',
-                    'info' => 'RMA faz parte do processo de devolução de um produto a uma empresa para receber um reembolso, substituição ou reparo.',
+                    'info' => 'Devoluções que os clientes podem solicitar após fazer um pedido.',
                     'morning' => 'Manhã',
                     'new-rma-message-to-customer' => 'Nova mensagem de RMA para o cliente',
                     'no' => 'Não',
