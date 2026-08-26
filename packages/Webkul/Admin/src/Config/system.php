@@ -257,8 +257,8 @@ return [
                     ],
                 ],
             ], [
-                'name' => 'agreement_label',
-                'title' => 'admin::app.configuration.index.general.gdpr.agreement.checkbox-label',
+                'name' => 'preview',
+                'title' => 'admin::app.configuration.index.general.design.menu-category.preview',
                 'type' => 'blade',
                 'path' => 'admin::configuration.custom-views.category-menu',
             ],
@@ -1423,7 +1423,7 @@ return [
             [
                 'name' => 'subscription',
                 'title' => 'admin::app.configuration.index.customer.settings.newsletter.subscription',
-                'info' => 'Enable subscription option for users in the footer section.',
+                'info' => 'admin::app.configuration.index.customer.settings.newsletter.subscription-info',
                 'type' => 'boolean',
                 'default' => 1,
             ],
@@ -1677,7 +1677,7 @@ return [
     ], [
         'key' => 'emails.configure.email_settings',
         'name' => 'admin::app.configuration.index.email.email-settings.title',
-        'info' => 'admin::app.configuration.index.email.email-settings.info',
+        'info' => 'admin::app.configuration.index.email.email-settings.title-info',
         'sort' => 2,
         'fields' => [
             [
@@ -1739,7 +1739,7 @@ return [
     ], [
         'key' => 'emails.general.notifications',
         'name' => 'admin::app.configuration.index.email.notifications.title',
-        'info' => 'admin::app.configuration.index.email.notifications.info',
+        'info' => 'admin::app.configuration.index.email.notifications.title-info',
         'sort' => 1,
         'fields' => [
             [
@@ -2517,7 +2517,7 @@ return [
                         'value' => 'paid',
                     ],
                 ],
-                'info' => 'admin::app.configuration.index.sales.payment-methods.set-order-status',
+                'info' => 'admin::app.configuration.index.sales.payment-methods.generate-invoice-applicable',
                 'channel_based' => true,
                 'locale_based' => false,
             ], [

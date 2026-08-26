@@ -4338,11 +4338,11 @@ return [
             'title' => 'Configuration',
 
             'general' => [
-                'info' => 'Set units options.',
+                'info' => 'Setări la nivel de magazin pentru unități, conținut, design, cursuri valutare, sitemap și GDPR.',
                 'title' => 'General',
 
                 'general' => [
-                    'info' => 'Configure unit settings and toggle the Breadcrumbs and Visitor options on or off.',
+                    'info' => 'Setări pentru unități și pesmeți de navigare în magazin.',
                     'title' => 'General',
 
                     'unit-options' => [
@@ -4360,7 +4360,7 @@ return [
                 ],
 
                 'content' => [
-                    'info' => 'Set header offer title and custom scripts.',
+                    'info' => 'Bannerul de ofertă, rândul de drepturi de autor, regulile de speculație și scripturile personalizate.',
                     'title' => 'Content',
 
                     'header-offer' => [
@@ -4373,7 +4373,7 @@ return [
 
                     'copyright-content' => [
                         'title' => 'Conținut drepturi de autor',
-                        'info' => 'Configurați conținutul drepturilor de autor afișat în subsolul site-ului dvs. pentru a vă proteja proprietatea intelectuală și a îmbunătăți recunoașterea brandului.',
+                        'info' => 'Rândul de drepturi de autor afișat în subsolul magazinului.',
                     ],
 
                     'speculation-rules' => [
@@ -4414,24 +4414,25 @@ return [
                         'custom-css' => 'Custom CSS',
                         'custom-javascript' => 'Custom Javascript',
                         'title' => 'Custom Scripts',
-                        'title-info' => 'Custom scripts are personalized pieces of code created to add specific functions or features to software, enhancing its capabilities uniquely.',
+                        'title-info' => 'CSS și JavaScript adăugate fiecărei pagini a magazinului.',
                     ],
                 ],
 
                 'design' => [
-                    'info' => 'Set logo and favicon icon for admin panel.',
+                    'info' => 'Logoul și favicon-ul panoului de administrare, și modul de afișare a categoriilor din meniul magazinului.',
                     'title' => 'Design',
 
                     'admin-logo' => [
                         'favicon' => 'Favicon',
                         'logo-image' => 'Logo Image',
                         'title' => 'Admin Logo',
-                        'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
+                        'title-info' => 'Logoul și favicon-ul afișate în panoul de administrare și în e-mailurile trimise administratorului.',
                     ],
 
                     'menu-category' => [
                         'default' => 'Default Menu',
                         'info' => 'This setting controls the visibility of categories in the header menu. You can choose to display only parent categories or all nested categories.',
+                        'preview' => 'Previzualizare',
                         'preview-default' => 'Preview Default Menu',
                         'preview-sidebar' => 'Preview Sidebar Menu',
                         'sidebar' => 'Sidebar Menu',
@@ -4441,11 +4442,11 @@ return [
 
                 'gdpr' => [
                     'title' => 'GDPR',
-                    'info' => 'GDPR Compliance Settings',
+                    'info' => 'Notificarea privind cookie-urile, categoriile de consimțământ și acordul de confidențialitate afișat clienților.',
 
                     'settings' => [
                         'title' => 'GDPR Compliance Settings',
-                        'info' => 'Manage GDPR compliance settings, including data privacy agreement. Enable or disable GDPR features as required',
+                        'info' => 'Activează sau dezactivează funcțiile GDPR pentru acest canal.',
                         'enabled' => 'Enable GDPR',
                     ],
 
@@ -4519,7 +4520,7 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info' => 'Set sitemap options.',
+                    'info' => 'Generarea sitemap-ului și limitele de fișier.',
                     'title' => 'Sitemap',
 
                     'settings' => [
@@ -4529,7 +4530,7 @@ return [
                     ],
 
                     'file-limits' => [
-                        'info' => 'Set file limits options.',
+                        'info' => 'Numărul maxim de URL-uri scrise într-un fișier sitemap înainte de a începe altul.',
                         'max-file-size' => 'Maximum file size',
                         'max-url-per-file' => 'Maximum no. of URLs per file',
                         'title' => 'File Limits',
@@ -4646,18 +4647,18 @@ return [
             ],
 
             'catalog' => [
-                'info' => 'Catalog',
+                'info' => 'Setări pentru produse, rich snippets și stoc.',
                 'title' => 'Catalog',
 
                 'products' => [
-                    'info' => 'Product view page, cart view page, store front, review and attribute social share.',
+                    'info' => 'Paginile de produs și coș, căutarea, dimensiunile imaginilor, recenziile, atributele și partajarea.',
                     'title' => 'Products',
 
                     'settings' => [
                         'compare-options' => 'Compare options',
                         'image-search-option' => 'Image Search Option',
                         'title' => 'Settings',
-                        'title-info' => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
+                        'title-info' => 'Activează sau dezactivează comparația de produse și căutarea după imagine.',
                         'wishlist-options' => 'Wishlist options',
                     ],
 
@@ -4688,13 +4689,13 @@ return [
                         'allow-no-of-related-products' => 'Allowed number of Related Products',
                         'allow-no-of-up-sells-products' => 'Allowed number of Up-Sell Products',
                         'title' => 'Product view page configuration',
-                        'title-info' => 'Product view page configuration entails adjusting the layout and elements on a product\'s display page, enhancing user experience and information presentation.',
+                        'title-info' => 'Câte produse similare și de vânzare superioară sunt afișate în pagina produsului.',
                     ],
 
                     'cart-view-page' => [
                         'allow-no-of-cross-sells-products' => 'Allowed number of Cross-Sell Products',
                         'title' => 'Cart view page configuration',
-                        'title-info' => 'Cart view page configuration involves arranging items, details, and options on the shopping cart page, improving user interaction and purchase flow.',
+                        'title-info' => 'Câte produse de vânzare încrucișată sunt afișate în pagina coșului.',
                     ],
 
                     'storefront' => [
@@ -4712,14 +4713,14 @@ return [
                         'products-per-page' => 'Products Per Page',
                         'sort-by' => 'Sort By',
                         'title' => 'Storefront',
-                        'title-info' => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
+                        'title-info' => 'Cum sunt listate produsele în paginile de categorie și de căutare.',
                     ],
 
                     'small-image' => [
                         'height' => 'Height',
                         'placeholder' => 'Small Image Placeholder',
                         'title' => 'Small Image',
-                        'title-info' => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
+                        'title-info' => 'Dimensiunea la care sunt redimensionate imaginile mici de produs și imaginea implicită când produsul nu are imagine.',
                         'width' => 'Width',
                     ],
 
@@ -4727,7 +4728,7 @@ return [
                         'height' => 'Height',
                         'placeholder' => 'Medium Image Placeholder',
                         'title' => 'Medium Image',
-                        'title-info' => 'Medium image refers to a moderate-sized picture that offers a balance between detail and screen space, commonly used for visuals.',
+                        'title-info' => 'Dimensiunea la care sunt redimensionate imaginile medii de produs și imaginea implicită când produsul nu are imagine.',
                         'width' => 'Width',
                     ],
 
@@ -4735,7 +4736,7 @@ return [
                         'height' => 'Height',
                         'placeholder' => 'Large Image Placeholder',
                         'title' => 'Large image',
-                        'title-info' => 'Large image represents a high-resolution picture providing enhanced detail and visual impact, often used for showcasing products or graphics.',
+                        'title-info' => 'Dimensiunea la care sunt redimensionate imaginile mari de produs și imaginea implicită când produsul nu are imagine.',
                         'width' => 'Width',
                     ],
 
@@ -4747,25 +4748,25 @@ return [
                         'display-star-count' => 'Display the star count in ratings.',
                         'summary' => 'Summary',
                         'title' => 'Review',
-                        'title-info' => 'Evaluation or assessment of something, often involving opinions and feedback.',
+                        'title-info' => 'Cine poate recenza un produs și cum sunt afișate recenziile în pagina produsului.',
                     ],
 
                     'attribute' => [
                         'file-upload-size' => 'Allowed File Upload Size (in Kb)',
                         'image-upload-size' => 'Allowed Image Upload Size (in Kb)',
                         'title' => 'Attribute',
-                        'title-info' => 'Characteristic or property that defines an object, influencing its behavior, appearance, or function.',
+                        'title-info' => 'Dimensiunea maximă a unei imagini sau a unui fișier încărcat pentru o valoare de atribut.',
                     ],
 
                     'social-share' => [
-                        'title-info' => 'Configure social sharing settings to enable product sharing on Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn, and via email.',
+                        'title-info' => 'Alegeți ce butoane de partajare apar în pagina produsului și ce mesaj transmit.',
                         'title' => 'Social Share',
                         'share-message' => 'Share Message',
                         'share' => 'Share',
                         'enable-social-share' => 'Enable Social Share?',
-                        'enable-share-whatsapp-info' => 'What\'s App share link just will appear to mobile devices.',
-                        'enable-share-whatsapp' => 'Enable Share in What\'s App?',
-                        'enable-share-twitter' => 'Enable Share in Twitter?',
+                        'enable-share-whatsapp-info' => 'Linkul de partajare WhatsApp apare doar pe dispozitivele mobile.',
+                        'enable-share-whatsapp' => 'Activați partajarea pe WhatsApp?',
+                        'enable-share-twitter' => 'Activați partajarea pe X (Twitter)?',
                         'enable-share-pinterest' => 'Enable Share in Pinterest?',
                         'enable-share-linkedin' => 'Enable Share in Linkedin?',
                         'enable-share-facebook' => 'Enable Share in Facebook?',
@@ -4780,7 +4781,7 @@ return [
                 ],
 
                 'rich-snippets' => [
-                    'info' => 'Set products and categories.',
+                    'info' => 'Date structurate adăugate paginilor magazinului pentru motoarele de căutare.',
                     'title' => 'Rich Snippets',
 
                     'products' => [
@@ -4793,14 +4794,14 @@ return [
                         'show-sku' => 'Show SKU',
                         'show-weight' => 'Show Weight',
                         'title' => 'Products',
-                        'title-info' => 'Configure product settings including with SKU, weight, Categories, Images, Reviews, Ratings, Offers and etc.',
+                        'title-info' => 'Alegeți ce detalii de produs sunt incluse în datele structurate.',
                     ],
 
                     'categories' => [
                         'enable' => 'Enable',
                         'show-search-input-field' => 'Show Search Input Field',
                         'title' => 'Categories',
-                        'title-info' => '"Categories" refer to groups or classifications that help organize and group similar products or items together for easier browsing and navigation.',
+                        'title-info' => 'Adaugă date structurate de categorie în paginile magazinului pentru ca motoarele de căutare să le poată citi.',
                     ],
                 ],
 
@@ -4814,13 +4815,13 @@ return [
                         'min-qty-allowed-in-cart' => 'Minimum Qty Allowed in Shopping Cart',
                         'out-of-stock-threshold' => 'Out-of-Stock Threshold',
                         'title' => 'Product Stock Option',
-                        'info' => 'Configure product stock options to allow back orders, set minimum and maximum cart quantities, and define out-of-stock thresholds.',
+                        'info' => 'Permite comenzi când stocul s-a epuizat și stabilește cantitatea sub care un produs este considerat epuizat.',
                     ],
                 ],
             ],
 
             'customer' => [
-                'info' => 'Customer',
+                'info' => 'Setări pentru adrese, captcha și conturi de client.',
                 'title' => 'Customer',
 
                 'address' => [
@@ -4832,19 +4833,19 @@ return [
                         'country' => 'Country',
                         'state' => 'State',
                         'title' => 'Requirements',
-                        'title-info' => 'Requirements are the conditions, features, or specifications necessary for something to be fulfilled, achieved, or met successfully.',
+                        'title-info' => 'Ce câmpuri de adresă trebuie completate de client.',
                         'zip' => 'Zip',
                     ],
 
                     'information' => [
                         'street-lines' => 'Lines in a Street Address',
                         'title' => 'Information',
-                        'title-info' => '"Lines in a street address" refer to individual segments of an address, often separated by commas, providing location information such as house number, street, city, and more.',
+                        'title-info' => 'Câte rânduri de adresă afișează formularul.',
                     ],
                 ],
 
                 'captcha' => [
-                    'info' => 'Set site key, secret key and status.',
+                    'info' => 'Cheile și starea Google reCAPTCHA Enterprise.',
                     'title' => 'Google Captcha',
 
                     'credentials' => [
@@ -4859,7 +4860,7 @@ return [
                         'site-key-info' => 'Once the project and API key have been created, search for the "reCAPTCHA" service in the library and generate the "reCAPTCHA" keys.',
                         'status' => 'Status',
                         'title' => 'Credentials',
-                        'title-info' => '"Sitemap: Website layout map for search engines. Secret key: Secure code for data encryption, authentication, or API access protection."',
+                        'title-info' => 'Datele de autentificare Google reCAPTCHA Enterprise și scorul pe care o cerere trebuie să îl atingă pentru a fi acceptată.',
                     ],
 
                     'validations' => [
@@ -4869,7 +4870,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Set wishlist, login redirection, newsletter subscriptions, default group option , email verifications and social login.',
+                    'settings-info' => 'Setează lista de dorințe, redirecționarea după autentificare, opțiunile de cont nou, newsletterul, verificarea e-mailului și autentificarea socială.',
                     'title' => 'Settings',
 
                     'login-as-customer' => [
@@ -4909,19 +4910,20 @@ return [
 
                     'newsletter' => [
                         'subscription' => 'Allow Newsletter Subscription',
+                        'subscription-info' => 'Afișează un formular de abonare în subsolul magazinului.',
                         'title' => 'Newsletter Subscription',
-                        'title-info' => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
+                        'title-info' => 'Abonare la newsletter în magazin.',
                     ],
 
                     'email' => [
                         'email-verification' => 'Allow Email Verification',
                         'title' => 'Email Verification',
-                        'title-info' => '"Email verification" confirms the authenticity of an email address, often by sending a confirmation link, enhancing account security and communication reliability.',
+                        'title-info' => 'Cere unui client nou să își confirme adresa de e-mail înainte de a se putea autentifica.',
                     ],
 
                     'social-login' => [
                         'title' => 'Social Login',
-                        'info' => '"Social login" allows users to access a website using their social media accounts, simplifying registration and login processes.',
+                        'info' => 'Permite clienților să se autentifice cu un cont extern. Fiecare furnizor are nevoie de propriul ID și secret de client.',
 
                         'google' => [
                             'enable-google' => 'Enable Google',
@@ -5000,21 +5002,21 @@ return [
                         ],
 
                         'twitter' => [
-                            'enable-twitter' => 'Enable Twitter',
+                            'enable-twitter' => 'Activează X (Twitter)',
 
                             'client-id' => [
                                 'title' => 'Client ID',
-                                'title-info' => 'Unique identifier provided by Twitter when creating your OAuth application.',
+                                'title-info' => 'Identificator unic furnizat de X la crearea aplicației dvs. OAuth.',
                             ],
 
                             'client-secret' => [
                                 'title' => 'Client Secret',
-                                'title-info' => 'Secret key associated with your Twitter OAuth client. Keep it confidential.',
+                                'title-info' => 'Cheia secretă asociată clientului dvs. OAuth X. Păstrați-o confidențială.',
                             ],
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with Twitter. Must match the URL configured in your Twitter console.',
+                                'title-info' => 'URL-ul de retur către care sunt redirecționați utilizatorii după autentificarea la X. Folosiți formatul de URL afișat (schimbați doar domeniul). Trebuie să corespundă URL-ului configurat în portalul pentru dezvoltatori X.',
                             ],
                         ],
                     ],
@@ -5022,7 +5024,7 @@ return [
             ],
 
             'email' => [
-                'info' => 'Email',
+                'info' => 'Driverul de e-mail, datele expeditorului și notificările trimise de magazin.',
                 'title' => 'Email',
 
                 'smtp' => [
@@ -5054,12 +5056,13 @@ return [
                     'contact-email-tip' => 'The email address will be shown at the bottom of your emails',
                     'contact-name' => 'Contact Name',
                     'contact-name-tip' => 'This name will be shown at the bottom of your emails',
-                    'info' => 'Set email sender name, shop email address, admin name and admin email address.',
+                    'info' => 'Alegeți cum sunt trimise e-mailurile și de la ce adrese.',
                     'sender-email' => 'Sender Email Address',
                     'sender-email-tip' => 'Emails to your customers will be sent from this address.',
                     'sender-name' => 'Sender Name',
                     'sender-name-tip' => 'This name will appear in your customers\' inbox as the email sender.',
                     'title' => 'Email Settings',
+                    'title-info' => 'Numele și adresele de la care magazinul trimite e-mailuri și care apar în subsol.',
                 ],
 
                 'notifications' => [
@@ -5067,7 +5070,7 @@ return [
                     'cancel-order-mail-to-admin' => 'Send a notification e-mail to admin after canceling an order',
                     'customer' => 'Send the customer account credentials after registration',
                     'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
-                    'info' => 'To configure, receive emails for account verification, order confirmations, updates on invoices, refunds, shipments, and order cancellations.',
+                    'info' => 'Alegeți ce e-mailuri sunt trimise clienților și administratorului.',
                     'new-inventory-source' => 'Send a notification e-mail to the inventory source after creating a shipment',
                     'new-invoice' => 'Send a notification e-mail to the customer after creating a new invoice',
                     'new-invoice-mail-to-admin' => 'Send a notification e-mail to the admin after creating a new invoice',
@@ -5079,16 +5082,17 @@ return [
                     'new-shipment-mail-to-admin' => 'Send a notification e-mail to the admin after creating a new shipment',
                     'registration' => 'Send a confirmation e-mail after customer registration',
                     'title' => 'Notifications',
+                    'title-info' => 'Activează sau dezactivează fiecare e-mail de notificare.',
                     'verification' => 'Send a verification e-mail after customer registration',
                 ],
             ],
 
             'sales' => [
-                'info' => 'Sales',
+                'info' => 'Setări pentru livrare, plăți, comenzi, facturi, taxe, finalizare comandă și retururi.',
                 'title' => 'Sales',
 
                 'shipping-setting' => [
-                    'info' => 'Configure shipping settings including Country, State, City, Street Address, Zip Code, Store Name, VAT Number, Contact Number, and Bank Details.',
+                    'info' => 'Adresa de la care sunt expediate comenzile.',
                     'title' => 'Shipping Settings',
 
                     'origin' => [
@@ -5100,14 +5104,14 @@ return [
                         'store-name' => 'Store Name',
                         'street-address' => 'Street Address',
                         'title' => 'Origin',
-                        'title-info' => 'Shipping origin refers to the location where goods or products originate before being transported to their destination.',
+                        'title-info' => 'Adresa de la care sunt expediate comenzile și datele magazinului afișate pe facturi.',
                         'vat-number' => 'Vat Number',
                         'zip' => 'Zip',
                     ],
                 ],
 
                 'shipping-methods' => [
-                    'info' => 'Configure shipping methods, including Free Shipping, Flat Rate, and additional options as needed.',
+                    'info' => 'Metodele de livrare oferite la finalizarea comenzii.',
                     'title' => 'Shipping Methods',
 
                     'free-shipping' => [
@@ -5115,7 +5119,7 @@ return [
                         'page-title' => 'Free Shipping',
                         'status' => 'Status',
                         'title' => 'Title',
-                        'title-info' => '"Free shipping" refers to a shipping method where the cost of shipping is waived, and the seller covers the shipping expenses for delivering goods to the buyer.',
+                        'title-info' => 'O metodă de livrare fără cost.',
                     ],
 
                     'flat-rate-shipping' => [
@@ -5124,7 +5128,7 @@ return [
                         'rate' => 'Rate',
                         'status' => 'Status',
                         'title' => 'Title',
-                        'title-info' => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
+                        'title-info' => 'O metodă de livrare cu tarif fix, per comandă sau per articol.',
                         'type' => [
                             'per-order' => 'Per Order',
                             'per-unit' => 'Per Unit',
@@ -5145,20 +5149,20 @@ return [
                     'application-fee' => 'Application Fee Payer',
                     'business-account' => 'Business Account',
                     'cash-on-delivery' => 'Cash On Delivery',
-                    'cash-on-delivery-info' => 'Payment method where customers pay in cash upon receiving goods or services at their doorstep.',
+                    'cash-on-delivery-info' => 'Permite clienților să plătească numerar la livrare.',
                     'client-id' => 'Client ID',
-                    'client-id-info' => 'Use "sb" for testing.',
+                    'client-id-info' => 'ID-ul de client al aplicației dvs. PayPal. Folosiți-l pe cel al aplicației sandbox cât timp Sandbox este activ.',
                     'client-secret' => 'Client Secret',
-                    'client-secret-info' => 'Add your secret key here',
+                    'client-secret-info' => 'Secretul de client al aplicației dvs. PayPal.',
                     'create-success-refund' => 'Refund created successfully.',
                     'description' => 'Description',
                     'enable' => 'Enable',
                     'generate-invoice' => 'Automatically generate the invoice after placing an order',
                     'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled',
-                    'info' => 'Set payment methods information',
+                    'info' => 'Configurați metodele de plată oferite la finalizarea comenzii.',
                     'instructions' => 'Instructions',
                     'logo' => 'Logo',
-                    'logo-information' => 'Image resolution should be like 55px X 45px',
+                    'logo-information' => 'Dimensiune recomandată: 55 x 45 pixeli.',
                     'mailing-address' => 'Send Check to',
                     'merchant-description' => 'Merchant Description',
                     'merchant-id' => 'Merchant ID',
@@ -5168,7 +5172,7 @@ return [
                     'merchant-private-key-info' => 'Lipiți conținutul fișierului PEM al cheii private generate în panoul PayGlocal. Este utilizată pentru semnarea cererilor.',
                     'merchant-salt' => 'Merchant Salt',
                     'money-transfer' => 'Money Transfer',
-                    'money-transfer-info' => 'Transfer of funds from one person or account to another, often electronically, for various purposes such as transactions or remittances.',
+                    'money-transfer-info' => 'Permite clienților să plătească prin transfer bancar sau cec.',
                     'page-title' => 'Payment Methods',
                     'paid' => 'Paid',
                     'payglocal' => 'PayGlocal',
@@ -5180,11 +5184,11 @@ return [
                     'payglocal-public-key-info' => 'Lipiți conținutul fișierului PEM al cheii publice PayGlocal. Este utilizată pentru criptarea cererilor și pentru verificarea răspunsurilor.',
                     'payglocal-sandbox-info' => 'Trimiteți plățile către mediul de testare PayGlocal.',
                     'paypal-smart-button' => 'PayPal',
-                    'paypal-smart-button-info' => 'PayPal Smart Button: Simplifies online payments with customizable buttons for secure, multi-method transactions on websites and apps.',
+                    'paypal-smart-button-info' => 'Afișează butoanele PayPal la finalizarea comenzii pentru ca clienții să plătească cu PayPal sau cu cardul.',
                     'paypal-standard' => 'PayPal Standard',
-                    'paypal-standard-info' => 'PayPal Standard is a basic PayPal payment option for online businesses, enabling customers to pay using their PayPal accounts or credit/debit cards.',
+                    'paypal-standard-info' => 'Trimite clienții la PayPal pentru a plăti cu contul PayPal sau cu cardul.',
                     'payu' => 'PayU',
-                    'payu-info' => 'Configure PayU payment gateway settings',
+                    'payu-info' => 'Acceptă plăți prin PayU.',
                     'payu-merchant-key-info' => 'Enter your PayU Merchant Key obtained from PayU dashboard',
                     'payu-merchant-salt-info' => 'Enter your PayU Merchant Salt obtained from PayU dashboard',
                     'pending' => 'Pending',
@@ -5199,7 +5203,7 @@ return [
                     'production-mode-info' => 'For production mode only.',
                     'public-key-id' => 'ID-ul cheii publice',
                     'razorpay' => 'Razorpay',
-                    'razorpay-info' => 'Razorpay is a financial technology platform that helps businesses accept, process, and disburse payments.',
+                    'razorpay-info' => 'Acceptă plăți prin Razorpay.',
                     'sandbox' => 'Sandbox',
                     'set-invoice-status' => 'Set the invoice status after creating the invoice to',
                     'set-order-status' => 'Set the order status after creating the invoice to',
@@ -5207,7 +5211,7 @@ return [
                     'statement-descriptor' => 'Statement Descriptor',
                     'status' => 'Status',
                     'stripe' => 'Stripe',
-                    'stripe-info' => 'Configure Stripe payment gateway settings for secure online transactions',
+                    'stripe-info' => 'Acceptă plăți cu cardul prin Stripe.',
                     'test-client-id' => 'Test Mode Client ID',
                     'test-client-secret' => 'Test Mode Client Secret',
                     'test-mode-info' => 'For test/sandbox mode only.',
@@ -5215,7 +5219,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info' => 'Set order numbers, minimum orders and back orders.',
+                    'info' => 'Reîncercări la crearea comenzii, numere de comandă, valoare minimă și recomandare.',
                     'title' => 'Order Settings',
 
                     'order-creation' => [
@@ -5226,7 +5230,7 @@ return [
 
                     'order-number' => [
                         'generator' => 'Order Number Generator',
-                        'info' => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',
+                        'info' => 'Cum sunt construite numerele de comandă generate.',
                         'length' => 'Order Number Length',
                         'prefix' => 'Order Number Prefix',
                         'suffix' => 'Order Number Suffix',
@@ -5238,17 +5242,17 @@ return [
                         'enable' => 'Enable',
                         'include-discount-amount' => 'Include Discount Amount',
                         'include-tax-amount' => 'Include Tax to Amount',
-                        'info' => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
+                        'info' => 'Valoarea minimă a comenzii cu care un client poate finaliza cumpărarea.',
                         'minimum-order-amount' => 'Minimum Order Amount',
                         'title' => 'Minimum Order Settings',
                     ],
 
                     'reorder' => [
                         'admin-reorder' => 'Admin Reorder',
-                        'admin-reorder-info' => 'Enable or disable the reordering feature for admin users.',
-                        'info' => 'Enable or disable the reordering feature for admin users.',
+                        'admin-reorder-info' => 'Permite unui administrator să plaseze din nou o comandă din panoul de administrare.',
+                        'info' => 'Permite plasarea din nou a unei comenzi din panoul de administrare sau din magazin.',
                         'shop-reorder' => 'Shop Reorder',
-                        'shop-reorder-info' => 'Enable or disable the reordering feature for shop users.',
+                        'shop-reorder-info' => 'Permite unui client să plaseze din nou o comandă din magazin.',
                         'title' => 'Allow Reorder',
                     ],
 
@@ -5260,12 +5264,12 @@ return [
                 ],
 
                 'invoice-settings' => [
-                    'info' => 'Set invoice number, payment terms, invoice slip design and invoice reminders.',
+                    'info' => 'Numere de factură, termene de plată, tipăriri PDF și memento-uri.',
                     'title' => 'Invoice Settings',
 
                     'invoice-number' => [
                         'generator' => 'Invoice Number Generator',
-                        'info' => 'Configuration of rules or parameters for generating and assigning unique identification numbers to invoices for organizational and tracking purposes.',
+                        'info' => 'Cum sunt construite numerele de factură generate.',
                         'length' => 'Invoice Number Length',
                         'prefix' => 'Invoice Number Prefix',
                         'suffix' => 'Invoice Number Suffix',
@@ -5276,7 +5280,7 @@ return [
                         'due-duration' => 'Due Duration',
                         'due-duration-day' => ':due-duration Day',
                         'due-duration-days' => ':due-duration Days',
-                        'info' => 'Agreed-upon conditions dictating when and how payment for goods or services should be made by the buyer to the seller.',
+                        'info' => 'La cât timp după emitere devine scadentă o factură.',
                         'title' => 'Payment Terms',
                     ],
 
@@ -5294,7 +5298,7 @@ return [
                     ],
 
                     'invoice-reminders' => [
-                        'info' => 'Automated notifications or communications sent to customers to remind them of upcoming or overdue payments for invoices.',
+                        'info' => 'Câte memento-uri de plată sunt trimise pentru o factură neachitată și la ce interval.',
                         'interval-between-reminders' => 'Interval between reminders',
                         'maximum-limit-of-reminders' => 'Maximum limit of reminders',
                         'title' => 'Invoice Reminders',
@@ -5303,11 +5307,11 @@ return [
 
                 'taxes' => [
                     'title' => 'Taxes',
-                    'title-info' => 'Taxes are mandatory fees imposed by governments on goods, services, or transactions, collected by sellers and remitted to the authorities.',
+                    'title-info' => 'Categorii de taxe, modul de calcul și de afișare.',
 
                     'categories' => [
                         'title' => 'Tax Categories',
-                        'title-info' => 'Tax categories are classifications for different types of taxes, such as sales tax, value-added tax, or excise tax, used to categorize and apply tax rates to products or services.',
+                        'title-info' => 'Categoria de taxă aplicată livrării și cea implicită pentru produsele noi.',
                         'product' => 'Product Default Tax Category',
                         'shipping' => 'Shipping Tax Category',
                         'none' => 'None',
@@ -5327,7 +5331,7 @@ return [
                         'shipping-origin' => 'Shipping Origin',
                         'shipping-prices' => 'Shipping Prices',
                         'title' => 'Calculation Settings',
-                        'title-info' => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
+                        'title-info' => 'La ce se calculează taxa și dacă prețurile introduse o includ deja.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5335,14 +5339,14 @@ return [
                         'default-post-code' => 'Default Post Code',
                         'default-state' => 'Default State',
                         'title' => 'Default Destination Calculation',
-                        'title-info' => 'Automated determination of a standard or initial destination based on predefined factors or settings.',
+                        'title-info' => 'Adresa în raport cu care se calculează taxa înainte ca clientul să o introducă pe a sa.',
                     ],
 
                     'shopping-cart' => [
                         'show-tax-breakdown' => 'Afișează detalierea taxelor',
                         'show-tax-breakdown-info' => 'Afișează o detaliere a taxelor pe produs și pe cotă în rezumatul coșului și al comenzii. Destinat depanării.',
                         'title' => 'Shopping Cart Display Settings',
-                        'title-info' => 'Set the display of taxes in the shopping cart',
+                        'title-info' => 'Cum este afișată taxa în coș și la finalizarea comenzii.',
                         'display-prices' => 'Display Prices',
                         'display-subtotal' => 'Display Subtotal',
                         'display-shipping-amount' => 'Display Shipping Amount',
@@ -5353,7 +5357,7 @@ return [
 
                     'sales' => [
                         'title' => 'Orders, Invoices, Refunds Display Settings',
-                        'title-info' => 'Set the display of taxes in the orders, invoices, and refunds',
+                        'title-info' => 'Cum este afișată taxa pe comenzi, facturi și rambursări.',
                         'display-prices' => 'Display Prices',
                         'display-subtotal' => 'Display Subtotal',
                         'display-shipping-amount' => 'Display Shipping Amount',
@@ -5365,7 +5369,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Checkout',
-                    'info' => 'Set guest checkout, Enable or Disable Mini Cart, cart Summary.',
+                    'info' => 'Cumpărare ca vizitator, pagina coșului, mini-coșul și rezumatul coșului.',
 
                     'shopping-cart' => [
                         'cart-page' => 'Cart Page',
@@ -5376,21 +5380,21 @@ return [
                         'estimate-shipping-info' => 'Enable estimated shipping to provide upfront shipping costs.',
                         'guest-checkout' => 'Allow guest checkout',
                         'guest-checkout-info' => 'Enable guest checkout for a faster, hassle-free purchase process.',
-                        'info' => 'Enable guest checkout, cart page, cross-sell products, and estimated shipping to enhance user convenience and streamline the shopping process for increased sales.',
+                        'info' => 'Cumpărare ca vizitator, pagina coșului, produse de vânzare încrucișată și livrare estimată.',
                         'title' => 'Shopping Cart',
                     ],
 
                     'my-cart' => [
                         'display-item-quantities' => 'Display item quantities',
                         'display-number-in-cart' => 'Display number of items in cart',
-                        'info' => 'Enable settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.',
+                        'info' => 'Dacă indicatorul coșului arată cantitatea totală sau numărul de articole.',
                         'summary' => 'Summary',
                         'title' => 'My Cart',
                     ],
 
                     'mini-cart' => [
                         'display-mini-cart' => 'Display Mini Cart',
-                        'info' => 'Enable Mini Cart settings to display the mini cart and show Mini Cart Offer Information for quick access to cart details and promotions.',
+                        'info' => 'Afișează mini-coșul și textul ofertei prezentat în el.',
                         'mini-cart-offer-info' => 'Mini Cart Offer Information',
                         'title' => 'Mini Cart',
                     ],
@@ -5420,7 +5424,7 @@ return [
                     'evening' => 'Evening',
                     'exchange' => 'Exchange',
                     'file-extension-info' => 'Tipurile de fișiere pe care clienții și administratorii le pot atașa unei cereri de returnare, cum ar fi fotografii ale produselor sau documente justificative.',
-                    'info' => 'RMA is part of the process of returning a product to a business to receive a refund, replacement, or repair.',
+                    'info' => 'Retururi pe care clienții le pot solicita după plasarea unei comenzi.',
                     'morning' => 'Morning',
                     'new-rma-message-to-customer' => 'New RMA Message to Customer',
                     'no' => 'No',

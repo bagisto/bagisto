@@ -4338,11 +4338,11 @@ return [
             'title' => '配置',
 
             'general' => [
-                'info' => '常规',
+                'info' => '单位、内容、设计、汇率、站点地图和 GDPR 的全店设置。',
                 'title' => '常规',
 
                 'general' => [
-                    'info' => '配置单位设置，并可启用或禁用面包屑和访客选项。',
+                    'info' => '单位设置和店铺面包屑导航。',
                     'title' => '常规',
 
                     'unit-options' => [
@@ -4360,7 +4360,7 @@ return [
                 ],
 
                 'content' => [
-                    'info' => '设置页眉优惠标题和自定义脚本。',
+                    'info' => '顶部优惠横幅、版权信息、预测加载规则和自定义脚本。',
                     'title' => '内容',
 
                     'header-offer' => [
@@ -4373,7 +4373,7 @@ return [
 
                     'copyright-content' => [
                         'title' => '版权内容',
-                        'info' => '配置在您网站页脚显示的版权内容，以保护您的知识产权并提升品牌知名度。',
+                        'info' => '店铺页脚显示的版权信息。',
                     ],
 
                     'speculation-rules' => [
@@ -4414,24 +4414,25 @@ return [
                         'custom-css' => '自定义CSS',
                         'custom-javascript' => '自定义Javascript',
                         'title' => '自定义脚本',
-                        'title-info' => '自定义脚本是为软件添加特定功能或特性的个性化代码片段，独特地增强其功能。',
+                        'title-info' => '添加到店铺每个页面的 CSS 和 JavaScript。',
                     ],
                 ],
 
                 'design' => [
-                    'info' => '为管理面板设置标志和网站图标。',
+                    'info' => '后台面板的标志和网站图标，以及店铺菜单分类的展示方式。',
                     'title' => '设计',
 
                     'admin-logo' => [
                         'favicon' => '网站图标',
                         'logo-image' => '标志图像',
                         'title' => '管理标志',
-                        'title-info' => '为您的网站前端配置标志和网站图标图像，以提升品牌形象和识别度。',
+                        'title-info' => '在后台面板和发给管理员的邮件中显示的标志与网站图标。',
                     ],
 
                     'menu-category' => [
                         'default' => '默认菜单',
                         'info' => '此设置控制标题菜单中类别的可见性。您可以选择仅显示父类别或显示所有嵌套类别。',
+                        'preview' => '预览',
                         'preview-default' => '预览默认菜单',
                         'preview-sidebar' => '预览侧边栏菜单',
                         'sidebar' => '侧边栏菜单',
@@ -4441,11 +4442,11 @@ return [
 
                 'gdpr' => [
                     'title' => 'GDPR',
-                    'info' => 'GDPR 合规设置',
+                    'info' => 'Cookie 提示、同意类别以及向客户展示的隐私协议。',
 
                     'settings' => [
                         'title' => 'GDPR 合规设置',
-                        'info' => '管理 GDPR 合规设置，包括隐私政策。根据要求启用或禁用 GDPR 功能。',
+                        'info' => '为该渠道开启或关闭 GDPR 功能。',
                         'enabled' => '启用 GDPR',
                     ],
 
@@ -4519,7 +4520,7 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info' => '设置站点地图选项。',
+                    'info' => '站点地图生成与文件数量上限。',
                     'title' => '站点地图',
 
                     'settings' => [
@@ -4529,7 +4530,7 @@ return [
                     ],
 
                     'file-limits' => [
-                        'info' => '设置文件限制选项。',
+                        'info' => '单个站点地图文件最多写入的 URL 数量，超出后另建新文件。',
                         'max-file-size' => '最大文件大小',
                         'max-url-per-file' => '每个文件的最大 URL 数量',
                         'title' => '文件限制',
@@ -4646,18 +4647,18 @@ return [
             ],
 
             'catalog' => [
-                'info' => '目录',
+                'info' => '商品、丰富网页摘要和库存设置。',
                 'title' => '目录',
 
                 'products' => [
-                    'info' => '产品查看页面，购物车查看页面，店面，评论和属性社交分享。',
+                    'info' => '商品页和购物车页、搜索、图片尺寸、评价、属性和分享。',
                     'title' => '产品',
 
                     'settings' => [
                         'compare-options' => '比较选项',
                         'image-search-option' => '图片搜索选项',
                         'title' => '设置',
-                        'title-info' => '设置是指根据用户的偏好和要求，对系统、应用程序或设备的行为进行可配置的选择。',
+                        'title-info' => '开启或关闭商品对比和图片搜索。',
                         'wishlist-options' => '心愿单选项',
                     ],
 
@@ -4688,13 +4689,13 @@ return [
                         'allow-no-of-related-products' => '允许相关产品的数量',
                         'allow-no-of-up-sells-products' => '允许上销售产品的数量',
                         'title' => '产品查看页面配置',
-                        'title-info' => '产品查看页面配置涉及调整产品显示页面上的布局和元素，提升用户体验和信息呈现。',
+                        'title-info' => '商品页面显示的相关商品和向上销售商品数量。',
                     ],
 
                     'cart-view-page' => [
                         'allow-no-of-cross-sells-products' => '允许交叉销售产品的数量',
                         'title' => '购物车查看页面配置',
-                        'title-info' => '购物车查看页面配置涉及在购物车页面上排列商品、详细信息和选项，提高用户交互和购买流程。',
+                        'title-info' => '购物车页面显示的交叉销售商品数量。',
                     ],
 
                     'storefront' => [
@@ -4712,14 +4713,14 @@ return [
                         'products-per-page' => '每页产品数量',
                         'sort-by' => '排序方式',
                         'title' => '商店前端',
-                        'title-info' => '商店前端是在线商店的面向客户的界面，展示产品、分类和导航，提供无缝的购物体验。',
+                        'title-info' => '商品在分类页和搜索页的展示方式。',
                     ],
 
                     'small-image' => [
                         'height' => '高度',
                         'placeholder' => '小图占位符',
                         'title' => '小图',
-                        'title-info' => '商店前端是在线商店的面向客户的界面，展示产品、分类和导航，提供无缝的购物体验。',
+                        'title-info' => '小尺寸商品图片的缩放尺寸，以及商品无图片时显示的占位图。',
                         'width' => '宽度',
                     ],
 
@@ -4727,7 +4728,7 @@ return [
                         'height' => '高度',
                         'placeholder' => '中图占位符',
                         'title' => '中图',
-                        'title-info' => '中图是指中等大小的图片，提供了详细信息和屏幕空间之间的平衡，通常用于视觉效果。',
+                        'title-info' => '中等尺寸商品图片的缩放尺寸，以及商品无图片时显示的占位图。',
                         'width' => '宽度',
                     ],
 
@@ -4735,7 +4736,7 @@ return [
                         'height' => '高度',
                         'placeholder' => '大图占位符',
                         'title' => '大图',
-                        'title-info' => '大图代表提供增强细节和视觉冲击力的高分辨率图片，通常用于展示产品或图形。',
+                        'title-info' => '大尺寸商品图片的缩放尺寸，以及商品无图片时显示的占位图。',
                         'width' => '宽度',
                     ],
 
@@ -4747,25 +4748,25 @@ return [
                         'display-star-count' => '显示评分中的星级数。',
                         'summary' => '概括',
                         'title' => '评价',
-                        'title-info' => '对某物进行评估或评价，通常涉及意见和反馈。',
+                        'title-info' => '谁可以评价商品，以及评价在商品页面的显示方式。',
                     ],
 
                     'attribute' => [
                         'file-upload-size' => '允许文件上传大小（以KB为单位）',
                         'image-upload-size' => '允许图片上传大小（以KB为单位）',
                         'title' => '属性',
-                        'title-info' => '定义对象的特性或属性，影响其行为、外观或功能。',
+                        'title-info' => '属性值可上传的图片和文件的最大大小。',
                     ],
 
                     'social-share' => [
-                        'title-info' => '配置社交分享设置，以在Instagram、Twitter、WhatsApp、Facebook、Pinterest、LinkedIn和电子邮件中启用产品分享。',
+                        'title-info' => '选择商品页面显示哪些分享按钮，以及它们附带的消息。',
                         'title' => '社交分享',
                         'share-message' => '分享消息',
                         'share' => '分享',
                         'enable-social-share' => '启用社交分享？',
-                        'enable-share-whatsapp-info' => '仅在移动设备上显示WhatsApp分享链接。',
-                        'enable-share-whatsapp' => '在WhatsApp中启用分享？',
-                        'enable-share-twitter' => '在Twitter中启用分享？',
+                        'enable-share-whatsapp-info' => 'WhatsApp 分享链接仅在移动设备上显示。',
+                        'enable-share-whatsapp' => '启用在 WhatsApp 上分享？',
+                        'enable-share-twitter' => '启用在 X（Twitter）上分享？',
                         'enable-share-pinterest' => '在Pinterest中启用分享？',
                         'enable-share-linkedin' => '在Linkedin中启用分享？',
                         'enable-share-facebook' => '在Facebook中启用分享？',
@@ -4780,7 +4781,7 @@ return [
                 ],
 
                 'rich-snippets' => [
-                    'info' => '设置产品和分类。',
+                    'info' => '为搜索引擎添加到店铺页面的结构化数据。',
                     'title' => '富媒体片段',
 
                     'products' => [
@@ -4793,14 +4794,14 @@ return [
                         'show-sku' => '显示SKU',
                         'show-weight' => '显示重量',
                         'title' => '产品',
-                        'title-info' => '配置产品设置，包括SKU、重量、类别、图像、评论、评分、优惠等。',
+                        'title-info' => '选择结构化数据中包含哪些商品信息。',
                     ],
 
                     'categories' => [
                         'enable' => '启用',
                         'show-search-input-field' => '显示搜索输入框',
                         'title' => '分类',
-                        'title-info' => '“分类”是指帮助组织和分组类似产品或物品，以便更轻松地浏览和导航的组或类别。',
+                        'title-info' => '为店铺页面添加分类结构化数据，便于搜索引擎读取。',
                     ],
                 ],
 
@@ -4814,13 +4815,13 @@ return [
                         'min-qty-allowed-in-cart' => '购物车中允许的最小数量',
                         'out-of-stock-threshold' => '缺货阈值',
                         'title' => '产品库存选项',
-                        'info' => '配置产品库存选项，允许缺货订单，设置购物车的最小和最大数量，并定义缺货门槛。',
+                        'info' => '缺货时仍允许下单，并设置商品被视为缺货的数量。',
                     ],
                 ],
             ],
 
             'customer' => [
-                'info' => '顧客',
+                'info' => '地址、验证码和客户账户设置。',
                 'title' => '顧客',
 
                 'address' => [
@@ -4832,19 +4833,19 @@ return [
                         'country' => '国家',
                         'state' => '省/直辖市',
                         'title' => '要求',
-                        'title-info' => '要求是实现某个目标所必需的条件、功能或规格。',
+                        'title-info' => '客户必须填写的地址字段。',
                         'zip' => '邮政编码',
                     ],
 
                     'information' => [
                         'street-lines' => '地址行',
                         'title' => '信息',
-                        'title-info' => '“地址行”指的是地址的各个部分，通常用逗号分隔，提供如门牌号、街道名称、市区等位置信息。',
+                        'title-info' => '地址表单显示的街道地址行数。',
                     ],
                 ],
 
                 'captcha' => [
-                    'info' => '设置站点密钥、密钥和状态。',
+                    'info' => 'Google reCAPTCHA Enterprise 的密钥和状态。',
                     'title' => 'Google 验证码',
 
                     'credentials' => [
@@ -4859,7 +4860,7 @@ return [
                         'site-key-info' => '创建项目和API密钥后，在库中搜索"reCAPTCHA"服务并生成"reCAPTCHA"密钥。',
                         'status' => '状态',
                         'title' => '凭据',
-                        'title-info' => '设置Google reCAPTCHA凭据，包括API密钥、项目ID、站点密钥、密钥，并启用或禁用状态。',
+                        'title-info' => 'Google reCAPTCHA Enterprise 的凭据，以及请求被接受所需达到的分值。',
                     ],
 
                     'validations' => [
@@ -4869,7 +4870,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => '设置愿望清单、登录重定向、新闻通讯订阅、默认组选项、电子邮件验证和社交登录。',
+                    'settings-info' => '设置心愿单、登录后跳转、新账户选项、邮件订阅、邮箱验证和社交登录。',
                     'title' => '設定',
 
                     'login-as-customer' => [
@@ -4909,19 +4910,20 @@ return [
 
                     'newsletter' => [
                         'subscription' => '允许订阅通讯信息',
+                        'subscription-info' => '在店铺页脚显示订阅表单。',
                         'title' => '通讯信息',
-                        'title-info' => '“通讯信息”是通过电子邮件定期向订阅者发送的更新、优惠或内容，帮助他们保持了解和参与。',
+                        'title-info' => '店铺的邮件订阅。',
                     ],
 
                     'email' => [
                         'email-verification' => '允许电子邮件验证',
                         'title' => '电子邮件验证',
-                        'title-info' => '“电子邮件验证”通过发送确认链接来验证电子邮件地址的有效性，增强账户安全性和通信可靠性。',
+                        'title-info' => '要求新客户先确认电子邮件地址才能登录。',
                     ],
 
                     'social-login' => [
                         'title' => '社交登录',
-                        'info' => '"社交登录"允许用户通过他们的社交媒体账户访问网站，从而简化注册和登录过程。',
+                        'info' => '允许客户使用外部账户登录。每个提供商都需要各自的客户端 ID 和密钥。',
 
                         'google' => [
                             'enable-google' => '启用Google',
@@ -5000,21 +5002,21 @@ return [
                         ],
 
                         'twitter' => [
-                            'enable-twitter' => '启用Twitter',
+                            'enable-twitter' => '启用 X（Twitter）',
 
                             'client-id' => [
                                 'title' => '客户端ID',
-                                'title-info' => 'Twitter在创建OAuth应用时提供的唯一标识符。',
+                                'title-info' => '创建 OAuth 应用时由 X 提供的唯一标识符。',
                             ],
 
                             'client-secret' => [
                                 'title' => '客户端密钥',
-                                'title-info' => '与您的Twitter OAuth客户端相关联的密钥。请保密。',
+                                'title-info' => '与您的 X OAuth 客户端关联的密钥。请妥善保密。',
                             ],
 
                             'redirect' => [
                                 'title' => '重定向URL',
-                                'title-info' => '用户在通过Twitter认证后被重定向的回调URL。使用显示的占位符URL格式（仅更改您的域名）。必须与您在Twitter控制台中配置的URL匹配。',
+                                'title-info' => '用户在 X 完成认证后跳转的回调 URL。请使用所示的 URL 格式（仅更改您的域名）。它必须与 X 开发者门户中配置的 URL 一致。',
                             ],
                         ],
                     ],
@@ -5022,7 +5024,7 @@ return [
             ],
 
             'email' => [
-                'info' => '电子邮件',
+                'info' => '邮件驱动、发件人信息以及店铺发送的通知。',
                 'title' => '电子邮件',
 
                 'smtp' => [
@@ -5054,12 +5056,13 @@ return [
                     'contact-email-tip' => '此邮箱地址将显示在您邮件的页脚中。',
                     'contact-name' => '联系人姓名',
                     'contact-name-tip' => '此名称将显示在您邮件的页脚中。',
-                    'info' => '配置用于所有电子邮件的发件人姓名、商店邮箱地址、管理员和联系方式。',
+                    'info' => '选择邮件的发送方式和发件地址。',
                     'sender-email' => '发件人邮箱地址',
                     'sender-email-tip' => '向客户发送的邮件将从此地址发出。',
                     'sender-name' => '发件人姓名',
                     'sender-name-tip' => '此名称将显示在客户收件箱中作为邮件发件人。',
                     'title' => '邮件设置',
+                    'title-info' => '店铺发送邮件所用的名称和地址，以及页脚显示的联系方式。',
                 ],
 
                 'notifications' => [
@@ -5067,7 +5070,7 @@ return [
                     'cancel-order-mail-to-admin' => '取消订单后向管理员发送通知邮件',
                     'customer' => '注册后向客户发送账户凭证',
                     'customer-registration-confirmation-mail-to-admin' => '客户注册后向管理员发送确认邮件',
-                    'info' => '配置接收账户验证、订单确认、发票更新、退款、发货和订单取消的邮件。',
+                    'info' => '选择发送给客户和管理员的邮件。',
                     'new-inventory-source' => '创建发货后向库存来源发送通知邮件',
                     'new-invoice' => '创建新发票后向客户发送通知邮件',
                     'new-invoice-mail-to-admin' => '创建新发票后向管理员发送通知邮件',
@@ -5079,16 +5082,17 @@ return [
                     'new-shipment-mail-to-admin' => '创建新发货后向管理员发送通知邮件',
                     'registration' => '客户注册后发送确认邮件',
                     'title' => '通知',
+                    'title-info' => '逐项开启或关闭通知邮件。',
                     'verification' => '客户注册后发送验证邮件',
                 ],
             ],
 
             'sales' => [
-                'info' => '销售',
+                'info' => '配送、支付、订单、发票、税费、结账和退货设置。',
                 'title' => '销售',
 
                 'shipping-setting' => [
-                    'info' => '配置配送设置，包括国家、省、市、地址、邮政编码、商店名称、增值税号和联系方式等。',
+                    'info' => '订单的发货地址。',
                     'title' => '配送设置',
 
                     'origin' => [
@@ -5100,14 +5104,14 @@ return [
                         'store-name' => '商店名称',
                         'street-address' => '街道地址',
                         'title' => '发货来源',
-                        'title-info' => '发货来源指的是商品在运输到目的地之前的起始地点。',
+                        'title-info' => '订单的发货地址，以及发票上显示的店铺信息。',
                         'vat-number' => '增值税号',
                         'zip' => '邮政编码',
                     ],
                 ],
 
                 'shipping-methods' => [
-                    'info' => '根据需要设置配送方式，包括免费配送、固定运费等。',
+                    'info' => '结账时提供的配送方式。',
                     'title' => '配送方式',
 
                     'free-shipping' => [
@@ -5115,7 +5119,7 @@ return [
                         'page-title' => '免费配送',
                         'status' => '状态',
                         'title' => '标题',
-                        'title-info' => '“免费配送”是指免收运费，由卖家承担将商品配送给买家的费用。',
+                        'title-info' => '不收取费用的配送方式。',
                     ],
 
                     'flat-rate-shipping' => [
@@ -5124,7 +5128,7 @@ return [
                         'rate' => '费用',
                         'status' => '状态',
                         'title' => '标题',
-                        'title-info' => '固定运费是指无论包裹的重量、大小或距离如何，始终收取固定金额的运费。这种方式简化了运费计算，对买卖双方都有利。',
+                        'title-info' => '按订单或按件收取固定费用的配送方式。',
                         'type' => [
                             'per-order' => '每订单',
                             'per-unit' => '每单位',
@@ -5145,20 +5149,20 @@ return [
                     'application-fee' => '应用费用支付方',
                     'business-account' => '商业账户',
                     'cash-on-delivery' => '货到付款',
-                    'cash-on-delivery-info' => '客户在收到商品或服务时以现金支付的付款方式。',
+                    'cash-on-delivery-info' => '允许客户在收货时以现金支付。',
                     'client-id' => '客户端 ID',
-                    'client-id-info' => '测试时使用“sb”。',
+                    'client-id-info' => '您 PayPal 应用的客户端 ID。开启沙盒时请使用沙盒应用的客户端 ID。',
                     'client-secret' => '客户端密钥',
-                    'client-secret-info' => '在此处添加密钥。',
+                    'client-secret-info' => '您 PayPal 应用的客户端密钥。',
                     'create-success-refund' => '退款创建成功。',
                     'description' => '描述',
                     'enable' => '启用',
                     'generate-invoice' => '在订单后自动生成发票',
                     'generate-invoice-applicable' => '适用于自动生成发票的情况',
-                    'info' => '设置支付方式的信息',
+                    'info' => '配置结账时提供的支付方式。',
                     'instructions' => '说明',
                     'logo' => '标志',
-                    'logo-information' => '图像分辨率应为 55px × 45px',
+                    'logo-information' => '建议尺寸：55 x 45 像素。',
                     'mailing-address' => '邮寄地址',
                     'merchant-description' => '商户描述',
                     'merchant-id' => '商户ID',
@@ -5168,7 +5172,7 @@ return [
                     'merchant-private-key-info' => 'Paste the contents of the private key PEM file generated in the PayGlocal dashboard. It is used to sign requests.',
                     'merchant-salt' => '商户盐值',
                     'money-transfer' => '汇款',
-                    'money-transfer-info' => '资金的转移，通常以电子方式进行。可用于交易、支付等多种目的。',
+                    'money-transfer-info' => '允许客户通过银行转账或支票支付。',
                     'page-title' => '支付方式',
                     'paid' => '已支付',
                     'payglocal' => 'PayGlocal',
@@ -5180,11 +5184,11 @@ return [
                     'payglocal-public-key-info' => 'Paste the contents of the PayGlocal public key PEM file. It is used to encrypt requests and to verify responses.',
                     'payglocal-sandbox-info' => 'Send payments to the PayGlocal test environment.',
                     'paypal-smart-button' => 'PayPal',
-                    'paypal-smart-button-info' => 'PayPal 智能按钮：一种定制化的按钮，用于简化在线支付，提供多种安全的交易方式。',
+                    'paypal-smart-button-info' => '在结账时显示 PayPal 按钮，让客户使用 PayPal 或银行卡支付。',
                     'paypal-standard' => '标准 PayPal',
-                    'paypal-standard-info' => '标准 PayPal 提供基础支付选项，允许客户使用 PayPal 账户或信用/借记卡支付。',
+                    'paypal-standard-info' => '将客户跳转到 PayPal，使用 PayPal 账户或银行卡支付。',
                     'payu' => 'PayU',
-                    'payu-info' => '配置 PayU 支付网关设置',
+                    'payu-info' => '通过 PayU 接受付款。',
                     'payu-merchant-key-info' => '输入从 PayU 仪表板获取的商户密钥',
                     'payu-merchant-salt-info' => '输入从 PayU 仪表板获取的商户盐值',
                     'pending' => '待处理',
@@ -5199,7 +5203,7 @@ return [
                     'production-mode-info' => '仅限生产模式。',
                     'public-key-id' => 'Public Key ID',
                     'razorpay' => 'Razorpay',
-                    'razorpay-info' => 'Razorpay 是一个金融技术平台，帮助企业接受、处理和支付款项。',
+                    'razorpay-info' => '通过 Razorpay 接受付款。',
                     'sandbox' => '沙盒',
                     'set-invoice-status' => '设置发票生成后的状态',
                     'set-order-status' => '设置发票生成后的订单状态',
@@ -5207,7 +5211,7 @@ return [
                     'statement-descriptor' => '账单描述',
                     'status' => '状态',
                     'stripe' => 'Stripe',
-                    'stripe-info' => '配置Stripe支付网关设置以进行安全的在线交易',
+                    'stripe-info' => '通过 Stripe 接受银行卡付款。',
                     'test-client-id' => '测试模式客户端 ID',
                     'test-client-secret' => '测试模式客户端密钥',
                     'test-mode-info' => '仅限测试/沙盒模式。',
@@ -5215,7 +5219,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info' => '设置订单编号、最低订单量和预购选项。',
+                    'info' => '订单创建重试次数、订单编号、最低订单金额和再次下单。',
                     'title' => '订单设置',
 
                     'order-creation' => [
@@ -5226,7 +5230,7 @@ return [
 
                     'order-number' => [
                         'generator' => '订单编号生成器',
-                        'info' => '为每个订单分配唯一的标识符，用于跟踪和管理整个购买流程。',
+                        'info' => '生成的订单编号的构成方式。',
                         'length' => '订单编号长度',
                         'prefix' => '订单编号前缀',
                         'suffix' => '订单编号后缀',
@@ -5238,17 +5242,17 @@ return [
                         'enable' => '启用',
                         'include-discount-amount' => '包括折扣金额',
                         'include-tax-amount' => '包括税额',
-                        'info' => '设置最低要求的订单数量或金额，以便订单能够被处理或享受优惠。',
+                        'info' => '客户可以结账的最低订单金额。',
                         'minimum-order-amount' => '最低订单金额',
                         'title' => '最低订单设置',
                     ],
 
                     'reorder' => [
                         'admin-reorder' => '管理员重新订购',
-                        'admin-reorder-info' => '启用或禁用管理员用户的重新订购功能。',
-                        'info' => '启用或禁用店铺用户的重新订购功能。',
+                        'admin-reorder-info' => '允许管理员在后台重新提交订单。',
+                        'info' => '允许在后台或店铺中重新提交订单。',
                         'shop-reorder' => '店铺重新订购',
-                        'shop-reorder-info' => '启用或禁用店铺用户的重新订购功能。',
+                        'shop-reorder-info' => '允许客户在店铺中重新提交订单。',
                         'title' => '允许重新订购',
                     ],
 
@@ -5260,12 +5264,12 @@ return [
                 ],
 
                 'invoice-settings' => [
-                    'info' => '设置发票编号、支付条款、发票设计和提醒功能。',
+                    'info' => '发票编号、付款条件、PDF 打印和催款提醒。',
                     'title' => '发票设置',
 
                     'invoice-number' => [
                         'generator' => '发票编号生成器',
-                        'info' => '生成并分配唯一的发票编号，用于组织和跟踪。',
+                        'info' => '生成的发票编号的构成方式。',
                         'length' => '发票编号长度',
                         'prefix' => '发票编号前缀',
                         'suffix' => '发票编号后缀',
@@ -5276,7 +5280,7 @@ return [
                         'due-duration' => '到期时间',
                         'due-duration-day' => ':due-duration 天',
                         'due-duration-days' => ':due-duration 天',
-                        'info' => '定义买方需要支付卖方的时间和方式。',
+                        'info' => '发票开具后多久到期。',
                         'title' => '支付条款',
                     ],
 
@@ -5294,7 +5298,7 @@ return [
                     ],
 
                     'invoice-reminders' => [
-                        'info' => '自动通知客户有关发票即将到期、接近付款期限或已逾期的信息。',
+                        'info' => '未付发票发送多少次付款提醒，以及提醒间隔。',
                         'interval-between-reminders' => '提醒间隔',
                         'maximum-limit-of-reminders' => '提醒的最大次数',
                         'title' => '发票提醒',
@@ -5303,11 +5307,11 @@ return [
 
                 'taxes' => [
                     'title' => '税费',
-                    'title-info' => '税费是政府对商品、服务或交易征收的强制性费用，由卖方代为收取并上缴税务机关。',
+                    'title-info' => '税种、税费的计算方式和显示方式。',
 
                     'categories' => [
                         'title' => '税费类别',
-                        'title-info' => '税费类别是对不同税种（如销售税、增值税、消费税等）的分类，用于对产品或服务进行税率分类和应用。',
+                        'title-info' => '应用于配送的税种，以及新商品默认的税种。',
                         'product' => '产品默认税费类别',
                         'shipping' => '运费税费类别',
                         'none' => '无',
@@ -5327,7 +5331,7 @@ return [
                         'shipping-origin' => '发货地',
                         'shipping-prices' => '运费',
                         'title' => '计算设置',
-                        'title-info' => '与商品或服务的价格、折扣、税费、附加费用等相关的详细信息。',
+                        'title-info' => '税费的计算基础，以及所填价格是否已含税。',
                     ],
 
                     'default-destination-calculation' => [
@@ -5335,14 +5339,14 @@ return [
                         'default-post-code' => '默认邮政编码',
                         'default-state' => '默认省/州',
                         'title' => '默认目的地计算',
-                        'title-info' => '根据预定义的元素或设置，自动确定标准或初始目的地。',
+                        'title-info' => '客户填写自己的地址前，用于计算税费的地址。',
                     ],
 
                     'shopping-cart' => [
                         'show-tax-breakdown' => '显示税费明细',
                         'show-tax-breakdown-info' => '在购物车和结账摘要中显示按商品、按税率的详细税费明细。用于调试。',
                         'title' => '购物车显示设置',
-                        'title-info' => '设置购物车中税费的显示方式。',
+                        'title-info' => '税费在购物车和结账时的显示方式。',
                         'display-prices' => '显示价格',
                         'display-subtotal' => '显示小计',
                         'display-shipping-amount' => '显示运费',
@@ -5353,7 +5357,7 @@ return [
 
                     'sales' => [
                         'title' => '订单、发票和退款显示设置',
-                        'title-info' => '设置订单、发票和退款中税费的显示方式。',
+                        'title-info' => '税费在订单、发票和退款中的显示方式。',
                         'display-prices' => '显示价格',
                         'display-subtotal' => '显示小计',
                         'display-shipping-amount' => '显示运费',
@@ -5365,7 +5369,7 @@ return [
 
                 'checkout' => [
                     'title' => '结账',
-                    'info' => '设置访客结账功能，启用或禁用迷你购物车和购物车摘要。',
+                    'info' => '访客结账、购物车页面、迷你购物车和购物车汇总。',
 
                     'shopping-cart' => [
                         'cart-page' => '购物车页面',
@@ -5376,21 +5380,21 @@ return [
                         'estimate-shipping-info' => '启用运费估算功能，提前提供运费信息。',
                         'guest-checkout' => '允许访客结账',
                         'guest-checkout-info' => '启用访客结账功能，实现快捷和无障碍的购买流程。',
-                        'info' => '通过启用访客结账、购物车页面、交叉销售商品和运费估算，提升用户便利性，简化购物流程并提高销售额。',
+                        'info' => '访客结账、购物车页面、交叉销售商品和预估运费。',
                         'title' => '购物车',
                     ],
 
                     'my-cart' => [
                         'display-item-quantities' => '显示商品数量',
                         'display-number-in-cart' => '显示购物车中的商品数量',
-                        'info' => '启用“我的购物车”设置以显示商品数量概览，并显示购物车中商品总数，方便追踪。',
+                        'info' => '购物车计数显示商品总数量还是商品条目数。',
                         'summary' => '概要',
                         'title' => '我的购物车',
                     ],
 
                     'mini-cart' => [
                         'display-mini-cart' => '显示迷你购物车',
-                        'info' => '启用迷你购物车设置以显示迷你购物车，并显示迷你购物车优惠信息，便于快速访问购物车详情和促销活动。',
+                        'info' => '显示迷你购物车，以及其中展示的优惠文案。',
                         'mini-cart-offer-info' => '迷你购物车优惠信息',
                         'title' => '迷你购物车',
                     ],
@@ -5420,7 +5424,7 @@ return [
                     'evening' => '晚上',
                     'exchange' => '换货',
                     'file-extension-info' => '客户和管理员可在退货请求中附加的文件类型，例如产品照片或佐证文件。',
-                    'info' => 'RMA是将产品退还给企业以获得退款、替换或修理的过程的一部分。',
+                    'info' => '客户下单后可申请的退货。',
                     'morning' => '早上',
                     'new-rma-message-to-customer' => '给客户的新RMA消息',
                     'no' => '否',

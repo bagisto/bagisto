@@ -4338,11 +4338,11 @@ return [
             'title' => 'Configuration',
 
             'general' => [
-                'info' => 'General',
+                'info' => 'Store-wide settings for units, content, design, exchange rates, sitemap and GDPR.',
                 'title' => 'General',
 
                 'general' => [
-                    'info' => 'Configure unit settings and toggle the Breadcrumbs and Visitor options on or off.',
+                    'info' => 'Unit settings and storefront breadcrumbs.',
                     'title' => 'General',
 
                     'unit-options' => [
@@ -4360,7 +4360,7 @@ return [
                 ],
 
                 'content' => [
-                    'info' => 'Set header offer title and custom scripts.',
+                    'info' => 'Header offer, copyright line, speculation rules and custom scripts.',
                     'title' => 'Content',
 
                     'header-offer' => [
@@ -4373,7 +4373,7 @@ return [
 
                     'copyright-content' => [
                         'title' => 'Copyright Content',
-                        'info' => 'Configure the copyright content displayed in the footer of your website to protect your intellectual property and enhance brand recognition.',
+                        'info' => 'The copyright line shown in the storefront footer.',
                     ],
 
                     'speculation-rules' => [
@@ -4414,24 +4414,25 @@ return [
                         'custom-css' => 'Custom CSS',
                         'custom-javascript' => 'Custom Javascript',
                         'title' => 'Custom Scripts',
-                        'title-info' => 'Custom scripts are personalized pieces of code created to add specific functions or features to software, enhancing its capabilities uniquely.',
+                        'title-info' => 'CSS and JavaScript added to every page of the storefront.',
                     ],
                 ],
 
                 'design' => [
-                    'info' => 'Set logo and favicon icon for admin panel.',
+                    'info' => 'The admin panel logo and favicon, and how storefront menu categories are shown.',
                     'title' => 'Design',
 
                     'admin-logo' => [
                         'favicon' => 'Favicon',
                         'logo-image' => 'Logo Image',
                         'title' => 'Admin Logo',
-                        'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
+                        'title-info' => 'The logo and favicon shown in the admin panel and in emails sent to the admin.',
                     ],
 
                     'menu-category' => [
                         'default' => 'Default Menu',
                         'info' => 'This setting controls the visibility of categories in the header menu. You can choose to display only parent categories or all nested categories.',
+                        'preview' => 'Preview',
                         'preview-default' => 'Preview Default Menu',
                         'preview-sidebar' => 'Preview Sidebar Menu',
                         'sidebar' => 'Sidebar Menu',
@@ -4441,11 +4442,11 @@ return [
 
                 'gdpr' => [
                     'title' => 'GDPR',
-                    'info' => 'GDPR Compliance Settings',
+                    'info' => 'Cookie notice, consent categories and the privacy agreement shown to customers.',
 
                     'settings' => [
                         'title' => 'GDPR Compliance Settings',
-                        'info' => 'Manage GDPR compliance settings, including data privacy agreement. Enable or disable GDPR features as required',
+                        'info' => 'Turn GDPR features on or off for this channel.',
                         'enabled' => 'Enable GDPR',
                     ],
 
@@ -4519,7 +4520,7 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info' => 'Set sitemap options.',
+                    'info' => 'Sitemap generation and file limits.',
                     'title' => 'Sitemap',
 
                     'settings' => [
@@ -4529,7 +4530,7 @@ return [
                     ],
 
                     'file-limits' => [
-                        'info' => 'Set file limits options.',
+                        'info' => 'The largest number of URLs written to one sitemap file before another is started.',
                         'max-file-size' => 'Maximum file size',
                         'max-url-per-file' => 'Maximum no. of URLs per file',
                         'title' => 'File Limits',
@@ -4646,18 +4647,18 @@ return [
             ],
 
             'catalog' => [
-                'info' => 'Catalog',
+                'info' => 'Settings for products, rich snippets and inventory.',
                 'title' => 'Catalog',
 
                 'products' => [
-                    'info' => 'Product view page, cart view page, store front, review and attribute social share.',
+                    'info' => 'Product and cart pages, search, image sizes, reviews, attributes and sharing.',
                     'title' => 'Products',
 
                     'settings' => [
                         'compare-options' => 'Compare options',
                         'image-search-option' => 'Image Search Option',
                         'title' => 'Settings',
-                        'title-info' => 'Settings refer to configurable choices that control how a system, application, or device behaves, tailored to user preferences and requirements.',
+                        'title-info' => 'Turn product comparison and image search on or off.',
                         'wishlist-options' => 'Wishlist options',
                     ],
 
@@ -4688,13 +4689,13 @@ return [
                         'allow-no-of-related-products' => 'Allowed number of Related Products',
                         'allow-no-of-up-sells-products' => 'Allowed number of Up-Sell Products',
                         'title' => 'Product view page configuration',
-                        'title-info' => 'Product view page configuration entails adjusting the layout and elements on a product\'s display page, enhancing user experience and information presentation.',
+                        'title-info' => 'How many related and up-sell products are shown on the product page.',
                     ],
 
                     'cart-view-page' => [
                         'allow-no-of-cross-sells-products' => 'Allowed number of Cross-Sell Products',
                         'title' => 'Cart view page configuration',
-                        'title-info' => 'Cart view page configuration involves arranging items, details, and options on the shopping cart page, improving user interaction and purchase flow.',
+                        'title-info' => 'How many cross-sell products are shown on the cart page.',
                     ],
 
                     'storefront' => [
@@ -4712,14 +4713,14 @@ return [
                         'products-per-page' => 'Products Per Page',
                         'sort-by' => 'Sort By',
                         'title' => 'Storefront',
-                        'title-info' => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
+                        'title-info' => 'How products are listed on category and search pages.',
                     ],
 
                     'small-image' => [
                         'height' => 'Height',
                         'placeholder' => 'Small Image Placeholder',
                         'title' => 'Small Image',
-                        'title-info' => 'Storefront is the customer-facing interface of an online shop, showcasing products, categories, and navigation for a seamless shopping experience.',
+                        'title-info' => 'The size small product images are resized to, and the placeholder shown when a product has no image.',
                         'width' => 'Width',
                     ],
 
@@ -4727,7 +4728,7 @@ return [
                         'height' => 'Height',
                         'placeholder' => 'Medium Image Placeholder',
                         'title' => 'Medium Image',
-                        'title-info' => 'Medium image refers to a moderate-sized picture that offers a balance between detail and screen space, commonly used for visuals.',
+                        'title-info' => 'The size medium product images are resized to, and the placeholder shown when a product has no image.',
                         'width' => 'Width',
                     ],
 
@@ -4735,7 +4736,7 @@ return [
                         'height' => 'Height',
                         'placeholder' => 'Large Image Placeholder',
                         'title' => 'Large image',
-                        'title-info' => 'Large image represents a high-resolution picture providing enhanced detail and visual impact, often used for showcasing products or graphics.',
+                        'title-info' => 'The size large product images are resized to, and the placeholder shown when a product has no image.',
                         'width' => 'Width',
                     ],
 
@@ -4747,25 +4748,25 @@ return [
                         'display-star-count' => 'Display the star count in ratings.',
                         'summary' => 'Summary',
                         'title' => 'Review',
-                        'title-info' => 'Evaluation or assessment of something, often involving opinions and feedback.',
+                        'title-info' => 'Who may review a product, and how reviews are shown on the product page.',
                     ],
 
                     'attribute' => [
                         'file-upload-size' => 'Allowed File Upload Size (in Kb)',
                         'image-upload-size' => 'Allowed Image Upload Size (in Kb)',
                         'title' => 'Attribute',
-                        'title-info' => 'Characteristic or property that defines an object, influencing its behavior, appearance, or function.',
+                        'title-info' => 'The largest image and file that may be uploaded for an attribute value.',
                     ],
 
                     'social-share' => [
-                        'title-info' => 'Configure social sharing settings to enable product sharing on Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn, and via email.',
+                        'title-info' => 'Choose which share buttons appear on the product page, and the message they carry.',
                         'title' => 'Social Share',
                         'share-message' => 'Share Message',
                         'share' => 'Share',
                         'enable-social-share' => 'Enable Social Share?',
-                        'enable-share-whatsapp-info' => 'What\'s App share link just will appear to mobile devices.',
-                        'enable-share-whatsapp' => 'Enable Share in What\'s App?',
-                        'enable-share-twitter' => 'Enable Share in Twitter?',
+                        'enable-share-whatsapp-info' => 'The WhatsApp share link only appears on mobile devices.',
+                        'enable-share-whatsapp' => 'Enable Share on WhatsApp?',
+                        'enable-share-twitter' => 'Enable Share on X (Twitter)?',
                         'enable-share-pinterest' => 'Enable Share in Pinterest?',
                         'enable-share-linkedin' => 'Enable Share in Linkedin?',
                         'enable-share-facebook' => 'Enable Share in Facebook?',
@@ -4780,7 +4781,7 @@ return [
                 ],
 
                 'rich-snippets' => [
-                    'info' => 'Set products and categories.',
+                    'info' => 'Structured data added to storefront pages for search engines.',
                     'title' => 'Rich Snippets',
 
                     'products' => [
@@ -4793,14 +4794,14 @@ return [
                         'show-sku' => 'Show SKU',
                         'show-weight' => 'Show Weight',
                         'title' => 'Products',
-                        'title-info' => 'Configure product settings including with SKU, weight, Categories, Images, Reviews, Ratings, Offers and etc.',
+                        'title-info' => 'Choose which product details are included in the structured data.',
                     ],
 
                     'categories' => [
                         'enable' => 'Enable',
                         'show-search-input-field' => 'Show Search Input Field',
                         'title' => 'Categories',
-                        'title-info' => '"Categories" refer to groups or classifications that help organize and group similar products or items together for easier browsing and navigation.',
+                        'title-info' => 'Add category structured data to storefront pages so search engines can read it.',
                     ],
                 ],
 
@@ -4814,13 +4815,13 @@ return [
                         'min-qty-allowed-in-cart' => 'Minimum Qty Allowed in Shopping Cart',
                         'out-of-stock-threshold' => 'Out-of-Stock Threshold',
                         'title' => 'Product Stock Option',
-                        'info' => 'Configure product stock options to allow back orders, set minimum and maximum cart quantities, and define out-of-stock thresholds.',
+                        'info' => 'Allow orders when stock runs out, and set the quantity at which a product counts as out of stock.',
                     ],
                 ],
             ],
 
             'customer' => [
-                'info' => 'Customer',
+                'info' => 'Settings for addresses, captcha and customer accounts.',
                 'title' => 'Customer',
 
                 'address' => [
@@ -4832,19 +4833,19 @@ return [
                         'country' => 'Country',
                         'state' => 'State',
                         'title' => 'Requirements',
-                        'title-info' => 'Requirements are the conditions, features, or specifications necessary for something to be fulfilled, achieved, or met successfully.',
+                        'title-info' => 'Which address fields a customer must fill in.',
                         'zip' => 'Zip',
                     ],
 
                     'information' => [
                         'street-lines' => 'Lines in a Street Address',
                         'title' => 'Information',
-                        'title-info' => '"Lines in a street address" refer to individual segments of an address, often separated by commas, providing location information such as house number, street, city, and more.',
+                        'title-info' => 'How many street address lines the address form shows.',
                     ],
                 ],
 
                 'captcha' => [
-                    'info' => 'Set site key, secret key and status.',
+                    'info' => 'Google reCAPTCHA Enterprise keys and status.',
                     'title' => 'Google Captcha',
 
                     'credentials' => [
@@ -4859,7 +4860,7 @@ return [
                         'site-key-info' => 'Once the project and API key have been created, search for the "reCAPTCHA" service in the library and generate the "reCAPTCHA" keys.',
                         'status' => 'Status',
                         'title' => 'Credentials',
-                        'title-info' => 'Set Google reCAPTCHA credentials including API key, Project ID, Site Key, Secret Key, and enable or disable the status.',
+                        'title-info' => 'Credentials for Google reCAPTCHA Enterprise, and the score a request must reach to be accepted.',
                     ],
 
                     'validations' => [
@@ -4869,7 +4870,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Set wishlist, login redirection, newsletter subscriptions, default group option , email verifications and social login.',
+                    'settings-info' => 'Set the wishlist, login redirect, new account options, newsletter, email verification and social login.',
                     'title' => 'Settings',
 
                     'login-as-customer' => [
@@ -4909,19 +4910,20 @@ return [
 
                     'newsletter' => [
                         'subscription' => 'Allow Newsletter Subscription',
+                        'subscription-info' => 'Show a subscription form in the storefront footer.',
                         'title' => 'Newsletter Subscription',
-                        'title-info' => '"Newsletter information" contains updates, offers, or content shared regularly through emails to subscribers, keeping them informed and engaged.',
+                        'title-info' => 'Newsletter sign-up on the storefront.',
                     ],
 
                     'email' => [
                         'email-verification' => 'Allow Email Verification',
                         'title' => 'Email Verification',
-                        'title-info' => '"Email verification" confirms the authenticity of an email address, often by sending a confirmation link, enhancing account security and communication reliability.',
+                        'title-info' => 'Ask a new customer to confirm their email address before they can sign in.',
                     ],
 
                     'social-login' => [
                         'title' => 'Social Login',
-                        'info' => '"Social login" allows users to access a website using their social media accounts, simplifying registration and login processes.',
+                        'info' => 'Let customers sign in with an external account. Each provider needs its own client ID and secret.',
 
                         'google' => [
                             'enable-google' => 'Enable Google',
@@ -5000,21 +5002,21 @@ return [
                         ],
 
                         'twitter' => [
-                            'enable-twitter' => 'Enable Twitter',
+                            'enable-twitter' => 'Enable X (Twitter)',
 
                             'client-id' => [
                                 'title' => 'Client ID',
-                                'title-info' => 'Unique identifier provided by Twitter when creating your OAuth application.',
+                                'title-info' => 'Unique identifier provided by X when creating your OAuth application.',
                             ],
 
                             'client-secret' => [
                                 'title' => 'Client Secret',
-                                'title-info' => 'Secret key associated with your Twitter OAuth client. Keep it confidential.',
+                                'title-info' => 'Secret key associated with your X OAuth client. Keep it confidential.',
                             ],
 
                             'redirect' => [
                                 'title' => 'Redirect URL',
-                                'title-info' => 'Callback URL where users are redirected after authenticating with Twitter. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your Twitter console.',
+                                'title-info' => 'Callback URL where users are redirected after authenticating with X. Use the placeholder URL format shown (only change your domain). This must match the URL configured in your X developer portal.',
                             ],
                         ],
                     ],
@@ -5022,7 +5024,7 @@ return [
             ],
 
             'email' => [
-                'info' => 'Email',
+                'info' => 'Mail driver, sender details and the notifications your store sends.',
                 'title' => 'Email',
 
                 'smtp' => [
@@ -5054,12 +5056,13 @@ return [
                     'contact-email-tip' => 'This email address will appear in the footer of your emails.',
                     'contact-name' => 'Contact Name',
                     'contact-name-tip' => 'This name will appear in the footer of your emails.',
-                    'info' => 'Configure the sender name, shop email address, admin, and contact details used across all emails.',
+                    'info' => 'Choose how email is sent and the addresses it is sent from.',
                     'sender-email' => 'Sender Email Address',
                     'sender-email-tip' => 'Emails to your customers will be sent from this address.',
                     'sender-name' => 'Sender Name',
                     'sender-name-tip' => 'This name will appear in your customers\' inbox as the email sender.',
                     'title' => 'Email Settings',
+                    'title-info' => 'The names and addresses your store sends email from and shows in the footer.',
                 ],
 
                 'notifications' => [
@@ -5067,7 +5070,7 @@ return [
                     'cancel-order-mail-to-admin' => 'Send a notification e-mail to admin after canceling an order',
                     'customer' => 'Send the customer account credentials after registration',
                     'customer-registration-confirmation-mail-to-admin' => 'Send a confirmation e-mail to admin after customer registration',
-                    'info' => 'To configure, receive emails for account verification, order confirmations, updates on invoices, refunds, shipments, and order cancellations.',
+                    'info' => 'Choose which emails are sent to customers and to the admin.',
                     'new-inventory-source' => 'Send a notification e-mail to the inventory source after creating a shipment',
                     'new-invoice' => 'Send a notification e-mail to the customer after creating a new invoice',
                     'new-invoice-mail-to-admin' => 'Send a notification e-mail to the admin after creating a new invoice',
@@ -5079,16 +5082,17 @@ return [
                     'new-shipment-mail-to-admin' => 'Send a notification e-mail to the admin after creating a new shipment',
                     'registration' => 'Send a confirmation e-mail after customer registration',
                     'title' => 'Notifications',
+                    'title-info' => 'Turn individual notification emails on or off.',
                     'verification' => 'Send a verification e-mail after customer registration',
                 ],
             ],
 
             'sales' => [
-                'info' => 'Sales',
+                'info' => 'Settings for shipping, payments, orders, invoices, taxes, checkout and returns.',
                 'title' => 'Sales',
 
                 'shipping-setting' => [
-                    'info' => 'Configure shipping settings including Country, State, City, Street Address, Zip Code, Store Name, VAT Number, Contact Number, and Bank Details.',
+                    'info' => 'The address orders are shipped from.',
                     'title' => 'Shipping Settings',
 
                     'origin' => [
@@ -5100,14 +5104,14 @@ return [
                         'store-name' => 'Store Name',
                         'street-address' => 'Street Address',
                         'title' => 'Origin',
-                        'title-info' => 'Shipping origin refers to the location where goods or products originate before being transported to their destination.',
+                        'title-info' => 'The address orders are shipped from, and the store details shown on invoices.',
                         'vat-number' => 'Vat Number',
                         'zip' => 'Zip',
                     ],
                 ],
 
                 'shipping-methods' => [
-                    'info' => 'Configure shipping methods, including Free Shipping, Flat Rate, and additional options as needed.',
+                    'info' => 'The shipping methods offered at checkout.',
                     'title' => 'Shipping Methods',
 
                     'free-shipping' => [
@@ -5115,7 +5119,7 @@ return [
                         'page-title' => 'Free Shipping',
                         'status' => 'Status',
                         'title' => 'Title',
-                        'title-info' => '"Free shipping" refers to a shipping method where the cost of shipping is waived, and the seller covers the shipping expenses for delivering goods to the buyer.',
+                        'title-info' => 'A shipping method with no charge.',
                     ],
 
                     'flat-rate-shipping' => [
@@ -5124,7 +5128,7 @@ return [
                         'rate' => 'Rate',
                         'status' => 'Status',
                         'title' => 'Title',
-                        'title-info' => 'Flat rate shipping is a shipping method where a fixed fee is charged for shipping, regardless of the weight, size, or distance of the package. This simplifies shipping costs and can be advantageous for both buyers and sellers.',
+                        'title-info' => 'A shipping method charging a fixed rate, either once per order or for each item.',
                         'type' => [
                             'per-order' => 'Per Order',
                             'per-unit' => 'Per Unit',
@@ -5145,20 +5149,20 @@ return [
                     'application-fee' => 'Application Fee Payer',
                     'business-account' => 'Business Account',
                     'cash-on-delivery' => 'Cash On Delivery',
-                    'cash-on-delivery-info' => 'Payment method where customers pay in cash upon receiving goods or services at their doorstep.',
+                    'cash-on-delivery-info' => 'Let customers pay in cash when the order is delivered.',
                     'client-id' => 'Client ID',
-                    'client-id-info' => 'Use "sb" for testing.',
+                    'client-id-info' => 'The client ID of your PayPal app. Use the sandbox app\'s client ID while Sandbox is on.',
                     'client-secret' => 'Client Secret',
-                    'client-secret-info' => 'Add your secret key here',
+                    'client-secret-info' => 'The client secret of your PayPal app.',
                     'create-success-refund' => 'Refund created successfully.',
                     'description' => 'Description',
                     'enable' => 'Enable',
                     'generate-invoice' => 'Automatically generate the invoice after placing an order',
                     'generate-invoice-applicable' => 'Applicable if automatic generate invoice is enabled',
-                    'info' => 'Set payment methods information',
+                    'info' => 'Configure the payment methods offered at checkout.',
                     'instructions' => 'Instructions',
                     'logo' => 'Logo',
-                    'logo-information' => 'Image resolution should be like 55px X 45px',
+                    'logo-information' => 'Recommended size: 55 x 45 pixels.',
                     'mailing-address' => 'Send Check to',
                     'merchant-description' => 'Merchant Description',
                     'merchant-id' => 'Merchant ID',
@@ -5168,7 +5172,7 @@ return [
                     'merchant-private-key-info' => 'Paste the contents of the private key PEM file generated in the PayGlocal dashboard. It is used to sign requests.',
                     'merchant-salt' => 'Merchant Salt',
                     'money-transfer' => 'Money Transfer',
-                    'money-transfer-info' => 'Transfer of funds from one person or account to another, often electronically, for various purposes such as transactions or remittances.',
+                    'money-transfer-info' => 'Let customers pay by bank transfer or cheque.',
                     'page-title' => 'Payment Methods',
                     'paid' => 'Paid',
                     'payglocal' => 'PayGlocal',
@@ -5180,11 +5184,11 @@ return [
                     'payglocal-public-key-info' => 'Paste the contents of the PayGlocal public key PEM file. It is used to encrypt requests and to verify responses.',
                     'payglocal-sandbox-info' => 'Send payments to the PayGlocal test environment.',
                     'paypal-smart-button' => 'PayPal',
-                    'paypal-smart-button-info' => 'PayPal Smart Button: Simplifies online payments with customizable buttons for secure, multi-method transactions on websites and apps.',
+                    'paypal-smart-button-info' => 'Show PayPal\'s buttons at checkout so customers can pay with PayPal or a card.',
                     'paypal-standard' => 'PayPal Standard',
-                    'paypal-standard-info' => 'PayPal Standard is a basic PayPal payment option for online businesses, enabling customers to pay using their PayPal accounts or credit/debit cards.',
+                    'paypal-standard-info' => 'Send customers to PayPal to pay with their PayPal account or a card.',
                     'payu' => 'PayU',
-                    'payu-info' => 'Configure PayU payment gateway settings',
+                    'payu-info' => 'Accept payments through PayU.',
                     'payu-merchant-key-info' => 'Enter your PayU Merchant Key obtained from PayU dashboard',
                     'payu-merchant-salt-info' => 'Enter your PayU Merchant Salt obtained from PayU dashboard',
                     'pending' => 'Pending',
@@ -5199,7 +5203,7 @@ return [
                     'production-mode-info' => 'For production mode only.',
                     'public-key-id' => 'Public Key ID',
                     'razorpay' => 'Razorpay',
-                    'razorpay-info' => 'Razorpay is a financial technology platform that helps businesses accept, process, and disburse payments.',
+                    'razorpay-info' => 'Accept payments through Razorpay.',
                     'sandbox' => 'Sandbox',
                     'set-invoice-status' => 'Set the invoice status after creating the invoice to',
                     'set-order-status' => 'Set the order status after creating the invoice to',
@@ -5207,7 +5211,7 @@ return [
                     'statement-descriptor' => 'Statement Descriptor',
                     'status' => 'Status',
                     'stripe' => 'Stripe',
-                    'stripe-info' => 'Configure Stripe payment gateway settings for secure online transactions',
+                    'stripe-info' => 'Accept card payments through Stripe.',
                     'test-client-id' => 'Test Mode Client ID',
                     'test-client-secret' => 'Test Mode Client Secret',
                     'test-mode-info' => 'For test/sandbox mode only.',
@@ -5215,7 +5219,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info' => 'Set order numbers, minimum orders and back orders.',
+                    'info' => 'Order creation retries, order numbers, minimum order value and reordering.',
                     'title' => 'Order Settings',
 
                     'order-creation' => [
@@ -5226,7 +5230,7 @@ return [
 
                     'order-number' => [
                         'generator' => 'Order Number Generator',
-                        'info' => 'Unique identifier assigned to a specific customer order, aiding tracking, communication, and reference throughout the purchasing process.',
+                        'info' => 'How generated order numbers are built.',
                         'length' => 'Order Number Length',
                         'prefix' => 'Order Number Prefix',
                         'suffix' => 'Order Number Suffix',
@@ -5238,17 +5242,17 @@ return [
                         'enable' => 'Enable',
                         'include-discount-amount' => 'Include Discount Amount',
                         'include-tax-amount' => 'Include Tax to Amount',
-                        'info' => 'Configured criteria specifying the lowest required quantity or value for an order to be processed or qualify for benefits.',
+                        'info' => 'The smallest order total a customer may check out with.',
                         'minimum-order-amount' => 'Minimum Order Amount',
                         'title' => 'Minimum Order Settings',
                     ],
 
                     'reorder' => [
                         'admin-reorder' => 'Admin Reorder',
-                        'admin-reorder-info' => 'Enable or disable the reordering feature for admin users.',
-                        'info' => 'Enable or disable the reordering feature for admin users.',
+                        'admin-reorder-info' => 'Allow an admin to place an order again from the admin panel.',
+                        'info' => 'Allow an order to be placed again from the admin panel or the storefront.',
                         'shop-reorder' => 'Shop Reorder',
-                        'shop-reorder-info' => 'Enable or disable the reordering feature for shop users.',
+                        'shop-reorder-info' => 'Allow a customer to place an order again from the storefront.',
                         'title' => 'Allow Reorder',
                     ],
 
@@ -5260,12 +5264,12 @@ return [
                 ],
 
                 'invoice-settings' => [
-                    'info' => 'Set invoice number, payment terms, invoice slip design and invoice reminders.',
+                    'info' => 'Invoice numbers, payment terms, PDF print outs and reminders.',
                     'title' => 'Invoice Settings',
 
                     'invoice-number' => [
                         'generator' => 'Invoice Number Generator',
-                        'info' => 'Configuration of rules or parameters for generating and assigning unique identification numbers to invoices for organizational and tracking purposes.',
+                        'info' => 'How generated invoice numbers are built.',
                         'length' => 'Invoice Number Length',
                         'prefix' => 'Invoice Number Prefix',
                         'suffix' => 'Invoice Number Suffix',
@@ -5276,7 +5280,7 @@ return [
                         'due-duration' => 'Due Duration',
                         'due-duration-day' => ':due-duration Day',
                         'due-duration-days' => ':due-duration Days',
-                        'info' => 'Agreed-upon conditions dictating when and how payment for goods or services should be made by the buyer to the seller.',
+                        'info' => 'How long after it is issued an invoice is due.',
                         'title' => 'Payment Terms',
                     ],
 
@@ -5294,7 +5298,7 @@ return [
                     ],
 
                     'invoice-reminders' => [
-                        'info' => 'Automated notifications or communications sent to customers to remind them of upcoming or overdue payments for invoices.',
+                        'info' => 'How many payment reminders are sent for an unpaid invoice, and how far apart.',
                         'interval-between-reminders' => 'Interval between reminders',
                         'maximum-limit-of-reminders' => 'Maximum limit of reminders',
                         'title' => 'Invoice Reminders',
@@ -5303,11 +5307,11 @@ return [
 
                 'taxes' => [
                     'title' => 'Taxes',
-                    'title-info' => 'Taxes are mandatory fees imposed by governments on goods, services, or transactions, collected by sellers and remitted to the authorities.',
+                    'title-info' => 'Tax categories, how tax is calculated, and how it is displayed.',
 
                     'categories' => [
                         'title' => 'Tax Categories',
-                        'title-info' => 'Tax categories are classifications for different types of taxes, such as sales tax, value-added tax, or excise tax, used to categorize and apply tax rates to products or services.',
+                        'title-info' => 'The tax category applied to shipping, and the one new products default to.',
                         'product' => 'Product Default Tax Category',
                         'shipping' => 'Shipping Tax Category',
                         'none' => 'None',
@@ -5327,7 +5331,7 @@ return [
                         'shipping-origin' => 'Shipping Origin',
                         'shipping-prices' => 'Shipping Prices',
                         'title' => 'Calculation Settings',
-                        'title-info' => 'Details about the cost of goods or services, including base price, discounts, taxes, and additional charges.information',
+                        'title-info' => 'What tax is calculated on, and whether entered prices already include it.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5335,14 +5339,14 @@ return [
                         'default-post-code' => 'Default Post Code',
                         'default-state' => 'Default State',
                         'title' => 'Default Destination Calculation',
-                        'title-info' => 'Automated determination of a standard or initial destination based on predefined factors or settings.',
+                        'title-info' => 'The address tax is calculated against before the customer enters their own.',
                     ],
 
                     'shopping-cart' => [
                         'show-tax-breakdown' => 'Show Tax Breakdown',
                         'show-tax-breakdown-info' => 'Display a detailed per-product, per-rate tax breakdown in the cart and checkout summary. Intended for debugging.',
                         'title' => 'Shopping Cart Display Settings',
-                        'title-info' => 'Set the display of taxes in the shopping cart',
+                        'title-info' => 'How tax is shown in the cart and at checkout.',
                         'display-prices' => 'Display Prices',
                         'display-subtotal' => 'Display Subtotal',
                         'display-shipping-amount' => 'Display Shipping Amount',
@@ -5353,7 +5357,7 @@ return [
 
                     'sales' => [
                         'title' => 'Orders, Invoices, Refunds Display Settings',
-                        'title-info' => 'Set the display of taxes in the orders, invoices, and refunds',
+                        'title-info' => 'How tax is shown on orders, invoices and refunds.',
                         'display-prices' => 'Display Prices',
                         'display-subtotal' => 'Display Subtotal',
                         'display-shipping-amount' => 'Display Shipping Amount',
@@ -5365,7 +5369,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Checkout',
-                    'info' => 'Set guest checkout, Enable or Disable Mini Cart, cart Summary.',
+                    'info' => 'Guest checkout, the cart page, the mini cart and the cart summary.',
 
                     'shopping-cart' => [
                         'cart-page' => 'Cart Page',
@@ -5376,21 +5380,21 @@ return [
                         'estimate-shipping-info' => 'Enable estimated shipping to provide upfront shipping costs.',
                         'guest-checkout' => 'Allow guest checkout',
                         'guest-checkout-info' => 'Enable guest checkout for a faster, hassle-free purchase process.',
-                        'info' => 'Enable guest checkout, cart page, cross-sell products, and estimated shipping to enhance user convenience and streamline the shopping process for increased sales.',
+                        'info' => 'Guest checkout, the cart page, cross-sell products and estimated shipping.',
                         'title' => 'Shopping Cart',
                     ],
 
                     'my-cart' => [
                         'display-item-quantities' => 'Display item quantities',
                         'display-number-in-cart' => 'Display number of items in cart',
-                        'info' => 'Enable settings for My Cart to show a summary of item quantities and display the total number of items in the cart for easy tracking.',
+                        'info' => 'Whether the cart count shows the total item quantity or the number of items.',
                         'summary' => 'Summary',
                         'title' => 'My Cart',
                     ],
 
                     'mini-cart' => [
                         'display-mini-cart' => 'Display Mini Cart',
-                        'info' => 'Enable Mini Cart settings to display the mini cart and show Mini Cart Offer Information for quick access to cart details and promotions.',
+                        'info' => 'Show the mini cart, and the offer text displayed inside it.',
                         'mini-cart-offer-info' => 'Mini Cart Offer Information',
                         'title' => 'Mini Cart',
                     ],
@@ -5420,7 +5424,7 @@ return [
                     'evening' => 'Evening',
                     'exchange' => 'Exchange',
                     'file-extension-info' => 'The file types customers and admins may attach to a return request, such as product photos or supporting documents.',
-                    'info' => 'RMA is part of the process of returning a product to a business to receive a refund, replacement, or repair.',
+                    'info' => 'Returns customers can request after an order is placed.',
                     'morning' => 'Morning',
                     'new-rma-message-to-customer' => 'New RMA Message to Customer',
                     'no' => 'No',

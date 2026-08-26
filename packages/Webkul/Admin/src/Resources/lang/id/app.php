@@ -4338,11 +4338,11 @@ return [
             'title' => 'Konfigurasi',
 
             'general' => [
-                'info' => 'Umum',
+                'info' => 'Pengaturan seluruh toko untuk satuan, konten, desain, kurs, peta situs, dan GDPR.',
                 'title' => 'Umum',
 
                 'general' => [
-                    'info' => 'Atur pengaturan unit dan aktifkan/nonaktifkan opsi Breadcrumbs dan Pengunjung.',
+                    'info' => 'Pengaturan satuan dan remah navigasi toko.',
                     'title' => 'Umum',
 
                     'unit-options' => [
@@ -4360,7 +4360,7 @@ return [
                 ],
 
                 'content' => [
-                    'info' => 'Atur judul penawaran header dan skrip kustom.',
+                    'info' => 'Spanduk penawaran, baris hak cipta, aturan spekulasi, dan skrip khusus.',
                     'title' => 'Konten',
 
                     'header-offer' => [
@@ -4373,7 +4373,7 @@ return [
 
                     'copyright-content' => [
                         'title' => 'Contenuto del copyright',
-                        'info' => 'Configura il contenuto del copyright visualizzato nel piè di pagina del tuo sito web per proteggere la tua proprietà intellettuale e migliorare il riconoscimento del marchio.',
+                        'info' => 'Baris hak cipta yang ditampilkan di bagian bawah toko.',
                     ],
 
                     'speculation-rules' => [
@@ -4414,24 +4414,25 @@ return [
                         'custom-css' => 'CSS Kustom',
                         'custom-javascript' => 'Javascript Kustom',
                         'title' => 'Skrip Kustom',
-                        'title-info' => 'Skrip kustom adalah potongan kode yang dibuat secara khusus untuk menambahkan fungsi atau fitur tertentu ke dalam perangkat lunak, sehingga meningkatkan kemampuannya secara unik.',
+                        'title-info' => 'CSS dan JavaScript yang ditambahkan ke setiap halaman toko.',
                     ],
                 ],
 
                 'design' => [
-                    'info' => 'Atur logo dan ikon favicon untuk panel admin.',
+                    'info' => 'Logo dan favicon panel admin, serta cara kategori menu toko ditampilkan.',
                     'title' => 'Desain',
 
                     'admin-logo' => [
                         'favicon' => 'Favicon',
                         'logo-image' => 'Logo Image',
                         'title' => 'Admin Logo',
-                        'title-info' => 'Configure logo and favicon images for your website\'s front end for better branding and recognition.',
+                        'title-info' => 'Logo dan favicon yang tampil di panel admin dan pada email ke admin.',
                     ],
 
                     'menu-category' => [
                         'default' => 'Menu Default',
                         'info' => 'Pengaturan ini mengontrol visibilitas kategori dalam menu header. Anda dapat memilih untuk menampilkan hanya kategori induk atau seluruh kategori bersarang.',
+                        'preview' => 'Pratinjau',
                         'preview-default' => 'Pratinjau Menu Default',
                         'preview-sidebar' => 'Pratinjau Menu Sidebar',
                         'sidebar' => 'Menu Sidebar',
@@ -4441,11 +4442,11 @@ return [
 
                 'gdpr' => [
                     'title' => 'GDPR',
-                    'info' => 'Pengaturan Kepatuhan GDPR',
+                    'info' => 'Pemberitahuan kuki, kategori persetujuan, dan perjanjian privasi yang ditampilkan kepada pelanggan.',
 
                     'settings' => [
                         'title' => 'Pengaturan Kepatuhan GDPR',
-                        'info' => 'Kelola pengaturan kepatuhan GDPR, termasuk perjanjian privasi data. Aktifkan atau nonaktifkan fitur GDPR sesuai kebutuhan.',
+                        'info' => 'Aktifkan atau nonaktifkan fitur GDPR untuk saluran ini.',
                         'enabled' => 'Aktifkan GDPR',
                     ],
 
@@ -4519,7 +4520,7 @@ return [
                 ],
 
                 'sitemap' => [
-                    'info' => 'Atur opsi sitemap.',
+                    'info' => 'Pembuatan peta situs dan batas berkas.',
                     'title' => 'Sitemap',
 
                     'settings' => [
@@ -4529,7 +4530,7 @@ return [
                     ],
 
                     'file-limits' => [
-                        'info' => 'Atur opsi batasan file.',
+                        'info' => 'Jumlah URL terbanyak yang ditulis dalam satu berkas peta situs sebelum berkas berikutnya dimulai.',
                         'max-file-size' => 'Ukuran Maksimum File',
                         'max-url-per-file' => 'Jumlah Maksimum URL per File',
                         'title' => 'Batasan File',
@@ -4646,18 +4647,18 @@ return [
             ],
 
             'catalog' => [
-                'info' => 'Katalog',
+                'info' => 'Pengaturan produk, rich snippet, dan stok.',
                 'title' => 'Katalog',
 
                 'products' => [
-                    'info' => 'Halaman tampilan produk, halaman tampilan keranjang, toko depan, ulasan, dan berbagi atribut sosial.',
+                    'info' => 'Halaman produk dan keranjang, pencarian, ukuran gambar, ulasan, atribut, dan berbagi.',
                     'title' => 'Produk',
 
                     'settings' => [
                         'compare-options' => 'Opsi Perbandingan',
                         'image-search-option' => 'Opsi Pencarian Gambar',
                         'title' => 'Pengaturan',
-                        'title-info' => 'Pengaturan mengacu pada pilihan yang dapat dikonfigurasi yang mengontrol bagaimana sistem, aplikasi, atau perangkat berperilaku, disesuaikan dengan preferensi dan kebutuhan pengguna.',
+                        'title-info' => 'Aktifkan atau nonaktifkan perbandingan produk dan pencarian gambar.',
                         'wishlist-options' => 'Opsi Wishlist',
                     ],
 
@@ -4688,13 +4689,13 @@ return [
                         'allow-no-of-related-products' => 'Jumlah Produk Terkait yang Diizinkan',
                         'allow-no-of-up-sells-products' => 'Jumlah Produk Up-Sell yang Diizinkan',
                         'title' => 'Konfigurasi Halaman Tampilan Produk',
-                        'title-info' => 'Konfigurasi halaman tampilan produk melibatkan penyesuaian tata letak dan elemen pada halaman tampilan produk, meningkatkan pengalaman pengguna dan penyajian informasi.',
+                        'title-info' => 'Berapa banyak produk terkait dan produk penjualan naik yang ditampilkan di halaman produk.',
                     ],
 
                     'cart-view-page' => [
                         'allow-no-of-cross-sells-products' => 'Jumlah Produk Cross-Sell yang Diizinkan',
                         'title' => 'Konfigurasi Halaman Tampilan Keranjang',
-                        'title-info' => 'Konfigurasi halaman tampilan keranjang melibatkan pengaturan item, detail, dan opsi di halaman keranjang belanja, meningkatkan interaksi pengguna dan alur pembelian.',
+                        'title-info' => 'Berapa banyak produk penjualan silang yang ditampilkan di halaman keranjang.',
                     ],
 
                     'storefront' => [
@@ -4712,14 +4713,14 @@ return [
                         'products-per-page' => 'Produk Per Halaman',
                         'sort-by' => 'Urutkan Berdasarkan',
                         'title' => 'Toko Depan',
-                        'title-info' => 'Toko depan adalah antarmuka yang menghadap pelanggan dari toko online, menampilkan produk, kategori, dan navigasi untuk pengalaman belanja yang mulus.',
+                        'title-info' => 'Bagaimana produk ditampilkan di halaman kategori dan pencarian.',
                     ],
 
                     'small-image' => [
                         'height' => 'Tinggi',
                         'placeholder' => 'Placeholder Gambar Kecil',
                         'title' => 'Gambar Kecil',
-                        'title-info' => 'Toko depan adalah antarmuka yang menghadap pelanggan dari toko online, menampilkan produk, kategori, dan navigasi untuk pengalaman belanja yang mulus.',
+                        'title-info' => 'Ukuran gambar produk kecil setelah diubah, dan gambar pengganti bila produk tidak memiliki gambar.',
                         'width' => 'Lebar',
                     ],
 
@@ -4727,7 +4728,7 @@ return [
                         'height' => 'Tinggi',
                         'placeholder' => 'Placeholder Gambar Sedang',
                         'title' => 'Gambar Sedang',
-                        'title-info' => 'Gambar sedang mengacu pada gambar berukuran sedang yang menawarkan keseimbangan antara detail dan ruang layar, umumnya digunakan untuk visual.',
+                        'title-info' => 'Ukuran gambar produk sedang setelah diubah, dan gambar pengganti bila produk tidak memiliki gambar.',
                         'width' => 'Lebar',
                     ],
 
@@ -4735,7 +4736,7 @@ return [
                         'height' => 'Tinggi',
                         'placeholder' => 'Placeholder Gambar Besar',
                         'title' => 'Gambar Besar',
-                        'title-info' => 'Gambar besar mewakili gambar beresolusi tinggi yang memberikan detail yang lebih baik dan dampak visual, sering digunakan untuk menampilkan produk atau grafik.',
+                        'title-info' => 'Ukuran gambar produk besar setelah diubah, dan gambar pengganti bila produk tidak memiliki gambar.',
                         'width' => 'Lebar',
                     ],
 
@@ -4747,25 +4748,25 @@ return [
                         'display-star-count' => 'Tampilkan jumlah bintang dalam penilaian.',
                         'summary' => 'Ringkasan',
                         'title' => 'Ulasan',
-                        'title-info' => 'Evaluasi atau penilaian terhadap sesuatu, biasanya melibatkan opini dan masukan.',
+                        'title-info' => 'Siapa yang boleh mengulas produk, dan bagaimana ulasan ditampilkan di halaman produk.',
                     ],
 
                     'attribute' => [
                         'file-upload-size' => 'Ukuran Unggahan File yang Diizinkan (dalam Kb)',
                         'image-upload-size' => 'Ukuran Unggahan Gambar yang Diizinkan (dalam Kb)',
                         'title' => 'Atribut',
-                        'title-info' => 'Karakteristik atau properti yang mendefinisikan objek, mempengaruhi perilaku, penampilan, atau fungsi.',
+                        'title-info' => 'Ukuran gambar dan berkas terbesar yang boleh diunggah untuk sebuah nilai atribut.',
                     ],
 
                     'social-share' => [
-                        'title-info' => 'Konfigurasi pengaturan berbagi sosial untuk memungkinkan berbagi produk di Instagram, Twitter, WhatsApp, Facebook, Pinterest, LinkedIn, dan melalui email.',
+                        'title-info' => 'Pilih tombol berbagi mana yang muncul di halaman produk, dan pesan yang dibawanya.',
                         'title' => 'Berbagi Sosial',
                         'share-message' => 'Pesan Berbagi',
                         'share' => 'Bagikan',
                         'enable-social-share' => 'Aktifkan Berbagi Sosial?',
-                        'enable-share-whatsapp-info' => 'Tautan berbagi WhatsApp hanya akan muncul di perangkat seluler.',
+                        'enable-share-whatsapp-info' => 'Tautan berbagi WhatsApp hanya muncul di perangkat seluler.',
                         'enable-share-whatsapp' => 'Aktifkan Berbagi di WhatsApp?',
-                        'enable-share-twitter' => 'Aktifkan Berbagi di Twitter?',
+                        'enable-share-twitter' => 'Aktifkan Berbagi di X (Twitter)?',
                         'enable-share-pinterest' => 'Aktifkan Berbagi di Pinterest?',
                         'enable-share-linkedin' => 'Aktifkan Berbagi di LinkedIn?',
                         'enable-share-facebook' => 'Aktifkan Berbagi di Facebook?',
@@ -4780,7 +4781,7 @@ return [
                 ],
 
                 'rich-snippets' => [
-                    'info' => 'Atur produk dan kategori.',
+                    'info' => 'Data terstruktur yang ditambahkan ke halaman toko untuk mesin pencari.',
                     'title' => 'Rich Snippets',
 
                     'products' => [
@@ -4793,14 +4794,14 @@ return [
                         'show-sku' => 'Tampilkan SKU',
                         'show-weight' => 'Tampilkan Berat',
                         'title' => 'Produk',
-                        'title-info' => 'Konfigurasi pengaturan produk termasuk dengan SKU, berat, Kategori, Gambar, Ulasan, Peringkat, Penawaran, dll.',
+                        'title-info' => 'Pilih detail produk mana yang disertakan dalam data terstruktur.',
                     ],
 
                     'categories' => [
                         'enable' => 'Aktifkan',
                         'show-search-input-field' => 'Tampilkan Kolom Pencarian',
                         'title' => 'Kategori',
-                        'title-info' => '"Kategori" mengacu pada kelompok atau klasifikasi yang membantu mengorganisir dan mengelompokkan produk atau item serupa untuk mempermudah pencarian dan navigasi.',
+                        'title-info' => 'Tambahkan data terstruktur kategori ke halaman toko agar mesin pencari dapat membacanya.',
                     ],
                 ],
 
@@ -4814,13 +4815,13 @@ return [
                         'min-qty-allowed-in-cart' => 'Jumlah Minimum yang Diizinkan di Keranjang Belanja',
                         'out-of-stock-threshold' => 'Ambang Batas Stok Habis',
                         'title' => 'Opsi Stok Produk',
-                        'info' => 'Konfigurasikan opsi stok produk untuk memungkinkan pemesanan kembali, menetapkan jumlah minimum dan maksimum di keranjang, dan tentukan ambang batas stok habis.',
+                        'info' => 'Izinkan pesanan saat stok habis, dan tetapkan jumlah saat produk dianggap habis.',
                     ],
                 ],
             ],
 
             'customer' => [
-                'info' => 'Pelanggan',
+                'info' => 'Pengaturan alamat, captcha, dan akun pelanggan.',
                 'title' => 'Pelanggan',
 
                 'address' => [
@@ -4832,19 +4833,19 @@ return [
                         'country' => 'Negara',
                         'state' => 'Negara Bagian',
                         'title' => 'Persyaratan',
-                        'title-info' => 'Persyaratan adalah kondisi, fitur, atau spesifikasi yang diperlukan agar sesuatu dapat dipenuhi, tercapai, atau berhasil dipenuhi.',
+                        'title-info' => 'Kolom alamat mana yang harus diisi pelanggan.',
                         'zip' => 'Kode Pos',
                     ],
 
                     'information' => [
                         'street-lines' => 'Baris di Alamat Jalan',
                         'title' => 'Informasi',
-                        'title-info' => '"Baris di alamat jalan" mengacu pada segmen individual dari alamat, sering dipisahkan dengan koma, memberikan informasi lokasi seperti nomor rumah, jalan, kota, dan lainnya.',
+                        'title-info' => 'Berapa banyak baris alamat yang ditampilkan formulir alamat.',
                     ],
                 ],
 
                 'captcha' => [
-                    'info' => 'Setel kunci situs, kunci rahasia, dan status.',
+                    'info' => 'Kunci dan status Google reCAPTCHA Enterprise.',
                     'title' => 'Google Captcha',
 
                     'credentials' => [
@@ -4859,7 +4860,7 @@ return [
                         'site-key-info' => 'Setelah proyek dan kunci API dibuat, cari layanan "reCAPTCHA" di perpustakaan dan hasilkan kunci "reCAPTCHA".',
                         'status' => 'Status',
                         'title' => 'Kredensial',
-                        'title-info' => 'Tetapkan kredensial Google reCAPTCHA termasuk kunci API, ID Proyek, Kunci Situs, Kunci Rahasia, dan aktifkan atau nonaktifkan status.',
+                        'title-info' => 'Kredensial Google reCAPTCHA Enterprise, dan skor yang harus dicapai sebuah permintaan agar diterima.',
                     ],
 
                     'validations' => [
@@ -4869,7 +4870,7 @@ return [
                 ],
 
                 'settings' => [
-                    'settings-info' => 'Setel wishlist, pengalihan login, langganan newsletter, opsi grup default, verifikasi email, dan login sosial.',
+                    'settings-info' => 'Atur daftar keinginan, pengalihan setelah masuk, opsi akun baru, buletin, verifikasi email, dan masuk lewat media sosial.',
                     'title' => 'Pengaturan',
 
                     'login-as-customer' => [
@@ -4909,19 +4910,20 @@ return [
 
                     'newsletter' => [
                         'subscription' => 'Izinkan Langganan Newsletter',
+                        'subscription-info' => 'Tampilkan formulir langganan di bagian bawah toko.',
                         'title' => 'Langganan Newsletter',
-                        'title-info' => '"Informasi Newsletter" berisi pembaruan, penawaran, atau konten yang dibagikan secara teratur melalui email kepada pelanggan, menjaga mereka tetap terinformasi dan terlibat.',
+                        'title-info' => 'Pendaftaran buletin di toko.',
                     ],
 
                     'email' => [
                         'email-verification' => 'Izinkan Verifikasi Email',
                         'title' => 'Verifikasi Email',
-                        'title-info' => '"Verifikasi email" mengonfirmasi keaslian alamat email, sering kali dengan mengirimkan tautan konfirmasi, meningkatkan keamanan akun dan keandalan komunikasi.',
+                        'title-info' => 'Minta pelanggan baru mengonfirmasi alamat emailnya sebelum dapat masuk.',
                     ],
 
                     'social-login' => [
                         'title' => 'Login Sosial',
-                        'info' => '"Login sosial" memungkinkan pengguna mengakses situs web menggunakan akun media sosial mereka, sehingga proses registrasi dan masuk menjadi lebih mudah.',
+                        'info' => 'Izinkan pelanggan masuk dengan akun eksternal. Setiap penyedia memerlukan ID klien dan rahasianya sendiri.',
 
                         'google' => [
                             'enable-google' => 'Aktifkan Google',
@@ -5000,21 +5002,21 @@ return [
                         ],
 
                         'twitter' => [
-                            'enable-twitter' => 'Aktifkan Twitter',
+                            'enable-twitter' => 'Aktifkan X (Twitter)',
 
                             'client-id' => [
                                 'title' => 'Client ID',
-                                'title-info' => 'Pengenal unik yang diberikan oleh Twitter saat membuat aplikasi OAuth.',
+                                'title-info' => 'Pengenal unik yang diberikan X saat membuat aplikasi OAuth Anda.',
                             ],
 
                             'client-secret' => [
                                 'title' => 'Client Secret',
-                                'title-info' => 'Kunci rahasia yang terkait dengan klien OAuth Twitter Anda. Jaga kerahasiaannya.',
+                                'title-info' => 'Kunci rahasia yang terkait dengan klien OAuth X Anda. Jaga kerahasiaannya.',
                             ],
 
                             'redirect' => [
                                 'title' => 'URL Pengalihan',
-                                'title-info' => 'URL callback tempat pengguna diarahkan setelah otentikasi dengan Twitter. Gunakan format URL placeholder yang ditampilkan (hanya ubah domain Anda). Harus sesuai dengan URL yang dikonfigurasi di konsol Twitter Anda.',
+                                'title-info' => 'URL callback tempat pengguna dialihkan setelah autentikasi dengan X. Gunakan format URL yang ditampilkan (ubah hanya domain Anda). Ini harus cocok dengan URL yang dikonfigurasi di portal pengembang X.',
                             ],
                         ],
                     ],
@@ -5022,7 +5024,7 @@ return [
             ],
 
             'email' => [
-                'info' => 'Email',
+                'info' => 'Driver surat, data pengirim, dan notifikasi yang dikirim toko Anda.',
                 'title' => 'Email',
 
                 'smtp' => [
@@ -5054,12 +5056,13 @@ return [
                     'contact-email-tip' => 'Alamat email ini akan muncul di footer email Anda.',
                     'contact-name' => 'Nama Kontak',
                     'contact-name-tip' => 'Nama ini akan muncul di footer email Anda.',
-                    'info' => 'Konfigurasi nama pengirim, alamat email toko, detail admin, dan kontak yang digunakan di semua email.',
+                    'info' => 'Pilih cara email dikirim dan dari alamat mana.',
                     'sender-email' => 'Alamat Email Pengirim',
                     'sender-email-tip' => 'Email kepada pelanggan Anda akan dikirim dari alamat ini.',
                     'sender-name' => 'Nama Pengirim',
                     'sender-name-tip' => 'Nama ini akan muncul di kotak masuk pelanggan Anda sebagai pengirim email.',
                     'title' => 'Pengaturan Email',
+                    'title-info' => 'Nama dan alamat yang digunakan toko Anda untuk mengirim email dan yang tampil di bagian bawah.',
                 ],
 
                 'notifications' => [
@@ -5067,7 +5070,7 @@ return [
                     'cancel-order-mail-to-admin' => 'Kirim email notifikasi kepada admin setelah membatalkan pesanan',
                     'customer' => 'Kirim kredensial akun pelanggan setelah pendaftaran',
                     'customer-registration-confirmation-mail-to-admin' => 'Kirim email konfirmasi kepada admin setelah pendaftaran pelanggan',
-                    'info' => 'Untuk mengonfigurasi, terima email untuk verifikasi akun, konfirmasi pesanan, pembaruan faktur, pengembalian dana, pengiriman, dan pembatalan pesanan.',
+                    'info' => 'Pilih email mana yang dikirim ke pelanggan dan ke admin.',
                     'new-inventory-source' => 'Kirim email notifikasi kepada sumber inventaris setelah membuat pengiriman',
                     'new-invoice' => 'Kirim email notifikasi kepada pelanggan setelah membuat faktur baru',
                     'new-invoice-mail-to-admin' => 'Kirim email notifikasi kepada admin setelah membuat faktur baru',
@@ -5079,16 +5082,17 @@ return [
                     'new-shipment-mail-to-admin' => 'Kirim email notifikasi kepada admin setelah membuat pengiriman baru',
                     'registration' => 'Kirim email konfirmasi setelah pendaftaran pelanggan',
                     'title' => 'Notifikasi',
+                    'title-info' => 'Aktifkan atau nonaktifkan tiap email notifikasi.',
                     'verification' => 'Kirim email verifikasi setelah pendaftaran pelanggan',
                 ],
             ],
 
             'sales' => [
-                'info' => 'Penjualan',
+                'info' => 'Pengaturan pengiriman, pembayaran, pesanan, faktur, pajak, checkout, dan pengembalian.',
                 'title' => 'Penjualan',
 
                 'shipping-setting' => [
-                    'info' => 'Konfigurasi pengaturan pengiriman termasuk Negara, Provinsi, Kota, Alamat Jalan, Kode Pos, Nama Toko, Nomor PPN, Nomor Kontak, dan Detail Bank.',
+                    'info' => 'Alamat asal pengiriman pesanan.',
                     'title' => 'Pengaturan Pengiriman',
 
                     'origin' => [
@@ -5100,14 +5104,14 @@ return [
                         'store-name' => 'Nama Toko',
                         'street-address' => 'Alamat Jalan',
                         'title' => 'Asal Pengiriman',
-                        'title-info' => 'Asal pengiriman merujuk pada lokasi tempat barang atau produk berasal sebelum dikirim ke tujuan.',
+                        'title-info' => 'Alamat asal pengiriman pesanan, dan data toko yang tampil pada faktur.',
                         'vat-number' => 'Nomor PPN',
                         'zip' => 'Kode Pos',
                     ],
                 ],
 
                 'shipping-methods' => [
-                    'info' => 'Konfigurasi metode pengiriman, termasuk Pengiriman Gratis, Tarif Tetap, dan opsi tambahan sesuai kebutuhan.',
+                    'info' => 'Metode pengiriman yang ditawarkan saat checkout.',
                     'title' => 'Metode Pengiriman',
 
                     'free-shipping' => [
@@ -5115,7 +5119,7 @@ return [
                         'page-title' => 'Pengiriman Gratis',
                         'status' => 'Status',
                         'title' => 'Judul',
-                        'title-info' => '"Pengiriman gratis" merujuk pada metode pengiriman di mana biaya pengiriman diabaikan, dan penjual menanggung biaya pengiriman untuk mengantarkan barang kepada pembeli.',
+                        'title-info' => 'Metode pengiriman tanpa biaya.',
                     ],
 
                     'flat-rate-shipping' => [
@@ -5124,7 +5128,7 @@ return [
                         'rate' => 'Tarif',
                         'status' => 'Status',
                         'title' => 'Judul',
-                        'title-info' => 'Pengiriman tarif tetap adalah metode pengiriman di mana biaya tetap dikenakan untuk pengiriman, terlepas dari berat, ukuran, atau jarak paket. Ini menyederhanakan biaya pengiriman dan dapat menguntungkan bagi pembeli dan penjual.',
+                        'title-info' => 'Metode pengiriman dengan tarif tetap, per pesanan atau per barang.',
                         'type' => [
                             'per-order' => 'Per Pesanan',
                             'per-unit' => 'Per Unit',
@@ -5145,20 +5149,20 @@ return [
                     'application-fee' => 'Pembayar Biaya Aplikasi',
                     'business-account' => 'Akun Bisnis',
                     'cash-on-delivery' => 'Pembayaran di Tempat',
-                    'cash-on-delivery-info' => 'Metode pembayaran di mana pelanggan membayar dengan uang tunai saat menerima barang atau layanan di depan pintu mereka.',
+                    'cash-on-delivery-info' => 'Izinkan pelanggan membayar tunai saat pesanan diantar.',
                     'client-id' => 'ID Klien',
-                    'client-id-info' => 'Gunakan "sb" untuk pengujian.',
+                    'client-id-info' => 'ID klien aplikasi PayPal Anda. Gunakan ID klien aplikasi sandbox selama Sandbox aktif.',
                     'client-secret' => 'Kunci Rahasia Klien',
-                    'client-secret-info' => 'Tambahkan kunci rahasia Anda di sini',
+                    'client-secret-info' => 'Rahasia klien aplikasi PayPal Anda.',
                     'create-success-refund' => 'Pengembalian dana berhasil dibuat.',
                     'description' => 'Deskripsi',
                     'enable' => 'Aktifkan',
                     'generate-invoice' => 'Secara otomatis menghasilkan faktur setelah melakukan pesanan',
                     'generate-invoice-applicable' => 'Berlaku jika pembuatan faktur otomatis diaktifkan',
-                    'info' => 'Setel informasi metode pembayaran',
+                    'info' => 'Atur metode pembayaran yang ditawarkan saat checkout.',
                     'instructions' => 'Instruksi',
                     'logo' => 'Logo',
-                    'logo-information' => 'Resolusi gambar harus seperti 55px X 45px',
+                    'logo-information' => 'Ukuran yang disarankan: 55 x 45 piksel.',
                     'mailing-address' => 'Kirim Cek ke',
                     'merchant-description' => 'Deskripsi Merchant',
                     'merchant-id' => 'ID Merchant',
@@ -5168,7 +5172,7 @@ return [
                     'merchant-private-key-info' => 'Tempelkan isi berkas PEM kunci privat yang dibuat di dasbor PayGlocal. Kunci ini dipakai untuk menandatangani permintaan.',
                     'merchant-salt' => 'Salt Merchant',
                     'money-transfer' => 'Transfer Uang',
-                    'money-transfer-info' => 'Transfer dana dari satu orang atau akun ke orang atau akun lain, sering kali secara elektronik, untuk berbagai tujuan seperti transaksi atau pengiriman uang.',
+                    'money-transfer-info' => 'Izinkan pelanggan membayar lewat transfer bank atau cek.',
                     'page-title' => 'Metode Pembayaran',
                     'paid' => 'Telah Dibayar',
                     'payglocal' => 'PayGlocal',
@@ -5180,11 +5184,11 @@ return [
                     'payglocal-public-key-info' => 'Tempelkan isi berkas PEM kunci publik PayGlocal. Kunci ini dipakai untuk mengenkripsi permintaan dan memverifikasi respons.',
                     'payglocal-sandbox-info' => 'Kirim pembayaran ke lingkungan pengujian PayGlocal.',
                     'paypal-smart-button' => 'PayPal',
-                    'paypal-smart-button-info' => 'PayPal Smart Button: Menyederhanakan pembayaran online dengan tombol yang dapat disesuaikan untuk transaksi multi-metode yang aman di situs web dan aplikasi.',
+                    'paypal-smart-button-info' => 'Tampilkan tombol PayPal saat checkout agar pelanggan dapat membayar dengan PayPal atau kartu.',
                     'paypal-standard' => 'PayPal Standard',
-                    'paypal-standard-info' => 'PayPal Standard adalah opsi pembayaran dasar PayPal untuk bisnis online, memungkinkan pelanggan untuk membayar menggunakan akun PayPal mereka atau kartu kredit/debit.',
+                    'paypal-standard-info' => 'Arahkan pelanggan ke PayPal untuk membayar dengan akun PayPal atau kartu.',
                     'payu' => 'PayU',
-                    'payu-info' => 'Konfigurasi pengaturan gateway pembayaran PayU',
+                    'payu-info' => 'Terima pembayaran melalui PayU.',
                     'payu-merchant-key-info' => 'Masukkan Kunci Merchant PayU Anda yang diperoleh dari dashboard PayU',
                     'payu-merchant-salt-info' => 'Masukkan Salt Merchant PayU Anda yang diperoleh dari dashboard PayU',
                     'pending' => 'Menunggu',
@@ -5199,7 +5203,7 @@ return [
                     'production-mode-info' => 'Hanya untuk mode produksi.',
                     'public-key-id' => 'ID Kunci Publik',
                     'razorpay' => 'Razorpay',
-                    'razorpay-info' => 'Razorpay adalah platform teknologi keuangan yang membantu bisnis menerima, memproses, dan mencairkan pembayaran.',
+                    'razorpay-info' => 'Terima pembayaran melalui Razorpay.',
                     'sandbox' => 'Sandbox',
                     'set-invoice-status' => 'Setel status faktur setelah membuat faktur ke',
                     'set-order-status' => 'Setel status pesanan setelah membuat faktur ke',
@@ -5207,7 +5211,7 @@ return [
                     'statement-descriptor' => 'Deskripsi Pernyataan',
                     'status' => 'Status',
                     'stripe' => 'Stripe',
-                    'stripe-info' => 'Configure Stripe payment gateway settings for secure online transactions',
+                    'stripe-info' => 'Terima pembayaran kartu melalui Stripe.',
                     'test-client-id' => 'ID Klien Mode Test',
                     'test-client-secret' => 'Kunci Rahasia Klien Mode Test',
                     'test-mode-info' => 'Hanya untuk mode test/sandbox.',
@@ -5215,7 +5219,7 @@ return [
                 ],
 
                 'order-settings' => [
-                    'info' => 'Atur nomor pesanan, pesanan minimum, dan pesanan balik.',
+                    'info' => 'Percobaan ulang pembuatan pesanan, nomor pesanan, nilai pesanan minimum, dan pemesanan ulang.',
                     'title' => 'Pengaturan Pesanan',
 
                     'order-creation' => [
@@ -5226,7 +5230,7 @@ return [
 
                     'order-number' => [
                         'generator' => 'Generator Nomor Pesanan',
-                        'info' => 'Identifikasi unik yang diberikan pada pesanan pelanggan tertentu, membantu pelacakan, komunikasi, dan referensi sepanjang proses pembelian.',
+                        'info' => 'Bagaimana nomor pesanan yang dihasilkan disusun.',
                         'length' => 'Panjang Nomor Pesanan',
                         'prefix' => 'Awalan Nomor Pesanan',
                         'suffix' => 'Akhiran Nomor Pesanan',
@@ -5238,17 +5242,17 @@ return [
                         'enable' => 'Aktifkan',
                         'include-discount-amount' => 'Termasuk Jumlah Diskon',
                         'include-tax-amount' => 'Termasuk Pajak ke Jumlah',
-                        'info' => 'Kriteria yang dikonfigurasi yang menentukan jumlah atau nilai terendah yang diperlukan agar pesanan dapat diproses atau memenuhi syarat untuk mendapatkan manfaat.',
+                        'info' => 'Total pesanan terkecil yang boleh digunakan pelanggan untuk checkout.',
                         'minimum-order-amount' => 'Jumlah Pesanan Minimum',
                         'title' => 'Pengaturan Pesanan Minimum',
                     ],
 
                     'reorder' => [
                         'admin-reorder' => 'Pemesanan Ulang Admin',
-                        'admin-reorder-info' => 'Aktifkan atau nonaktifkan fitur pemesanan ulang untuk pengguna admin.',
-                        'info' => 'Aktifkan atau nonaktifkan fitur pemesanan ulang untuk pengguna admin.',
+                        'admin-reorder-info' => 'Izinkan admin membuat ulang pesanan dari panel admin.',
+                        'info' => 'Izinkan pesanan dibuat ulang dari panel admin atau dari toko.',
                         'shop-reorder' => 'Pemesan Ulang Toko',
-                        'shop-reorder-info' => 'Aktifkan atau nonaktifkan fitur pemesanan ulang untuk pengguna toko.',
+                        'shop-reorder-info' => 'Izinkan pelanggan membuat ulang pesanan dari toko.',
                         'title' => 'Izinkan Pemesanan Ulang',
                     ],
 
@@ -5260,12 +5264,12 @@ return [
                 ],
 
                 'invoice-settings' => [
-                    'info' => 'Atur nomor faktur, syarat pembayaran, desain slip faktur, dan pengingat faktur.',
+                    'info' => 'Nomor faktur, syarat pembayaran, cetakan PDF, dan pengingat.',
                     'title' => 'Pengaturan Faktur',
 
                     'invoice-number' => [
                         'generator' => 'Generator Nomor Faktur',
-                        'info' => 'Konfigurasi aturan atau parameter untuk menghasilkan dan menetapkan nomor identifikasi unik untuk faktur guna tujuan organisasi dan pelacakan.',
+                        'info' => 'Bagaimana nomor faktur yang dihasilkan disusun.',
                         'length' => 'Panjang Nomor Faktur',
                         'prefix' => 'Awalan Nomor Faktur',
                         'suffix' => 'Akhiran Nomor Faktur',
@@ -5276,7 +5280,7 @@ return [
                         'due-duration' => 'Durasi Jatuh Tempo',
                         'due-duration-day' => ':due-duration Hari',
                         'due-duration-days' => ':due-duration Hari',
-                        'info' => 'Kondisi yang disepakati yang mengatur kapan dan bagaimana pembayaran untuk barang atau jasa harus dilakukan oleh pembeli kepada penjual.',
+                        'info' => 'Berapa lama setelah diterbitkan sebuah faktur jatuh tempo.',
                         'title' => 'Syarat Pembayaran',
                     ],
 
@@ -5294,7 +5298,7 @@ return [
                     ],
 
                     'invoice-reminders' => [
-                        'info' => 'Pemberitahuan otomatis atau komunikasi yang dikirimkan kepada pelanggan untuk mengingatkan mereka tentang pembayaran faktur yang akan datang atau yang telah jatuh tempo.',
+                        'info' => 'Berapa banyak pengingat pembayaran yang dikirim untuk faktur belum lunas, dan seberapa sering.',
                         'interval-between-reminders' => 'Interval antara pengingat',
                         'maximum-limit-of-reminders' => 'Batas maksimum pengingat',
                         'title' => 'Pengingat Faktur',
@@ -5303,11 +5307,11 @@ return [
 
                 'taxes' => [
                     'title' => 'Pajak',
-                    'title-info' => 'Pajak adalah biaya wajib yang dikenakan oleh pemerintah pada barang, jasa, atau transaksi, yang dikumpulkan oleh penjual dan disetorkan ke otoritas yang berwenang.',
+                    'title-info' => 'Kategori pajak, cara pajak dihitung, dan cara pajak ditampilkan.',
 
                     'categories' => [
                         'title' => 'Kategori Pajak',
-                        'title-info' => 'Kategori pajak adalah klasifikasi untuk berbagai jenis pajak, seperti pajak penjualan, pajak pertambahan nilai, atau pajak cukai, yang digunakan untuk mengkategorikan dan menerapkan tarif pajak pada produk atau layanan.',
+                        'title-info' => 'Kategori pajak yang diterapkan pada pengiriman, dan kategori bawaan untuk produk baru.',
                         'product' => 'Kategori Pajak Default Produk',
                         'shipping' => 'Kategori Pajak Pengiriman',
                         'none' => 'Tidak Ada',
@@ -5327,7 +5331,7 @@ return [
                         'shipping-origin' => 'Asal Pengiriman',
                         'shipping-prices' => 'Harga Pengiriman',
                         'title' => 'Pengaturan Perhitungan',
-                        'title-info' => 'Detail tentang biaya barang atau jasa, termasuk harga dasar, diskon, pajak, dan biaya tambahan.',
+                        'title-info' => 'Atas apa pajak dihitung, dan apakah harga yang dimasukkan sudah termasuk pajak.',
                     ],
 
                     'default-destination-calculation' => [
@@ -5335,14 +5339,14 @@ return [
                         'default-post-code' => 'Kode Pos Default',
                         'default-state' => 'Negara Bagian Default',
                         'title' => 'Perhitungan Tujuan Default',
-                        'title-info' => 'Penentuan otomatis tujuan standar atau awal berdasarkan faktor atau pengaturan yang telah ditentukan sebelumnya.',
+                        'title-info' => 'Alamat yang dipakai menghitung pajak sebelum pelanggan memasukkan alamatnya sendiri.',
                     ],
 
                     'shopping-cart' => [
                         'show-tax-breakdown' => 'Tampilkan Rincian Pajak',
                         'show-tax-breakdown-info' => 'Menampilkan rincian pajak per produk dan per tarif di ringkasan keranjang dan checkout. Untuk keperluan debugging.',
                         'title' => 'Pengaturan Tampilan Keranjang Belanja',
-                        'title-info' => 'Atur tampilan pajak di dalam keranjang belanja',
+                        'title-info' => 'Bagaimana pajak ditampilkan di keranjang dan saat checkout.',
                         'display-prices' => 'Tampilkan Harga',
                         'display-subtotal' => 'Tampilkan Subtotal',
                         'display-shipping-amount' => 'Tampilkan Jumlah Pengiriman',
@@ -5353,7 +5357,7 @@ return [
 
                     'sales' => [
                         'title' => 'Pengaturan Tampilan Pesanan, Faktur, dan Pengembalian',
-                        'title-info' => 'Atur tampilan pajak pada pesanan, faktur, dan pengembalian',
+                        'title-info' => 'Bagaimana pajak ditampilkan pada pesanan, faktur, dan pengembalian dana.',
                         'display-prices' => 'Tampilkan Harga',
                         'display-subtotal' => 'Tampilkan Subtotal',
                         'display-shipping-amount' => 'Tampilkan Jumlah Pengiriman',
@@ -5365,7 +5369,7 @@ return [
 
                 'checkout' => [
                     'title' => 'Pembayaran',
-                    'info' => 'Atur checkout tamu, Aktifkan atau Nonaktifkan Mini Cart, ringkasan keranjang.',
+                    'info' => 'Checkout tamu, halaman keranjang, keranjang mini, dan ringkasan keranjang.',
 
                     'shopping-cart' => [
                         'cart-page' => 'Halaman Keranjang',
@@ -5376,21 +5380,21 @@ return [
                         'estimate-shipping-info' => 'Aktifkan perkiraan pengiriman untuk memberikan biaya pengiriman di muka.',
                         'guest-checkout' => 'Izinkan checkout tamu',
                         'guest-checkout-info' => 'Aktifkan checkout tamu untuk proses pembelian yang lebih cepat dan tanpa hambatan.',
-                        'info' => 'Aktifkan checkout tamu, halaman keranjang, produk cross-sell, dan perkiraan pengiriman untuk meningkatkan kenyamanan pengguna dan memperlancar proses belanja untuk meningkatkan penjualan.',
+                        'info' => 'Checkout tamu, halaman keranjang, produk penjualan silang, dan perkiraan pengiriman.',
                         'title' => 'Keranjang Belanja',
                     ],
 
                     'my-cart' => [
                         'display-item-quantities' => 'Tampilkan jumlah item',
                         'display-number-in-cart' => 'Tampilkan jumlah item dalam keranjang',
-                        'info' => 'Aktifkan pengaturan untuk My Cart agar menampilkan ringkasan jumlah item dan menampilkan total jumlah item dalam keranjang untuk pelacakan yang mudah.',
+                        'info' => 'Apakah penghitung keranjang menampilkan total kuantitas atau jumlah barang.',
                         'summary' => 'Ringkasan',
                         'title' => 'Keranjang Saya',
                     ],
 
                     'mini-cart' => [
                         'display-mini-cart' => 'Tampilkan Mini Cart',
-                        'info' => 'Aktifkan pengaturan Mini Cart untuk menampilkan mini cart dan menampilkan Informasi Penawaran Mini Cart untuk akses cepat ke detail keranjang dan promosi.',
+                        'info' => 'Tampilkan keranjang mini dan teks penawaran yang muncul di dalamnya.',
                         'mini-cart-offer-info' => 'Informasi Penawaran Mini Cart',
                         'title' => 'Mini Cart',
                     ],
@@ -5420,7 +5424,7 @@ return [
                     'evening' => 'Malam',
                     'exchange' => 'Tukar',
                     'file-extension-info' => 'Jenis berkas yang dapat dilampirkan pelanggan dan admin ke permintaan pengembalian, seperti foto produk atau dokumen pendukung.',
-                    'info' => 'RMA adalah bagian dari proses pengembalian produk ke bisnis untuk menerima pengembalian dana, penggantian, atau perbaikan.',
+                    'info' => 'Pengembalian yang dapat diajukan pelanggan setelah pesanan dibuat.',
                     'morning' => 'Pagi',
                     'new-rma-message-to-customer' => 'Pesan RMA Baru ke Pelanggan',
                     'no' => 'Tidak',
