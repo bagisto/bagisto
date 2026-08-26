@@ -115,7 +115,7 @@ export class ProductConfigurationPage extends BasePage {
 
         if (config.buyNowDisplay) {
             await this.page.click(
-                'label[for="catalog[products][storefront][buy_now_button_display]"]',
+                'label[for="catalog[products][product_view_page][buy_now_button_display]"]',
             );
         }
 

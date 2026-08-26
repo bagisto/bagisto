@@ -22,7 +22,7 @@ export class CheckoutConfigurationPage extends BasePage {
 
     private get myCartSummarySelect() {
         return this.page.locator(
-            'select[name="sales[checkout][my_cart][summary]"]',
+            'select[name="sales[checkout][mini_cart][summary]"]',
         );
     }
 

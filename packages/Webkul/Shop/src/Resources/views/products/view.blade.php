@@ -433,7 +433,7 @@
                                 @if (core()->getConfigData('sales.checkout.shopping_cart.cart_page'))
                                     {!! view_render_event('bagisto.shop.products.view.buy_now.before', ['product' => $product]) !!}
 
-                                    @if (core()->getConfigData('catalog.products.storefront.buy_now_button_display'))
+                                    @if (core()->getConfigData('catalog.products.product_view_page.buy_now_button_display'))
                                         <x-shop::button
                                             type="submit"
                                             class="primary-button mt-5 w-full max-w-117.5 max-md:py-3 max-sm:mt-3 max-sm:rounded-lg max-sm:py-1.5"

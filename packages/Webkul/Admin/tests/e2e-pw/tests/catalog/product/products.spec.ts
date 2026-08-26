@@ -93,7 +93,7 @@ test.describe("product configuration", () => {
         await expect(sortBy).toHaveValue("name-asc");
 
         await adminPage.click(
-            'label[for="catalog[products][storefront][buy_now_button_display]"]',
+            'label[for="catalog[products][product_view_page][buy_now_button_display]"]',
         );
 
         await adminPage.click('button[type="submit"].primary-button:visible');

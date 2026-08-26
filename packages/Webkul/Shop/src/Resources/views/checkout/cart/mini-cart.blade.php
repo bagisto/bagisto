@@ -28,7 +28,7 @@
                             @click="getCart"
                         ></button>
 
-                        @if (core()->getConfigData('sales.checkout.my_cart.summary') == 'display_item_quantity')
+                        @if (core()->getConfigData('sales.checkout.mini_cart.summary') == 'display_item_quantity')
                             <span
                                 class="absolute -top-4 rounded-[44px] bg-navyBlue px-2 py-1.5 text-xs font-semibold leading-2.25 text-white ltr:left-5 rtl:right-5 max-md:ltr:left-4 max-md:rtl:right-4"
                                 v-if="cart?.items_qty"
