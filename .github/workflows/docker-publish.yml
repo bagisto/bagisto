@@ -20,6 +20,16 @@ name: Build & Publish Docker Image
 #   :<version>           → nginx on MySQL
 #   :latest              → the newest stable :<version>
 #
+# The variants build in parallel and are pushed by digest (untagged); a final
+# job then creates every human-readable tag sequentially, in reverse of the
+# order they should appear. Docker Hub lists tags newest-pushed first, so this
+# gives a stable, readable ordering on the repository page:
+#
+#   latest, latest-nginx, latest-litespeed, latest-apache,
+#   latest-nginx-mysql, latest-litespeed-mysql, latest-apache-mysql,
+#   latest-nginx-mariadb, latest-litespeed-mariadb, latest-apache-mariadb,
+#   then the matching <version> tags.
+#
 # Required repository secrets:
 #   DOCKERHUB_USERNAME  Docker Hub user / org with push access to webkul/bagisto
 #   DOCKERHUB_TOKEN     Docker Hub access token (NOT a password)
@@ -121,10 +131,12 @@ jobs:
           echo "Docker tag: $DOCKER_TAG (latest=$PUSH_LATEST, prerelease=$IS_PRERELEASE)"
 
   # --------------------------------------------------------------------------
-  # Build & push each web-server variant in parallel.
+  # Build each web-server × database variant in parallel and push it by digest
+  # (untagged). The human-readable tags are applied later, in order, by the
+  # `publish` job.
   # --------------------------------------------------------------------------
-  build_and_push:
-    name: Build & Push ${{ matrix.variant }}-${{ matrix.database }} (amd64 + arm64)
+  build:
+    name: Build ${{ matrix.variant }}-${{ matrix.database }} (amd64 + arm64)
     needs: resolve
     runs-on: ubuntu-latest
     permissions:
@@ -152,54 +164,14 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Compute Image Tags
-        id: tags
-        env:
-          IMAGE: ${{ env.IMAGE_NAME }}
-          DOCKER_TAG: ${{ needs.resolve.outputs.docker_tag }}
-          PUSH_LATEST: ${{ needs.resolve.outputs.push_latest }}
-          VARIANT: ${{ matrix.variant }}
-          DATABASE: ${{ matrix.database }}
-        run: |
-          # The full name always carries both dimensions, e.g. 2.4.10-nginx-mariadb
-          TAGS="${IMAGE}:${DOCKER_TAG}-${VARIANT}-${DATABASE}"
-
-          if [ "$PUSH_LATEST" = "true" ]; then
-            TAGS="$TAGS,${IMAGE}:latest-${VARIANT}-${DATABASE}"
-          fi
-
-          # MySQL is the conventional database, so it also answers to the
-          # shorter server-only name that was published before the
-          # multi-database images existed.
-          if [ "$DATABASE" = "mysql" ]; then
-            TAGS="$TAGS,${IMAGE}:${DOCKER_TAG}-${VARIANT}"
-
-            if [ "$PUSH_LATEST" = "true" ]; then
-              TAGS="$TAGS,${IMAGE}:latest-${VARIANT}"
-            fi
-
-            # nginx is the default server, so nginx + MySQL is what an
-            # unqualified pull gets.
-            if [ "$VARIANT" = "nginx" ]; then
-              TAGS="$TAGS,${IMAGE}:${DOCKER_TAG}"
-
-              if [ "$PUSH_LATEST" = "true" ]; then
-                TAGS="$TAGS,${IMAGE}:latest"
-              fi
-            fi
-          fi
-
-          echo "tags=$TAGS" >> "$GITHUB_OUTPUT"
-          echo "Will push: $TAGS"
-
-      - name: Build & Push Multi-Arch Image
+      - name: Build & Push by Digest
+        id: build
         uses: docker/build-push-action@v6
         with:
           context: ${{ env.BUILD_CONTEXT }}
           file: ${{ env.BUILD_CONTEXT }}/${{ matrix.variant }}/Dockerfile
           platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.tags.outputs.tags }}
+          outputs: type=image,name=${{ env.IMAGE_NAME }},push-by-digest=true,name-canonical=true,push=true
           build-args: |
             BAGISTO_VERSION=${{ needs.resolve.outputs.bagisto_version }}
             DB_ENGINE=${{ matrix.database }}
@@ -214,31 +186,109 @@ jobs:
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=MIT
 
+      - name: Export Digest
+        run: |
+          mkdir -p /tmp/digests
+          echo -n "${{ steps.build.outputs.digest }}" > "/tmp/digests/${{ matrix.variant }}-${{ matrix.database }}"
+
+      - name: Upload Digest
+        uses: actions/upload-artifact@v4
+        with:
+          name: digest-${{ matrix.variant }}-${{ matrix.database }}
+          path: /tmp/digests/${{ matrix.variant }}-${{ matrix.database }}
+          if-no-files-found: error
+          retention-days: 1
+
+  # --------------------------------------------------------------------------
+  # Apply the human-readable tags in a fixed order. Docker Hub lists tags by
+  # most-recently-pushed first, so tags are created bottom-up: the version tags
+  # first, then the `latest` aliases, ending with `:latest` — which then sits at
+  # the top of the repository page.
+  # --------------------------------------------------------------------------
+  publish:
+    name: Tag & Publish (ordered)
+    needs: [resolve, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Set Up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log In to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Download Digests
+        uses: actions/download-artifact@v4
+        with:
+          path: /tmp/digests
+          pattern: digest-*
+          merge-multiple: true
+
+      - name: Create Tags In Order
+        env:
+          IMAGE: ${{ env.IMAGE_NAME }}
+          DOCKER_TAG: ${{ needs.resolve.outputs.docker_tag }}
+          PUSH_LATEST: ${{ needs.resolve.outputs.push_latest }}
+        run: |
+          set -euo pipefail
+
+          # create <tag> <combo> — point IMAGE:<tag> at the digest built for <combo>.
+          create() {
+            local digest
+            digest=$(cat "/tmp/digests/$2")
+            echo "→ ${IMAGE}:$1  (from $2 @ ${digest})"
+            docker buildx imagetools create -t "${IMAGE}:$1" "${IMAGE}@${digest}"
+          }
+
+          # Version tags — created first so they sort below the `latest` block.
+          # Order here is the reverse of how they should read on Docker Hub.
+          create "${DOCKER_TAG}-apache-mariadb"    apache-mariadb
+          create "${DOCKER_TAG}-litespeed-mariadb" litespeed-mariadb
+          create "${DOCKER_TAG}-nginx-mariadb"     nginx-mariadb
+          create "${DOCKER_TAG}-apache-mysql"      apache-mysql
+          create "${DOCKER_TAG}-litespeed-mysql"   litespeed-mysql
+          create "${DOCKER_TAG}-nginx-mysql"       nginx-mysql
+          create "${DOCKER_TAG}-apache"            apache-mysql
+          create "${DOCKER_TAG}-litespeed"         litespeed-mysql
+          create "${DOCKER_TAG}-nginx"             nginx-mysql
+          create "${DOCKER_TAG}"                   nginx-mysql
+
+          # Latest aliases — only for a stable release on the default branch line.
+          # Created last, ending with `:latest`, so the block sorts to the top.
+          if [ "${PUSH_LATEST}" = "true" ]; then
+            create "latest-apache-mariadb"    apache-mariadb
+            create "latest-litespeed-mariadb" litespeed-mariadb
+            create "latest-nginx-mariadb"     nginx-mariadb
+            create "latest-apache-mysql"      apache-mysql
+            create "latest-litespeed-mysql"   litespeed-mysql
+            create "latest-nginx-mysql"       nginx-mysql
+            create "latest-apache"            apache-mysql
+            create "latest-litespeed"         litespeed-mysql
+            create "latest-nginx"             nginx-mysql
+            create "latest"                   nginx-mysql
+          fi
+
       - name: Summary
         env:
           IMAGE: ${{ env.IMAGE_NAME }}
           DOCKER_TAG: ${{ needs.resolve.outputs.docker_tag }}
           PUSH_LATEST: ${{ needs.resolve.outputs.push_latest }}
-          VARIANT: ${{ matrix.variant }}
-          DATABASE: ${{ matrix.database }}
         run: |
           {
-            echo "### Published \`${VARIANT}-${DATABASE}\`"
+            echo "### Published \`${IMAGE}\` (${DOCKER_TAG})"
             echo ""
-            echo "- Bagisto version: \`${{ needs.resolve.outputs.bagisto_version }}\`"
-            echo "- Image: \`${IMAGE}:${DOCKER_TAG}-${VARIANT}-${DATABASE}\`"
-
-            if [ "$PUSH_LATEST" = "true" ]; then
-              echo "- Also tagged: \`${IMAGE}:latest-${VARIANT}-${DATABASE}\`"
+            echo "Tags were created in a fixed order so the Docker Hub listing reads:"
+            echo ""
+            if [ "${PUSH_LATEST}" = "true" ]; then
+              echo '- `latest`, `latest-nginx`, `latest-litespeed`, `latest-apache`'
+              echo '- `latest-nginx-mysql`, `latest-litespeed-mysql`, `latest-apache-mysql`'
+              echo '- `latest-nginx-mariadb`, `latest-litespeed-mariadb`, `latest-apache-mariadb`'
             fi
-
-            if [ "$DATABASE" = "mysql" ]; then
-              echo "- Alias: \`${IMAGE}:${DOCKER_TAG}-${VARIANT}\`"
-
-              if [ "$VARIANT" = "nginx" ]; then
-                echo "- Default-pull aliases: \`${IMAGE}:${DOCKER_TAG}\`, \`${IMAGE}:latest\`"
-              fi
-            fi
-
+            echo "- then the matching \`${DOCKER_TAG}\` tags."
+            echo ""
             echo "- Platforms: \`linux/amd64\`, \`linux/arm64\`"
           } >> "$GITHUB_STEP_SUMMARY"
