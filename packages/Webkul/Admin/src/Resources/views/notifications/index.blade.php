@@ -158,31 +158,31 @@
                             },
 
                             pending : {
-                                icon: 'icon-information bg-amber-100 text-amber-600 dark:!text-amber-600',
+                                icon: 'icon-information bg-amber-100 text-amber-600 dark:text-amber-600!',
                                 message: '@lang('admin::app.notifications.order-status-messages.pending')',
                                 status: 'pending'
                             },
 
                             processing : {
-                                icon: 'icon-sort-right bg-green-100 text-green-600 dark:!text-green-600',
+                                icon: 'icon-sort-right bg-green-100 text-green-600 dark:text-green-600!',
                                 message: '@lang('admin::app.notifications.order-status-messages.processing')',
                                 status: 'processing'
                             },
 
                             canceled : {
-                                icon: 'icon-close bg-red-100 text-red-600 dark:!text-red-600',
+                                icon: 'icon-close bg-red-100 text-red-600 dark:text-red-600!',
                                 message: '@lang('admin::app.notifications.order-status-messages.canceled')',
                                 status: 'canceled'
                             },
 
                             completed : {
-                                icon: 'icon-done bg-blue-100 text-blue-600 dark:!text-blue-600',
+                                icon: 'icon-done bg-blue-100 text-blue-600 dark:text-blue-600!',
                                 message: '@lang('admin::app.notifications.order-status-messages.completed')',
                                 status: 'completed'
                             },
 
                             closed : {
-                                icon: 'icon-repeat bg-red-100 text-red-600 dark:!text-red-600',
+                                icon: 'icon-repeat bg-red-100 text-red-600 dark:text-red-600!',
                                 message: '@lang('admin::app.notifications.order-status-messages.closed')',
                                 status: 'closed'
                             },
