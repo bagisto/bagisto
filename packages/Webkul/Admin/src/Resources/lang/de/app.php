@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Wunschlistenoptionen',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Admin-Suchmodus',
-                        'admin-mode-info' => 'Die Mega-Suche, das Datagrid und andere Suchfunktionen im Admin-Panel basieren auf der ausgewählten Suchmaschine.',
-                        'database' => 'Datenbank',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Maximale Abfragelänge',
-                        'max-query-length-info' => 'Legen Sie die maximale Abfragelänge für Suchanfragen fest.',
-                        'min-query-length' => 'Minimale Abfragelänge',
-                        'min-query-length-info' => 'Legen Sie die minimale Abfragelänge für Suchanfragen fest.',
-                        'search-engine' => 'Suchmaschine',
-                        'storefront-mode' => 'Storefront-Suchmodus',
-                        'storefront-mode-info' => 'Die Suchfunktionen auf der Storefront basieren auf der ausgewählten Suchmaschine, einschließlich Kategorieseite, Suchseite und anderen Suchfunktionen.',
-                        'title' => 'Suche',
-                        'title-info' => 'Um die Suchmaschine für Produktsuchen einzurichten, können Sie je nach Ihren Anforderungen zwischen einer Datenbank und Elasticsearch wählen. Bei einer großen Anzahl von Produkten wird Elasticsearch empfohlen.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Gast-Checkout erlauben',
                         'allow-guest-checkout-hint' => 'Hinweis: Wenn diese Option aktiviert ist, kann sie für jedes Produkt spezifisch konfiguriert werden.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Benachrichtigungen',
                     'title-info' => 'Einzelne Benachrichtigungs-E-Mails ein- oder ausschalten.',
                     'verification' => 'Senden Sie eine Bestätigungs-E-Mail nach der Kundenregistrierung',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Suchmaschinen',
+                'info' => 'Wählen Sie die Suchmaschine für die Produktsuche und richten Sie sie ein.',
+
+                'engines' => [
+                    'database' => 'Datenbank',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Verbindung testen',
+                    'testing' => 'Wird getestet...',
+
+                    'statuses' => [
+                        'available' => ':engine ist verfügbar',
+                        'unreachable' => ':engine hat nicht geantwortet',
+                        'unauthorized' => ':engine hat die Zugangsdaten abgelehnt',
+                        'incompatible' => 'Der Host hat geantwortet, ist aber kein unterstützter :engine-Server',
+                        'misconfigured' => 'Die :engine-Verbindung ist nicht konfiguriert',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'Allgemein',
+                    'info' => 'Die Suchmaschine, auf der die Produktsuche läuft.',
+
+                    'settings' => [
+                        'title' => 'Einstellungen',
+                        'info' => 'Eine externe Suchmaschine einschalten und festlegen, wo sie verwendet wird.',
+                        'enabled' => 'Externe Suchmaschine aktivieren',
+                        'enabled-info' => 'Ausschalten, um überall in der Datenbank zu suchen, unabhängig von den Einstellungen unten.',
+                        'engine' => 'Standard-Suchmaschine',
+                        'engine-info' => 'Die Suchmaschine, die überall dort greift, wo ein Suchmodus auf Standard verwenden steht.',
+                        'inherit' => 'Standard verwenden',
+                    ],
+
+                    'products' => [
+                        'title' => 'Produkte',
+                        'info' => 'Mit welcher Suchmaschine jede Seite des Shops Produkte durchsucht.',
+                        'admin-mode' => 'Suchmodus im Admin-Bereich',
+                        'admin-mode-info' => 'Die Suchmaschine hinter der Mega-Suche, den Datagrids und der übrigen Suche im Admin-Bereich.',
+                        'storefront-mode' => 'Suchmodus in der Storefront',
+                        'storefront-mode-info' => 'Die Suchmaschine hinter Kategorieseiten, der Suchseite und der übrigen Suche in der Storefront.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Verbindungsstatus und Abfragegrenzen für Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Einstellungen',
+                        'info' => 'Wird verwendet, wenn ein Suchmodus auf Elasticsearch steht.',
+                        'hosts' => 'Hosts',
+                        'hosts-info' => 'Wo der Cluster erreichbar ist, etwa http://localhost:9200. Mehrere Hosts mit Komma trennen. Leer lassen, um die Umgebungsdatei zu verwenden.',
+                        'username' => 'Benutzername',
+                        'username-info' => 'Wird bei einfacher Authentifizierung verwendet. Leer lassen, wenn der Cluster keine benötigt.',
+                        'password' => 'Passwort',
+                        'password-info' => 'Das Passwort zum Benutzernamen.',
+                        'api-key' => 'API-Schlüssel',
+                        'api-key-info' => 'Wird anstelle von Benutzername und Passwort verwendet. Ein Eintrag stellt die Verbindung auf API-Schlüssel um.',
+                        'cloud-id' => 'Cloud-ID',
+                        'cloud-id-info' => 'Für Elastic Cloud. Ein Eintrag stellt die Verbindung auf Elastic Cloud um und wird mit dem API-Schlüssel kombiniert.',
+                        'index-prefix' => 'Index-Präfix',
+                        'index-prefix-info' => 'Wird jedem Indexnamen vorangestellt, sodass mehrere Shops einen Cluster teilen können.',
+                        'min-query-length' => 'Minimale Suchlänge',
+                        'min-query-length-info' => 'Der kürzeste Suchbegriff, den das Suchfeld der Storefront annimmt.',
+                        'max-query-length' => 'Maximale Suchlänge',
+                        'max-query-length-info' => 'Der längste Suchbegriff, den das Suchfeld der Storefront annimmt.',
+                        'connection' => 'Verbindung',
+                    ],
                 ],
             ],
 

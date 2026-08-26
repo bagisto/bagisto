@@ -7,9 +7,11 @@ use Illuminate\Support\ServiceProvider;
 use Webkul\Product\Console\Commands\Indexer;
 use Webkul\Product\Models\ProductProxy;
 use Webkul\Product\Observers\ProductObserver;
+use Webkul\Product\Services\Search\Connections\ElasticConnection;
 use Webkul\Product\Services\Search\Engines\DatabaseEngine;
 use Webkul\Product\Services\Search\Engines\ElasticSearchEngine;
 use Webkul\Product\Services\Search\Indexers\ElasticSearchIndexer;
+use Webkul\Product\Services\Search\SearchEngineConfigurator;
 use Webkul\Product\Services\Search\SearchEngineManager;
 
 class ProductServiceProvider extends ServiceProvider
@@ -36,6 +38,8 @@ class ProductServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
 
         $this->loadTranslationsFrom(__DIR__.'/../Resources/lang', 'product');
+
+        app(SearchEngineConfigurator::class)->configure();
 
         ProductProxy::observe(ProductObserver::class);
 
@@ -70,6 +74,8 @@ class ProductServiceProvider extends ServiceProvider
     protected function registerSearchBindings(): void
     {
         $this->app->singleton(SearchEngineManager::class);
+
+        $this->app->singleton('product.search.connection.elastic', ElasticConnection::class);
 
         $this->app->singleton('product.search.engine.database', DatabaseEngine::class);
 

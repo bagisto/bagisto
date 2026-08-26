@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'ウィッシュリストオプション',
                     ],
 
-                    'search' => [
-                        'admin-mode' => '管理者検索モード',
-                        'admin-mode-info' => '管理パネルのMega Search、Datagridなどの検索機能は、選択した検索エンジンに基づいて動作します。',
-                        'database' => 'データベース',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => '最大クエリ長',
-                        'max-query-length-info' => '検索クエリの最大長を設定します。',
-                        'min-query-length' => '最小クエリ長',
-                        'min-query-length-info' => '検索クエリの最小長を設定します。',
-                        'search-engine' => '検索エンジン',
-                        'storefront-mode' => 'ストアフロント検索モード',
-                        'storefront-mode-info' => 'ストアフロントの検索機能は、カテゴリページ、検索ページ、その他の検索機能を含む、選択した検索エンジンに基づいて動作します。',
-                        'title' => '検索',
-                        'title-info' => '製品検索のための検索エンジンを設定するには、データベースとElasticsearchのいずれかを選択できます。製品が多数ある場合は、Elasticsearchが推奨されます。',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'ゲストチェックアウトを許可する',
                         'allow-guest-checkout-hint' => 'ヒント：オンにすると、このオプションを製品ごとに設定できます。',
@@ -5446,6 +5430,79 @@ return [
                     'title' => '通知',
                     'title-info' => '通知メールを個別に有効・無効にします。',
                     'verification' => '顧客登録後に確認メールを送信する',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => '検索エンジン',
+                'info' => '商品検索を担う検索エンジンを選び、設定します。',
+
+                'engines' => [
+                    'database' => 'データベース',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => '接続をテスト',
+                    'testing' => 'テスト中...',
+
+                    'statuses' => [
+                        'available' => ':engine は利用できます',
+                        'unreachable' => ':engine から応答がありません',
+                        'unauthorized' => ':engine が認証情報を拒否しました',
+                        'incompatible' => 'ホストは応答しましたが、対応する :engine サーバーではありません',
+                        'misconfigured' => ':engine の接続が設定されていません',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => '一般',
+                    'info' => '商品検索が動作する検索エンジン。',
+
+                    'settings' => [
+                        'title' => '設定',
+                        'info' => '外部検索エンジンを有効にし、どこで使うかを選びます。',
+                        'enabled' => '外部検索エンジンを有効にする',
+                        'enabled-info' => 'オフにすると、以下の設定にかかわらずすべてデータベースで検索します。',
+                        'engine' => '既定の検索エンジン',
+                        'engine-info' => '検索モードが「既定を使用」のままの箇所で使われる検索エンジン。',
+                        'inherit' => '既定を使用',
+                    ],
+
+                    'products' => [
+                        'title' => '商品',
+                        'info' => 'ストアの各側が商品をどの検索エンジンで検索するか。',
+                        'admin-mode' => '管理画面の検索モード',
+                        'admin-mode-info' => 'メガ検索、データグリッド、その他の管理画面の検索を担う検索エンジン。',
+                        'storefront-mode' => 'ストアフロントの検索モード',
+                        'storefront-mode-info' => 'カテゴリページ、検索ページ、その他のストアフロントの検索を担う検索エンジン。',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Elasticsearch の接続状態とクエリの上限。',
+
+                    'settings' => [
+                        'title' => '設定',
+                        'info' => '検索モードが Elasticsearch に設定されているときに使われます。',
+                        'hosts' => 'ホスト',
+                        'hosts-info' => 'クラスターへの接続先。例: http://localhost:9200。複数のホストはカンマで区切ります。空にすると環境ファイルを使います。',
+                        'username' => 'ユーザー名',
+                        'username-info' => 'ベーシック認証で使います。クラスターが不要なら空のままにします。',
+                        'password' => 'パスワード',
+                        'password-info' => 'ユーザー名に対応するパスワード。',
+                        'api-key' => 'APIキー',
+                        'api-key-info' => 'ユーザー名とパスワードの代わりに使います。設定すると接続はAPIキー認証に切り替わります。',
+                        'cloud-id' => 'クラウドID',
+                        'cloud-id-info' => 'Elastic Cloud 用。設定すると接続は Elastic Cloud に切り替わり、APIキーと組み合わせて使います。',
+                        'index-prefix' => 'インデックス接頭辞',
+                        'index-prefix-info' => 'すべてのインデックス名の先頭に付き、複数のストアで1つのクラスターを共有できます。',
+                        'min-query-length' => 'クエリの最小文字数',
+                        'min-query-length-info' => 'ストアフロントの検索ボックスが受け付ける最短の検索語。',
+                        'max-query-length' => 'クエリの最大文字数',
+                        'max-query-length-info' => 'ストアフロントの検索ボックスが受け付ける最長の検索語。',
+                        'connection' => '接続',
+                    ],
                 ],
             ],
 

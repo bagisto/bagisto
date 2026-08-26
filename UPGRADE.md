@@ -245,10 +245,11 @@ Two enums replace all hardcoded search-related strings:
 
 #### New Contracts
 
-Two contracts define the engine abstraction:
+Three contracts define the engine abstraction:
 
 - `Webkul\Product\Contracts\SearchEngine` — search operations (`search`, `getSuggestions`, `getMaxPrice`, `findBySlug`)
 - `Webkul\Product\Contracts\SearchIndexer` — indexing operations (`indexBatch`, `deleteBatch`, `reindexFull`)
+- `Webkul\Product\Contracts\SearchEngineConnection` — optional, for an engine reached over a network (`configure`, `probe`). An engine that needs nothing to reach, such as the database, simply does not implement it.
 
 #### New Services
 
@@ -259,6 +260,11 @@ Two contracts define the engine abstraction:
 | `Services\Search\Engines\ElasticSearchEngine` | `SearchEngine` implementation for Elasticsearch |
 | `Services\Search\Indexers\ElasticSearchIndexer` | `SearchIndexer` implementation wrapping the existing `Helpers\Indexers\ElasticSearch` |
 | `Services\Search\Indexers\NullIndexer` | No-op `SearchIndexer` for database mode (eliminates config guards) |
+| `Services\Search\Connections\ElasticConnection` | `SearchEngineConnection` for Elasticsearch — applies the admin settings and probes the cluster |
+| `Services\Search\SearchEngineAvailability` | Probes an engine and caches the verdict, keyed per engine |
+| `Services\Search\SearchEngineConfigurator` | Applies every connectable engine's recorded settings at boot |
+| `Services\Search\SearchEngineOptions` | The shared option list behind the three engine selects |
+| `Enums\SearchEngineStatusEnum` | `available`, `unreachable`, `unauthorized`, `incompatible`, `misconfigured` |
 
 #### Migration Steps
 
@@ -397,6 +403,38 @@ Two contracts define the engine abstraction:
    }
    ```
 
+8. **Update stored configuration codes:**
+
+   Search settings have moved out of Catalog into a **Search Engines** section of their own, at
+   `Configuration → Search Engines`. The stored `core_config` codes move with them, and a migration
+   carries existing values across:
+
+   | Before | After |
+   |---|---|
+   | `catalog.products.search.engine` | `search_engines.general.settings.engine` |
+   | `catalog.products.search.admin_mode` | `search_engines.general.products.admin_mode` |
+   | `catalog.products.search.storefront_mode` | `search_engines.general.products.storefront_mode` |
+   | `catalog.products.search.min_query_length` | `search_engines.elastic.settings.min_query_length` |
+   | `catalog.products.search.max_query_length` | `search_engines.elastic.settings.max_query_length` |
+
+   A new `search_engines.general.settings.enabled` switch now gates every external engine — when it
+   is off, both contexts search the database whatever the modes say. The migration turns it on for
+   any store that already had a non-database engine selected, so an upgrade keeps searching the way
+   it did before.
+
+   The two context modes also accept an empty value meaning *use the default engine*, so a store no
+   longer has to repeat its engine choice in three places.
+
+   Read them through `SearchEngineManager` rather than by code, as in step 7 — its `ENABLED_KEY`,
+   `ENGINE_KEY`, `ADMIN_MODE_KEY` and `STOREFRONT_MODE_KEY` constants are the supported reference.
+
+9. **Elasticsearch connection settings are now editable in the admin:**
+
+   Host, credentials and index prefix can be set at `Configuration → Search Engines → Elasticsearch`
+   and are applied over `config/elasticsearch.php` at boot. A setting left empty is passed over, so
+   the environment file stays in charge of anything the admin has not filled in — no change is
+   required to keep using `ELASTICSEARCH_*` variables.
+
 #### Adding a Custom Search Engine
 
 To add a new search engine (e.g., Algolia):
@@ -437,7 +475,46 @@ To add a new search engine (e.g., Algolia):
    $this->app->singleton('product.search.indexer.algolia', AlgoliaIndexer::class);
    ```
 
-The `SearchEngineManager` will automatically resolve your engine when the config value matches the enum case.
+   The `SearchEngineManager` resolves your engine as soon as the stored config value matches the enum case.
+
+5. If your engine is reached over a network, implement `Webkul\Product\Contracts\SearchEngineConnection`
+   and bind it as well. This is what gives it settings in the admin and a working Test Connection
+   button; an engine without one is treated as always available.
+
+   ```php
+   class AlgoliaConnection implements SearchEngineConnection
+   {
+       public function configure(): void { /* push stored settings into config() */ }
+       public function probe(): array { /* ['status' => SearchEngineStatusEnum::AVAILABLE->value, ...] */ }
+   }
+   ```
+
+   ```php
+   $this->app->singleton('product.search.connection.algolia', AlgoliaConnection::class);
+   ```
+
+   `configure()` runs at boot for every bound connection, so keep it cheap and read `core_config`
+   directly rather than through a repository — the table may not exist yet on a fresh install.
+   `probe()` must return a `status` drawn from `SearchEngineStatusEnum`; anything else it returns is
+   passed through to the admin as detail.
+
+6. Add a configuration group keyed by the enum value, so the settings land on their own page:
+
+   ```php
+   ['key' => 'search_engines.algolia', 'name' => '…engines.algolia', 'icon' => '…', 'sort' => 3],
+   ['key' => 'search_engines.algolia.settings', 'fields' => [/* app id, api key, … */]],
+   ```
+
+   > [!IMPORTANT]
+   > Keep the `settings` segment. `SystemConfig::getDefaultConfig()` strips the **first** segment of a
+   > config key and looks the rest up in `config()`, so `search_engines.algolia.<field>` would resolve
+   > against a `config/algolia.php` if one existed and silently override your declared default.
+
+7. Add the engine's label at `admin::app.configuration.index.search-engines.engines.algolia` in all
+   22 locales. It names the option in every engine select and titles the settings page.
+
+The status strings under `search-engines.test-connection.statuses.*` take an `:engine` placeholder,
+so they read correctly for your engine without being touched.
 
 ### Tailwind CSS Upgraded from v3 to v4
 

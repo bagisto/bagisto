@@ -225,7 +225,10 @@
                 class="block w-full rounded-xl border border-['#E3E3E3'] px-11 py-3.5 text-sm font-medium text-gray-900 max-md:rounded-lg max-md:px-10 max-md:py-3 max-md:font-normal max-sm:text-xs"
                 name="query"
                 value="{{ request('query') }}"
+                minlength="{{ core()->getConfigData('search_engines.elastic.settings.min_query_length') }}"
+                maxlength="{{ core()->getConfigData('search_engines.elastic.settings.max_query_length') }}"
                 placeholder="@lang('shop::app.components.layouts.header.mobile.search-text')"
+                pattern="[^\\]+"
                 required
             >
 

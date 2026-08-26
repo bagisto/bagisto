@@ -1298,6 +1298,7 @@ return [
             'admin.configuration.search',
             'admin.configuration.download',
             'admin.configuration.cache-management.execute',
+            'admin.configuration.search-engines.test-connection',
         ],
         'sort' => 9,
     ],

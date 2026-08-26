@@ -2457,76 +2457,10 @@ return [
             ],
         ],
     ], [
-        'key' => 'catalog.products.search',
-        'name' => 'admin::app.configuration.index.catalog.products.search.title',
-        'info' => 'admin::app.configuration.index.catalog.products.search.title-info',
-        'sort' => 2,
-        'fields' => [
-            [
-                'name' => 'engine',
-                'title' => 'admin::app.configuration.index.catalog.products.search.search-engine',
-                'type' => 'select',
-                'default' => 'database',
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
-                        'value' => 'database',
-                    ], [
-                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
-                        'value' => 'elastic',
-                    ],
-                ],
-            ], [
-                'name' => 'admin_mode',
-                'title' => 'admin::app.configuration.index.catalog.products.search.admin-mode',
-                'info' => 'admin::app.configuration.index.catalog.products.search.admin-mode-info',
-                'type' => 'select',
-                'default' => 'database',
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
-                        'value' => 'database',
-                    ], [
-                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
-                        'value' => 'elastic',
-                    ],
-                ],
-            ], [
-                'name' => 'storefront_mode',
-                'title' => 'admin::app.configuration.index.catalog.products.search.storefront-mode',
-                'info' => 'admin::app.configuration.index.catalog.products.search.storefront-mode-info',
-                'type' => 'select',
-                'default' => 'database',
-                'options' => [
-                    [
-                        'title' => 'admin::app.configuration.index.catalog.products.search.database',
-                        'value' => 'database',
-                    ], [
-                        'title' => 'admin::app.configuration.index.catalog.products.search.elastic',
-                        'value' => 'elastic',
-                    ],
-                ],
-            ], [
-                'name' => 'min_query_length',
-                'title' => 'admin::app.configuration.index.catalog.products.search.min-query-length',
-                'info' => 'admin::app.configuration.index.catalog.products.search.min-query-length-info',
-                'type' => 'number',
-                'validation' => 'numeric',
-                'default' => '0',
-            ], [
-                'name' => 'max_query_length',
-                'title' => 'admin::app.configuration.index.catalog.products.search.max-query-length',
-                'info' => 'admin::app.configuration.index.catalog.products.search.max-query-length-info',
-                'type' => 'number',
-                'validation' => 'numeric',
-                'default' => '1000',
-            ],
-        ],
-    ], [
         'key' => 'catalog.products.storefront',
         'name' => 'admin::app.configuration.index.catalog.products.storefront.title',
         'info' => 'admin::app.configuration.index.catalog.products.storefront.title-info',
-        'sort' => 3,
+        'sort' => 2,
         'fields' => [
             [
                 'name' => 'mode',
@@ -2581,7 +2515,7 @@ return [
         'key' => 'catalog.products.product_view_page',
         'name' => 'admin::app.configuration.index.catalog.products.product-view-page.title',
         'info' => 'admin::app.configuration.index.catalog.products.product-view-page.title-info',
-        'sort' => 4,
+        'sort' => 3,
         'fields' => [
             [
                 'name' => 'no_of_related_products',
@@ -2603,7 +2537,7 @@ return [
         'key' => 'catalog.products.review',
         'name' => 'admin::app.configuration.index.catalog.products.review.title',
         'info' => 'admin::app.configuration.index.catalog.products.review.title-info',
-        'sort' => 5,
+        'sort' => 4,
         'fields' => [
             [
                 'name' => 'customer_review',
@@ -2639,7 +2573,7 @@ return [
         'key' => 'catalog.products.social_share',
         'name' => 'admin::app.configuration.index.catalog.products.social-share.title',
         'info' => 'admin::app.configuration.index.catalog.products.social-share.title-info',
-        'sort' => 6,
+        'sort' => 5,
         'fields' => [
             [
                 'name' => 'enabled',
@@ -2680,7 +2614,7 @@ return [
         'key' => 'catalog.products.cart_view_page',
         'name' => 'admin::app.configuration.index.catalog.products.cart-view-page.title',
         'info' => 'admin::app.configuration.index.catalog.products.cart-view-page.title-info',
-        'sort' => 7,
+        'sort' => 6,
         'fields' => [
             [
                 'name' => 'no_of_cross_sells_products',
@@ -2693,7 +2627,7 @@ return [
         'key' => 'catalog.products.cache_small_image',
         'name' => 'admin::app.configuration.index.catalog.products.small-image.title',
         'info' => 'admin::app.configuration.index.catalog.products.small-image.title-info',
-        'sort' => 8,
+        'sort' => 7,
         'fields' => [
             [
                 'name' => 'width',
@@ -2716,7 +2650,7 @@ return [
         'key' => 'catalog.products.cache_medium_image',
         'name' => 'admin::app.configuration.index.catalog.products.medium-image.title',
         'info' => 'admin::app.configuration.index.catalog.products.medium-image.title-info',
-        'sort' => 9,
+        'sort' => 8,
         'fields' => [
             [
                 'name' => 'width',
@@ -2739,7 +2673,7 @@ return [
         'key' => 'catalog.products.cache_large_image',
         'name' => 'admin::app.configuration.index.catalog.products.large-image.title',
         'info' => 'admin::app.configuration.index.catalog.products.large-image.title-info',
-        'sort' => 10,
+        'sort' => 9,
         'fields' => [
             [
                 'name' => 'width',
@@ -2762,7 +2696,7 @@ return [
         'key' => 'catalog.products.attribute',
         'name' => 'admin::app.configuration.index.catalog.products.attribute.title',
         'info' => 'admin::app.configuration.index.catalog.products.attribute.title-info',
-        'sort' => 11,
+        'sort' => 10,
         'fields' => [
             [
                 'name' => 'image_attribute_upload_size',
@@ -2780,7 +2714,7 @@ return [
         'key' => 'catalog.products.omnibus',
         'name' => 'admin::app.configuration.index.catalog.products.omnibus.title',
         'info' => 'admin::app.configuration.index.catalog.products.omnibus.title-info',
-        'sort' => 12,
+        'sort' => 11,
         'fields' => [
             [
                 'name' => 'is_enabled',
@@ -3448,13 +3382,136 @@ return [
     ],
 
     /**
+     * Search Engines.
+     */
+    [
+        'key' => 'search_engines',
+        'name' => 'admin::app.configuration.index.search-engines.title',
+        'info' => 'admin::app.configuration.index.search-engines.info',
+        'sort' => 7,
+    ], [
+        'key' => 'search_engines.general',
+        'name' => 'admin::app.configuration.index.search-engines.general.title',
+        'info' => 'admin::app.configuration.index.search-engines.general.info',
+        'icon' => 'settings/search-engine.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'search_engines.general.settings',
+        'name' => 'admin::app.configuration.index.search-engines.general.settings.title',
+        'info' => 'admin::app.configuration.index.search-engines.general.settings.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'enabled',
+                'title' => 'admin::app.configuration.index.search-engines.general.settings.enabled',
+                'info' => 'admin::app.configuration.index.search-engines.general.settings.enabled-info',
+                'type' => 'boolean',
+                'default' => false,
+            ], [
+                'name' => 'engine',
+                'title' => 'admin::app.configuration.index.search-engines.general.settings.engine',
+                'info' => 'admin::app.configuration.index.search-engines.general.settings.engine-info',
+                'type' => 'select',
+                'default' => 'database',
+                'depends' => 'enabled:1',
+                'options' => 'Webkul\Product\Services\Search\SearchEngineOptions@getEngineOptions',
+            ],
+        ],
+    ], [
+        'key' => 'search_engines.general.products',
+        'name' => 'admin::app.configuration.index.search-engines.general.products.title',
+        'info' => 'admin::app.configuration.index.search-engines.general.products.info',
+        'sort' => 2,
+        'fields' => [
+            [
+                'name' => 'admin_mode',
+                'title' => 'admin::app.configuration.index.search-engines.general.products.admin-mode',
+                'info' => 'admin::app.configuration.index.search-engines.general.products.admin-mode-info',
+                'type' => 'select',
+                'default' => '',
+                'options' => 'Webkul\Product\Services\Search\SearchEngineOptions@getContextOptions',
+            ], [
+                'name' => 'storefront_mode',
+                'title' => 'admin::app.configuration.index.search-engines.general.products.storefront-mode',
+                'info' => 'admin::app.configuration.index.search-engines.general.products.storefront-mode-info',
+                'type' => 'select',
+                'default' => '',
+                'options' => 'Webkul\Product\Services\Search\SearchEngineOptions@getContextOptions',
+            ],
+        ],
+    ], [
+        'key' => 'search_engines.elastic',
+        'name' => 'admin::app.configuration.index.search-engines.engines.elastic',
+        'info' => 'admin::app.configuration.index.search-engines.elastic.info',
+        'icon' => 'settings/elasticsearch.svg',
+        'sort' => 2,
+    ], [
+        'key' => 'search_engines.elastic.settings',
+        'name' => 'admin::app.configuration.index.search-engines.elastic.settings.title',
+        'info' => 'admin::app.configuration.index.search-engines.elastic.settings.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'hosts',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.hosts',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.hosts-info',
+                'type' => 'text',
+            ], [
+                'name' => 'username',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.username',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.username-info',
+                'type' => 'text',
+            ], [
+                'name' => 'password',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.password',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.password-info',
+                'type' => 'password',
+            ], [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.api-key',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.api-key-info',
+                'type' => 'password',
+            ], [
+                'name' => 'cloud_id',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.cloud-id',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.cloud-id-info',
+                'type' => 'text',
+            ], [
+                'name' => 'index_prefix',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.index-prefix',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.index-prefix-info',
+                'type' => 'text',
+            ], [
+                'name' => 'min_query_length',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.min-query-length',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.min-query-length-info',
+                'type' => 'number',
+                'validation' => 'numeric',
+                'default' => '0',
+            ], [
+                'name' => 'max_query_length',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.max-query-length',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.max-query-length-info',
+                'type' => 'number',
+                'validation' => 'numeric',
+                'default' => '1000',
+            ], [
+                'name' => 'connection',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.connection',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.search-engine-connection',
+            ],
+        ],
+    ],
+
+    /**
      * File Management.
      */
     [
         'key' => 'file_management',
         'name' => 'admin::app.configuration.index.file-management.title',
         'info' => 'admin::app.configuration.index.file-management.info',
-        'sort' => 7,
+        'sort' => 8,
     ], [
         'key' => 'file_management.general',
         'name' => 'admin::app.configuration.index.file-management.general.title',
@@ -3614,7 +3671,7 @@ return [
         'key' => 'cache_management',
         'name' => 'admin::app.configuration.index.cache-management.title',
         'info' => 'admin::app.configuration.index.cache-management.info',
-        'sort' => 8,
+        'sort' => 9,
     ], [
         'key' => 'cache_management.general',
         'name' => 'admin::app.configuration.index.cache-management.general.title',

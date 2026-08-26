@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Opcions de llista de desitjos',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Mode de cerca d\'administrador',
-                        'admin-mode-info' => 'La cerca mega, la quadrícula de dades i altres funcionalitats de cerca al panell d\'administració es basaran en el motor de cerca seleccionat.',
-                        'database' => 'Base de dades',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Longitud màxima de consulta',
-                        'max-query-length-info' => 'Establir la longitud màxima de consulta per a les cerques.',
-                        'min-query-length' => 'Longitud mínima de consulta',
-                        'min-query-length-info' => 'Establir la longitud mínima de consulta per a les cerques.',
-                        'search-engine' => 'Motor de cerca',
-                        'storefront-mode' => 'Mode de cerca de botiga en línia',
-                        'storefront-mode-info' => 'La funcionalitat de cerca a la botiga en línia es basarà en el motor de cerca seleccionat, incloent la pàgina de categoria, la pàgina de cerca i altres funcionalitats de cerca.',
-                        'title' => 'Cerca',
-                        'title-info' => 'Per configurar el motor de cerca per a les cerques de productes, podeu triar entre una base de dades i Elasticsearch segons els vostres requisits. Si teniu un gran nombre de productes, es recomana Elasticsearch.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Permetre el pagament per a convidats',
                         'allow-guest-checkout-hint' => 'Suggeriment: si està activat, aquesta opció es pot configurar per a cada producte específicament.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Notificacions',
                     'title-info' => 'Activa o desactiva cada correu de notificació.',
                     'verification' => 'Envia un correu electrònic de verificació després del registre del client',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Motors de cerca',
+                'info' => 'Trieu el motor que impulsa la cerca de productes i configureu-lo.',
+
+                'engines' => [
+                    'database' => 'Base de dades',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Prova la connexió',
+                    'testing' => 'Provant...',
+
+                    'statuses' => [
+                        'available' => ':engine està disponible',
+                        'unreachable' => ':engine no ha respost',
+                        'unauthorized' => ':engine ha rebutjat les credencials',
+                        'incompatible' => 'Lamfitrió ha respost però no és un servidor :engine compatible',
+                        'misconfigured' => 'La connexió d:engine no està configurada',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'El motor sobre el qual funciona la cerca de productes.',
+
+                    'settings' => [
+                        'title' => 'Configuració',
+                        'info' => 'Activeu un motor de cerca extern i trieu on sutilitza.',
+                        'enabled' => 'Activa el motor de cerca extern',
+                        'enabled-info' => 'Desactiveu-ho per cercar a la base de dades pertot, sigui quina sigui la configuració de sota.',
+                        'engine' => 'Motor de cerca predeterminat',
+                        'engine-info' => 'El motor utilitzat allà on una manera de cerca es deixi en Usa el predeterminat.',
+                        'inherit' => 'Usa el predeterminat',
+                    ],
+
+                    'products' => [
+                        'title' => 'Productes',
+                        'info' => 'Amb quin motor cerca productes cada costat de la botiga.',
+                        'admin-mode' => 'Manera de cerca del tauler',
+                        'admin-mode-info' => 'El motor darrere la megacerca, les graelles de dades i la resta de cerques del tauler dadministració.',
+                        'storefront-mode' => 'Manera de cerca de la botiga',
+                        'storefront-mode-info' => 'El motor darrere les pàgines de categoria, la pàgina de cerca i la resta de cerques de la botiga.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Estat de la connexió i límits de consulta dElasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Configuració',
+                        'info' => 'Sutilitza quan una manera de cerca està definida com a Elasticsearch.',
+                        'hosts' => 'Amfitrions',
+                        'hosts-info' => 'On s\'arriba al clúster, per exemple http://localhost:9200. Separeu diversos amfitrions amb una coma. Deixeu-ho buit per usar el fitxer d\'entorn.',
+                        'username' => 'Nom d\'usuari',
+                        'username-info' => 'S\'usa amb autenticació bàsica. Deixeu-ho buit si el clúster no en necessita.',
+                        'password' => 'Contrasenya',
+                        'password-info' => 'La contrasenya associada al nom d\'usuari.',
+                        'api-key' => 'Clau API',
+                        'api-key-info' => 'S\'usa en lloc del nom d\'usuari i la contrasenya. Definir-ne una canvia la connexió a autenticació per clau API.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Per a Elastic Cloud. Definir-ne un canvia la connexió a Elastic Cloud, combinat amb la clau API.',
+                        'index-prefix' => 'Prefix d\'índex',
+                        'index-prefix-info' => 'Es posa davant de cada nom d\'índex, perquè diverses botigues comparteixin un clúster.',
+                        'min-query-length' => 'Longitud mínima de la consulta',
+                        'min-query-length-info' => 'El terme de cerca més curt que accepta el quadre de cerca de la botiga.',
+                        'max-query-length' => 'Longitud màxima de la consulta',
+                        'max-query-length-info' => 'El terme de cerca més llarg que accepta el quadre de cerca de la botiga.',
+                        'connection' => 'Connexió',
+                    ],
                 ],
             ],
 

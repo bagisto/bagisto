@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Opsi Wishlist',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Mode Pencarian Admin',
-                        'admin-mode-info' => 'Mega Pencarian, Datagrid, dan fungsionalitas pencarian lainnya di panel admin akan didasarkan pada mesin pencarian yang dipilih.',
-                        'database' => 'Database',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Panjang kueri maksimum',
-                        'max-query-length-info' => 'Atur panjang kueri maksimum untuk pencarian.',
-                        'min-query-length' => 'Panjang kueri minimum',
-                        'min-query-length-info' => 'Atur panjang kueri minimum untuk pencarian.',
-                        'search-engine' => 'Mesin Pencarian',
-                        'storefront-mode' => 'Mode Pencarian Toko Depan',
-                        'storefront-mode-info' => 'Fungsionalitas pencarian di toko depan akan didasarkan pada mesin pencarian yang dipilih, termasuk halaman kategori, halaman pencarian, dan fungsionalitas pencarian lainnya.',
-                        'title' => 'Pencarian',
-                        'title-info' => 'Untuk mengatur mesin pencarian untuk pencarian produk, Anda dapat memilih antara database dan Elasticsearch berdasarkan kebutuhan Anda. Jika Anda memiliki banyak produk, Elasticsearch disarankan.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Izinkan Pembayaran Tamu',
                         'allow-guest-checkout-hint' => 'Petunjuk: Jika diaktifkan, opsi ini dapat dikonfigurasi untuk setiap produk secara spesifik.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Notifikasi',
                     'title-info' => 'Aktifkan atau nonaktifkan tiap email notifikasi.',
                     'verification' => 'Kirim email verifikasi setelah pendaftaran pelanggan',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Mesin Pencari',
+                'info' => 'Pilih mesin yang menjalankan pencarian produk dan konfigurasikan.',
+
+                'engines' => [
+                    'database' => 'Database',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Uji Koneksi',
+                    'testing' => 'Menguji...',
+
+                    'statuses' => [
+                        'available' => ':engine tersedia',
+                        'unreachable' => ':engine tidak menjawab',
+                        'unauthorized' => ':engine menolak kredensial',
+                        'incompatible' => 'Host menjawab tetapi bukan server :engine yang didukung',
+                        'misconfigured' => 'Koneksi :engine belum dikonfigurasi',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'Umum',
+                    'info' => 'Mesin tempat pencarian produk berjalan.',
+
+                    'settings' => [
+                        'title' => 'Pengaturan',
+                        'info' => 'Aktifkan mesin pencari eksternal dan pilih di mana ia digunakan.',
+                        'enabled' => 'Aktifkan Mesin Pencari Eksternal',
+                        'enabled-info' => 'Matikan untuk mencari di basis data di mana saja, apa pun pengaturan di bawah ini.',
+                        'engine' => 'Mesin Pencari Bawaan',
+                        'engine-info' => 'Mesin yang dipakai di mana pun mode pencarian dibiarkan pada Gunakan bawaan.',
+                        'inherit' => 'Gunakan bawaan',
+                    ],
+
+                    'products' => [
+                        'title' => 'Produk',
+                        'info' => 'Mesin apa yang dipakai tiap sisi toko untuk mencari produk.',
+                        'admin-mode' => 'Mode Pencarian Panel Admin',
+                        'admin-mode-info' => 'Mesin di balik mega pencarian, tabel data, dan pencarian lain di panel admin.',
+                        'storefront-mode' => 'Mode Pencarian Toko',
+                        'storefront-mode-info' => 'Mesin di balik halaman kategori, halaman pencarian, dan pencarian lain di toko.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Status koneksi dan batas kueri untuk Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Pengaturan',
+                        'info' => 'Dipakai saat mode pencarian disetel ke Elasticsearch.',
+                        'hosts' => 'Host',
+                        'hosts-info' => 'Tempat klaster dijangkau, misalnya http://localhost:9200. Pisahkan beberapa host dengan koma. Biarkan kosong untuk memakai berkas lingkungan.',
+                        'username' => 'Nama Pengguna',
+                        'username-info' => 'Dipakai dengan autentikasi dasar. Biarkan kosong jika klaster tidak memerlukannya.',
+                        'password' => 'Kata Sandi',
+                        'password-info' => 'Kata sandi yang berpasangan dengan nama pengguna.',
+                        'api-key' => 'Kunci API',
+                        'api-key-info' => 'Dipakai sebagai ganti nama pengguna dan kata sandi. Mengisinya mengalihkan koneksi ke autentikasi kunci API.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Untuk Elastic Cloud. Mengisinya mengalihkan koneksi ke Elastic Cloud, berpasangan dengan kunci API.',
+                        'index-prefix' => 'Awalan Indeks',
+                        'index-prefix-info' => 'Ditambahkan di depan setiap nama indeks, sehingga beberapa toko dapat berbagi satu klaster.',
+                        'min-query-length' => 'Panjang Kueri Minimum',
+                        'min-query-length-info' => 'Istilah pencarian terpendek yang diterima kotak pencarian toko.',
+                        'max-query-length' => 'Panjang Kueri Maksimum',
+                        'max-query-length-info' => 'Istilah pencarian terpanjang yang diterima kotak pencarian toko.',
+                        'connection' => 'Koneksi',
+                    ],
                 ],
             ],
 

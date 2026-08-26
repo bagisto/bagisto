@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Opciones de lista de deseos',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Modo de búsqueda de administrador',
-                        'admin-mode-info' => 'La búsqueda mega, la cuadrícula de datos y otras funcionalidades de búsqueda en el panel de administración se basarán en el motor de búsqueda seleccionado.',
-                        'database' => 'Base de datos',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Longitud máxima de consulta',
-                        'max-query-length-info' => 'Establecer la longitud máxima de consulta para las consultas de búsqueda.',
-                        'min-query-length' => 'Longitud mínima de consulta',
-                        'min-query-length-info' => 'Establecer la longitud mínima de consulta para las consultas de búsqueda.',
-                        'search-engine' => 'Motor de búsqueda',
-                        'storefront-mode' => 'Modo de búsqueda de tienda en línea',
-                        'storefront-mode-info' => 'La funcionalidad de búsqueda en la tienda en línea se basará en el motor de búsqueda seleccionado, incluida la página de categoría, la página de búsqueda y otras funcionalidades de búsqueda.',
-                        'title' => 'Búsqueda',
-                        'title-info' => 'Para configurar el motor de búsqueda para las búsquedas de productos, puede elegir entre una base de datos y Elasticsearch según sus requisitos. Si tiene un gran número de productos, se recomienda Elasticsearch.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Permitir pago de invitados',
                         'allow-guest-checkout-hint' => 'Sugerencia: si está activado, esta opción se puede configurar para cada producto específicamente.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Notificaciones',
                     'title-info' => 'Activar o desactivar cada correo de notificación.',
                     'verification' => 'Enviar un correo electrónico de verificación después del registro del cliente',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Motores de búsqueda',
+                'info' => 'Elija el motor que impulsa la búsqueda de productos y configúrelo.',
+
+                'engines' => [
+                    'database' => 'Base de datos',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Probar conexión',
+                    'testing' => 'Probando...',
+
+                    'statuses' => [
+                        'available' => ':engine está disponible',
+                        'unreachable' => ':engine no respondió',
+                        'unauthorized' => ':engine rechazó las credenciales',
+                        'incompatible' => 'El host respondió pero no es un servidor :engine compatible',
+                        'misconfigured' => 'La conexión de :engine no está configurada',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'El motor sobre el que funciona la búsqueda de productos.',
+
+                    'settings' => [
+                        'title' => 'Configuración',
+                        'info' => 'Active un motor de búsqueda externo y elija dónde se utiliza.',
+                        'enabled' => 'Activar motor de búsqueda externo',
+                        'enabled-info' => 'Desactívelo para buscar en la base de datos en todas partes, sea cual sea la configuración de abajo.',
+                        'engine' => 'Motor de búsqueda predeterminado',
+                        'engine-info' => 'El motor utilizado allí donde un modo de búsqueda se deje en Usar predeterminado.',
+                        'inherit' => 'Usar predeterminado',
+                    ],
+
+                    'products' => [
+                        'title' => 'Productos',
+                        'info' => 'Con qué motor busca productos cada lado de la tienda.',
+                        'admin-mode' => 'Modo de búsqueda del panel',
+                        'admin-mode-info' => 'El motor detrás de la megabúsqueda, las tablas de datos y el resto de búsquedas del panel de administración.',
+                        'storefront-mode' => 'Modo de búsqueda de la tienda',
+                        'storefront-mode-info' => 'El motor detrás de las páginas de categoría, la página de búsqueda y el resto de búsquedas de la tienda.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Estado de la conexión y límites de consulta de Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Configuración',
+                        'info' => 'Se utiliza cuando un modo de búsqueda está definido como Elasticsearch.',
+                        'hosts' => 'Hosts',
+                        'hosts-info' => 'Dónde se alcanza el clúster, por ejemplo http://localhost:9200. Separe varios hosts con una coma. Déjelo vacío para usar el archivo de entorno.',
+                        'username' => 'Usuario',
+                        'username-info' => 'Se usa con autenticación básica. Déjelo vacío si el clúster no la necesita.',
+                        'password' => 'Contraseña',
+                        'password-info' => 'La contraseña asociada al usuario.',
+                        'api-key' => 'Clave API',
+                        'api-key-info' => 'Se usa en lugar de usuario y contraseña. Definir una cambia la conexión a autenticación por clave API.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Para Elastic Cloud. Definir uno cambia la conexión a Elastic Cloud y se combina con la clave API.',
+                        'index-prefix' => 'Prefijo de índice',
+                        'index-prefix-info' => 'Se antepone a cada nombre de índice, para que varias tiendas compartan un clúster.',
+                        'min-query-length' => 'Longitud mínima de la consulta',
+                        'min-query-length-info' => 'El término de búsqueda más corto que acepta el cuadro de búsqueda de la tienda.',
+                        'max-query-length' => 'Longitud máxima de la consulta',
+                        'max-query-length-info' => 'El término de búsqueda más largo que acepta el cuadro de búsqueda de la tienda.',
+                        'connection' => 'Conexión',
+                    ],
                 ],
             ],
 

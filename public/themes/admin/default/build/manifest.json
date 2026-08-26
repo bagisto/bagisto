@@ -264,7 +264,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-DARqrvHg.css",
+    "file": "assets/app-Jix_NXNN.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -380,6 +380,10 @@
     "file": "assets/cloudflare-r2-D8OgzYNP.svg",
     "src": "src/Resources/assets/images/settings/cloudflare-r2.svg"
   },
+  "src/Resources/assets/images/settings/elasticsearch.svg": {
+    "file": "assets/elasticsearch-DhrRMj4r.svg",
+    "src": "src/Resources/assets/images/settings/elasticsearch.svg"
+  },
   "src/Resources/assets/images/settings/email.svg": {
     "file": "assets/email-5AJwT575.svg",
     "src": "src/Resources/assets/images/settings/email.svg"
@@ -435,6 +439,10 @@
   "src/Resources/assets/images/settings/product.svg": {
     "file": "assets/product-CoE-Gk7v.svg",
     "src": "src/Resources/assets/images/settings/product.svg"
+  },
+  "src/Resources/assets/images/settings/search-engine.svg": {
+    "file": "assets/search-engine-BWFbw49e.svg",
+    "src": "src/Resources/assets/images/settings/search-engine.svg"
   },
   "src/Resources/assets/images/settings/settings.svg": {
     "file": "assets/settings-DhKa03Cc.svg",

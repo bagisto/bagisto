@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Wishlist options',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Admin Search Mode',
-                        'admin-mode-info' => 'Mega Search, Datagrid, and other search functionalities in the admin panel will be based on the selected search engine.',
-                        'database' => 'Database',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Maximum query length',
-                        'max-query-length-info' => 'Set maximum query length for search queries.',
-                        'min-query-length' => 'Minimum query length',
-                        'min-query-length-info' => 'Set minimum query length for search queries.',
-                        'search-engine' => 'Search Engine',
-                        'storefront-mode' => 'Storefront Search Mode',
-                        'storefront-mode-info' => 'Search functionality on the storefront will be based on the selected search engine including category page, search page, and other search functionalities.',
-                        'title' => 'Search',
-                        'title-info' => 'To set up the search engine for product searches, you can choose between a database and Elasticsearch based on your requirements. If you have a large number of products, Elasticsearch is recommended.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Allow Guest Checkout',
                         'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Notifications',
                     'title-info' => 'Turn individual notification emails on or off.',
                     'verification' => 'Send a verification e-mail after customer registration',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Search Engines',
+                'info' => 'Choose the engine that powers product search and configure it.',
+
+                'engines' => [
+                    'database' => 'Database',
+                    'elastic' => 'Elasticsearch',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Test Connection',
+                    'testing' => 'Testing...',
+
+                    'statuses' => [
+                        'available' => ':engine is available',
+                        'unreachable' => ':engine did not answer',
+                        'unauthorized' => ':engine rejected the credentials',
+                        'incompatible' => 'The host answered but is not a supported :engine server',
+                        'misconfigured' => 'The :engine connection is not configured',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'The engine product search runs on.',
+
+                    'settings' => [
+                        'title' => 'Settings',
+                        'info' => 'Turn an external search engine on and choose where it is used.',
+                        'enabled' => 'Enable External Search Engine',
+                        'enabled-info' => 'Turn this off to search the database everywhere, whatever the settings below say.',
+                        'engine' => 'Default Search Engine',
+                        'engine-info' => 'The engine used wherever a search mode below is left on Use Default.',
+                        'inherit' => 'Use Default',
+                    ],
+
+                    'products' => [
+                        'title' => 'Products',
+                        'info' => 'Which engine each side of the store searches products with.',
+                        'admin-mode' => 'Admin Search Mode',
+                        'admin-mode-info' => 'The engine behind Mega Search, the datagrids and other search in the admin panel.',
+                        'storefront-mode' => 'Storefront Search Mode',
+                        'storefront-mode-info' => 'The engine behind category pages, the search page and other search on the storefront.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Connection state and query limits for Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Settings',
+                        'info' => 'Used when a search mode is set to Elasticsearch.',
+                        'hosts' => 'Hosts',
+                        'hosts-info' => 'Where the cluster is reached, such as http://localhost:9200. Separate several hosts with a comma. Leave empty to use the environment file.',
+                        'username' => 'Username',
+                        'username-info' => 'Used with basic authentication. Leave empty if the cluster needs none.',
+                        'password' => 'Password',
+                        'password-info' => 'The password paired with the username.',
+                        'api-key' => 'API Key',
+                        'api-key-info' => 'Used instead of a username and password. Setting one switches the connection to API key authentication.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'For Elastic Cloud. Setting one switches the connection to Elastic Cloud and is paired with the API key.',
+                        'index-prefix' => 'Index Prefix',
+                        'index-prefix-info' => 'Prefixed to every index name, so several stores can share one cluster.',
+                        'min-query-length' => 'Minimum Query Length',
+                        'min-query-length-info' => 'The shortest search term the storefront search box accepts.',
+                        'max-query-length' => 'Maximum Query Length',
+                        'max-query-length-info' => 'The longest search term the storefront search box accepts.',
+                        'connection' => 'Connection',
+                    ],
                 ],
             ],
 

@@ -12,6 +12,26 @@ use Webkul\Product\Services\Search\Indexers\NullIndexer;
 class SearchEngineManager
 {
     /**
+     * Whether an external search engine may be used at all.
+     */
+    const ENABLED_KEY = 'search_engines.general.settings.enabled';
+
+    /**
+     * The engine a context falls back to.
+     */
+    const ENGINE_KEY = 'search_engines.general.settings.engine';
+
+    /**
+     * The engine the admin panel searches with.
+     */
+    const ADMIN_MODE_KEY = 'search_engines.general.products.admin_mode';
+
+    /**
+     * The engine the storefront searches with.
+     */
+    const STOREFRONT_MODE_KEY = 'search_engines.general.products.storefront_mode';
+
+    /**
      * Create a new instance.
      */
     public function __construct(
@@ -62,12 +82,10 @@ class SearchEngineManager
         }
 
         $modeKey = $context === SearchContextEnum::ADMIN
-            ? 'catalog.products.search.admin_mode'
-            : 'catalog.products.search.storefront_mode';
+            ? self::ADMIN_MODE_KEY
+            : self::STOREFRONT_MODE_KEY;
 
-        $value = core()->getConfigData($modeKey);
-
-        return SearchEngineEnum::tryFrom($value) ?? SearchEngineEnum::DATABASE;
+        return $this->toEngine(core()->getConfigData($modeKey), $master);
     }
 
     /**
@@ -75,8 +93,22 @@ class SearchEngineManager
      */
     public function getMasterEngine(): SearchEngineEnum
     {
-        $value = core()->getConfigData('catalog.products.search.engine');
+        if (! core()->getConfigData(self::ENABLED_KEY)) {
+            return SearchEngineEnum::DATABASE;
+        }
 
-        return SearchEngineEnum::tryFrom($value) ?? SearchEngineEnum::DATABASE;
+        return $this->toEngine(core()->getConfigData(self::ENGINE_KEY));
+    }
+
+    /**
+     * Read a stored setting as an engine, falling back when it is unset or unknown.
+     */
+    protected function toEngine(mixed $value, SearchEngineEnum $fallback = SearchEngineEnum::DATABASE): SearchEngineEnum
+    {
+        if (! is_string($value) || $value === '') {
+            return $fallback;
+        }
+
+        return SearchEngineEnum::tryFrom($value) ?? $fallback;
     }
 }

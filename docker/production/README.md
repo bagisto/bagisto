@@ -1054,7 +1054,7 @@ The bundled database's credentials (`bagisto`/`bagisto`) are safe **in the defau
 
 ### Is Elasticsearch included?
 
-No. Bagisto works without it (falling back to MySQL full-text search). If you need Elasticsearch, run it as a separate container and configure Bagisto to connect to it via env vars.
+No. Bagisto works without it (falling back to database search). If you need Elasticsearch, run it as a separate container and point Bagisto at it from **Configuration → Search Engines**, where the host, credentials and index prefix are set and the connection can be tested. The `ELASTICSEARCH_*` env vars still work and are used for anything left empty there.
 
 ---
 

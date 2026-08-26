@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'İstek listesi seçenekleri',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Yönetici Arama Modu',
-                        'admin-mode-info' => 'Mega Arama, Veri Tablosu ve diğer arama işlevleri yönetici panelinde seçilen arama motoruna dayanacaktır.',
-                        'database' => 'Veritabanı',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Maksimum sorgu uzunluğu',
-                        'max-query-length-info' => 'Arama sorguları için maksimum sorgu uzunluğunu ayarlayın.',
-                        'min-query-length' => 'Minimum sorgu uzunluğu',
-                        'min-query-length-info' => 'Arama sorguları için minimum sorgu uzunluğunu ayarlayın.',
-                        'search-engine' => 'Arama Motoru',
-                        'storefront-mode' => 'Mağaza ön yüzü Arama Modu',
-                        'storefront-mode-info' => 'Mağaza ön yüzünde kategori sayfası, arama sayfası ve diğer arama işlevleri de dahil olmak üzere seçilen arama motoruna dayalı arama işlevselliği sağlanır.',
-                        'title' => 'Arama',
-                        'title-info' => 'Ürün aramaları için arama motorunu ayarlamak için gereksinimlerinize bağlı olarak bir veritabanı ve Elasticsearch arasında seçim yapabilirsiniz. Büyük bir ürün sayınız varsa, Elasticsearch önerilir.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Konuk Ödemesine İzin Ver',
                         'allow-guest-checkout-hint' => 'İpucu: Etkinleştirildiğinde, bu seçenek her ürün için ayrı ayrı yapılandırılabilir.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Bildirimler',
                     'title-info' => 'Tek tek bildirim e-postalarını açın veya kapatın.',
                     'verification' => 'Müşteri kaydından sonra bir doğrulama e-postası gönder',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Arama Motorları',
+                'info' => 'Ürün aramasını sağlayan motoru seçin ve yapılandırın.',
+
+                'engines' => [
+                    'database' => 'Veritabanı',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Bağlantıyı Sına',
+                    'testing' => 'Sınanıyor...',
+
+                    'statuses' => [
+                        'available' => ':engine kullanılabilir',
+                        'unreachable' => ':engine yanıt vermedi',
+                        'unauthorized' => ':engine kimlik bilgilerini reddetti',
+                        'incompatible' => 'Sunucu yanıt verdi ancak desteklenen bir :engine sunucusu değil',
+                        'misconfigured' => ':engine bağlantısı yapılandırılmamış',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'Genel',
+                    'info' => 'Ürün aramasının üzerinde çalıştığı motor.',
+
+                    'settings' => [
+                        'title' => 'Ayarlar',
+                        'info' => 'Harici bir arama motorunu açın ve nerede kullanılacağını seçin.',
+                        'enabled' => 'Harici Arama Motorunu Etkinleştir',
+                        'enabled-info' => 'Aşağıdaki ayarlar ne derse desin her yerde veritabanında aramak için bunu kapatın.',
+                        'engine' => 'Varsayılan Arama Motoru',
+                        'engine-info' => 'Bir arama kipi Varsayılanı kullan olarak bırakıldığı her yerde kullanılan motor.',
+                        'inherit' => 'Varsayılanı kullan',
+                    ],
+
+                    'products' => [
+                        'title' => 'Ürünler',
+                        'info' => 'Mağazanın her tarafının ürünleri hangi motorla aradığı.',
+                        'admin-mode' => 'Yönetim Paneli Arama Kipi',
+                        'admin-mode-info' => 'Mega arama, veri tabloları ve yönetim panelindeki diğer aramaların arkasındaki motor.',
+                        'storefront-mode' => 'Mağaza Arama Kipi',
+                        'storefront-mode-info' => 'Kategori sayfaları, arama sayfası ve mağazadaki diğer aramaların arkasındaki motor.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Elasticsearch için bağlantı durumu ve sorgu sınırları.',
+
+                    'settings' => [
+                        'title' => 'Ayarlar',
+                        'info' => 'Bir arama kipi Elasticsearch olarak ayarlandığında kullanılır.',
+                        'hosts' => 'Sunucular',
+                        'hosts-info' => 'Kümeye nereden erişildiği, örneğin http://localhost:9200. Birden çok sunucuyu virgülle ayırın. Ortam dosyasını kullanmak için boş bırakın.',
+                        'username' => 'Kullanıcı Adı',
+                        'username-info' => 'Temel kimlik doğrulamada kullanılır. Küme gerektirmiyorsa boş bırakın.',
+                        'password' => 'Parola',
+                        'password-info' => 'Kullanıcı adıyla eşleşen parola.',
+                        'api-key' => 'API Anahtarı',
+                        'api-key-info' => 'Kullanıcı adı ve parola yerine kullanılır. Birini girmek bağlantıyı API anahtarı doğrulamasına geçirir.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Elastic Cloud için. Birini girmek bağlantıyı Elastic Cloud\'a geçirir ve API anahtarıyla eşleşir.',
+                        'index-prefix' => 'Dizin Öneki',
+                        'index-prefix-info' => 'Her dizin adının önüne eklenir, böylece birden çok mağaza tek kümeyi paylaşabilir.',
+                        'min-query-length' => 'En Küçük Sorgu Uzunluğu',
+                        'min-query-length-info' => 'Mağaza arama kutusunun kabul ettiği en kısa arama terimi.',
+                        'max-query-length' => 'En Büyük Sorgu Uzunluğu',
+                        'max-query-length-info' => 'Mağaza arama kutusunun kabul ettiği en uzun arama terimi.',
+                        'connection' => 'Bağlantı',
+                    ],
                 ],
             ],
 

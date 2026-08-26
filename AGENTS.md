@@ -60,7 +60,7 @@ your summary rather than silently churning the codebase either way.
 ├── config/
 │   ├── concord.php             # Concord module (model proxy) registrations
 │   ├── themes.php              # Shop + Admin theme config (Vite paths)
-│   ├── elasticsearch.php       # Elasticsearch connection
+│   ├── elasticsearch.php       # Elasticsearch connection defaults (admin settings override)
 │   └── ...                     # Standard Laravel configs
 ├── database/
 │   ├── migrations/             # App-level migrations

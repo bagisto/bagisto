@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Wishlist options',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Admin Search Mode',
-                        'admin-mode-info' => 'Mega Search, Datagrid, and other search functionalities in the admin panel will be based on the selected search engine.',
-                        'database' => 'Database',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Maximum query length',
-                        'max-query-length-info' => 'Set maximum query length for search queries.',
-                        'min-query-length' => 'Minimum query length',
-                        'min-query-length-info' => 'Set minimum query length for search queries.',
-                        'search-engine' => 'Search Engine',
-                        'storefront-mode' => 'Storefront Search Mode',
-                        'storefront-mode-info' => 'Search functionality on the storefront will be based on the selected search engine including category page, search page, and other search functionalities.',
-                        'title' => 'Search',
-                        'title-info' => 'To set up the search engine for product searches, you can choose between a database and Elasticsearch based on your requirements. If you have a large number of products, Elasticsearch is recommended.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Allow Guest Checkout',
                         'allow-guest-checkout-hint' => 'Hint: If turned on, this option can be configured for each product specifically.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Notifications',
                     'title-info' => 'Activează sau dezactivează fiecare e-mail de notificare.',
                     'verification' => 'Send a verification e-mail after customer registration',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Motoare de căutare',
+                'info' => 'Alegeți motorul care asigură căutarea produselor și configurați-l.',
+
+                'engines' => [
+                    'database' => 'Database',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Testează conexiunea',
+                    'testing' => 'Se testează...',
+
+                    'statuses' => [
+                        'available' => ':engine este disponibil',
+                        'unreachable' => ':engine nu a răspuns',
+                        'unauthorized' => ':engine a respins datele de autentificare',
+                        'incompatible' => 'Gazda a răspuns, dar nu este un server :engine acceptat',
+                        'misconfigured' => 'Conexiunea :engine nu este configurată',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'General',
+                    'info' => 'Motorul pe care rulează căutarea produselor.',
+
+                    'settings' => [
+                        'title' => 'Setări',
+                        'info' => 'Activați un motor de căutare extern și alegeți unde este folosit.',
+                        'enabled' => 'Activează motorul de căutare extern',
+                        'enabled-info' => 'Dezactivați pentru a căuta peste tot în baza de date, indiferent de setările de mai jos.',
+                        'engine' => 'Motor de căutare implicit',
+                        'engine-info' => 'Motorul folosit oriunde un mod de căutare rămâne pe Folosește implicit.',
+                        'inherit' => 'Folosește implicit',
+                    ],
+
+                    'products' => [
+                        'title' => 'Produse',
+                        'info' => 'Cu ce motor caută produse fiecare parte a magazinului.',
+                        'admin-mode' => 'Mod de căutare în administrare',
+                        'admin-mode-info' => 'Motorul din spatele mega-căutării, al grilelor de date și al celorlalte căutări din panoul de administrare.',
+                        'storefront-mode' => 'Mod de căutare în magazin',
+                        'storefront-mode-info' => 'Motorul din spatele paginilor de categorie, al paginii de căutare și al celorlalte căutări din magazin.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Starea conexiunii și limitele de interogare pentru Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Setări',
+                        'info' => 'Folosit când un mod de căutare este setat pe Elasticsearch.',
+                        'hosts' => 'Gazde',
+                        'hosts-info' => 'Unde este accesibil clusterul, de exemplu http://localhost:9200. Separați mai multe gazde prin virgulă. Lăsați gol pentru a folosi fișierul de mediu.',
+                        'username' => 'Nume de utilizator',
+                        'username-info' => 'Folosit la autentificarea de bază. Lăsați gol dacă clusterul nu o cere.',
+                        'password' => 'Parolă',
+                        'password-info' => 'Parola asociată numelui de utilizator.',
+                        'api-key' => 'Cheie API',
+                        'api-key-info' => 'Folosită în locul numelui de utilizator și al parolei. Setarea ei comută conexiunea pe autentificare cu cheie API.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Pentru Elastic Cloud. Setarea lui comută conexiunea pe Elastic Cloud, împreună cu cheia API.',
+                        'index-prefix' => 'Prefix de index',
+                        'index-prefix-info' => 'Adăugat înaintea fiecărui nume de index, astfel încât mai multe magazine să poată folosi un cluster.',
+                        'min-query-length' => 'Lungimea minimă a interogării',
+                        'min-query-length-info' => 'Cel mai scurt termen de căutare acceptat de caseta de căutare din magazin.',
+                        'max-query-length' => 'Lungimea maximă a interogării',
+                        'max-query-length-info' => 'Cel mai lung termen de căutare acceptat de caseta de căutare din magazin.',
+                        'connection' => 'Conexiune',
+                    ],
                 ],
             ],
 

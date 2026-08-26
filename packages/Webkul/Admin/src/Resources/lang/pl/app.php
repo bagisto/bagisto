@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Włącz listę życzeń',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Tryb wyszukiwania w panelu administratora',
-                        'admin-mode-info' => 'Wyszukiwanie w trybie mega, siatki danych i inne funkcje wyszukiwania w panelu administratora będą oparte na wybranym silniku wyszukiwania.',
-                        'database' => 'Baza danych',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Maksymalna długość zapytania',
-                        'max-query-length-info' => 'Ustaw maksymalną długość zapytania dla zapytań wyszukiwania.',
-                        'min-query-length' => 'Minimalna długość zapytania',
-                        'min-query-length-info' => 'Ustaw minimalną długość zapytania dla zapytań wyszukiwania. Po ilu wpisanych znakach ma rozpocząć się wyszukiwanie',
-                        'search-engine' => 'Silnik wyszukiwania',
-                        'storefront-mode' => 'Tryb wyszukiwania w witrynie sklepu',
-                        'storefront-mode-info' => 'Funkcja wyszukiwania na stronie sklepu będzie oparta na wybranym silniku wyszukiwania, w tym na stronie kategorii, stronie wyszukiwania i innych funkcjach wyszukiwania.',
-                        'title' => 'Wyszukiwanie',
-                        'title-info' => 'Aby skonfigurować silnik wyszukiwania dla wyszukiwania produktów, możesz wybrać między bazą danych a Elasticsearch w zależności od swoich wymagań. Jeśli masz dużą liczbę produktów, zaleca się Elasticsearch.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Zezwalaj na zamówienia gości',
                         'allow-guest-checkout-hint' => 'Wskazówka: Jeśli jest włączone, tę opcję można skonfigurować dla każdego produktu.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Powiadomienia',
                     'title-info' => 'Włącz lub wyłącz poszczególne wiadomości z powiadomieniami.',
                     'verification' => 'Wyślij e-mail weryfikacyjny po rejestracji klienta',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Wyszukiwarki',
+                'info' => 'Wybierz silnik obsługujący wyszukiwanie produktów i skonfiguruj go.',
+
+                'engines' => [
+                    'database' => 'Baza danych',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Testuj połączenie',
+                    'testing' => 'Testowanie...',
+
+                    'statuses' => [
+                        'available' => ':engine jest dostępny',
+                        'unreachable' => ':engine nie odpowiedział',
+                        'unauthorized' => ':engine odrzucił dane uwierzytelniające',
+                        'incompatible' => 'Host odpowiedział, ale nie jest obsługiwanym serwerem :engine',
+                        'misconfigured' => 'Połączenie z :engine nie jest skonfigurowane',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'Ogólne',
+                    'info' => 'Silnik, na którym działa wyszukiwanie produktów.',
+
+                    'settings' => [
+                        'title' => 'Ustawienia',
+                        'info' => 'Włącz zewnętrzną wyszukiwarkę i wybierz, gdzie jest używana.',
+                        'enabled' => 'Włącz zewnętrzną wyszukiwarkę',
+                        'enabled-info' => 'Wyłącz, aby wszędzie przeszukiwać bazę danych, niezależnie od ustawień poniżej.',
+                        'engine' => 'Domyślna wyszukiwarka',
+                        'engine-info' => 'Silnik używany wszędzie tam, gdzie tryb wyszukiwania pozostaje na Użyj domyślnej.',
+                        'inherit' => 'Użyj domyślnej',
+                    ],
+
+                    'products' => [
+                        'title' => 'Produkty',
+                        'info' => 'Którą wyszukiwarką każda strona sklepu przeszukuje produkty.',
+                        'admin-mode' => 'Tryb wyszukiwania w panelu',
+                        'admin-mode-info' => 'Silnik stojący za megawyszukiwarką, tabelami danych i pozostałym wyszukiwaniem w panelu administracyjnym.',
+                        'storefront-mode' => 'Tryb wyszukiwania w sklepie',
+                        'storefront-mode-info' => 'Silnik stojący za stronami kategorii, stroną wyszukiwania i pozostałym wyszukiwaniem w sklepie.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Stan połączenia i limity zapytań dla Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Ustawienia',
+                        'info' => 'Używane, gdy tryb wyszukiwania jest ustawiony na Elasticsearch.',
+                        'hosts' => 'Hosty',
+                        'hosts-info' => 'Gdzie dostępny jest klaster, np. http://localhost:9200. Wiele hostów oddziel przecinkiem. Pozostaw puste, aby użyć pliku środowiska.',
+                        'username' => 'Nazwa użytkownika',
+                        'username-info' => 'Używana przy uwierzytelnianiu podstawowym. Pozostaw puste, jeśli klaster go nie wymaga.',
+                        'password' => 'Hasło',
+                        'password-info' => 'Hasło powiązane z nazwą użytkownika.',
+                        'api-key' => 'Klucz API',
+                        'api-key-info' => 'Używany zamiast nazwy użytkownika i hasła. Ustawienie go przełącza połączenie na uwierzytelnianie kluczem API.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Dla Elastic Cloud. Ustawienie go przełącza połączenie na Elastic Cloud, w parze z kluczem API.',
+                        'index-prefix' => 'Prefiks indeksu',
+                        'index-prefix-info' => 'Dodawany przed każdą nazwą indeksu, aby kilka sklepów mogło dzielić jeden klaster.',
+                        'min-query-length' => 'Minimalna długość zapytania',
+                        'min-query-length-info' => 'Najkrótsza fraza, jaką przyjmuje pole wyszukiwania w sklepie.',
+                        'max-query-length' => 'Maksymalna długość zapytania',
+                        'max-query-length-info' => 'Najdłuższa fraza, jaką przyjmuje pole wyszukiwania w sklepie.',
+                        'connection' => 'Połączenie',
+                    ],
                 ],
             ],
 

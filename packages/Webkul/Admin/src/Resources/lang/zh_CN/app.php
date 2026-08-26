@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => '心愿单选项',
                     ],
 
-                    'search' => [
-                        'admin-mode' => '管理员搜索模式',
-                        'admin-mode-info' => '管理员面板中的超级搜索、数据网格和其他搜索功能将基于所选的搜索引擎。',
-                        'database' => '数据库',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => '最大查询长度',
-                        'max-query-length-info' => '设置搜索查询的最大查询长度。',
-                        'min-query-length' => '最小查询长度',
-                        'min-query-length-info' => '设置搜索查询的最小查询长度。',
-                        'search-engine' => '搜索引擎',
-                        'storefront-mode' => '商店前端搜索模式',
-                        'storefront-mode-info' => '商店前端的搜索功能将基于所选的搜索引擎，包括分类页面、搜索页面和其他搜索功能。',
-                        'title' => '搜索',
-                        'title-info' => '要设置产品搜索的搜索引擎，您可以根据需求选择数据库和Elasticsearch之间的选择。如果您有大量的产品，建议使用Elasticsearch。',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => '允许访客结账',
                         'allow-guest-checkout-hint' => '提示：如果打开此选项，可以针对每个产品进行配置。',
@@ -5446,6 +5430,79 @@ return [
                     'title' => '通知',
                     'title-info' => '逐项开启或关闭通知邮件。',
                     'verification' => '客户注册后发送验证邮件',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => '搜索引擎',
+                'info' => '选择驱动商品搜索的引擎并进行配置。',
+
+                'engines' => [
+                    'database' => '数据库',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => '测试连接',
+                    'testing' => '测试中...',
+
+                    'statuses' => [
+                        'available' => ':engine 可用',
+                        'unreachable' => ':engine 未响应',
+                        'unauthorized' => ':engine 拒绝了凭据',
+                        'incompatible' => '主机已响应，但不是受支持的 :engine 服务器',
+                        'misconfigured' => '尚未配置 :engine 连接',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => '常规',
+                    'info' => '商品搜索所运行的引擎。',
+
+                    'settings' => [
+                        'title' => '设置',
+                        'info' => '启用外部搜索引擎并选择其使用范围。',
+                        'enabled' => '启用外部搜索引擎',
+                        'enabled-info' => '关闭后，无论下方如何设置，各处均使用数据库搜索。',
+                        'engine' => '默认搜索引擎',
+                        'engine-info' => '凡是搜索模式保持为“使用默认”之处所采用的引擎。',
+                        'inherit' => '使用默认',
+                    ],
+
+                    'products' => [
+                        'title' => '商品',
+                        'info' => '商店的每一侧使用哪个引擎搜索商品。',
+                        'admin-mode' => '后台搜索模式',
+                        'admin-mode-info' => '后台超级搜索、数据表格及其他搜索所使用的引擎。',
+                        'storefront-mode' => '店铺搜索模式',
+                        'storefront-mode-info' => '分类页、搜索页及店铺其他搜索所使用的引擎。',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Elasticsearch 的连接状态与查询限制。',
+
+                    'settings' => [
+                        'title' => '设置',
+                        'info' => '当搜索模式设为 Elasticsearch 时使用。',
+                        'hosts' => '主机',
+                        'hosts-info' => '集群的访问地址，例如 http://localhost:9200。多个主机用逗号分隔。留空则使用环境文件。',
+                        'username' => '用户名',
+                        'username-info' => '用于基本身份验证。若集群不需要则留空。',
+                        'password' => '密码',
+                        'password-info' => '与用户名配对的密码。',
+                        'api-key' => 'API 密钥',
+                        'api-key-info' => '用于替代用户名和密码。填写后连接将切换为 API 密钥验证。',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => '用于 Elastic Cloud。填写后连接将切换为 Elastic Cloud，并与 API 密钥配合使用。',
+                        'index-prefix' => '索引前缀',
+                        'index-prefix-info' => '添加在每个索引名之前，使多个商店可共用一个集群。',
+                        'min-query-length' => '最小查询长度',
+                        'min-query-length-info' => '店铺搜索框接受的最短搜索词。',
+                        'max-query-length' => '最大查询长度',
+                        'max-query-length-info' => '店铺搜索框接受的最长搜索词。',
+                        'connection' => '连接',
+                    ],
                 ],
             ],
 

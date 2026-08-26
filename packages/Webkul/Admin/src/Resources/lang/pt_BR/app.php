@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Opções de Lista de Desejos',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Modo de Busca do Admin',
-                        'admin-mode-info' => 'A Mega Busca, Datagrid e outras funcionalidades de busca no painel de administração serão baseadas no mecanismo de busca selecionado.',
-                        'database' => 'Banco de Dados',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Comprimento Máximo da Consulta',
-                        'max-query-length-info' => 'Defina o comprimento máximo da consulta para consultas de pesquisa.',
-                        'min-query-length' => 'Comprimento Mínimo da Consulta',
-                        'min-query-length-info' => 'Defina o comprimento mínimo da consulta para consultas de pesquisa.',
-                        'search-engine' => 'Mecanismo de Busca',
-                        'storefront-mode' => 'Modo de Busca da Frente da Loja',
-                        'storefront-mode-info' => 'A funcionalidade de busca na frente da loja será baseada no mecanismo de busca selecionado, incluindo a página de categoria, página de pesquisa e outras funcionalidades de busca.',
-                        'title' => 'Busca',
-                        'title-info' => 'Para configurar o mecanismo de busca para pesquisas de produtos, você pode escolher entre um banco de dados e o Elasticsearch com base em seus requisitos. Se você tiver um grande número de produtos, o Elasticsearch é recomendado.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Permitir Checkout de Convidado',
                         'allow-guest-checkout-hint' => 'Dica: Se ativado, essa opção pode ser configurada para cada produto especificamente.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Notificações',
                     'title-info' => 'Ativar ou desativar cada e-mail de notificação.',
                     'verification' => 'Envie um e-mail de verificação após o registro do cliente',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Mecanismos de busca',
+                'info' => 'Escolha o mecanismo que faz a busca de produtos e configure-o.',
+
+                'engines' => [
+                    'database' => 'Banco de Dados',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Testar conexão',
+                    'testing' => 'Testando...',
+
+                    'statuses' => [
+                        'available' => 'O :engine está disponível',
+                        'unreachable' => 'O :engine não respondeu',
+                        'unauthorized' => 'O :engine recusou as credenciais',
+                        'incompatible' => 'O host respondeu, mas não é um servidor :engine compatível',
+                        'misconfigured' => 'A conexão com o :engine não está configurada',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'Geral',
+                    'info' => 'O mecanismo em que a busca de produtos funciona.',
+
+                    'settings' => [
+                        'title' => 'Configurações',
+                        'info' => 'Ative um mecanismo de busca externo e escolha onde ele é usado.',
+                        'enabled' => 'Ativar mecanismo de busca externo',
+                        'enabled-info' => 'Desative para buscar no banco de dados em todos os lugares, seja qual for a configuração abaixo.',
+                        'engine' => 'Mecanismo de busca padrão',
+                        'engine-info' => 'O mecanismo usado sempre que um modo de busca ficar em Usar padrão.',
+                        'inherit' => 'Usar padrão',
+                    ],
+
+                    'products' => [
+                        'title' => 'Produtos',
+                        'info' => 'Com qual mecanismo cada lado da loja busca produtos.',
+                        'admin-mode' => 'Modo de busca do painel',
+                        'admin-mode-info' => 'O mecanismo por trás da megabusca, das tabelas de dados e das demais buscas do painel administrativo.',
+                        'storefront-mode' => 'Modo de busca da loja',
+                        'storefront-mode-info' => 'O mecanismo por trás das páginas de categoria, da página de busca e das demais buscas da loja.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Estado da conexão e limites de consulta do Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Configurações',
+                        'info' => 'Usado quando um modo de busca está definido como Elasticsearch.',
+                        'hosts' => 'Hosts',
+                        'hosts-info' => 'Onde o cluster é alcançado, por exemplo http://localhost:9200. Separe vários hosts por vírgula. Deixe vazio para usar o arquivo de ambiente.',
+                        'username' => 'Usuário',
+                        'username-info' => 'Usado com autenticação básica. Deixe vazio se o cluster não exigir.',
+                        'password' => 'Senha',
+                        'password-info' => 'A senha associada ao usuário.',
+                        'api-key' => 'Chave de API',
+                        'api-key-info' => 'Usada no lugar de usuário e senha. Definir uma muda a conexão para autenticação por chave de API.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Para o Elastic Cloud. Definir um muda a conexão para o Elastic Cloud, combinado com a chave de API.',
+                        'index-prefix' => 'Prefixo de índice',
+                        'index-prefix-info' => 'Colocado antes de cada nome de índice, para que várias lojas compartilhem um cluster.',
+                        'min-query-length' => 'Comprimento mínimo da consulta',
+                        'min-query-length-info' => 'O termo de busca mais curto que a caixa de busca da loja aceita.',
+                        'max-query-length' => 'Comprimento máximo da consulta',
+                        'max-query-length-info' => 'O termo de busca mais longo que a caixa de busca da loja aceita.',
+                        'connection' => 'Conexão',
+                    ],
                 ],
             ],
 

@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Options de liste de souhaits',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Mode de recherche administrateur',
-                        'admin-mode-info' => 'La recherche méga, la grille de données et autres fonctionnalités de recherche dans le panneau d\'administration seront basées sur le moteur de recherche sélectionné.',
-                        'database' => 'Base de données',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Longueur maximale de la requête',
-                        'max-query-length-info' => 'Définissez la longueur maximale de la requête pour les recherches.',
-                        'min-query-length' => 'Longueur minimale de la requête',
-                        'min-query-length-info' => 'Définissez la longueur minimale de la requête pour les recherches.',
-                        'search-engine' => 'Moteur de recherche',
-                        'storefront-mode' => 'Mode de recherche de la vitrine',
-                        'storefront-mode-info' => 'La fonctionnalité de recherche sur la vitrine sera basée sur le moteur de recherche sélectionné, y compris la page de catégorie, la page de recherche et autres fonctionnalités de recherche.',
-                        'title' => 'Recherche',
-                        'title-info' => 'Pour configurer le moteur de recherche pour les recherches de produits, vous pouvez choisir entre une base de données et Elasticsearch en fonction de vos besoins. Si vous avez un grand nombre de produits, Elasticsearch est recommandé.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Autoriser la validation des invités',
                         'allow-guest-checkout-hint' => 'Astuce : si activé, cette option peut être configurée pour chaque produit spécifiquement.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Notifications',
                     'title-info' => 'Activer ou désactiver chaque e-mail de notification.',
                     'verification' => 'Envoyer un e-mail de vérification après l\'inscription du client',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Moteurs de recherche',
+                'info' => 'Choisissez le moteur qui assure la recherche de produits et configurez-le.',
+
+                'engines' => [
+                    'database' => 'Base de données',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Tester la connexion',
+                    'testing' => 'Test en cours...',
+
+                    'statuses' => [
+                        'available' => ':engine est disponible',
+                        'unreachable' => ':engine n\\\'a pas répondu',
+                        'unauthorized' => ':engine a rejeté les identifiants',
+                        'incompatible' => 'L\\\'hôte a répondu mais n\\\'est pas un serveur :engine pris en charge',
+                        'misconfigured' => 'La connexion :engine n\\\'est pas configurée',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'Général',
+                    'info' => 'Le moteur sur lequel repose la recherche de produits.',
+
+                    'settings' => [
+                        'title' => 'Paramètres',
+                        'info' => 'Activez un moteur de recherche externe et choisissez où il est utilisé.',
+                        'enabled' => 'Activer un moteur de recherche externe',
+                        'enabled-info' => 'Désactivez pour rechercher partout dans la base de données, quels que soient les réglages ci-dessous.',
+                        'engine' => 'Moteur de recherche par défaut',
+                        'engine-info' => 'Le moteur utilisé partout où un mode de recherche reste sur Utiliser le défaut.',
+                        'inherit' => 'Utiliser le défaut',
+                    ],
+
+                    'products' => [
+                        'title' => 'Produits',
+                        'info' => 'Avec quel moteur chaque côté de la boutique recherche les produits.',
+                        'admin-mode' => 'Mode de recherche de l\\\'administration',
+                        'admin-mode-info' => 'Le moteur derrière la méga-recherche, les grilles de données et les autres recherches du panneau d\\\'administration.',
+                        'storefront-mode' => 'Mode de recherche de la boutique',
+                        'storefront-mode-info' => 'Le moteur derrière les pages de catégorie, la page de recherche et les autres recherches de la boutique.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'État de la connexion et limites de requête pour Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Paramètres',
+                        'info' => 'Utilisé lorsquun mode de recherche est réglé sur Elasticsearch.',
+                        'hosts' => 'Hôtes',
+                        'hosts-info' => 'Où le cluster est joignable, par exemple http://localhost:9200. Séparez plusieurs hôtes par une virgule. Laissez vide pour utiliser le fichier d\'environnement.',
+                        'username' => 'Nom d\'utilisateur',
+                        'username-info' => 'Utilisé avec l\'authentification basique. Laissez vide si le cluster n\'en demande pas.',
+                        'password' => 'Mot de passe',
+                        'password-info' => 'Le mot de passe associé au nom d\'utilisateur.',
+                        'api-key' => 'Clé API',
+                        'api-key-info' => 'Utilisée à la place d\'un nom d\'utilisateur et d\'un mot de passe. En renseigner une bascule la connexion sur la clé API.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Pour Elastic Cloud. En renseigner un bascule la connexion sur Elastic Cloud, associé à la clé API.',
+                        'index-prefix' => 'Préfixe d\'index',
+                        'index-prefix-info' => 'Ajouté devant chaque nom d\'index, pour que plusieurs boutiques partagent un cluster.',
+                        'min-query-length' => 'Longueur minimale de la requête',
+                        'min-query-length-info' => 'Le terme de recherche le plus court accepté par le champ de recherche de la boutique.',
+                        'max-query-length' => 'Longueur maximale de la requête',
+                        'max-query-length-info' => 'Le terme de recherche le plus long accepté par le champ de recherche de la boutique.',
+                        'connection' => 'Connexion',
+                    ],
                 ],
             ],
 

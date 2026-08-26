@@ -5024,22 +5024,6 @@ return [
                         'wishlist-options' => 'Wenslijstopties',
                     ],
 
-                    'search' => [
-                        'admin-mode' => 'Beheer Zoekmodus',
-                        'admin-mode-info' => 'Mega Zoeken, Datagrid en andere zoekfunctionaliteiten in het beheerderspaneel zijn gebaseerd op de geselecteerde zoekmachine.',
-                        'database' => 'Database',
-                        'elastic' => 'Elastic Search',
-                        'max-query-length' => 'Maximale zoekopdrachtlengte',
-                        'max-query-length-info' => 'Stel de maximale zoekopdrachtlengte in voor zoekopdrachten.',
-                        'min-query-length' => 'Minimale zoekopdrachtlengte',
-                        'min-query-length-info' => 'Stel de minimale zoekopdrachtlengte in voor zoekopdrachten.',
-                        'search-engine' => 'Zoekmachine',
-                        'storefront-mode' => 'Winkel Zoekmodus',
-                        'storefront-mode-info' => 'De zoekfunctionaliteit op de winkelvoorkant is gebaseerd op de geselecteerde zoekmachine, inclusief de categoriepagina, zoekpagina en andere zoekfunctionaliteiten.',
-                        'title' => 'Zoeken',
-                        'title-info' => 'Om de zoekmachine voor productzoekopdrachten in te stellen, kunt u kiezen tussen een database en Elasticsearch op basis van uw vereisten. Als u een groot aantal producten heeft, wordt Elasticsearch aanbevolen.',
-                    ],
-
                     'guest-checkout' => [
                         'allow-guest-checkout' => 'Gastafrekening toestaan',
                         'allow-guest-checkout-hint' => 'Hint: Als dit is ingeschakeld, kan deze optie specifiek worden geconfigureerd voor elk product.',
@@ -5446,6 +5430,79 @@ return [
                     'title' => 'Meldingen',
                     'title-info' => 'Afzonderlijke meldingsmails in- of uitschakelen.',
                     'verification' => 'Stuur een verificatiemail na klantregistratie',
+                ],
+            ],
+
+            'search-engines' => [
+                'title' => 'Zoekmachines',
+                'info' => 'Kies de zoekmachine achter het zoeken naar producten en stel deze in.',
+
+                'engines' => [
+                    'database' => 'Database',
+                    'elastic' => 'Elastic Search',
+                ],
+
+                'test-connection' => [
+                    'title' => 'Verbinding testen',
+                    'testing' => 'Bezig met testen...',
+
+                    'statuses' => [
+                        'available' => ':engine is beschikbaar',
+                        'unreachable' => ':engine gaf geen antwoord',
+                        'unauthorized' => ':engine heeft de inloggegevens geweigerd',
+                        'incompatible' => 'De host antwoordde maar is geen ondersteunde :engine-server',
+                        'misconfigured' => 'De :engine-verbinding is niet geconfigureerd',
+                    ],
+                ],
+
+                'general' => [
+                    'title' => 'Algemeen',
+                    'info' => 'De zoekmachine waarop het zoeken naar producten draait.',
+
+                    'settings' => [
+                        'title' => 'Instellingen',
+                        'info' => 'Zet een externe zoekmachine aan en kies waar deze wordt gebruikt.',
+                        'enabled' => 'Externe zoekmachine inschakelen',
+                        'enabled-info' => 'Zet dit uit om overal in de database te zoeken, wat de instellingen hieronder ook zeggen.',
+                        'engine' => 'Standaard zoekmachine',
+                        'engine-info' => 'De zoekmachine die geldt overal waar een zoekmodus op Standaard gebruiken staat.',
+                        'inherit' => 'Standaard gebruiken',
+                    ],
+
+                    'products' => [
+                        'title' => 'Producten',
+                        'info' => 'Met welke zoekmachine elke kant van de winkel producten doorzoekt.',
+                        'admin-mode' => 'Zoekmodus beheerpaneel',
+                        'admin-mode-info' => 'De zoekmachine achter de megazoekfunctie, de datagrids en het overige zoeken in het beheerpaneel.',
+                        'storefront-mode' => 'Zoekmodus winkel',
+                        'storefront-mode-info' => 'De zoekmachine achter categoriepaginas, de zoekpagina en het overige zoeken in de winkel.',
+                    ],
+                ],
+
+                'elastic' => [
+                    'info' => 'Verbindingsstatus en querylimieten voor Elasticsearch.',
+
+                    'settings' => [
+                        'title' => 'Instellingen',
+                        'info' => 'Gebruikt wanneer een zoekmodus op Elasticsearch staat.',
+                        'hosts' => 'Hosts',
+                        'hosts-info' => 'Waar het cluster bereikbaar is, bijvoorbeeld http://localhost:9200. Scheid meerdere hosts met een komma. Laat leeg om het omgevingsbestand te gebruiken.',
+                        'username' => 'Gebruikersnaam',
+                        'username-info' => 'Gebruikt bij basisauthenticatie. Laat leeg als het cluster die niet nodig heeft.',
+                        'password' => 'Wachtwoord',
+                        'password-info' => 'Het wachtwoord bij de gebruikersnaam.',
+                        'api-key' => 'API-sleutel',
+                        'api-key-info' => 'Wordt gebruikt in plaats van gebruikersnaam en wachtwoord. Invullen zet de verbinding om naar API-sleutelauthenticatie.',
+                        'cloud-id' => 'Cloud ID',
+                        'cloud-id-info' => 'Voor Elastic Cloud. Invullen zet de verbinding om naar Elastic Cloud, samen met de API-sleutel.',
+                        'index-prefix' => 'Indexvoorvoegsel',
+                        'index-prefix-info' => 'Wordt voor elke indexnaam gezet, zodat meerdere winkels één cluster kunnen delen.',
+                        'min-query-length' => 'Minimale querylengte',
+                        'min-query-length-info' => 'De kortste zoekterm die het zoekvak van de winkel accepteert.',
+                        'max-query-length' => 'Maximale querylengte',
+                        'max-query-length-info' => 'De langste zoekterm die het zoekvak van de winkel accepteert.',
+                        'connection' => 'Verbinding',
+                    ],
                 ],
             ],
 
