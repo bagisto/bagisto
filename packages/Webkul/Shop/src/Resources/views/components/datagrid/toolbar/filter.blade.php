@@ -420,6 +420,124 @@
                                     </template>
                                 </template>
 
+                                <!-- Integer / Decimal -->
+                                <template v-else-if="['integer', 'decimal'].includes(column.type) && column.filterable_type !== 'dropdown'">
+                                    <div class="flex items-center justify-between">
+                                        <p
+                                            class="text-sm font-medium leading-6 text-gray-800"
+                                            v-text="column.label"
+                                        >
+                                        </p>
+
+                                        <div
+                                            class="flex items-center gap-x-1.5"
+                                            @click="removeAppliedColumnAllValues(column.index)"
+                                        >
+                                            <p
+                                                class="cursor-pointer text-xs font-medium leading-6 text-blue-600"
+                                                v-if="hasAnyAppliedColumnValues(column.index)"
+                                            >
+                                                @lang('shop::app.components.datagrid.toolbar.filter.custom-filters.clear-all')
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-2 mt-1.5 grid gap-1.5">
+                                        <x-shop::dropdown>
+                                            <x-slot:toggle>
+                                                <button
+                                                    type="button"
+                                                    class="flex w-full cursor-pointer items-center justify-between gap-4 rounded-lg border border-zinc-200 bg-white py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 ltr:pl-4 ltr:pr-3 rtl:pl-3 rtl:pr-4"
+                                                >
+                                                    <span v-text="numericOperators.find((operator) => operator.value === filterOperator[column.index])?.label"></span>
+
+                                                    <span class="icon-sort-down text-2xl"></span>
+                                                </button>
+                                            </x-slot>
+
+                                            <x-slot:menu>
+                                                <x-shop::dropdown.menu.item
+                                                    v-for="operator in numericOperators"
+                                                    v-text="operator.label"
+                                                    @click="filterOperator[column.index] = operator.value; applyNumericFilter(column)"
+                                                >
+                                                </x-shop::dropdown.menu.item>
+                                            </x-slot>
+                                        </x-shop::dropdown>
+
+                                        <div
+                                            class="grid grid-cols-2 gap-1.5"
+                                            v-if="filterOperator[column.index] === 'between'"
+                                        >
+                                            <input
+                                                type="number"
+                                                step="any"
+                                                class="w-full rounded-lg border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                                v-model="filterValue[column.index]"
+                                                placeholder="@lang('shop::app.components.datagrid.toolbar.filter.number-options.from')"
+                                                @keyup.enter="applyNumericFilter(column)"
+                                                @change="applyNumericFilter(column)"
+                                            />
+
+                                            <input
+                                                type="number"
+                                                step="any"
+                                                class="w-full rounded-lg border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400"
+                                                v-model="filterValueMax[column.index]"
+                                                placeholder="@lang('shop::app.components.datagrid.toolbar.filter.number-options.to')"
+                                                @keyup.enter="applyNumericFilter(column)"
+                                                @change="applyNumericFilter(column)"
+                                            />
+                                        </div>
+
+                                        <div class="relative" v-else>
+                                            <input
+                                                type="number"
+                                                step="any"
+                                                class="w-full rounded-lg border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 ltr:pr-11 rtl:pl-11 [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                                                v-model="filterValue[column.index]"
+                                                :placeholder="column.label"
+                                                @keyup.enter="applyNumericFilter(column)"
+                                                @change="applyNumericFilter(column)"
+                                            />
+
+                                            <transition
+                                                enter-active-class="transition duration-200 ease-out"
+                                                enter-from-class="opacity-0 ltr:translate-x-2 rtl:-translate-x-2"
+                                                enter-to-class="opacity-100 translate-x-0"
+                                                leave-active-class="transition duration-150 ease-in"
+                                                leave-from-class="opacity-100 translate-x-0"
+                                                leave-to-class="opacity-0 ltr:translate-x-2 rtl:-translate-x-2"
+                                            >
+                                                <button
+                                                    type="button"
+                                                    class="absolute top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md bg-navyBlue text-white transition-colors hover:opacity-90 ltr:right-2 rtl:left-2"
+                                                    v-show="filterValue[column.index]"
+                                                    :aria-label="'@lang('shop::app.components.datagrid.toolbar.filter.apply-filter')'"
+                                                    @click="applyNumericFilter(column)"
+                                                >
+                                                    <span class="icon-arrow-right rtl:icon-arrow-left text-lg"></span>
+                                                </button>
+                                            </transition>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-4 flex flex-wrap gap-2">
+                                        <p
+                                            class="flex items-center rounded bg-gray-600 px-2 py-1 font-semibold text-white"
+                                            v-if="getAppliedColumnValues(column.index) !== ''"
+                                        >
+                                            <span v-text="getAppliedColumnValues(column.index)"></span>
+
+                                            <span
+                                                class="icon-cancel cursor-pointer text-lg text-white ltr:ml-1.5 rtl:mr-1.5"
+                                                @click="removeAppliedColumnValue(column.index, getAppliedColumnValues(column.index))"
+                                            >
+                                            </span>
+                                        </p>
+                                    </div>
+                                </template>
+
                                 <!-- Rest -->
                                 <template v-else>
                                     <!-- Dropdown -->
@@ -522,14 +640,35 @@
                                             </div>
                                         </div>
 
-                                        <div class="mb-2 mt-1.5 grid">
+                                        <div class="relative mb-2 mt-1.5">
                                             <input
                                                 type="text"
-                                                class="w-full rounded-lg border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:mb-0"
+                                                class="w-full rounded-lg border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 focus:border-gray-400 max-sm:mb-0 ltr:pr-11 rtl:pl-11"
                                                 :name="column.index"
                                                 :placeholder="column.label"
-                                                @keyup.enter="addFilter($event, column)"
+                                                v-model="filterValue[column.index]"
+                                                @keyup.enter="applyTextFilter(column)"
+                                                @change="applyTextFilter(column)"
                                             />
+
+                                            <transition
+                                                enter-active-class="transition duration-200 ease-out"
+                                                enter-from-class="opacity-0 ltr:translate-x-2 rtl:-translate-x-2"
+                                                enter-to-class="opacity-100 translate-x-0"
+                                                leave-active-class="transition duration-150 ease-in"
+                                                leave-from-class="opacity-100 translate-x-0"
+                                                leave-to-class="opacity-0 ltr:translate-x-2 rtl:-translate-x-2"
+                                            >
+                                                <button
+                                                    type="button"
+                                                    class="absolute top-1/2 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-md bg-navyBlue text-white transition-colors hover:opacity-90 ltr:right-2 rtl:left-2"
+                                                    v-show="filterValue[column.index]"
+                                                    :aria-label="'@lang('shop::app.components.datagrid.toolbar.filter.apply-filter')'"
+                                                    @click="applyTextFilter(column)"
+                                                >
+                                                    <span class="icon-arrow-right rtl:icon-arrow-left text-lg"></span>
+                                                </button>
+                                            </transition>
                                         </div>
 
                                         <div class="mb-4 flex flex-wrap gap-2">
@@ -569,18 +708,31 @@
                                 </template>
                             </template>
                         </div>
+                    </x-slot>
 
-                        <div>
-                            <!-- Apply Filter Button -->
-                            <button
-                                type="button"
-                                class="primary-button w-full max-w-full p-2.5 text-sm font-medium"
-                                @click="applyFilters"
-                                :disabled="! isFilterDirty"
+                    <x-slot:footer class="!p-0">
+                        <transition
+                            enter-active-class="transition duration-300 ease-out"
+                            enter-from-class="translate-y-full opacity-0"
+                            enter-to-class="translate-y-0 opacity-100"
+                            leave-active-class="transition duration-300 ease-in"
+                            leave-from-class="translate-y-0 opacity-100"
+                            leave-to-class="translate-y-full opacity-0"
+                        >
+                            <div
+                                class="sticky bottom-0 border-t border-zinc-200 bg-white p-4"
+                                v-show="filters.columns.length > 0 || hasAnyAppliedColumn()"
                             >
-                                @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
-                            </button>
-                        </div>
+                                <button
+                                    type="button"
+                                    class="primary-button w-full max-w-full p-2.5 text-sm font-medium"
+                                    :disabled="! isFilterDirty"
+                                    @click="applyFilters"
+                                >
+                                    @lang('shop::app.components.datagrid.toolbar.filter.apply-filter')
+                                </button>
+                            </div>
+                        </transition>
                     </x-slot>
                 </x-shop::drawer>
             </template>
@@ -601,12 +753,33 @@
                         columns: [],
                     },
 
+                    filterOperator: {},
+
+                    filterValue: {},
+
+                    filterValueMax: {},
+
+                    numericOperators: [
+                        { value: '=', label: @json(trans('shop::app.components.datagrid.toolbar.filter.number-options.equals')) },
+                        { value: '>', label: @json(trans('shop::app.components.datagrid.toolbar.filter.number-options.greater-than')) },
+                        { value: '>=', label: @json(trans('shop::app.components.datagrid.toolbar.filter.number-options.greater-than-or-equal')) },
+                        { value: '<', label: @json(trans('shop::app.components.datagrid.toolbar.filter.number-options.less-than')) },
+                        { value: '<=', label: @json(trans('shop::app.components.datagrid.toolbar.filter.number-options.less-than-or-equal')) },
+                        { value: 'between', label: @json(trans('shop::app.components.datagrid.toolbar.filter.number-options.between')) },
+                    ],
+
                     isFilterDirty: false,
                 };
             },
 
             mounted() {
                 this.filters.columns = this.applied.filters.columns.filter((column) => column.index !== 'all');
+
+                this.available.columns.forEach((column) => {
+                    if (['integer', 'decimal'].includes(column.type)) {
+                        this.filterOperator[column.index] = '=';
+                    }
+                });
             },
 
             methods: {
@@ -664,6 +837,57 @@
                             $event.target.value = '';
                         }
                     }
+                },
+
+                /**
+                 * Compose an operator based value for an integer or decimal column and apply it.
+                 * The backend decimal and integer column types parse strings like ">=50.20" and "50-100".
+                 *
+                 * @param {object} column
+                 * @returns {void}
+                 */
+                applyNumericFilter(column) {
+                    let operator = this.filterOperator[column.index] ?? '=';
+
+                    let value = (this.filterValue[column.index] ?? '').toString().trim();
+
+                    let composedValue = '';
+
+                    if (operator === 'between') {
+                        let maxValue = (this.filterValueMax[column.index] ?? '').toString().trim();
+
+                        if (value === '' || maxValue === '') {
+                            return;
+                        }
+
+                        composedValue = `${value}-${maxValue}`;
+                    } else {
+                        if (value === '') {
+                            return;
+                        }
+
+                        composedValue = `${operator}${value}`;
+                    }
+
+                    this.addFilter(composedValue, column);
+                },
+
+                /**
+                 * Apply a text column's typed value and clear the field so another can be added.
+                 *
+                 * @param {object} column
+                 * @returns {void}
+                 */
+                applyTextFilter(column) {
+                    let value = (this.filterValue[column.index] ?? '').toString().trim();
+
+                    if (value === '') {
+                        return;
+                    }
+
+                    this.addFilter(value, column);
+
+                    this.filterValue[column.index] = '';
                 },
 
                 /**
@@ -817,6 +1041,15 @@
                  */
                 findAppliedColumn(columnIndex) {
                     return this.filters.columns.find(column => column.index === columnIndex);
+                },
+
+                /**
+                 * Whether the grid currently has any applied (committed) filter column.
+                 *
+                 * @returns {boolean}
+                 */
+                hasAnyAppliedColumn() {
+                    return this.applied.filters.columns.filter(column => column.index !== 'all').length > 0;
                 },
 
                 /**
