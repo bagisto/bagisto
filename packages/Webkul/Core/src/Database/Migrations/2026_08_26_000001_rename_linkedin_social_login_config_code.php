@@ -7,21 +7,21 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     /**
-     * Configuration fields that moved to a different group, old code => new code.
+     * The configuration field was previously named after the OpenID protocol.
      */
-    const RELOCATED = [
-        'catalog.products.storefront.buy_now_button_display' => 'catalog.products.product_view_page.buy_now_button_display',
-        'sales.checkout.my_cart.summary' => 'sales.checkout.mini_cart.summary',
-    ];
+    const FROM = 'customer.settings.social_login.enable_linkedin-openid';
+
+    /**
+     * The configuration field is now named after the provider.
+     */
+    const TO = 'customer.settings.social_login.enable_linkedin';
 
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        foreach (self::RELOCATED as $from => $to) {
-            $this->relocate($from, $to);
-        }
+        $this->relocate(self::FROM, self::TO);
     }
 
     /**
@@ -29,9 +29,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        foreach (self::RELOCATED as $from => $to) {
-            $this->relocate($to, $from);
-        }
+        $this->relocate(self::TO, self::FROM);
     }
 
     /**

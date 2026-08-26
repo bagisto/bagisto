@@ -1,4 +1,3 @@
-<!-- Spaced here rather than by the form: this is injected through an event, so it cannot rely on whatever it lands under leaving room for it. -->
 @php
     $providers = [
         'enable_facebook' => 'facebook',
