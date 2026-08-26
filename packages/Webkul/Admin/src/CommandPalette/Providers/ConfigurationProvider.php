@@ -18,17 +18,15 @@ class ConfigurationProvider implements Provider
     /**
      * Icon shown against every configuration result.
      *
-     * The tree carries SVG paths for its cards rather than icon classes, so one icon
-     * stands for the whole area instead.
+     * The tree carries SVG paths rather than icon classes, so one icon stands for the area.
      */
     const ICON = 'icon-settings';
 
     /**
-     * Every configuration section, group and setting, if the admin may configure at all.
-     *
-     * Settings are indexed alongside the pages holding them, so an operator who knows the
-     * name of a setting need not know which page it sits on.
+     * Navigation entry the whole configuration tree hangs beneath.
      */
+    const NODE = 'configuration';
+
     /**
      * Create a new instance.
      */
@@ -36,6 +34,9 @@ class ConfigurationProvider implements Provider
         protected Aliases $aliases,
     ) {}
 
+    /**
+     * Every configuration section, group and setting, if the admin may configure at all.
+     */
     public function items(): array
     {
         if (! bouncer()->hasPermission(self::PERMISSION)) {
@@ -65,29 +66,29 @@ class ConfigurationProvider implements Provider
 
             $items[] = new Item(
                 label: $name,
-                url: $this->urlFor($target),
                 category: Item::CATEGORY_CONFIGURATION,
+                url: $this->urlFor($target),
                 path: $this->pathFor($trail),
                 icon: self::ICON,
                 keywords: $this->keywords($entry),
+                children: $this->walk(
+                    $this->descendantsOf($entry),
+                    [...$trail, $name],
+                    $target,
+                    $depth + 1,
+                ),
+                key: method_exists($entry, 'getKey') ? $entry->getKey() : null,
+                parent: $depth === 0 ? self::NODE : null,
             );
-
-            $items = array_merge($items, $this->walk(
-                $this->descendantsOf($entry),
-                [...$trail, $name],
-                $target,
-                $depth + 1,
-            ));
         }
 
         return $items;
     }
 
     /**
-     * The configuration page an entry is reached on.
+     * The key of the page an entry is reached on.
      *
-     * A section has a page listing its cards; everything from the card down is reached on
-     * that card's own page, so the key settles at the second level and is inherited below.
+     * It settles at the second level and is inherited by everything below.
      */
     protected function targetFor(mixed $entry, ?string $pageKey, int $depth): string
     {
@@ -135,7 +136,7 @@ class ConfigurationProvider implements Provider
     }
 
     /**
-     * The configuration page an entry is reached on.
+     * The address of a configuration page.
      */
     protected function urlFor(string $key): string
     {

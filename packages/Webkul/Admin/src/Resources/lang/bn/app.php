@@ -4333,6 +4333,17 @@ return [
         'select' => 'খুলুন',
         'close' => 'বন্ধ করুন',
 
+        'all' => 'সব :resource',
+        'back' => 'পিছনে',
+        'context-placeholder' => ':context-এ খুঁজুন...',
+
+        'start-typing' => 'খুঁজতে টাইপ করুন',
+        'record-actions' => [
+            'view' => 'দেখুন',
+            'edit' => 'সম্পাদনা',
+            'duplicate' => 'অনুলিপি',
+        ],
+
         'records' => [
             'products' => 'পণ্য',
             'orders' => 'অর্ডার',

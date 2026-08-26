@@ -4333,6 +4333,17 @@ return [
         'select' => 'විවෘත කරන්න',
         'close' => 'වසන්න',
 
+        'all' => 'සියලු :resource',
+        'back' => 'ආපසු',
+        'context-placeholder' => ':context තුළ සොයන්න...',
+
+        'start-typing' => 'සෙවීමට ටයිප් කරන්න',
+        'record-actions' => [
+            'view' => 'බලන්න',
+            'edit' => 'සංස්කරණය',
+            'duplicate' => 'පිටපත්',
+        ],
+
         'records' => [
             'products' => 'නිෂ්පාදන',
             'orders' => 'ඇණවුම්',

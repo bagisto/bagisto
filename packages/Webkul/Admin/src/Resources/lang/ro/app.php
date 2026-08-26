@@ -4333,6 +4333,17 @@ return [
         'select' => 'Deschide',
         'close' => 'Închide',
 
+        'all' => 'Toate :resource',
+        'back' => 'Înapoi',
+        'context-placeholder' => 'Caută în :context...',
+
+        'start-typing' => 'Scrie pentru a căuta',
+        'record-actions' => [
+            'view' => 'Vezi',
+            'edit' => 'Editează',
+            'duplicate' => 'Duplică',
+        ],
+
         'records' => [
             'products' => 'Produse',
             'orders' => 'Comenzi',

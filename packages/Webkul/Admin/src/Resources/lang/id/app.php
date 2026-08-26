@@ -4333,6 +4333,17 @@ return [
         'select' => 'Buka',
         'close' => 'Tutup',
 
+        'all' => 'Semua :resource',
+        'back' => 'Kembali',
+        'context-placeholder' => 'Cari di :context...',
+
+        'start-typing' => 'Ketik untuk mencari',
+        'record-actions' => [
+            'view' => 'Lihat',
+            'edit' => 'Ubah',
+            'duplicate' => 'Duplikat',
+        ],
+
         'records' => [
             'products' => 'Produk',
             'orders' => 'Pesanan',

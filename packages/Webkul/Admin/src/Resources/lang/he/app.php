@@ -4333,6 +4333,17 @@ return [
         'select' => 'פתיחה',
         'close' => 'סגירה',
 
+        'all' => 'כל :resource',
+        'back' => 'חזרה',
+        'context-placeholder' => 'חיפוש ב־:context...',
+
+        'start-typing' => 'הקלידו כדי לחפש',
+        'record-actions' => [
+            'view' => 'הצג',
+            'edit' => 'ערוך',
+            'duplicate' => 'שכפל',
+        ],
+
         'records' => [
             'products' => 'מוצרים',
             'orders' => 'הזמנות',

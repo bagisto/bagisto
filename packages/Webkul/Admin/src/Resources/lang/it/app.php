@@ -4333,6 +4333,17 @@ return [
         'select' => 'Apri',
         'close' => 'Chiudi',
 
+        'all' => 'Tutti i :resource',
+        'back' => 'Indietro',
+        'context-placeholder' => 'Cerca in :context...',
+
+        'start-typing' => 'Digita per cercare',
+        'record-actions' => [
+            'view' => 'Vedi',
+            'edit' => 'Modifica',
+            'duplicate' => 'Duplica',
+        ],
+
         'records' => [
             'products' => 'Prodotti',
             'orders' => 'Ordini',

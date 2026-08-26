@@ -4333,6 +4333,17 @@ return [
         'select' => '開く',
         'close' => '閉じる',
 
+        'all' => ':resource すべて',
+        'back' => '戻る',
+        'context-placeholder' => ':context を検索...',
+
+        'start-typing' => '入力して検索',
+        'record-actions' => [
+            'view' => '表示',
+            'edit' => '編集',
+            'duplicate' => '複製',
+        ],
+
         'records' => [
             'products' => '商品',
             'orders' => '注文',

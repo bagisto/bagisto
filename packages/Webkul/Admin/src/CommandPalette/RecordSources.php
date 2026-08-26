@@ -12,8 +12,7 @@ class RecordSources
     /**
      * The record sources the signed in admin may search.
      *
-     * These are searched live rather than indexed, because the records themselves change
-     * far too often to hold in the palette's index.
+     * Searched live rather than indexed, because records change too often to hold.
      */
     public function all(): array
     {
@@ -33,17 +32,52 @@ class RecordSources
 
             $sources[] = [
                 'key' => $source['key'],
+                'node' => $source['node'] ?? null,
                 'title' => trans($source['title']),
+                'collection_title' => trans('admin::app.command-palette.all', [
+                    'resource' => trans($source['title']),
+                ]),
                 'endpoint' => $endpoint,
+                'index' => $this->routeFor($source['index'] ?? null),
                 'link' => $this->routeFor($source['link'] ?? null, [':id']),
                 'label' => $source['label'] ?? ['name'],
                 'prefix' => $source['prefix'] ?? '',
                 'meta' => $source['meta'] ?? null,
                 'icon' => $source['icon'] ?? null,
+                'actions' => $this->actionsFor($source),
             ];
         }
 
         return $sources;
+    }
+
+    /**
+     * What a single record of a source opens, for the admins permitted to do it.
+     */
+    protected function actionsFor(array $source): array
+    {
+        $actions = [];
+
+        foreach ($source['actions'] ?? [] as $action) {
+            if (
+                ! empty($action['permission'])
+                && ! bouncer()->hasPermission($action['permission'])
+            ) {
+                continue;
+            }
+
+            if (! $link = $this->routeFor($action['route'] ?? null, [':id'])) {
+                continue;
+            }
+
+            $actions[] = [
+                'title' => trans($action['title']),
+                'link' => $link,
+                'icon' => $action['icon'] ?? null,
+            ];
+        }
+
+        return $actions;
     }
 
     /**

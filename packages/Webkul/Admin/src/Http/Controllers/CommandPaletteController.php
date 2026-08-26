@@ -25,9 +25,7 @@ class CommandPaletteController extends Controller
     /**
      * Everything the signed in admin may reach, for the palette to search.
      *
-     * The index is built once per role and locale, because the menu and the configuration
-     * tree only change with a deployment. Record sources are named rather than indexed,
-     * for the palette to search live as the operator types.
+     * The tree is cached per role and locale; record sources are named for it to search live.
      */
     public function index(): JsonResponse
     {
@@ -44,8 +42,7 @@ class CommandPaletteController extends Controller
     /**
      * The key an admin's index is held under.
      *
-     * Keyed by what the role may reach rather than by the role itself, so a permission
-     * change is reflected at once instead of when the entry expires.
+     * Keyed by what the role may reach, so a permission change takes effect at once.
      */
     protected function cacheKey(): string
     {

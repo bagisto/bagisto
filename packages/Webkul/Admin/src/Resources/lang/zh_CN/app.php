@@ -4333,6 +4333,17 @@ return [
         'select' => '打开',
         'close' => '关闭',
 
+        'all' => '全部:resource',
+        'back' => '返回',
+        'context-placeholder' => '在 :context 中搜索...',
+
+        'start-typing' => '输入以搜索',
+        'record-actions' => [
+            'view' => '查看',
+            'edit' => '编辑',
+            'duplicate' => '复制',
+        ],
+
         'records' => [
             'products' => '商品',
             'orders' => '订单',

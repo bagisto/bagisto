@@ -4333,6 +4333,17 @@ return [
         'select' => 'खोलें',
         'close' => 'बंद करें',
 
+        'all' => 'सभी :resource',
+        'back' => 'वापस',
+        'context-placeholder' => ':context में खोजें...',
+
+        'start-typing' => 'खोजने के लिए लिखें',
+        'record-actions' => [
+            'view' => 'देखें',
+            'edit' => 'संपादित करें',
+            'duplicate' => 'प्रतिलिपि',
+        ],
+
         'records' => [
             'products' => 'उत्पाद',
             'orders' => 'ऑर्डर',

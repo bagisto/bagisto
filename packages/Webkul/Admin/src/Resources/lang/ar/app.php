@@ -4333,6 +4333,17 @@ return [
         'select' => 'فتح',
         'close' => 'إغلاق',
 
+        'all' => 'كل :resource',
+        'back' => 'رجوع',
+        'context-placeholder' => 'ابحث في :context...',
+
+        'start-typing' => 'اكتب للبحث',
+        'record-actions' => [
+            'view' => 'عرض',
+            'edit' => 'تحرير',
+            'duplicate' => 'تكرار',
+        ],
+
         'records' => [
             'products' => 'المنتجات',
             'orders' => 'الطلبات',

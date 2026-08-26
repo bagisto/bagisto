@@ -4333,6 +4333,17 @@ return [
         'select' => 'Obre',
         'close' => 'Tanca',
 
+        'all' => 'Tots els :resource',
+        'back' => 'Enrere',
+        'context-placeholder' => 'Cerca a :context...',
+
+        'start-typing' => 'Escriviu per cercar',
+        'record-actions' => [
+            'view' => 'Mostra',
+            'edit' => 'Edita',
+            'duplicate' => 'Duplica',
+        ],
+
         'records' => [
             'products' => 'Productes',
             'orders' => 'Comandes',

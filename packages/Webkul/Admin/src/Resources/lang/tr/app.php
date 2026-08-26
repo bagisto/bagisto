@@ -4333,6 +4333,17 @@ return [
         'select' => 'Aç',
         'close' => 'Kapat',
 
+        'all' => 'Tüm :resource',
+        'back' => 'Geri',
+        'context-placeholder' => ':context içinde ara...',
+
+        'start-typing' => 'Aramak için yazın',
+        'record-actions' => [
+            'view' => 'Görüntüle',
+            'edit' => 'Düzenle',
+            'duplicate' => 'Çoğalt',
+        ],
+
         'records' => [
             'products' => 'Ürünler',
             'orders' => 'Siparişler',

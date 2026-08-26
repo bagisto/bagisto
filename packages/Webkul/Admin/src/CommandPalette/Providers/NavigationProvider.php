@@ -13,24 +13,24 @@ use Webkul\Core\Menu\MenuItem;
 class NavigationProvider implements Provider
 {
     /**
-     * Every admin menu entry the signed in admin may reach.
-     *
-     * The menu arrives already filtered by permission, so nothing is checked again here.
-     */
-    /**
      * Create a new instance.
      */
     public function __construct(
         protected Aliases $aliases,
     ) {}
 
+    /**
+     * The admin menu, as the tree the operator walks.
+     *
+     * The menu arrives already filtered by permission, so nothing is checked again here.
+     */
     public function items(): array
     {
         return $this->walk(Menu::getItems(BaseMenu::ADMIN));
     }
 
     /**
-     * Flatten the menu tree, carrying the trail of ancestor names as the path.
+     * Turn menu entries into items, keeping the shape of the menu.
      *
      * @return Item[]
      */
@@ -39,31 +39,27 @@ class NavigationProvider implements Provider
         $items = [];
 
         foreach ($menuItems as $menuItem) {
-            $items[] = new Item(
+            $children = $this->walk($menuItem->getChildren(), [...$trail, $menuItem->getName()]);
+
+            $item = new Item(
                 label: $menuItem->getName(),
-                url: $menuItem->getUrl(),
                 category: Item::CATEGORY_PAGE,
+                url: $menuItem->getUrl(),
                 path: $trail ? implode(Item::PATH_SEPARATOR, $trail) : null,
                 icon: $menuItem->getIcon() ?: null,
                 keywords: $this->keywords($menuItem),
+                children: $children,
+                key: $menuItem->getKey(),
             );
 
-            if ($menuItem->getChildren()->isNotEmpty()) {
-                $items = array_merge(
-                    $items,
-                    $this->walk($menuItem->getChildren(), [...$trail, $menuItem->getName()])
-                );
-            }
+            $items[] = $item;
         }
 
         return $items;
     }
 
     /**
-     * Terms the entry answers to beyond its label, taken from its key.
-     *
-     * A key such as `catalog.products` lends both `catalog` and `products`, so an
-     * operator finds the page by the words the codebase uses for it.
+     * Terms the entry answers to beyond its label, taken from its key and its aliases.
      *
      * @return string[]
      */

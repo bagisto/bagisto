@@ -15,8 +15,7 @@ class ActionProvider implements Provider
     /**
      * The declared actions the signed in admin is permitted to start.
      *
-     * Declaring an action is a matter of adding an entry to the config file; a package may
-     * merge its own into the same key.
+     * An action naming a `parent` is grafted onto that node rather than standing alone.
      */
     public function items(): array
     {
@@ -36,11 +35,12 @@ class ActionProvider implements Provider
 
             $items[] = new Item(
                 label: trans($action['title']),
-                url: $url,
                 category: Item::CATEGORY_ACTION,
+                url: $url,
                 path: isset($action['path']) ? trans($action['path']) : null,
                 icon: $action['icon'] ?? null,
                 keywords: $action['keywords'] ?? [],
+                parent: $action['parent'] ?? null,
             );
         }
 

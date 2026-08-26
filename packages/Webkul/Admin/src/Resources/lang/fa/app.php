@@ -4333,6 +4333,17 @@ return [
         'select' => 'گشودن',
         'close' => 'بستن',
 
+        'all' => 'همهٔ :resource',
+        'back' => 'بازگشت',
+        'context-placeholder' => 'جست‌وجو در :context...',
+
+        'start-typing' => 'برای جست‌وجو بنویسید',
+        'record-actions' => [
+            'view' => 'نمایش',
+            'edit' => 'ویرایش',
+            'duplicate' => 'تکثیر',
+        ],
+
         'records' => [
             'products' => 'محصولات',
             'orders' => 'سفارش‌ها',

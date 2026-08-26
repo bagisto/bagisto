@@ -4333,6 +4333,17 @@ return [
         'select' => 'Відкрити',
         'close' => 'Закрити',
 
+        'all' => 'Усі :resource',
+        'back' => 'Назад',
+        'context-placeholder' => 'Пошук у :context...',
+
+        'start-typing' => 'Введіть для пошуку',
+        'record-actions' => [
+            'view' => 'Переглянути',
+            'edit' => 'Редагувати',
+            'duplicate' => 'Дублювати',
+        ],
+
         'records' => [
             'products' => 'Товари',
             'orders' => 'Замовлення',
