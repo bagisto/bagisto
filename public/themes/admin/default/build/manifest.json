@@ -364,6 +364,10 @@
     "file": "assets/address-DH7M3lNY.svg",
     "src": "src/Resources/assets/images/settings/address.svg"
   },
+  "src/Resources/assets/images/settings/amazon-s3.svg": {
+    "file": "assets/amazon-s3-C_nmpuWN.svg",
+    "src": "src/Resources/assets/images/settings/amazon-s3.svg"
+  },
   "src/Resources/assets/images/settings/captcha.svg": {
     "file": "assets/captcha-CcuSNj-t.svg",
     "src": "src/Resources/assets/images/settings/captcha.svg"
@@ -371,6 +375,10 @@
   "src/Resources/assets/images/settings/checkout.svg": {
     "file": "assets/checkout-BvqH__Gi.svg",
     "src": "src/Resources/assets/images/settings/checkout.svg"
+  },
+  "src/Resources/assets/images/settings/cloudflare-r2.svg": {
+    "file": "assets/cloudflare-r2-D8OgzYNP.svg",
+    "src": "src/Resources/assets/images/settings/cloudflare-r2.svg"
   },
   "src/Resources/assets/images/settings/email.svg": {
     "file": "assets/email-5AJwT575.svg",

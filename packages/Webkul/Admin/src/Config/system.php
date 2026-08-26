@@ -3558,7 +3558,7 @@ return [
         'key' => 'file_management.amazon_s3',
         'name' => 'admin::app.configuration.index.file-management.amazon-s3.title',
         'info' => 'admin::app.configuration.index.file-management.amazon-s3.info',
-        'icon' => 'settings/settings.svg',
+        'icon' => 'settings/amazon-s3.svg',
         'sort' => 2,
     ], [
         'key' => 'file_management.amazon_s3.settings',
@@ -3624,7 +3624,7 @@ return [
         'key' => 'file_management.cloudflare_r2',
         'name' => 'admin::app.configuration.index.file-management.cloudflare-r2.title',
         'info' => 'admin::app.configuration.index.file-management.cloudflare-r2.info',
-        'icon' => 'settings/settings.svg',
+        'icon' => 'settings/cloudflare-r2.svg',
         'sort' => 3,
     ], [
         'key' => 'file_management.cloudflare_r2.settings',
