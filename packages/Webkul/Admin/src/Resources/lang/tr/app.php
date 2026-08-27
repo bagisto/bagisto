@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'Bir hata oluştu',
                 'must-select-a-mass-action' => 'Toplu işlem seçmelisiniz.',
                 'must-select-a-mass-action-option' => 'Toplu işlem seçeneği seçmelisiniz.',
                 'no-records-selected' => 'Hiçbir kayıt seçilmedi.',

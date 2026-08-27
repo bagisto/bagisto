@@ -61,6 +61,7 @@
                         button-type="button"
                         class="primary-button"
                         :title="trans('admin::app.export.export')"
+                        ::loading="isDownloading"
                         @click="download"
                     />
                 </x-slot>
@@ -77,6 +78,8 @@
             data() {
                 return {
                     format: 'xls',
+
+                    isDownloading: false,
 
                     available: null,
 
@@ -120,6 +123,10 @@
                  * @returns {void}
                  */
                 download() {
+                    if (this.isDownloading) {
+                        return;
+                    }
+
                     if (! this.available?.records?.length) {
                         this.$emitter.emit('add-flash', { type: 'warning', message: '@lang('admin::app.export.no-records')' });
 
@@ -145,6 +152,8 @@
                         this.applied.filters.columns.forEach(column => {
                             params.filters[column.index] = column.value;
                         });
+
+                        this.isDownloading = true;
 
                         this.$axios
                             .get(this.src, {
@@ -183,7 +192,17 @@
                                 link.click();
                                 document.body.removeChild(link);
 
+                                this.isDownloading = false;
+
                                 this.$refs.exportModal.toggle();
+                            })
+                            .catch(() => {
+                                this.isDownloading = false;
+
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: "@lang('admin::app.components.datagrid.index.action-error')",
+                                });
                             });
                     }
                 },

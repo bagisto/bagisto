@@ -187,6 +187,8 @@
                                 case 'post':
                                 case 'put':
                                 case 'patch':
+                                    this.$parent.setLoading(true);
+
                                     this.$axios[method](action.url, {
                                             indices: this.massActions.indices,
                                             value: this.massActions.value,
@@ -197,7 +199,10 @@
                                             this.$parent.get();
                                         })
                                         .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                            this.$emitter.emit('add-flash', {
+                                                type: 'error',
+                                                message: error.response?.data?.message ?? "@lang('admin::app.components.datagrid.index.action-error')",
+                                            });
 
                                             this.$parent.get();
                                         });
@@ -205,6 +210,8 @@
                                     break;
 
                                 case 'delete':
+                                    this.$parent.setLoading(true);
+
                                     this.$axios[method](action.url, {
                                             indices: this.massActions.indices
                                         })
@@ -217,7 +224,10 @@
                                             this.$parent.get();
                                         })
                                         .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                            this.$emitter.emit('add-flash', {
+                                                type: 'error',
+                                                message: error.response?.data?.message ?? "@lang('admin::app.components.datagrid.index.action-error')",
+                                            });
 
                                             /**
                                              * Need to check reason why this.$emit('massActionSuccess') not emitting.

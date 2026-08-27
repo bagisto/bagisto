@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Webkul\Attribute\Contracts\Attribute;
 use Webkul\Attribute\Enums\AttributeTypeEnum;
 use Webkul\Attribute\Repositories\AttributeRepository;
+use Webkul\Category\Repositories\CategoryRepository;
 use Webkul\Core\Contracts\Channel;
 use Webkul\Core\Contracts\Locale;
 use Webkul\Core\Facades\ElasticSearch as ElasticSearchClient;
@@ -75,6 +76,13 @@ class ElasticSearch extends AbstractIndexer
     protected $locale;
 
     /**
+     * Category chains, resolved once per locale for the run.
+     *
+     * @var array<string, array<int, string>>
+     */
+    protected $categoryPaths = [];
+
+    /**
      * Create a new indexer instance.
      *
      * @return void
@@ -84,6 +92,7 @@ class ElasticSearch extends AbstractIndexer
         protected CustomerGroupRepository $customerGroupRepository,
         protected AttributeRepository $attributeRepository,
         protected ProductRepository $productRepository,
+        protected CategoryRepository $categoryRepository,
     ) {
         $this->batchSize = self::BATCH_SIZE;
     }
@@ -285,6 +294,7 @@ class ElasticSearch extends AbstractIndexer
             'sku' => $this->product->sku,
             'attribute_family_id' => $this->product->attribute_family_id,
             'category_ids' => $this->product->categories->pluck('id')->toArray(),
+            'category_name' => $this->getCategoryNames(),
             'created_at' => $this->product->created_at,
             'quantity' => $this->product->inventories->isEmpty()
                 ? null
@@ -338,6 +348,24 @@ class ElasticSearch extends AbstractIndexer
         }
 
         return $properties;
+    }
+
+    /**
+     * The categories the product sits in, each read as the chain of ancestors leading down to it,
+     * so the index answers a search for a category by the same name the admin listing shows.
+     *
+     * @return string[]
+     */
+    public function getCategoryNames()
+    {
+        $locale = $this->locale->code;
+
+        $this->categoryPaths[$locale] ??= $this->categoryRepository->getCategoryPaths($locale);
+
+        return array_values(array_intersect_key(
+            $this->categoryPaths[$locale],
+            array_flip($this->product->categories->pluck('id')->toArray())
+        ));
     }
 
     /**

@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'कुछ गलत हो गया है',
                 'must-select-a-mass-action' => 'आपको एक सामूहिक क्रिया का चयन करना चाहिए।',
                 'must-select-a-mass-action-option' => 'आपको एक सामूहिक क्रिया का चयन एक विकल्प करना चाहिए।',
                 'no-records-selected' => 'कोई रिकॉर्ड नहीं चुना गया है।',

@@ -18,6 +18,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Refactored core search architecture to engine-agnostic design using Strategy + Manager patterns.
 
+- Added a command palette to the admin, opened with Ctrl + K, which searches menus, configuration settings, actions and records from one place, or is walked from a section to a page to a record to what may be done with it, showing only what the signed-in admin may reach.
+
 - Added Amazon S3 and Cloudflare R2 as storage drivers, chosen in Configuration → File Management; the local disk stays the default.
 
 - Added a Search Engines configuration section, gathering the engine, the per-context search modes and the Elasticsearch host, credentials and index prefix — which had been settable only in the environment file — into one place with a connection test, and a migration carrying the stored values over.

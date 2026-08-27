@@ -5,6 +5,7 @@ namespace Webkul\Product\Helpers\Indexers;
 use Closure;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Webkul\Category\Models\CategoryProxy;
 use Webkul\Product\Contracts\Product;
 use Webkul\Product\Helpers\ProductType;
 use Webkul\Product\Repositories\ProductFlatRepository;
@@ -254,13 +255,7 @@ class Flat extends AbstractIndexer
                 .' WHERE id = '.$tablePrefix.'product_flat.attribute_family_id)'
             ),
 
-            'category_name' => DB::raw(
-                '(SELECT '.db_grammar()->groupConcat('ct.name', ', ', false, 'ct.category_id')
-                .' FROM '.$tablePrefix.'product_categories pc'
-                .' INNER JOIN '.$tablePrefix.'category_translations ct'
-                .' ON ct.category_id = pc.category_id AND ct.locale = '.$tablePrefix.'product_flat.locale'
-                .' WHERE pc.product_id = '.$tablePrefix.'product_flat.product_id)'
-            ),
+            'category_name' => DB::raw($this->categoryPathsExpression($tablePrefix)),
         ]);
     }
 
@@ -298,6 +293,30 @@ class Flat extends AbstractIndexer
         $this->channels->each->locales;
 
         return $this->channels;
+    }
+
+    /**
+     * The categories a product sits in, each read as the chain of ancestors leading down to it.
+     *
+     * The root the chain hangs from is left out, and a category is placed by its nested set bounds
+     * so that the depth of the tree does not bound the expression.
+     */
+    protected function categoryPathsExpression(string $tablePrefix): string
+    {
+        $categoryClass = CategoryProxy::modelClass();
+
+        $path = '(SELECT '.db_grammar()->groupConcat('ct.name', $categoryClass::PATH_SEPARATOR, false, 'ancestor._lft')
+            .' FROM '.$tablePrefix.'categories ancestor'
+            .' INNER JOIN '.$tablePrefix.'category_translations ct'
+            .' ON ct.category_id = ancestor.id AND ct.locale = '.$tablePrefix.'product_flat.locale'
+            .' WHERE ancestor._lft <= category._lft'
+            .' AND ancestor._rgt >= category._rgt'
+            .' AND ancestor.parent_id IS NOT NULL)';
+
+        return '(SELECT '.db_grammar()->groupConcat($path, $categoryClass::PATH_DELIMITER, false, 'category._lft')
+            .' FROM '.$tablePrefix.'product_categories pc'
+            .' INNER JOIN '.$tablePrefix.'categories category ON category.id = pc.category_id'
+            .' WHERE pc.product_id = '.$tablePrefix.'product_flat.product_id)';
     }
 
     /**

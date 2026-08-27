@@ -23,13 +23,15 @@ class Category
     {
         /**
          * Scoped with a sub-select rather than a list of ids, since a category near the root
-         * can hold the whole catalog.
+         * can hold the whole catalog. Its descendants are taken along, as they read through the
+         * category that moved or was renamed.
          */
         $this->flatIndexer->refreshDerivedColumns(
             fn ($query) => $query
-                ->select('product_id')
+                ->select('product_categories.product_id')
                 ->from('product_categories')
-                ->where('category_id', $category->id)
+                ->join('categories', 'categories.id', '=', 'product_categories.category_id')
+                ->whereBetween('categories._lft', [$category->_lft, $category->_rgt])
         );
     }
 

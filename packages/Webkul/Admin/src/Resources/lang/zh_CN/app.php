@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => '出现错误',
                 'must-select-a-mass-action' => '您必须选择一项批量操作。',
                 'must-select-a-mass-action-option' => '您必须选择批量操作的选项。',
                 'no-records-selected' => '没有选择任何记录。',

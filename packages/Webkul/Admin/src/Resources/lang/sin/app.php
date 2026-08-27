@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'දෝෂයක් සිදු වී ඇත',
                 'must-select-a-mass-action' => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ යොදා ගැනේ.',
                 'must-select-a-mass-action-option' => 'ඔබ බොහෝනය ක්‍රියාකාරීත්වයක් තෝරා යන්නේ එකක් තෝරා යන්නේ.',
                 'no-records-selected' => 'කිසිද වාර්තාවක් තෝරාගෙන නැත.',

@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'Alguna cosa ha anat malament',
                 'must-select-a-mass-action' => 'Heu de seleccionar una acció massiva.',
                 'must-select-a-mass-action-option' => 'Heu de seleccionar una opció d\'acció massiva.',
                 'no-records-selected' => 'No s\'han seleccionat registres.',

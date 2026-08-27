@@ -264,6 +264,31 @@ class CategoryRepository extends Repository
     }
 
     /**
+     * Every category under the roots, read as the chain of ancestors leading down to it.
+     *
+     * The root each chain hangs from is left out, so a category reads as `Mens › Footwear`
+     * rather than by a name several of its siblings elsewhere in the tree may share.
+     *
+     * @param  string|null  $locale  The locale the names are read in, the current one when null.
+     * @return array<int, string>
+     */
+    public function getCategoryPaths(?string $locale = null): array
+    {
+        $levels = [];
+
+        $categories = $this->model::query()
+            ->orderBy('position')
+            ->orderBy('id')
+            ->get(['id', 'parent_id', 'position']);
+
+        foreach ($categories as $category) {
+            $levels[$category->parent_id ?? 0][] = $category;
+        }
+
+        return $this->readPathsUnder($levels, 0, [], $locale);
+    }
+
+    /**
      * Checks slug is unique or not based on locale.
      *
      * @param  int  $id
@@ -342,6 +367,34 @@ class CategoryRepository extends Repository
         if (array_key_exists('alt_text', $meta)) {
             $this->saveMediaAltText($category, $prefix.'_alt', $meta['alt_text']);
         }
+    }
+
+    /**
+     * Read one level of the tree, carrying the chain read so far down onto each of its entries.
+     *
+     * @param  array<int, Category[]>  $levels
+     * @param  string[]  $trail
+     * @return array<int, string>
+     */
+    protected function readPathsUnder(array $levels, int $parentId, array $trail, ?string $locale = null): array
+    {
+        $paths = [];
+
+        foreach ($levels[$parentId] ?? [] as $category) {
+            $branch = $trail;
+
+            if ($parentId) {
+                $branch[] = $locale
+                    ? ($category->translate($locale)?->name ?? $category->name)
+                    : $category->name;
+
+                $paths[$category->id] = implode($this->model::PATH_SEPARATOR, $branch);
+            }
+
+            $paths += $this->readPathsUnder($levels, $category->id, $branch, $locale);
+        }
+
+        return $paths;
     }
 
     /**

@@ -1277,10 +1277,13 @@
                             this.isShowSavedFilters = false;
                         })
                         .catch(error => {
-                            if (error.response.status == 422) {
+                            if (error.response?.status == 422) {
                                 setErrors(error.response.data.errors);
                             } else {
-                                this.$emitter.emit('add-flash', { type: 'error',  message: response.data.message });
+                                this.$emitter.emit('add-flash', {
+                                    type: 'error',
+                                    message: error.response?.data?.message ?? "@lang('admin::app.components.datagrid.index.action-error')",
+                                });
                             }
                         });
                 },
@@ -1318,7 +1321,10 @@
                                     this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
                                 })
                                 .catch(error => {
-                                    this.$emitter.emit('add-flash', { type: 'error', message: response.data.message });
+                                    this.$emitter.emit('add-flash', {
+                                        type: 'error',
+                                        message: error.response?.data?.message ?? "@lang('admin::app.components.datagrid.toolbar.filter.delete-error')",
+                                    });
                                 });
                         }
                     });

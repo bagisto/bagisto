@@ -18,6 +18,16 @@ class Category extends TranslatableModel implements CategoryContract
     use HasFactory, NodeTrait;
 
     /**
+     * What separates the steps of the chain of ancestors a category is read by.
+     */
+    const PATH_SEPARATOR = ' › ';
+
+    /**
+     * What separates one category from the next where several are read together.
+     */
+    const PATH_DELIMITER = ', ';
+
+    /**
      * Translated attributes.
      *
      * @var array

@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'Что-то пошло не так',
                 'must-select-a-mass-action' => 'Вы должны выбрать массовое действие.',
                 'must-select-a-mass-action-option' => 'Вы должны выбрать опцию массового действия.',
                 'no-records-selected' => 'Не выбрано ни одной записи.',

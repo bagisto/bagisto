@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'Terjadi kesalahan',
                 'must-select-a-mass-action' => 'Anda harus memilih tindakan massal.',
                 'must-select-a-mass-action-option' => 'Anda harus memilih opsi tindakan massal.',
                 'no-records-selected' => 'Tidak ada data yang dipilih.',

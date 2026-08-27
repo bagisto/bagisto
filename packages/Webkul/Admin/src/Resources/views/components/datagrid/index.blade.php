@@ -256,6 +256,17 @@
                 },
 
                 /**
+                 * Put the grid into, or out of, its loading state, so an action that reaches the
+                 * server reads as busy for as long as it is in flight.
+                 *
+                 * @param {boolean} state
+                 * @returns {void}
+                 */
+                setLoading(state) {
+                    this.isLoading = state;
+                },
+
+                /**
                  * Change Page. When the child component has handled all the cases, it will send the
                  * valid new page; otherwise, it will block. Here, we are certain that we have
                  * a new page, so the parent will simply call the AJAX based on the new page.

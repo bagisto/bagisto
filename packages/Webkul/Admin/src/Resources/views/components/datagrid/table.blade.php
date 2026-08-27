@@ -6,7 +6,9 @@
     :applied="applied"
     @selectAll="selectAll"
     @sort="sort"
+    @actionStart="setLoading(true)"
     @actionSuccess="get"
+    @actionError="setLoading(false)"
 >
     {{ $slot }}
 </v-datagrid-table>
@@ -240,6 +242,8 @@
                         case 'delete':
                             this.$emitter.emit('open-confirm-modal', {
                                 agree: () => {
+                                    this.$emit('actionStart', action);
+
                                     this.$axios[method](action.url)
                                         .then(response => {
                                             this.$emitter.emit('add-flash', { type: 'success', message: response.data.message });
@@ -247,9 +251,12 @@
                                             this.$emit('actionSuccess', response.data);
                                         })
                                         .catch((error) => {
-                                            this.$emitter.emit('add-flash', { type: 'error', message: error.response.data.message });
+                                            this.$emitter.emit('add-flash', {
+                                                type: 'error',
+                                                message: error.response?.data?.message ?? "@lang('admin::app.components.datagrid.index.action-error')",
+                                            });
 
-                                            this.$emit('actionError', error.response.data);
+                                            this.$emit('actionError', error.response?.data);
                                         });
                                 }
                             });

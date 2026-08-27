@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'エラーが発生しました',
                 'must-select-a-mass-action' => '一括操作を選択する必要があります。',
                 'must-select-a-mass-action-option' => '一括操作のオプションを選択する必要があります。',
                 'no-records-selected' => 'レコードは選択されていません。',

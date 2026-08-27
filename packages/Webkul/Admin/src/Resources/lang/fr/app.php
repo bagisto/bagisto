@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'Une erreur s\'est produite',
                 'must-select-a-mass-action' => 'Vous devez sélectionner une action de masse.',
                 'must-select-a-mass-action-option' => 'Vous devez sélectionner une option pour l\'action de masse.',
                 'no-records-selected' => 'Aucun enregistrement sélectionné.',

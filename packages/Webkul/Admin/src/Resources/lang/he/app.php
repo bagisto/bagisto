@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'משהו השתבש',
                 'must-select-a-mass-action' => 'עליך לבחור פעולת מסה.',
                 'must-select-a-mass-action-option' => 'עליך לבחור אפשרות לפעולת מסה.',
                 'no-records-selected' => 'לא נבחרו רשומות.',

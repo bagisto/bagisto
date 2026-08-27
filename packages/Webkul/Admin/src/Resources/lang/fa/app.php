@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'مشکلی پیش آمد',
                 'must-select-a-mass-action' => 'شما باید یک عمل جمعی انتخاب کنید.',
                 'must-select-a-mass-action-option' => 'شما باید یک گزینه عمل جمعی انتخاب کنید.',
                 'no-records-selected' => 'هیچ سابقه‌ای انتخاب نشده است.',

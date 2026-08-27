@@ -5782,6 +5782,7 @@ return [
 
         'datagrid' => [
             'index' => [
+                'action-error' => 'কিছু ভুল হয়েছে',
                 'must-select-a-mass-action' => 'আপনাকে একটি যথার্থ কর্মসূচি নির্বাচন করতে হবে।',
                 'must-select-a-mass-action-option' => 'আপনাকে একটি যথার্থ কর্মসূচির বিকল্প নির্বাচন করতে হবে।',
                 'no-records-selected' => 'কোন রেকর্ড নির্বাচন করা হয়নি।',

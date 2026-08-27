@@ -196,6 +196,7 @@ class ProductDataGrid extends DataGrid
             'index' => 'category_name',
             'label' => trans('admin::app.catalog.products.index.datagrid.category'),
             'type' => 'string',
+            'filterable' => true,
         ]);
 
         $this->addColumn([
@@ -404,7 +405,7 @@ class ProductDataGrid extends DataGrid
                 ],
             ],
 
-            'sku', 'name' => $this->getTextFilterValue($attribute, $values),
+            'sku', 'name', 'category_name' => $this->getTextFilterValue($attribute, $values),
 
             default => [
                 'terms' => [
