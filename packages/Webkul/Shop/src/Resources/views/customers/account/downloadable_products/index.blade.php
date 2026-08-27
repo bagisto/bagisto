@@ -34,7 +34,10 @@
 
         <!-- For Desktop View -->
         <div class="max-md:hidden">
-            <x-shop::datagrid :src="route('shop.customers.account.downloadable_products.index')" />
+            <x-shop::datagrid
+                :src="route('shop.customers.account.downloadable_products.index')"
+                :shimmerColumns="5"
+            />
         </div>
 
         <!-- For Mobile View -->
@@ -61,7 +64,7 @@
                     performAction
                 }">
                     <template v-if="isLoading">
-                        <x-shop::shimmer.datagrid.table.body />
+                        <x-shop::shimmer.customers.account.downloadable-products />
                     </template>
 
                     <template v-else>
@@ -105,6 +108,5 @@
         </div>
 
         {!! view_render_event('bagisto.shop.customers.account.downloadable_products.list.after') !!}
-
     </div>
 </x-shop::layouts.account>
