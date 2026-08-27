@@ -17,7 +17,7 @@ const socialLoginSelectors: Record<
         fill: "black",
     },
     linkedin: {
-        label: 'label[for="customer[settings][social_login][enable_linkedin-openid]"]',
+        label: 'label[for="customer[settings][social_login][enable_linkedin]"]',
         fill: "#1D8DEE",
     },
     google: {
