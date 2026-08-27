@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'В прошлом месяце',
+                'last-six-months' => 'За последние 6 месяцев',
+                'last-thirty-days' => 'За последние 30 дней',
+                'last-three-months' => 'За последние 3 месяца',
+                'this-month' => 'В этом месяце',
+                'this-week' => 'На этой неделе',
+                'this-year' => 'В этом году',
+                'today' => 'Сегодня',
+                'yesterday' => 'Вчера',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'Согласен',

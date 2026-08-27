@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'පසුගිය මාසය',
+                'last-six-months' => 'පසුගිය 6 මාස',
+                'last-thirty-days' => 'පසුගිය 30 දින',
+                'last-three-months' => 'පසුගිය 3 මාස',
+                'this-month' => 'මෙම මාසය',
+                'this-week' => 'මෙම සතිය',
+                'this-year' => 'මෙම වර්ෂය',
+                'today' => 'අද',
+                'yesterday' => 'ඊයේ',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'සහෝදරයේ',

@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'গত মাস',
+                'last-six-months' => 'গত ৬ মাস',
+                'last-thirty-days' => 'গত ৩০ দিন',
+                'last-three-months' => 'গত ৩ মাস',
+                'this-month' => 'এই মাস',
+                'this-week' => 'এই সপ্তাহ',
+                'this-year' => 'এই বছর',
+                'today' => 'আজ',
+                'yesterday' => 'গতকাল',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'সম্মত',

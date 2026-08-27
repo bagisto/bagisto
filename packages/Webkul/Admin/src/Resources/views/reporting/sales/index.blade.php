@@ -17,8 +17,7 @@
             <!-- Shimmer -->
             <div class="flex gap-1.5">
                 <div class="shimmer h-9.75 w-33 rounded-md"></div>
-                <div class="shimmer h-9.75 w-35 rounded-md"></div>
-                <div class="shimmer h-9.75 w-35 rounded-md"></div>
+                <div class="shimmer h-9.75 w-60 rounded-md"></div>
             </div>
         </v-reporting-filters>
     </div>
@@ -103,21 +102,13 @@
                     </x-admin::dropdown>
                 </template>
 
-                <x-admin::flat-picker.date class="w-35!" ::allow-input="false">
-                    <input
-                        class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                        v-model="filters.start"
-                        placeholder="@lang('admin::app.reporting.sales.index.start-date')"
-                    />
-                </x-admin::flat-picker.date>
-
-                <x-admin::flat-picker.date class="w-35!" ::allow-input="false">
-                    <input
-                        class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                        v-model="filters.end"
-                        placeholder="@lang('admin::app.reporting.sales.index.end-date')"
-                    />
-                </x-admin::flat-picker.date>
+                <x-admin::date-range-picker
+                    :start-label="trans('admin::app.reporting.sales.index.start-date')"
+                    :end-label="trans('admin::app.reporting.sales.index.end-date')"
+                    ::start="filters.start"
+                    ::end="filters.end"
+                    @change="applyDateRange"
+                />
             </div>
         </script>
 
@@ -153,6 +144,21 @@
 
                         deep: true
                     }
+                },
+
+                methods: {
+                    /**
+                     * Take a chosen range in one assignment, so the widgets are asked to reload once
+                     * rather than once per end of the range.
+                     *
+                     * @param {object} range
+                     * @param {string} range.start
+                     * @param {string} range.end
+                     * @returns {void}
+                     */
+                    applyDateRange({ start, end }) {
+                        this.filters = { ...this.filters, start, end };
+                    },
                 },
             });
         </script>

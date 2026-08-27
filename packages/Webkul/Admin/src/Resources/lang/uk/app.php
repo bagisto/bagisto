@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'Минулий місяць',
+                'last-six-months' => 'Останні 6 місяців',
+                'last-thirty-days' => 'Останні 30 днів',
+                'last-three-months' => 'Останні 3 місяці',
+                'this-month' => 'Цього місяця',
+                'this-week' => 'Цього тижня',
+                'this-year' => 'Цього року',
+                'today' => 'Сьогодні',
+                'yesterday' => 'Вчора',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'Згоден',

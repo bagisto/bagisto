@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'Bulan Lalu',
+                'last-six-months' => '6 Bulan Terakhir',
+                'last-thirty-days' => '30 Hari Terakhir',
+                'last-three-months' => '3 Bulan Terakhir',
+                'this-month' => 'Bulan Ini',
+                'this-week' => 'Minggu Ini',
+                'this-year' => 'Tahun Ini',
+                'today' => 'Hari Ini',
+                'yesterday' => 'Kemarin',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'Setuju',

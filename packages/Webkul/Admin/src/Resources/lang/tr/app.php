@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'Geçen Ay',
+                'last-six-months' => 'Son 6 Ay',
+                'last-thirty-days' => 'Son 30 Gün',
+                'last-three-months' => 'Son 3 Ay',
+                'this-month' => 'Bu Ay',
+                'this-week' => 'Bu Hafta',
+                'this-year' => 'Bu Yıl',
+                'today' => 'Bugün',
+                'yesterday' => 'Dün',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'Kabul Et',

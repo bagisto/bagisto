@@ -140,21 +140,13 @@
 
                     <!-- Actions -->
                     <div class="flex items-center gap-1.5">
-                        <x-admin::flat-picker.date class="w-35!" ::allow-input="false">
-                            <input
-                                class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                v-model="filters.start"
-                                placeholder="@lang('admin::app.reporting.view.start-date')"
-                            />
-                        </x-admin::flat-picker.date>
-
-                        <x-admin::flat-picker.date class="w-35!" ::allow-input="false">
-                            <input
-                                class="flex min-h-9.75 w-full rounded-md border px-3 py-2 text-sm text-gray-600 transition-all hover:border-gray-400 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-400"
-                                v-model="filters.end"
-                                placeholder="@lang('admin::app.reporting.view.end-date')"
-                            />
-                        </x-admin::flat-picker.date>
+                        <x-admin::date-range-picker
+                            :start-label="trans('admin::app.reporting.view.start-date')"
+                            :end-label="trans('admin::app.reporting.view.end-date')"
+                            ::start="filters.start"
+                            ::end="filters.end"
+                            @change="applyDateRange"
+                        />
                     </div>
                 </div>
 
@@ -267,6 +259,12 @@
                 },
 
                 computed: {
+                    /**
+                     * The report's rows in the order the operator asked for, comparing numerically
+                     * where both values read as numbers and alphabetically otherwise.
+                     *
+                     * @returns {array}
+                     */
                     sortedRecords() {
                         const records = this.reporting?.statistics?.records ?? [];
 
@@ -310,6 +308,24 @@
                 },
 
                 methods: {
+                    /**
+                     * Take a chosen range in one assignment, so the table is asked to reload once
+                     * rather than once per end of the range.
+                     *
+                     * @param {object} range
+                     * @param {string} range.start
+                     * @param {string} range.end
+                     * @returns {void}
+                     */
+                    applyDateRange({ start, end }) {
+                        this.filters = { ...this.filters, start, end };
+                    },
+
+                    /**
+                     * Fetch the report for the filters as they currently stand.
+                     *
+                     * @returns {void}
+                     */
                     getStats() {
                         this.isLoading = true;
 
@@ -324,6 +340,13 @@
                             .catch(error => {});
                     },
 
+                    /**
+                     * Sort on a column, turning the direction around when it is already the one
+                     * being sorted on.
+                     *
+                     * @param {string} column
+                     * @returns {void}
+                     */
                     toggleSort(column) {
                         if (this.sortColumn === column) {
                             this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
@@ -333,6 +356,13 @@
                         }
                     },
 
+                    /**
+                     * Open the report as a file in the requested format, carrying the same filters
+                     * the table is showing.
+                     *
+                     * @param {string} format
+                     * @returns {void}
+                     */
                     exportReporting(format) {
                         let filters = this.filters;
 

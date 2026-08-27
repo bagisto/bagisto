@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'الشهر الماضي',
+                'last-six-months' => 'آخر 6 أشهر',
+                'last-thirty-days' => 'آخر 30 أيام',
+                'last-three-months' => 'آخر 3 أشهر',
+                'this-month' => 'هذا الشهر',
+                'this-week' => 'هذا الأسبوع',
+                'this-year' => 'هذا العام',
+                'today' => 'اليوم',
+                'yesterday' => 'الأمس',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'موافق',

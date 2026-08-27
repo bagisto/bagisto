@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'Mes anterior',
+                'last-six-months' => 'Últims 6 mesos',
+                'last-thirty-days' => 'Últims 30 dies',
+                'last-three-months' => 'Últims 3 mesos',
+                'this-month' => 'Aquest mes',
+                'this-week' => 'Aquesta setmana',
+                'this-year' => 'Aquest any',
+                'today' => 'Avui',
+                'yesterday' => 'Ahir',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'Acceptar',

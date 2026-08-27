@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'ماه گذشته',
+                'last-six-months' => 'شش ماه گذشته',
+                'last-thirty-days' => '۳۰ روز گذشته',
+                'last-three-months' => 'سه ماه گذشته',
+                'this-month' => 'این ماه',
+                'this-week' => 'این هفته',
+                'this-year' => 'امسال',
+                'today' => 'امروز',
+                'yesterday' => 'دیروز',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'موافقم',

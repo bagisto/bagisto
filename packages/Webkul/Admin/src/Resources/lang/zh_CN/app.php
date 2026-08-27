@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => '上个月',
+                'last-six-months' => '过去6个月',
+                'last-thirty-days' => '过去30天',
+                'last-three-months' => '过去3个月',
+                'this-month' => '本月',
+                'this-week' => '本周',
+                'this-year' => '今年',
+                'today' => '今天',
+                'yesterday' => '昨天',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => '同意',

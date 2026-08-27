@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'Vorige Maand',
+                'last-six-months' => 'Laatste 6 Maanden',
+                'last-thirty-days' => 'Laatste 30 Dagen',
+                'last-three-months' => 'Laatste 3 Maanden',
+                'this-month' => 'Deze Maand',
+                'this-week' => 'Deze Week',
+                'this-year' => 'Dit Jaar',
+                'today' => 'Vandaag',
+                'yesterday' => 'Gisteren',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'Akkoord',

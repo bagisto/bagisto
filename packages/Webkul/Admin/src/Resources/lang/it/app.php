@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'Ultimo Mese',
+                'last-six-months' => 'Ultimi 6 Mesi',
+                'last-thirty-days' => 'Ultimi 30 Giorni',
+                'last-three-months' => 'Ultimi 3 Mesi',
+                'this-month' => 'Questo Mese',
+                'this-week' => 'Questa Settimana',
+                'this-year' => 'Questo Anno',
+                'today' => 'Oggi',
+                'yesterday' => 'Ieri',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'Concordo',

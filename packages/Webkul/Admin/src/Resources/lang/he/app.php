@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'החודש הקודם',
+                'last-six-months' => 'השישה החודשים האחרונים',
+                'last-thirty-days' => '30 הימים האחרונים',
+                'last-three-months' => 'השלושה החודשים האחרונים',
+                'this-month' => 'החודש',
+                'this-week' => 'השבוע',
+                'this-year' => 'השנה',
+                'today' => 'היום',
+                'yesterday' => 'אתמול',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'הסכם',

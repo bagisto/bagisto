@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'Last Month',
+                'last-six-months' => 'Last 6 Months',
+                'last-thirty-days' => 'Last 30 Days',
+                'last-three-months' => 'Last 3 Months',
+                'this-month' => 'This Month',
+                'this-week' => 'This Week',
+                'this-year' => 'This Year',
+                'today' => 'Today',
+                'yesterday' => 'Yesterday',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'Agree',

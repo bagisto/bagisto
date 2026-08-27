@@ -21,8 +21,7 @@
 
     <!-- Date Filters -->
     <div class="flex items-center gap-1.5">
-        <div class="shimmer h-9.75 w-35 rounded-md"></div>
-        <div class="shimmer h-9.75 w-35 rounded-md"></div>
+        <div class="shimmer h-9.75 w-60 rounded-md"></div>
     </div>
 </div>
 

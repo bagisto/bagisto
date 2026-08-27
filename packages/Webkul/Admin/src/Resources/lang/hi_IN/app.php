@@ -5879,6 +5879,20 @@ return [
             ],
         ],
 
+        'date-range-picker' => [
+            'presets' => [
+                'last-month' => 'पिछले महीने',
+                'last-six-months' => 'पिछले 6 महीने',
+                'last-thirty-days' => 'पिछले 30 दिन',
+                'last-three-months' => 'पिछले 3 महीने',
+                'this-month' => 'इस महीने',
+                'this-week' => 'इस सप्ताह',
+                'this-year' => 'इस साल',
+                'today' => 'आज',
+                'yesterday' => 'कल',
+            ],
+        ],
+
         'modal' => [
             'confirm' => [
                 'agree-btn' => 'सहमत',
