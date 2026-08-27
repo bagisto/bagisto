@@ -28,10 +28,12 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - #11209 [feature] - Added Omnibus package for EU Omnibus Directive compliance, recording per-channel lowest-price snapshots and showing the 30-day historical low for discounted products.
 
+- #11447 [fixed] - Fixed a stray pair of arrows sitting in the middle of the storefront account listings. The datagrid footer held a second previous and next control beside the paginator, invisible while its icon classes had no glyphs and revealed by the icon rework; the paginator already carries both arrows and a page number, so it is now the only one.
+
+- #11442 [fixed] - Fixed the blank space below the product view page, caused by a height class that Tailwind 4 resolves and Tailwind 3 ignored.
+
 - #11423 [fixed] - Fixed the storefront order details tabs staying on the loading shimmer, the same discarded slot that left the product page tabs empty.
 
 - #11422 [fixed] - Fixed the product page tabs staying on the loading shimmer. The component emitted a Vue slot in place of the Blade slot holding them, so every tab item was dropped.
-
-- #11442 [fixed] - Fixed the blank space below the product view page, caused by a height class that Tailwind 4 resolves and Tailwind 3 ignored.
 
 - #10816 [fixed] - Fixed theme section images breaking when the store domain changed or a remote disk was used; paths are now stored bare and resolved when rendered.

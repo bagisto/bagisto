@@ -190,25 +190,9 @@
                             </p>
 
                             <!-- Pagination -->
-                            <div class="flex items-center gap-1">
-                                <div
-                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 focus:outline-hidden focus:ring-2 focus:ring-black active:border-gray-300"
-                                    @click="changePage('previous')"
-                                >
-                                    <span class="icon-arrow-left text-2xl"></span>
-                                </div>
-
-                                <div
-                                    class="inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 focus:outline-hidden focus:ring-2 focus:ring-black active:border-gray-300"
-                                    @click="changePage('next')"
-                                >
-                                    <span class="icon-arrow-right text-2xl"></span>
-                                </div>
-                            </div>
-
                             <nav aria-label="@lang('shop::app.components.datagrid.table.page-navigation')">
                                 <ul class="inline-flex items-center -space-x-px rounded-lg border border-zinc-200 max-md:px-0">
-                                    <li  @click="changePage('previous')">
+                                    <li @click="changePage('previous')">
                                         <a
                                             href="javascript:void(0);"
                                             class="flex h-10 w-9 items-center justify-center font-medium leading-normal hover:bg-gray-100 max-md:h-8 max-md:w-6 max-md:justify-normal"
