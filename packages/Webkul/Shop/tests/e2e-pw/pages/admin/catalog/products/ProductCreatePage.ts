@@ -546,7 +546,7 @@ export class ProductCreation extends BasePage {
         await expect(this.page).toHaveURL(
             /\/admin\/catalog\/products\/edit\/\d+/,
         );
-        await this.page.waitForLoadState("networkidle");
+        await this.productName.waitFor({ state: "visible" });
     }
 
     private async fillCommonDetails(product: BaseProduct) {

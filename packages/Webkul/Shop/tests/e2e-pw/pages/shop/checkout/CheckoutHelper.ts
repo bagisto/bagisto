@@ -181,7 +181,14 @@ export class CheckoutHelper extends BasePage {
     }
 
     get orderIdHeading() {
-        return this.page.locator("p.text-xl:has(.text-blue-700)").first();
+        return this.page
+            .locator("p.text-xl")
+            .filter({ hasText: /#\s*\d+/ })
+            .first();
+    }
+
+    get errorFlashMessage() {
+        return this.page.locator("p:has(.icon-toast-error)").first();
     }
 
     get miniCart() {
@@ -332,7 +339,10 @@ export class CheckoutHelper extends BasePage {
             await this.shoppingCartIcon.click();
         }
         await this.continueButton.click();
-        await this.page.locator(".icon-radio-unselect").first().click();
+        await this.page.waitForURL("**/checkout/onepage**");
+        const savedAddress = this.page.locator(".icon-radio-unselect").first();
+        await savedAddress.waitFor({ state: "visible", timeout: 60 * 1000 });
+        await savedAddress.click();
         await this.clickProcessButton.click();
     }
 
@@ -340,9 +350,39 @@ export class CheckoutHelper extends BasePage {
      * Place order and wait for processing
      */
     async placeOrder() {
-        await this.page.waitForTimeout(2000);
+        await expect(this.clickPlaceOrderButton).toBeEnabled({
+            timeout: 60 * 1000,
+        });
         await this.clickPlaceOrderButton.click();
-        await this.page.waitForTimeout(5000);
+        await this.waitForOrderPlaced();
+    }
+
+    /**
+     * Wait for the order to be placed, reporting the checkout error when it is not
+     */
+    private async waitForOrderPlaced() {
+        await expect
+            .poll(
+                async () => {
+                    if (this.page.url().includes("/checkout/onepage/success")) {
+                        return "success";
+                    }
+                    const failed = await this.errorFlashMessage
+                        .isVisible()
+                        .catch(() => false);
+                    if (! failed) {
+                        return "pending";
+                    }
+                    const message = await this.errorFlashMessage
+                        .innerText()
+                        .catch(() => "");
+                    return `checkout failed: ${message.trim()}`;
+                },
+                { timeout: 90 * 1000 },
+            )
+            .toBe("success");
+
+        await this.page.waitForLoadState("domcontentloaded");
     }
 
     /**

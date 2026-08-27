@@ -15,19 +15,15 @@ export class LoginPage extends BasePage {
     }
 
     private get loginButton() {
-        return this.page.getByRole("button", { name: " Sign In " });
+        return this.page.getByRole("button", { name: "Sign In" });
     }
 
-    private get logoutButton() {
-        return this.page.locator("div.flex.select-none >> button");
+    private get accountDropdownToggle() {
+        return this.page.locator("header div.flex.select-none > button").last();
     }
 
     private get logoutLink() {
         return this.page.getByRole("link", { name: "Logout" });
-    }
-
-    private get megaSearchPlaceholder() {
-        return this.page.getByPlaceholder("Mega Search").first();
     }
 
     async visit() {
@@ -39,12 +35,13 @@ export class LoginPage extends BasePage {
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
-        await expect(this.megaSearchPlaceholder).toBeVisible();
+        await this.page.waitForURL("**/admin/dashboard");
     }
 
     async logout() {
-        await this.logoutButton.click();
+        await this.accountDropdownToggle.click();
         await this.logoutLink.click();
+        await this.page.waitForURL("**/admin/login");
         await expect(this.passwordInput).toBeVisible();
     }
 }

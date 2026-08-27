@@ -51,7 +51,7 @@ test.afterEach(async ({ adminPage }) => {
 async function assignTaxCategory(taxCategoryName: string, page: Page) {
     await page.goto("admin/catalog/products");
     await page.locator("span.cursor-pointer.icon-sort-right").nth(1).click();
-    await page.waitForLoadState("networkidle");
+    await expect(page).toHaveURL(/\/admin\/catalog\/products\/edit\/\d+/);
     await page.locator('span:text-is("Tax Category")').click();
     await page.locator(`span:text-is("${taxCategoryName}")`).first().click();
     await page.locator('button:has-text("Save Product")').first().click();
