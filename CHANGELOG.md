@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed Admin → Configuration pages keeping a two-column layout on small screens, which squeezed the settings panel; the description and panel now stack.
 
+- #11446 [fixed] - Fixed the loading placeholders on the storefront customer account pages. Reviews drew its product thumbnail through the lazy image loader with no source, so the placeholder turned itself into a broken image, and it stood in for a heading the page had already drawn, leaving the cards to jump as the reviews arrived. Orders, Downloadable Products, GDPR and RMA drew a table row where each of them lists cards on a phone. Every placeholder now has the shape and height of what replaces it.
+
 - #11445 [fixed] - Fixed Full Page Cache configuration refusing to save. Its lifetime field carries Laravel's `nullable` rule, which was passed to Vee Validate in the browser and threw "No such validator 'nullable' exists"; rules only the server understands are no longer sent to it.
 
 - #11441 [fixed] - Fixed numeric datagrid filters ignoring a value's decimal part, so an order-total filter of 50.20 matched on 50. Integer and decimal columns now compare the value exactly and can be filtered by operator — equals, greater than, less than, or a range.

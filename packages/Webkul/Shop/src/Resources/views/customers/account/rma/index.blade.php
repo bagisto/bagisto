@@ -67,7 +67,7 @@
                     performAction
                 }">
                     <template v-if="isLoading">
-                        <x-shop::shimmer.datagrid.table.body />
+                        <x-shop::shimmer.customers.account.rma />
                     </template>
 
                     <template v-else>
