@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'Waarop deze winkel draait en welke services worden gebruikt.',
+                'title' => 'Over',
+
+                'general' => [
+                    'info' => 'Waarop deze winkel draait en welke services worden gebruikt.',
+                    'title' => 'Algemeen',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'In cache',
+                        'database' => 'Database',
+                        'drivers' => 'Stuurprogramma’s',
+                        'environment' => 'Omgeving',
+                        'mail' => 'E-mail',
+                        'search' => 'Zoeken',
+                        'storage' => 'Opslag',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'Applicatienaam',
+                        'broadcast' => 'Broadcast',
+                        'cache' => 'Cache',
+                        'composer-version' => 'Composer-versie',
+                        'config' => 'Configuratie',
+                        'debug-mode' => 'Debugmodus',
+                        'disk' => 'Schijf',
+                        'engine' => 'Engine',
+                        'environment' => 'Omgeving',
+                        'events' => 'Gebeurtenissen',
+                        'laravel-version' => 'Laravel-versie',
+                        'link' => 'Openbare link',
+                        'locale' => 'Taal',
+                        'log' => 'Logboek',
+                        'maintenance-mode' => 'Onderhoudsmodus',
+                        'php-version' => 'PHP-versie',
+                        'queue' => 'Wachtrij',
+                        'routes' => 'Routes',
+                        'session' => 'Sessie',
+                        'status' => 'Status',
+                        'timezone' => 'Tijdzone',
+                        'transport' => 'Transport',
+                        'url' => 'URL',
+                        'version' => 'Versie',
+                        'views' => 'Weergaven',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'Niet beschikbaar',
+                        'not-configured' => 'Niet geconfigureerd',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'Terug',
             'delete' => 'Verwijderen',
             'enable-at-least-one-payment' => 'Schakel ten minste één betaalmethode in.',

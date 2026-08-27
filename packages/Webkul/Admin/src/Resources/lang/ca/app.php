@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'Sobre què funciona aquesta botiga i quins serveis utilitza.',
+                'title' => 'Quant a',
+
+                'general' => [
+                    'info' => 'Sobre què funciona aquesta botiga i quins serveis utilitza.',
+                    'title' => 'General',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'En memòria cau',
+                        'database' => 'Base de dades',
+                        'drivers' => 'Controladors',
+                        'environment' => 'Entorn',
+                        'mail' => 'Correu',
+                        'search' => 'Cerca',
+                        'storage' => 'Emmagatzematge',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'Nom de l\'aplicació',
+                        'broadcast' => 'Difusió',
+                        'cache' => 'Memòria cau',
+                        'composer-version' => 'Versió de Composer',
+                        'config' => 'Configuració',
+                        'debug-mode' => 'Mode de depuració',
+                        'disk' => 'Disc',
+                        'engine' => 'Motor',
+                        'environment' => 'Entorn',
+                        'events' => 'Esdeveniments',
+                        'laravel-version' => 'Versió de Laravel',
+                        'link' => 'Enllaç públic',
+                        'locale' => 'Idioma',
+                        'log' => 'Registre',
+                        'maintenance-mode' => 'Mode de manteniment',
+                        'php-version' => 'Versió de PHP',
+                        'queue' => 'Cua',
+                        'routes' => 'Rutes',
+                        'session' => 'Sessió',
+                        'status' => 'Estat',
+                        'timezone' => 'Zona horària',
+                        'transport' => 'Transport',
+                        'url' => 'URL',
+                        'version' => 'Versió',
+                        'views' => 'Vistes',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'No disponible',
+                        'not-configured' => 'No configurat',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'Enrere',
             'delete' => 'Esborrar',
             'enable-at-least-one-payment' => 'Habilita almenys un mètode de pagament.',

@@ -264,7 +264,7 @@
     "isDynamicEntry": true
   },
   "src/Resources/assets/css/app.css": {
-    "file": "assets/app-Bl0kNeSX.css",
+    "file": "assets/app-DU6IrWkA.css",
     "src": "src/Resources/assets/css/app.css",
     "isEntry": true
   },
@@ -360,6 +360,10 @@
     "file": "assets/zoom-CynTuPTI.svg",
     "src": "src/Resources/assets/images/product-placeholders/zoom.svg"
   },
+  "src/Resources/assets/images/settings/about.svg": {
+    "file": "assets/about-CPHHvVrJ.svg",
+    "src": "src/Resources/assets/images/settings/about.svg"
+  },
   "src/Resources/assets/images/settings/address.svg": {
     "file": "assets/address-DH7M3lNY.svg",
     "src": "src/Resources/assets/images/settings/address.svg"
@@ -367,6 +371,10 @@
   "src/Resources/assets/images/settings/amazon-s3.svg": {
     "file": "assets/amazon-s3-C_nmpuWN.svg",
     "src": "src/Resources/assets/images/settings/amazon-s3.svg"
+  },
+  "src/Resources/assets/images/settings/cache-management.svg": {
+    "file": "assets/cache-management-B0-St4GL.svg",
+    "src": "src/Resources/assets/images/settings/cache-management.svg"
   },
   "src/Resources/assets/images/settings/captcha.svg": {
     "file": "assets/captcha-CcuSNj-t.svg",
@@ -379,6 +387,10 @@
   "src/Resources/assets/images/settings/cloudflare-r2.svg": {
     "file": "assets/cloudflare-r2-D8OgzYNP.svg",
     "src": "src/Resources/assets/images/settings/cloudflare-r2.svg"
+  },
+  "src/Resources/assets/images/settings/content.svg": {
+    "file": "assets/content-Dtv6fyyL.svg",
+    "src": "src/Resources/assets/images/settings/content.svg"
   },
   "src/Resources/assets/images/settings/elasticsearch.svg": {
     "file": "assets/elasticsearch-DhrRMj4r.svg",
@@ -395,6 +407,10 @@
   "src/Resources/assets/images/settings/exchange-rate.svg": {
     "file": "assets/exchange-rate-nueYe-Ml.svg",
     "src": "src/Resources/assets/images/settings/exchange-rate.svg"
+  },
+  "src/Resources/assets/images/settings/file-management.svg": {
+    "file": "assets/file-management-BoB5z9A6.svg",
+    "src": "src/Resources/assets/images/settings/file-management.svg"
   },
   "src/Resources/assets/images/settings/full-page-cache.svg": {
     "file": "assets/full-page-cache-DOxvZ_cy.svg",

@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'Toko ini berjalan di atas apa dan layanan apa yang digunakan.',
+                'title' => 'Tentang',
+
+                'general' => [
+                    'info' => 'Toko ini berjalan di atas apa dan layanan apa yang digunakan.',
+                    'title' => 'Umum',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'Tersimpan di Cache',
+                        'database' => 'Basis Data',
+                        'drivers' => 'Driver',
+                        'environment' => 'Lingkungan',
+                        'mail' => 'Surel',
+                        'search' => 'Pencarian',
+                        'storage' => 'Penyimpanan',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'Nama Aplikasi',
+                        'broadcast' => 'Siaran',
+                        'cache' => 'Cache',
+                        'composer-version' => 'Versi Composer',
+                        'config' => 'Konfigurasi',
+                        'debug-mode' => 'Mode Debug',
+                        'disk' => 'Disk',
+                        'engine' => 'Mesin',
+                        'environment' => 'Lingkungan',
+                        'events' => 'Event',
+                        'laravel-version' => 'Versi Laravel',
+                        'link' => 'Tautan Publik',
+                        'locale' => 'Lokal',
+                        'log' => 'Log',
+                        'maintenance-mode' => 'Mode Pemeliharaan',
+                        'php-version' => 'Versi PHP',
+                        'queue' => 'Antrean',
+                        'routes' => 'Rute',
+                        'session' => 'Sesi',
+                        'status' => 'Status',
+                        'timezone' => 'Zona Waktu',
+                        'transport' => 'Transport',
+                        'url' => 'URL',
+                        'version' => 'Versi',
+                        'views' => 'Tampilan',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'Tidak Tersedia',
+                        'not-configured' => 'Belum Dikonfigurasi',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'Kembali',
             'delete' => 'Hapus',
             'enable-at-least-one-payment' => 'Aktifkan setidaknya satu metode pembayaran.',

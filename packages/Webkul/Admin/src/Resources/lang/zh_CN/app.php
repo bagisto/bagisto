@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => '此商店的运行环境以及使用的服务。',
+                'title' => '关于',
+
+                'general' => [
+                    'info' => '此商店的运行环境以及使用的服务。',
+                    'title' => '常规',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => '已缓存',
+                        'database' => '数据库',
+                        'drivers' => '驱动',
+                        'environment' => '环境',
+                        'mail' => '邮件',
+                        'search' => '搜索',
+                        'storage' => '存储',
+                    ],
+
+                    'labels' => [
+                        'application-name' => '应用名称',
+                        'broadcast' => '广播',
+                        'cache' => '缓存',
+                        'composer-version' => 'Composer 版本',
+                        'config' => '配置',
+                        'debug-mode' => '调试模式',
+                        'disk' => '磁盘',
+                        'engine' => '引擎',
+                        'environment' => '环境',
+                        'events' => '事件',
+                        'laravel-version' => 'Laravel 版本',
+                        'link' => '公共链接',
+                        'locale' => '语言',
+                        'log' => '日志',
+                        'maintenance-mode' => '维护模式',
+                        'php-version' => 'PHP 版本',
+                        'queue' => '队列',
+                        'routes' => '路由',
+                        'session' => '会话',
+                        'status' => '状态',
+                        'timezone' => '时区',
+                        'transport' => '传输方式',
+                        'url' => 'URL',
+                        'version' => '版本',
+                        'views' => '视图',
+                    ],
+
+                    'values' => [
+                        'not-available' => '不可用',
+                        'not-configured' => '未配置',
+                    ],
+                ],
+            ],
+
             'back-btn' => '返回',
             'delete' => '删除',
             'enable-at-least-one-payment' => '至少启用一种支付方式。',

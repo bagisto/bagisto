@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'यह स्टोर किस पर चलता है और कौन सी सेवाएँ उपयोग करता है।',
+                'title' => 'परिचय',
+
+                'general' => [
+                    'info' => 'यह स्टोर किस पर चलता है और कौन सी सेवाएँ उपयोग करता है।',
+                    'title' => 'सामान्य',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'कैश किया गया',
+                        'database' => 'डेटाबेस',
+                        'drivers' => 'ड्राइवर',
+                        'environment' => 'एनवायरनमेंट',
+                        'mail' => 'मेल',
+                        'search' => 'खोज',
+                        'storage' => 'स्टोरेज',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'एप्लिकेशन नाम',
+                        'broadcast' => 'ब्रॉडकास्ट',
+                        'cache' => 'कैश',
+                        'composer-version' => 'Composer संस्करण',
+                        'config' => 'कॉन्फ़िगरेशन',
+                        'debug-mode' => 'डिबग मोड',
+                        'disk' => 'डिस्क',
+                        'engine' => 'इंजन',
+                        'environment' => 'एनवायरनमेंट',
+                        'events' => 'इवेंट',
+                        'laravel-version' => 'Laravel संस्करण',
+                        'link' => 'सार्वजनिक लिंक',
+                        'locale' => 'लोकेल',
+                        'log' => 'लॉग',
+                        'maintenance-mode' => 'रखरखाव मोड',
+                        'php-version' => 'PHP संस्करण',
+                        'queue' => 'कतार',
+                        'routes' => 'रूट',
+                        'session' => 'सेशन',
+                        'status' => 'स्थिति',
+                        'timezone' => 'समय क्षेत्र',
+                        'transport' => 'ट्रांसपोर्ट',
+                        'url' => 'URL',
+                        'version' => 'संस्करण',
+                        'views' => 'व्यू',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'उपलब्ध नहीं',
+                        'not-configured' => 'कॉन्फ़िगर नहीं किया गया',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'वापस जाएं',
             'delete' => 'हटाएं',
             'enable-at-least-one-payment' => 'कम से कम एक भुगतान विधि सक्षम करें।',

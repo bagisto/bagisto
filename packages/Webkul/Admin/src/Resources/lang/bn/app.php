@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'এই স্টোরটি কীসের উপর চলছে এবং কোন পরিষেবাগুলি ব্যবহার করে।',
+                'title' => 'সম্পর্কে',
+
+                'general' => [
+                    'info' => 'এই স্টোরটি কীসের উপর চলছে এবং কোন পরিষেবাগুলি ব্যবহার করে।',
+                    'title' => 'সাধারণ',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'ক্যাশ করা',
+                        'database' => 'ডাটাবেস',
+                        'drivers' => 'ড্রাইভার',
+                        'environment' => 'এনভায়রনমেন্ট',
+                        'mail' => 'মেইল',
+                        'search' => 'সার্চ',
+                        'storage' => 'স্টোরেজ',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'অ্যাপ্লিকেশনের নাম',
+                        'broadcast' => 'ব্রডকাস্ট',
+                        'cache' => 'ক্যাশ',
+                        'composer-version' => 'Composer সংস্করণ',
+                        'config' => 'কনফিগারেশন',
+                        'debug-mode' => 'ডিবাগ মোড',
+                        'disk' => 'ডিস্ক',
+                        'engine' => 'ইঞ্জিন',
+                        'environment' => 'এনভায়রনমেন্ট',
+                        'events' => 'ইভেন্ট',
+                        'laravel-version' => 'Laravel সংস্করণ',
+                        'link' => 'পাবলিক লিঙ্ক',
+                        'locale' => 'লোকেল',
+                        'log' => 'লগ',
+                        'maintenance-mode' => 'রক্ষণাবেক্ষণ মোড',
+                        'php-version' => 'PHP সংস্করণ',
+                        'queue' => 'কিউ',
+                        'routes' => 'রুট',
+                        'session' => 'সেশন',
+                        'status' => 'স্ট্যাটাস',
+                        'timezone' => 'টাইমজোন',
+                        'transport' => 'ট্রান্সপোর্ট',
+                        'url' => 'URL',
+                        'version' => 'সংস্করণ',
+                        'views' => 'ভিউ',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'উপলব্ধ নয়',
+                        'not-configured' => 'কনফিগার করা নেই',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'পিছনে',
             'delete' => 'মুছে ফেলুন',
             'enable-at-least-one-payment' => 'অন্তত একটি পেমেন্ট মেথড সক্রিয় করুন।',

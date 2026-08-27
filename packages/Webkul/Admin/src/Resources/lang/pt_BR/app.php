@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'Em que esta loja funciona e quais serviços ela utiliza.',
+                'title' => 'Sobre',
+
+                'general' => [
+                    'info' => 'Em que esta loja funciona e quais serviços ela utiliza.',
+                    'title' => 'Geral',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'Em cache',
+                        'database' => 'Banco de dados',
+                        'drivers' => 'Drivers',
+                        'environment' => 'Ambiente',
+                        'mail' => 'E-mail',
+                        'search' => 'Busca',
+                        'storage' => 'Armazenamento',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'Nome do aplicativo',
+                        'broadcast' => 'Transmissão',
+                        'cache' => 'Cache',
+                        'composer-version' => 'Versão do Composer',
+                        'config' => 'Configuração',
+                        'debug-mode' => 'Modo de depuração',
+                        'disk' => 'Disco',
+                        'engine' => 'Motor',
+                        'environment' => 'Ambiente',
+                        'events' => 'Eventos',
+                        'laravel-version' => 'Versão do Laravel',
+                        'link' => 'Link público',
+                        'locale' => 'Idioma',
+                        'log' => 'Registro',
+                        'maintenance-mode' => 'Modo de manutenção',
+                        'php-version' => 'Versão do PHP',
+                        'queue' => 'Fila',
+                        'routes' => 'Rotas',
+                        'session' => 'Sessão',
+                        'status' => 'Status',
+                        'timezone' => 'Fuso horário',
+                        'transport' => 'Transporte',
+                        'url' => 'URL',
+                        'version' => 'Versão',
+                        'views' => 'Visualizações',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'Não disponível',
+                        'not-configured' => 'Não configurado',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'Voltar',
             'delete' => 'Excluir',
             'enable-at-least-one-payment' => 'Ative pelo menos um método de pagamento.',

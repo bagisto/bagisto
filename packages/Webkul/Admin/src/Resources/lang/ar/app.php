@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'ما يعمل عليه هذا المتجر والخدمات التي يستخدمها.',
+                'title' => 'حول',
+
+                'general' => [
+                    'info' => 'ما يعمل عليه هذا المتجر والخدمات التي يستخدمها.',
+                    'title' => 'عام',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'مخزّن مؤقتًا',
+                        'database' => 'قاعدة البيانات',
+                        'drivers' => 'المشغّلات',
+                        'environment' => 'البيئة',
+                        'mail' => 'البريد',
+                        'search' => 'البحث',
+                        'storage' => 'التخزين',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'اسم التطبيق',
+                        'broadcast' => 'البث',
+                        'cache' => 'ذاكرة التخزين المؤقت',
+                        'composer-version' => 'إصدار Composer',
+                        'config' => 'الإعدادات',
+                        'debug-mode' => 'وضع التصحيح',
+                        'disk' => 'القرص',
+                        'engine' => 'المحرك',
+                        'environment' => 'البيئة',
+                        'events' => 'الأحداث',
+                        'laravel-version' => 'إصدار Laravel',
+                        'link' => 'الرابط العام',
+                        'locale' => 'اللغة',
+                        'log' => 'السجل',
+                        'maintenance-mode' => 'وضع الصيانة',
+                        'php-version' => 'إصدار PHP',
+                        'queue' => 'قائمة الانتظار',
+                        'routes' => 'المسارات',
+                        'session' => 'الجلسة',
+                        'status' => 'الحالة',
+                        'timezone' => 'المنطقة الزمنية',
+                        'transport' => 'وسيلة الإرسال',
+                        'url' => 'URL',
+                        'version' => 'الإصدار',
+                        'views' => 'العروض',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'غير متاح',
+                        'not-configured' => 'غير مُهيأ',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'العودة',
             'delete' => 'حذف',
             'enable-at-least-one-payment' => 'تمكين طريقة دفع واحدة على الأقل.',

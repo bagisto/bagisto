@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'What this store runs on and which services it uses.',
+                'title' => 'About',
+
+                'general' => [
+                    'info' => 'What this store runs on and which services it uses.',
+                    'title' => 'General',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'Cached',
+                        'database' => 'Database',
+                        'drivers' => 'Drivers',
+                        'environment' => 'Environment',
+                        'mail' => 'Mail',
+                        'search' => 'Search',
+                        'storage' => 'Storage',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'Application Name',
+                        'broadcast' => 'Broadcast',
+                        'cache' => 'Cache',
+                        'composer-version' => 'Composer Version',
+                        'config' => 'Configuration',
+                        'debug-mode' => 'Debug Mode',
+                        'disk' => 'Disk',
+                        'engine' => 'Engine',
+                        'environment' => 'Environment',
+                        'events' => 'Events',
+                        'laravel-version' => 'Laravel Version',
+                        'link' => 'Public Link',
+                        'locale' => 'Locale',
+                        'log' => 'Log',
+                        'maintenance-mode' => 'Maintenance Mode',
+                        'php-version' => 'PHP Version',
+                        'queue' => 'Queue',
+                        'routes' => 'Routes',
+                        'session' => 'Session',
+                        'status' => 'Status',
+                        'timezone' => 'Timezone',
+                        'transport' => 'Transport',
+                        'url' => 'URL',
+                        'version' => 'Version',
+                        'views' => 'Views',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'Not Available',
+                        'not-configured' => 'Not Configured',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'Back',
             'delete' => 'Delete',
             'enable-at-least-one-payment' => 'Enable at least one payment method.',

@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'На чём работает этот магазин и какие сервисы использует.',
+                'title' => 'О системе',
+
+                'general' => [
+                    'info' => 'На чём работает этот магазин и какие сервисы использует.',
+                    'title' => 'Общие',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'Кэшировано',
+                        'database' => 'База данных',
+                        'drivers' => 'Драйверы',
+                        'environment' => 'Окружение',
+                        'mail' => 'Почта',
+                        'search' => 'Поиск',
+                        'storage' => 'Хранилище',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'Название приложения',
+                        'broadcast' => 'Трансляция',
+                        'cache' => 'Кэш',
+                        'composer-version' => 'Версия Composer',
+                        'config' => 'Конфигурация',
+                        'debug-mode' => 'Режим отладки',
+                        'disk' => 'Диск',
+                        'engine' => 'Движок',
+                        'environment' => 'Окружение',
+                        'events' => 'События',
+                        'laravel-version' => 'Версия Laravel',
+                        'link' => 'Публичная ссылка',
+                        'locale' => 'Язык',
+                        'log' => 'Журнал',
+                        'maintenance-mode' => 'Режим обслуживания',
+                        'php-version' => 'Версия PHP',
+                        'queue' => 'Очередь',
+                        'routes' => 'Маршруты',
+                        'session' => 'Сессия',
+                        'status' => 'Статус',
+                        'timezone' => 'Часовой пояс',
+                        'transport' => 'Транспорт',
+                        'url' => 'URL',
+                        'version' => 'Версия',
+                        'views' => 'Представления',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'Недоступно',
+                        'not-configured' => 'Не настроено',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'Назад',
             'delete' => 'Удалить',
             'enable-at-least-one-payment' => 'Включите хотя бы один способ оплаты.',

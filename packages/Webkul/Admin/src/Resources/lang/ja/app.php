@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'このストアの動作環境と利用しているサービス。',
+                'title' => 'について',
+
+                'general' => [
+                    'info' => 'このストアの動作環境と利用しているサービス。',
+                    'title' => '一般',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'キャッシュ済み',
+                        'database' => 'データベース',
+                        'drivers' => 'ドライバ',
+                        'environment' => '環境',
+                        'mail' => 'メール',
+                        'search' => '検索',
+                        'storage' => 'ストレージ',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'アプリケーション名',
+                        'broadcast' => 'ブロードキャスト',
+                        'cache' => 'キャッシュ',
+                        'composer-version' => 'Composer バージョン',
+                        'config' => '設定',
+                        'debug-mode' => 'デバッグモード',
+                        'disk' => 'ディスク',
+                        'engine' => 'エンジン',
+                        'environment' => '環境',
+                        'events' => 'イベント',
+                        'laravel-version' => 'Laravel バージョン',
+                        'link' => '公開リンク',
+                        'locale' => 'ロケール',
+                        'log' => 'ログ',
+                        'maintenance-mode' => 'メンテナンスモード',
+                        'php-version' => 'PHP バージョン',
+                        'queue' => 'キュー',
+                        'routes' => 'ルート',
+                        'session' => 'セッション',
+                        'status' => 'ステータス',
+                        'timezone' => 'タイムゾーン',
+                        'transport' => 'トランスポート',
+                        'url' => 'URL',
+                        'version' => 'バージョン',
+                        'views' => 'ビュー',
+                    ],
+
+                    'values' => [
+                        'not-available' => '利用できません',
+                        'not-configured' => '未設定',
+                    ],
+                ],
+            ],
+
             'back-btn' => '戻る',
             'delete' => '削除',
             'enable-at-least-one-payment' => '少なくとも1つの支払い方法を有効にしてください。',

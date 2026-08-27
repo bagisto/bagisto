@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'על מה חנות זו פועלת ובאילו שירותים היא משתמשת.',
+                'title' => 'אודות',
+
+                'general' => [
+                    'info' => 'על מה חנות זו פועלת ובאילו שירותים היא משתמשת.',
+                    'title' => 'כללי',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'במטמון',
+                        'database' => 'מסד נתונים',
+                        'drivers' => 'מנהלי התקן',
+                        'environment' => 'סביבה',
+                        'mail' => 'דואר',
+                        'search' => 'חיפוש',
+                        'storage' => 'אחסון',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'שם היישום',
+                        'broadcast' => 'שידור',
+                        'cache' => 'מטמון',
+                        'composer-version' => 'גרסת Composer',
+                        'config' => 'תצורה',
+                        'debug-mode' => 'מצב ניפוי שגיאות',
+                        'disk' => 'דיסק',
+                        'engine' => 'מנוע',
+                        'environment' => 'סביבה',
+                        'events' => 'אירועים',
+                        'laravel-version' => 'גרסת Laravel',
+                        'link' => 'קישור ציבורי',
+                        'locale' => 'שפה',
+                        'log' => 'יומן',
+                        'maintenance-mode' => 'מצב תחזוקה',
+                        'php-version' => 'גרסת PHP',
+                        'queue' => 'תור',
+                        'routes' => 'נתיבים',
+                        'session' => 'הפעלה',
+                        'status' => 'סטטוס',
+                        'timezone' => 'אזור זמן',
+                        'transport' => 'אמצעי שליחה',
+                        'url' => 'URL',
+                        'version' => 'גרסה',
+                        'views' => 'תצוגות',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'לא זמין',
+                        'not-configured' => 'לא מוגדר',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'חזור',
             'delete' => 'מחק',
             'enable-at-least-one-payment' => 'אפשר לפחות אמצעי תשלום אחד.',

@@ -59,7 +59,7 @@ return [
         'key' => 'general.content',
         'name' => 'admin::app.configuration.index.general.content.title',
         'info' => 'admin::app.configuration.index.general.content.info',
-        'icon' => 'settings/store.svg',
+        'icon' => 'settings/content.svg',
         'sort' => 2,
     ], [
         'key' => 'general.content.header_offer',
@@ -3516,7 +3516,7 @@ return [
         'key' => 'file_management.general',
         'name' => 'admin::app.configuration.index.file-management.general.title',
         'info' => 'admin::app.configuration.index.file-management.general.info',
-        'icon' => 'settings/settings.svg',
+        'icon' => 'settings/file-management.svg',
         'sort' => 1,
     ], [
         'key' => 'file_management.general.settings',
@@ -3676,7 +3676,7 @@ return [
         'key' => 'cache_management.general',
         'name' => 'admin::app.configuration.index.cache-management.general.title',
         'info' => 'admin::app.configuration.index.cache-management.general.info',
-        'icon' => 'settings/settings.svg',
+        'icon' => 'settings/cache-management.svg',
         'sort' => 1,
     ], [
         'key' => 'cache_management.general.cache_actions',
@@ -3719,6 +3719,35 @@ return [
                 'validation' => 'nullable|numeric|min:1',
                 'channel_based' => false,
                 'locale_based' => false,
+            ],
+        ],
+    ],
+
+    /**
+     * About.
+     */
+    [
+        'key' => 'about',
+        'name' => 'admin::app.configuration.index.about.title',
+        'info' => 'admin::app.configuration.index.about.info',
+        'sort' => 10,
+    ], [
+        'key' => 'about.general',
+        'name' => 'admin::app.configuration.index.about.general.title',
+        'info' => 'admin::app.configuration.index.about.general.info',
+        'icon' => 'settings/about.svg',
+        'sort' => 1,
+    ], [
+        'key' => 'about.general.system_information',
+        'name' => 'admin::app.configuration.index.about.general.title',
+        'info' => 'admin::app.configuration.index.about.general.info',
+        'sort' => 1,
+        'fields' => [
+            [
+                'name' => 'system_information',
+                'title' => 'admin::app.configuration.index.about.general.title',
+                'type' => 'blade',
+                'path' => 'admin::configuration.custom-views.about',
             ],
         ],
     ],

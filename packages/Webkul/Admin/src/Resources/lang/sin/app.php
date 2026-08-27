@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'මෙම වෙළඳසැල ක්‍රියාත්මක වන පසුබිම සහ භාවිත සේවා.',
+                'title' => 'පිළිබඳව',
+
+                'general' => [
+                    'info' => 'මෙම වෙළඳසැල ක්‍රියාත්මක වන පසුබිම සහ භාවිත සේවා.',
+                    'title' => 'සාමාන්‍ය',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'හැඹිලිගත',
+                        'database' => 'දත්ත සමුදාය',
+                        'drivers' => 'ධාවක',
+                        'environment' => 'පරිසරය',
+                        'mail' => 'තැපෑල',
+                        'search' => 'සෙවීම',
+                        'storage' => 'ගබඩාව',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'යෙදුමේ නම',
+                        'broadcast' => 'විකාශනය',
+                        'cache' => 'හැඹිලිය',
+                        'composer-version' => 'Composer අනුවාදය',
+                        'config' => 'වින්‍යාසය',
+                        'debug-mode' => 'නිදොස් ප්‍රකාරය',
+                        'disk' => 'තැටිය',
+                        'engine' => 'එන්ජිම',
+                        'environment' => 'පරිසරය',
+                        'events' => 'සිදුවීම්',
+                        'laravel-version' => 'Laravel අනුවාදය',
+                        'link' => 'ප්‍රසිද්ධ සබැඳිය',
+                        'locale' => 'පෙදෙසිය',
+                        'log' => 'ලොගය',
+                        'maintenance-mode' => 'නඩත්තු ප්‍රකාරය',
+                        'php-version' => 'PHP අනුවාදය',
+                        'queue' => 'පෝලිම',
+                        'routes' => 'මාර්ග',
+                        'session' => 'සැසිය',
+                        'status' => 'තත්ත්වය',
+                        'timezone' => 'වේලා කලාපය',
+                        'transport' => 'ප්‍රවාහනය',
+                        'url' => 'URL',
+                        'version' => 'අනුවාදය',
+                        'views' => 'දසුන්',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'නොමැත',
+                        'not-configured' => 'වින්‍යාස කර නැත',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'ආපසු',
             'delete' => 'මකන්න',
             'enable-at-least-one-payment' => 'කරුණාකර අවශ්‍යතාවයේ එකක් ගැනීමට හැකියාව සක්‍රිය කරන්න.',

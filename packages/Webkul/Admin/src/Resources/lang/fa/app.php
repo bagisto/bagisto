@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'این فروشگاه بر چه چیزی اجرا می‌شود و از چه سرویس‌هایی استفاده می‌کند.',
+                'title' => 'درباره',
+
+                'general' => [
+                    'info' => 'این فروشگاه بر چه چیزی اجرا می‌شود و از چه سرویس‌هایی استفاده می‌کند.',
+                    'title' => 'عمومی',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'ذخیره‌شده',
+                        'database' => 'پایگاه داده',
+                        'drivers' => 'درایورها',
+                        'environment' => 'محیط',
+                        'mail' => 'ایمیل',
+                        'search' => 'جستجو',
+                        'storage' => 'ذخیره‌سازی',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'نام برنامه',
+                        'broadcast' => 'پخش',
+                        'cache' => 'حافظه نهان',
+                        'composer-version' => 'نسخه Composer',
+                        'config' => 'پیکربندی',
+                        'debug-mode' => 'حالت اشکال‌زدایی',
+                        'disk' => 'دیسک',
+                        'engine' => 'موتور',
+                        'environment' => 'محیط',
+                        'events' => 'رویدادها',
+                        'laravel-version' => 'نسخه Laravel',
+                        'link' => 'پیوند عمومی',
+                        'locale' => 'زبان',
+                        'log' => 'گزارش',
+                        'maintenance-mode' => 'حالت تعمیر',
+                        'php-version' => 'نسخه PHP',
+                        'queue' => 'صف',
+                        'routes' => 'مسیرها',
+                        'session' => 'نشست',
+                        'status' => 'وضعیت',
+                        'timezone' => 'منطقه زمانی',
+                        'transport' => 'روش ارسال',
+                        'url' => 'URL',
+                        'version' => 'نسخه',
+                        'views' => 'نماها',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'در دسترس نیست',
+                        'not-configured' => 'پیکربندی نشده',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'بازگشت',
             'delete' => 'حذف',
             'enable-at-least-one-payment' => 'حداقل یک روش پرداخت را فعال کنید.',

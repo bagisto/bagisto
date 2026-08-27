@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'Bu mağazanın neyin üzerinde çalıştığı ve hangi servisleri kullandığı.',
+                'title' => 'Hakkında',
+
+                'general' => [
+                    'info' => 'Bu mağazanın neyin üzerinde çalıştığı ve hangi servisleri kullandığı.',
+                    'title' => 'Genel',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'Önbelleğe Alındı',
+                        'database' => 'Veritabanı',
+                        'drivers' => 'Sürücüler',
+                        'environment' => 'Ortam',
+                        'mail' => 'Posta',
+                        'search' => 'Arama',
+                        'storage' => 'Depolama',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'Uygulama Adı',
+                        'broadcast' => 'Yayın',
+                        'cache' => 'Önbellek',
+                        'composer-version' => 'Composer Sürümü',
+                        'config' => 'Yapılandırma',
+                        'debug-mode' => 'Hata Ayıklama Modu',
+                        'disk' => 'Disk',
+                        'engine' => 'Motor',
+                        'environment' => 'Ortam',
+                        'events' => 'Olaylar',
+                        'laravel-version' => 'Laravel Sürümü',
+                        'link' => 'Genel Bağlantı',
+                        'locale' => 'Dil',
+                        'log' => 'Günlük',
+                        'maintenance-mode' => 'Bakım Modu',
+                        'php-version' => 'PHP Sürümü',
+                        'queue' => 'Kuyruk',
+                        'routes' => 'Rotalar',
+                        'session' => 'Oturum',
+                        'status' => 'Durum',
+                        'timezone' => 'Saat Dilimi',
+                        'transport' => 'Taşıma',
+                        'url' => 'URL',
+                        'version' => 'Sürüm',
+                        'views' => 'Görünümler',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'Kullanılamıyor',
+                        'not-configured' => 'Yapılandırılmamış',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'Geri',
             'delete' => 'Sil',
             'enable-at-least-one-payment' => 'En az bir ödeme yöntemi etkinleştirin.',

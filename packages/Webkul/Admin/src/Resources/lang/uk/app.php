@@ -4372,6 +4372,60 @@ return [
 
     'configuration' => [
         'index' => [
+            'about' => [
+                'info' => 'На чому працює цей магазин і які сервіси використовує.',
+                'title' => 'Про систему',
+
+                'general' => [
+                    'info' => 'На чому працює цей магазин і які сервіси використовує.',
+                    'title' => 'Загальні',
+
+                    'sections' => [
+                        'bagisto' => 'Bagisto',
+                        'cache' => 'Кешовано',
+                        'database' => 'База даних',
+                        'drivers' => 'Драйвери',
+                        'environment' => 'Середовище',
+                        'mail' => 'Пошта',
+                        'search' => 'Пошук',
+                        'storage' => 'Сховище',
+                    ],
+
+                    'labels' => [
+                        'application-name' => 'Назва застосунку',
+                        'broadcast' => 'Трансляція',
+                        'cache' => 'Кеш',
+                        'composer-version' => 'Версія Composer',
+                        'config' => 'Конфігурація',
+                        'debug-mode' => 'Режим налагодження',
+                        'disk' => 'Диск',
+                        'engine' => 'Рушій',
+                        'environment' => 'Середовище',
+                        'events' => 'Події',
+                        'laravel-version' => 'Версія Laravel',
+                        'link' => 'Публічне посилання',
+                        'locale' => 'Мова',
+                        'log' => 'Журнал',
+                        'maintenance-mode' => 'Режим обслуговування',
+                        'php-version' => 'Версія PHP',
+                        'queue' => 'Черга',
+                        'routes' => 'Маршрути',
+                        'session' => 'Сесія',
+                        'status' => 'Статус',
+                        'timezone' => 'Часовий пояс',
+                        'transport' => 'Транспорт',
+                        'url' => 'URL',
+                        'version' => 'Версія',
+                        'views' => 'Подання',
+                    ],
+
+                    'values' => [
+                        'not-available' => 'Недоступно',
+                        'not-configured' => 'Не налаштовано',
+                    ],
+                ],
+            ],
+
             'back-btn' => 'Назад',
             'delete' => 'Видалити',
             'enable-at-least-one-payment' => 'Увімкніть принаймні один спосіб оплати.',
