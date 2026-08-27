@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed Admin → Configuration pages keeping a two-column layout on small screens, which squeezed the settings panel; the description and panel now stack.
 
+- #11445 [fixed] - Fixed Full Page Cache configuration refusing to save. Its lifetime field carries Laravel's `nullable` rule, which was passed to Vee Validate in the browser and threw "No such validator 'nullable' exists"; rules only the server understands are no longer sent to it.
+
 - #11441 [fixed] - Fixed numeric datagrid filters ignoring a value's decimal part, so an order-total filter of 50.20 matched on 50. Integer and decimal columns now compare the value exactly and can be filtered by operator — equals, greater than, less than, or a range.
 
 - #11440 [fixed] - Fixed the checkout payment-method radio button overlapping the method's logo and name on a mobile viewport; the card now reserves space for the radio so its content stays clear.

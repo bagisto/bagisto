@@ -7,6 +7,17 @@ use Illuminate\Support\Str;
 class ItemField
 {
     /**
+     * Rules Laravel applies on its own, which Vee Validate has no validator for.
+     */
+    const SERVER_ONLY_RULES = [
+        'nullable',
+        'sometimes',
+        'present',
+        'filled',
+        'bail',
+    ];
+
+    /**
      * Laravel to Vee Validation mappings.
      *
      * @var array
@@ -95,6 +106,9 @@ class ItemField
 
     /**
      * Get validation of config item.
+     *
+     * These rules are read by Vee Validate in the browser, so the ones Laravel alone understands
+     * are dropped rather than passed on for it to refuse.
      */
     public function getValidations(): ?string
     {
@@ -102,15 +116,27 @@ class ItemField
             return '';
         }
 
-        foreach ($this->veeValidateMappings as $laravelRule => $veeValidateRule) {
-            if (! array_key_exists($this->getType(), $veeValidateRule)) {
-                continue;
-            }
+        $rules = collect(explode('|', $this->validation))
+            ->reject(fn ($rule) => in_array(Str::before($rule, ':'), self::SERVER_ONLY_RULES))
+            ->map(fn ($rule) => $this->toVeeValidateRule($rule))
+            ->filter()
+            ->all();
 
-            $this->validation = str_replace($laravelRule, $veeValidateRule[$this->getType()], $this->validation);
+        return implode('|', $rules);
+    }
+
+    /**
+     * A single rule under the name Vee Validate knows it by.
+     */
+    protected function toVeeValidateRule(string $rule): string
+    {
+        $name = Str::before($rule, ':');
+
+        if (! array_key_exists($this->getType(), $this->veeValidateMappings[$name] ?? [])) {
+            return $rule;
         }
 
-        return $this->validation;
+        return Str::replaceFirst($name, $this->veeValidateMappings[$name][$this->getType()], $rule);
     }
 
     /**
