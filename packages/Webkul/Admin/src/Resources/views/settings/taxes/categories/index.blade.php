@@ -58,6 +58,7 @@
             <x-admin::datagrid
                 :src="route('admin.settings.taxes.categories.index')"
                 ref="datagrid"
+                :shimmer-columns="4"
             >
                 <template #body="{
                     isLoading,
@@ -68,7 +69,9 @@
                     performAction
                 }">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.body />
+                        <x-admin::shimmer.datagrid.table.body
+                            :columns="4"
+                        />
                     </template>
 
                     <template v-else>

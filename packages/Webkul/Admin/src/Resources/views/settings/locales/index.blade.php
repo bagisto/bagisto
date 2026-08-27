@@ -56,6 +56,7 @@
             <x-admin::datagrid
                 :src="route('admin.settings.locales.index')"
                 ref="datagrid"
+                :shimmer-columns="5"
             >
                 <!-- DataGrid Body -->
                 <template #body="{
@@ -67,7 +68,9 @@
                     performAction
                 }">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.body />
+                        <x-admin::shimmer.datagrid.table.body
+                            :columns="5"
+                        />
                     </template>
 
                     <template v-else>

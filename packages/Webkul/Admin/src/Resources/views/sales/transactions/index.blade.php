@@ -37,6 +37,8 @@
                 :src="route('admin.sales.transactions.index')"
                 :isMultiRow="true"
                 ref="datagrid"
+                :shimmer-columns="8"
+                :shimmer-multi-row="false"
             >
                 <template #body="{
                     isLoading,
@@ -47,7 +49,9 @@
                     performAction
                 }">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.body />
+                        <x-admin::shimmer.datagrid.table.body
+                            :columns="8"
+                        />
                     </template>
 
                     <template v-else>

@@ -1,4 +1,9 @@
-@props(['isMultiRow' => false])
+@props([
+    'isMultiRow' => false,
+    'shimmerColumns' => 6,
+    'shimmerMultiRow' => null,
+    'shimmerMassAction' => null,
+])
 
 <v-datagrid {{ $attributes }}>
     {{ $slot }}
@@ -14,7 +19,12 @@
             <x-admin::datagrid.toolbar />
 
             <div class="mt-4 flex">
-                <x-admin::datagrid.table :isMultiRow="$isMultiRow">
+                <x-admin::datagrid.table
+                    :isMultiRow="$isMultiRow"
+                    :shimmerColumns="$shimmerColumns"
+                    :shimmerMultiRow="$shimmerMultiRow"
+                    :shimmerMassAction="$shimmerMassAction"
+                >
                     <template #header="{
                         isLoading,
                         available,

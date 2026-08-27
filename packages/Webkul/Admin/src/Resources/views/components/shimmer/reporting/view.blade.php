@@ -26,7 +26,14 @@
 </div>
 
 <div class="table-responsive box-shadow grid w-full overflow-hidden rounded-sm bg-white dark:bg-gray-900">
-    <x-admin::shimmer.datagrid.table.head />
+    <x-admin::shimmer.datagrid.table.head
+        :columns="3"
+        :actions="false"
+    />
 
-    <x-admin::shimmer.datagrid.table.body />
+    <x-admin::shimmer.datagrid.table.body
+        :columns="3"
+        :rows="10"
+        :actions="false"
+    />
 </div>

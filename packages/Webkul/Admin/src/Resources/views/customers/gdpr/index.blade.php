@@ -26,6 +26,7 @@
                 <x-admin::datagrid
                     src="{{ route('admin.customers.gdpr.index') }}"
                     ref="datagrid"
+                    :shimmer-columns="7"
                 >
                     <template #body="{
                         isLoading,
@@ -36,7 +37,9 @@
                         performAction
                     }">
                         <template v-if="isLoading">
-                            <x-admin::shimmer.datagrid.table.body />
+                            <x-admin::shimmer.datagrid.table.body
+                                :columns="7"
+                            />
                         </template>
 
                         <template v-else>

@@ -1,4 +1,18 @@
-@props(['isMultiRow' => false])
+@props([
+    'isMultiRow' => false,
+    'shimmerColumns' => 6,
+    'shimmerMultiRow' => null,
+    'shimmerMassAction' => null,
+])
+
+@php
+    /**
+     * Whether the placeholder rows group their columns. Follows the grid unless the page
+     * says otherwise, for a grid that cards on mobile yet still lays its rows out as one
+     * column per field.
+     */
+    $shimmerMultiRow = $shimmerMultiRow ?? $isMultiRow;
+@endphp
 
 <v-datagrid-table
     :is-loading="isLoading"
@@ -30,7 +44,11 @@
                     :perform-action="performAction"
                 >
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.head :isMultiRow="$isMultiRow" />
+                        <x-admin::shimmer.datagrid.table.head
+                            :isMultiRow="$shimmerMultiRow"
+                            :columns="$shimmerColumns"
+                            :massAction="$shimmerMassAction"
+                        />
                     </template>
 
                     <template v-else>
@@ -101,7 +119,11 @@
                     :perform-action="performAction"
                 >
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.body :isMultiRow="$isMultiRow" />
+                        <x-admin::shimmer.datagrid.table.body
+                            :isMultiRow="$shimmerMultiRow"
+                            :columns="$shimmerColumns"
+                            :massAction="$shimmerMassAction"
+                        />
                     </template>
 
                     <template v-else>

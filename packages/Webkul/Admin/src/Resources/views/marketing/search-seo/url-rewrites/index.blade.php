@@ -52,6 +52,8 @@
             <x-admin::datagrid
                 :src="route('admin.marketing.search_seo.url_rewrites.index')"
                 ref="datagrid"
+                :shimmer-columns="8"
+                :shimmer-mass-action="true"
             >
                 <template #body="{
                     isLoading,
@@ -62,7 +64,10 @@
                     performAction
                 }">
                     <template v-if="isLoading">
-                        <x-admin::shimmer.datagrid.table.body />
+                        <x-admin::shimmer.datagrid.table.body
+                            :columns="8"
+                            :massAction="true"
+                        />
                     </template>
 
                     <template v-else>

@@ -255,7 +255,7 @@
 
                     this.$nextTick(() => {
                         this.calendar
-                            ? this.calendar.setDate([this.draft.start, this.draft.end], false)
+                            ? this.showRange(this.draft.start, this.draft.end)
                             : this.mountCalendar();
                     });
                 },
@@ -286,6 +286,22 @@
                     if (! this.$el.contains(event.target)) {
                         this.isOpen = false;
                     }
+                },
+
+                /**
+                 * Move the calendar onto a range, anchored on the month the range opens in.
+                 *
+                 * Setting the dates alone would leave the calendar on the month the range ends in,
+                 * so the panel would step forward each time it was reopened.
+                 *
+                 * @param {string} start
+                 * @param {string} end
+                 * @returns {void}
+                 */
+                showRange(start, end) {
+                    this.calendar?.setDate([start, end], false);
+
+                    this.calendar?.jumpToDate(start, false);
                 },
 
                 /**
@@ -329,7 +345,7 @@
                  * @returns {void}
                  */
                 applyPreset(preset) {
-                    this.calendar?.setDate([preset.start, preset.end], false);
+                    this.showRange(preset.start, preset.end);
 
                     this.apply(preset.start, preset.end);
                 },

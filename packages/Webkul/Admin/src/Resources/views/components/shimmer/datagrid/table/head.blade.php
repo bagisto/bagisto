@@ -5,6 +5,7 @@
     'massAction' => null,
     'template'   => null,
     'columns'    => 6,
+    'actions'    => true,
 ])
 
 @php
@@ -54,7 +55,7 @@
             @else
                 <div @class([
                     'shimmer h-4.25 w-full max-w-25',
-                    'place-self-end' => $column === (int) $columns - 1,
+                    'place-self-end' => $actions && $column === (int) $columns - 1,
                 ])></div>
             @endif
         @endfor
