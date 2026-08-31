@@ -102,7 +102,7 @@ return [
     */
 
     'serializer' => [
-        'driver' => env('CACHE_STORE', env('CACHE_DRIVER', 'file')),
+        'driver' => env('CACHE_STORE', env('CACHE_DRIVER', 'database')),
         'cache' => CacheDefinitionCache::class,
     ],
 

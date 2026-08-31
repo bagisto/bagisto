@@ -313,10 +313,29 @@ class SystemInformation
                 continue;
             }
 
-            $rows[$this->label($section, $key)] = $value;
+            $rows[$this->label($section, $key)] = $section === 'drivers'
+                ? $this->driver($value)
+                : $value;
         }
 
         return $rows;
+    }
+
+    /**
+     * How a driver reads, so `sync` is shown by name rather than as the identifier it is set by.
+     * One this page has no name for is read as words rather than left lowercase.
+     */
+    protected function driver(mixed $value): mixed
+    {
+        if (is_array($value)) {
+            return array_map(fn ($entry) => $this->driver($entry), $value);
+        }
+
+        if (! is_string($value)) {
+            return $value;
+        }
+
+        return $this->translate('drivers.'.$value, $value);
     }
 
     /**
