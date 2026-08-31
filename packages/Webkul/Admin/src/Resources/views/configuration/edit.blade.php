@@ -13,7 +13,7 @@
         {{ $name = $activeConfiguration->getName() }}
     </x-slot>
 
-    <!-- Configuration form fields -->
+    <!-- Configuration Form Fields -->
     <x-admin::form
         action=""
         enctype="multipart/form-data"
@@ -37,102 +37,115 @@
                     @lang('admin::app.configuration.index.back-btn')
                 </a>
 
-                <button
-                    type="submit"
-                    class="primary-button"
-                >
-                    @lang('admin::app.configuration.index.save-btn')
-                </button>
+                @if ($activeConfiguration->showsSaveButton())
+                    <button
+                        type="submit"
+                        class="primary-button"
+                    >
+                        @lang('admin::app.configuration.index.save-btn')
+                    </button>
+                @endif
             </div>
         </div>
 
-        <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
-            <div class="flex items-center gap-x-1">
-                <!-- Channel Switcher -->
-                <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
-                    <!-- Dropdown Toggler -->
-                    <x-slot:toggle>
-                        <button
-                            type="button"
-                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
-                        >
-                            <span class="icon-store text-2xl"></span>
+        @if (
+            $activeConfiguration->showsChannelSwitcher()
+            || $activeConfiguration->showsLocaleSwitcher()
+        )
+            <div class="mt-7 flex items-center justify-between gap-4 max-md:flex-wrap">
+                <div class="flex items-center gap-x-1">
+                    <!-- Channel Switcher -->
+                    @if ($activeConfiguration->showsChannelSwitcher())
+                        <x-admin::dropdown :class="$channels->count() <= 1 ? 'hidden' : ''">
+                            <!-- Dropdown Toggler -->
+                            <x-slot:toggle>
+                                <button
+                                    type="button"
+                                    class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
+                                >
+                                    <span class="icon-store text-2xl"></span>
 
-                            <span v-pre>{{ $currentChannel->name }}</span>
+                                    <span v-pre>{{ $currentChannel->name }}</span>
 
-                            <input
-                                type="hidden"
-                                name="channel"
-                                value="{{ $currentChannel->code }}"
-                            />
+                                    <input
+                                        type="hidden"
+                                        name="channel"
+                                        value="{{ $currentChannel->code }}"
+                                    />
 
-                            <span class="icon-sort-down text-2xl"></span>
-                        </button>
-                    </x-slot>
+                                    <span class="icon-sort-down text-2xl"></span>
+                                </button>
+                            </x-slot>
 
-                    <!-- Dropdown Content -->
-                    <x-slot:content class="p-0!">
-                        @foreach ($channels as $channel)
-                            <a
-                                href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $channel->default_locale?->code ?? $currentLocale->code]) }}"
-                                class="flex cursor-pointer gap-2.5 px-5 py-2 text-base hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
-                                v-pre
-                            >
-                                {{ $channel->name }}
-                            </a>
-                        @endforeach
-                    </x-slot>
-                </x-admin::dropdown>
+                            <!-- Dropdown Content -->
+                            <x-slot:content class="p-0!">
+                                @foreach ($channels as $channel)
+                                    <a
+                                        href="?{{ Arr::query(['channel' => $channel->code, 'locale' => $channel->default_locale?->code ?? $currentLocale->code]) }}"
+                                        class="flex cursor-pointer gap-2.5 px-5 py-2 text-base hover:bg-gray-100 dark:text-white dark:hover:bg-gray-950"
+                                        v-pre
+                                    >
+                                        {{ $channel->name }}
+                                    </a>
+                                @endforeach
+                            </x-slot>
+                        </x-admin::dropdown>
+                    @endif
 
-                <!-- Locale Switcher -->
-                <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">
-                    <!-- Dropdown Toggler -->
-                    <x-slot:toggle>
-                        <button
-                            type="button"
-                            class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
-                        >
-                            <span class="icon-language text-2xl"></span>
+                    <!-- Locale Switcher -->
+                    @if ($activeConfiguration->showsLocaleSwitcher())
+                        <x-admin::dropdown :class="$currentChannel->locales->count() <= 1 ? 'hidden' : ''">
+                            <!-- Dropdown Toggler -->
+                            <x-slot:toggle>
+                                <button
+                                    type="button"
+                                    class="transparent-button px-1 py-1.5 hover:bg-gray-200 focus:bg-gray-200 dark:text-white dark:hover:bg-gray-800 dark:focus:bg-gray-800"
+                                >
+                                    <span class="icon-language text-2xl"></span>
 
-                            <span v-pre>{{ $currentLocale->name }}</span>
-                            
-                            <input
-                                type="hidden"
-                                name="locale"
-                                value="{{ $currentLocale->code }}"
-                            />
+                                    <span v-pre>{{ $currentLocale->name }}</span>
 
-                            <span class="icon-sort-down text-2xl"></span>
-                        </button>
-                    </x-slot>
+                                    <input
+                                        type="hidden"
+                                        name="locale"
+                                        value="{{ $currentLocale->code }}"
+                                    />
 
-                    <!-- Dropdown Content -->
-                    <x-slot:content class="p-0!">
-                        @foreach ($currentChannel->locales->sortBy('name') as $locale)
-                            <a
-                                href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
-                                class="flex gap-2.5 px-5 py-2 text-base  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
-                                v-pre
-                            >
-                                {{ $locale->name }}
-                            </a>
-                        @endforeach
-                    </x-slot>
-                </x-admin::dropdown>
-            </div>
-        </div>
+                                    <span class="icon-sort-down text-2xl"></span>
+                                </button>
+                            </x-slot>
 
-        <div class="mt-6 grid grid-cols-[1fr_2fr] gap-10 max-xl:grid-cols-1 max-xl:gap-4">
-            @foreach ($activeConfiguration->getChildren() as $child)
-                <div class="grid content-start gap-2.5">
-                    <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
-                        {{ $child->getName() }}
-                    </p>
-
-                    <p class="leading-[140%] text-gray-600 dark:text-gray-300">
-                        {!! $child->getInfo() !!}
-                    </p>
+                            <!-- Dropdown Content -->
+                            <x-slot:content class="p-0!">
+                                @foreach ($currentChannel->locales->sortBy('name') as $locale)
+                                    <a
+                                        href="?{{ Arr::query(['channel' => $currentChannel->code, 'locale' => $locale->code]) }}"
+                                        class="flex gap-2.5 px-5 py-2 text-base  cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-950 dark:text-white {{ $locale->code == $currentLocale->code ? 'bg-gray-100 dark:bg-gray-950' : ''}}"
+                                        v-pre
+                                    >
+                                        {{ $locale->name }}
+                                    </a>
+                                @endforeach
+                            </x-slot>
+                        </x-admin::dropdown>
+                    @endif
                 </div>
+            </div>
+        @endif
+
+        <div class="mt-6 grid gap-10 max-xl:gap-4 {{ $activeConfiguration->showsTitleSection() ? 'grid-cols-[1fr_2fr] max-xl:grid-cols-1' : 'grid-cols-1' }}">
+            @foreach ($activeConfiguration->getChildren() as $child)
+                @if ($activeConfiguration->showsTitleSection())
+                    <div class="grid content-start gap-2.5">
+                        <p class="text-base font-semibold text-gray-600 dark:text-gray-300">
+                            {{ $child->getName() }}
+                        </p>
+
+                        <p class="leading-[140%] text-gray-600 dark:text-gray-300">
+                            {!! $child->getInfo() !!}
+                        </p>
+                    </div>
+                @endif
 
                 <div class="box-shadow rounded-sm bg-white p-4 dark:bg-gray-900">
                     @foreach ($child->getFields() as $field)

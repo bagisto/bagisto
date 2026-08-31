@@ -7,6 +7,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Webkul\Core\Contracts\CoreConfig;
 use Webkul\Core\Eloquent\Repository;
 
 class CoreConfigRepository extends Repository
@@ -16,7 +17,7 @@ class CoreConfigRepository extends Repository
      */
     public function model(): string
     {
-        return 'Webkul\Core\Contracts\CoreConfig';
+        return CoreConfig::class;
     }
 
     /**
@@ -26,16 +27,9 @@ class CoreConfigRepository extends Repository
     {
         Event::dispatch('core.configuration.save.before');
 
-        if (
-            $data['locale']
-            || $data['channel']
-        ) {
-            $locale = $data['locale'];
-            $channel = $data['channel'];
+        $locale = Arr::pull($data, 'locale') ?: core()->getRequestedLocaleCode();
 
-            unset($data['locale']);
-            unset($data['channel']);
-        }
+        $channel = Arr::pull($data, 'channel') ?: core()->getRequestedChannelCode();
 
         foreach ($data as $method => $fieldData) {
             $recursiveData = $this->recursiveArray($fieldData, $method);

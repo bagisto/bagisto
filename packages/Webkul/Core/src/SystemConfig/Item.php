@@ -18,7 +18,8 @@ class Item
         public string $key,
         public string $name,
         public ?string $route = null,
-        public ?int $sort = null
+        public ?int $sort = null,
+        public ?array $layout = null
     ) {}
 
     /**
@@ -27,14 +28,6 @@ class Item
     public function getName(): string
     {
         return $this->name ?? '';
-    }
-
-    /**
-     * Format options.
-     */
-    private function formatOptions($options)
-    {
-        return is_array($options) ? $options : (is_string($options) ? $options : []);
     }
 
     /**
@@ -128,5 +121,54 @@ class Item
         }
 
         return $this->children;
+    }
+
+    /**
+     * Whether the page shows the describing column beside each group of fields.
+     */
+    public function showsTitleSection(): bool
+    {
+        return $this->shows('title_section');
+    }
+
+    /**
+     * Whether the page shows the button that saves the form.
+     */
+    public function showsSaveButton(): bool
+    {
+        return $this->shows('save_button');
+    }
+
+    /**
+     * Whether the page shows the channel switcher.
+     */
+    public function showsChannelSwitcher(): bool
+    {
+        return $this->shows('channel_switcher');
+    }
+
+    /**
+     * Whether the page shows the locale switcher.
+     */
+    public function showsLocaleSwitcher(): bool
+    {
+        return $this->shows('locale_switcher');
+    }
+
+    /**
+     * Whether a piece of the page's furniture is shown. Everything is shown unless the
+     * item turns it off, so an item that declares no layout renders as it always has.
+     */
+    protected function shows(string $element): bool
+    {
+        return (bool) ($this->layout[$element] ?? true);
+    }
+
+    /**
+     * Format options.
+     */
+    private function formatOptions($options)
+    {
+        return is_array($options) ? $options : (is_string($options) ? $options : []);
     }
 }

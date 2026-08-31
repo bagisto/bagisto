@@ -3678,6 +3678,11 @@ return [
         'info' => 'admin::app.configuration.index.cache-management.general.info',
         'icon' => 'settings/cache-management.svg',
         'sort' => 1,
+        'layout' => [
+            'save_button' => false,
+            'channel_switcher' => false,
+            'locale_switcher' => false,
+        ],
     ], [
         'key' => 'cache_management.general.cache_actions',
         'name' => 'admin::app.configuration.index.cache-management.general.cache-actions.title',
@@ -3737,6 +3742,12 @@ return [
         'info' => 'admin::app.configuration.index.about.general.info',
         'icon' => 'settings/about.svg',
         'sort' => 1,
+        'layout' => [
+            'title_section' => false,
+            'save_button' => false,
+            'channel_switcher' => false,
+            'locale_switcher' => false,
+        ],
     ], [
         'key' => 'about.general.system_information',
         'name' => 'admin::app.configuration.index.about.general.title',
