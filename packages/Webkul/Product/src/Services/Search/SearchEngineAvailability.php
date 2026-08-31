@@ -70,15 +70,22 @@ class SearchEngineAvailability
     }
 
     /**
-     * Ask the engine where it stands and record the verdict.
+     * Ask the engine where it stands. The verdict is recorded only when it describes
+     * the saved settings.
      */
-    public function probe(SearchEngineEnum $engine): array
+    public function probe(SearchEngineEnum $engine, array $overrides = []): array
     {
         if (! $this->isConnectable($engine)) {
             return $this->record($engine, ['status' => SearchEngineStatusEnum::AVAILABLE->value]);
         }
 
-        return $this->record($engine, $this->connection($engine)->probe());
+        $connection = $this->connection($engine);
+
+        $verdict = $connection->probe($overrides);
+
+        return $connection->describesRecorded($overrides)
+            ? $this->record($engine, $verdict)
+            : $verdict;
     }
 
     /**

@@ -4419,9 +4419,20 @@ return [
                         'views' => 'Views',
                     ],
 
+                    'statuses' => [
+                        'available' => 'Disponibil',
+                        'incompatible' => 'Incompatibil',
+                        'misconfigured' => 'Configurat greșit',
+                        'unauthorized' => 'Neautorizat',
+                        'unreachable' => 'Inaccesibil',
+                    ],
+
                     'values' => [
+                        'no' => 'Nu',
                         'not-available' => 'Not Available',
+                        'not-checked' => 'Neverificat',
                         'not-configured' => 'Not Configured',
+                        'yes' => 'Da',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'Setări',
                         'info' => 'Folosit când un mod de căutare este setat pe Elasticsearch.',
+                        'auth-type' => 'Autentificare',
+                        'auth-type-info' => 'Cum este accesat clusterul și cum se face autentificarea. Sunt afișate doar câmpurile necesare.',
+
+                        'auth-types' => [
+                            'none' => 'Fără autentificare',
+                            'basic' => 'Nume de utilizator și parolă',
+                            'api_key' => 'Cheie API',
+                            'cloud_api_key' => 'Elastic Cloud cu cheie API',
+                            'cloud_basic' => 'Elastic Cloud cu nume de utilizator și parolă',
+                        ],
+
                         'hosts' => 'Gazde',
                         'hosts-info' => 'Unde este accesibil clusterul, de exemplu http://localhost:9200. Separați mai multe gazde prin virgulă. Lăsați gol pentru a folosi fișierul de mediu.',
                         'username' => 'Nume de utilizator',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'Parolă',
                         'password-info' => 'Parola asociată numelui de utilizator.',
                         'api-key' => 'Cheie API',
-                        'api-key-info' => 'Folosită în locul numelui de utilizator și al parolei. Setarea ei comută conexiunea pe autentificare cu cheie API.',
+                        'api-key-info' => 'Cheia cu care se face autentificarea în cluster.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'Pentru Elastic Cloud. Setarea lui comută conexiunea pe Elastic Cloud, împreună cu cheia API.',
+                        'cloud-id-info' => 'Cloud ID-ul implementării Elastic Cloud.',
                         'index-prefix' => 'Prefix de index',
                         'index-prefix-info' => 'Adăugat înaintea fiecărui nume de index, astfel încât mai multe magazine să poată folosi un cluster.',
                         'min-query-length' => 'Lungimea minimă a interogării',

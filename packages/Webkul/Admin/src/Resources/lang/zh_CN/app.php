@@ -4419,9 +4419,20 @@ return [
                         'views' => '视图',
                     ],
 
+                    'statuses' => [
+                        'available' => '可用',
+                        'incompatible' => '不兼容',
+                        'misconfigured' => '配置有误',
+                        'unauthorized' => '未授权',
+                        'unreachable' => '无法连接',
+                    ],
+
                     'values' => [
+                        'no' => '否',
                         'not-available' => '不可用',
+                        'not-checked' => '未检查',
                         'not-configured' => '未配置',
+                        'yes' => '是',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => '设置',
                         'info' => '当搜索模式设为 Elasticsearch 时使用。',
+                        'auth-type' => '身份验证',
+                        'auth-type-info' => '如何连接集群并登录。仅显示所需的字段。',
+
+                        'auth-types' => [
+                            'none' => '无身份验证',
+                            'basic' => '用户名和密码',
+                            'api_key' => 'API 密钥',
+                            'cloud_api_key' => '使用 API 密钥的 Elastic Cloud',
+                            'cloud_basic' => '使用用户名和密码的 Elastic Cloud',
+                        ],
+
                         'hosts' => '主机',
                         'hosts-info' => '集群的访问地址，例如 http://localhost:9200。多个主机用逗号分隔。留空则使用环境文件。',
                         'username' => '用户名',
@@ -5597,9 +5619,9 @@ return [
                         'password' => '密码',
                         'password-info' => '与用户名配对的密码。',
                         'api-key' => 'API 密钥',
-                        'api-key-info' => '用于替代用户名和密码。填写后连接将切换为 API 密钥验证。',
+                        'api-key-info' => '用于登录集群的密钥。',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => '用于 Elastic Cloud。填写后连接将切换为 Elastic Cloud，并与 API 密钥配合使用。',
+                        'cloud-id-info' => 'Elastic Cloud 部署的 Cloud ID。',
                         'index-prefix' => '索引前缀',
                         'index-prefix-info' => '添加在每个索引名之前，使多个商店可共用一个集群。',
                         'min-query-length' => '最小查询长度',

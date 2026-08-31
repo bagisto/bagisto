@@ -4419,9 +4419,20 @@ return [
                         'views' => 'Weergaven',
                     ],
 
+                    'statuses' => [
+                        'available' => 'Beschikbaar',
+                        'incompatible' => 'Niet compatibel',
+                        'misconfigured' => 'Verkeerd geconfigureerd',
+                        'unauthorized' => 'Niet geautoriseerd',
+                        'unreachable' => 'Onbereikbaar',
+                    ],
+
                     'values' => [
+                        'no' => 'Nee',
                         'not-available' => 'Niet beschikbaar',
+                        'not-checked' => 'Niet gecontroleerd',
                         'not-configured' => 'Niet geconfigureerd',
+                        'yes' => 'Ja',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'Instellingen',
                         'info' => 'Gebruikt wanneer een zoekmodus op Elasticsearch staat.',
+                        'auth-type' => 'Authenticatie',
+                        'auth-type-info' => 'Hoe het cluster wordt bereikt en aangemeld. Alleen de benodigde velden worden getoond.',
+
+                        'auth-types' => [
+                            'none' => 'Geen authenticatie',
+                            'basic' => 'Gebruikersnaam en wachtwoord',
+                            'api_key' => 'API-sleutel',
+                            'cloud_api_key' => 'Elastic Cloud met API-sleutel',
+                            'cloud_basic' => 'Elastic Cloud met gebruikersnaam en wachtwoord',
+                        ],
+
                         'hosts' => 'Hosts',
                         'hosts-info' => 'Waar het cluster bereikbaar is, bijvoorbeeld http://localhost:9200. Scheid meerdere hosts met een komma. Laat leeg om het omgevingsbestand te gebruiken.',
                         'username' => 'Gebruikersnaam',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'Wachtwoord',
                         'password-info' => 'Het wachtwoord bij de gebruikersnaam.',
                         'api-key' => 'API-sleutel',
-                        'api-key-info' => 'Wordt gebruikt in plaats van gebruikersnaam en wachtwoord. Invullen zet de verbinding om naar API-sleutelauthenticatie.',
+                        'api-key-info' => 'De sleutel waarmee wordt aangemeld bij het cluster.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'Voor Elastic Cloud. Invullen zet de verbinding om naar Elastic Cloud, samen met de API-sleutel.',
+                        'cloud-id-info' => 'De Cloud ID van de Elastic Cloud-implementatie.',
                         'index-prefix' => 'Indexvoorvoegsel',
                         'index-prefix-info' => 'Wordt voor elke indexnaam gezet, zodat meerdere winkels één cluster kunnen delen.',
                         'min-query-length' => 'Minimale querylengte',

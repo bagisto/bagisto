@@ -4419,9 +4419,20 @@ return [
                         'views' => 'תצוגות',
                     ],
 
+                    'statuses' => [
+                        'available' => 'זמין',
+                        'incompatible' => 'לא תואם',
+                        'misconfigured' => 'הוגדר שגוי',
+                        'unauthorized' => 'לא מורשה',
+                        'unreachable' => 'לא נגיש',
+                    ],
+
                     'values' => [
+                        'no' => 'לא',
                         'not-available' => 'לא זמין',
+                        'not-checked' => 'לא נבדק',
                         'not-configured' => 'לא מוגדר',
+                        'yes' => 'כן',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'הגדרות',
                         'info' => 'משמש כאשר מצב חיפוש מוגדר ל-Elasticsearch.',
+                        'auth-type' => 'אימות',
+                        'auth-type-info' => 'כיצד מגיעים לאשכול ומתחברים אליו. מוצגים רק השדות הנדרשים.',
+
+                        'auth-types' => [
+                            'none' => 'ללא אימות',
+                            'basic' => 'שם משתמש וסיסמה',
+                            'api_key' => 'מפתח API',
+                            'cloud_api_key' => 'Elastic Cloud עם מפתח API',
+                            'cloud_basic' => 'Elastic Cloud עם שם משתמש וסיסמה',
+                        ],
+
                         'hosts' => 'מארחים',
                         'hosts-info' => 'היכן האשכול נגיש, לדוגמה http://localhost:9200. הפרידו בין מארחים בפסיק. השאירו ריק כדי להשתמש בקובץ הסביבה.',
                         'username' => 'שם משתמש',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'סיסמה',
                         'password-info' => 'הסיסמה המשויכת לשם המשתמש.',
                         'api-key' => 'מפתח API',
-                        'api-key-info' => 'משמש במקום שם משתמש וסיסמה. הזנתו מעבירה את החיבור לאימות במפתח API.',
+                        'api-key-info' => 'המפתח שבאמצעותו מתחברים לאשכול.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'עבור Elastic Cloud. הזנתו מעבירה את החיבור ל-Elastic Cloud ומשויכת למפתח ה-API.',
+                        'cloud-id-info' => 'ה-Cloud ID של פריסת Elastic Cloud.',
                         'index-prefix' => 'קידומת אינדקס',
                         'index-prefix-info' => 'מתווספת לפני כל שם אינדקס, כדי שכמה חנויות יוכלו לחלוק אשכול אחד.',
                         'min-query-length' => 'אורך שאילתה מזערי',

@@ -4419,9 +4419,20 @@ return [
                         'views' => 'Tampilan',
                     ],
 
+                    'statuses' => [
+                        'available' => 'Tersedia',
+                        'incompatible' => 'Tidak kompatibel',
+                        'misconfigured' => 'Salah konfigurasi',
+                        'unauthorized' => 'Tidak diizinkan',
+                        'unreachable' => 'Tidak terjangkau',
+                    ],
+
                     'values' => [
+                        'no' => 'Tidak',
                         'not-available' => 'Tidak Tersedia',
+                        'not-checked' => 'Belum diperiksa',
                         'not-configured' => 'Belum Dikonfigurasi',
+                        'yes' => 'Ya',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'Pengaturan',
                         'info' => 'Dipakai saat mode pencarian disetel ke Elasticsearch.',
+                        'auth-type' => 'Autentikasi',
+                        'auth-type-info' => 'Bagaimana klaster dijangkau dan masuk. Hanya bidang yang diperlukan yang ditampilkan.',
+
+                        'auth-types' => [
+                            'none' => 'Tanpa autentikasi',
+                            'basic' => 'Nama pengguna dan kata sandi',
+                            'api_key' => 'Kunci API',
+                            'cloud_api_key' => 'Elastic Cloud dengan kunci API',
+                            'cloud_basic' => 'Elastic Cloud dengan nama pengguna dan kata sandi',
+                        ],
+
                         'hosts' => 'Host',
                         'hosts-info' => 'Tempat klaster dijangkau, misalnya http://localhost:9200. Pisahkan beberapa host dengan koma. Biarkan kosong untuk memakai berkas lingkungan.',
                         'username' => 'Nama Pengguna',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'Kata Sandi',
                         'password-info' => 'Kata sandi yang berpasangan dengan nama pengguna.',
                         'api-key' => 'Kunci API',
-                        'api-key-info' => 'Dipakai sebagai ganti nama pengguna dan kata sandi. Mengisinya mengalihkan koneksi ke autentikasi kunci API.',
+                        'api-key-info' => 'Kunci yang digunakan untuk masuk ke klaster.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'Untuk Elastic Cloud. Mengisinya mengalihkan koneksi ke Elastic Cloud, berpasangan dengan kunci API.',
+                        'cloud-id-info' => 'Cloud ID dari deployment Elastic Cloud.',
                         'index-prefix' => 'Awalan Indeks',
                         'index-prefix-info' => 'Ditambahkan di depan setiap nama indeks, sehingga beberapa toko dapat berbagi satu klaster.',
                         'min-query-length' => 'Panjang Kueri Minimum',

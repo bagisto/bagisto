@@ -4419,9 +4419,20 @@ return [
                         'views' => 'Görünümler',
                     ],
 
+                    'statuses' => [
+                        'available' => 'Kullanılabilir',
+                        'incompatible' => 'Uyumsuz',
+                        'misconfigured' => 'Yanlış yapılandırılmış',
+                        'unauthorized' => 'Yetkisiz',
+                        'unreachable' => 'Erişilemiyor',
+                    ],
+
                     'values' => [
+                        'no' => 'Hayır',
                         'not-available' => 'Kullanılamıyor',
+                        'not-checked' => 'Denetlenmedi',
                         'not-configured' => 'Yapılandırılmamış',
+                        'yes' => 'Evet',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'Ayarlar',
                         'info' => 'Bir arama kipi Elasticsearch olarak ayarlandığında kullanılır.',
+                        'auth-type' => 'Kimlik Doğrulama',
+                        'auth-type-info' => 'Kümeye nasıl erişildiği ve oturum açıldığı. Yalnızca gerekli alanlar gösterilir.',
+
+                        'auth-types' => [
+                            'none' => 'Kimlik doğrulama yok',
+                            'basic' => 'Kullanıcı adı ve parola',
+                            'api_key' => 'API anahtarı',
+                            'cloud_api_key' => 'API anahtarı ile Elastic Cloud',
+                            'cloud_basic' => 'Kullanıcı adı ve parola ile Elastic Cloud',
+                        ],
+
                         'hosts' => 'Sunucular',
                         'hosts-info' => 'Kümeye nereden erişildiği, örneğin http://localhost:9200. Birden çok sunucuyu virgülle ayırın. Ortam dosyasını kullanmak için boş bırakın.',
                         'username' => 'Kullanıcı Adı',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'Parola',
                         'password-info' => 'Kullanıcı adıyla eşleşen parola.',
                         'api-key' => 'API Anahtarı',
-                        'api-key-info' => 'Kullanıcı adı ve parola yerine kullanılır. Birini girmek bağlantıyı API anahtarı doğrulamasına geçirir.',
+                        'api-key-info' => 'Kümede oturum açmak için kullanılan anahtar.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'Elastic Cloud için. Birini girmek bağlantıyı Elastic Cloud\'a geçirir ve API anahtarıyla eşleşir.',
+                        'cloud-id-info' => 'Elastic Cloud dağıtımının Cloud ID değeri.',
                         'index-prefix' => 'Dizin Öneki',
                         'index-prefix-info' => 'Her dizin adının önüne eklenir, böylece birden çok mağaza tek kümeyi paylaşabilir.',
                         'min-query-length' => 'En Küçük Sorgu Uzunluğu',

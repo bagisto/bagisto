@@ -4419,9 +4419,20 @@ return [
                         'views' => 'දසුන්',
                     ],
 
+                    'statuses' => [
+                        'available' => 'ලබා ගත හැක',
+                        'incompatible' => 'නොගැළපේ',
+                        'misconfigured' => 'වැරදි වින්‍යාසය',
+                        'unauthorized' => 'අවසර නැත',
+                        'unreachable' => 'ළඟා විය නොහැක',
+                    ],
+
                     'values' => [
+                        'no' => 'නැත',
                         'not-available' => 'නොමැත',
+                        'not-checked' => 'පරීක්ෂා කර නැත',
                         'not-configured' => 'වින්‍යාස කර නැත',
+                        'yes' => 'ඔව්',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'සැකසුම්',
                         'info' => 'සෙවුම් ප්‍රකාරයක් Elasticsearch ලෙස සකසා ඇති විට භාවිතා වේ.',
+                        'auth-type' => 'සත්‍යාපනය',
+                        'auth-type-info' => 'පොකුරට සම්බන්ධ වන ආකාරය සහ පිවිසෙන ආකාරය. අවශ්‍ය ක්ෂේත්‍ර පමණක් පෙන්වයි.',
+
+                        'auth-types' => [
+                            'none' => 'සත්‍යාපනයක් නැත',
+                            'basic' => 'පරිශීලක නාමය සහ මුරපදය',
+                            'api_key' => 'API යතුර',
+                            'cloud_api_key' => 'API යතුර සමඟ Elastic Cloud',
+                            'cloud_basic' => 'පරිශීලක නාමය සහ මුරපදය සමඟ Elastic Cloud',
+                        ],
+
                         'hosts' => 'සත්කාරක',
                         'hosts-info' => 'පොකුරට ළඟා වන තැන, උදා. http://localhost:9200. සත්කාරක කිහිපයක් කොමාවෙන් වෙන් කරන්න. පරිසර ගොනුව භාවිතා කිරීමට හිස්ව තබන්න.',
                         'username' => 'පරිශීලක නාමය',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'මුරපදය',
                         'password-info' => 'පරිශීලක නාමය සමඟ යුගල වූ මුරපදය.',
                         'api-key' => 'API යතුර',
-                        'api-key-info' => 'පරිශීලක නාමය සහ මුරපදය වෙනුවට භාවිතා වේ. එකක් සැකසීම සම්බන්ධතාවය API යතුරු සත්‍යාපනයට මාරු කරයි.',
+                        'api-key-info' => 'පොකුරට පිවිසෙන යතුර.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'Elastic Cloud සඳහා. එකක් සැකසීම සම්බන්ධතාවය Elastic Cloud වෙත මාරු කර API යතුර සමඟ යුගල කරයි.',
+                        'cloud-id-info' => 'Elastic Cloud යෙදවීමේ Cloud ID.',
                         'index-prefix' => 'සුචි උපසර්ගය',
                         'index-prefix-info' => 'සෑම සුචි නාමයකට පෙර එකතු වේ, එවිට වෙළඳසැල් කිහිපයකට එක් පොකුරක් බෙදාගත හැකිය.',
                         'min-query-length' => 'අවම විමසුම් දිග',

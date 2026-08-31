@@ -4419,9 +4419,20 @@ return [
                         'views' => 'Widoki',
                     ],
 
+                    'statuses' => [
+                        'available' => 'Dostępny',
+                        'incompatible' => 'Niezgodny',
+                        'misconfigured' => 'Błędna konfiguracja',
+                        'unauthorized' => 'Brak autoryzacji',
+                        'unreachable' => 'Nieosiągalny',
+                    ],
+
                     'values' => [
+                        'no' => 'Nie',
                         'not-available' => 'Niedostępne',
+                        'not-checked' => 'Niesprawdzone',
                         'not-configured' => 'Nieskonfigurowane',
+                        'yes' => 'Tak',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'Ustawienia',
                         'info' => 'Używane, gdy tryb wyszukiwania jest ustawiony na Elasticsearch.',
+                        'auth-type' => 'Uwierzytelnianie',
+                        'auth-type-info' => 'Sposób połączenia z klastrem i logowania. Wyświetlane są tylko potrzebne pola.',
+
+                        'auth-types' => [
+                            'none' => 'Bez uwierzytelniania',
+                            'basic' => 'Nazwa użytkownika i hasło',
+                            'api_key' => 'Klucz API',
+                            'cloud_api_key' => 'Elastic Cloud z kluczem API',
+                            'cloud_basic' => 'Elastic Cloud z nazwą użytkownika i hasłem',
+                        ],
+
                         'hosts' => 'Hosty',
                         'hosts-info' => 'Gdzie dostępny jest klaster, np. http://localhost:9200. Wiele hostów oddziel przecinkiem. Pozostaw puste, aby użyć pliku środowiska.',
                         'username' => 'Nazwa użytkownika',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'Hasło',
                         'password-info' => 'Hasło powiązane z nazwą użytkownika.',
                         'api-key' => 'Klucz API',
-                        'api-key-info' => 'Używany zamiast nazwy użytkownika i hasła. Ustawienie go przełącza połączenie na uwierzytelnianie kluczem API.',
+                        'api-key-info' => 'Klucz, którym następuje logowanie do klastra.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'Dla Elastic Cloud. Ustawienie go przełącza połączenie na Elastic Cloud, w parze z kluczem API.',
+                        'cloud-id-info' => 'Cloud ID wdrożenia Elastic Cloud.',
                         'index-prefix' => 'Prefiks indeksu',
                         'index-prefix-info' => 'Dodawany przed każdą nazwą indeksu, aby kilka sklepów mogło dzielić jeden klaster.',
                         'min-query-length' => 'Minimalna długość zapytania',

@@ -4419,9 +4419,20 @@ return [
                         'views' => 'Views',
                     ],
 
+                    'statuses' => [
+                        'available' => 'Available',
+                        'incompatible' => 'Incompatible',
+                        'misconfigured' => 'Misconfigured',
+                        'unauthorized' => 'Unauthorized',
+                        'unreachable' => 'Unreachable',
+                    ],
+
                     'values' => [
+                        'no' => 'No',
                         'not-available' => 'Not Available',
+                        'not-checked' => 'Not Checked',
                         'not-configured' => 'Not Configured',
+                        'yes' => 'Yes',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'Settings',
                         'info' => 'Used when a search mode is set to Elasticsearch.',
+                        'auth-type' => 'Authentication',
+                        'auth-type-info' => 'How the cluster is reached and signed in to. Only the fields it needs are shown.',
+
+                        'auth-types' => [
+                            'none' => 'No authentication',
+                            'basic' => 'Username and password',
+                            'api_key' => 'API key',
+                            'cloud_api_key' => 'Elastic Cloud with API key',
+                            'cloud_basic' => 'Elastic Cloud with username and password',
+                        ],
+
                         'hosts' => 'Hosts',
                         'hosts-info' => 'Where the cluster is reached, such as http://localhost:9200. Separate several hosts with a comma. Leave empty to use the environment file.',
                         'username' => 'Username',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'Password',
                         'password-info' => 'The password paired with the username.',
                         'api-key' => 'API Key',
-                        'api-key-info' => 'Used instead of a username and password. Setting one switches the connection to API key authentication.',
+                        'api-key-info' => 'The key the cluster is signed in to with.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'For Elastic Cloud. Setting one switches the connection to Elastic Cloud and is paired with the API key.',
+                        'cloud-id-info' => 'The Cloud ID of the Elastic Cloud deployment.',
                         'index-prefix' => 'Index Prefix',
                         'index-prefix-info' => 'Prefixed to every index name, so several stores can share one cluster.',
                         'min-query-length' => 'Minimum Query Length',

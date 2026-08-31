@@ -2,6 +2,7 @@
 
 use Webkul\Core\Mail\Transport\DynamicMailTransport;
 use Webkul\MagicAI\AiProvider;
+use Webkul\Product\Enums\ElasticAuthEnum;
 use Webkul\Sales\Models\Order;
 
 return [
@@ -3452,30 +3453,42 @@ return [
         'sort' => 1,
         'fields' => [
             [
+                'name' => 'auth_type',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.auth-type',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.auth-type-info',
+                'type' => 'select',
+                'default' => ElasticAuthEnum::NONE->value,
+                'options' => 'Webkul\Product\Services\Search\SearchEngineOptions@getElasticAuthOptions',
+            ], [
                 'name' => 'hosts',
                 'title' => 'admin::app.configuration.index.search-engines.elastic.settings.hosts',
                 'info' => 'admin::app.configuration.index.search-engines.elastic.settings.hosts-info',
                 'type' => 'text',
-            ], [
-                'name' => 'username',
-                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.username',
-                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.username-info',
-                'type' => 'text',
-            ], [
-                'name' => 'password',
-                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.password',
-                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.password-info',
-                'type' => 'password',
-            ], [
-                'name' => 'api_key',
-                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.api-key',
-                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.api-key-info',
-                'type' => 'password',
+                'depends' => 'auth_type:'.implode(',', ElasticAuthEnum::readers('hosts')),
             ], [
                 'name' => 'cloud_id',
                 'title' => 'admin::app.configuration.index.search-engines.elastic.settings.cloud-id',
                 'info' => 'admin::app.configuration.index.search-engines.elastic.settings.cloud-id-info',
                 'type' => 'text',
+                'depends' => 'auth_type:'.implode(',', ElasticAuthEnum::readers('cloud_id')),
+            ], [
+                'name' => 'username',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.username',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.username-info',
+                'type' => 'text',
+                'depends' => 'auth_type:'.implode(',', ElasticAuthEnum::readers('username')),
+            ], [
+                'name' => 'password',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.password',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.password-info',
+                'type' => 'password',
+                'depends' => 'auth_type:'.implode(',', ElasticAuthEnum::readers('password')),
+            ], [
+                'name' => 'api_key',
+                'title' => 'admin::app.configuration.index.search-engines.elastic.settings.api-key',
+                'info' => 'admin::app.configuration.index.search-engines.elastic.settings.api-key-info',
+                'type' => 'password',
+                'depends' => 'auth_type:'.implode(',', ElasticAuthEnum::readers('api_key')),
             ], [
                 'name' => 'index_prefix',
                 'title' => 'admin::app.configuration.index.search-engines.elastic.settings.index-prefix',

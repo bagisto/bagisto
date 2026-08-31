@@ -4419,9 +4419,20 @@ return [
                         'views' => 'ビュー',
                     ],
 
+                    'statuses' => [
+                        'available' => '利用可能',
+                        'incompatible' => '非対応',
+                        'misconfigured' => '設定に誤りがあります',
+                        'unauthorized' => '認証されていません',
+                        'unreachable' => '接続できません',
+                    ],
+
                     'values' => [
+                        'no' => 'いいえ',
                         'not-available' => '利用できません',
+                        'not-checked' => '未確認',
                         'not-configured' => '未設定',
+                        'yes' => 'はい',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => '設定',
                         'info' => '検索モードが Elasticsearch に設定されているときに使われます。',
+                        'auth-type' => '認証',
+                        'auth-type-info' => 'クラスターへの接続方法とサインイン方法です。必要な項目のみが表示されます。',
+
+                        'auth-types' => [
+                            'none' => '認証なし',
+                            'basic' => 'ユーザー名とパスワード',
+                            'api_key' => 'API キー',
+                            'cloud_api_key' => 'API キーを使用する Elastic Cloud',
+                            'cloud_basic' => 'ユーザー名とパスワードを使用する Elastic Cloud',
+                        ],
+
                         'hosts' => 'ホスト',
                         'hosts-info' => 'クラスターへの接続先。例: http://localhost:9200。複数のホストはカンマで区切ります。空にすると環境ファイルを使います。',
                         'username' => 'ユーザー名',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'パスワード',
                         'password-info' => 'ユーザー名に対応するパスワード。',
                         'api-key' => 'APIキー',
-                        'api-key-info' => 'ユーザー名とパスワードの代わりに使います。設定すると接続はAPIキー認証に切り替わります。',
+                        'api-key-info' => 'クラスターへのサインインに使用するキーです。',
                         'cloud-id' => 'クラウドID',
-                        'cloud-id-info' => 'Elastic Cloud 用。設定すると接続は Elastic Cloud に切り替わり、APIキーと組み合わせて使います。',
+                        'cloud-id-info' => 'Elastic Cloud デプロイメントの Cloud ID です。',
                         'index-prefix' => 'インデックス接頭辞',
                         'index-prefix-info' => 'すべてのインデックス名の先頭に付き、複数のストアで1つのクラスターを共有できます。',
                         'min-query-length' => 'クエリの最小文字数',

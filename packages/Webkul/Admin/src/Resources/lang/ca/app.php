@@ -4419,9 +4419,20 @@ return [
                         'views' => 'Vistes',
                     ],
 
+                    'statuses' => [
+                        'available' => 'Disponible',
+                        'incompatible' => 'Incompatible',
+                        'misconfigured' => 'Mal configurat',
+                        'unauthorized' => 'No autoritzat',
+                        'unreachable' => 'Inaccessible',
+                    ],
+
                     'values' => [
+                        'no' => 'No',
                         'not-available' => 'No disponible',
+                        'not-checked' => 'Sense comprovar',
                         'not-configured' => 'No configurat',
+                        'yes' => 'Sí',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'Configuració',
                         'info' => 'Sutilitza quan una manera de cerca està definida com a Elasticsearch.',
+                        'auth-type' => 'Autenticació',
+                        'auth-type-info' => 'Com s\'arriba al clúster i s\'hi inicia la sessió. Només es mostren els camps necessaris.',
+
+                        'auth-types' => [
+                            'none' => 'Sense autenticació',
+                            'basic' => 'Nom d\'usuari i contrasenya',
+                            'api_key' => 'Clau API',
+                            'cloud_api_key' => 'Elastic Cloud amb clau API',
+                            'cloud_basic' => 'Elastic Cloud amb nom d\'usuari i contrasenya',
+                        ],
+
                         'hosts' => 'Amfitrions',
                         'hosts-info' => 'On s\'arriba al clúster, per exemple http://localhost:9200. Separeu diversos amfitrions amb una coma. Deixeu-ho buit per usar el fitxer d\'entorn.',
                         'username' => 'Nom d\'usuari',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'Contrasenya',
                         'password-info' => 'La contrasenya associada al nom d\'usuari.',
                         'api-key' => 'Clau API',
-                        'api-key-info' => 'S\'usa en lloc del nom d\'usuari i la contrasenya. Definir-ne una canvia la connexió a autenticació per clau API.',
+                        'api-key-info' => 'La clau amb què s\'inicia la sessió al clúster.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'Per a Elastic Cloud. Definir-ne un canvia la connexió a Elastic Cloud, combinat amb la clau API.',
+                        'cloud-id-info' => 'El Cloud ID del desplegament d\'Elastic Cloud.',
                         'index-prefix' => 'Prefix d\'índex',
                         'index-prefix-info' => 'Es posa davant de cada nom d\'índex, perquè diverses botigues comparteixin un clúster.',
                         'min-query-length' => 'Longitud mínima de la consulta',

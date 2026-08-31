@@ -4,7 +4,7 @@
     /**
      * A flag in words rather than as a bare one or zero.
      */
-    $flag = fn (bool $value) => trans('admin::app.components.datagrid.filters.boolean-options.'.($value ? 'true' : 'false'));
+    $flag = fn (bool $value) => trans('admin::app.configuration.index.about.general.values.'.($value ? 'yes' : 'no'));
 
     /**
      * How a resolved value reads. Flags are stored as booleans and a few facts as lists, so both
@@ -29,18 +29,6 @@
 
         return (string) $value;
     };
-
-    /**
-     * Whether a value reads as a service that is working, so it is seen at a glance.
-     */
-    $healthy = fn ($value) => is_string($value)
-        && in_array(strtolower($value), ['available', 'connected', 'true']);
-
-    /**
-     * Whether a value reads as a service that is not.
-     */
-    $failing = fn ($value) => is_string($value)
-        && in_array(strtolower($value), ['unreachable', 'unauthorized', 'incompatible', 'misconfigured', 'not available']);
 @endphp
 
 {{--
@@ -68,11 +56,11 @@
                                 </p>
 
                                 <p class="flex items-center gap-1.5 wrap-anywhere text-sm font-semibold text-gray-800 ltr:text-right rtl:text-left dark:text-white">
-                                    @if ($healthy($value) || $failing($value))
+                                    @if ($health = $card['health'][$label] ?? null)
                                         <span @class([
                                             'h-1.5 w-1.5 shrink-0 rounded-full',
-                                            'bg-emerald-500' => $healthy($value),
-                                            'bg-red-500' => $failing($value),
+                                            'bg-emerald-500' => $health === 'good',
+                                            'bg-red-500' => $health !== 'good',
                                         ])></span>
                                     @endif
 

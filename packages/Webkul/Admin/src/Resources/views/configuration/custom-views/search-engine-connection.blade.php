@@ -4,11 +4,20 @@
     $verdict = app(\Webkul\Product\Services\Search\SearchEngineAvailability::class)->cached($engine);
 
     $engineName = trans("admin::app.configuration.index.search-engines.engines.{$engine->value}");
+
+    /**
+     * How this section's fields are named on the form, so the values on screen can be read
+     * back out of it: `search_engines[elastic][settings][`.
+     */
+    $prefix = collect(explode('.', $child->getKey()))
+        ->map(fn ($part, $index) => $index === 0 ? $part : "[{$part}]")
+        ->implode('').'[';
 @endphp
 
 <v-search-engine-connection
     initial="{{ json_encode($verdict) }}"
     endpoint="{{ route('admin.configuration.search-engines.test-connection', $engine->value) }}"
+    prefix="{{ $prefix }}"
 ></v-search-engine-connection>
 
 @pushOnce('scripts')
@@ -57,7 +66,7 @@
         app.component('v-search-engine-connection', {
             template: '#v-search-engine-connection-template',
 
-            props: ['initial', 'endpoint'],
+            props: ['initial', 'endpoint', 'prefix'],
 
             data() {
                 return {
@@ -76,12 +85,18 @@
             },
 
             computed: {
+                /**
+                 * Whether the last verdict says the engine may be used.
+                 */
                 isAvailable() {
                     return this.verdict?.status === 'available';
                 },
             },
 
             methods: {
+                /**
+                 * Ask the engine where it stands, through the settings as they are on screen.
+                 */
                 testConnection() {
                     if (this.isTesting) {
                         return;
@@ -89,11 +104,41 @@
 
                     this.isTesting = true;
 
-                    this.$axios.post(this.endpoint)
+                    this.$axios.post(this.endpoint, { settings: this.settings() })
                         .then((response) => this.settle(response.data, 'success'))
                         .catch((error) => this.settle(error.response?.data, 'error'));
                 },
 
+                /**
+                 * The section's settings as the form holds them right now.
+                 * A field the chosen authentication hides is not rendered, so it is not read.
+                 */
+                settings() {
+                    const form = this.$el.closest('form');
+
+                    if (! form) {
+                        return {};
+                    }
+
+                    const settings = {};
+
+                    new FormData(form).forEach((value, name) => {
+                        if (
+                            ! name.startsWith(this.prefix)
+                            || ! name.endsWith(']')
+                        ) {
+                            return;
+                        }
+
+                        settings[name.slice(this.prefix.length, -1)] = value;
+                    });
+
+                    return settings;
+                },
+
+                /**
+                 * Show the verdict the engine answered with and stop the button spinning.
+                 */
                 settle(data, type) {
                     this.isTesting = false;
 

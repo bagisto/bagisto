@@ -4419,9 +4419,20 @@ return [
                         'views' => 'العروض',
                     ],
 
+                    'statuses' => [
+                        'available' => 'متاح',
+                        'incompatible' => 'غير متوافق',
+                        'misconfigured' => 'إعداد غير صحيح',
+                        'unauthorized' => 'غير مُصرَّح',
+                        'unreachable' => 'غير قابل للوصول',
+                    ],
+
                     'values' => [
+                        'no' => 'لا',
                         'not-available' => 'غير متاح',
+                        'not-checked' => 'لم يتم الفحص',
                         'not-configured' => 'غير مُهيأ',
+                        'yes' => 'نعم',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'الإعدادات',
                         'info' => 'يُستخدم عندما يكون وضع البحث مضبوطًا على Elasticsearch.',
+                        'auth-type' => 'المصادقة',
+                        'auth-type-info' => 'كيفية الوصول إلى العنقود وتسجيل الدخول إليه. تظهر الحقول المطلوبة فقط.',
+
+                        'auth-types' => [
+                            'none' => 'بدون مصادقة',
+                            'basic' => 'اسم المستخدم وكلمة المرور',
+                            'api_key' => 'مفتاح API',
+                            'cloud_api_key' => 'Elastic Cloud بمفتاح API',
+                            'cloud_basic' => 'Elastic Cloud باسم المستخدم وكلمة المرور',
+                        ],
+
                         'hosts' => 'المضيفون',
                         'hosts-info' => 'أين يمكن الوصول إلى العنقود، مثل http://localhost:9200. افصل بين عدة مضيفين بفاصلة. اتركه فارغًا لاستخدام ملف البيئة.',
                         'username' => 'اسم المستخدم',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'كلمة المرور',
                         'password-info' => 'كلمة المرور المقترنة باسم المستخدم.',
                         'api-key' => 'مفتاح API',
-                        'api-key-info' => 'يُستخدم بدلًا من اسم المستخدم وكلمة المرور. تعيينه ينقل الاتصال إلى المصادقة بمفتاح API.',
+                        'api-key-info' => 'المفتاح الذي يتم تسجيل الدخول إلى العنقود به.',
                         'cloud-id' => 'معرّف السحابة',
-                        'cloud-id-info' => 'لـ Elastic Cloud. تعيينه ينقل الاتصال إلى Elastic Cloud ويقترن بمفتاح API.',
+                        'cloud-id-info' => 'معرّف Cloud ID الخاص بنشر Elastic Cloud.',
                         'index-prefix' => 'بادئة الفهرس',
                         'index-prefix-info' => 'تُضاف قبل كل اسم فهرس، ليتمكن أكثر من متجر من مشاركة عنقود واحد.',
                         'min-query-length' => 'أدنى طول للاستعلام',

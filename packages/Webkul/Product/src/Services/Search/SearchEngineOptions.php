@@ -2,6 +2,7 @@
 
 namespace Webkul\Product\Services\Search;
 
+use Webkul\Product\Enums\ElasticAuthEnum;
 use Webkul\Product\Enums\SearchEngineEnum;
 
 class SearchEngineOptions
@@ -31,6 +32,17 @@ class SearchEngineOptions
             'title' => 'admin::app.configuration.index.search-engines.general.settings.inherit',
             'value' => self::INHERIT,
         ]], $this->getEngineOptions());
+    }
+
+    /**
+     * The ways an Elasticsearch cluster may be reached and authenticated against.
+     */
+    public function getElasticAuthOptions(): array
+    {
+        return array_map(fn (ElasticAuthEnum $auth) => [
+            'title' => "admin::app.configuration.index.search-engines.elastic.settings.auth-types.{$auth->value}",
+            'value' => $auth->value,
+        ], ElasticAuthEnum::cases());
     }
 
     /**

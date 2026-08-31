@@ -10,31 +10,46 @@ use Elastic\Transport\Exception\NoNodeAvailableException;
 use Illuminate\Support\Facades\DB;
 use Webkul\Core\Facades\ElasticSearch;
 use Webkul\Product\Contracts\SearchEngineConnection;
+use Webkul\Product\Enums\ElasticAuthEnum;
 use Webkul\Product\Enums\SearchEngineEnum;
 use Webkul\Product\Enums\SearchEngineStatusEnum;
 
 class ElasticConnection implements SearchEngineConnection
 {
     /**
-     * Where each recorded setting belongs in the Elasticsearch configuration.
+     * Where each recorded setting belongs, per connection. A connection reads its own
+     * parameter names, so the API key is `key` on one and `api_key` on another.
      */
     protected const SETTINGS = [
-        'hosts' => 'hosts',
-        'username' => 'user',
-        'password' => 'pass',
-        'api_key' => 'key',
-        'cloud_id' => 'id',
+        'default' => [
+            'hosts' => 'hosts',
+            'username' => 'user',
+            'password' => 'pass',
+        ],
+
+        'api' => [
+            'hosts' => 'hosts',
+            'api_key' => 'key',
+        ],
+
+        'cloud' => [
+            'cloud_id' => 'id',
+            'api_key' => 'api_key',
+            'username' => 'user',
+            'password' => 'pass',
+        ],
     ];
 
     /**
-     * Apply the recorded settings to the Elasticsearch configuration.
-     *
-     * Read straight from the table, because this is settled during boot, before the
-     * channel aware reader is available.
+     * Apply the recorded settings, or the values passed in, to the Elasticsearch configuration.
+     * Credentials the chosen authentication does not read are cleared.
      */
-    public function configure(): void
+    public function configure(array $overrides = []): void
     {
-        $settings = $this->settings();
+        $settings = array_merge($this->settings(), array_filter(
+            $overrides,
+            fn ($value) => $value !== null,
+        ));
 
         if (empty($settings)) {
             return;
@@ -44,11 +59,19 @@ class ElasticConnection implements SearchEngineConnection
             config(['elasticsearch.index_prefix' => $settings['index_prefix']]);
         }
 
-        $name = $this->connectionName($settings);
+        $auth = $this->auth($settings);
+
+        $name = $auth->connection();
 
         config(['elasticsearch.connection' => $name]);
 
-        foreach (self::SETTINGS as $setting => $key) {
+        foreach (self::SETTINGS[$name] as $setting => $key) {
+            if (! in_array($setting, $auth->settings())) {
+                config(["elasticsearch.connections.{$name}.{$key}" => null]);
+
+                continue;
+            }
+
             if (empty($settings[$setting])) {
                 continue;
             }
@@ -62,10 +85,14 @@ class ElasticConnection implements SearchEngineConnection
     }
 
     /**
-     * Ask the cluster who it is.
+     * Ask the cluster who it is, optionally through settings that are not saved yet.
      */
-    public function probe(): array
+    public function probe(array $overrides = []): array
     {
+        if (! empty($overrides)) {
+            $this->configure($overrides);
+        }
+
         try {
             $info = ElasticSearch::info()->asArray();
 
@@ -99,6 +126,22 @@ class ElasticConnection implements SearchEngineConnection
     }
 
     /**
+     * Whether the given values describe the settings as they are already recorded.
+     */
+    public function describesRecorded(array $overrides): bool
+    {
+        $settings = $this->settings();
+
+        foreach ($overrides as $setting => $value) {
+            if ((string) ($settings[$setting] ?? '') !== (string) $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    /**
      * Build a verdict for a connection that did not answer.
      */
     protected function failed(SearchEngineStatusEnum $status): array
@@ -110,19 +153,28 @@ class ElasticConnection implements SearchEngineConnection
     }
 
     /**
-     * Which of the configured connections the recorded settings describe.
+     * How the settings say the cluster is reached and authenticated against.
+     * Settings naming none are read the old way, by whichever credential is filled in.
      */
-    protected function connectionName(array $settings): string
+    protected function auth(array $settings): ElasticAuthEnum
     {
+        if ($auth = ElasticAuthEnum::tryFrom((string) ($settings['auth_type'] ?? ''))) {
+            return $auth;
+        }
+
         if (! empty($settings['cloud_id'])) {
-            return 'cloud';
+            return empty($settings['api_key'])
+                ? ElasticAuthEnum::CLOUD_BASIC
+                : ElasticAuthEnum::CLOUD_API_KEY;
         }
 
         if (! empty($settings['api_key'])) {
-            return 'api';
+            return ElasticAuthEnum::API_KEY;
         }
 
-        return 'default';
+        return empty($settings['username'])
+            ? ElasticAuthEnum::NONE
+            : ElasticAuthEnum::BASIC;
     }
 
     /**

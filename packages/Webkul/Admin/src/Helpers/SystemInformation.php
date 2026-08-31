@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Webkul\Core\Mail\Transport\DynamicMailTransport;
+use Webkul\Product\Enums\SearchEngineStatusEnum;
 use Webkul\Product\Services\Search\SearchEngineAvailability;
 use Webkul\Product\Services\Search\SearchEngineManager;
 
@@ -59,6 +60,14 @@ class SystemInformation
         'storage' => 'icon-folder',
         'cache' => 'icon-repeat',
     ];
+
+    /**
+     * How a reported fact stands, keyed by `section.key`, for the few that describe a service
+     * rather than a setting. Read from the state itself, never from the words it is shown in.
+     *
+     * @var array<string, string>
+     */
+    protected array $health = [];
 
     /**
      * Create a helper instance.
@@ -129,6 +138,7 @@ class SystemInformation
                 'icon' => self::ICONS[$key] ?? 'icon-information',
                 'heading' => $this->heading($key),
                 'entries' => $entries,
+                'health' => $this->health($key),
             ];
         }
 
@@ -205,17 +215,36 @@ class SystemInformation
     {
         $engine = $this->searchEngines->getMasterEngine();
 
+        $name = trans("admin::app.configuration.index.search-engines.engines.{$engine->value}");
+
         if (! $this->searchAvailability->isConnectable($engine)) {
-            return ['engine' => $engine->value];
+            return ['engine' => $name];
         }
 
         $probe = $this->searchAvailability->cached($engine) ?: [];
 
         return [
-            'engine' => $engine->value,
+            'engine' => $name,
             'version' => $probe['version'] ?? $this->translate('values.not-available'),
-            'status' => $probe['status'] ?? $this->translate('values.not-available'),
+            'status' => $this->searchStatus($probe),
         ];
+    }
+
+    /**
+     * How a recorded search verdict reads. A cluster that has never been asked reads as unknown 
+     * rather than as failing.
+     */
+    protected function searchStatus(array $probe): string
+    {
+        $status = SearchEngineStatusEnum::tryFrom((string) ($probe['status'] ?? ''));
+
+        if (! $status) {
+            return $this->translate('values.not-checked');
+        }
+
+        $this->health['search.status'] = $status->isUsable() ? 'good' : 'bad';
+
+        return $this->translate('statuses.'.$status->value);
     }
 
     /**
@@ -290,6 +319,26 @@ class SystemInformation
         }
 
         return $this->translate('labels.'.str_replace('_', '-', self::RENAMED[$section][$key] ?? $key), $key);
+    }
+
+    /**
+     * A section's health, keyed by the label each fact is read under.
+     *
+     * @return array<string, string>
+     */
+    protected function health(string $section): array
+    {
+        $health = [];
+
+        foreach ($this->health as $path => $state) {
+            [$owner, $key] = array_pad(explode('.', $path, 2), 2, '');
+
+            if ($owner === $section) {
+                $health[$this->label($section, $key)] = $state;
+            }
+        }
+
+        return $health;
     }
 
     /**

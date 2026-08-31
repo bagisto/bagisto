@@ -4419,9 +4419,20 @@ return [
                         'views' => 'Vistas',
                     ],
 
+                    'statuses' => [
+                        'available' => 'Disponible',
+                        'incompatible' => 'Incompatible',
+                        'misconfigured' => 'Mal configurado',
+                        'unauthorized' => 'No autorizado',
+                        'unreachable' => 'Inaccesible',
+                    ],
+
                     'values' => [
+                        'no' => 'No',
                         'not-available' => 'No disponible',
+                        'not-checked' => 'Sin comprobar',
                         'not-configured' => 'No configurado',
+                        'yes' => 'Sí',
                     ],
                 ],
             ],
@@ -5590,6 +5601,17 @@ return [
                     'settings' => [
                         'title' => 'Configuración',
                         'info' => 'Se utiliza cuando un modo de búsqueda está definido como Elasticsearch.',
+                        'auth-type' => 'Autenticación',
+                        'auth-type-info' => 'Cómo se accede al clúster y se inicia sesión. Solo se muestran los campos necesarios.',
+
+                        'auth-types' => [
+                            'none' => 'Sin autenticación',
+                            'basic' => 'Usuario y contraseña',
+                            'api_key' => 'Clave API',
+                            'cloud_api_key' => 'Elastic Cloud con clave API',
+                            'cloud_basic' => 'Elastic Cloud con usuario y contraseña',
+                        ],
+
                         'hosts' => 'Hosts',
                         'hosts-info' => 'Dónde se alcanza el clúster, por ejemplo http://localhost:9200. Separe varios hosts con una coma. Déjelo vacío para usar el archivo de entorno.',
                         'username' => 'Usuario',
@@ -5597,9 +5619,9 @@ return [
                         'password' => 'Contraseña',
                         'password-info' => 'La contraseña asociada al usuario.',
                         'api-key' => 'Clave API',
-                        'api-key-info' => 'Se usa en lugar de usuario y contraseña. Definir una cambia la conexión a autenticación por clave API.',
+                        'api-key-info' => 'La clave con la que se inicia sesión en el clúster.',
                         'cloud-id' => 'Cloud ID',
-                        'cloud-id-info' => 'Para Elastic Cloud. Definir uno cambia la conexión a Elastic Cloud y se combina con la clave API.',
+                        'cloud-id-info' => 'El Cloud ID del despliegue de Elastic Cloud.',
                         'index-prefix' => 'Prefijo de índice',
                         'index-prefix-info' => 'Se antepone a cada nombre de índice, para que varias tiendas compartan un clúster.',
                         'min-query-length' => 'Longitud mínima de la consulta',
