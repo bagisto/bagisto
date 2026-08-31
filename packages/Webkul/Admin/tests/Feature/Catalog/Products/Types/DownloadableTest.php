@@ -61,7 +61,7 @@ it('should return the create page of downloadable product', function () {
                 'weight' => $product->weight,
                 'locale' => app()->getLocale(),
                 'product_id' => $product->id,
-                'channel' => core()->getCurrentChannelCode(),
+                'channel' => core()->getDefaultChannelCode(),
             ],
         ],
     ]);
@@ -230,7 +230,7 @@ it('should update the downloadable product', function () {
         'name' => fake()->words(3, true),
         'price' => fake()->randomFloat(2, 1, 1000),
         'weight' => fake()->numberBetween(0, 100),
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => app()->getLocale(),
         'downloadable_links' => [
             'link_0' => [

@@ -17,7 +17,7 @@ use function Pest\Laravel\postJson;
 
 function makeSection(array $attributes = []): Section
 {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $section = Section::factory()->create(array_merge([
         'channel_id' => $channel->id,
@@ -42,7 +42,7 @@ function makeSection(array $attributes = []): Section
  */
 function themeCode(?Section $section = null): string
 {
-    return $section?->theme_code ?: (core()->getCurrentChannel()->theme ?: 'default');
+    return $section?->theme_code ?: (core()->getDefaultChannel()->theme ?: 'default');
 }
 
 /**
@@ -148,7 +148,7 @@ it('should publish every locale of a section, not only the one being edited', fu
 });
 
 it('should resolve a section to its draft for the preview', function () {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $section = makeSection();
 
@@ -264,7 +264,7 @@ it('should render the split editor when scoped to a theme', function () {
 it('should still render the editor when no theme is asked for', function () {
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+    get(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->assertOk()
         ->assertSee('v-section-editor', false);
 });
@@ -442,7 +442,7 @@ it('should mark each section in the preview exactly once', function () {
 });
 
 it('should preview a channel with its own sections, not another channel ones', function () {
-    $current = core()->getCurrentChannel();
+    $current = core()->getDefaultChannel();
 
     $other = Channel::factory()->create(['theme' => $current->theme]);
 
@@ -470,7 +470,7 @@ it('should preview a channel with its own sections, not another channel ones', f
 });
 
 it('should render every services section, so a duplicate of one shows up too', function () {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $names = ['Promises One', 'Promises Two'];
 
@@ -504,7 +504,7 @@ it('should render every services section, so a duplicate of one shows up too', f
 });
 
 it('should keep a pinned footer at the end whatever order is sent', function () {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $footer = Section::factory()->create([
         'type' => 'footer_links',
@@ -686,7 +686,7 @@ it('should announce a reorder, before and after', function () {
 });
 
 it('should hold a new section back from the storefront until it is published', function () {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $this->loginAsAdmin();
 

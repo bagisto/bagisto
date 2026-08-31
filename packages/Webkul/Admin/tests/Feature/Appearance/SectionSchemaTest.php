@@ -72,7 +72,7 @@ it('should describe every type a section may take', function () {
 it('should accept exactly the types the model declares', function () {
     $this->loginAsAdmin();
 
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     postJson(route('admin.appearance.sections.store', [
         'code' => $channel->theme,

@@ -118,7 +118,7 @@ it('should update the configurable product', function () {
     putJson(route('admin.catalog.products.update', $product->id), $data = [
         'sku' => $product->sku,
         'url_key' => $product->url_key,
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => app()->getLocale(),
         'short_description' => fake()->sentence(),
         'description' => fake()->paragraph(),
@@ -191,7 +191,7 @@ it('should update the configurable product variants', function () {
     putJson(route('admin.catalog.products.update', $product->id), [
         'sku' => $product->sku,
         'url_key' => $product->url_key,
-        'channel' => $channel = core()->getCurrentChannelCode(),
+        'channel' => $channel = core()->getDefaultChannelCode(),
         'locale' => $locale = app()->getLocale(),
         'short_description' => $product->short_description,
         'description' => $product->description,

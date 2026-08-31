@@ -20,7 +20,7 @@ it('should render the theme gallery', function () {
 });
 
 it('should mark the theme a channel runs as active', function () {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $channel->theme = 'default';
 

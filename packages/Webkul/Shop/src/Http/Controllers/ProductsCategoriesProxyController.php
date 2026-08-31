@@ -77,6 +77,7 @@ class ProductsCategoriesProxyController extends Controller
                 ! $product->url_key
                 || ! $product->visible_individually
                 || ! $product->status
+                || ! $product->isAvailableInChannel()
             ) {
                 abort(404);
             }

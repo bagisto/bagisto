@@ -292,6 +292,17 @@ class Product extends Model implements ProductContract
     }
 
     /**
+     * Is assigned to the given channel, defaulting to the current one.
+     */
+    public function isAvailableInChannel(?int $channelId = null): bool
+    {
+        return $this->channels->contains(
+            'id',
+            $channelId ?? core()->getCurrentChannel()->id
+        );
+    }
+
+    /**
      * Is saleable.
      *
      * @throws Exception
