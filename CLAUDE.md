@@ -4,7 +4,7 @@ Guidance for Claude Code working in this repository.
 
 ## Project Overview
 
-Bagisto 2.4.x — an open-source Laravel 12 e-commerce platform. PHP 8.3+, Vue 3, Tailwind 3, Vite 5.
+Bagisto 2.4.x — an open-source Laravel 12 e-commerce platform. PHP 8.3+, Vue 3, Tailwind 3, Vite 6.
 
 All functionality lives in **41 self-contained packages** under `packages/Webkul/`. The Laravel app
 itself is a thin shell.

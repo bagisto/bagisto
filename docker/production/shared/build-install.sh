@@ -53,7 +53,7 @@ log "Generating the application key..."
 php artisan key:generate --force --no-interaction
 
 log "Running the Bagisto installer..."
-php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
+php artisan bagisto:install --no-interaction
 
 log "Seeding demo products..."
 php artisan db:seed --class="Webkul\\Installer\\Database\\Seeders\\ProductTableSeeder"

@@ -103,7 +103,7 @@
                                                         >
                                                         </span>
 
-                                                        <span class="icon-sort-down text-2xl"></span>
+                                                        <span class="icon-arrow-down text-2xl"></span>
                                                     </button>
                                                 </x-slot>
 
@@ -451,7 +451,7 @@
                                                 >
                                                     <span v-text="numericOperators.find((operator) => operator.value === filterOperator[column.index])?.label"></span>
 
-                                                    <span class="icon-sort-down text-2xl"></span>
+                                                    <span class="icon-arrow-down text-2xl"></span>
                                                 </button>
                                             </x-slot>
 
