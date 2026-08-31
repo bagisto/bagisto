@@ -47,10 +47,12 @@ export class BookingProductCheckout extends CheckoutHelper {
     }
 
     private async getOrderId() {
-        const text = await this.orderIdHeading.textContent();
-        if (!text) return null;
-        const match = text.match(/#(\d+)/);
-        return match ? match[1] : null;
+        const text = await this.orderIdHeading.innerText();
+        const match = text.match(/#\s*(\d+)/);
+        if (! match) {
+            throw new Error(`Order id not found on the success page: "${text}"`);
+        }
+        return match[1];
     }
 
     private async tablematch(table: boolean) {

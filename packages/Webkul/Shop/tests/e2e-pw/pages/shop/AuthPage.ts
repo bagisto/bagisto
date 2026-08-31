@@ -85,7 +85,7 @@ export class AuthPage extends BasePage {
         await super.visit("");
     }
 
-    async register(credentials: CustomerCredentials) {
+    async register(credentials: CustomerCredentials, expectedMessage?: string) {
         await this.visit();
         await this.profileMenu.click();
         await this.signUpLink.click();
@@ -104,7 +104,11 @@ export class AuthPage extends BasePage {
         await this.newsletterOptIn.click();
         await this.registerButton.click();
 
-        await expect(this.accountCreatedMessage.first()).toBeVisible();
+        await expect(
+            expectedMessage
+                ? this.page.getByText(expectedMessage).first()
+                : this.accountCreatedMessage.first(),
+        ).toBeVisible();
 
         return credentials;
     }

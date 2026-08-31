@@ -58,13 +58,18 @@ test("should display correct message when email verfication is on", async ({
     adminPage,
 }) => {
     await adminPage.goto("admin/configuration/customer/settings");
-    const toggle = adminPage.locator(
-        "div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5",
+    const verificationCheckbox = adminPage.locator(
+        'input[type="checkbox"][name="customer[settings][email][verification]"]',
     );
+    const verificationToggle = adminPage.locator(
+        'label:has(input[name="customer[settings][email][verification]"]) > div.peer',
+    );
+    await verificationToggle.waitFor({ state: "visible" });
 
-    if (!(await toggle.isChecked())) {
-        await toggle.click();
+    if (! (await verificationCheckbox.isChecked())) {
+        await verificationToggle.click();
     }
+    await expect(verificationCheckbox).toBeChecked();
     await adminPage.getByRole("button", { name: "Save Configuration" }).click();
     await expect(
         adminPage.locator("#app").getByText("Configuration saved successfully"),
@@ -79,21 +84,16 @@ test("should display correct message when email verfication is on", async ({
         password: "admin123",
     };
 
-    await authPage.register(credentials);
-    await expect(
-        shopPage
-            .getByText(
-                "Account created successfully, an e-mail has been sent for verification.",
-            )
-            .first(),
-    ).toBeVisible();
+    await authPage.register(
+        credentials,
+        "Account created successfully, an e-mail has been sent for verification.",
+    );
 
     // Disable email verification
     await adminPage.goto("admin/configuration/customer/settings");
-    await adminPage.waitForLoadState("networkidle");
-    await adminPage
-        .locator("div:nth-child(10) > div > .mb-4 > .relative > .peer.h-5")
-        .click();
+    await verificationToggle.waitFor({ state: "visible" });
+    await verificationToggle.click();
+    await expect(verificationCheckbox).not.toBeChecked();
     await adminPage.getByRole("button", { name: "Save Configuration" }).click();
     await expect(
         adminPage.locator("#app").getByText("Configuration saved successfully"),
