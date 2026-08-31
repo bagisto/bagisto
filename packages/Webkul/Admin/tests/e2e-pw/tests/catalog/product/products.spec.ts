@@ -125,12 +125,17 @@ test.describe("product configuration", () => {
 
         await fileChooser.setFiles(getImageFile());
         await adminPage.click('button[type="submit"].primary-button:visible');
-        await adminPage
+
+        const placeholderTile = adminPage
             .locator(
-                '[id="catalog\\[products\\]\\[cache_small_image\\]\\[url\\]\\[delete\\]"]',
+                'input[type="file"][name="catalog[products][cache_small_image][url]"]',
             )
-            .nth(1)
-            .click();
+            .locator("xpath=../div[1]");
+
+        await placeholderTile.hover();
+        await placeholderTile.locator(".icon-delete").click();
+        await expect(placeholderTile).toBeHidden();
+
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(
             adminPage.locator("#app p", {
@@ -160,12 +165,17 @@ test.describe("product configuration", () => {
 
         await fileChooser.setFiles(getImageFile());
         await adminPage.click('button[type="submit"].primary-button:visible');
-        await adminPage
+
+        const placeholderTile = adminPage
             .locator(
-                '[id="catalog\\[products\\]\\[cache_medium_image\\]\\[url\\]\\[delete\\]"]',
+                'input[type="file"][name="catalog[products][cache_medium_image][url]"]',
             )
-            .nth(1)
-            .click();
+            .locator("xpath=../div[1]");
+
+        await placeholderTile.hover();
+        await placeholderTile.locator(".icon-delete").click();
+        await expect(placeholderTile).toBeHidden();
+
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(
             adminPage.locator("#app p", {
@@ -195,12 +205,17 @@ test.describe("product configuration", () => {
 
         await fileChooser.setFiles(getImageFile());
         await adminPage.click('button[type="submit"].primary-button:visible');
-        await adminPage
+
+        const placeholderTile = adminPage
             .locator(
-                '[id="catalog\\[products\\]\\[cache_large_image\\]\\[url\\]\\[delete\\]"]',
+                'input[type="file"][name="catalog[products][cache_large_image][url]"]',
             )
-            .nth(1)
-            .click();
+            .locator("xpath=../div[1]");
+
+        await placeholderTile.hover();
+        await placeholderTile.locator(".icon-delete").click();
+        await expect(placeholderTile).toBeHidden();
+
         await adminPage.click('button[type="submit"].primary-button:visible');
         await expect(
             adminPage.locator("#app p", {
