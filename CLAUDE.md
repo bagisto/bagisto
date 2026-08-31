@@ -98,16 +98,16 @@ E2E tests are run from within each package directory. Each package has its own P
 ```bash
 cd packages/Webkul/Admin
 npm install
-npx playwright install --with-deps chromium
-npx playwright test --config=tests/e2e-pw/playwright.config.ts
+npm run install:browsers
+npm run test:e2e
 ```
 
 **Shop**:
 ```bash
 cd packages/Webkul/Shop
 npm install
-npx playwright install --with-deps chromium
-npx playwright test --config=tests/e2e-pw/playwright.config.ts
+npm run install:browsers
+npm run test:e2e
 ```
 
 **Installer** — drives the guided web installer, so it runs against an *uninstalled* application
@@ -115,14 +115,31 @@ npx playwright test --config=tests/e2e-pw/playwright.config.ts
 ```bash
 cd packages/Webkul/Installer
 npm install
-npx playwright install --with-deps chromium
-npx playwright test --config=tests/e2e-pw/playwright.config.ts --grep "@en"
+npm run install:browsers
+npm run test:e2e -- --grep "@en"
 ```
 The database it installs into comes from the `INSTALLER_DB_*` env vars, defaulting to MySQL on
 127.0.0.1:3306.
 
 Admin and Shop tests require a running Laravel server (`php artisan serve`) and a seeded database.
-Set `BASE_URL` env var if not using default.
+The base URL comes from `APP_URL` in the application `.env`, falling back to `BASE_URL`; every
+environment value is read and validated once in `tests/e2e-pw/utils/env.ts`, never from
+`process.env` elsewhere. A suite also honours its own `tests/e2e-pw/.env` when one exists, and
+locates the application by searching upward for `artisan`, so it keeps working if the folder moves.
+
+Each package exposes the same scripts, all run from the package directory:
+
+| Script | Purpose |
+|---|---|
+| `npm run test:e2e` | Run the suite; append `-- --grep …`, `-- --shard=i/n`, or a spec path |
+| `npm run test:e2e:headed` / `:ui` / `:debug` | Visible browser, UI mode, inspector |
+| `npm run test:e2e:report` | Open the last HTML report |
+| `npm run install:browsers` | Install the pinned Chromium with its system deps |
+| `npm run typecheck` | `tsc --noEmit` over the suite |
+| `npm run format` / `format:check` | Prettier write / CI-style check, scoped to `tests/e2e-pw` |
+
+`typecheck` and `format:check` are not yet clean on the existing specs and page objects, so they
+are local tools rather than CI gates.
 
 ### Code Style
 ```bash

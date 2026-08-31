@@ -1,7 +1,12 @@
-import { test as base, expect, type Page } from "@playwright/test";
+import {
+    test as base,
+    expect,
+    type BrowserContext,
+    type Page,
+} from "@playwright/test";
 import fs from "fs";
-import { ADMIN_AUTH_STATE_PATH } from "./playwright.config";
 import { loginAsAdmin } from "./utils/admin";
+import { ADMIN_AUTH_STATE_PATH, ensureStateDir } from "./utils/paths";
 
 export interface AdminPage extends Page {
     fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
@@ -26,18 +31,29 @@ async function fillTinymce(
     await page.waitForFunction((id) => {
         const editor = (window as any).tinymce?.get(id);
 
-        return !! editor && editor.initialized;
+        return !!editor && editor.initialized;
     }, editorId);
 
-    await page.evaluate(({ id, value }) => {
-        const editor = (window as any).tinymce.get(id);
+    await page.evaluate(
+        ({ id, value }) => {
+            const editor = (window as any).tinymce.get(id);
 
-        editor.setContent(value);
-        editor.fire("keyup");
-        editor.save();
-    }, { id: editorId, value: content });
+            editor.setContent(value);
+            editor.fire("keyup");
+            editor.save();
+        },
+        { id: editorId, value: content },
+    );
 
-    await expect(page.frameLocator(iframeSelector).locator("body")).toHaveText(content);
+    await expect(page.frameLocator(iframeSelector).locator("body")).toHaveText(
+        content,
+    );
+}
+
+async function saveAdminAuth(context: BrowserContext): Promise<void> {
+    ensureStateDir();
+
+    await context.storageState({ path: ADMIN_AUTH_STATE_PATH });
 }
 
 export const test = base.extend<Fixtures>({
@@ -52,14 +68,14 @@ export const test = base.extend<Fixtures>({
 
         if (!authExists) {
             await loginAsAdmin(page);
-            await context.storageState({ path: ADMIN_AUTH_STATE_PATH });
+            await saveAdminAuth(context);
         } else {
             await page.goto("admin/dashboard");
         }
 
         if (page.url().includes("admin/login")) {
             await loginAsAdmin(page);
-            await context.storageState({ path: ADMIN_AUTH_STATE_PATH });
+            await saveAdminAuth(context);
         }
 
         (page as AdminPage).fillInTinymce = (

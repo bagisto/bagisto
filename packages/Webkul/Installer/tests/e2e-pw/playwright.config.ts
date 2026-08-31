@@ -1,14 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
-import dotenv from "dotenv";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-export const TESTS_ROOT_PATH = __dirname;
-
-dotenv.config({ path: path.resolve(__dirname, "../../../../../.env") });
+import { env } from "./utils/env";
 
 export default defineConfig({
     testDir: "./tests",
@@ -41,7 +32,8 @@ export default defineConfig({
     ],
 
     use: {
-        baseURL: `${process.env.APP_URL}/`.replace(/\/+$/, "/"),
+        baseURL: `${env.baseUrl}/`,
+        headless: !env.headed,
         screenshot: { mode: "only-on-failure", fullPage: true },
         video: "retain-on-failure",
         trace: "retain-on-failure",

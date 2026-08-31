@@ -1,7 +1,12 @@
-import { test as base, expect, type Page } from "@playwright/test";
+import {
+    test as base,
+    expect,
+    type BrowserContext,
+    type Page,
+} from "@playwright/test";
 import fs from "fs";
-import { ADMIN_AUTH_STATE_PATH } from "./playwright.config";
 import { loginAsAdmin } from "./utils/admin";
+import { ADMIN_AUTH_STATE_PATH, ensureStateDir } from "./utils/paths";
 
 interface AdminPage extends Page {
     fillInTinymce: (iframeSelector: string, content: string) => Promise<void>;
@@ -24,6 +29,12 @@ type Fixtures = {
  * Test with Fixtures
  */
 
+async function saveAdminAuth(context: BrowserContext): Promise<void> {
+    ensureStateDir();
+
+    await context.storageState({ path: ADMIN_AUTH_STATE_PATH });
+}
+
 export const test = base.extend<Fixtures>({
     /**
      *  AdminPage
@@ -33,29 +44,26 @@ export const test = base.extend<Fixtures>({
         const authExists = fs.existsSync(ADMIN_AUTH_STATE_PATH);
 
         const context = await browser.newContext(
-            authExists ? { storageState: ADMIN_AUTH_STATE_PATH } : {}
+            authExists ? { storageState: ADMIN_AUTH_STATE_PATH } : {},
         );
 
         const page = await context.newPage();
 
-        // Login if needed
         if (!authExists) {
             await loginAsAdmin(page);
-            await context.storageState({ path: ADMIN_AUTH_STATE_PATH });
+            await saveAdminAuth(context);
         } else {
             await page.goto("admin/dashboard");
         }
 
-        // Safety check (session expired)
         if (page.url().includes("admin/login")) {
             await loginAsAdmin(page);
-            await context.storageState({ path: ADMIN_AUTH_STATE_PATH });
+            await saveAdminAuth(context);
         }
 
-        // Extend admin page
         (page as AdminPage).fillInTinymce = async (
             iframeSelector: string,
-            content: string
+            content: string,
         ) => {
             await page.waitForSelector(iframeSelector);
 
@@ -89,7 +97,7 @@ export const test = base.extend<Fixtures>({
          */
         (page as ShopPage).fillInTinymce = async (
             iframeSelector: string,
-            content: string
+            content: string,
         ) => {
             await page.waitForSelector(iframeSelector);
             const iframe = page.frameLocator(iframeSelector);

@@ -1,18 +1,17 @@
 import { expect } from "../setup";
+import type { Page } from "@playwright/test";
+import { env } from "./env";
 import { generateDescription, generateName, generateSlug } from "./faker";
 
-export async function loginAsAdmin(page) {
-    /**
-     * Admin credentials.
-     */
+/**
+ * Sign the admin in and wait for the dashboard.
+ */
+export async function loginAsAdmin(page: Page) {
     const adminCredentials = {
-        email: "admin@example.com",
-        password: "admin123",
+        email: env.adminEmail,
+        password: env.adminPassword,
     };
 
-    /**
-     * Authenticate the admin user.
-     */
     await page.goto("admin/login");
     await page.locator('input[name="email"]').fill(adminCredentials.email);
     await page
@@ -20,9 +19,6 @@ export async function loginAsAdmin(page) {
         .fill(adminCredentials.password);
     await page.press('input[name="password"]', "Enter");
 
-    /**
-     * Wait for the dashboard to load.
-     */
     await page.waitForURL("**/admin/dashboard");
 
     return adminCredentials;

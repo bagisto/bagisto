@@ -3,7 +3,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build": "vite build",
+    "install:browsers": "playwright install --with-deps chromium",
+    "test:e2e": "playwright test --config=tests/e2e-pw/playwright.config.ts",
+    "test:e2e:headed": "playwright test --config=tests/e2e-pw/playwright.config.ts --headed",
+    "test:e2e:ui": "playwright test --config=tests/e2e-pw/playwright.config.ts --ui",
+    "test:e2e:debug": "playwright test --config=tests/e2e-pw/playwright.config.ts --debug",
+    "test:e2e:report": "playwright show-report tests/e2e-pw/playwright-report",
+    "typecheck": "tsc --noEmit --project tests/e2e-pw/tsconfig.json",
+    "format": "prettier --write tests/e2e-pw",
+    "format:check": "prettier --check tests/e2e-pw"
   },
   "devDependencies": {
     "@playwright/test": "^1.58.1",
@@ -12,7 +21,9 @@
     "axios": "^1.7.9",
     "dotenv": "^16.4.7",
     "laravel-vite-plugin": "^1.0",
+    "prettier": "^3.8.2",
     "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.2",
     "vite": "^6.4.2",
     "vue": "^3.5.13"
   },

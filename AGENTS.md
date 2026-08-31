@@ -174,12 +174,12 @@ vendor/bin/pest packages/Webkul/Admin/tests/Feature      # Run package tests
 vendor/bin/pest --testsuite="Unit Test"                  # Cross-package checks; needs no database
 
 # Playwright (E2E) — Admin (run from packages/Webkul/Admin)
-cd packages/Webkul/Admin && npm install && npx playwright install --with-deps chromium
-cd packages/Webkul/Admin && npx playwright test --config=tests/e2e-pw/playwright.config.ts
+cd packages/Webkul/Admin && npm install && npm run install:browsers
+cd packages/Webkul/Admin && npm run test:e2e
 
 # Playwright (E2E) — Shop (run from packages/Webkul/Shop)
-cd packages/Webkul/Shop && npm install && npx playwright install --with-deps chromium
-cd packages/Webkul/Shop && npx playwright test --config=tests/e2e-pw/playwright.config.ts
+cd packages/Webkul/Shop && npm install && npm run install:browsers
+cd packages/Webkul/Shop && npm run test:e2e
 ```
 
 ### Fresh Database Setup for Parallel Testing

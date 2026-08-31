@@ -1,10 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
-
-// Create ESM-safe __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { APP_ROOT_PATH, DATA_PATH } from "./paths";
 
 export type ImportType = "products" | "customers" | "tax_rates";
 
@@ -45,15 +41,14 @@ export const IMPORT_TIMEOUT = 180 * 1000;
 export const dataFilePath = (fileName: string) =>
     path.isAbsolute(fileName)
         ? fileName
-        : path.resolve(__dirname, `../data/data-transfer/${fileName}`);
+        : path.join(DATA_PATH, "data-transfer", fileName);
 
-export const SERVER_IMPORT_PATH = path.resolve(
-    __dirname,
-    "../../../../../../storage/app/import",
-);
+export const SERVER_IMPORT_PATH = APP_ROOT_PATH
+    ? path.join(APP_ROOT_PATH, "storage", "app", "import")
+    : "";
 
 export const canStageServerImages = () =>
-    fs.existsSync(path.dirname(SERVER_IMPORT_PATH));
+    !!SERVER_IMPORT_PATH && fs.existsSync(path.dirname(SERVER_IMPORT_PATH));
 
 const PIXEL_PNG = Buffer.from(
     "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==",

@@ -93,7 +93,7 @@ jobs:
       - name: Install Playwright Browsers
         run: |
           sudo apt-get update --allow-releaseinfo-change
-          npx playwright install --with-deps chromium
+          npm run install:browsers
         working-directory: packages/Webkul/Installer
 
       - name: Setting Environment
@@ -134,7 +134,7 @@ jobs:
           INSTALLER_DB_DATABASE: bagisto
           INSTALLER_DB_USERNAME: ${{ matrix.db-user }}
           INSTALLER_DB_PASSWORD: ${{ matrix.db-password }}
-        run: npx playwright test --config=tests/e2e-pw/playwright.config.ts --grep "@${{ matrix.locale }}"
+        run: npm run test:e2e -- --grep "@${{ matrix.locale }}"
         working-directory: packages/Webkul/Installer
 
       - name: Upload Test Results
@@ -230,7 +230,7 @@ jobs:
       - name: Install Playwright Browsers
         run: |
           sudo apt-get update --allow-releaseinfo-change
-          npx playwright install --with-deps chromium
+          npm run install:browsers
         working-directory: packages/Webkul/${{ matrix.project }}
 
       - name: Setting Environment
@@ -268,7 +268,7 @@ jobs:
         env:
           BASE_URL: "http://127.0.0.1:8000"
         run: |
-          npx playwright test --config=tests/e2e-pw/playwright.config.ts --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
+          npm run test:e2e -- --shard=${{ matrix.shard-index }}/${{ matrix.shard-total }}
         working-directory: packages/Webkul/${{ matrix.project }}
 
       - name: Upload Test Results
