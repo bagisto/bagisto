@@ -28,7 +28,7 @@ function createShippableOrder($testContext): array
         'customer_first_name' => $customer->first_name,
         'customer_last_name' => $customer->last_name,
         'status' => 'processing',
-        'channel_id' => core()->getCurrentChannel()->id,
+        'channel_id' => core()->getDefaultChannel()->id,
         'shipping_method' => 'free_free',
         'shipping_title' => 'Free Shipping - Free Shipping',
     ]);

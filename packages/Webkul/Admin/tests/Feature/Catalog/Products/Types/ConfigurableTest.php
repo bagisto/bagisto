@@ -125,7 +125,7 @@ it('should populate parent product_flat after store and update', function () {
 
     // Locale and channel
     expect($flat->locale)->toBe(app()->getLocale());
-    expect($flat->channel)->toBe(core()->getCurrentChannelCode());
+    expect($flat->channel)->toBe(core()->getDefaultChannelCode());
 });
 
 it('should populate variant product_flat entries after store and update', function () {
@@ -196,7 +196,7 @@ it('should create inventory for each variant after update', function () {
 
 it('should assign the configurable product and variants to the current channel', function () {
     $product = $this->storeAndUpdateConfigurableProduct();
-    $channelId = core()->getCurrentChannel()->id;
+    $channelId = core()->getDefaultChannel()->id;
 
     $this->assertDatabaseHas('product_channels', [
         'product_id' => $product->id,
@@ -250,7 +250,7 @@ it('should update variant values and reflect changes in product_flat', function 
         'name' => $product->name,
         'short_description' => $product->short_description,
         'description' => $product->description,
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => app()->getLocale(),
         'status' => 1,
         'visible_individually' => 1,

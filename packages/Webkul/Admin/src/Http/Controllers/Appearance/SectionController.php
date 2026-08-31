@@ -385,13 +385,13 @@ class SectionController extends Controller
 
     /**
      * Channel the editor is scoped to. Sections are per channel, so the editor edits one
-     * at a time and falls back to the current channel.
+     * at a time and falls back to the default channel.
      */
     protected function requestedChannel()
     {
         $channel = core()->getAllChannels()->firstWhere('id', (int) request('channel'));
 
-        return $channel ?? core()->getCurrentChannel();
+        return $channel ?? core()->getDefaultChannel();
     }
 
     /**

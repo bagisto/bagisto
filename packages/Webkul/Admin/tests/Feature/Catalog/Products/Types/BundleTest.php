@@ -116,7 +116,7 @@ it('should update bundle option products', function () {
         'name' => $product->name,
         'short_description' => $product->short_description,
         'description' => $product->description,
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => $locale,
         'status' => 1,
         'visible_individually' => 1,

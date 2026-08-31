@@ -63,7 +63,7 @@ trait ProductTestBench
     {
         $attributes = $this->getAttributeMap();
         $locale = app()->getLocale();
-        $channel = core()->getCurrentChannel();
+        $channel = core()->getDefaultChannel();
 
         $product = Product::factory()
             ->state(['type' => $type])
@@ -131,7 +131,7 @@ trait ProductTestBench
      */
     public function createConfigurableProduct(array $variantPrices = [100, 200]): Product
     {
-        $channel = core()->getCurrentChannel();
+        $channel = core()->getDefaultChannel();
 
         // Create parent configurable product.
         $parent = Product::factory()->state(['type' => 'configurable'])->create();
@@ -156,7 +156,7 @@ trait ProductTestBench
      */
     public function createGroupedProduct(array $associatedPrices = [100, 200]): Product
     {
-        $channel = core()->getCurrentChannel();
+        $channel = core()->getDefaultChannel();
 
         $parent = Product::factory()->state(['type' => 'grouped'])->create();
         $parent->channels()->sync([$channel->id]);
@@ -183,7 +183,7 @@ trait ProductTestBench
      */
     public function createBundleProduct(array $optionProductPrices = [100, 200]): Product
     {
-        $channel = core()->getCurrentChannel();
+        $channel = core()->getDefaultChannel();
         $locale = app()->getLocale();
 
         $parent = Product::factory()->state(['type' => 'bundle'])->create();
@@ -271,7 +271,7 @@ trait ProductTestBench
             'meta_title' => 'Test Meta Title',
             'meta_keywords' => 'test, simple, product',
             'meta_description' => 'Test meta description for SEO.',
-            'channel' => core()->getCurrentChannelCode(),
+            'channel' => core()->getDefaultChannelCode(),
             'locale' => app()->getLocale(),
             'status' => 1,
             'visible_individually' => 1,
@@ -317,7 +317,7 @@ trait ProductTestBench
             'meta_title' => 'Virtual Meta Title',
             'meta_keywords' => 'virtual, test, product',
             'meta_description' => 'Virtual meta description for SEO.',
-            'channel' => core()->getCurrentChannelCode(),
+            'channel' => core()->getDefaultChannelCode(),
             'locale' => app()->getLocale(),
             'status' => 1,
             'visible_individually' => 1,
@@ -379,7 +379,7 @@ trait ProductTestBench
             'name' => 'Test Configurable Product',
             'short_description' => 'A short description for the configurable product.',
             'description' => 'A full description for the configurable product.',
-            'channel' => core()->getCurrentChannelCode(),
+            'channel' => core()->getDefaultChannelCode(),
             'locale' => app()->getLocale(),
             'status' => 1,
             'visible_individually' => 1,
@@ -420,7 +420,7 @@ trait ProductTestBench
             'name' => 'Test Grouped Product',
             'short_description' => 'A short description for the grouped product.',
             'description' => 'A full description for the grouped product.',
-            'channel' => core()->getCurrentChannelCode(),
+            'channel' => core()->getDefaultChannelCode(),
             'locale' => app()->getLocale(),
             'status' => 1,
             'visible_individually' => 1,
@@ -473,7 +473,7 @@ trait ProductTestBench
             'name' => 'Test Bundle Product',
             'short_description' => 'A short description for the bundle product.',
             'description' => 'A full description for the bundle product.',
-            'channel' => core()->getCurrentChannelCode(),
+            'channel' => core()->getDefaultChannelCode(),
             'locale' => $locale,
             'status' => 1,
             'visible_individually' => 1,
@@ -533,7 +533,7 @@ trait ProductTestBench
             'short_description' => 'A short description for the downloadable product.',
             'description' => 'A full description for the downloadable product.',
             'price' => 49.99,
-            'channel' => core()->getCurrentChannelCode(),
+            'channel' => core()->getDefaultChannelCode(),
             'locale' => app()->getLocale(),
             'status' => 1,
             'visible_individually' => 1,

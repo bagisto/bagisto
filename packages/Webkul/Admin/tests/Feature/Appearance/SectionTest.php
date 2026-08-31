@@ -14,7 +14,7 @@ it('should returns the section index page', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    get(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+    get(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->assertOk()
         ->assertSeeText(trans('admin::app.components.layouts.sidebar.sections'))
         ->assertSeeText(trans('admin::app.appearance.sections.index.create-btn'));
@@ -24,7 +24,7 @@ it('should fail the validation with errors when certain field not provided when 
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme]))
+    postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]))
         ->assertJsonValidationErrorFor('name')
         ->assertJsonValidationErrorFor('type')
         ->assertUnprocessable();
@@ -34,7 +34,7 @@ it('should fail the validation with errors when correct type not provided when s
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme]), [
+    postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]), [
         'type' => 'INVALID_TYPE',
     ])
         ->assertJsonValidationErrorFor('name')
@@ -49,7 +49,7 @@ it('should store the newly created theme', function () {
     // Act and Assert.
     $this->loginAsAdmin();
 
-    postJson(route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme]), [
+    postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]), [
         'type' => $type = fake()->randomElement([
             'product_carousel',
             'category_carousel',
@@ -63,9 +63,9 @@ it('should store the newly created theme', function () {
         ->assertJsonPath('section.name', $name)
         ->assertJsonPath('section.type', $type);
 
-    $channelId = core()->getCurrentChannel()->id;
+    $channelId = core()->getDefaultChannel()->id;
 
-    $themeCode = core()->getCurrentChannel()->theme;
+    $themeCode = core()->getDefaultChannel()->theme;
 
     $this->assertModelWise([
         Section::class => [
@@ -176,15 +176,15 @@ it('should update the sections', function () {
     $data['type'] = $section->type;
     $data['name'] = $name = fake()->name();
     $data['sort_order'] = '1';
-    $data['channel_id'] = core()->getCurrentChannel()->id;
-    $data['theme_code'] = core()->getCurrentChannel()->theme;
+    $data['channel_id'] = core()->getDefaultChannel()->id;
+    $data['theme_code'] = core()->getDefaultChannel()->theme;
     $data['status'] = 'on';
 
     // Act and Assert.
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->isRedirection();
 
     $this->assertModelWise([
@@ -219,8 +219,8 @@ it('should sanitize malicious script tags from static content HTML when updating
         'type' => 'static_content',
         'name' => $name = fake()->name(),
         'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
+        'channel_id' => core()->getDefaultChannel()->id,
+        'theme_code' => core()->getDefaultChannel()->theme,
         'status' => 'on',
     ];
 
@@ -228,7 +228,7 @@ it('should sanitize malicious script tags from static content HTML when updating
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -260,8 +260,8 @@ it('should sanitize iframe tags from static content HTML when updating theme', f
         'type' => 'static_content',
         'name' => fake()->name(),
         'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
+        'channel_id' => core()->getDefaultChannel()->id,
+        'theme_code' => core()->getDefaultChannel()->theme,
         'status' => 'on',
     ];
 
@@ -269,7 +269,7 @@ it('should sanitize iframe tags from static content HTML when updating theme', f
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -301,8 +301,8 @@ it('should sanitize form tags from static content HTML when updating theme', fun
         'type' => 'static_content',
         'name' => fake()->name(),
         'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
+        'channel_id' => core()->getDefaultChannel()->id,
+        'theme_code' => core()->getDefaultChannel()->theme,
         'status' => 'on',
     ];
 
@@ -310,7 +310,7 @@ it('should sanitize form tags from static content HTML when updating theme', fun
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -344,8 +344,8 @@ it('should preserve safe HTML content in static content when updating theme', fu
         'type' => 'static_content',
         'name' => fake()->name(),
         'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
+        'channel_id' => core()->getDefaultChannel()->id,
+        'theme_code' => core()->getDefaultChannel()->theme,
         'status' => 'on',
     ];
 
@@ -353,7 +353,7 @@ it('should preserve safe HTML content in static content when updating theme', fu
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -388,8 +388,8 @@ it('should sanitize malicious event handlers from static content HTML when updat
         'type' => 'static_content',
         'name' => fake()->name(),
         'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
+        'channel_id' => core()->getDefaultChannel()->id,
+        'theme_code' => core()->getDefaultChannel()->theme,
         'status' => 'on',
     ];
 
@@ -397,7 +397,7 @@ it('should sanitize malicious event handlers from static content HTML when updat
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -431,8 +431,8 @@ it('should not sanitize HTML for non-static content theme types', function () {
         'type' => 'product_carousel',
         'name' => $name = fake()->name(),
         'sort_order' => '1',
-        'channel_id' => core()->getCurrentChannel()->id,
-        'theme_code' => core()->getCurrentChannel()->theme,
+        'channel_id' => core()->getDefaultChannel()->id,
+        'theme_code' => core()->getDefaultChannel()->theme,
         'status' => 'on',
     ];
 
@@ -440,7 +440,7 @@ it('should not sanitize HTML for non-static content theme types', function () {
     $this->loginAsAdmin();
 
     postJson(route('admin.appearance.sections.update', $section->id), $data)
-        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getCurrentChannel()->theme]))
+        ->assertRedirect(route('admin.appearance.sections.index', ['code' => core()->getDefaultChannel()->theme]))
         ->isRedirection();
 
     $section->refresh();
@@ -502,12 +502,12 @@ it('should turn a section off and back on again', function () {
 
 it('should take the channel and theme of the editor rather than the request when creating', function () {
     // Arrange.
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     // Act and Assert.
     $this->loginAsAdmin();
 
-    $response = postJson(route('admin.appearance.sections.store', ['code' => core()->getCurrentChannel()->theme]), [
+    $response = postJson(route('admin.appearance.sections.store', ['code' => core()->getDefaultChannel()->theme]), [
         'name' => $name = 'Scoped Section',
         'type' => 'product_carousel',
         'channel_id' => 999999,
@@ -523,7 +523,7 @@ it('should take the channel and theme of the editor rather than the request when
 
 it('should scope the listing to the requested channel', function () {
     // Arrange.
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $section = Section::factory()->create(['name' => 'Only On This Channel']);
 
@@ -559,7 +559,7 @@ it('should no longer expose the mass action endpoints', function () {
 
 it('should place a duplicate directly below its original', function () {
     // Arrange.
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $made = collect(['First', 'Second', 'Third'])->map(fn ($name, $index) => Section::factory()->create([
         'name' => $name,
@@ -670,7 +670,7 @@ it('should not ask for a sort order where the rows are dragged instead', functio
 
 it('should hand the editor a store url carrying the channel being edited', function () {
     // Arrange.
-    $other = Channel::factory()->create(['theme' => core()->getCurrentChannel()->theme]);
+    $other = Channel::factory()->create(['theme' => core()->getDefaultChannel()->theme]);
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -685,7 +685,7 @@ it('should hand the editor a store url carrying the channel being edited', funct
 
 it('should create a section against the channel the editor is scoped to', function () {
     // Arrange.
-    $other = Channel::factory()->create(['theme' => core()->getCurrentChannel()->theme]);
+    $other = Channel::factory()->create(['theme' => core()->getDefaultChannel()->theme]);
 
     // Act and Assert.
     $this->loginAsAdmin();
@@ -705,7 +705,7 @@ it('should create a section against the channel the editor is scoped to', functi
 
 it('should refuse a second footer links section on the same channel', function () {
     // Arrange.
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     Section::factory()->create([
         'type' => 'footer_links',
@@ -727,7 +727,7 @@ it('should refuse a second footer links section on the same channel', function (
 
 it('should still allow a footer links section on a channel that has none', function () {
     // Arrange.
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     Section::factory()->create([
         'type' => 'footer_links',
@@ -751,7 +751,7 @@ it('should still allow a footer links section on a channel that has none', funct
 
 it('should place a new section above the pinned footer', function () {
     // Arrange.
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     $footer = Section::factory()->create([
         'type' => 'footer_links',
@@ -828,7 +828,7 @@ it('should offer the same categories to both carousels', function () {
  */
 function channelWithoutFooter(): Channel
 {
-    $channel = core()->getCurrentChannel();
+    $channel = core()->getDefaultChannel();
 
     Section::where('type', Section::FOOTER_LINKS)->get()->each->delete();
 

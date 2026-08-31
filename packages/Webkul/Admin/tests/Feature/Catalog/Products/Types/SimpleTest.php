@@ -90,7 +90,7 @@ it('should persist boolean attribute values after store and update', function ()
 
 it('should persist channel-scoped boolean attribute values after store and update', function () {
     $product = $this->storeAndUpdateSimpleProduct();
-    $channel = core()->getCurrentChannelCode();
+    $channel = core()->getDefaultChannelCode();
 
     $channelScoped = ['status'];
 
@@ -163,7 +163,7 @@ it('should populate product_flat with all indexed columns after store and update
 
     // Locale and channel
     expect($flat->locale)->toBe(app()->getLocale());
-    expect($flat->channel)->toBe(core()->getCurrentChannelCode());
+    expect($flat->channel)->toBe(core()->getDefaultChannelCode());
 });
 
 // ============================================================================
@@ -192,7 +192,7 @@ it('should assign the simple product to the current channel after update', funct
 
     $this->assertDatabaseHas('product_channels', [
         'product_id' => $product->id,
-        'channel_id' => core()->getCurrentChannel()->id,
+        'channel_id' => core()->getDefaultChannel()->id,
     ]);
 });
 
@@ -241,7 +241,7 @@ it('should update a simple product and reflect changes in all related tables', f
         'description' => 'Changed description.',
         'price' => 49.99,
         'weight' => 5,
-        'channel' => core()->getCurrentChannelCode(),
+        'channel' => core()->getDefaultChannelCode(),
         'locale' => app()->getLocale(),
         'status' => 1,
         'visible_individually' => 1,

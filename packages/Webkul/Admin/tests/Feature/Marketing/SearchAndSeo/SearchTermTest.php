@@ -35,7 +35,7 @@ it('should store a newly created search term', function () {
     postJson(route('admin.marketing.search_seo.search_terms.store'), [
         'term' => $term = fake()->word(),
         'redirect_url' => $url = fake()->url(),
-        'channel_id' => $channelId = core()->getCurrentChannel()->id,
+        'channel_id' => $channelId = core()->getDefaultChannel()->id,
         'locale' => $locale = core()->getCurrentLocale()->code,
     ])
         ->assertOk()
@@ -71,7 +71,7 @@ it('should update an existing search term', function () {
     putJson(route('admin.marketing.search_seo.search_terms.update'), [
         'id' => $searchTerm->id,
         'term' => $term = fake()->word(),
-        'channel_id' => core()->getCurrentChannel()->id,
+        'channel_id' => core()->getDefaultChannel()->id,
         'locale' => core()->getCurrentLocale()->code,
     ])
         ->assertOk()
