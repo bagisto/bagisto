@@ -4,6 +4,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 ## Unreleased
 
+- Reworked every image and file setting in Admin → Configuration onto one upload control. Each now shows a preview tile that uploads on click and carries its own replace, download and delete actions, in place of the browser's bare file input and the loose delete checkbox beside it. The preview had been positioned with a class Tailwind 3 ignored and Tailwind 4 resolves, so it sat sixty pixels low and overlapped the field beneath it. Removing a setting now deletes the stored file along with the value, rather than leaving it behind on disk.
+
 - Added PostgreSQL support with database grammar abstraction layer, model boolean casts, and cross-database query compatibility.
 
 - Upgraded to Laravel 13 on PHP 8.4 with Pest 5 / PHPUnit 13, refreshed config and skeleton files, and major bumps across `nestedset`, `l5-repository`, `concord`, `tinker` and `debugbar`.

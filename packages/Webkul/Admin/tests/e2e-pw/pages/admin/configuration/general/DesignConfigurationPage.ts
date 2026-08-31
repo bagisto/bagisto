@@ -16,32 +16,14 @@ export class DesignConfigurationPage extends BasePage {
         return this.page.getByText("Configuration saved successfully");
     }
 
-    private logoInput() {
+    private mediaInput(field: string) {
         return this.page.locator(
-            'input[type="file"][name="general[design][admin_logo][logo_image]"]',
+            `input[type="file"][name="general[design][admin_logo][${field}]"]`,
         );
     }
 
-    private faviconInput() {
-        return this.page.locator(
-            'input[type="file"][name="general[design][admin_logo][favicon]"]',
-        );
-    }
-
-    private deleteLogoButton() {
-        return this.page
-            .locator(
-                '[id="general\\[design\\]\\[admin_logo\\]\\[logo_image\\]\\[delete\\]"]',
-            )
-            .nth(1);
-    }
-
-    private deleteFaviconButton() {
-        return this.page
-            .locator(
-                '[id="general\\[design\\]\\[admin_logo\\]\\[favicon\\]\\[delete\\]"]',
-            )
-            .nth(1);
+    private mediaTile(field: string) {
+        return this.mediaInput(field).locator("xpath=../div[1]");
     }
 
     private categoryViewSelect() {
@@ -75,23 +57,19 @@ export class DesignConfigurationPage extends BasePage {
     }
 
     async uploadLogo(filePath: string): Promise<void> {
-        const input = this.logoInput();
-        await expect(input).toBeVisible();
-        await input.setInputFiles(filePath);
+        await this.uploadMedia("logo_image", filePath);
     }
 
     async deleteLogo(): Promise<void> {
-        await this.deleteLogoButton().click();
+        await this.deleteMedia("logo_image");
     }
 
     async uploadFavicon(filePath: string): Promise<void> {
-        const input = this.faviconInput();
-        await expect(input).toBeVisible();
-        await input.setInputFiles(filePath);
+        await this.uploadMedia("favicon", filePath);
     }
 
     async deleteFavicon(): Promise<void> {
-        await this.deleteFaviconButton().click();
+        await this.deleteMedia("favicon");
     }
 
     async selectCategoryView(mode: "sidebar" | "default"): Promise<void> {
@@ -113,5 +91,19 @@ export class DesignConfigurationPage extends BasePage {
     async saveAndVerify(): Promise<void> {
         await this.saveButton.click();
         await expect(this.successNotification).toBeVisible();
+    }
+
+    private async uploadMedia(field: string, filePath: string): Promise<void> {
+        const input = this.mediaInput(field);
+        await expect(input).toBeAttached();
+        await input.setInputFiles(filePath);
+        await expect(this.mediaTile(field).locator("img")).toBeVisible();
+    }
+
+    private async deleteMedia(field: string): Promise<void> {
+        const tile = this.mediaTile(field);
+        await tile.hover();
+        await tile.locator(".icon-delete").click();
+        await expect(tile).toBeHidden();
     }
 }

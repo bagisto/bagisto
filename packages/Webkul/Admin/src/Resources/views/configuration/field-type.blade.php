@@ -27,7 +27,11 @@
     >
         <div class="shimmer mb-1.5 h-4 w-24"></div>
 
-        <div class="shimmer flex h-10.5 w-full rounded-md"></div>
+        @if (in_array($field->getType(), ['image', 'file']))
+            <div class="shimmer h-30 w-30 rounded-sm"></div>
+        @else
+            <div class="shimmer flex h-10.5 w-full rounded-md"></div>
+        @endif
     </v-configurable>
 </div>
 
@@ -233,84 +237,121 @@
                 </label>
             </template>
         
-            <template v-if="field.type == 'image' && field.is_visible">
-                <div class="flex items-center justify-center">
-                    <a
-                        :href="src"
-                        target="_blank"
-                        v-if="value"
-                    >
-                        <img
-                            :src="src"
-                            :alt="name"
-                            class="top-15 rounded-3 border-3 relative h-8.25 w-8.25 border-gray-500 ltr:mr-5 rtl:ml-5"
-                        />
-                    </a>
-                    
-                    <x-admin::form.control-group.control
-                        type="file"
-                        ::name="name"
-                        ::id="name"
-                        ::rules="validations"
-                        ::label="label"
-                    />
-                </div>
-        
-                <template v-if="value">
-                    <x-admin::form.control-group class="mt-1.5 flex w-max cursor-pointer select-none items-center gap-1.5">
-                        <x-admin::form.control-group.control
-                            type="checkbox"
-                            ::id="`${name}[delete]`"
-                            ::name="`${name}[delete]`"
-                            value="1"
-                            ::for="`${name}[delete]`"
-                        />
-        
-                        <label
-                            :for="`${name}[delete]`"
-                            class="cursor-pointer text-sm! font-semibold! text-gray-600! dark:text-gray-300!"
-                        >
-                            @lang('admin::app.configuration.index.delete')
-                        </label>
-                    </x-admin::form.control-group>
-                </template>
-            </template>
-
-            <template v-if="field.type == 'file' && field.is_visible">
-                <a
-                    v-if="value"
-                    :href="'{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), ':path']) }}'.replace(':path', value.split('/')[1])"
+            <!-- Image And File Input -->
+            <template v-if="isMediaField && field.is_visible">
+                <v-field
+                    v-slot="{ field: mediaField, errors, handleChange, handleBlur }"
+                    :name="name"
+                    :rules="validations"
+                    :label="label"
                 >
-                    <div class="mb-1 inline-flex w-full max-w-max cursor-pointer appearance-none items-center justify-between gap-x-1 rounded-md border border-transparent p-1.5 text-center text-gray-600 transition-all marker:shadow-sm hover:bg-gray-200 active:border-gray-300 dark:text-gray-300 dark:hover:bg-gray-800">
-                        <i class="icon-down-stat text-2xl"></i>
-                    </div>
-                </a>
-        
-                <x-admin::form.control-group.control
-                    type="file"
-                    ::id="name"
-                    ::name="name"
-                    ::rules="validations"
-                    ::label="label"
-                />
-        
-                <template v-if="value">
-                    <div class="flex cursor-pointer gap-2.5">
-                        <x-admin::form.control-group.control
-                            type="checkbox"
-                            ::id="`${name}[delete]`"
-                            ::name="`${name}[delete]`"
-                            value="1"
-                        />
-        
-                        <label
-                            class="cursor-pointer"
-                            ::for="`${name}[delete]`"
+                    <div class="flex">
+                        <!-- Uploaded Media -->
+                        <div
+                            v-if="hasMedia"
+                            class="group relative flex h-30 w-30 items-center justify-center overflow-hidden rounded-sm border border-gray-300 dark:border-gray-800"
                         >
-                            @lang('admin::app.configuration.index.delete')
+                            <img
+                                v-if="mediaPreview"
+                                class="max-h-full max-w-full"
+                                :src="mediaPreview"
+                                :alt="mediaFileName"
+                            />
+
+                            <div
+                                v-else
+                                class="flex flex-col items-center gap-1 px-2"
+                            >
+                                <span class="icon-folder text-2xl text-gray-600 dark:text-gray-300"></span>
+
+                                <p
+                                    class="line-clamp-2 break-all text-center text-xs text-gray-600 dark:text-gray-300"
+                                    v-text="mediaFileName"
+                                >
+                                </p>
+                            </div>
+
+                            <!-- Actions -->
+                            <div class="invisible absolute bottom-0 flex w-full justify-center gap-1 bg-white/90 p-1 transition-all group-hover:visible dark:bg-gray-900/90">
+                                <label
+                                    class="icon-edit cursor-pointer rounded-md p-1.5 text-2xl text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
+                                    :for="name"
+                                    title="@lang('admin::app.configuration.index.replace')"
+                                ></label>
+
+                                <a
+                                    v-if="mediaDownloadUrl"
+                                    class="icon-down-stat rounded-md p-1.5 text-2xl text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
+                                    :href="mediaDownloadUrl"
+                                    title="@lang('admin::app.configuration.index.download')"
+                                ></a>
+
+                                <span
+                                    class="icon-delete cursor-pointer rounded-md p-1.5 text-2xl text-gray-600 hover:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800"
+                                    title="@lang('admin::app.configuration.index.delete')"
+                                    @click="removeMedia"
+                                ></span>
+                            </div>
+                        </div>
+
+                        <!-- Upload Button -->
+                        <label
+                            v-else
+                            class="flex h-30 w-30 cursor-pointer flex-col items-center justify-center gap-1 overflow-hidden rounded-sm border border-dashed px-2 transition-all hover:border-gray-400 dark:hover:border-gray-400"
+                            :class="errors.length ? 'border-red-600' : 'border-gray-300 dark:border-gray-800'"
+                            :for="name"
+                        >
+                            <span
+                                v-if="field.type == 'image'"
+                                class="icon-image text-2xl text-gray-600 dark:text-gray-300"
+                            ></span>
+
+                            <span
+                                v-else
+                                class="icon-folder text-2xl text-gray-600 dark:text-gray-300"
+                            ></span>
+
+                            <p
+                                v-if="field.type == 'image'"
+                                class="text-center text-sm font-semibold text-gray-600 dark:text-gray-300"
+                            >
+                                @lang('admin::app.configuration.index.add-image')
+                            </p>
+
+                            <p
+                                v-else
+                                class="text-center text-sm font-semibold text-gray-600 dark:text-gray-300"
+                            >
+                                @lang('admin::app.configuration.index.add-file')
+                            </p>
+
+                            <p
+                                v-if="mediaHint"
+                                class="text-center text-xs leading-tight text-gray-500 dark:text-gray-300"
+                                v-text="mediaHint"
+                            >
+                            </p>
                         </label>
+
+                        <input
+                            type="file"
+                            class="hidden"
+                            ref="mediaInput"
+                            :id="name"
+                            :name="mediaField.name"
+                            :accept="mediaAccept"
+                            @change="handleChange($event); stageMedia($event)"
+                            @blur="handleBlur"
+                        />
                     </div>
-                </template>
+                </v-field>
+
+                <input
+                    v-if="media.isDeleted"
+                    type="hidden"
+                    :name="`${name}[delete]`"
+                    value="1"
+                />
             </template>
 
             <template v-if="field.type == 'country' && field.is_visible">
@@ -460,13 +501,113 @@
             data() {
                 return {
                     field: JSON.parse(this.fieldData),
+
+                    media: {
+                        file: null,
+
+                        preview: '',
+
+                        isDeleted: false,
+                    },
                 };
             },
 
             computed: {
+                /**
+                 * The stored comma separated value of a multiselect, as the array it binds to.
+                 */
                 savedSelections() {
                     return this.value ? this.value.split(',') : [];
-                }
+                },
+
+                /**
+                 * Whether the field holds an uploaded image or file.
+                 */
+                isMediaField() {
+                    return ['image', 'file'].includes(this.field.type);
+                },
+
+                /**
+                 * The extensions the field's mimes rule accepts.
+                 */
+                mediaTypes() {
+                    const rule = (this.validations ?? '')
+                        .split('|')
+                        .find((rule) => rule.startsWith('mimes:'));
+
+                    return rule
+                        ? rule.split(':')[1].split(',').filter((type) => type)
+                        : [];
+                },
+
+                /**
+                 * The accept attribute of the file input, narrowed to the extensions the field allows.
+                 */
+                mediaAccept() {
+                    if (this.mediaTypes.length) {
+                        return this.mediaTypes.map((type) => `.${type}`).join(',');
+                    }
+
+                    return this.field.type == 'image' ? 'image/*' : '';
+                },
+
+                /**
+                 * The accepted extensions, shown as the hint under the upload button.
+                 */
+                mediaHint() {
+                    return this.mediaTypes.join(', ');
+                },
+
+                /**
+                 * Whether there is a file to show: one just picked, or a stored one still kept.
+                 */
+                hasMedia() {
+                    return !! this.media.file
+                        || (!! this.value && ! this.media.isDeleted);
+                },
+
+                /**
+                 * The image to preview, empty for a field holding something that is not one.
+                 */
+                mediaPreview() {
+                    if (this.field.type != 'image') {
+                        return '';
+                    }
+
+                    if (this.media.file) {
+                        return this.media.preview;
+                    }
+
+                    return this.value && ! this.media.isDeleted ? this.src : '';
+                },
+
+                /**
+                 * The name of the picked file, or of the stored one.
+                 */
+                mediaFileName() {
+                    if (this.media.file) {
+                        return this.media.file.name;
+                    }
+
+                    return this.value ? this.value.split('/').pop() : '';
+                },
+
+                /**
+                 * The link a stored file is downloaded from, empty while there is nothing stored.
+                 */
+                mediaDownloadUrl() {
+                    if (
+                        this.field.type != 'file'
+                        || this.media.file
+                        || ! this.value
+                        || this.media.isDeleted
+                    ) {
+                        return '';
+                    }
+
+                    return "{{ route('admin.configuration.download', [request()->route('slug'), request()->route('slug2'), ':path']) }}"
+                        .replace(':path', this.value.split('/')[1]);
+                },
             },
 
             mounted() {
@@ -488,6 +629,55 @@
                 });
 
                 dependElement.dispatchEvent(new Event('change'));
+            },
+
+            methods: {
+                /**
+                 * Stage the picked file for preview, over whatever the field already held.
+                 */
+                stageMedia(event) {
+                    const file = event.target.files[0];
+
+                    if (! file) {
+                        return;
+                    }
+
+                    this.media.file = file;
+
+                    this.media.preview = '';
+
+                    this.media.isDeleted = false;
+
+                    if (! file.type.startsWith('image/')) {
+                        return;
+                    }
+
+                    const reader = new FileReader();
+
+                    reader.onload = (event) => this.media.preview = event.target.result;
+
+                    reader.readAsDataURL(file);
+                },
+
+                /**
+                 * Drop the picked file, or mark the stored one to be removed on save. The cleared
+                 * input is dispatched so the validator lets go of the file it was holding too.
+                 */
+                removeMedia() {
+                    this.$refs.mediaInput.value = '';
+
+                    this.$refs.mediaInput.dispatchEvent(new Event('change'));
+
+                    if (this.media.file) {
+                        this.media.file = null;
+
+                        this.media.preview = '';
+
+                        return;
+                    }
+
+                    this.media.isDeleted = true;
+                },
             },
         });
 

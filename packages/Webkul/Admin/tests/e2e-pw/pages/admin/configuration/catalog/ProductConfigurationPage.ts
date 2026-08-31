@@ -36,12 +36,12 @@ export class ProductConfigurationPage extends BasePage {
         return this.page.locator(`label:has-text("${size} Image Placeholder")`);
     }
 
-    private imageDeleteButton(size: "small" | "medium" | "large") {
+    private imagePlaceholderTile(size: "small" | "medium" | "large") {
         return this.page
             .locator(
-                `[id="catalog\\[products\\]\\[cache_${size}_image\\]\\[url\\]\\[delete\\]"]`,
+                `input[type="file"][name="catalog[products][cache_${size}_image][url]"]`,
             )
-            .nth(1);
+            .locator("xpath=../div[1]");
     }
 
     async open(): Promise<void> {
@@ -154,7 +154,11 @@ export class ProductConfigurationPage extends BasePage {
     async removeImagePlaceholder(
         size: "small" | "medium" | "large",
     ): Promise<void> {
-        await this.imageDeleteButton(size).click();
+        const tile = this.imagePlaceholderTile(size);
+
+        await tile.hover();
+        await tile.locator(".icon-delete").click();
+        await expect(tile).toBeHidden();
     }
 
     async updateReviewConfig(summary: string): Promise<void> {
