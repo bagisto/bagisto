@@ -63,7 +63,7 @@ php artisan optimize:clear      # Clear all caches (run after config/code change
 ### Testing
 ```bash
 vendor/bin/pest                                         # Run all tests
-vendor/bin/pest --parallel                              # Run all tests in parallel (6 processes)
+vendor/bin/pest --parallel                              # Run all tests in parallel (one process per CPU core)
 vendor/bin/pest --testsuite="Admin Feature Test"        # Run a specific test suite
 vendor/bin/pest packages/Webkul/Admin/tests/Feature     # Run tests in a directory
 vendor/bin/pest --filter="test name"                    # Run a single test by name
@@ -75,71 +75,27 @@ Every package that has tests is registered above. Packages without a `tests/` di
 
 Tests use **Pest 5** (PHPUnit 13) with package-specific TestCase classes bound in `tests/Pest.php`. Each package's tests live in `packages/Webkul/<Package>/tests/`.
 
-### Fresh Database Setup for Testing
-Parallel testing creates databases named `{DB_DATABASE}_test_1`, `{DB_DATABASE}_test_2`, etc. based on the number of CPU cores. For example, with `DB_DATABASE=bagisto` on a 6-core machine, it creates `bagisto_test_1` through `bagisto_test_6`. This applies to MySQL, MariaDB and PostgreSQL alike.
-
-When the schema changes, these test databases become stale and must be dropped before re-running:
-
-```bash
-# Drop parallel test databases (adjust the count to match your CPU cores)
-php artisan tinker --execute="for (\$i = 1; \$i <= 6; \$i++) { try { DB::statement(\"DROP DATABASE IF EXISTS bagisto_test_{\$i}\"); } catch (\Exception \$e) {} }"
-
-# Fresh install
-php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
-
-# Run tests
-vendor/bin/pest --parallel --no-coverage
-```
+Parallel runs create one database per CPU core (`{DB_DATABASE}_test_1`, `_test_2`, …) and do **not**
+re-migrate them, so a schema change leaves them stale and the failures look like broken code. The
+`bagisto-pest-testing` skill has the teardown-and-reinstall recipe.
 
 ### E2E Tests (Playwright)
-E2E tests are run from within each package directory. Each package has its own Playwright config and tests:
+Three suites — `Admin`, `Shop`, `Installer` — each run from its own package directory:
 
-**Admin**:
 ```bash
-cd packages/Webkul/Admin
-npm install
-npm run install:browsers
+cd packages/Webkul/Admin      # or Shop, or Installer
+npm install && npm run install:browsers
 npm run test:e2e
 ```
 
-**Shop**:
-```bash
-cd packages/Webkul/Shop
-npm install
-npm run install:browsers
-npm run test:e2e
-```
+Append flags after `--`, e.g. `npm run test:e2e -- --grep "@en"` (Installer tags specs per locale)
+or `-- --shard=1/10`. `test:e2e:headed`, `:ui`, `:debug` and `:report` mirror the Playwright flags.
 
-**Installer** — drives the guided web installer, so it runs against an *uninstalled* application
-(no `bagisto:install`, only `php artisan key:generate`). Specs are tagged per locale:
-```bash
-cd packages/Webkul/Installer
-npm install
-npm run install:browsers
-npm run test:e2e -- --grep "@en"
-```
-The database it installs into comes from the `INSTALLER_DB_*` env vars, defaulting to MySQL on
-127.0.0.1:3306.
+Admin and Shop need a running server (`php artisan serve`) and a seeded database; Installer runs
+against an *uninstalled* app. The base URL comes from `APP_URL`, falling back to `BASE_URL`.
 
-Admin and Shop tests require a running Laravel server (`php artisan serve`) and a seeded database.
-The base URL comes from `APP_URL` in the application `.env`, falling back to `BASE_URL`; every
-environment value is read and validated once in `tests/e2e-pw/utils/env.ts`, never from
-`process.env` elsewhere. A suite also honours its own `tests/e2e-pw/.env` when one exists, and
-locates the application by searching upward for `artisan`, so it keeps working if the folder moves.
-
-Each package exposes the same scripts, all run from the package directory:
-
-| Script | Purpose |
-|---|---|
-| `npm run test:e2e` | Run the suite; append `-- --grep …`, `-- --shard=i/n`, or a spec path |
-| `npm run test:e2e:headed` / `:ui` / `:debug` | Visible browser, UI mode, inspector |
-| `npm run test:e2e:report` | Open the last HTML report |
-| `npm run install:browsers` | Install the pinned Chromium with its system deps |
-| `npm run typecheck` | `tsc --noEmit` over the suite |
-| `npm run format` / `format:check` | Prettier write / CI-style check, scoped to `tests/e2e-pw` |
-
-`typecheck` and `format:check` are not yet clean on the existing specs and page objects, so they
-are local tools rather than CI gates.
+Load the `bagisto-playwright-testing` skill for anything beyond running them — the env and path
+contracts, writing specs and page objects, and diagnosing a failure.
 
 ### Code Style
 ```bash

@@ -105,8 +105,9 @@ your summary rather than silently churning the codebase either way.
 │   ├── FPC/                    # Full page cache
 │   ├── ImageCache/             # Image caching/resizing
 │   ├── DebugBar/               # Debug toolbar
-│   ├── BreezeFront/            # Breeze frontend theme
-│   └── NewTheme/               # New theme scaffold
+│   ├── Omnibus/                # EU Omnibus lowest-price history
+│   ├── EUWithdrawal/           # EU right-of-withdrawal
+│   └── PhonePe/                # PhonePe integration
 ├── routes/
 │   ├── web.php                 # Minimal — packages define their own routes
 │   └── console.php
@@ -116,7 +117,7 @@ your summary rather than silently churning the codebase either way.
 ├── pint.json                   # Pint config (preset: laravel)
 ├── vite.config.js              # Root Vite config
 └── docker-compose.yml          # Sail: MySQL 8, Redis, Elasticsearch 7.17, Kibana, Mailpit
-└── docker/production/          # Production images: {nginx,apache,litespeed} x {mysql,postgres}
+└── docker/production/          # Production images: {nginx,apache,litespeed} x {mysql,mariadb,postgres}
 ```
 
 ## Package Internal Structure
@@ -192,7 +193,7 @@ When the schema changes, these test databases become stale and must be dropped b
 php artisan tinker --execute="for (\$i = 1; \$i <= 6; \$i++) { try { DB::statement(\"DROP DATABASE IF EXISTS bagisto_test_{\$i}\"); } catch (\Exception \$e) {} }"
 
 # Fresh install
-php artisan bagisto:install --skip-env-check --skip-admin-creation --skip-github-star
+php artisan bagisto:install --no-interaction
 
 # Run tests
 vendor/bin/pest --parallel --no-coverage
