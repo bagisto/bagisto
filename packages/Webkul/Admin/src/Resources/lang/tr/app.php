@@ -4399,6 +4399,7 @@ return [
                         'config' => 'Yapılandırma',
                         'debug-mode' => 'Hata Ayıklama Modu',
                         'disk' => 'Disk',
+                        'driver' => 'Sürücü',
                         'engine' => 'Motor',
                         'environment' => 'Ortam',
                         'events' => 'Olaylar',

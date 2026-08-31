@@ -4399,6 +4399,7 @@ return [
                         'config' => 'پیکربندی',
                         'debug-mode' => 'حالت اشکال‌زدایی',
                         'disk' => 'دیسک',
+                        'driver' => 'درایور',
                         'engine' => 'موتور',
                         'environment' => 'محیط',
                         'events' => 'رویدادها',

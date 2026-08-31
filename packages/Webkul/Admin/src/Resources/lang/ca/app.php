@@ -4399,6 +4399,7 @@ return [
                         'config' => 'Configuració',
                         'debug-mode' => 'Mode de depuració',
                         'disk' => 'Disc',
+                        'driver' => 'Controlador',
                         'engine' => 'Motor',
                         'environment' => 'Entorn',
                         'events' => 'Esdeveniments',

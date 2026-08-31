@@ -4399,6 +4399,7 @@ return [
                         'config' => 'תצורה',
                         'debug-mode' => 'מצב ניפוי שגיאות',
                         'disk' => 'דיסק',
+                        'driver' => 'מנהל התקן',
                         'engine' => 'מנוע',
                         'environment' => 'סביבה',
                         'events' => 'אירועים',

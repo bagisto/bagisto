@@ -48,6 +48,18 @@ enum SupportedFilesystemEnum: string
     }
 
     /**
+     * Where this driver's name is kept, so it reads as the configuration screen names it.
+     */
+    public function title(): string
+    {
+        return 'admin::app.configuration.index.file-management.general.settings.drivers.'.match ($this) {
+            self::LOCAL => 'local',
+            self::S3 => 's3',
+            self::R2 => 'r2',
+        };
+    }
+
+    /**
      * The adapter package a driver needs, for the ones that are not built in.
      */
     public function adapter(): ?string

@@ -4399,6 +4399,7 @@ return [
                         'config' => '設定',
                         'debug-mode' => 'デバッグモード',
                         'disk' => 'ディスク',
+                        'driver' => 'ドライバー',
                         'engine' => 'エンジン',
                         'environment' => '環境',
                         'events' => 'イベント',

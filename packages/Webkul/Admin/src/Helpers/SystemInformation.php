@@ -5,6 +5,7 @@ namespace Webkul\Admin\Helpers;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
+use Webkul\Core\Enums\SupportedFilesystemEnum;
 use Webkul\Core\Mail\Transport\DynamicMailTransport;
 use Webkul\Product\Enums\SearchEngineStatusEnum;
 use Webkul\Product\Services\Search\SearchEngineAvailability;
@@ -177,9 +178,7 @@ class SystemInformation
                 'transport' => $this->mailTransport(),
             ],
 
-            'storage' => [
-                'disk' => config('filesystems.default'),
-            ],
+            'storage' => $this->storage(),
         ];
     }
 
@@ -231,7 +230,7 @@ class SystemInformation
     }
 
     /**
-     * How a recorded search verdict reads. A cluster that has never been asked reads as unknown 
+     * How a recorded search verdict reads. A cluster that has never been asked reads as unknown
      * rather than as failing.
      */
     protected function searchStatus(array $probe): string
@@ -266,6 +265,35 @@ class SystemInformation
         } catch (\Throwable) {
             return 'SMTP';
         }
+    }
+
+    /**
+     * The storage uploads are saved to, named as the configuration screen names it.
+     * Local storage cannot fail, so only a remote disk is reported as standing or not.
+     *
+     * @return array<string, string>
+     */
+    protected function storage(): array
+    {
+        $chosen = SupportedFilesystemEnum::fromConfig(
+            core()->getConfigData(SupportedFilesystemEnum::CONFIG_KEY)
+        );
+
+        $entries = ['driver' => trans($chosen->title())];
+
+        if (is_null($chosen->adapter())) {
+            return $entries;
+        }
+
+        $inEffect = config('filesystems.default') === $chosen->value;
+
+        $this->health['storage.status'] = $inEffect ? 'good' : 'bad';
+
+        return $entries + [
+            'status' => $inEffect
+                ? $this->translate('statuses.available')
+                : $this->translate('values.not-available'),
+        ];
     }
 
     /**

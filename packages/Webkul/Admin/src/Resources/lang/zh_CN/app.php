@@ -4399,6 +4399,7 @@ return [
                         'config' => '配置',
                         'debug-mode' => '调试模式',
                         'disk' => '磁盘',
+                        'driver' => '驱动',
                         'engine' => '引擎',
                         'environment' => '环境',
                         'events' => '事件',

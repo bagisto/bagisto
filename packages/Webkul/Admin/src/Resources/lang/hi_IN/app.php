@@ -4399,6 +4399,7 @@ return [
                         'config' => 'कॉन्फ़िगरेशन',
                         'debug-mode' => 'डिबग मोड',
                         'disk' => 'डिस्क',
+                        'driver' => 'ड्राइवर',
                         'engine' => 'इंजन',
                         'environment' => 'एनवायरनमेंट',
                         'events' => 'इवेंट',

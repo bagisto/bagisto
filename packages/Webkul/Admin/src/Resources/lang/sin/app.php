@@ -4399,6 +4399,7 @@ return [
                         'config' => 'වින්‍යාසය',
                         'debug-mode' => 'නිදොස් ප්‍රකාරය',
                         'disk' => 'තැටිය',
+                        'driver' => 'ධාවකය',
                         'engine' => 'එන්ජිම',
                         'environment' => 'පරිසරය',
                         'events' => 'සිදුවීම්',

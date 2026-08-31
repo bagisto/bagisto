@@ -4399,6 +4399,7 @@ return [
                         'config' => 'Konfiguracja',
                         'debug-mode' => 'Tryb debugowania',
                         'disk' => 'Dysk',
+                        'driver' => 'Sterownik',
                         'engine' => 'Silnik',
                         'environment' => 'Środowisko',
                         'events' => 'Zdarzenia',

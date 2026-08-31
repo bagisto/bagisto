@@ -4399,6 +4399,7 @@ return [
                         'config' => 'Configuratie',
                         'debug-mode' => 'Debugmodus',
                         'disk' => 'Schijf',
+                        'driver' => 'Stuurprogramma',
                         'engine' => 'Engine',
                         'environment' => 'Omgeving',
                         'events' => 'Gebeurtenissen',

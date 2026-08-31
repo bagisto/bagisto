@@ -4399,6 +4399,7 @@ return [
                         'config' => 'Konfigurasi',
                         'debug-mode' => 'Mode Debug',
                         'disk' => 'Disk',
+                        'driver' => 'Driver',
                         'engine' => 'Mesin',
                         'environment' => 'Lingkungan',
                         'events' => 'Event',
