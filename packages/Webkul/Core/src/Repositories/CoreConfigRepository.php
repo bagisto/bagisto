@@ -98,6 +98,10 @@ class CoreConfigRepository extends Repository
                         }
 
                         if (isset($value['delete'])) {
+                            if (in_array($field['type'] ?? '', ['image', 'file'])) {
+                                Storage::delete($coreConfig['value']);
+                            }
+
                             parent::delete($coreConfig['id']);
                         } else {
                             parent::update([
