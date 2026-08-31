@@ -77,7 +77,7 @@ it('should return total products added to wishlist stats', function () {
     Wishlist::factory()->create([
         'product_id' => $product->id,
         'customer_id' => $customer->id,
-        'channel_id' => core()->getCurrentChannel()->id,
+        'channel_id' => core()->getDefaultChannel()->id,
     ]);
 
     $this->loginAsAdmin();

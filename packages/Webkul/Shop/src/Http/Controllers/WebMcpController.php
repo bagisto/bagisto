@@ -80,12 +80,13 @@ class WebMcpController extends Controller
         $product = $this->productRepository->findBySlug($query)
             ?? $this->productRepository->findBySlug(Str::slug($query));
 
-        if ($product) {
+        if ($product?->isAvailableInChannel()) {
             return $product;
         }
 
         return $this->productRepository->getAll([
             'query' => $query,
+            'channel_id' => core()->getCurrentChannel()->id,
             'status' => 1,
             'visible_individually' => 1,
             'limit' => 1,

@@ -31,8 +31,8 @@ class SectionFactory extends Factory
             'type' => $this->faker->randomElement($types),
             'name' => preg_replace('/[^a-zA-Z ]/', '', $this->faker->name()),
             'sort_order' => ($lastSection ? $lastSection->id : 0) + 1,
-            'channel_id' => core()->getCurrentChannel()->id,
-            'theme_code' => core()->getCurrentChannel()->theme,
+            'channel_id' => core()->getDefaultChannel()->id,
+            'theme_code' => core()->getDefaultChannel()->theme,
         ];
     }
 }

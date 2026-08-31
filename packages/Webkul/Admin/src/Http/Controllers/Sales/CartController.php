@@ -58,6 +58,7 @@ class CartController extends Controller
         try {
             $cart = Cart::createCart([
                 'customer' => $customer,
+                'channel_id' => $customer->channel_id ?? core()->getDefaultChannel()->id,
                 'is_active' => false,
             ]);
 
