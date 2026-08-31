@@ -1,4 +1,4 @@
-import { Page, expect, Locator } from "@playwright/test";
+import { Locator, Page, Response, expect } from "@playwright/test";
 import { BasePage } from "../../BasePage";
 
 /**
@@ -187,10 +187,6 @@ export class CheckoutHelper extends BasePage {
             .first();
     }
 
-    get errorFlashMessage() {
-        return this.page.locator("p:has(.icon-toast-error)").first();
-    }
-
     get miniCart() {
         return this.page.locator("header").first();
     }
@@ -321,9 +317,6 @@ export class CheckoutHelper extends BasePage {
             .first();
     }
 
-    /**
-     * Search for product by name
-     */
     async searchProduct(productName: string) {
         await this.visit("");
         await this.page.waitForLoadState("networkidle");
@@ -331,9 +324,6 @@ export class CheckoutHelper extends BasePage {
         await this.searchInput.press("Enter");
     }
 
-    /**
-     * Navigate from cart to checkout (billing address step)
-     */
     async proceedToCheckout() {
         if (await this.shoppingCartIcon.isVisible()) {
             await this.shoppingCartIcon.click();
@@ -346,43 +336,86 @@ export class CheckoutHelper extends BasePage {
         await this.clickProcessButton.click();
     }
 
-    /**
-     * Place order and wait for processing
-     */
     async placeOrder() {
+        await this.waitForPaymentMethodSaved();
+
         await expect(this.clickPlaceOrderButton).toBeEnabled({
             timeout: 60 * 1000,
         });
+
+        const orderResponse = this.page.waitForResponse(
+            (response) =>
+                response.url().includes("/api/checkout/onepage/orders")
+                && response.request().method() === "POST",
+            { timeout: 90 * 1000 },
+        );
+
         await this.clickPlaceOrderButton.click();
+
+        await this.assertOrderAccepted(await orderResponse);
         await this.waitForOrderPlaced();
     }
 
-    /**
-     * Wait for the order to be placed, reporting the checkout error when it is not
-     */
-    private async waitForOrderPlaced() {
+    private async waitForPaymentMethodSaved() {
         await expect
             .poll(
                 async () => {
-                    if (this.page.url().includes("/checkout/onepage/success")) {
-                        return "success";
+                    const response = await this.page.request
+                        .get("api/checkout/onepage/summary")
+                        .catch(() => null);
+
+                    if (
+                        ! response
+                        || ! response.ok()
+                    ) {
+                        return null;
                     }
-                    const failed = await this.errorFlashMessage
-                        .isVisible()
-                        .catch(() => false);
-                    if (! failed) {
-                        return "pending";
-                    }
-                    const message = await this.errorFlashMessage
-                        .innerText()
-                        .catch(() => "");
-                    return `checkout failed: ${message.trim()}`;
+
+                    const body = await response.json().catch(() => null);
+
+                    return body?.data?.payment_method ?? null;
                 },
-                { timeout: 90 * 1000 },
+                {
+                    message: "the selected payment method was never saved on the cart",
+                    timeout: 30 * 1000,
+                },
             )
-            .toBe("success");
+            .not.toBeNull();
+    }
+
+    private async assertOrderAccepted(response: Response) {
+        if (response.ok()) {
+            return;
+        }
+
+        const body = await response.text().catch(() => "");
+        const payload = this.parseResponseBody(body);
+        const message =
+            payload?.message ?? payload?.data?.message ?? body.trim().slice(0, 300);
+
+        throw new Error(`checkout failed (${response.status()}): ${message}`);
+    }
+
+    private async waitForOrderPlaced() {
+        try {
+            await this.page.waitForURL("**/checkout/onepage/success**", {
+                timeout: 30 * 1000,
+            });
+        } catch {
+            throw new Error(
+                `checkout did not reach the success page, the browser is on "${this.page.url()}"`,
+            );
+        }
 
         await this.page.waitForLoadState("domcontentloaded");
+    }
+
+    private parseResponseBody(body: string): any {
+        try {
+            return JSON.parse(body);
+        } catch {
+            return null;
+        }
     }
 
     /**
