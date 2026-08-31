@@ -26,6 +26,8 @@ class ConfigurationController extends Controller
             request()->route('slug')
             && request()->route('slug2')
         ) {
+            abort_if(! system_config()->getActiveConfigurationItem(), 404);
+
             return view('admin::configuration.edit');
         }
 

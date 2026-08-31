@@ -12,6 +12,8 @@ This changelog consists of the bug & security fixes and new features being inclu
 
 - Fixed Admin → Configuration pages keeping a two-column layout on small screens, which squeezed the settings panel; the description and panel now stack.
 
+- Fixed a configuration URL naming a section that does not exist answering with a server error rather than a not found, whether the unknown name was the group or the section within it.
+
 - #11446 [fixed] - Fixed the loading placeholders on the storefront customer account pages. Reviews drew its product thumbnail through the lazy image loader with no source, so the placeholder turned itself into a broken image, and it stood in for a heading the page had already drawn, leaving the cards to jump as the reviews arrived. Orders, Downloadable Products, GDPR and RMA drew a table row where each of them lists cards on a phone. Every placeholder now has the shape and height of what replaces it.
 
 - #11445 [fixed] - Fixed Full Page Cache configuration refusing to save. Its lifetime field carries Laravel's `nullable` rule, which was passed to Vee Validate in the browser and threw "No such validator 'nullable' exists"; rules only the server understands are no longer sent to it.
