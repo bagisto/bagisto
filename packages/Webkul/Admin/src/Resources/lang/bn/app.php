@@ -4420,6 +4420,13 @@ return [
                         'views' => 'ভিউ',
                     ],
 
+                    'environments' => [
+                        'local' => 'লোকাল',
+                        'production' => 'প্রোডাকশন',
+                        'staging' => 'স্টেজিং',
+                        'testing' => 'টেস্টিং',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'অ্যারে (ইন-মেমরি)',

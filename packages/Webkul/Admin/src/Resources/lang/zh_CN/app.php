@@ -4420,6 +4420,13 @@ return [
                         'views' => '视图',
                     ],
 
+                    'environments' => [
+                        'local' => '本地',
+                        'production' => '生产',
+                        'staging' => '预发布',
+                        'testing' => '测试',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => '数组（内存）',

@@ -4420,6 +4420,13 @@ return [
                         'views' => 'תצוגות',
                     ],
 
+                    'environments' => [
+                        'local' => 'מקומי',
+                        'production' => 'ייצור',
+                        'staging' => 'הכנה',
+                        'testing' => 'בדיקות',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'מערך (בזיכרון)',

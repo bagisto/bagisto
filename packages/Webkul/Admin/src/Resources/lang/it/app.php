@@ -4420,6 +4420,13 @@ return [
                         'views' => 'Viste',
                     ],
 
+                    'environments' => [
+                        'local' => 'Locale',
+                        'production' => 'Produzione',
+                        'staging' => 'Staging',
+                        'testing' => 'Test',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'Array (in memoria)',

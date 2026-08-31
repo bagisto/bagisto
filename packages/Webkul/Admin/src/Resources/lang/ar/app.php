@@ -4420,6 +4420,13 @@ return [
                         'views' => 'العروض',
                     ],
 
+                    'environments' => [
+                        'local' => 'محلي',
+                        'production' => 'الإنتاج',
+                        'staging' => 'التجهيز',
+                        'testing' => 'الاختبار',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'مصفوفة (في الذاكرة)',

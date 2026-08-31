@@ -4420,6 +4420,13 @@ return [
                         'views' => 'Görünümler',
                     ],
 
+                    'environments' => [
+                        'local' => 'Yerel',
+                        'production' => 'Üretim',
+                        'staging' => 'Hazırlık',
+                        'testing' => 'Test',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'Dizi (bellekte)',

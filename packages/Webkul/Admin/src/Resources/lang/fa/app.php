@@ -4420,6 +4420,13 @@ return [
                         'views' => 'نماها',
                     ],
 
+                    'environments' => [
+                        'local' => 'محلی',
+                        'production' => 'تولید',
+                        'staging' => 'آزمایشی',
+                        'testing' => 'تست',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'آرایه (در حافظه)',

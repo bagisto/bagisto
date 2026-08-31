@@ -4420,6 +4420,13 @@ return [
                         'views' => 'දසුන්',
                     ],
 
+                    'environments' => [
+                        'local' => 'ස්ථානීය',
+                        'production' => 'නිෂ්පාදන',
+                        'staging' => 'අදියර',
+                        'testing' => 'පරීක්ෂණ',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'අරාව (මතකයේ)',

@@ -4420,6 +4420,13 @@ return [
                         'views' => 'Представления',
                     ],
 
+                    'environments' => [
+                        'local' => 'Локальная',
+                        'production' => 'Продакшн',
+                        'staging' => 'Стейджинг',
+                        'testing' => 'Тестовая',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'Массив (в памяти)',

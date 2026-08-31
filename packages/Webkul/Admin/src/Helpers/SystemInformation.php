@@ -313,29 +313,10 @@ class SystemInformation
                 continue;
             }
 
-            $rows[$this->label($section, $key)] = $section === 'drivers'
-                ? $this->driver($value)
-                : $value;
+            $rows[$this->label($section, $key)] = $this->readable($section, $key, $value);
         }
 
         return $rows;
-    }
-
-    /**
-     * How a driver reads, so `sync` is shown by name rather than as the identifier it is set by.
-     * One this page has no name for is read as words rather than left lowercase.
-     */
-    protected function driver(mixed $value): mixed
-    {
-        if (is_array($value)) {
-            return array_map(fn ($entry) => $this->driver($entry), $value);
-        }
-
-        if (! is_string($value)) {
-            return $value;
-        }
-
-        return $this->translate('drivers.'.$value, $value);
     }
 
     /**
@@ -369,6 +350,63 @@ class SystemInformation
     }
 
     /**
+     * How a reported value reads, for the few that arrive as an identifier rather than a name.
+     */
+    protected function readable(string $section, string $key, mixed $value): mixed
+    {
+        if ($section === 'drivers') {
+            return $this->driver($value);
+        }
+
+        if ($section !== 'environment') {
+            return $value;
+        }
+
+        return match ($key) {
+            'environment' => $this->translate('environments.'.$value, $value),
+            'locale' => $this->locale($value),
+            default => $value,
+        };
+    }
+
+    /**
+     * The language a locale code stands for, as the store names it.
+     */
+    protected function locale(string $code): string
+    {
+        try {
+            return core()->getAllLocales()->firstWhere('code', $code)?->name ?: $code;
+        } catch (\Throwable) {
+            return $code;
+        }
+    }
+
+    /**
+     * How a driver reads, so `sync` is shown by name rather than as the identifier it is set by.
+     * One this page has no name for is read as words rather than left lowercase.
+     */
+    protected function driver(mixed $value): mixed
+    {
+        if (is_array($value)) {
+            return array_map(fn ($entry) => $this->driver($entry), $value);
+        }
+
+        if (! is_string($value)) {
+            return $value;
+        }
+
+        return $this->translate('drivers.'.$value, $value);
+    }
+
+    /**
+     * A section's own heading.
+     */
+    protected function heading(string $section): string
+    {
+        return $this->translate('sections.'.str_replace('_', '-', $section), $section);
+    }
+
+    /**
      * A section's health, keyed by the label each fact is read under.
      *
      * @return array<string, string>
@@ -386,14 +424,6 @@ class SystemInformation
         }
 
         return $health;
-    }
-
-    /**
-     * A section's own heading.
-     */
-    protected function heading(string $section): string
-    {
-        return $this->translate('sections.'.str_replace('_', '-', $section), $section);
     }
 
     /**

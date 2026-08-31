@@ -4420,6 +4420,13 @@ return [
                         'views' => 'Weergaven',
                     ],
 
+                    'environments' => [
+                        'local' => 'Lokaal',
+                        'production' => 'Productie',
+                        'staging' => 'Staging',
+                        'testing' => 'Testen',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'Array (in geheugen)',

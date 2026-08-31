@@ -4420,6 +4420,13 @@ return [
                         'views' => 'ビュー',
                     ],
 
+                    'environments' => [
+                        'local' => 'ローカル',
+                        'production' => '本番',
+                        'staging' => 'ステージング',
+                        'testing' => 'テスト',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => '配列（メモリ内）',

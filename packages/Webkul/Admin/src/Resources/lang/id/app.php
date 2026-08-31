@@ -4420,6 +4420,13 @@ return [
                         'views' => 'Tampilan',
                     ],
 
+                    'environments' => [
+                        'local' => 'Lokal',
+                        'production' => 'Produksi',
+                        'staging' => 'Staging',
+                        'testing' => 'Pengujian',
+                    ],
+
                     'drivers' => [
                         'apc' => 'APC',
                         'array' => 'Array (dalam memori)',
