@@ -15,9 +15,11 @@ class EventServiceProvider extends ServiceProvider
         'Prettus\Repository\Events\RepositoryEntityCreated' => [
             'Webkul\Core\Listeners\CleanCacheRepository',
         ],
+
         'Prettus\Repository\Events\RepositoryEntityUpdated' => [
             'Webkul\Core\Listeners\CleanCacheRepository',
         ],
+
         'Prettus\Repository\Events\RepositoryEntityDeleted' => [
             'Webkul\Core\Listeners\CleanCacheRepository',
         ],
