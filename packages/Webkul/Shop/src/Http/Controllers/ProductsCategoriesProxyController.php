@@ -55,6 +55,10 @@ class ProductsCategoriesProxyController extends Controller
         $category = $this->categoryRepository->findBySlug($slugOrURLKey);
 
         if ($category) {
+            if (! $category->isAvailableInChannel()) {
+                abort(404);
+            }
+
             return view('shop::categories.view', [
                 'category' => $category,
                 'params' => [
@@ -102,7 +106,7 @@ class ProductsCategoriesProxyController extends Controller
 
             $category = $this->categoryRepository->findBySlug($trimmedSlug);
 
-            if ($category) {
+            if ($category?->isAvailableInChannel()) {
                 return redirect()->to($trimmedSlug, 301);
             }
         }

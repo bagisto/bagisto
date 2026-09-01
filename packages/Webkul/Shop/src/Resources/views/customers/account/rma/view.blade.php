@@ -210,7 +210,9 @@
                                 <td class="px-4 py-4 align-top">
                                     <div class="flex items-start gap-3">
                                         @if ($item->orderItem->product?->images?->first())
-                                            @php ($baseImage = product_image()->getProductBaseImage($item->orderItem->product))
+                                            @php
+                                                $baseImage = product_image()->getProductBaseImage($item->orderItem->product);
+                                            @endphp
 
                                             <img
                                                 src="{{ $baseImage['small_image_url'] }}"
@@ -291,7 +293,9 @@
                     <div class="rounded-xl border shadow-xs p-4 space-y-3">
                         <div class="flex items-center gap-3">
                             @if ($item->orderItem->product?->images?->first())
-                                @php ($baseImage = product_image()->getProductBaseImage($item->orderItem->product))
+                                @php
+                                    $baseImage = product_image()->getProductBaseImage($item->orderItem->product);
+                                @endphp
 
                                 <img
                                     src="{{ $baseImage['small_image_url'] }}"
