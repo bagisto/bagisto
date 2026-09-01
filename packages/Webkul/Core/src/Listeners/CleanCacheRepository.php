@@ -4,11 +4,15 @@ namespace Webkul\Core\Listeners;
 
 use Illuminate\Support\Facades\Log;
 use Prettus\Repository\Events\RepositoryEventBase;
-use Prettus\Repository\Helpers\CacheKeys;
 use Prettus\Repository\Listeners\CleanCacheRepository as BaseCleanCacheRepository;
+use Webkul\Core\Helpers\CacheKeys;
 
 class CleanCacheRepository extends BaseCleanCacheRepository
 {
+    /**
+     * Forget everything the written repository has cached, then stop tracking those keys.
+     * Upstream leaves them recorded, so every later write forgets the same dead keys again.
+     */
     public function handle(RepositoryEventBase $event)
     {
         try {
@@ -30,6 +34,8 @@ class CleanCacheRepository extends BaseCleanCacheRepository
                             $this->cache->forget($key);
                         }
                     }
+
+                    CacheKeys::forgetGroup($className);
                 }
             }
         } catch (\Exception $e) {

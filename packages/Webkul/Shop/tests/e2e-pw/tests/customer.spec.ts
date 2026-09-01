@@ -66,38 +66,51 @@ test("should display correct message when email verfication is on", async ({
     );
     await verificationToggle.waitFor({ state: "visible" });
 
-    if (! (await verificationCheckbox.isChecked())) {
-        await verificationToggle.click();
+    try {
+        if (! (await verificationCheckbox.isChecked())) {
+            await verificationToggle.click();
+        }
+        await expect(verificationCheckbox).toBeChecked();
+        await adminPage
+            .getByRole("button", { name: "Save Configuration" })
+            .click();
+        await expect(
+            adminPage
+                .locator("#app")
+                .getByText("Configuration saved successfully"),
+        ).toBeVisible();
+
+        // Register new user
+        const authPage = new AuthPage(shopPage);
+        const credentials = {
+            firstName: generateFirstName(),
+            lastName: generateLastName(),
+            email: generateEmail(),
+            password: "admin123",
+        };
+
+        await authPage.register(
+            credentials,
+            "Account created successfully, an e-mail has been sent for verification.",
+        );
+    } finally {
+        // Disable email verification
+        await adminPage.goto("admin/configuration/customer/settings");
+        await verificationToggle.waitFor({ state: "visible" });
+
+        if (await verificationCheckbox.isChecked()) {
+            await verificationToggle.click();
+        }
+        await expect(verificationCheckbox).not.toBeChecked();
+        await adminPage
+            .getByRole("button", { name: "Save Configuration" })
+            .click();
+        await expect(
+            adminPage
+                .locator("#app")
+                .getByText("Configuration saved successfully"),
+        ).toBeVisible();
     }
-    await expect(verificationCheckbox).toBeChecked();
-    await adminPage.getByRole("button", { name: "Save Configuration" }).click();
-    await expect(
-        adminPage.locator("#app").getByText("Configuration saved successfully"),
-    ).toBeVisible();
-
-    // Register new user
-    const authPage = new AuthPage(shopPage);
-    const credentials = {
-        firstName: generateFirstName(),
-        lastName: generateLastName(),
-        email: generateEmail(),
-        password: "admin123",
-    };
-
-    await authPage.register(
-        credentials,
-        "Account created successfully, an e-mail has been sent for verification.",
-    );
-
-    // Disable email verification
-    await adminPage.goto("admin/configuration/customer/settings");
-    await verificationToggle.waitFor({ state: "visible" });
-    await verificationToggle.click();
-    await expect(verificationCheckbox).not.toBeChecked();
-    await adminPage.getByRole("button", { name: "Save Configuration" }).click();
-    await expect(
-        adminPage.locator("#app").getByText("Configuration saved successfully"),
-    ).toBeVisible();
 });
 
 test("should edit a profile", async ({ shopPage }) => {

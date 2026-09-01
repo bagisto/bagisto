@@ -69,7 +69,7 @@ class LocaleRepository extends Repository
 
         $locale = parent::find($id);
 
-        $locale->delete($id);
+        parent::delete($id);
 
         Storage::delete((string) $locale->logo_path);
 

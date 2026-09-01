@@ -253,7 +253,7 @@ export class CustomerPage extends BasePage {
         await this.editProfileLink.click();
         await this.currentPasswordInput.click();
         await this.currentPasswordInput.fill(data.currentPassword);
-        await this.phone.fill("1234567890");
+        await this.phone.fill(generatePhoneNumber());
         await this.gender.selectOption({ value: "Male" });
         await this.newPasswordInput.click();
         await this.newPasswordInput.fill(data.newPassword);
