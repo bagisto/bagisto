@@ -5,6 +5,9 @@ inputs:
   php-version:
     description: The PHP version whose FPM pool serves the application.
     required: true
+  extensions:
+    description: The extensions PHP-FPM must load, as a comma separated list.
+    required: true
 
 runs:
   using: composite
@@ -38,19 +41,23 @@ runs:
       shell: bash
       env:
         PHP_VERSION: ${{ inputs.php-version }}
+        PHP_EXTENSIONS: ${{ inputs.extensions }}
       run: |
-        php -m | sort > /tmp/cli-modules.txt
-        "php-fpm$PHP_VERSION" -m | sort > /tmp/fpm-modules.txt
+        loaded=$("php-fpm$PHP_VERSION" -m 2>/dev/null)
+        missing=""
 
-        missing=$(comm -23 /tmp/cli-modules.txt /tmp/fpm-modules.txt)
+        for extension in $(echo "$PHP_EXTENSIONS" | tr ',' ' '); do
+          if ! echo "$loaded" | grep -qix "$extension"; then
+            missing="$missing $extension"
+          fi
+        done
 
         if [ -n "$missing" ]; then
-          echo "PHP-FPM is missing extensions the CLI has:"
-          echo "$missing"
+          echo "PHP-FPM is missing required extensions:$missing"
           exit 1
         fi
 
-        echo "PHP-FPM has every extension the CLI has."
+        echo "PHP-FPM loads every required extension."
 
     - name: Configure Nginx
       shell: bash
